@@ -1,0 +1,1736 @@
+import{j as e,l as b,aa as h,ab as ne,t as V,Z as He,aS as qe,G as re,x as te,A as ae,_ as ie,P as C,b as $,r as I,bf as j,n as ue,I as se,F as Ue}from"./iframe-Cw94KbKW.js";import{a as xe,V as we}from"./VergeFaktaInitPanel-BXznkVp3.js";import{u as q,P as U,a as Ye}from"./useStandardProsessPanelProps-DYrscFE2.js";import{W as ge,Q as x,H as Je}from"./index.es-DgYoKD5m.js";import{u as w,n as H}from"./fagsakApi-DVCCOVHW.js";import{u as me,C as de,w as z,T as ze,S as y,R as p,O as ve,c as P,a as oe}from"./index.es-hA9B1xXj.js";import{A as k}from"./index-DBkgJKiI.js";import{P as Ee,a as Q}from"./OverstyringPanel-57qzqhlQ.js";import{b as B,V as d,a as O,D as Ce,H as S,L as T,B as K,M as le}from"./VStack-Crk_hPaD.js";import{M as r}from"./message-DghR0wmc.js";import{d as _e,c as $e,v as Qe}from"./validerApKodeOgHentApEnum-N5xTXakj.js";import{u as Y,f as Ke}from"./behandlingApi-tltfjtkN.js";import{B as J}from"./FagsakIndex-BNHCjY8V.js";import{e as ke}from"./aksjonspunktUtils-Bp6ewLMR.js";import{L as Te}from"./Link-Brrt72Z9.js";import{F as We}from"./FatterVedtakStatusModal-BMy8XR_s.js";import{K as Ze}from"./KlageBehandlingModal-fniVO-rY.js";import"./preload-helper-PPVm8Dsz.js";import"./BehandlingMenuIndex-CMX9yEg2.js";import"./bind-BvClIo-r.js";import"./index.es-DSwsdiWY.js";import"./index-DWUNA2bG.js";import"./Checkmark-CuFGW6z4.js";import"./Popover-gaxZA-MN.js";import"./ExclamationmarkTriangleFill-QB8noEYs.js";import"./Kjonnkode-DjBoP8-t.js";import"./Table-DFiQcZHb.js";import"./FaktaKort-D7MmIZLe.js";import"./eksterneLenker-CZTrovcW.js";import"./Checkbox-DCnBWY2E.js";import"./CheckmarkCircleFill-B_JrPKEL.js";import"./SettPaVentModalIndex-DmpHbClZ.js";import"./FagsakData-B6kNW04I.js";import"./useBehandlingPollingOperasjoner-CSvIQz1A.js";import"./ErrorBoundary-B3vECHAq.js";import"./IngenBehandlingValgtPanel-C9FBfc3-.js";import"./apiPollingStatus-nT-xUZgL.js";import"./useKodeverk-MLdZligW.js";import"./paths-Cs8Hm_ok.js";import"./Dropdown-BNqGFV3q.js";import"./BehandlingHenlagtPanel-DSorCYLw.js";import"./TotrinnskontrollIndex-_SSipLDI.js";import"./SupportHeader-BMycoQTy.js";import"./index-HHcPDYkA.js";import"./VisittkortSakIndex-Bkf3XLuj.js";import"./Spacer-BBYJs_pQ.js";import"./useTrackRouteParam-DIW_mtIq.js";import"./RisikoklassifiseringIndex-CLUaJufa.js";import"./BehandlingPaVent-CcWZTAWb.js";import"./BehandlingSupportIndex-DAkNi3P4.js";import"./DokumentIndex-fZD3gXw7.js";import"./StarFill-DMatsfd2.js";import"./HistorikkIndex-CiNYfecb.js";import"./PersonHeadset-D-HVOEcU.js";import"./MeldingIndex-CyAwHpBV.js";import"./UkjentAdresseMeldingIndex-Cl4H5fhh.js";import"./SettPaVentReadOnlyModal-KVbIsgWu.js";import"./UtvidEllerMinskKnapp-CUzBc1e-.js";import"./DocPencil-CsuBaunI.js";import"./FagsakProfileIndex-Bpnz7LxH.js";const c="ikkePaklagdVedtak",W=a=>a.erKlagerPart===!1||a.erFristOverholdt===!1||a.erKonkret===!1||a.erSignert===!1||a.vedtak===c,Ae=(a,l)=>a.find(n=>n.uuid===l),Z=(a,l)=>{const n=Ae(a,l);return!!n&&(n.type==="BT-007"||n.type==="BT-009")},Le=(a,l)=>{const n=Z(a,l),t=Ae(a,l);return t&&n?{tilbakekrevingUuid:t.uuid,tilbakekrevingVedtakDato:t.avsluttet,tilbakekrevingBehandlingType:t.type}:void 0},Xe=(a,l,n,t)=>({kode:t,begrunnelse:a.begrunnelse,behandlingUuid:l,erKlagerPart:!!a.erKlagerPart,erFristOverholdt:!!a.erFristOverholdt,erKonkret:!!a.erKonkret,erSignert:!!a.erSignert,erTilbakekreving:Z(n,a.vedtak),klageTilbakekreving:Le(n,a.vedtak),paKlagdBehandlingUuid:a.vedtak===c?void 0:a.vedtak,fritekstTilBrev:W(a)?a.fritekstTilBrev:void 0,mottattDato:a.mottattDato}),pe=({behandlingUuid:a,saveKlage:l,avsluttedeBehandlinger:n,spinner:t=!1,aksjonspunktCode:i,readOnly:u=!1,handleSubmit:m})=>u?null:e.jsx(B,{size:"small",variant:"primary",loading:t,onClick:m(g=>l(Xe(g,a,n,i))),type:"button",children:e.jsx(r,{id:"TempsaveKlageButton.TempSaveButton"})});pe.__docgenInfo={description:"",methods:[],displayName:"TempsaveKlageButton",props:{behandlingUuid:{required:!0,tsType:{name:"string"},description:""},aksjonspunktCode:{required:!0,tsType:{name:"string"},description:""},avsluttedeBehandlinger:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  type: BehandlingType;
+  avsluttet?: string;
+  uuid: string;
+}`,signature:{properties:[{key:"type",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}},{key:"avsluttet",value:{name:"string",required:!1}},{key:"uuid",value:{name:"string",required:!0}}]}}],raw:"AvsluttetBehandling[]"},description:""},saveKlage:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: FormkravMellomlagretDataType) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  kode: string;
+  begrunnelse?: string;
+  behandlingUuid: string;
+  erKlagerPart: boolean;
+  erFristOverholdt: boolean;
+  erKonkret: boolean;
+  erSignert: boolean;
+  erTilbakekreving: boolean;
+  klageTilbakekreving?: {
+    tilbakekrevingUuid: string;
+    tilbakekrevingVedtakDato?: string;
+    tilbakekrevingBehandlingType?: string;
+  };
+  paKlagdBehandlingUuid?: string;
+  fritekstTilBrev?: string;
+  mottattDato?: string;
+}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"behandlingUuid",value:{name:"string",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erFristOverholdt",value:{name:"boolean",required:!0}},{key:"erKonkret",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"erTilbakekreving",value:{name:"boolean",required:!0}},{key:"klageTilbakekreving",value:{name:"signature",type:"object",raw:`{
+  tilbakekrevingUuid: string;
+  tilbakekrevingVedtakDato?: string;
+  tilbakekrevingBehandlingType?: string;
+}`,signature:{properties:[{key:"tilbakekrevingUuid",value:{name:"string",required:!0}},{key:"tilbakekrevingVedtakDato",value:{name:"string",required:!1}},{key:"tilbakekrevingBehandlingType",value:{name:"string",required:!1}}]},required:!1}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"mottattDato",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""},spinner:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},readOnly:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},handleSubmit:{required:!0,tsType:{name:"UseFormHandleSubmit",elements:[{name:"signature",type:"object",raw:`{
+  erKlagerPart?: boolean;
+  erFristOverholdt?: boolean;
+  erKonkret?: boolean;
+  erSignert?: boolean;
+  begrunnelse?: string;
+  vedtak?: string;
+  mottattDato?: string;
+  fritekstTilBrev?: string;
+}`,signature:{properties:[{key:"erKlagerPart",value:{name:"boolean",required:!1}},{key:"erFristOverholdt",value:{name:"boolean",required:!1}},{key:"erKonkret",value:{name:"boolean",required:!1}},{key:"erSignert",value:{name:"boolean",required:!1}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"vedtak",value:{name:"string",required:!1}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}}]}}],raw:"UseFormHandleSubmit<FormValues>"},description:""}}};const ea="_selectBredde_19ro0_1",aa={selectBredde:ea},la=a=>a?.paKlagdBehandlingUuid?`${a.paKlagdBehandlingUuid}`:c,na=(a,l,n)=>[e.jsx("option",{value:c,children:l.formatMessage({id:"Klage.Formkrav.IkkePåklagdVedtak"})},"formkrav")].concat([...a].sort((i,u)=>ae(i.avsluttet).diff(ae(u.avsluttet))).map(({uuid:i,type:u,avsluttet:m})=>e.jsx("option",{value:`${i}`,children:`${n.BehandlingType.find(({kode:g})=>g===u)?.navn??""} ${m?ie(m):""}`},i))),ra=a=>a===k.VURDERING_AV_FORMKRAV_KLAGE_NFP?"Klage.LovhjemmelNFP":"Klage.LovhjemmelKA",ta=a=>{const l=a.klageFormkravResultatNFP,n=a.klageVurderingResultatNFP;return l?{vedtak:la(l),begrunnelse:l.begrunnelse,erKlagerPart:l.erKlagerPart,erKonkret:l.erKlageKonkret,erFristOverholdt:l.erKlagefirstOverholdt,erSignert:l.erSignert,fritekstTilBrev:n?.fritekstTilBrev??void 0,mottattDato:a.mottattDato??void 0}:{mottattDato:a.mottattDato??void 0}},ia=(a,l)=>({erKlagerPart:!!a.erKlagerPart,erFristOverholdt:!!a.erFristOverholdt,erKonkret:!!a.erKonkret,erSignert:!!a.erSignert,begrunnelse:a.begrunnelse,kode:k.VURDERING_AV_FORMKRAV_KLAGE_NFP,vedtakBehandlingUuid:a.vedtak===c?void 0:a.vedtak,mottattDato:a.mottattDato,erTilbakekreving:Z(l,a.vedtak),tilbakekrevingInfo:Le(l,a.vedtak),fritekstTilBrev:W(a)?a.fritekstTilBrev:void 0}),Se=({klageVurdering:a,avsluttedeBehandlinger:l,lagreFormkravVurdering:n})=>{const t=b(),{behandling:i,isSubmittable:u,alleKodeverk:m,submitCallback:g,isReadOnly:s}=h(),E=na(l,t,m),{mellomlagretFormData:v,setMellomlagretFormData:o}=ne(),D=ta(a),_=me({defaultValues:v??D}),N=_.watch();return e.jsx(de,{formMethods:_,onSubmit:G=>g(ia(G,l)),setDataOnUnmount:o,children:e.jsxs(d,{gap:"space-16",children:[e.jsxs(d,{gap:"space-4",children:[e.jsx(O,{size:"small",level:"3",children:t.formatMessage({id:"Klage.Formkrav.Title"})}),e.jsx(Ce,{children:t.formatMessage({id:ra(k.VURDERING_AV_FORMKRAV_KLAGE_NFP)})})]}),e.jsxs(d,{gap:"space-24",children:[u&&e.jsx(ge,{children:e.jsx(r,{id:"Klage.Formkrav.HelpText"})}),e.jsx(d,{gap:"space-24",children:e.jsxs(S,{gap:"space-40",children:[e.jsxs(d,{gap:"space-16",children:[e.jsx(z,{name:"vedtak",control:_.control,readOnly:s,validate:[V],label:t.formatMessage({id:"Klage.Formkrav.VelgVedtak"}),selectValues:E,className:aa.selectBredde}),e.jsx(ze,{control:_.control,name:"mottattDato",label:t.formatMessage({id:"Klage.Formkrav.MottattDato"}),validate:[V,He,qe],isReadOnly:s})]}),e.jsxs(d,{gap:"space-20",children:[e.jsxs(S,{gap:"space-16",children:[e.jsx(y,{name:"erKlagerPart",control:_.control,label:t.formatMessage({id:"Klage.Formkrav.ErKlagerPart"}),validate:[V],isReadOnly:s,children:e.jsxs(S,{gap:"space-16",children:[e.jsx(p,{value:!0,size:"small",children:e.jsx(r,{id:"Klage.Formkrav.Ja"})}),e.jsx(p,{value:!1,size:"small",children:e.jsx(r,{id:"Klage.Formkrav.Nei"})})]})}),e.jsx(y,{name:"erKonkret",control:_.control,label:t.formatMessage({id:"Klage.Formkrav.ErKonkret"}),validate:[V],isReadOnly:s,children:e.jsxs(S,{gap:"space-16",children:[e.jsx(p,{value:!0,size:"small",children:e.jsx(r,{id:"Klage.Formkrav.Ja"})}),e.jsx(p,{value:!1,size:"small",children:e.jsx(r,{id:"Klage.Formkrav.Nei"})})]})})]}),e.jsxs(S,{gap:"space-16",children:[e.jsx(y,{name:"erFristOverholdt",control:_.control,label:t.formatMessage({id:"Klage.Formkrav.ErFristOverholdt"}),validate:[V],isReadOnly:s,children:e.jsxs(S,{gap:"space-16",children:[e.jsx(p,{value:!0,size:"small",children:e.jsx(r,{id:"Klage.Formkrav.Ja"})}),e.jsx(p,{value:!1,size:"small",children:e.jsx(r,{id:"Klage.Formkrav.Nei"})})]})}),e.jsx(y,{name:"erSignert",control:_.control,label:t.formatMessage({id:"Klage.Formkrav.ErSignert"}),validate:[V],isReadOnly:s,children:e.jsxs(S,{gap:"space-16",children:[e.jsx(p,{value:!0,size:"small",children:e.jsx(r,{id:"Klage.Formkrav.Ja"})}),e.jsx(p,{value:!1,size:"small",children:e.jsx(r,{id:"Klage.Formkrav.Nei"})})]})})]})]})]})}),e.jsx(Ee,{readOnly:s}),W(N)&&e.jsx(ve,{name:"fritekstTilBrev",control:_.control,label:t.formatMessage({id:"FormkravKlageFormNfp.Fritekst"}),maxLength:1e5,validate:[V,te],readOnly:s,parse:re}),e.jsxs(S,{justify:"space-between",children:[e.jsx(Q,{isReadOnly:s,isSubmittable:u,isSubmitting:_.formState.isSubmitting,isDirty:_.formState.isDirty}),e.jsx(pe,{behandlingUuid:i.uuid,saveKlage:n,avsluttedeBehandlinger:l,handleSubmit:_.handleSubmit,readOnly:s,aksjonspunktCode:k.VURDERING_AV_FORMKRAV_KLAGE_NFP})]})]})]})})};Se.__docgenInfo={description:`FormkravklageformNfp
+
+Setter opp aksjonspunktet for formkrav klage (NFP).`,methods:[],displayName:"FormkravKlageFormNfp",props:{klageVurdering:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  aktuelleHjemler?: Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>;
+  behandletAvKabal?: boolean;
+  klageFormkravResultatKA?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageFormkravResultatNFP?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageVurderingResultatNFP?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  klageVurderingResultatNK?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  mottattDato?: string;
+  underBehandlingKabal?: boolean;
+}`,signature:{properties:[{key:"aktuelleHjemler",value:{name:"Array",elements:[{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>",required:!1}},{key:"behandletAvKabal",value:{name:"boolean",required:!1}},{key:"klageFormkravResultatKA",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageFormkravResultatNFP",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageVurderingResultatNFP",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"klageVurderingResultatNK",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"underBehandlingKabal",value:{name:"boolean",required:!1}}]}},description:""},avsluttedeBehandlinger:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  type: BehandlingType;
+  avsluttet?: string;
+  uuid: string;
+}`,signature:{properties:[{key:"type",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}},{key:"avsluttet",value:{name:"string",required:!1}},{key:"uuid",value:{name:"string",required:!0}}]}}],raw:"AvsluttetBehandling[]"},description:""},lagreFormkravVurdering:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: FormkravMellomlagretDataType) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  kode: string;
+  begrunnelse?: string;
+  behandlingUuid: string;
+  erKlagerPart: boolean;
+  erFristOverholdt: boolean;
+  erKonkret: boolean;
+  erSignert: boolean;
+  erTilbakekreving: boolean;
+  klageTilbakekreving?: {
+    tilbakekrevingUuid: string;
+    tilbakekrevingVedtakDato?: string;
+    tilbakekrevingBehandlingType?: string;
+  };
+  paKlagdBehandlingUuid?: string;
+  fritekstTilBrev?: string;
+  mottattDato?: string;
+}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"behandlingUuid",value:{name:"string",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erFristOverholdt",value:{name:"boolean",required:!0}},{key:"erKonkret",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"erTilbakekreving",value:{name:"boolean",required:!0}},{key:"klageTilbakekreving",value:{name:"signature",type:"object",raw:`{
+  tilbakekrevingUuid: string;
+  tilbakekrevingVedtakDato?: string;
+  tilbakekrevingBehandlingType?: string;
+}`,signature:{properties:[{key:"tilbakekrevingUuid",value:{name:"string",required:!0}},{key:"tilbakekrevingVedtakDato",value:{name:"string",required:!1}},{key:"tilbakekrevingBehandlingType",value:{name:"string",required:!1}}]},required:!1}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"mottattDato",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const Ve=({klageVurdering:a,avsluttedeBehandlinger:l})=>{const n=b(),{alleKodeverk:t}=h(),{klageFormkravResultatKA:i,underBehandlingKabal:u,behandletAvKabal:m}=a;let g=n.formatMessage({id:"Klage.Formkrav.IkkePåklagdVedtak"});if(i?.paKlagdBehandlingUuid){const s=l.find(E=>E.uuid===i.paKlagdBehandlingUuid);s&&(g=`${t.BehandlingType.find(v=>v.kode===s.type)?.navn} ${s.avsluttet?ie(s.avsluttet):""}`)}return e.jsxs(d,{gap:"space-16",children:[e.jsx(O,{size:"small",level:"2",children:e.jsx(r,{id:"Klage.Formkrav.Title"})}),u&&e.jsx(O,{size:"small",level:"3",children:e.jsx(r,{id:"Klage.Formkrav.SeKabalText"})}),!u&&!m&&e.jsxs(e.Fragment,{children:[e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"Klage.Formkrav.VelgVedtak"})}),e.jsx(K,{size:"small",children:g})]}),e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"Klage.Formkrav.ErKlagerPart"})}),e.jsx(K,{size:"small",children:i?.erKlagerPart?e.jsx(r,{id:"Klage.Formkrav.Ja"}):e.jsx(r,{id:"Klage.Formkrav.Nei"})})]}),e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"Klage.Formkrav.ErKonkret"})}),e.jsx(K,{size:"small",children:i?.erKlageKonkret?e.jsx(r,{id:"Klage.Formkrav.Ja"}):e.jsx(r,{id:"Klage.Formkrav.Nei"})})]}),e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"Klage.Formkrav.ErFristOverholdt"})}),e.jsx(K,{size:"small",children:i?.erKlagefirstOverholdt?e.jsx(r,{id:"Klage.Formkrav.Ja"}):e.jsx(r,{id:"Klage.Formkrav.Nei"})})]}),e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"Klage.Formkrav.ErSignert"})}),e.jsx(K,{size:"small",children:i?.erSignert?e.jsx(r,{id:"Klage.Formkrav.Ja"}):e.jsx(r,{id:"Klage.Formkrav.Nei"})})]}),e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"Klage.Formkrav.Vurdering"})}),e.jsx(K,{size:"small",children:i?.begrunnelse})]})]})]})};Ve.__docgenInfo={description:`FormkravKlageKa
+
+Readonly panel for formkrav klage (KA).`,methods:[],displayName:"FormkravKlageKa",props:{klageVurdering:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  aktuelleHjemler?: Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>;
+  behandletAvKabal?: boolean;
+  klageFormkravResultatKA?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageFormkravResultatNFP?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageVurderingResultatNFP?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  klageVurderingResultatNK?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  mottattDato?: string;
+  underBehandlingKabal?: boolean;
+}`,signature:{properties:[{key:"aktuelleHjemler",value:{name:"Array",elements:[{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>",required:!1}},{key:"behandletAvKabal",value:{name:"boolean",required:!1}},{key:"klageFormkravResultatKA",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageFormkravResultatNFP",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageVurderingResultatNFP",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"klageVurderingResultatNK",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"underBehandlingKabal",value:{name:"boolean",required:!1}}]}},description:""},avsluttedeBehandlinger:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  type: BehandlingType;
+  avsluttet?: string;
+  uuid: string;
+}`,signature:{properties:[{key:"type",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}},{key:"avsluttet",value:{name:"string",required:!1}},{key:"uuid",value:{name:"string",required:!0}}]}}],raw:"AvsluttetBehandling[]"},description:""}}};const ua={"Klage.LovhjemmelNFP":"Fvl §§ 28, 31, 32, 33 og ftrl § 21-12","Klage.LovhjemmelKA":"Fvl §§  28, 31, 32, 34 og ftrl § 21-12","Klage.Formkrav.VelgVedtak":"Vedtaket som er påklagd","Klage.Formkrav.MottattDato":"Klage mottatt dato","Klage.Formkrav.Title":"Vurder formkrav","Klage.Formkrav.HelpText":"Vurder om klagen oppfyller formkravene","Klage.Formkrav.IkkePåklagdVedtak":"Ikke påklagd et vedtak","Klage.Formkrav.ErKlagerPart":"Er klager part i saken?","Klage.Formkrav.ErKonkret":"Klages det på konkrete elementer i vedtaket?","Klage.Formkrav.ErFristOverholdt":"Er klagefristen overholdt?","Klage.Formkrav.ErSignert":"Er klagen signert?","Klage.Formkrav.KabalText":"Fortsett klagebehandlingen i KABAL: Kryss av, velg hjemmel og trykk send","Klage.Formkrav.SeKabalText":"Klagen behandles i KABAL","Klage.Formkrav.SendTilKabal":"Send til KABAL","Klage.Formkrav.Hjemmel":"Hjemmel","Klage.Formkrav.Ja":"Ja","Klage.Formkrav.Nei":"Nei","Klage.Formkrav.Vurdering":"Vurdering","FormkravKlageFormNfp.Fritekst":"Fritekst","TempsaveKlageButton.TempSaveButton":"Lagre","Malform.Beskrivelse":"Foretrukket språk"},sa=$(ua),ga={},X=({klageVurdering:a=ga,avsluttedeBehandlinger:l,lagreFormkravVurdering:n})=>{const{aksjonspunkterForPanel:t}=h();return e.jsxs(C,{value:sa,children:[t.some(i=>i.definisjon===k.VURDERING_AV_FORMKRAV_KLAGE_NFP)&&e.jsx(Se,{klageVurdering:a,avsluttedeBehandlinger:l,lagreFormkravVurdering:n}),a.klageFormkravResultatKA&&e.jsx(Ve,{klageVurdering:a,avsluttedeBehandlinger:l})]})};X.__docgenInfo={description:"",methods:[],displayName:"FormkravProsessIndex",props:{klageVurdering:{required:!1,tsType:{name:"signature",type:"object",raw:`{
+  aktuelleHjemler?: Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>;
+  behandletAvKabal?: boolean;
+  klageFormkravResultatKA?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageFormkravResultatNFP?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageVurderingResultatNFP?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  klageVurderingResultatNK?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  mottattDato?: string;
+  underBehandlingKabal?: boolean;
+}`,signature:{properties:[{key:"aktuelleHjemler",value:{name:"Array",elements:[{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>",required:!1}},{key:"behandletAvKabal",value:{name:"boolean",required:!1}},{key:"klageFormkravResultatKA",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageFormkravResultatNFP",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageVurderingResultatNFP",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"klageVurderingResultatNK",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"underBehandlingKabal",value:{name:"boolean",required:!1}}]}},description:"",defaultValue:{value:"{}",computed:!1}},avsluttedeBehandlinger:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  type: BehandlingType;
+  avsluttet?: string;
+  uuid: string;
+}`,signature:{properties:[{key:"type",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}},{key:"avsluttet",value:{name:"string",required:!1}},{key:"uuid",value:{name:"string",required:!0}}]}}],raw:"AvsluttetBehandling[]"},description:""},lagreFormkravVurdering:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: FormkravMellomlagretDataType) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  kode: string;
+  begrunnelse?: string;
+  behandlingUuid: string;
+  erKlagerPart: boolean;
+  erFristOverholdt: boolean;
+  erKonkret: boolean;
+  erSignert: boolean;
+  erTilbakekreving: boolean;
+  klageTilbakekreving?: {
+    tilbakekrevingUuid: string;
+    tilbakekrevingVedtakDato?: string;
+    tilbakekrevingBehandlingType?: string;
+  };
+  paKlagdBehandlingUuid?: string;
+  fritekstTilBrev?: string;
+  mottattDato?: string;
+}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"behandlingUuid",value:{name:"string",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erFristOverholdt",value:{name:"boolean",required:!0}},{key:"erKonkret",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"erTilbakekreving",value:{name:"boolean",required:!0}},{key:"klageTilbakekreving",value:{name:"signature",type:"object",raw:`{
+  tilbakekrevingUuid: string;
+  tilbakekrevingVedtakDato?: string;
+  tilbakekrevingBehandlingType?: string;
+}`,signature:{properties:[{key:"tilbakekrevingUuid",value:{name:"string",required:!0}},{key:"tilbakekrevingVedtakDato",value:{name:"string",required:!1}},{key:"tilbakekrevingBehandlingType",value:{name:"string",required:!1}}]},required:!1}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"mottattDato",value:{name:"string",required:!1}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const ma=[k.VURDERING_AV_FORMKRAV_KLAGE_NFP],be=()=>{const a=b(),l=q(ma),{behandling:n,alleBehandlinger:t,hentOgSettBehandling:i}=I.use(J),u=t.filter(v=>v.status==="AVSLU").filter(v=>(v.type!=="BT-003"||_e(v.behandlingsresultat?.type))&&v.type!=="BT-008").map(v=>({uuid:v.uuid,type:v.type,avsluttet:v.avsluttet??void 0})),m=Y(n),{data:g,isFetching:s}=w(m.klage.klageVurderingOptions(n)),{mutate:E}=P({mutationFn:v=>m.klage.mellomlagreFormkravVurdering(v),onSuccess:()=>i()});return e.jsx(U,{standardPanelProps:l,prosessPanelKode:j.FORMKRAV_KLAGE_NAV_FAMILIE_OG_PENSJON,prosessPanelMenyTekst:a.formatMessage({id:"Behandlingspunkt.FormkravKlageNFP"}),skalPanelVisesIMeny:!0,children:s?e.jsx(x,{}):e.jsx(X,{klageVurdering:g,avsluttedeBehandlinger:u,lagreFormkravVurdering:E})})};be.__docgenInfo={description:"",methods:[],displayName:"FormKravFamOgPensjonProsessStegInitPanel"};const da=[k.UTGÅTT_5083],De=()=>{const a=b(),l=q(da),{behandling:n,alleBehandlinger:t,hentOgSettBehandling:i}=I.use(J),m=t.filter(o=>!o.behandlingHenlagt).filter(o=>o.status==="AVSLU").filter(o=>(o.type!=="BT-003"||_e(o.behandlingsresultat?.type))&&o.type!=="BT-008").map(o=>({uuid:o.uuid,type:o.type,avsluttet:o.avsluttet??void 0})),g=Y(n),{data:s,isFetching:E}=w(g.klage.klageVurderingOptions(n)),{mutate:v}=P({mutationFn:o=>g.klage.mellomlagreFormkravVurdering(o),onSuccess:()=>i()});return e.jsx(U,{standardPanelProps:l,prosessPanelKode:j.FORMKRAV_KLAGE_NAV_KLAGEINSTANS,prosessPanelMenyTekst:a.formatMessage({id:"Behandlingspunkt.FormkravKlageKA"}),skalPanelVisesIMeny:!0,children:E?e.jsx(x,{}):e.jsx(X,{klageVurdering:s,avsluttedeBehandlinger:m,lagreFormkravVurdering:v})})};De.__docgenInfo={description:"",methods:[],displayName:"FormKravKlageInstansProsessStegInitPanel"};const Ne=({behandlingPåVent:a,previewVedtakCallback:l,readOnly:n,lagreVedtak:t,isSubmitting:i})=>{const u=m=>{m.preventDefault(),l({gjelderVedtak:!0})};return e.jsxs(S,{gap:"space-8",align:"center",children:[!n&&e.jsx(B,{variant:"primary",size:"small",onClick:t,disabled:a||i,loading:i,type:"button",children:e.jsx(r,{id:"VedtakKlageForm.TilGodkjenning"})}),e.jsx(Te,{href:"#",onClick:u,onKeyDown:m=>m.key==="Enter"?u(m):null,children:e.jsx(r,{id:"VedtakKlageForm.ForhandvisBrev"})})]})};Ne.__docgenInfo={description:"",methods:[],displayName:"VedtakKlageSubmitPanel",props:{previewVedtakCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: VedtakKlageForhandsvisData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  gjelderVedtak: boolean;
+}`,signature:{properties:[{key:"gjelderVedtak",value:{name:"boolean",required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""},behandlingPåVent:{required:!0,tsType:{name:"boolean"},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},lagreVedtak:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},isSubmitting:{required:!0,tsType:{name:"boolean"},description:""}}};const va={GUNST_MEDHOLD_I_KLAGE:"VedtakKlageForm.KlageOmgjortGunst",UGUNST_MEDHOLD_I_KLAGE:"VedtakKlageForm.KlageOmgjortUgunst",DELVIS_MEDHOLD_I_KLAGE:"VedtakKlageForm.KlageOmgjortDelvis","-":""},Ie=({klageVurdering:a,previewVedtakCallback:l,behandlingsresultat:n})=>{const{behandling:t,isReadOnly:i,alleKodeverk:u,aksjonspunkterForPanel:m,submitCallback:g}=h(),s=oa(a),E=Ea(a,u),v=_a(a),o=a.klageVurderingResultatNK??a.klageVurderingResultatNFP,D=$e(n.type),[_,N]=I.useState(!1),G=()=>{N(!0);const L=m.filter(ke).map(R=>R.definisjon).map(R=>({kode:Qe(R,k.FORESLÅ_VEDTAK,k.FORESLÅ_VEDTAK_MANUELT)}));g(L).then(()=>N(!1))};return e.jsxs(d,{gap:"space-16",children:[e.jsx(O,{size:"small",level:"2",children:e.jsx(r,{id:"VedtakKlageForm.Header"})}),e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"VedtakKlageForm.Resultat"})}),v&&e.jsx(K,{size:"small",children:e.jsx(r,{id:v})})]}),n.type==="KLAGE_AVVIST"&&e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"VedtakKlageForm.ArsakTilAvvisning"})}),s.map(A=>e.jsx(K,{size:"small",children:u.KlageAvvistÅrsak.find(({kode:L})=>L===A)?.navn??""},A))]}),D&&e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"VedtakKlageForm.ArsakTilOmgjoring"})}),E]}),n.type==="KLAGE_YTELSESVEDTAK_OPPHEVET"&&e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"VedtakKlageForm.ArsakTilOppheving"})}),E]}),o?.klageVurdertAv==="NFP"&&e.jsx(Ne,{previewVedtakCallback:l,readOnly:i,behandlingPåVent:t.behandlingPåVent,lagreVedtak:G,isSubmitting:_})]})},oa=a=>a.klageFormkravResultatKA&&a.klageVurderingResultatNK?a.klageFormkravResultatKA.avvistArsaker:a.klageFormkravResultatNFP?a.klageFormkravResultatNFP.avvistArsaker:[],Ea=(a,l)=>a.klageVurderingResultatNK?.klageMedholdArsak?l.KlageMedholdÅrsak.find(({kode:n})=>n===a.klageVurderingResultatNK?.klageMedholdArsak)?.navn??"":a.klageVurderingResultatNFP?.klageMedholdArsak?l.KlageMedholdÅrsak.find(({kode:n})=>n===a.klageVurderingResultatNFP?.klageMedholdArsak)?.navn??"":null,_a=a=>{const l=a.klageVurderingResultatNK??a.klageVurderingResultatNFP;switch(l?.klageVurdering){case"AVVIS_KLAGE":return"VedtakKlageForm.KlageAvvist";case"STADFESTE_YTELSESVEDTAK":return"VedtakKlageForm.KlageStadfestet";case"OPPHEVE_YTELSESVEDTAK":return"VedtakKlageForm.YtelsesvedtakOpphevet";case"HJEMSENDE_UTEN_Å_OPPHEVE":return"VedtakKlageForm.HjemmsendUtenOpphev";case"MEDHOLD_I_KLAGE":return l.klageVurderingOmgjoer?va[l.klageVurderingOmgjoer]:void 0;default:return"VedtakKlageForm.IkkeFastsatt"}};Ie.__docgenInfo={description:"",methods:[],displayName:"VedtakKlageForm",props:{klageVurdering:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  aktuelleHjemler?: Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>;
+  behandletAvKabal?: boolean;
+  klageFormkravResultatKA?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageFormkravResultatNFP?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageVurderingResultatNFP?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  klageVurderingResultatNK?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  mottattDato?: string;
+  underBehandlingKabal?: boolean;
+}`,signature:{properties:[{key:"aktuelleHjemler",value:{name:"Array",elements:[{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>",required:!1}},{key:"behandletAvKabal",value:{name:"boolean",required:!1}},{key:"klageFormkravResultatKA",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageFormkravResultatNFP",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageVurderingResultatNFP",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"klageVurderingResultatNK",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"underBehandlingKabal",value:{name:"boolean",required:!1}}]}},description:""},previewVedtakCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: VedtakKlageForhandsvisData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  gjelderVedtak: boolean;
+}`,signature:{properties:[{key:"gjelderVedtak",value:{name:"boolean",required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""},behandlingsresultat:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  avslagsarsak?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
+  avslagsarsakFritekst?: string;
+  endretDekningsgrad?: boolean;
+  erRevurderingMedUendretUtfall?: boolean;
+  fritekstbrev?: string;
+  harRedigertVedtaksbrev: boolean;
+  id: number;
+  konsekvenserForYtelsen?: Array<foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen>;
+  opphørsdato?: string;
+  overskrift?: string;
+  rettenTil?: foreldrepenger_behandlingslager_behandling_RettenTil;
+  skjæringstidspunkt?: tjenester_behandling_dto_behandling_SkjæringstidspunktDto;
+  type: foreldrepenger_behandlingslager_behandling_BehandlingResultatType;
+  vedtaksbrev?: foreldrepenger_behandlingslager_behandling_vedtak_Vedtaksbrev;
+  vedtaksbrevStatus: foreldrepenger_domene_vedtak_intern_VedtaksbrevStatus;
+}`,signature:{properties:[{key:"avslagsarsak",value:{name:"union",raw:`| '1001'
+| '1002'
+| '1003'
+| '1004'
+| '1005'
+| '1006'
+| '1007'
+| '1008'
+| '1009'
+| '1010'
+| '1011'
+| '1012'
+| '1013'
+| '1014'
+| '1015'
+| '1016'
+| '1017'
+| '1018'
+| '1019'
+| '1020'
+| '1021'
+| '1023'
+| '1024'
+| '1025'
+| '1026'
+| '1027'
+| '1028'
+| '1029'
+| '1031'
+| '1032'
+| '1033'
+| '1034'
+| '1035'
+| '1041'
+| '1051'
+| '1052'
+| '1060'
+| '1061'
+| '1062'
+| '1063'
+| '1064'
+| '1065'
+| '1066'
+| '1099'
+| '-'`,elements:[{name:"literal",value:"'1001'"},{name:"literal",value:"'1002'"},{name:"literal",value:"'1003'"},{name:"literal",value:"'1004'"},{name:"literal",value:"'1005'"},{name:"literal",value:"'1006'"},{name:"literal",value:"'1007'"},{name:"literal",value:"'1008'"},{name:"literal",value:"'1009'"},{name:"literal",value:"'1010'"},{name:"literal",value:"'1011'"},{name:"literal",value:"'1012'"},{name:"literal",value:"'1013'"},{name:"literal",value:"'1014'"},{name:"literal",value:"'1015'"},{name:"literal",value:"'1016'"},{name:"literal",value:"'1017'"},{name:"literal",value:"'1018'"},{name:"literal",value:"'1019'"},{name:"literal",value:"'1020'"},{name:"literal",value:"'1021'"},{name:"literal",value:"'1023'"},{name:"literal",value:"'1024'"},{name:"literal",value:"'1025'"},{name:"literal",value:"'1026'"},{name:"literal",value:"'1027'"},{name:"literal",value:"'1028'"},{name:"literal",value:"'1029'"},{name:"literal",value:"'1031'"},{name:"literal",value:"'1032'"},{name:"literal",value:"'1033'"},{name:"literal",value:"'1034'"},{name:"literal",value:"'1035'"},{name:"literal",value:"'1041'"},{name:"literal",value:"'1051'"},{name:"literal",value:"'1052'"},{name:"literal",value:"'1060'"},{name:"literal",value:"'1061'"},{name:"literal",value:"'1062'"},{name:"literal",value:"'1063'"},{name:"literal",value:"'1064'"},{name:"literal",value:"'1065'"},{name:"literal",value:"'1066'"},{name:"literal",value:"'1099'"},{name:"literal",value:"'-'"}],required:!1}},{key:"avslagsarsakFritekst",value:{name:"string",required:!1}},{key:"endretDekningsgrad",value:{name:"boolean",required:!1}},{key:"erRevurderingMedUendretUtfall",value:{name:"boolean",required:!1}},{key:"fritekstbrev",value:{name:"string",required:!1}},{key:"harRedigertVedtaksbrev",value:{name:"boolean",required:!0}},{key:"id",value:{name:"number",required:!0}},{key:"konsekvenserForYtelsen",value:{name:"Array",elements:[{name:"union",raw:`| 'FORELDREPENGER_OPPHØRER'
+| 'ENDRING_I_BEREGNING'
+| 'ENDRING_I_UTTAK'
+| 'ENDRING_I_FORDELING_AV_YTELSEN'
+| 'INGEN_ENDRING'
+| '-'`,elements:[{name:"literal",value:"'FORELDREPENGER_OPPHØRER'"},{name:"literal",value:"'ENDRING_I_BEREGNING'"},{name:"literal",value:"'ENDRING_I_UTTAK'"},{name:"literal",value:"'ENDRING_I_FORDELING_AV_YTELSEN'"},{name:"literal",value:"'INGEN_ENDRING'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen>",required:!1}},{key:"opphørsdato",value:{name:"string",required:!1}},{key:"overskrift",value:{name:"string",required:!1}},{key:"rettenTil",value:{name:"union",raw:"'HAR_RETT_TIL_FP' | 'HAR_IKKE_RETT_TIL_FP' | '-'",elements:[{name:"literal",value:"'HAR_RETT_TIL_FP'"},{name:"literal",value:"'HAR_IKKE_RETT_TIL_FP'"},{name:"literal",value:"'-'"}],required:!1}},{key:"skjæringstidspunkt",value:{name:"signature",type:"object",raw:`{
+  dato?: string;
+  utenMinsterett?: boolean;
+}`,signature:{properties:[{key:"dato",value:{name:"string",required:!1}},{key:"utenMinsterett",value:{name:"boolean",required:!1}}]},required:!1}},{key:"type",value:{name:"union",raw:`| 'IKKE_FASTSATT'
+| 'INNVILGET'
+| 'AVSLÅTT'
+| 'OPPHØR'
+| 'HENLAGT_SØKNAD_TRUKKET'
+| 'HENLAGT_FEILOPPRETTET'
+| 'HENLAGT_BRUKER_DØD'
+| 'MERGET_OG_HENLAGT'
+| 'HENLAGT_SØKNAD_MANGLER'
+| 'FORELDREPENGER_ENDRET'
+| 'FORELDREPENGER_SENERE'
+| 'INGEN_ENDRING'
+| 'MANGLER_BEREGNINGSREGLER'
+| 'KLAGE_AVVIST'
+| 'KLAGE_MEDHOLD'
+| 'KLAGE_DELVIS_MEDHOLD'
+| 'KLAGE_OMGJORT_UGUNST'
+| 'KLAGE_YTELSESVEDTAK_OPPHEVET'
+| 'KLAGE_YTELSESVEDTAK_STADFESTET'
+| 'KLAGE_TILBAKEKREVING_VEDTAK_STADFESTET'
+| 'HENLAGT_KLAGE_TRUKKET'
+| 'HJEMSENDE_UTEN_OPPHEVE'
+| 'ANKE_AVVIST'
+| 'ANKE_MEDHOLD'
+| 'ANKE_DELVIS_MEDHOLD'
+| 'ANKE_OMGJORT_UGUNST'
+| 'ANKE_OPPHEVE_OG_HJEMSENDE'
+| 'ANKE_HJEMSENDE_UTEN_OPPHEV'
+| 'ANKE_YTELSESVEDTAK_STADFESTET'
+| 'HENLAGT_ANKE_TRUKKET'
+| 'INNSYN_INNVILGET'
+| 'INNSYN_DELVIS_INNVILGET'
+| 'INNSYN_AVVIST'
+| 'HENLAGT_INNSYN_TRUKKET'`,elements:[{name:"literal",value:"'IKKE_FASTSATT'"},{name:"literal",value:"'INNVILGET'"},{name:"literal",value:"'AVSLÅTT'"},{name:"literal",value:"'OPPHØR'"},{name:"literal",value:"'HENLAGT_SØKNAD_TRUKKET'"},{name:"literal",value:"'HENLAGT_FEILOPPRETTET'"},{name:"literal",value:"'HENLAGT_BRUKER_DØD'"},{name:"literal",value:"'MERGET_OG_HENLAGT'"},{name:"literal",value:"'HENLAGT_SØKNAD_MANGLER'"},{name:"literal",value:"'FORELDREPENGER_ENDRET'"},{name:"literal",value:"'FORELDREPENGER_SENERE'"},{name:"literal",value:"'INGEN_ENDRING'"},{name:"literal",value:"'MANGLER_BEREGNINGSREGLER'"},{name:"literal",value:"'KLAGE_AVVIST'"},{name:"literal",value:"'KLAGE_MEDHOLD'"},{name:"literal",value:"'KLAGE_DELVIS_MEDHOLD'"},{name:"literal",value:"'KLAGE_OMGJORT_UGUNST'"},{name:"literal",value:"'KLAGE_YTELSESVEDTAK_OPPHEVET'"},{name:"literal",value:"'KLAGE_YTELSESVEDTAK_STADFESTET'"},{name:"literal",value:"'KLAGE_TILBAKEKREVING_VEDTAK_STADFESTET'"},{name:"literal",value:"'HENLAGT_KLAGE_TRUKKET'"},{name:"literal",value:"'HJEMSENDE_UTEN_OPPHEVE'"},{name:"literal",value:"'ANKE_AVVIST'"},{name:"literal",value:"'ANKE_MEDHOLD'"},{name:"literal",value:"'ANKE_DELVIS_MEDHOLD'"},{name:"literal",value:"'ANKE_OMGJORT_UGUNST'"},{name:"literal",value:"'ANKE_OPPHEVE_OG_HJEMSENDE'"},{name:"literal",value:"'ANKE_HJEMSENDE_UTEN_OPPHEV'"},{name:"literal",value:"'ANKE_YTELSESVEDTAK_STADFESTET'"},{name:"literal",value:"'HENLAGT_ANKE_TRUKKET'"},{name:"literal",value:"'INNSYN_INNVILGET'"},{name:"literal",value:"'INNSYN_DELVIS_INNVILGET'"},{name:"literal",value:"'INNSYN_AVVIST'"},{name:"literal",value:"'HENLAGT_INNSYN_TRUKKET'"}],required:!0}},{key:"vedtaksbrev",value:{name:"union",raw:"'AUTOMATISK' | 'FRITEKST' | 'INGEN' | '-'",elements:[{name:"literal",value:"'AUTOMATISK'"},{name:"literal",value:"'FRITEKST'"},{name:"literal",value:"'INGEN'"},{name:"literal",value:"'-'"}],required:!1}},{key:"vedtaksbrevStatus",value:{name:"union",raw:`| 'VEDTAKSBREV_PRODUSERES'
+| 'INGEN_VEDTAKSBREV'
+| 'INGEN_VEDTAKSBREV_ANKE'
+| 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING'
+| 'INGEN_VEDTAKSBREV_BEHANDLING_ETTER_KLAGE'
+| 'INGEN_VEDTAKSBREV_JUSTERING_AV_FERIEPENGER'
+| 'INGEN_VEDTAKSBREV_INGEN_KONSEKVENS_FOR_YTELSE'`,elements:[{name:"literal",value:"'VEDTAKSBREV_PRODUSERES'"},{name:"literal",value:"'INGEN_VEDTAKSBREV'"},{name:"literal",value:"'INGEN_VEDTAKSBREV_ANKE'"},{name:"literal",value:"'INGEN_VEDTAKSBREV_KLAGEBEHANDLING'"},{name:"literal",value:"'INGEN_VEDTAKSBREV_BEHANDLING_ETTER_KLAGE'"},{name:"literal",value:"'INGEN_VEDTAKSBREV_JUSTERING_AV_FERIEPENGER'"},{name:"literal",value:"'INGEN_VEDTAKSBREV_INGEN_KONSEKVENS_FOR_YTELSE'"}],required:!0}}]}},description:""}}};const Ka={"VedtakKlageForm.ArsakTilAvslag":"Årsak til avslag","VedtakKlageForm.ResultatOpprettholdVedtak":"Vedtaket er stadfestet","VedtakKlageForm.ResultatKlageMedhold":"Vedtaket er omgjort","VedtakKlageForm.Resultat":"Resultat av klage","VedtakKlageForm.ArsakTilAvvisning":"Årsak til avvisning","VedtakKlageForm.ArsakTilOmgjoring":"Årsak til omgjøring","VedtakKlageForm.ArsakTilOppheving":"Årsak til oppheving","VedtakKlageForm.EngangsstonadIkkeInnvilget":"Engangsstønad er avslått","VedtakKlageForm.ResultatKlageAvvist":"Klagen er avvist","VedtakKlageForm.ResultatKlageYtelsesvedtakOpphevet":"Vedtaket er opphevet","VedtakKlageForm.TilGodkjenning":"Til godkjenning","VedtakKlageForm.ForhandvisBrev":"Forhåndsvis vedtaksbrev","VedtakKlageForm.ArsakTilMedhold":"Årsak","VedtakKlageForm.KlageOmgjortGunst":"Vedtaket er omgjort til gunst","VedtakKlageForm.KlageOmgjortUgunst":"Vedtaket er omgjort til ugunst","VedtakKlageForm.KlageOmgjortDelvis":"Vedtaket er delvis omgjort til gunst","VedtakKlageForm.HjemmsendUtenOpphev":"Vedtaket er hjemsendt","VedtakKlageForm.IkkeFastsatt":"Ikke fastsatt","VedtakKlageForm.Header":"Resultat","VedtakKlageForm.KlageAvvist":"Avvist fordi klagen ikke oppfyller formkravene","VedtakKlageForm.KlageStadfestet":"Vedtaket er stadfestet","VedtakKlageForm.YtelsesvedtakOpphevet":"Vedtak er opphevet og hjemsendt"},ka=$(Ka),he=({klageVurdering:a,previewVedtakCallback:l})=>{const{behandling:n}=h();if(!n.behandlingsresultat)throw new Error(`behandlingsresultat finnes ikke for behandling ${n.uuid}`);return e.jsx(C,{value:ka,children:e.jsx(Ie,{klageVurdering:a,previewVedtakCallback:l,behandlingsresultat:n.behandlingsresultat})})};he.__docgenInfo={description:"",methods:[],displayName:"VedtakKlageProsessIndex",props:{klageVurdering:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  aktuelleHjemler?: Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>;
+  behandletAvKabal?: boolean;
+  klageFormkravResultatKA?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageFormkravResultatNFP?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageVurderingResultatNFP?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  klageVurderingResultatNK?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  mottattDato?: string;
+  underBehandlingKabal?: boolean;
+}`,signature:{properties:[{key:"aktuelleHjemler",value:{name:"Array",elements:[{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>",required:!1}},{key:"behandletAvKabal",value:{name:"boolean",required:!1}},{key:"klageFormkravResultatKA",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageFormkravResultatNFP",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageVurderingResultatNFP",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"klageVurderingResultatNK",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"underBehandlingKabal",value:{name:"boolean",required:!1}}]}},description:""},previewVedtakCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: VedtakKlageForhandsvisData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  gjelderVedtak: boolean;
+}`,signature:{properties:[{key:"gjelderVedtak",value:{name:"boolean",required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const Ta=[k.FORESLÅ_VEDTAK,k.FATTER_VEDTAK,k.FORESLÅ_VEDTAK_MANUELT],Ge=()=>{const a=b(),{behandling:l,setSkalOppdatereEtterBekreftelseAvAp:n}=I.use(J),{aksjonspunkt:t}=l,[i,u]=I.useState(!1),m=La(u,n),g=q(Ta,[],m),s=Aa(l.behandlingsresultat,t),E=Y(l),v=ue(),{data:o}=w(E.klage.klageVurderingOptions(l)),{mutate:D}=P({mutationFn:_=>Ke({..._,behandlingUuid:l.uuid}),onSuccess:se});return e.jsxs(e.Fragment,{children:[e.jsx(We,{visModal:i,lukkModal:()=>{u(!1),v("/")},tekst:a.formatMessage({id:"FatterVedtakStatusModal.KlagenErFerdigbehandlet"})}),e.jsx(U,{skalPanelVisesIMeny:!0,prosessPanelKode:j.KLAGE_RESULTAT,prosessPanelMenyTekst:a.formatMessage({id:"Behandlingspunkt.ResultatKlage"}),standardPanelProps:g,overstyrtStatus:s,skalMarkeresSomAktiv:s!=="IKKE_VURDERT",children:o?e.jsx(he,{klageVurdering:o,previewVedtakCallback:D}):e.jsx(x,{})})]})},Aa=(a,l=[])=>{const n=l.some(ke);if(l.length===0||n)return"IKKE_VURDERT";const t=a?.type;return t==="HENLAGT_KLAGE_TRUKKET"||t==="HENLAGT_FEILOPPRETTET"?"IKKE_VURDERT":t==="KLAGE_AVVIST"||t==="KLAGE_YTELSESVEDTAK_OPPHEVET"?"IKKE_OPPFYLT":"OPPFYLT"},La=(a,l)=>()=>(l(!1),()=>{a(!0)});Ge.__docgenInfo={description:"",methods:[],displayName:"KlageresultatProsessStegInitPanel"};const ye=({klageVurdering:a})=>{const l=b(),{alleKodeverk:n}=h(),{begrunnelse:t,fritekstTilBrev:i,klageVurdering:u,klageMedholdArsak:m,klageVurderingOmgjoer:g}=a.klageVurderingResultatNK??{},s=n.KlageMedholdÅrsak;return e.jsxs(d,{gap:"space-16",children:[e.jsx(O,{size:"small",level:"2",children:l.formatMessage({id:"Klage.ResolveKlage.Title"})}),e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"KlageVurderingRadioOptionsKa.VurderingForKlage"})}),e.jsxs(K,{size:"small",children:[u==="STADFESTE_YTELSESVEDTAK"&&e.jsx(r,{id:"Klage.ResolveKlage.KeepVedtakNk"}),u==="MEDHOLD_I_KLAGE"&&e.jsx(r,{id:"Klage.ResolveKlage.ChangeVedtak"}),u==="HJEMSENDE_UTEN_Å_OPPHEVE"&&e.jsx(r,{id:"Klage.Behandle.Hjemsendt"}),u==="OPPHEVE_YTELSESVEDTAK"&&e.jsx(r,{id:"Klage.ResolveKlage.NullifyVedtak"})]})]}),u==="MEDHOLD_I_KLAGE"&&e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"Klage.ResolveKlage.Cause"})}),e.jsx(K,{size:"small",children:s.find(E=>E.kode===m)?.navn}),e.jsxs(K,{size:"small",children:[g==="GUNST_MEDHOLD_I_KLAGE"&&e.jsx(r,{id:"Klage.Behandle.Omgjort"}),g==="UGUNST_MEDHOLD_I_KLAGE"&&e.jsx(r,{id:"Klage.Behandle.Ugunst"}),g==="DELVIS_MEDHOLD_I_KLAGE"&&e.jsx(r,{id:"Klage.Behandle.DelvisOmgjort"})]})]}),(u==="OPPHEVE_YTELSESVEDTAK"||u==="HJEMSENDE_UTEN_Å_OPPHEVE")&&e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"Klage.ResolveKlage.Cause"})}),e.jsx(K,{size:"small",children:s.find(E=>E.kode===m)?.navn})]}),e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"FritekstKlageBrevTextField.Fritekst"})}),e.jsx(K,{size:"small",children:i})]}),e.jsxs(d,{gap:"space-4",children:[e.jsx(T,{size:"small",children:e.jsx(r,{id:"KlageVurderingRadioOptionsKa.Begrunnelse"})}),e.jsx(K,{size:"small",children:t})]})]})};ye.__docgenInfo={description:`BehandleklageformNfp
+
+Setter opp readonly-panel for behandling av klage (KA).`,methods:[],displayName:"BehandleKlageFormKa",props:{klageVurdering:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  aktuelleHjemler?: Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>;
+  behandletAvKabal?: boolean;
+  klageFormkravResultatKA?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageFormkravResultatNFP?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageVurderingResultatNFP?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  klageVurderingResultatNK?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  mottattDato?: string;
+  underBehandlingKabal?: boolean;
+}`,signature:{properties:[{key:"aktuelleHjemler",value:{name:"Array",elements:[{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>",required:!1}},{key:"behandletAvKabal",value:{name:"boolean",required:!1}},{key:"klageFormkravResultatKA",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageFormkravResultatNFP",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageVurderingResultatNFP",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"klageVurderingResultatNK",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"underBehandlingKabal",value:{name:"boolean",required:!1}}]}},description:""}}};const Oe=({erModalÅpen:a,lukkModal:l,isSubmittable:n,isSubmitting:t,isDirty:i,readOnly:u,valgtHjemmel:m})=>{const g=b();return e.jsx(le,{width:"500px",open:a,"aria-label":g.formatMessage({id:"Klage.Modal.Overskrift"}),onClose:l,children:e.jsx(le.Body,{children:e.jsxs(d,{gap:"space-12",children:[e.jsxs(d,{gap:"space-16",children:[e.jsx(T,{size:"medium",children:e.jsx(r,{id:"Klage.Modal.Overskrift"})}),e.jsx(K,{children:e.jsx(r,{id:"Klage.Modal.SendTilKlageinstans"})}),e.jsx(K,{children:e.jsx(r,{id:"Klage.Modal.Valg"})}),e.jsx(K,{children:e.jsx(r,{id:"Klage.Modal.Oppretthold"})}),m&&e.jsx(K,{children:e.jsx(r,{id:"Klage.Modal.Hjemmel",values:{hjemmel:m}})})]}),e.jsx("div",{children:e.jsxs(S,{gap:"space-8",children:[e.jsx(Q,{isReadOnly:u,isSubmittable:n,isSubmitting:t,isDirty:i}),e.jsx(B,{size:"small",variant:"primary",onClick:l,autoFocus:!0,type:"button",children:e.jsx(r,{id:"Klage.Modal.Avbryt"})})]})})]})})})};Oe.__docgenInfo={description:"",methods:[],displayName:"BekreftOgSubmitKlageModal",props:{erModalÅpen:{required:!0,tsType:{name:"boolean"},description:""},lukkModal:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},isSubmittable:{required:!0,tsType:{name:"boolean"},description:""},isSubmitting:{required:!0,tsType:{name:"boolean"},description:""},isDirty:{required:!0,tsType:{name:"boolean"},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},valgtHjemmel:{required:!1,tsType:{name:"string"},description:""}}};const pa="_fritekstTilBrevTextArea_n72am_1",Sa={fritekstTilBrevTextArea:pa},Re=({språkkode:a,readOnly:l=!0})=>{const{control:n}=oe();return e.jsx("div",{className:Sa.fritekstTilBrevTextArea,children:e.jsx(ve,{name:"fritekstTilBrev",control:n,label:b().formatMessage({id:"FritekstKlageBrevTextField.Fritekst"}),validate:[V,te],readOnly:l,maxLength:1e5,badges:[{type:"info",titleText:Ue(a)}],parse:re})})};Re.__docgenInfo={description:"",methods:[],displayName:"FritekstBrevTextField",props:{språkkode:{required:!0,tsType:{name:"string"},description:""},readOnly:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"true",computed:!1}}}};const Va="_select_1owoa_7",ba="_selectReadOnly_1owoa_10",F={select:Va,selectReadOnly:ba},fe=({readOnly:a,medholdReasons:l,alleHjemmlerMedNavn:n,klageVurdering:t})=>{const i=b(),{control:u}=oe(),m=l.map(s=>e.jsx("option",{value:s.kode,children:s.navn},s.kode)),g=n.map(s=>e.jsx("option",{value:s.kode,children:s.navn},s.kode));return e.jsxs(d,{gap:"space-12",children:[e.jsx(y,{name:"klageVurdering",control:u,validate:[V],isReadOnly:a,children:e.jsxs(S,{gap:"space-16",children:[e.jsx(p,{value:"MEDHOLD_I_KLAGE",size:"small",children:e.jsx(r,{id:"Klage.ResolveKlage.ChangeVedtak"})}),e.jsx(p,{value:"STADFESTE_YTELSESVEDTAK",size:"small",children:e.jsx(r,{id:"Klage.ResolveKlage.KeepVedtakNfp"})})]})}),t==="MEDHOLD_I_KLAGE"&&e.jsx(Je,{children:e.jsxs(d,{gap:"space-16",children:[e.jsx(z,{readOnly:a,control:u,name:"klageMedholdArsak",selectValues:m,className:a?F.selectReadOnly:F.select,label:i.formatMessage({id:"Klage.ResolveKlage.Cause"}),validate:[V]}),e.jsxs(y,{name:"klageVurderingOmgjoer",control:u,validate:[V],isReadOnly:a,children:[e.jsx(p,{value:"GUNST_MEDHOLD_I_KLAGE",size:"small",children:e.jsx(r,{id:"Klage.Behandle.Omgjort"})}),e.jsx(p,{value:"UGUNST_MEDHOLD_I_KLAGE",size:"small",children:e.jsx(r,{id:"Klage.Behandle.Ugunst"})}),e.jsx(p,{value:"DELVIS_MEDHOLD_I_KLAGE",size:"small",children:e.jsx(r,{id:"Klage.Behandle.DelvisOmgjort"})})]})]})}),e.jsx(z,{readOnly:a,control:u,name:"klageHjemmel",selectValues:g,className:a?F.selectReadOnly:F.select,label:i.formatMessage({id:"Klage.ResolveKlage.Hjemmel"}),validate:[V]})]})};fe.__docgenInfo={description:"",methods:[],displayName:"KlageVurderingRadioOptionsNfp",props:{readOnly:{required:!0,tsType:{name:"boolean"},description:""},medholdReasons:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:"KodeverkMedNavn<'KlageMedholdÅrsak'>[]"},description:""},alleHjemmlerMedNavn:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:"KodeverkMedNavn<'KlageHjemmel'>[]"},description:""},klageVurdering:{required:!1,tsType:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}]},description:""}}};const Da=(a,l)=>{switch(l){case"STADFESTE_YTELSESVEDTAK":return a?"KGESTA":"KGEOVE";case"OPPHEVE_YTELSESVEDTAK":return"KGEHJE";case"HJEMSENDE_UTEN_Å_OPPHEVE":return"KGEHJE";case"MEDHOLD_I_KLAGE":return"KGEOMG";default:return}},Na=(a,l)=>({fritekst:l??"",dokumentMal:Da(!1,a),erOpphevetKlage:a==="OPPHEVE_YTELSESVEDTAK"}),Pe=({previewCallback:a,fritekstTilBrev:l,klageVurdering:n})=>{const t=i=>{a(Na(n,l)),i.preventDefault()};return e.jsx(Te,{href:"#",onClick:t,onKeyDown:i=>i.key==="Enter"?t(i):null,children:e.jsx(r,{id:"PreviewKlageLink.ForhandvisBrev"})})};Pe.__docgenInfo={description:"",methods:[],displayName:"PreviewKlageLink",props:{previewCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: KlagevurderingForhåndsvisData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  fritekst: string;
+  dokumentMal?: DokumentMalType;
+  erOpphevetKlage: boolean;
+}`,signature:{properties:[{key:"fritekst",value:{name:"string",required:!0}},{key:"dokumentMal",value:{name:"union",raw:`| 'FRITEK'
+| 'FRIHTM'
+| 'INNVES'
+| 'AVSLES'
+| 'INVFOR'
+| 'AVSFOR'
+| 'OPPFOR'
+| 'ANUFOR'
+| 'INVSVP'
+| 'OPPSVP'
+| 'AVSSVP'
+| 'INFOAF'
+| 'INNOPP'
+| 'VARREV'
+| 'IOHENL'
+| 'INNSYN'
+| 'IKKESO'
+| 'INGEND'
+| 'FORSAK'
+| 'FORMED'
+| 'FORMEF'
+| 'FORTID'
+| 'KGEAVV'
+| 'KGEOMG'
+| 'KGEOVE'
+| 'ELYSIM'
+| 'ENDUTB'
+| 'INFOPU'
+| 'FORPUS'
+| 'KLAGAV'
+| 'KAVVIS'
+| 'KLAGNY'
+| 'KHJEMS'
+| 'VEDMED'
+| 'KOMGJO'
+| 'KLAGOV'
+| 'KOVKLA'
+| 'KLAGVE'
+| 'KSTADF'
+| 'VEDOGA'
+| 'ANKEBO'
+| 'ANKOMG'
+| 'ANKOPP'
+| 'KGESTA'
+| 'KGEHJE'`,elements:[{name:"literal",value:"'FRITEK'"},{name:"literal",value:"'FRIHTM'"},{name:"literal",value:"'INNVES'"},{name:"literal",value:"'AVSLES'"},{name:"literal",value:"'INVFOR'"},{name:"literal",value:"'AVSFOR'"},{name:"literal",value:"'OPPFOR'"},{name:"literal",value:"'ANUFOR'"},{name:"literal",value:"'INVSVP'"},{name:"literal",value:"'OPPSVP'"},{name:"literal",value:"'AVSSVP'"},{name:"literal",value:"'INFOAF'"},{name:"literal",value:"'INNOPP'"},{name:"literal",value:"'VARREV'"},{name:"literal",value:"'IOHENL'"},{name:"literal",value:"'INNSYN'"},{name:"literal",value:"'IKKESO'"},{name:"literal",value:"'INGEND'"},{name:"literal",value:"'FORSAK'"},{name:"literal",value:"'FORMED'"},{name:"literal",value:"'FORMEF'"},{name:"literal",value:"'FORTID'"},{name:"literal",value:"'KGEAVV'"},{name:"literal",value:"'KGEOMG'"},{name:"literal",value:"'KGEOVE'"},{name:"literal",value:"'ELYSIM'"},{name:"literal",value:"'ENDUTB'"},{name:"literal",value:"'INFOPU'"},{name:"literal",value:"'FORPUS'"},{name:"literal",value:"'KLAGAV'"},{name:"literal",value:"'KAVVIS'"},{name:"literal",value:"'KLAGNY'"},{name:"literal",value:"'KHJEMS'"},{name:"literal",value:"'VEDMED'"},{name:"literal",value:"'KOMGJO'"},{name:"literal",value:"'KLAGOV'"},{name:"literal",value:"'KOVKLA'"},{name:"literal",value:"'KLAGVE'"},{name:"literal",value:"'KSTADF'"},{name:"literal",value:"'VEDOGA'"},{name:"literal",value:"'ANKEBO'"},{name:"literal",value:"'ANKOMG'"},{name:"literal",value:"'ANKOPP'"},{name:"literal",value:"'KGESTA'"},{name:"literal",value:"'KGEHJE'"}],required:!1}},{key:"erOpphevetKlage",value:{name:"boolean",required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""},fritekstTilBrev:{required:!1,tsType:{name:"string"},description:""},klageVurdering:{required:!1,tsType:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}]},description:""}}};const Ia=a=>({klageMedholdArsak:a.klageVurdering==="MEDHOLD_I_KLAGE"?a.klageMedholdArsak:void 0,klageVurderingOmgjoer:a.klageVurdering==="MEDHOLD_I_KLAGE"?a.klageVurderingOmgjoer:void 0,klageHjemmel:a.klageHjemmel,klageVurdering:H(a.klageVurdering),fritekstTilBrev:a.fritekstTilBrev,begrunnelse:a.begrunnelse,kode:k.MANUELL_VURDERING_AV_KLAGE_NFP}),M=a=>{if(a&&a!=="-")return a},ha=(a,l)=>a.filter(({kode:n})=>l.includes(n)).sort((n,t)=>n.kode.localeCompare(t.kode)),Ga=a=>a.map(l=>l),ya=a=>({klageMedholdArsak:M(a?.klageMedholdArsak??void 0),klageVurderingOmgjoer:M(a?.klageVurderingOmgjoer??void 0),klageHjemmel:M(a?.klageHjemmel??void 0),klageVurdering:M(a?.klageVurdering??void 0),begrunnelse:a?.begrunnelse??void 0,fritekstTilBrev:a?.fritekstTilBrev??void 0}),Be=({klageVurdering:a,previewCallback:l,saveKlage:n,alleAktuelleHjemler:t})=>{const{behandling:i,alleKodeverk:u,submitCallback:m,isReadOnly:g,isSubmittable:s}=h(),E=ha(u.KlageHjemmel,Ga(t)),v=b(),[o,D]=I.useState(!1),_=ya(a.klageVurderingResultatNFP??void 0),{mellomlagretFormData:N,setMellomlagretFormData:G}=ne(),A=me({defaultValues:N??_}),L=A.watch(),R=()=>{D(!1)},Me=()=>{D(!0)};return e.jsx(de,{formMethods:A,onSubmit:f=>m(Ia(f)),setDataOnUnmount:G,children:e.jsxs(d,{gap:"space-16",children:[e.jsx(O,{size:"small",level:"2",children:v.formatMessage({id:"Klage.ResolveKlage.Title"})}),s&&e.jsx(ge,{children:e.jsx(r,{id:"Klage.ResolveKlage.HelpText"})}),e.jsx(fe,{readOnly:g,klageVurdering:L.klageVurdering,medholdReasons:u.KlageMedholdÅrsak,alleHjemmlerMedNavn:E}),e.jsx(Ee,{readOnly:g,text:v.formatMessage({id:"BehandleKlageFormNfp.BegrunnelseForKlage"})}),e.jsx(Re,{språkkode:i.språkkode,readOnly:g}),e.jsxs(S,{justify:"space-between",children:[e.jsxs(S,{gap:"space-16",children:[L.klageVurdering==="STADFESTE_YTELSESVEDTAK"&&e.jsxs(e.Fragment,{children:[e.jsx(B,{variant:"primary",type:"button",size:"small",onClick:()=>Me(),disabled:g,children:e.jsx(r,{id:"Klage.Behandle.Bekreft"})}),e.jsx(Oe,{erModalÅpen:o,lukkModal:R,valgtHjemmel:E.find(f=>f.kode===L.klageHjemmel)?.navn,readOnly:g,isSubmittable:s,isSubmitting:A.formState.isSubmitting,isDirty:A.formState.isValid})]}),L.klageVurdering!=="STADFESTE_YTELSESVEDTAK"&&e.jsx(Q,{isReadOnly:g,isSubmittable:s,isSubmitting:A.formState.isSubmitting,isDirty:A.formState.isDirty}),!g&&L.klageVurdering&&L.fritekstTilBrev&&L.fritekstTilBrev.length>2&&e.jsx(Pe,{previewCallback:l,fritekstTilBrev:L.fritekstTilBrev,klageVurdering:L.klageVurdering})]}),!g&&e.jsx(B,{size:"small",variant:"primary",onClick:A.handleSubmit(f=>n(Oa(f,k.MANUELL_VURDERING_AV_KLAGE_NFP))),type:"button",children:e.jsx(r,{id:"Klage.ResolveKlage.TempSaveButton"})})]})]})})},Oa=(a,l)=>({kode:l,klageMedholdArsak:a.klageVurdering==="MEDHOLD_I_KLAGE"||a.klageVurdering==="OPPHEVE_YTELSESVEDTAK"?a.klageMedholdArsak:void 0,klageVurderingOmgjoer:a.klageVurdering==="MEDHOLD_I_KLAGE"?a.klageVurderingOmgjoer:void 0,klageHjemmel:a.klageHjemmel,fritekstTilBrev:H(a.fritekstTilBrev),begrunnelse:H(a.begrunnelse),klageVurdering:H(a.klageVurdering)});Be.__docgenInfo={description:`BehandleklageformNfp
+
+Presentasjonskomponent. Setter opp aksjonspunktet for behandling av klage (NFP).`,methods:[],displayName:"BehandleKlageFormNfp",props:{previewCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: KlagevurderingForhåndsvisData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  fritekst: string;
+  dokumentMal?: DokumentMalType;
+  erOpphevetKlage: boolean;
+}`,signature:{properties:[{key:"fritekst",value:{name:"string",required:!0}},{key:"dokumentMal",value:{name:"union",raw:`| 'FRITEK'
+| 'FRIHTM'
+| 'INNVES'
+| 'AVSLES'
+| 'INVFOR'
+| 'AVSFOR'
+| 'OPPFOR'
+| 'ANUFOR'
+| 'INVSVP'
+| 'OPPSVP'
+| 'AVSSVP'
+| 'INFOAF'
+| 'INNOPP'
+| 'VARREV'
+| 'IOHENL'
+| 'INNSYN'
+| 'IKKESO'
+| 'INGEND'
+| 'FORSAK'
+| 'FORMED'
+| 'FORMEF'
+| 'FORTID'
+| 'KGEAVV'
+| 'KGEOMG'
+| 'KGEOVE'
+| 'ELYSIM'
+| 'ENDUTB'
+| 'INFOPU'
+| 'FORPUS'
+| 'KLAGAV'
+| 'KAVVIS'
+| 'KLAGNY'
+| 'KHJEMS'
+| 'VEDMED'
+| 'KOMGJO'
+| 'KLAGOV'
+| 'KOVKLA'
+| 'KLAGVE'
+| 'KSTADF'
+| 'VEDOGA'
+| 'ANKEBO'
+| 'ANKOMG'
+| 'ANKOPP'
+| 'KGESTA'
+| 'KGEHJE'`,elements:[{name:"literal",value:"'FRITEK'"},{name:"literal",value:"'FRIHTM'"},{name:"literal",value:"'INNVES'"},{name:"literal",value:"'AVSLES'"},{name:"literal",value:"'INVFOR'"},{name:"literal",value:"'AVSFOR'"},{name:"literal",value:"'OPPFOR'"},{name:"literal",value:"'ANUFOR'"},{name:"literal",value:"'INVSVP'"},{name:"literal",value:"'OPPSVP'"},{name:"literal",value:"'AVSSVP'"},{name:"literal",value:"'INFOAF'"},{name:"literal",value:"'INNOPP'"},{name:"literal",value:"'VARREV'"},{name:"literal",value:"'IOHENL'"},{name:"literal",value:"'INNSYN'"},{name:"literal",value:"'IKKESO'"},{name:"literal",value:"'INGEND'"},{name:"literal",value:"'FORSAK'"},{name:"literal",value:"'FORMED'"},{name:"literal",value:"'FORMEF'"},{name:"literal",value:"'FORTID'"},{name:"literal",value:"'KGEAVV'"},{name:"literal",value:"'KGEOMG'"},{name:"literal",value:"'KGEOVE'"},{name:"literal",value:"'ELYSIM'"},{name:"literal",value:"'ENDUTB'"},{name:"literal",value:"'INFOPU'"},{name:"literal",value:"'FORPUS'"},{name:"literal",value:"'KLAGAV'"},{name:"literal",value:"'KAVVIS'"},{name:"literal",value:"'KLAGNY'"},{name:"literal",value:"'KHJEMS'"},{name:"literal",value:"'VEDMED'"},{name:"literal",value:"'KOMGJO'"},{name:"literal",value:"'KLAGOV'"},{name:"literal",value:"'KOVKLA'"},{name:"literal",value:"'KLAGVE'"},{name:"literal",value:"'KSTADF'"},{name:"literal",value:"'VEDOGA'"},{name:"literal",value:"'ANKEBO'"},{name:"literal",value:"'ANKOMG'"},{name:"literal",value:"'ANKOPP'"},{name:"literal",value:"'KGESTA'"},{name:"literal",value:"'KGEHJE'"}],required:!1}},{key:"erOpphevetKlage",value:{name:"boolean",required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""},saveKlage:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: TransformedValues) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  kode: string;
+  klageMedholdArsak?: string;
+  klageVurderingOmgjoer?: KlageVurderingOmgjørType;
+  klageHjemmel?: KlageHjemmel;
+  fritekstTilBrev: string;
+  begrunnelse: string;
+  klageVurdering: KlageVurderingType;
+}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"klageMedholdArsak",value:{name:"string",required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""},klageVurdering:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  aktuelleHjemler?: Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>;
+  behandletAvKabal?: boolean;
+  klageFormkravResultatKA?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageFormkravResultatNFP?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageVurderingResultatNFP?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  klageVurderingResultatNK?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  mottattDato?: string;
+  underBehandlingKabal?: boolean;
+}`,signature:{properties:[{key:"aktuelleHjemler",value:{name:"Array",elements:[{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>",required:!1}},{key:"behandletAvKabal",value:{name:"boolean",required:!1}},{key:"klageFormkravResultatKA",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageFormkravResultatNFP",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageVurderingResultatNFP",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"klageVurderingResultatNK",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"underBehandlingKabal",value:{name:"boolean",required:!1}}]}},description:""},alleAktuelleHjemler:{required:!0,tsType:{name:"Array",elements:[{name:"string"}],raw:"string[]"},description:""}}};const Ra={"Klage.ResolveKlage.Title":"Behandle klage","Klage.ResolveKlage.HelpText":"Vurder om klagen skal tas til følge","Klage.ResolveKlage.KeepVedtakNk":"Stadfest vedtaket","Klage.ResolveKlage.KeepVedtakNfp":"Oppretthold vedtaket","Klage.ResolveKlage.ChangeVedtak":"Omgjør vedtaket","Klage.ResolveKlage.Hjemmel":"Hjemmel","Klage.Behandle.Omgjort":"Til gunst","Klage.Behandle.DelvisOmgjort":"Delvis omgjør, til gunst","Klage.Behandle.Hjemsendt":"Hjemsend vedtaket","Klage.Behandle.Ugunst":"Til ugunst","Klage.ResolveKlage.NullifyVedtak":"Opphev og hjemsend vedtaket","Klage.Behandle.Bekreft":"Bekreft og fortsett","Klage.Modal.Overskrift":"Oppsummering","Klage.Modal.SendTilKlageinstans":"Du vil nå sende klagen over til Nav klageinstans","Klage.Modal.Oppretthold":"Oppretthold vedtaket","Klage.Modal.Hjemmel":"Lovhjemmel {hjemmel}","Klage.Modal.Valg":"Du har valgt:","Klage.Modal.Avbryt":"Avbryt","Klage.ResolveKlage.Cause":"Årsak","Klage.ResolveKlage.TempSaveButton":"Lagre","KlageVurderingRadioOptionsKa.VurderingForKlage":"Vurdering","FritekstKlageBrevTextField.Fritekst":"Fritekst til brev","BehandleKlageFormNfp.BegrunnelseForKlage":"Begrunnelse","PreviewKlageLink.ForhandvisBrev":"Forhåndsvis brev","KlageVurderingRadioOptionsKa.Begrunnelse":"Begrunnelse","Malform.Beskrivelse":"Foretrukket språk"},fa=$(Ra),je=({klageVurdering:a,saveKlage:l,previewCallback:n})=>{const{aksjonspunkterForPanel:t}=h();return e.jsxs(C,{value:fa,children:[a.klageVurderingResultatNK&&e.jsx(ye,{klageVurdering:a}),t.some(i=>i.definisjon===k.MANUELL_VURDERING_AV_KLAGE_NFP)&&e.jsx(Be,{klageVurdering:a,saveKlage:l,previewCallback:n,alleAktuelleHjemler:a.aktuelleHjemler?a.aktuelleHjemler:[]})]})};je.__docgenInfo={description:"",methods:[],displayName:"KlagevurderingProsessIndex",props:{klageVurdering:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  aktuelleHjemler?: Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>;
+  behandletAvKabal?: boolean;
+  klageFormkravResultatKA?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageFormkravResultatNFP?: tjenester_behandling_klage_KlageFormkravResultatDto;
+  klageVurderingResultatNFP?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  klageVurderingResultatNK?: tjenester_behandling_klage_KlageVurderingResultatDto;
+  mottattDato?: string;
+  underBehandlingKabal?: boolean;
+}`,signature:{properties:[{key:"aktuelleHjemler",value:{name:"Array",elements:[{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel>",required:!1}},{key:"behandletAvKabal",value:{name:"boolean",required:!1}},{key:"klageFormkravResultatKA",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageFormkravResultatNFP",value:{name:"signature",type:"object",raw:`{
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  begrunnelse: string;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erKlagerPart: boolean;
+  erSignert: boolean;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+}`,signature:{properties:[{key:"avvistArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'KLAGET_FOR_SENT'
+| 'KLAGE_UGYLDIG'
+| 'IKKE_PAKLAGD_VEDTAK'
+| 'KLAGER_IKKE_PART'
+| 'IKKE_KONKRET'
+| 'IKKE_SIGNERT'
+| '-'`,elements:[{name:"literal",value:"'KLAGET_FOR_SENT'"},{name:"literal",value:"'KLAGE_UGYLDIG'"},{name:"literal",value:"'IKKE_PAKLAGD_VEDTAK'"},{name:"literal",value:"'KLAGER_IKKE_PART'"},{name:"literal",value:"'IKKE_KONKRET'"},{name:"literal",value:"'IKKE_SIGNERT'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"erKlageKonkret",value:{name:"boolean",required:!0}},{key:"erKlagefirstOverholdt",value:{name:"boolean",required:!0}},{key:"erKlagerPart",value:{name:"boolean",required:!0}},{key:"erSignert",value:{name:"boolean",required:!0}},{key:"paKlagdBehandlingId",value:{name:"number",required:!0}},{key:"paKlagdBehandlingUuid",value:{name:"string",required:!0}},{key:"paklagdBehandlingType",value:{name:"union",raw:`| 'BT-002'
+| 'BT-003'
+| 'BT-004'
+| 'BT-008'
+| 'BT-006'
+| 'BT-007'
+| 'BT-009'
+| '-'`,elements:[{name:"literal",value:"'BT-002'"},{name:"literal",value:"'BT-003'"},{name:"literal",value:"'BT-004'"},{name:"literal",value:"'BT-008'"},{name:"literal",value:"'BT-006'"},{name:"literal",value:"'BT-007'"},{name:"literal",value:"'BT-009'"},{name:"literal",value:"'-'"}],required:!0}}]},required:!1}},{key:"klageVurderingResultatNFP",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"klageVurderingResultatNK",value:{name:"signature",type:"object",raw:`{
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+  godkjentAvMedunderskriver?: boolean;
+  klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
+  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
+  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurdertAv: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!1}},{key:"godkjentAvMedunderskriver",value:{name:"boolean",required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageMedholdArsak",value:{name:"union",raw:`| 'NYE_OPPLYSNINGER'
+| 'ULIK_REGELVERKSTOLKNING'
+| 'ULIK_VURDERING'
+| 'PROSESSUELL_FEIL'
+| '-'`,elements:[{name:"literal",value:"'NYE_OPPLYSNINGER'"},{name:"literal",value:"'ULIK_REGELVERKSTOLKNING'"},{name:"literal",value:"'ULIK_VURDERING'"},{name:"literal",value:"'PROSESSUELL_FEIL'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageVurdertAv",value:{name:"string",required:!0}}]},required:!1}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"underBehandlingKabal",value:{name:"boolean",required:!1}}]}},description:""},previewCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: KlagevurderingForhåndsvisData) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  fritekst: string;
+  dokumentMal?: DokumentMalType;
+  erOpphevetKlage: boolean;
+}`,signature:{properties:[{key:"fritekst",value:{name:"string",required:!0}},{key:"dokumentMal",value:{name:"union",raw:`| 'FRITEK'
+| 'FRIHTM'
+| 'INNVES'
+| 'AVSLES'
+| 'INVFOR'
+| 'AVSFOR'
+| 'OPPFOR'
+| 'ANUFOR'
+| 'INVSVP'
+| 'OPPSVP'
+| 'AVSSVP'
+| 'INFOAF'
+| 'INNOPP'
+| 'VARREV'
+| 'IOHENL'
+| 'INNSYN'
+| 'IKKESO'
+| 'INGEND'
+| 'FORSAK'
+| 'FORMED'
+| 'FORMEF'
+| 'FORTID'
+| 'KGEAVV'
+| 'KGEOMG'
+| 'KGEOVE'
+| 'ELYSIM'
+| 'ENDUTB'
+| 'INFOPU'
+| 'FORPUS'
+| 'KLAGAV'
+| 'KAVVIS'
+| 'KLAGNY'
+| 'KHJEMS'
+| 'VEDMED'
+| 'KOMGJO'
+| 'KLAGOV'
+| 'KOVKLA'
+| 'KLAGVE'
+| 'KSTADF'
+| 'VEDOGA'
+| 'ANKEBO'
+| 'ANKOMG'
+| 'ANKOPP'
+| 'KGESTA'
+| 'KGEHJE'`,elements:[{name:"literal",value:"'FRITEK'"},{name:"literal",value:"'FRIHTM'"},{name:"literal",value:"'INNVES'"},{name:"literal",value:"'AVSLES'"},{name:"literal",value:"'INVFOR'"},{name:"literal",value:"'AVSFOR'"},{name:"literal",value:"'OPPFOR'"},{name:"literal",value:"'ANUFOR'"},{name:"literal",value:"'INVSVP'"},{name:"literal",value:"'OPPSVP'"},{name:"literal",value:"'AVSSVP'"},{name:"literal",value:"'INFOAF'"},{name:"literal",value:"'INNOPP'"},{name:"literal",value:"'VARREV'"},{name:"literal",value:"'IOHENL'"},{name:"literal",value:"'INNSYN'"},{name:"literal",value:"'IKKESO'"},{name:"literal",value:"'INGEND'"},{name:"literal",value:"'FORSAK'"},{name:"literal",value:"'FORMED'"},{name:"literal",value:"'FORMEF'"},{name:"literal",value:"'FORTID'"},{name:"literal",value:"'KGEAVV'"},{name:"literal",value:"'KGEOMG'"},{name:"literal",value:"'KGEOVE'"},{name:"literal",value:"'ELYSIM'"},{name:"literal",value:"'ENDUTB'"},{name:"literal",value:"'INFOPU'"},{name:"literal",value:"'FORPUS'"},{name:"literal",value:"'KLAGAV'"},{name:"literal",value:"'KAVVIS'"},{name:"literal",value:"'KLAGNY'"},{name:"literal",value:"'KHJEMS'"},{name:"literal",value:"'VEDMED'"},{name:"literal",value:"'KOMGJO'"},{name:"literal",value:"'KLAGOV'"},{name:"literal",value:"'KOVKLA'"},{name:"literal",value:"'KLAGVE'"},{name:"literal",value:"'KSTADF'"},{name:"literal",value:"'VEDOGA'"},{name:"literal",value:"'ANKEBO'"},{name:"literal",value:"'ANKOMG'"},{name:"literal",value:"'ANKOPP'"},{name:"literal",value:"'KGESTA'"},{name:"literal",value:"'KGEHJE'"}],required:!1}},{key:"erOpphevetKlage",value:{name:"boolean",required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""},saveKlage:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: TransformedValues) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  kode: string;
+  klageMedholdArsak?: string;
+  klageVurderingOmgjoer?: KlageVurderingOmgjørType;
+  klageHjemmel?: KlageHjemmel;
+  fritekstTilBrev: string;
+  begrunnelse: string;
+  klageVurdering: KlageVurderingType;
+}`,signature:{properties:[{key:"kode",value:{name:"string",required:!0}},{key:"klageMedholdArsak",value:{name:"string",required:!1}},{key:"klageVurderingOmgjoer",value:{name:"union",raw:`| 'GUNST_MEDHOLD_I_KLAGE'
+| 'DELVIS_MEDHOLD_I_KLAGE'
+| 'UGUNST_MEDHOLD_I_KLAGE'
+| '-'`,elements:[{name:"literal",value:"'GUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'DELVIS_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'UGUNST_MEDHOLD_I_KLAGE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"klageHjemmel",value:{name:"union",raw:`| '14-02'
+| '14-04'
+| '14-05'
+| '14-06'
+| '14-07'
+| '14-09'
+| '14-10'
+| '14-11'
+| '14-12'
+| '14-13'
+| '14-14'
+| '14-15'
+| '14-16'
+| '14-17'
+| '8-2'
+| '21-3'
+| '22-13'
+| '22-15'
+| '883-5'
+| '883-6'
+| '-'`,elements:[{name:"literal",value:"'14-02'"},{name:"literal",value:"'14-04'"},{name:"literal",value:"'14-05'"},{name:"literal",value:"'14-06'"},{name:"literal",value:"'14-07'"},{name:"literal",value:"'14-09'"},{name:"literal",value:"'14-10'"},{name:"literal",value:"'14-11'"},{name:"literal",value:"'14-12'"},{name:"literal",value:"'14-13'"},{name:"literal",value:"'14-14'"},{name:"literal",value:"'14-15'"},{name:"literal",value:"'14-16'"},{name:"literal",value:"'14-17'"},{name:"literal",value:"'8-2'"},{name:"literal",value:"'21-3'"},{name:"literal",value:"'22-13'"},{name:"literal",value:"'22-15'"},{name:"literal",value:"'883-5'"},{name:"literal",value:"'883-6'"},{name:"literal",value:"'-'"}],required:!1}},{key:"fritekstTilBrev",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}},{key:"klageVurdering",value:{name:"union",raw:`| 'OPPHEVE_YTELSESVEDTAK'
+| 'STADFESTE_YTELSESVEDTAK'
+| 'MEDHOLD_I_KLAGE'
+| 'AVVIS_KLAGE'
+| 'HJEMSENDE_UTEN_Å_OPPHEVE'
+| '-'`,elements:[{name:"literal",value:"'OPPHEVE_YTELSESVEDTAK'"},{name:"literal",value:"'STADFESTE_YTELSESVEDTAK'"},{name:"literal",value:"'MEDHOLD_I_KLAGE'"},{name:"literal",value:"'AVVIS_KLAGE'"},{name:"literal",value:"'HJEMSENDE_UTEN_Å_OPPHEVE'"},{name:"literal",value:"'-'"}],required:!0}}]}},name:"data"}],return:{name:"void"}}},description:""}}};const ee=({aksjonspunktKoder:a,prosessPanelKode:l,prosessPanelMenyTekst:n})=>{const[t,i]=I.useState(!1),{behandling:u,hentOgSettBehandling:m,setSkalOppdatereEtterBekreftelseAvAp:g,oppdaterProsessStegOgFaktaPanelIUrl:s}=I.use(J),E=Pa(i,g,s),v=q(a,[],E),o=Y(u),D=ue(),{data:_}=w(o.klage.klageVurderingOptions(u)),{mutate:N}=P({mutationFn:A=>Ke({...A,behandlingUuid:u.uuid}),onSuccess:se}),{mutate:G}=P({mutationFn:A=>o.klage.mellomlagreKlageVurdering({behandlingUuid:u.uuid,...A}),onSuccess:()=>m()});return e.jsx(U,{standardPanelProps:v,prosessPanelKode:l,prosessPanelMenyTekst:n,skalPanelVisesIMeny:!0,children:e.jsxs(e.Fragment,{children:[e.jsx(Ze,{visModal:t,lukkModal:()=>{i(!1),D("/")}}),_?e.jsx(je,{klageVurdering:_,previewCallback:N,saveKlage:G}):e.jsx(x,{})]})})},Pa=(a,l,n)=>t=>{const i=t.some(u=>u.kode===k.MANUELL_VURDERING_AV_KLAGE_NFP&&"klageVurdering"in u&&u.klageVurdering==="STADFESTE_YTELSESVEDTAK");return i&&l(!1),()=>{i?a(!0):n&&n("default","default")}};ee.__docgenInfo={description:"",methods:[],displayName:"VurderingFellesProsessStegInitPanel",props:{aksjonspunktKoder:{required:!1,tsType:{name:"Array",elements:[{name:"union",raw:"Aksjonspunkt['definisjon']"}],raw:"Aksjonspunkt['definisjon'][]"},description:""},prosessPanelKode:{required:!0,tsType:{name:"ProsessStegCode"},description:""},prosessPanelMenyTekst:{required:!0,tsType:{name:"string"},description:""}}};const Ba=[k.MANUELL_VURDERING_AV_KLAGE_NFP],ce=()=>e.jsx(ee,{aksjonspunktKoder:Ba,prosessPanelKode:j.KLAGE_NAV_FAMILIE_OG_PENSJON,prosessPanelMenyTekst:b().formatMessage({id:"Behandlingspunkt.CheckKlageNFP"})});ce.__docgenInfo={description:"",methods:[],displayName:"VurderingFamOgPensjonProsessStegInitPanel"};const ja=[k.UTGÅTT_5036],Fe=()=>e.jsx(ee,{aksjonspunktKoder:ja,prosessPanelKode:j.KLAGE_NAV_KLAGEINSTANS,prosessPanelMenyTekst:b().formatMessage({id:"Behandlingspunkt.CheckKlageNK"})});Fe.__docgenInfo={description:"",methods:[],displayName:"VurderingKlageInstansProsessStegInitPanel"};const ca=({valgtProsessSteg:a,valgtFaktaSteg:l})=>e.jsxs(e.Fragment,{children:[e.jsxs(Ye,{valgtProsessSteg:a,valgtFaktaSteg:l,children:[e.jsx(be,{}),e.jsx(ce,{}),e.jsx(De,{}),e.jsx(Fe,{}),e.jsx(Ge,{})]}),e.jsx(xe,{valgtFaktaSteg:l,valgtProsessSteg:a,children:e.jsx(we,{})})]});ca.__docgenInfo={description:"",methods:[],displayName:"KlagePaneler",props:{valgtProsessSteg:{required:!1,tsType:{name:"string"},description:""},valgtFaktaSteg:{required:!1,tsType:{name:"string"},description:""}}};export{ca as default};
