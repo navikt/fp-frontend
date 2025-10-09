@@ -14,7 +14,7 @@ import { BehandlingDataContext } from '../../felles/context/BehandlingDataContex
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_FORMKRAV_NK];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.UTGÅTT_5083];
 
 export const FormKravKlageInstansProsessStegInitPanel = () => {
   const intl = useIntl();

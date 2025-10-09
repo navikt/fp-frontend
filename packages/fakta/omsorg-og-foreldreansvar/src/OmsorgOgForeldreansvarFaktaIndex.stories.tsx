@@ -132,7 +132,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
   status: 'OPPR',
 
   kanLoses: true,
@@ -148,14 +148,14 @@ export const ÅpentAksjonspunktForOmsorgovertakelse: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+        definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
+      [AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
     },
     isReadOnly: false,
   },
@@ -172,14 +172,14 @@ export const UtførtAksjonspunktForOmsorgovertakelse: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+        definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
         status: 'UTFO',
         begrunnelse: 'dette er en begrunnelse',
         kanLoses: false,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
+      [AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
     },
     isReadOnly: true,
   },
@@ -190,14 +190,14 @@ export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+        definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_FORELDREANSVAR,
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
+      [AksjonspunktKode.AVKLAR_VILKÅR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
     },
     isReadOnly: false,
   },
@@ -208,7 +208,7 @@ export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+        definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_FORELDREANSVAR,
         status: 'UTFO',
         begrunnelse: 'dette er en begrunnelse',
         kanLoses: false,
@@ -220,7 +220,7 @@ export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
       foreldreansvarDato: '2021-02-02',
     },
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
+      [AksjonspunktKode.AVKLAR_VILKÅR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
     },
     isReadOnly: true,
   },

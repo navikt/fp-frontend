@@ -56,7 +56,7 @@ const buildInitialValues = (
 const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: AksjonspunktKode.SVANGERSKAPSVILKARET,
+  kode: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
 });
 
 interface Props {

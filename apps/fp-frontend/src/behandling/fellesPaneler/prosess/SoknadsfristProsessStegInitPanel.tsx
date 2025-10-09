@@ -14,7 +14,7 @@ import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInit
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST];
 
 export const SoknadsfristProsessStegInitPanel = () => {
   const intl = useIntl();

@@ -5,4 +5,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 export type AvklarFaktaForForeldreansvarAksjonspunktAp = {
   omsorgsovertakelseDato: string;
   foreldreansvarDato: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_VILKÅR_FOR_FORELDREANSVAR>;

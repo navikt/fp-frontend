@@ -33,7 +33,7 @@ const defaultOpptjening = {
 } as Opptjening;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
   status: 'OPPR',
 
   kanLoses: true,
@@ -65,7 +65,7 @@ export const ÅpentAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
         status: 'OPPR',
       },
     ] satisfies Aksjonspunkt[],
@@ -79,7 +79,7 @@ export const ÅpentAksjonspunktSvangerskapspenger: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
         status: 'OPPR',
       },
     ],
@@ -116,7 +116,7 @@ export const ÅpentAksjonspunktMedOppholdsperiode: Story = {
     } as Opptjening,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -134,7 +134,7 @@ export const ÅpentAksjonspunktMenUtenAktiviteter: Story = {
     },
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],

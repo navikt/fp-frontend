@@ -58,7 +58,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: AksjonspunktKode.FODSELTILRETTELEGGING,
+      kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
       begrunnelse: 'Dette er en begrunnelse',
       // @ts-expect-error -- trolig programmeringsfeil, bør ikke være undefined utifra typinga
       fødselsdato: undefined,
@@ -337,7 +337,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: AksjonspunktKode.FODSELTILRETTELEGGING,
+      kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
       begrunnelse: 'Dette er en begrunnelse',
       // @ts-expect-error -- trolig programmeringsfeil, bør ikke være undefined utifra typinga
       fødselsdato: undefined,

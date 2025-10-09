@@ -5,4 +5,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 export type BekreftDokumentertDatoAksjonspunktAp = {
   omsorgsovertakelseDato: string;
   fodselsdatoer: Record<number, string>;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.ADOPSJONSDOKUMENTAJON>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON>;

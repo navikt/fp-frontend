@@ -57,7 +57,7 @@ export const OmsorgOgForeldreansvarForm = ({ søknad, adopsjon, harForeldreansva
           ? 'AksjonspunktForm.Tittel.Foreldreansvar'
           : 'AksjonspunktForm.Tittel.Omsorgsovertakelse',
       })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE]}
     >
       <RhfForm
         formMethods={formMethods}
@@ -115,17 +115,17 @@ const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, aksjonspunkterFor
 });
 
 const transformValues = (values: FormValues, aksjonspunkt: Aksjonspunkt): AksjonpunktSubmitType =>
-  aksjonspunkt.definisjon === AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR
+  aksjonspunkt.definisjon === AksjonspunktKode.AVKLAR_VILKÅR_FOR_FORELDREANSVAR
     ? {
         omsorgsovertakelseDato: notEmpty(values.omsorgsovertakelseDato),
         foreldreansvarDato: notEmpty(values.foreldreansvarDato),
-        kode: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+        kode: AksjonspunktKode.AVKLAR_VILKÅR_FOR_FORELDREANSVAR,
         ...FaktaBegrunnelseTextField.transformValues(values),
       }
     : {
         omsorgsovertakelseDato: notEmpty(values.omsorgsovertakelseDato),
         vilkarType: notEmpty(values.vilkarType),
-        kode: AksjonspunktKode.OMSORGSOVERTAKELSE,
+        kode: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
         ...FaktaBegrunnelseTextField.transformValues(values),
       };
 

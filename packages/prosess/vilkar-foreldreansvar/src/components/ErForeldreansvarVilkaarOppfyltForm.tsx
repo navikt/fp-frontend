@@ -124,8 +124,8 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
     ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
     kode: validerApKodeOgHentApEnum(
       ap.definisjon,
-      AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-      AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-      AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD,
+      AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD,
+      AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
     ),
   }));

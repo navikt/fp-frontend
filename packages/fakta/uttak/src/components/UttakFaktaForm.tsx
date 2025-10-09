@@ -50,8 +50,8 @@ const leggTilAksjonspunktMarkering = (
     if (
       aksjonspunkter.some(
         ap =>
-          (ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE ||
-            ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE) &&
+          (ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET ||
+            ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG) &&
           ap.status === 'OPPR',
       ) &&
       periode.arbeidsforhold?.arbeidsgiverReferanse &&
@@ -129,9 +129,7 @@ const validerPerioder = (
     return feilmelding;
   }
 
-  const harApIngenPerioder = aksjonspunkter.some(
-    ap => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-  );
+  const harApIngenPerioder = aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER);
 
   return uttakPerioder.every(a => a.aksjonspunktType === undefined) && (!harApIngenPerioder || uttakPerioder.length > 0)
     ? null
@@ -198,13 +196,16 @@ export const UttakFaktaForm = ({
   );
 
   const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
-    a => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK,
+    a => a.definisjon !== AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
   );
   const bekreft = (begrunnelse: string) => {
     const overstyrAp = [
       {
         // TODO Fiks hack
-        kode: validerApKodeOgHentApEnum(AksjonspunktKode.OVERSTYR_FAKTA_UTTAK, AksjonspunktKode.OVERSTYR_FAKTA_UTTAK),
+        kode: validerApKodeOgHentApEnum(
+          AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+          AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+        ),
         perioder: uttakPerioder,
         begrunnelse,
       },
@@ -213,10 +214,10 @@ export const UttakFaktaForm = ({
     const aksjonspunkterSomSkalBekreftes = automatiskeAksjonspunkter.map(ap => ({
       kode: validerApKodeOgHentApEnum(
         ap.definisjon,
-        AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-        AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+        AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
+        AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
+        AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
+        AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
       ),
       perioder: uttakPerioder,
       begrunnelse,

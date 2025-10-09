@@ -145,5 +145,5 @@ const buildInitialValues = (
 const transformValues = (values: FormValues): AvklarOpptjeningsvilkaretAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKARET,
+  kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET,
 });

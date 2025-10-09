@@ -40,7 +40,7 @@ export const ÅpentAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+        definisjon: AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
         status: 'OPPR',
       },
     ],
@@ -53,7 +53,7 @@ export const OppfyltVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+        definisjon: AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
         kanLoses: false,
@@ -77,7 +77,7 @@ export const AvslåttVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+        definisjon: AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
         kanLoses: true,

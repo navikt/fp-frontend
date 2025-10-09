@@ -20,7 +20,7 @@ const behandling = {
 
 const aksjonspunkterForPanel: Aksjonspunkt[] = [
   {
-    definisjon: AksjonspunktKode.FORESLA_VEDTAK,
+    definisjon: AksjonspunktKode.FORESLÅ_VEDTAK,
     status: 'OPPR',
     kanLoses: true,
     toTrinnsBehandling: false,

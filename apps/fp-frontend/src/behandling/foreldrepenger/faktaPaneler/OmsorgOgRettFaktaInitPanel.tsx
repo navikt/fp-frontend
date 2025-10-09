@@ -16,7 +16,7 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-  AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+  AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
   AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
 ];
 

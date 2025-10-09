@@ -35,10 +35,7 @@ const getLagringSideeffekter =
     };
   };
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
-  AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL,
-];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.VARSEL_REVURDERING_MANUELL, AksjonspunktKode.UTGÅTT_5025];
 
 export const VarselProsessStegInitPanel = () => {
   const intl = useIntl();

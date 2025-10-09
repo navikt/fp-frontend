@@ -28,7 +28,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isReadOnly } = usePanelDataContext();
 
   const harForeldreansvarAP = harAksjonspunkt(
-    AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+    AksjonspunktKode.AVKLAR_VILKÅR_FOR_FORELDREANSVAR,
     aksjonspunkterForPanel,
   );
 

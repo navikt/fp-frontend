@@ -5,7 +5,7 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 
 import { VurderingFellesProsessStegInitPanel } from './VurderingFellesProsessStegInitPanel';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.BEHANDLE_KLAGE_NFP];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP];
 
 export const VurderingFamOgPensjonProsessStegInitPanel = () => (
   <VurderingFellesProsessStegInitPanel

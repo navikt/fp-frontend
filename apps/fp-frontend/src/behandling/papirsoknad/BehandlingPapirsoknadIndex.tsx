@@ -97,10 +97,10 @@ const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => {
     .map(a => a.definisjon)
     .find(
       kode =>
-        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD ||
-        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_FORELDREPENGER ||
+        kode === AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD ||
+        kode === AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER ||
         kode === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER ||
-        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER,
+        kode === AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER,
     );
 
   if (!ap) {

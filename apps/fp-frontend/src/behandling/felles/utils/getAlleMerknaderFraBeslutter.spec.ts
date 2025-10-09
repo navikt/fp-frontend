@@ -7,7 +7,7 @@ describe('getAlleMerknaderFraBeslutter', () => {
   const aksjonspunkter: Aksjonspunkt[] = [
     {
       status: 'OPPR',
-      definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      definisjon: AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
       kanLoses: true,
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,

@@ -26,7 +26,7 @@ export type ForhandsvisData = {
 };
 
 type FormValues = {
-  kode: AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL | AksjonspunktKode.VARSEL_REVURDERING_MANUELL;
+  kode: AksjonspunktKode.UTGÅTT_5025 | AksjonspunktKode.VARSEL_REVURDERING_MANUELL;
   begrunnelse?: string;
   sendVarsel?: boolean;
   fritekst?: string;
@@ -35,7 +35,7 @@ type FormValues = {
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   kode: validerApKodeOgHentApEnum(
     aksjonspunkter[0]?.definisjon,
-    AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL,
+    AksjonspunktKode.UTGÅTT_5025,
     AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
   ),
   begrunnelse: aksjonspunkter[0]?.begrunnelse ?? '',

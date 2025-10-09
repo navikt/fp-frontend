@@ -43,7 +43,7 @@ export const ÅpentAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
         status: 'OPPR',
         vilkarType: 'FP_VK_3',
       },
@@ -57,7 +57,7 @@ export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
         vilkarType: 'FP_VK_3',
@@ -80,7 +80,7 @@ export const AvslåttVilkår: Story = {
     } as Behandling,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
         vilkarType: 'FP_VK_3',
