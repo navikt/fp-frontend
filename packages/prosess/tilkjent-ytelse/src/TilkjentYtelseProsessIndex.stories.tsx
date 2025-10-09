@@ -145,7 +145,7 @@ export const UtførtAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
-        definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
+        definisjon: AksjonspunktKode.UTGÅTT_5090,
         status: 'UTFO',
       },
     ] as Aksjonspunkt[],
@@ -156,7 +156,7 @@ export const MedFeriepengegrunnlag: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
+        definisjon: AksjonspunktKode.UTGÅTT_5090,
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],

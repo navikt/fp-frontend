@@ -40,7 +40,7 @@ export const MannAdoptererAleneFaktaForm = ({
   return (
     <FaktaKort
       label={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE]}
     >
       <VStack gap="space-16">
         <ReadOnlyField
@@ -74,6 +74,6 @@ MannAdoptererAleneFaktaForm.buildInitialValues = (adopsjon: AdopsjonFamilieHende
 });
 
 MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean): BekreftMannAdoptererAksjonspunktAp => ({
-  kode: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+  kode: AksjonspunktKode.AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE,
   mannAdoptererAlene,
 });

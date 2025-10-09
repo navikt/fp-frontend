@@ -16,7 +16,7 @@ const defaultAksjonspunkter = [
     begrunnelse: 'Dette er utført',
   },
   {
-    definisjon: AksjonspunktKode.FORESLA_VEDTAK,
+    definisjon: AksjonspunktKode.FORESLÅ_VEDTAK,
     status: 'OPPR',
   },
 ] as Aksjonspunkt[];

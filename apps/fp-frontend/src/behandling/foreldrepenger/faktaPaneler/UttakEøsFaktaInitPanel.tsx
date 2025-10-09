@@ -15,10 +15,10 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-  AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS,
+  AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART,
 ];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS];
+const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART];
 
 export const UttakEøsFaktaInitPanel = () => {
   const intl = useIntl();

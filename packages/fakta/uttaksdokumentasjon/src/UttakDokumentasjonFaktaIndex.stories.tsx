@@ -32,7 +32,7 @@ const aktivitetskravGrunnlagListe = [
 ] satisfies AktivitetskravGrunnlagArbeid[];
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
   status: 'OPPR',
   kanLoses: true,
   toTrinnsBehandling: false,

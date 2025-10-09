@@ -8,8 +8,8 @@ import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/Inngangs
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET,
+  AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
 ];
 
 const VILKAR_KODER = ['FP_VK_5'] satisfies VilkårType[];
@@ -31,8 +31,8 @@ export const OmsorgInngangsvilkarInitPanel = () => {
 };
 
 const AKSJONSPUNKT_TEKST_PER_KODE: Record<string, string> = {
-  [AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET]: 'ErOmsorgVilkaarOppfyltForm.Paragraf',
-  [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
+  [AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET]: 'ErOmsorgVilkaarOppfyltForm.Paragraf',
+  [AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE]: 'SRBVilkarForm.VurderSammeBarn',
 };
 
 const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>

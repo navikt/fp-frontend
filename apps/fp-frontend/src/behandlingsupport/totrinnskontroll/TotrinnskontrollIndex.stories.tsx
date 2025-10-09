@@ -61,21 +61,21 @@ const TOTRINNSKONTROLL_AKSJONSPUNKTER = [
     totrinnskontrollAksjonspunkter: [
       createAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL),
       createAksjonspunkt(AksjonspunktKode.SJEKK_TERMINBEKREFTELSE),
-      createAksjonspunkt(AksjonspunktKode.AUTO_VENT_PÅ_FODSELREGISTRERING),
+      createAksjonspunkt(AksjonspunktKode.AUTO_VENT_PÅ_FØDSELREGISTRERING),
     ],
   },
   {
     skjermlenkeType: 'FAKTA_FOR_OMSORG' satisfies SkjermlenkeType,
     totrinnskontrollAksjonspunkter: [
-      createAksjonspunkt(AksjonspunktKode.OMSORGSOVERTAKELSE),
-      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET),
+      createAksjonspunkt(AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE),
+      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET),
     ],
   },
   {
     skjermlenkeType: 'PUNKT_FOR_FORELDREANSVAR' satisfies SkjermlenkeType,
     totrinnskontrollAksjonspunkter: [
-      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD),
-      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD),
+      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD),
+      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD),
     ],
   },
 ];

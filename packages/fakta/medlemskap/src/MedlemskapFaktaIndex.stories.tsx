@@ -32,7 +32,7 @@ const defaultSoknad = {
 } as Soknad;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
   status: 'OPPR',
 
   kanLoses: true,
@@ -330,7 +330,7 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_FORTSATT_MEDLEMSKAP,
+        definisjon: AksjonspunktKode.UTGÅTT_5053,
         status: 'UTFO',
 
         kanLoses: false,
@@ -358,7 +358,7 @@ export const LegacyVurdertInngangsvilkårMedlemskap: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_OPPHOLDSRETT,
+        definisjon: AksjonspunktKode.UTGÅTT_5023,
         status: 'UTFO',
 
         kanLoses: false,

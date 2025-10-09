@@ -42,7 +42,7 @@ const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageVurdering: notEmpty(values.klageVurdering),
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
-  kode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+  kode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
 });
 
 const definertKodeverdiEllerUndefined = <T,>(kode: T | undefined): T | undefined => {
@@ -173,7 +173,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
               size="small"
               variant="primary"
               onClick={formMethods.handleSubmit((values: KlageFormType) =>
-                saveKlage(transformValuesTempSave(values, AksjonspunktKode.BEHANDLE_KLAGE_NFP)),
+                saveKlage(transformValuesTempSave(values, AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP)),
               )}
               type="button"
             >

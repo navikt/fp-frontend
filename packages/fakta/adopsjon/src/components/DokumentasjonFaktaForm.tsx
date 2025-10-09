@@ -55,7 +55,7 @@ export const DokumentasjonFaktaForm = ({
   return (
     <FaktaKort
       label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.ADOPSJONSDOKUMENTAJON]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON]}
     >
       <VStack gap="space-16">
         <RhfDatepicker
@@ -86,7 +86,7 @@ export const DokumentasjonFaktaForm = ({
           />
         )}
         {fødselsdatoer.map((id, i) => (
-          <HStack gap="space-16" key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
+          <HStack gap="space-16" key={`div-${AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON}-${id}`}>
             {fødselsdatoer.length > 1 && (
               <Label size="small" className={i === 0 ? styles['topMarginFirstRow'] : styles['topMargin']}>
                 <FormattedMessage id="DokumentasjonFaktaForm.BarnNr" values={{ nummer: i + 1 }} />
@@ -151,7 +151,7 @@ DokumentasjonFaktaForm.initialValues = (adopsjon: AdopsjonFamilieHendelse): Form
 });
 
 DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumentertDatoAksjonspunktAp => ({
-  kode: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
+  kode: AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON,
   // Desse to variablane skal alltid ha verdi - fix i typescript og fjern ''
   omsorgsovertakelseDato: values.omsorgsovertakelseDato ?? '',
   fodselsdatoer: values.fodselsdatoer ?? '',

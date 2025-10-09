@@ -16,7 +16,10 @@ import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/Prosess
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.SOKNADSFRISTVILKARET, AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR];
+const AKSJONSPUNKT_KODER = [
+  AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
+  AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
+];
 
 const VILKAR_KODER = ['FP_VK_3'] satisfies VilkårType[];
 
@@ -30,7 +33,7 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
   const api = useBehandlingApi(behandling);
 
   const harSoknadsfristAp = standardPanelProps.aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.SOKNADSFRISTVILKARET,
+    ap => ap.definisjon === AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
   );
 
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
@@ -38,7 +41,7 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
 
   return (
     <PanelOverstyringProvider
-      overstyringApKode={AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR}
+      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET}
       kanOverstyreAccess={rettigheter.kanOverstyreAccess}
       overrideReadOnly={standardPanelProps.isReadOnly}
     >

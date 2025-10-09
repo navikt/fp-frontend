@@ -30,19 +30,20 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOversty
   );
   const opprettetRettAPUtenResultat = aksjonspunkter.some(
     a =>
-      a.definisjon === AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT &&
+      a.definisjon === AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT &&
       a.status === 'OPPR' &&
       !omsorgOgRett.manuellBehandlingResultat,
   );
   const rettAPMedResultat = aksjonspunkter.some(
-    a => a.definisjon === AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT && omsorgOgRett.manuellBehandlingResultat,
+    a =>
+      a.definisjon === AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT && omsorgOgRett.manuellBehandlingResultat,
   );
   const aleneomsorgAPMedResultat = aksjonspunkter.some(
     a =>
       a.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG &&
       omsorgOgRett.manuellBehandlingResultat,
   );
-  const harRettAp = aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT);
+  const harRettAp = aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT);
   const harAleneomsorgAp = aksjonspunkter.some(
     a => a.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
   );

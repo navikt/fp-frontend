@@ -33,7 +33,7 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
   return (
     <FaktaKort
       label={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
     >
       <RhfRadioGroup
         name="ektefellesBarn"
@@ -59,6 +59,6 @@ EktefelleFaktaForm.buildInitialValues = (adopsjon: AdopsjonFamilieHendelse): For
 });
 
 EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean): BekreftEktefelleAksjonspunktAp => ({
-  kode: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+  kode: AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
   ektefellesBarn,
 });

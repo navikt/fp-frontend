@@ -72,7 +72,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
   status: 'OPPR',
 
   kanLoses: true,
@@ -88,14 +88,14 @@ export const AksjonspunktForAdopsjonsvilkåret: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
+        definisjon: AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON,
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.ADOPSJONSDOKUMENTAJON]: merknaderFraBeslutter,
+      [AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON]: merknaderFraBeslutter,
     },
   },
 };
@@ -105,14 +105,14 @@ export const AksjonspunktForOmSøkerErMannSomAdoptererAlene: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+        definisjon: AksjonspunktKode.AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE,
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: merknaderFraBeslutter,
+      [AksjonspunktKode.AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE]: merknaderFraBeslutter,
     },
   },
 };
@@ -122,14 +122,14 @@ export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+        definisjon: AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
+      [AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
     },
   },
 };
@@ -139,14 +139,14 @@ export const IkkeVisBarnetsAnkomstDatoForEngangsstønad: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+        definisjon: AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
+      [AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
     },
     isForeldrepengerFagsak: false,
   },

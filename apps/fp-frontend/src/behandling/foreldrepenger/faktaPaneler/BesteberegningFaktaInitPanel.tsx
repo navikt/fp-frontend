@@ -14,10 +14,7 @@ import { BehandlingDataContext } from '../../felles/context/BehandlingDataContex
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
-  AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
-];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.UTGÅTT_5048, AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

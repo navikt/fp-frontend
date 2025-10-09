@@ -158,7 +158,7 @@ export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+        definisjon: AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
         status: 'OPPR',
         kanLoses: true,
       },
@@ -191,7 +191,7 @@ export const AvklarAnnenForelderRettBareFarRett: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+        definisjon: AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
         status: 'UTFO',
         begrunnelse: 'Mor har ikke rett og er uføretrygded i pesys.',
         kanLoses: false,

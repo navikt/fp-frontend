@@ -27,7 +27,7 @@ const meta = {
     soknad,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST,
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],

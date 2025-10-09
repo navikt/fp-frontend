@@ -5,7 +5,7 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 // Oppstod for alle besteberegninger i en periode
 export type KontrollerBesteberegningAP = {
   besteberegningErKorrekt: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.UTGÅTT_5048>;
 
 // Oppstår nå kun for besteberegninger med stort avvik mellom første og tredje ledd.
 export type ManuellKontrollBesteberegningAP = {

@@ -5,4 +5,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 export type OverstyringAvklarStartdatoForPeriodenAp = {
   startdatoFraSoknad: string;
   opprinneligDato?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO>;

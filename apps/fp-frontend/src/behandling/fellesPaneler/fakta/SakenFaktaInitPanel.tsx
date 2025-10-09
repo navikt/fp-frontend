@@ -14,12 +14,15 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-  AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
+  AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
   AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-  AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
+  AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
 ];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO, AksjonspunktKode.OVERSTYR_DEKNINGSGRAD];
+const OVERSTYRING_AP_CODES = [
+  AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
+  AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
+];
 
 /**
  * SakenFaktaInitPanel

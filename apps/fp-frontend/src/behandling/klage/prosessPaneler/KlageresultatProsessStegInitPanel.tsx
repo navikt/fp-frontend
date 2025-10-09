@@ -19,9 +19,9 @@ import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInit
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.FORESLA_VEDTAK,
+  AksjonspunktKode.FORESLÅ_VEDTAK,
   AksjonspunktKode.FATTER_VEDTAK,
-  AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
+  AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT,
 ];
 
 export const KlageresultatProsessStegInitPanel = () => {

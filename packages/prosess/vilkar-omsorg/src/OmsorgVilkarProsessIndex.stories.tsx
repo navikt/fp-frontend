@@ -35,7 +35,7 @@ export const ÅpentAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET,
         status: 'OPPR',
       },
     ],
@@ -47,7 +47,7 @@ export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
         kanLoses: false,
@@ -71,7 +71,7 @@ export const AvslåttVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
         kanLoses: false,

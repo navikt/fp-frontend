@@ -40,7 +40,7 @@ const buildInitialValues = (
 const transformValues = (values: FormValues): VurderSoknadsfristAp => ({
   harGyldigGrunn: values.gyldigSenFremsetting,
   ansesMottattDato: values.ansesMottatt,
-  kode: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
+  kode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST,
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
 });
 

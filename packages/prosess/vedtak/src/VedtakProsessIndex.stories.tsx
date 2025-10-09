@@ -22,7 +22,7 @@ import { VedtakEditeringProvider } from './VedtakEditeringContext';
 import { VedtakProsessIndex } from './VedtakProsessIndex';
 
 const defaultAksjonspunkt = {
-  definisjon: AksjonspunktKode.FORESLA_VEDTAK,
+  definisjon: AksjonspunktKode.FORESLÅ_VEDTAK,
   status: 'OPPR',
 
   kanLoses: true,
@@ -299,7 +299,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         ...defaultAksjonspunkter,
         {
           ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK,
           status: 'OPPR',
 
           kanLoses: false,
@@ -307,14 +307,14 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         },
         {
           ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
+          definisjon: AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK,
           status: 'OPPR',
 
           kanLoses: false,
         },
         {
           ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
+          definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK,
           status: 'OPPR',
 
           kanLoses: false,
@@ -355,7 +355,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         ...defaultAksjonspunkter,
         {
           ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK,
           status: 'OPPR',
           begrunnelse: 'Dette er en begrunnelse',
           kanLoses: false,
@@ -363,7 +363,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         },
         {
           ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
+          definisjon: AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK,
           status: 'OPPR',
           begrunnelse: 'Dette er en begrunnelse',
           kanLoses: false,

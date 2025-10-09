@@ -46,7 +46,7 @@ export const ÅpentAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
+        definisjon: AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU,
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -58,7 +58,7 @@ export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
+        definisjon: AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
       },
@@ -80,7 +80,7 @@ export const AvslåttVilkår: Story = {
     } as Behandling,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
+        definisjon: AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       },

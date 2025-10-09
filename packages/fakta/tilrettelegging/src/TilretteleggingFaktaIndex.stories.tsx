@@ -277,7 +277,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
   status: 'OPPR',
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -291,7 +291,7 @@ export const TilretteleggingMedVelferdspermisjon: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
         status: 'OPPR',
 
         kanLoses: true,
@@ -307,7 +307,7 @@ export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
         status: 'OPPR',
 
         kanLoses: true,
@@ -323,7 +323,7 @@ export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
         status: 'OPPR',
 
         kanLoses: true,
@@ -339,7 +339,7 @@ export const HarOpphold: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
         status: 'OPPR',
 
         kanLoses: true,
@@ -403,7 +403,7 @@ export const ErReadonly: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
         status: 'OPPR',
 
         kanLoses: true,
@@ -462,7 +462,7 @@ export const ErRevurdering: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
         status: 'OPPR',
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: true,

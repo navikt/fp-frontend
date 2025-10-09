@@ -30,7 +30,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5004', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
+      aksjonspunktKode: AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -45,7 +45,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5005', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+      aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -59,7 +59,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5006', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+      aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -73,7 +73,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 6004', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR,
+      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -88,7 +88,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5008', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OMSORGSOVERTAKELSE,
+      aksjonspunktKode: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -102,7 +102,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5011', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -117,7 +117,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 7002', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AUTO_VENT_PÅ_FODSELREGISTRERING,
+      aksjonspunktKode: AksjonspunktKode.AUTO_VENT_PÅ_FØDSELREGISTRERING,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -159,7 +159,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 6003', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYR_FODSELSVILKAR,
+      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -174,7 +174,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5014', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -189,7 +189,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5013 engangsstønad', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       false,
@@ -203,7 +203,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5013 foreldrepenger', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -217,7 +217,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5031', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -261,7 +261,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5007', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.SOKNADSFRISTVILKARET,
+      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -275,7 +275,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5043', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
+      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -289,7 +289,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 6006', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR,
+      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -304,7 +304,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5021', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+      aksjonspunktKode: AksjonspunktKode.UTGÅTT_5021,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -318,7 +318,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5019', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_LOVLIG_OPPHOLD,
+      aksjonspunktKode: AksjonspunktKode.UTGÅTT_5019,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -332,7 +332,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5020', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_BRUKER_ER_BOSATT,
+      aksjonspunktKode: AksjonspunktKode.UTGÅTT_5020,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -346,7 +346,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5023', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_OPPHOLDSRETT,
+      aksjonspunktKode: AksjonspunktKode.UTGÅTT_5023,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -360,7 +360,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 6005', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
+      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -375,7 +375,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5039 varig endring', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+      aksjonspunktKode: AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE,
       beregningDto: {
         fastsattVarigEndringNaering: true,
       },
@@ -392,7 +392,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5039 ikkje varig endring', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+      aksjonspunktKode: AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE,
 
       beregningDto: {
         fastsattVarigEndringNaering: false,
@@ -632,7 +632,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5035 medhold', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const behandlingsresultat = {
       type: 'KLAGE_MEDHOLD',
@@ -648,7 +648,7 @@ describe('aksjonspunktTekstUtleder', () => {
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -667,7 +667,7 @@ describe('aksjonspunktTekstUtleder', () => {
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.Avvist');
@@ -679,7 +679,7 @@ describe('aksjonspunktTekstUtleder', () => {
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
@@ -690,7 +690,7 @@ describe('aksjonspunktTekstUtleder', () => {
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
