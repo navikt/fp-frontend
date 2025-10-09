@@ -28,12 +28,11 @@ export type FormValues = {
  */
 export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutter }: Props) => {
   const intl = useIntl();
-
   const { control } = useFormContext<FormValues>();
 
   return (
     <FaktaKort
-      label={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformationsdfsdfsfd' })}
+      label={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
     >
       <RhfRadioGroup
