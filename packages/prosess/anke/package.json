@@ -18,13 +18,13 @@
     "storybook": "storybook dev --quiet -p 7030"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.31.0",
+    "@navikt/ds-react": "7.32.1",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-utils": "3.8.10",
     "dayjs": "1.11.18",
-    "react": "19.1.1",
-    "react-intl": "7.1.11"
+    "react": "19.2.0",
+    "react-intl": "7.1.13"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",

@@ -953,6 +953,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/intl@npm:3.1.7":
+  version: 3.1.7
+  resolution: "@formatjs/intl@npm:3.1.7"
+  dependencies:
+    "@formatjs/ecma402-abstract": 2.3.5
+    "@formatjs/fast-memoize": 2.2.7
+    "@formatjs/icu-messageformat-parser": 2.11.3
+    intl-messageformat: 10.7.17
+    tslib: ^2.8.0
+  peerDependencies:
+    typescript: 5.8.3
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 3bea7b49c83b0467333aa0a45ddf2a9549efa83c4cc99d998434869d2450ee7423befe78755aa1ea5bfea323bc3dd7c4bc247e40562ad80b8cc98956c17f080b
+  languageName: node
+  linkType: hard
+
 "@formatjs/ts-transformer@npm:3.14.1":
   version: 3.14.1
   resolution: "@formatjs/ts-transformer@npm:3.14.1"
@@ -1237,6 +1255,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/aksel-icons@npm:7.32.1, @navikt/aksel-icons@npm:^7.32.1":
+  version: 7.32.1
+  resolution: "@navikt/aksel-icons@npm:7.32.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.32.1%2F02c25e681fa3b7be8d79a00fee867e408baa22ac"
+  checksum: a7787dad6cc9621bf3a08824d76ad0a26a4c6505ec31a34c04f9407acd9e511f6b22868c6265bc116d849815c49032a68691d90912ab03734293999e056d82af
+  languageName: node
+  linkType: hard
+
 "@navikt/aksel-stylelint@npm:7.31.0":
   version: 7.31.0
   resolution: "@navikt/aksel-stylelint@npm:7.31.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.31.0%2Fbcaa4965fd4666a6ed7e8026ad231bafa21a74bd"
@@ -1258,6 +1283,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/ds-css@npm:7.32.1":
+  version: 7.32.1
+  resolution: "@navikt/ds-css@npm:7.32.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.32.1%2F82653bee55d66f3c60d68a9e0c2b74f67f55cf92"
+  checksum: 054d2cbea5ba7e9a92102c830c0797841f0182b7ee84eac6139bd5892bd904c5a18798f8ef01057e5426408dbf9adc26476f798cc4ffee3ea24d1590a82e038d
+  languageName: node
+  linkType: hard
+
 "@navikt/ds-react@npm:7.31.0":
   version: 7.31.0
   resolution: "@navikt/ds-react@npm:7.31.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F7.31.0%2F6a2825dae4e35d7f11a63e4ecbd3c0808ef5e308"
@@ -1276,6 +1308,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/ds-react@npm:7.32.1":
+  version: 7.32.1
+  resolution: "@navikt/ds-react@npm:7.32.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F7.32.1%2F8f3ed1f38de44c15a6006e2e01d049b0b9c21be4"
+  dependencies:
+    "@floating-ui/react": 0.27.8
+    "@floating-ui/react-dom": ^2.0.9
+    "@navikt/aksel-icons": ^7.32.1
+    "@navikt/ds-tokens": ^7.32.1
+    clsx: ^2.1.0
+    date-fns: ^4.0.0
+    react-day-picker: 9.7.0
+  peerDependencies:
+    "@types/react": ">=17.0.30"
+    react: ">=17.0.0 || >19.0.0-rc"
+  checksum: d1af4ad32e2cd72dbe2cebf4c7cd3ff0bae8f41edccc7e29495cf514dc4671e7736b21f6b0bf8f018506947ad24cc302bd8924425d3f802faab4439663da32a7
+  languageName: node
+  linkType: hard
+
 "@navikt/ds-tokens@npm:^7.31.0":
   version: 7.31.0
   resolution: "@navikt/ds-tokens@npm:7.31.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.31.0%2Fc8ff6b4d9a463ddab2a357fd4dee135c26693322"
@@ -1283,19 +1333,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/ds-tokens@npm:^7.32.1":
+  version: 7.32.1
+  resolution: "@navikt/ds-tokens@npm:7.32.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F7.32.1%2F50a447c61a00e24c7a44b5b5aa6fd2f1369a0eee"
+  checksum: e3c41ae80894aa963a41efeb9c4b862a26a31c380592c1deedb5573bd7f93011cabca56b4dabca70dbb3eb42f7b6c7dd095fab2bb73794c37eb329122605caaa
+  languageName: node
+  linkType: hard
+
 "@navikt/fp-app-felles@workspace:*, @navikt/fp-app-felles@workspace:packages/app-felles":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-app-felles@workspace:packages/app-felles"
   dependencies:
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-sak-infosider": "workspace:*"
-    "@sentry/browser": 10.15.0
+    "@sentry/browser": 10.18.0
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
-    react: 19.1.1
+    react: 19.2.0
     typescript: 5.9.3
     vitest: 3.2.4
   languageName: unknown
@@ -1305,10 +1362,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-avdelingsleder@workspace:apps/fp-avdelingsleder"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
     "@navikt/ds-css-internal": 3.4.3
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-app-felles": "workspace:*"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -1335,15 +1392,15 @@ __metadata:
     dayjs: 1.11.18
     eslint: 9.37.0
     history: 5.3.0
-    ky: 1.10.0
+    ky: 1.11.0
     lodash.debounce: 4.0.8
     msw: 2.11.3
     msw-storybook-addon: 2.0.5
     p-limit: 7.1.1
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
-    react-router-dom: 7.9.2
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
+    react-router-dom: 7.9.4
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -1397,9 +1454,9 @@ __metadata:
   resolution: "@navikt/fp-fakta-adopsjon@workspace:packages/fakta/adopsjon"
   dependencies:
     "@formatjs/cli-lib": 7.4.3
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1422,9 +1479,9 @@ __metadata:
     dayjs: 1.11.18
     eslint: 9.37.0
     fast-glob: 3.3.3
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -1437,9 +1494,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-arbeid-og-inntekt@workspace:packages/fakta/arbeid-og-inntekt"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1462,9 +1519,9 @@ __metadata:
     classnames: 2.5.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -1477,9 +1534,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-arbeidsforhold@workspace:packages/fakta/arbeidsforhold"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1494,8 +1551,8 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -1507,8 +1564,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-besteberegning@workspace:packages/fakta/besteberegning"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1529,9 +1586,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -1544,8 +1601,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-felles@workspace:packages/fakta/felles"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1563,9 +1620,9 @@ __metadata:
     classnames: 2.5.1
     eslint: 9.37.0
     lodash: ^4.17.21
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     stylelint: 16.25.0
     typescript: 5.9.3
     vitest: 3.2.4
@@ -1576,9 +1633,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-fodsel@workspace:packages/fakta/fodsel"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1600,9 +1657,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -1615,9 +1672,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-inntektsmelding@workspace:packages/fakta/inntektsmelding"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1633,8 +1690,8 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -1647,9 +1704,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-medlemskap@workspace:packages/fakta/medlemskap"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1670,9 +1727,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -1684,8 +1741,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta/omsorg-og-foreldreansvar"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1707,9 +1764,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -1721,9 +1778,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg-og-rett@workspace:packages/fakta/omsorg-og-rett"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1745,9 +1802,9 @@ __metadata:
     classnames: 2.5.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -1759,9 +1816,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg@workspace:packages/fakta/omsorg"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1783,9 +1840,9 @@ __metadata:
     classnames: 2.5.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -1797,9 +1854,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-opptjening@workspace:packages/fakta/opptjening"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1819,10 +1876,10 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-dom: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-dom: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -1835,9 +1892,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-permisjon@workspace:packages/fakta/permisjon"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1858,9 +1915,9 @@ __metadata:
     classnames: 2.5.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -1873,9 +1930,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-saken@workspace:packages/fakta/saken"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1896,9 +1953,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -1912,9 +1969,9 @@ __metadata:
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta/tilrettelegging"
   dependencies:
     "@formatjs/cli-lib": 7.4.3
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1936,10 +1993,10 @@ __metadata:
     dayjs: 1.11.18
     eslint: 9.37.0
     fast-glob: 3.3.3
-    react: 19.1.1
-    react-dom: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-dom: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -1952,9 +2009,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttak-eos@workspace:packages/fakta/uttak-eøs"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1976,9 +2033,9 @@ __metadata:
     classnames: 2.5.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -1991,9 +2048,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttak@workspace:packages/fakta/uttak"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2015,9 +2072,9 @@ __metadata:
     classnames: 2.5.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2030,9 +2087,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttaksdokumentasjon@workspace:packages/fakta/uttaksdokumentasjon"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2054,9 +2111,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2069,9 +2126,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-verge@workspace:packages/fakta/verge"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2092,9 +2149,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -2106,7 +2163,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-ytelser@workspace:packages/fakta/ytelser"
   dependencies:
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2118,8 +2175,8 @@ __metadata:
     "@testing-library/react": 16.3.0
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -2131,10 +2188,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-frontend@workspace:apps/fp-frontend"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
     "@navikt/ds-css-internal": 3.4.3
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-app-felles": "workspace:*"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -2242,15 +2299,15 @@ __metadata:
     dayjs: 1.11.18
     eslint: 9.37.0
     history: 5.3.0
-    ky: 1.10.0
+    ky: 1.11.0
     msw: 2.11.3
     msw-storybook-addon: 2.0.5
-    react: 19.1.1
-    react-dom: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-dom: 19.2.0
+    react-intl: 7.1.13
     react-modal: 3.16.3
     react-responsive: 10.0.1
-    react-router-dom: 7.9.2
+    react-router-dom: 7.9.4
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2263,9 +2320,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-journalforing@workspace:packages/journalforing"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2285,12 +2342,12 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    ky: 1.10.0
+    ky: 1.11.0
     msw: 2.11.3
     msw-storybook-addon: 2.0.5
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2325,8 +2382,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-los-felles@workspace:packages/los/felles"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2344,9 +2401,9 @@ __metadata:
     dayjs: 1.11.18
     echarts: 6.0.0
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2359,9 +2416,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-los-saksbehandler@workspace:packages/los/saksbehandler"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2382,13 +2439,13 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    ky: 1.10.0
+    ky: 1.11.0
     msw: 2.11.3
     msw-storybook-addon: 2.0.5
-    react: 19.1.1
-    react-dom: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-dom: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2401,8 +2458,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-modal-sett-pa-vent@workspace:packages/modal-sett-pa-vent"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2419,9 +2476,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -2433,9 +2490,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-papirsoknad-ui-komponenter@workspace:packages/papirsoknad-ui-komponenter"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2454,9 +2511,9 @@ __metadata:
     classnames: 2.5.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2469,8 +2526,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-papirsoknad@workspace:packages/papirsoknad"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2484,10 +2541,10 @@ __metadata:
     "@storybook/react": 9.1.10
     "@storybook/react-vite": 9.1.10
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
-    react-router-dom: 7.9.2
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
+    react-router-dom: 7.9.4
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -2498,7 +2555,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-anke-resultat@workspace:packages/prosess/anke-resultat"
   dependencies:
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2511,8 +2568,8 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -2524,7 +2581,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-anke-trygderettsbehandling@workspace:packages/prosess/anke-trygderettsbehandling"
   dependencies:
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2537,8 +2594,8 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -2550,7 +2607,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-anke@workspace:packages/prosess/anke"
   dependencies:
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2564,8 +2621,8 @@ __metadata:
     "@testing-library/react": 16.3.0
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -2577,8 +2634,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-beregningsresultat@workspace:packages/prosess/beregningsresultat"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2590,8 +2647,8 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2604,9 +2661,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-felles@workspace:packages/prosess/felles"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2618,9 +2675,9 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.8
     "@navikt/ft-utils": 3.8.10
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     stylelint: 16.25.0
     typescript: 5.9.3
   languageName: unknown
@@ -2630,8 +2687,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-formkrav@workspace:packages/prosess/formkrav"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2652,9 +2709,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2667,9 +2724,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-innsyn@workspace:packages/prosess/innsyn"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2692,9 +2749,9 @@ __metadata:
     classnames: 2.5.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2707,8 +2764,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-klagevurdering@workspace:packages/prosess/klagevurdering"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2729,9 +2786,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2744,9 +2801,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-simulering@workspace:packages/prosess/simulering"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2767,9 +2824,9 @@ __metadata:
     classnames: 2.5.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2782,8 +2839,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-soknadsfrist@workspace:packages/prosess/soknadsfrist"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2804,9 +2861,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2819,9 +2876,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-tilkjent-ytelse@workspace:packages/prosess/tilkjent-ytelse"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2838,9 +2895,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-dom: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-dom: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -2852,9 +2909,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-uttak@workspace:packages/prosess/uttak"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2876,9 +2933,9 @@ __metadata:
     classnames: 2.5.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2891,8 +2948,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-varsel-om-revurdering@workspace:packages/prosess/varsel-om-revurdering"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2914,9 +2971,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -2928,8 +2985,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak-innsyn@workspace:packages/prosess/vedtak-innsyn"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2949,9 +3006,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -2964,7 +3021,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak-klage@workspace:packages/prosess/vedtak-klage"
   dependencies:
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2981,8 +3038,8 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -2998,9 +3055,9 @@ __metadata:
     "@editorjs/header": 2.8.8
     "@editorjs/list": 2.0.8
     "@editorjs/paragraph": 2.11.7
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3029,9 +3086,9 @@ __metadata:
     editorjs-undo: 2.0.28
     eslint: 9.37.0
     lodash.debounce: 4.0.8
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3044,8 +3101,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-adopsjon@workspace:packages/prosess/vilkar-adopsjon"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3064,9 +3121,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3078,8 +3135,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-fodsel@workspace:packages/prosess/vilkar-fodsel"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3098,9 +3155,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3112,8 +3169,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-foreldreansvar@workspace:packages/prosess/vilkar-foreldreansvar"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3132,9 +3189,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3146,8 +3203,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-omsorg@workspace:packages/prosess/vilkar-omsorg"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3166,9 +3223,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3180,9 +3237,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-opptjening@workspace:packages/prosess/vilkar-opptjening"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3202,10 +3259,10 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-dom: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-dom: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3218,9 +3275,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-overstyring@workspace:packages/prosess/vilkar-overstyring"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3241,9 +3298,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3256,8 +3313,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-sokers-opplysningsplikt@workspace:packages/prosess/vilkar-sokers-opplysningsplikt"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3278,9 +3335,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3292,8 +3349,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-soknadsfrist@workspace:packages/prosess/vilkar-soknadsfrist"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3314,9 +3371,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3329,8 +3386,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-svangerskap@workspace:packages/prosess/vilkar-svangerskap"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3350,9 +3407,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3364,8 +3421,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-aktor@workspace:packages/sak/aktor"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3380,8 +3437,8 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3393,9 +3450,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-behandling-velger@workspace:packages/sak/behandling-velger"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3411,8 +3468,8 @@ __metadata:
     classnames: 2.5.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3425,9 +3482,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-dekorator@workspace:packages/sak/dekorator"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3441,8 +3498,8 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3455,9 +3512,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-dokumenter@workspace:packages/sak/dokumenter"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3470,8 +3527,8 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3484,9 +3541,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-fagsak-profil@workspace:packages/sak/fagsak-profil"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3499,8 +3556,8 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3512,8 +3569,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-historikk@workspace:packages/sak/historikk"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3528,9 +3585,9 @@ __metadata:
     dayjs: 1.11.18
     eslint: 9.37.0
     history: 5.3.0
-    react: 19.1.1
-    react-intl: 7.1.11
-    react-router-dom: 7.9.2
+    react: 19.2.0
+    react-intl: 7.1.13
+    react-router-dom: 7.9.4
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3543,7 +3600,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-infosider@workspace:packages/sak/infosider"
   dependencies:
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3553,8 +3610,8 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3567,9 +3624,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meldinger@workspace:packages/sak/meldinger"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3587,9 +3644,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3602,8 +3659,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-apne-for-endringer@workspace:packages/sak/meny-apne-for-endringer"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3615,8 +3672,8 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3628,8 +3685,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-endre-utland@workspace:packages/sak/meny-endre-utland"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3645,9 +3702,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3660,9 +3717,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-henlegg@workspace:packages/sak/meny-henlegg"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3678,9 +3735,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3693,8 +3750,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-merk-som-haster@workspace:packages/sak/meny-merk-som-haster"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3706,8 +3763,8 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3719,8 +3776,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-ny-behandling@workspace:packages/sak/meny-ny-behandling"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3736,9 +3793,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3765,8 +3822,8 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3778,8 +3835,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny@workspace:packages/sak/meny"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3796,9 +3853,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3811,8 +3868,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-notat@workspace:packages/sak/notat"
   dependencies:
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3828,9 +3885,9 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3843,9 +3900,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-risikoklassifisering@workspace:packages/sak/risikoklassifisering"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3863,10 +3920,10 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-dom: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-dom: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3879,9 +3936,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-sok@workspace:packages/sak/sok"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3897,9 +3954,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3912,9 +3969,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-totrinnskontroll@workspace:packages/sak/totrinnskontroll"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3936,10 +3993,10 @@ __metadata:
     dayjs: 1.11.18
     eslint: 9.37.0
     history: 5.3.0
-    react: 19.1.1
-    react-hook-form: 7.63.0
-    react-intl: 7.1.11
-    react-router-dom: 7.9.2
+    react: 19.2.0
+    react-hook-form: 7.64.0
+    react-intl: 7.1.13
+    react-router-dom: 7.9.4
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -3952,7 +4009,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-ukjent-adresse@workspace:packages/sak/ukjent-adresse"
   dependencies:
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3962,8 +4019,8 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -3975,9 +4032,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-visittkort@workspace:packages/sak/visittkort"
   dependencies:
-    "@navikt/aksel-icons": 7.31.0
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/aksel-icons": 7.32.1
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3990,8 +4047,8 @@ __metadata:
     "@testing-library/react": 16.3.0
     dayjs: 1.11.18
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     stylelint: 16.25.0
     typescript: 5.9.3
@@ -4004,7 +4061,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-storybook-utils@workspace:packages/storybook-utils"
   dependencies:
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4015,9 +4072,9 @@ __metadata:
     "@tanstack/react-query": 5.90.2
     "@tanstack/react-query-devtools": 5.90.2
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
-    react-router-dom: 7.9.2
+    react: 19.2.0
+    react-intl: 7.1.13
+    react-router-dom: 7.9.4
     storybook: 9.1.10
     typescript: 5.9.3
   languageName: unknown
@@ -4054,14 +4111,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-ui-komponenter@workspace:packages/ui-komponenter"
   dependencies:
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-konstanter": "workspace:^"
     "@navikt/fp-utils": "workspace:^"
     eslint: 9.37.0
-    react: 19.1.1
+    react: 19.2.0
     typescript: 5.9.3
   languageName: unknown
   linkType: soft
@@ -4071,8 +4128,8 @@ __metadata:
   resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
   dependencies:
     "@formatjs/cli-lib": 7.4.3
-    "@navikt/ds-css": 7.31.0
-    "@navikt/ds-react": 7.31.0
+    "@navikt/ds-css": 7.32.1
+    "@navikt/ds-react": 7.32.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -4086,8 +4143,8 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     eslint: 9.37.0
     fast-glob: 3.3.3
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     storybook: 9.1.10
     typescript: 5.9.3
     vite: 7.1.9
@@ -4102,8 +4159,8 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     eslint: 9.37.0
-    react: 19.1.1
-    react-intl: 7.1.11
+    react: 19.2.0
+    react-intl: 7.1.13
     typescript: 5.9.3
   languageName: unknown
   linkType: soft
@@ -4123,7 +4180,7 @@ __metadata:
     dayjs: 1.11.18
     eslint: 9.37.0
     history: 5.3.0
-    react: 19.1.1
+    react: 19.2.0
     typescript: 5.9.3
   languageName: unknown
   linkType: soft
@@ -4900,54 +4957,54 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry-internal/browser-utils@npm:10.15.0":
-  version: 10.15.0
-  resolution: "@sentry-internal/browser-utils@npm:10.15.0"
+"@sentry-internal/browser-utils@npm:10.18.0":
+  version: 10.18.0
+  resolution: "@sentry-internal/browser-utils@npm:10.18.0"
   dependencies:
-    "@sentry/core": 10.15.0
-  checksum: b8bece6be16ba1d019a660df86418f7f64033cc31a09cad41c56bfa8a462d80a6e47c3c9dac968825d52a290deb66abaf711de094ca8471f59c65120aad511a4
+    "@sentry/core": 10.18.0
+  checksum: 9b61d851e29ce5f35fb0cf08dc3bd64b824071f46534019c45f3755507f37a398b5076237b9538f26bdb852f64389df820035d86ea16138b4b748410898e4a5e
   languageName: node
   linkType: hard
 
-"@sentry-internal/feedback@npm:10.15.0":
-  version: 10.15.0
-  resolution: "@sentry-internal/feedback@npm:10.15.0"
+"@sentry-internal/feedback@npm:10.18.0":
+  version: 10.18.0
+  resolution: "@sentry-internal/feedback@npm:10.18.0"
   dependencies:
-    "@sentry/core": 10.15.0
-  checksum: 0025b65245ff9216de1d4ed0d26f26336fd2212e52d7552eb2e2b0d19c06222c7028ea26aac9d73f4c336107ad89c43eecad7b859bd4f901014a4bc75cf314b5
+    "@sentry/core": 10.18.0
+  checksum: 65e9b4a783ed22f43801e2340b7d55f3f9fd7df66a8e7fa37ef22a6f1adbe92f731608e804e3101071ddf7d7ea782ecfa1037380d85ed9ef56f5bad728a7356b
   languageName: node
   linkType: hard
 
-"@sentry-internal/replay-canvas@npm:10.15.0":
-  version: 10.15.0
-  resolution: "@sentry-internal/replay-canvas@npm:10.15.0"
+"@sentry-internal/replay-canvas@npm:10.18.0":
+  version: 10.18.0
+  resolution: "@sentry-internal/replay-canvas@npm:10.18.0"
   dependencies:
-    "@sentry-internal/replay": 10.15.0
-    "@sentry/core": 10.15.0
-  checksum: 547bcd0365faee9c7c11cb44b7d16abedfa7e725c2466d69c100c5b20320645305b7e20c9bf4482894f4c68cf3d85b0c28cbd9078e3fe9bcb46c42b8641483a6
+    "@sentry-internal/replay": 10.18.0
+    "@sentry/core": 10.18.0
+  checksum: e55471e9f5aab610204dd185e4b7c8807e62327236bc4f084b5531c577d4e2110a5503f1f1a0230506d7e8b92152b7ba00ea34a7d11e0e7bb3c6638453b1bcbf
   languageName: node
   linkType: hard
 
-"@sentry-internal/replay@npm:10.15.0":
-  version: 10.15.0
-  resolution: "@sentry-internal/replay@npm:10.15.0"
+"@sentry-internal/replay@npm:10.18.0":
+  version: 10.18.0
+  resolution: "@sentry-internal/replay@npm:10.18.0"
   dependencies:
-    "@sentry-internal/browser-utils": 10.15.0
-    "@sentry/core": 10.15.0
-  checksum: 0a02a870fe42a0ac51d50001959674f57fcf718feaf0886e821ffb8a83b2e7ad03d30ae15a6dddcfa9c1cc4225c2be3c759c13c59f46c7971fff458e7bf03da6
+    "@sentry-internal/browser-utils": 10.18.0
+    "@sentry/core": 10.18.0
+  checksum: ad3d6d0189f7c186b89bd265ddc9bae005d7cc42ba9cebbda7c2d45b47ea5b4c9ef0e9100e6cb7d3dde376c4c5b7c95b2aa40469eea8fabe9319a0b31dfa22f8
   languageName: node
   linkType: hard
 
-"@sentry/browser@npm:10.15.0":
-  version: 10.15.0
-  resolution: "@sentry/browser@npm:10.15.0"
+"@sentry/browser@npm:10.18.0":
+  version: 10.18.0
+  resolution: "@sentry/browser@npm:10.18.0"
   dependencies:
-    "@sentry-internal/browser-utils": 10.15.0
-    "@sentry-internal/feedback": 10.15.0
-    "@sentry-internal/replay": 10.15.0
-    "@sentry-internal/replay-canvas": 10.15.0
-    "@sentry/core": 10.15.0
-  checksum: 79bed4f67817e46a5cb21252f2ecbb2b243b941abb710fce3f55307134e993fd999c5ef4308fb0b12366454f78681d0a2eb456ca6f9dd349457cba31c1d12e88
+    "@sentry-internal/browser-utils": 10.18.0
+    "@sentry-internal/feedback": 10.18.0
+    "@sentry-internal/replay": 10.18.0
+    "@sentry-internal/replay-canvas": 10.18.0
+    "@sentry/core": 10.18.0
+  checksum: c6a30abbc01dbdfc236fea6bbff01ae4eb6e4241c424a090014eb3c3be014683ddcaed28e0a8c9110f0ac57adc2002230b20171fad413967811a8b9b1ab5adf2
   languageName: node
   linkType: hard
 
@@ -5047,10 +5104,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/core@npm:10.15.0":
-  version: 10.15.0
-  resolution: "@sentry/core@npm:10.15.0"
-  checksum: 359f61e6b0e1881d11194dcd2534551735aaec1b45133ec5e82c6e5e2ac314a60810c8f97ea40333c62c3db66367041b21b9f912442cddfcb7337988f8d475cc
+"@sentry/core@npm:10.18.0":
+  version: 10.18.0
+  resolution: "@sentry/core@npm:10.18.0"
+  checksum: ecfe501de4bf229e728aa80a46e99b203def9543f759f5825a7929068f684d0483971a96f1e491a5ca097f4d3f2fb54f4a0160c652580048792611b94475091c
   languageName: node
   linkType: hard
 
@@ -8490,6 +8547,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"intl-messageformat@npm:10.7.17":
+  version: 10.7.17
+  resolution: "intl-messageformat@npm:10.7.17"
+  dependencies:
+    "@formatjs/ecma402-abstract": 2.3.5
+    "@formatjs/fast-memoize": 2.2.7
+    "@formatjs/icu-messageformat-parser": 2.11.3
+    tslib: ^2.8.0
+  checksum: 929c60765718562961eebb17ce95b570fe9b4ce38390644dc046b352cfd7f5766736b386be5425ef07b37af4c196b36219ae51062154ad55d3f239b3d522313b
+  languageName: node
+  linkType: hard
+
 "ip-address@npm:^10.0.1":
   version: 10.0.1
   resolution: "ip-address@npm:10.0.1"
@@ -9128,10 +9197,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ky@npm:1.10.0":
-  version: 1.10.0
-  resolution: "ky@npm:1.10.0"
-  checksum: db835331c7d7a0a2d404c83c543830ca10e4b8e031c45d1ba988b5d1e52be4102f0226fd5fb1d739f99c7c95714ff6c365d52ee33f6966faafe8acadfcc5b2e7
+"ky@npm:1.11.0":
+  version: 1.11.0
+  resolution: "ky@npm:1.11.0"
+  checksum: 2d7eded44f9f7a363b264d1ecd2c7ffd83e9868ef70ea1e4cee05d36560198080008dd02fcc631841d1e9df8b23f270a4188ac5c7c085388e3b321aba7ec13f3
   languageName: node
   linkType: hard
 
@@ -10429,6 +10498,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-hook-form@npm:7.64.0":
+  version: 7.64.0
+  resolution: "react-hook-form@npm:7.64.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  checksum: 2851669e95694ceffb96f41b6277ea4709ff0dc64658fa361b352fffc5f9c7bee8c59465be2ed945455aa295d8f7438f504179f7b06e6daa19df34f549f282f8
+  languageName: node
+  linkType: hard
+
 "react-intl@npm:7.1.11":
   version: 7.1.11
   resolution: "react-intl@npm:7.1.11"
@@ -10448,6 +10526,28 @@ __metadata:
     typescript:
       optional: true
   checksum: d82d0ffa87da88fe1b793a55352511f8d5f7d6dc049e7780cbcf4e123df134d451079d3894336de78750b4f45a47fe4dad7e9bc29d6e4777044cf4485db5c94a
+  languageName: node
+  linkType: hard
+
+"react-intl@npm:7.1.13":
+  version: 7.1.13
+  resolution: "react-intl@npm:7.1.13"
+  dependencies:
+    "@formatjs/ecma402-abstract": 2.3.5
+    "@formatjs/icu-messageformat-parser": 2.11.3
+    "@formatjs/intl": 3.1.7
+    "@types/hoist-non-react-statics": ^3.3.1
+    "@types/react": 16 || 17 || 18 || 19
+    hoist-non-react-statics: ^3.3.2
+    intl-messageformat: 10.7.17
+    tslib: ^2.8.0
+  peerDependencies:
+    react: 16 || 17 || 18 || 19
+    typescript: ^5.6.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 9f20488c65762f84014ff99668e9795d0d2e1e0b155baa45602ab664d2b2f44180a4076896d7041331e7bd30d716244231107b86b84cad6a2af31d15a5119e0a
   languageName: node
   linkType: hard
 
@@ -10508,21 +10608,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:7.9.2":
-  version: 7.9.2
-  resolution: "react-router-dom@npm:7.9.2"
+"react-router-dom@npm:7.9.4":
+  version: 7.9.4
+  resolution: "react-router-dom@npm:7.9.4"
   dependencies:
-    react-router: 7.9.2
+    react-router: 7.9.4
   peerDependencies:
     react: ">=18"
     react-dom: ">=18"
-  checksum: d40c7c7c474bd2ebf2e0dbd149676e3667332729788b28e29f31624df6d76a14e80438a9ee72ccce15246d902c30867c9cd0e2fec478ee406f64c8e69005b76f
+  checksum: 56d7c10ce8c26d88fd92afb55d90f737ddee0ccd9715105444a62d31687a06f1b0b22c4a6047a4b896cf5f97d297b1036bedece65646b126c40b3e107d19a9a0
   languageName: node
   linkType: hard
 
-"react-router@npm:7.9.2":
-  version: 7.9.2
-  resolution: "react-router@npm:7.9.2"
+"react-router@npm:7.9.4":
+  version: 7.9.4
+  resolution: "react-router@npm:7.9.4"
   dependencies:
     cookie: ^1.0.1
     set-cookie-parser: ^2.6.0
@@ -10532,7 +10632,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 6548b670a67cdee016f7a72ac7b649699e53828a1ce3e0e05853430a5a302c4b9ffcc80240e0b05211e1e44a3b563d470f1df6aa5f2b2a1dabe1255b9cd338e1
+  checksum: 2a33bc2203f5fe1fd24858d246c5590c4920a429490986e36af19de0580c7a162fbfb0c675bc2be2ee535d965e08f8e9d28009ee9ddf9df2b7a236e6e2dc8a33
   languageName: node
   linkType: hard
 
