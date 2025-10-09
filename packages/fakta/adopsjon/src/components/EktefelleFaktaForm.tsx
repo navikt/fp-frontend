@@ -33,7 +33,7 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
 
   return (
     <FaktaKort
-      label={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
+      label={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformationsdfsdfsfd' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
     >
       <RhfRadioGroup
