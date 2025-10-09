@@ -6,7 +6,7 @@ import * as stories from './LedigOppgaveTabell.stories';
 
 const { Default, TomOppgaveTabell } = composeStories(stories);
 
-describe('OppgaverTabell', () => {
+describe('LedigOppgaveTabell', () => {
   it('skal vise tabell med behandlinger', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     await Default.run();

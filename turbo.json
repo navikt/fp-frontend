@@ -1,6 +1,16 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["turbo.json", "yarn.lock", "stylelint.config.cjs", "knip.ts", "Dockerfile", ".prettierrc"],
+  "globalDependencies": [
+    "turbo.json",
+    "yarn.lock",
+    "stylelint.config.cjs",
+    "knip.ts",
+    "Dockerfile",
+    ".prettierrc",
+    "packages/config/eslint/eslint.config.mjs",
+    "packages/config/typescript/tsconfig.json",
+    "packages/config/vite/vite.config.mjs"
+  ],
   "tasks": {
     "dev": {
       "cache": false,

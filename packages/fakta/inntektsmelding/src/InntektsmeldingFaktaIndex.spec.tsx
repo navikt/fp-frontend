@@ -6,7 +6,7 @@ import * as stories from './InntektsmeldingFaktaIndex.stories';
 
 const { InntektsmeldingDefault } = composeStories(stories);
 
-describe('InntektsmeldingDefault', () => {
+describe('InntektsmeldingFaktaIndex', () => {
   // eslint-disable-next-line vitest/expect-expect -- assertes i hjelpefunksjon
   it('Skal kunne sortere tabellen', async () => {
     render(<InntektsmeldingDefault />);
