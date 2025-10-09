@@ -11,7 +11,7 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-describe('VisittkortSakIndex', () => {
+describe('VisittkortLabels', () => {
   const fagsakPerson: Person = {
     navn: 'Olga Utvikler',
     kjønn: 'K',

@@ -17,7 +17,7 @@ const terminbekreftelse2ukerPassert = dayjs().subtract(2, 'weeks').format(ISO_DA
 
 const dagensDato = dayjs().format(ISO_DATE_FORMAT);
 
-describe('validator', () => {
+describe('fødselOgTerminValidator', () => {
   describe('terminBekreftelseBeforeTodayOrTermindato', () => {
     it('skal godta passert terminbekreftelse før termin i dag', () => {
       const result = terminBekreftelseBeforeTodayOrTermindato(dagensDato, terminbekreftelse7ukerPassert);

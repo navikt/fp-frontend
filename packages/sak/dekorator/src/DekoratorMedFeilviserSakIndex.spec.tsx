@@ -6,7 +6,7 @@ import * as stories from './DekoratorMedFeilviserSakIndex.stories';
 
 const { UtenFeilmeldinger, MedFeilmeldinger, MedFeilmeldingDetaljer } = composeStories(stories);
 
-describe('DekoratorSakIndex', () => {
+describe('DekoratorMedFeilviserSakIndex', () => {
   it('skal vise dekoratør uten feilmeldinger', async () => {
     render(<UtenFeilmeldinger />);
     expect(await screen.findByText('Nav')).toBeInTheDocument();
