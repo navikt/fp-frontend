@@ -10,7 +10,7 @@ export default {
     schema: [],
   },
 
-  create(context: any) {
+  create(context) {
     // filename normalization
     const rawFilename =
       (typeof context.getFilename === 'function' ? context.getFilename() : context.filename) ?? 'unknown';
@@ -21,7 +21,7 @@ export default {
     // create() is called once per file, but we still isolate state explicitly
     const state = { describeDepth: 0 };
 
-    const isDescribeCall = (callee: any): boolean => {
+    const isDescribeCall = callee => {
       if (!callee) return false;
       if (callee.type === 'Identifier' && callee.name === 'describe') return true;
       if (callee.type === 'MemberExpression') {
@@ -32,7 +32,7 @@ export default {
       return false;
     };
 
-    const getDescribeName = (arg: any): string | null => {
+    const getDescribeName = arg => {
       if (!arg) return null;
       if (arg.type === 'Literal' && typeof arg.value === 'string') return arg.value;
       if (arg.type === 'TemplateLiteral' && arg.expressions?.length === 0 && arg.quasis?.length === 1) {
@@ -42,7 +42,7 @@ export default {
     };
 
     return {
-      CallExpression(node: any) {
+      CallExpression(node) {
         if (!isDescribeCall(node.callee)) return;
         const describeName = getDescribeName(node.arguments[0]);
 
@@ -57,7 +57,7 @@ export default {
         state.describeDepth++;
       },
 
-      'CallExpression:exit'(node: any) {
+      'CallExpression:exit'(node) {
         if (isDescribeCall(node.callee)) {
           state.describeDepth--;
         }

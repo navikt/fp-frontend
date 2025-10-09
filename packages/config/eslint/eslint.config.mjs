@@ -7,7 +7,7 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import vitest from 'eslint-plugin-vitest';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import describeNameMatchesFilename from './rules/describe-name-matches-filename.ts';
+import describeNameMatchesFilename from './rules/describe-name-matches-filename.mjs';
 
 const OFF = 0;
 const WARNING = 1;
