@@ -3314,10 +3314,11 @@ export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto = {
   aktuelleDelvilkårAvslagsårsaker?: {
     [key: string]: Array<foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak>;
   };
-  gjeldende: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende;
+  gjeldende: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Omsorgsovertakelse;
+  kildeGjeldende: tjenester_behandling_fødsel_dto_Kilde;
   register: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Register;
   saksbehandlerVurdering?: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_SaksbehandlerVurdering;
-  søknad: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Søknad;
+  søknad: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Omsorgsovertakelse;
 };
 
 export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_BarnHendelseData = {
@@ -3326,28 +3327,12 @@ export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_BarnHendelseD
   fødselsdato: string;
 };
 
-export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende = {
-  antallBarn: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende_AntallBarn;
-  barn: Array<tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende_GjeldendeBarn>;
-  omsorgsovertakelse: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende_Omsorgsovertakelse;
-};
-
-export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende_AntallBarn = {
-  antall: number;
-  kilde: tjenester_behandling_fødsel_dto_Kilde;
-};
-
-export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende_GjeldendeBarn = {
-  barn: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_BarnHendelseData;
-  kanOverstyres: boolean;
-  kilde: tjenester_behandling_fødsel_dto_Kilde;
-};
-
-export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende_Omsorgsovertakelse = {
+export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Omsorgsovertakelse = {
   ankomstNorgeDato?: string;
+  antallBarn: number;
+  barn: Array<tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_BarnHendelseData>;
   delvilkår?: foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType;
-  ektefellesBarn?: boolean;
-  kilde: tjenester_behandling_fødsel_dto_Kilde;
+  erEktefellesBarn?: boolean;
   omsorgsovertakelseDato?: string;
 };
 
@@ -3358,15 +3343,6 @@ export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Register = {
 export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_SaksbehandlerVurdering = {
   avslagsårsak?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
   vilkårUtfallType: foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType;
-};
-
-export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Søknad = {
-  ankomstNorgeDato?: string;
-  antallBarn: number;
-  barn: Array<tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_BarnHendelseData>;
-  delvilkår?: foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType;
-  erEktefellesBarn?: boolean;
-  omsorgsovertakelseDato?: string;
 };
 
 export type tjenester_behandling_dto_behandling_InnsynVedtaksdokumentasjonDto = {

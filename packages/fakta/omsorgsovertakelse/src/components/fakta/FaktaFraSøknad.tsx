@@ -7,10 +7,10 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import type { Søknad } from '../../types';
+import type { Omsorgsovertakelse } from '../../types';
 
 interface Props {
-  søknad: Søknad;
+  søknad: Omsorgsovertakelse;
 }
 
 export const FaktaFraSøknad = ({

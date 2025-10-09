@@ -1,18 +1,12 @@
 // TODO: backend må forbedre eller samkjøre typenavnene sinde med FødselDto
 import type {
   tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_BarnHendelseData,
-  tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende,
-  tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende_GjeldendeBarn,
+  tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Omsorgsovertakelse,
   tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Register,
-  tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Søknad,
 } from '../../../types/src/apiDtoGenerert';
 
 export type BarnHendelseData = tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_BarnHendelseData;
 
-export type Gjeldende = tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende;
-
-export type GjeldendeBarn = tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Gjeldende_GjeldendeBarn;
+export type Omsorgsovertakelse = tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Omsorgsovertakelse;
 
 export type Register = tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Register;
-
-export type Søknad = tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Søknad;

@@ -40,6 +40,7 @@ import type {
   ManueltArbeidsforhold,
   Medlemskap,
   OmsorgOgRett,
+  OmsorgsovertakelseDto,
   Oppgave,
   Opptjening,
   PeriodeSoker,
@@ -161,6 +162,7 @@ export const BehandlingRel = {
   FEILUTBETALING_AARSAK: 'feilutbetalingAarsak',
   BEREGNINGRESULTAT_DAGYTELSE: 'beregningsresultat-dagytelse',
   FAKTA_FØDSEL: 'fakta-fødsel',
+  FAKTA_OMSORGSOVERTAKELSE: 'fakta-omsorgsovertakelse',
   FAMILIEHENDELSE: 'familiehendelse-v3',
   SOKNAD: 'soknad',
   FERIEPENGEGRUNNLAG: 'feriepengegrunnlag',
@@ -313,6 +315,15 @@ const getFaktaFødselOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     queryKey: [BehandlingRel.FAKTA_FØDSEL, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('FAKTA_FØDSEL', links)).json<Fødsel>(),
     enabled: harLenke(behandling, 'FAKTA_FØDSEL'),
+    staleTime: Infinity,
+  });
+};
+
+const getFaktaOmsorgsovertakelseOptions = (links: ApiLink[]) => (behandling: Behandling) => {
+  return queryOptions({
+    queryKey: [BehandlingRel.FAKTA_OMSORGSOVERTAKELSE, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('FAKTA_OMSORGSOVERTAKELSE', links)).json<OmsorgsovertakelseDto>(),
+    enabled: harLenke(behandling, 'FAKTA_OMSORGSOVERTAKELSE'),
     staleTime: Infinity,
   });
 };
@@ -722,6 +733,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     åpneForNyVurderingAOI: getÅpneForNyVurderingAOI(links),
     søknadOptions: getSøknadOptions(links),
     faktaFødselOptions: getFaktaFødselOptions(links),
+    faktaOmsorgsovertakelseOptions: getFaktaOmsorgsovertakelseOptions(links),
     familiehendelseOptions: getfamiliehendelseOptions(links),
     beregningsresultatDagytelseOptions: getBeregningsresultatDagytelseOptions(links),
     beregningDagytelseOriginalBehandlingOptions: getBeregningDagytelseOriginalBehandlingOptions(links),

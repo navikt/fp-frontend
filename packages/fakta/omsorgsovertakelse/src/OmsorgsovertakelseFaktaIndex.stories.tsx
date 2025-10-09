@@ -22,37 +22,20 @@ export const Default: Story = {
     omsorgsovertakelse: {
       aktuelleDelvilkår: ['FP_VK_4', 'FP_VK_8'],
       aktuelleDelvilkårAvslagsårsaker: { FP_VK_4: [], FP_VK_8: [] },
+      kildeGjeldende: 'SØKNAD',
       gjeldende: {
-        antallBarn: {
-          antall: 1,
-          kilde: 'SØKNAD',
-        },
-        barn: [
-          {
-            barn: { fødselsdato: '2022-10-01' },
-            kanOverstyres: false,
-            kilde: 'SØKNAD',
-          },
-        ],
-        omsorgsovertakelse: {
-          ankomstNorgeDato: '2023-01-04',
-          omsorgsovertakelseDato: '2023-01-01',
-          kilde: 'SØKNAD',
-          delvilkår: 'FP_VK_4',
-          ektefellesBarn: false,
-        },
+        antallBarn: 1,
+        barn: [{ fødselsdato: '2022-10-01' }],
+        ankomstNorgeDato: '2023-01-04',
+        omsorgsovertakelseDato: '2023-01-01',
+        delvilkår: 'FP_VK_4',
+        erEktefellesBarn: false,
       },
-      register: {
-        barn: [
-          {
-            fødselsdato: '2022-10-01',
-          },
-        ],
-      },
+      register: { barn: [{ fødselsdato: '2022-10-01' }] },
       saksbehandlerVurdering: { avslagsårsak: undefined, vilkårUtfallType: 'IKKE_VURDERT' },
       søknad: {
         ankomstNorgeDato: '2023-01-04',
-        omsorgsovertakelseDato: '2023-01-01',
+        omsorgsovertakelseDato: '2023-01-03',
         delvilkår: 'FP_VK_4',
         erEktefellesBarn: false,
         antallBarn: 1,

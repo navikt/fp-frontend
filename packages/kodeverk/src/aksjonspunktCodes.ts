@@ -13,6 +13,7 @@ export enum AksjonspunktKode {
   FORESLÅ_VEDTAK = '5015',
   FATTER_VEDTAK = '5016',
   SØKERS_OPPLYSNINGSPLIKT_MANU = '5017',
+  VURDER_OMSORGSOVERTAKELSEVILKÅRET = '5018',
   /**
    * @deprecated: AVKLAR_LOVLIG_OPPHOLD
    */

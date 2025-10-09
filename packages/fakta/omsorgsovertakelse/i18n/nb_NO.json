@@ -2,10 +2,11 @@
   "FaktaFraFReg.Tittel": "Opplysninger fra Folkeregisteret",
   "FaktaFraFReg.IngenBarn": "Det er ikke registrert noen fødselshendelse i Folkeregisteret",
   "FaktaFraSøknad.Tittel": "Opplysninger oppgitt i søknaden",
-  "Situasjon.OpplysningerGjeldende": "Gjeldende opplysninger",
+  "FaktaSammenligning.Tittel": "Sammenligning av opplysninger",
   "Label.Barn": "Barn",
   "Label.NummerertBarn": "Barn {nummer}",
   "Label.Fødselsdato": "Fødselsdato",
+  "Label.FødselsdatoNummerert": "Fødselsdato for barn {nummer}",
   "Label.Dødsdato": "Dødsdato",
   "Label.AntallBarn": "Antall barn",
   "Label.Omsorgsovertakelsesdato": "Omsorgsovertakelsesdato",
@@ -13,5 +14,6 @@
   "Label.ErEktefellesBarn": "Er det ektefelles barn?",
   "Label.Ja": "Ja",
   "Label.Nei": "Nei",
-  "Label.Delvilkår": "Delvilkår"
+  "Label.Delvilkår": "Delvilkår",
+  "Label.ErEndret": "Er endret av saksbehandler"
 }

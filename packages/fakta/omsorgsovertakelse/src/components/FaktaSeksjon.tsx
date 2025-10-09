@@ -4,7 +4,7 @@ import type { OmsorgsovertakelseDto } from '@navikt/fp-types';
 
 import { FaktaFraFReg } from './fakta/FaktaFraFReg';
 import { FaktaFraSøknad } from './fakta/FaktaFraSøknad';
-import { Situasjon } from './fakta/Situasjon';
+import { FaktaSammenligning } from './fakta/FaktaSammenligning';
 
 interface Props {
   omsorgsovertakelse: OmsorgsovertakelseDto;
@@ -13,7 +13,7 @@ interface Props {
 export const FaktaSeksjon = ({ omsorgsovertakelse }: Props) => {
   return (
     <>
-      <Situasjon gjeldende={omsorgsovertakelse.gjeldende} />
+      <FaktaSammenligning omsorgsovertakelse={omsorgsovertakelse} />
       <HGrid columns={2} gap="space-16">
         <FaktaFraSøknad søknad={omsorgsovertakelse.søknad} />
         <FaktaFraFReg register={omsorgsovertakelse.register} />
