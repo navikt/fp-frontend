@@ -25,7 +25,6 @@ describe('AdopsjonFaktaIndex', () => {
     expect(await screen.findByText('Barnet er over 15 år ved omsorgsovertakelsen')).toBeInTheDocument();
 
     expect(screen.getByText('Barnets ankomstdato til Norge')).toBeInTheDocument();
-
     expect(screen.getByText('ved utenlandsadopsjon')).toBeInTheDocument();
 
     expect(screen.getByText('Antall barn som fyller vilkåret')).toBeInTheDocument();

@@ -28,6 +28,7 @@ export type FormValues = {
  */
 export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutter }: Props) => {
   const intl = useIntl();
+
   const { control } = useFormContext<FormValues>();
 
   return (
