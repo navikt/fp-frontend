@@ -7,6 +7,7 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import vitest from 'eslint-plugin-vitest';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import describeNameMatchesFilename from './rules/describe-name-matches-filename.ts';
 
 const OFF = 0;
 const WARNING = 1;
@@ -23,6 +24,11 @@ export default [
     plugins: {
       vitest,
       'simple-import-sort': simpleImportSort,
+      local: {
+        rules: {
+          'describe-name-matches-filename': describeNameMatchesFilename,
+        },
+      },
     },
     languageOptions: { globals: globals.browser },
   },
@@ -80,6 +86,7 @@ export default [
       '@typescript-eslint/no-explicit-any': ERROR,
       '@typescript-eslint/ban-ts-comment': ERROR,
       '@typescript-eslint/no-unnecessary-condition': ERROR,
+      'local/describe-name-matches-filename': ERROR,
       '@typescript-eslint/no-unsafe-enum-comparison': OFF,
       '@typescript-eslint/no-misused-promises': OFF,
       '@typescript-eslint/no-unsafe-call': OFF, // Denne feiler for .stories pga parameters
