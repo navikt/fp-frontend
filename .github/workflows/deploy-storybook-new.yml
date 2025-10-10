@@ -58,3 +58,12 @@ jobs:
           yarn storybook-build-all
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Show most recent JSON file
+        run: |
+          # Find the most recent JSON file in the folder
+          LATEST_JSON=$(ls -t ~/work/fp-frontend/fp-frontend/.turbo/runs/*.json | head -n 1)
+
+          echo "Most recent JSON file: $LATEST_JSON"
+          echo
+          echo "Contents:"
+          cat "$LATEST_JSON"

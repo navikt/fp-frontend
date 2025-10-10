@@ -33,8 +33,7 @@
       "dependsOn": ["build"],
       "outputs": []
     },
-    "build-storybook": {
-      "dependsOn": ["build"],
+    "build-storybook-test": {
       "outputs": [".storybook-static-build"]
     },
     "build": {
