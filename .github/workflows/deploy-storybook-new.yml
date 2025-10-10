@@ -11,11 +11,6 @@ on:
         type: string
         description: Miljø versjon som skal brukes til bygg.
         default: 'ubuntu-latest'
-      package-manager:
-        required: false
-        type: string
-        description: Hvilken package manager en skal bruke (npm|pnpm|yarn)
-        default: 'yarn'
       node-version:
         required: false
         type: string
