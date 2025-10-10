@@ -54,6 +54,7 @@ jobs:
         with:
           path: ~/work/fp-frontend/fp-frontend/.turbo
           key: turbo-${{ runner.os }}-${{ github.ref_name }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: turbo-${{ runner.os }}-master-${{ hashFiles('yarn.lock') }}-fp-frontend
       - name: Yarn install
         run: yarn install --immutable
       - name: Yarn build
