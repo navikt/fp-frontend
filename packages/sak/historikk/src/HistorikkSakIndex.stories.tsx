@@ -30,7 +30,6 @@ const historikkInnslag: Historikkinnslag[] = [
     skjermlenke: 'FAKTA_UTTAK',
     opprettetTidspunkt: '2024-12-06T11:59:56.891',
     dokumenter: [],
-
     linjer: [
       {
         type: 'TEKST',

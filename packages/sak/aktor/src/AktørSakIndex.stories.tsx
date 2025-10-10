@@ -48,10 +48,8 @@ export const Default: Story = {
         navn: 'Espen Utvikler',
         kjønn: 'M',
         fødselsdato: '1979-01-01',
-
         fødselsnummer: '123456233',
         aktørId: '2323',
-
         språkkode: 'NB',
       },
     },
