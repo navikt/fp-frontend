@@ -23,8 +23,6 @@
 
   "VurderOmsorgsovertakelseVilkåretForm.Tittel": "Vurder opplysningene om omsorgsovertakelse",
   "VurderOmsorgsovertakelseVilkåretForm.EktefellesBarn.Label": "Er det ektefelles barn?",
-  "VurderOmsorgsovertakelseVilkåretForm.EktefellesBarn.Ja": "Ja",
-  "VurderOmsorgsovertakelseVilkåretForm.EktefellesBarn.Nei": "Nei",
   "VurderOmsorgsovertakelseVilkåretForm.HvilkeBarnSkalBrukes": "Hvilke barn skal med i vurderingen?",
   "VurderOmsorgsovertakelseVilkåretForm.BarnRad": "Barn {nummer} født {fødseldato}",
   "VurderOmsorgsovertakelseVilkåretForm.VilkårLabel": "Velg vilkår som skal anvendes",

@@ -33,7 +33,7 @@ type FormValues = {
   delvilkår?: OmsorgsovertakelseVilkårType;
   omsorgsovertakelseDato?: string;
   fødselsdatoer: {
-    fødseldato: string;
+    fødselsdato: string;
     barnNummer: number;
     skalBrukes: boolean;
   }[];
@@ -92,10 +92,10 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             isReadOnly={isReadOnly}
           >
             <Radio value={true}>
-              <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.EktefellesBarn.Ja" />
+              <FormattedMessage id="Label.Ja" />
             </Radio>
             <Radio value={false}>
-              <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.EktefellesBarn.Nei" />
+              <FormattedMessage id="Label.Nei" />
             </Radio>
           </RhfRadioGroup>
 
@@ -103,7 +103,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             <Label size="small">
               <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.HvilkeBarnSkalBrukes" />
             </Label>
-            {fields.map(({ fødseldato, barnNummer }, index) => (
+            {fields.map(({ fødselsdato, barnNummer }, index) => (
               <RhfCheckbox
                 key={barnNummer}
                 label={
@@ -112,10 +112,10 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
                       id="VurderOmsorgsovertakelseVilkåretForm.BarnRad"
                       values={{
                         nummer: barnNummer,
-                        fødseldato: dateFormat(fødseldato),
+                        fødseldato: dateFormat(fødselsdato),
                       }}
                     />
-                    <Over15Markering fødselsdato={fødseldato} />
+                    <Over15Markering fødselsdato={fødselsdato} />
                   </>
                 }
                 readOnly={isReadOnly}
@@ -223,7 +223,7 @@ const buildInitialValues = (
       gjeldendeBarn => gjeldendeBarn.barnNummer === søknadBarn.barnNummer,
     );
     return {
-      fødseldato: barn?.fødselsdato ?? søknadBarn.fødselsdato,
+      fødselsdato: barn?.fødselsdato ?? søknadBarn.fødselsdato,
       barnNummer: søknadBarn.barnNummer ?? index + 1,
       skalBrukes: !!barn,
     };
@@ -239,7 +239,7 @@ const transformValues = (values: FormValues): VurderOmsorgsovertakelseVilkåretA
   ektefellesBarn: notEmpty(values.ektefellesBarn),
   fødselsdatoer: notEmpty(values.fødselsdatoer)
     .filter(b => b.skalBrukes)
-    .reduce((acc, cur) => ({ ...acc, ...{ [cur.barnNummer]: cur.fødseldato } }), {}),
+    .map(({ fødselsdato, barnNummer }) => ({ barnNummer, fødselsdato })),
   kode: AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

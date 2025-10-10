@@ -36,8 +36,9 @@ export const OmsorgsovertakelseFaktaIndex = ({ omsorgsovertakelse }: Props) => {
         <FaktaFraFReg barn={omsorgsovertakelse.register.barn} />
 
         {aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET) && (
-          <VurderOmsorgsovertakelseVilkåretForm omsorgsovertakelse={omsorgsovertakelse} />
+          <></>
         )}
+        <VurderOmsorgsovertakelseVilkåretForm omsorgsovertakelse={omsorgsovertakelse} />
       </VStack>
     </RawIntlProvider>
   );
