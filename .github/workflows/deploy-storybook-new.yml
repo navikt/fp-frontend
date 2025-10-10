@@ -33,8 +33,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Sette yarn-config
-        run: 
-        |
+        run: |
           yarn config set npmScopes.navikt.npmRegistryServer "https://npm.pkg.github.com"
           yarn config set npmScopes.navikt.npmAlwaysAuth true
           yarn config set npmScopes.navikt.npmAuthToken $NPM_AUTH_TOKEN
