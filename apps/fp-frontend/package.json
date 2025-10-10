@@ -20,7 +20,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build",
-    "build-storybook": "storybook build -o .storybook-static-build",
+    "build-storybook-test": "storybook build -o .storybook-static-build",
     "storybook": "storybook dev --quiet -p 7001"
   },
   "dependencies": {
