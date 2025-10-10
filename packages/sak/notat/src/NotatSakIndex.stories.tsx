@@ -78,7 +78,7 @@ export const ErVeileder: Story = {
         opprettetTidspunkt: '2022-09-02T11:12:25.455',
       },
       {
-        notat: 'Dette er et annet notat',
+        notat: 'Dette er et annet notat av saksbehandler Eva',
         opprettetAv: 'Saksbehandler Eva',
         opprettetTidspunkt: '2022-09-02T00:23:25.455',
       },
