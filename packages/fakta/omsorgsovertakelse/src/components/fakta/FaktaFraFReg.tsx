@@ -1,22 +1,19 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Tag, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, VStack } from '@navikt/ds-react';
 import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import dayjs from 'dayjs';
 
+import type { BarnHendelseData } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
-
-import type { BarnHendelseData, Register } from '../../types';
 
 import styles from './faktaFraFReg.module.css';
 
 interface Props {
-  register: Register;
+  barn: BarnHendelseData[];
 }
 
-export const FaktaFraFReg = ({ register: { barn } }: Props) => {
+export const FaktaFraFReg = ({ barn }: Props) => {
   const intl = useIntl();
 
   return (
@@ -82,12 +79,6 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
               hideLabel={index > 0}
             />
           )}
-
-          {erOver15År(fødselsdato) && (
-            <Tag variant="warning" icon={<ExclamationmarkTriangleFillIcon color="var(--ax-warning-700)" />}>
-              Over 15 år
-            </Tag>
-          )}
         </HStack>
       ))}
     </div>
@@ -96,7 +87,3 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
 
 const erBarnUlike = (sammenlignbartBarn: BarnHendelseData) => (barn: BarnHendelseData) =>
   barn.fødselsdato !== sammenlignbartBarn.fødselsdato || barn.dødsdato !== sammenlignbartBarn.dødsdato;
-
-const erOver15År = (fødselsdato: string): boolean => {
-  return dayjs(fødselsdato).add(15, 'year').isBefore(dayjs());
-};

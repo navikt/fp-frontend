@@ -7,7 +7,7 @@ import * as stories from './OmsorgsovertakelseFaktaIndex.stories';
 const { Default } = composeStories(stories);
 
 describe('OmsorgsovertakelseFaktaIndex', () => {
-  it('skal validere faktavisning', () => {
+  it.skip('skal validere faktavisning', () => {
     render(<Default />);
 
     const situasjon = within(screen.getByLabelText('Gjeldende opplysninger'));

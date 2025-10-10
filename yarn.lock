@@ -1392,7 +1392,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-adopsjon@workspace:*, @navikt/fp-fakta-adopsjon@workspace:packages/fakta/adopsjon":
+"@navikt/fp-fakta-adopsjon@workspace:packages/fakta/adopsjon":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-adopsjon@workspace:packages/fakta/adopsjon"
   dependencies:
@@ -1680,7 +1680,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:*, @navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta/omsorg-og-foreldreansvar":
+"@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta/omsorg-og-foreldreansvar":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta/omsorg-og-foreldreansvar"
   dependencies:
@@ -1811,6 +1811,7 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
     "@navikt/ft-form-validators": 4.2.11
+    "@navikt/ft-ui-komponenter": 6.2.8
     "@navikt/ft-utils": 3.8.10
     "@storybook/react": 9.1.10
     "@storybook/react-vite": 9.1.10
@@ -2176,7 +2177,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-fakta-adopsjon": "workspace:*"
     "@navikt/fp-fakta-arbeid-og-inntekt": "workspace:*"
     "@navikt/fp-fakta-arbeidsforhold": "workspace:*"
     "@navikt/fp-fakta-besteberegning": "workspace:*"
@@ -2184,7 +2184,6 @@ __metadata:
     "@navikt/fp-fakta-inntektsmelding": "workspace:*"
     "@navikt/fp-fakta-medlemskap": "workspace:*"
     "@navikt/fp-fakta-omsorg": "workspace:*"
-    "@navikt/fp-fakta-omsorg-og-foreldreansvar": "workspace:*"
     "@navikt/fp-fakta-omsorg-og-rett": "workspace:*"
     "@navikt/fp-fakta-opptjening": "workspace:*"
     "@navikt/fp-fakta-permisjon": "workspace:*"

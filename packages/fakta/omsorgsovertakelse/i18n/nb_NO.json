@@ -1,4 +1,5 @@
 {
+  "OmsorgsovertakelseFaktaIndex.AksjonspunktTekst": "Kontroller opplysningene om omsorgsovertakelse",
   "FaktaFraFReg.Tittel": "Opplysninger fra Folkeregisteret",
   "FaktaFraFReg.IngenBarn": "Det er ikke registrert noen fødselshendelse i Folkeregisteret",
   "FaktaFraSøknad.Tittel": "Opplysninger oppgitt i søknaden",
@@ -15,5 +16,19 @@
   "Label.Ja": "Ja",
   "Label.Nei": "Nei",
   "Label.Delvilkår": "Delvilkår",
-  "Label.ErEndret": "Er endret av saksbehandler"
+  "Label.ErEndret": "Er endret av saksbehandler",
+
+  "VurderOmsorgsovertakelseVilkåretForm.Tittel": "Vurder opplysningene om omsorgsovertakelse",
+  "VurderOmsorgsovertakelseVilkåretForm.EktefellesBarn.Label": "Er det ektefelles barn?",
+  "VurderOmsorgsovertakelseVilkåretForm.EktefellesBarn.Ja": "Ja",
+  "VurderOmsorgsovertakelseVilkåretForm.EktefellesBarn.Nei": "Nei",
+  "VurderOmsorgsovertakelseVilkåretForm.HvilkeBarnSkalBrukes": "Hvilke barn skal med i vurderingen?",
+  "VurderOmsorgsovertakelseVilkåretForm.VilkårLabel": "Velg vilkår som skal anvendes",
+  "VurderOmsorgsovertakelseVilkåretForm.VilkårLabel.ReadOnly": "Vilkår",
+  "VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering": "Er vilkåret oppfylt?",
+  "VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.Oppfylt": "Oppfylt",
+  "VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.IkkeOppfylt": "Ikke oppfylt",
+  "VurderOmsorgsovertakelseVilkåretForm.VelgAvslagsårsak": "Velg en avslagsårsak",
+  "VurderOmsorgsovertakelseVilkåretForm.AvslagsarsakLabel": "Velg en avslagsårsak",
+  "VurderOmsorgsovertakelseVilkåretForm.AvslagsarsakLabel.ReadOnly": "Avslagsårsak"
 }

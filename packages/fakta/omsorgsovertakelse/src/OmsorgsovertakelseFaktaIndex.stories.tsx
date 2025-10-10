@@ -20,26 +20,41 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     omsorgsovertakelse: {
-      aktuelleDelvilkår: ['FP_VK_4', 'FP_VK_8'],
-      aktuelleDelvilkårAvslagsårsaker: { FP_VK_4: [], FP_VK_8: [] },
+      søknad: {
+        barn: [
+          {
+            fødselsdato: '2015-10-09',
+            barnNummer: 1,
+          },
+        ],
+        omsorgsovertakelseDato: '2025-11-09',
+        antallBarn: 1,
+        delvilkår: 'FP_VK_4',
+        erEktefellesBarn: false,
+        ankomstNorgeDato: '2025-11-09',
+      },
+      register: {
+        barn: [],
+      },
       kildeGjeldende: 'SØKNAD',
       gjeldende: {
+        barn: [
+          {
+            fødselsdato: '2015-10-09',
+            barnNummer: 1,
+          },
+        ],
+        omsorgsovertakelseDato: '2025-11-09',
         antallBarn: 1,
-        barn: [{ fødselsdato: '2022-10-01' }],
-        ankomstNorgeDato: '2023-01-04',
-        omsorgsovertakelseDato: '2023-01-01',
         delvilkår: 'FP_VK_4',
         erEktefellesBarn: false,
+        ankomstNorgeDato: '2025-11-09',
       },
-      register: { barn: [{ fødselsdato: '2022-10-01' }] },
-      saksbehandlerVurdering: { avslagsårsak: undefined, vilkårUtfallType: 'IKKE_VURDERT' },
-      søknad: {
-        ankomstNorgeDato: '2023-01-04',
-        omsorgsovertakelseDato: '2023-01-03',
-        delvilkår: 'FP_VK_4',
-        erEktefellesBarn: false,
-        antallBarn: 1,
-        barn: [{ fødselsdato: '2022-10-01' }],
+      aktuelleDelvilkårAvslagsårsaker: {
+        FP_VK_4: ['1005', '1006', '1032', '1004', '1034', '1033', '1011'],
+        FP_VK_33: ['1016', '1018', '1017', '1032', '1004', '1034', '1033', '1011'],
+        FP_VK_5: ['1010', '1009', '1012', '1008', '1032', '1004', '1034', '1033', '1011'],
+        FP_VK_8: ['1014', '1015', '1032', '1004', '1034', '1033', '1011'],
       },
     },
   },

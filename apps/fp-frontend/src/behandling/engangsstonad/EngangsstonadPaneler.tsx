@@ -2,23 +2,24 @@ import { useState } from 'react';
 
 import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
 
-import { FaktaMeny } from '../felles/fakta/FaktaMeny.tsx';
-import type { FaktaPanelMedÅpentApInfo } from '../felles/fakta/useFaktaPanelMenyData.ts';
-import { ProsessMeny } from '../felles/prosess/ProsessMeny.tsx';
-import { AdopsjonsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel.tsx';
-import { FodselvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/FodselvilkaretFaktaInitPanel.tsx';
-import { MedlemskapsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel.tsx';
-import { OmsorgOgForeldreansvarFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgOgForeldreansvarFaktaInitPanel.tsx';
-import { SakenFaktaInitPanel } from '../fellesPaneler/fakta/SakenFaktaInitPanel.tsx';
-import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel.tsx';
-import { YtelserFaktaInitPanel } from '../fellesPaneler/fakta/YtelserFaktaInitPanel.tsx';
-import { OpplysningspliktProsessStegInitPanel } from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel.tsx';
-import { SimuleringProsessStegInitPanel } from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel.tsx';
-import { VarselProsessStegInitPanel } from '../fellesPaneler/prosess/VarselProsessStegInitPanel.tsx';
-import { VedtakProsessStegInitPanel } from '../fellesPaneler/prosess/VedtakProsessStegInitPanel.tsx';
-import { BeregningEsProsessStegInitPanel } from './prosessPaneler/BeregningEsProsessStegInitPanel.tsx';
-import { InngangsvilkarEsProsessStegInitPanel } from './prosessPaneler/InngangsvilkarEsProsessStegInitPanel.tsx';
-import { SoknadsfristEsProsessStegInitPanel } from './prosessPaneler/SoknadsfristEsProsessStegInitPanel.tsx';
+import { FaktaMeny } from '../felles/fakta/FaktaMeny';
+import type { FaktaPanelMedÅpentApInfo } from '../felles/fakta/useFaktaPanelMenyData';
+import { ProsessMeny } from '../felles/prosess/ProsessMeny';
+import { AdopsjonsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
+import { FodselvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/FodselvilkaretFaktaInitPanel';
+import { MedlemskapsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
+import { OmsorgOgForeldreansvarFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgOgForeldreansvarFaktaInitPanel';
+import { OmsorgsovertakelseFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgsovertakelseFaktaInitPanel';
+import { SakenFaktaInitPanel } from '../fellesPaneler/fakta/SakenFaktaInitPanel';
+import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
+import { YtelserFaktaInitPanel } from '../fellesPaneler/fakta/YtelserFaktaInitPanel';
+import { OpplysningspliktProsessStegInitPanel } from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel';
+import { SimuleringProsessStegInitPanel } from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
+import { VarselProsessStegInitPanel } from '../fellesPaneler/prosess/VarselProsessStegInitPanel';
+import { VedtakProsessStegInitPanel } from '../fellesPaneler/prosess/VedtakProsessStegInitPanel';
+import { BeregningEsProsessStegInitPanel } from './prosessPaneler/BeregningEsProsessStegInitPanel';
+import { InngangsvilkarEsProsessStegInitPanel } from './prosessPaneler/InngangsvilkarEsProsessStegInitPanel';
+import { SoknadsfristEsProsessStegInitPanel } from './prosessPaneler/SoknadsfristEsProsessStegInitPanel';
 
 interface Props {
   valgtProsessSteg: string | undefined;
@@ -52,6 +53,7 @@ const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere,
         <VergeFaktaInitPanel />
         <OmsorgOgForeldreansvarFaktaInitPanel personoversikt={personoversikt} />
         <AdopsjonsvilkaretFaktaInitPanel />
+        <OmsorgsovertakelseFaktaInitPanel />
         <FodselvilkaretFaktaInitPanel />
         <MedlemskapsvilkaretFaktaInitPanel />
       </FaktaMeny>

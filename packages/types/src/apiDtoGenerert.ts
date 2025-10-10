@@ -3310,8 +3310,7 @@ export type foreldrepenger_behandlingslager_behandling_familiehendelse_Omsorgsov
   | '-';
 
 export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto = {
-  aktuelleDelvilkår?: Array<foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType>;
-  aktuelleDelvilkårAvslagsårsaker?: {
+  aktuelleDelvilkårAvslagsårsaker: {
     [key: string]: Array<foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak>;
   };
   gjeldende: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Omsorgsovertakelse;
