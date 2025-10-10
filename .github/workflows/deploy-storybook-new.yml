@@ -44,11 +44,13 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           cache: 'yarn'
+      - run: pwd && ls -la ./apps/fp-frontend
       - name: Use turbo cache
         uses: actions/cache@v4
         with:
           path: ~/work/fp-frontend/fp-frontend/.turbo
           key: turbo-${{ runner.os }}-storybook-deploy-${{ hashFiles('yarn.lock') }}
+      - run: ls -la ./apps/fp-frontend
       - name: Yarn install
         run: yarn install --immutable
       - name: Yarn build
