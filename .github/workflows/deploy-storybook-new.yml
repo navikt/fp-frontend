@@ -1,0 +1,68 @@
+name: Deploy storybook
+on:
+  workflow_call:
+    secrets:
+      READER_TOKEN:
+        description: 'A token passed from the caller workflow'
+        required: true
+    inputs:
+      runs-on:
+        required: false
+        type: string
+        description: Miljø versjon som skal brukes til bygg.
+        default: 'ubuntu-latest'
+      package-manager:
+        required: false
+        type: string
+        description: Hvilken package manager en skal bruke (npm|pnpm|yarn)
+        default: 'yarn'
+      node-version:
+        required: false
+        type: string
+        description: Node version som brukes.
+        default: '22'
+
+env:
+  NODE_OPTIONS: '--max_old_space_size=6144'
+jobs:
+  deploy-storybook:
+    name: Deploy storybook ${{ inputs.package-manager }}
+    permissions:
+      contents: write
+      pages: write
+    environment: gh-pages
+    runs-on: ${{ (github.event.pull_request.user.login == 'dependabot[bot]' && 'ubuntu-latest') || inputs.runs-on }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # ratchet:actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Sette yarn-config
+        run: |
+          yarn config set npmScopes.navikt.npmRegistryServer "https://npm.pkg.github.com"
+          yarn config set npmScopes.navikt.npmAlwaysAuth true
+          yarn config set npmScopes.navikt.npmAuthToken $NPM_AUTH_TOKEN
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: Set up NODE med yarn cache
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # ratchet:actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: 'yarn'
+      - name: Use turbo cache
+        uses: actions/cache@v4
+        with:
+          path: ~/work/fp-frontend/fp-frontend/.turbo
+          key: turbo-${{ runner.os }}-${{ github.ref_name }}-${{ hashFiles('yarn.lock') }}
+      - name: Yarn install
+        run: yarn install --immutable
+      - name: Yarn build
+        run: yarn build
+      - name: Set remote url med token
+        run: git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
+      - name: Deploy storybook yarn
+        run: |
+          yarn storybook-clean-deploy-folder && yarn storybook-build-all && yarn storybook-create-deploy-folder
+          yarn gh-pages -d .storybook-static-build -t -u "github-actions-bot <support+actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
