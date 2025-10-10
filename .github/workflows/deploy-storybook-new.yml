@@ -51,8 +51,6 @@ jobs:
           key: turbo-${{ runner.os }}-storybook-deploy-${{ hashFiles('yarn.lock') }}
       - name: Yarn install
         run: yarn install --immutable
-      - name: Yarn build
-        run: yarn build
       - name: Set remote url med token
         run: git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
       - name: Deploy storybook yarn
