@@ -4,11 +4,11 @@ import { describe, expect } from 'vitest';
 
 import * as stories from './OmsorgsovertakelseFaktaIndex.stories';
 
-const { Default } = composeStories(stories);
+const { EngangsstønadMedAp } = composeStories(stories);
 
 describe('OmsorgsovertakelseFaktaIndex', () => {
   it.skip('skal validere faktavisning', () => {
-    render(<Default />);
+    render(<EngangsstønadMedAp />);
 
     const situasjon = within(screen.getByLabelText('Gjeldende opplysninger'));
 

@@ -1,16 +1,13 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { Table, Tag } from '@navikt/ds-react';
+import { HStack, Table } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import dayjs from 'dayjs';
 
-import { getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
 import type { OmsorgsovertakelseDto } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { ErEndret } from './ErEndret';
+import { ErEndretMarkering, Over15Markering } from '../Markering';
 
 interface Props {
   omsorgsovertakelse: OmsorgsovertakelseDto;
@@ -27,8 +24,12 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende } 
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell />
-            <Table.HeaderCell>{getLabelForFaktaKilde('SØKNAD')}</Table.HeaderCell>
-            <Table.HeaderCell>{getLabelForFaktaKilde('SAKSBEHANDLER')}</Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="FaktaSammenligning.FraSøknaden" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="FaktaSammenligning.FraSaksbehandler" />
+            </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -41,7 +42,7 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende } 
             </Table.DataCell>
             <Table.DataCell>
               {gjeldende.omsorgsovertakelseDato ? <DateLabel dateString={gjeldende.omsorgsovertakelseDato} /> : '-'}
-              <ErEndret første={søknad.omsorgsovertakelseDato} andre={gjeldende.omsorgsovertakelseDato} />
+              <ErEndretMarkering første={søknad.omsorgsovertakelseDato} andre={gjeldende.omsorgsovertakelseDato} />
             </Table.DataCell>
           </Table.Row>
 
@@ -55,7 +56,7 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende } 
               </Table.DataCell>
               <Table.DataCell>
                 {gjeldende.ankomstNorgeDato ? <DateLabel dateString={gjeldende.ankomstNorgeDato} /> : '-'}
-                <ErEndret første={søknad.ankomstNorgeDato} andre={gjeldende.ankomstNorgeDato} />
+                <ErEndretMarkering første={søknad.ankomstNorgeDato} andre={gjeldende.ankomstNorgeDato} />
               </Table.DataCell>
             </Table.Row>
           )}
@@ -67,7 +68,7 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende } 
             <Table.DataCell>{søknad.antallBarn}</Table.DataCell>
             <Table.DataCell>
               {gjeldende.antallBarn}
-              <ErEndret første={søknad.antallBarn} andre={gjeldende.antallBarn} />
+              <ErEndretMarkering første={søknad.antallBarn} andre={gjeldende.antallBarn} />
             </Table.DataCell>
           </Table.Row>
 
@@ -80,26 +81,22 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende } 
                   {lengsteListeBarn.length === 1 ? (
                     <FormattedMessage id="Label.Fødselsdato" />
                   ) : (
-                    <FormattedMessage id="Label.Label.FødselsdatoNummerert" values={{ nummer: index + 1 }} />
+                    <FormattedMessage id="Label.FødselsdatoNummerert" values={{ nummer: index + 1 }} />
                   )}
                 </Table.HeaderCell>
                 <Table.DataCell>
                   {søknadFødselsdato ? (
-                    <>
+                    <HStack gap="space-12">
                       <DateLabel dateString={søknadFødselsdato} />
-                      {erOver15År(søknadFødselsdato) && (
-                        <Tag variant="warning" icon={<ExclamationmarkTriangleFillIcon color="var(--ax-warning-700)" />}>
-                          Over 15 år
-                        </Tag>
-                      )}
-                    </>
+                      <Over15Markering fødselsdato={søknadFødselsdato} />
+                    </HStack>
                   ) : (
                     '-'
                   )}
-                  <ErEndret første={søknadFødselsdato} andre={gjeldendeFødselsdato} />
                 </Table.DataCell>
                 <Table.DataCell>
                   {gjeldendeFødselsdato ? <DateLabel dateString={gjeldendeFødselsdato} /> : '-'}
+                  <ErEndretMarkering første={søknadFødselsdato} andre={gjeldendeFødselsdato} />
                 </Table.DataCell>
               </Table.Row>
             );
@@ -114,7 +111,7 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende } 
               </Table.DataCell>
               <Table.DataCell>
                 {gjeldende.erEktefellesBarn ? <FormattedMessage id="Label.Ja" /> : <FormattedMessage id="Label.Nei" />}
-                <ErEndret første={søknad.erEktefellesBarn} andre={gjeldende.erEktefellesBarn} />
+                <ErEndretMarkering første={søknad.erEktefellesBarn} andre={gjeldende.erEktefellesBarn} />
               </Table.DataCell>
             </Table.Row>
           )}
@@ -128,15 +125,11 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende } 
             </Table.DataCell>
             <Table.DataCell>
               {alleKodeverk['OmsorgsovertakelseVilkårType'].find(k => k.kode === gjeldende.delvilkår)?.navn}
-              <ErEndret første={søknad.delvilkår} andre={gjeldende.delvilkår} />
+              <ErEndretMarkering første={søknad.delvilkår} andre={gjeldende.delvilkår} />
             </Table.DataCell>
           </Table.Row>
         </Table.Body>
       </Table>
     </FaktaKort>
   );
-};
-
-const erOver15År = (fødselsdato: string): boolean => {
-  return dayjs(fødselsdato).add(15, 'year').isBefore(dayjs());
 };

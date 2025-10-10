@@ -2,7 +2,9 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { OmsorgsovertakelseFaktaIndex } from './OmsorgsovertakelseFaktaIndex';
 
@@ -11,14 +13,6 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     isReadOnly: false,
-  },
-} satisfies Meta<PanelDataArgs & ComponentProps<typeof OmsorgsovertakelseFaktaIndex>>;
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
-  args: {
     omsorgsovertakelse: {
       søknad: {
         barn: [
@@ -26,9 +20,13 @@ export const Default: Story = {
             fødselsdato: '2015-10-09',
             barnNummer: 1,
           },
+          {
+            fødselsdato: '2005-10-09',
+            barnNummer: 2,
+          },
         ],
         omsorgsovertakelseDato: '2025-11-09',
-        antallBarn: 1,
+        antallBarn: 2,
         delvilkår: 'FP_VK_4',
         erEktefellesBarn: false,
         ankomstNorgeDato: '2025-11-09',
@@ -43,9 +41,13 @@ export const Default: Story = {
             fødselsdato: '2015-10-09',
             barnNummer: 1,
           },
+          {
+            fødselsdato: '2005-10-09',
+            barnNummer: 2,
+          },
         ],
         omsorgsovertakelseDato: '2025-11-09',
-        antallBarn: 1,
+        antallBarn: 2,
         delvilkår: 'FP_VK_4',
         erEktefellesBarn: false,
         ankomstNorgeDato: '2025-11-09',
@@ -57,5 +59,27 @@ export const Default: Story = {
         FP_VK_8: ['1014', '1015', '1032', '1004', '1034', '1033', '1011'],
       },
     },
+  },
+  render: args => <OmsorgsovertakelseFaktaIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof OmsorgsovertakelseFaktaIndex>>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
+  status: 'OPPR',
+  kanLoses: true,
+  toTrinnsBehandling: false,
+  aksjonspunktType: 'AUTO',
+  vilkarType: 'FP_VK_5',
+  erAktivt: true,
+} satisfies Aksjonspunkt;
+
+export const EngangsstønadUtenAp: Story = {};
+
+export const EngangsstønadMedAp: Story = {
+  args: {
+    aksjonspunkterForPanel: [aksjonspunktDefault],
   },
 };

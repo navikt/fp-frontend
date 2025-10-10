@@ -1,7 +1,7 @@
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { HStack, Label, Radio, TextField, VStack } from '@navikt/ds-react';
+import { Label, Radio, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfDatepicker, RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { dateFormat } from '@navikt/ft-utils';
@@ -24,6 +24,8 @@ import {
 import type { VurderOmsorgsovertakelseVilkåretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
+
+import { Over15Markering } from '../Markering';
 
 type FormValues = {
   avslagskode?: Avslagsarsak;
@@ -101,24 +103,25 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             <Label size="small">
               <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.HvilkeBarnSkalBrukes" />
             </Label>
-            {fields.map(({ fødseldato, barnNummer, skalBrukes }, index) => (
-              <HStack gap="space-12" key={barnNummer} align="center">
-                <RhfCheckbox
-                  label={<FormattedMessage id="Label.NummerertBarn" values={{ nummer: barnNummer }} />}
-                  readOnly={isReadOnly}
-                  control={formMethods.control}
-                  name={`fødselsdatoer.${index}.skalBrukes`}
-                />
-                <TextField
-                  hideLabel
-                  label={<FormattedMessage id="Label.Fødseldato" />}
-                  size="small"
-                  disabled={skalBrukes}
-                  value={dateFormat(fødseldato)}
-                  htmlSize={10}
-                  readOnly
-                />
-              </HStack>
+            {fields.map(({ fødseldato, barnNummer }, index) => (
+              <RhfCheckbox
+                key={barnNummer}
+                label={
+                  <>
+                    <FormattedMessage
+                      id="VurderOmsorgsovertakelseVilkåretForm.BarnRad"
+                      values={{
+                        nummer: barnNummer,
+                        fødseldato: dateFormat(fødseldato),
+                      }}
+                    />
+                    <Over15Markering fødselsdato={fødseldato} />
+                  </>
+                }
+                readOnly={isReadOnly}
+                control={formMethods.control}
+                name={`fødselsdatoer.${index}.skalBrukes`}
+              />
             ))}
           </div>
 
