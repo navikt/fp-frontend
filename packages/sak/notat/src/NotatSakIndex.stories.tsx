@@ -73,7 +73,7 @@ export const ErVeileder: Story = {
         opprettetTidspunkt: '2022-08-02T00:54:25.455',
       },
       {
-        notat: 'Dette er et tredje notat',
+        notat: 'Dette er et tredje notat skrevet av Eva',
         opprettetAv: 'Saksbehandler Eva',
         opprettetTidspunkt: '2022-09-02T11:12:25.455',
       },
@@ -83,7 +83,6 @@ export const ErVeileder: Story = {
         opprettetTidspunkt: '2022-09-02T00:23:25.455',
       },
     ],
-
     kanSaksbehandle: false,
   },
 };
