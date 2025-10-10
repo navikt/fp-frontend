@@ -10,10 +10,10 @@ describe('MenyNyBehandlingIndex', () => {
   it('skal opprette ny klagebehandling', async () => {
     const lagNyBehandling = vi.fn();
     const lukkModal = vi.fn();
-    const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
+    render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-003');
+    await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'BT-003');
 
     await userEvent.click(screen.getByText('OK'));
 
@@ -29,18 +29,18 @@ describe('MenyNyBehandlingIndex', () => {
       },
     });
 
-    expect(utils.queryByRole('checkbox', { hidden: true })).not.toBeInTheDocument();
+    expect(screen.queryByRole('checkbox', { hidden: true })).not.toBeInTheDocument();
   });
 
   it('skal opprette ny førstegangssøknad og krysse av for at den er et resultat av klagebehandling', async () => {
     const lagNyBehandling = vi.fn();
     const lukkModal = vi.fn();
-    const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
+    render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-002');
+    await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'BT-002');
 
-    await userEvent.click(utils.getByRole('checkbox', { hidden: true }));
+    await userEvent.click(screen.getByRole('checkbox', { hidden: true }));
 
     await userEvent.click(screen.getByText('OK'));
 
@@ -61,10 +61,10 @@ describe('MenyNyBehandlingIndex', () => {
   it('skal opprette ny førstegangssøknad og ikke krysse av for at den er et resultat av klagebehandling', async () => {
     const lagNyBehandling = vi.fn();
     const lukkModal = vi.fn();
-    const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
+    render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-002');
+    await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'BT-002');
 
     await userEvent.click(screen.getByText('OK'));
 
@@ -85,12 +85,12 @@ describe('MenyNyBehandlingIndex', () => {
   it('skal velge årsak når en har valgt revurderingsbehandling', async () => {
     const lagNyBehandling = vi.fn();
     const lukkModal = vi.fn();
-    const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
+    render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-004');
+    await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'BT-004');
 
-    await userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[1]!, 'RE-KLAG-U-INNTK');
+    await userEvent.selectOptions(screen.getAllByRole('combobox', { hidden: true })[1]!, 'RE-KLAG-U-INNTK');
 
     await userEvent.click(screen.getByText('OK'));
 
@@ -111,14 +111,14 @@ describe('MenyNyBehandlingIndex', () => {
   it('skal gi feilmelding når obligatoriske felter ikke er fylt ut', async () => {
     const lagNyBehandling = vi.fn();
     const lukkModal = vi.fn();
-    const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
+    render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('OK'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-004');
+    await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'BT-004');
 
     await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 

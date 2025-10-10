@@ -28,7 +28,7 @@ describe('UttakFaktaIndex', () => {
   it('skal kunne overstyre når det ikke er aksjonspunkter og en er overstyrer', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<VisUttaksperiodeUtenAksjonspunktKanOverstyre submitCallback={lagre} />);
+    render(<VisUttaksperiodeUtenAksjonspunktKanOverstyre submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
@@ -42,18 +42,18 @@ describe('UttakFaktaIndex', () => {
 
     await userEvent.click(screen.getByTitle('Vis mer'));
 
-    const periodeFra = utils.getByLabelText('Periode fra');
+    const periodeFra = screen.getByLabelText('Periode fra');
     await userEvent.clear(periodeFra);
     await userEvent.type(periodeFra, '31.01.2022');
     fireEvent.blur(periodeFra);
 
     await userEvent.click(screen.getByText('Samtidig uttaksprosent'));
 
-    await userEvent.type(utils.getAllByLabelText('Samtidig uttaksprosent')[1]!, '10');
+    await userEvent.type(screen.getAllByLabelText('Samtidig uttaksprosent')[1]!, '10');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -84,7 +84,7 @@ describe('UttakFaktaIndex', () => {
   it('skal få aksjonspunkt der en må justere fom dato til avklart startdato', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<VisUttaksperiodeMedAksjonspunkt submitCallback={lagre} />);
+    render(<VisUttaksperiodeMedAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
@@ -96,14 +96,14 @@ describe('UttakFaktaIndex', () => {
 
     expect(await screen.findByText('Periode til')).toBeInTheDocument();
 
-    const periodeFra = utils.getByLabelText('Periode fra');
+    const periodeFra = screen.getByLabelText('Periode fra');
     await userEvent.clear(periodeFra);
     await userEvent.type(periodeFra, '31.01.2022');
     fireEvent.blur(periodeFra);
 
     await userEvent.click(screen.getByText('Oppdater'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -162,7 +162,7 @@ describe('UttakFaktaIndex', () => {
   it('skal vise aksjonspunkt når det ikke finnes perioder og så legge til en periode', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<VisAksjonspunktDerIngenPerioderFinnes submitCallback={lagre} />);
+    render(<VisAksjonspunktDerIngenPerioderFinnes submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
@@ -174,21 +174,21 @@ describe('UttakFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Legg til periode'));
 
-    const periodeFra = utils.getByLabelText('Periode fra');
+    const periodeFra = screen.getByLabelText('Periode fra');
     await userEvent.type(periodeFra, '31.01.2022');
     fireEvent.blur(periodeFra);
 
-    const periodeTil = utils.getByLabelText('Periode til');
+    const periodeTil = screen.getByLabelText('Periode til');
     await userEvent.type(periodeTil, '14.12.2022');
     fireEvent.blur(periodeTil);
 
     await userEvent.click(screen.getByText('Opphold'));
 
-    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'UTTAK_FEDREKVOTE_ANNEN_FORELDER');
+    await userEvent.selectOptions(screen.getByLabelText('Årsak'), 'UTTAK_FEDREKVOTE_ANNEN_FORELDER');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -215,7 +215,7 @@ describe('UttakFaktaIndex', () => {
   it('skal få aksjonspunkt der arbeidsforholdet i periode er ukjent', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering submitCallback={lagre} />);
+    render(<VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
@@ -227,16 +227,16 @@ describe('UttakFaktaIndex', () => {
       await screen.findByText('Arbeidsgiver oppgitt for perioden er ukjent. Referanse: 91090823'),
     ).toBeInTheDocument();
 
-    const periodeFra = utils.getByLabelText('Periode fra');
+    const periodeFra = screen.getByLabelText('Periode fra');
     await userEvent.clear(periodeFra);
     await userEvent.type(periodeFra, '31.01.2022');
     fireEvent.blur(periodeFra);
 
-    await userEvent.selectOptions(utils.getByLabelText('Arbeidsgiver'), '910909088-ORDINÆRT_ARBEID');
+    await userEvent.selectOptions(screen.getByLabelText('Arbeidsgiver'), '910909088-ORDINÆRT_ARBEID');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -267,7 +267,7 @@ describe('UttakFaktaIndex', () => {
   });
 
   it('skal vise ulike felter for ulike periodetyper', async () => {
-    const utils = render(<VisUtsettelseperiodeMedAksjonspunkt />);
+    render(<VisUtsettelseperiodeMedAksjonspunkt />);
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
@@ -276,50 +276,50 @@ describe('UttakFaktaIndex', () => {
     expect(await screen.findByText('Periodetype')).toBeInTheDocument();
 
     // For periodetype = Utsettelse
-    expect(utils.getByLabelText('Årsak')).toBeInTheDocument();
-    expect(utils.queryByLabelText('Mors aktivitet')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Stønadskonto')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Gradering %')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Arbeidsgiver')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Samtidig uttaksprosent')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Flerbarnsdager')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Årsak')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Mors aktivitet')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Stønadskonto')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Gradering %')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Arbeidsgiver')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Samtidig uttaksprosent')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Flerbarnsdager')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Overføring'));
 
-    expect(await utils.findByLabelText('Stønadskonto')).toBeInTheDocument();
-    expect(utils.getByLabelText('Årsak')).toBeInTheDocument();
-    expect(utils.queryByLabelText('Mors aktivitet')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Gradering %')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Arbeidsgiver')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Samtidig uttaksprosent')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Flerbarnsdager')).not.toBeInTheDocument();
+    expect(await screen.findByLabelText('Stønadskonto')).toBeInTheDocument();
+    expect(screen.getByLabelText('Årsak')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Mors aktivitet')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Gradering %')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Arbeidsgiver')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Samtidig uttaksprosent')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Flerbarnsdager')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Uttak'));
 
-    expect(await utils.findByLabelText('Gradering')).toBeInTheDocument();
-    expect(utils.getByLabelText('Samtidig uttaksprosent')).toBeInTheDocument();
-    expect(utils.getByLabelText('Stønadskonto')).toBeInTheDocument();
-    expect(utils.queryByLabelText('Gradering %')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Mors aktivitet')).not.toBeInTheDocument();
-    expect(utils.getByLabelText('Flerbarnsdager')).toBeInTheDocument();
-    expect(utils.queryByLabelText('Årsak')).not.toBeInTheDocument();
+    expect(await screen.findByLabelText('Gradering')).toBeInTheDocument();
+    expect(screen.getByLabelText('Samtidig uttaksprosent')).toBeInTheDocument();
+    expect(screen.getByLabelText('Stønadskonto')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Gradering %')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Mors aktivitet')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Flerbarnsdager')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Årsak')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Gradering'));
-    expect(await utils.findByLabelText('Gradering %')).toBeInTheDocument();
-    expect(utils.getByLabelText('Arbeidsgiver')).toBeInTheDocument();
+    expect(await screen.findByLabelText('Gradering %')).toBeInTheDocument();
+    expect(screen.getByLabelText('Arbeidsgiver')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Samtidig uttaksprosent'));
-    expect(await utils.findAllByLabelText('Samtidig uttaksprosent')).toHaveLength(2);
+    expect(await screen.findAllByLabelText('Samtidig uttaksprosent')).toHaveLength(2);
 
     await userEvent.click(screen.getByText('Opphold'));
 
-    expect(utils.getByLabelText('Årsak')).toBeInTheDocument();
-    expect(utils.queryByLabelText('Mors aktivitet')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Stønadskonto')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Gradering %')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Arbeidsgiver')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Samtidig uttaksprosent')).not.toBeInTheDocument();
-    expect(utils.queryByLabelText('Flerbarnsdager')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Årsak')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Mors aktivitet')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Stønadskonto')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Gradering %')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Arbeidsgiver')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Samtidig uttaksprosent')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Flerbarnsdager')).not.toBeInTheDocument();
   });
 
   it('skal vise periode der aksjonspunkt er løst og behandlingen er avsluttet', async () => {

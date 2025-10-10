@@ -164,7 +164,7 @@ describe('VedtakProsessIndex', () => {
   it('skal forhåndsvise avslått vedtaksbrev og så fatte vedtak med fritekst', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring submitCallback={lagre} />);
+    render(<AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring submitCallback={lagre} />);
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
     expect(screen.getByText('Foreldrepenger er avslått')).toBeInTheDocument();
@@ -174,13 +174,13 @@ describe('VedtakProsessIndex', () => {
     expect(screen.getByText('Årsak til avslag')).toBeInTheDocument();
     expect(screen.getByText('Søker har ikke noen gyldig uttaksperiode')).toBeInTheDocument();
 
-    await userEvent.type(utils.getByLabelText('Fritekst i brev til søker'), 'D');
+    await userEvent.type(screen.getByLabelText('Fritekst i brev til søker'), 'D');
 
     await userEvent.click(screen.getByText('Til godkjenning'));
 
     expect(await screen.findByText('Du må skrive minst 3 tegn')).toBeInTheDocument();
 
-    await userEvent.type(utils.getByLabelText('Fritekst i brev til søker'), 'ette er en tekst');
+    await userEvent.type(screen.getByLabelText('Fritekst i brev til søker'), 'ette er en tekst');
 
     await userEvent.click(screen.getByText('Til godkjenning'));
 
@@ -199,7 +199,7 @@ describe('VedtakProsessIndex', () => {
   it('skal vise info om hva saksbehandler må ta stilling til før godkjenning', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil submitCallback={lagre} />);
+    render(<TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil submitCallback={lagre} />);
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
     expect(screen.getByText('Foreldrepenger er innvilget')).toBeInTheDocument();
@@ -215,7 +215,7 @@ describe('VedtakProsessIndex', () => {
       screen.getByText('Beregningsgrunnlaget er endret til ugunst for søker. Skal det sendes varsel?'),
     ).toBeInTheDocument();
 
-    const fritekstInput = utils.getByLabelText(
+    const fritekstInput = screen.getByLabelText(
       'Fritekst i brev til søker som handler om fastsettelse av beregningsgrunnlaget',
     );
     await userEvent.type(fritekstInput, 'Dette er en tekst');

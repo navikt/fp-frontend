@@ -19,7 +19,7 @@ describe('RisikoklassifiseringSakIndex', () => {
 
   it('skal vurdere faresignaler som ikke reelle', async () => {
     const lagreAksjonspunkt = vi.fn();
-    const utils = render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
+    render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
     expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
     expect(await screen.findByText('Vurder faresignalene')).toBeInTheDocument();
 
@@ -31,7 +31,7 @@ describe('RisikoklassifiseringSakIndex', () => {
     expect(await screen.findByText('Faresignal 3')).toBeInTheDocument();
     expect(await screen.findByText('Faresignal 4')).toBeInTheDocument();
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
 
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Faresignalene vurderes ikke som reelle'));
@@ -47,7 +47,7 @@ describe('RisikoklassifiseringSakIndex', () => {
 
   it('skal vurdere faresignaler som reelle', async () => {
     const lagreAksjonspunkt = vi.fn();
-    const utils = render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
+    render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
     expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
     expect(screen.getByText('Vurder faresignalene')).toBeInTheDocument();
 
@@ -59,7 +59,7 @@ describe('RisikoklassifiseringSakIndex', () => {
     expect(screen.getByText('Faresignal 3')).toBeInTheDocument();
     expect(screen.getByText('Faresignal 4')).toBeInTheDocument();
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
 
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Faresignalene vurderes som reelle'));
@@ -76,11 +76,11 @@ describe('RisikoklassifiseringSakIndex', () => {
 
   it('skal få feilmelding når en ikke krysser av type vurdering og vurdering er for kort', async () => {
     const lagreAksjonspunkt = vi.fn();
-    const utils = render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
+    render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
     expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
 
     await userEvent.type(vurderingInput, 'De');
 
@@ -96,10 +96,10 @@ describe('RisikoklassifiseringSakIndex', () => {
 
   it('skal få feilmelding når en ikke krysser av grunn til at sak er innvilget eller avslått', async () => {
     const lagreAksjonspunkt = vi.fn();
-    const utils = render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
+    render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
     expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
 
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Faresignalene vurderes som reelle'));

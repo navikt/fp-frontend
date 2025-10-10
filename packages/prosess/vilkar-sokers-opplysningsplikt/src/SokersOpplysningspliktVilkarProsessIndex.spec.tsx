@@ -10,14 +10,14 @@ describe('SokersOpplysningspliktVilkarProsessIndex', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunkt submitCallback={lagre} />);
+    render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Søkers opplysningsplikt')).toBeInTheDocument();
     expect(screen.getByText('Manglende dokumentasjon')).toBeInTheDocument();
     expect(screen.getByText('Inntektsmelding')).toBeInTheDocument();
     expect(screen.getByText('Arbeidsgiver1 (1234)')).toBeInTheDocument();
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getAllByText(/Vilkåret er oppfylt/)[0]!);

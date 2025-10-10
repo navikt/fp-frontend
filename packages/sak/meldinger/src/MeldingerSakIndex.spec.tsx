@@ -14,10 +14,10 @@ const brukerenHarIkkeAdresseText =
 describe('MeldingerSakIndex', () => {
   it('skal bruke default mal og sende brev', async () => {
     const lagre = vi.fn();
-    const utils = render(<Default submitCallback={lagre} />);
+    render(<Default submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    const begrunnelseInput = utils.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
+    const begrunnelseInput = screen.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Send brev'));
@@ -42,11 +42,11 @@ describe('MeldingerSakIndex', () => {
 
   it('skal vise feltet årsak men ikke fritekst når en velger mal Revurderingsdokumentasjon og ikke Annet', async () => {
     const lagre = vi.fn();
-    const utils = render(<Default submitCallback={lagre} />);
+    render(<Default submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
-    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'BARNIKKEREG');
+    await userEvent.selectOptions(screen.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
+    await userEvent.selectOptions(screen.getByLabelText('Årsak'), 'BARNIKKEREG');
 
     await userEvent.click(screen.getByText('Send brev'));
 
@@ -60,13 +60,13 @@ describe('MeldingerSakIndex', () => {
 
   it('skal vise feltet årsak og fritekst når en velger mal Revurderingsdokumentasjon og Annet', async () => {
     const lagre = vi.fn();
-    const utils = render(<Default submitCallback={lagre} />);
+    render(<Default submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
-    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'ANNET');
+    await userEvent.selectOptions(screen.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
+    await userEvent.selectOptions(screen.getByLabelText('Årsak'), 'ANNET');
 
-    const begrunnelseInput = utils.getByLabelText('Fritekst');
+    const begrunnelseInput = screen.getByLabelText('Fritekst');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Send brev'));
@@ -82,10 +82,10 @@ describe('MeldingerSakIndex', () => {
 
   it('skal ikke vise årsaksverdi Barn ikke registrert for Svangerskapspenger', async () => {
     const lagre = vi.fn();
-    const utils = render(<ForSvangerskapspenger submitCallback={lagre} />);
+    render(<ForSvangerskapspenger submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
+    await userEvent.selectOptions(screen.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
 
     expect(await screen.findByText('Annet')).toBeInTheDocument();
     expect(screen.queryByText('Barn ikke registrert i folkeregisteret')).not.toBeInTheDocument();
@@ -94,10 +94,10 @@ describe('MeldingerSakIndex', () => {
 
   it('skal vise melding til saksbehandler at bruker ikke har en adresse registrert', async () => {
     const lagre = vi.fn();
-    const utils = render(<BrukerManglerAdresse submitCallback={lagre} />);
+    render(<BrukerManglerAdresse submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
+    await userEvent.selectOptions(screen.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
 
     expect(await screen.findByText(brukerenHarIkkeAdresseText)).toBeInTheDocument();
   });
