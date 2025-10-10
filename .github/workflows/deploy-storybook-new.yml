@@ -58,6 +58,6 @@ jobs:
       - name: Deploy storybook yarn
         run: |
           yarn storybook-clean-deploy-folder && yarn storybook-build-all && yarn storybook-create-deploy-folder
-          yarn gh-pages -d .storybook-static-build -t -u "github-actions-bot <support+actions@github.com>"
+          yarn gh-pages -d .storybook-all-static-build -t -u "github-actions-bot <support+actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -8,6 +8,7 @@ coverage/
 node_modules
 dist
 .storybook-static-build
+.storybook-all-static-build
 .vscode
 ssh.exe.stackdump
 .DS_Store

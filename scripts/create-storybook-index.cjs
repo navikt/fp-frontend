@@ -83,7 +83,7 @@ const generateHTML = packages => `
   </html>
 `;
 
-const DEPLOY_FOLDER = '../.storybook-static-build';
+const DEPLOY_FOLDER = '../.storybook-all-static-build';
 
 const copyFiles = subPackage => {
   shell.cd(subPackage);
