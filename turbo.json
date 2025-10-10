@@ -39,7 +39,7 @@
     },
     "build": {
       "dependsOn": ["^build", "eslint", "tsc", "stylelint"],
-      "outputs": ["dist", ".storybook-static-build"]
+      "outputs": ["dist"]
     },
     "clean": {
       "cache": false

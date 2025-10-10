@@ -44,13 +44,11 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           cache: 'yarn'
-      - run: pwd && ls -la ./apps/fp-frontend
       - name: Use turbo cache
         uses: actions/cache@v4
         with:
           path: ~/work/fp-frontend/fp-frontend/.turbo
           key: turbo-${{ runner.os }}-storybook-deploy-${{ hashFiles('yarn.lock') }}
-      - run: ls -la ./apps/fp-frontend
       - name: Yarn install
         run: yarn install --immutable
       - name: Yarn build
@@ -59,7 +57,6 @@ jobs:
         run: git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
       - name: Deploy storybook yarn
         run: |
-          yarn storybook-clean-deploy-folder && yarn storybook-build-all && yarn storybook-create-deploy-folder
-          yarn gh-pages -d .storybook-all-static-build -t -u "github-actions-bot <support+actions@github.com>"
+          yarn yarn storybook-build-all
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
