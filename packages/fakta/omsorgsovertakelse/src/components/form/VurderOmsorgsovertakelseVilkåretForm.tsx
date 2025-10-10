@@ -1,10 +1,10 @@
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { HStack, Label, Radio, TextField, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfDatepicker, RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { dateFormat } from '@navikt/ft-utils';
 
 import {
   type FaktaBegrunnelseFormValues,
@@ -98,22 +98,25 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
           </RhfRadioGroup>
 
           <div>
-            <Label>
+            <Label size="small">
               <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.HvilkeBarnSkalBrukes" />
             </Label>
-            {fields.map(({ fødseldato, barnNummer }, index) => (
-              <HStack gap="space-2" key={barnNummer} align="center">
-                <Label>
-                  <FormattedMessage id="Label.NummerertBarn" values={{ nummer: barnNummer }} />
-                </Label>
-                <BodyShort>
-                  <DateLabel dateString={fødseldato} />
-                </BodyShort>
+            {fields.map(({ fødseldato, barnNummer, skalBrukes }, index) => (
+              <HStack gap="space-12" key={barnNummer} align="center">
                 <RhfCheckbox
-                  label=""
+                  label={<FormattedMessage id="Label.NummerertBarn" values={{ nummer: barnNummer }} />}
                   readOnly={isReadOnly}
                   control={formMethods.control}
                   name={`fødselsdatoer.${index}.skalBrukes`}
+                />
+                <TextField
+                  hideLabel
+                  label={<FormattedMessage id="Label.Fødseldato" />}
+                  size="small"
+                  disabled={skalBrukes}
+                  value={dateFormat(fødseldato)}
+                  htmlSize={10}
+                  readOnly
                 />
               </HStack>
             ))}
