@@ -108,7 +108,7 @@ export const OmsorgOgForeldreansvarForm = ({ søknad, adopsjon, harForeldreansva
 };
 
 const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, aksjonspunkterForPanel: Aksjonspunkt[]): FormValues => ({
-  vilkarType: adopsjon.omsorgsovertakelseVilkårType,
+  ...OmsorgsovertakelseVilkårForm.initialValues(adopsjon.omsorgsovertakelseVilkårType),
   omsorgsovertakelseDato: adopsjon.omsorgsovertakelseDato,
   foreldreansvarDato: adopsjon.foreldreansvarDato,
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel),
