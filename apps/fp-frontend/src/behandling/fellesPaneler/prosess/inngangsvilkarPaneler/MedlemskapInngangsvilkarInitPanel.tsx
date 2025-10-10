@@ -8,7 +8,10 @@ import { InngangsvilkarOverstyringDefaultInitPanel } from '../../../felles/prose
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET, AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR];
+const AKSJONSPUNKT_KODER = [
+  AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+  AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+];
 
 const VILKAR_KODER = ['FP_VK_2'] satisfies VilkårType[];
 
@@ -32,7 +35,7 @@ export const MedlemskapInngangsvilkarInitPanel = () => {
       vilkårKoder={VILKAR_KODER}
       inngangsvilkårPanelKode="MEDLEMSKAP"
       hentInngangsvilkårPanelTekst=""
-      overstyringApKode={AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR}
+      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET}
       overrideReadOnly={harMedlemskapsAksjonspunkt}
     >
       <>

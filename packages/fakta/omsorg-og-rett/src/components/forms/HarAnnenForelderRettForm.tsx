@@ -48,7 +48,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmitt
 
   const transformerFeltverdier = (feltVerdier: FormValues) =>
     submitCallback({
-      kode: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+      kode: AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
       annenforelderHarRett: feltVerdier.harAnnenForelderRett,
       annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
       annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
@@ -59,7 +59,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmitt
     <RhfForm formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>
       <FaktaGruppe
         withoutBorder
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT]}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT]}
       >
         <VStack gap="space-24">
           <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />

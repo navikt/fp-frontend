@@ -99,4 +99,4 @@ const getLagringSideeffekter =
     };
   };
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.FORESLA_VEDTAK];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.FORESLÅ_VEDTAK];

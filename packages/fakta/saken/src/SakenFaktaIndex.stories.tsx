@@ -21,7 +21,7 @@ const defaultSøknad = {
 } as Soknad;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
   status: 'OPPR',
 
   kanLoses: true,
@@ -138,7 +138,7 @@ export const DekningsgradErEndret: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
+        definisjon: AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
         status: 'UTFO',
         kanLoses: true,
         begrunnelse: 'Er endret til 80 fordi...',

@@ -149,15 +149,15 @@ const transformValues = (perioder: PeriodeSoker[], aksjonspunkter: Aksjonspunkt[
       ap,
       AksjonspunktKode.FASTSETT_UTTAKPERIODER,
       AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
-      AksjonspunktKode.TILKNYTTET_STORTINGET,
-      AksjonspunktKode.ANNENPART_EØS,
-      AksjonspunktKode.TETTE_SAKER,
+      AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT,
+      AksjonspunktKode.UTGÅTT_5069,
+      AksjonspunktKode.UTGÅTT_5067,
       AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
-      AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
+      AksjonspunktKode.UTGÅTT_5075,
       AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD,
       AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
-      AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET,
-      AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
+      AksjonspunktKode.UTGÅTT_5078,
+      AksjonspunktKode.UTGÅTT_5079,
     ),
     perioder,
   }));
@@ -280,7 +280,7 @@ export const UttakProsessPanel = ({
 
   const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(erAksjonspunktÅpent);
   const erTilknyttetStortinget = aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.TILKNYTTET_STORTINGET && harÅpentAksjonspunkt,
+    ap => ap.definisjon === AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT && harÅpentAksjonspunkt,
   );
 
   const erBekreftKnappDisablet = useMemo(() => {

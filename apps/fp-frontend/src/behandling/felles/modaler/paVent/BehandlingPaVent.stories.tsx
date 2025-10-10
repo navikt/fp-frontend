@@ -45,7 +45,7 @@ export const BehandlingSattPåVent: Story = {
       aksjonspunkt: [
         {
           status: 'OPPR',
-          definisjon: AksjonspunktKode.ANNENPART_EØS,
+          definisjon: AksjonspunktKode.UTGÅTT_5069,
         } as Aksjonspunkt,
       ],
       links: [link],

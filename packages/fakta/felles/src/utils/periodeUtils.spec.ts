@@ -1,6 +1,6 @@
 import { sorterPerioder } from './periodeUtils';
 
-describe('sorterPerioder', () => {
+describe('periodeUtils', () => {
   it('skal returnere sortert liste av perioder med nyeste perioder først', () => {
     const perioder = [
       { fom: '2021-03-01', tom: '2021-06-01' },

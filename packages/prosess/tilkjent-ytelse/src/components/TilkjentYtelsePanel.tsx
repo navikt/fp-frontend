@@ -79,4 +79,4 @@ export const TilkjentYtelsePanel = ({
 };
 
 const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunkt[]): string | undefined =>
-  alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.VURDER_TILBAKETREKK)?.begrunnelse ?? undefined;
+  alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.UTGÅTT_5090)?.begrunnelse ?? undefined;

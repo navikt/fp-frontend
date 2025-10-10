@@ -3872,7 +3872,7 @@ export type tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode = {
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse = {
-  fom: string;
+  fom?: string;
   tom?: string;
   type: foreldrepenger_behandlingslager_aktør_OppholdstillatelseType;
 };
@@ -5095,6 +5095,8 @@ export type tjenester_forvaltning_dto_RefusjonsendringDto = {
   fom: string;
 };
 
+export type tjenester_forvaltning_dto_SaksnummerBrukerRolleDto_BrukerRolleDto = 'MOR' | 'FAR' | 'MEDMOR';
+
 export type tjenester_forvaltning_ForvaltningFagsakRestTjeneste_ByttAktørRequestDto = {
   gyldigAktørId: string;
   utgåttAktørId: string;
@@ -6023,6 +6025,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_HendelseDto = (
       '@type': 'FALSKID';
     } & foreldrepenger_kontrakter_abonnent_v2_pdl_FalskIdentitetHendelseDto)
   | ({
+      '@type': 'IDENTIFIKATOR';
+    } & foreldrepenger_kontrakter_abonnent_v2_pdl_FolkeregisteridentifikatorHendelseDto)
+  | ({
       '@type': 'FØDSEL';
     } & foreldrepenger_kontrakter_abonnent_v2_pdl_FødselHendelseDto)
   | ({
@@ -6076,6 +6081,16 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_FalskIdentitetHendelseDto 
   avsenderSystem?: string;
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   erFalsk?: boolean;
+  hendelsetype?: string;
+  id: string;
+};
+
+export type foreldrepenger_kontrakter_abonnent_v2_pdl_FolkeregisteridentifikatorHendelseDto = {
+  aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
+  alleAktørId?: Array<string>;
+  avsenderSystem?: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
+  erOpphørt?: boolean;
   hendelsetype?: string;
   id: string;
 };
@@ -8650,6 +8665,22 @@ export type LagFortsettBehandlingResponses = {
   default: unknown;
 };
 
+export type SikreOppdaterteRegisterdataData = {
+  body?: never;
+  path?: never;
+  query: {
+    behandlingUuid: string;
+  };
+  url: '/api/behandlingskontroll/sikreOppdaterteRegisterdata';
+};
+
+export type SikreOppdaterteRegisterdataResponses = {
+  /**
+   * default response
+   */
+  default: unknown;
+};
+
 export type HentBeregningsgrunnlagInputData = {
   body?: never;
   path?: never;
@@ -8686,7 +8717,7 @@ export type LagreNySatsData = {
   body?: never;
   path?: never;
   query: {
-    satsType: 'ENGANG' | 'GRUNNBELØP' | 'GSNITT';
+    satsType: foreldrepenger_behandlingslager_behandling_beregning_BeregningSatsType;
     /**
      * YYYY-MM-DD
      */
@@ -8785,6 +8816,36 @@ export type AvsluttFagsakUtenBehandlingResponses = {
 
 export type AvsluttFagsakUtenBehandlingResponse =
   AvsluttFagsakUtenBehandlingResponses[keyof AvsluttFagsakUtenBehandlingResponses];
+
+export type EndreSaksrolleData = {
+  body?: never;
+  path?: never;
+  query: {
+    saksnummer: string;
+    rolle: tjenester_forvaltning_dto_SaksnummerBrukerRolleDto_BrukerRolleDto;
+  };
+  url: '/api/forvaltningFagsak/endreSaksrolle';
+};
+
+export type EndreSaksrolleErrors = {
+  /**
+   * Ukjent fagsak oppgitt.
+   */
+  400: unknown;
+  /**
+   * Feilet pga ukjent feil.
+   */
+  500: unknown;
+};
+
+export type EndreSaksrolleResponses = {
+  /**
+   * Fagsaker frakoblet.
+   */
+  200: string;
+};
+
+export type EndreSaksrolleResponse = EndreSaksrolleResponses[keyof EndreSaksrolleResponses];
 
 export type FlyttJournalpostTilFagsakData = {
   body?: never;

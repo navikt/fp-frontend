@@ -33,7 +33,7 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
         status: 'OPPR',
         toTrinnsBehandling: false,
         aksjonspunktType: '-',
@@ -50,7 +50,7 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -73,7 +73,7 @@ export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
       },
@@ -95,7 +95,7 @@ export const AvslåttVilkår: Story = {
     } as Behandling,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       },

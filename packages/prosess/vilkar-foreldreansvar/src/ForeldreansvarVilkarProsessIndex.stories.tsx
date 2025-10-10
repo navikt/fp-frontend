@@ -25,7 +25,7 @@ export const ÅpentAksjonspunkt2Ledd: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD,
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -38,7 +38,7 @@ export const OppfyltVilkår2Ledd: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
       },
@@ -61,7 +61,7 @@ export const AvslåttVilkår2Ledd: Story = {
     } as Behandling,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       },
@@ -77,7 +77,7 @@ export const ÅpentAksjonspunkt4Ledd: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD,
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -91,7 +91,7 @@ export const OppfyltVilkår4Ledd: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
       },
@@ -114,7 +114,7 @@ export const AvslåttVilkår4Ledd: Story = {
     } as Behandling,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       },

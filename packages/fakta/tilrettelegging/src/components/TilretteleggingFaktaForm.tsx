@@ -39,7 +39,7 @@ const sorterArbeidsforhold = (
   });
 
 const getAksjonspunktBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string | undefined => {
-  const aksjonpunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FODSELTILRETTELEGGING);
+  const aksjonpunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.VURDER_SVP_TILRETTELEGGING);
   return aksjonpunkt?.begrunnelse ?? undefined;
 };
 
@@ -130,7 +130,7 @@ export const TilretteleggingFaktaForm = ({
       return Promise.resolve();
     }
     return submitCallback({
-      kode: AksjonspunktKode.FODSELTILRETTELEGGING,
+      kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
       termindato: values.termindato,
       fødselsdato: values.fødselsdato,
       begrunnelse: values.begrunnelse,

@@ -120,10 +120,10 @@ const transformValues = (
     .map(ap => ({
       kode: validerApKodeOgHentApEnum(
         ap.definisjon,
-        AksjonspunktKode.FORESLA_VEDTAK,
-        AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
-        AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-        AksjonspunktKode.VURDERE_DOKUMENT,
+        AksjonspunktKode.FORESLÅ_VEDTAK,
+        AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT,
+        AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK,
+        AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK,
       ),
       begrunnelse: values.begrunnelse,
       skalBrukeOverstyrendeFritekstBrev: harOverstyrtVedtaksbrev,

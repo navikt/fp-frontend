@@ -63,9 +63,9 @@ export const OpplysningerOmOppholdstillatelser = ({
             <Table.Body>
               {oppholdstillatelser.toSorted(sorterPerioder).map(({ fom, tom, type }) => {
                 return (
-                  <Table.Row key={fom + tom}>
+                  <Table.Row key={`${fom}${tom}${type}`}>
                     <Table.DataCell>
-                      <PeriodLabel dateStringFom={fom} dateStringTom={tom ?? undefined} />
+                      {fom ? <PeriodLabel dateStringFom={fom} dateStringTom={tom ?? undefined} /> : ' - '}
                     </Table.DataCell>
                     <Table.DataCell>{oppholdstillatelseTypeKodeverk.find(kv => kv.kode === type)?.navn}</Table.DataCell>
                   </Table.Row>

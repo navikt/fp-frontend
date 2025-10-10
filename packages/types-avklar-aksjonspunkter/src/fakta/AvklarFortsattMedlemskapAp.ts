@@ -5,4 +5,4 @@ import type { MedlemskapBekreftetPeriode } from './MedlemskapBekreftetPeriode';
 
 export type AvklarFortsattMedlemskapAp = {
   bekreftedePerioder: MedlemskapBekreftetPeriode[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_FORTSATT_MEDLEMSKAP>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.UTGÅTT_5053>;

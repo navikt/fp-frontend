@@ -54,7 +54,7 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: VilkarUtfall
 
 const transformValues = (values: FormValues): SoknadsfristAp => ({
   erVilkarOk: values.erVilkarOk || false,
-  kode: AksjonspunktKode.SOKNADSFRISTVILKARET,
+  kode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
 });
 

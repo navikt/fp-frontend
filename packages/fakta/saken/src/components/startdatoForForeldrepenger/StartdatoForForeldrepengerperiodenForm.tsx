@@ -35,7 +35,7 @@ const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormVa
 });
 
 const transformValues = (soknad: Soknad, values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
-  kode: AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
+  kode: AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
   opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon ?? undefined,
   startdatoFraSoknad: notEmpty(values.startdatoFraSoknad),
   begrunnelse: values.begrunnelse,
@@ -104,7 +104,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }:
             className={styles['aksjonspunktMargin']}
             erAksjonspunktApent={false}
             erIkkeGodkjentAvBeslutter={
-              !!alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted
+              !!alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO]?.notAccepted
             }
           >
             <VStack gap="space-16">

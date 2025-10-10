@@ -47,7 +47,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
 
     const behandlingAksjonspunktKodes = aksjonspunkterForPanel.filter(erAksjonspunktÅpent).map(ap => ap.definisjon);
     const input = behandlingAksjonspunktKodes.map(apCode => ({
-      kode: validerApKodeOgHentApEnum(apCode, AksjonspunktKode.FORESLA_VEDTAK, AksjonspunktKode.FORESLA_VEDTAK_MANUELT),
+      kode: validerApKodeOgHentApEnum(apCode, AksjonspunktKode.FORESLÅ_VEDTAK, AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT),
     }));
 
     void submitCallback(input).then(() => setIsSubmitting(false));

@@ -10,7 +10,7 @@ import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/Prosess
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODE = AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;
+const AKSJONSPUNKT_KODE = AksjonspunktKode.UTGÅTT_6012;
 
 const VILKAR_KODER = ['FP_VK_2_L'] satisfies VilkårType[];
 

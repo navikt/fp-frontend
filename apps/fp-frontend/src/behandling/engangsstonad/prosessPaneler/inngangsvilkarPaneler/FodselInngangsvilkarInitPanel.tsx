@@ -11,7 +11,7 @@ import {
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE];
 
 const VILKAR_KODER = ['FP_VK_1'] satisfies VilkårType[];
 
@@ -28,7 +28,7 @@ export const FodselInngangsvilkarInitPanel = () => {
       vilkårKoder={VILKAR_KODER}
       inngangsvilkårPanelKode="FODSEL"
       hentInngangsvilkårPanelTekst={paneltekst}
-      overstyringApKode={AksjonspunktKode.OVERSTYR_FODSELSVILKAR}
+      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET}
     >
       <OverstyringPanelDef
         vilkår={standardPanelProps.vilkårForPanel}
@@ -53,7 +53,7 @@ export const FodselInngangsvilkarInitPanel = () => {
 };
 
 const AKSJONSPUNKT_TEKST_PER_KODE: Record<string, string> = {
-  [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
+  [AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE]: 'SRBVilkarForm.VurderSammeBarn',
 };
 
 const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>

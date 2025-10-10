@@ -42,7 +42,7 @@ const buildUttakText = (
       } else if (
         uttakperiode.erEndret &&
         (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAKPERIODER ||
-          aksjonspunkt.aksjonspunktKode === AksjonspunktKode.TILKNYTTET_STORTINGET)
+          aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT)
       ) {
         id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
       } else if (
@@ -50,7 +50,7 @@ const buildUttakText = (
         aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
       ) {
         id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-      } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYR_FAKTA_UTTAK) {
+      } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK) {
         id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
       } else if (uttakperiode.erEndret) {
         id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
@@ -165,7 +165,7 @@ const buildOverstyrtRettOgOmsorgText = (): ReactElement<
 > => <FormattedMessage id="ToTrinnsForm.AvklarUttak.OverstyrtRettOgOmsorg" />;
 
 const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolean =>
-  aksjonspunkt.aksjonspunktKode === AksjonspunktKode.BEHANDLE_KLAGE_NFP ||
+  aksjonspunkt.aksjonspunktKode === AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP ||
   aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP;
 
 export const getAksjonspunkttekst = (
@@ -181,7 +181,7 @@ export const getAksjonspunkttekst = (
   }
   if (
     aksjonspunkt.aksjonspunktKode ===
-    AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE
+    AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE
   ) {
     return [buildVarigEndringBeregningText(aksjonspunkt.beregningDto)];
   }
@@ -195,10 +195,10 @@ export const getAksjonspunkttekst = (
     return buildUttakText(aksjonspunkt);
   }
 
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT) {
+  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT) {
     return [buildAvklarAnnenForelderText()];
   }
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD) {
+  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD) {
     return getTextForForeldreansvarsvilkåretAndreLedd(isForeldrepenger);
   }
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG) {

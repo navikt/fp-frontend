@@ -82,11 +82,11 @@ type FormValues = {
 
 const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK)?.begrunnelse ?? undefined,
+  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FORESLÅ_VEDTAK)?.begrunnelse ?? undefined,
 });
 
 const transformValues = (values: FormValues): ForeslaVedtakAp => ({
-  kode: AksjonspunktKode.FORESLA_VEDTAK,
+  kode: AksjonspunktKode.FORESLÅ_VEDTAK,
   ...values,
   begrunnelse: values.begrunnelse === '' ? undefined : values.begrunnelse,
 });

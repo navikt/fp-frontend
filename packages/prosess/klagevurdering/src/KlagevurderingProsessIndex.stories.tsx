@@ -107,7 +107,7 @@ export const KlagevurderingMedAksjonspunktNfp: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
       },
     ] as Aksjonspunkt[],
     klageVurdering: {

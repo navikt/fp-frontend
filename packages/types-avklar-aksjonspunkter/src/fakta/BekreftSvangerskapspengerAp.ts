@@ -7,4 +7,4 @@ export type BekreftSvangerskapspengerAp = {
   termindato: string;
   fødselsdato: string;
   bekreftetSvpArbeidsforholdList: ArbeidsforholdFodselOgTilrettelegging[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.FODSELTILRETTELEGGING>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_SVP_TILRETTELEGGING>;

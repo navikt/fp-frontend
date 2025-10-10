@@ -33,7 +33,7 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+        definisjon: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
         status: 'OPPR',
       } as Aksjonspunkt,
     ],
@@ -387,7 +387,7 @@ export const VisFødselsdatoNårPrivatperson: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+        definisjon: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
         status: 'OPPR',
       } as Aksjonspunkt,
     ],

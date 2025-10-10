@@ -30,7 +30,9 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, kanOverstyreAccess }:
     ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   );
   const automatiskAp = aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD);
-  const overstyringsAp = aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_DEKNINGSGRAD);
+  const overstyringsAp = aksjonspunkterForPanel.find(
+    ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
+  );
 
   return (
     <VStack gap="space-32">
@@ -57,7 +59,7 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, kanOverstyreAccess }:
           {fagsak.fagsakYtelseType !== 'SVP' && !!soknad && (
             <StartdatoForForeldrepengerperiodenForm
               aksjonspunkt={aksjonspunkterForPanel.find(
-                ap => ap.definisjon === AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
+                ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
               )}
               soknad={soknad}
             />

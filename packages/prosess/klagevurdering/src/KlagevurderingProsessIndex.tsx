@@ -25,7 +25,7 @@ export const KlagevurderingProsessIndex = ({ klageVurdering, saveKlage, previewC
   return (
     <RawIntlProvider value={intl}>
       {klageVurdering.klageVurderingResultatNK && <BehandleKlageFormKa klageVurdering={klageVurdering} />}
-      {aksjonspunkterForPanel.some(a => a.definisjon === AksjonspunktKode.BEHANDLE_KLAGE_NFP) && (
+      {aksjonspunkterForPanel.some(a => a.definisjon === AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP) && (
         <BehandleKlageFormNfp
           klageVurdering={klageVurdering}
           saveKlage={saveKlage}

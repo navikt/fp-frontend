@@ -25,12 +25,12 @@ import {
 
 const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FATTER_VEDTAK,
-  AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
-  AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-  AksjonspunktKode.VURDERE_DOKUMENT,
+  AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT,
+  AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK,
+  AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK,
   AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-  AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
-  AksjonspunktKode.FORESLA_VEDTAK,
+  AksjonspunktKode.UTGÅTT_5056,
+  AksjonspunktKode.FORESLÅ_VEDTAK,
 ];
 
 interface Props {
@@ -46,7 +46,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
 
   const aksjonspunktKoder = [
     ...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER,
-    ...(erEngangsstønad ? [] : [AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE]),
+    ...(erEngangsstønad ? [] : [AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK]),
   ];
 
   const { setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
@@ -186,8 +186,8 @@ const harKunLukkedeAksjonspunkt = (aksjonspunkter: Aksjonspunkt[], vedtakAksjons
 const harRelevantAksjonspunktDefinisjon = (ap: Aksjonspunkt): boolean => {
   return (
     ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG ||
-    ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG ||
-    ap.definisjon === AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER
+    ap.definisjon === AksjonspunktKode.AVKLAR_LØPENDE_OMSORG ||
+    ap.definisjon === AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST
   );
 };
 
@@ -239,7 +239,7 @@ const getLagringSideeffekter =
     return () => {
       const skalTilTotrinnskontroll = aksjonspunkter.some(
         ap =>
-          ap.kode === AksjonspunktKode.FORESLA_VEDTAK ||
+          ap.kode === AksjonspunktKode.FORESLÅ_VEDTAK ||
           ('skalBrukeOverstyrendeFritekstBrev' in ap && ap.skalBrukeOverstyrendeFritekstBrev),
       );
       if (skalTilTotrinnskontroll) {

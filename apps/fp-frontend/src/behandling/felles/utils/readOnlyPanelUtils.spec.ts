@@ -2,7 +2,7 @@ import type { Behandling, Vilkar } from '@navikt/fp-types';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
 
-describe('readOnlyUtils', () => {
+describe('readOnlyPanelUtils', () => {
   const behandling = {
     uuid: '1',
     versjon: 1,

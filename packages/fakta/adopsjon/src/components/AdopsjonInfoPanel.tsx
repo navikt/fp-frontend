@@ -19,7 +19,7 @@ import { DokumentasjonFaktaForm, type FormValues as DokFormValues } from './Doku
 import { EktefelleFaktaForm, type FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
 import { type FormValues as MannAdoptererFormValues, MannAdoptererAleneFaktaForm } from './MannAdoptererAleneFaktaForm';
 
-const { OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN } = AksjonspunktKode;
+const { AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE, AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN } = AksjonspunktKode;
 
 type FormValues = EktefelleFormValues & DokFormValues & MannAdoptererFormValues & FaktaBegrunnelseFormValues;
 
@@ -52,9 +52,11 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
-  const ektefellesBarnAP = aksjonspunkterForPanel.find(ap => ap.definisjon === OM_ADOPSJON_GJELDER_EKTEFELLES_BARN);
+  const ektefellesBarnAP = aksjonspunkterForPanel.find(
+    ap => ap.definisjon === AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+  );
   const mannAdoptererAleneAP = aksjonspunkterForPanel.find(
-    ap => ap.definisjon === OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+    ap => ap.definisjon === AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE,
   );
 
   const formMethods = useForm<FormValues>({
@@ -83,7 +85,10 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
             adopsjon={adopsjon}
             erForeldrepengerFagsak={isForeldrepengerFagsak}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            hasEktefellesBarnAksjonspunkt={harAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel)}
+            hasEktefellesBarnAksjonspunkt={harAksjonspunkt(
+              AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+              aksjonspunkterForPanel,
+            )}
           />
 
           {ektefellesBarnAP && (
@@ -125,8 +130,8 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
 };
 
 const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, aksjonspunkterForPanel: Aksjonspunkt[]): FormValues => {
-  const ektefellesBarnAP = harAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel);
-  const mannAdoptererAleneAP = harAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel);
+  const ektefellesBarnAP = harAksjonspunkt(AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel);
+  const mannAdoptererAleneAP = harAksjonspunkt(AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel);
 
   return {
     ...DokumentasjonFaktaForm.initialValues(adopsjon),
@@ -137,8 +142,8 @@ const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, aksjonspunkterFor
 };
 
 const transformValues = (values: FormValues, aksjonspunkterForPanel: Aksjonspunkt[]): AksjonspunktData[] => {
-  const ektefellesBarnAP = harAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel);
-  const mannAdoptererAleneAP = harAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel);
+  const ektefellesBarnAP = harAksjonspunkt(AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel);
+  const mannAdoptererAleneAP = harAksjonspunkt(AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel);
 
   const aksjonspunkterArray: AksjonspunktData[] = [
     DokumentasjonFaktaForm.transformValues(values),

@@ -9,4 +9,4 @@ export type BekreftSokersOpplysningspliktManuAp = {
     aktørId?: string;
     brukerHarSagtAtIkkeKommer: boolean;
   }[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU>;

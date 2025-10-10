@@ -101,7 +101,7 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
       formMethods={formMethods}
       onSubmit={(values: FormValues) =>
         submitCallback({
-          kode: AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
+          kode: AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
           dekningsgrad: values.dekningsgrad,
           begrunnelse: values.begrunnelse,
         }).then(slåAvEditeringAvStartdato)

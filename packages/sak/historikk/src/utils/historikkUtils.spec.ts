@@ -28,7 +28,7 @@ const historikkInnslagTilbake = [
   },
 ] as Historikkinnslag[];
 
-describe('sortAndTagTilbakekreving', () => {
+describe('historikkUtils', () => {
   it('sorterer historikk', () => {
     const sorted = sortAndTagTilbakekreving(historikkInnslagFpsak, historikkInnslagTilbake);
 

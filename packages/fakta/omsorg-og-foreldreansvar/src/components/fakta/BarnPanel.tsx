@@ -36,7 +36,7 @@ export const BarnPanel = ({ søknad, adopsjon }: Props) => {
         </Label>
 
         {fødselsdatoer.map(([childNumber, fødselsdato]) => (
-          <HStack gap="space-16" key={`${AksjonspunktKode.OMSORGSOVERTAKELSE}-${childNumber}`}>
+          <HStack gap="space-16" key={`${AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE}-${childNumber}`}>
             {fødselsdatoer.length > 1 && (
               <Label size="small">
                 <FormattedMessage id="BarnPanel.BarnNr" values={{ nummer: childNumber }} />

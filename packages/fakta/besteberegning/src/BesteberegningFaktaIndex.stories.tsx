@@ -63,7 +63,7 @@ export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+        definisjon: AksjonspunktKode.UTGÅTT_5048,
         status: 'OPPR',
       },
     ],
@@ -76,7 +76,7 @@ export const BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent: Story 
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+        definisjon: AksjonspunktKode.UTGÅTT_5048,
         status: 'UTFO',
         begrunnelse: 'Min begrunnelse for at besteberegningen er feil',
       },
@@ -90,7 +90,7 @@ export const BesteberegningMedAvvik: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+        definisjon: AksjonspunktKode.UTGÅTT_5048,
         status: 'OPPR',
       },
     ],

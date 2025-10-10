@@ -110,9 +110,9 @@ const transformValues = (
 
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
   const kode =
-    aksjonspunkt && aksjonspunkt.definisjon === AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU
-      ? AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU
-      : AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_OVST;
+    aksjonspunkt && aksjonspunkt.definisjon === AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU
+      ? AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU
+      : AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST;
 
   return {
     kode,

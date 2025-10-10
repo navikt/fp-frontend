@@ -85,7 +85,7 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
+        definisjon: AksjonspunktKode.AVKLAR_LØPENDE_OMSORG,
         status: 'OPPR',
 
         kanLoses: true,
@@ -96,7 +96,7 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
+      [AksjonspunktKode.AVKLAR_LØPENDE_OMSORG]: merknaderFraBeslutter,
     },
   },
 };

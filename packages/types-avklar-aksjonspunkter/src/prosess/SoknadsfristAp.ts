@@ -4,4 +4,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type SoknadsfristAp = {
   erVilkarOk: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.SOKNADSFRISTVILKARET>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET>;

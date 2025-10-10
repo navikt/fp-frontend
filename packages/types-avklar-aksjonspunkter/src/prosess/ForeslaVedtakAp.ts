@@ -6,4 +6,4 @@ export type ForeslaVedtakAp = {
   overskrift?: string;
   fritekstBrev?: string;
   skalBrukeOverstyrendeFritekstBrev?: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLA_VEDTAK>;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLÅ_VEDTAK>;

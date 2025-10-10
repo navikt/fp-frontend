@@ -8,17 +8,17 @@ import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/Inngangs
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-  AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+  AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD,
+  AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD,
+  AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
 ];
 
 const AKSJONSPUNKT_TEKST_PER_KODE: Record<string, string> = {
-  [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD]:
+  [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD]:
     'ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad',
-  [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]:
+  [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD]:
     'ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf',
-  [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
+  [AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE]: 'SRBVilkarForm.VurderSammeBarn',
 };
 
 const VILKAR_KODER = ['FP_VK_8', 'FP_VK_33'] satisfies VilkårType[];

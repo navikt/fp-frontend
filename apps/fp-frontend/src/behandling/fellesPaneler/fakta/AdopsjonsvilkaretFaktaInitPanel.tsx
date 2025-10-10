@@ -15,9 +15,9 @@ import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel'
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
 const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-  AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
-  AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+  AksjonspunktKode.AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE,
+  AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON,
+  AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
 ];
 
 export const AdopsjonsvilkaretFaktaInitPanel = () => {

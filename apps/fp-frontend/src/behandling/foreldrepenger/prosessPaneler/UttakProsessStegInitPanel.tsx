@@ -24,15 +24,15 @@ const getStatusFromUttakresultat = (behandling: Behandling): VilkarUtfallType =>
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FASTSETT_UTTAKPERIODER,
   AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
-  AksjonspunktKode.TILKNYTTET_STORTINGET,
-  AksjonspunktKode.ANNENPART_EØS,
-  AksjonspunktKode.TETTE_SAKER,
+  AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT,
+  AksjonspunktKode.UTGÅTT_5069,
+  AksjonspunktKode.UTGÅTT_5067,
   AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
-  AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
+  AksjonspunktKode.UTGÅTT_5075,
   AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD,
   AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
-  AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET,
-  AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
+  AksjonspunktKode.UTGÅTT_5078,
+  AksjonspunktKode.UTGÅTT_5079,
 ];
 
 interface Props {

@@ -71,7 +71,7 @@ export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }:
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.ArbeidOgInntekt' })}
       skalPanelVisesIMeny={
         harLenke(behandling, 'ARBEID_OG_INNTEKT') &&
-        !harAksjonspunkt(AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD, behandling.aksjonspunkt)
+        !harAksjonspunkt(AksjonspunktKode.UTGÅTT_5080, behandling.aksjonspunkt)
       }
     >
       {arbeidOgInntekt ? (

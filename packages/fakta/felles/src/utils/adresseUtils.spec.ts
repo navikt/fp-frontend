@@ -9,7 +9,7 @@ const defaultPeriode = {
   tom: '2050-01-01',
 };
 
-describe('formaterAdresse', () => {
+describe('adresseUtils', () => {
   describe('formaterAdresse', () => {
     it('skal sjekke at adresse blir korrekt satt', () => {
       const adresse = {

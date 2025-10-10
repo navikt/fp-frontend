@@ -44,8 +44,8 @@ type FormValues = {
 
 function erOverstyringAvMedlemskap(overstyringApKode: AksjonspunktKode) {
   return [
-    AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
-    AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
+    AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+    AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
   ].includes(overstyringApKode);
 }
 
@@ -93,13 +93,13 @@ const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyri
   };
 
   switch (overstyringApKode) {
-    case AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR:
+    case AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET:
       return {
         ...felles,
         avslagskode: vurdering === MedlemskapVurdering.OPPFYLT ? undefined : avslagskode,
         opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
       };
-    case AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE:
+    case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR:
       return {
         ...felles,
         avslagskode: vurdering === MedlemskapVurdering.OPPFYLT ? undefined : avslagskode,
@@ -231,7 +231,7 @@ export const VilkarresultatMedOverstyringForm = ({
                 readOnly={overrideReadOnly || !erOverstyrt}
                 ytelse={fagsak.fagsakYtelseType}
                 erRevurdering={behandling.type === 'BT-004'}
-                erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
+                erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
               />
             ) : (
               <VilkarResultPicker
