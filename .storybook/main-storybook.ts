@@ -9,6 +9,23 @@ export const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  viteFinal: async (viteConfig, { configType }) => {
+    if (configType === 'PRODUCTION') {
+      // deterministic filenames for caching
+      viteConfig.build = {
+        ...viteConfig.build,
+        rollupOptions: {
+          output: {
+            entryFileNames: `[name].js`,
+            chunkFileNames: `[name].js`,
+            assetFileNames: `[name].[ext]`,
+          },
+        },
+        sourcemap: false, // optional: reduce noise in files
+      };
+    }
+    return viteConfig;
+  },
   staticDirs: ['../../../.storybook/mock'],
 };
 
