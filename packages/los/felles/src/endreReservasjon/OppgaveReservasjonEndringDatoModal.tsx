@@ -57,6 +57,7 @@ export const OppgaveReservasjonEndringDatoModal = ({
             toDate={thirtyDaysFromNow().toDate()}
           />
         </NavModal.Body>
+
         <NavModal.Footer>
           <Button size="small">
             <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Ok" />
