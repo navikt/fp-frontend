@@ -20,6 +20,7 @@ describe('AdopsjonFaktaIndex', () => {
     expect(await screen.findByText('Kontroller mot opplysningene fra adopsjonsdokumentasjonen')).toBeInTheDocument();
 
     expect(screen.getByText('Adopsjonsopplysninger fra søknad')).toBeInTheDocument();
+
     expect(screen.queryByText('Ektefelles/samboers barn')).not.toBeInTheDocument();
     expect(screen.queryByText('Mann adopterer')).not.toBeInTheDocument();
 
