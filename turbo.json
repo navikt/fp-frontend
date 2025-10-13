@@ -34,7 +34,7 @@
       "outputs": []
     },
     "build-storybook": {
-      "outputs": []
+      "outputs": [".storybook-static-build"]
     },
     "build": {
       "dependsOn": ["^build", "eslint", "tsc", "stylelint"],
