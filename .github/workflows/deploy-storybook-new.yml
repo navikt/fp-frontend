@@ -55,7 +55,7 @@ jobs:
         run: git remote set-url origin https://git:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git
       - name: Deploy storybook yarn
         run: |
-          yarn storybook-build-all
+          yarn storybook-build-all --verbose
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Show most recent JSON file

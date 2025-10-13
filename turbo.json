@@ -34,6 +34,7 @@
       "outputs": []
     },
     "build-storybook-test": {
+      "inputs": ["src/**", "package.json"],
       "outputs": [".storybook-static-build"]
     },
     "build": {
