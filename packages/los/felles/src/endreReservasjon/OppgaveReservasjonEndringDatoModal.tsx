@@ -47,6 +47,7 @@ export const OppgaveReservasjonEndringDatoModal = ({
             <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Header" />
           </Heading>
         </NavModal.Header>
+
         <NavModal.Body>
           <RhfDatepicker
             name="reserverTil"
