@@ -61,11 +61,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
     if (!delvilkår) return [];
 
     return (omsorgsovertakelse.aktuelleDelvilkårAvslagsårsaker[delvilkår] ?? [])
-      .map(kode =>
-        Object.values(alleKodeverk['Avslagsårsak'])
-          .flat()
-          .find(kodeverk => kodeverk.kode === kode),
-      )
+      .map(kode => alleKodeverk['LineærAvslagsårsak'].find(kodeverk => kodeverk.kode === kode))
       .sort(sortByNavn);
   }, [delvilkår]);
 
@@ -73,6 +69,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
     control: formMethods.control,
     name: 'fødselsdatoer',
   });
+
   return (
     <FaktaKort
       label={intl.formatMessage({
