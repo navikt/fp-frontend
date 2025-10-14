@@ -5,32 +5,21 @@ import { Alert, BodyShort } from '@navikt/ds-react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
-const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]): string[] => {
-  const helpTexts = [];
-  if (aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK)) {
-    helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderAnnenYtelse' }));
-  }
-  if (aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK)) {
-    helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderDokument' }));
-  }
-  if (aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK)) {
-    helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderInntektsmeldingKlage' }));
-  }
-  if (aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST)) {
-    helpTexts.push(intl.formatMessage({ id: 'VedtakForm.KontrollerRevurderingsbehandling' }));
-  }
-
-  return helpTexts;
+const helpTextMap: Record<string, string> = {
+  [AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK]: 'VedtakForm.VurderAnnenYtelse',
+  [AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK]: 'VedtakForm.VurderDokument',
+  [AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK]: 'VedtakForm.VurderInntektsmeldingKlage',
+  [AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST]: 'VedtakForm.KontrollerRevurderingsbehandling',
 };
 
 interface Props {
   isReadOnly: boolean;
-  aksjonspunkter: Aksjonspunkt[];
+  aksjonspunkterForPanel: Aksjonspunkt[];
 }
 
-export const VedtakHelpTextPanel = ({ isReadOnly, aksjonspunkter }: Props) => {
+export const VedtakHelpTextPanel = ({ isReadOnly, aksjonspunkterForPanel }: Props) => {
   const intl = useIntl();
-  const helpTexts = findHelpTexts(intl, aksjonspunkter);
+  const helpTexts = findHelpTexts(intl, aksjonspunkterForPanel);
   if (!isReadOnly && helpTexts.length > 0) {
     return (
       <Alert variant="info" size="small">
@@ -48,4 +37,11 @@ export const VedtakHelpTextPanel = ({ isReadOnly, aksjonspunkter }: Props) => {
     );
   }
   return null;
+};
+
+const findHelpTexts = (intl: IntlShape, aksjonspunkterForPanel: Aksjonspunkt[]): string[] => {
+  return aksjonspunkterForPanel
+    .map(a => helpTextMap[a.definisjon])
+    .filter(Boolean)
+    .map(id => intl.formatMessage({ id }));
 };
