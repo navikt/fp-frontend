@@ -25,7 +25,7 @@ import type { VurderOmsorgsovertakelseVilkåretAp } from '@navikt/fp-types-avkla
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 
-import { Over15Markering } from '../Markering';
+import { Over15Markering } from './Markering';
 
 type FormValues = {
   avslagskode?: Avslagsarsak;

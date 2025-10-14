@@ -4,13 +4,13 @@ import { VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
+import { FaktaFraFReg } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { OmsorgsovertakelseDto } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { FaktaFraFReg } from './components/fakta/FaktaFraFReg';
-import { FaktaSammenligning } from './components/fakta/FaktaSammenligning';
-import { VurderOmsorgsovertakelseVilkåretForm } from './components/form/VurderOmsorgsovertakelseVilkåretForm';
+import { FaktaSammenligning } from './components/FaktaSammenligning';
+import { VurderOmsorgsovertakelseVilkåretForm } from './components/VurderOmsorgsovertakelseVilkåretForm';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -33,7 +33,7 @@ export const OmsorgsovertakelseFaktaIndex = ({ omsorgsovertakelse }: Props) => {
         )}
 
         <FaktaSammenligning omsorgsovertakelse={omsorgsovertakelse} />
-        <FaktaFraFReg barn={omsorgsovertakelse.register.barn} />
+        <FaktaFraFReg barna={omsorgsovertakelse.register.barn} />
 
         {aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET) && (
           <VurderOmsorgsovertakelseVilkåretForm omsorgsovertakelse={omsorgsovertakelse} />

@@ -7,7 +7,7 @@ import type { OmsorgsovertakelseDto } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { ErEndretMarkering, Over15Markering } from '../Markering';
+import { ErEndretMarkering, Over15Markering } from './Markering';
 
 interface Props {
   omsorgsovertakelse: OmsorgsovertakelseDto;
