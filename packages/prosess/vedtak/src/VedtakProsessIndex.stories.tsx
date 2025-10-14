@@ -29,16 +29,7 @@ const defaultAksjonspunkt: Aksjonspunkt = {
   vilkarType: 'FP_VK_5',
   erAktivt: true,
 };
-/*
-'RE-OPTJ'
-| 'RE-FRDLING'
-| 'RE-INNTK'
-| 'RE-FØDSEL'
-| 'RE-DØD'
-| 'RE-SRTB'
-| 'RE-FRIST'
-| 'RE-BER-GRUN'
-*/
+
 const defaultBehandling: Behandling = {
   uuid: '1',
   versjon: 1,
