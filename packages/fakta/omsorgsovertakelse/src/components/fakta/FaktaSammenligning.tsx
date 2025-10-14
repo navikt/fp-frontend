@@ -28,9 +28,11 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
             <Table.HeaderCell>
               <FormattedMessage id="FaktaSammenligning.FraSøknaden" />
             </Table.HeaderCell>
-            <Table.HeaderCell>
-              <FormattedMessage id="FaktaSammenligning.FraSaksbehandler" />
-            </Table.HeaderCell>
+            {erIkkeFraSøknad && (
+              <Table.HeaderCell>
+                <FormattedMessage id="FaktaSammenligning.FraSaksbehandler" />
+              </Table.HeaderCell>
+            )}
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -41,14 +43,12 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
             <Table.DataCell>
               {søknad.omsorgsovertakelseDato ? <DateLabel dateString={søknad.omsorgsovertakelseDato} /> : '-'}
             </Table.DataCell>
-            <Table.DataCell>
-              {erIkkeFraSøknad && (
-                <>
-                  {gjeldende.omsorgsovertakelseDato ? <DateLabel dateString={gjeldende.omsorgsovertakelseDato} /> : '-'}
-                  <ErEndretMarkering første={søknad.omsorgsovertakelseDato} andre={gjeldende.omsorgsovertakelseDato} />
-                </>
-              )}
-            </Table.DataCell>
+            {erIkkeFraSøknad && (
+              <Table.DataCell>
+                {gjeldende.omsorgsovertakelseDato ? <DateLabel dateString={gjeldende.omsorgsovertakelseDato} /> : '-'}
+                <ErEndretMarkering første={søknad.omsorgsovertakelseDato} andre={gjeldende.omsorgsovertakelseDato} />
+              </Table.DataCell>
+            )}
           </Table.Row>
 
           {(søknad.ankomstNorgeDato || gjeldende.ankomstNorgeDato) && (
@@ -59,14 +59,12 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
               <Table.DataCell>
                 {søknad.ankomstNorgeDato ? <DateLabel dateString={søknad.ankomstNorgeDato} /> : '-'}
               </Table.DataCell>
-              <Table.DataCell>
-                {erIkkeFraSøknad && (
-                  <>
-                    {gjeldende.ankomstNorgeDato ? <DateLabel dateString={gjeldende.ankomstNorgeDato} /> : '-'}
-                    <ErEndretMarkering første={søknad.ankomstNorgeDato} andre={gjeldende.ankomstNorgeDato} />
-                  </>
-                )}
-              </Table.DataCell>
+              {erIkkeFraSøknad && (
+                <Table.DataCell>
+                  {gjeldende.ankomstNorgeDato ? <DateLabel dateString={gjeldende.ankomstNorgeDato} /> : '-'}
+                  <ErEndretMarkering første={søknad.ankomstNorgeDato} andre={gjeldende.ankomstNorgeDato} />
+                </Table.DataCell>
+              )}
             </Table.Row>
           )}
 
@@ -75,14 +73,12 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
               <FormattedMessage id="Label.AntallBarn" />
             </Table.HeaderCell>
             <Table.DataCell>{søknad.antallBarn}</Table.DataCell>
-            <Table.DataCell>
-              {erIkkeFraSøknad && (
-                <>
-                  {gjeldende.antallBarn}
-                  <ErEndretMarkering første={søknad.antallBarn} andre={gjeldende.antallBarn} />
-                </>
-              )}
-            </Table.DataCell>
+            {erIkkeFraSøknad && (
+              <Table.DataCell>
+                {gjeldende.antallBarn}
+                <ErEndretMarkering første={søknad.antallBarn} andre={gjeldende.antallBarn} />
+              </Table.DataCell>
+            )}
           </Table.Row>
 
           {lengsteListeBarn.map((barn, index) => {
@@ -107,14 +103,12 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
                     '-'
                   )}
                 </Table.DataCell>
-                <Table.DataCell>
-                  {erIkkeFraSøknad && (
-                    <>
-                      {gjeldendeFødselsdato ? <DateLabel dateString={gjeldendeFødselsdato} /> : '-'}
-                      <ErEndretMarkering første={søknadFødselsdato} andre={gjeldendeFødselsdato} />
-                    </>
-                  )}
-                </Table.DataCell>
+                {erIkkeFraSøknad && (
+                  <Table.DataCell>
+                    {gjeldendeFødselsdato ? <DateLabel dateString={gjeldendeFødselsdato} /> : '-'}
+                    <ErEndretMarkering første={søknadFødselsdato} andre={gjeldendeFødselsdato} />
+                  </Table.DataCell>
+                )}
               </Table.Row>
             );
           })}
@@ -126,18 +120,16 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
               <Table.DataCell>
                 {søknad.erEktefellesBarn ? <FormattedMessage id="Label.Ja" /> : <FormattedMessage id="Label.Nei" />}
               </Table.DataCell>
-              <Table.DataCell>
-                {erIkkeFraSøknad && (
-                  <>
-                    {gjeldende.erEktefellesBarn ? (
-                      <FormattedMessage id="Label.Ja" />
-                    ) : (
-                      <FormattedMessage id="Label.Nei" />
-                    )}
-                    <ErEndretMarkering første={søknad.erEktefellesBarn} andre={gjeldende.erEktefellesBarn} />
-                  </>
-                )}
-              </Table.DataCell>
+              {erIkkeFraSøknad && (
+                <Table.DataCell>
+                  {gjeldende.erEktefellesBarn ? (
+                    <FormattedMessage id="Label.Ja" />
+                  ) : (
+                    <FormattedMessage id="Label.Nei" />
+                  )}
+                  <ErEndretMarkering første={søknad.erEktefellesBarn} andre={gjeldende.erEktefellesBarn} />
+                </Table.DataCell>
+              )}
             </Table.Row>
           )}
 
@@ -148,14 +140,12 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
             <Table.DataCell>
               {alleKodeverk['OmsorgsovertakelseVilkårType'].find(k => k.kode === søknad.delvilkår)?.navn}
             </Table.DataCell>
-            <Table.DataCell>
-              {erIkkeFraSøknad && (
-                <>
-                  {alleKodeverk['OmsorgsovertakelseVilkårType'].find(k => k.kode === gjeldende.delvilkår)?.navn}
-                  <ErEndretMarkering første={søknad.delvilkår} andre={gjeldende.delvilkår} />
-                </>
-              )}
-            </Table.DataCell>
+            {erIkkeFraSøknad && (
+              <Table.DataCell>
+                {alleKodeverk['OmsorgsovertakelseVilkårType'].find(k => k.kode === gjeldende.delvilkår)?.navn}
+                <ErEndretMarkering første={søknad.delvilkår} andre={gjeldende.delvilkår} />
+              </Table.DataCell>
+            )}
           </Table.Row>
         </Table.Body>
       </Table>
