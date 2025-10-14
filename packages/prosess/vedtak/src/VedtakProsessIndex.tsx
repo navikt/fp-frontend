@@ -11,7 +11,6 @@ import type {
   Oppgave,
   SimuleringResultat,
   TilbakekrevingValg,
-  Vilkar,
 } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -35,23 +34,12 @@ interface Props {
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   beregningsgrunnlag?: Beregningsgrunnlag;
-  vilkår: Vilkar[];
   previewCallback: (data: VedtakForhåndsvisData) => void;
   oppgaver?: Oppgave[];
   ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
 }
 
-export const VedtakProsessIndex = ({
-  beregningsresultat,
-  originaltBeregningsresultat,
-  tilbakekrevingvalg,
-  simuleringResultat,
-  beregningsgrunnlag,
-  vilkår,
-  previewCallback,
-  oppgaver,
-  ferdigstillOppgave,
-}: Props) => {
+export const VedtakProsessIndex = ({ originaltBeregningsresultat, beregningsgrunnlag, ...rest }: Props) => {
   const { behandling } = usePanelDataContext();
 
   const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(
@@ -63,27 +51,12 @@ export const VedtakProsessIndex = ({
     <RawIntlProvider value={intl}>
       {behandling.type === 'BT-004' ? (
         <VedtakRevurderingForm
-          previewCallback={previewCallback}
-          tilbakekrevingvalg={tilbakekrevingvalg}
-          simuleringResultat={simuleringResultat}
-          beregningsresultat={beregningsresultat}
-          vilkår={vilkår}
-          beregningErManueltFastsatt={beregningErManueltFastsatt}
           beregningsresultatOriginalBehandling={originaltBeregningsresultat}
-          oppgaver={oppgaver}
-          ferdigstillOppgave={ferdigstillOppgave}
+          beregningErManueltFastsatt={beregningErManueltFastsatt}
+          {...rest}
         />
       ) : (
-        <VedtakForm
-          previewCallback={previewCallback}
-          tilbakekrevingvalg={tilbakekrevingvalg}
-          simuleringResultat={simuleringResultat}
-          beregningsresultat={beregningsresultat}
-          vilkår={vilkår}
-          beregningErManueltFastsatt={beregningErManueltFastsatt}
-          oppgaver={oppgaver}
-          ferdigstillOppgave={ferdigstillOppgave}
-        />
+        <VedtakForm beregningErManueltFastsatt={beregningErManueltFastsatt} {...rest} />
       )}
     </RawIntlProvider>
   );

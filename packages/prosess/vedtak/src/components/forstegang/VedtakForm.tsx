@@ -20,7 +20,6 @@ import {
   type Oppgave,
   type SimuleringResultat,
   type TilbakekrevingValg,
-  type Vilkar,
 } from '@navikt/fp-types';
 import type {
   ForeslaVedtakAp,
@@ -112,10 +111,10 @@ const finnVedtakstatusTekst = (
 
 const transformValues = (
   values: VedtakFormValues,
-  aksjonspunkter: Aksjonspunkt[],
+  aksjonspunkterForPanel: Aksjonspunkt[],
   harOverstyrtVedtaksbrev: boolean,
 ): VedtakAksjonspunkter[] =>
-  aksjonspunkter
+  aksjonspunkterForPanel
     .filter(ap => ap.kanLoses)
     .map(ap => ({
       kode: validerApKodeOgHentApEnum(
@@ -150,7 +149,6 @@ interface Props {
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
-  vilkår: Vilkar[];
   beregningErManueltFastsatt: boolean;
   oppgaver?: Oppgave[];
   ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
@@ -161,15 +159,14 @@ export const VedtakForm = ({
   beregningsresultat,
   tilbakekrevingvalg,
   simuleringResultat,
-  vilkår,
   beregningErManueltFastsatt,
   oppgaver,
   ferdigstillOppgave,
 }: Props) => {
-  const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
+  const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly, aksjonspunkterForPanel } =
     usePanelDataContext<VedtakAksjonspunkter[]>();
 
-  const { aksjonspunkt, behandlingsresultat, språkkode } = behandling;
+  const { behandlingsresultat, språkkode, vilkår } = behandling;
 
   const intl = useIntl();
 
@@ -197,7 +194,7 @@ export const VedtakForm = ({
     <RhfForm
       formMethods={formMethods}
       onSubmit={(values: VedtakFormValues) =>
-        submitCallback(transformValues(values, aksjonspunkt, harValgtÅRedigereVedtaksbrev))
+        submitCallback(transformValues(values, aksjonspunkterForPanel, harValgtÅRedigereVedtaksbrev))
       }
       setDataOnUnmount={setMellomlagretFormData}
     >

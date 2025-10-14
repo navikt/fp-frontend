@@ -13,7 +13,6 @@ import type {
   BeregningsresultatEs,
   BrevOverstyring,
   Fagsak,
-  Vilkar,
 } from '@navikt/fp-types';
 
 import mal from '../.storybook/brevmal/mal.html?raw';
@@ -21,20 +20,17 @@ import redigertInnhold from '../.storybook/brevmal/redigertInnhold.html?raw';
 import { VedtakEditeringProvider } from './VedtakEditeringContext';
 import { VedtakProsessIndex } from './VedtakProsessIndex';
 
-const defaultAksjonspunkt = {
+const defaultAksjonspunkt: Aksjonspunkt = {
   definisjon: AksjonspunktKode.FORESLÅ_VEDTAK,
   status: 'OPPR',
-
   kanLoses: true,
   toTrinnsBehandling: false,
-
   aksjonspunktType: 'AUTO',
   vilkarType: 'FP_VK_5',
   erAktivt: true,
-} satisfies Aksjonspunkt;
-const defaultAksjonspunkter = [defaultAksjonspunkt];
+};
 
-const defaultBehandling = {
+const defaultBehandling: Behandling = {
   uuid: '1',
   versjon: 1,
   type: 'BT-002',
@@ -48,7 +44,7 @@ const defaultBehandling = {
   },
   behandlingPåVent: false,
   behandlingHenlagt: false,
-  aksjonspunkt: defaultAksjonspunkter,
+  aksjonspunkt: [defaultAksjonspunkt],
   behandlingÅrsaker: [
     {
       behandlingArsakType: 'RE-ANNET',
@@ -63,24 +59,22 @@ const defaultBehandling = {
   gjeldendeVedtak: false,
   behandlingKøet: false,
   toTrinnsBehandling: false,
-  vilkår: [],
+  vilkår: [
+    {
+      lovReferanse: '§§Dette er en lovreferanse',
+      vilkarType: 'FP_VK_1',
+      vilkarStatus: 'OPPFYLT',
+      overstyrbar: true,
+    },
+  ],
   links: [],
   harSøknad: false,
   harSattEndringsdato: false,
-} satisfies Behandling;
+};
 
-const defaultVilkar = [
-  {
-    lovReferanse: '§§Dette er en lovreferanse',
-    vilkarType: 'FP_VK_1',
-    vilkarStatus: 'OPPFYLT',
-    overstyrbar: true,
-  },
-] satisfies Vilkar[];
-
-const defaultberegningresultatDagytelse = {
+const defaultberegningresultatDagytelse: BeregningsresultatDagytelse = {
   perioder: undefined,
-} satisfies BeregningsresultatDagytelse;
+};
 
 const defaultSak = {
   fagsakYtelseType: 'FP',
@@ -121,16 +115,20 @@ const meta = {
   component: VedtakProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData, withRouter],
   args: {
-    vilkår: defaultVilkar,
-    previewCallback: action('button-click'),
-    ferdigstillOppgave: action('button-click') as (oppgaveId: string) => Promise<void>,
+    previewCallback: action('preview'),
+    ferdigstillOppgave: action('ferdigstill') as (oppgaveId: string) => Promise<void>,
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
+    behandling: defaultBehandling,
+    isReadOnly: false,
+    fagsak: defaultSak,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
   render: args => {
     const [redigertHtml, setRedigertHtml] = useState<string | null>(null);
 
     const mellomlagreBrevOverstyring = (redigert: string | null) => {
       setRedigertHtml(redigert);
-      action('button-click')(redigert);
+      action('mellomlagre')(redigert);
       return Promise.resolve();
     };
 
@@ -165,8 +163,6 @@ export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler: Story = {
   args: {
     behandling: defaultBehandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -177,9 +173,7 @@ export const GodkjentForeldrepengerForSaksbehandler: Story = {
       status: 'AVSLU',
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     isReadOnly: true,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -197,7 +191,6 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
   },
@@ -215,9 +208,6 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -234,17 +224,13 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     isReadOnly: true,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
 export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
   args: {
-    behandling: defaultBehandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -256,8 +242,6 @@ export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
         },
       ],
     } as Beregningsgrunnlag,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -274,7 +258,6 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -286,51 +269,45 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
         },
       ],
     } as Beregningsgrunnlag,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
 export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
   args: {
-    behandling: {
-      ...defaultBehandling,
-      aksjonspunkt: [
-        ...defaultAksjonspunkter,
-        {
-          ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK,
-          status: 'OPPR',
+    aksjonspunkterForPanel: [
+      defaultAksjonspunkt,
+      {
+        ...defaultAksjonspunkt,
+        definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK,
+        status: 'OPPR',
 
-          kanLoses: false,
-          toTrinnsBehandling: true,
-        },
-        {
-          ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK,
-          status: 'OPPR',
+        kanLoses: false,
+        toTrinnsBehandling: true,
+      },
+      {
+        ...defaultAksjonspunkt,
+        definisjon: AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK,
+        status: 'OPPR',
 
-          kanLoses: false,
-        },
-        {
-          ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK,
-          status: 'OPPR',
+        kanLoses: false,
+      },
+      {
+        ...defaultAksjonspunkt,
+        definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK,
+        status: 'OPPR',
 
-          kanLoses: false,
-        },
-        {
-          ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-          status: 'OPPR',
+        kanLoses: false,
+      },
+      {
+        ...defaultAksjonspunkt,
+        definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+        status: 'OPPR',
 
-          kanLoses: false,
-          toTrinnsBehandling: true,
-        },
-      ],
-    },
+        kanLoses: false,
+        toTrinnsBehandling: true,
+      },
+    ],
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -342,34 +319,29 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         },
       ],
     } as Beregningsgrunnlag,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
 export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
   args: {
-    behandling: {
-      ...defaultBehandling,
-      aksjonspunkt: [
-        ...defaultAksjonspunkter,
-        {
-          ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK,
-          status: 'OPPR',
-          begrunnelse: 'Dette er en begrunnelse',
-          kanLoses: false,
-          toTrinnsBehandling: true,
-        },
-        {
-          ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK,
-          status: 'OPPR',
-          begrunnelse: 'Dette er en begrunnelse',
-          kanLoses: false,
-        },
-      ],
-    },
+    aksjonspunkterForPanel: [
+      defaultAksjonspunkt,
+      {
+        ...defaultAksjonspunkt,
+        definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK,
+        status: 'OPPR',
+        begrunnelse: 'Dette er en begrunnelse',
+        kanLoses: false,
+        toTrinnsBehandling: true,
+      },
+      {
+        ...defaultAksjonspunkt,
+        definisjon: AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK,
+        status: 'OPPR',
+        begrunnelse: 'Dette er en begrunnelse',
+        kanLoses: false,
+      },
+    ],
     oppgaver: [
       {
         oppgaveId: '1',
@@ -468,9 +440,6 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         ],
       },
     ],
-    fagsak: defaultSak,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -487,11 +456,8 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyrin
     } as BeregningsresultatEs,
     fagsak: {
       ...defaultSak,
-      ...defaultSak,
       fagsakYtelseType: 'ES',
     },
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -510,13 +476,11 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
       fagsakYtelseType: 'ES',
     },
     isReadOnly: true,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
 export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring: Story = {
   args: {
-    behandling: defaultBehandling,
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -525,14 +489,11 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring
       ...defaultSak,
       fagsakYtelseType: 'ES',
     },
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
 export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
   args: {
-    behandling: defaultBehandling,
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -552,8 +513,6 @@ export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
         },
       ],
     } as Beregningsgrunnlag,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -577,8 +536,6 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
       ...defaultSak,
       fagsakYtelseType: 'ES',
     },
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -588,13 +545,10 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
 
 export const InnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOverstyring: Story = {
   args: {
-    behandling: defaultBehandling,
     fagsak: {
       ...defaultSak,
       fagsakYtelseType: 'SVP',
     },
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -616,9 +570,6 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -637,9 +588,6 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -657,9 +605,6 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -678,9 +623,6 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
-    isReadOnly: true,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -700,9 +642,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     isReadOnly: true,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -720,9 +660,6 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
       },
     } satisfies Behandling,
     originaltBeregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -740,9 +677,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
       },
     } satisfies Behandling,
     originaltBeregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     isReadOnly: true,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -760,9 +695,7 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     isReadOnly: true,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -780,7 +713,6 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -792,8 +724,6 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
         },
       ],
     } as Beregningsgrunnlag,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -810,9 +740,16 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
         id: 0,
         harRedigertVedtaksbrev: false,
       },
+      vilkår: [
+        {
+          lovReferanse: '§§Dette er en lovreferanse',
+          vilkarType: 'FP_VK_3',
+          vilkarStatus: 'IKKE_OPPFYLT',
+          overstyrbar: true,
+        },
+      ],
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -824,16 +761,6 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
         },
       ],
     } as Beregningsgrunnlag,
-    vilkår: [
-      {
-        lovReferanse: '§§Dette er en lovreferanse',
-        vilkarType: 'FP_VK_3',
-        vilkarStatus: 'IKKE_OPPFYLT',
-        overstyrbar: true,
-      },
-    ],
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -851,7 +778,6 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -863,8 +789,6 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
         },
       ],
     } as Beregningsgrunnlag,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -884,9 +808,7 @@ export const LegacyOverstyring: Story = {
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
     isReadOnly: true,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -906,9 +828,6 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
       },
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: defaultSak,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -947,8 +866,6 @@ export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: S
         },
       ],
     },
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -968,7 +885,5 @@ export const SkalIkkeProduseresBrev: Story = {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
-    isReadOnly: false,
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };

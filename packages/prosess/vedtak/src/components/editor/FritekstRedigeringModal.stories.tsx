@@ -69,6 +69,7 @@ const meta = {
     mellomlagreOgHentPåNytt: action('button-click') as (html: string | null) => Promise<void>,
     setVisFritekstRedigeringModal: action('button-click'),
     forhåndsvisBrev: action('button-click'),
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
   render: args => <FritekstRedigeringModal {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof FritekstRedigeringModal>>;
@@ -76,11 +77,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const MedOpprinneligHtml: Story = {
-  args: {
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-  },
-};
+export const MedOpprinneligHtml: Story = {};
 
 export const MedRedigertHtml: Story = {
   args: {
@@ -90,7 +87,6 @@ export const MedRedigertHtml: Story = {
 
 export const MedOpprinneligHtmlOgMarkeringPraksisUtsettelse: Story = {
   args: {
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     fagsak: FAGSAK_MED_MARKERING_PRAKSIS_UTSETTELSE,
   },
 };

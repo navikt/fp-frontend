@@ -34,8 +34,8 @@ const finnTekstkodeFraBehandlingstatus = (behandlingStatus: BehandlingStatus): s
 
 const kanSendesTilGodkjenning = (behandlingStatusKode: BehandlingStatus): boolean => behandlingStatusKode === 'UTRED';
 
-const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[], skalBrukeManueltBrev: boolean): string =>
-  aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.FORESLÅ_VEDTAK) || skalBrukeManueltBrev
+const finnKnappetekstkode = (aksjonspunkterForPanel: Aksjonspunkt[], skalBrukeManueltBrev: boolean): string =>
+  aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.FORESLÅ_VEDTAK) || skalBrukeManueltBrev
     ? 'VedtakForm.TilGodkjenning'
     : 'VedtakForm.FattVedtak';
 
@@ -88,9 +88,8 @@ export const VedtakFellesPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { behandling, isReadOnly } = usePanelDataContext();
-  const { aksjonspunkt, behandlingsresultat, behandlingPåVent, status, behandlingHenlagt, uuid, taskStatus } =
-    behandling;
+  const { behandling, isReadOnly, aksjonspunkterForPanel } = usePanelDataContext();
+  const { behandlingsresultat, behandlingPåVent, status, behandlingHenlagt, uuid, taskStatus } = behandling;
 
   const {
     formState: { isSubmitting },
@@ -201,7 +200,7 @@ export const VedtakFellesPanel = ({
           </BodyShort>
         </Alert>
       )}
-      <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
+      <VedtakHelpTextPanel aksjonspunkterForPanel={aksjonspunkterForPanel} isReadOnly={isReadOnly} />
       {oppgaver && oppgaver.length > 0 && (
         <OppgaveTabell oppgaver={oppgaver} ferdigstillOppgave={ferdigstillOppgave} isReadOnly={isReadOnly} />
       )}
@@ -224,7 +223,7 @@ export const VedtakFellesPanel = ({
               disabled={behandlingPåVent || isSubmitting || harValgtÅRedigereMenHarIkkeRedigert}
               loading={isSubmitting}
             >
-              <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, harValgtÅRedigereVedtaksbrev)} />
+              <FormattedMessage id={finnKnappetekstkode(aksjonspunkterForPanel, harValgtÅRedigereVedtaksbrev)} />
             </Button>
           </div>
         )}

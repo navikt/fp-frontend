@@ -23,11 +23,12 @@ import {
   useStandardProsessPanelProps,
 } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
+const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FATTER_VEDTAK,
   AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT,
   AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK,
   AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK,
+  AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK,
   AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
   AksjonspunktKode.UTGÅTT_5056,
   AksjonspunktKode.FORESLÅ_VEDTAK,
@@ -44,11 +45,6 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
   const [visIverksetterVedtakModal, setVisIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
 
-  const aksjonspunktKoder = [
-    ...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER,
-    ...(erEngangsstønad ? [] : [AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK]),
-  ];
-
   const { setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
 
   const lagringSideEffekter = getLagringSideeffekter(
@@ -57,7 +53,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
     setSkalOppdatereEtterBekreftelseAvAp,
   );
 
-  const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, [], lagringSideEffekter);
+  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
   const { behandling } = standardPanelProps;
 
   const statusForVedtak = finnStatusForVedtak(standardPanelProps);
@@ -163,7 +159,6 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
               tilbakekrevingvalg={tilbakekrevingValg}
               simuleringResultat={simuleringResultat}
               beregningsgrunnlag={beregningsgrunnlag}
-              vilkår={standardPanelProps.behandling.vilkår}
               previewCallback={forhandsvis}
               oppgaver={oppgaver}
               ferdigstillOppgave={ferdigstillOppgave}
