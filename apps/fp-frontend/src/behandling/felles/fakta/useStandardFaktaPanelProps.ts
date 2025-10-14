@@ -101,12 +101,24 @@ const getBekreftAksjonspunktFaktaCallback =
         return lagreOverstyrteAksjonspunkter({
           ...params,
           overstyrteAksjonspunktDtoer: model,
-        }).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+        }).then(() => {
+          oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
+          globalThis.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          });
+        });
       }
     }
 
     return lagreAksjonspunkter({
       ...params,
       bekreftedeAksjonspunktDtoer: model,
-    }).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
+    }).then(() => {
+      oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
+      globalThis.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    });
   };

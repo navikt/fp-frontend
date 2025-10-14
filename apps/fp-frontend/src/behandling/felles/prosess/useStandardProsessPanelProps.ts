@@ -62,6 +62,10 @@ export const useStandardProsessPanelProps = (
 
   const standardlagringSideEffekter = () => () => {
     oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
+    globalThis.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   const submitCallback = getBekreftAksjonspunktProsessCallback(
