@@ -1,11 +1,11 @@
 {
-  "name": "@navikt/fp-journalforing-old",
+  "name": "@navikt/fp-journalforing",
   "license": "MIT",
   "private": true,
+  "module": "src/main.tsx",
   "type": "module",
-  "description": "Komponent som lar saksbehandler journalføre (knytte til sak) journalposter som ikke har latt seg journalføres automatisk",
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.html"
   },
   "scripts": {
     "test": "vitest",
@@ -15,6 +15,9 @@
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
     "stylelint": "stylelint \"src/**/*.module.css\"",
     "prettier": "prettier --write src",
+    "dev": "vite serve",
+    "build": "vite build",
+    "preview": "vite preview",
     "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build",
     "build-storybook": "storybook build -o .storybook-static-build",
     "storybook": "storybook dev --quiet -p 7019"

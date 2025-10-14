@@ -1,0 +1,13 @@
+.gosysLink {
+  padding: 12px;
+}
+
+.nesteIkon {
+  color: var(--ax-accent-700);
+  height: 32px;
+  width: 32px;
+}
+
+.tabellRad {
+  cursor: pointer;
+}
