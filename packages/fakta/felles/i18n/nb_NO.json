@@ -50,8 +50,8 @@
 
   "FaktaFraFReg.Tittel": "Opplysninger fra Folkeregisteret",
   "FaktaFraFReg.IngenBarn": "Det er ikke registrert noen fødselshendelse i Folkeregisteret",
-  "FaktaFraFReg.Barn": "Barn",
-  "FaktaFraFReg.Fødselsdato": "Fødselsdato",
-  "FaktaFraFReg.Dødsdato": "Dødsdato",
-  "FaktaFraFReg.AntallBarn": "Antall barn"
+  "Label.Barn": "Barn",
+  "Label.Fødselsdato": "Fødselsdato",
+  "Label.Dødsdato": "Dødsdato",
+  "Label.AntallBarn": "Antall barn"
 }

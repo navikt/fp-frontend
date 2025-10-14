@@ -39,40 +39,40 @@ const BarnVisning = ({ barna }: { barna: BarnHendelseData[] }) => {
   if (!barnet) {
     return null;
   }
-  const barnErLike = !barna.some(erBarnUlike(barnet));
+  const erBarnLike = !barna.some(erBarnUlike(barnet));
 
-  if (barnErLike) {
+  if (erBarnLike) {
     return (
       <VStack gap="space-16">
         <ReadOnlyField
-          label={<FormattedMessage id="FaktaFraFReg.Fødselsdato" />}
+          label={<FormattedMessage id="Label.Fødselsdato" />}
           value={<DateLabel dateString={barnet.fødselsdato} />}
         />
         {barnet.dødsdato && (
           <ReadOnlyField
-            label={<FormattedMessage id="FaktaFraFReg.Dødsdato" />}
+            label={<FormattedMessage id="Label.Dødsdato" />}
             value={<DateLabel dateString={barnet.dødsdato} />}
           />
         )}
-        <ReadOnlyField label={<FormattedMessage id="FaktaFraFReg.AntallBarn" />} value={barna.length} />
+        <ReadOnlyField label={<FormattedMessage id="Label.AntallBarn" />} value={barna.length} />
       </VStack>
     );
   }
 
   const harDødtBarn = barna.some(b => b.dødsdato);
   return (
-    <div>
+    <>
       {barna.map(({ fødselsdato, dødsdato }, index) => (
         <HStack key={fødselsdato + dødsdato} gap="space-24" wrap={false} className={styles['grid']}>
           <ReadOnlyField
             size="medium"
-            label={<FormattedMessage id="FaktaFraFReg.Barn" />}
+            label={<FormattedMessage id="Label.Barn" />}
             value={index + 1}
             hideLabel={index > 0}
           />
           <ReadOnlyField
             size="medium"
-            label={<FormattedMessage id="FaktaFraFReg.Fødselsdato" />}
+            label={<FormattedMessage id="Label.Fødselsdato" />}
             value={<DateLabel dateString={fødselsdato} />}
             hideLabel={index > 0}
           />
@@ -80,13 +80,13 @@ const BarnVisning = ({ barna }: { barna: BarnHendelseData[] }) => {
             <ReadOnlyField
               size="medium"
               value={dødsdato ? <DateLabel dateString={dødsdato} /> : '-'}
-              label={<FormattedMessage id="FaktaFraFReg.Dødsdato" />}
+              label={<FormattedMessage id="Label.Dødsdato" />}
               hideLabel={index > 0}
             />
           )}
         </HStack>
       ))}
-    </div>
+    </>
   );
 };
 
