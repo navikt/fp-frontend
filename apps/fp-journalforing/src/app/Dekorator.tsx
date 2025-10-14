@@ -8,7 +8,6 @@ import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 import { ErrorType, type FpError, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { ApiPollingStatus, FPSAK_URL_NAME, RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
 import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
-import type { NavAnsatt } from '@navikt/fp-types';
 
 import { JOURNALFORING_URL_NAME } from '../../../../packages/konstanter/src/appnavn';
 
@@ -24,7 +23,7 @@ interface Props {
   hideErrorMessages?: boolean;
   theme: ComponentProps<typeof Theme>['theme'];
   setTheme: (theme: ComponentProps<typeof Theme>['theme']) => void;
-  navAnsatt: NavAnsatt;
+  ansattnavn: string;
 }
 
 export const Dekorator = ({
@@ -34,7 +33,7 @@ export const Dekorator = ({
   hideErrorMessages = false,
   theme,
   setTheme,
-  navAnsatt,
+  ansattnavn,
 }: Props) => {
   const intl = useIntl();
 
@@ -74,7 +73,7 @@ export const Dekorator = ({
     <DekoratorMedFeilviserSakIndex
       tittel={intl.formatMessage({ id: 'Dekorator.Avdelingsleder' })}
       tittelCallback={visLos}
-      navAnsattNavn={navAnsatt.navn}
+      navAnsattNavn={ansattnavn}
       feilmeldinger={hideErrorMessages ? [] : formaterFeilmeldinger(intl, errorMessages, queryStrings, crashMessage)}
       fjernFeilmeldinger={removeErrorMessages}
       setSiteHeight={setSiteHeight}

@@ -20,7 +20,7 @@ import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
 
 import { Dekorator } from './app/Dekorator';
 import { Home } from './app/Home';
-import { initFetchOptions } from './data/fpSakApi';
+import { brukerOptions } from './data/journalføringApi';
 
 import './globalCss/global.module.css';
 
@@ -52,7 +52,7 @@ const JournalføringAppIndex = () => {
   const [crashMessage, setCrashMessage] = useState<string>();
   const [theme, setTheme] = useState<ComponentProps<typeof Theme>['theme']>('light');
 
-  const initFetchQuery = useQuery(initFetchOptions());
+  const initFetchQuery = useQuery(brukerOptions());
 
   const location = useLocation();
 
@@ -80,7 +80,7 @@ const JournalføringAppIndex = () => {
     return <LoadingPanel />;
   }
 
-  const navAnsatt = initFetchQuery.data.innloggetBruker;
+  const brukerinfo = initFetchQuery.data;
 
   return (
     <Theme theme={theme}>
@@ -92,10 +92,10 @@ const JournalføringAppIndex = () => {
           crashMessage={crashMessage}
           theme={theme}
           setTheme={setTheme}
-          navAnsatt={navAnsatt}
+          ansattnavn={brukerinfo.givenName}
         />
         <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
-          {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
+          {shouldRenderHome && <Home headerHeight={headerHeight} ansattIdent={brukerinfo.onPremisesSamAccountName} />}
         </ErrorBoundary>
         {hasForbiddenErrors && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
         {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}

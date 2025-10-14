@@ -1,8 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import type { NavAnsatt } from '@navikt/fp-types';
-
-import { hentBruker, oppdaterMedBruker } from '../../data/fpFordelApi';
+import { hentBruker, oppdaterMedBruker } from '../../data/journalføringApi';
 import type { JournalførSubmitValue } from '../../typer/ferdigstillJournalføringSubmit';
 import type { Journalpost } from '../../typer/journalpostTsType';
 import type { Oppgave } from '../../typer/oppgaveTsType';
@@ -16,7 +14,7 @@ type Props = Readonly<{
   oppgave?: Oppgave;
   journalpost: Journalpost;
   avbrytVisningAvJournalpost: () => void;
-  navAnsatt: NavAnsatt;
+  ansattIdent: string;
   submitJournalføring: (data: JournalførSubmitValue, erAlleredeJournalført: boolean) => void;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   flyttTilGosys: (data: string) => void;
@@ -30,7 +28,7 @@ export const JournalpostIndex = ({
   journalpost,
   avbrytVisningAvJournalpost,
   submitJournalføring,
-  navAnsatt,
+  ansattIdent,
   reserverOppgave,
   flyttTilGosys,
 }: Props) => {
@@ -65,7 +63,7 @@ export const JournalpostIndex = ({
           brukerTilForhåndsvisning={hentetNavn}
           lasterBruker={hentBrukerState === 'pending'}
           reserverOppgave={reserverOppgave}
-          navAnsatt={navAnsatt}
+          ansattIdent={ansattIdent}
           flyttTilGosys={flyttTilGosys}
         />
       </div>

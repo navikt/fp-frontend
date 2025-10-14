@@ -5,8 +5,6 @@ import { ChevronRightIcon } from '@navikt/aksel-icons';
 import { Button, Table, Tag } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
-import type { NavAnsatt } from '@navikt/fp-types';
-
 import type { Oppgave } from '../../typer/oppgaveTsType';
 import type { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
 
@@ -15,11 +13,11 @@ import styles from './oppgaveTabellRad.module.css';
 type Props = Readonly<{
   oppgave: Oppgave;
   velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
-  navAnsatt: NavAnsatt;
+  ansattIdent: string;
   reserverOppgave: (data: ReserverOppgaveType) => void;
 }>;
 
-export const OppgaveTabellRad = ({ oppgave, velgOppgaveOgHentJournalpost, navAnsatt, reserverOppgave }: Props) => {
+export const OppgaveTabellRad = ({ oppgave, velgOppgaveOgHentJournalpost, ansattIdent, reserverOppgave }: Props) => {
   return (
     <Table.Row
       onClick={() => {
@@ -36,12 +34,12 @@ export const OppgaveTabellRad = ({ oppgave, velgOppgaveOgHentJournalpost, navAns
       </Table.DataCell>
       <Table.DataCell>{oppgave.beskrivelse}</Table.DataCell>
       <Table.DataCell>
-        {oppgave.reservertAv && navAnsatt.brukernavn === oppgave.reservertAv && (
+        {oppgave.reservertAv && ansattIdent === oppgave.reservertAv && (
           <Tag size="small" variant="alt3">
             <FormattedMessage id="Oppgavetabell.Meg" />
           </Tag>
         )}
-        {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
+        {oppgave.reservertAv && ansattIdent !== oppgave.reservertAv && (
           <Tag size="small" variant="neutral-moderate">
             {oppgave.reservertAv}
           </Tag>
@@ -54,7 +52,7 @@ export const OppgaveTabellRad = ({ oppgave, velgOppgaveOgHentJournalpost, navAns
               e.stopPropagation();
               reserverOppgave({
                 journalpostId: oppgave.journalpostId,
-                reserverFor: navAnsatt.brukernavn,
+                reserverFor: ansattIdent,
               });
             }}
             type="button"

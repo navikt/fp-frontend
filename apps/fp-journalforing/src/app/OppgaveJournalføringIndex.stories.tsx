@@ -2,12 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import { withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
-import type { NavAnsatt } from '@navikt/fp-types';
 
-import { FpFordelUrl } from './data/fpFordelApi';
+import { FpFordelUrl } from '../data/journalføringApi';
+import type { Journalpost, JournalpostTilstand } from '../typer/journalpostTsType';
+import { erEndeligJournalført } from '../utils/journalpostTilstandUtils';
 import { OppgaveJournalføringIndex } from './OppgaveJournalføringIndex';
-import type { Journalpost, JournalpostTilstand } from './typer/journalpostTsType';
-import { erEndeligJournalført } from './utils/journalpostTilstandUtils';
 
 const meta = {
   title: 'journalføring/journalføring/OppgaveJournalføringIndex',
@@ -17,11 +16,7 @@ const meta = {
     layout: 'fullscreen',
   },
   args: {
-    navAnsatt: {
-      kanOppgavestyre: true,
-      kanBehandleKode6: true,
-      brukernavn: 'X123456',
-    } as NavAnsatt,
+    ansattIdent: 'X123456',
   },
 } satisfies Meta<typeof OppgaveJournalføringIndex>;
 export default meta;

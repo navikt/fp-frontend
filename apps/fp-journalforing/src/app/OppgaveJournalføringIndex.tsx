@@ -7,7 +7,6 @@ import { createIntl } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { ErrorPage } from '@navikt/fp-sak-infosider';
-import type { NavAnsatt } from '@navikt/fp-types';
 
 import { JournalføringHeader } from '../components/header/JournalføringHeader';
 import { JournalføringIndex } from '../components/JournalføringIndex';
@@ -19,7 +18,7 @@ import {
   hentJournalpostDetaljer,
   knyttJournalpostTilAnnenSak,
   reserverBruker,
-} from '../data/fpFordelApi';
+} from '../data/journalføringApi';
 import type { JournalførSubmitValue } from '../typer/ferdigstillJournalføringSubmit';
 import type { Oppgave } from '../typer/oppgaveTsType';
 import type { ReserverOppgaveType } from '../typer/reserverOppgaveType';
@@ -29,7 +28,7 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  navAnsatt?: NavAnsatt;
+  ansattIdent?: string;
 }
 
 export const OppgaveJournalføringIndex = (props: Props) => {
@@ -43,7 +42,7 @@ export const OppgaveJournalføringIndex = (props: Props) => {
 /**
  * Toppkomponent, orkestrerer restkall for journalføring
  */
-const JournalforingIndex = ({ navAnsatt }: Props) => {
+const JournalforingIndex = ({ ansattIdent }: Props) => {
   const [valgtOppgave, setValgtOppgave] = useState<Oppgave | undefined>(undefined);
   const [visModal, setVisModal] = useState(false);
 
@@ -51,7 +50,7 @@ const JournalforingIndex = ({ navAnsatt }: Props) => {
     data: alleOppgaver,
     refetch: innhentAlleOppgaverPåNytt,
     status,
-  } = useQuery(hentAlleJournalOppgaver(navAnsatt?.brukernavn));
+  } = useQuery(hentAlleJournalOppgaver(ansattIdent));
 
   const {
     mutate: hentJournalpost,
@@ -126,7 +125,7 @@ const JournalforingIndex = ({ navAnsatt }: Props) => {
     }
   };
 
-  if (!navAnsatt) {
+  if (!ansattIdent) {
     return (
       <Heading size="medium" level="2">
         <FormattedMessage id="Journalforing.Tilgang" />
@@ -164,7 +163,7 @@ const JournalforingIndex = ({ navAnsatt }: Props) => {
       <JournalføringIndex
         valgtOppgave={valgtOppgave}
         valgtJournalpost={valgtJournalpost}
-        navAnsatt={navAnsatt}
+        ansattIdent={ansattIdent}
         velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         submitJournalføring={journalførCallback}

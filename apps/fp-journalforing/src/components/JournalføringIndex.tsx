@@ -1,5 +1,3 @@
-import type { NavAnsatt } from '@navikt/fp-types';
-
 import type { JournalførSubmitValue } from '../typer/ferdigstillJournalføringSubmit';
 import type { Journalpost } from '../typer/journalpostTsType';
 import type { Oppgave } from '../typer/oppgaveTsType';
@@ -10,7 +8,7 @@ import { OppgaveTabell } from './oppgaver/OppgaveTabell';
 import styles from './journalføringIndex.module.css';
 
 type Props = Readonly<{
-  navAnsatt: NavAnsatt;
+  ansattIdent: string;
   velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
   avbrytVisningAvJournalpost: () => void;
   valgtOppgave?: Oppgave;
@@ -24,7 +22,7 @@ type Props = Readonly<{
  * JournalføringIndex - Styrer logikk rundt valg av oppgave i listen med oppgaver
  */
 export const JournalføringIndex = ({
-  navAnsatt,
+  ansattIdent,
   valgtOppgave,
   valgtJournalpost,
   velgOppgaveOgHentJournalpost,
@@ -38,7 +36,7 @@ export const JournalføringIndex = ({
       <div className={styles['sentrertInnhold']}>
         <OppgaveTabell
           velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
-          navAnsatt={navAnsatt}
+          ansattIdent={ansattIdent}
           reserverOppgave={reserverOppgave}
         />
       </div>
@@ -48,7 +46,7 @@ export const JournalføringIndex = ({
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         oppgave={valgtOppgave}
         journalpost={valgtJournalpost}
-        navAnsatt={navAnsatt}
+        ansattIdent={ansattIdent}
         submitJournalføring={submitJournalføring}
         reserverOppgave={reserverOppgave}
         flyttTilGosys={flyttTilGosys}

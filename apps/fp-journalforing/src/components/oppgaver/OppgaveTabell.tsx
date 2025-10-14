@@ -3,9 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Table } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
-import type { NavAnsatt } from '@navikt/fp-types';
-
-import { hentAlleJournalOppgaver } from '../../data/fpFordelApi';
+import { hentAlleJournalOppgaver } from '../../data/journalføringApi';
 import type { Oppgave } from '../../typer/oppgaveTsType';
 import type { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
 import { OppgaveTabellRad } from './OppgaveTabellRad';
@@ -14,15 +12,15 @@ import styles from './oppgaveTabell.module.css';
 
 type Props = Readonly<{
   velgOppgaveOgHentJournalpost: (oppgave: Oppgave) => void;
-  navAnsatt: NavAnsatt;
+  ansattIdent: string;
   reserverOppgave: (data: ReserverOppgaveType) => void;
 }>;
 
 /**
  * OppgaveTabell - Presenterer liste over oppgaver og tar inn callback for å sette valgt oppgave
  */
-export const OppgaveTabell = ({ velgOppgaveOgHentJournalpost, navAnsatt, reserverOppgave }: Props) => {
-  const { data: oppgaver } = useQuery(hentAlleJournalOppgaver(navAnsatt.brukernavn));
+export const OppgaveTabell = ({ velgOppgaveOgHentJournalpost, ansattIdent, reserverOppgave }: Props) => {
+  const { data: oppgaver } = useQuery(hentAlleJournalOppgaver(ansattIdent));
 
   if ((oppgaver ?? []).length < 1) {
     return (
@@ -66,7 +64,7 @@ export const OppgaveTabell = ({ velgOppgaveOgHentJournalpost, navAnsatt, reserve
             oppgave={oppgave}
             velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
             key={oppgave.journalpostId}
-            navAnsatt={navAnsatt}
+            ansattIdent={ansattIdent}
             reserverOppgave={reserverOppgave}
           />
         ))}

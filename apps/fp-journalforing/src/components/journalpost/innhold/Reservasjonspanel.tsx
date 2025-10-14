@@ -2,23 +2,21 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Button, Tag } from '@navikt/ds-react';
 
-import type { NavAnsatt } from '@navikt/fp-types';
-
 import type { Oppgave } from '../../../typer/oppgaveTsType';
 import type { ReserverOppgaveType } from '../../../typer/reserverOppgaveType';
 
 type Props = Readonly<{
   oppgave: Oppgave;
-  navAnsatt: NavAnsatt;
+  ansattIdent: string;
   reserverOppgave: (data: ReserverOppgaveType) => void;
 }>;
 
 /**
  * Reservasjonspanel - Inneholder informasjon om hvem som har reservert saken og mulighet for å reservere saken på saksbehandler
  */
-export const Reservasjonspanel = ({ oppgave, reserverOppgave, navAnsatt }: Props) => {
+export const Reservasjonspanel = ({ oppgave, reserverOppgave, ansattIdent }: Props) => {
   const reserverOppgaveAction = () => {
-    const reservasjonFor = !oppgave.reservertAv ? navAnsatt.brukernavn : '';
+    const reservasjonFor = !oppgave.reservertAv ? ansattIdent : '';
     reserverOppgave({
       journalpostId: oppgave.journalpostId,
       reserverFor: reservasjonFor,
@@ -27,7 +25,7 @@ export const Reservasjonspanel = ({ oppgave, reserverOppgave, navAnsatt }: Props
 
   return (
     <>
-      {oppgave.reservertAv && navAnsatt.brukernavn === oppgave.reservertAv && (
+      {oppgave.reservertAv && ansattIdent === oppgave.reservertAv && (
         <BodyShort>
           <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
           <Tag size="small" variant="alt3" style={{ marginLeft: '0.5rem' }}>
@@ -38,7 +36,7 @@ export const Reservasjonspanel = ({ oppgave, reserverOppgave, navAnsatt }: Props
           </Button>
         </BodyShort>
       )}
-      {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
+      {oppgave.reservertAv && ansattIdent !== oppgave.reservertAv && (
         <BodyShort>
           <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
           <Tag size="small" variant="alt3" style={{ marginLeft: '0.5rem' }}>

@@ -4,8 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import { Alert, BodyLong, Heading, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
-import type { NavAnsatt } from '@navikt/fp-types';
-
 import type {
   DokumentTittelSubmitValue,
   JournalførSubmitValue,
@@ -108,7 +106,7 @@ type Props = Readonly<{
   forhåndsvisBruker: (fnr: string) => void;
   brukerTilForhåndsvisning?: ForhåndsvisBrukerRespons;
   lasterBruker: boolean;
-  navAnsatt: NavAnsatt;
+  ansattIdent: string;
   reserverOppgave: (data: ReserverOppgaveType) => void;
   flyttTilGosys: (data: string) => void;
 }>;
@@ -126,7 +124,7 @@ export const JournalpostDetaljer = ({
   brukerTilForhåndsvisning,
   lasterBruker,
   reserverOppgave,
-  navAnsatt,
+  ansattIdent,
   flyttTilGosys,
 }: Props) => {
   const formMethods = useForm<JournalføringFormValues>({
@@ -156,7 +154,9 @@ export const JournalpostDetaljer = ({
       <VStack gap="space-20">
         <div>
           <JournalpostTittelForm journalpost={journalpost} readOnly={skalBareKunneEndreSak} />
-          {oppgave && <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} navAnsatt={navAnsatt} />}
+          {oppgave && (
+            <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} ansattIdent={ansattIdent} />
+          )}
         </div>
         <BrukerAvsenderPanel
           journalpost={journalpost}

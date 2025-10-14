@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { NavAnsatt } from '@navikt/fp-types';
 
 import type { Journalpost } from '../../typer/journalpostTsType';
 import type { Oppgave } from '../../typer/oppgaveTsType';
@@ -15,10 +14,6 @@ const withIntl = getIntlDecorator(messages);
 
 const saksbehandler = 'Z123343';
 const journalpost = 986547336994;
-
-const navAnsattDefault = {
-  brukernavn: saksbehandler,
-} as NavAnsatt;
 
 const defaultOppgave: Oppgave = {
   journalpostId: journalpost.toString(),
@@ -144,7 +139,7 @@ export const VisOppgaveForSubmitReservertAvMeg: Story = {
   args: {
     oppgave: { ...defaultOppgave, reservertAv: saksbehandler },
     journalpost: detaljertJournalpostMal,
-    navAnsatt: navAnsattDefault,
+    ansattIdent: saksbehandler,
   },
 };
 
@@ -152,16 +147,14 @@ export const VisJournalpostKlage: Story = {
   args: {
     oppgave: { ...defaultOppgave, reservertAv: saksbehandler },
     journalpost: journalpostKlage,
-    navAnsatt: navAnsattDefault,
+    ansattIdent: saksbehandler,
   },
 };
 
 export const VisOppgaveReservertAvAndre: Story = {
   args: {
     ...VisOppgaveForSubmitReservertAvMeg.args,
-    navAnsatt: {
-      brukernavn: 'X123456',
-    } as NavAnsatt,
+    ansattIdent: 'X123456',
   },
 };
 

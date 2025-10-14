@@ -66,3 +66,22 @@ export const reserverBruker = (values: ReserverOppgaveType) =>
 
 export const flyttOppgaveTilGosys = (journalpostId: string) =>
   kyExtended.post(FpFordelUrl.FLYTT_OPPGAVE_TIL_GOSYS, { json: { journalpostId } }).json<void>();
+
+export type BrukerInfo = {
+  onPremisesSamAccountName: string;
+  displayName: string;
+  givenName: string;
+  mail: string;
+  officeLocation: string;
+  surname: string;
+  userPrincipalName: string;
+  id: string;
+  jobTitle: string;
+};
+
+export const brukerOptions = () =>
+  queryOptions({
+    queryKey: ['bruker'],
+    queryFn: () => kyExtended.get(`${globalThis.location.href}/me`).json<BrukerInfo>(),
+    staleTime: Infinity,
+  });
