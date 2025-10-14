@@ -15,8 +15,6 @@
   "ErBarnFødt.Label": "Er {antallBarn, plural, one {barnet} other {barna}} født?",
   "ErBarnFødt.Ja": "Ja",
   "ErBarnFødt.Nei": "Nei",
-  "FaktaFraFReg.Tittel": "Opplysninger fra Folkeregisteret",
-  "FaktaFraFReg.IngenBarn": "Det er ikke registrert noen fødselshendelse i Folkeregisteret",
   "FaktaFraSøknad.Tittel": "Opplysninger oppgitt i søknaden",
   "FaktaFraSøknad.Terminbekreftelse": "Terminbekreftelse",
   "FaktaFraSøknad.VisTerminbekreftelse": "Vis terminbekreftelse",

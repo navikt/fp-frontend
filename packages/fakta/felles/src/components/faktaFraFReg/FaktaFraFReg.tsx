@@ -1,33 +1,35 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { BodyShort, HStack, VStack } from '@navikt/ds-react';
 import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { createIntl } from '@navikt/ft-utils';
 
-import type { BarnHendelseData, FødselRegister } from '@navikt/fp-types';
+import type { BarnHendelseData } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
-
-import { erBarnUlike } from './barnUtils';
 
 import styles from './faktaFraFReg.module.css';
 
+import messages from '../../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 interface Props {
-  register: FødselRegister;
+  barn: BarnHendelseData[];
 }
 
-export const FaktaFraFReg = ({ register: { barn } }: Props) => {
-  const intl = useIntl();
-
+export const FaktaFraFReg = ({ barn }: Props) => {
   return (
-    <FaktaKort label={intl.formatMessage({ id: 'FaktaFraFReg.Tittel' })}>
-      {barn.length === 0 ? (
-        <BodyShort>
-          <FormattedMessage id="FaktaFraFReg.IngenBarn" />
-        </BodyShort>
-      ) : (
-        <BarnVisning barn={barn} />
-      )}
-    </FaktaKort>
+    <RawIntlProvider value={intl}>
+      <FaktaKort label={intl.formatMessage({ id: 'FaktaFraFReg.Tittel' })}>
+        {barn.length === 0 ? (
+          <BodyShort>
+            <FormattedMessage id="FaktaFraFReg.IngenBarn" />
+          </BodyShort>
+        ) : (
+          <BarnVisning barn={barn} />
+        )}
+      </FaktaKort>
+    </RawIntlProvider>
   );
 };
 
@@ -43,16 +45,16 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
     return (
       <VStack gap="space-16">
         <ReadOnlyField
-          label={<FormattedMessage id="Label.Fødselsdato" />}
+          label={<FormattedMessage id="FaktaFraFReg.Fødselsdato" />}
           value={<DateLabel dateString={barnet.fødselsdato} />}
         />
         {barnet.dødsdato && (
           <ReadOnlyField
-            label={<FormattedMessage id="Label.Dødsdato" />}
+            label={<FormattedMessage id="FaktaFraFReg.Dødsdato" />}
             value={<DateLabel dateString={barnet.dødsdato} />}
           />
         )}
-        <ReadOnlyField label={<FormattedMessage id="Label.AntallBarn" />} value={barn.length} />
+        <ReadOnlyField label={<FormattedMessage id="FaktaFraFReg.AntallBarn" />} value={barn.length} />
       </VStack>
     );
   }
@@ -63,13 +65,13 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
         <HStack key={fødselsdato + dødsdato} gap="space-24" wrap={false} className={styles['grid']}>
           <ReadOnlyField
             size="medium"
-            label={<FormattedMessage id="Label.Barn" />}
+            label={<FormattedMessage id="FaktaFraFReg.Barn" />}
             value={index + 1}
             hideLabel={index > 0}
           />
           <ReadOnlyField
             size="medium"
-            label={<FormattedMessage id="Label.Fødselsdato" />}
+            label={<FormattedMessage id="FaktaFraFReg.Fødselsdato" />}
             value={<DateLabel dateString={fødselsdato} />}
             hideLabel={index > 0}
           />
@@ -77,7 +79,7 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
             <ReadOnlyField
               size="medium"
               value={dødsdato ? <DateLabel dateString={dødsdato} /> : '-'}
-              label={<FormattedMessage id="Label.Dødsdato" />}
+              label={<FormattedMessage id="FaktaFraFReg.Dødsdato" />}
               hideLabel={index > 0}
             />
           )}
@@ -86,3 +88,6 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
     </div>
   );
 };
+
+export const erBarnUlike = (sammenlignbartBarn: BarnHendelseData) => (barn: BarnHendelseData) =>
+  barn.fødselsdato !== sammenlignbartBarn.fødselsdato || barn.dødsdato !== sammenlignbartBarn.dødsdato;

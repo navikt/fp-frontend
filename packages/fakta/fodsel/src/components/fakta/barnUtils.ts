@@ -1,5 +1,6 @@
 import { dateFormat } from '@navikt/ft-utils';
 
+import { erBarnUlike } from '@navikt/fp-fakta-felles';
 import type { BarnHendelseData, FødselGjeldende } from '@navikt/fp-types';
 
 export const formaterLiv = ({ fødselsdato, dødsdato }: BarnHendelseData): string => {
@@ -15,6 +16,3 @@ export const erGjeldendeBarnLike = (alleBarn: FødselGjeldende['barn']) => {
   }
   return !alleBarn.some(({ barn, kilde }) => kilde !== barnet.kilde || erBarnUlike(barnet.barn)(barn));
 };
-
-export const erBarnUlike = (sammenlignbartBarn: BarnHendelseData) => (barn: BarnHendelseData) =>
-  barn.fødselsdato !== sammenlignbartBarn.fødselsdato || barn.dødsdato !== sammenlignbartBarn.dødsdato;

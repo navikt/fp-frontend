@@ -46,5 +46,12 @@
   "FaktaKilde.FREG": "FRA FOLKEREGISTERET",
   "FaktaKilde.MEDL": "FRA MEDLEMSKAPSREGISTERET",
   "FaktaKilde.Ukjent": "FRA UKJENT KILDE",
-  "FaktaKilde.SBH": "FRA SAKSBEHANDLER"
+  "FaktaKilde.SBH": "FRA SAKSBEHANDLER",
+
+  "FaktaFraFReg.Tittel": "Opplysninger fra Folkeregisteret",
+  "FaktaFraFReg.IngenBarn": "Det er ikke registrert noen fødselshendelse i Folkeregisteret",
+  "FaktaFraFReg.Barn": "Barn",
+  "FaktaFraFReg.Fødselsdato": "Fødselsdato",
+  "FaktaFraFReg.Dødsdato": "Dødsdato",
+  "FaktaFraFReg.AntallBarn": "Antall barn"
 }
