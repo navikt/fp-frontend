@@ -219,17 +219,8 @@ const buildInitialValues = (
   omsorgsovertakelseDato: omsorgsovertakelse.gjeldende.omsorgsovertakelseDato,
   vilkårUtfallType: omsorgsovertakelse.saksbehandlerVurdering?.vilkårUtfallType ?? 'IKKE_VURDERT',
   avslagskode: omsorgsovertakelse.saksbehandlerVurdering?.avslagsårsak,
-  fødselsdatoer: omsorgsovertakelse.søknad.barn.map((søknadBarn, index) => {
-    const barn = omsorgsovertakelse.gjeldende.barn.find(
-      gjeldendeBarn => gjeldendeBarn.barnNummer === søknadBarn.barnNummer,
-    );
-    return {
-      fødselsdato: barn?.fødselsdato ?? søknadBarn.fødselsdato,
-      barnNummer: søknadBarn.barnNummer ?? index + 1,
-      skalBrukes: !!barn,
-    };
-  }),
-  ektefellesBarn: omsorgsovertakelse.gjeldende.erEktefellesBarn,
+  fødselsdatoer: mapBarn(omsorgsovertakelse),
+  ektefellesBarn: mapEktefellesBarn(omsorgsovertakelse.gjeldende),
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel),
 });
 
@@ -249,4 +240,29 @@ const sortByNavn = (a: { navn: string } | undefined, b: { navn: string } | undef
   if (!a) return 1;
   if (!b) return -1;
   return a.navn.localeCompare(b.navn);
+};
+
+const mapEktefellesBarn = (gjeldende: OmsorgsovertakelseDto['gjeldende']) => {
+  if (gjeldende.erEktefellesBarn === undefined) {
+    if (gjeldende.delvilkår === 'FP_VK_16') {
+      return false;
+    }
+    if (gjeldende.delvilkår === 'FP_VK_16S') {
+      return true;
+    }
+  }
+  return gjeldende.erEktefellesBarn;
+};
+
+const mapBarn = (omsorgsovertakelse: OmsorgsovertakelseDto) => {
+  return omsorgsovertakelse.søknad.barn.map((søknadBarn, index) => {
+    const barn = omsorgsovertakelse.gjeldende.barn.find(
+      gjeldendeBarn => gjeldendeBarn.barnNummer === søknadBarn.barnNummer,
+    );
+    return {
+      fødselsdato: barn?.fødselsdato ?? søknadBarn.fødselsdato,
+      barnNummer: søknadBarn.barnNummer ?? index + 1,
+      skalBrukes: !!barn,
+    };
+  });
 };
