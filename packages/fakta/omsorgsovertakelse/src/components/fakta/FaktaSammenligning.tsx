@@ -35,7 +35,7 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
         </Table.Header>
         <Table.Body>
           <Table.Row shadeOnHover={false}>
-            <Table.HeaderCell>
+            <Table.HeaderCell scope="row">
               <FormattedMessage id="Label.Omsorgsovertakelsesdato" />
             </Table.HeaderCell>
             <Table.DataCell>
@@ -53,7 +53,7 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
 
           {(søknad.ankomstNorgeDato || gjeldende.ankomstNorgeDato) && (
             <Table.Row shadeOnHover={false}>
-              <Table.HeaderCell>
+              <Table.HeaderCell scope="row">
                 <FormattedMessage id="Label.Ankomstdato" />
               </Table.HeaderCell>
               <Table.DataCell>
@@ -71,7 +71,7 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
           )}
 
           <Table.Row shadeOnHover={false}>
-            <Table.HeaderCell>
+            <Table.HeaderCell scope="row">
               <FormattedMessage id="Label.AntallBarn" />
             </Table.HeaderCell>
             <Table.DataCell>{søknad.antallBarn}</Table.DataCell>
@@ -90,7 +90,7 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
             const gjeldendeFødselsdato = gjeldende.barn.at(index)?.fødselsdato;
             return (
               <Table.Row shadeOnHover={false} key={barn.barnNummer}>
-                <Table.HeaderCell>
+                <Table.HeaderCell scope="row">
                   {lengsteListeBarn.length === 1 ? (
                     <FormattedMessage id="Label.Fødselsdato" />
                   ) : (
@@ -120,7 +120,7 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
           })}
           {søknad.erEktefellesBarn !== undefined && (
             <Table.Row shadeOnHover={false}>
-              <Table.HeaderCell>
+              <Table.HeaderCell scope="row">
                 <FormattedMessage id="Label.ErEktefellesBarn" />
               </Table.HeaderCell>
               <Table.DataCell>
@@ -142,7 +142,7 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
           )}
 
           <Table.Row shadeOnHover={false}>
-            <Table.HeaderCell>
+            <Table.HeaderCell scope="row">
               <FormattedMessage id="Label.Delvilkår" />
             </Table.HeaderCell>
             <Table.DataCell>
