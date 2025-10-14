@@ -13,13 +13,13 @@ type Story = StoryObj<typeof meta>;
 
 export const IngenBarn: Story = {
   args: {
-    barn: [],
+    barna: [],
   },
 };
 
 export const EttBarn: Story = {
   args: {
-    barn: [
+    barna: [
       {
         fødselsdato: '2025-06-03',
       },
@@ -29,7 +29,7 @@ export const EttBarn: Story = {
 
 export const EttBarnMedDødsdato: Story = {
   args: {
-    barn: [
+    barna: [
       {
         fødselsdato: '2025-05-28',
         dødsdato: '2025-06-01',
@@ -40,7 +40,7 @@ export const EttBarnMedDødsdato: Story = {
 
 export const ToBarnMedEnDødsdato: Story = {
   args: {
-    barn: [
+    barna: [
       {
         fødselsdato: '2025-05-01',
         dødsdato: '2025-05-02',

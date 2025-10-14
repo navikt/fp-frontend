@@ -13,33 +13,33 @@ import styles from './faktaFraFReg.module.css';
 import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
+
 interface Props {
-  barn: BarnHendelseData[];
+  barna: BarnHendelseData[];
 }
 
-export const FaktaFraFReg = ({ barn }: Props) => {
+export const FaktaFraFReg = ({ barna }: Props) => {
   return (
     <RawIntlProvider value={intl}>
       <FaktaKort label={intl.formatMessage({ id: 'FaktaFraFReg.Tittel' })}>
-        {barn.length === 0 ? (
+        {barna.length === 0 ? (
           <BodyShort>
             <FormattedMessage id="FaktaFraFReg.IngenBarn" />
           </BodyShort>
         ) : (
-          <BarnVisning barn={barn} />
+          <BarnVisning barna={barna} />
         )}
       </FaktaKort>
     </RawIntlProvider>
   );
 };
 
-const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
-  const barnet = barn.at(0);
+const BarnVisning = ({ barna }: { barna: BarnHendelseData[] }) => {
+  const barnet = barna.at(0);
   if (!barnet) {
     return null;
   }
-  const barnErLike = !barn.some(erBarnUlike(barnet));
-  const harDødtBarn = barn.some(b => b.dødsdato);
+  const barnErLike = !barna.some(erBarnUlike(barnet));
 
   if (barnErLike) {
     return (
@@ -54,14 +54,15 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
             value={<DateLabel dateString={barnet.dødsdato} />}
           />
         )}
-        <ReadOnlyField label={<FormattedMessage id="FaktaFraFReg.AntallBarn" />} value={barn.length} />
+        <ReadOnlyField label={<FormattedMessage id="FaktaFraFReg.AntallBarn" />} value={barna.length} />
       </VStack>
     );
   }
 
+  const harDødtBarn = barna.some(b => b.dødsdato);
   return (
     <div>
-      {barn.map(({ fødselsdato, dødsdato }, index) => (
+      {barna.map(({ fødselsdato, dødsdato }, index) => (
         <HStack key={fødselsdato + dødsdato} gap="space-24" wrap={false} className={styles['grid']}>
           <ReadOnlyField
             size="medium"

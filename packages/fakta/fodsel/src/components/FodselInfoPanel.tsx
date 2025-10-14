@@ -44,7 +44,7 @@ export const FodselInfoPanel = ({ fødsel, terminbekreftelseDokument }: Props) =
 
       <HGrid columns={2} gap="space-16">
         <FaktaFraSøknad søknad={fødsel.søknad} terminbekreftelseDokument={terminbekreftelseDokument} />
-        <FaktaFraFReg barn={fødsel.register.barn} />
+        <FaktaFraFReg barna={fødsel.register.barn} />
       </HGrid>
 
       {terminbekreftelseAp && <SjekkTerminbekreftelseForm fødsel={fødsel} aksjonspunkt={terminbekreftelseAp} />}
