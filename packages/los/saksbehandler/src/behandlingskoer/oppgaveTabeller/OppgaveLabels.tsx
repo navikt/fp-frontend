@@ -29,7 +29,7 @@ export const OppgaveLabels = ({ oppgave }: Props) => {
       </Tag>
       <Tag
         size="small"
-        variant="warning-filled"
+        variant="alt1-filled"
         title={behandlingTyper.find(b => b.kode === oppgave.behandlingstype)?.navn}
       >
         {hentAlleBehandlingstypeKortnavn(intl)[oppgave.behandlingstype]}
