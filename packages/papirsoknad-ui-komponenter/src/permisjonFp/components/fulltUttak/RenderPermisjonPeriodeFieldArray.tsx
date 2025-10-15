@@ -99,10 +99,10 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
         const erForsteRad = index === 0;
         const periode = watch(getPrefix(index));
 
-        const periodeFomForTidlig = erPeriodeFormFør01012019(periode.periodeFom);
+        const periodeFomForTidlig = erPeriodeFormFør01012019(periode?.periodeFom);
 
         const skalDisableMorsAktivitet =
-          PERIODS_WITH_NO_MORS_AKTIVITET.has(periode.periodeType) || periode.periodeType === '-';
+          PERIODS_WITH_NO_MORS_AKTIVITET.has(periode?.periodeType || '-') || periode?.periodeType === '-';
 
         return (
           <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
@@ -174,7 +174,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               />
             </div>
 
-            {periode.harSamtidigUttak && (
+            {periode?.harSamtidigUttak && (
               <RhfTextField
                 name={`${getPrefix(index)}.samtidigUttaksprosent`}
                 control={control}

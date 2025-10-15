@@ -40,10 +40,18 @@ const getValiderFomTomRekkefølge =
     const prefix = `${getPrefix(index)}` as const;
     const fomVerdi = getValues(`${prefix}.periodeFom`);
     const tomVerdi = getValues(`${prefix}.periodeTom`);
-    if (!tomVerdi && !fomVerdi) {
+
+    if (erFør) {
+      if (!tomVerdi) {
+        return null;
+      }
+      return dateBeforeOrEqual(tomVerdi)(fomVerdi);
+    }
+
+    if (!fomVerdi) {
       return null;
     }
-    return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+    return dateAfterOrEqual(fomVerdi)(tomVerdi);
   };
 
 const mapTyper = (typer: KodeverkMedNavn<'UtsettelseÅrsak'>[]): ReactElement[] =>

@@ -18,24 +18,24 @@
     "storybook": "storybook dev --quiet -p 7010"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.31.0",
+    "@navikt/ds-react": "7.32.1",
     "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/fp-ui-komponenter": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-form-hooks": "9.2.2",
-    "@navikt/ft-form-validators": "4.2.11",
-    "@navikt/ft-ui-komponenter": "6.2.8",
-    "@navikt/ft-utils": "3.8.10",
+    "@navikt/ft-form-hooks": "9.2.3",
+    "@navikt/ft-form-validators": "4.2.12",
+    "@navikt/ft-ui-komponenter": "6.2.9",
+    "@navikt/ft-utils": "3.8.11",
     "dayjs": "1.11.18",
-    "react": "19.1.1",
-    "react-hook-form": "7.63.0",
-    "react-intl": "7.1.11"
+    "react": "19.2.0",
+    "react-hook-form": "7.65.0",
+    "react-intl": "7.1.14"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.31.0",
+    "@navikt/ds-css": "7.32.1",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
@@ -48,7 +48,7 @@
     "eslint": "9.37.0",
     "storybook": "9.1.10",
     "typescript": "5.9.3",
-    "vite": "7.1.9",
+    "vite": "7.1.10",
     "vitest": "3.2.4"
   }
 }
