@@ -256,24 +256,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bundled-es-modules/cookie@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@bundled-es-modules/cookie@npm:2.0.1"
-  dependencies:
-    cookie: ^0.7.2
-  checksum: 4f210f9316a612f03a46c58f0e3de14b2598f36905433b5ac91e305a4185bd3cb0b141622fa54cff2fce18adbac0b5a8df67dca1874aabd81b7a631fc826e116
-  languageName: node
-  linkType: hard
-
-"@bundled-es-modules/statuses@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@bundled-es-modules/statuses@npm:1.0.1"
-  dependencies:
-    statuses: ^2.0.1
-  checksum: bcaa7de192e73056950b5fd20e75140d8d09074b1adc4437924b2051bb02b4dbf568c96e67d53b220fb7d735c3446e2ba746599cb1793ab2d23dd2ef230a8622
-  languageName: node
-  linkType: hard
-
 "@codexteam/icons@npm:^0.0.4":
   version: 0.0.4
   resolution: "@codexteam/icons@npm:0.0.4"
@@ -797,13 +779,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/cli-lib@npm:7.4.3":
-  version: 7.4.3
-  resolution: "@formatjs/cli-lib@npm:7.4.3"
+"@formatjs/cli-lib@npm:7.4.4":
+  version: 7.4.4
+  resolution: "@formatjs/cli-lib@npm:7.4.4"
   dependencies:
-    "@formatjs/icu-messageformat-parser": 2.11.3
-    "@formatjs/icu-skeleton-parser": 1.8.15
-    "@formatjs/ts-transformer": 3.14.1
+    "@formatjs/icu-messageformat-parser": 2.11.4
+    "@formatjs/icu-skeleton-parser": 1.8.16
+    "@formatjs/ts-transformer": 3.14.2
     "@types/estree": ^1.0.6
     "@types/fs-extra": ^11.0.4
     "@types/node": ^22.0.0
@@ -814,7 +796,7 @@ __metadata:
     json-stable-stringify: ^1.3.0
     loud-rejection: ^2
     tslib: ^2.8.0
-    typescript: 5.8.3
+    typescript: ^5.6.0
   peerDependencies:
     "@glimmer/syntax": ^0.95.0
     "@vue/compiler-core": ^3.5.12
@@ -838,7 +820,7 @@ __metadata:
       optional: true
     vue:
       optional: true
-  checksum: a38d4fa3d97115c43c65363aba751221d8cfe57f692436660c63556c40bb5f288e575815861a3ba0acd2a873d2815b97b0a84e2bbbf30cd0d4d7e11d37171d63
+  checksum: 6ef1546232de32c6020f2fdc6dcf1d1b223420541cf4d248eaf7e8cf0c7b78c4d27d6040a1c3986bedf745479cd0423ac5c204752feb4015430e8218b452f906
   languageName: node
   linkType: hard
 
@@ -854,15 +836,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/ecma402-abstract@npm:2.3.5":
-  version: 2.3.5
-  resolution: "@formatjs/ecma402-abstract@npm:2.3.5"
+"@formatjs/ecma402-abstract@npm:2.3.6":
+  version: 2.3.6
+  resolution: "@formatjs/ecma402-abstract@npm:2.3.6"
   dependencies:
     "@formatjs/fast-memoize": 2.2.7
     "@formatjs/intl-localematcher": 0.6.2
     decimal.js: ^10.4.3
     tslib: ^2.8.0
-  checksum: f698576992ddd5f125ff33de37a6c382135421493f29d88613162d7af1596e11c4c6546e681a5443100a14be9d1d68942c9f5e0731160159110ac7ab30fa9c17
+  checksum: ceb2a4b771f63792ed9de1c342da0e27004874c67de963a43b805d21b7a930ccdc62b7aa9ff2ef5da0a750c01b6df02168079218d57a6a37930f927c145c26d2
   languageName: node
   linkType: hard
 
@@ -886,14 +868,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/icu-messageformat-parser@npm:2.11.3":
-  version: 2.11.3
-  resolution: "@formatjs/icu-messageformat-parser@npm:2.11.3"
+"@formatjs/icu-messageformat-parser@npm:2.11.4":
+  version: 2.11.4
+  resolution: "@formatjs/icu-messageformat-parser@npm:2.11.4"
   dependencies:
-    "@formatjs/ecma402-abstract": 2.3.5
-    "@formatjs/icu-skeleton-parser": 1.8.15
+    "@formatjs/ecma402-abstract": 2.3.6
+    "@formatjs/icu-skeleton-parser": 1.8.16
     tslib: ^2.8.0
-  checksum: 75aa12d4b5aaf7849780120430e49b6b356350b0820b5c1ea92c5527c3f0abcf4822a1ba355c88e186ad1facafb2e617ea57988a6b795ba98e0ab8d41feb9266
+  checksum: 5213e61e729d0dca2e89f7774d8ef6a84916a50b8bb6cf42acddd8d8174a22b1a3e8ecec0b7a262921b05d1bf55842dea743c4390de3419168e85e7d250c3baa
   languageName: node
   linkType: hard
 
@@ -907,13 +889,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/icu-skeleton-parser@npm:1.8.15":
-  version: 1.8.15
-  resolution: "@formatjs/icu-skeleton-parser@npm:1.8.15"
+"@formatjs/icu-skeleton-parser@npm:1.8.16":
+  version: 1.8.16
+  resolution: "@formatjs/icu-skeleton-parser@npm:1.8.16"
   dependencies:
-    "@formatjs/ecma402-abstract": 2.3.5
+    "@formatjs/ecma402-abstract": 2.3.6
     tslib: ^2.8.0
-  checksum: a8ad2b002663466a2937c73d4b5db64da7a74655ace740ca3174a54d9322b290e52df80ae724fb3acf1171a813241b10a3f2e9ecd71ed374fe74832613b92739
+  checksum: 05dc404c425c1bf09a03a8ca0f69ec95e4ba3cf8ef15555f8ae39f3a775cfb2904f9c60a3e0b8f1b27b8fc17c7b09ca380964e55b32b89bec8d69f83ddfcbd73
   languageName: node
   linkType: hard
 
@@ -953,22 +935,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/ts-transformer@npm:3.14.1":
-  version: 3.14.1
-  resolution: "@formatjs/ts-transformer@npm:3.14.1"
+"@formatjs/ts-transformer@npm:3.14.2":
+  version: 3.14.2
+  resolution: "@formatjs/ts-transformer@npm:3.14.2"
   dependencies:
-    "@formatjs/icu-messageformat-parser": 2.11.3
+    "@formatjs/icu-messageformat-parser": 2.11.4
     "@types/node": ^22.0.0
     chalk: ^4.1.2
     json-stable-stringify: ^1.3.0
     tslib: ^2.8.0
-    typescript: 5.8.3
+    typescript: ^5.6.0
   peerDependencies:
     ts-jest: ^29
   peerDependenciesMeta:
     ts-jest:
       optional: true
-  checksum: f8bfb28ba5cdccb8f81cf14fb7e2fd90ca4e9f14f75469d748fe1c68ecddf8a3e000899ee6ff8a7386880c82630f9134dd938b6e7731c926b7b4eeef7774d56c
+  checksum: b6af20b8f2e2fcdbaffbc9e3f454f08f8f651215aca3b12516acf2a6eaee1cd7ecdcbf3118f0dc12e3db7b0c9fae844283a6ac3e67489d88e5658462e0323129
   languageName: node
   linkType: hard
 
@@ -993,9 +975,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/openapi-ts@npm:0.85.0":
-  version: 0.85.0
-  resolution: "@hey-api/openapi-ts@npm:0.85.0"
+"@hey-api/openapi-ts@npm:0.85.2":
+  version: 0.85.2
+  resolution: "@hey-api/openapi-ts@npm:0.85.2"
   dependencies:
     "@hey-api/codegen-core": ^0.2.0
     "@hey-api/json-schema-ref-parser": 1.2.0
@@ -1010,7 +992,7 @@ __metadata:
     typescript: ">=5.5.3"
   bin:
     openapi-ts: bin/index.cjs
-  checksum: fe8e5acce79958b9b6fe26c330e240649c090e501a12921b9b85fb8eac8a75ad12b593cb3e3d227d69b39feca361eb3bd77a2c13f28044e4692b7ac5bf4c056b
+  checksum: 398e220174caa1d605abfd3acca4395d1cb793597cb0a57636886c8be73243eaf7666c78aade132b0b772725fc9f3b5bfd529387755f691786757112470cfd7f
   languageName: node
   linkType: hard
 
@@ -1237,10 +1219,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-stylelint@npm:7.31.0":
-  version: 7.31.0
-  resolution: "@navikt/aksel-stylelint@npm:7.31.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.31.0%2Fbcaa4965fd4666a6ed7e8026ad231bafa21a74bd"
-  checksum: 8d3c1c14438d441e9ef73665ac3df4679db36c188744e3005f79e256b70c4433b23a9c014c4df3dbc2986e6829b794a23dc1c34dfa621b70955b836e2a3d0bd4
+"@navikt/aksel-stylelint@npm:7.32.1":
+  version: 7.32.1
+  resolution: "@navikt/aksel-stylelint@npm:7.32.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.32.1%2F4263e87a30f3f7a20196a06adbf081e1e82a6052"
+  checksum: 4fc8144c4116d046c2a3d430ecdc88df16c9cf7c44cf81c32bbba42de17378d6272f3f90bb82e8432bcc8e87bca51dc0a7ea292b11b311643be6ebe5cdf8aff0
   languageName: node
   linkType: hard
 
@@ -1337,8 +1319,8 @@ __metadata:
     history: 5.3.0
     ky: 1.10.0
     lodash.debounce: 4.0.8
-    msw: 2.11.3
-    msw-storybook-addon: 2.0.5
+    msw: 2.11.5
+    msw-storybook-addon: 2.0.6
     p-limit: 7.1.1
     react: 19.1.1
     react-hook-form: 7.63.0
@@ -1396,7 +1378,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-adopsjon@workspace:packages/fakta/adopsjon"
   dependencies:
-    "@formatjs/cli-lib": 7.4.3
+    "@formatjs/cli-lib": 7.4.4
     "@navikt/aksel-icons": 7.31.0
     "@navikt/ds-css": 7.31.0
     "@navikt/ds-react": 7.31.0
@@ -1798,7 +1780,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorgsovertakelse@workspace:packages/fakta/omsorgsovertakelse"
   dependencies:
-    "@formatjs/cli-lib": 7.4.3
+    "@formatjs/cli-lib": 7.4.4
     "@navikt/aksel-icons": 7.31.0
     "@navikt/ds-css": 7.31.0
     "@navikt/ds-react": 7.31.0
@@ -1950,7 +1932,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta/tilrettelegging"
   dependencies:
-    "@formatjs/cli-lib": 7.4.3
+    "@formatjs/cli-lib": 7.4.4
     "@navikt/aksel-icons": 7.31.0
     "@navikt/ds-css": 7.31.0
     "@navikt/ds-react": 7.31.0
@@ -2282,8 +2264,8 @@ __metadata:
     eslint: 9.37.0
     history: 5.3.0
     ky: 1.10.0
-    msw: 2.11.3
-    msw-storybook-addon: 2.0.5
+    msw: 2.11.5
+    msw-storybook-addon: 2.0.6
     react: 19.1.1
     react-dom: 19.1.1
     react-intl: 7.1.11
@@ -2325,8 +2307,8 @@ __metadata:
     dayjs: 1.11.18
     eslint: 9.37.0
     ky: 1.10.0
-    msw: 2.11.3
-    msw-storybook-addon: 2.0.5
+    msw: 2.11.5
+    msw-storybook-addon: 2.0.6
     react: 19.1.1
     react-hook-form: 7.63.0
     react-intl: 7.1.11
@@ -2422,8 +2404,8 @@ __metadata:
     dayjs: 1.11.18
     eslint: 9.37.0
     ky: 1.10.0
-    msw: 2.11.3
-    msw-storybook-addon: 2.0.5
+    msw: 2.11.5
+    msw-storybook-addon: 2.0.6
     react: 19.1.1
     react-dom: 19.1.1
     react-hook-form: 7.63.0
@@ -4109,7 +4091,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
   dependencies:
-    "@formatjs/cli-lib": 7.4.3
+    "@formatjs/cli-lib": 7.4.4
     "@navikt/ds-css": 7.31.0
     "@navikt/ds-react": 7.31.0
     "@navikt/fp-config-eslint": "workspace:*"
@@ -4990,74 +4972,74 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli-darwin@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-darwin@npm:2.55.0"
+"@sentry/cli-darwin@npm:2.56.1":
+  version: 2.56.1
+  resolution: "@sentry/cli-darwin@npm:2.56.1"
   conditions: os=darwin
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm64@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-linux-arm64@npm:2.55.0"
+"@sentry/cli-linux-arm64@npm:2.56.1":
+  version: 2.56.1
+  resolution: "@sentry/cli-linux-arm64@npm:2.56.1"
   conditions: (os=linux | os=freebsd | os=android) & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-linux-arm@npm:2.55.0"
+"@sentry/cli-linux-arm@npm:2.56.1":
+  version: 2.56.1
+  resolution: "@sentry/cli-linux-arm@npm:2.56.1"
   conditions: (os=linux | os=freebsd | os=android) & cpu=arm
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-i686@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-linux-i686@npm:2.55.0"
+"@sentry/cli-linux-i686@npm:2.56.1":
+  version: 2.56.1
+  resolution: "@sentry/cli-linux-i686@npm:2.56.1"
   conditions: (os=linux | os=freebsd | os=android) & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-x64@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-linux-x64@npm:2.55.0"
+"@sentry/cli-linux-x64@npm:2.56.1":
+  version: 2.56.1
+  resolution: "@sentry/cli-linux-x64@npm:2.56.1"
   conditions: (os=linux | os=freebsd | os=android) & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-arm64@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-win32-arm64@npm:2.55.0"
+"@sentry/cli-win32-arm64@npm:2.56.1":
+  version: 2.56.1
+  resolution: "@sentry/cli-win32-arm64@npm:2.56.1"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-i686@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-win32-i686@npm:2.55.0"
+"@sentry/cli-win32-i686@npm:2.56.1":
+  version: 2.56.1
+  resolution: "@sentry/cli-win32-i686@npm:2.56.1"
   conditions: os=win32 & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-x64@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-win32-x64@npm:2.55.0"
+"@sentry/cli-win32-x64@npm:2.56.1":
+  version: 2.56.1
+  resolution: "@sentry/cli-win32-x64@npm:2.56.1"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli@npm:2.55.0"
+"@sentry/cli@npm:2.56.1":
+  version: 2.56.1
+  resolution: "@sentry/cli@npm:2.56.1"
   dependencies:
-    "@sentry/cli-darwin": 2.55.0
-    "@sentry/cli-linux-arm": 2.55.0
-    "@sentry/cli-linux-arm64": 2.55.0
-    "@sentry/cli-linux-i686": 2.55.0
-    "@sentry/cli-linux-x64": 2.55.0
-    "@sentry/cli-win32-arm64": 2.55.0
-    "@sentry/cli-win32-i686": 2.55.0
-    "@sentry/cli-win32-x64": 2.55.0
+    "@sentry/cli-darwin": 2.56.1
+    "@sentry/cli-linux-arm": 2.56.1
+    "@sentry/cli-linux-arm64": 2.56.1
+    "@sentry/cli-linux-i686": 2.56.1
+    "@sentry/cli-linux-x64": 2.56.1
+    "@sentry/cli-win32-arm64": 2.56.1
+    "@sentry/cli-win32-i686": 2.56.1
+    "@sentry/cli-win32-x64": 2.56.1
     https-proxy-agent: ^5.0.0
     node-fetch: ^2.6.7
     progress: ^2.0.3
@@ -5082,7 +5064,7 @@ __metadata:
       optional: true
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: 9d42c3362f5849033207d2410b09e583db20598e956bd4d5d151e28b8a406663b363f27013387008d2673651ff0a1561b55cef2bec35720cd3165084bb8dd1c2
+  checksum: e70c68ddaf0dda7cae7a886f221cf62520603d71cb96976c40e515df56565b31d8f78a50af83b89b17a39f136976d83d54fd9eeca8aa05026dfff18b7a07c999
   languageName: node
   linkType: hard
 
@@ -5375,13 +5357,6 @@ __metadata:
   dependencies:
     "@types/deep-eql": "*"
   checksum: 386887bd55ba684572cececd833ed91aba6cce2edd8cc1d8cefa78800b3a74db6dbf5c5c41af041d1d1f3ce672ea30b45c9520f948cdc75431eb7df3fbba8405
-  languageName: node
-  linkType: hard
-
-"@types/cookie@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "@types/cookie@npm:0.6.0"
-  checksum: 5edce7995775b0b196b142883e4d4f71fd93c294eaec973670f1fa2540b70ea7390408ed513ddefef5fcb12a578100c76596e8f2a714b0c2ae9f70ee773f4510
   languageName: node
   linkType: hard
 
@@ -6617,14 +6592,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:^0.7.2":
-  version: 0.7.2
-  resolution: "cookie@npm:0.7.2"
-  checksum: 9bf8555e33530affd571ea37b615ccad9b9a34febbf2c950c86787088eb00a8973690833b0f8ebd6b69b753c62669ea60cec89178c1fb007bf0749abed74f93e
-  languageName: node
-  linkType: hard
-
-"cookie@npm:^1.0.1":
+"cookie@npm:^1.0.1, cookie@npm:^1.0.2":
   version: 1.0.2
   resolution: "cookie@npm:1.0.2"
   checksum: 2c5a6214147ffa7135ce41860c781de17e93128689b0d080d3116468274b3593b607bcd462ac210d3a61f081db3d3b09ae106e18d60b1f529580e95cf2db8a55
@@ -7947,9 +7915,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
-    "@hey-api/openapi-ts": 0.85.0
-    "@navikt/aksel-stylelint": 7.31.0
-    "@sentry/cli": 2.55.0
+    "@hey-api/openapi-ts": 0.85.2
+    "@navikt/aksel-stylelint": 7.32.1
+    "@sentry/cli": 2.56.1
     "@storybook/addon-a11y": 9.1.10
     "@storybook/addon-links": 9.1.10
     "@storybook/react": 9.1.10
@@ -7961,8 +7929,8 @@ __metadata:
     gh-pages: 6.3.0
     husky: 9.1.7
     jsdom: 27.0.0
-    knip: ^5.64.2
-    lint-staged: 16.2.3
+    knip: ^5.65.0
+    lint-staged: 16.2.4
     prettier: 3.6.2
     shelljs: 0.10.0
     stylelint: 16.25.0
@@ -9134,9 +9102,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knip@npm:^5.64.2":
-  version: 5.64.2
-  resolution: "knip@npm:5.64.2"
+"knip@npm:^5.65.0":
+  version: 5.65.0
+  resolution: "knip@npm:5.65.0"
   dependencies:
     "@nodelib/fs.walk": ^1.2.3
     fast-glob: ^3.3.3
@@ -9156,7 +9124,7 @@ __metadata:
   bin:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
-  checksum: 5838544fb6b1c8280241b2cd6304e9e6766b6eabccf3f52ce2c7d0099cec5ed961572e72be4f833488b5455d0fa689d498940e34c0248007958aae6b385b0411
+  checksum: c0230e4581738b548418eb47c9a06e2cc79d6959d19e55d9fee50dfd7bacc17117370d0f9a8f137b14ed1f7fed1d6e8b8e5c049ffc8182b152b1c9dfa8f84e5a
   languageName: node
   linkType: hard
 
@@ -9207,20 +9175,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:16.2.3":
-  version: 16.2.3
-  resolution: "lint-staged@npm:16.2.3"
+"lint-staged@npm:16.2.4":
+  version: 16.2.4
+  resolution: "lint-staged@npm:16.2.4"
   dependencies:
     commander: ^14.0.1
     listr2: ^9.0.4
     micromatch: ^4.0.8
-    nano-spawn: ^1.0.3
+    nano-spawn: ^2.0.0
     pidtree: ^0.6.0
     string-argv: ^0.3.2
     yaml: ^2.8.1
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 61b2f8c4fa199f7da6516f927115146bbb25c511760b85fc514aadbecec7e2346bddb4317c41145d31357bde29f23abea37b820144c93b32d2b6bae236829108
+  checksum: e09497196df24f3d9c134ea81e2e470f455c461925a6fa9d72fa409278ddb7d6c8506797268df497f3e908629fd275ef171361d8e0d6581efb2a7131bb7c0a26
   languageName: node
   linkType: hard
 
@@ -9611,28 +9579,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw-storybook-addon@npm:2.0.5":
-  version: 2.0.5
-  resolution: "msw-storybook-addon@npm:2.0.5"
+"msw-storybook-addon@npm:2.0.6":
+  version: 2.0.6
+  resolution: "msw-storybook-addon@npm:2.0.6"
   dependencies:
     is-node-process: ^1.0.1
   peerDependencies:
     msw: ^2.0.0
-  checksum: 4de85651cabac07e695acdf1a6aa7e3eb9557003b00579ba653f257686a5376cabe52b532d4fe795253c28bfa528bb1fb36bc9239ed75c24a57af4ba5c5ffbc6
+  checksum: dd375ce2c425c336628ca5359dcbd4aaa9baf6da6d4637242ee64732b9a6cec6e08e81fbb57e1381b1dc9b54031481c2bca388703717929d4a2d8b74ba151a75
   languageName: node
   linkType: hard
 
-"msw@npm:2.11.3":
-  version: 2.11.3
-  resolution: "msw@npm:2.11.3"
+"msw@npm:2.11.5":
+  version: 2.11.5
+  resolution: "msw@npm:2.11.5"
   dependencies:
-    "@bundled-es-modules/cookie": ^2.0.1
-    "@bundled-es-modules/statuses": ^1.0.1
     "@inquirer/confirm": ^5.0.0
     "@mswjs/interceptors": ^0.39.1
     "@open-draft/deferred-promise": ^2.2.0
-    "@types/cookie": ^0.6.0
     "@types/statuses": ^2.0.4
+    cookie: ^1.0.2
     graphql: ^16.8.1
     headers-polyfill: ^4.0.2
     is-node-process: ^1.2.0
@@ -9640,6 +9606,7 @@ __metadata:
     path-to-regexp: ^6.3.0
     picocolors: ^1.1.1
     rettime: ^0.7.0
+    statuses: ^2.0.2
     strict-event-emitter: ^0.5.1
     tough-cookie: ^6.0.0
     type-fest: ^4.26.1
@@ -9652,7 +9619,7 @@ __metadata:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: bb664fa0a73579e20335afcaa8aa519511a8ad4179ca6bafbaf9b11d6ebde840df70a659b39648580fcfcadb917f946a846cc03409f2cd16c6828a7d457e12e3
+  checksum: 86eaa1cbd0c9d3f56434f1e8d362802624d7548953cff1f1fcbf3e8a2ec6af827b444762c881de165f13e8665c67787a34831f97e5945d119f060f6fe880bf4c
   languageName: node
   linkType: hard
 
@@ -9663,10 +9630,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nano-spawn@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "nano-spawn@npm:1.0.3"
-  checksum: 5b3ec4b459e9f015bef29c4fd69736567b775d8744faf6ab2b54907043839eaf15caf8e9f3180de06321224c47d8f67a2ba541c83ff2127af0d7353aa13e8ab2
+"nano-spawn@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "nano-spawn@npm:2.0.0"
+  checksum: 48223f6f5b2ab3f7562d0e6e85abb9b9c4ee52f5c096bd50012c0776664ddc63cd2602c9e4dc3d6cd47ae5189e9c71b51afb2d44b2746d8ca80cb52fc8013904
   languageName: node
   linkType: hard
 
@@ -11201,7 +11168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"statuses@npm:^2.0.1":
+"statuses@npm:^2.0.2":
   version: 2.0.2
   resolution: "statuses@npm:2.0.2"
   checksum: 6927feb50c2a75b2a4caab2c565491f7a93ad3d8dbad7b1398d52359e9243a20e2ebe35e33726dee945125ef7a515e9097d8a1b910ba2bbd818265a2f6c39879
@@ -11940,17 +11907,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.8.3":
-  version: 5.8.3
-  resolution: "typescript@npm:5.8.3"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: cb1d081c889a288b962d3c8ae18d337ad6ee88a8e81ae0103fa1fecbe923737f3ba1dbdb3e6d8b776c72bc73bfa6d8d850c0306eed1a51377d2fccdfd75d92c4
-  languageName: node
-  linkType: hard
-
-"typescript@npm:5.9.3":
+"typescript@npm:5.9.3, typescript@npm:^5.6.0":
   version: 5.9.3
   resolution: "typescript@npm:5.9.3"
   bin:
@@ -11960,17 +11917,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@5.8.3#~builtin<compat/typescript>":
-  version: 5.8.3
-  resolution: "typescript@patch:typescript@npm%3A5.8.3#~builtin<compat/typescript>::version=5.8.3&hash=1f5320"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 1b503525a88ff0ff5952e95870971c4fb2118c17364d60302c21935dedcd6c37e6a0a692f350892bafcef6f4a16d09073fe461158547978d2f16fbe4cb18581c
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@5.9.3#~builtin<compat/typescript>":
+"typescript@patch:typescript@5.9.3#~builtin<compat/typescript>, typescript@patch:typescript@^5.6.0#~builtin<compat/typescript>":
   version: 5.9.3
   resolution: "typescript@patch:typescript@npm%3A5.9.3#~builtin<compat/typescript>::version=5.9.3&hash=1f5320"
   bin:
