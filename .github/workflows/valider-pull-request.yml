@@ -27,8 +27,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/work/fp-frontend/fp-frontend/.turbo
-          key: turbo-${{ runner.os }}-${{ github.ref_name }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
-          restore-keys: turbo-${{ runner.os }}-master-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
+          key: turbo-${{ runner.os }}-${{ github.ref_name }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: turbo-${{ runner.os }}-master-${{ hashFiles('yarn.lock') }}
 
       - name: Installere dependencies
         run: yarn install --immutable
