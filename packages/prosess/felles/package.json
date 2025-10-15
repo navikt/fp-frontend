@@ -8,11 +8,11 @@
   },
   "scripts": {
     "tsc": "tsc --pretty",
-    "eslint": "eslint \"src/**/*.ts*\" --color",
-    "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
-    "stylelint": "stylelint \"src/**/*.module.css\"",
+    "eslint": "eslint src/**/*.ts* --color",
+    "eslint:fix": "eslint --fix src/**/*.ts* --color",
+    "stylelint": "stylelint src/**/*.module.css",
     "prettier": "prettier --write src",
-    "clean": "rm -rf ./dist ./node_modules"
+    "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
     "@navikt/aksel-icons": "7.32.1",

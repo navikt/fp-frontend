@@ -137,11 +137,13 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             name="delvilkår"
             control={formMethods.control}
             validate={[required]}
-            label={intl.formatMessage({
-              id: isReadOnly
-                ? 'VurderOmsorgsovertakelseVilkåretForm.VilkårLabel.ReadOnly'
-                : 'VurderOmsorgsovertakelseVilkåretForm.VilkårLabel',
-            })}
+            label={
+              isReadOnly ? (
+                <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.Delvilkår.ReadOnlyLabel" />
+              ) : (
+                <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.Delvilkår.Label" />
+              )
+            }
             isReadOnly={isReadOnly}
             size="small"
           >

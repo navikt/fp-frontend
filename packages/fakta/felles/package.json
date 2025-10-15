@@ -10,11 +10,11 @@
     "test": "vitest",
     "test:watch": "vitest --watch=true",
     "tsc": "tsc --pretty",
-    "stylelint": "stylelint \"src/**/*.module.css\"",
-    "eslint": "eslint \"src/**/*.ts*\" --color",
-    "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
+    "stylelint": "stylelint src/**/*.module.css",
+    "eslint": "eslint src/**/*.ts* --color",
+    "eslint:fix": "eslint --fix src/**/*.ts* --color",
     "prettier": "prettier --write src",
-    "clean": "rm -rf ./dist ./node_modules",
+    "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "storybook": "storybook dev --quiet -p 7022"
   },
   "dependencies": {

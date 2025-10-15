@@ -11,7 +11,7 @@
     "eslint": "eslint decorators/**/*.ts* mocks/**/*.ts* --color",
     "eslint:fix": "eslint --fix decorators/**/*.ts* mocks/**/*.ts* --color",
     "prettier": "prettier --write decorators mocks",
-    "clean": "rm -rf ./dist ./node_modules"
+    "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
     "@navikt/ds-react": "7.32.1",
