@@ -20,9 +20,9 @@
     "storybook": "storybook dev --quiet -p 7019"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.31.0",
-    "@navikt/ds-css": "7.31.0",
-    "@navikt/ds-react": "7.31.0",
+    "@navikt/aksel-icons": "7.32.1",
+    "@navikt/ds-css": "7.32.1",
+    "@navikt/ds-react": "7.32.1",
     "@navikt/fp-kodeverk": "workspace:^",
     "@navikt/fp-types": "workspace:^",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^",
@@ -30,10 +30,10 @@
     "@navikt/ft-form-validators": "4.2.11",
     "@navikt/ft-ui-komponenter": "6.2.8",
     "@navikt/ft-utils": "3.8.10",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
-    "react-hook-form": "7.63.0",
-    "react-intl": "7.1.11"
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-hook-form": "7.65.0",
+    "react-intl": "7.1.14"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
@@ -49,7 +49,7 @@
     "storybook": "9.1.10",
     "stylelint": "16.25.0",
     "typescript": "5.9.3",
-    "vite": "7.1.9",
+    "vite": "7.1.10",
     "vitest": "3.2.4"
   }
 }
