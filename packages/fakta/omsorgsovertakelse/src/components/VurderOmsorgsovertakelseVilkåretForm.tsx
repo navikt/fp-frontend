@@ -159,7 +159,13 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             name="vilkårUtfallType"
             control={formMethods.control}
             validate={[required]}
-            label={intl.formatMessage({ id: 'VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering' })}
+            label={
+              isReadOnly ? (
+                <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.ReadOnlyLabel" />
+              ) : (
+                <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.Label" />
+              )
+            }
             isReadOnly={isReadOnly}
             size="small"
           >
@@ -175,11 +181,13 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             <RhfSelect
               name="avslagskode"
               control={formMethods.control}
-              label={intl.formatMessage({
-                id: isReadOnly
-                  ? 'VurderOmsorgsovertakelseVilkåretForm.AvslagsarsakLabel.ReadOnly'
-                  : 'VurderOmsorgsovertakelseVilkåretForm.AvslagsarsakLabel',
-              })}
+              label={
+                isReadOnly ? (
+                  <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.Avslagsarsak.ReadOnlyLabel" />
+                ) : (
+                  <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.Avslagsarsak.Label" />
+                )
+              }
               selectValues={avslagsÅrsaker.map(kodeverk => (
                 <option key={kodeverk?.kode} value={kodeverk?.kode}>
                   {kodeverk?.navn}
