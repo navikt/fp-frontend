@@ -30,7 +30,7 @@ describe('BesteberegningFaktaIndex', () => {
   it('skal bekrefte aksjonspunkt for vurder besteberegning', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<BesteberegningMedAvvik submitCallback={lagre} />);
+    render(<BesteberegningMedAvvik submitCallback={lagre} />);
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
@@ -43,7 +43,7 @@ describe('BesteberegningFaktaIndex', () => {
 
     expect(screen.getByText('Beregningen er riktig, fortsett behandlingen.')).toBeEnabled();
     await userEvent.click(screen.getByRole('checkbox'));
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Min begrunnelse for vurdering av besteberegning');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Min begrunnelse for vurdering av besteberegning');
 
     expect(screen.getByText('Bekreft og fortsett')).toBeEnabled();
     await userEvent.click(screen.getByText('Bekreft og fortsett'));

@@ -9,7 +9,7 @@ const { MedAksjonspunkt, UtenAksjonspunkt } = composeStories(stories);
 describe('OpptjeningFaktaIndex', () => {
   it('skal åpne aktivitet automatisk når det har åpent aksjonspunkt og så godkjenne det', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(<MedAksjonspunkt submitCallback={lagre} />);
+    render(<MedAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Vurder om aktivitetene kan godkjennes')).toBeInTheDocument();
     expect(screen.getByText('Skjæringstidspunkt for opptjening')).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe('OpptjeningFaktaIndex', () => {
     expect(screen.getByText('Avbryt')).toBeEnabled();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'D');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'D');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
@@ -34,8 +34,8 @@ describe('OpptjeningFaktaIndex', () => {
 
     await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
-    await userEvent.clear(utils.getByLabelText('Begrunn endringene'));
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.clear(screen.getByLabelText('Begrunn endringene'));
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await waitFor(() => expect(screen.queryByText('Du må skrive minst 3 tegn')).not.toBeInTheDocument());
 
@@ -44,7 +44,7 @@ describe('OpptjeningFaktaIndex', () => {
     expect(await screen.findAllByText('Sykepenger')).toHaveLength(2);
 
     await userEvent.click(screen.getAllByRole('radio')[1]!);
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse 2');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse 2');
 
     await userEvent.click(screen.getByText('Oppdater'));
 

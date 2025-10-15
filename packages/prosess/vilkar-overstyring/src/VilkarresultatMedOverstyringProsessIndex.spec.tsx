@@ -11,7 +11,7 @@ describe('VilkarresultatMedOverstyringProsessIndex', () => {
   it('skal overstyre og fylle ut fødselsvilkåret ikke er oppfylt og så lagre', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<OverstyringspanelForFødsel submitCallback={lagre} />);
+    render(<OverstyringspanelForFødsel submitCallback={lagre} />);
 
     expect(await screen.findByText('Fødsel')).toBeInTheDocument();
     expect(screen.getByText('Vilkåret er oppfylt')).toBeInTheDocument();
@@ -26,9 +26,9 @@ describe('VilkarresultatMedOverstyringProsessIndex', () => {
 
     expect(await screen.findByText('Avslagsårsak')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'Dette er en avslagsårsak');
+    await userEvent.selectOptions(screen.getByLabelText('Avslagsårsak'), 'Dette er en avslagsårsak');
 
-    const vurderingInput = utils.getByLabelText('Begrunnelse');
+    const vurderingInput = screen.getByLabelText('Begrunnelse');
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft overstyring'));
@@ -59,7 +59,7 @@ describe('VilkarresultatMedOverstyringProsessIndex', () => {
   it('skal overstyre og fylle ut medlemskapsvilkåret ikke er oppfylt og så lagre', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<OverstyringspanelForMedlemskap submitCallback={lagre} />);
+    render(<OverstyringspanelForMedlemskap submitCallback={lagre} />);
 
     expect(await screen.findByText('Medlemskap')).toBeInTheDocument();
     expect(screen.getByText('Vilkåret er oppfylt')).toBeInTheDocument();
@@ -84,7 +84,7 @@ describe('VilkarresultatMedOverstyringProsessIndex', () => {
     await userEvent.type(opphørDatoInput, '20.12.2021');
     fireEvent.blur(opphørDatoInput);
 
-    const vurderingInput = utils.getByLabelText('Begrunnelse');
+    const vurderingInput = screen.getByLabelText('Begrunnelse');
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft overstyring'));

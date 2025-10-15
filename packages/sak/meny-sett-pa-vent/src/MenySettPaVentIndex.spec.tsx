@@ -18,10 +18,12 @@ describe('MenySettPaVentIndex', () => {
   it('skal velge årsak for sett på vent og så fortsette', async () => {
     const settBehandlingPaVent = vi.fn();
     const lukkModal = vi.fn();
-    const utils = render(<Default settBehandlingPaVent={settBehandlingPaVent} lukkModal={lukkModal} />);
+
+    render(<Default settBehandlingPaVent={settBehandlingPaVent} lukkModal={lukkModal} />);
+
     expect(await screen.findByText('Behandlingen settes på vent')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'AVV_DOK');
+    await userEvent.selectOptions(screen.getByLabelText('Årsak'), 'AVV_DOK');
 
     await userEvent.click(screen.getByText('OK'));
 

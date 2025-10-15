@@ -107,7 +107,7 @@ describe('UttakProsessIndex', () => {
 
     const lagre = vi.fn();
 
-    const utils = render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
+    render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
 
     expect(
       await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.'),
@@ -118,17 +118,17 @@ describe('UttakProsessIndex', () => {
       ),
     ).toBeInTheDocument();
 
-    const inputFelter = utils.getAllByRole('textbox');
+    const inputFelter = screen.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(7);
 
     await userEvent.type(inputFelter[2]!, '0');
     await userEvent.type(inputFelter[5]!, '10');
 
-    await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering');
+    await userEvent.type(screen.getByLabelText('Vurdering:'), 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Oppfylt'));
 
-    await userEvent.selectOptions(utils.getByLabelText('Årsak til innvilgelse'), '2002');
+    await userEvent.selectOptions(screen.getByLabelText('Årsak til innvilgelse'), '2002');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
@@ -140,7 +140,7 @@ describe('UttakProsessIndex', () => {
 
     expect(await screen.findByText('Detaljer for valgt periode')).toBeInTheDocument();
 
-    const dropdowns = utils.getAllByRole('combobox');
+    const dropdowns = screen.getAllByRole('combobox');
     expect(dropdowns).toHaveLength(3);
 
     await userEvent.selectOptions(dropdowns[0]!, 'MØDREKVOTE');
@@ -239,7 +239,7 @@ describe('UttakProsessIndex', () => {
   it('skal ha aksjonspunkt og dele opp periode i to og så bekrefte', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
+    render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
 
     expect(
       await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.'),
@@ -262,25 +262,25 @@ describe('UttakProsessIndex', () => {
 
     expect(await screen.findByText('20.10.2022 - 28.10.2022')).toBeInTheDocument();
 
-    const inputFelter = utils.getAllByRole('textbox');
+    const inputFelter = screen.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(7);
 
     await userEvent.type(inputFelter[2]!, '0');
     await userEvent.type(inputFelter[5]!, '0');
 
-    await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering');
+    await userEvent.type(screen.getByLabelText('Vurdering:'), 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
     expect(await screen.findByText('29.10.2022 - 09.11.2022')).toBeInTheDocument();
 
-    const inputFelter2 = utils.getAllByRole('textbox');
+    const inputFelter2 = screen.getAllByRole('textbox');
     expect(inputFelter2).toHaveLength(7);
 
     await userEvent.type(inputFelter2[2]!, '0');
     await userEvent.type(inputFelter2[5]!, '0');
 
-    await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering på periode 2');
+    await userEvent.type(screen.getByLabelText('Vurdering:'), 'Dette er en vurdering på periode 2');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
@@ -412,7 +412,7 @@ describe('UttakProsessIndex', () => {
   });
 
   it('skal vise feilmelding når det ikke er valgt et gyldig antall dager for mødrekvoten', async () => {
-    const utils = render(<StønadskontoMedUgyldigForbruk />);
+    render(<StønadskontoMedUgyldigForbruk />);
 
     expect(
       await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.'),
@@ -423,12 +423,12 @@ describe('UttakProsessIndex', () => {
       ),
     ).toBeInTheDocument();
 
-    const inputFelter = utils.getAllByRole('textbox');
+    const inputFelter = screen.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(4);
 
     await userEvent.type(inputFelter[2]!, '0');
 
-    await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering');
+    await userEvent.type(screen.getByLabelText('Vurdering:'), 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
@@ -439,7 +439,7 @@ describe('UttakProsessIndex', () => {
 
   // TODO FIX!
   it.skip('skal vise varsel når samlet utbetalingsgrad og andel i arbeid overskrider 100%', async () => {
-    const utils = render(<VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent />);
+    render(<VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent />);
 
     expect(
       await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.'),
@@ -450,12 +450,12 @@ describe('UttakProsessIndex', () => {
       ),
     ).toBeInTheDocument();
 
-    const inputFelter = utils.getAllByRole('textbox');
+    const inputFelter = screen.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(4);
 
     await userEvent.type(inputFelter[2]!, '0');
 
-    await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering');
+    await userEvent.type(screen.getByLabelText('Vurdering:'), 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Oppfylt'));
 
@@ -468,7 +468,7 @@ describe('UttakProsessIndex', () => {
   });
 
   it('skal vise varsel når utbetalingsgrad og andel i arbeid overskrider 100%', async () => {
-    const utils = render(<VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent />);
+    render(<VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent />);
 
     expect(
       await screen.findByText('Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.'),
@@ -476,7 +476,7 @@ describe('UttakProsessIndex', () => {
 
     expect(screen.getByText('Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%.')).toBeInTheDocument();
 
-    const inputFelter = utils.getAllByRole('textbox');
+    const inputFelter = screen.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(4);
 
     await userEvent.clear(inputFelter[2]!);

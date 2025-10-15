@@ -36,9 +36,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(
-      <InnhentInntektsmelding settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />,
-    );
+    render(<InnhentInntektsmelding settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
     expect(screen.getByText('Skjæringstidspunkt for opptjening: 10.11.2021')).toBeInTheDocument();
@@ -58,7 +56,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'),
     );
 
-    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Lagre'));
 
@@ -86,15 +84,13 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(
-      <InnhentInntektsmelding submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />,
-    );
+    render(<InnhentInntektsmelding submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />);
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Gå videre uten inntektsmelding'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Lagre'));
 
@@ -143,9 +139,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(
-      <AvklarManglendeArbeidsforhold settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />,
-    );
+    render(<AvklarManglendeArbeidsforhold settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
     expect(screen.getByText('Skjæringstidspunkt for opptjening: 10.11.2021')).toBeInTheDocument();
@@ -168,7 +162,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Lagre'));
 
@@ -197,7 +191,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
     const settPåVent = vi.fn(() => Promise.resolve());
 
-    const utils = render(
+    render(
       <InnhentInntektsmelding
         submitCallback={bekrefteAksjonspunkt}
         lagreVurdering={lagreVurdering}
@@ -209,7 +203,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Send påminnelse via Min side - arbeidsgiver på nav.no'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Lagre'));
 
@@ -228,15 +222,13 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(
-      <AvklarManglendeArbeidsforhold submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />,
-    );
+    render(<AvklarManglendeArbeidsforhold submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />);
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Se bort fra inntektsmeldingen'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Lagre'));
 
@@ -262,7 +254,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
     const registrerArbeidsforhold = vi.fn(() => Promise.resolve());
 
-    const utils = render(
+    render(
       <AvklarManglendeArbeidsforhold
         submitCallback={bekrefteAksjonspunkt}
         registrerArbeidsforhold={registrerArbeidsforhold}
@@ -281,8 +273,8 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     await userEvent.type(periodeTil, '01.02.2022');
     fireEvent.blur(periodeTil);
 
-    await userEvent.type(utils.getByLabelText('Stillingsprosent'), '100');
-    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Stillingsprosent'), '100');
+    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Lagre'));
 
@@ -370,7 +362,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     const bekrefteAksjonspunkt = vi.fn(() => Promise.resolve());
     const registrerArbeidsforhold = vi.fn(() => Promise.resolve());
 
-    const utils = render(
+    render(
       <SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnHarReåpnetOgEnErOverstyrer
         submitCallback={bekrefteAksjonspunkt}
         registrerArbeidsforhold={registrerArbeidsforhold}
@@ -391,7 +383,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Legg til arbeidsforhold'));
 
-    await userEvent.type(utils.getByLabelText('Navn på arbeidsgiver'), 'Telenor');
+    await userEvent.type(screen.getByLabelText('Navn på arbeidsgiver'), 'Telenor');
 
     const periodeFra = screen.getByText('Periode fra');
     await userEvent.type(periodeFra, '01.02.2020');
@@ -401,8 +393,8 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     await userEvent.type(periodeTil, '01.02.2022');
     fireEvent.blur(periodeTil);
 
-    await userEvent.type(utils.getByLabelText('Stillingsprosent'), '100');
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Stillingsprosent'), '100');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Lagre'));
 
@@ -569,7 +561,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(
+    render(
       <FlereArbeidsforholdOgInntekstemeldinger
         settBehandlingPåVentCallback={settPåVent}
         lagreVurdering={lagreVurdering}
@@ -582,7 +574,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'),
     );
 
-    await userEvent.type(utils.getAllByLabelText('Begrunn valget')[0]!, 'Dette er en begrunnelse');
+    await userEvent.type(screen.getAllByLabelText('Begrunn valget')[0]!, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getAllByText('Lagre')[0]!);
 
@@ -598,7 +590,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
 
-    await userEvent.type(utils.getAllByLabelText('Begrunn valget')[1]!, 'Dette er begrunnelse nr 2');
+    await userEvent.type(screen.getAllByLabelText('Begrunn valget')[1]!, 'Dette er begrunnelse nr 2');
 
     await userEvent.click(screen.getAllByText('Lagre')[1]!);
 
@@ -626,7 +618,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(
+    render(
       <ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre
         settBehandlingPåVentCallback={settPåVent}
         lagreVurdering={lagreVurdering}
@@ -658,7 +650,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'),
     );
 
-    await userEvent.type(utils.getByLabelText('Kommentar'), 'Dette er en kommentar');
+    await userEvent.type(screen.getByLabelText('Kommentar'), 'Dette er en kommentar');
 
     await userEvent.click(screen.getByText('Lagre'));
 
