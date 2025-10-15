@@ -210,6 +210,7 @@ export type foreldrepenger_behandlingslager_behandling_RettenTil = 'HAR_RETT_TIL
 export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon =
   | '5001'
   | '5027'
+  | '5018'
   | '5004'
   | '5005'
   | '5006'
@@ -406,7 +407,6 @@ export type foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak =
   | '1010'
   | '1011'
   | '1012'
-  | '1013'
   | '1014'
   | '1015'
   | '1016'
@@ -443,6 +443,7 @@ export type foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak =
 export type foreldrepenger_behandlingslager_behandling_vilkår_VilkårType =
   | 'FP_VK_1'
   | 'FP_VK_11'
+  | 'FP_VK_6'
   | 'FP_VK_16'
   | 'FP_VK_2'
   | 'FP_VK_2_F'
@@ -3298,6 +3299,51 @@ export type tjenester_behandling_fødsel_dto_FødselDto_Søknad = {
 
 export type tjenester_behandling_fødsel_dto_Kilde = 'SAKSBEHANDLER' | 'SØKNAD' | 'FOLKEREGISTER';
 
+export type foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType =
+  | 'FP_VK_4'
+  | 'FP_VK_8'
+  | 'FP_VK_5'
+  | 'FP_VK_33'
+  | 'FP_VK_16'
+  | 'FP_VK_8F'
+  | 'FP_VK_16S'
+  | '-';
+
+export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto = {
+  aktuelleDelvilkårAvslagsårsaker: {
+    [key: string]: Array<foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak>;
+  };
+  gjeldende: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Omsorgsovertakelse;
+  kildeGjeldende: tjenester_behandling_fødsel_dto_Kilde;
+  register: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Register;
+  saksbehandlerVurdering?: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_SaksbehandlerVurdering;
+  søknad: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Omsorgsovertakelse;
+};
+
+export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_BarnHendelseData = {
+  barnNummer?: number;
+  dødsdato?: string;
+  fødselsdato: string;
+};
+
+export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Omsorgsovertakelse = {
+  ankomstNorgeDato?: string;
+  antallBarn: number;
+  barn: Array<tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_BarnHendelseData>;
+  delvilkår?: foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType;
+  erEktefellesBarn?: boolean;
+  omsorgsovertakelseDato?: string;
+};
+
+export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_Register = {
+  barn: Array<tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_BarnHendelseData>;
+};
+
+export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_SaksbehandlerVurdering = {
+  avslagsårsak?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
+  vilkårUtfallType: foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType;
+};
+
 export type tjenester_behandling_dto_behandling_InnsynVedtaksdokumentasjonDto = {
   behandlingUuid: string;
   opprettetDato: string;
@@ -4653,6 +4699,7 @@ export type foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeTy
   | 'FAKTA_OM_ARBEIDSFORHOLD_PERMISJON'
   | 'FAKTA_OM_BEREGNING'
   | 'FAKTA_OM_FOEDSEL'
+  | 'FAKTA_OM_OMSORGSOVERTAKELSE'
   | 'FAKTA_OM_FORDELING'
   | 'FAKTA_OM_MEDLEMSKAP'
   | 'FAKTA_OM_OMSORG_OG_FORELDREANSVAR'
@@ -4919,12 +4966,6 @@ export type tjenester_fagsak_dto_LagreFagsakNotatDto = {
 export type tjenester_fagsak_dto_SokefeltDto = {
   searchString: string;
 };
-
-export type foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType =
-  | 'FP_VK_5'
-  | 'FP_VK_8'
-  | 'FP_VK_33'
-  | '-';
 
 export type tjenester_familiehendelse_FamiliehendelseRestTjeneste_AdopsjonFamilieHendelseDto = {
   ankomstNorge?: string;
@@ -7096,6 +7137,27 @@ export type HentFødselResponses = {
 };
 
 export type HentFødselResponse = HentFødselResponses[keyof HentFødselResponses];
+
+export type HentOmsorgsovertakelseData = {
+  body?: never;
+  path?: never;
+  query: {
+    /**
+     * behandlingUUID
+     */
+    uuid: tjenester_behandling_dto_UuidDto;
+  };
+  url: '/api/behandling/omsorgsovertakelse/fakta-omsorgsovertakelse';
+};
+
+export type HentOmsorgsovertakelseResponses = {
+  /**
+   * Returnerer Fakta om adopsjon og foreldreansvar)
+   */
+  200: tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto;
+};
+
+export type HentOmsorgsovertakelseResponse = HentOmsorgsovertakelseResponses[keyof HentOmsorgsovertakelseResponses];
 
 export type HentAlleInnslagData = {
   body?: never;

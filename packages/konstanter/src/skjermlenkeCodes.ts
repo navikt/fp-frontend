@@ -69,6 +69,11 @@ const skjermlenkeCodesFpsak: SkjermlenkeData = {
     faktaNavn: FaktaPanelCode.OMSORGSVILKARET,
     punktNavn: '',
   },
+  FAKTA_OM_OMSORGSOVERTAKELSE: {
+    kode: 'FAKTA_OM_OMSORGSOVERTAKELSE',
+    faktaNavn: FaktaPanelCode.OMSORGSOVERTAKELSE,
+    punktNavn: '',
+  },
   FAKTA_OM_ARBEIDSFORHOLD: {
     kode: 'FAKTA_OM_ARBEIDSFORHOLD',
     faktaNavn: FaktaPanelCode.ARBEIDSFORHOLD,

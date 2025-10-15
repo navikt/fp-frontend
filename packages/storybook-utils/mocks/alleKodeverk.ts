@@ -1721,11 +1721,7 @@ export const alleKodeverk: AlleKodeverk = {
     },
   ],
   VilkårType: [
-    {
-      kode: 'FP_VK_16',
-      kodeverk: 'VILKAR_TYPE',
-      navn: 'Adopsjonsvilkåret Foreldrepenger',
-    },
+    { kode: 'FP_VK_16', kodeverk: 'VILKAR_TYPE', navn: 'Adopsjonsvilkåret Foreldrepenger' },
     {
       kode: 'FP_VK_2',
       kodeverk: 'VILKAR_TYPE',
@@ -1934,19 +1930,31 @@ export const alleKodeverk: AlleKodeverk = {
   ],
   OmsorgsovertakelseVilkårType: [
     {
-      kode: 'FP_VK_8',
+      kode: 'FP_VK_8F',
       kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
-      navn: 'Foreldreansvarsvilkåret §14-17 andre ledd',
-    },
-    {
-      kode: 'FP_VK_33',
-      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
-      navn: 'Foreldreansvarsvilkåret §14-17 fjerde ledd',
+      navn: 'Foreldreansvar §14-5 andre ledd',
     },
     {
       kode: 'FP_VK_5',
       kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
-      navn: 'Omsorgsvilkår §14-17 tredje ledd',
+      navn: 'Omsorg §14-17 tredje ledd',
+    },
+    {
+      kode: 'FP_VK_8',
+      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
+      navn: 'Foreldreansvar §14-17 andre ledd',
+    },
+    { kode: 'FP_VK_16S', kodeverk: 'OMSORGSOVERTAKELSE_VILKAR', navn: 'Stebarnsadopsjon §14-5 tredje ledd' },
+    { kode: 'FP_VK_16', kodeverk: 'OMSORGSOVERTAKELSE_VILKAR', navn: 'Adopsjon §14-5 første ledd' },
+    {
+      kode: 'FP_VK_4',
+      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
+      navn: 'Adopsjon §14-17 første ledd',
+    },
+    {
+      kode: 'FP_VK_33',
+      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
+      navn: 'Foreldreansvar §14-17 fjerde ledd',
     },
   ],
   FordelingPeriodeKilde: [
@@ -4024,21 +4032,16 @@ export const alleKodeverk: AlleKodeverk = {
     ],
     FP_VK_4: [
       {
-        kode: '1004',
+        kode: '1033',
         kodeverk: 'AVSLAGSARSAK',
-        navn: 'Barn over 15 år',
-        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_16_1", "lovreferanse": "14-5"}]}]}',
+        navn: 'Engangsstønad er allerede utbetalt til far/medmor ',
+        lovHjemmel:
+          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": {"lovreferanse": "14-5"}}]}',
       },
       {
         kode: '1006',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Mann adopterer ikke alene',
-        lovHjemmel: null,
-      },
-      {
-        kode: '1005',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Ektefelles/samboers barn',
         lovHjemmel: null,
       },
       {
@@ -4049,6 +4052,12 @@ export const alleKodeverk: AlleKodeverk = {
           '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK1", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK4", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK5", "lovreferanse": "§ 14-17 3. ledd"}]}, {"FP": [{"kategori": "FP_VK1", "lovreferanse": "§ 14-5 1. ledd"}, {"kategori": "FP_VK11", "lovreferanse": "§ 14-5 1. ledd"}, {"kategori": "FP_VK16", "lovreferanse": "§ 14-5 2. ledd"}]}]}',
       },
       {
+        kode: '1005',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Ektefelles/samboers barn',
+        lovHjemmel: null,
+      },
+      {
         kode: '1032',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Foreldrepenger er allerede utbetalt til mor',
@@ -4056,18 +4065,17 @@ export const alleKodeverk: AlleKodeverk = {
           '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK1", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK4", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK5", "lovreferanse": "§ 14-17 3. ledd"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
       },
       {
+        kode: '1004',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Barn over 15 år',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_16_1", "lovreferanse": "14-5"}]}]}',
+      },
+      {
         kode: '1034',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Foreldrepenger er allerede utbetalt til far/medmor',
         lovHjemmel:
           '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
-      },
-      {
-        kode: '1033',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Engangsstønad er allerede utbetalt til far/medmor ',
-        lovHjemmel:
-          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": {"lovreferanse": "14-5"}}]}',
       },
     ],
     FP_VK_1: [
@@ -4078,16 +4086,16 @@ export const alleKodeverk: AlleKodeverk = {
         lovHjemmel: null,
       },
       {
-        kode: '1003',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Søker er far',
-        lovHjemmel: null,
-      },
-      {
         kode: '1001',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Søkt for tidlig',
         lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_1", "lovreferanse": "14-5"}]}]}',
+      },
+      {
+        kode: '1031',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Engangsstønad er allerede utbetalt til mor',
+        lovHjemmel: '{"fagsakYtelseType": {"FP": {"lovreferanse": "14-5"}}}',
       },
       {
         kode: '1026',
@@ -4096,17 +4104,17 @@ export const alleKodeverk: AlleKodeverk = {
         lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_1", "lovreferanse": "14-5"}]}]}',
       },
       {
+        kode: '1003',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Søker er far',
+        lovHjemmel: null,
+      },
+      {
         kode: '1032',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Foreldrepenger er allerede utbetalt til mor',
         lovHjemmel:
           '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK1", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK4", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK5", "lovreferanse": "§ 14-17 3. ledd"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
-      },
-      {
-        kode: '1031',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Engangsstønad er allerede utbetalt til mor',
-        lovHjemmel: '{"fagsakYtelseType": {"FP": {"lovreferanse": "14-5"}}}',
       },
     ],
     FP_VK_2: [
@@ -4114,18 +4122,6 @@ export const alleKodeverk: AlleKodeverk = {
         kode: '1025',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Søker er ikke bosatt',
-        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
-      },
-      {
-        kode: '1024',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Søker har ikke oppholdsrett (EØS)',
-        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
-      },
-      {
-        kode: '1020',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Søker er ikke medlem',
         lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
       },
       {
@@ -4138,6 +4134,18 @@ export const alleKodeverk: AlleKodeverk = {
         kode: '1023',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Søker har ikke lovlig opphold',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
+      },
+      {
+        kode: '1024',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Søker har ikke oppholdsrett (EØS)',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
+      },
+      {
+        kode: '1020',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Søker er ikke medlem',
         lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
       },
     ],
@@ -4180,21 +4188,9 @@ export const alleKodeverk: AlleKodeverk = {
     ],
     FP_VK_2_F: [
       {
-        kode: '1021',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Søker er utflyttet',
-        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
-      },
-      {
         kode: '1023',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Søker har ikke lovlig opphold',
-        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
-      },
-      {
-        kode: '1024',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Søker har ikke oppholdsrett (EØS)',
         lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
       },
       {
@@ -4210,18 +4206,31 @@ export const alleKodeverk: AlleKodeverk = {
         lovHjemmel: '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK_2_F", "lovreferanse": "14-17 5. ledd"}]}]}',
       },
       {
+        kode: '1021',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Søker er utflyttet',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
+      },
+      {
         kode: '1020',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Søker er ikke medlem',
         lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
       },
+      {
+        kode: '1024',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Søker har ikke oppholdsrett (EØS)',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
+      },
     ],
     FP_VK_33: [
       {
-        kode: '1017',
+        kode: '1034',
         kodeverk: 'AVSLAGSARSAK',
-        navn: 'Omsorgsovertakelse etter 56 uker',
-        lovHjemmel: null,
+        navn: 'Foreldrepenger er allerede utbetalt til far/medmor',
+        lovHjemmel:
+          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
       },
       {
         kode: '1033',
@@ -4231,16 +4240,15 @@ export const alleKodeverk: AlleKodeverk = {
           '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": {"lovreferanse": "14-5"}}]}',
       },
       {
-        kode: '1034',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Foreldrepenger er allerede utbetalt til far/medmor',
-        lovHjemmel:
-          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
-      },
-      {
         kode: '1018',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Ikke foreldreansvar alene etter barnelova',
+        lovHjemmel: null,
+      },
+      {
+        kode: '1017',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Omsorgsovertakelse etter 56 uker',
         lovHjemmel: null,
       },
       {
@@ -4268,10 +4276,11 @@ export const alleKodeverk: AlleKodeverk = {
     ],
     FP_VK_8: [
       {
-        kode: '1014',
+        kode: '1034',
         kodeverk: 'AVSLAGSARSAK',
-        navn: 'Søker har ikke foreldreansvar',
-        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
+        navn: 'Foreldrepenger er allerede utbetalt til far/medmor',
+        lovHjemmel:
+          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
       },
       {
         kode: '1033',
@@ -4287,26 +4296,19 @@ export const alleKodeverk: AlleKodeverk = {
         lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
       },
       {
-        kode: '1034',
+        kode: '1004',
         kodeverk: 'AVSLAGSARSAK',
-        navn: 'Foreldrepenger er allerede utbetalt til far/medmor',
-        lovHjemmel:
-          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
+        navn: 'Barn over 15 år',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_16_1", "lovreferanse": "14-5"}]}]}',
       },
       {
-        kode: '1013',
+        kode: '1014',
         kodeverk: 'AVSLAGSARSAK',
-        navn: 'Barn ikke under 15 år',
+        navn: 'Søker har ikke foreldreansvar',
         lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
       },
     ],
     SVP_VK_1: [
-      {
-        kode: '1061',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: '§14-4 tredje ledd: Søker er ikke i arbeid/har ikke tap av pensjonsgivende inntekt',
-        lovHjemmel: '{"fagsakYtelseType": [{"SVP": [{"kategori": "SVP_VK_1", "lovreferanse": "14-4 3. ledd"}]}]}',
-      },
       {
         kode: '1062',
         kodeverk: 'AVSLAGSARSAK',
@@ -4314,16 +4316,10 @@ export const alleKodeverk: AlleKodeverk = {
         lovHjemmel: '{"fagsakYtelseType": [{"SVP": [{"kategori": "SVP_VK_1", "lovreferanse": "14-4 1. ledd"}]}]}',
       },
       {
-        kode: '1060',
+        kode: '1066',
         kodeverk: 'AVSLAGSARSAK',
-        navn: '§14-4 første ledd: Søker er ikke gravid kvinne',
-        lovHjemmel: '{"fagsakYtelseType": [{"SVP": [{"kategori": "SVP_VK_1", "lovreferanse": "14-4 1. ledd"}]}]}',
-      },
-      {
-        kode: '1064',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: '§14-4 første ledd: Arbeidstaker kan omplasseres til annet høvelig arbeid',
-        lovHjemmel: '{"fagsakYtelseType": [{"SVP": [{"kategori": "SVP_VK_1", "lovreferanse": "14-4 1. ledd"}]}]}',
+        navn: '§14-4 andre ledd: Næringsdrivende/frilanser har mulighet til å tilrettelegge sitt virke',
+        lovHjemmel: '{"fagsakYtelseType": [{"SVP": [{"kategori": "SVP_VK_1", "lovreferanse": "14-4 2. ledd"}]}]}',
       },
       {
         kode: '1065',
@@ -4338,27 +4334,59 @@ export const alleKodeverk: AlleKodeverk = {
         lovHjemmel: '{"fagsakYtelseType": [{"SVP": [{"kategori": "SVP_VK_1", "lovreferanse": "14-4 1. ledd"}]}]}',
       },
       {
-        kode: '1066',
+        kode: '1064',
         kodeverk: 'AVSLAGSARSAK',
-        navn: '§14-4 andre ledd: Næringsdrivende/frilanser har mulighet til å tilrettelegge sitt virke',
-        lovHjemmel: '{"fagsakYtelseType": [{"SVP": [{"kategori": "SVP_VK_1", "lovreferanse": "14-4 2. ledd"}]}]}',
+        navn: '§14-4 første ledd: Arbeidstaker kan omplasseres til annet høvelig arbeid',
+        lovHjemmel: '{"fagsakYtelseType": [{"SVP": [{"kategori": "SVP_VK_1", "lovreferanse": "14-4 1. ledd"}]}]}',
+      },
+      {
+        kode: '1060',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: '§14-4 første ledd: Søker er ikke gravid kvinne',
+        lovHjemmel: '{"fagsakYtelseType": [{"SVP": [{"kategori": "SVP_VK_1", "lovreferanse": "14-4 1. ledd"}]}]}',
+      },
+      {
+        kode: '1061',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: '§14-4 tredje ledd: Søker er ikke i arbeid/har ikke tap av pensjonsgivende inntekt',
+        lovHjemmel: '{"fagsakYtelseType": [{"SVP": [{"kategori": "SVP_VK_1", "lovreferanse": "14-4 3. ledd"}]}]}',
       },
     ],
     FP_VK_16: [
-      {
-        kode: '1051',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Stebarnsadopsjon ikke flere dager igjen',
-        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_16", "lovreferanse": "14-5"}]}]}',
-      },
       {
         kode: '1004',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Barn over 15 år',
         lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_16_1", "lovreferanse": "14-5"}]}]}',
       },
+      {
+        kode: '1051',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Stebarnsadopsjon ikke flere dager igjen',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_16", "lovreferanse": "14-5"}]}]}',
+      },
     ],
     FP_VK_5: [
+      {
+        kode: '1010',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Mor ikke død ved fødsel/omsorg',
+        lovHjemmel: null,
+      },
+      {
+        kode: '1011',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Engangsstønad er allerede utbetalt til mor',
+        lovHjemmel:
+          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK1", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK4", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK5", "lovreferanse": "§ 14-17 3. ledd"}]}, {"FP": [{"kategori": "FP_VK1", "lovreferanse": "§ 14-5 1. ledd"}, {"kategori": "FP_VK11", "lovreferanse": "§ 14-5 1. ledd"}, {"kategori": "FP_VK16", "lovreferanse": "§ 14-5 2. ledd"}]}]}',
+      },
+      {
+        kode: '1032',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Foreldrepenger er allerede utbetalt til mor',
+        lovHjemmel:
+          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK1", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK4", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK5", "lovreferanse": "§ 14-17 3. ledd"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
+      },
       {
         kode: '1012',
         kodeverk: 'AVSLAGSARSAK',
@@ -4372,16 +4400,86 @@ export const alleKodeverk: AlleKodeverk = {
         lovHjemmel: null,
       },
       {
-        kode: '1032',
+        kode: '1009',
         kodeverk: 'AVSLAGSARSAK',
-        navn: 'Foreldrepenger er allerede utbetalt til mor',
+        navn: 'Mor ikke død',
+        lovHjemmel: null,
+      },
+      {
+        kode: '1033',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Engangsstønad er allerede utbetalt til far/medmor ',
         lovHjemmel:
-          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK1", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK4", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK5", "lovreferanse": "§ 14-17 3. ledd"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
+          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": {"lovreferanse": "14-5"}}]}',
+      },
+      {
+        kode: '1034',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Foreldrepenger er allerede utbetalt til far/medmor',
+        lovHjemmel:
+          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
+      },
+    ],
+    FP_VK_6: [
+      {
+        kode: '1004',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Barn over 15 år',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_16_1", "lovreferanse": "14-5"}]}]}',
       },
       {
         kode: '1009',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Mor ikke død',
+        lovHjemmel: null,
+      },
+      {
+        kode: '1014',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Søker har ikke foreldreansvar',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
+      },
+      {
+        kode: '1015',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Søker har hatt vanlig samvær med barnet',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
+      },
+      {
+        kode: '1016',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Søker er ikke barnets far',
+        lovHjemmel: null,
+      },
+      {
+        kode: '1017',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Omsorgsovertakelse etter 56 uker',
+        lovHjemmel: null,
+      },
+      {
+        kode: '1012',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Far har ikke omsorg for barnet',
+        lovHjemmel: null,
+      },
+      {
+        kode: '1033',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Engangsstønad er allerede utbetalt til far/medmor ',
+        lovHjemmel:
+          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": {"lovreferanse": "14-5"}}]}',
+      },
+      {
+        kode: '1051',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Stebarnsadopsjon ikke flere dager igjen',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_16", "lovreferanse": "14-5"}]}]}',
+      },
+      {
+        kode: '1006',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Mann adopterer ikke alene',
         lovHjemmel: null,
       },
       {
@@ -4392,11 +4490,28 @@ export const alleKodeverk: AlleKodeverk = {
           '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
       },
       {
-        kode: '1033',
+        kode: '1008',
         kodeverk: 'AVSLAGSARSAK',
-        navn: 'Engangsstønad er allerede utbetalt til far/medmor ',
-        lovHjemmel:
-          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK4", "lovreferanse": "14-17"}, {"kategori": "FP_VK5", "lovreferanse": "14-17"}, {"kategori": "FP_VK33", "lovreferanse": "14-17"}]}, {"FP": {"lovreferanse": "14-5"}}]}',
+        navn: 'Søker er ikke barnets far',
+        lovHjemmel: null,
+      },
+      {
+        kode: '1018',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Ikke foreldreansvar alene etter barnelova',
+        lovHjemmel: null,
+      },
+      {
+        kode: '1005',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Ektefelles/samboers barn',
+        lovHjemmel: null,
+      },
+      {
+        kode: '1010',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Mor ikke død ved fødsel/omsorg',
+        lovHjemmel: null,
       },
       {
         kode: '1011',
@@ -4406,10 +4521,11 @@ export const alleKodeverk: AlleKodeverk = {
           '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK1", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK4", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK5", "lovreferanse": "§ 14-17 3. ledd"}]}, {"FP": [{"kategori": "FP_VK1", "lovreferanse": "§ 14-5 1. ledd"}, {"kategori": "FP_VK11", "lovreferanse": "§ 14-5 1. ledd"}, {"kategori": "FP_VK16", "lovreferanse": "§ 14-5 2. ledd"}]}]}',
       },
       {
-        kode: '1010',
+        kode: '1032',
         kodeverk: 'AVSLAGSARSAK',
-        navn: 'Mor ikke død ved fødsel/omsorg',
-        lovHjemmel: null,
+        navn: 'Foreldrepenger er allerede utbetalt til mor',
+        lovHjemmel:
+          '{"fagsakYtelseType": [{"ES": [{"kategori": "FP_VK1", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK4", "lovreferanse": "§ 14-17 1. ledd"}, {"kategori": "FP_VK5", "lovreferanse": "§ 14-17 3. ledd"}]}, {"FP": [{"kategori": "FP_VK_8", "lovreferanse": "14-5"}]}]}',
       },
     ],
     FP_VK_2_L: [
@@ -4417,18 +4533,6 @@ export const alleKodeverk: AlleKodeverk = {
         kode: '1025',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Søker er ikke bosatt',
-        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
-      },
-      {
-        kode: '1024',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Søker har ikke oppholdsrett (EØS)',
-        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
-      },
-      {
-        kode: '1020',
-        kodeverk: 'AVSLAGSARSAK',
-        navn: 'Søker er ikke medlem',
         lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
       },
       {
@@ -4441,6 +4545,18 @@ export const alleKodeverk: AlleKodeverk = {
         kode: '1023',
         kodeverk: 'AVSLAGSARSAK',
         navn: 'Søker har ikke lovlig opphold',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
+      },
+      {
+        kode: '1024',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Søker har ikke oppholdsrett (EØS)',
+        lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
+      },
+      {
+        kode: '1020',
+        kodeverk: 'AVSLAGSARSAK',
+        navn: 'Søker er ikke medlem',
         lovHjemmel: '{"fagsakYtelseType": [{"FP": [{"kategori": "FP_VK_2", "lovreferanse": "14-2"}]}]}',
       },
     ],
