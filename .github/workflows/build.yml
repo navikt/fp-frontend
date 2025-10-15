@@ -84,11 +84,14 @@ jobs:
           cache: 'yarn'
 
       - name: Use turbo cache
-        uses: actions/cache@v4
+        id: hent-cache
+        uses: actions/cache/restore@v4
         with:
           path: ~/work/fp-frontend/fp-frontend/.turbo
           key: turbo-${{ runner.os }}-${{ github.ref_name }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
-          restore-keys: turbo-${{ runner.os }}-master-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
+          restore-keys: |
+            turbo-${{ runner.os }}-${{ github.ref_name }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }} |
+            turbo-${{ runner.os }}-master-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
 
       - name: Installere dependencies
         run: yarn install --immutable
@@ -127,3 +130,11 @@ jobs:
         with:
           name: code-coverage-report
           path: coverage
+
+
+      - name: Lagre alltid turbo cache
+        if: always() && steps.hent-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          key: ${{ steps.hente-cache.outputs.cache-primary-key }}
+          path: ~/work/fp-frontend/fp-frontend/.turbo
