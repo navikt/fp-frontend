@@ -148,7 +148,7 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                             const status = info[a.internArbeidsforholdId];
                             return {
                               ...info,
-                               
+
                               [a.internArbeidsforholdId]: status === undefined || status === false,
                             };
                           });

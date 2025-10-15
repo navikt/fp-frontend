@@ -10,10 +10,10 @@
     "test": "vitest",
     "test:watch": "vitest --watch=true",
     "tsc": "tsc --pretty",
-    "eslint": "eslint \"src/**/*.ts*\" --color",
-    "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
+    "eslint": "eslint src/**/*.ts* --color",
+    "eslint:fix": "eslint --fix src/**/*.ts* --color",
     "prettier": "prettier --write src",
-    "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build"
+    "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
     "@navikt/ds-react": "7.32.1",

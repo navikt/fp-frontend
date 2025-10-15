@@ -18,6 +18,8 @@
   "VurderOmsorgsovertakelseVilkåretForm.EktefellesBarn.Label": "Er det ektefelles barn?",
   "VurderOmsorgsovertakelseVilkåretForm.HvilkeBarnSkalBrukes": "Hvilke barn skal med i vurderingen?",
   "VurderOmsorgsovertakelseVilkåretForm.BarnRad": "Barn {nummer} født {fødseldato}",
+  "VurderOmsorgsovertakelseVilkåretForm.Delvilkår.Label": "Velg vilkår som skal anvendes",
+  "VurderOmsorgsovertakelseVilkåretForm.Delvilkår.ReadOnlyLabel": "Vilkår",
   "VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.Label": "Er vilkåret oppfylt?",
   "VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.ReadOnlyLabel": "Vilkår",
   "VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.Oppfylt": "Oppfylt",
