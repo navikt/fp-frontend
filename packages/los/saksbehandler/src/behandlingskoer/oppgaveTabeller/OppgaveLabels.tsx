@@ -27,11 +27,7 @@ export const OppgaveLabels = ({ oppgave }: Props) => {
       >
         {oppgave.fagsakYtelseType}
       </Tag>
-      <Tag
-        size="small"
-        variant="warning-filled"
-        title={behandlingTyper.find(b => b.kode === oppgave.behandlingstype)?.navn}
-      >
+      <Tag size="small" variant="error" title={behandlingTyper.find(b => b.kode === oppgave.behandlingstype)?.navn}>
         {hentAlleBehandlingstypeKortnavn(intl)[oppgave.behandlingstype]}
       </Tag>
       {oppgave.andreKriterier.sort(sorterAndreKriterier).map(kode => (

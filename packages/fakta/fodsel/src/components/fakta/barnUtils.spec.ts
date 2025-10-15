@@ -2,7 +2,7 @@ import { expect } from 'vitest';
 
 import type { FødselDtoGjeldendeBarn } from '@navikt/fp-types';
 
-import { erBarnUlike, erGjeldendeBarnLike, formaterLiv } from './barnUtils';
+import { erGjeldendeBarnLike, formaterLiv } from './barnUtils';
 
 describe('barnUtils', () => {
   describe('formaterLiv', () => {
@@ -51,16 +51,6 @@ describe('barnUtils', () => {
 
     it('skal validere 0 barn som ulike', () => {
       expect(erGjeldendeBarnLike([])).toBeFalsy();
-    });
-  });
-
-  describe('erBarnUlike', () => {
-    const barn = { fødselsdato: '2025-05-28', dødsdato: '2025-05-28' };
-    it('skal validere like barn som false', () => {
-      expect(erBarnUlike(barn)(barn)).toBeFalsy();
-    });
-    it('skal validere ulike barn som true', () => {
-      expect(erBarnUlike(barn)({ fødselsdato: '2025-05-28', dødsdato: '2024-05-28' })).toBeTruthy();
     });
   });
 });

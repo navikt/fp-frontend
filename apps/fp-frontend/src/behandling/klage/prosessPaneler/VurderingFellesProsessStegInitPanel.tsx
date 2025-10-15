@@ -126,6 +126,10 @@ const getLagringSideeffekter =
         toggleKlageModal(true);
       } else if (oppdaterProsessStegOgFaktaPanelIUrl) {
         oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
+        globalThis.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
       }
     };
   };

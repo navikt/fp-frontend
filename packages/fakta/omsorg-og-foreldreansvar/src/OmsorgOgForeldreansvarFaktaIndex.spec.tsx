@@ -43,7 +43,7 @@ describe('OmsorgOgForeldreansvarFaktaIndex', () => {
     await userEvent.type(omsorgsovertakelseInput, '14.09.2022');
 
     expect(screen.getByText('Velg vilkår som skal anvendes')).toBeInTheDocument();
-    const radioKnapp = screen.getByRole('radio', { name: 'Omsorgsvilkår §14-17 tredje ledd' });
+    const radioKnapp = screen.getByRole('radio', { name: 'Omsorg §14-17 tredje ledd' });
     expect(radioKnapp).not.toBeChecked();
     await userEvent.click(radioKnapp);
     expect(radioKnapp).toBeChecked();

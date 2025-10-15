@@ -12,8 +12,10 @@ import {
   type AlleKodeverk,
   type Behandling,
   type BehandlingArsakType,
+  type Behandlingsresultat,
   type BeregningsresultatDagytelse,
   type BeregningsresultatEs,
+  type Fagsak,
   isAvslag,
   isInnvilget,
   isOpphor,
@@ -21,7 +23,6 @@ import {
   type Oppgave,
   type SimuleringResultat,
   type TilbakekrevingValg,
-  type Vilkar,
 } from '@navikt/fp-types';
 import type {
   ForeslaVedtakAp,
@@ -74,30 +75,23 @@ const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['beha
     .map(({ behandlingArsakType }) => behandlingArsakType)
     .some(bt => bt === 'ETTER_KLAGE' || bt === 'RE-KLAG-U-INNTK' || bt === 'RE-KLAG-M-INNTK');
 
-const lagÅrsakString = (revurderingAarsaker: BehandlingArsakType[], alleKodeverk: AlleKodeverk): string | undefined => {
-  if (revurderingAarsaker.length < 1) {
-    return undefined;
-  }
-  const aarsakTekstList = [];
-  const endringFraBrukerAarsak = revurderingAarsaker.find(aarsak => aarsak === 'RE-END-FRA-BRUKER');
-  const alleAndreAarsakerNavn = revurderingAarsaker
-    .filter(aarsak => aarsak !== 'RE-END-FRA-BRUKER')
-    .map(aarsak => alleKodeverk['BehandlingÅrsakType'].find(({ kode }) => kode === aarsak)?.navn ?? '');
-  // Dersom en av årsakene er "RE_ENDRING_FRA_BRUKER" skal alltid denne vises først
-  if (endringFraBrukerAarsak !== undefined) {
-    aarsakTekstList.push(
-      alleKodeverk['BehandlingÅrsakType'].find(({ kode }) => kode === endringFraBrukerAarsak)?.navn ?? '',
-    );
-  }
-  aarsakTekstList.push(...alleAndreAarsakerNavn);
-  return aarsakTekstList.join(', ');
+const lagÅrsakString = (revurderingAarsaker: BehandlingArsakType[], alleKodeverk: AlleKodeverk): string => {
+  // Dersom en av årsakene er "RE_ENDRING_FRA_BRUKER" skal den alltid vises først
+  return revurderingAarsaker
+    .toSorted((a, b) => {
+      if (a === 'RE-END-FRA-BRUKER') return -1;
+      if (b === 'RE-END-FRA-BRUKER') return 1;
+      return 0;
+    })
+    .map(årsakskode => alleKodeverk['BehandlingÅrsakType'].find(({ kode }) => kode === årsakskode)?.navn ?? '')
+    .join(', ');
 };
 
 const erNyttBehandlingResult = (
-  beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
+  harBeregningsresultat: boolean,
   originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
 ): boolean => {
-  const vedtakResult = beregningResultat ? VedtakResultType.INNVILGET : VedtakResultType.AVSLAG;
+  const vedtakResult = harBeregningsresultat ? VedtakResultType.INNVILGET : VedtakResultType.AVSLAG;
   const vedtakResultOriginal = originaltBeregningResultat ? VedtakResultType.INNVILGET : VedtakResultType.AVSLAG;
   return vedtakResultOriginal !== vedtakResult;
 };
@@ -140,44 +134,28 @@ const erTilkjentYtelseEllerAntallBarnEndret = (
 
 const hentResultattekst = (
   erInnvilget: boolean,
-  beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
+  beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
 ): string => {
-  if (erNyttBehandlingResult(beregningResultat, originaltBeregningResultat)) {
-    return beregningResultat ? 'VedtakForm.Resultat.EndretTilInnvilget' : 'VedtakForm.Resultat.EndretTilAvslag';
+  if (erNyttBehandlingResult(!!beregningsresultat, originaltBeregningResultat)) {
+    return beregningsresultat ? 'VedtakForm.Resultat.EndretTilInnvilget' : 'VedtakForm.Resultat.EndretTilAvslag';
   }
   if (erInnvilget) {
-    return erTilkjentYtelseEllerAntallBarnEndret(erInnvilget, beregningResultat, originaltBeregningResultat)
+    return erTilkjentYtelseEllerAntallBarnEndret(erInnvilget, beregningsresultat, originaltBeregningResultat)
       ? 'VedtakForm.Resultat.EndretTilkjentYtelse'
       : 'VedtakForm.Resultat.IngenEndring';
   }
-  return erTilkjentYtelseEllerAntallBarnEndret(erInnvilget, beregningResultat, originaltBeregningResultat)
+  return erTilkjentYtelseEllerAntallBarnEndret(erInnvilget, beregningsresultat, originaltBeregningResultat)
     ? 'VedtakForm.Resultat.EndretAntallBarn'
     : 'VedtakForm.Resultat.IngenEndring';
 };
 
-const finnInvilgetRevurderingTekst = (
-  intl: IntlShape,
-  ytelseTypeKode: string,
-  alleKodeverk: AlleKodeverk,
-  tilbakekrevingText: string | undefined,
-  konsekvenserForYtelsen: KonsekvensForYtelsen[],
-  beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
-  originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
-): string => {
-  if (ytelseTypeKode === 'ES') {
-    return intl.formatMessage({ id: hentResultattekst(true, beregningResultat, originaltBeregningResultat) });
-  }
-  const konsekvens = lagKonsekvensForYtelsenTekst(alleKodeverk, konsekvenserForYtelsen);
-  return `${konsekvens}${konsekvens === '' ? '. ' : (tilbakekrevingText ?? '')}`;
-};
-
 const transformValues = (
   values: VedtakFormValues,
-  aksjonspunkter: Aksjonspunkt[],
+  aksjonspunkterForPanel: Aksjonspunkt[],
   harOverstyrtVedtaksbrev: boolean,
 ): RevurderingVedtakAksjonspunkter[] =>
-  aksjonspunkter
+  aksjonspunkterForPanel
     .filter(ap => ap.kanLoses)
     .map(ap => ({
       kode: validerApKodeOgHentApEnum(
@@ -199,7 +177,6 @@ interface Props {
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
-  vilkår: Vilkar[];
   beregningErManueltFastsatt: boolean;
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   oppgaver?: Oppgave[];
@@ -211,7 +188,6 @@ export const VedtakRevurderingForm = ({
   beregningsresultat,
   tilbakekrevingvalg,
   simuleringResultat,
-  vilkår,
   beregningErManueltFastsatt,
   beregningsresultatOriginalBehandling,
   oppgaver,
@@ -219,7 +195,7 @@ export const VedtakRevurderingForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
+  const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly, aksjonspunkterForPanel } =
     usePanelDataContext<RevurderingVedtakAksjonspunkter[]>();
 
   const { harRedigertBrev } = useVedtakEditeringContext();
@@ -228,7 +204,7 @@ export const VedtakRevurderingForm = ({
     harRedigertBrev || behandling.behandlingsresultat?.vedtaksbrev === 'FRITEKST',
   );
 
-  const { behandlingsresultat, språkkode, aksjonspunkt, behandlingÅrsaker } = behandling;
+  const { behandlingsresultat, språkkode, behandlingÅrsaker, vilkår } = behandling;
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<VedtakFormValues>();
 
@@ -245,34 +221,17 @@ export const VedtakRevurderingForm = ({
   );
   const tilbakekrevingtekst = getTilbakekrevingText(simuleringResultat, tilbakekrevingvalg);
 
-  let vedtakstatusTekst = '';
-  if (behandlingsresultat && isInnvilget(behandlingsresultat.type)) {
-    const konsekvenserForYtelsen = behandlingsresultat.konsekvenserForYtelsen;
-    vedtakstatusTekst = finnInvilgetRevurderingTekst(
+  const vedtakstatusTekst =
+    behandlingsresultat &&
+    lagVedtakstatusTekst(
+      behandlingsresultat,
       intl,
-      fagsak.fagsakYtelseType,
+      fagsak,
       alleKodeverk,
       tilbakekrevingtekst,
-      konsekvenserForYtelsen ?? [],
       beregningsresultat,
       beregningsresultatOriginalBehandling,
     );
-  }
-  if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
-    vedtakstatusTekst = intl.formatMessage({
-      id: hentResultattekst(false, beregningsresultat, beregningsresultatOriginalBehandling),
-    });
-  }
-  if (behandlingsresultat && isOpphor(behandlingsresultat.type) && behandlingsresultat.opphørsdato) {
-    vedtakstatusTekst = intl.formatMessage(
-      {
-        id: 'VedtakForm.Revurdering.Opphoerer',
-      },
-      {
-        dato: dateFormat(behandlingsresultat.opphørsdato),
-      },
-    );
-  }
 
   const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(previewCallback, begrunnelse);
 
@@ -280,7 +239,7 @@ export const VedtakRevurderingForm = ({
     <RhfForm
       formMethods={formMethods}
       onSubmit={(values: VedtakFormValues) =>
-        submitCallback(transformValues(values, aksjonspunkt, harValgtÅRedigereVedtaksbrev))
+        submitCallback(transformValues(values, aksjonspunkterForPanel, harValgtÅRedigereVedtaksbrev))
       }
       setDataOnUnmount={setMellomlagretFormData}
     >
@@ -337,4 +296,30 @@ export const VedtakRevurderingForm = ({
       />
     </RhfForm>
   );
+};
+
+const lagVedtakstatusTekst = (
+  { type, opphørsdato, konsekvenserForYtelsen }: Behandlingsresultat,
+  intl: IntlShape,
+  fagsak: Fagsak,
+  alleKodeverk: AlleKodeverk,
+  tilbakekrevingtekst: string | undefined,
+  beregningsresultat: BeregningsresultatDagytelse | BeregningsresultatEs | undefined,
+  beregningsresultatOriginalBehandling: BeregningsresultatDagytelse | BeregningsresultatEs | undefined,
+): string | undefined => {
+  if (isInnvilget(type) && fagsak.fagsakYtelseType === 'ES') {
+    return intl.formatMessage({
+      id: hentResultattekst(true, beregningsresultat, beregningsresultatOriginalBehandling),
+    });
+  } else if (isInnvilget(type)) {
+    const konsekvens = lagKonsekvensForYtelsenTekst(alleKodeverk, konsekvenserForYtelsen);
+    return `${konsekvens}${konsekvens === '' ? '. ' : (tilbakekrevingtekst ?? '')}`;
+  } else if (isAvslag(type)) {
+    return intl.formatMessage({
+      id: hentResultattekst(false, beregningsresultat, beregningsresultatOriginalBehandling),
+    });
+  } else if (isOpphor(type) && opphørsdato) {
+    return intl.formatMessage({ id: 'VedtakForm.Revurdering.Opphoerer' }, { dato: dateFormat(opphørsdato) });
+  }
+  return undefined;
 };

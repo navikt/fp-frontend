@@ -87,6 +87,7 @@ type KodeverkEnumMap = {
   KlageMedholdÅrsak: KlageMedholdÅrsak;
   KonsekvensForYtelsen: KonsekvensForYtelsen;
   Landkoder: Landkode;
+  LineærAvslagsårsak: Avslagsarsak;
   ManuellBehandlingÅrsak: ManuellBehandlingÅrsak;
   MedlemskapDekningType: MedlemskapDekningType;
   MedlemskapManuellVurderingType: MedlemskapManuellVurderingType;
@@ -124,6 +125,7 @@ type KodeverkEnumMap = {
 export type KodeverkType = keyof KodeverkEnumMap;
 
 type AvslagsårsakKodeverk = Record<VilkårType | '-', KodeverkMedNavn<'Avslagsårsak'>[]>; // TODO [JOHANNES] -- mildertidig (?) hack
+
 export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
   lovHjemmel: string;
   sortering: string;
@@ -133,20 +135,27 @@ export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrs
   valgbarForKonto: string[];
   synligForRolle: string[];
 };
+
 export type GraderingAvslagÅrsakKodeverk = KodeverkMedNavn<'GraderingAvslagÅrsak'> & {
   lovHjemmel: string;
 };
 
+type LineærAvslagsårsakKodeverk = KodeverkMedNavn<'LineærAvslagsårsak'> & {
+  lovHjemmel: string;
+};
+
 type KodeverkMedSammeVerditype = {
-  [K in Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'>]: KodeverkMedNavn<
-    K extends KodeverkType ? K : unknown
-  >[];
+  [K in Exclude<
+    KodeverkType,
+    'Avslagsårsak' | 'LineærAvslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'
+  >]: KodeverkMedNavn<K extends KodeverkType ? K : unknown>[];
 };
 
 export type AlleKodeverk = KodeverkMedSammeVerditype & {
   Avslagsårsak: AvslagsårsakKodeverk;
   GraderingAvslagÅrsak: GraderingAvslagÅrsakKodeverk[];
   PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
+  LineærAvslagsårsak: LineærAvslagsårsakKodeverk[];
 };
 
 type EnumOrUnknown<T extends KodeverkType> = T extends keyof KodeverkEnumMap ? KodeverkEnumMap[T] : unknown;

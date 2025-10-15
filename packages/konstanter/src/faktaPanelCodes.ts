@@ -15,6 +15,7 @@ export enum FaktaPanelCode {
   OMSORG = 'omsorg',
   OMSORG_OG_RETT = 'omsorgogrett',
   OMSORGSVILKARET = 'omsorgsvilkaaret',
+  OMSORGSOVERTAKELSE = 'omsorgsovertakelse',
   OPPTJENINGSVILKARET = 'opptjeningsvilkaaret',
   PERMISJON = 'permisjon',
   SAKEN = 'saken',

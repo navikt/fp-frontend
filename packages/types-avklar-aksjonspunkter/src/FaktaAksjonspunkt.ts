@@ -37,6 +37,7 @@ import type { OverstyringRettigheterAp } from './fakta/OverstyringRettigheterAp'
 import type { VurderArbeidsforholdInntektsmeldingAp } from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 import type { VurderArbeidsforholdPermisjonAp } from './fakta/VurderArbeidsforholdPermisjonAp';
 import type { VurderDokumentasjonAp } from './fakta/VurderDokumentasjonAp';
+import type { VurderOmsorgsovertakelseVilkåretAp } from './fakta/VurderOmsorgsovertakelseVilkåretAp';
 
 export type FaktaAksjonspunkt =
   | AvklarVergeAp
@@ -67,6 +68,7 @@ export type FaktaAksjonspunkt =
   | FordelBeregningsgrunnlagAP
   | VurderRefusjonBeregningsgrunnlagAP
   | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp
+  | VurderOmsorgsovertakelseVilkåretAp
   | VurderArbeidsforholdInntektsmeldingAp
   | VurderDokumentasjonAp
   | VurderArbeidsforholdPermisjonAp

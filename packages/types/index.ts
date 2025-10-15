@@ -291,3 +291,5 @@ export {
   isKlageOmgjort,
   isKlageAvvist,
 } from './src/behandlingResultatType';
+
+export type { OmsorgsovertakelseDto } from './src/omsorgsovertakelse';
