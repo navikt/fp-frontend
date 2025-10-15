@@ -14,21 +14,11 @@ on:
         type: string
         description: Miljø versjon som skal brukes til bygg.
         default: 'ubuntu-latest'
-      node-version:
-        required: false
-        type: string
-        description: Node version som brukes.
-        default: '22'
       build-image:
         required: false
         type: boolean
         description: Skal docker image bygges?
         default: true
-      run-knip:
-        required: false
-        type: boolean
-        description: Skal knip kjøres?
-        default: false
       push-image:
         required: false
         type: boolean
@@ -77,10 +67,9 @@ jobs:
         env:
           NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
-      - name: Set up NODE med yarn
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: ${{ inputs.node-version }}
+          node-version: 22.17.1
           cache: 'yarn'
 
       - name: Use turbo cache
@@ -130,7 +119,6 @@ jobs:
         with:
           name: code-coverage-report
           path: coverage
-
 
       - name: Lagre alltid turbo cache
         if: always() && steps.hent-cache.outputs.cache-hit != 'true'
