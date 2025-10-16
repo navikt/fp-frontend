@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs22-debian12
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:22-slim
 
 LABEL org.opencontainers.image.source=https://github.com/navikt/fp-frontend
 ENV TZ="Europe/Oslo"
