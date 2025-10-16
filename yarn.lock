@@ -2199,7 +2199,7 @@ __metadata:
     "@navikt/fp-utbetalingsdata-is15": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-fakta-beregning": 12.1.21
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 13.1.19
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 13.1.21
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 7.1.16
     "@navikt/ft-form-hooks": 9.2.3
     "@navikt/ft-form-validators": 4.2.12
@@ -4060,7 +4060,7 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-fakta-beregning": 12.1.21
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 13.1.19
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 13.1.21
     "@navikt/ft-prosess-beregningsgrunnlag": 11.1.17
     eslint: 9.37.0
     typescript: 5.9.3
@@ -4195,9 +4195,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:13.1.19":
-  version: 13.1.19
-  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:13.1.19::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F13.1.19%2Fcdb4a4828c9a2649e3a30f1fc2818efc930bfed5"
+"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:13.1.21":
+  version: 13.1.21
+  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:13.1.21::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F13.1.21%2Fe5b330684062b4881f7d0bb948a868c6441220a0"
   dependencies:
     "@navikt/aksel-icons": 7.32.1
     "@navikt/ds-css": 7.32.1
@@ -4229,7 +4229,7 @@ __metadata:
     react-hook-form: 7.x
     react-intl: 6.x
     uuid: 9.0.1
-  checksum: f3e5a19ef30d8bab5aa12e75fe10cc6a71907dcf4ec420848fea161bc2cfa90b945c22f27bbf3efcbb9c6cb2ce6340ce93b620970c6d40a1b8ec2292e9d43883
+  checksum: ceee448a69ea90fd6d3388740718200588a3290bbc190be93937548e08e8074eee9f03d364d95298734a7d09024ee7de13ae5df4d4f349987fa20730eb730943
   languageName: node
   linkType: hard
 

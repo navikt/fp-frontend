@@ -79,8 +79,6 @@ const getBekreftAksjonspunktFaktaCallback =
     const apListe = Array.isArray(aksjonspunkter) ? aksjonspunkter : [aksjonspunkter];
 
     const model = apListe.map(ap => ({
-      // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       '@type': ap.kode,
       ...ap,
     }));
@@ -95,9 +93,7 @@ const getBekreftAksjonspunktFaktaCallback =
       if (model.length === 0) {
         throw new Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
       }
-      // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      if (overstyringApCodes.includes(model[0].kode)) {
+      if (overstyringApCodes.includes(model[0]?.kode ?? '')) {
         return lagreOverstyrteAksjonspunkter({
           ...params,
           overstyrteAksjonspunktDtoer: model,

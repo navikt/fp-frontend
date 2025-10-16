@@ -105,7 +105,7 @@
     "@navikt/fp-utbetalingsdata-is15": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-fakta-beregning": "12.1.21",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "13.1.19",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "13.1.21",
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "7.1.16",
     "@navikt/ft-form-hooks": "9.2.3",
     "@navikt/ft-form-validators": "4.2.12",
