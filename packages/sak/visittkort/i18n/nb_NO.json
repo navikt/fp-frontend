@@ -24,10 +24,7 @@
 
   "VisittkortBarnInfoPanel.Barnevogn": "Barnevogn",
 
-  "VisittkortBarnInfoOmsorgPanel.Foreldreansvar": "Foreldreansvar {dato}",
-  "VisittkortBarnInfoOmsorgPanel.Adopsjon": "Adopsjon {dato}",
-  "VisittkortBarnInfoOmsorgPanel.ForeldreansvarAntallBarn": "Foreldreansvar({antall} barn) {dato}",
-  "VisittkortBarnInfoOmsorgPanel.AdopsjonAntallBarn": "Adopsjon({antall} barn) {dato}",
+  "VisittkortBarnInfoOmsorgPanel.Omsorgsovertakelse": "Omsorgsovertakelse{antallBarn, plural, one {} other {({antallBarn} barn)}} {dato}",
 
   "VisittkortPanel.Ukjent": "Ukjent navn, mangler norsk id-nr"
 }

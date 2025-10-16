@@ -23,38 +23,38 @@ const Component = ({
 );
 
 describe('VisittkortBarnInfoPanel', () => {
-  it('skal vise panel for fødsel av ett barn', async () => {
+  it('skal vise panel for fødsel av ett barn', () => {
     render(<Component antallBarn={1} />);
-    expect(await screen.findByText(/Født 01.01.2024 \([^)]+\)/)).toBeInTheDocument();
+    expect(screen.getByText(/Født 01.01.2024 \([^)]+\)/)).toBeInTheDocument();
   });
 
-  it('skal vise panel for fødsel av flerlinger', async () => {
+  it('skal vise panel for fødsel av flerlinger', () => {
     render(<Component antallBarn={3} />);
-    expect(await screen.findByText(/Flerlinger Født 01.01.2024 \([^)]+\)/)).toBeInTheDocument();
+    expect(screen.getByText(/Flerlinger Født 01.01.2024 \([^)]+\)/)).toBeInTheDocument();
   });
 
-  it('skal vise panel for dødfødsel', async () => {
+  it('skal vise panel for dødfødsel', () => {
     render(<Component dødfødsel={true} />);
-    expect(await screen.findByText('Død')).toBeInTheDocument();
+    expect(screen.getByText('Død')).toBeInTheDocument();
   });
 
-  it('skal vise panel for omsorg', async () => {
+  it('skal vise panel for omsorg', () => {
     render(<Component hendelseType="OMSRGO" />);
-    expect(await screen.findByText(/Foreldreansvar 01.01.2024/)).toBeInTheDocument();
+    expect(screen.getByText('Omsorgsovertakelse 01.01.2024')).toBeInTheDocument();
   });
 
-  it('skal vise panel for adopsjon av ett barn', async () => {
+  it('skal vise panel for adopsjon av ett barn', () => {
     render(<Component hendelseType="ADPSJN" />);
-    expect(await screen.findByText('Adopsjon 01.01.2024')).toBeInTheDocument();
+    expect(screen.getByText('Omsorgsovertakelse 01.01.2024')).toBeInTheDocument();
   });
 
-  it('skal vise panel for adopsjon av flere barn', async () => {
+  it('skal vise panel for adopsjon av flere barn', () => {
     render(<Component hendelseType="ADPSJN" antallBarn={2} />);
-    expect(await screen.findByText('Adopsjon(2 barn) 01.01.2024')).toBeInTheDocument();
+    expect(screen.getByText('Omsorgsovertakelse(2 barn) 01.01.2024')).toBeInTheDocument();
   });
 
-  it('skal vise panel for termin', async () => {
+  it('skal vise panel for termin', () => {
     render(<Component hendelseType="TERM" />);
-    expect(await screen.findByText('Termin 01.01.2024')).toBeInTheDocument();
+    expect(screen.getByText('Termin 01.01.2024')).toBeInTheDocument();
   });
 });
