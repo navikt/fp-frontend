@@ -1,4 +1,5 @@
 import type { BeregningAksjonspunktSubmitType } from '@navikt/ft-prosess-beregningsgrunnlag';
+import type { ForeslaVedtakTilbakekrevingAp } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 
 import type { AvklarOpptjeningsvilkaretAp } from './prosess/AvklarOpptjeningsvilkaretAp';
 import type { BekreftSokersOpplysningspliktManuAp } from './prosess/BekreftSokersOpplysningspliktManuAp';
@@ -10,10 +11,12 @@ import type { ForeslaVedtakManueltAp } from './prosess/ForeslaVedtakManueltAp';
 import type { KlageFormkravAp } from './prosess/KlageFormkravAp';
 import type { KlageVurderingResultatAp } from './prosess/KlageVurderingResultatAp';
 import type { KontrollAvManueltOpprettetRevurderingsbehandlingAp } from './prosess/KontrollAvManueltOpprettetRevurderingsbehandlingAp';
+import type { KontrollerEtterbetalingTilSøkerAP } from './prosess/KontrollerEtterbetalingTilSøkerAP';
 import type { KontrollerRevurderingsBehandlingAp } from './prosess/KontrollerRevurderingsBehandlingAp';
 import type { OmsorgsvilkarAp } from './prosess/OmsorgsvilkarAp';
 import type { OverstyringAp } from './prosess/OverstyringAp';
 import type { OverstyringMedlemskapsvilkaretLopendeAp } from './prosess/OverstyringMedlemskapsvilkaretLopendeAp';
+import type { OverstyringMedlemskapvilkaretForutgaendeAp } from './prosess/OverstyringMedlemskapvilkaretForutgaendeAp';
 import type { OverstyringSokersOpplysingspliktAp } from './prosess/OverstyringSokersOpplysingspliktAp';
 import type { SoknadsfristAp } from './prosess/SoknadsfristAp';
 import type { UttakAp } from './prosess/UttakAp';
@@ -30,6 +33,7 @@ import type { VurderTilbaketrekkAp } from './prosess/VurderTilbaketrekkAp';
 export type ProsessAksjonspunkt =
   | BekreftSvangerskapspengervilkarAp
   | SoknadsfristAp
+  | ForeslaVedtakTilbakekrevingAp
   | BekreftSokersOpplysningspliktManuAp
   | OverstyringSokersOpplysingspliktAp
   | AvklarOpptjeningsvilkaretAp
@@ -37,6 +41,7 @@ export type ProsessAksjonspunkt =
   | VurdereYtelseSammeBarnSokerAp
   | Foreldreansvarsvilkar1Ap
   | Foreldreansvarsvilkar2Ap
+  | KontrollerEtterbetalingTilSøkerAP
   | ForeslaVedtakAp
   | ForeslaVedtakManueltAp
   | VurderInnsynAp
@@ -50,6 +55,7 @@ export type ProsessAksjonspunkt =
   | VarselRevurderingAp
   | KontrollAvManueltOpprettetRevurderingsbehandlingAp
   | OverstyringMedlemskapsvilkaretLopendeAp
+  | OverstyringMedlemskapvilkaretForutgaendeAp
   | VurdereAnnenYtelseForVedtakAp
   | UttakAp
   | BeregningAksjonspunktSubmitType

@@ -204,7 +204,6 @@ const useVisForhandsvisningAvMelding = (behandling: BehandlingAppKontekst) => {
         behandlingUuid: behandling.uuid,
         dokumentMal: params.brevmalkode,
         fritekst: params.fritekst || ' ',
-        // @ts-expect-error -- arsakskode må kodes som string union ikke string
         arsakskode: params.arsakskode,
       }),
     onSuccess: response => {

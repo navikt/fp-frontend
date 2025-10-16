@@ -2200,14 +2200,14 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-fakta-beregning": 12.1.21
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 13.1.21
-    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 7.1.16
+    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 8.0.0
     "@navikt/ft-form-hooks": 9.2.3
     "@navikt/ft-form-validators": 4.2.12
     "@navikt/ft-plattform-komponenter": 10.1.13
     "@navikt/ft-prosess-beregningsgrunnlag": 11.1.17
-    "@navikt/ft-prosess-tilbakekreving": 8.1.17
+    "@navikt/ft-prosess-tilbakekreving": 9.0.0
     "@navikt/ft-prosess-tilbakekreving-foreldelse": 8.1.26
-    "@navikt/ft-prosess-tilbakekreving-vedtak": 6.2.7
+    "@navikt/ft-prosess-tilbakekreving-vedtak": 7.0.0
     "@navikt/ft-types": 5.0.7
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
@@ -4233,9 +4233,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:7.1.16":
-  version: 7.1.16
-  resolution: "@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:7.1.16::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-tilbakekreving-feilutbetaling%2F7.1.16%2Fcb954c9b134fb1a592f2ffdfcfe410130a14fa1e"
+"@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:8.0.0":
+  version: 8.0.0
+  resolution: "@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:8.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-tilbakekreving-feilutbetaling%2F8.0.0%2F94f4f9da17854e5f5659f6b1124110d4e55febd7"
   dependencies:
     "@navikt/ds-css": 7.32.1
     "@navikt/ds-react": 7.32.1
@@ -4258,7 +4258,7 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: 44a80dfb266a146c10185fdb25a35ea8c5adefa71103a76b3fc96472b0f5c8db6658b63a63ab65771172fce220f458ed8a76579bfb6e59daa4788f37b8772b08
+  checksum: edaed565ec0f3ad561d1050e050855e1a6b3d2ee6e6ed3859e2540b2b2efaa71e934b3be9eed84bfc6c5b8be56db51da223e828ab9ff81cf4e77b65c600f3b32
   languageName: node
   linkType: hard
 
@@ -4402,9 +4402,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-tilbakekreving-vedtak@npm:6.2.7":
-  version: 6.2.7
-  resolution: "@navikt/ft-prosess-tilbakekreving-vedtak@npm:6.2.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving-vedtak%2F6.2.7%2F9f41ef7bbcd1895d9b6a2c33f88536bd072abe6a"
+"@navikt/ft-prosess-tilbakekreving-vedtak@npm:7.0.0":
+  version: 7.0.0
+  resolution: "@navikt/ft-prosess-tilbakekreving-vedtak@npm:7.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving-vedtak%2F7.0.0%2F86e024858aa27bf3449fb04dea6d0ec1ed34676d"
   dependencies:
     "@navikt/aksel-icons": 7.32.1
     "@navikt/ds-css": 7.32.1
@@ -4431,13 +4431,13 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: 3921afb4472ba88af27923acb7d08877949cad177791a96be77197657145a0c1f0235d8a32b522b4b63b75f9f29d173e24b6fc2777c8b41bc35faf0e7291edfa
+  checksum: ae537df04d4936af28a3d9a2b7f46aec6f938e578fb95f91c428309504cc6a3789d9820a1ba58349e73642fa6b7100797c2357d2f990d343286b24ecf17e2136
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-tilbakekreving@npm:8.1.17":
-  version: 8.1.17
-  resolution: "@navikt/ft-prosess-tilbakekreving@npm:8.1.17::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving%2F8.1.17%2Faddac7fd9f3f8b685daf37425f972310b6825585"
+"@navikt/ft-prosess-tilbakekreving@npm:9.0.0":
+  version: 9.0.0
+  resolution: "@navikt/ft-prosess-tilbakekreving@npm:9.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving%2F9.0.0%2F6a0ea4f28264111c14cd86b08a5fa1ead486e735"
   dependencies:
     "@navikt/aksel-icons": 7.32.1
     "@navikt/ds-css": 7.32.1
@@ -4464,7 +4464,7 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.53.0
     react-intl: 6.x
-  checksum: d8428adb34957e1ba5d30e133e794063f1a175fa91025f06221772998d698c06bb0a9ea8fdd8e7d722d5ea3bace2f3c96ac4b6ed66eb614e33fe416b11e2dd2c
+  checksum: 9a2a32516d141fd0b0edfb8b47fe00b9d8abe6da2c3c30a326b52938d41c445e627f7f3028684febd74b502a61298b2bb81038f901d1e3c135e1ab14ed9002c0
   languageName: node
   linkType: hard
 
