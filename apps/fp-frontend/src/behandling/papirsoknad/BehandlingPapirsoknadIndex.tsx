@@ -78,7 +78,6 @@ const useLagrePapirsøknad = (
       saksnummer: fagsak.saksnummer,
       behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
-      // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
       bekreftedeAksjonspunktDtoer,
     });
 
