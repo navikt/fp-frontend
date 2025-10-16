@@ -133,27 +133,19 @@ describe('TilretteleggingFaktaIndex', () => {
     expect(screen.getByText('Minst ett arbeidsforhold må brukes')).toBeInTheDocument();
   });
 
-  const timeout = 30000;
+  it('skal validere at en må ferdigstille tilretteleggingsperiode som er lagt til', async () => {
+    render(<HarOpphold />);
 
-  it(
-    'skal validere at en må ferdigstille tilretteleggingsperiode som er lagt til',
-    async () => {
-      render(<HarOpphold />);
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-      expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
 
-      await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-      await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-      await userEvent.click(screen.getByText('Bekreft og fortsett'));
-
-      expect(
-        await screen.findByText('Det er minst en periode som er lagt til men ikke ferdigstilt'),
-      ).toBeInTheDocument();
-    },
-    timeout,
-  );
+    expect(await screen.findByText('Det er minst en periode som er lagt til men ikke ferdigstilt')).toBeInTheDocument();
+  });
 
   it('skal validere at en må ferdigstille oppholdsperiode som er lagt til', async () => {
     render(<HarOpphold />);
