@@ -18,7 +18,7 @@
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-fakta-beregning": "12.1.21",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "13.1.19",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "13.1.21",
     "@navikt/ft-prosess-beregningsgrunnlag": "11.1.17"
   },
   "devDependencies": {
