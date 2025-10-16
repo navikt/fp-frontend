@@ -10,6 +10,7 @@ on:
       - '.deploy/naiserator.yaml'
       - '.github/workflows/build-fp-journalforing.yml'
       - '.github/workflows/build.yml'
+      - 'turbo.json'
       - 'Dockerfile'
       - 'yarn.lock'
 
