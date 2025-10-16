@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+}
+
+.oppgaveKolonne {
+  padding: 16px;
+  width: 35%;
+}
+
+.pdfKolonne {
+  background-color: var(--ax-neutral-400);
+  padding-top: 16px;
+  width: 65%;
+}

@@ -20,6 +20,7 @@
     "clean": "turbo run clean",
     "dev": "turbo run dev --filter=@navikt/fp-frontend",
     "dev-avdelingsleder": "turbo run dev --filter=@navikt/fp-avdelingsleder",
+    "dev-journalforing": "turbo run dev --filter=@navikt/fp-journalforing",
     "build": "turbo run build",
     "up": "docker-compose up -d --remove-orphans --build",
     "down": "docker-compose down",

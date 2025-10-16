@@ -1,0 +1,21 @@
+{
+  "app": "fp-journalforing",
+  "ingresses": ["https://fpjournalforing.intern.nav.no"],
+  "minReplicas": "2",
+  "maxReplicas": "4",
+  "env": "production",
+  "groups": ["73107205-17ec-4a07-a56e-e0a8542f90c9"],
+  "externals": ["fpsak-api.prod-fss-pub.nais.io", "fpfordel.prod-fss-pub.nais.io"],
+  "proxyRedirects": [
+    {
+      "path": "/fpsak/api",
+      "url": "https://fpsak-api.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fpsak/.default"
+    },
+    {
+      "path": "/fpfordel/api",
+      "url": "https://fpfordel.prod-fss-pub.nais.io",
+      "scope": "api://prod-fss.teamforeldrepenger.fpfordel/.default"
+    }
+  ]
+}

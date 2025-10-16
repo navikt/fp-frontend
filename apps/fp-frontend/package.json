@@ -49,7 +49,7 @@
     "@navikt/fp-fakta-uttaksdokumentasjon": "workspace:*",
     "@navikt/fp-fakta-verge": "workspace:*",
     "@navikt/fp-fakta-ytelser": "workspace:*",
-    "@navikt/fp-journalforing": "workspace:*",
+    "@navikt/fp-journalforing-old": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-los-saksbehandler": "workspace:*",
