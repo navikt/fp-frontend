@@ -8,6 +8,7 @@ const { Default, UgyldigAktørId } = composeStories(stories);
 describe('AktørSakIndex', () => {
   it('skal vise to fagsaker til aktør', async () => {
     render(<Default />);
+
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText(/(35425245)/)).toBeInTheDocument();
     expect(screen.getAllByText(/(123)/)).toHaveLength(2);
