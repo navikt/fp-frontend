@@ -137,13 +137,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             name="delvilkår"
             control={formMethods.control}
             validate={[required]}
-            label={
-              isReadOnly ? (
-                <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.Delvilkår.ReadOnlyLabel" />
-              ) : (
-                <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.Delvilkår.Label" />
-              )
-            }
+            label={<FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.Delvilkår.Label" />}
             isReadOnly={isReadOnly}
             size="small"
           >
@@ -161,13 +155,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             name="vilkårUtfallType"
             control={formMethods.control}
             validate={[required]}
-            label={
-              isReadOnly ? (
-                <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.ReadOnlyLabel" />
-              ) : (
-                <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.Label" />
-              )
-            }
+            label={<FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.Label" />}
             isReadOnly={isReadOnly}
             size="small"
           >
