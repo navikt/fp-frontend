@@ -10,22 +10,12 @@ interface Props {
 }
 
 export const VisittkortBarnInfoOmsorgPanel = ({ familiehendelse }: Props) => {
-  const { hendelseType, hendelseDato, antallBarn } = familiehendelse;
-
-  const erAdopsjon = hendelseType === 'ADPSJN';
-
-  const foreldreansvarTekstkode =
-    antallBarn === 1
-      ? 'VisittkortBarnInfoOmsorgPanel.Foreldreansvar'
-      : 'VisittkortBarnInfoOmsorgPanel.ForeldreansvarAntallBarn';
-  const adopsjonTekstkode =
-    antallBarn === 1 ? 'VisittkortBarnInfoOmsorgPanel.Adopsjon' : 'VisittkortBarnInfoOmsorgPanel.AdopsjonAntallBarn';
-
+  const { hendelseDato, antallBarn } = familiehendelse;
   return (
     <BodyShort>
       <FormattedMessage
-        id={erAdopsjon ? adopsjonTekstkode : foreldreansvarTekstkode}
-        values={{ antall: antallBarn, dato: hendelseDato ? dateFormat(hendelseDato) : '-' }}
+        id="VisittkortBarnInfoOmsorgPanel.Omsorgovertakelse"
+        values={{ antallBarn, dato: hendelseDato ? dateFormat(hendelseDato) : '-' }}
       />
     </BodyShort>
   );
