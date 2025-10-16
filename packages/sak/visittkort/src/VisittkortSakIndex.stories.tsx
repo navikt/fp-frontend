@@ -149,7 +149,7 @@ export const FamilieMedAdopsjon: Story = {
       hendelseType: 'ADPSJN',
       hendelseDato: '2020-01-21',
       dødfødsel: false,
-      antallBarn: 1,
+      antallBarn: 2,
     },
   },
 };
