@@ -24,7 +24,7 @@
 
   "VisittkortBarnInfoPanel.Barnevogn": "Barnevogn",
 
-  "VisittkortBarnInfoOmsorgPanel.Omsorgovertakelse": "Omsorgovertakelse {antallBarn, plural, one {} other {({antallBarn} barn)}} {dato}",
+  "VisittkortBarnInfoOmsorgPanel.Omsorgovertakelse": "Omsorgovertakelse{antallBarn, plural, one {} other {({antallBarn} barn)}} {dato}",
 
   "VisittkortPanel.Ukjent": "Ukjent navn, mangler norsk id-nr"
 }
