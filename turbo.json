@@ -15,13 +15,18 @@
     "dev": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     },
     "eslint": {
       "outputs": []
     },
     "lint": {
-      "dependsOn": ["^eslint", "^stylelint"],
+      "dependsOn": [
+        "^eslint",
+        "^stylelint"
+      ],
       "outputs": []
     },
     "tsc": {
@@ -34,15 +39,24 @@
       "outputs": []
     },
     "test": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "outputs": []
     },
     "build-storybook": {
-      "outputs": [".storybook-static-build/**"]
+      "outputs": [
+        ".storybook-static-build/**"
+      ]
     },
     "build": {
-      "dependsOn": ["^build", "tsc"],
-      "outputs": ["dist"]
+      "dependsOn": [
+        "^build",
+        "tsc"
+      ],
+      "outputs": [
+        "dist"
+      ]
     },
     "clean": {
       "cache": false
