@@ -21,7 +21,7 @@
       "outputs": []
     },
     "lint": {
-      "dependsOn": ["eslint", "stylelint"],
+      "dependsOn": ["^eslint", "^stylelint"],
       "outputs": []
     },
     "tsc": {
