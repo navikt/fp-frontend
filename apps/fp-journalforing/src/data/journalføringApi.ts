@@ -67,7 +67,7 @@ export const reserverBruker = (values: ReserverOppgaveType) =>
 export const flyttOppgaveTilGosys = (journalpostId: string) =>
   kyExtended.post(FpFordelUrl.FLYTT_OPPGAVE_TIL_GOSYS, { json: { journalpostId } }).json<void>();
 
-export type BrukerInfo = {
+type BrukerInfo = {
   onPremisesSamAccountName: string;
   displayName: string;
   givenName: string;
