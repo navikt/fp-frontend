@@ -79,7 +79,6 @@ jobs:
           path: ~/work/fp-frontend/fp-frontend/.turbo
           key: turbo-${{ runner.os }}-${{ github.ref_name }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
           restore-keys: |
-            turbo-${{ runner.os }}-${{ github.ref_name }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }} |
             turbo-${{ runner.os }}-master-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
 
       - name: Installere dependencies
