@@ -20,7 +20,7 @@ jobs:
       contents: read
       packages: write
       id-token: write
-    uses: .github/workflows/build.yml
+    uses: ./.github/workflows/build.yml
     with:
       runs-on: 'ubuntu-latest'
       node-version: '22.17.1'
