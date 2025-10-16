@@ -9,6 +9,6 @@ jobs:
     permissions:
       contents: write
       pages: write
-    uses: navikt/fp-frontend/.github/workflows/deploy-storybook-new.yml@master
+    uses: ./.github/workflows/deploy-storybook-new.yml
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
