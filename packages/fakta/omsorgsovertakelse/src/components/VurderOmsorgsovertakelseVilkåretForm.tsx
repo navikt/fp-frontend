@@ -29,7 +29,7 @@ import { Over15Markering } from './Markering';
 
 type FormValues = {
   avslagskode?: Avslagsarsak;
-  vilkårUtfallType: VilkarUtfallType;
+  vilkårUtfallType?: VilkarUtfallType;
   delvilkår?: OmsorgsovertakelseVilkårType;
   omsorgsovertakelseDato?: string;
   fødselsdatoer: {
@@ -224,15 +224,19 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
 const buildInitialValues = (
   omsorgsovertakelse: OmsorgsovertakelseDto,
   aksjonspunkterForPanel: Aksjonspunkt[],
-): FormValues => ({
-  delvilkår: omsorgsovertakelse.gjeldende.delvilkår,
-  omsorgsovertakelseDato: omsorgsovertakelse.gjeldende.omsorgsovertakelseDato,
-  vilkårUtfallType: omsorgsovertakelse.saksbehandlerVurdering?.vilkårUtfallType ?? 'IKKE_VURDERT',
-  avslagskode: omsorgsovertakelse.saksbehandlerVurdering?.avslagsårsak,
-  fødselsdatoer: mapBarn(omsorgsovertakelse),
-  ektefellesBarn: mapEktefellesBarn(omsorgsovertakelse.gjeldende),
-  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel),
-});
+): FormValues => {
+  const { gjeldende, saksbehandlerVurdering: { vilkårUtfallType, avslagsårsak } = {} } = omsorgsovertakelse;
+  return {
+    delvilkår: gjeldende.delvilkår,
+    omsorgsovertakelseDato: gjeldende.omsorgsovertakelseDato,
+    vilkårUtfallType:
+      vilkårUtfallType === 'OPPFYLT' || vilkårUtfallType === 'IKKE_OPPFYLT' ? vilkårUtfallType : undefined,
+    avslagskode: avslagsårsak,
+    fødselsdatoer: mapBarn(omsorgsovertakelse),
+    ektefellesBarn: mapEktefellesBarn(gjeldende),
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel),
+  };
+};
 
 const transformValues = (values: FormValues): VurderOmsorgsovertakelseVilkåretAp => ({
   omsorgsovertakelseDato: notEmpty(values.omsorgsovertakelseDato),
