@@ -20,6 +20,10 @@
     "eslint": {
       "outputs": []
     },
+    "lint": {
+      "dependsOn": ["eslint", "stylelint"],
+      "outputs": []
+    },
     "tsc": {
       "outputs": []
     },
@@ -37,7 +41,7 @@
       "outputs": [".storybook-static-build/**"]
     },
     "build": {
-      "dependsOn": ["^build", "eslint", "tsc", "stylelint"],
+      "dependsOn": ["^build", "tsc"],
       "outputs": ["dist"]
     },
     "clean": {

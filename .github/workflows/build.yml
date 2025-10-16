@@ -88,6 +88,8 @@ jobs:
           restore-keys: turbo-${{ runner.os }}-master-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
       - name: Installere dependencies
         run: yarn install --immutable
+      - name: linting
+        run: yarn lint --filter=@navikt/${{ inputs.app }}
       - name: Build and linting
         run: yarn build --filter=@navikt/${{ inputs.app }}
       - name: Run tests (linting always cached from build step)
