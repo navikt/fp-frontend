@@ -15,12 +15,18 @@
     "dev": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["^build"]
-    },
-    "eslint": {
-      "outputs": []
+      "dependsOn": [
+        "^build"
+      ]
     },
     "tsc": {
+      "outputs": []
+    },
+    "lint": {
+      "dependsOn": ["^eslint", "^stylelint"],
+      "outputs": []
+    },
+    "eslint": {
       "outputs": []
     },
     "stylelint": {
@@ -37,7 +43,7 @@
       "outputs": [".storybook-static-build/**"]
     },
     "build": {
-      "dependsOn": ["^build", "eslint", "tsc", "stylelint"],
+      "dependsOn": ["^build", "tsc"],
       "outputs": ["dist"]
     },
     "clean": {

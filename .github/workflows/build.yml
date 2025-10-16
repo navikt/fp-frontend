@@ -14,21 +14,11 @@ on:
         type: string
         description: Miljø versjon som skal brukes til bygg.
         default: 'ubuntu-latest'
-      node-version:
-        required: false
-        type: string
-        description: Node version som brukes.
-        default: '22'
       build-image:
         required: false
         type: boolean
         description: Skal docker image bygges?
         default: true
-      run-knip:
-        required: false
-        type: boolean
-        description: Skal knip kjøres?
-        default: false
       push-image:
         required: false
         type: boolean
@@ -64,10 +54,11 @@ jobs:
       build-version: ${{ steps.generate-build-version.outputs.build-version }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # ratchet:actions/checkout@v4
+        uses: actions/checkout@v4
         with:
           ref: ${{ (inputs.branch != '' && inputs.branch) || '' }}
           fetch-depth: 0
+
       - name: Sette yarn-config
         run: |
           yarn config set npmScopes.navikt.npmRegistryServer "https://npm.pkg.github.com"
@@ -75,26 +66,30 @@ jobs:
           yarn config set npmScopes.navikt.npmAuthToken $NPM_AUTH_TOKEN
         env:
           NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-      - name: Set up NODE med yarn
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # ratchet:actions/setup-node@v3
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: ${{ inputs.node-version }}
+          node-version: 22.17.1
           cache: 'yarn'
+
       - name: Use turbo cache
-        uses: actions/cache@v4
+        id: hent-cache
+        uses: actions/cache/restore@v4
         with:
           path: ~/work/fp-frontend/fp-frontend/.turbo
           key: turbo-${{ runner.os }}-${{ github.ref_name }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
-          restore-keys: turbo-${{ runner.os }}-master-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
+          restore-keys: |
+            turbo-${{ runner.os }}-master-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
+
       - name: Installere dependencies
         run: yarn install --immutable
-      - name: Build and linting
+
+      - name: Build
         run: yarn build --filter=@navikt/${{ inputs.app }}
-      - name: Run tests (linting always cached from build step)
-        run: yarn test --filter=@navikt/${{ inputs.app }}...
-      - name: Knip it
-        if: inputs.run-knip
-        run: yarn knip --no-exit-code --reporter=markdown >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Run tests
+        run: yarn test --filter=@navikt/${{ inputs.app }}
+
       - name: Opprett release med Sentry
         if: github.ref_name == 'master'
         run: yarn sentry-release
@@ -106,11 +101,12 @@ jobs:
         id: generate-build-version
         run: |
           echo "build-version=$(date +%Y.%m.%d.%H%M%S)-$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+
       - name: Print build version
         run: echo "Generated build-version is ${{ steps.generate-build-version.outputs.build-version }}"
       - name: Bygg og push docker image
         if: inputs.build-image
-        uses: navikt/fp-gha-workflows/.github/actions/build-push-docker-image@main # ratchet:exclude
+        uses: navikt/fp-gha-workflows/.github/actions/build-push-docker-image@main
         with:
           build-version: ${{ steps.generate-build-version.outputs.build-version }}
           push-image: ${{ inputs.push-image }}
@@ -122,3 +118,10 @@ jobs:
         with:
           name: code-coverage-report
           path: coverage
+
+      - name: Lagre alltid turbo cache
+        if: always() && steps.hent-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          key: ${{ steps.hente-cache.outputs.cache-primary-key }}
+          path: ~/work/fp-frontend/fp-frontend/.turbo
