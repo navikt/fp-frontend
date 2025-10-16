@@ -14,7 +14,7 @@ export const VisittkortBarnInfoOmsorgPanel = ({ familiehendelse }: Props) => {
   return (
     <BodyShort>
       <FormattedMessage
-        id="VisittkortBarnInfoOmsorgPanel.Omsorgovertakelse"
+        id="VisittkortBarnInfoOmsorgPanel.Omsorgsovertakelse"
         values={{ antallBarn, dato: hendelseDato ? dateFormat(hendelseDato) : '-' }}
       />
     </BodyShort>

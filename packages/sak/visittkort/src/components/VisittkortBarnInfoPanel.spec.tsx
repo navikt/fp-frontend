@@ -40,17 +40,17 @@ describe('VisittkortBarnInfoPanel', () => {
 
   it('skal vise panel for omsorg', async () => {
     render(<Component hendelseType="OMSRGO" />);
-    expect(screen.getByText('Omsorgovertakelse 01.01.2024')).toBeInTheDocument();
+    expect(screen.getByText('Omsorgsovertakelse 01.01.2024')).toBeInTheDocument();
   });
 
   it('skal vise panel for adopsjon av ett barn', async () => {
     render(<Component hendelseType="ADPSJN" />);
-    expect(screen.getByText('Omsorgovertakelse 01.01.2024')).toBeInTheDocument();
+    expect(screen.getByText('Omsorgsovertakelse 01.01.2024')).toBeInTheDocument();
   });
 
   it('skal vise panel for adopsjon av flere barn', async () => {
     render(<Component hendelseType="ADPSJN" antallBarn={2} />);
-    expect(screen.getByText('Omsorgovertakelse(2 barn) 01.01.2024')).toBeInTheDocument();
+    expect(screen.getByText('Omsorgsovertakelse(2 barn) 01.01.2024')).toBeInTheDocument();
   });
 
   it('skal vise panel for termin', async () => {
