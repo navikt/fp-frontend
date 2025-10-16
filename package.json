@@ -41,10 +41,10 @@
   ],
   "devDependencies": {
     "@hey-api/openapi-ts": "0.85.2",
-    "@navikt/aksel-stylelint": "7.32.1",
+    "@navikt/aksel-stylelint": "7.32.2",
     "@sentry/cli": "2.56.1",
-    "@storybook/addon-a11y": "9.1.10",
-    "@storybook/addon-links": "9.1.10",
+    "@storybook/addon-a11y": "9.1.11",
+    "@storybook/addon-links": "9.1.11",
     "@storybook/react": "9.1.10",
     "@testing-library/jest-dom": "6.9.1",
     "@types/react": "19.2.2",

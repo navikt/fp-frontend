@@ -1177,10 +1177,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-stylelint@npm:7.32.1":
-  version: 7.32.1
-  resolution: "@navikt/aksel-stylelint@npm:7.32.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.32.1%2F4263e87a30f3f7a20196a06adbf081e1e82a6052"
-  checksum: 4fc8144c4116d046c2a3d430ecdc88df16c9cf7c44cf81c32bbba42de17378d6272f3f90bb82e8432bcc8e87bca51dc0a7ea292b11b311643be6ebe5cdf8aff0
+"@navikt/aksel-stylelint@npm:7.32.2":
+  version: 7.32.2
+  resolution: "@navikt/aksel-stylelint@npm:7.32.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.32.2%2F4e3a31350c5b46d00e757da5fa4773b1192475c1"
+  checksum: 98e2224abe13906a773f407fe9861ed978897e008cdd6bed3da3620d53d8fe9f87d93b43dbfec0555a5d644657c305e49eab2533c736f171c63f8fd3b459a11f
   languageName: node
   linkType: hard
 
@@ -1265,7 +1265,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@tanstack/react-query": 5.90.3
     "@tanstack/react-query-devtools": 5.90.2
     "@testing-library/dom": 10.4.1
@@ -1355,7 +1355,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1395,7 +1395,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1428,7 +1428,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1463,7 +1463,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1499,7 +1499,7 @@ __metadata:
     "@navikt/ft-plattform-komponenter": 10.1.13
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     classnames: 2.5.1
@@ -1537,7 +1537,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1571,7 +1571,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1607,7 +1607,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1644,7 +1644,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1681,7 +1681,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1719,7 +1719,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1759,7 +1759,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     dayjs: 1.11.18
@@ -1796,7 +1796,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1834,7 +1834,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1873,7 +1873,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1912,7 +1912,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1952,7 +1952,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1991,7 +1991,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2031,7 +2031,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2070,7 +2070,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2096,7 +2096,7 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     dayjs: 1.11.18
@@ -2212,9 +2212,9 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@popperjs/core": 2.11.8
-    "@storybook/addon-a11y": 9.1.10
+    "@storybook/addon-a11y": 9.1.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@tanstack/react-query": 5.90.3
     "@tanstack/react-query-devtools": 5.90.2
     "@testing-library/dom": 10.4.1
@@ -2261,7 +2261,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@tanstack/react-query": 5.90.3
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
@@ -2305,7 +2305,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@tanstack/react-query": 5.90.3
     "@tanstack/react-query-devtools": 5.90.2
     "@testing-library/dom": 10.4.1
@@ -2365,7 +2365,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2403,7 +2403,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@tanstack/react-query": 5.90.3
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
@@ -2441,7 +2441,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2475,7 +2475,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2510,7 +2510,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     eslint: 9.37.0
     react: 19.2.0
     react-hook-form: 7.65.0
@@ -2535,7 +2535,7 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
@@ -2561,7 +2561,7 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
@@ -2587,7 +2587,7 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     dayjs: 1.11.18
@@ -2614,7 +2614,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
@@ -2674,7 +2674,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2713,7 +2713,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2751,7 +2751,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2788,7 +2788,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2826,7 +2826,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2860,7 +2860,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2897,7 +2897,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2936,7 +2936,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2972,7 +2972,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3004,7 +3004,7 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3045,7 +3045,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3087,7 +3087,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3121,7 +3121,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3155,7 +3155,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3189,7 +3189,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3224,7 +3224,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3263,7 +3263,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3300,7 +3300,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3336,7 +3336,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3372,7 +3372,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3404,7 +3404,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
@@ -3432,7 +3432,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3463,7 +3463,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3494,7 +3494,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
@@ -3523,7 +3523,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
@@ -3549,7 +3549,7 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3577,7 +3577,7 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
@@ -3609,7 +3609,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3638,7 +3638,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3668,7 +3668,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3701,7 +3701,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3729,7 +3729,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3759,7 +3759,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3787,7 +3787,7 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3819,7 +3819,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3850,7 +3850,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3886,7 +3886,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3920,7 +3920,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3957,7 +3957,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3986,7 +3986,7 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     eslint: 9.37.0
@@ -4013,7 +4013,7 @@ __metadata:
     "@navikt/ft-plattform-komponenter": 10.1.13
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     dayjs: 1.11.18
@@ -4108,7 +4108,7 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
-    "@storybook/react-vite": 9.1.10
+    "@storybook/react-vite": 9.1.11
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -5082,54 +5082,54 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-a11y@npm:9.1.10":
-  version: 9.1.10
-  resolution: "@storybook/addon-a11y@npm:9.1.10"
+"@storybook/addon-a11y@npm:9.1.11":
+  version: 9.1.11
+  resolution: "@storybook/addon-a11y@npm:9.1.11"
   dependencies:
     "@storybook/global": ^5.0.0
     axe-core: ^4.2.0
   peerDependencies:
-    storybook: ^9.1.10
-  checksum: 1eb26b36d3144b590f1132cc6cbf3f08d42d81516da64ebc2cb24b17b0e55e2b6a95d734618611155d4570114b641bb0fb4a5b99059403dafd326305f5a7e5eb
+    storybook: ^9.1.11
+  checksum: 52228d0b785e60559bed63697f5a19f82e25dc413dd7cfde5088fa35768311f0ef274d539d733be217790c06c4acc1d109bcdb1f33090c8dbb981cd95fccc2f3
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:9.1.10":
-  version: 9.1.10
-  resolution: "@storybook/addon-links@npm:9.1.10"
+"@storybook/addon-links@npm:9.1.11":
+  version: 9.1.11
+  resolution: "@storybook/addon-links@npm:9.1.11"
   dependencies:
     "@storybook/global": ^5.0.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    storybook: ^9.1.10
+    storybook: ^9.1.11
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: ea89195b4af30f939672391a99b59d8b4c48eed846419610d499af34a84c7cbbba8485d28573b90d610455386c2a8ee0bcf2a1402018052900e305579d1bb1d7
+  checksum: 6e1a515c85787966b53432393b78a340e683b52b00e0b74e4a95e37a4e5584344bde96c25a8022056a34c25681c8e988c85a6ac1dd33e8fefea07558fb878266
   languageName: node
   linkType: hard
 
-"@storybook/builder-vite@npm:9.1.10":
-  version: 9.1.10
-  resolution: "@storybook/builder-vite@npm:9.1.10"
+"@storybook/builder-vite@npm:9.1.11":
+  version: 9.1.11
+  resolution: "@storybook/builder-vite@npm:9.1.11"
   dependencies:
-    "@storybook/csf-plugin": 9.1.10
+    "@storybook/csf-plugin": 9.1.11
     ts-dedent: ^2.0.0
   peerDependencies:
-    storybook: ^9.1.10
+    storybook: ^9.1.11
     vite: ^5.0.0 || ^6.0.0 || ^7.0.0
-  checksum: ea843e28498ca5b21151c8268bddb47c7f4b8e8674400868ed5079195b9ec160407bf693d6ee67654932e6742296328b2b0633d3b2faf1f3271441278df9bbfe
+  checksum: d209de878bf1a85ed68f4255b6fb0ffdeb695f386fff3e9b6fb0201effce482cddd51a35310c0ea4c22670fbbbb98cc2ecc145d1d09620a02ea0157907f77d2f
   languageName: node
   linkType: hard
 
-"@storybook/csf-plugin@npm:9.1.10":
-  version: 9.1.10
-  resolution: "@storybook/csf-plugin@npm:9.1.10"
+"@storybook/csf-plugin@npm:9.1.11":
+  version: 9.1.11
+  resolution: "@storybook/csf-plugin@npm:9.1.11"
   dependencies:
     unplugin: ^1.3.1
   peerDependencies:
-    storybook: ^9.1.10
-  checksum: 57da6d6d9db66b03a144476b1ca1038e9d745c2d96e7143697a5ce99783c02641e70afb5bae5e5ea4f833327d1a4efcd09eb9823bd12e1741f8b86418c0f3391
+    storybook: ^9.1.11
+  checksum: fb362cbc5215934e3e1e39c0d202d528f46dd693ae8ed0175fe786b377e183c06d5f8e2ba50cb494e6f6280811574613790c736296d16123bf10ac8bad2c3c5f
   languageName: node
   linkType: hard
 
@@ -5151,14 +5151,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-vite@npm:9.1.10":
-  version: 9.1.10
-  resolution: "@storybook/react-vite@npm:9.1.10"
+"@storybook/react-dom-shim@npm:9.1.11":
+  version: 9.1.11
+  resolution: "@storybook/react-dom-shim@npm:9.1.11"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    storybook: ^9.1.11
+  checksum: 9ec1e03ebf88b1af735487baf9574303dd3cf9ed119c643a4eb8769b4b54271363b11f35b5d066da108fb97c4c7b071f23d5a31e51da2e53926f52baeac41027
+  languageName: node
+  linkType: hard
+
+"@storybook/react-vite@npm:9.1.11":
+  version: 9.1.11
+  resolution: "@storybook/react-vite@npm:9.1.11"
   dependencies:
     "@joshwooding/vite-plugin-react-docgen-typescript": 0.6.1
     "@rollup/pluginutils": ^5.0.2
-    "@storybook/builder-vite": 9.1.10
-    "@storybook/react": 9.1.10
+    "@storybook/builder-vite": 9.1.11
+    "@storybook/react": 9.1.11
     find-up: ^7.0.0
     magic-string: ^0.30.0
     react-docgen: ^8.0.0
@@ -5167,9 +5178,9 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    storybook: ^9.1.10
+    storybook: ^9.1.11
     vite: ^5.0.0 || ^6.0.0 || ^7.0.0
-  checksum: 9824838cf49060298f7fff685ccceef2d24e20d478f543537a01150a18779b7ec8e779eba700cf5ec0fa1ad666f064b0a2bd266623e4f8746bb24d9e529ae4a1
+  checksum: 9a2a7b552a4568d3bb523a0fecb72abe40bdedb99b3b8616cb42e10ed61744b3050f7bbf80704b47d469f06a11f379a3933f6e42365763df19c35f4ea67732c7
   languageName: node
   linkType: hard
 
@@ -5188,6 +5199,24 @@ __metadata:
     typescript:
       optional: true
   checksum: 4538d01d1bad457e89b2d28d78559f940afc1d780aebba902cbec7e74665d65870c569259b5394557c065258b12f379a344fa9f11ae46fba373980d5fa271666
+  languageName: node
+  linkType: hard
+
+"@storybook/react@npm:9.1.11":
+  version: 9.1.11
+  resolution: "@storybook/react@npm:9.1.11"
+  dependencies:
+    "@storybook/global": ^5.0.0
+    "@storybook/react-dom-shim": 9.1.11
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    storybook: ^9.1.11
+    typescript: ">= 4.9.x"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: f889a1313546adc1d27007fa1ffb23576444e984877334121fe4fa3716bf2a1e26150a8442cb08afe1a089d4832fea7735367446e82a345a70f64c99efc23b66
   languageName: node
   linkType: hard
 
@@ -7923,10 +7952,10 @@ __metadata:
   resolution: "fp-frontend@workspace:."
   dependencies:
     "@hey-api/openapi-ts": 0.85.2
-    "@navikt/aksel-stylelint": 7.32.1
+    "@navikt/aksel-stylelint": 7.32.2
     "@sentry/cli": 2.56.1
-    "@storybook/addon-a11y": 9.1.10
-    "@storybook/addon-links": 9.1.10
+    "@storybook/addon-a11y": 9.1.11
+    "@storybook/addon-links": 9.1.11
     "@storybook/react": 9.1.10
     "@testing-library/jest-dom": 6.9.1
     "@types/react": 19.2.2
