@@ -92,11 +92,9 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
       >
         {beregningsresultat && vedtaksbrev ? (
           <Wrapper
-            // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
             beregningsresultat={beregningsresultat}
             vedtaksbrev={vedtaksbrev}
             kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
-            // @ts-expect-error Johannes ser på denne - oppdater function i ft-repo
             fetchPreviewVedtaksbrev={forhandsvisVedtaksbrev}
             erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage ?? false}
             erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt ?? false}

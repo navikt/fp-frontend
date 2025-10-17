@@ -16,6 +16,7 @@ import type { AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './fakta
 import type { AvklarFortsattMedlemskapAp } from './fakta/AvklarFortsattMedlemskapAp';
 import type { AvklarVergeAp } from './fakta/AvklarVergeAp';
 import type { BekreftAleneomsorgVurderingAp } from './fakta/BekreftAleneomsorgVurderingAp';
+import type { BekreftAnnenpartsUttakEøsAp } from './fakta/BekreftAnnenpartsUttakEøsAp';
 import type { BekreftBosattVurderingAp } from './fakta/BekreftBosattVurderingAp';
 import type { BekreftDokumentertDatoAksjonspunktAp } from './fakta/BekreftDokumentertDatoAksjonspunktAp';
 import type { BekreftEktefelleAksjonspunktAp } from './fakta/BekreftEktefelleAksjonspunktAp';
@@ -29,7 +30,7 @@ import type { BekreftUttaksperioderAp } from './fakta/BekreftUttaksperioderAp';
 import type { OverstyringFaktaFødselAp } from './fakta/fødsel/OverstyringFaktaFødselAp';
 import type { SjekkManglendeFødselAp } from './fakta/fødsel/SjekkManglendeFødselAp';
 import type { SjekkTerminbekreftelseAp } from './fakta/fødsel/SjekkTerminbekreftelseAp';
-import type { KontrollerBesteberegningAP } from './fakta/KontrollerBesteberegningAP';
+import type { KontrollerBesteberegningAP, ManuellKontrollBesteberegningAP } from './fakta/KontrollerBesteberegningAP';
 import type { MerkOpptjeningUtlandAp } from './fakta/MerkOpptjeningUtlandAp';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import type { OverstyringDekningsgradAp } from './fakta/OverstyringDekningsgradAp';
@@ -37,6 +38,8 @@ import type { OverstyringRettigheterAp } from './fakta/OverstyringRettigheterAp'
 import type { VurderArbeidsforholdInntektsmeldingAp } from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 import type { VurderArbeidsforholdPermisjonAp } from './fakta/VurderArbeidsforholdPermisjonAp';
 import type { VurderDokumentasjonAp } from './fakta/VurderDokumentasjonAp';
+import type { VurderForutgaendeMedlemskapAp } from './fakta/VurderForutgaendeMedlemskapAp';
+import type { VurderMedlemskapAp } from './fakta/VurderMedlemskapAp';
 import type { VurderOmsorgsovertakelseVilkåretAp } from './fakta/VurderOmsorgsovertakelseVilkåretAp';
 
 export type FaktaAksjonspunkt =
@@ -47,7 +50,11 @@ export type FaktaAksjonspunkt =
   | BekreftDokumentertDatoAksjonspunktAp
   | BekreftMannAdoptererAksjonspunktAp
   | BekreftAleneomsorgVurderingAp
+  | ManuellKontrollBesteberegningAP
+  | VurderOmsorgsovertakelseVilkåretAp
+  | VurderMedlemskapAp
   | BekreftSvangerskapspengerAp
+  | VurderForutgaendeMedlemskapAp
   | BekreftOmsorgVurderingAp
   | BekreftBosattVurderingAp
   | BekreftErMedlemVurderingAp
@@ -68,10 +75,10 @@ export type FaktaAksjonspunkt =
   | FordelBeregningsgrunnlagAP
   | VurderRefusjonBeregningsgrunnlagAP
   | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp
-  | VurderOmsorgsovertakelseVilkåretAp
   | VurderArbeidsforholdInntektsmeldingAp
   | VurderDokumentasjonAp
   | VurderArbeidsforholdPermisjonAp
   | OverstyringDekningsgradAp
   | OverstyringRettigheterAp
+  | BekreftAnnenpartsUttakEøsAp
   | AvklarDekningsgradAp;

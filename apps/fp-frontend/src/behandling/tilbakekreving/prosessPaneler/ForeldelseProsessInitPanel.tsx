@@ -55,9 +55,9 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
           perioderForeldelse={perioderForeldelse}
           kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
           beregnBelop={(data: BeregnBeløpParams) => beregnBeløp(data)}
-          // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
+          // @ts-expect-error K9 har ein verdi 'DELTAKER' som me ikkje har. Legg til?
           relasjonsRolleType={fagsak.relasjonsRolleType}
-          // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
+          // @ts-expect-error K9 har ein verdi 'DELTAKER' som me ikkje har. Legg til?
           relasjonsRolleTypeKodeverk={standardPanelProps.alleKodeverk['RelasjonsRolleType']}
           {...standardPanelProps}
           behandlingUuid={behandling.uuid}

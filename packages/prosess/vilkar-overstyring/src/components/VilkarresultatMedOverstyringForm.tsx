@@ -134,7 +134,6 @@ export const VilkarresultatMedOverstyringForm = ({
   medlemskapManuellBehandlingResultat,
   status,
 }: Props) => {
-  // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
   const { behandling, fagsak, submitCallback, alleMerknaderFraBeslutter } = usePanelDataContext<OverstyringVilkår>();
 
   const { erOverstyrt, toggleOverstyring, overstyringApKode, overrideReadOnly, kanOverstyreAccess } =

@@ -30,7 +30,7 @@ export type FormValues = {
 export type ForhåndsvisBrevParams = {
   brevmalkode: DokumentMalType;
   fritekst?: string;
-  arsakskode?: string;
+  arsakskode?: RevurderingVarslingÅrsak;
 };
 
 interface Props {
