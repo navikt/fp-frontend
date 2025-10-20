@@ -15,10 +15,9 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, VilkårType } from '@navikt/fp-types';
-import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { BeregningsgrunnlagAp, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
-import type { BeregningsgrunnlagAp } from '../../../../../../packages/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAp';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
