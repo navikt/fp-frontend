@@ -123,5 +123,5 @@ jobs:
         if: always() && steps.hent-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
-          key: ${{ steps.hente-cache.outputs.cache-primary-key }}
+          key: ${{ steps.hent-cache.outputs.cache-primary-key }}
           path: ~/work/fp-frontend/fp-frontend/.turbo
