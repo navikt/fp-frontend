@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Checkbox, Label, VStack } from '@navikt/ds-react';
+import { Checkbox, VStack } from '@navikt/ds-react';
 import { RhfCheckboxGroup, RhfDatepicker, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, hasValidText, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
@@ -26,6 +26,7 @@ interface Props {
  */
 export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
   const { control } = useFormContext<VirksomhetFormValues>();
+  const intl = useIntl();
   return (
     <TrueFalseInput
       name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireAr`}
@@ -35,13 +36,16 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
       trueContent={
         <ArrowBox>
           <VStack gap="space-16">
-            <Label size="small">
-              <FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" />
-            </Label>
             <RhfCheckboxGroup
+              label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.Årsak.Tittel" />}
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireArArsak`}
               control={control}
-              validate={[required]}
+              validate={[
+                checked =>
+                  checked.length > 0
+                    ? undefined
+                    : intl.formatMessage({ id: 'Registrering.VirksomhetStartetPanel.Årsak.Required' }),
+              ]}
             >
               <CheckboxWithInfo
                 value="harVarigEndring"
