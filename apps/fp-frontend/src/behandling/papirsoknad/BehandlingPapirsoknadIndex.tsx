@@ -60,9 +60,11 @@ const useLagrePapirsøknad = (
     foreldreType: string,
     formValues?: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
   ) => {
+    const kode = getAktivPapirsøknadApKode(behandling.aksjonspunkt);
     const bekreftedeAksjonspunktDtoer = [
       {
-        '@type': getAktivPapirsøknadApKode(behandling.aksjonspunkt),
+        '@type': kode,
+        kode,
         tema: familieHendelseType,
         soknadstype: fagsakYtelseType,
         soker: foreldreType,
@@ -78,7 +80,6 @@ const useLagrePapirsøknad = (
       saksnummer: fagsak.saksnummer,
       behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
-      // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
       bekreftedeAksjonspunktDtoer,
     });
 
@@ -92,7 +93,13 @@ const useLagrePapirsøknad = (
   };
 };
 
-const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => {
+const getAktivPapirsøknadApKode = (
+  aksjonspunkter: Aksjonspunkt[],
+):
+  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
+  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
+  | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
+  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER => {
   const ap = aksjonspunkter
     .map(a => a.definisjon)
     .find(
@@ -106,6 +113,7 @@ const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => {
   if (!ap) {
     throw new Error('Fant ikke aktivt aksjonspunkt for papirsøknad');
   }
+  //@ts-expect-error Blir fiksa når AksjonspunktKode reflekterar backend-typar
   return ap;
 };
 

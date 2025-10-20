@@ -132,8 +132,41 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
   dekningsgrad: 100,
   ytelsesspesifiktGrunnlag: {
     ytelsetype: 'FP',
-    // @ts-expect-error: mock ved behov
-    besteberegninggrunnlag: { besteMåneder: [], avvik: 0 },
+    besteberegninggrunnlag: {
+      besteMåneder: [
+        {
+          fom: '2024-03-01',
+          tom: '2024-03-31',
+          inntekter: [],
+        },
+        {
+          fom: '2024-03-01',
+          tom: '2024-03-31',
+          inntekter: [],
+        },
+        {
+          fom: '2024-03-01',
+          tom: '2024-03-31',
+          inntekter: [],
+        },
+        {
+          fom: '2024-03-01',
+          tom: '2024-03-31',
+          inntekter: [],
+        },
+        {
+          fom: '2024-03-01',
+          tom: '2024-03-31',
+          inntekter: [],
+        },
+        {
+          fom: '2024-03-01',
+          tom: '2024-03-31',
+          inntekter: [],
+        },
+      ],
+      avvik: 0,
+    },
   },
   erOverstyrtInntekt: false,
   inntektsgrunnlag: {

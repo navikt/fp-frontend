@@ -143,6 +143,6 @@ const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgr
     beregningsgrunnlagId: '1',
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
-  // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
+  // @ts-expect-error Avventar svar på spørsmål om endringar bør gjerast i ft-repo eller på vår backend
   return [nyttBG];
 };

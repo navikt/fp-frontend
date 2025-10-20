@@ -6,5 +6,5 @@ export type InnsynFormValues = {
   fristDato?: string;
   sattPaVent?: boolean;
   begrunnelse?: string;
-  [key: `dokument_${number}`]: boolean;
+  [key: `dokument_${string}`]: boolean;
 };

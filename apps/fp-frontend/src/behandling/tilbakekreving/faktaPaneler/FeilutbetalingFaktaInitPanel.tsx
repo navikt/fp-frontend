@@ -52,7 +52,6 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
           kodeverkSamlingFpsak={standardPanelProps.alleKodeverk}
           isAksjonspunktOpen={standardPanelProps.harÅpentAksjonspunkt}
           {...standardPanelProps}
-          // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
           submitCallback={standardPanelProps.submitCallback}
         />
       ) : (

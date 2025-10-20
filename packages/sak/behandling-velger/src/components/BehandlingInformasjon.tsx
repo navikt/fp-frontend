@@ -8,7 +8,7 @@ import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } 
 
 import styles from './behandlingInformasjon.module.css';
 
-// @ts-expect-error - typer finnes ikke
+// @ts-expect-error - Type ligg i fptilbake-kodeverk
 const tilbakekrevingÅrsakTyperKlage = ['RE_KLAGE_KA', 'RE_KLAGE_NFP'] satisfies BehandlingArsakType[];
 
 const erTilbakekrevingÅrsakKlage = (årsak?: string): boolean =>

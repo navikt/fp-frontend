@@ -15,8 +15,8 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar } from '@navikt/fp-types';
-import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData } from '@navikt/fp-utils';
+import type { BeregningAp, FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -84,7 +84,13 @@ const Wrapper = (props: Omit<ComponentProps<typeof BeregningFaktaIndex>, 'formDa
   return <BeregningFaktaIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />;
 };
 
-const mapBGKodeTilFpsakKode = (bgKode: string): string => {
+const mapBGKodeTilFpsakKode = (
+  bgKode: string,
+):
+  | AksjonspunktKode.AVKLAR_AKTIVITETER
+  | AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER
+  | AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN
+  | AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG => {
   switch (bgKode) {
     case FaktaBeregningAvklaringsbehovCode.AVKLAR_AKTIVITETER:
       return AksjonspunktKode.AVKLAR_AKTIVITETER;
@@ -106,11 +112,10 @@ const lagModifisertCallback =
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
 
-    const transformerteData = apListe.map(apData => ({
+    const transformerteData = apListe.map<BeregningAp>(apData => ({
       kode: mapBGKodeTilFpsakKode(apData.kode),
-      ...apData.grunnlag[0],
+      ...notEmpty(apData.grunnlag[0], 'Mangler grunnlag i be'),
     }));
-    // @ts-expect-error -- gale typer
     return submitCallback(transformerteData);
   };
 
@@ -145,6 +150,6 @@ const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgr
     ...beregningsgrunnlag,
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
-  // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
+  // @ts-expect-error Avventar svar på spørsmål om endringar bør gjerast i ft-repo eller på vår backend
   return [nyttBG];
 };

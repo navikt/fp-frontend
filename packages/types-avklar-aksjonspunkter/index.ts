@@ -31,6 +31,7 @@ export type { VurderDokumentasjonAp } from './src/fakta/VurderDokumentasjonAp';
 export type { VurderMedlemskapAp } from './src/fakta/VurderMedlemskapAp';
 export type { VurderForutgaendeMedlemskapAp } from './src/fakta/VurderForutgaendeMedlemskapAp';
 export type { BekreftAnnenpartsUttakEøsAp } from './src/fakta/BekreftAnnenpartsUttakEøsAp';
+export type { BeregningAp } from './src/fakta/BeregningAp';
 export type { BesteberegningAP, ManuellKontrollBesteberegningAP } from './src/fakta/KontrollerBesteberegningAP';
 
 export type { ProsessAksjonspunkt } from './src/ProsessAksjonspunkt';
@@ -63,5 +64,6 @@ export type { OverstyringMedlemskapsvilkaretAp } from './src/prosess/Overstyring
 export type { VarselRevurderingAp } from './src/prosess/VarselRevurderingAp';
 export type { UttakAp } from './src/prosess/UttakAp';
 export type { SoknadsfristAp } from './src/prosess/SoknadsfristAp';
+export type { BeregningsgrunnlagAp } from './src/prosess/BeregningsgrunnlagAp';
 
 export type { FatterVedtakAp } from './src/totrinn/FatterVedtakAp';

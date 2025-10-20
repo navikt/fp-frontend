@@ -121,13 +121,8 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
     }
   }
 
-  // TODO Dette ser feil ut. Burde det vera const konto = stønadskonto.stonadskontoer[StonadskontoType.FLERBARNSDAGER];
-  // @ts-expect-error Fiks
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const konto = stønadskonto['FLERBARNSDAGER' satisfies StønadskontoType];
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  const konto = stønadskonto.stonadskontoer['FLERBARNSDAGER' satisfies StønadskontoType];
   if (feil.length === 0 && konto && !konto.gyldigForbruk) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
     feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidTrekkDagerFlerbarnsdager' }, { maxDays: konto.maxDager }));
   }
 

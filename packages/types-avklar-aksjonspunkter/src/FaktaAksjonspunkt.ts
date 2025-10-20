@@ -7,6 +7,7 @@ import type {
   FordelBeregningsgrunnlagAP,
   VurderRefusjonBeregningsgrunnlagAP,
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
+import type { AvklartFaktaFeilutbetalingAp } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 
 import type { AvklarAktivitetsPerioderAp } from './fakta/AvklarAktivitetsPerioderAp';
 import type { AvklarAnnenforelderHarRettAp } from './fakta/AvklarAnnenforelderHarRettAp';
@@ -27,6 +28,7 @@ import type { BekreftOmsorgVurderingAp } from './fakta/BekreftOmsorgVurderingAp'
 import type { BekreftOppholdsrettVurderingAp } from './fakta/BekreftOppholdsrettVurderingAp';
 import type { BekreftSvangerskapspengerAp } from './fakta/BekreftSvangerskapspengerAp';
 import type { BekreftUttaksperioderAp } from './fakta/BekreftUttaksperioderAp';
+import type { BeregningAp } from './fakta/BeregningAp';
 import type { OverstyringFaktaFødselAp } from './fakta/fødsel/OverstyringFaktaFødselAp';
 import type { SjekkManglendeFødselAp } from './fakta/fødsel/SjekkManglendeFødselAp';
 import type { SjekkTerminbekreftelseAp } from './fakta/fødsel/SjekkTerminbekreftelseAp';
@@ -45,6 +47,7 @@ import type { VurderOmsorgsovertakelseVilkåretAp } from './fakta/VurderOmsorgso
 export type FaktaAksjonspunkt =
   | AvklarVergeAp
   | MerkOpptjeningUtlandAp
+  | BeregningAp
   | AvklarAktivitetsPerioderAp
   | BekreftEktefelleAksjonspunktAp
   | BekreftDokumentertDatoAksjonspunktAp
@@ -81,4 +84,5 @@ export type FaktaAksjonspunkt =
   | OverstyringDekningsgradAp
   | OverstyringRettigheterAp
   | BekreftAnnenpartsUttakEøsAp
-  | AvklarDekningsgradAp;
+  | AvklarDekningsgradAp
+  | AvklartFaktaFeilutbetalingAp;

@@ -1,9 +1,9 @@
-import type { BeregningAksjonspunktSubmitType } from '@navikt/ft-prosess-beregningsgrunnlag';
 import type { ForeslaVedtakTilbakekrevingAp } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 
 import type { AvklarOpptjeningsvilkaretAp } from './prosess/AvklarOpptjeningsvilkaretAp';
 import type { BekreftSokersOpplysningspliktManuAp } from './prosess/BekreftSokersOpplysningspliktManuAp';
 import type { BekreftSvangerskapspengervilkarAp } from './prosess/BekreftSvangerskapspengervilkarAp';
+import type { BeregningsgrunnlagAp } from './prosess/BeregningsgrunnlagAp';
 import type { Foreldreansvarsvilkar1Ap } from './prosess/Foreldreansvarsvilkar1Ap';
 import type { Foreldreansvarsvilkar2Ap } from './prosess/Foreldreansvarsvilkar2Ap';
 import type { ForeslaVedtakAp } from './prosess/ForeslaVedtakAp';
@@ -33,6 +33,7 @@ import type { VurderTilbaketrekkAp } from './prosess/VurderTilbaketrekkAp';
 export type ProsessAksjonspunkt =
   | BekreftSvangerskapspengervilkarAp
   | SoknadsfristAp
+  | BeregningsgrunnlagAp
   | ForeslaVedtakTilbakekrevingAp
   | BekreftSokersOpplysningspliktManuAp
   | OverstyringSokersOpplysingspliktAp
@@ -58,6 +59,5 @@ export type ProsessAksjonspunkt =
   | OverstyringMedlemskapvilkaretForutgaendeAp
   | VurdereAnnenYtelseForVedtakAp
   | UttakAp
-  | BeregningAksjonspunktSubmitType
   | VurdereDokumentForVedtakAp
   | VurdereInntektsmeldingKlageForVedtakAp;

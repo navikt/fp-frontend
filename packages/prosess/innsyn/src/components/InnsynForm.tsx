@@ -12,7 +12,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, Innsyn, InnsynDokument } from '@navikt/fp-types';
 import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListInnsyn } from './DocumentListInnsyn';
 import type { InnsynFormValues } from './InnsynFormValues';
@@ -44,28 +44,17 @@ const getDocumentsStatus = (values: InnsynFormValues, documents: Dokument[]) =>
   documents.map(document => ({
     dokumentId: document.dokumentId,
     journalpostId: document.journalpostId,
-    // @ts-expect-error Fiks
     fikkInnsyn: !!values[`dokument_${document.dokumentId}`],
   }));
 
-const getFilteredValues = (values: InnsynFormValues) =>
-  Object.keys(values)
-    .filter(valueKey => !valueKey.startsWith('dokument_'))
-    .reduce(
-      (acc, valueKey) => ({
-        ...acc,
-        // @ts-expect-error Fiks
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        [valueKey]: values[valueKey],
-      }),
-      {},
-    );
-
-// @ts-expect-error Fiks
 const transformValues = (values: InnsynFormValues, documents: Dokument[]): VurderInnsynAp => ({
   kode: AksjonspunktKode.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),
-  ...(getFilteredValues(values) as InnsynFormValues),
+  mottattDato: notEmpty(values.mottattDato),
+  innsynResultatType: notEmpty(values.innsynResultatType),
+  fristDato: values.fristDato,
+  sattPaVent: values.sattPaVent,
+  begrunnelse: values.begrunnelse,
 });
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
