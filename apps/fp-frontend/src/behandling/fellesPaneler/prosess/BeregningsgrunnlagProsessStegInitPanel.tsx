@@ -16,7 +16,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, VilkårType } from '@navikt/fp-types';
 import type { BeregningsgrunnlagAp, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -54,7 +54,7 @@ const lagModifisertCallback =
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
     const transformerteData = apListe.map((apData): BeregningsgrunnlagAp => {
-      const grunnlag = apData.grunnlag[0]!;
+      const grunnlag = notEmpty(apData.grunnlag[0]);
       const felles = {
         kode: mapBGKodeTilFpsakKode(apData.kode),
         periode: grunnlag.periode,

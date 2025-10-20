@@ -113,12 +113,8 @@ const getAktivPapirsøknadApKode = (
   if (!ap) {
     throw new Error('Fant ikke aktivt aksjonspunkt for papirsøknad');
   }
-  // TODO (TOR) Midlertidig til AksjonspunktKode reflekterar type fra backend
-  return ap as
-    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
-    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
-    | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
-    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER;
+  //@ts-expect-error Blir fiksa når AksjonspunktKode reflekterar backend-typar
+  return ap;
 };
 
 // Default export grunna React.lazy
