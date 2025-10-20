@@ -23,16 +23,15 @@ const sortFomDates = (
 
 const maxLength50 = maxLength(50);
 
-const getValiderAtFomDatoErFørFørstePeriode =
-  (sorterteFomDatoer: string[], intl: IntlShape, fomVerdi?: string) => () => {
-    if (sorterteFomDatoer.length > 0 && sorterteFomDatoer[0] && fomVerdi) {
-      const isBefore = dayjs(sorterteFomDatoer[0]).isSameOrBefore(dayjs(fomVerdi));
-      if (!isBefore) {
-        return intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.BeforeFomValidation' });
-      }
+const getValiderAtFomDatoErFørFørstePeriode = (sorterteFomDatoer: string[], intl: IntlShape) => (fomVerdi?: string) => {
+  if (sorterteFomDatoer.length > 0 && sorterteFomDatoer[0] && fomVerdi) {
+    const isBefore = dayjs(sorterteFomDatoer[0]).isSameOrBefore(dayjs(fomVerdi));
+    if (!isBefore) {
+      return intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.BeforeFomValidation' });
     }
-    return null;
-  };
+  }
+  return null;
+};
 
 interface Props {
   readOnly: boolean;
@@ -81,7 +80,7 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
               hideLabel={index > 0}
               validate={[
                 hasValidDate,
-                getValiderAtFomDatoErFørFørstePeriode(sorterteFomDatoer, intl, getValues(`${namePart1}.fomDato`)),
+                getValiderAtFomDatoErFørFørstePeriode(sorterteFomDatoer, intl),
                 () => {
                   const fomVerdi = getValues(`${namePart1}.fomDato`);
                   const tomVerdi = getValues(`${namePart1}.tomDato`);
