@@ -1,4 +1,4 @@
-import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { type IntlShape, useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
@@ -9,12 +9,6 @@ import dayjs from 'dayjs';
 
 import { FRILANS_NAME_PREFIX } from '../constants';
 import type { FrilansFormValues } from '../types';
-
-const getValue = (
-  getValues: UseFormGetValues<FrilansFormValues>,
-  fieldName: string,
-  // @ts-expect-error Fiks
-): string => getValues(fieldName);
 
 const sortFomDates = (
   perioder: {
@@ -30,9 +24,7 @@ const sortFomDates = (
 const maxLength50 = maxLength(50);
 
 const getValiderAtFomDatoErFørFørstePeriode =
-  (getValues: UseFormGetValues<FrilansFormValues>, namePart1: string, sorterteFomDatoer: string[], intl: IntlShape) =>
-  () => {
-    const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
+  (sorterteFomDatoer: string[], intl: IntlShape, fomVerdi?: string) => () => {
     if (sorterteFomDatoer.length > 0 && sorterteFomDatoer[0] && fomVerdi) {
       const isBefore = dayjs(sorterteFomDatoer[0]).isSameOrBefore(dayjs(fomVerdi));
       if (!isBefore) {
@@ -79,7 +71,7 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
       emptyTemplate={{ fomDato: '', tomDato: '', oppdragsgiver: '' }}
     >
       {(field, index, removeButton) => {
-        const namePart1 = `${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}`;
+        const namePart1 = `${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}` as const;
         return (
           <HStack key={field.id} gap="space-8" align="end">
             <RhfDatepicker
@@ -89,10 +81,10 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
               hideLabel={index > 0}
               validate={[
                 hasValidDate,
-                getValiderAtFomDatoErFørFørstePeriode(getValues, namePart1, sorterteFomDatoer, intl),
+                getValiderAtFomDatoErFørFørstePeriode(sorterteFomDatoer, intl, getValues(`${namePart1}.fomDato`)),
                 () => {
-                  const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
-                  const tomVerdi = getValue(getValues, `${namePart1}.tomDato`);
+                  const fomVerdi = getValues(`${namePart1}.fomDato`);
+                  const tomVerdi = getValues(`${namePart1}.tomDato`);
                   return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
                 },
               ]}
@@ -106,8 +98,8 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
               validate={[
                 hasValidDate,
                 () => {
-                  const fomVerdi = getValue(getValues, `${namePart1}.fomDato`);
-                  const tomVerdi = getValue(getValues, `${namePart1}.tomDato`);
+                  const fomVerdi = getValues(`${namePart1}.fomDato`);
+                  const tomVerdi = getValues(`${namePart1}.tomDato`);
                   return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
                 },
               ]}

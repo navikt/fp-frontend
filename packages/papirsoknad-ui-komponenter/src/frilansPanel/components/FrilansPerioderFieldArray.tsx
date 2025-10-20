@@ -1,4 +1,4 @@
-import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
@@ -7,12 +7,6 @@ import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@na
 
 import { FRILANS_NAME_PREFIX } from '../constants';
 import type { FrilansFormValues, FrilansSubFormValues } from '../types';
-
-const getValue = (
-  getValues: UseFormGetValues<FrilansFormValues>,
-  fieldName: string,
-  // @ts-expect-error Fiks
-): string => getValues(fieldName);
 
 interface Props {
   readOnly: boolean;
@@ -47,7 +41,7 @@ export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
       append={append}
     >
       {(field, index, removeButton) => {
-        const namePart1 = `${FRILANS_NAME_PREFIX}.perioder.${index}`;
+        const namePart1 = `${FRILANS_NAME_PREFIX}.perioder.${index}` as const;
         return (
           <HStack key={field.id} gap="space-8" align="end">
             <RhfDatepicker
@@ -59,8 +53,8 @@ export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
                 required,
                 hasValidDate,
                 () => {
-                  const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
-                  const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
+                  const fomVerdi = getValues(`${namePart1}.periodeFom`);
+                  const tomVerdi = getValues(`${namePart1}.periodeTom`);
                   return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
                 },
               ]}
@@ -75,8 +69,8 @@ export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
                 required,
                 hasValidDate,
                 () => {
-                  const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
-                  const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
+                  const fomVerdi = getValues(`${namePart1}.periodeFom`);
+                  const tomVerdi = getValues(`${namePart1}.periodeTom`);
                   return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
                 },
               ]}

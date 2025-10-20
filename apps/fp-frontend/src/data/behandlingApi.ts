@@ -56,6 +56,8 @@ import type {
 } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import type { PapirsøknarAp } from '../behandling/papirsoknad/PapirsøknarAp';
+
 type SettPaVentParams = {
   ventearsak?: string;
   frist?: string;
@@ -73,7 +75,7 @@ type NyBehandlendeEnhet = {
 
 //TODO (TOR) Bør dela denne i to. Ein eigen for overstyringsaksjonspunkt
 
-type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | AvklartRisikoklassifiseringAp;
+type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | AvklartRisikoklassifiseringAp | PapirsøknarAp;
 
 export type AksjonspunktArgs = {
   behandlingUuid: string;

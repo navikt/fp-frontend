@@ -154,7 +154,7 @@ const buildInitialValues = (hasManualPaVent: boolean, frist?: string, ventearsak
   frist: frist || hasManualPaVent === false ? (frist ?? undefined) : initFrist(),
 });
 
-// @ts-expect-error tilbakekreving eller fjerna typar?
+// @ts-expect-error - Type ligg i fptilbake-kodeverk
 const manuelleVenteArsaker = new Set<VenteArsakType>([
   'AVV_DOK',
   'AVV_FODSEL',
@@ -168,7 +168,7 @@ const manuelleVenteArsaker = new Set<VenteArsakType>([
   'VENT_PÅ_MULIG_MOTREGNING',
 ]);
 
-// @ts-expect-error tilbakekreving
+// @ts-expect-error - Type ligg i fptilbake-kodeverk
 const automatiskeVentearsakerForTilbakekreving = new Set<VenteArsakType>([
   'VENT_PÅ_BRUKERTILBAKEMELDING',
   'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG',
@@ -189,7 +189,7 @@ const skalViseFristenTekst = (
   const erFristenUtløpt =
     erTilbakekreving &&
     ((!!frist && dateBeforeToday(frist) === null) || (!!originalFrist && dateBeforeToday(originalFrist) === null));
-  // @ts-expect-error tilbakekreving
+  // @ts-expect-error - Type ligg i fptilbake-kodeverk
   const erVenterPaKravgrunnlag = ventearsak === 'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG';
   return erTilbakekreving && erFristenUtløpt && erVenterPaKravgrunnlag;
 };

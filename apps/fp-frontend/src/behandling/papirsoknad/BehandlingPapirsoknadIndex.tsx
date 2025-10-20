@@ -63,6 +63,7 @@ const useLagrePapirsøknad = (
     const bekreftedeAksjonspunktDtoer = [
       {
         '@type': getAktivPapirsøknadApKode(behandling.aksjonspunkt),
+        kode: getAktivPapirsøknadApKode(behandling.aksjonspunkt),
         tema: familieHendelseType,
         soknadstype: fagsakYtelseType,
         soker: foreldreType,
@@ -78,7 +79,6 @@ const useLagrePapirsøknad = (
       saksnummer: fagsak.saksnummer,
       behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
-      // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
       bekreftedeAksjonspunktDtoer,
     });
 
@@ -92,7 +92,13 @@ const useLagrePapirsøknad = (
   };
 };
 
-const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => {
+const getAktivPapirsøknadApKode = (
+  aksjonspunkter: Aksjonspunkt[],
+):
+  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
+  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
+  | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
+  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER => {
   const ap = aksjonspunkter
     .map(a => a.definisjon)
     .find(
@@ -106,7 +112,12 @@ const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => {
   if (!ap) {
     throw new Error('Fant ikke aktivt aksjonspunkt for papirsøknad');
   }
-  return ap;
+  // TODO (TOR) Midlertidig til AksjonspunktKode reflekterar type fra backend
+  return ap as
+    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
+    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
+    | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
+    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER;
 };
 
 // Default export grunna React.lazy

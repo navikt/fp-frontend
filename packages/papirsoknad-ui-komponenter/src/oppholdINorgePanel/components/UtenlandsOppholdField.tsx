@@ -30,18 +30,19 @@ export type FormValues = {
 
 type Keys = 'tidligereOppholdUtenlands' | 'fremtidigeOppholdUtenlands';
 
-const getValue = (
-  getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>,
-  fieldName: string,
-  // @ts-expect-error Fiks
-): string => getValues(fieldName);
-
 const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>, name: Keys) => () => {
   const perioder = getValues(name);
-  const periodeMap = perioder
-    .filter(({ periodeFom, periodeTom }) => periodeFom && periodeFom !== '' && periodeTom && periodeTom !== '')
+
+  const periodeMap: string[][] = perioder
+    .filter(
+      (p): p is { periodeFom: string; periodeTom: string } =>
+        typeof p.periodeFom === 'string' &&
+        p.periodeFom !== '' &&
+        typeof p.periodeTom === 'string' &&
+        p.periodeTom !== '',
+    )
     .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  // @ts-expect-error Fiks
+
   return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
@@ -56,18 +57,13 @@ const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): Reac
       ),
     );
 
-const getValiderFørEllerEtter =
-  (getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>, name: string, index: number, sjekkFør: boolean) =>
-  () => {
-    const fomVerdi = getValue(getValues, `${name}.${index}.periodeFom`);
-    const tomVerdi = getValue(getValues, `${name}.${index}.periodeTom`);
+const getValiderFørEllerEtter = (sjekkFør: boolean, fomVerdi?: string, tomVerdi?: string) => () => {
+  if (!tomVerdi || !fomVerdi) {
+    return null;
+  }
 
-    if (!tomVerdi || !fomVerdi) {
-      return null;
-    }
-
-    return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
-  };
+  return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+};
 
 interface Props {
   erTidligereOpphold?: boolean;
@@ -134,9 +130,13 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
               validate={[
                 required,
                 hasValidDate,
-                getValiderFørEllerEtter(getValues, name, index, true),
+                getValiderFørEllerEtter(
+                  true,
+                  getValues(`${name}.${index}.periodeFom`),
+                  getValues(`${name}.${index}.periodeTom`),
+                ),
                 () => {
-                  const fomVerdi = getValue(getValues, `${name}.${index}.periodeFom`);
+                  const fomVerdi = getValues(`${name}.${index}.periodeFom`);
                   if (erTidligereOpphold) {
                     return dateBeforeOrEqual(dayjs().format(ISO_DATE_FORMAT))(fomVerdi);
                   }
@@ -156,9 +156,13 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
               validate={[
                 required,
                 hasValidDate,
-                getValiderFørEllerEtter(getValues, name, index, false),
+                getValiderFørEllerEtter(
+                  false,
+                  getValues(`${name}.${index}.periodeFom`),
+                  getValues(`${name}.${index}.periodeTom`),
+                ),
                 () => {
-                  const tomVerdi = getValue(getValues, `${name}.${index}.periodeTom`);
+                  const tomVerdi = getValues(`${name}.${index}.periodeTom`);
                   if (erTidligereOpphold) {
                     return dateBeforeOrEqual(dayjs().format(ISO_DATE_FORMAT))(tomVerdi);
                   }

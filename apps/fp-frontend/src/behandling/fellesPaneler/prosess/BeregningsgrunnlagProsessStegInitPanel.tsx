@@ -18,6 +18,7 @@ import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, Vilkår
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
+import type { BeregningsgrunnlagAp } from '../../../../../../packages/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAp';
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -25,7 +26,13 @@ import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardPr
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
 
-const mapBGKodeTilFpsakKode = (bgKode: string): string => {
+const mapBGKodeTilFpsakKode = (
+  bgKode: string,
+):
+  | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS
+  | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD
+  | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET
+  | AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE => {
   switch (bgKode) {
     case ProsessBeregningsgrunnlagAvklaringsbehovCode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS:
       return AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS;
@@ -47,11 +54,44 @@ const lagModifisertCallback =
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
-    const transformerteData = apListe.map(apData => ({
-      kode: mapBGKodeTilFpsakKode(apData.kode),
-      ...apData.grunnlag[0],
-    }));
-    // @ts-expect-error Her er det noko rart med typinga
+    const transformerteData = apListe.map((apData): BeregningsgrunnlagAp => {
+      const grunnlag = apData.grunnlag[0]!;
+      const felles = {
+        kode: mapBGKodeTilFpsakKode(apData.kode),
+        periode: grunnlag.periode,
+        begrunnelse: grunnlag.begrunnelse,
+      };
+
+      if ('inntektPrAndelList' in grunnlag) {
+        return {
+          ...felles,
+          inntektPrAndelList: grunnlag.inntektPrAndelList,
+          inntektFrilanser: grunnlag.inntektFrilanser,
+        };
+      }
+      if ('erVarigEndretNaering' in grunnlag) {
+        return {
+          ...felles,
+          erVarigEndretNaering: grunnlag.erVarigEndretNaering,
+          erVarigEndret: grunnlag.erVarigEndret,
+          bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
+        };
+      }
+      if ('fastsatteTidsbegrensedePerioder' in grunnlag) {
+        return {
+          ...felles,
+          fastsatteTidsbegrensedePerioder: grunnlag.fastsatteTidsbegrensedePerioder,
+          frilansInntekt: grunnlag.frilansInntekt,
+        };
+      }
+      return {
+        kode: mapBGKodeTilFpsakKode(apData.kode),
+        periode: grunnlag.periode,
+        begrunnelse: apData.begrunnelse,
+        bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
+      };
+    });
+
     return submitCallback(transformerteData);
   };
 
@@ -85,7 +125,7 @@ const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgr
     ...beregningsgrunnlag,
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
-  // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
+  // @ts-expect-error Avventar svar på spørsmål om endringar bør gjerast i ft-repo eller på vår backend
   return [nyttBG];
 };
 

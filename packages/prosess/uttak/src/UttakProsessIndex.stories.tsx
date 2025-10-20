@@ -166,7 +166,7 @@ const meta = {
     familiehendelse,
     oppdaterStønadskontoer: v => {
       action('button-click')(v);
-      return Promise.resolve(uttakStonadskontoer);
+      return Promise.resolve<UttakStonadskontoer>(uttakStonadskontoer);
     },
     arbeidsgiverOpplysningerPerId,
     annenForelderUttakEøs: undefined,
@@ -1015,7 +1015,6 @@ export const StønadskontoMedUgyldigForbruk: Story = {
   args: {
     aksjonspunkterForPanel: åpentAksjonspunkt,
     uttakStonadskontoer: uttakStønadskontoerForUgyldigForbrukt,
-    // @ts-expect-error --  denne forstår jeg ikke
     oppdaterStønadskontoer: v => {
       action('button-click')(v);
       return Promise.resolve(uttakStønadskontoerForUgyldigForbrukt);

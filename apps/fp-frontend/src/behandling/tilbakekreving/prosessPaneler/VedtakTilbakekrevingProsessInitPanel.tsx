@@ -31,7 +31,7 @@ import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 
 const AKSJONSPUNKT_KODER = [VedtakAksjonspunktCode.FORESLA_VEDTAK];
 
-// @ts-expect-error -- feil i typene
+// @ts-expect-error - Type ligg i fptilbake-kodeverk
 const tilbakekrevingÅrsakTyperKlage = ['RE-KLAGE-KA', 'RE-KLAGE-NFP'] satisfies BehandlingArsakType[];
 interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
@@ -55,7 +55,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
     behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
   const erRevurderingTilbakekrevingFeilBeløpBortfalt =
     behandling.førsteÅrsak &&
-    // @ts-expect-error -- feil i typene
+    // @ts-expect-error - Type ligg i fptilbake-kodeverk
     'RE_FEILUTBETALT_BELØP_REDUSERT' === behandling.førsteÅrsak.behandlingArsakType;
 
   const api = useBehandlingApi(behandling);
@@ -122,7 +122,7 @@ const Wrapper = (props: Omit<ComponentProps<typeof VedtakTilbakekrevingProsessIn
 };
 
 const erTilbakekrevingÅrsakKlage = (årsak: BehandlingArsakType): boolean =>
-  // @ts-expect-error -- feil i typene
+  // @ts-expect-error - Type ligg i fptilbake-kodeverk
   tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
 
 const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): VilkarUtfallType => {
@@ -131,14 +131,14 @@ const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): VilkarUtfall
   }
   const { type } = beregningsresultat;
 
-  // @ts-expect-error -- feil i typene
+  // @ts-expect-error - Type ligg i fptilbake-kodeverk
   if (type === 'INGEN_TILBAKEBETALING') {
     return 'IKKE_OPPFYLT';
   }
 
-  // @ts-expect-error -- feil i typene
+  // @ts-expect-error - Type ligg i fptilbake-kodeverk
   return type === 'DELVIS_TILBAKEBETALING' ||
-    // @ts-expect-error -- feil i typene
+    // @ts-expect-error - Type ligg i fptilbake-kodeverk
     type === 'FULL_TILBAKEBETALING'
     ? 'OPPFYLT'
     : 'IKKE_VURDERT';

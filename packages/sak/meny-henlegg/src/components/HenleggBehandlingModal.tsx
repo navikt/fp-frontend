@@ -32,7 +32,7 @@ const henleggArsakerPerBehandlingType: Record<string, BehandlingResultatType[]> 
   ['BT-008']: ['HENLAGT_ANKE_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
   ['BT-006']: ['HENLAGT_INNSYN_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
   ['BT-007']: ['HENLAGT_FEILOPPRETTET'],
-  // @ts-expect-error -- tilbakekreving
+  // @ts-expect-error - Type ligg i fptilbake-kodeverk
   ['BT-009']: ['HENLAGT_FEILOPPRETTET_MED_BREV', 'HENLAGT_FEILOPPRETTET_UTEN_BREV'],
   ['BT-004']: ['HENLAGT_SØKNAD_TRUKKET', 'HENLAGT_FEILOPPRETTET', 'HENLAGT_SØKNAD_MANGLER'],
   ['BT-002']: ['HENLAGT_SØKNAD_TRUKKET', 'HENLAGT_FEILOPPRETTET', 'HENLAGT_SØKNAD_MANGLER'],
