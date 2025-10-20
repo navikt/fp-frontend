@@ -84,9 +84,7 @@ const lagModifisertCallback =
         };
       }
       return {
-        kode: mapBGKodeTilFpsakKode(apData.kode),
-        periode: grunnlag.periode,
-        begrunnelse: apData.begrunnelse,
+        ...felles,
         bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
       };
     });
