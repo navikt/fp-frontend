@@ -60,10 +60,11 @@ const useLagrePapirsøknad = (
     foreldreType: string,
     formValues?: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
   ) => {
+    const kode = getAktivPapirsøknadApKode(behandling.aksjonspunkt);
     const bekreftedeAksjonspunktDtoer = [
       {
-        '@type': getAktivPapirsøknadApKode(behandling.aksjonspunkt),
-        kode: getAktivPapirsøknadApKode(behandling.aksjonspunkt),
+        '@type': kode,
+        kode,
         tema: familieHendelseType,
         soknadstype: fagsakYtelseType,
         soker: foreldreType,
