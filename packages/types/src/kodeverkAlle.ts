@@ -127,7 +127,6 @@ export type KodeverkType = keyof KodeverkEnumMap;
 type AvslagsårsakKodeverk = Record<VilkårType | '-', KodeverkMedNavn<'Avslagsårsak'>[]>; // TODO [JOHANNES] -- mildertidig (?) hack
 
 export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
-  lovHjemmel: string;
   sortering: string;
   utfallType: string;
   gyldigForLovendringer: string[];
@@ -136,13 +135,9 @@ export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrs
   synligForRolle: string[];
 };
 
-export type GraderingAvslagÅrsakKodeverk = KodeverkMedNavn<'GraderingAvslagÅrsak'> & {
-  lovHjemmel: string;
-};
+export type GraderingAvslagÅrsakKodeverk = KodeverkMedNavn<'GraderingAvslagÅrsak'>;
 
-type LineærAvslagsårsakKodeverk = KodeverkMedNavn<'LineærAvslagsårsak'> & {
-  lovHjemmel: string;
-};
+type LineærAvslagsårsakKodeverk = KodeverkMedNavn<'LineærAvslagsårsak'>;
 
 type KodeverkMedSammeVerditype = {
   [K in Exclude<
