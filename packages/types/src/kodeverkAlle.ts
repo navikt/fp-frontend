@@ -135,22 +135,16 @@ export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrs
   synligForRolle: string[];
 };
 
-export type GraderingAvslagÅrsakKodeverk = KodeverkMedNavn<'GraderingAvslagÅrsak'>;
-
-type LineærAvslagsårsakKodeverk = KodeverkMedNavn<'LineærAvslagsårsak'>;
-
 type KodeverkMedSammeVerditype = {
   [K in Exclude<
     KodeverkType,
-    'Avslagsårsak' | 'LineærAvslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'
+    'Avslagsårsak' | 'PeriodeResultatÅrsak'
   >]: KodeverkMedNavn<K extends KodeverkType ? K : unknown>[];
 };
 
 export type AlleKodeverk = KodeverkMedSammeVerditype & {
   Avslagsårsak: AvslagsårsakKodeverk;
-  GraderingAvslagÅrsak: GraderingAvslagÅrsakKodeverk[];
   PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
-  LineærAvslagsårsak: LineærAvslagsårsakKodeverk[];
 };
 
 type EnumOrUnknown<T extends KodeverkType> = T extends keyof KodeverkEnumMap ? KodeverkEnumMap[T] : unknown;
