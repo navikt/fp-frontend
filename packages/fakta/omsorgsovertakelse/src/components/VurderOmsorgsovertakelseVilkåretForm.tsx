@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfDatepicker, RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { Checkbox, Radio, VStack } from '@navikt/ds-react';
+import { RhfCheckboxGroup, RhfDatepicker, RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { dateFormat } from '@navikt/ft-utils';
 
@@ -32,11 +32,7 @@ type FormValues = {
   vilkårUtfallType?: VilkarUtfallType;
   delvilkår?: OmsorgsovertakelseVilkårType;
   omsorgsovertakelseDato?: string;
-  fødselsdatoer: {
-    fødselsdato: string;
-    barnNummer: number;
-    skalBrukes: boolean;
-  }[];
+  barnSomSkalVurderes: number[];
   ektefellesBarn?: boolean;
 } & FaktaBegrunnelseFormValues;
 
@@ -49,9 +45,9 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
 
   const { aksjonspunkterForPanel, alleMerknaderFraBeslutter, submitCallback, isReadOnly, isSubmittable, alleKodeverk } =
     usePanelDataContext<VurderOmsorgsovertakelseVilkåretAp>();
-
+  const alleBarn = mapBarn(omsorgsovertakelse);
   const formMethods = useForm<FormValues>({
-    defaultValues: buildInitialValues(omsorgsovertakelse, aksjonspunkterForPanel),
+    defaultValues: buildInitialValues(omsorgsovertakelse, aksjonspunkterForPanel, alleBarn),
   });
 
   const delvilkår = formMethods.watch('delvilkår');
@@ -65,11 +61,6 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
       .sort(sortByNavn);
   }, [delvilkår]);
 
-  const { fields } = useFieldArray({
-    control: formMethods.control,
-    name: 'fødselsdatoer',
-  });
-
   return (
     <FaktaKort
       label={intl.formatMessage({
@@ -77,7 +68,10 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
       })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET]}
     >
-      <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => submitCallback(transformValues(values))}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={(values: FormValues) => submitCallback(transformValues(values, alleBarn))}
+      >
         <VStack gap="space-20">
           <RhfDatepicker
             name="omsorgsovertakelseDato"
@@ -107,31 +101,31 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             </Radio>
           </RhfRadioGroup>
 
-          <div>
-            <Label size="small">
-              <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.HvilkeBarnSkalBrukes" />
-            </Label>
-            {fields.map(({ fødselsdato, barnNummer }, index) => (
-              <RhfCheckbox
-                key={barnNummer}
-                label={
-                  <>
-                    <FormattedMessage
-                      id="VurderOmsorgsovertakelseVilkåretForm.BarnRad"
-                      values={{
-                        nummer: barnNummer,
-                        fødseldato: dateFormat(fødselsdato),
-                      }}
-                    />
-                    <Over15Markering fødselsdato={fødselsdato} />
-                  </>
-                }
-                readOnly={isReadOnly}
-                control={formMethods.control}
-                name={`fødselsdatoer.${index}.skalBrukes`}
-              />
+          <RhfCheckboxGroup
+            isReadOnly={isReadOnly}
+            control={formMethods.control}
+            name="barnSomSkalVurderes"
+            label={<FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.BarnSomSkalVurderes.Tittel" />}
+            validate={[
+              values =>
+                values.length > 0
+                  ? undefined
+                  : intl.formatMessage({ id: 'VurderOmsorgsovertakelseVilkåretForm.BarnSomSkalVurderes.Required' }),
+            ]}
+          >
+            {alleBarn.map(({ fødselsdato, barnNummer }) => (
+              <Checkbox key={barnNummer} value={barnNummer} readOnly={isReadOnly}>
+                <FormattedMessage
+                  id="VurderOmsorgsovertakelseVilkåretForm.BarnSomSkalVurderes.Rad"
+                  values={{
+                    nummer: barnNummer,
+                    fødseldato: dateFormat(fødselsdato),
+                  }}
+                />
+                <Over15Markering fødselsdato={fødselsdato} />
+              </Checkbox>
             ))}
-          </div>
+          </RhfCheckboxGroup>
 
           <RhfRadioGroup
             name="delvilkår"
@@ -224,6 +218,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
 const buildInitialValues = (
   omsorgsovertakelse: OmsorgsovertakelseDto,
   aksjonspunkterForPanel: Aksjonspunkt[],
+  alleBarn: ReturnType<typeof mapBarn>,
 ): FormValues => {
   const { gjeldende, saksbehandlerVurdering: { vilkårUtfallType, avslagsårsak } = {} } = omsorgsovertakelse;
   return {
@@ -232,20 +227,23 @@ const buildInitialValues = (
     vilkårUtfallType:
       vilkårUtfallType === 'OPPFYLT' || vilkårUtfallType === 'IKKE_OPPFYLT' ? vilkårUtfallType : undefined,
     avslagskode: avslagsårsak,
-    fødselsdatoer: mapBarn(omsorgsovertakelse),
+    barnSomSkalVurderes: alleBarn.filter(b => b.skalBrukes).map(b => b.barnNummer),
     ektefellesBarn: mapEktefellesBarn(gjeldende),
     ...FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel),
   };
 };
 
-const transformValues = (values: FormValues): VurderOmsorgsovertakelseVilkåretAp => ({
+const transformValues = (
+  values: FormValues,
+  alleBarn: ReturnType<typeof mapBarn>,
+): VurderOmsorgsovertakelseVilkåretAp => ({
   omsorgsovertakelseDato: notEmpty(values.omsorgsovertakelseDato),
   delvilkår: notEmpty(values.delvilkår),
   avslagskode: values.vilkårUtfallType === 'IKKE_OPPFYLT' ? values.avslagskode : undefined,
   ektefellesBarn: notEmpty(values.ektefellesBarn),
-  fødselsdatoer: notEmpty(values.fødselsdatoer)
-    .filter(b => b.skalBrukes)
-    .map(({ fødselsdato, barnNummer }) => ({ barnNummer, fødselsdato })),
+  barn: alleBarn
+    .filter(b => values.barnSomSkalVurderes.includes(b.barnNummer))
+    .map(({ barnNummer, fødselsdato }) => ({ barnNummer, fødselsdato })),
   kode: AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
@@ -269,14 +267,14 @@ const mapEktefellesBarn = (gjeldende: OmsorgsovertakelseDto['gjeldende']) => {
 };
 
 const mapBarn = (omsorgsovertakelse: OmsorgsovertakelseDto) => {
-  return omsorgsovertakelse.søknad.barn.map((søknadBarn, index) => {
-    const barn = omsorgsovertakelse.gjeldende.barn.find(
+  return omsorgsovertakelse.søknad.barn.map(søknadBarn => {
+    const identiskBarn = omsorgsovertakelse.gjeldende.barn.find(
       gjeldendeBarn => gjeldendeBarn.barnNummer === søknadBarn.barnNummer,
     );
     return {
-      fødselsdato: barn?.fødselsdato ?? søknadBarn.fødselsdato,
-      barnNummer: søknadBarn.barnNummer ?? index + 1,
-      skalBrukes: !!barn,
+      fødselsdato: identiskBarn?.fødselsdato ?? søknadBarn.fødselsdato,
+      barnNummer: søknadBarn.barnNummer,
+      skalBrukes: !!identiskBarn,
     };
   });
 };

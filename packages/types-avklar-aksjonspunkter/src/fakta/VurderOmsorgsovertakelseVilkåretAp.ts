@@ -7,6 +7,6 @@ export type VurderOmsorgsovertakelseVilkåretAp = {
   avslagskode?: Avslagsarsak;
   delvilkår: OmsorgsovertakelseVilkårType;
   omsorgsovertakelseDato: string;
-  fødselsdatoer: { fødselsdato: string; barnNummer: number }[];
+  barn: { fødselsdato: string; barnNummer: number }[];
   ektefellesBarn: boolean;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET>;
