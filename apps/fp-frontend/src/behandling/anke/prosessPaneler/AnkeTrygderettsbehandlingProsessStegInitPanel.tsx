@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -9,7 +8,7 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeTrygderettsbehandlingProsessIndex } from '@navikt/fp-prosess-anke-trygderettsbehandling';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -19,7 +18,7 @@ export const AnkeTrygderettsbehandlingProsessStegInitPanel = () => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling } = useBehandlingDataContext();
 
   const api = useBehandlingApi(behandling);
   const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(behandling));

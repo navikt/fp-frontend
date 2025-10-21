@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import type {
   AlleKodeverk,
   AnnenforelderUttakEøsPeriode,
-  Behandling,
+  BehandlingFpSak,
   Fagsak,
   FamilieHendelse,
   OppholdÅrsakType,
@@ -46,7 +46,7 @@ const utledFamiliehendelseDato = (gjeldendeFamiliehendelse: FamilieHendelse): st
 };
 
 const finnTidslinjeTider = (
-  behandling: Behandling,
+  behandling: BehandlingFpSak,
   søknad: Soknad,
   familiehendelse: FamilieHendelse,
   personoversikt: Personoversikt,
@@ -96,7 +96,7 @@ const lagUttakMedOpphold = (perioderSøker: PeriodeSoker[]): PeriodeSoker[] =>
   });
 
 interface Props {
-  behandling: Behandling;
+  behandling: BehandlingFpSak;
   søknad: Soknad;
   personoversikt: Personoversikt;
   perioderSøker: PeriodeSoker[];

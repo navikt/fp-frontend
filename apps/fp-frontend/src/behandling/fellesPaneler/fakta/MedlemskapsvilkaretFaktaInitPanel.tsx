@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -9,7 +8,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
@@ -21,7 +20,7 @@ const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
 export const MedlemskapsvilkaretFaktaInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling } = useBehandlingDataContext();
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 

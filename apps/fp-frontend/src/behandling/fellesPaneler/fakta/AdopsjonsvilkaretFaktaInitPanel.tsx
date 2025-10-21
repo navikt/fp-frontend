@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -10,7 +9,7 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { adopsjonsvilkårene } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
@@ -23,7 +22,7 @@ const AKSJONSPUNKT_KODER = [
 export const AdopsjonsvilkaretFaktaInitPanel = () => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const { behandling, fagsak } = use(BehandlingDataContext);
+  const { behandling, fagsak } = useBehandlingDataContext();
 
   const skalPanelVisesIMeny = behandling.vilkår.some(v => adopsjonsvilkårene.has(v.vilkarType));
 

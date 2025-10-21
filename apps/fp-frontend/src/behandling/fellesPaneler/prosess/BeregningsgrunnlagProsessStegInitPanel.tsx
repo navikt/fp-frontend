@@ -1,4 +1,4 @@
-import { type ComponentProps, use } from 'react';
+import { type ComponentProps } from 'react';
 import { useIntl } from 'react-intl';
 
 import type { FtVilkar } from '@navikt/ft-fakta-beregning';
@@ -19,7 +19,7 @@ import type { BeregningsgrunnlagAp, ProsessAksjonspunkt } from '@navikt/fp-types
 import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -144,7 +144,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling } = useBehandlingDataContext();
 
   const api = useBehandlingApi(behandling);
 

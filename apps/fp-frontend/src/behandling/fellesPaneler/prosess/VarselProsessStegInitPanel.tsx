@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ import {
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -40,7 +39,7 @@ const AKSJONSPUNKT_KODER = [AksjonspunktKode.VARSEL_REVURDERING_MANUELL, Aksjons
 export const VarselProsessStegInitPanel = () => {
   const intl = useIntl();
 
-  const { setSkalOppdatereEtterBekreftelseAvAp, behandling } = use(BehandlingDataContext);
+  const { setSkalOppdatereEtterBekreftelseAvAp, behandling } = useBehandlingDataContext();
 
   const navigate = useNavigate();
 

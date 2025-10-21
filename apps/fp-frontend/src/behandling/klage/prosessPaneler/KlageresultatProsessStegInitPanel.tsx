@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ import type { Aksjonspunkt, Behandlingsresultat, VilkarUtfallType } from '@navik
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -27,7 +27,7 @@ const AKSJONSPUNKT_KODER = [
 export const KlageresultatProsessStegInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
+  const { behandling, setSkalOppdatereEtterBekreftelseAvAp } = useBehandlingDataContext();
 
   const { aksjonspunkt: aksjonspunkter } = behandling;
 

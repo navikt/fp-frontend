@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
 
 import { OmsorgVilkarProsessIndex } from './OmsorgVilkarProsessIndex';
 
@@ -67,7 +67,7 @@ export const AvslåttVilkår: Story = {
       behandlingsresultat: {
         avslagsarsak: '1099',
       },
-    } as Behandling,
+    } as BehandlingFpSak,
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,

@@ -7,7 +7,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
-  Behandling,
+  BehandlingFpSak,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
@@ -30,7 +30,7 @@ const defaultAksjonspunkt: Aksjonspunkt = {
   erAktivt: true,
 };
 
-const defaultBehandling: Behandling = {
+const defaultBehandling: BehandlingFpSak = {
   uuid: '1',
   versjon: 1,
   type: 'BT-002',
@@ -171,7 +171,7 @@ export const GodkjentForeldrepengerForSaksbehandler: Story = {
     behandling: {
       ...defaultBehandling,
       status: 'AVSLU',
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     isReadOnly: true,
   },
@@ -189,7 +189,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
@@ -206,7 +206,7 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
   },
 };
@@ -222,7 +222,7 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     isReadOnly: true,
   },
@@ -256,7 +256,7 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
@@ -527,7 +527,7 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
@@ -568,7 +568,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
   },
 };
@@ -586,7 +586,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
   },
 };
@@ -603,7 +603,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
   },
 };
@@ -621,7 +621,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
   },
 };
@@ -640,7 +640,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     isReadOnly: true,
   },
@@ -658,7 +658,7 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     originaltBeregningsresultat: defaultberegningresultatDagytelse,
   },
 };
@@ -675,7 +675,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     originaltBeregningsresultat: defaultberegningresultatDagytelse,
     isReadOnly: true,
   },
@@ -693,7 +693,7 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     isReadOnly: true,
   },
@@ -711,7 +711,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
@@ -748,7 +748,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
           overstyrbar: true,
         },
       ],
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
@@ -776,7 +776,7 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
@@ -806,7 +806,7 @@ export const LegacyOverstyring: Story = {
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     isReadOnly: true,
   },
@@ -826,7 +826,7 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
   },
 };
@@ -880,7 +880,7 @@ export const SkalIkkeProduseresBrev: Story = {
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-    } satisfies Behandling,
+    } satisfies BehandlingFpSak,
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,

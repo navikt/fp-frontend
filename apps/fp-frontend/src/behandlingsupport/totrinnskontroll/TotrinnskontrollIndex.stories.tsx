@@ -13,10 +13,10 @@ import {
   withRouter,
 } from '@navikt/fp-storybook-utils';
 import type {
-  BehandlingAppKontekst,
   BehandlingOppretting,
   BehandlingTillatteOperasjoner,
   Fagsak,
+  FagsakBehandlingDto,
   SkjermlenkeType,
   TotrinnskontrollAksjonspunkt,
 } from '@navikt/fp-types';
@@ -126,7 +126,7 @@ const BEHANDLING = {
   vilkår: [],
   links: [],
   brevmaler: [],
-} satisfies BehandlingAppKontekst;
+} satisfies FagsakBehandlingDto;
 
 const FAGSAK = {
   saksnummer: '123',

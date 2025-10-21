@@ -1,13 +1,13 @@
-import { createContext, type JSX, type MouseEvent, type ReactElement, use, useMemo } from 'react';
+import { createContext, type JSX, type MouseEvent, type ReactElement, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, Link, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type { Behandling, VilkarUtfallType } from '@navikt/fp-types';
+import type { BehandlingFpSak, VilkarUtfallType } from '@navikt/fp-types';
 
-import { BehandlingDataContext } from '../context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { type InngangsvilkarPanelData, useInngangsvilkårPanelData } from './useInngangsvilkårPanelData';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
@@ -20,7 +20,7 @@ interface Props {
 export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, children }: Props) => {
   const intl = useIntl();
 
-  const { behandling, oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
+  const { behandling, oppdaterProsessStegOgFaktaPanelIUrl } = useBehandlingDataContext<BehandlingFpSak>();
 
   const { inngangsvilkårPanelData, settIngangsvilkårPanelData } = useInngangsvilkårPanelData();
 
@@ -114,7 +114,7 @@ const getStatus = (paneler: InngangsvilkarPanelData[]): VilkarUtfallType => {
   return harMinstEttDelPanelStatus(paneler, 'IKKE_OPPFYLT') ? 'IKKE_OPPFYLT' : tempStatus;
 };
 
-const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: Behandling): boolean => {
+const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: BehandlingFpSak): boolean => {
   if (behandling.behandlingHenlagt) {
     return false;
   }

@@ -13,7 +13,7 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { Behandling, Fagsak } from '@navikt/fp-types';
+import type { BehandlingFpSak, Fagsak } from '@navikt/fp-types';
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -169,7 +169,7 @@ export const FaresignalerOppdaget: Story = {
     behandling: {
       uuid: '1',
       versjon: 1,
-    } as Behandling,
+    } as BehandlingFpSak,
   },
 };
 

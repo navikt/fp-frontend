@@ -1,12 +1,12 @@
 import { createContext, type ReactElement, useContext, useMemo } from 'react';
 
-import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
-type Props<AP_TYPE extends AksjonspunktType> = {
-  behandling: Behandling;
+type Props<AP_TYPE extends AksjonspunktType, B extends Behandling> = {
+  behandling: B;
   fagsak: Fagsak;
   aksjonspunkterForPanel: Aksjonspunkt[];
   harÅpentAksjonspunkt: boolean;
@@ -19,10 +19,10 @@ type Props<AP_TYPE extends AksjonspunktType> = {
 
 const PanelDataContext = createContext<unknown>(null);
 
-export const PanelDataProvider = <T extends AksjonspunktType>(
+export const PanelDataProvider = <T extends AksjonspunktType, B extends Behandling = BehandlingFpSak>(
   props: {
     children: ReactElement | null;
-  } & Props<T>,
+  } & Props<T, B>,
 ) => {
   const { children, ...otherProps } = props;
 
@@ -31,10 +31,13 @@ export const PanelDataProvider = <T extends AksjonspunktType>(
   return <PanelDataContext value={value}>{children}</PanelDataContext>;
 };
 
-export const usePanelDataContext = <AP_TYPE extends AksjonspunktType>() => {
+export const usePanelDataContext = <
+  AP_TYPE extends AksjonspunktType,
+  B_TYPE extends Behandling = BehandlingFpSak,
+>() => {
   const context = useContext(PanelDataContext);
   if (!context) {
     throw new Error('PanelContext.Provider er ikke satt opp');
   }
-  return context as Props<AP_TYPE>;
+  return context as Props<AP_TYPE, B_TYPE>;
 };

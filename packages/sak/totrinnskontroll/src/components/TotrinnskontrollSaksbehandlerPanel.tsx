@@ -8,7 +8,7 @@ import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
 import type {
-  BehandlingAppKontekst,
+  FagsakBehandlingDto,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
   SkjermlenkeType,
@@ -38,7 +38,7 @@ const VurderPåNyttPunkter = ({
 );
 
 interface Props {
-  behandling: BehandlingAppKontekst;
+  behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   erForeldrepengerFagsak: boolean;
   erTilbakekreving: boolean;

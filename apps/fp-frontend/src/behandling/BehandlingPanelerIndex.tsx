@@ -1,4 +1,4 @@
-import { Suspense, use } from 'react';
+import { Suspense } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -10,7 +10,7 @@ import { ErrorPage } from '@navikt/fp-sak-infosider';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../data/behandlingApi';
-import { BehandlingDataContext } from './felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from './felles/context/BehandlingDataContext';
 import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';
 import { lazyWithRetry } from './lazyUtils';
 
@@ -25,7 +25,7 @@ const TilbakekrevingPaneler = lazyWithRetry(() => import('./tilbakekreving/Tilba
 export const BehandlingPanelerIndex = () => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
-  const { alleKodeverk, behandling, fagsak } = use(BehandlingDataContext);
+  const { alleKodeverk, behandling, fagsak } = useBehandlingDataContext();
 
   const navigate = useNavigate();
   const location = useLocation();

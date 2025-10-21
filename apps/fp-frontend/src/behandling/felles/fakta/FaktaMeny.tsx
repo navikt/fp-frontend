@@ -1,11 +1,13 @@
-import { createContext, type JSX, type ReactNode, use, useMemo } from 'react';
+import { createContext, type JSX, type ReactNode, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { HStack } from '@navikt/ds-react';
 import { SideMenu } from '@navikt/ft-plattform-komponenter';
 
-import { BehandlingDataContext } from '../context/BehandlingDataContext';
+import type { Behandling } from '@navikt/fp-types';
+
+import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { type FaktaPanelMedÅpentApInfo, type FaktaPanelMenyData, useFaktaPanelMenyData } from './useFaktaPanelMenyData';
 
 import styles from './faktaMeny.module.css';
@@ -17,10 +19,15 @@ interface Props {
   children: ReactNode | ReactNode[];
 }
 
-export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setFaktaPanelMedÅpentApInfo, children }: Props) => {
+export const FaktaMeny = <T extends Behandling>({
+  valgtFaktaSteg,
+  valgtProsessSteg,
+  setFaktaPanelMedÅpentApInfo,
+  children,
+}: Props) => {
   const intl = useIntl();
 
-  const { oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
+  const { oppdaterProsessStegOgFaktaPanelIUrl } = useBehandlingDataContext<T>();
 
   const { faktaPanelMenyData, settFaktaPanelMenyData } = useFaktaPanelMenyData(setFaktaPanelMedÅpentApInfo);
 

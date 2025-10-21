@@ -1,4 +1,4 @@
-import { type ComponentProps, use } from 'react';
+import { type ComponentProps } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -21,7 +21,7 @@ import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { harAksjonspunkt, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
@@ -36,7 +36,7 @@ interface Props {
 export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling } = useBehandlingDataContext();
 
   const api = useBehandlingApi(behandling);
 

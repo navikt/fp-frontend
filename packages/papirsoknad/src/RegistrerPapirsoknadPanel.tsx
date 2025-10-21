@@ -8,7 +8,7 @@ import { createIntl } from '@navikt/ft-utils';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type {
   AlleKodeverk,
-  Behandling,
+  BehandlingFpSak,
   Fagsak,
   FagsakYtelseType,
   FamilieHendelseType,
@@ -37,7 +37,7 @@ interface Props {
     familieHendelseType: FamilieHendelseType,
     foreldreType: ForeldreType,
     formValues?: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
-  ) => Promise<Behandling>;
+  ) => Promise<BehandlingFpSak>;
   erEndringssøknad: boolean;
 }
 

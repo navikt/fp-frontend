@@ -1,13 +1,13 @@
 import { type ReactElement } from 'react';
 
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, FagsakBehandlingDto } from '@navikt/fp-types';
 
 import { BehandlingInformasjon } from './BehandlingInformasjon';
 
 import styles from './behandlingListeRad.module.css';
 
 interface Props {
-  behandling: BehandlingAppKontekst;
+  behandling: FagsakBehandlingDto;
   erKunEnBehandling: boolean;
   erAktiv: boolean;
   skalViseAlleBehandlinger: boolean;

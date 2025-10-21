@@ -5,7 +5,7 @@ import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling, KlageVurdering } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, KlageVurdering } from '@navikt/fp-types';
 
 import { VedtakKlageProsessIndex } from './VedtakKlageProsessIndex';
 
@@ -16,7 +16,7 @@ const behandling = {
     type: 'KLAGE_AVVIST',
   },
   behandlingPåVent: false,
-} as Behandling;
+} as BehandlingFpSak;
 
 const aksjonspunkterForPanel: Aksjonspunkt[] = [
   {

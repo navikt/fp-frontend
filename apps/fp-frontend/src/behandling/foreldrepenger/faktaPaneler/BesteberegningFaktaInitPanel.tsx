@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -10,7 +9,7 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
@@ -22,7 +21,7 @@ interface Props {
 
 export const BesteberegningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling } = useBehandlingDataContext();
 
   const api = useBehandlingApi(behandling);
   const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(behandling));

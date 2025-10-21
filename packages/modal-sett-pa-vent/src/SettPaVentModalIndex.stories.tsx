@@ -37,7 +37,6 @@ export const BehandlingSomErAutomatiskPåVentUtenFrist: Story = {
 export const VenterPåTilbakekrevinggrunnlagMedUtløptFrist: Story = {
   args: {
     frist: '2015-10-10',
-    //@ts-expect-error tilbakekreving
     ventearsak: 'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG',
     hasManualPaVent: false,
     erTilbakekreving: true,

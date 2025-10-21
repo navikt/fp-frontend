@@ -1,19 +1,25 @@
-import { use } from 'react';
-
-import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak, Vilkar, VilkarUtfallType } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  AlleKodeverk,
+  Behandling,
+  BehandlingFpSak,
+  Fagsak,
+  Vilkar,
+  VilkarUtfallType,
+} from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import type { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
 const DEFAULT_FAKTA_KODE = 'default';
 const DEFAULT_PROSESS_STEG_KODE = 'default';
 
-export interface StandardProsessPanelProps {
-  behandling: Behandling;
+export type StandardProsessPanelProps<T extends Behandling> = {
+  behandling: T;
   fagsak: Fagsak;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
@@ -26,13 +32,13 @@ export interface StandardProsessPanelProps {
   vilkårForPanel: Vilkar[];
   harÅpentAksjonspunkt: boolean;
   isAksjonspunktOpen: boolean;
-}
+};
 
-export const useStandardProsessPanelProps = (
+export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFpSak>(
   aksjonspunktKoder: Aksjonspunkt['definisjon'][] = [],
   vilkårKoder: Aksjonspunkt['vilkarType'][] = [],
   lagringSideEffekter?: (aksjonspunkter: ProsessAksjonspunkt[]) => () => void,
-): StandardProsessPanelProps => {
+): StandardProsessPanelProps<T> => {
   const {
     behandling,
     rettigheter,
@@ -41,14 +47,14 @@ export const useStandardProsessPanelProps = (
     lagreOverstyrteAksjonspunkter,
     alleKodeverk,
     oppdaterProsessStegOgFaktaPanelIUrl,
-  } = use(BehandlingDataContext);
+  } = useBehandlingDataContext<T>();
 
-  const { aksjonspunkt, vilkår } = behandling;
+  const { aksjonspunkt } = behandling;
+  const vilkår = 'vilkår' in behandling ? behandling.vilkår : [];
 
   const aksjonspunkterForPanel = aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon));
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- vilkår virker å være undefined fra fptilbake
-  const vilkårForPanel = (vilkår ?? []).filter(v => vilkårKoder.includes(v.vilkarType));
+  const vilkårForPanel = vilkår.filter(v => vilkårKoder.includes(v.vilkarType));
 
   const isReadOnly = erReadOnly(behandling, vilkårForPanel, rettigheter, false);
 

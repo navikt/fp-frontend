@@ -12,7 +12,7 @@ import {
   type MessagesFormValues,
   MessagesModalSakIndex,
 } from '@navikt/fp-sak-meldinger';
-import type { BehandlingAppKontekst } from '@navikt/fp-types';
+import type { DokumentMalType, FagsakBehandlingDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import {
@@ -35,7 +35,7 @@ interface Props {
   toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
 }
 
-const finnFristFraBehandling = (behandling: BehandlingAppKontekst) =>
+const finnFristFraBehandling = (behandling: FagsakBehandlingDto) =>
   behandling.behandlingPåVent ? behandling.fristBehandlingPåVent : undefined;
 
 /**
@@ -154,7 +154,7 @@ const getSubmitCallback =
     hentOgSettBehandling: () => void,
     setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
     setMeldingFormData: (data?: MessagesFormValues) => void,
-    behandling: BehandlingAppKontekst,
+    behandling: FagsakBehandlingDto,
   ) =>
   (values: MessagesFormValues) => {
     const skalSettePåVent =
@@ -195,14 +195,14 @@ const finnKanIkkeLagreMeldingTekst = (kanVeilede: boolean, behandlingKanSendeMel
   return 'MeldingIndex.IkkeTilgjengeligAvsluttet';
 };
 
-const useVisForhandsvisningAvMelding = (behandling: BehandlingAppKontekst) => {
+const useVisForhandsvisningAvMelding = (behandling: FagsakBehandlingDto) => {
   const api = useFagsakBehandlingApi(behandling);
 
   const { mutate: forhåndsvisFpSakBrev } = useMutation({
     mutationFn: (params: ForhåndsvisBrevParams) =>
       api.forhåndsvisMelding({
         behandlingUuid: behandling.uuid,
-        dokumentMal: params.brevmalkode,
+        dokumentMal: params.brevmalkode as DokumentMalType,
         fritekst: params.fritekst || ' ',
         arsakskode: params.arsakskode,
       }),

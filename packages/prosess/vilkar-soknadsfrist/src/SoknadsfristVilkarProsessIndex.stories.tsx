@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import { SoknadsfristVilkarProsessIndex } from './SoknadsfristVilkarProsessIndex';
 
@@ -77,7 +77,7 @@ export const AvslåttVilkår: Story = {
       behandlingsresultat: {
         avslagsarsak: '1099',
       },
-    } as Behandling,
+    } as BehandlingFpSak,
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,

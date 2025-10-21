@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { useQuery } from '@tanstack/react-query';
@@ -10,7 +9,7 @@ import type { VilkårType } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
 import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
@@ -26,7 +25,7 @@ const VILKAR_KODER = ['FP_VK_3'] satisfies VilkårType[];
 export const SoknadsfristEsProsessStegInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling, rettigheter } = use(BehandlingDataContext);
+  const { behandling, rettigheter } = useBehandlingDataContext();
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 

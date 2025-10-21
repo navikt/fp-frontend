@@ -1,4 +1,4 @@
-import { type ComponentProps, use } from 'react';
+import { type ComponentProps } from 'react';
 import { useIntl } from 'react-intl';
 
 import type { BeregnBeløpParams } from '@navikt/ft-prosess-tilbakekreving';
@@ -11,11 +11,11 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import type { AlleKodeverkTilbakekreving, BehandlingFpTilbake } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -32,7 +32,7 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const { behandling, fagsak } = use(BehandlingDataContext);
+  const { behandling, fagsak } = useBehandlingDataContext<BehandlingFpTilbake>();
 
   const api = useBehandlingApi(behandling);
 

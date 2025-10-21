@@ -1,6 +1,6 @@
 import { createContext, type ReactElement, useContext, useEffect, useMemo, useState } from 'react';
 
-import type { Behandling, BrevOverstyring } from '@navikt/fp-types';
+import type { BehandlingFpSak, BrevOverstyring } from '@navikt/fp-types';
 
 type VedtakEditeringData = {
   hentBrevOverstyring: () => Promise<BrevOverstyring>;
@@ -19,7 +19,7 @@ export const VedtakEditeringProvider = ({
   mellomlagreBrevOverstyring,
   children,
 }: {
-  behandling: Behandling;
+  behandling: BehandlingFpSak;
   hentBrevOverstyring: () => Promise<BrevOverstyring>;
   hentBrevOverstyringIsPending: boolean;
   mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;

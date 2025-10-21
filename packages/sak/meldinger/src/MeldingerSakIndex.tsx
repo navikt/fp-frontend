@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { FagsakBehandlingDto, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { type ForhåndsvisBrevParams, type FormValues, Messages } from './components/Messages';
 
@@ -19,7 +19,7 @@ interface Props {
   meldingFormData?: FormValues;
   setMeldingFormData: (data?: FormValues) => void;
   brukerManglerAdresse: boolean;
-  behandling: BehandlingAppKontekst;
+  behandling: FagsakBehandlingDto;
 }
 
 export const MeldingerSakIndex = (props: Props) => (

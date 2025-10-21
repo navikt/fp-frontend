@@ -1,30 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import type { Behandling } from '@navikt/fp-types';
+import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
+import type { BehandlingFpSak, BehandlingFpTilbake } from '@navikt/fp-types';
 
 import { MenyHenleggIndex } from './MenyHenleggIndex';
-
-const BEHANDLINGRESULTAT_TYPER_TILBAKEKREVING = [
-  {
-    kode: 'HENLAGT_FEILOPPRETTET_UTEN_BREV',
-    kodeverk: 'BEHANDLING_RESULT_TYPE',
-    navn: 'Henlagt feilopprettet uten brev',
-  },
-  {
-    kode: 'HENLAGT_FEILOPPRETTET_MED_BREV',
-    kodeverk: 'BEHANDLING_RESULT_TYPE',
-    navn: 'Henlagt feilopprettet med brev',
-  },
-];
 
 const meta = {
   title: 'sak/sak-meny-henlegg',
   component: MenyHenleggIndex,
   args: {
-    //@ts-expect-error tilbakekreving-type
-    behandlingResultatTyper: alleKodeverk.BehandlingResultatType.concat(BEHANDLINGRESULTAT_TYPER_TILBAKEKREVING),
     ytelseType: 'FP',
     gaaTilSokeside: action('button-click'),
     henleggBehandling: () => {
@@ -45,7 +30,8 @@ export const ForFørstegangssøknad: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: 'BT-002',
-    } as Behandling,
+    } as BehandlingFpSak,
+    behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };
 
@@ -55,7 +41,8 @@ export const ForKlage: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: 'BT-003',
-    } as Behandling,
+    } as BehandlingFpSak,
+    behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };
 
@@ -65,7 +52,8 @@ export const ForInnsyn: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: 'BT-006',
-    } as Behandling,
+    } as BehandlingFpSak,
+    behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };
 
@@ -75,7 +63,8 @@ export const ForTilbakekreving: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: 'BT-007',
-    } as Behandling,
+    } as BehandlingFpTilbake,
+    behandlingResultatTyper: alleKodeverkTilbakekreving.BehandlingResultatType,
   },
 };
 
@@ -85,7 +74,8 @@ export const ForTilbakekrevingRevurdering: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: 'BT-009',
-    } as Behandling,
+    } as BehandlingFpTilbake,
+    behandlingResultatTyper: alleKodeverkTilbakekreving.BehandlingResultatType,
   },
 };
 
@@ -95,6 +85,7 @@ export const ForRevurdering: Story = {
       versjon: 2,
       uuid: '23r2323',
       type: 'BT-004',
-    } as Behandling,
+    } as BehandlingFpSak,
+    behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };

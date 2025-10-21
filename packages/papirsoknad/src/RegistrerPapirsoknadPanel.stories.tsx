@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
-import type { Behandling, Fagsak } from '@navikt/fp-types';
+import type { BehandlingFpSak, Fagsak } from '@navikt/fp-types';
 
 import { RegistrerPapirsoknadPanel } from './RegistrerPapirsoknadPanel';
 
@@ -16,7 +16,7 @@ const meta = {
     kodeverk: alleKodeverk,
     lagrePapirsøknad: values => {
       action('lagrePapirsøknad')(values);
-      return Promise.resolve({} as Behandling);
+      return Promise.resolve({} as BehandlingFpSak);
     },
   },
 } satisfies Meta<typeof RegistrerPapirsoknadPanel>;

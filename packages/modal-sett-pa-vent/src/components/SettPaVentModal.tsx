@@ -7,11 +7,16 @@ import { dateAfterOrEqualToToday, dateBeforeToday, hasValidDate, required } from
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving, VenteArsakType } from '@navikt/fp-types';
+import type {
+  KodeverkMedNavn,
+  KodeverkMedNavnTilbakekreving,
+  VenteArsakType,
+  VenteÅrsakTypeFpTilbake,
+} from '@navikt/fp-types';
 
 export type FormValues = {
   frist?: string;
-  ventearsak?: VenteArsakType;
+  ventearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake;
 };
 
 interface Props {
@@ -23,7 +28,7 @@ interface Props {
   visBrevErBestilt?: boolean;
   hasManualPaVent: boolean;
   frist?: string;
-  ventearsak?: VenteArsakType;
+  ventearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake;
   defaultVenteårsak?: VenteArsakType;
 }
 
@@ -149,13 +154,16 @@ const initFrist = (): string => {
   return dayjs(date).format(ISO_DATE_FORMAT);
 };
 
-const buildInitialValues = (hasManualPaVent: boolean, frist?: string, ventearsak?: VenteArsakType): FormValues => ({
+const buildInitialValues = (
+  hasManualPaVent: boolean,
+  frist?: string,
+  ventearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake,
+): FormValues => ({
   ventearsak: ventearsak ?? undefined,
   frist: frist || hasManualPaVent === false ? (frist ?? undefined) : initFrist(),
 });
 
-// @ts-expect-error - Type ligg i fptilbake-kodeverk
-const manuelleVenteArsaker = new Set<VenteArsakType>([
+const manuelleVenteArsaker = new Set<VenteArsakType | VenteÅrsakTypeFpTilbake>([
   'AVV_DOK',
   'AVV_FODSEL',
   'VENT_PÅ_BRUKERTILBAKEMELDING',
@@ -168,34 +176,36 @@ const manuelleVenteArsaker = new Set<VenteArsakType>([
   'VENT_PÅ_MULIG_MOTREGNING',
 ]);
 
-// @ts-expect-error - Type ligg i fptilbake-kodeverk
-const automatiskeVentearsakerForTilbakekreving = new Set<VenteArsakType>([
+const automatiskeVentearsakerForTilbakekreving: VenteÅrsakTypeFpTilbake[] = [
   'VENT_PÅ_BRUKERTILBAKEMELDING',
   'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG',
-]);
+];
 
 const inkluderVentearsak = (
   ventearsak: KodeverkMedNavn<'Venteårsak'> | KodeverkMedNavnTilbakekreving<'Venteårsak'>,
-  valgtVentearsak?: VenteArsakType,
+  valgtVentearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake,
 ): boolean =>
-  automatiskeVentearsakerForTilbakekreving.has(ventearsak.kode) ? ventearsak.kode === valgtVentearsak : true;
+  automatiskeVentearsakerForTilbakekreving.some(kode => kode === ventearsak.kode)
+    ? ventearsak.kode === valgtVentearsak
+    : true;
 
 const skalViseFristenTekst = (
   erTilbakekreving: boolean,
   originalFrist?: string,
   frist?: string,
-  ventearsak?: VenteArsakType,
+  ventearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake,
 ): boolean => {
   const erFristenUtløpt =
     erTilbakekreving &&
     ((!!frist && dateBeforeToday(frist) === null) || (!!originalFrist && dateBeforeToday(originalFrist) === null));
-  // @ts-expect-error - Type ligg i fptilbake-kodeverk
   const erVenterPaKravgrunnlag = ventearsak === 'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG';
   return erTilbakekreving && erFristenUtløpt && erVenterPaKravgrunnlag;
 };
 
-const harEndretVenteårsak = (originalVentearsak?: VenteArsakType, ventearsak?: VenteArsakType) =>
-  !(originalVentearsak === ventearsak || (!ventearsak && !originalVentearsak));
+const harEndretVenteårsak = (
+  originalVentearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake,
+  ventearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake,
+) => !(originalVentearsak === ventearsak || (!ventearsak && !originalVentearsak));
 
 const harEndretFrist = (originalFrist?: string, frist?: string) =>
   !(originalFrist === frist || (!frist && !originalFrist));

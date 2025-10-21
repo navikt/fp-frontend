@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -12,7 +11,7 @@ import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { useFagsakApi } from '../../../data/fagsakApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
@@ -26,7 +25,7 @@ const AKSJONSPUNKT_KODER = [
 export const FodselvilkaretFaktaInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling, fagsak, rettigheter } = use(BehandlingDataContext);
+  const { behandling, fagsak, rettigheter } = useBehandlingDataContext();
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_KODER);
 

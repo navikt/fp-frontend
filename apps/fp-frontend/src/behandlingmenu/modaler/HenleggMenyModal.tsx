@@ -4,7 +4,7 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { type ForhåndsvisHenleggParams, MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
-import type { Behandling, BehandlingAppKontekst, FagsakYtelseType } from '@navikt/fp-types';
+import type { Behandling, FagsakBehandlingDto, FagsakYtelseType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../data/behandlingApi';
@@ -12,7 +12,7 @@ import { forhåndsvisTilbakekrevingHenleggelse, useFagsakApi, useFagsakBehandlin
 
 interface Props {
   behandling: Behandling;
-  behandlingAppKontekst: BehandlingAppKontekst;
+  behandlingAppKontekst: FagsakBehandlingDto;
   fagsakYtelseType: FagsakYtelseType;
   lukkModal: () => void;
 }
@@ -56,7 +56,7 @@ export const HenleggMenyModal = ({ behandling, behandlingAppKontekst, fagsakYtel
   );
 };
 
-const useVisForhandsvisningAvHenleggelse = (behandling: BehandlingAppKontekst) => {
+const useVisForhandsvisningAvHenleggelse = (behandling: FagsakBehandlingDto) => {
   const api = useFagsakBehandlingApi(behandling);
 
   const { mutate: forhåndsvisFpSakHenleggelse } = useMutation({

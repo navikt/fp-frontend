@@ -10,8 +10,8 @@ import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
   type Aksjonspunkt,
   type AlleKodeverk,
-  type Behandling,
   type BehandlingArsakType,
+  type BehandlingFpSak,
   type Behandlingsresultat,
   type BeregningsresultatDagytelse,
   type BeregningsresultatEs,
@@ -70,7 +70,7 @@ const hentForhåndsvisManueltBrevCallback =
     forhåndsvisCallback(data);
   };
 
-const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['behandlingÅrsaker'] = []): boolean =>
+const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: BehandlingFpSak['behandlingÅrsaker'] = []): boolean =>
   behandlingArsakTyper
     .map(({ behandlingArsakType }) => behandlingArsakType)
     .some(bt => bt === 'ETTER_KLAGE' || bt === 'RE-KLAG-U-INNTK' || bt === 'RE-KLAG-M-INNTK');

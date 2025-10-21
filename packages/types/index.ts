@@ -1,12 +1,12 @@
 export type { Aksjonspunkt } from './src/aksjonspunktTsType';
-export type { Behandling } from './src/behandlingTsType';
+export type { BehandlingFpSak } from './src/behandlingFpSak';
 export type {
-  BehandlingAppKontekst,
+  FagsakBehandlingDtoFpSak,
   BehandlingTillatteOperasjoner,
   BehandlingÅrsak,
   TotrinnskontrollSkjermlenkeContext,
-} from './src/behandlingAppKontekstTsType';
-export { VergeBehandlingmenyValg } from './src/behandlingAppKontekstTsType';
+} from './src/fagsakBehandlingDtoFpSak';
+export { VergeBehandlingmenyValg } from './src/fagsakBehandlingDtoFpSak';
 export type { Behandlingsresultat } from './src/behandlingsresultatTsType';
 export type {
   Beregningsgrunnlag,
@@ -103,7 +103,6 @@ export type {
 } from './src/fagsakTsType';
 export type { FagsakEnkel } from './src/fagsakEnkelTsType';
 export type { Person } from './src/personTsType';
-export type { FagsakDataFpTilbake } from './src/fagsakTilbakekrevingTsType';
 export type {
   Medlemskap,
   ManuellBehandlingResultat,
@@ -273,7 +272,6 @@ export type { PeriodeResultatType } from './src/periodeResultatType';
 export type { SkjermlenkeTypeTilbakekreving } from './src/skjermlenkeTypeTilbakekreving';
 export type { OppgaveBehandlingStatus } from './src/oppgaveBehandlingStatus';
 export type { KøSortering } from './src/køSortering';
-export type { BehandlingResultatTypeTilbakekreving } from './src/behandlingResultatTypeTilbakekreving';
 export type { HendelseUnderType } from './src/hendelseUnderType';
 export type { HendelseType } from './src/hendelseType';
 export type { Arbeidskategori } from './src/arbeidskategori';
@@ -291,5 +289,16 @@ export {
   isKlageOmgjort,
   isKlageAvvist,
 } from './src/behandlingResultatType';
-
 export type { OmsorgsovertakelseDto } from './src/omsorgsovertakelse';
+
+export type { VenteÅrsakTypeFpTilbake } from './src/tilbakekreving/venteÅrsakTypeFpTilbake';
+export type { BehandlingResultatTypeFpTilbake } from './src/tilbakekreving/behandlingResultatTypeFpTilbake';
+export type { FagsakBehandlingDtoFpTilbake } from './src/tilbakekreving/fagsakBehandlingDtoFpTilbake';
+export type { BehandlingFpTilbake } from './src/tilbakekreving/behandlingFpTilbake';
+export type { BehandlingsresultatDtoFpTilbake } from './src/tilbakekreving/behandlingsresultatDtoFpTilbake';
+export type { BehandlingÅrsakTypeFpTilbake } from './src/tilbakekreving/behandlingÅrsakTypeFpTilbake';
+export type { DokumentMalTypeFpTilbake } from './src/tilbakekreving/dokumentMalTypeFpTilbake';
+export type { FagsakDataFpTilbake } from './src/tilbakekreving/fagsakDataFpTilbake';
+
+export type { FagsakBehandlingDto } from './src/fagsakBehandlingDto';
+export type { Behandling } from './src/behandling';

@@ -1,4 +1,4 @@
-import { type ComponentProps, use } from 'react';
+import { type ComponentProps } from 'react';
 import { useIntl } from 'react-intl';
 
 import {
@@ -9,11 +9,11 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import type { AlleKodeverkTilbakekreving, BehandlingFpTilbake } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
@@ -29,7 +29,7 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
   const intl = useIntl();
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const { behandling, fagsak } = use(BehandlingDataContext);
+  const { behandling, fagsak } = useBehandlingDataContext<BehandlingFpTilbake>();
 
   const api = useBehandlingApi(behandling);
 

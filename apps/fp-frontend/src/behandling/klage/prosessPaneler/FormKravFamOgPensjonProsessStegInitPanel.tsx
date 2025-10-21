@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -10,7 +9,7 @@ import { type FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt
 import { isKlageAvvist } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -20,7 +19,7 @@ export const FormKravFamOgPensjonProsessStegInitPanel = () => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const { behandling, alleBehandlinger, hentOgSettBehandling } = use(BehandlingDataContext);
+  const { behandling, alleBehandlinger, hentOgSettBehandling } = useBehandlingDataContext();
 
   const avsluttedeBehandlinger = alleBehandlinger
     .filter(b => b.status === 'AVSLU')

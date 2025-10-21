@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
-import type { Behandling, BehandlingAppKontekst, BehandlingType } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import type { Behandling, BehandlingType, FagsakBehandlingDto } from '@navikt/fp-types';
+import { erTilbakekrevingBehandling, notEmpty } from '@navikt/fp-utils';
 
 import { ApplicationContextPath } from '../../app/ApplicationContextPath';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../../app/paths';
@@ -22,9 +22,13 @@ const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   'BT-009',
 ] satisfies BehandlingType[];
 
-const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string | undefined => {
+const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: FagsakBehandlingDto[] = []): string | undefined => {
   const behandling = behandlinger.find(
-    b => b.gjeldendeVedtak && b.status === 'AVSLU' && (b.type === 'BT-002' || b.type === 'BT-004'),
+    b =>
+      !erTilbakekrevingBehandling(b) &&
+      b.gjeldendeVedtak &&
+      b.status === 'AVSLU' &&
+      (b.type === 'BT-002' || b.type === 'BT-004'),
   );
   return behandling ? behandling.uuid : undefined;
 };

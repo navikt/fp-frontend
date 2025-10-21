@@ -7,7 +7,7 @@ import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@na
 import type {
   Aksjonspunkt,
   ArbeidsforholdFodselOgTilrettelegging,
-  Behandling,
+  BehandlingFpSak,
   FodselOgTilrettelegging,
 } from '@navikt/fp-types';
 
@@ -92,7 +92,7 @@ export const AvslåttVilkår: Story = {
       behandlingsresultat: {
         avslagsarsak: '1099',
       },
-    } as Behandling,
+    } as BehandlingFpSak,
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,

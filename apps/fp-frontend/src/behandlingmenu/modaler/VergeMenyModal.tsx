@@ -1,14 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { MenyVergeIndex } from '@navikt/fp-sak-meny';
-import { type Behandling, type BehandlingAppKontekst, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import { type Behandling, type FagsakBehandlingDto, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 import { BehandlingRel, useBehandlingApi } from '../../data/behandlingApi.ts';
 import { FagsakRel } from '../../data/fagsakApi.ts';
 import { useKodeverk } from '../../data/useKodeverk.tsx';
 
 interface Props {
-  behandlingAppKontekst: BehandlingAppKontekst;
+  behandlingAppKontekst: FagsakBehandlingDto;
   behandling: Behandling;
   hentOgSettBehandling: () => void;
   lukkModal: () => void;
