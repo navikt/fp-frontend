@@ -82,6 +82,6 @@ type BrukerInfo = {
 export const brukerOptions = () =>
   queryOptions({
     queryKey: ['bruker'],
-    queryFn: () => kyExtended.get(`${globalThis.location.href}/me`).json<BrukerInfo>(),
+    queryFn: () => kyExtended.get(`${globalThis.location.href}me`).json<BrukerInfo>(),
     staleTime: Infinity,
   });
