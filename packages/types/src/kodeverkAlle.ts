@@ -127,7 +127,6 @@ export type KodeverkType = keyof KodeverkEnumMap;
 type AvslagsårsakKodeverk = Record<VilkårType | '-', KodeverkMedNavn<'Avslagsårsak'>[]>; // TODO [JOHANNES] -- mildertidig (?) hack
 
 export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
-  lovHjemmel: string;
   sortering: string;
   utfallType: string;
   gyldigForLovendringer: string[];
@@ -136,26 +135,16 @@ export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrs
   synligForRolle: string[];
 };
 
-export type GraderingAvslagÅrsakKodeverk = KodeverkMedNavn<'GraderingAvslagÅrsak'> & {
-  lovHjemmel: string;
-};
-
-type LineærAvslagsårsakKodeverk = KodeverkMedNavn<'LineærAvslagsårsak'> & {
-  lovHjemmel: string;
-};
-
 type KodeverkMedSammeVerditype = {
   [K in Exclude<
     KodeverkType,
-    'Avslagsårsak' | 'LineærAvslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'
+    'Avslagsårsak' | 'PeriodeResultatÅrsak'
   >]: KodeverkMedNavn<K extends KodeverkType ? K : unknown>[];
 };
 
 export type AlleKodeverk = KodeverkMedSammeVerditype & {
   Avslagsårsak: AvslagsårsakKodeverk;
-  GraderingAvslagÅrsak: GraderingAvslagÅrsakKodeverk[];
   PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
-  LineærAvslagsårsak: LineærAvslagsårsakKodeverk[];
 };
 
 type EnumOrUnknown<T extends KodeverkType> = T extends keyof KodeverkEnumMap ? KodeverkEnumMap[T] : unknown;

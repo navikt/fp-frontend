@@ -48,7 +48,6 @@ export type {
   KodeverkType,
   KodeverkMedNavn,
   PeriodeResultatÅrsakKodeverk,
-  GraderingAvslagÅrsakKodeverk,
 } from './src/kodeverkAlle';
 export type {
   AlleKodeverkTilbakekreving,

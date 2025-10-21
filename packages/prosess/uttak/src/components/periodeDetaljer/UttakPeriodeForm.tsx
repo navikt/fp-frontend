@@ -12,7 +12,6 @@ import type {
   AarsakFilter,
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
-  GraderingAvslagÅrsakKodeverk,
   KodeverkMedNavn,
   PeriodeResultatÅrsakKodeverk,
   PeriodeSoker,
@@ -152,7 +151,7 @@ const finnDager = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker)
     : '0';
 };
 
-const sorterGradering = (a: GraderingAvslagÅrsakKodeverk, b: GraderingAvslagÅrsakKodeverk): number => {
+const sorterGradering = (a: KodeverkMedNavn<'GraderingAvslagÅrsak'>, b: KodeverkMedNavn<'GraderingAvslagÅrsak'>): number => {
   if (a.navn < b.navn) {
     return -1;
   }
