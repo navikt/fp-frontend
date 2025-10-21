@@ -1,10 +1,21 @@
 {
   "app": "fp-frontend",
-  "ingresses": ["https://fpsak.intern.nav.no"],
+  "ingresses": [
+    "https://fpsak.intern.nav.no"
+  ],
   "minReplicas": "2",
   "maxReplicas": "4",
   "env": "production",
-  "groups": ["73107205-17ec-4a07-a56e-e0a8542f90c9", "77f05833-ebfd-45fb-8be7-88eca8e7418f"],
+  "groups": [
+    {
+      "uuid": "73107205-17ec-4a07-a56e-e0a8542f90c9",
+      "kommentar": "saksbehandler"
+    },
+    {
+      "uuid": "77f05833-ebfd-45fb-8be7-88eca8e7418f",
+      "kommentar": "veileder"
+    }
+  ],
   "externals": [
     "fpsak-api.prod-fss-pub.nais.io",
     "fplos.prod-fss-pub.nais.io",

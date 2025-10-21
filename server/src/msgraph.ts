@@ -32,10 +32,10 @@ export const getUserInfoFromGraphApi = async (bearerToken: string) => {
   const query =
     "onPremisesSamAccountName,displayName,givenName,mail,officeLocation,surname,userPrincipalName,id,jobTitle,memberOf";
   const { graphUrl } = config.azureAd;
-  return getGraphRequest(bearerToken, `${graphUrl}/v1.0/me?$select=${query}`);
+  return getGraphRequest(bearerToken, `${graphUrl}/me?$select=${query}`);
 };
 
 export const getUserGroups = async (bearerToken: string) => {
   const { graphUrl } = config.azureAd;
-  return getGraphRequest(bearerToken, `${graphUrl}/v1.0/me/memberOf`);
+  return getGraphRequest(bearerToken, `${graphUrl}/me/memberOf`);
 };
