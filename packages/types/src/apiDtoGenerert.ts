@@ -3321,7 +3321,7 @@ export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto = {
 };
 
 export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto_BarnHendelseData = {
-  barnNummer?: number;
+  barnNummer: number;
   dødsdato?: string;
   fødselsdato: string;
 };
@@ -8378,6 +8378,25 @@ export type HentBehandlingDtoForBrevData = {
 };
 
 export type HentBehandlingDtoForBrevResponses = {
+  /**
+   * default response
+   */
+  default: unknown;
+};
+
+export type HentBrevGrunnlagData = {
+  body?: never;
+  path?: never;
+  query: {
+    /**
+     * UUID for behandlingen
+     */
+    behandlingId: tjenester_behandling_dto_BehandlingIdDto;
+  };
+  url: '/api/formidling/grunnlag';
+};
+
+export type HentBrevGrunnlagResponses = {
   /**
    * default response
    */

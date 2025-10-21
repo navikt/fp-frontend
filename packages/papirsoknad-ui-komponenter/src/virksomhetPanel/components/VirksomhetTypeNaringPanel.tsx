@@ -1,9 +1,8 @@
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Checkbox } from '@navikt/ds-react';
 import { RhfCheckboxGroup } from '@navikt/ft-form-hooks';
-import { required } from '@navikt/ft-form-validators';
 
 import type { AlleKodeverk, VirksomhetType } from '@navikt/fp-types';
 
@@ -33,12 +32,18 @@ interface Props {
  */
 export const VirksomhetTypeNaringPanel = ({ readOnly, alleKodeverk, index }: Props) => {
   const { control } = useFormContext<VirksomhetFormValues>();
+  const intl = useIntl();
   return (
     <RhfCheckboxGroup
       name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.typeVirksomhet`}
       control={control}
-      label={<FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" />}
-      validate={[required]}
+      label={<FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Tittel" />}
+      validate={[
+        checked =>
+          checked.length > 0
+            ? undefined
+            : intl.formatMessage({ id: 'Registrering.VirksomhetNaeringTypePanel.Required' }),
+      ]}
       isReadOnly={readOnly}
     >
       {getNæringvirksomhetTyper(alleKodeverk).map(type => (

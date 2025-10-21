@@ -97,17 +97,18 @@
   "Registrering.Sprak.Nynorsk": "Nynorsk",
   "Registrering.Sprak.Engelsk": "Engelsk",
 
-  "Registrering.VirksomhetNaeringTypePanel.Title": "Type næringsvirksomhet",
+  "Registrering.VirksomhetNaeringTypePanel.Tittel": "Type næringsvirksomhet",
+  "Registrering.VirksomhetNaeringTypePanel.Required": "Må fylle ut minst en type næringsvirksomhet",
 
   "Registrering.VirksomhetStartetPanel.NewlyStartedOrChanged": "Er virksomheten blitt varig endret, nyoppstartet eller er søker ny i arbeidslivet?",
-  "Registrering.VirksomhetStartetPanel.Reason": "Årsak",
+  "Registrering.VirksomhetStartetPanel.Årsak.Tittel": "Årsak",
   "Registrering.VirksomhetStartetPanel.HarVarigEndring": "Varig endring i næring",
   "Registrering.VirksomhetStartetPanel.GjeldendeFom": "Gjeldende f.o.m.",
   "Registrering.VirksomhetStartetPanel.ErNyoppstartet": "Nyoppstartet næring",
   "Registrering.VirksomhetStartetPanel.NyIArbeidslivet": "Ny i arbeidslivet",
   "Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse": "Beskriv endringen i næring",
   "Registrering.VirksomhetStartetPanel.Inntekt": "Årsinntekt",
-  "Registrering.VirksomhetStartetPanel.MaFylleUtEnArsak": "Må fylle ut minst en årsak",
+  "Registrering.VirksomhetStartetPanel.Årsak.Required": "Må fylle ut minst en årsak",
 
   "Registrering.VirksomhetRelasjonPanel.Relation": "Relasjon",
   "Registrering.VirksomhetRelasjonPanel.No": "Nei, har ikke nære venner eller er i familie tilknyttet næringen",
