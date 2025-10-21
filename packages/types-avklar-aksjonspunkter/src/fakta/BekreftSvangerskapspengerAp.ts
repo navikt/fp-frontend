@@ -5,6 +5,6 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type BekreftSvangerskapspengerAp = {
   termindato: string;
-  fødselsdato: string;
+  fødselsdato?: string;
   bekreftetSvpArbeidsforholdList: ArbeidsforholdFodselOgTilrettelegging[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_SVP_TILRETTELEGGING>;

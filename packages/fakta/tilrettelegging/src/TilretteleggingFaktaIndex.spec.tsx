@@ -60,7 +60,6 @@ describe('TilretteleggingFaktaIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
       begrunnelse: 'Dette er en begrunnelse',
-      // @ts-expect-error -- trolig programmeringsfeil, bør ikke være undefined utifra typinga
       fødselsdato: undefined,
       termindato: '2020-11-06',
       bekreftetSvpArbeidsforholdList: [
@@ -339,7 +338,6 @@ describe('TilretteleggingFaktaIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
       begrunnelse: 'Dette er en begrunnelse',
-      // @ts-expect-error -- trolig programmeringsfeil, bør ikke være undefined utifra typinga
       fødselsdato: undefined,
       termindato: '2020-11-06',
       bekreftetSvpArbeidsforholdList: [
