@@ -45,7 +45,6 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
       <>
         {!harÅpentMedlemskapAksjonspunkt && !isFetching && (
           <OverstyringPanelDef
-            vilkår={standardPanelProps.vilkårForPanel}
             vilkårKoder={VILKAR_KODER}
             panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
             medlemskap={medlemskap}

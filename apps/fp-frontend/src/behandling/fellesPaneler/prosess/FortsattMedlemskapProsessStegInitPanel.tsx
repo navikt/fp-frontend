@@ -35,11 +35,7 @@ export const FortsattMedlemskapProsessStegInitPanel = () => {
           standardPanelProps.vilkårForPanel,
         )}
       >
-        <OverstyringPanelDef
-          vilkår={standardPanelProps.vilkårForPanel}
-          vilkårKoder={VILKAR_KODER}
-          panelTekstKode="Behandlingspunkt.FortsattMedlemskap"
-        />
+        <OverstyringPanelDef vilkårKoder={VILKAR_KODER} panelTekstKode="Behandlingspunkt.FortsattMedlemskap" />
       </ProsessDefaultInitOverstyringPanel>
     </PanelOverstyringProvider>
   );

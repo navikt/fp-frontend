@@ -28,11 +28,7 @@ export const AdopsjonInngangsvilkarFpInitPanel = () => {
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
       overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP}
     >
-      <OverstyringPanelDef
-        vilkår={standardPanelProps.vilkårForPanel}
-        vilkårKoder={VILKAR_KODER}
-        panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
-      />
+      <OverstyringPanelDef vilkårKoder={VILKAR_KODER} panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret" />
     </InngangsvilkarOverstyringDefaultInitPanel>
   ) : (
     <InngangsvilkarDefaultInitPanel

@@ -30,11 +30,7 @@ export const FodselInngangsvilkarInitPanel = () => {
       hentInngangsvilkårPanelTekst={paneltekst}
       overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET}
     >
-      <OverstyringPanelDef
-        vilkår={standardPanelProps.vilkårForPanel}
-        vilkårKoder={VILKAR_KODER}
-        panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
-      />
+      <OverstyringPanelDef vilkårKoder={VILKAR_KODER} panelTekstKode="Inngangsvilkar.Fodselsvilkaret" />
     </InngangsvilkarOverstyringDefaultInitPanel>
   ) : (
     <InngangsvilkarDefaultInitPanel
@@ -43,11 +39,7 @@ export const FodselInngangsvilkarInitPanel = () => {
       inngangsvilkårPanelKode="FODSEL"
       hentInngangsvilkårPanelTekst={paneltekst}
     >
-      <FodselVilkarProsessIndex
-        ytelseTypeKode="ES"
-        status={standardPanelProps.status}
-        vilkår={standardPanelProps.vilkårForPanel}
-      />
+      <FodselVilkarProsessIndex ytelseTypeKode="ES" status={standardPanelProps.status} />
     </InngangsvilkarDefaultInitPanel>
   );
 };

@@ -30,11 +30,7 @@ export const AdopsjonInngangsvilkarInitPanel = () => {
       hentInngangsvilkårPanelTekst={paneltekst}
       overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET}
     >
-      <OverstyringPanelDef
-        vilkår={standardPanelProps.vilkårForPanel}
-        vilkårKoder={VILKAR_KODER}
-        panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
-      />
+      <OverstyringPanelDef vilkårKoder={VILKAR_KODER} panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret" />
     </InngangsvilkarOverstyringDefaultInitPanel>
   ) : (
     <InngangsvilkarDefaultInitPanel
