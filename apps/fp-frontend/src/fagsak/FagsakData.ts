@@ -8,9 +8,9 @@ import type {
 } from '@navikt/fp-types';
 
 export class FagsakData {
-  private $$fagsak: Fagsak;
+  private readonly $$fagsak: Fagsak;
 
-  private $$fpTilbakeFagsakData?: SakFullDtoFpTilbake;
+  private readonly $$fpTilbakeFagsakData?: SakFullDtoFpTilbake;
 
   private $$behandlingOppretting: BehandlingOppretting[];
 
