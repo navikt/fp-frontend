@@ -1,6 +1,4 @@
 import type { Aktsomhet } from './aktsomhet';
-import type { BehandlingArsakType } from './behandlingArsakType';
-import type { BehandlingResultatTypeTilbakekreving } from './behandlingResultatTypeTilbakekreving';
 import type { BehandlingType } from './behandlingType';
 import type { ForeldelseVurderingType } from './foreldelseVurderingType';
 import type { HendelseType } from './hendelseType';
@@ -8,9 +6,11 @@ import type { HendelseUnderType } from './hendelseUnderType';
 import type { HistorikkAktor } from './historikkAktor';
 import type { SærligGrunn } from './særligGrunn';
 import type { SkjermlenkeTypeTilbakekreving } from './skjermlenkeTypeTilbakekreving';
+import type { BehandlingÅrsakTypeFpTilbake } from './tilbakekreving/behandlingÅrsakTypeFpTilbake';
+import type { BehandlingResultatTypeFpTilbake } from './tilbakekreving/behandlingResultatTypeFpTilbake';
+import type { VenteÅrsakTypeFpTilbake } from './tilbakekreving/venteÅrsakTypeFpTilbake';
 import type { TilbakekrevingVidereBehandling } from './tilbakekrevingVidereBehandling';
 import type { VedtakResultatType } from './vedtakResultatType';
-import type { VenteArsakType } from './venteArsakType';
 import type { VergeType } from './vergeTsType';
 import type { VilkårResultat } from './vilkårResultat';
 import type { VurderÅrsak } from './vurderÅrsak';
@@ -20,11 +20,11 @@ import type { VurderÅrsak } from './vurderÅrsak';
 //Mapping mellom KodeverkTypeTilbakekreving og union-types med verdier
 type KodeverkEnumMap = {
   BehandlingType: BehandlingType;
-  BehandlingÅrsakType: BehandlingArsakType;
-  BehandlingResultatType: BehandlingResultatTypeTilbakekreving;
+  BehandlingÅrsakType: BehandlingÅrsakTypeFpTilbake;
+  BehandlingResultatType: BehandlingResultatTypeFpTilbake;
   HistorikkAktør: HistorikkAktor;
   SkjermlenkeType: SkjermlenkeTypeTilbakekreving;
-  Venteårsak: VenteArsakType;
+  Venteårsak: VenteÅrsakTypeFpTilbake;
   VurderÅrsak: VurderÅrsak;
   VergeType: VergeType;
   Aktsomhet: Aktsomhet;

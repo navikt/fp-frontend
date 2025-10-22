@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -7,14 +6,19 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
-import type { ArbeidsgiverOpplysningerPerId, Behandling, Personoversikt, VilkarUtfallType } from '@navikt/fp-types';
+import type {
+  ArbeidsgiverOpplysningerPerId,
+  BehandlingFpSak,
+  Personoversikt,
+  VilkarUtfallType,
+} from '@navikt/fp-types';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const getStatusFromUttakresultat = (behandling: Behandling): VilkarUtfallType => {
+const getStatusFromUttakresultat = (behandling: BehandlingFpSak): VilkarUtfallType => {
   if (!harLenke(behandling, 'UTTAKSRESULTAT')) {
     return 'IKKE_VURDERT';
   }
@@ -45,7 +49,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const { rettigheter, behandling } = use(BehandlingDataContext);
+  const { rettigheter, behandling } = useBehandlingDataContext();
 
   const overstyrtStatus = getStatusFromUttakresultat(behandling);
 

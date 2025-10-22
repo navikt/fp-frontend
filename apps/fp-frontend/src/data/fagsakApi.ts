@@ -8,10 +8,10 @@ import type {
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
   ApiLink,
-  Behandling,
-  BehandlingAppKontekst,
+  BehandlingFpSak,
   Dokument,
   Fagsak,
+  FagsakBehandlingDto,
   FagsakDataFpTilbake,
   FagsakEnkel,
   ForhåndsvisMeldingParams,
@@ -142,12 +142,12 @@ export const forhåndsvisTilbakekrevingHenleggelse = (behandlingUuid: string, fr
     .blob();
 
 export const lagNyBehandling = (params: NyBehandlingParams) =>
-  kyExtended.put<Behandling>(FagsakUrl.NEW_BEHANDLING_FPSAK, {
+  kyExtended.put<BehandlingFpSak>(FagsakUrl.NEW_BEHANDLING_FPSAK, {
     json: params,
   });
 
 export const lagNyTilbakekrevingBehandling = (params: NyBehandlingParams) =>
-  kyExtended.post<Behandling>(FagsakUrl.NEW_BEHANDLING_FPTILBAKE, {
+  kyExtended.post<BehandlingFpSak>(FagsakUrl.NEW_BEHANDLING_FPTILBAKE, {
     json: params,
   });
 
@@ -263,7 +263,7 @@ const getLagreTotrinnsaksjonspunkt = (links?: ApiLink[]) => (params: BekreftedeT
     .post(getUrlFromRel('SAVE_TOTRINNSAKSJONSPUNKT', links), {
       json: params,
     })
-    .json<Behandling>();
+    .json<BehandlingFpSak>();
 
 const getSendMelding = (links?: ApiLink[]) => (params: SubmitMessageParams) =>
   kyExtended
@@ -295,7 +295,7 @@ export const useFagsakApi = () => {
   };
 };
 
-export const useFagsakBehandlingApi = (valgtBehandling: BehandlingAppKontekst) => {
+export const useFagsakBehandlingApi = (valgtBehandling: FagsakBehandlingDto) => {
   const { links } = valgtBehandling;
   return {
     lagreTotrinnsaksjonspunkt: getLagreTotrinnsaksjonspunkt(links),

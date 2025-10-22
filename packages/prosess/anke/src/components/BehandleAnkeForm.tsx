@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
-import type { AlleKodeverk, AnkeVurdering, BehandlingAppKontekst } from '@navikt/fp-types';
+import type { AlleKodeverk, AnkeVurdering, FagsakBehandlingDto } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 const IKKE_PAA_ANKET_BEHANDLING_ID = '0';
@@ -16,7 +16,7 @@ const formatId = (id: string | undefined): string => {
 };
 
 const formatBehandlingId = (
-  behandlinger: BehandlingAppKontekst[],
+  behandlinger: FagsakBehandlingDto[],
   alleKodeverk: AlleKodeverk,
   vedtak?: string,
 ): string => {
@@ -32,7 +32,7 @@ const formatBehandlingId = (
 
 interface Props {
   ankeVurdering: AnkeVurdering;
-  behandlinger: BehandlingAppKontekst[];
+  behandlinger: FagsakBehandlingDto[];
 }
 
 /**

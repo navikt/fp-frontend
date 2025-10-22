@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -10,7 +9,7 @@ import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
 import type { ArbeidsgiverOpplysningerPerId, Personoversikt, VilkarUtfallType } from '@navikt/fp-types';
 
 import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -24,7 +23,7 @@ interface Props {
 export const TilkjentYtelseFpProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, personoversikt }: Props) => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling } = useBehandlingDataContext();
 
   const overstyrtStatus: VilkarUtfallType = behandling.links.some(
     link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE,

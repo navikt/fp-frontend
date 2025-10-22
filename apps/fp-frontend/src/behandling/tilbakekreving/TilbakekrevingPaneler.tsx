@@ -1,11 +1,12 @@
-import { use } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
+import type { BehandlingFpTilbake } from '@navikt/fp-types';
+
 import { useFagsakApi } from '../../data/fagsakApi';
-import { BehandlingDataContext } from '../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../felles/context/BehandlingDataContext';
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
 import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
 import { ProsessMeny } from '../felles/prosess/ProsessMeny';
@@ -21,7 +22,7 @@ interface Props {
 }
 
 const TilbakekrevingPaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => {
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling } = useBehandlingDataContext<BehandlingFpTilbake>();
 
   const api = useFagsakApi();
   const { data: tilbakekrevingKodeverk } = useQuery(api.fptilbake.kodeverkOptions());

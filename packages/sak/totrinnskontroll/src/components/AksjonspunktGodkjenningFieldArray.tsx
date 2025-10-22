@@ -5,7 +5,7 @@ import { BodyShort, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
 import type {
-  BehandlingAppKontekst,
+  FagsakBehandlingDto,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
   SkjermlenkeType,
@@ -32,7 +32,7 @@ export type AksjonspunktGodkjenningData = {
 };
 
 type Props = {
-  behandling: BehandlingAppKontekst;
+  behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;

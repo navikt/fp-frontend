@@ -8,7 +8,7 @@ import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konsta
 import type {
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
-  BehandlingAppKontekst,
+  FagsakBehandlingDto,
   FagsakYtelseType,
   SkjermlenkeType,
   VurderÅrsak,
@@ -63,7 +63,7 @@ export type ApData = {
 };
 
 interface Props {
-  behandling: BehandlingAppKontekst;
+  behandling: FagsakBehandlingDto;
   location: Location;
   fagsakYtelseType: FagsakYtelseType;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;

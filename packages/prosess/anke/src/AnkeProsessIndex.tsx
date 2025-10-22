@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { AnkeVurdering, BehandlingAppKontekst } from '@navikt/fp-types';
+import type { AnkeVurdering, FagsakBehandlingDto } from '@navikt/fp-types';
 
 import { BehandleAnkeForm } from './components/BehandleAnkeForm';
 
@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   ankeVurdering: AnkeVurdering;
-  behandlinger: BehandlingAppKontekst[];
+  behandlinger: FagsakBehandlingDto[];
 }
 
 export const AnkeProsessIndex = ({ ankeVurdering, behandlinger }: Props) => (

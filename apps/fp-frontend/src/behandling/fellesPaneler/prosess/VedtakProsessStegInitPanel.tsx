@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,12 +9,18 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakEditeringProvider, type VedtakForhåndsvisData, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import { type Aksjonspunkt, isAvslag, type Vilkar, type VilkarUtfallType } from '@navikt/fp-types';
+import {
+  type Aksjonspunkt,
+  type BehandlingFpSak,
+  isAvslag,
+  type Vilkar,
+  type VilkarUtfallType,
+} from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -45,7 +51,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
   const [visIverksetterVedtakModal, setVisIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
 
-  const { setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
+  const { setSkalOppdatereEtterBekreftelseAvAp } = useBehandlingDataContext();
 
   const lagringSideEffekter = getLagringSideeffekter(
     setVisIverksetterVedtakModal,
@@ -194,7 +200,7 @@ const harVilkarMedStatus = (vilkår: Vilkar[], status: VilkarUtfallType): boolea
   return vilkår.some(v => v.vilkarStatus === status);
 };
 
-const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps): VilkarUtfallType => {
+const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps<BehandlingFpSak>): VilkarUtfallType => {
   const { vilkår, aksjonspunkt, behandlingsresultat } = standardPanelProps.behandling;
   if (vilkår.length === 0) {
     return 'IKKE_VURDERT';

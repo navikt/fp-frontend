@@ -10,7 +10,7 @@ import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
 import type {
   OverstyringAp,
   OverstyringMedlemskapsvilkaretAp,
@@ -53,7 +53,7 @@ const createInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
   overstyringApKode: VilkårOverstyringAksjonspunkter,
-  behandlingsresultat: Behandling['behandlingsresultat'] | undefined,
+  behandlingsresultat: BehandlingFpSak['behandlingsresultat'] | undefined,
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined,
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === overstyringApKode);

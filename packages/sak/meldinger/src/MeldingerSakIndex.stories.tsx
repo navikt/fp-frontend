@@ -3,7 +3,7 @@ import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import type { BehandlingAppKontekst, DokumentMalType } from '@navikt/fp-types';
+import type { DokumentMalType, FagsakBehandlingDto } from '@navikt/fp-types';
 
 import { MeldingerSakIndex } from './MeldingerSakIndex';
 
@@ -43,7 +43,7 @@ const meta = {
     behandling: {
       brevmaler: TEMPLATES,
       språkkode: 'NB',
-    } as BehandlingAppKontekst,
+    } as FagsakBehandlingDto,
     forhåndsvisBrev: action('button-click'),
     submitCallback: action('button-click'),
     setMeldingFormData: action('button-click'),

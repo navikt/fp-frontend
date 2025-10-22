@@ -12,7 +12,7 @@ import {
   validerApKodeOgHentApEnum,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, Vilkar } from '@navikt/fp-types';
 import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -98,7 +98,7 @@ export const AdopsjonVilkarForm = ({ vilkår, status }: Props) => {
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
-  behandlingsresultat?: Behandling['behandlingsresultat'],
+  behandlingsresultat?: BehandlingFpSak['behandlingsresultat'],
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),

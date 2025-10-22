@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,11 +9,11 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakInnsynForhandsvisData, VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
-import type { Behandling, VilkarUtfallType } from '@navikt/fp-types';
+import type { BehandlingFpSak, VilkarUtfallType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -21,7 +21,7 @@ import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardPr
 export const InnsynVedtakProsessStegInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
+  const { behandling, setSkalOppdatereEtterBekreftelseAvAp } = useBehandlingDataContext();
 
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const lagringSideeffekterCallback = getLagringSideeffekter(
@@ -74,7 +74,7 @@ export const InnsynVedtakProsessStegInitPanel = () => {
   );
 };
 
-const getVedtakStatus = (behandling: Behandling): VilkarUtfallType => {
+const getVedtakStatus = (behandling: BehandlingFpSak): VilkarUtfallType => {
   const { aksjonspunkt, behandlingsresultat } = behandling;
   const harÅpentAksjonspunkt = aksjonspunkt.some(erAksjonspunktÅpent);
   if (aksjonspunkt.length === 0 || harÅpentAksjonspunkt) {

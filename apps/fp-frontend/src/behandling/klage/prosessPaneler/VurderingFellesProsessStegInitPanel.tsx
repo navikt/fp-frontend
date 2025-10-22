@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -16,7 +16,7 @@ import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { KlageBehandlingModal } from '../modaler/KlageBehandlingModal';
@@ -39,7 +39,7 @@ export const VurderingFellesProsessStegInitPanel = ({
     hentOgSettBehandling,
     setSkalOppdatereEtterBekreftelseAvAp,
     oppdaterProsessStegOgFaktaPanelIUrl,
-  } = use(BehandlingDataContext);
+  } = useBehandlingDataContext();
 
   const lagringSideEffekter = getLagringSideeffekter(
     toggleKlageModal,

@@ -4,7 +4,7 @@ import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
 
 import { BehandlingPaVent } from './BehandlingPaVent';
 
@@ -49,7 +49,7 @@ export const BehandlingSattPåVent: Story = {
         } as Aksjonspunkt,
       ],
       links: [link],
-    } as Behandling,
+    } as BehandlingFpSak,
   },
 };
 
@@ -71,6 +71,6 @@ export const BehandlingSattManueltPåVent: Story = {
         } as Aksjonspunkt,
       ],
       links: [link],
-    } as Behandling,
+    } as BehandlingFpSak,
   },
 };

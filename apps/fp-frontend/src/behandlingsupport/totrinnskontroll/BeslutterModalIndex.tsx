@@ -1,8 +1,8 @@
 import { FatterVedtakTotrinnskontrollModalSakIndex } from '@navikt/fp-sak-totrinnskontroll';
-import type { BehandlingAppKontekst } from '@navikt/fp-types';
+import type { FagsakBehandlingDto } from '@navikt/fp-types';
 
 interface Props {
-  behandling: BehandlingAppKontekst;
+  behandling: FagsakBehandlingDto;
   pushLocation: (location: string) => void;
   allAksjonspunktApproved: boolean;
 }

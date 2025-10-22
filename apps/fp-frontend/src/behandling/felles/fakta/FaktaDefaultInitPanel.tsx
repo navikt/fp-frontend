@@ -1,28 +1,29 @@
-import { type ReactElement, use } from 'react';
+import { type ReactElement } from 'react';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import type { Behandling, BehandlingFpSak } from '@navikt/fp-types';
 import { MellomlagretFormDataProvider, PanelDataProvider } from '@navikt/fp-utils';
 
-import { BehandlingDataContext } from '../context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { useFaktaMenyRegistrerer } from './useFaktaMenyRegistrerer';
 import type { StandardFaktaPanelProps } from './useStandardFaktaPanelProps';
 
-interface Props {
-  standardPanelProps: StandardFaktaPanelProps;
+interface Props<T extends Behandling> {
+  standardPanelProps: StandardFaktaPanelProps<T>;
   skalPanelVisesIMeny: boolean;
   faktaPanelKode: FaktaPanelCode;
   faktaPanelMenyTekst: string;
   children: ReactElement;
 }
 
-export const FaktaDefaultInitPanel = ({
+export const FaktaDefaultInitPanel = <T extends Behandling = BehandlingFpSak>({
   standardPanelProps,
   skalPanelVisesIMeny,
   faktaPanelKode,
   faktaPanelMenyTekst,
   children,
-}: Props) => {
-  const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
+}: Props<T>) => {
+  const { behandling, fagsak, alleKodeverk } = useBehandlingDataContext<T>();
 
   const skalVisePanel = useFaktaMenyRegistrerer(
     faktaPanelKode,

@@ -13,11 +13,11 @@ import {
   withRouter,
 } from '@navikt/fp-storybook-utils';
 import type {
-  Behandling,
-  BehandlingAppKontekst,
+  BehandlingFpSak,
   BehandlingOppretting,
   BehandlingTillatteOperasjoner,
   Fagsak,
+  FagsakBehandlingDto,
 } from '@navikt/fp-types';
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -125,7 +125,7 @@ const ALLE_BEHANDLINGER = [
     brevmaler: [],
     totrinnskontrollÅrsaker: [],
   },
-] satisfies BehandlingAppKontekst[];
+] satisfies FagsakBehandlingDto[];
 
 const FAGSAK = {
   saksnummer: '123',
@@ -199,7 +199,7 @@ export const BehandlingErValgt: Story = {
     behandlingUuid: '1',
     behandling: {
       versjon: 1,
-    } as Behandling,
+    } as BehandlingFpSak,
   },
 };
 

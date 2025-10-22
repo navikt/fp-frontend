@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, FagsakBehandlingDto } from '@navikt/fp-types';
 
 import { BehandlingerListe } from './components/BehandlingerListe';
 
@@ -12,7 +12,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  behandlinger: BehandlingAppKontekst[];
+  behandlinger: FagsakBehandlingDto[];
   behandlingUuid?: string;
   skalViseAlleBehandlinger: boolean;
   toggleVisAlleBehandlinger: () => void;

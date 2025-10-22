@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
-import type { BehandlingAppKontekst, Behandlingsresultat } from '@navikt/fp-types';
+import type { Behandlingsresultat, FagsakBehandlingDto } from '@navikt/fp-types';
 
 import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
 
@@ -127,7 +127,7 @@ export const Default: Story = {
           type: 'HENLAGT_SØKNAD_TRUKKET',
         } as Behandlingsresultat,
       },
-    ] as BehandlingAppKontekst[],
+    ] as FagsakBehandlingDto[],
   },
 };
 

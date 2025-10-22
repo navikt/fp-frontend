@@ -6,6 +6,7 @@ import { dateFormat } from '@navikt/ft-utils';
 import { AksjonspunktKode, isFaktaUttakAksjonspunkt, isUttakAksjonspunkt } from '@navikt/fp-kodeverk';
 import type {
   Behandlingsresultat,
+  BehandlingsresultatDtoFpTilbake,
   BehandlingStatus,
   KodeverkMedNavn,
   TotrinnskontrollAksjonspunkt,
@@ -113,7 +114,7 @@ const getFaktaOmBeregningText = (
 };
 
 const getTextForKlageHelper = (
-  behandlingsresultat?: Behandlingsresultat,
+  behandlingsresultat?: Behandlingsresultat | BehandlingsresultatDtoFpTilbake,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
   let aksjonspunktTextId = '';
   switch (behandlingsresultat?.type) {
@@ -146,7 +147,7 @@ const getTextForKlageHelper = (
 
 const getTextForKlage = (
   behandlingStaus: BehandlingStatus,
-  behandlingsresultat?: Behandlingsresultat,
+  behandlingsresultat?: Behandlingsresultat | BehandlingsresultatDtoFpTilbake,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   if (behandlingStaus === 'FVED') {
     return [getTextForKlageHelper(behandlingsresultat)];
@@ -174,7 +175,7 @@ export const getAksjonspunkttekst = (
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
-  behandlingsresultat?: Behandlingsresultat,
+  behandlingsresultat?: Behandlingsresultat | BehandlingsresultatDtoFpTilbake,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING) {
     return buildOpptjeningText(aksjonspunkt);

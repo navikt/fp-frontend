@@ -11,7 +11,7 @@ import type {
   AlleKodeverk,
   AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
-  Behandling,
+  BehandlingFpSak,
   ManuellBehandlingÅrsak,
   PeriodeSoker,
   PeriodeSokerAktivitet,
@@ -155,7 +155,7 @@ const lagPeriode = (valgtPeriode: PeriodeSoker, fom: string, tom: string): Perio
 interface Props {
   perioderSøker: PeriodeSoker[];
   perioderAnnenpart: PeriodeSoker[] | AnnenforelderUttakEøsPeriode[];
-  behandling: Behandling;
+  behandling: BehandlingFpSak;
   uttaksresultat: Uttaksresultat;
   valgtPeriodeIndex: number;
   oppdaterPeriode: (perioder: PeriodeSoker[]) => void;

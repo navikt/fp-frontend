@@ -8,8 +8,8 @@ import { createIntl } from '@navikt/ft-utils';
 
 import type {
   ArbeidsgiverOpplysningerPerId,
-  Behandling,
-  BehandlingAppKontekst,
+  BehandlingFpSak,
+  FagsakBehandlingDto,
   Inntektsmelding,
 } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -24,7 +24,7 @@ const intl = createIntl(messages);
 
 export type InntektsmeldingFaktaProps = {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  alleBehandlinger: BehandlingAppKontekst[];
+  alleBehandlinger: FagsakBehandlingDto[];
 };
 
 type TableHeaders = keyof Pick<
@@ -151,7 +151,7 @@ const sorterInntektsmeldinger = ({
   inntektsmeldinger: Inntektsmelding[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   sortKey: TableHeaders;
-  behandling: Behandling;
+  behandling: BehandlingFpSak;
 }) => {
   if (sortKey === 'arbeidsgiverIdent') {
     return inntektsmeldinger.slice().sort((a, b) => {
@@ -200,7 +200,7 @@ const InntektsmeldingStatus = ({
   behandling,
   inntektsmelding,
 }: {
-  behandling: Behandling;
+  behandling: BehandlingFpSak;
   inntektsmelding: Inntektsmelding;
 }) => {
   const behandlingIMStatus = hentBehandlingIMStatus({ behandling, inntektsmelding });
@@ -233,7 +233,7 @@ const hentBehandlingIMStatus = ({
   behandling,
   inntektsmelding,
 }: {
-  behandling: Behandling;
+  behandling: BehandlingFpSak;
   inntektsmelding: Inntektsmelding;
 }) => {
   if (inntektsmelding.tilknyttedeBehandlingIder.includes(behandling.uuid)) {

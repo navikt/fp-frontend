@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
@@ -11,7 +11,7 @@ import {
 } from '@navikt/fp-papirsoknad';
 import type { Aksjonspunkt, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
 
-import { BehandlingDataContext } from '../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../felles/context/BehandlingDataContext';
 
 /**
  * BehandlingPapirsoknadIndex
@@ -24,7 +24,7 @@ const BehandlingPapirsoknadIndex = () => {
   const [erAksjonspunktLagret, setErAksjonspunktLagret] = useState(false);
 
   const { alleKodeverk, behandling, rettigheter, fagsak, setSkalOppdatereEtterBekreftelseAvAp } =
-    use(BehandlingDataContext);
+    useBehandlingDataContext();
 
   const isReadOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPåVent;
 
@@ -52,7 +52,7 @@ const useLagrePapirsøknad = (
   setErAksjonspunktLagret: (erLagret: boolean) => void,
   setSkalOppdatereEtterBekreftelseAvAp: (skalOppdatere: boolean) => void,
 ) => {
-  const { behandling, fagsak, lagreAksjonspunkter } = use(BehandlingDataContext);
+  const { behandling, fagsak, lagreAksjonspunkter } = useBehandlingDataContext();
 
   return async (
     fagsakYtelseType: FagsakYtelseType,
@@ -113,7 +113,7 @@ const getAktivPapirsøknadApKode = (
   if (!ap) {
     throw new Error('Fant ikke aktivt aksjonspunkt for papirsøknad');
   }
-  //@ts-expect-error Blir fiksa når AksjonspunktKode reflekterar backend-typar
+  // @ts-expect-error Blir fiksa når AksjonspunktKode reflekterar backend-typar
   return ap;
 };
 

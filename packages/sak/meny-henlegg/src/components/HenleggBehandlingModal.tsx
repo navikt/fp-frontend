@@ -9,7 +9,7 @@ import { formaterFritekst } from '@navikt/ft-utils';
 
 import type {
   BehandlingResultatType,
-  BehandlingResultatTypeTilbakekreving,
+  BehandlingResultatTypeFpTilbake,
   BehandlingType,
   DokumentMalType,
   FagsakYtelseType,
@@ -27,12 +27,11 @@ export type ForhåndsvisHenleggParams = {
   fritekst?: string;
 };
 
-const henleggArsakerPerBehandlingType: Record<string, BehandlingResultatType[]> = {
+const henleggArsakerPerBehandlingType: Record<string, BehandlingResultatType[] | BehandlingResultatTypeFpTilbake[]> = {
   ['BT-003']: ['HENLAGT_KLAGE_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
   ['BT-008']: ['HENLAGT_ANKE_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
   ['BT-006']: ['HENLAGT_INNSYN_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
   ['BT-007']: ['HENLAGT_FEILOPPRETTET'],
-  // @ts-expect-error - Type ligg i fptilbake-kodeverk
   ['BT-009']: ['HENLAGT_FEILOPPRETTET_MED_BREV', 'HENLAGT_FEILOPPRETTET_UTEN_BREV'],
   ['BT-004']: ['HENLAGT_SØKNAD_TRUKKET', 'HENLAGT_FEILOPPRETTET', 'HENLAGT_SØKNAD_MANGLER'],
   ['BT-002']: ['HENLAGT_SØKNAD_TRUKKET', 'HENLAGT_FEILOPPRETTET', 'HENLAGT_SØKNAD_MANGLER'],
@@ -40,7 +39,7 @@ const henleggArsakerPerBehandlingType: Record<string, BehandlingResultatType[]> 
 };
 
 export type FormValues = {
-  årsakKode?: BehandlingResultatType | BehandlingResultatTypeTilbakekreving;
+  årsakKode?: BehandlingResultatType | BehandlingResultatTypeFpTilbake;
   begrunnelse?: string;
   fritekst?: string;
 };
@@ -175,12 +174,12 @@ const forhåndsvisHenleggBehandlingDoc =
 
 const showHenleggelseFritekst = (
   behandlingTypeKode: BehandlingType,
-  årsakKode?: BehandlingResultatType | BehandlingResultatTypeTilbakekreving,
+  årsakKode?: BehandlingResultatType | BehandlingResultatTypeFpTilbake,
 ): boolean => 'BT-009' === behandlingTypeKode && 'HENLAGT_FEILOPPRETTET_MED_BREV' === årsakKode;
 
 const disableHovedKnapp = (
   behandlingTypeKode: BehandlingType,
-  årsakKode?: BehandlingResultatType | BehandlingResultatTypeTilbakekreving,
+  årsakKode?: BehandlingResultatType | BehandlingResultatTypeFpTilbake,
   begrunnelse?: string,
   fritekst?: string,
 ): boolean => {
@@ -190,14 +189,14 @@ const disableHovedKnapp = (
   return !(årsakKode && begrunnelse);
 };
 
-const t = new Set<BehandlingResultatType | BehandlingResultatTypeTilbakekreving>([
+const t = new Set<BehandlingResultatType | BehandlingResultatTypeFpTilbake>([
   'HENLAGT_SØKNAD_TRUKKET',
   'HENLAGT_KLAGE_TRUKKET',
   'HENLAGT_INNSYN_TRUKKET',
 ]);
 const getShowLink = (
   behandlingType: BehandlingType,
-  arsakKode?: BehandlingResultatType | BehandlingResultatTypeTilbakekreving,
+  arsakKode?: BehandlingResultatType | BehandlingResultatTypeFpTilbake,
   fritekst?: string,
 ): boolean => {
   if (behandlingType === 'BT-007') {

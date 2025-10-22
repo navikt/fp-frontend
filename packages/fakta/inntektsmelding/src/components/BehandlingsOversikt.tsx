@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { List, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
-import type { AlleKodeverk, Behandling, BehandlingAppKontekst, Inntektsmelding } from '@navikt/fp-types';
+import type { AlleKodeverk, BehandlingFpSak, FagsakBehandlingDto, Inntektsmelding } from '@navikt/fp-types';
 
 import { InntektsmeldingInfoBlokk } from './InntektsmeldingInfoBlokk';
 
@@ -14,8 +14,8 @@ export const BehandlingsOversikt = ({
   alleKodeverk,
 }: {
   inntektsmelding: Inntektsmelding;
-  behandling: Behandling;
-  alleBehandlinger: BehandlingAppKontekst[];
+  behandling: BehandlingFpSak;
+  alleBehandlinger: FagsakBehandlingDto[];
   alleKodeverk: AlleKodeverk;
 }) => {
   const intl = useIntl();

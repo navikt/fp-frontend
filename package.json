@@ -11,7 +11,7 @@
     "url": "git+https://github.com/navikt/fp-frontend.git"
   },
   "scripts": {
-    "test": "turbo run test --concurrency=1",
+    "test": "turbo run test --concurrency=5",
     "tsc": "turbo run tsc",
     "lint": "turbo run lint",
     "eslint": "turbo run eslint",

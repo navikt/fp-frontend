@@ -1,4 +1,4 @@
-export type BehandlingResultatTypeTilbakekreving =
+export type BehandlingResultatTypeFpTilbake =
   | 'INGEN_TILBAKEBETALING'
   | 'DELVIS_TILBAKEBETALING'
   | 'FULL_TILBAKEBETALING'

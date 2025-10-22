@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -8,14 +7,14 @@ import { YtelserFaktaIndex } from '@navikt/fp-fakta-ytelser';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
 export const YtelserFaktaInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling } = useBehandlingDataContext();
   const standardPanelProps = useStandardFaktaPanelProps();
 
   const api = useBehandlingApi(behandling);

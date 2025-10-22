@@ -52,13 +52,11 @@ export const ForTilbakekreving: Story = {
   args: {
     tilbakekrevingRevurderingArsaker: [
       {
-        //@ts-expect-error feil type
         kode: 'RE_KLAGE_KA',
         kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage KA',
       },
       {
-        //@ts-expect-error feil type
         kode: 'RE_KLAGE_NFP',
         kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage NFP',

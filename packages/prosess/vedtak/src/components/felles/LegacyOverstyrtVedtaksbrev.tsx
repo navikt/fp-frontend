@@ -4,7 +4,7 @@ import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import { BodyShort, Label, Link, VStack } from '@navikt/ds-react';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
-import type { Behandling } from '@navikt/fp-types';
+import type { BehandlingFpSak } from '@navikt/fp-types';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 
@@ -12,7 +12,7 @@ import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData'
 
 interface Props {
   forhåndsvisOverstyrtBrev: (data: VedtakForhåndsvisData) => void;
-  behandling: Behandling;
+  behandling: BehandlingFpSak;
 }
 
 export const LegacyOverstyrtVedtaksbrev = ({ forhåndsvisOverstyrtBrev, behandling }: Props) => {

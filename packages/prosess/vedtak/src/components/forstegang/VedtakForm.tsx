@@ -9,7 +9,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
   type Aksjonspunkt,
-  type Behandling,
+  type BehandlingFpSak,
   type BehandlingResultatType,
   type Behandlingsresultat,
   type BeregningsresultatDagytelse,
@@ -90,7 +90,7 @@ const hentForhåndsvisManueltBrevCallback =
     });
   };
 
-const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['behandlingÅrsaker'] = []): boolean =>
+const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: BehandlingFpSak['behandlingÅrsaker'] = []): boolean =>
   behandlingArsakTyper
     .map(({ behandlingArsakType }) => behandlingArsakType)
     .some(bt => bt === 'ETTER_KLAGE' || bt === 'RE-KLAG-U-INNTK' || bt === 'RE-KLAG-M-INNTK');
@@ -128,13 +128,13 @@ const transformValues = (
       skalBrukeOverstyrendeFritekstBrev: harOverstyrtVedtaksbrev,
     }));
 
-const finnBegrunnelse = (behandling: Behandling): string | undefined => {
+const finnBegrunnelse = (behandling: BehandlingFpSak): string | undefined => {
   return behandling.behandlingsresultat?.avslagsarsakFritekst
     ? decodeHtmlEntity(behandling.behandlingsresultat.avslagsarsakFritekst)
     : undefined;
 };
 
-export const buildInitialValues = (behandling: Behandling): VedtakFormValues => ({
+export const buildInitialValues = (behandling: BehandlingFpSak): VedtakFormValues => ({
   begrunnelse: finnBegrunnelse(behandling),
 });
 

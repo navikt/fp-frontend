@@ -1,17 +1,17 @@
 import { type ReactElement, use, useEffect, useState } from 'react';
 
 import { type OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
-import type { VilkårType } from '@navikt/fp-types';
+import type { BehandlingFpSak, VilkårType } from '@navikt/fp-types';
 import { MellomlagretFormDataProvider, PanelDataProvider, PanelOverstyringProvider } from '@navikt/fp-utils';
 
-import { BehandlingDataContext } from '../context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { InngangsvilkårPanelDataContext } from './InngangsvilkarDefaultInitWrapper';
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useInngangsvilkarRegistrerer } from './useInngangsvilkarRegistrerer';
 import type { StandardProsessPanelProps } from './useStandardProsessPanelProps';
 
 interface Props {
-  standardPanelProps: StandardProsessPanelProps;
+  standardPanelProps: StandardProsessPanelProps<BehandlingFpSak>;
   vilkårKoder?: VilkårType[];
   inngangsvilkårPanelKode: string;
   hentInngangsvilkårPanelTekst: string;
@@ -24,7 +24,7 @@ export const InngangsvilkarOverstyringDefaultInitPanel = (
     overrideReadOnly?: boolean;
   },
 ) => {
-  const { behandling, rettigheter } = use(BehandlingDataContext);
+  const { behandling, rettigheter } = useBehandlingDataContext<BehandlingFpSak>();
   const { harÅpentInngangsvilkårAksjonspunkt } = use(InngangsvilkårPanelDataContext);
 
   const [erOverstyrt, setErOverstyrt] = useState(false);
@@ -58,7 +58,7 @@ export const InngangsvilkarDefaultInitPanel = ({
   erOverstyrt = false,
   children,
 }: Props & { erOverstyrt?: boolean }) => {
-  const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
+  const { behandling, fagsak, alleKodeverk } = useBehandlingDataContext();
 
   const { erPanelValgt } = use(InngangsvilkårPanelDataContext);
 

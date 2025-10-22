@@ -1,10 +1,10 @@
-import { createContext, type JSX, type ReactNode, use, useMemo } from 'react';
+import { createContext, type JSX, type ReactNode, useMemo } from 'react';
 
 import { ProcessMenu, ProcessMenuStepType } from '@navikt/ft-plattform-komponenter';
 
-import type { VilkarUtfallType } from '@navikt/fp-types';
+import type { Behandling, VilkarUtfallType } from '@navikt/fp-types';
 
-import { BehandlingDataContext } from '../context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
 import { type ProsessPanelMenyData, useProsessPanelMenyData } from './useProsessPanelMenyData';
 
@@ -16,9 +16,8 @@ interface Props {
   children: ReactNode[];
 }
 
-export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Props) => {
-  const { oppdaterProsessStegOgFaktaPanelIUrl } = use(BehandlingDataContext);
-  const { behandling } = use(BehandlingDataContext);
+export const ProsessMeny = <T extends Behandling>({ valgtProsessSteg, valgtFaktaSteg, children }: Props) => {
+  const { oppdaterProsessStegOgFaktaPanelIUrl, behandling } = useBehandlingDataContext<T>();
 
   const { prosessPanelMenyData, settProsessPanelMenyData } = useProsessPanelMenyData();
 

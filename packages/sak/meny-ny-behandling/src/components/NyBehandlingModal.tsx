@@ -6,7 +6,12 @@ import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import type { BehandlingArsakType, KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
+import type {
+  BehandlingArsakType,
+  BehandlingÅrsakTypeFpTilbake,
+  KodeverkMedNavn,
+  KodeverkMedNavnTilbakekreving,
+} from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.module.css';
 
@@ -19,15 +24,15 @@ const createOptions = (
 };
 
 // TODO Denne inndelinga burde vel flyttast til DB (KODELISTE.EKSTRA_DATA)?
-const manuelleRevurderingsArsakerES = [
+const manuelleRevurderingsArsakerES: BehandlingArsakType[] = [
   'RE-ANNET',
   'RE-LOV',
   'RE-FEFAKTA',
   'RE-RGLF',
   'RE-PRSSL',
-] satisfies BehandlingArsakType[];
+];
 
-const manuelleRevurderingsArsakerFP = [
+const manuelleRevurderingsArsakerFP: BehandlingArsakType[] = [
   'RE-BER-GRUN',
   'RE-MDL',
   'RE-OPTJ',
@@ -38,9 +43,9 @@ const manuelleRevurderingsArsakerFP = [
   'RE-FRIST',
   'RE-KLAG-U-INNTK',
   'RE-KLAG-M-INNTK',
-] satisfies BehandlingArsakType[];
+];
 
-const manuelleRevurderingsArsakerSVP = [
+const manuelleRevurderingsArsakerSVP: BehandlingArsakType[] = [
   'RE-KLAG-U-INNTK',
   'RE-KLAG-M-INNTK',
   'RE-END-INNTEKTSMELD',
@@ -49,20 +54,15 @@ const manuelleRevurderingsArsakerSVP = [
   'RE-DØD',
   'RE-ANNET',
   'RE-INNTK',
-] satisfies BehandlingArsakType[];
+];
 
-const TilbakekrevingRevurderingArsaker = [
-  //@ts-expect-error - typer finnes ikke
+const TilbakekrevingRevurderingArsaker: BehandlingÅrsakTypeFpTilbake[] = [
   'RE_FORELDELSE',
-  //@ts-expect-error - typer finnes ikke
   'RE_VILKÅR',
-  //@ts-expect-error - typer finnes ikke
   'RE_KLAGE_KA',
-  //@ts-expect-error - typer finnes ikke
   'RE_KLAGE_NFP',
-  //@ts-expect-error - typer finnes ikke
   'RE_FEILUTBETALT_BELØP_REDUSERT',
-] satisfies BehandlingArsakType[];
+];
 
 const getBehandlingAarsaker = (
   ytelseType: string,
@@ -72,7 +72,6 @@ const getBehandlingAarsaker = (
 ): KodeverkMedNavn<'BehandlingÅrsakType'>[] | KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[] => {
   if (alleTilbakekrevingRevurderingArsaker && valgtBehandlingType === 'BT-009') {
     return TilbakekrevingRevurderingArsaker.flatMap(ar => {
-      //@ts-expect-error - typer finnes ikke
       const arsak = alleTilbakekrevingRevurderingArsaker.find(el => el.kode === ar);
       return arsak ? [arsak] : [];
     });

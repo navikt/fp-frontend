@@ -11,7 +11,7 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingAppKontekst, BehandlingOppretting, DokumentMalType, Fagsak } from '@navikt/fp-types';
+import type { BehandlingOppretting, DokumentMalType, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -75,7 +75,7 @@ const ALLE_BEHANDLINGER = [
       },
     ],
   },
-] as BehandlingAppKontekst[];
+] as FagsakBehandlingDto[];
 
 const FAGSAK = {
   saksnummer: '123',

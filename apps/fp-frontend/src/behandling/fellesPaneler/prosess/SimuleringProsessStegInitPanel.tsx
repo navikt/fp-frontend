@@ -11,7 +11,7 @@ import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { forhåndsvisTilbakekrevingMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessMenyContext } from '../../felles/prosess/ProsessMeny';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -27,7 +27,7 @@ interface Props {
 
 export const SimuleringProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
-  const { behandling, fagsak } = use(BehandlingDataContext);
+  const { behandling, fagsak } = useBehandlingDataContext();
   const { prosessPanelMenyData } = use(ProsessMenyContext);
 
   const api = useBehandlingApi(behandling);
