@@ -37,7 +37,10 @@ export const AdopsjonInngangsvilkarFpInitPanel = () => {
       inngangsvilkårPanelKode="ADOPSJON"
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
     >
-      <AdopsjonVilkarProsessIndex status={standardPanelProps.status} vilkår={standardPanelProps.vilkårForPanel} />
+      <AdopsjonVilkarProsessIndex
+        status={standardPanelProps.status}
+        vilkårForPanel={standardPanelProps.vilkårForPanel}
+      />
     </InngangsvilkarDefaultInitPanel>
   );
 };

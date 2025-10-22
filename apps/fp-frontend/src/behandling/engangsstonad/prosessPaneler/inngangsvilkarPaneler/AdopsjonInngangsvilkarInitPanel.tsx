@@ -39,7 +39,10 @@ export const AdopsjonInngangsvilkarInitPanel = () => {
       inngangsvilkårPanelKode="ADOPSJON"
       hentInngangsvilkårPanelTekst={paneltekst}
     >
-      <AdopsjonVilkarProsessIndex status={standardPanelProps.status} vilkår={standardPanelProps.vilkårForPanel} />
+      <AdopsjonVilkarProsessIndex
+        status={standardPanelProps.status}
+        vilkårForPanel={standardPanelProps.vilkårForPanel}
+      />
     </InngangsvilkarDefaultInitPanel>
   );
 };
