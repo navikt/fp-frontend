@@ -26,7 +26,7 @@ type FormValues = {
 
 interface Props {
   status: string;
-  vilkår: Vilkar[];
+  vilkårForPanel: Vilkar[];
   ytelseTypeKode: string;
 }
 
@@ -35,7 +35,7 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av Fødselsvilkåret.
  */
-export const FodselVilkarForm = ({ status, ytelseTypeKode, vilkår }: Props) => {
+export const FodselVilkarForm = ({ status, ytelseTypeKode, vilkårForPanel }: Props) => {
   const intl = useIntl();
 
   const {
@@ -78,7 +78,7 @@ export const FodselVilkarForm = ({ status, ytelseTypeKode, vilkår }: Props) => 
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        lovReferanse={vilkår[0]?.lovReferanse ?? undefined}
+        lovReferanse={vilkårForPanel[0]?.lovReferanse ?? undefined}
         originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}

@@ -39,7 +39,11 @@ export const FodselInngangsvilkarInitPanel = () => {
       inngangsvilkårPanelKode="FODSEL"
       hentInngangsvilkårPanelTekst={paneltekst}
     >
-      <FodselVilkarProsessIndex ytelseTypeKode="ES" status={standardPanelProps.status} />
+      <FodselVilkarProsessIndex
+        ytelseTypeKode="ES"
+        status={standardPanelProps.status}
+        vilkårForPanel={standardPanelProps.vilkårForPanel}
+      />
     </InngangsvilkarDefaultInitPanel>
   );
 };
