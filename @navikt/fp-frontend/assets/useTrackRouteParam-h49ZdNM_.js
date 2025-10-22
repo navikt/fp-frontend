@@ -1,1 +1,0 @@
-import{u as m,ad as n,U as u}from"./iframe-D_b5tSRA.js";const p=r=>{const a={parse:c=>c,isQueryParam:!1,...r},s=m(),e=n(),o=a.isQueryParam?u(s.search):e,t=a.parse(o[a.paramName]);return{location:s,selected:t}};export{p as u};
