@@ -1,5 +1,5 @@
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
-import type { KodeverkMedNavn, Medlemskap, Vilkar, VilkårType } from '@navikt/fp-types';
+import type { KodeverkMedNavn, Medlemskap, VilkårType } from '@navikt/fp-types';
 import { usePanelOverstyring } from '@navikt/fp-utils';
 
 import { skalViseProsessPanel } from './skalViseProsessPanel';
@@ -16,20 +16,26 @@ const filtrerAvslagsårsaker = (
     : avslagsårsaker[vilkarTypeKode]!;
 
 interface Props {
-  vilkår: Vilkar[];
   vilkårKoder: VilkårType[];
   medlemskap?: Medlemskap;
   panelTekstKode: string;
 }
 
-export const OverstyringPanelDef = ({ vilkår, vilkårKoder, panelTekstKode, medlemskap }: Props) => {
+export const OverstyringPanelDef = ({ vilkårKoder, panelTekstKode, medlemskap }: Props) => {
   const { overstyringApKode } = usePanelOverstyring();
 
   const standardProps = useStandardProsessPanelProps([overstyringApKode], vilkårKoder);
 
-  const skalVises = skalViseProsessPanel(standardProps.aksjonspunkterForPanel, vilkårKoder, vilkår);
+  const skalVises = skalViseProsessPanel(
+    standardProps.aksjonspunkterForPanel,
+    vilkårKoder,
+    standardProps.vilkårForPanel,
+  );
 
-  const avslagsårsaker = filtrerAvslagsårsaker(standardProps.alleKodeverk['Avslagsårsak'], vilkår[0]!.vilkarType);
+  const avslagsårsaker = filtrerAvslagsårsaker(
+    standardProps.alleKodeverk['Avslagsårsak'],
+    standardProps.vilkårForPanel[0]!.vilkarType,
+  );
 
   if (!skalVises) {
     return null;
@@ -40,7 +46,7 @@ export const OverstyringPanelDef = ({ vilkår, vilkårKoder, panelTekstKode, med
       medlemskap={medlemskap}
       avslagsårsaker={avslagsårsaker}
       panelTekstKode={panelTekstKode}
-      lovReferanse={vilkår[0]?.lovReferanse ?? undefined}
+      lovReferanse={standardProps.vilkårForPanel[0]?.lovReferanse ?? undefined}
       status={standardProps.status}
     />
   );

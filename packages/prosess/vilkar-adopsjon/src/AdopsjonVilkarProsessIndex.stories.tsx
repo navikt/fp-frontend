@@ -23,7 +23,7 @@ const meta = {
   component: AdopsjonVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    vilkår: [
+    vilkårForPanel: [
       {
         lovReferanse: '§§Dette er en lovreferanse',
       },

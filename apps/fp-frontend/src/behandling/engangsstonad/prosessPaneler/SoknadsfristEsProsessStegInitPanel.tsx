@@ -56,11 +56,7 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
       >
         <>
           {!harSoknadsfristAp && (
-            <OverstyringPanelDef
-              vilkår={standardPanelProps.vilkårForPanel}
-              vilkårKoder={VILKAR_KODER}
-              panelTekstKode="Behandlingspunkt.Soknadsfristvilkaret"
-            />
+            <OverstyringPanelDef vilkårKoder={VILKAR_KODER} panelTekstKode="Behandlingspunkt.Soknadsfristvilkaret" />
           )}
           {harSoknadsfristAp && søknad && familiehendelse && (
             <SoknadsfristVilkarProsessIndex

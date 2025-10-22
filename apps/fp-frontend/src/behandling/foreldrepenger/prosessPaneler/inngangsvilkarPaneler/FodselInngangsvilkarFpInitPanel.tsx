@@ -32,11 +32,7 @@ export const FodselInngangsvilkarFpInitPanel = () => {
           : AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR
       }
     >
-      <OverstyringPanelDef
-        vilkår={standardPanelProps.vilkårForPanel}
-        vilkårKoder={VILKAR_KODER}
-        panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
-      />
+      <OverstyringPanelDef vilkårKoder={VILKAR_KODER} panelTekstKode="Inngangsvilkar.Fodselsvilkaret" />
     </InngangsvilkarOverstyringDefaultInitPanel>
   ) : (
     <InngangsvilkarDefaultInitPanel
@@ -48,7 +44,7 @@ export const FodselInngangsvilkarFpInitPanel = () => {
       <FodselVilkarProsessIndex
         ytelseTypeKode="FP"
         status={standardPanelProps.status}
-        vilkår={standardPanelProps.vilkårForPanel}
+        vilkårForPanel={standardPanelProps.vilkårForPanel}
       />
     </InngangsvilkarDefaultInitPanel>
   );

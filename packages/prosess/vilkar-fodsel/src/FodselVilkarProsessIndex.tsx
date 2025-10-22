@@ -13,7 +13,7 @@ const intl = createIntl(messages);
 interface Props {
   ytelseTypeKode: string;
   status: string;
-  vilkår: Vilkar[];
+  vilkårForPanel: Vilkar[];
 }
 
 export const FodselVilkarProsessIndex = (props: Props) => (

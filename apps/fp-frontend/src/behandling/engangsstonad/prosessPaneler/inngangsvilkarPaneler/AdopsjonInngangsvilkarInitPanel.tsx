@@ -30,11 +30,7 @@ export const AdopsjonInngangsvilkarInitPanel = () => {
       hentInngangsvilkårPanelTekst={paneltekst}
       overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET}
     >
-      <OverstyringPanelDef
-        vilkår={standardPanelProps.vilkårForPanel}
-        vilkårKoder={VILKAR_KODER}
-        panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
-      />
+      <OverstyringPanelDef vilkårKoder={VILKAR_KODER} panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret" />
     </InngangsvilkarOverstyringDefaultInitPanel>
   ) : (
     <InngangsvilkarDefaultInitPanel
@@ -43,7 +39,10 @@ export const AdopsjonInngangsvilkarInitPanel = () => {
       inngangsvilkårPanelKode="ADOPSJON"
       hentInngangsvilkårPanelTekst={paneltekst}
     >
-      <AdopsjonVilkarProsessIndex status={standardPanelProps.status} vilkår={standardPanelProps.vilkårForPanel} />
+      <AdopsjonVilkarProsessIndex
+        status={standardPanelProps.status}
+        vilkårForPanel={standardPanelProps.vilkårForPanel}
+      />
     </InngangsvilkarDefaultInitPanel>
   );
 };
