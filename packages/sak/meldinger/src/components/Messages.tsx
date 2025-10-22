@@ -9,8 +9,9 @@ import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import type {
-  BehandlingAppKontekst,
   DokumentMalType,
+  DokumentMalTypeFpTilbake,
+  FagsakBehandlingDto,
   KodeverkMedNavn,
   RevurderingVarslingÅrsak,
 } from '@navikt/fp-types';
@@ -22,19 +23,19 @@ const maxLength10000 = maxLength(10000);
 const minLength3 = minLength(3);
 
 export type FormValues = {
-  brevmalkode?: DokumentMalType;
+  brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake;
   fritekst?: string;
   arsakskode?: RevurderingVarslingÅrsak;
 };
 
 export type ForhåndsvisBrevParams = {
-  brevmalkode: DokumentMalType;
+  brevmalkode: DokumentMalType | DokumentMalTypeFpTilbake;
   fritekst?: string;
   arsakskode?: RevurderingVarslingÅrsak;
 };
 
 interface Props {
-  behandling: BehandlingAppKontekst;
+  behandling: FagsakBehandlingDto;
   submitCallback: (values: FormValues) => void;
   forhåndsvisBrev: (params: ForhåndsvisBrevParams) => void;
   revurderingVarslingArsak: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[];
@@ -155,18 +156,17 @@ export const Messages = ({
   );
 };
 
-const getFritekstMessage = (brevmalkode?: DokumentMalType): string =>
-  //@ts-expect-error tilbakekreving
+const getFritekstMessage = (brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake): string =>
   brevmalkode === 'INNOPP' || brevmalkode === 'INNHEN' ? 'Messages.DocumentList' : 'Messages.Fritekst';
 
 // TODO (TOR) Bør erstattast av ein markør fra backend
-const showFritekst = (brevmalkode?: DokumentMalType, arsakskode?: RevurderingVarslingÅrsak): boolean =>
+const showFritekst = (
+  brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake,
+  arsakskode?: RevurderingVarslingÅrsak,
+): boolean =>
   brevmalkode === 'INNOPP' ||
-  //@ts-expect-error tilbakekreving
   brevmalkode === 'KORRIGVARS' ||
-  //@ts-expect-error tilbakekreving
   brevmalkode === 'VARS' ||
-  //@ts-expect-error tilbakekreving
   brevmalkode === 'INNHEN' ||
   (brevmalkode === 'VARREV' && arsakskode === 'ANNET');
 
@@ -183,13 +183,13 @@ const getfiltrerteRevurderingVarslingArsaker = (
   return revurderingVarslingArsaker;
 };
 
-const buildInitialValues = (behandling: BehandlingAppKontekst): FormValues => {
+const buildInitialValues = (behandling: FagsakBehandlingDto): FormValues => {
   const initialValues = {
-    brevmalkode: (behandling.brevmaler[0]?.kode as DokumentMalType | undefined) ?? undefined,
+    brevmalkode: (behandling.brevmaler[0]?.kode as DokumentMalType | DokumentMalTypeFpTilbake | undefined) ?? undefined,
     fritekst: '',
   };
 
-  if (behandling.ugunstAksjonspunkt) {
+  if ('ugunstAksjonspunkt' in behandling && behandling.ugunstAksjonspunkt) {
     return { ...initialValues, brevmalkode: 'VARREV' satisfies DokumentMalType };
   }
 

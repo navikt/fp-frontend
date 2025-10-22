@@ -11,7 +11,7 @@ import {
   withPanelData,
   withPanelOverstyring,
 } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling, Fagsak, KodeverkMedNavn, Medlemskap } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, Fagsak, KodeverkMedNavn, Medlemskap } from '@navikt/fp-types';
 
 import { VilkarresultatMedOverstyringProsessIndex } from './VilkarresultatMedOverstyringProsessIndex';
 
@@ -20,7 +20,7 @@ const defaultBehandling = {
   versjon: 1,
   type: 'BT-002',
   aksjonspunkt: [] as Aksjonspunkt[],
-} as Behandling;
+} as BehandlingFpSak;
 
 const defaultAvslagsårsaker = [
   {
@@ -71,7 +71,7 @@ export const OverstyringspanelForMedlemskap: Story = {
     behandling: {
       ...defaultBehandling,
       type: 'BT-004',
-    } as Behandling,
+    } as BehandlingFpSak,
   },
 };
 
@@ -90,7 +90,7 @@ export const OverstyringErUtførtForMedlemskap: Story = {
           begrunnelse: 'Dette er en begrunnelse',
         },
       ],
-    } as Behandling,
+    } as BehandlingFpSak,
     status: 'IKKE_OPPFYLT',
     medlemskap: {
       manuellBehandlingResultat: {
@@ -130,7 +130,7 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
           begrunnelse: 'Dette er en begrunnelse',
         },
       ],
-    } as Behandling,
+    } as BehandlingFpSak,
     status: 'IKKE_OPPFYLT',
     medlemskap: {
       manuellBehandlingResultat: {
@@ -164,7 +164,7 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
           begrunnelse: 'Dette er en begrunnelse',
         } as Aksjonspunkt,
       ],
-    } as Behandling,
+    } as BehandlingFpSak,
     status: 'IKKE_OPPFYLT',
     panelTekstKode: 'Inngangsvilkar.Fodselsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
@@ -179,7 +179,7 @@ export const OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert: Story = {
         avslagsarsak: '1020',
         type: 'OPPHØR',
       },
-    } as Behandling,
+    } as BehandlingFpSak,
     status: 'IKKE_VURDERT',
     panelTekstKode: 'Inngangsvilkar.Opptjeningsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
@@ -201,7 +201,7 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
           begrunnelse: 'Dette er en begrunnelse',
         },
       ],
-    } as Behandling,
+    } as BehandlingFpSak,
     status: 'OPPFYLT',
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
     isReadOnly: true,

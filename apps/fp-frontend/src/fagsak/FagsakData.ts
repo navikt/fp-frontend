@@ -1,7 +1,7 @@
 import type {
-  BehandlingAppKontekst,
   BehandlingOppretting,
   Fagsak,
+  FagsakBehandlingDto,
   FagsakDataFpTilbake,
   Historikkinnslag,
 } from '@navikt/fp-types';
@@ -13,7 +13,7 @@ export class FagsakData {
 
   private $$behandlingOppretting: BehandlingOppretting[];
 
-  private $$alleBehandlinger: BehandlingAppKontekst[];
+  private $$alleBehandlinger: FagsakBehandlingDto[];
 
   constructor(fagsak: Fagsak, fpTilbakeFagsakData?: FagsakDataFpTilbake) {
     this.$$fagsak = fagsak;
@@ -31,7 +31,7 @@ export class FagsakData {
         this.$$fpTilbakeFagsakData.behandlingTypeKanOpprettes,
       );
 
-      this.$$alleBehandlinger = this.$$fagsak.behandlinger.concat(this.$$fpTilbakeFagsakData.behandlinger);
+      this.$$alleBehandlinger = [...this.$$fagsak.behandlinger, ...this.$$fpTilbakeFagsakData.behandlinger];
     } else {
       this.$$behandlingOppretting = this.$$fagsak.behandlingTypeKanOpprettes;
       this.$$alleBehandlinger = this.$$fagsak.behandlinger;
@@ -46,11 +46,11 @@ export class FagsakData {
     return this.$$behandlingOppretting;
   }
 
-  getAlleBehandlinger(): BehandlingAppKontekst[] {
+  getAlleBehandlinger(): FagsakBehandlingDto[] {
     return this.$$alleBehandlinger;
   }
 
-  getBehandling(uuid?: string): BehandlingAppKontekst | undefined {
+  getBehandling(uuid?: string): FagsakBehandlingDto | undefined {
     return this.$$alleBehandlinger.find(b => b.uuid === uuid);
   }
 

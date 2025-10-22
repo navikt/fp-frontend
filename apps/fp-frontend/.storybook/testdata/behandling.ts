@@ -1,7 +1,7 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Behandling } from '@navikt/fp-types';
+import type { BehandlingFpSak } from '@navikt/fp-types';
 
-export const behandling: Behandling = {
+export const behandling: BehandlingFpSak = {
   uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
   versjon: 26,
   type: 'BT-002',

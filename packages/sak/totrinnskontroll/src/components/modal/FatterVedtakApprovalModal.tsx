@@ -3,15 +3,20 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
-import type { Behandling, BehandlingStatus, BehandlingType } from '@navikt/fp-types';
+import type {
+  Behandlingsresultat,
+  BehandlingsresultatDtoFpTilbake,
+  BehandlingStatus,
+  BehandlingType,
+} from '@navikt/fp-types';
 
 import styles from './fatterVedtakApprovalModal.module.css';
 
 const getInfoTextCode = (
   behandlingtypeKode: BehandlingType,
-  behandlingsresultat: Behandling['behandlingsresultat'],
   isOpphor: boolean,
   harSammeResultatSomOriginalBehandling?: boolean,
+  behandlingsresultat?: Behandlingsresultat | BehandlingsresultatDtoFpTilbake,
 ) => {
   if (behandlingtypeKode === 'BT-007') {
     return 'FatterVedtakApprovalModal.Tilbakekreving';
@@ -56,17 +61,17 @@ const utledInfoTextCode = (
   allAksjonspunktApproved: boolean,
   behandlingStatusKode: BehandlingStatus,
   behandlingTypeKode: BehandlingType,
-  behandlingsresultat: Behandling['behandlingsresultat'],
   isBehandlingsresultatOpphor: boolean,
   harSammeResultatSomOriginalBehandling?: boolean,
+  behandlingsresultat?: Behandlingsresultat | BehandlingsresultatDtoFpTilbake,
 ): string => {
   if (allAksjonspunktApproved) {
     return isStatusFatterVedtak(behandlingStatusKode)
       ? getInfoTextCode(
           behandlingTypeKode,
-          behandlingsresultat,
           isBehandlingsresultatOpphor,
           harSammeResultatSomOriginalBehandling,
+          behandlingsresultat,
         )
       : '';
   }
@@ -88,7 +93,7 @@ const utledModalDescriptionTextCode = (
 interface Props {
   closeEvent: () => void;
   allAksjonspunktApproved: boolean;
-  behandlingsresultat?: Behandling['behandlingsresultat'];
+  behandlingsresultat?: Behandlingsresultat | BehandlingsresultatDtoFpTilbake;
   behandlingStatusKode: BehandlingStatus;
   behandlingTypeKode: BehandlingType;
   harSammeResultatSomOriginalBehandling?: boolean;
@@ -114,9 +119,9 @@ export const FatterVedtakApprovalModal = ({
     allAksjonspunktApproved,
     behandlingStatusKode,
     behandlingTypeKode,
-    behandlingsresultat,
     isBehandlingsresultatOpphor,
     harSammeResultatSomOriginalBehandling,
+    behandlingsresultat,
   );
 
   const altImgTextCode = utledAltImgTextCode(behandlingStatusKode);

@@ -4,12 +4,16 @@ import { ChevronDownIcon, ChevronUpIcon, StarFillIcon } from '@navikt/aksel-icon
 import { BodyShort, Box, HStack, Label, Spacer, Tooltip, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
+import type {
+  AlleKodeverk,
+  AlleKodeverkTilbakekreving,
+  BehandlingÅrsakTypeFpTilbake,
+  FagsakBehandlingDto,
+} from '@navikt/fp-types';
 
 import styles from './behandlingInformasjon.module.css';
 
-// @ts-expect-error - Type ligg i fptilbake-kodeverk
-const tilbakekrevingÅrsakTyperKlage = ['RE_KLAGE_KA', 'RE_KLAGE_NFP'] satisfies BehandlingArsakType[];
+const tilbakekrevingÅrsakTyperKlage: BehandlingÅrsakTypeFpTilbake[] = ['RE_KLAGE_KA', 'RE_KLAGE_NFP'];
 
 const erTilbakekrevingÅrsakKlage = (årsak?: string): boolean =>
   !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
@@ -17,7 +21,7 @@ const erTilbakekrevingÅrsakKlage = (årsak?: string): boolean =>
 interface Props {
   withChevronDown?: boolean;
   withChevronUp?: boolean;
-  behandling: BehandlingAppKontekst;
+  behandling: FagsakBehandlingDto;
   alleKodeverk: AlleKodeverk;
   alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
 }
@@ -73,7 +77,7 @@ export const BehandlingInformasjon = ({
             </>
           )}
           <Spacer />
-          {behandling.gjeldendeVedtak && (
+          {'gjeldendeVedtak' in behandling && behandling.gjeldendeVedtak && (
             <StarFillIcon
               className={styles['starImage']}
               title={intl.formatMessage({ id: 'BehandlingPickerItemContent.GjeldendeVedtak' })}

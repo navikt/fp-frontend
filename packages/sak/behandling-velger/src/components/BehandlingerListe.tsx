@@ -4,13 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import { Box, Label } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, FagsakBehandlingDto } from '@navikt/fp-types';
 
 import { BehandlingListeRad } from './BehandlingListeRad';
 
 import styles from './behandlingerListe.module.css';
 
-const sorterBehandlinger = (behandlinger: BehandlingAppKontekst[]): BehandlingAppKontekst[] =>
+const sorterBehandlinger = (behandlinger: FagsakBehandlingDto[]): FagsakBehandlingDto[] =>
   [...behandlinger].sort((b1, b2) => {
     if (b1.avsluttet && !b2.avsluttet) {
       return 1;
@@ -25,7 +25,7 @@ const sorterBehandlinger = (behandlinger: BehandlingAppKontekst[]): BehandlingAp
   });
 
 interface Props {
-  behandlinger: BehandlingAppKontekst[];
+  behandlinger: FagsakBehandlingDto[];
   renderRadSomLenke: (className: string, behandlingInfoKomponent: ReactElement, uuid: string) => ReactElement;
   behandlingUuid?: string;
   skalViseAlleBehandlinger: boolean;

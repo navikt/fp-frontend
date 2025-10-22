@@ -1,4 +1,4 @@
-import type { Behandling, Vilkar } from '@navikt/fp-types';
+import type { BehandlingFpSak, Vilkar } from '@navikt/fp-types';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
 
@@ -10,7 +10,7 @@ describe('readOnlyPanelUtils', () => {
     type: 'BT-002',
     behandlingPåVent: false,
     behandlingHenlagt: false,
-  } as Behandling;
+  } as BehandlingFpSak;
 
   const vilkår: Vilkar[] = [
     {
@@ -38,7 +38,7 @@ describe('readOnlyPanelUtils', () => {
         readOnly: true,
       },
     };
-    const status = harBehandlingReadOnlyStatus(behandlingMedReadOnly as Behandling);
+    const status = harBehandlingReadOnlyStatus(behandlingMedReadOnly as BehandlingFpSak);
     expect(status).toBe(true);
   });
 
@@ -49,7 +49,7 @@ describe('readOnlyPanelUtils', () => {
         readOnly: false,
       },
     };
-    const status = harBehandlingReadOnlyStatus(behandlingMedReadOnly as Behandling);
+    const status = harBehandlingReadOnlyStatus(behandlingMedReadOnly as BehandlingFpSak);
     expect(status).toBe(false);
   });
 
@@ -89,7 +89,7 @@ describe('readOnlyPanelUtils', () => {
       },
     };
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandlingMedReadOnly as Behandling, vilkår, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandlingMedReadOnly as BehandlingFpSak, vilkår, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });

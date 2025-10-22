@@ -17,7 +17,7 @@ import type {
   Aksjonspunkt,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
-  Behandling,
+  BehandlingFpSak,
   FodselOgTilrettelegging,
   VilkarUtfallType,
 } from '@navikt/fp-types';
@@ -47,7 +47,7 @@ type FormValues = {
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
-  behandlingsresultat?: Behandling['behandlingsresultat'],
+  behandlingsresultat?: BehandlingFpSak['behandlingsresultat'],
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),

@@ -1,29 +1,29 @@
-import { type ReactElement, use } from 'react';
+import { type ReactElement } from 'react';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type { VilkarUtfallType } from '@navikt/fp-types';
+import type { Behandling, BehandlingFpSak, VilkarUtfallType } from '@navikt/fp-types';
 import { MellomlagretFormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
-import { BehandlingDataContext } from '../context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
 import type { StandardProsessPanelProps } from './useStandardProsessPanelProps';
 
-interface Props {
+interface Props<T extends Behandling> {
   skalPanelVisesIMeny: boolean;
   overstyrtStatus?: VilkarUtfallType;
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
   skalMarkeresSomAktiv?: boolean;
-  standardPanelProps: StandardProsessPanelProps;
+  standardPanelProps: StandardProsessPanelProps<T>;
   children: ReactElement;
 }
 
-export const ProsessDefaultInitPanel = (props: Props) => {
-  return <ProsessPanel {...props} harÅpentAksjonspunkt={props.standardPanelProps.harÅpentAksjonspunkt} />;
+export const ProsessDefaultInitPanel = <T extends Behandling = BehandlingFpSak>(props: Props<T>) => {
+  return <ProsessPanel<T> {...props} harÅpentAksjonspunkt={props.standardPanelProps.harÅpentAksjonspunkt} />;
 };
 
-export const ProsessDefaultInitOverstyringPanel = (props: Props) => {
+export const ProsessDefaultInitOverstyringPanel = <T extends Behandling = BehandlingFpSak>(props: Props<T>) => {
   const { erOverstyrt } = usePanelOverstyring();
 
   const harÅpentAksjonspunkt = erOverstyrt || props.standardPanelProps.harÅpentAksjonspunkt;
@@ -35,7 +35,7 @@ interface ProsessPanel {
   harÅpentAksjonspunkt: boolean;
 }
 
-const ProsessPanel = ({
+const ProsessPanel = <T extends Behandling>({
   overstyrtStatus,
   skalMarkeresSomAktiv,
   skalPanelVisesIMeny,
@@ -44,8 +44,8 @@ const ProsessPanel = ({
   standardPanelProps,
   harÅpentAksjonspunkt,
   children,
-}: Props & ProsessPanel) => {
-  const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
+}: Props<T> & ProsessPanel) => {
+  const { behandling, fagsak, alleKodeverk } = useBehandlingDataContext<T>();
 
   const status = overstyrtStatus ?? standardPanelProps.status;
 

@@ -12,7 +12,7 @@ import { getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg
 import { getMenytekst as getMerkSomHasterMenytekst } from '@navikt/fp-sak-meny-merk-som-haster';
 import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
 import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
-import type { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import type { Behandling, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -153,7 +153,7 @@ export const BehandlingMenuIndex = ({
   );
 };
 
-const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fagsak, kanVeilede: boolean) => {
+const hentMenyData = (behandling: FagsakBehandlingDto | undefined, fagsak: Fagsak, kanVeilede: boolean) => {
   const erPaVent = behandling ? behandling.behandlingPåVent : false;
   const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
 

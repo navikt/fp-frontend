@@ -110,6 +110,8 @@ const BehandlingIndexWrapper = ({
     return <LoadingPanel />;
   }
 
+  const erPapirsøknad = 'erAktivPapirsoknad' in behandling && behandling.erAktivPapirsoknad === true;
+
   return (
     <BehandlingDataProvider
       behandling={behandling}
@@ -124,14 +126,14 @@ const BehandlingIndexWrapper = ({
       oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
     >
       <>
-        {behandling.erAktivPapirsoknad && (
+        {erPapirsøknad && (
           <Suspense fallback={<LoadingPanel />}>
             <ErrorBoundary errorMessageCallback={addErrorMessage}>
               <BehandlingPapirsoknadIndex key={behandling.uuid} />
             </ErrorBoundary>
           </Suspense>
         )}
-        {!behandling.erAktivPapirsoknad && (
+        {!erPapirsøknad && (
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <BehandlingPanelerIndex key={behandling.uuid} />
           </ErrorBoundary>

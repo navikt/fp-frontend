@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling, Innsyn, InnsynDokument } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, Innsyn, InnsynDokument } from '@navikt/fp-types';
 
 import { InnsynProsessIndex } from './InnsynProsessIndex';
 
@@ -12,7 +12,7 @@ const defaultBehandling = {
   uuid: '1',
   versjon: 1,
   behandlingPåVent: false,
-} as Behandling;
+} as BehandlingFpSak;
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,

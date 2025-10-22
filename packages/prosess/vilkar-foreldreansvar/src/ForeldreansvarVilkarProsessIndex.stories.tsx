@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
 
 import { ForeldreansvarVilkarProsessIndex } from './ForeldreansvarVilkarProsessIndex';
 
@@ -58,7 +58,7 @@ export const AvslåttVilkår2Ledd: Story = {
       behandlingsresultat: {
         avslagsarsak: '1099',
       },
-    } as Behandling,
+    } as BehandlingFpSak,
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD,
@@ -111,7 +111,7 @@ export const AvslåttVilkår4Ledd: Story = {
       behandlingsresultat: {
         avslagsarsak: '1099',
       },
-    } as Behandling,
+    } as BehandlingFpSak,
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD,

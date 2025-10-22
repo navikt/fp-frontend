@@ -1,33 +1,30 @@
-import { use } from 'react';
-
-import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
-import { BehandlingDataContext } from '../context/BehandlingDataContext';
+import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
 const DEFAULT_FAKTA_KODE = 'default';
 const DEFAULT_PROSESS_STEG_KODE = 'default';
 
-export type StandardFaktaPanelProps = Readonly<{
-  behandling: Behandling;
+export type StandardFaktaPanelProps<T extends Behandling> = Readonly<{
+  behandling: T;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   aksjonspunkterForPanel: Aksjonspunkt[];
   isReadOnly: boolean;
   isSubmittable: boolean;
   harÅpentAksjonspunkt: boolean;
-
   submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
 }>;
 
-export const useStandardFaktaPanelProps = (
+export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSak>(
   aksjonspunktKoder: Aksjonspunkt['definisjon'][] = [],
   overstyringKoder: Aksjonspunkt['definisjon'][] = [],
-): StandardFaktaPanelProps => {
+): StandardFaktaPanelProps<T> => {
   const {
     behandling,
     rettigheter,
@@ -36,7 +33,7 @@ export const useStandardFaktaPanelProps = (
     lagreOverstyrteAksjonspunkter,
     oppdaterProsessStegOgFaktaPanelIUrl,
     alleKodeverk,
-  } = use(BehandlingDataContext);
+  } = useBehandlingDataContext<T>();
 
   const { aksjonspunkt } = behandling;
 

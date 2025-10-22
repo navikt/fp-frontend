@@ -5,7 +5,7 @@ import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
 
 import { VarselOmRevurderingProsessIndex } from './VarselOmRevurderingProsessIndex';
 
@@ -14,7 +14,7 @@ const defaultBehandling = {
   versjon: 1,
   språkkode: 'NN',
   type: 'BT-002',
-} as Behandling;
+} as BehandlingFpSak;
 
 const aksjonspunkterForPanel = [
   {

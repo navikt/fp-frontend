@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import type { BehandlingAppKontekst } from '@navikt/fp-types';
+import type { FagsakBehandlingDto } from '@navikt/fp-types';
 
 import { BeslutterModalIndex } from './BeslutterModalIndex';
 
@@ -14,7 +14,7 @@ describe('BeslutterModalIndex', () => {
       type: 'OPPHØR',
       erRevurderingMedUendretUtfall: true,
     },
-  } as BehandlingAppKontekst;
+  } as FagsakBehandlingDto;
 
   it('skal vise modal når beslutter sender tilbake til ny vurdering', async () => {
     render(<BeslutterModalIndex behandling={behandling} pushLocation={vi.fn()} allAksjonspunktApproved />);

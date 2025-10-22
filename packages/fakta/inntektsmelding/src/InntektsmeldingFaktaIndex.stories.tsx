@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import type { ArbeidsgiverOpplysninger, Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysninger, BehandlingFpSak, FagsakBehandlingDto } from '@navikt/fp-types';
 
 const inntektsmeldingmal = {
   innsendingstidspunkt: '2024-08-08T00:00:00',
@@ -55,7 +55,7 @@ export const InntektsmeldingDefault: Story = {
         opprettet: '2024-07-15',
         avsluttet: '2024-08-15',
       },
-    ] as BehandlingAppKontekst[],
+    ] as FagsakBehandlingDto[],
     arbeidsgiverOpplysningerPerId: {
       ['1']: { navn: 'Rema 1000' } as ArbeidsgiverOpplysninger,
       ['2']: { navn: 'Kiwi' } as ArbeidsgiverOpplysninger,
@@ -63,7 +63,7 @@ export const InntektsmeldingDefault: Story = {
     },
     behandling: {
       uuid: 'UUID2',
-    } as Behandling,
+    } as BehandlingFpSak,
     inntektsmeldinger: [
       {
         ...inntektsmeldingmal,

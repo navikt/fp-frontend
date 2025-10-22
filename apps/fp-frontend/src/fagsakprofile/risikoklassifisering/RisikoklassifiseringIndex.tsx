@@ -4,8 +4,15 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { type AvklartRisikoklassifiseringAp, RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
-import type { AksessRettigheter, Behandling, BehandlingAppKontekst, Fagsak, NavAnsatt } from '@navikt/fp-types';
-import { erAksjonspunktÅpent, notEmpty, useTrackRouteParam } from '@navikt/fp-utils';
+import type {
+  AksessRettigheter,
+  Behandling,
+  BehandlingFpSak,
+  Fagsak,
+  FagsakBehandlingDtoFpSak,
+  NavAnsatt,
+} from '@navikt/fp-types';
+import { erAksjonspunktÅpent, erTilbakekrevingBehandling, notEmpty, useTrackRouteParam } from '@navikt/fp-utils';
 
 import { getRiskPanelLocationCreator } from '../../app/paths';
 import { getAccessRights } from '../../app/util/access';
@@ -49,7 +56,10 @@ export const RisikoklassifiseringIndex = ({ fagsakData, behandling, setBehandlin
 
   // Hvis behandlingen ikke har kontrollresultat viser vi gjeldende kontrollresultat på
   // fagsaken (siste vedtatte førstegangssøknad) slik at vi kan vi se resultat også i revurderinger
-  return behandling && behandlingAppKontekst ? (
+  return behandling &&
+    behandlingAppKontekst &&
+    !erTilbakekrevingBehandling(behandlingAppKontekst) &&
+    !erTilbakekrevingBehandling(behandling) ? (
     <RisikoklassifiseringBehandling
       isRiskPanelOpen={isRiskPanelOpen}
       fagsak={fagsak}
@@ -71,8 +81,8 @@ export const RisikoklassifiseringIndex = ({ fagsakData, behandling, setBehandlin
 
 interface RisikoBehandlingProps {
   fagsak: Fagsak;
-  behandling: Behandling;
-  behandlingAppKontekst: BehandlingAppKontekst;
+  behandling: BehandlingFpSak;
+  behandlingAppKontekst: FagsakBehandlingDtoFpSak;
   isRiskPanelOpen: boolean;
   toggleRiskPanel: () => void;
   setBehandling: (behandling: Behandling) => void;

@@ -9,7 +9,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import {
   type Aksjonspunkt,
-  type Behandling,
+  type BehandlingFpSak,
   type Behandlingsresultat,
   type BehandlingStatus,
   isAvslag,
@@ -44,7 +44,7 @@ const finnSkalViseLink = (behandlingsresultat: Behandlingsresultat): boolean =>
 
 const harIkkeKonsekvenserForYtelsen = (
   konsekvenserForYtelsenKoder: string[],
-  behandlingResultat?: Behandling['behandlingsresultat'],
+  behandlingResultat?: BehandlingFpSak['behandlingsresultat'],
 ): boolean => {
   if (!behandlingResultat) {
     return true;

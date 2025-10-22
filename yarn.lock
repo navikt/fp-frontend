@@ -3951,6 +3951,7 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-utils": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
     "@navikt/ft-form-hooks": 9.3.0
     "@navikt/ft-form-validators": 4.2.12

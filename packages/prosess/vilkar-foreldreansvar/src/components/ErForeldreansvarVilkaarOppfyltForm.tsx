@@ -12,7 +12,7 @@ import {
   validerApKodeOgHentApEnum,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Behandling, VilkårType } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, VilkårType } from '@navikt/fp-types';
 import type {
   Foreldreansvarsvilkar1Ap,
   Foreldreansvarsvilkar2Ap,
@@ -112,7 +112,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({ isEngangsstonad, isForeldre
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
-  behandlingsresultat?: Behandling['behandlingsresultat'],
+  behandlingsresultat?: BehandlingFpSak['behandlingsresultat'],
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),

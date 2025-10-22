@@ -6,7 +6,7 @@ import { Alert, BodyShort, Button, Heading, HStack, Spacer, VStack } from '@navi
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import type { Aksjonspunkt, ArbeidOgInntektsmelding, Behandling, ManueltArbeidsforhold } from '@navikt/fp-types';
+import type { Aksjonspunkt, ArbeidOgInntektsmelding, BehandlingFpSak, ManueltArbeidsforhold } from '@navikt/fp-types';
 import { AksjonspunktÅrsak } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
@@ -15,7 +15,7 @@ import { MANUELT_ORG_NR, ManueltLagtTilArbeidsforholdForm } from './manuelt/Manu
 import styles from './arbeidsOgInntektOverstyrPanel.module.css';
 
 interface Props {
-  behandling: Behandling;
+  behandling: BehandlingFpSak;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   arbeidOgInntekt: ArbeidOgInntektsmelding;

@@ -2,7 +2,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen } from '@testing-library/react';
 
-import type { BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
+import type { Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
 
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingerIndex } from './BehandlingerIndex';
@@ -15,7 +15,7 @@ describe('BehandlingerIndex', () => {
         {
           uuid: '1',
         },
-      ] as BehandlingAppKontekst[],
+      ] as FagsakBehandlingDto[],
     } as Fagsak;
 
     render(

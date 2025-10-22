@@ -8,7 +8,7 @@ import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@na
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
-  Behandling,
+  BehandlingFpSak,
   Fagsak,
   FamilieHendelse,
   Personoversikt,
@@ -48,7 +48,7 @@ const behandling = {
   },
   status: 'UTRED',
   språkkode: '-',
-} as Behandling;
+} as BehandlingFpSak;
 
 const uttakStonadskontoer = {
   tapteDagerFpff: 1,

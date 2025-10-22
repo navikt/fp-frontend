@@ -8,7 +8,7 @@ import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
 import type {
-  BehandlingAppKontekst,
+  FagsakBehandlingDto,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
   KonsekvensForYtelsen,
@@ -17,6 +17,7 @@ import type {
   VurderÅrsak,
 } from '@navikt/fp-types';
 
+import { erTilbakekrevingBehandling } from '../../../../utils/src/tilbakekrevingUtils';
 import {
   type AksjonspunktGodkjenningData,
   AksjonspunktGodkjenningFieldArray,
@@ -30,12 +31,12 @@ const erAlleGodkjentEllerAvvist = (formState: AksjonspunktGodkjenningData[] = []
 
 const harIkkeKonsekvenserForYtelsen = (
   konsekvenserForYtelsenKoder: KonsekvensForYtelsen[],
-  behandlingResultat?: BehandlingAppKontekst['behandlingsresultat'],
+  behandling: FagsakBehandlingDto,
 ) => {
-  if (!behandlingResultat) {
+  if (!behandling.behandlingsresultat || erTilbakekrevingBehandling(behandling)) {
     return true;
   }
-  const { konsekvenserForYtelsen } = behandlingResultat;
+  const { konsekvenserForYtelsen } = behandling.behandlingsresultat;
   if (!Array.isArray(konsekvenserForYtelsen) || konsekvenserForYtelsen.length !== 1) {
     return true;
   }
@@ -85,7 +86,7 @@ const buildInitialValues = (totrinnskontrollSkjermlenkeContext: Totrinnskontroll
 });
 
 interface Props {
-  behandling: BehandlingAppKontekst;
+  behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   forhandsvisVedtaksbrev: () => void;
   readOnly: boolean;
@@ -119,7 +120,7 @@ export const TotrinnskontrollBeslutterForm = ({
   const erAnke = behandling.type === 'BT-008';
   const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
     ['ENDRING_I_FORDELING_AV_YTELSEN', 'INGEN_ENDRING'],
-    behandling.behandlingsresultat,
+    behandling,
   );
 
   const defaultValues = buildInitialValues(totrinnskontrollSkjermlenkeContext);
