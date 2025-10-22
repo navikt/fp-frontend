@@ -1,6 +1,7 @@
-import type { FagsakDataFpTilbake } from '@navikt/fp-types';
+import type { SakFullDtoFpTilbake } from '@navikt/fp-types';
 
-export const fagsakFullTilbake: FagsakDataFpTilbake = {
+export const fagsakFullTilbake: SakFullDtoFpTilbake = {
+  saksnummer: '123456',
   behandlingTypeKanOpprettes: [
     {
       behandlingType: 'BT-007',

@@ -4,7 +4,14 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import type { Location } from 'history';
 
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag, SkjermlenkeType } from '@navikt/fp-types';
+import type {
+  AlleKodeverk,
+  AlleKodeverkTilbakekreving,
+  Historikkinnslag,
+  HistorikkinnslagDtoFpTilbake,
+  SkjermlenkeType,
+  SkjermlenkeTypeFpTilbake,
+} from '@navikt/fp-types';
 
 import { Historikk } from './components/Historikk';
 
@@ -14,14 +21,14 @@ const intl = createIntl(messages);
 
 interface Props {
   historikkFpSak?: Historikkinnslag[];
-  historikkFpTilbake?: Historikkinnslag[];
+  historikkFpTilbake?: HistorikkinnslagDtoFpTilbake[];
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
   alleKodeverkFpSak: AlleKodeverk;
   saksnummer: string;
   getBehandlingLocation: (behandlingUuid: string) => Location;
   createLocationForSkjermlenke: (
     behandlingLocation: Location,
-    skjermlenkeCode: SkjermlenkeType,
+    skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake,
   ) => Location | undefined;
   valgtBehandlingUuid?: string;
   utvidEllerMinskBehandlingDetaljerKnapp: ReactElement;

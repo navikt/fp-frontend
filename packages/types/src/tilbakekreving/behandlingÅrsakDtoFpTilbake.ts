@@ -2,6 +2,4 @@ import type { BehandlingÅrsakTypeFpTilbake } from './behandlingÅrsakTypeFpTilb
 
 export type BehandlingÅrsakDtoFpTilbake = {
   behandlingArsakType: BehandlingÅrsakTypeFpTilbake;
-  erAutomatiskRevurdering: boolean;
-  manueltOpprettet: boolean;
 };

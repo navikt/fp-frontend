@@ -3,15 +3,20 @@ import { NavLink } from 'react-router-dom';
 import { BodyShort } from '@navikt/ds-react';
 import { type Location } from 'history';
 
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, SkjermlenkeType } from '@navikt/fp-types';
+import type {
+  AlleKodeverk,
+  AlleKodeverkTilbakekreving,
+  SkjermlenkeType,
+  SkjermlenkeTypeFpTilbake,
+} from '@navikt/fp-types';
 
 interface Props {
-  skjermlenke?: SkjermlenkeType;
+  skjermlenke?: SkjermlenkeType | SkjermlenkeTypeFpTilbake;
   behandlingLocation: Location | undefined;
   alleKodeverk: AlleKodeverkTilbakekreving | AlleKodeverk;
   createLocationForSkjermlenke: (
     behandlingLocation: Location,
-    skjermlenkeKode: SkjermlenkeType,
+    skjermlenkeKode: SkjermlenkeType | SkjermlenkeTypeFpTilbake,
   ) => Location | undefined;
 }
 

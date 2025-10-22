@@ -2,6 +2,7 @@ import { buildPath, formatQueryString, parseQueryString } from '@navikt/ft-utils
 import type { Location, Search } from 'history';
 
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
+import type { SkjermlenkeType, SkjermlenkeTypeFpTilbake } from '@navikt/fp-types';
 
 export const JOURNALFØRING_PATH = 'journalforing';
 export const UTBETALINGSDATA_PATH = 'utbetalingsdata';
@@ -77,13 +78,9 @@ export const getLocationWithDefaultProsessStegAndFakta = (location: Location): L
 
 export const createLocationForSkjermlenke = (
   behandlingLocation: Location,
-  skjermlenkeCode: string,
+  skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake,
 ): Location | undefined => {
   const skjermlenke = skjermlenkeCodes[skjermlenkeCode];
-
-  if (!skjermlenke) {
-    return undefined;
-  }
   return getLocationWithQueryParams(behandlingLocation, { punkt: skjermlenke.punktNavn, fakta: skjermlenke.faktaNavn });
 };
 

@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 
-import type { Historikkinnslag } from '@navikt/fp-types';
+import type { Historikkinnslag, HistorikkinnslagDtoFpTilbake } from '@navikt/fp-types';
 
 import { sortAndTagTilbakekreving } from './historikkUtils';
 
@@ -26,7 +26,7 @@ const historikkInnslagTilbake = [
   {
     opprettetTidspunkt: '2024-12-17T11:06:14.361',
   },
-] as Historikkinnslag[];
+] as HistorikkinnslagDtoFpTilbake[];
 
 describe('historikkUtils', () => {
   it('sorterer historikk', () => {

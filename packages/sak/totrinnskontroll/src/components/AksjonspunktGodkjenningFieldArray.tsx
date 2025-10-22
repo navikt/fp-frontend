@@ -10,6 +10,7 @@ import type {
   KodeverkMedNavnTilbakekreving,
   SkjermlenkeType,
   TotrinnskontrollSkjermlenkeContext,
+  TotrinnskontrollSkjermlenkeContextDtoFpTilbake,
 } from '@navikt/fp-types';
 
 import { getAksjonspunkttekst } from './aksjonspunktTekster/aksjonspunktTekstUtleder';
@@ -33,7 +34,10 @@ export type AksjonspunktGodkjenningData = {
 
 type Props = {
   behandling: FagsakBehandlingDto;
-  totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
+  totrinnskontrollSkjermlenkeContext: (
+    | TotrinnskontrollSkjermlenkeContext
+    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+  )[];
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
   erTilbakekreving: boolean;

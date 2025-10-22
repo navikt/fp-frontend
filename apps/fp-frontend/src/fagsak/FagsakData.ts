@@ -2,20 +2,21 @@ import type {
   BehandlingOppretting,
   Fagsak,
   FagsakBehandlingDto,
-  FagsakDataFpTilbake,
   Historikkinnslag,
+  HistorikkinnslagDtoFpTilbake,
+  SakFullDtoFpTilbake,
 } from '@navikt/fp-types';
 
 export class FagsakData {
   private $$fagsak: Fagsak;
 
-  private $$fpTilbakeFagsakData?: FagsakDataFpTilbake;
+  private $$fpTilbakeFagsakData?: SakFullDtoFpTilbake;
 
   private $$behandlingOppretting: BehandlingOppretting[];
 
   private $$alleBehandlinger: FagsakBehandlingDto[];
 
-  constructor(fagsak: Fagsak, fpTilbakeFagsakData?: FagsakDataFpTilbake) {
+  constructor(fagsak: Fagsak, fpTilbakeFagsakData?: SakFullDtoFpTilbake) {
     this.$$fagsak = fagsak;
     this.$$fpTilbakeFagsakData = fpTilbakeFagsakData;
 
@@ -58,7 +59,7 @@ export class FagsakData {
     return this.$$fagsak.historikkinnslag;
   }
 
-  getHistorikkFpTilbake(): Historikkinnslag[] | undefined {
+  getHistorikkFpTilbake(): HistorikkinnslagDtoFpTilbake[] | undefined {
     return this.$$fpTilbakeFagsakData?.historikkinnslag;
   }
 }

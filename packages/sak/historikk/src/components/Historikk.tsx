@@ -4,7 +4,14 @@ import { useIntl } from 'react-intl';
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag, SkjermlenkeType } from '@navikt/fp-types';
+import type {
+  AlleKodeverk,
+  AlleKodeverkTilbakekreving,
+  Historikkinnslag,
+  HistorikkinnslagDtoFpTilbake,
+  SkjermlenkeType,
+  SkjermlenkeTypeFpTilbake,
+} from '@navikt/fp-types';
 
 import { sortAndTagTilbakekreving } from '../utils/historikkUtils';
 import { HistorikkInnslag } from './HistorikkInnslag/HistorikkInnslag';
@@ -14,14 +21,14 @@ import styles from './historikk.module.css';
 interface Props {
   valgtBehandlingUuid?: string;
   historikkFpSak: Historikkinnslag[];
-  historikkFpTilbake: Historikkinnslag[];
+  historikkFpTilbake: HistorikkinnslagDtoFpTilbake[];
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
   alleKodeverkFpSak: AlleKodeverk;
   saksnummer: string;
   getBehandlingLocation: (behandlingUuid: string) => Location;
   createLocationForSkjermlenke: (
     behandlingLocation: Location,
-    skjermlenkeCode: SkjermlenkeType,
+    skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake,
   ) => Location | undefined;
   utvidEllerMinskBehandlingDetaljerKnapp: ReactElement;
 }

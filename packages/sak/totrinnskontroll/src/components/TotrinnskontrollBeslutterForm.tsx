@@ -13,7 +13,9 @@ import type {
   KodeverkMedNavnTilbakekreving,
   KonsekvensForYtelsen,
   SkjermlenkeType,
+  SkjermlenkeTypeFpTilbake,
   TotrinnskontrollSkjermlenkeContext,
+  TotrinnskontrollSkjermlenkeContextDtoFpTilbake,
   VurderÅrsak,
 } from '@navikt/fp-types';
 
@@ -73,7 +75,12 @@ export type FormValues = {
   aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
 };
 
-const buildInitialValues = (totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[]): FormValues => ({
+const buildInitialValues = (
+  totrinnskontrollSkjermlenkeContext: (
+    | TotrinnskontrollSkjermlenkeContext
+    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+  )[],
+): FormValues => ({
   aksjonspunktGodkjenning: totrinnskontrollSkjermlenkeContext
     .map(context => context.totrinnskontrollAksjonspunkter)
     .flat()
@@ -87,7 +94,10 @@ const buildInitialValues = (totrinnskontrollSkjermlenkeContext: Totrinnskontroll
 
 interface Props {
   behandling: FagsakBehandlingDto;
-  totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
+  totrinnskontrollSkjermlenkeContext: (
+    | TotrinnskontrollSkjermlenkeContext
+    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+  )[];
   forhandsvisVedtaksbrev: () => void;
   readOnly: boolean;
   erTilbakekreving: boolean;
@@ -95,7 +105,7 @@ interface Props {
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   erBehandlingEtterKlage: boolean;
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
-  lagLenke: (skjermlenkeCode: SkjermlenkeType) => Location | undefined;
+  lagLenke: (skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake) => Location | undefined;
   onSubmit: (data: FormValues) => void;
   beslutterFormData?: FormValues;
   setBeslutterFormData: (data?: FormValues) => void;
