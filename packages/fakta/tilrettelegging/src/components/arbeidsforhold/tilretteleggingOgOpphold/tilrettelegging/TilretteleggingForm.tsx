@@ -234,14 +234,14 @@ export const TilretteleggingForm = ({
               ),
               validerAtPeriodeErGyldig(intl, arbeidsforhold.tilretteleggingBehovFom, termindato),
             ]}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
           />
           <RhfRadioGroup
             name={`${index}.type`}
             control={formMethods.control}
-            label={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
+            legend={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
             validate={[required]}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
           >
             <Radio value="HEL_TILRETTELEGGING" size="small">
               <FormattedMessage id="TilretteleggingForm.KanGjennomfores" />

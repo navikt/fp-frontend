@@ -38,9 +38,9 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
       <RhfRadioGroup
         name="ektefellesBarn"
         control={control}
-        label={<FormattedMessage id="EktefelleFaktaForm.APSpørsmål" />}
+        legend={<FormattedMessage id="EktefelleFaktaForm.APSpørsmål" />}
         validate={[required]}
-        isReadOnly={readOnly}
+        readOnly={readOnly}
         isEdited={hasValue(adopsjon.ektefellesBarn)}
       >
         <Radio value={true}>

@@ -60,7 +60,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
             <RhfRadioGroup
               name="fagsakYtelseType"
               control={formMethods.control}
-              label={<FormattedMessage id="Registrering.Omsoknaden.soknadstype" />}
+              legend={<FormattedMessage id="Registrering.Omsoknaden.soknadstype" />}
               validate={[required]}
             >
               {fagsakYtelseTyper.map(fyt => (
@@ -74,7 +74,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
               <RhfRadioGroup
                 name="familieHendelseType"
                 control={formMethods.control}
-                label={<FormattedMessage id="Registrering.Omsoknaden.Tema" />}
+                legend={<FormattedMessage id="Registrering.Omsoknaden.Tema" />}
                 validate={[required]}
               >
                 {familieHendelseTyper
@@ -90,7 +90,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
             <RhfRadioGroup
               name="foreldreType"
               control={formMethods.control}
-              label={<FormattedMessage id="Registrering.Omsoknaden.Soker" />}
+              legend={<FormattedMessage id="Registrering.Omsoknaden.Soker" />}
               validate={[required]}
             >
               {foreldreTyper.map(ft => (

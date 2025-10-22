@@ -246,7 +246,7 @@ export const SokersOpplysningspliktForm = ({ soknad, status, arbeidsgiverOpplysn
           )}
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
           {!isReadOnly && (
-            <RhfRadioGroup name="erVilkarOk" control={formMethods.control} validate={[required]}>
+            <RhfRadioGroup name="erVilkarOk" control={formMethods.control} legend="" hideLegend validate={[required]}>
               <HStack gap="space-16">
                 <Radio value={true} size="small" disabled={!hasSoknad}>
                   <FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />

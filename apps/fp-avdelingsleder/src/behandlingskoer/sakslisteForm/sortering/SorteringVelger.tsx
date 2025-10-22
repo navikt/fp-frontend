@@ -60,7 +60,7 @@ export const SorteringVelger = ({
     <RhfRadioGroup
       name="sortering"
       control={control}
-      label={<FormattedMessage id="SorteringVelger.Sortering" />}
+      legend={<FormattedMessage id="SorteringVelger.Sortering" />}
       onChange={sorteringType => {
         resetField('fra', { defaultValue: '' });
         resetField('til', { defaultValue: '' });

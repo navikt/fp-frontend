@@ -117,7 +117,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               />
             </div>
             <RhfDatepicker
-              isReadOnly={readOnly}
+              readOnly={readOnly}
               control={control}
               name={`${getPrefix(index)}.periodeFom`}
               label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }))}
@@ -130,7 +130,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
             <RhfDatepicker
-              isReadOnly={readOnly}
+              readOnly={readOnly}
               control={control}
               name={`${getPrefix(index)}.periodeTom`}
               label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }))}
@@ -156,7 +156,6 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
                 hideValueOnDisable
               />
             )}
-
             <div>
               <RhfCheckbox
                 name={`${getPrefix(index)}.flerbarnsdager`}
@@ -173,7 +172,6 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
                 label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
               />
             </div>
-
             {periode?.harSamtidigUttak && (
               <RhfTextField
                 name={`${getPrefix(index)}.samtidigUttaksprosent`}
@@ -185,7 +183,6 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
                 }
               />
             )}
-
             {periodeFomForTidlig && (
               <Alert size="small" variant="warning">
                 <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />

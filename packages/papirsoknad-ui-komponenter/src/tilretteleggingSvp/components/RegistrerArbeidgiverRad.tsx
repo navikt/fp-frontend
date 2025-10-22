@@ -64,7 +64,7 @@ export const RegistrerArbeidsgiverRad = ({ open, readOnly = false, index, remove
               control={control}
               label={intl.formatMessage({ id: 'RegistrerArbeidsgiverRad.TilretteleggingFra' })}
               validate={[required]}
-              isReadOnly={readOnly}
+              readOnly={readOnly}
             />
           </HStack>
           <BehovForTilretteleggingFieldArray

@@ -132,8 +132,10 @@ export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfris
               <RhfRadioGroup
                 name="gyldigSenFremsetting"
                 control={formMethods.control}
+                legend=""
+                hideLegend
                 validate={[required]}
-                isReadOnly={isReadOnly}
+                readOnly={isReadOnly}
                 isEdited={isEdited(aksjonspunkterForPanel.length > 0, gyldigSenFremsetting)}
               >
                 <HStack gap="space-16">
@@ -150,7 +152,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfris
                   <RhfDatepicker
                     name="ansesMottatt"
                     control={formMethods.control}
-                    isReadOnly={isReadOnly}
+                    readOnly={isReadOnly}
                     label={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.NyMottattDato" />}
                     validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
                   />

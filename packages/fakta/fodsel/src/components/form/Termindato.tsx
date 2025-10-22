@@ -39,7 +39,7 @@ export const Termindato = ({ isReadOnly, isRequired = true }: TermindatoProps) =
       fromDate={minTermindato().toDate()}
       toDate={maxTermindato().toDate()}
       defaultMonth={new Date()}
-      isReadOnly={isReadOnly}
+      readOnly={isReadOnly}
     />
   );
 };

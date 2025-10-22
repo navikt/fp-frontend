@@ -119,7 +119,7 @@ export const ArbeidsforholdPanel = ({
             id: 'TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging',
           })}
           validate={[required, hasValidDate, validerTidligereEnn(intl, getValues, tilretteleggingBehovFom)]}
-          isReadOnly={readOnly}
+          readOnly={readOnly}
         />
         {filtrerteVelferdspermisjoner.length > 0 && (
           <VelferdspermisjonPanel

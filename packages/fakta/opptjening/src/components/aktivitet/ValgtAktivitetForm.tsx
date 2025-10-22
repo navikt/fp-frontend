@@ -202,9 +202,10 @@ export const ValgtAktivitetForm = ({
             <RhfRadioGroup
               name="erGodkjent"
               control={formMethods.control}
+              legend=""
               hideLegend
               validate={[required]}
-              isReadOnly={readOnly}
+              readOnly={readOnly}
               isEdited={erEndret}
             >
               <HStack gap="space-16">

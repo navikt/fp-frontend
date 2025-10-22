@@ -90,9 +90,9 @@ export const OmsorgOgAdopsjonPanel = ({
             // @ts-expect-error Her er det noko rart med typane
             name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
             control={control}
-            label={<FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />}
+            legend={<FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />}
             validate={[required]}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
           >
             <HStack gap="space-16">
               <Radio value={true} size="small">
@@ -113,7 +113,7 @@ export const OmsorgOgAdopsjonPanel = ({
                 ? 'Registrering.Adopsjon.DatoForOvertakelsenStebarn'
                 : 'Registrering.Adopsjon.DatoForOvertakelsen',
           })}
-          isReadOnly={readOnly}
+          readOnly={readOnly}
           validate={familieHendelseType === 'ADPSJN' ? [required, hasValidDate] : [hasValidDate]}
         />
         <HStack gap="space-16">
@@ -140,7 +140,7 @@ export const OmsorgOgAdopsjonPanel = ({
             <RhfDatepicker
               name={`${OMSORG_NAME_PREFIX}.foedselsDato.${index}.dato`}
               control={control}
-              isReadOnly={readOnly}
+              readOnly={readOnly}
               validate={
                 familieHendelseType === 'ADPSJN'
                   ? [

@@ -86,9 +86,9 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
           <RhfRadioGroup
             name="erBarnetFodt"
             control={control}
-            label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
+            legend={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
             validate={[required]}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
           >
             <Radio value={true} size="small">
               <FormattedMessage id="Registrering.TerminOgFodsel.ErFodt" />
@@ -106,7 +106,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                       name="termindato"
                       control={control}
                       label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Termindato' })}
-                      isReadOnly={readOnly}
+                      readOnly={readOnly}
                       fromDate={minTermindato().toDate()}
                       toDate={maxTermindato().toDate()}
                       defaultMonth={new Date()}
@@ -133,7 +133,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                     name="terminbekreftelseDato"
                     control={control}
                     label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.UtstedtDato' })}
-                    isReadOnly={readOnly}
+                    readOnly={readOnly}
                     fromDate={minTerminbekreftelseDato().toDate()}
                     toDate={maxTerminbekreftelseDato().toDate()}
                     defaultMonth={new Date()}
@@ -148,7 +148,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                       name="foedselsDato"
                       control={control}
                       label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Fodselsdato' })}
-                      isReadOnly={readOnly}
+                      readOnly={readOnly}
                       validate={[required, hasValidDate, dateAfterOrEqual(minFodselsdato()), dateBeforeOrEqualToToday]}
                       fromDate={minFodselsdato().toDate()}
                       toDate={maxFodselsdato().toDate()}
@@ -176,7 +176,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                     name="termindato"
                     control={control}
                     label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Termindato' })}
-                    isReadOnly={readOnly}
+                    readOnly={readOnly}
                     validate={[
                       hasValidDate,
                       dateAfterOrEqual(minTermindato()),

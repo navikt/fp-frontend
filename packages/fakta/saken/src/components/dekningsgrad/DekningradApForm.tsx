@@ -127,9 +127,9 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
             <RhfRadioGroup
               name="dekningsgrad"
               control={formMethods.control}
-              label={<FormattedMessage id="DekningradApForm.HvilkenDekningsgrad" />}
+              legend={<FormattedMessage id="DekningradApForm.HvilkenDekningsgrad" />}
               validate={[required]}
-              isReadOnly={isReadOnly}
+              readOnly={isReadOnly}
             >
               <Radio value={80} size="small">
                 <FormattedMessage id="DekningradApForm.80" />

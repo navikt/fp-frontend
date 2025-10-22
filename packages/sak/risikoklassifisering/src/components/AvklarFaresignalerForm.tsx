@@ -73,9 +73,9 @@ export const AvklarFaresignalerForm = ({
         <RhfRadioGroup
           name={VURDERING_HOVEDKATEGORI}
           control={formMethods.control}
-          label={<FormattedMessage id="Risikopanel.RhfForm.Resultat" />}
+          legend={<FormattedMessage id="Risikopanel.RhfForm.Resultat" />}
           validate={[required]}
-          isReadOnly={readOnly}
+          readOnly={readOnly}
         >
           <VStack gap="space-12">
             <Radio value="INNVIRKNING" size="small">
@@ -86,8 +86,10 @@ export const AvklarFaresignalerForm = ({
                 <RhfRadioGroup
                   name={IKKE_REELLE_VURDERINGER_UNDERKATEGORI}
                   control={formMethods.control}
+                  legend=""
+                  hideLegend
                   validate={[required]}
-                  isReadOnly={readOnly}
+                  readOnly={readOnly}
                 >
                   {underkategoriFaresignalVurderinger.map(vurdering => (
                     <Radio key={vurdering.kode} value={vurdering.kode} size="small">

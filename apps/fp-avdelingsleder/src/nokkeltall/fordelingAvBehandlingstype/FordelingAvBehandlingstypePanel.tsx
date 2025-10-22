@@ -60,7 +60,7 @@ export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, ge
         <Label size="small">
           <FormattedMessage id="FordelingAvBehandlingstypePanel.Fordeling" />
         </Label>
-        <RhfRadioGroup name="valgtYtelseType" control={formMethods.control}>
+        <RhfRadioGroup name="valgtYtelseType" control={formMethods.control} legend="" hideLegend>
           <HStack gap="space-16">
             <Radio value="FP" size="small">
               {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'FP')}

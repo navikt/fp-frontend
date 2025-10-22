@@ -156,7 +156,7 @@ export const TilretteleggingFaktaForm = ({
             control={formMethods.control}
             label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
             validate={[required, hasValidDate]}
-            isReadOnly={readonly}
+            readOnly={readonly}
           />
           {fødselsdato && (
             <RhfDatepicker
@@ -164,7 +164,7 @@ export const TilretteleggingFaktaForm = ({
               control={formMethods.control}
               label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
               validate={[required, hasValidDate]}
-              isReadOnly={readonly}
+              readOnly={readonly}
             />
           )}
         </HStack>

@@ -92,10 +92,10 @@ export const VelferdspermisjonForm = ({
           <RhfRadioGroup
             name={`${permisjonIndex}.erGyldig`}
             control={formMethods.control}
-            label={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldig' })}
+            legend={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldig' })}
             description={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldigDetaljer' })}
             validate={[required]}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
           >
             <Radio value={true} size="small">
               <FormattedMessage id="VelferdspermisjonPanel.Ja" />

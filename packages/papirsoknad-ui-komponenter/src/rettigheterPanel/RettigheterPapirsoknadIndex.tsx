@@ -62,7 +62,7 @@ export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => 
         <Heading size="small" level="3">
           {intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}
         </Heading>
-        <RhfRadioGroup name="rettigheter" control={control} isReadOnly={readOnly}>
+        <RhfRadioGroup name="rettigheter" control={control} legend="" hideLegend readOnly={readOnly}>
           {options.map(o => (
             <Radio key={o.value} value={o.value} size="small">
               {o.label}

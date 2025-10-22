@@ -149,7 +149,7 @@ export const OppholdForm = ({
                 validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold),
                 validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
               ]}
-              isReadOnly={forVisning}
+              readOnly={forVisning}
             />
             <RhfDatepicker
               name={`${index}.tom`}
@@ -164,15 +164,15 @@ export const OppholdForm = ({
                 validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
                 validerAtPeriodeIkkeOverlapper(formMethods.getValues, index, opphold, alleOpphold),
               ]}
-              isReadOnly={forVisning}
+              readOnly={forVisning}
             />
           </HStack>
           <RhfRadioGroup
             name={`${index}.oppholdÅrsak`}
             control={formMethods.control}
-            label={intl.formatMessage({ id: 'OppholdForm.GrunnTilOpphold' })}
+            legend={intl.formatMessage({ id: 'OppholdForm.GrunnTilOpphold' })}
             validate={[required]}
-            isReadOnly={forVisning}
+            readOnly={forVisning}
           >
             <Radio value="SYKEPENGER" size="small">
               <FormattedMessage id="OppholdForm.Sykepenger" />

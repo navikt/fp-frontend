@@ -59,9 +59,9 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
         <RhfRadioGroup
           name="erBarnetFodt"
           control={control}
-          label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
+          legend={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
           validate={[required]}
-          isReadOnly={readOnly}
+          readOnly={readOnly}
         >
           <Radio value={true} size="small">
             {intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErFodt' })}
@@ -75,7 +75,7 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
             name="foedselsDato"
             control={control}
             label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Fodselsdato' })}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
             fromDate={minFodselsdato().toDate()}
             toDate={maxFodselsdato().toDate()}
             validate={[required, hasValidDate, dateBeforeOrEqualToToday, dateAfterOrEqual(minFodselsdato())]}
@@ -85,7 +85,7 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
           name="termindato"
           control={control}
           label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Termindato' })}
-          isReadOnly={readOnly}
+          readOnly={readOnly}
           fromDate={minTermindato().toDate()}
           toDate={maxTermindato().toDate()}
           defaultMonth={new Date()}

@@ -61,9 +61,9 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
       <RhfRadioGroup
         name="videreBehandling"
         control={control}
-        label={<FormattedMessage id="Simulering.videreBehandling" />}
+        legend={<FormattedMessage id="Simulering.videreBehandling" />}
         validate={[required]}
-        isReadOnly={readOnly}
+        readOnly={readOnly}
       >
         <VStack gap="space-2">
           <Radio value={'TILBAKEKR_OPPRETT' satisfies TilbakekrevingVidereBehandling} size="small">

@@ -36,7 +36,7 @@ export const TrueFalseInput = <T extends FieldValues>({
   const value = watch(name);
 
   return (
-    <RhfRadioGroup name={name} control={control} label={label} validate={[required]} isReadOnly={readOnly}>
+    <RhfRadioGroup name={name} control={control} legend={label} validate={[required]} readOnly={readOnly}>
       <VStack gap="space-2">
         <VStack gap="space-16">
           <Radio value={true} size="small">

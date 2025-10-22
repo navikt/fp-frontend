@@ -89,9 +89,10 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
               <RhfRadioGroup
                 name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.arsak`}
                 control={control}
+                legend=""
                 hideLegend
                 validate={[required]}
-                isReadOnly={readOnly}
+                readOnly={readOnly}
               >
                 <Radio value={'UKJENT_FORELDER' satisfies KanIkkeOppgiAnnenForelderArsak} size="small">
                   <FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1" />

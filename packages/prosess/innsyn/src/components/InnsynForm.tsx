@@ -122,7 +122,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
           name="mottattDato"
           control={formMethods.control}
           label={intl.formatMessage({ id: 'InnsynForm.DatoMottattKrav' })}
-          isReadOnly={isReadOnly}
+          readOnly={isReadOnly}
           isEdited={!isApOpen}
           validate={[required, hasValidDate]}
         />
@@ -136,9 +136,9 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
           <RhfRadioGroup
             name="innsynResultatType"
             control={formMethods.control}
-            label={<FormattedMessage id="InnsynForm.Resultat" />}
+            legend={<FormattedMessage id="InnsynForm.Resultat" />}
             validate={[required]}
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
             isEdited={!isApOpen}
           >
             <HStack gap="space-16">
@@ -155,9 +155,9 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
                 <RhfRadioGroup
                   name="sattPaVent"
                   control={formMethods.control}
-                  label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
+                  legend={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
                   validate={[required]}
-                  isReadOnly={isReadOnly}
+                  readOnly={isReadOnly}
                   isEdited={!isApOpen}
                 >
                   <HStack gap="space-16">
@@ -174,7 +174,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
                     name="fristDato"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
-                    isReadOnly={isReadOnly}
+                    readOnly={isReadOnly}
                     isEdited={!isApOpen}
                     validate={[required, hasValidDate]}
                   />

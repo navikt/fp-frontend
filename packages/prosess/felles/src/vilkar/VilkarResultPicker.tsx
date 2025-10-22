@@ -68,9 +68,15 @@ export const VilkarResultPicker = ({
           )}
         </HStack>
       )}
-
       {(!isReadOnly || erVilkårOk === undefined) && (
-        <RhfRadioGroup name="erVilkarOk" control={control} validate={radioValidators} isReadOnly={isReadOnly}>
+        <RhfRadioGroup
+          name="erVilkarOk"
+          control={control}
+          legend=""
+          hideLegend
+          validate={radioValidators}
+          readOnly={isReadOnly}
+        >
           <Radio value={true} size="small" disabled={!skalKunneInnvilge}>
             {customVilkårOppfyltText}
           </Radio>
