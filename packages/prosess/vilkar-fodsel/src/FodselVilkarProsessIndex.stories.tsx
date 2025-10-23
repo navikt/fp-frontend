@@ -3,7 +3,12 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import {
+  avslagsårsakerPerVilkår,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, BehandlingFpSak, Vilkar } from '@navikt/fp-types';
 
 import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
@@ -15,10 +20,11 @@ const meta = {
   args: {
     vilkårForPanel: [
       {
+        vilkarType: 'FP_VK_1',
         lovReferanse: '§§Dette er en lovreferanse',
+        aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_1,
       },
     ] as Vilkar[],
-    ytelseTypeKode: 'FP',
   },
   render: args => <FodselVilkarProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselVilkarProsessIndex>>;
@@ -59,7 +65,7 @@ export const AvslåttVilkår: Story = {
       uuid: '1',
       versjon: 1,
       behandlingsresultat: {
-        avslagsarsak: '1099',
+        avslagsarsak: '1002',
       },
     } as BehandlingFpSak,
     aksjonspunkterForPanel: [

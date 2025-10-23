@@ -1,5 +1,6 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { BehandlingFpSak } from '@navikt/fp-types';
+import { avslagsårsakerPerVilkår } from '@navikt/fp-storybook-utils';
 
 export const behandling: BehandlingFpSak = {
   uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
@@ -51,42 +52,42 @@ export const behandling: BehandlingFpSak = {
     {
       vilkarType: 'FP_VK_34',
       vilkarStatus: 'OPPFYLT',
-
+      aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_34,
       lovReferanse: '§§ 21-3',
       overstyrbar: true,
     },
     {
       vilkarType: 'FP_VK_2',
       vilkarStatus: 'OPPFYLT',
-
+      aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_2,
       lovReferanse: '§ 14-2',
       overstyrbar: true,
     },
     {
       vilkarType: 'FP_VK_1',
       vilkarStatus: 'OPPFYLT',
-
+      aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_1,
       lovReferanse: '§ 14-5, 1. ledd',
       overstyrbar: true,
     },
     {
       vilkarType: 'FP_VK_23',
       vilkarStatus: 'OPPFYLT',
-
+      aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_23,
       lovReferanse: '§ 14-6',
       overstyrbar: true,
     },
     {
       vilkarType: 'FP_VK_41',
       vilkarStatus: 'IKKE_VURDERT',
-
+      aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_41,
       lovReferanse: '§ 14-7',
       overstyrbar: true,
     },
     {
       vilkarType: 'FP_VK_21',
       vilkarStatus: 'OPPFYLT',
-
+      aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_21,
       lovReferanse: '§ 14-6 og 14-10',
       overstyrbar: true,
     },

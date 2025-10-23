@@ -40,7 +40,6 @@ export const FodselInngangsvilkarInitPanel = () => {
       hentInngangsvilkårPanelTekst={paneltekst}
     >
       <FodselVilkarProsessIndex
-        ytelseTypeKode="ES"
         status={standardPanelProps.status}
         vilkårForPanel={standardPanelProps.vilkårForPanel}
       />

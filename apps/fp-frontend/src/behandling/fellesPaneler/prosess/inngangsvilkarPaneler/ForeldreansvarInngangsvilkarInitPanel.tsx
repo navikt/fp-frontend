@@ -43,7 +43,6 @@ export const ForeldreansvarInngangsvilkarInitPanel = () => {
     >
       <ForeldreansvarVilkarProsessIndex
         isEngangsstonad
-        isForeldreansvar2Ledd={standardPanelProps.vilkårForPanel.some(v => v.vilkarType === 'FP_VK_8')}
         status={standardPanelProps.status}
       />
     </InngangsvilkarDefaultInitPanel>

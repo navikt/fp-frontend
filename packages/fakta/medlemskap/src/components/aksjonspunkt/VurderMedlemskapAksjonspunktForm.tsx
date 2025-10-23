@@ -78,9 +78,12 @@ export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandli
       medlemFom: avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? medlemFom : undefined,
     });
   };
-  const avslagsårsaker = alleKodeverk['Avslagsårsak'][erForutgåendeAksjonspunkt ? 'FP_VK_2_F' : 'FP_VK_2'].sort(
-    (k1, k2) => k1.navn.localeCompare(k2.navn),
-  );
+  const vilkår = behandling.vilkår.find(v => v.vilkarType === aksjonspunkt.vilkarType);
+  const avslagsårsaker = vilkår
+    ? alleKodeverk['LineærAvslagsårsak']
+        .filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))
+        .sort((k1, k2) => k1.navn.localeCompare(k2.navn))
+    : [];
 
   return (
     <ConditionalWrapper isReadOnly={isReadOnly}>

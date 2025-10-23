@@ -10,3 +10,4 @@ export type { PanelOverstyringContextArgs } from './decorators/withPanelOverstyr
 export { alleKodeverk } from './mocks/alleKodeverk.ts';
 export { alleKodeverkLos } from './mocks/alleKodeverkLos.ts';
 export { alleKodeverkTilbakekreving } from './mocks/alleKodeverkTilbakekreving.ts';
+export { avslagsårsakerPerVilkår, getAvslagsårsakerKodeverkForVilkår } from './mocks/avslagsårsakerPerVilkår.ts';

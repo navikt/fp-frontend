@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   medlemskap?: Medlemskap;
-  avslagsårsaker: KodeverkMedNavn<'Avslagsårsak'>[];
+  avslagsårsaker: KodeverkMedNavn<'LineærAvslagsårsak'>[];
   panelTekstKode: string;
   lovReferanse?: string;
   status: string;

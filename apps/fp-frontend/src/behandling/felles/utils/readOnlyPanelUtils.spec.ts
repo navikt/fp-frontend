@@ -1,6 +1,7 @@
 import type { BehandlingFpSak, Vilkar } from '@navikt/fp-types';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
+import { avslagsårsakerPerVilkår } from '@navikt/fp-storybook-utils';
 
 describe('readOnlyPanelUtils', () => {
   const behandling = {
@@ -17,6 +18,7 @@ describe('readOnlyPanelUtils', () => {
       vilkarType: 'FP_VK_1',
       vilkarStatus: 'OPPFYLT',
       overstyrbar: true,
+      aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_1,
     },
   ];
 

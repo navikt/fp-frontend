@@ -44,6 +44,7 @@ export const AdopsjonVilkarForm = ({ vilkårForPanel, status }: Props) => {
     isReadOnly,
     isSubmittable,
     alleMerknaderFraBeslutter,
+    vilkårForPanel,
   } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
@@ -57,7 +58,9 @@ export const AdopsjonVilkarForm = ({ vilkårForPanel, status }: Props) => {
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const avslagsårsaker = alleKodeverk['Avslagsårsak']['FP_VK_4'];
+  const avslagsårsaker = alleKodeverk['LineærAvslagsårsak'].filter(kodeverk =>
+    vilkårForPanel[0]?.aktuelleAvslagsårsaker.includes(kodeverk.kode)
+  );
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 

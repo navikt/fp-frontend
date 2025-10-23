@@ -12,7 +12,7 @@ import {
   validerApKodeOgHentApEnum,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak, VilkårType } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
 import type {
   Foreldreansvarsvilkar1Ap,
   Foreldreansvarsvilkar2Ap,
@@ -29,7 +29,6 @@ type FormValues = {
 type AksjonspunktData = Array<Foreldreansvarsvilkar1Ap | Foreldreansvarsvilkar2Ap | VurdereYtelseSammeBarnSokerAp>;
 
 interface Props {
-  isForeldreansvar2Ledd: boolean;
   isEngangsstonad: boolean;
   status: string;
 }
@@ -39,7 +38,7 @@ interface Props {
  *
  * Setter opp aksjonspunkter for avklaring av foreldreansvarvilkåret 2 eller 4 ledd.
  */
-export const ErForeldreansvarVilkaarOppfyltForm = ({ isEngangsstonad, isForeldreansvar2Ledd, status }: Props) => {
+export const ErForeldreansvarVilkaarOppfyltForm = ({ isEngangsstonad, status }: Props) => {
   const intl = useIntl();
 
   const {
@@ -51,6 +50,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({ isEngangsstonad, isForeldre
     harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
+    vilkårForPanel
   } = usePanelDataContext<AksjonspunktData>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
@@ -64,8 +64,10 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({ isEngangsstonad, isForeldre
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const vilkarTypeKode: VilkårType = isForeldreansvar2Ledd ? 'FP_VK_8' : 'FP_VK_33';
-  const avslagsårsaker = alleKodeverk['Avslagsårsak'][vilkarTypeKode];
+  const avslagsårsaker =
+  alleKodeverk['LineærAvslagsårsak'].filter(kodeverk =>
+    vilkårForPanel[0]?.aktuelleAvslagsårsaker.includes(kodeverk.kode)
+  );
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 

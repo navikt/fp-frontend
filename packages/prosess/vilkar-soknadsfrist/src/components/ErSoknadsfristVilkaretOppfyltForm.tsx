@@ -86,7 +86,6 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
   const textCode = findTextCode(gjeldendeFamiliehendelse);
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
-
   const antallDagerSoknadLevertForSent = soknad.søknadsfrist.dagerOversittetFrist;
 
   return (
@@ -167,9 +166,8 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
         </RhfRadioGroup>
         {isReadOnly && erVilkarOk === false && !!behandling.behandlingsresultat?.avslagsarsak && (
           <BodyShort size="small">
-            {alleKodeverk['Avslagsårsak']['FP_VK_3'].find(
-              type => type.kode === behandling.behandlingsresultat?.avslagsarsak,
-            )?.navn ?? ''}
+            {alleKodeverk['LineærAvslagsårsak'].find(type => type.kode === behandling.behandlingsresultat?.avslagsarsak)
+              ?.navn ?? ''}
           </BodyShort>
         )}
         <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />

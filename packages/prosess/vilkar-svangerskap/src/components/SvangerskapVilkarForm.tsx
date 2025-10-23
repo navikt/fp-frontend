@@ -99,7 +99,10 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     }
   }, [erVilkarOk]);
 
-  const avslagsårsaker = alleKodeverk['Avslagsårsak']['SVP_VK_1'];
+  const vilkår = behandling.vilkår.find(v => v.vilkarType === 'SVP_VK_1');
+  const avslagsårsaker = vilkår
+    ? alleKodeverk['LineærAvslagsårsak'].filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))
+    : [];
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
