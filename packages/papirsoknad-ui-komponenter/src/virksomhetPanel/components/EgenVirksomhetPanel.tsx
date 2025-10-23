@@ -37,9 +37,10 @@ export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) =>
         <RhfRadioGroup
           name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}
           control={control}
-          validate={[required]}
-          isReadOnly={readOnly}
+          legend=""
           hideLegend
+          validate={[required]}
+          readOnly={readOnly}
         >
           <Radio value={false} size="small">
             <FormattedMessage id="Registrering.EgenVirksomhet.No" />

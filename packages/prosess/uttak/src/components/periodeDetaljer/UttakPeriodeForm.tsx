@@ -151,7 +151,10 @@ const finnDager = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker)
     : '0';
 };
 
-const sorterGradering = (a: KodeverkMedNavn<'GraderingAvslagÅrsak'>, b: KodeverkMedNavn<'GraderingAvslagÅrsak'>): number => {
+const sorterGradering = (
+  a: KodeverkMedNavn<'GraderingAvslagÅrsak'>,
+  b: KodeverkMedNavn<'GraderingAvslagÅrsak'>,
+): number => {
   if (a.navn < b.navn) {
     return -1;
   }
@@ -381,7 +384,7 @@ export const UttakPeriodeForm = ({
         {erHovedsøkersPeriode && !isReadOnly && (
           <>
             <VStack gap="space-12">
-              <RhfRadioGroup name="erOppfylt" control={formMethods.control} hideLegend validate={[required]}>
+              <RhfRadioGroup name="erOppfylt" control={formMethods.control} legend="" hideLegend validate={[required]}>
                 <HStack gap="space-16">
                   <Radio value={true} size="small">
                     <FormattedMessage id="UttakActivity.Oppfylt" />
@@ -408,7 +411,7 @@ export const UttakPeriodeForm = ({
                         <RhfRadioGroup
                           name="graderingInnvilget"
                           control={formMethods.control}
-                          label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
+                          legend={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
                           validate={[required]}
                         >
                           <HStack gap="space-16">

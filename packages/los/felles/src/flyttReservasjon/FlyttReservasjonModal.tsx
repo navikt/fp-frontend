@@ -98,7 +98,6 @@ export const FlyttReservasjonModal = ({
                 label={intl.formatMessage({ id: 'FlyttReservasjonModal.Brukerident' })}
                 validate={[required, minLength7, maxLength7]}
                 autoFocus
-                autoComplete
               />
               <Button
                 size="small"

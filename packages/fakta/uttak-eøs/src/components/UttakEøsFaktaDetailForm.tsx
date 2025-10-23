@@ -76,7 +76,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
                 label={intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.Fom' })}
                 control={formMethods.control}
                 validate={[required, hasValidDate]}
-                isReadOnly={isReadOnly}
+                readOnly={isReadOnly}
                 onChange={value => {
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
                   oppdaterTrekkdagerOgTrekkuker(value, formMethods.getValues('tom'));
@@ -87,7 +87,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
                 label={intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.Tom' })}
                 control={formMethods.control}
                 validate={[required, hasValidDate, validerTomEtterFom(intl, formMethods.getValues)]}
-                isReadOnly={isReadOnly}
+                readOnly={isReadOnly}
                 fromDate={dayjs(fom, ISO_DATE_FORMAT).toDate()}
                 onChange={value => {
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
@@ -130,6 +130,8 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               <RhfNumericField
                 name="trekkuker"
                 control={formMethods.control}
+                label=""
+                hideLabel
                 className={styles['numberWidth']}
                 readOnly={isReadOnly}
                 validate={[required, hasValidInteger]}
@@ -138,6 +140,8 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               <RhfNumericField
                 name="trekkdager"
                 control={formMethods.control}
+                label=""
+                hideLabel
                 className={styles['numberWidth']}
                 readOnly={isReadOnly}
                 validate={[required, hasValidDecimal]}

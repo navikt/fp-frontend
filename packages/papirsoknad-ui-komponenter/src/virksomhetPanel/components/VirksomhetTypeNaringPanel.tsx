@@ -37,14 +37,14 @@ export const VirksomhetTypeNaringPanel = ({ readOnly, alleKodeverk, index }: Pro
     <RhfCheckboxGroup
       name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.typeVirksomhet`}
       control={control}
-      label={<FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Tittel" />}
+      legend={<FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Tittel" />}
       validate={[
         checked =>
           checked.length > 0
             ? undefined
             : intl.formatMessage({ id: 'Registrering.VirksomhetNaeringTypePanel.Required' }),
       ]}
-      isReadOnly={readOnly}
+      readOnly={readOnly}
     >
       {getNæringvirksomhetTyper(alleKodeverk).map(type => (
         <Checkbox key={type.kode} value={type.kode} readOnly={readOnly}>

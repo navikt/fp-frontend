@@ -106,7 +106,13 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
                 <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />
               </AksjonspunktHelpTextHTML>
               <VStack gap="space-12">
-                <RhfRadioGroup name="sendVarsel" control={formMethods.control} validate={[required]}>
+                <RhfRadioGroup
+                  name="sendVarsel"
+                  control={formMethods.control}
+                  legend=""
+                  hideLegend
+                  validate={[required]}
+                >
                   <HStack gap="space-16">
                     <Radio value={true} size="small">
                       <FormattedMessage id="VarselOmRevurderingForm.SendVarsel" />

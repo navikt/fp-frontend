@@ -254,8 +254,9 @@ export const UttakAktiviteterTabell = ({
                         <RhfNumericField
                           name={`aktiviteter.${index}.weeks`}
                           control={control}
-                          className={styles['numberWidth']}
+                          label=""
                           hideLabel
+                          className={styles['numberWidth']}
                           readOnly={isReadOnly}
                           validate={[
                             required,
@@ -274,6 +275,7 @@ export const UttakAktiviteterTabell = ({
                         name={`aktiviteter.${index}.days`}
                         control={control}
                         className={styles['numberWidth']}
+                        label=""
                         hideLabel
                         readOnly={isReadOnly}
                         validate={[
@@ -297,6 +299,7 @@ export const UttakAktiviteterTabell = ({
                       <RhfNumericField
                         name={`aktiviteter.${index}.utbetalingsgrad`}
                         control={control}
+                        label={<FormattedMessage id="RenderUttakTable.PeriodeData.Utbetalingsgrad" />}
                         hideLabel
                         validate={[
                           required,

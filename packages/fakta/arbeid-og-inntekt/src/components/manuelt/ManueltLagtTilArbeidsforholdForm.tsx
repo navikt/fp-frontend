@@ -134,14 +134,14 @@ export const ManueltLagtTilArbeidsforholdForm = ({
                   control={formMethods.control}
                   label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" />}
                   validate={[required, hasValidDate]}
-                  isReadOnly={isReadOnly || !erOverstyrt}
+                  readOnly={isReadOnly || !erOverstyrt}
                 />
                 <RhfDatepicker
                   name="tom"
                   control={formMethods.control}
                   label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" />}
                   validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
-                  isReadOnly={isReadOnly || !erOverstyrt}
+                  readOnly={isReadOnly || !erOverstyrt}
                 />
               </>
             )}

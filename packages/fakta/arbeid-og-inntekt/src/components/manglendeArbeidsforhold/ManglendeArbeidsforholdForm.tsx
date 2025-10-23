@@ -134,7 +134,7 @@ export const ManglendeArbeidsforholdForm = ({
           <RhfRadioGroup
             name="saksbehandlersVurdering"
             control={formMethods.control}
-            label={
+            legend={
               <HStack gap="space-8">
                 <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
                 <QuestionmarkDiamondIcon
@@ -158,7 +158,7 @@ export const ManglendeArbeidsforholdForm = ({
               </HStack>
             }
             validate={[required]}
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
           >
             <Radio value="KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD" size="small">
               <FormattedMessage id="ManglendeOpplysningerForm.TarKontakt" />
@@ -177,14 +177,14 @@ export const ManglendeArbeidsforholdForm = ({
                 control={formMethods.control}
                 label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
                 validate={[required, hasValidDate]}
-                isReadOnly={isReadOnly}
+                readOnly={isReadOnly}
               />
               <RhfDatepicker
                 name="tom"
                 control={formMethods.control}
                 label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
                 validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
-                isReadOnly={isReadOnly}
+                readOnly={isReadOnly}
               />
               <RhfTextField
                 name="stillingsprosent"

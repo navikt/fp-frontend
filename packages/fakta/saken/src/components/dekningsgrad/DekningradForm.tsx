@@ -120,7 +120,7 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
           <RhfRadioGroup
             name="dekningsgrad"
             control={formMethods.control}
-            label={<FormattedMessage id="DekningsgradForm.Dekningsgrad" />}
+            legend={<FormattedMessage id="DekningsgradForm.Dekningsgrad" />}
             description={
               fagsak.annenPart
                 ? intl.formatMessage(
@@ -140,7 +140,7 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
                 return null;
               },
             ]}
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
           >
             <HStack gap="space-16">
               <Radio value={80} size="small">

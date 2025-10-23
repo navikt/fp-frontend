@@ -44,9 +44,9 @@ export const TrueFalseInput = <T extends FieldValues>({
       <RhfRadioGroup
         name={name}
         control={control}
-        label={label}
+        legend={label}
         validate={isRequired ? [required] : []}
-        isReadOnly={readOnly}
+        readOnly={readOnly}
       >
         <VStack gap="space-12">
           <HStack gap="space-16">
@@ -68,9 +68,9 @@ export const TrueFalseInput = <T extends FieldValues>({
     <RhfRadioGroup
       name={name}
       control={control}
-      label={label}
+      legend={label}
       validate={isRequired ? [required] : []}
-      isReadOnly={readOnly}
+      readOnly={readOnly}
     >
       <VStack gap="space-2">
         <VStack gap="space-16">

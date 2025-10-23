@@ -62,7 +62,8 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
       <RhfRadioGroup
         name={`${FIELD_ARRAY_NAME}.${index}.totrinnskontrollGodkjent`}
         control={control}
-        isReadOnly={readOnly}
+        readOnly={readOnly}
+        legend=""
         hideLegend
       >
         <HStack gap="space-16">

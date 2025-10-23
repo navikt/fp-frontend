@@ -30,8 +30,8 @@ export const OmsorgsovertakelseVilkårForm = ({ adopsjon }: Props) => {
       name="vilkarType"
       control={control}
       validate={[required]}
-      label={intl.formatMessage({ id: 'OmsorgsovertakelseVilkårForm.VelgVilkaarSomSkalAnvendes' })}
-      isReadOnly={isReadOnly}
+      legend={intl.formatMessage({ id: 'OmsorgsovertakelseVilkårForm.VelgVilkaarSomSkalAnvendes' })}
+      readOnly={isReadOnly}
       size="medium"
       isEdited={hasValue(adopsjon.omsorgsovertakelseVilkårType)}
     >

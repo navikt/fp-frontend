@@ -94,7 +94,7 @@ export const ManglendeInntektsmeldingForm = ({
         <RhfRadioGroup
           name="saksbehandlersVurdering"
           control={formMethods.control}
-          label={
+          legend={
             <HStack gap="space-8">
               <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
               <QuestionmarkDiamondIcon
@@ -126,7 +126,7 @@ export const ManglendeInntektsmeldingForm = ({
             </HStack>
           }
           validate={[required]}
-          isReadOnly={isReadOnly}
+          readOnly={isReadOnly}
         >
           <VStack gap="space-2">
             <Radio value="KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING" size="small">

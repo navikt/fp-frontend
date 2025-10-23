@@ -75,7 +75,7 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
             <RhfDatepicker
               name={`${name}.${index}.dato`}
               control={control}
-              isReadOnly={readOnly}
+              readOnly={readOnly}
               label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDato' })}
               validate={[required]}
             />

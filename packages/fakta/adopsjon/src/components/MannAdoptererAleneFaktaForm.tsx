@@ -52,10 +52,10 @@ export const MannAdoptererAleneFaktaForm = ({
         <RhfRadioGroup
           name="mannAdoptererAlene"
           control={control}
-          label={<FormattedMessage id="MannAdoptererAleneFaktaForm.APSpørsmål" />}
+          legend={<FormattedMessage id="MannAdoptererAleneFaktaForm.APSpørsmål" />}
           isEdited={hasValue(adopsjon.mannAdoptererAlene)}
           validate={[required]}
-          isReadOnly={readOnly}
+          readOnly={readOnly}
         >
           <Radio value={true}>
             <FormattedMessage id="MannAdoptererAleneFaktaForm.Ja" />

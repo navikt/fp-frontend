@@ -42,11 +42,11 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erFor
         <RhfRadioGroup
           name="vurdering"
           control={control}
-          label={
+          legend={
             readOnly ? intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.ReadOnly' }) : label
           }
           validate={[required]}
-          isReadOnly={readOnly}
+          readOnly={readOnly}
         >
           {lagVurderingsAlternativer(ytelse, erForutgående, erRevurdering).map(option => (
             <Radio key={option.value} value={option.value} size="small">
@@ -83,7 +83,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erFor
                 : 'VurderMedlemsskapAksjonspunktForm.OpphorFomLabel',
             })}
             validate={[hasValidDate, required]}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
           />
         )}
         {erForutgående &&
@@ -100,7 +100,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erFor
                   : 'VurderMedlemsskapAksjonspunktForm.MedlemFomLabel',
               })}
               validate={[hasValidDate, required]}
-              isReadOnly={readOnly}
+              readOnly={readOnly}
             />
           )}
       </VStack>

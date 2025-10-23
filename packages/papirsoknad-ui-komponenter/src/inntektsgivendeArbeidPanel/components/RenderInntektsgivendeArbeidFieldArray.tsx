@@ -66,14 +66,14 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
           <RhfDatepicker
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.periodeFom`}
             control={control}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeFom' })}
             validate={[hasValidDate]}
           />
           <RhfDatepicker
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.periodeTom`}
             control={control}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeTom' })}
             validate={[hasValidDate]}
           />

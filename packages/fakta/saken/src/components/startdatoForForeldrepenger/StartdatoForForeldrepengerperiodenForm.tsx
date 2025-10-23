@@ -113,7 +113,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }:
                 control={formMethods.control}
                 label={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Startdato' })}
                 validate={[required, hasValidDate, getValidateIsBefore2019(formMethods.getValues, intl)]}
-                isReadOnly={isReadOnly}
+                readOnly={isReadOnly}
               />
               <RhfTextarea
                 name="begrunnelse"

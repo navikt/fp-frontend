@@ -154,9 +154,9 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
               <RhfRadioGroup
                 name={`perioder.${0}.vurdering`}
                 control={formMethods.control}
-                label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
+                legend={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
                 validate={[required]}
-                isReadOnly={readOnly}
+                readOnly={readOnly}
               >
                 {vurderingsalternativ.map(alt => (
                   <Radio key={alt.value} value={alt.value} size="small">
@@ -208,9 +208,9 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   <RhfRadioGroup
                     name={`perioder.${index}.vurdering`}
                     control={formMethods.control}
-                    label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
+                    legend={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
                     validate={[required]}
-                    isReadOnly={readOnly}
+                    readOnly={readOnly}
                   >
                     {vurderingsalternativ.map(alt => (
                       <Radio key={alt.value} value={alt.value} size="small">

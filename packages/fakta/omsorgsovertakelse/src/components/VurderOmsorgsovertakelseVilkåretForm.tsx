@@ -79,7 +79,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             control={formMethods.control}
             label={<FormattedMessage id="Label.Omsorgsovertakelsesdato" />}
             validate={[required, hasValidDate]}
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
             isEdited={isNotEqual(
               omsorgsovertakelse.søknad.omsorgsovertakelseDato,
               omsorgsovertakelse.gjeldende.omsorgsovertakelseDato,
@@ -89,9 +89,9 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
           <RhfRadioGroup
             name="ektefellesBarn"
             control={formMethods.control}
-            label={<FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.EktefellesBarn.Label" />}
+            legend={<FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.EktefellesBarn.Label" />}
             validate={[required]}
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
           >
             <Radio value={true}>
               <FormattedMessage id="Label.Ja" />
@@ -102,10 +102,10 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
           </RhfRadioGroup>
 
           <RhfCheckboxGroup
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
             control={formMethods.control}
             name="barnSomSkalVurderes"
-            label={<FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.BarnSomSkalVurderes.Tittel" />}
+            legend={<FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.BarnSomSkalVurderes.Tittel" />}
             validate={[
               values =>
                 values.length > 0
@@ -131,14 +131,14 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             name="delvilkår"
             control={formMethods.control}
             validate={[required]}
-            label={
+            legend={
               isReadOnly ? (
                 <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.Delvilkår.ReadOnlyLabel" />
               ) : (
                 <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.Delvilkår.Label" />
               )
             }
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
             size="small"
           >
             {Object.keys(omsorgsovertakelse.aktuelleDelvilkårAvslagsårsaker)
@@ -155,14 +155,14 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
             name="vilkårUtfallType"
             control={formMethods.control}
             validate={[required]}
-            label={
+            legend={
               isReadOnly ? (
                 <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.ReadOnlyLabel" />
               ) : (
                 <FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.Label" />
               )
             }
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
             size="small"
           >
             <Radio size="small" value="OPPFYLT">

@@ -65,13 +65,14 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
             name="ukevalg"
             control={formMethods.control}
             label=""
+            hideLabel
             selectValues={uker.map(u => (
               <option key={u.kode} value={u.kode}>
                 {intl.formatMessage({ id: u.tekstKode })}
               </option>
             ))}
           />
-          <RhfRadioGroup name="ytelseType" control={formMethods.control}>
+          <RhfRadioGroup name="ytelseType" control={formMethods.control} legend="" hideLegend>
             <HStack gap="space-16">
               <Radio value="FP" size="small">
                 {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'FP')}

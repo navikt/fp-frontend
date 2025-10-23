@@ -157,7 +157,7 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
                   name="mottattDato"
                   label={intl.formatMessage({ id: 'Klage.Formkrav.MottattDato' })}
                   validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
-                  isReadOnly={isReadOnly}
+                  readOnly={isReadOnly}
                 />
               </VStack>
               <VStack gap="space-20">
@@ -165,9 +165,9 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
                   <RhfRadioGroup
                     name="erKlagerPart"
                     control={formMethods.control}
-                    label={intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
+                    legend={intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
                     validate={[required]}
-                    isReadOnly={isReadOnly}
+                    readOnly={isReadOnly}
                   >
                     <HStack gap="space-16">
                       <Radio value={true} size="small">
@@ -181,9 +181,9 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
                   <RhfRadioGroup
                     name="erKonkret"
                     control={formMethods.control}
-                    label={intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
+                    legend={intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
                     validate={[required]}
-                    isReadOnly={isReadOnly}
+                    readOnly={isReadOnly}
                   >
                     <HStack gap="space-16">
                       <Radio value={true} size="small">
@@ -199,9 +199,9 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
                   <RhfRadioGroup
                     name="erFristOverholdt"
                     control={formMethods.control}
-                    label={intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
+                    legend={intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
                     validate={[required]}
-                    isReadOnly={isReadOnly}
+                    readOnly={isReadOnly}
                   >
                     <HStack gap="space-16">
                       <Radio value={true} size="small">
@@ -215,9 +215,9 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
                   <RhfRadioGroup
                     name="erSignert"
                     control={formMethods.control}
-                    label={intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
+                    legend={intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
                     validate={[required]}
-                    isReadOnly={isReadOnly}
+                    readOnly={isReadOnly}
                   >
                     <HStack gap="space-16">
                       <Radio value={true} size="small">

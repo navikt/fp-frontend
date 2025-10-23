@@ -31,9 +31,9 @@ export const ErBarnFødt = ({ isReadOnly, finnesBarnIFReg, antallBarnISøknad }:
       <RhfRadioGroup
         control={control}
         name="erBarnFødt"
-        label={intl.formatMessage({ id: 'ErBarnFødt.Label' }, { antallBarn: antallBarnISøknad })}
+        legend={intl.formatMessage({ id: 'ErBarnFødt.Label' }, { antallBarn: antallBarnISøknad })}
         validate={[required]}
-        isReadOnly={isReadOnly}
+        readOnly={isReadOnly}
         size="medium"
       >
         <HStack gap="space-16">

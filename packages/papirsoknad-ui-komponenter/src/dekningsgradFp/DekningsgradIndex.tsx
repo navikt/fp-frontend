@@ -29,7 +29,14 @@ export const DekningsgradIndex = ({ readOnly }: Props) => {
         <Heading size="small" level="3">
           {intl.formatMessage({ id: 'Registrering.Dekningsgrad.Title' })}
         </Heading>
-        <RhfRadioGroup name="dekningsgrad" control={control} validate={[required]} isReadOnly={readOnly}>
+        <RhfRadioGroup
+          name="dekningsgrad"
+          control={control}
+          legend=""
+          hideLegend
+          validate={[required]}
+          readOnly={readOnly}
+        >
           <HStack gap="space-16">
             <Radio value="80_PROSENT" size="small">
               {intl.formatMessage({ id: 'Registrering.Dekningsgrad.prosent.80' })}

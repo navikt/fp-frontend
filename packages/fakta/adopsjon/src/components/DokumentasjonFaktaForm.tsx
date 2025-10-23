@@ -70,7 +70,7 @@ export const DokumentasjonFaktaForm = ({
           }
           size="small"
           validate={[required, hasValidDate]}
-          isReadOnly={readOnly}
+          readOnly={readOnly}
           isEdited={isNotEqual(soknad.omsorgsovertakelseDato, adopsjon.omsorgsovertakelseDato)}
         />
         {erForeldrepengerFagsak && barnetsAnkomstTilNorgeDato && (
@@ -81,7 +81,7 @@ export const DokumentasjonFaktaForm = ({
             description={<FormattedMessage id="DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge.Description" />}
             size="small"
             validate={[hasValidDate]}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
             isEdited={isNotEqual(soknad.barnetsAnkomstTilNorgeDato, adopsjon.ankomstNorge)}
           />
         )}
@@ -99,7 +99,7 @@ export const DokumentasjonFaktaForm = ({
               hideLabel={i > 0}
               size="small"
               validate={[required, hasValidDate]}
-              isReadOnly={readOnly}
+              readOnly={readOnly}
               isEdited={getAdopsjonsdatoEditedStatusForId(id)}
             />
             {!readOnly && isAgeAbove15(fodselsdatoer, Number.parseInt(id, 10), omsorgsovertakelseDato) && (

@@ -57,7 +57,7 @@ export const EndreUtlandModal = ({
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <RhfCheckboxGroup name="fagsakMarkeringer" control={formMethods.control} hideLegend>
+          <RhfCheckboxGroup name="fagsakMarkeringer" control={formMethods.control} legend="" hideLegend>
             {fagsakMarkeringerKodeverk.map(markering => (
               <Checkbox key={markering.kode} value={markering.kode}>
                 {markering.navn}

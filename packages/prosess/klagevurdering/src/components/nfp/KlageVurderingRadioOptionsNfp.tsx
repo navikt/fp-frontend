@@ -41,7 +41,14 @@ export const KlageVurderingRadioOptionsNfp = ({
   ));
   return (
     <VStack gap="space-12">
-      <RhfRadioGroup name="klageVurdering" control={control} validate={[required]} isReadOnly={readOnly}>
+      <RhfRadioGroup
+        name="klageVurdering"
+        control={control}
+        legend=""
+        hideLegend
+        validate={[required]}
+        readOnly={readOnly}
+      >
         <HStack gap="space-16">
           <Radio value={'MEDHOLD_I_KLAGE' satisfies KlageVurderingType} size="small">
             <FormattedMessage id="Klage.ResolveKlage.ChangeVedtak" />
@@ -63,7 +70,14 @@ export const KlageVurderingRadioOptionsNfp = ({
               label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
               validate={[required]}
             />
-            <RhfRadioGroup name="klageVurderingOmgjoer" control={control} validate={[required]} isReadOnly={readOnly}>
+            <RhfRadioGroup
+              name="klageVurderingOmgjoer"
+              control={control}
+              legend=""
+              hideLegend
+              validate={[required]}
+              readOnly={readOnly}
+            >
               <Radio value={'GUNST_MEDHOLD_I_KLAGE' satisfies KlageVurderingOmgjørType} size="small">
                 <FormattedMessage id="Klage.Behandle.Omgjort" />
               </Radio>

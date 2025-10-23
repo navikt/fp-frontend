@@ -32,7 +32,14 @@ export const SprakPapirsoknadIndex = ({ readOnly }: Props) => {
         <Heading size="small" level="3">
           {intl.formatMessage({ id: 'Registrering.Sprak' })}
         </Heading>
-        <RhfRadioGroup name="språkkode" control={control} validate={[required]} isReadOnly={readOnly}>
+        <RhfRadioGroup
+          name="språkkode"
+          control={control}
+          legend=""
+          hideLegend
+          validate={[required]}
+          readOnly={readOnly}
+        >
           <Radio value={sprakvalg.BOKMAL} size="small">
             {intl.formatMessage({ id: 'Registrering.Sprak.Bokmal' })}
           </Radio>

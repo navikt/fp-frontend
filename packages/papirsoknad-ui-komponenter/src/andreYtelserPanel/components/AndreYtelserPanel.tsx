@@ -35,10 +35,11 @@ export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = fal
           <FormattedMessage id="Registrering.AndreYtelser.Title" />
         </Heading>
         <RhfCheckboxGroup
-          hideLegend
           name={`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_TYPER_NAME}`}
           control={control}
-          isReadOnly={readOnly}
+          legend=""
+          hideLegend
+          readOnly={readOnly}
         >
           {filtrerteArbeidstyper.map(at => (
             <CheckboxWithInfo key={at.kode} arbeidstype={at} readOnly={readOnly} />

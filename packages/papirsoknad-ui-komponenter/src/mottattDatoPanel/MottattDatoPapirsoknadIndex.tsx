@@ -39,7 +39,7 @@ export const MottattDatoPapirsoknadIndex = ({ readOnly }: Props) => {
             fromDate={minMottattdato().toDate()}
             toDate={maxMottattdato().toDate()}
             validate={[required, hasValidDate, dateBeforeOrEqualToToday, dateAfterOrEqual(minMottattdato())]}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
           />
         </VStack>
       </BorderBox>

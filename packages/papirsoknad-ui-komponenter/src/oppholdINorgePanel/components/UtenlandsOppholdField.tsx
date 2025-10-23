@@ -126,7 +126,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
               control={control}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeFom' })}
               hideLabel={index > 0}
-              isReadOnly={readOnly}
+              readOnly={readOnly}
               validate={[
                 required,
                 hasValidDate,
@@ -152,7 +152,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
               control={control}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeTom' })}
               hideLabel={index > 0}
-              isReadOnly={readOnly}
+              readOnly={readOnly}
               validate={[
                 required,
                 hasValidDate,

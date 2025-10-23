@@ -76,7 +76,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
                     control={control}
                     label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
                     validate={[required]}
-                    isReadOnly={readOnly}
+                    readOnly={readOnly}
                   />
                   <BehovForTilretteleggingFieldArray
                     name={`${TILRETTELEGGING_NAME_PREFIX}.${SELVSTENDIG_NARINGSDRIVENDE_FIELD_ARRAY_NAME}`}
@@ -103,7 +103,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
                     control={control}
                     label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
                     validate={[required]}
-                    isReadOnly={readOnly}
+                    readOnly={readOnly}
                   />
                   <BehovForTilretteleggingFieldArray
                     name={`${TILRETTELEGGING_NAME_PREFIX}.${FRILANS_FIELD_ARRAY_NAME}`}

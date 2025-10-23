@@ -79,6 +79,8 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
                 <RhfRadioGroup
                   name={`${akt.kode}_inkluder`}
                   control={control}
+                  legend=""
+                  hideLegend
                   onChange={skalInkludere =>
                     lagreAndreKriterier({
                       andreKriterierType: akt.kode,

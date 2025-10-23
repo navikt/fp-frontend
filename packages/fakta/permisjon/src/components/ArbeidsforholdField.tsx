@@ -191,7 +191,7 @@ export const ArbeidsforholdField = ({
           <RhfRadioGroup
             name={`${FIELD_ARRAY_NAME}.${index}.permisjonStatus`}
             control={control}
-            label={
+            legend={
               <HStack gap="space-8">
                 <FormattedMessage id="ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed" />
                 <div className={styles['image']}>
@@ -233,7 +233,7 @@ export const ArbeidsforholdField = ({
               </HStack>
             }
             validate={[required]}
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
           >
             <Radio value={BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON} size="small">
               <FormattedMessage

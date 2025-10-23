@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
@@ -53,27 +53,26 @@ export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFr
     <RhfForm<FormValues> formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="space-16">
-        <Label size="small">
-          <FormattedMessage id="VentefristUtløperPanel.SattPaVent" />
-        </Label>
-        <HStack gap="space-16">
-          <RhfRadioGroup name="valgtYtelsetype" control={formMethods.control}>
-            <HStack gap="space-16">
-              <Radio value="FP" size="small">
-                {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'FP')}
-              </Radio>
-              <Radio value="ES" size="small">
-                {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'ES')}
-              </Radio>
-              <Radio value="SVP" size="small">
-                {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'SVP')}
-              </Radio>
-              <Radio value={ALLE_YTELSETYPER_VALGT} size="small">
-                <FormattedMessage id="VentefristUtløperPanel.Alle" />
-              </Radio>
-            </HStack>
-          </RhfRadioGroup>
-        </HStack>
+        <RhfRadioGroup
+          name="valgtYtelsetype"
+          control={formMethods.control}
+          legend={<FormattedMessage id="VentefristUtløperPanel.SattPaVent" />}
+        >
+          <HStack gap="space-16">
+            <Radio value="FP" size="small">
+              {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'FP')}
+            </Radio>
+            <Radio value="ES" size="small">
+              {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'ES')}
+            </Radio>
+            <Radio value="SVP" size="small">
+              {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'SVP')}
+            </Radio>
+            <Radio value={ALLE_YTELSETYPER_VALGT} size="small">
+              <FormattedMessage id="VentefristUtløperPanel.Alle" />
+            </Radio>
+          </HStack>
+        </RhfRadioGroup>
         <VentefristUtløperGraf
           height={height}
           behandlingerPaVent={behandlingerPaVent.filter(ompv =>

@@ -201,7 +201,7 @@ export const UttakFaktaDetailForm = ({
               control={formMethods.control}
               label={<FormattedMessage id="UttakFaktaDetailForm.Fom" />}
               validate={[required, hasValidDate]}
-              isReadOnly={readOnly}
+              readOnly={readOnly}
               defaultMonth={defaultMonth}
             />
             <RhfDatepicker
@@ -209,7 +209,7 @@ export const UttakFaktaDetailForm = ({
               control={formMethods.control}
               label={<FormattedMessage id="UttakFaktaDetailForm.Tom" />}
               validate={[required, hasValidDate, validerTomEtterFom(intl, formMethods.getValues)]}
-              isReadOnly={readOnly}
+              readOnly={readOnly}
               defaultMonth={defaultMonth}
             />
             {slettPeriode && !readOnly && (
@@ -239,9 +239,9 @@ export const UttakFaktaDetailForm = ({
               <RhfRadioGroup
                 name="arsakstype"
                 control={formMethods.control}
-                label={<FormattedMessage id="UttakFaktaDetailForm.Periodetype" />}
+                legend={<FormattedMessage id="UttakFaktaDetailForm.Periodetype" />}
                 validate={[required]}
-                isReadOnly={readOnly}
+                readOnly={readOnly}
               >
                 <HStack gap="space-16">
                   {Object.values(Årsakstype).map(type => (

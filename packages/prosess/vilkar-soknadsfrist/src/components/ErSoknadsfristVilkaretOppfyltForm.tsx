@@ -148,7 +148,14 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
             <span className="typo-normal">{dato && <DateLabel dateString={dato} />}</span>
           </VStack>
         </HStack>
-        <RhfRadioGroup name="erVilkarOk" control={formMethods.control} validate={[required]} isReadOnly={isReadOnly}>
+        <RhfRadioGroup
+          name="erVilkarOk"
+          control={formMethods.control}
+          legend=""
+          hideLegend
+          validate={[required]}
+          readOnly={isReadOnly}
+        >
           <HStack gap="space-16">
             <Radio value={true} size="small">
               <FormattedMessage id={findRadioButtonTextCode(true)} values={{ b: BTag }} />

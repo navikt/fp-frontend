@@ -37,7 +37,7 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
         <ArrowBox>
           <VStack gap="space-16">
             <RhfCheckboxGroup
-              label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.Årsak.Tittel" />}
+              legend={<FormattedMessage id="Registrering.VirksomhetStartetPanel.Årsak.Tittel" />}
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireArArsak`}
               control={control}
               validate={[
@@ -147,7 +147,7 @@ const CheckboxWithInfo = ({
                 : `${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.nyIArbeidslivetFom`
             }
             control={control}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
             validate={[hasValidDate, required]}
             label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
           />

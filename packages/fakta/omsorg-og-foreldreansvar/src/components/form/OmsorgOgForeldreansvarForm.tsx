@@ -70,7 +70,7 @@ export const OmsorgOgForeldreansvarForm = ({ søknad, adopsjon, harForeldreansva
             control={formMethods.control}
             label={<FormattedMessage id="AksjonspunktForm.Omsorgsovertakelsesdato" />}
             validate={[required, hasValidDate]}
-            isReadOnly={isReadOnly}
+            readOnly={isReadOnly}
             isEdited={isNotEqual(finnOmsorgsovertakelseDato(søknad), adopsjon.omsorgsovertakelseDato)}
           />
 
@@ -81,7 +81,7 @@ export const OmsorgOgForeldreansvarForm = ({ søknad, adopsjon, harForeldreansva
               control={formMethods.control}
               label={<FormattedMessage id="AksjonspunktForm.Foreldreansvarsdato" />}
               validate={[required, hasValidDate]}
-              isReadOnly={isReadOnly}
+              readOnly={isReadOnly}
             />
           ) : (
             <OmsorgsovertakelseVilkårForm adopsjon={adopsjon} />

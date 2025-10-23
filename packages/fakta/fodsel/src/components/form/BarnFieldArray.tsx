@@ -122,7 +122,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
                     validate={[required, hasValidDate, dateAfterOrEqual(minFodselsdato()), dateBeforeOrEqualToToday]}
                     fromDate={minFodselsdato().toDate()}
                     toDate={maxFodselsdato().toDate()}
-                    isReadOnly={isReadOnly}
+                    readOnly={isReadOnly}
                     disabled={!field.kanOverstyres}
                   />
                 </Table.DataCell>
@@ -136,7 +136,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
                       hideLabel
                       validate={[hasValidDate, dateBeforeOrEqualToToday, validerDødsdato(getValues, index)]}
                       toDate={today}
-                      isReadOnly={isReadOnly}
+                      readOnly={isReadOnly}
                       disabled={!field.kanOverstyres}
                     />
                   </Table.DataCell>

@@ -88,7 +88,7 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
           <RhfDatepicker
             name={`${getPrefix(index)}.periodeFom`}
             control={control}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
             validate={[
               required,
               hasValidDate,
@@ -106,7 +106,7 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
           <RhfDatepicker
             name={`${getPrefix(index)}.periodeTom`}
             control={control}
-            isReadOnly={readOnly}
+            readOnly={readOnly}
             validate={[
               required,
               hasValidDate,

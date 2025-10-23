@@ -66,9 +66,9 @@ export const InnhentDokOpptjeningUtlandPanel = ({ aksjonspunkt, dokStatus }: Pro
             <RhfRadioGroup
               name="dokStatus"
               control={formMethods.control}
-              label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
+              legend={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
               validate={[required]}
-              isReadOnly={isReadOnly}
+              readOnly={isReadOnly}
             >
               <Radio value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET} size="small">
                 <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />

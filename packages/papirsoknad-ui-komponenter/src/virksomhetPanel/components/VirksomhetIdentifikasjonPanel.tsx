@@ -80,14 +80,14 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
               <RhfDatepicker
                 name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.fom`}
                 control={control}
-                isReadOnly={readOnly}
+                readOnly={readOnly}
                 validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
                 label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeFom' })}
               />
               <RhfDatepicker
                 name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.tom`}
                 control={control}
-                isReadOnly={readOnly}
+                readOnly={readOnly}
                 validate={[
                   hasValidDate,
                   tomDato => {
