@@ -8,6 +8,14 @@ import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { OmsorgsovertakelseFaktaIndex } from './OmsorgsovertakelseFaktaIndex';
 
+const lagAksjonspunkt = (definisjon: AksjonspunktKode, status: 'OPPR' | 'UTFO'): Aksjonspunkt => ({
+  ...aksjonspunktDefault,
+  definisjon,
+  status,
+  kanLoses: status === 'OPPR',
+  begrunnelse: status === 'UTFO' ? 'Dette er en begrunnelse' : undefined,
+});
+
 const meta = {
   component: OmsorgsovertakelseFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
@@ -81,5 +89,22 @@ export const EngangsstønadUtenAp: Story = {};
 export const EngangsstønadMedAp: Story = {
   args: {
     aksjonspunkterForPanel: [aksjonspunktDefault],
+  },
+};
+
+export const LegacyAP: Story = {
+  args: {
+    aksjonspunkterForPanel: [
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_VILKÅR_FOR_FORELDREANSVAR, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP, 'UTFO'),
+    ],
   },
 };

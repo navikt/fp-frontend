@@ -10,6 +10,7 @@ import type { OmsorgsovertakelseDto } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { FaktaSammenligning } from './components/FaktaSammenligning';
+import { LegacyAksjonspunktVisning } from './components/LegacyAksjonspunktVisning';
 import { VurderOmsorgsovertakelseVilkåretForm } from './components/VurderOmsorgsovertakelseVilkåretForm';
 
 import messages from '../i18n/nb_NO.json';
@@ -22,7 +23,9 @@ interface Props {
 
 export const OmsorgsovertakelseFaktaIndex = ({ omsorgsovertakelse }: Props) => {
   const { harÅpentAksjonspunkt, aksjonspunkterForPanel } = usePanelDataContext();
-
+  const harOmsorgsovertakelseAP = aksjonspunkterForPanel.some(
+    ap => ap.definisjon === AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
+  );
   return (
     <RawIntlProvider value={intl}>
       <VStack gap="space-16">
@@ -35,9 +38,8 @@ export const OmsorgsovertakelseFaktaIndex = ({ omsorgsovertakelse }: Props) => {
         <FaktaSammenligning omsorgsovertakelse={omsorgsovertakelse} />
         <FaktaFraFReg barna={omsorgsovertakelse.register.barn} />
 
-        {aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET) && (
-          <VurderOmsorgsovertakelseVilkåretForm omsorgsovertakelse={omsorgsovertakelse} />
-        )}
+        {harOmsorgsovertakelseAP && <VurderOmsorgsovertakelseVilkåretForm omsorgsovertakelse={omsorgsovertakelse} />}
+        {aksjonspunkterForPanel.length > 0 && !harOmsorgsovertakelseAP && <LegacyAksjonspunktVisning />}
       </VStack>
     </RawIntlProvider>
   );
