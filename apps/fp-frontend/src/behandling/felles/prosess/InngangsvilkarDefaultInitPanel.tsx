@@ -82,15 +82,15 @@ export const InngangsvilkarDefaultInitPanel = ({
   return (
     <MellomlagretFormDataProvider behandling={behandling}>
       <PanelDataProvider
-        behandling={behandling}
         fagsak={fagsak}
+        behandling={behandling}
+        alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
+        alleKodeverk={alleKodeverk}
         aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
         harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
-        alleKodeverk={alleKodeverk}
-        submitCallback={standardPanelProps.submitCallback}
         isReadOnly={standardPanelProps.isReadOnly}
-        alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
-        isSubmittable={!standardPanelProps.readOnlySubmitButton}
+        isSubmittable={standardPanelProps.isSubmittable}
+        submitCallback={standardPanelProps.submitCallback}
       >
         {skalViseVilkårIPanel ? children : null}
       </PanelDataProvider>

@@ -167,7 +167,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
           isReadOnly={standardPanelProps.isReadOnly}
-          readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
+          readOnlySubmitButton={!standardPanelProps.isSubmittable}
         />
       )}
     </ProsessDefaultInitPanel>

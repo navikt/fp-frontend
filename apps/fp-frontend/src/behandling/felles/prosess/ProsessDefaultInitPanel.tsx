@@ -71,15 +71,15 @@ const ProsessPanel = <T extends Behandling>({
       >
         {skalVisePanel ? (
           <PanelDataProvider
-            behandling={behandling}
             fagsak={fagsak}
+            behandling={behandling}
+            alleKodeverk={alleKodeverk}
+            alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
             aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
             harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
-            alleKodeverk={alleKodeverk}
-            submitCallback={standardPanelProps.submitCallback}
             isReadOnly={standardPanelProps.isReadOnly}
-            alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
-            isSubmittable={!standardPanelProps.readOnlySubmitButton}
+            isSubmittable={standardPanelProps.isSubmittable}
+            submitCallback={standardPanelProps.submitCallback}
           >
             {children}
           </PanelDataProvider>

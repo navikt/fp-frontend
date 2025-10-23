@@ -15,7 +15,6 @@ import { useBehandlingDataContext } from '../../felles/context/BehandlingDataCon
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const OVERSTYRING_KODER = [AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL];
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
   AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
@@ -27,7 +26,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
 
   const { behandling, fagsak, rettigheter } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const api = useBehandlingApi(behandling);
   const fagsakApi = useFagsakApi();

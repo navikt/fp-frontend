@@ -59,7 +59,6 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   aoiArbeidsforhold: AoIArbeidsforhold[];
-  readonly: boolean;
 }
 
 /**
@@ -71,11 +70,10 @@ export const TilretteleggingFaktaForm = ({
   arbeidsgiverOpplysningerPerId,
   svangerskapspengerTilrettelegging,
   aoiArbeidsforhold,
-  readonly,
 }: Props) => {
   const intl = useIntl();
 
-  const { isSubmittable, aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpentAksjonspunkt } =
+  const { isSubmittable, isReadOnly, aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpentAksjonspunkt } =
     usePanelDataContext<BekreftSvangerskapspengerAp>();
   const uttakArbeidTyper = alleKodeverk['UttakArbeidType'];
 
@@ -156,7 +154,7 @@ export const TilretteleggingFaktaForm = ({
             control={formMethods.control}
             label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
             validate={[required, hasValidDate]}
-            readOnly={readonly}
+            readOnly={isReadOnly}
           />
           {fødselsdato && (
             <RhfDatepicker
@@ -164,7 +162,7 @@ export const TilretteleggingFaktaForm = ({
               control={formMethods.control}
               label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
               validate={[required, hasValidDate]}
-              readOnly={readonly}
+              readOnly={isReadOnly}
             />
           )}
         </HStack>
@@ -172,7 +170,7 @@ export const TilretteleggingFaktaForm = ({
           sorterteArbeidsforhold={arbeidsforhold}
           aoiArbeidsforhold={aoiArbeidsforhold}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          readOnly={readonly}
+          readOnly={isReadOnly}
           uttakArbeidTyper={uttakArbeidTyper}
         />
         {visFeil && harIkkeVurdertAlleVelferdspermisjoner && (
@@ -206,11 +204,11 @@ export const TilretteleggingFaktaForm = ({
           label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnEndringene' })}
           validate={[isRequiredFn, maxLength1500, hasValidText]}
           maxLength={1500}
-          readOnly={readonly}
+          readOnly={isReadOnly}
         />
         <FaktaSubmitButton
           isSubmittable={isSubmittable}
-          isReadOnly={readonly}
+          isReadOnly={isReadOnly}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
         />

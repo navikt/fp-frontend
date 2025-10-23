@@ -14,7 +14,6 @@ interface Props {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   arbeidOgInntekt?: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  readonly: boolean;
 }
 
 export const TilretteleggingFaktaIndex = ({ arbeidOgInntekt, ...rest }: Props) => (

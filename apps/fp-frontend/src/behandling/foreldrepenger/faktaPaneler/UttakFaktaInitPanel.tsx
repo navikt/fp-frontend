@@ -21,8 +21,6 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
 ];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK];
-
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -32,7 +30,7 @@ export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) =>
 
   const { behandling, rettigheter } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const api = useBehandlingApi(behandling);
 

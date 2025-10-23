@@ -23,7 +23,6 @@ export type StandardFaktaPanelProps<T extends Behandling> = Readonly<{
 
 export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSak>(
   aksjonspunktKoder: Aksjonspunkt['definisjon'][] = [],
-  overstyringKoder: Aksjonspunkt['definisjon'][] = [],
 ): StandardFaktaPanelProps<T> => {
   const {
     behandling,
@@ -35,9 +34,8 @@ export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSa
     alleKodeverk,
   } = useBehandlingDataContext<T>();
 
-  const { aksjonspunkt } = behandling;
-
-  const aksjonspunkterForPanel = aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon));
+  const aksjonspunkterForPanel = behandling.aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon));
+  const overstyringKoder = aksjonspunkterForPanel.filter(ap => ap.aksjonspunktType === 'OVST').map(ap => ap.definisjon);
 
   const isReadOnly = erReadOnly(behandling, [], rettigheter, false);
   const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForPanel);
