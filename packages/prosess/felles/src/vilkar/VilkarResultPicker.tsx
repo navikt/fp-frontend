@@ -24,7 +24,7 @@ type FormValues = {
 };
 
 interface Props {
-  avslagsårsaker?: KodeverkMedNavn<'Avslagsårsak'>[];
+  avslagsårsaker?: KodeverkMedNavn<'LineærAvslagsårsak'>[];
   customVilkårIkkeOppfyltText: string | ReactElement;
   customVilkårOppfyltText: string | ReactElement;
   isReadOnly: boolean;
@@ -33,8 +33,8 @@ interface Props {
 }
 
 const sorterAvslagsårsaker = (
-  avslagsårsakerUsortert: KodeverkMedNavn<'Avslagsårsak'>[],
-): KodeverkMedNavn<'Avslagsårsak'>[] => avslagsårsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
+  avslagsårsakerUsortert: KodeverkMedNavn<'LineærAvslagsårsak'>[],
+): KodeverkMedNavn<'LineærAvslagsårsak'>[] => avslagsårsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
 
 export const VilkarResultPicker = ({
   avslagsårsaker,

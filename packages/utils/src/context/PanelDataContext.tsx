@@ -1,6 +1,6 @@
 import { createContext, type ReactElement, useContext, useMemo } from 'react';
 
-import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak, Vilkar } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
@@ -9,6 +9,7 @@ type Props<AP_TYPE extends AksjonspunktType, B extends Behandling> = {
   behandling: B;
   fagsak: Fagsak;
   aksjonspunkterForPanel: Aksjonspunkt[];
+  vilkårForPanel: Vilkar[];
   harÅpentAksjonspunkt: boolean;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };

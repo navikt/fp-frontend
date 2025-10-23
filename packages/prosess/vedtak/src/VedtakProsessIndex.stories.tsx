@@ -4,7 +4,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
+import {
+  avslagsårsakerPerVilkår,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+  withRouter,
+} from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
   BehandlingFpSak,
@@ -65,6 +71,7 @@ const defaultBehandling: BehandlingFpSak = {
       vilkarType: 'FP_VK_1',
       vilkarStatus: 'OPPFYLT',
       overstyrbar: true,
+      aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_1,
     },
   ],
   links: [],
@@ -746,6 +753,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
           vilkarType: 'FP_VK_3',
           vilkarStatus: 'IKKE_OPPFYLT',
           overstyrbar: true,
+          aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_3,
         },
       ],
     } satisfies BehandlingFpSak,

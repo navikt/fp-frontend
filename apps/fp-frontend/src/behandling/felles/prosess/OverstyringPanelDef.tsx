@@ -1,19 +1,13 @@
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
-import type { KodeverkMedNavn, Medlemskap, VilkårType } from '@navikt/fp-types';
+import type { AlleKodeverk, Medlemskap, VilkårType } from '@navikt/fp-types';
 import { usePanelOverstyring } from '@navikt/fp-utils';
 
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
 
-// TODO Spesifikk ES-kodar bør ikkje ligga her
-const avslagsårsakerES = new Set(['1002', '1003', '1032']);
-const filtrerAvslagsårsaker = (
-  avslagsårsaker: { [key: string]: KodeverkMedNavn<'Avslagsårsak'>[] },
-  vilkarTypeKode: VilkårType,
-): KodeverkMedNavn<'Avslagsårsak'>[] =>
-  vilkarTypeKode === 'FP_VK_1'
-    ? avslagsårsaker[vilkarTypeKode]!.filter(årsak => !avslagsårsakerES.has(årsak.kode))
-    : avslagsårsaker[vilkarTypeKode]!;
+const filtrerAvslagsårsaker = (vilkår: Vilkar, alleKodeverk: AlleKodeverk) => {
+  return alleKodeverk['LineærAvslagsårsak'].filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode));
+};
 
 interface Props {
   vilkårKoder: VilkårType[];
@@ -24,30 +18,26 @@ interface Props {
 export const OverstyringPanelDef = ({ vilkårKoder, panelTekstKode, medlemskap }: Props) => {
   const { overstyringApKode } = usePanelOverstyring();
 
-  const standardProps = useStandardProsessPanelProps([overstyringApKode], vilkårKoder);
-
-  const skalVises = skalViseProsessPanel(
-    standardProps.aksjonspunkterForPanel,
+  const { status, aksjonspunkterForPanel, vilkårForPanel, alleKodeverk } = useStandardProsessPanelProps(
+    [overstyringApKode],
     vilkårKoder,
-    standardProps.vilkårForPanel,
   );
 
-  const avslagsårsaker = filtrerAvslagsårsaker(
-    standardProps.alleKodeverk['Avslagsårsak'],
-    standardProps.vilkårForPanel[0]!.vilkarType,
-  );
+  const skalVises = skalViseProsessPanel(aksjonspunkterForPanel, vilkårKoder, vilkårForPanel);
 
   if (!skalVises) {
     return null;
   }
+
+  const avslagsårsaker = filtrerAvslagsårsaker(alleKodeverk['Avslagsårsak'], vilkårForPanel[0]!.vilkarType);
 
   return (
     <VilkarresultatMedOverstyringProsessIndex
       medlemskap={medlemskap}
       avslagsårsaker={avslagsårsaker}
       panelTekstKode={panelTekstKode}
-      lovReferanse={standardProps.vilkårForPanel[0]?.lovReferanse ?? undefined}
-      status={standardProps.status}
+      lovReferanse={vilkårForPanel[0]?.lovReferanse}
+      status={status}
     />
   );
 };

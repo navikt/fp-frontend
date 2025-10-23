@@ -40,6 +40,7 @@ export const FaktaDefaultInitPanel = <T extends Behandling = BehandlingFpSak>({
           fagsak={fagsak}
           alleKodeverk={alleKodeverk}
           aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
+          vilkårForPanel={standardPanelProps.vilkårForPanel}
           harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
           submitCallback={standardPanelProps.submitCallback}
           isReadOnly={standardPanelProps.isReadOnly}

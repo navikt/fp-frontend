@@ -599,9 +599,8 @@ export type tjenester_behandling_dto_behandling_UtvidetBehandlingDto = {
 };
 
 export type tjenester_behandling_vilkår_VilkårDto = {
+  aktuelleAvslagsårsaker: Array<foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak>;
   avslagKode?: string;
-  evaluering?: string;
-  input?: string;
   lovReferanse?: string;
   overstyrbar: boolean;
   vilkarStatus: foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType;
