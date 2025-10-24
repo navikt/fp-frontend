@@ -12,7 +12,7 @@ import {
   validerApKodeOgHentApEnum,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, VilkarUtfallType } from '@navikt/fp-types';
 import type { OmsorgsvilkarAp, VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -25,7 +25,7 @@ type FormValues = {
 type AksjonspunktData = Array<OmsorgsvilkarAp | VurdereYtelseSammeBarnSokerAp>;
 
 interface Props {
-  status: string;
+  status: VilkarUtfallType;
 }
 
 /**

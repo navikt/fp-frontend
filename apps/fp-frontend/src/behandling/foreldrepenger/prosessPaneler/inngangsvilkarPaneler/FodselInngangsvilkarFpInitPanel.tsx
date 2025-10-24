@@ -43,7 +43,6 @@ export const FodselInngangsvilkarFpInitPanel = () => {
     >
       <FodselVilkarProsessIndex
         status={standardPanelProps.status}
-        vilkårForPanel={standardPanelProps.vilkårForPanel}
       />
     </InngangsvilkarDefaultInitPanel>
   );

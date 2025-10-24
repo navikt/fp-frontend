@@ -1,5 +1,6 @@
 import type { Avslagsarsak, KodeverkMedNavn, VilkårType } from '@navikt/fp-types';
-import { alleKodeverk } from './alleKodeverk.ts';
+
+import { alleKodeverk } from './alleKodeverk';
 
 export const avslagsårsakerPerVilkår:{ [K in VilkårType]: Array<Avslagsarsak> } = {
   FP_VK_3: ['1007'],

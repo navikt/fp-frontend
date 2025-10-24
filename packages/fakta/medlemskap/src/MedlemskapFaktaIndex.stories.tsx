@@ -5,7 +5,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { type Aksjonspunkt, type Behandling, type Medlemskap, type Soknad } from '@navikt/fp-types';
+import {
+  type Aksjonspunkt,
+  type BehandlingFpSak,
+  type Medlemskap,
+  type Soknad,
+} from '@navikt/fp-types';
 
 import { MedlemskapFaktaIndex } from './MedlemskapFaktaIndex';
 
@@ -48,7 +53,7 @@ const behandling = {
       overstyrbar: true,
     },
   ],
-} as Behandling;
+} as BehandlingFpSak;
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
