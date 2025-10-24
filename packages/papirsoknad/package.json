@@ -40,6 +40,6 @@
     "eslint": "9.37.0",
     "storybook": "9.1.10",
     "typescript": "5.9.3",
-    "vite": "7.1.10"
+    "vite": "7.1.11"
   }
 }
