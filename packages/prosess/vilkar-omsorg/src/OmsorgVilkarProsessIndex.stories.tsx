@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
 
 import { OmsorgVilkarProsessIndex } from './OmsorgVilkarProsessIndex';
@@ -39,6 +39,7 @@ export const ÅpentAksjonspunkt: Story = {
         status: 'OPPR',
       },
     ],
+    vilkårForPanel: [lagVilkår({ vilkarType: 'FP_VK_5', vilkarStatus: 'IKKE_VURDERT' })],
     status: 'IKKE_VURDERT',
   },
 };
@@ -53,6 +54,7 @@ export const OppfyltVilkår: Story = {
         kanLoses: false,
       },
     ] as Aksjonspunkt[],
+    vilkårForPanel: [lagVilkår({ vilkarType: 'FP_VK_5', vilkarStatus: 'OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
     status: 'OPPFYLT',
@@ -65,7 +67,7 @@ export const AvslåttVilkår: Story = {
       uuid: '1',
       versjon: 1,
       behandlingsresultat: {
-        avslagsarsak: '1099',
+        avslagsarsak: '1010',
       },
     } as BehandlingFpSak,
     aksjonspunkterForPanel: [
@@ -77,6 +79,7 @@ export const AvslåttVilkår: Story = {
         kanLoses: false,
       },
     ],
+    vilkårForPanel: [lagVilkår({ vilkarType: 'FP_VK_5', vilkarStatus: 'IKKE_OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
     status: 'IKKE_OPPFYLT',

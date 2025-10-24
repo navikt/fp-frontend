@@ -133,9 +133,7 @@ export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrs
 };
 
 type KodeverkMedSammeVerditype = {
-  [K in Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak'>]: KodeverkMedNavn<
-    K extends KodeverkType ? K : unknown
-  >[];
+  [K in Exclude<KodeverkType, 'PeriodeResultatÅrsak'>]: KodeverkMedNavn<K extends KodeverkType ? K : unknown>[];
 };
 
 export type AlleKodeverk = KodeverkMedSammeVerditype & {

@@ -1,5 +1,6 @@
 import type { Avslagsarsak, KodeverkMedNavn, VilkårType } from '@navikt/fp-types';
-import { alleKodeverk } from './alleKodeverk.ts';
+
+import { alleKodeverk } from './alleKodeverk';
 
 export const avslagsårsakerPerVilkår:{ [K in VilkårType]: Array<Avslagsarsak> } = {
   FP_VK_3: ['1007'],
@@ -41,7 +42,7 @@ export const avslagsårsakerPerVilkår:{ [K in VilkårType]: Array<Avslagsarsak>
 };
 
 export const getAvslagsårsakerKodeverkForVilkår = (vilkårType: VilkårType): KodeverkMedNavn<'LineærAvslagsårsak'>[] => {
-  const avslagsårsakerKoder = avslagsårsakerPerVilkår[vilkårType] || [];
+  const avslagsårsakerKoder = avslagsårsakerPerVilkår[vilkårType];
   return alleKodeverk['LineærAvslagsårsak']
     .filter(kodeverk => (avslagsårsakerKoder.includes(kodeverk.kode)));
 }

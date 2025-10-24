@@ -52,9 +52,8 @@ const ConditionalWrapper = ({ isReadOnly, children }: PropsWithChildren<{ isRead
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
 export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandlingResultat }: Props) => {
-  const { fagsak, behandling, submitCallback, isReadOnly, isSubmittable, alleKodeverk } = usePanelDataContext<
-    VurderMedlemskapAp | VurderForutgaendeMedlemskapAp
-  >();
+  const { fagsak, behandling, vilkårForPanel, submitCallback, isReadOnly, isSubmittable, alleKodeverk } =
+    usePanelDataContext<VurderMedlemskapAp | VurderForutgaendeMedlemskapAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<VurderMedlemskapFormValues>();
   const [submitting, setSubmitting] = useState(false);
@@ -78,12 +77,10 @@ export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandli
       medlemFom: avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? medlemFom : undefined,
     });
   };
-  const vilkår = behandling.vilkår.find(v => v.vilkarType === aksjonspunkt.vilkarType);
-  const avslagsårsaker = vilkår
-    ? alleKodeverk['LineærAvslagsårsak']
-        .filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))
-        .sort((k1, k2) => k1.navn.localeCompare(k2.navn))
-    : [];
+
+  const avslagsårsaker = alleKodeverk['LineærAvslagsårsak']
+    .filter(kodeverk => vilkårForPanel[0]?.aktuelleAvslagsårsaker.includes(kodeverk.kode))
+    .sort((k1, k2) => k1.navn.localeCompare(k2.navn));
 
   return (
     <ConditionalWrapper isReadOnly={isReadOnly}>

@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
-  avslagsårsakerPerVilkår,
+  lagVilkår,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -19,11 +19,10 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     vilkårForPanel: [
-      {
+      lagVilkår({
         vilkarType: 'FP_VK_1',
         lovReferanse: '§§Dette er en lovreferanse',
-        aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_1,
-      },
+      }),
     ] as Vilkar[],
   },
   render: args => <FodselVilkarProsessIndex {...args} />,

@@ -67,6 +67,7 @@ interface Props {
 export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, status }: Props) => {
   const {
     aksjonspunkterForPanel,
+    vilkårForPanel,
     alleMerknaderFraBeslutter,
     behandling,
     isSubmittable,
@@ -99,10 +100,9 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     }
   }, [erVilkarOk]);
 
-  const vilkår = behandling.vilkår.find(v => v.vilkarType === 'SVP_VK_1');
-  const avslagsårsaker = vilkår
-    ? alleKodeverk['LineærAvslagsårsak'].filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))
-    : [];
+  const avslagsårsaker = alleKodeverk['LineærAvslagsårsak'].filter(kodeverk =>
+    vilkårForPanel[0]?.aktuelleAvslagsårsaker.includes(kodeverk.kode),
+  );
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
