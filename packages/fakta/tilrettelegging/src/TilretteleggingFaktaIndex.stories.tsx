@@ -268,7 +268,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId: ARBEIDSGIVEROPPLYSNINGER_PER_ID,
-    readonly: false,
+    isReadOnly: false,
   },
   render: args => <TilretteleggingFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof TilretteleggingFaktaIndex>>;
@@ -453,7 +453,7 @@ export const ErReadonly: Story = {
       ],
     },
     arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
-    readonly: true,
+    isReadOnly: true,
   },
 };
 

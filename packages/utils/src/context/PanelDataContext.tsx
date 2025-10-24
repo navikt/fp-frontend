@@ -6,15 +6,15 @@ import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-av
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
 type Props<AP_TYPE extends AksjonspunktType, B extends Behandling> = {
-  behandling: B;
   fagsak: Fagsak;
-  aksjonspunkterForPanel: Aksjonspunkt[];
-  harÅpentAksjonspunkt: boolean;
+  behandling: B;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+  aksjonspunkterForPanel: Aksjonspunkt[];
+  harÅpentAksjonspunkt: boolean;
   isReadOnly: boolean;
-  submitCallback: (aksjonspunktData: AP_TYPE) => Promise<void>;
   isSubmittable: boolean;
+  submitCallback: (aksjonspunktData: AP_TYPE) => Promise<void>;
 };
 
 const PanelDataContext = createContext<unknown>(null);

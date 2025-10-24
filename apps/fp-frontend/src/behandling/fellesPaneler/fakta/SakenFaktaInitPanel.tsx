@@ -18,11 +18,6 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
 ];
 
-const OVERSTYRING_AP_CODES = [
-  AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
-  AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
-];
-
 /**
  * SakenFaktaInitPanel
  *
@@ -33,7 +28,7 @@ export const SakenFaktaInitPanel = () => {
 
   const { behandling, rettigheter } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const api = useBehandlingApi(behandling);
 

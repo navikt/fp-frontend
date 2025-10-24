@@ -24,14 +24,12 @@ export type StandardProsessPanelProps<T extends Behandling> = {
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   aksjonspunkterForPanel: Aksjonspunkt[];
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
+  vilkårForPanel: Vilkar[];
   status: VilkarUtfallType;
   isReadOnly: boolean;
-  readOnlySubmitButton: boolean;
-  vilkårForPanel: Vilkar[];
+  isSubmittable: boolean;
   harÅpentAksjonspunkt: boolean;
-  isAksjonspunktOpen: boolean;
+  submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
 };
 
 export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFpSak>(
@@ -49,11 +47,9 @@ export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFp
     oppdaterProsessStegOgFaktaPanelIUrl,
   } = useBehandlingDataContext<T>();
 
-  const { aksjonspunkt } = behandling;
+  const aksjonspunkterForPanel = behandling.aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon));
+
   const vilkår = 'vilkår' in behandling ? behandling.vilkår : [];
-
-  const aksjonspunkterForPanel = aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon));
-
   const vilkårForPanel = vilkår.filter(v => vilkårKoder.includes(v.vilkarType));
 
   const isReadOnly = erReadOnly(behandling, vilkårForPanel, rettigheter, false);
@@ -64,7 +60,7 @@ export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFp
 
   const status = finnStatus(vilkårForPanel, aksjonspunkterForPanel);
 
-  const readOnlySubmitButton = !aksjonspunkterForPanel.some(ap => ap.kanLoses) || 'OPPFYLT' === status;
+  const isSubmittable = aksjonspunkterForPanel.some(ap => ap.kanLoses) && status !== 'OPPFYLT';
 
   const standardlagringSideEffekter = () => () => {
     oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
@@ -86,15 +82,13 @@ export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFp
   return {
     fagsak,
     behandling,
-    harÅpentAksjonspunkt,
-    isAksjonspunktOpen: harÅpentAksjonspunkt,
-    aksjonspunkter: aksjonspunkterForPanel,
-    aksjonspunkterForPanel,
-    vilkårForPanel,
     alleKodeverk,
     alleMerknaderFraBeslutter,
+    aksjonspunkterForPanel,
+    vilkårForPanel,
     isReadOnly,
-    readOnlySubmitButton,
+    isSubmittable,
+    harÅpentAksjonspunkt,
     submitCallback,
     status,
   };
@@ -152,11 +146,10 @@ const getBekreftAksjonspunktProsessCallback =
 
 const finnStatus = (vilkår: Vilkar[], aksjonspunkter: Aksjonspunkt[]): VilkarUtfallType => {
   if (vilkår.length > 0) {
-    const vilkårStatusCodes = vilkår.map(v => v.vilkarStatus);
-    if (vilkårStatusCodes.includes('IKKE_VURDERT')) {
+    if (vilkår.some(v => v.vilkarStatus === 'IKKE_VURDERT')) {
       return 'IKKE_VURDERT';
     }
-    return vilkårStatusCodes.every(vsc => vsc === 'OPPFYLT') ? 'OPPFYLT' : 'IKKE_OPPFYLT';
+    return vilkår.some(v => v.vilkarStatus !== 'OPPFYLT') ? 'IKKE_OPPFYLT' : 'OPPFYLT';
   }
 
   if (aksjonspunkter.length > 0) {

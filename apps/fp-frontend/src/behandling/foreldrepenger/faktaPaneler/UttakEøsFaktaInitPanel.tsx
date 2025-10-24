@@ -17,14 +17,12 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART,
 ];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART];
-
 export const UttakEøsFaktaInitPanel = () => {
   const intl = useIntl();
 
   const { behandling, rettigheter } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const api = useBehandlingApi(behandling);
   const { data: annenForelderUttakEøs } = useQuery(api.uttakAnnenpartEøsOptions(behandling));

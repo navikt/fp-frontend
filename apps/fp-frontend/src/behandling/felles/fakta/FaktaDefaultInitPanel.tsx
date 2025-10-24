@@ -39,12 +39,12 @@ export const FaktaDefaultInitPanel = <T extends Behandling = BehandlingFpSak>({
           behandling={behandling}
           fagsak={fagsak}
           alleKodeverk={alleKodeverk}
+          alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
           aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
           harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
-          submitCallback={standardPanelProps.submitCallback}
           isReadOnly={standardPanelProps.isReadOnly}
-          alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
           isSubmittable={standardPanelProps.isSubmittable}
+          submitCallback={standardPanelProps.submitCallback}
         >
           {children}
         </PanelDataProvider>

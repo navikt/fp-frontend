@@ -7,7 +7,6 @@ import { TilretteleggingFaktaIndex } from '@navikt/fp-fakta-tilrettelegging';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
-import { harAksjonspunkt } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -16,14 +15,12 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_SVP_TILRETTELEGGING];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO];
-
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 export const FodselOgTilretteleggingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AP_CODES);
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const { behandling } = useBehandlingDataContext();
 
@@ -48,10 +45,6 @@ export const FodselOgTilretteleggingFaktaInitPanel = ({ arbeidsgiverOpplysninger
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           arbeidOgInntekt={arbeidOgInntekt}
           svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-          readonly={
-            standardPanelProps.isReadOnly ||
-            !AKSJONSPUNKT_KODER.some(kode => harAksjonspunkt(kode, behandling.aksjonspunkt))
-          }
         />
       ) : (
         <LoadingPanel />

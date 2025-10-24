@@ -19,14 +19,12 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
 ];
 
-const OVERSTYRING_AKSJONSPUNKT_KODER = [AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG];
-
 interface Props {
   personoversikt: Personoversikt;
 }
 
 export const OmsorgOgRettFaktaInitPanel = ({ personoversikt }: Props) => {
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const { behandling, rettigheter } = useBehandlingDataContext();
 

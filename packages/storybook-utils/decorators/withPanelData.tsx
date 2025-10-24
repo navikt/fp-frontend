@@ -13,17 +13,17 @@ type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjons
 export type PanelDataArgs = {
   fagsak?: Fagsak;
   behandling?: BehandlingFpSak;
+  alleMerknaderFraBeslutter?: { [key: string]: { notAccepted?: boolean } };
   aksjonspunkterForPanel?: Aksjonspunkt[];
   isReadOnly?: boolean;
-  submitCallback?: (data: AksjonspunktType) => Promise<void>;
-  alleMerknaderFraBeslutter?: { [key: string]: { notAccepted?: boolean } };
   isSubmittable?: boolean;
+  submitCallback?: (data: AksjonspunktType) => Promise<void>;
 };
 
 const promiseAction =
   () =>
   (...args: [AksjonspunktType]): Promise<void> => {
-    action('button-click')(...args);
+    action('submit')(...args);
     return Promise.resolve();
   };
 
@@ -96,11 +96,11 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
   const {
     fagsak,
     behandling,
+    alleMerknaderFraBeslutter,
     aksjonspunkterForPanel,
     isReadOnly,
-    submitCallback,
-    alleMerknaderFraBeslutter,
     isSubmittable,
+    submitCallback,
   } = context.args as PanelDataArgs;
 
   const aksjonspunkter = aksjonspunkterForPanel ?? [];
@@ -109,13 +109,13 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
     <PanelDataProvider
       fagsak={fagsak ?? DEFAULT_FAGSAK}
       behandling={behandling ?? DEFAULT_BEHANDLING}
-      aksjonspunkterForPanel={aksjonspunkter}
-      harÅpentAksjonspunkt={aksjonspunkter.some(erAksjonspunktÅpent)}
       alleKodeverk={alleKodeverk}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter ?? {}}
+      aksjonspunkterForPanel={aksjonspunkter}
+      harÅpentAksjonspunkt={aksjonspunkter.some(erAksjonspunktÅpent)}
       isReadOnly={isReadOnly ?? false}
-      submitCallback={submitCallback ?? promiseAction()}
       isSubmittable={isSubmittable ?? true}
+      submitCallback={submitCallback ?? promiseAction()}
     >
       <Story />
     </PanelDataProvider>
