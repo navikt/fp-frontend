@@ -43,12 +43,7 @@ export type {
 export type { Dokument } from './src/dokumentTsType';
 export type { FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export type { InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
-export type {
-  AlleKodeverk,
-  KodeverkType,
-  KodeverkMedNavn,
-  PeriodeResultatÅrsakKodeverk,
-} from './src/kodeverkAlle';
+export type { AlleKodeverk, KodeverkType, KodeverkMedNavn, PeriodeResultatÅrsakKodeverk } from './src/kodeverkAlle';
 export type {
   AlleKodeverkTilbakekreving,
   TilbakekrevingKodeverkType,
@@ -292,12 +287,20 @@ export type { OmsorgsovertakelseDto } from './src/omsorgsovertakelse';
 
 export type { VenteÅrsakTypeFpTilbake } from './src/tilbakekreving/venteÅrsakTypeFpTilbake';
 export type { BehandlingResultatTypeFpTilbake } from './src/tilbakekreving/behandlingResultatTypeFpTilbake';
-export type { FagsakBehandlingDtoFpTilbake } from './src/tilbakekreving/fagsakBehandlingDtoFpTilbake';
+export type {
+  FagsakBehandlingDtoFpTilbake,
+  TotrinnskontrollSkjermlenkeContextDtoFpTilbake,
+  TotrinnskontrollAksjonspunkterDtoFpTilbake,
+} from './src/tilbakekreving/fagsakBehandlingDtoFpTilbake';
 export type { BehandlingFpTilbake } from './src/tilbakekreving/behandlingFpTilbake';
 export type { BehandlingsresultatDtoFpTilbake } from './src/tilbakekreving/behandlingsresultatDtoFpTilbake';
 export type { BehandlingÅrsakTypeFpTilbake } from './src/tilbakekreving/behandlingÅrsakTypeFpTilbake';
 export type { DokumentMalTypeFpTilbake } from './src/tilbakekreving/dokumentMalTypeFpTilbake';
-export type { FagsakDataFpTilbake } from './src/tilbakekreving/fagsakDataFpTilbake';
+export type {
+  SakFullDtoFpTilbake,
+  HistorikkinnslagDtoFpTilbake,
+  SkjermlenkeTypeFpTilbake,
+} from './src/tilbakekreving/sakFullDtoFpTilbake';
 
 export type { FagsakBehandlingDto } from './src/fagsakBehandlingDto';
 export type { Behandling } from './src/behandling';

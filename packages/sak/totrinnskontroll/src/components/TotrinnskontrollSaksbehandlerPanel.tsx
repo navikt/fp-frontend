@@ -13,6 +13,7 @@ import type {
   KodeverkMedNavnTilbakekreving,
   SkjermlenkeType,
   TotrinnskontrollSkjermlenkeContext,
+  TotrinnskontrollSkjermlenkeContextDtoFpTilbake,
   VurderÅrsak,
 } from '@navikt/fp-types';
 
@@ -39,7 +40,10 @@ const VurderPåNyttPunkter = ({
 
 interface Props {
   behandling: FagsakBehandlingDto;
-  totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
+  totrinnskontrollSkjermlenkeContext: (
+    | TotrinnskontrollSkjermlenkeContext
+    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+  )[];
   erForeldrepengerFagsak: boolean;
   erTilbakekreving: boolean;
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];

@@ -5,7 +5,7 @@ import type { DecoratorFunction } from 'storybook/internal/types';
 import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
 import type {
   BehandlingÅrsak,
-  FagsakBehandlingDto,
+  FagsakBehandlingDtoFpSak,
   SkjermlenkeType,
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
@@ -30,7 +30,7 @@ const DEFAULT_BEHANDLING = {
   behandlingsresultat: {
     type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
   },
-} as FagsakBehandlingDto;
+} as FagsakBehandlingDtoFpSak;
 
 const withDiv: DecoratorFunction<ReactRenderer> = Story => (
   <div

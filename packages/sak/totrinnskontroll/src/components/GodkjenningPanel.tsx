@@ -6,7 +6,10 @@ import { RhfCheckbox, RhfRadioGroup, RhfTextarea, useCustomValidation } from '@n
 import { hasValidText, isRequiredMessage, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import type { TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
+import type {
+  TotrinnskontrollSkjermlenkeContext,
+  TotrinnskontrollSkjermlenkeContextDtoFpTilbake,
+} from '@navikt/fp-types';
 
 import type { AksjonspunktGodkjenningData } from './AksjonspunktGodkjenningFieldArray';
 
@@ -30,7 +33,10 @@ const harIkkeValgtMinstEnFakta = (
 
 type Props = {
   index: number;
-  totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
+  totrinnskontrollSkjermlenkeContext: (
+    | TotrinnskontrollSkjermlenkeContext
+    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+  )[];
   readOnly: boolean;
 };
 

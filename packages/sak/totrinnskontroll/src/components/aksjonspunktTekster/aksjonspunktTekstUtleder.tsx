@@ -10,6 +10,7 @@ import type {
   BehandlingStatus,
   KodeverkMedNavn,
   TotrinnskontrollAksjonspunkt,
+  TotrinnskontrollAksjonspunkterDtoFpTilbake,
 } from '@navikt/fp-types';
 
 import {
@@ -71,7 +72,7 @@ const buildOpptjeningText = (
   ));
 
 const getTextFromAksjonspunktkode = (
-  aksjonspunkt: TotrinnskontrollAksjonspunkt,
+  aksjonspunkt: TotrinnskontrollAksjonspunkt | TotrinnskontrollAksjonspunkterDtoFpTilbake,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   const aksjonspunktTextId = (totrinnskontrollaksjonspunktTextCodes as Record<string, string>)[
     aksjonspunkt.aksjonspunktKode
@@ -82,7 +83,7 @@ const getTextFromAksjonspunktkode = (
 };
 
 const getTextFromTilbakekrevingAksjonspunktkode = (
-  aksjonspunkt: TotrinnskontrollAksjonspunkt,
+  aksjonspunkt: TotrinnskontrollAksjonspunkterDtoFpTilbake,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   const aksjonspunktTextId = totrinnsTilbakekrevingkontrollaksjonspunktTextCodes[aksjonspunkt.aksjonspunktKode];
   return aksjonspunktTextId && typeof aksjonspunktTextId === 'string'
@@ -165,7 +166,9 @@ const buildOverstyrtRettOgOmsorgText = (): ReactElement<
   typeof FormattedMessage
 > => <FormattedMessage id="ToTrinnsForm.AvklarUttak.OverstyrtRettOgOmsorg" />;
 
-const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolean =>
+const erKlageAksjonspunkt = (
+  aksjonspunkt: TotrinnskontrollAksjonspunkt | TotrinnskontrollAksjonspunkterDtoFpTilbake,
+): boolean =>
   aksjonspunkt.aksjonspunktKode === AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP ||
   aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP;
 
@@ -174,25 +177,36 @@ export const getAksjonspunkttekst = (
   behandlingStatus: BehandlingStatus,
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
   erTilbakekreving: boolean,
-  aksjonspunkt: TotrinnskontrollAksjonspunkt,
+  aksjonspunkt: TotrinnskontrollAksjonspunkt | TotrinnskontrollAksjonspunkterDtoFpTilbake,
   behandlingsresultat?: Behandlingsresultat | BehandlingsresultatDtoFpTilbake,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING) {
+  const erFpSakAksjonspunkt = 'beregningDto' in aksjonspunkt;
+
+  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING && erFpSakAksjonspunkt) {
     return buildOpptjeningText(aksjonspunkt);
   }
   if (
     aksjonspunkt.aksjonspunktKode ===
-    AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE
+      AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE &&
+    erFpSakAksjonspunkt
   ) {
     return [buildVarigEndringBeregningText(aksjonspunkt.beregningDto)];
   }
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN) {
+  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN && erFpSakAksjonspunkt) {
     return getFaktaOmBeregningText(faktaOmBeregningTilfeller, aksjonspunkt.beregningDto);
   }
-  if (isUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) && aksjonspunkt.uttakPerioder.length > 0) {
+  if (
+    isUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) &&
+    erFpSakAksjonspunkt &&
+    aksjonspunkt.uttakPerioder.length > 0
+  ) {
     return buildUttakText(aksjonspunkt);
   }
-  if (isFaktaUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) && aksjonspunkt.uttakPerioder.length > 0) {
+  if (
+    isFaktaUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) &&
+    erFpSakAksjonspunkt &&
+    aksjonspunkt.uttakPerioder.length > 0
+  ) {
     return buildUttakText(aksjonspunkt);
   }
 
