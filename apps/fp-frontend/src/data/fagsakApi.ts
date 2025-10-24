@@ -9,14 +9,15 @@ import type {
   AlleKodeverkTilbakekreving,
   ApiLink,
   BehandlingFpSak,
+  BehandlingFpTilbake,
   Dokument,
   Fagsak,
   FagsakBehandlingDto,
-  FagsakDataFpTilbake,
   FagsakEnkel,
   ForhåndsvisMeldingParams,
   InfotrygdVedtak,
   NavAnsatt,
+  SakFullDtoFpTilbake,
 } from '@navikt/fp-types';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -147,7 +148,7 @@ export const lagNyBehandling = (params: NyBehandlingParams) =>
   });
 
 export const lagNyTilbakekrevingBehandling = (params: NyBehandlingParams) =>
-  kyExtended.post<BehandlingFpSak>(FagsakUrl.NEW_BEHANDLING_FPTILBAKE, {
+  kyExtended.post<BehandlingFpTilbake>(FagsakUrl.NEW_BEHANDLING_FPTILBAKE, {
     json: params,
   });
 
@@ -186,7 +187,7 @@ const getHentFagsakFpTilbakeOptions = (links?: ApiLink[]) => (isEnabled: boolean
     queryFn: () =>
       kyExtended
         .get(getUrlFromRel('FETCH_FAGSAKDATA_FPTILBAKE', links), { searchParams: { saksnummer } })
-        .json<FagsakDataFpTilbake>(),
+        .json<SakFullDtoFpTilbake>(),
     enabled: isEnabled,
   });
 

@@ -4,13 +4,13 @@ import { createIntl } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
 import type {
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
   FagsakBehandlingDto,
   FagsakYtelseType,
   SkjermlenkeType,
+  SkjermlenkeTypeFpTilbake,
   VurderÅrsak,
 } from '@navikt/fp-types';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -23,11 +23,11 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const sorterteSkjermlenkeCodesForTilbakekreving = [
-  skjermlenkeCodes['FAKTA_OM_FEILUTBETALING'],
-  skjermlenkeCodes['FORELDELSE'],
-  skjermlenkeCodes['TILBAKEKREVING'],
-  skjermlenkeCodes['VEDTAK'],
+const sorterteSkjermlenkeCodesForTilbakekreving: SkjermlenkeTypeFpTilbake[] = [
+  'FAKTA_OM_FEILUTBETALING',
+  'FORELDELSE',
+  'TILBAKEKREVING',
+  'VEDTAK',
 ];
 
 const getArsaker = (apData: AksjonspunktGodkjenningData): VurderÅrsak[] => {
@@ -72,7 +72,7 @@ interface Props {
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (
     behandlingLocation: Location,
-    skjermlenkeCode: SkjermlenkeType,
+    skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake,
   ) => Location | undefined;
   beslutterFormData?: FormValues;
   setBeslutterFormData: (data?: FormValues) => void;
@@ -120,12 +120,12 @@ export const TotrinnskontrollSakIndex = ({
 
   const sorterteTotrinnskontrollSkjermlenkeContext = erTilbakekreving
     ? sorterteSkjermlenkeCodesForTilbakekreving.flatMap(s => {
-        const context = behandling.totrinnskontrollÅrsaker.find(el => el.skjermlenkeType === s?.kode);
+        const context = behandling.totrinnskontrollÅrsaker.find(el => el.skjermlenkeType === s);
         return context ? [context] : [];
       })
     : behandling.totrinnskontrollÅrsaker;
 
-  const lagLenke = (skjermlenkeCode: SkjermlenkeType): Location | undefined =>
+  const lagLenke = (skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake): Location | undefined =>
     createLocationForSkjermlenke(location, skjermlenkeCode);
 
   const erStatusFatterVedtak = behandling.status === 'FVED';

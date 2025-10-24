@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { HistorikkSakIndex } from '@navikt/fp-sak-historikk';
-import type { Historikkinnslag } from '@navikt/fp-types';
+import type { Historikkinnslag, HistorikkinnslagDtoFpTilbake } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { createLocationForSkjermlenke, pathToBehandling } from '../../app/paths';
@@ -14,7 +14,7 @@ interface Props {
   saksnummer: string;
   behandlingUuid?: string;
   historikkinnslagFpSak?: Historikkinnslag[];
-  historikkinnslagFpTilbake?: Historikkinnslag[];
+  historikkinnslagFpTilbake?: HistorikkinnslagDtoFpTilbake[];
   toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
 }
 

@@ -10,7 +10,9 @@ import type {
   AlleKodeverkTilbakekreving,
   HistorikkAktor,
   Historikkinnslag,
+  HistorikkinnslagDtoFpTilbake,
   SkjermlenkeType,
+  SkjermlenkeTypeFpTilbake,
 } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
@@ -22,10 +24,10 @@ interface Props {
   behandlingLocation?: Location;
   createLocationForSkjermlenke: (
     behandlingLocation: Location,
-    skjermlenkeCode: SkjermlenkeType,
+    skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake,
   ) => Location | undefined;
   alleKodeverk: AlleKodeverkTilbakekreving | AlleKodeverk;
-  historikkInnslag: Historikkinnslag;
+  historikkInnslag: Historikkinnslag | HistorikkinnslagDtoFpTilbake;
   saksnummer: string;
 }
 
