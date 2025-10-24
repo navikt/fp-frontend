@@ -2,7 +2,7 @@ import { type ReactRenderer } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import type { Aksjonspunkt, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, Fagsak, Vilkar } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, PanelDataProvider } from '@navikt/fp-utils';
 
@@ -14,6 +14,7 @@ export type PanelDataArgs = {
   fagsak?: Fagsak;
   behandling?: BehandlingFpSak;
   aksjonspunkterForPanel?: Aksjonspunkt[];
+  vilkårForPanel?: Vilkar[];
   isReadOnly?: boolean;
   submitCallback?: (data: AksjonspunktType) => Promise<void>;
   alleMerknaderFraBeslutter?: { [key: string]: { notAccepted?: boolean } };
@@ -101,6 +102,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
     submitCallback,
     alleMerknaderFraBeslutter,
     isSubmittable,
+    vilkårForPanel,
   } = context.args as PanelDataArgs;
 
   const aksjonspunkter = aksjonspunkterForPanel ?? [];
@@ -110,6 +112,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
       fagsak={fagsak ?? DEFAULT_FAGSAK}
       behandling={behandling ?? DEFAULT_BEHANDLING}
       aksjonspunkterForPanel={aksjonspunkter}
+      vilkårForPanel={vilkårForPanel ?? []}
       harÅpentAksjonspunkt={aksjonspunkter.some(erAksjonspunktÅpent)}
       alleKodeverk={alleKodeverk}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter ?? {}}

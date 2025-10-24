@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import type { AlleKodeverk } from '@navikt/fp-types';

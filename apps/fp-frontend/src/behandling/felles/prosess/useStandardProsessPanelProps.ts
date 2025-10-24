@@ -24,12 +24,11 @@ export type StandardProsessPanelProps<T extends Behandling> = {
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   aksjonspunkterForPanel: Aksjonspunkt[];
-  aksjonspunkter: Aksjonspunkt[];
+  vilkårForPanel: Vilkar[];
   submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   status: VilkarUtfallType;
   isReadOnly: boolean;
   readOnlySubmitButton: boolean;
-  vilkårForPanel: Vilkar[];
   harÅpentAksjonspunkt: boolean;
   isAksjonspunktOpen: boolean;
 };

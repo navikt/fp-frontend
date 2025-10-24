@@ -85,6 +85,7 @@ export const InngangsvilkarDefaultInitPanel = ({
         behandling={behandling}
         fagsak={fagsak}
         aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
+        vilkårForPanel={standardPanelProps.vilkårForPanel}
         harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
         alleKodeverk={alleKodeverk}
         submitCallback={standardPanelProps.submitCallback}

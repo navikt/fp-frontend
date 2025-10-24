@@ -12,11 +12,9 @@ import {
   validerApKodeOgHentApEnum,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak, KodeverkMedNavn, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
 import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
-
-const avslagsårsakerES = new Set(['1002', '1003', '1032']);
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -26,8 +24,6 @@ type FormValues = {
 
 interface Props {
   status: string;
-  vilkårForPanel: Vilkar[];
-  ytelseTypeKode: string;
 }
 
 /**
@@ -35,7 +31,7 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av Fødselsvilkåret.
  */
-export const FodselVilkarForm = ({ status, ytelseTypeKode, vilkårForPanel }: Props) => {
+export const FodselVilkarForm = ({ status }: Props) => {
   const intl = useIntl();
 
   const {
@@ -43,6 +39,7 @@ export const FodselVilkarForm = ({ status, ytelseTypeKode, vilkårForPanel }: Pr
     isSubmittable,
     alleKodeverk,
     aksjonspunkterForPanel,
+    vilkårForPanel,
     submitCallback,
     harÅpentAksjonspunkt,
     isReadOnly,
@@ -60,9 +57,8 @@ export const FodselVilkarForm = ({ status, ytelseTypeKode, vilkårForPanel }: Pr
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const avslagsårsaker = getFodselVilkarAvslagsårsaker(
-    ytelseTypeKode === 'FP',
-    alleKodeverk['Avslagsårsak']['FP_VK_1'],
+  const avslagsårsaker = alleKodeverk['LineærAvslagsårsak'].filter(kodeverk =>
+    vilkårForPanel[0]!.aktuelleAvslagsårsaker.includes(kodeverk.kode),
   );
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
@@ -78,7 +74,7 @@ export const FodselVilkarForm = ({ status, ytelseTypeKode, vilkårForPanel }: Pr
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        lovReferanse={vilkårForPanel[0]?.lovReferanse ?? undefined}
+        lovReferanse={vilkårForPanel[0]?.lovReferanse}
         originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
@@ -115,9 +111,3 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Vu
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
   kode: validerApKodeOgHentApEnum(aksjonspunkter[0]?.definisjon, AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE),
 });
-
-const getFodselVilkarAvslagsårsaker = (
-  isFpFagsak: boolean,
-  fødselsvilkårAvslagskoder: KodeverkMedNavn<'Avslagsårsak'>[],
-): KodeverkMedNavn<'Avslagsårsak'>[] =>
-  isFpFagsak ? fødselsvilkårAvslagskoder.filter(arsak => !avslagsårsakerES.has(arsak.kode)) : fødselsvilkårAvslagskoder;
