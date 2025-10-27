@@ -256,7 +256,7 @@ const sortByNavn = (a: { navn: string } | undefined, b: { navn: string } | undef
 
 const mapEktefellesBarn = (gjeldende: OmsorgsovertakelseDto['gjeldende']) => {
   if (gjeldende.erEktefellesBarn === undefined) {
-    if (gjeldende.delvilkår === 'FP_VK_16') {
+    if (gjeldende.delvilkår === 'FP_VK_16A') {
       return false;
     }
     if (gjeldende.delvilkår === 'FP_VK_16S') {

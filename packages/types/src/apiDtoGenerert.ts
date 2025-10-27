@@ -600,8 +600,6 @@ export type tjenester_behandling_dto_behandling_UtvidetBehandlingDto = {
 
 export type tjenester_behandling_vilkår_VilkårDto = {
   avslagKode?: string;
-  evaluering?: string;
-  input?: string;
   lovReferanse?: string;
   overstyrbar: boolean;
   vilkarStatus: foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType;
@@ -2218,33 +2216,6 @@ export type tjenester_behandling_dto_BehandlingIdVersjonDto = {
   behandlingVersjon: number;
 };
 
-export type foreldrepenger_domene_arbeidsforhold_dto_GraderingPeriodeDto = {
-  arbeidsprosent?: number;
-  fom?: string;
-  tom?: string;
-};
-
-export type foreldrepenger_domene_arbeidsforhold_dto_InntektsmeldingDto = {
-  arbeidsgiver?: string;
-  arbeidsgiverOrgnr?: string;
-  arbeidsgiverReferanse?: string;
-  arbeidsgiverStartdato?: string;
-  getRefusjonBeløpPerMnd?: foreldrepenger_domene_typer_Beløp;
-  graderingPerioder?: Array<foreldrepenger_domene_arbeidsforhold_dto_GraderingPeriodeDto>;
-  innsendingstidspunkt?: string;
-  utsettelsePerioder?: Array<foreldrepenger_domene_arbeidsforhold_dto_UtsettelsePeriodeDto>;
-};
-
-export type foreldrepenger_domene_arbeidsforhold_dto_InntektsmeldingerDto = {
-  inntektsmeldinger?: Array<foreldrepenger_domene_arbeidsforhold_dto_InntektsmeldingDto>;
-};
-
-export type foreldrepenger_domene_arbeidsforhold_dto_UtsettelsePeriodeDto = {
-  fom?: string;
-  tom?: string;
-  utsettelseArsak?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_UtsettelseÅrsak;
-};
-
 export type tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto = {
   erPrivatPerson: boolean;
   fødselsdato?: string;
@@ -3304,8 +3275,8 @@ export type foreldrepenger_behandlingslager_behandling_familiehendelse_Omsorgsov
   | 'FP_VK_8'
   | 'FP_VK_5'
   | 'FP_VK_33'
-  | 'FP_VK_16'
-  | 'FP_VK_8F'
+  | 'FP_VK_16A'
+  | 'FP_VK_8FP'
   | 'FP_VK_16S'
   | '-';
 
@@ -3404,10 +3375,6 @@ export type tjenester_behandling_klage_KlagebehandlingDto = {
   klageVurderingResultatNK?: tjenester_behandling_klage_KlageVurderingResultatDto;
   mottattDato?: string;
   underBehandlingKabal?: boolean;
-};
-
-export type tjenester_behandling_klage_MottattKlagedokumentDto = {
-  mottattDato?: string;
 };
 
 export type tjenester_behandling_klage_aksjonspunkt_KlageFormKravAksjonspunktMellomlagringDto = {
@@ -4052,7 +4019,14 @@ export type tjenester_behandling_søknad_OppgittTilknytningDto = {
   utlandsoppholdFor: Array<tjenester_behandling_søknad_UtlandsoppholdDto>;
 };
 
-export type tjenester_behandling_søknad_SoknadDto = {
+export type tjenester_behandling_søknad_SoknadDto = (
+  | ({
+      '@type': 'tjenester.behandling.søknad.SoknadAdopsjonDto';
+    } & tjenester_behandling_søknad_SoknadAdopsjonDto)
+  | ({
+      '@type': 'tjenester.behandling.søknad.SoknadFodselDto';
+    } & tjenester_behandling_søknad_SoknadFodselDto)
+) & {
   antallBarn: number;
   begrunnelseForSenInnsending?: string;
   manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto>;
@@ -4119,12 +4093,6 @@ export type tjenester_behandling_søknad_SoknadFodselDto = {
   søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
   termindato?: string;
   utstedtdato?: string;
-};
-
-export type tjenester_behandling_søknad_SoknadBackendDto = {
-  mottattDato?: string;
-  oppgittAleneomsorg?: boolean;
-  soknadType?: tjenester_behandling_søknad_SøknadType;
 };
 
 export type foreldrepenger_kontrakter_simulering_resultat_kodeverk_Fagområde =
@@ -4347,23 +4315,19 @@ export type tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto = {
 export type tjenester_behandling_uttak_dto_UttakResultatPeriodeDto = {
   aktiviteter: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto>;
   begrunnelse?: string;
-  erUtbetalingRedusertTilMorsStillingsprosent?: boolean;
   flerbarnsdager: boolean;
   fom: string;
   graderingAvslagÅrsak?: foreldrepenger_behandlingslager_uttak_fp_GraderingAvslagÅrsak;
   graderingInnvilget: boolean;
-  graderingsAvslagÅrsakLovhjemmel?: string;
   gradertAktivitet?: tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto;
   manuellBehandlingÅrsak?: foreldrepenger_behandlingslager_uttak_fp_ManuellBehandlingÅrsak;
   mottattDato?: string;
   oppholdÅrsak: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak;
   periodeResultatType?: foreldrepenger_behandlingslager_uttak_PeriodeResultatType;
   periodeResultatÅrsak: foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak;
-  periodeResultatÅrsakLovhjemmel?: string;
   periodeType?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType;
   samtidigUttak?: boolean;
   samtidigUttaksprosent?: number;
-  tidligstMottattDato?: string;
   tom: string;
   utsettelseType?: foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType;
 };
@@ -4411,15 +4375,6 @@ export type foreldrepenger_behandlingslager_behandling_verge_VergeType =
   | 'VOKSEN'
   | 'ADVOKAT'
   | 'ANNEN_F';
-
-export type foreldrepenger_domene_person_verge_dto_VergeBackendDto = {
-  aktoerId?: string;
-  gyldigFom?: string;
-  gyldigTom?: string;
-  navn?: string;
-  organisasjonsnummer?: string;
-  vergeType?: foreldrepenger_behandlingslager_behandling_verge_VergeType;
-};
 
 export type foreldrepenger_domene_person_verge_dto_VergeDto = {
   fnr?: string;
@@ -4586,29 +4541,6 @@ export type tjenester_dokument_dto_DokumentDto = {
   tittel?: string;
 };
 
-export type foreldrepenger_behandlingslager_behandling_DokumentKategori =
-  | '-'
-  | 'KLGA'
-  | 'ITSKJ'
-  | 'SOKN'
-  | 'ESKJ'
-  | 'BRV'
-  | 'EDIALOG'
-  | 'FNOT'
-  | 'IBRV'
-  | 'KONVEARK'
-  | 'KONVSYS'
-  | 'PUBEOS'
-  | 'SEDOK'
-  | 'TSKJ'
-  | 'VBRV';
-
-export type tjenester_dokument_dto_MottattDokumentDto = {
-  dokumentKategori?: foreldrepenger_behandlingslager_behandling_DokumentKategori;
-  dokumentTypeId?: foreldrepenger_behandlingslager_behandling_DokumentTypeId;
-  mottattDato?: string;
-};
-
 export type tjenester_dokument_dto_JournalpostIdDto = {
   journalpostId?: string;
 };
@@ -4668,7 +4600,7 @@ export type tjenester_fagsak_dto_EndreUtlandMarkeringDto = {
   saksnummer: string;
 };
 
-export type tjenester_fagsak_dto_FagsakBackendDto = {
+export type tjenester_fagsak_dto_FagsakDto = {
   aktørId?: string;
   dekningsgrad?: number;
   fagsakYtelseType?: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
@@ -6966,28 +6898,6 @@ export type ÅpneForEndringResponses = {
   default: unknown;
 };
 
-export type GetAlleInntektsmeldinger1Data = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/behandling/inntektsmeldinger-alle';
-};
-
-export type GetAlleInntektsmeldinger1Responses = {
-  /**
-   * Returnerer InntektsmeldingerDto, null hvis ikke eksisterer (GUI støtter ikke NOT_FOUND p.t.)
-   */
-  200: foreldrepenger_domene_arbeidsforhold_dto_InntektsmeldingerDto;
-};
-
-export type GetAlleInntektsmeldinger1Response =
-  GetAlleInntektsmeldinger1Responses[keyof GetAlleInntektsmeldinger1Responses];
-
 export type GetArbeidsgiverOpplysningerData = {
   body?: never;
   path?: never;
@@ -7220,27 +7130,6 @@ export type GetKlageVurderingResponses = {
 
 export type GetKlageVurderingResponse = GetKlageVurderingResponses[keyof GetKlageVurderingResponses];
 
-export type GetMottattKlagedokumentData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/behandling/klage/mottatt-klagedokument-v2';
-};
-
-export type GetMottattKlagedokumentResponses = {
-  /**
-   * Returnerer mottatt klagedokument
-   */
-  200: tjenester_behandling_klage_MottattKlagedokumentDto;
-};
-
-export type GetMottattKlagedokumentResponse = GetMottattKlagedokumentResponses[keyof GetMottattKlagedokumentResponses];
-
 export type MellomlagreAvvistFormKravData = {
   /**
    * KlageVurderingAdapter tilpasset til mellomlagring.
@@ -7400,27 +7289,6 @@ export type GetSøknadResponses = {
 };
 
 export type GetSøknadResponse = GetSøknadResponses[keyof GetSøknadResponses];
-
-export type GetSøknadBackendData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/behandling/soknad-backend';
-};
-
-export type GetSøknadBackendResponses = {
-  /**
-   * RReturnerer forenklet søknad til andre applikasjoner
-   */
-  200: tjenester_behandling_søknad_SoknadDto;
-};
-
-export type GetSøknadBackendResponse = GetSøknadBackendResponses[keyof GetSøknadBackendResponses];
 
 export type HentSimuleringResultatData = {
   body?: never;
@@ -7713,27 +7581,6 @@ export type FjernVergeResponses = {
   200: unknown;
 };
 
-export type GetVergeBackendData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/verge/backend';
-};
-
-export type GetVergeBackendResponses = {
-  /**
-   * Verge hvis eksisterer ellers null
-   */
-  200: foreldrepenger_domene_person_verge_dto_VergeBackendDto;
-};
-
-export type GetVergeBackendResponse = GetVergeBackendResponses[keyof GetVergeBackendResponses];
-
 export type HentVergeData = {
   body?: never;
   path?: never;
@@ -7854,28 +7701,6 @@ export type ForhåndsvisDokumentResponses = {
   default: unknown;
 };
 
-export type HarSendtVarselOmRevurderingData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/brev/varsel/revurdering';
-};
-
-export type HarSendtVarselOmRevurderingResponses = {
-  /**
-   * default response
-   */
-  default: boolean;
-};
-
-export type HarSendtVarselOmRevurderingResponse =
-  HarSendtVarselOmRevurderingResponses[keyof HarSendtVarselOmRevurderingResponses];
-
 export type HentOverstyringAvBrevMedOrginaltBrevPåHtmlFormatData = {
   body?: never;
   path?: never;
@@ -7961,28 +7786,6 @@ export type HentAlleDokumenterForSakResponses = {
 export type HentAlleDokumenterForSakResponse =
   HentAlleDokumenterForSakResponses[keyof HentAlleDokumenterForSakResponses];
 
-export type HentAlleMottatteDokumenterForBehandlingData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/dokument/hent-mottattdokumentliste';
-};
-
-export type HentAlleMottatteDokumenterForBehandlingResponses = {
-  /**
-   * default response
-   */
-  default: Array<tjenester_dokument_dto_MottattDokumentDto>;
-};
-
-export type HentAlleMottatteDokumenterForBehandlingResponse =
-  HentAlleMottatteDokumenterForBehandlingResponses[keyof HentAlleMottatteDokumenterForBehandlingResponses];
-
 export type HentDokumentData = {
   body?: never;
   path?: never;
@@ -8065,7 +7868,7 @@ export type HentFagsakResponses = {
   /**
    * Returnerer fagsak
    */
-  200: tjenester_fagsak_dto_FagsakBackendDto;
+  200: tjenester_fagsak_dto_FagsakDto;
 };
 
 export type HentFagsakResponse = HentFagsakResponses[keyof HentFagsakResponses];
@@ -8365,25 +8168,6 @@ export type VurderForKlageinstansResponses = {
 
 export type VurderForKlageinstansResponse = VurderForKlageinstansResponses[keyof VurderForKlageinstansResponses];
 
-export type HentBehandlingDtoForBrevData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * UUID for behandlingen
-     */
-    behandlingId: tjenester_behandling_dto_BehandlingIdDto;
-  };
-  url: '/api/formidling/ressurser';
-};
-
-export type HentBehandlingDtoForBrevResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
 export type HentBrevGrunnlagData = {
   body?: never;
   path?: never;
@@ -8397,120 +8181,6 @@ export type HentBrevGrunnlagData = {
 };
 
 export type HentBrevGrunnlagResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type MottattDatoSøknadData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/formidling/motattDatoSøknad';
-};
-
-export type MottattDatoSøknadResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type UtsattStartdatoData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/formidling/utsattstart';
-};
-
-export type UtsattStartdatoResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HentStatusInntektsmeldingerData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/formidling/arbeidInntektsmelding/inntektsmelding-status';
-};
-
-export type HentStatusInntektsmeldingerResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HentBeregningsgrunnlagFormidlingV2Data = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/formidling/beregningsgrunnlag/v2';
-};
-
-export type HentBeregningsgrunnlagFormidlingV2Responses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HentTilkjentYtelseDagytelseFormidlingData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/formidling/tilkjentytelse/dagytelse';
-};
-
-export type HentTilkjentYtelseDagytelseFormidlingResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HentTilkjentYtelseEngangsstonadFormidlingData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/formidling/tilkjentytelse/engangsstonad';
-};
-
-export type HentTilkjentYtelseEngangsstonadFormidlingResponses = {
   /**
    * default response
    */
@@ -9789,6 +9459,20 @@ export type SettStartdatoResponses = {
   default: unknown;
 };
 
+export type AdopsjonHistorikkSkjermlenkeData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/api/forvaltningUttrekk/adopsjonHistorikkSkjermlenke';
+};
+
+export type AdopsjonHistorikkSkjermlenkeResponses = {
+  /**
+   * default response
+   */
+  default: unknown;
+};
+
 export type AvstemOverlappForPeriodeData = {
   body?: {
     /**
@@ -9835,6 +9519,20 @@ export type AvstemSakForOverlappData = {
 };
 
 export type AvstemSakForOverlappResponses = {
+  /**
+   * default response
+   */
+  default: unknown;
+};
+
+export type FlyttAdopsjonTilKofakData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/api/forvaltningUttrekk/flyttAdopsjonTilKofak';
+};
+
+export type FlyttAdopsjonTilKofakResponses = {
   /**
    * default response
    */
@@ -9947,6 +9645,20 @@ export type OpenIkkeLopendeSakerData = {
 };
 
 export type OpenIkkeLopendeSakerResponses = {
+  /**
+   * default response
+   */
+  default: unknown;
+};
+
+export type PopulerAdopsjonVilkår6Data = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/api/forvaltningUttrekk/populerAdopsjonVilkår6';
+};
+
+export type PopulerAdopsjonVilkår6Responses = {
   /**
    * default response
    */
