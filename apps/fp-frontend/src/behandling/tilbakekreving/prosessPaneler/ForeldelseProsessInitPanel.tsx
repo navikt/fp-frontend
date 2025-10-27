@@ -60,6 +60,7 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
           // @ts-expect-error K9 har ein verdi 'DELTAKER' som me ikkje har. Legg til?
           relasjonsRolleTypeKodeverk={standardPanelProps.alleKodeverk['RelasjonsRolleType']}
           {...standardPanelProps}
+          aksjonspunkter={standardPanelProps.aksjonspunkterForPanel}
           behandlingUuid={behandling.uuid}
         />
       ) : (
