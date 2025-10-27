@@ -35,7 +35,7 @@ export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSa
   } = useBehandlingDataContext<T>();
 
   const aksjonspunkterForPanel = behandling.aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon));
-  const overstyringKoder = aksjonspunkterForPanel.filter(ap => ap.aksjonspunktType === 'OVST').map(ap => ap.definisjon);
+  const overstyringKoder = aksjonspunktKoder.filter(kode => kode.startsWith('6'));
 
   const isReadOnly = erReadOnly(behandling, [], rettigheter, false);
   const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForPanel);
@@ -68,7 +68,7 @@ const getBekreftAksjonspunktFaktaCallback =
     oppdaterProsessStegOgFaktaPanelIUrl: (prosessPanel?: string, faktanavn?: string) => void,
     lagreAksjonspunkter: (params: AksjonspunktArgs) => Promise<Behandling>,
     lagreOverstyrteAksjonspunkter: (params: OverstyrteAksjonspunktArgs) => Promise<Behandling>,
-    overstyringApCodes?: string[],
+    overstyringApCodes: string[],
   ) =>
   (aksjonspunkter: FaktaAksjonspunkt | FaktaAksjonspunkt[]): Promise<void> => {
     const apListe = Array.isArray(aksjonspunkter) ? aksjonspunkter : [aksjonspunkter];
@@ -84,7 +84,7 @@ const getBekreftAksjonspunktFaktaCallback =
       behandlingVersjon: behandling.versjon,
     };
 
-    if (overstyringApCodes) {
+    if (overstyringApCodes.length > 0) {
       if (model.length === 0) {
         throw new Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
       }
