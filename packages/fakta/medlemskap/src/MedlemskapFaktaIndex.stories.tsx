@@ -4,13 +4,8 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import {
-  type Aksjonspunkt,
-  type BehandlingFpSak,
-  type Medlemskap,
-  type Soknad,
-} from '@navikt/fp-types';
+import { lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type Aksjonspunkt, type Medlemskap, type Soknad } from '@navikt/fp-types';
 
 import { MedlemskapFaktaIndex } from './MedlemskapFaktaIndex';
 
@@ -36,24 +31,14 @@ const defaultSoknad = {
   },
 } as Soknad;
 
-const behandling = {
-  vilkår: [
-    {
-      vilkarType: 'FP_VK_2_F',
-      lovReferanse: '§ 14-17, femte ledd',
-      aktuelleAvslagsårsaker: ['1020', '1052', '1025', '1021', '1024', '1023'],
-      vilkarStatus: 'OPPFYLT',
-      overstyrbar: true,
-    },
-    {
-      vilkarType: 'FP_VK_2',
-      lovReferanse: '§ 14-2',
-      aktuelleAvslagsårsaker: ['1025', '1024', '1021', '1023', '1020'],
-      vilkarStatus: 'OPPFYLT',
-      overstyrbar: true,
-    },
-  ],
-} as BehandlingFpSak;
+const vilkårForPanel = [
+  lagVilkår('FP_VK_2_F', {
+    vilkarStatus: 'OPPFYLT',
+  }),
+  lagVilkår('FP_VK_2', {
+    vilkarStatus: 'OPPFYLT',
+  }),
+];
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
@@ -73,7 +58,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     soknad: defaultSoknad,
-    behandling,
+    vilkårForPanel,
   },
   render: args => <MedlemskapFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof MedlemskapFaktaIndex>>;
