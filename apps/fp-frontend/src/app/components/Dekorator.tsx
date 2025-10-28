@@ -19,6 +19,7 @@ import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchOptions } from '../../data/fagsakApi';
 import { JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
+import { useAppVersjonDeteksjon } from './useAppVersjonDeteksjon';
 
 type QueryStrings = {
   errorcode?: string;
@@ -43,6 +44,7 @@ export const Dekorator = ({
   setTheme,
 }: Props) => {
   const intl = useIntl();
+  const nyVersjonTilgjengelig = useAppVersjonDeteksjon();
 
   const errorMessages = useRestApiError();
   const { removeErrorMessages } = useRestApiErrorDispatcher();
@@ -54,6 +56,7 @@ export const Dekorator = ({
   const visLos = (e: React.SyntheticEvent) => {
     if (e.type === 'click') {
       void navigate('/');
+      window.location.reload();
     }
     if (e.type === 'contextmenu') {
       globalThis.open('/', '_newtab');
@@ -115,6 +118,7 @@ export const Dekorator = ({
       eksterneLenker={eksterneLenker}
       theme={theme}
       setTheme={setTheme}
+      nyVersjonTilgjengelig={nyVersjonTilgjengelig}
     />
   );
 };

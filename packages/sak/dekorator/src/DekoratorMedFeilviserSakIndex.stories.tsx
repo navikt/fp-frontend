@@ -25,6 +25,7 @@ const meta = {
     ],
     theme: 'light',
     setTheme: action('setTheme'),
+    nyVersjonTilgjengelig: false,
   },
   render: storyArgs => {
     const [args, setArgs] = useState(storyArgs);
@@ -81,5 +82,12 @@ export const MedFeilmeldingDetaljer: Story = {
         },
       },
     ],
+  },
+};
+
+export const NyAppVersjonErDetektert: Story = {
+  args: {
+    feilmeldinger: [],
+    nyVersjonTilgjengelig: true,
   },
 };
