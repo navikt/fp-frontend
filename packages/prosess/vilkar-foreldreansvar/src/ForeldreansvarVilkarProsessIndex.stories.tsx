@@ -3,20 +3,10 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { avslagsårsakerPerVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, BehandlingFpSak, Vilkar, VilkårType } from '@navikt/fp-types';
+import { lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
 
 import { ForeldreansvarVilkarProsessIndex } from './ForeldreansvarVilkarProsessIndex';
-
-const lagVilkår = (vilkårType: VilkårType): Vilkar => {
-  return {
-    vilkarType: vilkårType,
-    aktuelleAvslagsårsaker: avslagsårsakerPerVilkår[vilkårType],
-    lovReferanse: '§§Dette er en lovreferanse',
-    overstyrbar: true,
-    vilkarStatus: 'IKKE_VURDERT',
-  };
-};
 
 const meta = {
   title: 'prosess/prosess-vilkar-foreldreansvar',
@@ -39,8 +29,8 @@ export const ÅpentAksjonspunkt2Ledd: Story = {
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
-    status: 'IKKE_VURDERT',
     vilkårForPanel: [lagVilkår('FP_VK_8')],
+    status: 'IKKE_VURDERT',
   },
 };
 
@@ -53,10 +43,10 @@ export const OppfyltVilkår2Ledd: Story = {
         begrunnelse: 'Dette vilkåret er godkjent',
       },
     ] as Aksjonspunkt[],
+    vilkårForPanel: [lagVilkår('FP_VK_8')],
     isReadOnly: true,
     isSubmittable: false,
     status: 'OPPFYLT',
-    vilkårForPanel: [lagVilkår('FP_VK_8')],
   },
 };
 
@@ -76,10 +66,10 @@ export const AvslåttVilkår2Ledd: Story = {
         begrunnelse: 'Dette vilkåret er avslått',
       },
     ] as Aksjonspunkt[],
+    vilkårForPanel: [lagVilkår('FP_VK_8')],
     isReadOnly: true,
     isSubmittable: false,
     status: 'IKKE_OPPFYLT',
-    vilkårForPanel: [lagVilkår('FP_VK_8')],
   },
 };
 

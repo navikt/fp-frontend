@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, BehandlingFpSak, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
 
 import { AdopsjonVilkarProsessIndex } from './AdopsjonVilkarProsessIndex';
 
@@ -23,12 +23,7 @@ const meta = {
   component: AdopsjonVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    vilkårForPanel: [
-      lagVilkår({
-        vilkarType: 'FP_VK_4',
-        lovReferanse: '§§Dette er en lovreferanse',
-      }),
-    ] as Vilkar[],
+    vilkårForPanel: [lagVilkår('FP_VK_4')],
   },
   render: args => <AdopsjonVilkarProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof AdopsjonVilkarProsessIndex>>;
@@ -45,7 +40,7 @@ export const ÅpentAksjonspunkt: Story = {
         status: 'OPPR',
       },
     ],
-    vilkårForPanel: [lagVilkår({ vilkarType: 'FP_VK_16', vilkarStatus: 'IKKE_VURDERT' })],
+    vilkårForPanel: [lagVilkår('FP_VK_16', { vilkarStatus: 'IKKE_VURDERT' })],
     status: 'IKKE_VURDERT',
   },
 };
@@ -61,7 +56,7 @@ export const OppfyltVilkår: Story = {
         kanLoses: false,
       },
     ],
-    vilkårForPanel: [lagVilkår({ vilkarType: 'FP_VK_4', vilkarStatus: 'OPPFYLT' })],
+    vilkårForPanel: [lagVilkår('FP_VK_4', { vilkarStatus: 'OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
     status: 'OPPFYLT',
@@ -86,7 +81,7 @@ export const AvslåttVilkår: Story = {
         kanLoses: true,
       },
     ],
-    vilkårForPanel: [lagVilkår({ vilkarType: 'FP_VK_16', vilkarStatus: 'IKKE_OPPFYLT' })],
+    vilkårForPanel: [lagVilkår('FP_VK_16', { vilkarStatus: 'IKKE_OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
     status: 'IKKE_OPPFYLT',

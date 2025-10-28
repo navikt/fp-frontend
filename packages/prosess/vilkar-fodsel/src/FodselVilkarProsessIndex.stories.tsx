@@ -3,12 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import {
-  lagVilkår,
-  type PanelDataArgs,
-  withMellomlagretFormData,
-  withPanelData,
-} from '@navikt/fp-storybook-utils';
+import { lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, BehandlingFpSak, Vilkar } from '@navikt/fp-types';
 
 import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
@@ -18,12 +13,7 @@ const meta = {
   component: FodselVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    vilkårForPanel: [
-      lagVilkår({
-        vilkarType: 'FP_VK_1',
-        lovReferanse: '§§Dette er en lovreferanse',
-      }),
-    ] as Vilkar[],
+    vilkårForPanel: [lagVilkår('FP_VK_1')] as Vilkar[],
   },
   render: args => <FodselVilkarProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselVilkarProsessIndex>>;
