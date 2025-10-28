@@ -32,7 +32,7 @@ const lovReferansePerVilkår: Record<VilkårType, string> = {
   '-': '',
 };
 
-export const avslagsårsakerPerVilkår: Record<VilkårType, Array<Avslagsarsak>> = {
+const avslagsårsakerPerVilkår: Record<VilkårType, Array<Avslagsarsak>> = {
   FP_VK_1: ['1002', '1001', '1031', '1026', '1003', '1032'],
   FP_VK_2: ['1025', '1021', '1023', '1024', '1020'],
   FP_VK_2_F: ['1023', '1025', '1052', '1021', '1020', '1024'],
