@@ -1,7 +1,7 @@
-import type { BehandlingFpSak, Vilkar } from '@navikt/fp-types';
+import { lagVilkår } from '@navikt/fp-storybook-utils';
+import type { BehandlingFpSak } from '@navikt/fp-types';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
-import { avslagsårsakerPerVilkår } from '@navikt/fp-storybook-utils';
 
 describe('readOnlyPanelUtils', () => {
   const behandling = {
@@ -13,13 +13,10 @@ describe('readOnlyPanelUtils', () => {
     behandlingHenlagt: false,
   } as BehandlingFpSak;
 
-  const vilkår: Vilkar[] = [
-    {
-      vilkarType: 'FP_VK_1',
+  const vilkår = [
+    lagVilkår('FP_VK_1', {
       vilkarStatus: 'OPPFYLT',
-      overstyrbar: true,
-      aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_1,
-    },
+    }),
   ];
 
   const rettigheter = {

@@ -4,14 +4,15 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
-  getAvslagsårsakerKodeverkForVilkår,
+  alleKodeverk,
+  lagVilkår,
   type PanelDataArgs,
   type PanelOverstyringContextArgs,
   withMellomlagretFormData,
   withPanelData,
   withPanelOverstyring,
 } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, BehandlingFpSak, Fagsak, Medlemskap } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, Fagsak, KodeverkMedNavn, Medlemskap, VilkårType } from '@navikt/fp-types';
 
 import { VilkarresultatMedOverstyringProsessIndex } from './VilkarresultatMedOverstyringProsessIndex';
 
@@ -21,6 +22,11 @@ const defaultBehandling = {
   type: 'BT-002',
   aksjonspunkt: [] as Aksjonspunkt[],
 } as BehandlingFpSak;
+
+const getAvslagsårsakerKodeverkForVilkår = (vilkårType: VilkårType): KodeverkMedNavn<'LineærAvslagsårsak'>[] => {
+  const avslagsårsakerKoder = lagVilkår(vilkårType).aktuelleAvslagsårsaker;
+  return alleKodeverk['LineærAvslagsårsak'].filter(kodeverk => avslagsårsakerKoder.includes(kodeverk.kode));
+};
 
 const meta = {
   title: 'prosess/prosess-vilkar-overstyring',

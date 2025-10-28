@@ -13,7 +13,7 @@ describe('AdopsjonVilkarProsessIndex', () => {
     render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Adopsjon')).toBeInTheDocument();
-    expect(screen.getByText('§§Dette er en lovreferanse')).toBeInTheDocument();
+    expect(screen.getByText('§ 14-5, første ledd eller tredje ledd')).toBeInTheDocument();
     expect(screen.getByText('Tidligere utbetalte foreldrepenger eller engangsstønad')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Er utbetalt for et annet barn, vilkåret er oppfylt'));

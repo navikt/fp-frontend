@@ -5,7 +5,7 @@ import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
-  avslagsårsakerPerVilkår,
+  lagVilkår,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -65,15 +65,7 @@ const defaultBehandling: BehandlingFpSak = {
   gjeldendeVedtak: false,
   behandlingKøet: false,
   toTrinnsBehandling: false,
-  vilkår: [
-    {
-      lovReferanse: '§§Dette er en lovreferanse',
-      vilkarType: 'FP_VK_1',
-      vilkarStatus: 'OPPFYLT',
-      overstyrbar: true,
-      aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_1,
-    },
-  ],
+  vilkår: [lagVilkår('FP_VK_1', { vilkarStatus: 'OPPFYLT' })],
   links: [],
   harSøknad: false,
   harSattEndringsdato: false,
@@ -747,15 +739,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-      vilkår: [
-        {
-          lovReferanse: '§§Dette er en lovreferanse',
-          vilkarType: 'FP_VK_3',
-          vilkarStatus: 'IKKE_OPPFYLT',
-          overstyrbar: true,
-          aktuelleAvslagsårsaker: avslagsårsakerPerVilkår.FP_VK_3,
-        },
-      ],
+      vilkår: [lagVilkår('FP_VK_3', { vilkarStatus: 'IKKE_OPPFYLT' })],
     } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {

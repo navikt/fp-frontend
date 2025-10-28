@@ -1,6 +1,4 @@
-import type { Avslagsarsak, KodeverkMedNavn, Vilkar, VilkårType } from '@navikt/fp-types';
-
-import { alleKodeverk } from '../mocks/alleKodeverk';
+import type { Avslagsarsak, Vilkar, VilkårType } from '@navikt/fp-types';
 
 export const lagVilkår = (vilkarType: VilkårType, options?: Partial<Vilkar>): Vilkar => {
   return {
@@ -71,9 +69,4 @@ export const avslagsårsakerPerVilkår: Record<VilkårType, Array<Avslagsarsak>>
   FP_VK_41: ['1041'],
   SVP_VK_1: ['1062', '1066', '1065', '1063', '1064', '1060', '1061'],
   '-': [],
-};
-
-export const getAvslagsårsakerKodeverkForVilkår = (vilkårType: VilkårType): KodeverkMedNavn<'LineærAvslagsårsak'>[] => {
-  const avslagsårsakerKoder = avslagsårsakerPerVilkår[vilkårType];
-  return alleKodeverk['LineærAvslagsårsak'].filter(kodeverk => avslagsårsakerKoder.includes(kodeverk.kode));
 };
