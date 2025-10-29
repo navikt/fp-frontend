@@ -89,13 +89,10 @@ jobs:
         run: |
           echo "SENTRY_RELEASE=${{ inputs.app }}-$(git rev-parse --short HEAD)-$(date +%Y.%m.%d.%H%M%S)" >> $GITHUB_OUTPUT
 
-      - name: Bygg pakker
-        run: yarn build --filter=@navikt/${{ inputs.app }}
+      - name: Bygg og test
+        run: yarn ci --filter=@navikt/${{ inputs.app }}
         env:
           VITE_SENTRY_RELEASE: ${{ steps.sentry_release_key.outputs.SENTRY_RELEASE }}
-
-      - name: Kjør tester
-        run: yarn test --filter=@navikt/${{ inputs.app }}
 
       - name: Opprett release med Sentry
         if: inputs.push-image
