@@ -10,10 +10,8 @@
 
   "OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger": "Opptjent rett til foreldrepenger",
   "OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilSvangerskapspenger": "Opptjent rett til svangerskapspenger",
-  "OpptjeningVilkarAksjonspunktPanel.ErOppfylt": "Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.",
-  "OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt": "Søker har ikke oppfylt krav om 6 mnd opptjening, vilkåret er <b>ikke</b> oppfylt.",
-  "OpptjeningVilkarAksjonspunktPanel.ErOppfyltSvp": "Søker har oppfylt krav om 4 uker opptjening, vilkåret er oppfylt.",
-  "OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfyltSvp": "Søker har ikke oppfylt krav om 4 uker mnd opptjening, vilkåret er <b>ikke</b> oppfylt.",
+  "OpptjeningVilkarAksjonspunktPanel.ErOppfylt": "Søker har oppfylt krav om {erSvpFagsak, select, true {4 uker} other {6 mnd}} opptjening, vilkåret er oppfylt.",
+  "OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt": "Søker har ikke oppfylt krav om {erSvpFagsak, select, true {4 uker} other {6 mnd}} opptjening, vilkåret er <b>ikke</b> oppfylt.",
   "OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret": "Opptjening",
   "OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt": "Du kan ikke velge at opptjeningsvilkåret er oppfylt, fordi det ikke finnes noen aktiviteter å beregne inntekten fra. Kontakt bruker for å avklare om bruker har noen opptjening.",
 

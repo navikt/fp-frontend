@@ -1,17 +1,10 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import crypto from 'node:crypto';
 
 import * as stories from './OpptjeningVilkarProsessIndex.stories';
 
 const { ÅpentAksjonspunkt, HarIkkeAksjonspunkt, ÅpentAksjonspunktMenUtenAktiviteter } = composeStories(stories);
-
-Object.defineProperty(global.self, 'crypto', {
-  value: {
-    getRandomValues: (arr: (typeof crypto)['getRandomValues']) => crypto.randomBytes(arr.length),
-  },
-});
 
 describe('OpptjeningVilkarProsessIndex', () => {
   it('skal løse aksjonspunkt', async () => {

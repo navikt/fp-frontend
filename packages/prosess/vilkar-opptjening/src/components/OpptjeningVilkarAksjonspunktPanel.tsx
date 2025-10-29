@@ -42,7 +42,6 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ lovReferanse, status, fastsa
     behandling,
     isSubmittable,
     aksjonspunkterForPanel,
-    vilkårForPanel,
     submitCallback,
     harÅpentAksjonspunkt,
     isReadOnly,
@@ -105,25 +104,16 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ lovReferanse, status, fastsa
         </Label>
         <VStack gap="space-16">
           <VilkarResultPicker
-            vilkår={vilkårForPanel[0]}
+            // trenger ikke vilkår til avslagsårsak fordi det finnes kun en avslagsårsak for opptjeningsvilkåret
+            vilkår={undefined}
             isReadOnly={isReadOnly}
             customVilkårOppfyltText={
-              <FormattedMessage
-                id={
-                  erSvpFagsak
-                    ? 'OpptjeningVilkarAksjonspunktPanel.ErOppfyltSvp'
-                    : 'OpptjeningVilkarAksjonspunktPanel.ErOppfylt'
-                }
-              />
+              <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" values={{ erSvpFagsak }} />
             }
             customVilkårIkkeOppfyltText={
               <FormattedMessage
-                id={
-                  erSvpFagsak
-                    ? 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfyltSvp'
-                    : 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt'
-                }
-                values={{ b: BTag }}
+                id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt"
+                values={{ b: BTag, erSvpFagsak }}
               />
             }
             validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}

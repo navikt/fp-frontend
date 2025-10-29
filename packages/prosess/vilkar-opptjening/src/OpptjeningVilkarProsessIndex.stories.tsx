@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Opptjening } from '@navikt/fp-types';
 
 import { opptjeningAktivitetKlassifisering } from './kodeverk/opptjeningAktivitetKlassifisering';
@@ -52,6 +52,7 @@ const meta = {
     status: 'IKKE_VURDERT',
     lovReferanse: '§§Dette er en lovreferanse',
     erSvpFagsak: false,
+    vilkårForPanel: [lagVilkår('FP_VK_21')],
   },
   render: args => <OpptjeningVilkarProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof OpptjeningVilkarProsessIndex>>;

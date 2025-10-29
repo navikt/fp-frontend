@@ -7,6 +7,7 @@ import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { AlleKodeverk, Vilkar } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import {
   MedlemskapVurdering,
@@ -16,7 +17,6 @@ import {
 import { lagVurderingsAlternativer } from './lagVurderingsAlternativer';
 
 import messages from '../../../i18n/nb_NO.json';
-import { usePanelDataContext } from '@navikt/fp-utils';
 
 const intl = createIntl(messages);
 
