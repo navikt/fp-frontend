@@ -9,8 +9,8 @@
   "scripts": {
     "tsc": "tsc --pretty",
     "eslint": "eslint {decorators,mocks,testdata}/**/*.ts* --color",
-    "eslint:fix": "eslint --fix decorators/**/*.ts* mocks/**/*.ts* --color",
-    "prettier": "prettier --write decorators mocks",
+    "eslint:fix": "eslint --fix {decorators,mocks,testdata}/**/*.ts* --color",
+    "prettier": "prettier --write decorators mocks testdata",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {

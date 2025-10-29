@@ -49,7 +49,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({ isEngangsstonad, status }: 
     harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
-    vilkårForPanel
+    vilkårForPanel,
   } = usePanelDataContext<AksjonspunktData>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
