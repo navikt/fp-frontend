@@ -43,6 +43,7 @@
       "outputs": [".storybook-static-build/**"]
     },
     "build": {
+      "env": ["VITE_SENTRY_RELEASE"],
       "dependsOn": ["^build", "tsc"],
       "outputs": ["dist"]
     },
