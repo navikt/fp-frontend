@@ -38,7 +38,6 @@ export const ErOmsorgVilkaarOppfyltForm = ({ status }: Props) => {
 
   const {
     behandling,
-    alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
     isReadOnly,
@@ -58,10 +57,6 @@ export const ErOmsorgVilkaarOppfyltForm = ({ status }: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
-
-  const avslagsårsaker = alleKodeverk['LineærAvslagsårsak'].filter(kodeverk =>
-    vilkårForPanel[0]?.aktuelleAvslagsårsaker.includes(kodeverk.kode),
-  );
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
@@ -86,7 +81,7 @@ export const ErOmsorgVilkaarOppfyltForm = ({ status }: Props) => {
             <FormattedMessage id="ErOmsorgVilkaarOppfyltForm.VilkaretOppfylt" />
           </Label>
           <VilkarResultPicker
-            avslagsårsaker={avslagsårsaker}
+            vilkår={vilkårForPanel[0]}
             isReadOnly={isReadOnly}
             customVilkårOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.Oppfylt" />}
             customVilkårIkkeOppfyltText={

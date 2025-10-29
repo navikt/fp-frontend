@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
-  alleKodeverk,
   lagVilkår,
   type PanelDataArgs,
   type PanelOverstyringContextArgs,
@@ -12,7 +11,7 @@ import {
   withPanelData,
   withPanelOverstyring,
 } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, BehandlingFpSak, Fagsak, KodeverkMedNavn, Medlemskap, VilkårType } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, Fagsak, Medlemskap } from '@navikt/fp-types';
 
 import { VilkarresultatMedOverstyringProsessIndex } from './VilkarresultatMedOverstyringProsessIndex';
 
@@ -22,11 +21,6 @@ const defaultBehandling = {
   type: 'BT-002',
   aksjonspunkt: [] as Aksjonspunkt[],
 } as BehandlingFpSak;
-
-const getAvslagsårsakerKodeverkForVilkår = (vilkårType: VilkårType): KodeverkMedNavn<'LineærAvslagsårsak'>[] => {
-  const avslagsårsakerKoder = lagVilkår(vilkårType).aktuelleAvslagsårsaker;
-  return alleKodeverk['LineærAvslagsårsak'].filter(kodeverk => avslagsårsakerKoder.includes(kodeverk.kode));
-};
 
 const meta = {
   title: 'prosess/prosess-vilkar-overstyring',
@@ -52,7 +46,7 @@ export const OverstyringspanelForFødsel: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Fodselsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
-    avslagsårsaker: getAvslagsårsakerKodeverkForVilkår('FP_VK_1'),
+    vilkår: lagVilkår('FP_VK_1'),
   },
 };
 
@@ -60,7 +54,7 @@ export const OverstyringspanelForMedlemskap: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
-    avslagsårsaker: getAvslagsårsakerKodeverkForVilkår('FP_VK_2'),
+    vilkår: lagVilkår('FP_VK_2'),
     behandling: {
       ...defaultBehandling,
       type: 'BT-004',
@@ -72,7 +66,7 @@ export const OverstyringErUtførtForMedlemskap: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
-    avslagsårsaker: getAvslagsårsakerKodeverkForVilkår('FP_VK_2'),
+    vilkår: lagVilkår('FP_VK_2'),
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
@@ -100,7 +94,7 @@ export const OverstyringForForutgåendeMedlemskap: Story = {
       fagsakYtelseType: 'ES',
     } as Fagsak,
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
-    avslagsårsaker: getAvslagsårsakerKodeverkForVilkår('FP_VK_2_F'),
+    vilkår: lagVilkår('FP_VK_2_F'),
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
   },
 };
@@ -112,7 +106,7 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
     } as Fagsak,
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-    avslagsårsaker: getAvslagsårsakerKodeverkForVilkår('FP_VK_2_F'),
+    vilkår: lagVilkår('FP_VK_2_F'),
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
@@ -138,7 +132,7 @@ export const OverstyringspanelForOpptjening: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Opptjeningsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
-    avslagsårsaker: getAvslagsårsakerKodeverkForVilkår('FP_VK_23'),
+    vilkår: lagVilkår('FP_VK_23'),
   },
 };
 
@@ -161,7 +155,7 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
     status: 'IKKE_OPPFYLT',
     panelTekstKode: 'Inngangsvilkar.Fodselsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
-    avslagsårsaker: getAvslagsårsakerKodeverkForVilkår('FP_VK_1'),
+    vilkår: lagVilkår('FP_VK_1'),
   },
 };
 
@@ -177,7 +171,7 @@ export const OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert: Story = {
     status: 'IKKE_VURDERT',
     panelTekstKode: 'Inngangsvilkar.Opptjeningsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
-    avslagsårsaker: getAvslagsårsakerKodeverkForVilkår('FP_VK_23'),
+    vilkår: lagVilkår('FP_VK_23'),
   },
 };
 
@@ -185,7 +179,7 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
   args: {
     panelTekstKode: 'Behandlingspunkt.FortsattMedlemskap',
     overstyringApKode: AksjonspunktKode.UTGÅTT_6012,
-    avslagsårsaker: getAvslagsårsakerKodeverkForVilkår('FP_VK_2_L'),
+    vilkår: lagVilkår('FP_VK_2_L'),
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
@@ -207,7 +201,7 @@ export const LøpendeMedlemskapVisningSomIkkeErOverstyrt: Story = {
   args: {
     panelTekstKode: 'Behandlingspunkt.FortsattMedlemskap',
     overstyringApKode: AksjonspunktKode.UTGÅTT_6012,
-    avslagsårsaker: getAvslagsårsakerKodeverkForVilkår('FP_VK_2_L'),
+    vilkår: lagVilkår('FP_VK_2_L'),
     status: 'IKKE_OPPFYLT',
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
     isReadOnly: true,

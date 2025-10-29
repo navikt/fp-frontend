@@ -37,7 +37,6 @@ export const FodselVilkarForm = ({ status }: Props) => {
   const {
     behandling,
     isSubmittable,
-    alleKodeverk,
     aksjonspunkterForPanel,
     vilkårForPanel,
     submitCallback,
@@ -56,11 +55,6 @@ export const FodselVilkarForm = ({ status }: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
-
-  const avslagsårsaker = alleKodeverk['LineærAvslagsårsak'].filter(kodeverk =>
-    vilkårForPanel[0]!.aktuelleAvslagsårsaker.includes(kodeverk.kode),
-  );
-
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
   return (
@@ -85,7 +79,7 @@ export const FodselVilkarForm = ({ status }: Props) => {
             <FormattedMessage id="FodselVilkarForm.TidligereUtbetaltStonad" />
           </Label>
           <VilkarResultPicker
-            avslagsårsaker={avslagsårsaker}
+            vilkår={vilkårForPanel[0]}
             isReadOnly={isReadOnly}
             customVilkårOppfyltText={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
             customVilkårIkkeOppfyltText={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}

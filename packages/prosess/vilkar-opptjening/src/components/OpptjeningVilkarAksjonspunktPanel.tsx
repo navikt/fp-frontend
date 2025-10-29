@@ -42,6 +42,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ lovReferanse, status, fastsa
     behandling,
     isSubmittable,
     aksjonspunkterForPanel,
+    vilkårForPanel,
     submitCallback,
     harÅpentAksjonspunkt,
     isReadOnly,
@@ -104,6 +105,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ lovReferanse, status, fastsa
         </Label>
         <VStack gap="space-16">
           <VilkarResultPicker
+            vilkår={vilkårForPanel[0]}
             isReadOnly={isReadOnly}
             customVilkårOppfyltText={
               <FormattedMessage

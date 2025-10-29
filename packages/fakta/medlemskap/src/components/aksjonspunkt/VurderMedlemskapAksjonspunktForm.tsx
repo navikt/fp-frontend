@@ -52,7 +52,7 @@ const ConditionalWrapper = ({ isReadOnly, children }: PropsWithChildren<{ isRead
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
 export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandlingResultat }: Props) => {
-  const { fagsak, behandling, vilkårForPanel, submitCallback, isReadOnly, isSubmittable, alleKodeverk } =
+  const { fagsak, behandling, vilkårForPanel, submitCallback, isReadOnly, isSubmittable } =
     usePanelDataContext<VurderMedlemskapAp | VurderForutgaendeMedlemskapAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<VurderMedlemskapFormValues>();
@@ -78,10 +78,6 @@ export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandli
     });
   };
 
-  const avslagsårsaker = alleKodeverk['LineærAvslagsårsak']
-    .filter(kodeverk => vilkårForPanel[0]?.aktuelleAvslagsårsaker.includes(kodeverk.kode))
-    .sort((k1, k2) => k1.navn.localeCompare(k2.navn));
-
   return (
     <ConditionalWrapper isReadOnly={isReadOnly}>
       <RhfForm formMethods={formMethods} onSubmit={bekreft} setDataOnUnmount={setMellomlagretFormData}>
@@ -89,7 +85,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandli
           <MedlemskapVurderinger
             erForutgående={erForutgåendeAksjonspunkt}
             erRevurdering={behandling.type === 'BT-004'}
-            avslagsårsaker={avslagsårsaker}
+            vilkår={vilkårForPanel[0]!}
             readOnly={isReadOnly}
             ytelse={fagsak.fagsakYtelseType}
           />

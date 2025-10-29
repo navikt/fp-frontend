@@ -73,7 +73,6 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     isSubmittable,
     harÅpentAksjonspunkt,
     submitCallback,
-    alleKodeverk,
     isReadOnly,
   } = usePanelDataContext<BekreftSvangerskapspengervilkarAp>();
 
@@ -99,10 +98,6 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
       formMethods.clearErrors();
     }
   }, [erVilkarOk]);
-
-  const avslagsårsaker = alleKodeverk['LineærAvslagsårsak'].filter(kodeverk =>
-    vilkårForPanel[0]?.aktuelleAvslagsårsaker.includes(kodeverk.kode),
-  );
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
@@ -132,7 +127,7 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
             </Label>
           )}
           <VilkarResultPicker
-            avslagsårsaker={avslagsårsaker}
+            vilkår={vilkårForPanel[0]}
             isReadOnly={isReadOnly}
             skalKunneInnvilge={finnesUttak}
             customVilkårOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}

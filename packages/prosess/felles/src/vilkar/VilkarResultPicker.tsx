@@ -7,8 +7,8 @@ import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import type { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
-import { erAksjonspunktÅpent } from '@navikt/fp-utils';
+import type { Aksjonspunkt, AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
+import { erAksjonspunktÅpent, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './vilkarResultPicker.module.css';
 
@@ -16,15 +16,13 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const getIsAvslagCodeRequired = (erVilkårOk: boolean, avslagCode?: string) => () => erVilkårOk === false && !avslagCode;
-
 type FormValues = {
   erVilkarOk?: boolean;
   avslagskode?: string;
 };
 
 interface Props {
-  avslagsårsaker?: KodeverkMedNavn<'LineærAvslagsårsak'>[];
+  vilkår: Vilkar | undefined;
   customVilkårIkkeOppfyltText: string | ReactElement;
   customVilkårOppfyltText: string | ReactElement;
   isReadOnly: boolean;
@@ -32,12 +30,8 @@ interface Props {
   validatorsForRadioOptions?: ((value: string | number | boolean) => string | null | undefined)[];
 }
 
-const sorterAvslagsårsaker = (
-  avslagsårsakerUsortert: KodeverkMedNavn<'LineærAvslagsårsak'>[],
-): KodeverkMedNavn<'LineærAvslagsårsak'>[] => avslagsårsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
-
 export const VilkarResultPicker = ({
-  avslagsårsaker,
+  vilkår,
   customVilkårIkkeOppfyltText,
   customVilkårOppfyltText,
   isReadOnly,
@@ -49,6 +43,9 @@ export const VilkarResultPicker = ({
   const erVilkårOk = watch('erVilkarOk');
 
   const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
+
+  const { alleKodeverk } = usePanelDataContext();
+  const avslagsårsakerOptions = getAvslagsårsakerOptions(alleKodeverk, vilkår);
 
   return (
     <VStack gap="space-16" paddingInline="4">
@@ -85,16 +82,12 @@ export const VilkarResultPicker = ({
           </Radio>
         </RhfRadioGroup>
       )}
-      {erVilkårOk !== undefined && !erVilkårOk && avslagsårsaker && (
+      {erVilkårOk !== undefined && !erVilkårOk && avslagsårsakerOptions && (
         <RhfSelect
           name="avslagskode"
           control={control}
           label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-          selectValues={sorterAvslagsårsaker(avslagsårsaker).map(aa => (
-            <option key={aa.kode} value={aa.kode}>
-              {aa.navn}
-            </option>
-          ))}
+          selectValues={avslagsårsakerOptions}
           readOnly={isReadOnly}
           className={styles['selectBredde']}
           validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkårOk, getValues('avslagskode')))]}
@@ -124,3 +117,19 @@ VilkarResultPicker.transformValues = (values: FormValues) =>
         erVilkarOk: false,
         avslagskode: values.avslagskode,
       };
+
+const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkar | undefined) => {
+  if (vilkår) {
+    return alleKodeverk['LineærAvslagsårsak']
+      .filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))
+      .toSorted((k1, k2) => k1.navn.localeCompare(k2.navn))
+      .map(aa => (
+        <option key={aa.kode} value={aa.kode}>
+          {aa.navn}
+        </option>
+      ));
+  }
+  return undefined;
+};
+
+const getIsAvslagCodeRequired = (erVilkårOk: boolean, avslagCode?: string) => () => erVilkårOk === false && !avslagCode;

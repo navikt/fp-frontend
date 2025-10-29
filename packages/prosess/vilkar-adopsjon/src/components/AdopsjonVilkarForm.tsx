@@ -36,7 +36,6 @@ export const AdopsjonVilkarForm = ({ status }: Props) => {
 
   const {
     behandling,
-    alleKodeverk,
     aksjonspunkterForPanel,
     vilkårForPanel,
     submitCallback,
@@ -56,10 +55,6 @@ export const AdopsjonVilkarForm = ({ status }: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
-
-  const avslagsårsaker = alleKodeverk['LineærAvslagsårsak'].filter(kodeverk =>
-    vilkårForPanel[0]?.aktuelleAvslagsårsaker.includes(kodeverk.kode)
-  );
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
@@ -85,7 +80,7 @@ export const AdopsjonVilkarForm = ({ status }: Props) => {
         </Label>
         <VStack gap="space-16">
           <VilkarResultPicker
-            avslagsårsaker={avslagsårsaker}
+            vilkår={vilkårForPanel[0]}
             isReadOnly={isReadOnly}
             customVilkårOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
             customVilkårIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
