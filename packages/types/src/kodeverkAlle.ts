@@ -66,7 +66,6 @@ type KodeverkEnumMap = {
   AnkeOmgjørÅrsak: AnkeOmgjorArsak;
   Arbeidskategori: Arbeidskategori;
   ArbeidType: ArbeidType;
-  Avslagsårsak: Avslagsarsak;
   BehandlingResultatType: BehandlingResultatType;
   BehandlingStatus: BehandlingStatus;
   BehandlingType: BehandlingType;
@@ -124,8 +123,6 @@ type KodeverkEnumMap = {
 
 export type KodeverkType = keyof KodeverkEnumMap;
 
-type AvslagsårsakKodeverk = Record<VilkårType | '-', KodeverkMedNavn<'Avslagsårsak'>[]>; // TODO [JOHANNES] -- mildertidig (?) hack
-
 export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
   sortering: string;
   utfallType: string;
@@ -136,13 +133,10 @@ export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrs
 };
 
 type KodeverkMedSammeVerditype = {
-  [K in Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak'>]: KodeverkMedNavn<
-    K extends KodeverkType ? K : unknown
-  >[];
+  [K in Exclude<KodeverkType, 'PeriodeResultatÅrsak'>]: KodeverkMedNavn<K extends KodeverkType ? K : unknown>[];
 };
 
 export type AlleKodeverk = KodeverkMedSammeVerditype & {
-  Avslagsårsak: AvslagsårsakKodeverk;
   PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
 };
 

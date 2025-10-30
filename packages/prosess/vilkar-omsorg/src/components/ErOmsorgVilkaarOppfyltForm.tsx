@@ -12,7 +12,7 @@ import {
   validerApKodeOgHentApEnum,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, VilkarUtfallType } from '@navikt/fp-types';
 import type { OmsorgsvilkarAp, VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -25,7 +25,7 @@ type FormValues = {
 type AksjonspunktData = Array<OmsorgsvilkarAp | VurdereYtelseSammeBarnSokerAp>;
 
 interface Props {
-  status: string;
+  status: VilkarUtfallType;
 }
 
 /**
@@ -38,13 +38,13 @@ export const ErOmsorgVilkaarOppfyltForm = ({ status }: Props) => {
 
   const {
     behandling,
-    alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
     isReadOnly,
     alleMerknaderFraBeslutter,
     harÅpentAksjonspunkt,
     isSubmittable,
+    vilkårForPanel,
   } = usePanelDataContext<AksjonspunktData>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
@@ -57,8 +57,6 @@ export const ErOmsorgVilkaarOppfyltForm = ({ status }: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
-
-  const avslagsårsaker = alleKodeverk['Avslagsårsak']['FP_VK_5'];
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
@@ -83,7 +81,7 @@ export const ErOmsorgVilkaarOppfyltForm = ({ status }: Props) => {
             <FormattedMessage id="ErOmsorgVilkaarOppfyltForm.VilkaretOppfylt" />
           </Label>
           <VilkarResultPicker
-            avslagsårsaker={avslagsårsaker}
+            vilkår={vilkårForPanel[0]}
             isReadOnly={isReadOnly}
             customVilkårOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.Oppfylt" />}
             customVilkårIkkeOppfyltText={

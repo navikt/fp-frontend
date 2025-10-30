@@ -10,7 +10,7 @@ import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, ManuellBehandlingResultat, Vilkar } from '@navikt/fp-types';
 import type {
   OverstyringAp,
   OverstyringMedlemskapsvilkaretAp,
@@ -114,11 +114,10 @@ const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyri
 };
 
 interface Props {
-  medlemskapManuellBehandlingResultat?: ManuellBehandlingResultat;
-  avslagsårsaker: KodeverkMedNavn<'Avslagsårsak'>[];
+  medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined;
+  vilkår: Vilkar | undefined;
   status: string;
   panelTekstKode: string;
-  lovReferanse?: string;
 }
 
 /**
@@ -129,8 +128,7 @@ interface Props {
  */
 export const VilkarresultatMedOverstyringForm = ({
   panelTekstKode,
-  lovReferanse,
-  avslagsårsaker,
+  vilkår,
   medlemskapManuellBehandlingResultat,
   status,
 }: Props) => {
@@ -186,7 +184,7 @@ export const VilkarresultatMedOverstyringForm = ({
             <Heading size="small" level="3">
               <FormattedMessage id={panelTekstKode} />
             </Heading>
-            {lovReferanse && <Detail className={styles['vilkar']}>{lovReferanse}</Detail>}
+            {vilkår?.lovReferanse && <Detail className={styles['vilkar']}>{vilkår.lovReferanse}</Detail>}
           </HStack>
           <HStack gap="space-8">
             {originalErVilkårOk && (
@@ -224,9 +222,9 @@ export const VilkarresultatMedOverstyringForm = ({
               aksjonspunkt ? !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted : false
             }
           >
-            {erOverstyringAvMedlemskap(overstyringApKode) ? (
+            {erOverstyringAvMedlemskap(overstyringApKode) && vilkår ? (
               <MedlemskapVurderinger
-                avslagsårsaker={avslagsårsaker}
+                vilkår={vilkår}
                 readOnly={overrideReadOnly || !erOverstyrt}
                 ytelse={fagsak.fagsakYtelseType}
                 erRevurdering={behandling.type === 'BT-004'}
@@ -234,7 +232,7 @@ export const VilkarresultatMedOverstyringForm = ({
               />
             ) : (
               <VilkarResultPicker
-                avslagsårsaker={avslagsårsaker}
+                vilkår={vilkår}
                 isReadOnly={overrideReadOnly || !erOverstyrt}
                 customVilkårOppfyltText={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />}
                 customVilkårIkkeOppfyltText={

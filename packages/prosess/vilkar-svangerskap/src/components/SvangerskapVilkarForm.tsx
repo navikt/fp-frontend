@@ -67,12 +67,12 @@ interface Props {
 export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, status }: Props) => {
   const {
     aksjonspunkterForPanel,
+    vilkårForPanel,
     alleMerknaderFraBeslutter,
     behandling,
     isSubmittable,
     harÅpentAksjonspunkt,
     submitCallback,
-    alleKodeverk,
     isReadOnly,
   } = usePanelDataContext<BekreftSvangerskapspengervilkarAp>();
 
@@ -98,8 +98,6 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
       formMethods.clearErrors();
     }
   }, [erVilkarOk]);
-
-  const avslagsårsaker = alleKodeverk['Avslagsårsak']['SVP_VK_1'];
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
@@ -129,7 +127,7 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
             </Label>
           )}
           <VilkarResultPicker
-            avslagsårsaker={avslagsårsaker}
+            vilkår={vilkårForPanel[0]}
             isReadOnly={isReadOnly}
             skalKunneInnvilge={finnesUttak}
             customVilkårOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}

@@ -1,4 +1,4 @@
-import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak, Vilkar } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
@@ -15,6 +15,7 @@ export type StandardFaktaPanelProps<T extends Behandling> = Readonly<{
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   aksjonspunkterForPanel: Aksjonspunkt[];
+  vilkårForPanel: Vilkar[];
   isReadOnly: boolean;
   isSubmittable: boolean;
   harÅpentAksjonspunkt: boolean;
@@ -37,6 +38,11 @@ export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSa
   const aksjonspunkterForPanel = behandling.aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon));
   const overstyringKoder = aksjonspunktKoder.filter(kode => kode.startsWith('6'));
 
+  const vilkårTypeFraAP = new Set(
+    aksjonspunkterForPanel.flatMap(ap => ('vilkarType' in ap && ap.vilkarType ? [ap.vilkarType] : [])),
+  );
+  const vilkårForPanel = 'vilkår' in behandling ? behandling.vilkår.filter(v => vilkårTypeFraAP.has(v.vilkarType)) : [];
+
   const isReadOnly = erReadOnly(behandling, [], rettigheter, false);
   const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForPanel);
 
@@ -55,6 +61,7 @@ export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSa
     harÅpentAksjonspunkt: aksjonspunkterForPanel.some(ap => erAksjonspunktÅpent(ap) && ap.kanLoses),
     alleKodeverk,
     aksjonspunkterForPanel,
+    vilkårForPanel,
     isReadOnly,
     alleMerknaderFraBeslutter,
     submitCallback,

@@ -87,6 +87,7 @@ export const InngangsvilkarDefaultInitPanel = ({
         alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
         alleKodeverk={alleKodeverk}
         aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
+        vilkårForPanel={standardPanelProps.vilkårForPanel}
         harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
         isReadOnly={standardPanelProps.isReadOnly}
         isSubmittable={standardPanelProps.isSubmittable}

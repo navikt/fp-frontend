@@ -267,7 +267,7 @@ export const SokersOpplysningspliktForm = ({ soknad, status, arbeidsgiverOpplysn
             <div>
               {originalErVilkårOk === false && behandling.behandlingsresultat?.avslagsarsak && (
                 <BodyShort size="small">
-                  {alleKodeverk['Avslagsårsak']['FP_VK_34'].find(
+                  {alleKodeverk['LineærAvslagsårsak'].find(
                     type => type.kode === behandling.behandlingsresultat?.avslagsarsak,
                   )?.navn ?? ''}
                 </BodyShort>

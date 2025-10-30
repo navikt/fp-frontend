@@ -26,7 +26,6 @@ type FormValues = {
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
   status: string;
-  lovReferanse?: string;
   erSvpFagsak: boolean;
 }
 
@@ -35,13 +34,14 @@ interface Props {
  *
  * Viser panel for å løse aksjonspunkt for avslått opptjeningsvilkår
  */
-export const OpptjeningVilkarAksjonspunktPanel = ({ lovReferanse, status, fastsattOpptjening, erSvpFagsak }: Props) => {
+export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, erSvpFagsak }: Props) => {
   const intl = useIntl();
 
   const {
     behandling,
     isSubmittable,
     aksjonspunkterForPanel,
+    vilkårForPanel,
     submitCallback,
     harÅpentAksjonspunkt,
     isReadOnly,
@@ -86,7 +86,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ lovReferanse, status, fastsa
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        lovReferanse={lovReferanse}
+        lovReferanse={vilkårForPanel[0]?.lovReferanse}
         originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
@@ -104,24 +104,16 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ lovReferanse, status, fastsa
         </Label>
         <VStack gap="space-16">
           <VilkarResultPicker
+            // trenger ikke vilkår til avslagsårsak fordi det finnes kun en avslagsårsak for opptjeningsvilkåret
+            vilkår={undefined}
             isReadOnly={isReadOnly}
             customVilkårOppfyltText={
-              <FormattedMessage
-                id={
-                  erSvpFagsak
-                    ? 'OpptjeningVilkarAksjonspunktPanel.ErOppfyltSvp'
-                    : 'OpptjeningVilkarAksjonspunktPanel.ErOppfylt'
-                }
-              />
+              <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" values={{ erSvpFagsak }} />
             }
             customVilkårIkkeOppfyltText={
               <FormattedMessage
-                id={
-                  erSvpFagsak
-                    ? 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfyltSvp'
-                    : 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt'
-                }
-                values={{ b: BTag }}
+                id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt"
+                values={{ b: BTag, erSvpFagsak }}
               />
             }
             validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}

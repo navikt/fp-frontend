@@ -41,11 +41,7 @@ export const FodselInngangsvilkarFpInitPanel = () => {
       inngangsvilkårPanelKode="FODSEL"
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
     >
-      <FodselVilkarProsessIndex
-        ytelseTypeKode="FP"
-        status={standardPanelProps.status}
-        vilkårForPanel={standardPanelProps.vilkårForPanel}
-      />
+      <FodselVilkarProsessIndex status={standardPanelProps.status} />
     </InngangsvilkarDefaultInitPanel>
   );
 };

@@ -2,7 +2,7 @@ import { type ReactRenderer } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import type { Aksjonspunkt, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, Fagsak, Vilkar } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, PanelDataProvider } from '@navikt/fp-utils';
 
@@ -15,6 +15,7 @@ export type PanelDataArgs = {
   behandling?: BehandlingFpSak;
   alleMerknaderFraBeslutter?: { [key: string]: { notAccepted?: boolean } };
   aksjonspunkterForPanel?: Aksjonspunkt[];
+  vilkårForPanel?: Vilkar[];
   isReadOnly?: boolean;
   isSubmittable?: boolean;
   submitCallback?: (data: AksjonspunktType) => Promise<void>;
@@ -98,6 +99,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
     behandling,
     alleMerknaderFraBeslutter,
     aksjonspunkterForPanel,
+    vilkårForPanel,
     isReadOnly,
     isSubmittable,
     submitCallback,
@@ -112,6 +114,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
       alleKodeverk={alleKodeverk}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter ?? {}}
       aksjonspunkterForPanel={aksjonspunkter}
+      vilkårForPanel={vilkårForPanel ?? []}
       harÅpentAksjonspunkt={aksjonspunkter.some(erAksjonspunktÅpent)}
       isReadOnly={isReadOnly ?? false}
       isSubmittable={isSubmittable ?? true}

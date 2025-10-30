@@ -1,5 +1,6 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { BehandlingFpSak } from '@navikt/fp-types';
+import { lagVilkår } from '@navikt/fp-storybook-utils';
 
 export const behandling: BehandlingFpSak = {
   uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
@@ -48,48 +49,24 @@ export const behandling: BehandlingFpSak = {
     },
   ],
   vilkår: [
-    {
-      vilkarType: 'FP_VK_34',
+    lagVilkår('FP_VK_34', {
       vilkarStatus: 'OPPFYLT',
-
-      lovReferanse: '§§ 21-3',
-      overstyrbar: true,
-    },
-    {
-      vilkarType: 'FP_VK_2',
+    }),
+    lagVilkår('FP_VK_2', {
       vilkarStatus: 'OPPFYLT',
-
-      lovReferanse: '§ 14-2',
-      overstyrbar: true,
-    },
-    {
-      vilkarType: 'FP_VK_1',
+    }),
+    lagVilkår('FP_VK_1', {
       vilkarStatus: 'OPPFYLT',
-
-      lovReferanse: '§ 14-5, 1. ledd',
-      overstyrbar: true,
-    },
-    {
-      vilkarType: 'FP_VK_23',
+    }),
+    lagVilkår('FP_VK_23', {
       vilkarStatus: 'OPPFYLT',
-
-      lovReferanse: '§ 14-6',
-      overstyrbar: true,
-    },
-    {
-      vilkarType: 'FP_VK_41',
+    }),
+    lagVilkår('FP_VK_41', {
       vilkarStatus: 'IKKE_VURDERT',
-
-      lovReferanse: '§ 14-7',
-      overstyrbar: true,
-    },
-    {
-      vilkarType: 'FP_VK_21',
+    }),
+    lagVilkår('FP_VK_21', {
       vilkarStatus: 'OPPFYLT',
-
-      lovReferanse: '§ 14-6 og 14-10',
-      overstyrbar: true,
-    },
+    }),
   ],
   links: [
     {

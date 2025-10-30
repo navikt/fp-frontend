@@ -52,9 +52,8 @@ const ConditionalWrapper = ({ isReadOnly, children }: PropsWithChildren<{ isRead
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
 export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandlingResultat }: Props) => {
-  const { fagsak, behandling, submitCallback, isReadOnly, isSubmittable, alleKodeverk } = usePanelDataContext<
-    VurderMedlemskapAp | VurderForutgaendeMedlemskapAp
-  >();
+  const { fagsak, behandling, vilkårForPanel, submitCallback, isReadOnly, isSubmittable } =
+    usePanelDataContext<VurderMedlemskapAp | VurderForutgaendeMedlemskapAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<VurderMedlemskapFormValues>();
   const [submitting, setSubmitting] = useState(false);
@@ -78,9 +77,6 @@ export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandli
       medlemFom: avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? medlemFom : undefined,
     });
   };
-  const avslagsårsaker = alleKodeverk['Avslagsårsak'][erForutgåendeAksjonspunkt ? 'FP_VK_2_F' : 'FP_VK_2'].sort(
-    (k1, k2) => k1.navn.localeCompare(k2.navn),
-  );
 
   return (
     <ConditionalWrapper isReadOnly={isReadOnly}>
@@ -89,7 +85,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandli
           <MedlemskapVurderinger
             erForutgående={erForutgåendeAksjonspunkt}
             erRevurdering={behandling.type === 'BT-004'}
-            avslagsårsaker={avslagsårsaker}
+            vilkår={vilkårForPanel[0]!}
             readOnly={isReadOnly}
             ytelse={fagsak.fagsakYtelseType}
           />

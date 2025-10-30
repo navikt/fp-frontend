@@ -13,7 +13,7 @@ describe('AdopsjonVilkarProsessIndex', () => {
     render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Adopsjon')).toBeInTheDocument();
-    expect(screen.getByText('§§Dette er en lovreferanse')).toBeInTheDocument();
+    expect(screen.getByText('§ 14-5, første ledd eller tredje ledd')).toBeInTheDocument();
     expect(screen.getByText('Tidligere utbetalte foreldrepenger eller engangsstønad')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Er utbetalt for et annet barn, vilkåret er oppfylt'));
@@ -47,13 +47,13 @@ describe('AdopsjonVilkarProsessIndex', () => {
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByLabelText('Avslagsårsak'), '1006');
+    await userEvent.selectOptions(screen.getByLabelText('Avslagsårsak'), '1004');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      avslagskode: '1006',
+      avslagskode: '1004',
       begrunnelse: 'Dette er en vurdering',
       erVilkarOk: false,
       kode: '5031',
@@ -79,6 +79,8 @@ describe('AdopsjonVilkarProsessIndex', () => {
     expect(screen.getByText(/ikke/)).toBeInTheDocument();
     expect(screen.queryByText('Er utbetalt for et annet barn, vilkåret er oppfylt')).not.toBeInTheDocument();
     expect(screen.getByText('Dette vilkåret er avslått')).toBeInTheDocument();
+    expect(screen.getByText('Avslagsårsak')).toBeInTheDocument();
+    expect(screen.getByText('Barn over 15 år')).toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
   });
 });

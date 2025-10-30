@@ -76,6 +76,7 @@ const ProsessPanel = <T extends Behandling>({
             alleKodeverk={alleKodeverk}
             alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
             aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
+            vilkårForPanel={standardPanelProps.vilkårForPanel}
             harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
             isReadOnly={standardPanelProps.isReadOnly}
             isSubmittable={standardPanelProps.isSubmittable}

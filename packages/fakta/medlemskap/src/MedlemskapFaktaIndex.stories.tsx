@@ -4,7 +4,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, type Medlemskap, type Soknad } from '@navikt/fp-types';
 
 import { MedlemskapFaktaIndex } from './MedlemskapFaktaIndex';
@@ -31,6 +31,15 @@ const defaultSoknad = {
   },
 } as Soknad;
 
+const vilkårForPanel = [
+  lagVilkår('FP_VK_2_F', {
+    vilkarStatus: 'OPPFYLT',
+  }),
+  lagVilkår('FP_VK_2', {
+    vilkarStatus: 'OPPFYLT',
+  }),
+];
+
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
   status: 'OPPR',
@@ -49,6 +58,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     soknad: defaultSoknad,
+    vilkårForPanel,
   },
   render: args => <MedlemskapFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof MedlemskapFaktaIndex>>;

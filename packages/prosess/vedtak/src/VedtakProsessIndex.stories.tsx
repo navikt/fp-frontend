@@ -4,7 +4,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
+import {
+  lagVilkår,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+  withRouter,
+} from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
   BehandlingFpSak,
@@ -59,14 +65,7 @@ const defaultBehandling: BehandlingFpSak = {
   gjeldendeVedtak: false,
   behandlingKøet: false,
   toTrinnsBehandling: false,
-  vilkår: [
-    {
-      lovReferanse: '§§Dette er en lovreferanse',
-      vilkarType: 'FP_VK_1',
-      vilkarStatus: 'OPPFYLT',
-      overstyrbar: true,
-    },
-  ],
+  vilkår: [lagVilkår('FP_VK_1', { vilkarStatus: 'OPPFYLT' })],
   links: [],
   harSøknad: false,
   harSattEndringsdato: false,
@@ -740,14 +739,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
         id: 0,
         harRedigertVedtaksbrev: false,
       },
-      vilkår: [
-        {
-          lovReferanse: '§§Dette er en lovreferanse',
-          vilkarType: 'FP_VK_3',
-          vilkarStatus: 'IKKE_OPPFYLT',
-          overstyrbar: true,
-        },
-      ],
+      vilkår: [lagVilkår('FP_VK_3', { vilkarStatus: 'IKKE_OPPFYLT' })],
     } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {

@@ -12,7 +12,7 @@ import {
   validerApKodeOgHentApEnum,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
 import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -24,7 +24,6 @@ type FormValues = {
 
 interface Props {
   status: string;
-  vilkårForPanel: Vilkar[];
 }
 
 /**
@@ -32,13 +31,13 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av Adopsjonsvilkåret.
  */
-export const AdopsjonVilkarForm = ({ vilkårForPanel, status }: Props) => {
+export const AdopsjonVilkarForm = ({ status }: Props) => {
   const intl = useIntl();
 
   const {
     behandling,
-    alleKodeverk,
     aksjonspunkterForPanel,
+    vilkårForPanel,
     submitCallback,
     harÅpentAksjonspunkt,
     isReadOnly,
@@ -57,8 +56,6 @@ export const AdopsjonVilkarForm = ({ vilkårForPanel, status }: Props) => {
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const avslagsårsaker = alleKodeverk['Avslagsårsak']['FP_VK_4'];
-
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
   return (
@@ -72,7 +69,7 @@ export const AdopsjonVilkarForm = ({ vilkårForPanel, status }: Props) => {
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        lovReferanse={vilkårForPanel[0]?.lovReferanse ?? undefined}
+        lovReferanse={vilkårForPanel[0]?.lovReferanse}
         originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
@@ -83,7 +80,7 @@ export const AdopsjonVilkarForm = ({ vilkårForPanel, status }: Props) => {
         </Label>
         <VStack gap="space-16">
           <VilkarResultPicker
-            avslagsårsaker={avslagsårsaker}
+            vilkår={vilkårForPanel[0]}
             isReadOnly={isReadOnly}
             customVilkårOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
             customVilkårIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}

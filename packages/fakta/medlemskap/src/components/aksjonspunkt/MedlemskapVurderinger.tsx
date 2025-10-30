@@ -6,7 +6,8 @@ import { RhfDatepicker, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, Vilkar } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import {
   MedlemskapVurdering,
@@ -20,17 +21,20 @@ import messages from '../../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  avslagsårsaker: KodeverkMedNavn<'Avslagsårsak'>[];
+  vilkår: Vilkar;
   readOnly: boolean;
   ytelse: string;
   erForutgående: boolean;
   erRevurdering: boolean;
 }
 
-export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erForutgående, erRevurdering }: Props) => {
+export const MedlemskapVurderinger = ({ readOnly, ytelse, vilkår, erForutgående, erRevurdering }: Props) => {
   const { watch, control } = useFormContext<VurderMedlemskapFormValues>();
   const vurdering = watch('vurdering');
   const avslagskode = watch('avslagskode');
+
+  const { alleKodeverk } = usePanelDataContext();
+  const avslagsårsakerOptions = getAvslagsårsakerOptions(alleKodeverk, vilkår);
 
   const label = erForutgående
     ? intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.Forutgaaende' })
@@ -64,11 +68,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erFor
                 ? 'VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly'
                 : 'VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel',
             })}
-            selectValues={avslagsårsaker.map(aa => (
-              <option key={aa.kode} value={aa.kode}>
-                {aa.navn}
-              </option>
-            ))}
+            selectValues={avslagsårsakerOptions}
             readOnly={readOnly}
             validate={[required]}
           />
@@ -106,4 +106,15 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erFor
       </VStack>
     </RawIntlProvider>
   );
+};
+
+const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkar) => {
+  return alleKodeverk['LineærAvslagsårsak']
+    .filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))
+    .toSorted((k1, k2) => k1.navn.localeCompare(k2.navn))
+    .map(aa => (
+      <option key={aa.kode} value={aa.kode}>
+        {aa.navn}
+      </option>
+    ));
 };
