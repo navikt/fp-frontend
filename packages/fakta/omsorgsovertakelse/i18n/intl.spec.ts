@@ -42,9 +42,9 @@ describe('intl', () => {
     const missingKeysCode = stringsInFile.difference(stringsInCode);
 
     expect(missingKeysCode.size).toBe(NOT_FOUND_BECAUSE_ID_IS_STRING_UNION_IN_CODE.size);
-    NOT_FOUND_BECAUSE_ID_IS_STRING_UNION_IN_CODE.forEach(key => {
+    for (const key of NOT_FOUND_BECAUSE_ID_IS_STRING_UNION_IN_CODE) {
       missingKeysCode.delete(key);
-    });
+    }
 
     if (missingKeysCode.size > 0) {
       writeToConsole('Not found in code:');
