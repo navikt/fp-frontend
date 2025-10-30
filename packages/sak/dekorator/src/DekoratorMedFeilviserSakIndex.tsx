@@ -1,8 +1,8 @@
 import React, { type ComponentProps, useEffect, useRef } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { ExternalLinkIcon, MenuGridIcon, MoonIcon, SunIcon } from '@navikt/aksel-icons';
-import { Dropdown, InternalHeader, Link, Spacer, Theme } from '@navikt/ds-react';
+import { ArrowCirclepathIcon, ExternalLinkIcon, MenuGridIcon, MoonIcon, SunIcon } from '@navikt/aksel-icons';
+import { Dropdown, InternalHeader, Link, Spacer, Theme, Tooltip } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
@@ -27,6 +27,7 @@ interface Props {
   eksterneLenker: DekoratorLenke[];
   theme: ComponentProps<typeof Theme>['theme'];
   setTheme: (theme: NonNullable<ComponentProps<typeof Theme>['theme']>) => void;
+  nyVersjonTilgjengelig?: boolean;
 }
 
 /**
@@ -48,6 +49,7 @@ export const DekoratorMedFeilviserSakIndex = ({
   eksterneLenker,
   theme,
   setTheme,
+  nyVersjonTilgjengelig,
 }: Props) => {
   const fixedHeaderRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -64,10 +66,17 @@ export const DekoratorMedFeilviserSakIndex = ({
             {tittel}
           </InternalHeader.Title>
           <Spacer />
+          {nyVersjonTilgjengelig && (
+            <InternalHeader.Button onClick={() => window.location.reload()}>
+              <Tooltip content={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.NyVersjon' })}>
+                <ArrowCirclepathIcon fontSize="1.5rem" color="var(--ax-text-accent-subtle)" />
+              </Tooltip>
+            </InternalHeader.Button>
+          )}
           <Dropdown>
             <InternalHeader.Button as={Dropdown.Toggle}>
               <MenuGridIcon
-                style={{ fontSize: '1.5rem' }}
+                fontSize="1.5rem"
                 title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk' })}
               />
             </InternalHeader.Button>

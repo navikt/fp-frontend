@@ -78,6 +78,19 @@ function startApp() {
   // The routes below require the user to be authenticated
   server.use(verifyToken);
 
+  server.get(["/version"], async (_, res, next) => {
+    try {
+      res.set("Cache-Control", "no-store");
+      res
+        .json({
+          app_image: process.env.NAIS_APP_IMAGE,
+        })
+        .send();
+    } catch (error) {
+      return next(error);
+    }
+  });
+
   server.get(["/logout"], async (req, res) => {
     if (req.headers.authorization) {
       res.redirect("/oauth2/logout");
