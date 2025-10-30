@@ -53,18 +53,13 @@ jobs:
     outputs:
       build-version: ${{ steps.generate-build-version.outputs.build-version }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v5
         with:
           ref: ${{ (inputs.branch != '' && inputs.branch) || '' }}
 
-      - name: Sette yarn-config
-        run: |
-          yarn config set npmScopes.navikt.npmRegistryServer "https://npm.pkg.github.com"
-          yarn config set npmScopes.navikt.npmAlwaysAuth true
-          yarn config set npmScopes.navikt.npmAuthToken $NPM_AUTH_TOKEN
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - uses: ./.github/actions/setup-yarnrc
+        with:
+          npmAuthToken: ${{ secrets.READER_TOKEN }}
 
       - uses: actions/setup-node@v6
         with:
@@ -75,7 +70,7 @@ jobs:
         id: hent-cache
         uses: actions/cache/restore@v4
         with:
-          path: ~/work/fp-frontend/fp-frontend/.turbo
+          path: .turbo
           key: turbo-${{ runner.os }}-${{ github.ref_name }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
           restore-keys: |
             turbo-${{ runner.os }}-master-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
@@ -103,6 +98,7 @@ jobs:
 
       - name: Bygg server
         run: cd ./server && yarn install --immutable && yarn build
+
       - name: Generate build version
         id: generate-build-version
         run: |
@@ -110,6 +106,7 @@ jobs:
 
       - name: Print build version
         run: echo "Generated build-version is ${{ steps.generate-build-version.outputs.build-version }}"
+
       - name: Bygg og push docker image
         if: inputs.build-image
         uses: navikt/fp-gha-workflows/.github/actions/build-push-docker-image@main
@@ -131,4 +128,4 @@ jobs:
         uses: actions/cache/save@v4
         with:
           key: ${{ steps.hent-cache.outputs.cache-primary-key }}
-          path: ~/work/fp-frontend/fp-frontend/.turbo
+          path: .turbo
