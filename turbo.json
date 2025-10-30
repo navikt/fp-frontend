@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalPassThroughEnv": ["VITE_SENTRY_RELEASE"],
   "globalDependencies": [
     "turbo.json",
     "yarn.lock",
@@ -23,7 +24,11 @@
       "outputs": []
     },
     "lint": {
-      "dependsOn": ["^eslint", "^stylelint"],
+      "dependsOn": [
+        "^eslint",
+        "^stylelint",
+        "^tsc"
+      ],
       "outputs": []
     },
     "eslint": {

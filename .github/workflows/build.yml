@@ -57,7 +57,6 @@ jobs:
         uses: actions/checkout@v5
         with:
           ref: ${{ (inputs.branch != '' && inputs.branch) || '' }}
-          fetch-depth: 0
 
       - name: Sette yarn-config
         run: |
@@ -84,17 +83,27 @@ jobs:
       - name: Installere dependencies
         run: yarn install --immutable
 
-      - name: Build
-        run: yarn build --filter=@navikt/${{ inputs.app }}
+      - name: Opprett SENTRY_RELEASE environment variable
+        if: inputs.push-image
+        id: sentry_release_key
+        run: |
+          echo "SENTRY_RELEASE=${{ inputs.app }}-$(git rev-parse --short HEAD)-$(date +%Y.%m.%d.%H%M%S)" >> $GITHUB_OUTPUT
 
-      - name: Run tests
+      - name: Bygg pakker
+        run: yarn build --filter=@navikt/${{ inputs.app }}
+        env:
+          VITE_SENTRY_RELEASE: ${{ steps.sentry_release_key.outputs.SENTRY_RELEASE }}
+
+      - name: Kjør tester
         run: yarn test --filter=@navikt/${{ inputs.app }}
 
       - name: Opprett release med Sentry
-        if: github.ref_name == 'master'
+        if: inputs.push-image
         run: yarn sentry-release
         env:
+          SENTRY_RELEASE: ${{ steps.sentry_release_key.outputs.SENTRY_RELEASE }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
       - name: Bygg server
         run: cd ./server && yarn install --immutable && yarn build
       - name: Generate build version
@@ -113,6 +122,7 @@ jobs:
           image_suffix: ${{ inputs.image_suffix }}
           build_args: |
             APP_NAME=${{ inputs.app }}
+
       - name: Archive code coverage results
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # ratchet:actions/upload-artifact@v4.6.2
         with:
