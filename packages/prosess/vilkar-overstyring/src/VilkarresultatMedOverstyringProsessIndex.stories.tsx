@@ -11,7 +11,7 @@ import {
   withPanelData,
   withPanelOverstyring,
 } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, BehandlingFpSak, Fagsak, Medlemskap } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
 
 import { VilkarresultatMedOverstyringProsessIndex } from './VilkarresultatMedOverstyringProsessIndex';
 
@@ -30,7 +30,7 @@ const meta = {
     behandling: defaultBehandling,
     kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
     status: 'OPPFYLT',
-    lovReferanse: '§ 1-2 3. ledd',
+    medlemskapManuellBehandlingResultat: undefined,
   },
   render: props => {
     return <VilkarresultatMedOverstyringProsessIndex {...props} />;
@@ -79,12 +79,10 @@ export const OverstyringErUtførtForMedlemskap: Story = {
       ],
     } as BehandlingFpSak,
     status: 'IKKE_OPPFYLT',
-    medlemskap: {
-      manuellBehandlingResultat: {
-        avslagskode: '1025',
-        opphørFom: '2022-02-19',
-      },
-    } as Medlemskap,
+    medlemskapManuellBehandlingResultat: {
+      avslagskode: '1025',
+      opphørFom: '2022-02-19',
+    },
   },
 };
 
@@ -119,12 +117,10 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
       ],
     } as BehandlingFpSak,
     status: 'IKKE_OPPFYLT',
-    medlemskap: {
-      manuellBehandlingResultat: {
-        avslagskode: '1052',
-        medlemFom: '2022-02-19',
-      },
-    } as Medlemskap,
+    medlemskapManuellBehandlingResultat: {
+      avslagskode: '1052',
+      medlemFom: '2022-02-19',
+    },
   },
 };
 

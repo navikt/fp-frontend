@@ -27,10 +27,9 @@ export const OverstyringPanelDef = ({ vilkårKoder, panelTekstKode, medlemskap }
 
   return (
     <VilkarresultatMedOverstyringProsessIndex
-      medlemskap={medlemskap}
+      medlemskapManuellBehandlingResultat={medlemskap?.manuellBehandlingResultat ?? undefined}
       vilkår={vilkårForPanel[0]}
       panelTekstKode={panelTekstKode}
-      lovReferanse={vilkårForPanel[0]?.lovReferanse}
       status={status}
     />
   );

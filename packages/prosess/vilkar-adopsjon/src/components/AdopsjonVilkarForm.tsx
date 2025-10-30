@@ -69,7 +69,7 @@ export const AdopsjonVilkarForm = ({ status }: Props) => {
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        lovReferanse={vilkårForPanel[0]?.lovReferanse ?? undefined}
+        lovReferanse={vilkårForPanel[0]?.lovReferanse}
         originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}

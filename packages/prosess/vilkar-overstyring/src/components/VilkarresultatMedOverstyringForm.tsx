@@ -114,11 +114,10 @@ const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyri
 };
 
 interface Props {
-  medlemskapManuellBehandlingResultat?: ManuellBehandlingResultat;
+  medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined;
   vilkår: Vilkar | undefined;
   status: string;
   panelTekstKode: string;
-  lovReferanse?: string;
 }
 
 /**
@@ -129,7 +128,6 @@ interface Props {
  */
 export const VilkarresultatMedOverstyringForm = ({
   panelTekstKode,
-  lovReferanse,
   vilkår,
   medlemskapManuellBehandlingResultat,
   status,
@@ -186,7 +184,7 @@ export const VilkarresultatMedOverstyringForm = ({
             <Heading size="small" level="3">
               <FormattedMessage id={panelTekstKode} />
             </Heading>
-            {lovReferanse && <Detail className={styles['vilkar']}>{lovReferanse}</Detail>}
+            {vilkår?.lovReferanse && <Detail className={styles['vilkar']}>{vilkår.lovReferanse}</Detail>}
           </HStack>
           <HStack gap="space-8">
             {originalErVilkårOk && (

@@ -50,7 +50,6 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     status: 'IKKE_VURDERT',
-    lovReferanse: '§§Dette er en lovreferanse',
     erSvpFagsak: false,
     vilkårForPanel: [lagVilkår('FP_VK_21')],
   },
