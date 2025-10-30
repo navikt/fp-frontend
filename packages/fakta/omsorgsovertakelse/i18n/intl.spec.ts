@@ -57,7 +57,3 @@ describe('intl', () => {
     expect(missingKeysCode.size).toBe(0);
   });
 });
-
-const forventetAvvik = (fullSet: Set<string>, prefix: string): Set<string> => {
-  return new Set(Array.from(fullSet).filter(key => key.startsWith(prefix)));
-};
