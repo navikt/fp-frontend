@@ -1,6 +1,5 @@
 import { extract } from '@formatjs/cli-lib/lib_esnext';
 import glob from 'fast-glob';
-import { expect } from 'vitest';
 
 import nb from './nb_NO.json';
 
