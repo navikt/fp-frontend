@@ -41,10 +41,7 @@ export const ForeldreansvarInngangsvilkarInitPanel = () => {
           : ''
       }
     >
-      <ForeldreansvarVilkarProsessIndex
-        isEngangsstonad
-        status={standardPanelProps.status}
-      />
+      <ForeldreansvarVilkarProsessIndex isEngangsstonad status={standardPanelProps.status} />
     </InngangsvilkarDefaultInitPanel>
   );
 };

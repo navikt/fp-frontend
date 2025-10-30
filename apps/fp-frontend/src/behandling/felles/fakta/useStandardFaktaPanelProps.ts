@@ -38,13 +38,10 @@ export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSa
   const aksjonspunkterForPanel = behandling.aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon));
   const overstyringKoder = aksjonspunktKoder.filter(kode => kode.startsWith('6'));
 
-  const vilkårTypeFraAP = aksjonspunkterForPanel
-    .map(ap => 'vilkarType' in ap && ap.vilkarType)
-    .filter(Boolean);
-  const vilkårForPanel =
-    'vilkår' in behandling
-      ? behandling.vilkår.filter(v => 'vilkarType' in v && vilkårTypeFraAP.includes(v.vilkarType))
-      : [];
+  const vilkårTypeFraAP = new Set(
+    aksjonspunkterForPanel.flatMap(ap => ('vilkarType' in ap && ap.vilkarType ? [ap.vilkarType] : [])),
+  );
+  const vilkårForPanel = 'vilkår' in behandling ? behandling.vilkår.filter(v => vilkårTypeFraAP.has(v.vilkarType)) : [];
 
   const isReadOnly = erReadOnly(behandling, [], rettigheter, false);
   const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForPanel);
