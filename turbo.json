@@ -36,7 +36,7 @@
       "outputs": []
     },
     "test": {
-      "dependsOn": ["build", "^test"],
+      "dependsOn": ["tsc", "^test"],
       "outputs": []
     },
     "build-storybook": {
