@@ -26,5 +26,17 @@
   "VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.Oppfylt": "Oppfylt",
   "VurderOmsorgsovertakelseVilkåretForm.VilkårVurdering.IkkeOppfylt": "Ikke oppfylt",
   "VurderOmsorgsovertakelseVilkåretForm.Avslagsarsak.Label": "Velg en avslagsårsak",
-  "VurderOmsorgsovertakelseVilkåretForm.Avslagsarsak.ReadOnlyLabel": "Avslagsårsak"
+  "VurderOmsorgsovertakelseVilkåretForm.Avslagsarsak.ReadOnlyLabel": "Avslagsårsak",
+
+  "LegacyAksjonspunktVisning.Tittel": "Saksbehandlers vurdering av omsorgsovertakelse",
+  "LegacyAksjonspunktVisning.Aksjonspunkt.5008": "Vurdering av omsorgsovertakelse",
+  "LegacyAksjonspunktVisning.Aksjonspunkt.5054": "Vurdering av foreldreansvar",
+  "LegacyAksjonspunktVisning.Aksjonspunkt.5006": "Vurdering av om mann adopterer alene",
+  "LegacyAksjonspunktVisning.Aksjonspunkt.5004": "Vurdering av adopsjonsdokumentasjon",
+  "LegacyAksjonspunktVisning.Aksjonspunkt.5005": "Vurdering av om adopsjon gjelder ektefelles barn",
+  "LegacyAksjonspunktVisning.Aksjonspunkt.5013": "Vurdering av foreldreansvarsvilkåret 2. ledd",
+  "LegacyAksjonspunktVisning.Aksjonspunkt.5014": "Vurdering av foreldreansvarsvilkåret 4. ledd",
+  "LegacyAksjonspunktVisning.Aksjonspunkt.5011": "Vurdering av omsorgsvilkåret",
+  "LegacyAksjonspunktVisning.Aksjonspunkt.6004": "Vurdering av adopsjonsvilkåret",
+  "LegacyAksjonspunktVisning.Aksjonspunkt.6010": "Vurdering av adopsjonsvilkåret"
 }
