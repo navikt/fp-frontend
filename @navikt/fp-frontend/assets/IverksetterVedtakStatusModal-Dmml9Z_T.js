@@ -1,0 +1,110 @@
+import{l as s,j as e}from"./iframe-Cm0GdzKP.js";import{M as t,H as N,V as u,L as T,B as v,b as m}from"./VStack-Ds9FrsUY.js";import{S as d}from"./CheckmarkCircleFill-DveVufbB.js";import{M as a}from"./message-BhgjYFSr.js";const A="_image_1mfyr_1",S={image:A},G=({lukkModal:l,visModal:E,behandlingsresultat:n})=>{const i=s(),r=n&&n.type==="AVSLÅTT",_=i.formatMessage({id:r?"IverksetterVedtakStatusModal.Avslatt":"IverksetterVedtakStatusModal.Innvilget"});return e.jsx(t,{open:E,"aria-label":_,onClose:l,children:e.jsx(t.Body,{children:e.jsxs(N,{gap:"space-24",children:[e.jsx(d,{className:S.image}),e.jsxs(u,{gap:"space-4",children:[e.jsx(T,{size:"small",children:r?e.jsx(a,{id:"IverksetterVedtakStatusModal.VedtakAvslatt"}):e.jsx(a,{id:"IverksetterVedtakStatusModal.VedtakInnvilet"})}),e.jsx(v,{size:"small",children:e.jsx(a,{id:"IverksetterVedtakStatusModal.GoToSearchPage"})})]}),e.jsx(m,{size:"small",variant:"primary",onClick:l,autoFocus:!0,type:"button",children:e.jsx(a,{id:"IverksetterVedtakStatusModal.Ok"})})]})})})};G.__docgenInfo={description:`IverksetterVedtakStatusModal
+
+Denne modalen vises etter en vilkarsvurdering der behandlingsstatusen
+er satt til Iverksetter vedtak. Ved å trykke på knapp blir den Nav-ansatte tatt tilbake til sokesiden.`,methods:[],displayName:"IverksetterVedtakStatusModal",props:{lukkModal:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},visModal:{required:!0,tsType:{name:"boolean"},description:""},behandlingsresultat:{required:!1,tsType:{name:"signature",type:"object",raw:`{
+  avslagsarsak?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
+  avslagsarsakFritekst?: string;
+  endretDekningsgrad?: boolean;
+  erRevurderingMedUendretUtfall?: boolean;
+  fritekstbrev?: string;
+  harRedigertVedtaksbrev: boolean;
+  id: number;
+  konsekvenserForYtelsen?: Array<foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen>;
+  opphørsdato?: string;
+  overskrift?: string;
+  rettenTil?: foreldrepenger_behandlingslager_behandling_RettenTil;
+  skjæringstidspunkt?: tjenester_behandling_dto_behandling_SkjæringstidspunktDto;
+  type: foreldrepenger_behandlingslager_behandling_BehandlingResultatType;
+  vedtaksbrev?: foreldrepenger_behandlingslager_behandling_vedtak_Vedtaksbrev;
+  vedtaksbrevStatus: foreldrepenger_domene_vedtak_intern_VedtaksbrevStatus;
+}`,signature:{properties:[{key:"avslagsarsak",value:{name:"union",raw:`| '1001'
+| '1002'
+| '1003'
+| '1004'
+| '1005'
+| '1006'
+| '1007'
+| '1008'
+| '1009'
+| '1010'
+| '1011'
+| '1012'
+| '1014'
+| '1015'
+| '1016'
+| '1017'
+| '1018'
+| '1019'
+| '1020'
+| '1021'
+| '1023'
+| '1024'
+| '1025'
+| '1026'
+| '1027'
+| '1028'
+| '1029'
+| '1031'
+| '1032'
+| '1033'
+| '1034'
+| '1035'
+| '1041'
+| '1051'
+| '1052'
+| '1060'
+| '1061'
+| '1062'
+| '1063'
+| '1064'
+| '1065'
+| '1066'
+| '1099'
+| '-'`,elements:[{name:"literal",value:"'1001'"},{name:"literal",value:"'1002'"},{name:"literal",value:"'1003'"},{name:"literal",value:"'1004'"},{name:"literal",value:"'1005'"},{name:"literal",value:"'1006'"},{name:"literal",value:"'1007'"},{name:"literal",value:"'1008'"},{name:"literal",value:"'1009'"},{name:"literal",value:"'1010'"},{name:"literal",value:"'1011'"},{name:"literal",value:"'1012'"},{name:"literal",value:"'1014'"},{name:"literal",value:"'1015'"},{name:"literal",value:"'1016'"},{name:"literal",value:"'1017'"},{name:"literal",value:"'1018'"},{name:"literal",value:"'1019'"},{name:"literal",value:"'1020'"},{name:"literal",value:"'1021'"},{name:"literal",value:"'1023'"},{name:"literal",value:"'1024'"},{name:"literal",value:"'1025'"},{name:"literal",value:"'1026'"},{name:"literal",value:"'1027'"},{name:"literal",value:"'1028'"},{name:"literal",value:"'1029'"},{name:"literal",value:"'1031'"},{name:"literal",value:"'1032'"},{name:"literal",value:"'1033'"},{name:"literal",value:"'1034'"},{name:"literal",value:"'1035'"},{name:"literal",value:"'1041'"},{name:"literal",value:"'1051'"},{name:"literal",value:"'1052'"},{name:"literal",value:"'1060'"},{name:"literal",value:"'1061'"},{name:"literal",value:"'1062'"},{name:"literal",value:"'1063'"},{name:"literal",value:"'1064'"},{name:"literal",value:"'1065'"},{name:"literal",value:"'1066'"},{name:"literal",value:"'1099'"},{name:"literal",value:"'-'"}],required:!1}},{key:"avslagsarsakFritekst",value:{name:"string",required:!1}},{key:"endretDekningsgrad",value:{name:"boolean",required:!1}},{key:"erRevurderingMedUendretUtfall",value:{name:"boolean",required:!1}},{key:"fritekstbrev",value:{name:"string",required:!1}},{key:"harRedigertVedtaksbrev",value:{name:"boolean",required:!0}},{key:"id",value:{name:"number",required:!0}},{key:"konsekvenserForYtelsen",value:{name:"Array",elements:[{name:"union",raw:`| 'FORELDREPENGER_OPPHØRER'
+| 'ENDRING_I_BEREGNING'
+| 'ENDRING_I_UTTAK'
+| 'ENDRING_I_FORDELING_AV_YTELSEN'
+| 'INGEN_ENDRING'
+| '-'`,elements:[{name:"literal",value:"'FORELDREPENGER_OPPHØRER'"},{name:"literal",value:"'ENDRING_I_BEREGNING'"},{name:"literal",value:"'ENDRING_I_UTTAK'"},{name:"literal",value:"'ENDRING_I_FORDELING_AV_YTELSEN'"},{name:"literal",value:"'INGEN_ENDRING'"},{name:"literal",value:"'-'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen>",required:!1}},{key:"opphørsdato",value:{name:"string",required:!1}},{key:"overskrift",value:{name:"string",required:!1}},{key:"rettenTil",value:{name:"union",raw:"'HAR_RETT_TIL_FP' | 'HAR_IKKE_RETT_TIL_FP' | '-'",elements:[{name:"literal",value:"'HAR_RETT_TIL_FP'"},{name:"literal",value:"'HAR_IKKE_RETT_TIL_FP'"},{name:"literal",value:"'-'"}],required:!1}},{key:"skjæringstidspunkt",value:{name:"signature",type:"object",raw:`{
+  dato?: string;
+  utenMinsterett?: boolean;
+}`,signature:{properties:[{key:"dato",value:{name:"string",required:!1}},{key:"utenMinsterett",value:{name:"boolean",required:!1}}]},required:!1}},{key:"type",value:{name:"union",raw:`| 'IKKE_FASTSATT'
+| 'INNVILGET'
+| 'AVSLÅTT'
+| 'OPPHØR'
+| 'HENLAGT_SØKNAD_TRUKKET'
+| 'HENLAGT_FEILOPPRETTET'
+| 'HENLAGT_BRUKER_DØD'
+| 'MERGET_OG_HENLAGT'
+| 'HENLAGT_SØKNAD_MANGLER'
+| 'FORELDREPENGER_ENDRET'
+| 'FORELDREPENGER_SENERE'
+| 'INGEN_ENDRING'
+| 'MANGLER_BEREGNINGSREGLER'
+| 'KLAGE_AVVIST'
+| 'KLAGE_MEDHOLD'
+| 'KLAGE_DELVIS_MEDHOLD'
+| 'KLAGE_OMGJORT_UGUNST'
+| 'KLAGE_YTELSESVEDTAK_OPPHEVET'
+| 'KLAGE_YTELSESVEDTAK_STADFESTET'
+| 'KLAGE_TILBAKEKREVING_VEDTAK_STADFESTET'
+| 'HENLAGT_KLAGE_TRUKKET'
+| 'HJEMSENDE_UTEN_OPPHEVE'
+| 'ANKE_AVVIST'
+| 'ANKE_MEDHOLD'
+| 'ANKE_DELVIS_MEDHOLD'
+| 'ANKE_OMGJORT_UGUNST'
+| 'ANKE_OPPHEVE_OG_HJEMSENDE'
+| 'ANKE_HJEMSENDE_UTEN_OPPHEV'
+| 'ANKE_YTELSESVEDTAK_STADFESTET'
+| 'HENLAGT_ANKE_TRUKKET'
+| 'INNSYN_INNVILGET'
+| 'INNSYN_DELVIS_INNVILGET'
+| 'INNSYN_AVVIST'
+| 'HENLAGT_INNSYN_TRUKKET'`,elements:[{name:"literal",value:"'IKKE_FASTSATT'"},{name:"literal",value:"'INNVILGET'"},{name:"literal",value:"'AVSLÅTT'"},{name:"literal",value:"'OPPHØR'"},{name:"literal",value:"'HENLAGT_SØKNAD_TRUKKET'"},{name:"literal",value:"'HENLAGT_FEILOPPRETTET'"},{name:"literal",value:"'HENLAGT_BRUKER_DØD'"},{name:"literal",value:"'MERGET_OG_HENLAGT'"},{name:"literal",value:"'HENLAGT_SØKNAD_MANGLER'"},{name:"literal",value:"'FORELDREPENGER_ENDRET'"},{name:"literal",value:"'FORELDREPENGER_SENERE'"},{name:"literal",value:"'INGEN_ENDRING'"},{name:"literal",value:"'MANGLER_BEREGNINGSREGLER'"},{name:"literal",value:"'KLAGE_AVVIST'"},{name:"literal",value:"'KLAGE_MEDHOLD'"},{name:"literal",value:"'KLAGE_DELVIS_MEDHOLD'"},{name:"literal",value:"'KLAGE_OMGJORT_UGUNST'"},{name:"literal",value:"'KLAGE_YTELSESVEDTAK_OPPHEVET'"},{name:"literal",value:"'KLAGE_YTELSESVEDTAK_STADFESTET'"},{name:"literal",value:"'KLAGE_TILBAKEKREVING_VEDTAK_STADFESTET'"},{name:"literal",value:"'HENLAGT_KLAGE_TRUKKET'"},{name:"literal",value:"'HJEMSENDE_UTEN_OPPHEVE'"},{name:"literal",value:"'ANKE_AVVIST'"},{name:"literal",value:"'ANKE_MEDHOLD'"},{name:"literal",value:"'ANKE_DELVIS_MEDHOLD'"},{name:"literal",value:"'ANKE_OMGJORT_UGUNST'"},{name:"literal",value:"'ANKE_OPPHEVE_OG_HJEMSENDE'"},{name:"literal",value:"'ANKE_HJEMSENDE_UTEN_OPPHEV'"},{name:"literal",value:"'ANKE_YTELSESVEDTAK_STADFESTET'"},{name:"literal",value:"'HENLAGT_ANKE_TRUKKET'"},{name:"literal",value:"'INNSYN_INNVILGET'"},{name:"literal",value:"'INNSYN_DELVIS_INNVILGET'"},{name:"literal",value:"'INNSYN_AVVIST'"},{name:"literal",value:"'HENLAGT_INNSYN_TRUKKET'"}],required:!0}},{key:"vedtaksbrev",value:{name:"union",raw:"'AUTOMATISK' | 'FRITEKST' | 'INGEN' | '-'",elements:[{name:"literal",value:"'AUTOMATISK'"},{name:"literal",value:"'FRITEKST'"},{name:"literal",value:"'INGEN'"},{name:"literal",value:"'-'"}],required:!1}},{key:"vedtaksbrevStatus",value:{name:"union",raw:`| 'VEDTAKSBREV_PRODUSERES'
+| 'INGEN_VEDTAKSBREV'
+| 'INGEN_VEDTAKSBREV_ANKE'
+| 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING'
+| 'INGEN_VEDTAKSBREV_BEHANDLING_ETTER_KLAGE'
+| 'INGEN_VEDTAKSBREV_JUSTERING_AV_FERIEPENGER'
+| 'INGEN_VEDTAKSBREV_INGEN_KONSEKVENS_FOR_YTELSE'`,elements:[{name:"literal",value:"'VEDTAKSBREV_PRODUSERES'"},{name:"literal",value:"'INGEN_VEDTAKSBREV'"},{name:"literal",value:"'INGEN_VEDTAKSBREV_ANKE'"},{name:"literal",value:"'INGEN_VEDTAKSBREV_KLAGEBEHANDLING'"},{name:"literal",value:"'INGEN_VEDTAKSBREV_BEHANDLING_ETTER_KLAGE'"},{name:"literal",value:"'INGEN_VEDTAKSBREV_JUSTERING_AV_FERIEPENGER'"},{name:"literal",value:"'INGEN_VEDTAKSBREV_INGEN_KONSEKVENS_FOR_YTELSE'"}],required:!0}}]}},description:""}}};export{G as I};

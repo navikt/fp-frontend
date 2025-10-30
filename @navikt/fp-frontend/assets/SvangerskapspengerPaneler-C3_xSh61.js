@@ -1,0 +1,1261 @@
+import{r as K,h as Q,a1 as gr,l as O,bb as ur,j as e,s as Er,A as S,t as L,Z as J,aS as mr,aT as pr,aX as _e,aV as Tr,J as Ne,a0 as _r,a9 as Ge,aa as Pe,C as Nr,N as vr,P as he,e as Ke,ba as Sr,V as Ir,be as Rr}from"./iframe-Cm0GdzKP.js";import{u as kr,F as Dr,a as Ar,V as yr}from"./VergeFaktaInitPanel-CactdStc.js";import{u as se,P as fr,a as br}from"./useStandardProsessPanelProps-9EDsOGzi.js";import{c as Or,O as Lr,T as Gr,B as Pr,d as hr,F as Kr,A as jr,I as cr,e as Fr,f as Mr,P as Vr,g as qr,h as Br}from"./TilkjentYtelseProsessIndex-D4n5weET.js";import{I as Jr,O as wr,a as je,b as Ur,M as xr,c as Hr,d as Yr,V as $r,e as Cr,Y as zr,f as Zr}from"./MedlemskapInngangsvilkarInitPanel-Dsczo0pg.js";import{e as oe,A as ce,K as Fe,Z as de}from"./index.es-CVCShSfR.js";import{n as Qr,u as c}from"./fagsakApi-pKBqlq_a.js";import{u as C,F as ge,T as w,S as ue,R as V,k as ve,a as U,c as te,f as Se,j as Wr,P as Me,O as Xr}from"./index.es-DefN28F4.js";import{a as en}from"./BehandlingMenuIndex-hvXYks01.js";import{A as F}from"./index-D-RWlIss.js";import{u as rn,H as b,B,D as ne,y as nn,V as G,b as h,L as X,a as an}from"./VStack-Ds9FrsUY.js";import{M as u}from"./message-BhgjYFSr.js";import{S as Ve}from"./Spacer-B2yxgTrd.js";import{T as A}from"./Table-yHlQJoZ-.js";import{T as $}from"./index-CDCbtC9L.js";import{S as qe}from"./ExclamationmarkTriangleFill-dkB9PQ38.js";import{E as ae}from"./RisikoklassifiseringIndex-BCEuK0Sk.js";import{S as ln}from"./Buildings3-CYbMRj0I.js";import{u as ee,a as tn}from"./behandlingApi-7xLNMv8P.js";import{u as Ee}from"./FagsakIndex-DtSHl9MW.js";import{P as me,V as pe,b as sn}from"./OverstyringPanel-BUTEyeEy.js";import{H as on}from"./HGrid-B6-QhfXM.js";import"./preload-helper-PPVm8Dsz.js";import"./index.es-BkNR4JWA.js";import"./Link-C8C7mttb.js";import"./Checkmark-sFxLXpWt.js";import"./Popover-5q0oIUwq.js";import"./aksjonspunktUtils-Bp6ewLMR.js";import"./BehandlingHenlagtPanel-B_72Lh9P.js";import"./bind-B-2cMbE3.js";import"./SettPaVentModalIndex-V0yJCxd7.js";import"./FaktaKort-CNFwReG5.js";import"./eksterneLenker-CZTrovcW.js";import"./FagsakProfileIndex-pgNi6UUJ.js";import"./ErrorBoundary-BiF--nPX.js";import"./IngenBehandlingValgtPanel-vuR-qHVA.js";import"./CheckmarkCircleFill-DveVufbB.js";import"./DocPencil-Azsiy0gI.js";import"./PersonHeadset-CXWpqHF1.js";import"./Kjonnkode-DjBoP8-t.js";import"./StarFill-CJ6vFsvs.js";import"./UkjentAdresseMeldingIndex-CymVNphA.js";import"./paths-D7eXQqDA.js";import"./useKodeverk-BY2YIXtg.js";import"./PlusCircle-C69E3wKc.js";import"./BehandlingSupportIndex-RzDfyL2f.js";import"./useTrackRouteParam-DlzfzW_G.js";import"./DokumentIndex-D1qPriCV.js";import"./Checkbox-fDzfdIWC.js";import"./SupportHeader-BliJdstm.js";import"./HistorikkIndex-DPBT8H8o.js";import"./MeldingIndex-BE2pHI6F.js";import"./SettPaVentReadOnlyModal-B3Bp2ndU.js";import"./TotrinnskontrollIndex-CAO-uNev.js";import"./tilbakekrevingUtils-B4wJRSdP.js";import"./UtvidEllerMinskKnapp-DX8bs-6W.js";import"./Timeline-BSO0Ok3_.js";import"./VisittkortSakIndex-BRrgNiJA.js";import"./validerApKodeOgHentApEnum-N5xTXakj.js";import"./apiPollingStatus-nT-xUZgL.js";import"./ExternalLink-B6NSvHTl.js";import"./FatterVedtakStatusModal-Cwba1f1v.js";import"./IverksetterVedtakStatusModal-Dmml9Z_T.js";import"./FagsakData-BhpsHlBf.js";import"./useBehandlingPollingOperasjoner-Bda5lSaF.js";import"./Dropdown-66slK5y_.js";import"./index-YskeyUeF.js";import"./BehandlingPaVent-nClHxHu2.js";var dn=function(r,n){var a={};for(var l in r)Object.prototype.hasOwnProperty.call(r,l)&&n.indexOf(l)<0&&(a[l]=r[l]);if(r!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,l=Object.getOwnPropertySymbols(r);i<l.length;i++)n.indexOf(l[i])<0&&Object.prototype.propertyIsEnumerable.call(r,l[i])&&(a[l[i]]=r[l[i]]);return a};const Ie=K.forwardRef((r,n)=>{var{title:a,titleId:l}=r,i=dn(r,["title","titleId"]);let t=rn();return t=a?l||"title-"+t:void 0,Q.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:n,"aria-labelledby":t},i),a?Q.createElement("title",{id:t},a):null,Q.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12.25 5.5a2.25 2.25 0 0 1-1.5 2.122v4.628H12A4.25 4.25 0 0 0 16.25 8v-.378a2.25 2.25 0 1 1 1.5 0V8A5.75 5.75 0 0 1 12 13.75h-1.25v2.628a2.251 2.251 0 1 1-1.5 0V7.622a2.25 2.25 0 1 1 3-2.122M10 4.75a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5m7 1.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5M9.25 18.5a.75.75 0 1 1 1.5 0 .75.75 0 0 1-1.5 0",clipRule:"evenodd"}))});var W={exports:{}},gn=W.exports,Re;function un(){return Re||(Re=1,(function(r,n){(function(a,l){r.exports=l()})(gn,(function(){return function(a,l,i){var t=function(o,s){if(!s||!s.length||s.length===1&&!s[0]||s.length===1&&Array.isArray(s[0])&&!s[0].length)return null;var g;s.length===1&&s[0].length>0&&(s=s[0]),g=(s=s.filter((function(m){return m})))[0];for(var d=1;d<s.length;d+=1)s[d].isValid()&&!s[d][o](g)||(g=s[d]);return g};i.max=function(){var o=[].slice.call(arguments,0);return t("isAfter",o)},i.min=function(){var o=[].slice.call(arguments,0);return t("isBefore",o)}}}))})(W)),W.exports}var En=un();const mn=gr(En),pn=(r,n,a)=>{const l=S(n).diff(a,"days");return r.formatMessage({id:"TilretteleggingInfoPanel.Dager"},{dager:l})},Tn=r=>r.type==="HEL_TILRETTELEGGING"?0:r.type==="INGEN_TILRETTELEGGING"?100:r.overstyrtUtbetalingsgrad??0,_n=r=>r.type==="HEL_TILRETTELEGGING"?100:r.type==="INGEN_TILRETTELEGGING"?0:r.stillingsprosent??0,Be=({tilrettelegging:r,termindato:n,erTomDatoTreUkerFørTermin:a,stillingsprosentArbeidsforhold:l,tomDato:i})=>{const t=O(),o=ur(r.fom,i),s=a?t.formatMessage({id:"TilretteleggingInfoPanel.TreUker"}):pn(t,n,i),g=r.kilde==="REGISTRERT_AV_SAKSBEHANDLER";return e.jsx("div",{style:{background:"var(--ax-bg-neutral-soft)",marginLeft:"-24px",marginTop:"-24px",marginRight:"-24px",paddingBottom:"10px",paddingLeft:"20px",paddingRight:"50px",paddingTop:"10px"},children:e.jsxs(b,{justify:"space-between",children:[e.jsxs(b,{gap:"space-16",children:[e.jsx(Or,{title:"a11y-title",fontSize:"1.5rem"}),e.jsxs("div",{children:[e.jsx(B,{size:"small",children:e.jsx(u,{id:"TilretteleggingInfoPanel.SvpOgArbeid",values:{svp:Tn(r),arbeid:_n(r)}})}),e.jsx(ne,{children:e.jsx(u,{id:"TilretteleggingInfoPanel.AvStillingsprosent",values:{stillingsprosent:l}})})]})]}),e.jsxs(b,{gap:"space-16",children:[e.jsx(nn,{title:"a11y-title",fontSize:"1.5rem"}),e.jsxs("div",{children:[e.jsx(B,{size:"small",children:e.jsx(u,{id:"TilretteleggingInfoPanel.Periode",values:{periode:o.formattedString}})}),e.jsx(ne,{children:s})]})]}),!g&&e.jsxs(b,{gap:"space-16",children:[e.jsx(Ie,{title:"a11y-title",fontSize:"1.5rem"}),e.jsxs("div",{children:[e.jsx(B,{size:"small",children:e.jsx(u,{id:"TilretteleggingInfoPanel.FraSoknad"})}),e.jsx(ne,{children:r.mottattDato&&e.jsx(u,{id:"TilretteleggingInfoPanel.Sendt",values:{dato:Er(r.mottattDato)}})})]})]}),g&&e.jsxs(b,{gap:"space-16",children:[e.jsx(Ie,{title:"a11y-title",fontSize:"1.5rem"}),e.jsx(B,{size:"small",children:e.jsx(u,{id:"TilretteleggingInfoPanel.Saksbehandler"})})]})]})})};Be.__docgenInfo={description:"",methods:[],displayName:"TilretteleggingInfoPanel",props:{tilrettelegging:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}},description:""},termindato:{required:!0,tsType:{name:"string"},description:""},erTomDatoTreUkerFørTermin:{required:!0,tsType:{name:"boolean"},description:""},stillingsprosentArbeidsforhold:{required:!0,tsType:{name:"number"},description:""},tomDato:{required:!0,tsType:{name:"string"},description:""}}};const Nn="_utbetalingsgrad_wu8wb_5",vn="_arbeidsprosent_wu8wb_9",ke={utbetalingsgrad:Nn,arbeidsprosent:vn},De=pr(100),Ae=mr(0),Sn=(r,n,a,l)=>i=>{const o=n.filter(g=>g.fom!==l.fom).some(g=>g.fom===i),s=a.some(g=>g.fom===i);return o||s?r.formatMessage({id:"TilretteleggingForm.DuplikateDatoer"}):null},In=(r,n,a)=>l=>S(l).isAfter(S(a).subtract(3,"weeks").subtract(1,"day"))?r.formatMessage({id:"TilretteleggingForm.EtterTermindato"}):S(l).isBefore(n)?r.formatMessage({id:"TilretteleggingForm.ForForsteDato"}):null,Je=r=>r.velferdspermisjoner.filter(n=>n.erGyldig).map(n=>n.permisjonsprosent).reduce((n,a)=>n+a,0),we=(r,n,a)=>{const l=r-n,i=l<=0?0:100*(1-a/l);return i>0?+i.toFixed(2):0},Te=(r,n,a,l=!0)=>{if(r.type!=="HEL_TILRETTELEGGING")return l&&r.overstyrtUtbetalingsgrad?r.overstyrtUtbetalingsgrad:r.type==="INGEN_TILRETTELEGGING"?100:we(n,a,r.stillingsprosent??0)},Rn=(r,n)=>S(r).subtract(3,"week").subtract(1,"day").isSame(S(n)),Ue=({tilrettelegging:r,termindato:n,index:a,readOnly:l,oppdaterTilrettelegging:i,avbrytEditering:t,stillingsprosentArbeidsforhold:o,arbeidsforhold:s,tomDatoForTilrettelegging:g,slettTilrettelegging:d})=>{const m=O(),E=!r.fom,R=Rn(n,g),v=Je(s),p=Te(r,o,v),T=C({defaultValues:{[a]:{...r,overstyrtUtbetalingsgrad:p}}});K.useEffect(()=>{T.reset({[a]:{...r,overstyrtUtbetalingsgrad:p}})},[p]);const N=T.watch()[a];if(!N)return console.error(`FormValues finne ikke for ${a}`),null;const y=_=>{const k=Qr(_[a],`TilretteleggingForm sine submitted values finnes ikke for index ${a}`),j=k.kilde==="REGISTRERT_AV_SAKSBEHANDLER"||E?"REGISTRERT_AV_SAKSBEHANDLER":"ENDRET_AV_SAKSBEHANDLER",f={...k,overstyrtUtbetalingsgrad:k.overstyrtUtbetalingsgrad!==p?k.overstyrtUtbetalingsgrad:void 0,kilde:j};return i(f),T.reset({[a]:f}),Promise.resolve()},P=()=>{t(),T.reset()},M=()=>(d(r.fom),Promise.resolve());return e.jsx(ge,{...T,children:e.jsx("div",{style:{backgroundColor:"var(--ax-bg-default)",padding:"24px",marginTop:"-8px",marginBottom:"-8px",marginLeft:"-8px",marginRight:"-8px"},children:e.jsxs(G,{gap:"space-32",children:[!E&&e.jsx(Be,{tilrettelegging:N,termindato:n,erTomDatoTreUkerFørTermin:R,stillingsprosentArbeidsforhold:o,tomDato:g}),e.jsx(w,{name:`${a}.fom`,control:T.control,label:m.formatMessage({id:"TilretteleggingForm.FraOgMed"}),validate:[L,J,Sn(m,s.tilretteleggingDatoer,s.avklarteOppholdPerioder,r),In(m,s.tilretteleggingBehovFom,n)],readOnly:l}),e.jsxs(ue,{name:`${a}.type`,control:T.control,legend:m.formatMessage({id:"TilretteleggingForm.Tilretteleggingsbehov"}),validate:[L],readOnly:l,children:[e.jsx(V,{value:"HEL_TILRETTELEGGING",size:"small",children:e.jsx(u,{id:"TilretteleggingForm.KanGjennomfores"})}),e.jsx(V,{value:"DELVIS_TILRETTELEGGING",size:"small",children:e.jsx(u,{id:"TilretteleggingForm.RedusertArbeid"})}),e.jsx(V,{value:"INGEN_TILRETTELEGGING",size:"small",children:e.jsx(u,{id:"TilretteleggingForm.KanIkkeGjennomfores"})})]}),N.type==="DELVIS_TILRETTELEGGING"&&e.jsxs(e.Fragment,{children:[(r.stillingsprosent===void 0||r.type!=="DELVIS_TILRETTELEGGING"||E||N.kilde==="REGISTRERT_AV_SAKSBEHANDLER")&&e.jsx(ve,{name:`${a}.stillingsprosent`,control:T.control,className:ke.arbeidsprosent,readOnly:l,label:m.formatMessage({id:"TilretteleggingForm.Arbeidsprosent"}),description:m.formatMessage({id:"TilretteleggingForm.ArbeidsprosentBeskrivelse"}),validate:[L,Ae,De,_e],forceTwoDecimalDigits:!0,onChange:_=>{const k=we(o,v,_);T.setValue(`${a}.overstyrtUtbetalingsgrad`,k,{shouldDirty:!0})}}),e.jsx(ve,{name:`${a}.overstyrtUtbetalingsgrad`,control:T.control,className:ke.utbetalingsgrad,readOnly:l,label:m.formatMessage({id:"TilretteleggingForm.ProsentSvp"}),description:m.formatMessage({id:"TilretteleggingForm.ProsentSvpBeskrivelse"}),validate:[L,Ae,De,_e,_=>!o&&_===0?m.formatMessage({id:"TilretteleggingForm.AngiUtbetalingsgrad"}):null],forceTwoDecimalDigits:!0,disabled:N.stillingsprosent===void 0})]}),!l&&e.jsxs(b,{gap:"space-8",children:[e.jsx(h,{size:"small",variant:"primary",type:"button",disabled:!T.formState.isDirty||!1,loading:!1,onClick:T.handleSubmit(_=>y(_)),children:E?e.jsx(u,{id:"TilretteleggingForm.LeggTil"}):e.jsx(u,{id:"TilretteleggingForm.Oppdater"})}),e.jsx(h,{size:"small",variant:"secondary",onClick:P,type:"button",children:E?e.jsx(u,{id:"TilretteleggingForm.AvsluttOgSlett"}):e.jsx(u,{id:"TilretteleggingForm.Avbryt"})}),!E&&e.jsxs(e.Fragment,{children:[e.jsx(Ve,{}),e.jsx(h,{size:"small",variant:"secondary",onClick:M,type:"button",children:e.jsx(u,{id:"TilretteleggingForm.SlettPeriode"})})]})]})]})})})};Ue.__docgenInfo={description:"",methods:[],displayName:"TilretteleggingForm",props:{tilrettelegging:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}},description:""},termindato:{required:!0,tsType:{name:"string"},description:""},index:{required:!0,tsType:{name:"number"},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},oppdaterTilrettelegging:{required:!0,tsType:{name:"signature",type:"function",raw:"(values: ArbeidsforholdTilretteleggingDato) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}},name:"values"}],return:{name:"void"}}},description:""},avbrytEditering:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},stillingsprosentArbeidsforhold:{required:!0,tsType:{name:"number"},description:""},arbeidsforhold:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  kanTilrettelegges: boolean;
+  kopiertFraTidligereBehandling?: boolean;
+  mottattTidspunkt?: string;
+  opplysningerOmRisiko?: string;
+  opplysningerOmTilrettelegging?: string;
+  skalBrukes: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  tilretteleggingId: number;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"avklarteOppholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"internArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"kanTilrettelegges",value:{name:"boolean",required:!0}},{key:"kopiertFraTidligereBehandling",value:{name:"boolean",required:!1}},{key:"mottattTidspunkt",value:{name:"string",required:!1}},{key:"opplysningerOmRisiko",value:{name:"string",required:!1}},{key:"opplysningerOmTilrettelegging",value:{name:"string",required:!1}},{key:"skalBrukes",value:{name:"boolean",required:!0}},{key:"stillingsprosentStartTilrettelegging",value:{name:"number",required:!1}},{key:"tilretteleggingBehovFom",value:{name:"string",required:!0}},{key:"tilretteleggingDatoer",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>",required:!0}},{key:"tilretteleggingId",value:{name:"number",required:!0}},{key:"uttakArbeidType",value:{name:"union",raw:`| 'ORDINÆRT_ARBEID'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'FRILANS'
+| 'ANNET'`,elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}},{key:"velferdspermisjoner",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_VelferdspermisjonDto>",required:!0}}]}},description:""},tomDatoForTilrettelegging:{required:!0,tsType:{name:"string"},description:""},slettTilrettelegging:{required:!0,tsType:{name:"signature",type:"function",raw:"(fomDato: string) => void",signature:{arguments:[{type:{name:"string"},name:"fomDato"}],return:{name:"void"}}},description:""}}};const kn=(r,n,a,l)=>i=>{const o=n.filter(g=>g.fom!==l.fom).some(g=>g.fom===i);return a.some(g=>g.fom===i)||o?r.formatMessage({id:"TilretteleggingForm.DuplikateDatoer"}):null},Dn=(r,n,a)=>l=>S(l).isBefore(a(`${n}.fom`))?r.formatMessage({id:"OppholdForm.TomForFom"}):null,ye=(r,n,a)=>l=>{if(S(l).isAfter(S(a).subtract(3,"weeks").subtract(1,"day")))return r.formatMessage({id:"OppholdForm.EtterTermindato"});const i=n.reduce((t,o)=>t===void 0||S(o.fom).isBefore(t)?o.fom:t,void 0);return S(l).isBefore(i)?r.formatMessage({id:"OppholdForm.ForForsteDato"}):null},An=(r,n,a,l)=>()=>{const i=r(`${n}.fom`),t=r(`${n}.tom`),o=l.filter(s=>s.fom!==a.fom).map(({fom:s,tom:g})=>[s,g]).concat([[i,t]]);return o.length>0&&S(i).isBefore(S(t))?Tr(o):void 0},xe=({opphold:r,index:n,readOnly:a,oppdaterOpphold:l,avbrytEditering:i,slettOpphold:t,alleTilrettelegginger:o,alleOpphold:s,termindato:g})=>{const d=O(),m=!r.fom,E=C({defaultValues:{[n]:r}}),R=I=>(l(I[n]),E.reset(I),Promise.resolve()),v=()=>(t(r),Promise.resolve()),p=()=>{i(),E.reset()},T=a||r.oppholdKilde==="INNTEKTSMELDING";return e.jsx(ge,{...E,children:e.jsx("div",{style:{backgroundColor:"var(--ax-bg-default)",padding:"24px",marginTop:"-8px",marginBottom:"-8px",marginLeft:"-8px",marginRight:"-8px"},children:e.jsxs(G,{gap:"space-40",children:[e.jsxs(b,{gap:"space-16",children:[e.jsx(w,{name:`${n}.fom`,control:E.control,label:d.formatMessage({id:"OppholdForm.FraOgMed"}),validate:[L,J,kn(d,s,o,r),ye(d,o,g)],readOnly:T}),e.jsx(w,{name:`${n}.tom`,control:E.control,label:d.formatMessage({id:"OppholdForm.TilOgMed"}),validate:[L,J,Dn(d,n,E.getValues),ye(d,o,g),An(E.getValues,n,r,s)],readOnly:T})]}),e.jsxs(ue,{name:`${n}.oppholdÅrsak`,control:E.control,legend:d.formatMessage({id:"OppholdForm.GrunnTilOpphold"}),validate:[L],readOnly:T,children:[e.jsx(V,{value:"SYKEPENGER",size:"small",children:e.jsx(u,{id:"OppholdForm.Sykepenger"})}),e.jsx(V,{value:"FERIE",size:"small",children:e.jsx(u,{id:"OppholdForm.Ferie"})})]}),!T&&e.jsxs(b,{gap:"space-8",children:[e.jsx(h,{size:"small",variant:"primary",type:"button",disabled:!E.formState.isDirty||!1,loading:!1,onClick:E.handleSubmit(I=>R(I)),children:m?e.jsx(u,{id:"OppholdForm.LeggTil"}):e.jsx(u,{id:"OppholdForm.Oppdater"})}),e.jsx(h,{size:"small",variant:"secondary",onClick:p,type:"button",children:m?e.jsx(u,{id:"OppholdForm.AvsluttOgSlett"}):e.jsx(u,{id:"OppholdForm.Avbryt"})}),!m&&e.jsxs(e.Fragment,{children:[e.jsx(Ve,{}),e.jsx(h,{size:"small",variant:"secondary",onClick:v,type:"button",children:e.jsx(u,{id:"OppholdForm.SlettPeriode"})})]})]})]})})})};xe.__docgenInfo={description:"",methods:[],displayName:"OppholdForm",props:{opphold:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}},description:""},index:{required:!0,tsType:{name:"number"},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},oppdaterOpphold:{required:!0,tsType:{name:"signature",type:"function",raw:"(values: SvpAvklartOppholdPeriode) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}},name:"values"}],return:{name:"void"}}},description:""},slettOpphold:{required:!0,tsType:{name:"signature",type:"function",raw:"(opphold: SvpAvklartOppholdPeriode) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}},name:"opphold"}],return:{name:"void"}}},description:""},avbrytEditering:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},alleTilrettelegginger:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}}],raw:"ArbeidsforholdTilretteleggingDato[]"},description:""},alleOpphold:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"SvpAvklartOppholdPeriode[]"},description:""},termindato:{required:!0,tsType:{name:"string"},description:""}}};const yn="_row_yo41g_1",fn="_openRow_yo41g_5",fe={row:yn,openRow:fn},bn=(r,n)=>n.oppholdÅrsak===void 0?r.formatMessage({id:"TilretteleggingPerioderTabellRad.Opphold"}):n.oppholdÅrsak==="FERIE"?r.formatMessage({id:"TilretteleggingPerioderTabellRad.Ferie"}):r.formatMessage({id:"TilretteleggingPerioderTabellRad.Sykepenger"}),On=(r,n)=>{switch(n.oppholdKilde){case"SØKNAD":return r.formatMessage({id:"TilretteleggingPerioderTabellRad.Soknad"});case"INNTEKTSMELDING":return r.formatMessage({id:"TilretteleggingPerioderTabellRad.Inntektsmelding"});case"TIDLIGERE_VEDTAK":return r.formatMessage({id:"TilretteleggingPerioderTabellRad.TidligereVedtak"});default:return r.formatMessage({id:"TilretteleggingPerioderTabellRad.Saksbehandler"})}},He=({navn:r,opphold:n,index:a,readOnly:l,openRad:i,fjernOpphold:t,setLeggTilKnapperDisablet:o,arbeidsforhold:s,termindato:g})=>{const d=O(),[m,E]=K.useState(i),{setValue:R}=U(),v=T=>{E(!1),o(!1),R(r,T,{shouldDirty:!0})},p=()=>{n.fom||t(),o(!1),E(!1)};return e.jsxs(A.ExpandableRow,{open:m,expandOnRowClick:!0,onOpenChange:()=>E(!m),onClick:()=>E(!m),contentGutter:"none",content:e.jsx(xe,{opphold:n,index:a,oppdaterOpphold:v,avbrytEditering:p,readOnly:l,alleTilrettelegginger:s.tilretteleggingDatoer,alleOpphold:s.avklarteOppholdPerioder,termindato:g,slettOpphold:t}),togglePlacement:"right",className:m?fe.openRow:fe.row,children:[e.jsx(A.DataCell,{children:n.fom?e.jsx(oe,{dateStringFom:n.fom,dateStringTom:n.tom}):e.jsx(u,{id:"TilretteleggingPerioderTabellRad.Periode"})}),e.jsx(A.DataCell,{children:bn(d,n)}),e.jsx(A.DataCell,{children:e.jsx($,{size:"small",variant:"neutral-moderate",children:On(d,n)})})]})};He.__docgenInfo={description:"",methods:[],displayName:"OppholdPeriodeTabellRad",props:{navn:{required:!0,tsType:{name:"literal",value:"`arbeidsforhold.${number}.avklarteOppholdPerioder.${number}`"},description:""},opphold:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},index:{required:!0,tsType:{name:"number"},description:""},openRad:{required:!0,tsType:{name:"boolean"},description:""},fjernOpphold:{required:!0,tsType:{name:"signature",type:"function",raw:"(opphold?: SvpAvklartOppholdPeriode) => void",signature:{arguments:[{type:{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}},name:"opphold"}],return:{name:"void"}}},description:""},setLeggTilKnapperDisablet:{required:!0,tsType:{name:"ReactDispatch",raw:"React.Dispatch<React.SetStateAction<boolean>>",elements:[{name:"ReactSetStateAction",raw:"React.SetStateAction<boolean>",elements:[{name:"boolean"}]}]},description:""},arbeidsforhold:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  kanTilrettelegges: boolean;
+  kopiertFraTidligereBehandling?: boolean;
+  mottattTidspunkt?: string;
+  opplysningerOmRisiko?: string;
+  opplysningerOmTilrettelegging?: string;
+  skalBrukes: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  tilretteleggingId: number;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"avklarteOppholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"internArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"kanTilrettelegges",value:{name:"boolean",required:!0}},{key:"kopiertFraTidligereBehandling",value:{name:"boolean",required:!1}},{key:"mottattTidspunkt",value:{name:"string",required:!1}},{key:"opplysningerOmRisiko",value:{name:"string",required:!1}},{key:"opplysningerOmTilrettelegging",value:{name:"string",required:!1}},{key:"skalBrukes",value:{name:"boolean",required:!0}},{key:"stillingsprosentStartTilrettelegging",value:{name:"number",required:!1}},{key:"tilretteleggingBehovFom",value:{name:"string",required:!0}},{key:"tilretteleggingDatoer",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>",required:!0}},{key:"tilretteleggingId",value:{name:"number",required:!0}},{key:"uttakArbeidType",value:{name:"union",raw:`| 'ORDINÆRT_ARBEID'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'FRILANS'
+| 'ANNET'`,elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}},{key:"velferdspermisjoner",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_VelferdspermisjonDto>",required:!0}}]}},description:""},termindato:{required:!0,tsType:{name:"string"},description:""}}};const Ln="_row_yo41g_1",Gn="_openRow_yo41g_5",be={row:Ln,openRow:Gn},Pn=(r,n,a,l)=>{const i=Je(a),t=l.type==="INGEN_TILRETTELEGGING"?100:l.stillingsprosent,o=l.fom&&t?Te(l,n,i):0;return l.fom?r.formatMessage({id:"TilretteleggingPerioderTabellRad.SVPprosent"},{prosent:o??"0"}):r.formatMessage({id:"TilretteleggingPerioderTabellRad.Tilrettelegging"})},hn=(r,n)=>n.kilde==="REGISTRERT_AV_SAKSBEHANDLER"||n.fom===""?r.formatMessage({id:"TilretteleggingPerioderTabellRad.Saksbehandler"}):n.kilde==="ENDRET_AV_SAKSBEHANDLER"?r.formatMessage({id:"TilretteleggingPerioderTabellRad.EndretAvSaksbehandler"}):n.kilde==="TIDLIGERE_VEDTAK"?r.formatMessage({id:"TilretteleggingPerioderTabellRad.TidligereVedtak"}):r.formatMessage({id:"TilretteleggingPerioderTabellRad.Soknad"}),Ye=({navn:r,tilrettelegging:n,index:a,readOnly:l,openRad:i,fjernTilrettelegging:t,setLeggTilKnapperDisablet:o,stillingsprosentArbeidsforhold:s,arbeidsforhold:g,tomDatoForTilrettelegging:d,termindato:m})=>{const E=O(),[R,v]=K.useState(i),{setValue:p}=U(),T=N=>{v(!1),o(!1),p(r,N,{shouldDirty:!0})},I=()=>{n.fom||t(),o(!1),v(!1)};return e.jsxs(A.ExpandableRow,{open:R,expandOnRowClick:!0,onOpenChange:()=>v(!R),onClick:()=>v(!R),contentGutter:"none",content:e.jsx(Ue,{tilrettelegging:n,termindato:m,index:a,oppdaterTilrettelegging:T,avbrytEditering:I,readOnly:l,stillingsprosentArbeidsforhold:s,arbeidsforhold:g,tomDatoForTilrettelegging:d,slettTilrettelegging:t}),togglePlacement:"right",className:R?be.openRow:be.row,children:[e.jsx(A.DataCell,{children:n.fom?e.jsx(oe,{dateStringFom:n.fom,dateStringTom:d}):e.jsx(u,{id:"TilretteleggingPerioderTabellRad.Periode"})}),e.jsx(A.DataCell,{children:Pn(E,s,g,n)}),e.jsx(A.DataCell,{children:e.jsx($,{size:"small",variant:"neutral-moderate",children:hn(E,n)})})]})};Ye.__docgenInfo={description:"",methods:[],displayName:"TilretteleggingPeriodeTabellRad",props:{navn:{required:!0,tsType:{name:"literal",value:"`arbeidsforhold.${number}.tilretteleggingDatoer.${number}`"},description:""},tilrettelegging:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},index:{required:!0,tsType:{name:"number"},description:""},openRad:{required:!0,tsType:{name:"boolean"},description:""},fjernTilrettelegging:{required:!0,tsType:{name:"signature",type:"function",raw:"(fomDato?: string) => void",signature:{arguments:[{type:{name:"string"},name:"fomDato"}],return:{name:"void"}}},description:""},setLeggTilKnapperDisablet:{required:!0,tsType:{name:"ReactDispatch",raw:"React.Dispatch<React.SetStateAction<boolean>>",elements:[{name:"ReactSetStateAction",raw:"React.SetStateAction<boolean>",elements:[{name:"boolean"}]}]},description:""},stillingsprosentArbeidsforhold:{required:!0,tsType:{name:"number"},description:""},arbeidsforhold:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  kanTilrettelegges: boolean;
+  kopiertFraTidligereBehandling?: boolean;
+  mottattTidspunkt?: string;
+  opplysningerOmRisiko?: string;
+  opplysningerOmTilrettelegging?: string;
+  skalBrukes: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  tilretteleggingId: number;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"avklarteOppholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"internArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"kanTilrettelegges",value:{name:"boolean",required:!0}},{key:"kopiertFraTidligereBehandling",value:{name:"boolean",required:!1}},{key:"mottattTidspunkt",value:{name:"string",required:!1}},{key:"opplysningerOmRisiko",value:{name:"string",required:!1}},{key:"opplysningerOmTilrettelegging",value:{name:"string",required:!1}},{key:"skalBrukes",value:{name:"boolean",required:!0}},{key:"stillingsprosentStartTilrettelegging",value:{name:"number",required:!1}},{key:"tilretteleggingBehovFom",value:{name:"string",required:!0}},{key:"tilretteleggingDatoer",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>",required:!0}},{key:"tilretteleggingId",value:{name:"number",required:!0}},{key:"uttakArbeidType",value:{name:"union",raw:`| 'ORDINÆRT_ARBEID'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'FRILANS'
+| 'ANNET'`,elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}},{key:"velferdspermisjoner",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_VelferdspermisjonDto>",required:!0}}]}},description:""},tomDatoForTilrettelegging:{required:!0,tsType:{name:"string"},description:""},termindato:{required:!0,tsType:{name:"string"},description:""}}};const $e=(r,n,a)=>{const l=r[a+1];return l?n.find(t=>t.fom===l)??$e(r,n,a+1):void 0},Ce=({arbeidsforhold:r,arbeidsforholdIndex:n,readOnly:a,stillingsprosentArbeidsforhold:l,termindato:i})=>{const t=`arbeidsforhold.${n}.tilretteleggingDatoer`,o=`arbeidsforhold.${n}.avklarteOppholdPerioder`,[s,g]=K.useState(!1),{control:d}=U(),{append:m,remove:E}=te({name:t,control:d}),{append:R,remove:v}=te({name:o,control:d}),{tilretteleggingDatoer:p,avklarteOppholdPerioder:T}=r,I=()=>{g(!0),R({fom:"",tom:"",oppholdÅrsak:void 0,oppholdKilde:"REGISTRERT_AV_SAKSBEHANDLER"})},N=()=>{g(!0),m({fom:"",type:void 0,kilde:"REGISTRERT_AV_SAKSBEHANDLER",stillingsprosent:void 0,overstyrtUtbetalingsgrad:void 0,mottattDato:void 0})},y=_=>{E(_?p.findIndex(k=>k.fom===_):p.length-1)},P=_=>{v(_?T.findIndex(k=>k.fom===_.fom&&k.tom===_.tom&&k.oppholdKilde===_.oppholdKilde):T.length-1)},M=[...p,...T].sort((_,k)=>_.fom?k.fom?S(_.fom).diff(S(k.fom)):-1:1);return e.jsxs(G,{gap:"space-24",children:[e.jsx(A,{size:"small",children:e.jsx(A.Body,{children:M.map((_,k)=>{if("kilde"in _){const f=M.map(D=>D.fom),x=p.findIndex(D=>D.fom===_.fom),z=$e(f,p,k),re=z?.fom?S(z.fom).subtract(1,"day").format(Ne):S(i).subtract(3,"week").subtract(1,"day").format(Ne);return e.jsx(Ye,{navn:`${t}.${x}`,tilrettelegging:_,readOnly:a,index:n+x,openRad:_.fom==="",fjernTilrettelegging:y,setLeggTilKnapperDisablet:g,stillingsprosentArbeidsforhold:l,arbeidsforhold:r,tomDatoForTilrettelegging:re,termindato:i},`${t}.${x}`)}const j=T.findIndex(f=>f.fom===_.fom&&f.tom===_.tom&&f.oppholdKilde===_.oppholdKilde);return e.jsx(He,{navn:`${o}.${j}`,opphold:_,readOnly:a,index:n+j,openRad:_.fom==="",fjernOpphold:P,setLeggTilKnapperDisablet:g,arbeidsforhold:r,termindato:i},`${o}.${j}`)})})}),!a&&e.jsxs(b,{gap:"space-16",children:[e.jsx(h,{size:"small",variant:"secondary",type:"button",icon:e.jsx(Se,{"aria-hidden":!0}),onClick:N,disabled:s,children:e.jsx(u,{id:"TilretteleggingFieldArray.LeggTilTilrettelegging"})}),e.jsx(h,{size:"small",variant:"secondary",onClick:I,icon:e.jsx(Se,{"aria-hidden":!0}),type:"button",disabled:s,children:e.jsx(u,{id:"TilretteleggingFieldArray.LeggTilOpphold"})})]})]})};Ce.__docgenInfo={description:"",methods:[],displayName:"TilretteleggingOgOppholdPerioderPanel",props:{arbeidsforhold:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  kanTilrettelegges: boolean;
+  kopiertFraTidligereBehandling?: boolean;
+  mottattTidspunkt?: string;
+  opplysningerOmRisiko?: string;
+  opplysningerOmTilrettelegging?: string;
+  skalBrukes: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  tilretteleggingId: number;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"avklarteOppholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"internArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"kanTilrettelegges",value:{name:"boolean",required:!0}},{key:"kopiertFraTidligereBehandling",value:{name:"boolean",required:!1}},{key:"mottattTidspunkt",value:{name:"string",required:!1}},{key:"opplysningerOmRisiko",value:{name:"string",required:!1}},{key:"opplysningerOmTilrettelegging",value:{name:"string",required:!1}},{key:"skalBrukes",value:{name:"boolean",required:!0}},{key:"stillingsprosentStartTilrettelegging",value:{name:"number",required:!1}},{key:"tilretteleggingBehovFom",value:{name:"string",required:!0}},{key:"tilretteleggingDatoer",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>",required:!0}},{key:"tilretteleggingId",value:{name:"number",required:!0}},{key:"uttakArbeidType",value:{name:"union",raw:`| 'ORDINÆRT_ARBEID'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'FRILANS'
+| 'ANNET'`,elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}},{key:"velferdspermisjoner",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_VelferdspermisjonDto>",required:!0}}]}},description:""},arbeidsforholdIndex:{required:!0,tsType:{name:"number"},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},stillingsprosentArbeidsforhold:{required:!0,tsType:{name:"number"},description:""},termindato:{required:!0,tsType:{name:"string"},description:""}}};const ze=({velferdspermisjon:r,arbeidsforholdIndex:n,readOnly:a,lukkRad:l,oppdaterOverstyrtUtbetalingsgrad:i})=>{const t=O(),{setValue:o,getValues:s}=U(),g=s(`arbeidsforhold.${n}.velferdspermisjoner`),d=g.findIndex(v=>v.permisjonFom===r.permisjonFom&&v.permisjonTom===r.permisjonTom),m=C({defaultValues:{[d]:{...r}}}),E=v=>{const p=v[d];if(!p)throw new Error(`Formvalues finnes ikke for index ${d}`);o(`arbeidsforhold.${n}.velferdspermisjoner.${d}`,p,{shouldDirty:!0}),p.erGyldig&&r.permisjonsprosent===100&&o(`arbeidsforhold.${n}.skalBrukes`,!1,{shouldDirty:!0});const I=g.filter((N,y)=>d!==y).concat(p).filter(N=>N.erGyldig).map(N=>N.permisjonsprosent).reduce((N,y)=>N+y,0);return i(I),m.reset(v),l(),Promise.resolve()},R=m.watch(`${d}.erGyldig`);return e.jsx(ge,{...m,children:e.jsx("div",{style:{backgroundColor:"var(--ax-bg-default)",padding:"24px",marginTop:"-8px",marginBottom:"-8px",marginLeft:"-8px",marginRight:"-8px"},children:e.jsxs(G,{gap:"space-20",children:[e.jsxs(ue,{name:`${d}.erGyldig`,control:m.control,legend:t.formatMessage({id:"VelferdspermisjonPanel.PermisjonGyldig"}),description:t.formatMessage({id:"VelferdspermisjonPanel.PermisjonGyldigDetaljer"}),validate:[L],readOnly:a,children:[e.jsx(V,{value:!0,size:"small",children:e.jsx(u,{id:"VelferdspermisjonPanel.Ja"})}),e.jsx(V,{value:!1,size:"small",children:e.jsx(u,{id:"VelferdspermisjonPanel.Nei"})})]}),R&&r.permisjonsprosent===100&&e.jsx(ce,{variant:"info",size:"small",children:e.jsx(u,{id:"VelferdspermisjonPanel.Permisjon100ProsentOgGyldig"})}),e.jsx("div",{children:e.jsx(h,{size:"small",variant:"primary",type:"button",disabled:!m.formState.isDirty||!1,onClick:m.handleSubmit(E),children:e.jsx(u,{id:"VelferdspermisjonPanel.Oppdater"})})})]})})})};ze.__docgenInfo={description:"",methods:[],displayName:"VelferdspermisjonForm",props:{velferdspermisjon:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}},description:""},arbeidsforholdIndex:{required:!0,tsType:{name:"number"},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},lukkRad:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},oppdaterOverstyrtUtbetalingsgrad:{required:!0,tsType:{name:"signature",type:"function",raw:"(velferdspermisjonprosent: number) => void",signature:{arguments:[{type:{name:"number"},name:"velferdspermisjonprosent"}],return:{name:"void"}}},description:""}}};const Kn="_row_11ji7_1",jn="_openRow_11ji7_5",cn="_apRow_11ji7_10",le={row:Kn,openRow:jn,apRow:cn},Fn=(r,n)=>n?le.apRow:r?le.openRow:le.row,Ze=({velferdspermisjon:r,arbeidsforholdIndex:n,readOnly:a,oppdaterOverstyrtUtbetalingsgrad:l})=>{const i=r.erGyldig===void 0,[t,o]=K.useState(i);return e.jsxs(A.ExpandableRow,{open:t,expandOnRowClick:!0,onOpenChange:()=>o(!t),onClick:()=>o(!t),contentGutter:"none",content:e.jsx(ze,{velferdspermisjon:r,arbeidsforholdIndex:n,readOnly:a,lukkRad:()=>o(!1),oppdaterOverstyrtUtbetalingsgrad:l}),togglePlacement:"right",className:Fn(t,i),children:[e.jsx(A.DataCell,{children:e.jsx(oe,{dateStringFom:r.permisjonFom,dateStringTom:r.permisjonTom})}),e.jsx(A.DataCell,{children:e.jsx(u,{id:"VelferdspermisjonPanel.Permisjon",values:{type:r.type.toLowerCase(),permisjon:r.permisjonsprosent}})}),e.jsx(A.DataCell,{children:e.jsx($,{variant:"neutral-moderate",size:"small",children:e.jsx(u,{id:"VelferdspermisjonPanel.AaRegisteret"})})})]})};Ze.__docgenInfo={description:"",methods:[],displayName:"VelferdspermisjonTabellRad",props:{velferdspermisjon:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}},description:""},arbeidsforholdIndex:{required:!0,tsType:{name:"number"},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},oppdaterOverstyrtUtbetalingsgrad:{required:!0,tsType:{name:"signature",type:"function",raw:"(velferdspermisjonprosent: number) => void",signature:{arguments:[{type:{name:"number"},name:"velferdspermisjonprosent"}],return:{name:"void"}}},description:""}}};const Mn="_image_g8oiy_1",Vn={image:Mn},Qe=({velferdspermisjoner:r,arbeidsforholdIndex:n,readOnly:a,oppdaterOverstyrtUtbetalingsgrad:l})=>{const i=O();return e.jsxs(G,{gap:"space-8",children:[e.jsxs(b,{gap:"space-16",align:"center",children:[e.jsx(X,{size:"small",children:e.jsx(u,{id:"TilretteleggingForArbeidsgiverPanel.Velferdspermisjon"})}),r.some(t=>t.erGyldig===void 0)&&e.jsx(qe,{title:i.formatMessage({id:"TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg"}),className:Vn.image})]}),e.jsx(A,{size:"small",children:e.jsx(A.Body,{children:r.map(t=>e.jsx(Ze,{velferdspermisjon:t,readOnly:a,arbeidsforholdIndex:n,oppdaterOverstyrtUtbetalingsgrad:l},t.permisjonFom))})})]})};Qe.__docgenInfo={description:"",methods:[],displayName:"VelferdspermisjonPanel",props:{velferdspermisjoner:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}}],raw:"Permisjon[]"},description:""},arbeidsforholdIndex:{required:!0,tsType:{name:"number"},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},oppdaterOverstyrtUtbetalingsgrad:{required:!0,tsType:{name:"signature",type:"function",raw:"(velferdspermisjonprosent: number) => void",signature:{arguments:[{type:{name:"number"},name:"velferdspermisjonprosent"}],return:{name:"void"}}},description:""}}};S.extend(mn);const qn=(r,n,a)=>()=>{const l=n("termindato"),i=n("fødselsdato"),t=S(a),o=S(l).subtract(3,"week").subtract(1,"day"),s=i?S.min(o,S(i)):o;return t.isValid()&&!t.isBefore(s)?r.formatMessage({id:"TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn"},{dato:s.format(_r)}):null},We=(r,n)=>r.filter(a=>!S(a.permisjonFom).isAfter(n)&&(a.permisjonTom==null||!S(a.permisjonTom).isBefore(n))),Xe=({arbeidsforhold:r,arbeidsforholdIndex:n,readOnly:a,visInfoAlert:l,stillingsprosentArbeidsforhold:i})=>{const t=O(),{getValues:o,watch:s,setValue:g,control:d}=U(),m=s(`arbeidsforhold.${n}.tilretteleggingBehovFom`),E=We(r.velferdspermisjoner,m),R=s("termindato"),v=E.some(T=>T.erGyldig===void 0),p=T=>{for(const[I,N]of r.tilretteleggingDatoer.entries()){const y=Te(N,i,T,!1);y!==void 0&&g(`arbeidsforhold.${n}.tilretteleggingDatoer.${I}`,{...N,overstyrtUtbetalingsgrad:y})}};return e.jsxs(G,{gap:"space-16",children:[l&&e.jsx(Fe,{children:e.jsx(u,{id:"TilretteleggingFaktaForm.UndersokNarmere"})}),e.jsx(Wr,{name:`arbeidsforhold.${n}.skalBrukes`,control:d,readOnly:a,label:e.jsx(u,{id:"TilretteleggingForArbeidsgiverPanel.SkalHaSvpForArbeidsforhold"})}),e.jsxs(G,{gap:"space-32",children:[e.jsx(w,{name:`arbeidsforhold.${n}.tilretteleggingBehovFom`,control:d,label:t.formatMessage({id:"TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging"}),validate:[L,J,qn(t,o,m)],readOnly:a}),E.length>0&&e.jsx(Qe,{velferdspermisjoner:E,arbeidsforholdIndex:n,readOnly:a,oppdaterOverstyrtUtbetalingsgrad:p}),e.jsxs(G,{gap:"space-8",children:[e.jsx(X,{size:"small",children:e.jsx(u,{id:"TilretteleggingForArbeidsgiverPanel.Perioder"})}),e.jsx(Ce,{arbeidsforhold:r,arbeidsforholdIndex:n,readOnly:a||v,stillingsprosentArbeidsforhold:i,termindato:R})]})]})]})};Xe.__docgenInfo={description:"",methods:[],displayName:"ArbeidsforholdPanel",props:{arbeidsforhold:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  kanTilrettelegges: boolean;
+  kopiertFraTidligereBehandling?: boolean;
+  mottattTidspunkt?: string;
+  opplysningerOmRisiko?: string;
+  opplysningerOmTilrettelegging?: string;
+  skalBrukes: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  tilretteleggingId: number;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"avklarteOppholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"internArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"kanTilrettelegges",value:{name:"boolean",required:!0}},{key:"kopiertFraTidligereBehandling",value:{name:"boolean",required:!1}},{key:"mottattTidspunkt",value:{name:"string",required:!1}},{key:"opplysningerOmRisiko",value:{name:"string",required:!1}},{key:"opplysningerOmTilrettelegging",value:{name:"string",required:!1}},{key:"skalBrukes",value:{name:"boolean",required:!0}},{key:"stillingsprosentStartTilrettelegging",value:{name:"number",required:!1}},{key:"tilretteleggingBehovFom",value:{name:"string",required:!0}},{key:"tilretteleggingDatoer",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>",required:!0}},{key:"tilretteleggingId",value:{name:"number",required:!0}},{key:"uttakArbeidType",value:{name:"union",raw:`| 'ORDINÆRT_ARBEID'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'FRILANS'
+| 'ANNET'`,elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}},{key:"velferdspermisjoner",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_VelferdspermisjonDto>",required:!0}}]}},description:""},arbeidsforholdIndex:{required:!0,tsType:{name:"number"},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},visInfoAlert:{required:!0,tsType:{name:"boolean"},description:""},stillingsprosentArbeidsforhold:{required:!0,tsType:{name:"number"},description:""}}};const Bn="_card_1cmfa_1",Jn="_cardHeader_1cmfa_5",wn="_padding_1cmfa_9",Un="_image_1cmfa_13",H={card:Bn,cardHeader:Jn,padding:wn,image:Un},xn=r=>r?`...${r.substring(r.length-4,r.length)}`:"",Hn=(r,n)=>r.length>1?r.find(a=>a.internArbeidsforholdId===n):r.length===1?r[0]:void 0,ie=(r,n,a)=>{const l=S(r);return!(l.isBefore(S(n||void 0))||l.isAfter(S(a||void 0)))},Yn=(r,n)=>n&&r?e.jsx(u,{id:"ArbeidsforholdFieldArray.SvpIkkeBeregnet"}):r?e.jsx(u,{id:"ArbeidsforholdFieldArray.SkalHaSvp"}):e.jsx(u,{id:"ArbeidsforholdFieldArray.SkalIkkeHaSvp"}),$n=(r,n)=>r.filter(l=>ie(n,l.fom,l.tom)).reduce((l,i)=>l+(i.stillingsprosent??0),0),er=({sorterteArbeidsforhold:r,aoiArbeidsforhold:n,arbeidsgiverOpplysningerPerId:a,readOnly:l,uttakArbeidTyper:i})=>{const{control:t}=U(),{fields:o}=te({control:t,name:"arbeidsforhold"});return e.jsx(e.Fragment,{children:o.map((s,g)=>{const d=r[g];if(!d)return null;const m=a[d.arbeidsgiverReferanse??""],E=n.filter(I=>I.arbeidsgiverIdent===d.arbeidsgiverReferanse),R=Hn(E,d.internArbeidsforholdReferanse),v=R?!ie(d.tilretteleggingBehovFom,R.fom,R.tom):E.length>0&&E.every(I=>!ie(d.tilretteleggingBehovFom,I.fom,I.tom)),p=R?R.stillingsprosent:$n(E,d.tilretteleggingBehovFom),T=i.find(I=>I.kode===d.uttakArbeidType);return e.jsx(Q.Fragment,{children:e.jsxs(ae,{"aria-label":"arbeidsgiver",defaultOpen:!0,className:H.card,children:[e.jsx(ae.Header,{className:H.cardHeader,children:e.jsx("div",{className:H.padding,children:e.jsxs(b,{gap:"space-56",align:"center",children:[e.jsxs(b,{gap:"space-16",align:"center",children:[e.jsx(ln,{color:"var(--ax-accent-700)",className:H.image}),e.jsx(an,{size:"small",level:"3",children:m?.navn??T?.navn}),m?.identifikator&&e.jsx(B,{size:"small",children:m.identifikator}),d.eksternArbeidsforholdReferanse&&e.jsx(B,{size:"small",children:xn(d.eksternArbeidsforholdReferanse)})]}),e.jsxs(b,{gap:"space-16",align:"center",children:[e.jsx($,{size:"small",variant:"neutral-moderate",children:e.jsx(u,{id:"ArbeidsforholdFieldArray.Stillingsprosent",values:{stillingsprosent:p}})}),e.jsx($,{size:"small",variant:"neutral-moderate",children:Yn(d.skalBrukes,v)}),d.skalBrukes&&v&&e.jsx(qe,{color:"var(--ax-warning-700)",className:H.image})]})]})})}),e.jsx(ae.Content,{children:e.jsx(Xe,{arbeidsforhold:d,arbeidsforholdIndex:g,readOnly:l,visInfoAlert:d.skalBrukes&&v,stillingsprosentArbeidsforhold:p??0})})]})},s.id)})})};er.__docgenInfo={description:"",methods:[],displayName:"ArbeidsforholdFieldArray",props:{readOnly:{required:!0,tsType:{name:"boolean"},description:""},sorterteArbeidsforhold:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  kanTilrettelegges: boolean;
+  kopiertFraTidligereBehandling?: boolean;
+  mottattTidspunkt?: string;
+  opplysningerOmRisiko?: string;
+  opplysningerOmTilrettelegging?: string;
+  skalBrukes: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  tilretteleggingId: number;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"avklarteOppholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"internArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"kanTilrettelegges",value:{name:"boolean",required:!0}},{key:"kopiertFraTidligereBehandling",value:{name:"boolean",required:!1}},{key:"mottattTidspunkt",value:{name:"string",required:!1}},{key:"opplysningerOmRisiko",value:{name:"string",required:!1}},{key:"opplysningerOmTilrettelegging",value:{name:"string",required:!1}},{key:"skalBrukes",value:{name:"boolean",required:!0}},{key:"stillingsprosentStartTilrettelegging",value:{name:"number",required:!1}},{key:"tilretteleggingBehovFom",value:{name:"string",required:!0}},{key:"tilretteleggingDatoer",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>",required:!0}},{key:"tilretteleggingId",value:{name:"number",required:!0}},{key:"uttakArbeidType",value:{name:"union",raw:`| 'ORDINÆRT_ARBEID'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'FRILANS'
+| 'ANNET'`,elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}},{key:"velferdspermisjoner",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_VelferdspermisjonDto>",required:!0}}]}}],raw:"ArbeidsforholdFodselOgTilrettelegging[]"},description:""},aoiArbeidsforhold:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent: string;
+  begrunnelse?: string;
+  eksternArbeidsforholdId?: string;
+  fom: string;
+  internArbeidsforholdId?: string;
+  permisjonOgMangel?: foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto;
+  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
+  stillingsprosent?: number;
+  tom: string;
+  årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"internArbeidsforholdId",value:{name:"string",required:!1}},{key:"permisjonOgMangel",value:{name:"signature",type:"object",raw:`{
+  permisjonFom: string;
+  permisjonStatus?: foreldrepenger_domene_iay_modell_kodeverk_BekreftetPermisjonStatus;
+  permisjonTom?: string;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+  årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
+}`,signature:{properties:[{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonStatus",value:{name:"union",raw:`| '-'
+| 'BRUK_PERMISJON'
+| 'IKKE_BRUK_PERMISJON'
+| 'UGYLDIGE_PERIODER'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'BRUK_PERMISJON'"},{name:"literal",value:"'IKKE_BRUK_PERMISJON'"},{name:"literal",value:"'UGYLDIGE_PERIODER'"}],required:!1}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}},{key:"årsak",value:{name:"union",raw:`| 'PERMISJON'
+| 'MANGLENDE_INNTEKTSMELDING'
+| 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'
+| 'ENDRING_I_ARBEIDSFORHOLDS_ID'
+| 'PERMISJON_UTEN_SLUTTDATO'`,elements:[{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'MANGLENDE_INNTEKTSMELDING'"},{name:"literal",value:"'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'"},{name:"literal",value:"'ENDRING_I_ARBEIDSFORHOLDS_ID'"},{name:"literal",value:"'PERMISJON_UTEN_SLUTTDATO'"}],required:!1}}]},required:!1}},{key:"saksbehandlersVurdering",value:{name:"union",raw:`| 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING'
+| 'FORTSETT_UTEN_INNTEKTSMELDING'
+| 'MELDING_TIL_ARBEIDSGIVER_NAV_NO'
+| 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD'
+| 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING'
+| 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING'
+| 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER'
+| 'FJERN_FRA_BEHANDLINGEN'
+| 'SLÅTT_SAMMEN_MED_ANNET'
+| 'BRUK_MED_OVERSTYRT_PERIODE'
+| 'INNTEKT_IKKE_MED_I_BG'
+| 'BRUK'
+| 'NYTT_ARBEIDSFORHOLD'
+| '-'`,elements:[{name:"literal",value:"'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING'"},{name:"literal",value:"'FORTSETT_UTEN_INNTEKTSMELDING'"},{name:"literal",value:"'MELDING_TIL_ARBEIDSGIVER_NAV_NO'"},{name:"literal",value:"'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD'"},{name:"literal",value:"'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING'"},{name:"literal",value:"'OPPRETT_BASERT_PÅ_INNTEKTSMELDING'"},{name:"literal",value:"'MANUELT_OPPRETTET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'FJERN_FRA_BEHANDLINGEN'"},{name:"literal",value:"'SLÅTT_SAMMEN_MED_ANNET'"},{name:"literal",value:"'BRUK_MED_OVERSTYRT_PERIODE'"},{name:"literal",value:"'INNTEKT_IKKE_MED_I_BG'"},{name:"literal",value:"'BRUK'"},{name:"literal",value:"'NYTT_ARBEIDSFORHOLD'"},{name:"literal",value:"'-'"}],required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"tom",value:{name:"string",required:!0}},{key:"årsak",value:{name:"union",raw:`| 'PERMISJON'
+| 'MANGLENDE_INNTEKTSMELDING'
+| 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'
+| 'ENDRING_I_ARBEIDSFORHOLDS_ID'
+| 'PERMISJON_UTEN_SLUTTDATO'`,elements:[{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'MANGLENDE_INNTEKTSMELDING'"},{name:"literal",value:"'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'"},{name:"literal",value:"'ENDRING_I_ARBEIDSFORHOLDS_ID'"},{name:"literal",value:"'PERMISJON_UTEN_SLUTTDATO'"}],required:!1}}]}}],raw:"AoIArbeidsforhold[]"},description:""},arbeidsgiverOpplysningerPerId:{required:!0,tsType:{name:"Record",elements:[{name:"string"},{name:"union",raw:`| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: true; fødselsdato: string })
+| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: false })`,elements:[{name:"unknown"},{name:"unknown"}]}],raw:"Record<string, ArbeidsgiverOpplysninger>"},description:""},uttakArbeidTyper:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:"KodeverkMedNavn<'UttakArbeidType'>[]"},description:""}}};const Cn=Nr(1500),zn=(r,n)=>[...r].sort((a,l)=>{const i=n[a.arbeidsgiverReferanse??""],t=n[l.arbeidsgiverReferanse??""];return i&&t?i.navn.localeCompare(t.navn):0}),Zn=r=>r.find(a=>a.definisjon===F.VURDER_SVP_TILRETTELEGGING)?.begrunnelse??void 0,Qn=r=>n=>n!==void 0||r?L(n):void 0,Oe=r=>r.some(n=>We(n.velferdspermisjoner,n.tilretteleggingBehovFom).some(a=>a.erGyldig===void 0)),Y=({children:r})=>e.jsx(ce,{variant:"error",children:r}),rr=({arbeidsgiverOpplysningerPerId:r,svangerskapspengerTilrettelegging:n,aoiArbeidsforhold:a})=>{const l=O(),{isSubmittable:i,isReadOnly:t,aksjonspunkterForPanel:o,alleKodeverk:s,submitCallback:g,harÅpentAksjonspunkt:d}=Ge(),m=s.UttakArbeidType,E=zn(n.arbeidsforholdListe,r),{mellomlagretFormData:R,setMellomlagretFormData:v}=Pe(),p=C({defaultValues:R??{arbeidsforhold:E,termindato:n.termindato,fødselsdato:n.fødselsdato,begrunnelse:Zn(o)}}),T=n.fødselsdato??"",I=Qn(p.formState.isDirty),N=p.watch("arbeidsforhold"),y=Oe(E),P=Oe(N),M=!N.some(D=>D.skalBrukes),_=N.some(D=>D.tilretteleggingDatoer.some(q=>!q.fom)||D.avklarteOppholdPerioder.some(q=>!q.fom)),k=N.some(D=>D.skalBrukes&&D.tilretteleggingDatoer.length===0),j=N.some(D=>D.skalBrukes&&D.velferdspermisjoner.some(q=>q.erGyldig&&q.permisjonsprosent===100)),[f,x]=K.useState(!1),z=P||M||_||k||j,re=D=>z?(x(!0),Promise.resolve()):g({kode:F.VURDER_SVP_TILRETTELEGGING,termindato:D.termindato,fødselsdato:D.fødselsdato,begrunnelse:D.begrunnelse,bekreftetSvpArbeidsforholdList:D.arbeidsforhold});return e.jsx(Me,{formMethods:p,setDataOnUnmount:v,onSubmit:re,children:e.jsxs(G,{gap:"space-32",children:[d&&e.jsx(Fe,{children:y?e.jsx(u,{id:"TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner"}):e.jsx(u,{id:"TilretteleggingFaktaForm.Aksjonspunkt"})}),e.jsxs(b,{gap:"space-16",wrap:!0,children:[e.jsx(w,{name:"termindato",control:p.control,label:l.formatMessage({id:"TilretteleggingFaktaForm.Termindato"}),validate:[L,J],readOnly:t}),T&&e.jsx(w,{name:"fødselsdato",control:p.control,label:l.formatMessage({id:"TilretteleggingFaktaForm.Fodselsdato"}),validate:[L,J],readOnly:t})]}),e.jsx(er,{sorterteArbeidsforhold:N,aoiArbeidsforhold:a,arbeidsgiverOpplysningerPerId:r,readOnly:t,uttakArbeidTyper:m}),f&&P&&e.jsx(Y,{children:e.jsx(u,{id:"TilretteleggingFaktaForm.IkkeAllePermisjonerVurdert"})}),f&&M&&e.jsx(Y,{children:e.jsx(u,{id:"TilretteleggingFaktaForm.HarIkkeValgtArbeidsforhold"})}),f&&_&&e.jsx(Y,{children:e.jsx(u,{id:"TilretteleggingFaktaForm.PeriodeIkkeLagtTil"})}),f&&k&&e.jsx(Y,{children:e.jsx(u,{id:"TilretteleggingFaktaForm.ArbeidsforholdUtenTilrettelegging"})}),f&&j&&e.jsx(Y,{children:e.jsx(u,{id:"TilretteleggingFaktaForm.ValgtSvpVedGyldig100Permisjon"})}),e.jsx(Xr,{name:"begrunnelse",control:p.control,label:l.formatMessage({id:"TilretteleggingFaktaForm.BegrunnEndringene"}),validate:[I,Cn,vr],maxLength:1500,readOnly:t}),e.jsx(en,{isSubmittable:i,isReadOnly:t,isSubmitting:p.formState.isSubmitting,isDirty:p.formState.isDirty})]})})};rr.__docgenInfo={description:`TilretteleggingFaktaForm
+
+Viser tillrettlegging før svangerskapspenger`,methods:[],displayName:"TilretteleggingFaktaForm",props:{arbeidsgiverOpplysningerPerId:{required:!0,tsType:{name:"Record",elements:[{name:"string"},{name:"union",raw:`| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: true; fødselsdato: string })
+| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: false })`,elements:[{name:"unknown"},{name:"unknown"}]}],raw:"Record<string, ArbeidsgiverOpplysninger>"},description:""},svangerskapspengerTilrettelegging:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  arbeidsforholdListe: Array<tjenester_behandling_svp_SvpArbeidsforholdDto>;
+  fødselsdato?: string;
+  saksbehandlet: boolean;
+  termindato?: string;
+}`,signature:{properties:[{key:"arbeidsforholdListe",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  kanTilrettelegges: boolean;
+  kopiertFraTidligereBehandling?: boolean;
+  mottattTidspunkt?: string;
+  opplysningerOmRisiko?: string;
+  opplysningerOmTilrettelegging?: string;
+  skalBrukes: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  tilretteleggingId: number;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"avklarteOppholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"internArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"kanTilrettelegges",value:{name:"boolean",required:!0}},{key:"kopiertFraTidligereBehandling",value:{name:"boolean",required:!1}},{key:"mottattTidspunkt",value:{name:"string",required:!1}},{key:"opplysningerOmRisiko",value:{name:"string",required:!1}},{key:"opplysningerOmTilrettelegging",value:{name:"string",required:!1}},{key:"skalBrukes",value:{name:"boolean",required:!0}},{key:"stillingsprosentStartTilrettelegging",value:{name:"number",required:!1}},{key:"tilretteleggingBehovFom",value:{name:"string",required:!0}},{key:"tilretteleggingDatoer",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>",required:!0}},{key:"tilretteleggingId",value:{name:"number",required:!0}},{key:"uttakArbeidType",value:{name:"union",raw:`| 'ORDINÆRT_ARBEID'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'FRILANS'
+| 'ANNET'`,elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}},{key:"velferdspermisjoner",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_VelferdspermisjonDto>",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpArbeidsforholdDto>",required:!0}},{key:"fødselsdato",value:{name:"string",required:!1}},{key:"saksbehandlet",value:{name:"boolean",required:!0}},{key:"termindato",value:{name:"string",required:!1}}]}},description:""},aoiArbeidsforhold:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent: string;
+  begrunnelse?: string;
+  eksternArbeidsforholdId?: string;
+  fom: string;
+  internArbeidsforholdId?: string;
+  permisjonOgMangel?: foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto;
+  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
+  stillingsprosent?: number;
+  tom: string;
+  årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"internArbeidsforholdId",value:{name:"string",required:!1}},{key:"permisjonOgMangel",value:{name:"signature",type:"object",raw:`{
+  permisjonFom: string;
+  permisjonStatus?: foreldrepenger_domene_iay_modell_kodeverk_BekreftetPermisjonStatus;
+  permisjonTom?: string;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+  årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
+}`,signature:{properties:[{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonStatus",value:{name:"union",raw:`| '-'
+| 'BRUK_PERMISJON'
+| 'IKKE_BRUK_PERMISJON'
+| 'UGYLDIGE_PERIODER'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'BRUK_PERMISJON'"},{name:"literal",value:"'IKKE_BRUK_PERMISJON'"},{name:"literal",value:"'UGYLDIGE_PERIODER'"}],required:!1}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}},{key:"årsak",value:{name:"union",raw:`| 'PERMISJON'
+| 'MANGLENDE_INNTEKTSMELDING'
+| 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'
+| 'ENDRING_I_ARBEIDSFORHOLDS_ID'
+| 'PERMISJON_UTEN_SLUTTDATO'`,elements:[{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'MANGLENDE_INNTEKTSMELDING'"},{name:"literal",value:"'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'"},{name:"literal",value:"'ENDRING_I_ARBEIDSFORHOLDS_ID'"},{name:"literal",value:"'PERMISJON_UTEN_SLUTTDATO'"}],required:!1}}]},required:!1}},{key:"saksbehandlersVurdering",value:{name:"union",raw:`| 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING'
+| 'FORTSETT_UTEN_INNTEKTSMELDING'
+| 'MELDING_TIL_ARBEIDSGIVER_NAV_NO'
+| 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD'
+| 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING'
+| 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING'
+| 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER'
+| 'FJERN_FRA_BEHANDLINGEN'
+| 'SLÅTT_SAMMEN_MED_ANNET'
+| 'BRUK_MED_OVERSTYRT_PERIODE'
+| 'INNTEKT_IKKE_MED_I_BG'
+| 'BRUK'
+| 'NYTT_ARBEIDSFORHOLD'
+| '-'`,elements:[{name:"literal",value:"'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING'"},{name:"literal",value:"'FORTSETT_UTEN_INNTEKTSMELDING'"},{name:"literal",value:"'MELDING_TIL_ARBEIDSGIVER_NAV_NO'"},{name:"literal",value:"'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD'"},{name:"literal",value:"'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING'"},{name:"literal",value:"'OPPRETT_BASERT_PÅ_INNTEKTSMELDING'"},{name:"literal",value:"'MANUELT_OPPRETTET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'FJERN_FRA_BEHANDLINGEN'"},{name:"literal",value:"'SLÅTT_SAMMEN_MED_ANNET'"},{name:"literal",value:"'BRUK_MED_OVERSTYRT_PERIODE'"},{name:"literal",value:"'INNTEKT_IKKE_MED_I_BG'"},{name:"literal",value:"'BRUK'"},{name:"literal",value:"'NYTT_ARBEIDSFORHOLD'"},{name:"literal",value:"'-'"}],required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"tom",value:{name:"string",required:!0}},{key:"årsak",value:{name:"union",raw:`| 'PERMISJON'
+| 'MANGLENDE_INNTEKTSMELDING'
+| 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'
+| 'ENDRING_I_ARBEIDSFORHOLDS_ID'
+| 'PERMISJON_UTEN_SLUTTDATO'`,elements:[{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'MANGLENDE_INNTEKTSMELDING'"},{name:"literal",value:"'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'"},{name:"literal",value:"'ENDRING_I_ARBEIDSFORHOLDS_ID'"},{name:"literal",value:"'PERMISJON_UTEN_SLUTTDATO'"}],required:!1}}]}}],raw:"AoIArbeidsforhold[]"},description:""}}};const Wn={"ArbeidsforholdFieldArray.SkalHaSvp":"Skal ha svangerskapspenger","ArbeidsforholdFieldArray.SkalIkkeHaSvp":"Skal ikke ha svangerskapspenger","ArbeidsforholdFieldArray.SvpIkkeBeregnet":"Svangerskapspenger kan ikke beregnes","ArbeidsforholdFieldArray.Stillingsprosent":"{stillingsprosent}% stilling","TilretteleggingFaktaForm.Aksjonspunkt":"Kontroller opplysninger fra jordmor og arbeidsgiver","TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner":"Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer","TilretteleggingFaktaForm.Termindato":"Termindato","TilretteleggingFaktaForm.Fodselsdato":"Fødselsdato","TilretteleggingFaktaForm.BegrunnEndringene":"Begrunn endringene","TilretteleggingFaktaForm.UndersokNarmere":"Søker var ikke ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.","TilretteleggingFaktaForm.IkkeAllePermisjonerVurdert":"Ikke alle velferdspermisjoner er vurdert","TilretteleggingFaktaForm.HarIkkeValgtArbeidsforhold":"Minst ett arbeidsforhold må brukes","TilretteleggingFaktaForm.PeriodeIkkeLagtTil":"Det er minst en periode som er lagt til men ikke ferdigstilt","TilretteleggingFaktaForm.ArbeidsforholdUtenTilrettelegging":"Alle arbeidsforhold med svangerskapspenger må ha minst en tilretteleggingsperiode","TilretteleggingFaktaForm.ValgtSvpVedGyldig100Permisjon":"Arbeidsforhold med gyldig permisjon på 100% kan ikke ha svangerskapspenger","TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn":"Tilrettelegging fra og med må være tidligere enn {dato}","TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging":"Dato for tilrettelegging fra lege eller jordmor","TilretteleggingForArbeidsgiverPanel.Perioder":"Perioder","TilretteleggingForArbeidsgiverPanel.SkalHaSvpForArbeidsforhold":"Skal ha svangerskapspenger for arbeidsforholdet","TilretteleggingForArbeidsgiverPanel.Velferdspermisjon":"Registrerte velferdspermisjoner","TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg":"Er permisjoner gyldige?","TilretteleggingForm.Tilretteleggingsbehov":"Tilretteleggingsbehov","TilretteleggingForm.FraOgMed":"Fra og med","TilretteleggingForm.KanGjennomfores":"Arbeidstakeren kan fortsette i samme stilling","TilretteleggingForm.RedusertArbeid":"Arbeidstakeren kan fortsette med redusert arbeidstid","TilretteleggingForm.KanIkkeGjennomfores":"Arbeidstakeren må midlertidig gå ut av sitt arbeid","TilretteleggingForm.LeggTil":"Legg til ny periode","TilretteleggingForm.AvsluttOgSlett":"Avbryt","TilretteleggingForm.Oppdater":"Oppdater","TilretteleggingForm.Avbryt":"Avbryt","TilretteleggingForm.ProsentSvp":"Prosent svangerskapspenger","TilretteleggingForm.SlettPeriode":"Slett periode","TilretteleggingForm.DuplikateDatoer":"Flere perioder med samme Fra og med","TilretteleggingForm.EtterTermindato":"Dato kan ikke være senere enn tre uker før termindato","TilretteleggingForm.ForForsteDato":"Dato kan ikke være før dato for tilrettelegging fra lege eller jordmor","TilretteleggingForm.Arbeidsprosent":"Arbeidsprosent","TilretteleggingForm.ArbeidsprosentBeskrivelse":"Dette er prosenten arbeidstaker skal jobbe i perioden","TilretteleggingForm.ProsentSvpBeskrivelse":"Utbetalingsgrad i perioden","TilretteleggingForm.AngiUtbetalingsgrad":"Utbetalingsgrad må være større enn 0 når stillingsprosenten er 0","TilretteleggingInfoPanel.Periode":"Periode på {periode}","TilretteleggingInfoPanel.TreUker":"Frem til tre uker før termin","TilretteleggingInfoPanel.Dager":"Frem til {dager} dager før termin","TilretteleggingInfoPanel.FraSoknad":"Fra søknaden","TilretteleggingInfoPanel.Sendt":"Mottatt {dato}","TilretteleggingInfoPanel.SvpOgArbeid":"Svangerskapspenger {svp}% og arbeide {arbeid}%","TilretteleggingInfoPanel.AvStillingsprosent":"Av stillingsprosent {stillingsprosent}%","TilretteleggingInfoPanel.Saksbehandler":"Saksbehandler","OppholdForm.SlettPeriode":"Slett periode","OppholdForm.LeggTil":"Legg til ny periode","OppholdForm.AvsluttOgSlett":"Avbryt","OppholdForm.Oppdater":"Oppdater","OppholdForm.Avbryt":"Avbryt","OppholdForm.FraOgMed":"Fra og med","OppholdForm.TilOgMed":"Til og med","OppholdForm.GrunnTilOpphold":"Grunn til opphold","OppholdForm.Sykepenger":"Sykepenger 100% i perioden med svangerskapspenger","OppholdForm.Ferie":"Ferie","OppholdForm.TomForFom":"Dato kan ikke være før fra og med","OppholdForm.EtterTermindato":"Dato kan ikke være senere enn tre uker før termindato","OppholdForm.ForForsteDato":"Dato kan ikke være før første tilrettelegging","TilretteleggingFieldArray.LeggTilTilrettelegging":"Periode med svangerskapspenger","TilretteleggingFieldArray.LeggTilOpphold":"Opphold","VelferdspermisjonPanel.Permisjon":"{permisjon}% {type}","VelferdspermisjonPanel.PermisjonGyldig":"Er permisjon gyldig?","VelferdspermisjonPanel.PermisjonGyldigDetaljer":"Hvis den er gyldig vil utbetalingsgraden for alle perioder for denne arbeidsgiveren reduseres med permisjonsprosent.","VelferdspermisjonPanel.Ja":"Ja","VelferdspermisjonPanel.Nei":"Nei","VelferdspermisjonPanel.Oppdater":"Oppdater","VelferdspermisjonPanel.AaRegisteret":"Aa-registeret","VelferdspermisjonPanel.Permisjon100ProsentOgGyldig":"Permisjonen på 100% er satt som gyldig, og dette fører til at søker ikke får svangerskapsenger for arbeidsforholdet.","TilretteleggingPerioderTabellRad.Periode":"Periode","TilretteleggingPerioderTabellRad.Saksbehandler":"Saksbehandler","TilretteleggingPerioderTabellRad.EndretAvSaksbehandler":"Endret av saksbehandler","TilretteleggingPerioderTabellRad.TidligereVedtak":"Tidligere vedtak","TilretteleggingPerioderTabellRad.Inntektsmelding":"Inntektsmelding","TilretteleggingPerioderTabellRad.Soknad":"Søknad","TilretteleggingPerioderTabellRad.Tilrettelegging":"Tilrettelegging","TilretteleggingPerioderTabellRad.Opphold":"Opphold","TilretteleggingPerioderTabellRad.Sykepenger":"Sykepenger 100%","TilretteleggingPerioderTabellRad.Ferie":"Ferie","TilretteleggingPerioderTabellRad.SVPprosent":"{prosent}% svangerskapspenger"},Xn=Ke(Wn),nr=({arbeidOgInntekt:r,...n})=>e.jsx(he,{value:Xn,children:e.jsx(rr,{aoiArbeidsforhold:r?.arbeidsforhold??[],...n})});nr.__docgenInfo={description:"",methods:[],displayName:"TilretteleggingFaktaIndex",props:{svangerskapspengerTilrettelegging:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  arbeidsforholdListe: Array<tjenester_behandling_svp_SvpArbeidsforholdDto>;
+  fødselsdato?: string;
+  saksbehandlet: boolean;
+  termindato?: string;
+}`,signature:{properties:[{key:"arbeidsforholdListe",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  kanTilrettelegges: boolean;
+  kopiertFraTidligereBehandling?: boolean;
+  mottattTidspunkt?: string;
+  opplysningerOmRisiko?: string;
+  opplysningerOmTilrettelegging?: string;
+  skalBrukes: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  tilretteleggingId: number;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"avklarteOppholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"internArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"kanTilrettelegges",value:{name:"boolean",required:!0}},{key:"kopiertFraTidligereBehandling",value:{name:"boolean",required:!1}},{key:"mottattTidspunkt",value:{name:"string",required:!1}},{key:"opplysningerOmRisiko",value:{name:"string",required:!1}},{key:"opplysningerOmTilrettelegging",value:{name:"string",required:!1}},{key:"skalBrukes",value:{name:"boolean",required:!0}},{key:"stillingsprosentStartTilrettelegging",value:{name:"number",required:!1}},{key:"tilretteleggingBehovFom",value:{name:"string",required:!0}},{key:"tilretteleggingDatoer",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>",required:!0}},{key:"tilretteleggingId",value:{name:"number",required:!0}},{key:"uttakArbeidType",value:{name:"union",raw:`| 'ORDINÆRT_ARBEID'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'FRILANS'
+| 'ANNET'`,elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}},{key:"velferdspermisjoner",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_VelferdspermisjonDto>",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpArbeidsforholdDto>",required:!0}},{key:"fødselsdato",value:{name:"string",required:!1}},{key:"saksbehandlet",value:{name:"boolean",required:!0}},{key:"termindato",value:{name:"string",required:!1}}]}},description:""},arbeidOgInntekt:{required:!1,tsType:{name:"signature",type:"object",raw:`{
+  arbeidsforhold: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto>;
+  inntekter: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektDto>;
+  inntektsmeldinger: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto>;
+  skjæringstidspunkt: string;
+}`,signature:{properties:[{key:"arbeidsforhold",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent: string;
+  begrunnelse?: string;
+  eksternArbeidsforholdId?: string;
+  fom: string;
+  internArbeidsforholdId?: string;
+  permisjonOgMangel?: foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto;
+  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
+  stillingsprosent?: number;
+  tom: string;
+  årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"internArbeidsforholdId",value:{name:"string",required:!1}},{key:"permisjonOgMangel",value:{name:"signature",type:"object",raw:`{
+  permisjonFom: string;
+  permisjonStatus?: foreldrepenger_domene_iay_modell_kodeverk_BekreftetPermisjonStatus;
+  permisjonTom?: string;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+  årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
+}`,signature:{properties:[{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonStatus",value:{name:"union",raw:`| '-'
+| 'BRUK_PERMISJON'
+| 'IKKE_BRUK_PERMISJON'
+| 'UGYLDIGE_PERIODER'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'BRUK_PERMISJON'"},{name:"literal",value:"'IKKE_BRUK_PERMISJON'"},{name:"literal",value:"'UGYLDIGE_PERIODER'"}],required:!1}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}},{key:"årsak",value:{name:"union",raw:`| 'PERMISJON'
+| 'MANGLENDE_INNTEKTSMELDING'
+| 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'
+| 'ENDRING_I_ARBEIDSFORHOLDS_ID'
+| 'PERMISJON_UTEN_SLUTTDATO'`,elements:[{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'MANGLENDE_INNTEKTSMELDING'"},{name:"literal",value:"'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'"},{name:"literal",value:"'ENDRING_I_ARBEIDSFORHOLDS_ID'"},{name:"literal",value:"'PERMISJON_UTEN_SLUTTDATO'"}],required:!1}}]},required:!1}},{key:"saksbehandlersVurdering",value:{name:"union",raw:`| 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING'
+| 'FORTSETT_UTEN_INNTEKTSMELDING'
+| 'MELDING_TIL_ARBEIDSGIVER_NAV_NO'
+| 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD'
+| 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING'
+| 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING'
+| 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER'
+| 'FJERN_FRA_BEHANDLINGEN'
+| 'SLÅTT_SAMMEN_MED_ANNET'
+| 'BRUK_MED_OVERSTYRT_PERIODE'
+| 'INNTEKT_IKKE_MED_I_BG'
+| 'BRUK'
+| 'NYTT_ARBEIDSFORHOLD'
+| '-'`,elements:[{name:"literal",value:"'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING'"},{name:"literal",value:"'FORTSETT_UTEN_INNTEKTSMELDING'"},{name:"literal",value:"'MELDING_TIL_ARBEIDSGIVER_NAV_NO'"},{name:"literal",value:"'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD'"},{name:"literal",value:"'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING'"},{name:"literal",value:"'OPPRETT_BASERT_PÅ_INNTEKTSMELDING'"},{name:"literal",value:"'MANUELT_OPPRETTET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'FJERN_FRA_BEHANDLINGEN'"},{name:"literal",value:"'SLÅTT_SAMMEN_MED_ANNET'"},{name:"literal",value:"'BRUK_MED_OVERSTYRT_PERIODE'"},{name:"literal",value:"'INNTEKT_IKKE_MED_I_BG'"},{name:"literal",value:"'BRUK'"},{name:"literal",value:"'NYTT_ARBEIDSFORHOLD'"},{name:"literal",value:"'-'"}],required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"tom",value:{name:"string",required:!0}},{key:"årsak",value:{name:"union",raw:`| 'PERMISJON'
+| 'MANGLENDE_INNTEKTSMELDING'
+| 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'
+| 'ENDRING_I_ARBEIDSFORHOLDS_ID'
+| 'PERMISJON_UTEN_SLUTTDATO'`,elements:[{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'MANGLENDE_INNTEKTSMELDING'"},{name:"literal",value:"'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'"},{name:"literal",value:"'ENDRING_I_ARBEIDSFORHOLDS_ID'"},{name:"literal",value:"'PERMISJON_UTEN_SLUTTDATO'"}],required:!1}}]}}],raw:"Array<foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto>",required:!0}},{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent: string;
+  inntekter?: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto>;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!0}},{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  beløp: number;
+  fom?: string;
+  tom?: string;
+  type?: foreldrepenger_domene_iay_modell_kodeverk_InntektspostType;
+}`,signature:{properties:[{key:"beløp",value:{name:"number",required:!0}},{key:"fom",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!1}},{key:"type",value:{name:"union",raw:`| '-'
+| 'LØNN'
+| 'YTELSE'
+| 'VANLIG'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'NÆRING_FISKE_FANGST_FAMBARNEHAGE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'LØNN'"},{name:"literal",value:"'YTELSE'"},{name:"literal",value:"'VANLIG'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'NÆRING_FISKE_FANGST_FAMBARNEHAGE'"}],required:!1}}]}}],raw:"Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto>",required:!1}}]}}],raw:"Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektDto>",required:!0}},{key:"inntektsmeldinger",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  aktiveNaturalytelser: Array<foreldrepenger_domene_iay_modell_NaturalYtelse>;
+  arbeidsgiverIdent: string;
+  begrunnelse?: string;
+  dokumentId: string;
+  eksternArbeidsforholdId?: string;
+  innsendingstidspunkt: string;
+  innsendingsårsak: foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak;
+  inntektPrMnd: number;
+  internArbeidsforholdId?: string;
+  journalpostId: string;
+  kildeSystem: string;
+  kontaktpersonNavn: string;
+  kontaktpersonNummer: string;
+  motattDato: string;
+  refusjonPrMnd?: number;
+  refusjonsperioder: Array<foreldrepenger_domene_iay_modell_Refusjon>;
+  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
+  startDatoPermisjon?: string;
+  tilknyttedeBehandlingIder: Array<string>;
+  årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
+}`,signature:{properties:[{key:"aktiveNaturalytelser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  beloepPerMnd: foreldrepenger_domene_typer_Beløp;
+  indexKey?: string;
+  periode: foreldrepenger_domene_tid_DatoIntervallEntitet;
+  type: foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType;
+}`,signature:{properties:[{key:"beloepPerMnd",value:{name:"signature",type:"object",raw:`{
+  indexKey?: string;
+  verdi?: number;
+}`,signature:{properties:[{key:"indexKey",value:{name:"string",required:!1}},{key:"verdi",value:{name:"number",required:!1}}]},required:!1}},{key:"indexKey",value:{name:"string",required:!1}},{key:"periode",value:{name:"signature",type:"object",raw:`{
+  fomDato: string;
+  tomDato: string;
+}`,signature:{properties:[{key:"fomDato",value:{name:"string",required:!0}},{key:"tomDato",value:{name:"string",required:!0}}]},required:!0}},{key:"type",value:{name:"union",raw:`| 'ELEKTRISK_KOMMUNIKASJON'
+| 'AKSJER_UNDERKURS'
+| 'LOSJI'
+| 'KOST_DOEGN'
+| 'BESOEKSREISER_HJEM'
+| 'KOSTBESPARELSE_HJEM'
+| 'RENTEFORDEL_LAAN'
+| 'BIL'
+| 'KOST_DAGER'
+| 'BOLIG'
+| 'FORSIKRINGER'
+| 'FRI_TRANSPORT'
+| 'OPSJONER'
+| 'TILSKUDD_BARNEHAGE'
+| 'ANNET'
+| 'BEDRIFTSBARNEHAGE'
+| 'YRKESBIL_KILOMETER'
+| 'YRKESBIL_LISTEPRIS'
+| 'UTENLANDSK_PENSJONSORDNING'
+| '-'`,elements:[{name:"literal",value:"'ELEKTRISK_KOMMUNIKASJON'"},{name:"literal",value:"'AKSJER_UNDERKURS'"},{name:"literal",value:"'LOSJI'"},{name:"literal",value:"'KOST_DOEGN'"},{name:"literal",value:"'BESOEKSREISER_HJEM'"},{name:"literal",value:"'KOSTBESPARELSE_HJEM'"},{name:"literal",value:"'RENTEFORDEL_LAAN'"},{name:"literal",value:"'BIL'"},{name:"literal",value:"'KOST_DAGER'"},{name:"literal",value:"'BOLIG'"},{name:"literal",value:"'FORSIKRINGER'"},{name:"literal",value:"'FRI_TRANSPORT'"},{name:"literal",value:"'OPSJONER'"},{name:"literal",value:"'TILSKUDD_BARNEHAGE'"},{name:"literal",value:"'ANNET'"},{name:"literal",value:"'BEDRIFTSBARNEHAGE'"},{name:"literal",value:"'YRKESBIL_KILOMETER'"},{name:"literal",value:"'YRKESBIL_LISTEPRIS'"},{name:"literal",value:"'UTENLANDSK_PENSJONSORDNING'"},{name:"literal",value:"'-'"}],required:!0}}]}}],raw:"Array<foreldrepenger_domene_iay_modell_NaturalYtelse>",required:!0}},{key:"arbeidsgiverIdent",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"dokumentId",value:{name:"string",required:!0}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"innsendingstidspunkt",value:{name:"string",required:!0}},{key:"innsendingsårsak",value:{name:"union",raw:"'NY' | 'ENDRING' | '-'",elements:[{name:"literal",value:"'NY'"},{name:"literal",value:"'ENDRING'"},{name:"literal",value:"'-'"}],required:!0}},{key:"inntektPrMnd",value:{name:"number",required:!0}},{key:"internArbeidsforholdId",value:{name:"string",required:!1}},{key:"journalpostId",value:{name:"string",required:!0}},{key:"kildeSystem",value:{name:"string",required:!0}},{key:"kontaktpersonNavn",value:{name:"string",required:!0}},{key:"kontaktpersonNummer",value:{name:"string",required:!0}},{key:"motattDato",value:{name:"string",required:!0}},{key:"refusjonPrMnd",value:{name:"number",required:!1}},{key:"refusjonsperioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  indexKey?: string;
+  refusjonsbeløp?: foreldrepenger_domene_typer_Beløp;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"indexKey",value:{name:"string",required:!1}},{key:"refusjonsbeløp",value:{name:"signature",type:"object",raw:`{
+  indexKey?: string;
+  verdi?: number;
+}`,signature:{properties:[{key:"indexKey",value:{name:"string",required:!1}},{key:"verdi",value:{name:"number",required:!1}}]},required:!1}}]}}],raw:"Array<foreldrepenger_domene_iay_modell_Refusjon>",required:!0}},{key:"saksbehandlersVurdering",value:{name:"union",raw:`| 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING'
+| 'FORTSETT_UTEN_INNTEKTSMELDING'
+| 'MELDING_TIL_ARBEIDSGIVER_NAV_NO'
+| 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD'
+| 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING'
+| 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING'
+| 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER'
+| 'FJERN_FRA_BEHANDLINGEN'
+| 'SLÅTT_SAMMEN_MED_ANNET'
+| 'BRUK_MED_OVERSTYRT_PERIODE'
+| 'INNTEKT_IKKE_MED_I_BG'
+| 'BRUK'
+| 'NYTT_ARBEIDSFORHOLD'
+| '-'`,elements:[{name:"literal",value:"'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING'"},{name:"literal",value:"'FORTSETT_UTEN_INNTEKTSMELDING'"},{name:"literal",value:"'MELDING_TIL_ARBEIDSGIVER_NAV_NO'"},{name:"literal",value:"'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD'"},{name:"literal",value:"'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING'"},{name:"literal",value:"'OPPRETT_BASERT_PÅ_INNTEKTSMELDING'"},{name:"literal",value:"'MANUELT_OPPRETTET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'FJERN_FRA_BEHANDLINGEN'"},{name:"literal",value:"'SLÅTT_SAMMEN_MED_ANNET'"},{name:"literal",value:"'BRUK_MED_OVERSTYRT_PERIODE'"},{name:"literal",value:"'INNTEKT_IKKE_MED_I_BG'"},{name:"literal",value:"'BRUK'"},{name:"literal",value:"'NYTT_ARBEIDSFORHOLD'"},{name:"literal",value:"'-'"}],required:!1}},{key:"startDatoPermisjon",value:{name:"string",required:!1}},{key:"tilknyttedeBehandlingIder",value:{name:"Array",elements:[{name:"string"}],raw:"Array<string>",required:!0}},{key:"årsak",value:{name:"union",raw:`| 'PERMISJON'
+| 'MANGLENDE_INNTEKTSMELDING'
+| 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'
+| 'ENDRING_I_ARBEIDSFORHOLDS_ID'
+| 'PERMISJON_UTEN_SLUTTDATO'`,elements:[{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'MANGLENDE_INNTEKTSMELDING'"},{name:"literal",value:"'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'"},{name:"literal",value:"'ENDRING_I_ARBEIDSFORHOLDS_ID'"},{name:"literal",value:"'PERMISJON_UTEN_SLUTTDATO'"}],required:!1}}]}}],raw:"Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto>",required:!0}},{key:"skjæringstidspunkt",value:{name:"string",required:!0}}]}},description:""},arbeidsgiverOpplysningerPerId:{required:!0,tsType:{name:"Record",elements:[{name:"string"},{name:"union",raw:`| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: true; fødselsdato: string })
+| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: false })`,elements:[{name:"unknown"},{name:"unknown"}]}],raw:"Record<string, ArbeidsgiverOpplysninger>"},description:""}}};const ea=[F.VURDER_SVP_TILRETTELEGGING],ar=({arbeidsgiverOpplysningerPerId:r})=>{const n=kr(ea),{behandling:a}=Ee(),l=ee(a),{data:i}=c(l.arbeidOgInntektOptions(a)),{data:t}=c(l.svp.svangerskapspengerTilretteleggingOptions(a));return e.jsx(Dr,{standardPanelProps:n,faktaPanelKode:Sr.FODSELTILRETTELEGGING,faktaPanelMenyTekst:O().formatMessage({id:"FaktaInitPanel.Title.FodselOgTilrettelegging"}),skalPanelVisesIMeny:!0,children:t?e.jsx(nr,{arbeidsgiverOpplysningerPerId:r,arbeidOgInntekt:i,svangerskapspengerTilrettelegging:t}):e.jsx(de,{})})};ar.__docgenInfo={description:"",methods:[],displayName:"FodselOgTilretteleggingFaktaInitPanel",props:{arbeidsgiverOpplysningerPerId:{required:!0,tsType:{name:"Record",elements:[{name:"string"},{name:"union",raw:`| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: true; fødselsdato: string })
+| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: false })`,elements:[{name:"unknown"},{name:"unknown"}]}],raw:"Record<string, ArbeidsgiverOpplysninger>"},description:""}}};const ra=[F.VURDER_OPPTJENINGSVILKÅRET],Z=["FP_VK_21","FP_VK_23"],lr=()=>{const r=O(),{behandling:n}=Ee(),a=se(ra,Z),l=a.aksjonspunkterForPanel.length===0,i=ee(n),{data:t}=c(i.opptjeningOptions(n,!l));return l?e.jsx(Jr,{standardPanelProps:a,vilkårKoder:Z,inngangsvilkårPanelKode:"OPPTJENINGSVILKARET",hentInngangsvilkårPanelTekst:r.formatMessage({id:"OpptjeningVilkarView.VurderOmSøkerHarRett"}),overstyringApKode:F.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,children:e.jsx(wr,{vilkårKoder:Z,panelTekstKode:"Inngangsvilkar.Opptjeningsvilkaret"})}):e.jsx(je,{standardPanelProps:a,vilkårKoder:Z,inngangsvilkårPanelKode:"OPPTJENINGSVILKARET",hentInngangsvilkårPanelTekst:r.formatMessage({id:"OpptjeningVilkarView.VurderOmSøkerHarRett"}),children:e.jsx(e.Fragment,{children:t&&e.jsx(Lr,{erSvpFagsak:!0,opptjening:t,status:a.status})})})};lr.__docgenInfo={description:"",methods:[],displayName:"OpptjeningInngangsvilkarInitPanel"};const na=r=>{const n=r.tilretteleggingDatoer.some(l=>l.type!=="HEL_TILRETTELEGGING"),a=r.tilretteleggingDatoer.some(l=>l.type==="HEL_TILRETTELEGGING"&&S(l.fom).isAfter(S(r.tilretteleggingBehovFom)));return n||a},aa=r=>r.arbeidsforholdListe.some(n=>na(n)),la=(r,n,a)=>({...pe.buildInitialValues(r,n,a),...me.buildInitialValues(r)}),ta=r=>({...pe.transformValues(r),...me.transformValues(r),kode:F.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET}),tr=({svangerskapspengerTilrettelegging:r,status:n})=>{const{aksjonspunkterForPanel:a,vilkårForPanel:l,alleMerknaderFraBeslutter:i,behandling:t,isSubmittable:o,harÅpentAksjonspunkt:s,submitCallback:g,isReadOnly:d}=Ge(),m=a.some(P=>i[P.definisjon]?.notAccepted),E=aa(r),R=O(),v=la(a,n,t.behandlingsresultat),{mellomlagretFormData:p,setMellomlagretFormData:T}=Pe(),I=C({defaultValues:p??v}),N=I.watch("erVilkarOk");K.useEffect(()=>{N&&I.clearErrors()},[N]);const y=s?void 0:n==="OPPFYLT";return e.jsx(Me,{formMethods:I,onSubmit:P=>g(ta(P)),setDataOnUnmount:T,children:e.jsx(sn,{title:R.formatMessage({id:"SvangerskapVilkarForm.Svangerskap"}),harÅpentAksjonspunkt:s,isSubmittable:o,isReadOnly:d,originalErVilkårOk:y,erIkkeGodkjentAvBeslutter:m,isDirty:I.formState.isDirty,isSubmitting:I.formState.isSubmitting,children:e.jsxs(G,{gap:"space-16",children:[e.jsx(X,{size:"small",children:e.jsx(u,{id:"SvangerskapVilkarForm.RettTilSvp"})}),!E&&e.jsx(X,{size:"small",children:e.jsx(u,{id:"SvangerskapVilkarForm.IkkeInnvilgetUttak"})}),e.jsx(pe,{vilkår:l[0],isReadOnly:d,skalKunneInnvilge:E,customVilkårOppfyltText:e.jsx(u,{id:"SvangerskapVilkarForm.Oppfylt"}),customVilkårIkkeOppfyltText:e.jsx(u,{id:"SvangerskapVilkarForm.IkkeOppfylt",values:{b:Ir}})}),e.jsx(me,{readOnly:d,notRequired:N})]})})})};tr.__docgenInfo={description:"",methods:[],displayName:"SvangerskapVilkarForm",props:{status:{required:!0,tsType:{name:"union",raw:`| 'OPPFYLT'
+| 'IKKE_OPPFYLT'
+| 'IKKE_VURDERT'
+| '-'`,elements:[{name:"literal",value:"'OPPFYLT'"},{name:"literal",value:"'IKKE_OPPFYLT'"},{name:"literal",value:"'IKKE_VURDERT'"},{name:"literal",value:"'-'"}]},description:""},svangerskapspengerTilrettelegging:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  arbeidsforholdListe: Array<tjenester_behandling_svp_SvpArbeidsforholdDto>;
+  fødselsdato?: string;
+  saksbehandlet: boolean;
+  termindato?: string;
+}`,signature:{properties:[{key:"arbeidsforholdListe",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  kanTilrettelegges: boolean;
+  kopiertFraTidligereBehandling?: boolean;
+  mottattTidspunkt?: string;
+  opplysningerOmRisiko?: string;
+  opplysningerOmTilrettelegging?: string;
+  skalBrukes: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  tilretteleggingId: number;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"avklarteOppholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"internArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"kanTilrettelegges",value:{name:"boolean",required:!0}},{key:"kopiertFraTidligereBehandling",value:{name:"boolean",required:!1}},{key:"mottattTidspunkt",value:{name:"string",required:!1}},{key:"opplysningerOmRisiko",value:{name:"string",required:!1}},{key:"opplysningerOmTilrettelegging",value:{name:"string",required:!1}},{key:"skalBrukes",value:{name:"boolean",required:!0}},{key:"stillingsprosentStartTilrettelegging",value:{name:"number",required:!1}},{key:"tilretteleggingBehovFom",value:{name:"string",required:!0}},{key:"tilretteleggingDatoer",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>",required:!0}},{key:"tilretteleggingId",value:{name:"number",required:!0}},{key:"uttakArbeidType",value:{name:"union",raw:`| 'ORDINÆRT_ARBEID'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'FRILANS'
+| 'ANNET'`,elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}},{key:"velferdspermisjoner",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_VelferdspermisjonDto>",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpArbeidsforholdDto>",required:!0}},{key:"fødselsdato",value:{name:"string",required:!1}},{key:"saksbehandlet",value:{name:"boolean",required:!0}},{key:"termindato",value:{name:"string",required:!1}}]}},description:""}}};const ia={"SvangerskapVilkarForm.Svangerskap":"Svangerskap","SvangerskapVilkarForm.RettTilSvp":"Rett til svangerskapspenger","SvangerskapVilkarForm.Oppfylt":"Mor har rett til svangerskapspenger, vilkåret er oppfylt","SvangerskapVilkarForm.IkkeOppfylt":"Mor har ikke rett til svangerskapspenger, vilkåret er <b>ikke</b> oppfylt","SvangerskapVilkarForm.IkkeInnvilgetUttak":"Det finnes ingen perioder med svangerskapspenger som kan innvilges","ShowVilkarStatus.Check":"Informasjonen er utfylt"},sa=Ke(ia),ir=r=>e.jsx(he,{value:sa,children:e.jsx(tr,{...r})});ir.__docgenInfo={description:"",methods:[],displayName:"SvangerskapVilkarProsessIndex",props:{svangerskapspengerTilrettelegging:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  arbeidsforholdListe: Array<tjenester_behandling_svp_SvpArbeidsforholdDto>;
+  fødselsdato?: string;
+  saksbehandlet: boolean;
+  termindato?: string;
+}`,signature:{properties:[{key:"arbeidsforholdListe",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  kanTilrettelegges: boolean;
+  kopiertFraTidligereBehandling?: boolean;
+  mottattTidspunkt?: string;
+  opplysningerOmRisiko?: string;
+  opplysningerOmTilrettelegging?: string;
+  skalBrukes: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  tilretteleggingId: number;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"avklarteOppholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  forVisning?: boolean;
+  oppholdKilde?: tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+  tom: string;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"forVisning",value:{name:"boolean",required:!1}},{key:"oppholdKilde",value:{name:"union",raw:`| 'SØKNAD'
+| 'INNTEKTSMELDING'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'`,elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'INNTEKTSMELDING'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"}],required:!1}},{key:"oppholdÅrsak",value:{name:"union",raw:"'SYKEPENGER' | 'FERIE'",elements:[{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'FERIE'"}],required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"internArbeidsforholdReferanse",value:{name:"string",required:!1}},{key:"kanTilrettelegges",value:{name:"boolean",required:!0}},{key:"kopiertFraTidligereBehandling",value:{name:"boolean",required:!1}},{key:"mottattTidspunkt",value:{name:"string",required:!1}},{key:"opplysningerOmRisiko",value:{name:"string",required:!1}},{key:"opplysningerOmTilrettelegging",value:{name:"string",required:!1}},{key:"skalBrukes",value:{name:"boolean",required:!0}},{key:"stillingsprosentStartTilrettelegging",value:{name:"number",required:!1}},{key:"tilretteleggingBehovFom",value:{name:"string",required:!0}},{key:"tilretteleggingDatoer",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato?: string;
+  overstyrtUtbetalingsgrad?: number;
+  stillingsprosent?: number;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"kilde",value:{name:"union",raw:`| 'ENDRET_AV_SAKSBEHANDLER'
+| 'REGISTRERT_AV_SAKSBEHANDLER'
+| 'TIDLIGERE_VEDTAK'
+| 'SØKNAD'`,elements:[{name:"literal",value:"'ENDRET_AV_SAKSBEHANDLER'"},{name:"literal",value:"'REGISTRERT_AV_SAKSBEHANDLER'"},{name:"literal",value:"'TIDLIGERE_VEDTAK'"},{name:"literal",value:"'SØKNAD'"}],required:!0}},{key:"mottattDato",value:{name:"string",required:!1}},{key:"overstyrtUtbetalingsgrad",value:{name:"number",required:!1}},{key:"stillingsprosent",value:{name:"number",required:!1}},{key:"type",value:{name:"union",raw:`| 'HEL_TILRETTELEGGING'
+| 'DELVIS_TILRETTELEGGING'
+| 'INGEN_TILRETTELEGGING'`,elements:[{name:"literal",value:"'HEL_TILRETTELEGGING'"},{name:"literal",value:"'DELVIS_TILRETTELEGGING'"},{name:"literal",value:"'INGEN_TILRETTELEGGING'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>",required:!0}},{key:"tilretteleggingId",value:{name:"number",required:!0}},{key:"uttakArbeidType",value:{name:"union",raw:`| 'ORDINÆRT_ARBEID'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'FRILANS'
+| 'ANNET'`,elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}},{key:"velferdspermisjoner",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+}`,signature:{properties:[{key:"erGyldig",value:{name:"boolean",required:!1}},{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!1}},{key:"permisjonsprosent",value:{name:"number",required:!0}},{key:"type",value:{name:"union",raw:`| '-'
+| 'PERMISJON'
+| 'UTDANNINGSPERMISJON'
+| 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+| 'UTDANNINGSPERMISJON_LOVFESTET'
+| 'VELFERDSPERMISJON'
+| 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+| 'ANNEN_PERMISJON_LOVFESTET'
+| 'PERMISJON_MED_FORELDREPENGER'
+| 'PERMITTERING'
+| 'PERMISJON_VED_MILITÆRTJENESTE'`,elements:[{name:"literal",value:"'-'"},{name:"literal",value:"'PERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'UTDANNINGSPERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'UTDANNINGSPERMISJON_LOVFESTET'"},{name:"literal",value:"'VELFERDSPERMISJON'"},{name:"literal",value:"'ANNEN_PERMISJON_IKKE_LOVFESTET'"},{name:"literal",value:"'ANNEN_PERMISJON_LOVFESTET'"},{name:"literal",value:"'PERMISJON_MED_FORELDREPENGER'"},{name:"literal",value:"'PERMITTERING'"},{name:"literal",value:"'PERMISJON_VED_MILITÆRTJENESTE'"}],required:!0}}]}}],raw:"Array<tjenester_behandling_svp_VelferdspermisjonDto>",required:!0}}]}}],raw:"Array<tjenester_behandling_svp_SvpArbeidsforholdDto>",required:!0}},{key:"fødselsdato",value:{name:"string",required:!1}},{key:"saksbehandlet",value:{name:"boolean",required:!0}},{key:"termindato",value:{name:"string",required:!1}}]}},description:""},status:{required:!0,tsType:{name:"union",raw:`| 'OPPFYLT'
+| 'IKKE_OPPFYLT'
+| 'IKKE_VURDERT'
+| '-'`,elements:[{name:"literal",value:"'OPPFYLT'"},{name:"literal",value:"'IKKE_OPPFYLT'"},{name:"literal",value:"'IKKE_VURDERT'"},{name:"literal",value:"'-'"}]},description:""}}};const oa=[F.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET],Le=["SVP_VK_1"],sr=()=>{const r=O(),n=se(oa,Le),a=ee(n.behandling),{data:l}=c(a.svp.svangerskapspengerTilretteleggingOptions(n.behandling));return e.jsx(je,{vilkårKoder:Le,standardPanelProps:n,inngangsvilkårPanelKode:"SVANGERSKAP",hentInngangsvilkårPanelTekst:r.formatMessage({id:"SvangerskapVilkarForm.FyllerVilkår"}),children:e.jsxs(e.Fragment,{children:[l&&e.jsx(ir,{svangerskapspengerTilrettelegging:l,status:n.status}),!l&&e.jsx(de,{})]})})};sr.__docgenInfo={description:"",methods:[],displayName:"SvangerskapInngangsvilkarInitPanel"};const or=({faktaPanelMedÅpentApInfo:r})=>e.jsx(Ur,{faktaPanelMedÅpentApInfo:r,children:e.jsxs(on,{columns:2,gap:"space-32",children:[e.jsxs(G,{gap:"space-32",children:[e.jsx(sr,{}),e.jsx(xr,{})]}),e.jsx(lr,{})]})});or.__docgenInfo={description:"",methods:[],displayName:"InngangsvilkarSvpProsessStegInitPanel",props:{faktaPanelMedÅpentApInfo:{required:!1,tsType:{name:"signature",type:"object",raw:"{ urlCode: string; text: string }",signature:{properties:[{key:"urlCode",value:{name:"string",required:!0}},{key:"text",value:{name:"string",required:!0}}]}},description:""}}};const da=[F.UTGÅTT_5090],dr=({arbeidsgiverOpplysningerPerId:r,personoversikt:n})=>{const a=se(da),{behandling:l}=Ee(),i=ee(l),t=l.links.some(E=>E.rel===tn.BEREGNINGRESULTAT_DAGYTELSE)?"OPPFYLT":"IKKE_VURDERT",o=a.harÅpentAksjonspunkt||t!=="IKKE_VURDERT",{data:s}=c(i.beregningsresultatDagytelseOptions(l)),{data:g}=c(i.familiehendelseOptions(l,o)),{data:d}=c(i.søknadOptions(l)),{data:m}=c(i.feriepengegrunnlagOptions(l,o));return e.jsx(fr,{standardPanelProps:a,prosessPanelKode:Rr.TILKJENT_YTELSE,prosessPanelMenyTekst:O().formatMessage({id:"Behandlingspunkt.TilkjentYtelse"}),skalPanelVisesIMeny:!0,overstyrtStatus:t,children:s&&g&&d?e.jsx(Gr,{arbeidsgiverOpplysningerPerId:r,personoversikt:n,beregningresultat:s,familiehendelse:g,søknad:d,feriepengegrunnlag:m}):e.jsx(de,{})})};dr.__docgenInfo={description:"",methods:[],displayName:"TilkjentYtelseProsessStegInitPanel",props:{arbeidsgiverOpplysningerPerId:{required:!0,tsType:{name:"Record",elements:[{name:"string"},{name:"union",raw:`| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: true; fødselsdato: string })
+| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: false })`,elements:[{name:"unknown"},{name:"unknown"}]}],raw:"Record<string, ArbeidsgiverOpplysninger>"},description:""},personoversikt:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  annenPart?: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+  barn: Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>;
+  bruker: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+}`,signature:{properties:[{key:"annenPart",value:{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}},{key:"barn",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}],raw:"Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>",required:!0}},{key:"bruker",value:{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}}]}},description:""}}};const ga=({valgtProsessSteg:r,valgtFaktaSteg:n,arbeidsgivere:a,personoversikt:l})=>{const[i,t]=K.useState();return e.jsxs(e.Fragment,{children:[e.jsxs(br,{valgtProsessSteg:r,valgtFaktaSteg:n,children:[e.jsx(Hr,{arbeidsgiverOpplysningerPerId:a}),e.jsx(or,{faktaPanelMedÅpentApInfo:i}),e.jsx(Pr,{arbeidsgiverOpplysningerPerId:a}),e.jsx(hr,{}),e.jsx(Kr,{}),e.jsx(dr,{arbeidsgiverOpplysningerPerId:a,personoversikt:l}),e.jsx(Yr,{arbeidsgiverOpplysningerPerId:a}),e.jsx($r,{})]}),e.jsxs(Ar,{valgtFaktaSteg:n,valgtProsessSteg:r,setFaktaPanelMedÅpentApInfo:t,children:[e.jsx(Cr,{}),e.jsx(jr,{arbeidsgiverOpplysningerPerId:a}),e.jsx(cr,{arbeidsgiverOpplysningerPerId:a}),e.jsx(Fr,{arbeidsgiverOpplysningerPerId:a}),e.jsx(zr,{}),e.jsx(yr,{}),e.jsx(ar,{arbeidsgiverOpplysningerPerId:a}),e.jsx(Zr,{}),e.jsx(Mr,{arbeidsgiverOpplysningerPerId:a}),e.jsx(Vr,{arbeidsgiverOpplysningerPerId:a}),e.jsx(qr,{arbeidsgiverOpplysningerPerId:a}),e.jsx(Br,{arbeidsgiverOpplysningerPerId:a})]})]})};ga.__docgenInfo={description:"",methods:[],displayName:"SvangerskapspengerPaneler",props:{valgtProsessSteg:{required:!0,tsType:{name:"union",raw:"string | undefined",elements:[{name:"string"},{name:"undefined"}]},description:""},valgtFaktaSteg:{required:!0,tsType:{name:"union",raw:"string | undefined",elements:[{name:"string"},{name:"undefined"}]},description:""},arbeidsgivere:{required:!0,tsType:{name:"Record",elements:[{name:"string"},{name:"union",raw:`| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: true; fødselsdato: string })
+| (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: false })`,elements:[{name:"unknown"},{name:"unknown"}]}],raw:"Record<string, ArbeidsgiverOpplysninger>"},description:""},personoversikt:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  annenPart?: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+  barn: Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>;
+  bruker: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+}`,signature:{properties:[{key:"annenPart",value:{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}},{key:"barn",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}],raw:"Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>",required:!0}},{key:"bruker",value:{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}}]}},description:""}}};export{ga as default};
