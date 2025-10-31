@@ -436,7 +436,7 @@ describe('VedtakProsessIndex', () => {
     expect(screen.queryByText('Rediger vedtaksbrev')).not.toBeInTheDocument();
   });
 
-  it('skal ikke vise redigeringslenke når en ikke har lenke for å hente brevovestyring', async () => {
+  it('skal ikke vise redigeringslenke når en ikke har lenke for å hente brevoverstyring', async () => {
     render(<SkalIkkeKunneRedigereVedtaksbrevNårEnIkkeHarLenke />);
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
