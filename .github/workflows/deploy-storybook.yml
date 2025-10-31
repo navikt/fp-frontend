@@ -10,10 +10,22 @@ jobs:
     permissions:
       contents: write
       pages: write
+      id-token: write
     runs-on: 'ubuntu-latest'
-    environment: gh-pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
+
+      - name: Cache turbo build setup
+        id: hent-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
 
       - uses: ./.github/actions/setup-yarnrc
         with:
@@ -38,3 +50,10 @@ jobs:
 
       - uses: actions/deploy-pages@v4
         id: deployment
+
+      - name: Save turbo cache
+        if: always() && steps.hent-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          key: ${{ steps.hent-cache.outputs.cache-primary-key }}
+          path: .turbo
