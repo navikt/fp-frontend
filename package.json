@@ -27,7 +27,8 @@
     "up": "docker-compose up -d --remove-orphans --build",
     "down": "docker-compose down",
     "remove-node-modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
-    "build:storybook": "turbo run build-storybook",
+    "build:storybook": "turbo run build-storybook && yarn storybook-create-deploy-folder",
+    "storybook-create-deploy-folder": "node scripts/create-storybook-index.cjs",
     "sentry-release": "node ./scripts/sentry-release.cjs",
     "prepare": "husky install",
     "generate-types": "node ./scripts/generate-types.js"
