@@ -3,12 +3,38 @@ name: 'Deploy storybook'
 on:
   push:
     branches: ['master']
+  workflow_dispatch:
 
 jobs:
   deploy-storybook:
     permissions:
       contents: write
       pages: write
-    uses: ./.github/workflows/deploy-storybook-new.yml
-    secrets:
-      READER_TOKEN: ${{ secrets.READER_TOKEN }}
+    runs-on: 'ubuntu-latest'
+    environment: gh-pages
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ./.github/actions/setup-yarnrc
+        with:
+          npmAuthToken: ${{ secrets.READER_TOKEN }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.17.1
+          cache: 'yarn'
+
+      - name: Yarn install
+        run: yarn install --immutable
+
+      - name: Bygg Storybook
+        run: yarn build:storybook
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./.storybook-static-build
+
+      - uses: actions/deploy-pages@v4
+        id: deployment
