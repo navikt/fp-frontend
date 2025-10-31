@@ -5,7 +5,6 @@ import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query';
 
 import { ErrorType, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
-import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing-old';
 import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { NotFoundPage } from '@navikt/fp-sak-infosider';
 import type { NavAnsatt } from '@navikt/fp-types';
@@ -17,13 +16,7 @@ import { useFagsakApi } from '../../data/fagsakApi';
 import { RequestPendingProvider } from '../../data/polling/RequestPendingContext';
 import { FagsakIndex } from '../../fagsak/FagsakIndex';
 import { FagsakSearchIndex } from '../../fagsakSearch/FagsakSearchIndex';
-import {
-  aktoerRoutePath,
-  fagsakRoutePath,
-  getFagsakHref,
-  journalføringRoutePath,
-  utbetalingsdataIs15RoutePath,
-} from '../paths';
+import { aktoerRoutePath, fagsakRoutePath, getFagsakHref, utbetalingsdataIs15RoutePath } from '../paths';
 
 import styles from './home.module.css';
 
@@ -92,7 +85,6 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
             )
           }
         />
-        <Route path={journalføringRoutePath} element={<OppgaveJournalføringIndex navAnsatt={navAnsatt} />} />
         <Route
           path={utbetalingsdataIs15RoutePath}
           element={

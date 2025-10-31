@@ -11,6 +11,7 @@ import {
   ApiPollingStatus,
   AVDELINGSLEDER_URL_NAME,
   FPSAK_URL_NAME,
+  JOURNALFORING_URL_NAME,
   RETTSKILDE_URL,
   SYSTEMRUTINE_URL,
 } from '@navikt/fp-konstanter';
@@ -18,7 +19,7 @@ import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } 
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchOptions } from '../../data/fagsakApi';
-import { JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
+import { UTBETALINGSDATA_PATH } from '../paths';
 
 type QueryStrings = {
   errorcode?: string;
@@ -61,11 +62,6 @@ export const Dekorator = ({
     e.preventDefault();
   };
 
-  const visJournalføringside = (e: React.SyntheticEvent) => {
-    void navigate(JOURNALFØRING_PATH);
-    e.preventDefault();
-  };
-
   const visUtbetalingsdataSide = (e: React.SyntheticEvent) => {
     void navigate(UTBETALINGSDATA_PATH);
     e.preventDefault();
@@ -84,7 +80,8 @@ export const Dekorator = ({
   if (kanSaksbehandle) {
     interneLenker.push({
       tekst: intl.formatMessage({ id: 'Dekorator.Journalforing' }),
-      callback: (e: React.SyntheticEvent) => visJournalføringside(e),
+      callback: () =>
+        (globalThis.location.href = globalThis.location.href.replace(FPSAK_URL_NAME, JOURNALFORING_URL_NAME)),
     });
   }
   interneLenker.push({

@@ -9,8 +9,8 @@ export default mergeConfig(createSharedAppConfig(), {
     port: 9010,
     cors: {
       origin: [
-        'https://fp-avdelingsleder.intern.dev.nav.no',
-        'https://fp-avdelingsleder.intern.nav.no',
+        'https://fpavdelingsleder.intern.dev.nav.no',
+        'https://fpavdelingsleder.intern.nav.no',
         'http://localhost:9000',
       ],
     },

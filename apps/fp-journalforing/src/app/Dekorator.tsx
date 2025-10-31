@@ -6,10 +6,14 @@ import type { Theme } from '@navikt/ds-react';
 import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 
 import { ErrorType, type FpError, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
-import { ApiPollingStatus, FPSAK_URL_NAME, RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
+import {
+  ApiPollingStatus,
+  FPSAK_URL_NAME,
+  JOURNALFORING_URL_NAME,
+  RETTSKILDE_URL,
+  SYSTEMRUTINE_URL,
+} from '@navikt/fp-konstanter';
 import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
-
-import { JOURNALFORING_URL_NAME } from '../../../../packages/konstanter/src/appnavn';
 
 type QueryStrings = {
   errorcode?: string;
@@ -71,7 +75,7 @@ export const Dekorator = ({
 
   return (
     <DekoratorMedFeilviserSakIndex
-      tittel={intl.formatMessage({ id: 'Dekorator.Avdelingsleder' })}
+      tittel={intl.formatMessage({ id: 'Dekorator.Journalforing' })}
       tittelCallback={visLos}
       navAnsattNavn={ansattnavn}
       feilmeldinger={hideErrorMessages ? [] : formaterFeilmeldinger(intl, errorMessages, queryStrings, crashMessage)}
