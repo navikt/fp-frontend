@@ -16,6 +16,7 @@ const {
   LegacyOverstyring,
   LegacyOverstyringHarSendtTilbakeFraBeslutter,
   SkalIkkeProduseresBrev,
+  SkalIkkeKunneRedigereVedtaksbrevNårEnIkkeHarLenke,
 } = composeStories(stories);
 
 describe('VedtakProsessIndex', () => {
@@ -432,6 +433,14 @@ describe('VedtakProsessIndex', () => {
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
     expect(screen.getByText('Det blir ikke sendt vedtaksbrev i denne behandlingen')).toBeInTheDocument();
+    expect(screen.queryByText('Rediger vedtaksbrev')).not.toBeInTheDocument();
+  });
+
+  it('skal ikke vise redigeringslenke når en ikke har lenke for å hente brevovestyring', async () => {
+    render(<SkalIkkeKunneRedigereVedtaksbrevNårEnIkkeHarLenke />);
+
+    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
+    expect(screen.getByText('Foreldrepenger er innvilget')).toBeInTheDocument();
     expect(screen.queryByText('Rediger vedtaksbrev')).not.toBeInTheDocument();
   });
 });
