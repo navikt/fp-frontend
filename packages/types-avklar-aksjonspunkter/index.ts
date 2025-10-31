@@ -2,10 +2,7 @@ export type { AksjonspunktTilBekreftelse } from './src/AksjonspunktTilBekreftels
 export type { FaktaAksjonspunkt } from './src/FaktaAksjonspunkt';
 export type { AvklarVergeAp } from './src/fakta/AvklarVergeAp';
 export type { MerkOpptjeningUtlandAp } from './src/fakta/MerkOpptjeningUtlandAp';
-export type { BekreftEktefelleAksjonspunktAp } from './src/fakta/BekreftEktefelleAksjonspunktAp';
-export type { BekreftDokumentertDatoAksjonspunktAp } from './src/fakta/BekreftDokumentertDatoAksjonspunktAp';
 export type { BekreftSvangerskapspengerAp } from './src/fakta/BekreftSvangerskapspengerAp';
-export type { BekreftMannAdoptererAksjonspunktAp } from './src/fakta/BekreftMannAdoptererAksjonspunktAp';
 export type { BekreftAleneomsorgVurderingAp } from './src/fakta/BekreftAleneomsorgVurderingAp';
 export type { BekreftOmsorgVurderingAp } from './src/fakta/BekreftOmsorgVurderingAp';
 export type { BekreftBosattVurderingAp } from './src/fakta/BekreftBosattVurderingAp';
@@ -23,8 +20,6 @@ export type { OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/Overst
 export type { OverstyringDekningsgradAp } from './src/fakta/OverstyringDekningsgradAp';
 export type { OverstyringRettigheterAp } from './src/fakta/OverstyringRettigheterAp';
 export type { AvklarDekningsgradAp } from './src/fakta/AvklarDekningsgradAp';
-export type { AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
-export type { AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
 export type { VurderOmsorgsovertakelseVilkåretAp } from './src/fakta/VurderOmsorgsovertakelseVilkåretAp';
 export type { AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';
 export type { VurderDokumentasjonAp } from './src/fakta/VurderDokumentasjonAp';

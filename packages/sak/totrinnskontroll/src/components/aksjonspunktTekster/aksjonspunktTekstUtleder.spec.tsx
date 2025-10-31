@@ -27,105 +27,12 @@ const defaultAksjonspunkt = {
 } satisfies TotrinnskontrollAksjonspunkt;
 
 describe('aksjonspunktTekstUtleder', () => {
-  it('skal vise korrekt tekst for aksjonspunkt 5004', () => {
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Adopsjon.KontrollerOpplysninger');
-  });
-  it('skal vise korrekt tekst for aksjonspunkt 5005', () => {
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Adopsjon.VurderEktefellesBarn');
-  });
-  it('skal vise korrekt tekst for aksjonspunkt 5006', () => {
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Adopsjon.VurderMannAdoptererAlene');
-  });
-  it('skal vise korrekt tekst for aksjonspunkt 6004', () => {
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Adopsjon.VilkarOverstyrt');
-  });
-
-  it('skal vise korrekt tekst for aksjonspunkt 5008', () => {
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.KontrollerOpplysninger');
-  });
-  it('skal vise korrekt tekst for aksjonspunkt 5011', () => {
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.VurderVilkarForeldreansvarTredjeLedd');
-  });
-
   it('skal vise korrekt tekst for aksjonspunkt 7002', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.AUTO_VENT_PÅ_FØDSELREGISTRERING,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Fødsel.VurderSokersRelasjon');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5001', () => {
@@ -133,13 +40,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Fødsel.SjekkTerminbekreftelse');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5027', () => {
@@ -147,13 +48,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Fødsel.SjekkManglendeFødsel');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6003', () => {
@@ -161,72 +56,17 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Fødsel.VilkarOverstyrt');
   });
 
-  it('skal vise korrekt tekst for aksjonspunkt 5014', () => {
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarFjerdeLedd');
-  });
-
-  it('skal vise korrekt tekst for aksjonspunkt 5013 engangsstønad', () => {
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      false,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddES');
-  });
-  it('skal vise korrekt tekst for aksjonspunkt 5013 foreldrepenger', () => {
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddFP');
-  });
   it('skal vise korrekt tekst for aksjonspunkt 5031', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderTidligereUtbetaling');
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.VurderTidligereUtbetaling');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5038', () => {
@@ -234,13 +74,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5047', () => {
@@ -248,13 +82,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
 
@@ -263,13 +91,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5043', () => {
@@ -277,13 +99,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6006', () => {
@@ -291,13 +107,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Soknadsfrist.VilkarOverstyrt');
   });
 
@@ -306,13 +116,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.UTGÅTT_5021,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Medlemskap.VurderGyldigMedlemskap');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5019', () => {
@@ -320,13 +124,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.UTGÅTT_5019,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarLovligOpphold');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5020', () => {
@@ -334,13 +132,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.UTGÅTT_5020,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Medlemskap.VurderSokerBosatt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5023', () => {
@@ -348,13 +140,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.UTGÅTT_5023,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarOppholdsrett');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6005', () => {
@@ -362,13 +148,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Medlemskap.VilkarOverstyrt');
   });
 
@@ -380,13 +160,7 @@ describe('aksjonspunktTekstUtleder', () => {
         fastsattVarigEndringNaering: true,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Beregning.VarigEndring');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5039 ikkje varig endring', () => {
@@ -398,13 +172,7 @@ describe('aksjonspunktTekstUtleder', () => {
         fastsattVarigEndringNaering: false,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Beregning.IkkeVarigEndring');
   });
 
@@ -424,13 +192,7 @@ describe('aksjonspunktTekstUtleder', () => {
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
 
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 slettet', () => {
@@ -448,13 +210,7 @@ describe('aksjonspunktTekstUtleder', () => {
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
 
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
 
@@ -477,13 +233,7 @@ describe('aksjonspunktTekstUtleder', () => {
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
 
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 lagt til', () => {
@@ -505,13 +255,7 @@ describe('aksjonspunktTekstUtleder', () => {
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
 
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
 
@@ -534,13 +278,7 @@ describe('aksjonspunktTekstUtleder', () => {
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
 
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.OverstyrUttak.PeriodeEndret');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 endret', () => {
@@ -562,13 +300,7 @@ describe('aksjonspunktTekstUtleder', () => {
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
 
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret');
   });
 
@@ -590,13 +322,7 @@ describe('aksjonspunktTekstUtleder', () => {
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
 
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 avklart', () => {
@@ -617,13 +343,7 @@ describe('aksjonspunktTekstUtleder', () => {
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
 
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      faktaOmBeregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-    );
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
 
@@ -637,7 +357,7 @@ describe('aksjonspunktTekstUtleder', () => {
     const behandlingsresultat = {
       type: 'KLAGE_MEDHOLD',
     } as Behandlingsresultat;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
+    const message = getAksjonspunkttekst(behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
   // Klage avslag
@@ -651,7 +371,6 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
-      true,
       behandlingStatusFVED,
       faktaOmBeregningTilfeller,
       false,
@@ -669,7 +388,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
+    const message = getAksjonspunkttekst(behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.Avvist');
   });
   // Ikke fastsatt Engangsstønad
@@ -681,7 +400,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
+    const message = getAksjonspunkttekst(behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak stadfestet', () => {
@@ -692,7 +411,7 @@ describe('aksjonspunktTekstUtleder', () => {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
+    const message = getAksjonspunkttekst(behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
 
@@ -711,7 +430,7 @@ describe('aksjonspunktTekstUtleder', () => {
         faktaOmBeregningTilfeller: ['VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'],
       },
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
+    const message = getAksjonspunkttekst(behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!).toEqual(
       <div key="Vurder tidsbegrenset arbeidsforhold">Vurder tidsbegrenset arbeidsforhold</div>,
     );
@@ -731,7 +450,7 @@ describe('aksjonspunktTekstUtleder', () => {
         faktaOmBeregningTilfeller: ['VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'],
       },
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
+    const message = getAksjonspunkttekst(behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!).toEqual(<div key="Vurder at og fl">Vurder at og fl</div>);
   });
   it('skal vise korrekte tekster for kombinasjon av aksjonspunkt 5058', () => {
@@ -755,7 +474,7 @@ describe('aksjonspunktTekstUtleder', () => {
         faktaOmBeregningTilfeller: ['VURDER_BESTEBEREGNING', 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'],
       },
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
+    const message = getAksjonspunkttekst(behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!).toEqual(<div key="Vurder besteberegning">Vurder besteberegning</div>);
     expect(message[1]!).toEqual(
       <div key="Vurder tidsbegrenset arbeidsforhold">Vurder tidsbegrenset arbeidsforhold</div>,

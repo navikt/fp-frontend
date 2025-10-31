@@ -250,7 +250,7 @@ export type { UttakPeriodeType } from './src/uttakPeriodeType';
 export type { SøknadType } from './src/søknadType';
 export type { SammenligningType } from './src/sammenligningType';
 export type { StønadskontoType } from './src/stønadskontoType';
-export { type VilkårType, fødselsvilkårene, adopsjonsvilkårene } from './src/vilkårType';
+export type { VilkårType } from './src/vilkårType';
 export type { UtsettelseÅrsak } from './src/utsettelseÅrsak';
 export type { UttakArbeidType } from './src/uttakArbeidType';
 export type { UttakUtsettelseType } from './src/uttakUtsettelseType';

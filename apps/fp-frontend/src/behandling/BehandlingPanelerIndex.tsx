@@ -98,7 +98,6 @@ export const BehandlingPanelerIndex = () => {
               valgtProsessSteg={query['punkt']}
               valgtFaktaSteg={query['fakta']}
               arbeidsgivere={notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere}
-              personoversikt={notEmpty(behandlingPersonoversiktQuery.data)}
             />
           </ErrorBoundary>
         </Suspense>

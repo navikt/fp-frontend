@@ -12,18 +12,13 @@ import type { AvklartFaktaFeilutbetalingAp } from '@navikt/ft-fakta-tilbakekrevi
 import type { AvklarAktivitetsPerioderAp } from './fakta/AvklarAktivitetsPerioderAp';
 import type { AvklarAnnenforelderHarRettAp } from './fakta/AvklarAnnenforelderHarRettAp';
 import type { AvklarDekningsgradAp } from './fakta/AvklarDekningsgradAp';
-import type { AvklarFaktaForForeldreansvarAksjonspunktAp } from './fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
-import type { AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
 import type { AvklarFortsattMedlemskapAp } from './fakta/AvklarFortsattMedlemskapAp';
 import type { AvklarVergeAp } from './fakta/AvklarVergeAp';
 import type { BekreftAleneomsorgVurderingAp } from './fakta/BekreftAleneomsorgVurderingAp';
 import type { BekreftAnnenpartsUttakEøsAp } from './fakta/BekreftAnnenpartsUttakEøsAp';
 import type { BekreftBosattVurderingAp } from './fakta/BekreftBosattVurderingAp';
-import type { BekreftDokumentertDatoAksjonspunktAp } from './fakta/BekreftDokumentertDatoAksjonspunktAp';
-import type { BekreftEktefelleAksjonspunktAp } from './fakta/BekreftEktefelleAksjonspunktAp';
 import type { BekreftErMedlemVurderingAp } from './fakta/BekreftErMedlemVurderingAp';
 import type { BekreftLovligOppholdVurderingAp } from './fakta/BekreftLovligOppholdVurderingAp';
-import type { BekreftMannAdoptererAksjonspunktAp } from './fakta/BekreftMannAdoptererAksjonspunktAp';
 import type { BekreftOmsorgVurderingAp } from './fakta/BekreftOmsorgVurderingAp';
 import type { BekreftOppholdsrettVurderingAp } from './fakta/BekreftOppholdsrettVurderingAp';
 import type { BekreftSvangerskapspengerAp } from './fakta/BekreftSvangerskapspengerAp';
@@ -49,9 +44,6 @@ export type FaktaAksjonspunkt =
   | MerkOpptjeningUtlandAp
   | BeregningAp
   | AvklarAktivitetsPerioderAp
-  | BekreftEktefelleAksjonspunktAp
-  | BekreftDokumentertDatoAksjonspunktAp
-  | BekreftMannAdoptererAksjonspunktAp
   | BekreftAleneomsorgVurderingAp
   | ManuellKontrollBesteberegningAP
   | VurderOmsorgsovertakelseVilkåretAp
@@ -70,14 +62,12 @@ export type FaktaAksjonspunkt =
   | AvklarAnnenforelderHarRettAp
   | BekreftUttaksperioderAp
   | OverstyringAvklarStartdatoForPeriodenAp
-  | AvklarFaktaForForeldreansvarAksjonspunktAp
   | KontrollerBesteberegningAP
   | OverstyrBeregningsaktiviteterAP
   | BeregningFaktaAP
   | BeregningOverstyringAP
   | FordelBeregningsgrunnlagAP
   | VurderRefusjonBeregningsgrunnlagAP
-  | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp
   | VurderArbeidsforholdInntektsmeldingAp
   | VurderDokumentasjonAp
   | VurderArbeidsforholdPermisjonAp

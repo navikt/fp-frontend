@@ -21,14 +21,11 @@ const defaultSøknad = {
 } as Soknad;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
   status: 'OPPR',
-
   kanLoses: true,
-  toTrinnsBehandling: false,
-
-  aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_23',
+  toTrinnsBehandling: true,
+  aksjonspunktType: 'MANU',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -89,9 +86,6 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjon: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
   },
@@ -103,9 +97,6 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     fagsak: {
@@ -120,9 +111,6 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
@@ -165,9 +153,6 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     fagsak: {
@@ -201,15 +186,7 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
 
 export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-        status: 'OPPR',
-
-        kanLoses: true,
-      },
-    ],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
     fagsak: {
       fagsakYtelseType: 'FP',
       bruker: {
@@ -245,8 +222,6 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-        status: 'OPPR',
-        kanLoses: true,
         begrunnelse: 'Dette er en begrunnelse',
       },
     ],

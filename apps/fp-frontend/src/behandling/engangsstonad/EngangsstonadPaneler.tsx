@@ -1,14 +1,12 @@
 import { useState } from 'react';
 
-import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
 import type { FaktaPanelMedÅpentApInfo } from '../felles/fakta/useFaktaPanelMenyData';
 import { ProsessMeny } from '../felles/prosess/ProsessMeny';
-import { AdopsjonsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
 import { FodselvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/FodselvilkaretFaktaInitPanel';
 import { MedlemskapsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
-import { OmsorgOgForeldreansvarFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgOgForeldreansvarFaktaInitPanel';
 import { OmsorgsovertakelseFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgsovertakelseFaktaInitPanel';
 import { SakenFaktaInitPanel } from '../fellesPaneler/fakta/SakenFaktaInitPanel';
 import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
@@ -25,10 +23,9 @@ interface Props {
   valgtProsessSteg: string | undefined;
   valgtFaktaSteg: string | undefined;
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
-  personoversikt: Personoversikt;
 }
 
-const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere, personoversikt }: Props) => {
+const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere }: Props) => {
   const [faktaPanelMedÅpentApInfo, setFaktaPanelMedÅpentApInfo] = useState<FaktaPanelMedÅpentApInfo>();
   const emptyArbeidsgiverOpplysningerPerId = {};
 
@@ -51,8 +48,6 @@ const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere,
         <SakenFaktaInitPanel />
         <YtelserFaktaInitPanel />
         <VergeFaktaInitPanel />
-        <OmsorgOgForeldreansvarFaktaInitPanel personoversikt={personoversikt} />
-        <AdopsjonsvilkaretFaktaInitPanel />
         <OmsorgsovertakelseFaktaInitPanel />
         <FodselvilkaretFaktaInitPanel />
         <MedlemskapsvilkaretFaktaInitPanel />

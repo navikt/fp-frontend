@@ -82,7 +82,7 @@ const aksjonspunktDefault = {
   kanLoses: true,
   toTrinnsBehandling: false,
   aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_5',
+  vilkarType: 'FP_VK_6',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -107,16 +107,16 @@ export const EngangsstønadMedApOgSaksnummereForTidligereSaker: Story = {
 export const LegacyAP: Story = {
   args: {
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.AVKLAR_VILKÅR_FOR_FORELDREANSVAR, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5008, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5054, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5006, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5004, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5005, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5013, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5014, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5011, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_6004, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_6010, 'UTFO'),
     ],
   },
 };
