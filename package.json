@@ -13,7 +13,8 @@
   "scripts": {
     "test": "turbo run test --concurrency=5",
     "tsc": "turbo run tsc",
-    "lint": "turbo run lint",
+    "lint": "turbo run stylelint eslint",
+    "ci": "turbo run build test",
     "eslint": "turbo run eslint",
     "eslint:fix": "turbo run eslint:fix",
     "stylelint": "turbo run stylelint",

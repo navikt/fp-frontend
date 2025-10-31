@@ -23,14 +23,6 @@
     "tsc": {
       "outputs": []
     },
-    "lint": {
-      "dependsOn": [
-        "^eslint",
-        "^stylelint",
-        "^tsc"
-      ],
-      "outputs": []
-    },
     "eslint": {
       "outputs": []
     },
