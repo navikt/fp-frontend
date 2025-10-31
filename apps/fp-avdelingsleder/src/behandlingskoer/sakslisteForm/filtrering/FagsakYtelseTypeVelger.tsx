@@ -43,7 +43,7 @@ export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }:
   const alleFagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
 
   return (
-    <VStack gap="space-8">
+    <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="FagsakYtelseTypeVelger.Stonadstype" />
       </Label>

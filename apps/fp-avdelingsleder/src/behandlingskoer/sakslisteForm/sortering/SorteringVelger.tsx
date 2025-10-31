@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Radio, VStack } from '@navikt/ds-react';
+import { Box, Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -57,48 +57,50 @@ export const SorteringVelger = ({
   const sortering = watch('sortering');
 
   return (
-    <RhfRadioGroup
-      name="sortering"
-      control={control}
-      legend={<FormattedMessage id="SorteringVelger.Sortering" />}
-      onChange={sorteringType => {
-        resetField('fra', { defaultValue: '' });
-        resetField('til', { defaultValue: '' });
-        resetField('fomDato', { defaultValue: '' });
-        resetField('tomDato', { defaultValue: '' });
-        resetField('erDynamiskPeriode', { defaultValue: false });
+    <Box.New borderWidth="1" borderColor="neutral-subtle" padding="10">
+      <RhfRadioGroup
+        name="sortering"
+        control={control}
+        legend={<FormattedMessage id="SorteringVelger.Sortering" />}
+        onChange={sorteringType => {
+          resetField('fra', { defaultValue: '' });
+          resetField('til', { defaultValue: '' });
+          resetField('fomDato', { defaultValue: '' });
+          resetField('tomDato', { defaultValue: '' });
+          resetField('erDynamiskPeriode', { defaultValue: false });
 
-        return lagreSortering({
-          sorteringType: String(sorteringType),
-        });
-      }}
-    >
-      {koSorteringer
-        .filter(
-          koSortering =>
-            koSortering.feltkategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
-        )
-        .map(koSortering => (
-          <VStack key={koSortering.kode} gap="space-2">
-            <Radio value={koSortering.kode} size="small">
-              {koSortering.navn}
-            </Radio>
-            {sortering === koSortering.kode && (
-              <>
-                {koSortering.felttype === 'DATO' && (
-                  <DatoSorteringValg
-                    valgtSakslisteId={valgtSakslisteId}
-                    valgtAvdelingEnhet={valgtAvdelingEnhet}
-                    erDynamiskPeriode={erDynamiskPeriode}
-                  />
-                )}
-                {koSortering.felttype === 'HELTALL' && (
-                  <BelopSorteringValg valgtSakslisteId={valgtSakslisteId} valgtAvdelingEnhet={valgtAvdelingEnhet} />
-                )}
-              </>
-            )}
-          </VStack>
-        ))}
-    </RhfRadioGroup>
+          return lagreSortering({
+            sorteringType: String(sorteringType),
+          });
+        }}
+      >
+        {koSorteringer
+          .filter(
+            koSortering =>
+              koSortering.feltkategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
+          )
+          .map(koSortering => (
+            <VStack key={koSortering.kode} gap="space-2">
+              <Radio value={koSortering.kode} size="small">
+                {koSortering.navn}
+              </Radio>
+              {sortering === koSortering.kode && (
+                <>
+                  {koSortering.felttype === 'DATO' && (
+                    <DatoSorteringValg
+                      valgtSakslisteId={valgtSakslisteId}
+                      valgtAvdelingEnhet={valgtAvdelingEnhet}
+                      erDynamiskPeriode={erDynamiskPeriode}
+                    />
+                  )}
+                  {koSortering.felttype === 'HELTALL' && (
+                    <BelopSorteringValg valgtSakslisteId={valgtSakslisteId} valgtAvdelingEnhet={valgtAvdelingEnhet} />
+                  )}
+                </>
+              )}
+            </VStack>
+          ))}
+      </RhfRadioGroup>
+    </Box.New>
   );
 };

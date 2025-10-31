@@ -20,6 +20,7 @@ import {
   FagsakYtelseTypeVelger,
   type FormValues as FagsakYtelseTypeVelgerFormValues,
 } from './filtrering/FagsakYtelseTypeVelger';
+import { type FormValues as TilBeslutterFormValues, TilBeslutterVelger } from './filtrering/TilBeslutterVelger';
 import { type FormValues as SorteringVelgerFormValues, SorteringVelger } from './sortering/SorteringVelger';
 import { useDebounce } from './useDebounce';
 
@@ -34,7 +35,8 @@ type FormValues = {
 } & AndreKriterierVelgerFormTypes &
   BehandlingstypeVelgerFormValues &
   FagsakYtelseTypeVelgerFormValues &
-  SorteringVelgerFormValues;
+  SorteringVelgerFormValues &
+  TilBeslutterFormValues;
 
 const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling): FormValues => {
   const behandlingTypes = valgtSaksliste.behandlingTyper
@@ -54,6 +56,9 @@ const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling):
       )
     : {};
 
+  const tilBeslutterKriterie = valgtSaksliste.andreKriterier?.find(ak => ak.andreKriterierType === 'TIL_BESLUTTER');
+  const inkluderEllerEkskluder = tilBeslutterKriterie?.inkluder ? 'TA_MED' : 'FJERN';
+
   return {
     sakslisteId: valgtSaksliste.sakslisteId,
     navn: valgtSaksliste.navn ?? intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.NyListe' }),
@@ -63,6 +68,7 @@ const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling):
     fra: valgtSaksliste.sortering ? valgtSaksliste.sortering.fra?.toString() : undefined,
     til: valgtSaksliste.sortering ? valgtSaksliste.sortering.til?.toString() : undefined,
     erDynamiskPeriode: valgtSaksliste.sortering ? valgtSaksliste.sortering.erDynamiskPeriode : undefined,
+    tilBeslutter: tilBeslutterKriterie === undefined ? 'TA_MED_ALLE' : inkluderEllerEkskluder,
     ...andreKriterierTyper,
     ...andreKriterierInkluder,
     ...behandlingTypes,
@@ -106,23 +112,23 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
 
   return (
     <RhfForm formMethods={formMethods}>
-      <Box.New padding="5" borderColor="neutral-subtle" borderRadius="0" borderWidth="1">
+      <Box.New padding="5">
         <VStack gap="space-8">
           <Heading size="small" level="2">
             <FormattedMessage id="UtvalgskriterierForSakslisteForm.Utvalgskriterier" />
           </Heading>
-          <VStack gap="space-16">
-            <RhfTextField
-              name="navn"
-              control={formMethods.control}
-              label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Navn' })}
-              validate={[required, minLength3, maxLength100, hasValidName]}
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
-              onChange={value => lagreNavn(value)}
-              className={styles['bredde']}
-            />
-            <HStack justify="space-between">
-              <VStack gap="space-16">
+          <HStack gap="space-44">
+            <Box.New borderWidth="1" borderColor="neutral-subtle" padding="10">
+              <VStack gap="space-24">
+                <RhfTextField
+                  name="navn"
+                  control={formMethods.control}
+                  label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Navn' })}
+                  validate={[required, minLength3, maxLength100, hasValidName]}
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
+                  onChange={value => lagreNavn(value)}
+                  className={styles['bredde']}
+                />
                 <FagsakYtelseTypeVelger
                   valgtSakslisteId={valgtSaksliste.sakslisteId}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
@@ -131,23 +137,23 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
                   valgtSakslisteId={valgtSaksliste.sakslisteId}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
                 />
+                <TilBeslutterVelger
+                  valgtSakslisteId={valgtSaksliste.sakslisteId}
+                  valgtAvdelingEnhet={valgtAvdelingEnhet}
+                />
               </VStack>
-              <div>
-                <AndreKriterierVelger
-                  valgtSakslisteId={valgtSaksliste.sakslisteId}
-                  valgtAvdelingEnhet={valgtAvdelingEnhet}
-                />
-              </div>
-              <div>
-                <SorteringVelger
-                  valgtSakslisteId={valgtSaksliste.sakslisteId}
-                  valgteBehandlingtyper={valgtSaksliste.behandlingTyper}
-                  valgtAvdelingEnhet={valgtAvdelingEnhet}
-                  erDynamiskPeriode={!!values.erDynamiskPeriode}
-                />
-              </div>
-            </HStack>
-          </VStack>
+            </Box.New>
+            <AndreKriterierVelger
+              valgtSakslisteId={valgtSaksliste.sakslisteId}
+              valgtAvdelingEnhet={valgtAvdelingEnhet}
+            />
+            <SorteringVelger
+              valgtSakslisteId={valgtSaksliste.sakslisteId}
+              valgteBehandlingtyper={valgtSaksliste.behandlingTyper}
+              valgtAvdelingEnhet={valgtAvdelingEnhet}
+              erDynamiskPeriode={!!values.erDynamiskPeriode}
+            />
+          </HStack>
         </VStack>
       </Box.New>
     </RhfForm>
