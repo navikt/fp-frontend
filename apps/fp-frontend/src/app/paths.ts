@@ -17,7 +17,6 @@ type QueryParams = {
   risiko?: boolean;
 };
 
-export const journalføringRoutePath = `/${JOURNALFØRING_PATH}`;
 export const utbetalingsdataIs15RoutePath = `/${UTBETALINGSDATA_PATH}`;
 export const fagsakRoutePath = '/fagsak/:saksnummer//*';
 export const aktoerRoutePath = '/aktoer/:aktoerId';
