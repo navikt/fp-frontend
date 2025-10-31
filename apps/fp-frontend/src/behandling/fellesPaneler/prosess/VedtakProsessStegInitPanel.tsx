@@ -19,7 +19,7 @@ import {
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
-import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
+import { forhåndsvisMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
@@ -131,7 +131,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
   return (
     <VedtakEditeringProvider
       behandling={behandling}
-      hentBrevOverstyring={hentBrevOverstyring}
+      hentBrevOverstyring={harLenke(behandling, 'HENT_BREV_OVERSTYRING') ? hentBrevOverstyring : undefined}
       hentBrevOverstyringIsPending={isPending}
       mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
     >
