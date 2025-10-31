@@ -4,7 +4,6 @@ import type { Location, Search } from 'history';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 import type { SkjermlenkeType, SkjermlenkeTypeFpTilbake } from '@navikt/fp-types';
 
-export const JOURNALFØRING_PATH = 'journalforing';
 export const UTBETALINGSDATA_PATH = 'utbetalingsdata';
 
 const DEFAULT_FAKTA = 'default';
