@@ -8,11 +8,11 @@ import * as stories from './AndreKriterierVelger.stories';
 const { Default } = composeStories(stories);
 
 describe('AndreKriterierVelger', () => {
-  it('skal vise checkboxer for andre kriterier der Til beslutter er valgt fra før', async () => {
+  it('skal vise checkboxer for arbeid inntekt der Til beslutter er valgt fra før', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     const { getByLabelText } = render(<Default />);
-    expect(await screen.findByText('Til beslutter')).toBeInTheDocument();
-    expect(getByLabelText('Til beslutter')).toBeChecked();
+    expect(await screen.findByText('Arbeid og inntekt')).toBeInTheDocument();
+    expect(getByLabelText('Arbeid og inntekt')).toBeChecked();
     expect(getByLabelText('Ta med i køen')).toBeChecked();
     expect(getByLabelText('Fjern fra køen')).not.toBeChecked();
   });

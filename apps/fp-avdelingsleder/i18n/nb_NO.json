@@ -42,11 +42,15 @@
   "UtvalgskriterierForSakslisteForm.Navn": "Navn",
   "UtvalgskriterierForSakslisteForm.NyListe": "Ny behandlingskø",
 
-  "AndreKriterierVelger.TilBeslutter": "Til beslutter",
   "AndreKriterierVelger.RegistrerPapirsoknad": "Registrer papirsøknad",
   "AndreKriterierVelger.AndreKriterier": "Andre kriterier",
   "AndreKriterierVelger.TaMed": "Ta med i køen",
   "AndreKriterierVelger.Fjern": "Fjern fra køen",
+
+  "TilBeslutterVelger.Overskrift": "Beslutter",
+  "TilBeslutterVelger.TaMed": "Vis kun beslutteroppgaver",
+  "TilBeslutterVelger.Fjern": "Fjern beslutteroppgaver",
+  "TilBeslutterVelger.TaMedAlle": "Ta med alle",
 
   "GjeldendeSakslisterTabell.GjeldendeLister": "Gjeldende behandlingskøer",
   "GjeldendeSakslisterTabell.IngenLister": "Ingen behandlingskøer er laget",

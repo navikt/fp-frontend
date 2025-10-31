@@ -58,7 +58,7 @@ export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: 
   const behandlingTyper = behandlingstypeOrder.map(kode => alleBehandlingTyper.find(bt => bt.kode === kode));
 
   return (
-    <VStack gap="space-8">
+    <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="BehandlingstypeVelger.Behandlingstype" />
       </Label>
