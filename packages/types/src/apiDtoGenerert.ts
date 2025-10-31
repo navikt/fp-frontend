@@ -210,15 +210,8 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '5001'
   | '5027'
   | '5018'
-  | '5004'
-  | '5005'
-  | '5006'
   | '5007'
-  | '5008'
-  | '5011'
   | '5012'
-  | '5013'
-  | '5014'
   | '5015'
   | '5016'
   | '5017'
@@ -241,7 +234,6 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '5049'
   | '5051'
   | '5052'
-  | '5054'
   | '5055'
   | '5057'
   | '5058'
@@ -276,12 +268,10 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '5103'
   | '6002'
   | '6003'
-  | '6004'
   | '6005'
   | '6006'
   | '6008'
   | '6009'
-  | '6010'
   | '6011'
   | '6065'
   | '6014'
@@ -308,7 +298,14 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '7039'
   | '7040'
   | 'UNDEFINED'
+  | '5004'
+  | '5005'
+  | '5006'
+  | '5008'
   | '5009'
+  | '5011'
+  | '5013'
+  | '5014'
   | '5019'
   | '5020'
   | '5021'
@@ -324,6 +321,7 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '5048'
   | '5050'
   | '5053'
+  | '5054'
   | '5056'
   | '5067'
   | '5069'
@@ -342,7 +340,9 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '5097'
   | '5098'
   | '5099'
+  | '6004'
   | '6007'
+  | '6010'
   | '6012'
   | '6013'
   | '6068'
@@ -443,15 +443,10 @@ export type foreldrepenger_behandlingslager_behandling_vilkår_VilkårType =
   | 'FP_VK_1'
   | 'FP_VK_11'
   | 'FP_VK_6'
-  | 'FP_VK_16'
   | 'FP_VK_2'
   | 'FP_VK_2_F'
   | 'FP_VK_2_L'
   | 'FP_VK_3'
-  | 'FP_VK_4'
-  | 'FP_VK_5'
-  | 'FP_VK_8'
-  | 'FP_VK_33'
   | 'FP_VK_34'
   | 'FP_VK_21'
   | 'FP_VK_23'
@@ -1883,12 +1878,6 @@ export type foreldrepenger_behandling_aksjonspunkt_OverstyringAksjonspunktDto = 
       '@type': '6006';
     } & tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSøknadsfristvilkåretDto)
   | ({
-      '@type': '6004';
-    } & tjenester_behandling_vilkår_aksjonspunkt_es_OverstyringAdopsjonsvilkåretDto)
-  | ({
-      '@type': '6010';
-    } & tjenester_behandling_vilkår_aksjonspunkt_fp_OverstyringAdopsjonsvilkåretDto)
-  | ({
       '@type': '6045';
     } & tjenester_behandling_ytelsefordeling_OverstyringAvklarStartdatoForPeriodenDto)
 ) & {
@@ -1972,18 +1961,6 @@ export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSokersOpply
 };
 
 export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSøknadsfristvilkåretDto = {
-  begrunnelse?: string;
-  erVilkarOk?: boolean;
-};
-
-export type tjenester_behandling_vilkår_aksjonspunkt_es_OverstyringAdopsjonsvilkåretDto = {
-  avslagskode?: string;
-  begrunnelse?: string;
-  erVilkarOk?: boolean;
-};
-
-export type tjenester_behandling_vilkår_aksjonspunkt_fp_OverstyringAdopsjonsvilkåretDto = {
-  avslagskode?: string;
   begrunnelse?: string;
   erVilkarOk?: boolean;
 };
@@ -4630,7 +4607,6 @@ export type foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeTy
   | 'BESTEBEREGNING'
   | 'FAKTA_FOR_OMSORG'
   | 'FAKTA_FOR_OPPTJENING'
-  | 'FAKTA_OM_ADOPSJON'
   | 'FAKTA_OM_ARBEIDSFORHOLD'
   | 'FAKTA_OM_ARBEIDSFORHOLD_INNTEKTSMELDING'
   | 'FAKTA_OM_ARBEIDSFORHOLD_PERMISJON'
@@ -4639,7 +4615,6 @@ export type foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeTy
   | 'FAKTA_OM_OMSORGSOVERTAKELSE'
   | 'FAKTA_OM_FORDELING'
   | 'FAKTA_OM_MEDLEMSKAP'
-  | 'FAKTA_OM_OMSORG_OG_FORELDREANSVAR'
   | 'FAKTA_OM_OPPTJENING'
   | 'FAKTA_OM_SIMULERING'
   | 'FAKTA_OM_UTTAK'
@@ -4652,12 +4627,9 @@ export type foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeTy
   | 'KLAGE_BEH_NK'
   | 'KONTROLL_AV_SAKSOPPLYSNINGER'
   | 'OPPLYSNINGSPLIKT'
-  | 'PUNKT_FOR_ADOPSJON'
   | 'PUNKT_FOR_FOEDSEL'
-  | 'PUNKT_FOR_FORELDREANSVAR'
   | 'PUNKT_FOR_MEDLEMSKAP'
   | 'PUNKT_FOR_MEDLEMSKAP_LØPENDE'
-  | 'PUNKT_FOR_OMSORG'
   | 'PUNKT_FOR_OPPTJENING'
   | 'PUNKT_FOR_SVANGERSKAPSPENGER'
   | 'PUNKT_FOR_SVP_INNGANG'

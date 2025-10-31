@@ -44,7 +44,6 @@ interface Props {
     | TotrinnskontrollSkjermlenkeContext
     | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
-  erForeldrepengerFagsak: boolean;
   erTilbakekreving: boolean;
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   vurderArsaker: KodeverkMedNavn<'VurderÅrsak'>[] | KodeverkMedNavnTilbakekreving<'VurderÅrsak'>[];
@@ -55,7 +54,6 @@ interface Props {
 export const TotrinnskontrollSaksbehandlerPanel = ({
   behandling,
   totrinnskontrollSkjermlenkeContext,
-  erForeldrepengerFagsak,
   erTilbakekreving,
   skjemalenkeTyper,
   vurderArsaker,
@@ -85,7 +83,6 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
               )}
               {aksjonspunkter.map(aksjonspunkt => {
                 const aksjonspunktTexts = getAksjonspunkttekst(
-                  erForeldrepengerFagsak,
                   behandling.status,
                   faktaOmBeregningTilfeller,
                   erTilbakekreving,

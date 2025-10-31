@@ -15,16 +15,16 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET, // Aktivt aksjonspunkt
   // Legacy-aksjonspunkt
-  AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
-  AksjonspunktKode.AVKLAR_VILKÅR_FOR_FORELDREANSVAR,
-  AksjonspunktKode.AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE,
-  AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON,
-  AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-  AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD,
-  AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD,
-  AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET,
-  AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET,
-  AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP,
+  AksjonspunktKode.UTGÅTT_5008,
+  AksjonspunktKode.UTGÅTT_5054,
+  AksjonspunktKode.UTGÅTT_5006,
+  AksjonspunktKode.UTGÅTT_5004,
+  AksjonspunktKode.UTGÅTT_5005,
+  AksjonspunktKode.UTGÅTT_5013,
+  AksjonspunktKode.UTGÅTT_5014,
+  AksjonspunktKode.UTGÅTT_5011,
+  AksjonspunktKode.UTGÅTT_6004,
+  AksjonspunktKode.UTGÅTT_6010,
 ];
 
 export const OmsorgsovertakelseFaktaInitPanel = () => {

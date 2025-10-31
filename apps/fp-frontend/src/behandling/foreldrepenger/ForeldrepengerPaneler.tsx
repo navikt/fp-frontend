@@ -5,7 +5,6 @@ import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-t
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
 import type { FaktaPanelMedÅpentApInfo } from '../felles/fakta/useFaktaPanelMenyData';
 import { ProsessMeny } from '../felles/prosess/ProsessMeny';
-import { AdopsjonsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/AdopsjonsvilkaretFaktaInitPanel';
 import { ArbeidOgInntektFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidOgInntektFaktaInitPanel';
 import { ArbeidsforholdFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidsforholdFaktaInitPanel';
 import { BeregningFaktaInitPanel } from '../fellesPaneler/fakta/BeregningFaktaInitPanel';
@@ -13,7 +12,6 @@ import { FodselvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/Fodselvilka
 import { FordelingFaktaInitPanel } from '../fellesPaneler/fakta/FordelingFaktaInitPanel';
 import { InntektsmeldingerFaktaInitPanel } from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
 import { MedlemskapsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
-import { OmsorgOgForeldreansvarFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgOgForeldreansvarFaktaInitPanel';
 import { OmsorgsovertakelseFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgsovertakelseFaktaInitPanel';
 import { OpptjeningsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/OpptjeningsvilkaretFaktaInitPanel';
 import { PermisjonFaktaInitPanel } from '../fellesPaneler/fakta/PermisjonFaktaInitPanel';
@@ -75,8 +73,6 @@ const ForeldrepengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere
         <ArbeidsforholdFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <YtelserFaktaInitPanel />
         <VergeFaktaInitPanel />
-        <OmsorgOgForeldreansvarFaktaInitPanel personoversikt={personoversikt} />
-        <AdopsjonsvilkaretFaktaInitPanel />
         <OmsorgsovertakelseFaktaInitPanel />
         <FodselvilkaretFaktaInitPanel />
         <MedlemskapsvilkaretFaktaInitPanel />

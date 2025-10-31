@@ -52,7 +52,6 @@ const meta = {
     onSubmit: action('button-click') as (params: ApData) => Promise<void>,
     location: LOCATION,
     forhandsvisVedtaksbrev: action('button-click'),
-    fagsakYtelseType: 'FP',
     alleKodeverk: alleKodeverk,
     createLocationForSkjermlenke: () => LOCATION,
     setBeslutterFormData: () => undefined,

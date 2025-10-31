@@ -9,14 +9,11 @@ import type { Aksjonspunkt, Fagsak } from '@navikt/fp-types';
 import { UttakFaktaEøsIndex } from './UttakFaktaEøsIndex';
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_INNSYN,
+  definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
   status: 'OPPR',
-
   kanLoses: true,
-  toTrinnsBehandling: false,
-
-  aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_5',
+  toTrinnsBehandling: true,
+  aksjonspunktType: 'MANU',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -29,12 +26,7 @@ const meta = {
       relasjonsRolleType: 'FARA',
     } as Fagsak,
     kanOverstyre: false,
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-      },
-    ],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
   },
   render: args => <UttakFaktaEøsIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof UttakFaktaEøsIndex>>;
@@ -78,9 +70,9 @@ export const AksjonspunktErUtførtHvorIngenPerioderErRegistrert: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        begrunnelse: 'Dette er en begrunnelse',
-        status: 'UTFO',
         definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+        status: 'UTFO',
+        begrunnelse: 'Dette er en begrunnelse',
       },
     ],
     annenForelderUttakEøs: [],
@@ -93,9 +85,8 @@ export const OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSom
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-
-        status: 'UTFO',
         definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+        status: 'UTFO',
       },
     ],
     annenForelderUttakEøs: [

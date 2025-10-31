@@ -8,7 +8,6 @@ import type {
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
   FagsakBehandlingDto,
-  FagsakYtelseType,
   SkjermlenkeType,
   SkjermlenkeTypeFpTilbake,
   VurderÅrsak,
@@ -65,7 +64,6 @@ export type ApData = {
 interface Props {
   behandling: FagsakBehandlingDto;
   location: Location;
-  fagsakYtelseType: FagsakYtelseType;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   readOnly: boolean;
   onSubmit: (data: ApData) => void;
@@ -81,7 +79,6 @@ interface Props {
 export const TotrinnskontrollSakIndex = ({
   behandling,
   location,
-  fagsakYtelseType,
   readOnly,
   onSubmit,
   forhandsvisVedtaksbrev,
@@ -142,7 +139,6 @@ export const TotrinnskontrollSakIndex = ({
           readOnly={readOnly}
           onSubmit={submitHandler}
           forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-          erForeldrepengerFagsak={fagsakYtelseType === 'FP'}
           skjemalenkeTyper={skjemalenkeTyper}
           erBehandlingEtterKlage={erBehandlingEtterKlage}
           faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
@@ -156,7 +152,6 @@ export const TotrinnskontrollSakIndex = ({
         <TotrinnskontrollSaksbehandlerPanel
           behandling={behandling}
           totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
-          erForeldrepengerFagsak={fagsakYtelseType === 'FP'}
           erTilbakekreving={erTilbakekreving}
           skjemalenkeTyper={skjemalenkeTyper}
           lagLenke={lagLenke}

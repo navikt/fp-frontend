@@ -33,14 +33,14 @@ const defaultOpptjening = {
 } as Opptjening;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET,
   status: 'OPPR',
 
   kanLoses: true,
-  toTrinnsBehandling: false,
+  toTrinnsBehandling: true,
 
-  aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_5',
+  aksjonspunktType: 'MANU',
+  vilkarType: 'FP_VK_23',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -62,13 +62,7 @@ type Story = StoryObj<typeof meta>;
 export const ÅpentAksjonspunkt: Story = {
   args: {
     opptjening: defaultOpptjening,
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
-        status: 'OPPR',
-      },
-    ] satisfies Aksjonspunkt[],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
   },
 };
 
@@ -76,13 +70,7 @@ export const ÅpentAksjonspunktSvangerskapspenger: Story = {
   args: {
     erSvpFagsak: true,
     opptjening: defaultOpptjening,
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
-        status: 'OPPR',
-      },
-    ],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
   },
 };
 
@@ -132,12 +120,7 @@ export const ÅpentAksjonspunktMenUtenAktiviteter: Story = {
         fastsattOpptjeningAktivitetList: [],
       },
     },
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
-        status: 'OPPR',
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
   },
 };
 

@@ -26,7 +26,6 @@ const åpentAksjonspunkt: Aksjonspunkt[] = [
     kanLoses: true,
     toTrinnsBehandling: true,
     aksjonspunktType: 'MANU',
-    vilkarType: 'FP_VK_5',
     erAktivt: true,
   },
 ];

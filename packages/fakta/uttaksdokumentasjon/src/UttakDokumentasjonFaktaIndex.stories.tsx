@@ -32,12 +32,11 @@ const aktivitetskravGrunnlagListe = [
 ] satisfies AktivitetskravGrunnlagArbeid[];
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
   status: 'OPPR',
   kanLoses: true,
   toTrinnsBehandling: false,
-  aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_5',
+  aksjonspunktType: 'MANU',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -104,15 +103,7 @@ type Story = StoryObj<typeof meta>;
 
 export const AksjonspunktMedUavklartePerioder: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-        status: 'OPPR',
-
-        kanLoses: true,
-      },
-    ],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
     dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
   },
 };
@@ -165,7 +156,6 @@ export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: 'UTFO',
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: false,
@@ -181,10 +171,7 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: 'UTFO',
-
-        kanLoses: true,
       },
     ],
     dokumentasjonVurderingBehov: [

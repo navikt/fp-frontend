@@ -20,8 +20,7 @@ const aksjonspunkterForPanel: Aksjonspunkt[] = [
     status: 'OPPR',
     kanLoses: true,
     toTrinnsBehandling: false,
-    aksjonspunktType: 'AUTO',
-    vilkarType: 'FP_VK_5',
+    aksjonspunktType: 'MANU',
     erAktivt: true,
   },
 ];

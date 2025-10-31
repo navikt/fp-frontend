@@ -101,7 +101,6 @@ interface Props {
   forhandsvisVedtaksbrev: () => void;
   readOnly: boolean;
   erTilbakekreving: boolean;
-  erForeldrepengerFagsak: boolean;
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   erBehandlingEtterKlage: boolean;
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
@@ -117,7 +116,6 @@ export const TotrinnskontrollBeslutterForm = ({
   forhandsvisVedtaksbrev,
   readOnly,
   erBehandlingEtterKlage,
-  erForeldrepengerFagsak,
   skjemalenkeTyper,
   erTilbakekreving,
   totrinnskontrollSkjermlenkeContext,
@@ -154,7 +152,6 @@ export const TotrinnskontrollBeslutterForm = ({
         )}
         <AksjonspunktGodkjenningFieldArray
           behandling={behandling}
-          erForeldrepengerFagsak={erForeldrepengerFagsak}
           erTilbakekreving={erTilbakekreving}
           readOnly={readOnly}
           totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}

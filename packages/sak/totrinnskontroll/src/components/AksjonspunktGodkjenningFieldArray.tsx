@@ -39,7 +39,6 @@ type Props = {
     | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
   readOnly: boolean;
-  erForeldrepengerFagsak: boolean;
   erTilbakekreving: boolean;
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
@@ -50,7 +49,6 @@ export const AksjonspunktGodkjenningFieldArray = ({
   behandling,
   totrinnskontrollSkjermlenkeContext,
   readOnly,
-  erForeldrepengerFagsak,
   erTilbakekreving,
   skjemalenkeTyper,
   faktaOmBeregningTilfeller,
@@ -82,7 +80,6 @@ export const AksjonspunktGodkjenningFieldArray = ({
         }
 
         const aksjonspunktText = getAksjonspunkttekst(
-          erForeldrepengerFagsak,
           behandling.status,
           faktaOmBeregningTilfeller,
           erTilbakekreving,

@@ -91,15 +91,6 @@ const getTextFromTilbakekrevingAksjonspunktkode = (
     : [];
 };
 
-const getTextForForeldreansvarsvilkåretAndreLedd = (
-  isForeldrepenger: boolean,
-): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
-  const aksjonspunktTextId = isForeldrepenger
-    ? 'ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddFP'
-    : 'ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddES';
-  return [<FormattedMessage key={aksjonspunktTextId} id={aksjonspunktTextId} />];
-};
-
 const getFaktaOmBeregningText = (
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
   beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto'],
@@ -173,7 +164,6 @@ const erKlageAksjonspunkt = (
   aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP;
 
 export const getAksjonspunkttekst = (
-  isForeldrepenger: boolean,
   behandlingStatus: BehandlingStatus,
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
   erTilbakekreving: boolean,
@@ -212,9 +202,6 @@ export const getAksjonspunkttekst = (
 
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT) {
     return [buildAvklarAnnenForelderText()];
-  }
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_2_LEDD) {
-    return getTextForForeldreansvarsvilkåretAndreLedd(isForeldrepenger);
   }
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG) {
     return [buildOverstyrtRettOgOmsorgText()];

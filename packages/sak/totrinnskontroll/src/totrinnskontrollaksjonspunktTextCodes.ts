@@ -1,16 +1,6 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 export const totrinnskontrollaksjonspunktTextCodes = {
-  [AksjonspunktKode.AVKLAR_ADOPSJONSDOKUMENTAJON]: 'ToTrinnsForm.Adopsjon.KontrollerOpplysninger',
-  [AksjonspunktKode.AVKLAR_OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: 'ToTrinnsForm.Adopsjon.VurderEktefellesBarn',
-  [AksjonspunktKode.AVKLAR_OM_SØKER_ER_MANN_SOM_ADOPTERER_ALENE]: 'ToTrinnsForm.Adopsjon.VurderMannAdoptererAlene',
-  [AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET]: 'ToTrinnsForm.Adopsjon.VilkarOverstyrt',
-  [AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP]: 'ToTrinnsForm.Adopsjon.VilkarOverstyrt',
-
-  [AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE]: 'ToTrinnsForm.Omsorgovertagelse.KontrollerOpplysninger',
-  [AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKÅRET]:
-    'ToTrinnsForm.Omsorgovertagelse.VurderVilkarForeldreansvarTredjeLedd',
-
   [AksjonspunktKode.AUTO_VENT_PÅ_FØDSELREGISTRERING]: 'ToTrinnsForm.Fødsel.VurderSokersRelasjon',
   [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: 'ToTrinnsForm.Fødsel.SjekkTerminbekreftelse',
   [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: 'ToTrinnsForm.Fødsel.SjekkManglendeFødsel',
@@ -18,9 +8,7 @@ export const totrinnskontrollaksjonspunktTextCodes = {
   [AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET]: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
   [AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR]: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
 
-  [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKÅRET_4_LEDD]:
-    'ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarFjerdeLedd',
-  [AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE]: 'ToTrinnsForm.Foreldreansvar.VurderTidligereUtbetaling',
+  [AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE]: 'ToTrinnsForm.VurderTidligereUtbetaling',
 
   [AksjonspunktKode.AVKLAR_AKTIVITETER]: 'ToTrinnsForm.Beregning.AvklarAktiviteter',
   [AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER]: 'ToTrinnsForm.Beregning.OverstyrtBeregningsaktiviteter',

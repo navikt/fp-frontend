@@ -25,10 +25,6 @@ const skjermlenkeCodesFpsak: SkjermlenkeDataFpSak = {
     faktaNavn: FaktaPanelCode.BESTEBEREGNING,
     punktNavn: ProsessStegCode.DEFAULT,
   },
-  FAKTA_OM_ADOPSJON: {
-    faktaNavn: FaktaPanelCode.ADOPSJONSVILKARET,
-    punktNavn: '',
-  },
   FAKTA_OM_ARBEIDSFORHOLD_PERMISJON: {
     faktaNavn: FaktaPanelCode.ARBEIDSFORHOLD,
     punktNavn: '',
@@ -61,10 +57,6 @@ const skjermlenkeCodesFpsak: SkjermlenkeDataFpSak = {
     faktaNavn: FaktaPanelCode.OPPTJENINGSVILKARET,
     punktNavn: '',
   },
-  FAKTA_OM_OMSORG_OG_FORELDREANSVAR: {
-    faktaNavn: FaktaPanelCode.OMSORGSVILKARET,
-    punktNavn: '',
-  },
   FAKTA_OM_OMSORGSOVERTAKELSE: {
     faktaNavn: FaktaPanelCode.OMSORGSOVERTAKELSE,
     punktNavn: '',
@@ -76,10 +68,6 @@ const skjermlenkeCodesFpsak: SkjermlenkeDataFpSak = {
   FAKTA_OM_AKTIVITETSKRAV: {
     faktaNavn: FaktaPanelCode.UTTAK_DOKUMENTASJON,
     punktNavn: '',
-  },
-  PUNKT_FOR_FORELDREANSVAR: {
-    faktaNavn: FaktaPanelCode.DEFAULT,
-    punktNavn: ProsessStegCode.INNGANGSVILKAR,
   },
   KLAGE_BEH_NFP: {
     faktaNavn: FaktaPanelCode.DEFAULT,
@@ -109,20 +97,12 @@ const skjermlenkeCodesFpsak: SkjermlenkeDataFpSak = {
     faktaNavn: FaktaPanelCode.DEFAULT,
     punktNavn: ProsessStegCode.OPPLYSNINGSPLIKT,
   },
-  PUNKT_FOR_ADOPSJON: {
-    faktaNavn: FaktaPanelCode.DEFAULT,
-    punktNavn: ProsessStegCode.INNGANGSVILKAR,
-  },
   PUNKT_FOR_FOEDSEL: {
     faktaNavn: FaktaPanelCode.DEFAULT,
     punktNavn: ProsessStegCode.INNGANGSVILKAR,
   },
   PUNKT_FOR_MEDLEMSKAP: {
     faktaNavn: FaktaPanelCode.MEDLEMSKAPSVILKARET,
-    punktNavn: ProsessStegCode.INNGANGSVILKAR,
-  },
-  PUNKT_FOR_OMSORG: {
-    faktaNavn: FaktaPanelCode.DEFAULT,
     punktNavn: ProsessStegCode.INNGANGSVILKAR,
   },
   PUNKT_FOR_OPPTJENING: {

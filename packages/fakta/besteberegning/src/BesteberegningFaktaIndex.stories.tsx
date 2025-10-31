@@ -28,12 +28,10 @@ const arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId = {
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,
   status: 'OPPR',
-
   kanLoses: true,
   toTrinnsBehandling: false,
-
-  aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_5',
+  aksjonspunktType: 'MANU',
+  vilkarType: 'FP_VK_41',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -64,7 +62,6 @@ export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.UTGÅTT_5048,
-        status: 'OPPR',
       },
     ],
   },
@@ -91,7 +88,6 @@ export const BesteberegningMedAvvik: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.UTGÅTT_5048,
-        status: 'OPPR',
       },
     ],
   },

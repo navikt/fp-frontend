@@ -47,7 +47,6 @@ export const TotrinnskontrollIndex = ({
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
   const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
 
-  const fagsak = fagsakData.getFagsak();
   const valgtBehandling = notEmpty(fagsakData.getBehandling(valgtBehandlingUuid));
 
   const api = useFagsakBehandlingApi(valgtBehandling);
@@ -101,7 +100,6 @@ export const TotrinnskontrollIndex = ({
           readOnly={brukernavn === valgtBehandling.ansvarligSaksbehandler || kanVeilede}
           onSubmit={onSubmit}
           forhandsvisVedtaksbrev={forhåndsvisVedtaksbrev}
-          fagsakYtelseType={fagsak.fagsakYtelseType}
           alleKodeverk={alleKodeverk}
           createLocationForSkjermlenke={createLocationForSkjermlenke}
           beslutterFormData={beslutterFormData}

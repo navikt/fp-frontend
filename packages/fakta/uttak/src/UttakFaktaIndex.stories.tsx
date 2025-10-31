@@ -19,14 +19,11 @@ const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
 };
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
   status: 'OPPR',
-
   kanLoses: true,
-  toTrinnsBehandling: false,
-
-  aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_5',
+  toTrinnsBehandling: true,
+  aksjonspunktType: 'MANU',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -98,9 +95,6 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     ytelsefordeling: {
@@ -155,9 +149,6 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     ytelsefordeling: {
@@ -181,9 +172,6 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     ytelsefordeling: {
@@ -208,9 +196,6 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     ytelsefordeling: {
@@ -227,9 +212,6 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     ytelsefordeling: {
@@ -259,9 +241,6 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     ytelsefordeling: {
@@ -362,8 +341,6 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-        status: 'OPPR',
-        kanLoses: true,
       },
     ],
     ytelsefordeling: {

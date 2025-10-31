@@ -38,14 +38,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
   status: 'OPPR',
-
   kanLoses: true,
   toTrinnsBehandling: false,
-
-  aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_5',
+  aksjonspunktType: 'MANU',
+  vilkarType: 'FP_VK_23',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -55,9 +53,6 @@ export const MedAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     opptjening: {
@@ -197,9 +192,6 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     opptjening: {
@@ -258,11 +250,7 @@ export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
     opptjening: {
