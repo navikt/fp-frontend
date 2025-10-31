@@ -1,7 +1,6 @@
-import { FormattedMessage, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import { FaktaFraFReg } from '@navikt/fp-fakta-felles';
@@ -9,6 +8,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { OmsorgsovertakelseDto } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
+import { AksjonspunktTekst } from './components/AksjonspunktTekst';
 import { FaktaSammenligning } from './components/FaktaSammenligning';
 import { LegacyAksjonspunktVisning } from './components/LegacyAksjonspunktVisning';
 import { VurderOmsorgsovertakelseVilkåretForm } from './components/VurderOmsorgsovertakelseVilkåretForm';
@@ -29,11 +29,7 @@ export const OmsorgsovertakelseFaktaIndex = ({ omsorgsovertakelse }: Props) => {
   return (
     <RawIntlProvider value={intl}>
       <VStack gap="space-16">
-        {harÅpentAksjonspunkt && (
-          <AksjonspunktHelpTextHTML>
-            <FormattedMessage id="OmsorgsovertakelseFaktaIndex.AksjonspunktTekst" />
-          </AksjonspunktHelpTextHTML>
-        )}
+        {harÅpentAksjonspunkt && <AksjonspunktTekst omsorgsovertakelse={omsorgsovertakelse} />}
 
         <FaktaSammenligning omsorgsovertakelse={omsorgsovertakelse} />
         <FaktaFraFReg barna={omsorgsovertakelse.register.barn} />

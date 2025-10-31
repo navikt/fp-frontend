@@ -1,5 +1,6 @@
 {
-  "OmsorgsovertakelseFaktaIndex.AksjonspunktTekst": "Kontroller opplysningene om omsorgsovertakelse",
+  "OmsorgsovertakelseFaktaIndex.AksjonspunktTekst.Generell": "Kontroller opplysningene om omsorgsovertakelse",
+  "OmsorgsovertakelseFaktaIndex.AksjonspunktTekst.VurderMotattStøtte": "Vurder om det er søkt eller mottatt støtte for {antallBarn, plural, one {barnet} other {barna}} tidligere: {saksnummere}",
   "FaktaSammenligning.Tittel": "Sammenligning av opplysninger",
   "FaktaSammenligning.FraSøknaden": "Opplysninger fra søknaden",
   "FaktaSammenligning.FraSaksbehandler": "Opplysninger bekreftet av saksbehandler",
