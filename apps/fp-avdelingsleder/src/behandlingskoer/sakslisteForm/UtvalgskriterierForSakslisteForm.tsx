@@ -121,7 +121,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
           <Heading size="small" level="2">
             <FormattedMessage id="UtvalgskriterierForSakslisteForm.Utvalgskriterier" />
           </Heading>
-          <HStack gap="space-44">
+          <HStack gap="space-44" wrap={false}>
             <Box.New borderWidth="1" borderColor="neutral-subtle" padding="10">
               <VStack gap="space-24">
                 <RhfTextField
