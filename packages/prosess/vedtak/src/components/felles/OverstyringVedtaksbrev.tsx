@@ -36,13 +36,13 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
   const [brevOverstyring, setBrevOverstyring] = useState<BrevOverstyring | null>(null);
 
   useEffect(() => {
-    if (harRedigertBrev) {
+    if (harRedigertBrev && hentBrevOverstyring) {
       void hentBrevOverstyring().then(setBrevOverstyring);
     }
   }, []);
 
   const visFritekstModalOgHentBrev = async () => {
-    if (!brevOverstyring) {
+    if (!brevOverstyring && hentBrevOverstyring) {
       const res = await hentBrevOverstyring();
       setBrevOverstyring(res);
     }
@@ -52,8 +52,10 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
   const mellomlagreOgHentPåNytt = async (html: string | null) => {
     setHarRedigertBrev(html !== null);
     await mellomlagreBrevOverstyring(html);
-    const res = await hentBrevOverstyring();
-    setBrevOverstyring(res);
+    if (hentBrevOverstyring) {
+      const res = await hentBrevOverstyring();
+      setBrevOverstyring(res);
+    }
   };
 
   const forkastOverstyrtBrev = async () => {

@@ -121,6 +121,7 @@ const meta = {
     isReadOnly: false,
     fagsak: defaultSak,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
+    harHentBrevOverstyringLenke: true,
   },
   render: args => {
     const [redigertHtml, setRedigertHtml] = useState<string | null>(null);
@@ -134,14 +135,18 @@ const meta = {
     return (
       <VedtakEditeringProvider
         behandling={args.behandling ?? defaultBehandling}
-        hentBrevOverstyring={() => {
-          return redigertHtml
-            ? Promise.resolve({
-                opprinneligHtml: args.brevOverstyring.opprinneligHtml,
-                redigertHtml,
-              })
-            : Promise.resolve(args.brevOverstyring);
-        }}
+        hentBrevOverstyring={
+          args.harHentBrevOverstyringLenke
+            ? () => {
+                return redigertHtml
+                  ? Promise.resolve({
+                      opprinneligHtml: args.brevOverstyring.opprinneligHtml,
+                      redigertHtml,
+                    })
+                  : Promise.resolve(args.brevOverstyring);
+              }
+            : undefined
+        }
         hentBrevOverstyringIsPending={false}
         mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
       >
@@ -149,7 +154,11 @@ const meta = {
       </VedtakEditeringProvider>
     );
   },
-} satisfies Meta<PanelDataArgs & { brevOverstyring: BrevOverstyring } & ComponentProps<typeof VedtakProsessIndex>>;
+} satisfies Meta<
+  PanelDataArgs & { brevOverstyring: BrevOverstyring; harHentBrevOverstyringLenke?: boolean } & ComponentProps<
+      typeof VedtakProsessIndex
+    >
+>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -877,5 +886,12 @@ export const SkalIkkeProduseresBrev: Story = {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
+  },
+};
+
+export const SkalIkkeKunneRedigereVedtaksbrevNårEnIkkeHarLenke: Story = {
+  args: {
+    ...InnvilgetForeldrepengerTilGodkjenningForSaksbehandler.args,
+    harHentBrevOverstyringLenke: false,
   },
 };

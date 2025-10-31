@@ -1,5 +1,5 @@
 name: Valider pull request
-on: [ pull_request ]
+on: [pull_request]
 jobs:
   valid-pull-request:
     name: Valider pull request
@@ -7,16 +7,10 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
 
-      - name: Sette yarn-config
-        run: |
-          yarn config set npmScopes.navikt.npmRegistryServer "https://npm.pkg.github.com"
-          yarn config set npmScopes.navikt.npmAlwaysAuth true
-          yarn config set npmScopes.navikt.npmAuthToken $NPM_AUTH_TOKEN
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - uses: ./.github/actions/setup-yarnrc
+        with:
+          npmAuthToken: ${{ secrets.READER_TOKEN }}
 
       - uses: actions/setup-node@v6
         with:
@@ -45,16 +39,10 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
 
-      - name: Sette yarn-config
-        run: |
-          yarn config set npmScopes.navikt.npmRegistryServer "https://npm.pkg.github.com"
-          yarn config set npmScopes.navikt.npmAlwaysAuth true
-          yarn config set npmScopes.navikt.npmAuthToken $NPM_AUTH_TOKEN
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - uses: ./.github/actions/setup-yarnrc
+        with:
+          npmAuthToken: ${{ secrets.READER_TOKEN }}
 
       - uses: actions/setup-node@v6
         with:

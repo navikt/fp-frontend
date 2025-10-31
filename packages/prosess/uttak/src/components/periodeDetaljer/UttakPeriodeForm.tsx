@@ -369,6 +369,7 @@ export const UttakPeriodeForm = ({
             aktiviteter={sorterteAktiviteter}
             erOppfylt={!!erOppfylt}
             valgtPeriode={valgtPeriode}
+            erTilknyttetStortinget={erTilknyttetStortinget}
           />
         )}
         {erHovedsøkersPeriode && (

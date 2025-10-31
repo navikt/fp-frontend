@@ -3,7 +3,7 @@ import { createContext, type ReactElement, useContext, useEffect, useMemo, useSt
 import type { BehandlingFpSak, BrevOverstyring } from '@navikt/fp-types';
 
 type VedtakEditeringData = {
-  hentBrevOverstyring: () => Promise<BrevOverstyring>;
+  hentBrevOverstyring?: () => Promise<BrevOverstyring>;
   hentBrevOverstyringIsPending: boolean;
   mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
   harRedigertBrev: boolean;
@@ -20,7 +20,7 @@ export const VedtakEditeringProvider = ({
   children,
 }: {
   behandling: BehandlingFpSak;
-  hentBrevOverstyring: () => Promise<BrevOverstyring>;
+  hentBrevOverstyring?: () => Promise<BrevOverstyring>;
   hentBrevOverstyringIsPending: boolean;
   mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
   children: ReactElement;

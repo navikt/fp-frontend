@@ -69,11 +69,18 @@ const sjekkOmUtbetalingsgradEr0OmAvslått =
   };
 
 const sjekkOmUtbetalingsgradMårVæreHøyereEnn0 =
-  (intl: IntlShape, valgtPeriode: PeriodeSoker, samletUtbetalingsgradForAndreAktiviteter: number, erOppfylt: boolean) =>
+  (
+    intl: IntlShape,
+    valgtPeriode: PeriodeSoker,
+    samletUtbetalingsgradForAndreAktiviteter: number,
+    erOppfylt: boolean,
+    erTilknyttetStortinget: boolean,
+  ) =>
   (utbetalingsgrad: string): string | null => {
     const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0]?.stønadskontoType === '-';
     const erUttak = valgtPeriode.utsettelseType === '-' && !kontoIkkeSatt;
     if (
+      !erTilknyttetStortinget &&
       erUttak &&
       erOppfylt &&
       Number.parseFloat(utbetalingsgrad) <= 0 &&
@@ -168,6 +175,7 @@ interface Props {
   aktiviteter: PeriodeSokerAktivitet[];
   erOppfylt: boolean;
   valgtPeriode: PeriodeSoker;
+  erTilknyttetStortinget: boolean;
 }
 
 export const UttakAktiviteterTabell = ({
@@ -177,6 +185,7 @@ export const UttakAktiviteterTabell = ({
   aktiviteter,
   erOppfylt,
   valgtPeriode,
+  erTilknyttetStortinget,
 }: Props) => {
   const intl = useIntl();
 
@@ -311,6 +320,7 @@ export const UttakAktiviteterTabell = ({
                             valgtPeriode,
                             samletUtbetalingsgradForAndreAktiviteter,
                             erOppfylt,
+                            erTilknyttetStortinget,
                           ),
                           sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
                           sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),

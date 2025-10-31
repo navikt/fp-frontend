@@ -95,7 +95,7 @@ export const VedtakFellesPanel = ({
     formState: { isSubmitting },
   } = useFormContext<VedtakFormValues>();
 
-  const { harRedigertBrev } = useVedtakEditeringContext();
+  const { harRedigertBrev, hentBrevOverstyring } = useVedtakEditeringContext();
 
   if (!behandlingsresultat) {
     throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
@@ -168,7 +168,7 @@ export const VedtakFellesPanel = ({
           )}
         </div>
         <div>
-          {skalProdusereBrev && !isReadOnly && !harValgtÅRedigereVedtaksbrev && (
+          {hentBrevOverstyring && skalProdusereBrev && !isReadOnly && !harValgtÅRedigereVedtaksbrev && (
             <Link
               href="#"
               onClick={(e: React.MouseEvent) => {
