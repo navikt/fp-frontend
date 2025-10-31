@@ -57,7 +57,11 @@ const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling):
     : {};
 
   const tilBeslutterKriterie = valgtSaksliste.andreKriterier?.find(ak => ak.andreKriterierType === 'TIL_BESLUTTER');
-  const inkluderEllerEkskluder = tilBeslutterKriterie?.inkluder ? 'TA_MED' : 'FJERN';
+
+  let tilBeslutter: 'TA_MED_ALLE' | 'TA_MED' | 'FJERN' = 'TA_MED_ALLE';
+  if (tilBeslutterKriterie) {
+    tilBeslutter = tilBeslutterKriterie.inkluder ? 'TA_MED' : 'FJERN';
+  }
 
   return {
     sakslisteId: valgtSaksliste.sakslisteId,
@@ -68,7 +72,7 @@ const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling):
     fra: valgtSaksliste.sortering ? valgtSaksliste.sortering.fra?.toString() : undefined,
     til: valgtSaksliste.sortering ? valgtSaksliste.sortering.til?.toString() : undefined,
     erDynamiskPeriode: valgtSaksliste.sortering ? valgtSaksliste.sortering.erDynamiskPeriode : undefined,
-    tilBeslutter: tilBeslutterKriterie === undefined ? 'TA_MED_ALLE' : inkluderEllerEkskluder,
+    tilBeslutter,
     ...andreKriterierTyper,
     ...andreKriterierInkluder,
     ...behandlingTypes,
