@@ -6,7 +6,6 @@ import Header from '@editorjs/header';
 import EditorjsList from '@editorjs/list';
 import Paragraph from '@editorjs/paragraph';
 import edjsHTML from 'editorjs-html';
-// @ts-expect-error Bør laga ein typefil for denne, men funkar ikkje å legga den under @types
 import Undo from 'editorjs-undo';
 import debounce from 'lodash.debounce';
 
@@ -51,6 +50,19 @@ export const useEditorJs = (
 
   const lagreBrevDebouncer = useLagreBrevDebouncer();
 
+  const validerOgLagre = async () => {
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
+    const innhold = await editor.save();
+    const html = edjsHTML().parse(innhold);
+
+    if (refCurrentHtml.current !== html && erRedigertHtmlGyldig(html)) {
+      const redigertTekst = harPraksisUtsettelse
+        ? lagRedigerbartInnholdWrapper(html, undefined)
+        : lagRedigerbartInnholdWrapper(html, footer);
+      void mellomlagreOgHentPåNytt(redigertTekst);
+    }
+  };
+
   useEffect(() => {
     if (!refEditorJs.current && !refMounted.current) {
       refMounted.current = true;
@@ -80,19 +92,6 @@ export const useEditorJs = (
       }
     };
   }, []);
-
-  const validerOgLagre = async () => {
-    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
-    const innhold = await editor.save();
-    const html = edjsHTML().parse(innhold);
-
-    if (refCurrentHtml.current !== html && erRedigertHtmlGyldig(html)) {
-      const redigertTekst = harPraksisUtsettelse
-        ? lagRedigerbartInnholdWrapper(html, undefined)
-        : lagRedigerbartInnholdWrapper(html, footer);
-      void mellomlagreOgHentPåNytt(redigertTekst);
-    }
-  };
 
   const tilbakestillEndringer = async () => {
     const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);

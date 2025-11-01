@@ -35,7 +35,7 @@ const intl = createIntl(messages);
 
 export const LosAppIndexWrapper = () => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
-  const queryClient = useMemo(() => createQueryClient(getErrorHandler(addErrorMessage)), []);
+  const queryClient = useMemo(() => createQueryClient(getErrorHandler(addErrorMessage)), [addErrorMessage]);
 
   return (
     <RawIntlProvider value={intl}>

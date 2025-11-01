@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { type FieldValues, type Path, useFormContext, type UseFormTrigger } from 'react-hook-form';
 
 import debounce from 'lodash.debounce';
@@ -13,12 +13,9 @@ export const useDebounce = <VALUE, FORM_VALUES extends FieldValues>(
   const context = useFormContext<FORM_VALUES>();
   const validationTrigger = trigger || context.trigger;
 
-  const lagre = useCallback(
-    debounce((verdi: VALUE) => {
-      void validationTrigger(feltNavn).then(isValid => isValid && funksjon(verdi));
-    }, getTimeoutValue()),
-    [funksjon],
-  );
+  const lagre = debounce((verdi: VALUE) => {
+    void validationTrigger(feltNavn).then(isValid => isValid && funksjon(verdi));
+  }, getTimeoutValue());
 
   useEffect(() => () => lagre.cancel(), []);
 

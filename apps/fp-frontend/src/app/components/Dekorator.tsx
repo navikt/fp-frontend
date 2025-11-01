@@ -74,6 +74,7 @@ export const Dekorator = ({
     interneLenker.push({
       tekst: intl.formatMessage({ id: 'Dekorator.Avdelingsleder' }),
       callback: () =>
+        // eslint-disable-next-line react-hooks/immutability -- OK
         (globalThis.location.href = globalThis.location.href.replace(FPSAK_URL_NAME, AVDELINGSLEDER_URL_NAME)),
     });
   }
@@ -81,6 +82,7 @@ export const Dekorator = ({
     interneLenker.push({
       tekst: intl.formatMessage({ id: 'Dekorator.Journalforing' }),
       callback: () =>
+        // eslint-disable-next-line react-hooks/immutability -- OK
         (globalThis.location.href = globalThis.location.href.replace(FPSAK_URL_NAME, JOURNALFORING_URL_NAME)),
     });
   }
