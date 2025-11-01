@@ -132,6 +132,7 @@ export const OpptjeningFaktaPanel = ({
 
   useEffect(() => {
     const index = formVerdierForAlleAktiviteter.findIndex(a => a.erGodkjent === undefined);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setValgtAktivitetIndex(index !== -1 ? index : undefined);
   }, [formVerdierForAlleAktiviteter]);
 

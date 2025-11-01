@@ -59,6 +59,7 @@ export const Dekorator = ({
   interneLenker.push({
     tekst: intl.formatMessage({ id: 'Dekorator.Foreldrepenger' }),
     callback: () =>
+      // eslint-disable-next-line react-hooks/immutability -- OK
       (globalThis.location.href = globalThis.location.href.replace(JOURNALFORING_URL_NAME, FPSAK_URL_NAME)),
   });
 

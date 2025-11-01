@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
@@ -16,19 +16,17 @@ type Props = {
 export const BehandlingHenlagtPanel = ({ valgtProsessSteg, settProsessPanelMenyData }: Props) => {
   const intl = useIntl();
 
-  const [erPanelValgt, setPanelValgt] = useState(false);
+  const erPanelValgt = valgtProsessSteg === ID || valgtProsessSteg === 'default';
 
   useEffect(() => {
-    const erValgt = valgtProsessSteg === ID || valgtProsessSteg === 'default';
     settProsessPanelMenyData({
       id: ID,
       tekst: intl.formatMessage({ id: 'BehandlingHenlagtPanel.Header' }),
-      erAktiv: erValgt,
+      erAktiv: erPanelValgt,
       harÅpentAksjonspunkt: false,
       status: 'IKKE_VURDERT',
       skalVisesIMeny: true,
     });
-    setPanelValgt(erValgt);
   }, [valgtProsessSteg]);
 
   return (

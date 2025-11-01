@@ -146,6 +146,7 @@ const NotatKnapp = ({ oppgave, brukernavn }: { oppgave: Oppgave; brukernavn: str
         icon={<ChatElipsisIcon className={styles['image']} aria-hidden />}
         variant="tertiary-neutral"
       ></Button>
+      {/* eslint-disable-next-line react-hooks/refs */}
       <Popover open={openState} onClose={() => setOpenState(false)} anchorEl={buttonRef.current}>
         <Popover.Content>{lagFlyttetReservasjonPopover(oppgave.reservasjonStatus, brukernavn)}</Popover.Content>
       </Popover>

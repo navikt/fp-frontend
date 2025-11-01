@@ -7,20 +7,23 @@ import type { DecoratorFunction } from 'storybook/internal/types';
 export const withThemeDecorator: DecoratorFunction<ReactRenderer> = (Story, context) => {
   const theme = context.globals['theme'] as string;
 
-  useEffect(() => {
-    // Dette kan sikkert gjerast på ein bedre måte
-    const elements = document.getElementsByClassName('sb-show-main');
-    if (elements.length > 0) {
-      elements[0]!.setAttribute(
-        'style',
-        theme === 'dark' ? 'background: #0e151f !important' : 'background: #fff !important',
-      );
-    }
-  }, [theme]);
+  const Wrapper = () => {
+    useEffect(() => {
+      const elements = document.getElementsByClassName('sb-show-main');
+      if (elements.length > 0) {
+        elements[0]!.setAttribute(
+          'style',
+          theme === 'dark' ? 'background: #0e151f !important' : 'background: #fff !important',
+        );
+      }
+    }, [theme]);
 
-  return (
-    <Theme theme={theme === 'dark' ? 'dark' : 'light'}>
-      <Story />
-    </Theme>
-  );
+    return (
+      <Theme theme={theme === 'dark' ? 'dark' : 'light'}>
+        <Story />
+      </Theme>
+    );
+  };
+
+  return <Wrapper />;
 };
