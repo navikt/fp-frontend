@@ -25,7 +25,7 @@ export const BehandlingPaVent = ({
   skalIkkeViseModal = false,
 }: Props) => {
   const [manueltSkjult, setManueltSkjult] = useState(false);
-  const skjulModal = () => setManueltSkjult(false);
+  const skjulModal = () => setManueltSkjult(true);
 
   const skalViseModal = !skalIkkeViseModal && behandling.behandlingPåVent && !manueltSkjult;
 
