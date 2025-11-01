@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
@@ -24,8 +24,10 @@ export const BehandlingPaVent = ({
   erTilbakekreving = false,
   skalIkkeViseModal = false,
 }: Props) => {
-  const [skalViseModal, setVisModal] = useState(!skalIkkeViseModal && behandling.behandlingPåVent);
-  const skjulModal = () => setVisModal(false);
+  const [manueltSkjult, setManueltSkjult] = useState(false);
+  const skjulModal = () => setManueltSkjult(false);
+
+  const skalViseModal = !skalIkkeViseModal && behandling.behandlingPåVent && !manueltSkjult;
 
   const behandlingApi = useBehandlingApi(behandling);
 
@@ -38,12 +40,6 @@ export const BehandlingPaVent = ({
       }),
     onSuccess: () => opneSokeside(),
   });
-
-  useEffect(() => {
-    if (!skalIkkeViseModal) {
-      setVisModal(behandling.behandlingPåVent);
-    }
-  }, [behandling.versjon, skalIkkeViseModal]);
 
   const erManueltSattPaVent = behandling.aksjonspunkt
     .filter(erAksjonspunktÅpent)

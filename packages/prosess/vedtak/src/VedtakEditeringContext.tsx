@@ -30,6 +30,7 @@ export const VedtakEditeringProvider = ({
   );
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved endring av behandling
     setHarRedigertBrev(behandling.behandlingsresultat?.harRedigertVedtaksbrev || false);
   }, [behandling.uuid, behandling.versjon]);
 

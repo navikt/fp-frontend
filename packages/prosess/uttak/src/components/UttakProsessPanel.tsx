@@ -226,13 +226,20 @@ export const UttakProsessPanel = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<PeriodeSoker[]>();
 
   const [perioder, setPerioder] = useState<PeriodeSoker[]>(mellomlagretFormData ?? uttaksresultat.perioderSøker);
-  const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
-  const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
-
-  useEffect(() => () => setMellomlagretFormData(perioder), [perioder]);
 
   const perioderAnnenpart = getPerioderAnnenpart(uttaksresultat, annenForelderUttakEøs);
   const allePerioder = perioderAnnenpart.concat(perioder);
+
+  const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>(() => {
+    const index = allePerioder.findIndex(
+      period => erOrdinærPeriode(period) && period.periodeResultatType === 'MANUELL_BEHANDLING',
+    );
+    return index !== -1 ? index : undefined;
+  });
+
+  const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
+
+  useEffect(() => () => setMellomlagretFormData(perioder), [perioder]);
 
   const visPeriode = (per: (PeriodeSoker | AnnenforelderUttakEøsPeriode)[]) => {
     const index = per.findIndex(
@@ -244,10 +251,6 @@ export const UttakProsessPanel = ({
       setValgtPeriodeIndex(undefined);
     }
   };
-
-  useEffect(() => {
-    visPeriode(allePerioder);
-  }, []);
 
   const bekreftAksjonspunkter = () => {
     setIsSubmitting(true);

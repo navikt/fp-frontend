@@ -30,6 +30,7 @@ export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid, kanVeilede
   const erReservert = oppgaveForBehandling?.reservasjonStatus.erReservert;
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setErOppgaveReservert(erReservert || false);
   }, [erReservert]);
 

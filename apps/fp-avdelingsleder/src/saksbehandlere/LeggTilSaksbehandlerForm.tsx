@@ -73,7 +73,7 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
     return erLagtTilAllerede
       ? `${saksbehandler.navn} (${intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesAllerede' })})`
       : saksbehandler.navn;
-  }, [saksbehandlerStatus, saksbehandler, erLagtTilAllerede]);
+  }, [saksbehandlerStatus, saksbehandler, erLagtTilAllerede, intl]);
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={values => finnSaksbehandler({ brukerIdent: values.brukerIdent })}>

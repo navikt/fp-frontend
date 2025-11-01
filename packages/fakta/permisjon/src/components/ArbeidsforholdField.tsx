@@ -62,6 +62,9 @@ export const ArbeidsforholdField = ({
 
   const { inntektsmeldinger, inntekter } = arbeidOgInntekt;
 
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [openState, setOpenState] = useState(false);
+
   const arbeidsforhold = sorterteArbeidsforhold[index];
   if (!arbeidsforhold) {
     return null;
@@ -78,8 +81,6 @@ export const ArbeidsforholdField = ({
   const visArbeidsforholdId =
     sorterteArbeidsforhold.filter(a => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length > 1;
 
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const [openState, setOpenState] = useState(false);
   const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
 
   return (
@@ -209,6 +210,7 @@ export const ArbeidsforholdField = ({
                   <Popover
                     open={openState}
                     onClose={toggleHjelpetekst}
+                    /* eslint-disable react-hooks/refs */
                     anchorEl={buttonRef.current}
                     className={styles['hjelpetekst']}
                   >

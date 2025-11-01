@@ -84,6 +84,7 @@ export const FagsakProfileIndex = ({
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved valg av ny behandling
     setShowAll(!behandlingUuid);
   }, [behandlingUuid]);
 

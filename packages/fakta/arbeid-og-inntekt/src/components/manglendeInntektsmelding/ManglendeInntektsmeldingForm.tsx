@@ -106,6 +106,7 @@ export const ManglendeInntektsmeldingForm = ({
               <Popover
                 open={openState}
                 onClose={toggleHjelpetekst}
+                /* eslint-disable react-hooks/refs */
                 anchorEl={svgRef.current}
                 className={styles['hjelpetekst']}
               >

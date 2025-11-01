@@ -77,30 +77,22 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
   const idRef = useRef(valgtSakslisteId);
   const getSakslisteId = () => idRef.current;
 
-  const {
-    mutateAsync: pollEtterOppgaver,
-    data: tilBehandling = EMPTY_ARRAY,
-    isSuccess,
-    error: tilBehandlingError,
-  } = useMutation({
+  const { mutateAsync: pollEtterOppgaver, error: tilBehandlingError } = useMutation({
     mutationFn: (values: { oppgaveIder?: string }) =>
       hentOppgaver(valgtSakslisteId, getSakslisteId, values.oppgaveIder),
-  });
-
-  useEffect(() => {
-    void pollEtterOppgaver({ oppgaveIder: undefined });
-  }, []);
-
-  useEffect(() => {
-    if (isSuccess) {
+    onSuccess(tilBehandling = EMPTY_ARRAY) {
       setOppgaverTilBehandling(tilBehandling);
       if (oppgaverTilBehandling.length > 0) {
         setNyeBehandlinger(tilBehandling.filter(o => !oppgaverTilBehandling.some(ob => ob.id === o.id)));
       }
 
       void pollEtterOppgaver({ oppgaveIder: tilBehandling.map(o => o.id).join(',') });
-    }
-  }, [isSuccess]);
+    },
+  });
+
+  useEffect(() => {
+    void pollEtterOppgaver({ oppgaveIder: undefined });
+  }, []);
 
   useEffect(() => {
     // For å stoppe polling på den gamle saksid'en

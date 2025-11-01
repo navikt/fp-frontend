@@ -3,6 +3,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import pluginReact from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import vitest from 'eslint-plugin-vitest';
 import globals from 'globals';
@@ -45,6 +46,7 @@ export default [
   pluginReact.configs.flat.recommended,
   jsxA11y.flatConfigs.recommended,
   importPlugin.flatConfigs.recommended,
+  reactHooks.configs.flat.recommended,
   eslintConfigPrettier,
   {
     rules: {
@@ -89,7 +91,11 @@ export default [
       'local/describe-name-matches-filename': ERROR,
       '@typescript-eslint/no-unsafe-enum-comparison': OFF,
       '@typescript-eslint/no-misused-promises': OFF,
-      '@typescript-eslint/no-unsafe-call': OFF, // Denne feiler for .stories pga parameters
+      '@typescript-eslint/no-unsafe-call': ERROR,
+      'import/no-default-export': ERROR,
+      'react-hooks/rules-of-hooks': ERROR,
+      'react-hooks/exhaustive-deps': OFF,
+      'react-hooks/incompatible-library': OFF,
 
       // Note: you must disable the base rule as it can report incorrect errors
       'no-use-before-define': OFF,
@@ -122,9 +128,11 @@ export default [
     },
   },
   {
-    ignores: ['**/*.stories.tsx', 'eslint.config.mjs'],
+    files: ['**/*.stories.tsx', 'eslint.config.mjs'],
     rules: {
-      'import/no-default-export': ERROR,
+      '@typescript-eslint/no-unsafe-call': OFF, // Denne feiler for .stories pga parameters
+      'import/no-default-export': OFF,
+      'react-hooks/rules-of-hooks': OFF,
     },
   },
 ];
