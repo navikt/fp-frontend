@@ -234,7 +234,7 @@ export const UttakProsessPanel = ({
     const index = allePerioder.findIndex(
       period => erOrdinærPeriode(period) && period.periodeResultatType === 'MANUELL_BEHANDLING',
     );
-    return index !== -1 ? index : undefined;
+    return index === -1 ? undefined : index;
   });
 
   const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
