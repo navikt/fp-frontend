@@ -33,14 +33,12 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
   });
   const sorterTabellPåKolonne = (sorteringsnøkkel: TableHeaders) => {
     setTabellSortering(
-      tabellSortering && sorteringsnøkkel === tabellSortering.orderBy && tabellSortering.direction === 'descending'
+      sorteringsnøkkel === tabellSortering?.orderBy && tabellSortering.direction === 'descending'
         ? undefined
         : {
             orderBy: sorteringsnøkkel,
             direction:
-              tabellSortering &&
-              sorteringsnøkkel === tabellSortering.orderBy &&
-              tabellSortering.direction === 'ascending'
+              sorteringsnøkkel === tabellSortering?.orderBy && tabellSortering.direction === 'ascending'
                 ? 'descending'
                 : 'ascending',
           },

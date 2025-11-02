@@ -30,34 +30,28 @@ const getCorrectEmptyArbeidsForhold = (
   periodeTypeKode: UttakPeriodeType,
   stonadskonto: UttakStonadskontoer,
 ): string[] => {
-  const arbeidsForholdMedNullDagerIgjenArray: string[] = [];
-
-  let arbeidsforholdMedPositivSaldoFinnes = false;
-
   const konto = stonadskonto.stonadskontoer[periodeTypeKode];
+  const aktiviteter = konto?.aktivitetSaldoDtoList ?? [];
 
-  if (konto?.aktivitetSaldoDtoList) {
-    for (const item of konto.aktivitetSaldoDtoList) {
-      if (item.saldo === 0) {
-        if (item.aktivitetIdentifikator.arbeidsgiverReferanse) {
-          const arbeidsgiverOpplysninger =
-            arbeidsgiverOpplysningerPerId[item.aktivitetIdentifikator.arbeidsgiverReferanse];
-          arbeidsForholdMedNullDagerIgjenArray.push(arbeidsgiverOpplysninger?.navn ?? 'Fant ikke navn');
-        } else {
-          const navn = alleKodeverk['UttakArbeidType'].find(
-            k => k.kode === item.aktivitetIdentifikator.uttakArbeidType,
-          )?.navn;
-          if (navn) {
-            arbeidsForholdMedNullDagerIgjenArray.push(navn);
-          }
-        }
-      } else {
-        arbeidsforholdMedPositivSaldoFinnes = true;
+  if (aktiviteter.length === 0) return [];
+
+  const arbeidsforholdMedNullDager = aktiviteter
+    .filter(item => item.saldo === 0)
+    .map(item => {
+      const { arbeidsgiverReferanse, uttakArbeidType } = item.aktivitetIdentifikator;
+
+      if (arbeidsgiverReferanse) {
+        return arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]?.navn ?? 'Fant ikke navn';
       }
-    }
-  }
 
-  return arbeidsforholdMedPositivSaldoFinnes ? arbeidsForholdMedNullDagerIgjenArray : [];
+      const navn = alleKodeverk['UttakArbeidType'].find(k => k.kode === uttakArbeidType)?.navn;
+      return navn ?? null;
+    })
+    .filter((navn): navn is string => !!navn);
+
+  const harPositivSaldo = aktiviteter.some(item => item.saldo > 0);
+
+  return harPositivSaldo ? arbeidsforholdMedNullDager : [];
 };
 
 const erEøsPeriode = (

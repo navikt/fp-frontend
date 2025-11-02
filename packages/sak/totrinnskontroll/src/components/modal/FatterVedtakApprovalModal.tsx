@@ -33,7 +33,7 @@ const getInfoTextCode = (
   if (harSammeResultatSomOriginalBehandling) {
     return 'FatterVedtakApprovalModal.UendretUtfall';
   }
-  if (behandlingsresultat && behandlingsresultat.type === 'AVSLÅTT') {
+  if (behandlingsresultat?.type === 'AVSLÅTT') {
     return 'FatterVedtakApprovalModal.IkkeInnvilget';
   }
   if (isOpphor) {

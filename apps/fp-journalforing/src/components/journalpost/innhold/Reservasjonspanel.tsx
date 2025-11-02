@@ -16,7 +16,7 @@ type Props = Readonly<{
  */
 export const Reservasjonspanel = ({ oppgave, reserverOppgave, ansattIdent }: Props) => {
   const reserverOppgaveAction = () => {
-    const reservasjonFor = !oppgave.reservertAv ? ansattIdent : '';
+    const reservasjonFor = oppgave.reservertAv ? '' : ansattIdent;
     reserverOppgave({
       journalpostId: oppgave.journalpostId,
       reserverFor: reservasjonFor,

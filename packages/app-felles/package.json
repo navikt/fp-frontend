@@ -13,7 +13,9 @@
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
     "prettier": "prettier --write src",
-    "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
+    "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
+    "build-storybook": "storybook build -o .storybook-static-build",
+    "storybook": "storybook dev --quiet -p 7001"
   },
   "dependencies": {
     "@navikt/ds-react": "7.32.1",
@@ -25,9 +27,13 @@
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
+    "@storybook/react": "9.1.10",
+    "@storybook/react-vite": "9.1.10",
     "@testing-library/react": "16.3.0",
     "eslint": "9.37.0",
+    "storybook": "9.1.10",
     "typescript": "5.9.3",
+    "vite": "7.1.10",
     "vitest": "3.2.4"
   }
 }

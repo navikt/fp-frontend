@@ -44,10 +44,10 @@ const erPeriodeOppfylt = (
   if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === 'MANUELL_BEHANDLING') {
     // Litt flaky. Bør sende med kodeverket og slå opp utfallType
     const kodeverkKode = utfallKoder.find(kodeItem => kodeItem.kode === valgtPeriode.periodeResultatÅrsak);
-    if ((kodeverkKode && kodeverkKode.utfallType === 'INNVILGET') || valgtPeriode.oppholdÅrsak !== '-') {
+    if (kodeverkKode?.utfallType === 'INNVILGET' || valgtPeriode.oppholdÅrsak !== '-') {
       return true;
     }
-    if (kodeverkKode && kodeverkKode.utfallType === 'AVSLÅTT') {
+    if (kodeverkKode?.utfallType === 'AVSLÅTT') {
       return false;
     }
     return undefined;
