@@ -1,7 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 
-import * as stories from './Dekorator.stories';
+import * as stories from './FellesDekorator.stories';
 
 const { Default, VisFeilmeldingSomLiggIUrl, VisTekniskFeilmelding, SkjulFeilmelding } = composeStories(stories);
 

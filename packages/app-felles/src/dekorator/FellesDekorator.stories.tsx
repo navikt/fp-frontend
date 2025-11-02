@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/internal/actions';
 
-import type { DekoratorLenke } from '../../../sak/dekorator/src/typer/dekoratorLenke';
+import type { DekoratorLenke } from '@navikt/fp-sak-dekorator';
+
 import { FellesDekorator } from './FellesDekorator';
 
 const interneLenker: DekoratorLenke[] = [
