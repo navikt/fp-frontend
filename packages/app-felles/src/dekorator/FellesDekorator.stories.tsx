@@ -19,7 +19,7 @@ const meta = {
     layout: 'fullscreen',
   },
   args: {
-    tittel: 'Dette er en tittel',
+    tittel: 'Svangerskap, fødsel og adopsjon',
     interneLenker,
     ansattnavn: 'Ola Nordmann',
     queryStrings: {

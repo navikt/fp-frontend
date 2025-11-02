@@ -9,7 +9,7 @@ describe('FellesDekorator', () => {
   it('skal vise dekorator', async () => {
     render(<Default />);
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
-    expect(await screen.findByText('Sara Saksbehandler')).toBeInTheDocument();
+    expect(await screen.findByText('Ola Nordmann')).toBeInTheDocument();
   });
 
   it('skal vise feilmeldinger som ligger i URL', async () => {
@@ -30,7 +30,7 @@ describe('FellesDekorator', () => {
     render(<SkjulFeilmelding />);
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
-    expect(await screen.findByText('Sara Saksbehandler')).toBeInTheDocument();
+    expect(await screen.findByText('Ola Nordmann')).toBeInTheDocument();
     expect(screen.queryByText('test is undefined')).not.toBeInTheDocument();
   });
 });
