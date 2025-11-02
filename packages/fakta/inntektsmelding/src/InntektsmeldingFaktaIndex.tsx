@@ -43,11 +43,11 @@ export const InntektsmeldingFaktaIndex = ({
   const [sort, setSort] = useState<SortState | undefined>({ orderBy: 'innsendingstidspunkt', direction: 'descending' });
   const handleSort = (sortKey: TableHeaders) => {
     setSort(
-      sort && sortKey === sort.orderBy && sort.direction === 'descending'
+      sortKey === sort?.orderBy && sort.direction === 'descending'
         ? undefined
         : {
             orderBy: sortKey,
-            direction: sort && sortKey === sort.orderBy && sort.direction === 'ascending' ? 'descending' : 'ascending',
+            direction: sortKey === sort?.orderBy && sort.direction === 'ascending' ? 'descending' : 'ascending',
           },
     );
   };

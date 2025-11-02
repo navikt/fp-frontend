@@ -54,7 +54,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
   const erRevurderingTilbakekrevingKlage =
     behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
   const erRevurderingTilbakekrevingFeilBeløpBortfalt =
-    behandling.førsteÅrsak && 'RE_FEILUTBETALT_BELØP_REDUSERT' === behandling.førsteÅrsak.behandlingArsakType;
+    behandling.førsteÅrsak?.behandlingArsakType === 'RE_FEILUTBETALT_BELØP_REDUSERT';
 
   const api = useBehandlingApi(behandling);
 
@@ -95,7 +95,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
             kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
             fetchPreviewVedtaksbrev={forhandsvisVedtaksbrev}
             erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage ?? false}
-            erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt ?? false}
+            erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
             {...standardPanelProps}
             behandlingUuid={behandling.uuid}
           />

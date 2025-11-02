@@ -13,7 +13,7 @@ import styles from './brukerAvsenderPanel.module.css';
 
 const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
   const avsenderId = journalpost.avsender.id;
-  if (avsenderId && avsenderId.length === 9) {
+  if (avsenderId.length === 9) {
     return <Buildings3Icon className={styles['ikon']} />;
   }
   return <SilhouetteIcon className={styles['ikon']} />;

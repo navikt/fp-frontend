@@ -38,7 +38,7 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Adopsjon' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {familiehendelse?.adopsjon && søknad && søknad.soknadType === 'ST-002' ? (
+      {familiehendelse?.adopsjon && søknad?.soknadType === 'ST-002' ? (
         <AdopsjonFaktaIndex
           adopsjon={familiehendelse.adopsjon}
           soknad={søknad}

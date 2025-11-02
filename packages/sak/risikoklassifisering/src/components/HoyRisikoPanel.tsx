@@ -30,7 +30,7 @@ export const HoyRisikoPanel = ({
   faresignalVurderinger,
 }: Props) => (
   <VStack gap="space-16">
-    {aksjonspunkt && aksjonspunkt.status === 'OPPR' && (
+    {aksjonspunkt?.status === 'OPPR' && (
       <AksjonspunktHelpTextHTML>
         <FormattedMessage id="Risikopanel.Panel.Tittel" />
       </AksjonspunktHelpTextHTML>

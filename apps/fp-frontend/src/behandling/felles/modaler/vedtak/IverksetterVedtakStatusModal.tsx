@@ -21,7 +21,7 @@ interface Props {
  */
 export const IverksetterVedtakStatusModal = ({ lukkModal, visModal, behandlingsresultat }: Props) => {
   const intl = useIntl();
-  const erVedtakAvslatt = behandlingsresultat && behandlingsresultat.type === 'AVSLÅTT';
+  const erVedtakAvslatt = behandlingsresultat?.type === 'AVSLÅTT';
   const imageAltText = intl.formatMessage({
     id: erVedtakAvslatt ? 'IverksetterVedtakStatusModal.Avslatt' : 'IverksetterVedtakStatusModal.Innvilget',
   });
