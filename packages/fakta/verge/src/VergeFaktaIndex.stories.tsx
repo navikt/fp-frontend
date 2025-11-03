@@ -6,24 +6,13 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
+  lagAksjonspunkt,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { VergeFaktaIndex } from './VergeFaktaIndex';
-
-const aksjonspunkterForPanel: Aksjonspunkt[] = [
-  {
-    definisjon: AksjonspunktKode.AVKLAR_VERGE,
-    status: 'OPPR',
-    kanLoses: true,
-    toTrinnsBehandling: false,
-    aksjonspunktType: 'MANU',
-    erAktivt: true,
-  },
-];
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -34,7 +23,7 @@ const meta = {
   component: VergeFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    aksjonspunkterForPanel,
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_VERGE)],
     alleKodeverk: { ...alleKodeverk, ...alleKodeverkTilbakekreving },
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AVKLAR_VERGE]: merknaderFraBeslutter,

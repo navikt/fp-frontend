@@ -10,6 +10,7 @@ import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
   getIntlDecorator,
+  lagAksjonspunkt,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
@@ -78,14 +79,10 @@ const FAGSAK = {
       kontrollResultat: {
         kontrollresultat: 'HOY',
       },
-      risikoAksjonspunkt: {
-        definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
-        status: 'OPPR',
-        toTrinnsBehandling: false,
-        aksjonspunktType: '-',
+      risikoAksjonspunkt: lagAksjonspunkt(AksjonspunktKode.VURDER_FARESIGNALER, {
         kanLoses: false,
         erAktivt: false,
-      },
+      }),
 
       opprettet: '',
 

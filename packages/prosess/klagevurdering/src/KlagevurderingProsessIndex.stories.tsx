@@ -4,8 +4,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { KlageVurdering } from '@navikt/fp-types';
 
 import { type TransformedValues } from './components/nfp/BehandleKlageFormNfp';
 import type { KlagevurderingForhåndsvisData } from './components/nfp/PreviewKlageLink';
@@ -105,11 +110,7 @@ export const OpphevIKlageNk: Story = {
 
 export const KlagevurderingMedAksjonspunktNfp: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP)],
     klageVurdering: {
       klageFormkravResultatKA: {
         avvistArsaker: ['IKKE_KONKRET'],

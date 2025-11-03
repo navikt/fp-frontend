@@ -4,25 +4,15 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
+  lagAksjonspunkt,
   type PanelDataArgs,
   type PanelOverstyringContextArgs,
   withMellomlagretFormData,
   withPanelData,
   withPanelOverstyring,
 } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
-
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: false,
-  aksjonspunktType: 'MANU',
-  vilkarType: 'FP_VK_1',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -94,12 +84,7 @@ export const Default: Story = {};
 
 export const APTerminbekreftelse: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
-      },
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SJEKK_TERMINBEKREFTELSE)],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: merknaderFraBeslutter,
     },
@@ -163,7 +148,7 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
         barn: [],
       },
     },
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL)],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
@@ -206,7 +191,7 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
         ],
       },
     },
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL)],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
@@ -255,7 +240,7 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
         ],
       },
     },
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL)],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
@@ -264,7 +249,7 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
 
 export const APSjekkManglendeFødselUtenTermindatoFraSøknad = {
   args: {
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL)],
     fødsel: {
       søknad: {
         barn: [
@@ -308,7 +293,7 @@ export const APSjekkManglendeFødselUtenTermindatoFraSøknad = {
 export const APSjekkManglendeFødselUtførtOgUtført: Story = {
   args: {
     isReadOnly: true,
-    aksjonspunkterForPanel: [{ ...aksjonspunktDefault, status: 'UTFO', begrunnelse: 'Dette er en begrunnelse' }],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL, { status: 'UTFO' })],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
@@ -385,13 +370,10 @@ export const OverstyrtSettSomOverstyrer: Story = {
     initialToggleState: true,
     isReadOnly: false,
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL, {
         status: 'UTFO',
         begrunnelse: 'Denne saken har blitt overstyrt',
-        kanLoses: false,
-      },
+      }),
     ],
   },
 };
@@ -402,13 +384,10 @@ export const OverstyrtSettSomSBH: Story = {
     initialToggleState: true,
     isReadOnly: false,
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL, {
         status: 'UTFO',
         begrunnelse: 'Denne saken har blitt overstyrt',
-        kanLoses: false,
-      },
+      }),
     ],
   },
 };

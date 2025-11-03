@@ -4,8 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt } from '@navikt/fp-types';
+import { alleKodeverk, lagAksjonspunkt } from '@navikt/fp-storybook-utils';
 
 import { RisikoklassifiseringSakIndex } from './RisikoklassifiseringSakIndex';
 import type { AvklartRisikoklassifiseringAp } from './types/AvklartRisikoklassifiseringAp';
@@ -51,10 +50,7 @@ export const LavRisikoklassifisering: Story = {
 
 export const HøyRisikoklassifisering: Story = {
   args: {
-    aksjonspunkt: {
-      definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
-      status: 'OPPR',
-    } as Aksjonspunkt,
+    aksjonspunkt: lagAksjonspunkt(AksjonspunktKode.VURDER_FARESIGNALER),
     risikoklassifisering: {
       kontrollresultat: 'HOY',
       medlFaresignaler: {

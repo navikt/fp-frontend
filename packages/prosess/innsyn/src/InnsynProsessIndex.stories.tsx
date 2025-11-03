@@ -3,8 +3,13 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, BehandlingFpSak, Innsyn, InnsynDokument } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { BehandlingFpSak, Innsyn, InnsynDokument } from '@navikt/fp-types';
 
 import { InnsynProsessIndex } from './InnsynProsessIndex';
 
@@ -13,15 +18,6 @@ const defaultBehandling = {
   versjon: 1,
   behandlingPåVent: false,
 } as BehandlingFpSak;
-
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_INNSYN,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: false,
-  aksjonspunktType: 'MANU',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'prosess/innsyn/prosess-innsyn',
@@ -47,7 +43,7 @@ type Story = StoryObj<typeof meta>;
 export const PanelForVurderingAvInnsyn: Story = {
   args: {
     behandling: defaultBehandling,
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_INNSYN)],
     innsyn: {
       dokumenter: [] as InnsynDokument[],
       vedtaksdokumentasjon: [
@@ -68,11 +64,9 @@ export const InnsynSattPaVent: Story = {
       fristBehandlingPåVent: '2021-12-25',
     },
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
+      lagAksjonspunkt(AksjonspunktKode.VURDER_INNSYN, {
         status: 'UTFO',
-        begrunnelse: 'Dette er en begrunnelse',
-      },
+      }),
     ],
     isReadOnly: true,
     innsyn: {

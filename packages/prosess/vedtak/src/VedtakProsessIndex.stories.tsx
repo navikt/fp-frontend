@@ -5,6 +5,7 @@ import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
+  lagAksjonspunkt,
   lagVilkår,
   type PanelDataArgs,
   withMellomlagretFormData,
@@ -12,7 +13,6 @@ import {
   withRouter,
 } from '@navikt/fp-storybook-utils';
 import type {
-  Aksjonspunkt,
   BehandlingFpSak,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
@@ -26,14 +26,7 @@ import redigertInnhold from '../.storybook/brevmal/redigertInnhold.html?raw';
 import { VedtakEditeringProvider } from './VedtakEditeringContext';
 import { VedtakProsessIndex } from './VedtakProsessIndex';
 
-const defaultAksjonspunkt: Aksjonspunkt = {
-  definisjon: AksjonspunktKode.FORESLÅ_VEDTAK,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: false,
-  aksjonspunktType: 'AUTO',
-  erAktivt: true,
-};
+const defaultAksjonspunkt = lagAksjonspunkt(AksjonspunktKode.FORESLÅ_VEDTAK);
 
 const defaultBehandling: BehandlingFpSak = {
   uuid: '1',
@@ -283,36 +276,18 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
   args: {
     aksjonspunkterForPanel: [
       defaultAksjonspunkt,
-      {
-        ...defaultAksjonspunkt,
-        definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK,
-        status: 'OPPR',
-
+      lagAksjonspunkt(AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK, {
         kanLoses: false,
-        toTrinnsBehandling: true,
-      },
-      {
-        ...defaultAksjonspunkt,
-        definisjon: AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK,
-        status: 'OPPR',
-
+      }),
+      lagAksjonspunkt(AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK, {
         kanLoses: false,
-      },
-      {
-        ...defaultAksjonspunkt,
-        definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK,
-        status: 'OPPR',
-
+      }),
+      lagAksjonspunkt(AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK, {
         kanLoses: false,
-      },
-      {
-        ...defaultAksjonspunkt,
-        definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-        status: 'OPPR',
-
+      }),
+      lagAksjonspunkt(AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST, {
         kanLoses: false,
-        toTrinnsBehandling: true,
-      },
+      }),
     ],
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {
@@ -333,21 +308,14 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
   args: {
     aksjonspunkterForPanel: [
       defaultAksjonspunkt,
-      {
-        ...defaultAksjonspunkt,
-        definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK,
-        status: 'OPPR',
+      lagAksjonspunkt(AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK, {
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: false,
-        toTrinnsBehandling: true,
-      },
-      {
-        ...defaultAksjonspunkt,
-        definisjon: AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK,
-        status: 'OPPR',
+      }),
+      lagAksjonspunkt(AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK, {
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: false,
-      },
+      }),
     ],
     oppgaver: [
       {

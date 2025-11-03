@@ -3,8 +3,13 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, BehandlingFpSak, Soknad } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { ArbeidsgiverOpplysningerPerId, BehandlingFpSak, Soknad } from '@navikt/fp-types';
 
 import { SokersOpplysningspliktVilkarProsessIndex } from './SokersOpplysningspliktVilkarProsessIndex';
 
@@ -44,12 +49,7 @@ type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunkt: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU,
-        status: 'OPPR',
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU)],
     status: 'IKKE_VURDERT',
   },
 };
@@ -57,12 +57,11 @@ export const ÅpentAksjonspunkt: Story = {
 export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU,
+      lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU, {
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
-      },
-    ] as Aksjonspunkt[],
+      }),
+    ],
     isReadOnly: true,
     isSubmittable: false,
     status: 'OPPFYLT',
@@ -79,12 +78,11 @@ export const AvslåttVilkår: Story = {
       },
     } as BehandlingFpSak,
     aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU,
+      lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU, {
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
-      },
-    ] as Aksjonspunkt[],
+      }),
+    ],
     isReadOnly: true,
     isSubmittable: false,
     status: 'IKKE_OPPFYLT',

@@ -3,8 +3,13 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { BesteberegningFaktaIndex } from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
@@ -24,16 +29,6 @@ const arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId = {
     fødselsdato: '1943-03-03',
   },
 };
-
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_INNSYN,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: false,
-  aksjonspunktType: 'MANU',
-  vilkarType: 'FP_VK_41',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'fakta/fakta-besteberegning',
@@ -58,12 +53,7 @@ export const BesteberegningMedDagpengerOgArbeid: Story = {
 export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt: Story = {
   args: {
     beregningsgrunnlag: scenarioBG,
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.UTGÅTT_5048,
-      },
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5048)],
   },
 };
 
@@ -71,12 +61,10 @@ export const BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent: Story 
   args: {
     beregningsgrunnlag: scenarioBG,
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.UTGÅTT_5048,
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5048, {
         status: 'UTFO',
         begrunnelse: 'Min begrunnelse for at besteberegningen er feil',
-      },
+      }),
     ],
   },
 };
@@ -84,11 +72,6 @@ export const BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent: Story 
 export const BesteberegningMedAvvik: Story = {
   args: {
     beregningsgrunnlag: scenarioBG,
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.UTGÅTT_5048,
-      },
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5048)],
   },
 };

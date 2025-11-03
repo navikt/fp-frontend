@@ -4,8 +4,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { BehandlingFpSak } from '@navikt/fp-types';
 
 import { VarselOmRevurderingProsessIndex } from './VarselOmRevurderingProsessIndex';
 
@@ -16,18 +21,11 @@ const defaultBehandling = {
   type: 'BT-002',
 } as BehandlingFpSak;
 
-const aksjonspunkterForPanel = [
-  {
-    definisjon: AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
-    status: 'OPPR',
-  },
-] as Aksjonspunkt[];
-
 const meta = {
   component: VarselOmRevurderingProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    aksjonspunkterForPanel,
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VARSEL_REVURDERING_MANUELL)],
     previewCallback: action('button-click'),
   },
   render: args => <VarselOmRevurderingProsessIndex {...args} />,

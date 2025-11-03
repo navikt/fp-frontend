@@ -3,8 +3,13 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { type Aksjonspunkt, AksjonspunktÅrsak } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import { AksjonspunktÅrsak } from '@navikt/fp-types';
 
 import { PermisjonFaktaIndex } from './PermisjonFaktaIndex';
 
@@ -23,6 +28,9 @@ const meta = {
   title: 'fakta/fakta-permisjon',
   component: PermisjonFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
+  args: {
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO)],
+  },
   render: args => <PermisjonFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof PermisjonFaktaIndex>>;
 export default meta;
@@ -31,12 +39,6 @@ type Story = StoryObj<typeof meta>;
 
 export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
-        status: 'OPPR',
-      } as Aksjonspunkt,
-    ],
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
@@ -125,12 +127,6 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
 
 export const FlereArbeidsforhold: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: 'OPPR',
-      },
-    ] as Aksjonspunkt[],
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
@@ -279,12 +275,6 @@ export const FlereArbeidsforhold: Story = {
 
 export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: 'OPPR',
-      },
-    ] as Aksjonspunkt[],
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: false,
@@ -385,12 +375,6 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
 
 export const VisFødselsdatoNårPrivatperson: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
-        status: 'OPPR',
-      } as Aksjonspunkt,
-    ],
     arbeidsgiverOpplysningerPerId: {
       910909088: {
         erPrivatPerson: true,

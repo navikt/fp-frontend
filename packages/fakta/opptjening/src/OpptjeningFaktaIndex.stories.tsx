@@ -3,8 +3,13 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningFaktaIndex } from './OpptjeningFaktaIndex';
 
@@ -37,23 +42,10 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: false,
-  aksjonspunktType: 'MANU',
-  vilkarType: 'FP_VK_23',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
-
 export const MedAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-      },
+      lagAksjonspunkt(AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING),
     ],
     opptjening: {
       fastsattOpptjening: {
@@ -189,10 +181,7 @@ export const UtenAksjonspunkt: Story = {
 export const MedToLikePerioderForSammeAktivitetstype: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-      },
+      lagAksjonspunkt(AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING)
     ],
     opptjening: {
       fastsattOpptjening: {
@@ -248,10 +237,7 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
 export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-      },
+      lagAksjonspunkt(AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING)
     ],
     opptjening: {
       fastsattOpptjening: {

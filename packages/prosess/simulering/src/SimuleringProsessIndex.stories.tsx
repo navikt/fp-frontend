@@ -4,13 +4,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type {
-  Aksjonspunkt,
-  ArbeidsgiverOpplysningerPerId,
-  SimuleringResultat,
-  TilbakekrevingValg,
-} from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { ArbeidsgiverOpplysningerPerId, SimuleringResultat, TilbakekrevingValg } from '@navikt/fp-types';
 
 import { SimuleringProsessIndex } from './SimuleringProsessIndex';
 
@@ -134,37 +134,22 @@ type Story = StoryObj<typeof meta>;
 
 export const AksjonspunktVurderFeilutbetaling: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
-        status: 'OPPR',
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING)],
   },
 };
 
 export const AksjonspunktKontrollerEtterbetaling: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
-        status: 'OPPR',
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER)],
   },
 };
 
 export const AksjonspunktVurderFeilutbetalingOgEtterbetaling: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
-        status: 'OPPR',
-      },
-      {
-        definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
-      },
-    ] as Aksjonspunkt[],
+      lagAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING),
+      lagAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER),
+    ],
   },
 };
 

@@ -3,8 +3,13 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, BehandlingFpSak, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { BehandlingFpSak, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import { SoknadsfristVilkarProsessIndex } from './SoknadsfristVilkarProsessIndex';
 
@@ -41,13 +46,7 @@ type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunkt: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
-        status: 'OPPR',
-        vilkarType: 'FP_VK_3',
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET)],
     isReadOnly: false,
     status: 'IKKE_VURDERT',
   },
@@ -56,13 +55,12 @@ export const ÅpentAksjonspunkt: Story = {
 export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
+     lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
-        vilkarType: 'FP_VK_3',
-      },
-    ] as Aksjonspunkt[],
+      })
+    ],
     isReadOnly: true,
     isSubmittable: false,
     status: 'OPPFYLT',
@@ -79,13 +77,11 @@ export const AvslåttVilkår: Story = {
       },
     } as BehandlingFpSak,
     aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
+      lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET, {
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
-        vilkarType: 'FP_VK_3',
-      },
-    ] as Aksjonspunkt[],
+      }),
+    ],
     isReadOnly: true,
     isSubmittable: false,
     status: 'IKKE_OPPFYLT',

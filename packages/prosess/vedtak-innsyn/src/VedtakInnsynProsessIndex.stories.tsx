@@ -4,22 +4,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
 
 import { VedtakInnsynProsessIndex } from './VedtakInnsynProsessIndex';
-
-const defaultAksjonspunkter = [
-  {
-    definisjon: AksjonspunktKode.VURDER_INNSYN,
-    status: 'UTFO',
-    begrunnelse: 'Dette er utført',
-  },
-  {
-    definisjon: AksjonspunktKode.FORESLÅ_VEDTAK,
-    status: 'OPPR',
-  },
-] as Aksjonspunkt[];
 
 const meta = {
   title: 'prosess/innsyn/prosess-vedtak-innsyn',
@@ -27,7 +19,10 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     previewCallback: action('button-click'),
-    aksjonspunkterForPanel: defaultAksjonspunkter,
+    aksjonspunkterForPanel: [
+      lagAksjonspunkt(AksjonspunktKode.VURDER_INNSYN, { status: 'UTFO', begrunnelse: 'Dette er utført' }),
+      lagAksjonspunkt(AksjonspunktKode.FORESLÅ_VEDTAK),
+    ],
     alleDokumenter: [
       {
         journalpostId: '2',
@@ -94,12 +89,11 @@ export const PanelForAvvistVedtakReadonly: Story = {
   args: {
     isReadOnly: true,
     aksjonspunkterForPanel: [
-      defaultAksjonspunkter[0]!,
-      {
-        ...defaultAksjonspunkter[1]!,
+      lagAksjonspunkt(AksjonspunktKode.VURDER_INNSYN, { status: 'UTFO', begrunnelse: 'Dette er utført' }),
+      lagAksjonspunkt(AksjonspunktKode.FORESLÅ_VEDTAK, {
         status: 'UTFO',
         begrunnelse: 'Dette er en vurdering',
-      },
+      }),
     ],
     innsyn: {
       dokumenter: [

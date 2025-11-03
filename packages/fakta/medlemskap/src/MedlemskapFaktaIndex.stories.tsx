@@ -4,8 +4,14 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { type Aksjonspunkt, type Medlemskap, type Soknad } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  lagVilkår,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import { type Medlemskap, type Soknad } from '@navikt/fp-types';
 
 import { MedlemskapFaktaIndex } from './MedlemskapFaktaIndex';
 
@@ -39,16 +45,6 @@ const vilkårForPanel = [
     vilkarStatus: 'OPPFYLT',
   }),
 ];
-
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: true,
-  aksjonspunktType: 'MANU',
-  vilkarType: 'FP_VK_2',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'fakta/fakta-medlemskap-v3',
@@ -195,7 +191,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
 export const Default: Story = {
   args: {
     medlemskap: lagMedlemskap({}),
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET)],
   },
 };
 
@@ -204,12 +200,7 @@ export const ForutgåendeMedlemskap: Story = {
     medlemskap: lagMedlemskap({
       avvik: ['BOSATT_UTENLANDSADRESSE'],
     }),
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-      },
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR)],
   },
 };
 
@@ -252,7 +243,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
         utlandsoppholdEtter: [],
       } as Soknad['oppgittTilknytning'],
     } as Soknad,
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET)],
   },
 };
 
@@ -267,13 +258,10 @@ export const TidligereVurderingAvMedlemskapMedEtAvvik: Story = {
       },
     }),
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+      lagAksjonspunkt(AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET, {
         status: 'UTFO',
         begrunnelse: 'Søker har bodd i Gautemala siden 10.09.2024 ',
-        kanLoses: false,
-      },
+      }),
     ],
   },
 };
@@ -317,12 +305,9 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
       },
     }),
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.UTGÅTT_5053,
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5053, {
         status: 'UTFO',
-        kanLoses: false,
-      },
+      }),
     ],
   },
 };
@@ -344,12 +329,9 @@ export const LegacyVurdertInngangsvilkårMedlemskap: Story = {
       },
     }),
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.UTGÅTT_5023,
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5023, {
         status: 'UTFO',
-        kanLoses: false,
-      },
+      }),
     ],
   },
 };

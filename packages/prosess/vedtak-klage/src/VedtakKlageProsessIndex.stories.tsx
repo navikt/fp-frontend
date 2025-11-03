@@ -4,8 +4,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, BehandlingFpSak, KlageVurdering } from '@navikt/fp-types';
+import { lagAksjonspunkt, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import type { BehandlingFpSak, KlageVurdering } from '@navikt/fp-types';
 
 import { VedtakKlageProsessIndex } from './VedtakKlageProsessIndex';
 
@@ -18,17 +18,6 @@ const behandling = {
   behandlingPåVent: false,
 } as BehandlingFpSak;
 
-const aksjonspunkterForPanel: Aksjonspunkt[] = [
-  {
-    definisjon: AksjonspunktKode.FORESLÅ_VEDTAK,
-    status: 'OPPR',
-    kanLoses: true,
-    toTrinnsBehandling: false,
-    aksjonspunktType: 'MANU',
-    erAktivt: true,
-  },
-];
-
 const meta = {
   title: 'prosess/klage/prosess-vedtak-klage',
   component: VedtakKlageProsessIndex,
@@ -36,7 +25,7 @@ const meta = {
   args: {
     previewVedtakCallback: action('button-click'),
     behandling,
-    aksjonspunkterForPanel,
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.FORESLÅ_VEDTAK)],
   },
   render: args => <VedtakKlageProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakKlageProsessIndex>>;

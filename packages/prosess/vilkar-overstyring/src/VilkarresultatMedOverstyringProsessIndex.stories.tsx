@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
+  lagAksjonspunkt,
   lagVilkår,
   type PanelDataArgs,
   type PanelOverstyringContextArgs,
@@ -70,12 +71,9 @@ export const OverstyringErUtførtForMedlemskap: Story = {
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
-        {
-          definisjon: AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+        lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET, {
           status: 'UTFO',
-          kanLoses: false,
-          begrunnelse: 'Dette er en begrunnelse',
-        },
+        }),
       ],
     } as BehandlingFpSak,
     status: 'IKKE_OPPFYLT',
@@ -108,12 +106,9 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
-        {
-          definisjon: AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+        lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR, {
           status: 'UTFO',
-          kanLoses: false,
-          begrunnelse: 'Dette er en begrunnelse',
-        },
+        }),
       ],
     } as BehandlingFpSak,
     status: 'IKKE_OPPFYLT',
@@ -140,12 +135,9 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
         avslagsarsak: '1002',
       },
       aksjonspunkt: [
-        {
-          definisjon: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
+        lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET, {
           status: 'UTFO',
-          kanLoses: false,
-          begrunnelse: 'Dette er en begrunnelse',
-        } as Aksjonspunkt,
+        }),
       ],
     } as BehandlingFpSak,
     status: 'IKKE_OPPFYLT',
@@ -179,12 +171,9 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
-        {
-          definisjon: AksjonspunktKode.UTGÅTT_6012,
+        lagAksjonspunkt(AksjonspunktKode.UTGÅTT_6012, {
           status: 'UTFO',
-          kanLoses: false,
-          begrunnelse: 'Dette er en begrunnelse',
-        },
+        }),
       ],
     } as BehandlingFpSak,
     status: 'OPPFYLT',

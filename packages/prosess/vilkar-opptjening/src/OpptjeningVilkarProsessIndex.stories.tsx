@@ -3,8 +3,14 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Opptjening } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  lagVilkår,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { Opptjening } from '@navikt/fp-types';
 
 import { opptjeningAktivitetKlassifisering } from './kodeverk/opptjeningAktivitetKlassifisering';
 import { OpptjeningVilkarProsessIndex } from './OpptjeningVilkarProsessIndex';
@@ -32,17 +38,7 @@ const defaultOpptjening = {
   },
 } as Opptjening;
 
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET,
-  status: 'OPPR',
-
-  kanLoses: true,
-  toTrinnsBehandling: true,
-
-  aksjonspunktType: 'MANU',
-  vilkarType: 'FP_VK_23',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
+const defaultAksjonspunkt = lagAksjonspunkt(AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET);
 
 const meta = {
   title: 'prosess/prosess-vilkar-opptjening',
@@ -62,7 +58,7 @@ type Story = StoryObj<typeof meta>;
 export const ÅpentAksjonspunkt: Story = {
   args: {
     opptjening: defaultOpptjening,
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
   },
 };
 
@@ -70,7 +66,7 @@ export const ÅpentAksjonspunktSvangerskapspenger: Story = {
   args: {
     erSvpFagsak: true,
     opptjening: defaultOpptjening,
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
   },
 };
 
@@ -102,12 +98,7 @@ export const ÅpentAksjonspunktMedOppholdsperiode: Story = {
         opptjeningTom: '2018-06-04',
       },
     } as Opptjening,
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
-        status: 'OPPR',
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET)],
   },
 };
 
@@ -120,13 +111,13 @@ export const ÅpentAksjonspunktMenUtenAktiviteter: Story = {
         fastsattOpptjeningAktivitetList: [],
       },
     },
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
   },
 };
 
 export const HarIkkeAksjonspunkt: Story = {
   args: {
     opptjening: defaultOpptjening,
-    aksjonspunkterForPanel: [] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [],
   },
 };
