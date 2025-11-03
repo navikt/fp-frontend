@@ -68,24 +68,7 @@ yarn storybook
 
 ### Utvikling mot lokal kode i ft-frontend-saksbehandling
 
-```
-cd fp-frontend
-yarn link <sti til folder på disk>
-Eksempel: yarn link ../../../ft-frontend-saksbehandling/packages/sak-fagsak-profil/
-
-cd ft-frontend-saksbehandling
-Gå til aktuell pakke og kjør yarn dev
-```
-
-yarn link endrer på package.json og lock-filen, så husk å kjør unlink før commit/push
-
-For å gå tilbake til å bruke publisert pakke:
-
-```
-cd fp-frontend
-yarn unlink <sti til folder på disk>
-Eksempel: yarn unlink ../../../ft-frontend-saksbehandling/packages/sak-fagsak-profil/
-```
+Oppskrift ligg i readme i ft-frontend-saksbehandling.
 
 ## Utvikle lokalt med autotest
 

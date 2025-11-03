@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { action } from 'storybook/internal/actions';
+import { action } from 'storybook/actions';
 
 import type { DekoratorLenke } from '@navikt/fp-sak-dekorator';
 

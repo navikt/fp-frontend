@@ -13,10 +13,10 @@ const annotations = setProjectAnnotations(globalStorybookConfig);
 // Run Storybook's beforeAll hook
 beforeAll(annotations.beforeAll);
 
-globalThis.ResizeObserver =
-  globalThis.ResizeObserver ||
-  vi.fn().mockImplementation(() => ({
-    disconnect: vi.fn(),
-    observe: vi.fn(),
-    unobserve: vi.fn(),
-  }));
+class MockResizeObserver {
+  disconnect = vi.fn();
+  observe = vi.fn();
+  unobserve = vi.fn();
+}
+
+globalThis.ResizeObserver = globalThis.ResizeObserver || MockResizeObserver;
