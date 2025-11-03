@@ -35,8 +35,8 @@ const meta = {
   render: args => {
     const formMethods = useForm({
       defaultValues: {
-        ['TIL_BESLUTTER' satisfies AndreKriterierType]: true,
-        [`${'TIL_BESLUTTER' satisfies AndreKriterierType}_inkluder`]: true,
+        ['ARBEID_INNTEKT' satisfies AndreKriterierType]: true,
+        [`${'ARBEID_INNTEKT' satisfies AndreKriterierType}_inkluder`]: true,
       },
     });
 
