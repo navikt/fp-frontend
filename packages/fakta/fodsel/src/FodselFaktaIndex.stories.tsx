@@ -15,25 +15,14 @@ import type { Aksjonspunkt } from '@navikt/fp-types';
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
+  definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
   status: 'OPPR',
-
   kanLoses: true,
   toTrinnsBehandling: false,
-
-  aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_5',
+  aksjonspunktType: 'MANU',
+  vilkarType: 'FP_VK_1',
   erAktivt: true,
 } satisfies Aksjonspunkt;
-
-const apTerminbekreftelse: Aksjonspunkt = {
-  ...aksjonspunktDefault,
-  definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
-};
-const apSjekkManglendeFødsel: Aksjonspunkt = {
-  ...aksjonspunktDefault,
-  definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
-};
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -105,7 +94,12 @@ export const Default: Story = {};
 
 export const APTerminbekreftelse: Story = {
   args: {
-    aksjonspunkterForPanel: [apTerminbekreftelse],
+    aksjonspunkterForPanel: [
+      {
+        ...aksjonspunktDefault,
+        definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
+      },
+    ],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: merknaderFraBeslutter,
     },
@@ -169,7 +163,7 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
         barn: [],
       },
     },
-    aksjonspunkterForPanel: [apSjekkManglendeFødsel],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
@@ -212,7 +206,7 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
         ],
       },
     },
-    aksjonspunkterForPanel: [apSjekkManglendeFødsel],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
@@ -261,7 +255,7 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
         ],
       },
     },
-    aksjonspunkterForPanel: [apSjekkManglendeFødsel],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
@@ -270,7 +264,7 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
 
 export const APSjekkManglendeFødselUtenTermindatoFraSøknad = {
   args: {
-    aksjonspunkterForPanel: [apSjekkManglendeFødsel],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
     fødsel: {
       søknad: {
         barn: [
@@ -314,7 +308,7 @@ export const APSjekkManglendeFødselUtenTermindatoFraSøknad = {
 export const APSjekkManglendeFødselUtførtOgUtført: Story = {
   args: {
     isReadOnly: true,
-    aksjonspunkterForPanel: [{ ...apSjekkManglendeFødsel, status: 'UTFO', begrunnelse: 'Dette er en begrunnelse' }],
+    aksjonspunkterForPanel: [{ ...aksjonspunktDefault, status: 'UTFO', begrunnelse: 'Dette er en begrunnelse' }],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },

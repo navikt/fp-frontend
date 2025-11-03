@@ -32,7 +32,6 @@ const defaultAksjonspunkt: Aksjonspunkt = {
   kanLoses: true,
   toTrinnsBehandling: false,
   aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_5',
   erAktivt: true,
 };
 

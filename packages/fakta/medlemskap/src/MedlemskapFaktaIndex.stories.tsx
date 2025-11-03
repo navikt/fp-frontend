@@ -41,14 +41,12 @@ const vilkårForPanel = [
 ];
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.AVKLAR_VILKÅR_FOR_OMSORGSOVERTAKELSE,
+  definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
   status: 'OPPR',
-
   kanLoses: true,
-  toTrinnsBehandling: false,
-
-  aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_5',
+  toTrinnsBehandling: true,
+  aksjonspunktType: 'MANU',
+  vilkarType: 'FP_VK_2',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -197,15 +195,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
 export const Default: Story = {
   args: {
     medlemskap: lagMedlemskap({}),
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-        status: 'OPPR',
-
-        kanLoses: true,
-      },
-    ],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
   },
 };
 
@@ -218,9 +208,6 @@ export const ForutgåendeMedlemskap: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-        status: 'OPPR',
-
-        kanLoses: true,
       },
     ],
   },
@@ -265,15 +252,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
         utlandsoppholdEtter: [],
       } as Soknad['oppgittTilknytning'],
     } as Soknad,
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-        status: 'OPPR',
-
-        kanLoses: true,
-      },
-    ],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
   },
 };
 
@@ -342,7 +321,6 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.UTGÅTT_5053,
         status: 'UTFO',
-
         kanLoses: false,
       },
     ],
@@ -370,7 +348,6 @@ export const LegacyVurdertInngangsvilkårMedlemskap: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.UTGÅTT_5023,
         status: 'UTFO',
-
         kanLoses: false,
       },
     ],
