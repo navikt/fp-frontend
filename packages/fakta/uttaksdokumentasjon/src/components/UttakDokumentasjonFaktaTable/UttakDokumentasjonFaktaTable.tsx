@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Table } from '@navikt/ds-react';
@@ -44,7 +44,10 @@ export const UttakDokumentasjonFaktaTable = ({
   readOnly,
   setDirty,
 }: Props) => {
-  const [valgtDokBehovFomDatoer, setValgtDokBehovFomDatoer] = useState<string[]>([]);
+  const [valgtDokBehovFomDatoer, setValgtDokBehovFomDatoer] = useState<string[]>(() => {
+    const fom = dokumentasjonVurderingBehov.find(oa => !oa.vurdering)?.fom;
+    return fom ? [fom] : [];
+  });
 
   const velgDokBehovFomDato = (fom?: string) => {
     if (fom) {
@@ -55,8 +58,6 @@ export const UttakDokumentasjonFaktaTable = ({
       }
     }
   };
-
-  useEffect(() => velgDokBehovFomDato(dokumentasjonVurderingBehov.find(oa => !oa.vurdering)?.fom), []);
 
   const oppdaterPeriode = (oppdatertKrav: { perioder: DokumentasjonVurderingBehov[] }) => {
     const { perioder } = oppdatertKrav;

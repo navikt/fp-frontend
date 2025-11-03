@@ -31,6 +31,7 @@ export const JournalføringHeader = ({
 
   useEffect(() => {
     if (valgtJournalpost) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setÅpenSøkemodal(false);
     }
   }, [valgtJournalpost]);

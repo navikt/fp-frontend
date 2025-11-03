@@ -35,7 +35,7 @@ const intl = createIntl(messages);
 
 export const JournalføringAppIndexWrapper = () => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
-  const queryClient = useMemo(() => createQueryClient(getErrorHandler(addErrorMessage)), []);
+  const queryClient = useMemo(() => createQueryClient(getErrorHandler(addErrorMessage)), [addErrorMessage]);
 
   return (
     <RawIntlProvider value={intl}>

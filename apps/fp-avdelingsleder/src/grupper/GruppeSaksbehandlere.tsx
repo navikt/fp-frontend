@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -95,16 +95,11 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
     formMethods.trigger,
   );
 
-  const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
   const [filterValue, setFilterValue] = useState<string>('');
 
-  const filterOptions = (searchTerm: string | undefined) => {
-    if (searchTerm?.trim()) {
-      setFilteredOptions(options.filter(option => option.toLowerCase().includes(searchTerm.toLowerCase())));
-    } else {
-      setFilteredOptions(options);
-    }
-  };
+  const filteredOptions = filterValue.trim()
+    ? options.filter(option => option.toLowerCase().includes(filterValue.toLowerCase()))
+    : options;
 
   const toggleSelected = (option: string, isSelected: boolean) => {
     const selectedOption = filteredOptions.find(o => o.toLowerCase().includes(option.toLowerCase()));
@@ -117,8 +112,6 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
       leggTilSaksbehandler({ brukerIdent: navnOgBrukerIdent[1]!, gruppeId: saksbehandlerGruppe.gruppeId });
     }
   };
-
-  useEffect(() => filterOptions(filterValue), [saksbehandlerGruppe, filterValue]);
 
   return (
     <RhfForm formMethods={formMethods}>

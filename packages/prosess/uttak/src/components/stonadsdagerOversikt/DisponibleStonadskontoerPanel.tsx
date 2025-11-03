@@ -122,7 +122,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
       navn: utledNavn(aktivitet.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId, intl),
     }));
     return aktiviteterMedNavn.sort((akt1, akt2) => akt1.navn.localeCompare(akt2.navn));
-  }, [valgtKonto, stønadskontoerMedNavn]);
+  }, [valgtKonto, stønadskontoerMedNavn, arbeidsgiverOpplysningerPerId, intl]);
 
   return (
     <div className={styles['disponibeltUttak']}>

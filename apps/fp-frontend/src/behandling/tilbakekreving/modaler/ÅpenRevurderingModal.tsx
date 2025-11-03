@@ -5,9 +5,12 @@ import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Heading, HStack, Modal } from '@navikt/ds-react';
 
 export const ÅpenRevurderingModal = ({ harÅpenRevurdering }: { harÅpenRevurdering: boolean }) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks -- Rapportert fordi den ikkje taklar norske bokstavar i komponentnamn
   const intl = useIntl();
+  // eslint-disable-next-line react-hooks/rules-of-hooks -- Rapportert fordi den ikkje taklar norske bokstavar i komponentnamn
   const ref = useRef<HTMLDialogElement>(null);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks -- Rapportert fordi den ikkje taklar norske bokstavar i komponentnamn
   useEffect(() => {
     if (harÅpenRevurdering) {
       ref.current?.showModal();

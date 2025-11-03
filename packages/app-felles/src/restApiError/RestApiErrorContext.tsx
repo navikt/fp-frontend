@@ -1,4 +1,4 @@
-import { createContext, type JSX, type ReactNode, useContext, useReducer } from 'react';
+import { createContext, type JSX, type ReactNode, useCallback, useContext, useReducer } from 'react';
 
 import type { FpError } from './errorType';
 
@@ -48,16 +48,19 @@ export const RestApiErrorProvider = ({ children, initialState }: Props): JSX.Ele
 export const useRestApiErrorDispatcher = () => {
   const dispatch = useContext(RestApiErrorDispatchContext);
 
-  const addErrorMessage = (data: FpError) => {
-    if (dispatch) {
-      dispatch({ type: 'add', data });
-    }
-  };
-  const removeErrorMessages = () => {
+  const addErrorMessage = useCallback(
+    (data: FpError) => {
+      if (dispatch) {
+        dispatch({ type: 'add', data });
+      }
+    },
+    [dispatch],
+  );
+  const removeErrorMessages = useCallback(() => {
     if (dispatch) {
       dispatch({ type: 'remove' });
     }
-  };
+  }, [dispatch]);
 
   return {
     addErrorMessage,

@@ -31,6 +31,7 @@ export const InngangsvilkarOverstyringDefaultInitPanel = (
   const toggleOverstyring = () => setErOverstyrt(!erOverstyrt);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved ekstern endring av behandling
     setErOverstyrt(false);
   }, [behandling.versjon]);
 

@@ -93,6 +93,7 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
 
   useEffect(() => {
     if (isSuccess) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOppgaverTilBehandling(tilBehandling);
       if (oppgaverTilBehandling.length > 0) {
         setNyeBehandlinger(tilBehandling.filter(o => !oppgaverTilBehandling.some(ob => ob.id === o.id)));

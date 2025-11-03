@@ -20,6 +20,7 @@ export const MellomlagretFormDataProvider = <T,>({
 
   useEffect(() => {
     if (mellomlagretFormData) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved endring av behandling
       setMellomlagretFormData(undefined);
     }
   }, [behandling.uuid, behandling.versjon]);
