@@ -68,7 +68,7 @@ yarn storybook
 
 ### Utvikling mot lokal kode i ft-frontend-saksbehandling
 
-Oppskrift ligg i readme i ft-frontend-saksbehandling.
+Oppskrift: [README - ft-frontend-saksbehandling](https://github.com/navikt/ft-frontend-saksbehandling/blob/main/README.md)
 
 ## Utvikle lokalt med autotest
 
