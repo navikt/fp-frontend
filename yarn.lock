@@ -5,6 +5,13 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@acemir/cssom@npm:^0.9.19":
+  version: 0.9.19
+  resolution: "@acemir/cssom@npm:0.9.19"
+  checksum: 9b10affc99e8231bb1a3b739b9c6c3301a44ada5a7cd43224477d0533e7609eab0493861fd530655b5b74919ef5aa9a86454b8542913c4fea0a1090517bc7301
+  languageName: node
+  linkType: hard
+
 "@adobe/css-tools@npm:4.3.2":
   version: 4.3.2
   resolution: "@adobe/css-tools@npm:4.3.2"
@@ -25,16 +32,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@asamuzakjp/dom-selector@npm:^6.5.4":
-  version: 6.5.6
-  resolution: "@asamuzakjp/dom-selector@npm:6.5.6"
+"@asamuzakjp/dom-selector@npm:^6.7.3":
+  version: 6.7.4
+  resolution: "@asamuzakjp/dom-selector@npm:6.7.4"
   dependencies:
     "@asamuzakjp/nwsapi": ^2.3.9
     bidi-js: ^1.0.3
     css-tree: ^3.1.0
     is-potential-custom-element-name: ^1.0.1
-    lru-cache: ^11.2.1
-  checksum: 2bd0fb1ebd0b3cc757f7f3b04cfebb1d9f425000c5a3537e65c9cfb03d3c7ed202c09cab9e85baaa25b040c37bf5de43e3ee0042ace2fa2a622ef18f80d1e7a2
+    lru-cache: ^11.2.2
+  checksum: 117173ffddbc8cf4df9e9a25c480e9ae87aa4451a3170eda3353f818cc933d0e1d4833a961d18d7749f53a217980f61835d38fa46244cd61e9d8947fb990fe3d
   languageName: node
   linkType: hard
 
@@ -736,32 +743,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/config-array@npm:^0.21.0":
-  version: 0.21.0
-  resolution: "@eslint/config-array@npm:0.21.0"
+"@eslint/config-array@npm:^0.21.1":
+  version: 0.21.1
+  resolution: "@eslint/config-array@npm:0.21.1"
   dependencies:
-    "@eslint/object-schema": ^2.1.6
+    "@eslint/object-schema": ^2.1.7
     debug: ^4.3.1
     minimatch: ^3.1.2
-  checksum: 84d3ae7cb755af94dc158a74389f4c560757b13f2bb908f598f927b87b70a38e8152015ea2e9557c1b4afc5130ee1356f6cad682050d67aae0468bbef98bc3a8
+  checksum: fc5b57803b059f7c1f62950ef83baf045a01887fc00551f9e87ac119246fcc6d71c854a7f678accc79cbf829ed010e8135c755a154b0f54b129c538950cd7e6a
   languageName: node
   linkType: hard
 
-"@eslint/config-helpers@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@eslint/config-helpers@npm:0.4.0"
+"@eslint/config-helpers@npm:^0.4.2":
+  version: 0.4.2
+  resolution: "@eslint/config-helpers@npm:0.4.2"
   dependencies:
-    "@eslint/core": ^0.16.0
-  checksum: f17af9d6de60e0d8be5131451ef489f32984f92aff00cb1c5c8f1790baf07ea7ad803e0f21f1519eded4ce247871ffe593b7e51ddc094b5337d22f29dd720ba5
+    "@eslint/core": ^0.17.0
+  checksum: 63ff6a0730c9fff2edb80c89b39b15b28d6a635a1c3f32cf0d7eb3e2625f2efbc373c5531ae84e420ae36d6e37016dd40c365b6e5dee6938478e9907aaadae0b
   languageName: node
   linkType: hard
 
-"@eslint/core@npm:^0.16.0":
-  version: 0.16.0
-  resolution: "@eslint/core@npm:0.16.0"
+"@eslint/core@npm:^0.17.0":
+  version: 0.17.0
+  resolution: "@eslint/core@npm:0.17.0"
   dependencies:
     "@types/json-schema": ^7.0.15
-  checksum: 5c08dbf08aa27a6e057003a05a29f483038b70e59f9ac7af26938d0fa4627383c95768e2154835260607de34975e8f407c10762af9a005ed348cd8039cc6aede
+  checksum: ff9b5b4987f0bae4f2a4cfcdc7ae584ad3b0cb58526ca562fb281d6837700a04c7f3c86862e95126462318f33f60bf38e1cb07ed0e2449532d4b91cd5f4ab1f2
   languageName: node
   linkType: hard
 
@@ -789,20 +796,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/object-schema@npm:^2.1.6":
-  version: 2.1.6
-  resolution: "@eslint/object-schema@npm:2.1.6"
-  checksum: e32e565319f6544d36d3fa69a3e163120722d12d666d1a4525c9a6f02e9b54c29d9b1f03139e25d7e759e08dda8da433590bc23c09db8d511162157ef1b86a4c
+"@eslint/js@npm:9.39.0":
+  version: 9.39.0
+  resolution: "@eslint/js@npm:9.39.0"
+  checksum: e7453a8634e38b0c24d0f3d233c9611122d0cf258de47f9b7b8675719749a6c5d9c1a76954eddbf1a7acac732a95e85be0a62ded7cf088f06c5e7d39116653b7
   languageName: node
   linkType: hard
 
-"@eslint/plugin-kit@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@eslint/plugin-kit@npm:0.4.0"
+"@eslint/object-schema@npm:^2.1.7":
+  version: 2.1.7
+  resolution: "@eslint/object-schema@npm:2.1.7"
+  checksum: fc5708f192476956544def13455d60fd1bafbf8f062d1e05ec5c06dd470b02078eaf721e696a8b31c1c45d2056723a514b941ae5eea1398cc7e38eba6711a775
+  languageName: node
+  linkType: hard
+
+"@eslint/plugin-kit@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "@eslint/plugin-kit@npm:0.4.1"
   dependencies:
-    "@eslint/core": ^0.16.0
+    "@eslint/core": ^0.17.0
     levn: ^0.4.1
-  checksum: bb82be19c99eea256f7ec8e0996d28bd4b95b796bd1b27659b92e83278ef813485ada55995314887e7812cca02b0a9672d63f547c2a110eb5a7f0022c8e0f23d
+  checksum: 3f4492e02a3620e05d46126c5cfeff5f651ecf33466c8f88efb4812ae69db5f005e8c13373afabc070ecca7becd319b656d6670ad5093f05ca63c2a8841d99ba
   languageName: node
   linkType: hard
 
@@ -991,45 +1005,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/codegen-core@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "@hey-api/codegen-core@npm:0.2.0"
+"@hey-api/codegen-core@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "@hey-api/codegen-core@npm:0.3.2"
   peerDependencies:
     typescript: ">=5.5.3"
-  checksum: 1d396e1cd95b0afa3a7a7876ac9a589df86c732149097d33d4a5eb4ec01c375a5ebd1458f0ee0f4496823e61bb245156eb488cade117c4a84b4f5d46894111ab
+  checksum: ab7a9c2d2696714e44af7a89fe9a90dc6b43bf9636b8a2d99ee4bb497e206b38fadfa9ae862907668184780318355fbd8a23bd1c50eec79d8c36f96f445669b9
   languageName: node
   linkType: hard
 
-"@hey-api/json-schema-ref-parser@npm:1.2.0":
-  version: 1.2.0
-  resolution: "@hey-api/json-schema-ref-parser@npm:1.2.0"
+"@hey-api/json-schema-ref-parser@npm:1.2.1":
+  version: 1.2.1
+  resolution: "@hey-api/json-schema-ref-parser@npm:1.2.1"
   dependencies:
     "@jsdevtools/ono": ^7.1.3
     "@types/json-schema": ^7.0.15
     js-yaml: ^4.1.0
     lodash: ^4.17.21
-  checksum: a06c8ed4715fa949a4d8a714353e2beba9d32fd6c06d38ee41523000cbfb3d42c95fb4ab5310fde116c442bae52101b9a53e9e79adc12dae64e0729e23b43812
+  checksum: a859b41278c7c3fc351a3cf79c7d47222d96730af51e494fb40920073b5710c771c3716f90377cc87619b2623e2b5aa433b51f25c252751b42322c82bc6f561b
   languageName: node
   linkType: hard
 
-"@hey-api/openapi-ts@npm:0.85.2":
-  version: 0.85.2
-  resolution: "@hey-api/openapi-ts@npm:0.85.2"
+"@hey-api/openapi-ts@npm:0.86.11":
+  version: 0.86.11
+  resolution: "@hey-api/openapi-ts@npm:0.86.11"
   dependencies:
-    "@hey-api/codegen-core": ^0.2.0
-    "@hey-api/json-schema-ref-parser": 1.2.0
+    "@hey-api/codegen-core": ^0.3.2
+    "@hey-api/json-schema-ref-parser": 1.2.1
     ansi-colors: 4.1.3
-    c12: 3.3.0
+    c12: 3.3.1
     color-support: 1.1.3
-    commander: 13.0.0
+    commander: 14.0.1
     handlebars: 4.7.8
-    open: 10.1.2
+    open: 10.2.0
     semver: 7.7.2
   peerDependencies:
     typescript: ">=5.5.3"
   bin:
-    openapi-ts: bin/index.cjs
-  checksum: 398e220174caa1d605abfd3acca4395d1cb793597cb0a57636886c8be73243eaf7666c78aade132b0b772725fc9f3b5bfd529387755f691786757112470cfd7f
+    openapi-ts: bin/run.js
+  checksum: 60bcfba06115d70d7e5308afd42cbb2a7ed2bb81deb246e59ba920b49f5a24ba32d707d0582ef9d80ec7b631936345f9cf9fe060064897d5a4c8272303864390
   languageName: node
   linkType: hard
 
@@ -1224,9 +1238,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mswjs/interceptors@npm:^0.39.1":
-  version: 0.39.6
-  resolution: "@mswjs/interceptors@npm:0.39.6"
+"@mswjs/interceptors@npm:^0.40.0":
+  version: 0.40.0
+  resolution: "@mswjs/interceptors@npm:0.40.0"
   dependencies:
     "@open-draft/deferred-promise": ^2.2.0
     "@open-draft/logger": ^0.3.0
@@ -1234,18 +1248,18 @@ __metadata:
     is-node-process: ^1.2.0
     outvariant: ^1.4.3
     strict-event-emitter: ^0.5.1
-  checksum: 4960ad247aeabdb6465754ab4646b6441032bdc26cef8c38696240cd3968e99533363f7e71f5d3f8f170b49456c2f1294920c28031327ea7d721320e3863b546
+  checksum: b9d9bd80d2c26d4603a9bf449f5b1379cb039482cfa459e49290f3ddcafa6e4a75b5d9cd4a6283cee6af3df0fa13b7f2556958ef307b390f7e56961c05e2ab57
   languageName: node
   linkType: hard
 
-"@napi-rs/wasm-runtime@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@napi-rs/wasm-runtime@npm:1.0.5"
+"@napi-rs/wasm-runtime@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "@napi-rs/wasm-runtime@npm:1.0.7"
   dependencies:
     "@emnapi/core": ^1.5.0
     "@emnapi/runtime": ^1.5.0
     "@tybys/wasm-util": ^0.10.1
-  checksum: 22005c6e9d77854938cf0c832bb630533108ea1f3617d1cf40fa814bc1351412fb98d4d4ea63099c9963bc4ca63cf691ca6e370a490adc5fd7d42721005367c5
+  checksum: 9b59bd8b7310936ed163935befae0613dfffd563e7ff021d4f1b62b419fb0e3395f7206b17460a91db555bea6c471408f3472455e4e2ca9f5a0bff4468fa38d0
   languageName: node
   linkType: hard
 
@@ -1256,10 +1270,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-stylelint@npm:7.32.1":
-  version: 7.32.1
-  resolution: "@navikt/aksel-stylelint@npm:7.32.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.32.1%2F4263e87a30f3f7a20196a06adbf081e1e82a6052"
-  checksum: 4fc8144c4116d046c2a3d430ecdc88df16c9cf7c44cf81c32bbba42de17378d6272f3f90bb82e8432bcc8e87bca51dc0a7ea292b11b311643be6ebe5cdf8aff0
+"@navikt/aksel-stylelint@npm:7.32.5":
+  version: 7.32.5
+  resolution: "@navikt/aksel-stylelint@npm:7.32.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.32.5%2F8c430b189d1b1e4a05760df5438668e119067140"
+  checksum: d67c46ceac80762ffa857903a13678a83ce82c55c632985e44bb212c2f8fb9fd4ccb8a037d99dda65fb3bb437d8c8be3fbd303c6a651bbcecef8120ee01ebcf0
   languageName: node
   linkType: hard
 
@@ -1319,7 +1333,7 @@ __metadata:
     "@storybook/react": 9.1.10
     "@storybook/react-vite": 9.1.10
     "@testing-library/react": 16.3.0
-    eslint: 9.37.0
+    eslint: 9.39.0
     fast-glob: 3.3.3
     react: 19.2.0
     storybook: 9.1.10
@@ -1361,11 +1375,11 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     "@types/lodash.debounce": 4.0.9
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     history: 5.3.0
     ky: 1.12.0
     lodash.debounce: 4.0.8
-    msw: 2.11.5
+    msw: 2.11.6
     msw-storybook-addon: 2.0.6
     p-limit: 7.1.1
     react: 19.2.0
@@ -1449,7 +1463,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -1481,7 +1495,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -1516,7 +1530,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -1551,7 +1565,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     classnames: 2.5.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     lodash: ^4.17.21
     react: 19.2.0
     react-hook-form: 7.65.0
@@ -1590,7 +1604,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -1623,7 +1637,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -1660,7 +1674,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -1698,7 +1712,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -1736,7 +1750,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -1774,7 +1788,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     fast-glob: 3.3.3
     react: 19.2.0
     react-hook-form: 7.65.0
@@ -1812,7 +1826,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-dom: 19.2.0
     react-hook-form: 7.65.0
@@ -1851,7 +1865,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -1889,7 +1903,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -1928,7 +1942,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     fast-glob: 3.3.3
     react: 19.2.0
     react-dom: 19.2.0
@@ -1969,7 +1983,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2008,7 +2022,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2047,7 +2061,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2085,7 +2099,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2111,7 +2125,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -2228,10 +2242,10 @@ __metadata:
     classnames: 2.5.1
     core-js: 3.46.0
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     history: 5.3.0
     ky: 1.12.0
-    msw: 2.11.5
+    msw: 2.11.6
     msw-storybook-addon: 2.0.6
     react: 19.2.0
     react-dom: 19.2.0
@@ -2277,9 +2291,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     ky: 1.12.0
-    msw: 2.11.5
+    msw: 2.11.6
     msw-storybook-addon: 2.0.6
     react: 19.2.0
     react-hook-form: 7.65.0
@@ -2298,7 +2312,7 @@ __metadata:
   dependencies:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
-    eslint: 9.37.0
+    eslint: 9.39.0
     typescript: 5.9.3
   languageName: unknown
   linkType: soft
@@ -2310,7 +2324,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    eslint: 9.37.0
+    eslint: 9.39.0
     typescript: 5.9.3
   languageName: unknown
   linkType: soft
@@ -2337,7 +2351,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
     echarts: 6.0.0
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2375,9 +2389,9 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     ky: 1.12.0
-    msw: 2.11.5
+    msw: 2.11.6
     msw-storybook-addon: 2.0.6
     react: 19.2.0
     react-dom: 19.2.0
@@ -2412,7 +2426,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2447,7 +2461,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2477,7 +2491,7 @@ __metadata:
     "@navikt/ft-utils": 3.8.11
     "@storybook/react": 9.1.10
     "@storybook/react-vite": 9.1.10
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2504,7 +2518,7 @@ __metadata:
     "@storybook/react-vite": 9.1.10
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -2530,7 +2544,7 @@ __metadata:
     "@storybook/react-vite": 9.1.10
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -2557,7 +2571,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -2583,7 +2597,7 @@ __metadata:
     "@storybook/react-vite": 9.1.10
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -2611,7 +2625,7 @@ __metadata:
     "@navikt/ft-form-validators": 4.2.12
     "@navikt/ft-ui-komponenter": 6.2.9
     "@navikt/ft-utils": 3.8.11
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2645,7 +2659,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2685,7 +2699,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2722,7 +2736,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2760,7 +2774,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2797,7 +2811,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2831,7 +2845,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-dom: 19.2.0
     react-intl: 7.1.14
@@ -2869,7 +2883,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2907,7 +2921,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2942,7 +2956,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -2974,7 +2988,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3021,7 +3035,7 @@ __metadata:
     dayjs: 1.11.18
     editorjs-html: 4.0.5
     editorjs-undo: 2.0.28
-    eslint: 9.37.0
+    eslint: 9.39.0
     lodash.debounce: 4.0.8
     react: 19.2.0
     react-hook-form: 7.65.0
@@ -3057,7 +3071,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3093,7 +3107,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-dom: 19.2.0
     react-hook-form: 7.65.0
@@ -3132,7 +3146,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3169,7 +3183,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3205,7 +3219,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3241,7 +3255,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3271,7 +3285,7 @@ __metadata:
     "@storybook/react-vite": 9.1.10
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3302,7 +3316,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3332,7 +3346,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3361,7 +3375,7 @@ __metadata:
     "@storybook/react-vite": 9.1.10
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3390,7 +3404,7 @@ __metadata:
     "@storybook/react-vite": 9.1.10
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3418,7 +3432,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     history: 5.3.0
     react: 19.2.0
     react-intl: 7.1.14
@@ -3444,7 +3458,7 @@ __metadata:
     "@storybook/react-vite": 9.1.10
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3478,7 +3492,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3506,7 +3520,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3536,7 +3550,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3569,7 +3583,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3597,7 +3611,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3627,7 +3641,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3656,7 +3670,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3687,7 +3701,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3719,7 +3733,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3754,7 +3768,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-dom: 19.2.0
     react-hook-form: 7.65.0
@@ -3788,7 +3802,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-hook-form: 7.65.0
     react-intl: 7.1.14
@@ -3826,7 +3840,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     history: 5.3.0
     react: 19.2.0
     react-hook-form: 7.65.0
@@ -3853,7 +3867,7 @@ __metadata:
     "@storybook/react-vite": 9.1.10
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3881,7 +3895,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     storybook: 9.1.10
@@ -3906,7 +3920,7 @@ __metadata:
     "@storybook/react": 9.1.10
     "@tanstack/react-query": 5.90.3
     "@tanstack/react-query-devtools": 5.90.2
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     react-router-dom: 7.9.4
@@ -3928,7 +3942,7 @@ __metadata:
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 8.1.1
     "@navikt/ft-prosess-beregningsgrunnlag": 11.2.1
     "@navikt/ft-prosess-tilbakekreving-vedtak": 7.1.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     typescript: 5.9.3
   languageName: unknown
   linkType: soft
@@ -3939,7 +3953,7 @@ __metadata:
   dependencies:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
-    eslint: 9.37.0
+    eslint: 9.39.0
     typescript: 5.9.3
   languageName: unknown
   linkType: soft
@@ -3954,7 +3968,7 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-konstanter": "workspace:^"
     "@navikt/fp-utils": "workspace:^"
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     typescript: 5.9.3
   languageName: unknown
@@ -3978,7 +3992,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.37.0
+    eslint: 9.39.0
     fast-glob: 3.3.3
     react: 19.2.0
     react-intl: 7.1.14
@@ -3995,7 +4009,7 @@ __metadata:
   dependencies:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
-    eslint: 9.37.0
+    eslint: 9.39.0
     react: 19.2.0
     react-intl: 7.1.14
     typescript: 5.9.3
@@ -4015,7 +4029,7 @@ __metadata:
     "@navikt/ft-form-validators": 4.2.12
     "@navikt/ft-utils": 3.8.11
     dayjs: 1.11.18
-    eslint: 9.37.0
+    eslint: 9.39.0
     history: 5.3.0
     react: 19.2.0
     typescript: 5.9.3
@@ -4455,137 +4469,137 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-android-arm-eabi@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-android-arm-eabi@npm:11.9.0"
+"@oxc-resolver/binding-android-arm-eabi@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-android-arm-eabi@npm:11.13.0"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-android-arm64@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-android-arm64@npm:11.9.0"
+"@oxc-resolver/binding-android-arm64@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-android-arm64@npm:11.13.0"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-darwin-arm64@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-darwin-arm64@npm:11.9.0"
+"@oxc-resolver/binding-darwin-arm64@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-darwin-arm64@npm:11.13.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-darwin-x64@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-darwin-x64@npm:11.9.0"
+"@oxc-resolver/binding-darwin-x64@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-darwin-x64@npm:11.13.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-freebsd-x64@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-freebsd-x64@npm:11.9.0"
+"@oxc-resolver/binding-freebsd-x64@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-freebsd-x64@npm:11.13.0"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-linux-arm-gnueabihf@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-linux-arm-gnueabihf@npm:11.9.0"
+"@oxc-resolver/binding-linux-arm-gnueabihf@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-linux-arm-gnueabihf@npm:11.13.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-linux-arm-musleabihf@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-linux-arm-musleabihf@npm:11.9.0"
+"@oxc-resolver/binding-linux-arm-musleabihf@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-linux-arm-musleabihf@npm:11.13.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-linux-arm64-gnu@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-linux-arm64-gnu@npm:11.9.0"
+"@oxc-resolver/binding-linux-arm64-gnu@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-linux-arm64-gnu@npm:11.13.0"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-linux-arm64-musl@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-linux-arm64-musl@npm:11.9.0"
+"@oxc-resolver/binding-linux-arm64-musl@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-linux-arm64-musl@npm:11.13.0"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-linux-ppc64-gnu@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-linux-ppc64-gnu@npm:11.9.0"
+"@oxc-resolver/binding-linux-ppc64-gnu@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-linux-ppc64-gnu@npm:11.13.0"
   conditions: os=linux & cpu=ppc64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-linux-riscv64-gnu@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-linux-riscv64-gnu@npm:11.9.0"
+"@oxc-resolver/binding-linux-riscv64-gnu@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-linux-riscv64-gnu@npm:11.13.0"
   conditions: os=linux & cpu=riscv64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-linux-riscv64-musl@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-linux-riscv64-musl@npm:11.9.0"
+"@oxc-resolver/binding-linux-riscv64-musl@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-linux-riscv64-musl@npm:11.13.0"
   conditions: os=linux & cpu=riscv64 & libc=musl
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-linux-s390x-gnu@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-linux-s390x-gnu@npm:11.9.0"
+"@oxc-resolver/binding-linux-s390x-gnu@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-linux-s390x-gnu@npm:11.13.0"
   conditions: os=linux & cpu=s390x & libc=glibc
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-linux-x64-gnu@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-linux-x64-gnu@npm:11.9.0"
+"@oxc-resolver/binding-linux-x64-gnu@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-linux-x64-gnu@npm:11.13.0"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-linux-x64-musl@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-linux-x64-musl@npm:11.9.0"
+"@oxc-resolver/binding-linux-x64-musl@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-linux-x64-musl@npm:11.13.0"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-wasm32-wasi@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-wasm32-wasi@npm:11.9.0"
+"@oxc-resolver/binding-wasm32-wasi@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-wasm32-wasi@npm:11.13.0"
   dependencies:
-    "@napi-rs/wasm-runtime": ^1.0.5
+    "@napi-rs/wasm-runtime": ^1.0.7
   conditions: cpu=wasm32
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-win32-arm64-msvc@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-win32-arm64-msvc@npm:11.9.0"
+"@oxc-resolver/binding-win32-arm64-msvc@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-win32-arm64-msvc@npm:11.13.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-win32-ia32-msvc@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-win32-ia32-msvc@npm:11.9.0"
+"@oxc-resolver/binding-win32-ia32-msvc@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-win32-ia32-msvc@npm:11.13.0"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@oxc-resolver/binding-win32-x64-msvc@npm:11.9.0":
-  version: 11.9.0
-  resolution: "@oxc-resolver/binding-win32-x64-msvc@npm:11.9.0"
+"@oxc-resolver/binding-win32-x64-msvc@npm:11.13.0":
+  version: 11.13.0
+  resolution: "@oxc-resolver/binding-win32-x64-msvc@npm:11.13.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -4845,74 +4859,74 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli-darwin@npm:2.56.1":
-  version: 2.56.1
-  resolution: "@sentry/cli-darwin@npm:2.56.1"
+"@sentry/cli-darwin@npm:2.57.0":
+  version: 2.57.0
+  resolution: "@sentry/cli-darwin@npm:2.57.0"
   conditions: os=darwin
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm64@npm:2.56.1":
-  version: 2.56.1
-  resolution: "@sentry/cli-linux-arm64@npm:2.56.1"
+"@sentry/cli-linux-arm64@npm:2.57.0":
+  version: 2.57.0
+  resolution: "@sentry/cli-linux-arm64@npm:2.57.0"
   conditions: (os=linux | os=freebsd | os=android) & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm@npm:2.56.1":
-  version: 2.56.1
-  resolution: "@sentry/cli-linux-arm@npm:2.56.1"
+"@sentry/cli-linux-arm@npm:2.57.0":
+  version: 2.57.0
+  resolution: "@sentry/cli-linux-arm@npm:2.57.0"
   conditions: (os=linux | os=freebsd | os=android) & cpu=arm
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-i686@npm:2.56.1":
-  version: 2.56.1
-  resolution: "@sentry/cli-linux-i686@npm:2.56.1"
+"@sentry/cli-linux-i686@npm:2.57.0":
+  version: 2.57.0
+  resolution: "@sentry/cli-linux-i686@npm:2.57.0"
   conditions: (os=linux | os=freebsd | os=android) & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-x64@npm:2.56.1":
-  version: 2.56.1
-  resolution: "@sentry/cli-linux-x64@npm:2.56.1"
+"@sentry/cli-linux-x64@npm:2.57.0":
+  version: 2.57.0
+  resolution: "@sentry/cli-linux-x64@npm:2.57.0"
   conditions: (os=linux | os=freebsd | os=android) & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-arm64@npm:2.56.1":
-  version: 2.56.1
-  resolution: "@sentry/cli-win32-arm64@npm:2.56.1"
+"@sentry/cli-win32-arm64@npm:2.57.0":
+  version: 2.57.0
+  resolution: "@sentry/cli-win32-arm64@npm:2.57.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-i686@npm:2.56.1":
-  version: 2.56.1
-  resolution: "@sentry/cli-win32-i686@npm:2.56.1"
+"@sentry/cli-win32-i686@npm:2.57.0":
+  version: 2.57.0
+  resolution: "@sentry/cli-win32-i686@npm:2.57.0"
   conditions: os=win32 & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-x64@npm:2.56.1":
-  version: 2.56.1
-  resolution: "@sentry/cli-win32-x64@npm:2.56.1"
+"@sentry/cli-win32-x64@npm:2.57.0":
+  version: 2.57.0
+  resolution: "@sentry/cli-win32-x64@npm:2.57.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.56.1":
-  version: 2.56.1
-  resolution: "@sentry/cli@npm:2.56.1"
+"@sentry/cli@npm:2.57.0":
+  version: 2.57.0
+  resolution: "@sentry/cli@npm:2.57.0"
   dependencies:
-    "@sentry/cli-darwin": 2.56.1
-    "@sentry/cli-linux-arm": 2.56.1
-    "@sentry/cli-linux-arm64": 2.56.1
-    "@sentry/cli-linux-i686": 2.56.1
-    "@sentry/cli-linux-x64": 2.56.1
-    "@sentry/cli-win32-arm64": 2.56.1
-    "@sentry/cli-win32-i686": 2.56.1
-    "@sentry/cli-win32-x64": 2.56.1
+    "@sentry/cli-darwin": 2.57.0
+    "@sentry/cli-linux-arm": 2.57.0
+    "@sentry/cli-linux-arm64": 2.57.0
+    "@sentry/cli-linux-i686": 2.57.0
+    "@sentry/cli-linux-x64": 2.57.0
+    "@sentry/cli-win32-arm64": 2.57.0
+    "@sentry/cli-win32-i686": 2.57.0
+    "@sentry/cli-win32-x64": 2.57.0
     https-proxy-agent: ^5.0.0
     node-fetch: ^2.6.7
     progress: ^2.0.3
@@ -4937,7 +4951,7 @@ __metadata:
       optional: true
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: e70c68ddaf0dda7cae7a886f221cf62520603d71cb96976c40e515df56565b31d8f78a50af83b89b17a39f136976d83d54fd9eeca8aa05026dfff18b7a07c999
+  checksum: bdab3589ddcdaf86902ca8e1cab698438e5f59bb6816aaee53b176c1634a2b27e7d744a339b6382c791b5512f4f2bcf0503b05b2b527911250f96795eab69479
   languageName: node
   linkType: hard
 
@@ -6135,17 +6149,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"c12@npm:3.3.0":
-  version: 3.3.0
-  resolution: "c12@npm:3.3.0"
+"c12@npm:3.3.1":
+  version: 3.3.1
+  resolution: "c12@npm:3.3.1"
   dependencies:
     chokidar: ^4.0.3
     confbox: ^0.2.2
     defu: ^6.1.4
-    dotenv: ^17.2.2
+    dotenv: ^17.2.3
     exsolve: ^1.0.7
     giget: ^2.0.0
-    jiti: ^2.5.1
+    jiti: ^2.6.1
     ohash: ^2.0.11
     pathe: ^2.0.3
     perfect-debounce: ^2.0.0
@@ -6156,7 +6170,7 @@ __metadata:
   peerDependenciesMeta:
     magicast:
       optional: true
-  checksum: ec8ca3d5ee15a9e59008350cd1a2120f3bd9fd8c720486c3490d5bcf5c6b2de49b74737211623d5ae7afc4be7f122ee004277fdff7f677d9aac26123e7a6ab6f
+  checksum: aa52d7986f84bc8cf048a70629897cbcd044a0eaa21c79331f58cff4e9acc5b313bef36dd9a86da886da5843c362ef059e7ad4f1ab24873a642a380694f8e0f0
   languageName: node
   linkType: hard
 
@@ -6402,10 +6416,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:13.0.0":
-  version: 13.0.0
-  resolution: "commander@npm:13.0.0"
-  checksum: 3981c8c197c93ceeb949f6e2250785ea319209c502b7c53d6dc36148347739c72b15de2e4bcad80bedc3f8e1e5544a89ca4e7d673b2f3238ac51b44292ad08d6
+"commander@npm:14.0.1, commander@npm:^14.0.1":
+  version: 14.0.1
+  resolution: "commander@npm:14.0.1"
+  checksum: a072b714e73a69cc85e68f588a3c910f330e5b31861fe1f9abc9312e81bdca193676fc1fea99f739b4237ee903751fb20b4adcdd409ec4c4df0964792e9daa47
   languageName: node
   linkType: hard
 
@@ -6413,13 +6427,6 @@ __metadata:
   version: 13.1.0
   resolution: "commander@npm:13.1.0"
   checksum: 8ca2fcb33caf2aa06fba3722d7a9440921331d54019dabf906f3603313e7bf334b009b862257b44083ff65d5a3ab19e83ad73af282bd5319f01dc228bdf87ef0
-  languageName: node
-  linkType: hard
-
-"commander@npm:^14.0.1":
-  version: 14.0.1
-  resolution: "commander@npm:14.0.1"
-  checksum: a072b714e73a69cc85e68f588a3c910f330e5b31861fe1f9abc9312e81bdca193676fc1fea99f739b4237ee903751fb20b4adcdd409ec4c4df0964792e9daa47
   languageName: node
   linkType: hard
 
@@ -6540,14 +6547,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cssstyle@npm:^5.3.0":
-  version: 5.3.1
-  resolution: "cssstyle@npm:5.3.1"
+"cssstyle@npm:^5.3.2":
+  version: 5.3.2
+  resolution: "cssstyle@npm:5.3.2"
   dependencies:
     "@asamuzakjp/css-color": ^4.0.3
     "@csstools/css-syntax-patches-for-csstree": ^1.0.14
     css-tree: ^3.1.0
-  checksum: 08be443e771457875906c10d51fe0067df218bc9d779c7f0ffefd374be716c58f7cbab7a2ce63feda2bbce19954a3e3d867eae9cb28bbc40d982f3746edcab56
+  checksum: 0187b0696d91a4c3791b3cfef42f1dace68916d1f72447936979e25cc4f44d8e5c17f6b3a3cbae2cb6161383bdb505df00b68125b972c000aff68604f82b2ed5
   languageName: node
   linkType: hard
 
@@ -6659,7 +6666,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decimal.js@npm:^10.4.3, decimal.js@npm:^10.5.0":
+"decimal.js@npm:^10.4.3, decimal.js@npm:^10.6.0":
   version: 10.6.0
   resolution: "decimal.js@npm:10.6.0"
   checksum: 9302b990cd6f4da1c7602200002e40e15d15660374432963421d3cd6d81cc6e27e0a488356b030fee64650947e32e78bdbea245d596dadfeeeb02e146d485999
@@ -6802,7 +6809,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^17.2.2":
+"dotenv@npm:^17.2.3":
   version: 17.2.3
   resolution: "dotenv@npm:17.2.3"
   checksum: fde23eb88649041ec7a0f6a47bbe59cac3c454fc2007cf2e40b9c984aaf0636347218c56cfbbf067034b0a73f530a2698a19b4058695787eb650ec69fe234624
@@ -7370,23 +7377,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:9.37.0":
-  version: 9.37.0
-  resolution: "eslint@npm:9.37.0"
+"eslint@npm:9.39.0":
+  version: 9.39.0
+  resolution: "eslint@npm:9.39.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.8.0
     "@eslint-community/regexpp": ^4.12.1
-    "@eslint/config-array": ^0.21.0
-    "@eslint/config-helpers": ^0.4.0
-    "@eslint/core": ^0.16.0
+    "@eslint/config-array": ^0.21.1
+    "@eslint/config-helpers": ^0.4.2
+    "@eslint/core": ^0.17.0
     "@eslint/eslintrc": ^3.3.1
-    "@eslint/js": 9.37.0
-    "@eslint/plugin-kit": ^0.4.0
+    "@eslint/js": 9.39.0
+    "@eslint/plugin-kit": ^0.4.1
     "@humanfs/node": ^0.16.6
     "@humanwhocodes/module-importer": ^1.0.1
     "@humanwhocodes/retry": ^0.4.2
     "@types/estree": ^1.0.6
-    "@types/json-schema": ^7.0.15
     ajv: ^6.12.4
     chalk: ^4.0.0
     cross-spawn: ^7.0.6
@@ -7416,7 +7422,7 @@ __metadata:
       optional: true
   bin:
     eslint: bin/eslint.js
-  checksum: 78e813174acef58d361d557a4d083d2d03f20cd70dd96f59973414305acaedf72bad52271c789174a19ee0407f8bece017ce42a05c89014b93e457d033285aeb
+  checksum: b0a55edbbbc28111dcbdeebd49b5dcc46402cab65d55784036436e9de55710c5d0923334f1626ef4d6f2e6551a71d34890bca9d2ac15b82e2902ecf87f199969
   languageName: node
   linkType: hard
 
@@ -7736,9 +7742,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
-    "@hey-api/openapi-ts": 0.85.2
-    "@navikt/aksel-stylelint": 7.32.1
-    "@sentry/cli": 2.56.1
+    "@hey-api/openapi-ts": 0.86.11
+    "@navikt/aksel-stylelint": 7.32.5
+    "@sentry/cli": 2.57.0
     "@storybook/addon-a11y": 9.1.10
     "@storybook/addon-links": 9.1.10
     "@storybook/react": 9.1.10
@@ -7748,14 +7754,14 @@ __metadata:
     "@types/react-responsive": 9.0.0
     "@types/react-router-dom": 5.3.3
     husky: 9.1.7
-    jsdom: 27.0.0
-    knip: ^5.65.0
-    lint-staged: 16.2.4
+    jsdom: 27.1.0
+    knip: ^5.67.0
+    lint-staged: 16.2.6
     prettier: 3.6.2
     shelljs: 0.10.0
     stylelint: 16.25.0
     stylelint-order: 7.0.0
-    turbo: 2.5.8
+    turbo: 2.6.0
     typescript: 5.9.3
     vitest: 3.2.4
     vitest-canvas-mock: 0.3.3
@@ -8710,16 +8716,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jiti@npm:^2.5.1":
-  version: 2.5.1
-  resolution: "jiti@npm:2.5.1"
-  bin:
-    jiti: lib/jiti-cli.mjs
-  checksum: db901281e01013c27d46d6c5cde5fa817082f32232c92099043df11e135d00ccd1b4356a9ba356a3293e91855bd7437b6df5ae0ae6ad2c384d9bd59df926633c
-  languageName: node
-  linkType: hard
-
-"jiti@npm:^2.6.0":
+"jiti@npm:^2.6.0, jiti@npm:^2.6.1":
   version: 2.6.1
   resolution: "jiti@npm:2.6.1"
   bin:
@@ -8753,20 +8750,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdom@npm:27.0.0":
-  version: 27.0.0
-  resolution: "jsdom@npm:27.0.0"
+"jsdom@npm:27.1.0":
+  version: 27.1.0
+  resolution: "jsdom@npm:27.1.0"
   dependencies:
-    "@asamuzakjp/dom-selector": ^6.5.4
-    cssstyle: ^5.3.0
+    "@acemir/cssom": ^0.9.19
+    "@asamuzakjp/dom-selector": ^6.7.3
+    cssstyle: ^5.3.2
     data-urls: ^6.0.0
-    decimal.js: ^10.5.0
+    decimal.js: ^10.6.0
     html-encoding-sniffer: ^4.0.0
     http-proxy-agent: ^7.0.2
     https-proxy-agent: ^7.0.6
     is-potential-custom-element-name: ^1.0.1
-    parse5: ^7.3.0
-    rrweb-cssom: ^0.8.0
+    parse5: ^8.0.0
     saxes: ^6.0.0
     symbol-tree: ^3.2.4
     tough-cookie: ^6.0.0
@@ -8774,15 +8771,15 @@ __metadata:
     webidl-conversions: ^8.0.0
     whatwg-encoding: ^3.1.1
     whatwg-mimetype: ^4.0.0
-    whatwg-url: ^15.0.0
-    ws: ^8.18.2
+    whatwg-url: ^15.1.0
+    ws: ^8.18.3
     xml-name-validator: ^5.0.0
   peerDependencies:
     canvas: ^3.0.0
   peerDependenciesMeta:
     canvas:
       optional: true
-  checksum: a908333c5202b782aa4b989184143786250d4806485a3c0e0cad8dc1fe2fd33600133b3fc947e9fedf0dfdee767f6ad89df710e79fb345279a911fd89fcbd8f2
+  checksum: 436a0be337c630b7b34d0b0258b46a4682c3852ef9f7a4163bb446e9cf5a00470cc8881cd4faf6f2185c57ff9e62439f4b027bdbb447e8a09ee9b1f3aec9bb00
   languageName: node
   linkType: hard
 
@@ -8920,9 +8917,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knip@npm:^5.65.0":
-  version: 5.65.0
-  resolution: "knip@npm:5.65.0"
+"knip@npm:^5.67.0":
+  version: 5.67.0
+  resolution: "knip@npm:5.67.0"
   dependencies:
     "@nodelib/fs.walk": ^1.2.3
     fast-glob: ^3.3.3
@@ -8930,7 +8927,7 @@ __metadata:
     jiti: ^2.6.0
     js-yaml: ^4.1.0
     minimist: ^1.2.8
-    oxc-resolver: ^11.8.3
+    oxc-resolver: ^11.12.0
     picocolors: ^1.1.1
     picomatch: ^4.0.1
     smol-toml: ^1.4.1
@@ -8942,7 +8939,7 @@ __metadata:
   bin:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
-  checksum: c0230e4581738b548418eb47c9a06e2cc79d6959d19e55d9fee50dfd7bacc17117370d0f9a8f137b14ed1f7fed1d6e8b8e5c049ffc8182b152b1c9dfa8f84e5a
+  checksum: e46f082c27e86329e57308fa041ac678188895c07a77d9c3db2682a1b57c755af07f3d78da05e1b0c8dcf65c7b2bac096a27fc96e220ac52233260c2d0a2b4df
   languageName: node
   linkType: hard
 
@@ -8993,12 +8990,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:16.2.4":
-  version: 16.2.4
-  resolution: "lint-staged@npm:16.2.4"
+"lint-staged@npm:16.2.6":
+  version: 16.2.6
+  resolution: "lint-staged@npm:16.2.6"
   dependencies:
     commander: ^14.0.1
-    listr2: ^9.0.4
+    listr2: ^9.0.5
     micromatch: ^4.0.8
     nano-spawn: ^2.0.0
     pidtree: ^0.6.0
@@ -9006,13 +9003,13 @@ __metadata:
     yaml: ^2.8.1
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: e09497196df24f3d9c134ea81e2e470f455c461925a6fa9d72fa409278ddb7d6c8506797268df497f3e908629fd275ef171361d8e0d6581efb2a7131bb7c0a26
+  checksum: 472668e4855a0a2b1300497af1ae920c36ef594380029b13bec14d2c9b7310879921a02693e37626162070c812947e0ec7150fd86738e692c22673ba158f0b23
   languageName: node
   linkType: hard
 
-"listr2@npm:^9.0.4":
-  version: 9.0.4
-  resolution: "listr2@npm:9.0.4"
+"listr2@npm:^9.0.5":
+  version: 9.0.5
+  resolution: "listr2@npm:9.0.5"
   dependencies:
     cli-truncate: ^5.0.0
     colorette: ^2.0.20
@@ -9020,7 +9017,7 @@ __metadata:
     log-update: ^6.1.0
     rfdc: ^1.4.1
     wrap-ansi: ^9.0.0
-  checksum: 642c5774049e3b6d0e67beb49dcf6fd6b4ea6687c70bcf8a9f9d1867bc0028ebd29ebfd7f5db38f064ea3f7997f5684820e264b62020c29878976e481e3a788e
+  checksum: 64ef0dcd6f69e131f5699f584c13096d828a747472d4a18e68a9418848a54aef86bf953bf4a8a03a3dff24dacf771fab919dad59dce115244308a06d147acbfa
   languageName: node
   linkType: hard
 
@@ -9118,7 +9115,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lru-cache@npm:^11.2.1":
+"lru-cache@npm:^11.2.1, lru-cache@npm:^11.2.2":
   version: 11.2.2
   resolution: "lru-cache@npm:11.2.2"
   checksum: 052b3d0b81a02dd017e8b6d82422bed273732c89c9c63762f538e0a75b7018247896b365c19d9392cc7de9c6a304cde3ac11eb7376f96a4885d0ab32b5c46d5b
@@ -9390,12 +9387,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:2.11.5":
-  version: 2.11.5
-  resolution: "msw@npm:2.11.5"
+"msw@npm:2.11.6":
+  version: 2.11.6
+  resolution: "msw@npm:2.11.6"
   dependencies:
     "@inquirer/confirm": ^5.0.0
-    "@mswjs/interceptors": ^0.39.1
+    "@mswjs/interceptors": ^0.40.0
     "@open-draft/deferred-promise": ^2.2.0
     "@types/statuses": ^2.0.4
     cookie: ^1.0.2
@@ -9419,7 +9416,7 @@ __metadata:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: 86eaa1cbd0c9d3f56434f1e8d362802624d7548953cff1f1fcbf3e8a2ec6af827b444762c881de165f13e8665c67787a34831f97e5945d119f060f6fe880bf4c
+  checksum: 826e25f61d1fb13d25468c4eb9e436e985b93b4052d5bf9793bb714a13d8edf342664a3d2ba24aa48d7e29baa4fbef4c6827181beb95b8e6eb7f4b8d7146bad0
   languageName: node
   linkType: hard
 
@@ -9664,15 +9661,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"open@npm:10.1.2":
-  version: 10.1.2
-  resolution: "open@npm:10.1.2"
+"open@npm:10.2.0":
+  version: 10.2.0
+  resolution: "open@npm:10.2.0"
   dependencies:
     default-browser: ^5.2.1
     define-lazy-prop: ^3.0.0
     is-inside-container: ^1.0.0
-    is-wsl: ^3.1.0
-  checksum: cb40d9786e8c679a1c647c62ad3642bbf1a8cc986c3ec970e99ed13d279c93328ea46bf756db64ea465d2d707815d4e792e7ba906830c3439cc8577cdefb8610
+    wsl-utils: ^0.1.0
+  checksum: 64e2e1fb1dc5ab82af06c990467237b8fd349b1b9ecc6324d12df337a005d039cec11f758abea148be68878ccd616977005682c48ef3c5c7ba48bd3e5d6a3dbb
   languageName: node
   linkType: hard
 
@@ -9719,29 +9716,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"oxc-resolver@npm:^11.8.3":
-  version: 11.9.0
-  resolution: "oxc-resolver@npm:11.9.0"
+"oxc-resolver@npm:^11.12.0":
+  version: 11.13.0
+  resolution: "oxc-resolver@npm:11.13.0"
   dependencies:
-    "@oxc-resolver/binding-android-arm-eabi": 11.9.0
-    "@oxc-resolver/binding-android-arm64": 11.9.0
-    "@oxc-resolver/binding-darwin-arm64": 11.9.0
-    "@oxc-resolver/binding-darwin-x64": 11.9.0
-    "@oxc-resolver/binding-freebsd-x64": 11.9.0
-    "@oxc-resolver/binding-linux-arm-gnueabihf": 11.9.0
-    "@oxc-resolver/binding-linux-arm-musleabihf": 11.9.0
-    "@oxc-resolver/binding-linux-arm64-gnu": 11.9.0
-    "@oxc-resolver/binding-linux-arm64-musl": 11.9.0
-    "@oxc-resolver/binding-linux-ppc64-gnu": 11.9.0
-    "@oxc-resolver/binding-linux-riscv64-gnu": 11.9.0
-    "@oxc-resolver/binding-linux-riscv64-musl": 11.9.0
-    "@oxc-resolver/binding-linux-s390x-gnu": 11.9.0
-    "@oxc-resolver/binding-linux-x64-gnu": 11.9.0
-    "@oxc-resolver/binding-linux-x64-musl": 11.9.0
-    "@oxc-resolver/binding-wasm32-wasi": 11.9.0
-    "@oxc-resolver/binding-win32-arm64-msvc": 11.9.0
-    "@oxc-resolver/binding-win32-ia32-msvc": 11.9.0
-    "@oxc-resolver/binding-win32-x64-msvc": 11.9.0
+    "@oxc-resolver/binding-android-arm-eabi": 11.13.0
+    "@oxc-resolver/binding-android-arm64": 11.13.0
+    "@oxc-resolver/binding-darwin-arm64": 11.13.0
+    "@oxc-resolver/binding-darwin-x64": 11.13.0
+    "@oxc-resolver/binding-freebsd-x64": 11.13.0
+    "@oxc-resolver/binding-linux-arm-gnueabihf": 11.13.0
+    "@oxc-resolver/binding-linux-arm-musleabihf": 11.13.0
+    "@oxc-resolver/binding-linux-arm64-gnu": 11.13.0
+    "@oxc-resolver/binding-linux-arm64-musl": 11.13.0
+    "@oxc-resolver/binding-linux-ppc64-gnu": 11.13.0
+    "@oxc-resolver/binding-linux-riscv64-gnu": 11.13.0
+    "@oxc-resolver/binding-linux-riscv64-musl": 11.13.0
+    "@oxc-resolver/binding-linux-s390x-gnu": 11.13.0
+    "@oxc-resolver/binding-linux-x64-gnu": 11.13.0
+    "@oxc-resolver/binding-linux-x64-musl": 11.13.0
+    "@oxc-resolver/binding-wasm32-wasi": 11.13.0
+    "@oxc-resolver/binding-win32-arm64-msvc": 11.13.0
+    "@oxc-resolver/binding-win32-ia32-msvc": 11.13.0
+    "@oxc-resolver/binding-win32-x64-msvc": 11.13.0
   dependenciesMeta:
     "@oxc-resolver/binding-android-arm-eabi":
       optional: true
@@ -9781,7 +9778,7 @@ __metadata:
       optional: true
     "@oxc-resolver/binding-win32-x64-msvc":
       optional: true
-  checksum: 4e94c6a7b3f0391635b662d0718d80e826e20c79a91671e1a0d557d1366fa82eb9467a1c0dde1166337333b301fee3aac15a3de486d2649fe7d45271f89fccd6
+  checksum: e992b35cb0cb101df63bff16ab5c8786eddc29a10e94cbc17846de5c40d3ca42f3a05b674f385769556abbf351a3a73558ce9e20a5cefbe07616ce5332ce0a57
   languageName: node
   linkType: hard
 
@@ -9865,12 +9862,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse5@npm:^7.3.0":
-  version: 7.3.0
-  resolution: "parse5@npm:7.3.0"
+"parse5@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "parse5@npm:8.0.0"
   dependencies:
     entities: ^6.0.0
-  checksum: ffd040c4695d93f0bc370e3d6d75c1b352178514af41be7afa212475ea5cead1d6e377cd9d4cec6a5e2bcf497ca50daf9e0088eadaa37dbc271f60def08fdfcd
+  checksum: 6f5844c71214f70b97e09573699693cfaa37cbb0ab3a41af4c0d295474a82c23cd48b2daaa2cefa5f5cdc7d0bfa6b1949300668155f54d389e51edec1dc6d27a
   languageName: node
   linkType: hard
 
@@ -10584,13 +10581,6 @@ __metadata:
   bin:
     rollup: dist/bin/rollup
   checksum: fbdd9b470585fe1add3ec35edb760de289fe4413c9eb4ba5321fcf38638669d7f0d44ee54f9c55cd81404c69caa2c4b0598d2b4715e0b138cdace65bbe9a207a
-  languageName: node
-  linkType: hard
-
-"rrweb-cssom@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "rrweb-cssom@npm:0.8.0"
-  checksum: b84912cd1fbab9c972bf3fd5ca27b492efb442cacb23b6fd5a5ef6508572a91e411d325692609bf758865bc38a01b876e343c552d0e2ae87d0ff9907d96ef622
   languageName: node
   linkType: hard
 
@@ -11500,58 +11490,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "turbo-darwin-64@npm:2.5.8"
+"turbo-darwin-64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "turbo-darwin-64@npm:2.6.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "turbo-darwin-arm64@npm:2.5.8"
+"turbo-darwin-arm64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "turbo-darwin-arm64@npm:2.6.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "turbo-linux-64@npm:2.5.8"
+"turbo-linux-64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "turbo-linux-64@npm:2.6.0"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "turbo-linux-arm64@npm:2.5.8"
+"turbo-linux-arm64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "turbo-linux-arm64@npm:2.6.0"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "turbo-windows-64@npm:2.5.8"
+"turbo-windows-64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "turbo-windows-64@npm:2.6.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:2.5.8":
-  version: 2.5.8
-  resolution: "turbo-windows-arm64@npm:2.5.8"
+"turbo-windows-arm64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "turbo-windows-arm64@npm:2.6.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:2.5.8":
-  version: 2.5.8
-  resolution: "turbo@npm:2.5.8"
+"turbo@npm:2.6.0":
+  version: 2.6.0
+  resolution: "turbo@npm:2.6.0"
   dependencies:
-    turbo-darwin-64: 2.5.8
-    turbo-darwin-arm64: 2.5.8
-    turbo-linux-64: 2.5.8
-    turbo-linux-arm64: 2.5.8
-    turbo-windows-64: 2.5.8
-    turbo-windows-arm64: 2.5.8
+    turbo-darwin-64: 2.6.0
+    turbo-darwin-arm64: 2.6.0
+    turbo-linux-64: 2.6.0
+    turbo-linux-arm64: 2.6.0
+    turbo-windows-64: 2.6.0
+    turbo-windows-arm64: 2.6.0
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -11567,7 +11557,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: f1d6d84e828f7f2d41ae7598507267c7ed8de22307507a304da8353ce4e47cf38c1c7c26e6249c1247ea7702eebd6c062b6fcf037c565b2a94417690956c8cb5
+  checksum: c77632d31be7672660ccaa755dcee977001f2aa13c3a3fa659881286ab81ed17813eb7b55f11ba0ccb35a627aeee1c39e75904df56e8955962eea219a0a55a4e
   languageName: node
   linkType: hard
 
@@ -12050,7 +12040,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"whatwg-url@npm:^15.0.0":
+"whatwg-url@npm:^15.0.0, whatwg-url@npm:^15.1.0":
   version: 15.1.0
   resolution: "whatwg-url@npm:15.1.0"
   dependencies:
@@ -12244,7 +12234,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.18.0, ws@npm:^8.18.2":
+"ws@npm:^8.18.0, ws@npm:^8.18.3":
   version: 8.18.3
   resolution: "ws@npm:8.18.3"
   peerDependencies:
@@ -12256,6 +12246,15 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: d64ef1631227bd0c5fe21b3eb3646c9c91229402fb963d12d87b49af0a1ef757277083af23a5f85742bae1e520feddfb434cb882ea59249b15673c16dc3f36e0
+  languageName: node
+  linkType: hard
+
+"wsl-utils@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "wsl-utils@npm:0.1.0"
+  dependencies:
+    is-wsl: ^3.1.0
+  checksum: de4c92187e04c3c27b4478f410a02e81c351dc85efa3447bf1666f34fc80baacd890a6698ec91995631714086992036013286aea3d77e6974020d40a08e00aec
   languageName: node
   linkType: hard
 
