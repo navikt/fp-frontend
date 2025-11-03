@@ -102,9 +102,9 @@ async function generateTypes() {
     }
 
     console.log('Genererer TS-typer fra swagger.json');
-    spawnSync('yarn', ['run', 'openapi-ts'], { stdio: 'inherit' });
-
     const isWindows = process.platform === 'win32';
+
+    spawnSync('yarn', ['run', 'openapi-ts'], { stdio: 'inherit', shell: isWindows });
     if (isWindows) {
       spawnSync(
         'cmd',
