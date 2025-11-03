@@ -67,7 +67,7 @@ const transformTittelValues = (
   values: JournalføringFormValues,
   journalpost: Journalpost,
 ): OppdaterJournalførTittlerSubmitValue | undefined => {
-  const nyJournalpostTittel = journalpost.tittel !== values.journalpostTittel ? values.journalpostTittel : undefined;
+  const nyJournalpostTittel = journalpost.tittel === values.journalpostTittel ? undefined : values.journalpostTittel;
   const endredeDokumenter =
     nyJournalpostTittel && dokumentTittelSkalStyresAvJournalpost(journalpost)
       ? transformValuesEttDokument(journalpost, nyJournalpostTittel)

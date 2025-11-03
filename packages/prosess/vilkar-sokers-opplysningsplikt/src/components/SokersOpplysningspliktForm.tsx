@@ -72,7 +72,7 @@ const buildInitialValues = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
-  const isOpenAksjonspunkt = aksjonspunkt && aksjonspunkt.status === 'OPPR';
+  const isOpenAksjonspunkt = aksjonspunkt?.status === 'OPPR';
   const isVilkarGodkjent = soknadExists && 'OPPFYLT' === status;
 
   // TODO Mogleg inntektsmeldingerSomIkkeKommer kan fjernast, men trur fjerning av bruken av denne i render er ein midlertidig

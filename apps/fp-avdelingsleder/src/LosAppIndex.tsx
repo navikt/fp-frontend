@@ -26,8 +26,8 @@ import './globalCss/global.module.css';
 
 import messages from '../i18n/nb_NO.json';
 
-import '@navikt/ds-css/darkside';
 import '@navikt/ds-css-internal';
+import '@navikt/ds-css/darkside';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
@@ -92,7 +92,7 @@ const LosAppIndex = () => {
           crashMessage={crashMessage}
           theme={theme}
           setTheme={setTheme}
-          navAnsatt={navAnsatt}
+          ansattnavn={navAnsatt.navn}
         />
         <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
           {shouldRenderHome && <Home headerHeight={headerHeight} initData={initFetchQuery.data} />}
