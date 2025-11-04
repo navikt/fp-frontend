@@ -7,7 +7,7 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type {
   KlageHjemmel,
   KlageVurdering,
@@ -126,7 +126,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
           medholdReasons={alleKodeverk['KlageMedholdÅrsak']}
           alleHjemmlerMedNavn={hjemmlerMedNavn}
         />
-        <ProsessStegBegrunnelseTextFieldNew
+        <ProsessStegBegrunnelseTextField
           readOnly={isReadOnly}
           text={intl.formatMessage({ id: 'BehandleKlageFormNfp.BegrunnelseForKlage' })}
         />
@@ -150,7 +150,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
               </>
             )}
             {formValues.klageVurdering !== 'STADFESTE_YTELSESVEDTAK' && (
-              <ProsessStegSubmitButtonNew
+              <ProsessStegSubmitButton
                 isReadOnly={isReadOnly}
                 isSubmittable={isSubmittable}
                 isSubmitting={formMethods.formState.isSubmitting}

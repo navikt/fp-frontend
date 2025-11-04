@@ -9,7 +9,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, Innsyn, InnsynDokument } from '@navikt/fp-types';
 import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -36,7 +36,7 @@ const getDefaultValues = (
   innsynResultatType: innsyn?.innsynResultatType,
   fristDato: fristBehandlingPåVent ?? dayjs().add(3, 'days').format(ISO_DATE_FORMAT),
   sattPaVent: aksjonspunkter[0]?.status === 'OPPR' ? undefined : !!fristBehandlingPåVent,
-  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+  ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
   ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter ?? []),
 });
 
@@ -131,7 +131,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
           behandlingTypes={alleKodeverk['BehandlingType']}
         />
         <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} readOnly={isReadOnly} />
-        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+        <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
         <VStack gap="space-12">
           <RhfRadioGroup
             name="innsynResultatType"
@@ -183,7 +183,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
             </ArrowBox>
           )}
         </VStack>
-        <ProsessStegSubmitButtonNew
+        <ProsessStegSubmitButton
           isReadOnly={isReadOnly}
           isSubmittable={isSubmittable}
           isSubmitting={formMethods.formState.isSubmitting}

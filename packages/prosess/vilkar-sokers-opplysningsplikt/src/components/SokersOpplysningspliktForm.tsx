@@ -7,7 +7,11 @@ import { required } from '@navikt/ft-form-validators';
 import { BTag, dateFormat, isObject } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { ProsessPanelTemplate, ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
+import {
+  ProsessPanelTemplate,
+  ProsessStegBegrunnelseTextField,
+  type ProsessStegBegrunnelseTextFieldFormValues,
+} from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysninger,
@@ -94,7 +98,7 @@ const buildInitialValues = (
     inntektsmeldingerSomIkkeKommer,
     erVilkarOk: isOpenAksjonspunkt && soknadExists ? undefined : isVilkarGodkjent,
     hasAksjonspunkt: aksjonspunkt !== undefined,
-    ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+    ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
   };
 };
 
@@ -134,7 +138,7 @@ const transformValues = (
         };
       })
       .filter(o => o !== undefined),
-    ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
+    ...ProsessStegBegrunnelseTextField.transformValues(values),
   };
 };
 
@@ -143,7 +147,7 @@ type FormValues = {
   begrunnelse?: string;
   inntektsmeldingerSomIkkeKommer?: { [key: string]: boolean };
   hasAksjonspunkt?: boolean;
-};
+} & ProsessStegBegrunnelseTextFieldFormValues;
 
 interface Props {
   soknad: Soknad;
@@ -244,7 +248,7 @@ export const SokersOpplysningspliktForm = ({ soknad, status, arbeidsgiverOpplysn
               </Table>
             </VStack>
           )}
-          <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
           {!isReadOnly && (
             <RhfRadioGroup name="erVilkarOk" control={formMethods.control} legend="" hideLegend validate={[required]}>
               <HStack gap="space-16">

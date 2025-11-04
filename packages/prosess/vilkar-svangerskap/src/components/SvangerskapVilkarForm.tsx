@@ -10,8 +10,10 @@ import dayjs from 'dayjs';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
-  ProsessStegBegrunnelseTextFieldNew,
+  ProsessStegBegrunnelseTextField,
+  type ProsessStegBegrunnelseTextFieldFormValues,
   VilkarResultPicker,
+  type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -38,11 +40,7 @@ const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): bo
 const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrettelegging): boolean =>
   svangerskapspengerTilrettelegging.arbeidsforholdListe.some(arbfor => finnesUttakPåArbfor(arbfor));
 
-type FormValues = {
-  erVilkarOk?: boolean;
-  avslagCode?: string;
-  begrunnelse?: string;
-};
+type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextFieldFormValues;
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
@@ -50,12 +48,12 @@ const buildInitialValues = (
   behandlingsresultat?: BehandlingFpSak['behandlingsresultat'],
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
-  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+  ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
 const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp => ({
   ...VilkarResultPicker.transformValues(values),
-  ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
+  ...ProsessStegBegrunnelseTextField.transformValues(values),
   kode: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
 });
 
@@ -135,7 +133,7 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
               <FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: BTag }} />
             }
           />
-          <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} notRequired={erVilkarOk} />
+          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} notRequired={erVilkarOk} />
         </VStack>
       </ProsessPanelTemplate>
     </RhfForm>

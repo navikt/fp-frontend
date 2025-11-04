@@ -2,7 +2,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
-import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import { ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 
 interface Props {
   erModalÅpen: boolean;
@@ -54,7 +54,7 @@ export const BekreftOgSubmitKlageModal = ({
           </VStack>
           <div>
             <HStack gap="space-8">
-              <ProsessStegSubmitButtonNew
+              <ProsessStegSubmitButton
                 isReadOnly={readOnly}
                 isSubmittable={isSubmittable}
                 isSubmitting={isSubmitting}

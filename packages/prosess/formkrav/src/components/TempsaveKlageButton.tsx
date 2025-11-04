@@ -3,6 +3,8 @@ import { FormattedMessage } from 'react-intl';
 
 import { Button } from '@navikt/ds-react';
 
+import type { ProsessStegBegrunnelseTextFieldFormValues } from '@navikt/fp-prosess-felles';
+
 import type { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
 import type { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
 
@@ -13,11 +15,10 @@ export type FormValues = {
   erFristOverholdt?: boolean;
   erKonkret?: boolean;
   erSignert?: boolean;
-  begrunnelse?: string;
   vedtak?: string;
   mottattDato?: string;
   fritekstTilBrev?: string;
-};
+} & ProsessStegBegrunnelseTextFieldFormValues;
 
 type TilbakekrevingInfo = {
   tilbakekrevingUuid: string;

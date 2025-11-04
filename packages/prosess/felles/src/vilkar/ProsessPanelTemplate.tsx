@@ -5,7 +5,7 @@ import { BodyShort, Detail, Heading, HStack, Label, VStack } from '@navikt/ds-re
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import { ProsessStegSubmitButton } from '../ProsessStegSubmitButtonNew';
+import { ProsessStegSubmitButton } from '../ProsessStegSubmitButton';
 
 import styles from './prosessPanelTemplate.module.css';
 

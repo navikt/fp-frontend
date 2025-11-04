@@ -10,7 +10,7 @@ import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 import type { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -232,7 +232,7 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
               </VStack>
             </HStack>
           </VStack>
-          <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
           {skalLagreFritekstfelt(formVerdier) && (
             <RhfTextarea
               name="fritekstTilBrev"
@@ -245,7 +245,7 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
             />
           )}
           <HStack justify="space-between">
-            <ProsessStegSubmitButtonNew
+            <ProsessStegSubmitButton
               isReadOnly={isReadOnly}
               isSubmittable={isSubmittable}
               isSubmitting={formMethods.formState.isSubmitting}

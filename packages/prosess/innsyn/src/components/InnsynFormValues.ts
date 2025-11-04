@@ -1,3 +1,4 @@
+import type { ProsessStegBegrunnelseTextFieldFormValues } from '@navikt/fp-prosess-felles';
 import type { InnsynResultatType } from '@navikt/fp-types';
 
 export type InnsynFormValues = {
@@ -5,6 +6,5 @@ export type InnsynFormValues = {
   innsynResultatType?: InnsynResultatType;
   fristDato?: string;
   sattPaVent?: boolean;
-  begrunnelse?: string;
   [key: `dokument_${string}`]: boolean;
-};
+} & ProsessStegBegrunnelseTextFieldFormValues;

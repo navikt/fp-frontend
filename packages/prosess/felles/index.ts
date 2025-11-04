@@ -1,6 +1,9 @@
-export { ProsessStegBegrunnelseTextField as ProsessStegBegrunnelseTextFieldNew } from './src/ProsessStegBegrunnelseTextFieldNew';
-export { ProsessStegSubmitButton as ProsessStegSubmitButtonNew } from './src/ProsessStegSubmitButtonNew';
-export { VilkarResultPicker } from './src/vilkar/VilkarResultPicker';
+export {
+  ProsessStegBegrunnelseTextField,
+  type ProsessStegBegrunnelseTextFieldFormValues,
+} from './src/ProsessStegBegrunnelseTextField';
+export { ProsessStegSubmitButton } from './src/ProsessStegSubmitButton';
+export { VilkarResultPicker, type VilkarResultPickerFormValues } from './src/vilkar/VilkarResultPicker';
 export { ProsessPanelTemplate } from './src/vilkar/ProsessPanelTemplate';
 export { OverstyringPanel } from './src/vilkar/OverstyringPanel';
 export { validerApKodeOgHentApEnum } from './src/validerApKodeOgHentApEnum';

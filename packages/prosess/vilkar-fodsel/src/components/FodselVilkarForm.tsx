@@ -8,19 +8,17 @@ import { BTag } from '@navikt/ft-utils';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
-  ProsessStegBegrunnelseTextFieldNew,
+  ProsessStegBegrunnelseTextField,
+  type ProsessStegBegrunnelseTextFieldFormValues,
   validerApKodeOgHentApEnum,
   VilkarResultPicker,
+  type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
 import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-type FormValues = {
-  erVilkarOk?: boolean;
-  avslagCode?: string;
-  begrunnelse?: string;
-};
+type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextFieldFormValues;
 
 interface Props {
   status: string;
@@ -84,7 +82,7 @@ export const FodselVilkarForm = ({ status }: Props) => {
             customVilkårOppfyltText={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
             customVilkårIkkeOppfyltText={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
           />
-          <ProsessStegBegrunnelseTextFieldNew useAllWidth readOnly={isReadOnly} />
+          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
     </RhfForm>
@@ -97,11 +95,11 @@ const buildInitialValues = (
   behandlingsresultat?: BehandlingFpSak['behandlingsresultat'],
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
-  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+  ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
 const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): VurdereYtelseSammeBarnSokerAp => ({
   ...VilkarResultPicker.transformValues(values),
-  ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
+  ...ProsessStegBegrunnelseTextField.transformValues(values),
   kode: validerApKodeOgHentApEnum(aksjonspunkter[0]?.definisjon, AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE),
 });
