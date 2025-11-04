@@ -5,9 +5,8 @@ import type { ReactRenderer } from '@storybook/react';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
 export const withThemeDecorator: DecoratorFunction<ReactRenderer> = (Story, context) => {
-  const theme = context.globals['theme'] as string;
-
   const Wrapper = () => {
+    const theme = context.globals['theme'] as string;
     useEffect(() => {
       const elements = document.getElementsByClassName('sb-show-main');
       if (elements.length > 0) {
