@@ -3,19 +3,15 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Fagsak } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { Fagsak } from '@navikt/fp-types';
 
 import { UttakFaktaEøsIndex } from './UttakFaktaEøsIndex';
-
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: true,
-  aksjonspunktType: 'MANU',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'fakta/fakta-uttak-eøs',
@@ -26,7 +22,7 @@ const meta = {
       relasjonsRolleType: 'FARA',
     } as Fagsak,
     kanOverstyre: false,
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART)],
   },
   render: args => <UttakFaktaEøsIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof UttakFaktaEøsIndex>>;
@@ -68,12 +64,9 @@ export const AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg: S
 export const AksjonspunktErUtførtHvorIngenPerioderErRegistrert: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART, {
         status: 'UTFO',
-        begrunnelse: 'Dette er en begrunnelse',
-      },
+      }),
     ],
     annenForelderUttakEøs: [],
   },
@@ -82,13 +75,7 @@ export const AksjonspunktErUtførtHvorIngenPerioderErRegistrert: Story = {
 export const OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSomKanLøsesEllerEndres: Story = {
   args: {
     kanOverstyre: true,
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-        status: 'UTFO',
-      },
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART, { status: 'UTFO' })],
     annenForelderUttakEøs: [
       {
         fom: '2023-02-01',

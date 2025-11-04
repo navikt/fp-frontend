@@ -4,7 +4,12 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
 import {
   KjønnkodeEnum,
   type Personadresse,
@@ -83,18 +88,7 @@ type Story = StoryObj<typeof meta>;
 export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
   args: {
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.AVKLAR_LØPENDE_OMSORG,
-        status: 'OPPR',
-
-        kanLoses: true,
-        vilkarType: 'FP_VK_1',
-        toTrinnsBehandling: false,
-        aksjonspunktType: 'AUTO',
-        erAktivt: true,
-      },
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_LØPENDE_OMSORG)],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AVKLAR_LØPENDE_OMSORG]: merknaderFraBeslutter,
     },

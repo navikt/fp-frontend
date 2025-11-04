@@ -4,9 +4,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
 import type {
-  Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
   BehandlingFpSak,
   Fagsak,
@@ -19,16 +23,7 @@ import type {
 
 import { UttakProsessIndex } from './UttakProsessIndex';
 
-const åpentAksjonspunkt: Aksjonspunkt[] = [
-  {
-    definisjon: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
-    status: 'OPPR',
-    kanLoses: true,
-    toTrinnsBehandling: true,
-    aksjonspunktType: 'MANU',
-    erAktivt: true,
-  },
-];
+const defaultAksjonspunkt = lagAksjonspunkt(AksjonspunktKode.FASTSETT_UTTAKPERIODER);
 
 const familiehendelse = {
   fødselTermin: {
@@ -178,7 +173,7 @@ type Story = StoryObj<typeof meta>;
 
 export const AksjonspunktDerValgtStønadskontoIkkeFinnes: Story = {
   args: {
-    aksjonspunkterForPanel: åpentAksjonspunkt,
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.FASTSETT_UTTAKPERIODER)],
     uttaksresultat: {
       perioderSøker: [
         {
@@ -441,7 +436,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
 
 export const AksjonspunktIRevurdering: Story = {
   args: {
-    aksjonspunkterForPanel: åpentAksjonspunkt,
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     uttaksresultat: {
       perioderSøker: [
         {
@@ -818,7 +813,7 @@ export const ProsessUttakToParter: Story = {
 
 export const AksjonspunktForFar: Story = {
   args: {
-    aksjonspunkterForPanel: åpentAksjonspunkt,
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     personoversikt: {
       bruker: {
         kjønn: 'M',
@@ -1012,7 +1007,7 @@ const uttakStønadskontoerForUgyldigForbrukt = {
 
 export const StønadskontoMedUgyldigForbruk: Story = {
   args: {
-    aksjonspunkterForPanel: åpentAksjonspunkt,
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     uttakStonadskontoer: uttakStønadskontoerForUgyldigForbrukt,
     oppdaterStønadskontoer: v => {
       action('button-click')(v);
@@ -1061,7 +1056,7 @@ export const StønadskontoMedUgyldigForbruk: Story = {
 
 export const VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent: Story = {
   args: {
-    aksjonspunkterForPanel: åpentAksjonspunkt,
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     uttaksresultat: {
       perioderSøker: [
         {
@@ -1105,7 +1100,7 @@ export const VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent: Story = {
 
 export const VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent: Story = {
   args: {
-    aksjonspunkterForPanel: åpentAksjonspunkt,
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     uttaksresultat: {
       perioderSøker: [
         {
@@ -1149,7 +1144,7 @@ export const VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent: 
 
 export const VisOppholdsperiode: Story = {
   args: {
-    aksjonspunkterForPanel: åpentAksjonspunkt,
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     uttaksresultat: {
       perioderSøker: [
         {

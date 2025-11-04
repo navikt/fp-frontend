@@ -3,9 +3,8 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import { lagAksjonspunkt, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
-  Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
   FamilieHendelse,
@@ -143,23 +142,17 @@ export const UtenAksjonspunkt: Story = {
 export const UtførtAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
-        definisjon: AksjonspunktKode.UTGÅTT_5090,
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5090, {
         status: 'UTFO',
-      },
-    ] as Aksjonspunkt[],
+        begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
+      }),
+    ],
   },
 };
 
 export const MedFeriepengegrunnlag: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.UTGÅTT_5090,
-        status: 'OPPR',
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5090)],
     feriepengegrunnlag: {
       andeler: [
         {

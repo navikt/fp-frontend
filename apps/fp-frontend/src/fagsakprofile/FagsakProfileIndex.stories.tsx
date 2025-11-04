@@ -8,7 +8,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
-  getIntlDecorator,
+  getIntlDecorator, lagAksjonspunkt,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
@@ -100,16 +100,11 @@ const ALLE_BEHANDLINGER = [
     kontrollResultat: {
       kontrollresultat: 'HOY',
     },
-    risikoAksjonspunkt: {
-      definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
-      status: 'OPPR',
-
-      toTrinnsBehandling: false,
-
-      aksjonspunktType: '-',
+    risikoAksjonspunkt: lagAksjonspunkt(
+      AksjonspunktKode.VURDER_FARESIGNALER,{
       kanLoses: false,
       erAktivt: false,
-    },
+    }),
 
     gjeldendeVedtak: false,
 

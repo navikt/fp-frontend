@@ -3,8 +3,13 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { Fagsak, Soknad } from '@navikt/fp-types';
 
 import { SakenFaktaIndex } from './SakenFaktaIndex';
 
@@ -19,15 +24,6 @@ const defaultSøknad = {
     },
   },
 } as Soknad;
-
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: true,
-  aksjonspunktType: 'MANU',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'fakta/fakta-saken',
@@ -83,10 +79,7 @@ export const KanIkkeOverstyreDekningsgrad: Story = {
 export const ApentAksjonspunktForInnhentingAvDokumentasjon: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-      },
+     lagAksjonspunkt(AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)
     ],
   },
 };
@@ -94,10 +87,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjon: Story = {
 export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-      },
+      lagAksjonspunkt(AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)
     ],
     fagsak: {
       fagsakYtelseType: 'SVP',
@@ -108,10 +98,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
 export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-      },
+      lagAksjonspunkt(AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)
     ],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK]: {
@@ -124,13 +111,11 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
 export const DekningsgradErEndret: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
+      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,{
         status: 'UTFO',
         kanLoses: true,
         begrunnelse: 'Er endret til 80 fordi...',
-      },
+      })
     ],
     soknad: {
       oppgittFordeling: {
@@ -150,10 +135,7 @@ export const DekningsgradErEndret: Story = {
 export const HarFåttDekningsgradAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-      },
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_DEKNINGSGRAD),
     ],
     fagsak: {
       fagsakYtelseType: 'FP',
@@ -186,7 +168,7 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
 
 export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
   args: {
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_DEKNINGSGRAD)],
     fagsak: {
       fagsakYtelseType: 'FP',
       bruker: {
@@ -219,11 +201,9 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
 export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_DEKNINGSGRAD,{
         begrunnelse: 'Dette er en begrunnelse',
-      },
+      })
     ],
     fagsak: {
       fagsakYtelseType: 'FP',

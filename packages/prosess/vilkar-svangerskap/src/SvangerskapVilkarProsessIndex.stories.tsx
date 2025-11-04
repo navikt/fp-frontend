@@ -3,13 +3,14 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type {
-  Aksjonspunkt,
-  ArbeidsforholdFodselOgTilrettelegging,
-  BehandlingFpSak,
-  FodselOgTilrettelegging,
-} from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  lagVilkår,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { ArbeidsforholdFodselOgTilrettelegging, BehandlingFpSak, FodselOgTilrettelegging } from '@navikt/fp-types';
 
 import { SvangerskapVilkarProsessIndex } from './SvangerskapVilkarProsessIndex';
 
@@ -32,14 +33,10 @@ type Story = StoryObj<typeof meta>;
 export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
-        status: 'OPPR',
-        toTrinnsBehandling: false,
-        aksjonspunktType: '-',
+      lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET, {
         kanLoses: false,
         erAktivt: false,
-      },
+      }),
     ],
     isReadOnly: false,
     vilkårForPanel: [lagVilkår('SVP_VK_1', { vilkarStatus: 'IKKE_VURDERT' })],
@@ -49,12 +46,7 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
 
 export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
-        status: 'OPPR',
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET)],
     status: 'IKKE_VURDERT',
     vilkårForPanel: [lagVilkår('SVP_VK_1', { vilkarStatus: 'IKKE_VURDERT' })],
     svangerskapspengerTilrettelegging: {
@@ -74,12 +66,11 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
 export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
+      lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET, {
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
-      },
-    ] as Aksjonspunkt[],
+      }),
+    ],
     vilkårForPanel: [lagVilkår('SVP_VK_1', { vilkarStatus: 'OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
@@ -97,12 +88,11 @@ export const AvslåttVilkår: Story = {
       },
     } as BehandlingFpSak,
     aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
+      lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET, {
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
-      },
-    ] as Aksjonspunkt[],
+      }),
+    ],
     vilkårForPanel: [lagVilkår('SVP_VK_1', { vilkarStatus: 'IKKE_OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,

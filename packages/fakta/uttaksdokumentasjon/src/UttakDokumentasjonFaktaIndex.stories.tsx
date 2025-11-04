@@ -3,12 +3,13 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
-  type Aksjonspunkt,
-  type AktivitetskravGrunnlagArbeid,
-  type DokumentasjonVurderingBehov,
-} from '@navikt/fp-types';
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { AktivitetskravGrunnlagArbeid, DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
 import { UttakDokumentasjonFaktaIndex } from './UttakDokumentasjonFaktaIndex';
 
@@ -30,15 +31,6 @@ const aktivitetskravGrunnlagListe = [
     },
   },
 ] satisfies AktivitetskravGrunnlagArbeid[];
-
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: false,
-  aksjonspunktType: 'MANU',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
 
 const opprettetDokumentasjonVurderingBehovListe = [
   {
@@ -103,7 +95,7 @@ type Story = StoryObj<typeof meta>;
 
 export const AksjonspunktMedUavklartePerioder: Story = {
   args: {
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON)],
     dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
   },
 };
@@ -154,12 +146,9 @@ const utfortDokumentasjonVurderingBehovListe = [
 export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
+      lagAksjonspunkt(AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON, {
         status: 'UTFO',
-        begrunnelse: 'Dette er en begrunnelse',
-        kanLoses: false,
-      },
+      }),
     ],
     dokumentasjonVurderingBehov: utfortDokumentasjonVurderingBehovListe,
     isReadOnly: true,
@@ -169,10 +158,10 @@ export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
 export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
+      lagAksjonspunkt(AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON, {
         status: 'UTFO',
-      },
+        begrunnelse: undefined,
+      }),
     ],
     dokumentasjonVurderingBehov: [
       {

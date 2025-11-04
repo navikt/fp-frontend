@@ -3,18 +3,16 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, OmsorgsovertakelseDto } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { OmsorgsovertakelseDto } from '@navikt/fp-types';
 
 import { OmsorgsovertakelseFaktaIndex } from './OmsorgsovertakelseFaktaIndex';
 
-const lagAksjonspunkt = (definisjon: AksjonspunktKode, status: 'OPPR' | 'UTFO'): Aksjonspunkt => ({
-  ...aksjonspunktDefault,
-  definisjon,
-  status,
-  kanLoses: status === 'OPPR',
-  begrunnelse: status === 'UTFO' ? 'Dette er en begrunnelse' : undefined,
-});
 const omsorgsovertakelseDefault: OmsorgsovertakelseDto = {
   søknad: {
     barn: [
@@ -76,27 +74,19 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: false,
-  aksjonspunktType: 'AUTO',
-  vilkarType: 'FP_VK_6',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
+const defaultAksjonspunkt = lagAksjonspunkt(AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET);
 
 export const EngangsstønadUtenAp: Story = {};
 
 export const EngangsstønadMedAp: Story = {
   args: {
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
   },
 };
 
 export const EngangsstønadMedApOgSaksnummereForTidligereSaker: Story = {
   args: {
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     omsorgsovertakelse: {
       ...omsorgsovertakelseDefault,
       andreSakerSammeFamiliehendelse: [{ saksnummer: '123456789' }, { saksnummer: '908766253' }],
@@ -107,16 +97,16 @@ export const EngangsstønadMedApOgSaksnummereForTidligereSaker: Story = {
 export const LegacyAP: Story = {
   args: {
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5008, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5054, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5006, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5004, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5005, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5013, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5014, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5011, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_6004, 'UTFO'),
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_6010, 'UTFO'),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5008, { status: 'UTFO' }),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5054, { status: 'UTFO' }),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5006, { status: 'UTFO' }),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5004, { status: 'UTFO' }),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5005, { status: 'UTFO' }),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5013, { status: 'UTFO' }),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5014, { status: 'UTFO' }),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5011, { status: 'UTFO' }),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_6004, { status: 'UTFO' }),
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_6010, { status: 'UTFO' }),
     ],
   },
 };

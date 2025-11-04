@@ -4,8 +4,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { KlageVurdering } from '@navikt/fp-types';
 
 import { FormkravProsessIndex } from './FormkravProsessIndex';
 import type { AvsluttetBehandling } from './types/avsluttetBehandlingTsType';
@@ -44,11 +49,10 @@ export const FormkravPanelForAksjonspunktNfp: Story = {
       mottattDato: '2025-08-26',
     } as KlageVurdering,
     aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
+      lagAksjonspunkt(AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP, {
         status: 'UTFO',
-      },
-    ] as Aksjonspunkt[],
+      }),
+    ],
   },
 };
 

@@ -3,8 +3,13 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
 
 import { OverføringÅrsak } from './kodeverk/overføringÅrsak';
 import { UttakFaktaIndex } from './UttakFaktaIndex';
@@ -17,15 +22,6 @@ const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
     navn: 'BEDRIFT AS',
   },
 };
-
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: true,
-  aksjonspunktType: 'MANU',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'fakta/fakta-uttak',
@@ -92,10 +88,7 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre: Story = {
 export const VisUttaksperiodeMedAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-      },
+      lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO),
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
@@ -146,10 +139,7 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
 export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-      },
+      lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO),
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
@@ -169,10 +159,7 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
 export const VisOverføringsperiodeMedAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-      },
+      lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO),
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
@@ -192,12 +179,7 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
 
 export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
-      },
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER)],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
     },
@@ -208,12 +190,7 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
 
 export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
-      },
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET)],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
     },
@@ -237,12 +214,7 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
 
 export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
-      },
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG)],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
     },
@@ -267,13 +239,9 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
 export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
+      lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG, {
         status: 'UTFO',
-        begrunnelse: 'Dette er en begrunnelse',
-        kanLoses: false,
-      },
+      }),
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
@@ -302,13 +270,7 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
 export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
-        status: 'UTFO',
-        begrunnelse: 'Dette er en begrunnelse',
-        kanLoses: false,
-      },
+      lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG, { status: 'UTFO' }),
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
@@ -338,10 +300,7 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
 export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-      },
+      lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO),
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',

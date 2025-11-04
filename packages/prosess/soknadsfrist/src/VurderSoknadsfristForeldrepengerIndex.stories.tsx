@@ -3,8 +3,13 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import type { Soknad } from '@navikt/fp-types';
 
 import { VurderSoknadsfristForeldrepengerIndex } from './VurderSoknadsfristForeldrepengerIndex';
 
@@ -25,12 +30,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     soknad,
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST,
-        status: 'OPPR',
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST)],
   },
   render: args => <VurderSoknadsfristForeldrepengerIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof VurderSoknadsfristForeldrepengerIndex>>;

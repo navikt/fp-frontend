@@ -3,8 +3,8 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
+import { alleKodeverk, lagAksjonspunkt, withQueryClient } from '@navikt/fp-storybook-utils';
+import type { BehandlingFpSak } from '@navikt/fp-types';
 
 import { BehandlingPaVent } from './BehandlingPaVent';
 
@@ -42,12 +42,7 @@ export const BehandlingSattPåVent: Story = {
       behandlingHenlagt: false,
       fristBehandlingPåVent: '2030-10-10',
       venteÅrsakKode: 'AVV_FODSEL',
-      aksjonspunkt: [
-        {
-          status: 'OPPR',
-          definisjon: AksjonspunktKode.UTGÅTT_5069,
-        } as Aksjonspunkt,
-      ],
+      aksjonspunkt: [lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5069)],
       links: [link],
     } as BehandlingFpSak,
   },
@@ -64,12 +59,7 @@ export const BehandlingSattManueltPåVent: Story = {
       behandlingHenlagt: false,
       fristBehandlingPåVent: '2030-10-10',
       venteÅrsakKode: 'AVV_FODSEL',
-      aksjonspunkt: [
-        {
-          status: 'OPPR',
-          definisjon: AksjonspunktKode.AUTO_MANUELT_SATT_PÅ_VENT,
-        } as Aksjonspunkt,
-      ],
+      aksjonspunkt: [lagAksjonspunkt(AksjonspunktKode.AUTO_MANUELT_SATT_PÅ_VENT)],
       links: [link],
     } as BehandlingFpSak,
   },

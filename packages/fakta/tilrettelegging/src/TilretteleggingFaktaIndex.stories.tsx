@@ -3,9 +3,13 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
-  type Aksjonspunkt,
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import {
   type ArbeidOgInntektsmelding,
   type ArbeidsforholdFodselOgTilrettelegging,
   type ArbeidsgiverOpplysningerPerId,
@@ -276,18 +280,11 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
-  status: 'OPPR',
-  kanLoses: true,
-  toTrinnsBehandling: false,
-  aksjonspunktType: 'MANU',
-  erAktivt: true,
-} satisfies Aksjonspunkt;
+const defaultAksjonspunkt = lagAksjonspunkt(AksjonspunktKode.VURDER_SVP_TILRETTELEGGING);
 
 export const TilretteleggingMedVelferdspermisjon: Story = {
   args: {
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     svangerskapspengerTilrettelegging: TILRETTELEGGING_PERMISJON,
     arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
   },
@@ -295,7 +292,7 @@ export const TilretteleggingMedVelferdspermisjon: Story = {
 
 export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
   args: {
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     svangerskapspengerTilrettelegging: TILRETTELEGGING_MED_100_PROSENT_PERMISJON,
     arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
   },
@@ -303,7 +300,7 @@ export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
 
 export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
   args: {
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     svangerskapspengerTilrettelegging: SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER,
     arbeidOgInntekt: DEFAULT_ARBEID_OG_INNTEKT,
   },
@@ -311,7 +308,7 @@ export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
 
 export const HarOpphold: Story = {
   args: {
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     svangerskapspengerTilrettelegging: {
       ...TILRETTELEGGING_PERMISJON,
       arbeidsforholdListe: [
@@ -367,7 +364,7 @@ export const HarOpphold: Story = {
 
 export const ErReadonly: Story = {
   args: {
-    aksjonspunkterForPanel: [aksjonspunktDefault],
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
     svangerskapspengerTilrettelegging: {
       ...TILRETTELEGGING_PERMISJON,
       arbeidsforholdListe: [
@@ -419,10 +416,9 @@ export const ErReadonly: Story = {
 export const ErRevurdering: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        ...aksjonspunktDefault,
+      lagAksjonspunkt(AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,{
         begrunnelse: 'Dette er en begrunnelse',
-      },
+      })
     ],
     svangerskapspengerTilrettelegging: {
       ...TILRETTELEGGING_PERMISJON,

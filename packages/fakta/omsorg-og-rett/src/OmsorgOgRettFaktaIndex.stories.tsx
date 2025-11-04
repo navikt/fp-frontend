@@ -4,14 +4,13 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
-  type Aksjonspunkt,
-  KjønnkodeEnum,
-  type OmsorgOgRett,
-  type Personadresse,
-  type PersonopplysningerBasis,
-} from '@navikt/fp-types';
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
+import { KjønnkodeEnum, type OmsorgOgRett, type Personadresse, type PersonopplysningerBasis } from '@navikt/fp-types';
 
 import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
 
@@ -115,13 +114,7 @@ type Story = StoryObj<typeof meta>;
 
 export const HarAksjonspunktForAvklarAleneomsorg: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-        status: 'OPPR',
-        kanLoses: true,
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG)],
     omsorgOgRett: aleneOmsorgForOmsorgOgRett,
     kanOverstyre: false,
   },
@@ -129,13 +122,7 @@ export const HarAksjonspunktForAvklarAleneomsorg: Story = {
 
 export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-        status: 'OPPR',
-        kanLoses: true,
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG)],
     personoversikt: {
       barn: [
         defaultBarn,
@@ -156,13 +143,7 @@ export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn: Story = {
 
 export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
-        status: 'OPPR',
-        kanLoses: true,
-      },
-    ] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT)],
     omsorgOgRett: {
       søknad: {
         søkerHarAleneomsorg: 'NEI',
@@ -190,13 +171,11 @@ export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
 export const AvklarAnnenForelderRettBareFarRett: Story = {
   args: {
     aksjonspunkterForPanel: [
-      {
-        definisjon: AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT, {
         status: 'UTFO',
         begrunnelse: 'Mor har ikke rett og er uføretrygded i pesys.',
-        kanLoses: false,
-      },
-    ] as Aksjonspunkt[],
+      }),
+    ],
     isReadOnly: true,
     omsorgOgRett: {
       søknad: {
@@ -266,7 +245,7 @@ export const RevurderingManuell: Story = {
 };
 export const KanOverstyreMor: Story = {
   args: {
-    aksjonspunkterForPanel: [] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [],
     isReadOnly: false,
     omsorgOgRett: {
       søknad: {
@@ -293,7 +272,7 @@ export const KanOverstyreMor: Story = {
 };
 export const KanOverstyreFarOgAlleredeLøstAP: Story = {
   args: {
-    aksjonspunkterForPanel: [] as Aksjonspunkt[],
+    aksjonspunkterForPanel: [],
     isReadOnly: false,
     omsorgOgRett: {
       søknad: {
