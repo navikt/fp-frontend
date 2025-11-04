@@ -9,7 +9,11 @@ import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import {
+  ProsessStegBegrunnelseTextField,
+  type ProsessStegBegrunnelseTextFieldFormValues,
+  ProsessStegSubmitButton,
+} from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, FamilieHendelse, Soknad, VilkarUtfallType } from '@navikt/fp-types';
 import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -26,8 +30,7 @@ const findSoknadsfristDate = (mottattDato: string, antallDagerSoknadLevertForSen
 
 type FormValues = {
   erVilkarOk?: boolean;
-  begrunnelse?: string;
-};
+} & ProsessStegBegrunnelseTextFieldFormValues;
 
 const findTextCode = (familiehendelse: FamilieHendelse): string => {
   if (familiehendelse.fødselTermin) {
@@ -49,13 +52,13 @@ const findDate = (familiehendelse: FamilieHendelse): string | undefined => {
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: VilkarUtfallType): FormValues => ({
   erVilkarOk: aksjonspunkter[0]?.status === 'OPPR' ? undefined : 'OPPFYLT' === status,
-  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+  ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
 const transformValues = (values: FormValues): SoknadsfristAp => ({
   erVilkarOk: values.erVilkarOk || false,
   kode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
-  ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
+  ...ProsessStegBegrunnelseTextField.transformValues(values),
 });
 
 interface Props {
@@ -170,8 +173,8 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
               ?.navn ?? ''}
           </BodyShort>
         )}
-        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
-        <ProsessStegSubmitButtonNew
+        <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
+        <ProsessStegSubmitButton
           isReadOnly={isReadOnly}
           isSubmittable={isSubmittable}
           isSubmitting={formMethods.formState.isSubmitting}

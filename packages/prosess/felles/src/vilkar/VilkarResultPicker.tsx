@@ -16,7 +16,7 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-type FormValues = {
+export type VilkarResultPickerFormValues = {
   erVilkarOk?: boolean;
   avslagskode?: string;
 };
@@ -38,7 +38,7 @@ export const VilkarResultPicker = ({
   skalKunneInnvilge = true,
   validatorsForRadioOptions,
 }: Props) => {
-  const { getValues, watch, control } = useFormContext<FormValues>();
+  const { getValues, watch, control } = useFormContext<VilkarResultPickerFormValues>();
 
   const erVilkårOk = watch('erVilkarOk');
 
@@ -101,7 +101,7 @@ VilkarResultPicker.buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
   behandlingsresultat?: Behandlingsresultat,
-): FormValues => {
+): VilkarResultPickerFormValues => {
   const erVilkårOk = aksjonspunkter.some(erAksjonspunktÅpent) ? undefined : 'OPPFYLT' === status;
   return {
     erVilkarOk: erVilkårOk,
@@ -110,7 +110,7 @@ VilkarResultPicker.buildInitialValues = (
   };
 };
 
-VilkarResultPicker.transformValues = (values: FormValues) =>
+VilkarResultPicker.transformValues = (values: VilkarResultPickerFormValues) =>
   values.erVilkarOk
     ? { erVilkarOk: true }
     : {

@@ -8,8 +8,10 @@ import { BTag } from '@navikt/ft-utils';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
-  ProsessStegBegrunnelseTextFieldNew,
+  ProsessStegBegrunnelseTextField,
+  type ProsessStegBegrunnelseTextFieldFormValues,
   VilkarResultPicker,
+  type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
 import type { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -17,11 +19,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { OpptjeningVilkarView } from './OpptjeningVilkarView';
 
-type FormValues = {
-  erVilkarOk?: boolean;
-  avslagCode?: string;
-  begrunnelse?: string;
-};
+type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextFieldFormValues;
 
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
@@ -118,7 +116,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, 
             }
             validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}
           />
-          <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
     </RhfForm>
@@ -131,11 +129,11 @@ const buildInitialValues = (
   behandlingsresultat?: Behandlingsresultat,
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
-  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+  ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
 const transformValues = (values: FormValues): AvklarOpptjeningsvilkaretAp => ({
   ...VilkarResultPicker.transformValues(values),
-  ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
+  ...ProsessStegBegrunnelseTextField.transformValues(values),
   kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET,
 });

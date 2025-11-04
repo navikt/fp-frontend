@@ -8,7 +8,11 @@ import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat, periodFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import {
+  ProsessStegBegrunnelseTextField,
+  type ProsessStegBegrunnelseTextFieldFormValues,
+  ProsessStegSubmitButton,
+} from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
 import type { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -21,8 +25,7 @@ const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: boolean): boo
 type FormValues = {
   gyldigSenFremsetting?: boolean;
   ansesMottatt?: string;
-  begrunnelse?: string;
-};
+} & ProsessStegBegrunnelseTextFieldFormValues;
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
@@ -33,7 +36,7 @@ const buildInitialValues = (
   return {
     gyldigSenFremsetting: aksjonspunkter.at(0)?.status === 'OPPR' ? undefined : upgMottattDato !== mottattDato,
     ansesMottatt: upgMottattDato,
-    ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+    ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
   };
 };
 
@@ -41,7 +44,7 @@ const transformValues = (values: FormValues): VurderSoknadsfristAp => ({
   harGyldigGrunn: values.gyldigSenFremsetting,
   ansesMottattDato: values.ansesMottatt,
   kode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST,
-  ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
+  ...ProsessStegBegrunnelseTextField.transformValues(values),
 });
 
 interface Props {
@@ -127,7 +130,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfris
         </HStack>
         <div className={styles['marginTop']}>
           <VStack gap="space-16">
-            <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+            <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
             <VStack gap="space-12">
               <RhfRadioGroup
                 name="gyldigSenFremsetting"
@@ -159,7 +162,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfris
                 </ArrowBox>
               )}
             </VStack>
-            <ProsessStegSubmitButtonNew
+            <ProsessStegSubmitButton
               isReadOnly={isReadOnly}
               isSubmittable={isSubmittable}
               isSubmitting={formMethods.formState.isSubmitting}

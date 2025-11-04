@@ -8,7 +8,7 @@ import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
+import { ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, DokumentMalType, InnsynDokument, InnsynResultatType } from '@navikt/fp-types';
 import type { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -184,7 +184,7 @@ export const InnsynVedtakForm = ({
         )}
         <HStack gap="space-16">
           {!isReadOnly && (
-            <ProsessStegSubmitButtonNew
+            <ProsessStegSubmitButton
               isReadOnly={isReadOnly}
               isSubmittable
               isSubmitting={formMethods.formState.isSubmitting}
