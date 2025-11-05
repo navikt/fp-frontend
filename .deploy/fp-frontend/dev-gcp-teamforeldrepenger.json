@@ -5,6 +5,14 @@
   ],
   "minReplicas": "1",
   "maxReplicas": "2",
+  "limits": {
+    "cpu": "1000m",
+    "mem": "256Mi"
+  },
+  "requests": {
+    "cpu": "150m",
+    "mem": "150Mi"
+  },
   "env": "development",
   "groups": [
     {
