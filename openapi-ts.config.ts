@@ -8,8 +8,8 @@ export default defineConfig({
     lint: 'eslint',
     path: 'packages/types/src/',
     fileName: {
+      name: 'apiDtoGenerert',
       suffix: null,
-      name: 'apiDtoGenerert'
     },
   },
   plugins: [
@@ -18,7 +18,7 @@ export default defineConfig({
       definitions: {
         case: 'preserve',
       },
-      exportFromIndex:false
+      exportFromIndex: false,
     },
   ],
 });
