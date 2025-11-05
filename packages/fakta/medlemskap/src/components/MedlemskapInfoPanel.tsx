@@ -1,6 +1,6 @@
 import { VStack } from '@navikt/ds-react';
 
-import type { Medlemskap, Soknad } from '@navikt/fp-types';
+import type { Medlemskap } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { VurderMedlemskapAksjonspunktForm } from './aksjonspunkt/VurderMedlemskapAksjonspunktForm';
@@ -15,7 +15,6 @@ import { SituasjonOversikt } from './situasjon/SituasjonOversikt';
 
 interface Props {
   medlemskap: Medlemskap;
-  soknad: Soknad;
 }
 
 /**
@@ -23,7 +22,7 @@ interface Props {
  *
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
-export const MedlemskapInfoPanel = ({ medlemskap, soknad }: Props) => {
+export const MedlemskapInfoPanel = ({ medlemskap }: Props) => {
   const { aksjonspunkterForPanel, alleKodeverk, fagsak, isReadOnly } = usePanelDataContext();
 
   const aksjonspunkt = aksjonspunkterForPanel.find(ap => ap.status === 'OPPR' || ap.status === 'UTFO');
@@ -45,10 +44,10 @@ export const MedlemskapInfoPanel = ({ medlemskap, soknad }: Props) => {
           alleKodeverk={alleKodeverk}
         />
       )}
-      <SituasjonOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
+      <SituasjonOversikt medlemskap={medlemskap} alleKodeverk={alleKodeverk} />
 
       <VStack gap="space-8">
-        <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.avvik} skalViseAvvik={harAksjonspunkt} />
+        <OpplysningerOmUtenlandsopphold medlemskap={medlemskap} skalViseAvvik={harAksjonspunkt} />
         <OpplysningerOmAdresser
           medlemskap={medlemskap}
           avvik={medlemskap.avvik}

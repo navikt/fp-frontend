@@ -22,6 +22,7 @@ const soknad = {
     søknadsperiodeSlutt: '2019-01-10',
     utledetSøknadsfrist: '2019-10-01',
   },
+  manglendeVedlegg: []
 } as Soknad;
 
 const meta = {

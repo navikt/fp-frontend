@@ -2,7 +2,7 @@ import { createIntl } from '@navikt/ft-utils';
 import { expect } from 'vitest';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import type { Medlemskap, Personadresse } from '@navikt/fp-types';
+import type { Medlemskap, Personadresse, UtlandsoppholdPeriode } from '@navikt/fp-types';
 
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
 
@@ -16,6 +16,12 @@ const defaultMedlemskapProps: Medlemskap = {
   utenlandsopphold: [],
   oppholdstillatelser: [],
   avvik: [],
+  oppgittUtlandsopphold: {
+    oppholdNestePeriode: false,
+    oppholdSistePeriode: false,
+    utlandsoppholdEtter: [],
+    utlandsoppholdFør: [],
+  },
 };
 
 const intl = createIntl(messages);
@@ -88,7 +94,8 @@ describe('situasjonUtils', () => {
           fom: '2022-07-01',
           tom: '2025-02-01',
           landNavn: 'Finland',
-        },
+          landkode: 'FIN',
+        } as UtlandsoppholdPeriode,
       ];
       expect(formaterUtenlandsopphold(utenlandsopphold, kodeverk, intl)).toBe('I Finland');
     });
@@ -99,12 +106,14 @@ describe('situasjonUtils', () => {
           fom: '2023-07-01',
           tom: '2023-09-01',
           landNavn: 'Danmark',
-        },
+          landkode: 'DNK',
+        } as UtlandsoppholdPeriode,
         {
           fom: '2024-07-01',
           tom: '2024-10-01',
           landNavn: 'Finland',
-        },
+          landkode: 'FIN',
+        } as UtlandsoppholdPeriode,
       ];
       expect(formaterUtenlandsopphold(utenlandsopphold, kodeverk, intl)).toBe('I flere land');
     });

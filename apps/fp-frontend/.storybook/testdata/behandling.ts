@@ -140,8 +140,8 @@ export const behandling: BehandlingFpSak = {
       type: 'GET',
     },
     {
-      href: '/fpsak/api/behandling/soknad?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
-      rel: 'soknad',
+      href: '/fpsak/api/behandling/søknad?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
+      rel: 'søknad',
       type: 'GET',
     },
     {

@@ -11,31 +11,9 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import { type Medlemskap, type Soknad } from '@navikt/fp-types';
+import { type Medlemskap } from '@navikt/fp-types';
 
 import { MedlemskapFaktaIndex } from './MedlemskapFaktaIndex';
-
-const defaultSoknad = {
-  oppgittTilknytning: {
-    oppholdNorgeNa: true,
-    oppholdNestePeriode: true,
-    oppholdSistePeriode: true,
-    utlandsoppholdFor: [
-      {
-        landNavn: 'SVERIGE',
-        fom: '2010-01-01',
-        tom: '2011-01-01',
-      },
-    ],
-    utlandsoppholdEtter: [
-      {
-        landNavn: 'DANMARK',
-        fom: '2018-01-01',
-        tom: '2019-01-01',
-      },
-    ],
-  },
-} as Soknad;
 
 const vilkårForPanel = [
   lagVilkår('FP_VK_2_F', {
@@ -51,7 +29,6 @@ const meta = {
   component: MedlemskapFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    soknad: defaultSoknad,
     vilkårForPanel,
   },
   render: args => <MedlemskapFaktaIndex {...args} />,
@@ -99,13 +76,6 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       beslutningsdato: '2024-09-24',
     },
   ],
-  utenlandsopphold: [
-    {
-      fom: '2019-01-01',
-      tom: '2021-01-01',
-      landkode: 'DNK',
-    },
-  ],
   adresser: [
     {
       fom: '2019-01-01',
@@ -147,6 +117,27 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       type: 'UTVA',
     },
   ],
+  utenlandsopphold: [],
+  oppgittUtlandsopphold: {
+    oppholdNestePeriode: true,
+    oppholdSistePeriode: true,
+    utlandsoppholdFør: [
+      {
+        landNavn: 'SVERIGE',
+        landkode: 'SWE',
+        fom: '2010-01-01',
+        tom: '2011-01-01',
+      },
+    ],
+    utlandsoppholdEtter: [
+      {
+        landNavn: 'DANMARK',
+        landkode: 'DNK',
+        fom: '2018-01-01',
+        tom: '2019-01-01',
+      },
+    ],
+  },
   annenpart: {
     adresser: [
       {
@@ -234,15 +225,6 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
       personstatuser: [{ fom: '2022-09-01', tom: TIDENES_ENDE, type: 'BOSA' }],
       regioner: [{ fom: '1971-09-17', tom: TIDENES_ENDE, type: 'NORDEN' }],
     }),
-    soknad: {
-      oppgittTilknytning: {
-        oppholdNorgeNa: true,
-        oppholdSistePeriode: true,
-        oppholdNestePeriode: true,
-        utlandsoppholdFor: [],
-        utlandsoppholdEtter: [],
-      } as Soknad['oppgittTilknytning'],
-    } as Soknad,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET)],
   },
 };

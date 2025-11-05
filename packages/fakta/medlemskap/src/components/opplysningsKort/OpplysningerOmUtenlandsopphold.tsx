@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { type MedlemskapAvvik, type Soknad, type UtlandsoppholdPeriode } from '@navikt/fp-types';
+import { type Medlemskap, type UtlandsoppholdPeriode } from '@navikt/fp-types';
 
 import { toTitleCapitalization } from '../../utils/stringUtils';
 import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
@@ -38,26 +38,22 @@ const UtenlandsoppholdListe = ({
 };
 
 interface Props {
-  soknad: Soknad;
-  avvik: MedlemskapAvvik[];
+  medlemskap: Medlemskap;
   skalViseAvvik: boolean;
 }
 
-export const OpplysningerOmUtenlandsopphold = ({
-  avvik = [],
-  soknad: { oppgittTilknytning },
-  skalViseAvvik,
-}: Props) => {
+export const OpplysningerOmUtenlandsopphold = ({ medlemskap, skalViseAvvik }: Props) => {
   const intl = useIntl();
 
-  const { oppholdSistePeriode, oppholdNestePeriode, utlandsoppholdFor, utlandsoppholdEtter } = oppgittTilknytning;
+  const { oppholdSistePeriode, oppholdNestePeriode, utlandsoppholdFør, utlandsoppholdEtter } =
+    medlemskap.oppgittUtlandsopphold;
 
   return (
     <EkspansjonsKort
       skalViseAvvik={skalViseAvvik}
       tittel={intl.formatMessage({ id: 'OpplysningsKort.UtenlandsoppholdTittel' })}
       kilde="SØKNAD"
-      relevanteAvvik={avvik.filter(a => relevantForUtenlandsopphold.includes(a))}
+      relevanteAvvik={medlemskap.avvik.filter(a => relevantForUtenlandsopphold.includes(a))}
     >
       <div>
         <Label size="small">
@@ -71,10 +67,10 @@ export const OpplysningerOmUtenlandsopphold = ({
         </BodyShort>
       </div>
 
-      {utlandsoppholdFor.length > 0 && (
+      {utlandsoppholdFør.length > 0 && (
         <UtenlandsoppholdListe
           label={<FormattedMessage id="OpplysningerOmUtenlandsopphold.BoddForegaaende12.HvilkeLand" />}
-          utlandsopphold={utlandsoppholdFor}
+          utlandsopphold={utlandsoppholdFør}
         />
       )}
 

@@ -51,7 +51,7 @@ const ressursMap = {
 
   [BehandlingRel.ARBEIDSGIVERE_OVERSIKT]: arbeidsgiverOpplysninger,
   [BehandlingRel.BEHANDLING_PERSONOVERSIKT]: personoversikt,
-  [BehandlingRel.SOKNAD]: soknad,
+  [BehandlingRel.SØKNAD]: soknad,
   [BehandlingRel.MEDLEMSKAP]: medlemskap,
   [BehandlingRel.ARBEID_OG_INNTEKT]: arbeidInntektsmelding,
   [BehandlingRel.INNTEKT_ARBEID_YTELSE]: inntektArbeidYtelse,

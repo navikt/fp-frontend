@@ -8,7 +8,7 @@ import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -34,20 +34,20 @@ type FormValues = {
 };
 
 interface Props {
-  søknad: Soknad;
+  ytelseFordeling: Ytelsefordeling;
   aksjonspunkt: Aksjonspunkt;
 }
 
-export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
+export const DekningradApForm = ({ ytelseFordeling, aksjonspunkt }: Props) => {
   const { submitCallback, alleMerknaderFraBeslutter, fagsak, isReadOnly } = usePanelDataContext<AvklarDekningsgradAp>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
-      dekningsgrad: søknad.oppgittFordeling?.dekningsgrader.avklartDekningsgrad ?? undefined,
+      dekningsgrad: ytelseFordeling.dekningsgrader.avklartDekningsgrad ?? undefined,
       begrunnelse: aksjonspunkt.begrunnelse ?? '',
     },
   });
-  const { annenPart: dgAnnenpart, søker: dgSøker } = søknad.oppgittFordeling?.dekningsgrader ?? {};
+  const { annenPart: dgAnnenpart, søker: dgSøker } = ytelseFordeling.dekningsgrader;
 
   const erAksjonspunktApent = aksjonspunkt.status === 'OPPR';
 
@@ -78,18 +78,16 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
                         <FormattedMessage
                           id="DekningradApForm.SøknadSendt"
                           values={{
-                            dato: dgSøker
-                              ? dateFormat(dgSøker.søknadsdato, {
-                                  month: 'long',
-                                })
-                              : '-',
+                            dato: dateFormat(dgSøker.søknadsdato, {
+                              month: 'long',
+                            }),
                           }}
                         />
                       </BodyShort>
                     </VStack>
                   </HStack>
                   <Heading size="xsmall" level="3">
-                    <FormattedMessage id="DekningradApForm.HarValgt" values={{ dekningsgrad: dgSøker?.dekningsgrad }} />
+                    <FormattedMessage id="DekningradApForm.HarValgt" values={{ dekningsgrad: dgSøker.dekningsgrad }} />
                   </Heading>
                 </VStack>
               </Box.New>

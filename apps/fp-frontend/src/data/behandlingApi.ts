@@ -168,7 +168,7 @@ export const BehandlingRel = {
   FAKTA_FØDSEL: 'fakta-fødsel',
   FAKTA_OMSORGSOVERTAKELSE: 'fakta-omsorgsovertakelse',
   FAMILIEHENDELSE: 'familiehendelse-v3',
-  SOKNAD: 'soknad',
+  SØKNAD: 'søknad',
   FERIEPENGEGRUNNLAG: 'feriepengegrunnlag',
   TILBAKEKREVINGVALG: 'tilbakekrevingvalg',
   BEREGNINGSGRUNNLAG: 'beregningsgrunnlag',
@@ -342,8 +342,8 @@ const getfamiliehendelseOptions = (links: ApiLink[]) => (behandling: BehandlingF
 
 const getSøknadOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
   queryOptions({
-    queryKey: [BehandlingRel.SOKNAD, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('SOKNAD', links)).json<Soknad>(),
+    queryKey: [BehandlingRel.SØKNAD, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('SØKNAD', links)).json<Soknad>(),
     staleTime: Infinity,
   });
 
@@ -455,6 +455,7 @@ const getYtelsefordelingOptions = (links: ApiLink[]) => (behandling: BehandlingF
   queryOptions({
     queryKey: [BehandlingRel.YTELSEFORDELING, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('YTELSEFORDELING', links)).json<Ytelsefordeling>(),
+    enabled: harLenke(behandling, 'YTELSEFORDELING'),
     staleTime: Infinity,
   });
 

@@ -120,7 +120,7 @@ async function generateTypes() {
     }
 
     process.chdir('packages/types');
-    spawnSync('yarn', ['prettier', '--log-level', 'silent'], { stdio: 'pipe' });
+    spawnSync('yarn', ['prettier', '--log-level', 'silent'], { stdio: 'pipe', shell:isWindows });
 
     console.log('Script ferdig!');
   } catch (error) {
