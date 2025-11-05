@@ -16,6 +16,7 @@ import {
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandlingsresultat, Soknad } from '@navikt/fp-types';
 import type { OverstyringSokersOpplysingspliktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+
 import { MangledeVedlegg } from './MangledeVedlegg.tsx';
 
 type FormValues = ProsessStegBegrunnelseTextFieldFormValues & VilkarResultPickerFormValues;

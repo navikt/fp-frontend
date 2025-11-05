@@ -40,16 +40,14 @@ const formatArbeidsgiver = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   arbeidsgiverReferanse: string | undefined,
 ): string => {
-  if (!arbeidsgiverReferanse) {
-    return '';
-  }
-  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
-  if (!arbeidsgiverOpplysninger) {
-    return '';
-  }
+  const opplysninger = arbeidsgiverReferanse
+    ? arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]
+    : undefined;
 
-  return formaterArbeidsgiver(arbeidsgiverOpplysninger, arbeidsgiverReferanse);
+  return opplysninger
+    ? formaterArbeidsgiver(opplysninger, arbeidsgiverReferanse)
+    : '';
 };
 
 const getSortedManglendeVedlegg = (soknad: Soknad): ManglendeVedleggSoknad[] =>
-  soknad.manglendeVedlegg.slice().sort((mv1, mv2) => mv1.dokumentTittel.localeCompare(mv2.dokumentTittel));
+  soknad.manglendeVedlegg.toSorted((mv1, mv2) => mv1.dokumentTittel.localeCompare(mv2.dokumentTittel));
