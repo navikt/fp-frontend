@@ -111,7 +111,7 @@ const uttakStonadskontoer = {
 } satisfies UttakStonadskontoer;
 
 const soknad = {
-  soknadType: 'ST-001',
+  manglendeVedlegg: [],
   mottattDato: '2019-11-18',
   søknadsfrist: {
     mottattDato: '2019-11-18',

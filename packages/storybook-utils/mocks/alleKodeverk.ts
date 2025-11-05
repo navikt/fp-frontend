@@ -1781,33 +1781,6 @@ export const alleKodeverk: AlleKodeverk = {
       navn: 'Foreldreansvarsvilkåret 4.ledd',
     },
   ],
-  FarSøkerType: [
-    {
-      kode: 'ADOPTERER_ALENE',
-      kodeverk: 'FAR_SOEKER_TYPE',
-      navn: 'Adopterer barnet eller barna alene',
-    },
-    {
-      kode: 'OVERTATT_OMSORG',
-      kodeverk: 'FAR_SOEKER_TYPE',
-      navn: 'Overtatt omsorg < 56 uker',
-    },
-    {
-      kode: 'ANDRE_FORELD_DØD_F',
-      kodeverk: 'FAR_SOEKER_TYPE',
-      navn: 'Overtatt omsorg ifm. død ved fødsel',
-    },
-    {
-      kode: 'OVERTATT_OMSORG_F',
-      kodeverk: 'FAR_SOEKER_TYPE',
-      navn: 'Overtatt omsorg fødsel',
-    },
-    {
-      kode: 'ANDRE_FORELDER_DØD',
-      kodeverk: 'FAR_SOEKER_TYPE',
-      navn: 'Den andre forelderen er død',
-    },
-  ],
   FaresignalVurdering: [
     {
       kode: 'INNVIRKNING',

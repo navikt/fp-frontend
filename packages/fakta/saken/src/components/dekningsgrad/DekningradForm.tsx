@@ -8,7 +8,7 @@ import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -24,18 +24,18 @@ type FormValues = {
 
 interface Props {
   aksjonspunkt?: Aksjonspunkt;
-  søknad: Soknad;
+  ytelseFordeling: Ytelsefordeling;
   kanOverstyreAccess: boolean;
 }
 
-export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Props) => {
+export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAccess }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, fagsak, isReadOnly } = usePanelDataContext<OverstyringDekningsgradAp>();
 
   const dekningsgrad =
-    søknad.oppgittFordeling?.dekningsgrader.avklartDekningsgrad ??
-    søknad.oppgittFordeling?.dekningsgrader.søker.dekningsgrad ??
+    ytelseFordeling.dekningsgrader.avklartDekningsgrad ??
+    ytelseFordeling.dekningsgrader.søker.dekningsgrad ??
     undefined;
 
   const defaultValues = {
@@ -146,13 +146,13 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
               <Radio value={80} size="small">
                 {intl.formatMessage(
                   { id: 'DekningsgradForm.80' },
-                  { erSatt: søknad.oppgittFordeling?.dekningsgrader.avklartDekningsgrad === 80 },
+                  { erSatt: ytelseFordeling.dekningsgrader.avklartDekningsgrad === 80 },
                 )}
               </Radio>
               <Radio value={100} size="small">
                 {intl.formatMessage(
                   { id: 'DekningsgradForm.100' },
-                  { erSatt: søknad.oppgittFordeling?.dekningsgrader.avklartDekningsgrad === 100 },
+                  { erSatt: ytelseFordeling.dekningsgrader.avklartDekningsgrad === 100 },
                 )}
               </Radio>
             </HStack>

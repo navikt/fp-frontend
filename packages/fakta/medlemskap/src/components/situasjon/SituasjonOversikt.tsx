@@ -1,29 +1,28 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { FaktaBox, FaktaGruppe } from '@navikt/fp-fakta-felles';
-import type { AlleKodeverk, Medlemskap, Soknad } from '@navikt/fp-types';
+import type { AlleKodeverk, Medlemskap } from '@navikt/fp-types';
 
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
 
 interface Props {
   medlemskap: Medlemskap;
-  soknad: Soknad;
   alleKodeverk: AlleKodeverk;
 }
 
-export const SituasjonOversikt = ({ soknad, medlemskap, alleKodeverk }: Props) => {
+export const SituasjonOversikt = ({ medlemskap, alleKodeverk }: Props) => {
   const intl = useIntl();
 
   return (
     <FaktaGruppe aria-label="Situasjons Oversikt">
       <FaktaBox
         label={<FormattedMessage id="SituasjonLabel.HarBodd" />}
-        value={formaterUtenlandsopphold(soknad.oppgittTilknytning.utlandsoppholdFor, alleKodeverk, intl)}
+        value={formaterUtenlandsopphold(medlemskap.oppgittUtlandsopphold.utlandsoppholdFør, alleKodeverk, intl)}
         kilde="SØKNAD"
       />
       <FaktaBox
         label={<FormattedMessage id="SituasjonLabel.SkalBo" />}
-        value={formaterUtenlandsopphold(soknad.oppgittTilknytning.utlandsoppholdEtter, alleKodeverk, intl)}
+        value={formaterUtenlandsopphold(medlemskap.oppgittUtlandsopphold.utlandsoppholdEtter, alleKodeverk, intl)}
         kilde="SØKNAD"
       />
       <FaktaBox
