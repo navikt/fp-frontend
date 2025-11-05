@@ -32,7 +32,7 @@ export const SakenFaktaInitPanel = () => {
 
   const api = useBehandlingApi(behandling);
 
-  const { data: søknad } = useQuery(api.søknadOptions(behandling));
+  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(behandling));
   const { data: utlandDokStatus } = useQuery(api.utlandDokStatusOptions(behandling));
 
   return (
@@ -43,7 +43,7 @@ export const SakenFaktaInitPanel = () => {
       skalPanelVisesIMeny
     >
       <SakenFaktaIndex
-        soknad={søknad}
+        ytelsefordeling={ytelsefordeling}
         utlandDokStatus={utlandDokStatus}
         kanOverstyreAccess={rettigheter.kanOverstyreAccess.isEnabled}
       />

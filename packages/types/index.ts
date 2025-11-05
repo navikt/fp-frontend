@@ -59,14 +59,7 @@ export type {
   SimuleringResultatPerFagområde,
   SimuleringPeriode,
 } from './src/simuleringResultatTsType';
-export type {
-  Soknad,
-  SøknadAdopsjon,
-  ManglendeVedleggSoknad,
-  UtlandsoppholdPeriode,
-  Søknadsfrist,
-} from './src/soknadTsType';
-export { søknadErAdopsjon } from './src/soknadTsType';
+export type { Soknad, ManglendeVedleggSoknad, UtlandsoppholdPeriode, Søknadsfrist } from './src/soknadTsType';
 export type {
   Uttaksresultat,
   PeriodeSoker,
@@ -209,7 +202,6 @@ export type { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
 export type { FamilieHendelseType } from './src/familieHendelseType';
 export type { ForeldreType } from './src/foreldreType';
 export type { FaresignalVurdering } from './src/faresignalVurdering';
-export type { FarSøkerType } from './src/farSøkerType';
 export type { FordelingPeriodeKilde } from './src/fordelingPeriodeKilde';
 export type { InnsynResultatType } from './src/innsynResultatType';
 export type { KlageAvvistÅrsak } from './src/klageAvvistÅrsak';
@@ -247,7 +239,6 @@ export type { UtsettelseArsakCode } from './src/utsettelseArsakCodes';
 export type { PersonstatusType } from './src/personstatusType';
 export type { SkjermlenkeType } from './src/skjermlenkeType';
 export type { UttakPeriodeType } from './src/uttakPeriodeType';
-export type { SøknadType } from './src/søknadType';
 export type { SammenligningType } from './src/sammenligningType';
 export type { StønadskontoType } from './src/stønadskontoType';
 export type { VilkårType } from './src/vilkårType';

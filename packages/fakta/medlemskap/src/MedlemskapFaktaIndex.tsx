@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { Medlemskap, Soknad } from '@navikt/fp-types';
+import type { Medlemskap } from '@navikt/fp-types';
 
 import { MedlemskapInfoPanel } from './components/MedlemskapInfoPanel';
 
@@ -12,7 +12,6 @@ const intl = createIntl(messages);
 
 interface Props {
   medlemskap: Medlemskap;
-  soknad: Soknad;
 }
 
 export const MedlemskapFaktaIndex = (props: Props) => (

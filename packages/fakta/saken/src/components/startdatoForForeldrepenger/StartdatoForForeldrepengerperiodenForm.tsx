@@ -10,7 +10,7 @@ import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -29,14 +29,17 @@ const capitalizeFirstLetter = (landNavn: string): string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormValues => ({
-  startdatoFraSoknad: soknad.oppgittFordeling?.startDatoForPermisjon ?? undefined,
+const buildInitialValues = (ytelseFordeling: Ytelsefordeling, aksjonspunkt?: Aksjonspunkt): FormValues => ({
+  startdatoFraSoknad: ytelseFordeling.startDatoForPermisjon ?? undefined,
   begrunnelse: aksjonspunkt?.begrunnelse ?? '',
 });
 
-const transformValues = (soknad: Soknad, values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
+const transformValues = (
+  ytelseFordeling: Ytelsefordeling,
+  values: FormValues,
+): OverstyringAvklarStartdatoForPeriodenAp => ({
   kode: AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
-  opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon ?? undefined,
+  opprinneligDato: ytelseFordeling.startDatoForPermisjon ?? undefined,
   startdatoFraSoknad: notEmpty(values.startdatoFraSoknad),
   begrunnelse: values.begrunnelse,
 });
@@ -50,7 +53,7 @@ const getValidateIsBefore2019 = (getValues: UseFormGetValues<FormValues>, intl: 
 
 interface Props {
   aksjonspunkt?: Aksjonspunkt;
-  soknad: Soknad;
+  ytelseFordeling: Ytelsefordeling;
 }
 
 /**
@@ -58,7 +61,7 @@ interface Props {
  *
  * Overstyring av startdato for foreldrepengerperioden.
  */
-export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }: Props) => {
+export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, ytelseFordeling }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } =
@@ -67,7 +70,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }:
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(soknad, aksjonspunkt),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(ytelseFordeling, aksjonspunkt),
   });
 
   const [visEditeringsmodus, setVisEditeringsmodus] = useState(false);
@@ -80,7 +83,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }:
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(soknad, values))}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(ytelseFordeling, values))}
       setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="space-16">
@@ -90,7 +93,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }:
         {!visEditeringsmodus && (
           <HStack gap="space-8">
             <BodyShort size="small">
-              {capitalizeFirstLetter(dayjs(soknad.oppgittFordeling?.startDatoForPermisjon).format('dddd D MMMM YYYY'))}
+              {capitalizeFirstLetter(dayjs(ytelseFordeling.startDatoForPermisjon).format('dddd D MMMM YYYY'))}
             </BodyShort>
             <PencilFillIcon
               title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}

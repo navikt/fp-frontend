@@ -89,7 +89,7 @@ const søknad = {
     oppholdSistePeriode: false,
     oppholdNestePeriode: false,
     utlandsoppholdFor: [],
-    utlandsoppholdEtter: [],
+    utenlandsoppholdEtter: [],
   },
   manglendeVedlegg: [],
   oppgittFordeling: {

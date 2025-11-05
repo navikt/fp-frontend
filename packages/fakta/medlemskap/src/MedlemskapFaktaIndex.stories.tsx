@@ -27,7 +27,7 @@ const defaultSoknad = {
         tom: '2011-01-01',
       },
     ],
-    utlandsoppholdEtter: [
+    utenlandsoppholdEtter: [
       {
         landNavn: 'DANMARK',
         fom: '2018-01-01',
@@ -240,7 +240,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
         oppholdSistePeriode: true,
         oppholdNestePeriode: true,
         utlandsoppholdFor: [],
-        utlandsoppholdEtter: [],
+        utenlandsoppholdEtter: [],
       } as Soknad['oppgittTilknytning'],
     } as Soknad,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET)],

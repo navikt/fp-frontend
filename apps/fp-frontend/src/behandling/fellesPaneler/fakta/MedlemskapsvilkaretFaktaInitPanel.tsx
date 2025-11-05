@@ -27,7 +27,6 @@ export const MedlemskapsvilkaretFaktaInitPanel = () => {
   const api = useBehandlingApi(behandling);
 
   const { data: medlemskap } = useQuery(api.medlemskapOptions(behandling));
-  const { data: søknad } = useQuery(api.søknadOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -36,7 +35,7 @@ export const MedlemskapsvilkaretFaktaInitPanel = () => {
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Medlemskap' })}
       skalPanelVisesIMeny={behandling.harSøknad}
     >
-      {medlemskap && søknad ? <MedlemskapFaktaIndex medlemskap={medlemskap} soknad={søknad} /> : <LoadingPanel />}
+      {medlemskap ? <MedlemskapFaktaIndex medlemskap={medlemskap} /> : <LoadingPanel />}
     </FaktaDefaultInitPanel>
   );
 };

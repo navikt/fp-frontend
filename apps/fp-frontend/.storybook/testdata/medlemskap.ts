@@ -15,6 +15,12 @@ export const medlemskap: Medlemskap = {
       type: 'BOSA',
     },
   ],
+  oppgittUtlandsopphold: {
+    oppholdNestePeriode: false,
+    oppholdSistePeriode: false,
+    utlandsoppholdFør: [],
+    utlandsoppholdEtter: [],
+  },
   utenlandsopphold: [],
   adresser: [
     {
