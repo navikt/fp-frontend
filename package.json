@@ -31,8 +31,9 @@
     "storybook-create-deploy-folder": "node scripts/create-storybook-index.cjs",
     "sentry-release": "node ./scripts/sentry-release.cjs",
     "prepare": "husky install",
-    "generate:local": "node ./scripts/generate-types.js lokal",
-    "generate": "node ./scripts/generate-types.js"
+    "update-swagger": "node scripts/hent-openapi-spec.js",
+    "generate:local": "yarn update-swagger lokal && openapi-ts",
+    "generate": "yarn update-swagger && openapi-ts"
   },
   "workspaces": [
     "apps/**/*",
