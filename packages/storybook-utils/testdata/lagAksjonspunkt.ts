@@ -78,7 +78,7 @@ const aksjonspunktKodeTilVilkårType: Partial<Record<AksjonspunktKode, VilkårTy
   [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]: 'FP_VK_23',
   [AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET]: 'FP_VK_23',
   [AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET]: 'FP_VK_23',
-  [AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU]: 'FP_VK_34',
+  [AksjonspunktKode.UTGÅTT_5017]: 'FP_VK_34',
   [AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST]: 'FP_VK_34',
   [AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS]: 'FP_VK_41',
   [AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE]: 'FP_VK_41',
