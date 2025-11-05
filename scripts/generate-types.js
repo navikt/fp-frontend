@@ -2,11 +2,6 @@
 
 import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const isLokal = process.argv.includes('lokal');
 
@@ -105,23 +100,6 @@ async function generateTypes() {
     const isWindows = process.platform === 'win32';
 
     spawnSync('yarn', ['run', 'openapi-ts'], { stdio: 'inherit', shell: isWindows });
-    if (isWindows) {
-      spawnSync(
-        'cmd',
-        ['/c', 'copy', String.raw`temp-types\types.gen.ts`, String.raw`packages\types\src\apiDtoGenerert.ts`],
-        {
-          stdio: 'inherit',
-        },
-      );
-      spawnSync('cmd', ['/c', 'rmdir', '/s', '/q', 'temp-types'], { stdio: 'inherit' });
-    } else {
-      spawnSync('cp', ['temp-types/types.gen.ts', 'packages/types/src/apiDtoGenerert.ts'], { stdio: 'inherit' });
-      spawnSync('rm', ['-rf', 'temp-types'], { stdio: 'inherit' });
-    }
-
-    process.chdir('packages/types');
-    spawnSync('yarn', ['prettier', '--log-level', 'silent'], { stdio: 'pipe', shell:isWindows });
-
     console.log('Script ferdig!');
   } catch (error) {
     console.error('Error:', error.message);
