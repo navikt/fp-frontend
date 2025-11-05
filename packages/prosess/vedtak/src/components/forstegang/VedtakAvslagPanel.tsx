@@ -65,7 +65,7 @@ const getAvslagÅrsak = (
   const vilkarType = alleKodeverk['VilkårType'].find(({ kode }) => kode === avslatteVilkar[0]?.vilkarType)?.navn ?? '';
 
   const årsak =
-    alleKodeverk['LineærAvslagsårsak'].find(({ kode }) => kode === behandlingsresultat.avslagsarsak)?.navn ?? '';
+    alleKodeverk['Avslagsårsak'].find(({ kode }) => kode === behandlingsresultat.avslagsarsak)?.navn ?? '';
 
   return `${vilkarType}: ${årsak}`;
 };
