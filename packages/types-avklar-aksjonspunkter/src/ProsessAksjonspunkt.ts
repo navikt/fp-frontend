@@ -1,7 +1,6 @@
 import type { ForeslaVedtakTilbakekrevingAp } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 
 import type { AvklarOpptjeningsvilkaretAp } from './prosess/AvklarOpptjeningsvilkaretAp';
-import type { BekreftSokersOpplysningspliktManuAp } from './prosess/BekreftSokersOpplysningspliktManuAp';
 import type { BekreftSvangerskapspengervilkarAp } from './prosess/BekreftSvangerskapspengervilkarAp';
 import type { BeregningsgrunnlagAp } from './prosess/BeregningsgrunnlagAp';
 import type { Foreldreansvarsvilkar1Ap } from './prosess/Foreldreansvarsvilkar1Ap';
@@ -35,7 +34,6 @@ export type ProsessAksjonspunkt =
   | SoknadsfristAp
   | BeregningsgrunnlagAp
   | ForeslaVedtakTilbakekrevingAp
-  | BekreftSokersOpplysningspliktManuAp
   | OverstyringSokersOpplysingspliktAp
   | AvklarOpptjeningsvilkaretAp
   | OmsorgsvilkarAp

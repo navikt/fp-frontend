@@ -31,7 +31,6 @@ export type { BesteberegningAP, ManuellKontrollBesteberegningAP } from './src/fa
 
 export type { ProsessAksjonspunkt } from './src/ProsessAksjonspunkt';
 export type { BekreftSvangerskapspengervilkarAp } from './src/prosess/BekreftSvangerskapspengervilkarAp';
-export type { BekreftSokersOpplysningspliktManuAp } from './src/prosess/BekreftSokersOpplysningspliktManuAp';
 export type { OverstyringSokersOpplysingspliktAp } from './src/prosess/OverstyringSokersOpplysingspliktAp';
 export type { AvklarOpptjeningsvilkaretAp } from './src/prosess/AvklarOpptjeningsvilkaretAp';
 export type { OmsorgsvilkarAp } from './src/prosess/OmsorgsvilkarAp';
