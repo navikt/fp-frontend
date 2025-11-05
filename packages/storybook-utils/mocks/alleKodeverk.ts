@@ -1704,7 +1704,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
   ],
   VilkårType: [
-    { kode: 'FP_VK_16', kodeverk: 'VILKAR_TYPE', navn: 'Adopsjonsvilkåret Foreldrepenger' },
     {
       kode: 'FP_VK_2',
       kodeverk: 'VILKAR_TYPE',
