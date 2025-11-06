@@ -214,7 +214,6 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '5012'
   | '5015'
   | '5016'
-  | '5017'
   | '5002'
   | '5026'
   | '5028'
@@ -306,6 +305,7 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '5011'
   | '5013'
   | '5014'
+  | '5017'
   | '5019'
   | '5020'
   | '5021'
@@ -691,9 +691,6 @@ export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto = (
   | ({
       '@type': '5092';
     } & tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto)
-  | ({
-      '@type': '5017';
-    } & tjenester_behandling_søknad_aksjonspunkt_BekreftSokersOpplysningspliktManuDto)
   | ({
       '@type': '5007';
     } & tjenester_behandling_søknad_aksjonspunkt_SoknadsfristAksjonspunktDto)
@@ -1288,18 +1285,6 @@ export type tjenester_behandling_svp_VelferdspermisjonDto = {
   permisjonTom?: string;
   permisjonsprosent: number;
   type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
-};
-
-export type tjenester_behandling_søknad_aksjonspunkt_BekreftSokersOpplysningspliktManuDto = {
-  begrunnelse?: string;
-  erVilkarOk?: boolean;
-  inntektsmeldingerSomIkkeKommer?: Array<tjenester_behandling_søknad_aksjonspunkt_InntektsmeldingSomIkkeKommerDto>;
-};
-
-export type tjenester_behandling_søknad_aksjonspunkt_InntektsmeldingSomIkkeKommerDto = {
-  aktørId?: string;
-  brukerHarSagtAtIkkeKommer?: boolean;
-  organisasjonsnummer?: string;
 };
 
 export type tjenester_behandling_søknad_aksjonspunkt_SoknadsfristAksjonspunktDto = {
@@ -3823,10 +3808,11 @@ export type tjenester_behandling_medlem_MedlemskapDto = {
   legacyManuellBehandling?: tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling;
   manuellBehandlingResultat?: tjenester_behandling_medlem_MedlemskapDto_ManuellBehandlingResultat;
   medlemskapsperioder: Array<tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode>;
+  oppgittUtlandsopphold: tjenester_behandling_medlem_MedlemskapDto_OppgittUtlandsopphold;
   oppholdstillatelser: Array<tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse>;
   personstatuser: Array<tjenester_behandling_medlem_MedlemskapDto_Personstatus>;
   regioner: Array<tjenester_behandling_medlem_MedlemskapDto_Region>;
-  utenlandsopphold: Array<tjenester_behandling_medlem_MedlemskapDto_Utenlandsopphold>;
+  utenlandsopphold: Array<tjenester_behandling_medlem_MedlemskapDto_Utlandsopphold>;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Annenpart = {
@@ -3866,6 +3852,13 @@ export type tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode = {
   tom?: string;
 };
 
+export type tjenester_behandling_medlem_MedlemskapDto_OppgittUtlandsopphold = {
+  oppholdNestePeriode: boolean;
+  oppholdSistePeriode: boolean;
+  utlandsoppholdEtter: Array<tjenester_behandling_medlem_MedlemskapDto_Utlandsopphold>;
+  utlandsoppholdFør: Array<tjenester_behandling_medlem_MedlemskapDto_Utlandsopphold>;
+};
+
 export type tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse = {
   fom?: string;
   tom?: string;
@@ -3884,8 +3877,9 @@ export type tjenester_behandling_medlem_MedlemskapDto_Region = {
   type: foreldrepenger_behandlingslager_geografisk_Region;
 };
 
-export type tjenester_behandling_medlem_MedlemskapDto_Utenlandsopphold = {
+export type tjenester_behandling_medlem_MedlemskapDto_Utlandsopphold = {
   fom: string;
+  landNavn: string;
   landkode: foreldrepenger_behandlingslager_geografisk_Landkoder;
   tom?: string;
 };
@@ -4001,14 +3995,7 @@ export type tjenester_behandling_søknad_OppgittTilknytningDto = {
   utlandsoppholdFor: Array<tjenester_behandling_søknad_UtlandsoppholdDto>;
 };
 
-export type tjenester_behandling_søknad_SoknadDto = (
-  | ({
-      '@type': 'tjenester.behandling.søknad.SoknadAdopsjonDto';
-    } & tjenester_behandling_søknad_SoknadAdopsjonDto)
-  | ({
-      '@type': 'tjenester.behandling.søknad.SoknadFodselDto';
-    } & tjenester_behandling_søknad_SoknadFodselDto)
-) & {
+export type tjenester_behandling_søknad_SoknadDto = {
   antallBarn: number;
   begrunnelseForSenInnsending?: string;
   manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto>;
@@ -4075,6 +4062,21 @@ export type tjenester_behandling_søknad_SoknadFodselDto = {
   søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
   termindato?: string;
   utstedtdato?: string;
+};
+
+export type tjenester_behandling_søknad_SøknadDto = {
+  begrunnelseForSenInnsending?: string;
+  manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto>;
+  mottattDato: string;
+  søknadsfrist: tjenester_behandling_søknad_SøknadDto_Søknadsfrist;
+};
+
+export type tjenester_behandling_søknad_SøknadDto_Søknadsfrist = {
+  dagerOversittetFrist: number;
+  gjeldendeMottattDato?: string;
+  søknadsperiodeSlutt?: string;
+  søknadsperiodeStart?: string;
+  utledetSøknadsfrist?: string;
 };
 
 export type foreldrepenger_kontrakter_simulering_resultat_kodeverk_Fagområde =
@@ -4368,9 +4370,21 @@ export type foreldrepenger_domene_person_verge_dto_VergeDto = {
 };
 
 export type tjenester_behandling_ytelsefordeling_YtelseFordelingDto = {
+  dekningsgrader: tjenester_behandling_ytelsefordeling_YtelseFordelingDto_DekningsgradInfoDto;
   førsteUttaksdato: string;
   overstyrtOmsorg?: boolean;
-  ønskerJustertVedFødsel?: boolean;
+  startDatoForPermisjon: string;
+};
+
+export type tjenester_behandling_ytelsefordeling_YtelseFordelingDto_DekningsgradInfoDto = {
+  annenPart?: tjenester_behandling_ytelsefordeling_YtelseFordelingDto_OppgittDekningsgradDto;
+  avklartDekningsgrad?: number;
+  søker: tjenester_behandling_ytelsefordeling_YtelseFordelingDto_OppgittDekningsgradDto;
+};
+
+export type tjenester_behandling_ytelsefordeling_YtelseFordelingDto_OppgittDekningsgradDto = {
+  dekningsgrad?: number;
+  søknadsdato: string;
 };
 
 export type foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType =
@@ -6382,6 +6396,134 @@ export type vedtak_felles_prosesstask_rest_dto_SokeFilterDto = {
   tekst: string;
 };
 
+export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDtoWritable = (
+  | ({
+      '@type': '5016';
+    } & tjenester_behandling_aksjonspunkt_FatterVedtakAksjonspunktDto)
+  | ({
+      '@type': '5002';
+    } & tjenester_behandling_dekningsgrad_AvklarDekningsgradDto)
+  | ({
+      '@type': '5037';
+    } & tjenester_behandling_innsyn_aksjonspunkt_VurderInnsynDto)
+  | ({
+      '@type': '5082';
+    } & tjenester_behandling_klage_aksjonspunkt_KlageFormkravAksjonspunktDto)
+  | ({
+      '@type': '5035';
+    } & tjenester_behandling_klage_aksjonspunkt_KlageVurderingResultatAksjonspunktDto)
+  | ({
+      '@type': '5102';
+    } & tjenester_behandling_medlem_aksjonspunkt_VurderForutgåendeMedlemskapDto)
+  | ({
+      '@type': '5101';
+    } & tjenester_behandling_medlem_aksjonspunkt_VurderMedlemskapDto)
+  | ({
+      '@type': '5055';
+    } & tjenester_behandling_revurdering_aksjonspunkt_KontrollerRevurderingsBehandlingDto)
+  | ({
+      '@type': '5026';
+    } & tjenester_behandling_revurdering_aksjonspunkt_VarselRevurderingManuellDto)
+  | ({
+      '@type': '5095';
+    } & tjenester_behandling_risikoklassifisering_VurderFaresignalerDto)
+  | ({
+      '@type': '5091';
+    } & tjenester_behandling_svp_BekreftSvangerskapspengerDto)
+  | ({
+      '@type': '5092';
+    } & tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto)
+  | ({
+      '@type': '5007';
+    } & tjenester_behandling_søknad_aksjonspunkt_SoknadsfristAksjonspunktDto)
+  | ({
+      '@type': '5043';
+    } & tjenester_behandling_søknad_aksjonspunkt_VurderSøknadsfristDto)
+  | ({
+      '@type': '5029';
+    } & tjenester_behandling_tilbakekreving_aksjonspunkt_KontrollerStorEtterbetalingSøkerDto)
+  | ({
+      '@type': '5084';
+    } & tjenester_behandling_tilbakekreving_aksjonspunkt_VurderFeilutbetalingDto)
+  | ({
+      '@type': 'tjenester.behandling.uttak.dokumentasjon.VurderUttakDokumentasjonDtoWritable';
+    } & tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDtoWritable)
+  | ({
+      '@type': '5060';
+    } & tjenester_behandling_uttak_dto_AvklarAleneomsorgVurderingDto)
+  | ({
+      '@type': '5086';
+    } & tjenester_behandling_uttak_dto_AvklarAnnenforelderHarRettDto)
+  | ({
+      '@type': '5076';
+    } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerOpplysningerOmDødDto)
+  | ({
+      '@type': '5077';
+    } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerOpplysningerOmSøknadsfristDto)
+  | ({
+      '@type': '5073';
+    } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerRealitetsBehandlingEllerKlageDto)
+  | ({
+      '@type': '5071';
+    } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakPerioderDto)
+  | ({
+      '@type': '5072';
+    } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakStortingsrepresentantDto)
+  | ({
+      '@type': '5103';
+    } & tjenester_behandling_uttak_eøs_EøsUttakDto)
+  | ({
+      '@type': '5066';
+    } & tjenester_behandling_uttak_fakta_FaktaUttakDto_GraderingAktivitetUtenBGDto)
+  | ({
+      '@type': '5063';
+    } & tjenester_behandling_uttak_fakta_FaktaUttakDto_GraderingUkjentAktivitetDto)
+  | ({
+      '@type': '5064';
+    } & tjenester_behandling_uttak_fakta_FaktaUttakDto_IngenPerioderDto)
+  | ({
+      '@type': '5065';
+    } & tjenester_behandling_uttak_fakta_FaktaUttakDto_ManueltSattStartdatoDto)
+  | ({
+      '@type': '5028';
+    } & tjenester_behandling_vedtak_aksjonspunkt_ForeslaVedtakManueltAksjonspuntDto)
+  | ({
+      '@type': '5015';
+    } & tjenester_behandling_vedtak_aksjonspunkt_ForeslåVedtakAksjonspunktDto)
+  | ({
+      '@type': '5033';
+    } & tjenester_behandling_vedtak_aksjonspunkt_VurdereAnnenYteleseFørVedtakDto)
+  | ({
+      '@type': '5034';
+    } & tjenester_behandling_vedtak_aksjonspunkt_VurdereDokumentFørVedtakDto)
+  | ({
+      '@type': '5003';
+    } & tjenester_behandling_vedtak_aksjonspunkt_VurdereInntektsmeldingFørVedtakDto)
+  | ({
+      '@type': '5061';
+    } & tjenester_behandling_ytelsefordeling_BekreftFaktaForOmsorgVurderingDto)
+  | ({
+      '@type': '5012';
+    } & tjenester_registrering_es_ManuellRegistreringEngangsstonadDto)
+  | ({
+      '@type': '5057';
+    } & tjenester_registrering_fp_ManuellRegistreringEndringsøknadDto)
+  | ({
+      '@type': '5040';
+    } & tjenester_registrering_fp_ManuellRegistreringForeldrepengerDto)
+  | ({
+      '@type': '5096';
+    } & tjenester_registrering_svp_ManuellRegistreringSvangerskapspengerDto)
+) & {
+  begrunnelse?: string;
+};
+
+export type tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDtoWritable = {
+  behandlingUuid: string;
+  behandlingVersjon: number;
+  bekreftedeAksjonspunktDtoer?: Array<foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDtoWritable>;
+};
+
 export type tjenester_behandling_søknad_aksjonspunkt_VurderSøknadsfristDtoWritable = {
   ansesMottattDato?: string;
   begrunnelse?: string;
@@ -6697,7 +6839,7 @@ export type BekreftData = {
   /**
    * Liste over aksjonspunkt som skal bekreftes, inklusiv data som trengs for å løse de.
    */
-  body?: tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDto;
+  body?: tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDtoWritable;
   path?: never;
   query?: never;
   url: '/api/behandling/aksjonspunkt';
@@ -6714,7 +6856,7 @@ export type BesluttData = {
   /**
    * Liste over aksjonspunkt som skal bekreftes, inklusiv data som trengs for å løse de.
    */
-  body?: tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDto;
+  body?: tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDtoWritable;
   path?: never;
   query?: never;
   url: '/api/behandling/aksjonspunkt/beslutt';
@@ -7246,7 +7388,7 @@ export type TilretteleggingResponses = {
 
 export type TilretteleggingResponse = TilretteleggingResponses[keyof TilretteleggingResponses];
 
-export type GetSøknadData = {
+export type GetSoknadData = {
   body?: never;
   path?: never;
   query: {
@@ -7258,9 +7400,30 @@ export type GetSøknadData = {
   url: '/api/behandling/soknad';
 };
 
-export type GetSøknadResponses = {
+export type GetSoknadResponses = {
   /**
    * Returnerer Søknad, null hvis ikke eksisterer (GUI støtter ikke NOT_FOUND p.t.)
+   */
+  200: tjenester_behandling_søknad_SoknadDto;
+};
+
+export type GetSoknadResponse = GetSoknadResponses[keyof GetSoknadResponses];
+
+export type GetSøknadData = {
+  body?: never;
+  path?: never;
+  query: {
+    /**
+     * behandlingUUID
+     */
+    uuid: tjenester_behandling_dto_UuidDto;
+  };
+  url: '/api/behandling/søknad';
+};
+
+export type GetSøknadResponses = {
+  /**
+   * Returnerer søknad
    */
   200: tjenester_behandling_søknad_SoknadDto;
 };
@@ -9763,6 +9926,25 @@ export type GrovSorterResponses = {
 };
 
 export type GrovSorterResponse = GrovSorterResponses[keyof GrovSorterResponses];
+
+export type GrovSorterHistoriskData = {
+  /**
+   * Liste med aktør IDer som skal sorteres
+   */
+  body?: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
+  path?: never;
+  query?: never;
+  url: '/api/hendelser/grovsorter-historisk';
+};
+
+export type GrovSorterHistoriskResponses = {
+  /**
+   * default response
+   */
+  default: Array<string>;
+};
+
+export type GrovSorterHistoriskResponse = GrovSorterHistoriskResponses[keyof GrovSorterHistoriskResponses];
 
 export type MottaHendelseData = {
   /**

@@ -14,7 +14,6 @@ import type { BehandlingFpSak, FamilieHendelse, Soknad } from '@navikt/fp-types'
 import { SoknadsfristVilkarProsessIndex } from './SoknadsfristVilkarProsessIndex';
 
 const soknad = {
-  soknadType: 'ST-001',
   mottattDato: '2019-01-01',
   begrunnelseForSenInnsending: 'Dette er en begrunnelse',
   søknadsfrist: {
@@ -22,6 +21,7 @@ const soknad = {
     utledetSøknadsfrist: '2019-07-01',
     dagerOversittetFrist: 2,
   },
+  manglendeVedlegg: []
 } as Soknad;
 
 const familiehendelse = {

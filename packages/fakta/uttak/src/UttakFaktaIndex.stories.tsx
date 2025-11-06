@@ -52,6 +52,18 @@ export const VisUttaksperiodeUtenAksjonspunkt: Story = {
     aksjonspunkterForPanel: [],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
+      dekningsgrader: {
+        annenPart: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+        avklartDekningsgrad: 80,
+        søker: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+      },
+      startDatoForPermisjon: '',
     },
     uttakKontrollerFaktaPerioder: [
       {
@@ -71,6 +83,18 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre: Story = {
     aksjonspunkterForPanel: [],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
+      dekningsgrader: {
+        annenPart: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+        avklartDekningsgrad: 80,
+        søker: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+      },
+      startDatoForPermisjon: '',
     },
     uttakKontrollerFaktaPerioder: [
       {
@@ -92,6 +116,18 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
+      dekningsgrader: {
+        annenPart: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+        avklartDekningsgrad: 80,
+        søker: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+      },
+      startDatoForPermisjon: '',
     },
     uttakKontrollerFaktaPerioder: [
       {
@@ -143,6 +179,14 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
+      dekningsgrader: {
+        avklartDekningsgrad: 100,
+        søker: {
+          dekningsgrad: 100,
+          søknadsdato: '2022-01-31',
+        },
+      },
+      startDatoForPermisjon: '',
     },
     uttakKontrollerFaktaPerioder: [
       {
@@ -163,6 +207,18 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
+      dekningsgrader: {
+        annenPart: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+        avklartDekningsgrad: 80,
+        søker: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+      },
+      startDatoForPermisjon: '',
     },
     uttakKontrollerFaktaPerioder: [
       {
@@ -182,6 +238,14 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER)],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
+      dekningsgrader: {
+        avklartDekningsgrad: 80,
+        søker: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+      },
+      startDatoForPermisjon: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [],
     kanOverstyre: false,
@@ -193,6 +257,18 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET)],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
+      dekningsgrader: {
+        annenPart: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+        avklartDekningsgrad: 80,
+        søker: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+      },
+      startDatoForPermisjon: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
       {
@@ -217,6 +293,18 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG)],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
+      dekningsgrader: {
+        annenPart: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+        avklartDekningsgrad: 80,
+        søker: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+      },
+      startDatoForPermisjon: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
       {
@@ -245,6 +333,18 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
+      dekningsgrader: {
+        annenPart: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+        avklartDekningsgrad: 80,
+        søker: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+      },
+      startDatoForPermisjon: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
       {
@@ -274,6 +374,18 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
+      dekningsgrader: {
+        annenPart: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+        avklartDekningsgrad: 80,
+        søker: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+      },
+      startDatoForPermisjon: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
       {
@@ -304,6 +416,18 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
     ],
     ytelsefordeling: {
       førsteUttaksdato: '2022-01-31',
+      dekningsgrader: {
+        annenPart: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+        avklartDekningsgrad: 80,
+        søker: {
+          dekningsgrad: 80,
+          søknadsdato: '2022-01-31',
+        },
+      },
+      startDatoForPermisjon: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
       {

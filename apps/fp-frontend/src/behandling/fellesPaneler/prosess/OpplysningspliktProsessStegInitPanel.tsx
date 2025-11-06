@@ -16,7 +16,7 @@ import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardPr
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST,
-  AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU,
+  AksjonspunktKode.UTGÅTT_5017,
 ];
 
 const VILKAR_KODER = ['FP_VK_34'] satisfies VilkårType[];
@@ -52,7 +52,7 @@ export const OpplysningspliktProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
     >
       {søknad ? (
         <SokersOpplysningspliktVilkarProsessIndex
-          soknad={søknad}
+          søknad={søknad}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           status={standardPanelProps.status}
         />

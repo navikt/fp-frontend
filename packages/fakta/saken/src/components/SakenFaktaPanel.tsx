@@ -4,7 +4,7 @@ import { HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { DekningradApForm } from './dekningsgrad/DekningradApForm';
@@ -13,7 +13,7 @@ import { InnhentDokOpptjeningUtlandPanel } from './innhentDok/InnhentDokOpptjeni
 import { StartdatoForForeldrepengerperiodenForm } from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
 
 interface Props {
-  soknad?: Soknad;
+  ytelsefordeling?: Ytelsefordeling;
   utlandDokStatus?: {
     dokStatus?: string;
   };
@@ -23,7 +23,7 @@ interface Props {
 const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
 
-export const SakenFaktaPanel = ({ soknad, utlandDokStatus, kanOverstyreAccess }: Props) => {
+export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyreAccess }: Props) => {
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt, fagsak } = usePanelDataContext();
 
   const automatiskMarkeringAvUtenlandssakAp = aksjonspunkterForPanel.find(
@@ -48,7 +48,9 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, kanOverstyreAccess }:
           </AksjonspunktHelpTextHTML>
         )}
       <VStack gap="space-40">
-        {soknad && automatiskAp && <DekningradApForm søknad={soknad} aksjonspunkt={automatiskAp} />}
+        {ytelsefordeling && automatiskAp && (
+          <DekningradApForm ytelseFordeling={ytelsefordeling} aksjonspunkt={automatiskAp} />
+        )}
         <HStack gap="space-40">
           {automatiskMarkeringAvUtenlandssakAp && (
             <InnhentDokOpptjeningUtlandPanel
@@ -56,17 +58,21 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, kanOverstyreAccess }:
               aksjonspunkt={automatiskMarkeringAvUtenlandssakAp}
             />
           )}
-          {fagsak.fagsakYtelseType !== 'SVP' && !!soknad && (
+          {fagsak.fagsakYtelseType === 'FP' && !!ytelsefordeling && (
             <StartdatoForForeldrepengerperiodenForm
               aksjonspunkt={aksjonspunkterForPanel.find(
                 ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
               )}
-              soknad={soknad}
+              ytelseFordeling={ytelsefordeling}
             />
           )}
         </HStack>
-        {soknad && !automatiskAp && fagsak.fagsakYtelseType === 'FP' && (
-          <DekningradForm søknad={soknad} aksjonspunkt={overstyringsAp} kanOverstyreAccess={kanOverstyreAccess} />
+        {ytelsefordeling && !automatiskAp && fagsak.fagsakYtelseType === 'FP' && (
+          <DekningradForm
+            ytelseFordeling={ytelsefordeling}
+            aksjonspunkt={overstyringsAp}
+            kanOverstyreAccess={kanOverstyreAccess}
+          />
         )}
       </VStack>
     </VStack>

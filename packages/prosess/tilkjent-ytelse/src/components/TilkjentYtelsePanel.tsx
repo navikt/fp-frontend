@@ -40,7 +40,7 @@ export const TilkjentYtelsePanel = ({
   // Utgått aksjonspunkt, viser kun begrunnelse hvis det er løst tidligere
   const vurderTilbaketrekkAPBegrunnelse = finnTilbaketrekkAksjonspunktBegrunnelse(aksjonspunkterForPanel);
 
-  const søknadMottattDato = søknad.søknadsfrist.mottattDato ?? søknad.mottattDato;
+  const søknadMottattDato = søknad.søknadsfrist.gjeldendeMottattDato ?? søknad.mottattDato;
 
   return (
     <VStack gap="space-16">

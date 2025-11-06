@@ -22,12 +22,18 @@ const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   },
 };
 
-const soknad = {
+const søknad = {
   manglendeVedlegg: [
     {
       dokumentType: 'I500027',
       dokumentTittel: 'Inntektsmelding',
       arbeidsgiverReferanse: '1234',
+      brukerHarSagtAtIkkeKommer: false,
+    },
+    {
+      dokumentType: 'FØDSELSATTEST',
+      dokumentTittel: 'Fødselsattest',
+      arbeidsgiverReferanse: undefined,
       brukerHarSagtAtIkkeKommer: false,
     },
   ],
@@ -38,7 +44,7 @@ const meta = {
   component: SokersOpplysningspliktVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    soknad,
+    søknad,
     arbeidsgiverOpplysningerPerId,
   },
   render: args => <SokersOpplysningspliktVilkarProsessIndex {...args} />,
@@ -47,19 +53,11 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const ÅpentAksjonspunkt: Story = {
-  args: {
-    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU)],
-    status: 'IKKE_VURDERT',
-  },
-};
-
-export const OppfyltVilkår: Story = {
+export const UtførtAPMedOppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU, {
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5017, {
         status: 'UTFO',
-        begrunnelse: 'Dette vilkåret er godkjent',
       }),
     ],
     isReadOnly: true,
@@ -68,7 +66,7 @@ export const OppfyltVilkår: Story = {
   },
 };
 
-export const AvslåttVilkår: Story = {
+export const UtførtAPMedAvslåttVilkår: Story = {
   args: {
     behandling: {
       uuid: '1',
@@ -78,10 +76,54 @@ export const AvslåttVilkår: Story = {
       },
     } as BehandlingFpSak,
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_MANU, {
+      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5017, {
         status: 'UTFO',
-        begrunnelse: 'Dette vilkåret er avslått',
       }),
+    ],
+    isReadOnly: true,
+    isSubmittable: false,
+    status: 'IKKE_OPPFYLT',
+  },
+};
+
+export const KanOverstyreVilkår: Story = {
+  args: {
+    aksjonspunkterForPanel: [],
+    status: 'OPPFYLT',
+    isReadOnly: false,
+    isSubmittable: true,
+  },
+};
+
+export const HarOverstyrtMedOppfyltVilkår: Story = {
+  args: {
+    behandling: {
+      uuid: '1',
+      versjon: 1,
+      behandlingsresultat: {
+        avslagsarsak: undefined,
+      },
+    } as BehandlingFpSak,
+    aksjonspunkterForPanel: [
+      lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
+    ],
+    isReadOnly: true,
+    isSubmittable: false,
+    status: 'OPPFYLT',
+  },
+};
+
+export const HarOverstyrtMedAvslåttVilkår: Story = {
+  args: {
+    behandling: {
+      uuid: '1',
+      versjon: 1,
+      behandlingsresultat: {
+        avslagsarsak: '1099',
+      },
+    } as BehandlingFpSak,
+    aksjonspunkterForPanel: [
+      lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
     ],
     isReadOnly: true,
     isSubmittable: false,

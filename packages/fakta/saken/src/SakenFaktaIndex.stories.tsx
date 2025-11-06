@@ -9,28 +9,32 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { Fagsak, Soknad } from '@navikt/fp-types';
+import type { Fagsak, Ytelsefordeling } from '@navikt/fp-types';
 
 import { SakenFaktaIndex } from './SakenFaktaIndex';
 
-const defaultSøknad = {
-  oppgittFordeling: {
-    startDatoForPermisjon: '2019-01-01',
-    dekningsgrader: {
-      søker: {
-        søknadsdato: '2019-01-02',
-        dekningsgrad: 100,
-      },
+const defaultYtelsefordeling = {
+  førsteUttaksdato: '2019-01-01',
+  startDatoForPermisjon: '2019-01-01',
+  dekningsgrader: {
+    avklartDekningsgrad: 100,
+    søker: {
+      søknadsdato: '2019-01-02',
+      dekningsgrad: 100,
+    },
+    annenPart: {
+      søknadsdato: '2019-01-01',
+      dekningsgrad: 80,
     },
   },
-} as Soknad;
+} as Ytelsefordeling;
 
 const meta = {
   title: 'fakta/fakta-saken',
   component: SakenFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    soknad: defaultSøknad,
+    ytelsefordeling: defaultYtelsefordeling,
     kanOverstyreAccess: true,
   },
   render: args => <SakenFaktaIndex {...args} />,
@@ -78,17 +82,13 @@ export const KanIkkeOverstyreDekningsgrad: Story = {
 
 export const ApentAksjonspunktForInnhentingAvDokumentasjon: Story = {
   args: {
-    aksjonspunkterForPanel: [
-     lagAksjonspunkt(AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)],
   },
 };
 
 export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)],
     fagsak: {
       fagsakYtelseType: 'SVP',
     } as Fagsak,
@@ -97,9 +97,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
 
 export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK]: {
         notAccepted: true,
@@ -111,32 +109,29 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
 export const DekningsgradErEndret: Story = {
   args: {
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,{
+      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD, {
         status: 'UTFO',
         kanLoses: true,
         begrunnelse: 'Er endret til 80 fordi...',
-      })
+      }),
     ],
-    soknad: {
-      oppgittFordeling: {
-        startDatoForPermisjon: '2019-01-01',
-        dekningsgrader: {
-          avklartDekningsgrad: 80,
-          søker: {
-            søknadsdato: '2019-01-02',
-            dekningsgrad: 100,
-          },
+    ytelsefordeling: {
+      førsteUttaksdato: '2019-01-01',
+      startDatoForPermisjon: '2019-01-01',
+      dekningsgrader: {
+        avklartDekningsgrad: 80,
+        søker: {
+          søknadsdato: '2019-01-02',
+          dekningsgrad: 100,
         },
       },
-    } as Soknad,
+    } as Ytelsefordeling,
   },
 };
 
 export const HarFåttDekningsgradAksjonspunkt: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.AVKLAR_DEKNINGSGRAD),
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_DEKNINGSGRAD)],
     fagsak: {
       fagsakYtelseType: 'FP',
       bruker: {
@@ -148,21 +143,20 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
         kjønn: 'M',
       },
     } as Fagsak,
-    soknad: {
-      oppgittFordeling: {
-        startDatoForPermisjon: '2019-01-01',
-        dekningsgrader: {
-          søker: {
-            søknadsdato: '2019-01-02',
-            dekningsgrad: 100,
-          },
-          annenPart: {
-            søknadsdato: '2019-01-01',
-            dekningsgrad: 80,
-          },
+    ytelsefordeling: {
+      førsteUttaksdato: '2019-01-01',
+      startDatoForPermisjon: '2019-01-01',
+      dekningsgrader: {
+        søker: {
+          søknadsdato: '2019-01-02',
+          dekningsgrad: 100,
+        },
+        annenPart: {
+          søknadsdato: '2019-01-01',
+          dekningsgrad: 80,
         },
       },
-    } as Soknad,
+    } as Ytelsefordeling,
   },
 };
 
@@ -180,30 +174,29 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
         kjønn: '-',
       },
     } as Fagsak,
-    soknad: {
-      oppgittFordeling: {
-        startDatoForPermisjon: '2019-01-01',
-        dekningsgrader: {
-          søker: {
-            søknadsdato: '2019-01-02',
-            dekningsgrad: 100,
-          },
-          annenPart: {
-            søknadsdato: '2019-01-01',
-            dekningsgrad: 80,
-          },
+    ytelsefordeling: {
+      førsteUttaksdato: '2019-01-01',
+      startDatoForPermisjon: '2019-01-01',
+      dekningsgrader: {
+        søker: {
+          søknadsdato: '2019-01-02',
+          dekningsgrad: 100,
+        },
+        annenPart: {
+          søknadsdato: '2019-01-01',
+          dekningsgrad: 80,
         },
       },
-    } as Soknad,
+    } as Ytelsefordeling,
   },
 };
 
 export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
   args: {
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.AVKLAR_DEKNINGSGRAD,{
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_DEKNINGSGRAD, {
         begrunnelse: 'Dette er en begrunnelse',
-      })
+      }),
     ],
     fagsak: {
       fagsakYtelseType: 'FP',
@@ -221,21 +214,20 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
         notAccepted: true,
       },
     },
-    soknad: {
-      oppgittFordeling: {
-        startDatoForPermisjon: '2019-01-01',
-        dekningsgrader: {
-          avklartDekningsgrad: 100,
-          søker: {
-            søknadsdato: '2019-01-02',
-            dekningsgrad: 100,
-          },
-          annenPart: {
-            søknadsdato: '2019-01-01',
-            dekningsgrad: 80,
-          },
+    ytelsefordeling: {
+      førsteUttaksdato: '2019-01-01',
+      startDatoForPermisjon: '2019-01-01',
+      dekningsgrader: {
+        avklartDekningsgrad: 100,
+        søker: {
+          søknadsdato: '2019-01-02',
+          dekningsgrad: 100,
+        },
+        annenPart: {
+          søknadsdato: '2019-01-01',
+          dekningsgrad: 80,
         },
       },
-    } as Soknad,
+    } as Ytelsefordeling,
   },
 };

@@ -172,77 +172,79 @@ export const VilkarresultatMedOverstyringForm = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, overstyringApKode))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="space-8">
-        <VStack gap="space-16">
-          <HStack gap="space-8">
-            {!erOverstyrt && originalErVilkårOk !== undefined && (
-              <>
-                {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles['godkjentImage']} />}
-                {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles['avslattImage']} />}
-              </>
-            )}
-            <Heading size="small" level="3">
-              <FormattedMessage id={panelTekstKode} />
-            </Heading>
-            {vilkår?.lovReferanse && <Detail className={styles['vilkar']}>{vilkår.lovReferanse}</Detail>}
-          </HStack>
-          <HStack gap="space-8">
-            {originalErVilkårOk && (
-              <Label size="small">
-                <FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />
-              </Label>
-            )}
-            {originalErVilkårOk === false && (
-              <Label size="small">
-                <FormattedMessage id="VilkarresultatMedOverstyringForm.ErIkkeOppfylt" />
-              </Label>
-            )}
-            {originalErVilkårOk === undefined && (
-              <BodyShort size="small">
-                <FormattedMessage id="VilkarresultatMedOverstyringForm.IkkeBehandlet" />
-              </BodyShort>
-            )}
-            {originalErVilkårOk !== undefined &&
-              !isHidden(kanOverstyreAccess.isEnabled, aksjonspunkt ? [aksjonspunkt] : [], overstyringApKode) && (
-                <OverstyringKnapp onClick={togglePa} erOverstyrt={erOverstyrt || overrideReadOnly} />
-              )}
-          </HStack>
-        </VStack>
-        {(erOverstyrt || hasAksjonspunkt) && (
-          <OverstyringPanel
-            erOverstyrt={erOverstyrt}
-            isSolvable={erOverstyrt || isSolvable}
-            erVilkårOk={erVilkårOk}
-            hasAksjonspunkt={hasAksjonspunkt}
-            overrideReadOnly={overrideReadOnly}
-            isSubmitting={formMethods.formState.isSubmitting}
-            isPristine={!formMethods.formState.isDirty}
-            toggleAv={toggleAv}
-            erIkkeGodkjentAvBeslutter={
-              aksjonspunkt ? !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted : false
-            }
-          >
-            {erOverstyringAvMedlemskap(overstyringApKode) && vilkår ? (
-              <MedlemskapVurderinger
-                vilkår={vilkår}
-                readOnly={overrideReadOnly || !erOverstyrt}
-                ytelse={fagsak.fagsakYtelseType}
-                erRevurdering={behandling.type === 'BT-004'}
-                erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
-              />
-            ) : (
-              <VilkarResultPicker
-                vilkår={vilkår}
-                isReadOnly={overrideReadOnly || !erOverstyrt}
-                customVilkårOppfyltText={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />}
-                customVilkårIkkeOppfyltText={
-                  <FormattedMessage id="VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt" values={{ b: BTag }} />
-                }
-              />
-            )}
-          </OverstyringPanel>
+      <HStack gap="space-16">
+        {!erOverstyrt && originalErVilkårOk !== undefined && (
+          <>
+            {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles['godkjentImage']} />}
+            {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles['avslattImage']} />}
+          </>
         )}
-      </VStack>
+        <VStack gap="space-8">
+          <VStack>
+            <HStack gap="space-8" align="center">
+              <Heading size="small" level="3">
+                <FormattedMessage id={panelTekstKode} />
+              </Heading>
+              {vilkår?.lovReferanse && <Detail>{vilkår.lovReferanse}</Detail>}
+            </HStack>
+            <HStack gap="space-8" align="center">
+              {originalErVilkårOk && (
+                <Label size="small">
+                  <FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />
+                </Label>
+              )}
+              {originalErVilkårOk === false && (
+                <Label size="small">
+                  <FormattedMessage id="VilkarresultatMedOverstyringForm.ErIkkeOppfylt" />
+                </Label>
+              )}
+              {originalErVilkårOk === undefined && (
+                <BodyShort size="small">
+                  <FormattedMessage id="VilkarresultatMedOverstyringForm.IkkeBehandlet" />
+                </BodyShort>
+              )}
+              {originalErVilkårOk !== undefined &&
+                !isHidden(kanOverstyreAccess.isEnabled, aksjonspunkt ? [aksjonspunkt] : [], overstyringApKode) && (
+                  <OverstyringKnapp onClick={togglePa} erOverstyrt={erOverstyrt || overrideReadOnly} />
+                )}
+            </HStack>
+          </VStack>
+          {(erOverstyrt || hasAksjonspunkt) && (
+            <OverstyringPanel
+              erOverstyrt={erOverstyrt}
+              isSolvable={erOverstyrt || isSolvable}
+              erVilkårOk={erVilkårOk}
+              hasAksjonspunkt={hasAksjonspunkt}
+              overrideReadOnly={overrideReadOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isPristine={!formMethods.formState.isDirty}
+              toggleAv={toggleAv}
+              erIkkeGodkjentAvBeslutter={
+                aksjonspunkt ? !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted : false
+              }
+            >
+              {erOverstyringAvMedlemskap(overstyringApKode) && vilkår ? (
+                <MedlemskapVurderinger
+                  vilkår={vilkår}
+                  readOnly={overrideReadOnly || !erOverstyrt}
+                  ytelse={fagsak.fagsakYtelseType}
+                  erRevurdering={behandling.type === 'BT-004'}
+                  erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
+                />
+              ) : (
+                <VilkarResultPicker
+                  vilkår={vilkår}
+                  isReadOnly={overrideReadOnly || !erOverstyrt}
+                  customVilkårOppfyltText={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />}
+                  customVilkårIkkeOppfyltText={
+                    <FormattedMessage id="VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt" values={{ b: BTag }} />
+                  }
+                />
+              )}
+            </OverstyringPanel>
+          )}
+        </VStack>
+      </HStack>
     </RhfForm>
   );
 };

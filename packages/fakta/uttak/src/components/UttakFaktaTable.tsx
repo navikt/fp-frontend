@@ -95,6 +95,7 @@ export const UttakFaktaTable = ({
   const slettPeriode = (fom: string) => {
     const oppdatertePerioder = uttakKontrollerFaktaPerioder.filter(p => p.originalFom !== fom);
     oppdaterUttakPerioder(oppdatertePerioder);
+    velgPeriodeFomDato(fom);
     setDirty(true);
   };
 

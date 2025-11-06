@@ -15,7 +15,6 @@ import type { FagsakYtelseType } from './fagsakYtelseType';
 import type { FaktaOmBeregningTilfelle } from './faktaOmBeregningTilfelle';
 import type { FamilieHendelseType } from './familieHendelseType';
 import type { FaresignalVurdering } from './faresignalVurdering';
-import type { FarSøkerType } from './farSøkerType';
 import type { FordelingPeriodeKilde } from './fordelingPeriodeKilde';
 import type { ForeldreType } from './foreldreType';
 import type { GraderingAvslagÅrsak } from './graderingAvslagÅrsak';
@@ -76,7 +75,6 @@ type KodeverkEnumMap = {
   FagsakYtelseType: FagsakYtelseType;
   FagsakMarkering: FagsakMarkeringType;
   FaktaOmBeregningTilfelle: FaktaOmBeregningTilfelle;
-  FarSøkerType: FarSøkerType;
   FordelingPeriodeKilde: FordelingPeriodeKilde;
   ForeldreType: ForeldreType;
   HistorikkAktør: HistorikkAktor;

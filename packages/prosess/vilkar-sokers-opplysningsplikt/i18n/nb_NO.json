@@ -3,7 +3,6 @@
   "SokersOpplysningspliktForm.UtfyllendeOpplysninger": "Vurder om søker har oppfylt opplysningsplikten etter § 21-3",
   "SokersOpplysningspliktForm.VilkarOppfylt": "Vilkåret er oppfylt",
   "SokersOpplysningspliktForm.VilkarIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt {br}Manglende opplysninger, foreslå avslag",
-  "SokersOpplysningspliktForm.ManglendeDokumentasjon": "Manglende dokumentasjon",
-
-  "ShowVilkarStatus.Check": "Informasjonen er utfylt"
+  "MangledeVedlegg.Tittel": "Manglende dokumentasjon",
+  "MangledeVedlegg.Arbeidsgiver": " fra {arbeidsgiverNavn}"
 }

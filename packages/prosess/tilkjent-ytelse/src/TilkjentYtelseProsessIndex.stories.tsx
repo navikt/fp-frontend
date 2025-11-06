@@ -77,34 +77,10 @@ const beregningresultat: BeregningsresultatDagytelse = {
 
 const søknad = {
   mottattDato: '2019-01-10',
-  soknadType: 'ST-001',
-  fodselsdatoer: {
-    1: '2019-01-01',
-  },
-  termindato: '2019-02-01',
-
-  antallBarn: 0,
-  oppgittTilknytning: {
-    oppholdNorgeNa: false,
-    oppholdSistePeriode: false,
-    oppholdNestePeriode: false,
-    utlandsoppholdFor: [],
-    utlandsoppholdEtter: [],
-  },
   manglendeVedlegg: [],
-  oppgittFordeling: {
-    dekningsgrader: {
-      søker: {
-        søknadsdato: '',
-        dekningsgrad: 0,
-      },
-      annenPart: {
-        søknadsdato: '',
-        dekningsgrad: undefined,
-      },
-    },
+  søknadsfrist: {
+    dagerOversittetFrist: 0,
   },
-  søknadsfrist: {},
 } satisfies Soknad;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {

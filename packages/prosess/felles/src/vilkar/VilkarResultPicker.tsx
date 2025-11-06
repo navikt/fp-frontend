@@ -48,7 +48,7 @@ export const VilkarResultPicker = ({
   const avslagsårsakerOptions = getAvslagsårsakerOptions(alleKodeverk, vilkår);
 
   return (
-    <VStack gap="space-16" paddingInline="4">
+    <VStack gap="space-16">
       {isReadOnly && erVilkårOk !== undefined && (
         <HStack gap="space-8">
           {erVilkårOk && (

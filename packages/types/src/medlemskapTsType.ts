@@ -8,6 +8,7 @@ import type {
   tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse,
   tjenester_behandling_medlem_MedlemskapDto_Personstatus,
   tjenester_behandling_medlem_MedlemskapDto_Region,
+  tjenester_behandling_medlem_MedlemskapDto_Utlandsopphold,
 } from './apiDtoGenerert.ts';
 
 export type RegionPeriode = tjenester_behandling_medlem_MedlemskapDto_Region;
@@ -27,3 +28,5 @@ export type LegacyManuellMedlemskapsBehandling = tjenester_behandling_medlem_Med
 export type ManuellBehandlingResultat = tjenester_behandling_medlem_MedlemskapDto_ManuellBehandlingResultat;
 
 export type Medlemskap = tjenester_behandling_medlem_MedlemskapDto;
+
+export type UtlandsoppholdPeriode = tjenester_behandling_medlem_MedlemskapDto_Utlandsopphold;

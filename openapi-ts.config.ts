@@ -2,14 +2,23 @@ import { defineConfig } from '@hey-api/openapi-ts';
 
 export default defineConfig({
   input: './swagger.json',
-  output: 'temp-types',
+  output: {
+    clean: false,
+    format: 'prettier',
+    lint: 'eslint',
+    path: 'packages/types/src/',
+    fileName: {
+      name: 'apiDtoGenerert',
+      suffix: null,
+    },
+  },
   plugins: [
-    '@hey-api/client-fetch',
     {
       name: '@hey-api/typescript',
       definitions: {
         case: 'preserve',
       },
+      exportFromIndex: false,
     },
   ],
 });
