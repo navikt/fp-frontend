@@ -1,11 +1,12 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Box, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
 
 import type { AlleKodeverk, LegacyManuellMedlemskapsBehandling, LegacyMedlemPeriode } from '@navikt/fp-types';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 interface Props {
   alleKodeverk: AlleKodeverk;
@@ -37,13 +38,11 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
               <FormattedMessage id="MedlemskapLegacy.ErSokerEOS.Label" />
             </Label>
             <BodyShort size="small">
-              <FormattedMessage
-                id={
-                  medlemsperiode.erEosBorger
-                    ? 'StatusForBorgerFaktaPanel.CitizenEEA'
-                    : 'StatusForBorgerFaktaPanel.CitizenOutsideEEA'
-                }
-              />
+              {medlemsperiode.erEosBorger ? (
+                <FormattedMessage id="StatusForBorgerFaktaPanel.CitizenEEA" />
+              ) : (
+                <FormattedMessage id="StatusForBorgerFaktaPanel.CitizenOutsideEEA" />
+              )}
             </BodyShort>
           </HStack>
         )}
@@ -118,13 +117,11 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
 
 export const VurderMedlemsskapLegacyAksjonspunktVisning = ({ legacyManuellBehandling, alleKodeverk }: Props) => {
   const skalViseDato = legacyManuellBehandling.perioder.length !== 1;
+  const intl = useIntl();
 
   return (
-    <Box.New background="neutral-soft" borderWidth="2" borderRadius="large" borderColor="neutral-subtle" padding="4">
+    <FaktaKort label={intl.formatMessage({ id: 'MedlemskapLegacy.TidligereVurdering' })}>
       <VStack gap="space-16">
-        <Heading size="small" level="3">
-          <FormattedMessage id="MedlemskapLegacy.TidligereVurdering" />
-        </Heading>
         {legacyManuellBehandling.perioder.map((p, index) => (
           <React.Fragment key={p.vurderingsdato}>
             <MedlemskapPeriodeVisning medlemsperiode={p} alleKodeverk={alleKodeverk} skalViseDato={skalViseDato} />
@@ -132,6 +129,6 @@ export const VurderMedlemsskapLegacyAksjonspunktVisning = ({ legacyManuellBehand
           </React.Fragment>
         ))}
       </VStack>
-    </Box.New>
+    </FaktaKort>
   );
 };

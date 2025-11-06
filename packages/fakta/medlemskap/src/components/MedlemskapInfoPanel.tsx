@@ -1,7 +1,8 @@
 import { VStack } from '@navikt/ds-react';
 
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Medlemskap } from '@navikt/fp-types';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { harAksjonspunkt, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VurderMedlemskapAksjonspunktForm } from './aksjonspunkt/VurderMedlemskapAksjonspunktForm';
 import { VurderMedlemsskapLegacyAksjonspunktVisning } from './aksjonspunkt/VurderMedlemskapLegacyAksjonspunktVisning';
@@ -23,20 +24,15 @@ interface Props {
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
 export const MedlemskapInfoPanel = ({ medlemskap }: Props) => {
-  const { aksjonspunkterForPanel, alleKodeverk, fagsak, isReadOnly } = usePanelDataContext();
+  const { aksjonspunkterForPanel, alleKodeverk, fagsak, harÅpentAksjonspunkt } = usePanelDataContext();
 
-  const aksjonspunkt = aksjonspunkterForPanel.find(ap => ap.status === 'OPPR' || ap.status === 'UTFO');
-  const harAksjonspunkt = !!aksjonspunkt;
+  const harVilkårAP =
+    harAksjonspunkt(AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET, aksjonspunkterForPanel) ||
+    harAksjonspunkt(AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR, aksjonspunkterForPanel);
 
   return (
     <VStack gap="space-24">
-      <AksjonspunktHelpText aksjonspunkter={aksjonspunkterForPanel} medlemskap={medlemskap} />
-      {medlemskap.manuellBehandlingResultat && isReadOnly && aksjonspunkt && (
-        <VurderMedlemskapAksjonspunktForm
-          manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
-          aksjonspunkt={aksjonspunkt}
-        />
-      )}
+      {harÅpentAksjonspunkt && <AksjonspunktHelpText aksjonspunkter={aksjonspunkterForPanel} medlemskap={medlemskap} />}
 
       {medlemskap.legacyManuellBehandling && !medlemskap.manuellBehandlingResultat && (
         <VurderMedlemsskapLegacyAksjonspunktVisning
@@ -47,14 +43,14 @@ export const MedlemskapInfoPanel = ({ medlemskap }: Props) => {
       <SituasjonOversikt medlemskap={medlemskap} alleKodeverk={alleKodeverk} />
 
       <VStack gap="space-8">
-        <OpplysningerOmUtenlandsopphold medlemskap={medlemskap} skalViseAvvik={harAksjonspunkt} />
+        <OpplysningerOmUtenlandsopphold medlemskap={medlemskap} skalViseAvvik={harVilkårAP} />
         <OpplysningerOmAdresser
           medlemskap={medlemskap}
           avvik={medlemskap.avvik}
           brukerNavn={fagsak.bruker.navn}
           annenpartNavn={fagsak.annenPart?.navn}
           alleKodeverk={alleKodeverk}
-          skalViseAvvik={harAksjonspunkt}
+          skalViseAvvik={harVilkårAP}
         />
         <OpplysningerOmPersonstatus
           medlemskap={medlemskap}
@@ -62,26 +58,24 @@ export const MedlemskapInfoPanel = ({ medlemskap }: Props) => {
           brukerNavn={fagsak.bruker.navn}
           annenpartNavn={fagsak.annenPart?.navn}
           alleKodeverk={alleKodeverk}
-          skalViseAvvik={harAksjonspunkt}
+          skalViseAvvik={harVilkårAP}
         />
         <OpplysningerFraMedlemskapsregister
           medlemskapsperioder={medlemskap.medlemskapsperioder}
           avvik={medlemskap.avvik}
           alleKodeverk={alleKodeverk}
-          skalViseAvvik={harAksjonspunkt}
+          skalViseAvvik={harVilkårAP}
         />
         <OpplysningerOmOppholdstillatelser
           oppholdstillatelser={medlemskap.oppholdstillatelser}
           avvik={medlemskap.avvik}
           alleKodeverk={alleKodeverk}
-          skalViseAvvik={harAksjonspunkt}
+          skalViseAvvik={harVilkårAP}
         />
       </VStack>
-      {!isReadOnly && aksjonspunkt && (
-        <VurderMedlemskapAksjonspunktForm
-          manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
-          aksjonspunkt={aksjonspunkt}
-        />
+
+      {harVilkårAP && (
+        <VurderMedlemskapAksjonspunktForm manuellBehandlingResultat={medlemskap.manuellBehandlingResultat} />
       )}
     </VStack>
   );

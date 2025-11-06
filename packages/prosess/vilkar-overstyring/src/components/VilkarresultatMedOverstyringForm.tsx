@@ -7,7 +7,7 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 
-import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
+import { MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, BehandlingFpSak, ManuellBehandlingResultat, Vilkar } from '@navikt/fp-types';
@@ -63,14 +63,12 @@ const createInitialValues = (
   };
 
   if (erOverstyringAvMedlemskap(overstyringApKode)) {
-    if (aksjonspunkt) {
-      return {
-        ...felles,
-        ...createMedlemskapInitialValues(aksjonspunkt, medlemskapManuellBehandlingResultat),
-      };
-    } else {
-      return felles;
-    }
+    return aksjonspunkt
+      ? {
+          ...felles,
+          ...MedlemskapVurderinger.initialValues(medlemskapManuellBehandlingResultat),
+        }
+      : felles;
   }
   return {
     ...felles,
@@ -85,25 +83,17 @@ type OverstyringVilkår =
   | OverstyringMedlemskapvilkaretForutgaendeAp;
 
 const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyringAksjonspunkter): OverstyringVilkår => {
-  const { vurdering, avslagskode, begrunnelse, medlemFom, opphørFom } = values;
-
   const felles = {
     kode: overstyringApKode,
-    begrunnelse: begrunnelse,
+    begrunnelse: values.begrunnelse,
   };
 
   switch (overstyringApKode) {
     case AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET:
-      return {
-        ...felles,
-        avslagskode: vurdering === MedlemskapVurdering.OPPFYLT ? undefined : avslagskode,
-        opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
-      };
     case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR:
       return {
         ...felles,
-        avslagskode: vurdering === MedlemskapVurdering.OPPFYLT ? undefined : avslagskode,
-        medlemFom: vurdering === MedlemskapVurdering.IKKE_OPPFYLT ? medlemFom : undefined,
+        ...MedlemskapVurderinger.transformValues(values),
       };
     default:
       return {
