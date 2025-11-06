@@ -21,7 +21,6 @@ export const medlemskap: Medlemskap = {
     utlandsoppholdFør: [],
     utlandsoppholdEtter: [],
   },
-  utenlandsopphold: [],
   adresser: [
     {
       fom: '2015-03-05',

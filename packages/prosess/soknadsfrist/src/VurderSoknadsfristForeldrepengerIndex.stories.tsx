@@ -16,7 +16,7 @@ import { VurderSoknadsfristForeldrepengerIndex } from './VurderSoknadsfristForel
 const soknad = {
   mottattDato: '2019-01-01',
   søknadsfrist: {
-    mottattDato: '2019-01-01',
+    gjeldendeMottattDato: '2019-01-01',
     dagerOversittetFrist: 2,
     søknadsperiodeStart: '2019-01-01',
     søknadsperiodeSlutt: '2019-01-10',

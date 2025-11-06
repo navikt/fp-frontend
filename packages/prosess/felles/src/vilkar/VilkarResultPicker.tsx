@@ -120,7 +120,7 @@ VilkarResultPicker.transformValues = (values: VilkarResultPickerFormValues) =>
 
 const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkar | undefined) => {
   if (vilkår) {
-    return alleKodeverk['LineærAvslagsårsak']
+    return alleKodeverk['Avslagsårsak']
       .filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))
       .toSorted((k1, k2) => k1.navn.localeCompare(k2.navn))
       .map(aa => (
