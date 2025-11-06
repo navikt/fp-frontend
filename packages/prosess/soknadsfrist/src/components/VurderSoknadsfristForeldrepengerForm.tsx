@@ -32,7 +32,7 @@ const buildInitialValues = (
   mottattDato: string,
   søknadsfrist?: Søknadsfrist,
 ): FormValues => {
-  const upgMottattDato = søknadsfrist?.mottattDato ?? undefined;
+  const upgMottattDato = søknadsfrist?.gjeldendeMottattDato ?? undefined;
   return {
     gyldigSenFremsetting: aksjonspunkter.at(0)?.status === 'OPPR' ? undefined : upgMottattDato !== mottattDato,
     ansesMottatt: upgMottattDato,
