@@ -57,7 +57,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
     if (!delvilkår) return [];
 
     return (omsorgsovertakelse.aktuelleDelvilkårAvslagsårsaker[delvilkår] ?? [])
-      .map(kode => alleKodeverk['LineærAvslagsårsak'].find(kodeverk => kodeverk.kode === kode))
+      .map(kode => alleKodeverk['Avslagsårsak'].find(kodeverk => kodeverk.kode === kode))
       .sort(sortByNavn);
   }, [delvilkår]);
 

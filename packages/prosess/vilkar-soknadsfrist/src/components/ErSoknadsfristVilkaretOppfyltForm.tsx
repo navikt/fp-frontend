@@ -169,7 +169,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
         </RhfRadioGroup>
         {isReadOnly && erVilkarOk === false && !!behandling.behandlingsresultat?.avslagsarsak && (
           <BodyShort size="small">
-            {alleKodeverk['LineærAvslagsårsak'].find(type => type.kode === behandling.behandlingsresultat?.avslagsarsak)
+            {alleKodeverk['Avslagsårsak'].find(type => type.kode === behandling.behandlingsresultat?.avslagsarsak)
               ?.navn ?? ''}
           </BodyShort>
         )}

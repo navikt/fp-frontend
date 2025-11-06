@@ -84,7 +84,7 @@ type KodeverkEnumMap = {
   KlageMedholdÅrsak: KlageMedholdÅrsak;
   KonsekvensForYtelsen: KonsekvensForYtelsen;
   Landkoder: Landkode;
-  LineærAvslagsårsak: Avslagsarsak;
+  Avslagsårsak: Avslagsarsak;
   ManuellBehandlingÅrsak: ManuellBehandlingÅrsak;
   MedlemskapDekningType: MedlemskapDekningType;
   MedlemskapManuellVurderingType: MedlemskapManuellVurderingType;
