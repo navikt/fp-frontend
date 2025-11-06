@@ -13,7 +13,6 @@ const defaultMedlemskapProps: Medlemskap = {
   personstatuser: [],
   medlemskapsperioder: [],
   adresser: [],
-  utenlandsopphold: [],
   oppholdstillatelser: [],
   avvik: [],
   oppgittUtlandsopphold: {

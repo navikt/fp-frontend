@@ -117,7 +117,6 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       type: 'UTVA',
     },
   ],
-  utenlandsopphold: [],
   oppgittUtlandsopphold: {
     oppholdNestePeriode: true,
     oppholdSistePeriode: true,
@@ -221,7 +220,6 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
       ],
       medlemskapsperioder: [],
       oppholdstillatelser: [],
-      utenlandsopphold: [],
       personstatuser: [{ fom: '2022-09-01', tom: TIDENES_ENDE, type: 'BOSA' }],
       regioner: [{ fom: '1971-09-17', tom: TIDENES_ENDE, type: 'NORDEN' }],
     }),
