@@ -3812,7 +3812,6 @@ export type tjenester_behandling_medlem_MedlemskapDto = {
   oppholdstillatelser: Array<tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse>;
   personstatuser: Array<tjenester_behandling_medlem_MedlemskapDto_Personstatus>;
   regioner: Array<tjenester_behandling_medlem_MedlemskapDto_Region>;
-  utenlandsopphold: Array<tjenester_behandling_medlem_MedlemskapDto_Utlandsopphold>;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Annenpart = {
@@ -3969,99 +3968,6 @@ export type tjenester_behandling_søknad_ManglendeVedleggDto = {
   brukerHarSagtAtIkkeKommer: boolean;
   dokumentTittel: string;
   dokumentType: foreldrepenger_behandlingslager_behandling_DokumentTypeId;
-};
-
-export type tjenester_behandling_søknad_OppgittFordelingDto = {
-  dekningsgrader: tjenester_behandling_søknad_OppgittFordelingDto_DekningsgradInfoDto;
-  startDatoForPermisjon?: string;
-};
-
-export type tjenester_behandling_søknad_OppgittFordelingDto_DekningsgradInfoDto = {
-  annenPart: tjenester_behandling_søknad_OppgittFordelingDto_OppgittDekningsgradDto;
-  avklartDekningsgrad?: number;
-  søker: tjenester_behandling_søknad_OppgittFordelingDto_OppgittDekningsgradDto;
-};
-
-export type tjenester_behandling_søknad_OppgittFordelingDto_OppgittDekningsgradDto = {
-  dekningsgrad?: number;
-  søknadsdato: string;
-};
-
-export type tjenester_behandling_søknad_OppgittTilknytningDto = {
-  oppholdNestePeriode: boolean;
-  oppholdNorgeNa: boolean;
-  oppholdSistePeriode: boolean;
-  utlandsoppholdEtter: Array<tjenester_behandling_søknad_UtlandsoppholdDto>;
-  utlandsoppholdFor: Array<tjenester_behandling_søknad_UtlandsoppholdDto>;
-};
-
-export type tjenester_behandling_søknad_SoknadDto = {
-  antallBarn: number;
-  begrunnelseForSenInnsending?: string;
-  manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto>;
-  mottattDato: string;
-  oppgittFordeling?: tjenester_behandling_søknad_OppgittFordelingDto;
-  oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto;
-  soknadType: tjenester_behandling_søknad_SøknadType;
-  søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
-};
-
-export type tjenester_behandling_søknad_SøknadType = 'ST-001' | 'ST-002';
-
-export type tjenester_behandling_søknad_SøknadsfristDto = {
-  dagerOversittetFrist?: number;
-  mottattDato?: string;
-  søknadsperiodeSlutt?: string;
-  søknadsperiodeStart?: string;
-  utledetSøknadsfrist?: string;
-};
-
-export type tjenester_behandling_søknad_UtlandsoppholdDto = {
-  fom: string;
-  landNavn: string;
-  tom: string;
-};
-
-export type foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType =
-  | 'ADOPTERER_ALENE'
-  | 'ANDRE_FORELDER_DØD'
-  | 'OVERTATT_OMSORG'
-  | 'OVERTATT_OMSORG_F'
-  | 'ANDRE_FORELD_DØD_F'
-  | '-';
-
-export type tjenester_behandling_søknad_SoknadAdopsjonDto = {
-  adopsjonFodelsedatoer?: {
-    [key: string]: string;
-  };
-  antallBarn: number;
-  barnetsAnkomstTilNorgeDato?: string;
-  begrunnelseForSenInnsending?: string;
-  farSokerType?: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType;
-  manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto>;
-  mottattDato: string;
-  omsorgsovertakelseDato?: string;
-  oppgittFordeling?: tjenester_behandling_søknad_OppgittFordelingDto;
-  oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto;
-  soknadType: tjenester_behandling_søknad_SøknadType;
-  søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
-};
-
-export type tjenester_behandling_søknad_SoknadFodselDto = {
-  antallBarn: number;
-  begrunnelseForSenInnsending?: string;
-  farSokerType?: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType;
-  fodselsdatoer?: {
-    [key: string]: string;
-  };
-  manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto>;
-  mottattDato: string;
-  oppgittFordeling?: tjenester_behandling_søknad_OppgittFordelingDto;
-  oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto;
-  soknadType: tjenester_behandling_søknad_SøknadType;
-  søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
-  termindato?: string;
-  utstedtdato?: string;
 };
 
 export type tjenester_behandling_søknad_SøknadDto = {
@@ -7388,27 +7294,6 @@ export type TilretteleggingResponses = {
 
 export type TilretteleggingResponse = TilretteleggingResponses[keyof TilretteleggingResponses];
 
-export type GetSoknadData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/behandling/soknad';
-};
-
-export type GetSoknadResponses = {
-  /**
-   * Returnerer Søknad, null hvis ikke eksisterer (GUI støtter ikke NOT_FOUND p.t.)
-   */
-  200: tjenester_behandling_søknad_SoknadDto;
-};
-
-export type GetSoknadResponse = GetSoknadResponses[keyof GetSoknadResponses];
-
 export type GetSøknadData = {
   body?: never;
   path?: never;
@@ -7425,7 +7310,7 @@ export type GetSøknadResponses = {
   /**
    * Returnerer søknad
    */
-  200: tjenester_behandling_søknad_SoknadDto;
+  200: tjenester_behandling_søknad_SøknadDto;
 };
 
 export type GetSøknadResponse = GetSøknadResponses[keyof GetSøknadResponses];
