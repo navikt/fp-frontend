@@ -26,8 +26,16 @@ interface Props {
  */
 export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: Props) => {
   const intl = useIntl();
-  const { fagsak, behandling, aksjonspunkterForPanel, vilkårForPanel, submitCallback, isReadOnly, isSubmittable } =
-    usePanelDataContext<VurderMedlemskapAp | VurderForutgaendeMedlemskapAp>();
+  const {
+    fagsak,
+    behandling,
+    aksjonspunkterForPanel,
+    vilkårForPanel,
+    submitCallback,
+    isReadOnly,
+    isSubmittable,
+    alleMerknaderFraBeslutter,
+  } = usePanelDataContext<VurderMedlemskapAp | VurderForutgaendeMedlemskapAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -45,6 +53,13 @@ export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: 
         erForutgående
           ? intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.Tittel.Forutgående' })
           : intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.Tittel.Ordinært' })
+      }
+      merknaderFraBeslutter={
+        alleMerknaderFraBeslutter[
+          erForutgående
+            ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
+            : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET
+        ]
       }
     >
       <RhfForm
