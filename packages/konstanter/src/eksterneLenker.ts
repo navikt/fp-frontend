@@ -22,3 +22,25 @@ export const hentDokumentLenke = (saksnummer: string, journalpostId: string, dok
 
 export const hentVedtakDokumentLenke = (behandlingUuid: string): string =>
   `/fpsak/api/vedtak/hent-vedtaksdokument?behandlingId=${behandlingUuid}`;
+
+const FPSAK_URL_NAME = 'fpsak';
+const AVDELINGSLEDER_URL_NAME = 'fpavdelingsleder';
+const JOURNALFORING_URL_NAME = 'fpjournalforing';
+
+export const getAvdelingslederLenke = () =>
+  removePathAndQuery(globalThis.location.href.replace(FPSAK_URL_NAME, AVDELINGSLEDER_URL_NAME));
+
+export const getJournalføringLenke = () =>
+  removePathAndQuery(globalThis.location.href.replace(FPSAK_URL_NAME, JOURNALFORING_URL_NAME));
+
+export const getFpSakLenke = () =>
+  removePathAndQuery(
+    globalThis.location.href
+      .replace(JOURNALFORING_URL_NAME, FPSAK_URL_NAME)
+      .replace(AVDELINGSLEDER_URL_NAME, FPSAK_URL_NAME),
+  );
+
+const removePathAndQuery = (url: string): string => {
+  const urlObj = new URL(url);
+  return `${urlObj.protocol}//${urlObj.host}`;
+};

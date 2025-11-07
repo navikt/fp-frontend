@@ -4,11 +4,13 @@ import { CheckmarkCircleIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Link, Modal, VStack } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
+import { getFpSakLenke } from '@navikt/fp-konstanter';
+
 import type { SaksnummerType } from '../../../typer/saksnummerTsType';
 
 import styles from './journalførtSubmitModal.module.css';
 
-const velgSakLenke = (saksnummer: string): string => `/fagsak/${saksnummer}/`;
+const velgSakLenke = (saksnummer: string): string => `${getFpSakLenke()}/fagsak/${saksnummer}/`;
 
 type Props = Readonly<{
   saksnummer?: SaksnummerType;
