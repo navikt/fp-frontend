@@ -51,7 +51,7 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
-    "@storybook/react": "10.0.2",
+    "@storybook/react": "10.0.5",
     "@storybook/react-vite": "10.0.2",
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.0",
@@ -59,10 +59,10 @@
     "@types/css-tree": "2.3.11",
     "@types/lodash.debounce": "4.0.9",
     "eslint": "9.39.0",
-    "storybook": "10.0.2",
+    "storybook": "10.0.5",
     "stylelint": "16.25.0",
     "typescript": "5.9.3",
-    "vite": "7.1.12",
-    "vitest": "4.0.6"
+    "vite": "7.2.2",
+    "vitest": "4.0.7"
   }
 }

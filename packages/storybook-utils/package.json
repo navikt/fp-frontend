@@ -18,12 +18,12 @@
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@storybook/react": "10.0.2",
-    "@tanstack/react-query": "5.90.6",
+    "@storybook/react": "10.0.5",
+    "@tanstack/react-query": "5.90.7",
     "react": "19.2.0",
     "react-intl": "7.1.14",
     "react-router-dom": "7.9.5",
-    "storybook": "10.0.2"
+    "storybook": "10.0.5"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
