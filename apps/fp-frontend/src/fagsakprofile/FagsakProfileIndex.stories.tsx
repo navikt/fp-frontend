@@ -61,12 +61,12 @@ const ALLE_BEHANDLINGER = [
   {
     uuid: '1',
     versjon: 1,
-    behandlingKøet: false,
     behandlingPåVent: false,
     type: 'BT-002',
     status: 'AVSLU',
     behandlendeEnhetId: '2323',
     behandlendeEnhetNavn: 'Nav Vikafossen',
+    aktivPapirsøknad: false,
     erAktivPapirsoknad: false,
     opprettet: '2024-01-02T00:54:25.455',
     behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
@@ -79,6 +79,8 @@ const ALLE_BEHANDLINGER = [
 
     toTrinnsBehandling: false,
 
+    ugunstAksjonspunkt: false,
+
     behandlingÅrsaker: [],
     vilkår: [],
     links: [],
@@ -88,12 +90,12 @@ const ALLE_BEHANDLINGER = [
   {
     uuid: '2',
     versjon: 1,
-    behandlingKøet: false,
     behandlingPåVent: false,
     type: 'BT-004',
     status: 'UTRED',
     behandlendeEnhetId: '2323',
     behandlendeEnhetNavn: 'Nav Vikafossen',
+    aktivPapirsøknad: false,
     erAktivPapirsoknad: false,
     behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
     opprettet: '2024-08-02T00:54:25.455',
@@ -113,6 +115,8 @@ const ALLE_BEHANDLINGER = [
     språkkode: '-',
 
     toTrinnsBehandling: false,
+
+    ugunstAksjonspunkt: false,
 
     behandlingÅrsaker: [],
     vilkår: [],

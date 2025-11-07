@@ -56,12 +56,12 @@ const FAGSAK = {
     {
       versjon: 2,
       uuid: '1',
-      behandlingKøet: false,
       behandlingPåVent: false,
       type: 'BT-004',
       status: 'UTRED',
       behandlendeEnhetId: '2323',
       behandlendeEnhetNavn: 'Nav Vikafossen',
+      aktivPapirsøknad: false,
       erAktivPapirsoknad: false,
       behandlingTillatteOperasjoner: {
         behandlingFraBeslutter: false,
@@ -93,6 +93,8 @@ const FAGSAK = {
       språkkode: '-',
 
       toTrinnsBehandling: false,
+
+      ugunstAksjonspunkt: false,
 
       behandlingÅrsaker: [],
       vilkår: [],

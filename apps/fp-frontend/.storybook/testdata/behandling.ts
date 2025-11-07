@@ -1,30 +1,21 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { BehandlingFpSak } from '@navikt/fp-types';
 import { lagVilkår } from '@navikt/fp-storybook-utils';
+import type { BehandlingFpSak } from '@navikt/fp-types';
 
 export const behandling: BehandlingFpSak = {
   uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
   versjon: 26,
   type: 'BT-002',
   status: 'UTRED',
-  opprettet: '2025-03-05T16:42:58',
 
   behandlendeEnhetId: '4867',
   behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser foreldrepenger',
   erAktivPapirsoknad: false,
-  førsteÅrsak: {
-    erAutomatiskRevurdering: false,
-    behandlingArsakType: 'RE-END-INNTEKTSMELD',
-    manueltOpprettet: false,
-  },
-  gjeldendeVedtak: false,
   behandlingHenlagt: false,
   behandlingPåVent: false,
 
   språkkode: 'NB',
-  behandlingKøet: false,
 
-  toTrinnsBehandling: false,
   behandlingsresultat: {
     id: 999951,
     type: 'IKKE_FASTSATT',
@@ -254,5 +245,4 @@ export const behandling: BehandlingFpSak = {
   harSøknad: true,
   harSattEndringsdato: false,
   alleUttaksperioderAvslått: false,
-  sjekkSimuleringResultat: false,
 };

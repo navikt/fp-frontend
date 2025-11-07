@@ -538,44 +538,24 @@ export type tjenester_behandling_dto_behandling_SkjæringstidspunktDto = {
 export type tjenester_behandling_dto_behandling_UtvidetBehandlingDto = {
   aksjonspunkt: Array<tjenester_behandling_aksjonspunkt_AksjonspunktDto>;
   alleUttaksperioderAvslått?: boolean;
-  ansvarligBeslutter?: string;
-  ansvarligSaksbehandler?: string;
-  avsluttet?: string;
   behandlendeEnhetId: string;
   behandlendeEnhetNavn: string;
   behandlingHenlagt: boolean;
-  behandlingKoet?: boolean;
-  behandlingKøet: boolean;
-  behandlingPaaVent?: boolean;
   behandlingPåVent: boolean;
-  behandlingsfristTid?: string;
   behandlingsresultat?: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
   behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
-  endret?: string;
-  endretAvBrukernavn?: string;
   erAktivPapirsoknad: boolean;
-  erPaaVent?: boolean;
-  fagsakId?: number;
-  fristBehandlingPaaVent?: string;
   fristBehandlingPåVent?: string;
-  førsteÅrsak?: tjenester_behandling_dto_behandling_BehandlingÅrsakDto;
-  gjeldendeVedtak: boolean;
-  harRegisterdata?: boolean;
   harSattEndringsdato: boolean;
   harSøknad: boolean;
-  id?: number;
+  id: number;
   links: Array<rest_ResourceLink>;
   opprettet: string;
-  originalVedtaksDato?: string;
-  sjekkSimuleringResultat?: boolean;
-  sprakkode?: foreldrepenger_behandlingslager_geografisk_Språkkode;
   språkkode: foreldrepenger_behandlingslager_geografisk_Språkkode;
   status: foreldrepenger_behandlingslager_behandling_BehandlingStatus;
   taskStatus?: tjenester_behandling_dto_AsyncPollingStatus;
-  toTrinnsBehandling: boolean;
   type: foreldrepenger_behandlingslager_behandling_BehandlingType;
   uuid: string;
-  venteArsakKode?: string;
   venteÅrsakKode?: string;
   versjon: number;
   vilkår: Array<tjenester_behandling_vilkår_VilkårDto>;
@@ -588,44 +568,6 @@ export type tjenester_behandling_vilkår_VilkårDto = {
   overstyrbar: boolean;
   vilkarStatus: foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType;
   vilkarType: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType;
-};
-
-export type tjenester_behandling_dto_behandling_BehandlingDto = {
-  ansvarligSaksbehandler?: string;
-  avsluttet?: string;
-  behandlendeEnhetId: string;
-  behandlendeEnhetNavn: string;
-  behandlingHenlagt: boolean;
-  behandlingKoet?: boolean;
-  behandlingKøet: boolean;
-  behandlingPaaVent?: boolean;
-  behandlingPåVent: boolean;
-  behandlingsfristTid?: string;
-  behandlingsresultat?: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
-  behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
-  endret?: string;
-  endretAvBrukernavn?: string;
-  erAktivPapirsoknad: boolean;
-  erPaaVent?: boolean;
-  fagsakId?: number;
-  fristBehandlingPaaVent?: string;
-  fristBehandlingPåVent?: string;
-  førsteÅrsak?: tjenester_behandling_dto_behandling_BehandlingÅrsakDto;
-  gjeldendeVedtak: boolean;
-  id?: number;
-  links: Array<rest_ResourceLink>;
-  opprettet: string;
-  originalVedtaksDato?: string;
-  sprakkode?: foreldrepenger_behandlingslager_geografisk_Språkkode;
-  språkkode: foreldrepenger_behandlingslager_geografisk_Språkkode;
-  status: foreldrepenger_behandlingslager_behandling_BehandlingStatus;
-  toTrinnsBehandling: boolean;
-  type: foreldrepenger_behandlingslager_behandling_BehandlingType;
-  uuid: string;
-  venteArsakKode?: string;
-  venteÅrsakKode?: string;
-  versjon: number;
-  vilkår: Array<tjenester_behandling_vilkår_VilkårDto>;
 };
 
 export type tjenester_behandling_dto_NyBehandlingDto = {
@@ -4624,46 +4566,32 @@ export type tjenester_behandling_dto_behandling_AnnenPartBehandlingDto = {
 };
 
 export type tjenester_behandling_dto_behandling_FagsakBehandlingDto = {
+  aktivPapirsøknad: boolean;
   ansvarligSaksbehandler?: string;
   avsluttet?: string;
   behandlendeEnhetId: string;
   behandlendeEnhetNavn: string;
   behandlingHenlagt: boolean;
-  behandlingKoet?: boolean;
-  behandlingKøet: boolean;
-  behandlingPaaVent?: boolean;
   behandlingPåVent: boolean;
-  behandlingTillatteOperasjoner?: tjenester_behandling_dto_BehandlingOperasjonerDto;
-  behandlingsfristTid?: string;
+  behandlingTillatteOperasjoner: tjenester_behandling_dto_BehandlingOperasjonerDto;
   behandlingsresultat?: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
   behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
   brevmaler: Array<foreldrepenger_kontrakter_formidling_v3_BrevmalDto>;
-  endret?: string;
-  endretAvBrukernavn?: string;
   erAktivPapirsoknad: boolean;
-  erPaaVent?: boolean;
-  fagsakId?: number;
-  fristBehandlingPaaVent?: string;
   fristBehandlingPåVent?: string;
   førsteÅrsak?: tjenester_behandling_dto_behandling_BehandlingÅrsakDto;
   gjeldendeVedtak: boolean;
-  id?: number;
   kontrollResultat?: tjenester_behandling_kontroll_dto_KontrollresultatDto;
   links: Array<rest_ResourceLink>;
   opprettet: string;
-  originalVedtaksDato?: string;
   risikoAksjonspunkt?: tjenester_behandling_aksjonspunkt_AksjonspunktDto;
-  sprakkode?: foreldrepenger_behandlingslager_geografisk_Språkkode;
   språkkode: foreldrepenger_behandlingslager_geografisk_Språkkode;
   status: foreldrepenger_behandlingslager_behandling_BehandlingStatus;
   toTrinnsBehandling: boolean;
-  totrinnskontrollReadonly?: boolean;
   totrinnskontrollÅrsaker: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto>;
   type: foreldrepenger_behandlingslager_behandling_BehandlingType;
-  ugunstAksjonspunkt?: boolean;
+  ugunstAksjonspunkt: boolean;
   uuid: string;
-  venteArsakKode?: string;
-  venteÅrsakKode?: string;
   versjon: number;
   vilkår: Array<tjenester_behandling_vilkår_VilkårDto>;
 };
@@ -5687,7 +5615,7 @@ export type HentBehandlingerResponses = {
   /**
    * default response
    */
-  default: Array<tjenester_behandling_dto_behandling_BehandlingDto>;
+  default: Array<tjenester_behandling_dto_behandling_UtvidetBehandlingDto>;
 };
 
 export type HentBehandlingerResponse = HentBehandlingerResponses[keyof HentBehandlingerResponses];
