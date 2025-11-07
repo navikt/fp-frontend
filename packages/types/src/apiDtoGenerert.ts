@@ -1284,6 +1284,7 @@ export type tjenester_behandling_søknad_aksjonspunkt_SoknadsfristAksjonspunktDt
 export type tjenester_behandling_søknad_aksjonspunkt_VurderSøknadsfristDto = {
   ansesMottattDato?: string;
   begrunnelse?: string;
+  harGyldigGrunn?: boolean;
 };
 
 export type tjenester_behandling_tilbakekreving_aksjonspunkt_KontrollerStorEtterbetalingSøkerDto = {
@@ -1325,6 +1326,7 @@ export type tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehov
 
 export type tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDto = {
   begrunnelse?: string;
+  vurderingBehov?: Array<tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto>;
 };
 
 export type tjenester_behandling_uttak_dto_ArbeidsforholdDto = {
@@ -5495,145 +5497,6 @@ export type vedtak_felles_prosesstask_rest_dto_SokeFilterDto = {
   tekst: string;
 };
 
-export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDtoWritable = (
-  | ({
-      '@type': '5016';
-    } & tjenester_behandling_aksjonspunkt_FatterVedtakAksjonspunktDto)
-  | ({
-      '@type': '5002';
-    } & tjenester_behandling_dekningsgrad_AvklarDekningsgradDto)
-  | ({
-      '@type': '5037';
-    } & tjenester_behandling_innsyn_aksjonspunkt_VurderInnsynDto)
-  | ({
-      '@type': '5082';
-    } & tjenester_behandling_klage_aksjonspunkt_KlageFormkravAksjonspunktDto)
-  | ({
-      '@type': '5035';
-    } & tjenester_behandling_klage_aksjonspunkt_KlageVurderingResultatAksjonspunktDto)
-  | ({
-      '@type': '5102';
-    } & tjenester_behandling_medlem_aksjonspunkt_VurderForutgåendeMedlemskapDto)
-  | ({
-      '@type': '5101';
-    } & tjenester_behandling_medlem_aksjonspunkt_VurderMedlemskapDto)
-  | ({
-      '@type': '5055';
-    } & tjenester_behandling_revurdering_aksjonspunkt_KontrollerRevurderingsBehandlingDto)
-  | ({
-      '@type': '5026';
-    } & tjenester_behandling_revurdering_aksjonspunkt_VarselRevurderingManuellDto)
-  | ({
-      '@type': '5095';
-    } & tjenester_behandling_risikoklassifisering_VurderFaresignalerDto)
-  | ({
-      '@type': '5091';
-    } & tjenester_behandling_svp_BekreftSvangerskapspengerDto)
-  | ({
-      '@type': '5092';
-    } & tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto)
-  | ({
-      '@type': '5007';
-    } & tjenester_behandling_søknad_aksjonspunkt_SoknadsfristAksjonspunktDto)
-  | ({
-      '@type': '5043';
-    } & tjenester_behandling_søknad_aksjonspunkt_VurderSøknadsfristDto)
-  | ({
-      '@type': '5029';
-    } & tjenester_behandling_tilbakekreving_aksjonspunkt_KontrollerStorEtterbetalingSøkerDto)
-  | ({
-      '@type': '5084';
-    } & tjenester_behandling_tilbakekreving_aksjonspunkt_VurderFeilutbetalingDto)
-  | ({
-      '@type': 'tjenester.behandling.uttak.dokumentasjon.VurderUttakDokumentasjonDtoWritable';
-    } & tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDtoWritable)
-  | ({
-      '@type': '5060';
-    } & tjenester_behandling_uttak_dto_AvklarAleneomsorgVurderingDto)
-  | ({
-      '@type': '5086';
-    } & tjenester_behandling_uttak_dto_AvklarAnnenforelderHarRettDto)
-  | ({
-      '@type': '5076';
-    } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerOpplysningerOmDødDto)
-  | ({
-      '@type': '5077';
-    } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerOpplysningerOmSøknadsfristDto)
-  | ({
-      '@type': '5073';
-    } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerRealitetsBehandlingEllerKlageDto)
-  | ({
-      '@type': '5071';
-    } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakPerioderDto)
-  | ({
-      '@type': '5072';
-    } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakStortingsrepresentantDto)
-  | ({
-      '@type': '5103';
-    } & tjenester_behandling_uttak_eøs_EøsUttakDto)
-  | ({
-      '@type': '5066';
-    } & tjenester_behandling_uttak_fakta_FaktaUttakDto_GraderingAktivitetUtenBGDto)
-  | ({
-      '@type': '5063';
-    } & tjenester_behandling_uttak_fakta_FaktaUttakDto_GraderingUkjentAktivitetDto)
-  | ({
-      '@type': '5064';
-    } & tjenester_behandling_uttak_fakta_FaktaUttakDto_IngenPerioderDto)
-  | ({
-      '@type': '5065';
-    } & tjenester_behandling_uttak_fakta_FaktaUttakDto_ManueltSattStartdatoDto)
-  | ({
-      '@type': '5028';
-    } & tjenester_behandling_vedtak_aksjonspunkt_ForeslaVedtakManueltAksjonspuntDto)
-  | ({
-      '@type': '5015';
-    } & tjenester_behandling_vedtak_aksjonspunkt_ForeslåVedtakAksjonspunktDto)
-  | ({
-      '@type': '5033';
-    } & tjenester_behandling_vedtak_aksjonspunkt_VurdereAnnenYteleseFørVedtakDto)
-  | ({
-      '@type': '5034';
-    } & tjenester_behandling_vedtak_aksjonspunkt_VurdereDokumentFørVedtakDto)
-  | ({
-      '@type': '5003';
-    } & tjenester_behandling_vedtak_aksjonspunkt_VurdereInntektsmeldingFørVedtakDto)
-  | ({
-      '@type': '5061';
-    } & tjenester_behandling_ytelsefordeling_BekreftFaktaForOmsorgVurderingDto)
-  | ({
-      '@type': '5012';
-    } & tjenester_registrering_es_ManuellRegistreringEngangsstonadDto)
-  | ({
-      '@type': '5057';
-    } & tjenester_registrering_fp_ManuellRegistreringEndringsøknadDto)
-  | ({
-      '@type': '5040';
-    } & tjenester_registrering_fp_ManuellRegistreringForeldrepengerDto)
-  | ({
-      '@type': '5096';
-    } & tjenester_registrering_svp_ManuellRegistreringSvangerskapspengerDto)
-) & {
-  begrunnelse?: string;
-};
-
-export type tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDtoWritable = {
-  behandlingUuid: string;
-  behandlingVersjon: number;
-  bekreftedeAksjonspunktDtoer?: Array<foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDtoWritable>;
-};
-
-export type tjenester_behandling_søknad_aksjonspunkt_VurderSøknadsfristDtoWritable = {
-  ansesMottattDato?: string;
-  begrunnelse?: string;
-  harGyldigGrunn?: boolean;
-};
-
-export type tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDtoWritable = {
-  begrunnelse?: string;
-  vurderingBehov?: Array<tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto>;
-};
-
 export type AutoRunBatchData = {
   body?: never;
   path?: never;
@@ -5921,7 +5784,7 @@ export type BekreftData = {
   /**
    * Liste over aksjonspunkt som skal bekreftes, inklusiv data som trengs for å løse de.
    */
-  body?: tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDtoWritable;
+  body?: tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDto;
   path?: never;
   query?: never;
   url: '/api/behandling/aksjonspunkt';
@@ -5938,7 +5801,7 @@ export type BesluttData = {
   /**
    * Liste over aksjonspunkt som skal bekreftes, inklusiv data som trengs for å løse de.
    */
-  body?: tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDtoWritable;
+  body?: tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDto;
   path?: never;
   query?: never;
   url: '/api/behandling/aksjonspunkt/beslutt';
