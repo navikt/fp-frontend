@@ -70,17 +70,17 @@ describe('VilkarresultatMedOverstyringProsessIndex', () => {
     expect(await screen.findByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
     expect(screen.getByText('Er medlemskapsvilkåret oppfylt?')).toBeInTheDocument();
 
-    expect(screen.queryByText('Velg en avslagsårsak')).not.toBeInTheDocument();
-    expect(screen.queryByText('Når opphører medlemskapet?')).not.toBeInTheDocument();
+    expect(screen.queryByText('Avslagsårsak')).not.toBeInTheDocument();
+    expect(screen.queryByText('Opphørsdato')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Delvis oppfylt'));
 
-    expect(screen.getByText('Velg en avslagsårsak')).toBeInTheDocument();
-    expect(screen.getByText('Når opphører medlemskapet?')).toBeInTheDocument();
+    expect(screen.getByText('Avslagsårsak')).toBeInTheDocument();
+    expect(screen.getByText('Opphørsdato')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByLabelText('Velg en avslagsårsak'), 'Søker er utflyttet');
+    await userEvent.selectOptions(screen.getByLabelText('Avslagsårsak'), 'Søker er utflyttet');
 
-    const opphørDatoInput = screen.getByLabelText('Når opphører medlemskapet?');
+    const opphørDatoInput = screen.getByLabelText('Opphørsdato');
     await userEvent.type(opphørDatoInput, '20.12.2021');
     fireEvent.blur(opphørDatoInput);
 

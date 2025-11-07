@@ -15,6 +15,13 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
   AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
   AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+
+  AksjonspunktKode.UTGÅTT_5019,
+  AksjonspunktKode.UTGÅTT_5020,
+  AksjonspunktKode.UTGÅTT_5021,
+  AksjonspunktKode.UTGÅTT_5023,
+  AksjonspunktKode.UTGÅTT_5053,
+  AksjonspunktKode.UTGÅTT_6012,
 ];
 
 export const MedlemskapsvilkaretFaktaInitPanel = () => {

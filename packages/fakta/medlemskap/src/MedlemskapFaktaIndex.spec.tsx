@@ -185,6 +185,6 @@ describe('MedlemskapFaktaIndex', () => {
     expect(oppholdstillatelser.getByText('Permanent oppholdstillatelse')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
-    expect(screen.getByText('Bekreft')).toBeInTheDocument();
+    expect(screen.getByText('Bekreft og fortsett')).toBeInTheDocument();
   });
 });

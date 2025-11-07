@@ -6,19 +6,22 @@ import { RhfDatepicker, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import type { AlleKodeverk, Vilkar } from '@navikt/fp-types';
+import type { AlleKodeverk, ManuellBehandlingResultat, Vilkar } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import {
-  MedlemskapVurdering,
-  SØKER_INNFLYTTET_FOR_SENT_KODE,
-  type VurderMedlemskapFormValues,
-} from '../../types/vurderingMedlemskapForm';
+import { MedlemskapVurdering, SØKER_INNFLYTTET_FOR_SENT_KODE } from '../../types/vurderingMedlemskapForm';
 import { lagVurderingsAlternativer } from './lagVurderingsAlternativer';
 
 import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
+
+export type MedlemskapVurderingerFormValues = {
+  vurdering?: MedlemskapVurdering;
+  opphørFom?: string;
+  medlemFom?: string;
+  avslagskode?: string;
+};
 
 interface Props {
   vilkår: Vilkar;
@@ -29,16 +32,12 @@ interface Props {
 }
 
 export const MedlemskapVurderinger = ({ readOnly, ytelse, vilkår, erForutgående, erRevurdering }: Props) => {
-  const { watch, control } = useFormContext<VurderMedlemskapFormValues>();
+  const { watch, control } = useFormContext<MedlemskapVurderingerFormValues>();
   const vurdering = watch('vurdering');
   const avslagskode = watch('avslagskode');
 
   const { alleKodeverk } = usePanelDataContext();
   const avslagsårsakerOptions = getAvslagsårsakerOptions(alleKodeverk, vilkår);
-
-  const label = erForutgående
-    ? intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.Forutgaaende' })
-    : intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.Ordinaert' });
 
   return (
     <RawIntlProvider value={intl}>
@@ -47,7 +46,9 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, vilkår, erForutgåend
           name="vurdering"
           control={control}
           legend={
-            readOnly ? intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.ReadOnly' }) : label
+            erForutgående
+              ? intl.formatMessage({ id: 'MedlemskapVurderinger.VurderingLabel.Forutgående' })
+              : intl.formatMessage({ id: 'MedlemskapVurderinger.VurderingLabel.Ordinært' })
           }
           validate={[required]}
           readOnly={readOnly}
@@ -58,16 +59,12 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, vilkår, erForutgåend
             </Radio>
           ))}
         </RhfRadioGroup>
-        {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere */}
+
         {vurdering && [MedlemskapVurdering.DELVIS_OPPFYLT, MedlemskapVurdering.IKKE_OPPFYLT].includes(vurdering) && (
           <RhfSelect
             name="avslagskode"
             control={control}
-            label={intl.formatMessage({
-              id: readOnly
-                ? 'VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly'
-                : 'VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel',
-            })}
+            label={intl.formatMessage({ id: 'MedlemskapVurderinger.AvslagsarsakLabel' })}
             selectValues={avslagsårsakerOptions}
             readOnly={readOnly}
             validate={[required]}
@@ -77,28 +74,19 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, vilkår, erForutgåend
           <RhfDatepicker
             name="opphørFom"
             control={control}
-            label={intl.formatMessage({
-              id: readOnly
-                ? 'VurderMedlemsskapAksjonspunktForm.OpphorFomLabel.ReadOnly'
-                : 'VurderMedlemsskapAksjonspunktForm.OpphorFomLabel',
-            })}
+            label={intl.formatMessage({ id: 'MedlemskapVurderinger.OpphorFomLabel' })}
             validate={[hasValidDate, required]}
             readOnly={readOnly}
           />
         )}
         {erForutgående &&
-          /* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere */
           vurdering &&
           [MedlemskapVurdering.IKKE_OPPFYLT].includes(vurdering) &&
           avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE && (
             <RhfDatepicker
               name="medlemFom"
               control={control}
-              label={intl.formatMessage({
-                id: readOnly
-                  ? 'VurderMedlemsskapAksjonspunktForm.MedlemFomLabel.ReadOnly'
-                  : 'VurderMedlemsskapAksjonspunktForm.MedlemFomLabel',
-              })}
+              label={intl.formatMessage({ id: 'MedlemskapVurderinger.MedlemFomLabel' })}
               validate={[hasValidDate, required]}
               readOnly={readOnly}
             />
@@ -118,3 +106,26 @@ const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkar) 
       </option>
     ));
 };
+
+MedlemskapVurderinger.initialValues = (
+  resultat: ManuellBehandlingResultat | undefined,
+): MedlemskapVurderingerFormValues => {
+  if (resultat) {
+    const { opphørFom, avslagskode, medlemFom } = resultat;
+    if (!avslagskode) {
+      return { vurdering: MedlemskapVurdering.OPPFYLT };
+    } else if (opphørFom) {
+      return { vurdering: MedlemskapVurdering.DELVIS_OPPFYLT, opphørFom, avslagskode };
+    } else if (medlemFom) {
+      return { vurdering: MedlemskapVurdering.IKKE_OPPFYLT, medlemFom, avslagskode };
+    }
+    return { vurdering: MedlemskapVurdering.IKKE_OPPFYLT, avslagskode };
+  }
+  return {};
+};
+
+MedlemskapVurderinger.transformValues = (values: MedlemskapVurderingerFormValues) => ({
+  avslagskode: values.vurdering === MedlemskapVurdering.OPPFYLT ? undefined : values.avslagskode,
+  opphørFom: values.vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? values.opphørFom : undefined,
+  medlemFom: values.avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? values.medlemFom : undefined,
+});
