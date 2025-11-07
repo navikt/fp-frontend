@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
@@ -14,22 +13,18 @@ import {
   VilkarResultPicker,
   type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
 import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextFieldFormValues;
-
-interface Props {
-  status: string;
-}
 
 /**
  * FodselVilkarForm
  *
  * Setter opp aksjonspunktet for avklaring av Fødselsvilkåret.
  */
-export const FodselVilkarForm = ({ status }: Props) => {
+export const FodselVilkarForm = () => {
   const {
     behandling,
     isSubmittable,
@@ -41,17 +36,13 @@ export const FodselVilkarForm = ({ status }: Props) => {
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
 
-  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
-    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
-  );
-
-  const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
+  const vilkår = vilkårForPanel[0];
+  const initialValues = buildInitialValues(vilkår, aksjonspunkterForPanel, behandling.behandlingsresultat);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
-  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
   return (
     <RhfForm
@@ -61,36 +52,34 @@ export const FodselVilkarForm = ({ status }: Props) => {
     >
       <ProsessPanelTemplate
         title={<FormattedMessage id="FodselVilkarForm.Fodsel" />}
+        vilkår={vilkår}
+        aksjonspunkterForPanel={aksjonspunkterForPanel}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        lovReferanse={vilkårForPanel[0]?.lovReferanse}
-        originalErVilkårOk={originalErVilkårOk}
-        erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <VStack gap="space-16">
-          <VilkarResultPicker
-            vilkår={vilkårForPanel[0]}
-            legend={<FormattedMessage id="FodselVilkarForm.TidligereUtbetaltStonad" />}
-            isReadOnly={isReadOnly}
-            vilkårOppfyltLabel={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
-            vilkårIkkeOppfyltLabel={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
-          />
-          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
-        </VStack>
+        <VilkarResultPicker
+          vilkår={vilkårForPanel[0]}
+          legend={<FormattedMessage id="FodselVilkarForm.TidligereUtbetaltStonad" />}
+          isReadOnly={isReadOnly}
+          vilkårOppfyltLabel={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
+          vilkårIkkeOppfyltLabel={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
+        />
+        <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
       </ProsessPanelTemplate>
     </RhfForm>
   );
 };
 
 const buildInitialValues = (
+  vilkår: Vilkar | undefined,
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
-  behandlingsresultat?: BehandlingFpSak['behandlingsresultat'],
+  behandlingsresultat: Behandlingsresultat | undefined,
 ): FormValues => ({
-  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+  ...VilkarResultPicker.buildInitialValues(vilkår, aksjonspunkter, behandlingsresultat),
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 

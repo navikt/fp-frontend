@@ -1,25 +1,28 @@
 import { type ReactNode } from 'react';
 
-import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
-import { createIntl } from '@navikt/ft-utils';
+
+import type { Aksjonspunkt, Vilkar } from '@navikt/fp-types';
 
 import { ProsessStegSubmitButton } from '../ProsessStegSubmitButton';
+import { VilkårStatus } from './VilkårStatus';
 
 import styles from './prosessPanelTemplate.module.css';
 
-import messages from '../../i18n/nb_NO.json';
-
-const intl = createIntl(messages);
-
 interface Props {
   title: ReactNode;
-  lovReferanse: string | undefined;
   harÅpentAksjonspunkt: boolean;
+  harÅpenSaksbehendlerOverstyring?: boolean;
+  saksbehendlerOverstyringsKnapp?: ReactNode;
+  aksjonspunkterForPanel: Aksjonspunkt[];
+  vilkår: Vilkar | undefined;
   isSubmittable: boolean;
-  originalErVilkårOk: boolean | undefined;
-  erIkkeGodkjentAvBeslutter: boolean;
+  alleMerknaderFraBeslutter: {
+    [p: string]: {
+      notAccepted?: boolean;
+    };
+  };
   rendreFakta?: ReactNode;
   isReadOnly: boolean;
   isDirty: boolean;
@@ -28,54 +31,41 @@ interface Props {
 }
 
 export const ProsessPanelTemplate = ({
-  lovReferanse,
+  vilkår,
+  aksjonspunkterForPanel,
   title,
-  originalErVilkårOk,
   harÅpentAksjonspunkt,
+  harÅpenSaksbehendlerOverstyring = false,
+  saksbehendlerOverstyringsKnapp,
   isSubmittable,
   isReadOnly,
   rendreFakta,
   isDirty,
-  erIkkeGodkjentAvBeslutter,
+  alleMerknaderFraBeslutter,
   isSubmitting,
   children,
-}: Props) => (
-  <HStack gap="space-8">
-    {originalErVilkårOk !== undefined && (
-      <>
-        {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles['godkjentImage']} />}
-        {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles['avslattImage']} />}
-      </>
-    )}
+}: Props) => {
+  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
+  );
+
+  return (
     <VStack gap="space-16">
-      <HStack gap="space-8" wrap={false} align="center">
-        <Heading size="small" level="3">
-          {title}
-        </Heading>
-        {lovReferanse && <Detail>{lovReferanse}</Detail>}
-      </HStack>
-
-      {!harÅpentAksjonspunkt && (
-        <HStack gap="space-8">
-          {originalErVilkårOk && (
-            <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErOppfylt' })}</Label>
-          )}
-          {originalErVilkårOk === false && (
-            <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErIkkeOppfylt' })}</Label>
-          )}
-          {originalErVilkårOk === undefined && (
-            <BodyShort size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.IkkeBehandlet' })}</BodyShort>
-          )}
-        </HStack>
-      )}
-
+      <VilkårStatus
+        title={title}
+        vilkår={vilkår}
+        aksjonspunkterForPanel={aksjonspunkterForPanel}
+        harÅpentAksjonspunkt={harÅpentAksjonspunkt}
+        erOverstyringAktivert={harÅpenSaksbehendlerOverstyring}
+        overstyringsKnapp={saksbehendlerOverstyringsKnapp}
+      />
       <AksjonspunktBox
-        className={harÅpentAksjonspunkt ? undefined : styles['aksjonspunktMargin']}
-        erAksjonspunktApent={harÅpentAksjonspunkt}
+        className={harÅpentAksjonspunkt ? styles['aksjonspunktMarginÅpenAP'] : styles['aksjonspunktMargin']}
+        erAksjonspunktApent={harÅpentAksjonspunkt || harÅpenSaksbehendlerOverstyring}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
       >
         <VStack gap="space-16">
-          <div>{children}</div>
+          {children}
           <ProsessStegSubmitButton
             isReadOnly={isReadOnly}
             isSubmittable={isSubmittable}
@@ -84,7 +74,7 @@ export const ProsessPanelTemplate = ({
           />
         </VStack>
       </AksjonspunktBox>
-      {rendreFakta}
+      <div className={styles['aksjonspunktMargin']}>{rendreFakta}</div>
     </VStack>
-  </HStack>
-);
+  );
+};

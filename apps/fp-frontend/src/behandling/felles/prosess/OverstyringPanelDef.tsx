@@ -14,10 +14,7 @@ interface Props {
 export const OverstyringPanelDef = ({ vilkårKoder, panelTekstKode, medlemskap }: Props) => {
   const { overstyringApKode } = usePanelOverstyring();
 
-  const { status, aksjonspunkterForPanel, vilkårForPanel } = useStandardProsessPanelProps(
-    [overstyringApKode],
-    vilkårKoder,
-  );
+  const { aksjonspunkterForPanel, vilkårForPanel } = useStandardProsessPanelProps([overstyringApKode], vilkårKoder);
 
   const skalVises = skalViseProsessPanel(aksjonspunkterForPanel, vilkårKoder, vilkårForPanel);
 
@@ -28,9 +25,7 @@ export const OverstyringPanelDef = ({ vilkårKoder, panelTekstKode, medlemskap }
   return (
     <VilkarresultatMedOverstyringProsessIndex
       medlemskapManuellBehandlingResultat={medlemskap?.manuellBehandlingResultat ?? undefined}
-      vilkår={vilkårForPanel[0]}
       panelTekstKode={panelTekstKode}
-      status={status}
     />
   );
 };

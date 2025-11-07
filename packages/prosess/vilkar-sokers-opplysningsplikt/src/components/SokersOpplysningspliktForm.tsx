@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Label, VStack } from '@navikt/ds-react';
+import { Label } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
-import { BTag, isObject } from '@navikt/ft-utils';
+import { BTag } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
@@ -13,7 +13,13 @@ import {
   VilkarResultPicker,
   type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandlingsresultat, Soknad } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  ArbeidsgiverOpplysningerPerId,
+  Behandlingsresultat,
+  Soknad,
+  Vilkar,
+} from '@navikt/fp-types';
 import type { OverstyringSokersOpplysingspliktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -23,7 +29,6 @@ type FormValues = ProsessStegBegrunnelseTextFieldFormValues & VilkarResultPicker
 
 interface Props {
   søknad: Soknad;
-  status: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -32,7 +37,7 @@ interface Props {
  *
  * Informasjon om søkers informasjonsplikt er godkjent eller avvist.
  */
-export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplysningerPerId }: Props) => {
+export const SokersOpplysningspliktForm = ({ søknad, arbeidsgiverOpplysningerPerId }: Props) => {
   const {
     aksjonspunkterForPanel,
     vilkårForPanel,
@@ -44,20 +49,14 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
     behandling,
   } = usePanelDataContext<OverstyringSokersOpplysingspliktAp>();
 
-  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
-    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
-  );
-
-  const hasSoknad = harSoknad(søknad);
-
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
-  const formMethods = useForm<FormValues>({
-    defaultValues:
-      mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat),
-  });
+  const vilkår = vilkårForPanel[0];
+  const initialValues = buildInitialValues(vilkår, aksjonspunkterForPanel, behandling.behandlingsresultat);
 
-  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
+  const formMethods = useForm<FormValues>({
+    defaultValues: mellomlagretFormData ?? initialValues,
+  });
 
   return (
     <RhfForm
@@ -67,50 +66,45 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
     >
       <ProsessPanelTemplate
         title={<FormattedMessage id="SokersOpplysningspliktForm.SokersOpplysningsplikt" />}
+        vilkår={vilkår}
+        aksjonspunkterForPanel={aksjonspunkterForPanel}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
-        lovReferanse={vilkårForPanel[0]?.lovReferanse}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        originalErVilkårOk={originalErVilkårOk}
-        erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
         rendreFakta={<MangledeVedlegg søknad={søknad} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} />}
       >
-        <VStack gap="space-16">
-          <Label size="medium">
-            <FormattedMessage id="SokersOpplysningspliktForm.Tittel" />
-          </Label>
-          <VilkarResultPicker
-            vilkår={undefined}
-            legend={<FormattedMessage id="SokersOpplysningspliktForm.ErVilkåretOppfylt" />}
-            isReadOnly={isReadOnly}
-            skalKunneInnvilge={hasSoknad}
-            vilkårOppfyltLabel={<FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />}
-            vilkårIkkeOppfyltLabel={
-              <FormattedMessage
-                id="SokersOpplysningspliktForm.VilkarIkkeOppfylt"
-                values={{ b: BTag, br: <br key="break-line" /> }}
-              />
-            }
-          />
-          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
-        </VStack>
+        <Label size="medium">
+          <FormattedMessage id="SokersOpplysningspliktForm.Tittel" />
+        </Label>
+        <VilkarResultPicker
+          vilkår={vilkår}
+          legend={<FormattedMessage id="SokersOpplysningspliktForm.ErVilkåretOppfylt" />}
+          isReadOnly={isReadOnly}
+          skalKunneInnvilge={!!søknad}
+          vilkårOppfyltLabel={<FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />}
+          vilkårIkkeOppfyltLabel={
+            <FormattedMessage
+              id="SokersOpplysningspliktForm.ErIkkeOppfylt"
+              values={{ b: BTag, br: <br key="break-line" /> }}
+            />
+          }
+        />
+        <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
       </ProsessPanelTemplate>
     </RhfForm>
   );
 };
 
-// TODO: søknad er vel alltid objekt så denne sjekken er irrelevant??
-const harSoknad = (soknad: Soknad): boolean => isObject(soknad);
-
 const buildInitialValues = (
+  vilkår: Vilkar | undefined,
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
   behandlingsresultat: Behandlingsresultat | undefined,
 ): FormValues => {
   return {
-    ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+    ...VilkarResultPicker.buildInitialValues(vilkår, aksjonspunkter, behandlingsresultat),
     ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
   };
 };

@@ -1,5 +1,3 @@
-import { type ComponentProps } from 'react';
-
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -10,7 +8,7 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak, Vilkar } from '@navikt/fp-types';
+import type { BehandlingFpSak } from '@navikt/fp-types';
 
 import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
 
@@ -19,10 +17,9 @@ const meta = {
   component: FodselVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    vilkårForPanel: [lagVilkår('FP_VK_1')] as Vilkar[],
+    vilkårForPanel: [lagVilkår('FP_VK_1', { vilkarStatus: 'IKKE_VURDERT' })],
   },
-  render: args => <FodselVilkarProsessIndex {...args} />,
-} satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselVilkarProsessIndex>>;
+} satisfies Meta<PanelDataArgs>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -30,25 +27,20 @@ type Story = StoryObj<typeof meta>;
 export const ÅpentAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE)],
-    status: 'IKKE_VURDERT',
   },
 };
 
 export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(
-        AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
-
-        {
-          status: 'UTFO',
-          begrunnelse: 'Dette vilkåret er godkjent',
-        },
-      ),
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE, {
+        status: 'UTFO',
+        begrunnelse: 'Dette vilkåret er godkjent',
+      }),
     ],
+    vilkårForPanel: [lagVilkår('FP_VK_1', { vilkarStatus: 'OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'OPPFYLT',
   },
 };
 
@@ -67,8 +59,8 @@ export const AvslåttVilkår: Story = {
         begrunnelse: 'Dette vilkåret er avslått',
       }),
     ],
+    vilkårForPanel: [lagVilkår('FP_VK_1', { vilkarStatus: 'IKKE_OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'IKKE_OPPFYLT',
   },
 };

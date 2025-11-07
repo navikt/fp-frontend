@@ -50,7 +50,6 @@ export const ÅpentAksjonspunkt: Story = {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET)],
     vilkårForPanel: [lagVilkår('FP_VK_3', { vilkarStatus: 'IKKE_VURDERT' })],
     isReadOnly: false,
-    status: 'IKKE_VURDERT',
   },
 };
 
@@ -65,7 +64,6 @@ export const OppfyltVilkår: Story = {
     vilkårForPanel: [lagVilkår('FP_VK_3', { vilkarStatus: 'OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'OPPFYLT',
   },
 };
 
@@ -75,7 +73,7 @@ export const AvslåttVilkår: Story = {
       uuid: '1',
       versjon: 1,
       behandlingsresultat: {
-        avslagsarsak: '1099',
+        avslagsarsak: '1007',
       },
     } as BehandlingFpSak,
     aksjonspunkterForPanel: [
@@ -87,6 +85,5 @@ export const AvslåttVilkår: Story = {
     vilkårForPanel: [lagVilkår('FP_VK_3', { vilkarStatus: 'IKKE_OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'IKKE_OPPFYLT',
   },
 };

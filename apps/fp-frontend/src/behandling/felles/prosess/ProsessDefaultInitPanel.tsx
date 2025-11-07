@@ -46,8 +46,14 @@ const ProsessPanel = <T extends Behandling>({
   children,
 }: Props<T> & ProsessPanel) => {
   const { behandling, fagsak, alleKodeverk } = useBehandlingDataContext<T>();
-
-  const status = overstyrtStatus ?? standardPanelProps.status;
+  // TODO fix dette
+  const vilkår = standardPanelProps.vilkårForPanel[0];
+  const panelStatus = standardPanelProps.harÅpentAksjonspunkt
+    ? 'IKKE_VURDERT'
+    : vilkår
+      ? vilkår.vilkarStatus
+      : 'IKKE_VURDERT';
+  const status = overstyrtStatus ?? panelStatus;
 
   const markertSomAktiv = !!skalMarkeresSomAktiv && !behandling.behandlingHenlagt;
 

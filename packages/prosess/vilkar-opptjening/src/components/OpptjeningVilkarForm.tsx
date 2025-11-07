@@ -6,7 +6,6 @@ import { OpptjeningVilkarView } from './OpptjeningVilkarView';
 
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
-  status: string;
 }
 
 /**
@@ -14,11 +13,11 @@ interface Props {
  *
  * Presentasjonskomponent. Viser resultatet av opptjeningsvilkåret.
  */
-export const OpptjeningVilkarForm = ({ fastsattOpptjening, status }: Props) => {
+export const OpptjeningVilkarForm = ({ fastsattOpptjening }: Props) => {
   const { aksjonspunkterForPanel } = usePanelDataContext();
 
   return aksjonspunkterForPanel.length > 0 ? (
-    <OpptjeningVilkarAksjonspunktPanel status={status} fastsattOpptjening={fastsattOpptjening} />
+    <OpptjeningVilkarAksjonspunktPanel fastsattOpptjening={fastsattOpptjening} />
   ) : (
     <OpptjeningVilkarView fastsattOpptjening={fastsattOpptjening} />
   );

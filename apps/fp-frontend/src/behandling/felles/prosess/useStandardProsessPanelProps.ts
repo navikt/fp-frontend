@@ -1,14 +1,5 @@
-import type {
-  Aksjonspunkt,
-  AlleKodeverk,
-  Behandling,
-  BehandlingFpSak,
-  Fagsak,
-  Vilkar,
-  VilkarUtfallType,
-} from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import type { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
@@ -25,7 +16,6 @@ export type StandardProsessPanelProps<T extends Behandling> = {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   aksjonspunkterForPanel: Aksjonspunkt[];
   vilkårForPanel: Vilkar[];
-  status: VilkarUtfallType;
   isReadOnly: boolean;
   isSubmittable: boolean;
   harÅpentAksjonspunkt: boolean;
@@ -58,8 +48,6 @@ export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFp
 
   const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === 'OPPR' && ap.kanLoses);
 
-  const status = finnStatus(vilkårForPanel, aksjonspunkterForPanel);
-
   const isSubmittable = aksjonspunkterForPanel.some(ap => ap.kanLoses) && status !== 'OPPFYLT';
 
   const standardlagringSideEffekter = () => () => {
@@ -90,7 +78,6 @@ export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFp
     isSubmittable,
     harÅpentAksjonspunkt,
     submitCallback,
-    status,
   };
 };
 
@@ -143,17 +130,3 @@ const getBekreftAksjonspunktProsessCallback =
       bekreftedeAksjonspunktDtoer: models,
     }).then(etterLagringCallback);
   };
-
-const finnStatus = (vilkår: Vilkar[], aksjonspunkter: Aksjonspunkt[]): VilkarUtfallType => {
-  if (vilkår.length > 0) {
-    if (vilkår.some(v => v.vilkarStatus === 'IKKE_VURDERT')) {
-      return 'IKKE_VURDERT';
-    }
-    return vilkår.some(v => v.vilkarStatus !== 'OPPFYLT') ? 'IKKE_OPPFYLT' : 'OPPFYLT';
-  }
-
-  if (aksjonspunkter.length > 0) {
-    return aksjonspunkter.some(erAksjonspunktÅpent) ? 'IKKE_VURDERT' : 'OPPFYLT';
-  }
-  return 'IKKE_VURDERT';
-};

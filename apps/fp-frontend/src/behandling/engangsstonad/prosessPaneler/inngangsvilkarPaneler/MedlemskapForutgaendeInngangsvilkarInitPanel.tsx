@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { VilkårType } from '@navikt/fp-types';
-import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../../felles/context/BehandlingDataContext';
@@ -26,13 +25,6 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
 
   const { data: medlemskap, isFetching } = useQuery(api.medlemskapOptions(behandling));
 
-  const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR && ap.status !== 'AVBR',
-  );
-  const harÅpentMedlemskapAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR && erAksjonspunktÅpent(ap),
-  );
-
   return (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
@@ -40,10 +32,9 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
       inngangsvilkårPanelKode="MEDLEMSKAP"
       hentInngangsvilkårPanelTekst=""
       overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
-      overrideReadOnly={harMedlemskapsAksjonspunkt}
     >
       <>
-        {!harÅpentMedlemskapAksjonspunkt && !isFetching && (
+        {medlemskap && !isFetching && (
           <OverstyringPanelDef
             vilkårKoder={VILKAR_KODER}
             panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"

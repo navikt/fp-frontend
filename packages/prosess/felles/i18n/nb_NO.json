@@ -6,13 +6,14 @@
   "OverstyringPanel.ConfirmInformation": "Bekreft overstyring",
   "OverstyringPanel.Avbryt": "Avbryt",
 
-  "ProsessPanelTemplate.ErOppfylt": "Vilkåret er oppfylt",
-  "ProsessPanelTemplate.ErIkkeOppfylt": "Vilkåret er avslått",
-  "ProsessPanelTemplate.IkkeBehandlet": "Ikke behandlet",
+  "VilkårStatus.ErOppfylt": "Vilkåret er oppfylt",
+  "VilkårStatus.ErAvslått": "Vilkåret er avslått",
+  "VilkårStatus.IkkeBehandlet": "Ikke behandlet",
+  "VilkårStatus.UnderBehandling": "Under behandling",
 
   "VilkarResultPicker.Arsak": "Avslagsårsak",
-  "VilkarResultPicker.OpphorFom": "Dato for opphør av medlemskapet",
-  "VilkarResultPicker.MedlemFom": "Innflyttingsdato",
+  "VilkarResultPicker.ErOppfylt": "Vilkåret er oppfylt.",
+  "VilkarResultPicker.ErIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt.",
 
   "ProsessStegBegrunnelseTextField.ExplanationRequired": "Vurdering",
   "ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly": "Begrunnelse",

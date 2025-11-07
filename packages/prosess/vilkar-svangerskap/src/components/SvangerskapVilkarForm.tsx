@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Detail, VStack } from '@navikt/ds-react';
+import { Detail } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -19,9 +18,9 @@ import type {
   Aksjonspunkt,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
-  BehandlingFpSak,
+  Behandlingsresultat,
   FodselOgTilrettelegging,
-  VilkarUtfallType,
+  Vilkar,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -43,11 +42,11 @@ const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrett
 type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextFieldFormValues;
 
 const buildInitialValues = (
+  vilkår: Vilkar | undefined,
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
-  behandlingsresultat?: BehandlingFpSak['behandlingsresultat'],
+  behandlingsresultat: Behandlingsresultat | undefined,
 ): FormValues => ({
-  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+  ...VilkarResultPicker.buildInitialValues(vilkår, aksjonspunkter, behandlingsresultat),
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
@@ -58,11 +57,10 @@ const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp 
 });
 
 interface Props {
-  status: VilkarUtfallType;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
 }
 
-export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, status }: Props) => {
+export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging }: Props) => {
   const {
     aksjonspunkterForPanel,
     vilkårForPanel,
@@ -74,28 +72,15 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     isReadOnly,
   } = usePanelDataContext<BekreftSvangerskapspengervilkarAp>();
 
-  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
-    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
-  );
-
   const finnesUttak = finnesInnvilgetUttak(svangerskapspengerTilrettelegging);
 
-  const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
+  const vilkår = vilkårForPanel[0];
+  const initialValues = buildInitialValues(vilkår, aksjonspunkterForPanel, behandling.behandlingsresultat);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
-
-  const erVilkarOk = formMethods.watch('erVilkarOk');
-
-  useEffect(() => {
-    if (erVilkarOk) {
-      formMethods.clearErrors();
-    }
-  }, [erVilkarOk]);
-
-  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
   return (
     <RhfForm
@@ -106,30 +91,28 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
       <ProsessPanelTemplate
         title={<FormattedMessage id="SvangerskapVilkarForm.Svangerskap" />}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
-        lovReferanse={vilkårForPanel[0]?.lovReferanse}
+        vilkår={vilkår}
+        aksjonspunkterForPanel={aksjonspunkterForPanel}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        originalErVilkårOk={originalErVilkårOk}
-        erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <VStack gap="space-16">
-          <VilkarResultPicker
-            vilkår={vilkårForPanel[0]}
-            isReadOnly={isReadOnly}
-            legend={<FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" />}
-            skalKunneInnvilge={finnesUttak}
-            vilkårOppfyltLabel={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
-            vilkårIkkeOppfyltLabel={<FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
-          />
-          {!finnesUttak && (
-            <Detail>
-              <FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" />
-            </Detail>
-          )}
-          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} notRequired={erVilkarOk} />
-        </VStack>
+        <VilkarResultPicker
+          vilkår={vilkårForPanel[0]}
+          isReadOnly={isReadOnly}
+          legend={<FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" />}
+          skalKunneInnvilge={finnesUttak}
+          vilkårOppfyltLabel={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
+          vilkårIkkeOppfyltLabel={<FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
+        />
+        {!finnesUttak && (
+          <Detail>
+            <FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" />
+          </Detail>
+        )}
+        <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
       </ProsessPanelTemplate>
     </RhfForm>
   );

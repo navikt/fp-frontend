@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './FodselVilkarProsessIndex.stories';
@@ -10,7 +10,7 @@ describe('FodselVilkarProsessIndex', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    render(<ÅpentAksjonspunkt submitCallback={lagre} />);
+    await ÅpentAksjonspunkt.run({ parameters: { submitCallback: lagre } });
 
     expect(await screen.findByText('Fødsel')).toBeInTheDocument();
     expect(screen.getByText('§ 14-17 første ledd')).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe('FodselVilkarProsessIndex', () => {
   it('skal bestemme at vilkåret ikke er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    render(<ÅpentAksjonspunkt submitCallback={lagre} />);
+    await ÅpentAksjonspunkt.run({ parameters: { submitCallback: lagre } });
 
     expect(await screen.findByText('Fødsel')).toBeInTheDocument();
 
@@ -61,7 +61,7 @@ describe('FodselVilkarProsessIndex', () => {
   });
 
   it('skal vise at vilkår er oppfylt', async () => {
-    render(<OppfyltVilkår />);
+    await OppfyltVilkår.run();
 
     expect(await screen.findByText('Fødsel')).toBeInTheDocument();
     expect(screen.getByText('Vilkåret er oppfylt')).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe('FodselVilkarProsessIndex', () => {
   });
 
   it('skal vise at vilkår er avslått', async () => {
-    render(<AvslåttVilkår />);
+    await AvslåttVilkår.run();
 
     expect(await screen.findByText('Fødsel')).toBeInTheDocument();
     expect(screen.getByText('Vilkåret er avslått')).toBeInTheDocument();

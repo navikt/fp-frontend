@@ -1,14 +1,13 @@
 import { type ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
 import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox, EditedIcon } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import styles from './overstyringPanel.module.css';
+import styles from './prosessPanelTemplate.module.css';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -58,13 +57,13 @@ export const OverstyringPanel = ({
 
   return (
     <AksjonspunktBox
-      className={erOverstyrt ? undefined : styles['aksjonspunktMargin']}
+      className={erOverstyrt ? styles['aksjonspunktMarginÅpenAP'] : styles['aksjonspunktMargin']}
       erAksjonspunktApent={erOverstyrt}
       erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
     >
       <VStack gap="space-16">
         <Label size="medium">{intl.formatMessage({ id: 'OverstyringPanel.AutomatiskVurdering' })}</Label>
-        <div>{children}</div>
+        {children}
         {(erOverstyrt || hasAksjonspunkt) && (
           <RhfTextarea
             name="begrunnelse"
@@ -83,10 +82,9 @@ export const OverstyringPanel = ({
         )}
         {erOverstyrt && (
           <>
-            <HStack gap="space-8">
-              <ExclamationmarkTriangleFillIcon className={styles['exclamationmarkIcon']} />
-              <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Unntakstilfeller' })}</BodyShort>
-            </HStack>
+            <Alert inline variant="warning" size="small">
+              {intl.formatMessage({ id: 'OverstyringPanel.Unntakstilfeller' })}
+            </Alert>
             <HStack gap="space-8">
               {!overrideReadOnly && (
                 <Button

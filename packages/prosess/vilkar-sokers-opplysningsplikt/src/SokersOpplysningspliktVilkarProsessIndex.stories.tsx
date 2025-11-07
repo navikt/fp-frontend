@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagVilkår,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -39,6 +40,14 @@ const søknad = {
   ],
 } as Soknad;
 
+const behandlingMedAvslagsårsak = {
+  uuid: '1',
+  versjon: 1,
+  behandlingsresultat: {
+    avslagsarsak: '1019',
+  },
+} as BehandlingFpSak;
+
 const meta = {
   title: 'prosess/prosess-vilkar-sokers-opplysningsplikt',
   component: SokersOpplysningspliktVilkarProsessIndex,
@@ -60,36 +69,30 @@ export const UtførtAPMedOppfyltVilkår: Story = {
         status: 'UTFO',
       }),
     ],
+    vilkårForPanel: [lagVilkår('FP_VK_34', { vilkarStatus: 'OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'OPPFYLT',
   },
 };
 
 export const UtførtAPMedAvslåttVilkår: Story = {
   args: {
-    behandling: {
-      uuid: '1',
-      versjon: 1,
-      behandlingsresultat: {
-        avslagsarsak: '1099',
-      },
-    } as BehandlingFpSak,
+    behandling: behandlingMedAvslagsårsak,
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5017, {
         status: 'UTFO',
       }),
     ],
+    vilkårForPanel: [lagVilkår('FP_VK_34', { vilkarStatus: 'IKKE_OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'IKKE_OPPFYLT',
   },
 };
 
 export const KanOverstyreVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [],
-    status: 'OPPFYLT',
+    vilkårForPanel: [lagVilkår('FP_VK_34', { vilkarStatus: 'OPPFYLT' })],
     isReadOnly: false,
     isSubmittable: true,
   },
@@ -107,26 +110,20 @@ export const HarOverstyrtMedOppfyltVilkår: Story = {
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
     ],
+    vilkårForPanel: [lagVilkår('FP_VK_34', { vilkarStatus: 'OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'OPPFYLT',
   },
 };
 
 export const HarOverstyrtMedAvslåttVilkår: Story = {
   args: {
-    behandling: {
-      uuid: '1',
-      versjon: 1,
-      behandlingsresultat: {
-        avslagsarsak: '1099',
-      },
-    } as BehandlingFpSak,
+    behandling: behandlingMedAvslagsårsak,
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
     ],
+    vilkårForPanel: [lagVilkår('FP_VK_34', { vilkarStatus: 'IKKE_OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'IKKE_OPPFYLT',
   },
 };

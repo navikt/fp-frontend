@@ -26,7 +26,7 @@ describe('SokersOpplysningspliktVilkarProsessIndex', () => {
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
   });
 
-  it('skal overstyre at vilkåret er oppfylt', async () => {
+  it('skal overstyre at vilkåret er avslått', async () => {
     const lagre = vi.fn();
 
     render(<KanOverstyreVilkår submitCallback={lagre} />);
@@ -40,12 +40,13 @@ describe('SokersOpplysningspliktVilkarProsessIndex', () => {
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByRole('radio', { name: /ikke/ }));
+    await userEvent.selectOptions(screen.getByLabelText('Avslagsårsak'), '1019');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      avslagskode: undefined,
+      avslagskode: '1019',
       begrunnelse: 'Dette er en begrunnelse',
       erVilkarOk: false,
       kode: '6002',

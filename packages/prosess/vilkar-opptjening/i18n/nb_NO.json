@@ -11,9 +11,7 @@
   "OpptjeningVilkarView.DetailsForSelectedPeriod": "Detaljer for valgt periode",
   "OpptjeningVilkarView.IngenAktiviteter": "Det finnes ingen aktiviteter å beregne inntekten fra.",
 
-  "OpptjeningVilkarAksjonspunktPanel.VilkårLabel": "Opptjent rett til {erSvpFagsak, select, true {svangerskapspenger} other {foreldrepenger}}",
-  "OpptjeningVilkarAksjonspunktPanel.ErOppfylt": "Søker har oppfylt krav om {erSvpFagsak, select, true {4 uker} other {6 mnd}} opptjening, vilkåret er oppfylt.",
-  "OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt": "Søker har ikke oppfylt krav om {erSvpFagsak, select, true {4 uker} other {6 mnd}} opptjening, vilkåret er <b>ikke</b> oppfylt.",
+  "OpptjeningVilkarAksjonspunktPanel.VilkårLabel": "Er opptjeningsvilkåret på {erSvpFagsak, select, true {4 uker opptjening for svangerskapspenger} other {6 mnd opptjening for foreldrepenger}} oppfylt?",
   "OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret": "Opptjening",
   "OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt": "Du kan ikke velge at opptjeningsvilkåret er oppfylt, fordi det ikke finnes noen aktiviteter å beregne inntekten fra. Kontakt bruker for å avklare om bruker har noen opptjening.",
 

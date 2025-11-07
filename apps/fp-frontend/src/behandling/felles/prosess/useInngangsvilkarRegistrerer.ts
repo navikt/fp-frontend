@@ -9,7 +9,7 @@ export const useInngangsvilkarRegistrerer = (
   aksjonspunktTekst: string,
   skalVises: boolean,
   erAksjonspunktApent: boolean,
-  status: VilkarUtfallType,
+  inngangsvilkårStatus: VilkarUtfallType,
   erOverstyrt: boolean,
 ) => {
   const { settIngangsvilkårPanelData } = use(InngangsvilkårPanelDataContext);
@@ -18,7 +18,7 @@ export const useInngangsvilkarRegistrerer = (
     if (skalVises) {
       settIngangsvilkårPanelData({
         id,
-        status,
+        status: inngangsvilkårStatus,
         harÅpentAksjonspunkt: erOverstyrt || erAksjonspunktApent,
         aksjonspunktTekst: erOverstyrt || erAksjonspunktApent ? aksjonspunktTekst : undefined,
       });

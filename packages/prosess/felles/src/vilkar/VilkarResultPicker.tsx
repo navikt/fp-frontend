@@ -1,15 +1,17 @@
-import { type ReactElement, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import { Radio, VStack } from '@navikt/ds-react';
+import { Radio } from '@navikt/ds-react';
 import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
-import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
+import { required } from '@navikt/ft-form-validators';
 import { LabeledValue } from '@navikt/ft-ui-komponenter';
-import { createIntl } from '@navikt/ft-utils';
+import { BTag, createIntl } from '@navikt/ft-utils';
 
 import type { Aksjonspunkt, AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
-import { erAksjonspunktÅpent, usePanelDataContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
+
+import { finnStatus } from './VilkårStatus';
 
 import styles from './vilkarResultPicker.module.css';
 
@@ -25,11 +27,10 @@ export type VilkarResultPickerFormValues = {
 interface Props {
   vilkår: Vilkar | undefined;
   legend: ReactNode;
-  vilkårIkkeOppfyltLabel: string | ReactElement;
-  vilkårOppfyltLabel: string | ReactElement;
+  vilkårIkkeOppfyltLabel?: ReactNode;
+  vilkårOppfyltLabel?: ReactNode;
   isReadOnly: boolean;
   skalKunneInnvilge?: boolean;
-  validatorsForRadioOptions?: ((value: string | number | boolean) => string | null | undefined)[];
 }
 
 export const VilkarResultPicker = ({
@@ -39,19 +40,16 @@ export const VilkarResultPicker = ({
   vilkårOppfyltLabel,
   isReadOnly,
   skalKunneInnvilge = true,
-  validatorsForRadioOptions,
 }: Props) => {
-  const { getValues, watch, control } = useFormContext<VilkarResultPickerFormValues>();
+  const { watch, control } = useFormContext<VilkarResultPickerFormValues>();
 
   const erVilkårOk = watch('erVilkarOk');
-
-  const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
 
   const { alleKodeverk } = usePanelDataContext();
   const avslagsårsakerOptions = getAvslagsårsakerOptions(alleKodeverk, vilkår);
 
   return (
-    <VStack gap="space-16">
+    <>
       {isReadOnly && erVilkårOk !== undefined && (
         <LabeledValue
           label={legend}
@@ -59,31 +57,25 @@ export const VilkarResultPicker = ({
           value={
             erVilkårOk ? (
               <>
-                <CheckmarkIcon className={styles['godkjentImage']} />
-                {vilkårOppfyltLabel}
+                <CheckmarkIcon className={styles['icon']} color="var(--ax-bg-success-strong)" />
+                {vilkårOppfyltLabel?? intl.formatMessage({ id: 'VilkarResultPicker.ErOppfylt' })}
               </>
             ) : (
               <>
-                <XMarkOctagonIcon className={styles['avslattImage']} />
-                {vilkårIkkeOppfyltLabel}
+                <XMarkOctagonIcon className={styles['icon']} color="var(--ax-bg-danger-strong)" />
+                {vilkårIkkeOppfyltLabel ?? intl.formatMessage({ id: 'VilkarResultPicker.ErIkkeOppfylt' }, { b: BTag })}
               </>
             )
           }
         />
       )}
       {(!isReadOnly || erVilkårOk === undefined) && (
-        <RhfRadioGroup
-          name="erVilkarOk"
-          control={control}
-          legend={legend}
-          validate={radioValidators}
-          readOnly={isReadOnly}
-        >
+        <RhfRadioGroup name="erVilkarOk" control={control} legend={legend} validate={[required]} readOnly={isReadOnly}>
           <Radio value={true} size="small" disabled={!skalKunneInnvilge}>
-            {vilkårOppfyltLabel}
+            {vilkårOppfyltLabel ?? intl.formatMessage({ id: 'VilkarResultPicker.ErOppfylt' })}
           </Radio>
           <Radio value={false} size="small">
-            {vilkårIkkeOppfyltLabel}
+            {vilkårIkkeOppfyltLabel ?? intl.formatMessage({ id: 'VilkarResultPicker.ErIkkeOppfylt' }, { b: BTag })}
           </Radio>
         </RhfRadioGroup>
       )}
@@ -95,23 +87,36 @@ export const VilkarResultPicker = ({
           selectValues={avslagsårsakerOptions}
           readOnly={isReadOnly}
           className={styles['selectBredde']}
-          validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkårOk, getValues('avslagskode')))]}
+          validate={[required]}
         />
       )}
-    </VStack>
+    </>
   );
 };
 
 VilkarResultPicker.buildInitialValues = (
+  vilkår: Vilkar | undefined,
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
-  behandlingsresultat?: Behandlingsresultat,
+  behandlingsresultat: Behandlingsresultat | undefined,
 ): VilkarResultPickerFormValues => {
-  const erVilkårOk = aksjonspunkter.some(erAksjonspunktÅpent) ? undefined : 'OPPFYLT' === status;
+  const erVilkårOk = finnStatus(vilkår, aksjonspunkter);
+
+  /**
+   * Hvis det bare finnes en avslagsårsak ønsker man at den skal autovelges.
+   * transformValues håndterer å ikke sende den når erVilkarOk === 'OPPFYLT'
+   */
+  const avslagskode = (() => {
+    if (erVilkårOk === 'IKKE_OPPFYLT') {
+      return behandlingsresultat?.avslagsarsak;
+    } else if (vilkår?.aktuelleAvslagsårsaker.length === 1) {
+      return vilkår.aktuelleAvslagsårsaker[0];
+    }
+    return undefined;
+  })();
+
   return {
-    erVilkarOk: erVilkårOk,
-    avslagskode:
-      erVilkårOk === false && behandlingsresultat?.avslagsarsak ? behandlingsresultat.avslagsarsak : undefined,
+    erVilkarOk: erVilkårOk === 'IKKE_VURDERT' ? undefined : erVilkårOk === 'OPPFYLT',
+    avslagskode,
   };
 };
 
@@ -136,5 +141,3 @@ const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkar |
   }
   return undefined;
 };
-
-const getIsAvslagCodeRequired = (erVilkårOk: boolean, avslagCode?: string) => () => erVilkårOk === false && !avslagCode;

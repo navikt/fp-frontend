@@ -14,7 +14,7 @@ import type { Fagsak, FastsattOpptjening } from '@navikt/fp-types';
 
 import { OpptjeningVilkarProsessIndex } from './OpptjeningVilkarProsessIndex';
 
-const defaultFastsattOpptjening = {
+const defaultFastsattOpptjening: FastsattOpptjening = {
   opptjeningperiode: {
     måneder: 2,
     dager: 3,
@@ -33,7 +33,7 @@ const defaultFastsattOpptjening = {
   ],
   opptjeningFom: '2018-01-01',
   opptjeningTom: '2018-10-01',
-} satisfies FastsattOpptjening;
+};
 
 const defaultAksjonspunkt = lagAksjonspunkt(AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET);
 
@@ -43,7 +43,6 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     isReadOnly: false,
-    status: 'IKKE_VURDERT',
     fagsak: {
       fagsakYtelseType: 'FP',
     } as Fagsak,
@@ -98,7 +97,7 @@ export const ÅpentAksjonspunktMedOppholdsperiode: Story = {
       ],
       opptjeningFom: '2018-01-01',
       opptjeningTom: '2018-06-04',
-    } satisfies FastsattOpptjening,
+    },
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET)],
   },
 };

@@ -1,6 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { expect } from 'vitest';
 
 import * as stories from './OpptjeningVilkarProsessIndex.stories';
 
@@ -13,15 +14,16 @@ describe('OpptjeningVilkarProsessIndex', () => {
     render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Opptjening')).toBeInTheDocument();
-    expect(screen.getByText('Opptjent rett til foreldrepenger')).toBeInTheDocument();
+    expect(
+      screen.getByLabelText('Er opptjeningsvilkåret på 6 mnd opptjening for foreldrepenger oppfylt?'),
+    ).toBeInTheDocument();
 
     expect(screen.getByText('2 måneder og 3 dager')).toBeInTheDocument();
     expect(screen.getByText('01.01.2018 - 01.10.2018')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.'));
+    await userEvent.click(screen.getByLabelText('Vilkåret er oppfylt.'));
 
-    const vurderingInput = screen.getByLabelText('Vurdering');
-    await userEvent.type(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -33,28 +35,21 @@ describe('OpptjeningVilkarProsessIndex', () => {
     });
   });
 
-  it('skal validere at en ikke kan oppfylle vilkår når det ikke finnes aktiviteter', async () => {
+  it('skal ikke kunne oppfylle vilkår når det ikke finnes aktiviteter', async () => {
     const lagre = vi.fn();
 
     render(<ÅpentAksjonspunktMenUtenAktiviteter submitCallback={lagre} />);
 
     expect(await screen.findByText('Opptjening')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.'));
-
-    const vurderingInput = screen.getByLabelText('Vurdering');
-    await userEvent.type(vurderingInput, 'Dette er en vurdering');
-
-    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+    expect(screen.getByText('Det finnes ingen aktiviteter')).toBeInTheDocument();
 
     expect(
-      await screen.findByText(
-        'Du kan ikke velge at opptjeningsvilkåret er oppfylt, fordi det ikke finnes noen aktiviteter ' +
-          'å beregne inntekten fra. Kontakt bruker for å avklare om bruker har noen opptjening.',
-      ),
+      screen.getByLabelText('Er opptjeningsvilkåret på 6 mnd opptjening for foreldrepenger oppfylt?'),
     ).toBeInTheDocument();
+    expect(screen.getByLabelText('Vilkåret er oppfylt.')).toBeDisabled();
+    await userEvent.click(screen.getByLabelText(/ikke/));
 
-    await userEvent.click(screen.getByText(/Søker har ikke oppfylt krav om 6 mnd opptjening/));
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -63,7 +58,7 @@ describe('OpptjeningVilkarProsessIndex', () => {
       begrunnelse: 'Dette er en vurdering',
       erVilkarOk: false,
       kode: '5089',
-      avslagskode: undefined,
+      avslagskode: '1035',
     });
   });
 
@@ -73,11 +68,11 @@ describe('OpptjeningVilkarProsessIndex', () => {
     expect(await screen.findByText('2 måneder og 3 dager')).toBeInTheDocument();
     expect(screen.getByText('01.01.2018 - 01.10.2018')).toBeInTheDocument();
 
-    expect(screen.queryByText('Opptjent rett til foreldrepenger')).not.toBeInTheDocument();
     expect(
-      screen.queryByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.'),
+      screen.queryByLabelText('Er opptjeningsvilkåret på 6 mnd opptjening for foreldrepenger oppfylt?'),
     ).not.toBeInTheDocument();
-    expect(screen.queryByText('Vurdering')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Vilkåret er oppfylt.')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Vurdering')).not.toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
   });
 });

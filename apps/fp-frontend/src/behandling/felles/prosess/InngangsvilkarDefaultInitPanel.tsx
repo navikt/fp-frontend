@@ -21,7 +21,6 @@ interface Props {
 export const InngangsvilkarOverstyringDefaultInitPanel = (
   props: Props & {
     overstyringApKode: OverstyringAksjonspunkter;
-    overrideReadOnly?: boolean;
   },
 ) => {
   const { behandling, rettigheter } = useBehandlingDataContext<BehandlingFpSak>();
@@ -41,7 +40,6 @@ export const InngangsvilkarOverstyringDefaultInitPanel = (
       kanOverstyreAccess={rettigheter.kanOverstyreAccess}
       overrideReadOnly={
         props.standardPanelProps.isReadOnly ||
-        props.overrideReadOnly ||
         (harÅpentInngangsvilkårAksjonspunkt && !(props.standardPanelProps.harÅpentAksjonspunkt || erOverstyrt))
       }
       toggleOverstyring={toggleOverstyring}
@@ -68,13 +66,19 @@ export const InngangsvilkarDefaultInitPanel = ({
     vilkårKoder,
     standardPanelProps.vilkårForPanel,
   );
+  const vilkår = standardPanelProps.vilkårForPanel[0];
+  const inngangsvilkårStatus = standardPanelProps.harÅpentAksjonspunkt
+    ? 'IKKE_VURDERT'
+    : vilkår
+      ? vilkår.vilkarStatus
+      : 'IKKE_VURDERT';
 
   useInngangsvilkarRegistrerer(
     inngangsvilkårPanelKode,
     hentInngangsvilkårPanelTekst,
     skalVises,
     standardPanelProps.harÅpentAksjonspunkt,
-    standardPanelProps.status,
+    inngangsvilkårStatus,
     erOverstyrt,
   );
 
