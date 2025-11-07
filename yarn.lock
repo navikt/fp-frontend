@@ -1689,9 +1689,11 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 10.0.2
     "@navikt/ft-form-validators": 4.2.13
+    "@navikt/ft-ui-komponenter": 6.2.10
     "@navikt/ft-utils": 3.8.12
     "@storybook/react": 10.0.2
     "@storybook/react-vite": 10.0.2
