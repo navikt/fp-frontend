@@ -5,6 +5,7 @@ import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import { Button, CopyButton, Detail, HStack, Label, Spacer, Tag, type TagProps, VStack } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
+import { getFpSakLenke } from '@navikt/fp-konstanter';
 import type { FagsakStatus, FamilieHendelseType } from '@navikt/fp-types';
 
 import type { FamilieHendelse, JournalFagsak } from '../../../typer/journalFagsakTsType';
@@ -74,7 +75,7 @@ export const SakDetaljer = ({ sak }: Props) => {
   );
 };
 
-const velgSakLenke = (saksnummer: string): string => `/fagsak/${saksnummer}/`;
+const velgSakLenke = (saksnummer: string): string => `${getFpSakLenke()}/fagsak/${saksnummer}/`;
 
 const finnTagProps = (statusKode: FagsakStatus): TagProps | null => {
   switch (statusKode) {

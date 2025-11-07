@@ -6,7 +6,7 @@ import type { Theme } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { FellesDekorator, type QueryStrings } from '@navikt/fp-app-felles';
-import { AVDELINGSLEDER_URL_NAME, FPSAK_URL_NAME, JOURNALFORING_URL_NAME } from '@navikt/fp-konstanter';
+import { getAvdelingslederLenke, getJournalføringLenke } from '@navikt/fp-konstanter';
 import { type DekoratorLenke } from '@navikt/fp-sak-dekorator';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -44,15 +44,13 @@ export const Dekorator = (props: Props) => {
   if (kanOppgavestyre) {
     interneLenker.push({
       tekst: intl.formatMessage({ id: 'Dekorator.Avdelingsleder' }),
-      callback: () =>
-        (globalThis.location.href = globalThis.location.href.replace(FPSAK_URL_NAME, AVDELINGSLEDER_URL_NAME)),
+      callback: () => (globalThis.location.href = getAvdelingslederLenke()),
     });
   }
   if (kanSaksbehandle) {
     interneLenker.push({
       tekst: intl.formatMessage({ id: 'Dekorator.Journalforing' }),
-      callback: () =>
-        (globalThis.location.href = globalThis.location.href.replace(FPSAK_URL_NAME, JOURNALFORING_URL_NAME)),
+      callback: () => (globalThis.location.href = getJournalføringLenke()),
     });
   }
   interneLenker.push({
