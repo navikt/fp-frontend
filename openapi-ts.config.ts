@@ -12,6 +12,11 @@ export default defineConfig({
       suffix: null,
     },
   },
+  parser: {
+    transforms: {
+      readWrite: false,
+    },
+  },
   plugins: [
     {
       name: '@hey-api/typescript',
