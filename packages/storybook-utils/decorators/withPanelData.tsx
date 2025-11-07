@@ -36,19 +36,18 @@ const DEFAULT_BEHANDLING = {
   status: 'UTRED',
   behandlingPåVent: false,
   behandlingHenlagt: false,
-  opprettet: '',
   behandlendeEnhetId: '',
   behandlendeEnhetNavn: '',
   erAktivPapirsoknad: false,
-  gjeldendeVedtak: false,
-  behandlingKøet: false,
-  toTrinnsBehandling: false,
+  aktivPapirsøknad: false,
   behandlingÅrsaker: [],
   vilkår: [],
   links: [],
   aksjonspunkt: [],
   harSøknad: false,
   harSattEndringsdato: false,
+  id: 1,
+  opprettet: '2017-08-02T00:54:25.455',
 } satisfies BehandlingFpSak;
 
 const DEFAULT_FAGSAK = {

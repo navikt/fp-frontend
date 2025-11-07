@@ -1,3 +1,3 @@
-import type { foreldrepenger_dokumentbestiller_DokumentMalType } from './apiDtoGenerert';
+import type { foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType } from './apiDtoGenerert';
 
-export type DokumentMalType = foreldrepenger_dokumentbestiller_DokumentMalType;
+export type DokumentMalType = foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;

@@ -69,18 +69,14 @@ export const fagsakFullFpsak: Fagsak = {
 
       behandlendeEnhetId: '4867',
       behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser foreldrepenger',
+      aktivPapirsøknad: false,
       erAktivPapirsoknad: false,
-      førsteÅrsak: {
-        erAutomatiskRevurdering: false,
-        behandlingArsakType: 'RE-END-INNTEKTSMELD',
-        manueltOpprettet: false,
-      },
+      ugunstAksjonspunkt: false,
       gjeldendeVedtak: false,
       behandlingHenlagt: false,
       behandlingPåVent: false,
 
       språkkode: 'NB',
-      behandlingKøet: false,
 
       toTrinnsBehandling: false,
       behandlingsresultat: {
@@ -154,7 +150,6 @@ export const fagsakFullFpsak: Fagsak = {
         },
       ],
       totrinnskontrollÅrsaker: [],
-      totrinnskontrollReadonly: true,
 
       kontrollResultat: {
         kontrollresultat: 'IKKE_HOY',
