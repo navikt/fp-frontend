@@ -1692,7 +1692,6 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 10.0.2
     "@navikt/ft-form-validators": 4.2.13
-    "@navikt/ft-ui-komponenter": 6.2.10
     "@navikt/ft-utils": 3.8.12
     "@storybook/react": 10.0.2
     "@storybook/react-vite": 10.0.2
