@@ -645,6 +645,63 @@ export type tjenester_behandling_dto_behandling_ProsessTaskGruppeIdDto = {
 
 export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto = (
   | ({
+      '@type': '5085';
+    } & foreldrepenger_domene_arbeidInntektsmelding_BekreftArbeidInntektsmeldingAksjonspunktDto)
+  | ({
+      '@type': '5041';
+    } & foreldrepenger_domene_arbeidInntektsmelding_BekreftArbeidMedPermisjonUtenSluttdatoDto)
+  | ({
+      '@type': '5051';
+    } & foreldrepenger_domene_opptjening_dto_AvklarAktivitetsPerioderDto)
+  | ({
+      '@type': '5089';
+    } & foreldrepenger_domene_opptjening_dto_AvklarOpptjeningsvilkåretDto)
+  | ({
+      '@type': '5068';
+    } & foreldrepenger_domene_opptjening_dto_MerkOpptjeningUtlandDto)
+  | ({
+      '@type': '5030';
+    } & foreldrepenger_domene_person_verge_dto_AvklarVergeDto)
+  | ({
+      '@type': '5052';
+    } & foreldrepenger_domene_rest_dto_AvklarteAktiviteterDto)
+  | ({
+      '@type': '5047';
+    } & foreldrepenger_domene_rest_dto_FastsettBGTidsbegrensetArbeidsforholdDto)
+  | ({
+      '@type': '5038';
+    } & foreldrepenger_domene_rest_dto_FastsettBeregningsgrunnlagATFLDto)
+  | ({
+      '@type': '5049';
+    } & foreldrepenger_domene_rest_dto_FastsettBruttoBeregningsgrunnlagSNforNyIArbeidslivetDto)
+  | ({
+      '@type': '5062';
+    } & foreldrepenger_domene_rest_dto_KontrollerBesteberegningDto)
+  | ({
+      '@type': '5058';
+    } & foreldrepenger_domene_rest_dto_VurderFaktaOmBeregningDto)
+  | ({
+      '@type': '5059';
+    } & foreldrepenger_domene_rest_dto_VurderRefusjonBeregningsgrunnlagDto)
+  | ({
+      '@type': '5039';
+    } & foreldrepenger_domene_rest_dto_VurderVarigEndringEllerNyoppstartetSNDto)
+  | ({
+      '@type': '5046';
+    } & foreldrepenger_domene_rest_dto_fordeling_FordelBeregningsgrunnlagDto)
+  | ({
+      '@type': '5027';
+    } & foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_SjekkManglendeFødselAksjonspunktDto)
+  | ({
+      '@type': '5001';
+    } & foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_SjekkTerminbekreftelseAksjonspunktDto)
+  | ({
+      '@type': '5018';
+    } & foreldrepenger_familiehendelse_aksjonspunkt_omsorgsovertakelse_dto_VurderOmsorgsovertakelseVilkårAksjonspunktDto)
+  | ({
+      '@type': '5031';
+    } & foreldrepenger_familiehendelse_aksjonspunkt_sammebarn_dto_VurdereYtelseSammeBarnSøkerAksjonspunktDto)
+  | ({
       '@type': '5016';
     } & tjenester_behandling_aksjonspunkt_FatterVedtakAksjonspunktDto)
   | ({
@@ -772,11 +829,51 @@ export type foreldrepenger_behandlingslager_behandling_aktivitetskrav_Aktivitets
   | 'PERMITTERING'
   | 'ANNEN_PERMISJON';
 
+export type foreldrepenger_behandlingslager_behandling_beregning_AktivitetStatus =
+  | 'AAP'
+  | 'AT'
+  | 'DP'
+  | 'FL'
+  | 'MS'
+  | 'SN'
+  | 'AT_FL'
+  | 'AT_SN'
+  | 'FL_SN'
+  | 'AT_FL_SN'
+  | 'BA'
+  | 'KUN_YTELSE'
+  | 'TY'
+  | 'VENTELØNN_VARTPENGER'
+  | '-';
+
+export type foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori =
+  | 'ARBEIDSTAKER'
+  | 'FRILANSER'
+  | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+  | 'DAGPENGER'
+  | 'ARBEIDSAVKLARINGSPENGER'
+  | 'SJØMANN'
+  | 'DAGMAMMA'
+  | 'JORDBRUKER'
+  | 'FISKER'
+  | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+  | '-';
+
 export type foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType =
   | 'ADPSJN'
   | 'OMSRGO'
   | 'FODSL'
   | 'TERM'
+  | '-';
+
+export type foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType =
+  | 'FP_VK_4'
+  | 'FP_VK_8'
+  | 'FP_VK_5'
+  | 'FP_VK_33'
+  | 'FP_VK_16'
+  | 'FP_VK_8F'
+  | 'FP_VK_16S'
   | '-';
 
 export type foreldrepenger_behandlingslager_behandling_innsyn_InnsynResultatType = 'INNV' | 'DELV' | 'AVVIST' | '-';
@@ -825,6 +922,28 @@ export type foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgj�
   | 'UGUNST_MEDHOLD_I_KLAGE'
   | '-';
 
+export type foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType =
+  | 'AAP'
+  | 'ARBEID'
+  | 'DAGPENGER'
+  | 'FORELDREPENGER'
+  | 'FRILANS'
+  | 'FRILOPP'
+  | 'MILITÆR_ELLER_SIVILTJENESTE'
+  | 'NÆRING'
+  | 'OMSORGSPENGER'
+  | 'OPPLÆRINGSPENGER'
+  | 'PLEIEPENGER'
+  | 'FRISINN'
+  | 'ETTERLØNN_SLUTTPAKKE'
+  | 'SVANGERSKAPSPENGER'
+  | 'SYKEPENGER'
+  | 'VENTELØNN_VARTPENGER'
+  | 'VIDERE_ETTERUTDANNING'
+  | 'UTENLANDSK_ARBEIDSFORHOLD'
+  | 'UTDANNINGSPERMISJON'
+  | '-';
+
 export type foreldrepenger_behandlingslager_behandling_søknad_ForeldreType = 'MOR' | 'FAR' | 'MEDMOR' | 'ANDRE' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling =
@@ -846,6 +965,13 @@ export type foreldrepenger_behandlingslager_behandling_tilrettelegging_Tilrettel
   | 'HEL_TILRETTELEGGING'
   | 'DELVIS_TILRETTELEGGING'
   | 'INGEN_TILRETTELEGGING';
+
+export type foreldrepenger_behandlingslager_behandling_verge_VergeType =
+  | 'BARN'
+  | 'FBARN'
+  | 'VOKSEN'
+  | 'ADVOKAT'
+  | 'ANNEN_F';
 
 export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_MorsAktivitet =
   | '-'
@@ -899,6 +1025,11 @@ export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_Ut
   | '-';
 
 export type foreldrepenger_behandlingslager_fagsak_FagsakYtelseType = 'ES' | 'FP' | 'SVP' | '-';
+
+export type foreldrepenger_behandlingslager_fagsak_egenskaper_UtlandDokumentasjonStatus =
+  | 'DOKUMENTASJON_ER_INNHENTET'
+  | 'DOKUMENTASJON_VIL_BLI_INNHENTET'
+  | 'DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET';
 
 export type foreldrepenger_behandlingslager_risikoklassifisering_FaresignalVurdering =
   | 'INNVIRKNING'
@@ -1081,6 +1212,27 @@ export type foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver = {
   orgnr?: string;
 };
 
+export type foreldrepenger_domene_arbeidInntektsmelding_AvklarPermisjonUtenSluttdatoDto = {
+  arbeidsgiverIdent: string;
+  internArbeidsforholdId?: string;
+  permisjonStatus: foreldrepenger_domene_iay_modell_kodeverk_BekreftetPermisjonStatus;
+};
+
+export type foreldrepenger_domene_arbeidInntektsmelding_BekreftArbeidInntektsmeldingAksjonspunktDto = {
+  begrunnelse?: string;
+};
+
+export type foreldrepenger_domene_arbeidInntektsmelding_BekreftArbeidMedPermisjonUtenSluttdatoDto = {
+  arbeidsforhold: Array<foreldrepenger_domene_arbeidInntektsmelding_AvklarPermisjonUtenSluttdatoDto>;
+  begrunnelse?: string;
+};
+
+export type foreldrepenger_domene_iay_modell_kodeverk_BekreftetPermisjonStatus =
+  | '-'
+  | 'BRUK_PERMISJON'
+  | 'IKKE_BRUK_PERMISJON'
+  | 'UGYLDIGE_PERIODER';
+
 export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType =
   | '-'
   | 'PERMISJON'
@@ -1093,6 +1245,307 @@ export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType 
   | 'PERMISJON_MED_FORELDREPENGER'
   | 'PERMITTERING'
   | 'PERMISJON_VED_MILITÆRTJENESTE';
+
+export type foreldrepenger_domene_modell_kodeverk_AndelKilde =
+  | 'SAKSBEHANDLER_KOFAKBER'
+  | 'PROSESS_BESTEBEREGNING'
+  | 'SAKSBEHANDLER_FORDELING'
+  | 'PROSESS_PERIODISERING'
+  | 'PROSESS_OMFORDELING'
+  | 'PROSESS_START';
+
+export type foreldrepenger_domene_modell_kodeverk_FaktaOmBeregningTilfelle =
+  | 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'
+  | 'VURDER_SN_NY_I_ARBEIDSLIVET'
+  | 'VURDER_NYOPPSTARTET_FL'
+  | 'FASTSETT_MAANEDSINNTEKT_FL'
+  | 'FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+  | 'VURDER_LØNNSENDRING'
+  | 'FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+  | 'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'
+  | 'FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE'
+  | 'VURDER_ETTERLØNN_SLUTTPAKKE'
+  | 'FASTSETT_ETTERLØNN_SLUTTPAKKE'
+  | 'VURDER_MOTTAR_YTELSE'
+  | 'VURDER_BESTEBEREGNING'
+  | 'VURDER_MILITÆR_SIVILTJENESTE'
+  | 'VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT'
+  | 'FASTSETT_BG_KUN_YTELSE'
+  | 'TILSTØTENDE_YTELSE'
+  | 'FASTSETT_ENDRET_BEREGNINGSGRUNNLAG'
+  | '-';
+
+export type foreldrepenger_domene_opptjening_dto_AvklarAktivitetsPerioderDto = {
+  begrunnelse?: string;
+  opptjeningsaktiviteter?: Array<foreldrepenger_domene_opptjening_dto_AvklarOpptjeningAktivitetDto>;
+};
+
+export type foreldrepenger_domene_opptjening_dto_AvklarOpptjeningAktivitetDto = {
+  aktivitetType?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
+  arbeidsforholdRef?: string;
+  arbeidsgiverReferanse?: string;
+  begrunnelse?: string;
+  erGodkjent?: boolean;
+  opptjeningFom?: string;
+  opptjeningTom?: string;
+};
+
+export type foreldrepenger_domene_opptjening_dto_AvklarOpptjeningsvilkåretDto = {
+  avslagskode?: string;
+  begrunnelse?: string;
+  erVilkarOk?: boolean;
+};
+
+export type foreldrepenger_domene_opptjening_dto_MerkOpptjeningUtlandDto = {
+  begrunnelse?: string;
+  dokStatus?: foreldrepenger_behandlingslager_fagsak_egenskaper_UtlandDokumentasjonStatus;
+};
+
+export type foreldrepenger_domene_person_verge_dto_AvklarVergeDto = {
+  begrunnelse?: string;
+  fnr?: string;
+  gyldigFom?: string;
+  gyldigTom?: string;
+  navn?: string;
+  organisasjonsnummer?: string;
+  vergeType: foreldrepenger_behandlingslager_behandling_verge_VergeType;
+};
+
+export type foreldrepenger_domene_rest_dto_ArbeidstakerandelUtenIMMottarYtelseDto = {
+  andelsnr: number;
+  mottarYtelse?: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_AvklarteAktiviteterDto = {
+  begrunnelse?: string;
+  beregningsaktivitetLagreDtoList?: Array<foreldrepenger_domene_rest_dto_BeregningsaktivitetLagreDto>;
+};
+
+export type foreldrepenger_domene_rest_dto_BeregningsaktivitetLagreDto = {
+  arbeidsforholdRef?: string;
+  arbeidsgiverIdentifikator?: string;
+  fom: string;
+  oppdragsgiverOrg?: string;
+  opptjeningAktivitetType: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
+  skalBrukes?: boolean;
+  tom?: string;
+};
+
+export type foreldrepenger_domene_rest_dto_BesteberegningFødendeKvinneAndelDto = {
+  andelsnr?: number;
+  fastsatteVerdier: foreldrepenger_domene_rest_dto_FastsatteVerdierForBesteberegningDto;
+  lagtTilAvSaksbehandler: boolean;
+  nyAndel?: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_BesteberegningFødendeKvinneDto = {
+  besteberegningAndelListe?: Array<foreldrepenger_domene_rest_dto_BesteberegningFødendeKvinneAndelDto>;
+  nyDagpengeAndel?: foreldrepenger_domene_rest_dto_DagpengeAndelLagtTilBesteberegningDto;
+};
+
+export type foreldrepenger_domene_rest_dto_DagpengeAndelLagtTilBesteberegningDto = {
+  fastsatteVerdier: foreldrepenger_domene_rest_dto_FastsatteVerdierForBesteberegningDto;
+};
+
+export type foreldrepenger_domene_rest_dto_FaktaBeregningLagreDto = {
+  besteberegningAndeler?: foreldrepenger_domene_rest_dto_BesteberegningFødendeKvinneDto;
+  faktaOmBeregningTilfeller?: Array<foreldrepenger_domene_modell_kodeverk_FaktaOmBeregningTilfelle>;
+  fastsattUtenInntektsmelding?: foreldrepenger_domene_rest_dto_FastsettMånedsinntektUtenInntektsmeldingDto;
+  fastsettEtterlønnSluttpakke?: foreldrepenger_domene_rest_dto_FastsettEtterlønnSluttpakkeDto;
+  fastsettMaanedsinntektFL?: foreldrepenger_domene_rest_dto_FastsettMånedsinntektFLDto;
+  kunYtelseFordeling?: foreldrepenger_domene_rest_dto_FastsettBgKunYtelseDto;
+  mottarYtelse?: foreldrepenger_domene_rest_dto_MottarYtelseDto;
+  refusjonskravGyldighet?: Array<foreldrepenger_domene_rest_dto_RefusjonskravPrArbeidsgiverVurderingDto>;
+  vurderATogFLiSammeOrganisasjon?: foreldrepenger_domene_rest_dto_VurderATogFLiSammeOrganisasjonDto;
+  vurderEtterlønnSluttpakke?: foreldrepenger_domene_rest_dto_VurderEtterlønnSluttpakkeDto;
+  vurderMilitaer?: foreldrepenger_domene_rest_dto_VurderMilitærDto;
+  vurderNyIArbeidslivet?: foreldrepenger_domene_rest_dto_VurderSelvstendigNæringsdrivendeNyIArbeidslivetDto;
+  vurderNyoppstartetFL?: foreldrepenger_domene_rest_dto_VurderNyoppstartetFLDto;
+  vurderTidsbegrensetArbeidsforhold?: foreldrepenger_domene_rest_dto_VurderTidsbegrensetArbeidsforholdDto;
+  vurdertLonnsendring?: foreldrepenger_domene_rest_dto_VurderLønnsendringDto;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsattBrukersAndel = {
+  andelsnr?: number;
+  fastsattBeløp: number;
+  inntektskategori: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
+  lagtTilAvSaksbehandler?: boolean;
+  nyAndel: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsatteAndelerTidsbegrensetDto = {
+  andelsnr: number;
+  bruttoFastsattInntekt: number;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsattePerioderTidsbegrensetDto = {
+  fastsatteTidsbegrensedeAndeler?: Array<foreldrepenger_domene_rest_dto_FastsatteAndelerTidsbegrensetDto>;
+  periodeFom: string;
+  periodeTom?: string;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsatteVerdierForBesteberegningDto = {
+  fastsattBeløp: number;
+  inntektskategori: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
+  skalHaBesteberegning?: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsettBGTidsbegrensetArbeidsforholdDto = {
+  begrunnelse?: string;
+  fastsatteTidsbegrensedePerioder?: Array<foreldrepenger_domene_rest_dto_FastsattePerioderTidsbegrensetDto>;
+  frilansInntekt?: number;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsettBeregningsgrunnlagATFLDto = {
+  begrunnelse?: string;
+  inntektFrilanser?: number;
+  inntektPrAndelList?: Array<foreldrepenger_domene_rest_dto_InntektPrAndelDto>;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsettBgKunYtelseDto = {
+  andeler?: Array<foreldrepenger_domene_rest_dto_FastsattBrukersAndel>;
+  skalBrukeBesteberegning?: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsettBruttoBeregningsgrunnlagSNforNyIArbeidslivetDto = {
+  begrunnelse?: string;
+  bruttoBeregningsgrunnlag: number;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsettEtterlønnSluttpakkeDto = {
+  fastsattPrMnd: number;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsettMånedsinntektFLDto = {
+  maanedsinntekt: number;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsettMånedsinntektUtenInntektsmeldingAndelDto = {
+  andelsnr: number;
+  fastsattBeløp: number;
+  inntektskategori?: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsettMånedsinntektUtenInntektsmeldingDto = {
+  andelListe: Array<foreldrepenger_domene_rest_dto_FastsettMånedsinntektUtenInntektsmeldingAndelDto>;
+};
+
+export type foreldrepenger_domene_rest_dto_InntektPrAndelDto = {
+  andelsnr?: number;
+  inntekt?: number;
+};
+
+export type foreldrepenger_domene_rest_dto_KontrollerBesteberegningDto = {
+  begrunnelse?: string;
+  besteberegningErKorrekt: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_MottarYtelseDto = {
+  arbeidstakerUtenIMMottarYtelse?: Array<foreldrepenger_domene_rest_dto_ArbeidstakerandelUtenIMMottarYtelseDto>;
+  frilansMottarYtelse?: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_RefusjonskravPrArbeidsgiverVurderingDto = {
+  arbeidsgiverId: string;
+  skalUtvideGyldighet?: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderATogFLiSammeOrganisasjonAndelDto = {
+  andelsnr: number;
+  arbeidsinntekt: number;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderATogFLiSammeOrganisasjonDto = {
+  vurderATogFLiSammeOrganisasjonAndelListe: Array<foreldrepenger_domene_rest_dto_VurderATogFLiSammeOrganisasjonAndelDto>;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderEtterlønnSluttpakkeDto = {
+  erEtterlønnSluttpakke?: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderFaktaOmBeregningDto = {
+  begrunnelse?: string;
+  fakta: foreldrepenger_domene_rest_dto_FaktaBeregningLagreDto;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderLønnsendringDto = {
+  erLønnsendringIBeregningsperioden?: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderMilitærDto = {
+  harMilitaer: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderNyoppstartetFLDto = {
+  erNyoppstartetFL?: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderRefusjonAndelBeregningsgrunnlagDto = {
+  arbeidsgiverAktoerId?: string;
+  arbeidsgiverOrgnr?: string;
+  delvisRefusjonPrMndFørStart?: number;
+  fastsattRefusjonFom: string;
+  internArbeidsforholdRef?: string;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderRefusjonBeregningsgrunnlagDto = {
+  begrunnelse?: string;
+  fastsatteAndeler?: Array<foreldrepenger_domene_rest_dto_VurderRefusjonAndelBeregningsgrunnlagDto>;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderSelvstendigNæringsdrivendeNyIArbeidslivetDto = {
+  erNyIArbeidslivet?: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderTidsbegrensetArbeidsforholdDto = {
+  fastsatteArbeidsforhold: Array<foreldrepenger_domene_rest_dto_VurderteArbeidsforholdDto>;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderVarigEndringEllerNyoppstartetSNDto = {
+  begrunnelse?: string;
+  bruttoBeregningsgrunnlag?: number;
+  erVarigEndretNaering: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_VurderteArbeidsforholdDto = {
+  andelsnr: number;
+  opprinneligVerdi?: boolean;
+  tidsbegrensetArbeidsforhold: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_fordeling_FordelBeregningsgrunnlagAndelDto = {
+  aktivitetStatus?: foreldrepenger_behandlingslager_behandling_beregning_AktivitetStatus;
+  andelsnr?: number;
+  arbeidsforholdId?: foreldrepenger_domene_typer_InternArbeidsforholdRef;
+  arbeidsforholdType?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
+  arbeidsgiverId?: string;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  fastsatteVerdier: foreldrepenger_domene_rest_dto_fordeling_FordelFastsatteVerdierDto;
+  forrigeArbeidsinntektPrÅr?: number;
+  forrigeInntektskategori?: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
+  forrigeRefusjonPrÅr?: number;
+  kilde?: foreldrepenger_domene_modell_kodeverk_AndelKilde;
+  lagtTilAvSaksbehandler?: boolean;
+  nyAndel: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_fordeling_FordelBeregningsgrunnlagDto = {
+  begrunnelse?: string;
+  endretBeregningsgrunnlagPerioder?: Array<foreldrepenger_domene_rest_dto_fordeling_FordelBeregningsgrunnlagPeriodeDto>;
+};
+
+export type foreldrepenger_domene_rest_dto_fordeling_FordelBeregningsgrunnlagPeriodeDto = {
+  andeler?: Array<foreldrepenger_domene_rest_dto_fordeling_FordelBeregningsgrunnlagAndelDto>;
+  fom: string;
+  tom?: string;
+};
+
+export type foreldrepenger_domene_rest_dto_fordeling_FordelFastsatteVerdierDto = {
+  fastsattÅrsbeløpInklNaturalytelse: number;
+  inntektskategori: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
+  refusjonPrÅr?: number;
+};
 
 export type foreldrepenger_domene_typer_InternArbeidsforholdRef = {
   indexKey?: string;
@@ -1124,6 +1577,45 @@ export type foreldrepenger_domene_uttak_fakta_uttak_DokumentasjonVurderingBehov_
   | 'AKTIVITETSKRAV_ARBEID_OG_UTDANNING'
   | 'AKTIVITETSKRAV_IKKE_OPPGITT'
   | 'TIDLIG_OPPSTART_FAR';
+
+export type foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_DokumentertBarnDto = {
+  dødsdato?: string;
+  fødselsdato: string;
+};
+
+export type foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_SjekkManglendeFødselAksjonspunktDto = {
+  barn?: Array<foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_DokumentertBarnDto>;
+  begrunnelse?: string;
+  termindato?: string;
+};
+
+export type foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_SjekkTerminbekreftelseAksjonspunktDto = {
+  antallBarn: number;
+  begrunnelse?: string;
+  termindato: string;
+  utstedtdato: string;
+};
+
+export type foreldrepenger_familiehendelse_aksjonspunkt_omsorgsovertakelse_dto_OmsorgsovertakelseBarnDto = {
+  barnNummer: number;
+  fødselsdato: string;
+};
+
+export type foreldrepenger_familiehendelse_aksjonspunkt_omsorgsovertakelse_dto_VurderOmsorgsovertakelseVilkårAksjonspunktDto =
+  {
+    avslagskode?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
+    barn: Array<foreldrepenger_familiehendelse_aksjonspunkt_omsorgsovertakelse_dto_OmsorgsovertakelseBarnDto>;
+    begrunnelse?: string;
+    delvilkår: foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType;
+    ektefellesBarn: boolean;
+    omsorgsovertakelseDato: string;
+  };
+
+export type foreldrepenger_familiehendelse_aksjonspunkt_sammebarn_dto_VurdereYtelseSammeBarnSøkerAksjonspunktDto = {
+  avslagskode?: string;
+  begrunnelse?: string;
+  erVilkarOk: boolean;
+};
 
 export type tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDto = {
   behandlingUuid: string;
@@ -1818,6 +2310,15 @@ export type tjenester_registrering_svp_SvpTilretteleggingVirksomhetDto = {
 
 export type foreldrepenger_behandling_aksjonspunkt_OverstyringAksjonspunktDto = (
   | ({
+      '@type': '6014';
+    } & foreldrepenger_domene_rest_dto_OverstyrBeregningsaktiviteterDto)
+  | ({
+      '@type': '6015';
+    } & foreldrepenger_domene_rest_dto_OverstyrBeregningsgrunnlagDto)
+  | ({
+      '@type': '6019';
+    } & foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_OverstyringFaktaOmFødselDto)
+  | ({
       '@type': '6016';
     } & tjenester_behandling_dekningsgrad_AvklarDekningsgradOverstyringDto)
   | ({
@@ -1867,6 +2368,66 @@ export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighet
   | 'BARE_MOR_RETT'
   | 'BARE_FAR_RETT'
   | 'BARE_FAR_RETT_MOR_UFØR';
+
+export type foreldrepenger_domene_rest_dto_FastsatteVerdierDto = {
+  fastsattBeløp?: number;
+  fastsattÅrsbeløp?: number;
+  fastsattÅrsbeløpInklNaturalytelse?: number;
+  inntektskategori?: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
+  refusjon?: number;
+  refusjonPrÅr?: number;
+  skalHaBesteberegning?: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_FastsettBeregningsgrunnlagAndelDto = {
+  aktivitetStatus?: foreldrepenger_behandlingslager_behandling_beregning_AktivitetStatus;
+  andelsnr?: number;
+  arbeidsforholdId?: foreldrepenger_domene_typer_InternArbeidsforholdRef;
+  arbeidsforholdType?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
+  arbeidsgiverId?: string;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  fastsatteVerdier: foreldrepenger_domene_rest_dto_FastsatteVerdierDto;
+  forrigeArbeidsinntektPrÅr?: number;
+  forrigeInntektskategori?: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
+  forrigeRefusjonPrÅr?: number;
+  lagtTilAvSaksbehandler?: boolean;
+  nyAndel: boolean;
+};
+
+export type foreldrepenger_domene_rest_dto_OverstyrBeregningsaktiviteterDto = {
+  begrunnelse?: string;
+  beregningsaktivitetLagreDtoList?: Array<foreldrepenger_domene_rest_dto_BeregningsaktivitetLagreDto>;
+};
+
+export type foreldrepenger_domene_rest_dto_OverstyrBeregningsgrunnlagDto = {
+  begrunnelse?: string;
+  endringer?: Array<foreldrepenger_domene_rest_historikk_Lønnsendring>;
+  fakta?: foreldrepenger_domene_rest_dto_FaktaBeregningLagreDto;
+  overstyrteAndeler: Array<foreldrepenger_domene_rest_dto_FastsettBeregningsgrunnlagAndelDto>;
+};
+
+export type foreldrepenger_domene_rest_historikk_Lønnsendring = {
+  aktivitetStatus?: foreldrepenger_behandlingslager_behandling_beregning_AktivitetStatus;
+  arbeidsforholdRef?: foreldrepenger_domene_typer_InternArbeidsforholdRef;
+  arbeidsgiver?: foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver;
+  gammelArbeidsinntekt?: number;
+  gammelArbeidsinntektPrÅr?: number;
+  gammelInntektskategori?: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
+  gammelRefusjonPrÅr?: number;
+  nyAndel?: boolean;
+  nyArbeidsinntekt?: number;
+  nyArbeidsinntektPrÅr?: number;
+  nyInntektskategori?: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
+  nyRefusjonPrÅr?: number;
+  nyTotalRefusjonPrÅr?: number;
+};
+
+export type foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_OverstyringFaktaOmFødselDto = {
+  barn?: Array<foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_DokumentertBarnDto>;
+  begrunnelse?: string;
+  termindato: string;
+};
 
 export type tjenester_behandling_aksjonspunkt_OverstyrteAksjonspunkterDto = {
   behandlingUuid: string;
@@ -2127,12 +2688,6 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto
   type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
   årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
 };
-
-export type foreldrepenger_domene_iay_modell_kodeverk_BekreftetPermisjonStatus =
-  | '-'
-  | 'BRUK_PERMISJON'
-  | 'IKKE_BRUK_PERMISJON'
-  | 'UGYLDIGE_PERIODER';
 
 export type foreldrepenger_domene_iay_modell_kodeverk_InntektspostType =
   | '-'
@@ -3074,45 +3629,6 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon
   tom?: string;
 };
 
-export type foreldrepenger_behandlingslager_behandling_beregning_AktivitetStatus =
-  | 'AAP'
-  | 'AT'
-  | 'DP'
-  | 'FL'
-  | 'MS'
-  | 'SN'
-  | 'AT_FL'
-  | 'AT_SN'
-  | 'FL_SN'
-  | 'AT_FL_SN'
-  | 'BA'
-  | 'KUN_YTELSE'
-  | 'TY'
-  | 'VENTELØNN_VARTPENGER'
-  | '-';
-
-export type foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType =
-  | 'AAP'
-  | 'ARBEID'
-  | 'DAGPENGER'
-  | 'FORELDREPENGER'
-  | 'FRILANS'
-  | 'FRILOPP'
-  | 'MILITÆR_ELLER_SIVILTJENESTE'
-  | 'NÆRING'
-  | 'OMSORGSPENGER'
-  | 'OPPLÆRINGSPENGER'
-  | 'PLEIEPENGER'
-  | 'FRISINN'
-  | 'ETTERLØNN_SLUTTPAKKE'
-  | 'SVANGERSKAPSPENGER'
-  | 'SYKEPENGER'
-  | 'VENTELØNN_VARTPENGER'
-  | 'VIDERE_ETTERUTDANNING'
-  | 'UTENLANDSK_ARBEIDSFORHOLD'
-  | 'UTDANNINGSPERMISJON'
-  | '-';
-
 export type tjenester_behandling_beregningsresultat_dto_BeregningsresultatMedUttaksplanDto = {
   perioder?: Array<tjenester_behandling_beregningsresultat_dto_BeregningsresultatPeriodeDto>;
 };
@@ -3222,16 +3738,6 @@ export type tjenester_behandling_fødsel_dto_FødselDto_Søknad = {
 };
 
 export type tjenester_behandling_fødsel_dto_Kilde = 'SAKSBEHANDLER' | 'SØKNAD' | 'FOLKEREGISTER';
-
-export type foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType =
-  | 'FP_VK_4'
-  | 'FP_VK_8'
-  | 'FP_VK_5'
-  | 'FP_VK_33'
-  | 'FP_VK_16'
-  | 'FP_VK_8F'
-  | 'FP_VK_16S'
-  | '-';
 
 export type tjenester_behandling_fødsel_dto_OmsorgsovertakelseDto = {
   aktuelleDelvilkårAvslagsårsaker: {
@@ -3360,11 +3866,6 @@ export type tjenester_behandling_klage_aksjonspunkt_KlageVurderingResultatAksjon
   klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
   kode?: string;
 };
-
-export type foreldrepenger_behandlingslager_fagsak_egenskaper_UtlandDokumentasjonStatus =
-  | 'DOKUMENTASJON_ER_INNHENTET'
-  | 'DOKUMENTASJON_VIL_BLI_INNHENTET'
-  | 'DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET';
 
 export type foreldrepenger_domene_opptjening_dto_OpptjeningIUtlandDokStatusDto = {
   dokStatus?: foreldrepenger_behandlingslager_fagsak_egenskaper_UtlandDokumentasjonStatus;
@@ -4250,13 +4751,6 @@ export type tjenester_behandling_vedtak_dto_OppgaveDto_Dokument = {
   tittel?: string;
 };
 
-export type foreldrepenger_behandlingslager_behandling_verge_VergeType =
-  | 'BARN'
-  | 'FBARN'
-  | 'VOKSEN'
-  | 'ADVOKAT'
-  | 'ANNEN_F';
-
 export type foreldrepenger_domene_person_verge_dto_VergeDto = {
   fnr?: string;
   gyldigFom: string;
@@ -4561,27 +5055,6 @@ export type foreldrepenger_behandlingslager_risikoklassifisering_Kontrollresulta
   | 'IKKE_KLASSIFISERT'
   | '-';
 
-export type foreldrepenger_domene_modell_kodeverk_FaktaOmBeregningTilfelle =
-  | 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'
-  | 'VURDER_SN_NY_I_ARBEIDSLIVET'
-  | 'VURDER_NYOPPSTARTET_FL'
-  | 'FASTSETT_MAANEDSINNTEKT_FL'
-  | 'FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
-  | 'VURDER_LØNNSENDRING'
-  | 'FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
-  | 'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'
-  | 'FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE'
-  | 'VURDER_ETTERLØNN_SLUTTPAKKE'
-  | 'FASTSETT_ETTERLØNN_SLUTTPAKKE'
-  | 'VURDER_MOTTAR_YTELSE'
-  | 'VURDER_BESTEBEREGNING'
-  | 'VURDER_MILITÆR_SIVILTJENESTE'
-  | 'VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT'
-  | 'FASTSETT_BG_KUN_YTELSE'
-  | 'TILSTØTENDE_YTELSE'
-  | 'FASTSETT_ENDRET_BEREGNINGSGRUNNLAG'
-  | '-';
-
 export type foreldrepenger_domene_person_verge_dto_VergeBehandlingsmenyEnum = 'SKJUL' | 'OPPRETT' | 'FJERN';
 
 export type foreldrepenger_domene_uttak_UttakPeriodeEndringDto = {
@@ -4810,518 +5283,6 @@ export type tjenester_familiehendelse_FamiliehendelseRestTjeneste_FødselTerminF
   termindato?: string;
 };
 
-export type foreldrepenger_behandlingslager_behandling_beregning_BeregningSatsType =
-  | 'ENGANG'
-  | 'GRUNNBELØP'
-  | 'GSNITT'
-  | '-';
-
-export type tjenester_forvaltning_dto_BeregningSatsDto = {
-  satsFom: string;
-  satsTom?: string;
-  satsType: foreldrepenger_behandlingslager_behandling_beregning_BeregningSatsType;
-  satsVerdi: number;
-};
-
-export type tjenester_forvaltning_dto_EndreInntektsmeldingDto = {
-  behandlingUuid: string;
-  journalpostId: string;
-  refusjonOpphørFom?: string;
-  refusjonPrMndFraStart?: number;
-  refusjonsendringer?: Array<tjenester_forvaltning_dto_RefusjonsendringDto>;
-  startdatoPermisjon?: string;
-};
-
-export type tjenester_forvaltning_dto_RefusjonsendringDto = {
-  beløp: number;
-  fom: string;
-};
-
-export type tjenester_forvaltning_dto_SaksnummerBrukerRolleDto_BrukerRolleDto = 'MOR' | 'FAR' | 'MEDMOR';
-
-export type tjenester_forvaltning_ForvaltningFagsakRestTjeneste_ByttAktørRequestDto = {
-  gyldigAktørId: string;
-  utgåttAktørId: string;
-};
-
-export type tjenester_forvaltning_dto_oppdrag_KvitteringDto = {
-  behandlingUuid: string;
-  fagsystemId: number;
-  maksDato: string;
-  oppdaterProsessTask: boolean;
-};
-
-export type tjenester_forvaltning_dto_oppdrag_K27PatchDto = {
-  behandlingUuid: string;
-  fagsystemId: number;
-  maksDato: string;
-};
-
-export type tjenester_forvaltning_dto_oppdrag_OppdragPatchDto = {
-  arbeidsgiverOrgnr?: string;
-  behandingUuid: string;
-  'bruk-ompostering116'?: boolean;
-  brukerErMottaker: boolean;
-  fagsystemId: number;
-  kodeEndring: string;
-  'omposter-fom'?: string;
-  oppdragslinjer: Array<tjenester_forvaltning_dto_oppdrag_OppdragslinjePatchDto>;
-};
-
-export type tjenester_forvaltning_dto_oppdrag_OppdragslinjePatchDto = {
-  delytelseId: number;
-  fom: string;
-  kodeEndring: string;
-  kodeKlassifik: string;
-  opphoerFom?: string;
-  refDelytelseId?: number;
-  refFagsystemId?: number;
-  sats: number;
-  satsType: string;
-  tom: string;
-};
-
-export type abakus_iaygrunnlag_Organisasjon = {
-  ident: string;
-};
-
-export type abakus_iaygrunnlag_Periode = {
-  fom?: string;
-  tom?: string;
-};
-
-export type abakus_iaygrunnlag_kodeverk_ArbeidType =
-  | 'ETTERLØNN_SLUTTPAKKE'
-  | 'FORENKLET_OPPGJØRSORDNING'
-  | 'FRILANSER'
-  | 'FRILANSER_OPPDRAGSTAKER'
-  | 'LØNN_UNDER_UTDANNING'
-  | 'MARITIMT_ARBEIDSFORHOLD'
-  | 'MILITÆR_ELLER_SIVILTJENESTE'
-  | 'ORDINÆRT_ARBEIDSFORHOLD'
-  | 'PENSJON_OG_ANDRE_TYPER_YTELSER_UTEN_ANSETTELSESFORHOLD'
-  | 'NÆRING'
-  | 'UTENLANDSK_ARBEIDSFORHOLD'
-  | 'VENTELØNN_VARTPENGER'
-  | 'VANLIG'
-  | '-';
-
-export type abakus_iaygrunnlag_kodeverk_VirksomhetType = 'DAGMAMMA' | 'FISKE' | 'JORDBRUK_SKOGBRUK' | 'ANNEN' | '-';
-
-export type abakus_iaygrunnlag_oppgittopptjening_v1_OppgittAnnenAktivitetDto = {
-  arbeidType: abakus_iaygrunnlag_kodeverk_ArbeidType;
-  periode: abakus_iaygrunnlag_Periode;
-};
-
-export type abakus_iaygrunnlag_oppgittopptjening_v1_OppgittArbeidsforholdDto = {
-  arbeidType: abakus_iaygrunnlag_kodeverk_ArbeidType;
-  periode: abakus_iaygrunnlag_Periode;
-  erUtenlandskInntekt?: boolean;
-  inntekt?: number;
-  landkode: string;
-  virksomhetNavn?: string;
-};
-
-export type abakus_iaygrunnlag_oppgittopptjening_v1_OppgittEgenNæringDto = {
-  bruttoInntekt?: number;
-  endringBegrunnelse?: string;
-  endringDato?: string;
-  erNyIArbeidslivet?: boolean;
-  erNyoppstartet?: boolean;
-  erNærRelasjon?: boolean;
-  erVarigEndring?: boolean;
-  landkode: string;
-  periode: abakus_iaygrunnlag_Periode;
-  regnskapsførerNavn?: string;
-  regnskapsførerTlf?: string;
-  virksomhet?: abakus_iaygrunnlag_Organisasjon;
-  virksomhetNavn?: string;
-  virksomhetType?: abakus_iaygrunnlag_kodeverk_VirksomhetType;
-};
-
-export type abakus_iaygrunnlag_oppgittopptjening_v1_OppgittFrilansDto = {
-  erNyoppstartet?: boolean;
-  erNærRelasjon?: boolean;
-  frilansoppdrag: Array<abakus_iaygrunnlag_oppgittopptjening_v1_OppgittFrilansoppdragDto>;
-  harInntektFraFosterhjem?: boolean;
-};
-
-export type abakus_iaygrunnlag_oppgittopptjening_v1_OppgittFrilansoppdragDto = {
-  inntekt?: number;
-  oppdragsgiver?: string;
-  periode: abakus_iaygrunnlag_Periode;
-};
-
-export type abakus_iaygrunnlag_oppgittopptjening_v1_OppgittOpptjeningDto = {
-  eksternReferanse: string;
-  innsendingstidspunkt?: string;
-  journalpostId?: string;
-  opprettetTidspunkt: string;
-  annenAktivitet?: Array<abakus_iaygrunnlag_oppgittopptjening_v1_OppgittAnnenAktivitetDto>;
-  arbeidsforhold?: Array<abakus_iaygrunnlag_oppgittopptjening_v1_OppgittArbeidsforholdDto>;
-  egenNæring?: Array<abakus_iaygrunnlag_oppgittopptjening_v1_OppgittEgenNæringDto>;
-  frilans?: abakus_iaygrunnlag_oppgittopptjening_v1_OppgittFrilansDto;
-};
-
-export type tjenester_forvaltning_dto_LeggTilOppgittNæringDto_Utfall = 'JA' | 'NEI';
-
-export type foreldrepenger_behandlingslager_behandling_BehandlingStegType =
-  | 'REGSØK'
-  | 'INSØK'
-  | 'VURDERKOMPLETT'
-  | 'INREG'
-  | 'VURDERKOMPLETTBEH'
-  | 'INREG_AVSL'
-  | 'KOFAK'
-  | 'VURDEROP'
-  | 'VURDERMV'
-  | 'VURDERSAMLET'
-  | 'BERYT'
-  | 'FORBRES'
-  | 'SIMOPP'
-  | 'VURDER_FARESIGNALER'
-  | 'FORVEDSTEG'
-  | 'FVEDSTEG'
-  | 'IVEDSTEG'
-  | 'VURDER_FK_UI'
-  | 'KLAGEUI'
-  | 'VURDER_FK_OI'
-  | 'KLAGEOI'
-  | 'ANKE'
-  | 'ANKE_MERKNADER'
-  | 'VURDINNSYN'
-  | 'INPER'
-  | 'VURDERSFV'
-  | 'DEKNINGSGRAD'
-  | 'FORS_BESTEBEREGNING'
-  | 'KONTROLLER_OMSORG_RETT'
-  | 'FAKTA_LØPENDE_OMSORG'
-  | 'GRUNNLAG_UTTAK'
-  | 'KOFAKUT'
-  | 'KONTROLLER_AKTIVITETSKRAV'
-  | 'FAKTA_UTTAK'
-  | 'FAKTA_UTTAK_DOKUMENTASJON'
-  | 'VURDER_TLRG'
-  | 'VURDERSPV'
-  | 'VRSLREV'
-  | 'VURDERSRB'
-  | 'KO_ARB_IM'
-  | 'VURDER_ARB_FORHOLD_PERMISJON'
-  | 'VURDER_OPPTJ_PERIODE'
-  | 'VURDER_OPPTJ_FAKTA'
-  | 'VURDER_OPPTJ'
-  | 'FASTSETT_STP_BER'
-  | 'KOFAKBER'
-  | 'FORS_BERGRUNN'
-  | 'FORS_BERGRUNN_2'
-  | 'VURDER_VILKAR_BERGRUNN'
-  | 'VURDER_REF_BERGRUNN'
-  | 'FORDEL_BERGRUNN'
-  | 'FAST_BERGRUNN'
-  | 'KOFAK_LOP_MEDL'
-  | 'SØKNADSFRIST_FP'
-  | 'VURDER_UTTAK'
-  | 'VURDER_TILBAKETREKK'
-  | 'BERYT_OPPDRAG'
-  | 'KOARB'
-  | 'VURDER_FORUTGÅENDE_MEDLEMSKAPVILKÅR'
-  | 'VULOMED';
-
-export type vedtak_felles_prosesstask_rest_dto_ProsessTaskIdDto = {
-  prosessTaskId: number;
-};
-
-export type foreldrepenger_mottak_vedtak_rest_InfotrygdRestanseDto = {
-  behandlendeEnhet: string;
-  fnr: string;
-  mottatt: string;
-  reellEnhet: string;
-  registrert: string;
-  type: string;
-  valg: string;
-  vedtatt: string;
-};
-
-export type tjenester_forvaltning_fpoversikt_FpoversiktMigreringRestTjeneste_TaskInput = {
-  delayBetween?: number;
-  fom?: string;
-  tom?: string;
-  ytelseType?: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
-};
-
-export type foreldrepenger_datavarehus_domene_VilkårIkkeOppfylt =
-  | 'MEDLEMSKAP'
-  | 'SØKNADSFRIST'
-  | 'OPPLYSNINGSPLIKT'
-  | 'SVANGERSKAPSPENGER'
-  | 'ENGANGSSTØNAD'
-  | 'FORELDREPENGER_GENERELL'
-  | 'FORELDREPENGER_OPPTJENING'
-  | 'FORELDREPENGER_BEREGNING'
-  | 'FORELDREPENGER_UTTAK';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkUtbetalingPeriode = {
-  arbeidsgiver?: string;
-  dagsats: number;
-  fom: string;
-  inntektskategori: foreldrepenger_datavarehus_v2_StønadsstatistikkUtbetalingPeriode_Inntektskategori;
-  mottaker: foreldrepenger_datavarehus_v2_StønadsstatistikkUtbetalingPeriode_Mottaker;
-  tom: string;
-  utbetalingsgrad: number;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkUtbetalingPeriode_Inntektskategori =
-  | 'ARBEIDSTAKER'
-  | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
-  | 'SJØMANN'
-  | 'FRILANSER'
-  | 'DAGPENGER'
-  | 'ARBEIDSAVKLARINGSPENGER'
-  | 'SELVSTENDIG_NÆRINGSDRIVENDE'
-  | 'DAGMAMMA'
-  | 'JORDBRUKER'
-  | 'FISKER';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkUtbetalingPeriode_Mottaker = 'BRUKER' | 'ARBEIDSGIVER';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkUttakPeriode = {
-  erUtbetaling?: boolean;
-  fom: string;
-  forklaring?: foreldrepenger_datavarehus_v2_StønadsstatistikkUttakPeriode_Forklaring;
-  gradering?: foreldrepenger_datavarehus_v2_StønadsstatistikkUttakPeriode_Gradering;
-  rettighetType: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_RettighetType;
-  samtidigUttakProsent?: number;
-  stønadskontoType?: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_StønadskontoType;
-  søknadsdato?: string;
-  tom: string;
-  trekkdager: number;
-  type?: foreldrepenger_datavarehus_v2_StønadsstatistikkUttakPeriode_PeriodeType;
-  virkedager?: number;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkUttakPeriode_AktivitetType =
-  | 'ARBEIDSTAKER'
-  | 'FRILANS'
-  | 'NÆRING';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkUttakPeriode_Forklaring =
-  | 'UTSETTELSE_FERIE'
-  | 'UTSETTELSE_ARBEID'
-  | 'UTSETTELSE_INNLEGGELSE'
-  | 'UTSETTELSE_BARNINNLAGT'
-  | 'UTSETTELSE_SYKDOM'
-  | 'UTSETTELSE_HVOVELSE'
-  | 'UTSETTELSE_NAVTILTAK'
-  | 'OVERFØRING_ANNEN_PART_SYKDOM'
-  | 'OVERFØRING_ANNEN_PART_INNLAGT'
-  | 'OVERFØRING_ALENEOMSORG'
-  | 'OVERFØRING_BARE_SØKER_RETT'
-  | 'AKTIVITETSKRAV_ARBEID'
-  | 'AKTIVITETSKRAV_UTDANNING'
-  | 'AKTIVITETSKRAV_ARBEIDUTDANNING'
-  | 'AKTIVITETSKRAV_SYKDOM'
-  | 'AKTIVITETSKRAV_INNLEGGELSE'
-  | 'AKTIVITETSKRAV_INTRODUKSJONSPROGRAM'
-  | 'AKTIVITETSKRAV_KVALIFISERINGSPROGRAM'
-  | 'MINSTERETT'
-  | 'FLERBARNSDAGER'
-  | 'SAMTIDIG_MØDREKVOTE'
-  | 'AVSLAG_ANNET'
-  | 'AVSLAG_AKTIVITETSKRAV'
-  | 'AVSLAG_SØKNADSFRIST'
-  | 'AVSLAG_IKKE_SØKT'
-  | 'AVSLAG_UTSETTELSE'
-  | 'AVSLAG_UTSETTELSE_TILBAKE_I_TID'
-  | 'AVSLAG_PLEIEPENGER'
-  | 'AVSLAG_STØNADSPERIODE_UTLØPT'
-  | 'AVSLAG_VILKÅR';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkUttakPeriode_Gradering = {
-  aktivitetType?: foreldrepenger_datavarehus_v2_StønadsstatistikkUttakPeriode_AktivitetType;
-  arbeidsprosent?: number;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkUttakPeriode_PeriodeType = 'UTTAK' | 'UTSETTELSE' | 'AVSLAG';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak = {
-  annenForelder?: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_AnnenForelder;
-  behandlingId?: number;
-  behandlingUuid: string;
-  beregning?: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_Beregning;
-  engangsstønadInnvilget?: number;
-  fagsakId?: number;
-  familieHendelse?: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_FamilieHendelse;
-  foreldrepengerRettigheter?: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_ForeldrepengerRettigheter;
-  forrigeBehandlingUuid?: string;
-  lovVersjon: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_LovVersjon;
-  revurderingÅrsak?: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_RevurderingÅrsak;
-  saksnummer?: string;
-  saksrolle: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_Saksrolle;
-  skjæringstidspunkt?: string;
-  søker: string;
-  søknadsdato: string;
-  utbetalingsreferanse: string;
-  utbetalingssperioder?: Array<foreldrepenger_datavarehus_v2_StønadsstatistikkUtbetalingPeriode>;
-  utlandsTilsnitt: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_UtlandsTilsnitt;
-  uttaksperioder?: Array<foreldrepenger_datavarehus_v2_StønadsstatistikkUttakPeriode>;
-  vedtaksresultat: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_VedtakResultat;
-  vedtakstidspunkt: string;
-  vilkårIkkeOppfylt?: foreldrepenger_datavarehus_domene_VilkårIkkeOppfylt;
-  ytelseType: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_YtelseType;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_AndelType =
-  | 'ARBEIDSAVKLARINGSPENGER'
-  | 'ARBEIDSTAKER'
-  | 'DAGPENGER'
-  | 'FRILANSER'
-  | 'MILITÆR_SIVILTJENESTE'
-  | 'SELVSTENDIG_NÆRINGSDRIVENDE'
-  | 'YTELSE';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_AnnenForelder = {
-  aktørId: string;
-  saksnummer?: string;
-  saksrolle?: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_Saksrolle;
-  ytelseType?: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_YtelseType;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_Beregning = {
-  andeler?: Array<foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_BeregningAndel>;
-  fastsatt: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_BeregningFastsatt;
-  grunnbeløp: number;
-  hjemmel: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_BeregningHjemmel;
-  næringOrgNr?: Array<string>;
-  årsbeløp: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_BeregningÅrsbeløp;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_BeregningAndel = {
-  aktivitet?: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_AndelType;
-  arbeidsgiver?: string;
-  årsbeløp?: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_BeregningÅrsbeløp;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_BeregningFastsatt = 'AUTOMATISK' | 'SKJØNN';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_BeregningHjemmel =
-  | 'ARBEID'
-  | 'NÆRING'
-  | 'FRILANS'
-  | 'ARBEID_FRILANS'
-  | 'ARBEID_NÆRING'
-  | 'NÆRING_FRILANS'
-  | 'ARBEID_NÆRING_FRILANS'
-  | 'DAGPENGER'
-  | 'ARBEIDSAVKLARINGSPENGER'
-  | 'BESTEBEREGNING'
-  | 'MILITÆR_SIVIL'
-  | 'ANNEN';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_BeregningÅrsbeløp = {
-  avkortet?: number;
-  brutto?: number;
-  dagsats?: number;
-  redusert?: number;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_FamilieHendelse = {
-  adopsjonsdato?: string;
-  antallBarn: number;
-  barn?: Array<foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_FamilieHendelse_Barn>;
-  hendelseType: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_HendelseType;
-  termindato?: string;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_FamilieHendelse_Barn = {
-  aktørId?: string;
-  dødsdato?: string;
-  fødselsdato: string;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_ForeldrepengerRettigheter = {
-  dekningsgrad: number;
-  rettighetType: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_RettighetType;
-  stønadskonti: Array<foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_ForeldrepengerRettigheter_Stønadskonto>;
-  stønadsutvidelser?: Array<foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_ForeldrepengerRettigheter_Stønadsutvidelse>;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_ForeldrepengerRettigheter_Stønadskonto = {
-  maksdager: number;
-  minsterett?: number;
-  restdager: number;
-  type: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_StønadskontoType;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_ForeldrepengerRettigheter_Stønadsutvidelse = {
-  dager?: number;
-  type: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_StønadUtvidetType;
-};
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_HendelseType =
-  | 'FØDSEL'
-  | 'ADOPSJON'
-  | 'STEBARNSADOPSJON'
-  | 'OMSORGSOVERTAKELSE';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_LovVersjon =
-  | 'FORELDREPENGER_2019_01_01'
-  | 'FORELDREPENGER_FRI_2021_10_01'
-  | 'FORELDREPENGER_MINSTERETT_2022_08_02'
-  | 'FORELDREPENGER_UTJEVNE80_2024_07_01'
-  | 'FORELDREPENGER_MINSTERETT_2024_08_02'
-  | 'ENGANGSSTØNAD_2019_01_01'
-  | 'ENGANGSSTØNAD_MEDLEM_2024_10_01'
-  | 'SVANGERSKAPSPENGER_2019_01_01';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_RettighetType =
-  | 'ALENEOMSORG'
-  | 'BARE_SØKER_RETT'
-  | 'BEGGE_RETT'
-  | 'BEGGE_RETT_EØS';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_RevurderingÅrsak =
-  | 'MANUELL'
-  | 'UTTAKMANUELL'
-  | 'KLAGE'
-  | 'ETTERKONTROLL'
-  | 'SØKNAD'
-  | 'INNTEKTSMELDING'
-  | 'FOLKEREGISTER'
-  | 'PLEIEPENGER'
-  | 'NYSAK'
-  | 'ANNENFORELDER'
-  | 'REGULERING'
-  | 'PRAKSIS_UTSETTELSE';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_Saksrolle = 'MOR' | 'FAR' | 'MEDMOR' | 'UKJENT';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_StønadUtvidetType =
-  | 'FLERBARNSDAGER'
-  | 'PREMATURDAGER';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_StønadskontoType =
-  | 'FORELDREPENGER'
-  | 'FORELDREPENGER_FØR_FØDSEL'
-  | 'MØDREKVOTE'
-  | 'FELLESPERIODE'
-  | 'FEDREKVOTE';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_UtlandsTilsnitt =
-  | 'NASJONAL'
-  | 'EØS_BOSATT_NORGE'
-  | 'BOSATT_UTLAND';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_VedtakResultat = 'INNVILGET' | 'AVSLAG' | 'OPPHØR';
-
-export type foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak_YtelseType =
-  | 'FORELDREPENGER'
-  | 'SVANGERSKAPSPENGER'
-  | 'ENGANGSSTØNAD';
-
-export type tjenester_forvaltning_stonadsstatistikk_ForvaltningStønadsstatistikkRestTjeneste_MigreringTaskInput = {
-  fom?: string;
-};
-
 export type tjenester_infotrygd_InfotrygdVedtakDto = {
   saker: Array<tjenester_infotrygd_InfotrygdVedtakDto_SakDto>;
   vedtakKjeder: Array<tjenester_infotrygd_InfotrygdVedtakDto_VedtakKjede>;
@@ -5411,111 +5372,6 @@ export type tjenester_saksbehandler_dto_InitLinksDto = {
   innloggetBruker?: foreldrepenger_tilganger_InnloggetNavAnsattDto;
   links?: Array<rest_ResourceLink>;
   sakLinks?: Array<rest_ResourceLink>;
-};
-
-export type tjenester_vedtak_VedtakRestTjeneste_GenererVedtaksXmlDto = {
-  fom: string;
-  maksAntall: number;
-  tom: string;
-};
-
-export type vedtak_felles_prosesstask_rest_dto_ProsessTaskDataDto = {
-  gruppe: string;
-  id: number;
-  nesteKjøringEtter?: string;
-  sekvens: string;
-  sistKjørt?: string;
-  sisteFeilKode?: string;
-  status: string;
-  taskParametre?: {
-    [key: string]: string;
-  };
-  taskType: string;
-};
-
-export type vedtak_felles_prosesstask_rest_dto_ProsessTaskOpprettInputDto = {
-  taskParametre: {
-    [key: string]: string;
-  };
-  taskType: string;
-};
-
-export type vedtak_felles_prosesstask_rest_dto_FeiletProsessTaskDataDto = {
-  feiledeForsøk?: number;
-  gruppe: string;
-  id: number;
-  nesteKjøringEtter?: string;
-  sekvens: string;
-  sistKjørt?: string;
-  sisteFeilKode?: string;
-  status: string;
-  taskParametre?: {
-    [key: string]: string;
-  };
-  taskType: string;
-  sisteFeilTekst?: string;
-  sisteKjøringServerProsess?: string;
-};
-
-export type vedtak_felles_prosesstask_rest_dto_IkkeFerdigProsessTaskStatusEnum =
-  | 'FEILET'
-  | 'VENTER_SVAR'
-  | 'SUSPENDERT'
-  | 'VETO'
-  | 'KLAR';
-
-/**
- * Resultatet av asynkron-restart av en eksisterende prosesstask
- */
-export type vedtak_felles_prosesstask_rest_dto_ProsessTaskRestartResultatDto = {
-  /**
-   * Kjøretidspunkt for restart av prosessen
-   */
-  nesteKjoeretidspunkt: string;
-  prosessTaskId: number;
-  /**
-   * Nåværende status (KLAR)
-   */
-  prosessTaskStatus: string;
-};
-
-export type vedtak_felles_prosesstask_rest_dto_FeiletProsessTaskStatusEnum = 'FEILET' | 'VENTER_SVAR' | 'SUSPENDERT';
-
-/**
- * Resultatet av asynkron-restart av feilede prosesstasks
- */
-export type vedtak_felles_prosesstask_rest_dto_ProsessTaskRetryAllResultatDto = {
-  /**
-   * Prosesstasks som restartes
-   */
-  prosessTaskIds?: Array<number>;
-};
-
-export type vedtak_felles_prosesstask_rest_dto_SokeFilterDto = {
-  sisteKjoeretidspunktFraOgMed?: string;
-  sisteKjoeretidspunktTilOgMed?: string;
-  tekst: string;
-};
-
-export type AutoRunBatchData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/batch/autorun';
-};
-
-export type AutoRunBatchErrors = {
-  /**
-   * Feilet pga ukjent feil
-   */
-  500: unknown;
-};
-
-export type AutoRunBatchResponses = {
-  /**
-   * Starter batch-scheduler
-   */
-  200: unknown;
 };
 
 export type BehandlingErHasteSakData = {
@@ -6812,22 +6668,6 @@ export type MellomlagringAvOverstyringResponses = {
   default: unknown;
 };
 
-export type RegenererVedtaksXmlData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/datavarehus/regenerer_vedtaksdokument';
-};
-
-export type RegenererVedtaksXmlResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
 export type HentAlleDokumenterForSakData = {
   body?: never;
   path?: never;
@@ -7049,1524 +6889,6 @@ export type HentFamiliehendelseResponses = {
 
 export type HentFamiliehendelseResponse = HentFamiliehendelseResponses[keyof HentFamiliehendelseResponses];
 
-export type FjernOverstyrtGrunnlagSvpBehandlingData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: tjenester_behandling_dto_BehandlingIdDto;
-  };
-  url: '/api/forvaltningBehandling/fjernOverstyrtGrunnlagSvpBehandling';
-};
-
-export type FjernOverstyrtGrunnlagSvpBehandlingErrors = {
-  /**
-   * Oppgitt behandlinguuid er ukjent, ikke under behandling, svangerskapspenger eller avsluttet.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type FjernOverstyrtGrunnlagSvpBehandlingResponses = {
-  /**
-   * Overstyrt grunnlag for behandling er fjernet.
-   */
-  200: string;
-};
-
-export type FjernOverstyrtGrunnlagSvpBehandlingResponse =
-  FjernOverstyrtGrunnlagSvpBehandlingResponses[keyof FjernOverstyrtGrunnlagSvpBehandlingResponses];
-
-export type HenleggBehandlingTekniskData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningBehandling/henleggBehandlingTeknisk';
-};
-
-export type HenleggBehandlingTekniskErrors = {
-  /**
-   * Ukjent fagsak oppgitt.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type HenleggBehandlingTekniskResponses = {
-  /**
-   * Avslutter fagsak.
-   */
-  200: string;
-};
-
-export type HenleggBehandlingTekniskResponse =
-  HenleggBehandlingTekniskResponses[keyof HenleggBehandlingTekniskResponses];
-
-export type HenleggVentendeBehandlingData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: tjenester_fagsak_dto_SaksnummerDto;
-  };
-  url: '/api/forvaltningBehandling/henleggVentendeBehandling';
-};
-
-export type HenleggVentendeBehandlingErrors = {
-  /**
-   * Ukjent fagsak oppgitt.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type HenleggVentendeBehandlingResponses = {
-  /**
-   * Avslutter fagsak.
-   */
-  200: string;
-};
-
-export type HenleggVentendeBehandlingResponse =
-  HenleggVentendeBehandlingResponses[keyof HenleggVentendeBehandlingResponses];
-
-export type HenleggÅpenFørstegangsbehandlingOgOpprettNyData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: tjenester_fagsak_dto_SaksnummerDto;
-  };
-  url: '/api/forvaltningBehandling/henleggÅpenFørstegangsbehandlingOgOpprettNy';
-};
-
-export type HenleggÅpenFørstegangsbehandlingOgOpprettNyErrors = {
-  /**
-   * Oppgitt fagsak er ukjent, ikke under behandling, eller engangsstønad.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type HenleggÅpenFørstegangsbehandlingOgOpprettNyResponses = {
-  /**
-   * Ny behandling er opprettet.
-   */
-  200: string;
-};
-
-export type HenleggÅpenFørstegangsbehandlingOgOpprettNyResponse =
-  HenleggÅpenFørstegangsbehandlingOgOpprettNyResponses[keyof HenleggÅpenFørstegangsbehandlingOgOpprettNyResponses];
-
-export type OppdaterBehandlingresultatMedVedtaksbrevTypeData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: tjenester_behandling_dto_BehandlingIdDto;
-    vedtaksbrev: foreldrepenger_behandlingslager_behandling_vedtak_Vedtaksbrev;
-    dryRun: boolean;
-  };
-  url: '/api/forvaltningBehandling/behandlingsresultat';
-};
-
-export type OppdaterBehandlingresultatMedVedtaksbrevTypeErrors = {
-  /**
-   * Oppgitt behandlinguuid er ukjent
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type OppdaterBehandlingresultatMedVedtaksbrevTypeResponses = {
-  /**
-   * Oppdatert behandlingsresultat.
-   */
-  200: string;
-};
-
-export type OppdaterBehandlingresultatMedVedtaksbrevTypeResponse =
-  OppdaterBehandlingresultatMedVedtaksbrevTypeResponses[keyof OppdaterBehandlingresultatMedVedtaksbrevTypeResponses];
-
-export type OpprettNyRevurderingBerørtBehandlingData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: tjenester_fagsak_dto_SaksnummerDto;
-  };
-  url: '/api/forvaltningBehandling/startNyRevurderingBerørtBehandling';
-};
-
-export type OpprettNyRevurderingBerørtBehandlingErrors = {
-  /**
-   * Oppgitt fagsak er ukjent, ikke under behandling, eller engangsstønad.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type OpprettNyRevurderingBerørtBehandlingResponses = {
-  /**
-   * Ny behandling er opprettet.
-   */
-  200: string;
-};
-
-export type OpprettNyRevurderingBerørtBehandlingResponse =
-  OpprettNyRevurderingBerørtBehandlingResponses[keyof OpprettNyRevurderingBerørtBehandlingResponses];
-
-export type ReInnsendInntektsmeldingData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: string;
-    journalpostid: string;
-  };
-  url: '/api/forvaltningBehandling/reInnsendInntektsmelding';
-};
-
-export type ReInnsendInntektsmeldingErrors = {
-  /**
-   * Oppgitt fagsak er ukjent, ikke under behandling, eller engangsstønad.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type ReInnsendInntektsmeldingResponses = {
-  /**
-   * Inntektsmelding reinnsendt.
-   */
-  200: string;
-};
-
-export type ReInnsendInntektsmeldingResponse =
-  ReInnsendInntektsmeldingResponses[keyof ReInnsendInntektsmeldingResponses];
-
-export type LagFortsettBehandlingData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/behandlingskontroll/taskFortsettBehandling';
-};
-
-export type LagFortsettBehandlingResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type SikreOppdaterteRegisterdataData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/behandlingskontroll/sikreOppdaterteRegisterdata';
-};
-
-export type SikreOppdaterteRegisterdataResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HentBeregningsgrunnlagInputData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningBeregning/hentBeregningsgrunnlagInput';
-};
-
-export type HentBeregningsgrunnlagInputResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HentGjeldendeSatserData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningBeregning/satsHentGjeldende';
-};
-
-export type HentGjeldendeSatserResponses = {
-  /**
-   * Gjeldende satser
-   */
-  200: Array<tjenester_forvaltning_dto_BeregningSatsDto>;
-};
-
-export type HentGjeldendeSatserResponse = HentGjeldendeSatserResponses[keyof HentGjeldendeSatserResponses];
-
-export type LagreNySatsData = {
-  body?: never;
-  path?: never;
-  query: {
-    satsType: foreldrepenger_behandlingslager_behandling_beregning_BeregningSatsType;
-    /**
-     * YYYY-MM-DD
-     */
-    satsFom: string;
-    /**
-     * YYYY-MM-DD
-     */
-    satsTom?: string;
-    /**
-     * Minumum satsverdi er satt til 75000
-     */
-    satsVerdi: number;
-  };
-  url: '/api/forvaltningBeregning/satsLagreNy';
-};
-
-export type LagreNySatsResponses = {
-  /**
-   * Gjeldende satser
-   */
-  200: Array<tjenester_forvaltning_dto_BeregningSatsDto>;
-};
-
-export type LagreNySatsResponse = LagreNySatsResponses[keyof LagreNySatsResponses];
-
-export type OpphørRefusjonInntektsmeldingData = {
-  body: tjenester_forvaltning_dto_EndreInntektsmeldingDto;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningBeregning/stoppRefusjon';
-};
-
-export type OpphørRefusjonInntektsmeldingResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type OpprettGreguleringEnkeltSakData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: tjenester_fagsak_dto_SaksnummerDto;
-  };
-  url: '/api/forvaltningBeregning/opprettGreguleringEnkeltSak';
-};
-
-export type OpprettGreguleringEnkeltSakErrors = {
-  /**
-   * Ukjent fagsak oppgitt.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type OpprettGreguleringEnkeltSakResponses = {
-  /**
-   * Flyttet fagsak.
-   */
-  200: string;
-};
-
-export type OpprettGreguleringEnkeltSakResponse =
-  OpprettGreguleringEnkeltSakResponses[keyof OpprettGreguleringEnkeltSakResponses];
-
-export type AvsluttFagsakUtenBehandlingData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: tjenester_fagsak_dto_SaksnummerDto;
-  };
-  url: '/api/forvaltningFagsak/avsluttFagsakUtenBehandling';
-};
-
-export type AvsluttFagsakUtenBehandlingErrors = {
-  /**
-   * Ukjent fagsak oppgitt.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type AvsluttFagsakUtenBehandlingResponses = {
-  /**
-   * Avslutter fagsak.
-   */
-  200: string;
-};
-
-export type AvsluttFagsakUtenBehandlingResponse =
-  AvsluttFagsakUtenBehandlingResponses[keyof AvsluttFagsakUtenBehandlingResponses];
-
-export type EndreSaksrolleData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: string;
-    rolle: tjenester_forvaltning_dto_SaksnummerBrukerRolleDto_BrukerRolleDto;
-  };
-  url: '/api/forvaltningFagsak/endreSaksrolle';
-};
-
-export type EndreSaksrolleErrors = {
-  /**
-   * Ukjent fagsak oppgitt.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type EndreSaksrolleResponses = {
-  /**
-   * Fagsaker frakoblet.
-   */
-  200: string;
-};
-
-export type EndreSaksrolleResponse = EndreSaksrolleResponses[keyof EndreSaksrolleResponses];
-
-export type FlyttJournalpostTilFagsakData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: string;
-    journalpostid: string;
-  };
-  url: '/api/forvaltningFagsak/fagsak/flyttJournalpostFagsak';
-};
-
-export type FlyttJournalpostTilFagsakErrors = {
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type FlyttJournalpostTilFagsakResponses = {
-  /**
-   * Task satt til ferdig.
-   */
-  200: unknown;
-};
-
-export type HentFagsakInformasjonData = {
-  body?: never;
-  path: {
-    fagsakId: number;
-  };
-  query?: never;
-  url: '/api/forvaltningFagsak/fagsak/{fagsakId}';
-};
-
-export type HentFagsakInformasjonResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type IdenthistorikkData = {
-  /**
-   * Søkestreng kan være aktørId, fødselsnummer eller D-nummer.
-   */
-  body?: tjenester_fagsak_dto_SokefeltDto;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningFagsak/fagsak/identhistorikk';
-};
-
-export type IdenthistorikkResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type KobleFraFagsakerData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer1: string;
-    saksnummer2: string;
-  };
-  url: '/api/forvaltningFagsak/kobleFraFagsaker';
-};
-
-export type KobleFraFagsakerErrors = {
-  /**
-   * Ukjent fagsak oppgitt.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type KobleFraFagsakerResponses = {
-  /**
-   * Fagsaker frakoblet.
-   */
-  200: string;
-};
-
-export type KobleFraFagsakerResponse = KobleFraFagsakerResponses[keyof KobleFraFagsakerResponses];
-
-export type KobleSammenFagsakerData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer1: string;
-    saksnummer2: string;
-  };
-  url: '/api/forvaltningFagsak/kobleSammenFagsaker';
-};
-
-export type KobleSammenFagsakerErrors = {
-  /**
-   * Ukjent fagsak oppgitt.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type KobleSammenFagsakerResponses = {
-  /**
-   * Fagsaker koblet.
-   */
-  200: string;
-};
-
-export type KobleSammenFagsakerResponse = KobleSammenFagsakerResponses[keyof KobleSammenFagsakerResponses];
-
-export type OppdaterAktoerIdData = {
-  body: tjenester_forvaltning_ForvaltningFagsakRestTjeneste_ByttAktørRequestDto;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningFagsak/fagsak/oppdaterAktoerId';
-};
-
-export type OppdaterAktoerIdErrors = {
-  /**
-   * AktørId er uendret.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type OppdaterAktoerIdResponses = {
-  /**
-   * Task satt til ferdig.
-   */
-  200: unknown;
-};
-
-export type OppdaterAktoerIdFraPdlData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: tjenester_fagsak_dto_SaksnummerDto;
-  };
-  url: '/api/forvaltningFagsak/fagsak/oppdaterAktoerIdFraPdl';
-};
-
-export type OppdaterAktoerIdFraPdlErrors = {
-  /**
-   * Saksnummer er ugyldig.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type OppdaterAktoerIdFraPdlResponses = {
-  /**
-   * Task satt til ferdig.
-   */
-  200: unknown;
-};
-
-export type OppdaterPersongalleriForTilgangData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: tjenester_fagsak_dto_SaksnummerDto;
-  };
-  url: '/api/forvaltningFagsak/fagsak/oppdater-personer-tilgang';
-};
-
-export type OppdaterPersongalleriForTilgangErrors = {
-  /**
-   * Ukjent fagsak oppgitt.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type OppdaterPersongalleriForTilgangResponses = {
-  /**
-   * Avslutter fagsak.
-   */
-  200: string;
-};
-
-export type OppdaterPersongalleriForTilgangResponse =
-  OppdaterPersongalleriForTilgangResponses[keyof OppdaterPersongalleriForTilgangResponses];
-
-export type SettFagsakFraAvsluttetTilUnderBehandlingData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: tjenester_fagsak_dto_SaksnummerDto;
-  };
-  url: '/api/forvaltningFagsak/settFagsakFraAvsluttetTilUnderBehandling';
-};
-
-export type SettFagsakFraAvsluttetTilUnderBehandlingErrors = {
-  /**
-   * Ukjent fagsak oppgitt, eller fagsak i feil tilstand
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type SettFagsakFraAvsluttetTilUnderBehandlingResponses = {
-  /**
-   * Fagsak endret.
-   */
-  200: string;
-};
-
-export type SettFagsakFraAvsluttetTilUnderBehandlingResponse =
-  SettFagsakFraAvsluttetTilUnderBehandlingResponses[keyof SettFagsakFraAvsluttetTilUnderBehandlingResponses];
-
-export type StengFagsakData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: tjenester_fagsak_dto_SaksnummerDto;
-  };
-  url: '/api/forvaltningFagsak/stengFagsakForVidereBruk';
-};
-
-export type StengFagsakErrors = {
-  /**
-   * Ukjent fagsak oppgitt.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type StengFagsakResponses = {
-  /**
-   * Fagsak stengt.
-   */
-  200: string;
-};
-
-export type StengFagsakResponse = StengFagsakResponses[keyof StengFagsakResponses];
-
-export type KvitterOkData = {
-  /**
-   * Identifikasjon av oppdrag som kvitteres OK. Sett oppdaterProsessTask til false kun når prosesstasken allerede er flyttet til FERDIG
-   */
-  body: tjenester_forvaltning_dto_oppdrag_KvitteringDto;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningOppdrag/kvitter-oppdrag-ok';
-};
-
-export type KvitterOkResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type PatchK27Data = {
-  body: tjenester_forvaltning_dto_oppdrag_K27PatchDto;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningOppdrag/patch-k27';
-};
-
-export type PatchK27Responses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type PatchOppdragData = {
-  body: tjenester_forvaltning_dto_oppdrag_OppdragPatchDto;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningOppdrag/patch-oppdrag';
-};
-
-export type PatchOppdragResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type PatchOppdragOgRekjørData = {
-  body: tjenester_forvaltning_dto_oppdrag_OppdragPatchDto;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningOppdrag/patch-oppdrag-hardt-og-rekjoer';
-};
-
-export type PatchOppdragOgRekjørResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HentOppgittOpptjeningData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningOpptjening/hentOppgittOpptjening';
-};
-
-export type HentOppgittOpptjeningResponses = {
-  /**
-   * default response
-   */
-  default: abakus_iaygrunnlag_oppgittopptjening_v1_OppgittOpptjeningDto;
-};
-
-export type HentOppgittOpptjeningResponse = HentOppgittOpptjeningResponses[keyof HentOppgittOpptjeningResponses];
-
-export type LeggTilOppgittFrilansData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-    /**
-     * YYYY-MM-DD
-     */
-    frilansFom: string;
-    /**
-     * YYYY-MM-DD
-     */
-    frilansTom?: string;
-    /**
-     * YYYY-MM-DD
-     */
-    stpOpptjening: string;
-  };
-  url: '/api/forvaltningOpptjening/leggTilOppgittFrilans';
-};
-
-export type LeggTilOppgittFrilansResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type LeggTilOppgittNæringData = {
-  body?: {
-    behandlingUuid: string;
-    typeKode: 'ANNEN' | 'DAGMAMMA' | 'FISKE' | 'JORDBRUK_SKOGBRUK';
-    /**
-     * YYYY-MM-DD
-     */
-    fom: string;
-    /**
-     * YYYY-MM-DD
-     */
-    tom?: string;
-    orgnummer?: string;
-    regnskapNavn?: string;
-    regnskapTlf?: string;
-    nyoppstartet?: tjenester_forvaltning_dto_LeggTilOppgittNæringDto_Utfall;
-    varigEndring?: tjenester_forvaltning_dto_LeggTilOppgittNæringDto_Utfall;
-    nyIArbeidslivet?: tjenester_forvaltning_dto_LeggTilOppgittNæringDto_Utfall;
-    erRelasjon?: tjenester_forvaltning_dto_LeggTilOppgittNæringDto_Utfall;
-    /**
-     * YYYY-MM-DD
-     */
-    endringsDato?: string;
-    begrunnelse?: string;
-    bruttoBeløp?: number;
-  };
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningOpptjening/leggTilOppgittNæring';
-};
-
-export type LeggTilOppgittNæringResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type LeggTilOppgittNæringFjerneAndreOppgitteOrgnummerData = {
-  body?: {
-    behandlingUuid: string;
-    typeKode: 'ANNEN' | 'DAGMAMMA' | 'FISKE' | 'JORDBRUK_SKOGBRUK';
-    /**
-     * YYYY-MM-DD
-     */
-    fom: string;
-    /**
-     * YYYY-MM-DD
-     */
-    tom?: string;
-    orgnummer?: string;
-    regnskapNavn?: string;
-    regnskapTlf?: string;
-    nyoppstartet?: tjenester_forvaltning_dto_LeggTilOppgittNæringDto_Utfall;
-    varigEndring?: tjenester_forvaltning_dto_LeggTilOppgittNæringDto_Utfall;
-    nyIArbeidslivet?: tjenester_forvaltning_dto_LeggTilOppgittNæringDto_Utfall;
-    erRelasjon?: tjenester_forvaltning_dto_LeggTilOppgittNæringDto_Utfall;
-    /**
-     * YYYY-MM-DD
-     */
-    endringsDato?: string;
-    begrunnelse?: string;
-    bruttoBeløp?: number;
-  };
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningOpptjening/leggTilOppgittNæringFjerneAndreOppgitteOrgnummer';
-};
-
-export type LeggTilOppgittNæringFjerneAndreOppgitteOrgnummerResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type ReInnhentAlleIayRegisterDataData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningOpptjening/reInnhentAlleIAYRegisterData';
-};
-
-export type ReInnhentAlleIayRegisterDataResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type FjernOverstyrtFhData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningSteg/fjernFHValgHoppTilbake';
-};
-
-export type FjernOverstyrtFhResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type FjernStartpunktData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningSteg/fjernStartpunkt';
-};
-
-export type FjernStartpunktResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HoppTilbakeData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-    målSteg: foreldrepenger_behandlingslager_behandling_BehandlingStegType;
-  };
-  url: '/api/forvaltningSteg/generell';
-};
-
-export type HoppTilbakeResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HoppTilbakeTil5085Data = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningSteg/5085';
-};
-
-export type HoppTilbakeTil5085Responses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type BeregnTilretteleggingsperioderData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningSvangerskapspenger/beregnTilretteleggingsperioder';
-};
-
-export type BeregnTilretteleggingsperioderResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type EndreTermindatoData = {
-  body?: {
-    /**
-     * Begrunnelse, fx FAGSYSTEM-nr
-     */
-    begrunnelse?: string;
-  };
-  path?: never;
-  query: {
-    /**
-     * Saksnummer
-     */
-    saksnummer: string;
-    /**
-     * Termindato (YYYY-MM-DD)
-     */
-    termindato: string;
-    /**
-     * Utstedt dato (YYYY-MM-DD)
-     */
-    utstedtdato: string;
-  };
-  url: '/api/forvaltningSoknad/endreTermindato';
-};
-
-export type EndreTermindatoResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type ManglendeFødselsdatoData = {
-  body?: {
-    /**
-     * Begrunnelse, fx FAGSYSTEM-nr
-     */
-    begrunnelse?: string;
-  };
-  path?: never;
-  query: {
-    /**
-     * Saksnummer
-     */
-    saksnummer: string;
-    /**
-     * Fødselsdato (YYYY-MM-DD)
-     */
-    fødselsdato: string;
-    /**
-     * Dødsdato (YYYY-MM-DD)
-     */
-    dødsdato?: string;
-  };
-  url: '/api/forvaltningSoknad/manglendeFødselsdato';
-};
-
-export type ManglendeFødselsdatoResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type ManglendeTermindatoData = {
-  body?: {
-    /**
-     * Begrunnelse, fx FAGSYSTEM-nr
-     */
-    begrunnelse?: string;
-  };
-  path?: never;
-  query: {
-    /**
-     * Saksnummer
-     */
-    saksnummer: string;
-    /**
-     * Termindato (YYYY-MM-DD)
-     */
-    termindato: string;
-    /**
-     * Utstedt dato (YYYY-MM-DD)
-     */
-    utstedtdato: string;
-  };
-  url: '/api/forvaltningSoknad/manglendeTermindato';
-};
-
-export type ManglendeTermindatoResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type SettNorskIdentAnnenpartData = {
-  body?: {
-    /**
-     * Begrunnelse, fx FAGSYSTEM-nr
-     */
-    begrunnelse?: string;
-  };
-  path?: never;
-  query: {
-    /**
-     * Saksnummer
-     */
-    saksnummer: string;
-    /**
-     * FNR annen part
-     */
-    identAnnenPart: string;
-  };
-  url: '/api/forvaltningSoknad/settNorskIdentAnnenpart';
-};
-
-export type SettNorskIdentAnnenpartResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type SettUtlandskIdentAnnenpartData = {
-  body?: {
-    /**
-     * Begrunnelse, fx FAGSYSTEM-nr
-     */
-    begrunnelse?: string;
-  };
-  path?: never;
-  query: {
-    /**
-     * Saksnummer
-     */
-    saksnummer: string;
-    /**
-     * FNR annen part
-     */
-    identAnnenPart: string;
-  };
-  url: '/api/forvaltningSoknad/settUtlandskIdentAnnenpart';
-};
-
-export type SettUtlandskIdentAnnenpartResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type FerdigstillOppgave1Data = {
-  /**
-   * Oppgave som skal settes ferdig
-   */
-  body: vedtak_felles_prosesstask_rest_dto_ProsessTaskIdDto;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningTeknisk/sett-oppgave-ferdigstilt';
-};
-
-export type FerdigstillOppgave1Errors = {
-  /**
-   * Fant ikke aktuell oppgave.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type FerdigstillOppgave1Responses = {
-  /**
-   * Oppgave satt til ferdig.
-   */
-  200: unknown;
-};
-
-export type FjernFagsakProsesstaskAvsluttetBehandlingData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningTeknisk/fjern-fagsak-prosesstask-avsluttet';
-};
-
-export type FjernFagsakProsesstaskAvsluttetBehandlingResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HentAlleÅpneOppgaverData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningTeknisk/hent-alle-aapne-oppgaver';
-};
-
-export type HentAlleÅpneOppgaverErrors = {
-  /**
-   * Fant ikke aktuell oppgave.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type HentAlleÅpneOppgaverResponses = {
-  /**
-   * Oppgave satt til ferdig.
-   */
-  200: unknown;
-};
-
-export type SetAksjonspunktAvbruttData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-    aksjonspunktKode: string;
-  };
-  url: '/api/forvaltningTeknisk/sett-aksjonspunkt-avbrutt';
-};
-
-export type SetAksjonspunktAvbruttErrors = {
-  /**
-   * Fant ikke aktuelt aksjonspunkt.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type SetAksjonspunktAvbruttResponses = {
-  /**
-   * Aksjonspunkt avbrutt.
-   */
-  200: unknown;
-};
-
-export type SetBehandlingKøetData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: tjenester_behandling_dto_BehandlingIdDto;
-  };
-  url: '/api/forvaltningTeknisk/sett-behandling-koet';
-};
-
-export type SetBehandlingKøetErrors = {
-  /**
-   * Fant ikke aktuelt aksjonspunkt.
-   */
-  400: unknown;
-  /**
-   * Feilet pga ukjent feil.
-   */
-  500: unknown;
-};
-
-export type SetBehandlingKøetResponses = {
-  /**
-   * Aksjonspunkt avbrutt.
-   */
-  200: unknown;
-};
-
-export type SynkPostnummerData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningTeknisk/synk-postnummer';
-};
-
-export type SynkPostnummerResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type BeregnKontoerData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningUttak/beregn-kontoer';
-};
-
-export type BeregnKontoerResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type SettStartdatoData = {
-  body?: {
-    /**
-     * YYYY-MM-DD
-     */
-    startdato: string;
-  };
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningUttak/startdato';
-};
-
-export type SettStartdatoResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type AvstemOverlappForPeriodeData = {
-  body?: {
-    /**
-     * key (secret)
-     */
-    key: string;
-  };
-  path?: never;
-  query: {
-    /**
-     * fom (YYYY-MM-DD)
-     */
-    fom: string;
-    /**
-     * tom (YYYY-MM-DD)
-     */
-    tom: string;
-    /**
-     * tidsrom for avstemming av 1 dag (sekunder)
-     */
-    tidsrom: number;
-    /**
-     * true gir saker med vedtak fattet i periode, false gir saker opprettet i periode
-     */
-    vedtak?: boolean;
-  };
-  url: '/api/forvaltningUttrekk/avstemOverlappForPeriode';
-};
-
-export type AvstemOverlappForPeriodeResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type AvstemSakForOverlappData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: tjenester_fagsak_dto_SaksnummerDto;
-  };
-  url: '/api/forvaltningUttrekk/avstemSakOverlapp';
-};
-
-export type AvstemSakForOverlappResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type FlyttBehandlingTilStegData = {
-  body?: never;
-  path?: never;
-  query: {
-    fom: number;
-    tom: number;
-  };
-  url: '/api/forvaltningUttrekk/flyttBehandlingTilSteg';
-};
-
-export type FlyttBehandlingTilStegResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HentAvstemtSakOverlappTrexData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: tjenester_fagsak_dto_SaksnummerDto;
-  };
-  url: '/api/forvaltningUttrekk/hentAvstemtSakOverlapp';
-};
-
-export type HentAvstemtSakOverlappTrexResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type InfotrygdRestanseFpData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningUttrekk/infotrygdRestanseFP';
-};
-
-export type InfotrygdRestanseFpResponses = {
-  /**
-   * Restanse
-   */
-  200: Array<foreldrepenger_mottak_vedtak_rest_InfotrygdRestanseDto>;
-};
-
-export type InfotrygdRestanseFpResponse = InfotrygdRestanseFpResponses[keyof InfotrygdRestanseFpResponses];
-
-export type InfotrygdRestanseSvpData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningUttrekk/infotrygdRestanseSVP';
-};
-
-export type InfotrygdRestanseSvpResponses = {
-  /**
-   * Restanse
-   */
-  200: Array<foreldrepenger_mottak_vedtak_rest_InfotrygdRestanseDto>;
-};
-
-export type InfotrygdRestanseSvpResponse = InfotrygdRestanseSvpResponses[keyof InfotrygdRestanseSvpResponses];
-
-export type ListFagsakUtenBehandlingData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningUttrekk/listFagsakUtenBehandling';
-};
-
-export type ListFagsakUtenBehandlingResponses = {
-  /**
-   * Fagsaker uten behandling
-   */
-  200: Array<tjenester_fagsak_dto_SaksnummerDto>;
-};
-
-export type ListFagsakUtenBehandlingResponse =
-  ListFagsakUtenBehandlingResponses[keyof ListFagsakUtenBehandlingResponses];
-
-export type OpenAutopunktData = {
-  body?: never;
-  path?: never;
-  query: {
-    aksjonspunktKode: string;
-  };
-  url: '/api/forvaltningUttrekk/openAutopunkt';
-};
-
-export type OpenAutopunktResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type OpenIkkeLopendeSakerData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningUttrekk/openIkkeLopendeSaker';
-};
-
-export type OpenIkkeLopendeSakerResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type SlettTidligereAvstemmingData = {
-  body?: {
-    /**
-     * key (secret)
-     */
-    key: string;
-  };
-  path?: never;
-  query: {
-    /**
-     * fom (YYYY-MM-DD)
-     */
-    fom: string;
-    /**
-     * tom (YYYY-MM-DD)
-     */
-    tom: string;
-    /**
-     * tidsrom for avstemming av 1 dag (sekunder)
-     */
-    tidsrom: number;
-    /**
-     * true gir saker med vedtak fattet i periode, false gir saker opprettet i periode
-     */
-    vedtak?: boolean;
-  };
-  url: '/api/forvaltningUttrekk/slettTidligereAvstemmingOverlapp';
-};
-
-export type SlettTidligereAvstemmingResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type OpprettTaskData = {
-  body?: tjenester_forvaltning_fpoversikt_FpoversiktMigreringRestTjeneste_TaskInput;
-  path?: never;
-  query?: never;
-  url: '/api/fpoversiktMigrering/opprettTask';
-};
-
-export type OpprettTaskResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type GenererVedtakJsonData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltning-stonadsstatistikk/for-behandling';
-};
-
-export type GenererVedtakJsonResponses = {
-  /**
-   * default response
-   */
-  default: foreldrepenger_datavarehus_v2_StønadsstatistikkVedtak;
-};
-
-export type GenererVedtakJsonResponse = GenererVedtakJsonResponses[keyof GenererVedtakJsonResponses];
-
-export type OpprettTaskForPeriodeData = {
-  body?: tjenester_forvaltning_stonadsstatistikk_ForvaltningStønadsstatistikkRestTjeneste_MigreringTaskInput;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltning-stonadsstatistikk/opprettTaskForPeriode';
-};
-
-export type OpprettTaskForPeriodeResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
 export type SokInfotrygdData = {
   /**
    * Søkestreng kan være aktørId, fødselsnummer eller D-nummer.
@@ -8651,206 +6973,4 @@ export type HentVedtaksdokumentResponses = {
    * default response
    */
   default: unknown;
-};
-
-export type RegenererIkkeGyldigeVedtaksXmlData = {
-  /**
-   * Datointervall i vedtak tabell for hvor det skal genereres ny vedtaksxml og maksAntall som behandles
-   */
-  body: tjenester_vedtak_VedtakRestTjeneste_GenererVedtaksXmlDto;
-  path?: never;
-  query?: never;
-  url: '/api/vedtak/regenerer';
-};
-
-export type RegenererIkkeGyldigeVedtaksXmlResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type ValiderVedtaksXmlData = {
-  /**
-   * Datointervall i vedtak tabell for hvilke vedtakxml som skal valideres og maksAntall som behandles
-   */
-  body: tjenester_vedtak_VedtakRestTjeneste_GenererVedtaksXmlDto;
-  path?: never;
-  query?: never;
-  url: '/api/vedtak/validate';
-};
-
-export type ValiderVedtaksXmlResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type CreateProsessTaskData = {
-  /**
-   * Informasjon for restart en eksisterende prosesstask
-   */
-  body?: vedtak_felles_prosesstask_rest_dto_ProsessTaskOpprettInputDto;
-  path?: never;
-  query?: never;
-  url: '/api/prosesstask/create';
-};
-
-export type CreateProsessTaskErrors = {
-  /**
-   * Feilet pga ukjent feil eller tekniske/funksjonelle feil
-   */
-  500: unknown;
-};
-
-export type CreateProsessTaskResponses = {
-  /**
-   * Prosesstaskens oppdatert informasjon
-   */
-  202: vedtak_felles_prosesstask_rest_dto_ProsessTaskDataDto;
-};
-
-export type CreateProsessTaskResponse = CreateProsessTaskResponses[keyof CreateProsessTaskResponses];
-
-export type FinnFeiletProsessTaskData = {
-  body?: never;
-  path: {
-    prosessTaskId: number;
-  };
-  query?: never;
-  url: '/api/prosesstask/feil/{prosessTaskId}';
-};
-
-export type FinnFeiletProsessTaskErrors = {
-  /**
-   * Feil input
-   */
-  400: unknown;
-  /**
-   * Tom respons når angitt prosesstask-id ikke finnes
-   */
-  404: unknown;
-};
-
-export type FinnFeiletProsessTaskResponses = {
-  /**
-   * Angitt prosesstask-id finnes
-   */
-  200: vedtak_felles_prosesstask_rest_dto_FeiletProsessTaskDataDto;
-};
-
-export type FinnFeiletProsessTaskResponse = FinnFeiletProsessTaskResponses[keyof FinnFeiletProsessTaskResponses];
-
-export type FinnProsessTasksData = {
-  body?: never;
-  path: {
-    /**
-     * Liste av statuser som skal hentes.
-     */
-    prosessTaskStatus: vedtak_felles_prosesstask_rest_dto_IkkeFerdigProsessTaskStatusEnum;
-  };
-  query?: never;
-  url: '/api/prosesstask/list/{prosessTaskStatus}';
-};
-
-export type FinnProsessTasksResponses = {
-  /**
-   * Liste over prosesstasker, eller tom liste når angitt/default søkefilter ikke finner noen prosesstasker
-   */
-  200: vedtak_felles_prosesstask_rest_dto_ProsessTaskDataDto;
-};
-
-export type FinnProsessTasksResponse = FinnProsessTasksResponses[keyof FinnProsessTasksResponses];
-
-export type RestartProsessTaskData = {
-  body?: never;
-  path: {
-    prosessTaskId: number;
-    prosessTaskStatus: vedtak_felles_prosesstask_rest_dto_FeiletProsessTaskStatusEnum;
-  };
-  query?: never;
-  url: '/api/prosesstask/launch/{prosessTaskId}/{prosessTaskStatus}';
-};
-
-export type RestartProsessTaskErrors = {
-  /**
-   * Feilet pga ukjent feil eller tekniske/funksjonelle feil
-   */
-  500: unknown;
-};
-
-export type RestartProsessTaskResponses = {
-  /**
-   * Prosesstaskens oppdatert informasjon
-   */
-  200: vedtak_felles_prosesstask_rest_dto_ProsessTaskRestartResultatDto;
-};
-
-export type RestartProsessTaskResponse = RestartProsessTaskResponses[keyof RestartProsessTaskResponses];
-
-export type RetryAllProsessTaskData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/prosesstask/retryall';
-};
-
-export type RetryAllProsessTaskErrors = {
-  /**
-   * Feilet pga ukjent feil eller tekniske/funksjonelle feil
-   */
-  500: unknown;
-};
-
-export type RetryAllProsessTaskResponses = {
-  /**
-   * Response med liste av prosesstasks som restartes
-   */
-  200: vedtak_felles_prosesstask_rest_dto_ProsessTaskRetryAllResultatDto;
-};
-
-export type RetryAllProsessTaskResponse = RetryAllProsessTaskResponses[keyof RetryAllProsessTaskResponses];
-
-export type SearchProsessTasksData = {
-  /**
-   * Søkefilter for å begrense resultatet av returnerte prosesstask.
-   */
-  body?: vedtak_felles_prosesstask_rest_dto_SokeFilterDto;
-  path?: never;
-  query?: never;
-  url: '/api/prosesstask/search';
-};
-
-export type SearchProsessTasksResponses = {
-  /**
-   * Liste over prosesstasker, eller tom liste når angitt/default søkefilter ikke finner noen prosesstasker
-   */
-  200: vedtak_felles_prosesstask_rest_dto_ProsessTaskDataDto;
-};
-
-export type SearchProsessTasksResponse = SearchProsessTasksResponses[keyof SearchProsessTasksResponses];
-
-export type SetFeiletProsessTaskFerdigData = {
-  body?: never;
-  path: {
-    prosessTaskId: number;
-    prosessTaskStatus: vedtak_felles_prosesstask_rest_dto_IkkeFerdigProsessTaskStatusEnum;
-  };
-  query?: never;
-  url: '/api/prosesstask/setferdig/{prosessTaskId}/{prosessTaskStatus}';
-};
-
-export type SetFeiletProsessTaskFerdigErrors = {
-  /**
-   * Feilet pga ukjent feil eller tekniske/funksjonelle feil
-   */
-  500: unknown;
-};
-
-export type SetFeiletProsessTaskFerdigResponses = {
-  /**
-   * Angitt prosesstask-id satt til status FERDIG
-   */
-  200: unknown;
 };
