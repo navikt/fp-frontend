@@ -110,7 +110,7 @@ const BehandlingIndexWrapper = ({
     return <LoadingPanel />;
   }
 
-  const erPapirsøknad = 'erAktivPapirsoknad' in behandling && behandling.erAktivPapirsoknad === true;
+  const erPapirsøknad = 'aktivPapirsøknad' in behandling && behandling.aktivPapirsøknad;
 
   return (
     <BehandlingDataProvider

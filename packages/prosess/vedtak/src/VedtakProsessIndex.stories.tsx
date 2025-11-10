@@ -50,17 +50,16 @@ const defaultBehandling: BehandlingFpSak = {
       manueltOpprettet: false,
     },
   ],
-  opprettet: '',
   behandlendeEnhetId: '',
   behandlendeEnhetNavn: '',
   erAktivPapirsoknad: false,
-  gjeldendeVedtak: false,
-  behandlingKøet: false,
-  toTrinnsBehandling: false,
+  aktivPapirsøknad: false,
   vilkår: [lagVilkår('FP_VK_1', { vilkarStatus: 'OPPFYLT' })],
   links: [],
   harSøknad: false,
   harSattEndringsdato: false,
+  id: 1,
+  opprettet: '2017-08-02T00:54:25.455',
 };
 
 const defaultberegningresultatDagytelse: BeregningsresultatDagytelse = {

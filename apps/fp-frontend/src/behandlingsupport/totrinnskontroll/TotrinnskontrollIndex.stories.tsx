@@ -95,12 +95,12 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
 const BEHANDLING = {
   versjon: 2,
   uuid: '1',
-  behandlingKøet: false,
   behandlingPåVent: false,
   type: 'BT-002',
   status: 'FVED',
   behandlendeEnhetId: '2323',
   behandlendeEnhetNavn: 'Nav Vikafossen',
+  aktivPapirsøknad: false,
   erAktivPapirsoknad: false,
   toTrinnsBehandling: true,
   behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
@@ -120,6 +120,8 @@ const BEHANDLING = {
   behandlingHenlagt: false,
 
   språkkode: '-',
+
+  ugunstAksjonspunkt: false,
 
   vilkår: [],
   links: [],
