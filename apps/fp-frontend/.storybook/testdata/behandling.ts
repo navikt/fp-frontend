@@ -10,7 +10,6 @@ export const behandling: BehandlingFpSak = {
 
   behandlendeEnhetId: '4867',
   behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser foreldrepenger',
-  erAktivPapirsoknad: false,
   aktivPapirsøknad: false,
   behandlingHenlagt: false,
   behandlingPåVent: false,

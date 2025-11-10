@@ -545,7 +545,6 @@ export type tjenester_behandling_dto_behandling_UtvidetBehandlingDto = {
   behandlingPåVent: boolean;
   behandlingsresultat?: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
   behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
-  erAktivPapirsoknad: boolean;
   fristBehandlingPåVent?: string;
   harSattEndringsdato: boolean;
   harSøknad: boolean;
@@ -5051,7 +5050,6 @@ export type tjenester_behandling_dto_behandling_FagsakBehandlingDto = {
   behandlingsresultat?: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
   behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
   brevmaler: Array<foreldrepenger_kontrakter_formidling_v3_BrevmalDto>;
-  erAktivPapirsoknad: boolean;
   fristBehandlingPåVent?: string;
   førsteÅrsak?: tjenester_behandling_dto_behandling_BehandlingÅrsakDto;
   gjeldendeVedtak: boolean;

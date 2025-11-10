@@ -69,7 +69,6 @@ const ALLE_BEHANDLINGER = [
     behandlendeEnhetId: '2323',
     behandlendeEnhetNavn: 'Nav Vikafossen',
     aktivPapirsøknad: false,
-    erAktivPapirsoknad: false,
     opprettet: '2024-08-02T00:54:25.455',
     behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
     gjeldendeVedtak: false,

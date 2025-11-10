@@ -38,7 +38,6 @@ const DEFAULT_BEHANDLING = {
   behandlingHenlagt: false,
   behandlendeEnhetId: '',
   behandlendeEnhetNavn: '',
-  erAktivPapirsoknad: false,
   aktivPapirsøknad: false,
   behandlingÅrsaker: [],
   vilkår: [],

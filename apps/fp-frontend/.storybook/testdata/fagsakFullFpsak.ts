@@ -70,7 +70,6 @@ export const fagsakFullFpsak: Fagsak = {
       behandlendeEnhetId: '4867',
       behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser foreldrepenger',
       aktivPapirsøknad: false,
-      erAktivPapirsoknad: false,
       ugunstAksjonspunkt: false,
       gjeldendeVedtak: false,
       behandlingHenlagt: false,

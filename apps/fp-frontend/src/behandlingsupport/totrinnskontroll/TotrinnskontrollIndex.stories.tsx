@@ -101,7 +101,6 @@ const BEHANDLING = {
   behandlendeEnhetId: '2323',
   behandlendeEnhetNavn: 'Nav Vikafossen',
   aktivPapirsøknad: false,
-  erAktivPapirsoknad: false,
   toTrinnsBehandling: true,
   behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
   totrinnskontrollÅrsaker: TOTRINNSKONTROLL_AKSJONSPUNKTER,
