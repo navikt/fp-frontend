@@ -52,7 +52,6 @@ const defaultBehandling: BehandlingFpSak = {
   ],
   behandlendeEnhetId: '',
   behandlendeEnhetNavn: '',
-  erAktivPapirsoknad: false,
   aktivPapirsøknad: false,
   vilkår: [lagVilkår('FP_VK_1', { vilkarStatus: 'OPPFYLT' })],
   links: [],

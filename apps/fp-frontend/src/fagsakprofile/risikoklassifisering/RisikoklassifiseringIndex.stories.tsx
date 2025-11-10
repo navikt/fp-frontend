@@ -62,7 +62,6 @@ const FAGSAK = {
       behandlendeEnhetId: '2323',
       behandlendeEnhetNavn: 'Nav Vikafossen',
       aktivPapirsøknad: false,
-      erAktivPapirsoknad: false,
       behandlingTillatteOperasjoner: {
         behandlingFraBeslutter: false,
         behandlingKanSendeMelding: true,
