@@ -5,16 +5,15 @@
   "ErSoknadsfristVilkaretOppfyltForm.Question2": "Har Nav gitt misvisende opplysninger?",
   "ErSoknadsfristVilkaretOppfyltForm.Question3": "Har søker åpenbart ikke vært i stand til å sette frem krav?",
   "ErSoknadsfristVilkaretOppfyltForm.MottattDato": "Dato for mottatt søknad",
+  "ErSoknadsfristVilkaretOppfyltForm.Søknadsfrist": "Søknadsfrist",
   "ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato": "Dato for omsorgsovertakelse",
   "ErSoknadsfristVilkaretOppfyltForm.Fodselsdato": "Fødselsdato",
   "ErSoknadsfristVilkaretOppfyltForm.Termindato": "Termindato",
   "ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication": "Begrunnelse fra søknaden",
-  "ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart1": "Søknaden ble mottatt ",
-  "ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart2": "{numberOfDays} dager ",
-  "ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart3": "etter søknadsfristen ",
+  "ErSoknadsfristVilkaretOppfyltForm.FaktaKortTittel": "Detaljer om søknadsfristen",
+  "ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart": "Søknaden ble mottatt {numberOfDays} dager etter søknadsfristen",
   "ErSoknadsfristVilkaretOppfyltForm.SokersOpplysningsplikt": "Søkers opplysningsplikt",
+  "ErSoknadsfristVilkaretOppfyltForm.VilkårTittel": "Er søknadsfristvilkåret oppfylt?",
   "ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt": "Vilkåret er oppfylt",
-  "ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt",
-
-  "ShowVilkarStatus.Check": "Informasjonen er utfylt"
+  "ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt"
 }

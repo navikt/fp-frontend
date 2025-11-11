@@ -224,6 +224,7 @@ export const VilkarresultatMedOverstyringForm = ({
               ) : (
                 <VilkarResultPicker
                   vilkår={vilkår}
+                  legend={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErVilkåretOppfylt"/>}
                   isReadOnly={overrideReadOnly || !erOverstyrt}
                   customVilkårOppfyltText={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />}
                   customVilkårIkkeOppfyltText={

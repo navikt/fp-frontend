@@ -11,7 +11,7 @@ describe('SokersOpplysningspliktVilkarProsessIndex', () => {
     render(<UtførtAPMedOppfyltVilkår />);
 
     expect(await screen.findByText('Søkers opplysningsplikt')).toBeInTheDocument();
-    expect(screen.getAllByText( 'Vilkåret er oppfylt')).toHaveLength(2);
+    expect(screen.getAllByText('Vilkåret er oppfylt')).toHaveLength(2);
     expect(screen.queryByText(/ikke/)).not.toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
@@ -32,7 +32,8 @@ describe('SokersOpplysningspliktVilkarProsessIndex', () => {
     render(<KanOverstyreVilkår submitCallback={lagre} />);
 
     expect(await screen.findByText('Søkers opplysningsplikt')).toBeInTheDocument();
-    expect(screen.getByText('Manglende dokumentasjon')).toBeInTheDocument();
+    expect(screen.getByText('Dokumenter som mangler')).toBeInTheDocument();
+    expect(screen.getByText('Fødselsattest')).toBeInTheDocument();
     expect(screen.getByText('Inntektsmelding fra arbeidsgiver1 (1234)...1234')).toBeInTheDocument();
 
     const vurderingInput = screen.getByLabelText('Vurdering');

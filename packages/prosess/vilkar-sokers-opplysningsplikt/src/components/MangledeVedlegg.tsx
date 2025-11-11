@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { Alert, Heading, List } from '@navikt/ds-react';
+import { Box, Label, List } from '@navikt/ds-react';
 import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import type { ArbeidsgiverOpplysningerPerId, ManglendeVedleggSoknad, Soknad } from '@navikt/fp-types';
@@ -12,12 +12,15 @@ interface Props {
 
 export const MangledeVedlegg = ({ søknad, arbeidsgiverOpplysningerPerId }: Props) => {
   const sorterteManglendeVedlegg = getSortedManglendeVedlegg(søknad);
+  if (søknad.manglendeVedlegg.length === 0) {
+    return null;
+  }
   return (
-    <Alert variant="warning" size="small">
-      <Heading spacing size="xsmall" level="3">
+    <Box.New background="info-soft" padding="space-16">
+      <Label>
         <FormattedMessage id="MangledeVedlegg.Tittel" />
-      </Heading>
-      <List as="ul" size="small">
+      </Label>
+      <List>
         {sorterteManglendeVedlegg.map(vedlegg => (
           <List.Item key={vedlegg.dokumentType + vedlegg.arbeidsgiverReferanse}>
             {vedlegg.dokumentTittel}
@@ -32,7 +35,7 @@ export const MangledeVedlegg = ({ søknad, arbeidsgiverOpplysningerPerId }: Prop
           </List.Item>
         ))}
       </List>
-    </Alert>
+    </Box.New>
   );
 };
 
@@ -40,13 +43,9 @@ const formatArbeidsgiver = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   arbeidsgiverReferanse: string | undefined,
 ): string => {
-  const opplysninger = arbeidsgiverReferanse
-    ? arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]
-    : undefined;
+  const opplysninger = arbeidsgiverReferanse ? arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse] : undefined;
 
-  return opplysninger
-    ? formaterArbeidsgiver(opplysninger, arbeidsgiverReferanse)
-    : '';
+  return opplysninger ? formaterArbeidsgiver(opplysninger, arbeidsgiverReferanse) : '';
 };
 
 const getSortedManglendeVedlegg = (soknad: Soknad): ManglendeVedleggSoknad[] =>

@@ -12,10 +12,7 @@ describe('SoknadsfristVilkarProsessIndex', () => {
 
     render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
-    expect(await screen.findByText('Søknadsfrist')).toBeInTheDocument();
-    expect(screen.getByText(/Søknaden ble mottatt/)).toBeInTheDocument();
-    expect(screen.getByText(/2 dager/)).toBeInTheDocument();
-    expect(screen.getByText(/etter søknadsfristen/)).toBeInTheDocument();
+    expect(screen.getByText(/Søknaden ble mottatt 2 dager etter søknadsfristen/)).toBeInTheDocument();
     expect(screen.getByText(/30.12.2018/)).toBeInTheDocument();
     expect(screen.getByText('Vurder følgende')).toBeInTheDocument();
     expect(screen.getByText('01.01.2019')).toBeInTheDocument();
@@ -40,9 +37,8 @@ describe('SoknadsfristVilkarProsessIndex', () => {
   it('skal vise at vilkår er oppfylt', async () => {
     render(<OppfyltVilkår />);
 
-    expect(await screen.findByText('Søknadsfrist')).toBeInTheDocument();
-    expect(screen.getByLabelText('Vilkåret er oppfylt')).toBeChecked();
-    expect(screen.getByLabelText('Vilkåret er ikke oppfylt')).not.toBeChecked();
+    expect(screen.getByText('Er søknadsfristvilkåret oppfylt?')).toBeInTheDocument();
+    expect(screen.getAllByText('Vilkåret er oppfylt')).toHaveLength(2);
     expect(screen.getByText('Dette vilkåret er godkjent')).toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
   });
@@ -50,8 +46,8 @@ describe('SoknadsfristVilkarProsessIndex', () => {
   it('skal vise at vilkår er avslått', async () => {
     render(<AvslåttVilkår />);
 
-    expect(await screen.findByText('Søknadsfrist')).toBeInTheDocument();
-    expect(screen.getAllByText(/ikke/)).toHaveLength(2);
+    expect(screen.getByText('Er søknadsfristvilkåret oppfylt?')).toBeInTheDocument();
+    expect(screen.getByText(/ikke/)).toBeInTheDocument();
     expect(screen.getByText('Dette vilkåret er avslått')).toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
   });

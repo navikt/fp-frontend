@@ -1,9 +1,9 @@
-import { type ReactElement } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { BodyShort, Radio, VStack } from '@navikt/ds-react';
+import { ReadOnlyField, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -23,6 +23,7 @@ export type VilkarResultPickerFormValues = {
 
 interface Props {
   vilkår: Vilkar | undefined;
+  legend: ReactNode;
   customVilkårIkkeOppfyltText: string | ReactElement;
   customVilkårOppfyltText: string | ReactElement;
   isReadOnly: boolean;
@@ -32,6 +33,7 @@ interface Props {
 
 export const VilkarResultPicker = ({
   vilkår,
+  legend,
   customVilkårIkkeOppfyltText,
   customVilkårOppfyltText,
   isReadOnly,
@@ -50,27 +52,33 @@ export const VilkarResultPicker = ({
   return (
     <VStack gap="space-16">
       {isReadOnly && erVilkårOk !== undefined && (
-        <HStack gap="space-8">
-          {erVilkårOk && (
-            <>
-              <CheckmarkIcon className={styles['godkjentImage']} />
-              <BodyShort size="small">{customVilkårOppfyltText}</BodyShort>
-            </>
-          )}
-          {!erVilkårOk && (
-            <>
-              <XMarkOctagonIcon className={styles['avslattImage']} />
-              <BodyShort size="small">{customVilkårIkkeOppfyltText}</BodyShort>
-            </>
-          )}
-        </HStack>
+        <ReadOnlyField
+          label={legend}
+          size="small"
+          value={
+            erVilkårOk ? (
+              <>
+                <CheckmarkIcon className={styles['godkjentImage']} />
+                <BodyShort as="span" size="small">
+                  {customVilkårOppfyltText}
+                </BodyShort>
+              </>
+            ) : (
+              <>
+                <XMarkOctagonIcon className={styles['avslattImage']} />
+                <BodyShort as="span" size="small">
+                  {customVilkårIkkeOppfyltText}
+                </BodyShort>
+              </>
+            )
+          }
+        />
       )}
       {(!isReadOnly || erVilkårOk === undefined) && (
         <RhfRadioGroup
           name="erVilkarOk"
           control={control}
-          legend=""
-          hideLegend
+          legend={legend}
           validate={radioValidators}
           readOnly={isReadOnly}
         >

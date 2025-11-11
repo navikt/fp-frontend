@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { Label, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
@@ -30,8 +30,6 @@ interface Props {
  * Setter opp aksjonspunktet for avklaring av Fødselsvilkåret.
  */
 export const FodselVilkarForm = ({ status }: Props) => {
-  const intl = useIntl();
-
   const {
     behandling,
     isSubmittable,
@@ -62,7 +60,7 @@ export const FodselVilkarForm = ({ status }: Props) => {
       setDataOnUnmount={setMellomlagretFormData}
     >
       <ProsessPanelTemplate
-        title={intl.formatMessage({ id: 'FodselVilkarForm.Fodsel' })}
+        title={<FormattedMessage id="FodselVilkarForm.Fodsel" />}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
@@ -73,11 +71,9 @@ export const FodselVilkarForm = ({ status }: Props) => {
         isSubmitting={formMethods.formState.isSubmitting}
       >
         <VStack gap="space-16">
-          <Label size="small">
-            <FormattedMessage id="FodselVilkarForm.TidligereUtbetaltStonad" />
-          </Label>
           <VilkarResultPicker
             vilkår={vilkårForPanel[0]}
+            legend={<FormattedMessage id="FodselVilkarForm.TidligereUtbetaltStonad" />}
             isReadOnly={isReadOnly}
             customVilkårOppfyltText={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
             customVilkårIkkeOppfyltText={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
