@@ -20,9 +20,7 @@ export const behandling: BehandlingFpSak = {
     id: 999951,
     type: 'IKKE_FASTSATT',
 
-    rettenTil: '-',
     konsekvenserForYtelsen: [],
-    vedtaksbrev: '-',
 
     harRedigertVedtaksbrev: false,
     erRevurderingMedUendretUtfall: false,
