@@ -70,7 +70,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, 
   return (
     <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
       <ProsessPanelTemplate
-        title={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret"/>}
+        title={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret" />}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}

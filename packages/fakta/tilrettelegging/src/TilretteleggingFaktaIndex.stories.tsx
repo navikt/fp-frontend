@@ -416,9 +416,9 @@ export const ErReadonly: Story = {
 export const ErRevurdering: Story = {
   args: {
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,{
+      lagAksjonspunkt(AksjonspunktKode.VURDER_SVP_TILRETTELEGGING, {
         begrunnelse: 'Dette er en begrunnelse',
-      })
+      }),
     ],
     svangerskapspengerTilrettelegging: {
       ...TILRETTELEGGING_PERMISJON,

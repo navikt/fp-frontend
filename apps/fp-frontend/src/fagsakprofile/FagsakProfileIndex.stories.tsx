@@ -9,7 +9,8 @@ import { LosUrl } from '@navikt/fp-los-saksbehandler';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
-  getIntlDecorator, lagAksjonspunkt,
+  getIntlDecorator,
+  lagAksjonspunkt,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
@@ -101,8 +102,7 @@ const ALLE_BEHANDLINGER = [
     kontrollResultat: {
       kontrollresultat: 'HOY',
     },
-    risikoAksjonspunkt: lagAksjonspunkt(
-      AksjonspunktKode.VURDER_FARESIGNALER,{
+    risikoAksjonspunkt: lagAksjonspunkt(AksjonspunktKode.VURDER_FARESIGNALER, {
       kanLoses: false,
       erAktivt: false,
     }),
