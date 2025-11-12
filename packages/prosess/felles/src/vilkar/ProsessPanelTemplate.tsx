@@ -70,7 +70,7 @@ export const ProsessPanelTemplate = ({
       )}
 
       <AksjonspunktBox
-        className={harÅpentAksjonspunkt ? undefined : styles['lukketAksjonspunktMargin']}
+        className={harÅpentAksjonspunkt ? undefined : styles['aksjonspunktMargin']}
         erAksjonspunktApent={harÅpentAksjonspunkt}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
       >

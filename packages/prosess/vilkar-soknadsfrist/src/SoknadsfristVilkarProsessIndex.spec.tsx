@@ -34,7 +34,7 @@ describe('SoknadsfristVilkarProsessIndex', () => {
     });
   });
 
-  it('skal vise at vilkår er oppfylt', async () => {
+  it('skal vise at vilkår er oppfylt', () => {
     render(<OppfyltVilkår />);
 
     expect(screen.getByText('Er søknadsfristvilkåret oppfylt?')).toBeInTheDocument();
@@ -43,7 +43,7 @@ describe('SoknadsfristVilkarProsessIndex', () => {
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
   });
 
-  it('skal vise at vilkår er avslått', async () => {
+  it('skal vise at vilkår er avslått', () => {
     render(<AvslåttVilkår />);
 
     expect(screen.getByText('Er søknadsfristvilkåret oppfylt?')).toBeInTheDocument();
