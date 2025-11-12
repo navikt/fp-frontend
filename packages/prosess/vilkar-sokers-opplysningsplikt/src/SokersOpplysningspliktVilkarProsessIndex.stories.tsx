@@ -62,7 +62,6 @@ export const UtførtAPMedOppfyltVilkår: Story = {
     ],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'OPPFYLT',
   },
 };
 
@@ -80,16 +79,15 @@ export const UtførtAPMedAvslåttVilkår: Story = {
         status: 'UTFO',
       }),
     ],
+    vilkårForPanel: [],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'IKKE_OPPFYLT',
   },
 };
 
 export const KanOverstyreVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [],
-    status: 'OPPFYLT',
     isReadOnly: false,
     isSubmittable: true,
   },
@@ -109,7 +107,6 @@ export const HarOverstyrtMedOppfyltVilkår: Story = {
     ],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'OPPFYLT',
   },
 };
 
@@ -127,6 +124,5 @@ export const HarOverstyrtMedAvslåttVilkår: Story = {
     ],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'IKKE_OPPFYLT',
   },
 };

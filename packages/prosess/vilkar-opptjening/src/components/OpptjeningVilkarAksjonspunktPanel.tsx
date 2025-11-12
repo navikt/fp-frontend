@@ -13,7 +13,7 @@ import {
   VilkarResultPicker,
   type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening, Vilkar } from '@navikt/fp-types';
 import type { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -23,7 +23,6 @@ type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextField
 
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
-  status: string;
   erSvpFagsak: boolean;
 }
 
@@ -32,7 +31,7 @@ interface Props {
  *
  * Viser panel for å løse aksjonspunkt for avslått opptjeningsvilkår
  */
-export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, erSvpFagsak }: Props) => {
+export const OpptjeningVilkarAksjonspunktPanel = ({ fastsattOpptjening, erSvpFagsak }: Props) => {
   const intl = useIntl();
 
   const {
@@ -51,12 +50,11 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, 
   );
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
+  const vilkår = vilkårForPanel[0];
   const formMethods = useForm<FormValues>({
     defaultValues:
-      mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat),
+      mellomlagretFormData ?? buildInitialValues(vilkår, aksjonspunkterForPanel, behandling.behandlingsresultat),
   });
-
-  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
 
@@ -81,11 +79,11 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, 
     <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret' })}
+        aksjonspunkterForPanel={aksjonspunkterForPanel}
+        vilkår={vilkårForPanel[0]}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        lovReferanse={vilkårForPanel[0]?.lovReferanse}
-        originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
@@ -124,11 +122,11 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, 
 };
 
 const buildInitialValues = (
+  vilkår: Vilkar | undefined,
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
   behandlingsresultat?: Behandlingsresultat,
 ): FormValues => ({
-  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+  ...VilkarResultPicker.buildInitialValues(vilkår, aksjonspunkter, behandlingsresultat),
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 

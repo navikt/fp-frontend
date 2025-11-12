@@ -45,7 +45,6 @@ const meta = {
   component: OpptjeningVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    status: 'IKKE_VURDERT',
     erSvpFagsak: false,
     vilkårForPanel: [lagVilkår('FP_VK_21')],
   },

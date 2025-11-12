@@ -1,9 +1,13 @@
-import { type ComponentProps } from 'react';
-
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { lagAksjonspunkt, lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import {
+  lagAksjonspunkt,
+  lagVilkår,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
 import type { BehandlingFpSak, Vilkar } from '@navikt/fp-types';
 
 import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
@@ -15,36 +19,28 @@ const meta = {
   args: {
     vilkårForPanel: [lagVilkår('FP_VK_1')] as Vilkar[],
   },
-  render: args => <FodselVilkarProsessIndex {...args} />,
-} satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselVilkarProsessIndex>>;
+} satisfies Meta<PanelDataArgs>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunkt: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      lagAksjonspunkt( AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
-      )    ],
-    status: 'IKKE_VURDERT',
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE)],
   },
 };
 
 export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(
-       AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
-
-      {
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE, {
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
-      },
-      )
+      }),
     ],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'OPPFYLT',
+    vilkårForPanel: [lagVilkår('FP_VK_1', { vilkarStatus: 'OPPFYLT' })],
   },
 };
 
@@ -58,15 +54,13 @@ export const AvslåttVilkår: Story = {
       },
     } as BehandlingFpSak,
     aksjonspunkterForPanel: [
-     lagAksjonspunkt(
-         AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
-       {
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE, {
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       }),
     ],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'IKKE_OPPFYLT',
+    vilkårForPanel: [lagVilkår('FP_VK_1', { vilkarStatus: 'IKKE_OPPFYLT' })],
   },
 };

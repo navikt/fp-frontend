@@ -13,7 +13,6 @@ const intl = createIntl(messages);
 interface Props {
   søknad: Soknad;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  status: string;
 }
 
 export const SokersOpplysningspliktVilkarProsessIndex = (props: Props) => (

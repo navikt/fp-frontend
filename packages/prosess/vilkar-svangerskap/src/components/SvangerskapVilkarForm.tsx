@@ -21,7 +21,7 @@ import type {
   ArbeidsforholdTilretteleggingDato,
   BehandlingFpSak,
   FodselOgTilrettelegging,
-  VilkarUtfallType,
+  Vilkar,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -43,11 +43,11 @@ const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrett
 type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextFieldFormValues;
 
 const buildInitialValues = (
+  vilkår: Vilkar | undefined,
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
   behandlingsresultat?: BehandlingFpSak['behandlingsresultat'],
 ): FormValues => ({
-  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+  ...VilkarResultPicker.buildInitialValues(vilkår, aksjonspunkter, behandlingsresultat),
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
@@ -58,11 +58,10 @@ const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp 
 });
 
 interface Props {
-  status: VilkarUtfallType;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
 }
 
-export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, status }: Props) => {
+export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging }: Props) => {
   const {
     aksjonspunkterForPanel,
     vilkårForPanel,
@@ -81,8 +80,8 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
   const finnesUttak = finnesInnvilgetUttak(svangerskapspengerTilrettelegging);
 
   const intl = useIntl();
-
-  const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
+  const vilkår = vilkårForPanel[0];
+  const initialValues = buildInitialValues(vilkår, aksjonspunkterForPanel, behandling.behandlingsresultat);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
@@ -97,8 +96,6 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     }
   }, [erVilkarOk]);
 
-  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
-
   return (
     <RhfForm
       formMethods={formMethods}
@@ -107,10 +104,11 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}
+        aksjonspunkterForPanel={aksjonspunkterForPanel}
+        vilkår={vilkår}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}

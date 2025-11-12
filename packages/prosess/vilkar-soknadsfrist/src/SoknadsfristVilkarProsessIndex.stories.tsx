@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagVilkår,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -21,7 +22,7 @@ const soknad = {
     utledetSøknadsfrist: '2019-07-01',
     dagerOversittetFrist: 2,
   },
-  manglendeVedlegg: []
+  manglendeVedlegg: [],
 } as Soknad;
 
 const familiehendelse = {
@@ -48,22 +49,21 @@ export const ÅpentAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET)],
     isReadOnly: false,
-    status: 'IKKE_VURDERT',
+    vilkårForPanel: [lagVilkår('FP_VK_3', { vilkarStatus: 'IKKE_VURDERT' })],
   },
 };
 
 export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
-     lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
-      {
+      lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET, {
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
-      })
+      }),
     ],
+    vilkårForPanel: [lagVilkår('FP_VK_3', { vilkarStatus: 'OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'OPPFYLT',
   },
 };
 
@@ -82,8 +82,8 @@ export const AvslåttVilkår: Story = {
         begrunnelse: 'Dette vilkåret er avslått',
       }),
     ],
+    vilkårForPanel: [lagVilkår('FP_VK_3', { vilkarStatus: 'IKKE_OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'IKKE_OPPFYLT',
   },
 };

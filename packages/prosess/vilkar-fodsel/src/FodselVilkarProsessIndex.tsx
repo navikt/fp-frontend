@@ -8,12 +8,8 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface Props {
-  status: string;
-}
-
-export const FodselVilkarProsessIndex = (props: Props) => (
+export const FodselVilkarProsessIndex = () => (
   <RawIntlProvider value={intl}>
-    <FodselVilkarForm {...props} />
+    <FodselVilkarForm />
   </RawIntlProvider>
 );
