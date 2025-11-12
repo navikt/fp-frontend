@@ -1,6 +1,6 @@
 import type { AndreKriterierType, BehandlingType, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-types';
 
-export type ReservasjonStatus = Readonly<{
+export type ReservasjonStatus = {
   erReservert: boolean;
   reservertTilTidspunkt?: string;
   erReservertAvInnloggetBruker?: boolean;
@@ -11,10 +11,10 @@ export type ReservasjonStatus = Readonly<{
     uid: string;
     navn: string;
     begrunnelse: string;
-  };
-}>;
+  } | null;
+};
 
-export type Oppgave = Readonly<{
+export type Oppgave = {
   id: number;
   reservasjonStatus: ReservasjonStatus;
   saksnummer: string;
@@ -28,5 +28,8 @@ export type Oppgave = Readonly<{
   erTilSaksbehandling: boolean;
   behandlingId: string;
   andreKriterier: AndreKriterierType[];
+};
+
+export type OppgaveMedStatus = Oppgave & {
   oppgaveBehandlingStatus: OppgaveBehandlingStatus;
-}>;
+};

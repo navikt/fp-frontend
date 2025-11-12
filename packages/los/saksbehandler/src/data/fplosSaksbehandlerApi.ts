@@ -1,7 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { Oppgave, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { Oppgave, OppgaveMedStatus, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AlleKodeverkLos, FagsakEnkel } from '@navikt/fp-types';
 
 import type { Driftsmelding } from '../typer/driftsmeldingTsType';
@@ -31,7 +31,7 @@ export const LosUrl = {
   SØK_FAGSAK: wrapUrl('/fpsak/api/fagsak/sok'),
   SAKSLISTE: wrapUrl('/fplos/api/saksbehandler/saksliste'),
   RESERVERTE_OPPGAVER: wrapUrl('/fplos/api/reservasjon/reserverte-oppgaver'),
-  BEHANDLEDE_OPPGAVER: wrapUrl('/fplos/api/reservasjon/tidligere-reserverte'),
+  TIDLIGERE_RESERVERTE: wrapUrl('/fplos/api/reservasjon/tidligere-reserverte'),
   RESERVER_OPPGAVE: wrapUrl('/fplos/api/reservasjon/reserver'),
   OPPGAVER_FOR_FAGSAKER: wrapUrl('/fplos/api/saksbehandler/oppgaver/oppgaver-for-fagsaker'),
   HENT_RESERVASJONSSTATUS: wrapUrl('/fplos/api/reservasjon/reservasjon-status'),
@@ -107,9 +107,9 @@ export const reserverteOppgaverOptions = () =>
 
 export const behandlendeOppgaverOptions = (kunAktive: boolean) =>
   queryOptions({
-    queryKey: [LosUrl.BEHANDLEDE_OPPGAVER, kunAktive],
+    queryKey: [LosUrl.TIDLIGERE_RESERVERTE, kunAktive],
     queryFn: () =>
-      kyExtended.get(LosUrl.BEHANDLEDE_OPPGAVER, { searchParams: { kunAktive: kunAktive } }).json<Oppgave[]>(),
+      kyExtended.get(LosUrl.TIDLIGERE_RESERVERTE, { searchParams: { kunAktive: kunAktive } }).json<OppgaveMedStatus[]>(),
   });
 
 export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>

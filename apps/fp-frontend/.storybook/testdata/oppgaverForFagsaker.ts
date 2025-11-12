@@ -1,23 +1,25 @@
-export const oppgaverForFagsaker = [
+import type { Oppgave } from '@navikt/fp-los-felles';
+
+export const oppgaverForFagsaker: Oppgave[] = [
   {
     id: 46567,
-    saksnummer: '352026485',
-    navn: 'Rusten Kveldsmat',
+    saksnummer: '1',
+    navn: 'Kristine Kalv',
     system: 'FPSAK',
-    personnummer: '16430172291',
+    personnummer: '21487132273',
     behandlingstype: 'BT-002',
-    fagsakYtelseType: 'ES',
+    fagsakYtelseType: 'FP',
     erTilSaksbehandling: true,
     opprettetTidspunkt: '2025-09-15T11:36:28.579',
     behandlingsfrist: '2025-10-27T00:00:00',
-    behandlingId: 'b6408b6f-e3cd-4809-915c-fd7bc2c9db6d',
+    behandlingId: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
     andreKriterier: ['UTBETALING_TIL_BRUKER'],
     reservasjonStatus: {
       erReservert: true,
       reservertTilTidspunkt: '2025-11-12T21:49:56.181',
       erReservertAvInnloggetBruker: true,
-      reservertAvUid: 'Z994834',
-      reservertAvNavn: 'F_Z994834 E_Z994834',
+      reservertAvUid: 'S123456',
+      reservertAvNavn: 'Sara Saksbehandler',
       flyttetReservasjon: null,
     },
   },
