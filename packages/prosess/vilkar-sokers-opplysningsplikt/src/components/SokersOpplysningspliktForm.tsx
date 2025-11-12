@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
+import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag, isObject } from '@navikt/ft-utils';
 
@@ -78,6 +78,9 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
         rendreFakta={<MangledeVedlegg søknad={søknad} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} />}
       >
         <VStack gap="space-16">
+          <Label size="medium">
+            <FormattedMessage id="SokersOpplysningspliktForm.Tittel" />
+          </Label>
           <VilkarResultPicker
             vilkår={undefined}
             legend={<FormattedMessage id="SokersOpplysningspliktForm.ErVilkåretOppfylt" />}
