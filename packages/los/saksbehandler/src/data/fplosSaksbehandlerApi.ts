@@ -109,7 +109,9 @@ export const behandlendeOppgaverOptions = (kunAktive: boolean) =>
   queryOptions({
     queryKey: [LosUrl.TIDLIGERE_RESERVERTE, kunAktive],
     queryFn: () =>
-      kyExtended.get(LosUrl.TIDLIGERE_RESERVERTE, { searchParams: { kunAktive: kunAktive } }).json<OppgaveMedStatus[]>(),
+      kyExtended
+        .get(LosUrl.TIDLIGERE_RESERVERTE, { searchParams: { kunAktive: kunAktive } })
+        .json<OppgaveMedStatus[]>(),
   });
 
 export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>

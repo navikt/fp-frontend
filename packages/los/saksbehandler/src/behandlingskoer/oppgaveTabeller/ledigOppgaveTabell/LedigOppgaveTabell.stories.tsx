@@ -40,7 +40,6 @@ const OPPGAVER_TIL_BEHANDLING = [
     erTilSaksbehandling: true,
     behandlingId: '1',
     andreKriterier: ['REVURDERING_INNTEKTSMELDING'],
-    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
 ] satisfies Oppgave[];
 

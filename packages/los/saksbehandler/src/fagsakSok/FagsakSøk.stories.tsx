@@ -82,7 +82,6 @@ export const Default: Story = {
         erTilSaksbehandling: true,
         behandlingId: '12344',
         andreKriterier: [],
-        oppgaveBehandlingStatus: 'UNDER_ARBEID',
       },
       {
         id: 2,
@@ -100,7 +99,6 @@ export const Default: Story = {
         erTilSaksbehandling: true,
         behandlingId: '12344',
         andreKriterier: [],
-        oppgaveBehandlingStatus: 'UNDER_ARBEID',
       },
     ],
   },

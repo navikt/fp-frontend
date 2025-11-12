@@ -30,7 +30,6 @@ const oppgaveForResevertAvAnnenModal = {
   erTilSaksbehandling: true,
   behandlingId: '1',
   andreKriterier: [],
-  oppgaveBehandlingStatus: 'UNDER_ARBEID',
 } satisfies Oppgave;
 
 describe('OppgaveErReservertAvAnnenModal', () => {
