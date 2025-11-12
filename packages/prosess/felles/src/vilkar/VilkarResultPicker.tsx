@@ -1,4 +1,4 @@
-import { type ReactElement } from 'react';
+import { type ReactElement, type ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
@@ -8,7 +8,9 @@ import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-val
 import { createIntl } from '@navikt/ft-utils';
 
 import type { Aksjonspunkt, AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
-import { erAksjonspunktÅpent, usePanelDataContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
+
+import { finnStatus } from './VilkårStatus';
 
 import styles from './vilkarResultPicker.module.css';
 
@@ -23,6 +25,7 @@ export type VilkarResultPickerFormValues = {
 
 interface Props {
   vilkår: Vilkar | undefined;
+  legend?: ReactNode;
   customVilkårIkkeOppfyltText: string | ReactElement;
   customVilkårOppfyltText: string | ReactElement;
   isReadOnly: boolean;
@@ -32,6 +35,7 @@ interface Props {
 
 export const VilkarResultPicker = ({
   vilkår,
+  legend,
   customVilkårIkkeOppfyltText,
   customVilkårOppfyltText,
   isReadOnly,
@@ -98,15 +102,15 @@ export const VilkarResultPicker = ({
 };
 
 VilkarResultPicker.buildInitialValues = (
+  vilkår: Vilkar | undefined,
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
-  behandlingsresultat?: Behandlingsresultat,
+  behandlingsresultat: Behandlingsresultat | undefined,
 ): VilkarResultPickerFormValues => {
-  const erVilkårOk = aksjonspunkter.some(erAksjonspunktÅpent) ? undefined : 'OPPFYLT' === status;
+  const erVilkårOk = finnStatus(vilkår, aksjonspunkter);
   return {
-    erVilkarOk: erVilkårOk,
+    erVilkarOk: erVilkårOk === 'IKKE_VURDERT' ? undefined : erVilkårOk === 'OPPFYLT',
     avslagskode:
-      erVilkårOk === false && behandlingsresultat?.avslagsarsak ? behandlingsresultat.avslagsarsak : undefined,
+      erVilkårOk === 'IKKE_OPPFYLT' && behandlingsresultat?.avslagsarsak ? behandlingsresultat.avslagsarsak : undefined,
   };
 };
 

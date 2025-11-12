@@ -46,7 +46,7 @@ export const OpptjeningInngangsvilkarFpInitPanel = () => {
       inngangsvilkårPanelKode="OPPTJENINGSVILKARET"
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
     >
-      <>{opptjening && <OpptjeningVilkarProsessIndex status={standardPanelProps.status} opptjening={opptjening} />}</>
+      <>{opptjening && <OpptjeningVilkarProsessIndex opptjening={opptjening} />}</>
     </InngangsvilkarDefaultInitPanel>
   );
 };

@@ -13,15 +13,10 @@ const intl = createIntl(messages);
 interface Props {
   opptjening: Opptjening;
   erSvpFagsak?: boolean;
-  status: string;
 }
 
-export const OpptjeningVilkarProsessIndex = ({ opptjening, status, erSvpFagsak = false }: Props) => (
+export const OpptjeningVilkarProsessIndex = ({ opptjening, erSvpFagsak = false }: Props) => (
   <RawIntlProvider value={intl}>
-    <OpptjeningVilkarForm
-      fastsattOpptjening={opptjening.fastsattOpptjening}
-      status={status}
-      erSvpFagsak={erSvpFagsak}
-    />
+    <OpptjeningVilkarForm fastsattOpptjening={opptjening.fastsattOpptjening} erSvpFagsak={erSvpFagsak} />
   </RawIntlProvider>
 );

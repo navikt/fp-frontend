@@ -2,6 +2,7 @@ import { HGrid, VStack } from '@navikt/ds-react';
 
 import { InngangsvilkarDefaultInitWrapper } from '../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import { MedlemskapInngangsvilkarInitPanel } from '../../fellesPaneler/prosess/inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
+import { OmsorgsovertakelseInngangsvilkårInitPanel } from '../../fellesPaneler/prosess/inngangsvilkarPaneler/OmsorgsovertakelseInngangsvilkårInitPanel';
 import { FodselInngangsvilkarFpInitPanel } from './inngangsvilkarPaneler/FodselInngangsvilkarFpInitPanel';
 import { OpptjeningInngangsvilkarFpInitPanel } from './inngangsvilkarPaneler/OpptjeningInngangsvilkarFpInitPanel';
 
@@ -15,6 +16,7 @@ export const InngangsvilkarFpProsessStegInitPanel = ({ faktaPanelMedÅpentApInfo
       <HGrid columns={2} gap="space-32">
         <VStack gap="space-32">
           <FodselInngangsvilkarFpInitPanel />
+          <OmsorgsovertakelseInngangsvilkårInitPanel />
           <MedlemskapInngangsvilkarInitPanel />
         </VStack>
         <OpptjeningInngangsvilkarFpInitPanel />

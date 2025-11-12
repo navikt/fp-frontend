@@ -1,32 +1,26 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Box, Detail, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
-import { required } from '@navikt/ft-form-validators';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { BodyShort, Heading, HStack, VStack } from '@navikt/ds-react';
+import { ReadOnlyField, RhfForm } from '@navikt/ft-form-hooks';
+import { AksjonspunktHelpTextHTML, DateLabel } from '@navikt/ft-ui-komponenter';
+import { BTag, DDMMYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
+  ProsessPanelTemplate,
   ProsessStegBegrunnelseTextField,
   type ProsessStegBegrunnelseTextFieldFormValues,
-  ProsessStegSubmitButton,
+  VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, FamilieHendelse, Soknad, VilkarUtfallType } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandlingsresultat, FamilieHendelse, Soknad, Vilkar } from '@navikt/fp-types';
 import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import styles from './erSoknadsfristVilkaretOppfyltForm.module.css';
-
-const findRadioButtonTextCode = (erVilkarOk?: boolean): string =>
-  erVilkarOk
-    ? 'ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt'
-    : 'ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt';
-
 const findSoknadsfristDate = (mottattDato: string, antallDagerSoknadLevertForSent: number): string =>
-  dayjs(mottattDato).subtract(antallDagerSoknadLevertForSent, 'days').format(ISO_DATE_FORMAT);
+  dayjs(mottattDato).subtract(antallDagerSoknadLevertForSent, 'days').format(DDMMYY_DATE_FORMAT);
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -50,21 +44,24 @@ const findDate = (familiehendelse: FamilieHendelse): string | undefined => {
   );
 };
 
-const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: VilkarUtfallType): FormValues => ({
-  erVilkarOk: aksjonspunkter[0]?.status === 'OPPR' ? undefined : 'OPPFYLT' === status,
+const buildInitialValues = (
+  vilkår: Vilkar | undefined,
+  aksjonspunkter: Aksjonspunkt[],
+  behandlingsresultat: Behandlingsresultat | undefined,
+): FormValues => ({
+  ...VilkarResultPicker.buildInitialValues(vilkår, aksjonspunkter, behandlingsresultat),
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
 const transformValues = (values: FormValues): SoknadsfristAp => ({
-  erVilkarOk: values.erVilkarOk || false,
   kode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
+  ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
 });
 
 interface Props {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  status: VilkarUtfallType;
 }
 
 /**
@@ -72,13 +69,22 @@ interface Props {
  *
  * Setter opp aksjonspunktet for vurdering av søknadsfristvilkåret.
  */
-export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehendelse, status }: Props) => {
+export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehendelse }: Props) => {
   const intl = useIntl();
 
-  const { isSubmittable, aksjonspunkterForPanel, behandling, isReadOnly, submitCallback, alleKodeverk } =
-    usePanelDataContext<SoknadsfristAp>();
+  const {
+    isSubmittable,
+    aksjonspunkterForPanel,
+    vilkårForPanel,
+    harÅpentAksjonspunkt,
+    alleMerknaderFraBeslutter,
+    behandling,
+    isReadOnly,
+    submitCallback,
+  } = usePanelDataContext<SoknadsfristAp>();
 
-  const initialValues = buildInitialValues(aksjonspunkterForPanel, status);
+  const vilkår = vilkårForPanel[0];
+  const initialValues = buildInitialValues(vilkår, aksjonspunkterForPanel, behandling.behandlingsresultat);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
@@ -88,8 +94,40 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
   const dato = findDate(gjeldendeFamiliehendelse);
   const textCode = findTextCode(gjeldendeFamiliehendelse);
 
-  const erVilkarOk = formMethods.watch('erVilkarOk');
   const antallDagerSoknadLevertForSent = soknad.søknadsfrist.dagerOversittetFrist;
+
+  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
+  );
+  const rendreFakta = () => (
+    <FaktaKort label={intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.FaktaKortTittel' })}>
+      <VStack gap="space-16">
+        <BodyShort>
+          <FormattedMessage
+            id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart"
+            values={{
+              numberOfDays: antallDagerSoknadLevertForSent,
+            }}
+          />
+        </BodyShort>
+        <HStack gap="space-24">
+          <ReadOnlyField
+            label={intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Søknadsfrist' })}
+            value={findSoknadsfristDate(soknad.mottattDato, antallDagerSoknadLevertForSent)}
+          />
+          <ReadOnlyField
+            label={intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}
+            value={<DateLabel dateString={soknad.mottattDato} />}
+          />
+          <ReadOnlyField label={intl.formatMessage({ id: textCode })} value={dato && <DateLabel dateString={dato} />} />
+        </HStack>
+        <ReadOnlyField
+          label={intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}
+          value={soknad.begrunnelseForSenInnsending ?? '-'}
+        />
+      </VStack>
+    </FaktaKort>
+  );
 
   return (
     <RhfForm
@@ -97,90 +135,40 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="space-16">
-        <VStack gap="space-4">
-          <Heading size="small" level="2">
-            {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Soknadsfrist' })}
-          </Heading>
-          <span className="typo-normal">
-            <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart1" />
-            <span className={styles['days']}>
-              <FormattedMessage
-                id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart2"
-                values={{ numberOfDays: antallDagerSoknadLevertForSent }}
-              />
-            </span>
-            <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart3" />
-            {soknad.mottattDato && antallDagerSoknadLevertForSent && (
-              <DateLabel dateString={findSoknadsfristDate(soknad.mottattDato, antallDagerSoknadLevertForSent)} />
-            )}
-          </span>
+      <ProsessPanelTemplate
+        title={intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Soknadsfrist' })}
+        aksjonspunkterForPanel={aksjonspunkterForPanel}
+        vilkår={vilkår}
+        harÅpentAksjonspunkt={harÅpentAksjonspunkt}
+        isSubmittable={isSubmittable}
+        isReadOnly={isReadOnly}
+        erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
+        isDirty={formMethods.formState.isDirty}
+        isSubmitting={formMethods.formState.isSubmitting}
+        rendreFakta={rendreFakta}
+      >
+        <VStack gap="space-16">
+          {harÅpentAksjonspunkt && (
+            <AksjonspunktHelpTextHTML>
+              <Heading size="xsmall" level="3">
+                {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Consider' })}
+              </Heading>
+              <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question1" />
+              <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question2" />
+              <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question3" />
+            </AksjonspunktHelpTextHTML>
+          )}
+          <VilkarResultPicker
+            vilkår={vilkår}
+            isReadOnly={isReadOnly}
+            customVilkårOppfyltText={<FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt" />}
+            customVilkårIkkeOppfyltText={
+              <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt" values={{ b: BTag }} />
+            }
+          />
+          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
         </VStack>
-        <HStack justify="space-between">
-          <Box.New className={styles['panel']}>
-            <Heading size="small" level="3">
-              {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Consider' })}
-            </Heading>
-            <ul className={styles['hyphen']}>
-              <li>
-                <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question1" />
-              </li>
-              <li>
-                <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question2" />
-              </li>
-              <li>
-                <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question3" />
-              </li>
-            </ul>
-          </Box.New>
-          <VStack gap="space-24">
-            <VStack gap="space-4">
-              <Detail>{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}</Detail>
-              <span className="typo-normal">{soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}</span>
-            </VStack>
-            <VStack gap="space-4">
-              <Detail>
-                {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}
-              </Detail>
-              <span className="typo-normal">{soknad.begrunnelseForSenInnsending ?? '-'}</span>
-            </VStack>
-          </VStack>
-          <VStack gap="space-4">
-            {textCode && <Detail>{intl.formatMessage({ id: textCode })}</Detail>}
-            <span className="typo-normal">{dato && <DateLabel dateString={dato} />}</span>
-          </VStack>
-        </HStack>
-        <RhfRadioGroup
-          name="erVilkarOk"
-          control={formMethods.control}
-          legend=""
-          hideLegend
-          validate={[required]}
-          readOnly={isReadOnly}
-        >
-          <HStack gap="space-16">
-            <Radio value={true} size="small">
-              <FormattedMessage id={findRadioButtonTextCode(true)} values={{ b: BTag }} />
-            </Radio>
-            <Radio value={false} size="small">
-              <FormattedMessage id={findRadioButtonTextCode(false)} values={{ b: BTag }} />
-            </Radio>
-          </HStack>
-        </RhfRadioGroup>
-        {isReadOnly && erVilkarOk === false && !!behandling.behandlingsresultat?.avslagsarsak && (
-          <BodyShort size="small">
-            {alleKodeverk['Avslagsårsak'].find(type => type.kode === behandling.behandlingsresultat?.avslagsarsak)
-              ?.navn ?? ''}
-          </BodyShort>
-        )}
-        <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
-        <ProsessStegSubmitButton
-          isReadOnly={isReadOnly}
-          isSubmittable={isSubmittable}
-          isSubmitting={formMethods.formState.isSubmitting}
-          isDirty={formMethods.formState.isDirty}
-        />
-      </VStack>
+      </ProsessPanelTemplate>
     </RhfForm>
   );
 };

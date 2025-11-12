@@ -9,6 +9,7 @@
   "ProsessPanelTemplate.ErOppfylt": "Vilkåret er oppfylt",
   "ProsessPanelTemplate.ErIkkeOppfylt": "Vilkåret er avslått",
   "ProsessPanelTemplate.IkkeBehandlet": "Ikke behandlet",
+  "ProsessPanelTemplate.UnderBehandling": "Under behandling",
 
   "VilkarResultPicker.Arsak": "Avslagsårsak",
   "VilkarResultPicker.OpphorFom": "Dato for opphør av medlemskapet",

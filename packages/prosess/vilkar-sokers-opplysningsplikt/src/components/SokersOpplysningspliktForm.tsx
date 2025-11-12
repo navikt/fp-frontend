@@ -13,7 +13,13 @@ import {
   VilkarResultPicker,
   type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandlingsresultat, Soknad } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  ArbeidsgiverOpplysningerPerId,
+  Behandlingsresultat,
+  Soknad,
+  Vilkar,
+} from '@navikt/fp-types';
 import type { OverstyringSokersOpplysingspliktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -23,7 +29,6 @@ type FormValues = ProsessStegBegrunnelseTextFieldFormValues & VilkarResultPicker
 
 interface Props {
   søknad: Soknad;
-  status: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -32,11 +37,12 @@ interface Props {
  *
  * Informasjon om søkers informasjonsplikt er godkjent eller avvist.
  */
-export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplysningerPerId }: Props) => {
+export const SokersOpplysningspliktForm = ({ søknad, arbeidsgiverOpplysningerPerId }: Props) => {
   const intl = useIntl();
 
   const {
     aksjonspunkterForPanel,
+    vilkårForPanel,
     isSubmittable,
     submitCallback,
     alleMerknaderFraBeslutter,
@@ -52,13 +58,11 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
   const hasSoknad = harSoknad(søknad);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
-
+  const vilkår = vilkårForPanel[0];
   const formMethods = useForm<FormValues>({
     defaultValues:
-      mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat),
+      mellomlagretFormData ?? buildInitialValues(vilkår, aksjonspunkterForPanel, behandling.behandlingsresultat),
   });
-
-  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
   return (
     <RhfForm
@@ -68,10 +72,11 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SokersOpplysningspliktForm.SokersOpplysningsplikt' })}
+        aksjonspunkterForPanel={aksjonspunkterForPanel}
+        vilkår={vilkår}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
@@ -103,12 +108,12 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
 const harSoknad = (soknad: Soknad): boolean => isObject(soknad);
 
 const buildInitialValues = (
+  vilkår: Vilkar | undefined,
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
   behandlingsresultat: Behandlingsresultat | undefined,
 ): FormValues => {
   return {
-    ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+    ...VilkarResultPicker.buildInitialValues(vilkår, aksjonspunkter, behandlingsresultat),
     ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
   };
 };
