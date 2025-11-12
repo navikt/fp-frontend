@@ -5,6 +5,7 @@ import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { LosUrl } from '@navikt/fp-los-saksbehandler';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -28,7 +29,6 @@ import { FagsakData } from '../fagsak/FagsakData';
 import { FagsakProfileIndex } from './FagsakProfileIndex';
 
 import messages from '../../i18n/nb_NO.json';
-import { LosUrl } from '@navikt/fp-los-saksbehandler';
 
 const withIntl = getIntlDecorator(messages);
 

@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
+import { LosUrl } from '@navikt/fp-los-saksbehandler';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -23,7 +24,6 @@ import { RequestPendingProvider } from '../data/polling/RequestPendingContext';
 import { FagsakIndex } from './FagsakIndex';
 
 import messages from '../../i18n/nb_NO.json';
-import { LosUrl } from '@navikt/fp-los-saksbehandler';
 
 const withIntl = getIntlDecorator(messages);
 
