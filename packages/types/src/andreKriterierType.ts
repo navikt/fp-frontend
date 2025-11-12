@@ -26,4 +26,5 @@ export type AndreKriterierType =
   | 'VURDER_SYKDOM'
   | 'VURDER_FORMKRAV'
   | 'IKKE_VARSLET'
-  | 'OVER_FIRE_RETTSGEBYR';
+  | 'OVER_FIRE_RETTSGEBYR'
+  | 'HASTER';

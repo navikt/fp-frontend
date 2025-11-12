@@ -1,11 +1,11 @@
 import { MemoryRouter } from 'react-router-dom';
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { cleanUrl, type JsonBodyType } from 'msw';
-import { http, HttpResponse } from 'msw';
+import { cleanUrl, http, HttpResponse, type JsonBodyType } from 'msw';
 
 import { RestApiErrorProvider } from '@navikt/fp-app-felles';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
+import { LosUrl } from '@navikt/fp-los-saksbehandler';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
 import {
@@ -28,6 +28,7 @@ import {
   kontrollerFaktaPeriode,
   medlemskap,
   omsorgOgRett,
+  oppgaverForFagsaker,
   opptjening,
   personoversikt,
   soknad,
@@ -101,6 +102,7 @@ const HANDLERS = [
       pollIntervalMillis: 100000000,
     }),
   ),
+  http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json(oppgaverForFagsaker)),
   http.get('https://www.test.com/api/result', () => HttpResponse.json(behandling)),
   ...[
     ...initFetchFpsak.links,
@@ -108,7 +110,7 @@ const HANDLERS = [
     ...initFetchFptilbake.links,
     ...initFetchFptilbake.sakLinks,
     ...behandling.links,
-  ].map(link => http.all(cleanUrl(wrapUrl(link.href)), getMockResponse(link.rel))),
+  ].map(link => http.all(encodeURI(cleanUrl(wrapUrl(link.href))), getMockResponse(link.rel))),
 ];
 
 const meta = {

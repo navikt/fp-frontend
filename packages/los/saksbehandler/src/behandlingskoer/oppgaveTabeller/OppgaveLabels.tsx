@@ -74,6 +74,7 @@ const MAP_ANDRE_KRITERIER_TIL_LABEL_FARGE_SORTERT = {
   ['SAMMENSATT_KONTROLL']: 'alt2',
   ['NÆRING']: 'alt2',
   ['UTBETALING_TIL_BRUKER']: 'alt2',
+  ['HASTER']: 'alt2',
 } satisfies Record<AndreKriterierType, React.ComponentProps<typeof Tag>['variant']>;
 
 const kriterier = Object.keys(MAP_ANDRE_KRITERIER_TIL_LABEL_FARGE_SORTERT);

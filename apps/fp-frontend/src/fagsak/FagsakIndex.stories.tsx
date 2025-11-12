@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
+import { LosUrl } from '@navikt/fp-los-saksbehandler';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -16,7 +17,7 @@ import type { BehandlingTillatteOperasjoner, Fagsak, FagsakBehandlingDto } from 
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { behandling, initFetchFpsak, initFetchFptilbake } from '../../.storybook/testdata';
+import { behandling, initFetchFpsak, initFetchFptilbake, oppgaverForFagsaker } from '../../.storybook/testdata';
 import { BehandlingUrl } from '../data/behandlingApi';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { RequestPendingProvider } from '../data/polling/RequestPendingContext';
@@ -139,6 +140,7 @@ const meta = {
         http.get(getHref(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(FAGSAK)),
         http.get(getHref(FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE), () => HttpResponse.json(fagsakFpTilbake)),
         http.post(BehandlingUrl.BEHANDLING, () => HttpResponse.json(behandling)),
+        http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json(oppgaverForFagsaker)),
       ],
     },
   },

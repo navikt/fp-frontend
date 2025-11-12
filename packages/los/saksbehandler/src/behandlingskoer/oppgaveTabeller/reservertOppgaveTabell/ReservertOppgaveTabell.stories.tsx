@@ -40,7 +40,6 @@ const RESERVERTE_OPPGAVER = [
     erTilSaksbehandling: true,
     behandlingId: '2',
     andreKriterier: [],
-    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
   {
     id: 3,
@@ -59,7 +58,6 @@ const RESERVERTE_OPPGAVER = [
     erTilSaksbehandling: true,
     behandlingId: '2',
     andreKriterier: [],
-    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
   {
     id: 4,
@@ -78,7 +76,6 @@ const RESERVERTE_OPPGAVER = [
     erTilSaksbehandling: true,
     behandlingId: '2',
     andreKriterier: ['REVURDERING_INNTEKTSMELDING'],
-    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
 ] satisfies Oppgave[];
 

@@ -17,6 +17,7 @@ export { inntektArbeidYtelse } from './inntektArbeidYtelse';
 export { kontrollerFaktaPeriode } from './kontrollerFaktaPeriode';
 export { medlemskap } from './medlemskap';
 export { omsorgOgRett } from './omsorgOgRett';
+export { oppgaverForFagsaker } from './oppgaverForFagsaker';
 export { opptjening } from './opptjening';
 export { personoversikt } from './personoversikt';
 export { soknad } from './soknad';

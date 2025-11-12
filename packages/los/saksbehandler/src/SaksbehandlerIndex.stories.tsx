@@ -3,7 +3,7 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import { type Oppgave } from '@navikt/fp-los-felles';
+import { type Oppgave, type OppgaveMedStatus } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
@@ -54,7 +54,6 @@ const OPPGAVER_TIL_BEHANDLING = [
     erTilSaksbehandling: true,
     behandlingId: '12',
     andreKriterier: ['REVURDERING_INNTEKTSMELDING'],
-    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
   {
     id: 4,
@@ -72,7 +71,6 @@ const OPPGAVER_TIL_BEHANDLING = [
     erTilSaksbehandling: true,
     behandlingId: '12',
     andreKriterier: [],
-    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
   {
     id: 3,
@@ -90,7 +88,6 @@ const OPPGAVER_TIL_BEHANDLING = [
     erTilSaksbehandling: true,
     behandlingId: '34',
     andreKriterier: [],
-    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
 ] satisfies Oppgave[];
 
@@ -118,7 +115,6 @@ const RESERVERTE_OPPGAVER = [
     erTilSaksbehandling: true,
     behandlingId: '2',
     andreKriterier: ['REVURDERING_INNTEKTSMELDING'],
-    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
 ] satisfies Oppgave[];
 
@@ -149,7 +145,7 @@ const BEHANDLEDE_OPPGAVER = [
       erReservert: false,
     },
     oppgaveBehandlingStatus: 'UNDER_ARBEID',
-  } as Oppgave,
+  } as OppgaveMedStatus,
   {
     id: 2,
     personnummer: '334342323',
@@ -159,7 +155,7 @@ const BEHANDLEDE_OPPGAVER = [
       erReservert: false,
     },
     oppgaveBehandlingStatus: 'UNDER_ARBEID',
-  } as Oppgave,
+  } as OppgaveMedStatus,
 ];
 
 const meta = {
@@ -194,7 +190,7 @@ const meta = {
         ),
         http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
         http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
-        http.get(LosUrl.BEHANDLEDE_OPPGAVER, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
+        http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
         http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
       ],
     },

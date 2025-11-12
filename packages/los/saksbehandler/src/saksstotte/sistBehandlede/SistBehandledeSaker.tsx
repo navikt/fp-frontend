@@ -15,7 +15,7 @@ import { BodyShort, Heading, HStack, Spacer, Switch, Table, VStack } from '@navi
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { type Oppgave } from '@navikt/fp-los-felles';
+import { type OppgaveMedStatus } from '@navikt/fp-los-felles';
 
 import { behandlendeOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
@@ -60,7 +60,7 @@ const SistBehandledeSakerContent = ({
   åpneFagsak,
 }: {
   isFetching: boolean;
-  sisteReserverte: Oppgave[];
+  sisteReserverte: OppgaveMedStatus[];
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }) => {
   if (isFetching) return <LoadingPanel />;
@@ -117,7 +117,7 @@ const SistBehandledeSakerContent = ({
   );
 };
 
-const StatusIcon = ({ oppgave }: { oppgave: Oppgave }) => {
+const StatusIcon = ({ oppgave }: { oppgave: OppgaveMedStatus }) => {
   const oppgaveBehandlingStatuser = useLosKodeverk('OppgaveBehandlingStatus');
   const statusNavn = oppgaveBehandlingStatuser.find(obs => obs.kode === oppgave.oppgaveBehandlingStatus)?.navn ?? '-';
 

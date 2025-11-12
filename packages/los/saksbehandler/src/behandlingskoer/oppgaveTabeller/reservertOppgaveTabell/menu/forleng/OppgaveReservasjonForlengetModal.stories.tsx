@@ -43,7 +43,6 @@ export const Default: Story = {
       erTilSaksbehandling: true,
       behandlingId: '1',
       andreKriterier: [],
-      oppgaveBehandlingStatus: 'UNDER_ARBEID',
     },
     closeModal: action('button-click'),
   },

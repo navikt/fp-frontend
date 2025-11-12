@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { type Oppgave } from '@navikt/fp-los-felles';
+import { type OppgaveMedStatus } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
@@ -36,7 +36,7 @@ export const Default: Story = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.BEHANDLEDE_OPPGAVER, () =>
+        http.get(LosUrl.TIDLIGERE_RESERVERTE, () =>
           HttpResponse.json([
             {
               id: 1,
@@ -48,7 +48,7 @@ export const Default: Story = {
                 erReservert: true,
                 reservertAvNavn: 'Ola Nordmann',
               },
-            } as Oppgave,
+            } as OppgaveMedStatus,
           ]),
         ),
       ],
@@ -61,7 +61,7 @@ export const IngenBehandlinger: Story = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.BEHANDLEDE_OPPGAVER, () => HttpResponse.json([])),
+        http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json<OppgaveMedStatus[]>([])),
       ],
     },
   },
