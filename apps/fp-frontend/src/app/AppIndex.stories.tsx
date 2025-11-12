@@ -5,6 +5,7 @@ import { cleanUrl, http, HttpResponse, type JsonBodyType } from 'msw';
 
 import { RestApiErrorProvider } from '@navikt/fp-app-felles';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
+import { LosUrl } from '@navikt/fp-los-saksbehandler';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
 import {
@@ -37,7 +38,6 @@ import { BehandlingRel, BehandlingUrl } from '../data/behandlingApi';
 import { FagsakRel, FagsakUrl, wrapUrl } from '../data/fagsakApi';
 import { AppIndexWrapper } from './AppIndex';
 
-const OPPGAVER_FOR_FAGSAKER = wrapUrl('/fplos/api/saksbehandler/oppgaver/oppgaver-for-fagsaker');
 const ressursMap = {
   [FagsakUrl.INIT_FETCH]: initFetchFpsak,
   [FagsakUrl.INIT_FETCH_FPTILBAKE]: initFetchFptilbake,
@@ -102,7 +102,7 @@ const HANDLERS = [
       pollIntervalMillis: 100000000,
     }),
   ),
-  http.get(OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json(oppgaverForFagsaker)),
+  http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json(oppgaverForFagsaker)),
   http.get('https://www.test.com/api/result', () => HttpResponse.json(behandling)),
   ...[
     ...initFetchFpsak.links,
