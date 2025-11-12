@@ -1,8 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { cleanUrl, type JsonBodyType } from 'msw';
-import { http, HttpResponse } from 'msw';
+import { cleanUrl, http, HttpResponse, type JsonBodyType } from 'msw';
 
 import { RestApiErrorProvider } from '@navikt/fp-app-felles';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
@@ -28,6 +27,7 @@ import {
   kontrollerFaktaPeriode,
   medlemskap,
   omsorgOgRett,
+  oppgaverForFagsaker,
   opptjening,
   personoversikt,
   soknad,
@@ -37,6 +37,7 @@ import { BehandlingRel, BehandlingUrl } from '../data/behandlingApi';
 import { FagsakRel, FagsakUrl, wrapUrl } from '../data/fagsakApi';
 import { AppIndexWrapper } from './AppIndex';
 
+const OPPGAVER_FOR_FAGSAKER = wrapUrl('/fplos/api/saksbehandler/oppgaver/oppgaver-for-fagsaker');
 const ressursMap = {
   [FagsakUrl.INIT_FETCH]: initFetchFpsak,
   [FagsakUrl.INIT_FETCH_FPTILBAKE]: initFetchFptilbake,
@@ -101,6 +102,7 @@ const HANDLERS = [
       pollIntervalMillis: 100000000,
     }),
   ),
+  http.get(OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json(oppgaverForFagsaker)),
   http.get('https://www.test.com/api/result', () => HttpResponse.json(behandling)),
   ...[
     ...initFetchFpsak.links,
@@ -108,7 +110,7 @@ const HANDLERS = [
     ...initFetchFptilbake.links,
     ...initFetchFptilbake.sakLinks,
     ...behandling.links,
-  ].map(link => http.all(cleanUrl(wrapUrl(link.href)), getMockResponse(link.rel))),
+  ].map(link => http.all(encodeURI(cleanUrl(wrapUrl(link.href))), getMockResponse(link.rel))),
 ];
 
 const meta = {
