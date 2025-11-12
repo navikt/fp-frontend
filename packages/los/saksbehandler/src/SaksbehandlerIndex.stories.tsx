@@ -3,12 +3,12 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import { type Oppgave, type OppgaveMedStatus } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
+import { type Oppgave, type OppgaveMedStatus } from './typer/oppgaveTsType';
 import type { Saksbehandler } from './typer/saksbehandlerTsType';
 import type { Saksliste } from './typer/sakslisteTsType';
 

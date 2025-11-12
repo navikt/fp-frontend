@@ -2,10 +2,10 @@ import { type IntlShape, useIntl } from 'react-intl';
 
 import { HStack, Tag } from '@navikt/ds-react';
 
-import { type Oppgave } from '@navikt/fp-los-felles';
 import type { AndreKriterierType, LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { useLosKodeverk } from '../../data/useLosKodeverk';
+import { type Oppgave } from '../../typer/oppgaveTsType';
 
 type Props = {
   oppgave: Oppgave;

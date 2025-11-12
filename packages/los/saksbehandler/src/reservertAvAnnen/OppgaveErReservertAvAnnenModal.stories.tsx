@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import type { Oppgave } from '@navikt/fp-los-felles';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
+import type { Oppgave } from '../typer/oppgaveTsType';
 import { OppgaveErReservertAvAnnenModal } from './OppgaveErReservertAvAnnenModal';
 
 import messages from '../../i18n/nb_NO.json';

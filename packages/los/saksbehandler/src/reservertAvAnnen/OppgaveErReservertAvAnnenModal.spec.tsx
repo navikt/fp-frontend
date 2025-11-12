@@ -2,8 +2,7 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import type { Oppgave } from '@navikt/fp-los-felles';
-
+import type { Oppgave } from '../typer/oppgaveTsType';
 import * as stories from './OppgaveErReservertAvAnnenModal.stories';
 
 const { Default } = composeStories(stories);

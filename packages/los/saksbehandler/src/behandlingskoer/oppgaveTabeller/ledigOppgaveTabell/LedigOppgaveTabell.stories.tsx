@@ -7,10 +7,10 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
+import { type Oppgave } from '../../../typer/oppgaveTsType';
 import { LedigOppgaveTabell } from './LedigOppgaveTabell';
 
 import messages from '../../../../i18n/nb_NO.json';

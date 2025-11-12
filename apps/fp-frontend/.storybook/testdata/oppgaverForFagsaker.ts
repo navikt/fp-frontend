@@ -1,4 +1,4 @@
-import type { Oppgave } from '@navikt/fp-los-felles';
+import type { Oppgave } from '@navikt/fp-los-saksbehandler';
 
 export const oppgaverForFagsaker: Oppgave[] = [
   {

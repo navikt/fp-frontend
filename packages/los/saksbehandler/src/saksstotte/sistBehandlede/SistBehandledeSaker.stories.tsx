@@ -4,10 +4,10 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { type OppgaveMedStatus } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
+import { type OppgaveMedStatus } from '../../typer/oppgaveTsType';
 import { SistBehandledeSaker } from './SistBehandledeSaker';
 
 import messages from '../../../i18n/nb_NO.json';
