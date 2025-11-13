@@ -7,7 +7,7 @@ import type { ReservasjonStatus } from '@navikt/fp-los-felles';
 
 import { reserverOppgavePost, sakslisteOptions } from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
-import type { Oppgave} from '../typer/oppgaveTsType';
+import type { Oppgave } from '../typer/oppgaveTsType';
 import type { Saksliste } from '../typer/sakslisteTsType';
 import { SakslistePanel } from './SakslistePanel';
 
