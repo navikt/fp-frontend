@@ -15,10 +15,9 @@ import { BodyShort, Heading, HStack, Spacer, Switch, Table, VStack } from '@navi
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { type OppgaveMedStatus } from '@navikt/fp-los-felles';
-
 import { behandlendeOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
+import { type OppgaveMedStatus } from '../../typer/oppgaveTsType';
 
 import styles from './sistBehandledeSaker.module.css';
 

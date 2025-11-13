@@ -1,14 +1,13 @@
 import { VStack } from '@navikt/ds-react';
 import { useMutation } from '@tanstack/react-query';
 
-import type { Oppgave } from '@navikt/fp-los-felles';
-
 import { getBehandlingskøOppgaveAntall } from '../data/fplosSaksbehandlerApi';
 import {
   getValueFromLocalStorage,
   removeValueFromLocalStorage,
   setValueInLocalStorage,
 } from '../data/localStorageHelper';
+import type { Oppgave } from '../typer/oppgaveTsType';
 import type { Saksliste } from '../typer/sakslisteTsType';
 import { LedigOppgaveTabell } from './oppgaveTabeller/ledigOppgaveTabell/LedigOppgaveTabell';
 import { ReservertOppgaveTabell } from './oppgaveTabeller/reservertOppgaveTabell/ReservertOppgaveTabell';

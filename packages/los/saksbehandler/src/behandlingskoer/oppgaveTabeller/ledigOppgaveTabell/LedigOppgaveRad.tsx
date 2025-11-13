@@ -5,8 +5,7 @@ import { CheckmarkIcon, FilesIcon } from '@navikt/aksel-icons';
 import { BodyShort, CopyButton, HStack, Table, Tooltip } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
-import type { Oppgave } from '@navikt/fp-los-felles';
-
+import type { Oppgave } from '../../../typer/oppgaveTsType';
 import { OppgaveLabels } from '../OppgaveLabels';
 
 import styles from './ledigOppgaveRad.module.css';

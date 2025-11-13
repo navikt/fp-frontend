@@ -1,10 +1,11 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { Oppgave, OppgaveMedStatus, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AlleKodeverkLos, FagsakEnkel } from '@navikt/fp-types';
 
 import type { Driftsmelding } from '../typer/driftsmeldingTsType';
+import type { Oppgave, OppgaveMedStatus } from '../typer/oppgaveTsType';
 import type { Saksbehandler } from '../typer/saksbehandlerTsType';
 import type { Saksliste } from '../typer/sakslisteTsType';
 
@@ -121,13 +122,15 @@ export const opphevReservasjon = (oppgaveId: number) =>
   kyExtended.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, { json: { oppgaveId } });
 
 export const forlengReservasjonPost = (oppgaveId: number) =>
-  kyExtended.post(LosUrl.FORLENG_OPPGAVERESERVASJON, { json: { oppgaveId } }).json<Oppgave[]>();
+  kyExtended.post(LosUrl.FORLENG_OPPGAVERESERVASJON, { json: { oppgaveId } }).json<ReservasjonStatus>();
 
 export const endreReservasjonPost = (oppgaveId: number, reserverTil: string) =>
-  kyExtended.post(LosUrl.ENDRE_OPPGAVERESERVASJON, { json: { oppgaveId, reserverTil } }).json<Oppgave[]>();
+  kyExtended.post(LosUrl.ENDRE_OPPGAVERESERVASJON, { json: { oppgaveId, reserverTil } }).json<ReservasjonStatus>();
 
 export const flyttReservasjonPost = (oppgaveId: number, brukerIdent: string, begrunnelse: string) =>
-  kyExtended.post(LosUrl.FLYTT_RESERVASJON, { json: { oppgaveId, brukerIdent, begrunnelse } }).json<Oppgave[]>();
+  kyExtended
+    .post(LosUrl.FLYTT_RESERVASJON, { json: { oppgaveId, brukerIdent, begrunnelse } })
+    .json<ReservasjonStatus>();
 
 export const reserverOppgavePost = (oppgaveId: number) =>
   kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: { oppgaveId } }).json<ReservasjonStatus>();

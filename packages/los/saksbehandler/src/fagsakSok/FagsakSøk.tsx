@@ -2,9 +2,9 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, VStack } from '@navikt/ds-react';
 
-import type { Oppgave } from '@navikt/fp-los-felles';
 import type { FagsakEnkel } from '@navikt/fp-types';
 
+import type { Oppgave } from '../typer/oppgaveTsType';
 import { SøkForm, type SøkFormValues } from './form/SøkForm';
 import { PersonInfo } from './person/PersonInfo';
 import { SøkResultat } from './resultat/SøkResultat';

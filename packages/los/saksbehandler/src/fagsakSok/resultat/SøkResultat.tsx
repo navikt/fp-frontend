@@ -7,10 +7,10 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { Oppgave } from '@navikt/fp-los-felles';
 import type { FagsakEnkel } from '@navikt/fp-types';
 
 import { useLosKodeverk } from '../../data/useLosKodeverk';
+import type { Oppgave } from '../../typer/oppgaveTsType';
 
 const sorterFagsaker = (fagsak1: FagsakEnkel, fagsak2: FagsakEnkel) => {
   if (fagsak1.status === 'AVSLU' && fagsak2.status !== 'AVSLU') {

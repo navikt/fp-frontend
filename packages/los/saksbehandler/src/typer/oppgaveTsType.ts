@@ -1,18 +1,5 @@
+import type { ReservasjonStatus } from '@navikt/fp-los-felles';
 import type { AndreKriterierType, BehandlingType, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-types';
-
-export type ReservasjonStatus = {
-  erReservert: boolean;
-  reservertTilTidspunkt?: string;
-  erReservertAvInnloggetBruker?: boolean;
-  reservertAvUid?: string;
-  reservertAvNavn?: string;
-  flyttetReservasjon?: {
-    tidspunkt: string;
-    uid: string;
-    navn: string;
-    begrunnelse: string;
-  } | null;
-};
 
 export type Oppgave = {
   id: number;

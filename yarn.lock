@@ -2366,7 +2366,6 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
-    "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": 10.0.2
     "@navikt/ft-form-validators": 4.2.13
     "@navikt/ft-ui-komponenter": 6.2.10

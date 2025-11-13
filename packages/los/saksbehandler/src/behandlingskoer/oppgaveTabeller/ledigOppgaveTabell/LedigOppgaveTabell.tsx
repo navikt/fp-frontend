@@ -2,8 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
 
-import { type Oppgave } from '@navikt/fp-los-felles';
-
+import { type Oppgave } from '../../../typer/oppgaveTsType';
 import { BehandlingPollingTimoutModal } from '../../timeoutModal/BehandlingPollingTimoutModal';
 import { LedigOppgaveRad } from './LedigOppgaveRad';
 import { useOppgavePolling } from './useOppgavePolling';
