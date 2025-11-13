@@ -82,9 +82,7 @@ export const fagsakFullFpsak: Fagsak = {
         id: 999951,
         type: 'IKKE_FASTSATT',
 
-        rettenTil: '-',
         konsekvenserForYtelsen: [],
-        vedtaksbrev: '-',
 
         harRedigertVedtaksbrev: false,
         erRevurderingMedUendretUtfall: false,
