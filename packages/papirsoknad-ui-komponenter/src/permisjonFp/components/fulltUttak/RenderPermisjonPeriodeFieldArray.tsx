@@ -59,7 +59,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
   const morsAktivitetTyper = alleKodeverk['MorsAktivitet'];
 
   if (morsAktivitetTyper.filter(({ kode }) => kode === '-').length === 0) {
-    morsAktivitetTyper.unshift({ kode: '-', navn: '', kodeverk: '' });
+    morsAktivitetTyper.unshift({ kode: '-', navn: '' });
   }
 
   const {

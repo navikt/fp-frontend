@@ -52,5 +52,4 @@ type EnumOrUnknown<T extends TilbakekrevingKodeverkType> = T extends keyof Kodev
 export type KodeverkMedNavnTilbakekreving<T extends TilbakekrevingKodeverkType> = Readonly<{
   kode: EnumOrUnknown<T>;
   navn: string;
-  kodeverk: string;
 }>;

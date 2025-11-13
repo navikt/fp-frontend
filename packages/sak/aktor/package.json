@@ -23,9 +23,9 @@
     "@navikt/ds-react": "7.33.0",
     "@navikt/fp-sak-visittkort": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-plattform-komponenter": "10.1.14",
-    "@navikt/ft-ui-komponenter": "6.2.10",
-    "@navikt/ft-utils": "3.8.12",
+    "@navikt/ft-plattform-komponenter": "10.1.15",
+    "@navikt/ft-ui-komponenter": "6.2.11",
+    "@navikt/ft-utils": "3.8.13",
     "react": "19.2.0",
     "react-intl": "7.1.14"
   },

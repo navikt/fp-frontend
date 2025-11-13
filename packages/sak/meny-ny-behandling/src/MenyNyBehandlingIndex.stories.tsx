@@ -53,12 +53,10 @@ export const ForTilbakekreving: Story = {
     tilbakekrevingRevurderingArsaker: [
       {
         kode: 'RE_KLAGE_KA',
-        kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage KA',
       },
       {
         kode: 'RE_KLAGE_NFP',
-        kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage NFP',
       },
     ],

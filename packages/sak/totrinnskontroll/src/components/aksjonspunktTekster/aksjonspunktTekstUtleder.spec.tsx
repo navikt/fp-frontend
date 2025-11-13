@@ -420,7 +420,6 @@ describe('aksjonspunktTekstUtleder', () => {
       {
         kode: 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD',
         navn: 'Vurder tidsbegrenset arbeidsforhold',
-        kodeverk: '',
       },
     ] satisfies KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
     const aksjonspunkt = {
@@ -440,7 +439,6 @@ describe('aksjonspunktTekstUtleder', () => {
       {
         kode: 'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON',
         navn: 'Vurder at og fl',
-        kodeverk: '',
       },
     ] satisfies KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
     const aksjonspunkt = {
@@ -458,12 +456,10 @@ describe('aksjonspunktTekstUtleder', () => {
       {
         kode: 'VURDER_BESTEBEREGNING' satisfies FaktaOmBeregningTilfelle,
         navn: 'Vurder besteberegning',
-        kodeverk: '',
       },
       {
         kode: 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD' satisfies FaktaOmBeregningTilfelle,
         navn: 'Vurder tidsbegrenset arbeidsforhold',
-        kodeverk: '',
       },
     ] satisfies KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
 
