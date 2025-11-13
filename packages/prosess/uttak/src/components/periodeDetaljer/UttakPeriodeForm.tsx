@@ -13,7 +13,7 @@ import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   KodeverkMedNavn,
-  PeriodeResultatÅrsakKodeverk,
+  PeriodeResultatÅrsakMuligeÅrsaker,
   PeriodeSoker,
   PeriodeSokerAktivitet,
   UtsettelseArsakCode,
@@ -31,7 +31,7 @@ const maxLength1500 = maxLength(1500);
 
 const erPeriodeOppfylt = (
   valgtPeriode: PeriodeSoker,
-  utfallKoder: PeriodeResultatÅrsakKodeverk[],
+  utfallKoder: PeriodeResultatÅrsakMuligeÅrsaker[],
 ): boolean | undefined => {
   if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === 'INNVILGET') {
     return true;
@@ -55,42 +55,52 @@ const erPeriodeOppfylt = (
   return false;
 };
 
-const sorterÅrsakKodeverk = (a: PeriodeResultatÅrsakKodeverk, b: PeriodeResultatÅrsakKodeverk): number => {
+const sorterÅrsakKodeverk = (
+  a: PeriodeResultatÅrsakMuligeÅrsaker,
+  b: PeriodeResultatÅrsakMuligeÅrsaker,
+  alleKodeverk: AlleKodeverk,
+): number => {
   if (a.sortering < b.sortering) {
     return -1;
   }
   if (a.sortering > b.sortering) {
     return 1;
   }
-  if (a.navn < b.navn) {
+  const navnA = alleKodeverk['PeriodeResultatÅrsak'].find(k => k.kode === a.kode)?.navn ?? '';
+  const navnB = alleKodeverk['PeriodeResultatÅrsak'].find(k => k.kode === b.kode)?.navn ?? '';
+  if (navnA < navnB) {
     return -1;
   }
-  if (a.navn > b.navn) {
+  if (navnA > navnB) {
     return 1;
   }
   return 0;
 };
 
 const lagOptionsTilPeriodeÅrsakSelect = (
-  årsakKoder: PeriodeResultatÅrsakKodeverk[],
+  årsakKoder: PeriodeResultatÅrsakMuligeÅrsaker[],
   periodeFom: string,
   utfallType: string,
   aarsakFilter: AarsakFilter,
   periodeType: UttakPeriodeType,
+  alleKodeverk: AlleKodeverk,
   utsettelseType?: string,
 ): ReactElement[] => {
-  årsakKoder.sort(sorterÅrsakKodeverk);
+  årsakKoder.sort((a, b) => sorterÅrsakKodeverk(a, b, alleKodeverk));
 
   const filteredNyKodeArray = årsakKoder
     .filter(kodeItem => !utfallType || kodeItem.utfallType === utfallType)
     .filter(getFiltrerPåGyldighetForLovendringer(aarsakFilter, periodeFom))
     .filter(getFiltrerPåSynlighet(aarsakFilter));
 
-  const mapTilOption = (kodeverk: KodeverkMedNavn<'PeriodeResultatÅrsak'>) => (
-    <option value={kodeverk.kode} key={kodeverk.kode}>
-      {kodeverk.navn}
-    </option>
-  );
+  const mapTilOption = (kodeverk: PeriodeResultatÅrsakMuligeÅrsaker) => {
+    const navn = alleKodeverk['PeriodeResultatÅrsak'].find(k => k.kode === kodeverk.kode)?.navn ?? '';
+    return (
+      <option value={kodeverk.kode} key={kodeverk.kode}>
+        {navn}
+      </option>
+    );
+  };
 
   if (utsettelseType && utsettelseType !== '-') {
     return filteredNyKodeArray.filter(kv => kv.uttakTyper.includes('UTSETTELSE')).map(mapTilOption);
@@ -103,7 +113,7 @@ const lagOptionsTilPeriodeÅrsakSelect = (
 
 const getFiltrerPåGyldighetForLovendringer =
   (aarsakFilter: AarsakFilter, periodeFom: string) =>
-  (kodeItem: PeriodeResultatÅrsakKodeverk): boolean => {
+  (kodeItem: PeriodeResultatÅrsakMuligeÅrsaker): boolean => {
     if (!dayjs(periodeFom).isAfter(aarsakFilter.kreverSammenhengendeUttakTom)) {
       return kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK');
     }
@@ -114,7 +124,7 @@ const getFiltrerPåGyldighetForLovendringer =
 
 const getFiltrerPåSynlighet =
   (aarsakFilter: AarsakFilter) =>
-  (kodeItem: PeriodeResultatÅrsakKodeverk): boolean => {
+  (kodeItem: PeriodeResultatÅrsakMuligeÅrsaker): boolean => {
     return aarsakFilter.søkerErMor
       ? kodeItem.synligForRolle.includes('MOR')
       : kodeItem.synligForRolle.includes('IKKE_MOR');
@@ -210,7 +220,7 @@ const hentSorterAktiviteterFn =
 const byggDefaultValues = (
   valgtPeriode: PeriodeSoker,
   sorterteAktiviteter: PeriodeSokerAktivitet[],
-  periodeResultatårsakKoder: PeriodeResultatÅrsakKodeverk[],
+  periodeResultatårsakKoder: PeriodeResultatÅrsakMuligeÅrsaker[],
 ): UttakAktivitetType => {
   const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0]?.stønadskontoType === '-';
 
@@ -271,6 +281,7 @@ interface Props {
   oppdaterPeriode: (perioder: PeriodeSoker[]) => void;
   lukkPeriodeVisning: () => void;
   alleKodeverk: AlleKodeverk;
+  muligeÅrsaker: PeriodeResultatÅrsakMuligeÅrsaker[];
   årsakFilter: AarsakFilter;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   harSoktOmFlerbarnsdager: boolean;
@@ -284,14 +295,13 @@ export const UttakPeriodeForm = ({
   isReadOnly,
   erHovedsøkersPeriode,
   alleKodeverk,
+  muligeÅrsaker,
   årsakFilter,
   arbeidsgiverOpplysningerPerId,
   harSoktOmFlerbarnsdager,
   erTilknyttetStortinget,
 }: Props) => {
   const intl = useIntl();
-
-  const periodeResultatårsakKoder = alleKodeverk['PeriodeResultatÅrsak'];
 
   // Her er det noko rart. Denne må ha useMemo, ellers blir testen aldri ferdig
   const sorterteAktiviteter = useMemo(() => {
@@ -301,7 +311,7 @@ export const UttakPeriodeForm = ({
 
   // Her er det noko rart. Denne må ha useMemo, ellers blir testen aldri ferdig
   const defaultValues = useMemo(
-    () => byggDefaultValues(valgtPeriode, sorterteAktiviteter, periodeResultatårsakKoder),
+    () => byggDefaultValues(valgtPeriode, sorterteAktiviteter, muligeÅrsaker),
     [valgtPeriode, sorterteAktiviteter, arbeidsgiverOpplysningerPerId],
   );
 
@@ -322,24 +332,29 @@ export const UttakPeriodeForm = ({
   const stønadskontoType: UttakPeriodeType = aktiviteter[0]?.stønadskontoType ?? '-';
 
   const periodeÅrsakOptions = lagOptionsTilPeriodeÅrsakSelect(
-    periodeResultatårsakKoder,
+    muligeÅrsaker,
     valgtPeriode.fom,
     erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
     årsakFilter,
     stønadskontoType,
+    alleKodeverk,
     valgtPeriode.utsettelseType,
   );
 
   const graderingAvslagsårsakOptions = lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk);
 
-  const warning1 = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(
+  const utsettelseVedMindreEnn100ProsentStillingWarning = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(
     valgtPeriode.utsettelseType ?? '-',
     valgtPeriode.aktiviteter,
     intl,
     erOppfylt,
   );
-  const warning2 = hentTekstNårUtbetalingPlusArbeidsprosentMerEn100(aktiviteter, sorterteAktiviteter, intl);
-  const warning = warning1 ?? warning2;
+  const utbetalingPlusArbeidsprosentMerEn100Warning = hentTekstNårUtbetalingPlusArbeidsprosentMerEn100(
+    aktiviteter,
+    sorterteAktiviteter,
+    intl,
+  );
+  const warning = utsettelseVedMindreEnn100ProsentStillingWarning ?? utbetalingPlusArbeidsprosentMerEn100Warning;
 
   return (
     <RhfForm

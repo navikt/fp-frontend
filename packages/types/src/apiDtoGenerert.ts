@@ -1700,6 +1700,7 @@ export type tjenester_behandling_svp_VelferdspermisjonDto = {
 };
 
 export type tjenester_behandling_søknad_aksjonspunkt_SoknadsfristAksjonspunktDto = {
+  avslagskode?: string;
   begrunnelse?: string;
   erVilkarOk: boolean;
 };
@@ -2429,8 +2430,9 @@ export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSokersOpply
 };
 
 export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSøknadsfristvilkåretDto = {
+  avslagskode?: string;
   begrunnelse?: string;
-  erVilkarOk?: boolean;
+  erVilkarOk: boolean;
 };
 
 export type tjenester_behandling_ytelsefordeling_OverstyringAvklarStartdatoForPeriodenDto = {
@@ -4567,6 +4569,17 @@ export type foreldrepenger_behandlingslager_uttak_fp_ManuellBehandlingÅrsak =
   | '5031'
   | '5032';
 
+export type foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak_LovEndring =
+  | 'KREVER_SAMMENHENGENDE_UTTAK'
+  | 'FRITT_UTTAK'
+  | 'MINSTERETT_2022';
+
+export type foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak_SynligFor = 'MOR' | 'IKKE_MOR';
+
+export type foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak_UtfallType = 'INNVILGET' | 'AVSLÅTT';
+
+export type foreldrepenger_behandlingslager_uttak_fp_UttakType = 'UTTAK' | 'UTSETTELSE';
+
 export type tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto = {
   arbeidsforholdId?: string;
   arbeidsgiverReferanse?: string;
@@ -4601,6 +4614,7 @@ export type tjenester_behandling_uttak_dto_UttakResultatPeriodeDto = {
 
 export type tjenester_behandling_uttak_dto_UttakResultatPerioderDto = {
   endringsdato: string;
+  muligeÅrsaker: Array<tjenester_behandling_uttak_dto_UttakResultatPerioderDto_PeriodeResultatÅrsakDto>;
   perioderAnnenpart: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeDto>;
   perioderSøker: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeDto>;
   årsakFilter: tjenester_behandling_uttak_dto_UttakResultatPerioderDto_FilterDto;
@@ -4610,6 +4624,16 @@ export type tjenester_behandling_uttak_dto_UttakResultatPerioderDto_FilterDto = 
   kreverSammenhengendeUttakTom: string;
   søkerErMor: boolean;
   utenMinsterett: boolean;
+};
+
+export type tjenester_behandling_uttak_dto_UttakResultatPerioderDto_PeriodeResultatÅrsakDto = {
+  gyldigForLovendringer: Array<foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak_LovEndring>;
+  kode: string;
+  sortering: string;
+  synligForRolle: Array<foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak_SynligFor>;
+  utfallType: foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak_UtfallType;
+  uttakTyper: Array<foreldrepenger_behandlingslager_uttak_fp_UttakType>;
+  valgbarForKonto: Array<foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType>;
 };
 
 export type foreldrepenger_behandlingslager_behandling_vedtak_OppgaveType = 'VUR_KONSEKVENS' | 'VUR_DOKUMENT';

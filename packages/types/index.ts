@@ -228,6 +228,7 @@ export type { OppgaveType } from './src/oppgaveType';
 export type { OppholdÅrsakType } from './src/oppholdÅrsakType';
 export type { Organisasjonstype } from './src/organisasjonstype';
 export type { PeriodeResultatÅrsak } from './src/periodeResultatÅrsak';
+export type { PeriodeResultatÅrsakMuligeÅrsaker } from './src/periodeResultatÅrsakMuligeÅrsaker';
 export type { OppholdstillatelseType } from './src/oppholdstillatelseType';
 export type { PeriodeÅrsak } from './src/periodeÅrsak';
 export type { SivilstandType } from './src/sivilstandType';

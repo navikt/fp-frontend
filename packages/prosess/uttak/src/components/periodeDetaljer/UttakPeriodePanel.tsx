@@ -303,6 +303,7 @@ export const UttakPeriodePanel = ({
               erHovedsøkersPeriode={erHovedsøkersPeriode}
               lukkPeriodeVisning={lukkPeriode}
               alleKodeverk={alleKodeverk}
+              muligeÅrsaker={uttaksresultat.muligeÅrsaker}
               årsakFilter={uttaksresultat.årsakFilter}
               arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
               harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
