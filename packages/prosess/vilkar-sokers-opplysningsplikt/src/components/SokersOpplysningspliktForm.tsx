@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
+import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag, isObject } from '@navikt/ft-utils';
 
@@ -17,7 +17,7 @@ import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandlingsresultat, 
 import type { OverstyringSokersOpplysingspliktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import { MangledeVedlegg } from './MangledeVedlegg.tsx';
+import { MangledeVedlegg } from './MangledeVedlegg';
 
 type FormValues = ProsessStegBegrunnelseTextFieldFormValues & VilkarResultPickerFormValues;
 
@@ -33,10 +33,9 @@ interface Props {
  * Informasjon om søkers informasjonsplikt er godkjent eller avvist.
  */
 export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplysningerPerId }: Props) => {
-  const intl = useIntl();
-
   const {
     aksjonspunkterForPanel,
+    vilkårForPanel,
     isSubmittable,
     submitCallback,
     alleMerknaderFraBeslutter,
@@ -67,21 +66,24 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
       setDataOnUnmount={setMellomlagretFormData}
     >
       <ProsessPanelTemplate
-        title={intl.formatMessage({ id: 'SokersOpplysningspliktForm.SokersOpplysningsplikt' })}
+        title={<FormattedMessage id="SokersOpplysningspliktForm.SokersOpplysningsplikt" />}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
+        lovReferanse={vilkårForPanel[0]?.lovReferanse}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
         originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
+        rendreFakta={<MangledeVedlegg søknad={søknad} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} />}
       >
         <VStack gap="space-16">
-          {søknad.manglendeVedlegg.length > 0 && (
-            <MangledeVedlegg søknad={søknad} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} />
-          )}
+          <Label size="medium">
+            <FormattedMessage id="SokersOpplysningspliktForm.Tittel" />
+          </Label>
           <VilkarResultPicker
             vilkår={undefined}
+            legend={<FormattedMessage id="SokersOpplysningspliktForm.ErVilkåretOppfylt" />}
             isReadOnly={isReadOnly}
             skalKunneInnvilge={hasSoknad}
             customVilkårOppfyltText={<FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />}

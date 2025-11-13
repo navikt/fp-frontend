@@ -58,7 +58,7 @@ export const OverstyringPanel = ({
 
   return (
     <AksjonspunktBox
-      className={styles['aksjonspunktMargin']}
+      className={erOverstyrt ? undefined : styles['aksjonspunktMargin']}
       erAksjonspunktApent={erOverstyrt}
       erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
     >

@@ -1,8 +1,11 @@
 {
+  "SokersOpplysningspliktForm.Tittel": "Manuell saksbehandleroverstyring av automatisk vurdering",
   "SokersOpplysningspliktForm.SokersOpplysningsplikt": "Søkers opplysningsplikt",
   "SokersOpplysningspliktForm.UtfyllendeOpplysninger": "Vurder om søker har oppfylt opplysningsplikten etter § 21-3",
+  "SokersOpplysningspliktForm.ErVilkåretOppfylt": "Er vilkåret oppfylt?",
   "SokersOpplysningspliktForm.VilkarOppfylt": "Vilkåret er oppfylt",
   "SokersOpplysningspliktForm.VilkarIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt {br}Manglende opplysninger, foreslå avslag",
-  "MangledeVedlegg.Tittel": "Manglende dokumentasjon",
+  "SokersOpplysningspliktForm.AksjonspunktTittel": "Det mangler dokumentasjon",
+  "MangledeVedlegg.Tittel": "Dokumenter som mangler",
   "MangledeVedlegg.Arbeidsgiver": " fra {arbeidsgiverNavn}"
 }

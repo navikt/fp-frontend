@@ -3,7 +3,13 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { lagAksjonspunkt, lagVilkår, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import {
+  lagAksjonspunkt,
+  lagVilkår,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
 import type { BehandlingFpSak, Vilkar } from '@navikt/fp-types';
 
 import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
@@ -23,9 +29,7 @@ type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunkt: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      lagAksjonspunkt( AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
-      )    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE)],
     status: 'IKKE_VURDERT',
   },
 };
@@ -34,13 +38,13 @@ export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
       lagAksjonspunkt(
-       AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
+        AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
 
-      {
-        status: 'UTFO',
-        begrunnelse: 'Dette vilkåret er godkjent',
-      },
-      )
+        {
+          status: 'UTFO',
+          begrunnelse: 'Dette vilkåret er godkjent',
+        },
+      ),
     ],
     isReadOnly: true,
     isSubmittable: false,
@@ -58,9 +62,7 @@ export const AvslåttVilkår: Story = {
       },
     } as BehandlingFpSak,
     aksjonspunkterForPanel: [
-     lagAksjonspunkt(
-         AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
-       {
+      lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE, {
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       }),

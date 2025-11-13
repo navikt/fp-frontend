@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Label, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
@@ -67,20 +67,10 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, 
     return null;
   };
 
-  const rendreFakta = () => (
-    <OpptjeningVilkarView
-      months={fastsattOpptjening.opptjeningperiode.måneder}
-      days={fastsattOpptjening.opptjeningperiode.dager}
-      fastsattOpptjeningActivities={fastsattOpptjening.fastsattOpptjeningAktivitetList}
-      opptjeningFomDate={fastsattOpptjening.opptjeningFom}
-      opptjeningTomDate={fastsattOpptjening.opptjeningTom}
-    />
-  );
-
   return (
     <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
       <ProsessPanelTemplate
-        title={intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret' })}
+        title={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret" />}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
@@ -89,21 +79,29 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, 
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
-        rendreFakta={rendreFakta}
-      >
-        <Label size="small">
-          <FormattedMessage
-            id={
-              erSvpFagsak
-                ? 'OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilSvangerskapspenger'
-                : 'OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger'
-            }
+        rendreFakta={
+          <OpptjeningVilkarView
+            months={fastsattOpptjening.opptjeningperiode.måneder}
+            days={fastsattOpptjening.opptjeningperiode.dager}
+            fastsattOpptjeningActivities={fastsattOpptjening.fastsattOpptjeningAktivitetList}
+            opptjeningFomDate={fastsattOpptjening.opptjeningFom}
+            opptjeningTomDate={fastsattOpptjening.opptjeningTom}
           />
-        </Label>
+        }
+      >
         <VStack gap="space-16">
           <VilkarResultPicker
             // trenger ikke vilkår til avslagsårsak fordi det finnes kun en avslagsårsak for opptjeningsvilkåret
             vilkår={undefined}
+            legend={
+              <FormattedMessage
+                id={
+                  erSvpFagsak
+                    ? 'OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilSvangerskapspenger'
+                    : 'OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger'
+                }
+              />
+            }
             isReadOnly={isReadOnly}
             customVilkårOppfyltText={
               <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" values={{ erSvpFagsak }} />

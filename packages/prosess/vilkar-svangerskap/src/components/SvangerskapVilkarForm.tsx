@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { Label, VStack } from '@navikt/ds-react';
+import { Detail, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -80,8 +80,6 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
 
   const finnesUttak = finnesInnvilgetUttak(svangerskapspengerTilrettelegging);
 
-  const intl = useIntl();
-
   const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
@@ -106,8 +104,9 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
       setDataOnUnmount={setMellomlagretFormData}
     >
       <ProsessPanelTemplate
-        title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}
+        title={<FormattedMessage id="SvangerskapVilkarForm.Svangerskap" />}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
+        lovReferanse={vilkårForPanel[0]?.lovReferanse}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
         originalErVilkårOk={originalErVilkårOk}
@@ -116,23 +115,21 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
         isSubmitting={formMethods.formState.isSubmitting}
       >
         <VStack gap="space-16">
-          <Label size="small">
-            <FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" />
-          </Label>
-          {!finnesUttak && (
-            <Label size="small">
-              <FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" />
-            </Label>
-          )}
           <VilkarResultPicker
             vilkår={vilkårForPanel[0]}
             isReadOnly={isReadOnly}
+            legend={<FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" />}
             skalKunneInnvilge={finnesUttak}
             customVilkårOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
             customVilkårIkkeOppfyltText={
               <FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: BTag }} />
             }
           />
+          {!finnesUttak && (
+            <Detail>
+              <FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" />
+            </Detail>
+          )}
           <ProsessStegBegrunnelseTextField readOnly={isReadOnly} notRequired={erVilkarOk} />
         </VStack>
       </ProsessPanelTemplate>

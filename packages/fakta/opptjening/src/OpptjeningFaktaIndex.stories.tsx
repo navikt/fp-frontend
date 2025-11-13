@@ -44,9 +44,7 @@ type Story = StoryObj<typeof meta>;
 
 export const MedAksjonspunkt: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING),
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING)],
     opptjening: {
       fastsattOpptjening: {
         opptjeningFom: '2018-12-25',
@@ -180,9 +178,7 @@ export const UtenAksjonspunkt: Story = {
 
 export const MedToLikePerioderForSammeAktivitetstype: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING)
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING)],
     opptjening: {
       fastsattOpptjening: {
         opptjeningFom: '2018-12-25',
@@ -236,9 +232,7 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
 
 export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
   args: {
-    aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING)
-    ],
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING)],
     opptjening: {
       fastsattOpptjening: {
         opptjeningFom: '2018-12-25',
