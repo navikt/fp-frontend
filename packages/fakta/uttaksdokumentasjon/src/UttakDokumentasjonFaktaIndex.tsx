@@ -16,9 +16,7 @@ interface Props {
 }
 
 export const UttakDokumentasjonFaktaIndex = ({ dokumentasjonVurderingBehov }: Props) => {
-  const sorterteBehov = [...dokumentasjonVurderingBehov].sort((krav1, krav2) =>
-    dayjs(krav1.fom).diff(dayjs(krav2.fom)),
-  );
+  const sorterteBehov = dokumentasjonVurderingBehov.toSorted((krav1, krav2) => dayjs(krav1.fom).diff(dayjs(krav2.fom)));
 
   return (
     <RawIntlProvider value={intl}>
