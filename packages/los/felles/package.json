@@ -20,7 +20,6 @@
   },
   "dependencies": {
     "@navikt/ds-react": "7.33.0",
-    "@navikt/fp-types": "workspace:*",
     "@navikt/ft-form-hooks": "10.0.2",
     "@navikt/ft-form-validators": "4.2.13",
     "@navikt/ft-ui-komponenter": "6.2.10",

@@ -6,7 +6,9 @@ import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, Tooltip, 
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import type { Oppgave, ReservasjonStatus } from '../../../typer/oppgaveTsType';
+import type { ReservasjonStatus } from '@navikt/fp-los-felles';
+
+import type { Oppgave } from '../../../typer/oppgaveTsType';
 import { OppgaveLabels } from '../OppgaveLabels';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 

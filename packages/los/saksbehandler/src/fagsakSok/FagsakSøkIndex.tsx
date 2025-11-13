@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 
+import type { ReservasjonStatus } from '@navikt/fp-los-felles';
 import type { FagsakEnkel } from '@navikt/fp-types';
 
 import {
@@ -12,7 +13,7 @@ import {
   søkFagsakPost,
 } from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
-import type { Oppgave, ReservasjonStatus } from '../typer/oppgaveTsType';
+import type { Oppgave } from '../typer/oppgaveTsType';
 import { FagsakSøk } from './FagsakSøk';
 import type { SøkFormValues } from './form/SøkForm';
 

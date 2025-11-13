@@ -2,7 +2,7 @@ import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 import pLimit from 'p-limit';
 
-import type { Oppgave, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AlleKodeverkLos, AndreKriterierType } from '@navikt/fp-types';
 
 import type { Avdeling } from '../typer/avdelingTsType';
@@ -337,14 +337,14 @@ export const flyttReservasjon = (oppgaveId: number, brukerIdent: string, begrunn
     .post(LosUrl.FLYTT_RESERVASJON, {
       json: { oppgaveId, brukerIdent, begrunnelse },
     })
-    .json();
+    .json<ReservasjonStatus>();
 
 export const endreReservasjon = (oppgaveId: number, reserverTil: string) =>
   kyExtended
     .post(LosUrl.ENDRE_OPPGAVERESERVASJON, {
       json: { oppgaveId, reserverTil },
     })
-    .json<Oppgave[]>();
+    .json<ReservasjonStatus>();
 
 export const flyttReservasjonSaksbehandlerSøk = (brukerIdent: string) =>
   kyExtended
