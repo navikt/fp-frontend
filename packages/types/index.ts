@@ -43,7 +43,7 @@ export type {
 export type { Dokument } from './src/dokumentTsType';
 export type { FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export type { InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
-export type { AlleKodeverk, KodeverkType, KodeverkMedNavn, PeriodeResultatÅrsakKodeverk } from './src/kodeverkAlle';
+export type { AlleKodeverk, KodeverkType, KodeverkMedNavn } from './src/kodeverkAlle';
 export type {
   AlleKodeverkTilbakekreving,
   TilbakekrevingKodeverkType,
