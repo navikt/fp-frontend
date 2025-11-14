@@ -43,7 +43,7 @@ export type {
 export type { Dokument } from './src/dokumentTsType';
 export type { FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export type { InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
-export type { AlleKodeverk, KodeverkType, KodeverkMedNavn, PeriodeResultatÅrsakKodeverk } from './src/kodeverkAlle';
+export type { AlleKodeverk, KodeverkType, KodeverkMedNavn } from './src/kodeverkAlle';
 export type {
   AlleKodeverkTilbakekreving,
   TilbakekrevingKodeverkType,
@@ -228,6 +228,7 @@ export type { OppgaveType } from './src/oppgaveType';
 export type { OppholdÅrsakType } from './src/oppholdÅrsakType';
 export type { Organisasjonstype } from './src/organisasjonstype';
 export type { PeriodeResultatÅrsak } from './src/periodeResultatÅrsak';
+export type { PeriodeResultatÅrsakMuligeÅrsaker } from './src/periodeResultatÅrsakMuligeÅrsaker';
 export type { OppholdstillatelseType } from './src/oppholdstillatelseType';
 export type { PeriodeÅrsak } from './src/periodeÅrsak';
 export type { SivilstandType } from './src/sivilstandType';

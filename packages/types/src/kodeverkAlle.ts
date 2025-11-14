@@ -121,21 +121,8 @@ type KodeverkEnumMap = {
 
 export type KodeverkType = keyof KodeverkEnumMap;
 
-export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
-  sortering: string;
-  utfallType: string;
-  gyldigForLovendringer: string[];
-  uttakTyper: string[];
-  valgbarForKonto: string[];
-  synligForRolle: string[];
-};
-
-type KodeverkMedSammeVerditype = {
-  [K in Exclude<KodeverkType, 'PeriodeResultatÅrsak'>]: KodeverkMedNavn<K extends KodeverkType ? K : unknown>[];
-};
-
-export type AlleKodeverk = KodeverkMedSammeVerditype & {
-  PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
+export type AlleKodeverk = {
+  [K in KodeverkType]: KodeverkMedNavn<K extends KodeverkType ? K : unknown>[];
 };
 
 type EnumOrUnknown<T extends KodeverkType> = T extends keyof KodeverkEnumMap ? KodeverkEnumMap[T] : unknown;
