@@ -143,5 +143,4 @@ type EnumOrUnknown<T extends KodeverkType> = T extends keyof KodeverkEnumMap ? K
 export type KodeverkMedNavn<T extends KodeverkType> = Readonly<{
   kode: EnumOrUnknown<T>;
   navn: string;
-  kodeverk: string;
 }>;

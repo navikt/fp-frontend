@@ -6,4379 +6,3526 @@ export const alleKodeverk: AlleKodeverk = {
   UttakUtsettelseType: [
     {
       kode: 'SYKDOM_SKADE',
-      kodeverk: 'UTTAK_UTSETTELSE_TYPE',
       navn: 'Avhengig av hjelp grunnet sykdom',
     },
     {
       kode: 'BARN_INNLAGT',
-      kodeverk: 'UTTAK_UTSETTELSE_TYPE',
       navn: 'Barn er innlagt i helseinstitusjon',
     },
     {
       kode: 'FERIE',
-      kodeverk: 'UTTAK_UTSETTELSE_TYPE',
       navn: 'Lovbestemt ferie',
     },
     {
       kode: 'ARBEID',
-      kodeverk: 'UTTAK_UTSETTELSE_TYPE',
       navn: 'Arbeid',
     },
     {
       kode: 'SØKER_INNLAGT',
-      kodeverk: 'UTTAK_UTSETTELSE_TYPE',
       navn: 'Søker er innlagt i helseinstitusjon',
     },
     {
       kode: 'FRI',
-      kodeverk: 'UTTAK_UTSETTELSE_TYPE',
       navn: 'Fri utsettelse fom høst 2021',
     },
     {
       kode: 'HV_OVELSE',
-      kodeverk: 'UTTAK_UTSETTELSE_TYPE',
       navn: 'Heimevernet',
     },
     {
       kode: 'NAV_TILTAK',
-      kodeverk: 'UTTAK_UTSETTELSE_TYPE',
       navn: 'Tiltak i regi av Nav',
     },
   ],
   FagsakYtelseType: [
     {
       kode: 'FP',
-      kodeverk: 'FAGSAK_YTELSE',
       navn: 'Foreldrepenger',
     },
     {
       kode: 'SVP',
-      kodeverk: 'FAGSAK_YTELSE',
       navn: 'Svangerskapspenger',
     },
     {
       kode: 'ES',
-      kodeverk: 'FAGSAK_YTELSE',
       navn: 'Engangsstønad',
     },
   ],
   StønadskontoType: [
     {
       kode: 'TETTE_SAKER_MOR',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Tette fødsler mor',
     },
     {
       kode: 'TILLEGG_PREMATUR',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Tilleggsdager ved prematur fødsel',
     },
     {
       kode: 'BARE_FAR_RETT',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Bare far har rett',
     },
     {
       kode: 'FLERBARNSDAGER',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Flerbarnsdager',
     },
     {
       kode: 'UFØREDAGER',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Uføredager',
     },
     {
       kode: 'FEDREKVOTE',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Fedrekvote',
     },
     {
       kode: 'FORELDREPENGER',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Foreldrepenger',
     },
     {
       kode: 'FORELDREPENGER_FØR_FØDSEL',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Foreldrepenger før fødsel',
     },
     {
       kode: 'FELLESPERIODE',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Fellesperiode',
     },
     {
       kode: 'TILLEGG_FLERBARN',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Tilleggsdager ved flerbarnstilfelle',
     },
     {
       kode: 'FAR_RUNDT_FØDSEL',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Fars uttak ifm fødsel',
     },
     {
       kode: 'TETTE_SAKER_FAR',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Tette fødsler far/medmor',
     },
     {
       kode: 'MØDREKVOTE',
-      kodeverk: 'STOENADSKONTOTYPE',
       navn: 'Mødrekvote',
     },
   ],
   FagsakStatus: [
     {
       kode: 'UBEH',
-      kodeverk: 'FAGSAK_STATUS',
       navn: 'Under behandling',
     },
     {
       kode: 'AVSLU',
-      kodeverk: 'FAGSAK_STATUS',
       navn: 'Avsluttet',
     },
     {
       kode: 'OPPR',
-      kodeverk: 'FAGSAK_STATUS',
       navn: 'Opprettet',
     },
     {
       kode: 'LOP',
-      kodeverk: 'FAGSAK_STATUS',
       navn: 'Løpende',
     },
   ],
   Venteårsak: [
     {
       kode: 'VENTELØNN_ELLER_MILITÆR_MED_FLERE_AKTIVITETER',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Mangel i løsning for oppgitt ventelønn og/eller militær i kombinasjon med andre statuser',
     },
     {
       kode: 'VENT_UTLAND_TRYGD',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på utenlandsk trygdemyndighet',
     },
     {
       kode: 'VENT_PÅ_SISTE_AAP_MELDEKORT',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på siste meldekort for AAP eller dagpenger før første uttaksdag.',
     },
     {
       kode: 'VENT_MANGLENDE_SYKEMELDING',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på siste sykemelding for sykepenger basert på dagpenger',
     },
     {
       kode: 'VENT_BEREGNING_TILBAKE_I_TID',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Endring i tilkjent ytelse bakover i tid. Dette håndteres ikke i løsningen enda.',
     },
     {
       kode: 'VENT_TIDLIGERE_BEHANDLING',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på iverksettelse av en tidligere behandling i denne saken',
     },
     {
       kode: 'ANKE_OVERSENDT_TIL_TRYGDERETTEN',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på at saken blir behandlet hos Trygderetten',
     },
     {
       kode: 'VENT_DEKGRAD_REGEL',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på 80% dekningsgrad-regel',
     },
     {
       kode: 'VENT_MANGLENDE_ARBEIDSFORHOLD',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Sak settes på vent pga kommune- og fylkesammenslåing. Meld saken i Porten.',
     },
     {
       kode: 'AVV_RESPONS_REVURDERING',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Avventer respons på varsel om revurdering',
     },
     {
       kode: 'VENT_REGISTERINNHENTING',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på registerinformasjon',
     },
     {
       kode: 'VENT_KABAL',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Klage / anke behandles av Klageinstans i egen løsning',
     },
     {
       kode: 'AVV_DOK',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Avventer dokumentasjon',
     },
     {
       kode: 'FOR_TIDLIG_SOKNAD',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter pga. for tidlig søknad',
     },
     {
       kode: 'OPPD_ÅPEN_BEH',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på oppdatering av åpen behandling',
     },
     {
       kode: 'VENT_MILITÆR_OG_BG_UNDER_3G',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Behandlingen er satt på vent på grunn av mangel i løsningen. Det jobbes med å løse dette.',
     },
     {
       kode: 'ULIKE_STARTDATOER_SVP',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Behandlingen er satt på vent på grunn av mangel i løsningen. Det jobbes med å løse dette.',
     },
     {
       kode: 'VENT_SØKNAD_SENDT_INFORMASJONSBREV',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Sendt informasjonsbrev, og venter på søknad.',
     },
     {
       kode: 'VENT_DØDFØDSEL_80P_DEKNINGSGRAD',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Mangel i løsning for oppgitt 80% dekningsgrad med dødfødsel',
     },
     {
       kode: 'VENT_ØKONOMI',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på økonomiløsningen',
     },
     {
       kode: 'ANKE_VENTER_PAA_MERKNADER_FRA_BRUKER',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på merknader fra bruker',
     },
     {
       kode: 'UTV_FRIST',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Utvidet frist',
     },
     {
       kode: 'FL_SN_IKKE_STOTTET_FOR_SVP',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Behandlingen er satt på vent på grunn av mangel i løsningen. Det jobbes med å løse dette.',
     },
     {
       kode: 'VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Mangel i løsning for oppgitt gradering der utbetaling ikke finnes',
     },
     {
       kode: 'VENT_FEIL_ENDRINGSSØKNAD',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Behandlingen er satt på vent på grunn av potensielt feil i endringssøknad',
     },
     {
       kode: 'AAP_DP_SISTE_10_MND_SVP',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Behandlingen er satt på vent på grunn av mangel i løsningen. Det jobbes med å løse dette.',
     },
     {
       kode: 'VENT_PÅ_NY_INNTEKTSMELDING_MED_GYLDIG_ARB_ID',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på ny inntektsmelding med arbeidsforholdsID som stemmer med Aa-reg',
     },
     {
       kode: 'VENT_ÅPEN_BEHANDLING',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Søker eller den andre forelderen har en åpen behandling',
     },
     {
       kode: 'DELVIS_TILRETTELEGGING_OG_REFUSJON_SVP',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Behandlingen er satt på vent på grunn av mangel i løsningen. Det jobbes med å løse dette.',
     },
     {
       kode: 'FLERE_ARBEIDSFORHOLD_SAMME_ORG_SVP',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Håndterer foreløpig ikke flere arbeidsforhold i samme virksomhet for SVP',
     },
     {
       kode: 'REFUSJON_3_MÅNEDER',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Behandlingen er satt på vent på grunn av mangel i løsningen. Det jobbes med å løse dette.',
     },
     {
       kode: 'VENT_PÅ_KORRIGERT_BESTEBEREGNING',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Besteberegningen er feil. Feilen må meldes og korrigeres.',
     },
     {
       kode: 'VENT_OPDT_INNTEKTSMELDING',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på inntektsmelding',
     },
     {
       kode: 'VENT_OPPTJENING_OPPLYSNINGER',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på opptjeningsopplysninger',
     },
     {
       kode: 'VENT_INFOTRYGD',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på en ytelse i Infotrygd',
     },
     {
       kode: 'VENT_PÅ_BRUKERTILBAKEMELDING',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på tilbakemelding fra bruker',
     },
     {
       kode: 'GRADERING_FLERE_ARBEIDSFORHOLD',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Behandlingen er satt på vent på grunn av mangel i løsningen. Det jobbes med å løse dette.',
     },
     {
       kode: 'AVV_FODSEL',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Avventer fødsel',
     },
     {
       kode: 'VENT_LOVENDRING_8_41',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på vedtak om lovendring vedrørende beregning av næring i kombinasjon med arbeid eller frilans',
     },
     {
       kode: 'VENT_INNTEKT_RAPPORTERINGSFRIST',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Inntekt rapporteringsfrist',
     },
     {
       kode: 'SCANN',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Venter på skanning',
     },
     {
       kode: 'AAP_DP_ENESTE_AKTIVITET_SVP',
-      kodeverk: 'VENT_AARSAK',
       navn: 'Bruker har ikke rett til svangerskapspenger når eneste aktivitet er AAP/DP',
     },
   ],
   BehandlingÅrsakType: [
     {
       kode: 'RE-HENDELSE-FØDSEL',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Fødselsmelding',
     },
     {
       kode: 'RE-SATS-REGULERING',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Regulering grunnbeløp',
     },
     {
       kode: 'RE-HENDELSE-DØDFØD',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Dødfødsel',
     },
     {
       kode: 'KLAGE_TILBAKE',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Tilbakebetaling',
     },
     {
       kode: 'OPPHØR-NYTT-BARN',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Nytt barn/stønadsperiode',
     },
     {
       kode: 'RE-ANNET',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Annet',
     },
     {
       kode: 'RE-LOV',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Lovanvendelse',
     },
     {
       kode: 'RE-HENDELSE-DØD-F',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Forelder død',
     },
     {
       kode: 'KØET-BEHANDLING',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Køet behandling',
     },
     {
       kode: 'RE-PRSSL',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Prosessuell feil',
     },
     {
       kode: 'RE-OPTJ',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Nye opplysninger om opptjening',
     },
     {
       kode: 'RE-END-FRA-BRUKER',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Ny søknad',
     },
     {
       kode: 'RE-KLAG-U-INNTK',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Klage/Anke uendret inntekt',
     },
     {
       kode: 'RE-YTELSE',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Opplysninger annen ytelse',
     },
     {
       kode: 'RE-FØDSEL',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Fødsel',
     },
     {
       kode: 'RE-MF',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Mangler fødselsregistrering',
     },
     {
       kode: 'RE-REGISTEROPPL',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Nye registeropplysninger',
     },
     {
       kode: 'RE-HENDELSE-DØD-B',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Barn død',
     },
     {
       kode: 'RE-FRIST',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Nye opplysninger om søknadsfrist',
     },
     {
       kode: 'INFOBREV_OPPHOLD',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Informasjonsbrev opphold',
     },
     {
       kode: 'RE-RGLF',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Regelverksforståelse',
     },
     {
       kode: 'RE-UTSATT-START',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Senere startdato',
     },
     {
       kode: 'RE-AVAB',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Avvik antall barn',
     },
     {
       kode: 'RE-KLAG-M-INNTK',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Klage/Anke endret inntekt',
     },
     {
       kode: 'RE-END-INNTEKTSMELD',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Ny inntektsmelding',
     },
     {
       kode: 'RE-FRDLING',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Nye opplysninger om uttak',
     },
     {
       kode: 'RE-SRTB',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Opplysninger relasjon/barn',
     },
     {
       kode: 'RE-MDL',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Nye opplysninger om medlemskap',
     },
     {
       kode: 'RE-DØD',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Opplysninger død',
     },
     {
       kode: 'RE-HENDELSE-UTFLYTTING',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Utflytting',
     },
     {
       kode: 'RE-FEFAKTA',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Endrede opplysninger',
     },
     {
       kode: 'FEIL_PRAKSIS_UTSETTELSE',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Feil praksis utsettelse',
     },
     {
       kode: 'REBEREGN-FERIEPENGER',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Omfordel feriepenger',
     },
     {
       kode: 'RE-VEDTAK-PSB',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Pleiepenger',
     },
     {
       kode: 'INFOBREV_PÅMINNELSE',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Informasjonsbrev påminnelse',
     },
     {
       kode: 'FEIL_PRAKSIS_IVERKS_UTSET',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Feil iverksettelse fri utsettelse',
     },
     {
       kode: 'ETTER_KLAGE',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Klage/Anke',
     },
     {
       kode: 'RE-INNTK',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Nye opplysninger om inntekt',
     },
     {
       kode: 'RE-BER-GRUN',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Nye opplysninger om beregning',
     },
     {
       kode: 'RE-MFIP',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Mangler fødselsreg. for uke 26-29',
     },
     {
       kode: 'ENDRE-DEKNINGSGRAD',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Endre dekningsgrad',
     },
     {
       kode: 'BERØRT-BEHANDLING',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Berørt behandling',
     },
     {
       kode: 'RE-TILST-YT-OPPH',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Annen ytelse opphørt',
     },
     {
       kode: 'INFOBREV_BEHANDLING',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Informasjonsbrev',
     },
     {
       kode: 'RE-TILST-YT-INNVIL',
-      kodeverk: 'BEHANDLING_AARSAK',
       navn: 'Annen ytelse innvilget',
     },
   ],
   GraderingAvslagÅrsak: [
     {
       kode: '4523',
-      kodeverk: 'GRADERING_AVSLAG_AARSAK',
       navn: '§14-16 første ledd: Avslag gradering - arbeid 100% eller mer',
     },
     {
       kode: '4503',
-      kodeverk: 'GRADERING_AVSLAG_AARSAK',
       navn: '§14-16 fjerde ledd: Avslag gradering – ikke rett til gradert uttak pga. redusert oppfylt aktivitetskrav på mor',
     },
     {
       kode: '4504',
-      kodeverk: 'GRADERING_AVSLAG_AARSAK',
       navn: '§14-16 andre ledd: Avslag gradering - gradering før uke 7',
     },
     {
       kode: '4502',
-      kodeverk: 'GRADERING_AVSLAG_AARSAK',
       navn: '§14-16 femte ledd, jf §21-3: Avslag graderingsavtale mangler - ikke dokumentert',
     },
     {
       kode: '4501',
-      kodeverk: 'GRADERING_AVSLAG_AARSAK',
       navn: '§14-16: Ikke gradering pga. for sen søknad',
     },
   ],
   AktivitetStatus: [
     {
       kode: 'AT_FL_SN',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Kombinert arbeidstaker, frilanser og selvstendig næringsdrivende',
     },
     {
       kode: 'FL',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Frilanser',
     },
     {
       kode: 'BA',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Brukers andel',
     },
     {
       kode: 'MS',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Militær eller sivil',
     },
     {
       kode: 'AT',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Arbeidstaker',
     },
     {
       kode: 'KUN_YTELSE',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Kun ytelse',
     },
     {
       kode: 'SN',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Selvstendig næringsdrivende',
     },
     {
       kode: 'AAP',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Arbeidsavklaringspenger',
     },
     {
       kode: 'AT_SN',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Kombinert arbeidstaker og selvstendig næringsdrivende',
     },
     {
       kode: 'TY',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Tilstøtende ytelse',
     },
     {
       kode: 'VENTELØNN_VARTPENGER',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Ventelønn/Vartpenger',
     },
     {
       kode: 'FL_SN',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Kombinert frilanser og selvstendig næringsdrivende',
     },
     {
       kode: 'DP',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Dagpenger',
     },
     {
       kode: 'AT_FL',
-      kodeverk: 'AKTIVITET_STATUS',
       navn: 'Kombinert arbeidstaker og frilanser',
     },
   ],
   RevurderingVarslingÅrsak: [
     {
       kode: 'AKTIVITET',
-      kodeverk: 'REVURDERING_VARSLING_AARSAK',
       navn: 'Mors aktivitetskrav er ikke oppfylt',
     },
     {
       kode: 'JOBBUTLAND',
-      kodeverk: 'REVURDERING_VARSLING_AARSAK',
       navn: 'Arbeid i utlandet',
     },
     {
       kode: 'BARNIKKEREG',
-      kodeverk: 'REVURDERING_VARSLING_AARSAK',
       navn: 'Barn er ikke registrert i folkeregisteret',
     },
     {
       kode: 'UTVANDRET',
-      kodeverk: 'REVURDERING_VARSLING_AARSAK',
       navn: 'Bruker er registrert utflyttet',
     },
     {
       kode: 'JOBBFULLTID',
-      kodeverk: 'REVURDERING_VARSLING_AARSAK',
       navn: 'Arbeid i stønadsperioden',
     },
     {
       kode: 'JOBB6MND',
-      kodeverk: 'REVURDERING_VARSLING_AARSAK',
       navn: 'Opptjeningsvilkår ikke oppfylt',
     },
     {
       kode: 'IKKEOPPTJENT',
-      kodeverk: 'REVURDERING_VARSLING_AARSAK',
       navn: 'Beregningsgrunnlaget er under 1/2 G',
     },
     {
       kode: 'ANNET',
-      kodeverk: 'REVURDERING_VARSLING_AARSAK',
       navn: 'Annet',
     },
     {
       kode: 'IKKEOPPHOLD',
-      kodeverk: 'REVURDERING_VARSLING_AARSAK',
       navn: 'Ikke lovlig opphold',
     },
   ],
   UttakArbeidType: [
     {
       kode: 'ANNET',
-      kodeverk: 'UTTAK_ARBEID_TYPE',
       navn: 'Annet',
     },
     {
       kode: 'ORDINÆRT_ARBEID',
-      kodeverk: 'UTTAK_ARBEID_TYPE',
       navn: 'Ordinært arbeid',
     },
     {
       kode: 'FRILANS',
-      kodeverk: 'UTTAK_ARBEID_TYPE',
       navn: 'Frilans',
     },
     {
       kode: 'SELVSTENDIG_NÆRINGSDRIVENDE',
-      kodeverk: 'UTTAK_ARBEID_TYPE',
       navn: 'Selvstendig næringsdrivende',
     },
   ],
   KonsekvensForYtelsen: [
     {
       kode: 'ENDRING_I_UTTAK',
-      kodeverk: 'KONSEKVENS_FOR_YTELSEN',
       navn: 'Endring i uttak',
     },
     {
       kode: 'ENDRING_I_FORDELING_AV_YTELSEN',
-      kodeverk: 'KONSEKVENS_FOR_YTELSEN',
       navn: 'Endring i fordeling av ytelsen',
     },
     {
       kode: 'INGEN_ENDRING',
-      kodeverk: 'KONSEKVENS_FOR_YTELSEN',
       navn: 'Ingen endring',
     },
     {
       kode: 'FORELDREPENGER_OPPHØRER',
-      kodeverk: 'KONSEKVENS_FOR_YTELSEN',
       navn: 'Foreldrepenger opphører',
     },
     {
       kode: 'ENDRING_I_BEREGNING',
-      kodeverk: 'KONSEKVENS_FOR_YTELSEN',
       navn: 'Endring i beregning',
     },
   ],
   AktivitetskravPermisjonType: [
     {
       kode: 'FORELDREPENGER',
-      kodeverk: 'AKTIVITETSKRAV_PERMISJON_TYPE',
       navn: 'Foreldrepenger',
     },
     {
       kode: 'UTDANNING',
-      kodeverk: 'AKTIVITETSKRAV_PERMISJON_TYPE',
       navn: 'Utdanning',
     },
     {
       kode: 'PERMITTERING',
-      kodeverk: 'AKTIVITETSKRAV_PERMISJON_TYPE',
       navn: 'Permittering',
     },
     {
       kode: 'ANNEN_PERMISJON',
-      kodeverk: 'AKTIVITETSKRAV_PERMISJON_TYPE',
       navn: 'Annen permisjon',
     },
   ],
   AdresseType: [
     {
       kode: 'POSTADRESSE_UTLAND',
-      kodeverk: 'ADRESSE_TYPE',
       navn: 'Kontaktadresse utland',
     },
     {
       kode: 'MIDLERTIDIG_POSTADRESSE_NORGE',
-      kodeverk: 'ADRESSE_TYPE',
       navn: 'Oppholdsadresse',
     },
     {
       kode: 'BOSTEDSADRESSE_UTLAND',
-      kodeverk: 'ADRESSE_TYPE',
       navn: 'Bostedsadresse utland',
     },
     {
       kode: 'UKJENT_ADRESSE',
-      kodeverk: 'ADRESSE_TYPE',
       navn: 'Ukjent adresse',
     },
     {
       kode: 'BOSTEDSADRESSE',
-      kodeverk: 'ADRESSE_TYPE',
       navn: 'Bostedsadresse',
     },
     {
       kode: 'MIDLERTIDIG_POSTADRESSE_UTLAND',
-      kodeverk: 'ADRESSE_TYPE',
       navn: 'Oppholdsadresse utland',
     },
     {
       kode: 'POSTADRESSE',
-      kodeverk: 'ADRESSE_TYPE',
       navn: 'Kontaktadresse',
     },
   ],
   SivilstandType: [
     {
       kode: 'ENKE',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Enke/-mann',
     },
     {
       kode: 'SKPA',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Skilt partner',
     },
     {
       kode: 'GLAD',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Gift, lever adskilt',
     },
     {
       kode: 'SAMB',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Samboer',
     },
     {
       kode: 'SEPR',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Separert',
     },
     {
       kode: 'SEPA',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Separert partner',
     },
     {
       kode: 'GIFT',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Gift',
     },
     {
       kode: 'NULL',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Uoppgitt',
     },
     {
       kode: 'REPA',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Registrert partner',
     },
     {
       kode: 'SKIL',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Skilt',
     },
     {
       kode: 'GJPA',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Gjenlevende partner',
     },
     {
       kode: 'UGIF',
-      kodeverk: 'SIVILSTAND_TYPE',
       navn: 'Ugift',
     },
   ],
   Inntektskategori: [
     {
       kode: 'ARBEIDSAVKLARINGSPENGER',
-      kodeverk: 'INNTEKTSKATEGORI',
       navn: 'Arbeidsavklaringspenger',
     },
     {
       kode: 'FRILANSER',
-      kodeverk: 'INNTEKTSKATEGORI',
       navn: 'Frilanser',
     },
     {
       kode: 'DAGPENGER',
-      kodeverk: 'INNTEKTSKATEGORI',
       navn: 'Dagpenger',
     },
     {
       kode: 'SELVSTENDIG_NÆRINGSDRIVENDE',
-      kodeverk: 'INNTEKTSKATEGORI',
       navn: 'Selvstendig næringsdrivende',
     },
     {
       kode: 'FISKER',
-      kodeverk: 'INNTEKTSKATEGORI',
       navn: 'Selvstendig næringsdrivende - fisker',
     },
     {
       kode: 'ARBEIDSTAKER_UTEN_FERIEPENGER',
-      kodeverk: 'INNTEKTSKATEGORI',
       navn: 'Arbeidstaker uten feriepenger',
     },
     {
       kode: 'JORDBRUKER',
-      kodeverk: 'INNTEKTSKATEGORI',
       navn: 'Selvstendig næringsdrivende - jordbruker',
     },
     {
       kode: 'SJØMANN',
-      kodeverk: 'INNTEKTSKATEGORI',
       navn: 'Arbeidstaker - Sjømann',
     },
     {
       kode: 'DAGMAMMA',
-      kodeverk: 'INNTEKTSKATEGORI',
       navn: 'Selvstendig næringsdrivende - dagmamma',
     },
     {
       kode: 'ARBEIDSTAKER',
-      kodeverk: 'INNTEKTSKATEGORI',
       navn: 'Arbeidstaker',
     },
   ],
   SkjermlenkeType: [
     {
       kode: 'FAKTA_OM_VERGE',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om verge/fullmektig',
     },
     {
       kode: 'FAKTA_OM_OPPTJENING',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om opptjening',
     },
     {
       kode: 'FAKTA_OM_ARBEIDSFORHOLD_PERMISJON',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om arbeidsforhold med permisjon uten sluttdato',
     },
     {
       kode: 'SOEKNADSFRIST',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Søknadsfrist',
     },
     {
       kode: 'TILKJENT_YTELSE',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Tilkjent ytelse',
     },
     {
       kode: 'FAKTA_OM_MEDLEMSKAP',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om medlemskap',
     },
     {
       kode: 'PUNKT_FOR_FORELDREANSVAR',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Foreldreansvar',
     },
     {
       kode: 'FAKTA_OM_BEREGNING',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om beregning',
     },
     {
       kode: 'FAKTA_OMSORG_OG_RETT',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om omsorg og rett',
     },
     {
       kode: 'PUNKT_FOR_SVP_INNGANG',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om fødsel og tilrettelegging',
     },
     {
       kode: 'FAKTA_OM_UTTAK',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om uttak',
     },
     {
       kode: 'BEREGNING_ENGANGSSTOENAD',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Beregning',
     },
     {
       kode: 'FAKTA_OM_SIMULERING',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Simulering',
     },
     {
       kode: 'PUNKT_FOR_MEDLEMSKAP_LØPENDE',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Løpende medlemskap',
     },
     {
       kode: 'FORMKRAV_KLAGE_NFP',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Formkrav klage NFP',
     },
     {
       kode: 'FAKTA_OM_OMSORG_OG_FORELDREANSVAR',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om omsorg og foreldreansvar',
     },
     {
       kode: 'OPPLYSNINGSPLIKT',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Opplysningsplikt',
     },
     {
       kode: 'FAKTA_OM_ARBEIDSFORHOLD_INNTEKTSMELDING',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om arbeid og inntekt',
     },
     {
       kode: 'FAKTA_UTTAK',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta uttak',
     },
     {
       kode: 'FAKTA_OM_UTTAK_DOKUMENTASJON',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Vurder dokumentasjon',
     },
     {
       kode: 'FAKTA_FOR_OMSORG',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om omsorg',
     },
     {
       kode: 'FORMKRAV_KLAGE_KA',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Formkrav klage KA',
     },
     {
       kode: 'BEREGNING_FORELDREPENGER',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Beregning',
     },
     {
       kode: 'PUNKT_FOR_OMSORG',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Omsorg',
     },
     {
       kode: 'VURDER_FARESIGNALER',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Vurder faresignaler',
     },
     {
       kode: 'KONTROLL_AV_SAKSOPPLYSNINGER',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om saken',
     },
     {
       kode: 'VEDTAK',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Vedtak',
     },
     {
       kode: 'PUNKT_FOR_ADOPSJON',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Adopsjon',
     },
     {
       kode: 'BESTEBEREGNING',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Besteberegning',
     },
     {
       kode: 'FAKTA_OM_ARBEIDSFORHOLD',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om arbeidsforhold',
     },
     {
       kode: 'PUNKT_FOR_FOEDSEL',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fødsel',
     },
     {
       kode: 'KLAGE_BEH_NK',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Klageresultat Klageinstansen',
     },
     {
       kode: 'FAKTA_OM_FOEDSEL',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om fødsel',
     },
     {
       kode: 'FAKTA_OM_ADOPSJON',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om adopsjon',
     },
     {
       kode: 'PUNKT_FOR_MEDLEMSKAP',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Medlemskap',
     },
     {
       kode: 'PUNKT_FOR_OPPTJENING',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Opptjening',
     },
     {
       kode: 'UTLAND',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Endret utland',
     },
     {
       kode: 'FAKTA_OM_AKTIVITETSKRAV',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om aktivitetskrav',
     },
     {
       kode: 'ANKE_VURDERING',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Anke vurdering',
     },
     {
       kode: 'ANKE_MERKNADER',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Anke merknader',
     },
     {
       kode: 'KLAGE_BEH_NFP',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Klageresultat NFP',
     },
     {
       kode: 'PUNKT_FOR_SVANGERSKAPSPENGER',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Svangerskapspenger',
     },
     {
       kode: 'FAKTA_FOR_OPPTJENING',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om opptjening',
     },
     {
       kode: 'FAKTA_OM_FORDELING',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Fakta om fordeling',
     },
     {
       kode: 'UTTAK',
-      kodeverk: 'SKJERMLENKE_TYPE',
       navn: 'Uttak',
     },
   ],
   FaktaOmBeregningTilfelle: [
     {
       kode: 'VURDER_MOTTAR_YTELSE',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Vurder om søker mottar ytelse for aktivitet.',
     },
     {
       kode: 'VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Vurder refusjonskrav fremsatt for sent skal være med i beregning.',
     },
     {
       kode: 'FASTSETT_BG_KUN_YTELSE',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Fastsett beregningsgrunnlag for kun ytelse uten arbeidsforhold',
     },
     {
       kode: 'FASTSETT_ENDRET_BEREGNINGSGRUNNLAG',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Fastsette endring i beregningsgrunnlag',
     },
     {
       kode: 'VURDER_LØNNSENDRING',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Vurder lønnsendring',
     },
     {
       kode: 'FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Fastsett månedslønn arbeidstaker uten inntektsmelding',
     },
     {
       kode: 'VURDER_ETTERLØNN_SLUTTPAKKE',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Vurder om søker har etterlønn og/eller sluttpakke',
     },
     {
       kode: 'VURDER_MILITÆR_SIVILTJENESTE',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Vurder om søker har hatt militær- eller siviltjeneste i opptjeningsperioden.',
     },
     {
       kode: 'FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Fastsette beregningsgrunnlag for arbeidstaker uten inntektsmelding',
     },
     {
       kode: 'VURDER_SN_NY_I_ARBEIDSLIVET',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Vurder om søker er SN og ny i arbeidslivet',
     },
     {
       kode: 'TILSTØTENDE_YTELSE',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Avklar beregningsgrunnlag og inntektskategori for tilstøtende ytelse',
     },
     {
       kode: 'VURDER_BESTEBEREGNING',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Vurder om søker skal ha besteberegning',
     },
     {
       kode: 'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Vurder om bruker er arbeidstaker og frilanser i samme organisasjon',
     },
     {
       kode: 'VURDER_NYOPPSTARTET_FL',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Vurder nyoppstartet frilans',
     },
     {
       kode: 'FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Fastsett besteberegning fødende kvinne',
     },
     {
       kode: 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Vurder tidsbegrenset arbeidsforhold',
     },
     {
       kode: 'FASTSETT_ETTERLØNN_SLUTTPAKKE',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Fastsett søkers beregningsgrunnlag for etterlønn og/eller sluttpakke andel',
     },
     {
       kode: 'FASTSETT_MAANEDSINNTEKT_FL',
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
       navn: 'Fastsett månedsinntekt frilans',
     },
   ],
   OppholdÅrsak: [
     {
       kode: 'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
-      kodeverk: 'OPPHOLD_AARSAK_TYPE',
       navn: 'Annen forelder har uttak av Fedrekvote',
     },
     {
       kode: 'UTTAK_MØDREKVOTE_ANNEN_FORELDER',
-      kodeverk: 'OPPHOLD_AARSAK_TYPE',
       navn: 'Annen forelder har uttak av Mødrekvote',
     },
     {
       kode: 'UTTAK_FELLESP_ANNEN_FORELDER',
-      kodeverk: 'OPPHOLD_AARSAK_TYPE',
       navn: 'Annen forelder har uttak av Fellesperiode',
     },
     {
       kode: 'UTTAK_FORELDREPENGER_ANNEN_FORELDER',
-      kodeverk: 'OPPHOLD_AARSAK_TYPE',
       navn: 'Annen forelder har uttak av Foreldrepenger',
     },
   ],
   UttakPeriodeType: [
     {
       kode: 'FORELDREPENGER',
-      kodeverk: 'UTTAK_PERIODE_TYPE',
       navn: 'Foreldrepenger',
     },
     {
       kode: 'FEDREKVOTE',
-      kodeverk: 'UTTAK_PERIODE_TYPE',
       navn: 'Fedrekvoten',
     },
     {
       kode: 'MØDREKVOTE',
-      kodeverk: 'UTTAK_PERIODE_TYPE',
       navn: 'Mødrekvoten',
     },
     {
       kode: 'FORELDREPENGER_FØR_FØDSEL',
-      kodeverk: 'UTTAK_PERIODE_TYPE',
       navn: 'Foreldrepenger før fødsel',
     },
     {
       kode: 'FELLESPERIODE',
-      kodeverk: 'UTTAK_PERIODE_TYPE',
       navn: 'Fellesperioden',
     },
   ],
   KlageAvvistÅrsak: [
     {
       kode: 'KLAGE_UGYLDIG',
-      kodeverk: 'KLAGE_AVVIST_AARSAK',
       navn: 'Klagen er ugyldig',
     },
     {
       kode: 'KLAGET_FOR_SENT',
-      kodeverk: 'KLAGE_AVVIST_AARSAK',
       navn: 'Bruker har klaget for sent',
     },
     {
       kode: 'IKKE_PAKLAGD_VEDTAK',
-      kodeverk: 'KLAGE_AVVIST_AARSAK',
       navn: 'Ikke påklagd et vedtak',
     },
     {
       kode: 'IKKE_KONKRET',
-      kodeverk: 'KLAGE_AVVIST_AARSAK',
       navn: 'Klagen er ikke konkret',
     },
     {
       kode: 'KLAGER_IKKE_PART',
-      kodeverk: 'KLAGE_AVVIST_AARSAK',
       navn: 'Klager er ikke part',
     },
     {
       kode: 'IKKE_SIGNERT',
-      kodeverk: 'KLAGE_AVVIST_AARSAK',
       navn: 'Klagen er ikke signert',
     },
   ],
   BehandlingResultatType: [
     {
       kode: 'KLAGE_OMGJORT_UGUNST',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Omgjort til ugunst',
     },
     {
       kode: 'ANKE_MEDHOLD',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Medhold',
     },
     {
       kode: 'IKKE_FASTSATT',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Ikke fastsatt',
     },
     {
       kode: 'INGEN_ENDRING',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Ingen endring',
     },
     {
       kode: 'FORELDREPENGER_SENERE',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Sak er endret',
     },
     {
       kode: 'AVSLÅTT',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Avslått',
     },
     {
       kode: 'HENLAGT_INNSYN_TRUKKET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Henlagt, innsynskrav er trukket',
     },
     {
       kode: 'KLAGE_YTELSESVEDTAK_OPPHEVET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Ytelsesvedtak opphevet',
     },
     {
       kode: 'ANKE_OPPHEVE_OG_HJEMSENDE',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Vedtak opphevet',
     },
     {
       kode: 'INNSYN_INNVILGET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Innsynskrav er innvilget',
     },
     {
       kode: 'ANKE_DELVIS_MEDHOLD',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Delvis medhold',
     },
     {
       kode: 'KLAGE_YTELSESVEDTAK_STADFESTET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Ytelsesvedtak stadfestet',
     },
     {
       kode: 'ANKE_AVVIST',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Anke er avvist',
     },
     {
       kode: 'HENLAGT_BRUKER_DØD',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Henlagt, brukeren er død',
     },
     {
       kode: 'INNSYN_DELVIS_INNVILGET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Innsynskrav er delvis innvilget',
     },
     {
       kode: 'HENLAGT_KLAGE_TRUKKET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Henlagt, klagen er trukket',
     },
     {
       kode: 'HJEMSENDE_UTEN_OPPHEVE',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Behandlingen er hjemsendt',
     },
     {
       kode: 'MERGET_OG_HENLAGT',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Mottatt ny søknad',
     },
     {
       kode: 'KLAGE_AVVIST',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Klage er avvist',
     },
     {
       kode: 'OPPHØR',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Opphør',
     },
     {
       kode: 'INNVILGET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Innvilget',
     },
     {
       kode: 'INNSYN_AVVIST',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Innsynskrav er avvist',
     },
     {
       kode: 'ANKE_YTELSESVEDTAK_STADFESTET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Vedtak stadfestet',
     },
     {
       kode: 'FORELDREPENGER_ENDRET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Sak er endret',
     },
     {
       kode: 'HENLAGT_FEILOPPRETTET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Henlagt, søknaden er feilopprettet',
     },
     {
       kode: 'KLAGE_DELVIS_MEDHOLD',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Delvis medhold',
     },
     {
       kode: 'HENLAGT_SØKNAD_TRUKKET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Henlagt, søknaden er trukket',
     },
     {
       kode: 'HENLAGT_ANKE_TRUKKET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Henlagt, anken er trukket',
     },
     {
       kode: 'HENLAGT_SØKNAD_MANGLER',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Henlagt, søknad mangler',
     },
     {
       kode: 'KLAGE_TILBAKEKREVING_VEDTAK_STADFESTET',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Tilbakekrevingsvedtak stadfestet',
     },
     {
       kode: 'ANKE_OMGJORT_UGUNST',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Omgjort til ugunst',
     },
     {
       kode: 'KLAGE_MEDHOLD',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Medhold',
     },
     {
       kode: 'MANGLER_BEREGNINGSREGLER',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Mangler beregningsregler',
     },
     {
       kode: 'ANKE_HJEMSENDE_UTEN_OPPHEV',
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
       navn: 'Behandlingen er hjemsendt',
     },
   ],
   VergeType: [
     {
       kode: 'VOKSEN',
-      kodeverk: 'VERGE_TYPE',
       navn: 'Verge for voksen',
     },
     {
       kode: 'FBARN',
-      kodeverk: 'VERGE_TYPE',
       navn: 'Verge for foreldreløst barn under 18 år',
     },
     {
       kode: 'BARN',
-      kodeverk: 'VERGE_TYPE',
       navn: 'Verge for barn under 18 år',
     },
     {
       kode: 'ADVOKAT',
-      kodeverk: 'VERGE_TYPE',
       navn: 'Advokat/advokatfullmektig',
     },
     {
       kode: 'ANNEN_F',
-      kodeverk: 'VERGE_TYPE',
       navn: 'Annen fullmektig',
     },
   ],
   OverføringÅrsak: [
     {
       kode: 'IKKE_RETT_ANNEN_FORELDER',
-      kodeverk: 'OVERFOERING_AARSAK_TYPE',
       navn: 'Den andre foreldren har ikke rett på foreldrepenger',
     },
     {
       kode: 'ALENEOMSORG',
-      kodeverk: 'OVERFOERING_AARSAK_TYPE',
       navn: 'Aleneomsorg for barnet/barna',
     },
     {
       kode: 'SYKDOM_ANNEN_FORELDER',
-      kodeverk: 'OVERFOERING_AARSAK_TYPE',
       navn: 'Den andre foreldren er pga sykdom avhengig av hjelp for å ta seg av barnet/barna',
     },
     {
       kode: 'INSTITUSJONSOPPHOLD_ANNEN_FORELDER',
-      kodeverk: 'OVERFOERING_AARSAK_TYPE',
       navn: 'Den andre foreldren er innlagt i helseinstitusjon',
     },
   ],
   FamilieHendelseType: [
     {
       kode: 'OMSRGO',
-      kodeverk: 'FAMILIE_HENDELSE_TYPE',
       navn: 'Omsorgoverdragelse',
     },
     {
       kode: 'TERM',
-      kodeverk: 'FAMILIE_HENDELSE_TYPE',
       navn: 'Termin',
     },
     {
       kode: 'ADPSJN',
-      kodeverk: 'FAMILIE_HENDELSE_TYPE',
       navn: 'Adopsjon',
     },
     {
       kode: 'FODSL',
-      kodeverk: 'FAMILIE_HENDELSE_TYPE',
       navn: 'Fødsel',
     },
   ],
   KlageHjemmel: [
     {
       kode: '14-13',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-13 Fars uttak',
     },
     {
       kode: '8-2',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '8-2 Opptjeningstid',
     },
     {
       kode: '14-06',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-6 Opptjening',
     },
     {
       kode: '14-15',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-15 Far aleneomsorg',
     },
     {
       kode: '22-13',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '22-13 Fremsetning av krav',
     },
     {
       kode: '883-5',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: 'EØS 883/2004 artikkel 5',
     },
     {
       kode: '14-10',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-10 Uttaksperiodene',
     },
     {
       kode: '14-04',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-4 Svangerskapspenger',
     },
     {
       kode: '14-09',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-9 Stønadsperioden',
     },
     {
       kode: '14-11',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-11 Utsettelse',
     },
     {
       kode: '14-12',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-12 Uttak av kvoter',
     },
     {
       kode: '21-3',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '21-3 Opplysningsplikt',
     },
     {
       kode: '14-05',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-5 Rett på foreldrepenger',
     },
     {
       kode: '14-14',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-14 Bare far har rett',
     },
     {
       kode: '14-07',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-7 Beregning',
     },
     {
       kode: '883-6',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: 'EØS 883/2004 artikkel 6',
     },
     {
       kode: '14-02',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-2 Medlemskap',
     },
     {
       kode: '22-15',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '22-15 Tilbakekreving',
     },
     {
       kode: '14-17',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-17 Rett på engangsstønad',
     },
     {
       kode: '14-16',
-      kodeverk: 'KLAGE_HJEMMEL',
       navn: '14-16 Gradert uttak',
     },
   ],
   VilkårType: [
     {
       kode: 'FP_VK_2',
-      kodeverk: 'VILKAR_TYPE',
       navn: 'Medlemskapsvilkåret',
     },
     {
       kode: 'FP_VK_3',
-      kodeverk: 'VILKAR_TYPE',
       navn: 'Søknadsfristvilkåret',
     },
     {
       kode: 'FP_VK_1',
-      kodeverk: 'VILKAR_TYPE',
       navn: 'Fødselsvilkår Mor',
     },
     {
       kode: 'FP_VK_21',
-      kodeverk: 'VILKAR_TYPE',
       navn: 'Opptjeningsperiode',
     },
     {
       kode: 'FP_VK_23',
-      kodeverk: 'VILKAR_TYPE',
       navn: 'Opptjeningsvilkåret',
     },
     {
       kode: 'FP_VK_41',
-      kodeverk: 'VILKAR_TYPE',
       navn: 'Beregning',
     },
     {
       kode: 'FP_VK_2_F',
-      kodeverk: 'VILKAR_TYPE',
       navn: 'Medlemskapsvilkåret',
     },
     {
       kode: 'SVP_VK_1',
-      kodeverk: 'VILKAR_TYPE',
       navn: 'Svangerskapspengervilkåret',
     },
     {
       kode: 'FP_VK_11',
-      kodeverk: 'VILKAR_TYPE',
       navn: 'Fødselsvilkår for far/medmor',
     },
     {
       kode: 'FP_VK_2_L',
-      kodeverk: 'VILKAR_TYPE',
       navn: 'Løpende medlemskapsvilkår',
     },
     {
       kode: 'FP_VK_34',
-      kodeverk: 'VILKAR_TYPE',
       navn: 'Søkers opplysningsplikt',
     },
   ],
   FaresignalVurdering: [
     {
       kode: 'INNVIRKNING',
-      kodeverk: 'FARESIGNAL_VURDERING',
       navn: 'Faresignalene vurderes som reelle',
     },
     {
       kode: 'AVSLAG_FARESIGNAL',
-      kodeverk: 'FARESIGNAL_VURDERING',
       navn: 'Saken er avslått på grunn av faresignalene',
     },
     {
       kode: 'AVSLAG_ANNET',
-      kodeverk: 'FARESIGNAL_VURDERING',
       navn: 'Saken er avslått av andre årsaker',
     },
     {
       kode: 'INGEN_INNVIRKNING',
-      kodeverk: 'FARESIGNAL_VURDERING',
       navn: 'Faresignalene vurderes ikke som reelle',
     },
     {
       kode: 'INNVILGET_REDUSERT',
-      kodeverk: 'FARESIGNAL_VURDERING',
       navn: 'Saken er innvilget med redusert beregningsgrunnlag',
     },
     {
       kode: 'INNVILGET_UENDRET',
-      kodeverk: 'FARESIGNAL_VURDERING',
       navn: 'Saken er innvilget uten at faresignalene påvirket utfallet',
     },
   ],
   ArbeidType: [
     {
       kode: 'FRILANSER',
-      kodeverk: 'ARBEID_TYPE',
       navn: 'Frilanser, samlet aktivitet',
     },
     {
       kode: 'LØNN_UNDER_UTDANNING',
-      kodeverk: 'ARBEID_TYPE',
       navn: 'Lønn under utdanning',
     },
     {
       kode: 'MILITÆR_ELLER_SIVILTJENESTE',
-      kodeverk: 'ARBEID_TYPE',
       navn: 'Militær eller siviltjeneste',
     },
     {
       kode: 'VENTELØNN_VARTPENGER',
-      kodeverk: 'ARBEID_TYPE',
       navn: 'Ventelønn eller vartpenger',
     },
     {
       kode: 'ETTERLØNN_SLUTTPAKKE',
-      kodeverk: 'ARBEID_TYPE',
       navn: 'Etterlønn eller sluttpakke',
     },
     {
       kode: 'UTENLANDSK_ARBEIDSFORHOLD',
-      kodeverk: 'ARBEID_TYPE',
       navn: 'Arbeid i utlandet',
     },
   ],
   KlageMedholdÅrsak: [
     {
       kode: 'ULIK_REGELVERKSTOLKNING',
-      kodeverk: 'KLAGE_MEDHOLD_AARSAK',
       navn: 'Feil lovanvendelse',
     },
     {
       kode: 'PROSESSUELL_FEIL',
-      kodeverk: 'KLAGE_MEDHOLD_AARSAK',
       navn: 'Saksbehandlingsfeil',
     },
     {
       kode: 'ULIK_VURDERING',
-      kodeverk: 'KLAGE_MEDHOLD_AARSAK',
       navn: 'Ulik skjønnsvurdering',
     },
     {
       kode: 'NYE_OPPLYSNINGER',
-      kodeverk: 'KLAGE_MEDHOLD_AARSAK',
       navn: 'Nytt faktum',
     },
   ],
   Region: [
     {
       kode: 'NORDEN',
-      kodeverk: 'REGION',
       navn: 'Nordisk',
     },
     {
       kode: 'EOS',
-      kodeverk: 'REGION',
       navn: 'EU/EØS',
     },
     {
       kode: 'ANNET',
-      kodeverk: 'REGION',
       navn: '3.landsborger',
     },
   ],
   OmsorgsovertakelseVilkårType: [
     {
       kode: 'FP_VK_8F',
-      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
       navn: 'Foreldreansvar §14-5 andre ledd',
     },
     {
       kode: 'FP_VK_5',
-      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
       navn: 'Omsorg §14-17 tredje ledd',
     },
     {
       kode: 'FP_VK_8',
-      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
       navn: 'Foreldreansvar §14-17 andre ledd',
     },
-    { kode: 'FP_VK_16S', kodeverk: 'OMSORGSOVERTAKELSE_VILKAR', navn: 'Stebarnsadopsjon §14-5 tredje ledd' },
-    { kode: 'FP_VK_16', kodeverk: 'OMSORGSOVERTAKELSE_VILKAR', navn: 'Adopsjon §14-5 første ledd' },
+    { kode: 'FP_VK_16S', navn: 'Stebarnsadopsjon §14-5 tredje ledd' },
+    { kode: 'FP_VK_16', navn: 'Adopsjon §14-5 første ledd' },
     {
       kode: 'FP_VK_4',
-      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
       navn: 'Adopsjon §14-17 første ledd',
     },
     {
       kode: 'FP_VK_33',
-      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
       navn: 'Foreldreansvar §14-17 fjerde ledd',
     },
   ],
   FordelingPeriodeKilde: [
     {
       kode: 'ANDRE_NAV_VEDTAK',
-      kodeverk: 'FORDELING_PERIODE_KILDE',
       navn: 'Vedtak andre ytelser',
     },
     {
       kode: 'SØKNAD',
-      kodeverk: 'FORDELING_PERIODE_KILDE',
       navn: 'Søknad',
     },
     {
       kode: 'TIDLIGERE_VEDTAK',
-      kodeverk: 'FORDELING_PERIODE_KILDE',
       navn: 'Vedtak',
     },
     {
       kode: 'SAKSBEHANDLER',
-      kodeverk: 'FORDELING_PERIODE_KILDE',
       navn: 'Saksbehandler',
     },
   ],
   FagsakMarkering: [
     {
       kode: 'SELVSTENDIG_NÆRING',
-      kodeverk: 'FAGSAK_MARKERING',
       navn: 'Næringsdrivende',
     },
     {
       kode: 'SAMMENSATT_KONTROLL',
-      kodeverk: 'FAGSAK_MARKERING',
       navn: 'Sammensatt kontroll',
     },
     {
       kode: 'EØS_BOSATT_NORGE',
-      kodeverk: 'FAGSAK_MARKERING',
       navn: 'EØS bosatt Norge',
     },
     {
       kode: 'PRAKSIS_UTSETTELSE',
-      kodeverk: 'FAGSAK_MARKERING',
       navn: 'Praksis utsettelse',
     },
     {
       kode: 'BARE_FAR_RETT',
-      kodeverk: 'FAGSAK_MARKERING',
       navn: 'Bare far har rett',
     },
     {
       kode: 'DØD_DØDFØDSEL',
-      kodeverk: 'FAGSAK_MARKERING',
       navn: 'Død eller dødfødsel',
     },
     {
       kode: 'BOSATT_UTLAND',
-      kodeverk: 'FAGSAK_MARKERING',
       navn: 'Bosatt utland',
     },
   ],
   Arbeidskategori: [
     {
       kode: 'INAKTIV',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Inaktiv',
     },
     {
       kode: 'KOMBINASJON_ARBEIDSTAKER_OG_FISKER',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Kombinasjon arbeidstaker og selvstendig næringsdrivende - fisker',
     },
     {
       kode: 'KOMBINASJON_ARBEIDSTAKER_OG_FRILANSER',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Kombinasjon arbeidstaker og frilanser',
     },
     {
       kode: 'JORDBRUKER',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Selvstendig næringsdrivende - Jordbruker',
     },
     {
       kode: 'KOMBINASJON_ARBEIDSTAKER_OG_JORDBRUKER',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Kombinasjon arbeidstaker og selvstendig næringsdrivende - jordbruker',
     },
     {
       kode: 'ARBEIDSTAKER',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Arbeidstaker',
     },
     {
       kode: 'FRILANSER',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Frilanser',
     },
     {
       kode: 'KOMBINASJON_ARBEIDSTAKER_OG_DAGPENGER',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Kombinasjon arbeidstaker og dagpenger',
     },
     {
       kode: 'DAGMAMMA',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Selvstendig næringsdrivende - Dagmamma',
     },
     {
       kode: 'SJØMANN',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Arbeidstaker - sjømann',
     },
     {
       kode: 'UGYLDIG',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Ugyldig',
     },
     {
       kode: 'DAGPENGER',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Tilstøtende ytelse - dagpenger',
     },
     {
       kode: 'KOMBINASJON_ARBEIDSTAKER_OG_SELVSTENDIG_NÆRINGSDRIVENDE',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Kombinasjon arbeidstaker og selvstendig næringsdrivende',
     },
     {
       kode: 'SELVSTENDIG_NÆRINGSDRIVENDE',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Selvstendig næringsdrivende',
     },
     {
       kode: 'FISKER',
-      kodeverk: 'ARBEIDSKATEGORI',
       navn: 'Selvstendig næringsdrivende - Fisker',
     },
   ],
   VurderÅrsak: [
     {
       kode: 'ANNET',
-      kodeverk: 'VURDER_AARSAK',
       navn: 'Annet',
     },
     {
       kode: 'FEIL_REGEL',
-      kodeverk: 'VURDER_AARSAK',
       navn: 'Feil regelforståelse',
     },
     {
       kode: 'UTREDNING',
-      kodeverk: 'VURDER_AARSAK',
       navn: 'Utredning',
     },
     {
       kode: 'FEIL_LOV',
-      kodeverk: 'VURDER_AARSAK',
       navn: 'Regel-/lovanvendelse',
     },
     {
       kode: 'SKJØNN',
-      kodeverk: 'VURDER_AARSAK',
       navn: 'Skjønn',
     },
     {
       kode: 'SAKSFLYT',
-      kodeverk: 'VURDER_AARSAK',
       navn: 'Saksflyt',
     },
     {
       kode: 'BEGRUNNELSE',
-      kodeverk: 'VURDER_AARSAK',
       navn: 'Begrunnelse',
     },
     {
       kode: 'FEIL_FAKTA',
-      kodeverk: 'VURDER_AARSAK',
       navn: 'Fakta',
     },
   ],
   Landkoder: [
     {
       kode: 'SGP',
-      kodeverk: 'LANDKODER',
       navn: 'SINGAPORE',
     },
     {
       kode: 'GNB',
-      kodeverk: 'LANDKODER',
       navn: 'GUINEA-BISSAU',
     },
     {
       kode: 'NCL',
-      kodeverk: 'LANDKODER',
       navn: 'NY-KALEDONIA',
     },
     {
       kode: 'GHA',
-      kodeverk: 'LANDKODER',
       navn: 'GHANA',
     },
     {
       kode: 'DEU',
-      kodeverk: 'LANDKODER',
       navn: 'TYSKLAND',
     },
     {
       kode: 'ANT',
-      kodeverk: 'LANDKODER',
       navn: 'DE NEDERLANDSKE ANTILLENE',
     },
     {
       kode: 'SPM',
-      kodeverk: 'LANDKODER',
       navn: 'ST-PIERRE OG MIQUELON',
     },
     {
       kode: 'CUB',
-      kodeverk: 'LANDKODER',
       navn: 'CUBA',
     },
     {
       kode: 'NGA',
-      kodeverk: 'LANDKODER',
       navn: 'NIGERIA',
     },
     {
       kode: 'UGA',
-      kodeverk: 'LANDKODER',
       navn: 'UGANDA',
     },
     {
       kode: 'BVT',
-      kodeverk: 'LANDKODER',
       navn: 'BOUVETØYA',
     },
     {
       kode: 'XXK',
-      kodeverk: 'LANDKODER',
       navn: 'KOSOVO',
     },
     {
       kode: 'MDG',
-      kodeverk: 'LANDKODER',
       navn: 'MADAGASKAR',
     },
     {
       kode: 'VAT',
-      kodeverk: 'LANDKODER',
       navn: 'VATIKANSTATEN',
     },
     {
       kode: 'PRK',
-      kodeverk: 'LANDKODER',
       navn: 'NORD-KOREA',
     },
     {
       kode: 'NZL',
-      kodeverk: 'LANDKODER',
       navn: 'NEW ZEALAND',
     },
     {
       kode: 'MCO',
-      kodeverk: 'LANDKODER',
       navn: 'MONACO',
     },
     {
       kode: 'GUF',
-      kodeverk: 'LANDKODER',
       navn: 'FRANSK GUYANA',
     },
     {
       kode: 'ETH',
-      kodeverk: 'LANDKODER',
       navn: 'ETIOPIA',
     },
     {
       kode: 'MNP',
-      kodeverk: 'LANDKODER',
       navn: 'NORD-MARIANENE',
     },
     {
       kode: 'BMU',
-      kodeverk: 'LANDKODER',
       navn: 'BERMUDA',
     },
     {
       kode: 'PSE',
-      kodeverk: 'LANDKODER',
       navn: 'DET PALESTINSKE OMRÅDET',
     },
     {
       kode: 'PYF',
-      kodeverk: 'LANDKODER',
       navn: 'FRANSK POLYNESIA',
     },
     {
       kode: 'FLK',
-      kodeverk: 'LANDKODER',
       navn: 'FALKLANDSØYENE',
     },
     {
       kode: 'NER',
-      kodeverk: 'LANDKODER',
       navn: 'NIGER',
     },
     {
       kode: 'SSD',
-      kodeverk: 'LANDKODER',
       navn: 'SØR-SUDAN',
     },
     {
       kode: 'PLW',
-      kodeverk: 'LANDKODER',
       navn: 'PALAU',
     },
     {
       kode: 'HRV',
-      kodeverk: 'LANDKODER',
       navn: 'KROATIA',
     },
     {
       kode: 'ALA',
-      kodeverk: 'LANDKODER',
       navn: 'ÅLAND',
     },
     {
       kode: 'ZWE',
-      kodeverk: 'LANDKODER',
       navn: 'ZIMBABWE',
     },
     {
       kode: 'SRB',
-      kodeverk: 'LANDKODER',
       navn: 'SERBIA',
     },
     {
       kode: 'SHN',
-      kodeverk: 'LANDKODER',
       navn: 'ST. HELENA',
     },
     {
       kode: 'TTO',
-      kodeverk: 'LANDKODER',
       navn: 'TRINIDAD OG TOBAGO',
     },
     {
       kode: 'THA',
-      kodeverk: 'LANDKODER',
       navn: 'THAILAND',
     },
     {
       kode: 'KGZ',
-      kodeverk: 'LANDKODER',
       navn: 'KIRGISISTAN',
     },
     {
       kode: 'MDV',
-      kodeverk: 'LANDKODER',
       navn: 'MALDIVENE',
     },
     {
       kode: 'TWN',
-      kodeverk: 'LANDKODER',
       navn: 'TAIWAN',
     },
     {
       kode: 'BEL',
-      kodeverk: 'LANDKODER',
       navn: 'BELGIA',
     },
     {
       kode: 'ARM',
-      kodeverk: 'LANDKODER',
       navn: 'ARMENIA',
     },
     {
       kode: 'SYR',
-      kodeverk: 'LANDKODER',
       navn: 'SYRIA',
     },
     {
       kode: 'WSM',
-      kodeverk: 'LANDKODER',
       navn: 'SAMOA',
     },
     {
       kode: 'VCT',
-      kodeverk: 'LANDKODER',
       navn: 'ST. VINCENT',
     },
     {
       kode: 'IND',
-      kodeverk: 'LANDKODER',
       navn: 'INDIA',
     },
     {
       kode: 'ITA',
-      kodeverk: 'LANDKODER',
       navn: 'ITALIA',
     },
     {
       kode: 'SLE',
-      kodeverk: 'LANDKODER',
       navn: 'SIERRA LEONE',
     },
     {
       kode: 'CHE',
-      kodeverk: 'LANDKODER',
       navn: 'SVEITS',
     },
     {
       kode: 'MHL',
-      kodeverk: 'LANDKODER',
       navn: 'MARSHALLØYENE',
     },
     {
       kode: 'URY',
-      kodeverk: 'LANDKODER',
       navn: 'URUGUAY',
     },
     {
       kode: 'FJI',
-      kodeverk: 'LANDKODER',
       navn: 'FIJI',
     },
     {
       kode: 'IMN',
-      kodeverk: 'LANDKODER',
       navn: 'ISLE OF MAN',
     },
     {
       kode: 'CSK',
-      kodeverk: 'LANDKODER',
       navn: 'TSJEKKOSLOVAKIA',
     },
     {
       kode: 'SGS',
-      kodeverk: 'LANDKODER',
       navn: 'SØR-GEORGIA OG SØR-SANDWICHØYE',
     },
     {
       kode: 'ASM',
-      kodeverk: 'LANDKODER',
       navn: 'AM. SAMOA',
     },
     {
       kode: 'BGR',
-      kodeverk: 'LANDKODER',
       navn: 'BULGARIA',
     },
     {
       kode: 'MYT',
-      kodeverk: 'LANDKODER',
       navn: 'MAYOTTE',
     },
     {
       kode: 'DNK',
-      kodeverk: 'LANDKODER',
       navn: 'DANMARK',
     },
     {
       kode: 'IRL',
-      kodeverk: 'LANDKODER',
       navn: 'IRLAND',
     },
     {
       kode: 'LSO',
-      kodeverk: 'LANDKODER',
       navn: 'LESOTHO',
     },
     {
       kode: 'IRN',
-      kodeverk: 'LANDKODER',
       navn: 'IRAN',
     },
     {
       kode: 'GLP',
-      kodeverk: 'LANDKODER',
       navn: 'GUADELOUPE',
     },
     {
       kode: 'ABW',
-      kodeverk: 'LANDKODER',
       navn: 'ARUBA',
     },
     {
       kode: 'BIH',
-      kodeverk: 'LANDKODER',
       navn: 'BOSNIA-HERCEGOVINA',
     },
     {
       kode: 'MTQ',
-      kodeverk: 'LANDKODER',
       navn: 'MARTINIQUE',
     },
     {
       kode: 'PRI',
-      kodeverk: 'LANDKODER',
       navn: 'PUERTO RICO',
     },
     {
       kode: 'HMD',
-      kodeverk: 'LANDKODER',
       navn: 'HEARD OG MCDONALD ØYENE',
     },
     {
       kode: 'IOT',
-      kodeverk: 'LANDKODER',
       navn: 'BRITISK-INDISKE HAV',
     },
     {
       kode: 'SLB',
-      kodeverk: 'LANDKODER',
       navn: 'SALOMONØYENE',
     },
     {
       kode: 'KAZ',
-      kodeverk: 'LANDKODER',
       navn: 'KAZAKHSTAN',
     },
     {
       kode: 'MEX',
-      kodeverk: 'LANDKODER',
       navn: 'MEXICO',
     },
     {
       kode: 'HKG',
-      kodeverk: 'LANDKODER',
       navn: 'HONGKONG',
     },
     {
       kode: 'LIE',
-      kodeverk: 'LANDKODER',
       navn: 'LIECHTENSTEIN',
     },
     {
       kode: 'BHS',
-      kodeverk: 'LANDKODER',
       navn: 'BAHAMAS',
     },
     {
       kode: 'UKR',
-      kodeverk: 'LANDKODER',
       navn: 'UKRAINA',
     },
     {
       kode: 'BES',
-      kodeverk: 'LANDKODER',
       navn: 'BONAIRE, SINT EUSTATIUS, SABA',
     },
     {
       kode: 'RWA',
-      kodeverk: 'LANDKODER',
       navn: 'RWANDA',
     },
     {
       kode: 'ARE',
-      kodeverk: 'LANDKODER',
       navn: 'DE ARABISKE EMIRATER',
     },
     {
       kode: 'EGY',
-      kodeverk: 'LANDKODER',
       navn: 'EGYPT',
     },
     {
       kode: 'SXM',
-      kodeverk: 'LANDKODER',
       navn: 'SINT MAARTEN',
     },
     {
       kode: 'GRC',
-      kodeverk: 'LANDKODER',
       navn: 'HELLAS',
     },
     {
       kode: 'ROU',
-      kodeverk: 'LANDKODER',
       navn: 'ROMANIA',
     },
     {
       kode: 'SUR',
-      kodeverk: 'LANDKODER',
       navn: 'SURINAM',
     },
     {
       kode: 'MYS',
-      kodeverk: 'LANDKODER',
       navn: 'MALAYSIA',
     },
     {
       kode: 'OMN',
-      kodeverk: 'LANDKODER',
       navn: 'OMAN',
     },
     {
       kode: 'LBY',
-      kodeverk: 'LANDKODER',
       navn: 'LIBYA',
     },
     {
       kode: 'FRO',
-      kodeverk: 'LANDKODER',
       navn: 'FÆRØYENE',
     },
     {
       kode: 'ISR',
-      kodeverk: 'LANDKODER',
       navn: 'ISRAEL',
     },
     {
       kode: 'IDN',
-      kodeverk: 'LANDKODER',
       navn: 'INDONESIA',
     },
     {
       kode: 'SMR',
-      kodeverk: 'LANDKODER',
       navn: 'SAN MARINO',
     },
     {
       kode: 'MKD',
-      kodeverk: 'LANDKODER',
       navn: 'MAKEDONIA',
     },
     {
       kode: 'SWZ',
-      kodeverk: 'LANDKODER',
       navn: 'SWAZILAND',
     },
     {
       kode: 'DZA',
-      kodeverk: 'LANDKODER',
       navn: 'ALGERIE',
     },
     {
       kode: 'MWI',
-      kodeverk: 'LANDKODER',
       navn: 'MALAWI',
     },
     {
       kode: 'STP',
-      kodeverk: 'LANDKODER',
       navn: 'SAO TOME OG PRINCIPE',
     },
     {
       kode: 'VIR',
-      kodeverk: 'LANDKODER',
       navn: 'JOMFRUØYENE AM.',
     },
     {
       kode: 'CPV',
-      kodeverk: 'LANDKODER',
       navn: 'KAPP VERDE',
     },
     {
       kode: 'PAK',
-      kodeverk: 'LANDKODER',
       navn: 'PAKISTAN',
     },
     {
       kode: 'ECU',
-      kodeverk: 'LANDKODER',
       navn: 'ECUADOR',
     },
     {
       kode: 'PRT',
-      kodeverk: 'LANDKODER',
       navn: 'PORTUGAL',
     },
     {
       kode: 'COD',
-      kodeverk: 'LANDKODER',
       navn: 'KONGO, DEN DEMOKR. REPUBL',
     },
     {
       kode: 'MMR',
-      kodeverk: 'LANDKODER',
       navn: 'MYANMAR (BURMA)',
     },
     {
       kode: 'ZAF',
-      kodeverk: 'LANDKODER',
       navn: 'SØR-AFRIKA',
     },
     {
       kode: 'USA',
-      kodeverk: 'LANDKODER',
       navn: 'USA',
     },
     {
       kode: 'SVN',
-      kodeverk: 'LANDKODER',
       navn: 'SLOVENIA',
     },
     {
       kode: 'FSM',
-      kodeverk: 'LANDKODER',
       navn: 'MIKRONESIAFØD.',
     },
     {
       kode: 'GNQ',
-      kodeverk: 'LANDKODER',
       navn: 'EKVATORIAL-GUINEA',
     },
     {
       kode: 'CHN',
-      kodeverk: 'LANDKODER',
       navn: 'REPUBLIKKEN KINA',
     },
     {
       kode: 'HTI',
-      kodeverk: 'LANDKODER',
       navn: 'HAITI',
     },
     {
       kode: 'NIC',
-      kodeverk: 'LANDKODER',
       navn: 'NICARAGUA',
     },
     {
       kode: 'NAM',
-      kodeverk: 'LANDKODER',
       navn: 'NAMIBIA',
     },
     {
       kode: 'SWE',
-      kodeverk: 'LANDKODER',
       navn: 'SVERIGE',
     },
     {
       kode: 'BRA',
-      kodeverk: 'LANDKODER',
       navn: 'BRASIL',
     },
     {
       kode: 'GMB',
-      kodeverk: 'LANDKODER',
       navn: 'GAMBIA',
     },
     {
       kode: 'WLF',
-      kodeverk: 'LANDKODER',
       navn: 'WALLIS/FUTUNAØYENE',
     },
     {
       kode: 'JAM',
-      kodeverk: 'LANDKODER',
       navn: 'JAMAICA',
     },
     {
       kode: '???',
-      kodeverk: 'LANDKODER',
       navn: 'UOPPGITT/UKJENT',
     },
     {
       kode: 'YEM',
-      kodeverk: 'LANDKODER',
       navn: 'JEMEN',
     },
     {
       kode: 'MAF',
-      kodeverk: 'LANDKODER',
       navn: 'SAINT MARTIN',
     },
     {
       kode: 'NRU',
-      kodeverk: 'LANDKODER',
       navn: 'NAURU',
     },
     {
       kode: 'TKL',
-      kodeverk: 'LANDKODER',
       navn: 'TOKELAU',
     },
     {
       kode: 'AND',
-      kodeverk: 'LANDKODER',
       navn: 'ANDORRA',
     },
     {
       kode: 'SJM',
-      kodeverk: 'LANDKODER',
       navn: 'SVALBARD OG JAN MAYEN',
     },
     {
       kode: 'BEN',
-      kodeverk: 'LANDKODER',
       navn: 'BENIN',
     },
     {
       kode: 'CHL',
-      kodeverk: 'LANDKODER',
       navn: 'CHILE',
     },
     {
       kode: 'SCG',
-      kodeverk: 'LANDKODER',
       navn: 'SERBIA OG MONTENEGRO',
     },
     {
       kode: 'KIR',
-      kodeverk: 'LANDKODER',
       navn: 'KIRIBATI',
     },
     {
       kode: 'VGB',
-      kodeverk: 'LANDKODER',
       navn: 'JOMFRUØYENE BRIT.',
     },
     {
       kode: 'MNE',
-      kodeverk: 'LANDKODER',
       navn: 'MONTENEGRO',
     },
     {
       kode: 'MLI',
-      kodeverk: 'LANDKODER',
       navn: 'MALI',
     },
     {
       kode: 'REU',
-      kodeverk: 'LANDKODER',
       navn: 'REUNION',
     },
     {
       kode: 'BWA',
-      kodeverk: 'LANDKODER',
       navn: 'BOTSWANA',
     },
     {
       kode: 'PCN',
-      kodeverk: 'LANDKODER',
       navn: 'PITCAIRN',
     },
     {
       kode: 'UMI',
-      kodeverk: 'LANDKODER',
       navn: 'MINDRE STILLEHAVSØYER',
     },
     {
       kode: 'TUV',
-      kodeverk: 'LANDKODER',
       navn: 'TUVALU',
     },
     {
       kode: 'LKA',
-      kodeverk: 'LANDKODER',
       navn: 'SRI LANKA',
     },
     {
       kode: 'BDI',
-      kodeverk: 'LANDKODER',
       navn: 'BURUNDI',
     },
     {
       kode: 'AGO',
-      kodeverk: 'LANDKODER',
       navn: 'ANGOLA',
     },
     {
       kode: 'MRT',
-      kodeverk: 'LANDKODER',
       navn: 'MAURITANIA',
     },
     {
       kode: 'MUS',
-      kodeverk: 'LANDKODER',
       navn: 'MAURITIUS',
     },
     {
       kode: 'CYP',
-      kodeverk: 'LANDKODER',
       navn: 'KYPROS',
     },
     {
       kode: 'SYC',
-      kodeverk: 'LANDKODER',
       navn: 'SEYCHELLENE',
     },
     {
       kode: 'COK',
-      kodeverk: 'LANDKODER',
       navn: 'COOKØYENE',
     },
     {
       kode: 'VEN',
-      kodeverk: 'LANDKODER',
       navn: 'VENEZUELA',
     },
     {
       kode: 'ESH',
-      kodeverk: 'LANDKODER',
       navn: 'VEST-SAHARA',
     },
     {
       kode: 'SUN',
-      kodeverk: 'LANDKODER',
       navn: 'SOVJETUNIONEN',
     },
     {
       kode: 'EST',
-      kodeverk: 'LANDKODER',
       navn: 'ESTLAND',
     },
     {
       kode: 'CIV',
-      kodeverk: 'LANDKODER',
       navn: 'ELFENBEINSKYSTEN',
     },
     {
       kode: 'HUN',
-      kodeverk: 'LANDKODER',
       navn: 'UNGARN',
     },
     {
       kode: 'MLT',
-      kodeverk: 'LANDKODER',
       navn: 'MALTA',
     },
     {
       kode: 'COM',
-      kodeverk: 'LANDKODER',
       navn: 'KOMORENE',
     },
     {
       kode: 'NPL',
-      kodeverk: 'LANDKODER',
       navn: 'NEPAL',
     },
     {
       kode: 'CRI',
-      kodeverk: 'LANDKODER',
       navn: 'COSTA RICA',
     },
     {
       kode: 'LVA',
-      kodeverk: 'LANDKODER',
       navn: 'LATVIA',
     },
     {
       kode: 'GUY',
-      kodeverk: 'LANDKODER',
       navn: 'GUYANA',
     },
     {
       kode: 'ALB',
-      kodeverk: 'LANDKODER',
       navn: 'ALBANIA',
     },
     {
       kode: 'NLD',
-      kodeverk: 'LANDKODER',
       navn: 'NEDERLAND',
     },
     {
       kode: 'AIA',
-      kodeverk: 'LANDKODER',
       navn: 'ANGUILLA',
     },
     {
       kode: 'BRN',
-      kodeverk: 'LANDKODER',
       navn: 'BRUNEI',
     },
     {
       kode: 'LCA',
-      kodeverk: 'LANDKODER',
       navn: 'ST. LUCIA',
     },
     {
       kode: 'NOR',
-      kodeverk: 'LANDKODER',
       navn: 'NORGE',
     },
     {
       kode: 'NIU',
-      kodeverk: 'LANDKODER',
       navn: 'NIUE',
     },
     {
       kode: 'DOM',
-      kodeverk: 'LANDKODER',
       navn: 'DEN DOMINIKANSKE REP',
     },
     {
       kode: 'GGY',
-      kodeverk: 'LANDKODER',
       navn: 'GUERNSEY',
     },
     {
       kode: 'BTN',
-      kodeverk: 'LANDKODER',
       navn: 'BHUTAN',
     },
     {
       kode: 'YUG',
-      kodeverk: 'LANDKODER',
       navn: 'JUGOSLAVIA',
     },
     {
       kode: 'MSR',
-      kodeverk: 'LANDKODER',
       navn: 'MONSERRAT',
     },
     {
       kode: 'JEY',
-      kodeverk: 'LANDKODER',
       navn: 'JERSEY',
     },
     {
       kode: 'TCA',
-      kodeverk: 'LANDKODER',
       navn: 'TURKS/CAICOSØYENE',
     },
     {
       kode: 'GRL',
-      kodeverk: 'LANDKODER',
       navn: 'GRØNLAND',
     },
     {
       kode: 'CAN',
-      kodeverk: 'LANDKODER',
       navn: 'CANADA',
     },
     {
       kode: 'TJK',
-      kodeverk: 'LANDKODER',
       navn: 'TADZJIKISTAN',
     },
     {
       kode: 'LUX',
-      kodeverk: 'LANDKODER',
       navn: 'LUXEMBOURG',
     },
     {
       kode: 'KHM',
-      kodeverk: 'LANDKODER',
       navn: 'KAMBODSJA',
     },
     {
       kode: 'TCD',
-      kodeverk: 'LANDKODER',
       navn: 'TSJAD',
     },
     {
       kode: 'FIN',
-      kodeverk: 'LANDKODER',
       navn: 'FINLAND',
     },
     {
       kode: 'AUT',
-      kodeverk: 'LANDKODER',
       navn: 'ØSTERRIKE',
     },
     {
       kode: 'BFA',
-      kodeverk: 'LANDKODER',
       navn: 'BURKINA FASO',
     },
     {
       kode: 'CZE',
-      kodeverk: 'LANDKODER',
       navn: 'DEN TSJEKKISKE REP.',
     },
     {
       kode: 'XXX',
-      kodeverk: 'LANDKODER',
       navn: 'STATSLØS',
     },
     {
       kode: 'CYM',
-      kodeverk: 'LANDKODER',
       navn: 'CAYMANØYENE',
     },
     {
       kode: 'POL',
-      kodeverk: 'LANDKODER',
       navn: 'POLEN',
     },
     {
       kode: 'VNM',
-      kodeverk: 'LANDKODER',
       navn: 'VIETNAM',
     },
     {
       kode: 'BRB',
-      kodeverk: 'LANDKODER',
       navn: 'BARBADOS',
     },
     {
       kode: 'SVK',
-      kodeverk: 'LANDKODER',
       navn: 'SLOVAKIA',
     },
     {
       kode: 'AUS',
-      kodeverk: 'LANDKODER',
       navn: 'AUSTRALIA',
     },
     {
       kode: 'PRY',
-      kodeverk: 'LANDKODER',
       navn: 'PARAGUAY',
     },
     {
       kode: 'ATG',
-      kodeverk: 'LANDKODER',
       navn: 'ANTIGUA OG BARBUDA',
     },
     {
       kode: 'TKM',
-      kodeverk: 'LANDKODER',
       navn: 'TURKMENISTAN',
     },
     {
       kode: 'LTU',
-      kodeverk: 'LANDKODER',
       navn: 'LITAUEN',
     },
     {
       kode: 'SAU',
-      kodeverk: 'LANDKODER',
       navn: 'SAUDI-ARABIA',
     },
     {
       kode: 'CAF',
-      kodeverk: 'LANDKODER',
       navn: 'SENTRALAFRIKA. REP.',
     },
     {
       kode: 'TON',
-      kodeverk: 'LANDKODER',
       navn: 'TONGA',
     },
     {
       kode: 'CMR',
-      kodeverk: 'LANDKODER',
       navn: 'KAMERUN',
     },
     {
       kode: 'SDN',
-      kodeverk: 'LANDKODER',
       navn: 'SUDAN',
     },
     {
       kode: 'PAN',
-      kodeverk: 'LANDKODER',
       navn: 'PANAMA',
     },
     {
       kode: 'LAO',
-      kodeverk: 'LANDKODER',
       navn: 'LAOS',
     },
     {
       kode: 'JOR',
-      kodeverk: 'LANDKODER',
       navn: 'JORDAN',
     },
     {
       kode: 'MAC',
-      kodeverk: 'LANDKODER',
       navn: 'MACAO',
     },
     {
       kode: 'GIB',
-      kodeverk: 'LANDKODER',
       navn: 'GIBRALTAR',
     },
     {
       kode: 'XUK',
-      kodeverk: 'LANDKODER',
       navn: 'UKJENT',
     },
     {
       kode: 'MNG',
-      kodeverk: 'LANDKODER',
       navn: 'MONGOLIA',
     },
     {
       kode: 'TUN',
-      kodeverk: 'LANDKODER',
       navn: 'TUNISIA',
     },
     {
       kode: 'UZB',
-      kodeverk: 'LANDKODER',
       navn: 'UZBEKISTAN',
     },
     {
       kode: 'KWT',
-      kodeverk: 'LANDKODER',
       navn: 'KUWAIT',
     },
     {
       kode: 'ERI',
-      kodeverk: 'LANDKODER',
       navn: 'ERITREA',
     },
     {
       kode: 'TGO',
-      kodeverk: 'LANDKODER',
       navn: 'TOGO',
     },
     {
       kode: 'VUT',
-      kodeverk: 'LANDKODER',
       navn: 'VANUATU',
     },
     {
       kode: 'GIN',
-      kodeverk: 'LANDKODER',
       navn: 'GUINEA',
     },
     {
       kode: 'SOM',
-      kodeverk: 'LANDKODER',
       navn: 'SOMALIA',
     },
     {
       kode: 'KOR',
-      kodeverk: 'LANDKODER',
       navn: 'SØR-KOREA',
     },
     {
       kode: 'PHL',
-      kodeverk: 'LANDKODER',
       navn: 'FILIPPINENE',
     },
     {
       kode: 'BHR',
-      kodeverk: 'LANDKODER',
       navn: 'BAHRAIN',
     },
     {
       kode: 'DJI',
-      kodeverk: 'LANDKODER',
       navn: 'DJIBOUTI',
     },
     {
       kode: 'ESP',
-      kodeverk: 'LANDKODER',
       navn: 'SPANIA',
     },
     {
       kode: 'GTM',
-      kodeverk: 'LANDKODER',
       navn: 'GUATEMALA',
     },
     {
       kode: 'GAB',
-      kodeverk: 'LANDKODER',
       navn: 'GABON',
     },
     {
       kode: 'KNA',
-      kodeverk: 'LANDKODER',
       navn: 'ST. KITTS OG NEVIS',
     },
     {
       kode: 'AFG',
-      kodeverk: 'LANDKODER',
       navn: 'AFGHANISTAN',
     },
     {
       kode: 'MDA',
-      kodeverk: 'LANDKODER',
       navn: 'MOLDOVA',
     },
     {
       kode: 'PER',
-      kodeverk: 'LANDKODER',
       navn: 'PERU',
     },
     {
       kode: 'ZMB',
-      kodeverk: 'LANDKODER',
       navn: 'ZAMBIA',
     },
     {
       kode: 'QAT',
-      kodeverk: 'LANDKODER',
       navn: 'QATAR',
     },
     {
       kode: 'LBR',
-      kodeverk: 'LANDKODER',
       navn: 'LIBERIA',
     },
     {
       kode: 'CUW',
-      kodeverk: 'LANDKODER',
       navn: 'CURACAO',
     },
     {
       kode: 'BLM',
-      kodeverk: 'LANDKODER',
       navn: 'SAINT BARTHELEMY',
     },
     {
       kode: 'BLZ',
-      kodeverk: 'LANDKODER',
       navn: 'BELIZE',
     },
     {
       kode: 'TZA',
-      kodeverk: 'LANDKODER',
       navn: 'TANZANIA',
     },
     {
       kode: 'ISL',
-      kodeverk: 'LANDKODER',
       navn: 'ISLAND',
     },
     {
       kode: 'TLS',
-      kodeverk: 'LANDKODER',
       navn: 'ØST-TIMOR',
     },
     {
       kode: 'GRD',
-      kodeverk: 'LANDKODER',
       navn: 'GRENADA',
     },
     {
       kode: 'ARG',
-      kodeverk: 'LANDKODER',
       navn: 'ARGENTINA',
     },
     {
       kode: 'COG',
-      kodeverk: 'LANDKODER',
       navn: 'KONGO, REPUBLIKKEN',
     },
     {
       kode: 'MOZ',
-      kodeverk: 'LANDKODER',
       navn: 'MOSAMBIK',
     },
     {
       kode: 'SEN',
-      kodeverk: 'LANDKODER',
       navn: 'SENEGAL',
     },
     {
       kode: 'BGD',
-      kodeverk: 'LANDKODER',
       navn: 'BANGLADESH',
     },
     {
       kode: 'IRQ',
-      kodeverk: 'LANDKODER',
       navn: 'IRAK',
     },
     {
       kode: 'SLV',
-      kodeverk: 'LANDKODER',
       navn: 'EL SALVADOR',
     },
     {
       kode: 'TUR',
-      kodeverk: 'LANDKODER',
       navn: 'TYRKIA',
     },
     {
       kode: 'DDR',
-      kodeverk: 'LANDKODER',
       navn: 'TYSKLAND (ØST)',
     },
     {
       kode: 'LBN',
-      kodeverk: 'LANDKODER',
       navn: 'LIBANON',
     },
     {
       kode: 'GBR',
-      kodeverk: 'LANDKODER',
       navn: 'STORBRITANNIA',
     },
     {
       kode: 'COL',
-      kodeverk: 'LANDKODER',
       navn: 'COLOMBIA',
     },
     {
       kode: 'CXR',
-      kodeverk: 'LANDKODER',
       navn: 'CHRISTMASØYA',
     },
     {
       kode: 'PNG',
-      kodeverk: 'LANDKODER',
       navn: 'PAPUA NY-GUINEA',
     },
     {
       kode: 'NFK',
-      kodeverk: 'LANDKODER',
       navn: 'NORFOLKØYA',
     },
     {
       kode: 'HND',
-      kodeverk: 'LANDKODER',
       navn: 'HONDURAS',
     },
     {
       kode: 'BOL',
-      kodeverk: 'LANDKODER',
       navn: 'BOLIVIA',
     },
     {
       kode: 'RUS',
-      kodeverk: 'LANDKODER',
       navn: 'RUSSLAND',
     },
     {
       kode: 'DMA',
-      kodeverk: 'LANDKODER',
       navn: 'DOMINICA',
     },
     {
       kode: 'AZE',
-      kodeverk: 'LANDKODER',
       navn: 'AZERBAJDZJAN',
     },
     {
       kode: 'BLR',
-      kodeverk: 'LANDKODER',
       navn: 'HVITERUSSLAND',
     },
     {
       kode: 'CCK',
-      kodeverk: 'LANDKODER',
       navn: 'KOKOSØYENE',
     },
     {
       kode: 'GEO',
-      kodeverk: 'LANDKODER',
       navn: 'GEORGIA',
     },
     {
       kode: 'GUM',
-      kodeverk: 'LANDKODER',
       navn: 'GUAM',
     },
     {
       kode: 'JPN',
-      kodeverk: 'LANDKODER',
       navn: 'JAPAN',
     },
     {
       kode: 'FRA',
-      kodeverk: 'LANDKODER',
       navn: 'FRANKRIKE',
     },
     {
       kode: 'KEN',
-      kodeverk: 'LANDKODER',
       navn: 'KENYA',
     },
     {
       kode: 'MAR',
-      kodeverk: 'LANDKODER',
       navn: 'MAROKKO',
     },
   ],
   Avslagsårsak: [
     {
       kode: '1008',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søker er ikke barnets far',
     },
     {
       kode: '1025',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søker er ikke bosatt',
     },
     {
       kode: '1016',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søker er ikke barnets far',
     },
     {
       kode: '1060',
-      kodeverk: 'AVSLAGSARSAK',
       navn: '§14-4 første ledd: Søker er ikke gravid kvinne',
     },
     {
       kode: '1033',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Engangsstønad er allerede utbetalt til far/medmor ',
     },
     {
       kode: '1005',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Ektefelles/samboers barn',
     },
     {
       kode: '1064',
-      kodeverk: 'AVSLAGSARSAK',
       navn: '§14-4 første ledd: Arbeidstaker kan omplasseres til annet høvelig arbeid',
     },
     {
       kode: '1023',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søker har ikke lovlig opphold',
     },
     {
       kode: '1015',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søker har hatt vanlig samvær med barnet',
     },
     {
       kode: '1027',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Ingen barn dokumentert på far/medmor',
     },
     {
       kode: '1026',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Fødselsdato ikke oppgitt eller registrert',
     },
     {
       kode: '1003',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søker er far',
     },
     {
       kode: '1029',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Bruker er ikke registrert som far/medmor til barnet',
     },
     {
       kode: '1021',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søker er utflyttet',
     },
     {
       kode: '1032',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Foreldrepenger er allerede utbetalt til mor',
     },
     {
       kode: '1006',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Mann adopterer ikke alene',
     },
     {
       kode: '1009',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Mor ikke død',
     },
     {
       kode: '1001',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søkt for tidlig',
     },
     {
       kode: '1018',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Ikke foreldreansvar alene etter barnelova',
     },
     {
       kode: '1035',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Ikke tilstrekkelig opptjening',
     },
     {
       kode: '1010',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Mor ikke død ved fødsel/omsorg',
     },
     {
       kode: '1020',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søker er ikke medlem',
     },
     {
       kode: '1051',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Stebarnsadopsjon ikke flere dager igjen',
     },
     {
       kode: '1028',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Mor fyller ikke vilkåret for sykdom',
     },
     {
       kode: '1017',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Omsorgsovertakelse etter 56 uker',
     },
     {
       kode: '1004',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Barn over 15 år',
     },
     {
       kode: '1062',
-      kodeverk: 'AVSLAGSARSAK',
       navn: '§14-4 første ledd: Søker har mottatt sykepenger',
     },
     {
       kode: '1041',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'For lavt brutto beregningsgrunnlag',
     },
     {
       kode: '1063',
-      kodeverk: 'AVSLAGSARSAK',
       navn: '§14-4 første ledd: Arbeidstaker har ikke dokumentert risikofaktorer',
     },
     {
       kode: '1065',
-      kodeverk: 'AVSLAGSARSAK',
       navn: '§14-4 andre ledd: Næringsdrivende/frilanser har ikke dokumentert risikofaktorer',
     },
     {
       kode: '1011',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Engangsstønad er allerede utbetalt til mor',
     },
     {
       kode: '1052',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Innflyttet mindre enn 12 måneder før termin/omsorgsovertakelse',
     },
     {
       kode: '1031',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Engangsstønad er allerede utbetalt til mor',
     },
     {
       kode: '1066',
-      kodeverk: 'AVSLAGSARSAK',
       navn: '§14-4 andre ledd: Næringsdrivende/frilanser har mulighet til å tilrettelegge sitt virke',
     },
     {
       kode: '1007',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søkt for sent',
     },
     {
       kode: '1012',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Far har ikke omsorg for barnet',
     },
     {
       kode: '1034',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Foreldrepenger er allerede utbetalt til far/medmor',
     },
     {
       kode: '1002',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søker er medmor',
     },
     {
       kode: '1014',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søker har ikke foreldreansvar',
     },
     {
       kode: '1019',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Manglende dokumentasjon',
     },
     {
       kode: '1024',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Søker har ikke oppholdsrett (EØS)',
     },
     {
       kode: '1061',
-      kodeverk: 'AVSLAGSARSAK',
       navn: '§14-4 tredje ledd: Søker er ikke i arbeid/har ikke tap av pensjonsgivende inntekt',
     },
     {
       kode: '1099',
-      kodeverk: 'AVSLAGSARSAK',
       navn: 'Ingen beregningsregler tilgjengelig i løsningen',
     },
   ],
   BehandlingType: [
     {
       kode: 'BT-002',
-      kodeverk: 'BEHANDLING_TYPE',
       navn: 'Førstegangsbehandling',
     },
     {
       kode: 'BT-006',
-      kodeverk: 'BEHANDLING_TYPE',
       navn: 'Dokumentinnsyn',
     },
     {
       kode: 'BT-007',
-      kodeverk: 'BEHANDLING_TYPE',
       navn: 'Tilbakekreving',
     },
     {
       kode: 'BT-004',
-      kodeverk: 'BEHANDLING_TYPE',
       navn: 'Revurdering',
     },
     {
       kode: 'BT-003',
-      kodeverk: 'BEHANDLING_TYPE',
       navn: 'Klage',
     },
     {
       kode: 'BT-008',
-      kodeverk: 'BEHANDLING_TYPE',
       navn: 'Anke',
     },
     {
       kode: 'BT-009',
-      kodeverk: 'BEHANDLING_TYPE',
       navn: 'Revurdering tilbakekreving',
     },
   ],
   InnsynResultatType: [
     {
       kode: 'AVVIST',
-      kodeverk: 'INNSYN_RESULTAT_TYPE',
       navn: 'Avslått innsyn',
     },
     {
       kode: 'DELV',
-      kodeverk: 'INNSYN_RESULTAT_TYPE',
       navn: 'Delvis innvilget innsyn',
     },
     {
       kode: 'INNV',
-      kodeverk: 'INNSYN_RESULTAT_TYPE',
       navn: 'Innvilget innsyn',
     },
   ],
   MedlemskapType: [
     {
       kode: 'ENDELIG',
-      kodeverk: 'MEDLEMSKAP_TYPE',
       navn: 'Endelig',
     },
     {
       kode: 'AVKLARES',
-      kodeverk: 'MEDLEMSKAP_TYPE',
       navn: 'Under avklaring',
     },
     {
       kode: 'FORELOPIG',
-      kodeverk: 'MEDLEMSKAP_TYPE',
       navn: 'Foreløpig',
     },
   ],
   PersonstatusType: [
     {
       kode: 'FOSV',
-      kodeverk: 'PERSONSTATUS_TYPE',
       navn: 'Forsvunnet',
     },
     {
       kode: 'UTPE',
-      kodeverk: 'PERSONSTATUS_TYPE',
       navn: 'Opphørt',
     },
     {
       kode: 'BOSA',
-      kodeverk: 'PERSONSTATUS_TYPE',
       navn: 'Bosatt (f.reg)',
     },
     {
       kode: 'ADNR',
-      kodeverk: 'PERSONSTATUS_TYPE',
       navn: 'D-nummer',
     },
     {
       kode: 'FØDR',
-      kodeverk: 'PERSONSTATUS_TYPE',
       navn: 'Fødselregistrert',
     },
     {
       kode: 'DØD',
-      kodeverk: 'PERSONSTATUS_TYPE',
       navn: 'Død',
     },
     {
       kode: 'UREG',
-      kodeverk: 'PERSONSTATUS_TYPE',
       navn: 'Ikke bosatt (f.reg)',
     },
     {
       kode: 'UTVA',
-      kodeverk: 'PERSONSTATUS_TYPE',
       navn: 'Utflyttet',
     },
   ],
   UtsettelseÅrsak: [
     {
       kode: 'ARBEID',
-      kodeverk: 'UTSETTELSE_AARSAK_TYPE',
       navn: 'Arbeid',
     },
     {
       kode: 'INSTITUSJONSOPPHOLD_SØKER',
-      kodeverk: 'UTSETTELSE_AARSAK_TYPE',
       navn: 'Søker er innlagt i helseinstitusjon',
     },
     {
       kode: 'NAV_TILTAK',
-      kodeverk: 'UTSETTELSE_AARSAK_TYPE',
       navn: 'Tiltak i regi av Nav',
     },
     {
       kode: 'FRI',
-      kodeverk: 'UTSETTELSE_AARSAK_TYPE',
       navn: 'Fri utsettelse fom høst 2021',
     },
     {
       kode: 'SYKDOM',
-      kodeverk: 'UTSETTELSE_AARSAK_TYPE',
       navn: 'Avhengig av hjelp grunnet sykdom',
     },
     {
       kode: 'HV_OVELSE',
-      kodeverk: 'UTSETTELSE_AARSAK_TYPE',
       navn: 'Heimevernet',
     },
     {
       kode: 'INSTITUSJONSOPPHOLD_BARNET',
-      kodeverk: 'UTSETTELSE_AARSAK_TYPE',
       navn: 'Barn er innlagt i helseinstitusjon',
     },
     {
       kode: 'LOVBESTEMT_FERIE',
-      kodeverk: 'UTSETTELSE_AARSAK_TYPE',
       navn: 'Lovbestemt ferie',
     },
   ],
   BehandlingStatus: [
     {
       kode: 'AVSLU',
-      kodeverk: 'BEHANDLING_STATUS',
       navn: 'Avsluttet',
     },
     {
       kode: 'IVED',
-      kodeverk: 'BEHANDLING_STATUS',
       navn: 'Iverksetter vedtak',
     },
     {
       kode: 'FVED',
-      kodeverk: 'BEHANDLING_STATUS',
       navn: 'Fatter vedtak',
     },
     {
       kode: 'OPPRE',
-      kodeverk: 'BEHANDLING_STATUS',
       navn: 'Opprettet',
     },
     {
       kode: 'UTRED',
-      kodeverk: 'BEHANDLING_STATUS',
       navn: 'Behandling utredes',
     },
   ],
   RelasjonsRolleType: [
     {
       kode: 'FARA',
-      kodeverk: 'RELASJONSROLLE_TYPE',
       navn: 'Far',
     },
     {
       kode: 'ANPA',
-      kodeverk: 'RELASJONSROLLE_TYPE',
       navn: 'Annen part fra søknad',
     },
     {
       kode: 'EKTE',
-      kodeverk: 'RELASJONSROLLE_TYPE',
       navn: 'Ektefelle',
     },
     {
       kode: 'REPA',
-      kodeverk: 'RELASJONSROLLE_TYPE',
       navn: 'Registrert partner',
     },
     {
       kode: 'MORA',
-      kodeverk: 'RELASJONSROLLE_TYPE',
       navn: 'Mor',
     },
     {
       kode: 'BARN',
-      kodeverk: 'RELASJONSROLLE_TYPE',
       navn: 'Barn',
     },
     {
       kode: 'MMOR',
-      kodeverk: 'RELASJONSROLLE_TYPE',
       navn: 'Medmor',
     },
   ],
   VirksomhetType: [
     {
       kode: 'JORDBRUK_SKOGBRUK',
-      kodeverk: 'VIRKSOMHET_TYPE',
       navn: 'Jordbruk',
     },
     {
       kode: 'FRILANSER',
-      kodeverk: 'VIRKSOMHET_TYPE',
       navn: 'Frilanser',
     },
     {
       kode: 'ANNEN',
-      kodeverk: 'VIRKSOMHET_TYPE',
       navn: 'Annen næringsvirksomhet',
     },
     {
       kode: 'FISKE',
-      kodeverk: 'VIRKSOMHET_TYPE',
       navn: 'Fiske',
     },
     {
       kode: 'DAGMAMMA',
-      kodeverk: 'VIRKSOMHET_TYPE',
       navn: 'Dagmamma i eget hjem/familiebarnehage',
     },
   ],
   MedlemskapDekningType: [
     {
       kode: 'FTL_2_9_1_b',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'Folketrygdloven § 2-9, 1.ledd bokstav b',
     },
     {
       kode: 'OPPHOR',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'Opphør',
     },
     {
       kode: 'FTL_2_9_1_c',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'Folketrygdloven § 2-9, 1.ledd bokstav c',
     },
     {
       kode: 'FTL_2_9_2_a',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'Folketrygdloven § 2-9, annet ledd, jfr. 1.ledd bokstav a',
     },
     {
       kode: 'FTL_2_7_b',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'Folketrygdloven § 2-7, 3. ledd bokstav b',
     },
     {
       kode: 'FTL_2_7_a',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'Folketrygdloven § 2-7, 3.ledd bokstav a',
     },
     {
       kode: 'IHT_AVTALE',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'I henhold til avtale',
     },
     {
       kode: 'FTL_2_6',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'Folketrygdloven § 2-6',
     },
     {
       kode: 'FTL_2_9_2_c',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'Folketrygdloven § 2-9, annet ledd, jf. 1. ledd bokstav c',
     },
     {
       kode: 'FULL',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'Full',
     },
     {
       kode: 'UNNTATT',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'Unntatt',
     },
     {
       kode: 'FTL_2_9_1_a',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
       navn: 'Folketrygdloven § 2-9, 1.ledd bokstav a',
     },
   ],
   HistorikkAktør: [
     {
       kode: 'SBH',
-      kodeverk: 'HISTORIKK_AKTOER',
       navn: 'Saksbehandler',
     },
     {
       kode: 'ARBEIDSGIVER',
-      kodeverk: 'HISTORIKK_AKTOER',
       navn: 'Arbeidsgiver',
     },
     {
       kode: 'BESL',
-      kodeverk: 'HISTORIKK_AKTOER',
       navn: 'Beslutter',
     },
     {
       kode: 'SOKER',
-      kodeverk: 'HISTORIKK_AKTOER',
       navn: 'Søker',
     },
     {
       kode: 'VL',
-      kodeverk: 'HISTORIKK_AKTOER',
       navn: 'Vedtaksløsningen',
     },
   ],
   OpptjeningAktivitetType: [
     {
       kode: 'UTENLANDSK_ARBEIDSFORHOLD',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Arbeid i utlandet',
     },
     {
       kode: 'ETTERLØNN_SLUTTPAKKE',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Etterlønn eller sluttpakke',
     },
     {
       kode: 'UTDANNINGSPERMISJON',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Utdanningspermisjon',
     },
     {
       kode: 'OPPLÆRINGSPENGER',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Opplæringspenger',
     },
     {
       kode: 'VENTELØNN_VARTPENGER',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Ventelønn eller vartpenger',
     },
     {
       kode: 'MILITÆR_ELLER_SIVILTJENESTE',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Militær- eller siviltjeneste',
     },
     {
       kode: 'FRILANS',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Frilans',
     },
     {
       kode: 'AAP',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Arbeidsavklaringspenger',
     },
     {
       kode: 'FRISINN',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'FRISINN',
     },
     {
       kode: 'OMSORGSPENGER',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Omsorgspenger',
     },
     {
       kode: 'SYKEPENGER',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Sykepenger',
     },
     {
       kode: 'FORELDREPENGER',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Foreldrepenger',
     },
     {
       kode: 'FRILOPP',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Frilansoppdrag',
     },
     {
       kode: 'ARBEID',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Arbeid',
     },
     {
       kode: 'NÆRING',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Næring',
     },
     {
       kode: 'SVANGERSKAPSPENGER',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Svangerskapspenger',
     },
     {
       kode: 'DAGPENGER',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Dagpenger',
     },
     {
       kode: 'PLEIEPENGER',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Pleiepenger',
     },
     {
       kode: 'VIDERE_ETTERUTDANNING',
-      kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
       navn: 'Videre- og etterutdanning',
     },
   ],
   PermisjonsbeskrivelseType: [
     {
       kode: 'PERMISJON_MED_FORELDREPENGER',
-      kodeverk: 'PERMISJONSBESKRIVELSE_TYPE',
       navn: 'Permisjon med foreldrepenger',
     },
     {
       kode: 'UTDANNINGSPERMISJON',
-      kodeverk: 'PERMISJONSBESKRIVELSE_TYPE',
       navn: 'Utdanningspermisjon',
     },
     {
       kode: 'PERMISJON',
-      kodeverk: 'PERMISJONSBESKRIVELSE_TYPE',
       navn: 'Permisjon',
     },
     {
       kode: 'VELFERDSPERMISJON',
-      kodeverk: 'PERMISJONSBESKRIVELSE_TYPE',
       navn: 'Velferdspermisjon',
     },
     {
       kode: 'ANNEN_PERMISJON_LOVFESTET',
-      kodeverk: 'PERMISJONSBESKRIVELSE_TYPE',
       navn: 'Andre lovfestede permisjoner',
     },
     {
       kode: 'UTDANNINGSPERMISJON_IKKE_LOVFESTET',
-      kodeverk: 'PERMISJONSBESKRIVELSE_TYPE',
       navn: 'Utdanningspermisjon (Ikke lovfestet)',
     },
     {
       kode: 'UTDANNINGSPERMISJON_LOVFESTET',
-      kodeverk: 'PERMISJONSBESKRIVELSE_TYPE',
       navn: 'Utdanningspermisjon (Lovfestet)',
     },
     {
       kode: 'ANNEN_PERMISJON_IKKE_LOVFESTET',
-      kodeverk: 'PERMISJONSBESKRIVELSE_TYPE',
       navn: 'Andre ikke-lovfestede permisjoner',
     },
     {
       kode: 'PERMISJON_VED_MILITÆRTJENESTE',
-      kodeverk: 'PERMISJONSBESKRIVELSE_TYPE',
       navn: 'Permisjon ved militærtjeneste',
     },
     {
       kode: 'PERMITTERING',
-      kodeverk: 'PERMISJONSBESKRIVELSE_TYPE',
       navn: 'Permittering',
     },
   ],
   AnkeOmgjørÅrsak: [
     {
       kode: 'PROSESSUELL_FEIL',
-      kodeverk: 'ANKE_OMGJOER_AARSAK',
       navn: 'Saksbehandlingsfeil',
     },
     {
       kode: 'ULIK_REGELVERKSTOLKNING',
-      kodeverk: 'ANKE_OMGJOER_AARSAK',
       navn: 'Ulik regelverkstolkning',
     },
     {
       kode: 'ULIK_VURDERING',
-      kodeverk: 'ANKE_OMGJOER_AARSAK',
       navn: 'Ulik skjønnsvurdering',
     },
     {
       kode: 'NYE_OPPLYSNINGER',
-      kodeverk: 'ANKE_OMGJOER_AARSAK',
       navn: 'Nye opplysninger',
     },
   ],
   OppholdstillatelseType: [
     {
       kode: 'MIDLERTIDIG',
-      kodeverk: 'OPPHOLDSTILLATELSE_TYPE',
       navn: 'Midlertidig oppholdstillatelse',
     },
     {
       kode: 'PERMANENT',
-      kodeverk: 'OPPHOLDSTILLATELSE_TYPE',
       navn: 'Permanent oppholdstillatelse',
     },
   ],
   MedlemskapManuellVurderingType: [
     {
       kode: 'UNNTAK',
-      kodeverk: 'MEDLEMSKAP_MANUELL_VURD',
       navn: 'Periode med unntak fra medlemskap',
     },
     {
       kode: 'MEDLEM',
-      kodeverk: 'MEDLEMSKAP_MANUELL_VURD',
       navn: 'Periode med medlemskap',
     },
     {
       kode: 'IKKE_RELEVANT',
-      kodeverk: 'MEDLEMSKAP_MANUELL_VURD',
       navn: 'Ikke relevant periode',
     },
   ],
   ManuellBehandlingÅrsak: [
     {
       kode: '5031',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Vurder om det skal være utsettelse i perioden',
     },
     {
       kode: '5005',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Manglende søkt periode. Fastsett hvilken stønadskonto perioden skal trekkes fra.',
     },
     {
       kode: '5030',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Far/medmor søker før fødsel/omsorg',
     },
     {
       kode: '5003',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Ikke gyldig grunn for overføring av kvote. Vurder bruk av annen stønadskonto eller avslå perioden.',
     },
     {
       kode: '5026',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Vurder uttak med hensyn på dødsfall',
     },
     {
       kode: '5032',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Vurder utbetalingsgrad og trekkdager når mor er i delvis arbeid (under 75% arbeidsprosent)',
     },
     {
       kode: '5024',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Opphold større enn tilgjengelige dager',
     },
     {
       kode: '5019',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Stebarnsadopsjon - sjekk uttak med tanke på aktivitetskravet',
     },
     {
       kode: '5011',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Ikke gyldig grunn for utsettelse av perioden, avslå utsettelsen, og sett riktig stønadskonto som skal benyttes.',
     },
     {
       kode: '5025',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Søker er ikke registrert med en heltidsstilling i Aa-registeret. Avklar om søker jobber 100 % og dermed har rett til utsettelse',
     },
     {
       kode: '5007',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Støtte for automatisk behandling av adopsjon er ikke implementert i saksbehandlingsløsningen.',
     },
     {
       kode: '5014',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Vurder samtidig uttak av foreldrepenger.',
     },
     {
       kode: '5004',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Kontroller mors krav til aktivitet.',
     },
     {
       kode: '5006',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Søker er i arbeid i perioden. Vurder konsekvens for arbeid i perioden.',
     },
     {
       kode: '5009',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Søker har ikke omsorg for barnet. Vurder bruk av annen stønadskonto eller avslå perioden.',
     },
     {
       kode: '5002',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.',
     },
     {
       kode: '5028',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Innvilget pleiepenger med innleggelse, vurder riktig ytelse',
     },
     {
       kode: '5029',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Innvilget pleiepenger uten innleggelse, vurder riktig ytelse',
     },
     {
       kode: '5018',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Opphør av foreldrepenger fordi inngangsvilkår ikke oppfylt, avslå stønadsperiode',
     },
     {
       kode: '5012',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Perioden er uavklart. Vurder trekkdager og sett utbetalingsgrad.',
     },
     {
       kode: '5001',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Stønadskonto tom for stønadsdager. Vurder bruk av annen stønadskonto eller avslå perioden.',
     },
     {
       kode: '5010',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'For sent fremsatt søknad. Vurder om uttak i perioden er gyldig.',
     },
     {
       kode: '5016',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Vurder søknad om overføring av kvote.',
     },
     {
       kode: '5027',
-      kodeverk: 'MANUELL_BEHANDLING_AARSAK',
       navn: 'Vurder fars/medmors rett til uttak på grunn av mors uføretrygd',
     },
   ],
   MorsAktivitet: [
     {
       kode: 'UFØRE',
-      kodeverk: 'MORS_AKTIVITET',
       navn: 'Mor mottar uføretrygd',
     },
     {
       kode: 'KVALPROG',
-      kodeverk: 'MORS_AKTIVITET',
       navn: 'Deltar i kvalifiseringsprogrammet',
     },
     {
       kode: 'UTDANNING',
-      kodeverk: 'MORS_AKTIVITET',
       navn: 'Tar utdanning på heltid',
     },
     {
       kode: 'INTROPROG',
-      kodeverk: 'MORS_AKTIVITET',
       navn: 'Deltar i introduksjonsprogram for nykomne innvandrere',
     },
     {
       kode: 'ARBEID_OG_UTDANNING',
-      kodeverk: 'MORS_AKTIVITET',
       navn: 'Er i arbeid og utdanning',
     },
     {
       kode: 'INNLAGT',
-      kodeverk: 'MORS_AKTIVITET',
       navn: 'Er innlagt på institusjon',
     },
     {
       kode: 'ARBEID',
-      kodeverk: 'MORS_AKTIVITET',
       navn: 'Er i arbeid',
     },
     {
       kode: 'IKKE_OPPGITT',
-      kodeverk: 'MORS_AKTIVITET',
       navn: 'Periode uten oppgitt aktivitetskrav',
     },
     {
       kode: 'TRENGER_HJELP',
-      kodeverk: 'MORS_AKTIVITET',
       navn: 'Er avhengig av hjelp til å ta seg av barnet',
     },
   ],
   NaturalYtelseType: [
     {
       kode: 'FRI_TRANSPORT',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Fri transport',
     },
     {
       kode: 'BEDRIFTSBARNEHAGE',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Bedriftsbarnehageplass',
     },
     {
       kode: 'KOST_DOEGN',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Kostpenger døgnsats',
     },
     {
       kode: 'BIL',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Bil',
     },
     {
       kode: 'OPSJONER',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Opsjoner',
     },
     {
       kode: 'KOST_DAGER',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Kostpenger dager',
     },
     {
       kode: 'YRKESBIL_KILOMETER',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Yrkesbil tjenesteligbehov kilometer',
     },
     {
       kode: 'RENTEFORDEL_LAAN',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Rentefordel lån',
     },
     {
       kode: 'ANNET',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Annet',
     },
     {
       kode: 'TILSKUDD_BARNEHAGE',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Tilskudd barnehageplass',
     },
     {
       kode: 'ELEKTRISK_KOMMUNIKASJON',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Elektrisk kommunikasjon',
     },
     {
       kode: 'YRKESBIL_LISTEPRIS',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Yrkesbil tjenesteligbehov listepris',
     },
     {
       kode: 'UTENLANDSK_PENSJONSORDNING',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Innbetaling utenlandsk pensjonsordning',
     },
     {
       kode: 'BESOEKSREISER_HJEM',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Besøksreiser hjemmet annet',
     },
     {
       kode: 'BOLIG',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Bolig',
     },
     {
       kode: 'AKSJER_UNDERKURS',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Aksjer grunnfondsbevis til underkurs',
     },
     {
       kode: 'KOSTBESPARELSE_HJEM',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Kostbesparelser i hjemmet',
     },
     {
       kode: 'FORSIKRINGER',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Skattepliktig del forsikringer',
     },
     {
       kode: 'LOSJI',
-      kodeverk: 'NATURAL_YTELSE_TYPE',
       navn: 'Losji',
     },
   ],
   PeriodeResultatÅrsak: [
     {
       kode: '4005',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 sjuende ledd: Ikke sammenhengende perioder',
       sortering: '14-10-7',
       utfallType: 'AVSLÅTT',
@@ -4389,7 +3536,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4031',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9: Ferie/arbeid innenfor de første 6 ukene',
       sortering: '14-09',
       utfallType: 'AVSLÅTT',
@@ -4400,7 +3546,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4056',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav g: Aktivitetskravet mors deltakelse på kvalifiseringsprogram ikke oppfylt',
       sortering: '14-13-1-g',
       utfallType: 'AVSLÅTT',
@@ -4411,7 +3556,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2022',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-12: Overføring oppfylt, annen part er innlagt i helseinstitusjon',
       sortering: '14-12',
       utfallType: 'INNVILGET',
@@ -4422,7 +3566,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4076',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9 femte ledd: Avslag overføring - annen forelder har rett til foreldrepenger',
       sortering: '14-09-5',
       utfallType: 'AVSLÅTT',
@@ -4433,7 +3576,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4103',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9 sjette ledd: Mangler søknad for første 6 uker etter fødsel',
       sortering: '14-09-6',
       utfallType: 'AVSLÅTT',
@@ -4444,7 +3586,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2030',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9, jf. §14-16: Gradering av fellesperiode/foreldrepenger',
       sortering: '14-16',
       utfallType: 'INNVILGET',
@@ -4455,7 +3596,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4116',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11, jf §21-3: Søkers innleggelse første 6 uker ikke dokumentert',
       sortering: '14-11',
       utfallType: 'AVSLÅTT',
@@ -4466,7 +3606,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4063',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav c og tredje ledd, jf §21-3: Utsettelse søkers sykdom/skade ikke dokumentert',
       sortering: '14-11-1-c',
       utfallType: 'AVSLÅTT',
@@ -4477,7 +3616,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4054',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav e: Aktivitetskravet mors innleggelse ikke oppfylt',
       sortering: '14-13-1-e',
       utfallType: 'AVSLÅTT',
@@ -4488,7 +3626,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4040',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav d: Barnets innleggelse ikke oppfylt',
       sortering: '14-11-1-d',
       utfallType: 'AVSLÅTT',
@@ -4499,7 +3636,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4041',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav a: Avslag utsettelse ferie på bevegelig helligdag',
       sortering: '14-11-1-a',
       utfallType: 'AVSLÅTT',
@@ -4510,7 +3646,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2016',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav b, jf. §14-14, jf. §14-13: Utsettelse pga. 100% arbeid, kun far har rett',
       sortering: '14-11-1-b',
       utfallType: 'INNVILGET',
@@ -4521,7 +3656,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4112',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11: Barnets innleggelse første 6 uker ikke oppfylt',
       sortering: '14-11',
       utfallType: 'AVSLÅTT',
@@ -4532,7 +3666,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4053',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav d: Aktivitetskravet mors sykdom/skade ikke oppfylt',
       sortering: '14-13-1-d',
       utfallType: 'AVSLÅTT',
@@ -4543,7 +3676,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4069',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav d og femte ledd, jf §21-3: Aktivitetskrav – sykdom/skade ikke dokumentert',
       sortering: '14-13-1-d',
       utfallType: 'AVSLÅTT',
@@ -4554,7 +3686,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4025',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-16 første ledd: Avslag gradering - arbeid 100% eller mer',
       sortering: '14-16-1',
       utfallType: 'AVSLÅTT',
@@ -4565,7 +3696,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2015',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav a, jf. §14-14, jf. §14-13: Utsettelse pga. ferie, kun far har rett',
       sortering: '14-11-1-a',
       utfallType: 'INNVILGET',
@@ -4576,7 +3706,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2020',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9 første ledd: Overføring oppfylt, annen part har ikke rett til foreldrepenger',
       sortering: '14-09-1',
       utfallType: 'INNVILGET',
@@ -4587,7 +3716,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2023',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-15 første ledd: Overføring oppfylt, søker har aleneomsorg for barnet',
       sortering: '14-15-1',
       utfallType: 'INNVILGET',
@@ -4598,7 +3726,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4110',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11: Søkers sykdom/skade første 6 uker ikke oppfylt',
       sortering: '14-11',
       utfallType: 'AVSLÅTT',
@@ -4609,7 +3736,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2010',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav a: Gyldig utsettelse pga. ferie',
       sortering: '14-11-1-a',
       utfallType: 'INNVILGET',
@@ -4620,7 +3746,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2037',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9, jf. §14-13: Innvilget fellesperiode til far',
       sortering: '14-09',
       utfallType: 'INNVILGET',
@@ -4631,7 +3756,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4055',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav f: Aktivitetskravet mors deltakelse på introduksjonsprogram ikke oppfylt',
       sortering: '14-13-1-f',
       utfallType: 'AVSLÅTT',
@@ -4642,7 +3766,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2004',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-14, jf. §14-13 : Innvilget foreldrepenger, kun far har rett',
       sortering: '14-14',
       utfallType: 'INNVILGET',
@@ -4653,7 +3776,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2006',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10: Innvilget foreldrepenger før fødsel',
       sortering: '14-10',
       utfallType: 'INNVILGET',
@@ -4664,7 +3786,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2011',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav b: Gyldig utsettelse pga. 100% arbeid',
       sortering: '14-11-1-b',
       utfallType: 'INNVILGET',
@@ -4675,7 +3796,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4003',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 fjerde ledd: Mor har ikke omsorg',
       sortering: '14-10-4',
       utfallType: 'AVSLÅTT',
@@ -4686,7 +3806,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2033',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-14, jf. §14-13, jf. §14-16: Gradering foreldrepenger, kun far har rett',
       sortering: '14-14',
       utfallType: 'INNVILGET',
@@ -4697,7 +3816,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4088',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav f, jf §21-3: Aktivitetskrav – introprogram ikke dokumentert',
       sortering: '14-13-1-f',
       utfallType: 'AVSLÅTT',
@@ -4708,7 +3826,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4100',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 andre ledd: Uttak før omsorgsovertakelse',
       sortering: '14-10-2',
       utfallType: 'AVSLÅTT',
@@ -4719,7 +3836,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4097',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-5: Adopsjonsvilkåret er ikke oppfylt',
       sortering: '14-05',
       utfallType: 'AVSLÅTT',
@@ -4730,7 +3846,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4074',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-12 tredje ledd, jf §21-3: Avslag overføring kvote pga. sykdom/skade/innleggelse ikke dokumentert',
       sortering: '14-12-3',
       utfallType: 'AVSLÅTT',
@@ -4741,7 +3856,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4117',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11, jf §21-3: Barnets innleggelse første 6 uker ikke dokumentert',
       sortering: '14-11',
       utfallType: 'AVSLÅTT',
@@ -4752,7 +3866,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4092',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-12: Avslag overføring - har ikke aleneomsorg for barnet',
       sortering: '14-12',
       utfallType: 'AVSLÅTT',
@@ -4763,7 +3876,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4002',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9: Ikke stønadsdager igjen på stønadskonto',
       sortering: '14-09',
       utfallType: 'AVSLÅTT',
@@ -4774,7 +3886,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4086',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 sjette ledd og §14-11: Annen part har overlappende uttaksperioder som er innvilget utsettelse',
       sortering: '14-10-6',
       utfallType: 'AVSLÅTT',
@@ -4785,7 +3896,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2012',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav c: Gyldig utsettelse pga. innleggelse',
       sortering: '14-11-1-c',
       utfallType: 'INNVILGET',
@@ -4796,7 +3906,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4075',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9 første ledd: Ikke rett til fellesperiode fordi mor ikke har rett til foreldrepenger',
       sortering: '14-09-1',
       utfallType: 'AVSLÅTT',
@@ -4807,7 +3916,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4098',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-5: Foreldreansvarsvilkåret er ikke oppfylt',
       sortering: '14-05',
       utfallType: 'AVSLÅTT',
@@ -4818,7 +3926,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2024',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11: Gyldig utsettelse',
       sortering: '14-11',
       utfallType: 'INNVILGET',
@@ -4829,7 +3936,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4023',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 femte ledd: Arbeider i uttaksperioden mer enn 0%',
       sortering: '14-10-5',
       utfallType: 'AVSLÅTT',
@@ -4840,7 +3946,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4007',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-12 tredje ledd: Den andre part syk/skadet ikke oppfylt',
       sortering: '14-12-3',
       utfallType: 'AVSLÅTT',
@@ -4851,7 +3956,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4106',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 første ledd: Far/medmor søker mer enn 10 dager ifm fødsel',
       sortering: '14-10-1',
       utfallType: 'AVSLÅTT',
@@ -4862,7 +3966,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4035',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav b, jf. §14-14: Bare far har rett, mor fyller ikke aktivitetskravet',
       sortering: '14-11-1-b',
       utfallType: 'AVSLÅTT',
@@ -4873,7 +3976,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4085',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 sjette ledd: Det er ikke samtykke mellom partene',
       sortering: '14-10-6',
       utfallType: 'AVSLÅTT',
@@ -4884,7 +3986,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2028',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-14, jf. 14-13: Bare far rett, aktivitetskravet oppfylt',
       sortering: '14-14',
       utfallType: 'INNVILGET',
@@ -4895,7 +3996,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4060',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 sjette ledd: Samtidig uttak - ikke gyldig kombinasjon',
       sortering: '14-10-6',
       utfallType: 'AVSLÅTT',
@@ -4906,7 +4006,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2002',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9: Innvilget fellesperiode/foreldrepenger',
       sortering: '14-09',
       utfallType: 'INNVILGET',
@@ -4917,7 +4016,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4095',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 første ledd: Mor tar ikke alle 3 ukene før termin',
       sortering: '14-10-1',
       utfallType: 'AVSLÅTT',
@@ -4928,7 +4026,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2027',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11: Gyldig utsettelse første 6 uker pga. sykdom',
       sortering: '14-11',
       utfallType: 'INNVILGET',
@@ -4939,7 +4036,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4105',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9 sjette ledd: Far/medmor søker uttak før fødsel/omsorg',
       sortering: '14-09-6',
       utfallType: 'AVSLÅTT',
@@ -4950,7 +4046,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4062',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav b, jf §21-3: Utsettelse arbeid ikke dokumentert',
       sortering: '14-11-1-b',
       utfallType: 'AVSLÅTT',
@@ -4961,7 +4056,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4032',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav a: Ferie - selvstendig næringsdrivende/frilanser',
       sortering: '14-11-1-a',
       utfallType: 'AVSLÅTT',
@@ -4972,7 +4066,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2039',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9 sjette ledd: Innvilget første 6 uker etter fødsel',
       sortering: '14-09-6',
       utfallType: 'INNVILGET',
@@ -4983,7 +4076,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2031',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-12, jf. §14-16: Gradering av kvote/overført kvote',
       sortering: '14-16',
       utfallType: 'INNVILGET',
@@ -4994,7 +4086,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4051',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav b: Aktivitetskravet offentlig godkjent utdanning ikke oppfylt',
       sortering: '14-13-1-b',
       utfallType: 'AVSLÅTT',
@@ -5005,7 +4096,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4058',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-5 tredje ledd: Unntak for Aktivitetskravet, stebarnsadopsjon - ikke nok dager',
       sortering: '14-05-3',
       utfallType: 'AVSLÅTT',
@@ -5016,7 +4106,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2018',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav c, jf. §14-14, jf. §14-13: Utsettelse pga. egen innleggelse på helseinstiusjon, kun far har rett',
       sortering: '14-11-1-c',
       utfallType: 'INNVILGET',
@@ -5027,7 +4116,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4059',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 sjette ledd, jf. §14-9 fjerde ledd: Unntak for Aktivitetskravet, flerbarnsfødsel - ikke nok dager',
       sortering: '14-13-6',
       utfallType: 'AVSLÅTT',
@@ -5038,7 +4126,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2026',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11: Gyldig utsettelse første 6 uker pga. barn innlagt',
       sortering: '14-11',
       utfallType: 'INNVILGET',
@@ -5049,7 +4136,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2036',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-14 tredje ledd: Innvilget foreldrepenger, kun far har rett - dager uten aktivitetskrav',
       sortering: '14-14-3',
       utfallType: 'INNVILGET',
@@ -5060,7 +4146,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4111',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11: Søkers innleggelse første 6 uker ikke oppfylt',
       sortering: '14-11',
       utfallType: 'AVSLÅTT',
@@ -5071,7 +4156,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4022',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 tredje ledd: Barnet er over 3 år',
       sortering: '14-10-3',
       utfallType: 'AVSLÅTT',
@@ -5082,7 +4166,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4102',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-14, jf 14-13: Bare far har rett, mangler søknad uttak/aktivitetskrav',
       sortering: '14-14',
       utfallType: 'AVSLÅTT',
@@ -5093,7 +4176,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4020',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§22-13 tredje ledd: Brudd på søknadsfrist',
       sortering: '22-13-3',
       utfallType: 'AVSLÅTT',
@@ -5104,7 +4186,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4038',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav c: Søkers sykdom/skade ikke oppfylt',
       sortering: '14-11-1-c',
       utfallType: 'AVSLÅTT',
@@ -5115,7 +4196,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4068',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav c, jf §21-3: Aktivitetskrav – arbeid i komb utdanning ikke dokumentert',
       sortering: '14-13-1-c',
       utfallType: 'AVSLÅTT',
@@ -5126,7 +4206,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2019',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav d, jf. §14-14, jf. §14-13: Utsettelse pga. barnets innleggelse på helseinstitusjon, kun far har rett',
       sortering: '14-11-1-d',
       utfallType: 'INNVILGET',
@@ -5137,7 +4216,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4082',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav b: Avslag utsettelse pga arbeid tilbake i tid',
       sortering: '14-11-1-b',
       utfallType: 'AVSLÅTT',
@@ -5148,7 +4226,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4050',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav a: Aktivitetskravet arbeid ikke oppfylt',
       sortering: '14-13-1-a',
       utfallType: 'AVSLÅTT',
@@ -5159,7 +4236,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2034',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10, jf. §14-16: Gradering foreldrepenger, kun mor har rett',
       sortering: '14-16',
       utfallType: 'INNVILGET',
@@ -5170,7 +4246,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4012',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 fjerde ledd: Far/medmor har ikke omsorg',
       sortering: '14-10-4',
       utfallType: 'AVSLÅTT',
@@ -5181,7 +4256,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2003',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-12: Innvilget uttak av kvote',
       sortering: '14-12',
       utfallType: 'INNVILGET',
@@ -5192,7 +4266,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2035',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-14 tredje ledd, jf. §14-16: Gradering foreldrepenger, kun far har rett - dager uten aktivitetskrav',
       sortering: '14-14-3',
       utfallType: 'INNVILGET',
@@ -5203,7 +4276,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4073',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-12 første ledd: Ikke rett til kvote fordi mor ikke har rett til foreldrepenger',
       sortering: '14-12-1',
       utfallType: 'AVSLÅTT',
@@ -5214,7 +4286,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2025',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11: Gyldig utsettelse første 6 uker pga. innleggelse',
       sortering: '14-11',
       utfallType: 'INNVILGET',
@@ -5225,7 +4296,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4008',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-12 tredje ledd: Den andre part innleggelse ikke oppfylt',
       sortering: '14-12-3',
       utfallType: 'AVSLÅTT',
@@ -5236,7 +4306,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4072',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9 sjuende ledd: Barnet er dødt',
       sortering: '14-09-7',
       utfallType: 'AVSLÅTT',
@@ -5247,7 +4316,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4070',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav e og femte ledd, jf §21-3: Aktivitetskrav – innleggelse ikke dokumentert',
       sortering: '14-13-1-e',
       utfallType: 'AVSLÅTT',
@@ -5258,7 +4326,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4030',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-9: Avslag utsettelse før termin/fødsel',
       sortering: '14-09',
       utfallType: 'AVSLÅTT',
@@ -5269,7 +4336,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4057',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-14 tredje ledd: Unntak for aktivitetskravet, mors mottak av uføretrygd ikke oppfylt',
       sortering: '14-14-3',
       utfallType: 'AVSLÅTT',
@@ -5280,7 +4346,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4052',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav c: Aktivitetskravet offentlig godkjent utdanning i kombinasjon med arbeid ikke oppfylt',
       sortering: '14-13-1-c',
       utfallType: 'AVSLÅTT',
@@ -5291,7 +4356,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4081',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav a: Avslag utsettelse pga ferie tilbake i tid',
       sortering: '14-11-1-a',
       utfallType: 'AVSLÅTT',
@@ -5302,7 +4366,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2017',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav c, jf. §14-14, jf. §14-13: Utsettelse pga. sykdom, skade, kun far har rett',
       sortering: '14-11-1-c',
       utfallType: 'INNVILGET',
@@ -5313,7 +4376,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4064',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav c og tredje ledd, jf §21-3: Utsettelse søkers innleggelse ikke dokumentert',
       sortering: '14-11-1-c',
       utfallType: 'AVSLÅTT',
@@ -5324,7 +4386,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2005',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-15: Innvilget foreldrepenger ved aleneomsorg',
       sortering: '14-15',
       utfallType: 'INNVILGET',
@@ -5335,7 +4396,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4013',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 første ledd: Mor søker uttak før 12 uker før termin/fødsel',
       sortering: '14-10-1',
       utfallType: 'AVSLÅTT',
@@ -5346,7 +4406,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4077',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 a: Innvilget prematuruker, med fratrekk pleiepenger',
       sortering: '14-10-0-a',
       utfallType: 'AVSLÅTT',
@@ -5357,7 +4416,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4033',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav a: Ikke lovbestemt ferie',
       sortering: '14-11-1-a',
       utfallType: 'AVSLÅTT',
@@ -5368,7 +4426,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4034',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11, jf §14-9: Avslag utsettelse - ingen stønadsdager igjen',
       sortering: '14-11-0',
       utfallType: 'AVSLÅTT',
@@ -5379,7 +4436,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4093',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-16: Avslag gradering - søker er ikke i arbeid',
       sortering: '14-16',
       utfallType: 'AVSLÅTT',
@@ -5390,7 +4446,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4039',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav c: Søkers innleggelse ikke oppfylt',
       sortering: '14-11-1-c',
       utfallType: 'AVSLÅTT',
@@ -5401,7 +4456,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4089',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav g, jf §21-3: Aktivitetskrav – KVP ikke dokumentert',
       sortering: '14-13-1-g',
       utfallType: 'AVSLÅTT',
@@ -5412,7 +4466,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4066',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav a, jf §21-3: Aktivitetskrav - arbeid ikke dokumentert',
       sortering: '14-13-1-a',
       utfallType: 'AVSLÅTT',
@@ -5423,7 +4476,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4115',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11, jf §21-3: Søkers sykdom/skade første 6 uker ikke dokumentert',
       sortering: '14-11',
       utfallType: 'AVSLÅTT',
@@ -5434,7 +4486,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2014',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav c: Gyldig utsettelse pga. sykdom',
       sortering: '14-11-1-c',
       utfallType: 'INNVILGET',
@@ -5445,7 +4496,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4104',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 tredje ledd: Stønadsperiode for nytt barn',
       sortering: '14-10-3',
       utfallType: 'AVSLÅTT',
@@ -5456,7 +4506,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4065',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav d, jf §21-3: Utsettelse barnets innleggelse - ikke dokumentert',
       sortering: '14-11-1-d',
       utfallType: 'AVSLÅTT',
@@ -5467,7 +4516,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4087',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-2: Opphør medlemskap',
       sortering: '14-02',
       utfallType: 'AVSLÅTT',
@@ -5478,7 +4526,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4037',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav b: Ikke heltidsarbeid',
       sortering: '14-11-1-b',
       utfallType: 'AVSLÅTT',
@@ -5489,7 +4536,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4099',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-6: Opptjeningsvilkåret er ikke oppfylt',
       sortering: '14-06',
       utfallType: 'AVSLÅTT',
@@ -5500,7 +4546,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4061',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav a, jf §21-3: Utsettelse ferie ikke dokumentert',
       sortering: '14-11-1-a',
       utfallType: 'AVSLÅTT',
@@ -5511,7 +4556,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4067',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-13 første ledd bokstav b, jf §21-3: Aktivitetskrav – utdanning ikke dokumentert',
       sortering: '14-13-1-b',
       utfallType: 'AVSLÅTT',
@@ -5522,7 +4566,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2021',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-12: Overføring oppfylt, annen part er helt avhengig av hjelp til å ta seg av barnet',
       sortering: '14-12',
       utfallType: 'INNVILGET',
@@ -5533,7 +4576,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4071',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10: Bruker er død',
       sortering: '14-10',
       utfallType: 'AVSLÅTT',
@@ -5544,7 +4586,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2007',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10: Innvilget foreldrepenger, kun mor har rett',
       sortering: '14-10',
       utfallType: 'INNVILGET',
@@ -5555,7 +4596,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4107',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-14 tredje ledd: Ikke nok dager uten aktivitetskrav',
       sortering: '14-14-3',
       utfallType: 'AVSLÅTT',
@@ -5566,7 +4606,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2032',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-15, jf. §14-16: Gradering foreldrepenger ved aleneomsorg',
       sortering: '14-16',
       utfallType: 'INNVILGET',
@@ -5577,7 +4616,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2038',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 sjette ledd: Samtidig uttak',
       sortering: '14-10-6',
       utfallType: 'INNVILGET',
@@ -5588,7 +4626,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4096',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-5: Fødselsvilkåret er ikke oppfylt',
       sortering: '14-05',
       utfallType: 'AVSLÅTT',
@@ -5599,7 +4636,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '2013',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-11 første ledd bokstav d: Gyldig utsettelse pga. barn innlagt',
       sortering: '14-11-1-d',
       utfallType: 'INNVILGET',
@@ -5610,7 +4646,6 @@ export const alleKodeverk: AlleKodeverk = {
     },
     {
       kode: '4084',
-      kodeverk: 'PERIODE_RESULTAT_AARSAK',
       navn: '§14-10 sjette ledd: Annen part har overlappende uttak, det er ikke søkt/innvilget samtidig uttak',
       sortering: '14-10-6',
       utfallType: 'AVSLÅTT',
@@ -5623,34 +4658,28 @@ export const alleKodeverk: AlleKodeverk = {
   ForeldreType: [
     {
       kode: 'FAR',
-      kodeverk: 'FORELDRE_TYPE',
       navn: 'Far',
     },
     {
       kode: 'ANDRE',
-      kodeverk: 'FORELDRE_TYPE',
       navn: 'Andre',
     },
     {
       kode: 'MEDMOR',
-      kodeverk: 'FORELDRE_TYPE',
       navn: 'Medmor',
     },
     {
       kode: 'MOR',
-      kodeverk: 'FORELDRE_TYPE',
       navn: 'Mor',
     },
   ],
   OppgaveType: [
     {
       kode: 'VUR_KONSEKVENS',
-      kodeverk: 'OPPGAVE_TYPE',
       navn: 'Vurder konsekvens for ytelse',
     },
     {
       kode: 'VUR_DOKUMENT',
-      kodeverk: 'OPPGAVE_TYPE',
       navn: 'Vurder dokument',
     },
   ],
