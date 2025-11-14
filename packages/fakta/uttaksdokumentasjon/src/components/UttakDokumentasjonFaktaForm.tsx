@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, Button, VStack } from '@navikt/ds-react';
+import { Button, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -23,6 +24,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
   const {
     submitCallback,
     aksjonspunkterForPanel,
+    harÅpentAksjonspunkt,
     isReadOnly,
     isSubmittable: submittable,
   } = usePanelDataContext<VurderDokumentasjonAp>();
@@ -70,10 +72,10 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
 
   return (
     <VStack gap="space-24">
-      {aksjonspunkterForPanel.some(a => a.status === 'OPPR') && (
-        <Alert variant="warning">
+      {harÅpentAksjonspunkt && (
+        <AksjonspunktHelpTextHTML>
           <FormattedMessage id="UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst" />
-        </Alert>
+        </AksjonspunktHelpTextHTML>
       )}
       <UttakDokumentasjonFaktaTable
         dokumentasjonVurderingBehov={dokBehov}
