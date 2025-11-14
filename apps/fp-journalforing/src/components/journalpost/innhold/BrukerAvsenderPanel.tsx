@@ -37,10 +37,12 @@ const BrukerAvsenderRad = ({ navn, id, ikon, title }: BrukerAvsenderRadProps): R
       <div className={styles['ikonKol']}>{ikon}</div>
       <div>
         <BodyShort>{navn}</BodyShort>
-        <HStack gap="space-4" align="center">
-          <BodyShort>{id}</BodyShort>
-          {id && <CopyButton copyText={id} variant="action" size="small" />}
-        </HStack>
+        {id && (
+          <HStack gap="space-4" align="center">
+            <BodyShort>{id}</BodyShort>
+            <CopyButton copyText={id} variant="action" size="small" />
+          </HStack>
+        )}
       </div>
     </HStack>
   </VStack>
