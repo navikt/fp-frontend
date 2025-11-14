@@ -13,7 +13,7 @@ import styles from './brukerAvsenderPanel.module.css';
 
 const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
   const avsenderId = journalpost.avsender.id;
-  if (avsenderId.length === 9) {
+  if (avsenderId?.length === 9) {
     return <Buildings3Icon className={styles['ikon']} />;
   }
   return <SilhouetteIcon className={styles['ikon']} />;
@@ -21,7 +21,7 @@ const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
 
 interface BrukerAvsenderRadProps {
   navn: string;
-  id: string;
+  id?: string;
   ikon: ReactElement;
   title?: ReactElement;
 }
@@ -37,10 +37,12 @@ const BrukerAvsenderRad = ({ navn, id, ikon, title }: BrukerAvsenderRadProps): R
       <div className={styles['ikonKol']}>{ikon}</div>
       <div>
         <BodyShort>{navn}</BodyShort>
-        <HStack gap="space-4" align="center">
-          <BodyShort>{id}</BodyShort>
-          <CopyButton copyText={id} variant="action" size="small" />
-        </HStack>
+        {id && (
+          <HStack gap="space-4" align="center">
+            <BodyShort>{id}</BodyShort>
+            <CopyButton copyText={id} variant="action" size="small" />
+          </HStack>
+        )}
       </div>
     </HStack>
   </VStack>

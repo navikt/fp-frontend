@@ -20,7 +20,7 @@ type JournalBruker = Readonly<{
 
 type JournalAvsender = Readonly<{
   navn: string;
-  id: string;
+  id?: string;
 }>;
 
 export type Journalpost = Readonly<{
