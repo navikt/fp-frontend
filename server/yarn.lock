@@ -171,8 +171,8 @@ __metadata:
   resolution: "@fp-frontend/server@workspace:."
   dependencies:
     "@eslint/js": 9.32.0
-    "@navikt/oasis": ^3.4.0
-    "@navikt/vite-mode": 0.13.3
+    "@navikt/oasis": ^4.1.0
+    "@navikt/vite-mode": 0.13.6
     "@types/connect-timeout": ^0.0.39
     "@types/cors": ^2.8.19
     "@types/express": 5.0.3
@@ -246,25 +246,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/oasis@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@navikt/oasis@npm:3.4.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F3.4.0%2F7a21e6e8c8e6eca00d7e6a5c06f7e8315c0cc71a"
+"@navikt/oasis@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@navikt/oasis@npm:4.1.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F4.1.0%2Fed0d98fe57279240a53fe82bf518776ddce59a0a"
   dependencies:
-    jose: ^5.2.3
-    openid-client: ^5.6.5
-    prom-client: ^15.1.0
-  checksum: ee44bd6f874f1aadbc3c18e277c36df7f80316b741761e9cbc7089810ef254dc2bb351f992c0f7c9bf864d9b6268817ab95d00dbfa1566a15094d120a416a802
+    "@navikt/texas": ^4.1.0
+    "@opentelemetry/api": ^1.9.0
+    jose: ^6.1.0
+    prom-client: ^15.1.3
+  checksum: 9d28129ab4f5839637546baafbd4f0eb336efba984a3a1a80db449aa106e6829b449bbb5a28f24b1f41d756d69ff6d6513548d97638ef94eb38561d3125ae589
   languageName: node
   linkType: hard
 
-"@navikt/vite-mode@npm:0.13.3":
-  version: 0.13.3
-  resolution: "@navikt/vite-mode@npm:0.13.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fvite-mode%2F0.13.3%2Ff880257c92483835d4804d748f53a43aab4bd28f"
+"@navikt/texas@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@navikt/texas@npm:4.1.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ftexas%2F4.1.0%2F36e6f1a056838a6777e4e0680cb45e1a568c15d1"
+  checksum: 9caaaabc9422e7d78b56121fa3ba2a3acf0b82a87f92a8df39ef1af95c55b36b5a59bd16c38d81efe2b3b21e855dcb48549f7d46718c923636fc76b9bca8ae92
+  languageName: node
+  linkType: hard
+
+"@navikt/vite-mode@npm:0.13.6":
+  version: 0.13.6
+  resolution: "@navikt/vite-mode@npm:0.13.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fvite-mode%2F0.13.6%2Fde2ea7ffe998af2097f7885d2a335484638ca81e"
   dependencies:
     cookie-parser: 1.4.7
   peerDependencies:
     express: 5.x
-  checksum: a5d4311d2d335916bb1c4e9b548c79bd751e8959aa8b5c8768b1f73e88e42d3be2c9edf4965e79e33b37d2fae817345f3ae61304f35e52bd1fc028a7a44ae757
+  checksum: 3b5f97f726538f7ed1d0f294eb9e56f0cfb1c6a1cc5a59e178ce65cf2616f1872d783cb96295e2c4cb2d9a167126763fc7c859b7f26e7d4a3772a780b3dd237a
   languageName: node
   linkType: hard
 
@@ -295,7 +303,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/api@npm:^1.4.0":
+"@opentelemetry/api@npm:^1.4.0, @opentelemetry/api@npm:^1.9.0":
   version: 1.9.0
   resolution: "@opentelemetry/api@npm:1.9.0"
   checksum: 9e88e59d53ced668f3daaecfd721071c5b85a67dd386f1c6f051d1be54375d850016c881f656ffbe9a03bedae85f7e89c2f2b635313f9c9b195ad033cdc31020
@@ -2056,17 +2064,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^4.15.9":
-  version: 4.15.9
-  resolution: "jose@npm:4.15.9"
-  checksum: 41abe1c99baa3cf8a78ebbf93da8f8e50e417b7a26754c4afa21865d87527b8ac2baf66de2c5f6accc3f7d7158658dae7364043677236ea1d07895b040097f15
-  languageName: node
-  linkType: hard
-
-"jose@npm:^5.2.3":
-  version: 5.9.6
-  resolution: "jose@npm:5.9.6"
-  checksum: 4b536da0201858ed4c4582e8bb479081f11e0c63dd0f5e473adde16fc539785e1f2f0409bc1fc7cbbb5b68026776c960b4952da3a06f6fdfff0b9764c9127ae0
+"jose@npm:^6.1.0":
+  version: 6.1.2
+  resolution: "jose@npm:6.1.2"
+  checksum: 3dae4e71e3efd4b26468b903a750465300bd99afbd6de617a01cdceb7f70b04320fc168caf71f692a3d2de597fbc0d0ec839a87be78ad654c7c9d46b1b1d9665
   languageName: node
   linkType: hard
 
@@ -2233,15 +2234,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lru-cache@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "lru-cache@npm:6.0.0"
-  dependencies:
-    yallist: ^4.0.0
-  checksum: f97f499f898f23e4585742138a22f22526254fdba6d75d41a1c2526b3b6cc5747ef59c5612ba7375f42aca4f8461950e925ba08c991ead0651b4918b7c978297
-  languageName: node
-  linkType: hard
-
 "math-intrinsics@npm:^1.1.0":
   version: 1.1.0
   resolution: "math-intrinsics@npm:1.1.0"
@@ -2404,24 +2396,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-hash@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "object-hash@npm:2.2.0"
-  checksum: 55ba841e3adce9c4f1b9b46b41983eda40f854e0d01af2802d3ae18a7085a17168d6b81731d43fdf1d6bcbb3c9f9c56d22c8fea992203ad90a38d7d919bc28f1
-  languageName: node
-  linkType: hard
-
 "object-inspect@npm:^1.13.3":
   version: 1.13.4
   resolution: "object-inspect@npm:1.13.4"
   checksum: 582810c6a8d2ef988ea0a39e69e115a138dad8f42dd445383b394877e5816eb4268489f316a6f74ee9c4e0a984b3eab1028e3e79d62b1ed67c726661d55c7a8b
-  languageName: node
-  linkType: hard
-
-"oidc-token-hash@npm:^5.0.3":
-  version: 5.0.3
-  resolution: "oidc-token-hash@npm:5.0.3"
-  checksum: 35fa19aea9ff2c509029ec569d74b778c8a215b92bd5e6e9bc4ebbd7ab035f44304ff02430a6397c3fb7c1d15ebfa467807ca0bcd31d06ba610b47798287d303
   languageName: node
   linkType: hard
 
@@ -2472,18 +2450,6 @@ __metadata:
   dependencies:
     fn.name: 1.x.x
   checksum: fd008d7e992bdec1c67f53a2f9b46381ee12a9b8c309f88b21f0223546003fb47e8ad7c1fd5843751920a8d276c63bd4b45670ef80c61fb3e07dbccc962b5c7d
-  languageName: node
-  linkType: hard
-
-"openid-client@npm:^5.6.5":
-  version: 5.7.0
-  resolution: "openid-client@npm:5.7.0"
-  dependencies:
-    jose: ^4.15.9
-    lru-cache: ^6.0.0
-    object-hash: ^2.2.0
-    oidc-token-hash: ^5.0.3
-  checksum: 63fc76918fc12f3d6e1456a0b170f417defccf6820acb4581ffc226cb8c9a18d50f76f0982d7a00cce2896c732eb2a6361ad6ea04b127b2603e56408b680ef9c
   languageName: node
   linkType: hard
 
@@ -2720,7 +2686,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prom-client@npm:^15.1.0":
+"prom-client@npm:^15.1.3":
   version: 15.1.3
   resolution: "prom-client@npm:15.1.3"
   dependencies:
@@ -3448,13 +3414,6 @@ __metadata:
   version: 1.0.2
   resolution: "wrappy@npm:1.0.2"
   checksum: 159da4805f7e84a3d003d8841557196034155008f817172d4e986bd591f74aa82aa7db55929a54222309e01079a65a92a9e6414da5a6aa4b01ee44a511ac3ee5
-  languageName: node
-  linkType: hard
-
-"yallist@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "yallist@npm:4.0.0"
-  checksum: 343617202af32df2a15a3be36a5a8c0c8545208f3d3dfbc6bb7c3e3b7e8c6f8e7485432e4f3b88da3031a6e20afa7c711eded32ddfb122896ac5d914e75848d5
   languageName: node
   linkType: hard
 
