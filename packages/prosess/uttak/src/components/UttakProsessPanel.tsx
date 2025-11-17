@@ -40,7 +40,7 @@ const UTTAK_PANEL_AKSJONSPUNKT_KODER: Partial<Record<AksjonspunktDefinisjon, str
   5098: 'UttakPanel.Aksjonspunkt.5098',
 };
 
-// TODO Kva er dette? Kodeverk-navn skal hentast fra databasen!
+// TODO Hent fra kodeverk om mogleg (evt intl-messages)
 const UttakPeriodeNavn = {
   MØDREKVOTE: 'Mødrekvote',
   FEDREKVOTE: 'Fedrekvote',
