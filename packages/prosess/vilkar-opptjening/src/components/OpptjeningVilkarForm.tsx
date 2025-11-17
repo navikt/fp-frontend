@@ -7,7 +7,6 @@ import { OpptjeningVilkarView } from './OpptjeningVilkarView';
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
   status: string;
-  erSvpFagsak: boolean;
 }
 
 /**
@@ -15,25 +14,12 @@ interface Props {
  *
  * Presentasjonskomponent. Viser resultatet av opptjeningsvilkåret.
  */
-export const OpptjeningVilkarForm = ({ fastsattOpptjening, status, erSvpFagsak }: Props) => {
+export const OpptjeningVilkarForm = ({ fastsattOpptjening, status }: Props) => {
   const { aksjonspunkterForPanel } = usePanelDataContext();
 
-  if (aksjonspunkterForPanel.length > 0) {
-    return (
-      <OpptjeningVilkarAksjonspunktPanel
-        status={status}
-        fastsattOpptjening={fastsattOpptjening}
-        erSvpFagsak={erSvpFagsak}
-      />
-    );
-  }
-  return (
-    <OpptjeningVilkarView
-      months={fastsattOpptjening.opptjeningperiode.måneder}
-      days={fastsattOpptjening.opptjeningperiode.dager}
-      fastsattOpptjeningActivities={fastsattOpptjening.fastsattOpptjeningAktivitetList}
-      opptjeningFomDate={fastsattOpptjening.opptjeningFom}
-      opptjeningTomDate={fastsattOpptjening.opptjeningTom}
-    />
+  return aksjonspunkterForPanel.length > 0 ? (
+    <OpptjeningVilkarAksjonspunktPanel status={status} fastsattOpptjening={fastsattOpptjening} />
+  ) : (
+    <OpptjeningVilkarView fastsattOpptjening={fastsattOpptjening} />
   );
 };

@@ -24,7 +24,6 @@ type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextField
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
   status: string;
-  erSvpFagsak: boolean;
 }
 
 /**
@@ -32,10 +31,11 @@ interface Props {
  *
  * Viser panel for å løse aksjonspunkt for avslått opptjeningsvilkår
  */
-export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, erSvpFagsak }: Props) => {
+export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }: Props) => {
   const intl = useIntl();
 
   const {
+    fagsak,
     behandling,
     isSubmittable,
     aksjonspunkterForPanel,
@@ -45,6 +45,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, 
     isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<AvklarOpptjeningsvilkaretAp>();
+  const erSvpFagsak = fagsak.fagsakYtelseType === 'SVP';
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
@@ -79,15 +80,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening, 
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
-        rendreFakta={
-          <OpptjeningVilkarView
-            months={fastsattOpptjening.opptjeningperiode.måneder}
-            days={fastsattOpptjening.opptjeningperiode.dager}
-            fastsattOpptjeningActivities={fastsattOpptjening.fastsattOpptjeningAktivitetList}
-            opptjeningFomDate={fastsattOpptjening.opptjeningFom}
-            opptjeningTomDate={fastsattOpptjening.opptjeningTom}
-          />
-        }
+        rendreFakta={<OpptjeningVilkarView fastsattOpptjening={fastsattOpptjening} />}
       >
         <VStack gap="space-16">
           <VilkarResultPicker

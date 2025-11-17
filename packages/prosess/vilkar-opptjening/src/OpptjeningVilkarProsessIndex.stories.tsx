@@ -10,33 +10,31 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { Opptjening } from '@navikt/fp-types';
+import type { Fagsak, FastsattOpptjening } from '@navikt/fp-types';
 
 import { opptjeningAktivitetKlassifisering } from './kodeverk/opptjeningAktivitetKlassifisering';
 import { OpptjeningVilkarProsessIndex } from './OpptjeningVilkarProsessIndex';
 
-const defaultOpptjening = {
-  fastsattOpptjening: {
-    opptjeningperiode: {
-      måneder: 2,
-      dager: 3,
-    },
-    fastsattOpptjeningAktivitetList: [
-      {
-        fom: '2018-01-01',
-        tom: '2018-04-04',
-        klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
-      },
-      {
-        fom: '2018-04-05',
-        tom: '2018-04-10',
-        klasse: opptjeningAktivitetKlassifisering.ANTATT_AVVIST,
-      },
-    ],
-    opptjeningFom: '2018-01-01',
-    opptjeningTom: '2018-10-01',
+const defaultFastsattOpptjening = {
+  opptjeningperiode: {
+    måneder: 2,
+    dager: 3,
   },
-} as Opptjening;
+  fastsattOpptjeningAktivitetList: [
+    {
+      fom: '2018-01-01',
+      tom: '2018-04-04',
+      klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
+    },
+    {
+      fom: '2018-04-05',
+      tom: '2018-04-10',
+      klasse: opptjeningAktivitetKlassifisering.ANTATT_AVVIST,
+    },
+  ],
+  opptjeningFom: '2018-01-01',
+  opptjeningTom: '2018-10-01',
+} as FastsattOpptjening;
 
 const defaultAksjonspunkt = lagAksjonspunkt(AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET);
 
@@ -46,7 +44,9 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     status: 'IKKE_VURDERT',
-    erSvpFagsak: false,
+    fagsak: {
+      fagsakYtelseType: 'FP',
+    } as Fagsak,
     vilkårForPanel: [lagVilkår('FP_VK_21')],
   },
   render: args => <OpptjeningVilkarProsessIndex {...args} />,
@@ -57,59 +57,56 @@ type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunkt: Story = {
   args: {
-    opptjening: defaultOpptjening,
+    fastsattOpptjening: defaultFastsattOpptjening,
     aksjonspunkterForPanel: [defaultAksjonspunkt],
   },
 };
 
 export const ÅpentAksjonspunktSvangerskapspenger: Story = {
   args: {
-    erSvpFagsak: true,
-    opptjening: defaultOpptjening,
+    fagsak: {
+      fagsakYtelseType: 'SVP',
+    } as Fagsak,
+    fastsattOpptjening: defaultFastsattOpptjening,
     aksjonspunkterForPanel: [defaultAksjonspunkt],
   },
 };
 
 export const ÅpentAksjonspunktMedOppholdsperiode: Story = {
   args: {
-    opptjening: {
-      fastsattOpptjening: {
-        opptjeningperiode: {
-          måneder: 2,
-          dager: 3,
-        },
-        fastsattOpptjeningAktivitetList: [
-          {
-            fom: '2018-01-01',
-            tom: '2018-04-04',
-            klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
-          },
-          {
-            fom: '2018-04-05',
-            tom: '2018-04-10',
-          },
-          {
-            fom: '2018-04-11',
-            tom: '2018-06-04',
-            klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
-          },
-        ],
-        opptjeningFom: '2018-01-01',
-        opptjeningTom: '2018-06-04',
+    fastsattOpptjening: {
+      opptjeningperiode: {
+        måneder: 2,
+        dager: 3,
       },
-    } as Opptjening,
+      fastsattOpptjeningAktivitetList: [
+        {
+          fom: '2018-01-01',
+          tom: '2018-04-04',
+          klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
+        },
+        {
+          fom: '2018-04-05',
+          tom: '2018-04-10',
+        },
+        {
+          fom: '2018-04-11',
+          tom: '2018-06-04',
+          klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
+        },
+      ],
+      opptjeningFom: '2018-01-01',
+      opptjeningTom: '2018-06-04',
+    } as FastsattOpptjening,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET)],
   },
 };
 
 export const ÅpentAksjonspunktMenUtenAktiviteter: Story = {
   args: {
-    opptjening: {
-      ...defaultOpptjening,
-      fastsattOpptjening: {
-        ...defaultOpptjening.fastsattOpptjening,
-        fastsattOpptjeningAktivitetList: [],
-      },
+    fastsattOpptjening: {
+      ...defaultFastsattOpptjening,
+      fastsattOpptjeningAktivitetList: [],
     },
     aksjonspunkterForPanel: [defaultAksjonspunkt],
   },
@@ -117,7 +114,7 @@ export const ÅpentAksjonspunktMenUtenAktiviteter: Story = {
 
 export const HarIkkeAksjonspunkt: Story = {
   args: {
-    opptjening: defaultOpptjening,
+    fastsattOpptjening: defaultFastsattOpptjening,
     aksjonspunkterForPanel: [],
   },
 };

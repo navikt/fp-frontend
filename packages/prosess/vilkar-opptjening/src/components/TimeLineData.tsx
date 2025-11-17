@@ -33,7 +33,7 @@ interface Props {
 }
 
 export const TimeLineData = ({
-  fastsattOpptjeningAktivitet,
+  fastsattOpptjeningAktivitet: { klasse, fom, tom },
   lukkPeriode,
   velgNestePeriode,
   velgForrigePeriode,
@@ -79,18 +79,16 @@ export const TimeLineData = ({
           </HStack>
         </HStack>
         <BodyShort size="small">
-          <PeriodLabel
-            dateStringFom={fastsattOpptjeningAktivitet.fom}
-            dateStringTom={fastsattOpptjeningAktivitet.tom}
-          />
+          <PeriodLabel dateStringFom={fom} dateStringTom={tom} />
         </BodyShort>
-        <HStack gap="space-4">
-          {isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && (
+        <HStack gap="space-4" align="center">
+          {isPeriodGodkjent(klasse) ? (
             <CheckmarkIcon className={styles['godkjentImage']} />
+          ) : (
+            <XMarkIcon className={styles['avslattImage']} />
           )}
-          {!isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <XMarkIcon className={styles['avslattImage']} />}
           <BodyShort size="small">
-            <FormattedMessage id={periodStatus(fastsattOpptjeningAktivitet.klasse)} />
+            <FormattedMessage id={periodStatus(klasse)} />
           </BodyShort>
         </HStack>
       </VStack>

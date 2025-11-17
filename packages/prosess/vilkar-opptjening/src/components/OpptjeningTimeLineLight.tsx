@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkCircleIcon, DoorOpenIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import { BodyShort, Label, Timeline } from '@navikt/ds-react';
+import { Timeline } from '@navikt/ds-react';
+import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
@@ -104,20 +105,18 @@ export const OpptjeningTimeLineLight = ({ opptjeningPeriods, opptjeningFomDate, 
         endDate={dayjs(opptjeningTomDate).add(10, 'days').toDate()}
       >
         <Timeline.Pin date={dayjs(opptjeningFomDate).toDate()}>
-          <Label size="small">
-            <FormattedMessage id="OpptjeningTimeLineLight.StartDato" />
-          </Label>
-          <BodyShort size="small">
-            <DateLabel dateString={opptjeningFomDate} />
-          </BodyShort>
+          <ReadOnlyField
+            size="small"
+            label={<FormattedMessage id="OpptjeningTimeLineLight.StartDato" />}
+            value={<DateLabel dateString={opptjeningFomDate} />}
+          />
         </Timeline.Pin>
         <Timeline.Pin date={dayjs(opptjeningTomDate).toDate()}>
-          <Label size="small">
-            <FormattedMessage id="OpptjeningTimeLineLight.SluttDato" />
-          </Label>
-          <BodyShort size="small">
-            <DateLabel dateString={opptjeningTomDate} />
-          </BodyShort>
+          <ReadOnlyField
+            size="small"
+            label={<FormattedMessage id="OpptjeningTimeLineLight.SluttDato" />}
+            value={<DateLabel dateString={opptjeningTomDate} />}
+          />
         </Timeline.Pin>
         <Timeline.Row label="">
           {perioder.map(periode => (

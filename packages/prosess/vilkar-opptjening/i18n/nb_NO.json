@@ -5,7 +5,9 @@
   "OpptjeningVilkarView.Months": "måneder",
   "OpptjeningVilkarView.Weeks": "uker",
   "OpptjeningVilkarView.Days": "dager",
-  "OpptjeningVilkarView.MonthsAndDays": "{months} måneder og {days} dager aktivitet i opptjeningsperioden",
+  "OpptjeningVilkarView.MonthsAndDaysLabel": "Aktivitet i opptjeningsperioden (måneder og dager)",
+  "OpptjeningVilkarView.MonthsAndDays": "{months} måneder og {days} dager",
+  "OpptjeningVilkarView.Opptjeningsperiode": "Opptjeningsperiode",
   "OpptjeningVilkarView.DetailsForSelectedPeriod": "Detaljer for valgt periode",
 
   "OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger": "Opptjent rett til foreldrepenger",
