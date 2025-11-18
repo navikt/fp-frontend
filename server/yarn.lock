@@ -247,13 +247,13 @@ __metadata:
   linkType: hard
 
 "@navikt/oasis@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@navikt/oasis@npm:3.4.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F3.4.0%2F7a21e6e8c8e6eca00d7e6a5c06f7e8315c0cc71a"
+  version: 3.8.0
+  resolution: "@navikt/oasis@npm:3.8.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F3.8.0%2Ffc6862d934adfbefa382220614af18160688cd1e"
   dependencies:
     jose: ^5.2.3
     openid-client: ^5.6.5
     prom-client: ^15.1.0
-  checksum: ee44bd6f874f1aadbc3c18e277c36df7f80316b741761e9cbc7089810ef254dc2bb351f992c0f7c9bf864d9b6268817ab95d00dbfa1566a15094d120a416a802
+  checksum: fc8093f23757c9c40fac0e2fd66e0d3660d6ff602bd22a439531bf8e75d1d8a4889af3abb1c468aa629ce8ff3349afecc4e9bc83ffc6e89640de63f4ed678691
   languageName: node
   linkType: hard
 
