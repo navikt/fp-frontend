@@ -5,7 +5,10 @@ import logger from "./logger.js";
 
 const getGraphRequest = async (bearerToken: string, graphUrl: string) => {
   const scope = "https://graph.microsoft.com/.default";
-  const obo = await requestAzureOboToken(bearerToken, scope);
+  const obo = await requestAzureOboToken(
+    bearerToken.replace("Bearer ", ""),
+    scope,
+  );
 
   if (!obo.ok) {
     const errorMessage = `OBO-utveklsing for ${scope} feilet.`;
