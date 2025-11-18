@@ -56,7 +56,7 @@ describe('UttakProsessIndex', () => {
     expect(screen.getByText('11.10.2019 - 31.10.2019')).toBeInTheDocument();
     expect(screen.getByText('3 uker')).toBeInTheDocument();
     expect(screen.getByText('Mottatt dato: 01.11.2019')).toBeInTheDocument();
-    expect(screen.getByText(/§14-10: Innvilget foreldrepenger før fødsel/)).toBeInTheDocument();
+    expect(screen.getByText(/§ 14-10: Innvilget foreldrepenger før fødsel/)).toBeInTheDocument();
 
     expect(screen.getByText('BEDRIFT AS (910909088)...-001')).toBeInTheDocument();
     expect(screen.getByText('3')).toBeInTheDocument();

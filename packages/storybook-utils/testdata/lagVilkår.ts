@@ -12,15 +12,15 @@ export const lagVilkår = (vilkarType: VilkårType, options?: Partial<Vilkar>): 
 };
 
 const lovReferansePerVilkår: Record<VilkårType, string> = {
-  FP_VK_1: '§ 14-17, 1. ledd',
-  FP_VK_11: '§ 14-5, 1. ledd',
+  FP_VK_1: '§ 14-17 første ledd',
+  FP_VK_11: '§ 14-5 første ledd',
   FP_VK_6: '§ 14-17',
   FP_VK_2: '§ 14-2',
-  FP_VK_2_F: '§ 14-17, femte ledd',
+  FP_VK_2_F: '§ 14-17 femte ledd',
   FP_VK_2_L: '§ 14-2',
-  FP_VK_3: '§ 22-13, 2. ledd',
-  FP_VK_34: '§§ 21-3',
-  FP_VK_21: '§ 14-6 og 14-10',
+  FP_VK_3: '§ 22-13 andre ledd',
+  FP_VK_34: '§ 21-3',
+  FP_VK_21: '§§ 14-6 og 14-10',
   FP_VK_23: '§ 14-6',
   FP_VK_41: '§ 14-7',
   SVP_VK_1: '§ 14-4',
