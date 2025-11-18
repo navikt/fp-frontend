@@ -1,19 +1,9 @@
 .godkjentImage {
   color: var(--ax-bg-success-strong);
-  height: 25px;
-  width: 25px;
+  font-size: 1.5rem;
 }
 
 .avslattImage {
-  color: var(--ax-danger-400);
-  height: 25px;
-  width: 25px;
-}
-
-.margin {
-  margin-right: 5px;
-}
-
-.fix {
-  display: flex;
+  color: var(--ax-bg-danger-strong);
+  font-size: 1.5rem;
 }

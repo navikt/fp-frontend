@@ -16,7 +16,7 @@ describe('OpptjeningFaktaIndex', () => {
     expect(screen.getByText('25.10.2019')).toBeInTheDocument();
 
     expect(screen.getByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
-    expect(screen.getByText('(8 mndr. 14 dager)')).toBeInTheDocument();
+    expect(screen.getByText(/8 måneder og 14 dager/)).toBeInTheDocument();
     expect(screen.getAllByText('Næring')).toHaveLength(2);
 
     expect(screen.getByText('Oppdater').closest('button')).toBeDisabled();

@@ -86,8 +86,8 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
             legend={<FormattedMessage id="SokersOpplysningspliktForm.ErVilkåretOppfylt" />}
             isReadOnly={isReadOnly}
             skalKunneInnvilge={hasSoknad}
-            customVilkårOppfyltText={<FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />}
-            customVilkårIkkeOppfyltText={
+            vilkårOppfyltLabel={<FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />}
+            vilkårIkkeOppfyltLabel={
               <FormattedMessage
                 id="SokersOpplysningspliktForm.VilkarIkkeOppfylt"
                 values={{ b: BTag, br: <br key="break-line" /> }}

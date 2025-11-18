@@ -18,11 +18,10 @@ const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET];
 
 const VILKAR_KODER = ['FP_VK_21', 'FP_VK_23'] satisfies VilkårType[];
 
-export const OpptjeningInngangsvilkarFpInitPanel = () => {
+export const OpptjeningInngangsvilkarInitPanel = () => {
   const intl = useIntl();
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
-
   const harIngenAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.length === 0;
 
   const api = useBehandlingApi(standardPanelProps.behandling);
@@ -46,7 +45,11 @@ export const OpptjeningInngangsvilkarFpInitPanel = () => {
       inngangsvilkårPanelKode="OPPTJENINGSVILKARET"
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
     >
-      <>{opptjening && <OpptjeningVilkarProsessIndex status={standardPanelProps.status} opptjening={opptjening} />}</>
+      <>
+        {opptjening && (
+          <OpptjeningVilkarProsessIndex fastsattOpptjening={opptjening.fastsattOpptjening} status={standardPanelProps.status} />
+        )}
+      </>
     </InngangsvilkarDefaultInitPanel>
   );
 };

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkCircleIcon, DoorOpenIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import { BodyShort, Label, Timeline } from '@navikt/ds-react';
+import { Timeline } from '@navikt/ds-react';
+import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import type { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
-import { opptjeningAktivitetKlassifisering } from '../kodeverk/opptjeningAktivitetKlassifisering';
 import { TimeLineData } from './TimeLineData';
 
 type Periode = {
@@ -24,17 +24,11 @@ const PERIODE_STATUS_IKON_MAP = {
   info: <DoorOpenIcon />,
 } as Record<string, React.ReactElement>;
 
-const getStatus = (klasseKode: string): 'success' | 'danger' | 'info' => {
-  if (
-    klasseKode === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST ||
-    klasseKode === opptjeningAktivitetKlassifisering.ANTATT_AVVIST
-  ) {
+const getStatus = (klasseKode: FastsattOpptjeningAktivitet['klasse']) => {
+  if (klasseKode === 'BEKREFTET_AVVIST') {
     return 'danger';
   }
-  if (
-    klasseKode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT ||
-    klasseKode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
-  ) {
+  if (klasseKode === 'BEKREFTET_GODKJENT' || klasseKode === 'ANTATT_GODKJENT') {
     return 'success';
   }
   return 'info';
@@ -104,20 +98,18 @@ export const OpptjeningTimeLineLight = ({ opptjeningPeriods, opptjeningFomDate, 
         endDate={dayjs(opptjeningTomDate).add(10, 'days').toDate()}
       >
         <Timeline.Pin date={dayjs(opptjeningFomDate).toDate()}>
-          <Label size="small">
-            <FormattedMessage id="OpptjeningTimeLineLight.StartDato" />
-          </Label>
-          <BodyShort size="small">
-            <DateLabel dateString={opptjeningFomDate} />
-          </BodyShort>
+          <ReadOnlyField
+            size="small"
+            label={<FormattedMessage id="OpptjeningTimeLineLight.StartDato" />}
+            value={<DateLabel dateString={opptjeningFomDate} />}
+          />
         </Timeline.Pin>
         <Timeline.Pin date={dayjs(opptjeningTomDate).toDate()}>
-          <Label size="small">
-            <FormattedMessage id="OpptjeningTimeLineLight.SluttDato" />
-          </Label>
-          <BodyShort size="small">
-            <DateLabel dateString={opptjeningTomDate} />
-          </BodyShort>
+          <ReadOnlyField
+            size="small"
+            label={<FormattedMessage id="OpptjeningTimeLineLight.SluttDato" />}
+            value={<DateLabel dateString={opptjeningTomDate} />}
+          />
         </Timeline.Pin>
         <Timeline.Row label="">
           {perioder.map(periode => (

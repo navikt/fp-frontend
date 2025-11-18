@@ -1,13 +1,13 @@
-import { type ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { Button, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
+import { ReadOnlyField, RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { BTag, findDifferenceInMonthsAndDays, periodFormat } from '@navikt/ft-utils';
+import { FaktaGruppe, PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { BTag, findDifferenceInMonthsAndDays } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
@@ -20,8 +20,6 @@ import type {
 
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
 import { ValgtAktivitetSubForm } from './ValgtAktivitetSubForm';
-
-import styles from './valgtAktivitetForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -124,19 +122,15 @@ export const ValgtAktivitetForm = ({
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitet(values)}>
-      <FaktaGruppe
-        className={styles['panel']}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]}
-      >
+      <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]}>
         <VStack gap="space-24">
           <VStack gap="space-8">
             <HStack justify="space-between">
               <Heading size="small" level="3">
                 <FormattedMessage id="ActivityPanel.Details" />
               </Heading>
-              <HStack gap="space-8">
+              <HStack gap="space-16">
                 <Button
-                  className={styles['margin']}
                   size="xsmall"
                   icon={<ArrowLeftIcon aria-hidden />}
                   onClick={velgForrigeAktivitet}
@@ -147,7 +141,6 @@ export const ValgtAktivitetForm = ({
                   <FormattedMessage id="Timeline.prevPeriodShort" />
                 </Button>
                 <Button
-                  className={styles['margin']}
                   size="xsmall"
                   icon={<ArrowRightIcon aria-hidden />}
                   onClick={velgNesteAktivitet}
@@ -168,26 +161,24 @@ export const ValgtAktivitetForm = ({
                 />
               </HStack>
             </HStack>
-            <HStack gap="space-4">
-              <div className={styles['colMargin']}>
-                <Label size="small">
-                  <FormattedMessage id="ActivityPanel.Period" />
-                </Label>
-                {opptjeningFom && opptjeningTom && (
-                  <HStack gap="space-8">
-                    <BodyShort size="small">{periodFormat(opptjeningFom, opptjeningTom)}</BodyShort>
-                    <BodyShort size="small">{finnMånederOgDager(opptjeningFom, opptjeningTom)}</BodyShort>
-                  </HStack>
-                )}
-              </div>
-              <div>
-                <Label size="small">
-                  <FormattedMessage id="ActivityPanel.Activity" />
-                </Label>
-                <BodyShort size="small">
-                  {opptjeningAktivitetTyper.find(oat => oat.kode === aktivitetType)?.navn}
-                </BodyShort>
-              </div>
+            <HStack gap="space-32">
+              <ReadOnlyField
+                size="small"
+                label={<FormattedMessage id="ActivityPanel.Period" />}
+                value={
+                  opptjeningFom && opptjeningTom ? (
+                    <>
+                      <PeriodLabel dateStringFom={opptjeningFom} dateStringTom={opptjeningTom} />{' '}
+                      {finnMånederOgDager(opptjeningFom, opptjeningTom)}
+                    </>
+                  ) : undefined
+                }
+              />
+              <ReadOnlyField
+                size="small"
+                label={<FormattedMessage id="ActivityPanel.Activity" />}
+                value={opptjeningAktivitetTyper.find(oat => oat.kode === aktivitetType)?.navn}
+              />
             </HStack>
           </VStack>
           <ValgtAktivitetSubForm
@@ -202,20 +193,17 @@ export const ValgtAktivitetForm = ({
             <RhfRadioGroup
               name="erGodkjent"
               control={formMethods.control}
-              legend=""
-              hideLegend
+              legend={<FormattedMessage id="ActivityPanel.ErAktivitetenGodkjent" />}
               validate={[required]}
               readOnly={readOnly}
               isEdited={erEndret}
             >
-              <HStack gap="space-16">
-                <Radio value={true} size="small">
-                  <FormattedMessage id="ActivityPanel.Godkjent" />
-                </Radio>
-                <Radio value={false} size="small">
-                  <FormattedMessage id="ActivityPanel.IkkeGodkjent" values={{ b: BTag }} />
-                </Radio>
-              </HStack>
+              <Radio value={true} size="small">
+                <FormattedMessage id="ActivityPanel.Godkjent" />
+              </Radio>
+              <Radio value={false} size="small">
+                <FormattedMessage id="ActivityPanel.IkkeGodkjent" values={{ b: BTag }} />
+              </Radio>
             </RhfRadioGroup>
           )}
           <RhfTextarea

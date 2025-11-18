@@ -1,18 +1,15 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, VStack } from '@navikt/ds-react';
+import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import type { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
+import type { FastsattOpptjening } from '@navikt/fp-types';
 
 import { OpptjeningTimeLineLight } from './OpptjeningTimeLineLight';
 
 interface Props {
-  months: number;
-  days: number;
-  fastsattOpptjeningActivities?: FastsattOpptjeningAktivitet[];
-  opptjeningFomDate: string;
-  opptjeningTomDate: string;
+  fastsattOpptjening: FastsattOpptjening;
 }
 
 /**
@@ -21,24 +18,35 @@ interface Props {
  * Viser resultatet av opptjeningsvilkåret.
  */
 export const OpptjeningVilkarView = ({
-  months,
-  days,
-  fastsattOpptjeningActivities = [],
-  opptjeningFomDate,
-  opptjeningTomDate,
+  fastsattOpptjening: {
+    opptjeningperiode: { måneder, dager },
+    opptjeningFom,
+    opptjeningTom,
+    fastsattOpptjeningAktivitetList,
+  },
 }: Props) => (
   <VStack gap="space-16">
-    <BodyShort size="small">
-      <FormattedMessage id="OpptjeningVilkarView.MonthsAndDays" values={{ months, days }} />
-    </BodyShort>
-    <BodyShort size="small">
-      <PeriodLabel dateStringFom={opptjeningFomDate} dateStringTom={opptjeningTomDate} />
-    </BodyShort>
-    {fastsattOpptjeningActivities.length > 0 && (
+    <ReadOnlyField
+      size="small"
+      label={<FormattedMessage id="OpptjeningVilkarView.MonthsAndDaysLabel" />}
+      value={<FormattedMessage id="OpptjeningVilkarView.MonthsAndDays" values={{ months: måneder, days: dager }} />}
+    />
+    {fastsattOpptjeningAktivitetList.length === 0 && (
+      <BodyShort size="small">
+        <FormattedMessage id="OpptjeningVilkarView.IngenAktiviteter" />
+      </BodyShort>
+    )}
+    <ReadOnlyField
+      size="small"
+      label={<FormattedMessage id="OpptjeningVilkarView.Opptjeningsperiode" />}
+      value={<PeriodLabel dateStringFom={opptjeningFom} dateStringTom={opptjeningTom} />}
+    />
+
+    {fastsattOpptjeningAktivitetList.length > 0 && (
       <OpptjeningTimeLineLight
-        opptjeningPeriods={fastsattOpptjeningActivities}
-        opptjeningFomDate={opptjeningFomDate}
-        opptjeningTomDate={opptjeningTomDate}
+        opptjeningPeriods={fastsattOpptjeningAktivitetList}
+        opptjeningFomDate={opptjeningFom}
+        opptjeningTomDate={opptjeningTom}
       />
     )}
   </VStack>

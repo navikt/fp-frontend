@@ -24,8 +24,8 @@ export type VilkarResultPickerFormValues = {
 interface Props {
   vilkår: Vilkar | undefined;
   legend: ReactNode;
-  customVilkårIkkeOppfyltText: string | ReactElement;
-  customVilkårOppfyltText: string | ReactElement;
+  vilkårIkkeOppfyltLabel: string | ReactElement;
+  vilkårOppfyltLabel: string | ReactElement;
   isReadOnly: boolean;
   skalKunneInnvilge?: boolean;
   validatorsForRadioOptions?: ((value: string | number | boolean) => string | null | undefined)[];
@@ -34,8 +34,8 @@ interface Props {
 export const VilkarResultPicker = ({
   vilkår,
   legend,
-  customVilkårIkkeOppfyltText,
-  customVilkårOppfyltText,
+  vilkårIkkeOppfyltLabel,
+  vilkårOppfyltLabel,
   isReadOnly,
   skalKunneInnvilge = true,
   validatorsForRadioOptions,
@@ -60,14 +60,14 @@ export const VilkarResultPicker = ({
               <>
                 <CheckmarkIcon className={styles['godkjentImage']} />
                 <BodyShort as="span" size="small">
-                  {customVilkårOppfyltText}
+                  {vilkårOppfyltLabel}
                 </BodyShort>
               </>
             ) : (
               <>
                 <XMarkOctagonIcon className={styles['avslattImage']} />
                 <BodyShort as="span" size="small">
-                  {customVilkårIkkeOppfyltText}
+                  {vilkårIkkeOppfyltLabel}
                 </BodyShort>
               </>
             )
@@ -83,10 +83,10 @@ export const VilkarResultPicker = ({
           readOnly={isReadOnly}
         >
           <Radio value={true} size="small" disabled={!skalKunneInnvilge}>
-            {customVilkårOppfyltText}
+            {vilkårOppfyltLabel}
           </Radio>
           <Radio value={false} size="small">
-            {customVilkårIkkeOppfyltText}
+            {vilkårIkkeOppfyltLabel}
           </Radio>
         </RhfRadioGroup>
       )}
