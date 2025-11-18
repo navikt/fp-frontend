@@ -9,7 +9,7 @@ const getGraphRequest = async (bearerToken: string, graphUrl: string) => {
 
   if (!obo.ok) {
     const errorMessage = `OBO-utveklsing for ${scope} feilet.`;
-    logger.warning(errorMessage);
+    logger.error(errorMessage, obo.error);
     throw new Error(errorMessage);
   }
 

@@ -44,7 +44,8 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
               options.headers.Authorization = `Bearer ${obo.token}`;
               resolve(options);
             } else {
-              logger.warning(`OBO-utveklsing for ${api.scopes} feilet.`);
+              const errorMessage = `OBO-utveklsing for ${api.scopes} feilet.`;
+              logger.error(errorMessage, obo.error);
               reject(obo.error); // NOSONAR: Sonarcloud forstår ikke at obo.error er et Error objekt. Dermed gir den en false positive.
             }
           });
