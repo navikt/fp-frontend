@@ -21,6 +21,7 @@ import dayjs from 'dayjs';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { getSakslisteSaksbehandlere } from '../../data/fplosSaksbehandlerApi';
+import { getValueFromLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 import type { Saksliste } from '../../typer/sakslisteTsType';
 
@@ -28,7 +29,6 @@ import styles from './sakslisteVelgerForm.module.css';
 
 const getDefaultSaksliste = (
   sorterteSakslister: Saksliste[],
-  getValueFromLocalStorage: (key: string) => string | undefined,
   removeValueFromLocalStorage: (key: string) => void,
 ): number | undefined => {
   const lagretSakslisteId = getValueFromLocalStorage('sakslisteId');
@@ -44,7 +44,6 @@ const getDefaultSaksliste = (
 
 const getFormDefaultValues = (
   sorterteSakslister: Saksliste[],
-  getValueFromLocalStorage: (key: string) => string | undefined,
   removeValueFromLocalStorage: (key: string) => void,
 ): { sakslisteId: string | undefined } => {
   if (sorterteSakslister.length === 0) {
@@ -52,11 +51,7 @@ const getFormDefaultValues = (
       sakslisteId: undefined,
     };
   }
-  const defaultSaksliste = getDefaultSaksliste(
-    sorterteSakslister,
-    getValueFromLocalStorage,
-    removeValueFromLocalStorage,
-  );
+  const defaultSaksliste = getDefaultSaksliste(sorterteSakslister, removeValueFromLocalStorage);
   return {
     sakslisteId: defaultSaksliste ? `${defaultSaksliste}` : undefined,
   };
@@ -171,7 +166,6 @@ interface Props {
   sakslister: Saksliste[];
   setValgtSakslisteId: (sakslisteId: number) => void;
   fetchAntallOppgaver: (sakslisteId: number) => void;
-  getValueFromLocalStorage: (key: string) => string | undefined;
   setValueInLocalStorage: (key: string, value: string) => void;
   removeValueFromLocalStorage: (key: string) => void;
 }
@@ -180,7 +174,6 @@ export const SakslisteVelgerForm = ({
   sakslister,
   setValgtSakslisteId,
   fetchAntallOppgaver,
-  getValueFromLocalStorage,
   setValueInLocalStorage,
   removeValueFromLocalStorage,
 }: Props) => {
@@ -203,7 +196,7 @@ export const SakslisteVelgerForm = ({
   });
 
   const formMethods = useForm<FormValues>({
-    defaultValues: getFormDefaultValues(sorterteSakslister, getValueFromLocalStorage, removeValueFromLocalStorage),
+    defaultValues: getFormDefaultValues(sorterteSakslister, removeValueFromLocalStorage),
   });
 
   const sakslisteId = formMethods.watch('sakslisteId');

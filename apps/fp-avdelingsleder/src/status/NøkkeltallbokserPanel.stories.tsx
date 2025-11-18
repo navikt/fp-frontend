@@ -5,12 +5,10 @@ import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
-import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
-import { FordelingAvBehandlingstypePanel } from './FordelingAvBehandlingstypePanel';
+import { losKodeverkOptions, LosUrl, oppgaverForAvdelingOptions } from '../data/fplosAvdelingslederApi';
+import { NøkkeltallbokserPanel } from './NøkkeltallbokserPanel';
 
-import messages from '../../../i18n/nb_NO.json';
-
-const withIntl = getIntlDecorator(messages);
+import messages from '../../i18n/nb_NO.json';
 
 const OPPGAVER_FOR_AVDELING = [
   {
@@ -45,9 +43,11 @@ const OPPGAVER_FOR_AVDELING = [
   },
 ];
 
+const withIntl = getIntlDecorator(messages);
+
 const meta = {
-  title: 'los/avdelingsleder/nokkeltall/FordelingAvBehandlingstypePanel',
-  component: FordelingAvBehandlingstypePanel,
+  title: 'los/avdelingsleder/status/NøkkeltallbokserPanel',
+  component: NøkkeltallbokserPanel,
   decorators: [withIntl, withQueryClient],
   parameters: {
     msw: {
@@ -60,16 +60,16 @@ const meta = {
     },
   },
   args: {
-    height: 300,
     valgtAvdelingEnhet: '1',
-    getValueFromLocalStorage: () => '',
+    children: <div>Avdelingsvelger</div>,
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
     const alleKodeverk = useQuery(losKodeverkOptions()).data;
-    return alleKodeverk ? <FordelingAvBehandlingstypePanel {...props} /> : <LoadingPanel />;
+    const oppgaverForAvdeling = useQuery(oppgaverForAvdelingOptions(props.valgtAvdelingEnhet)).data;
+    return alleKodeverk && oppgaverForAvdeling.length > 0 ? <NøkkeltallbokserPanel {...props} /> : <LoadingPanel />;
   },
-} satisfies Meta<typeof FordelingAvBehandlingstypePanel>;
+} satisfies Meta<typeof NøkkeltallbokserPanel>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

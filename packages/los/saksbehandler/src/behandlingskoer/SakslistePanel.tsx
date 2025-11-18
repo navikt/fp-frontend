@@ -2,11 +2,7 @@ import { VStack } from '@navikt/ds-react';
 import { useMutation } from '@tanstack/react-query';
 
 import { getBehandlingskøOppgaveAntall } from '../data/fplosSaksbehandlerApi';
-import {
-  getValueFromLocalStorage,
-  removeValueFromLocalStorage,
-  setValueInLocalStorage,
-} from '../data/localStorageHelper';
+import { removeValueFromLocalStorage, setValueInLocalStorage } from '../data/localStorageHelper';
 import type { Oppgave } from '../typer/oppgaveTsType';
 import type { Saksliste } from '../typer/sakslisteTsType';
 import { LedigOppgaveTabell } from './oppgaveTabeller/ledigOppgaveTabell/LedigOppgaveTabell';
@@ -38,7 +34,6 @@ export const SakslistePanel = ({
         sakslister={sakslister}
         setValgtSakslisteId={setValgtSakslisteId}
         fetchAntallOppgaver={fetchAntallOppgaver}
-        getValueFromLocalStorage={getValueFromLocalStorage}
         setValueInLocalStorage={setValueInLocalStorage}
         removeValueFromLocalStorage={removeValueFromLocalStorage}
       />

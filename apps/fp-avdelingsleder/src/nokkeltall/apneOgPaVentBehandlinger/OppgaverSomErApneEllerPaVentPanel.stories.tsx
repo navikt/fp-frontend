@@ -81,7 +81,6 @@ const meta = {
   args: {
     height: 300,
     valgtAvdelingEnhet: '1',
-    getValueFromLocalStorage: () => '',
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla

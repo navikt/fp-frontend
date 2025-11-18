@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
-import { Box, Heading, HStack, Select, Tabs } from '@navikt/ds-react';
+import { Box, Heading, Select, Tabs, VStack } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
@@ -22,10 +22,9 @@ import { GrupperPanel } from '../grupper/GrupperPanel';
 import { NokkeltallPanel } from '../nokkeltall/NokkeltallPanel';
 import { ReservasjonerTabell } from '../reservasjoner/ReservasjonerTabell';
 import { SaksbehandlerePanel } from '../saksbehandlere/SaksbehandlerePanel';
+import { NøkkeltallbokserPanel } from '../status/NøkkeltallbokserPanel';
 import type { Avdeling } from '../typer/avdelingTsType';
 import { AvdelingslederPanels } from './avdelingslederPanels';
-
-import styles from './avdelingslederIndex.module.css';
 
 interface Props {
   initData: InitDataLos;
@@ -62,78 +61,80 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
   }
 
   return (
-    <div key={valgtAvdelingEnhet} className={styles['container']}>
-      <HStack justify="end" padding="2">
-        <Select
+    <div>
+      <VStack gap="space-16">
+        <NøkkeltallbokserPanel valgtAvdelingEnhet={valgtAvdelingEnhet}>
+          {/* TODO (TOR) Denne selecten bør flyttast til dekoratøren */}
+          <Select
+            size="small"
+            hideLabel
+            label=""
+            onChange={e => {
+              const index = e.target.value;
+              setValueInLocalStorage('avdelingEnhet', index);
+              setValgtAvdelingEnhet(index);
+            }}
+            value={valgtAvdelingEnhet}
+          >
+            {initData.avdelinger.map(avdeling => (
+              <option key={avdeling.avdelingEnhet} value={avdeling.avdelingEnhet}>
+                {`${avdeling.avdelingEnhet} ${avdeling.navn}`}
+              </option>
+            ))}
+          </Select>
+        </NøkkeltallbokserPanel>
+        <Tabs
           size="small"
-          hideLabel
-          label=""
-          onChange={e => {
-            const index = e.target.value;
-            setValueInLocalStorage('avdelingEnhet', index);
-            setValgtAvdelingEnhet(index);
+          value={activeAvdelingslederPanel}
+          onChange={(avdelingslederPanel: string) => {
+            void navigate(getAvdelingslederPanelLocation(avdelingslederPanel));
           }}
-          value={valgtAvdelingEnhet}
-          className={styles['paddingSelect']}
         >
-          {initData.avdelinger.map(avdeling => (
-            <option key={avdeling.avdelingEnhet} value={avdeling.avdelingEnhet}>
-              {`${avdeling.avdelingEnhet} ${avdeling.navn}`}
-            </option>
-          ))}
-        </Select>
-      </HStack>
-      <Tabs
-        size="small"
-        value={activeAvdelingslederPanel}
-        onChange={(avdelingslederPanel: string) => {
-          void navigate(getAvdelingslederPanelLocation(avdelingslederPanel));
-        }}
-        className={styles['paddingHeader']}
-      >
-        <Tabs.List>
-          <Tabs.Tab
-            value={AvdelingslederPanels.BEHANDLINGSKOER}
-            label={
-              <Heading size="small" level="2">
-                <FormattedMessage id="AvdelingslederIndex.Behandlingskoer" />
-              </Heading>
-            }
-          />
-          <Tabs.Tab
-            value={AvdelingslederPanels.NOKKELTALL}
-            label={
-              <Heading size="small" level="2">
-                <FormattedMessage id="AvdelingslederIndex.Nokkeltall" />
-              </Heading>
-            }
-          />
-          <Tabs.Tab
-            value={AvdelingslederPanels.SAKSBEHANDLERE}
-            label={
-              <Heading size="small" level="2">
-                <FormattedMessage id="AvdelingslederIndex.Saksbehandlere" />
-              </Heading>
-            }
-          />
-          <Tabs.Tab
-            value={AvdelingslederPanels.GRUPPER}
-            label={
-              <Heading size="small" level="2">
-                <FormattedMessage id="AvdelingslederIndex.Grupper" />
-              </Heading>
-            }
-          />
-          <Tabs.Tab
-            value={AvdelingslederPanels.RESERVASJONER}
-            label={
-              <Heading size="small" level="2">
-                <FormattedMessage id="AvdelingslederIndex.Reservasjoner" />
-              </Heading>
-            }
-          />
-        </Tabs.List>
-      </Tabs>
+          <Tabs.List>
+            <Tabs.Tab
+              value={AvdelingslederPanels.BEHANDLINGSKOER}
+              label={
+                <Heading size="small" level="2">
+                  <FormattedMessage id="AvdelingslederIndex.Behandlingskoer" />
+                </Heading>
+              }
+            />
+            <Tabs.Tab
+              value={AvdelingslederPanels.NOKKELTALL}
+              label={
+                <Heading size="small" level="2">
+                  <FormattedMessage id="AvdelingslederIndex.Nokkeltall" />
+                </Heading>
+              }
+            />
+            <Tabs.Tab
+              value={AvdelingslederPanels.SAKSBEHANDLERE}
+              label={
+                <Heading size="small" level="2">
+                  <FormattedMessage id="AvdelingslederIndex.Saksbehandlere" />
+                </Heading>
+              }
+            />
+            <Tabs.Tab
+              value={AvdelingslederPanels.GRUPPER}
+              label={
+                <Heading size="small" level="2">
+                  <FormattedMessage id="AvdelingslederIndex.Grupper" />
+                </Heading>
+              }
+            />
+            <Tabs.Tab
+              value={AvdelingslederPanels.RESERVASJONER}
+              label={
+                <Heading size="small" level="2">
+                  <FormattedMessage id="AvdelingslederIndex.Reservasjoner" />
+                </Heading>
+              }
+            />
+          </Tabs.List>
+        </Tabs>
+      </VStack>
+
       <Box.New background="default" padding="5">
         {activeAvdelingslederPanel === AvdelingslederPanels.BEHANDLINGSKOER && (
           <EndreSakslisterPanel

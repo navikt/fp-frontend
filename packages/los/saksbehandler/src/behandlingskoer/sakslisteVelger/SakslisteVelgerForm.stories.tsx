@@ -48,7 +48,6 @@ const meta = {
     fetchAntallOppgaver: action('button-click'),
     setValueInLocalStorage: action('button-click'),
     removeValueFromLocalStorage: action('button-click'),
-    getValueFromLocalStorage: () => '',
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla

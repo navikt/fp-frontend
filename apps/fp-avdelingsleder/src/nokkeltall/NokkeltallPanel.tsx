@@ -1,9 +1,7 @@
 import { VStack } from '@navikt/ds-react';
 
-import { getValueFromLocalStorage } from '../data/localStorageHelper';
 import { OppgaverPerForsteStonadsdagPanel } from './antallBehandlingerPerForsteStonadsdag/OppgaverPerForsteStonadsdagPanel';
 import { OppgaverSomErApneEllerPaVentPanel } from './apneOgPaVentBehandlinger/OppgaverSomErApneEllerPaVentPanel';
-import { FordelingAvBehandlingstypePanel } from './fordelingAvBehandlingstype/FordelingAvBehandlingstypePanel';
 import { TilBehandlingPanel } from './tilBehandling/TilBehandlingPanel';
 import { VentefristUtløperPanel } from './ventefristUtløper/VentefristUtløperPanel';
 
@@ -16,27 +14,10 @@ export const NokkeltallPanel = ({ valgtAvdelingEnhet }: Props) => {
 
   return (
     <VStack gap="space-16">
-      <TilBehandlingPanel
-        height={height}
-        valgtAvdelingEnhet={valgtAvdelingEnhet}
-        getValueFromLocalStorage={getValueFromLocalStorage}
-      />
-      <FordelingAvBehandlingstypePanel
-        height={height}
-        valgtAvdelingEnhet={valgtAvdelingEnhet}
-        getValueFromLocalStorage={getValueFromLocalStorage}
-      />
-      <VentefristUtløperPanel
-        height={height}
-        valgtAvdelingEnhet={valgtAvdelingEnhet}
-        getValueFromLocalStorage={getValueFromLocalStorage}
-      />
+      <TilBehandlingPanel height={height} valgtAvdelingEnhet={valgtAvdelingEnhet} />
+      <VentefristUtløperPanel height={height} valgtAvdelingEnhet={valgtAvdelingEnhet} />
       <OppgaverPerForsteStonadsdagPanel height={height} valgtAvdelingEnhet={valgtAvdelingEnhet} />
-      <OppgaverSomErApneEllerPaVentPanel
-        height={height}
-        valgtAvdelingEnhet={valgtAvdelingEnhet}
-        getValueFromLocalStorage={getValueFromLocalStorage}
-      />
+      <OppgaverSomErApneEllerPaVentPanel height={height} valgtAvdelingEnhet={valgtAvdelingEnhet} />
     </VStack>
   );
 };

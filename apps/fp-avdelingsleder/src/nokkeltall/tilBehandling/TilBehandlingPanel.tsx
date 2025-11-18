@@ -11,7 +11,7 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { oppgaverPerDatoOptions } from '../../data/fplosAvdelingslederApi';
-import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
+import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 import type { OppgaveForDato } from '../../typer/oppgaverForDatoTsType';
 import { type OppgaveForDatoGraf, TilBehandlingGraf } from './TilBehandlingGraf';
@@ -33,29 +33,28 @@ const formDefaultValues = { ytelseType: ALLE_YTELSETYPER_VALGT, ukevalg: UKE_2 }
 interface Props {
   height: number;
   valgtAvdelingEnhet: string;
-  getValueFromLocalStorage: (key: string) => string | undefined;
 }
 
-export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLocalStorage }: Props) => {
+export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
   const intl = useIntl();
 
   const { data: oppgaverPerDato } = useQuery(oppgaverPerDatoOptions(valgtAvdelingEnhet));
 
   const behandlingTyper = useLosKodeverk('BehandlingType');
   const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
-  const stringFromStorage = getValueFromLocalStorage(formName);
 
-  const lagredeVerdier = stringFromStorage ? (JSON.parse(stringFromStorage) as FormValues) : undefined;
+  const lagretFilter = getParsedValueFromLocalStorage<FormValues>(formName);
 
   const formMethods = useForm<FormValues>({
-    defaultValues: lagredeVerdier ?? formDefaultValues,
+    defaultValues: lagretFilter ?? formDefaultValues,
   });
 
   const values = formMethods.watch();
 
+  useStoreValuesInLocalStorage(formName, values);
+
   return (
     <RhfForm<FormValues> formMethods={formMethods}>
-      <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="TilBehandlingPanel.TilBehandling" />

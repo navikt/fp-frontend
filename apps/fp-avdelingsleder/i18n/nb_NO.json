@@ -79,11 +79,6 @@
   "SletteSaksbehandlerModal.Ja": "Ja",
   "SletteSaksbehandlerModal.Nei": "Nei",
 
-  "FordelingAvBehandlingstypePanel.Fordeling": "Antall åpne oppgaver nå",
-  "FordelingAvBehandlingstypePanel.Alle": "Alle",
-  "FordelingAvBehandlingstypeGraf.TilBehandling": "Til behandling",
-  "FordelingAvBehandlingstypeGraf.TilBeslutter": "Til beslutter",
-
   "TilBehandlingPanel.TilBehandling": "Antall åpne oppgaver pr dato",
   "TilBehandlingPanel.ToSisteUker": "2 siste uker",
   "TilBehandlingPanel.FireSisteUker": "4 siste uker",
@@ -158,5 +153,10 @@
   "GruppeSaksbehandlere.ValgteSaksbehandlere": "Valgte saksbehandlere",
   "GruppeSaksbehandlere.Ingen": "Ingen valgte saksbehandlere",
   "GruppeSaksbehandlere.Navn": "Navn på gruppe",
-  "GruppeSaksbehandlere.VelgSaksbehandlere": "Velg saksbehandlere"
+  "GruppeSaksbehandlere.VelgSaksbehandlere": "Velg saksbehandlere",
+
+  "NøkkeltallbokserPanel.Status": "Status",
+  "NøkkeltallbokserPanel.TilBeslutter": "{antall} til beslutter",
+  "NøkkeltallbokserPanel.Resten": "Øvrige",
+  "NøkkeltallbokserPanel.SistOppdatert": "Sist oppdatert: {tid}"
 }
