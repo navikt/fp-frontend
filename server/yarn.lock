@@ -171,7 +171,7 @@ __metadata:
   resolution: "@fp-frontend/server@workspace:."
   dependencies:
     "@eslint/js": 9.32.0
-    "@navikt/oasis": ^4.1.0
+    "@navikt/oasis": 4.1.1
     "@navikt/vite-mode": 0.13.6
     "@types/connect-timeout": ^0.0.39
     "@types/cors": ^2.8.19
@@ -246,22 +246,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/oasis@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@navikt/oasis@npm:4.1.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F4.1.0%2Fed0d98fe57279240a53fe82bf518776ddce59a0a"
+"@navikt/oasis@npm:4.1.1":
+  version: 4.1.1
+  resolution: "@navikt/oasis@npm:4.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F4.1.1%2F970a0555b93c862b7c7b0919349f48fc8e7de53c"
   dependencies:
-    "@navikt/texas": ^4.1.0
+    "@navikt/texas": ^4.1.1
     "@opentelemetry/api": ^1.9.0
     jose: ^6.1.0
     prom-client: ^15.1.3
-  checksum: 9d28129ab4f5839637546baafbd4f0eb336efba984a3a1a80db449aa106e6829b449bbb5a28f24b1f41d756d69ff6d6513548d97638ef94eb38561d3125ae589
+  checksum: 3f9548de53cb6439a38750f026329ab3ebdada2f6e1743436920ea7f43eaab87d8e4c1feac5df96fff56bbbc64493232947add42b44011645e6c36e37f3e81d7
   languageName: node
   linkType: hard
 
-"@navikt/texas@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@navikt/texas@npm:4.1.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ftexas%2F4.1.0%2F36e6f1a056838a6777e4e0680cb45e1a568c15d1"
-  checksum: 9caaaabc9422e7d78b56121fa3ba2a3acf0b82a87f92a8df39ef1af95c55b36b5a59bd16c38d81efe2b3b21e855dcb48549f7d46718c923636fc76b9bca8ae92
+"@navikt/texas@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@navikt/texas@npm:4.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ftexas%2F4.1.1%2Fa4875c9cc658d6cebf4185bb2c89a17c54f15827"
+  checksum: ee7f001274e9cd57b57be73082358932debb370ebed364b1cbc9e0c4b37f8b3ee2e8cd85b02d41b669fd2ae215f525d2d6646a64b348b8d216754c29ab89a1ca
   languageName: node
   linkType: hard
 
