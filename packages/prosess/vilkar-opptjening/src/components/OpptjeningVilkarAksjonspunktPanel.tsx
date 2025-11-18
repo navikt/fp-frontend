@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
+import { Alert, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
@@ -32,8 +32,6 @@ interface Props {
  * Viser panel for å løse aksjonspunkt for avslått opptjeningsvilkår
  */
 export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }: Props) => {
-  const intl = useIntl();
-
   const {
     fagsak,
     behandling,
@@ -45,6 +43,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }
     isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<AvklarOpptjeningsvilkaretAp>();
+  const intl = useIntl();
   const erSvpFagsak = fagsak.fagsakYtelseType === 'SVP';
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
@@ -60,13 +59,6 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
-
-  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = (verdi: string | number | boolean) => {
-    if (fastsattOpptjening.fastsattOpptjeningAktivitetList.length === 0 && verdi === true) {
-      return intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' });
-    }
-    return null;
-  };
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
@@ -86,27 +78,24 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }
           <VilkarResultPicker
             // trenger ikke vilkår til avslagsårsak fordi det finnes kun en avslagsårsak for opptjeningsvilkåret
             vilkår={undefined}
-            legend={
-              <FormattedMessage
-                id={
-                  erSvpFagsak
-                    ? 'OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilSvangerskapspenger'
-                    : 'OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger'
-                }
-              />
-            }
+            legend={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.VilkårLabel" values={{ erSvpFagsak }} />}
+            skalKunneInnvilge={fastsattOpptjening.fastsattOpptjeningAktivitetList.length > 0}
             isReadOnly={isReadOnly}
-            customVilkårOppfyltText={
+            vilkårOppfyltLabel={
               <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" values={{ erSvpFagsak }} />
             }
-            customVilkårIkkeOppfyltText={
+            vilkårIkkeOppfyltLabel={
               <FormattedMessage
                 id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt"
                 values={{ b: BTag, erSvpFagsak }}
               />
             }
-            validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}
           />
+          {fastsattOpptjening.fastsattOpptjeningAktivitetList.length === 0 && !isReadOnly && (
+            <Alert inline variant="warning" size="small">
+              {intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' })}
+            </Alert>
+          )}
           <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
@@ -117,7 +106,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
-  behandlingsresultat?: Behandlingsresultat,
+  behandlingsresultat: Behandlingsresultat | undefined,
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),

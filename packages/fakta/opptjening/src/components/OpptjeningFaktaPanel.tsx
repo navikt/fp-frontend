@@ -1,7 +1,8 @@
 import { type ReactElement, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Button, Label, VStack } from '@navikt/ds-react';
+import { Button, VStack } from '@navikt/ds-react';
+import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, DateLabel } from '@navikt/ft-ui-komponenter';
 import { addDaysToDate, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -19,8 +20,6 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type FormValues, ValgtAktivitetForm } from './aktivitet/ValgtAktivitetForm';
 import { OpptjeningTidslinje } from './tidslinje/OpptjeningTidslinje';
-
-import styles from './opptjeningFaktaPanel.module.css';
 
 const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]): ReactElement[] => {
   const texts = new Array<ReactElement>();
@@ -187,20 +186,17 @@ export const OpptjeningFaktaPanel = ({
   const harIkkeBehandletAlle = formVerdierForAlleAktiviteter.some(a => a.erGodkjent === undefined);
 
   return (
-    <VStack gap="space-24" className={styles['container']}>
+    <VStack gap="space-24">
       {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}
         </AksjonspunktHelpTextHTML>
       )}
-      <div>
-        <Label size="small">
-          <FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" />
-        </Label>
-        <BodyShort size="small">
-          <DateLabel dateString={findSkjaringstidspunkt(fastsattOpptjening?.opptjeningTom)} />
-        </BodyShort>
-      </div>
+      <ReadOnlyField
+        size="small"
+        label={<FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" />}
+        value={<DateLabel dateString={findSkjaringstidspunkt(fastsattOpptjening?.opptjeningTom)} />}
+      />
       <OpptjeningTidslinje
         opptjeningPerioder={filtrerteOgSorterteOpptjeningsaktiviteter}
         formVerdierForAlleAktiviteter={formVerdierForAlleAktiviteter}

@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Label } from '@navikt/ds-react';
+import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { BeløpLabel, DateLabel } from '@navikt/ft-ui-komponenter';
 import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
@@ -62,37 +63,30 @@ export const ValgtAktivitetSubForm = ({
   naringRegistreringsdato,
   ferdiglignetNæring,
 }: Props) => (
-  <VStack gap="space-16">
+  <>
     {erAvType(valgtAktivitetstype, 'ARBEID', 'NÆRING', ...YTELSE_TYPER) && (
       <HStack gap="space-16">
-        <div>
-          <Label size="small">
-            <FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />
-          </Label>
-          <BodyShort size="small">
-            {finnArbeidsgivertekst(arbeidsgiverOpplysningerPerId, arbeidsgiverReferanse)}
-          </BodyShort>
-        </div>
+        <ReadOnlyField
+          size="small"
+          label={<FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />}
+          value={finnArbeidsgivertekst(arbeidsgiverOpplysningerPerId, arbeidsgiverReferanse)}
+        />
         {erAvType(valgtAktivitetstype, 'ARBEID') && (
-          <div>
-            <Label size="small">
-              <FormattedMessage id="ActivityPanel.Stillingsandel" />
-            </Label>
-            <BodyShort size="small">{stillingsandel}</BodyShort>
-          </div>
+          <ReadOnlyField
+            size="small"
+            label={<FormattedMessage id="ActivityPanel.Stillingsandel" />}
+            value={stillingsandel}
+          />
         )}
       </HStack>
     )}
     {erAvType(valgtAktivitetstype, 'NÆRING') && (
       <>
-        <div>
-          <Label size="small">
-            <FormattedMessage id="ActivityPanel.Registreringsdato" />
-          </Label>
-          <BodyShort size="small">
-            {naringRegistreringsdato ? <DateLabel dateString={naringRegistreringsdato} /> : '-'}
-          </BodyShort>
-        </div>
+        <ReadOnlyField
+          size="small"
+          label={<FormattedMessage id="ActivityPanel.Registreringsdato" />}
+          value={naringRegistreringsdato ? <DateLabel dateString={naringRegistreringsdato} /> : '-'}
+        />
         <div>
           <Label size="small">
             <FormattedMessage id={finnNæringLabel(ferdiglignetNæring)} />
@@ -111,12 +105,12 @@ export const ValgtAktivitetSubForm = ({
               <HStack gap="space-20" key={inntekt.år}>
                 <BodyShort size="small">{inntekt.år}</BodyShort>
                 <BodyShort size="small">
-                  <BeløpLabel beløp={inntekt.beløp} />
+                  <BeløpLabel beløp={inntekt.beløp} kr />
                 </BodyShort>
               </HStack>
             ))}
         </div>
       </>
     )}
-  </VStack>
+  </>
 );

@@ -113,8 +113,8 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
             vilkår={undefined}
             legend={<FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.VilkårTittel" />}
             isReadOnly={isReadOnly}
-            customVilkårOppfyltText={<FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt" />}
-            customVilkårIkkeOppfyltText={
+            vilkårOppfyltLabel={<FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt" />}
+            vilkårIkkeOppfyltLabel={
               <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt" values={{ b: BTag }} />
             }
           />

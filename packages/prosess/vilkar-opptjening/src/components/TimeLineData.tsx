@@ -6,24 +6,7 @@ import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
-import { opptjeningAktivitetKlassifisering } from '../kodeverk/opptjeningAktivitetKlassifisering';
-
 import styles from './timeLineData.module.css';
-
-const MELLOMLIGGENDE_PERIODE = 'MELLOMLIGGENDE_PERIODE';
-
-const periodStatus = (periodState: string): string =>
-  periodState === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST ||
-  periodState === opptjeningAktivitetKlassifisering.ANTATT_AVVIST
-    ? 'OpptjeningVilkarView.Avslatt'
-    : 'OpptjeningVilkarView.Godkjent';
-
-const isPeriodGodkjent = (period: string): boolean =>
-  !!(
-    period === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT ||
-    period === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT ||
-    period === MELLOMLIGGENDE_PERIODE
-  );
 
 interface Props {
   fastsattOpptjeningAktivitet: FastsattOpptjeningAktivitet;
@@ -82,16 +65,22 @@ export const TimeLineData = ({
           <PeriodLabel dateStringFom={fom} dateStringTom={tom} />
         </BodyShort>
         <HStack gap="space-4" align="center">
-          {isPeriodGodkjent(klasse) ? (
+          {erPeriodeGodkjent(klasse) ? (
             <CheckmarkIcon className={styles['godkjentImage']} />
           ) : (
             <XMarkIcon className={styles['avslattImage']} />
           )}
           <BodyShort size="small">
-            <FormattedMessage id={periodStatus(klasse)} />
+            <FormattedMessage id={hentStatusTekst(klasse)} />
           </BodyShort>
         </HStack>
       </VStack>
     </Box.New>
   );
 };
+
+const hentStatusTekst = (klasse: FastsattOpptjeningAktivitet['klasse']): string =>
+  klasse === 'BEKREFTET_AVVIST' ? 'OpptjeningVilkarView.Avslatt' : 'OpptjeningVilkarView.Godkjent';
+
+const erPeriodeGodkjent = (klasse: FastsattOpptjeningAktivitet['klasse']): boolean =>
+  new Set(['BEKREFTET_GODKJENT', 'ANTATT_GODKJENT', 'MELLOMLIGGENDE_PERIODE']).has(klasse);

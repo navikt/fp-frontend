@@ -1,9 +1,9 @@
 .godkjentImage {
-    color: var(--ax-bg-success-strong);
-    font-size: 1.5rem;
+  color: var(--ax-bg-success-strong);
+  font-size: 1.5rem;
 }
 
 .avslattImage {
-    color: var(--ax-bg-danger-strong);
-    font-size: 1.5rem;
+  color: var(--ax-bg-danger-strong);
+  font-size: 1.5rem;
 }

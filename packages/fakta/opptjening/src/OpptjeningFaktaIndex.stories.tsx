@@ -9,7 +9,7 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { OpptjeningFaktaIndex } from './OpptjeningFaktaIndex';
 
@@ -132,7 +132,7 @@ export const MedAksjonspunkt: Story = {
           beløp: 200000,
         },
       ],
-    } satisfies Opptjening,
+    },
   },
 };
 
@@ -147,6 +147,7 @@ export const UtenAksjonspunkt: Story = {
           dager: 4,
           måneder: 10,
         },
+        fastsattOpptjeningAktivitetList: [],
       },
       opptjeningAktivitetList: [
         {
@@ -172,7 +173,7 @@ export const UtenAksjonspunkt: Story = {
           stillingsandel: 50,
         },
       ],
-    } as Opptjening,
+    },
   },
 };
 
@@ -226,7 +227,7 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
           beløp: 200000,
         },
       ],
-    } satisfies Opptjening,
+    },
   },
 };
 
@@ -257,6 +258,6 @@ export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
         },
       ],
       ferdiglignetNæring: [],
-    } satisfies Opptjening,
+    },
   },
 };

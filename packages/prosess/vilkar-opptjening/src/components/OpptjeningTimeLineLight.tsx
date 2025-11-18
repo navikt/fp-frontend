@@ -9,7 +9,6 @@ import dayjs from 'dayjs';
 
 import type { FastsattOpptjeningAktivitet } from '@navikt/fp-types';
 
-import { opptjeningAktivitetKlassifisering } from '../kodeverk/opptjeningAktivitetKlassifisering';
 import { TimeLineData } from './TimeLineData';
 
 type Periode = {
@@ -25,17 +24,11 @@ const PERIODE_STATUS_IKON_MAP = {
   info: <DoorOpenIcon />,
 } as Record<string, React.ReactElement>;
 
-const getStatus = (klasseKode: string): 'success' | 'danger' | 'info' => {
-  if (
-    klasseKode === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST ||
-    klasseKode === opptjeningAktivitetKlassifisering.ANTATT_AVVIST
-  ) {
+const getStatus = (klasseKode: FastsattOpptjeningAktivitet['klasse']) => {
+  if (klasseKode === 'BEKREFTET_AVVIST') {
     return 'danger';
   }
-  if (
-    klasseKode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT ||
-    klasseKode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
-  ) {
+  if (klasseKode === 'BEKREFTET_GODKJENT' || klasseKode === 'ANTATT_GODKJENT') {
     return 'success';
   }
   return 'info';

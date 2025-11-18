@@ -226,8 +226,8 @@ export const VilkarresultatMedOverstyringForm = ({
                   vilkår={vilkår}
                   legend={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErVilkåretOppfylt" />}
                   isReadOnly={overrideReadOnly || !erOverstyrt}
-                  customVilkårOppfyltText={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />}
-                  customVilkårIkkeOppfyltText={
+                  vilkårOppfyltLabel={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />}
+                  vilkårIkkeOppfyltLabel={
                     <FormattedMessage id="VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt" values={{ b: BTag }} />
                   }
                 />

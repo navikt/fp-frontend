@@ -12,7 +12,6 @@ import {
 } from '@navikt/fp-storybook-utils';
 import type { Fagsak, FastsattOpptjening } from '@navikt/fp-types';
 
-import { opptjeningAktivitetKlassifisering } from './kodeverk/opptjeningAktivitetKlassifisering';
 import { OpptjeningVilkarProsessIndex } from './OpptjeningVilkarProsessIndex';
 
 const defaultFastsattOpptjening = {
@@ -24,17 +23,17 @@ const defaultFastsattOpptjening = {
     {
       fom: '2018-01-01',
       tom: '2018-04-04',
-      klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
+      klasse: 'BEKREFTET_GODKJENT',
     },
     {
       fom: '2018-04-05',
       tom: '2018-04-10',
-      klasse: opptjeningAktivitetKlassifisering.ANTATT_AVVIST,
+      klasse: 'BEKREFTET_AVVIST',
     },
   ],
   opptjeningFom: '2018-01-01',
   opptjeningTom: '2018-10-01',
-} as FastsattOpptjening;
+} satisfies FastsattOpptjening;
 
 const defaultAksjonspunkt = lagAksjonspunkt(AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET);
 
@@ -43,6 +42,7 @@ const meta = {
   component: OpptjeningVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
+    isReadOnly: false,
     status: 'IKKE_VURDERT',
     fagsak: {
       fagsakYtelseType: 'FP',
@@ -83,21 +83,22 @@ export const ÅpentAksjonspunktMedOppholdsperiode: Story = {
         {
           fom: '2018-01-01',
           tom: '2018-04-04',
-          klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
+          klasse: 'BEKREFTET_GODKJENT',
         },
         {
           fom: '2018-04-05',
           tom: '2018-04-10',
+          klasse: 'MELLOMLIGGENDE_PERIODE',
         },
         {
           fom: '2018-04-11',
           tom: '2018-06-04',
-          klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
+          klasse: 'BEKREFTET_GODKJENT',
         },
       ],
       opptjeningFom: '2018-01-01',
       opptjeningTom: '2018-06-04',
-    } as FastsattOpptjening,
+    } satisfies FastsattOpptjening,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET)],
   },
 };
@@ -106,6 +107,10 @@ export const ÅpentAksjonspunktMenUtenAktiviteter: Story = {
   args: {
     fastsattOpptjening: {
       ...defaultFastsattOpptjening,
+      opptjeningperiode: {
+        dager: 0,
+        måneder: 0,
+      },
       fastsattOpptjeningAktivitetList: [],
     },
     aksjonspunkterForPanel: [defaultAksjonspunkt],

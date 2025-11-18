@@ -75,8 +75,8 @@ export const FodselVilkarForm = ({ status }: Props) => {
             vilkår={vilkårForPanel[0]}
             legend={<FormattedMessage id="FodselVilkarForm.TidligereUtbetaltStonad" />}
             isReadOnly={isReadOnly}
-            customVilkårOppfyltText={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
-            customVilkårIkkeOppfyltText={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
+            vilkårOppfyltLabel={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
+            vilkårIkkeOppfyltLabel={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
           />
           <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
         </VStack>
