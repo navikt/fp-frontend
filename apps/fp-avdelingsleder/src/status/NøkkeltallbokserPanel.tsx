@@ -100,12 +100,18 @@ const NøkkeltallBoks = ({
     .reduce((sum, ofa) => sum + ofa.antall, 0);
 
   const behandlingTyper = useLosKodeverk('BehandlingType');
-  const behandling = behandlingTyper.find(bt => bt.kode === behandlingType);
+  const behandlingTypeKodeverk = behandlingTyper.find(bt => bt.kode === behandlingType);
 
   return (
     <Box.New background="neutral-moderate" borderRadius="large" padding="4" width="200px">
-      <VStack gap="space-16" align="center" data-testid={'nokkeltallboks-' + (behandling?.kode ?? 'resten')}>
-        <BodyShort size="small">{behandling?.navn ?? <FormattedMessage id="NøkkeltallbokserPanel.Resten" />}</BodyShort>
+      <VStack
+        gap="space-16"
+        align="center"
+        data-testid={'nokkeltallboks-' + (behandlingTypeKodeverk?.kode ?? 'resten')}
+      >
+        <BodyShort size="small">
+          {behandlingTypeKodeverk?.navn ?? <FormattedMessage id="NøkkeltallbokserPanel.Resten" />}
+        </BodyShort>
         <Heading size="medium">{antall}</Heading>
         <Detail>
           <FormattedMessage id="NøkkeltallbokserPanel.TilBeslutter" values={{ antall: antallTilBeslutter }} />
