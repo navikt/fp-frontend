@@ -400,7 +400,14 @@ export const UttakPeriodeForm = ({
         {erHovedsøkersPeriode && !isReadOnly && (
           <>
             <VStack gap="space-12">
-              <RhfRadioGroup name="erOppfylt" control={formMethods.control} legend="" hideLegend validate={[required]}>
+              <RhfRadioGroup
+                name="erOppfylt"
+                control={formMethods.control}
+                legend=""
+                hideLegend
+                validate={[required]}
+                onClick={() => formMethods.setValue('periodeAarsak', '-')}
+              >
                 <HStack gap="space-16">
                   <Radio value={true} size="small">
                     <FormattedMessage id="UttakActivity.Oppfylt" />
