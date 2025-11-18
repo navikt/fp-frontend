@@ -1,10 +1,10 @@
 import type { AndreKriterierType } from './andreKriterierType';
 import type { BehandlingType } from './behandlingType';
+import type { BehandlingVenteStatus } from './behandlingVenteStatus';
 import type { FagsakStatus } from './fagsakStatus';
 import type { FagsakYtelseType } from './fagsakYtelseType';
 import type { KøSortering } from './køSortering';
 import type { OppgaveBehandlingStatus } from './oppgaveBehandlingStatus';
-import type { BehandlingVenteStatus } from './behandlingVenteStatus';
 
 //Mapping mellom LosKodeverkType og union-types med verdier
 type KodeverkEnumMap = {
