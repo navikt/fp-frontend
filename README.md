@@ -66,11 +66,11 @@ For å kjøre opp storybook. Gå inn i aktuell pakke og kjør:
 yarn storybook
 ```
 
-### Utvikling mot lokal kode i ft-frontend-saksbehandling
+### 3. Utvikling mot lokal kode i ft-frontend-saksbehandling
 
 Oppskrift: [README - ft-frontend-saksbehandling](https://github.com/navikt/ft-frontend-saksbehandling/blob/main/README.md)
 
-## Utvikle lokalt med autotest
+### 4. Utvikle lokalt med autotest
 
 For å utvikle lokalt på fpfrontend mot autotest må man kjøre opp autotest (f.eks.
 kjøre [./lokal-utvikling/lokal-utvikling-ide.sh](https://github.com/navikt/fp-autotest/blob/master/lokal-utvikling/lokal-utvikling-ide.sh)
@@ -102,13 +102,13 @@ Synkroniser jevnlig for å holde typene oppdatert.
 - **Synkroniser typer i dev:**
 
 ```bash
-yarn generate-types
+yarn generate
 ```
 
 - **Generer typer for lokale endringer (forutsetter at fpsak kjører på port 8080):**
 
 ```bash
-  yarn generate-types lokal
+  yarn generate:local
 ```
 
 ## Oppgradere avhengigheter
