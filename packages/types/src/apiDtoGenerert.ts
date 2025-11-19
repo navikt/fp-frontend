@@ -1606,9 +1606,9 @@ export type tjenester_behandling_klage_aksjonspunkt_KlageVurderingResultatAksjon
   begrunnelse?: string;
   fritekstTilBrev?: string;
   klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
-  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageMedholdÅrsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
   klageVurdering: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
-  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurderingOmgjør?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
 };
 
 export type tjenester_behandling_medlem_aksjonspunkt_VurderForutgåendeMedlemskapDto = {
@@ -2463,9 +2463,9 @@ export type foreldrepenger_behandlingslager_behandling_anke_AnkeVurderingOmgjør
   | '-';
 
 export type tjenester_behandling_anke_AnkeVurderingResultatDto = {
-  ankeOmgjoerArsak?: foreldrepenger_behandlingslager_behandling_anke_AnkeOmgjørÅrsak;
+  ankeOmgjørÅrsak?: foreldrepenger_behandlingslager_behandling_anke_AnkeOmgjørÅrsak;
   ankeVurdering?: foreldrepenger_behandlingslager_behandling_anke_AnkeVurdering;
-  ankeVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_anke_AnkeVurderingOmgjør;
+  ankeVurderingOmgjør?: foreldrepenger_behandlingslager_behandling_anke_AnkeVurderingOmgjør;
   begrunnelse: string;
   erAnkerIkkePart: boolean;
   erFristIkkeOverholdt: boolean;
@@ -2476,9 +2476,9 @@ export type tjenester_behandling_anke_AnkeVurderingResultatDto = {
   fritekstTilBrev?: string;
   merknadKommentar?: string;
   påAnketKlageBehandlingUuid?: string;
-  trygderettOmgjoerArsak?: foreldrepenger_behandlingslager_behandling_anke_AnkeOmgjørÅrsak;
+  trygderettOmgjørÅrsak?: foreldrepenger_behandlingslager_behandling_anke_AnkeOmgjørÅrsak;
   trygderettVurdering?: foreldrepenger_behandlingslager_behandling_anke_AnkeVurdering;
-  trygderettVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_anke_AnkeVurderingOmgjør;
+  trygderettVurderingOmgjør?: foreldrepenger_behandlingslager_behandling_anke_AnkeVurderingOmgjør;
 };
 
 export type tjenester_behandling_anke_AnkebehandlingDto = {
@@ -3740,22 +3740,22 @@ export type foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak =
   | '-';
 
 export type tjenester_behandling_klage_KlageFormkravResultatDto = {
-  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
+  avvistÅrsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
   begrunnelse: string;
   erKlageKonkret: boolean;
   erKlagefirstOverholdt: boolean;
   erKlagerPart: boolean;
   erSignert: boolean;
-  paKlagdBehandlingUuid: string;
+  påKlagdBehandlingUuid: string;
 };
 
 export type tjenester_behandling_klage_KlageVurderingResultatDto = {
   begrunnelse?: string;
   fritekstTilBrev?: string;
   klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
-  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageMedholdÅrsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
   klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
-  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurderingOmgjør?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
   klageVurdertAv: string;
 };
 
@@ -3782,7 +3782,7 @@ export type tjenester_behandling_klage_aksjonspunkt_KlageFormKravAksjonspunktMel
   klageTilbakekreving?: tjenester_behandling_klage_aksjonspunkt_KlageTilbakekrevingDto;
   kode?: string;
   mottattDato?: string;
-  paKlagdBehandlingUuid?: string;
+  påKlagdBehandlingUuid?: string;
 };
 
 export type tjenester_behandling_klage_aksjonspunkt_KlageVurderingResultatAksjonspunktMellomlagringDto = {
@@ -3790,9 +3790,9 @@ export type tjenester_behandling_klage_aksjonspunkt_KlageVurderingResultatAksjon
   behandlingUuid: string;
   fritekstTilBrev?: string;
   klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
-  klageMedholdArsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
+  klageMedholdÅrsak?: foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak;
   klageVurdering?: foreldrepenger_behandlingslager_behandling_klage_KlageVurdering;
-  klageVurderingOmgjoer?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
+  klageVurderingOmgjør?: foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
   kode?: string;
 };
 
@@ -6774,14 +6774,14 @@ export type SokInfotrygdResponses = {
 
 export type SokInfotrygdResponse = SokInfotrygdResponses[keyof SokInfotrygdResponses];
 
-export type HentGruppertKodelisteData = {
+export type HentGruppertKodelisteMedNavnData = {
   body?: never;
   path?: never;
   query?: never;
   url: '/api/kodeverk';
 };
 
-export type HentGruppertKodelisteResponses = {
+export type HentGruppertKodelisteMedNavnResponses = {
   /**
    * default response
    */

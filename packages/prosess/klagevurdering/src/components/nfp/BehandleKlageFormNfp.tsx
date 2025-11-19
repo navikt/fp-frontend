@@ -27,8 +27,8 @@ import { type KlagevurderingForhåndsvisData, PreviewKlageLink } from './Preview
 
 export type TransformedValues = {
   kode: string;
-  klageMedholdArsak?: string;
-  klageVurderingOmgjoer?: KlageVurderingOmgjørType;
+  klageMedholdÅrsak?: string;
+  klageVurderingOmgjør?: KlageVurderingOmgjørType;
   klageHjemmel?: KlageHjemmel;
   fritekstTilBrev: string;
   begrunnelse: string;
@@ -36,8 +36,8 @@ export type TransformedValues = {
 };
 
 const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
-  klageMedholdArsak: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageMedholdArsak : undefined,
-  klageVurderingOmgjoer: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageVurderingOmgjoer : undefined,
+  klageMedholdÅrsak: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageMedholdÅrsak : undefined,
+  klageVurderingOmgjør: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageVurderingOmgjør : undefined,
   klageHjemmel: values.klageHjemmel,
   klageVurdering: notEmpty(values.klageVurdering),
   fritekstTilBrev: values.fritekstTilBrev,
@@ -60,8 +60,8 @@ const lagHjemlerMedNavn = (
 const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map(kode => kode);
 
 const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
-  klageMedholdArsak: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageMedholdArsak ?? undefined),
-  klageVurderingOmgjoer: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageVurderingOmgjoer ?? undefined),
+  klageMedholdÅrsak: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageMedholdÅrsak ?? undefined),
+  klageVurderingOmgjør: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageVurderingOmgjør ?? undefined),
   klageHjemmel: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageHjemmel ?? undefined),
   klageVurdering: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageVurdering ?? undefined),
   begrunnelse: klageVurderingResultat?.begrunnelse ?? undefined,
@@ -188,11 +188,11 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
 
 const transformValuesTempSave = (values: KlageFormType, aksjonspunktCode: string): TransformedValues => ({
   kode: aksjonspunktCode,
-  klageMedholdArsak:
+  klageMedholdÅrsak:
     values.klageVurdering === 'MEDHOLD_I_KLAGE' || values.klageVurdering === 'OPPHEVE_YTELSESVEDTAK'
-      ? values.klageMedholdArsak
+      ? values.klageMedholdÅrsak
       : undefined,
-  klageVurderingOmgjoer: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageVurderingOmgjoer : undefined,
+  klageVurderingOmgjør: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageVurderingOmgjør : undefined,
   klageHjemmel: values.klageHjemmel,
   fritekstTilBrev: notEmpty(values.fritekstTilBrev),
   begrunnelse: notEmpty(values.begrunnelse),

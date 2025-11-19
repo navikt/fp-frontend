@@ -110,26 +110,26 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
 };
 const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering) => {
   if (klageVurderingResultat.klageFormkravResultatKA && klageVurderingResultat.klageVurderingResultatNK) {
-    return klageVurderingResultat.klageFormkravResultatKA.avvistArsaker;
+    return klageVurderingResultat.klageFormkravResultatKA.avvistÅrsaker;
   }
   if (klageVurderingResultat.klageFormkravResultatNFP) {
-    return klageVurderingResultat.klageFormkravResultatNFP.avvistArsaker;
+    return klageVurderingResultat.klageFormkravResultatNFP.avvistÅrsaker;
   }
   return [];
 };
 
 const getOmgjortAarsak = (klageVurderingResultat: KlageVurdering, alleKodeverk: AlleKodeverk): string | null => {
-  if (klageVurderingResultat.klageVurderingResultatNK?.klageMedholdArsak) {
+  if (klageVurderingResultat.klageVurderingResultatNK?.klageMedholdÅrsak) {
     return (
       alleKodeverk['KlageMedholdÅrsak'].find(
-        ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNK?.klageMedholdArsak,
+        ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNK?.klageMedholdÅrsak,
       )?.navn ?? ''
     );
   }
-  if (klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdArsak) {
+  if (klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdÅrsak) {
     return (
       alleKodeverk['KlageMedholdÅrsak'].find(
-        ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdArsak,
+        ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdÅrsak,
       )?.navn ?? ''
     );
   }
@@ -149,7 +149,7 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering) => {
     case 'HJEMSENDE_UTEN_Å_OPPHEVE':
       return 'VedtakKlageForm.HjemmsendUtenOpphev';
     case 'MEDHOLD_I_KLAGE':
-      return klageResultat.klageVurderingOmgjoer ? OMGJOER_TEKST_MAP[klageResultat.klageVurderingOmgjoer] : undefined;
+      return klageResultat.klageVurderingOmgjør ? OMGJOER_TEKST_MAP[klageResultat.klageVurderingOmgjør] : undefined;
     default:
       return 'VedtakKlageForm.IkkeFastsatt';
   }
