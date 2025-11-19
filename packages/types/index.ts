@@ -193,7 +193,7 @@ export type { AktivitetskravPermisjonType } from './src/aktivitetskravPermisjonT
 export type { ArbeidType } from './src/arbeidType';
 export type { AnkeVurderingType } from './src/ankeVurdering';
 export type { AnkeOmgjorArsak } from './src/ankeOmgjorArsak';
-export type { AnkeVurderingOmgjoer } from './src/ankeVurderingOmgjoer';
+export type { AnkeVurderingOmgjoer } from './src/ankeVurderingOmgjoer.ts';
 export type { Avslagsarsak } from './src/avslagsarsakCodes';
 export type { ArbeidsforholdKomplettVurderingType } from './src/arbeidsforholdKomplettVurderingType';
 export type { DiskresjonskodeType } from './src/diskresjonskodeType';

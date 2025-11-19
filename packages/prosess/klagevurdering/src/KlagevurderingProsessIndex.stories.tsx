@@ -39,13 +39,13 @@ export const MedholdIKlageNk: Story = {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
         klageVurdering: 'MEDHOLD_I_KLAGE',
-        klageMedholdArsak: 'ULIK_VURDERING',
-        klageVurderingOmgjoer: 'GUNST_MEDHOLD_I_KLAGE',
+        klageMedholdÅrsak: 'ULIK_VURDERING',
+        klageVurderingOmgjør: 'GUNST_MEDHOLD_I_KLAGE',
         fritekstTilBrev: 'test',
         begrunnelse: 'Dette er en begrunnelse',
       },
       klageFormkravResultatKA: {
-        avvistArsaker: ['IKKE_KONKRET'],
+        avvistÅrsaker: ['IKKE_KONKRET'],
       },
       aktuelleHjemler: ['14-17'],
     } as KlageVurdering,
@@ -63,7 +63,7 @@ export const StadfestKlageNk: Story = {
         begrunnelse: 'Dette er en begrunnelse',
       },
       klageFormkravResultatKA: {
-        avvistArsaker: ['IKKE_KONKRET'],
+        avvistÅrsaker: ['IKKE_KONKRET'],
       },
       aktuelleHjemler: ['14-17'],
     } as KlageVurdering,
@@ -77,12 +77,12 @@ export const HjemsendtIKlageNk: Story = {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
         klageVurdering: 'HJEMSENDE_UTEN_Å_OPPHEVE',
-        klageMedholdArsak: 'ULIK_VURDERING',
+        klageMedholdÅrsak: 'ULIK_VURDERING',
         fritekstTilBrev: 'test',
         begrunnelse: 'Dette er en begrunnelse',
       },
       klageFormkravResultatKA: {
-        avvistArsaker: ['IKKE_KONKRET'],
+        avvistÅrsaker: ['IKKE_KONKRET'],
       },
       aktuelleHjemler: ['14-17'],
     } as KlageVurdering,
@@ -96,12 +96,12 @@ export const OpphevIKlageNk: Story = {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
         klageVurdering: 'OPPHEVE_YTELSESVEDTAK',
-        klageMedholdArsak: 'ULIK_VURDERING',
+        klageMedholdÅrsak: 'ULIK_VURDERING',
         fritekstTilBrev: 'test',
         begrunnelse: 'Dette er en begrunnelse',
       },
       klageFormkravResultatKA: {
-        avvistArsaker: ['IKKE_KONKRET'],
+        avvistÅrsaker: ['IKKE_KONKRET'],
       },
       aktuelleHjemler: ['14-17'],
     } as KlageVurdering,
@@ -113,7 +113,7 @@ export const KlagevurderingMedAksjonspunktNfp: Story = {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP)],
     klageVurdering: {
       klageFormkravResultatKA: {
-        avvistArsaker: ['IKKE_KONKRET'],
+        avvistÅrsaker: ['IKKE_KONKRET'],
       },
       aktuelleHjemler: ['14-17'],
     } as KlageVurdering,

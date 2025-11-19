@@ -74,7 +74,7 @@ export const FormkravPanelForAksjonspunktKaValgtBehandling: Story = {
   args: {
     klageVurdering: {
       klageFormkravResultatKA: {
-        paKlagdBehandlingUuid: '1',
+        påKlagdBehandlingUuid: '1',
         begrunnelse: 'Dette er en begrunnelse',
         erKlagerPart: true,
         erSignert: true,

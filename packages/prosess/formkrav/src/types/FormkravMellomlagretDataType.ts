@@ -12,7 +12,7 @@ export type FormkravMellomlagretDataType = {
     tilbakekrevingVedtakDato?: string;
     tilbakekrevingBehandlingType?: string;
   };
-  paKlagdBehandlingUuid?: string;
+  påKlagdBehandlingUuid?: string;
   fritekstTilBrev?: string;
   mottattDato?: string;
 };

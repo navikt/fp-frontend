@@ -8,7 +8,7 @@ import { AnkeResultatProsessIndex } from './AnkeResultatProsessIndex';
 
 const ankeVurderingResultat = {
   ankeVurdering: 'ANKE_AVVIS',
-  ankeVurderingOmgjoer: '-',
+  ankeVurderingOmgjør: '-',
   påAnketKlageBehandlingUuid: '1',
   erAnkerIkkePart: true,
   erIkkeKonkret: true,
@@ -17,11 +17,11 @@ const ankeVurderingResultat = {
   erSubsidiartRealitetsbehandles: true,
   begrunnelse: 'Dette er en begrunnelse',
 
-  ankeOmgjoerArsak: '-',
+  ankeOmgjørÅrsak: '-',
 
   trygderettVurdering: 'ANKE_STADFESTE_YTELSESVEDTAK',
-  trygderettOmgjoerArsak: '-',
-  trygderettVurderingOmgjoer: '-',
+  trygderettOmgjørÅrsak: '-',
+  trygderettVurderingOmgjør: '-',
 } as const;
 
 const ankeVurderingDefault = {
@@ -69,7 +69,7 @@ export const ResultatVedOmgjør: Story = {
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
         ankeVurdering: 'ANKE_OMGJOER',
-        ankeVurderingOmgjoer: 'ANKE_TIL_UGUNST',
+        ankeVurderingOmgjør: 'ANKE_TIL_UGUNST',
       },
     },
   },

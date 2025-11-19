@@ -22,10 +22,10 @@ export const ResultatVedOmgjortResultat: Story = {
     ankeVurdering: {
       ankeVurderingResultat: {
         erMerknaderMottatt: true,
-        merknadKommentar: 'Dette er en kommentar',
+        merknadKommentar: 'Dette er en merknad',
         trygderettVurdering: 'ANKE_OMGJOER',
-        trygderettOmgjoerArsak: 'NYE_OPPLYSNINGER',
-        trygderettVurderingOmgjoer: 'ANKE_TIL_GUNST',
+        trygderettOmgjørÅrsak: 'NYE_OPPLYSNINGER',
+        trygderettVurderingOmgjør: 'ANKE_TIL_GUNST',
       },
     } as AnkeVurdering,
   },
@@ -38,7 +38,7 @@ export const ResultatVedOpphevetResultat: Story = {
         erMerknaderMottatt: true,
         merknadKommentar: 'Dette er en kommentar',
         trygderettVurdering: 'ANKE_OPPHEVE_OG_HJEMSENDE',
-        trygderettOmgjoerArsak: 'NYE_OPPLYSNINGER',
+        trygderettOmgjørÅrsak: 'NYE_OPPLYSNINGER',
       },
     } as AnkeVurdering,
   },
@@ -49,9 +49,9 @@ export const ResultatVedHjemsendtResultat: Story = {
     ankeVurdering: {
       ankeVurderingResultat: {
         erMerknaderMottatt: true,
-        merknadKommentar: 'Dette er en kommentar',
+        merknadKommentar: 'Dette er en merknad',
         trygderettVurdering: 'ANKE_HJEMSENDE_UTEN_OPPHEV',
-        trygderettOmgjoerArsak: 'NYE_OPPLYSNINGER',
+        trygderettOmgjørÅrsak: 'NYE_OPPLYSNINGER',
       },
     } as AnkeVurdering,
   },

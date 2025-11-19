@@ -29,7 +29,7 @@ import {
 import styles from './formkravKlageFormNfp.module.css';
 
 const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']): string =>
-  klageFormkavResultat?.paKlagdBehandlingUuid ? `${klageFormkavResultat.paKlagdBehandlingUuid}` : IKKE_PA_KLAGD_VEDTAK;
+  klageFormkavResultat?.påKlagdBehandlingUuid ? `${klageFormkavResultat.påKlagdBehandlingUuid}` : IKKE_PA_KLAGD_VEDTAK;
 
 const getKlagBareVedtak = (
   avsluttedeBehandlinger: AvsluttetBehandling[],

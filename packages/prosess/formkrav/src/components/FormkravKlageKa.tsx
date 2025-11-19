@@ -26,8 +26,8 @@ export const FormkravKlageKa = ({ klageVurdering, avsluttedeBehandlinger }: Prop
   const { klageFormkravResultatKA, underBehandlingKabal, behandletAvKabal } = klageVurdering;
 
   let vedtak = intl.formatMessage({ id: 'Klage.Formkrav.IkkePåklagdVedtak' });
-  if (klageFormkravResultatKA?.paKlagdBehandlingUuid) {
-    const behandling = avsluttedeBehandlinger.find(b => b.uuid === klageFormkravResultatKA.paKlagdBehandlingUuid);
+  if (klageFormkravResultatKA?.påKlagdBehandlingUuid) {
+    const behandling = avsluttedeBehandlinger.find(b => b.uuid === klageFormkravResultatKA.påKlagdBehandlingUuid);
     if (behandling) {
       const navn = alleKodeverk['BehandlingType'].find(k => k.kode === behandling.type)?.navn;
       vedtak = `${navn} ${behandling.avsluttet ? dateTimeFormat(behandling.avsluttet) : ''}`;

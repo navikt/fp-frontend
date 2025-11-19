@@ -143,18 +143,18 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
                   <FormattedMessage id="Ankebehandling.Avvisning" />
                 </Label>
                 <BodyShort size="small">
-                  {ankeOmgorArsaker.find(aoa => aoa.kode === avr.ankeOmgjoerArsak)?.navn}
+                  {ankeOmgorArsaker.find(aoa => aoa.kode === avr.ankeOmgjørÅrsak)?.navn}
                 </BodyShort>
               </VStack>
               <VStack gap="space-4">
                 <BodyShort size="small">
-                  {avr.ankeVurderingOmgjoer === 'ANKE_TIL_GUNST' && (
+                  {avr.ankeVurderingOmgjør === 'ANKE_TIL_GUNST' && (
                     <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
                   )}
-                  {avr.ankeVurderingOmgjoer === 'ANKE_TIL_UGUNST' && (
+                  {avr.ankeVurderingOmgjør === 'ANKE_TIL_UGUNST' && (
                     <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Ugunst" />
                   )}
-                  {avr.ankeVurderingOmgjoer === 'ANKE_DELVIS_OMGJOERING_TIL_GUNST' && (
+                  {avr.ankeVurderingOmgjør === 'ANKE_DELVIS_OMGJOERING_TIL_GUNST' && (
                     <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Delvis" />
                   )}
                 </BodyShort>
@@ -169,7 +169,7 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
                   <FormattedMessage id="Ankebehandling.OmgjoeringArsak" />
                 </Label>
                 <BodyShort size="small">
-                  {ankeOmgorArsaker.find(aoa => aoa.kode === avr.ankeOmgjoerArsak)?.navn}
+                  {ankeOmgorArsaker.find(aoa => aoa.kode === avr.ankeOmgjørÅrsak)?.navn}
                 </BodyShort>
               </VStack>
             )}

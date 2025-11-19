@@ -64,14 +64,14 @@ export const KlageVurderingRadioOptionsNfp = ({
             <RhfSelect
               readOnly={readOnly}
               control={control}
-              name="klageMedholdArsak"
+              name="klageMedholdÅrsak"
               selectValues={medholdOptions}
               className={readOnly ? styles['selectReadOnly'] : styles['select']}
               label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
               validate={[required]}
             />
             <RhfRadioGroup
-              name="klageVurderingOmgjoer"
+              name="klageVurderingOmgjør"
               control={control}
               legend=""
               hideLegend
