@@ -57,7 +57,7 @@ jobs:
         with:
           ref: ${{ (inputs.branch != '' && inputs.branch) || '' }}
 
-      - uses: navikt/fp-gha-workflows/.github/actions/setup-yarnrc/action.yml@feature/introduser-global-yarn-npm-config-action
+      - uses: navikt/fp-gha-workflows/.github/actions/setup-yarnrc@63ba0cc5e7166d52436bd8bcee32cce0cb5c1e43
         with:
           npmAuthToken: ${{ secrets.READER_TOKEN }}
 
