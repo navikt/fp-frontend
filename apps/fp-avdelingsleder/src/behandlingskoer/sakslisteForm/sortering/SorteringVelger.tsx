@@ -10,6 +10,7 @@ import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import type { KøSorteringFelt } from '../../../typer/sakslisteAvdelingTsType.ts';
 import { BelopSorteringValg, type FormValues as BelopSorteringValgFormValues } from './BelopSorteringValg';
 import { DatoSorteringValg, type FormValues as DatoSorteringValgFormValues } from './DatoSorteringValg';
+import { notEmpty } from '@navikt/fp-utils';
 
 export type FormValues = {
   sortering?: string;
@@ -55,7 +56,7 @@ export const SorteringVelger = ({
     },
   });
 
-  const koSorteringer = useLosKodeverk('KøSortering');
+  const sorteringKoder = useLosKodeverk('KøSortering');
 
   const sortering = watch('sortering');
 
@@ -83,11 +84,11 @@ export const SorteringVelger = ({
               koSortering.feltKategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
           )
           .map(koSortering => (
-            <VStack key={koSortering.køSortering} gap="space-2">
-              <Radio value={koSortering.køSortering} size="small">
-                {koSorteringer.filter(k => k.kode === koSortering.køSortering).map(k => k.navn)}
+            <VStack key={koSortering.sorteringType} gap="space-2">
+              <Radio value={koSortering.sorteringType} size="small">
+                {notEmpty(sorteringKoder.find(k => k.kode === koSortering.sorteringType)?.navn, "Mangler kodeverk")}
               </Radio>
-              {sortering === koSortering.køSortering && (
+              {sortering === koSortering.sorteringType && (
                 <>
                   {koSortering.feltType === 'DATO' && (
                     <DatoSorteringValg
