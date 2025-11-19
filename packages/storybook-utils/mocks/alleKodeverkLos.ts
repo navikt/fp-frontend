@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import type { AlleKodeverkLos } from '@navikt/fp-types';
 
 export const alleKodeverkLos: AlleKodeverkLos = {
@@ -67,12 +65,28 @@ export const alleKodeverkLos: AlleKodeverkLos = {
       navn: 'Gruppe 2',
     },
     {
+      kode: 'HASTER',
+      navn: 'Haster',
+    },
+    {
+      kode: 'IKKE_VARSLET',
+      navn: 'Ikke varslet',
+    },
+    {
       kode: 'KLAGE_PÅ_TILBAKEBETALING',
       navn: 'Klage på tilbakebetaling',
     },
     {
       kode: 'KODE7_SAK',
       navn: 'Kode 7',
+    },
+    {
+      kode: 'NYTT_VEDTAK',
+      navn: 'Ny stønadsperiode',
+    },
+    {
+      kode: 'OVER_FIRE_RETTSGEBYR',
+      navn: 'Over 4 rettsgebyr',
     },
     {
       kode: 'PLEIEPENGER',
@@ -85,6 +99,10 @@ export const alleKodeverkLos: AlleKodeverkLos = {
     {
       kode: 'PAPIRSOKNAD',
       navn: 'Registrer papirsøknad',
+    },
+    {
+      kode: 'RETURNERT_FRA_BESLUTTER',
+      navn: 'Returnert fra beslutter',
     },
     {
       kode: 'REVURDERING_INNTEKTSMELDING',
@@ -111,6 +129,10 @@ export const alleKodeverkLos: AlleKodeverkLos = {
       navn: 'Utbetaling til bruker',
     },
     {
+      kode: 'UTSATT_START',
+      navn: 'Utsatt start',
+    },
+    {
       kode: 'VURDER_EØS_OPPTJENING',
       navn: 'Vurder behov for SED',
     },
@@ -126,13 +148,27 @@ export const alleKodeverkLos: AlleKodeverkLos = {
       kode: 'VURDER_SYKDOM',
       navn: 'Vurder sykdom',
     },
+  ],
+  OppgaveBehandlingStatus: [
     {
-      kode: 'IKKE_VARSLET',
-      navn: 'Ikke varslet',
+      kode: 'PÅ_VENT',
+      navn: 'På vent',
     },
     {
-      kode: 'OVER_FIRE_RETTSGEBYR',
-      navn: 'Over 4 rettsgebyr',
+      kode: 'FERDIG',
+      navn: 'Ferdig',
+    },
+    {
+      kode: 'TIL_BESLUTTER',
+      navn: 'Til beslutter',
+    },
+    {
+      kode: 'RETURNERT_FRA_BESLUTTER',
+      navn: 'Returnert fra beslutter',
+    },
+    {
+      kode: 'UNDER_ARBEID',
+      navn: 'Under arbeid',
     },
   ],
   FagsakYtelseType: [
@@ -197,6 +233,12 @@ export const alleKodeverkLos: AlleKodeverkLos = {
       feltkategori: 'UNIVERSAL',
     },
     {
+      kode: 'FORSTONAD_SYNK',
+      navn: 'Dato for første stønadsdag synkende',
+      felttype: 'DATO',
+      feltkategori: 'UNIVERSAL',
+    },
+    {
       kode: 'BELOP',
       navn: 'Feilutbetalt beløp',
       felttype: 'HELTALL',
@@ -207,28 +249,6 @@ export const alleKodeverkLos: AlleKodeverkLos = {
       navn: 'Dato for første feilutbetaling',
       felttype: 'DATO',
       feltkategori: 'TILBAKEKREVING',
-    },
-  ],
-  OppgaveBehandlingStatus: [
-    {
-      kode: 'PÅ_VENT',
-      navn: 'På vent',
-    },
-    {
-      kode: 'FERDIG',
-      navn: 'Ferdig',
-    },
-    {
-      kode: 'TIL_BESLUTTER',
-      navn: 'Til beslutter',
-    },
-    {
-      kode: 'RETURNERT_FRA_BESLUTTER',
-      navn: 'Returnert fra beslutter',
-    },
-    {
-      kode: 'UNDER_ARBEID',
-      navn: 'Under arbeid',
     },
   ],
 };

@@ -9,9 +9,9 @@ const { BesteberegningMedDagpengerOgArbeid, BesteberegningMedAvvik } = composeSt
 describe('BesteberegningFaktaIndex', () => {
   it('skal se at tabell renderes med korrekt antall måneder og at passende navn vises for aktivitetene', async () => {
     render(<BesteberegningMedDagpengerOgArbeid />);
-    expect(await screen.findByText('Beregning etter § 14-7, 1. ledd gir beste beregning.')).toBeInTheDocument();
+    expect(await screen.findByText('Beregning etter § 14-7 første ledd gir beste beregning.')).toBeInTheDocument();
     expect(screen.getByText('Inntektsgrunnlag for besteberegning')).toBeInTheDocument();
-    expect(screen.queryByText('Beregning etter § 14-7, 3. ledd gir beste beregning.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Beregning etter § 14-7 tredje ledd gir beste beregning.')).not.toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
     expect(screen.queryByText('Vurdering')).not.toBeInTheDocument();
 
@@ -36,7 +36,7 @@ describe('BesteberegningFaktaIndex', () => {
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
     expect(
       screen.getByText(
-        'Saken er tatt ut til kontroll på grunn av stort avvik mellom 3. og 1. ledd.' +
+        'Saken er tatt ut til kontroll på grunn av stort avvik mellom tredje og første ledd.' +
           ' Vennligst kontroller beregningen',
       ),
     ).toBeInTheDocument();

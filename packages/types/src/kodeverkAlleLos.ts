@@ -1,5 +1,6 @@
 import type { AndreKriterierType } from './andreKriterierType';
 import type { BehandlingType } from './behandlingType';
+import type { BehandlingVenteStatus } from './behandlingVenteStatus';
 import type { FagsakStatus } from './fagsakStatus';
 import type { FagsakYtelseType } from './fagsakYtelseType';
 import type { KøSortering } from './køSortering';
@@ -13,6 +14,7 @@ type KodeverkEnumMap = {
   KøSortering: KøSortering;
   FagsakStatus: FagsakStatus;
   OppgaveBehandlingStatus: OppgaveBehandlingStatus;
+  BehandlingVenteStatus: BehandlingVenteStatus;
 };
 
 export type LosKodeverkType = keyof KodeverkEnumMap;

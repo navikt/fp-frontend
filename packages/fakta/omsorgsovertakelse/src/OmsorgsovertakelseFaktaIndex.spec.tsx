@@ -36,7 +36,7 @@ describe('OmsorgsovertakelseFaktaIndex', () => {
     expect(ektefellesBarnRad.getByText('Nei')).toBeInTheDocument();
 
     const delvilkårRad = withinRowWithLabel('Delvilkår');
-    expect(delvilkårRad.getByText('Adopsjon §14-17 første ledd')).toBeInTheDocument();
+    expect(delvilkårRad.getByText('Adopsjon § 14-17 første ledd')).toBeInTheDocument();
 
     const fregBoks = within(screen.getByLabelText('Opplysninger fra Folkeregisteret'));
     expect(fregBoks.getByText('Opplysninger fra Folkeregisteret')).toBeInTheDocument();
@@ -62,10 +62,10 @@ describe('OmsorgsovertakelseFaktaIndex', () => {
     expect(apBoks.getByRole('radio', { name: 'Nei' })).toBeChecked();
 
     expect(apBoks.getByLabelText('Velg vilkår som skal anvendes')).toBeInTheDocument();
-    expect(apBoks.getByRole('radio', { name: 'Adopsjon §14-17 første ledd' })).toBeChecked();
-    expect(apBoks.getByRole('radio', { name: 'Foreldreansvar §14-17 andre ledd' })).not.toBeChecked();
-    expect(apBoks.getByRole('radio', { name: 'Foreldreansvar §14-17 fjerde ledd' })).not.toBeChecked();
-    expect(apBoks.getByRole('radio', { name: 'Omsorg §14-17 tredje ledd' })).not.toBeChecked();
+    expect(apBoks.getByRole('radio', { name: 'Adopsjon § 14-17 første ledd' })).toBeChecked();
+    expect(apBoks.getByRole('radio', { name: 'Foreldreansvar § 14-17 andre ledd' })).not.toBeChecked();
+    expect(apBoks.getByRole('radio', { name: 'Foreldreansvar § 14-17 fjerde ledd' })).not.toBeChecked();
+    expect(apBoks.getByRole('radio', { name: 'Omsorg § 14-17 tredje ledd' })).not.toBeChecked();
 
     expect(apBoks.getByLabelText('Er vilkåret oppfylt?')).toBeInTheDocument();
     expect(apBoks.getByRole('radio', { name: 'Oppfylt' })).not.toBeChecked();
@@ -79,7 +79,7 @@ describe('OmsorgsovertakelseFaktaIndex', () => {
 
     await userEvent.click(apBoks.getByRole('radio', { name: 'Ja' }));
     await userEvent.click(apBoks.getByRole('checkbox', { name: 'Barn 2 født 09.10.2005Over 15 år' }));
-    await userEvent.click(apBoks.getByRole('radio', { name: 'Foreldreansvar §14-17 andre ledd' }));
+    await userEvent.click(apBoks.getByRole('radio', { name: 'Foreldreansvar § 14-17 andre ledd' }));
     await userEvent.click(screen.getByText('Ikke oppfylt'));
     await userEvent.selectOptions(screen.getByLabelText('Velg en avslagsårsak'), '1004');
     await userEvent.type(apBoks.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
