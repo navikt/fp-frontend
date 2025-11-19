@@ -46,6 +46,7 @@ const meta = {
         sakslister: oldArgs.sakslister.concat({
           sakslisteId: oldArgs.sakslister.length === 1 ? 1 : 2,
           navn: 'Ny liste',
+          sorteringTyper: [],
           saksbehandlerIdenter: [],
         }),
       }));
@@ -70,6 +71,7 @@ export const TabellNårDetFinnesEnBehandlingskø: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
+        sorteringTyper: [],
         saksbehandlerIdenter: ['R23233'],
       },
     ],

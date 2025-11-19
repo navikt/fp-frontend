@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
+import type { KøSorteringFelt } from '../../../typer/sakslisteAvdelingTsType.ts';
 import { BelopSorteringValg, type FormValues as BelopSorteringValgFormValues } from './BelopSorteringValg';
 import { DatoSorteringValg, type FormValues as DatoSorteringValgFormValues } from './DatoSorteringValg';
 
@@ -24,6 +25,7 @@ interface Props {
   valgteBehandlingtyper?: string[];
   valgtAvdelingEnhet: string;
   erDynamiskPeriode: boolean;
+  muligeSorteringer: KøSorteringFelt[];
 }
 
 export const SorteringVelger = ({
@@ -31,6 +33,7 @@ export const SorteringVelger = ({
   valgteBehandlingtyper,
   valgtAvdelingEnhet,
   erDynamiskPeriode,
+  muligeSorteringer,
 }: Props) => {
   const queryClient = useQueryClient();
 
@@ -74,26 +77,26 @@ export const SorteringVelger = ({
           });
         }}
       >
-        {koSorteringer
+        {muligeSorteringer
           .filter(
             koSortering =>
-              koSortering.feltkategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
+              koSortering.feltType !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
           )
           .map(koSortering => (
-            <VStack key={koSortering.kode} gap="space-2">
-              <Radio value={koSortering.kode} size="small">
-                {koSortering.navn}
+            <VStack key={koSortering.køSortering} gap="space-2">
+              <Radio value={koSortering.køSortering} size="small">
+                {koSorteringer.filter(k => k.kode === koSortering.køSortering).map(k => k.navn)}
               </Radio>
-              {sortering === koSortering.kode && (
+              {sortering === koSortering.køSortering && (
                 <>
-                  {koSortering.felttype === 'DATO' && (
+                  {koSortering.feltType === 'DATO' && (
                     <DatoSorteringValg
                       valgtSakslisteId={valgtSakslisteId}
                       valgtAvdelingEnhet={valgtAvdelingEnhet}
                       erDynamiskPeriode={erDynamiskPeriode}
                     />
                   )}
-                  {koSortering.felttype === 'HELTALL' && (
+                  {koSortering.feltType === 'HELTALL' && (
                     <BelopSorteringValg valgtSakslisteId={valgtSakslisteId} valgtAvdelingEnhet={valgtAvdelingEnhet} />
                   )}
                 </>

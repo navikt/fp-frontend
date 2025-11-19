@@ -217,20 +217,14 @@ export const alleKodeverkLos: AlleKodeverkLos = {
     {
       kode: 'BEHFRIST',
       navn: 'Dato for behandlingsfrist',
-      felttype: 'DATO',
-      feltkategori: 'UNIVERSAL',
     },
     {
       kode: 'OPPRBEH',
       navn: 'Dato for opprettelse av behandling',
-      felttype: 'DATO',
-      feltkategori: 'UNIVERSAL',
     },
     {
       kode: 'FORSTONAD',
       navn: 'Dato for første stønadsdag',
-      felttype: 'DATO',
-      feltkategori: 'UNIVERSAL',
     },
     {
       kode: 'FORSTONAD_SYNK',
@@ -241,14 +235,10 @@ export const alleKodeverkLos: AlleKodeverkLos = {
     {
       kode: 'BELOP',
       navn: 'Feilutbetalt beløp',
-      felttype: 'HELTALL',
-      feltkategori: 'TILBAKEKREVING',
     },
     {
       kode: 'FEILUTBETALINGSTART',
       navn: 'Dato for første feilutbetaling',
-      felttype: 'DATO',
-      feltkategori: 'TILBAKEKREVING',
     },
   ],
 };

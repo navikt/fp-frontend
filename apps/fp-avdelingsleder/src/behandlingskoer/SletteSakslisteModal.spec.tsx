@@ -17,6 +17,7 @@ describe('SletteSakslisteModal', () => {
     await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
     expect(submit).toHaveBeenNthCalledWith(1, {
       navn: 'Saksliste 1',
+      sorteringTyper: [],
       saksbehandlerIdenter: [],
       sakslisteId: 1,
     });

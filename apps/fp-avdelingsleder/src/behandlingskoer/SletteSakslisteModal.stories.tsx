@@ -27,6 +27,7 @@ export const Default: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      sorteringTyper: [],
       saksbehandlerIdenter: [],
     },
   },
