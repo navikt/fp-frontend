@@ -5,12 +5,13 @@ import { Box, Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { notEmpty } from '@navikt/fp-utils';
+
 import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import type { KøSorteringFelt } from '../../../typer/sakslisteAvdelingTsType.ts';
 import { BelopSorteringValg, type FormValues as BelopSorteringValgFormValues } from './BelopSorteringValg';
 import { DatoSorteringValg, type FormValues as DatoSorteringValgFormValues } from './DatoSorteringValg';
-import { notEmpty } from '@navikt/fp-utils';
 
 export type FormValues = {
   sortering?: string;
