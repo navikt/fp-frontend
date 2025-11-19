@@ -23,8 +23,8 @@ export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
     begrunnelse,
     fritekstTilBrev,
     klageVurdering: vurdering,
-    klageMedholdArsak,
-    klageVurderingOmgjoer,
+    klageMedholdÅrsak,
+    klageVurderingOmgjør,
   } = klageVurdering.klageVurderingResultatNK ?? {};
 
   const medholdReasons = alleKodeverk['KlageMedholdÅrsak'];
@@ -50,11 +50,11 @@ export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
           <Label size="small">
             <FormattedMessage id="Klage.ResolveKlage.Cause" />
           </Label>
-          <BodyShort size="small">{medholdReasons.find(mo => mo.kode === klageMedholdArsak)?.navn}</BodyShort>
+          <BodyShort size="small">{medholdReasons.find(mo => mo.kode === klageMedholdÅrsak)?.navn}</BodyShort>
           <BodyShort size="small">
-            {klageVurderingOmgjoer === 'GUNST_MEDHOLD_I_KLAGE' && <FormattedMessage id="Klage.Behandle.Omgjort" />}
-            {klageVurderingOmgjoer === 'UGUNST_MEDHOLD_I_KLAGE' && <FormattedMessage id="Klage.Behandle.Ugunst" />}
-            {klageVurderingOmgjoer === 'DELVIS_MEDHOLD_I_KLAGE' && (
+            {klageVurderingOmgjør === 'GUNST_MEDHOLD_I_KLAGE' && <FormattedMessage id="Klage.Behandle.Omgjort" />}
+            {klageVurderingOmgjør === 'UGUNST_MEDHOLD_I_KLAGE' && <FormattedMessage id="Klage.Behandle.Ugunst" />}
+            {klageVurderingOmgjør === 'DELVIS_MEDHOLD_I_KLAGE' && (
               <FormattedMessage id="Klage.Behandle.DelvisOmgjort" />
             )}
           </BodyShort>
@@ -65,7 +65,7 @@ export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
           <Label size="small">
             <FormattedMessage id="Klage.ResolveKlage.Cause" />
           </Label>
-          <BodyShort size="small">{medholdReasons.find(mo => mo.kode === klageMedholdArsak)?.navn}</BodyShort>
+          <BodyShort size="small">{medholdReasons.find(mo => mo.kode === klageMedholdÅrsak)?.navn}</BodyShort>
         </VStack>
       )}
       <VStack gap="space-4">

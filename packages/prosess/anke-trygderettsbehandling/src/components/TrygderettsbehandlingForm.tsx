@@ -81,18 +81,18 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
               <FormattedMessage id="Ankebehandling.OmgjoeringArsak" />
             </Label>
             <BodyShort size="small">
-              {ankeOmgorArsaker.find(aoa => aoa.kode === avr.trygderettOmgjoerArsak)?.navn}
+              {ankeOmgorArsaker.find(aoa => aoa.kode === avr.trygderettOmgjørÅrsak)?.navn}
             </BodyShort>
           </VStack>
           <VStack gap="space-4">
             <BodyShort size="small">
-              {avr.trygderettVurderingOmgjoer === 'ANKE_TIL_GUNST' && (
+              {avr.trygderettVurderingOmgjør === 'ANKE_TIL_GUNST' && (
                 <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
               )}
-              {avr.trygderettVurderingOmgjoer === 'ANKE_TIL_UGUNST' && (
+              {avr.trygderettVurderingOmgjør === 'ANKE_TIL_UGUNST' && (
                 <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Ugunst" />
               )}
-              {avr.trygderettVurderingOmgjoer === 'ANKE_DELVIS_OMGJOERING_TIL_GUNST' && (
+              {avr.trygderettVurderingOmgjør === 'ANKE_DELVIS_OMGJOERING_TIL_GUNST' && (
                 <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Delvis" />
               )}
             </BodyShort>
@@ -107,7 +107,7 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
               <FormattedMessage id="Ankebehandling.OmgjoeringArsak" />
             </Label>
             <BodyShort size="small">
-              {ankeOmgorArsaker.find(aoa => aoa.kode === avr.trygderettOmgjoerArsak)?.navn}
+              {ankeOmgorArsaker.find(aoa => aoa.kode === avr.trygderettOmgjørÅrsak)?.navn}
             </BodyShort>
           </VStack>
         )}

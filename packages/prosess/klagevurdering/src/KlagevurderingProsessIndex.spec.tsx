@@ -45,9 +45,9 @@ describe('KlagevurderingProsessIndex', () => {
       begrunnelse: 'Dette er en begrunnelse',
       fritekstTilBrev: 'Dette er en fritekst',
       klageHjemmel: '14-17',
-      klageMedholdArsak: 'ULIK_VURDERING',
+      klageMedholdÅrsak: 'ULIK_VURDERING',
       klageVurdering: 'MEDHOLD_I_KLAGE',
-      klageVurderingOmgjoer: 'GUNST_MEDHOLD_I_KLAGE',
+      klageVurderingOmgjør: 'GUNST_MEDHOLD_I_KLAGE',
       kode: '5035',
     });
 
@@ -67,9 +67,9 @@ describe('KlagevurderingProsessIndex', () => {
       begrunnelse: 'Dette er en begrunnelse',
       fritekstTilBrev: 'Dette er en fritekst',
       klageHjemmel: '14-17',
-      klageMedholdArsak: 'ULIK_VURDERING',
+      klageMedholdÅrsak: 'ULIK_VURDERING',
       klageVurdering: 'MEDHOLD_I_KLAGE',
-      klageVurderingOmgjoer: 'GUNST_MEDHOLD_I_KLAGE',
+      klageVurderingOmgjør: 'GUNST_MEDHOLD_I_KLAGE',
       kode: '5035',
     });
   });

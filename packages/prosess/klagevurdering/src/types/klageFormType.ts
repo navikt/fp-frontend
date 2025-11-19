@@ -4,7 +4,7 @@ export type KlageFormType = {
   begrunnelse?: string;
   fritekstTilBrev?: string;
   klageVurdering?: KlageVurderingType;
-  klageVurderingOmgjoer?: KlageVurderingOmgjørType;
-  klageMedholdArsak?: string;
+  klageVurderingOmgjør?: KlageVurderingOmgjørType;
+  klageMedholdÅrsak?: string;
   klageHjemmel?: KlageHjemmel;
 };

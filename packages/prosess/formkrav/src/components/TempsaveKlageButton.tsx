@@ -73,7 +73,7 @@ const transformValues = (
   erSignert: !!values.erSignert,
   erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),
   klageTilbakekreving: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak),
-  paKlagdBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? undefined : values.vedtak,
+  påKlagdBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? undefined : values.vedtak,
   fritekstTilBrev: skalLagreFritekstfelt(values) ? values.fritekstTilBrev : undefined,
   mottattDato: values.mottattDato,
 });

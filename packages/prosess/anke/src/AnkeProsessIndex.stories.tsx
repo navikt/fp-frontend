@@ -26,8 +26,8 @@ export const OmjørResultatTilUgunst: Story = {
       ankeVurderingResultat: {
         ankeVurdering: 'ANKE_OMGJOER',
         begrunnelse: 'Dette er en begrunnelse',
-        ankeOmgjoerArsak: 'ULIK_VURDERING',
-        ankeVurderingOmgjoer: 'ANKE_TIL_UGUNST',
+        ankeOmgjørÅrsak: 'ULIK_VURDERING',
+        ankeVurderingOmgjør: 'ANKE_TIL_UGUNST',
         fritekstTilBrev: 'Dette er en fritekst',
       },
     } as AnkeVurdering,
@@ -40,7 +40,7 @@ export const OpphevResultat: Story = {
       ankeVurderingResultat: {
         ankeVurdering: 'ANKE_OPPHEVE_OG_HJEMSENDE',
         begrunnelse: 'Dette er en begrunnelse',
-        ankeOmgjoerArsak: 'ULIK_REGELVERKSTOLKNING',
+        ankeOmgjørÅrsak: 'ULIK_REGELVERKSTOLKNING',
         fritekstTilBrev: 'Dette er en fritekst',
       },
     } as AnkeVurdering,
@@ -53,7 +53,7 @@ export const HjemsendResultat: Story = {
       ankeVurderingResultat: {
         ankeVurdering: 'ANKE_HJEMSENDE_UTEN_OPPHEV',
         begrunnelse: 'Dette er en begrunnelse',
-        ankeOmgjoerArsak: 'ULIK_REGELVERKSTOLKNING',
+        ankeOmgjørÅrsak: 'ULIK_REGELVERKSTOLKNING',
         fritekstTilBrev: 'Dette er en fritekst',
       },
     } as AnkeVurdering,
@@ -66,7 +66,7 @@ export const AvvisResultat: Story = {
       ankeVurderingResultat: {
         ankeVurdering: 'ANKE_AVVIS',
         begrunnelse: 'Dette er en begrunnelse',
-        ankeOmgjoerArsak: 'ULIK_REGELVERKSTOLKNING',
+        ankeOmgjørÅrsak: 'ULIK_REGELVERKSTOLKNING',
         erSubsidiartRealitetsbehandles: true,
         erAnkerIkkePart: true,
         erIkkeKonkret: true,
@@ -102,7 +102,13 @@ export const ErBehandletIKabal: Story = {
     ankeVurdering: {
       ankeVurderingResultat: {
         ankeVurdering: 'ANKE_OMGJOER',
-        ankeVurderingOmgjoer: 'ANKE_DELVIS_OMGJOERING_TIL_GUNST',
+        ankeVurderingOmgjør: 'ANKE_DELVIS_OMGJOERING_TIL_GUNST',
+        begrunnelse: '',
+        erAnkerIkkePart: false,
+        erFristIkkeOverholdt: false,
+        erIkkeKonkret: false,
+        erIkkeSignert: false,
+        erSubsidiartRealitetsbehandles: false,
       },
       underBehandlingKabal: false,
       behandletAvKabal: true,

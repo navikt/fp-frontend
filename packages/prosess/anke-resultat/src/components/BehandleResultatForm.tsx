@@ -120,8 +120,8 @@ const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
   </VStack>
 );
 
-const hentSpråkkode = (ankeOmgjoerArsak: string | null | undefined): string => {
-  switch (ankeOmgjoerArsak) {
+const hentSpråkkode = (ankeVurderingOmgjør: string | null | undefined): string => {
+  switch (ankeVurderingOmgjør) {
     case 'ANKE_TIL_UGUNST':
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilUgunst';
     case 'ANKE_TIL_GUNST':
@@ -139,15 +139,15 @@ const ResultatOmgjores = ({
 }: Props & { alleKodeverk: AlleKodeverk }): ReactElement => (
   <VStack gap="space-16">
     <Detail>
-      <FormattedMessage id={hentSpråkkode(ankeVurderingResultat?.ankeVurderingOmgjoer)} />
+      <FormattedMessage id={hentSpråkkode(ankeVurderingResultat?.ankeVurderingOmgjør)} />
     </Detail>
-    {ankeVurderingResultat?.ankeOmgjoerArsak && (
+    {ankeVurderingResultat?.ankeOmgjørÅrsak && (
       <>
         <Detail>
           <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" />
         </Detail>
         <Detail>
-          {alleKodeverk['AnkeOmgjørÅrsak'].find(({ kode }) => kode === ankeVurderingResultat.ankeOmgjoerArsak)?.navn ??
+          {alleKodeverk['AnkeOmgjørÅrsak'].find(({ kode }) => kode === ankeVurderingResultat.ankeOmgjørÅrsak)?.navn ??
             ''}
         </Detail>
       </>

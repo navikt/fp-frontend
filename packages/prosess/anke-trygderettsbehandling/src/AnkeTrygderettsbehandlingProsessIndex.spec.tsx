@@ -23,7 +23,7 @@ describe('AnkeTrygderettsbehandlingProsessIndex', () => {
     expect(screen.getByText('Ja')).toBeInTheDocument();
 
     expect(screen.getByText('Fritekst for Trygderettsbehandling')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en kommentar')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en merknad')).toBeInTheDocument();
 
     expect(screen.getByText('Resultat fra Trygdretten')).toBeInTheDocument();
     expect(screen.getByText('Omgjort')).toBeInTheDocument();
@@ -61,7 +61,7 @@ describe('AnkeTrygderettsbehandlingProsessIndex', () => {
     expect(screen.getByText('Ja')).toBeInTheDocument();
 
     expect(screen.getByText('Fritekst for Trygderettsbehandling')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en kommentar')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en merknad')).toBeInTheDocument();
 
     expect(screen.getByText('Resultat fra Trygdretten')).toBeInTheDocument();
     expect(screen.getByText('Hjemsendt')).toBeInTheDocument();

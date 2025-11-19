@@ -85,7 +85,7 @@ describe('FormkravProsessIndex', () => {
       mottattDato: '2025-08-26',
       kode: '5082',
       klageTilbakekreving: undefined,
-      paKlagdBehandlingUuid: '1',
+      påKlagdBehandlingUuid: '1',
     });
   });
 
