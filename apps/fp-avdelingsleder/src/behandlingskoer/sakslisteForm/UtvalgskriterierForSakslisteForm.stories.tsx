@@ -59,6 +59,7 @@ export const MedGittNavn: Story = {
       },
       behandlingTyper: ['BT-002'],
       fagsakYtelseTyper: ['FP'],
+      sorteringTyper: [{sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL'}],
       andreKriterier: [
         {
           andreKriterierType: 'TIL_BESLUTTER',
@@ -87,6 +88,7 @@ export const MedDefaultNavn: Story = {
       },
       behandlingTyper: ['BT-002'],
       fagsakYtelseTyper: ['FP'],
+      sorteringTyper: [{sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL'}],
       andreKriterier: [
         {
           andreKriterierType: 'TIL_BESLUTTER',

@@ -5,8 +5,11 @@ import { Box, Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { notEmpty } from '@navikt/fp-utils';
+
 import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
+import type { KøSorteringFelt } from '../../../typer/sakslisteAvdelingTsType.ts';
 import { BelopSorteringValg, type FormValues as BelopSorteringValgFormValues } from './BelopSorteringValg';
 import { DatoSorteringValg, type FormValues as DatoSorteringValgFormValues } from './DatoSorteringValg';
 
@@ -24,6 +27,7 @@ interface Props {
   valgteBehandlingtyper?: string[];
   valgtAvdelingEnhet: string;
   erDynamiskPeriode: boolean;
+  muligeSorteringer: KøSorteringFelt[];
 }
 
 export const SorteringVelger = ({
@@ -31,6 +35,7 @@ export const SorteringVelger = ({
   valgteBehandlingtyper,
   valgtAvdelingEnhet,
   erDynamiskPeriode,
+  muligeSorteringer,
 }: Props) => {
   const queryClient = useQueryClient();
 
@@ -52,7 +57,7 @@ export const SorteringVelger = ({
     },
   });
 
-  const koSorteringer = useLosKodeverk('KøSortering');
+  const sorteringKoder = useLosKodeverk('KøSortering');
 
   const sortering = watch('sortering');
 
@@ -74,26 +79,26 @@ export const SorteringVelger = ({
           });
         }}
       >
-        {koSorteringer
+        {muligeSorteringer
           .filter(
             koSortering =>
-              koSortering.feltkategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
+              koSortering.feltKategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
           )
           .map(koSortering => (
-            <VStack key={koSortering.kode} gap="space-2">
-              <Radio value={koSortering.kode} size="small">
-                {koSortering.navn}
+            <VStack key={koSortering.sorteringType} gap="space-2">
+              <Radio value={koSortering.sorteringType} size="small">
+                {notEmpty(sorteringKoder.find(k => k.kode === koSortering.sorteringType)?.navn, "Mangler kodeverk")}
               </Radio>
-              {sortering === koSortering.kode && (
+              {sortering === koSortering.sorteringType && (
                 <>
-                  {koSortering.felttype === 'DATO' && (
+                  {koSortering.feltType === 'DATO' && (
                     <DatoSorteringValg
                       valgtSakslisteId={valgtSakslisteId}
                       valgtAvdelingEnhet={valgtAvdelingEnhet}
                       erDynamiskPeriode={erDynamiskPeriode}
                     />
                   )}
-                  {koSortering.felttype === 'HELTALL' && (
+                  {koSortering.feltType === 'HELTALL' && (
                     <BelopSorteringValg valgtSakslisteId={valgtSakslisteId} valgtAvdelingEnhet={valgtAvdelingEnhet} />
                   )}
                 </>

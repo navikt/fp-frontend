@@ -5,6 +5,12 @@ type AnnetKriterie = Readonly<{
   inkluder: boolean;
 }>;
 
+export type KøSorteringFelt = Readonly<{
+  sorteringType: KøSortering;
+  feltType: string;
+  feltKategori: string
+}>;
+
 export type SakslisteAvdeling = Readonly<{
   sakslisteId: number;
   navn?: string;
@@ -18,6 +24,7 @@ export type SakslisteAvdeling = Readonly<{
     tomDato?: string;
     erDynamiskPeriode: boolean;
   };
+  sorteringTyper: KøSorteringFelt[];
   andreKriterier?: AnnetKriterie[];
   saksbehandlerIdenter: string[];
 }>;
