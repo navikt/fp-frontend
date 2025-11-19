@@ -1,5 +1,6 @@
 /// <reference types="vitest" />
 import { mergeConfig } from 'vite';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 
 import { createSharedAppConfig } from '@navikt/fp-config-vite';
 
@@ -27,4 +28,17 @@ export default mergeConfig(createSharedAppConfig(), {
       },
     },
   },
+  plugins: [
+    // Put the Sentry vite plugin after all other plugins
+    sentryVitePlugin({
+      authToken: process.env.SENTRY_AUTH_TOKEN, // Kommer fra Github organization secrets
+      disable: !process.env.SENTRY_AUTH_TOKEN, // Ikke last opp source maps hvis token ikke er satt. Token er bare satt når det bygges fra master branch
+      org: 'nav',
+      project: 'fp-avdelingsleder',
+      url: 'https://sentry.gc.nav.no',
+      release: {
+        name: process.env.VITE_SENTRY_RELEASE,
+      },
+    }),
+  ],
 });

@@ -28,6 +28,7 @@ jobs:
       push-image: ${{ github.ref_name == 'master' }} # default: false
       app: fp-journalforing
       image_suffix: '/fp-journalforing'
+      sentry_dsn: 'https://e3fbcf06855a6a4caf8d9c8e1e92479b@sentry.gc.nav.no/185'
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN  }}
