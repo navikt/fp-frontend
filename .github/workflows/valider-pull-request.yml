@@ -1,5 +1,5 @@
 name: Valider pull request
-on: [pull_request]
+on: [ pull_request ]
 jobs:
   valid-pull-request:
     name: Valider pull request
@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: ./.github/actions/setup-yarnrc
+      - uses: navikt/fp-gha-workflows/.github/actions/setup-yarnrc@main
         with:
           npmAuthToken: ${{ secrets.READER_TOKEN }}
 
@@ -40,7 +40,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: ./.github/actions/setup-yarnrc
+      - uses: navikt/fp-gha-workflows/.github/actions/setup-yarnrc@main
         with:
           npmAuthToken: ${{ secrets.READER_TOKEN }}
 
