@@ -17,7 +17,7 @@ if (app === null) {
   throw new Error('No app element');
 }
 
-initSentry();
+initSentry('fp-frontend');
 
 const root = createRoot(app);
 

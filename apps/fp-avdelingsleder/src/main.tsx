@@ -17,7 +17,7 @@ if (app === null) {
   throw new Error('No app element');
 }
 
-initSentry();
+initSentry('fp-avdelingsleder');
 
 const root = createRoot(app);
 

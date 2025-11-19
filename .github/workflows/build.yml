@@ -37,10 +37,6 @@ on:
         required: false
         type: string
         description: App som skal bygges
-      sentry_dsn:
-        required: true
-        type: string
-        description: 'Data Source Name(DSN): url for hvor events skal sendes'
     outputs:
       build-version:
         description: 'Build version'
@@ -92,7 +88,6 @@ jobs:
         run: yarn ci --filter=@navikt/${{ inputs.app }}
         env:
           VITE_SENTRY_RELEASE: ${{ steps.sentry_release_key.outputs.SENTRY_RELEASE }}
-          VITE_SENTRY_DSN: ${{ inputs.sentry_dsn }}
 
       - name: Bygg server
         run: cd ./server && yarn install --immutable && yarn build

@@ -28,7 +28,6 @@ jobs:
       push-image: ${{ github.ref_name == 'master' }} # default: false
       app: fp-avdelingsleder
       image_suffix: '/fp-avdelingsleder'
-      sentry_dsn: 'https://acfe5c7d102b49aa1b622345dc6cd0c0@sentry.gc.nav.no/184'
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN  }}

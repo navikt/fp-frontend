@@ -28,7 +28,6 @@ jobs:
       push-image: ${{ github.ref_name == 'master' }} # default: false
       app: fp-frontend
       image_suffix: '/fp-frontend'
-      sentry_dsn: 'https://d1b7de8cc42949569da03849b47d3ea1@sentry.gc.nav.no/17'
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN  }}
