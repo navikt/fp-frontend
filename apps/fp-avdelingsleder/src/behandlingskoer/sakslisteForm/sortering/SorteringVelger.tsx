@@ -80,7 +80,7 @@ export const SorteringVelger = ({
         {muligeSorteringer
           .filter(
             koSortering =>
-              koSortering.feltType !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
+              koSortering.feltKategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
           )
           .map(koSortering => (
             <VStack key={koSortering.køSortering} gap="space-2">
