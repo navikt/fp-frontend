@@ -229,8 +229,6 @@ export const alleKodeverkLos: AlleKodeverkLos = {
     {
       kode: 'FORSTONAD_SYNK',
       navn: 'Dato for første stønadsdag synkende',
-      felttype: 'DATO',
-      feltkategori: 'UNIVERSAL',
     },
     {
       kode: 'BELOP',
