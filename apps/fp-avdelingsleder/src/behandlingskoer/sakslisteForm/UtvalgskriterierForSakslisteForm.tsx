@@ -156,6 +156,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
               valgteBehandlingtyper={valgtSaksliste.behandlingTyper}
               valgtAvdelingEnhet={valgtAvdelingEnhet}
               erDynamiskPeriode={!!values.erDynamiskPeriode}
+              muligeSorteringer={valgtSaksliste.sorteringTyper}
             />
           </HStack>
         </VStack>

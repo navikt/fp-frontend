@@ -19,17 +19,8 @@ type KodeverkEnumMap = {
 
 export type LosKodeverkType = keyof KodeverkEnumMap;
 
-type KøSorteringKodeverk = LosKodeverkMedNavn<'KøSortering'> & {
-  felttype: string;
-  feltkategori: string;
-};
-
-type KodeverkMedSammeVerditype = {
-  [K in Exclude<LosKodeverkType, 'KøSortering'>]: LosKodeverkMedNavn<K extends LosKodeverkType ? K : unknown>[];
-};
-
-export type AlleKodeverkLos = KodeverkMedSammeVerditype & {
-  KøSortering: KøSorteringKodeverk[];
+export type AlleKodeverkLos = {
+  [K in LosKodeverkType]: LosKodeverkMedNavn<K extends LosKodeverkType ? K : unknown>[];
 };
 
 type EnumOrUnknown<T extends LosKodeverkType> = T extends keyof KodeverkEnumMap ? KodeverkEnumMap[T] : unknown;

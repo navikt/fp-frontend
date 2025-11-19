@@ -26,6 +26,7 @@ const SAKSLISTER = [
     },
     behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],
+    sorteringTyper: [{sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL'}],
     andreKriterier: [
       {
         andreKriterierType: 'TIL_BESLUTTER',
