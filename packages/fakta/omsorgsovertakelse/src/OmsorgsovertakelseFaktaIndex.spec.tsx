@@ -64,7 +64,7 @@ describe('OmsorgsovertakelseFaktaIndex', () => {
     expect(apBoks.getByLabelText('Velg vilkår som skal anvendes')).toBeInTheDocument();
     expect(apBoks.getByRole('radio', { name: 'Adopsjon § 14-17 første ledd' })).toBeChecked();
     expect(apBoks.getByRole('radio', { name: 'Foreldreansvar § 14-17 andre ledd' })).not.toBeChecked();
-    expect(apBoks.getByRole('radio', { name: 'Foreldreansvar § 1 4-17 fjerde ledd' })).not.toBeChecked();
+    expect(apBoks.getByRole('radio', { name: 'Foreldreansvar § 14-17 fjerde ledd' })).not.toBeChecked();
     expect(apBoks.getByRole('radio', { name: 'Omsorg § 14-17 tredje ledd' })).not.toBeChecked();
 
     expect(apBoks.getByLabelText('Er vilkåret oppfylt?')).toBeInTheDocument();
