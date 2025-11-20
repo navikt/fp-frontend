@@ -9,34 +9,34 @@ import type { AnnenForelderFormValues, PermisjonRettigheterFormValues } from '..
 
 interface Props {
   readOnly: boolean;
-  sokerErMor: boolean;
+  søkerErMor: boolean;
 }
 
-export const PermisjonRettigheterPanel = ({ readOnly, sokerErMor }: Props) => {
+export const PermisjonRettigheterPanel = ({ readOnly, søkerErMor }: Props) => {
   const intl = useIntl();
 
   const { watch, control } = useFormContext<AnnenForelderFormValues>();
-  const sokerHarAleneomsorg = watch(`${ANNEN_FORELDER_NAME_PREFIX}.sokerHarAleneomsorg`);
-  const annenForelderHarRett = watch(`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPaForeldrepenger`);
+  const søkerHarAleneomsorg = watch(`${ANNEN_FORELDER_NAME_PREFIX}.søkerHarAleneomsorg`);
+  const annenForelderHarRett = watch(`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPåForeldrepenger`);
   const annenForelderRettEØS = watch(`${ANNEN_FORELDER_NAME_PREFIX}.annenForelderRettEØS`);
 
   return (
     <VStack gap="space-16">
       <TrueFalseInput
-        name={`${ANNEN_FORELDER_NAME_PREFIX}.sokerHarAleneomsorg`}
+        name={`${ANNEN_FORELDER_NAME_PREFIX}.søkerHarAleneomsorg`}
         control={control}
         label={intl.formatMessage({ id: 'Registrering.Permisjon.SøkerHarAleneomsorg' })}
         readOnly={readOnly}
       />
-      {sokerHarAleneomsorg === false && (
+      {søkerHarAleneomsorg === false && (
         <TrueFalseInput
-          name={`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPaForeldrepenger`}
+          name={`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPåForeldrepenger`}
           control={control}
           label={intl.formatMessage({ id: 'Registrering.Permisjon.HarRettPaForeldrepenger' })}
           readOnly={readOnly}
         />
       )}
-      {sokerHarAleneomsorg === false && annenForelderHarRett === false && (
+      {søkerHarAleneomsorg === false && annenForelderHarRett === false && (
         <TrueFalseInput
           name={`${ANNEN_FORELDER_NAME_PREFIX}.annenForelderRettEØS`}
           control={control}
@@ -44,8 +44,8 @@ export const PermisjonRettigheterPanel = ({ readOnly, sokerErMor }: Props) => {
           readOnly={readOnly}
         />
       )}
-      {!sokerErMor &&
-        sokerHarAleneomsorg === false &&
+      {!søkerErMor &&
+        søkerHarAleneomsorg === false &&
         annenForelderHarRett === false &&
         annenForelderRettEØS === false && (
           <TrueFalseInput
@@ -60,14 +60,14 @@ export const PermisjonRettigheterPanel = ({ readOnly, sokerErMor }: Props) => {
 };
 
 PermisjonRettigheterPanel.transformValues = ({
-  sokerHarAleneomsorg,
-  denAndreForelderenHarRettPaForeldrepenger,
+  søkerHarAleneomsorg,
+  denAndreForelderenHarRettPåForeldrepenger,
   annenForelderRettEØS,
   morMottarUføretrygd,
 }: PermisjonRettigheterFormValues): PermisjonRettigheterFormValues => ({
-  sokerHarAleneomsorg,
-  denAndreForelderenHarRettPaForeldrepenger:
-    sokerHarAleneomsorg === false ? denAndreForelderenHarRettPaForeldrepenger : undefined,
-  annenForelderRettEØS: denAndreForelderenHarRettPaForeldrepenger === false ? annenForelderRettEØS : undefined,
+  søkerHarAleneomsorg,
+  denAndreForelderenHarRettPåForeldrepenger:
+    søkerHarAleneomsorg === false ? denAndreForelderenHarRettPåForeldrepenger : undefined,
+  annenForelderRettEØS: denAndreForelderenHarRettPåForeldrepenger === false ? annenForelderRettEØS : undefined,
   morMottarUføretrygd: annenForelderRettEØS === false ? morMottarUføretrygd : undefined,
 });

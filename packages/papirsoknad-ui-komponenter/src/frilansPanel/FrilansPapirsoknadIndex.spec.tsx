@@ -28,7 +28,7 @@ describe('FrilansPapirsoknadIndex', () => {
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
       frilans: {
-        harSokerPeriodeMedFrilans: false,
+        harSøkerPeriodeMedFrilans: false,
       },
     });
   });
@@ -67,7 +67,7 @@ describe('FrilansPapirsoknadIndex', () => {
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
       frilans: {
-        harSokerPeriodeMedFrilans: true,
+        harSøkerPeriodeMedFrilans: true,
         perioder: [
           {
             periodeFom: '2022-05-27',
@@ -135,7 +135,7 @@ describe('FrilansPapirsoknadIndex', () => {
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
       frilans: {
-        harSokerPeriodeMedFrilans: true,
+        harSøkerPeriodeMedFrilans: true,
         perioder: [
           {
             periodeFom: '2022-05-27',

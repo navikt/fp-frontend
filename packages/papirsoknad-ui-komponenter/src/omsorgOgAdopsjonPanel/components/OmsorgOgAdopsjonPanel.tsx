@@ -60,7 +60,7 @@ export const OmsorgOgAdopsjonPanel = ({
   const { control, watch } = useFormContext<OmsorgOgAdopsjonFormValues>();
   const { fields, remove, append } = useFieldArray({
     control,
-    name: `${OMSORG_NAME_PREFIX}.foedselsDato`,
+    name: `${OMSORG_NAME_PREFIX}.fødselsdato`,
   });
 
   const antallBarn = watch(`${OMSORG_NAME_PREFIX}.antallBarn`) ?? 0;
@@ -138,7 +138,7 @@ export const OmsorgOgAdopsjonPanel = ({
         {fields.map((field, index) => (
           <React.Fragment key={field.id}>
             <RhfDatepicker
-              name={`${OMSORG_NAME_PREFIX}.foedselsDato.${index}.dato`}
+              name={`${OMSORG_NAME_PREFIX}.fødselsdato.${index}.dato`}
               control={control}
               readOnly={readOnly}
               validate={
@@ -165,7 +165,7 @@ OmsorgOgAdopsjonPanel.initialValues = (): OmsorgOgAdopsjonFormValues => ({ [OMSO
 OmsorgOgAdopsjonPanel.transformValues = ({ omsorg }: OmsorgOgAdopsjonFormValues): TransformedFormValue => ({
   [OMSORG_NAME_PREFIX]: {
     ...omsorg,
-    foedselsDato:
-      omsorg.foedselsDato && omsorg.foedselsDato.length > 0 ? omsorg.foedselsDato.map(f => f.dato) : undefined,
+    fødselsdato:
+      omsorg.fødselsdato && omsorg.fødselsdato.length > 0 ? omsorg.fødselsdato.map(f => f.dato) : undefined,
   },
 });

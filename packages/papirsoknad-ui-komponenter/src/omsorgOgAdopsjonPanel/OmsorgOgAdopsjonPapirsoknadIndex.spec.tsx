@@ -43,7 +43,7 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     expect(lagre).toHaveBeenCalledWith({
       omsorg: {
         antallBarn: 1,
-        foedselsDato: ['2022-05-27'],
+        fødselsdato: ['2022-05-27'],
         omsorgsovertakelsesdato: '2022-05-30',
       },
     });
@@ -81,7 +81,7 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     expect(lagre).toHaveBeenCalledWith({
       omsorg: {
         antallBarn: 2,
-        foedselsDato: ['2022-05-27', '2022-05-26'],
+        fødselsdato: ['2022-05-27', '2022-05-26'],
         omsorgsovertakelsesdato: '2022-05-30',
       },
     });
@@ -127,7 +127,7 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     expect(lagre).toHaveBeenCalledWith({
       omsorg: {
         antallBarn: 2,
-        foedselsDato: ['2022-05-27', '2022-05-26'],
+        fødselsdato: ['2022-05-27', '2022-05-26'],
         omsorgsovertakelsesdato: '2022-05-30',
       },
     });

@@ -3,7 +3,7 @@ import type { Arbeidskategori, MorsAktivitet, OverføringÅrsak, UttakPeriodeTyp
 import {
   GRADERING_PERIODE_FIELD_ARRAY_NAME,
   OPPHOLD_PERIODE_FIELD_ARRAY_NAME,
-  OVERFORING_PERIODE_FIELD_ARRAY_NAME,
+  OVERFØRING_PERIODE_FIELD_ARRAY_NAME,
   PERMISJON_PERIODE_FIELD_ARRAY_NAME,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,
@@ -67,7 +67,7 @@ export type FormValuesOpphold = {
 
 export type FormValuesOverforing = {
   skalOvertaKvote: boolean;
-  [OVERFORING_PERIODE_FIELD_ARRAY_NAME]?: OverforingPeriode[];
+  [OVERFØRING_PERIODE_FIELD_ARRAY_NAME]?: OverforingPeriode[];
 };
 export type FormValuesGradering = {
   skalGradere?: boolean;

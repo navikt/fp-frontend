@@ -35,22 +35,22 @@ type FormValues = {
   termindato?: string;
   terminbekreftelseDato?: string;
   antallBarnFraTerminbekreftelse?: number;
-  foedselsDato?: string;
+  fødselsdato?: string;
   antallBarn?: number;
-  erBarnetFodt?: boolean;
+  erBarnetFødt?: boolean;
 };
 
 type TransformFormValues =
   | {
-      erBarnetFodt: false;
+      erBarnetFødt: false;
       termindato?: string;
       terminbekreftelseDato?: string;
       antallBarnFraTerminbekreftelse?: number;
     }
   | {
-      erBarnetFodt: true;
+      erBarnetFødt: true;
       termindato?: string;
-      foedselsDato?: string;
+      fødselsdato?: string;
       antallBarn?: number;
     };
 
@@ -60,7 +60,7 @@ interface Props {
 }
 
 const validateTermin = (getValues: UseFormGetValues<FormValues>) => (termindato: string) => {
-  const fodselsdato = getValues('foedselsDato');
+  const fodselsdato = getValues('fødselsdato');
 
   return terminErRundtFodselsdato(fodselsdato, termindato);
 };
@@ -74,7 +74,7 @@ const validerTerminBekreftelse =
 export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Props) => {
   const { watch, getValues, control } = useFormContext<FormValues>();
 
-  const erBarnetFodt = watch('erBarnetFodt');
+  const erBarnetFødt = watch('erBarnetFødt');
 
   return (
     <RawIntlProvider value={intl}>
@@ -84,7 +84,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
             {intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}
           </Heading>
           <RhfRadioGroup
-            name="erBarnetFodt"
+            name="erBarnetFødt"
             control={control}
             legend={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
             validate={[required]}
@@ -97,9 +97,9 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
               <FormattedMessage id="Registrering.TerminOgFodsel.ErIkkeFodt" />
             </Radio>
           </RhfRadioGroup>
-          {erBarnetFodt !== undefined && (
+          {erBarnetFødt !== undefined && (
             <VStack gap="space-16">
-              {erBarnetFodt === false && (
+              {erBarnetFødt === false && (
                 <>
                   <HStack gap="space-16">
                     <RhfDatepicker
@@ -141,11 +141,11 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                   />
                 </>
               )}
-              {erBarnetFodt === true && (
+              {erBarnetFødt === true && (
                 <>
                   <HStack gap="space-16">
                     <RhfDatepicker
-                      name="foedselsDato"
+                      name="fødselsdato"
                       control={control}
                       label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Fodselsdato' })}
                       readOnly={readOnly}
@@ -198,25 +198,25 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
 };
 
 TerminOgFodselPanel.initialValues = (): FormValues => ({
-  erBarnetFodt: undefined,
+  erBarnetFødt: undefined,
 });
 
 TerminOgFodselPanel.transformValues = ({
   antallBarn,
-  erBarnetFodt,
-  foedselsDato,
+  erBarnetFødt,
+  fødselsdato,
   termindato,
   terminbekreftelseDato,
 }: FormValues): TransformFormValues =>
-  erBarnetFodt
+  erBarnetFødt
     ? {
-        erBarnetFodt: true,
+        erBarnetFødt: true,
         termindato,
-        foedselsDato,
+        fødselsdato,
         antallBarn,
       }
     : {
-        erBarnetFodt: false,
+        erBarnetFødt: false,
         termindato,
         terminbekreftelseDato,
         antallBarnFraTerminbekreftelse: antallBarn,

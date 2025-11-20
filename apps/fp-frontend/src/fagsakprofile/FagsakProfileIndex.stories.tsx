@@ -104,7 +104,6 @@ const ALLE_BEHANDLINGER = [
     },
     risikoAksjonspunkt: lagAksjonspunkt(AksjonspunktKode.VURDER_FARESIGNALER, {
       kanLoses: false,
-      erAktivt: false,
     }),
 
     gjeldendeVedtak: false,
