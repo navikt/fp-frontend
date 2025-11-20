@@ -22,13 +22,6 @@ export const MedlemskapInngangsvilkarInitPanel = () => {
 
   const { data: medlemskap, isFetching } = useQuery(api.medlemskapOptions(standardPanelProps.behandling));
 
-  const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET && ap.status !== 'AVBR',
-  );
-  const harÅpentMedlemskapAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET && ap.status == 'OPPR',
-  );
-
   return (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
@@ -36,10 +29,9 @@ export const MedlemskapInngangsvilkarInitPanel = () => {
       inngangsvilkårPanelKode="MEDLEMSKAP"
       hentInngangsvilkårPanelTekst=""
       overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET}
-      overrideReadOnly={harMedlemskapsAksjonspunkt}
     >
       <>
-        {!harÅpentMedlemskapAksjonspunkt && !isFetching && (
+        {medlemskap && !isFetching && (
           <OverstyringPanelDef
             vilkårKoder={VILKAR_KODER}
             panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"

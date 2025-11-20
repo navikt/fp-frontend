@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FamilieHendelse, Soknad, VilkarUtfallType } from '@navikt/fp-types';
+import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import { ErSoknadsfristVilkaretOppfyltForm } from './components/ErSoknadsfristVilkaretOppfyltForm';
 
@@ -13,11 +13,10 @@ const intl = createIntl(messages);
 interface Props {
   soknad: Soknad;
   familiehendelse: FamilieHendelse;
-  status: VilkarUtfallType;
 }
 
-export const SoknadsfristVilkarProsessIndex = ({ soknad, familiehendelse, status }: Props) => (
+export const SoknadsfristVilkarProsessIndex = ({ soknad, familiehendelse }: Props) => (
   <RawIntlProvider value={intl}>
-    <ErSoknadsfristVilkaretOppfyltForm soknad={soknad} gjeldendeFamiliehendelse={familiehendelse} status={status} />
+    <ErSoknadsfristVilkaretOppfyltForm soknad={soknad} gjeldendeFamiliehendelse={familiehendelse} />
   </RawIntlProvider>
 );

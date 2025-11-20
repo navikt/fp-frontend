@@ -51,7 +51,6 @@ export const OpplysningspliktProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
         <SokersOpplysningspliktVilkarProsessIndex
           søknad={søknad}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          status={standardPanelProps.status}
         />
       ) : (
         <LoadingPanel />
