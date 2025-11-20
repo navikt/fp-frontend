@@ -42,7 +42,9 @@ export const FaktaFraSøknad = ({
             value={<DateLabel dateString={barnet.fødselsdato} />}
           />
         )}
-        {antallBarn && <LabeledValue label={<FormattedMessage id="Label.AntallBarn" />} value={antallBarn} />}
+        {antallBarn && (
+          <LabeledValue size="medium" label={<FormattedMessage id="Label.AntallBarn" />} value={antallBarn} />
+        )}
 
         {terminbekreftelseDokument && (
           <LabeledValue

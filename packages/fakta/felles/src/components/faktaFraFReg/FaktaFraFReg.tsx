@@ -55,7 +55,7 @@ const BarnVisning = ({ barna }: { barna: BarnHendelseData[] }) => {
             value={<DateLabel dateString={barnet.dødsdato} />}
           />
         )}
-        <LabeledValue size="medium"  label={<FormattedMessage id="Label.AntallBarn" />} value={barna.length} />
+        <LabeledValue size="medium" label={<FormattedMessage id="Label.AntallBarn" />} value={barna.length} />
       </VStack>
     );
   }

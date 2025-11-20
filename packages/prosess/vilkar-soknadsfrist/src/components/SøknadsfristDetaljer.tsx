@@ -21,19 +21,23 @@ export const SøknadsfristDetaljer = ({ søknad, gjeldendeFamiliehendelse }: Pro
       <VStack gap="space-16">
         <HStack gap="space-24">
           <LabeledValue
+            size="small"
             label={<FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Søknadsfrist" />}
             value={findSoknadsfristDate(søknad.mottattDato, søknad.søknadsfrist.dagerOversittetFrist)}
           />
           <LabeledValue
+            size="small"
             label={<FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.MottattDato" />}
             value={<DateLabel dateString={søknad.mottattDato} />}
           />
           <LabeledValue
+            size="small"
             label={<FormattedMessage id={textCode} />}
             value={dato ? <DateLabel dateString={dato} /> : '-'}
           />
         </HStack>
         <LabeledValue
+          size="small"
           label={<FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication" />}
           value={søknad.begrunnelseForSenInnsending ?? '-'}
         />
