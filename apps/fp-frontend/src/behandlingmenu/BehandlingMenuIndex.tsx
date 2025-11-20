@@ -70,7 +70,7 @@ export const BehandlingMenuIndex = ({
     <>
       <button
         onClick={() => {
-          console.error('feil i behandleingsmeny');
+          throw new Error('feil i behandleingsmeny');
         }}
       >
         Trigg Error

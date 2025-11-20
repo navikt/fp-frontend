@@ -63,6 +63,13 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
 
   return (
     <div key={valgtAvdelingEnhet} className={styles['container']}>
+      <button
+        onClick={() => {
+          throw new Error('feil i behandleingsmeny');
+        }}
+      >
+        Trigg Error
+      </button>
       <HStack justify="end" padding="2">
         <Select
           size="small"
