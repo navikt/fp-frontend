@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { BehandlingType } from '@navikt/fp-types';
 
 import { oppgaverÅpneEllerPåVentOptions } from '../../data/fplosAvdelingslederApi';
-import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
+import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { OppgaverSomErApneEllerPaVentGraf } from './OppgaverSomErApneEllerPaVentGraf';
 
@@ -21,15 +21,14 @@ type ValgteVerdier = {
 interface Props {
   height: number;
   valgtAvdelingEnhet: string;
-  getValueFromLocalStorage: (key: string) => string | undefined;
 }
 
-export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, getValueFromLocalStorage }: Props) => {
+export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet }: Props) => {
   const { data: oppgaverApneEllerPaVent } = useQuery(oppgaverÅpneEllerPåVentOptions(valgtAvdelingEnhet));
 
   const behandlingTyper = useLosKodeverk('BehandlingType');
-  const stringFromStorage = getValueFromLocalStorage(formName);
-  const lagredeVerdier = stringFromStorage ? (JSON.parse(stringFromStorage) as ValgteVerdier) : undefined;
+
+  const lagretFilter = getParsedValueFromLocalStorage<ValgteVerdier>(formName);
 
   const filtrerteBehandlingstyper = behandlingTyper.filter(type => type.kode !== 'BT-007' && type.kode !== 'BT-009');
 
@@ -42,14 +41,15 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
   );
 
   const formMethods = useForm<ValgteVerdier>({
-    defaultValues: lagredeVerdier ?? formDefaultValues,
+    defaultValues: lagretFilter ?? formDefaultValues,
   });
 
   const values = formMethods.watch();
 
+  useStoreValuesInLocalStorage(formName, values);
+
   return (
     <RhfForm formMethods={formMethods}>
-      <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="OppgaverSomErApneEllerPaVentPanel.Apne" />

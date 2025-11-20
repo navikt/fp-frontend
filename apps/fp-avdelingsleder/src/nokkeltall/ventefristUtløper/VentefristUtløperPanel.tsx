@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { behandlingerFristUtløptOptions } from '../../data/fplosAvdelingslederApi';
-import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
+import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { VentefristUtløperGraf } from './VentefristUtløperGraf';
 
@@ -32,26 +32,25 @@ type FormValues = {
 interface Props {
   height: number;
   valgtAvdelingEnhet: string;
-  getValueFromLocalStorage: (key: string) => string | undefined;
 }
 
-export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFromLocalStorage }: Props) => {
+export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet }: Props) => {
   const { data: behandlingerPaVent } = useQuery(behandlingerFristUtløptOptions(valgtAvdelingEnhet));
 
   const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
 
-  const stringFromStorage = getValueFromLocalStorage(formName);
-  const lagredeVerdier = stringFromStorage ? (JSON.parse(stringFromStorage) as FormValues) : undefined;
+  const lagretFilter = getParsedValueFromLocalStorage<FormValues>(formName);
 
   const formMethods = useForm<FormValues>({
-    defaultValues: lagredeVerdier ?? formDefaultValues,
+    defaultValues: lagretFilter ?? formDefaultValues,
   });
 
   const values = formMethods.watch();
 
+  useStoreValuesInLocalStorage(formName, values);
+
   return (
     <RhfForm<FormValues> formMethods={formMethods}>
-      <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="space-16">
         <RhfRadioGroup
           name="valgtYtelsetype"
