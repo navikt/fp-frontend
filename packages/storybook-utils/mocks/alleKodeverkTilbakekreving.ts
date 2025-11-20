@@ -132,19 +132,19 @@ export const alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving = {
   VilkårResultat: [
     {
       kode: 'FEIL_OPPLYSNINGER',
-      navn: 'Ja, mottaker har forårsaket feilutbetalingen ved forsett eller uaktsomt gitt feilaktige opplysninger (1. ledd, 2 punkt)',
+      navn: 'Ja, mottaker har forårsaket feilutbetalingen ved forsett eller uaktsomt gitt feilaktige opplysninger (første ledd, andre punkt)',
     },
     {
       kode: 'FORSTO_BURDE_FORSTAATT',
-      navn: 'Ja, mottaker forsto eller burde forstått at utbetalingen skyldtes en feil (1. ledd, 1. punkt)',
+      navn: 'Ja, mottaker forsto eller burde forstått at utbetalingen skyldtes en feil (første ledd, første punkt)',
     },
     {
       kode: 'GOD_TRO',
-      navn: 'Nei, mottaker har mottatt beløpet i god tro (1. ledd)',
+      navn: 'Nei, mottaker har mottatt beløpet i god tro (første ledd)',
     },
     {
       kode: 'MANGELFULL_OPPLYSNING',
-      navn: 'Ja, mottaker har forårsaket feilutbetalingen ved forsett eller uaktsomt gitt mangelfulle opplysninger (1. ledd, 2 punkt)',
+      navn: 'Ja, mottaker har forårsaket feilutbetalingen ved forsett eller uaktsomt gitt mangelfulle opplysninger (første ledd, andre punkt)',
     },
   ],
   VedtakResultatType: [
@@ -204,11 +204,11 @@ export const alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving = {
   HendelseType: [
     {
       kode: 'BEREGNING_TYPE',
-      navn: '§14-7 Beregning',
+      navn: '§ 14-7 Beregning',
     },
     {
       kode: 'ES_ADOPSJONSVILKAARET_TYPE',
-      navn: '§14-17 1. ledd Adopsjonsvilkåret',
+      navn: '§ 14-17 første ledd Adopsjonsvilkåret',
     },
     {
       kode: 'ES_ANNET_TYPE',
@@ -220,23 +220,23 @@ export const alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving = {
     },
     {
       kode: 'ES_FODSELSVILKAARET_TYPE',
-      navn: '§14-17 1. ledd Fødselsvilkåret',
+      navn: '§ 14-17 første ledd Fødselsvilkåret',
     },
     {
       kode: 'ES_FORELDREANSVAR_FAR_TYPE',
-      navn: '§14-17 4. ledd Foreldreansvar far',
+      navn: '§ 14-17 fjerde ledd Foreldreansvar far',
     },
     {
       kode: 'ES_FORELDREANSVAR_TYPE',
-      navn: '§14-17 2. ledd Foreldreansvar ',
+      navn: '§ 14-17 andre ledd Foreldreansvar ',
     },
     {
       kode: 'ES_MEDLEMSKAP',
-      navn: '§14-2 Medlemskap',
+      navn: '§ 14-2 Medlemskap',
     },
     {
       kode: 'ES_OMSORGSVILKAAR_TYPE',
-      navn: '§14-17 3. ledd Omsorgsvilkår ved mors død',
+      navn: '§ 14-17 tredje ledd Omsorgsvilkår ved mors død',
     },
     {
       kode: 'ES_RETT_PAA_FORELDREPENGER_TYPE',
@@ -252,11 +252,11 @@ export const alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving = {
     },
     {
       kode: 'KUN_RETT_TYPE',
-      navn: '§14-14 Kun far/medmor rett',
+      navn: '§ 14-14 Kun far/medmor rett',
     },
     {
       kode: 'MEDLEMSKAP',
-      navn: '§14-2 Medlemskap',
+      navn: '§ 14-2 Medlemskap',
     },
     {
       kode: 'OKONOMI_FEIL',
@@ -276,7 +276,7 @@ export const alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving = {
     },
     {
       kode: 'OPPTJENING_TYPE',
-      navn: '§14-6 Opptjening',
+      navn: '§ 14-6 Opptjening',
     },
     {
       kode: 'PPN_ANNET_TYPE',
@@ -288,7 +288,7 @@ export const alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving = {
     },
     {
       kode: 'STONADSPERIODEN_TYPE',
-      navn: '§14-9 Stønadsperioden',
+      navn: '§ 14-9 Stønadsperioden',
     },
     {
       kode: 'SVP_ANNET_TYPE',
@@ -296,47 +296,47 @@ export const alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving = {
     },
     {
       kode: 'SVP_ARBEIDSGIVERS_FORHOLD_TYPE',
-      navn: '§14-4 1. ledd Arbeidsgivers forhold',
+      navn: '§ 14-4 første ledd Arbeidsgivers forhold',
     },
     {
       kode: 'SVP_BEREGNING_TYPE',
-      navn: '§14-4 5. ledd Beregning ',
+      navn: '§ 14-4 5. ledd Beregning ',
     },
     {
       kode: 'SVP_FAKTA_TYPE',
-      navn: '§14-4 Fakta om svangerskap',
+      navn: '§ 14-4 Fakta om svangerskap',
     },
     {
       kode: 'SVP_OPPTJENING_TYPE',
-      navn: '§14-4 3. ledd Opptjening/ inntekt',
+      navn: '§ 14-4 3. ledd Opptjening/ inntekt',
     },
     {
       kode: 'SVP_UTTAK_TYPE',
-      navn: '§14-4 Uttak',
+      navn: '§ 14-4 Uttak',
     },
     {
       kode: 'UTTAK_ALENEOMSORG_TYPE',
-      navn: '§14-15 Uttak ved aleneomsorg/samlivsbrudd',
+      navn: '§ 14-15 Uttak ved aleneomsorg/samlivsbrudd',
     },
     {
       kode: 'UTTAK_GENERELT_TYPE',
-      navn: '§14-10 Generelt om uttak',
+      navn: '§ 14-10 Generelt om uttak',
     },
     {
       kode: 'UTTAK_GRADERT_TYPE',
-      navn: '§14-16 Gradert uttak',
+      navn: '§ 14-16 Gradert uttak',
     },
     {
       kode: 'UTTAK_KVOTENE_TYPE',
-      navn: '§14-12 Uttak av kvotene',
+      navn: '§ 14-12 Uttak av kvotene',
     },
     {
       kode: 'UTTAK_UTSETTELSE_TYPE',
-      navn: '§14-11 Utsettelse av uttak',
+      navn: '§ 14-11 Utsettelse av uttak',
     },
     {
       kode: 'VILKAAR_GENERELLE_TYPE',
-      navn: '§14-13 Generelle vilkår for fars uttak',
+      navn: '§ 14-13 Generelle vilkår for fars uttak',
     },
   ],
   SkjermlenkeType: [
