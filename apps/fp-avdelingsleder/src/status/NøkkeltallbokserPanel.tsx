@@ -33,8 +33,8 @@ export const NøkkeltallbokserPanel = ({ valgtAvdelingEnhet, children }: Props) 
 
   useStoreValuesInLocalStorage(STATE_KEY, valgteYtelseTyper);
 
-  const oppgaverFiltrertPåYtelseType = alleOppgaverForAvdeling.filter(
-    ofa => valgteYtelseTyper.length === 0 || valgteYtelseTyper.includes(ofa.fagsakYtelseType),
+  const oppgaverFiltrertPåYtelseType = alleOppgaverForAvdeling.filter(ofa =>
+    valgteYtelseTyper.includes(ofa.fagsakYtelseType),
   );
 
   return (
@@ -90,7 +90,7 @@ const NøkkeltallBoks = ({
   behandlingType,
 }: {
   oppgaverForAvdeling: OppgaverForAvdeling[];
-  behandlingType?: BehandlingType;
+  behandlingType: BehandlingType | undefined;
 }) => {
   const oppgaverFiltrertPåBehandlingType = oppgaverForAvdeling.filter(ofa => ofa.behandlingType === behandlingType);
 
