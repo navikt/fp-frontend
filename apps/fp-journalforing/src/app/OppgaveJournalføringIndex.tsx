@@ -143,13 +143,6 @@ const JournalforingIndex = ({ ansattIdent }: Props) => {
 
   return (
     <div>
-      <button
-        onClick={() => {
-          throw new Error('feil i behandleingsmeny');
-        }}
-      >
-        Trigg Error
-      </button>
       <JournalføringHeader
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         harHentetFerdigJournalpost={hentJournalpostStatus === 'success'}
