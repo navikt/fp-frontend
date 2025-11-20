@@ -58,7 +58,7 @@ export const VilkarResultPicker = ({
             erVilkårOk ? (
               <>
                 <CheckmarkIcon className={styles['icon']} color="var(--ax-bg-success-strong)" />
-                {vilkårOppfyltLabel?? intl.formatMessage({ id: 'VilkarResultPicker.ErOppfylt' })}
+                {vilkårOppfyltLabel ?? intl.formatMessage({ id: 'VilkarResultPicker.ErOppfylt' })}
               </>
             ) : (
               <>

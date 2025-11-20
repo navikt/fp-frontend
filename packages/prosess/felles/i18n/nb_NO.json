@@ -12,8 +12,8 @@
   "VilkårStatus.UnderBehandling": "Under behandling",
 
   "VilkarResultPicker.Arsak": "Avslagsårsak",
-  "VilkarResultPicker.ErOppfylt": "Vilkåret er oppfylt.",
-  "VilkarResultPicker.ErIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt.",
+  "VilkarResultPicker.ErOppfylt": "Vilkåret er oppfylt",
+  "VilkarResultPicker.ErIkkeOppfylt": "Vilkåret er <b>ikke</b> oppfylt",
 
   "ProsessStegBegrunnelseTextField.ExplanationRequired": "Vurdering",
   "ProsessStegBegrunnelseTextField.ExplanationRequiredReadOnly": "Begrunnelse",

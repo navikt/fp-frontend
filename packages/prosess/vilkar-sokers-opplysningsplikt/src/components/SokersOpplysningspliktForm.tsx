@@ -84,7 +84,6 @@ export const SokersOpplysningspliktForm = ({ søknad, arbeidsgiverOpplysningerPe
           legend={<FormattedMessage id="SokersOpplysningspliktForm.ErVilkåretOppfylt" />}
           isReadOnly={isReadOnly}
           skalKunneInnvilge={!!søknad}
-          vilkårOppfyltLabel={<FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />}
           vilkårIkkeOppfyltLabel={
             <FormattedMessage
               id="SokersOpplysningspliktForm.ErIkkeOppfylt"

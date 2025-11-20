@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './VilkarresultatMedOverstyringProsessIndex.stories';
 
-const { OverstyringspanelForFødsel, OverstyringspanelForMedlemskap, OverstyrtAksjonspunktSomErBekreftet } =
+const { OverstyringspanelForFødsel, OverstyringspanelForMedlemskap, OverstyringErUtførtForFødsel } =
   composeStories(stories);
 
 describe('VilkarresultatMedOverstyringProsessIndex', () => {
@@ -99,7 +99,7 @@ describe('VilkarresultatMedOverstyringProsessIndex', () => {
   });
 
   it('skal overstyre et vilkår på nytt etter at det allerede er overstyrt og bekreftet', async () => {
-    render(<OverstyrtAksjonspunktSomErBekreftet />);
+    render(<OverstyringErUtførtForFødsel />);
 
     expect(await screen.findByText('Fødsel')).toBeInTheDocument();
     expect(screen.getByText('Vilkåret er avslått')).toBeInTheDocument();
