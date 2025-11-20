@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
-import { PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { type Medlemskap, type UtlandsoppholdPeriode } from '@navikt/fp-types';
 
@@ -55,17 +55,16 @@ export const OpplysningerOmUtenlandsopphold = ({ medlemskap, skalViseAvvik }: Pr
       kilde="SØKNAD"
       relevanteAvvik={medlemskap.avvik.filter(a => relevantForUtenlandsopphold.includes(a))}
     >
-      <div>
-        <Label size="small">
-          <FormattedMessage id="OpplysningerOmUtenlandsopphold.BoddForegaaende12.Sporsmaal" />
-        </Label>
-        <BodyShort size="small">
+      <LabeledValue
+        size="small"
+        label={<FormattedMessage id="OpplysningerOmUtenlandsopphold.BoddForegaaende12.Sporsmaal" />}
+        value={
           <FormattedMessage
             id="OpplysningerOmUtenlandsopphold.BoddForegaaende12.Svar"
             values={{ iNorge: oppholdSistePeriode }}
           />
-        </BodyShort>
-      </div>
+        }
+      />
 
       {utlandsoppholdFør.length > 0 && (
         <UtenlandsoppholdListe
@@ -74,17 +73,16 @@ export const OpplysningerOmUtenlandsopphold = ({ medlemskap, skalViseAvvik }: Pr
         />
       )}
 
-      <div>
-        <Label size="small">
-          <FormattedMessage id="OpplysningerOmUtenlandsopphold.BoNeste12.Sporsmaal" />
-        </Label>
-        <BodyShort size="small">
+      <LabeledValue
+        size="small"
+        label={<FormattedMessage id="OpplysningerOmUtenlandsopphold.BoNeste12.Sporsmaal" />}
+        value={
           <FormattedMessage
             id="OpplysningerOmUtenlandsopphold.BoNeste12.Svar"
             values={{ iNorge: oppholdNestePeriode }}
           />
-        </BodyShort>
-      </div>
+        }
+      />
 
       {utlandsoppholdEtter.length > 0 && (
         <UtenlandsoppholdListe

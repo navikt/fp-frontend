@@ -24,7 +24,7 @@
     "@navikt/ds-css": "7.33.0",
     "@navikt/ds-react": "7.33.0",
     "@navikt/ft-plattform-komponenter": "10.1.15",
-    "@navikt/ft-ui-komponenter": "6.2.11",
+    "@navikt/ft-ui-komponenter": "6.3.0",
     "@navikt/ft-utils": "3.8.13",
     "classnames": "2.5.1",
     "react": "19.2.0",

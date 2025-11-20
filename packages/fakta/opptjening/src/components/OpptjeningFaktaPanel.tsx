@@ -2,8 +2,7 @@ import { type ReactElement, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { ReadOnlyField } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML, DateLabel } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { addDaysToDate, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -192,7 +191,7 @@ export const OpptjeningFaktaPanel = ({
           {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}
         </AksjonspunktHelpTextHTML>
       )}
-      <ReadOnlyField
+      <LabeledValue
         size="small"
         label={<FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" />}
         value={<DateLabel dateString={findSkjaringstidspunkt(fastsattOpptjening?.opptjeningTom)} />}

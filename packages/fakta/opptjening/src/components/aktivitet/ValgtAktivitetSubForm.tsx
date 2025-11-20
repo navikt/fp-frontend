@@ -1,8 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label } from '@navikt/ds-react';
-import { ReadOnlyField } from '@navikt/ft-form-hooks';
-import { BeløpLabel, DateLabel } from '@navikt/ft-ui-komponenter';
+import { BeløpLabel, DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import type { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring, OpptjeningAktivitetType } from '@navikt/fp-types';
@@ -66,13 +65,13 @@ export const ValgtAktivitetSubForm = ({
   <>
     {erAvType(valgtAktivitetstype, 'ARBEID', 'NÆRING', ...YTELSE_TYPER) && (
       <HStack gap="space-16">
-        <ReadOnlyField
+        <LabeledValue
           size="small"
           label={<FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />}
           value={finnArbeidsgivertekst(arbeidsgiverOpplysningerPerId, arbeidsgiverReferanse)}
         />
         {erAvType(valgtAktivitetstype, 'ARBEID') && (
-          <ReadOnlyField
+          <LabeledValue
             size="small"
             label={<FormattedMessage id="ActivityPanel.Stillingsandel" />}
             value={stillingsandel}
@@ -82,7 +81,7 @@ export const ValgtAktivitetSubForm = ({
     )}
     {erAvType(valgtAktivitetstype, 'NÆRING') && (
       <>
-        <ReadOnlyField
+        <LabeledValue
           size="small"
           label={<FormattedMessage id="ActivityPanel.Registreringsdato" />}
           value={naringRegistreringsdato ? <DateLabel dateString={naringRegistreringsdato} /> : '-'}

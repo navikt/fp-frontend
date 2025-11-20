@@ -27,6 +27,7 @@ const meta = {
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VARSEL_REVURDERING_MANUELL)],
     previewCallback: action('button-click'),
+    isReadOnly: false,
   },
   render: args => <VarselOmRevurderingProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof VarselOmRevurderingProsessIndex>>;
@@ -46,5 +47,15 @@ export const ForRevurdering: Story = {
       ...defaultBehandling,
       type: 'BT-004',
     },
+  },
+};
+
+export const Readonly: Story = {
+  args: {
+    behandling: defaultBehandling,
+    isReadOnly: true,
+    aksjonspunkterForPanel: [
+      lagAksjonspunkt(AksjonspunktKode.VARSEL_REVURDERING_MANUELL, { begrunnelse: 'Test begrunnelse' }),
+    ],
   },
 };

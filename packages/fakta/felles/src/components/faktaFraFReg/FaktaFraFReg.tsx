@@ -1,8 +1,7 @@
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { BodyShort, HStack, VStack } from '@navikt/ds-react';
-import { ReadOnlyField } from '@navikt/ft-form-hooks';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { BarnHendelseData } from '@navikt/fp-types';
@@ -44,17 +43,19 @@ const BarnVisning = ({ barna }: { barna: BarnHendelseData[] }) => {
   if (erBarnLike) {
     return (
       <VStack gap="space-16">
-        <ReadOnlyField
+        <LabeledValue
+          size="medium"
           label={<FormattedMessage id="Label.Fødselsdato" />}
           value={<DateLabel dateString={barnet.fødselsdato} />}
         />
         {barnet.dødsdato && (
-          <ReadOnlyField
+          <LabeledValue
+            size="medium"
             label={<FormattedMessage id="Label.Dødsdato" />}
             value={<DateLabel dateString={barnet.dødsdato} />}
           />
         )}
-        <ReadOnlyField label={<FormattedMessage id="Label.AntallBarn" />} value={barna.length} />
+        <LabeledValue size="medium" label={<FormattedMessage id="Label.AntallBarn" />} value={barna.length} />
       </VStack>
     );
   }
@@ -64,24 +65,17 @@ const BarnVisning = ({ barna }: { barna: BarnHendelseData[] }) => {
     <>
       {barna.map(({ fødselsdato, dødsdato }, index) => (
         <HStack key={fødselsdato + dødsdato} gap="space-24" wrap={false} className={styles['grid']}>
-          <ReadOnlyField
+          <LabeledValue size="medium" label={index > 0 ? '' : <FormattedMessage id="Label.Barn" />} value={index + 1} />
+          <LabeledValue
             size="medium"
-            label={<FormattedMessage id="Label.Barn" />}
-            value={index + 1}
-            hideLabel={index > 0}
-          />
-          <ReadOnlyField
-            size="medium"
-            label={<FormattedMessage id="Label.Fødselsdato" />}
+            label={index > 0 ? '' : <FormattedMessage id="Label.Fødselsdato" />}
             value={<DateLabel dateString={fødselsdato} />}
-            hideLabel={index > 0}
           />
           {harDødtBarn && (
-            <ReadOnlyField
+            <LabeledValue
               size="medium"
               value={dødsdato ? <DateLabel dateString={dødsdato} /> : '-'}
-              label={<FormattedMessage id="Label.Dødsdato" />}
-              hideLabel={index > 0}
+              label={index > 0 ? '' : <FormattedMessage id="Label.Dødsdato" />}
             />
           )}
         </HStack>

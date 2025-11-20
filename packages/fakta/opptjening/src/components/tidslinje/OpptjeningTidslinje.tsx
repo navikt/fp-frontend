@@ -13,8 +13,7 @@ import {
   XMarkOctagonIcon,
 } from '@navikt/aksel-icons';
 import { Timeline } from '@navikt/ds-react';
-import { ReadOnlyField } from '@navikt/ft-form-hooks';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import type { KodeverkMedNavn, Opptjening, OpptjeningAktivitet, OpptjeningAktivitetType } from '@navikt/fp-types';
@@ -162,14 +161,14 @@ export const OpptjeningTidslinje = ({
       endDate={dayjs(opptjeningTomDato).add(10, 'days').toDate()}
     >
       <Timeline.Pin date={dayjs(opptjeningFomDato).toDate()}>
-        <ReadOnlyField
+        <LabeledValue
           size="small"
           label={<FormattedMessage id="OpptjeningTidslinje.StartDato" />}
           value={<DateLabel dateString={opptjeningFomDato} />}
         />
       </Timeline.Pin>
       <Timeline.Pin date={dayjs(opptjeningTomDato).toDate()}>
-        <ReadOnlyField
+        <LabeledValue
           size="small"
           label={<FormattedMessage id="OpptjeningTidslinje.SluttDato" />}
           value={<DateLabel dateString={opptjeningTomDato} />}

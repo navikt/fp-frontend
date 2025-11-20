@@ -1,7 +1,7 @@
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { ReadOnlyField } from '@navikt/ft-form-hooks';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
@@ -22,11 +22,11 @@ export const LegacyAksjonspunktVisning = () => {
     >
       <VStack gap="space-16">
         {filteredAksjonspunkter.map(ap => (
-          <ReadOnlyField
+          <LabeledValue
             key={ap.definisjon}
-            type="textarea"
-            label={intl.formatMessage({ id: `LegacyAksjonspunktVisning.Aksjonspunkt.${ap.definisjon}` })}
-            value={ap.begrunnelse}
+            size="medium"
+            label={<FormattedMessage id={`LegacyAksjonspunktVisning.Aksjonspunkt.${ap.definisjon}`} />}
+            value={ap.begrunnelse ?? ''}
           />
         ))}
       </VStack>

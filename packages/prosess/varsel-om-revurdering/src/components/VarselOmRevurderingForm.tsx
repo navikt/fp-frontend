@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, HStack, Link, Radio, VStack } from '@navikt/ds-react';
-import { ReadOnlyField, RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML, ArrowBox, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -164,11 +164,10 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
             </>
           )}
           {(isReadOnly || aksjonspunkterForPanel[0]?.status !== 'OPPR') && (
-            <ReadOnlyField
+            <LabeledValue
               size="small"
               label={<FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" />}
-              value={formVerdier.begrunnelse}
-              type="textarea"
+              value={formVerdier.begrunnelse ?? ''}
             />
           )}
         </VStack>

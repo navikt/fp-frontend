@@ -1,8 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, VStack } from '@navikt/ds-react';
-import { ReadOnlyField } from '@navikt/ft-form-hooks';
-import { PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { FastsattOpptjening } from '@navikt/fp-types';
 
@@ -26,7 +25,7 @@ export const OpptjeningVilkarView = ({
   },
 }: Props) => (
   <VStack gap="space-16">
-    <ReadOnlyField
+    <LabeledValue
       size="small"
       label={<FormattedMessage id="OpptjeningVilkarView.MonthsAndDaysLabel" />}
       value={<FormattedMessage id="OpptjeningVilkarView.MonthsAndDays" values={{ months: måneder, days: dager }} />}
@@ -36,7 +35,7 @@ export const OpptjeningVilkarView = ({
         <FormattedMessage id="OpptjeningVilkarView.IngenAktiviteter" />
       </BodyShort>
     )}
-    <ReadOnlyField
+    <LabeledValue
       size="small"
       label={<FormattedMessage id="OpptjeningVilkarView.Opptjeningsperiode" />}
       value={<PeriodLabel dateStringFom={opptjeningFom} dateStringTom={opptjeningTom} />}
