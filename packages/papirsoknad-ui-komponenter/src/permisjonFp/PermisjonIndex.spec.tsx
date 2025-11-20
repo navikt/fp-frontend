@@ -66,7 +66,7 @@ describe('PermisjonIndex', () => {
         skalUtsette: false,
         graderingPeriode: undefined,
         oppholdPerioder: undefined,
-        overforingsperioder: undefined,
+        overføringsperioder: undefined,
         utsettelsePeriode: undefined,
       },
     });
@@ -100,7 +100,7 @@ describe('PermisjonIndex', () => {
     expect(lagre).toHaveBeenCalledWith({
       tidsromPermisjon: {
         fulltUttak: false,
-        overforingsperioder: [
+        overføringsperioder: [
           {
             overforingArsak: 'SYKDOM_ANNEN_FORELDER',
             periodeFom: '2022-05-20',
@@ -170,7 +170,7 @@ describe('PermisjonIndex', () => {
         ],
         graderingPeriode: undefined,
         oppholdPerioder: undefined,
-        overforingsperioder: undefined,
+        overføringsperioder: undefined,
         permisjonsPerioder: undefined,
         skalGradere: false,
         skalHaOpphold: false,
@@ -245,7 +245,7 @@ describe('PermisjonIndex', () => {
           },
         ],
         oppholdPerioder: undefined,
-        overforingsperioder: undefined,
+        overføringsperioder: undefined,
         permisjonsPerioder: undefined,
         skalGradere: true,
         skalHaOpphold: false,
@@ -329,7 +329,7 @@ describe('PermisjonIndex', () => {
           },
         ],
         utsettelsePeriode: undefined,
-        overforingsperioder: undefined,
+        overføringsperioder: undefined,
         graderingPeriode: undefined,
       },
     });
