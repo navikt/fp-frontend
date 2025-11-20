@@ -88,6 +88,7 @@ jobs:
         run: yarn ci --filter=@navikt/${{ inputs.app }}
         env:
           VITE_SENTRY_RELEASE: ${{ steps.sentry_release_key.outputs.SENTRY_RELEASE }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       - name: Bygg server
         run: cd ./server && yarn install --immutable && yarn build
