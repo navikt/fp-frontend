@@ -68,6 +68,13 @@ export const BehandlingMenuIndex = ({
 
   return (
     <>
+      <button
+        onClick={() => {
+          console.error('feil i behandleingsmeny');
+        }}
+      >
+        Trigg Error
+      </button>
       <Dropdown>
         <Button
           size="small"
