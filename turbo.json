@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalPassThroughEnv": ["VITE_SENTRY_RELEASE"],
+  "globalPassThroughEnv": ["VITE_SENTRY_RELEASE", "VITE_SENTRY_AUTH_TOKEN "],
   "globalDependencies": [
     "turbo.json",
     "yarn.lock",
