@@ -16,7 +16,7 @@ const app = document.getElementById('root');
 if (app === null) {
   throw new Error('No app element');
 }
-initSentry();
+initSentry('fp-journalforing');
 
 const root = createRoot(app);
 

@@ -29,7 +29,6 @@
     "remove-node-modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
     "build:storybook": "turbo run build-storybook && yarn storybook-create-deploy-folder",
     "storybook-create-deploy-folder": "node scripts/create-storybook-index.cjs",
-    "sentry-release": "node ./scripts/sentry-release.cjs",
     "prepare": "husky install",
     "update-swagger": "node scripts/hent-openapi-spec.js",
     "generate:local": "yarn update-swagger lokal && openapi-ts",
@@ -42,7 +41,6 @@
   "devDependencies": {
     "@hey-api/openapi-ts": "0.86.11",
     "@navikt/aksel-stylelint": "7.33.0",
-    "@sentry/cli": "2.57.0",
     "@storybook/addon-a11y": "10.0.2",
     "@storybook/addon-links": "10.0.2",
     "@storybook/react": "10.0.2",
