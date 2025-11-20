@@ -1,8 +1,7 @@
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Box, HStack, VStack } from '@navikt/ds-react';
-import { ReadOnlyField } from '@navikt/ft-form-hooks';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -14,7 +13,6 @@ interface Props {
 }
 
 export const SøknadsfristDetaljer = ({ søknad, gjeldendeFamiliehendelse }: Props) => {
-  const intl = useIntl();
   const dato = findDate(gjeldendeFamiliehendelse);
   const textCode = findTextCode(gjeldendeFamiliehendelse);
 
@@ -22,18 +20,21 @@ export const SøknadsfristDetaljer = ({ søknad, gjeldendeFamiliehendelse }: Pro
     <Box.New background="info-soft" padding="space-16">
       <VStack gap="space-16">
         <HStack gap="space-24">
-          <ReadOnlyField
-            label={intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Søknadsfrist' })}
+          <LabeledValue
+            label={<FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Søknadsfrist" />}
             value={findSoknadsfristDate(søknad.mottattDato, søknad.søknadsfrist.dagerOversittetFrist)}
           />
-          <ReadOnlyField
-            label={intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}
+          <LabeledValue
+            label={<FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.MottattDato" />}
             value={<DateLabel dateString={søknad.mottattDato} />}
           />
-          <ReadOnlyField label={intl.formatMessage({ id: textCode })} value={dato && <DateLabel dateString={dato} />} />
+          <LabeledValue
+            label={<FormattedMessage id={textCode} />}
+            value={dato ? <DateLabel dateString={dato} /> : '-'}
+          />
         </HStack>
-        <ReadOnlyField
-          label={intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}
+        <LabeledValue
+          label={<FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication" />}
           value={søknad.begrunnelseForSenInnsending ?? '-'}
         />
       </VStack>

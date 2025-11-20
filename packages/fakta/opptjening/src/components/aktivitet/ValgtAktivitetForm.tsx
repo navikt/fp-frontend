@@ -4,9 +4,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { Button, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
-import { ReadOnlyField, RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { FaktaGruppe, PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { FaktaGruppe, LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { BTag, findDifferenceInMonthsAndDays } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -162,7 +162,7 @@ export const ValgtAktivitetForm = ({
               </HStack>
             </HStack>
             <HStack gap="space-32">
-              <ReadOnlyField
+              <LabeledValue
                 size="small"
                 label={<FormattedMessage id="ActivityPanel.Period" />}
                 value={
@@ -171,13 +171,15 @@ export const ValgtAktivitetForm = ({
                       <PeriodLabel dateStringFom={opptjeningFom} dateStringTom={opptjeningTom} />{' '}
                       {finnMånederOgDager(opptjeningFom, opptjeningTom)}
                     </>
-                  ) : undefined
+                  ) : (
+                    '-'
+                  )
                 }
               />
-              <ReadOnlyField
+              <LabeledValue
                 size="small"
                 label={<FormattedMessage id="ActivityPanel.Activity" />}
-                value={opptjeningAktivitetTyper.find(oat => oat.kode === aktivitetType)?.navn}
+                value={opptjeningAktivitetTyper.find(oat => oat.kode === aktivitetType)?.navn ?? ''}
               />
             </HStack>
           </VStack>

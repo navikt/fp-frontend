@@ -9,13 +9,8 @@ import {
 } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Detail, ErrorMessage, HelpText, HStack, Table, VStack } from '@navikt/ds-react';
-import {
-  ReadOnlyField,
-  RhfDatepicker,
-  RhfFieldArrayAppendButton,
-  RhfFieldArrayRemoveButton,
-} from '@navikt/ft-form-hooks';
+import { BodyShort, Detail, ErrorMessage, HelpText, HStack, Table, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfFieldArrayAppendButton, RhfFieldArrayRemoveButton } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -104,12 +99,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
               <Table.Row shadeOnHover={false} key={field.id}>
                 {fields.length > 1 && (
                   <Table.DataCell>
-                    <ReadOnlyField
-                      size="medium"
-                      label={<FormattedMessage id="Label.Barn" />}
-                      value={index + 1}
-                      hideLabel
-                    />
+                    <BodyShort size="medium">{index + 1}</BodyShort>
                   </Table.DataCell>
                 )}
                 <Table.DataCell>

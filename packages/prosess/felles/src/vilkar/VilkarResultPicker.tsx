@@ -2,9 +2,10 @@ import { type ReactElement, type ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import { BodyShort, Radio, VStack } from '@navikt/ds-react';
-import { ReadOnlyField, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { Radio, VStack } from '@navikt/ds-react';
+import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { Aksjonspunkt, AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
@@ -52,23 +53,19 @@ export const VilkarResultPicker = ({
   return (
     <VStack gap="space-16">
       {isReadOnly && erVilkårOk !== undefined && (
-        <ReadOnlyField
+        <LabeledValue
           label={legend}
           size="small"
           value={
             erVilkårOk ? (
               <>
                 <CheckmarkIcon className={styles['godkjentImage']} />
-                <BodyShort as="span" size="small">
-                  {vilkårOppfyltLabel}
-                </BodyShort>
+                {vilkårOppfyltLabel}
               </>
             ) : (
               <>
                 <XMarkOctagonIcon className={styles['avslattImage']} />
-                <BodyShort as="span" size="small">
-                  {vilkårIkkeOppfyltLabel}
-                </BodyShort>
+                {vilkårIkkeOppfyltLabel}
               </>
             )
           }
