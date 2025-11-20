@@ -80,7 +80,6 @@ const FAGSAK = {
       },
       risikoAksjonspunkt: lagAksjonspunkt(AksjonspunktKode.VURDER_FARESIGNALER, {
         kanLoses: false,
-        erAktivt: false,
       }),
 
       opprettet: '',

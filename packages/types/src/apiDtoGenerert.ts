@@ -367,17 +367,6 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | 'SAOV'
   | '-';
 
-export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak =
-  | 'FEIL_FAKTA'
-  | 'FEIL_LOV'
-  | 'SKJØNN'
-  | 'UTREDNING'
-  | 'SAKSFLYT'
-  | 'BEGRUNNELSE'
-  | '-'
-  | 'ANNET'
-  | 'FEIL_REGEL';
-
 export type foreldrepenger_behandlingslager_behandling_vedtak_Vedtaksbrev = 'AUTOMATISK' | 'FRITEKST' | 'INGEN' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak =
@@ -472,19 +461,15 @@ export type rest_ResourceLink_HttpMethod = 'DELETE' | 'GET' | 'PATCH' | 'POST' |
 export type tjenester_behandling_aksjonspunkt_AksjonspunktDto = {
   aksjonspunktType: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktType;
   begrunnelse?: string;
-  besluttersBegrunnelse?: string;
   definisjon: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon;
-  erAktivt: boolean;
   kanLoses: boolean;
   status: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktStatus;
   toTrinnsBehandling: boolean;
   toTrinnsBehandlingGodkjent?: boolean;
   vilkarType?: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType;
-  vurderPaNyttArsaker?: Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>;
 };
 
 export type tjenester_behandling_dto_AsyncPollingStatus = {
-  cancelUri?: string;
   eta?: string;
   location?: string;
   message: string;
@@ -756,6 +741,17 @@ export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto = (
 ) & {
   begrunnelse?: string;
 };
+
+export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak =
+  | 'FEIL_FAKTA'
+  | 'FEIL_LOV'
+  | 'SKJØNN'
+  | 'UTREDNING'
+  | 'SAKSFLYT'
+  | 'BEGRUNNELSE'
+  | '-'
+  | 'ANNET'
+  | 'FEIL_REGEL';
 
 export type foreldrepenger_behandlingslager_behandling_aktivitetskrav_AktivitetskravPermisjonType =
   | '-'
