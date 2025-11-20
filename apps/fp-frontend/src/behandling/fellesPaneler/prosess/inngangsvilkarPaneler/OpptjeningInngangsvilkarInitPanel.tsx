@@ -47,7 +47,10 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
     >
       <>
         {opptjening && (
-          <OpptjeningVilkarProsessIndex fastsattOpptjening={opptjening.fastsattOpptjening} status={standardPanelProps.status} />
+          <OpptjeningVilkarProsessIndex
+            fastsattOpptjening={opptjening.fastsattOpptjening}
+            status={standardPanelProps.status}
+          />
         )}
       </>
     </InngangsvilkarDefaultInitPanel>

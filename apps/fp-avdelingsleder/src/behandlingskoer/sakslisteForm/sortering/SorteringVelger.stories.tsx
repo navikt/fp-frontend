@@ -65,9 +65,11 @@ export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-002', 'BT-006'],
     erDynamiskPeriode: false,
-    muligeSorteringer: [{sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL'},
-      {sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL'},
-      {sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL'}],
+    muligeSorteringer: [
+      { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
+      { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
+      { sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
+    ],
   },
 };
 
@@ -75,8 +77,10 @@ export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-002', 'BT-006'],
     erDynamiskPeriode: true,
-    muligeSorteringer: [{sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL'},
-      {sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL'}],
+    muligeSorteringer: [
+      { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
+      { sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
+    ],
   },
 };
 
@@ -84,10 +88,12 @@ export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-007'],
     erDynamiskPeriode: false,
-    muligeSorteringer: [{sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL'},
-      {sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL'},
-      {sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL'},
-      {sorteringType: 'BELOP', feltType: 'HELTALL', feltKategori: 'TILBAKEKREVING'},
-      {sorteringType: 'FEILUTBETALINGSTART', feltType: 'DATO', feltKategori: 'TILBAKEKREVING'}],
+    muligeSorteringer: [
+      { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
+      { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
+      { sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
+      { sorteringType: 'BELOP', feltType: 'HELTALL', feltKategori: 'TILBAKEKREVING' },
+      { sorteringType: 'FEILUTBETALINGSTART', feltType: 'DATO', feltKategori: 'TILBAKEKREVING' },
+    ],
   },
 };

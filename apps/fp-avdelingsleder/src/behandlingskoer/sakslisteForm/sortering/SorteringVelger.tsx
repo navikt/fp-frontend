@@ -87,7 +87,7 @@ export const SorteringVelger = ({
           .map(koSortering => (
             <VStack key={koSortering.sorteringType} gap="space-2">
               <Radio value={koSortering.sorteringType} size="small">
-                {notEmpty(sorteringKoder.find(k => k.kode === koSortering.sorteringType)?.navn, "Mangler kodeverk")}
+                {notEmpty(sorteringKoder.find(k => k.kode === koSortering.sorteringType)?.navn, 'Mangler kodeverk')}
               </Radio>
               {sortering === koSortering.sorteringType && (
                 <>
