@@ -14,10 +14,7 @@ import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInit
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST,
-  AksjonspunktKode.UTGÅTT_5017,
-];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, AksjonspunktKode.UTGÅTT_5017];
 
 const VILKAR_KODER = ['FP_VK_34'] satisfies VilkårType[];
 

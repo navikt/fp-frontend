@@ -1,15 +1,15 @@
 .aksjonspunktMargin {
-    margin-left: -20px;
+  margin-left: -20px;
 }
 
 .godkjentImage {
-    color: var(--ax-bg-success-strong);
-    height: 25px;
-    width: 25px;
+  color: var(--ax-bg-success-strong);
+  height: 25px;
+  width: 25px;
 }
 
 .avslattImage {
-    color: var(--ax-danger-500);
-    height: 25px;
-    width: 25px;
+  color: var(--ax-danger-500);
+  height: 25px;
+  width: 25px;
 }

@@ -8,7 +8,7 @@ type AnnetKriterie = Readonly<{
 export type KøSorteringFelt = Readonly<{
   sorteringType: KøSortering;
   feltType: string;
-  feltKategori: string
+  feltKategori: string;
 }>;
 
 export type SakslisteAvdeling = Readonly<{

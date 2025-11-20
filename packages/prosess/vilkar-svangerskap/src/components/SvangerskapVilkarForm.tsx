@@ -121,9 +121,7 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
             legend={<FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" />}
             skalKunneInnvilge={finnesUttak}
             vilkårOppfyltLabel={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
-            vilkårIkkeOppfyltLabel={
-              <FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: BTag }} />
-            }
+            vilkårIkkeOppfyltLabel={<FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
           />
           {!finnesUttak && (
             <Detail>
