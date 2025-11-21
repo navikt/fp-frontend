@@ -12,7 +12,7 @@ const { Default } = composeStories(stories);
 describe('TerminFodselSvpPanel', () => {
   it('skal velge termindato og fødselsdato', async () => {
     const lagre = vi.fn();
-    const foedselsDato = dayjs().subtract(1, 'day');
+    const fødselsdato = dayjs().subtract(1, 'day');
     const termindato = dayjs().subtract(1, 'week');
 
     await Default.run({ parameters: { submitCallback: lagre } });
@@ -22,7 +22,7 @@ describe('TerminFodselSvpPanel', () => {
     await userEvent.click(screen.getByText('Ja'));
 
     const fødselsdatoFelt = screen.getByLabelText('Fødselsdato');
-    await userEvent.type(fødselsdatoFelt, foedselsDato.format(DDMMYYYY_DATE_FORMAT));
+    await userEvent.type(fødselsdatoFelt, fødselsdato.format(DDMMYYYY_DATE_FORMAT));
 
     const termindatoFelt = screen.getByLabelText('Termindato');
     await userEvent.type(termindatoFelt, termindato.format(DDMMYYYY_DATE_FORMAT));
@@ -32,8 +32,8 @@ describe('TerminFodselSvpPanel', () => {
 
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
-      erBarnetFodt: true,
-      foedselsDato: foedselsDato.format(ISO_DATE_FORMAT),
+      erBarnetFødt: true,
+      fødselsdato: fødselsdato.format(ISO_DATE_FORMAT),
       termindato: termindato.format(ISO_DATE_FORMAT),
     });
   });
@@ -53,7 +53,7 @@ describe('TerminFodselSvpPanel', () => {
   it('skal validere termindato i forhold til fødselsdato', async () => {
     const lagre = vi.fn();
 
-    const foedselsDato = dayjs().subtract(6, 'months').format(ISO_DATE_FORMAT);
+    const fødselsdato = dayjs().subtract(6, 'months').format(ISO_DATE_FORMAT);
     const ugyldigTermindato = dayjs().format(ISO_DATE_FORMAT);
 
     await Default.run({ parameters: { submitCallback: lagre } });
@@ -61,7 +61,7 @@ describe('TerminFodselSvpPanel', () => {
     await userEvent.click(screen.getByText('Ja'));
 
     const fødselsdatoFelt = screen.getByLabelText('Fødselsdato');
-    await userEvent.type(fødselsdatoFelt, foedselsDato);
+    await userEvent.type(fødselsdatoFelt, fødselsdato);
     fødselsdatoFelt.blur();
 
     const termindatoFelt = screen.getByLabelText('Termindato');

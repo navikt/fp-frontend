@@ -52,12 +52,12 @@ describe('AnnenForelderPapirsoknadIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledOnce());
     expect(lagre).toHaveBeenCalledWith({
       annenForelder: {
-        foedselsnummer: '30013726678',
+        fødselsnummer: '30013726678',
         kanIkkeOppgiAnnenForelder: false,
-        sokerHarAleneomsorg: true,
+        søkerHarAleneomsorg: true,
         annenForelderRettEØS: undefined,
         morMottarUføretrygd: undefined,
-        denAndreForelderenHarRettPaForeldrepenger: undefined,
+        denAndreForelderenHarRettPåForeldrepenger: undefined,
       },
     });
   });
@@ -87,14 +87,14 @@ describe('AnnenForelderPapirsoknadIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledOnce());
     expect(lagre).toHaveBeenCalledWith({
       annenForelder: {
-        foedselsnummer: undefined,
+        fødselsnummer: undefined,
         kanIkkeOppgiAnnenForelder: true,
         kanIkkeOppgiBegrunnelse: {
-          arsak: 'IKKE_NORSK_FNR',
+          årsak: 'IKKE_NORSK_FNR',
           land: 'AND',
-          utenlandskFoedselsnummer: '032323',
+          utenlandskFødselsnummer: '032323',
         },
-        sokerHarAleneomsorg: true,
+        søkerHarAleneomsorg: true,
       },
     });
   });

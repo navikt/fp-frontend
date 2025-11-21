@@ -13,7 +13,6 @@ describe('getAlleMerknaderFraBeslutter', () => {
       toTrinnsBehandlingGodkjent: false,
       vilkarType: 'FP_VK_1',
       aksjonspunktType: 'MANU',
-      erAktivt: true,
     },
   ];
 

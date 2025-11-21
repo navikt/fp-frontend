@@ -45,12 +45,12 @@ export default meta;
 
 export const SokerErMor: StoryObj<typeof meta> = {
   args: {
-    sokerErMor: true,
+    søkerErMor: true,
   },
 };
 
 export const SokerErFar: StoryObj<typeof meta> = {
   args: {
-    sokerErMor: false,
+    søkerErMor: false,
   },
 };

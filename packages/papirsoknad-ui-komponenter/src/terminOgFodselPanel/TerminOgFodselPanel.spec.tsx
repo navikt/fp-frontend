@@ -50,8 +50,8 @@ describe('TerminOgFodselPanel', () => {
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
       antallBarn: 2,
-      erBarnetFodt: true,
-      foedselsDato: dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT),
+      erBarnetFødt: true,
+      fødselsdato: dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT),
       termindato: dayjs().subtract(15, 'day').format(ISO_DATE_FORMAT),
     });
   });
@@ -85,8 +85,8 @@ describe('TerminOgFodselPanel', () => {
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
       antallBarn: 1,
-      erBarnetFodt: true,
-      foedselsDato: '2022-09-14',
+      erBarnetFødt: true,
+      fødselsdato: '2022-09-14',
       termindato: '2022-09-13',
     });
   });
@@ -134,7 +134,7 @@ describe('TerminOgFodselPanel', () => {
     expect(lagre).toHaveBeenCalledOnce();
     expect(lagre).toHaveBeenCalledWith({
       antallBarnFraTerminbekreftelse: 2,
-      erBarnetFodt: false,
+      erBarnetFødt: false,
       terminbekreftelseDato: '2022-05-27',
       termindato: '2022-09-13',
     });

@@ -12,10 +12,10 @@ import {
 } from '@navikt/ft-form-validators';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
-import { OVERFORING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { OVERFØRING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { OverforingPeriode, PermisjonFormValues } from '../../types';
 
-const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`;
+const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFØRING_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 
 const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {

@@ -46,7 +46,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
   } = useFormContext<AnnenForelderFormValues>();
 
   const kanIkkeOppgiAnnenForelder = watch(`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`);
-  const kanIkkeOppgiBegrunnelse = watch(`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}`);
+  const årsak = watch(`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.årsak`);
 
   const landkoder = alleKodeverk['Landkoder'];
   const sorterteLand = landkoder.slice().sort((a, b) => a.navn.localeCompare(b.navn));
@@ -54,7 +54,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
   return (
     <>
       <RhfTextField
-        name={`${ANNEN_FORELDER_NAME_PREFIX}.foedselsnummer`}
+        name={`${ANNEN_FORELDER_NAME_PREFIX}.fødselsnummer`}
         control={control}
         label={formatMessage({ id: 'Registrering.TheOtherParent.Fodselsnummer' })}
         parse={value => (value ? value.toString().replace(/\s/g, '') : value)}
@@ -87,7 +87,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
                 {formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title' })}
               </Heading>
               <RhfRadioGroup
-                name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.arsak`}
+                name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.årsak`}
                 control={control}
                 legend=""
                 hideLegend
@@ -101,7 +101,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
                   <FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2" />
                 </Radio>
               </RhfRadioGroup>
-              {kanIkkeOppgiBegrunnelse?.arsak === 'IKKE_NORSK_FNR' && (
+              {årsak === 'IKKE_NORSK_FNR' && (
                 <>
                   <RhfSelect
                     name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
@@ -114,7 +114,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
                   />
 
                   <RhfTextField
-                    name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFoedselsnummer`}
+                    name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFødselsnummer`}
                     control={control}
                     label={formatMessage({
                       id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer',
@@ -134,21 +134,21 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
 };
 
 OppgiAnnenForelderPanel.transformValues = ({
-  foedselsnummer,
+  fødselsnummer,
   kanIkkeOppgiAnnenForelder,
-  kanIkkeOppgiBegrunnelse: { arsak, land, utenlandskFoedselsnummer } = {},
+  kanIkkeOppgiBegrunnelse: { årsak, land, utenlandskFødselsnummer } = {},
 }: AnnenForelderSubFormValues): AnnenForelderSubFormValues => {
   if (kanIkkeOppgiAnnenForelder) {
-    const erUkjentFar = arsak === 'IKKE_NORSK_FNR';
+    const erUkjentFar = årsak === 'IKKE_NORSK_FNR';
     return {
-      foedselsnummer: undefined,
+      fødselsnummer: undefined,
       kanIkkeOppgiAnnenForelder: true,
-      kanIkkeOppgiBegrunnelse: erUkjentFar ? { arsak, land, utenlandskFoedselsnummer } : { arsak },
+      kanIkkeOppgiBegrunnelse: erUkjentFar ? { årsak, land, utenlandskFødselsnummer } : { årsak: årsak },
     };
   }
 
   return {
-    foedselsnummer,
+    fødselsnummer,
     kanIkkeOppgiAnnenForelder: false,
     kanIkkeOppgiBegrunnelse: undefined,
   };

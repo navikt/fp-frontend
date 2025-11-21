@@ -11,7 +11,7 @@ import { notEmpty } from '@navikt/fp-utils';
 import {
   GRADERING_PERIODE_FIELD_ARRAY_NAME,
   OPPHOLD_PERIODE_FIELD_ARRAY_NAME,
-  OVERFORING_PERIODE_FIELD_ARRAY_NAME,
+  OVERFØRING_PERIODE_FIELD_ARRAY_NAME,
   PERMISJON_PERIODE_FIELD_ARRAY_NAME,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,
@@ -105,7 +105,7 @@ PermisjonPanel.transformValues = (values: PermisjonFormValues) => {
     newValues[UTSETTELSE_PERIODE_FIELD_ARRAY_NAME] = undefined;
   }
   if (!values.tidsromPermisjon?.skalOvertaKvote) {
-    newValues[OVERFORING_PERIODE_FIELD_ARRAY_NAME] = undefined;
+    newValues[OVERFØRING_PERIODE_FIELD_ARRAY_NAME] = undefined;
   }
   if (!values.tidsromPermisjon?.skalHaOpphold) {
     newValues[OPPHOLD_PERIODE_FIELD_ARRAY_NAME] = undefined;

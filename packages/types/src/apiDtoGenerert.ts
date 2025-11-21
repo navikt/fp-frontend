@@ -367,17 +367,6 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | 'SAOV'
   | '-';
 
-export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak =
-  | 'FEIL_FAKTA'
-  | 'FEIL_LOV'
-  | 'SKJØNN'
-  | 'UTREDNING'
-  | 'SAKSFLYT'
-  | 'BEGRUNNELSE'
-  | '-'
-  | 'ANNET'
-  | 'FEIL_REGEL';
-
 export type foreldrepenger_behandlingslager_behandling_vedtak_Vedtaksbrev = 'AUTOMATISK' | 'FRITEKST' | 'INGEN' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak =
@@ -472,19 +461,15 @@ export type rest_ResourceLink_HttpMethod = 'DELETE' | 'GET' | 'PATCH' | 'POST' |
 export type tjenester_behandling_aksjonspunkt_AksjonspunktDto = {
   aksjonspunktType: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktType;
   begrunnelse?: string;
-  besluttersBegrunnelse?: string;
   definisjon: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon;
-  erAktivt: boolean;
   kanLoses: boolean;
   status: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktStatus;
   toTrinnsBehandling: boolean;
   toTrinnsBehandlingGodkjent?: boolean;
   vilkarType?: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType;
-  vurderPaNyttArsaker?: Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>;
 };
 
 export type tjenester_behandling_dto_AsyncPollingStatus = {
-  cancelUri?: string;
   eta?: string;
   location?: string;
   message: string;
@@ -756,6 +741,17 @@ export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto = (
 ) & {
   begrunnelse?: string;
 };
+
+export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak =
+  | 'FEIL_FAKTA'
+  | 'FEIL_LOV'
+  | 'SKJØNN'
+  | 'UTREDNING'
+  | 'SAKSFLYT'
+  | 'BEGRUNNELSE'
+  | '-'
+  | 'ANNET'
+  | 'FEIL_REGEL';
 
 export type foreldrepenger_behandlingslager_behandling_aktivitetskrav_AktivitetskravPermisjonType =
   | '-'
@@ -1924,19 +1920,18 @@ export type tjenester_kodeverk_dto_NaringsvirksomhetTypeDto = {
 
 export type tjenester_registrering_dto_AnnenForelderDto = {
   annenForelderRettEØS?: boolean;
-  denAndreForelderenHarRettPaForeldrepenger?: boolean;
-  foedselsnummer?: string;
+  denAndreForelderenHarRettPåForeldrepenger?: boolean;
+  fødselsnummer?: string;
   kanIkkeOppgiAnnenForelder?: boolean;
   kanIkkeOppgiBegrunnelse?: tjenester_registrering_dto_AnnenForelderDto_KanIkkeOppgiBegrunnelse;
   morMottarUføretrygd?: boolean;
-  sokerHarAleneomsorg?: boolean;
+  søkerHarAleneomsorg?: boolean;
 };
 
 export type tjenester_registrering_dto_AnnenForelderDto_KanIkkeOppgiBegrunnelse = {
-  arsak: string;
-  begrunnelse?: string;
   land?: string;
-  utenlandskFoedselsnummer?: string;
+  utenlandskFødselsnummer?: string;
+  årsak: string;
 };
 
 export type tjenester_registrering_dto_ArbeidsforholdDto = {
@@ -1957,7 +1952,7 @@ export type tjenester_registrering_dto_FrilansDto = {
   erNyoppstartetFrilanser?: boolean;
   harHattOppdragForFamilie?: boolean;
   harInntektFraFosterhjem?: boolean;
-  harSokerPeriodeMedFrilans?: boolean;
+  harSøkerPeriodeMedFrilans?: boolean;
   oppdragPerioder?: Array<tjenester_registrering_dto_FrilansDto_Oppdragperiode>;
   perioder?: Array<tjenester_registrering_dto_FrilansDto_Frilansperiode>;
 };
@@ -1992,7 +1987,7 @@ export type tjenester_registrering_dto_OmsorgDto = {
   ankomstdato?: string;
   antallBarn?: number;
   erEktefellesBarn?: boolean;
-  foedselsDato?: Array<string>;
+  fødselsdato?: Array<string>;
   omsorgsovertakelsesdato?: string;
 };
 
@@ -2054,9 +2049,9 @@ export type tjenester_registrering_es_ManuellRegistreringEngangsstonadDto = {
   antallBarn?: number;
   antallBarnFraTerminbekreftelse?: number;
   begrunnelse?: string;
-  erBarnetFodt?: boolean;
-  foedselsDato?: string;
+  erBarnetFødt?: boolean;
   fremtidigeOppholdUtenlands?: Array<tjenester_registrering_dto_UtenlandsoppholdDto>;
+  fødselsdato?: string;
   harFremtidigeOppholdUtenlands?: boolean;
   harTidligereOppholdUtenlands?: boolean;
   kommentarEndring?: string;
@@ -2065,15 +2060,15 @@ export type tjenester_registrering_es_ManuellRegistreringEngangsstonadDto = {
   oppholdINorge?: boolean;
   registrerVerge?: boolean;
   rettigheter?: tjenester_registrering_dto_RettigheterDto;
-  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
-  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
   språkkode?: foreldrepenger_behandlingslager_geografisk_Språkkode;
+  søker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
+  søknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
   tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType;
   terminbekreftelseDato?: string;
   termindato?: string;
   tidligereOppholdUtenlands?: Array<tjenester_registrering_dto_UtenlandsoppholdDto>;
   tilleggsopplysninger?: string;
-  ufullstendigSoeknad?: boolean;
+  ufullstendigSøknad?: boolean;
 };
 
 export type tjenester_registrering_fp_ManuellRegistreringEndringsøknadDto = {
@@ -2082,9 +2077,9 @@ export type tjenester_registrering_fp_ManuellRegistreringEndringsøknadDto = {
   antallBarn?: number;
   antallBarnFraTerminbekreftelse?: number;
   begrunnelse?: string;
-  erBarnetFodt?: boolean;
-  foedselsDato?: string;
+  erBarnetFødt?: boolean;
   fremtidigeOppholdUtenlands?: Array<tjenester_registrering_dto_UtenlandsoppholdDto>;
+  fødselsdato?: string;
   harFremtidigeOppholdUtenlands?: boolean;
   harTidligereOppholdUtenlands?: boolean;
   kommentarEndring?: string;
@@ -2093,16 +2088,16 @@ export type tjenester_registrering_fp_ManuellRegistreringEndringsøknadDto = {
   oppholdINorge?: boolean;
   registrerVerge?: boolean;
   rettigheter?: tjenester_registrering_dto_RettigheterDto;
-  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
-  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
   språkkode?: foreldrepenger_behandlingslager_geografisk_Språkkode;
+  søker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
+  søknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
   tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType;
   terminbekreftelseDato?: string;
   termindato?: string;
   tidligereOppholdUtenlands?: Array<tjenester_registrering_dto_UtenlandsoppholdDto>;
   tidsromPermisjon?: tjenester_registrering_fp_TidsromPermisjonDto;
   tilleggsopplysninger?: string;
-  ufullstendigSoeknad?: boolean;
+  ufullstendigSøknad?: boolean;
 };
 
 export type tjenester_registrering_fp_ManuellRegistreringForeldrepengerDto = {
@@ -2115,10 +2110,10 @@ export type tjenester_registrering_fp_ManuellRegistreringForeldrepengerDto = {
   begrunnelse?: string;
   dekningsgrad?: tjenester_registrering_dto_DekningsgradDto;
   egenVirksomhet?: tjenester_registrering_dto_EgenVirksomhetDto;
-  erBarnetFodt?: boolean;
-  foedselsDato?: string;
+  erBarnetFødt?: boolean;
   fremtidigeOppholdUtenlands?: Array<tjenester_registrering_dto_UtenlandsoppholdDto>;
   frilans?: tjenester_registrering_dto_FrilansDto;
+  fødselsdato?: string;
   harFremtidigeOppholdUtenlands?: boolean;
   harTidligereOppholdUtenlands?: boolean;
   kommentarEndring?: string;
@@ -2127,16 +2122,16 @@ export type tjenester_registrering_fp_ManuellRegistreringForeldrepengerDto = {
   oppholdINorge?: boolean;
   registrerVerge?: boolean;
   rettigheter?: tjenester_registrering_dto_RettigheterDto;
-  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
-  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
   språkkode?: foreldrepenger_behandlingslager_geografisk_Språkkode;
+  søker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
+  søknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
   tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType;
   terminbekreftelseDato?: string;
   termindato?: string;
   tidligereOppholdUtenlands?: Array<tjenester_registrering_dto_UtenlandsoppholdDto>;
   tidsromPermisjon?: tjenester_registrering_fp_TidsromPermisjonDto;
   tilleggsopplysninger?: string;
-  ufullstendigSoeknad?: boolean;
+  ufullstendigSøknad?: boolean;
 };
 
 export type tjenester_registrering_fp_PermisjonPeriodeDto = {
@@ -2152,7 +2147,7 @@ export type tjenester_registrering_fp_PermisjonPeriodeDto = {
 export type tjenester_registrering_fp_TidsromPermisjonDto = {
   graderingPeriode?: Array<tjenester_registrering_dto_GraderingDto>;
   oppholdPerioder?: Array<tjenester_registrering_dto_OppholdDto>;
-  overforingsperioder?: Array<tjenester_registrering_dto_OverføringsperiodeDto>;
+  overføringsperioder?: Array<tjenester_registrering_dto_OverføringsperiodeDto>;
   permisjonsPerioder?: Array<tjenester_registrering_fp_PermisjonPeriodeDto>;
   utsettelsePeriode?: Array<tjenester_registrering_dto_UtsettelseDto>;
 };
@@ -2165,10 +2160,10 @@ export type tjenester_registrering_svp_ManuellRegistreringSvangerskapspengerDto 
   arbeidsforhold?: Array<tjenester_registrering_dto_ArbeidsforholdDto>;
   begrunnelse?: string;
   egenVirksomhet?: tjenester_registrering_dto_EgenVirksomhetDto;
-  erBarnetFodt?: boolean;
-  foedselsDato?: string;
+  erBarnetFødt?: boolean;
   fremtidigeOppholdUtenlands?: Array<tjenester_registrering_dto_UtenlandsoppholdDto>;
   frilans?: tjenester_registrering_dto_FrilansDto;
+  fødselsdato?: string;
   harFremtidigeOppholdUtenlands?: boolean;
   harTidligereOppholdUtenlands?: boolean;
   kommentarEndring?: string;
@@ -2177,16 +2172,16 @@ export type tjenester_registrering_svp_ManuellRegistreringSvangerskapspengerDto 
   oppholdINorge?: boolean;
   registrerVerge?: boolean;
   rettigheter?: tjenester_registrering_dto_RettigheterDto;
-  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
-  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
   språkkode?: foreldrepenger_behandlingslager_geografisk_Språkkode;
+  søker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
+  søknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
   tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType;
   terminbekreftelseDato?: string;
   termindato?: string;
   tidligereOppholdUtenlands?: Array<tjenester_registrering_dto_UtenlandsoppholdDto>;
   tilleggsopplysninger?: string;
   tilretteleggingArbeidsforhold?: Array<tjenester_registrering_svp_SvpTilretteleggingArbeidsforholdDto>;
-  ufullstendigSoeknad?: boolean;
+  ufullstendigSøknad?: boolean;
 };
 
 export type tjenester_registrering_svp_SvpTilretteleggingArbeidsforholdDto = (
@@ -5093,7 +5088,6 @@ export type tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto = {
   erEndring: boolean;
   godkjent: boolean;
   orgnr?: string;
-  privatpersonFødselsdato?: string;
 };
 
 export type tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto = {
@@ -6086,7 +6080,7 @@ export type GetSøknadData = {
      */
     uuid: tjenester_behandling_dto_UuidDto;
   };
-  url: '/api/behandling/søknad';
+  url: '/api/behandling/soknad';
 };
 
 export type GetSøknadResponses = {
