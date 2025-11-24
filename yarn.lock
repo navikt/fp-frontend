@@ -3965,7 +3965,7 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-fakta-beregning": 12.1.29
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 13.2.5
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 13.2.6
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 8.1.5
     "@navikt/ft-prosess-beregningsgrunnlag": 11.2.5
     "@navikt/ft-prosess-tilbakekreving-vedtak": 7.1.5
@@ -4137,6 +4137,44 @@ __metadata:
     react-intl: 6.x
     uuid: 9.0.1
   checksum: ad38220eb3a7bc2c487e5e1349381638e0502371ad7c72403e48579a57d3159d781b3f78cbfabe189dccaf18399b9a202bac0813827d933874e8bc0afa58af0c
+  languageName: node
+  linkType: hard
+
+"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:13.2.6":
+  version: 13.2.6
+  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:13.2.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F13.2.6%2Fd1629684e84363151c8533706180a48a9f359fc6"
+  dependencies:
+    "@navikt/aksel-icons": 7.32.5
+    "@navikt/ds-css": 7.32.5
+    "@navikt/ds-react": 7.32.5
+    "@navikt/ft-form-hooks": ^10.1.0
+    "@navikt/ft-form-validators": ^4.2.14
+    "@navikt/ft-ui-komponenter": ^6.3.0
+    "@navikt/ft-utils": ^3.8.13
+    classnames: 2.5.1
+    dayjs: 1.11.19
+    react: 19.2.0
+    react-hook-form: 7.66.0
+    react-intl: 7.1.14
+  peerDependencies:
+    "@navikt/aksel-icons": 7.x
+    "@navikt/ds-css": 7.x
+    "@navikt/ds-react": 7.x
+    "@navikt/ft-form-hooks": 5.x
+    "@navikt/ft-form-validators": 2.x
+    "@navikt/ft-kodeverk": 4.x
+    "@navikt/ft-plattform-komponenter": 5.x
+    "@navikt/ft-types": 3.x
+    "@navikt/ft-ui-komponenter": 2.x
+    "@navikt/ft-utils": 2.x
+    classnames: 2.5.1
+    core-js: 3.37.1
+    dayjs: 1.11.x
+    react: 19.1.0
+    react-hook-form: 7.x
+    react-intl: 6.x
+    uuid: 9.0.1
+  checksum: d454d3599c4c7bc0a817f545294ae0e57261f9f03b2db1815d2638154bec5b90c4b4d6cf5c9961be2a2cfc0871effebdbc1070aed52696aa1f7d3e6ac138b652
   languageName: node
   linkType: hard
 
