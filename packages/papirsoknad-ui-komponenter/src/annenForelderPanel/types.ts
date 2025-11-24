@@ -2,18 +2,18 @@ import type { KanIkkeOppgiAnnenForelderArsak } from './components/kanIkkeOppgiAn
 import { ANNEN_FORELDER_NAME_PREFIX } from './constant';
 
 export type AnnenForelderSubFormValues = {
-  foedselsnummer?: string;
+  fødselsnummer?: string;
   kanIkkeOppgiAnnenForelder?: boolean;
   kanIkkeOppgiBegrunnelse?: {
-    arsak?: KanIkkeOppgiAnnenForelderArsak;
+    årsak?: KanIkkeOppgiAnnenForelderArsak;
     land?: string;
-    utenlandskFoedselsnummer?: string;
+    utenlandskFødselsnummer?: string;
   };
 };
 
 export type PermisjonRettigheterFormValues = {
-  sokerHarAleneomsorg?: boolean;
-  denAndreForelderenHarRettPaForeldrepenger?: boolean;
+  søkerHarAleneomsorg?: boolean;
+  denAndreForelderenHarRettPåForeldrepenger?: boolean;
   annenForelderRettEØS?: boolean;
   morMottarUføretrygd?: boolean;
 };

@@ -46,7 +46,6 @@ type AksjonspunktDtoFpTilbake = {
   aksjonspunktType: AksjonspunktTypeFpTilbake;
   besluttersBegrunnelse?: string;
   definisjon: AksjonspunktDefinisjonFpTilbake;
-  erAktivt: boolean;
   kanLoses: boolean;
   status: AksjonspunktStatusFpTilbake;
   toTrinnsBehandling: boolean;

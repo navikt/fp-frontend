@@ -43,7 +43,7 @@ const PERIODS_WITH_NO_MORS_AKTIVITET = new Set<UttakPeriodeType>([
 
 interface Props {
   readOnly: boolean;
-  sokerErMor: boolean;
+  søkerErMor: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -52,7 +52,7 @@ interface Props {
  *
  * Viser inputfelter for dato for bestemmelse av perioder med permijon.
  */
-export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKodeverk }: Props) => {
+export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKodeverk }: Props) => {
   const intl = useIntl();
 
   const periodeTyper = alleKodeverk['UttakPeriodeType'];
@@ -142,7 +142,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               ]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
-            {!sokerErMor && (
+            {!søkerErMor && (
               <RhfSelect
                 name={`${getPrefix(index)}.morsAktivitet`}
                 control={control}

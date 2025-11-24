@@ -35,7 +35,6 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET, {
         kanLoses: false,
-        erAktivt: false,
       }),
     ],
     isReadOnly: false,

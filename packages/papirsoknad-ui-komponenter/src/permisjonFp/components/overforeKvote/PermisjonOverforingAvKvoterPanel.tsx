@@ -23,14 +23,14 @@ const getText = (intl: IntlShape, kode: OverføringÅrsak, navn: string): string
 
 const mapArsaker = (
   arsaker: KodeverkMedNavn<'OverføringÅrsak'>[],
-  sokerErMor: boolean,
+  søkerErMor: boolean,
   erEndringssøknad: boolean,
   intl: IntlShape,
 ): ReactElement[] =>
   arsaker
     .filter(({ kode }) => erEndringssøknad || (kode !== 'ALENEOMSORG' && kode !== 'IKKE_RETT_ANNEN_FORELDER'))
     .map(({ kode, navn }) =>
-      !sokerErMor ? (
+      !søkerErMor ? (
         <option value={kode} key={kode}>
           {getText(intl, kode, navn)}
         </option>
@@ -81,5 +81,5 @@ export const PermisjonOverforingAvKvoterPanel = ({ foreldreType, alleKodeverk, r
 
 PermisjonOverforingAvKvoterPanel.initialValues = (): FormValuesOverforing => ({
   skalOvertaKvote: false,
-  overforingsperioder: [],
+  overføringsperioder: [],
 });

@@ -33,7 +33,7 @@ describe('LagreSoknadPapirsoknadIndex', () => {
     expect(lagre).toHaveBeenCalledWith({
       kommentarEndring: 'Dette er en begrunnelse',
       registrerVerge: true,
-      ufullstendigSoeknad: undefined,
+      ufullstendigSøknad: undefined,
     });
   });
 
