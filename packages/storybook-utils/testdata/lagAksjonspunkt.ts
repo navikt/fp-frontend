@@ -6,7 +6,6 @@ export const lagAksjonspunkt = (aksjonspunktKode: AksjonspunktKode, options?: Pa
   return {
     definisjon: aksjonspunktKode,
     kanLoses: status === 'OPPR',
-    erAktivt: status === 'OPPR',
     begrunnelse: status === 'OPPR' ? undefined : 'Dette er en begrunnelse',
     aksjonspunktType: aksjonspunktKode.startsWith('6') ? 'MANU' : 'OVST',
     toTrinnsBehandling: aksjonspunktKoderMedToTrinnsBehandling.has(aksjonspunktKode),

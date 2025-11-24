@@ -26,8 +26,8 @@ const intl = createIntl(messages);
 
 type FormValues = {
   termindato?: string;
-  foedselsDato?: string;
-  erBarnetFodt?: boolean;
+  fødselsdato?: string;
+  erBarnetFødt?: boolean;
 };
 
 interface Props {
@@ -35,7 +35,7 @@ interface Props {
 }
 
 const validateTermin = (getValues: UseFormGetValues<FormValues>) => (termindato: string) => {
-  const fodselsdato = getValues('foedselsDato');
+  const fodselsdato = getValues('fødselsdato');
 
   return terminErRundtFodselsdato(fodselsdato, termindato);
 };
@@ -48,7 +48,7 @@ const validateTermin = (getValues: UseFormGetValues<FormValues>) => (termindato:
 export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
   const { getValues, watch, control } = useFormContext<FormValues>();
 
-  const erBarnetFodt = watch('erBarnetFodt');
+  const erBarnetFødt = watch('erBarnetFødt');
 
   return (
     <BorderBox>
@@ -57,7 +57,7 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
           {intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}
         </Heading>
         <RhfRadioGroup
-          name="erBarnetFodt"
+          name="erBarnetFødt"
           control={control}
           legend={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
           validate={[required]}
@@ -70,9 +70,9 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
             {intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErIkkeFodt' })}
           </Radio>
         </RhfRadioGroup>
-        {erBarnetFodt && (
+        {erBarnetFødt && (
           <RhfDatepicker
-            name="foedselsDato"
+            name="fødselsdato"
             control={control}
             label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Fodselsdato' })}
             readOnly={readOnly}
@@ -104,12 +104,12 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
 
 TerminOgFodselPanelSvp.initialValues = (): FormValues => ({
   termindato: undefined,
-  foedselsDato: undefined,
-  erBarnetFodt: false,
+  fødselsdato: undefined,
+  erBarnetFødt: false,
 });
 
-TerminOgFodselPanelSvp.transformValues = ({ erBarnetFodt, foedselsDato, termindato }: FormValues) => ({
-  erBarnetFodt,
+TerminOgFodselPanelSvp.transformValues = ({ erBarnetFødt, fødselsdato, termindato }: FormValues) => ({
+  erBarnetFødt,
   termindato,
-  foedselsDato: erBarnetFodt ? foedselsDato : undefined,
+  fødselsdato: erBarnetFødt ? fødselsdato : undefined,
 });

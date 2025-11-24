@@ -19,10 +19,10 @@ interface Props {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
-  sokerErMor: boolean;
+  søkerErMor: boolean;
 }
 
-export const AnnenForelderPapirsoknadIndex = ({ readOnly, alleKodeverk, fagsakPersonnummer, sokerErMor }: Props) => (
+export const AnnenForelderPapirsoknadIndex = ({ readOnly, alleKodeverk, fagsakPersonnummer, søkerErMor }: Props) => (
   <RawIntlProvider value={intl}>
     <BorderBox>
       <VStack gap="space-16">
@@ -34,7 +34,7 @@ export const AnnenForelderPapirsoknadIndex = ({ readOnly, alleKodeverk, fagsakPe
           fagsakPersonnummer={fagsakPersonnummer}
           alleKodeverk={alleKodeverk}
         />
-        <PermisjonRettigheterPanel readOnly={readOnly} sokerErMor={sokerErMor} />
+        <PermisjonRettigheterPanel readOnly={readOnly} søkerErMor={søkerErMor} />
       </VStack>
     </BorderBox>
   </RawIntlProvider>

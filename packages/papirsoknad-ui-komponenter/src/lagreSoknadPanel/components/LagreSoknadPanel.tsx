@@ -11,7 +11,7 @@ const maxLength1500 = maxLength(1500);
 type LagreSoknadFormValues = {
   kommentarEndring?: string;
   registrerVerge?: boolean;
-  ufullstendigSoeknad?: boolean;
+  ufullstendigSøknad?: boolean;
 };
 
 interface Props {
@@ -30,7 +30,7 @@ export const LagreSoknadPanel = ({
   const intl = useIntl();
 
   const { watch, control } = useFormContext<LagreSoknadFormValues>();
-  const ufullstendigSoeknad = watch('ufullstendigSoeknad') || false;
+  const ufullstendigSøknad = watch('ufullstendigSøknad') || false;
 
   return (
     <BorderBox>
@@ -56,7 +56,7 @@ export const LagreSoknadPanel = ({
               readOnly={readOnly}
             />
             <RhfCheckbox
-              name="ufullstendigSoeknad"
+              name="ufullstendigSøknad"
               control={control}
               label={intl.formatMessage({ id: 'Registrering.SaveApplication.OpplysningspliktErIkkeOverholdt' })}
               readOnly={readOnly}
@@ -64,7 +64,7 @@ export const LagreSoknadPanel = ({
           </div>
         )}
         <div>
-          {!ufullstendigSoeknad && (
+          {!ufullstendigSøknad && (
             <Button
               id="saveButton"
               size="small"
@@ -75,7 +75,7 @@ export const LagreSoknadPanel = ({
               <FormattedMessage id="Registrering.SaveApplication.SaveButton" />
             </Button>
           )}
-          {ufullstendigSoeknad && (
+          {ufullstendigSøknad && (
             <Button
               id="endButton"
               onClick={onSubmitUfullstendigsoknad}
@@ -97,15 +97,15 @@ export const LagreSoknadPanel = ({
 LagreSoknadPanel.initialValues = (): LagreSoknadFormValues => ({
   kommentarEndring: undefined,
   registrerVerge: false,
-  ufullstendigSoeknad: false,
+  ufullstendigSøknad: false,
 });
 
 LagreSoknadPanel.transformValues = ({
   kommentarEndring,
   registrerVerge,
-  ufullstendigSoeknad,
+  ufullstendigSøknad,
 }: LagreSoknadFormValues): LagreSoknadFormValues => ({
   kommentarEndring,
   registrerVerge,
-  ufullstendigSoeknad,
+  ufullstendigSøknad,
 });

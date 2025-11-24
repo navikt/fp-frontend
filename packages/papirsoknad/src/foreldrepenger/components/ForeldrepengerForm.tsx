@@ -91,13 +91,13 @@ export const ForeldrepengerForm = ({
     defaultValues: buildInitialValues(),
   });
 
-  const sokerHarAleneomsorg = formMethods.watch(`annenForelder.sokerHarAleneomsorg`);
-  const denAndreForelderenHarRettPaForeldrepenger = formMethods.watch(
-    `annenForelder.denAndreForelderenHarRettPaForeldrepenger`,
+  const søkerHarAleneomsorg = formMethods.watch(`annenForelder.søkerHarAleneomsorg`);
+  const denAndreForelderenHarRettPåForeldrepenger = formMethods.watch(
+    `annenForelder.denAndreForelderenHarRettPåForeldrepenger`,
   );
-  const annenForelderInformertRequired = !sokerHarAleneomsorg && denAndreForelderenHarRettPaForeldrepenger !== false;
+  const annenForelderInformertRequired = !søkerHarAleneomsorg && denAndreForelderenHarRettPåForeldrepenger !== false;
 
-  const foedselsDatoFraTerminOgFodelsPanel = formMethods.watch('foedselsDato');
+  const foedselsDatoFraTerminOgFodelsPanel = formMethods.watch('fødselsdato');
   const mottattDato = formMethods.watch('mottattDato');
 
   return (
@@ -129,7 +129,7 @@ export const ForeldrepengerForm = ({
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
           fagsakPersonnummer={fagsakPersonnummer}
-          sokerErMor={soknadData.getForeldreType() === 'MOR'}
+          søkerErMor={soknadData.getForeldreType() === 'MOR'}
         />
         <PermisjonIndex
           foreldreType={soknadData.getForeldreType()}

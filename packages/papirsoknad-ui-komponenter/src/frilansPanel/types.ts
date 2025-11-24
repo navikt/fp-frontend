@@ -11,7 +11,7 @@ type OppdragPeriode = {
 };
 
 export type FrilansSubFormValues = {
-  harSokerPeriodeMedFrilans?: boolean;
+  harSøkerPeriodeMedFrilans?: boolean;
   perioder?: {
     periodeFom: string;
     periodeTom?: string;

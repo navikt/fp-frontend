@@ -237,7 +237,6 @@ export const behandling: BehandlingFpSak = {
       toTrinnsBehandling: true,
       aksjonspunktType: 'MANU',
       kanLoses: true,
-      erAktivt: true,
     },
   ],
   harSøknad: true,

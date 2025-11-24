@@ -33,7 +33,7 @@ export const PermisjonFulltUttak = ({ foreldreType, readOnly, alleKodeverk }: Pr
       />
       {fulltUttak && (
         <RenderPermisjonPeriodeFieldArray
-          sokerErMor={foreldreType === 'MOR'}
+          søkerErMor={foreldreType === 'MOR'}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
         />

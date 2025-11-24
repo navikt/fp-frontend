@@ -66,8 +66,8 @@ const useLagrePapirsøknad = (
         '@type': kode,
         kode,
         tema: familieHendelseType,
-        soknadstype: fagsakYtelseType,
-        soker: foreldreType,
+        søknadstype: fagsakYtelseType,
+        søker: foreldreType,
         ...formValues,
       },
     ];

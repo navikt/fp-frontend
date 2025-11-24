@@ -24,7 +24,7 @@ export const FrilansPanel = ({ readOnly }: Props) => {
         </Heading>
 
         <TrueFalseInput
-          name={`${FRILANS_NAME_PREFIX}.harSokerPeriodeMedFrilans`}
+          name={`${FRILANS_NAME_PREFIX}.harSøkerPeriodeMedFrilans`}
           control={control}
           label={<FormattedMessage id="Registrering.Frilans.HarFrilansvirksomhet" />}
           readOnly={readOnly}
@@ -70,12 +70,12 @@ FrilansPanel.initialValues = (): FrilansFormValues => ({
 
 FrilansPanel.transformValues = ({ frilans }: FrilansFormValues): FrilansFormValues => ({
   [FRILANS_NAME_PREFIX]:
-    frilans.harSokerPeriodeMedFrilans === false
+    frilans.harSøkerPeriodeMedFrilans === false
       ? {
-          harSokerPeriodeMedFrilans: false,
+          harSøkerPeriodeMedFrilans: false,
         }
       : {
-          harSokerPeriodeMedFrilans: true,
+          harSøkerPeriodeMedFrilans: true,
           perioder: frilans.perioder,
           erNyoppstartetFrilanser: frilans.erNyoppstartetFrilanser,
           harInntektFraFosterhjem: frilans.harInntektFraFosterhjem,

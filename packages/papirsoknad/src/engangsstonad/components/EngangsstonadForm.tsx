@@ -36,7 +36,7 @@ export const EngangsstonadForm = ({
     defaultValues: initialValues(),
   });
 
-  const foedselsDatoFraTerminOgFodelsPanel = formMethods.watch('foedselsDato');
+  const foedselsDatoFraTerminOgFodelsPanel = formMethods.watch('fødselsdato');
   const mottattDato = formMethods.watch('mottattDato');
 
   return (
