@@ -23,9 +23,9 @@
     "@navikt/aksel-icons": "7.33.0",
     "@navikt/ds-css": "7.33.0",
     "@navikt/ds-react": "7.33.0",
-    "@navikt/ft-plattform-komponenter": "10.1.15",
-    "@navikt/ft-ui-komponenter": "6.3.0",
-    "@navikt/ft-utils": "3.8.13",
+    "@navikt/ft-plattform-komponenter": "10.2.0",
+    "@navikt/ft-ui-komponenter": "6.4.0",
+    "@navikt/ft-utils": "3.9.0",
     "classnames": "2.5.1",
     "react": "19.2.0",
     "react-intl": "7.1.14"
