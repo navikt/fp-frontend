@@ -22,7 +22,7 @@
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",
-    "@navikt/ft-utils": "3.8.13",
+    "@navikt/ft-utils": "3.9.0",
     "@sentry/browser": "10.22.0",
     "react": "19.2.0"
   },
