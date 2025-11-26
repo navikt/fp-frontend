@@ -101,7 +101,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
     isReadOnly,
     isSubmittable,
     submitCallback,
-  } = context.args as PanelDataArgs;
+  } = { ...context.parameters, ...context.args } as PanelDataArgs;
 
   const aksjonspunkter = aksjonspunkterForPanel ?? [];
 

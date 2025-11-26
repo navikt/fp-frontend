@@ -39,14 +39,12 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
     ],
     isReadOnly: false,
     vilkårForPanel: [lagVilkår('SVP_VK_1', { vilkarStatus: 'IKKE_VURDERT' })],
-    status: 'IKKE_VURDERT',
   },
 };
 
 export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET)],
-    status: 'IKKE_VURDERT',
     vilkårForPanel: [lagVilkår('SVP_VK_1', { vilkarStatus: 'IKKE_VURDERT' })],
     svangerskapspengerTilrettelegging: {
       arbeidsforholdListe: [
@@ -73,7 +71,6 @@ export const OppfyltVilkår: Story = {
     vilkårForPanel: [lagVilkår('SVP_VK_1', { vilkarStatus: 'OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'OPPFYLT',
   },
 };
 
@@ -83,7 +80,7 @@ export const AvslåttVilkår: Story = {
       uuid: '1',
       versjon: 1,
       behandlingsresultat: {
-        avslagsarsak: '1099',
+        avslagsarsak: '1062',
       },
     } as BehandlingFpSak,
     aksjonspunkterForPanel: [
@@ -95,6 +92,5 @@ export const AvslåttVilkår: Story = {
     vilkårForPanel: [lagVilkår('SVP_VK_1', { vilkarStatus: 'IKKE_OPPFYLT' })],
     isReadOnly: true,
     isSubmittable: false,
-    status: 'IKKE_OPPFYLT',
   },
 };

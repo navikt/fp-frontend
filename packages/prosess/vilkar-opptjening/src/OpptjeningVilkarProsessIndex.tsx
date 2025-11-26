@@ -12,7 +12,6 @@ const intl = createIntl(messages);
 
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
-  status: string;
 }
 
 export const OpptjeningVilkarProsessIndex = (props: Props) => (

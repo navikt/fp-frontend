@@ -1,9 +1,7 @@
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { Alert, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
-import { BTag } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
@@ -13,7 +11,7 @@ import {
   VilkarResultPicker,
   type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening, Vilkar } from '@navikt/fp-types';
 import type { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -23,7 +21,6 @@ type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextField
 
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
-  status: string;
 }
 
 /**
@@ -31,7 +28,7 @@ interface Props {
  *
  * Viser panel for å løse aksjonspunkt for avslått opptjeningsvilkår
  */
-export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }: Props) => {
+export const OpptjeningVilkarAksjonspunktPanel = ({ fastsattOpptjening }: Props) => {
   const {
     fagsak,
     behandling,
@@ -43,72 +40,52 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }
     isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<AvklarOpptjeningsvilkaretAp>();
-  const intl = useIntl();
   const erSvpFagsak = fagsak.fagsakYtelseType === 'SVP';
 
-  const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
-    a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
-  );
+  const vilkår = vilkårForPanel[0];
+  const initialValues = buildInitialValues(vilkår, aksjonspunkterForPanel, behandling.behandlingsresultat);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues:
-      mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat),
+    defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
-
-  const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
-
   return (
-    <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
+    <RhfForm
+      formMethods={formMethods}
+      onSubmit={values => submitCallback(transformValues(values))}
+      setDataOnUnmount={setMellomlagretFormData}
+    >
       <ProsessPanelTemplate
         title={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret" />}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
+        vilkår={vilkår}
+        aksjonspunkterForPanel={aksjonspunkterForPanel}
         isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
-        lovReferanse={vilkårForPanel[0]?.lovReferanse}
-        originalErVilkårOk={originalErVilkårOk}
-        erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
         rendreFakta={<OpptjeningVilkarView fastsattOpptjening={fastsattOpptjening} />}
       >
-        <VStack gap="space-16">
-          <VilkarResultPicker
-            // trenger ikke vilkår til avslagsårsak fordi det finnes kun en avslagsårsak for opptjeningsvilkåret
-            vilkår={undefined}
-            legend={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.VilkårLabel" values={{ erSvpFagsak }} />}
-            skalKunneInnvilge={fastsattOpptjening.fastsattOpptjeningAktivitetList.length > 0}
-            isReadOnly={isReadOnly}
-            vilkårOppfyltLabel={
-              <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" values={{ erSvpFagsak }} />
-            }
-            vilkårIkkeOppfyltLabel={
-              <FormattedMessage
-                id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt"
-                values={{ b: BTag, erSvpFagsak }}
-              />
-            }
-          />
-          {fastsattOpptjening.fastsattOpptjeningAktivitetList.length === 0 && !isReadOnly && (
-            <Alert inline variant="warning" size="small">
-              {intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' })}
-            </Alert>
-          )}
-          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
-        </VStack>
+        <VilkarResultPicker
+          vilkår={vilkår}
+          legend={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.VilkårLabel" values={{ erSvpFagsak }} />}
+          skalKunneInnvilge={fastsattOpptjening.fastsattOpptjeningAktivitetList.length > 0}
+          isReadOnly={isReadOnly}
+        />
+        <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
       </ProsessPanelTemplate>
     </RhfForm>
   );
 };
 
 const buildInitialValues = (
+  vilkår: Vilkar | undefined,
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
   behandlingsresultat: Behandlingsresultat | undefined,
 ): FormValues => ({
-  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+  ...VilkarResultPicker.buildInitialValues(vilkår, aksjonspunkter, behandlingsresultat),
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
