@@ -38,9 +38,33 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: navikt/fp-gha-workflows/.github/actions/knip-it@c2471fea25670e0832301963f94857ca9e45229f
+      - name: Run knip
+        uses: navikt/fp-gha-workflows/.github/actions/knip-it@c2471fea25670e0832301963f94857ca9e45229f
         with:
           npmAuthToken: ${{ secrets.READER_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           package-manager: 'yarn'
           node-version: 22.17.1
+
+  knip-it2:
+    name: Kjør alternativ knip
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: navikt/fp-gha-workflows/.github/actions/setup-yarnrc@main
+        with:
+          npmAuthToken: ${{ secrets.READER_TOKEN }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.17.1
+          cache: 'yarn'
+
+      - name: Installere dependencies
+        run: yarn install --immutable
+      - name: Kjør med annen reporter
+        run: npx knip --reporter github-actions
