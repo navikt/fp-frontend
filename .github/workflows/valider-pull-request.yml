@@ -38,7 +38,7 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: navikt/fp-gha-workflows/.github/actions/knip-it@8b66a49a7c48e8410c8e0435658465383d500c34
+      - uses: navikt/fp-gha-workflows/.github/actions/knip-it@c2471fea25670e0832301963f94857ca9e45229f
         with:
           npmAuthToken: ${{ secrets.READER_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
