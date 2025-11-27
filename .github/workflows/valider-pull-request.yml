@@ -39,9 +39,9 @@ jobs:
       pull-requests: write
     steps:
       - name: Run knip
-        uses: navikt/fp-gha-workflows/.github/actions/knip-it@main
+        uses: navikt/fp-gha-workflows/.github/actions/knip-it@3b86e5a6349026d09ad73551599158cf8fd6f0ed
         with:
-          npmAuthToken: ${{ secrets.READER_TOKEN }}
+          npm-auth-token: ${{ secrets.READER_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           package-manager: 'yarn'
           node-version: 22.17.1
