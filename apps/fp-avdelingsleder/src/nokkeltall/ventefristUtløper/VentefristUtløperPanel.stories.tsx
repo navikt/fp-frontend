@@ -1,8 +1,6 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -17,18 +15,53 @@ const withIntl = getIntlDecorator(messages);
 const BEHANDLINGER_PÅ_VENT = [
   {
     fagsakYtelseType: 'FP',
-    behandlingFrist: dayjs().format(ISO_DATE_FORMAT),
+    fristUke: '2025-29',
+    antall: 50,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    fristUke: '2025-28',
     antall: 10,
   },
   {
-    fagsakYtelseType: 'ES',
-    behandlingFrist: dayjs().add(5, 'd').format(ISO_DATE_FORMAT),
-    antall: 4,
+    fagsakYtelseType: 'FP',
+    fristUke: '2025-31',
+    antall: 125,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    fristUke: '2025-33',
+    antall: 25,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    fristUke: '2025-34',
+    antall: 40,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    fristUke: '2025-32',
+    antall: 75,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    fristUke: '2025-35',
+    antall: 20,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    fristUke: '2025-30',
+    antall: 20,
   },
   {
     fagsakYtelseType: 'ES',
-    behandlingFrist: dayjs().add(5, 'w').format(ISO_DATE_FORMAT),
+    fristUke: '2025-35',
     antall: 14,
+  },
+  {
+    fagsakYtelseType: 'ES',
+    fristUke: '2025-29',
+    antall: 4,
   },
 ];
 

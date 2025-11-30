@@ -11,6 +11,7 @@ import type { InnloggetBruker } from '../typer/innloggetBruker';
 import type { OppgaverForAvdeling } from '../typer/oppgaverForAvdelingTsType';
 import type { OppgaveForDato } from '../typer/oppgaverForDatoTsType';
 import type { OppgaverForForsteStonadsdag } from '../typer/oppgaverForForsteStonadsdagTsType';
+import type { OppgaverForForsteStonadsdagUkeMnd } from '../typer/oppgaverForForsteStonadsdagUkeMndTsType.ts';
 import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import type { Reservasjon } from '../typer/reservasjonTsType';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
@@ -64,6 +65,8 @@ export const LosUrl = {
   HENT_OPPGAVER_APNE_ELLER_PA_VENT: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/åpne-behandlinger'),
   HENT_BEHANDLINGER_FRISTUTLOP: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/frist-utløp'),
   HENT_OPPGAVER_PER_FORSTE_STONADSDAG: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag'),
+  HENT_OPPGAVER_PER_FORSTE_STONADSDAG_UKE: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag-uke'),
+  HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag-mnd'),
   RESERVASJONER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/reservasjoner'),
   SLETT_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister/slett'),
   HENT_GRUPPER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/grupper'),
@@ -147,6 +150,26 @@ export const oppgaverPerFørsteStønadsdagOptions = (avdelingEnhet: string) =>
       kyExtended
         .get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG, { searchParams: { avdelingEnhet } })
         .json<OppgaverForForsteStonadsdag[]>(),
+    initialData: [],
+  });
+
+export const oppgaverPerFørsteStønadsdagUkeOptions = (avdelingEnhet: string) =>
+  queryOptions({
+    queryKey: [LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_UKE, avdelingEnhet],
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_UKE, { searchParams: { avdelingEnhet } })
+        .json<OppgaverForForsteStonadsdagUkeMnd[]>(),
+    initialData: [],
+  });
+
+export const oppgaverPerFørsteStønadsdagMånedOptions = (avdelingEnhet: string) =>
+  queryOptions({
+    queryKey: [LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND, avdelingEnhet],
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND, { searchParams: { avdelingEnhet } })
+        .json<OppgaverForForsteStonadsdagUkeMnd[]>(),
     initialData: [],
   });
 
