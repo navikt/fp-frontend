@@ -37,15 +37,8 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
     oppgaverApneEllerPaVent.filter(o => o.behandlingVenteStatus === BehandlingVenteStatus.IKKE_PA_VENT),
   );
 
-  const [periodeStart, periodeSlutt] = finnGrafPeriode(oppgaverApneEllerPaVent);
-
-  const alledatoer = new Set<string>(oppgaverApneEllerPaVent
-    .filter(o => o.førsteUttakMåned !== UKJENT_DATO)
-    .map(o => dayjs(o.førsteUttakMåned).startOf('month').format(ISO_DATE_FORMAT)));
-  alledatoer.add(periodeStart.format(ISO_DATE_FORMAT));
-  alledatoer.add(periodeSlutt.format(ISO_DATE_FORMAT));
-
-  const maaneder: string[] = Array.from(alledatoer).map(m => dayjs(m)).sort((a, b) => a.isBefore(b) ? -1 : 1).map(d => d.format(ISO_DATE_FORMAT));
+  const maaneder: string[] = finnMaaneder(oppgaverApneEllerPaVent);
+  const periodeSlutt = dayjs(maaneder.at(-1));
 
   const { koordinaterPaVent, koordinaterIkkePaVent } = fyllInnManglendeDatoerOgSorterEtterDato(
     maaneder,
@@ -99,11 +92,10 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
             axisLabel: {
               formatter: value => {
                 const dato = dayjs(value);
-                const erSiste = dato.isSame(periodeSlutt);
-                const maned = erSiste ? ukjentTekst : getYearText(dato.month(), intl);
-                const ar = erSiste ? datoTekst : dato.year();
-
-                return `${maned}\n${ar}`;
+                if (dato.isSame(periodeSlutt)) {
+                  return `${ukjentTekst}\n${datoTekst}`;
+                }
+                return `${getYearText(dato.month(), intl)}\n${dato.year()}`;
               },
             },
           },
@@ -146,25 +138,16 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
   );
 };
 
-const finnGrafPeriode = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent[]): [dayjs.Dayjs, dayjs.Dayjs] => {
-  // Data er garantert å gå inntil 6 mnd tilbake og 10 mnd fram i tid. Utliggerne havner på første/siste mnd
-  let periodeStart = dayjs().subtract(6, 'M');
-  let periodeSlutt = dayjs().add(1, 'M');
-
-  oppgaverSomErApneEllerPaVent
+const finnMaaneder = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent[]): string[] => {
+  const alledatoer = new Set<string>(oppgaverSomErApneEllerPaVent
     .filter(oppgave => !!oppgave.førsteUttakMåned)
-    .forEach(oppgave => {
-      const dato = dayjs(oppgave.førsteUttakMåned);
-      if (dato.isBefore(periodeStart)) {
-        periodeStart = dato;
-      }
-      if (dato.isAfter(periodeSlutt)) {
-        periodeSlutt = dato;
-      }
-    });
+    .map(o => dayjs(o.førsteUttakMåned).startOf('month').format(ISO_DATE_FORMAT)));
 
-  // Ekstra kolonne for data med ukjent dato
-  return [dayjs(periodeStart.startOf('month')), dayjs(periodeSlutt.add(1, 'months').startOf('month'))];
+  const maaneder: string[] = Array.from(alledatoer).map(m => dayjs(m)).sort((a, b) => a.isBefore(b) ? -1 : 1).map(d => d.format(ISO_DATE_FORMAT));
+  const maxmaaned = maaneder.length > 0 ? maaneder.at(-1) : dayjs().startOf('month');
+  const ekstra = dayjs(maxmaaned).add(1, 'months').startOf('month');
+  maaneder.push(ekstra.format(ISO_DATE_FORMAT));
+  return maaneder;
 };
 
 const finnAntallPerDato = (
