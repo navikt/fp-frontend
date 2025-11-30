@@ -1,5 +1,6 @@
 import { type IntlShape, useIntl } from 'react-intl';
 
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { ReactECharts } from '@navikt/fp-los-felles';
@@ -38,10 +39,18 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
 
   const [periodeStart, periodeSlutt] = finnGrafPeriode(oppgaverApneEllerPaVent);
 
+  const alledatoer = new Set<string>(oppgaverApneEllerPaVent
+    .filter(o => o.førsteUttakMåned !== UKJENT_DATO)
+    .map(o => dayjs(o.førsteUttakMåned).startOf('month').format(ISO_DATE_FORMAT)));
+  alledatoer.add(periodeStart.format(ISO_DATE_FORMAT));
+  alledatoer.add(periodeSlutt.format(ISO_DATE_FORMAT));
+
+  const maaneder: string[] = Array.from(alledatoer).map(m => dayjs(m)).sort((a, b) => a.isBefore(b) ? -1 : 1).map(d => d.format(ISO_DATE_FORMAT));
+
   const { koordinaterPaVent, koordinaterIkkePaVent } = fyllInnManglendeDatoerOgSorterEtterDato(
+    maaneder,
     oppgaverPaVentPerDato,
     oppgaverIkkePaVentPerDato,
-    periodeStart,
     periodeSlutt,
   );
 
@@ -85,7 +94,8 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
         xAxis: [
           {
             type: 'category',
-            boundaryGap: false,
+            boundaryGap: true,
+            data: maaneder,
             axisLabel: {
               formatter: value => {
                 const dato = dayjs(value);
@@ -106,18 +116,6 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
         ],
         series: [
           {
-            name: paVentTekst,
-            type: 'bar',
-            stack: 'total',
-            label: {
-              show: true,
-            },
-            emphasis: {
-              focus: 'series',
-            },
-            data: koordinaterPaVent,
-          },
-          {
             name: ikkePaVentTekst,
             type: 'bar',
             stack: 'total',
@@ -129,8 +127,20 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
             },
             data: koordinaterIkkePaVent,
           },
+          {
+            name: paVentTekst,
+            type: 'bar',
+            stack: 'total',
+            label: {
+              show: true,
+            },
+            emphasis: {
+              focus: 'series',
+            },
+            data: koordinaterPaVent,
+          }
         ],
-        color: ['#85d5f0', '#38a161'],
+        color: ['#38a161', '#85d5f0'],
       }}
     />
   );
@@ -175,34 +185,32 @@ const finnAntallPerDato = (
   return Object.keys(antallPerDatoOgUkjent).map(k => ({ x: k, y: antallPerDatoOgUkjent[k]! }));
 };
 
-const lagKoordinatForDato = (dato: dayjs.Dayjs, oppgaver: KoordinatDatoEllerUkjent[]): (number | Date)[] => {
+const lagKoordinatForDato = (dato: dayjs.Dayjs, oppgaver: KoordinatDatoEllerUkjent[]): number => {
   const eksisterendeDato = oppgaver.filter(o => o.x !== UKJENT_DATO).find(o => dayjs(o.x).isSame(dato));
-  return [
-    eksisterendeDato ? dayjs(eksisterendeDato.x).toDate() : dato.toDate(),
-    eksisterendeDato ? eksisterendeDato.y : 0,
-  ];
+  return eksisterendeDato ? eksisterendeDato.y : 0;
+};
+
+const lagKoordinatForUkjent = (oppgaver: KoordinatDatoEllerUkjent[]): number => {
+  const ukjentDato = oppgaver.find(o => o.x === UKJENT_DATO);
+  return ukjentDato ? ukjentDato.y : 0;
 };
 
 const fyllInnManglendeDatoerOgSorterEtterDato = (
+  maaneder: string[],
   oppgaverPaVent: KoordinatDatoEllerUkjent[],
   oppgaverIkkePaVent: KoordinatDatoEllerUkjent[],
-  periodeStart: dayjs.Dayjs,
   periodeSlutt: dayjs.Dayjs,
-): { koordinaterPaVent: (number | Date)[][]; koordinaterIkkePaVent: (number | Date)[][] } => {
-  const koordinaterPaVent: (number | Date)[][] = [];
-  const koordinaterIkkePaVent: (number | Date)[][] = [];
+): { koordinaterPaVent: number[]; koordinaterIkkePaVent: number[] } => {
+  const koordinaterPaVent: number[] = [];
+  const koordinaterIkkePaVent: number[] = [];
 
-  // For å unngå kollisjon med Y-akse
-  koordinaterPaVent.push([periodeStart.subtract(1, 'months').startOf('month').toDate(), 0]);
-  let dato = dayjs(periodeStart);
-  do {
+  maaneder.filter(m => !dayjs(m).isSame(periodeSlutt)).forEach(m => {
+    const dato = dayjs(m);
     koordinaterPaVent.push(lagKoordinatForDato(dato, oppgaverPaVent));
     koordinaterIkkePaVent.push(lagKoordinatForDato(dato, oppgaverIkkePaVent));
-    dato = dayjs(dato.add(1, 'month'));
-  } while (dato.isBefore(periodeSlutt));
-
-  koordinaterPaVent.push([periodeSlutt.toDate(), oppgaverPaVent.find(d => d.x === UKJENT_DATO)?.y ?? 0]);
-  koordinaterIkkePaVent.push([periodeSlutt.toDate(), oppgaverIkkePaVent.find(d => d.x === UKJENT_DATO)?.y ?? 0]);
+  });
+  koordinaterPaVent.push(lagKoordinatForUkjent(oppgaverPaVent));
+  koordinaterIkkePaVent.push(lagKoordinatForUkjent(oppgaverIkkePaVent));
 
   return {
     koordinaterPaVent,
