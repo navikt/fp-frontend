@@ -45,6 +45,12 @@ const OPPGAVER_ÅPNE_ELLER_PÅ_VENT = [
     antall: 6,
   },
   {
+    behandlingVenteStatus: BehandlingVenteStatus.IKKE_PA_VENT,
+    behandlingType: 'BT-004',
+    førsteUttakMåned: null,
+    antall: 5,
+  },
+  {
     behandlingVenteStatus: BehandlingVenteStatus.PA_VENT,
     behandlingType: 'BT-004',
     førsteUttakMåned: dayjs().startOf('month').subtract(4, 'M').format(ISO_DATE_FORMAT),

@@ -60,7 +60,7 @@ export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStona
           axisLabel: {
             formatter: value => {
               const dato = dayjs(value);
-              return `${getYearText(dato.month(), intl)} - ${dato.year()}`;
+              return `${getYearText(dato.month(), intl)}\n${dato.year()}`;
             },
           },
         },
