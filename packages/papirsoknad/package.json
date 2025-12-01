@@ -16,7 +16,7 @@
     "storybook": "storybook dev --quiet -p 7024"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.33.0",
+    "@navikt/ds-react": "7.34.0",
     "@navikt/fp-papirsoknad-ui-komponenter": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-types": "workspace:*",
@@ -25,21 +25,21 @@
     "@navikt/ft-ui-komponenter": "6.4.0",
     "@navikt/ft-utils": "3.9.0",
     "react": "19.2.0",
-    "react-hook-form": "7.66.0",
+    "react-hook-form": "7.66.1",
     "react-intl": "7.1.14",
-    "react-router-dom": "7.9.5"
+    "react-router-dom": "7.9.6"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.33.0",
+    "@navikt/ds-css": "7.34.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
-    "@storybook/react": "10.0.2",
+    "@storybook/react": "10.0.8",
     "@storybook/react-vite": "10.0.2",
     "eslint": "9.39.0",
-    "storybook": "10.0.2",
+    "storybook": "10.0.8",
     "typescript": "5.9.3",
-    "vite": "7.1.12"
+    "vite": "7.2.4"
   }
 }
