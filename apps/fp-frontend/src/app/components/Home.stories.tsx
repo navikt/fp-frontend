@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 
-import { alleKodeverk, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { Aktor, NavAnsatt, Person } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -80,8 +80,10 @@ const meta = {
         http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
         http.get(getHref(FagsakRel.SEARCH_UTBETALINGSDATA_IS15), () => HttpResponse.json({})),
         http.get(FagsakUrl.AKTOER_INFO, () => HttpResponse.json(AKTØR_INFO)),
-        http.get(wrapUrl('fplos/api/kodeverk'), () => new HttpResponse(null, { status: 404 })),
-        http.get(wrapUrl('fplos/api/driftsmeldinger'), () => new HttpResponse(null, { status: 404 })),
+        http.get(wrapUrl('fplos/api/kodeverk'), () => HttpResponse.json(alleKodeverkLos)),
+        http.get(wrapUrl('fplos/api/driftsmeldinger'), () => HttpResponse.json([])),
+        http.get(wrapUrl('fplos/api/reservasjon/tidligere-reserverte'), () => HttpResponse.json([])),
+        http.get(wrapUrl('fplos/api/saksbehandler/saksliste'), () => HttpResponse.json([])),
       ],
     },
     layout: 'fullscreen',
