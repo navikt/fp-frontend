@@ -18,12 +18,12 @@
     "storybook": "storybook dev --quiet -p 7001"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.33.0",
+    "@navikt/ds-react": "7.34.0",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",
     "@navikt/ft-utils": "3.9.0",
-    "@sentry/browser": "10.26.0",
+    "@sentry/browser": "10.27.0",
     "react": "19.2.0"
   },
   "devDependencies": {

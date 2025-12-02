@@ -19,8 +19,8 @@
     "storybook": "storybook dev --quiet -p 7015"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.33.0",
-    "@navikt/ds-react": "7.33.0",
+    "@navikt/aksel-icons": "7.34.0",
+    "@navikt/ds-react": "7.34.0",
     "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
@@ -33,11 +33,11 @@
     "classnames": "2.5.1",
     "dayjs": "1.11.19",
     "react": "19.2.0",
-    "react-hook-form": "7.66.0",
+    "react-hook-form": "7.66.1",
     "react-intl": "7.1.14"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.33.0",
+    "@navikt/ds-css": "7.34.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",

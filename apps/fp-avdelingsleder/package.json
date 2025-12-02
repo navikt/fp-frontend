@@ -23,10 +23,10 @@
     "storybook": "storybook dev --quiet -p 7020"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.33.0",
-    "@navikt/ds-css": "7.33.0",
+    "@navikt/aksel-icons": "7.34.0",
+    "@navikt/ds-css": "7.34.0",
     "@navikt/ds-css-internal": "3.4.3",
-    "@navikt/ds-react": "7.33.0",
+    "@navikt/ds-react": "7.34.0",
     "@navikt/fp-app-felles": "workspace:*",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-los-felles": "workspace:*",
@@ -47,7 +47,7 @@
     "lodash.debounce": "4.0.8",
     "p-limit": "7.2.0",
     "react": "19.2.0",
-    "react-hook-form": "7.66.0",
+    "react-hook-form": "7.66.1",
     "react-intl": "7.1.14",
     "react-router-dom": "7.9.6"
   },
