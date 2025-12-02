@@ -1,4 +1,3 @@
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
@@ -9,7 +8,7 @@ import type { BehandlingVentefrist } from '../../typer/behandlingVentefristTsTyp
 dayjs.extend(isSameOrBefore);
 
 interface Koordinat {
-  x: number;
+  x: string;
   y: number;
 }
 
@@ -34,7 +33,7 @@ export const VentefristUtløperGraf = ({ height, behandlingerPaVent }: Props) =>
                 if (params.axisDimension === 'y') {
                   return Number.parseInt(params.value as string, 10).toString();
                 }
-                return dayjs(params.value).format(DDMMYYYY_DATE_FORMAT);
+                return params.value.toString();
               },
             },
           },
@@ -48,10 +47,7 @@ export const VentefristUtløperGraf = ({ height, behandlingerPaVent }: Props) =>
           },
         },
         xAxis: {
-          type: 'time',
-          axisLabel: {
-            formatter: '{dd}.{MM}.{yyyy}',
-          },
+          type: 'category',
         },
         yAxis: {
           type: 'value',
@@ -59,8 +55,7 @@ export const VentefristUtløperGraf = ({ height, behandlingerPaVent }: Props) =>
         series: [
           {
             data,
-            type: 'line',
-            areaStyle: {},
+            type: 'bar',
           },
         ],
         color: ['#337c9b'],
@@ -71,31 +66,17 @@ export const VentefristUtløperGraf = ({ height, behandlingerPaVent }: Props) =>
 
 const lagKoordinater = (oppgaverManueltPaVent: BehandlingVentefrist[]): Koordinat[] =>
   oppgaverManueltPaVent.map(o => ({
-    x: dayjs(o.behandlingFrist).startOf('day').toDate().getTime(),
+    x: o.fristUke,
     y: o.antall,
   }));
 
-const lagDatastruktur = (koordinater: Koordinat[]): (number | Date)[][] => {
-  const nyeKoordinater = [];
-  const periodeStart = koordinater
-    .map(koordinat => dayjs(koordinat.x))
-    .reduce(
-      (tidligesteDato, dato) => (tidligesteDato.isSameOrBefore(dato) ? tidligesteDato : dato),
-      dayjs().startOf('day'),
-    )
-    .toDate();
-  const periodeSlutt = koordinater
-    .map(koordinat => dayjs(koordinat.x))
-    .reduce((senesteDato, dato) => (senesteDato.isSameOrAfter(dato) ? senesteDato : dato), dayjs().startOf('day'))
-    .toDate();
-
-  for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {
-    const sumY = koordinater
-      .filter(k => dayjs(k.x).isSame(dato))
-      .map(k => k.y)
-      .reduce((sum, y) => sum + y, 0);
-    nyeKoordinater.push([dato.toDate(), sumY]);
-  }
-
-  return nyeKoordinater;
+const lagDatastruktur = (koordinater: Koordinat[]): (number | string)[][] => {
+  const nyeKoordinater: Record<string, number> = koordinater.reduce(
+    (acc, { x, y }) => {
+      acc[x] = (acc[x] || 0) + y;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+  return Object.entries(nyeKoordinater).sort((a, b) => a[0].localeCompare(b[0]));
 };

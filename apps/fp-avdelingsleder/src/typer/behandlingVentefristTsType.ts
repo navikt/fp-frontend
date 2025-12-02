@@ -1,5 +1,5 @@
 export type BehandlingVentefrist = Readonly<{
   fagsakYtelseType: string;
-  behandlingFrist: string;
+  fristUke: string;
   antall: number;
 }>;

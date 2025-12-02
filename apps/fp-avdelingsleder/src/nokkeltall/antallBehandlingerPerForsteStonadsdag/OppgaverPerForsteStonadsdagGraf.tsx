@@ -1,26 +1,33 @@
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import type { IntlShape } from 'react-intl';
+import { useIntl } from 'react-intl';
+
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { ReactECharts } from '@navikt/fp-los-felles';
 
-import type { OppgaverForForsteStonadsdag } from '../../typer/oppgaverForForsteStonadsdagTsType';
+import type { OppgaverForForsteStonadsdagUkeMnd } from '../../typer/oppgaverForForsteStonadsdagUkeMndTsType.ts';
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
 
 interface Koordinat {
-  x: number;
+  x: string;
   y: number;
 }
 
 interface Props {
   height: number;
-  oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdag[];
+  oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdagUkeMnd[];
 }
 
+const getYearText = (month: number, intl: IntlShape): string =>
+  intl.formatMessage({ id: `OppgaverPerForsteStonadsdagGraf.${month}` });
+
 export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStonadsdag }: Props) => {
+  const intl = useIntl();
   const koordinater = lagKoordinater(oppgaverPerForsteStonadsdag);
   const data = lagDatastruktur(koordinater);
   return (
@@ -30,9 +37,12 @@ export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStona
         tooltip: {
           trigger: 'axis',
           axisPointer: {
-            snap: true,
+            type: 'shadow',
             label: {
-              formatter: params => dayjs(params.value).format(DDMMYYYY_DATE_FORMAT),
+              formatter: params => {
+                const dato = dayjs(params.value);
+                return `${getYearText(dato.month(), intl)} - ${dato.year()}`;
+              },
             },
           },
         },
@@ -40,14 +50,18 @@ export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStona
           feature: {
             saveAsImage: {
               title: 'Lagre ',
-              name: 'Antall_førstegangsbehandlinger_fordelt_på_første_stønadsdag',
+              name: 'Antall_førstegangsbehandling_oppgaver_fordelt_på_første_stønadsdag',
             },
           },
         },
         xAxis: {
-          type: 'time',
+          type: 'category',
+          boundaryGap: true,
           axisLabel: {
-            formatter: '{dd}.{MM}.{yyyy}',
+            formatter: value => {
+              const dato = dayjs(value);
+              return `${getYearText(dato.month(), intl)}\n${dato.year()}`;
+            },
           },
         },
         yAxis: {
@@ -56,8 +70,7 @@ export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStona
         series: [
           {
             data,
-            type: 'line',
-            areaStyle: {},
+            type: 'bar',
           },
         ],
         color: ['#337c9b'],
@@ -66,29 +79,20 @@ export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStona
   );
 };
 
-const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdag[]): Koordinat[] =>
+const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdagUkeMnd[]): Koordinat[] =>
   oppgaverPerForsteStonadsdag.map(o => ({
-    x: dayjs(o.forsteStonadsdag).startOf('day').toDate().getTime(),
+    x: dayjs(o.førsteStønadsdag).startOf('month').format(ISO_DATE_FORMAT),
     y: o.antall,
   }));
 
-const lagDatastruktur = (koordinater: Koordinat[]): number[][] => {
-  const nyeKoordinater = [];
-  const periodeStart = koordinater
-    .map(koordinat => dayjs(koordinat.x))
-    .reduce(
-      (tidligesteDato, dato) => (tidligesteDato.isSameOrBefore(dato) ? tidligesteDato : dato),
-      dayjs().startOf('day'),
-    )
-    .toDate();
-  const periodeSlutt = koordinater
-    .map(koordinat => dayjs(koordinat.x))
-    .reduce((senesteDato, dato) => (senesteDato.isSameOrAfter(dato) ? senesteDato : dato), dayjs().startOf('day'))
-    .toDate();
 
-  for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {
-    const funnetKoordinat = koordinater.find(k => dayjs(k.x).isSame(dato));
-    nyeKoordinater.push([dato.toDate().getTime(), funnetKoordinat ? funnetKoordinat.y : 0]);
-  }
-  return nyeKoordinater;
+const lagDatastruktur = (koordinater: Koordinat[]): (number | string)[][] => {
+  const nyeKoordinater: Record<string, number> = koordinater.reduce(
+    (acc, { x, y }) => {
+      acc[x] = (acc[x] || 0) + y;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+  return Object.entries(nyeKoordinater).sort((a, b) => a[0].localeCompare(b[0]));
 };
