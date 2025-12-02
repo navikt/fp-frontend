@@ -143,26 +143,6 @@ export const grupperOptions = (avdelingEnhet: string) =>
         .json<SaksbehandlereOgSaksbehandlerGrupper>(),
   });
 
-export const oppgaverPerFørsteStønadsdagOptions = (avdelingEnhet: string) =>
-  queryOptions({
-    queryKey: [LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG, avdelingEnhet],
-    queryFn: () =>
-      kyExtended
-        .get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG, { searchParams: { avdelingEnhet } })
-        .json<OppgaverForForsteStonadsdag[]>(),
-    initialData: [],
-  });
-
-export const oppgaverPerFørsteStønadsdagUkeOptions = (avdelingEnhet: string) =>
-  queryOptions({
-    queryKey: [LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_UKE, avdelingEnhet],
-    queryFn: () =>
-      kyExtended
-        .get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_UKE, { searchParams: { avdelingEnhet } })
-        .json<OppgaverForForsteStonadsdagUkeMnd[]>(),
-    initialData: [],
-  });
-
 export const oppgaverPerFørsteStønadsdagMånedOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND, avdelingEnhet],
