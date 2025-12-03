@@ -20,9 +20,13 @@
       "kommentar": "saksbehandler"
     }
   ],
+  "outboundRules": [
+    {
+      "application": "fpmottak"
+    }
+  ],
   "externals": [
-    "fpsak-api.prod-fss-pub.nais.io",
-    "fpfordel.prod-fss-pub.nais.io"
+    "fpsak-api.prod-fss-pub.nais.io"
   ],
   "proxyRedirects": [
     {
@@ -31,9 +35,9 @@
       "scope": "api://prod-fss.teamforeldrepenger.fpsak/.default"
     },
     {
-      "path": "/fpfordel/api",
-      "url": "https://fpfordel.prod-fss-pub.nais.io",
-      "scope": "api://prod-fss.teamforeldrepenger.fpfordel/.default"
+      "path": "/fpmottak/api",
+      "url": "http://fpmottak",
+      "scope": "api://prod-gcp.teamforeldrepenger.fpmottak/.default"
     }
   ]
 }

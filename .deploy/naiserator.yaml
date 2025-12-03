@@ -53,6 +53,12 @@ spec:
         - /logout
   accessPolicy:
     outbound:
+      {{#if outboundRules}}
+      rules:
+        {{#each outboundRules as |outboundRule|}}
+        - application: "{{outboundRule.application}}"
+        {{/each }}
+      {{/if}}
       external:
         {{#each externals as |external|}}
         - host: "{{external}}"
