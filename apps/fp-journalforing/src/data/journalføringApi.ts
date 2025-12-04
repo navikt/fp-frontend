@@ -26,46 +26,46 @@ const kyExtended = ky.extend({
 const isTest = import.meta.env.MODE === 'test';
 const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
-export const FpFordelUrl = {
-  ALLE_JOURNAL_OPPGAVER: wrapUrl('/fpfordel/api/journalfoering/oppgaver'),
-  HENT_JOURNALPOST_DETALJER: wrapUrl('/fpfordel/api/journalfoering/oppgave/detaljer'),
-  FERDIGSTILL_JOURNALFØRING: wrapUrl('/fpfordel/api/sak/ferdigstill'),
-  KNYTT_JOURNALPOST_TIL_ANNEN_SAK: wrapUrl('/fpfordel/api/sak/knyttTilAnnenSak'),
-  OPPDATER_MED_BRUKER: wrapUrl('/fpfordel/api/journalfoering/bruker/oppdater'),
-  HENT_BRUKER: wrapUrl('/fpfordel/api/journalfoering/bruker/hent'),
-  RESERVER_OPPGAVE: wrapUrl('/fpfordel/api/journalfoering/oppgave/reserver'),
-  FLYTT_OPPGAVE_TIL_GOSYS: wrapUrl('/fpfordel/api/journalfoering/oppgave/tilgosys'),
+export const FpmottakUrl = {
+  ALLE_JOURNAL_OPPGAVER: wrapUrl('/fpmottak/api/journalfoering/oppgaver'),
+  HENT_JOURNALPOST_DETALJER: wrapUrl('/fpmottak/api/journalfoering/oppgave/detaljer'),
+  FERDIGSTILL_JOURNALFØRING: wrapUrl('/fpmottak/api/sak/ferdigstill'),
+  KNYTT_JOURNALPOST_TIL_ANNEN_SAK: wrapUrl('/fpmottak/api/sak/knyttTilAnnenSak'),
+  OPPDATER_MED_BRUKER: wrapUrl('/fpmottak/api/journalfoering/bruker/oppdater'),
+  HENT_BRUKER: wrapUrl('/fpmottak/api/journalfoering/bruker/hent'),
+  RESERVER_OPPGAVE: wrapUrl('/fpmottak/api/journalfoering/oppgave/reserver'),
+  FLYTT_OPPGAVE_TIL_GOSYS: wrapUrl('/fpmottak/api/journalfoering/oppgave/tilgosys'),
 };
 
 export const hentAlleJournalOppgaver = (ident?: string) =>
   queryOptions({
-    queryKey: [FpFordelUrl.ALLE_JOURNAL_OPPGAVER, ident],
+    queryKey: [FpmottakUrl.ALLE_JOURNAL_OPPGAVER, ident],
     queryFn: () =>
-      kyExtended.get(FpFordelUrl.ALLE_JOURNAL_OPPGAVER, { searchParams: { ident: ident ?? '' } }).json<Oppgave[]>(),
+      kyExtended.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, { searchParams: { ident: ident ?? '' } }).json<Oppgave[]>(),
     enabled: ident !== undefined,
     staleTime: Infinity,
   });
 
 export const hentJournalpostDetaljer = (journalpostId: string) =>
-  kyExtended.get(FpFordelUrl.HENT_JOURNALPOST_DETALJER, { searchParams: { journalpostId } }).json<Journalpost>();
+  kyExtended.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, { searchParams: { journalpostId } }).json<Journalpost>();
 
 export const ferdigstillJournalføring = (values: JournalførSubmitValue) =>
-  kyExtended.post(FpFordelUrl.FERDIGSTILL_JOURNALFØRING, { json: values }).json<SaksnummerType>();
+  kyExtended.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, { json: values }).json<SaksnummerType>();
 
 export const knyttJournalpostTilAnnenSak = (values: JournalførSubmitValue) =>
-  kyExtended.post(FpFordelUrl.KNYTT_JOURNALPOST_TIL_ANNEN_SAK, { json: values }).json<SaksnummerType>();
+  kyExtended.post(FpmottakUrl.KNYTT_JOURNALPOST_TIL_ANNEN_SAK, { json: values }).json<SaksnummerType>();
 
 export const oppdaterMedBruker = (values: OppdaterMedBruker) =>
-  kyExtended.post(FpFordelUrl.OPPDATER_MED_BRUKER, { json: values }).json<Journalpost>();
+  kyExtended.post(FpmottakUrl.OPPDATER_MED_BRUKER, { json: values }).json<Journalpost>();
 
 export const hentBruker = (fødselsnummer: string) =>
-  kyExtended.post(FpFordelUrl.HENT_BRUKER, { json: { fødselsnummer } }).json<ForhåndsvisBrukerRespons>();
+  kyExtended.post(FpmottakUrl.HENT_BRUKER, { json: { fødselsnummer } }).json<ForhåndsvisBrukerRespons>();
 
 export const reserverBruker = (values: ReserverOppgaveType) =>
-  kyExtended.post(FpFordelUrl.RESERVER_OPPGAVE, { json: values }).json<void>();
+  kyExtended.post(FpmottakUrl.RESERVER_OPPGAVE, { json: values }).json<void>();
 
 export const flyttOppgaveTilGosys = (journalpostId: string) =>
-  kyExtended.post(FpFordelUrl.FLYTT_OPPGAVE_TIL_GOSYS, { json: { journalpostId } }).json<void>();
+  kyExtended.post(FpmottakUrl.FLYTT_OPPGAVE_TIL_GOSYS, { json: { journalpostId } }).json<void>();
 
 type BrukerInfo = {
   onPremisesSamAccountName: string;
