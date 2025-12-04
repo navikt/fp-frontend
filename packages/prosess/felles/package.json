@@ -20,12 +20,12 @@
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-form-hooks": "10.2.0",
-    "@navikt/ft-form-validators": "4.3.0",
-    "@navikt/ft-ui-komponenter": "6.4.0",
-    "@navikt/ft-utils": "3.9.0",
+    "@navikt/ft-form-hooks": "10.2.2",
+    "@navikt/ft-form-validators": "4.3.1",
+    "@navikt/ft-ui-komponenter": "6.4.2",
+    "@navikt/ft-utils": "3.9.1",
     "react": "19.2.0",
-    "react-hook-form": "7.66.0",
+    "react-hook-form": "7.66.1",
     "react-intl": "7.1.14"
   },
   "devDependencies": {
@@ -34,7 +34,7 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "eslint": "9.39.1",
-    "stylelint": "16.26.0",
+    "stylelint": "16.26.1",
     "typescript": "5.9.3"
   }
 }
