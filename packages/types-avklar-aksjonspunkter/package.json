@@ -17,11 +17,11 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-fakta-beregning": "12.2.0",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "13.3.0",
-    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "8.2.0",
-    "@navikt/ft-prosess-beregningsgrunnlag": "11.3.0",
-    "@navikt/ft-prosess-tilbakekreving-vedtak": "7.2.0"
+    "@navikt/ft-fakta-beregning": "12.2.2",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "13.3.2",
+    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "8.2.2",
+    "@navikt/ft-prosess-beregningsgrunnlag": "11.3.2",
+    "@navikt/ft-prosess-tilbakekreving-vedtak": "7.2.2"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",

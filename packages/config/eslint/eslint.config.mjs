@@ -135,4 +135,5 @@ export default [
       'react-hooks/rules-of-hooks': OFF,
     },
   },
+  { files: ['**/apiDtoGenerert.ts'], rules: { '@typescript-eslint/no-redundant-type-constituents': OFF } },
 ];
