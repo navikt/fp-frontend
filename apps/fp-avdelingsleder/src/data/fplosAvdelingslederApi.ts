@@ -10,8 +10,7 @@ import type { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';
 import type { InnloggetBruker } from '../typer/innloggetBruker';
 import type { OppgaverForAvdeling } from '../typer/oppgaverForAvdelingTsType';
 import type { OppgaveForDato } from '../typer/oppgaverForDatoTsType';
-import type { OppgaverForForsteStonadsdag } from '../typer/oppgaverForForsteStonadsdagTsType';
-import type { OppgaverForForsteStonadsdagUkeMnd } from '../typer/oppgaverForForsteStonadsdagUkeMndTsType.ts';
+import type { OppgaverForForsteStonadsdagUkeMnd } from '../typer/oppgaverForForsteStonadsdagUkeMndTsType';
 import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import type { Reservasjon } from '../typer/reservasjonTsType';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
@@ -141,26 +140,6 @@ export const grupperOptions = (avdelingEnhet: string) =>
       kyExtended
         .get(LosUrl.HENT_GRUPPER, { searchParams: { avdelingEnhet } })
         .json<SaksbehandlereOgSaksbehandlerGrupper>(),
-  });
-
-export const oppgaverPerFørsteStønadsdagOptions = (avdelingEnhet: string) =>
-  queryOptions({
-    queryKey: [LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG, avdelingEnhet],
-    queryFn: () =>
-      kyExtended
-        .get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG, { searchParams: { avdelingEnhet } })
-        .json<OppgaverForForsteStonadsdag[]>(),
-    initialData: [],
-  });
-
-export const oppgaverPerFørsteStønadsdagUkeOptions = (avdelingEnhet: string) =>
-  queryOptions({
-    queryKey: [LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_UKE, avdelingEnhet],
-    queryFn: () =>
-      kyExtended
-        .get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_UKE, { searchParams: { avdelingEnhet } })
-        .json<OppgaverForForsteStonadsdagUkeMnd[]>(),
-    initialData: [],
   });
 
 export const oppgaverPerFørsteStønadsdagMånedOptions = (avdelingEnhet: string) =>
