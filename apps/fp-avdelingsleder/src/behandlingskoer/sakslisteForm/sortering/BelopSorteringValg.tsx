@@ -15,8 +15,8 @@ import { useDebounce } from '../useDebounce';
 import styles from './sorteringVelger.module.css';
 
 export type FormValues = {
-  fra?: string;
-  til?: string;
+  fraBeløp?: string;
+  tilBeløp?: string;
 };
 
 interface Props {
@@ -28,8 +28,8 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
   const queryClient = useQueryClient();
 
   const { watch, trigger, control } = useFormContext<FormValues>();
-  const fraVerdi = watch('fra');
-  const tilVerdi = watch('til');
+  const fraVerdi = watch('fraBeløp');
+  const tilVerdi = watch('tilBeløp');
 
   const { mutate: lagreSakslisteSorteringTidsintervallDager } = useMutation({
     mutationFn: (valuesToStore: { fra: string | undefined; til: string | undefined }) =>
@@ -58,8 +58,8 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
       til: nyTilVerdi,
     });
 
-  const lagreFraDebounce = useDebounce('fra', lagreFra, trigger);
-  const lagreTilDebounce = useDebounce('til', lagreTil, trigger);
+  const lagreFraDebounce = useDebounce('fraBeløp', lagreFra, trigger);
+  const lagreTilDebounce = useDebounce('tilBeløp', lagreTil, trigger);
 
   return (
     <ArrowBox>
@@ -68,7 +68,7 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
       </Detail>
       <HStack gap="space-16">
         <RhfTextField
-          name="fra"
+          name="fraBeløp"
           control={control}
           className={styles['dato']}
           validate={[hasValidPosOrNegInteger]}
@@ -78,7 +78,7 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
           <FormattedMessage id="SorteringVelger.Valuta" />
         </Detail>
         <RhfTextField
-          name="til"
+          name="tilBeløp"
           control={control}
           className={styles['dato']}
           validate={[hasValidPosOrNegInteger]}
