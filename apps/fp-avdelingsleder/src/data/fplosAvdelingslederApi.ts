@@ -63,8 +63,6 @@ export const LosUrl = {
   HENT_OPPGAVER_PER_DATO: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid-historikk'),
   HENT_OPPGAVER_APNE_ELLER_PA_VENT: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/åpne-behandlinger'),
   HENT_BEHANDLINGER_FRISTUTLOP: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/frist-utløp'),
-  HENT_OPPGAVER_PER_FORSTE_STONADSDAG: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag'),
-  HENT_OPPGAVER_PER_FORSTE_STONADSDAG_UKE: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag-uke'),
   HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag-mnd'),
   RESERVASJONER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/reservasjoner'),
   SLETT_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister/slett'),
