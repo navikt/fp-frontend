@@ -111,12 +111,6 @@ jobs:
           build_args: |
             APP_NAME=${{ inputs.app }}
 
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # ratchet:actions/upload-artifact@v4.6.2
-        with:
-          name: code-coverage-report
-          path: coverage
-
       - name: Lagre alltid turbo cache
         if: always() && steps.hent-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4

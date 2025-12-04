@@ -53,7 +53,7 @@ const createInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
   overstyringApKode: VilkårOverstyringAksjonspunkter,
-  behandlingsresultat: BehandlingFpSak['behandlingsresultat'] | undefined,
+  behandlingsresultat: BehandlingFpSak['behandlingsresultat'],
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined,
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === overstyringApKode);

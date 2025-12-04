@@ -27,7 +27,7 @@ const meta = {
           notat: params.notat,
         }),
       }));
-      return Promise.resolve<void | undefined>(undefined);
+      return Promise.resolve();
     };
 
     return (
