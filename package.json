@@ -40,7 +40,7 @@
   ],
   "devDependencies": {
     "@hey-api/openapi-ts": "0.88.0",
-    "@navikt/aksel-stylelint": "7.33.0",
+    "@navikt/aksel-stylelint": "7.34.0",
     "@storybook/addon-a11y": "10.1.2",
     "@storybook/addon-links": "10.1.2",
     "@storybook/react": "10.1.2",
