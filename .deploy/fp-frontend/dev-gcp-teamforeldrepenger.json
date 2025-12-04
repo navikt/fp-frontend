@@ -24,11 +24,15 @@
       "kommentar": "veileder"
     }
   ],
+  "outboundRules": [
+    {
+      "application": "fpmottak"
+    }
+  ],
   "externals": [
     "fpsak-api.dev-fss-pub.nais.io",
     "fplos.dev-fss-pub.nais.io",
-    "fptilbake.dev-fss-pub.nais.io",
-    "fpfordel.dev-fss-pub.nais.io"
+    "fptilbake.dev-fss-pub.nais.io"
   ],
   "proxyRedirects": [
     {
@@ -47,9 +51,9 @@
       "scope": "api://dev-fss.teamforeldrepenger.fplos/.default"
     },
     {
-      "path": "/fpfordel/api",
-      "url": "https://fpfordel.dev-fss-pub.nais.io",
-      "scope": "api://dev-fss.teamforeldrepenger.fpfordel/.default"
+      "path": "/fpmottak/api",
+      "url": "http://fpmottak",
+      "scope": "api://dev-gcp.teamforeldrepenger.fpmottak/.default"
     }
   ]
 }

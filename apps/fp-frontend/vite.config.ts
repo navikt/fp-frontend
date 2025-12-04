@@ -27,7 +27,7 @@ export default mergeConfig(createSharedAppConfig(), {
         changeOrigin: false,
         secure: false,
       },
-      '/fpfordel/api': {
+      '/fpmottak/api': {
         target: 'http://127.0.0.1:9000',
         changeOrigin: false,
         secure: false,
