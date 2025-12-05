@@ -1492,10 +1492,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-stylelint@npm:7.33.0":
-  version: 7.33.0
-  resolution: "@navikt/aksel-stylelint@npm:7.33.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.33.0%2F7d9ee5d79ac2569919db6fb0dbf49cb17219008c"
-  checksum: 10/ee9343cb67fbcb8c7975725d27ebff23a0fbaf4e2a0b3d7b085c010fa07a4947781f7c90a740cfb5f59194d2cebb3dab159d88e5b61dbc39c2de8fbe9d6abad5
+"@navikt/aksel-stylelint@npm:7.34.0":
+  version: 7.34.0
+  resolution: "@navikt/aksel-stylelint@npm:7.34.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.34.0%2Fce05917c85fb4d894fb1141ac88dfa50632f64ff"
+  checksum: 10/7d413b00a7a61d5ea0059255abe6635ab2973e37ce875c912e156c794cd77cf3132e192c3ee44a8efe54a044dd226e3e0ab52910e53bdd2b3212ec04ee691fde
   languageName: node
   linkType: hard
 
@@ -8223,7 +8223,7 @@ __metadata:
   resolution: "fp-frontend@workspace:."
   dependencies:
     "@hey-api/openapi-ts": "npm:0.88.0"
-    "@navikt/aksel-stylelint": "npm:7.33.0"
+    "@navikt/aksel-stylelint": "npm:7.34.0"
     "@storybook/addon-a11y": "npm:10.1.2"
     "@storybook/addon-links": "npm:10.1.2"
     "@storybook/react": "npm:10.1.2"
