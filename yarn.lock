@@ -1492,10 +1492,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-stylelint@npm:7.33.0":
-  version: 7.33.0
-  resolution: "@navikt/aksel-stylelint@npm:7.33.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.33.0%2F7d9ee5d79ac2569919db6fb0dbf49cb17219008c"
-  checksum: 10/ee9343cb67fbcb8c7975725d27ebff23a0fbaf4e2a0b3d7b085c010fa07a4947781f7c90a740cfb5f59194d2cebb3dab159d88e5b61dbc39c2de8fbe9d6abad5
+"@navikt/aksel-stylelint@npm:7.35.0":
+  version: 7.35.0
+  resolution: "@navikt/aksel-stylelint@npm:7.35.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.35.0%2F9ce495261a89b411d8fea1b2298ce112791f61d6"
+  checksum: 10/48e8abbb9e39d79c9b5d2fb8823201b9efc6820973ade7c604d3f773c3f7a8e29c360230fd56c4f0105195575ff3d0849d6afc49fed2f768c35f1ec8b3259158
   languageName: node
   linkType: hard
 
@@ -8223,7 +8223,7 @@ __metadata:
   resolution: "fp-frontend@workspace:."
   dependencies:
     "@hey-api/openapi-ts": "npm:0.88.0"
-    "@navikt/aksel-stylelint": "npm:7.33.0"
+    "@navikt/aksel-stylelint": "npm:7.35.0"
     "@storybook/addon-a11y": "npm:10.1.2"
     "@storybook/addon-links": "npm:10.1.2"
     "@storybook/react": "npm:10.1.2"
@@ -8234,7 +8234,7 @@ __metadata:
     "@types/react-router-dom": "npm:5.3.3"
     husky: "npm:9.1.7"
     jsdom: "npm:27.2.0"
-    knip: "npm:5.70.2"
+    knip: "npm:5.71.0"
     lint-staged: "npm:16.2.7"
     prettier: "npm:3.7.3"
     shelljs: "npm:0.10.0"
@@ -9405,9 +9405,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knip@npm:5.70.2":
-  version: 5.70.2
-  resolution: "knip@npm:5.70.2"
+"knip@npm:5.71.0":
+  version: 5.71.0
+  resolution: "knip@npm:5.71.0"
   dependencies:
     "@nodelib/fs.walk": "npm:^1.2.3"
     fast-glob: "npm:^3.3.3"
@@ -9427,7 +9427,7 @@ __metadata:
   bin:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
-  checksum: 10/918a98dcc29a5d1592c7b92c1df20ef01f11fd21ce21aed26e32c405824d2eb6e6b147db78a3d70c229e7f5da208394b478c162ea4e2bc59fdd1670d35df3b95
+  checksum: 10/68c1508be9db70865559f5ebc106f8a6aced8e4799949655e92a59fbb3f530c042087e50565cfdd698b619f69f584ee214cc7b315f3241d483d09e4fd200c45b
   languageName: node
   linkType: hard
 
