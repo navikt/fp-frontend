@@ -19,9 +19,9 @@
     "storybook": "storybook dev --quiet -p 7006"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.33.0",
-    "@navikt/ds-css": "7.33.0",
-    "@navikt/ds-react": "7.33.0",
+    "@navikt/aksel-icons": "7.35.0",
+    "@navikt/ds-css": "7.35.0",
+    "@navikt/ds-react": "7.35.0",
     "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
@@ -44,7 +44,7 @@
     "storybook": "10.1.2",
     "stylelint": "16.26.1",
     "typescript": "5.9.3",
-    "vite": "7.2.4",
+    "vite": "7.2.6",
     "vitest": "4.0.14"
   }
 }

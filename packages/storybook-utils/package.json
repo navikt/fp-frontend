@@ -14,7 +14,7 @@
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.33.0",
+    "@navikt/ds-react": "7.35.0",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
