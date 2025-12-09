@@ -20,7 +20,7 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 interface Props {
-  personoversikt: Personoversikt;
+  personoversikt?: Personoversikt;
 }
 
 export const OmsorgOgRettFaktaInitPanel = ({ personoversikt }: Props) => {
