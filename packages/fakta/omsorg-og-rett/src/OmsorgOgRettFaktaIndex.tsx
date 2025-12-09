@@ -11,7 +11,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 export interface OmsorgOgRettProps {
-  personoversikt: Personoversikt;
+  personoversikt?: Personoversikt;
   omsorgOgRett: OmsorgOgRett;
   kanOverstyre: boolean;
 }
