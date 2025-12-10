@@ -6,9 +6,9 @@ import { Dropdown, InternalHeader, Link, Spacer, Theme } from '@navikt/ds-react'
 import { createIntl } from '@navikt/ft-utils';
 
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
+import { Adventslys } from './jul/Adventslys';
 import type { DekoratorLenke } from './typer/dekoratorLenke';
 import type { Feilmelding } from './typer/feilmeldingTsType';
-import { Adventslys } from './jul/Adventslys';
 
 import styles from './dekoratorMedFeilviserSakIndex.module.css';
 

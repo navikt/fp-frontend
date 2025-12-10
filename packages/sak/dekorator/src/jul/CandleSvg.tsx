@@ -1,4 +1,5 @@
-export function CandleSvg() {
+/* eslint-disable max-len */
+export const CandleSvg = () => {
   return (
     <svg width="17" height="27" viewBox="0 0 17 27" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -31,4 +32,4 @@ export function CandleSvg() {
       <path d="M15.9488 4.51132L15.9488 24.1549" stroke="black" strokeWidth="0.4" />
     </svg>
   );
-}
+};

@@ -1,4 +1,5 @@
-export function CandleLightMeltSvg() {
+/* eslint-disable max-len */
+export const CandleLightMeltSvg = () => {
   return (
     <svg width="25" height="40" viewBox="0 0 25 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -27,6 +28,7 @@ export function CandleLightMeltSvg() {
         strokeWidth="0.72388"
         strokeLinecap="round"
       />
+      { }
       <path
         d="M15.6784 16.419C15.6784 16.5324 12.18 16.4663 10.4308 16.419C9.94022 16.2963 11.6772 15.9615 12.6144 15.8733V13.2988H13.4654V15.8881C14.3368 15.9942 15.6784 16.3024 15.6784 16.419Z"
         fill="#002256"
