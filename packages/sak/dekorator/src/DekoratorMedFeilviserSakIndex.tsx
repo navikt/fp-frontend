@@ -6,6 +6,7 @@ import { Dropdown, InternalHeader, Link, Spacer, Theme } from '@navikt/ds-react'
 import { createIntl } from '@navikt/ft-utils';
 
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
+import { Adventslys } from './jul/Adventslys';
 import type { DekoratorLenke } from './typer/dekoratorLenke';
 import type { Feilmelding } from './typer/feilmeldingTsType';
 
@@ -63,6 +64,8 @@ export const DekoratorMedFeilviserSakIndex = ({
           <InternalHeader.Title href={tittelLenke} onClick={tittelCallback} onContextMenu={tittelCallback}>
             {tittel}
           </InternalHeader.Title>
+          <Spacer />
+          <Adventslys />
           <Spacer />
           <Dropdown>
             <InternalHeader.Button as={Dropdown.Toggle}>
