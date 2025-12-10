@@ -24,10 +24,10 @@
     "storybook": "storybook dev --quiet -p 7001"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.33.0",
-    "@navikt/ds-css": "7.33.0",
+    "@navikt/aksel-icons": "7.35.0",
+    "@navikt/ds-css": "7.35.0",
     "@navikt/ds-css-internal": "3.4.3",
-    "@navikt/ds-react": "7.33.0",
+    "@navikt/ds-react": "7.35.0",
     "@navikt/fp-app-felles": "workspace:*",
     "@navikt/fp-fakta-arbeid-og-inntekt": "workspace:*",
     "@navikt/fp-fakta-arbeidsforhold": "workspace:*",
@@ -144,7 +144,7 @@
     "storybook": "10.1.2",
     "stylelint": "16.26.1",
     "typescript": "5.9.3",
-    "vite": "7.2.4",
+    "vite": "7.2.6",
     "vitest": "4.0.14"
   }
 }

@@ -20,7 +20,7 @@
     "storybook": "storybook dev --quiet -p 7020"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.33.0",
+    "@navikt/ds-react": "7.35.0",
     "@navikt/ft-utils": "3.9.1",
     "react": "19.2.0",
     "react-intl": "7.1.14"
@@ -37,7 +37,7 @@
     "storybook": "10.1.2",
     "stylelint": "16.26.1",
     "typescript": "5.9.3",
-    "vite": "7.2.4",
+    "vite": "7.2.6",
     "vitest": "4.0.14"
   }
 }
