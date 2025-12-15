@@ -24,8 +24,9 @@ export const FerdigstillOppgaveKnapp = ({ oppgave, ferdigstillOppgave }: Props) 
         setFerdigstiller(true);
         try {
           await ferdigstillOppgave(oppgave.oppgaveId);
-        } finally {
+        } catch (e) {
           setFerdigstiller(false);
+          throw e;
         }
       }}
       type="button"
