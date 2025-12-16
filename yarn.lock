@@ -2472,6 +2472,7 @@ __metadata:
     "@navikt/ft-form-hooks": "npm:10.2.4"
     "@navikt/ft-form-validators": "npm:4.3.3"
     "@navikt/ft-plattform-komponenter": "npm:10.2.7"
+    "@navikt/ft-prosess-beregning": "portal:../../../ft-frontend-saksbehandling/packages/prosess-beregning"
     "@navikt/ft-prosess-beregningsgrunnlag": "npm:11.3.4"
     "@navikt/ft-prosess-tilbakekreving": "npm:9.2.4"
     "@navikt/ft-prosess-tilbakekreving-foreldelse": "npm:8.3.4"
@@ -4459,6 +4460,40 @@ __metadata:
   checksum: 10/b3b4c97cafa3768cfdb7a58f89ea24a95d04580de64a466ad7d21c23b82eb77c88274abbe0909a48804055e62b1042904ac18f15aed05b20d013dbaf9185b4e0
   languageName: node
   linkType: hard
+
+"@navikt/ft-prosess-beregning@portal:../../../ft-frontend-saksbehandling/packages/prosess-beregning::locator=%40navikt%2Ffp-frontend%40workspace%3Aapps%2Ffp-frontend":
+  version: 0.0.0-use.local
+  resolution: "@navikt/ft-prosess-beregning@portal:../../../ft-frontend-saksbehandling/packages/prosess-beregning::locator=%40navikt%2Ffp-frontend%40workspace%3Aapps%2Ffp-frontend"
+  dependencies:
+    "@navikt/aksel-icons": "npm:7.32.5"
+    "@navikt/ds-css": "npm:7.32.5"
+    "@navikt/ds-react": "npm:7.32.5"
+    "@navikt/ft-form-hooks": "npm:10.2.4"
+    "@navikt/ft-form-validators": "npm:4.3.3"
+    "@navikt/ft-ui-komponenter": "npm:6.4.4"
+    "@navikt/ft-utils": "npm:3.9.3"
+    dayjs: "npm:1.11.19"
+    echarts: "npm:6.0.0"
+    react: "npm:19.2.0"
+    react-hook-form: "npm:7.66.0"
+    react-intl: "npm:7.1.14"
+  peerDependencies:
+    "@navikt/aksel-icons": 7.x
+    "@navikt/ds-css": 7.x
+    "@navikt/ds-react": 7.x
+    "@navikt/ft-form-hooks": 5.x
+    "@navikt/ft-form-validators": 2.x
+    "@navikt/ft-kodeverk": 4.x
+    "@navikt/ft-types": 3.x
+    "@navikt/ft-ui-komponenter": 2.x
+    "@navikt/ft-utils": 2.x
+    dayjs: 1.11.x
+    echarts: 6.x
+    react: 19.1.0
+    react-hook-form: 7.x
+    react-intl: 6.x
+  languageName: node
+  linkType: soft
 
 "@navikt/ft-prosess-beregningsgrunnlag@npm:11.3.4":
   version: 11.3.4
@@ -10683,6 +10718,15 @@ __metadata:
   peerDependencies:
     react: ^19.1.1
   checksum: 10/9005415d2175b1f1eb4a544ad04afb29691bb7b6dd43bbdaa09932146b310b73bd4552bc772ad78fa481f409eada1560cf887606c83c1a53a922c1e30f1b3a34
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:7.66.0":
+  version: 7.66.0
+  resolution: "react-hook-form@npm:7.66.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18 || ^19
+  checksum: 10/7342e7148419f0ab455ee1018c8f9ad39f1adda6be45122f885c2b26e237bde846a35724800a3be5cb96f264446474795c1b4c8f807ebf779640ccfcb9f4a1b4
   languageName: node
   linkType: hard
 

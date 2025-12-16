@@ -1,7 +1,9 @@
-import { type ComponentProps } from 'react';
+import { type ComponentProps, useState } from 'react';
 import { useIntl } from 'react-intl';
 
+import { ToggleGroup } from '@navikt/ds-react';
 import type { FtVilkar } from '@navikt/ft-fakta-beregning';
+import { BeregningProsessIndex } from '@navikt/ft-prosess-beregning';
 import {
   type BeregningAksjonspunktSubmitType,
   BeregningsgrunnlagProsessIndex,
@@ -174,10 +176,33 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
   );
 };
 
+type Visning = 'ny' | 'gammel';
+
 const Wrapper = (props: Omit<ComponentProps<typeof BeregningsgrunnlagProsessIndex>, 'formData' | 'setFormData'>) => {
   const { mellomlagretFormData, setMellomlagretFormData } =
     useMellomlagretFormData<React.ComponentProps<typeof BeregningsgrunnlagProsessIndex>['formData']>();
+
+  const erProd = globalThis.location.hostname.includes('intern.nav.no');
+  const [valgtVisning, setValgtVisning] = useState<Visning>('gammel');
+
   return (
-    <BeregningsgrunnlagProsessIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />
+    <>
+      {!erProd && (
+        <ToggleGroup value={valgtVisning} onChange={value => setValgtVisning(value as Visning)} size="small">
+          <ToggleGroup.Item value="gammel" label="Gammel" />
+          <ToggleGroup.Item value="ny" label="Ny" />
+        </ToggleGroup>
+      )}
+      {valgtVisning === 'gammel' && (
+        <BeregningsgrunnlagProsessIndex
+          {...props}
+          formData={mellomlagretFormData}
+          setFormData={setMellomlagretFormData}
+        />
+      )}
+      {valgtVisning === 'ny' && (
+        <BeregningProsessIndex {...props} beregningsgrunnlagsvilkår={props.beregningsgrunnlagsvilkar} />
+      )}
+    </>
   );
 };
