@@ -534,7 +534,7 @@ export type tjenester_behandling_dto_behandling_UtvidetBehandlingDto = {
   taskStatus?: tjenester_behandling_dto_AsyncPollingStatus;
   type: foreldrepenger_behandlingslager_behandling_BehandlingType;
   uuid: string;
-  venteÅrsakKode?: string;
+  venteÅrsakKode?: foreldrepenger_behandlingslager_behandling_aksjonspunkt_Venteårsak;
   versjon: number;
   vilkår: Array<tjenester_behandling_vilkår_VilkårDto>;
 };
@@ -2973,7 +2973,9 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   opphoersdato?: string;
   organisasjonstype?: folketrygdloven_kalkulus_kodeverk_Organisasjonstype;
   refusjonPrAar?: number;
+  sisteLønnsendringsdato?: string;
   startdato?: string;
+  stillingsprosenter?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_StillingsprosentDto>;
 };
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagDto = {
@@ -2991,6 +2993,7 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   hjemmel?: folketrygdloven_kalkulus_kodeverk_Hjemmel;
   inntektsgrunnlag?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagDto;
   refusjonTilVurdering?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_RefusjonTilVurderingDto;
+  refusjonskravSomKommerForSentListe?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravForSentDto>;
   sammenligningsgrunnlagPrStatus?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SammenligningsgrunnlagDto>;
   skjaeringstidspunktBeregning: string;
   skjæringstidspunkt: string;
@@ -3236,7 +3239,7 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmB
   frilansAndel?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmBeregningAndelDto;
   kortvarigeArbeidsforhold?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_KortvarigeArbeidsforholdDto>;
   kunYtelse?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_KunYtelseDto;
-  refusjonskravSomKommerForSentListe?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravSomKommerForSentDto>;
+  refusjonskravSomKommerForSentListe?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravForSentDto>;
   saksopplysninger?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fakta_Saksopplysninger;
   vurderBesteberegning?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderBesteberegningDto;
   vurderMilitaer?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderMilitærDto;
@@ -3274,7 +3277,9 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBe
   perioderMedGraderingEllerRefusjon: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_NyPeriodeDto>;
   permisjon?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PermisjonDto;
   refusjonPrAar?: number;
+  sisteLønnsendringsdato?: string;
   startdato?: string;
+  stillingsprosenter?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_StillingsprosentDto>;
 };
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagDto = {
@@ -3349,7 +3354,7 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PgiDto =
   årstall?: number;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravSomKommerForSentDto = {
+export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravForSentDto = {
   arbeidsgiverIdent: string;
   erRefusjonskravGyldig?: boolean;
 };
@@ -3362,6 +3367,12 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Sammenli
   sammenligningsgrunnlagFom?: string;
   sammenligningsgrunnlagTom?: string;
   sammenligningsgrunnlagType?: folketrygdloven_kalkulus_kodeverk_SammenligningsgrunnlagType;
+};
+
+export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_StillingsprosentDto = {
+  fomDato: string;
+  prosent: number;
+  tomDato: string;
 };
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SvangerskapspengerGrunnlagDto = {
@@ -3548,6 +3559,7 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_RefusjonTilVurderingDto = {
   andeler: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_RefusjonAndelTilVurderingDto>;
+  refusjonskravForSentListe: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravForSentDto>;
 };
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_TidligereUtbetalingDto = {
