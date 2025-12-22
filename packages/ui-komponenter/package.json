@@ -14,10 +14,10 @@
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.33.0",
+    "@navikt/ds-react": "7.35.2",
     "@navikt/fp-konstanter": "workspace:^",
     "@navikt/fp-utils": "workspace:^",
-    "react": "19.2.0"
+    "react": "19.2.3"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
