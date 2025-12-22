@@ -36,8 +36,8 @@
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@storybook/react": "10.1.2",
-    "@storybook/react-vite": "10.1.2",
-    "eslint": "9.39.1",
+    "@storybook/react-vite": "10.1.8",
+    "eslint": "9.39.2",
     "storybook": "10.1.2",
     "typescript": "5.9.3",
     "vite": "7.2.4"
