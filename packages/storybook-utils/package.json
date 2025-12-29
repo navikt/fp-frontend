@@ -30,7 +30,7 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@tanstack/react-query-devtools": "5.91.1",
-    "eslint": "9.39.1",
+    "eslint": "9.39.2",
     "typescript": "5.9.3"
   }
 }
