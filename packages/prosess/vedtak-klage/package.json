@@ -18,14 +18,14 @@
     "storybook": "storybook dev --quiet -p 7045"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.33.0",
+    "@navikt/ds-react": "7.36.0",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-prosess-felles": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-utils": "3.9.3",
-    "react": "19.2.0",
+    "@navikt/ft-utils": "3.9.4",
+    "react": "19.2.3",
     "react-intl": "7.1.14"
   },
   "devDependencies": {
@@ -33,15 +33,15 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
-    "@storybook/react": "10.1.2",
+    "@storybook/react": "10.1.10",
     "@storybook/react-vite": "10.1.2",
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "eslint": "9.39.1",
-    "storybook": "10.1.2",
+    "storybook": "10.1.10",
     "typescript": "5.9.3",
-    "vite": "7.2.4",
-    "vitest": "4.0.14"
+    "vite": "7.3.0",
+    "vitest": "4.0.16"
   }
 }
