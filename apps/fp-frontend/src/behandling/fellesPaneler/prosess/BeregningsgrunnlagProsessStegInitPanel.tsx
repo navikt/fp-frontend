@@ -1,7 +1,7 @@
 import { type ComponentProps, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { ToggleGroup } from '@navikt/ds-react';
+import { ToggleGroup, VStack } from '@navikt/ds-react';
 import type { FtVilkar } from '@navikt/ft-fakta-beregning';
 import { BeregningProsessIndex } from '@navikt/ft-prosess-beregning';
 import {
@@ -183,14 +183,17 @@ const Wrapper = (props: Omit<ComponentProps<typeof BeregningsgrunnlagProsessInde
     useMellomlagretFormData<React.ComponentProps<typeof BeregningsgrunnlagProsessIndex>['formData']>();
 
   const erProd = globalThis.location.hostname.includes('intern.nav.no');
-  const [valgtVisning, setValgtVisning] = useState<Visning>('gammel');
+  const erAktivitetKunAG = props.beregningsgrunnlagListe
+    .flatMap(bg => bg.aktivitetStatus)
+    .every(status => status === 'AT');
+  const [valgtVisning, setValgtVisning] = useState<Visning>(erAktivitetKunAG && !erProd ? 'ny' : 'gammel');
 
   return (
-    <>
+    <VStack gap="space-16">
       {!erProd && (
         <ToggleGroup value={valgtVisning} onChange={value => setValgtVisning(value as Visning)} size="small">
-          <ToggleGroup.Item value="gammel" label="Gammel" />
-          <ToggleGroup.Item value="ny" label="Ny" />
+          <ToggleGroup.Item value="gammel" label="Gammel visning" />
+          <ToggleGroup.Item value="ny" label="Ny visning" />
         </ToggleGroup>
       )}
       {valgtVisning === 'gammel' && (
@@ -201,8 +204,14 @@ const Wrapper = (props: Omit<ComponentProps<typeof BeregningsgrunnlagProsessInde
         />
       )}
       {valgtVisning === 'ny' && (
-        <BeregningProsessIndex {...props} beregningsgrunnlagsvilkår={props.beregningsgrunnlagsvilkar} />
+        <BeregningProsessIndex
+          {...props}
+          isSubmittable={!props.readOnlySubmitButton}
+          beregningsgrunnlagsvilkår={props.beregningsgrunnlagsvilkar}
+          formData={mellomlagretFormData}
+          setFormData={setMellomlagretFormData}
+        />
       )}
-    </>
+    </VStack>
   );
 };
