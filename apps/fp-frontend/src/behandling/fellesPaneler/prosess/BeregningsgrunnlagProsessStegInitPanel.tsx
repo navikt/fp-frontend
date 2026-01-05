@@ -183,10 +183,11 @@ const Wrapper = (props: Omit<ComponentProps<typeof BeregningsgrunnlagProsessInde
     useMellomlagretFormData<React.ComponentProps<typeof BeregningsgrunnlagProsessIndex>['formData']>();
 
   const erProd = globalThis.location.hostname.includes('intern.nav.no');
-  const erAktivitetKunAG = props.beregningsgrunnlagListe
+  const erAktivitetKunAT = props.beregningsgrunnlagListe
     .flatMap(bg => bg.aktivitetStatus)
-    .every(status => status === 'AT');
-  const [valgtVisning, setValgtVisning] = useState<Visning>(erAktivitetKunAG && !erProd ? 'ny' : 'gammel');
+    .some(status => status !== 'AT');
+
+  const [valgtVisning, setValgtVisning] = useState<Visning>(erAktivitetKunAT && !erProd ? 'ny' : 'gammel');
 
   return (
     <VStack gap="space-16">
