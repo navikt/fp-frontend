@@ -14,22 +14,22 @@
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.33.0",
+    "@navikt/ds-react": "7.37.0",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@storybook/react": "10.1.2",
-    "@tanstack/react-query": "5.90.11",
-    "react": "19.2.0",
+    "@storybook/react": "10.1.11",
+    "@tanstack/react-query": "5.90.16",
+    "react": "19.2.3",
     "react-intl": "7.1.14",
-    "react-router-dom": "7.9.6",
-    "storybook": "10.1.2"
+    "react-router-dom": "7.11.0",
+    "storybook": "10.1.11"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
-    "@tanstack/react-query-devtools": "5.91.1",
+    "@tanstack/react-query-devtools": "5.91.2",
     "eslint": "9.39.2",
     "typescript": "5.9.3"
   }
