@@ -1,9 +1,6 @@
-import { FormattedMessage, useIntl } from 'react-intl';
-
+import { FormattedMessage } from 'react-intl';
+import { Button, Dialog, HStack } from '@navikt/ds-react';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { Button, HStack, Label, Modal } from '@navikt/ds-react';
-
-import styles from './MessagesModal.module.css';
 
 interface Props {
   showModal: boolean;
@@ -17,30 +14,24 @@ interface Props {
  * Ved å trykke på knapp blir fritekst-feltet tømt.
  */
 export const MessagesModal = ({ showModal, closeEvent }: Props) => {
-  const intl = useIntl();
   return (
-    <Modal
-      className={styles['modal']}
-      open={showModal}
-      aria-label={intl.formatMessage({ id: 'MessagesModal.description' })}
-      onClose={closeEvent}
-    >
-      <Modal.Body>
-        <HStack justify="space-between" align="center">
-          <HStack gap="space-8" align="center">
-            <CheckmarkCircleFillIcon
-              className={styles['image']}
-              title={intl.formatMessage({ id: 'MessagesModal.description' })}
-            />
-            <Label size="small">
+    <Dialog open={showModal} onOpenChange={closeEvent}>
+      <Dialog.Popup>
+        <Dialog.Header>
+          <Dialog.Title>
+            <HStack gap="2" align="center">
+              <CheckmarkCircleFillIcon aria-hidden width={35} height={35} color="var(--ax-success-600)" />
               <FormattedMessage id="MessagesModal.text" />
-            </Label>
-          </HStack>
+            </HStack>
+          </Dialog.Title>
+        </Dialog.Header>
+
+        <Dialog.Footer>
           <Button size="small" variant="primary" onClick={closeEvent} autoFocus type="button">
             <FormattedMessage id="MessagesModal.OK" />
           </Button>
-        </HStack>
-      </Modal.Body>
-    </Modal>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
