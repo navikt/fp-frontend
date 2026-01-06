@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Heading, HStack, Label, Link, Modal, VStack } from '@navikt/ds-react';
+import { Button, Dialog, HStack, Label, Link, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst } from '@navikt/ft-utils';
@@ -16,8 +16,6 @@ import type {
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
 } from '@navikt/fp-types';
-
-import styles from './henleggBehandlingModal.module.css';
 
 const maxLength1500 = maxLength(1500);
 
@@ -85,78 +83,73 @@ export const HenleggBehandlingModal = ({
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
-      <Modal
-        className={styles['modal']}
-        open
-        aria-label={intl.formatMessage({ id: 'HenleggBehandlingModal.ModalDescription' })}
-        onClose={cancelEvent}
-      >
-        <Modal.Header>
-          <Heading size="small" level="2">
-            <FormattedMessage id="HenleggBehandlingModal.HenleggBehandling" />
-          </Heading>
-        </Modal.Header>
-        <Modal.Body>
-          <VStack gap="space-16">
-            <RhfSelect
-              name="årsakKode"
-              control={formMethods.control}
-              className={styles['selectWidth']}
-              label={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakField' })}
-              validate={[required]}
-              selectValues={henleggArsaker.map(arsak => (
-                <option value={arsak.kode} key={arsak.kode}>
-                  {intl.formatMessage({ id: arsak.kode })}
-                </option>
-              ))}
-            />
-            <RhfTextarea
-              name="begrunnelse"
-              control={formMethods.control}
-              label={intl.formatMessage({ id: 'HenleggBehandlingModal.BegrunnelseField' })}
-              validate={[required, maxLength1500, hasValidText]}
-              maxLength={1500}
-            />
-            {showHenleggelseFritekst(behandlingType, årsakKode) && (
-              <div className={styles['fritekstTilBrevTextArea']}>
-                <RhfTextarea
-                  name="fritekst"
-                  control={formMethods.control}
-                  label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
-                  validate={[required, hasValidText]}
-                  maxLength={2000}
-                  parse={formaterFritekst}
-                />
-              </div>
-            )}
-            {showLink && (
-              <HStack justify="space-between">
-                <Label size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Label>
-                <Link
-                  href="#"
-                  onClick={forhåndsvisHenleggBehandlingDoc(forhandsvisHenleggBehandling, behandlingUuid, fritekst)}
-                  onKeyDown={forhåndsvisHenleggBehandlingDoc(forhandsvisHenleggBehandling, behandlingUuid, fritekst)}
-                >
-                  <FormattedMessage id="HenleggBehandlingModal.ForhandsvisBrev" />
-                </Link>
-              </HStack>
-            )}
-          </VStack>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="primary"
-            size="small"
-            className={styles['button']}
-            disabled={disableHovedKnapp(behandlingType, årsakKode, begrunnelse, fritekst)}
-          >
-            <FormattedMessage id="HenleggBehandlingModal.HenleggBehandlingSubmit" />
-          </Button>
-          <Button variant="secondary" size="small" onClick={cancelEvent} type="button">
-            <FormattedMessage id="HenleggBehandlingModal.Avbryt" />
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Dialog open onOpenChange={cancelEvent}>
+        <Dialog.Popup closeOnOutsideClick={false}>
+          <Dialog.Header>
+            <Dialog.Title>
+              <FormattedMessage id="HenleggBehandlingModal.HenleggBehandling" />
+            </Dialog.Title>
+          </Dialog.Header>
+          <Dialog.Body>
+            <VStack gap="space-16">
+              <RhfSelect
+                name="årsakKode"
+                control={formMethods.control}
+                label={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakField' })}
+                validate={[required]}
+                selectValues={henleggArsaker.map(arsak => (
+                  <option value={arsak.kode} key={arsak.kode}>
+                    {intl.formatMessage({ id: arsak.kode })}
+                  </option>
+                ))}
+              />
+              <RhfTextarea
+                name="begrunnelse"
+                control={formMethods.control}
+                label={intl.formatMessage({ id: 'HenleggBehandlingModal.BegrunnelseField' })}
+                validate={[required, maxLength1500, hasValidText]}
+                maxLength={1500}
+              />
+              {showHenleggelseFritekst(behandlingType, årsakKode) && (
+                <div>
+                  <RhfTextarea
+                    name="fritekst"
+                    control={formMethods.control}
+                    label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
+                    validate={[required, hasValidText]}
+                    maxLength={2000}
+                    parse={formaterFritekst}
+                  />
+                </div>
+              )}
+              {showLink && (
+                <HStack justify="space-between">
+                  <Label size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Label>
+                  <Link
+                    href="#"
+                    onClick={forhåndsvisHenleggBehandlingDoc(forhandsvisHenleggBehandling, behandlingUuid, fritekst)}
+                    onKeyDown={forhåndsvisHenleggBehandlingDoc(forhandsvisHenleggBehandling, behandlingUuid, fritekst)}
+                  >
+                    <FormattedMessage id="HenleggBehandlingModal.ForhandsvisBrev" />
+                  </Link>
+                </HStack>
+              )}
+            </VStack>
+          </Dialog.Body>
+          <Dialog.Footer>
+            <Button
+              variant="primary"
+              size="small"
+              disabled={disableHovedKnapp(behandlingType, årsakKode, begrunnelse, fritekst)}
+            >
+              <FormattedMessage id="HenleggBehandlingModal.HenleggBehandlingSubmit" />
+            </Button>
+            <Button variant="secondary" size="small" onClick={cancelEvent} type="button">
+              <FormattedMessage id="HenleggBehandlingModal.Avbryt" />
+            </Button>
+          </Dialog.Footer>
+        </Dialog.Popup>
+      </Dialog>
     </RhfForm>
   );
 };

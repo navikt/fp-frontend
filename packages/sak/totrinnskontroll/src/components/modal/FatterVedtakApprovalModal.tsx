@@ -40,19 +40,6 @@ const getInfoTextCode = (
   return 'FatterVedtakApprovalModal.InnvilgetVedtak';
 };
 
-const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: BehandlingType) => {
-  if (behandlingTypeKode === 'BT-003') {
-    return 'FatterVedtakApprovalModal.ModalDescriptionKlage';
-  }
-  if (behandlingTypeKode === 'BT-008') {
-    return 'FatterVedtakApprovalModal.ModalDescriptionAnke';
-  }
-  if (isOpphor) {
-    return 'FatterVedtakApprovalModal.ModalDescriptionOpphort';
-  }
-  return 'FatterVedtakApprovalModal.ModalDescriptionApproval';
-};
-
 const isStatusFatterVedtak = (behandlingStatusKode: BehandlingStatus) => behandlingStatusKode === 'FVED';
 
 const utledInfoTextCode = (
