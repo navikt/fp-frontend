@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { RawIntlProvider } from 'react-intl';
 
-import { Button, Heading, Modal } from '@navikt/ds-react';
+import { Button, Dialog } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -52,37 +52,32 @@ export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModa
   return (
     <RawIntlProvider value={intl}>
       <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
-        <Modal
-          open
-          width="small"
-          onClose={lukkModal}
-          aria-label={intl.formatMessage({
-            id: erFjerneOperasjon ? 'MenyVergeIndex.FjernVergeSporsmal' : 'MenyVergeIndex.OpprettVergeSporsmal',
-          })}
-        >
-          <Modal.Header closeButton>
-            <Heading size="small" level="2">
-              {intl.formatMessage({
-                id: erFjerneOperasjon ? 'MenyVergeIndex.FjernVergeSporsmal' : 'MenyVergeIndex.OpprettVergeSporsmal',
-              })}
-            </Heading>
-          </Modal.Header>
-          <Modal.Body>
-            <RegistrereVergeForm
-              readOnly={erFjerneOperasjon}
-              vergetyper={alleKodeverk['VergeType']}
-              valgtVergeType={valgtVergeType}
-            />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="primary" size="small" autoFocus type="submit">
-              {intl.formatMessage({ id: erFjerneOperasjon ? 'MenyVergeIndex.Fjern' : 'MenyVergeIndex.Opprett' })}
-            </Button>
-            <Button variant="secondary" size="small" onClick={lukkModal} type="button">
-              {intl.formatMessage({ id: 'MenyVergeIndex.Avbryt' })}
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        <Dialog open onOpenChange={lukkModal}>
+          <Dialog.Popup width="small">
+            <Dialog.Header>
+              <Dialog.Title>
+                {intl.formatMessage({
+                  id: erFjerneOperasjon ? 'MenyVergeIndex.FjernVergeSporsmal' : 'MenyVergeIndex.OpprettVergeSporsmal',
+                })}
+              </Dialog.Title>
+            </Dialog.Header>
+            <Dialog.Body>
+              <RegistrereVergeForm
+                readOnly={erFjerneOperasjon}
+                vergetyper={alleKodeverk['VergeType']}
+                valgtVergeType={valgtVergeType}
+              />
+            </Dialog.Body>
+            <Dialog.Footer>
+              <Button variant="primary" size="small" autoFocus type="submit">
+                {intl.formatMessage({ id: erFjerneOperasjon ? 'MenyVergeIndex.Fjern' : 'MenyVergeIndex.Opprett' })}
+              </Button>
+              <Button variant="secondary" size="small" onClick={lukkModal} type="button">
+                {intl.formatMessage({ id: 'MenyVergeIndex.Avbryt' })}
+              </Button>
+            </Dialog.Footer>
+          </Dialog.Popup>
+        </Dialog>
       </RhfForm>
     </RawIntlProvider>
   );
