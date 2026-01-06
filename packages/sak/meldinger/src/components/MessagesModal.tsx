@@ -15,8 +15,8 @@ interface Props {
  */
 export const MessagesModal = ({ showModal, closeEvent }: Props) => {
   return (
-    <Dialog open={showModal} onOpenChange={closeEvent}>
-      <Dialog.Popup>
+    <Dialog open={showModal} onOpenChange={closeEvent} size="small">
+      <Dialog.Popup width="small">
         <Dialog.Header>
           <Dialog.Title>
             <HStack gap="2" align="center">

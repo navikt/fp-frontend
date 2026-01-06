@@ -1,7 +1,7 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
+import { Button, Dialog, HStack } from '@navikt/ds-react';
 
 import type {
   Behandlingsresultat,
@@ -9,8 +9,6 @@ import type {
   BehandlingStatus,
   BehandlingType,
 } from '@navikt/fp-types';
-
-import styles from './fatterVedtakApprovalModal.module.css';
 
 const getInfoTextCode = (
   behandlingtypeKode: BehandlingType,
@@ -64,7 +62,7 @@ const utledInfoTextCode = (
   isBehandlingsresultatOpphor: boolean,
   harSammeResultatSomOriginalBehandling?: boolean,
   behandlingsresultat?: Behandlingsresultat | BehandlingsresultatDtoFpTilbake,
-): string => {
+) => {
   if (allAksjonspunktApproved) {
     return isStatusFatterVedtak(behandlingStatusKode)
       ? getInfoTextCode(
@@ -77,18 +75,6 @@ const utledInfoTextCode = (
   }
   return 'FatterVedtakApprovalModal.VedtakReturneresTilSaksbehandler';
 };
-
-const utledAltImgTextCode = (behandlingStatusKode: BehandlingStatus) =>
-  isStatusFatterVedtak(behandlingStatusKode) ? 'FatterVedtakApprovalModal.Innvilget' : '';
-
-const utledModalDescriptionTextCode = (
-  behandlingStatusKode: BehandlingStatus,
-  behandlingTypeKode: BehandlingType,
-  isBehandlingsresultatOpphor: boolean,
-) =>
-  isStatusFatterVedtak(behandlingStatusKode)
-    ? getModalDescriptionTextCode(isBehandlingsresultatOpphor, behandlingTypeKode)
-    : 'FatterVedtakApprovalModal.ModalDescription';
 
 interface Props {
   closeEvent: () => void;
@@ -113,7 +99,6 @@ export const FatterVedtakApprovalModal = ({
   behandlingsresultat,
   harSammeResultatSomOriginalBehandling,
 }: Props) => {
-  const intl = useIntl();
   const isBehandlingsresultatOpphor = !!behandlingsresultat && behandlingsresultat.type === 'OPPHØR';
   const infoTextCode = utledInfoTextCode(
     allAksjonspunktApproved,
@@ -124,39 +109,26 @@ export const FatterVedtakApprovalModal = ({
     behandlingsresultat,
   );
 
-  const altImgTextCode = utledAltImgTextCode(behandlingStatusKode);
-
-  const modalDescriptionTextCode = utledModalDescriptionTextCode(
-    behandlingStatusKode,
-    behandlingTypeKode,
-    isBehandlingsresultatOpphor,
-  );
-
   return (
-    <Modal
-      className={styles['modal']}
-      open
-      aria-label={intl.formatMessage({ id: modalDescriptionTextCode })}
-      onClose={closeEvent}
-    >
-      <Modal.Body>
-        <HStack justify="space-between" align="center" wrap={false}>
-          <HStack gap="space-8">
-            <CheckmarkCircleFillIcon className={styles['image']} title={intl.formatMessage({ id: altImgTextCode })} />
-            <VStack gap="space-4">
-              <Label size="small">
-                <FormattedMessage id={infoTextCode} />
-              </Label>
-              <BodyShort size="small">
-                <FormattedMessage id="FatterVedtakApprovalModal.GoToSearchPage" />
-              </BodyShort>
-            </VStack>
-          </HStack>
+    <Dialog open onOpenChange={closeEvent} size="small">
+      <Dialog.Popup closeOnOutsideClick={false}>
+        <Dialog.Header withClosebutton={false}>
+          <Dialog.Title>
+            <HStack gap="2" align="center">
+              <CheckmarkCircleFillIcon aria-hidden width={35} height={35} color="var(--ax-success-600)" />
+              <FormattedMessage id={infoTextCode} />
+            </HStack>
+          </Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <FormattedMessage id="FatterVedtakApprovalModal.GoToSearchPage" />
+        </Dialog.Body>
+        <Dialog.Footer>
           <Button size="small" variant="primary" onClick={closeEvent} autoFocus type="button">
             <FormattedMessage id="FatterVedtakApprovalModal.Ok" />
           </Button>
-        </HStack>
-      </Modal.Body>
-    </Modal>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
