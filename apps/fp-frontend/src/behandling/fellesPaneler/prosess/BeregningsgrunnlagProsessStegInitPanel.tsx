@@ -185,7 +185,7 @@ const Wrapper = (props: Omit<ComponentProps<typeof BeregningsgrunnlagProsessInde
   const erProd = globalThis.location.hostname.includes('intern.nav.no');
   const erAktivitetKunAT = props.beregningsgrunnlagListe
     .flatMap(bg => bg.aktivitetStatus)
-    .some(status => status !== 'AT');
+    .every(status => status === 'AT');
 
   const [valgtVisning, setValgtVisning] = useState<Visning>(erAktivitetKunAT && !erProd ? 'ny' : 'gammel');
 
