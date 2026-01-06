@@ -4,8 +4,6 @@ import { beforeAll, expect, vi } from 'vitest';
 
 import * as globalStorybookConfig from '../../../.storybook/preview-storybook';
 
-import 'vitest-canvas-mock';
-
 expect.extend(matchers);
 
 const annotations = setProjectAnnotations(globalStorybookConfig);
