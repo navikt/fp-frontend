@@ -21,7 +21,7 @@ export const KlageBehandlingModal = ({ visModal = false, lukkModal }: Props) => 
   const intl = useIntl();
 
   return (
-    <Dialog open={visModal}>
+    <Dialog open={visModal} size="small">
       <Dialog.Popup closeOnOutsideClick={false}>
         <Dialog.Header withClosebutton={false}>
           <Dialog.Title>
