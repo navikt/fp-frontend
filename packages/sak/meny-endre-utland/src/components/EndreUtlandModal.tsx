@@ -1,12 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { Button, Checkbox, Heading, Modal } from '@navikt/ds-react';
+import { Button, Checkbox, Dialog } from '@navikt/ds-react';
 import { RhfCheckboxGroup, RhfForm } from '@navikt/ft-form-hooks';
 
 import type { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
-
-import styles from './endreUtlandModal.module.css';
 
 export type FormValues = {
   saksnummer: string;
@@ -34,8 +32,6 @@ export const EndreUtlandModal = ({
   fagsakMarkeringer,
   fagsakMarkeringerKodeverk,
 }: Props) => {
-  const intl = useIntl();
-
   const formMethods = useForm<FormValues>({
     defaultValues: {
       saksnummer,
@@ -45,35 +41,32 @@ export const EndreUtlandModal = ({
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={submitCallback}>
-      <Modal
-        className={styles['modal']}
-        open
-        aria-label={intl.formatMessage({ id: 'MenyEndreUtlandIndex.UtlandTittel' })}
-        onClose={cancelEvent}
-      >
-        <Modal.Header>
-          <Heading size="small" level="2">
-            <FormattedMessage id="MenyEndreUtlandIndex.UtlandTittel" />
-          </Heading>
-        </Modal.Header>
-        <Modal.Body>
-          <RhfCheckboxGroup name="fagsakMarkeringer" control={formMethods.control} legend="" hideLegend>
-            {fagsakMarkeringerKodeverk.map(markering => (
-              <Checkbox key={markering.kode} value={markering.kode}>
-                {markering.navn}
-              </Checkbox>
-            ))}
-          </RhfCheckboxGroup>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button size="small" variant="primary">
-            <FormattedMessage id="MenyEndreUtlandIndex.Ok" />
-          </Button>
-          <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
-            <FormattedMessage id="MenyEndreUtlandIndex.Avbryt" />
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Dialog open onOpenChange={cancelEvent} size="small">
+        <Dialog.Popup width="small">
+          <Dialog.Header>
+            <Dialog.Title>
+              <FormattedMessage id="MenyEndreUtlandIndex.UtlandTittel" />
+            </Dialog.Title>
+          </Dialog.Header>
+          <Dialog.Body>
+            <RhfCheckboxGroup name="fagsakMarkeringer" control={formMethods.control} legend="" hideLegend>
+              {fagsakMarkeringerKodeverk.map(markering => (
+                <Checkbox key={markering.kode} value={markering.kode}>
+                  {markering.navn}
+                </Checkbox>
+              ))}
+            </RhfCheckboxGroup>
+          </Dialog.Body>
+          <Dialog.Footer>
+            <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
+              <FormattedMessage id="MenyEndreUtlandIndex.Avbryt" />
+            </Button>
+            <Button size="small" variant="primary">
+              <FormattedMessage id="MenyEndreUtlandIndex.Ok" />
+            </Button>
+          </Dialog.Footer>
+        </Dialog.Popup>
+      </Dialog>
     </RhfForm>
   );
 };
