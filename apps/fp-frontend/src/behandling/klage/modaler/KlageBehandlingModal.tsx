@@ -3,8 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { Button, Dialog, HStack } from '@navikt/ds-react';
 
-import styles from './klageBehandlingModal.module.css';
-
 interface Props {
   visModal?: boolean;
   lukkModal: () => void;
@@ -26,7 +24,7 @@ export const KlageBehandlingModal = ({ visModal = false, lukkModal }: Props) => 
         <Dialog.Header withClosebutton={false}>
           <Dialog.Title>
             <HStack gap="2" align="center">
-              <CheckmarkCircleFillIcon aria-hidden className={styles['image']} />
+              <CheckmarkCircleFillIcon aria-hidden width={35} height={35} color="var(--ax-success-600)" />
               <FormattedMessage id="KlageVurderingModal.VedtakOversendt" />
             </HStack>
           </Dialog.Title>
