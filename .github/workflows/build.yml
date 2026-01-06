@@ -68,7 +68,7 @@ jobs:
 
       - name: Use turbo cache
         id: hent-cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: .turbo
           key: turbo-${{ runner.os }}-${{ github.ref_name }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
@@ -113,7 +113,7 @@ jobs:
 
       - name: Lagre alltid turbo cache
         if: always() && steps.hent-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           key: ${{ steps.hent-cache.outputs.cache-primary-key }}
           path: .turbo
