@@ -35,10 +35,10 @@
     "dayjs": "1.11.19",
     "react": "19.2.3",
     "react-hook-form": "7.66.1",
-    "react-intl": "7.1.14"
+    "react-intl": "8.0.10"
   },
   "devDependencies": {
-    "@formatjs/cli-lib": "7.4.4",
+    "@formatjs/cli-lib": "8.0.4",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
