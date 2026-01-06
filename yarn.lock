@@ -7173,7 +7173,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-name@npm:^1.1.4, color-name@npm:~1.1.4":
+"color-name@npm:~1.1.4":
   version: 1.1.4
   resolution: "color-name@npm:1.1.4"
   checksum: 10/b0445859521eb4021cd0fb0cc1a75cecf67fceecae89b63f62b201cca8d345baf8b952c966862a9d9a2632987d4f6581f0ec8d957dfacece86f0a7919316f610
@@ -7324,13 +7324,6 @@ __metadata:
   bin:
     cssesc: bin/cssesc
   checksum: 10/0e161912c1306861d8f46e1883be1cbc8b1b2879f0f509287c0db71796e4ddfb97ac96bdfca38f77f452e2c10554e1bb5678c99b07a5cf947a12778f73e47e12
-  languageName: node
-  linkType: hard
-
-"cssfontparser@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "cssfontparser@npm:1.2.1"
-  checksum: 10/952d487cddab591fb944f2a4c326a7736bc963784a6d92b6ad4051f3bf5ee49a732eff62e29a52ff085197cb07f5bd66525a2245ded7fd356113ac81be9238b9
   languageName: node
   linkType: hard
 
@@ -8721,7 +8714,6 @@ __metadata:
     turbo: "npm:2.7.2"
     typescript: "npm:5.9.3"
     vitest: "npm:4.0.16"
-    vitest-canvas-mock: "npm:0.3.3"
   languageName: unknown
   linkType: soft
 
@@ -9698,16 +9690,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-canvas-mock@npm:~2.5.2":
-  version: 2.5.2
-  resolution: "jest-canvas-mock@npm:2.5.2"
-  dependencies:
-    cssfontparser: "npm:^1.2.1"
-    moo-color: "npm:^1.0.2"
-  checksum: 10/094e2e1c773c658fab7e91e9279027fc38a55060865b5b6a3c9acc47fc912fb9d3451ab4fdf544d016578f77b975626707c3a62e396575aa878f46d939c7ca5e
-  languageName: node
-  linkType: hard
-
 "jiti@npm:^2.6.0, jiti@npm:^2.6.1":
   version: 2.6.1
   resolution: "jiti@npm:2.6.1"
@@ -10371,15 +10353,6 @@ __metadata:
   bin:
     mkdirp: dist/cjs/src/bin.js
   checksum: 10/16fd79c28645759505914561e249b9a1f5fe3362279ad95487a4501e4467abeb714fd35b95307326b8fd03f3c7719065ef11a6f97b7285d7888306d1bd2232ba
-  languageName: node
-  linkType: hard
-
-"moo-color@npm:^1.0.2":
-  version: 1.0.3
-  resolution: "moo-color@npm:1.0.3"
-  dependencies:
-    color-name: "npm:^1.1.4"
-  checksum: 10/a0c48927214d2acb02b3fd1a2b1439fa8130edbda7406594748146e398c22336af855b7d348ba9e657995909c9099084635a199db1e2098efd7117d92eb2cb59
   languageName: node
   linkType: hard
 
@@ -12980,17 +12953,6 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10/827a18e7365871532af74b2ec65cccecff1effccbf6fb5c32fa1f8d7bcea26f4403d6988db3fa39e9c09c8091b04654b6cfbcc6da5c5dc449eed2b07afc22d81
-  languageName: node
-  linkType: hard
-
-"vitest-canvas-mock@npm:0.3.3":
-  version: 0.3.3
-  resolution: "vitest-canvas-mock@npm:0.3.3"
-  dependencies:
-    jest-canvas-mock: "npm:~2.5.2"
-  peerDependencies:
-    vitest: "*"
-  checksum: 10/bf564fe0cb701f228eb20cacdbd3abb9eb83c948bebbbea7fe907082ef830b2f8d7865277eade77fd84806bd1ddccdf1426c85ad716b8da8a977ae6b82e4f85f
   languageName: node
   linkType: hard
 
