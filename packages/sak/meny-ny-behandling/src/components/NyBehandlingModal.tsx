@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
+import { Button, Dialog, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
@@ -195,60 +195,57 @@ export const NyBehandlingModal = ({
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={onSubmit}>
-      <Modal
-        className={styles['modal']}
-        open
-        aria-label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.ModalDescription' })}
-        onClose={cancelEvent}
-      >
-        <Modal.Header>
-          <Heading size="small" level="2">
-            <FormattedMessage id="MenyNyBehandlingIndex.OpprettNyForstegangsbehandling" />
-          </Heading>
-        </Modal.Header>
-        <Modal.Body>
-          <VStack gap="space-16">
-            <RhfSelect
-              name="behandlingType"
-              control={formMethods.control}
-              label=""
-              validate={[required]}
-              selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper))}
-              className={styles['typeBredde']}
-            />
-            {valgtBehandlingTypeKode === 'BT-002' && (
-              <RhfCheckbox
-                name="nyBehandlingEtterKlage"
-                control={formMethods.control}
-                label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyBehandlingEtterKlage' })}
-              />
-            )}
-            {behandlingArsakTyper.length > 0 && (
+      <Dialog open onOpenChange={cancelEvent}>
+        <Dialog.Popup className={styles['modal']}>
+          <Dialog.Header>
+            <Dialog.Title>
+              <FormattedMessage id="MenyNyBehandlingIndex.OpprettNyForstegangsbehandling" />
+            </Dialog.Title>
+          </Dialog.Header>
+          <Dialog.Body>
+            <VStack gap="space-16">
               <RhfSelect
-                name="behandlingArsakType"
+                name="behandlingType"
                 control={formMethods.control}
                 label=""
-                hideLabel
                 validate={[required]}
-                className={styles['arsakBredde']}
-                selectValues={behandlingArsakTyper.map(b => (
-                  <option key={b.kode} value={b.kode}>
-                    {b.navn}
-                  </option>
-                ))}
+                selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper))}
+                className={styles['typeBredde']}
               />
-            )}
-          </VStack>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button size="small" variant="primary">
-            <FormattedMessage id="MenyNyBehandlingIndex.Ok" />
-          </Button>
-          <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
-            <FormattedMessage id="MenyNyBehandlingIndex.Avbryt" />
-          </Button>
-        </Modal.Footer>
-      </Modal>
+              {valgtBehandlingTypeKode === 'BT-002' && (
+                <RhfCheckbox
+                  name="nyBehandlingEtterKlage"
+                  control={formMethods.control}
+                  label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyBehandlingEtterKlage' })}
+                />
+              )}
+              {behandlingArsakTyper.length > 0 && (
+                <RhfSelect
+                  name="behandlingArsakType"
+                  control={formMethods.control}
+                  label=""
+                  hideLabel
+                  validate={[required]}
+                  className={styles['arsakBredde']}
+                  selectValues={behandlingArsakTyper.map(b => (
+                    <option key={b.kode} value={b.kode}>
+                      {b.navn}
+                    </option>
+                  ))}
+                />
+              )}
+            </VStack>
+          </Dialog.Body>
+          <Dialog.Footer>
+            <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
+              <FormattedMessage id="MenyNyBehandlingIndex.Avbryt" />
+            </Button>
+            <Button size="small" variant="primary">
+              <FormattedMessage id="MenyNyBehandlingIndex.Ok" />
+            </Button>
+          </Dialog.Footer>
+        </Dialog.Popup>
+      </Dialog>
     </RhfForm>
   );
 };
