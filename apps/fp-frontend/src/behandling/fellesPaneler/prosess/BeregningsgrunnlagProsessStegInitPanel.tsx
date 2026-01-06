@@ -1,7 +1,9 @@
-import { type ComponentProps } from 'react';
+import { type ComponentProps, useState } from 'react';
 import { useIntl } from 'react-intl';
 
+import { ToggleGroup, VStack } from '@navikt/ds-react';
 import type { FtVilkar } from '@navikt/ft-fakta-beregning';
+import { BeregningProsessIndex } from '@navikt/ft-prosess-beregning';
 import {
   type BeregningAksjonspunktSubmitType,
   BeregningsgrunnlagProsessIndex,
@@ -174,10 +176,43 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
   );
 };
 
+type Visning = 'ny' | 'gammel';
+
 const Wrapper = (props: Omit<ComponentProps<typeof BeregningsgrunnlagProsessIndex>, 'formData' | 'setFormData'>) => {
   const { mellomlagretFormData, setMellomlagretFormData } =
     useMellomlagretFormData<React.ComponentProps<typeof BeregningsgrunnlagProsessIndex>['formData']>();
+
+  const erProd = globalThis.location.hostname.includes('intern.nav.no');
+  const erAktivitetKunAT = props.beregningsgrunnlagListe
+    .flatMap(bg => bg.aktivitetStatus)
+    .some(status => status !== 'AT');
+
+  const [valgtVisning, setValgtVisning] = useState<Visning>(erAktivitetKunAT && !erProd ? 'ny' : 'gammel');
+
   return (
-    <BeregningsgrunnlagProsessIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />
+    <VStack gap="space-16">
+      {!erProd && (
+        <ToggleGroup value={valgtVisning} onChange={value => setValgtVisning(value as Visning)} size="small">
+          <ToggleGroup.Item value="gammel" label="Gammel visning" />
+          <ToggleGroup.Item value="ny" label="Ny visning" />
+        </ToggleGroup>
+      )}
+      {valgtVisning === 'gammel' && (
+        <BeregningsgrunnlagProsessIndex
+          {...props}
+          formData={mellomlagretFormData}
+          setFormData={setMellomlagretFormData}
+        />
+      )}
+      {valgtVisning === 'ny' && (
+        <BeregningProsessIndex
+          {...props}
+          isSubmittable={!props.readOnlySubmitButton}
+          beregningsgrunnlagsvilkår={props.beregningsgrunnlagsvilkar}
+          formData={mellomlagretFormData}
+          setFormData={setMellomlagretFormData}
+        />
+      )}
+    </VStack>
   );
 };
