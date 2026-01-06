@@ -1,6 +1,6 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Dialog, HStack, Label, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -14,47 +14,41 @@ interface Props {
   frist?: string;
 }
 
+// TODO: verifiser, storybook funker ikke helt
 export const SettPaVentReadOnlyModal = ({ lukkCallback, ventearsaker, ventearsak, frist }: Props) => {
-  const intl = useIntl();
-
   return (
-    <Modal
-      open
-      width="small"
-      aria-label={intl.formatMessage({
-        id: 'SettPaVentReadOnlyModal.ModalDescriptionErPaVent',
-      })}
-      onClose={lukkCallback}
-    >
-      <Modal.Header>
-        <Heading size="small" level="2">
-          <FormattedMessage id="SettPaVentReadOnlyModal.ModalDescriptionErPaVent" />
-        </Heading>
-      </Modal.Header>
-      <Modal.Body>
-        <HStack gap="space-24">
-          <VStack gap="space-4">
-            <Label>
-              <FormattedMessage id="SettPaVentReadOnlyModal.Arsak" />
-            </Label>
-            <BodyShort>{ventearsaker.find(v => v.kode === ventearsak)?.navn}</BodyShort>
-          </VStack>
-          <VStack gap="space-4">
-            <Label>
-              <FormattedMessage id="SettPaVentReadOnlyModal.Frist" />
-            </Label>
-            <BodyShort>
-              <DateLabel dateString={frist ?? lagFramtidigFrist()} />
-            </BodyShort>
-          </VStack>
-        </HStack>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button size="small" variant="primary" onClick={lukkCallback}>
-          <FormattedMessage id="SettPaVentReadOnlyModal.Forsiden" />
-        </Button>
-      </Modal.Footer>
-    </Modal>
+    <Dialog open size="small" onOpenChange={() => lukkCallback()}>
+      <Dialog.Popup closeOnOutsideClick={false}>
+        <Dialog.Header>
+          <Dialog.Title>
+            <FormattedMessage id="SettPaVentReadOnlyModal.ModalDescriptionErPaVent" />
+          </Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <HStack gap="space-24">
+            <VStack gap="space-4">
+              <Label>
+                <FormattedMessage id="SettPaVentReadOnlyModal.Arsak" />
+              </Label>
+              <BodyShort>{ventearsaker.find(v => v.kode === ventearsak)?.navn}</BodyShort>
+            </VStack>
+            <VStack gap="space-4">
+              <Label>
+                <FormattedMessage id="SettPaVentReadOnlyModal.Frist" />
+              </Label>
+              <BodyShort>
+                <DateLabel dateString={frist ?? lagFramtidigFrist()} />
+              </BodyShort>
+            </VStack>
+          </HStack>
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Button size="small" variant="primary" onClick={lukkCallback}>
+            <FormattedMessage id="SettPaVentReadOnlyModal.Forsiden" />
+          </Button>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
 
