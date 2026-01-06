@@ -35,10 +35,10 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hook-form": "7.66.1",
-    "react-intl": "7.1.14"
+    "react-intl": "8.0.10"
   },
   "devDependencies": {
-    "@formatjs/cli-lib": "7.4.4",
+    "@formatjs/cli-lib": "8.1.0",
     "@navikt/ds-css": "7.37.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",

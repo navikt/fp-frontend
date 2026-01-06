@@ -1268,18 +1268,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/cli-lib@npm:7.4.4":
-  version: 7.4.4
-  resolution: "@formatjs/cli-lib@npm:7.4.4"
+"@formatjs/cli-lib@npm:8.1.0":
+  version: 8.1.0
+  resolution: "@formatjs/cli-lib@npm:8.1.0"
   dependencies:
-    "@formatjs/icu-messageformat-parser": "npm:2.11.4"
-    "@formatjs/icu-skeleton-parser": "npm:1.8.16"
-    "@formatjs/ts-transformer": "npm:3.14.2"
+    "@formatjs/icu-messageformat-parser": "npm:3.2.1"
+    "@formatjs/icu-skeleton-parser": "npm:2.0.7"
+    "@formatjs/ts-transformer": "npm:4.1.0"
     "@types/estree": "npm:^1.0.6"
     "@types/fs-extra": "npm:^11.0.4"
     "@types/node": "npm:^22.0.0"
     chalk: "npm:^4.1.2"
-    commander: "npm:^13"
+    commander: "npm:^14.0.0"
     fast-glob: "npm:^3.3.2"
     fs-extra: "npm:^11.2.0"
     json-stable-stringify: "npm:^1.3.0"
@@ -1289,7 +1289,7 @@ __metadata:
   peerDependencies:
     "@glimmer/syntax": ^0.95.0
     "@vue/compiler-core": ^3.5.12
-    content-tag: ^3.0.0
+    content-tag: 4
     ember-template-recast: ^6.1.5
     vue: ^3.5.12
   peerDependenciesMeta:
@@ -1309,7 +1309,7 @@ __metadata:
       optional: true
     vue:
       optional: true
-  checksum: 10/138a46e8d58d0dc32ff3fd6ca074ca0d41531da5113afbf4a4cf88d12372c6a24a877cfb5b36b482a49ce28826648a06bc7bc92ff4d0bfc1baecc6205297b0b9
+  checksum: 10/96ca95034fb40215f808e930593dac7fbffec3cb2cbc64ed5be240cc139d378dd2bedf7a5bf7480ea2e76a768198035a15684315e5f514c916881ca900c66351
   languageName: node
   linkType: hard
 
@@ -1325,12 +1325,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/ecma402-abstract@npm:3.0.7":
+  version: 3.0.7
+  resolution: "@formatjs/ecma402-abstract@npm:3.0.7"
+  dependencies:
+    "@formatjs/fast-memoize": "npm:3.0.2"
+    "@formatjs/intl-localematcher": "npm:0.7.4"
+    decimal.js: "npm:^10.4.3"
+    tslib: "npm:^2.8.0"
+  checksum: 10/a79f43d3c3e5301722d3288806e6910d8598e2f0c849775398f6e20bac78b568db9c03b6605c9db8eb3aa80dff4fc260cb153e67b167924a547e0d29a1b2d8c3
+  languageName: node
+  linkType: hard
+
 "@formatjs/fast-memoize@npm:2.2.7":
   version: 2.2.7
   resolution: "@formatjs/fast-memoize@npm:2.2.7"
   dependencies:
     tslib: "npm:^2.8.0"
   checksum: 10/e7e6efc677d63a13d99a854305db471b69f64cbfebdcb6dbe507dab9aa7eaae482ca5de86f343c856ca0a2c8f251672bd1f37c572ce14af602c0287378097d43
+  languageName: node
+  linkType: hard
+
+"@formatjs/fast-memoize@npm:3.0.2":
+  version: 3.0.2
+  resolution: "@formatjs/fast-memoize@npm:3.0.2"
+  dependencies:
+    tslib: "npm:^2.8.0"
+  checksum: 10/381afd816ca67d7e3e333247f1115ede11420226d72f109c54e8300741212b9bb08a6bacec17d0f0f2172789e39d0cef61fcae0a484e1dff2e9c33eee930694e
   languageName: node
   linkType: hard
 
@@ -1345,6 +1366,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/icu-messageformat-parser@npm:3.2.1":
+  version: 3.2.1
+  resolution: "@formatjs/icu-messageformat-parser@npm:3.2.1"
+  dependencies:
+    "@formatjs/ecma402-abstract": "npm:3.0.7"
+    "@formatjs/icu-skeleton-parser": "npm:2.0.7"
+    tslib: "npm:^2.8.0"
+  checksum: 10/4e853881ad10472547e893648474841f7943b16c0262c9db7e92fd29d49214da0b5723e48f53872ad3673b3f4a9d11c6683e102f6a864efc78d3a4203a451dff
+  languageName: node
+  linkType: hard
+
 "@formatjs/icu-skeleton-parser@npm:1.8.16":
   version: 1.8.16
   resolution: "@formatjs/icu-skeleton-parser@npm:1.8.16"
@@ -1355,12 +1387,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/icu-skeleton-parser@npm:2.0.7":
+  version: 2.0.7
+  resolution: "@formatjs/icu-skeleton-parser@npm:2.0.7"
+  dependencies:
+    "@formatjs/ecma402-abstract": "npm:3.0.7"
+    tslib: "npm:^2.8.0"
+  checksum: 10/4a496854f877af04f87ac9bcf36593bfe4ec949a58a695c40c87dcbfff4a15473941448d6812644ab6fc832fc96408d6374015de74d3842cb03654f136b783d1
+  languageName: node
+  linkType: hard
+
 "@formatjs/intl-localematcher@npm:0.6.2":
   version: 0.6.2
   resolution: "@formatjs/intl-localematcher@npm:0.6.2"
   dependencies:
     tslib: "npm:^2.8.0"
   checksum: 10/eb12a7f5367bbecdfafc20d7f005559ce840f420e970f425c5213d35e94e86dfe75bde03464971a26494bf8427d4961269db22ecad2834f2a19d888b5d9cc064
+  languageName: node
+  linkType: hard
+
+"@formatjs/intl-localematcher@npm:0.7.4":
+  version: 0.7.4
+  resolution: "@formatjs/intl-localematcher@npm:0.7.4"
+  dependencies:
+    "@formatjs/fast-memoize": "npm:3.0.2"
+    tslib: "npm:^2.8.0"
+  checksum: 10/e2eb759628b35b45d95bddfc33bc8e985afd5d17c3d22bd243ea537fcb3b22eba2bbd8ce9e0f5cd6e29c3b514fe077ba99f5e7e5a1730983c9bfad649dc76985
   languageName: node
   linkType: hard
 
@@ -1382,11 +1434,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/ts-transformer@npm:3.14.2":
-  version: 3.14.2
-  resolution: "@formatjs/ts-transformer@npm:3.14.2"
+"@formatjs/intl@npm:4.0.8":
+  version: 4.0.8
+  resolution: "@formatjs/intl@npm:4.0.8"
   dependencies:
-    "@formatjs/icu-messageformat-parser": "npm:2.11.4"
+    "@formatjs/ecma402-abstract": "npm:3.0.7"
+    "@formatjs/fast-memoize": "npm:3.0.2"
+    "@formatjs/icu-messageformat-parser": "npm:3.2.1"
+    intl-messageformat: "npm:11.0.8"
+    tslib: "npm:^2.8.0"
+  peerDependencies:
+    typescript: ^5.6.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/99251a970a96737ba667a4bdfdc7a7ac2229387794d21a8959690efdb01b48272b8f149a29afe24969d48e26ea3e08aa24fb09ef0275d605ea414a5a9dbc0ce9
+  languageName: node
+  linkType: hard
+
+"@formatjs/ts-transformer@npm:4.1.0":
+  version: 4.1.0
+  resolution: "@formatjs/ts-transformer@npm:4.1.0"
+  dependencies:
+    "@formatjs/icu-messageformat-parser": "npm:3.2.1"
     "@types/node": "npm:^22.0.0"
     chalk: "npm:^4.1.2"
     json-stable-stringify: "npm:^1.3.0"
@@ -1397,7 +1467,7 @@ __metadata:
   peerDependenciesMeta:
     ts-jest:
       optional: true
-  checksum: 10/a45669213c2787d3c3251994b510fccda79a81c9f81462093d09b886048a59b2a5d25e40e1deee9770872c357c14d9f48b5309abce100285a436a1814f222a52
+  checksum: 10/8f0be8e36be83593cfa4d7190962639e6488a81fe61c3880fb91152ff09eac784b99b4dbb3a01b08eed1340770e5381d4d183944152a8cde5409aa04c4d029f7
   languageName: node
   linkType: hard
 
@@ -1792,7 +1862,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-app-felles@workspace:packages/app-felles"
   dependencies:
-    "@formatjs/cli-lib": "npm:7.4.4"
+    "@formatjs/cli-lib": "npm:8.1.0"
     "@navikt/ds-react": "npm:7.37.0"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -1857,7 +1927,7 @@ __metadata:
     p-limit: "npm:7.2.0"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     react-router-dom: "npm:7.11.0"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
@@ -1879,7 +1949,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:7.0.1"
     eslint-plugin-simple-import-sort: "npm:12.1.1"
     eslint-plugin-vitest: "npm:0.5.4"
-    globals: "npm:16.5.0"
+    globals: "npm:17.0.0"
     typescript-eslint: "npm:8.51.0"
   peerDependencies:
     eslint: 9.32.0
@@ -1939,7 +2009,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -1970,7 +2040,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -2006,7 +2076,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2042,7 +2112,7 @@ __metadata:
     lodash: "npm:^4.17.21"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2080,7 +2150,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2112,7 +2182,7 @@ __metadata:
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2151,7 +2221,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -2189,7 +2259,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -2227,7 +2297,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -2239,7 +2309,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorgsovertakelse@workspace:packages/fakta/omsorgsovertakelse"
   dependencies:
-    "@formatjs/cli-lib": "npm:7.4.4"
+    "@formatjs/cli-lib": "npm:8.1.0"
     "@navikt/aksel-icons": "npm:7.37.0"
     "@navikt/ds-css": "npm:7.37.0"
     "@navikt/ds-react": "npm:7.37.0"
@@ -2266,7 +2336,7 @@ __metadata:
     fast-glob: "npm:3.3.3"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2304,7 +2374,7 @@ __metadata:
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -2341,7 +2411,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2379,7 +2449,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2392,7 +2462,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta/tilrettelegging"
   dependencies:
-    "@formatjs/cli-lib": "npm:7.4.4"
+    "@formatjs/cli-lib": "npm:8.1.0"
     "@navikt/aksel-icons": "npm:7.37.0"
     "@navikt/ds-css": "npm:7.37.0"
     "@navikt/ds-react": "npm:7.37.0"
@@ -2420,7 +2490,7 @@ __metadata:
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2459,7 +2529,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2498,7 +2568,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2537,7 +2607,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2575,7 +2645,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -2600,7 +2670,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -2724,7 +2794,7 @@ __metadata:
     msw-storybook-addon: "npm:2.0.6"
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     react-modal: "npm:3.16.3"
     react-responsive: "npm:10.0.1"
     react-router-dom: "npm:7.11.0"
@@ -2773,7 +2843,7 @@ __metadata:
     msw-storybook-addon: "npm:2.0.6"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2829,7 +2899,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2871,7 +2941,7 @@ __metadata:
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2904,7 +2974,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -2939,7 +3009,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2969,7 +3039,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     react-router-dom: "npm:7.11.0"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
@@ -2995,7 +3065,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3021,7 +3091,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3048,7 +3118,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3074,7 +3144,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3103,7 +3173,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
   languageName: unknown
@@ -3137,7 +3207,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3177,7 +3247,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3214,7 +3284,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3252,7 +3322,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3289,7 +3359,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3323,7 +3393,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3361,7 +3431,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3399,7 +3469,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3434,7 +3504,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3465,7 +3535,7 @@ __metadata:
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3514,7 +3584,7 @@ __metadata:
     lodash.debounce: "npm:4.0.8"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3549,7 +3619,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3586,7 +3656,7 @@ __metadata:
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3624,7 +3694,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3661,7 +3731,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3697,7 +3767,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3732,7 +3802,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3761,7 +3831,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3792,7 +3862,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3822,7 +3892,7 @@ __metadata:
     classnames: "npm:2.5.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3851,7 +3921,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3880,7 +3950,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -3909,7 +3979,7 @@ __metadata:
     eslint: "npm:9.39.2"
     history: "npm:5.3.0"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     react-router-dom: "npm:7.11.0"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
@@ -3934,7 +4004,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3969,7 +4039,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3996,7 +4066,7 @@ __metadata:
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -4027,7 +4097,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4060,7 +4130,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4087,7 +4157,7 @@ __metadata:
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -4118,7 +4188,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4146,7 +4216,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -4178,7 +4248,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4210,7 +4280,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4246,7 +4316,7 @@ __metadata:
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4279,7 +4349,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4318,7 +4388,7 @@ __metadata:
     history: "npm:5.3.0"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.66.1"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     react-router-dom: "npm:7.11.0"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
@@ -4343,7 +4413,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -4371,7 +4441,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4396,7 +4466,7 @@ __metadata:
     "@tanstack/react-query-devtools": "npm:5.91.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     react-router-dom: "npm:7.11.0"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
@@ -4452,7 +4522,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
   dependencies:
-    "@formatjs/cli-lib": "npm:7.4.4"
+    "@formatjs/cli-lib": "npm:8.1.0"
     "@navikt/ds-css": "npm:7.37.0"
     "@navikt/ds-react": "npm:7.37.0"
     "@navikt/fp-config-eslint": "workspace:*"
@@ -4469,7 +4539,7 @@ __metadata:
     eslint: "npm:9.39.2"
     fast-glob: "npm:3.3.3"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.0"
@@ -4485,7 +4555,7 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:7.1.14"
+    react-intl: "npm:8.0.10"
     typescript: "npm:5.9.3"
   languageName: unknown
   linkType: soft
@@ -7082,17 +7152,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:14.0.2, commander@npm:^14.0.2":
+"commander@npm:14.0.2, commander@npm:^14.0.0, commander@npm:^14.0.2":
   version: 14.0.2
   resolution: "commander@npm:14.0.2"
   checksum: 10/2d202db5e5f9bb770112a3c1579b893d17ac6f6d932183077308bdd96d0f87f0bbe6a68b5b9ed2cf3b2514be6bb7de637480703c0e2db9741ee1b383237deb26
-  languageName: node
-  linkType: hard
-
-"commander@npm:^13":
-  version: 13.1.0
-  resolution: "commander@npm:13.1.0"
-  checksum: 10/d3b4b79e6be8471ddadacbb8cd441fe82154d7da7393b50e76165a9e29ccdb74fa911a186437b9a211d0fc071db6051915c94fb8ef16d77511d898e9dbabc6af
   languageName: node
   linkType: hard
 
@@ -8840,10 +8903,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:16.5.0":
-  version: 16.5.0
-  resolution: "globals@npm:16.5.0"
-  checksum: 10/f9e8a2a13f50222c127030a619e283e7bbfe32966316bdde0715af1d15a7e40cb9c24ff52cad59671f97762ed8b515353c2f8674f560c63d9385f19ee26735a6
+"globals@npm:17.0.0":
+  version: 17.0.0
+  resolution: "globals@npm:17.0.0"
+  checksum: 10/af6213db9bf5f599b8a609061984c4d5fedb23db336228b866eba70819fe13ea3d11ca507b4799e8afc888331d0f7e5760d01507e38cb988fff9ad3a9635b312
   languageName: node
   linkType: hard
 
@@ -9170,6 +9233,18 @@ __metadata:
     "@formatjs/icu-messageformat-parser": "npm:2.11.4"
     tslib: "npm:^2.8.0"
   checksum: 10/96650d673912763d21bbfa14b50749b992d45f1901092a020e3155961e3c70f4644dd1731c3ecb1207a1eb94d84bedf4c34b1ac8127c29ad6b015b6a2a4045cb
+  languageName: node
+  linkType: hard
+
+"intl-messageformat@npm:11.0.8":
+  version: 11.0.8
+  resolution: "intl-messageformat@npm:11.0.8"
+  dependencies:
+    "@formatjs/ecma402-abstract": "npm:3.0.7"
+    "@formatjs/fast-memoize": "npm:3.0.2"
+    "@formatjs/icu-messageformat-parser": "npm:3.2.1"
+    tslib: "npm:^2.8.0"
+  checksum: 10/e6b1317c683732c5c9677d897e049669b89569422f96edd8160d11ae252a5795ba62f27812b3ec2be57ca88e49ac336be6608642edbd2c2b36515f55b13385e9
   languageName: node
   linkType: hard
 
@@ -11123,6 +11198,28 @@ __metadata:
     typescript:
       optional: true
   checksum: 10/74b1d9a2f6e6fa964503a08a56e0d27d52344ad5495dca875e08a146d16418d29bd12769273a479f3adf9ab445fc28a322421a8afaed4a4d040a0e9e3bedb79c
+  languageName: node
+  linkType: hard
+
+"react-intl@npm:8.0.10":
+  version: 8.0.10
+  resolution: "react-intl@npm:8.0.10"
+  dependencies:
+    "@formatjs/ecma402-abstract": "npm:3.0.7"
+    "@formatjs/icu-messageformat-parser": "npm:3.2.1"
+    "@formatjs/intl": "npm:4.0.8"
+    "@types/hoist-non-react-statics": "npm:^3.3.1"
+    hoist-non-react-statics: "npm:^3.3.2"
+    intl-messageformat: "npm:11.0.8"
+    tslib: "npm:^2.8.0"
+  peerDependencies:
+    "@types/react": 19
+    react: 16 || 17 || 18 || 19
+    typescript: ^5.6.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/3ef3a437e7e8198d719e27eee69656269ac0d5ffda6d1ee5a7532282c50ec6e2b224a94ef3c05726680bac2bf25d18b8e60d129ea27362e4e99add019d89afd1
   languageName: node
   linkType: hard
 
