@@ -40,10 +40,10 @@
   ],
   "devDependencies": {
     "@hey-api/openapi-ts": "0.89.2",
-    "@navikt/aksel-stylelint": "7.36.0",
+    "@navikt/aksel-stylelint": "7.37.0",
     "@storybook/addon-a11y": "10.1.11",
     "@storybook/addon-links": "10.1.11",
-    "@storybook/react": "10.1.2",
+    "@storybook/react": "10.1.11",
     "@testing-library/jest-dom": "6.9.1",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
@@ -51,7 +51,7 @@
     "@types/react-router-dom": "5.3.3",
     "husky": "9.1.7",
     "jsdom": "27.4.0",
-    "knip": "5.78.0",
+    "knip": "5.79.0",
     "lint-staged": "16.2.7",
     "prettier": "3.7.4",
     "shelljs": "0.10.0",
@@ -59,7 +59,7 @@
     "stylelint-order": "7.0.1",
     "turbo": "2.7.2",
     "typescript": "5.9.3",
-    "vitest": "4.0.14",
+    "vitest": "4.0.16",
     "vitest-canvas-mock": "0.3.3"
   },
   "resolutions": {
