@@ -1,7 +1,7 @@
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Modal } from '@navikt/ds-react';
+import { Button, Dialog, HStack } from '@navikt/ds-react';
 
 import styles from './klageBehandlingModal.module.css';
 
@@ -19,25 +19,27 @@ interface Props {
  */
 export const KlageBehandlingModal = ({ visModal = false, lukkModal }: Props) => {
   const intl = useIntl();
+
   return (
-    <Modal
-      width="small"
-      open={visModal}
-      aria-label={intl.formatMessage({ id: 'KlageVurderingModal.ModalDescription' })}
-      onClose={lukkModal}
-    >
-      <Modal.Body>
-        <HStack gap="space-16">
-          <CheckmarkCircleFillIcon className={styles['image']} />
-          <div>
-            <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.VedtakOversendt' })}</BodyShort>
-            <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.GoToSearchPage' })}</BodyShort>
-          </div>
+    <Dialog open={visModal}>
+      <Dialog.Popup closeOnOutsideClick={false}>
+        <Dialog.Header withClosebutton={false}>
+          <Dialog.Title>
+            <HStack gap="2" align="center">
+              <CheckmarkCircleFillIcon aria-hidden className={styles['image']} />
+              <FormattedMessage id="KlageVurderingModal.VedtakOversendt" />
+            </HStack>
+          </Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <FormattedMessage id="KlageVurderingModal.GoToSearchPage" />
+        </Dialog.Body>
+        <Dialog.Footer>
           <Button variant="primary" size="small" onClick={lukkModal} autoFocus type="button">
             {intl.formatMessage({ id: 'KlageVurderingModal.Ok' })}
           </Button>
-        </HStack>
-      </Modal.Body>
-    </Modal>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
