@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BodyShort, Button, Dialog, HStack } from '@navikt/ds-react';
+
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, Dialog, HStack } from '@navikt/ds-react';
 
 export const ÅpenRevurderingModal = ({ harÅpenRevurdering }: { harÅpenRevurdering: boolean }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks -- Rapportert fordi den ikkje taklar norske bokstavar i komponentnamn

@@ -13,7 +13,6 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
-    "stylelint": "stylelint src/**/*.module.css",
     "prettier": "prettier --write src",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "build-storybook": "storybook build -o .storybook-static-build",
@@ -46,7 +45,6 @@
     "@testing-library/user-event": "14.6.1",
     "eslint": "9.39.2",
     "storybook": "10.1.11",
-    "stylelint": "16.26.1",
     "typescript": "5.9.3",
     "vite": "7.3.0",
     "vitest": "4.0.16"

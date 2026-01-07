@@ -14,7 +14,6 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
-    "stylelint": "stylelint src/**/*.module.css",
     "prettier": "prettier --write src",
     "dev": "vite serve",
     "build": "vite build",
@@ -143,7 +142,6 @@
     "msw": "2.12.7",
     "msw-storybook-addon": "2.0.6",
     "storybook": "10.1.11",
-    "stylelint": "16.26.1",
     "typescript": "5.9.3",
     "vite": "7.3.0",
     "vitest": "4.0.16"

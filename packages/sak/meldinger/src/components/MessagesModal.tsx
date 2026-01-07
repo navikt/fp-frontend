@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl';
-import { Button, Dialog, HStack } from '@navikt/ds-react';
+
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
+import { Button, Dialog, HStack } from '@navikt/ds-react';
 
 interface Props {
   showModal: boolean;
