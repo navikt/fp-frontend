@@ -40,9 +40,9 @@ export const EndreUtlandModal = ({
   });
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={submitCallback}>
-      <Dialog open onOpenChange={cancelEvent} size="small">
-        <Dialog.Popup width="small">
+    <Dialog open onOpenChange={cancelEvent} size="small">
+      <Dialog.Popup width="small">
+        <RhfForm formMethods={formMethods} onSubmit={submitCallback}>
           <Dialog.Header>
             <Dialog.Title>
               <FormattedMessage id="MenyEndreUtlandIndex.UtlandTittel" />
@@ -65,8 +65,8 @@ export const EndreUtlandModal = ({
               <FormattedMessage id="MenyEndreUtlandIndex.Ok" />
             </Button>
           </Dialog.Footer>
-        </Dialog.Popup>
-      </Dialog>
-    </RhfForm>
+        </RhfForm>
+      </Dialog.Popup>
+    </Dialog>
   );
 };

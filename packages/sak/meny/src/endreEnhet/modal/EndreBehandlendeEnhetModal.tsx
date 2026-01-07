@@ -56,9 +56,9 @@ export const EndreBehandlendeEnhetModal = ({
   const begrunnelse = formMethods.watch('begrunnelse');
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
-      <Dialog open onOpenChange={lukkModal} size="small">
-        <Dialog.Popup>
+    <Dialog open onOpenChange={lukkModal} size="small">
+      <Dialog.Popup>
+        <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
           <Dialog.Header>
             <Dialog.Title>
               <FormattedMessage id="EndreBehandlendeEnhetModal.EndreEnhet" />
@@ -91,8 +91,8 @@ export const EndreBehandlendeEnhetModal = ({
               {intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.Ok' })}
             </Button>
           </Dialog.Footer>
-        </Dialog.Popup>
-      </Dialog>
-    </RhfForm>
+        </RhfForm>
+      </Dialog.Popup>
+    </Dialog>
   );
 };

@@ -58,9 +58,9 @@ export const SettPaVentModal = ({
   const showFristenTekst = skalViseFristenTekst(erTilbakekreving, frist, fristFraFelt, ventearsakFraFelt);
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={submitCallback}>
-      <Dialog open={showModal} onOpenChange={cancelEvent} size="small">
-        <Dialog.Popup>
+    <Dialog open={showModal} onOpenChange={cancelEvent} size="small">
+      <Dialog.Popup>
+        <RhfForm formMethods={formMethods} onSubmit={submitCallback}>
           <Dialog.Header>
             <Dialog.Title>
               <FormattedMessage id={ventearsak ? 'SettPaVentModal.ErSettPaVent' : 'SettPaVentModal.SettesPaVent'} />
@@ -137,9 +137,9 @@ export const SettPaVentModal = ({
               </Button>
             )}
           </Dialog.Footer>
-        </Dialog.Popup>
-      </Dialog>
-    </RhfForm>
+        </RhfForm>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
 

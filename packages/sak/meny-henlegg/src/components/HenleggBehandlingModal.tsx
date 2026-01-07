@@ -82,9 +82,9 @@ export const HenleggBehandlingModal = ({
   const henleggArsaker = getHenleggÅrsaker(behandlingResultatTyper, behandlingType, ytelseType);
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
-      <Dialog open onOpenChange={cancelEvent}>
-        <Dialog.Popup closeOnOutsideClick={false}>
+    <Dialog open onOpenChange={cancelEvent}>
+      <Dialog.Popup closeOnOutsideClick={false}>
+        <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
           <Dialog.Header>
             <Dialog.Title>
               <FormattedMessage id="HenleggBehandlingModal.HenleggBehandling" />
@@ -148,9 +148,9 @@ export const HenleggBehandlingModal = ({
               <FormattedMessage id="HenleggBehandlingModal.Avbryt" />
             </Button>
           </Dialog.Footer>
-        </Dialog.Popup>
-      </Dialog>
-    </RhfForm>
+        </RhfForm>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
 

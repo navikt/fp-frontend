@@ -51,9 +51,9 @@ export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModa
 
   return (
     <RawIntlProvider value={intl}>
-      <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
-        <Dialog open onOpenChange={lukkModal}>
-          <Dialog.Popup width="small">
+      <Dialog open onOpenChange={lukkModal}>
+        <Dialog.Popup width="small">
+          <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
             <Dialog.Header>
               <Dialog.Title>
                 {intl.formatMessage({
@@ -76,9 +76,9 @@ export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModa
                 {intl.formatMessage({ id: 'MenyVergeIndex.Avbryt' })}
               </Button>
             </Dialog.Footer>
-          </Dialog.Popup>
-        </Dialog>
-      </RhfForm>
+          </RhfForm>
+        </Dialog.Popup>
+      </Dialog>
     </RawIntlProvider>
   );
 };

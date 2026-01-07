@@ -194,9 +194,9 @@ export const NyBehandlingModal = ({
   );
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={onSubmit}>
-      <Dialog open onOpenChange={cancelEvent}>
-        <Dialog.Popup className={styles['modal']}>
+    <Dialog open onOpenChange={cancelEvent}>
+      <Dialog.Popup className={styles['modal']}>
+        <RhfForm formMethods={formMethods} onSubmit={onSubmit}>
           <Dialog.Header>
             <Dialog.Title>
               <FormattedMessage id="MenyNyBehandlingIndex.OpprettNyForstegangsbehandling" />
@@ -244,8 +244,8 @@ export const NyBehandlingModal = ({
               <FormattedMessage id="MenyNyBehandlingIndex.Ok" />
             </Button>
           </Dialog.Footer>
-        </Dialog.Popup>
-      </Dialog>
-    </RhfForm>
+        </RhfForm>
+      </Dialog.Popup>
+    </Dialog>
   );
 };

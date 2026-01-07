@@ -34,9 +34,9 @@ export const SplittPeriodeModal = ({ fomDato, tomDato, submit, cancel }: Props) 
   const numberOfDaysAndWeeks = calcDaysAndWeeks(fomDato, dato);
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={values => submit(values.dato)}>
-      <Dialog open onOpenChange={cancel} size="small">
-        <Dialog.Popup width="small" withBackdrop>
+    <Dialog open onOpenChange={cancel} size="small">
+      <Dialog.Popup width="small" withBackdrop>
+        <RhfForm formMethods={formMethods} onSubmit={values => submit(values.dato)}>
           <Dialog.Header>
             <Dialog.Title>
               <FormattedMessage id="DelOppPeriodeModalImpl.DelOppPerioden" />
@@ -81,8 +81,8 @@ export const SplittPeriodeModal = ({ fomDato, tomDato, submit, cancel }: Props) 
               <FormattedMessage id="DelOppPeriodeModalImpl.Ok" />
             </Button>
           </Dialog.Footer>
-        </Dialog.Popup>
-      </Dialog>
-    </RhfForm>
+        </RhfForm>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
