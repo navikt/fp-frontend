@@ -14,11 +14,10 @@ interface Props {
   frist?: string;
 }
 
-// TODO: verifiser, storybook funker ikke helt
 export const SettPaVentReadOnlyModal = ({ lukkCallback, ventearsaker, ventearsak, frist }: Props) => {
   return (
     <Dialog open size="small" onOpenChange={() => lukkCallback()}>
-      <Dialog.Popup closeOnOutsideClick={false}>
+      <Dialog.Popup closeOnOutsideClick={false} width="small">
         <Dialog.Header>
           <Dialog.Title>
             <FormattedMessage id="SettPaVentReadOnlyModal.ModalDescriptionErPaVent" />
