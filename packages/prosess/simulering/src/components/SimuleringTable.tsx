@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading, Table } from '@navikt/ds-react';
-import { formatCurrencyNoKr, getRangeOfMonths } from '@navikt/ft-utils';
+import { getRangeOfMonths } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
@@ -18,6 +18,7 @@ import type {
 import { CollapseButton } from './CollapseButton';
 
 import styles from './simuleringTable.module.css';
+import { BeløpLabel } from '@navikt/ft-ui-komponenter';
 
 const classNames = classnames.bind(styles);
 
@@ -183,7 +184,7 @@ const createColumns = (
             : dayjs(måned.periode.tom).format('MMMMYY') === nextPeriodFormatted,
       })}
     >
-      {måned.beløp ? formatCurrencyNoKr(måned.beløp) : '-'}
+      <BeløpLabel beløp={måned.beløp} />
     </Table.DataCell>
   ));
 };
