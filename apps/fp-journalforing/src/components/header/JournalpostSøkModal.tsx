@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { MagnifyingGlassIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading, HStack, Modal, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Dialog, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidInteger, minLength, required } from '@navikt/ft-form-validators';
 
@@ -29,43 +29,45 @@ export const JournalpostSøkModal = ({ hentJournalpost, lukkModal, erÅpen, harS
   });
 
   return (
-    <Modal open={erÅpen} onClose={lukkModal} aria-label="journalpost-modal">
-      <Modal.Header>
-        <Heading size="medium" level="2">
-          <FormattedMessage id="Journalpost.Søk.Tittel" />
-        </Heading>
-      </Modal.Header>
-      <Modal.Body>
-        <VStack gap="space-8">
-          <RhfForm<FormValues>
-            formMethods={formMethods}
-            onSubmit={(data: FormValues) => {
-              setLasterJournalpost(true);
-              hentJournalpost(data.journalpostId);
-              setLasterJournalpost(false);
-            }}
-          >
-            <HStack gap="space-8" align="end">
-              <RhfTextField
-                description={<FormattedMessage id="Journalpost.Søk.KunTall" />}
-                label={<FormattedMessage id="Journalpost.Søk.JournalpostID" />}
-                name="journalpostId"
-                control={formMethods.control}
-                validate={[required, hasValidInteger, minLength(9)]}
-                size="medium"
-              />
-              <Button loading={lasterJournalpost} icon={<MagnifyingGlassIcon aria-hidden />}>
-                <FormattedMessage id="Journalpost.Søk.Finn" />
-              </Button>
-            </HStack>
-          </RhfForm>
-          {harSøktOgFunnetIngenMatch && (
-            <BodyShort>
-              <FormattedMessage id="Journalpost.Søk.IngenTreffEllerManglerTilgang" />
-            </BodyShort>
-          )}
-        </VStack>
-      </Modal.Body>
-    </Modal>
+    <Dialog open={erÅpen} onOpenChange={lukkModal}>
+      <Dialog.Popup closeOnOutsideClick={false} width="small">
+        <Dialog.Header>
+          <Dialog.Title>
+            <FormattedMessage id="Journalpost.Søk.Tittel" />
+          </Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <VStack gap="space-8">
+            <RhfForm<FormValues>
+              formMethods={formMethods}
+              onSubmit={(data: FormValues) => {
+                setLasterJournalpost(true);
+                hentJournalpost(data.journalpostId);
+                setLasterJournalpost(false);
+              }}
+            >
+              <HStack gap="space-8" align="end">
+                <RhfTextField
+                  description={<FormattedMessage id="Journalpost.Søk.KunTall" />}
+                  label={<FormattedMessage id="Journalpost.Søk.JournalpostID" />}
+                  name="journalpostId"
+                  control={formMethods.control}
+                  validate={[required, hasValidInteger, minLength(9)]}
+                  size="medium"
+                />
+                <Button loading={lasterJournalpost} icon={<MagnifyingGlassIcon aria-hidden />}>
+                  <FormattedMessage id="Journalpost.Søk.Finn" />
+                </Button>
+              </HStack>
+            </RhfForm>
+            {harSøktOgFunnetIngenMatch && (
+              <BodyShort>
+                <FormattedMessage id="Journalpost.Søk.IngenTreffEllerManglerTilgang" />
+              </BodyShort>
+            )}
+          </VStack>
+        </Dialog.Body>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
