@@ -2,6 +2,7 @@ import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading, Table } from '@navikt/ds-react';
+import { BeløpLabel } from '@navikt/ft-ui-komponenter';
 import { getRangeOfMonths } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
@@ -18,7 +19,6 @@ import type {
 import { CollapseButton } from './CollapseButton';
 
 import styles from './simuleringTable.module.css';
-import { BeløpLabel } from '@navikt/ft-ui-komponenter';
 
 const classNames = classnames.bind(styles);
 
