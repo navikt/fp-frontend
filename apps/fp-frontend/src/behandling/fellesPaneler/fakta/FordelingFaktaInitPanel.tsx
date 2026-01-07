@@ -7,7 +7,6 @@ import {
   FordelBeregningsgrunnlagFaktaIndex,
   type FtBeregningsgrunnlag,
   type FtVilkar,
-  type VurderNyttInntektsforholdAP,
   type VurderRefusjonBeregningsgrunnlagAP,
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -97,7 +96,6 @@ const lagModifisertCallback =
     aksjonspunkterSomSkalLagres:
       | VurderRefusjonBeregningsgrunnlagAP
       | FordelBeregningsgrunnlagAP
-      | VurderNyttInntektsforholdAP,
   ) => {
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
