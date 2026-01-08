@@ -49,7 +49,7 @@ export type {
   TilbakekrevingKodeverkType,
   KodeverkMedNavnTilbakekreving,
 } from './src/tilbakekreving/kodeverkAlleTilbakekreving';
-export type { AlleKodeverkLos, LosKodeverkType, LosKodeverkMedNavn } from './src/kodeverkAlleLos';
+export type { AlleKodeverkLos, LosKodeverkType, LosKodeverkMedNavn } from './src/los/kodeverkAlleLos';
 export type { NavAnsatt } from './src/navAnsattTsType';
 export type {
   SimuleringResultat,
@@ -257,12 +257,12 @@ export type { VedtakbrevType } from './src/vedtakbrevType';
 export type { TilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereBehandling';
 export type { PeriodeResultatType } from './src/periodeResultatType';
 export type { SkjermlenkeTypeTilbakekreving } from './src/tilbakekreving/skjermlenkeTypeTilbakekreving';
-export type { OppgaveBehandlingStatus } from './src/oppgaveBehandlingStatus';
-export type { KøSortering } from './src/køSortering';
+export type { OppgaveBehandlingStatus } from './src/los/oppgaveBehandlingStatus';
+export type { KøSortering } from './src/los/køSortering';
 export type { HendelseUnderType } from './src/tilbakekreving/hendelseUnderType';
 export type { HendelseType } from './src/tilbakekreving/hendelseType';
 export type { Arbeidskategori } from './src/arbeidskategori';
-export type { AndreKriterierType } from './src/andreKriterierType';
+export type { AndreKriterierType } from './src/los/andreKriterierType';
 export type { AksjonspunktKodeTilbakekreving } from './src/tilbakekreving/aksjonspunktCodesTilbakekreving';
 export type { ForeldelseVurderingType } from './src/tilbakekreving/foreldelseVurderingType';
 export type { Rettighetstype } from './src/rettighetstype';
