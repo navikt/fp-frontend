@@ -1,4 +1,3 @@
-//TODO: hvorfor ikke generert?
 export type Arbeidskategori =
   | 'FISKER'
   | 'ARBEIDSTAKER'

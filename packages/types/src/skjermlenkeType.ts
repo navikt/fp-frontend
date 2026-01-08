@@ -3,4 +3,4 @@ import type { SkjermlenkeTypeFpTilbake } from './tilbakekreving/sakFullDtoFpTilb
 
 export type SkjermlenkeType =
   | foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType
-  | SkjermlenkeTypeFpTilbake; // TODO
+  | SkjermlenkeTypeFpTilbake;
