@@ -283,7 +283,6 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '7037'
   | '7039'
   | '7040'
-  | 'UNDEFINED'
   | '5004'
   | '5005'
   | '5006'
@@ -1132,8 +1131,7 @@ export type foreldrepenger_behandlingslager_virksomhet_ArbeidType =
   | 'NÆRING'
   | 'UTENLANDSK_ARBEIDSFORHOLD'
   | 'VENTELØNN_VARTPENGER'
-  | 'VANLIG'
-  | '-';
+  | 'VANLIG';
 
 export type foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver = {
   aktørId?: string;
@@ -5103,7 +5101,7 @@ export type tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto = {
 };
 
 export type tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto = {
-  skjermlenkeType: string;
+  skjermlenkeType: foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType;
   totrinnskontrollAksjonspunkter: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto>;
 };
 

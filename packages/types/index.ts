@@ -48,7 +48,7 @@ export type {
   AlleKodeverkTilbakekreving,
   TilbakekrevingKodeverkType,
   KodeverkMedNavnTilbakekreving,
-} from './src/kodeverkAlleTilbakekreving';
+} from './src/tilbakekreving/kodeverkAlleTilbakekreving';
 export type { AlleKodeverkLos, LosKodeverkType, LosKodeverkMedNavn } from './src/kodeverkAlleLos';
 export type { NavAnsatt } from './src/navAnsattTsType';
 export type {
@@ -124,7 +124,7 @@ export type {
 export type {
   BeregningsresultatTilbakekreving,
   BeregningResultatPeriode,
-} from './src/beregningsresultatTilbakekrevingTsType';
+} from './src/tilbakekreving/beregningsresultatTilbakekrevingTsType';
 export type { Aktor } from './src/aktorTsType';
 export type { Kjønnkode } from './src/Kjonnkode';
 export { KjønnkodeEnum } from './src/Kjonnkode';
@@ -142,10 +142,10 @@ export type {
 } from './src/dokumentasjonVurderingBehovTsType';
 export type { UttakType, UttakVurdering, UttakÅrsak } from './src/dokumentasjonVurderingBehovTsType';
 export type {
-  VilkarsVurdertePerioderWrapper,
+  VilkårsVurderingDto,
   VilkarsVurdertPeriode,
   AktsomhetInfo,
-} from './src/vilkarsVurdertePerioderTsType';
+} from './src/tilbakekreving/vilkarsVurdertePerioderTsType';
 export type {
   ArbeidOgInntektsmelding,
   Arbeidsforhold as AoIArbeidsforhold,
@@ -198,7 +198,7 @@ export type { Avslagsarsak } from './src/avslagsarsakCodes';
 export type { ArbeidsforholdKomplettVurderingType } from './src/arbeidsforholdKomplettVurderingType';
 export type { DiskresjonskodeType } from './src/diskresjonskodeType';
 export type { DokumentMalType } from './src/dokumentMalType';
-export type { FagsakMarkeringType } from './src/fagsakMarkeringType';
+export type { FagsakMarkeringType } from './src/fagsakMarkeringType.ts';
 export type { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
 export type { FamilieHendelseType } from './src/familieHendelseType';
 export type { ForeldreType } from './src/foreldreType';
@@ -250,21 +250,21 @@ export type { UttakUtsettelseType } from './src/uttakUtsettelseType';
 export type { VurderÅrsak } from './src/vurderÅrsak';
 export type { VilkarUtfallType } from './src/vilkarUtfallType';
 export type { VenteArsakType } from './src/venteArsakType';
-export type { VilkårResultat } from './src/vilkårResultat';
-export type { VedtakResultatType } from './src/vedtakResultatType';
-export type { SærligGrunn } from './src/særligGrunn';
+export type { VilkårResultat } from './src/tilbakekreving/vilkårResultat';
+export type { VedtakResultatType } from './src/tilbakekreving/vedtakResultatType';
+export type { SærligGrunn } from './src/tilbakekreving/særligGrunn.ts';
 export type { VedtakbrevType } from './src/vedtakbrevType';
 export type { TilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereBehandling';
 export type { PeriodeResultatType } from './src/periodeResultatType';
-export type { SkjermlenkeTypeTilbakekreving } from './src/skjermlenkeTypeTilbakekreving';
+export type { SkjermlenkeTypeTilbakekreving } from './src/tilbakekreving/skjermlenkeTypeTilbakekreving';
 export type { OppgaveBehandlingStatus } from './src/oppgaveBehandlingStatus';
 export type { KøSortering } from './src/køSortering';
-export type { HendelseUnderType } from './src/hendelseUnderType';
-export type { HendelseType } from './src/hendelseType';
+export type { HendelseUnderType } from './src/tilbakekreving/hendelseUnderType';
+export type { HendelseType } from './src/tilbakekreving/hendelseType';
 export type { Arbeidskategori } from './src/arbeidskategori';
 export type { AndreKriterierType } from './src/andreKriterierType';
-export type { AksjonspunktKodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
-export type { ForeldelseVurderingType } from './src/foreldelseVurderingType';
+export type { AksjonspunktKodeTilbakekreving } from './src/tilbakekreving/aksjonspunktCodesTilbakekreving';
+export type { ForeldelseVurderingType } from './src/tilbakekreving/foreldelseVurderingType';
 export type { Rettighetstype } from './src/rettighetstype';
 export type { AksjonspunktDefinisjon } from './src/aksjonspunktDefinisjon';
 export type { GraderingAvslagÅrsak } from './src/graderingAvslagÅrsak';
