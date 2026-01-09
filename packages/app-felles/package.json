@@ -22,12 +22,12 @@
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",
-    "@navikt/ft-utils": "3.9.4",
+    "@navikt/ft-utils": "3.10.0",
     "@sentry/browser": "10.32.1",
     "react": "19.2.3"
   },
   "devDependencies": {
-    "@formatjs/cli-lib": "8.0.4",
+    "@formatjs/cli-lib": "8.1.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
