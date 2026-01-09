@@ -4448,7 +4448,7 @@ export type foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto = {
 
 export type foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto = {
   simuleringResultat: foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_DetaljertSimuleringResultatDto;
-  simuleringResultatUtenInntrekk: foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_DetaljertSimuleringResultatDto;
+  simuleringResultatUtenInntrekk?: foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_DetaljertSimuleringResultatDto;
   slåttAvInntrekk: boolean;
 };
 
