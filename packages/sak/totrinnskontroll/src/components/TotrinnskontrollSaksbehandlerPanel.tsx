@@ -73,7 +73,7 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
         );
 
         if (aksjonspunkter.length > 0) {
-          const lenke = lagLenke(context.skjermlenkeType as SkjermlenkeType); // TODO [JOHANNES] -- gjør SkjermlenkeType til enum i BE
+          const lenke = lagLenke(context.skjermlenkeType);
           return (
             <React.Fragment key={context.skjermlenkeType}>
               {lenke && skjermlenkeTypeKodeverk && (

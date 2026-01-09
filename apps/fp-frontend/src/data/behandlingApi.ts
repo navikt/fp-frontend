@@ -53,7 +53,7 @@ import type {
   Uttaksresultat,
   UttakStonadskontoer,
   Verge,
-  VilkarsVurdertePerioderWrapper,
+  VilkårsVurderingDto,
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -266,7 +266,7 @@ const getVilkårsvurderingsperioderOptions = (links: ApiLink[]) => (behandling: 
 const getVilkårsvurderingOptions = (links: ApiLink[]) => (behandling: BehandlingFpTilbake) =>
   queryOptions({
     queryKey: [BehandlingRel.VILKARVURDERING, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('VILKARVURDERING', links)).json<VilkarsVurdertePerioderWrapper>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('VILKARVURDERING', links)).json<VilkårsVurderingDto>(),
     enabled: harLenke(behandling, 'VILKARVURDERING'),
     staleTime: Infinity,
   });

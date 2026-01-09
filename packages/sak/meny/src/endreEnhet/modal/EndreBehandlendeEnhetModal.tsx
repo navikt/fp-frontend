@@ -1,11 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
+import { Button, Dialog, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
-
-import styles from './endreBehandlendeEnhetModal.module.css';
 
 const maxLength400 = maxLength(400);
 
@@ -58,46 +56,43 @@ export const EndreBehandlendeEnhetModal = ({
   const begrunnelse = formMethods.watch('begrunnelse');
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
-      <Modal
-        className={styles['modal']}
-        open
-        aria-label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.ModalDescription' })}
-        onClose={lukkModal}
-      >
-        <Modal.Header>
-          <Heading size="small" level="2">
-            <FormattedMessage id="EndreBehandlendeEnhetModal.EndreEnhet" />
-          </Heading>
-        </Modal.Header>
-        <Modal.Body>
-          <VStack gap="space-16">
-            <RhfSelect
-              name="nyEnhet"
-              control={formMethods.control}
-              label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.NyEnhetField' })}
-              validate={[required]}
-              selectValues={selectOptions}
-              className={styles['selectWidth']}
-            />
-            <RhfTextarea
-              name="begrunnelse"
-              control={formMethods.control}
-              label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.BegrunnelseField' })}
-              validate={[required, maxLength400, hasValidText]}
-              maxLength={400}
-            />
-          </VStack>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button size="small" variant="primary" className={styles['button']} disabled={!(nyEnhet && begrunnelse)}>
-            {intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.Ok' })}
-          </Button>
-          <Button size="small" variant="secondary" onClick={lukkModal} type="button">
-            {intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.Avbryt' })}
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </RhfForm>
+    <Dialog open onOpenChange={lukkModal} size="small">
+      <Dialog.Popup>
+        <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
+          <Dialog.Header>
+            <Dialog.Title>
+              <FormattedMessage id="EndreBehandlendeEnhetModal.EndreEnhet" />
+            </Dialog.Title>
+          </Dialog.Header>
+          <Dialog.Body>
+            <VStack gap="space-16">
+              <RhfSelect
+                name="nyEnhet"
+                style={{ width: '350px' }}
+                control={formMethods.control}
+                label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.NyEnhetField' })}
+                validate={[required]}
+                selectValues={selectOptions}
+              />
+              <RhfTextarea
+                name="begrunnelse"
+                control={formMethods.control}
+                label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.BegrunnelseField' })}
+                validate={[required, maxLength400, hasValidText]}
+                maxLength={400}
+              />
+            </VStack>
+          </Dialog.Body>
+          <Dialog.Footer>
+            <Button size="small" variant="secondary" onClick={lukkModal} type="button">
+              {intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.Avbryt' })}
+            </Button>
+            <Button size="small" variant="primary" disabled={!(nyEnhet && begrunnelse)}>
+              {intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.Ok' })}
+            </Button>
+          </Dialog.Footer>
+        </RhfForm>
+      </Dialog.Popup>
+    </Dialog>
   );
 };

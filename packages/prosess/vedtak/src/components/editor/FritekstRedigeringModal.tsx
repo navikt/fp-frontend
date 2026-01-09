@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { useHref, useLocation } from 'react-router-dom';
 
 import { ExternalLinkIcon } from '@navikt/aksel-icons';
-import { Alert, Button, Heading, Modal, VStack } from '@navikt/ds-react';
+import { Alert, Button, Dialog } from '@navikt/ds-react';
 
 import type { BrevOverstyring } from '@navikt/fp-types';
 
@@ -24,8 +24,6 @@ export const FritekstRedigeringModal = ({
   setVisFritekstRedigeringModal,
   forhåndsvisBrev,
 }: Props) => {
-  const intl = useIntl();
-
   const [visTilbakestillAdvarselModal, setVisTilbakestillAdvarselModal] = useState(false);
   const [visValideringsFeil, setVisValideringsFeil] = useState(false);
 
@@ -67,70 +65,74 @@ export const FritekstRedigeringModal = ({
 
   return (
     <>
-      <Modal
+      <Dialog
         open
-        onClose={() => {
+        onOpenChange={() => {
           setVisFritekstRedigeringModal(false);
         }}
-        width="53.75rem"
-        aria-label="Rediger brev"
+        size="small"
       >
-        <Modal.Header>
-          <VStack gap="space-16">
-            <Heading level="3" size="small">
+        <Dialog.Popup width="53.75rem">
+          <Dialog.Header>
+            <Dialog.Title>
               <FormattedMessage id="FritekstRedigeringModal.Rediger" />
-            </Heading>
-            <Alert variant="info" size="small">
-              <FormattedMessage id="FritekstRedigeringModal.Infotekst" />
-              <Button
-                variant="tertiary"
-                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-                  e.preventDefault();
-                  globalThis.open(href, '_blank');
-                }}
-                iconPosition="right"
-                icon={<ExternalLinkIcon aria-hidden />}
-                size="small"
-              >
-                <FormattedMessage id="FritekstRedigeringModal.ApneINyFane" />
-              </Button>
+            </Dialog.Title>
+            <Dialog.Description>
+              <Alert variant="info" size="small" style={{ marginTop: '1rem' }}>
+                <FormattedMessage id="FritekstRedigeringModal.Infotekst" />
+                <Button
+                  variant="tertiary"
+                  onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+                    e.preventDefault();
+                    globalThis.open(href, '_blank');
+                  }}
+                  iconPosition="right"
+                  icon={<ExternalLinkIcon aria-hidden />}
+                  size="small"
+                >
+                  <FormattedMessage id="FritekstRedigeringModal.ApneINyFane" />
+                </Button>
+              </Alert>
+            </Dialog.Description>
+          </Dialog.Header>
+          <Dialog.Body>
+            <BrevInnhold
+              brevOverstyring={brevOverstyring}
+              setVisTilbakestillAdvarselModal={setVisTilbakestillAdvarselModal}
+              lagreOgLukk={lagreOgLukk}
+              forhåndsvis={forhåndsvisEditertBrev}
+              visForhåndsvisValideringsFeil={visValideringsFeil}
+            />
+          </Dialog.Body>
+        </Dialog.Popup>
+      </Dialog>
+      <Dialog open={visTilbakestillAdvarselModal} onOpenChange={() => setVisTilbakestillAdvarselModal(false)}>
+        <Dialog.Popup closeOnOutsideClick={false} withBackdrop>
+          <Dialog.Header>
+            <Dialog.Title>
+              <FormattedMessage id="FritekstRedigeringModal.BekreftTilbakestillTittel" />
+            </Dialog.Title>
+          </Dialog.Header>
+          <Dialog.Body>
+            <Alert variant="warning" inline>
+              <FormattedMessage id="FritekstRedigeringModal.BekreftTilbakestill" />
             </Alert>
-          </VStack>
-        </Modal.Header>
-        <Modal.Body>
-          <BrevInnhold
-            brevOverstyring={brevOverstyring}
-            setVisTilbakestillAdvarselModal={setVisTilbakestillAdvarselModal}
-            lagreOgLukk={lagreOgLukk}
-            forhåndsvis={forhåndsvisEditertBrev}
-            visForhåndsvisValideringsFeil={visValideringsFeil}
-          />
-        </Modal.Body>
-      </Modal>
-      <Modal
-        open={visTilbakestillAdvarselModal}
-        onClose={() => setVisTilbakestillAdvarselModal(false)}
-        aria-label={intl.formatMessage({ id: 'FritekstRedigeringModal.TilbakestillLabel' })}
-      >
-        <Modal.Header>
-          <Heading as="h3" size="medium" level="3">
-            <FormattedMessage id="FritekstRedigeringModal.BekreftTilbakestillTittel" />
-          </Heading>
-        </Modal.Header>
-        <Modal.Body>
-          <Alert variant="warning" inline>
-            <FormattedMessage id="FritekstRedigeringModal.BekreftTilbakestill" />
-          </Alert>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button size="small" type="button" variant="tertiary" onClick={() => setVisTilbakestillAdvarselModal(false)}>
-            <FormattedMessage id="FritekstRedigeringModal.IkkeTilbakestill" />
-          </Button>
-          <Button size="small" type="button" variant="primary" onClick={tilbakestill}>
-            <FormattedMessage id="FritekstRedigeringModal.Tilbakestill" />
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          </Dialog.Body>
+          <Dialog.Footer>
+            <Button
+              size="small"
+              type="button"
+              variant="tertiary"
+              onClick={() => setVisTilbakestillAdvarselModal(false)}
+            >
+              <FormattedMessage id="FritekstRedigeringModal.IkkeTilbakestill" />
+            </Button>
+            <Button size="small" type="button" variant="primary" onClick={tilbakestill}>
+              <FormattedMessage id="FritekstRedigeringModal.Tilbakestill" />
+            </Button>
+          </Dialog.Footer>
+        </Dialog.Popup>
+      </Dialog>
     </>
   );
 };

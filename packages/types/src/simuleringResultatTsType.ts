@@ -1,44 +1,23 @@
-import type { MottakerType } from './mottakerTyper';
+import type {
+  foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto,
+  foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto,
+  foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_DetaljertSimuleringResultatDto,
+  foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringForMottakerDto,
+  foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatPerFagområdeDto,
+  foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatRadDto,
+} from './apiDtoGenerert.ts';
 
-// TODO: Kommer fra kontrakter.simulering
-export type SimuleringPeriode = Readonly<{
-  fom: string;
-  tom: string;
-}>;
+export type SimuleringPeriode = foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto;
 
-export type SimuleringResultatRad = Readonly<{
-  feltnavn: string;
-  resultaterPerMåned: {
-    periode: SimuleringPeriode;
-    beløp: number;
-  }[];
-}>;
+export type SimuleringResultatRad =
+  foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatRadDto;
 
-export type SimuleringResultatPerFagområde = Readonly<{
-  fagOmrådeKode: string;
-  rader: SimuleringResultatRad[];
-}>;
+export type SimuleringResultatPerFagområde =
+  foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatPerFagområdeDto;
 
-export type Mottaker = Readonly<{
-  mottakerType: MottakerType;
-  mottakerNummer: string;
-  mottakerIdentifikator: string;
-  nesteUtbPeriode: SimuleringPeriode;
-  resultatPerFagområde: SimuleringResultatPerFagområde[];
-  resultatOgMotregningRader: SimuleringResultatRad[];
-}>;
+export type Mottaker = foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringForMottakerDto;
 
-export type DetaljertSimuleringResultat = Readonly<{
-  periode: SimuleringPeriode;
-  sumEtterbetaling: number;
-  sumFeilutbetaling: number;
-  sumInntrekk: number;
-  ingenPerioderMedAvvik: boolean;
-  perioderPerMottaker: Mottaker[];
-}>;
+export type DetaljertSimuleringResultat =
+  foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_DetaljertSimuleringResultatDto;
 
-export type SimuleringResultat = Readonly<{
-  simuleringResultat: DetaljertSimuleringResultat;
-  simuleringResultatUtenInntrekk: DetaljertSimuleringResultat;
-  slåttAvInntrekk: boolean;
-}>;
+export type SimuleringResultat = foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto;

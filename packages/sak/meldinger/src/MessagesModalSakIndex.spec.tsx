@@ -12,7 +12,7 @@ describe('MessagesModalSakIndex', () => {
 
     render(<Default closeEvent={lukk} />);
 
-    expect(await screen.findAllByText('Brevet er bestilt')).toHaveLength(2);
+    expect(await screen.findAllByText('Brevet er bestilt')).toHaveLength(1);
 
     await userEvent.click(screen.getByText('OK'));
 

@@ -91,7 +91,7 @@ export const AksjonspunktGodkjenningFieldArray = ({
           skjemalenkeType => skjemalenkeType.kode === context.skjermlenkeType,
         );
 
-        const lenke = lagLenke(context.skjermlenkeType as SkjermlenkeType); // TODO [JOHANNES] -- gjør SkjermlenkeType til enum i BE
+        const lenke = lagLenke(context.skjermlenkeType);
 
         return (
           <div key={field.id}>

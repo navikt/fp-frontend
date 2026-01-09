@@ -1,29 +1,5 @@
-.container {
-  width: 730px;
-}
-
-.image {
-  height: 35px;
-  margin-top: 5px;
-  width: 35px;
-}
-
 .modal {
   width: 400px;
-}
-
-.label {
-  margin-top: 5px;
-}
-
-.button {
-  margin-top: 10px;
-  padding-left: 35px;
-  padding-right: 35px;
-}
-
-.cancelButton {
-  margin: 10px 10px 0 10px;
 }
 
 .typeBredde {
