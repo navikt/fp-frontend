@@ -1,7 +1,6 @@
 {
   "MenyHenleggIndex.HenleggBehandling": "Henlegg behandlingen og avslutt",
 
-  "HenleggBehandlingModal.ModalDescription": "Behandlingen henlegges",
   "HenleggBehandlingModal.HenleggBehandling": "Henlegg behandling",
   "HenleggBehandlingModal.ArsakField": "Velg årsak",
   "HenleggBehandlingModal.BegrunnelseField": "Begrunnelse",
@@ -11,7 +10,6 @@
   "HenleggBehandlingModal.SokerInformeres": "Informer søker",
   "HenleggBehandlingModal.ForhandsvisBrev": "Forhåndsvis brev",
 
-  "HenlagtBehandlingModal.ModalDescription": "Behandlingen er henlagt",
   "HenlagtBehandlingModal.Henlagt": "Henlagt",
   "HenlagtBehandlingModal.BehandlingenErHenlagt": "Behandlingen er henlagt",
   "HenlagtBehandlingModal.RutetTilForsiden": "Du kommer nå til forsiden",

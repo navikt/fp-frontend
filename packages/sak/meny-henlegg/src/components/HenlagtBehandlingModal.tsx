@@ -1,9 +1,7 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
-
-import styles from './henlagtBehandlingModal.module.css';
+import { Button, Dialog, HStack } from '@navikt/ds-react';
 
 interface Props {
   showModal: boolean;
@@ -17,36 +15,26 @@ interface Props {
  * er satt til Iverksetter vedtak. Ved å trykke på knapp blir saksbehandler tatt tilbake til sokesiden.
  */
 export const HenlagtBehandlingModal = ({ showModal, closeEvent }: Props) => {
-  const intl = useIntl();
-
   return (
-    <Modal
-      className={styles['modal']}
-      open={showModal}
-      aria-label={intl.formatMessage({ id: 'HenlagtBehandlingModal.ModalDescription' })}
-      onClose={closeEvent}
-    >
-      <Modal.Body>
-        <HStack justify="space-between">
-          <HStack gap="space-12">
-            <CheckmarkCircleFillIcon
-              className={styles['image']}
-              title={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })}
-            />
-            <VStack gap="space-4">
-              <Label size="small">
-                <FormattedMessage id="HenlagtBehandlingModal.BehandlingenErHenlagt" />
-              </Label>
-              <BodyShort size="small">
-                <FormattedMessage id="HenlagtBehandlingModal.RutetTilForsiden" />
-              </BodyShort>
-            </VStack>
-          </HStack>
+    <Dialog open={showModal} onOpenChange={closeEvent} size="small">
+      <Dialog.Popup closeOnOutsideClick={false}>
+        <Dialog.Header withClosebutton={false}>
+          <Dialog.Title>
+            <HStack gap="2" align="center">
+              <CheckmarkCircleFillIcon aria-hidden width={35} height={35} color="var(--ax-success-600)" />
+              <FormattedMessage id="HenlagtBehandlingModal.BehandlingenErHenlagt" />
+            </HStack>
+          </Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <FormattedMessage id="HenlagtBehandlingModal.RutetTilForsiden" />
+        </Dialog.Body>
+        <Dialog.Footer>
           <Button variant="primary" size="small" onClick={closeEvent} autoFocus type="button">
             <FormattedMessage id="HenlagtBehandlingModal.Ok" />
           </Button>
-        </HStack>
-      </Modal.Body>
-    </Modal>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };
