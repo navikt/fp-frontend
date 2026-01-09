@@ -283,7 +283,6 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '7037'
   | '7039'
   | '7040'
-  | 'UNDEFINED'
   | '5004'
   | '5005'
   | '5006'
@@ -1132,8 +1131,7 @@ export type foreldrepenger_behandlingslager_virksomhet_ArbeidType =
   | 'NÆRING'
   | 'UTENLANDSK_ARBEIDSFORHOLD'
   | 'VENTELØNN_VARTPENGER'
-  | 'VANLIG'
-  | '-';
+  | 'VANLIG';
 
 export type foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver = {
   aktørId?: string;
@@ -4444,47 +4442,47 @@ export type foreldrepenger_kontrakter_simulering_resultat_kodeverk_RadId =
   | 'resultat';
 
 export type foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto = {
-  fom?: string;
-  tom?: string;
+  fom: string;
+  tom: string;
 };
 
 export type foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto = {
-  simuleringResultat?: foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_DetaljertSimuleringResultatDto;
+  simuleringResultat: foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_DetaljertSimuleringResultatDto;
   simuleringResultatUtenInntrekk?: foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_DetaljertSimuleringResultatDto;
-  slåttAvInntrekk?: boolean;
+  slåttAvInntrekk: boolean;
 };
 
 export type foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_DetaljertSimuleringResultatDto = {
-  ingenPerioderMedAvvik?: boolean;
-  periode?: foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto;
-  perioderPerMottaker?: Array<foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringForMottakerDto>;
-  sumEtterbetaling?: number;
-  sumFeilutbetaling?: number;
-  sumInntrekk?: number;
+  ingenPerioderMedAvvik: boolean;
+  periode: foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto;
+  perioderPerMottaker: Array<foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringForMottakerDto>;
+  sumEtterbetaling: number;
+  sumFeilutbetaling: number;
+  sumInntrekk: number;
 };
 
 export type foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringForMottakerDto = {
-  mottakerIdentifikator?: string;
-  mottakerNummer?: string;
-  mottakerType?: foreldrepenger_kontrakter_simulering_resultat_kodeverk_MottakerType;
-  nesteUtbPeriode?: foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto;
-  resultatOgMotregningRader?: Array<foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatRadDto>;
-  resultatPerFagområde?: Array<foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatPerFagområdeDto>;
+  mottakerIdentifikator: string;
+  mottakerNummer: string;
+  mottakerType: foreldrepenger_kontrakter_simulering_resultat_kodeverk_MottakerType;
+  nesteUtbPeriode: foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto;
+  resultatOgMotregningRader: Array<foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatRadDto>;
+  resultatPerFagområde: Array<foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatPerFagområdeDto>;
 };
 
 export type foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatPerFagområdeDto = {
-  fagOmrådeKode?: foreldrepenger_kontrakter_simulering_resultat_kodeverk_Fagområde;
-  rader?: Array<foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatRadDto>;
+  fagOmrådeKode: foreldrepenger_kontrakter_simulering_resultat_kodeverk_Fagområde;
+  rader: Array<foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatRadDto>;
 };
 
 export type foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatPerMånedDto = {
-  beløp?: number;
-  periode?: foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto;
+  beløp: number;
+  periode: foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto;
 };
 
 export type foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatRadDto = {
-  feltnavn?: foreldrepenger_kontrakter_simulering_resultat_kodeverk_RadId;
-  resultaterPerMåned?: Array<foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatPerMånedDto>;
+  feltnavn: foreldrepenger_kontrakter_simulering_resultat_kodeverk_RadId;
+  resultaterPerMåned: Array<foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatPerMånedDto>;
 };
 
 export type tjenester_behandling_tilbakekreving_TilbakekrevingValgDto = {
@@ -5103,7 +5101,7 @@ export type tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto = {
 };
 
 export type tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto = {
-  skjermlenkeType: string;
+  skjermlenkeType: foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType;
   totrinnskontrollAksjonspunkter: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto>;
 };
 

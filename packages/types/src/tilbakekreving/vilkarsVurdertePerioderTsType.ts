@@ -1,6 +1,5 @@
 import type { Aktsomhet } from './aktsomhet';
 
-// TODO [JOHANNES] -- tilbakekreving
 export type AktsomhetInfo = {
   sarligGrunner: string[];
   harGrunnerTilReduksjon: boolean;
@@ -29,6 +28,6 @@ export type VilkarsVurdertPeriode = {
   feilutbetalingBelop?: number;
 };
 
-export type VilkarsVurdertePerioderWrapper = {
+export type VilkårsVurderingDto = {
   vilkarsVurdertePerioder: VilkarsVurdertPeriode[];
 };
