@@ -1,9 +1,7 @@
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Modal } from '@navikt/ds-react';
-
-import styles from './klageBehandlingModal.module.css';
+import { Button, Dialog, HStack } from '@navikt/ds-react';
 
 interface Props {
   visModal?: boolean;
@@ -19,25 +17,27 @@ interface Props {
  */
 export const KlageBehandlingModal = ({ visModal = false, lukkModal }: Props) => {
   const intl = useIntl();
+
   return (
-    <Modal
-      width="small"
-      open={visModal}
-      aria-label={intl.formatMessage({ id: 'KlageVurderingModal.ModalDescription' })}
-      onClose={lukkModal}
-    >
-      <Modal.Body>
-        <HStack gap="space-16">
-          <CheckmarkCircleFillIcon className={styles['image']} />
-          <div>
-            <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.VedtakOversendt' })}</BodyShort>
-            <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.GoToSearchPage' })}</BodyShort>
-          </div>
+    <Dialog open={visModal} size="small">
+      <Dialog.Popup closeOnOutsideClick={false}>
+        <Dialog.Header withClosebutton={false}>
+          <Dialog.Title>
+            <HStack gap="2" align="center">
+              <CheckmarkCircleFillIcon aria-hidden width={35} height={35} color="var(--ax-success-600)" />
+              <FormattedMessage id="KlageVurderingModal.VedtakOversendt" />
+            </HStack>
+          </Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <FormattedMessage id="KlageVurderingModal.GoToSearchPage" />
+        </Dialog.Body>
+        <Dialog.Footer>
           <Button variant="primary" size="small" onClick={lukkModal} autoFocus type="button">
             {intl.formatMessage({ id: 'KlageVurderingModal.Ok' })}
           </Button>
-        </HStack>
-      </Modal.Body>
-    </Modal>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };

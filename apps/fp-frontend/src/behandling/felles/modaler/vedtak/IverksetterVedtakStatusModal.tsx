@@ -1,11 +1,9 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
+import { Button, Dialog, HStack } from '@navikt/ds-react';
 
 import type { Behandlingsresultat } from '@navikt/fp-types';
-
-import styles from './iverksetterVedtakStatusModal.module.css';
 
 interface Props {
   lukkModal: () => void;
@@ -20,34 +18,32 @@ interface Props {
  * er satt til Iverksetter vedtak. Ved å trykke på knapp blir den Nav-ansatte tatt tilbake til sokesiden.
  */
 export const IverksetterVedtakStatusModal = ({ lukkModal, visModal, behandlingsresultat }: Props) => {
-  const intl = useIntl();
   const erVedtakAvslatt = behandlingsresultat?.type === 'AVSLÅTT';
-  const imageAltText = intl.formatMessage({
-    id: erVedtakAvslatt ? 'IverksetterVedtakStatusModal.Avslatt' : 'IverksetterVedtakStatusModal.Innvilget',
-  });
 
   return (
-    <Modal open={visModal} aria-label={imageAltText} onClose={lukkModal}>
-      <Modal.Body>
-        <HStack gap="space-24">
-          <CheckmarkCircleFillIcon className={styles['image']} />
-          <VStack gap="space-4">
-            <Label size="small">
+    <Dialog open={visModal} size="small">
+      <Dialog.Popup>
+        <Dialog.Header withClosebutton={false}>
+          <Dialog.Title>
+            <HStack gap="2" align="center">
+              <CheckmarkCircleFillIcon aria-hidden width={35} height={35} color="var(--ax-success-600)" />
               {erVedtakAvslatt ? (
                 <FormattedMessage id="IverksetterVedtakStatusModal.VedtakAvslatt" />
               ) : (
                 <FormattedMessage id="IverksetterVedtakStatusModal.VedtakInnvilet" />
               )}
-            </Label>
-            <BodyShort size="small">
-              <FormattedMessage id="IverksetterVedtakStatusModal.GoToSearchPage" />
-            </BodyShort>
-          </VStack>
+            </HStack>
+          </Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <FormattedMessage id="IverksetterVedtakStatusModal.GoToSearchPage" />
+        </Dialog.Body>
+        <Dialog.Footer>
           <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
             <FormattedMessage id="IverksetterVedtakStatusModal.Ok" />
           </Button>
-        </HStack>
-      </Modal.Body>
-    </Modal>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };

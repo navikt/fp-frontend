@@ -1,44 +1,42 @@
-import { useEffect, useRef } from 'react';
-import { useIntl } from 'react-intl';
+import { useEffect, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading, HStack, Modal } from '@navikt/ds-react';
+import { BodyShort, Button, Dialog, HStack } from '@navikt/ds-react';
 
 export const ÅpenRevurderingModal = ({ harÅpenRevurdering }: { harÅpenRevurdering: boolean }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks -- Rapportert fordi den ikkje taklar norske bokstavar i komponentnamn
-  const intl = useIntl();
-  // eslint-disable-next-line react-hooks/rules-of-hooks -- Rapportert fordi den ikkje taklar norske bokstavar i komponentnamn
-  const ref = useRef<HTMLDialogElement>(null);
+  const [open, setOpen] = useState(harÅpenRevurdering);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks -- Rapportert fordi den ikkje taklar norske bokstavar i komponentnamn
   useEffect(() => {
     if (harÅpenRevurdering) {
-      ref.current?.showModal();
+      setOpen(true);
     }
   }, [harÅpenRevurdering]);
 
   return (
-    <Modal
-      ref={ref}
-      width="small"
-      aria-label={intl.formatMessage({ id: 'ÅpenRevurderingModal.ApenRevurderingHeader' })}
-    >
-      <Modal.Header closeButton={false}>
-        <HStack gap="space-16" align="center">
-          <ExclamationmarkTriangleFillIcon width={35} height={35} color="var(--ax-warning-700)" />
-          <Heading size="small" level="2">
-            {intl.formatMessage({ id: 'ÅpenRevurderingModal.ApenRevurderingHeader' })}
-          </Heading>
-        </HStack>
-      </Modal.Header>
-      <Modal.Body>
-        <BodyShort size="small">{intl.formatMessage({ id: 'ÅpenRevurderingModal.ApenRevurdering' })}</BodyShort>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button size="small" variant="primary" onClick={() => ref.current?.close()} autoFocus type="button">
-          {intl.formatMessage({ id: 'ÅpenRevurderingModal.Ok' })}
-        </Button>
-      </Modal.Footer>
-    </Modal>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog.Popup width="small" role="alertdialog" closeOnOutsideClick={false}>
+        <Dialog.Header withClosebutton={false}>
+          <Dialog.Title>
+            <HStack gap="space-16" align="center">
+              <ExclamationmarkTriangleFillIcon aria-hidden width={35} height={35} color="var(--ax-warning-700)" />
+              <FormattedMessage id="ÅpenRevurderingModal.ApenRevurderingHeader" />
+            </HStack>
+          </Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <BodyShort size="small">
+            <FormattedMessage id="ÅpenRevurderingModal.ApenRevurdering" />
+          </BodyShort>
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Button size="small" variant="primary" type="button" autoFocus onClick={() => setOpen(false)}>
+            <FormattedMessage id="ÅpenRevurderingModal.Ok" />
+          </Button>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };

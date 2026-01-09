@@ -13,14 +13,13 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
-    "stylelint": "stylelint src/**/*.module.css",
     "prettier": "prettier --write src",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "build-storybook": "storybook build -o .storybook-static-build",
     "storybook": "storybook dev --quiet -p 7064"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.37.0",
+    "@navikt/ds-react": "7.38.0",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-form-hooks": "10.2.6",
     "@navikt/ft-form-validators": "4.3.4",
@@ -31,7 +30,7 @@
     "react-intl": "8.0.10"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.37.0",
+    "@navikt/ds-css": "7.38.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
@@ -43,7 +42,6 @@
     "@testing-library/user-event": "14.6.1",
     "eslint": "9.39.2",
     "storybook": "10.1.11",
-    "stylelint": "16.26.1",
     "typescript": "5.9.3",
     "vite": "7.3.0",
     "vitest": "4.0.16"

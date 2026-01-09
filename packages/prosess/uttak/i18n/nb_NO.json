@@ -228,7 +228,6 @@
   "ValidationMessage.SamtidigUttakErObligatorisk": "Feltet er obligatorisk",
   "DelOppPeriodeModalImpl.Periode": "Periode",
   "DelOppPeriodeModalImpl.AngiTomDato": "Angi t.o.m. dato for første periode",
-  "DelOppPeriodeModalImpl.ModalDescription": "Periode er splittet",
   "DelOppPeriodeModalImpl.DelOppPerioden": "Del opp perioden",
   "DelOppPeriodeModalImpl.Ok": "Ok",
   "DelOppPeriodeModalImpl.Avbryt": "Avbryt",

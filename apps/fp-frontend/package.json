@@ -14,7 +14,6 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
-    "stylelint": "stylelint src/**/*.module.css",
     "prettier": "prettier --write src",
     "dev": "vite serve",
     "build": "vite build",
@@ -24,10 +23,10 @@
     "storybook": "storybook dev --quiet -p 7001"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.37.0",
-    "@navikt/ds-css": "7.37.0",
+    "@navikt/aksel-icons": "7.38.0",
+    "@navikt/ds-css": "7.38.0",
     "@navikt/ds-css-internal": "3.4.3",
-    "@navikt/ds-react": "7.37.0",
+    "@navikt/ds-react": "7.38.0",
     "@navikt/fp-app-felles": "workspace:*",
     "@navikt/fp-fakta-arbeid-og-inntekt": "workspace:*",
     "@navikt/fp-fakta-arbeidsforhold": "workspace:*",
@@ -143,7 +142,6 @@
     "msw": "2.12.7",
     "msw-storybook-addon": "2.0.6",
     "storybook": "10.1.11",
-    "stylelint": "16.26.1",
     "typescript": "5.9.3",
     "vite": "7.3.0",
     "vitest": "4.0.16"

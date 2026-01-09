@@ -55,7 +55,6 @@
   "UttakDokumentasjonFaktaDetailForm.AktivitetskravGrunnlagProsent": "{value}%",
   "UttakDokumentasjonFaktaDetailForm.PermisjonsprosentJa": "{prosent}% {type}",
   "UttakDokumentasjonFaktaDetailForm.PermisjonsprosentNei": "Nei",
-  "DelOppPeriodeModal.Periode": "Periode",
   "DelOppPeriodeModal.PeriodeLabel": "Perioden som skal deles opp",
   "DelOppPeriodeModal.Tittel": "Vil du dele opp perioden?",
   "DelOppPeriodeModal.Beskrivelse": "Når du deler opp perioden vil du opprette to perioder som du kan redigere hver for seg.",
