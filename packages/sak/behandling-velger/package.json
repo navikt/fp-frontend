@@ -23,7 +23,7 @@
     "@navikt/ds-css": "7.37.0",
     "@navikt/ds-react": "7.37.0",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "6.4.5",
+    "@navikt/ft-ui-komponenter": "6.4.6",
     "@navikt/ft-utils": "3.9.4",
     "classnames": "2.5.1",
     "dayjs": "1.11.19",
