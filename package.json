@@ -39,7 +39,7 @@
     "packages/**/*"
   ],
   "devDependencies": {
-    "@hey-api/openapi-ts": "0.89.2",
+    "@hey-api/openapi-ts": "0.90.1",
     "@navikt/aksel-stylelint": "7.38.0",
     "@storybook/addon-a11y": "10.1.11",
     "@storybook/addon-links": "10.1.11",
@@ -51,7 +51,7 @@
     "@types/react-router-dom": "5.3.3",
     "husky": "9.1.7",
     "jsdom": "27.4.0",
-    "knip": "5.79.0",
+    "knip": "5.80.0",
     "lint-staged": "16.2.7",
     "prettier": "3.7.4",
     "shelljs": "0.10.0",
