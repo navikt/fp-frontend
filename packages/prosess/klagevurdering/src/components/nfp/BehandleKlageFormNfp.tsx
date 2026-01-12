@@ -152,6 +152,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
                 isSubmittable={isSubmittable}
                 isSubmitting={formMethods.formState.isSubmitting}
                 isDirty={formMethods.formState.isDirty}
+                onClick={formMethods.handleSubmit(values => submitCallback(transformValues(values)))}
               />
             )}
             {!isReadOnly &&
