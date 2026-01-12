@@ -12,6 +12,7 @@ interface Props {
   isDirty: boolean;
   readOnly: boolean;
   valgtHjemmel?: string;
+  submitCallback: () => void;
 }
 
 export const BekreftOgSubmitKlageModal = ({
@@ -22,6 +23,7 @@ export const BekreftOgSubmitKlageModal = ({
   isDirty,
   readOnly,
   valgtHjemmel,
+  submitCallback,
 }: Props) => {
   return (
     <Dialog open={erModalÅpen} onOpenChange={lukkModal} size="small">
@@ -52,7 +54,7 @@ export const BekreftOgSubmitKlageModal = ({
           </VStack>
         </Dialog.Body>
         <Dialog.Footer>
-          <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
+          <Button size="small" variant="secondary" onClick={lukkModal} autoFocus type="button">
             <FormattedMessage id="Klage.Modal.Avbryt" />
           </Button>
           <ProsessStegSubmitButton
@@ -60,6 +62,7 @@ export const BekreftOgSubmitKlageModal = ({
             isSubmittable={isSubmittable}
             isSubmitting={isSubmitting}
             isDirty={isDirty}
+            onClick={submitCallback}
           />
         </Dialog.Footer>
       </Dialog.Popup>
