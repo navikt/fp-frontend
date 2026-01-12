@@ -106,11 +106,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
   };
 
   return (
-    <RhfForm
-      formMethods={formMethods}
-      onSubmit={(values: KlageFormType) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setMellomlagretFormData}
-    >
+    <RhfForm formMethods={formMethods} setDataOnUnmount={setMellomlagretFormData}>
       <VStack gap="space-16">
         <Heading size="small" level="2">
           {intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}
@@ -146,6 +142,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
                   isSubmittable={isSubmittable}
                   isSubmitting={formMethods.formState.isSubmitting}
                   isDirty={formMethods.formState.isValid}
+                  submitCallback={formMethods.handleSubmit(values => submitCallback(transformValues(values)))}
                 />
               </>
             )}
@@ -155,6 +152,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
                 isSubmittable={isSubmittable}
                 isSubmitting={formMethods.formState.isSubmitting}
                 isDirty={formMethods.formState.isDirty}
+                onClick={formMethods.handleSubmit(values => submitCallback(transformValues(values)))}
               />
             )}
             {!isReadOnly &&
