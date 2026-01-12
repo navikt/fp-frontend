@@ -5,8 +5,8 @@
  */
 export enum ApiPollingStatus {
   PENDING = 'PENDING',
-  COMPLETE = 'COMPLETE',
+  // COMPLETE = 'COMPLETE',
   DELAYED = 'DELAYED',
-  CANCELLED = 'CANCELLED',
+  // CANCELLED = 'CANCELLED',
   HALTED = 'HALTED',
 }
