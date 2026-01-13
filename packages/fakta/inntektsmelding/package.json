@@ -25,7 +25,7 @@
     "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-ui-komponenter": "6.5.1",
+    "@navikt/ft-ui-komponenter": "6.5.2",
     "@navikt/ft-utils": "3.10.0",
     "react": "19.2.3",
     "react-intl": "8.0.10"
