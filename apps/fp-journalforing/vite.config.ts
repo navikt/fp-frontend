@@ -12,7 +12,7 @@ export default mergeConfig(createSharedAppConfig(), {
       origin: [
         'https://fpjournalforing.intern.dev.nav.no',
         'https://fpjournalforing.intern.nav.no',
-        'http://localhost:9000',
+        'http://localhost:9005',
       ],
     },
     proxy: {

@@ -12,7 +12,7 @@ export default mergeConfig(createSharedAppConfig(), {
       origin: [
         'https://fpavdelingsleder.intern.dev.nav.no',
         'https://fpavdelingsleder.intern.nav.no',
-        'http://localhost:9000',
+        'http://localhost:9004',
       ],
     },
     proxy: {
