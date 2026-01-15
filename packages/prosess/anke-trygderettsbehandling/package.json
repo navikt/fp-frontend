@@ -23,7 +23,7 @@
     "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-utils": "3.10.0",
     "react": "19.2.3",
-    "react-intl": "8.0.10"
+    "react-intl": "8.0.11"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
@@ -37,7 +37,7 @@
     "eslint": "9.39.2",
     "storybook": "10.1.11",
     "typescript": "5.9.3",
-    "vite": "7.3.0",
+    "vite": "7.3.1",
     "vitest": "4.0.16"
   }
 }
