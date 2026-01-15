@@ -12,7 +12,7 @@ jobs:
       contents: write
       pages: write
       id-token: write
-    uses: navikt/fp-gha-workflows/.github/workflows/deploy-storybook1.yml@ny-storybook-deploy
+    uses: navikt/fp-gha-workflows/.github/workflows/deploy-storybook.yml@main
     with:
       package-manager: yarn
       cache: turbo
