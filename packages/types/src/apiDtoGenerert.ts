@@ -4442,8 +4442,8 @@ export type foreldrepenger_kontrakter_simulering_resultat_kodeverk_RadId =
   | 'resultat';
 
 export type foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto = {
-  fom?: string;
-  tom?: string;
+  fom: string;
+  tom: string;
 };
 
 export type foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto = {
