@@ -12,8 +12,9 @@ jobs:
       contents: write
       pages: write
       id-token: write
-    uses: navikt/fp-gha-workflows/.github/workflows/deploy-storybook1.yml@eecbab354ff8d2994f28fb838305450a0cb104b8
+    uses: navikt/fp-gha-workflows/.github/workflows/deploy-storybook1.yml@ny-storybook-deploy
     with:
       package-manager: yarn
+      cache: turbo
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
