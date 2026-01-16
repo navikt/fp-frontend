@@ -17,6 +17,7 @@ import { SaksbehandlereForSakslisteForm } from './saksbehandlerForm/Saksbehandle
 import { UtvalgskriterierForSakslisteForm } from './sakslisteForm/UtvalgskriterierForSakslisteForm';
 
 import styles from './endreSakslisterPanel.module.css';
+import { GrafModul } from './GrafModul.tsx';
 
 interface Props {
   valgtAvdelingEnhet: string;
@@ -62,6 +63,7 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
       >
         {valgtSakId && valgtSaksliste && (
           <React.Fragment key={valgtSaksliste.sakslisteId}>
+            <GrafModul valgtSakslisteId={valgtSaksliste.sakslisteId} />
             <UtvalgskriterierForSakslisteForm valgtSaksliste={valgtSaksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
             <HStack gap="space-16" justify="center">
               <ArrowDownIcon

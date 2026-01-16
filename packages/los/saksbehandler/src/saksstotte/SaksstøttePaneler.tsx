@@ -1,13 +1,16 @@
 import { VStack } from '@navikt/ds-react';
 
+import { SaksbehandlerNokkeltallPanel } from './nokkeltall/SaksbehandlerNokkeltallPanel';
 import { SistBehandledeSaker } from './sistBehandlede/SistBehandledeSaker';
 
 interface Props {
+  valgtSakslisteId?: number;
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }
 
-export const SaksstøttePaneler = ({ åpneFagsak }: Props) => (
+export const SaksstøttePaneler = ({ valgtSakslisteId, åpneFagsak }: Props) => (
   <VStack gap="space-24">
+    {!!valgtSakslisteId && <SaksbehandlerNokkeltallPanel valgtSakslisteId={valgtSakslisteId} />}
     <SistBehandledeSaker åpneFagsak={åpneFagsak} />
   </VStack>
 );

@@ -8,6 +8,7 @@ import type { NavAnsatt } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
+import type { OppgaveFilterStatistikk } from '../../felles/src/typer/oppgaveFilterStatistikk.ts';
 import { type Oppgave, type OppgaveMedStatus } from './typer/oppgaveTsType';
 import type { Saksbehandler } from './typer/saksbehandlerTsType';
 import type { Saksliste } from './typer/sakslisteTsType';
@@ -32,6 +33,24 @@ const SAKSLISTER = [
       {
         andreKriterierType: 'PAPIRSOKNAD',
         inkluder: false,
+      },
+    ],
+  },
+  {
+    sakslisteId: 2,
+    navn: 'Beslutter kø',
+    sortering: {
+      sorteringType: 'BEHFRIST',
+      fra: 1,
+      til: 4,
+      erDynamiskPeriode: true,
+    },
+    behandlingTyper: ['BT-002', 'BT-004'],
+    fagsakYtelseTyper: ['FP', 'SVP', 'ES'],
+    andreKriterier: [
+      {
+        andreKriterierType: 'TIL_BESLUTTER',
+        inkluder: true,
       },
     ],
   },
@@ -158,6 +177,29 @@ const BEHANDLEDE_OPPGAVER = [
   } as OppgaveMedStatus,
 ];
 
+// Hjelpefunksjon for relative datoer
+const minusHours = (hours: number): string => {
+  const date = new Date();
+  date.setHours(date.getHours() - hours);
+  return date.toISOString();
+};
+
+// Generer OPPGAVE_KØ_STATISTIKK programmatisk
+const generateOppgaveKøStatistikk = (): OppgaveFilterStatistikk[] => {
+  const data: OppgaveFilterStatistikk[] = [];
+  for (let i = 24*7; i >= 0; i--) {
+    data.push({
+      tidspunkt: minusHours(i),
+      aktive: 3500 + Math.floor(Math.random() * 20),
+      aktiveLedige: 3400 + Math.floor(Math.random() * 15),
+      behandlingerPåVent: 2321 + Math.floor(Math.random() * 15),
+    });
+  }
+  return data;
+};
+
+const OPPGAVE_KØ_STATISTIKK = generateOppgaveKøStatistikk() satisfies OppgaveFilterStatistikk[];
+
 const meta = {
   title: 'SaksbehandlerIndex',
   decorators: [withQueryClient],
@@ -192,6 +234,7 @@ const meta = {
         http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
         http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+        http.get(LosUrl.OPPGAVE_KØ_STATISTIKK, () => HttpResponse.json(OPPGAVE_KØ_STATISTIKK)),
       ],
     },
   },
