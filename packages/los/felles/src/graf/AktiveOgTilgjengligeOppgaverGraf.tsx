@@ -8,22 +8,29 @@ interface Props {
 
 export const AktiveOgTilgjengligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
   const height = 400;
-  const aktivLabel = 'Antall oppgaver';
-  const påVentLabel = 'Behandlinger på vent';
-  const reserverteLabel = 'Reserverte oppgaver';
+  const aktivLabel = 'Ledige';
+  //const påVentLabel = 'Behandlinger på vent';
+  const reserverteLabel = 'Reserverte';
 
   // Sorter oppgaver etter tidspunkt
   const sortedOppgaver = [...aktiveOgLedigeTidslinje].sort(
     (a, b) => new Date(a.tidspunkt).getTime() - new Date(b.tidspunkt).getTime(),
   );
 
-  // Hent tidspunkter for x-aksen
-  const tidspunkter = sortedOppgaver.map(o => o.tidspunkt);
-
-  // Hent data for aktive, på vent og beregn reserverte (aktive - aktiveLedige)
-  const aktivData = sortedOppgaver.map(o => o.aktive);
-  const påVentData = sortedOppgaver.map(o => o.behandlingerPåVent);
-  const reserverteData = sortedOppgaver.map(o => o.aktive - o.aktiveLedige);
+  // Bruk sampling på tidspunkter og data
+  const granularitet = 50;
+  const sampledTidspunkter = sampleData(
+    sortedOppgaver.map(o => o.tidspunkt),
+    granularitet,
+  );
+  const sampledLedigeData = sampleData(
+    sortedOppgaver.map(o => o.aktiveLedige),
+    granularitet,
+  );
+  const sampledReserverteData = sampleData(
+    sortedOppgaver.map(o => o.aktive - o.aktiveLedige),
+    granularitet,
+  );
 
   return (
     <ReactECharts
@@ -37,12 +44,12 @@ export const AktiveOgTilgjengligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Pr
           },
         },
         legend: {
-          data: [aktivLabel, påVentLabel, reserverteLabel],
+          data: [aktivLabel, reserverteLabel],
         },
         xAxis: {
           name: 'Tid',
           type: 'category',
-          data: tidspunkter,
+          data: sampledTidspunkter,
           boundaryGap: true,
           axisLabel: {
             formatter: (value: string) => {
@@ -57,24 +64,20 @@ export const AktiveOgTilgjengligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Pr
         yAxis: {
           type: 'value',
           name: 'Antall',
+          scale: true,
         },
         series: [
           {
             name: reserverteLabel,
             type: 'line',
-            data: reserverteData,
-          },
-          {
-            name: aktivLabel,
-            type: 'line',
-            data: aktivData,
+            data: sampledReserverteData,
             stack: 'total',
             areaStyle: {},
           },
           {
-            name: påVentLabel,
+            name: aktivLabel,
             type: 'line',
-            data: påVentData,
+            data: sampledLedigeData,
             stack: 'total',
             areaStyle: {},
           },
@@ -83,4 +86,13 @@ export const AktiveOgTilgjengligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Pr
       }}
     />
   );
+};
+
+
+// Funksjon for å sample data ned til maks antall punkter
+const sampleData = (data: (string | number)[], maxPoints: number) => {
+  if (data.length <= maxPoints) return data;
+
+  const step = Math.ceil(data.length / maxPoints);
+  return data.filter((_, index) => index % step === 0);
 };

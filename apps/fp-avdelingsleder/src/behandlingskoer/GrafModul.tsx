@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { AktiveOgTilgjengligeOppgaverGrafModal } from '@navikt/fp-los-felles';
+import { AktiveOgTilgjengligeOppgaverGrafDialog } from '@navikt/fp-los-felles';
 
 import { oppgaveKøStatistikkOptions } from '../data/fplosAvdelingslederApi.ts';
 
@@ -14,5 +14,5 @@ export const GrafModul = ({ valgtSakslisteId }: Props) => {
       ...oppgaveKøStatistikkOptions(valgtSakslisteId),
     }).data ?? [];
 
-  return <AktiveOgTilgjengligeOppgaverGrafModal aktiveOgLedigeTidslinje={aktiveOgLedigeTidslinje} />;
+  return <AktiveOgTilgjengligeOppgaverGrafDialog aktiveOgLedigeTidslinje={aktiveOgLedigeTidslinje} utenTittel={true} />;
 };

@@ -67,7 +67,7 @@
   "SistBehandledeSaker.Status": "Status",
   "SistBehandledeSaker.ErReservert": "Reservert",
 
-  "AktiveOgTilgjengligeOppgaverGraf.Overskrift": "Antall oppgaver og åpne behandlinger",
+  "AktiveOgTilgjengligeOppgaverGraf.Overskrift": "Antall oppgaver",
   "AktiveOgTilgjengligeOppgaverGrafModal.ÅpneGraf": "Åpne graf",
   "AktiveOgTilgjengligeOppgaverGraf.SisteDøgnet": "Siste døgnet",
   "AktiveOgTilgjengligeOppgaverGraf.SisteUken": "Siste uken",

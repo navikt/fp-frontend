@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { AktiveOgTilgjengligeOppgaverGrafModal } from './AktiveOgTilgjengligeOppgaverGrafModal';
+import { AktiveOgTilgjengligeOppgaverGrafDialog } from './AktiveOgTilgjengligeOppgaverGrafDialog.tsx';
 
 import messages from '../../i18n/nb_NO.json';
 import type { OppgaveFilterStatistikk } from '../typer/oppgaveFilterStatistikk.ts';
@@ -34,9 +34,9 @@ const OPPGAVE_KØ_STATISTIKK = generateOppgaveKøStatistikk() satisfies OppgaveF
 
 const meta = {
   title: 'los/AktiveOgTilgjengligeOppgaverGrafModal',
-  component: AktiveOgTilgjengligeOppgaverGrafModal,
+  component: AktiveOgTilgjengligeOppgaverGrafDialog,
   decorators: [withIntl],
-} satisfies Meta<typeof AktiveOgTilgjengligeOppgaverGrafModal>;
+} satisfies Meta<typeof AktiveOgTilgjengligeOppgaverGrafDialog>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
