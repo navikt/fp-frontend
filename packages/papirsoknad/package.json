@@ -16,21 +16,21 @@
     "storybook": "storybook dev --quiet -p 7024"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.38.0",
+    "@navikt/ds-react": "7.40.0",
     "@navikt/fp-papirsoknad-ui-komponenter": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-form-hooks": "10.3.2",
-    "@navikt/ft-form-validators": "4.4.0",
-    "@navikt/ft-ui-komponenter": "6.5.2",
-    "@navikt/ft-utils": "3.10.0",
+    "@navikt/ft-form-hooks": "10.3.13",
+    "@navikt/ft-form-validators": "4.4.11",
+    "@navikt/ft-ui-komponenter": "6.5.13",
+    "@navikt/ft-utils": "3.10.11",
     "react": "19.2.3",
-    "react-hook-form": "7.69.0",
-    "react-intl": "8.0.10",
-    "react-router-dom": "7.11.0"
+    "react-hook-form": "7.71.1",
+    "react-intl": "8.0.11",
+    "react-router-dom": "7.12.0"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.38.0",
+    "@navikt/ds-css": "7.40.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
@@ -40,6 +40,6 @@
     "eslint": "9.39.2",
     "storybook": "10.1.11",
     "typescript": "5.9.3",
-    "vite": "7.3.0"
+    "vite": "7.3.1"
   }
 }
