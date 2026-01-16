@@ -2,7 +2,7 @@ import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 import pLimit from 'p-limit';
 
-import type { ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { OppgaveFilterStatistikk, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AlleKodeverkLos, AndreKriterierType } from '@navikt/fp-types';
 
 import type { Avdeling } from '../typer/avdelingTsType';
@@ -63,7 +63,9 @@ export const LosUrl = {
   HENT_OPPGAVER_PER_DATO: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid-historikk'),
   HENT_OPPGAVER_APNE_ELLER_PA_VENT: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/åpne-behandlinger'),
   HENT_BEHANDLINGER_FRISTUTLOP: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/frist-utløp'),
-  HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag-mnd'),
+  HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND: wrapUrl(
+    '/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag-mnd',
+  ),
   RESERVASJONER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/reservasjoner'),
   SLETT_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister/slett'),
   HENT_GRUPPER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/grupper'),
@@ -79,12 +81,25 @@ export const LosUrl = {
   SLETT_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/slett'),
   SAKSBEHANDLER_SOK: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/søk'),
   OPPRETT_NY_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
+  OPPGAVE_KØ_STATISTIKK: wrapUrl('/fplos/api/saksbehandler/nokkeltall/antall-ko'),
 };
 
 export const initFetchOptions = () =>
   queryOptions({
     queryKey: [LosUrl.INIT_FETCH],
     queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<InitDataLos>(),
+  });
+
+export const getOppgaveKøStatistikk = (valgtSakslisteId: number) =>
+  kyExtended
+    .get(LosUrl.OPPGAVE_KØ_STATISTIKK, { searchParams: { valgtSakslisteId } })
+    .json<OppgaveFilterStatistikk[]>();
+
+export const oppgaveKøStatistikkOptions = (valgtSakslisteId: number) =>
+  queryOptions({
+    ///fplos/api/saksbehandler/nøkkeltall/antall-kø?valgtSakslisteId=12345
+    queryKey: [LosUrl.OPPGAVE_KØ_STATISTIKK, valgtSakslisteId],
+    queryFn: () => getOppgaveKøStatistikk(valgtSakslisteId),
   });
 
 export const oppgaverForAvdelingAntallOptions = (avdelingEnhet: string) =>

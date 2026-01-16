@@ -13,14 +13,7 @@ import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { SletteSakslisteModal } from './SletteSakslisteModal';
 
 import styles from './gjeldendeSakslisterTabell.module.css';
-
-const headerTextCodes = [
-  'GjeldendeSakslisterTabell.Listenavn',
-  'GjeldendeSakslisterTabell.Stonadstype',
-  'GjeldendeSakslisterTabell.Behandlingtype',
-  'GjeldendeSakslisterTabell.AntallSaksbehandlere',
-  'GjeldendeSakslisterTabell.AntallBehandlinger',
-];
+import { GrafModul } from './GrafModul.tsx';
 
 const formatStonadstyper = (
   fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
@@ -151,13 +144,34 @@ export const GjeldendeSakslisterTabell = ({
         <Table size="small">
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell scope="col" />
-              {headerTextCodes.map(code => (
-                <Table.HeaderCell key={code} scope="col">
-                  <FormattedMessage id={code} />
-                </Table.HeaderCell>
-              ))}
-              <Table.HeaderCell scope="col" />
+              <Table.HeaderCell scope="col" rowSpan={2} />
+              <Table.HeaderCell scope="col" rowSpan={2}>
+                <FormattedMessage id="GjeldendeSakslisterTabell.Listenavn" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col" rowSpan={2}>
+                <FormattedMessage id="GjeldendeSakslisterTabell.Stonadstype" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col" rowSpan={2}>
+                <FormattedMessage id="GjeldendeSakslisterTabell.Behandlingtype" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col" rowSpan={2}>
+                <FormattedMessage id="GjeldendeSakslisterTabell.AntallSaksbehandlere" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col" colSpan={3} style={{ textAlign: 'center' }}>
+                <FormattedMessage id="GjeldendeSakslisterTabell.Oppgaver" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col" rowSpan={2} />
+            </Table.Row>
+            <Table.Row>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="GjeldendeSakslisterTabell.AntallLedige" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="GjeldendeSakslisterTabell.AntallReserverte" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="GjeldendeSakslisterTabell.Graf" />
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -181,6 +195,10 @@ export const GjeldendeSakslisterTabell = ({
                     valgtAvdelingEnhet={valgtAvdelingEnhet}
                     sakslisteId={saksliste.sakslisteId}
                   />
+                </Table.DataCell>
+                <Table.DataCell>43</Table.DataCell>
+                <Table.DataCell>
+                  <GrafModul valgtSakslisteId={saksliste.sakslisteId} />
                 </Table.DataCell>
                 <Table.DataCell>
                   <div

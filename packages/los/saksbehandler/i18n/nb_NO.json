@@ -67,6 +67,12 @@
   "SistBehandledeSaker.Status": "Status",
   "SistBehandledeSaker.ErReservert": "Reservert",
 
+  "AktiveOgTilgjengligeOppgaverGraf.Overskrift": "Antall oppgaver",
+  "AktiveOgTilgjengligeOppgaverGrafModal.ÅpneGraf": "Åpne graf",
+  "AktiveOgTilgjengligeOppgaverGraf.SisteDøgnet": "Siste døgnet",
+  "AktiveOgTilgjengligeOppgaverGraf.SisteUken": "Siste uken",
+  "AktiveOgTilgjengligeOppgaverGraf.VisReserverte": "Reserverte",
+
   "OppgaveErReservertAvAnnenModal.ReservertAv": "{saksbehandlernavn} ({saksbehandlerid}) arbeider nå med denne behandlingen (reservert fram t.o.m {date} - {time})",
   "OppgaveErReservertAvAnnenModal.ReservertAvEnkel": "En annen saksbehandler arbeider nå med denne behandlingen",
   "OppgaveErReservertAvAnnenModal.Ok": "OK",
@@ -137,6 +143,10 @@
   "SakslisteVelgerForm.VisFærre": "Se færre",
   "SakslisteVelgerForm.Andre": "{antallAndre} andre",
   "SakslisteVelgerForm.FilterForKoen": "Filtere for køen",
+
+  "SaksbehandlerNokkeltallPanel.Statistikk": "Statistikk",
+  "SaksbehandlerNokkeltallPanel.ForAlle": "For alle saksbehandlere",
+  "SaksbehandlerNokkeltallPanel.ForAlleDetaljer": "Statistikk for alle som jobber med foreldrepenger, engangsstønad og svangerskapspenger",
 
   "NotatModal.SkrivNotat": "Legg til notat på reservasjon",
   "NotatModal.Notat": "Notat"

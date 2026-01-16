@@ -8,6 +8,7 @@ import type { NavAnsatt } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
+import type { OppgaveFilterStatistikk } from '../../felles/src/typer/oppgaveFilterStatistikk.ts';
 import { type Oppgave, type OppgaveMedStatus } from './typer/oppgaveTsType';
 import type { Saksbehandler } from './typer/saksbehandlerTsType';
 import type { Saksliste } from './typer/sakslisteTsType';
@@ -32,6 +33,24 @@ const SAKSLISTER = [
       {
         andreKriterierType: 'PAPIRSOKNAD',
         inkluder: false,
+      },
+    ],
+  },
+  {
+    sakslisteId: 2,
+    navn: 'Beslutter kø',
+    sortering: {
+      sorteringType: 'BEHFRIST',
+      fra: 1,
+      til: 4,
+      erDynamiskPeriode: true,
+    },
+    behandlingTyper: ['BT-002', 'BT-004'],
+    fagsakYtelseTyper: ['FP', 'SVP', 'ES'],
+    andreKriterier: [
+      {
+        andreKriterierType: 'TIL_BESLUTTER',
+        inkluder: true,
       },
     ],
   },
@@ -158,6 +177,39 @@ const BEHANDLEDE_OPPGAVER = [
   } as OppgaveMedStatus,
 ];
 
+// Hjelpefunksjon for relative datoer
+const minusHours = (hours: number): string => {
+  const date = new Date();
+  date.setHours(date.getHours() - hours);
+  return date.toISOString();
+};
+
+const OPPGAVE_KØ_STATISTIKK: OppgaveFilterStatistikk[] = [
+  // gap på ~13 timer
+  { tidspunkt: minusHours(43), aktive: 21, aktiveLedige: 5 },
+  { tidspunkt: minusHours(42), aktive: 21, aktiveLedige: 4 },
+  { tidspunkt: minusHours(41), aktive: 21, aktiveLedige: 6 },
+  // gap på ~13 timer
+  { tidspunkt: minusHours(28), aktive: 19, aktiveLedige: 8 },
+  { tidspunkt: minusHours(27), aktive: 19, aktiveLedige: 8 },
+  { tidspunkt: minusHours(26), aktive: 19, aktiveLedige: 6 },
+  { tidspunkt: minusHours(25), aktive: 18, aktiveLedige: 3 },
+  { tidspunkt: minusHours(24), aktive: 18, aktiveLedige: 1 },
+  { tidspunkt: minusHours(23), aktive: 24, aktiveLedige: 5 },
+  { tidspunkt: minusHours(22), aktive: 27, aktiveLedige: 7 },
+  { tidspunkt: minusHours(21), aktive: 27, aktiveLedige: 7 },
+  { tidspunkt: minusHours(20), aktive: 25, aktiveLedige: 9 },
+  { tidspunkt: minusHours(19), aktive: 21, aktiveLedige: 5 },
+  { tidspunkt: minusHours(18), aktive: 18, aktiveLedige: 3 },
+  { tidspunkt: minusHours(17), aktive: 18, aktiveLedige: 6 },
+  // gap på ~13 timer
+  { tidspunkt: minusHours(4), aktive: 20, aktiveLedige: 10 },
+  { tidspunkt: minusHours(3), aktive: 20, aktiveLedige: 9 },
+  { tidspunkt: minusHours(2), aktive: 18, aktiveLedige: 6 },
+  { tidspunkt: minusHours(1), aktive: 21, aktiveLedige: 4 },
+  { tidspunkt: minusHours(0), aktive: 29, aktiveLedige: 9 },
+];
+
 const meta = {
   title: 'SaksbehandlerIndex',
   decorators: [withQueryClient],
@@ -192,6 +244,7 @@ const meta = {
         http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
         http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+        http.get(LosUrl.OPPGAVE_KØ_STATISTIKK, () => HttpResponse.json(OPPGAVE_KØ_STATISTIKK)),
       ],
     },
   },
