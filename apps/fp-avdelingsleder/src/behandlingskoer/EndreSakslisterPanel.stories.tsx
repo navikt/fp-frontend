@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
+import type { OppgaveFilterStatistikk } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
@@ -10,7 +11,6 @@ import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
 
 import messages from '../../i18n/nb_NO.json';
-import type { OppgaveFilterStatistikk } from '@navikt/fp-los-felles';
 
 const withIntl = getIntlDecorator(messages);
 
@@ -48,22 +48,30 @@ const minusHours = (hours: number): string => {
   return date.toISOString();
 };
 
-// Generer OPPGAVE_KØ_STATISTIKK programmatisk
-const generateOppgaveKøStatistikk = (): OppgaveFilterStatistikk[] => {
-  const data: OppgaveFilterStatistikk[] = [];
-  for (let i = 24*7; i >= 0; i--) {
-    data.push({
-      tidspunkt: minusHours(i),
-      aktive: 3500 + Math.floor(Math.random() * 20),
-      aktiveLedige: 3400 + Math.floor(Math.random() * 15),
-      behandlingerPåVent: 2321 + Math.floor(Math.random() * 15),
-    });
-  }
-  return data;
-};
-
-const OPPGAVE_KØ_STATISTIKK = generateOppgaveKøStatistikk() satisfies OppgaveFilterStatistikk[];
-
+const OPPGAVE_KØ_STATISTIKK: OppgaveFilterStatistikk[] = [
+  { tidspunkt: minusHours(43), aktive: 21, aktiveLedige: 5 },
+  { tidspunkt: minusHours(42), aktive: 21, aktiveLedige: 4 },
+  { tidspunkt: minusHours(41), aktive: 21, aktiveLedige: 6 },
+  // gap på ~13 timer
+  { tidspunkt: minusHours(28), aktive: 19, aktiveLedige: 8 },
+  { tidspunkt: minusHours(27), aktive: 19, aktiveLedige: 8 },
+  { tidspunkt: minusHours(26), aktive: 19, aktiveLedige: 6 },
+  { tidspunkt: minusHours(25), aktive: 18, aktiveLedige: 3 },
+  { tidspunkt: minusHours(24), aktive: 18, aktiveLedige: 1 },
+  { tidspunkt: minusHours(23), aktive: 24, aktiveLedige: 5 },
+  { tidspunkt: minusHours(22), aktive: 27, aktiveLedige: 7 },
+  { tidspunkt: minusHours(21), aktive: 27, aktiveLedige: 7 },
+  { tidspunkt: minusHours(20), aktive: 25, aktiveLedige: 9 },
+  { tidspunkt: minusHours(19), aktive: 21, aktiveLedige: 5 },
+  { tidspunkt: minusHours(18), aktive: 18, aktiveLedige: 3 },
+  { tidspunkt: minusHours(17), aktive: 18, aktiveLedige: 6 },
+  // gap på ~13 timer
+  { tidspunkt: minusHours(4), aktive: 20, aktiveLedige: 10 },
+  { tidspunkt: minusHours(3), aktive: 20, aktiveLedige: 9 },
+  { tidspunkt: minusHours(2), aktive: 18, aktiveLedige: 6 },
+  { tidspunkt: minusHours(1), aktive: 21, aktiveLedige: 4 },
+  { tidspunkt: minusHours(0), aktive: 29, aktiveLedige: 9 },
+];
 
 const meta = {
   title: 'los/avdelingsleder/behandlingskoer/EndreSakslisterPanel',

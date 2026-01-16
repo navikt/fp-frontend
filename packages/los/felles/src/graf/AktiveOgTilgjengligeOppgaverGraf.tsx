@@ -24,7 +24,7 @@ export const AktiveOgTilgjengligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Pr
     (a, b) => new Date(a.tidspunkt).getTime() - new Date(b.tidspunkt).getTime(),
   );
   // Bruk sampling på tidspunkter og data
-  const granularitet = 20;
+  const granularitet = 40;
   const sampledTidspunkter = sampleData(
     sortertOgFiltrertTidslinje.map(o => o.tidspunkt),
     granularitet,
@@ -59,7 +59,7 @@ export const AktiveOgTilgjengligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Pr
             data: [aktivLabel, reserverteLabel],
           },
           xAxis: {
-            name: tidsintervall === 'dag' ? 'Tid (hh:mm)' : 'Dato (dd.mm)',
+            name: 'Tid',
             type: 'category',
             data: sampledTidspunkter,
             boundaryGap: true,
