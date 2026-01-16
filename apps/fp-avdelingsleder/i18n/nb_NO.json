@@ -58,8 +58,14 @@
   "GjeldendeSakslisterTabell.Stonadstype": "Stønadstype",
   "GjeldendeSakslisterTabell.Alle": "Alle",
   "GjeldendeSakslisterTabell.AntallSaksbehandlere": "Antall saksbehandlere",
-  "GjeldendeSakslisterTabell.AntallBehandlinger": "Antall behandlinger",
+  "GjeldendeSakslisterTabell.AntallPåVent": "Behandlinger på vent",
+  "GjeldendeSakslisterTabell.Oppgaver": "Oppgaver",
+  "GjeldendeSakslisterTabell.AntallOppgaver": "Alle oppgaver",
+  "GjeldendeSakslisterTabell.AntallTilgjengelige": "Tilgjengelige oppgaver",
+  "GjeldendeSakslisterTabell.Graf": "Graf",
   "GjeldendeSakslisterTabell.OppgaverForAvdeling": "Antall åpne behandlinger totalt",
+
+  "AktiveOgTilgjengligeOppgaverGraf.Overskrift": "Antall oppgaver",
 
   "AntallOppgaverForSaksliste.HentingAvAntallOppgaverFeilet": "Henting av antall feilet",
   "AntallOppgaverForSaksliste.HentingAvAntallOppgaverHentes": "Henter antall oppgaver for behandlingskøen",

@@ -4,6 +4,7 @@ import ky from 'ky';
 import type { ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AlleKodeverkLos, FagsakEnkel } from '@navikt/fp-types';
 
+import type { OppgaveFilterStatistikk } from '../../../felles/src/typer/oppgaveFilterStatistikk.ts';
 import type { Driftsmelding } from '../typer/driftsmeldingTsType';
 import type { Oppgave, OppgaveMedStatus } from '../typer/oppgaveTsType';
 import type { Saksbehandler } from '../typer/saksbehandlerTsType';
@@ -44,6 +45,7 @@ export const LosUrl = {
   SAKSLISTE_SAKSBEHANDLERE: wrapUrl('/fplos/api/saksbehandler/saksliste/saksbehandlere'),
   BEHANDLINGSKO_OPPGAVE_ANTALL: wrapUrl('/fplos/api/saksbehandler/oppgaver/antall'),
   OPPGAVER_TIL_BEHANDLING: wrapUrl('/fplos/api/saksbehandler/oppgaver'),
+  OPPGAVE_KØ_STATISTIKK: wrapUrl('/fplos/api/saksbehandler/nokkeltall/antall-ko'),
 };
 
 export const getSakslisteSaksbehandlere = (sakslisteId: number) =>
@@ -54,6 +56,9 @@ export const getBehandlingskøOppgaveAntall = (sakslisteId: number) =>
 
 export const getReservasjonsstatus = (oppgaveId: number) =>
   kyExtended.get(LosUrl.HENT_RESERVASJONSSTATUS, { searchParams: { oppgaveId } }).json<ReservasjonStatus>();
+
+export const getOppgaveKøStatistikk = (valgtSakslisteId: number) =>
+  kyExtended.get(LosUrl.OPPGAVE_KØ_STATISTIKK, { searchParams: { valgtSakslisteId } }).json<OppgaveFilterStatistikk[]>();
 
 export const getOppgaverTilBehandling = (sakslisteId: number, oppgaveIder?: string) =>
   kyExtended.get<Oppgave[]>(LosUrl.OPPGAVER_TIL_BEHANDLING, {
@@ -113,6 +118,13 @@ export const behandlendeOppgaverOptions = (kunAktive: boolean) =>
       kyExtended
         .get(LosUrl.TIDLIGERE_RESERVERTE, { searchParams: { kunAktive: kunAktive } })
         .json<OppgaveMedStatus[]>(),
+  });
+
+export const oppgaveKøStatistikkOptions = (valgtSakslisteId: number) =>
+  queryOptions({
+    ///fplos/api/saksbehandler/nøkkeltall/antall-kø?valgtSakslisteId=12345
+    queryKey: [LosUrl.OPPGAVE_KØ_STATISTIKK, valgtSakslisteId],
+    queryFn: () => getOppgaveKøStatistikk(valgtSakslisteId),
   });
 
 export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>

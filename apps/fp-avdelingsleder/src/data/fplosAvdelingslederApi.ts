@@ -2,7 +2,7 @@ import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 import pLimit from 'p-limit';
 
-import type { ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { OppgaveFilterStatistikk, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AlleKodeverkLos, AndreKriterierType } from '@navikt/fp-types';
 
 import type { Avdeling } from '../typer/avdelingTsType';
@@ -81,12 +81,25 @@ export const LosUrl = {
   SLETT_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/slett'),
   SAKSBEHANDLER_SOK: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/søk'),
   OPPRETT_NY_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
+  OPPGAVE_FILTER_STATISTIKK: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/statistikk-oppgave-filter'),
 };
 
 export const initFetchOptions = () =>
   queryOptions({
     queryKey: [LosUrl.INIT_FETCH],
     queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<InitDataLos>(),
+  });
+
+export const getOppgaveFilterStatistikk = (sakslisteId: number, avdelingEnhet: string) =>
+  kyExtended
+    .get(LosUrl.OPPGAVE_FILTER_STATISTIKK, { searchParams: { sakslisteId, avdelingEnhet } })
+    .json<OppgaveFilterStatistikk[]>();
+
+export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number, valgtAvdelingEnhet: string) =>
+  queryOptions({
+    ///fplos/api/saksbehandler/nøkkeltall/antall-kø?valgtSakslisteId=12345
+    queryKey: [LosUrl.OPPGAVE_FILTER_STATISTIKK, valgtSakslisteId, valgtAvdelingEnhet],
+    queryFn: () => getOppgaveFilterStatistikk(valgtSakslisteId, valgtAvdelingEnhet),
   });
 
 export const oppgaverForAvdelingAntallOptions = (avdelingEnhet: string) =>

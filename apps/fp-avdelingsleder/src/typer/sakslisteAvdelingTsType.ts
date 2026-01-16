@@ -11,6 +11,11 @@ export type KøSorteringFelt = Readonly<{
   feltKategori: string;
 }>;
 
+export type Statistikk = {
+  alleOppgaver: number;
+  tilgjengligeOppgaver: number;
+};
+
 export type SakslisteAvdeling = Readonly<{
   sakslisteId: number;
   navn?: string;
@@ -27,4 +32,5 @@ export type SakslisteAvdeling = Readonly<{
   sorteringTyper: KøSorteringFelt[];
   andreKriterier?: AnnetKriterie[];
   saksbehandlerIdenter: string[];
+  gjeldendeStatistikk?: Statistikk;
 }>;
