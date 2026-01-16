@@ -14,15 +14,15 @@
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.38.0",
+    "@navikt/ds-react": "7.40.0",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
     "@storybook/react": "10.1.11",
     "@tanstack/react-query": "5.90.16",
     "react": "19.2.3",
-    "react-intl": "8.0.10",
-    "react-router-dom": "7.11.0",
+    "react-intl": "8.0.11",
+    "react-router-dom": "7.12.0",
     "storybook": "10.1.11"
   },
   "devDependencies": {
