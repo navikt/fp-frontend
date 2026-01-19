@@ -1,6 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Label, Table } from '@navikt/ds-react';
+import { capitalizeFirstLetter } from '@navikt/ft-utils';
 
 import { type AlleKodeverk, type OmsorgOgRett } from '@navikt/fp-types';
 
@@ -22,9 +23,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett, alleKodeverk }: Props) => 
   const harSøkerAleneOmsorg = omsorgOgRett.søknad.søkerHarAleneomsorg;
   const { annenpartIdent, annenpartBostedsland } = omsorgOgRett.søknad;
   const bostedsland = alleKodeverk.Landkoder.find(land => land.kode === annenpartBostedsland)?.navn;
-  const formattedBostedsland = bostedsland
-    ? bostedsland.charAt(0).toUpperCase() + bostedsland.slice(1).toLowerCase()
-    : null;
+  const formattedBostedsland = bostedsland ? capitalizeFirstLetter(bostedsland.toLowerCase()) : null;
 
   return (
     <EkspansjonsKort

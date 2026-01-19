@@ -165,7 +165,6 @@ OmsorgOgAdopsjonPanel.initialValues = (): OmsorgOgAdopsjonFormValues => ({ [OMSO
 OmsorgOgAdopsjonPanel.transformValues = ({ omsorg }: OmsorgOgAdopsjonFormValues): TransformedFormValue => ({
   [OMSORG_NAME_PREFIX]: {
     ...omsorg,
-    fødselsdato:
-      omsorg.fødselsdato && omsorg.fødselsdato.length > 0 ? omsorg.fødselsdato.map(f => f.dato) : undefined,
+    fødselsdato: omsorg.fødselsdato && omsorg.fødselsdato.length > 0 ? omsorg.fødselsdato.map(f => f.dato) : undefined,
   },
 });

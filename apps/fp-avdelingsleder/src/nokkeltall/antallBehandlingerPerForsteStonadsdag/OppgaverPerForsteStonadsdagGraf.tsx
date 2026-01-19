@@ -85,7 +85,6 @@ const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdag
     y: o.antall,
   }));
 
-
 const lagDatastruktur = (koordinater: Koordinat[]): (number | string)[][] => {
   const nyeKoordinater: Record<string, number> = koordinater.reduce(
     (acc, { x, y }) => {
