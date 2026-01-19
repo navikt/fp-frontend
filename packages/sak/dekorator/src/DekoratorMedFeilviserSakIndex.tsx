@@ -60,7 +60,12 @@ export const DekoratorMedFeilviserSakIndex = ({
     <div ref={fixedHeaderRef} className={styles['container']}>
       <RawIntlProvider value={intl}>
         <InternalHeader>
-          <InternalHeader.Title href={tittelLenke} onClick={tittelCallback} onContextMenu={tittelCallback}>
+          <InternalHeader.Title
+            style={{ cursor: 'pointer' }}
+            href={tittelLenke}
+            onClick={tittelCallback}
+            onContextMenu={tittelCallback}
+          >
             {tittel}
           </InternalHeader.Title>
           <Spacer />

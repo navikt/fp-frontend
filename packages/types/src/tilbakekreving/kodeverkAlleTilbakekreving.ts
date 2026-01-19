@@ -1,19 +1,19 @@
+import type { BehandlingType } from '../behandlingType';
+import type { HistorikkAktor } from '../historikkAktor';
+import type { TilbakekrevingVidereBehandling } from '../tilbakekrevingVidereBehandling';
+import type { VergeType } from '../vergeTsType';
+import type { VurderÅrsak } from '../vurderÅrsak';
 import type { Aktsomhet } from './aktsomhet';
-import type { BehandlingType } from './behandlingType';
+import type { BehandlingÅrsakTypeFpTilbake } from './behandlingÅrsakTypeFpTilbake';
+import type { BehandlingResultatTypeFpTilbake } from './behandlingResultatTypeFpTilbake';
 import type { ForeldelseVurderingType } from './foreldelseVurderingType';
 import type { HendelseType } from './hendelseType';
 import type { HendelseUnderType } from './hendelseUnderType';
-import type { HistorikkAktor } from './historikkAktor';
-import type { SærligGrunn } from './særligGrunn';
+import type { SærligGrunn } from './særligGrunn.ts';
 import type { SkjermlenkeTypeTilbakekreving } from './skjermlenkeTypeTilbakekreving';
-import type { BehandlingÅrsakTypeFpTilbake } from './tilbakekreving/behandlingÅrsakTypeFpTilbake';
-import type { BehandlingResultatTypeFpTilbake } from './tilbakekreving/behandlingResultatTypeFpTilbake';
-import type { VenteÅrsakTypeFpTilbake } from './tilbakekreving/venteÅrsakTypeFpTilbake';
-import type { TilbakekrevingVidereBehandling } from './tilbakekrevingVidereBehandling';
 import type { VedtakResultatType } from './vedtakResultatType';
-import type { VergeType } from './vergeTsType';
+import type { VenteÅrsakTypeFpTilbake } from './venteÅrsakTypeFpTilbake';
 import type { VilkårResultat } from './vilkårResultat';
-import type { VurderÅrsak } from './vurderÅrsak';
 
 //TODO Ein del av desse kodeverk-filene er delt mellom fpsak og tilbake. Mange av dei har ulike verdiar og bør delast opp i fleire filer
 

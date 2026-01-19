@@ -1,18 +1,11 @@
-import type { SkjermlenkeType, SkjermlenkeTypeFpTilbake } from '@navikt/fp-types';
+import type { SkjermlenkeType } from '@navikt/fp-types';
 
 import { FaktaPanelCode } from './faktaPanelCodes';
 import { ProsessStegCode } from './prosessStegCodes';
 
-type SkjermlenkeDataFpSak = Record<
-  SkjermlenkeType,
-  { faktaNavn: FaktaPanelCode | ''; punktNavn: ProsessStegCode | '' }
->;
-type SkjermlenkeDataFpTilbake = Record<
-  SkjermlenkeTypeFpTilbake,
-  { faktaNavn: FaktaPanelCode | ''; punktNavn: ProsessStegCode | '' }
->;
+type SkjermlenkeData = Record<SkjermlenkeType, { faktaNavn: FaktaPanelCode | ''; punktNavn: ProsessStegCode | '' }>;
 
-const skjermlenkeCodesFpsak: SkjermlenkeDataFpSak = {
+export const skjermlenkeCodes: SkjermlenkeData = {
   BEREGNING_ENGANGSSTOENAD: {
     faktaNavn: FaktaPanelCode.DEFAULT,
     punktNavn: ProsessStegCode.BEREGNING,
@@ -181,14 +174,6 @@ const skjermlenkeCodesFpsak: SkjermlenkeDataFpSak = {
     faktaNavn: FaktaPanelCode.OMSORG_OG_RETT,
     punktNavn: '',
   },
-  // Denne blir aldri brukt men må ligge her for å tilfredsstille typen SkjermlenkeData
-  '-': {
-    faktaNavn: '',
-    punktNavn: '',
-  },
-};
-
-export const skjermlenkeCodesFpTilbake: SkjermlenkeDataFpTilbake = {
   FAKTA_OM_FEILUTBETALING: {
     faktaNavn: FaktaPanelCode.FEILUTBETALING,
     punktNavn: '',
@@ -201,19 +186,9 @@ export const skjermlenkeCodesFpTilbake: SkjermlenkeDataFpTilbake = {
     faktaNavn: FaktaPanelCode.DEFAULT,
     punktNavn: ProsessStegCode.FORELDELSE,
   },
-  VEDTAK: {
-    faktaNavn: FaktaPanelCode.DEFAULT,
-    punktNavn: ProsessStegCode.VEDTAK,
-  },
-  FAKTA_OM_VERGE: {
-    faktaNavn: FaktaPanelCode.VERGE,
-    punktNavn: '',
-  },
-  // Denne blir aldri brukt men må ligge her for å tilfredsstille typen SkjermlenkeDataFpTilbake
+  // Denne blir aldri brukt men må ligge her for å tilfredsstille typen
   '-': {
     faktaNavn: '',
     punktNavn: '',
   },
 };
-
-export const skjermlenkeCodes = { ...skjermlenkeCodesFpsak, ...skjermlenkeCodesFpTilbake };

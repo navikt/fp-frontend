@@ -1,9 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
-
-import styles from './fatterVedtakStatusModal.module.css';
+import { Button, Dialog, HStack } from '@navikt/ds-react';
 
 interface Props {
   visModal?: boolean;
@@ -19,21 +17,25 @@ interface Props {
  */
 export const FatterVedtakStatusModal = ({ visModal = false, lukkModal, tekst }: Props) => {
   return (
-    <Modal width="small" open={visModal} aria-label={tekst} onClose={lukkModal}>
-      <Modal.Body>
-        <HStack gap="space-24">
-          <CheckmarkCircleFillIcon className={styles['image']} />
-          <VStack gap="space-4">
-            <Label size="small">{tekst}</Label>
-            <BodyShort size="small">
-              <FormattedMessage id="FatterVedtakStatusModal.GoToSearchPage" />
-            </BodyShort>
-          </VStack>
+    <Dialog open={visModal} size="small">
+      <Dialog.Popup closeOnOutsideClick={false}>
+        <Dialog.Header withClosebutton={false}>
+          <Dialog.Title>
+            <HStack gap="2" align="center">
+              <CheckmarkCircleFillIcon aria-hidden width={35} height={35} color="var(--ax-success-600)" />
+              {tekst}
+            </HStack>
+          </Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <FormattedMessage id="FatterVedtakStatusModal.GoToSearchPage" />
+        </Dialog.Body>
+        <Dialog.Footer>
           <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
             <FormattedMessage id="FatterVedtakStatusModal.Ok" />
           </Button>
-        </HStack>
-      </Modal.Body>
-    </Modal>
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };

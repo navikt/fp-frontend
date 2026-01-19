@@ -1,7 +1,7 @@
 export { ProsessStegCode } from './src/prosessStegCodes';
 export { FaktaPanelCode } from './src/faktaPanelCodes';
 export { ApiPollingStatus } from './src/apiPollingStatus';
-export { skjermlenkeCodes, skjermlenkeCodesFpTilbake } from './src/skjermlenkeCodes';
+export { skjermlenkeCodes } from './src/skjermlenkeCodes';
 
 export {
   LINK_TIL_BESTE_BEREGNING_REGNEARK,

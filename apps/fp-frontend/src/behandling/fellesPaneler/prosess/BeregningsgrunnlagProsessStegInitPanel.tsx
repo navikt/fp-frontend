@@ -26,6 +26,7 @@ import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInit
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
+import '@navikt/ft-prosess-beregning/dist/style.css';
 
 const mapBGKodeTilFpsakKode = (
   bgKode: string,

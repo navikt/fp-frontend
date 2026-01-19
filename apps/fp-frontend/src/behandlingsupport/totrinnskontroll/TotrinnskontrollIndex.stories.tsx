@@ -17,8 +17,8 @@ import type {
   BehandlingTillatteOperasjoner,
   Fagsak,
   FagsakBehandlingDto,
-  SkjermlenkeType,
   TotrinnskontrollAksjonspunkt,
+  TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -55,9 +55,9 @@ const createAksjonspunkt = (aksjonspunktKode: string) =>
     uttakPerioder: [],
   }) satisfies TotrinnskontrollAksjonspunkt;
 
-const TOTRINNSKONTROLL_AKSJONSPUNKTER = [
+const TOTRINNSKONTROLL_AKSJONSPUNKTER: TotrinnskontrollSkjermlenkeContext[] = [
   {
-    skjermlenkeType: 'FAKTA_OM_FOEDSEL' satisfies SkjermlenkeType,
+    skjermlenkeType: 'FAKTA_OM_FOEDSEL',
     totrinnskontrollAksjonspunkter: [
       createAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL),
       createAksjonspunkt(AksjonspunktKode.SJEKK_TERMINBEKREFTELSE),
@@ -66,11 +66,11 @@ const TOTRINNSKONTROLL_AKSJONSPUNKTER = [
     ],
   },
   {
-    skjermlenkeType: 'FAKTA_FOR_OMSORG' satisfies SkjermlenkeType,
+    skjermlenkeType: 'FAKTA_FOR_OMSORG',
     totrinnskontrollAksjonspunkter: [createAksjonspunkt(AksjonspunktKode.AVKLAR_LØPENDE_OMSORG)],
   },
   {
-    skjermlenkeType: 'PUNKT_FOR_MEDLEMSKAP' satisfies SkjermlenkeType,
+    skjermlenkeType: 'PUNKT_FOR_MEDLEMSKAP',
     totrinnskontrollAksjonspunkter: [
       createAksjonspunkt(AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET),
       createAksjonspunkt(AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR),

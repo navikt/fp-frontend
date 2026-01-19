@@ -1,6 +1,6 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Dialog, VStack } from '@navikt/ds-react';
 
 import { ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 
@@ -12,6 +12,7 @@ interface Props {
   isDirty: boolean;
   readOnly: boolean;
   valgtHjemmel?: string;
+  submitCallback: () => void;
 }
 
 export const BekreftOgSubmitKlageModal = ({
@@ -22,51 +23,49 @@ export const BekreftOgSubmitKlageModal = ({
   isDirty,
   readOnly,
   valgtHjemmel,
+  submitCallback,
 }: Props) => {
-  const intl = useIntl();
   return (
-    <Modal
-      width="500px"
-      open={erModalÅpen}
-      aria-label={intl.formatMessage({ id: 'Klage.Modal.Overskrift' })}
-      onClose={lukkModal}
-    >
-      <Modal.Body>
-        <VStack gap="space-12">
-          <VStack gap="space-16">
-            <Label size="medium">
-              <FormattedMessage id="Klage.Modal.Overskrift" />
-            </Label>
-            <BodyShort>
-              <FormattedMessage id="Klage.Modal.SendTilKlageinstans" />
-            </BodyShort>
-            <BodyShort>
-              <FormattedMessage id="Klage.Modal.Valg" />
-            </BodyShort>
-            <BodyShort>
-              <FormattedMessage id="Klage.Modal.Oppretthold" />
-            </BodyShort>
-            {valgtHjemmel && (
+    <Dialog open={erModalÅpen} onOpenChange={lukkModal} size="small">
+      <Dialog.Popup closeOnOutsideClick={false} width="small">
+        <Dialog.Header withClosebutton={false}>
+          <Dialog.Title>
+            <FormattedMessage id="Klage.Modal.Overskrift" />
+          </Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>
+          <VStack gap="space-12">
+            <VStack gap="space-16">
               <BodyShort>
-                <FormattedMessage id="Klage.Modal.Hjemmel" values={{ hjemmel: valgtHjemmel }} />
+                <FormattedMessage id="Klage.Modal.SendTilKlageinstans" />
               </BodyShort>
-            )}
+              <BodyShort>
+                <FormattedMessage id="Klage.Modal.Valg" />
+              </BodyShort>
+              <BodyShort>
+                <FormattedMessage id="Klage.Modal.Oppretthold" />
+              </BodyShort>
+              {valgtHjemmel && (
+                <BodyShort>
+                  <FormattedMessage id="Klage.Modal.Hjemmel" values={{ hjemmel: valgtHjemmel }} />
+                </BodyShort>
+              )}
+            </VStack>
           </VStack>
-          <div>
-            <HStack gap="space-8">
-              <ProsessStegSubmitButton
-                isReadOnly={readOnly}
-                isSubmittable={isSubmittable}
-                isSubmitting={isSubmitting}
-                isDirty={isDirty}
-              />
-              <Button size="small" variant="primary" onClick={lukkModal} autoFocus type="button">
-                <FormattedMessage id="Klage.Modal.Avbryt" />
-              </Button>
-            </HStack>
-          </div>
-        </VStack>
-      </Modal.Body>
-    </Modal>
+        </Dialog.Body>
+        <Dialog.Footer>
+          <Button size="small" variant="secondary" onClick={lukkModal} autoFocus type="button">
+            <FormattedMessage id="Klage.Modal.Avbryt" />
+          </Button>
+          <ProsessStegSubmitButton
+            isReadOnly={readOnly}
+            isSubmittable={isSubmittable}
+            isSubmitting={isSubmitting}
+            isDirty={isDirty}
+            onClick={submitCallback}
+          />
+        </Dialog.Footer>
+      </Dialog.Popup>
+    </Dialog>
   );
 };

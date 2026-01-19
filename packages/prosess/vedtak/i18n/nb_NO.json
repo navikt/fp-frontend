@@ -58,7 +58,6 @@
   "FritekstRedigeringModal.Rediger": "Rediger brev",
   "FritekstRedigeringModal.Infotekst": "Gjør nødvendige endringer i brevet nedenfor. Redigering er begrenset til området markert i oransje. Endringer vil automatisk bli mellomlagret. Vil du se saken samtidig som du redigerer kan du åpne en kopi av saken i ny fane:",
   "FritekstRedigeringModal.ApneINyFane": "Åpne sak i ny fane",
-  "FritekstRedigeringModal.TilbakestillLabel": "Tilbakestill brev",
   "FritekstRedigeringModal.BekreftTilbakestillTittel": "Tilbakestill brev",
   "FritekstRedigeringModal.BekreftTilbakestill": "Alle endringer gjort i brevet vil nå bli slettet. Er du sikker på at du vil tilbakestille brevet?",
   "FritekstRedigeringModal.Tilbakestill": "Tilbakestill",

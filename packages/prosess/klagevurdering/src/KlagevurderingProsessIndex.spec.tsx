@@ -74,6 +74,49 @@ describe('KlagevurderingProsessIndex', () => {
     });
   });
 
+  it('skal fylle ut, mellomlagre, forhåndsvise og så bekrefte aksjonspunkt for NFP -- oppretthold vedtaket', async () => {
+    const lagre = vi.fn();
+    const mellomlagre = vi.fn();
+    const forhåndsvise = vi.fn();
+
+    render(
+      <KlagevurderingMedAksjonspunktNfp
+        submitCallback={lagre}
+        saveKlage={mellomlagre}
+        previewCallback={forhåndsvise}
+      />,
+    );
+
+    expect(await screen.findByText('Behandle klage')).toBeInTheDocument();
+    expect(screen.getByText('Vurder om klagen skal tas til følge')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Oppretthold vedtaket'));
+
+    await userEvent.selectOptions(screen.getByLabelText('Hjemmel'), '14-17');
+
+    const vurderingInput = screen.getByLabelText('Begrunnelse');
+    await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+
+    const fritekstInput = screen.getByLabelText('Fritekst til brev');
+    await userEvent.type(fritekstInput, 'Dette er en fritekst');
+
+    await userEvent.click(screen.getByText('Lagre'));
+
+    await userEvent.click(screen.getByRole('button', { name: /bekreft og fortsett/i }));
+    await userEvent.click(screen.getByRole('button', { name: /bekreft og fortsett/i }));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      begrunnelse: 'Dette er en begrunnelse',
+      fritekstTilBrev: 'Dette er en fritekst',
+      klageHjemmel: '14-17',
+      klageMedholdÅrsak: undefined,
+      klageVurdering: 'STADFESTE_YTELSESVEDTAK',
+      klageVurderingOmgjør: undefined,
+      kode: '5035',
+    });
+  });
+
   it('skal ikke vise forhåndsvis-lenke når fritekst ikke er fylt ut', async () => {
     render(<KlagevurderingMedAksjonspunktNfp />);
     expect(await screen.findByText('Behandle klage')).toBeInTheDocument();

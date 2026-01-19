@@ -11,49 +11,9 @@ jobs:
       contents: write
       pages: write
       id-token: write
-    runs-on: 'ubuntu-latest'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Cache turbo build setup
-        id: hent-cache
-        uses: actions/cache/restore@v5
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
-
-      - uses: navikt/fp-gha-workflows/.github/actions/setup-yarnrc@main
-        with:
-          npmAuthToken: ${{ secrets.READER_TOKEN }}
-
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 22.17.1
-          cache: 'yarn'
-
-      - name: Yarn install
-        run: yarn install --immutable
-
-      - name: Bygg Storybook
-        run: yarn build:storybook
-
-      - uses: actions/configure-pages@v5
-
-      - uses: actions/upload-pages-artifact@v4
-        with:
-          path: ./.storybook-static-build
-
-      - uses: actions/deploy-pages@v4
-        id: deployment
-
-      - name: Save turbo cache
-        if: always() && steps.hent-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v5
-        with:
-          key: ${{ steps.hent-cache.outputs.cache-primary-key }}
-          path: .turbo
+    uses: navikt/fp-gha-workflows/.github/workflows/deploy-storybook.yml@main
+    with:
+      package-manager: yarn
+      cache: turbo
+    secrets:
+      READER_TOKEN: ${{ secrets.READER_TOKEN }}
