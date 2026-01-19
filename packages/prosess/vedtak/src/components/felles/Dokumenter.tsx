@@ -6,7 +6,7 @@ import { Button, VStack } from '@navikt/ds-react';
 
 import type { OppgaveDokument } from '@navikt/fp-types';
 
-import { DokumentVisning } from './DokumentVisning.tsx';
+import { DokumentVisning } from './DokumentVisning';
 
 import styles from './dokumenter.module.css';
 

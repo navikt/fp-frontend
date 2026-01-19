@@ -9,7 +9,7 @@ import type { BehandlingResultatTypeFpTilbake } from './behandlingResultatTypeFp
 import type { ForeldelseVurderingType } from './foreldelseVurderingType';
 import type { HendelseType } from './hendelseType';
 import type { HendelseUnderType } from './hendelseUnderType';
-import type { SærligGrunn } from './særligGrunn.ts';
+import type { SærligGrunn } from './særligGrunn';
 import type { SkjermlenkeTypeTilbakekreving } from './skjermlenkeTypeTilbakekreving';
 import type { VedtakResultatType } from './vedtakResultatType';
 import type { VenteÅrsakTypeFpTilbake } from './venteÅrsakTypeFpTilbake';

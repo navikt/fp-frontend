@@ -5,9 +5,9 @@ import { BodyShort, Label, Table, VStack } from '@navikt/ds-react';
 import type { Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { Beskrivelser } from './Beskrivelser.tsx';
-import { Dokumenter } from './Dokumenter.tsx';
-import { FerdigstillOppgaveKnapp } from './FerdigstillOppgaveKnapp.tsx';
+import { Beskrivelser } from './Beskrivelser';
+import { Dokumenter } from './Dokumenter';
+import { FerdigstillOppgaveKnapp } from './FerdigstillOppgaveKnapp';
 
 import styles from './oppgaveTabell.module.css';
 

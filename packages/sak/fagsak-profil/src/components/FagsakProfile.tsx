@@ -5,7 +5,7 @@ import { BodyShort, Heading, HStack, Tag, Tooltip, VStack } from '@navikt/ds-rea
 
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
-import { SidePanelProfileKnapp } from './SidePanelProfileKnapp.tsx';
+import { SidePanelProfileKnapp } from './SidePanelProfileKnapp';
 
 const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean => {
   const erForeldrepenger = saksKode === 'FP';

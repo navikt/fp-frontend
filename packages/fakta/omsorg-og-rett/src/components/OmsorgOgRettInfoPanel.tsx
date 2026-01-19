@@ -7,12 +7,12 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { type OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
-import { AnnenPartsYtelser } from '../opplysningskort/AnnenPartsYtelser.tsx';
-import { OpplysningerFraSoknad } from '../opplysningskort/OpplysningerFraSoknad.tsx';
-import { OpplysningerOmAdresser } from '../opplysningskort/OpplysningerOmAdresser.tsx';
+import { AnnenPartsYtelser } from '../opplysningskort/AnnenPartsYtelser';
+import { OpplysningerFraSoknad } from '../opplysningskort/OpplysningerFraSoknad';
+import { OpplysningerOmAdresser } from '../opplysningskort/OpplysningerOmAdresser';
 import { AleneomsorgForm } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
-import { RettighetstypeForm } from './forms/RettighetstypeForm.tsx';
+import { RettighetstypeForm } from './forms/RettighetstypeForm';
 
 export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOverstyre }: OmsorgOgRettProps) => {
   const { alleKodeverk, isSubmittable, aksjonspunkterForPanel, isReadOnly, harÅpentAksjonspunkt } =

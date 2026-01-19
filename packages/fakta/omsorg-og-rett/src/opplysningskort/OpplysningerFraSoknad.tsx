@@ -4,7 +4,7 @@ import { BodyShort, Label, Table } from '@navikt/ds-react';
 
 import { type AlleKodeverk, type OmsorgOgRett } from '@navikt/fp-types';
 
-import { EkspansjonsKort } from '../components/ekspansjonsKort/EkspansjonsKort.tsx';
+import { EkspansjonsKort } from '../components/ekspansjonsKort/EkspansjonsKort';
 
 interface Props {
   omsorgOgRett: OmsorgOgRett;

@@ -4,7 +4,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 
-import { UttakEøsFaktaForm } from './components/UttakEøsFaktaForm.tsx';
+import { UttakEøsFaktaForm } from './components/UttakEøsFaktaForm';
 
 import messages from '../i18n/nb_NO.json';
 

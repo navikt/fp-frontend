@@ -8,8 +8,8 @@ import { useQuery } from '@tanstack/react-query';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { oppgaverPerFørsteStønadsdagMånedOptions } from '../../data/fplosAvdelingslederApi';
-import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper.ts';
-import { useLosKodeverk } from '../../data/useLosKodeverk.ts';
+import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper';
+import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { OppgaverPerForsteStonadsdagGraf } from './OppgaverPerForsteStonadsdagGraf';
 
 interface Props {

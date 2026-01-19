@@ -5,7 +5,7 @@ import type {
   foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringForMottakerDto,
   foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatPerFagområdeDto,
   foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringResultatRadDto,
-} from './apiDtoGenerert.ts';
+} from './apiDtoGenerert';
 
 export type SimuleringPeriode = foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto;
 

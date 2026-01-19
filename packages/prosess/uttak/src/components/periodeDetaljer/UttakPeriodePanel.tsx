@@ -22,7 +22,7 @@ import type {
 
 import { SplittPeriodeModal } from './splitt/SplittPeriodeModal';
 import { UttakPeriodeForm } from './UttakPeriodeForm';
-import { UttakPeriodeInfoEØS } from './UttakPeriodeinfoEøs.tsx';
+import { UttakPeriodeInfoEØS } from './UttakPeriodeinfoEøs';
 
 const getCorrectEmptyArbeidsForhold = (
   alleKodeverk: AlleKodeverk,
