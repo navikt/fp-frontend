@@ -5,7 +5,7 @@ import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 import { Personopplysninger } from '@navikt/fp-fakta-felles';
 import { type AlleKodeverk, type Personoversikt } from '@navikt/fp-types';
 
-import { EkspansjonsKort } from '../components/ekspansjonsKort/EkspansjonsKort.tsx';
+import { EkspansjonsKort } from '../components/ekspansjonsKort/EkspansjonsKort';
 
 interface Props {
   personoversikt: Personoversikt;

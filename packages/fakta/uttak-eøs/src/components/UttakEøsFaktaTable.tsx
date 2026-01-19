@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import { finnDager, finnUker } from '@navikt/fp-utils';
 
-import { toTitleCapitalization, UttakEøsFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
+import { toTitleCapitalization, UttakEøsFaktaDetailForm } from './UttakEøsFaktaDetailForm';
 
 import styles from './uttakEøsFaktaTable.module.css';
 

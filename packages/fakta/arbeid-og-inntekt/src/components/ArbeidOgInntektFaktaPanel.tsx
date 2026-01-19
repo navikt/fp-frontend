@@ -16,7 +16,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
-import { byggTabellStruktur, finnUløstArbeidsforholdIndex } from '../utils/arbeidOgInntektTabellUtils.ts';
+import { byggTabellStruktur, finnUløstArbeidsforholdIndex } from '../utils/arbeidOgInntektTabellUtils';
 import { ArbeidsforholdRad } from './ArbeidsforholdRad';
 import { ArbeidsOgInntektOverstyrPanel } from './ArbeidsOgInntektOverstyrPanel';
 

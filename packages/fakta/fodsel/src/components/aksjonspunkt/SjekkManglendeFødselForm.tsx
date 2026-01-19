@@ -13,7 +13,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ErBarnFødt, type ErBarnFødtFormValues } from '../form/ErBarnFødt';
 import { Termindato, type TermindatoFormValues } from '../form/Termindato';
-import { TermindatoMedReadonlyToggle } from '../form/TermindatoMedReadonlyToggle.tsx';
+import { TermindatoMedReadonlyToggle } from '../form/TermindatoMedReadonlyToggle';
 
 type FormValues = ErBarnFødtFormValues & TermindatoFormValues & FaktaBegrunnelseFormValues;
 

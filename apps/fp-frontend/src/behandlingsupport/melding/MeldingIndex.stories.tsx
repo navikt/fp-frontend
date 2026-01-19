@@ -15,11 +15,11 @@ import type { BehandlingOppretting, DokumentMalType, Fagsak, FagsakBehandlingDto
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata/index.ts';
-import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi.ts';
-import { FagsakData } from '../../fagsak/FagsakData.ts';
-import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp.tsx';
-import { MeldingIndex } from './MeldingIndex.tsx';
+import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata/index';
+import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
+import { FagsakData } from '../../fagsak/FagsakData';
+import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp';
+import { MeldingIndex } from './MeldingIndex';
 
 import messages from '../../../i18n/nb_NO.json';
 

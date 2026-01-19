@@ -1,4 +1,4 @@
-import type { foreldrepenger_domene_arbeidInntektsmelding_ManglendeOpplysningerVurderingDto } from './apiDtoGenerert.ts';
+import type { foreldrepenger_domene_arbeidInntektsmelding_ManglendeOpplysningerVurderingDto } from './apiDtoGenerert';
 
 export type ManglendeInntektsmeldingVurdering =
   foreldrepenger_domene_arbeidInntektsmelding_ManglendeOpplysningerVurderingDto;

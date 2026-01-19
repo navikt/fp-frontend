@@ -19,12 +19,12 @@ import {
 } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData.ts';
-import type { VedtakFormValues } from '../../types/VedtakFormValues.ts';
-import { useVedtakEditeringContext } from '../../VedtakEditeringContext.tsx';
-import { LegacyOverstyrtVedtaksbrev } from './LegacyOverstyrtVedtaksbrev.tsx';
-import { OppgaveTabell } from './OppgaveTabell.tsx';
-import { OverstyringVedtaksbrev } from './OverstyringVedtaksbrev.tsx';
+import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
+import type { VedtakFormValues } from '../../types/VedtakFormValues';
+import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
+import { LegacyOverstyrtVedtaksbrev } from './LegacyOverstyrtVedtaksbrev';
+import { OppgaveTabell } from './OppgaveTabell';
+import { OverstyringVedtaksbrev } from './OverstyringVedtaksbrev';
 import { VedtakHelpTextPanel } from './VedtakHelpTextPanel';
 
 import styles from './vedtakFellesPanel.module.css';

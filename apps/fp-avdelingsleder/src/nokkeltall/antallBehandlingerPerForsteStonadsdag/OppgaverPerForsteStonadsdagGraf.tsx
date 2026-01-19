@@ -8,7 +8,7 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { ReactECharts } from '@navikt/fp-los-felles';
 
-import type { OppgaverForForsteStonadsdagUkeMnd } from '../../typer/oppgaverForForsteStonadsdagUkeMndTsType.ts';
+import type { OppgaverForForsteStonadsdagUkeMnd } from '../../typer/oppgaverForForsteStonadsdagUkeMndTsType';
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
