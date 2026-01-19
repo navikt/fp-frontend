@@ -2,9 +2,9 @@ import { FormattedMessage } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Detail, Dialog, Heading, HStack, VStack } from '@navikt/ds-react';
+import { capitalizeFirstLetter } from '@navikt/ft-utils';
 
 import type { Feilmelding } from '../typer/feilmeldingTsType';
-import { capitalizeFirstLetter } from '@navikt/ft-utils';
 
 interface Props {
   skalViseModal: boolean;
