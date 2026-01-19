@@ -1297,13 +1297,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/cli-lib@npm:8.0.4":
-  version: 8.0.4
-  resolution: "@formatjs/cli-lib@npm:8.0.4"
+"@formatjs/cli-lib@npm:8.0.8":
+  version: 8.0.8
+  resolution: "@formatjs/cli-lib@npm:8.0.8"
   dependencies:
-    "@formatjs/icu-messageformat-parser": "npm:3.0.4"
-    "@formatjs/icu-skeleton-parser": "npm:2.0.3"
-    "@formatjs/ts-transformer": "npm:4.0.4"
+    "@formatjs/icu-messageformat-parser": "npm:3.2.0"
+    "@formatjs/icu-skeleton-parser": "npm:2.0.6"
+    "@formatjs/ts-transformer": "npm:4.0.7"
     "@types/estree": "npm:^1.0.6"
     "@types/fs-extra": "npm:^11.0.4"
     "@types/node": "npm:^22.0.0"
@@ -1318,7 +1318,7 @@ __metadata:
   peerDependencies:
     "@glimmer/syntax": ^0.95.0
     "@vue/compiler-core": ^3.5.12
-    content-tag: ^3.0.0
+    content-tag: 4
     ember-template-recast: ^6.1.5
     vue: ^3.5.12
   peerDependenciesMeta:
@@ -1338,19 +1338,19 @@ __metadata:
       optional: true
     vue:
       optional: true
-  checksum: 10/b5e723c32e120be889d83a4f156a39dcc9b3a7135d66ee09c4f92bda90c29a9f7c27885e55f44b281ed884fc9e65adb6b63a689ff9ee0b146782c7b15de82328
+  checksum: 10/723d16957cd253dc47d78ab197fa1f5f416ac43a09e86843bea75452828826e90bfc4fbe03219cd028b610fbd2b377ebae45d564336ca676a7c7da357b55cf73
   languageName: node
   linkType: hard
 
-"@formatjs/ecma402-abstract@npm:3.0.3":
-  version: 3.0.3
-  resolution: "@formatjs/ecma402-abstract@npm:3.0.3"
+"@formatjs/ecma402-abstract@npm:3.0.6":
+  version: 3.0.6
+  resolution: "@formatjs/ecma402-abstract@npm:3.0.6"
   dependencies:
     "@formatjs/fast-memoize": "npm:3.0.1"
-    "@formatjs/intl-localematcher": "npm:0.7.2"
+    "@formatjs/intl-localematcher": "npm:0.7.3"
     decimal.js: "npm:^10.4.3"
     tslib: "npm:^2.8.0"
-  checksum: 10/134192d5ee45e215b3b61d06849f4f311948629417cd57aa4eb26bd8ca8c13d39660b2d3d46797a83f811c877a86d691ca58969fe889be59241782a59b638db1
+  checksum: 10/d1747a4a1f1b3b749727f226c94f9f698e1761a9c486fe9091ada3010886a85410a5230772bc19cd468fc8af55809e90d2cbb3e045460d3488ae5d9bc391e5a5
   languageName: node
   linkType: hard
 
@@ -1384,14 +1384,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/icu-messageformat-parser@npm:3.0.4":
-  version: 3.0.4
-  resolution: "@formatjs/icu-messageformat-parser@npm:3.0.4"
+"@formatjs/icu-messageformat-parser@npm:3.2.0":
+  version: 3.2.0
+  resolution: "@formatjs/icu-messageformat-parser@npm:3.2.0"
   dependencies:
-    "@formatjs/ecma402-abstract": "npm:3.0.3"
-    "@formatjs/icu-skeleton-parser": "npm:2.0.3"
+    "@formatjs/ecma402-abstract": "npm:3.0.6"
+    "@formatjs/icu-skeleton-parser": "npm:2.0.6"
     tslib: "npm:^2.8.0"
-  checksum: 10/87bc0504a07b536a17f2ef7fe61529352b67b42f7e9253441120bcf105958747315031a15939791487358198d8790a85cb112c956216bbe07d6e2f284a78279e
+  checksum: 10/0b381dfa74b1a31490b18ec1325155d308d229c3dc1105496c4b0f7e501ea14ff3780a6e437fd47d2b57cd2591a8341823a83c95a4b1c92f0a12cedfafcceeb9
   languageName: node
   linkType: hard
 
@@ -1406,13 +1406,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/icu-skeleton-parser@npm:2.0.3":
-  version: 2.0.3
-  resolution: "@formatjs/icu-skeleton-parser@npm:2.0.3"
+"@formatjs/icu-skeleton-parser@npm:2.0.6":
+  version: 2.0.6
+  resolution: "@formatjs/icu-skeleton-parser@npm:2.0.6"
   dependencies:
-    "@formatjs/ecma402-abstract": "npm:3.0.3"
+    "@formatjs/ecma402-abstract": "npm:3.0.6"
     tslib: "npm:^2.8.0"
-  checksum: 10/a402b4cc6765a718ad2b83bb97becc0e17b5cf400d6216e629f1804bd224dbf3a8c04f4a0e3fc5ab4dcf1b449af975d750e003e7958a0eaae8db87b47ac2f971
+  checksum: 10/f1504406691eacfaab95eb88a4360f9dbddb991a919f8f9fe8d7cbf0cae85072c159b7198e159c5eaf8c4797d1e97f1c6a27300bd19f35241b5ee9aa089418af
   languageName: node
   linkType: hard
 
@@ -1426,12 +1426,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl-localematcher@npm:0.7.2":
-  version: 0.7.2
-  resolution: "@formatjs/intl-localematcher@npm:0.7.2"
+"@formatjs/intl-localematcher@npm:0.7.3":
+  version: 0.7.3
+  resolution: "@formatjs/intl-localematcher@npm:0.7.3"
   dependencies:
+    "@formatjs/fast-memoize": "npm:3.0.1"
     tslib: "npm:^2.8.0"
-  checksum: 10/cdf12070f9dbddb35808382baf220c0de67d480626aa115ce3c16b92f608a23235c7e4ac953518c1cf04acb2808230fdf63bd214cb1ea575b2c494e3c69ef88f
+  checksum: 10/31386f8ca3a190a457a5969a3da76f2cb66b6c0b07ad98e9b6f42cc0ca2cd0242639a3efd2148c7e6d06f3b5e25267931c53a35ed2cb3c326cd2a34a5edda4e0
   languageName: node
   linkType: hard
 
@@ -1463,11 +1464,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/ts-transformer@npm:4.0.4":
-  version: 4.0.4
-  resolution: "@formatjs/ts-transformer@npm:4.0.4"
+"@formatjs/ts-transformer@npm:4.0.7":
+  version: 4.0.7
+  resolution: "@formatjs/ts-transformer@npm:4.0.7"
   dependencies:
-    "@formatjs/icu-messageformat-parser": "npm:3.0.4"
+    "@formatjs/icu-messageformat-parser": "npm:3.2.0"
     "@types/node": "npm:^22.0.0"
     chalk: "npm:^4.1.2"
     json-stable-stringify: "npm:^1.3.0"
@@ -1478,7 +1479,7 @@ __metadata:
   peerDependenciesMeta:
     ts-jest:
       optional: true
-  checksum: 10/e69708b80b21d6495972f09ab1129e6419d5d492f08e6dabbb376a4aa89165237cfa291485b334fe50a4ca9e7ece1cecc294e0f97db31ff85af15baa46e13d38
+  checksum: 10/8fde85f0beaa6202a1dcfc69acf674157a16b798ab3b6613b338f7f7e4dc8ad1863b22dd3df3bc9cd691f05325845a17bbdcd7e1639bcb100e5953726c60de11
   languageName: node
   linkType: hard
 
@@ -1506,9 +1507,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/openapi-ts@npm:0.90.2":
-  version: 0.90.2
-  resolution: "@hey-api/openapi-ts@npm:0.90.2"
+"@hey-api/openapi-ts@npm:0.90.3":
+  version: 0.90.3
+  resolution: "@hey-api/openapi-ts@npm:0.90.3"
   dependencies:
     "@hey-api/codegen-core": "npm:^0.5.2"
     "@hey-api/json-schema-ref-parser": "npm:1.2.2"
@@ -1522,7 +1523,7 @@ __metadata:
     typescript: ">=5.5.3"
   bin:
     openapi-ts: bin/run.js
-  checksum: 10/41e74327886d5ab9d6822ca996f4b66d3a686f7918e24b694a7191f3b748a6ff8b508225e3b2ec98a0379e9c9d700f3093d8762007c7423273a9565217c02210
+  checksum: 10/3cbd519ccf75d0bd8b2af01565f4c823ae466b1c4e25f975a72aa78273b2a6f75daefde60e1a1355465ff8681786b7b086e9ae378467c8c54f1d613f482f8175
   languageName: node
   linkType: hard
 
@@ -1827,7 +1828,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-app-felles@workspace:packages/app-felles"
   dependencies:
-    "@formatjs/cli-lib": "npm:8.0.4"
+    "@formatjs/cli-lib": "npm:8.0.8"
     "@navikt/ds-react": "npm:7.40.0"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -2274,7 +2275,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorgsovertakelse@workspace:packages/fakta/omsorgsovertakelse"
   dependencies:
-    "@formatjs/cli-lib": "npm:8.0.4"
+    "@formatjs/cli-lib": "npm:8.0.8"
     "@navikt/aksel-icons": "npm:7.40.0"
     "@navikt/ds-css": "npm:7.40.0"
     "@navikt/ds-react": "npm:7.40.0"
@@ -2427,7 +2428,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta/tilrettelegging"
   dependencies:
-    "@formatjs/cli-lib": "npm:8.0.4"
+    "@formatjs/cli-lib": "npm:8.0.8"
     "@navikt/aksel-icons": "npm:7.40.0"
     "@navikt/ds-css": "npm:7.40.0"
     "@navikt/ds-react": "npm:7.40.0"
@@ -4482,7 +4483,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
   dependencies:
-    "@formatjs/cli-lib": "npm:8.0.4"
+    "@formatjs/cli-lib": "npm:8.0.8"
     "@navikt/ds-css": "npm:7.40.0"
     "@navikt/ds-react": "npm:7.40.0"
     "@navikt/fp-config-eslint": "workspace:*"
@@ -8602,7 +8603,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
-    "@hey-api/openapi-ts": "npm:0.90.2"
+    "@hey-api/openapi-ts": "npm:0.90.3"
     "@navikt/aksel-stylelint": "npm:7.40.0"
     "@storybook/addon-a11y": "npm:10.1.11"
     "@storybook/addon-links": "npm:10.1.11"
@@ -8620,7 +8621,7 @@ __metadata:
     shelljs: "npm:0.10.0"
     stylelint: "npm:16.26.1"
     stylelint-order: "npm:7.0.1"
-    turbo: "npm:2.7.3"
+    turbo: "npm:2.7.4"
     typescript: "npm:5.9.3"
     vitest: "npm:4.0.16"
   languageName: unknown
@@ -12416,58 +12417,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:2.7.3":
-  version: 2.7.3
-  resolution: "turbo-darwin-64@npm:2.7.3"
+"turbo-darwin-64@npm:2.7.4":
+  version: 2.7.4
+  resolution: "turbo-darwin-64@npm:2.7.4"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:2.7.3":
-  version: 2.7.3
-  resolution: "turbo-darwin-arm64@npm:2.7.3"
+"turbo-darwin-arm64@npm:2.7.4":
+  version: 2.7.4
+  resolution: "turbo-darwin-arm64@npm:2.7.4"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:2.7.3":
-  version: 2.7.3
-  resolution: "turbo-linux-64@npm:2.7.3"
+"turbo-linux-64@npm:2.7.4":
+  version: 2.7.4
+  resolution: "turbo-linux-64@npm:2.7.4"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:2.7.3":
-  version: 2.7.3
-  resolution: "turbo-linux-arm64@npm:2.7.3"
+"turbo-linux-arm64@npm:2.7.4":
+  version: 2.7.4
+  resolution: "turbo-linux-arm64@npm:2.7.4"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:2.7.3":
-  version: 2.7.3
-  resolution: "turbo-windows-64@npm:2.7.3"
+"turbo-windows-64@npm:2.7.4":
+  version: 2.7.4
+  resolution: "turbo-windows-64@npm:2.7.4"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:2.7.3":
-  version: 2.7.3
-  resolution: "turbo-windows-arm64@npm:2.7.3"
+"turbo-windows-arm64@npm:2.7.4":
+  version: 2.7.4
+  resolution: "turbo-windows-arm64@npm:2.7.4"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:2.7.3":
-  version: 2.7.3
-  resolution: "turbo@npm:2.7.3"
+"turbo@npm:2.7.4":
+  version: 2.7.4
+  resolution: "turbo@npm:2.7.4"
   dependencies:
-    turbo-darwin-64: "npm:2.7.3"
-    turbo-darwin-arm64: "npm:2.7.3"
-    turbo-linux-64: "npm:2.7.3"
-    turbo-linux-arm64: "npm:2.7.3"
-    turbo-windows-64: "npm:2.7.3"
-    turbo-windows-arm64: "npm:2.7.3"
+    turbo-darwin-64: "npm:2.7.4"
+    turbo-darwin-arm64: "npm:2.7.4"
+    turbo-linux-64: "npm:2.7.4"
+    turbo-linux-arm64: "npm:2.7.4"
+    turbo-windows-64: "npm:2.7.4"
+    turbo-windows-arm64: "npm:2.7.4"
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -12483,7 +12484,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 10/a0801db6b524540f1e9d60e410aac46051278b24c49829397fb9dfba22b66bc9af36e982b96f8d33d555794464b7d99e7d4f871b2308bd344338f4530c99c4e5
+  checksum: 10/fbb901da0f576aadac57168f365913b8cd07fd22874c4bfedc736bcd18a5888c2897882e03d87ba451b2dcd21b376a44b0245622260b08bc1bbc36f70345a19b
   languageName: node
   linkType: hard
 
