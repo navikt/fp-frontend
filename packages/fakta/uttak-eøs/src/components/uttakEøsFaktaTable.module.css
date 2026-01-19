@@ -1,21 +1,10 @@
-.panel {
-  background-color: var(--ax-neutral-200);
-  padding: 10px;
-}
+.table {
+  thead th {
+    background-color: var(--ax-neutral-100);
+  }
 
-.panelOpen {
-  background-color: var(--ax-neutral-100);
-  margin-bottom: -16px;
-  margin-left: -7px;
-  margin-right: -7px;
-  margin-top: -16px;
-  padding: 16px;
-}
-
-.headerRow {
-  background-color: var(--ax-neutral-100);
-}
-
-.isOpen {
-  background-color: var(--ax-neutral-100);
+  tbody tr:has(+ tr[data-state='open']) td,
+  tbody tr[data-state='open'] td {
+    background-color: var(--ax-neutral-100);
+  }
 }
