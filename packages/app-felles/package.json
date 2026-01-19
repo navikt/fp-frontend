@@ -23,7 +23,7 @@
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",
     "@navikt/ft-utils": "3.10.11",
-    "@sentry/browser": "10.32.1",
+    "@sentry/browser": "10.33.0",
     "react": "19.2.3"
   },
   "devDependencies": {
@@ -39,6 +39,6 @@
     "storybook": "10.1.11",
     "typescript": "5.9.3",
     "vite": "7.3.1",
-    "vitest": "4.0.16"
+    "vitest": "4.0.17"
   }
 }
