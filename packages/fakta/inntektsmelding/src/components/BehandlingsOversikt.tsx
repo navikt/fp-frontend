@@ -1,6 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { List, VStack, Box } from '@navikt/ds-react';
+import { Box, List, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, BehandlingFpSak, FagsakBehandlingDto, Inntektsmelding } from '@navikt/fp-types';
