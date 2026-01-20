@@ -130,7 +130,7 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
               focus: 'series',
             },
             data: koordinaterPaVent,
-          }
+          },
         ],
         color: ['#38a161', '#85d5f0'],
       }}
@@ -139,11 +139,16 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
 };
 
 const finnMaaneder = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent[]): string[] => {
-  const alledatoer = new Set<string>(oppgaverSomErApneEllerPaVent
-    .filter(oppgave => !!oppgave.førsteUttakMåned)
-    .map(o => dayjs(o.førsteUttakMåned).startOf('month').format(ISO_DATE_FORMAT)));
+  const alledatoer = new Set<string>(
+    oppgaverSomErApneEllerPaVent
+      .filter(oppgave => !!oppgave.førsteUttakMåned)
+      .map(o => dayjs(o.førsteUttakMåned).startOf('month').format(ISO_DATE_FORMAT)),
+  );
 
-  const maaneder: string[] = Array.from(alledatoer).map(m => dayjs(m)).sort((a, b) => a.isBefore(b) ? -1 : 1).map(d => d.format(ISO_DATE_FORMAT));
+  const maaneder: string[] = Array.from(alledatoer)
+    .map(m => dayjs(m))
+    .sort((a, b) => (a.isBefore(b) ? -1 : 1))
+    .map(d => d.format(ISO_DATE_FORMAT));
   const maxmaaned = maaneder.length > 0 ? maaneder.at(-1) : dayjs().startOf('month');
   const ekstra = dayjs(maxmaaned).add(1, 'months').startOf('month');
   maaneder.push(ekstra.format(ISO_DATE_FORMAT));
@@ -187,11 +192,13 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
   const koordinaterPaVent: number[] = [];
   const koordinaterIkkePaVent: number[] = [];
 
-  maaneder.filter(m => !dayjs(m).isSame(periodeSlutt)).forEach(m => {
-    const dato = dayjs(m);
-    koordinaterPaVent.push(lagKoordinatForDato(dato, oppgaverPaVent));
-    koordinaterIkkePaVent.push(lagKoordinatForDato(dato, oppgaverIkkePaVent));
-  });
+  maaneder
+    .filter(m => !dayjs(m).isSame(periodeSlutt))
+    .forEach(m => {
+      const dato = dayjs(m);
+      koordinaterPaVent.push(lagKoordinatForDato(dato, oppgaverPaVent));
+      koordinaterIkkePaVent.push(lagKoordinatForDato(dato, oppgaverIkkePaVent));
+    });
   koordinaterPaVent.push(lagKoordinatForUkjent(oppgaverPaVent));
   koordinaterIkkePaVent.push(lagKoordinatForUkjent(oppgaverIkkePaVent));
 

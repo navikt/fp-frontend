@@ -2,10 +2,9 @@ import { FormattedMessage } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Detail, Dialog, Heading, HStack, VStack } from '@navikt/ds-react';
+import { capitalizeFirstLetter } from '@navikt/ft-utils';
 
 import type { Feilmelding } from '../typer/feilmeldingTsType';
-
-const capitalizeFirstLetters = (key: string): string => key.charAt(0).toUpperCase() + key.substring(1);
 
 interface Props {
   skalViseModal: boolean;
@@ -39,7 +38,7 @@ export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldin
               {feilmeldingsdetaljer &&
                 Object.keys(feilmeldingsdetaljer).map(edKey => (
                   <div key={edKey}>
-                    <Detail>{`${capitalizeFirstLetters(edKey)}:`}</Detail>
+                    <Detail>{`${capitalizeFirstLetter(edKey)}:`}</Detail>
                     <div>
                       {/* @ts-expect-error Fiks. Dette vil kreve at vi lager en rekursiv rendering av objectet */}
                       <BodyShort size="small">{feilmeldingsdetaljer[edKey]}</BodyShort>
