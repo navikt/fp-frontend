@@ -41,10 +41,10 @@ export const BesteberegningResultatGrunnlagPanel = ({ periode, besteMåneder }: 
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell scope="col" />
-          <Table.HeaderCell scope="col">
+          <Table.HeaderCell scope="col" textSize="small" align="right">
             <FormattedMessage id="ResultatGrunnlag.BeregningEtterKap8" />
           </Table.HeaderCell>
-          <Table.HeaderCell scope="col">
+          <Table.HeaderCell scope="col" textSize="small" align="right">
             <FormattedMessage id="ResultatGrunnlag.BeregningEtterBesteberegning" />
           </Table.HeaderCell>
         </Table.Row>
@@ -54,20 +54,19 @@ export const BesteberegningResultatGrunnlagPanel = ({ periode, besteMåneder }: 
           <Table.DataCell textSize="small">
             <FormattedMessage id="ResultatGrunnlag.BruttoBeregningsgrunnlag" />
           </Table.DataCell>
-          <Table.DataCell textSize="small">
-            <BeløpLabel beløp={finnKap8Beregning(periode)} />
+          <Table.DataCell textSize="small" align="right">
+            <BeløpLabel beløp={finnKap8Beregning(periode)} kr />
           </Table.DataCell>
-          <Table.DataCell textSize="small">
-            <BeløpLabel beløp={finnBesteberegnet(besteMåneder)} />
+          <Table.DataCell textSize="small" align="right">
+            <BeløpLabel beløp={finnBesteberegnet(besteMåneder)} kr />
           </Table.DataCell>
         </Table.Row>
       </Table.Body>
     </Table>
     <BodyShort size="small">
-      {girKap8Besteberegning(finnKap8Beregning(periode), finnBesteberegnet(besteMåneder)) && (
+      {girKap8Besteberegning(finnKap8Beregning(periode), finnBesteberegnet(besteMåneder)) ? (
         <FormattedMessage id="ResultatGrunnlag.Kap8GirBesteBeregning" />
-      )}
-      {!girKap8Besteberegning(finnKap8Beregning(periode), finnBesteberegnet(besteMåneder)) && (
+      ) : (
         <FormattedMessage id="ResultatGrunnlag.Kap1473GirBesteBeregning" />
       )}
     </BodyShort>

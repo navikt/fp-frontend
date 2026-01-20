@@ -49,7 +49,6 @@ export const OppgaverPerForsteStonadsdagPanel = ({ height, valgtAvdelingEnhet }:
 
   useStoreValuesInLocalStorage(formName, values);
 
-
   return (
     <RhfForm<FormValues> formMethods={formMethods}>
       <VStack gap="space-16">
@@ -76,7 +75,7 @@ export const OppgaverPerForsteStonadsdagPanel = ({ height, valgtAvdelingEnhet }:
         <OppgaverPerForsteStonadsdagGraf
           height={height}
           oppgaverPerForsteStonadsdag={oppgaverPerForsteStonadsdag.filter(ompv =>
-              values.valgtYtelsetype === ALLE_YTELSETYPER_VALGT ? true : values.valgtYtelsetype === ompv.fagsakYtelseType,
+            values.valgtYtelsetype === ALLE_YTELSETYPER_VALGT ? true : values.valgtYtelsetype === ompv.fagsakYtelseType,
           )}
         />
       </VStack>

@@ -3,14 +3,19 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
-import { Button, HStack, Label, VStack } from '@navikt/ds-react';
+import { Button, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, hasValidInteger, required } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { type AnnenforelderUttakEøsPeriode, type Fagsak, type UttakPeriodeType } from '@navikt/fp-types';
+import {
+  type AlleKodeverk,
+  type AnnenforelderUttakEøsPeriode,
+  type Fagsak,
+  type UttakPeriodeType,
+} from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { finnDager, finnUker, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -34,7 +39,7 @@ interface Props {
 export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdater, slettPeriode, avbryt }: Props) => {
   const intl = useIntl();
 
-  const { isReadOnly, fagsak } = usePanelDataContext<BekreftUttaksperioderAp[]>();
+  const { isReadOnly, fagsak, alleKodeverk } = usePanelDataContext<BekreftUttaksperioderAp[]>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: annenForelderUttakEøsPeriode
@@ -68,9 +73,9 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
   return (
     <>
       <RhfForm formMethods={formMethods} onSubmit={values => oppdater(transformValues(values))}>
-        <VStack gap="space-32">
-          <VStack gap="space-16">
-            <HStack gap="space-16" align="end">
+        <VStack gap="space-16">
+          <VStack gap="space-4">
+            <HStack gap="space-16">
               <RhfDatepicker
                 name="fom"
                 label={intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.Fom' })}
@@ -96,6 +101,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               />
               {slettPeriode && !isReadOnly && (
                 <Button
+                  className={styles['marginBtn']}
                   size="small"
                   variant="tertiary"
                   type="button"
@@ -107,10 +113,12 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               )}
             </HStack>
             {fom && tom && (
-              <FormattedMessage
-                id="UttakEøsFaktaDetailForm.Virkedager"
-                values={{ virkedager: calcDaysAndWeeks(fom, tom).formattedString }}
-              />
+              <Detail>
+                <FormattedMessage
+                  id="UttakEøsFaktaDetailForm.Virkedager"
+                  values={{ virkedager: calcDaysAndWeeks(fom, tom).formattedString }}
+                />
+              </Detail>
             )}
           </VStack>
           <RhfSelect
@@ -120,19 +128,19 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
             })}
             control={formMethods.control}
             className={styles['select']}
-            selectValues={lagGyldigeKontotyperOption(fagsak)}
+            selectValues={lagGyldigeKontotyperOption(fagsak, alleKodeverk)}
             readOnly={isReadOnly}
             validate={[required]}
           />
           <VStack align="start">
             <Label size="small">{intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.TrekkUkerDager' })}</Label>
-            <HStack gap="space-8" align="center">
+            <HStack gap="space-8">
               <RhfNumericField
                 name="trekkuker"
                 control={formMethods.control}
-                label=""
+                label="Trekk uker"
                 hideLabel
-                className={styles['numberWidth']}
+                htmlSize={5}
                 readOnly={isReadOnly}
                 validate={[required, hasValidInteger]}
               />
@@ -140,15 +148,15 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               <RhfNumericField
                 name="trekkdager"
                 control={formMethods.control}
-                label=""
+                label="Trekk dager"
                 hideLabel
-                className={styles['numberWidth']}
+                htmlSize={5}
                 readOnly={isReadOnly}
                 validate={[required, hasValidDecimal]}
               />
             </HStack>
           </VStack>
-          <HStack gap="space-16" className={styles['marginBtn']}>
+          <HStack gap="space-8">
             <Button
               size="small"
               variant="primary"
@@ -179,23 +187,23 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
   );
 };
 
-const lagGyldigeKontotyperOption = (fagsak: Fagsak): ReactElement[] => {
+const lagGyldigeKontotyperOption = (fagsak: Fagsak, alleKodeverk: AlleKodeverk): ReactElement[] => {
   if (fagsak.relasjonsRolleType === 'MORA') {
     return [
       <option key={0} value={'FELLESPERIODE' satisfies UttakPeriodeType}>
-        {toTitleCapitalization('FELLESPERIODE')}
+        {finnTrekkkonto('FELLESPERIODE', alleKodeverk)}
       </option>,
       <option key={1} value={'FEDREKVOTE' satisfies UttakPeriodeType}>
-        {toTitleCapitalization('FEDREKVOTE')}
+        {finnTrekkkonto('FEDREKVOTE', alleKodeverk)}
       </option>,
     ];
   } else {
     return [
       <option key={0} value={'FELLESPERIODE' satisfies UttakPeriodeType}>
-        {toTitleCapitalization('FELLESPERIODE')}
+        {finnTrekkkonto('FELLESPERIODE', alleKodeverk)}
       </option>,
       <option key={1} value={'MØDREKVOTE' satisfies UttakPeriodeType}>
-        {toTitleCapitalization('MØDREKVOTE')}
+        {finnTrekkkonto('MØDREKVOTE', alleKodeverk)}
       </option>,
     ];
   }
@@ -211,10 +219,6 @@ const transformValues = ({ trekkdager, trekkuker, ...rest }: FormValues): Annenf
   };
 };
 
-export const toTitleCapitalization = (sentence: UttakPeriodeType): string => {
-  return sentence
-    .toLowerCase()
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
-    .join(' ');
+export const finnTrekkkonto = (trekkontoKode: UttakPeriodeType, alleKodeverk: AlleKodeverk): string => {
+  return alleKodeverk['UttakPeriodeType'].find(k => k.kode === trekkontoKode)?.navn ?? trekkontoKode;
 };

@@ -24,7 +24,7 @@ interface Props {
 export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, isReadOnly, submitCallback } =
+  const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, isReadOnly, submitCallback, alleKodeverk } =
     usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
   annenForelderUttakEøs.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
@@ -83,7 +83,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   }, [perioder, begrunnelse]);
 
   return (
-    <VStack gap="space-32">
+    <VStack gap="space-16">
       <HStack gap="space-16">
         <Heading size="small">
           <FormattedMessage id="UttakEøsFaktaForm.FaktaUttakEos" />
@@ -102,36 +102,35 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
           <ErrorSummary.Item>{feilmelding}</ErrorSummary.Item>
         </ErrorSummary>
       )}
-      <VStack gap="space-32">
-        <UttakEøsFaktaTable
-          annenForelderUttakEøsPerioder={perioder}
-          setPerioder={setPerioder}
-          isReadOnly={!erRedigerbart}
-          erRedigerbart={erRedigerbart}
-          visLeggTilPeriodeForm={visLeggTilPeriodeForm}
-          setVisLeggTilPeriodeForm={setVisLeggTilPeriodeForm}
-          setDirty={setIsDirty}
-        />
-        <RhfForm formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
-          <VStack gap="space-16">
-            <FaktaBegrunnelseTextField
-              control={formMethods.control}
-              isSubmittable
-              isReadOnly={!erRedigerbart}
-              hasVurderingText={true}
-              hasBegrunnelse
+      <UttakEøsFaktaTable
+        annenForelderUttakEøsPerioder={perioder}
+        setPerioder={setPerioder}
+        isReadOnly={!erRedigerbart}
+        erRedigerbart={erRedigerbart}
+        visLeggTilPeriodeForm={visLeggTilPeriodeForm}
+        setVisLeggTilPeriodeForm={setVisLeggTilPeriodeForm}
+        setDirty={setIsDirty}
+        alleKodeverk={alleKodeverk}
+      />
+      <RhfForm formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
+        <VStack gap="space-16">
+          <FaktaBegrunnelseTextField
+            control={formMethods.control}
+            isSubmittable
+            isReadOnly={!erRedigerbart}
+            hasVurderingText={true}
+            hasBegrunnelse
+          />
+          {erRedigerbart && (
+            <FaktaSubmitButton
+              isSubmittable={isSubmittable && !feilmelding && !visLeggTilPeriodeForm}
+              isReadOnly={isReadOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={isDirty || formMethods.formState.isDirty}
             />
-            {erRedigerbart && (
-              <FaktaSubmitButton
-                isSubmittable={isSubmittable && !feilmelding && !visLeggTilPeriodeForm}
-                isReadOnly={isReadOnly}
-                isSubmitting={formMethods.formState.isSubmitting}
-                isDirty={isDirty || formMethods.formState.isDirty}
-              />
-            )}
-          </VStack>
-        </RhfForm>
-      </VStack>
+          )}
+        </VStack>
+      </RhfForm>
     </VStack>
   );
 };

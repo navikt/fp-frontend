@@ -1,17 +1,5 @@
-.colWidth {
-  margin-right: 20px;
-  width: 48%;
-}
-
-.månedRad {
-  width: 50%;
-}
-
-.månedAktivitet {
-  width: 80%;
-}
-
-.månedInntekt {
-  text-align: left;
-  width: 20%;
+.table {
+  tfoot {
+    border-block: 2px solid var(--ax-border-neutral-strong);
+  }
 }
