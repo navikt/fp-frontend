@@ -42,7 +42,7 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
   }, []);
 
   return (
-    <Box.New background="brand-blue-moderateA" padding="3" style={{ borderLeft: '4px solid var(--a-lightblue-700)' }}>
+    <Box background="brand-blue-moderateA" padding="space-12" style={{ borderLeft: '4px solid var(--a-lightblue-700)' }}>
       <RhfFieldArray
         fields={fields}
         emptyTemplate={defaultTilrettelegging}
@@ -91,6 +91,6 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
           </FieldArrayRow>
         )}
       </RhfFieldArray>
-    </Box.New>
+    </Box>
   );
 };

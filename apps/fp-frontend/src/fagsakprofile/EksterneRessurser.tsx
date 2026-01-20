@@ -15,19 +15,19 @@ export const EksterneRessurser = ({
   arbeidstakerHref: string | undefined;
 }) => {
   return (
-    <Box.New paddingInline="4" paddingBlock="2" background="neutral-moderate" borderRadius="large">
+    <Box paddingInline="space-16" paddingBlock="space-8" background="neutral-moderate" borderRadius="large">
       <HStack justify="space-between" align="center" wrap={false}>
         <Detail weight="semibold">
           <FormattedMessage id="EksterneRessurser.Lenke" />
         </Detail>
         <HStack gap="space-16">
           <a href={getModiaUrl(fagsak.bruker.fødselsnummer)} target="_blank" rel="noreferrer">
-            <Button as="span" size="xsmall" variant="primary-neutral">
+            <Button data-color="neutral" as="span" size="xsmall" variant="primary">
               <FormattedMessage id="EksterneRessurser.Modia" />
             </Button>
           </a>
           <a href={getGosysUrl(fagsak.bruker.fødselsnummer)} target="_blank" rel="noreferrer">
-            <Button as="span" size="xsmall" variant="primary-neutral">
+            <Button data-color="neutral" as="span" size="xsmall" variant="primary">
               <FormattedMessage id="EksterneRessurser.Gosys" />
             </Button>
           </a>
@@ -36,7 +36,7 @@ export const EksterneRessurser = ({
             target="_blank"
             rel="noreferrer"
           >
-            <Button as="span" size="xsmall" variant="primary-neutral">
+            <Button data-color="neutral" as="span" size="xsmall" variant="primary">
               <FormattedMessage id="EksterneRessurser.AInntekt" />
             </Button>
           </a>
@@ -45,12 +45,12 @@ export const EksterneRessurser = ({
             target="_blank"
             rel="noreferrer"
           >
-            <Button as="span" size="xsmall" variant="primary-neutral">
+            <Button data-color="neutral" as="span" size="xsmall" variant="primary">
               <FormattedMessage id="EksterneRessurser.AaReg" />
             </Button>
           </a>
         </HStack>
       </HStack>
-    </Box.New>
+    </Box>
   );
 };

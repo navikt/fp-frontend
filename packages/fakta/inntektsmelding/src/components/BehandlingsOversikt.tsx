@@ -1,6 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { List, VStack } from '@navikt/ds-react';
+import { List, VStack, Box } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, BehandlingFpSak, FagsakBehandlingDto, Inntektsmelding } from '@navikt/fp-types';
@@ -46,25 +46,27 @@ export const BehandlingsOversikt = ({
   return (
     <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.behandling.heading' })}>
       {infoTekst}
-      <List>
-        {sorterteBehandlinger.map(b => (
-          <List.Item key={b.uuid}>
-            <VStack gap="space-4">
-              <span>{alleKodeverk.BehandlingType.find(({ kode }) => kode === b.type)?.navn}</span>
-              <span>
-                <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.opprettet" />{' '}
-                <DateTimeLabel dateTimeString={b.opprettet} separator="kl" />
-              </span>
-              {b.avsluttet ? (
+      <Box marginBlock="space-16" asChild>
+        <List>
+          {sorterteBehandlinger.map(b => (
+            <List.Item key={b.uuid}>
+              <VStack gap="space-4">
+                <span>{alleKodeverk.BehandlingType.find(({ kode }) => kode === b.type)?.navn}</span>
                 <span>
-                  <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.avsluttet" />{' '}
-                  <DateTimeLabel dateTimeString={b.avsluttet} separator="kl" />
+                  <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.opprettet" />{' '}
+                  <DateTimeLabel dateTimeString={b.opprettet} separator="kl" />
                 </span>
-              ) : null}
-            </VStack>
-          </List.Item>
-        ))}
-      </List>
+                {b.avsluttet ? (
+                  <span>
+                    <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.avsluttet" />{' '}
+                    <DateTimeLabel dateTimeString={b.avsluttet} separator="kl" />
+                  </span>
+                ) : null}
+              </VStack>
+            </List.Item>
+          ))}
+        </List>
+      </Box>
     </InntektsmeldingInfoBlokk>
   );
 };

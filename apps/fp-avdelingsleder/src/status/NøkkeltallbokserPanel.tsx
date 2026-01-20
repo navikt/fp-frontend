@@ -38,7 +38,7 @@ export const NøkkeltallbokserPanel = ({ valgtAvdelingEnhet, children }: Props) 
   );
 
   return (
-    <Box.New padding="10">
+    <Box padding="space-40">
       <VStack gap="space-16">
         <HStack justify="space-between">
           <Heading size="medium">
@@ -81,7 +81,7 @@ export const NøkkeltallbokserPanel = ({ valgtAvdelingEnhet, children }: Props) 
           <NøkkeltallBoks oppgaverForAvdeling={oppgaverFiltrertPåYtelseType} behandlingType={undefined} />
         </HStack>
       </VStack>
-    </Box.New>
+    </Box>
   );
 };
 
@@ -103,7 +103,7 @@ const NøkkeltallBoks = ({
   const behandlingTypeKodeverk = behandlingTyper.find(bt => bt.kode === behandlingType);
 
   return (
-    <Box.New background="neutral-moderate" borderRadius="large" padding="4" width="200px">
+    <Box background="neutral-moderate" borderRadius="large" padding="space-16" width="200px">
       <VStack
         gap="space-16"
         align="center"
@@ -117,6 +117,6 @@ const NøkkeltallBoks = ({
           <FormattedMessage id="NøkkeltallbokserPanel.TilBeslutter" values={{ antall: antallTilBeslutter }} />
         </Detail>
       </VStack>
-    </Box.New>
+    </Box>
   );
 };

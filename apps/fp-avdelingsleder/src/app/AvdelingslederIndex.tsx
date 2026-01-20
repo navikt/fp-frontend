@@ -134,8 +134,7 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
           </Tabs.List>
         </Tabs>
       </VStack>
-
-      <Box.New background="default" padding="5">
+      <Box background="default" padding="space-20">
         {activeAvdelingslederPanel === AvdelingslederPanels.BEHANDLINGSKOER && (
           <EndreSakslisterPanel
             valgtAvdelingEnhet={valgtAvdelingEnhet}
@@ -157,7 +156,7 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
         {activeAvdelingslederPanel === AvdelingslederPanels.RESERVASJONER && (
           <ReservasjonerTabell valgtAvdelingEnhet={valgtAvdelingEnhet} />
         )}
-      </Box.New>
+      </Box>
     </div>
   );
 };

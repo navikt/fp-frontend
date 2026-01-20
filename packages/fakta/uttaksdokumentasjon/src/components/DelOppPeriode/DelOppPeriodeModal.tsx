@@ -67,9 +67,9 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
                 toDate={dayjs(periode.tom, ISO_DATE_FORMAT).subtract(1, 'day').toDate()}
               />
               {perioder && (
-                <Box.New
+                <Box
                   background="neutral-moderate"
-                  padding="2"
+                  padding="space-8"
                   borderRadius="large"
                   style={{ width: 'max-content' }}
                 >
@@ -86,7 +86,7 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
                       </BodyShort>
                     ))}
                   </VStack>
-                </Box.New>
+                </Box>
               )}
             </VStack>
           </Dialog.Body>

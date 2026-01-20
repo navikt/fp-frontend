@@ -83,14 +83,14 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
           )}
         </HStack>
         {aksjonspunkt?.begrunnelse && (
-          <Box.New background="neutral-moderate" padding="5" borderRadius="medium">
+          <Box background="neutral-moderate" padding="space-20" borderRadius="medium">
             <VStack gap="space-8">
               <Label size="small">
                 <FormattedMessage id="DekningsgradForm.BeskrivelseAvEndring" />
               </Label>
               <BodyShort size="small">{aksjonspunkt.begrunnelse}</BodyShort>
             </VStack>
-          </Box.New>
+          </Box>
         )}
       </VStack>
     );
@@ -115,7 +115,7 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
           </Heading>
         </HStack>
       </div>
-      <Box.New background="neutral-moderate" padding="5">
+      <Box background="neutral-moderate" padding="space-20">
         <VStack gap="space-24">
           <RhfRadioGroup
             name="dekningsgrad"
@@ -176,7 +176,7 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
             </Button>
           </div>
         </VStack>
-      </Box.New>
+      </Box>
     </RhfForm>
   );
 };

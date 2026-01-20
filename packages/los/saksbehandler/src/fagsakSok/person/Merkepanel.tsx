@@ -24,18 +24,26 @@ export const MerkePanel = ({ erDød = false, diskresjonskode }: Props) => {
   return (
     <>
       {erDød && (
-        <Tag variant="info" title={intl.formatMessage({ id: 'MerkePanel.DodTittel' })}>
+        <Tag
+          data-color="info"
+          variant="outline"
+          title={intl.formatMessage({ id: 'MerkePanel.DodTittel' })}>
           <FormattedMessage id="MerkePanel.Dod" />
         </Tag>
       )}
       {diskresjonskode === DiskresjonskodeType.KODE6 && !erDød && (
-        <Tag variant="error" title={intl.formatMessage({ id: 'MerkePanel.Diskresjon6Tittel' })}>
+        <Tag
+          data-color="danger"
+          variant="outline"
+          title={intl.formatMessage({ id: 'MerkePanel.Diskresjon6Tittel' })}>
           <FormattedMessage id="MerkePanel.Diskresjon6" />
         </Tag>
       )}
-
       {diskresjonskode === DiskresjonskodeType.KODE7 && !erDød && (
-        <Tag variant="warning" title={intl.formatMessage({ id: 'MerkePanel.Diskresjon7Tittel' })}>
+        <Tag
+          data-color="warning"
+          variant="outline"
+          title={intl.formatMessage({ id: 'MerkePanel.Diskresjon7Tittel' })}>
           <FormattedMessage id="MerkePanel.Diskresjon7" />
         </Tag>
       )}

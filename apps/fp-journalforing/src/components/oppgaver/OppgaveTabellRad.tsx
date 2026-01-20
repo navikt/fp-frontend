@@ -35,12 +35,12 @@ export const OppgaveTabellRad = ({ oppgave, velgOppgaveOgHentJournalpost, ansatt
       <Table.DataCell>{oppgave.beskrivelse}</Table.DataCell>
       <Table.DataCell>
         {oppgave.reservertAv && ansattIdent === oppgave.reservertAv && (
-          <Tag size="small" variant="alt3">
+          <Tag data-color="info" size="small" variant="outline">
             <FormattedMessage id="Oppgavetabell.Meg" />
           </Tag>
         )}
         {oppgave.reservertAv && ansattIdent !== oppgave.reservertAv && (
-          <Tag size="small" variant="neutral-moderate">
+          <Tag data-color="neutral" size="small" variant="moderate">
             {oppgave.reservertAv}
           </Tag>
         )}

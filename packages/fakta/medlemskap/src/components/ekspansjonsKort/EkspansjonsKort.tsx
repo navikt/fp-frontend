@@ -38,12 +38,12 @@ export const EkspansjonsKort = ({
         </HStack>
       </ExpansionCard.Header>
       <ExpansionCard.Content>
-        <Box.New padding="4" background="neutral-softA" borderRadius="medium">
+        <Box padding="space-16" background="neutral-softA" borderRadius="medium">
           <VStack gap="space-16">
             {skalViseAvvik && relevanteAvvik.map(a => <AvvikMerknad key={a} avvik={a} />)}
             {children}
           </VStack>
-        </Box.New>
+        </Box>
       </ExpansionCard.Content>
     </ExpansionCard>
   );

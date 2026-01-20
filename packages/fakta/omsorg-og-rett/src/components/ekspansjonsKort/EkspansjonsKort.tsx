@@ -22,9 +22,9 @@ export const EkspansjonsKort = ({ tittel, kilde, defaultOpen, children }: PropsW
         </HStack>
       </ExpansionCard.Header>
       <ExpansionCard.Content>
-        <Box.New padding="4" background="neutral-soft" borderRadius="medium">
+        <Box padding="space-16" background="neutral-soft" borderRadius="medium">
           <VStack gap="space-16">{children}</VStack>
-        </Box.New>
+        </Box>
       </ExpansionCard.Content>
     </ExpansionCard>
   );

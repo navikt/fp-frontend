@@ -68,9 +68,9 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
   return (
     <>
       <RhfForm formMethods={formMethods} onSubmit={values => oppdater(transformValues(values))}>
-        <VStack gap="8">
-          <VStack gap="4">
-            <HStack gap="4" align="end">
+        <VStack gap="space-32">
+          <VStack gap="space-16">
+            <HStack gap="space-16" align="end">
               <RhfDatepicker
                 name="fom"
                 label={intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.Fom' })}
@@ -126,7 +126,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
           />
           <VStack align="start">
             <Label size="small">{intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.TrekkUkerDager' })}</Label>
-            <HStack gap="2" align="center">
+            <HStack gap="space-8" align="center">
               <RhfNumericField
                 name="trekkuker"
                 control={formMethods.control}
@@ -148,7 +148,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               />
             </HStack>
           </VStack>
-          <HStack gap="4" className={styles['marginBtn']}>
+          <HStack gap="space-16" className={styles['marginBtn']}>
             <Button
               size="small"
               variant="primary"

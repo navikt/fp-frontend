@@ -9,7 +9,7 @@ import { Box, HStack, Label } from '@navikt/ds-react';
  * Statisk visning av panel som tilsier ingen faresignaler funnet i behandlingen.
  */
 export const IngenRisikoPanel = () => (
-  <Box.New background="success-moderate" borderRadius="large" padding="3">
+  <Box background="success-moderate" borderRadius="large" padding="space-12">
     <HStack gap="space-16" align="center">
       <CheckmarkCircleFillIcon
         title={useIntl().formatMessage({ id: 'Risikopanel.Tittel' })}
@@ -21,5 +21,5 @@ export const IngenRisikoPanel = () => (
         <FormattedMessage id="Risikopanel.Tittel.IngenFaresignaler" />
       </Label>
     </HStack>
-  </Box.New>
+  </Box>
 );

@@ -18,13 +18,13 @@ interface FaktaBoxProps {
 
 export const FaktaBox = ({ label, value, kilde }: FaktaBoxProps) => {
   return (
-    <Box.New
+    <Box
       background="neutral-soft"
       flexBasis="0%"
       flexGrow="1"
       borderRadius="medium"
-      paddingBlock="2"
-      paddingInline="4"
+      paddingBlock="space-8"
+      paddingInline="space-16"
       aria-label={typeof label === 'string' ? label : undefined}
     >
       <VStack gap="space-24" flexGrow="1" height="100%" justify="space-between">
@@ -34,6 +34,6 @@ export const FaktaBox = ({ label, value, kilde }: FaktaBoxProps) => {
         </div>
         <Detail uppercase>{getLabelForFaktaKilde(kilde)}</Detail>
       </VStack>
-    </Box.New>
+    </Box>
   );
 };

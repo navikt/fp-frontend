@@ -62,7 +62,7 @@ export const SorteringVelger = ({
   const sortering = watch('sortering');
 
   return (
-    <Box.New borderWidth="1" borderColor="neutral-subtle" padding="10">
+    <Box borderWidth="1" borderColor="neutral-subtle" padding="space-40">
       <RhfRadioGroup
         name="sortering"
         control={control}
@@ -106,6 +106,6 @@ export const SorteringVelger = ({
             </VStack>
           ))}
       </RhfRadioGroup>
-    </Box.New>
+    </Box>
   );
 };

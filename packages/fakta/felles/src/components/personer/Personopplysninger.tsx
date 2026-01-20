@@ -51,7 +51,7 @@ export const Personopplysninger = ({
   const isChild = rolle === 'BARN';
   return (
     <RawIntlProvider value={intl}>
-      <Box.New background="neutral-moderate" padding="4" borderRadius="large" aria-label={navn}>
+      <Box background="neutral-moderate" padding="space-16" borderRadius="large" aria-label={navn}>
         <VStack gap="space-4">
           <HStack gap="space-20">
             {showIcon && (
@@ -94,7 +94,7 @@ export const Personopplysninger = ({
             erAnnenpart={rolle === 'ANNEN_PART'}
           />
         </VStack>
-      </Box.New>
+      </Box>
     </RawIntlProvider>
   );
 };

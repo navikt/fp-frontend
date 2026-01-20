@@ -21,6 +21,7 @@ export const UtvidEllerMinskKnapp = ({ toggleVisUtvidetBehandlingDetaljer, visUt
       placement="bottom"
     >
       <Button
+        data-color="neutral"
         icon={
           visUtvidetBehandlingDetaljer ? (
             <ShrinkIcon fontSize="1.4rem" aria-hidden />
@@ -29,10 +30,9 @@ export const UtvidEllerMinskKnapp = ({ toggleVisUtvidetBehandlingDetaljer, visUt
           )
         }
         aria-label="Utvid behandling detaljer panel"
-        variant="tertiary-neutral"
+        variant="tertiary"
         size="xsmall"
-        onClick={toggleVisUtvidetBehandlingDetaljer}
-      />
+        onClick={toggleVisUtvidetBehandlingDetaljer} />
     </Tooltip>
   );
 };

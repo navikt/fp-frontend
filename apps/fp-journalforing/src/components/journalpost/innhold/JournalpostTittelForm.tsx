@@ -29,7 +29,7 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
   const { control } = useFormContext<JournalføringFormValues>();
 
   return (
-    <HStack gap="0 4" align="center">
+    <HStack gap="space-0 space-16" align="center">
       {kanRedigereTittel && (
         <>
           {harToggletFritekst && (

@@ -74,7 +74,7 @@ export const UttakEøsFaktaTable = ({
       {erRedigerbart && (
         <>
           {visLeggTilPeriodeForm && (
-            <VStack gap="4" className={styles['panel']}>
+            <VStack gap="space-16" className={styles['panel']}>
               <Heading size="small">
                 <FormattedMessage id="UttakEøsFaktaForm.NyPeriode" />
               </Heading>
