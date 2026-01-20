@@ -16,7 +16,7 @@ export const InfoBox = ({
     <Box
       background="neutral-soft"
       borderWidth="2"
-      borderRadius="large"
+      borderRadius="8"
       borderColor="neutral"
       paddingInline="space-16"
       paddingBlock={size === 'small' ? '2' : '4'}

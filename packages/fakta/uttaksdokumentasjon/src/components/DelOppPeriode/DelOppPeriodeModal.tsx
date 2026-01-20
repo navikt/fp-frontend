@@ -70,7 +70,7 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
                 <Box
                   background="neutral-moderate"
                   padding="space-8"
-                  borderRadius="large"
+                  borderRadius="8"
                   style={{ width: 'max-content' }}
                 >
                   <VStack gap="space-4">

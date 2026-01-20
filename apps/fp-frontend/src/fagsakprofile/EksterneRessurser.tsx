@@ -15,7 +15,7 @@ export const EksterneRessurser = ({
   arbeidstakerHref: string | undefined;
 }) => {
   return (
-    <Box paddingInline="space-16" paddingBlock="space-8" background="neutral-moderate" borderRadius="large">
+    <Box paddingInline="space-16" paddingBlock="space-8" background="neutral-moderate" borderRadius="8">
       <HStack justify="space-between" align="center" wrap={false}>
         <Detail weight="semibold">
           <FormattedMessage id="EksterneRessurser.Lenke" />

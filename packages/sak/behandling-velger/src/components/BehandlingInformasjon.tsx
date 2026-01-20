@@ -51,7 +51,7 @@ export const BehandlingInformasjon = ({
     : alleKodeverk['BehandlingResultatType'];
 
   return (
-    <Box borderWidth="2" borderColor="neutral-subtle" borderRadius="large" padding="space-12">
+    <Box borderWidth="2" borderColor="neutral-subtle" borderRadius="8" padding="space-12">
       <VStack gap="space-4">
         <HStack gap="space-16">
           <div className={styles['arsakPadding']}>

@@ -51,7 +51,7 @@ export const Personopplysninger = ({
   const isChild = rolle === 'BARN';
   return (
     <RawIntlProvider value={intl}>
-      <Box background="neutral-moderate" padding="space-16" borderRadius="large" aria-label={navn}>
+      <Box background="neutral-moderate" padding="space-16" borderRadius="8" aria-label={navn}>
         <VStack gap="space-4">
           <HStack gap="space-20">
             {showIcon && (

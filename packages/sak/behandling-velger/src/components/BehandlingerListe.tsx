@@ -55,7 +55,7 @@ export const BehandlingerListe = ({
   return (
     <ul className={styles['behandlingList']}>
       {behandlinger.length === 0 && (
-        <Box borderWidth="2" borderColor="neutral-subtle" borderRadius="large" padding="space-12">
+        <Box borderWidth="2" borderColor="neutral-subtle" borderRadius="8" padding="space-12">
           <Label size="small">
             <FormattedMessage id="BehandlingList.ZeroBehandlinger" />
           </Label>

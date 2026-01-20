@@ -259,7 +259,7 @@ export const SakslisteVelgerForm = ({
             <VStack gap="space-24">
               {valgtSaksliste && (
                 <HStack gap="space-20" align="stretch">
-                  <Box background="neutral-moderateA" padding="space-16" borderRadius="xlarge" width="200px">
+                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
                     <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">
@@ -280,7 +280,7 @@ export const SakslisteVelgerForm = ({
                       )}
                     </VStack>
                   </Box>
-                  <Box background="neutral-moderateA" padding="space-16" borderRadius="xlarge" width="200px">
+                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
                     <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">
@@ -299,7 +299,7 @@ export const SakslisteVelgerForm = ({
                       )}
                     </VStack>
                   </Box>
-                  <Box background="neutral-moderateA" padding="space-16" borderRadius="xlarge" width="200px">
+                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
                     <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">
@@ -310,7 +310,7 @@ export const SakslisteVelgerForm = ({
                       <AndreKriterier saksliste={valgtSaksliste} />
                     </VStack>
                   </Box>
-                  <Box background="neutral-moderateA" padding="space-16" borderRadius="xlarge" width="200px">
+                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
                     <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">

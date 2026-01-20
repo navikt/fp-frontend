@@ -16,11 +16,11 @@ export const FaktaKort = ({ label, children, merknaderFraBeslutter }: Props) => 
     <Box
       borderWidth={error ? '2' : undefined}
       borderColor={error ? 'danger-strong' : undefined}
-      borderRadius="medium"
+      borderRadius="4"
       background="neutral-soft"
       aria-label={label}
     >
-      <Box padding="space-16" borderRadius="medium medium 0 0" background="neutral-moderateA">
+      <Box padding="space-16" borderRadius="4 4 0 0" background="neutral-moderateA">
         <Heading size="small" level="3">
           {label}
         </Heading>

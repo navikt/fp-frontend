@@ -86,7 +86,7 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
         submit={forkastOverstyrtBrev}
       />
       <VStack gap="space-16">
-        <Box padding="space-16" borderRadius="medium" background="neutral-soft">
+        <Box padding="space-16" borderRadius="4" background="neutral-soft">
           <VStack gap="space-16">
             {!isReadOnly && !brevOverstyring?.redigertHtml && !hentBrevOverstyringIsPending && (
               <Alert variant="info" size="small">

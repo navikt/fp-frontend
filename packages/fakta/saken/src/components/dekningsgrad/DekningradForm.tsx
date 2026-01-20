@@ -83,7 +83,7 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
           )}
         </HStack>
         {aksjonspunkt?.begrunnelse && (
-          <Box background="neutral-moderate" padding="space-20" borderRadius="medium">
+          <Box background="neutral-moderate" padding="space-20" borderRadius="4">
             <VStack gap="space-8">
               <Label size="small">
                 <FormattedMessage id="DekningsgradForm.BeskrivelseAvEndring" />

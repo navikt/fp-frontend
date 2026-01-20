@@ -68,7 +68,7 @@ export const DekningradApForm = ({ ytelseFordeling, aksjonspunkt }: Props) => {
         >
           <VStack gap="space-40">
             <HStack gap="space-16">
-              <Box background="brand-blue-moderate" padding="space-20" borderColor="neutral" borderRadius="medium">
+              <Box background="brand-blue-moderate" padding="space-20" borderColor="neutral" borderRadius="4">
                 <VStack gap="space-8">
                   <HStack gap="space-16" align="center">
                     {finnIkonForKjønn(fagsak.bruker.kjønn)}
@@ -92,7 +92,7 @@ export const DekningradApForm = ({ ytelseFordeling, aksjonspunkt }: Props) => {
                 </VStack>
               </Box>
               {fagsak.annenPart && (
-                <Box background="brand-blue-moderate" padding="space-20" borderColor="neutral" borderRadius="medium">
+                <Box background="brand-blue-moderate" padding="space-20" borderColor="neutral" borderRadius="4">
                   <VStack gap="space-8">
                     <HStack gap="space-16" align="center">
                       {finnIkonForKjønn(fagsak.annenPart.kjønn)}

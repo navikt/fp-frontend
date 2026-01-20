@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const SakerPanel = ({ saker }: Props) => (
-  <Box background="neutral-moderate" padding="space-20" borderRadius="medium">
+  <Box background="neutral-moderate" padding="space-20" borderRadius="4">
     <Table size="small">
       <Table.Header>
         <Table.Row>

@@ -74,7 +74,7 @@ export const UttakEøsFaktaTable = ({
     </Table>
 
     {erRedigerbart && visLeggTilPeriodeForm && (
-      <Box.New background="sunken" padding="space-16">
+      <Box background="sunken" padding="space-16">
         <Heading size="small" level="3">
           <FormattedMessage id="UttakEøsFaktaForm.NyPeriode" />
         </Heading>
@@ -86,7 +86,7 @@ export const UttakEøsFaktaTable = ({
           }}
           avbryt={() => setVisLeggTilPeriodeForm(false)}
         />
-      </Box.New>
+      </Box>
     )}
     {erRedigerbart && !visLeggTilPeriodeForm && (
       <div>
