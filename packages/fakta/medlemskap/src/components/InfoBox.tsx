@@ -19,7 +19,7 @@ export const InfoBox = ({
       borderRadius="8"
       borderColor="neutral"
       paddingInline="space-16"
-      paddingBlock={size === 'small' ? '2' : '4'}
+      paddingBlock={size === 'small' ? 'space-8' : 'space-16'}
     >
       <HStack gap="space-8">
         {Icon && <Icon style={{ height: '25px', width: '25px' }} />}
