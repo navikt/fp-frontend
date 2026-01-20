@@ -220,7 +220,7 @@ export const UttakPeriodePanel = ({
   };
 
   return (
-    <Box.New borderWidth="1" padding="4">
+    <Box borderWidth="1" padding="space-16">
       <VStack gap="space-16">
         <HStack align="center" justify="space-between">
           <Label size="small">
@@ -230,13 +230,13 @@ export const UttakPeriodePanel = ({
           {!isReadOnly && erHovedsøkersPeriode && !erValgtPeriodeEøsPeriode && !erRevurderingFørEndringsdato && (
             <>
               <Button
+                data-color="neutral"
                 size="xsmall"
                 icon={<ScissorsIcon aria-hidden />}
                 onClick={toggleVisningAvModal}
-                variant="tertiary-neutral"
+                variant="tertiary"
                 type="button"
-                title={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
-              >
+                title={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}>
                 <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
               </Button>
               {visModal && (
@@ -252,34 +252,34 @@ export const UttakPeriodePanel = ({
 
           <HStack gap="space-8">
             <Button
+              data-color="neutral"
               size="xsmall"
               icon={<ArrowLeftIcon aria-hidden />}
               onClick={visForrigePeriode}
-              variant="secondary-neutral"
+              variant="secondary"
               type="button"
-              title={intl.formatMessage({ id: 'UttakPeriodePanel.prevPeriod' })}
-            >
+              title={intl.formatMessage({ id: 'UttakPeriodePanel.prevPeriod' })}>
               <FormattedMessage id="UttakPeriodePanel.prevPeriodShort" />
             </Button>
             <Button
+              data-color="neutral"
               size="xsmall"
               icon={<ArrowRightIcon aria-hidden />}
               onClick={visNestePeriode}
-              variant="secondary-neutral"
+              variant="secondary"
               type="button"
               title={intl.formatMessage({ id: 'UttakPeriodePanel.nextPeriod' })}
-              iconPosition="right"
-            >
+              iconPosition="right">
               <FormattedMessage id="UttakPeriodePanel.nextPeriodShort" />
             </Button>
             <Button
+              data-color="neutral"
               size="xsmall"
               icon={<XMarkIcon aria-hidden />}
               onClick={lukkPeriode}
-              variant="tertiary-neutral"
+              variant="tertiary"
               type="button"
-              title={intl.formatMessage({ id: 'UttakPeriodePanel.LukkPeriode' })}
-            />
+              title={intl.formatMessage({ id: 'UttakPeriodePanel.LukkPeriode' })} />
           </HStack>
         </HStack>
         {erValgtPeriodeEøsPeriode && <UttakPeriodeInfoEØS valgtPeriode={valgtPeriode} alleKodeverk={alleKodeverk} />}
@@ -312,6 +312,6 @@ export const UttakPeriodePanel = ({
           </>
         )}
       </VStack>
-    </Box.New>
+    </Box>
   );
 };

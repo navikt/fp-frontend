@@ -68,11 +68,11 @@ export const DekningradApForm = ({ ytelseFordeling, aksjonspunkt }: Props) => {
         >
           <VStack gap="space-40">
             <HStack gap="space-16">
-              <Box.New background="brand-blue-moderate" padding="5" borderColor="neutral" borderRadius="medium">
+              <Box background="brand-blue-moderate" padding="space-20" borderColor="neutral" borderRadius="4">
                 <VStack gap="space-8">
                   <HStack gap="space-16" align="center">
                     {finnIkonForKjønn(fagsak.bruker.kjønn)}
-                    <VStack gap="0">
+                    <VStack gap="space-0">
                       <BodyShort size="medium">{fagsak.bruker.navn}</BodyShort>
                       <BodyShort size="small">
                         <FormattedMessage
@@ -90,13 +90,13 @@ export const DekningradApForm = ({ ytelseFordeling, aksjonspunkt }: Props) => {
                     <FormattedMessage id="DekningradApForm.HarValgt" values={{ dekningsgrad: dgSøker.dekningsgrad }} />
                   </Heading>
                 </VStack>
-              </Box.New>
+              </Box>
               {fagsak.annenPart && (
-                <Box.New background="brand-blue-moderate" padding="5" borderColor="neutral" borderRadius="medium">
+                <Box background="brand-blue-moderate" padding="space-20" borderColor="neutral" borderRadius="4">
                   <VStack gap="space-8">
                     <HStack gap="space-16" align="center">
                       {finnIkonForKjønn(fagsak.annenPart.kjønn)}
-                      <VStack gap="0">
+                      <VStack gap="space-0">
                         <BodyShort size="medium">{fagsak.annenPart.navn} </BodyShort>
                         <BodyShort size="small">
                           <FormattedMessage
@@ -119,7 +119,7 @@ export const DekningradApForm = ({ ytelseFordeling, aksjonspunkt }: Props) => {
                       />
                     </Heading>
                   </VStack>
-                </Box.New>
+                </Box>
               )}
             </HStack>
             <RhfRadioGroup

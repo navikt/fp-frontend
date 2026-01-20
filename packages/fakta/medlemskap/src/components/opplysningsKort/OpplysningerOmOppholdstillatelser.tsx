@@ -42,11 +42,11 @@ export const OpplysningerOmOppholdstillatelser = ({
         </BodyShort>
 
         {oppholdstillatelser.length === 0 && (
-          <Box.New padding="4">
+          <Box padding="space-16">
             <BodyLong textColor="subtle">
               <FormattedMessage id="OpplysningerOmOppholdstillatelser.Tabell.Ingen" />
             </BodyLong>
-          </Box.New>
+          </Box>
         )}
         {oppholdstillatelser.length > 0 && (
           <Table>

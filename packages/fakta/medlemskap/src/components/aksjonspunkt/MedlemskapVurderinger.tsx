@@ -41,7 +41,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, vilkår, erForutgåend
 
   return (
     <RawIntlProvider value={intl}>
-      <VStack gap={readOnly ? '2' : '6'}>
+      <VStack gap={readOnly ? 'space-8' : 'space-24'}>
         <RhfRadioGroup
           name="vurdering"
           control={control}

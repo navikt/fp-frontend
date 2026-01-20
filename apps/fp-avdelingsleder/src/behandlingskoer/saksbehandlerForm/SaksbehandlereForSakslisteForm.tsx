@@ -52,7 +52,7 @@ export const SaksbehandlereForSakslisteForm = ({
 
   return (
     <RhfForm<FormValues> formMethods={formMethods}>
-      <Box.New padding="5" borderColor="neutral-subtle" borderRadius="0" borderWidth="1">
+      <Box padding="space-20" borderColor="neutral-subtle" borderRadius="0" borderWidth="1">
         <VStack gap="space-8">
           <Label size="small">
             <FormattedMessage id="SaksbehandlereForSakslisteForm.Saksbehandlere" />
@@ -127,7 +127,7 @@ export const SaksbehandlereForSakslisteForm = ({
             </ExpansionCard>
           )}
         </VStack>
-      </Box.New>
+      </Box>
     </RhfForm>
   );
 };

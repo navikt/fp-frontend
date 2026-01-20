@@ -54,7 +54,7 @@ export const FagsakProfile = ({
             content={intl.formatMessage({ id: 'FagsakProfile.Dekningsgrad' }, { dekningsgrad })}
             placement="bottom"
           >
-            <Tag variant="info">{`${dekningsgrad}%`}</Tag>
+            <Tag data-color="info" variant="outline">{`${dekningsgrad}%`}</Tag>
           </Tooltip>
         )}
       </HStack>
@@ -67,7 +67,7 @@ export const FagsakProfile = ({
               content={intl.formatMessage({ id: 'FagsakProfile.FagsakMarkering' }, { tekst })}
               placement="bottom"
             >
-              <Tag size="small" variant="alt1">
+              <Tag data-color="meta-purple" size="small" variant="outline">
                 {tekst}
               </Tag>
             </Tooltip>

@@ -97,7 +97,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfris
           </AksjonspunktHelpTextHTML>
         )}
         <HStack justify="space-between">
-          <Box.New className={styles['panel']}>
+          <Box className={styles['panel']}>
             <Label size="small">
               <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Vurder" />
             </Label>
@@ -112,7 +112,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfris
                 <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt3" />
               </li>
             </ul>
-          </Box.New>
+          </Box>
           <div>
             <Detail>
               <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadMottatt" />

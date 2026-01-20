@@ -65,19 +65,17 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOversty
         </AksjonspunktHelpTextHTML>
       )}
       {!harUløsteAksjonspunkter && omsorgOgRett.rettighetstype && (
-        <Box.New background="neutral-moderate" padding="5">
+        <Box background="neutral-moderate" padding="space-20">
           <RettighetstypeForm
             omsorgOgRett={omsorgOgRett}
             aksjonspunkt={overstyringAksjonspunkter[0]}
             kanOverstyre={kanOverstyre}
           />
-        </Box.New>
+        </Box>
       )}
-
       <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} alleKodeverk={alleKodeverk} />
       {personoversikt && <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />}
       {omsorgOgRett.registerdata && <AnnenPartsYtelser omsorgOgRett={omsorgOgRett} />}
-
       {(opprettetAleneomsorgAPUtenResultat || aleneomsorgAPMedResultat) && (
         <AleneomsorgForm omsorgOgRett={omsorgOgRett} aksjonspunkt={aksjonspunkter[0]} isSubmittable={isSubmittable} />
       )}

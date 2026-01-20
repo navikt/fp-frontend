@@ -49,7 +49,7 @@ export const DokumentDetaljer = ({
   );
   if (dokumentTittelStyresAvJournalpostTittel) {
     return (
-      <HStack className={styles['dokContainer']} gap="0 4" align="center" wrap={false}>
+      <HStack className={styles['dokContainer']} gap="space-0 space-16" align="center" wrap={false}>
         <RhfTextField
           name="journalpostTittel"
           control={control}
@@ -63,7 +63,7 @@ export const DokumentDetaljer = ({
     );
   }
   return (
-    <HStack className={styles['dokContainer']} gap="0 4" align="center" wrap={false}>
+    <HStack className={styles['dokContainer']} gap="space-0 space-16" align="center" wrap={false}>
       {kanRedigeres && (
         <>
           {harToggletFritekst && (

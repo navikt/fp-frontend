@@ -66,7 +66,7 @@ export const VelferdspermisjonTabellRad = ({
         />
       </Table.DataCell>
       <Table.DataCell>
-        <Tag variant="neutral-moderate" size="small">
+        <Tag data-color="neutral" variant="moderate" size="small">
           <FormattedMessage id="VelferdspermisjonPanel.AaRegisteret" />
         </Tag>
       </Table.DataCell>

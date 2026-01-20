@@ -113,7 +113,7 @@ export const OppholdPeriodeTabellRad = ({
       </Table.DataCell>
       <Table.DataCell>{utledTypeTekst(intl, opphold)}</Table.DataCell>
       <Table.DataCell>
-        <Tag size="small" variant="neutral-moderate">
+        <Tag data-color="neutral" size="small" variant="moderate">
           {utledKilde(intl, opphold)}
         </Tag>
       </Table.DataCell>

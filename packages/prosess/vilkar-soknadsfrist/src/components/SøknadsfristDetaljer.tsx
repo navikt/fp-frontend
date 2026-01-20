@@ -17,7 +17,7 @@ export const SøknadsfristDetaljer = ({ søknad, gjeldendeFamiliehendelse }: Pro
   const textCode = findTextCode(gjeldendeFamiliehendelse);
 
   return (
-    <Box.New background="info-soft" padding="space-16">
+    <Box background="info-soft" padding="space-16">
       <VStack gap="space-16">
         <HStack gap="space-24">
           <LabeledValue
@@ -42,7 +42,7 @@ export const SøknadsfristDetaljer = ({ søknad, gjeldendeFamiliehendelse }: Pro
           value={søknad.begrunnelseForSenInnsending ?? '-'}
         />
       </VStack>
-    </Box.New>
+    </Box>
   );
 };
 

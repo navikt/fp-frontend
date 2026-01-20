@@ -35,16 +35,16 @@ export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, rem
     <Table.Row shadeOnHover={false} style={{ backgroundColor: error && !isOpen ? 'var(--ax-danger-100)' : 'none' }}>
       <Table.DataCell valign="top">
         <Button
+          data-color="neutral"
           type="button"
-          variant="tertiary-neutral"
+          variant="tertiary"
           onClick={() => setIsOpen(curr => !curr)}
-          icon={isOpen ? <ChevronUpIcon aria-label="Vis mindre" /> : <ChevronDownIcon aria-label="Vis mer" />}
-        />
+          icon={isOpen ? <ChevronUpIcon aria-label="Vis mindre" /> : <ChevronDownIcon aria-label="Vis mer" />} />
       </Table.DataCell>
       <Table.DataCell valign="top">
-        <Box.New hidden={isOpen} paddingBlock="3">
+        <Box hidden={isOpen} paddingBlock="space-12">
           <BodyShort weight="semibold">{virksomhetNavn}</BodyShort>
-        </Box.New>
+        </Box>
         <VStack gap="space-16" hidden={!isOpen}>
           <RhfTextField
             name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navn`}
@@ -62,12 +62,12 @@ export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, rem
       </Table.DataCell>
       <Table.DataCell valign="top" align="right">
         <Button
+          data-color="neutral"
           type="button"
-          variant="tertiary-neutral"
+          variant="tertiary"
           onClick={remove}
           onKeyDown={remove}
-          icon={<TrashIcon aria-label="Slett rad" />}
-        />
+          icon={<TrashIcon aria-label="Slett rad" />} />
       </Table.DataCell>
     </Table.Row>
   );

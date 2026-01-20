@@ -27,7 +27,7 @@ import messages from '../../i18n/nb_NO.json';
 
 import '../globalCss/global.css';
 import '@navikt/ds-css-internal';
-import '@navikt/ds-css/darkside';
+import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';

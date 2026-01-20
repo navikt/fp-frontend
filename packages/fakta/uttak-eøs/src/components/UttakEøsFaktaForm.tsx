@@ -83,8 +83,8 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   }, [perioder, begrunnelse]);
 
   return (
-    <VStack gap="4">
-      <HStack gap="4">
+    <VStack gap="space-16">
+      <HStack gap="space-16">
         <Heading size="small">
           <FormattedMessage id="UttakEøsFaktaForm.FaktaUttakEos" />
         </Heading>
@@ -113,7 +113,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
         alleKodeverk={alleKodeverk}
       />
       <RhfForm formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
-        <VStack gap="4">
+        <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
             isSubmittable
