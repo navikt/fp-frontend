@@ -24,7 +24,7 @@
     "@navikt/ds-react": "8.0.1",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-utils": "3.10.11",
+    "@navikt/ft-utils": "3.10.12",
     "dayjs": "1.11.19",
     "history": "5.3.0",
     "react": "19.2.3",
