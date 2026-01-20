@@ -103,7 +103,7 @@ const NøkkeltallBoks = ({
   const behandlingTypeKodeverk = behandlingTyper.find(bt => bt.kode === behandlingType);
 
   return (
-    <Box background="neutral-moderate" borderRadius="large" padding="space-16" width="200px">
+    <Box background="neutral-moderate" borderRadius="8" padding="space-16" width="200px">
       <VStack
         gap="space-16"
         align="center"
