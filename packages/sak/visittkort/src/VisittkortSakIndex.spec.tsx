@@ -65,7 +65,7 @@ describe('VisittkortSakIndex', () => {
   });
 
   it.each([
-    ['fødsel', ['Født 21.01.2020 (5 år)'], FamilieMedFødtBarn],
+    ['fødsel', [/Født 21.01.2020 \(\d+ år\)/], FamilieMedFødtBarn],
     ['termin', ['Termin 21.01.2020'], FamilieMedTermin],
     ['omsorgovertakelse', ['Omsorgsovertakelse 21.01.2020'], FamilieMedOmsorgovertakelse],
     ['adopsjon', ['Omsorgsovertakelse(2 barn) 21.01.2020'], FamilieMedAdopsjon],
