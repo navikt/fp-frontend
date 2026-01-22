@@ -8,7 +8,7 @@
  * @example
  * // Før: '/fplos/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid'
  * // Etter: '/fplos/api/avdelingsleder/n%C3%B8kkeltall/behandlinger-under-arbeid'
- * const encodedUrl = encodeNorwegianChars(LosUrl.HENT_OPPGAVER_FOR_AVDELING);
+ * const encodedUrl = urlEncodeNorskeBokstaver(LosUrl.HENT_OPPGAVER_FOR_AVDELING);
  */
 export const urlEncodeNorskeBokstaver = (url: string): string => {
   return url.replaceAll('ø', '%C3%B8').replaceAll('å', '%C3%A5').replaceAll('æ', '%C3%A6');

@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ToggleGroup } from '@navikt/ds-react';
 import { ToggleGroupItem } from '@navikt/ds-react/ToggleGroup';
 
-import { ReactECharts } from '../ReactECharts.tsx';
-import type { OppgaveFilterStatistikk } from '../typer/oppgaveFilterStatistikk.ts';
+import { ReactECharts } from '../ReactECharts';
+import type { OppgaveFilterStatistikk } from '../typer/oppgaveFilterStatistikk';
 
 enum Tidsintervall {
   DAG = 'dag',
@@ -16,10 +17,11 @@ interface Props {
   aktiveOgLedigeTidslinje: OppgaveFilterStatistikk[];
 }
 
-export const AktiveOgTilgjengligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
+export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
   const height = 400;
-  const aktivLabel = 'Ledige';
-  const reserverteLabel = 'Reserverte';
+  const intl = useIntl();
+  const aktivLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Ledig' });
+  const reserverteLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Reserverte' });
 
   const [tidsintervall, setTidsintervall] = useState<Tidsintervall>(Tidsintervall.UKE);
   const filtrertTidslinje = filtererTidslinjeBasertPåValgIntervall(aktiveOgLedigeTidslinje, tidsintervall);
@@ -28,25 +30,31 @@ export const AktiveOgTilgjengligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Pr
   );
   // Bruk sampling på tidspunkter og data
   const granularitet = 40;
-  const sampledTidspunkter = sampleData(
+  const sampletTidspunkter = reduserDatapunkterTilSpesifisertMaxAntall(
     sortertOgFiltrertTidslinje.map(o => o.tidspunkt),
     granularitet,
   );
-  const sampledLedigeData = sampleData(
-    sortertOgFiltrertTidslinje.map(o => o.tilgjenglige),
+  const sampletLedigeData = reduserDatapunkterTilSpesifisertMaxAntall(
+    sortertOgFiltrertTidslinje.map(o => o.tilgjengelige),
     granularitet,
   );
-  const sampledReserverteData = sampleData(
-    sortertOgFiltrertTidslinje.map(o => o.aktive - o.tilgjenglige),
+  const sampletReserverteData = reduserDatapunkterTilSpesifisertMaxAntall(
+    sortertOgFiltrertTidslinje.map(o => o.aktive - o.tilgjengelige),
     granularitet,
   );
 
   return (
     <>
       <ToggleGroup size="small" value={tidsintervall} onChange={value => setTidsintervall(value as Tidsintervall)}>
-        <ToggleGroupItem value="måned">Siste måned</ToggleGroupItem>
-        <ToggleGroupItem value="uke">Siste uke</ToggleGroupItem>
-        <ToggleGroupItem value="dag">Siste døgn</ToggleGroupItem>
+        <ToggleGroupItem value="måned">
+          <FormattedMessage id="AktiveOgTilgjengeligeOppgaverGraf.SisteMåned" />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="uke">
+          <FormattedMessage id="AktiveOgTilgjengeligeOppgaverGraf.SisteUke" />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="dag">
+          <FormattedMessage id="AktiveOgTilgjengeligeOppgaverGraf.SisteDag" />
+        </ToggleGroupItem>
       </ToggleGroup>
       <ReactECharts
         key={`chart-${aktiveOgLedigeTidslinje.length}`}
@@ -62,9 +70,9 @@ export const AktiveOgTilgjengligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Pr
             data: [aktivLabel, reserverteLabel],
           },
           xAxis: {
-            name: 'Tid',
+            name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.xAkse' }),
             type: 'category',
-            data: sampledTidspunkter,
+            data: sampletTidspunkter,
             boundaryGap: true,
             axisLabel: {
               formatter: (value: string) => {
@@ -91,21 +99,21 @@ export const AktiveOgTilgjengligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Pr
           },
           yAxis: {
             type: 'value',
-            name: 'Antall',
+            name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.yAkse' }),
             scale: true,
           },
           series: [
             {
               name: reserverteLabel,
               type: 'line',
-              data: sampledReserverteData,
+              data: sampletReserverteData,
               stack: 'total',
               areaStyle: {},
             },
             {
               name: aktivLabel,
               type: 'line',
-              data: sampledLedigeData,
+              data: sampletLedigeData,
               stack: 'total',
               areaStyle: {},
             },
@@ -138,9 +146,10 @@ const filtererTidslinjeBasertPåValgIntervall = (
   });
 };
 
-// Funksjon for å sample data ned til maks antall punkter
-const sampleData = (data: (string | number)[], maxPoints: number) => {
-  if (data.length <= maxPoints) return data;
+const reduserDatapunkterTilSpesifisertMaxAntall = (data: (string | number)[], maxPoints: number) => {
+  if (data.length <= maxPoints) {
+    return data;
+  }
 
   const step = Math.ceil(data.length / maxPoints);
   return data.filter((_, index) => index % step === 0);

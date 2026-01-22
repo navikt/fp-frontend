@@ -13,7 +13,7 @@ export type KøSorteringFelt = Readonly<{
 
 export type Statistikk = {
   alleOppgaver: number;
-  tilgjengligeOppgaver: number;
+  tilgjengeligeOppgaver: number;
 };
 
 export type SakslisteAvdeling = Readonly<{

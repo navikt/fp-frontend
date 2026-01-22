@@ -1929,7 +1929,6 @@ __metadata:
     lodash.debounce: "npm:4.0.8"
     msw: "npm:2.12.7"
     msw-storybook-addon: "npm:2.0.6"
-    p-limit: "npm:7.2.0"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.0.11"
@@ -10711,15 +10710,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"p-limit@npm:7.2.0":
-  version: 7.2.0
-  resolution: "p-limit@npm:7.2.0"
-  dependencies:
-    yocto-queue: "npm:^1.2.1"
-  checksum: 10/ea1cae6e8bbf84a65cc832e4d6a802ec34902bfe0da2fba0c6fadb72f0c51d48db67b7fb2df8433dde5f4a970cf482b9c2cb4edbfa8cfadd7f4341c6fdb38a5d
-  languageName: node
-  linkType: hard
-
 "p-limit@npm:^3.0.2":
   version: 3.1.0
   resolution: "p-limit@npm:3.1.0"
@@ -13294,13 +13284,6 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 10/f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
-  languageName: node
-  linkType: hard
-
-"yocto-queue@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "yocto-queue@npm:1.2.1"
-  checksum: 10/0843d6c2c0558e5c06e98edf9c17942f25c769e21b519303a5c2adefd5b738c9b2054204dc856ac0cd9d134b1bc27d928ce84fd23c9e2423b7e013d5a6f50577
   languageName: node
   linkType: hard
 

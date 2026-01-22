@@ -1,5 +1,5 @@
 export type OppgaveFilterStatistikk = Readonly<{
   aktive: number;
-  tilgjenglige: number;
+  tilgjengelige: number;
   tidspunkt: string;
 }>;

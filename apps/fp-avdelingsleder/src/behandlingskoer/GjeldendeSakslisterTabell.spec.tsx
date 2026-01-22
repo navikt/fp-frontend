@@ -25,7 +25,7 @@ describe('GjeldendeSakslisterTabell', () => {
     expect(await screen.findByText('Ny liste')).toBeInTheDocument();
   });
 
-  it('skal vise antall saksbehanlder og oppgaver for kø', async () => {
+  it('skal vise antall saksbehandlere og oppgaver for kø', async () => {
     applyRequestHandlers(TabellNårDetFinnesEnBehandlingskø.parameters['msw'] as MswParameters['msw']);
     render(<TabellNårDetFinnesEnBehandlingskø />);
     const rows = await screen.findAllByRole('row');
@@ -49,7 +49,7 @@ describe('GjeldendeSakslisterTabell', () => {
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
     // Klikk på graf-ikonet (index 1)
-    await userEvent.click(screen.getAllByRole('button')[1]!);
+    await userEvent.click(screen.getByTitle('Vis oppgave graf'));
 
     expect(await screen.findByText('Antall oppgaver')).toBeInTheDocument();
 

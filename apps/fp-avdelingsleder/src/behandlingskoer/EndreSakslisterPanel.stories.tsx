@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import type { OppgaveFilterStatistikk } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, urlEncodeNorskeBokstaver, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
@@ -11,6 +10,8 @@ import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
 
 import messages from '../../i18n/nb_NO.json';
+import dayjs from 'dayjs';
+import type { OppgaveFilterStatistikk } from '@navikt/fp-los-felles';
 
 const withIntl = getIntlDecorator(messages);
 
@@ -40,7 +41,7 @@ const SAKSLISTER = [
     ],
     gjeldendeStatistikk: {
       alleOppgaver: 33,
-      tilgjengligeOppgaver: 25,
+      tilgjengeligeOppgaver: 25,
     },
   },
   {
@@ -68,41 +69,39 @@ const SAKSLISTER = [
     ],
     gjeldendeStatistikk: {
       alleOppgaver: 12,
-      tilgjengligeOppgaver: 8,
+      tilgjengeligeOppgaver: 8,
     },
   },
 ] satisfies SakslisteAvdeling[];
 
 // Hjelpefunksjon for relative datoer
-const minusHours = (hours: number): string => {
-  const date = new Date();
-  date.setHours(date.getHours() - hours);
-  return date.toISOString();
+const getTidspunktForAntallTimerSiden = (hours: number): string => {
+  return dayjs().subtract(hours, 'hour').toISOString();
 };
 
 const OPPGAVE_FILTER_STATISTIKK: OppgaveFilterStatistikk[] = [
-  { tidspunkt: minusHours(43), aktive: 21, tilgjenglige: 5 },
-  { tidspunkt: minusHours(42), aktive: 21, tilgjenglige: 4 },
-  { tidspunkt: minusHours(41), aktive: 21, tilgjenglige: 6 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(43), aktive: 21, tilgjengelige: 5 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(42), aktive: 21, tilgjengelige: 4 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(41), aktive: 21, tilgjengelige: 6 },
   // gap på ~13 timer
-  { tidspunkt: minusHours(28), aktive: 19, tilgjenglige: 8 },
-  { tidspunkt: minusHours(27), aktive: 19, tilgjenglige: 8 },
-  { tidspunkt: minusHours(26), aktive: 19, tilgjenglige: 6 },
-  { tidspunkt: minusHours(25), aktive: 18, tilgjenglige: 3 },
-  { tidspunkt: minusHours(24), aktive: 18, tilgjenglige: 1 },
-  { tidspunkt: minusHours(23), aktive: 24, tilgjenglige: 5 },
-  { tidspunkt: minusHours(22), aktive: 27, tilgjenglige: 7 },
-  { tidspunkt: minusHours(21), aktive: 27, tilgjenglige: 7 },
-  { tidspunkt: minusHours(20), aktive: 25, tilgjenglige: 9 },
-  { tidspunkt: minusHours(19), aktive: 21, tilgjenglige: 5 },
-  { tidspunkt: minusHours(18), aktive: 18, tilgjenglige: 3 },
-  { tidspunkt: minusHours(17), aktive: 18, tilgjenglige: 6 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(28), aktive: 19, tilgjengelige: 8 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(27), aktive: 19, tilgjengelige: 8 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(26), aktive: 19, tilgjengelige: 6 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(25), aktive: 18, tilgjengelige: 3 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(24), aktive: 18, tilgjengelige: 1 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(23), aktive: 24, tilgjengelige: 5 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(22), aktive: 27, tilgjengelige: 7 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(21), aktive: 27, tilgjengelige: 7 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(20), aktive: 25, tilgjengelige: 9 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(19), aktive: 21, tilgjengelige: 5 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(18), aktive: 18, tilgjengelige: 3 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(17), aktive: 18, tilgjengelige: 6 },
   // gap på ~13 timer
-  { tidspunkt: minusHours(4), aktive: 20, tilgjenglige: 10 },
-  { tidspunkt: minusHours(3), aktive: 20, tilgjenglige: 9 },
-  { tidspunkt: minusHours(2), aktive: 18, tilgjenglige: 6 },
-  { tidspunkt: minusHours(1), aktive: 21, tilgjenglige: 4 },
-  { tidspunkt: minusHours(0), aktive: 29, tilgjenglige: 9 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(4), aktive: 20, tilgjengelige: 10 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(3), aktive: 20, tilgjengelige: 9 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(2), aktive: 18, tilgjengelige: 6 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(1), aktive: 21, tilgjengelige: 4 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(0), aktive: 29, tilgjengelige: 9 },
 ];
 
 const meta = {

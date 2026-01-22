@@ -182,18 +182,11 @@ export const GjeldendeSakslisterTabell = ({
                 <Table.DataCell>{saksliste.navn}</Table.DataCell>
                 <Table.DataCell>{formatStonadstyper(fagsakYtelseTyper, saksliste.fagsakYtelseTyper)}</Table.DataCell>
                 <Table.DataCell>{formatBehandlingstyper(behandlingTyper, saksliste.behandlingTyper)}</Table.DataCell>
-                <Table.DataCell>
-                  {saksliste.saksbehandlerIdenter.length > 0 ? saksliste.saksbehandlerIdenter.length : '0'}
-                </Table.DataCell>
+                <Table.DataCell>{saksliste.saksbehandlerIdenter.length}</Table.DataCell>
                 <Table.DataCell>{saksliste.gjeldendeStatistikk?.alleOppgaver ?? '-'}</Table.DataCell>
-                <Table.DataCell>{saksliste.gjeldendeStatistikk?.tilgjengligeOppgaver ?? '-'}</Table.DataCell>
+                <Table.DataCell>{saksliste.gjeldendeStatistikk?.tilgjengeligeOppgaver ?? '-'}</Table.DataCell>
                 <Table.DataCell>
-                  <OppgaverGrafDialog
-                    valgtSakslisteId={saksliste.sakslisteId}
-                    valgtAvdelingEnhet={valgtAvdelingEnhet}
-                    sakslisteNavn={saksliste.navn}
-                    harStatistikk={saksliste.gjeldendeStatistikk != null}
-                  />
+                  <OppgaverGrafDialog saksliste={saksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
                 </Table.DataCell>
                 <Table.DataCell>
                   <div
