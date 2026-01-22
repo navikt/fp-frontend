@@ -1,8 +1,10 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
+import type { OppgaveFilterStatistikk } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, urlEncodeNorskeBokstaver, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
@@ -10,8 +12,6 @@ import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
 
 import messages from '../../i18n/nb_NO.json';
-import dayjs from 'dayjs';
-import type { OppgaveFilterStatistikk } from '@navikt/fp-los-felles';
 
 const withIntl = getIntlDecorator(messages);
 
