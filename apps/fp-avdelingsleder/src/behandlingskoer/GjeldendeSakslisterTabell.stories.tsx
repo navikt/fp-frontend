@@ -31,7 +31,7 @@ const meta = {
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.post(LosUrl.SLETT_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
         http.get(urlEncodeNorskeBokstaver(LosUrl.OPPGAVE_FILTER_STATISTIKK), () =>
-          HttpResponse.json(OPPGAVE_KØ_STATISTIKK),
+          HttpResponse.json(OPPGAVE_FILTER_STATISTIKK),
         ),
       ],
     },
@@ -99,7 +99,7 @@ const minusHours = (hours: number): string => {
   return date.toISOString();
 };
 
-const OPPGAVE_KØ_STATISTIKK: OppgaveFilterStatistikk[] = [
+const OPPGAVE_FILTER_STATISTIKK: OppgaveFilterStatistikk[] = [
   // gap på ~13 timer
   { tidspunkt: minusHours(43), aktive: 21, tilgjenglige: 5 },
   { tidspunkt: minusHours(42), aktive: 21, tilgjenglige: 4 },

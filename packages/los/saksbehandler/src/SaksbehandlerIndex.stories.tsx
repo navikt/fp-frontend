@@ -6,7 +6,6 @@ import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
-import type { OppgaveFilterStatistikk } from '../../felles/src/typer/oppgaveFilterStatistikk.ts';
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
 import { type Oppgave, type OppgaveMedStatus } from './typer/oppgaveTsType';
@@ -50,7 +49,7 @@ const SAKSLISTER = [
     andreKriterier: [
       {
         andreKriterierType: 'TIL_BESLUTTER',
-        inkluder: true,
+        inkluder: false,
       },
     ],
   },
@@ -177,39 +176,6 @@ const BEHANDLEDE_OPPGAVER = [
   } as OppgaveMedStatus,
 ];
 
-// Hjelpefunksjon for relative datoer
-const minusHours = (hours: number): string => {
-  const date = new Date();
-  date.setHours(date.getHours() - hours);
-  return date.toISOString();
-};
-
-const OPPGAVE_KØ_STATISTIKK: OppgaveFilterStatistikk[] = [
-  // gap på ~13 timer
-  { tidspunkt: minusHours(43), aktive: 21, tilgjenglige: 5 },
-  { tidspunkt: minusHours(42), aktive: 21, tilgjenglige: 4 },
-  { tidspunkt: minusHours(41), aktive: 21, tilgjenglige: 6 },
-  // gap på ~13 timer
-  { tidspunkt: minusHours(28), aktive: 19, tilgjenglige: 8 },
-  { tidspunkt: minusHours(27), aktive: 19, tilgjenglige: 8 },
-  { tidspunkt: minusHours(26), aktive: 19, tilgjenglige: 6 },
-  { tidspunkt: minusHours(25), aktive: 18, tilgjenglige: 3 },
-  { tidspunkt: minusHours(24), aktive: 18, tilgjenglige: 1 },
-  { tidspunkt: minusHours(23), aktive: 24, tilgjenglige: 5 },
-  { tidspunkt: minusHours(22), aktive: 27, tilgjenglige: 7 },
-  { tidspunkt: minusHours(21), aktive: 27, tilgjenglige: 7 },
-  { tidspunkt: minusHours(20), aktive: 25, tilgjenglige: 9 },
-  { tidspunkt: minusHours(19), aktive: 21, tilgjenglige: 5 },
-  { tidspunkt: minusHours(18), aktive: 18, tilgjenglige: 3 },
-  { tidspunkt: minusHours(17), aktive: 18, tilgjenglige: 6 },
-  // gap på ~13 timer
-  { tidspunkt: minusHours(4), aktive: 20, tilgjenglige: 10 },
-  { tidspunkt: minusHours(3), aktive: 20, tilgjenglige: 9 },
-  { tidspunkt: minusHours(2), aktive: 18, tilgjenglige: 6 },
-  { tidspunkt: minusHours(1), aktive: 21, tilgjenglige: 4 },
-  { tidspunkt: minusHours(0), aktive: 29, tilgjenglige: 9 },
-];
-
 const meta = {
   title: 'SaksbehandlerIndex',
   decorators: [withQueryClient],
@@ -244,7 +210,6 @@ const meta = {
         http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
         http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
-        http.get(LosUrl.OPPGAVE_KØ_STATISTIKK, () => HttpResponse.json(OPPGAVE_KØ_STATISTIKK)),
       ],
     },
   },
