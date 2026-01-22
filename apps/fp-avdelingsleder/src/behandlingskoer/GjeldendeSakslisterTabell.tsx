@@ -1,4 +1,4 @@
-import { type ReactElement, useEffect, useRef, useState } from 'react';
+import { type KeyboardEvent, type ReactElement, useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
@@ -111,7 +111,7 @@ export const GjeldendeSakslisterTabell = ({
     }
   };
 
-  const lagNySakslisteFn = (event: React.KeyboardEvent<HTMLAnchorElement>): void => {
+  const lagNySakslisteFn = (event: KeyboardEvent<HTMLAnchorElement>): void => {
     if (event.key === 'Enter') {
       lagNySaksliste();
     }
