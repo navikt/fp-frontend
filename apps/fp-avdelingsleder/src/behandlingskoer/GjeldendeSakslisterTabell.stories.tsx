@@ -92,32 +92,6 @@ export const TabellNårDetFinnesEnBehandlingskø: Story = {
   },
 };
 
-export const TabellNårDetLasterOppgaver: Story = {
-  args: {
-    sakslister: [
-      {
-        sakslisteId: 1,
-        navn: 'Saksliste 1',
-        sorteringTyper: [],
-        saksbehandlerIdenter: ['R23233'],
-        gjeldendeStatistikk: {
-          alleOppgaver: 33,
-          tilgjengligeOppgaver: 25,
-        },
-      },
-    ],
-  },
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.post(LosUrl.SLETT_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
-        http.get(LosUrl.OPPGAVE_FILTER_STATISTIKK, () => HttpResponse.json(OPPGAVE_KØ_STATISTIKK)),
-      ],
-    },
-  },
-};
-
 // Hjelpefunksjon for relative datoer
 const minusHours = (hours: number): string => {
   const date = new Date();
