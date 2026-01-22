@@ -1,9 +1,11 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
-import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import type { OppgaveFilterStatistikk } from '@navikt/fp-los-felles';
+import { alleKodeverkLos, getIntlDecorator, urlEncodeNorskeBokstaver, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
@@ -16,7 +18,7 @@ const withIntl = getIntlDecorator(messages);
 const SAKSLISTER = [
   {
     sakslisteId: 1,
-    navn: 'test',
+    navn: 'A00 Hurtig kø',
     saksbehandlerIdenter: [],
     sortering: {
       sorteringType: 'BEHFRIST',
@@ -37,8 +39,70 @@ const SAKSLISTER = [
         inkluder: false,
       },
     ],
+    gjeldendeStatistikk: {
+      alleOppgaver: 33,
+      tilgjengeligeOppgaver: 25,
+    },
+  },
+  {
+    sakslisteId: 2,
+    navn: 'A02 - Registrere papirsøknad',
+    saksbehandlerIdenter: [],
+    sortering: {
+      sorteringType: 'BEHFRIST',
+      fra: 1,
+      til: 4,
+      erDynamiskPeriode: true,
+    },
+    behandlingTyper: ['BT-002'],
+    fagsakYtelseTyper: ['FP'],
+    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+    andreKriterier: [
+      {
+        andreKriterierType: 'TIL_BESLUTTER',
+        inkluder: true,
+      },
+      {
+        andreKriterierType: 'PAPIRSOKNAD',
+        inkluder: false,
+      },
+    ],
+    gjeldendeStatistikk: {
+      alleOppgaver: 12,
+      tilgjengeligeOppgaver: 8,
+    },
   },
 ] satisfies SakslisteAvdeling[];
+
+// Hjelpefunksjon for relative datoer
+const getTidspunktForAntallTimerSiden = (hours: number): string => {
+  return dayjs().subtract(hours, 'hour').toISOString();
+};
+
+const OPPGAVE_FILTER_STATISTIKK: OppgaveFilterStatistikk[] = [
+  { tidspunkt: getTidspunktForAntallTimerSiden(43), aktive: 21, tilgjengelige: 5 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(42), aktive: 21, tilgjengelige: 4 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(41), aktive: 21, tilgjengelige: 6 },
+  // gap på ~13 timer
+  { tidspunkt: getTidspunktForAntallTimerSiden(28), aktive: 19, tilgjengelige: 8 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(27), aktive: 19, tilgjengelige: 8 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(26), aktive: 19, tilgjengelige: 6 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(25), aktive: 18, tilgjengelige: 3 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(24), aktive: 18, tilgjengelige: 1 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(23), aktive: 24, tilgjengelige: 5 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(22), aktive: 27, tilgjengelige: 7 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(21), aktive: 27, tilgjengelige: 7 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(20), aktive: 25, tilgjengelige: 9 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(19), aktive: 21, tilgjengelige: 5 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(18), aktive: 18, tilgjengelige: 3 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(17), aktive: 18, tilgjengelige: 6 },
+  // gap på ~13 timer
+  { tidspunkt: getTidspunktForAntallTimerSiden(4), aktive: 20, tilgjengelige: 10 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(3), aktive: 20, tilgjengelige: 9 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(2), aktive: 18, tilgjengelige: 6 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(1), aktive: 21, tilgjengelige: 4 },
+  { tidspunkt: getTidspunktForAntallTimerSiden(0), aktive: 29, tilgjengelige: 9 },
+];
 
 const meta = {
   title: 'los/avdelingsleder/behandlingskoer/EndreSakslisterPanel',
@@ -50,6 +114,9 @@ const meta = {
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.get(LosUrl.OPPGAVE_ANTALL, () => HttpResponse.json(1)),
         http.get(LosUrl.SAKSLISTER_FOR_AVDELING, () => HttpResponse.json(SAKSLISTER)),
+        http.get(urlEncodeNorskeBokstaver(LosUrl.OPPGAVE_FILTER_STATISTIKK), () =>
+          HttpResponse.json(OPPGAVE_FILTER_STATISTIKK),
+        ),
         http.post(LosUrl.LAGRE_SAKSLISTE_NAVN, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, () => new HttpResponse(null, { status: 200 })),
