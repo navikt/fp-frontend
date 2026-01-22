@@ -6,9 +6,9 @@ import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
+import type { OppgaveFilterStatistikk } from '../../felles/src/typer/oppgaveFilterStatistikk.ts';
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
-import type { OppgaveFilterStatistikk } from '../../felles/src/typer/oppgaveFilterStatistikk.ts';
 import { type Oppgave, type OppgaveMedStatus } from './typer/oppgaveTsType';
 import type { Saksbehandler } from './typer/saksbehandlerTsType';
 import type { Saksliste } from './typer/sakslisteTsType';
@@ -35,10 +35,6 @@ const SAKSLISTER = [
         inkluder: false,
       },
     ],
-    gjeldendeStatistikk: {
-      alleOppgaver: 100,
-      tilgjengligeOppgaver: 75,
-    },
   },
   {
     sakslisteId: 2,
@@ -57,10 +53,6 @@ const SAKSLISTER = [
         inkluder: true,
       },
     ],
-    gjeldendeStatistikk: {
-      alleOppgaver: 35,
-      tilgjengligeOppgaver: 23,
-    },
   },
 ] satisfies Saksliste[];
 

@@ -113,10 +113,6 @@ export const TabellNårDetLasterOppgaver: Story = {
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.post(LosUrl.SLETT_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.OPPGAVE_FILTER_STATISTIKK, () => HttpResponse.json(OPPGAVE_KØ_STATISTIKK)),
-        http.get(LosUrl.OPPGAVE_ANTALL, async () => {
-          await new Promise(resolve => setTimeout(resolve, 5000));
-          return HttpResponse.json({ ledige: 5, reserverte: 3 });
-        }),
       ],
     },
   },

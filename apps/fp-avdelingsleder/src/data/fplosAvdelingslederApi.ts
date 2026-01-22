@@ -1,6 +1,5 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
-import pLimit from 'p-limit';
 
 import type { OppgaveFilterStatistikk, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AlleKodeverkLos, AndreKriterierType } from '@navikt/fp-types';
@@ -125,18 +124,6 @@ export const saksbehandlareForAvdelingOptions = (avdelingEnhet?: string) =>
         .json<SaksbehandlerProfil[]>(),
     initialData: [],
     enabled: !!avdelingEnhet,
-  });
-
-// Limit concurrency to 2 requests at once
-const limit = pLimit(2);
-
-export const oppgaveAntallOptions = (sakslisteId: number, avdelingEnhet: string) =>
-  queryOptions({
-    queryKey: [LosUrl.OPPGAVE_ANTALL, sakslisteId, avdelingEnhet],
-    queryFn: () =>
-      limit(() =>
-        kyExtended.get(LosUrl.OPPGAVE_ANTALL, { searchParams: { sakslisteId, avdelingEnhet } }).json<number>(),
-      ),
   });
 
 export const losKodeverkOptions = () =>
