@@ -67,14 +67,6 @@
   "OppgaverGrafDialog.Overskrift": "Antall oppgaver",
   "OppgaverGrafDialog.Lukk": "Lukk",
 
-  "AktiveOgTilgjengeligeOppgaverGraf.Ledig": "Ledig",
-  "AktiveOgTilgjengeligeOppgaverGraf.Reserverte": "Reserverte",
-  "AktiveOgTilgjengeligeOppgaverGraf.xAkse": "Tid",
-  "AktiveOgTilgjengeligeOppgaverGraf.yAkse": "Antall",
-  "AktiveOgTilgjengeligeOppgaverGraf.SisteDag": "Siste dag",
-  "AktiveOgTilgjengeligeOppgaverGraf.SisteUke": "Siste uke",
-  "AktiveOgTilgjengeligeOppgaverGraf.SisteMåned": "Siste måned",
-
   "AntallOppgaverForSaksliste.HentingAvAntallOppgaverFeilet": "Henting av antall feilet",
   "AntallOppgaverForSaksliste.HentingAvAntallOppgaverHentes": "Henter antall oppgaver for behandlingskøen",
 

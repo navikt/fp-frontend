@@ -1,11 +1,16 @@
 import { useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { ToggleGroup } from '@navikt/ds-react';
 import { ToggleGroupItem } from '@navikt/ds-react/ToggleGroup';
+import { createIntl } from '@navikt/ft-utils';
 
 import { ReactECharts } from '../ReactECharts';
 import type { OppgaveFilterStatistikk } from '../typer/oppgaveFilterStatistikk';
+
+import messages from '../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 enum Tidsintervall {
   DAG = 'dag',
@@ -19,7 +24,6 @@ interface Props {
 
 export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
   const height = 400;
-  const intl = useIntl();
   const aktivLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Ledig' });
   const reserverteLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Reserverte' });
 
@@ -44,7 +48,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
   );
 
   return (
-    <>
+    <RawIntlProvider value={intl}>
       <ToggleGroup size="small" value={tidsintervall} onChange={value => setTidsintervall(value as Tidsintervall)}>
         <ToggleGroupItem value="måned">
           <FormattedMessage id="AktiveOgTilgjengeligeOppgaverGraf.SisteMåned" />
@@ -121,7 +125,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
           color: ['#38a161', '#9ad6bd'],
         }}
       />
-    </>
+    </RawIntlProvider>
   );
 };
 

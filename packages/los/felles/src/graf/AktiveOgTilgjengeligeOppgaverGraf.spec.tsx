@@ -7,7 +7,7 @@ import type { OppgaveFilterStatistikk } from '../typer/oppgaveFilterStatistikk';
 import { AktiveOgTilgjengeligeOppgaverGraf } from './AktiveOgTilgjengeligeOppgaverGraf';
 
 // Mock ReactECharts for å unngå canvas-problemer i tests
-vi.mock('../ReactECharts.tsx', () => ({
+vi.mock('../ReactECharts', () => ({
   ReactECharts: ({ option }: { option: unknown }) => (
     <div data-testid="mock-chart" data-option={JSON.stringify(option)} />
   ),
