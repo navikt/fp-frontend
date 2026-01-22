@@ -6,8 +6,8 @@ import { vi } from 'vitest';
 
 import * as stories from './GjeldendeSakslisterTabell.stories';
 
-vi.mock('./OppgaverGrafDialogBody', () => ({
-  OppgaverGrafDialogBody: () => <div>Mocked Graph</div>,
+vi.mock('@navikt/fp-los-felles', () => ({
+  AktiveOgTilgjengeligeOppgaverGraf: () => <div data-testid="mocked-graph">Mocked Graph</div>,
 }));
 
 const { TabellNårDetIkkeFinnesBehandlingskøer, TabellNårDetFinnesEnBehandlingskø } = composeStories(stories);
