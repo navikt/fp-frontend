@@ -89,14 +89,13 @@ export const initFetchOptions = () =>
     queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<InitDataLos>(),
   });
 
-export const getOppgaveFilterStatistikk = (sakslisteId: number, avdelingEnhet: string) =>
+const getOppgaveFilterStatistikk = (sakslisteId: number, avdelingEnhet: string) =>
   kyExtended
     .get(LosUrl.OPPGAVE_FILTER_STATISTIKK, { searchParams: { sakslisteId, avdelingEnhet } })
     .json<OppgaveFilterStatistikk[]>();
 
 export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number, valgtAvdelingEnhet: string) =>
   queryOptions({
-    ///fplos/api/saksbehandler/nøkkeltall/antall-kø?valgtSakslisteId=12345
     queryKey: [LosUrl.OPPGAVE_FILTER_STATISTIKK, valgtSakslisteId, valgtAvdelingEnhet],
     queryFn: () => getOppgaveFilterStatistikk(valgtSakslisteId, valgtAvdelingEnhet),
   });
