@@ -26,7 +26,7 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
           disabled={saksliste.gjeldendeStatistikk == null}
         ></Button>
       </Dialog.Trigger>
-      <Dialog.Popup>
+      <Dialog.Popup onClick={(e) => e.stopPropagation()}>
         <Dialog.Header>
           <Dialog.Title>
             <FormattedMessage id="OppgaverGrafDialog.Overskrift" />
