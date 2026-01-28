@@ -18,26 +18,26 @@
     "connect-timeout": "^1.9.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "express-http-proxy": "^2.1.2",
     "helmet": "^8.1.0",
     "morgan": "^1.10.1",
-    "winston": "^3.18.3"
+    "winston": "^3.19.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.1",
+    "@eslint/js": "9.39.2",
     "@types/connect-timeout": "^1.9.0",
     "@types/cors": "^2.8.19",
-    "@types/express": "5.0.5",
+    "@types/express": "5.0.6",
     "@types/express-http-proxy": "^1.6.7",
     "@types/morgan": "1.9.10",
-    "eslint": "9.39.1",
-    "eslint-plugin-prettier": "5.5.4",
+    "eslint": "9.39.2",
+    "eslint-plugin-prettier": "5.5.5",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-unicorn": "62.0.0",
-    "knip": "5.70.2",
-    "prettier": "3.7.3",
+    "knip": "5.82.1",
+    "prettier": "3.8.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.48.0"
+    "typescript-eslint": "8.53.1"
   }
 }
