@@ -1315,6 +1315,51 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/cli-lib@npm:8.1.0":
+  version: 8.1.0
+  resolution: "@formatjs/cli-lib@npm:8.1.0"
+  dependencies:
+    "@formatjs/icu-messageformat-parser": "npm:3.2.1"
+    "@formatjs/icu-skeleton-parser": "npm:2.0.7"
+    "@formatjs/ts-transformer": "npm:4.1.0"
+    "@types/estree": "npm:^1.0.6"
+    "@types/fs-extra": "npm:^11.0.4"
+    "@types/node": "npm:^22.0.0"
+    chalk: "npm:^4.1.2"
+    commander: "npm:^14.0.0"
+    fast-glob: "npm:^3.3.2"
+    fs-extra: "npm:^11.2.0"
+    json-stable-stringify: "npm:^1.3.0"
+    loud-rejection: "npm:^2"
+    tslib: "npm:^2.8.0"
+    typescript: "npm:^5.6.0"
+  peerDependencies:
+    "@glimmer/syntax": ^0.95.0
+    "@vue/compiler-core": ^3.5.12
+    content-tag: 4
+    ember-template-recast: ^6.1.5
+    vue: ^3.5.12
+  peerDependenciesMeta:
+    "@glimmer/env":
+      optional: true
+    "@glimmer/reference":
+      optional: true
+    "@glimmer/syntax":
+      optional: true
+    "@glimmer/validator":
+      optional: true
+    "@vue/compiler-core":
+      optional: true
+    content-tag:
+      optional: true
+    ember-template-recast:
+      optional: true
+    vue:
+      optional: true
+  checksum: 10/96ca95034fb40215f808e930593dac7fbffec3cb2cbc64ed5be240cc139d378dd2bedf7a5bf7480ea2e76a768198035a15684315e5f514c916881ca900c66351
+  languageName: node
+  linkType: hard
+
 "@formatjs/cli-lib@npm:8.2.1":
   version: 8.2.1
   resolution: "@formatjs/cli-lib@npm:8.2.1"
@@ -1357,6 +1402,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/ecma402-abstract@npm:3.0.7":
+  version: 3.0.7
+  resolution: "@formatjs/ecma402-abstract@npm:3.0.7"
+  dependencies:
+    "@formatjs/fast-memoize": "npm:3.0.2"
+    "@formatjs/intl-localematcher": "npm:0.7.4"
+    decimal.js: "npm:^10.4.3"
+    tslib: "npm:^2.8.0"
+  checksum: 10/a79f43d3c3e5301722d3288806e6910d8598e2f0c849775398f6e20bac78b568db9c03b6605c9db8eb3aa80dff4fc260cb153e67b167924a547e0d29a1b2d8c3
+  languageName: node
+  linkType: hard
+
 "@formatjs/ecma402-abstract@npm:3.0.8":
   version: 3.0.8
   resolution: "@formatjs/ecma402-abstract@npm:3.0.8"
@@ -1381,6 +1438,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/fast-memoize@npm:3.0.2":
+  version: 3.0.2
+  resolution: "@formatjs/fast-memoize@npm:3.0.2"
+  dependencies:
+    tslib: "npm:^2.8.0"
+  checksum: 10/381afd816ca67d7e3e333247f1115ede11420226d72f109c54e8300741212b9bb08a6bacec17d0f0f2172789e39d0cef61fcae0a484e1dff2e9c33eee930694e
+  languageName: node
+  linkType: hard
+
 "@formatjs/fast-memoize@npm:3.0.3":
   version: 3.0.3
   resolution: "@formatjs/fast-memoize@npm:3.0.3"
@@ -1396,6 +1462,17 @@ __metadata:
   dependencies:
     tslib: "npm:^2.8.1"
   checksum: 10/700dfd0a10d20d8cb7427406127f78612a696e4942d38a8f153d82ca213f26bd0616d01a29957f194688887551595455eb0f629c2ce36d964a66ba15815afde9
+  languageName: node
+  linkType: hard
+
+"@formatjs/icu-messageformat-parser@npm:3.2.1":
+  version: 3.2.1
+  resolution: "@formatjs/icu-messageformat-parser@npm:3.2.1"
+  dependencies:
+    "@formatjs/ecma402-abstract": "npm:3.0.7"
+    "@formatjs/icu-skeleton-parser": "npm:2.0.7"
+    tslib: "npm:^2.8.0"
+  checksum: 10/4e853881ad10472547e893648474841f7943b16c0262c9db7e92fd29d49214da0b5723e48f53872ad3673b3f4a9d11c6683e102f6a864efc78d3a4203a451dff
   languageName: node
   linkType: hard
 
@@ -1421,6 +1498,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/icu-skeleton-parser@npm:2.0.7":
+  version: 2.0.7
+  resolution: "@formatjs/icu-skeleton-parser@npm:2.0.7"
+  dependencies:
+    "@formatjs/ecma402-abstract": "npm:3.0.7"
+    tslib: "npm:^2.8.0"
+  checksum: 10/4a496854f877af04f87ac9bcf36593bfe4ec949a58a695c40c87dcbfff4a15473941448d6812644ab6fc832fc96408d6374015de74d3842cb03654f136b783d1
+  languageName: node
+  linkType: hard
+
 "@formatjs/icu-skeleton-parser@npm:2.0.8":
   version: 2.0.8
   resolution: "@formatjs/icu-skeleton-parser@npm:2.0.8"
@@ -1438,6 +1525,16 @@ __metadata:
     "@formatjs/ecma402-abstract": "npm:3.1.0"
     tslib: "npm:^2.8.1"
   checksum: 10/e2934a4eef60118185075b63e84ea04703f55090d80ec414999f9cfd00615101e305072f91e2c87a30c07abc80f267c52e648ba4d3a5b312775e56f459203cef
+  languageName: node
+  linkType: hard
+
+"@formatjs/intl-localematcher@npm:0.7.4":
+  version: 0.7.4
+  resolution: "@formatjs/intl-localematcher@npm:0.7.4"
+  dependencies:
+    "@formatjs/fast-memoize": "npm:3.0.2"
+    tslib: "npm:^2.8.0"
+  checksum: 10/e2eb759628b35b45d95bddfc33bc8e985afd5d17c3d22bd243ea537fcb3b22eba2bbd8ce9e0f5cd6e29c3b514fe077ba99f5e7e5a1730983c9bfad649dc76985
   languageName: node
   linkType: hard
 
@@ -1494,6 +1591,25 @@ __metadata:
     typescript:
       optional: true
   checksum: 10/2bd1d4920ca699f7cd79c7d5c83c5f34c8b3723524a88d9e22a694eaf1595ddb518c2d53714e32a83a21b1115d08b9b1c18ac796d4301531a92f347585a574ae
+  languageName: node
+  linkType: hard
+
+"@formatjs/ts-transformer@npm:4.1.0":
+  version: 4.1.0
+  resolution: "@formatjs/ts-transformer@npm:4.1.0"
+  dependencies:
+    "@formatjs/icu-messageformat-parser": "npm:3.2.1"
+    "@types/node": "npm:^22.0.0"
+    chalk: "npm:^4.1.2"
+    json-stable-stringify: "npm:^1.3.0"
+    tslib: "npm:^2.8.0"
+    typescript: "npm:^5.6.0"
+  peerDependencies:
+    ts-jest: ^29
+  peerDependenciesMeta:
+    ts-jest:
+      optional: true
+  checksum: 10/8f0be8e36be83593cfa4d7190962639e6488a81fe61c3880fb91152ff09eac784b99b4dbb3a01b08eed1340770e5381d4d183944152a8cde5409aa04c4d029f7
   languageName: node
   linkType: hard
 
@@ -1899,7 +2015,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-app-felles@workspace:packages/app-felles"
   dependencies:
-    "@formatjs/cli-lib": "npm:8.2.1"
+    "@formatjs/cli-lib": "npm:8.1.0"
     "@navikt/ds-react": "npm:8.1.0"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -6044,7 +6160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.19.5":
+"@types/node@npm:^22.0.0, @types/node@npm:^22.19.5":
   version: 22.19.7
   resolution: "@types/node@npm:22.19.7"
   dependencies:
@@ -8688,7 +8804,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"fs-extra@npm:^11.3.3":
+"fs-extra@npm:^11.2.0, fs-extra@npm:^11.3.3":
   version: 11.3.3
   resolution: "fs-extra@npm:11.3.3"
   dependencies:
