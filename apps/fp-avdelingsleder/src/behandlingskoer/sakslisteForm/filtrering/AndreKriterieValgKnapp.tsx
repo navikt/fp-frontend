@@ -25,12 +25,14 @@ type AvOgPåKnapperProps = {
   }) => void;
 };
 
-export const AvOgPåKnapper = ({ andreKriterierType, lagreAndreKriterier }: AvOgPåKnapperProps): ReactElement => {
+export const AndreKriterieValgKnapp = ({
+  andreKriterierType,
+  lagreAndreKriterier,
+}: AvOgPåKnapperProps): ReactElement => {
   const { setValue, watch } = useFormContext<FormValues>();
   const values = watch();
 
-  const inkluder = values[`${andreKriterierType.kode}_inkluder`];
-  const filterStatus = inkluder === undefined ? FilterStatus.OFF : inkluder ? FilterStatus.PLUS : FilterStatus.MINUS;
+  const filterStatus = getFilterStatus(values[`${andreKriterierType.kode}_inkluder`]);
 
   const toggleFilterOn = () => {
     if (filterStatus === FilterStatus.PLUS) {
@@ -110,3 +112,14 @@ const MinusKnapp = ({ filterStatus, toggleFilterOut }: MinusKnappProps): ReactEl
     aria-label="minus"
   />
 );
+
+const getFilterStatus = (inkluder: boolean | undefined): FilterStatus => {
+  switch (inkluder) {
+    case undefined:
+      return FilterStatus.OFF;
+    case true:
+      return FilterStatus.PLUS;
+    case false:
+      return FilterStatus.MINUS;
+  }
+};

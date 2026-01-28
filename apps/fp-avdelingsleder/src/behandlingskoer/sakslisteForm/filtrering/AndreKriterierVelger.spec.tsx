@@ -8,7 +8,7 @@ import * as stories from './AndreKriterierVelger.stories';
 const { Default } = composeStories(stories);
 
 describe('AndreKriterierVelger', () => {
-  it('skal vise checkboxer for arbeid inntekt der Til beslutter er valgt fra før', async () => {
+  it('skal vise pluss/minus-knapper for Arbeid og inntekt der Til beslutter er valgt å inkluderes fra før', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
     expect(await screen.findByText('Arbeid og inntekt')).toBeInTheDocument();

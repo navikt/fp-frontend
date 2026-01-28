@@ -42,7 +42,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
   const queryClient = useQueryClient();
   const intl = useIntl();
 
-  const { mutate: lagreSakslisteSorteringTidsintervallDager } = useMutation({
+  const { mutate: lagreSakslisteSorteringRelativPeriode } = useMutation({
     mutationFn: (valuesToStore: { fra: string | undefined; til: string | undefined; periodefilter: Periodefilter }) =>
       lagreSakslisteSorteringIntervall(
         valgtSakslisteId,
@@ -86,13 +86,13 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
   const tomDatoVerdi = watch('tomDato');
 
   const lagreFra = (nyFraVerdi: string) =>
-    lagreSakslisteSorteringTidsintervallDager({
+    lagreSakslisteSorteringRelativPeriode({
       fra: nyFraVerdi,
       til: tilVerdi,
       periodefilter: periodefilter,
     });
   const lagreTil = (nyTilVerdi: string) =>
-    lagreSakslisteSorteringTidsintervallDager({
+    lagreSakslisteSorteringRelativPeriode({
       fra: fraVerdi,
       til: nyTilVerdi,
       periodefilter: periodefilter,
@@ -123,7 +123,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
                   tomDato: tomDatoVerdi,
                 });
               } else {
-                lagreSakslisteSorteringTidsintervallDager({
+                lagreSakslisteSorteringRelativPeriode({
                   fra: fraVerdi,
                   til: tilVerdi,
                   periodefilter: value as Periodefilter,

@@ -7,7 +7,7 @@ import type { AndreKriterierType } from '@navikt/fp-types';
 
 import { lagreSakslisteAndreKriterier, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import { AvOgPåKnapper } from './AvOgPåKnapper';
+import { AndreKriterieValgKnapp } from './AndreKriterieValgKnapp.tsx';
 
 export type FormValues = { [key in AndreKriterierType]?: boolean } & {
   [K in AndreKriterierType as `${K}_inkluder`]?: boolean;
@@ -52,12 +52,20 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
         <HStack gap="space-8">
           <VStack gap="space-8">
             {andreKriterierTyper.slice(0, half).map(akt => (
-              <AvOgPåKnapper key={akt.kode} andreKriterierType={akt} lagreAndreKriterier={lagreAndreKriterier} />
+              <AndreKriterieValgKnapp
+                key={akt.kode}
+                andreKriterierType={akt}
+                lagreAndreKriterier={lagreAndreKriterier}
+              />
             ))}
           </VStack>
           <VStack gap="space-8">
             {andreKriterierTyper.slice(half).map(akt => (
-              <AvOgPåKnapper key={akt.kode} andreKriterierType={akt} lagreAndreKriterier={lagreAndreKriterier} />
+              <AndreKriterieValgKnapp
+                key={akt.kode}
+                andreKriterierType={akt}
+                lagreAndreKriterier={lagreAndreKriterier}
+              />
             ))}
           </VStack>
         </HStack>
