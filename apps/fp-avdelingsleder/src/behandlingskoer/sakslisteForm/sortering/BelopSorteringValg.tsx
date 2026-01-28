@@ -33,13 +33,16 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
 
   const { mutate: lagreSakslisteSorteringTidsintervallDager } = useMutation({
     mutationFn: (valuesToStore: { fra: string | undefined; til: string | undefined }) =>
-      lagreSakslisteSorteringIntervall(valgtSakslisteId, valuesToStore.fra, valuesToStore.til, valgtAvdelingEnhet),
+      lagreSakslisteSorteringIntervall(
+        valgtSakslisteId,
+        valuesToStore.fra,
+        valuesToStore.til,
+        undefined,
+        valgtAvdelingEnhet,
+      ),
     onSuccess: () => {
       void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
       });
       void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],

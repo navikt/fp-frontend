@@ -9,6 +9,7 @@ import { http, HttpResponse } from 'msw';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosAvdelingslederApi';
+import { Periodefilter } from '../../../typer/sakslisteAvdelingTsType.ts';
 import { SorteringVelger } from './SorteringVelger';
 
 import messages from '../../../../i18n/nb_NO.json';
@@ -25,7 +26,6 @@ const meta = {
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO, () => new HttpResponse(null, { status: 200 })),
       ],
     },
@@ -42,7 +42,7 @@ const meta = {
         til: 3,
         fomDato: '2020-01-10',
         tomDato: '2020-10-01',
-        erDynamiskPeriode: args.erDynamiskPeriode,
+        periodefilter: args.periodefilter,
       },
     });
 
@@ -64,7 +64,7 @@ type Story = StoryObj<typeof meta>;
 export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-002', 'BT-006'],
-    erDynamiskPeriode: false,
+    periodefilter: Periodefilter.FAST_PERIODE,
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
@@ -76,7 +76,7 @@ export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
 export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-002', 'BT-006'],
-    erDynamiskPeriode: true,
+    periodefilter: Periodefilter.RELATIV_PERIODE_DAGER,
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
@@ -87,7 +87,7 @@ export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
 export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-007'],
-    erDynamiskPeriode: false,
+    periodefilter: Periodefilter.FAST_PERIODE,
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },

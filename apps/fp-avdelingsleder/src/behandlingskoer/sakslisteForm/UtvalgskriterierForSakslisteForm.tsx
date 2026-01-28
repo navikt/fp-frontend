@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Box, Heading, HStack, VStack } from '@navikt/ds-react';
+import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { lagreSakslisteNavn, LosUrl } from '../../data/fplosAvdelingslederApi';
-import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
+import { Periodefilter, type SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
 import {
   AndreKriterierVelger,
   type FormValues as AndreKriterierVelgerFormTypes,
@@ -66,12 +66,12 @@ const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling):
   return {
     sakslisteId: valgtSaksliste.sakslisteId,
     navn: valgtSaksliste.navn ?? intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.NyListe' }),
-    sortering: valgtSaksliste.sortering ? valgtSaksliste.sortering.sorteringType : undefined,
-    fomDato: valgtSaksliste.sortering ? valgtSaksliste.sortering.fomDato : undefined,
-    tomDato: valgtSaksliste.sortering ? valgtSaksliste.sortering.tomDato : undefined,
-    fra: valgtSaksliste.sortering ? valgtSaksliste.sortering.fra?.toString() : undefined,
-    til: valgtSaksliste.sortering ? valgtSaksliste.sortering.til?.toString() : undefined,
-    erDynamiskPeriode: valgtSaksliste.sortering ? valgtSaksliste.sortering.erDynamiskPeriode : undefined,
+    sortering: valgtSaksliste.sortering?.sorteringType,
+    fomDato: valgtSaksliste.sortering?.fomDato,
+    tomDato: valgtSaksliste.sortering?.tomDato,
+    fra: valgtSaksliste.sortering?.fra?.toString(),
+    til: valgtSaksliste.sortering?.til?.toString(),
+    periodefilter: valgtSaksliste.sortering?.periodefilter ?? Periodefilter.FAST_PERIODE,
     tilBeslutter,
     ...andreKriterierTyper,
     ...andreKriterierInkluder,
@@ -116,11 +116,18 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
 
   return (
     <RhfForm formMethods={formMethods}>
-      <Box padding="space-20">
-        <VStack gap="space-8">
-          <Heading size="small" level="2">
+      <ExpansionCard
+        className={styles['expansion-card']}
+        size="small"
+        defaultOpen={true}
+        aria-label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Utvalgskriterier' })}
+      >
+        <ExpansionCard.Header>
+          <ExpansionCard.Title>
             <FormattedMessage id="UtvalgskriterierForSakslisteForm.Utvalgskriterier" />
-          </Heading>
+          </ExpansionCard.Title>
+        </ExpansionCard.Header>
+        <ExpansionCard.Content>
           <HStack gap="space-44" wrap={false}>
             <Box borderWidth="1" borderColor="neutral-subtle" padding="space-40">
               <VStack gap="space-24">
@@ -155,12 +162,12 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
               valgtSakslisteId={valgtSaksliste.sakslisteId}
               valgteBehandlingtyper={valgtSaksliste.behandlingTyper}
               valgtAvdelingEnhet={valgtAvdelingEnhet}
-              erDynamiskPeriode={!!values.erDynamiskPeriode}
+              periodefilter={values.periodefilter}
               muligeSorteringer={valgtSaksliste.sorteringTyper}
             />
           </HStack>
-        </VStack>
-      </Box>
+        </ExpansionCard.Content>
+      </ExpansionCard>
     </RhfForm>
   );
 };

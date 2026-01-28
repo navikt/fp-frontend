@@ -32,9 +32,6 @@ export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }:
         queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
       void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
-      });
-      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
       });
     },

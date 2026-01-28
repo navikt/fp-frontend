@@ -86,10 +86,10 @@ export const TabellNårDetFinnesEnBehandlingskø: Story = {
         gjeldendeStatistikk: {
           alleOppgaver: 33,
           tilgjengeligeOppgaver: 25,
+          behandlingerPåVent: 10,
         },
       },
     ],
-    oppgaverForAvdelingAntall: 1,
   },
 };
 
@@ -123,4 +123,3 @@ const OPPGAVE_FILTER_STATISTIKK: OppgaveFilterStatistikk[] = [
   { tidspunkt: getTidspunktForAntallTimerSiden(1), aktive: 21, tilgjengelige: 4 },
   { tidspunkt: getTidspunktForAntallTimerSiden(0), aktive: 29, tilgjengelige: 9 },
 ];
-

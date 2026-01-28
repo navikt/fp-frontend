@@ -13,7 +13,7 @@ import type { OppgaverForForsteStonadsdagUkeMnd } from '../typer/oppgaverForFors
 import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import type { Reservasjon } from '../typer/reservasjonTsType';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
-import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
+import { Periodefilter, type SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 
 export type InitDataLos = {
   innloggetBruker: InnloggetBruker;
@@ -41,7 +41,6 @@ export const LosUrl = {
   KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
   INIT_FETCH: wrapUrl('/fplos/api/avdelingsleder/init-fetch'),
   SAKSBEHANDLERE_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
-  OPPGAVE_AVDELING_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/avdelingantall'),
   SAKSLISTER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/sakslister'),
   OPPRETT_NY_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister'),
   OPPGAVE_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/antall'),
@@ -49,9 +48,6 @@ export const LosUrl = {
   LAGRE_SAKSLISTE_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/sakslister/saksbehandler'),
   LAGRE_SAKSLISTE_SORTERING: wrapUrl('/fplos/api/avdelingsleder/sakslister/sortering'),
   LAGRE_SAKSLISTE_SORTERING_INTERVALL: wrapUrl('/fplos/api/avdelingsleder/sakslister/sortering-numerisk-intervall'),
-  LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE: wrapUrl(
-    '/fplos/api/avdelingsleder/sakslister/sortering-tidsintervall-type',
-  ),
   LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO: wrapUrl(
     '/fplos/api/avdelingsleder/sakslister/sortering-tidsintervall-dato',
   ),
@@ -98,12 +94,6 @@ export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number, valgtAv
   queryOptions({
     queryKey: [LosUrl.OPPGAVE_FILTER_STATISTIKK, valgtSakslisteId, valgtAvdelingEnhet],
     queryFn: () => getOppgaveFilterStatistikk(valgtSakslisteId, valgtAvdelingEnhet),
-  });
-
-export const oppgaverForAvdelingAntallOptions = (avdelingEnhet: string) =>
-  queryOptions({
-    queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL, avdelingEnhet],
-    queryFn: () => kyExtended.get(LosUrl.OPPGAVE_AVDELING_ANTALL, { searchParams: { avdelingEnhet } }).json<number>(),
   });
 
 export const sakslisterForAvdelingOptions = (avdelingEnhet: string) =>
@@ -222,16 +212,12 @@ export const lagreSakslisteSorteringIntervall = (
   sakslisteId: number,
   fra: string | undefined,
   til: string | undefined,
+  periodefilter: Periodefilter | undefined,
   avdelingEnhet: string,
 ) =>
   kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, { json: { sakslisteId, fra, til, avdelingEnhet } })
-    .json();
-
-export const lagreSakslisteSorteringDynamiskPeriode = (sakslisteId: number, avdelingEnhet: string) =>
-  kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE, {
-      json: { sakslisteId, avdelingEnhet },
+    .post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, {
+      json: { sakslisteId, fra, til, periodefilter, avdelingEnhet },
     })
     .json();
 
