@@ -91,7 +91,7 @@ const formaterFeilmeldinger = (
   const feilmeldinger: Feilmelding[] = [];
 
   if (queryStringFeilmeldinger.errorcode) {
-    addIfNotExists(feilmeldinger, { melding: intl.formatMessage({ id: queryStringFeilmeldinger.errorcode }) });
+    addIfNotExists(feilmeldinger, { melding: queryStringFeilmeldinger.errorcode });
   }
   if (queryStringFeilmeldinger.errormessage) {
     addIfNotExists(feilmeldinger, { melding: queryStringFeilmeldinger.errormessage });
