@@ -168,37 +168,37 @@ export const TilkjentYtelse = ({
       </Timeline>
       <HStack gap="space-8" justify="end">
         <Button
+          data-color="neutral"
           size="small"
           icon={<PlusIcon aria-hidden />}
           onClick={zoomIn}
-          variant="primary-neutral"
+          variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomInn' })}
-        />
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomInn' })} />
         <Button
+          data-color="neutral"
           size="small"
           icon={<MinusIcon aria-hidden />}
           onClick={zoomOut}
-          variant="primary-neutral"
+          variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomUt' })}
-        />
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomUt' })} />
         <Button
+          data-color="neutral"
           size="small"
           icon={<ArrowLeftIcon aria-hidden />}
           onClick={goBackward}
-          variant="primary-neutral"
+          variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilVenstre' })}
-        />
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilVenstre' })} />
         <Button
+          data-color="neutral"
           size="small"
           icon={<ArrowRightIcon aria-hidden />}
           onClick={goForward}
-          variant="primary-neutral"
+          variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilHogre' })}
-        />
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilHogre' })} />
       </HStack>
       {valgtPeriode && (
         <TilkjentYtelseTimelineData

@@ -21,10 +21,10 @@
   "dependencies": {
     "@navikt/fp-modal-sett-pa-vent": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-utils": "3.10.0",
+    "@navikt/ft-utils": "3.11.0",
     "dayjs": "1.11.19",
     "react": "19.2.3",
-    "react-intl": "8.0.10"
+    "react-intl": "8.1.1"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
@@ -34,12 +34,12 @@
     "@storybook/react": "10.1.11",
     "@storybook/react-vite": "10.1.11",
     "@testing-library/dom": "10.4.1",
-    "@testing-library/react": "16.3.1",
+    "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "eslint": "9.39.2",
     "storybook": "10.1.11",
     "typescript": "5.9.3",
-    "vite": "7.3.0",
-    "vitest": "4.0.16"
+    "vite": "7.3.1",
+    "vitest": "4.0.17"
   }
 }

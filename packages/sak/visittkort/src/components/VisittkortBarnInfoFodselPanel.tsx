@@ -75,10 +75,10 @@ export const VisittkortBarnInfoFodselPanel = ({ familiehendelse }: Props) => {
       </BodyShort>
       {dødfødsel && (
         <Tag
-          variant="neutral"
+          data-color="neutral"
+          variant="outline"
           size="small"
-          title={intl.formatMessage({ id: 'VisittkortBarnInfoFodselPanel.DodTittel' })}
-        >
+          title={intl.formatMessage({ id: 'VisittkortBarnInfoFodselPanel.DodTittel' })}>
           <FormattedMessage id="VisittkortBarnInfoFodselPanel.Dod" />
         </Tag>
       )}

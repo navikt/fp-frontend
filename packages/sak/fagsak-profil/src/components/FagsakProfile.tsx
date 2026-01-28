@@ -5,7 +5,7 @@ import { BodyShort, Heading, HStack, Tag, Tooltip, VStack } from '@navikt/ds-rea
 
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
-import { SidePanelProfileKnapp } from './SidePanelProfileKnapp.tsx';
+import { SidePanelProfileKnapp } from './SidePanelProfileKnapp';
 
 const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean => {
   const erForeldrepenger = saksKode === 'FP';
@@ -54,7 +54,7 @@ export const FagsakProfile = ({
             content={intl.formatMessage({ id: 'FagsakProfile.Dekningsgrad' }, { dekningsgrad })}
             placement="bottom"
           >
-            <Tag variant="info">{`${dekningsgrad}%`}</Tag>
+            <Tag data-color="info" variant="outline">{`${dekningsgrad}%`}</Tag>
           </Tooltip>
         )}
       </HStack>
@@ -67,7 +67,7 @@ export const FagsakProfile = ({
               content={intl.formatMessage({ id: 'FagsakProfile.FagsakMarkering' }, { tekst })}
               placement="bottom"
             >
-              <Tag size="small" variant="alt1">
+              <Tag data-color="meta-purple" size="small" variant="outline">
                 {tekst}
               </Tag>
             </Tooltip>

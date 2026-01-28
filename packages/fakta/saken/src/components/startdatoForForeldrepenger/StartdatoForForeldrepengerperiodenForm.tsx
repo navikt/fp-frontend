@@ -7,6 +7,7 @@ import { BodyShort, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
+import { capitalizeFirstLetter } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -22,11 +23,6 @@ const maxLength1500 = maxLength(1500);
 type FormValues = {
   startdatoFraSoknad?: string;
   begrunnelse?: string;
-};
-
-const capitalizeFirstLetter = (landNavn: string): string => {
-  const string = landNavn.toLowerCase();
-  return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 const buildInitialValues = (ytelseFordeling: Ytelsefordeling, aksjonspunkt?: Aksjonspunkt): FormValues => ({

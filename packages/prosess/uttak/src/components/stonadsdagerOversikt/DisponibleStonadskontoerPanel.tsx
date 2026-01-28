@@ -151,7 +151,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
       </div>
       {valgtKonto && sorterteAktiviteter && sorterteAktiviteter.length > 0 && (
         <div className={styles['visKonto']}>
-          <VStack gap="4">
+          <VStack gap="space-16">
             {valgtKonto.kontoReduksjoner?.annenForelderEøsUttak && (
               <FormattedMessage
                 id="TimeLineInfo.KontoReduksjonerEøs"

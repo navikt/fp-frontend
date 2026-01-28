@@ -127,7 +127,7 @@ export const TilretteleggingPeriodeTabellRad = ({
         {utledTypeTekst(intl, stillingsprosentArbeidsforhold, arbeidsforhold, tilrettelegging)}
       </Table.DataCell>
       <Table.DataCell>
-        <Tag size="small" variant="neutral-moderate">
+        <Tag data-color="neutral" size="small" variant="moderate">
           {utledKilde(intl, tilrettelegging)}
         </Tag>
       </Table.DataCell>

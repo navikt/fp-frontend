@@ -23,10 +23,10 @@ export const SakDetaljer = ({ sak }: Props) => {
   const famTekst = utledFamileihendelsetekst(sak.familieHendelseJf);
   const intl = useIntl();
   return (
-    <HStack className={styles['sakContainer']} gap="0 4" align="center" wrap={false}>
+    <HStack className={styles['sakContainer']} gap="space-0 space-16" align="center" wrap={false}>
       <div>
         <VStack gap="space-4">
-          <HStack gap="0 2" align="center">
+          <HStack gap="space-0 space-8" align="center">
             <Label>
               <FormattedMessage id="Journal.Sak.Ytelse" values={{ ytelseType: sak.ytelseType }} />
             </Label>

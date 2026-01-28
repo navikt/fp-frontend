@@ -13,12 +13,12 @@ export const SidePanelProfileKnapp = ({ toggleSideMeny, visSideMeny }: Props) =>
   return (
     <Tooltip content={intl.formatMessage({ id: 'FagsakProfile.SkjulSidemeny' })} placement="bottom">
       <Button
+        data-color="neutral"
         icon={<SidebarRightIcon fontSize="1.7rem" aria-hidden />}
         aria-label={visSideMeny ? 'Skjul profil sidepanel' : 'Vis profil sidepanel'}
-        variant="tertiary-neutral"
+        variant="tertiary"
         size="small"
-        onClick={toggleSideMeny}
-      />
+        onClick={toggleSideMeny} />
     </Tooltip>
   );
 };

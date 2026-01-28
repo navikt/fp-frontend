@@ -131,34 +131,34 @@ export const ValgtAktivitetForm = ({
               </Heading>
               <HStack gap="space-16">
                 <Button
+                  data-color="neutral"
                   size="xsmall"
                   icon={<ArrowLeftIcon aria-hidden />}
                   onClick={velgForrigeAktivitet}
-                  variant="secondary-neutral"
+                  variant="secondary"
                   type="button"
-                  title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
-                >
+                  title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}>
                   <FormattedMessage id="Timeline.prevPeriodShort" />
                 </Button>
                 <Button
+                  data-color="neutral"
                   size="xsmall"
                   icon={<ArrowRightIcon aria-hidden />}
                   onClick={velgNesteAktivitet}
-                  variant="secondary-neutral"
+                  variant="secondary"
                   type="button"
                   title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
-                  iconPosition="right"
-                >
+                  iconPosition="right">
                   <FormattedMessage id="Timeline.nextPeriodShort" />
                 </Button>
                 <Button
+                  data-color="neutral"
                   size="xsmall"
                   icon={<XMarkIcon aria-hidden />}
                   onClick={lukkPeriode}
-                  variant="tertiary-neutral"
+                  variant="tertiary"
                   type="button"
-                  title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
-                />
+                  title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })} />
               </HStack>
             </HStack>
             <HStack gap="space-32">

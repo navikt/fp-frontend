@@ -12,11 +12,11 @@ const locationMock = { key: 'test', pathname: 'test', search: 'test', state: {},
 const utvidKnapp = (
   <Tooltip content="Utvid" placement="bottom">
     <Button
+      data-color="neutral"
       icon={<ExpandVerticalIcon fontSize="1.4rem" aria-hidden />}
       aria-label="Utvid behandling detaljer panel"
-      variant="tertiary-neutral"
-      size="xsmall"
-    />
+      variant="tertiary"
+      size="xsmall" />
   </Tooltip>
 );
 

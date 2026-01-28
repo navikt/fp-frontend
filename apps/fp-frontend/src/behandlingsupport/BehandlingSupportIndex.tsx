@@ -16,15 +16,15 @@ import type { MessagesFormValues } from '@navikt/fp-sak-meldinger';
 import type { TotrinnskontrollFormValues } from '@navikt/fp-sak-totrinnskontroll';
 import { useTrackRouteParam } from '@navikt/fp-utils';
 
-import { getSupportPanelLocationCreator } from '../app/paths.ts';
-import { FagsakData } from '../fagsak/FagsakData.ts';
-import { DokumentIndex } from './dokument/DokumentIndex.tsx';
-import { HistorikkIndex } from './historikk/HistorikkIndex.tsx';
-import { MeldingIndex } from './melding/MeldingIndex.tsx';
-import { NotatIndex } from './notat/NotatIndex.tsx';
-import { SupportTabs } from './supportTabs.tsx';
-import { TotrinnskontrollIndex } from './totrinnskontroll/TotrinnskontrollIndex.tsx';
-import { UtvidEllerMinskKnapp } from './UtvidEllerMinskKnapp.tsx';
+import { getSupportPanelLocationCreator } from '../app/paths';
+import { FagsakData } from '../fagsak/FagsakData';
+import { DokumentIndex } from './dokument/DokumentIndex';
+import { HistorikkIndex } from './historikk/HistorikkIndex';
+import { MeldingIndex } from './melding/MeldingIndex';
+import { NotatIndex } from './notat/NotatIndex';
+import { SupportTabs } from './supportTabs';
+import { TotrinnskontrollIndex } from './totrinnskontroll/TotrinnskontrollIndex';
+import { UtvidEllerMinskKnapp } from './UtvidEllerMinskKnapp';
 
 import styles from './behandlingSupportIndex.module.css';
 

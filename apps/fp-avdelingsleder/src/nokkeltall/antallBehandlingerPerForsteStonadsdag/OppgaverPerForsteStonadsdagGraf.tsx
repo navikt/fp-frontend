@@ -8,7 +8,7 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { ReactECharts } from '@navikt/fp-los-felles';
 
-import type { OppgaverForForsteStonadsdagUkeMnd } from '../../typer/oppgaverForForsteStonadsdagUkeMndTsType.ts';
+import type { OppgaverForForsteStonadsdagUkeMnd } from '../../typer/oppgaverForForsteStonadsdagUkeMndTsType';
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
@@ -84,7 +84,6 @@ const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdag
     x: dayjs(o.førsteStønadsdag).startOf('month').format(ISO_DATE_FORMAT),
     y: o.antall,
   }));
-
 
 const lagDatastruktur = (koordinater: Koordinat[]): (number | string)[][] => {
   const nyeKoordinater: Record<string, number> = koordinater.reduce(

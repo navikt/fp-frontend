@@ -59,7 +59,7 @@ export const HistorikkInnslag = ({
 
   return (
     <HStack data-testid="historikkinnslag" wrap={false} gap="space-20" justify="end" align="center">
-      <Box.New padding="4" background={backgrounds[aktør.type]}>
+      <Box padding="space-16" background={backgrounds[aktør.type]}>
         <VStack gap="space-8">
           <HStack gap="space-8">
             <Detail weight="semibold">{name}</Detail>
@@ -110,10 +110,10 @@ export const HistorikkInnslag = ({
             </div>
           )}
         </VStack>
-      </Box.New>
-      <Box.New>
+      </Box>
+      <Box>
         <Avatar aktørType={aktør.type} />
-      </Box.New>
+      </Box>
     </HStack>
   );
 };

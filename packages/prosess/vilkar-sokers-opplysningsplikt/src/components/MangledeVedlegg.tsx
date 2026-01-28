@@ -16,26 +16,26 @@ export const MangledeVedlegg = ({ søknad, arbeidsgiverOpplysningerPerId }: Prop
     return null;
   }
   return (
-    <Box.New background="info-soft" padding="space-16">
+    <Box background="info-soft" padding="space-16">
       <Label>
         <FormattedMessage id="MangledeVedlegg.Tittel" />
       </Label>
-      <List>
-        {sorterteManglendeVedlegg.map(vedlegg => (
-          <List.Item key={vedlegg.dokumentType + vedlegg.arbeidsgiverReferanse}>
-            {vedlegg.dokumentTittel}
-            {!!vedlegg.arbeidsgiverReferanse && (
-              <FormattedMessage
-                id="MangledeVedlegg.Arbeidsgiver"
-                values={{
-                  arbeidsgiverNavn: formatArbeidsgiver(arbeidsgiverOpplysningerPerId, vedlegg.arbeidsgiverReferanse),
-                }}
-              />
-            )}
-          </List.Item>
-        ))}
-      </List>
-    </Box.New>
+      <Box marginBlock="space-16" asChild><List data-aksel-migrated-v8>
+          {sorterteManglendeVedlegg.map(vedlegg => (
+            <List.Item key={vedlegg.dokumentType + vedlegg.arbeidsgiverReferanse}>
+              {vedlegg.dokumentTittel}
+              {!!vedlegg.arbeidsgiverReferanse && (
+                <FormattedMessage
+                  id="MangledeVedlegg.Arbeidsgiver"
+                  values={{
+                    arbeidsgiverNavn: formatArbeidsgiver(arbeidsgiverOpplysningerPerId, vedlegg.arbeidsgiverReferanse),
+                  }}
+                />
+              )}
+            </List.Item>
+          ))}
+        </List></Box>
+    </Box>
   );
 };
 

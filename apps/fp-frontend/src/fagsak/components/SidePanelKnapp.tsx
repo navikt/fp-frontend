@@ -13,13 +13,13 @@ export const SidePanelKnapp = ({ toggleSideMeny, visSideMeny }: Props) => {
   return (
     <Tooltip content={intl.formatMessage({ id: 'FagsakGrid.ApneSidemeny' })} placement="bottom">
       <Button
+        data-color="neutral"
         icon={<SidebarRightIcon fontSize="1.7rem" aria-hidden />}
         aria-label={visSideMeny ? 'Skjul sidepanel' : 'Vis sidepanel'}
-        variant="tertiary-neutral"
+        variant="tertiary"
         size="small"
         onClick={toggleSideMeny}
-        style={{ marginTop: '18px', backgroundColor: 'var(--ax-neutral-400)' }}
-      />
+        style={{ marginTop: '18px', backgroundColor: 'var(--ax-neutral-400)' }} />
     </Tooltip>
   );
 };

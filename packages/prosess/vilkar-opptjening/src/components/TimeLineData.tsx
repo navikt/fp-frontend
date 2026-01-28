@@ -23,7 +23,7 @@ export const TimeLineData = ({
 }: Props) => {
   const intl = useIntl();
   return (
-    <Box.New borderWidth="1" padding="4">
+    <Box borderWidth="1" padding="space-16">
       <VStack gap="space-16">
         <HStack justify="space-between">
           <Label size="small">
@@ -31,34 +31,34 @@ export const TimeLineData = ({
           </Label>
           <HStack gap="space-8">
             <Button
+              data-color="neutral"
               size="xsmall"
               icon={<ArrowLeftIcon aria-hidden />}
               onClick={velgForrigePeriode}
-              variant="secondary-neutral"
+              variant="secondary"
               type="button"
-              title={intl.formatMessage({ id: 'TimeLineData.prevPeriod' })}
-            >
+              title={intl.formatMessage({ id: 'TimeLineData.prevPeriod' })}>
               <FormattedMessage id="TimeLineData.prevPeriodShort" />
             </Button>
             <Button
+              data-color="neutral"
               size="xsmall"
               icon={<ArrowRightIcon aria-hidden />}
               onClick={velgNestePeriode}
-              variant="secondary-neutral"
+              variant="secondary"
               type="button"
               title={intl.formatMessage({ id: 'TimeLineData.nextPeriod' })}
-              iconPosition="right"
-            >
+              iconPosition="right">
               <FormattedMessage id="TimeLineData.nextPeriodShort" />
             </Button>
             <Button
+              data-color="neutral"
               size="xsmall"
               icon={<XMarkIcon aria-hidden />}
               onClick={lukkPeriode}
-              variant="tertiary-neutral"
+              variant="tertiary"
               type="button"
-              title={intl.formatMessage({ id: 'TimeLineData.lukkPeriode' })}
-            />
+              title={intl.formatMessage({ id: 'TimeLineData.lukkPeriode' })} />
           </HStack>
         </HStack>
         <BodyShort size="small">
@@ -75,7 +75,7 @@ export const TimeLineData = ({
           </BodyShort>
         </HStack>
       </VStack>
-    </Box.New>
+    </Box>
   );
 };
 

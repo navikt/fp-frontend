@@ -18,7 +18,7 @@ export const VisittkortLabels = ({ fagsakPerson, harVergeIÅpenBehandling = fals
     <>
       {fagsakPerson.dødsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.DodTittel' })} placement="bottom">
-          <Tag variant="neutral" size="small">
+          <Tag data-color="neutral" variant="outline" size="small">
             <FormattedMessage id="VisittkortLabels.Dod" values={{ dato: dateFormat(fagsakPerson.dødsdato) }} />
           </Tag>
         </Tooltip>
@@ -26,7 +26,7 @@ export const VisittkortLabels = ({ fagsakPerson, harVergeIÅpenBehandling = fals
       {fagsakPerson.diskresjonskode === 'SPSF' && //KODE6
         !fagsakPerson.dødsdato && (
           <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon6Tittel' })} placement="bottom">
-            <Tag variant="error" size="small">
+            <Tag data-color="danger" variant="outline" size="small">
               <FormattedMessage id="VisittkortLabels.Diskresjon6" />
             </Tag>
           </Tooltip>
@@ -34,21 +34,21 @@ export const VisittkortLabels = ({ fagsakPerson, harVergeIÅpenBehandling = fals
       {fagsakPerson.diskresjonskode === 'SPFO' && //KODE7
         !fagsakPerson.dødsdato && (
           <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon7Tittel' })} placement="bottom">
-            <Tag variant="warning" size="small">
+            <Tag data-color="warning" variant="outline" size="small">
               <FormattedMessage id="VisittkortLabels.Diskresjon7" />
             </Tag>
           </Tooltip>
         )}
       {harVergeIÅpenBehandling && !fagsakPerson.dødsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.VergeTittel' })} placement="bottom">
-          <Tag variant="info" size="small">
+          <Tag data-color="info" variant="outline" size="small">
             <FormattedMessage id="VisittkortLabels.Verge" />
           </Tag>
         </Tooltip>
       )}
       {erSokerUnder18 && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Under18Tittel' })} placement="bottom">
-          <Tag variant="info" size="small">
+          <Tag data-color="info" variant="outline" size="small">
             <FormattedMessage id="VisittkortLabels.Under18" />
           </Tag>
         </Tooltip>

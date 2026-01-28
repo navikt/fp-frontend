@@ -41,14 +41,14 @@ describe('UttakFaktaEøsIndex', () => {
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Legg til periode'));
-    await userEvent.type(screen.getByLabelText('Fra og med'), '31.01.2022');
-    await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
-    await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), 'FELLESPERIODE');
+    await userEvent.type(screen.getByRole('textbox', { name: 'Fra og med' }), '31.01.2022');
+    await userEvent.type(screen.getByRole('textbox', { name: 'Til og med' }), '15.02.2022');
+    await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Stønadskonto' }), 'FELLESPERIODE');
 
-    await userEvent.clear(screen.getAllByRole('textbox')[2]!);
-    await userEvent.clear(screen.getAllByRole('textbox')[3]!);
-    await userEvent.type(screen.getAllByRole('textbox')[2]!, '8');
-    await userEvent.type(screen.getAllByRole('textbox')[3]!, '0');
+    await userEvent.clear(screen.getByRole('textbox', { name: 'Trekk uker' }));
+    await userEvent.clear(screen.getByRole('textbox', { name: 'Trekk dager' }));
+    await userEvent.type(screen.getByRole('textbox', { name: 'Trekk uker' }), '8');
+    await userEvent.type(screen.getByRole('textbox', { name: 'Trekk dager' }), '0');
     await userEvent.click(screen.getByText('Legg til'));
 
     expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
@@ -77,8 +77,8 @@ describe('UttakFaktaEøsIndex', () => {
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
     expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByTitle('Vis mer')[0]!);
-    await userEvent.click(screen.getByText('Slett periode'));
+    await userEvent.click(screen.getByText('01.01.2021 - 31.01.2021'));
+    await userEvent.click(screen.getByRole('button', { name: 'Slett periode' }));
     expect(screen.getByText('Vil du slette denne perioden?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('OK'));
 
@@ -117,24 +117,27 @@ describe('UttakFaktaEøsIndex', () => {
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Legg til periode'));
-    await userEvent.type(screen.getByLabelText('Fra og med'), '31.01.2022');
-    await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
-    await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), 'FELLESPERIODE');
-    await userEvent.clear(screen.getAllByRole('textbox')[2]!);
-    await userEvent.clear(screen.getAllByRole('textbox')[3]!);
-    await userEvent.type(screen.getAllByRole('textbox')[2]!, '8');
-    await userEvent.type(screen.getAllByRole('textbox')[3]!, '3');
+
+    expect(screen.getByText('Ny periode')).toBeInTheDocument();
+
+    await userEvent.type(screen.getByRole('textbox', { name: 'Fra og med' }), '31.01.2022');
+    await userEvent.type(screen.getByRole('textbox', { name: 'Til og med' }), '15.02.2022');
+    await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Stønadskonto' }), 'FELLESPERIODE');
+    await userEvent.clear(screen.getByRole('textbox', { name: 'Trekk uker' }));
+    await userEvent.type(screen.getByRole('textbox', { name: 'Trekk uker' }), '8');
+    await userEvent.clear(screen.getByRole('textbox', { name: 'Trekk dager' }));
+    await userEvent.type(screen.getByRole('textbox', { name: 'Trekk dager' }), '3');
     await userEvent.click(screen.getByText('Legg til'));
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Legg til periode'));
-    await userEvent.type(screen.getByLabelText('Fra og med'), '12.02.2022');
-    await userEvent.type(screen.getByLabelText('Til og med'), '25.02.2022');
-    await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), 'MØDREKVOTE');
-    await userEvent.clear(screen.getAllByRole('textbox')[2]!);
-    await userEvent.clear(screen.getAllByRole('textbox')[3]!);
-    await userEvent.type(screen.getAllByRole('textbox')[2]!, '1');
-    await userEvent.type(screen.getAllByRole('textbox')[3]!, '2.4');
+    await userEvent.type(screen.getByRole('textbox', { name: 'Fra og med' }), '12.02.2022');
+    await userEvent.type(screen.getByRole('textbox', { name: 'Til og med' }), '25.02.2022');
+    await userEvent.selectOptions(screen.getByRole('combobox', { name: 'Stønadskonto' }), 'MØDREKVOTE');
+    await userEvent.clear(screen.getByRole('textbox', { name: 'Trekk uker' }));
+    await userEvent.clear(screen.getByRole('textbox', { name: 'Trekk dager' }));
+    await userEvent.type(screen.getByRole('textbox', { name: 'Trekk uker' }), '1');
+    await userEvent.type(screen.getByRole('textbox', { name: 'Trekk dager' }), '2.4');
     await userEvent.click(screen.getByText('Legg til'));
 
     expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
@@ -148,14 +151,14 @@ describe('UttakFaktaEøsIndex', () => {
     expect(lagre).not.toHaveBeenCalled();
 
     // Oppdatere perioden slik at det ikke blir overlapp og sender deretter inn
-    await userEvent.click(screen.getAllByTitle('Vis mer')[1]!);
-    await userEvent.clear(screen.getByLabelText('Fra og med'));
-    await userEvent.type(screen.getByLabelText('Fra og med'), '16.02.2022');
-    await userEvent.clear(screen.getAllByRole('textbox')[2]!);
-    await userEvent.clear(screen.getAllByRole('textbox')[3]!);
-    await userEvent.type(screen.getAllByRole('textbox')[2]!, '1');
-    await userEvent.type(screen.getAllByRole('textbox')[3]!, '2.4');
-    await userEvent.click(screen.getByText('Oppdater'));
+    await userEvent.click(screen.getByText('12.02.2022 - 25.02.2022'));
+    await userEvent.clear(screen.getByRole('textbox', { name: 'Fra og med' }));
+    await userEvent.type(screen.getByRole('textbox', { name: 'Fra og med' }), '16.02.2022');
+    await userEvent.clear(screen.getByRole('textbox', { name: 'Trekk uker' }));
+    await userEvent.type(screen.getByRole('textbox', { name: 'Trekk uker' }), '1');
+    await userEvent.clear(screen.getByRole('textbox', { name: 'Trekk dager' }));
+    await userEvent.type(screen.getByRole('textbox', { name: 'Trekk dager' }), '2.4');
+    await userEvent.click(screen.getAllByText('Oppdater')[1]!);
 
     expect(screen.queryByText('Du må rette disse feilene før du kan fortsette:')).not.toBeInTheDocument();
     expect(screen.queryByText('Det finnes overlappende perioder')).not.toBeInTheDocument();

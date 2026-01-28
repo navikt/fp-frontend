@@ -21,13 +21,17 @@ export const OppgaveLabels = ({ oppgave }: Props) => {
   return (
     <HStack gap="space-8">
       <Tag
+        data-color="success"
         size="small"
-        variant="success"
-        title={fagsakYtelseTyper.find(b => b.kode === oppgave.fagsakYtelseType)?.navn}
-      >
+        variant="outline"
+        title={fagsakYtelseTyper.find(b => b.kode === oppgave.fagsakYtelseType)?.navn}>
         {oppgave.fagsakYtelseType}
       </Tag>
-      <Tag size="small" variant="error" title={behandlingTyper.find(b => b.kode === oppgave.behandlingstype)?.navn}>
+      <Tag
+        data-color="danger"
+        size="small"
+        variant="outline"
+        title={behandlingTyper.find(b => b.kode === oppgave.behandlingstype)?.navn}>
         {hentAlleBehandlingstypeKortnavn(intl)[oppgave.behandlingstype]}
       </Tag>
       {oppgave.andreKriterier.sort(sorterAndreKriterier).map(kode => (
