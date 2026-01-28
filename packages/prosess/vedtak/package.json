@@ -43,7 +43,7 @@
     "lodash.debounce": "4.0.8",
     "react": "19.2.3",
     "react-hook-form": "7.71.1",
-    "react-intl": "8.0.11"
+    "react-intl": "8.1.1"
   },
   "devDependencies": {
     "@navikt/ds-css": "8.0.1",
@@ -60,7 +60,7 @@
     "@types/lodash.debounce": "4.0.9",
     "eslint": "9.39.2",
     "storybook": "10.1.11",
-    "stylelint": "16.26.1",
+    "stylelint": "17.0.0",
     "typescript": "5.9.3",
     "vite": "7.3.1",
     "vitest": "4.0.17"
