@@ -118,6 +118,14 @@ export const DekoratorMedFeilviserSakIndex = ({
               />
             )}
           </InternalHeader.Button>
+          {globalThis.location.hostname.includes('localhost') && (
+            <InternalHeader.Button
+              href={`${globalThis.location.origin}/oauth2/login?redirect=${globalThis.location.pathname}`}
+              as={Link}
+            >
+              Bytt bruker
+            </InternalHeader.Button>
+          )}
         </InternalHeader>
         <FeilmeldingPanel fjernFeilmeldinger={fjernFeilmeldinger} feilmeldinger={feilmeldinger} />
       </RawIntlProvider>
