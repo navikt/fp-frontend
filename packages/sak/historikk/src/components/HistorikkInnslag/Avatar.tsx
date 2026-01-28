@@ -34,7 +34,5 @@ export const Avatar = ({ aktørType }: Props) => {
       return <RobotSmileIcon fontSize={24} title={intl.formatMessage({ id: 'Historikkinnslag.Vedtakslosninger' })} />;
     case 'ARBEIDSGIVER':
       return <PersonSuitIcon fontSize={24} title={intl.formatMessage({ id: 'Historikkinnslag.Arbeidsgiver' })} />;
-    case '-':
-      throw new Error(`Ugyldig aktørType: ${aktørType}`);
   }
 };
