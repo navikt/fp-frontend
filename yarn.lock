@@ -1577,9 +1577,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/openapi-ts@npm:0.90.3":
-  version: 0.90.3
-  resolution: "@hey-api/openapi-ts@npm:0.90.3"
+"@hey-api/openapi-ts@npm:0.90.6":
+  version: 0.90.6
+  resolution: "@hey-api/openapi-ts@npm:0.90.6"
   dependencies:
     "@hey-api/codegen-core": "npm:^0.5.2"
     "@hey-api/json-schema-ref-parser": "npm:1.2.2"
@@ -1593,7 +1593,7 @@ __metadata:
     typescript: ">=5.5.3"
   bin:
     openapi-ts: bin/run.js
-  checksum: 10/3cbd519ccf75d0bd8b2af01565f4c823ae466b1c4e25f975a72aa78273b2a6f75daefde60e1a1355465ff8681786b7b086e9ae378467c8c54f1d613f482f8175
+  checksum: 10/d6dbcf992a4489c825eee713e089d40d76236797bf03e17a065930cd64951618d95cbac5df8ead38a4382a4b41d6ddbd624463f4e4b2eedf00ce0d59ff8f1b15
   languageName: node
   linkType: hard
 
@@ -1909,7 +1909,7 @@ __metadata:
     "@sentry/browser": "npm:10.35.0"
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     fast-glob: "npm:3.3.3"
     react: "npm:19.2.3"
@@ -1949,7 +1949,7 @@ __metadata:
     "@tanstack/react-query": "npm:5.90.19"
     "@tanstack/react-query-devtools": "npm:5.91.2"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     "@types/lodash.debounce": "npm:4.0.9"
     dayjs: "npm:1.11.19"
@@ -2036,7 +2036,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     dayjs: "npm:1.11.19"
@@ -2069,7 +2069,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -2104,7 +2104,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -2140,7 +2140,7 @@ __metadata:
     "@navikt/ft-utils": "npm:3.11.0"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     classnames: "npm:2.5.1"
     eslint: "npm:9.39.2"
     lodash: "npm:^4.17.21"
@@ -2178,7 +2178,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -2212,7 +2212,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -2249,7 +2249,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -2286,7 +2286,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     dayjs: "npm:1.11.19"
@@ -2324,7 +2324,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     dayjs: "npm:1.11.19"
@@ -2364,7 +2364,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     fast-glob: "npm:3.3.3"
@@ -2401,7 +2401,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -2438,7 +2438,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     dayjs: "npm:1.11.19"
@@ -2477,7 +2477,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -2516,7 +2516,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -2556,7 +2556,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -2594,7 +2594,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     dayjs: "npm:1.11.19"
@@ -2634,7 +2634,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -2673,7 +2673,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -2699,7 +2699,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -2815,7 +2815,7 @@ __metadata:
     "@tanstack/react-query": "npm:5.90.19"
     "@tanstack/react-query-devtools": "npm:5.91.2"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     core-js: "npm:3.47.0"
@@ -2866,7 +2866,7 @@ __metadata:
     "@tanstack/react-query": "npm:5.90.19"
     "@tanstack/react-query-devtools": "npm:5.91.2"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -2924,7 +2924,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     echarts: "npm:6.0.0"
@@ -2963,7 +2963,7 @@ __metadata:
     "@storybook/react-vite": "npm:10.1.11"
     "@tanstack/react-query": "npm:5.90.19"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -3000,7 +3000,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -3034,7 +3034,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     dayjs: "npm:1.11.19"
@@ -3094,7 +3094,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-intl: "npm:8.1.1"
@@ -3120,7 +3120,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-intl: "npm:8.1.1"
@@ -3146,7 +3146,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -3173,7 +3173,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-intl: "npm:8.1.1"
@@ -3233,7 +3233,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -3272,7 +3272,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     dayjs: "npm:1.11.19"
@@ -3310,7 +3310,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     eslint: "npm:9.39.2"
@@ -3347,7 +3347,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     dayjs: "npm:1.11.19"
@@ -3385,7 +3385,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -3419,7 +3419,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -3456,7 +3456,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     dayjs: "npm:1.11.19"
@@ -3495,7 +3495,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -3531,7 +3531,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -3563,7 +3563,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -3604,7 +3604,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     "@types/css-tree": "npm:2.3.11"
     "@types/lodash.debounce": "npm:4.0.9"
@@ -3646,7 +3646,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -3681,7 +3681,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -3720,7 +3720,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -3757,7 +3757,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -3793,7 +3793,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -3828,7 +3828,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -3860,7 +3860,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-intl: "npm:8.1.1"
@@ -3888,7 +3888,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     dayjs: "npm:1.11.19"
@@ -3919,7 +3919,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     eslint: "npm:9.39.2"
@@ -3950,7 +3950,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-intl: "npm:8.1.1"
@@ -3979,7 +3979,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-intl: "npm:8.1.1"
@@ -4005,7 +4005,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -4033,7 +4033,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-intl: "npm:8.1.1"
@@ -4065,7 +4065,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     classnames: "npm:2.5.1"
     eslint: "npm:9.39.2"
@@ -4093,7 +4093,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -4123,7 +4123,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -4155,7 +4155,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -4182,7 +4182,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -4212,7 +4212,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -4240,7 +4240,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -4272,7 +4272,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -4302,7 +4302,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -4338,7 +4338,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -4372,7 +4372,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -4409,7 +4409,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
@@ -4438,7 +4438,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-intl: "npm:8.1.1"
@@ -4465,7 +4465,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
@@ -4562,7 +4562,7 @@ __metadata:
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/dom": "npm:10.4.1"
-    "@testing-library/react": "npm:16.3.1"
+    "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     fast-glob: "npm:3.3.3"
@@ -5829,9 +5829,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:16.3.1":
-  version: 16.3.1
-  resolution: "@testing-library/react@npm:16.3.1"
+"@testing-library/react@npm:16.3.2":
+  version: 16.3.2
+  resolution: "@testing-library/react@npm:16.3.2"
   dependencies:
     "@babel/runtime": "npm:^7.12.5"
   peerDependencies:
@@ -5845,7 +5845,7 @@ __metadata:
       optional: true
     "@types/react-dom":
       optional: true
-  checksum: 10/2d1221861c41711f2767c57c5b5158593baf6f7ca4bf15fad9e79bc9aeaadb56c2e327943b8733d2788f1826499fe01daef7289a7a0149b48dd7f51b33b12e58
+  checksum: 10/0ca88c6f672d00c2afd1bdedeff9b5382dd8157038efeb9762dc016731030075624be7106b92d2b5e5c52812faea85263e69272c14b6f8700eb48a4a8af6feef
   languageName: node
   linkType: hard
 
@@ -8662,7 +8662,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
-    "@hey-api/openapi-ts": "npm:0.90.3"
+    "@hey-api/openapi-ts": "npm:0.90.6"
     "@navikt/aksel-stylelint": "npm:8.0.1"
     "@storybook/addon-a11y": "npm:10.1.11"
     "@storybook/addon-links": "npm:10.1.11"
@@ -8674,13 +8674,13 @@ __metadata:
     "@types/react-router-dom": "npm:5.3.3"
     husky: "npm:9.1.7"
     jsdom: "npm:27.4.0"
-    knip: "npm:5.80.2"
+    knip: "npm:5.82.1"
     lint-staged: "npm:16.2.7"
-    prettier: "npm:3.7.4"
+    prettier: "npm:3.8.0"
     shelljs: "npm:0.10.0"
     stylelint: "npm:16.26.1"
     stylelint-order: "npm:7.0.1"
-    turbo: "npm:2.7.4"
+    turbo: "npm:2.7.5"
     typescript: "npm:5.9.3"
     vitest: "npm:4.0.17"
   languageName: unknown
@@ -9864,9 +9864,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knip@npm:5.80.2":
-  version: 5.80.2
-  resolution: "knip@npm:5.80.2"
+"knip@npm:5.82.1":
+  version: 5.82.1
+  resolution: "knip@npm:5.82.1"
   dependencies:
     "@nodelib/fs.walk": "npm:^1.2.3"
     fast-glob: "npm:^3.3.3"
@@ -9886,7 +9886,7 @@ __metadata:
   bin:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
-  checksum: 10/5cc2c6dbd32ae102776e7fbc4e9be0ab082e392e2f8a72efa12f1dbf3235d72cf2140cfe4c7475255e416c63e68ae60ff8b62efccb96d34bf412f4740b8fc796
+  checksum: 10/e41549af9dc9b8921b393cab881f848ce06c7fd915214cb1806ee01aec7155b4e045684bc8d1a396a588e8fe284693912a50edc5680312b1859a1f949dd4c37a
   languageName: node
   linkType: hard
 
@@ -10997,12 +10997,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.7.4":
-  version: 3.7.4
-  resolution: "prettier@npm:3.7.4"
+"prettier@npm:3.8.0":
+  version: 3.8.0
+  resolution: "prettier@npm:3.8.0"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10/b4d00ea13baed813cb777c444506632fb10faaef52dea526cacd03085f01f6db11fc969ccebedf05bf7d93c3960900994c6adf1b150e28a31afd5cfe7089b313
+  checksum: 10/a643c62f095c2987a34cea4fceddce8dea12cc3ee024494aff690cfac22ef20be835e212b39b718c833014fd22890ae156be67b75a26e2bc9b7acde9a34d31fa
   languageName: node
   linkType: hard
 
@@ -12501,58 +12501,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:2.7.4":
-  version: 2.7.4
-  resolution: "turbo-darwin-64@npm:2.7.4"
+"turbo-darwin-64@npm:2.7.5":
+  version: 2.7.5
+  resolution: "turbo-darwin-64@npm:2.7.5"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:2.7.4":
-  version: 2.7.4
-  resolution: "turbo-darwin-arm64@npm:2.7.4"
+"turbo-darwin-arm64@npm:2.7.5":
+  version: 2.7.5
+  resolution: "turbo-darwin-arm64@npm:2.7.5"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:2.7.4":
-  version: 2.7.4
-  resolution: "turbo-linux-64@npm:2.7.4"
+"turbo-linux-64@npm:2.7.5":
+  version: 2.7.5
+  resolution: "turbo-linux-64@npm:2.7.5"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:2.7.4":
-  version: 2.7.4
-  resolution: "turbo-linux-arm64@npm:2.7.4"
+"turbo-linux-arm64@npm:2.7.5":
+  version: 2.7.5
+  resolution: "turbo-linux-arm64@npm:2.7.5"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:2.7.4":
-  version: 2.7.4
-  resolution: "turbo-windows-64@npm:2.7.4"
+"turbo-windows-64@npm:2.7.5":
+  version: 2.7.5
+  resolution: "turbo-windows-64@npm:2.7.5"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-windows-arm64@npm:2.7.4":
-  version: 2.7.4
-  resolution: "turbo-windows-arm64@npm:2.7.4"
+"turbo-windows-arm64@npm:2.7.5":
+  version: 2.7.5
+  resolution: "turbo-windows-arm64@npm:2.7.5"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo@npm:2.7.4":
-  version: 2.7.4
-  resolution: "turbo@npm:2.7.4"
+"turbo@npm:2.7.5":
+  version: 2.7.5
+  resolution: "turbo@npm:2.7.5"
   dependencies:
-    turbo-darwin-64: "npm:2.7.4"
-    turbo-darwin-arm64: "npm:2.7.4"
-    turbo-linux-64: "npm:2.7.4"
-    turbo-linux-arm64: "npm:2.7.4"
-    turbo-windows-64: "npm:2.7.4"
-    turbo-windows-arm64: "npm:2.7.4"
+    turbo-darwin-64: "npm:2.7.5"
+    turbo-darwin-arm64: "npm:2.7.5"
+    turbo-linux-64: "npm:2.7.5"
+    turbo-linux-arm64: "npm:2.7.5"
+    turbo-windows-64: "npm:2.7.5"
+    turbo-windows-arm64: "npm:2.7.5"
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -12568,7 +12568,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 10/fbb901da0f576aadac57168f365913b8cd07fd22874c4bfedc736bcd18a5888c2897882e03d87ba451b2dcd21b376a44b0245622260b08bc1bbc36f70345a19b
+  checksum: 10/fe9c2c8c55242ae102bf30494f8830749fc91c0fade85a2ad376eb3df0d5aa3452f222dbf080f852f2f8a2197fec3b607e0cec63fae096f48b5fff2228caaff6
   languageName: node
   linkType: hard
 
