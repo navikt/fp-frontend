@@ -118,9 +118,9 @@ export const DekoratorMedFeilviserSakIndex = ({
               />
             )}
           </InternalHeader.Button>
-          {window.location.hostname.includes('localhost') && (
+          {globalThis.location.hostname.includes('localhost') && (
             <InternalHeader.Button
-              href={`${window.location.origin}/oauth2/login?redirect=${window.location.pathname}`}
+              href={`${globalThis.location.origin}/oauth2/login?redirect=${globalThis.location.pathname}`}
               as={Link}
             >
               Bytt bruker
