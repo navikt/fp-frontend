@@ -2723,18 +2723,18 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utbetalingsdata-is15": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-fakta-beregning": "npm:12.5.0"
+    "@navikt/ft-fakta-beregning": "npm:12.5.1"
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "npm:14.3.0"
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "npm:8.5.0"
     "@navikt/ft-form-hooks": "npm:10.5.0"
     "@navikt/ft-form-validators": "npm:4.4.13"
     "@navikt/ft-plattform-komponenter": "npm:10.4.1"
-    "@navikt/ft-prosess-beregning": "npm:0.3.0"
+    "@navikt/ft-prosess-beregning": "npm:0.3.1"
     "@navikt/ft-prosess-beregningsgrunnlag": "npm:11.6.0"
     "@navikt/ft-prosess-tilbakekreving": "npm:9.5.0"
     "@navikt/ft-prosess-tilbakekreving-foreldelse": "npm:8.6.0"
     "@navikt/ft-prosess-tilbakekreving-vedtak": "npm:7.5.0"
-    "@navikt/ft-types": "npm:5.3.12"
+    "@navikt/ft-types": "npm:5.3.13"
     "@navikt/ft-ui-komponenter": "npm:6.7.0"
     "@navikt/ft-utils": "npm:3.11.0"
     "@popperjs/core": "npm:2.11.8"
@@ -4439,7 +4439,7 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-fakta-beregning": "npm:12.5.0"
+    "@navikt/ft-fakta-beregning": "npm:12.5.1"
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "npm:14.3.0"
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "npm:8.5.0"
     "@navikt/ft-prosess-beregningsgrunnlag": "npm:11.6.0"
@@ -4538,9 +4538,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ft-fakta-beregning@npm:12.5.0":
-  version: 12.5.0
-  resolution: "@navikt/ft-fakta-beregning@npm:12.5.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F12.5.0%2F27c8dd3531409833c7f6c90e864c3f63fc737227"
+"@navikt/ft-fakta-beregning@npm:12.5.1":
+  version: 12.5.1
+  resolution: "@navikt/ft-fakta-beregning@npm:12.5.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F12.5.1%2F16d7a48c120afc6ac63574be158baa49c58f6b78"
   dependencies:
     "@navikt/aksel-icons": "npm:8.0.1"
     "@navikt/ds-css": "npm:8.0.1"
@@ -4572,7 +4572,7 @@ __metadata:
     react-dom: 19.1.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: 10/0eb258dc3ecf82ebf025e9c96717dd5ad13b6bbae3e0e5b8f0509a5c5913aec91278e1d6c869927fac16bad8e32c6916f50976947e7ee6a9eae50e3bad9e0216
+  checksum: 10/7c3e0bc4e5d3452572bfef31ef940a93ec2aa4ea008604b76983ef96032b985e1d5b9afb7b1acbab16ca11808d8bc92eadc6a863df848a0ab4604d6b85500877
   languageName: node
   linkType: hard
 
@@ -4712,9 +4712,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-beregning@npm:0.3.0":
-  version: 0.3.0
-  resolution: "@navikt/ft-prosess-beregning@npm:0.3.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregning%2F0.3.0%2F72a9d33465d99bccaaee7ecf12c23ea7d9892bca"
+"@navikt/ft-prosess-beregning@npm:0.3.1":
+  version: 0.3.1
+  resolution: "@navikt/ft-prosess-beregning@npm:0.3.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregning%2F0.3.1%2Fbc7d7ded3fd9e3b69675f53915a40e865a561d3b"
   dependencies:
     "@navikt/aksel-icons": "npm:8.0.1"
     "@navikt/ds-css": "npm:8.0.1"
@@ -4744,7 +4744,7 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: 10/006072cf129580c670cae32305a0209d9ce2de14ec552259ef27d3dd8af3051f3f19040f94c9a754de511104dabf4ab92a446ab1be60d20f971bc8d54f5bfccc
+  checksum: 10/0e279e66a91b29f59ee5587eb3aa8e1f9f2bddec6f18867ff2494c31668e8d5ff388408916b9e0df3ce9d6bcfdee40d520ee7c164b1f0b2ac307b092b7b72dce
   languageName: node
   linkType: hard
 
@@ -4885,10 +4885,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-types@npm:5.3.12":
-  version: 5.3.12
-  resolution: "@navikt/ft-types@npm:5.3.12::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-types%2F5.3.12%2Ff2ef642d67233c066a8d3f317ecf47035a9a3758"
-  checksum: 10/91a3127161e1e77339f98408eba808ac5dc1e3885a1f5bb0cbf2ed5fed81f1facee6cbd4982c6cd6ace9b44f8c470bf5ea8dd4e599b18bdd648f94ae1d6ac160
+"@navikt/ft-types@npm:5.3.13":
+  version: 5.3.13
+  resolution: "@navikt/ft-types@npm:5.3.13::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-types%2F5.3.13%2F3ce9cbd0dfd4f2a645d49fee82bf22fda95c0039"
+  checksum: 10/f6913220d606ffd835079db2279e38f1e37e3cc6c26a60f7480a640cac411591d0faeb12059c01be4ad23ba9cf10a9804bb1b7941b4266b009f8dc744af75d8e
   languageName: node
   linkType: hard
 
