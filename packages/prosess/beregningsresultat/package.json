@@ -21,10 +21,10 @@
   "dependencies": {
     "@navikt/ds-react": "8.0.1",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "6.6.0",
-    "@navikt/ft-utils": "3.10.12",
+    "@navikt/ft-ui-komponenter": "6.7.0",
+    "@navikt/ft-utils": "3.11.0",
     "react": "19.2.3",
-    "react-intl": "8.0.11"
+    "react-intl": "8.1.1"
   },
   "devDependencies": {
     "@navikt/ds-css": "8.0.1",
@@ -37,7 +37,7 @@
     "@testing-library/react": "16.3.1",
     "eslint": "9.39.2",
     "storybook": "10.1.11",
-    "stylelint": "16.26.1",
+    "stylelint": "17.0.0",
     "typescript": "5.9.3",
     "vite": "7.3.1",
     "vitest": "4.0.17"

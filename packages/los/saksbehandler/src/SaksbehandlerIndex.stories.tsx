@@ -35,6 +35,24 @@ const SAKSLISTER = [
       },
     ],
   },
+  {
+    sakslisteId: 2,
+    navn: 'Beslutter kø',
+    sortering: {
+      sorteringType: 'BEHFRIST',
+      fra: 1,
+      til: 4,
+      erDynamiskPeriode: true,
+    },
+    behandlingTyper: ['BT-002', 'BT-004'],
+    fagsakYtelseTyper: ['FP', 'SVP', 'ES'],
+    andreKriterier: [
+      {
+        andreKriterierType: 'TIL_BESLUTTER',
+        inkluder: false,
+      },
+    ],
+  },
 ] satisfies Saksliste[];
 
 const OPPGAVER_TIL_BEHANDLING = [

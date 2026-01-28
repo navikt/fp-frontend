@@ -20,10 +20,10 @@
   },
   "dependencies": {
     "@navikt/ds-react": "8.0.1",
-    "@navikt/ft-ui-komponenter": "6.6.0",
-    "@navikt/ft-utils": "3.10.12",
+    "@navikt/ft-ui-komponenter": "6.7.0",
+    "@navikt/ft-utils": "3.11.0",
     "react": "19.2.3",
-    "react-intl": "8.0.11"
+    "react-intl": "8.1.1"
   },
   "devDependencies": {
     "@navikt/ds-css": "8.0.1",

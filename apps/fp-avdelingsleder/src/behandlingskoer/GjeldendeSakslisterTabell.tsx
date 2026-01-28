@@ -1,26 +1,19 @@
 import { type KeyboardEvent, type ReactElement, useEffect, useRef, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, HStack, Label, Link, Loader, Table, VStack } from '@navikt/ds-react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { BodyShort, Detail, HStack, Label, Link, Table, VStack } from '@navikt/ds-react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
-import { LosUrl, oppgaveAntallOptions, slettSaksliste } from '../data/fplosAvdelingslederApi';
+import { LosUrl, slettSaksliste } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
 import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
+import { OppgaverGrafDialog } from './OppgaverGrafDialog.tsx';
 import { SletteSakslisteModal } from './SletteSakslisteModal';
 
 import styles from './gjeldendeSakslisterTabell.module.css';
-
-const headerTextCodes = [
-  'GjeldendeSakslisterTabell.Listenavn',
-  'GjeldendeSakslisterTabell.Stonadstype',
-  'GjeldendeSakslisterTabell.Behandlingtype',
-  'GjeldendeSakslisterTabell.AntallSaksbehandlere',
-  'GjeldendeSakslisterTabell.AntallBehandlinger',
-];
 
 const formatStonadstyper = (
   fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
@@ -118,8 +111,8 @@ export const GjeldendeSakslisterTabell = ({
     }
   };
 
-  const lagNySakslisteFn = (event: KeyboardEvent): void => {
-    if (event.keyCode === 13) {
+  const lagNySakslisteFn = (event: KeyboardEvent<HTMLAnchorElement>): void => {
+    if (event.key === 'Enter') {
       lagNySaksliste();
     }
   };
@@ -148,15 +141,31 @@ export const GjeldendeSakslisterTabell = ({
         </BodyShort>
       )}
       {sakslister.length > 0 && (
-        <Table size="small">
+        <Table size="small" stickyHeader={true}>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell scope="col" />
-              {headerTextCodes.map(code => (
-                <Table.HeaderCell key={code} scope="col">
-                  <FormattedMessage id={code} />
-                </Table.HeaderCell>
-              ))}
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="GjeldendeSakslisterTabell.Listenavn" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="GjeldendeSakslisterTabell.Stonadstype" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="GjeldendeSakslisterTabell.Behandlingtype" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="GjeldendeSakslisterTabell.AntallSaksbehandlere" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="GjeldendeSakslisterTabell.AntallOppgaver" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="GjeldendeSakslisterTabell.AntallTilgjengelige" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="GjeldendeSakslisterTabell.Graf" />
+              </Table.HeaderCell>
               <Table.HeaderCell scope="col" />
             </Table.Row>
           </Table.Header>
@@ -173,14 +182,11 @@ export const GjeldendeSakslisterTabell = ({
                 <Table.DataCell>{saksliste.navn}</Table.DataCell>
                 <Table.DataCell>{formatStonadstyper(fagsakYtelseTyper, saksliste.fagsakYtelseTyper)}</Table.DataCell>
                 <Table.DataCell>{formatBehandlingstyper(behandlingTyper, saksliste.behandlingTyper)}</Table.DataCell>
+                <Table.DataCell>{saksliste.saksbehandlerIdenter.length}</Table.DataCell>
+                <Table.DataCell>{saksliste.gjeldendeStatistikk?.alleOppgaver ?? '-'}</Table.DataCell>
+                <Table.DataCell>{saksliste.gjeldendeStatistikk?.tilgjengeligeOppgaver ?? '-'}</Table.DataCell>
                 <Table.DataCell>
-                  {saksliste.saksbehandlerIdenter.length > 0 ? saksliste.saksbehandlerIdenter.length : ''}
-                </Table.DataCell>
-                <Table.DataCell>
-                  <AntallOppgaverForSaksliste
-                    valgtAvdelingEnhet={valgtAvdelingEnhet}
-                    sakslisteId={saksliste.sakslisteId}
-                  />
+                  <OppgaverGrafDialog saksliste={saksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
                 </Table.DataCell>
                 <Table.DataCell>
                   <div
@@ -214,29 +220,5 @@ export const GjeldendeSakslisterTabell = ({
         />
       )}
     </VStack>
-  );
-};
-
-const AntallOppgaverForSaksliste = ({
-  valgtAvdelingEnhet,
-  sakslisteId,
-}: {
-  valgtAvdelingEnhet: string;
-  sakslisteId: number;
-}) => {
-  const intl = useIntl();
-  const { data: antallOppgaver, isFetching, isError } = useQuery(oppgaveAntallOptions(sakslisteId, valgtAvdelingEnhet));
-
-  if (isError) {
-    return <FormattedMessage id="AntallOppgaverForSaksliste.HentingAvAntallOppgaverFeilet" />;
-  }
-
-  return isFetching ? (
-    <Loader
-      size="small"
-      title={intl.formatMessage({ id: 'AntallOppgaverForSaksliste.HentingAvAntallOppgaverHentes' })}
-    />
-  ) : (
-    antallOppgaver
   );
 };

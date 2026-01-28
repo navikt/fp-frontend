@@ -10,5 +10,6 @@ export type { PanelOverstyringContextArgs } from './decorators/withPanelOverstyr
 export { alleKodeverk } from './mocks/alleKodeverk';
 export { alleKodeverkLos } from './mocks/alleKodeverkLos';
 export { alleKodeverkTilbakekreving } from './mocks/alleKodeverkTilbakekreving';
+export { urlEncodeNorskeBokstaver } from './utils/urlUtil';
 export { lagAksjonspunkt } from './testdata/lagAksjonspunkt';
 export { lagVilkår } from './testdata/lagVilkår';
