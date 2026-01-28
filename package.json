@@ -39,8 +39,8 @@
     "packages/**/*"
   ],
   "devDependencies": {
-    "@hey-api/openapi-ts": "0.90.2",
-    "@navikt/aksel-stylelint": "7.40.0",
+    "@hey-api/openapi-ts": "0.90.3",
+    "@navikt/aksel-stylelint": "8.0.1",
     "@storybook/addon-a11y": "10.1.11",
     "@storybook/addon-links": "10.1.11",
     "@storybook/react": "10.1.11",
@@ -57,9 +57,9 @@
     "shelljs": "0.10.0",
     "stylelint": "16.26.1",
     "stylelint-order": "7.0.1",
-    "turbo": "2.7.3",
+    "turbo": "2.7.4",
     "typescript": "5.9.3",
-    "vitest": "4.0.16"
+    "vitest": "4.0.17"
   },
   "resolutions": {
     "@adobe/css-tools": "4.3.2",

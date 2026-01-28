@@ -73,7 +73,7 @@ export const Historikk = ({
 
   return (
     <>
-      <Box.New background="neutral-moderate" borderColor="neutral-subtleA" borderWidth="0 0 2 0" padding="5">
+      <Box background="neutral-moderate" borderColor="neutral-subtleA" borderWidth="0 0 2 0" padding="space-20">
         <HStack justify="space-between">
           <HStack gap="space-4" align="center">
             <Heading size="small" level="3">
@@ -90,7 +90,7 @@ export const Historikk = ({
             <div className={styles['circle']}>{filtrerteInnslag.length}</div>
           </HStack>
         </HStack>
-      </Box.New>
+      </Box>
       <div
         style={{ height: `calc(100vh - ${top}px)` }}
         className={styles['overflow']}
@@ -100,7 +100,7 @@ export const Historikk = ({
           }
         }}
       >
-        <VStack gap="space-8" padding="4">
+        <VStack gap="space-8" padding="space-16">
           {filtrerteInnslag.map(historikkinnslag => {
             const alleKodeverk = historikkinnslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
 

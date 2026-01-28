@@ -9,7 +9,7 @@ import { notEmpty } from '@navikt/fp-utils';
 
 import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import type { KøSorteringFelt } from '../../../typer/sakslisteAvdelingTsType.ts';
+import type { KøSorteringFelt } from '../../../typer/sakslisteAvdelingTsType';
 import { BelopSorteringValg, type FormValues as BelopSorteringValgFormValues } from './BelopSorteringValg';
 import { DatoSorteringValg, type FormValues as DatoSorteringValgFormValues } from './DatoSorteringValg';
 
@@ -62,7 +62,7 @@ export const SorteringVelger = ({
   const sortering = watch('sortering');
 
   return (
-    <Box.New borderWidth="1" borderColor="neutral-subtle" padding="10">
+    <Box borderWidth="1" borderColor="neutral-subtle" padding="space-40">
       <RhfRadioGroup
         name="sortering"
         control={control}
@@ -106,6 +106,6 @@ export const SorteringVelger = ({
             </VStack>
           ))}
       </RhfRadioGroup>
-    </Box.New>
+    </Box>
   );
 };

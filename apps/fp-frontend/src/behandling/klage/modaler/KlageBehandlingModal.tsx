@@ -23,7 +23,7 @@ export const KlageBehandlingModal = ({ visModal = false, lukkModal }: Props) => 
       <Dialog.Popup closeOnOutsideClick={false}>
         <Dialog.Header withClosebutton={false}>
           <Dialog.Title>
-            <HStack gap="2" align="center">
+            <HStack gap="space-8" align="center">
               <CheckmarkCircleFillIcon aria-hidden width={35} height={35} color="var(--ax-success-600)" />
               <FormattedMessage id="KlageVurderingModal.VedtakOversendt" />
             </HStack>

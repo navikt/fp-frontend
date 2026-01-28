@@ -99,15 +99,15 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
       <ActionMenu onOpenChange={open => setEnableTableEvents(!open)}>
         <ActionMenu.Trigger>
           <Button
-            variant="tertiary-neutral"
+            data-color="neutral"
+            variant="tertiary"
             icon={
               <MenuElipsisVerticalCircleIcon
                 className={styles['image']}
                 title={intl.formatMessage({ id: 'OppgaveHandlingerMenu.OppgaveHandlinger' })}
               />
             }
-            size="small"
-          />
+            size="small" />
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group aria-label={intl.formatMessage({ id: 'OppgaveHandlingerMenu.Meny' })}>

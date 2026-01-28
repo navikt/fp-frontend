@@ -138,6 +138,10 @@
   "SakslisteVelgerForm.Andre": "{antallAndre} andre",
   "SakslisteVelgerForm.FilterForKoen": "Filtere for køen",
 
+  "SaksbehandlerNokkeltallPanel.Statistikk": "Statistikk",
+  "SaksbehandlerNokkeltallPanel.ForAlle": "For alle saksbehandlere",
+  "SaksbehandlerNokkeltallPanel.ForAlleDetaljer": "Statistikk for alle som jobber med foreldrepenger, engangsstønad og svangerskapspenger",
+
   "NotatModal.SkrivNotat": "Legg til notat på reservasjon",
   "NotatModal.Notat": "Notat"
 }

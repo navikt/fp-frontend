@@ -1,9 +1,9 @@
 import type { AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt.ts';
-import { harMatchendeArbeidsgiverIdent, lagArbeidsgiver } from './arbeidsgiverUtils.ts';
-import { lagAvklaringFraArbeidsforhold, lagAvklaringFraInntektsmelding } from './avklaringUtils.ts';
-import { finnInntektsmeldingerForArbeidsgiver } from './inntektsmeldingUtils.ts';
+import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
+import { harMatchendeArbeidsgiverIdent, lagArbeidsgiver } from './arbeidsgiverUtils';
+import { lagAvklaringFraArbeidsforhold, lagAvklaringFraInntektsmelding } from './avklaringUtils';
+import { finnInntektsmeldingerForArbeidsgiver } from './inntektsmeldingUtils';
 
 const sorterGittÅrsak = (arbeidsforhold1: AoIArbeidsforhold) => (arbeidsforhold1.årsak ? -1 : 1);
 

@@ -259,7 +259,7 @@ export const SakslisteVelgerForm = ({
             <VStack gap="space-24">
               {valgtSaksliste && (
                 <HStack gap="space-20" align="stretch">
-                  <Box.New background="neutral-moderateA" padding="4" borderRadius="xlarge" width="200px">
+                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
                     <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">
@@ -279,8 +279,8 @@ export const SakslisteVelgerForm = ({
                         </BodyShort>
                       )}
                     </VStack>
-                  </Box.New>
-                  <Box.New background="neutral-moderateA" padding="4" borderRadius="xlarge" width="200px">
+                  </Box>
+                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
                     <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">
@@ -298,8 +298,8 @@ export const SakslisteVelgerForm = ({
                         <FormattedMessage id="SakslisteVelgerForm.Alle" />
                       )}
                     </VStack>
-                  </Box.New>
-                  <Box.New background="neutral-moderateA" padding="4" borderRadius="xlarge" width="200px">
+                  </Box>
+                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
                     <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">
@@ -309,8 +309,8 @@ export const SakslisteVelgerForm = ({
                       </HStack>
                       <AndreKriterier saksliste={valgtSaksliste} />
                     </VStack>
-                  </Box.New>
-                  <Box.New background="neutral-moderateA" padding="4" borderRadius="xlarge" width="200px">
+                  </Box>
+                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
                     <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">
@@ -320,7 +320,7 @@ export const SakslisteVelgerForm = ({
                       </HStack>
                       <BodyShort>{getSorteringsnavn(intl, køSorteringTyper, valgtSaksliste)}</BodyShort>
                     </VStack>
-                  </Box.New>
+                  </Box>
                 </HStack>
               )}
               <VStack gap="space-8">
@@ -334,9 +334,9 @@ export const SakslisteVelgerForm = ({
                       sorterteSaksbehandlere.length > 3 && !visAlleSaksbehandlere ? 3 : sorterteSaksbehandlere.length,
                     )
                     .map(s => (
-                      <Box.New
+                      <Box
                         background="neutral-moderateA"
-                        padding="2"
+                        padding="space-8"
                         borderRadius="full"
                         key={s.brukerIdent.brukerIdent}
                       >
@@ -344,12 +344,12 @@ export const SakslisteVelgerForm = ({
                           <PersonHeadsetIcon aria-hidden className={styles['grayout']} />
                           <BodyShort>{s.navn}</BodyShort>
                         </HStack>
-                      </Box.New>
+                      </Box>
                     ))}
                   {sorterteSaksbehandlere && sorterteSaksbehandlere.length > 3 && (
                     <HStack gap="space-8">
                       {!visAlleSaksbehandlere && (
-                        <Box.New background="neutral-moderateA" padding="2" borderRadius="full">
+                        <Box background="neutral-moderateA" padding="space-8" borderRadius="full">
                           <HStack gap="space-8" align="center">
                             <PlusIcon aria-hidden className={styles['grayout']} />
                             <BodyShort>
@@ -359,7 +359,7 @@ export const SakslisteVelgerForm = ({
                               />
                             </BodyShort>
                           </HStack>
-                        </Box.New>
+                        </Box>
                       )}
                       <Button
                         variant="tertiary"

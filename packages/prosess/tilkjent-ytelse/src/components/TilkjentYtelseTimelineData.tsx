@@ -54,7 +54,7 @@ export const TilkjentYtelseTimelineData = ({
   const bold = (...chunks: [parts: React.ReactNode[]]) => <b>{chunks}</b>;
 
   return (
-    <Box.New borderWidth="1" padding="4">
+    <Box borderWidth="1" padding="space-16">
       <VStack gap="space-16">
         <HStack justify="space-between">
           <Label size="small">
@@ -62,37 +62,37 @@ export const TilkjentYtelseTimelineData = ({
           </Label>
           <HStack gap="space-8" align="center">
             <Button
+              data-color="neutral"
               size="xsmall"
               icon={<ArrowLeftIcon aria-hidden />}
               onClick={velgForrigePeriode}
-              variant="secondary-neutral"
+              variant="secondary"
               type="button"
-              title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
-            >
+              title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}>
               <FormattedMessage id="Timeline.prevPeriodShort" />
             </Button>
             <Button
+              data-color="neutral"
               size="xsmall"
               icon={<ArrowRightIcon aria-hidden />}
               onClick={velgNestePeriode}
-              variant="secondary-neutral"
+              variant="secondary"
               type="button"
               title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
-              iconPosition="right"
-            >
+              iconPosition="right">
               <FormattedMessage id="Timeline.nextPeriodShort" />
             </Button>
             <Button
+              data-color="neutral"
               size="xsmall"
               icon={<XMarkIcon aria-hidden />}
               onClick={lukkPeriode}
-              variant="tertiary-neutral"
+              variant="tertiary"
               type="button"
-              title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
-            />
+              title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })} />
           </HStack>
         </HStack>
-        <Box.New background="success-moderate" padding="4" width="370px">
+        <Box background="success-moderate" padding="space-16" width="370px">
           <VStack gap="space-8">
             <HStack justify="space-between">
               <Label size="small">
@@ -113,7 +113,7 @@ export const TilkjentYtelseTimelineData = ({
               />
             </HStack>
           </VStack>
-        </Box.New>
+        </Box>
         {valgtBeregningsresultatPeriode.andeler && valgtBeregningsresultatPeriode.andeler.length !== 0 && (
           <Table>
             <Table.Header>
@@ -181,7 +181,7 @@ export const TilkjentYtelseTimelineData = ({
           </Table>
         )}
       </VStack>
-    </Box.New>
+    </Box>
   );
 };
 

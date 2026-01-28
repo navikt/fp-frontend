@@ -67,7 +67,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: 
         onSubmit={values => submitCallback(transformValues(values, erForutgående))}
         setDataOnUnmount={setMellomlagretFormData}
       >
-        <VStack gap={isReadOnly ? '2' : '6'}>
+        <VStack gap={isReadOnly ? 'space-8' : 'space-24'}>
           <MedlemskapVurderinger
             erForutgående={erForutgående}
             erRevurdering={behandling.type === 'BT-004'}

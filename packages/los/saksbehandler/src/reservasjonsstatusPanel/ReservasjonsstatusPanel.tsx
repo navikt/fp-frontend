@@ -59,17 +59,22 @@ export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid, kanVeilede
         {erReservert && oppgaveForBehandling.reservasjonStatus.erReservertAvInnloggetBruker && (
           <Tooltip content={intl.formatMessage({ id: 'ReservasjonsstatusPanel.ErReservertPaDeg' })}>
             <Button
+              data-color="neutral"
               size="small"
-              variant="primary-neutral"
+              variant="primary"
               onClick={() => opphevOppgavereservasjon(oppgaveForBehandling.id)}
-              disabled={kanVeilede}
-            >
+              disabled={kanVeilede}>
               <FormattedMessage id="ReservasjonsstatusPanel.OpphevReservasjon" />
             </Button>
           </Tooltip>
         )}
         {erReservert && !oppgaveForBehandling.reservasjonStatus.erReservertAvInnloggetBruker && (
-          <Button size="small" variant="primary-neutral" disabled icon={<PadlockLockedIcon aria-hidden />}>
+          <Button
+            data-color="neutral"
+            size="small"
+            variant="primary"
+            disabled
+            icon={<PadlockLockedIcon aria-hidden />}>
             <FormattedMessage
               id="ReservasjonsstatusPanel.Reservert"
               values={{ navn: oppgaveForBehandling.reservasjonStatus.reservertAvNavn }}

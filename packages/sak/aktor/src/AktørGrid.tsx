@@ -17,7 +17,7 @@ export const AktørGrid = ({ aktorInfo, fagsakStatuser, fagsakYtelseTyper, rende
   return (
     <>
       <VisittkortSakIndex bruker={aktorInfo.person} />
-      <VStack gap="space-16" align="center" margin="5">
+      <VStack gap="space-16" align="center" margin="space-20">
         {aktorInfo.fagsaker.length ? (
           aktorInfo.fagsaker.map(fagsak => {
             const fagsakYtelseNavn = fagsakYtelseTyper.find(s => s.kode === fagsak.fagsakYtelseType)?.navn;

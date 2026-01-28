@@ -1,7 +1,5 @@
+import { capitalizeFirstLetter } from '@navikt/ft-utils';
+
 export const toTitleCapitalization = (sentence: string): string => {
-  return sentence
-    .toLowerCase()
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
-    .join(' ');
+  return sentence.toLowerCase().split(' ').map(capitalizeFirstLetter).join(' ');
 };

@@ -1,8 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
-import pLimit from 'p-limit';
 
-import type { ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { OppgaveFilterStatistikk, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AlleKodeverkLos, AndreKriterierType } from '@navikt/fp-types';
 
 import type { Avdeling } from '../typer/avdelingTsType';
@@ -63,7 +62,9 @@ export const LosUrl = {
   HENT_OPPGAVER_PER_DATO: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid-historikk'),
   HENT_OPPGAVER_APNE_ELLER_PA_VENT: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/åpne-behandlinger'),
   HENT_BEHANDLINGER_FRISTUTLOP: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/frist-utløp'),
-  HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag-mnd'),
+  HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND: wrapUrl(
+    '/fplos/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag-mnd',
+  ),
   RESERVASJONER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/reservasjoner'),
   SLETT_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister/slett'),
   HENT_GRUPPER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/grupper'),
@@ -79,12 +80,24 @@ export const LosUrl = {
   SLETT_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/slett'),
   SAKSBEHANDLER_SOK: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/søk'),
   OPPRETT_NY_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
+  OPPGAVE_FILTER_STATISTIKK: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/statistikk-oppgave-filter'),
 };
 
 export const initFetchOptions = () =>
   queryOptions({
     queryKey: [LosUrl.INIT_FETCH],
     queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<InitDataLos>(),
+  });
+
+const getOppgaveFilterStatistikk = (sakslisteId: number, avdelingEnhet: string) =>
+  kyExtended
+    .get(LosUrl.OPPGAVE_FILTER_STATISTIKK, { searchParams: { sakslisteId, avdelingEnhet } })
+    .json<OppgaveFilterStatistikk[]>();
+
+export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number, valgtAvdelingEnhet: string) =>
+  queryOptions({
+    queryKey: [LosUrl.OPPGAVE_FILTER_STATISTIKK, valgtSakslisteId, valgtAvdelingEnhet],
+    queryFn: () => getOppgaveFilterStatistikk(valgtSakslisteId, valgtAvdelingEnhet),
   });
 
 export const oppgaverForAvdelingAntallOptions = (avdelingEnhet: string) =>
@@ -110,18 +123,6 @@ export const saksbehandlareForAvdelingOptions = (avdelingEnhet?: string) =>
         .json<SaksbehandlerProfil[]>(),
     initialData: [],
     enabled: !!avdelingEnhet,
-  });
-
-// Limit concurrency to 2 requests at once
-const limit = pLimit(2);
-
-export const oppgaveAntallOptions = (sakslisteId: number, avdelingEnhet: string) =>
-  queryOptions({
-    queryKey: [LosUrl.OPPGAVE_ANTALL, sakslisteId, avdelingEnhet],
-    queryFn: () =>
-      limit(() =>
-        kyExtended.get(LosUrl.OPPGAVE_ANTALL, { searchParams: { sakslisteId, avdelingEnhet } }).json<number>(),
-      ),
   });
 
 export const losKodeverkOptions = () =>

@@ -246,7 +246,7 @@ const finnLabelForPeriode = (
         <BodyShort>
           <FormattedMessage id="UttakTidslinje.Periode" values={{ periodeString }} />
         </BodyShort>
-        <VStack gap="2">
+        <VStack gap="space-8">
           <BodyShort>
             <FormattedMessage
               id="UttakTidslinje.Trekkdager"
@@ -451,37 +451,37 @@ export const UttakTidslinje = ({
       </Timeline>
       <HStack gap="space-8" justify="end">
         <Button
+          data-color="neutral"
           size="small"
           icon={<PlusIcon aria-hidden />}
           onClick={zoomIn}
-          variant="primary-neutral"
+          variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'UttakTidslinje.ZoomInn' })}
-        />
+          title={intl.formatMessage({ id: 'UttakTidslinje.ZoomInn' })} />
         <Button
+          data-color="neutral"
           size="small"
           icon={<MinusIcon aria-hidden />}
           onClick={zoomOut}
-          variant="primary-neutral"
+          variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'UttakTidslinje.ZoomUt' })}
-        />
+          title={intl.formatMessage({ id: 'UttakTidslinje.ZoomUt' })} />
         <Button
+          data-color="neutral"
           size="small"
           icon={<ArrowLeftIcon aria-hidden />}
           onClick={goBackward}
-          variant="primary-neutral"
+          variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilVenstre' })}
-        />
+          title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilVenstre' })} />
         <Button
+          data-color="neutral"
           size="small"
           icon={<ArrowRightIcon aria-hidden />}
           onClick={goForward}
-          variant="primary-neutral"
+          variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilHogre' })}
-        />
+          title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilHogre' })} />
       </HStack>
     </VStack>
   );

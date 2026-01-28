@@ -110,7 +110,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
     >
       {(field, index, removeButton) => (
         <React.Fragment key={field.id}>
-          <HStack gap="space-16" paddingBlock="2" align="end">
+          <HStack gap="space-16" paddingBlock="space-8" align="end">
             <RhfSelect
               name={`${name}.${index}.land`}
               control={control}

@@ -51,7 +51,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
   const half = Math.ceil(andreKriterierTyper.length / 2);
 
   return (
-    <Box.New borderWidth="1" borderColor="neutral-subtle" padding="10">
+    <Box borderWidth="1" borderColor="neutral-subtle" padding="space-40">
       <VStack gap="space-8">
         <Label size="small">
           <FormattedMessage id="AndreKriterierVelger.AndreKriterier" />
@@ -77,7 +77,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
           </div>
         </HStack>
       </VStack>
-    </Box.New>
+    </Box>
   );
 };
 

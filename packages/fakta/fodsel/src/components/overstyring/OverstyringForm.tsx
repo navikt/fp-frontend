@@ -36,7 +36,7 @@ export const OverstyringForm = ({ gjeldende, isReadOnly, avbrytOverstyring }: Pr
   const finnesBarnIFReg = gjeldende.barn.some(b => b.kilde === 'FOLKEREGISTER');
   return (
     <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(transformValues(values))}>
-      <VStack gap="6">
+      <VStack gap="space-24">
         <TermindatoMedReadonlyToggle isReadOnly={isReadOnly} />
 
         <ErBarnFødt
@@ -54,7 +54,7 @@ export const OverstyringForm = ({ gjeldende, isReadOnly, avbrytOverstyring }: Pr
         />
 
         {!isReadOnly && (
-          <HStack gap="2">
+          <HStack gap="space-8">
             <FaktaSubmitButton
               isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}

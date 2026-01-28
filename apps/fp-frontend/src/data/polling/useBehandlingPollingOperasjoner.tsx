@@ -2,9 +2,9 @@ import { useMutation } from '@tanstack/react-query';
 
 import type { Behandling } from '@navikt/fp-types';
 
-import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs, useBehandlingApi } from '../behandlingApi.ts';
-import { doPolling, useTaskStatusChecker } from './pollingUtils.ts';
-import { useRequestPendingContext } from './RequestPendingContext.tsx';
+import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs, useBehandlingApi } from '../behandlingApi';
+import { doPolling, useTaskStatusChecker } from './pollingUtils';
+import { useRequestPendingContext } from './RequestPendingContext';
 
 export const useBehandlingPollingOperasjoner = (
   behandling: Behandling,

@@ -9,7 +9,7 @@ import type { BehandlingArsakType } from './behandlingArsakType';
 import type { BehandlingResultatType } from './behandlingResultatType';
 import type { BehandlingStatus } from './behandlingStatus';
 import type { BehandlingType } from './behandlingType';
-import type { FagsakMarkeringType } from './fagsakMarkeringType.ts';
+import type { FagsakMarkeringType } from './fagsakMarkeringType';
 import type { FagsakStatus } from './fagsakStatus';
 import type { FagsakYtelseType } from './fagsakYtelseType';
 import type { FaktaOmBeregningTilfelle } from './faktaOmBeregningTilfelle';

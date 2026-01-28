@@ -26,7 +26,7 @@ export const TermindatoMedReadonlyToggle = ({ isReadOnly }: TermindatoMedReadonl
 
   const formatertKilde = getLabelForFaktaKilde(isDirty ? 'SAKSBEHANDLER' : kilde);
   return (
-    <HStack gap="2" align="start">
+    <HStack gap="space-8" align="start">
       <Termindato isReadOnly={isInputReadonly} isRequired={erBarnFødt === false} />
 
       {skalViseKnapp && (

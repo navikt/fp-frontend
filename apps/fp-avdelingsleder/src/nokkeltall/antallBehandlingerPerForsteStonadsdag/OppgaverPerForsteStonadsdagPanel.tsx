@@ -8,8 +8,8 @@ import { useQuery } from '@tanstack/react-query';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { oppgaverPerFørsteStønadsdagMånedOptions } from '../../data/fplosAvdelingslederApi';
-import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper.ts';
-import { useLosKodeverk } from '../../data/useLosKodeverk.ts';
+import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper';
+import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { OppgaverPerForsteStonadsdagGraf } from './OppgaverPerForsteStonadsdagGraf';
 
 interface Props {
@@ -49,7 +49,6 @@ export const OppgaverPerForsteStonadsdagPanel = ({ height, valgtAvdelingEnhet }:
 
   useStoreValuesInLocalStorage(formName, values);
 
-
   return (
     <RhfForm<FormValues> formMethods={formMethods}>
       <VStack gap="space-16">
@@ -76,7 +75,7 @@ export const OppgaverPerForsteStonadsdagPanel = ({ height, valgtAvdelingEnhet }:
         <OppgaverPerForsteStonadsdagGraf
           height={height}
           oppgaverPerForsteStonadsdag={oppgaverPerForsteStonadsdag.filter(ompv =>
-              values.valgtYtelsetype === ALLE_YTELSETYPER_VALGT ? true : values.valgtYtelsetype === ompv.fagsakYtelseType,
+            values.valgtYtelsetype === ALLE_YTELSETYPER_VALGT ? true : values.valgtYtelsetype === ompv.fagsakYtelseType,
           )}
         />
       </VStack>

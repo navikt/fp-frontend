@@ -7,12 +7,12 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { type OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
-import { AnnenPartsYtelser } from '../opplysningskort/AnnenPartsYtelser.tsx';
-import { OpplysningerFraSoknad } from '../opplysningskort/OpplysningerFraSoknad.tsx';
-import { OpplysningerOmAdresser } from '../opplysningskort/OpplysningerOmAdresser.tsx';
+import { AnnenPartsYtelser } from '../opplysningskort/AnnenPartsYtelser';
+import { OpplysningerFraSoknad } from '../opplysningskort/OpplysningerFraSoknad';
+import { OpplysningerOmAdresser } from '../opplysningskort/OpplysningerOmAdresser';
 import { AleneomsorgForm } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
-import { RettighetstypeForm } from './forms/RettighetstypeForm.tsx';
+import { RettighetstypeForm } from './forms/RettighetstypeForm';
 
 export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOverstyre }: OmsorgOgRettProps) => {
   const { alleKodeverk, isSubmittable, aksjonspunkterForPanel, isReadOnly, harÅpentAksjonspunkt } =
@@ -65,19 +65,17 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOversty
         </AksjonspunktHelpTextHTML>
       )}
       {!harUløsteAksjonspunkter && omsorgOgRett.rettighetstype && (
-        <Box.New background="neutral-moderate" padding="5">
+        <Box background="neutral-moderate" padding="space-20">
           <RettighetstypeForm
             omsorgOgRett={omsorgOgRett}
             aksjonspunkt={overstyringAksjonspunkter[0]}
             kanOverstyre={kanOverstyre}
           />
-        </Box.New>
+        </Box>
       )}
-
       <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} alleKodeverk={alleKodeverk} />
       {personoversikt && <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />}
       {omsorgOgRett.registerdata && <AnnenPartsYtelser omsorgOgRett={omsorgOgRett} />}
-
       {(opprettetAleneomsorgAPUtenResultat || aleneomsorgAPMedResultat) && (
         <AleneomsorgForm omsorgOgRett={omsorgOgRett} aksjonspunkt={aksjonspunkter[0]} isSubmittable={isSubmittable} />
       )}
