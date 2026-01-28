@@ -31,7 +31,7 @@ describe('SorteringVelger', () => {
     expect(screen.getByText('F.o.m.')).toBeInTheDocument();
     expect(screen.getByText('T.o.m.')).toBeInTheDocument();
 
-    expect(screen.getByLabelText('Dynamisk periode')).not.toBeChecked();
+    expect(screen.getByLabelText('Fast periode')).toBeChecked();
   });
 
   it('skal vise datovelger der dynamisk periode er valgt', async () => {
@@ -42,7 +42,7 @@ describe('SorteringVelger', () => {
     expect(screen.getByText('F.o.m.')).toBeInTheDocument();
     expect(screen.getByText('T.o.m.')).toBeInTheDocument();
 
-    expect(screen.getByLabelText('Dynamisk periode')).toBeChecked();
+    expect(screen.getByLabelText('Relativ periode (dager)')).toBeChecked();
   });
 
   it('skal vise vis beløpvelger når Feilutbetalt beløp er valgt', async () => {

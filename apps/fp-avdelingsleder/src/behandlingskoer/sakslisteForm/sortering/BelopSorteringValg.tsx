@@ -31,15 +31,18 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
   const fraVerdi = watch('fraBeløp');
   const tilVerdi = watch('tilBeløp');
 
-  const { mutate: lagreSakslisteSorteringTidsintervallDager } = useMutation({
+  const { mutate: lagreSakslisteSorteringRelativt } = useMutation({
     mutationFn: (valuesToStore: { fra: string | undefined; til: string | undefined }) =>
-      lagreSakslisteSorteringIntervall(valgtSakslisteId, valuesToStore.fra, valuesToStore.til, valgtAvdelingEnhet),
+      lagreSakslisteSorteringIntervall(
+        valgtSakslisteId,
+        valuesToStore.fra,
+        valuesToStore.til,
+        undefined,
+        valgtAvdelingEnhet,
+      ),
     onSuccess: () => {
       void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
       });
       void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
@@ -48,12 +51,12 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
   });
 
   const lagreFra = (nyFraVerdi: string) =>
-    lagreSakslisteSorteringTidsintervallDager({
+    lagreSakslisteSorteringRelativt({
       fra: nyFraVerdi,
       til: tilVerdi,
     });
   const lagreTil = (nyTilVerdi: string) =>
-    lagreSakslisteSorteringTidsintervallDager({
+    lagreSakslisteSorteringRelativt({
       fra: fraVerdi,
       til: nyTilVerdi,
     });

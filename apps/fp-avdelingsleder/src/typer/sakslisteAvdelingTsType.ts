@@ -14,7 +14,14 @@ export type KøSorteringFelt = Readonly<{
 export type Statistikk = {
   alleOppgaver: number;
   tilgjengeligeOppgaver: number;
+  behandlingerPåVent: number;
 };
+
+export enum Periodefilter {
+  FAST_PERIODE = 'FAST_PERIODE',
+  RELATIV_PERIODE_DAGER = 'RELATIV_PERIODE_DAGER',
+  RELATIV_PERIODE_MÅNEDER = 'RELATIV_PERIODE_MÅNEDER',
+}
 
 export type SakslisteAvdeling = Readonly<{
   sakslisteId: number;
@@ -23,11 +30,11 @@ export type SakslisteAvdeling = Readonly<{
   fagsakYtelseTyper?: string[];
   sortering?: {
     sorteringType: KøSortering;
+    periodefilter: Periodefilter;
     fra?: number;
     til?: number;
     fomDato?: string;
     tomDato?: string;
-    erDynamiskPeriode: boolean;
   };
   sorteringTyper: KøSorteringFelt[];
   andreKriterier?: AnnetKriterie[];
