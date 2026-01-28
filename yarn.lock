@@ -1366,6 +1366,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/ecma402-abstract@npm:3.1.0":
+  version: 3.1.0
+  resolution: "@formatjs/ecma402-abstract@npm:3.1.0"
+  dependencies:
+    "@formatjs/fast-memoize": "npm:3.1.0"
+    "@formatjs/intl-localematcher": "npm:0.8.0"
+    decimal.js: "npm:^10.6.0"
+    tslib: "npm:^2.8.1"
+  checksum: 10/3d11ab33ca4a48c44f7b24e31c6de024a5d2f81286e6faca03d526827fe09df22b5fb52b6a3471a54312c7790775dc6580bcb5290aab39806b44a5720b23cbc3
+  languageName: node
+  linkType: hard
+
 "@formatjs/fast-memoize@npm:3.0.1":
   version: 3.0.1
   resolution: "@formatjs/fast-memoize@npm:3.0.1"
@@ -1381,6 +1393,15 @@ __metadata:
   dependencies:
     tslib: "npm:^2.8.0"
   checksum: 10/466aa1250eee77897455b6e0282bd178357e326790e18f59e33c77371ebb6099cbf8c520300193ef10ab4909174286ab1d922fa930f02b81dddf08d28eaef1a1
+  languageName: node
+  linkType: hard
+
+"@formatjs/fast-memoize@npm:3.1.0":
+  version: 3.1.0
+  resolution: "@formatjs/fast-memoize@npm:3.1.0"
+  dependencies:
+    tslib: "npm:^2.8.1"
+  checksum: 10/700dfd0a10d20d8cb7427406127f78612a696e4942d38a8f153d82ca213f26bd0616d01a29957f194688887551595455eb0f629c2ce36d964a66ba15815afde9
   languageName: node
   linkType: hard
 
@@ -1406,6 +1427,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/icu-messageformat-parser@npm:3.5.0":
+  version: 3.5.0
+  resolution: "@formatjs/icu-messageformat-parser@npm:3.5.0"
+  dependencies:
+    "@formatjs/ecma402-abstract": "npm:3.1.0"
+    "@formatjs/icu-skeleton-parser": "npm:2.1.0"
+    tslib: "npm:^2.8.1"
+  checksum: 10/179f267b00b50c713bb51855a37b863e6c7cf5da646bc6381bd85ea5022739d8e647916c00aa81ed8259247569db2db60d93eed4443e45bd3ff2d3cfeb9bee74
+  languageName: node
+  linkType: hard
+
 "@formatjs/icu-skeleton-parser@npm:2.0.6":
   version: 2.0.6
   resolution: "@formatjs/icu-skeleton-parser@npm:2.0.6"
@@ -1423,6 +1455,16 @@ __metadata:
     "@formatjs/ecma402-abstract": "npm:3.0.8"
     tslib: "npm:^2.8.0"
   checksum: 10/9917502129e663da5ec8008a9a27c9032e01477adcf4c71788eb475225f57f4602711f9b8f3a3b669c801b0232e9eb53e58c0fdb11aa81e2339e1416f636be3f
+  languageName: node
+  linkType: hard
+
+"@formatjs/icu-skeleton-parser@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@formatjs/icu-skeleton-parser@npm:2.1.0"
+  dependencies:
+    "@formatjs/ecma402-abstract": "npm:3.1.0"
+    tslib: "npm:^2.8.1"
+  checksum: 10/e2934a4eef60118185075b63e84ea04703f55090d80ec414999f9cfd00615101e305072f91e2c87a30c07abc80f267c52e648ba4d3a5b312775e56f459203cef
   languageName: node
   linkType: hard
 
@@ -1446,6 +1488,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/intl-localematcher@npm:0.8.0":
+  version: 0.8.0
+  resolution: "@formatjs/intl-localematcher@npm:0.8.0"
+  dependencies:
+    "@formatjs/fast-memoize": "npm:3.1.0"
+    tslib: "npm:^2.8.1"
+  checksum: 10/cd13313add6c77587b660c22231db8fe50ee5f295a8666225bc96029e18b92054531544bfc0d85f2d25823954ca4ee31af5a1fbe64d275740bf7d11125da121a
+  languageName: node
+  linkType: hard
+
 "@formatjs/intl@npm:4.0.9":
   version: 4.0.9
   resolution: "@formatjs/intl@npm:4.0.9"
@@ -1461,6 +1513,24 @@ __metadata:
     typescript:
       optional: true
   checksum: 10/074809ff13771fb5c620ba28e37612741c4c9a00a283a730c4eb3db1a1292a4a1ab6073b2abf526fe5f7aecbdc6425738258a7a63e371de6aa62ced3c7fc9754
+  languageName: node
+  linkType: hard
+
+"@formatjs/intl@npm:4.1.1":
+  version: 4.1.1
+  resolution: "@formatjs/intl@npm:4.1.1"
+  dependencies:
+    "@formatjs/ecma402-abstract": "npm:3.1.0"
+    "@formatjs/fast-memoize": "npm:3.1.0"
+    "@formatjs/icu-messageformat-parser": "npm:3.5.0"
+    intl-messageformat: "npm:11.1.1"
+    tslib: "npm:^2.8.1"
+  peerDependencies:
+    typescript: ^5.6.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/2bd1d4920ca699f7cd79c7d5c83c5f34c8b3723524a88d9e22a694eaf1595ddb518c2d53714e32a83a21b1115d08b9b1c18ac796d4301531a92f347585a574ae
   languageName: node
   linkType: hard
 
@@ -1836,7 +1906,7 @@ __metadata:
     "@navikt/fp-sak-dekorator": "workspace:*"
     "@navikt/fp-sak-infosider": "workspace:*"
     "@navikt/ft-utils": "npm:3.11.0"
-    "@sentry/browser": "npm:10.33.0"
+    "@sentry/browser": "npm:10.35.0"
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
     "@testing-library/react": "npm:16.3.1"
@@ -1873,10 +1943,10 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.13"
     "@navikt/ft-ui-komponenter": "npm:6.7.0"
     "@navikt/ft-utils": "npm:3.11.0"
-    "@sentry/vite-plugin": "npm:4.6.1"
+    "@sentry/vite-plugin": "npm:4.7.0"
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
-    "@tanstack/react-query": "npm:5.90.16"
+    "@tanstack/react-query": "npm:5.90.19"
     "@tanstack/react-query-devtools": "npm:5.91.2"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.1"
@@ -1891,7 +1961,7 @@ __metadata:
     msw-storybook-addon: "npm:2.0.6"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     react-router-dom: "npm:7.12.0"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
@@ -1914,7 +1984,7 @@ __metadata:
     eslint-plugin-simple-import-sort: "npm:12.1.1"
     eslint-plugin-vitest: "npm:0.5.4"
     globals: "npm:17.0.0"
-    typescript-eslint: "npm:8.52.0"
+    typescript-eslint: "npm:8.53.1"
   peerDependencies:
     eslint: 9.32.0
   languageName: unknown
@@ -1973,7 +2043,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2004,7 +2074,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2040,7 +2110,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2076,7 +2146,7 @@ __metadata:
     lodash: "npm:^4.17.21"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2114,7 +2184,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2146,7 +2216,7 @@ __metadata:
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2185,7 +2255,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2223,7 +2293,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2261,7 +2331,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2300,7 +2370,7 @@ __metadata:
     fast-glob: "npm:3.3.3"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2338,7 +2408,7 @@ __metadata:
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2375,7 +2445,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2413,7 +2483,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2454,7 +2524,7 @@ __metadata:
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2492,7 +2562,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2531,7 +2601,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2570,7 +2640,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2608,7 +2678,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2633,7 +2703,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2738,11 +2808,11 @@ __metadata:
     "@navikt/ft-ui-komponenter": "npm:6.7.0"
     "@navikt/ft-utils": "npm:3.11.0"
     "@popperjs/core": "npm:2.11.8"
-    "@sentry/vite-plugin": "npm:4.6.1"
+    "@sentry/vite-plugin": "npm:4.7.0"
     "@storybook/addon-a11y": "npm:10.1.11"
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
-    "@tanstack/react-query": "npm:5.90.16"
+    "@tanstack/react-query": "npm:5.90.19"
     "@tanstack/react-query-devtools": "npm:5.91.2"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.1"
@@ -2757,7 +2827,7 @@ __metadata:
     msw-storybook-addon: "npm:2.0.6"
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     react-modal: "npm:3.16.3"
     react-responsive: "npm:10.0.1"
     react-router-dom: "npm:7.12.0"
@@ -2790,10 +2860,10 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.13"
     "@navikt/ft-ui-komponenter": "npm:6.7.0"
     "@navikt/ft-utils": "npm:3.11.0"
-    "@sentry/vite-plugin": "npm:4.6.1"
+    "@sentry/vite-plugin": "npm:4.7.0"
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
-    "@tanstack/react-query": "npm:5.90.16"
+    "@tanstack/react-query": "npm:5.90.19"
     "@tanstack/react-query-devtools": "npm:5.91.2"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.1"
@@ -2805,7 +2875,7 @@ __metadata:
     msw-storybook-addon: "npm:2.0.6"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2861,7 +2931,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2891,7 +2961,7 @@ __metadata:
     "@navikt/ft-utils": "npm:3.11.0"
     "@storybook/react": "npm:10.1.11"
     "@storybook/react-vite": "npm:10.1.11"
-    "@tanstack/react-query": "npm:5.90.16"
+    "@tanstack/react-query": "npm:5.90.19"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.1"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2903,7 +2973,7 @@ __metadata:
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -2936,7 +3006,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2971,7 +3041,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3001,7 +3071,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     react-router-dom: "npm:7.12.0"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
@@ -3027,7 +3097,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3053,7 +3123,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3080,7 +3150,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3106,7 +3176,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3135,7 +3205,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
   languageName: unknown
@@ -3169,7 +3239,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3209,7 +3279,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3246,7 +3316,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3284,7 +3354,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3321,7 +3391,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3355,7 +3425,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3393,7 +3463,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3431,7 +3501,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3466,7 +3536,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3497,7 +3567,7 @@ __metadata:
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3546,7 +3616,7 @@ __metadata:
     lodash.debounce: "npm:4.0.8"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3581,7 +3651,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3618,7 +3688,7 @@ __metadata:
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3656,7 +3726,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3693,7 +3763,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3729,7 +3799,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3764,7 +3834,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3793,7 +3863,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3824,7 +3894,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3854,7 +3924,7 @@ __metadata:
     classnames: "npm:2.5.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3883,7 +3953,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -3912,7 +3982,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3941,7 +4011,7 @@ __metadata:
     eslint: "npm:9.39.2"
     history: "npm:5.3.0"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     react-router-dom: "npm:7.12.0"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
@@ -3966,7 +4036,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4001,7 +4071,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4027,7 +4097,7 @@ __metadata:
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4058,7 +4128,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4090,7 +4160,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4116,7 +4186,7 @@ __metadata:
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4147,7 +4217,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4175,7 +4245,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4207,7 +4277,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4238,7 +4308,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4274,7 +4344,7 @@ __metadata:
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4307,7 +4377,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4346,7 +4416,7 @@ __metadata:
     history: "npm:5.3.0"
     react: "npm:19.2.3"
     react-hook-form: "npm:7.71.1"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     react-router-dom: "npm:7.12.0"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
@@ -4371,7 +4441,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4399,7 +4469,7 @@ __metadata:
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     stylelint: "npm:16.26.1"
     typescript: "npm:5.9.3"
@@ -4420,11 +4490,11 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@storybook/react": "npm:10.1.11"
-    "@tanstack/react-query": "npm:5.90.16"
+    "@tanstack/react-query": "npm:5.90.19"
     "@tanstack/react-query-devtools": "npm:5.91.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     react-router-dom: "npm:7.12.0"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
@@ -4497,7 +4567,7 @@ __metadata:
     eslint: "npm:9.39.2"
     fast-glob: "npm:3.3.3"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     storybook: "npm:10.1.11"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4513,7 +4583,7 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     eslint: "npm:9.39.2"
     react: "npm:19.2.3"
-    react-intl: "npm:8.0.11"
+    react-intl: "npm:8.1.1"
     typescript: "npm:5.9.3"
   languageName: unknown
   linkType: soft
@@ -5350,77 +5420,77 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry-internal/browser-utils@npm:10.33.0":
-  version: 10.33.0
-  resolution: "@sentry-internal/browser-utils@npm:10.33.0"
+"@sentry-internal/browser-utils@npm:10.35.0":
+  version: 10.35.0
+  resolution: "@sentry-internal/browser-utils@npm:10.35.0"
   dependencies:
-    "@sentry/core": "npm:10.33.0"
-  checksum: 10/fa431b1a25fc58ea2edbf6e379c1c2785d620660d4de0c48f1350ec955afd863b86183180c82a35750a02849491fe8b03c22f65726420dcb8a97a630469cb64b
+    "@sentry/core": "npm:10.35.0"
+  checksum: 10/efbbe4c498d79bfe0f368b1f4552a0b498adec26deb3efad8b73a9c0808c1a42a013970ce63b36116521bcf59fc463647b6f368c36dd9565b954ab2a7e6119bd
   languageName: node
   linkType: hard
 
-"@sentry-internal/feedback@npm:10.33.0":
-  version: 10.33.0
-  resolution: "@sentry-internal/feedback@npm:10.33.0"
+"@sentry-internal/feedback@npm:10.35.0":
+  version: 10.35.0
+  resolution: "@sentry-internal/feedback@npm:10.35.0"
   dependencies:
-    "@sentry/core": "npm:10.33.0"
-  checksum: 10/3b45ef3995f9d6f53ab850e3f3c6f6ec6f04a65c1c28c563271ba9b1e5efcade877963e9f33f62d57a775cdf1d26ec38cee30bbfb26aeedf82a55d26b1cb34b4
+    "@sentry/core": "npm:10.35.0"
+  checksum: 10/e8c176fe2041c5b873e9b38ed660a1fe1d20b8a7965793e69a512cb180cdd15f9b9d6fdefaba7cc7372b3c81dfdb350429af512a508e9f6cde13ae53b1be754b
   languageName: node
   linkType: hard
 
-"@sentry-internal/replay-canvas@npm:10.33.0":
-  version: 10.33.0
-  resolution: "@sentry-internal/replay-canvas@npm:10.33.0"
+"@sentry-internal/replay-canvas@npm:10.35.0":
+  version: 10.35.0
+  resolution: "@sentry-internal/replay-canvas@npm:10.35.0"
   dependencies:
-    "@sentry-internal/replay": "npm:10.33.0"
-    "@sentry/core": "npm:10.33.0"
-  checksum: 10/429b3cc95e45f3f08a3c795ff535ada411325513fbaf07abd8d0bc7c78216e073efb727aa8262ca1cb7151fc78d6b0fa2594dfa40cf8a6ec2e7b7f396e51d6c9
+    "@sentry-internal/replay": "npm:10.35.0"
+    "@sentry/core": "npm:10.35.0"
+  checksum: 10/af79cb58b95c8f7c71e467fa784e2b843c874a73870f95ec498f8fa479bf1dda226c7a35d9454e767845c843f932d19adc8c9ca648ddb2f23fd6680aa2f77269
   languageName: node
   linkType: hard
 
-"@sentry-internal/replay@npm:10.33.0":
-  version: 10.33.0
-  resolution: "@sentry-internal/replay@npm:10.33.0"
+"@sentry-internal/replay@npm:10.35.0":
+  version: 10.35.0
+  resolution: "@sentry-internal/replay@npm:10.35.0"
   dependencies:
-    "@sentry-internal/browser-utils": "npm:10.33.0"
-    "@sentry/core": "npm:10.33.0"
-  checksum: 10/a931819a39bfa5410e10bc792521f680b5d8ed47823085ffdc31906c4d891d87123d9f36bd9a0996dba43e7205b0c6e44026d1df56b6e80490bd1be4abdb8688
+    "@sentry-internal/browser-utils": "npm:10.35.0"
+    "@sentry/core": "npm:10.35.0"
+  checksum: 10/00ae8fd745003d91b793645e2bdfafb216a230e5c8ff020ff86e7e43d6a8747d64cf5e217f8cd95ebfe9c3a72610aef0424a273214ab1d897d4861966230b8ad
   languageName: node
   linkType: hard
 
-"@sentry/babel-plugin-component-annotate@npm:4.6.1":
-  version: 4.6.1
-  resolution: "@sentry/babel-plugin-component-annotate@npm:4.6.1"
-  checksum: 10/8aff72493b2b5aeeb67887054dcb52a3faf4a1b9cf2888f576467df1954ee9784409eef210043c4f3a571958fcd01e940a28cfa5758c7393239405ab5fec7628
+"@sentry/babel-plugin-component-annotate@npm:4.7.0":
+  version: 4.7.0
+  resolution: "@sentry/babel-plugin-component-annotate@npm:4.7.0"
+  checksum: 10/6cdfa797fcee963cd34bd50d83255ab1e14b075b4661c098c5e30fe270e0c41100fec75336ee5654e0d4a176c2d718853fa3bce5123ef7858071f87f8b031aa8
   languageName: node
   linkType: hard
 
-"@sentry/browser@npm:10.33.0":
-  version: 10.33.0
-  resolution: "@sentry/browser@npm:10.33.0"
+"@sentry/browser@npm:10.35.0":
+  version: 10.35.0
+  resolution: "@sentry/browser@npm:10.35.0"
   dependencies:
-    "@sentry-internal/browser-utils": "npm:10.33.0"
-    "@sentry-internal/feedback": "npm:10.33.0"
-    "@sentry-internal/replay": "npm:10.33.0"
-    "@sentry-internal/replay-canvas": "npm:10.33.0"
-    "@sentry/core": "npm:10.33.0"
-  checksum: 10/e452bf07dc120bbba93943d93502ee633941f49602ee5444183b5bfcb172c469fe7bb0bc0c2c9813ef42b60ca64579e940aba770cdb22f2b43d9c07c5db6a52e
+    "@sentry-internal/browser-utils": "npm:10.35.0"
+    "@sentry-internal/feedback": "npm:10.35.0"
+    "@sentry-internal/replay": "npm:10.35.0"
+    "@sentry-internal/replay-canvas": "npm:10.35.0"
+    "@sentry/core": "npm:10.35.0"
+  checksum: 10/3c2eb79a4563ea0096381b5185e4b3a2700258adba4f1a27072bba295ea37dc98d5ad68457280ebf84090fc050e05bd463139d010c09025f1365a32c4f22f0dc
   languageName: node
   linkType: hard
 
-"@sentry/bundler-plugin-core@npm:4.6.1":
-  version: 4.6.1
-  resolution: "@sentry/bundler-plugin-core@npm:4.6.1"
+"@sentry/bundler-plugin-core@npm:4.7.0":
+  version: 4.7.0
+  resolution: "@sentry/bundler-plugin-core@npm:4.7.0"
   dependencies:
     "@babel/core": "npm:^7.18.5"
-    "@sentry/babel-plugin-component-annotate": "npm:4.6.1"
+    "@sentry/babel-plugin-component-annotate": "npm:4.7.0"
     "@sentry/cli": "npm:^2.57.0"
     dotenv: "npm:^16.3.1"
     find-up: "npm:^5.0.0"
     glob: "npm:^10.5.0"
     magic-string: "npm:0.30.8"
     unplugin: "npm:1.0.1"
-  checksum: 10/9144b5dca6cb3846600e5829a95e183e89fbde05236a20402897d9eecc10b4f11bb94259777cdac9736deaf49d1c5ac7d9d3ef4f11bccb60981ce086d35e7abe
+  checksum: 10/c648f7e6958a2a69729fc98e02b3428c71372949177aea9b05b1a6a00cb3ff4038089c19cc9786c076b035cf7946dc53ccbee4e222cd864c6ca28dd7e5bb3509
   languageName: node
   linkType: hard
 
@@ -5520,20 +5590,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/core@npm:10.33.0":
-  version: 10.33.0
-  resolution: "@sentry/core@npm:10.33.0"
-  checksum: 10/e552bbac80602db8f98c52ea3e5f5f18ad51f1d64ee50d098d653ee3a3913619fa66bc3f4910b0a0e33ff8591e8d984180232dbe9fb79c257a2811f14db1f86b
+"@sentry/core@npm:10.35.0":
+  version: 10.35.0
+  resolution: "@sentry/core@npm:10.35.0"
+  checksum: 10/8d0d4ce40c51699c7a04b9daf3889c61098d28dc5297985497b65e8bd3e33a18b18ad68f7a582867a16087867ff82f21f6fd029fa0c4258b75ddf4b830dce46c
   languageName: node
   linkType: hard
 
-"@sentry/vite-plugin@npm:4.6.1":
-  version: 4.6.1
-  resolution: "@sentry/vite-plugin@npm:4.6.1"
+"@sentry/vite-plugin@npm:4.7.0":
+  version: 4.7.0
+  resolution: "@sentry/vite-plugin@npm:4.7.0"
   dependencies:
-    "@sentry/bundler-plugin-core": "npm:4.6.1"
+    "@sentry/bundler-plugin-core": "npm:4.7.0"
     unplugin: "npm:1.0.1"
-  checksum: 10/241d87ff753e874007cfb5a2712e41341ebeae681771e3c5234601e15caaa96d14d0f9e0ca07abc0004aa21b735a03b79a3f68ddec43fca3331b1ab43fd3652d
+  checksum: 10/10d79b56d146bf76b14b54d02a346c9b8ab8e8842b59b2560afdc634cc37ba629bdad3eb4b0594c3e098eeb7bae2972562388891657c4c7165cf8e964a5b4b1f
   languageName: node
   linkType: hard
 
@@ -5678,10 +5748,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.90.16":
-  version: 5.90.16
-  resolution: "@tanstack/query-core@npm:5.90.16"
-  checksum: 10/25720ff6aa5888550351d92620ca62b6882e80da0fd0428be01c2c6cf4772e6678d7850b88f81916b3ab3fb49dad3b697a3ac84e9e6a90da482ef980c30b7566
+"@tanstack/query-core@npm:5.90.19":
+  version: 5.90.19
+  resolution: "@tanstack/query-core@npm:5.90.19"
+  checksum: 10/04fa0ad7dd4a3b63bf1b74dca8e61f4fd03657c76b960792da48032942ed69571e2dbc904ec3cf156a99659a6a6b53842edeaafdb3791c30431e11d659819ca3
   languageName: node
   linkType: hard
 
@@ -5704,14 +5774,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:5.90.16":
-  version: 5.90.16
-  resolution: "@tanstack/react-query@npm:5.90.16"
+"@tanstack/react-query@npm:5.90.19":
+  version: 5.90.19
+  resolution: "@tanstack/react-query@npm:5.90.19"
   dependencies:
-    "@tanstack/query-core": "npm:5.90.16"
+    "@tanstack/query-core": "npm:5.90.19"
   peerDependencies:
     react: ^18 || ^19
-  checksum: 10/7cd8fa3da43f99ecb52f1ef16fb3fe177957e3bc71d0f367f2e55b9f7bce19984f2d9ff367c909ec10a49ed4d66fc26bb1f3a0088340dfab746be63a51b5bb94
+  checksum: 10/18a12f0e635b23d2d19e4ca2ba6ff12c992bd7575c4739b0432e843eb72d23c25491a5b8c2d38eb3ec4fa93bbd3e8d4af2de2b17f1f090b8875938d4cfe6d873
   languageName: node
   linkType: hard
 
@@ -6036,52 +6106,52 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.52.0":
-  version: 8.52.0
-  resolution: "@typescript-eslint/eslint-plugin@npm:8.52.0"
+"@typescript-eslint/eslint-plugin@npm:8.53.1":
+  version: 8.53.1
+  resolution: "@typescript-eslint/eslint-plugin@npm:8.53.1"
   dependencies:
     "@eslint-community/regexpp": "npm:^4.12.2"
-    "@typescript-eslint/scope-manager": "npm:8.52.0"
-    "@typescript-eslint/type-utils": "npm:8.52.0"
-    "@typescript-eslint/utils": "npm:8.52.0"
-    "@typescript-eslint/visitor-keys": "npm:8.52.0"
+    "@typescript-eslint/scope-manager": "npm:8.53.1"
+    "@typescript-eslint/type-utils": "npm:8.53.1"
+    "@typescript-eslint/utils": "npm:8.53.1"
+    "@typescript-eslint/visitor-keys": "npm:8.53.1"
     ignore: "npm:^7.0.5"
     natural-compare: "npm:^1.4.0"
     ts-api-utils: "npm:^2.4.0"
   peerDependencies:
-    "@typescript-eslint/parser": ^8.52.0
+    "@typescript-eslint/parser": ^8.53.1
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/4f2a2ada2597cfa22c913d436a4ce3f0d20fa17445dda0c6b3eb6088c4b0d1d8ba0ebc0a72c6a1577a3e58c96f7a2f260c201646cb1fb0308a0e248cc9d81cca
+  checksum: 10/264a2f3a0d21bedb0fbc54e93749dd9569f6a2936161a892c25ef4d02082025cd5c8714359629fe3c03dd739f8a0815d8af1cf9ca7d090481ee2447b9fe6801b
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.52.0":
-  version: 8.52.0
-  resolution: "@typescript-eslint/parser@npm:8.52.0"
+"@typescript-eslint/parser@npm:8.53.1":
+  version: 8.53.1
+  resolution: "@typescript-eslint/parser@npm:8.53.1"
   dependencies:
-    "@typescript-eslint/scope-manager": "npm:8.52.0"
-    "@typescript-eslint/types": "npm:8.52.0"
-    "@typescript-eslint/typescript-estree": "npm:8.52.0"
-    "@typescript-eslint/visitor-keys": "npm:8.52.0"
+    "@typescript-eslint/scope-manager": "npm:8.53.1"
+    "@typescript-eslint/types": "npm:8.53.1"
+    "@typescript-eslint/typescript-estree": "npm:8.53.1"
+    "@typescript-eslint/visitor-keys": "npm:8.53.1"
     debug: "npm:^4.4.3"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/f221411fb3cc6c5a9e9fa6bec45cd16d5e5d7c1eeba331c97dae97756103bd4b5f67956e2288d478ad96cce7bc4c3c91b510b06d54283c7c0c86acaf4cdb4abf
+  checksum: 10/7873eb0ca1e524664b93e78c72d110142b333879e71f66992beec993e5d700fc5a562628af53d318cc8555810730cf42f4dfdbb2588c7c8625c5fa53a96f4630
   languageName: node
   linkType: hard
 
-"@typescript-eslint/project-service@npm:8.52.0":
-  version: 8.52.0
-  resolution: "@typescript-eslint/project-service@npm:8.52.0"
+"@typescript-eslint/project-service@npm:8.53.1":
+  version: 8.53.1
+  resolution: "@typescript-eslint/project-service@npm:8.53.1"
   dependencies:
-    "@typescript-eslint/tsconfig-utils": "npm:^8.52.0"
-    "@typescript-eslint/types": "npm:^8.52.0"
+    "@typescript-eslint/tsconfig-utils": "npm:^8.53.1"
+    "@typescript-eslint/types": "npm:^8.53.1"
     debug: "npm:^4.4.3"
   peerDependencies:
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/bfa786007ed4a603fb8f31c6e354f0ba0cca576b03e402584ae3cf0d674f07adfbde9e976a5bf165fa44c484d4b4f310bd18b34d1b0e75b4210253edbdaabb87
+  checksum: 10/e450cda2cb30426d55ebbbb5ecad40ba91e68f913ec7df3008ce4c1be524f7cde8411f4ea3c0a3e12fb43655def0e2473315897e410520e496f3fbb3c450ea08
   languageName: node
   linkType: hard
 
@@ -6095,38 +6165,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:8.52.0":
-  version: 8.52.0
-  resolution: "@typescript-eslint/scope-manager@npm:8.52.0"
+"@typescript-eslint/scope-manager@npm:8.53.1":
+  version: 8.53.1
+  resolution: "@typescript-eslint/scope-manager@npm:8.53.1"
   dependencies:
-    "@typescript-eslint/types": "npm:8.52.0"
-    "@typescript-eslint/visitor-keys": "npm:8.52.0"
-  checksum: 10/89d9c04cd2567e6aa9adcbe85e2eab24fbc64bde5a33c688764e7c896e9a02c06aad2ec88e8bdc4d5bfabadbc510906a0cb4f3e0b73a5b80d10218f7a6a4ea27
+    "@typescript-eslint/types": "npm:8.53.1"
+    "@typescript-eslint/visitor-keys": "npm:8.53.1"
+  checksum: 10/eaf320706143cab1cd1ac27a766be36f038f748be9e891dbedeeb29a39d3e3e7af0789f6f0a94f5c77842533253e10bd63af22c1b974ffc8a25c0ab3a120ba9e
   languageName: node
   linkType: hard
 
-"@typescript-eslint/tsconfig-utils@npm:8.52.0, @typescript-eslint/tsconfig-utils@npm:^8.52.0":
-  version: 8.52.0
-  resolution: "@typescript-eslint/tsconfig-utils@npm:8.52.0"
+"@typescript-eslint/tsconfig-utils@npm:8.53.1, @typescript-eslint/tsconfig-utils@npm:^8.53.1":
+  version: 8.53.1
+  resolution: "@typescript-eslint/tsconfig-utils@npm:8.53.1"
   peerDependencies:
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/5b26227ab549e20a6b15725a4f8373acb70ae1c83570c8d670e242bfcd22ac0c9111d4d28ea16ee3939572caacce50e113388ce943f238fc2ca17f6c5a040cd2
+  checksum: 10/0e2743e3f16d60d6784edab67964725686c3efb9fddf9f90e88a9f8b3e5cf40af23be80d55142397704d765a02771626b23b43151c4e3089a394a7c487d035f9
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:8.52.0":
-  version: 8.52.0
-  resolution: "@typescript-eslint/type-utils@npm:8.52.0"
+"@typescript-eslint/type-utils@npm:8.53.1":
+  version: 8.53.1
+  resolution: "@typescript-eslint/type-utils@npm:8.53.1"
   dependencies:
-    "@typescript-eslint/types": "npm:8.52.0"
-    "@typescript-eslint/typescript-estree": "npm:8.52.0"
-    "@typescript-eslint/utils": "npm:8.52.0"
+    "@typescript-eslint/types": "npm:8.53.1"
+    "@typescript-eslint/typescript-estree": "npm:8.53.1"
+    "@typescript-eslint/utils": "npm:8.53.1"
     debug: "npm:^4.4.3"
     ts-api-utils: "npm:^2.4.0"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/e46d77192e2678561e2cdefe2c2b1ba8965458a88e6dd0d1967656ff5dcb00b75217ec6b084323710028215f64a65ba6ec288e5b021a0c9a325450b4bcfc4f43
+  checksum: 10/d03b8f092d53896ac1d64d3e0555f34d8d52c78eb6d14ca7c4b3a7f62baa37aa99fbeb69ab77d6ea0df3b8e1011e1356a8f281fd00bbb2aa965e433b78b8e9f3
   languageName: node
   linkType: hard
 
@@ -6137,10 +6207,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:8.52.0, @typescript-eslint/types@npm:^8.52.0":
-  version: 8.52.0
-  resolution: "@typescript-eslint/types@npm:8.52.0"
-  checksum: 10/05a630c5d25cce74d1bfa51027f1232f2e8a97a8f483ce0274e928373b4633cdf713be53eca39926f0372d52a3335f13786c7910d2edfd546a0cf1d66b3bcf51
+"@typescript-eslint/types@npm:8.53.1, @typescript-eslint/types@npm:^8.53.1":
+  version: 8.53.1
+  resolution: "@typescript-eslint/types@npm:8.53.1"
+  checksum: 10/9a01aa343329af529c645204070dd20be54556c6fd92bfda3a42b6213c0408f5f2f57084064d88d5de1337a7731e57290f0ec11a0fb181bbb3c3b293ef0dcf4a
   languageName: node
   linkType: hard
 
@@ -6163,14 +6233,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:8.52.0":
-  version: 8.52.0
-  resolution: "@typescript-eslint/typescript-estree@npm:8.52.0"
+"@typescript-eslint/typescript-estree@npm:8.53.1":
+  version: 8.53.1
+  resolution: "@typescript-eslint/typescript-estree@npm:8.53.1"
   dependencies:
-    "@typescript-eslint/project-service": "npm:8.52.0"
-    "@typescript-eslint/tsconfig-utils": "npm:8.52.0"
-    "@typescript-eslint/types": "npm:8.52.0"
-    "@typescript-eslint/visitor-keys": "npm:8.52.0"
+    "@typescript-eslint/project-service": "npm:8.53.1"
+    "@typescript-eslint/tsconfig-utils": "npm:8.53.1"
+    "@typescript-eslint/types": "npm:8.53.1"
+    "@typescript-eslint/visitor-keys": "npm:8.53.1"
     debug: "npm:^4.4.3"
     minimatch: "npm:^9.0.5"
     semver: "npm:^7.7.3"
@@ -6178,22 +6248,22 @@ __metadata:
     ts-api-utils: "npm:^2.4.0"
   peerDependencies:
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/4e699f44a05e9c487531557a1eaf6412a97f370ec946a03596c8d445f584c3d17e9aa34cde5ce8998ae9d6908c1daffb2c9b523cb07e5988cf249eae6dea50fd
+  checksum: 10/fb1e0016292b82a873df1d4d95f9ecc441b443bdd83236eb7c118a88e500b9466e29bba4a6a5c3526d37c3cb189b427ea9f45d49f988fbc6dc4f238d58cfadb9
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:8.52.0":
-  version: 8.52.0
-  resolution: "@typescript-eslint/utils@npm:8.52.0"
+"@typescript-eslint/utils@npm:8.53.1":
+  version: 8.53.1
+  resolution: "@typescript-eslint/utils@npm:8.53.1"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.9.1"
-    "@typescript-eslint/scope-manager": "npm:8.52.0"
-    "@typescript-eslint/types": "npm:8.52.0"
-    "@typescript-eslint/typescript-estree": "npm:8.52.0"
+    "@typescript-eslint/scope-manager": "npm:8.53.1"
+    "@typescript-eslint/types": "npm:8.53.1"
+    "@typescript-eslint/typescript-estree": "npm:8.53.1"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/11a02ab0fd26bb1284dfa8c02d40c54cabd3aa795e82ab26b060ea3839998c28a41822b075f9d23fb51e291e465147213166c8ddaf3c8d5807e70b0a4345d967
+  checksum: 10/ff874fc9938b3b9493e0e543d400cd51ed34391a6bf9838a688bb124d1999639207efb9b626908fc927ae6f149ef4aa62e02df794e5b5b0b34e6ac5de48cdaa6
   languageName: node
   linkType: hard
 
@@ -6221,13 +6291,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:8.52.0":
-  version: 8.52.0
-  resolution: "@typescript-eslint/visitor-keys@npm:8.52.0"
+"@typescript-eslint/visitor-keys@npm:8.53.1":
+  version: 8.53.1
+  resolution: "@typescript-eslint/visitor-keys@npm:8.53.1"
   dependencies:
-    "@typescript-eslint/types": "npm:8.52.0"
+    "@typescript-eslint/types": "npm:8.53.1"
     eslint-visitor-keys: "npm:^4.2.1"
-  checksum: 10/4d841402cc65e876382ede464b68cf167c7d24905b15225c472516bb759140abbef02f250c6335ca35327f7328975ff3b28c3249a5183319cfd01f1d5541e3c1
+  checksum: 10/9498ecd42de7ce5746faee88f67edebd92781d35b31c1da355207b42b564a5974c1a5314d01cd7aea865c5e948b15b3aa043d724b2e51b4f8bc26e0b3711a8b2
   languageName: node
   linkType: hard
 
@@ -9185,6 +9255,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"intl-messageformat@npm:11.1.1":
+  version: 11.1.1
+  resolution: "intl-messageformat@npm:11.1.1"
+  dependencies:
+    "@formatjs/ecma402-abstract": "npm:3.1.0"
+    "@formatjs/fast-memoize": "npm:3.1.0"
+    "@formatjs/icu-messageformat-parser": "npm:3.5.0"
+    tslib: "npm:^2.8.1"
+  checksum: 10/a33494c5582aa764af84544a0453676bbc591ecbf46f26bae344a7dba4d501bf31b88b760cc4d6aa81d378583dede9c05a12a40652ed3ff561ec8bd93d27d415
+  languageName: node
+  linkType: hard
+
 "ip-address@npm:^10.0.1":
   version: 10.0.1
   resolution: "ip-address@npm:10.0.1"
@@ -11110,6 +11192,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-intl@npm:8.1.1":
+  version: 8.1.1
+  resolution: "react-intl@npm:8.1.1"
+  dependencies:
+    "@formatjs/ecma402-abstract": "npm:3.1.0"
+    "@formatjs/icu-messageformat-parser": "npm:3.5.0"
+    "@formatjs/intl": "npm:4.1.1"
+    "@types/hoist-non-react-statics": "npm:^3.3.1"
+    hoist-non-react-statics: "npm:^3.3.2"
+    intl-messageformat: "npm:11.1.1"
+    tslib: "npm:^2.8.1"
+  peerDependencies:
+    "@types/react": ^19.2.8
+    react: 16 || 17 || 18 || 19
+    typescript: ^5.6.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/03154c512a9274e36345d5c51e82052afe3158de1fa5703b98612846b5e3026e15544857d75260db6f832c0d08df76dea63d4212358ec82a53fde9a1a58ba193
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -12390,7 +12494,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.1, tslib@npm:^2.4.0, tslib@npm:^2.8.0":
+"tslib@npm:^2.0.1, tslib@npm:^2.4.0, tslib@npm:^2.8.0, tslib@npm:^2.8.1":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
@@ -12539,18 +12643,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:8.52.0":
-  version: 8.52.0
-  resolution: "typescript-eslint@npm:8.52.0"
+"typescript-eslint@npm:8.53.1":
+  version: 8.53.1
+  resolution: "typescript-eslint@npm:8.53.1"
   dependencies:
-    "@typescript-eslint/eslint-plugin": "npm:8.52.0"
-    "@typescript-eslint/parser": "npm:8.52.0"
-    "@typescript-eslint/typescript-estree": "npm:8.52.0"
-    "@typescript-eslint/utils": "npm:8.52.0"
+    "@typescript-eslint/eslint-plugin": "npm:8.53.1"
+    "@typescript-eslint/parser": "npm:8.53.1"
+    "@typescript-eslint/typescript-estree": "npm:8.53.1"
+    "@typescript-eslint/utils": "npm:8.53.1"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/c12d55948c903549b779bc5a46aab85825be63679118c6fefeb8dcab21173e17665b054ab23cf6e57ac0549fb2f6edcaace03cde165d61a9f0dccadb03e2ab59
+  checksum: 10/7065be8cb4ec2ab4bd53d7342b4c1ea51d96a735cd86496040e34d7b8f1adfc846055b39f0ba80c2c224e0ee49b9273de167f915ffb5cc75e392011c15d7be50
   languageName: node
   linkType: hard
 
