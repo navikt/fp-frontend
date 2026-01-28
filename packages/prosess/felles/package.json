@@ -34,7 +34,7 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "eslint": "9.39.2",
-    "stylelint": "16.26.1",
+    "stylelint": "17.0.0",
     "typescript": "5.9.3"
   }
 }
