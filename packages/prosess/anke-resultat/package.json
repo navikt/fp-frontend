@@ -23,7 +23,7 @@
     "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-utils": "3.11.0",
     "react": "19.2.3",
-    "react-intl": "8.0.11"
+    "react-intl": "8.1.1"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
