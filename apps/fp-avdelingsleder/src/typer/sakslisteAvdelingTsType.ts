@@ -17,11 +17,7 @@ export type Statistikk = {
   behandlingerPåVent: number;
 };
 
-export enum Periodefilter {
-  FAST_PERIODE = 'FAST_PERIODE',
-  RELATIV_PERIODE_DAGER = 'RELATIV_PERIODE_DAGER',
-  RELATIV_PERIODE_MÅNEDER = 'RELATIV_PERIODE_MÅNEDER',
-}
+export type Periodefilter = 'FAST_PERIODE' | 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER';
 
 export type SakslisteAvdeling = Readonly<{
   sakslisteId: number;

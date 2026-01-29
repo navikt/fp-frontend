@@ -7,11 +7,9 @@ import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-va
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { lagreSakslisteNavn, LosUrl } from '../../data/fplosAvdelingslederApi';
-import { Periodefilter, type SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
-import {
-  AndreKriterierVelger,
-  type FormValues as AndreKriterierVelgerFormTypes,
-} from './filtrering/AndreKriterierVelger';
+import { type SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
+import { AndreKriterierVelger } from './filtrering/AndreKriterierVelger';
+import { type FormValues as AndreKriterieValgKnappFormTypes } from './filtrering/AndreKriterieValgKnapp';
 import {
   BehandlingstypeVelger,
   type FormValues as BehandlingstypeVelgerFormValues,
@@ -32,7 +30,7 @@ const maxLength100 = maxLength(100);
 type FormValues = {
   sakslisteId: number;
   navn: string;
-} & AndreKriterierVelgerFormTypes &
+} & AndreKriterieValgKnappFormTypes &
   BehandlingstypeVelgerFormValues &
   FagsakYtelseTypeVelgerFormValues &
   SorteringVelgerFormValues &
@@ -71,7 +69,7 @@ const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling):
     tomDato: valgtSaksliste.sortering?.tomDato,
     fra: valgtSaksliste.sortering?.fra?.toString(),
     til: valgtSaksliste.sortering?.til?.toString(),
-    periodefilter: valgtSaksliste.sortering?.periodefilter ?? Periodefilter.FAST_PERIODE,
+    periodefilter: valgtSaksliste.sortering?.periodefilter ?? 'FAST_PERIODE',
     tilBeslutter,
     ...andreKriterierTyper,
     ...andreKriterierInkluder,
@@ -119,7 +117,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
       <ExpansionCard
         className={styles['expansion-card']}
         size="small"
-        defaultOpen={true}
+        defaultOpen
         aria-label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Utvalgskriterier' })}
       >
         <ExpansionCard.Header>

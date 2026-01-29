@@ -13,7 +13,7 @@ import type { OppgaverForForsteStonadsdagUkeMnd } from '../typer/oppgaverForFors
 import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import type { Reservasjon } from '../typer/reservasjonTsType';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
-import { Periodefilter, type SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
+import type { Periodefilter, SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 
 export type InitDataLos = {
   innloggetBruker: InnloggetBruker;
@@ -212,8 +212,8 @@ export const lagreSakslisteSorteringIntervall = (
   sakslisteId: number,
   fra: string | undefined,
   til: string | undefined,
-  periodefilter: Periodefilter | undefined,
   avdelingEnhet: string,
+  periodefilter?: Periodefilter,
 ) =>
   kyExtended
     .post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, {

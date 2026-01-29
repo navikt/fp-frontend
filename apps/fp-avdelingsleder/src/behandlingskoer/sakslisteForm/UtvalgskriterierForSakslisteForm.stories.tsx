@@ -6,7 +6,6 @@ import { http, HttpResponse } from 'msw';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
-import { Periodefilter } from '../../typer/sakslisteAvdelingTsType.ts';
 import { UtvalgskriterierForSakslisteForm } from './UtvalgskriterierForSakslisteForm';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -55,7 +54,7 @@ export const MedGittNavn: Story = {
         sorteringType: 'BEHFRIST',
         fra: 1,
         til: 4,
-        periodefilter: Periodefilter.RELATIV_PERIODE_DAGER,
+        periodefilter: 'RELATIV_PERIODE_DAGER',
       },
       behandlingTyper: ['BT-002'],
       fagsakYtelseTyper: ['FP'],
@@ -84,7 +83,7 @@ export const MedDefaultNavn: Story = {
         sorteringType: 'BEHFRIST',
         fra: 1,
         til: 4,
-        periodefilter: Periodefilter.RELATIV_PERIODE_DAGER,
+        periodefilter: 'RELATIV_PERIODE_DAGER',
       },
       behandlingTyper: ['BT-002'],
       fagsakYtelseTyper: ['FP'],

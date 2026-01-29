@@ -1,14 +1,17 @@
 import type { ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useIntl } from 'react-intl';
 
 import { MinusIcon, PlusIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack } from '@navikt/ds-react';
 
 import type { AndreKriterierType, LosKodeverkMedNavn } from '@navikt/fp-types';
 
-import type { FormValues } from './AndreKriterierVelger.tsx';
-
 import styles from './AvOgPåKnapper.module.css';
+
+export type FormValues = { [key in AndreKriterierType]?: boolean } & {
+  [K in AndreKriterierType as `${K}_inkluder`]?: boolean;
+};
 
 enum FilterStatus {
   PLUS = 'PLUS',
@@ -26,6 +29,7 @@ type Props = {
 };
 
 export const AndreKriterieValgKnapp = ({ andreKriterierType, lagreAndreKriterier }: Props): ReactElement => {
+  const intl = useIntl();
   const { setValue, watch } = useFormContext<FormValues>();
   const inkluderVerdi = watch(`${andreKriterierType.kode}_inkluder`);
   const filterStatus = getFilterStatus(inkluderVerdi);
@@ -56,40 +60,48 @@ export const AndreKriterieValgKnapp = ({ andreKriterierType, lagreAndreKriterier
       aktiverKnapp(knapp);
     }
   };
-
   return (
     <HStack gap="space-4" data-testid={`av-og-pa-knapper-${andreKriterierType.kode}`}>
-      <PlussKnapp filterStatus={filterStatus} toggle={toggleKnapp} />
-      <MinusKnapp filterStatus={filterStatus} toggle={toggleKnapp} />
+      <PlussKnapp
+        iconTittel={intl.formatMessage({ id: 'AndreKriterieValgKnapp.PlusKnappIconTittel' })}
+        filterStatus={filterStatus}
+        toggle={toggleKnapp}
+      />
+      <MinusKnapp
+        iconTittel={intl.formatMessage({ id: 'AndreKriterieValgKnapp.MinusKnappIconTittel' })}
+        filterStatus={filterStatus}
+        toggle={toggleKnapp}
+      />
       <BodyShort>{andreKriterierType.navn}</BodyShort>
     </HStack>
   );
 };
 
 type KnappProps = {
+  iconTittel: string;
   filterStatus: FilterStatus;
   toggle: (knapp: FilterStatus.PLUS | FilterStatus.MINUS) => void;
 };
 
-const PlussKnapp = ({ filterStatus, toggle }: KnappProps): ReactElement => (
+const PlussKnapp = ({ iconTittel, filterStatus, toggle }: KnappProps): ReactElement => (
   <Button
     className={styles['knapp']}
     variant={filterStatus === FilterStatus.PLUS ? 'primary' : 'secondary'}
     size="xsmall"
-    icon={<PlusIcon title="Filtrer" />}
+    icon={<PlusIcon title={iconTittel} />}
     type="button"
     onClick={() => toggle(FilterStatus.PLUS)}
     aria-label="pluss"
   />
 );
 
-const MinusKnapp = ({ filterStatus, toggle }: KnappProps): ReactElement => (
+const MinusKnapp = ({ iconTittel, filterStatus, toggle }: KnappProps): ReactElement => (
   <Button
     className={styles['knapp']}
     variant={filterStatus === FilterStatus.MINUS ? 'primary' : 'secondary'}
     data-color={filterStatus === FilterStatus.MINUS ? 'danger' : undefined}
     size="xsmall"
-    icon={<MinusIcon title="Filtrer bort" />}
+    icon={<MinusIcon title={iconTittel} />}
     type="button"
     onClick={() => toggle(FilterStatus.MINUS)}
     aria-label="minus"

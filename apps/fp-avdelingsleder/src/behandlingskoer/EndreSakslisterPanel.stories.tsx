@@ -13,7 +13,7 @@ import {
 } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
-import { Periodefilter, type SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
+import { type SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
 
 import messages from '../../i18n/nb_NO.json';
@@ -29,7 +29,7 @@ const SAKSLISTER = [
       sorteringType: 'BEHFRIST',
       fra: 1,
       til: 4,
-      periodefilter: Periodefilter.RELATIV_PERIODE_DAGER,
+      periodefilter: 'RELATIV_PERIODE_DAGER',
     },
     behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],
@@ -58,7 +58,7 @@ const SAKSLISTER = [
       sorteringType: 'BEHFRIST',
       fra: 1,
       til: 4,
-      periodefilter: Periodefilter.RELATIV_PERIODE_DAGER,
+      periodefilter: 'RELATIV_PERIODE_DAGER',
     },
     behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],

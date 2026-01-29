@@ -17,7 +17,7 @@ import {
   lagreSakslisteSorteringTidsintervallDato,
   LosUrl,
 } from '../../../data/fplosAvdelingslederApi';
-import { Periodefilter } from '../../../typer/sakslisteAvdelingTsType.ts';
+import { type Periodefilter } from '../../../typer/sakslisteAvdelingTsType.ts';
 import { useDebounce } from '../useDebounce';
 
 import styles from './sorteringVelger.module.css';
@@ -48,8 +48,8 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
         valgtSakslisteId,
         valuesToStore.fra,
         valuesToStore.til,
-        valuesToStore.periodefilter,
         valgtAvdelingEnhet,
+        valuesToStore.periodefilter,
       ),
     onSuccess: () => {
       void queryClient.invalidateQueries({
@@ -114,10 +114,9 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
           <RhfRadioGroup
             control={control}
             name="periodefilter"
-            legend={intl.formatMessage({ id: 'SorteringVelger.DatoTypeValg' })}
-            defaultValue={periodefilter}
+            legend={intl.formatMessage({ id: 'SorteringVelger.FilterForPeriode' })}
             onChange={value => {
-              if (value === Periodefilter.FAST_PERIODE) {
+              if (value === ('FAST_PERIODE' satisfies Periodefilter)) {
                 lagreSorteringTidsintervallDato({
                   fomDato: fomDatoVerdi,
                   tomDato: tomDatoVerdi,
@@ -131,17 +130,17 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
               }
             }}
           >
-            <Radio value={Periodefilter.FAST_PERIODE}>
+            <Radio value={'FAST_PERIODE' satisfies Periodefilter}>
               <FormattedMessage id="SorteringVelger.FastPeriode" />
             </Radio>
-            <Radio value={Periodefilter.RELATIV_PERIODE_DAGER}>
+            <Radio value={'RELATIV_PERIODE_DAGER' satisfies Periodefilter}>
               <FormattedMessage id="SorteringVelger.RelativPeriodeDag" />
             </Radio>
-            <Radio value={Periodefilter.RELATIV_PERIODE_MÅNEDER}>
+            <Radio value={'RELATIV_PERIODE_MÅNEDER' satisfies Periodefilter}>
               <FormattedMessage id="SorteringVelger.RelativPeriodeMåned" />
             </Radio>
           </RhfRadioGroup>
-          {periodefilter !== Periodefilter.FAST_PERIODE && (
+          {periodefilter !== 'FAST_PERIODE' && (
             <HStack gap="space-16">
               <div>
                 <RhfTextField
@@ -154,7 +153,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
                 />
                 {(fraVerdi || fraVerdi === '0') && (
                   <Detail>
-                    {periodefilter === Periodefilter.RELATIV_PERIODE_DAGER ? (
+                    {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                       <DateLabel dateString={finnDato(fraVerdi)} />
                     ) : (
                       <DateLabel dateString={finnDatoMåned(fraVerdi, true)} />
@@ -163,7 +162,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
                 )}
               </div>
               <Detail className={styles['dager']}>
-                {periodefilter === Periodefilter.RELATIV_PERIODE_DAGER ? (
+                {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                   <FormattedMessage id="SorteringVelger.DagerMedBindestrek" />
                 ) : (
                   <FormattedMessage id="SorteringVelger.MånedMedBindestrek" />
@@ -180,7 +179,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
                 />
                 {(tilVerdi || tilVerdi === '0') && (
                   <Detail>
-                    {periodefilter === Periodefilter.RELATIV_PERIODE_DAGER ? (
+                    {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                       <DateLabel dateString={finnDato(tilVerdi)} />
                     ) : (
                       <DateLabel dateString={finnDatoMåned(tilVerdi, false)} />
@@ -189,7 +188,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
                 )}
               </div>
               <Detail className={styles['dagerMedBindestrek']}>
-                {periodefilter === Periodefilter.RELATIV_PERIODE_DAGER ? (
+                {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                   <FormattedMessage id="SorteringVelger.Dager" />
                 ) : (
                   <FormattedMessage id="SorteringVelger.Måneder" />
@@ -197,7 +196,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
               </Detail>
             </HStack>
           )}
-          {periodefilter === Periodefilter.FAST_PERIODE && (
+          {periodefilter === 'FAST_PERIODE' && (
             <HStack gap="space-16">
               <RhfDatepicker
                 name="fomDato"
@@ -226,11 +225,9 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
 
 const finnDato = (antallDager: string) => dayjs().add(Number(antallDager), 'd').format();
 
-const finnDatoMåned = (antallMåneder: string, start: boolean) => {
-  if (start) {
-    return dayjs().startOf('month').add(Number(antallMåneder), 'month').format();
-  }
-  return dayjs().endOf('month').add(Number(antallMåneder), 'month').format();
+const finnDatoMåned = (antallMåneder: string, erStartenAvMåned: boolean) => {
+  const baseDato = erStartenAvMåned ? dayjs().startOf('month') : dayjs().endOf('month');
+  return baseDato.add(Number(antallMåneder), 'month').format();
 };
 
 const getLagreDatoFn =

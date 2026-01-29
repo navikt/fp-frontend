@@ -7,11 +7,7 @@ import type { AndreKriterierType } from '@navikt/fp-types';
 
 import { lagreSakslisteAndreKriterier, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import { AndreKriterieValgKnapp } from './AndreKriterieValgKnapp.tsx';
-
-export type FormValues = { [key in AndreKriterierType]?: boolean } & {
-  [K in AndreKriterierType as `${K}_inkluder`]?: boolean;
-};
+import { AndreKriterieValgKnapp } from './AndreKriterieValgKnapp';
 
 interface Props {
   valgtSakslisteId: number;

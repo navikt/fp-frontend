@@ -9,7 +9,6 @@ import { http, HttpResponse } from 'msw';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosAvdelingslederApi';
-import { Periodefilter } from '../../../typer/sakslisteAvdelingTsType.ts';
 import { SorteringVelger } from './SorteringVelger';
 
 import messages from '../../../../i18n/nb_NO.json';
@@ -64,7 +63,7 @@ type Story = StoryObj<typeof meta>;
 export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-002', 'BT-006'],
-    periodefilter: Periodefilter.FAST_PERIODE,
+    periodefilter: 'FAST_PERIODE',
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
@@ -76,7 +75,7 @@ export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
 export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-002', 'BT-006'],
-    periodefilter: Periodefilter.RELATIV_PERIODE_DAGER,
+    periodefilter: 'RELATIV_PERIODE_DAGER',
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
@@ -87,7 +86,7 @@ export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
 export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-007'],
-    periodefilter: Periodefilter.FAST_PERIODE,
+    periodefilter: 'FAST_PERIODE',
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
