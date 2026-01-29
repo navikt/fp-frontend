@@ -38,5 +38,6 @@ describe('AndreKriterierVelger', () => {
     await userEvent.click(minusButton);
     expect(plusButton).toHaveAttribute('data-variant', 'secondary');
     expect(minusButton).toHaveAttribute('data-variant', 'primary');
+    expect(minusButton).toHaveAttribute('data-color', 'danger');
   });
 });

@@ -27,85 +27,71 @@ type Props = {
 
 export const AndreKriterieValgKnapp = ({ andreKriterierType, lagreAndreKriterier }: Props): ReactElement => {
   const { setValue, watch } = useFormContext<FormValues>();
-  const values = watch();
+  const inkluderVerdi = watch(`${andreKriterierType.kode}_inkluder`);
+  const filterStatus = getFilterStatus(inkluderVerdi);
 
-  const filterStatus = getFilterStatus(values[`${andreKriterierType.kode}_inkluder`]);
-
-  const togglePlussKnapp = () => {
-    if (filterStatus === FilterStatus.PLUS) {
-      setValue(`${andreKriterierType.kode}_inkluder`, undefined);
-      lagreAndreKriterier({
-        andreKriterierType: andreKriterierType.kode,
-        checked: false,
-        inkluder: false,
-      });
-    } else {
-      setValue(`${andreKriterierType.kode}_inkluder`, true);
-      lagreAndreKriterier({
-        andreKriterierType: andreKriterierType.kode,
-        checked: true,
-        inkluder: true,
-      });
-    }
+  const deaktiverKnapp = () => {
+    setValue(`${andreKriterierType.kode}_inkluder`, undefined);
+    lagreAndreKriterier({
+      andreKriterierType: andreKriterierType.kode,
+      checked: false,
+      inkluder: false,
+    });
   };
 
-  const toggleMinusKnapp = () => {
-    if (filterStatus === FilterStatus.MINUS) {
-      setValue(`${andreKriterierType.kode}_inkluder`, undefined);
-      lagreAndreKriterier({
-        andreKriterierType: andreKriterierType.kode,
-        checked: false,
-        inkluder: false,
-      });
+  const aktiverKnapp = (knapp: FilterStatus.PLUS | FilterStatus.MINUS) => {
+    const inkluder = knapp === FilterStatus.PLUS;
+    setValue(`${andreKriterierType.kode}_inkluder`, inkluder);
+    lagreAndreKriterier({
+      andreKriterierType: andreKriterierType.kode,
+      checked: true,
+      inkluder: inkluder,
+    });
+  };
+
+  const toggleKnapp = (knapp: FilterStatus.PLUS | FilterStatus.MINUS) => {
+    if (knapp == filterStatus) {
+      deaktiverKnapp();
     } else {
-      setValue(`${andreKriterierType.kode}_inkluder`, false);
-      lagreAndreKriterier({
-        andreKriterierType: andreKriterierType.kode,
-        checked: true,
-        inkluder: false,
-      });
+      aktiverKnapp(knapp);
     }
   };
 
   return (
     <HStack gap="space-4" data-testid={`av-og-pa-knapper-${andreKriterierType.kode}`}>
-      <PlussKnapp filterStatus={filterStatus} toggle={togglePlussKnapp} />
-      <MinusKnapp filterStatus={filterStatus} toggle={toggleMinusKnapp} />
+      <PlussKnapp filterStatus={filterStatus} toggle={toggleKnapp} />
+      <MinusKnapp filterStatus={filterStatus} toggle={toggleKnapp} />
       <BodyShort>{andreKriterierType.navn}</BodyShort>
     </HStack>
   );
 };
 
-type PlussKnappProps = {
+type KnappProps = {
   filterStatus: FilterStatus;
-  toggle: () => void;
+  toggle: (knapp: FilterStatus.PLUS | FilterStatus.MINUS) => void;
 };
 
-const PlussKnapp = ({ filterStatus, toggle }: PlussKnappProps): ReactElement => (
+const PlussKnapp = ({ filterStatus, toggle }: KnappProps): ReactElement => (
   <Button
     className={styles['knapp']}
     variant={filterStatus === FilterStatus.PLUS ? 'primary' : 'secondary'}
     size="xsmall"
     icon={<PlusIcon title="Filtrer" />}
     type="button"
-    onClick={toggle}
+    onClick={() => toggle(FilterStatus.PLUS)}
     aria-label="pluss"
   />
 );
 
-type MinusKnappProps = {
-  filterStatus: FilterStatus;
-  toggle: () => void;
-};
-
-const MinusKnapp = ({ filterStatus, toggle }: MinusKnappProps): ReactElement => (
+const MinusKnapp = ({ filterStatus, toggle }: KnappProps): ReactElement => (
   <Button
     className={styles['knapp']}
-    variant={filterStatus === FilterStatus.MINUS ? 'danger' : 'secondary'}
+    variant={filterStatus === FilterStatus.MINUS ? 'primary' : 'secondary'}
+    data-color={filterStatus === FilterStatus.MINUS ? 'danger' : undefined}
     size="xsmall"
     icon={<MinusIcon title="Filtrer bort" />}
     type="button"
-    onClick={toggle}
+    onClick={() => toggle(FilterStatus.MINUS)}
     aria-label="minus"
   />
 );
