@@ -121,13 +121,28 @@ export const SaksbehandlereSomErGruppert: Story = {
                 gruppeNavn: 'Gruppe 1',
                 saksbehandlere: [
                   {
+                    brukerIdent: 'S34354',
+                    navn: 'Steffen',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                  {
                     brukerIdent: 'E23232',
                     navn: 'Espen Utvikler',
                     ansattAvdeling: 'Avdeling Å',
                   },
                   {
-                    brukerIdent: 'S34354',
-                    navn: 'Steffen',
+                    brukerIdent: 'E23232',
+                    navn: 'Anders Utvikler',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                  {
+                    brukerIdent: 'E23232',
+                    navn: 'Jens-Otto Techlead',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                  {
+                    brukerIdent: 'E23232',
+                    navn: 'Morgan Designer',
                     ansattAvdeling: 'Avdeling Å',
                   },
                 ],

@@ -82,10 +82,12 @@ export const SaksbehandlereForSakslisteForm = ({
                       key={sg.gruppeId}
                       content={
                         <ValgAvSaksbehandlere
-                          saksbehandlere={sg.saksbehandlere.map(sb => ({
-                            brukerIdent: sb.brukerIdent,
-                            navn: sb.navn,
-                          }))}
+                          saksbehandlere={sg.saksbehandlere
+                            .toSorted((sb1, sb2) => sb1.navn.localeCompare(sb2.navn))
+                            .map(sb => ({
+                              brukerIdent: sb.brukerIdent,
+                              navn: sb.navn,
+                            }))}
                           valgtSaksliste={valgtSaksliste}
                           valgtAvdelingEnhet={valgtAvdelingEnhet}
                         />
