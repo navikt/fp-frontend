@@ -37,7 +37,6 @@ const backgrounds: Record<HistorikkAktor, BoxNewProps['background']> = {
   ['VL']: 'neutral-moderate',
   ['SBH']: 'meta-purple-moderate',
   ['SOKER']: 'warning-moderate',
-  '-': 'info-moderate',
 };
 
 export const HistorikkInnslag = ({

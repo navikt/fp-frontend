@@ -13,7 +13,7 @@
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-vitest": "0.5.4",
     "globals": "17.0.0",
-    "typescript-eslint": "8.52.0"
+    "typescript-eslint": "8.53.1"
   },
   "peerDependencies": {
     "eslint": "9.32.0"

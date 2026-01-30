@@ -3915,7 +3915,7 @@ export type tjenester_behandling_personopplysning_PersonoversiktDto = {
   bruker: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
 };
 
-export type foreldrepenger_behandlingslager_aktør_OppholdstillatelseType = 'MIDLERTIDIG' | 'PERMANENT' | '-';
+export type foreldrepenger_behandlingslager_aktør_OppholdstillatelseType = 'MIDLERTIDIG' | 'PERMANENT';
 
 export type foreldrepenger_behandlingslager_aktør_PersonstatusType =
   | 'ADNR'
@@ -4911,8 +4911,7 @@ export type foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør
   | 'SBH'
   | 'SOKER'
   | 'ARBEIDSGIVER'
-  | 'VL'
-  | '-';
+  | 'VL';
 
 export type foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType =
   | 'ANKE_MERKNADER'

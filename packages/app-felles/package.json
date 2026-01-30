@@ -23,7 +23,7 @@
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",
     "@navikt/ft-utils": "3.11.0",
-    "@sentry/browser": "10.33.0",
+    "@sentry/browser": "10.35.0",
     "react": "19.2.3"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "@navikt/fp-config-vite": "workspace:*",
     "@storybook/react": "10.1.11",
     "@storybook/react-vite": "10.1.11",
-    "@testing-library/react": "16.3.1",
+    "@testing-library/react": "16.3.2",
     "eslint": "9.39.2",
     "fast-glob": "3.3.3",
     "storybook": "10.1.11",

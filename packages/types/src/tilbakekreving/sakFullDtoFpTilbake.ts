@@ -7,7 +7,7 @@ type BehandlingOpprettingDtoFpTilbake = {
   kanOppretteBehandling: boolean;
 };
 
-type HistorikkAktørFpTilbake = 'BESL' | 'SBH' | 'SOKER' | 'ARBEIDSGIVER' | 'VL' | '-';
+type HistorikkAktørFpTilbake = 'BESL' | 'SBH' | 'SOKER' | 'ARBEIDSGIVER' | 'VL';
 
 type HistorikkAktørDtoFpTilbake = {
   ident?: string;
