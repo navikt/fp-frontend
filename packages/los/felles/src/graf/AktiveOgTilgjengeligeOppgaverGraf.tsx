@@ -113,9 +113,9 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
           },
           series: [
             {
-              name: ventendeLabel,
+              name: reserverteLabel,
               type: 'line',
-              data: sampletVentendeData,
+              data: sampletReserverteData,
               stack: 'total',
               areaStyle: {},
             },
@@ -127,14 +127,14 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
               areaStyle: {},
             },
             {
-              name: reserverteLabel,
+              name: ventendeLabel,
               type: 'line',
-              data: sampletReserverteData,
+              data: sampletVentendeData,
               stack: 'total',
               areaStyle: {},
             },
           ],
-          color: ['#A8D5BA', '#7EC8C2', '#84abca'],
+          color: ['#a8d5ba', '#7ec8c2', '#7bbbcd'],
         }}
       />
     </RawIntlProvider>
