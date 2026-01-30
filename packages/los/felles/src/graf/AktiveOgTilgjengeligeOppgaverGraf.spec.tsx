@@ -30,17 +30,20 @@ describe('AktiveOgTilgjengeligeOppgaverGraf', () => {
   };
 
   const mockData: OppgaveFilterStatistikk[] = [
-    { tidspunkt: getTidspunktForAntallTimerSiden(200), aktive: 21, tilgjengelige: 5 }, // Eldre enn 7 dager (200 timer)
-    { tidspunkt: getTidspunktForAntallTimerSiden(180), aktive: 21, tilgjengelige: 4 }, // Eldre enn 7 dager (180 timer)
-    { tidspunkt: getTidspunktForAntallTimerSiden(170), aktive: 21, tilgjengelige: 6 }, // Eldre enn 7 dager (170 timer)
-    { tidspunkt: getTidspunktForAntallTimerSiden(100), aktive: 19, tilgjengelige: 8 }, // Innenfor 7 dager, utenfor 24 timer (100 timer = ~4 dager)
-    { tidspunkt: getTidspunktForAntallTimerSiden(90), aktive: 19, tilgjengelige: 8 }, // Innenfor 7 dager, utenfor 24 timer (90 timer = ~3.75 dager)
-    { tidspunkt: getTidspunktForAntallTimerSiden(80), aktive: 19, tilgjengelige: 6 }, // Innenfor 7 dager, utenfor 24 timer (80 timer = ~3.3 dager)
-    { tidspunkt: getTidspunktForAntallTimerSiden(4), aktive: 20, tilgjengelige: 10 }, // Innenfor 24 timer
-    { tidspunkt: getTidspunktForAntallTimerSiden(3), aktive: 20, tilgjengelige: 9 }, // Innenfor 24 timer
-    { tidspunkt: getTidspunktForAntallTimerSiden(2), aktive: 18, tilgjengelige: 6 }, // Innenfor 24 timer
-    { tidspunkt: getTidspunktForAntallTimerSiden(1), aktive: 21, tilgjengelige: 4 }, // Innenfor 24 timer
-    { tidspunkt: getTidspunktForAntallTimerSiden(0), aktive: 29, tilgjengelige: 9 }, // Innenfor 24 timer
+    { tidspunkt: getTidspunktForAntallTimerSiden(200), aktive: 21, tilgjengelige: 5, ventende: 32 }, // Eldre enn 7 dager (200 timer)
+    { tidspunkt: getTidspunktForAntallTimerSiden(180), aktive: 21, tilgjengelige: 4, ventende: 31 }, // Eldre enn 7 dager (180 timer)
+    { tidspunkt: getTidspunktForAntallTimerSiden(170), aktive: 21, tilgjengelige: 6, ventende: 33 }, // Eldre enn 7 dager (170 timer)
+    { tidspunkt: getTidspunktForAntallTimerSiden(100), aktive: 19, tilgjengelige: 8, ventende: 29 },
+    // Innenfor 7 dager, utenfor 24 timer (100 timer = ~4 dager)
+    { tidspunkt: getTidspunktForAntallTimerSiden(90), aktive: 19, tilgjengelige: 8, ventende: 30 },
+    // Innenfor 7 dager, utenfor 24 timer (90 timer = ~3.75 dager)
+    { tidspunkt: getTidspunktForAntallTimerSiden(80), aktive: 19, tilgjengelige: 6, ventende: 28 },
+    // Innenfor 7 dager, utenfor 24 timer (80 timer = ~3.3 dager)
+    { tidspunkt: getTidspunktForAntallTimerSiden(4), aktive: 20, tilgjengelige: 10, ventende: 31 }, // Innenfor 24 timer
+    { tidspunkt: getTidspunktForAntallTimerSiden(3), aktive: 20, tilgjengelige: 9, ventende: 30 }, // Innenfor 24 timer
+    { tidspunkt: getTidspunktForAntallTimerSiden(2), aktive: 18, tilgjengelige: 6, ventende: 27 }, // Innenfor 24 timer
+    { tidspunkt: getTidspunktForAntallTimerSiden(1), aktive: 21, tilgjengelige: 4, ventende: 32 }, // Innenfor 24 timer
+    { tidspunkt: getTidspunktForAntallTimerSiden(0), aktive: 29, tilgjengelige: 9, ventende: 44 }, // Innenfor 24 timer
   ];
 
   it('skal renderes med ToggleGroup for tidsintervaller', () => {
@@ -99,7 +102,7 @@ describe('AktiveOgTilgjengeligeOppgaverGraf', () => {
 
   it('skal oppdatere grafen når data endres og vise nye datapunkter', () => {
     const initialData: OppgaveFilterStatistikk[] = [
-      { tidspunkt: getTidspunktForAntallTimerSiden(2), aktive: 10, tilgjengelige: 5 },
+      { tidspunkt: getTidspunktForAntallTimerSiden(2), aktive: 10, tilgjengelige: 5, ventende: 15 },
     ];
 
     const { rerender } = render(<AktiveOgTilgjengeligeOppgaverGraf aktiveOgLedigeTidslinje={initialData} />);
@@ -111,9 +114,9 @@ describe('AktiveOgTilgjengeligeOppgaverGraf', () => {
 
     // Oppdater med nye data
     const newData: OppgaveFilterStatistikk[] = [
-      { tidspunkt: getTidspunktForAntallTimerSiden(2), aktive: 10, tilgjengelige: 5 },
-      { tidspunkt: getTidspunktForAntallTimerSiden(1), aktive: 15, tilgjengelige: 8 },
-      { tidspunkt: getTidspunktForAntallTimerSiden(0), aktive: 20, tilgjengelige: 12 },
+      { tidspunkt: getTidspunktForAntallTimerSiden(2), aktive: 10, tilgjengelige: 5, ventende: 15 },
+      { tidspunkt: getTidspunktForAntallTimerSiden(1), aktive: 15, tilgjengelige: 8, ventende: 23 },
+      { tidspunkt: getTidspunktForAntallTimerSiden(0), aktive: 20, tilgjengelige: 12, ventende: 30 },
     ];
 
     rerender(<AktiveOgTilgjengeligeOppgaverGraf aktiveOgLedigeTidslinje={newData} />);

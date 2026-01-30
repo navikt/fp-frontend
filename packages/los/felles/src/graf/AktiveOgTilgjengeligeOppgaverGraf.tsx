@@ -24,8 +24,9 @@ interface Props {
 
 export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
   const height = 400;
-  const aktivLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Ledig' });
+  const ledigLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Ledig' });
   const reserverteLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Reserverte' });
+  const ventendeLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.PaVent' });
 
   const [tidsintervall, setTidsintervall] = useState<Tidsintervall>(Tidsintervall.UKE);
   const filtrertTidslinje = filtererTidslinjeBasertPåValgIntervall(aktiveOgLedigeTidslinje, tidsintervall);
@@ -36,6 +37,10 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
   const granularitet = 40;
   const sampletTidspunkter = reduserDatapunkterTilSpesifisertMaxAntall(
     sortertOgFiltrertTidslinje.map(o => o.tidspunkt),
+    granularitet,
+  );
+  const sampletBehandlingPåVent = reduserDatapunkterTilSpesifisertMaxAntall(
+    sortertOgFiltrertTidslinje.map(o => o.ventende),
     granularitet,
   );
   const sampletLedigeData = reduserDatapunkterTilSpesifisertMaxAntall(
@@ -71,7 +76,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
             },
           },
           legend: {
-            data: [aktivLabel, reserverteLabel],
+            data: [ventendeLabel, ledigLabel, reserverteLabel],
           },
           xAxis: {
             name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.xAkse' }),
@@ -108,21 +113,28 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
           },
           series: [
             {
+              name: ventendeLabel,
+              type: 'line',
+              data: sampletBehandlingPåVent,
+              stack: 'total',
+              areaStyle: {},
+            },
+            {
+              name: ledigLabel,
+              type: 'line',
+              data: sampletLedigeData,
+              stack: 'total',
+              areaStyle: {},
+            },
+            {
               name: reserverteLabel,
               type: 'line',
               data: sampletReserverteData,
               stack: 'total',
               areaStyle: {},
             },
-            {
-              name: aktivLabel,
-              type: 'line',
-              data: sampletLedigeData,
-              stack: 'total',
-              areaStyle: {},
-            },
           ],
-          color: ['#38a161', '#9ad6bd'],
+          color: ['#A8D5BA', '#7EC8C2', '#84abca'],
         }}
       />
     </RawIntlProvider>
