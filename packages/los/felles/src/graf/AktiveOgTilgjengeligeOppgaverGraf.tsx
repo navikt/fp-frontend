@@ -76,7 +76,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
             },
           },
           legend: {
-            data: [ventendeLabel, ledigLabel, reserverteLabel],
+            data: [ledigLabel, reserverteLabel, ventendeLabel],
           },
           xAxis: {
             name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.xAkse' }),
@@ -113,6 +113,13 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
           },
           series: [
             {
+              name: ventendeLabel,
+              type: 'line',
+              data: sampletVentendeData,
+              stack: 'total',
+              areaStyle: {},
+            },
+            {
               name: reserverteLabel,
               type: 'line',
               data: sampletReserverteData,
@@ -123,13 +130,6 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
               name: ledigLabel,
               type: 'line',
               data: sampletLedigeData,
-              stack: 'total',
-              areaStyle: {},
-            },
-            {
-              name: ventendeLabel,
-              type: 'line',
-              data: sampletVentendeData,
               stack: 'total',
               areaStyle: {},
             },
