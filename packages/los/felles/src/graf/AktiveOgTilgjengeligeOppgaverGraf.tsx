@@ -24,8 +24,9 @@ interface Props {
 
 export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
   const height = 400;
-  const aktivLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Ledig' });
+  const ledigLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Ledig' });
   const reserverteLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Reserverte' });
+  const ventendeLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.PaVent' });
 
   const [tidsintervall, setTidsintervall] = useState<Tidsintervall>(Tidsintervall.UKE);
   const filtrertTidslinje = filtererTidslinjeBasertPåValgIntervall(aktiveOgLedigeTidslinje, tidsintervall);
@@ -36,6 +37,10 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
   const granularitet = 40;
   const sampletTidspunkter = reduserDatapunkterTilSpesifisertMaxAntall(
     sortertOgFiltrertTidslinje.map(o => o.tidspunkt),
+    granularitet,
+  );
+  const sampletVentendeData = reduserDatapunkterTilSpesifisertMaxAntall(
+    sortertOgFiltrertTidslinje.map(o => o.ventende),
     granularitet,
   );
   const sampletLedigeData = reduserDatapunkterTilSpesifisertMaxAntall(
@@ -71,7 +76,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
             },
           },
           legend: {
-            data: [aktivLabel, reserverteLabel],
+            data: [ledigLabel, reserverteLabel, ventendeLabel],
           },
           xAxis: {
             name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.xAkse' }),
@@ -108,6 +113,13 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
           },
           series: [
             {
+              name: ventendeLabel,
+              type: 'line',
+              data: sampletVentendeData,
+              stack: 'total',
+              areaStyle: {},
+            },
+            {
               name: reserverteLabel,
               type: 'line',
               data: sampletReserverteData,
@@ -115,14 +127,14 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
               areaStyle: {},
             },
             {
-              name: aktivLabel,
+              name: ledigLabel,
               type: 'line',
               data: sampletLedigeData,
               stack: 'total',
               areaStyle: {},
             },
           ],
-          color: ['#38a161', '#9ad6bd'],
+          color: ['#a8d5ba', '#7ec8c2', '#7bbbcd'],
         }}
       />
     </RawIntlProvider>
