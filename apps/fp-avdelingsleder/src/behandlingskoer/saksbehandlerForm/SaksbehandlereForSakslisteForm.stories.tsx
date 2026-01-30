@@ -131,18 +131,33 @@ export const SaksbehandlereSomErGruppert: Story = {
                     ansattAvdeling: 'Avdeling Å',
                   },
                   {
-                    brukerIdent: 'E23232',
+                    brukerIdent: 'A123456',
                     navn: 'Anders Utvikler',
                     ansattAvdeling: 'Avdeling Å',
                   },
                   {
-                    brukerIdent: 'E23232',
+                    brukerIdent: 'T123421',
                     navn: 'Jens-Otto Techlead',
                     ansattAvdeling: 'Avdeling Å',
                   },
                   {
-                    brukerIdent: 'E23232',
+                    brukerIdent: 'M00000',
                     navn: 'Morgan Designer',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                  {
+                    brukerIdent: 'S00001',
+                    navn: 'Tor på Spor',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                  {
+                    brukerIdent: 'M00002',
+                    navn: 'Marte',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                  {
+                    brukerIdent: 'K123456',
+                    navn: 'Kari Kanari',
                     ansattAvdeling: 'Avdeling Å',
                   },
                 ],

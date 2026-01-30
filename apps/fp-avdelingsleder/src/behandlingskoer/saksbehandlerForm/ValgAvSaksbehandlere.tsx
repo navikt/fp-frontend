@@ -1,6 +1,5 @@
 import { useFormContext } from 'react-hook-form';
 
-import { HStack, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -35,16 +34,11 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
     },
   });
 
-  const pos = Math.ceil(saksbehandlere.length / 2);
-  const avdelingensSaksbehandlereVenstreListe = saksbehandlere.slice(0, pos);
-  const avdelingensSaksbehandlereHoyreListe = saksbehandlere.slice(pos);
-
   return (
-    <HStack gap="space-4">
-      <VStack gap="space-8" width="50%">
-        {avdelingensSaksbehandlereVenstreListe.map(s => (
+    <div style={{ columnCount: 3, columnGap: '32px' }}>
+      {saksbehandlere.map(s => (
+        <div key={s.brukerIdent} style={{ breakInside: 'avoid', marginBottom: '16px' }}>
           <RhfCheckbox
-            key={s.brukerIdent}
             name={s.brukerIdent}
             control={control}
             label={s.navn}
@@ -55,24 +49,8 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
               })
             }
           />
-        ))}
-      </VStack>
-      <VStack gap="space-8">
-        {avdelingensSaksbehandlereHoyreListe.map(s => (
-          <RhfCheckbox
-            key={s.brukerIdent}
-            name={s.brukerIdent}
-            control={control}
-            label={s.navn}
-            onChange={isChecked =>
-              knyttSaksbehandlerTilSaksliste({
-                brukerIdent: s.brukerIdent,
-                checked: isChecked,
-              })
-            }
-          />
-        ))}
-      </VStack>
-    </HStack>
+        </div>
+      ))}
+    </div>
   );
 };
