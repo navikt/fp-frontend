@@ -39,7 +39,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
     sortertOgFiltrertTidslinje.map(o => o.tidspunkt),
     granularitet,
   );
-  const sampletBehandlingPåVent = reduserDatapunkterTilSpesifisertMaxAntall(
+  const sampletVentendeData = reduserDatapunkterTilSpesifisertMaxAntall(
     sortertOgFiltrertTidslinje.map(o => o.ventende),
     granularitet,
   );
@@ -115,7 +115,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
             {
               name: ventendeLabel,
               type: 'line',
-              data: sampletBehandlingPåVent,
+              data: sampletVentendeData,
               stack: 'total',
               areaStyle: {},
             },
