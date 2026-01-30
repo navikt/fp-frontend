@@ -7,7 +7,11 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
-import { opprettNySaksliste, sakslisterForAvdelingOptions } from '../data/fplosAvdelingslederApi';
+import {
+  oppgaverForAvdelingAntallOptions,
+  opprettNySaksliste,
+  sakslisterForAvdelingOptions,
+} from '../data/fplosAvdelingslederApi';
 import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
 import { SaksbehandlereForSakslisteForm } from './saksbehandlerForm/SaksbehandlereForSakslisteForm';
 import { UtvalgskriterierForSakslisteForm } from './sakslisteForm/UtvalgskriterierForSakslisteForm';
@@ -23,6 +27,7 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
   const intl = useIntl();
   const [valgtSakslisteId, setValgtSakslisteId] = useState<number>();
 
+  const { data: oppgaverForAvdelingAntall } = useQuery(oppgaverForAvdelingAntallOptions(valgtAvdelingEnhet));
   const { data: sakslister, refetch: refetchSakslister } = useQuery(sakslisterForAvdelingOptions(valgtAvdelingEnhet));
 
   const { mutate: lagNySakslisteOgHentAvdelingensSakslisterPåNytt, data: nySakslisteObject } = useMutation({
@@ -44,6 +49,7 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
       setValgtSakslisteId={setValgtSakslisteId}
       valgtSakslisteId={valgtSakId}
       valgtAvdelingEnhet={valgtAvdelingEnhet}
+      oppgaverForAvdelingAntall={oppgaverForAvdelingAntall}
       lagNySaksliste={lagNySakslisteOgHentAvdelingensSakslisterPåNytt}
       resetValgtSakslisteId={() => setValgtSakslisteId(undefined)}
     >

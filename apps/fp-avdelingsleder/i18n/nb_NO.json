@@ -54,6 +54,7 @@
   "TilBeslutterVelger.Fjern": "Fjern beslutteroppgaver",
   "TilBeslutterVelger.TaMedAlle": "Ta med alle",
 
+  "GjeldendeSakslisterTabell.GjeldendeLister": "Gjeldende behandlingskøer",
   "GjeldendeSakslisterTabell.IngenLister": "Ingen behandlingskøer er laget",
   "GjeldendeSakslisterTabell.Listenavn": "Navn",
   "GjeldendeSakslisterTabell.LeggTilListe": "Legg til behandlingskø",
@@ -66,6 +67,7 @@
   "GjeldendeSakslisterTabell.AntallOppgaver": "Alle oppgaver",
   "GjeldendeSakslisterTabell.AntallTilgjengelige": "Tilgjengelige oppgaver",
   "GjeldendeSakslisterTabell.Graf": "Graf",
+  "GjeldendeSakslisterTabell.OppgaverForAvdeling": "Antall åpne behandlinger totalt",
 
   "OppgaverGrafDialog.Overskrift": "Antall oppgaver",
   "OppgaverGrafDialog.Lukk": "Lukk",

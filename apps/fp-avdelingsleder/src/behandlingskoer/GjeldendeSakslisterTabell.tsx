@@ -2,7 +2,7 @@ import { type KeyboardEvent, type ReactElement, useEffect, useRef, useState } fr
 import { FormattedMessage } from 'react-intl';
 
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, Link, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Detail, HStack, Label, Link, Table, VStack } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
@@ -58,6 +58,7 @@ interface Props {
   setValgtSakslisteId: (sakslisteId?: number) => void;
   valgtSakslisteId?: number;
   valgtAvdelingEnhet: string;
+  oppgaverForAvdelingAntall?: number;
   lagNySaksliste: () => void;
   resetValgtSakslisteId: () => void;
   children: ReactElement;
@@ -73,6 +74,7 @@ export const GjeldendeSakslisterTabell = ({
   valgtAvdelingEnhet,
   setValgtSakslisteId,
   valgtSakslisteId,
+  oppgaverForAvdelingAntall,
   lagNySaksliste,
   resetValgtSakslisteId,
   children,
@@ -122,6 +124,17 @@ export const GjeldendeSakslisterTabell = ({
 
   return (
     <VStack gap="space-16">
+      <HStack justify="space-between">
+        <Label size="small">
+          <FormattedMessage id="GjeldendeSakslisterTabell.GjeldendeLister" />
+        </Label>
+        <div className={styles['grayBox']}>
+          <BodyShort size="small">
+            <FormattedMessage id="GjeldendeSakslisterTabell.OppgaverForAvdeling" />
+          </BodyShort>
+          <BodyShort size="large">{oppgaverForAvdelingAntall ?? '0'}</BodyShort>
+        </div>
+      </HStack>
       {sakslister.length === 0 && (
         <BodyShort size="small">
           <FormattedMessage id="GjeldendeSakslisterTabell.IngenLister" />

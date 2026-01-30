@@ -41,6 +41,7 @@ export const LosUrl = {
   KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
   INIT_FETCH: wrapUrl('/fplos/api/avdelingsleder/init-fetch'),
   SAKSBEHANDLERE_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
+  OPPGAVE_AVDELING_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/avdelingantall'),
   SAKSLISTER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/sakslister'),
   OPPRETT_NY_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister'),
   OPPGAVE_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/antall'),
@@ -94,6 +95,12 @@ export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number, valgtAv
   queryOptions({
     queryKey: [LosUrl.OPPGAVE_FILTER_STATISTIKK, valgtSakslisteId, valgtAvdelingEnhet],
     queryFn: () => getOppgaveFilterStatistikk(valgtSakslisteId, valgtAvdelingEnhet),
+  });
+
+export const oppgaverForAvdelingAntallOptions = (avdelingEnhet: string) =>
+  queryOptions({
+    queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL, avdelingEnhet],
+    queryFn: () => kyExtended.get(LosUrl.OPPGAVE_AVDELING_ANTALL, { searchParams: { avdelingEnhet } }).json<number>(),
   });
 
 export const sakslisterForAvdelingOptions = (avdelingEnhet: string) =>
