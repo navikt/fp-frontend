@@ -17,7 +17,7 @@ import {
   lagreSakslisteSorteringTidsintervallDato,
   LosUrl,
 } from '../../../data/fplosAvdelingslederApi';
-import { type Periodefilter } from '../../../typer/sakslisteAvdelingTsType.ts';
+import { type Periodefilter } from '../../../typer/sakslisteAvdelingTsType';
 import { useDebounce } from '../useDebounce';
 
 import styles from './sorteringVelger.module.css';
