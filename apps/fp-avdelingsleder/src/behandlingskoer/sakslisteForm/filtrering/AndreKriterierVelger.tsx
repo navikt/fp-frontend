@@ -44,7 +44,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
 
   return (
     <Box borderWidth="1" borderColor="neutral-subtle" padding="space-40">
-      <VStack gap="space-8">
+      <VStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="AndreKriterierVelger.AndreKriterier" />
         </Label>

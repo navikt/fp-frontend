@@ -90,6 +90,7 @@ export const TabellNårDetFinnesEnBehandlingskø: Story = {
         },
       },
     ],
+    oppgaverForAvdelingAntall: 1,
   },
 };
 

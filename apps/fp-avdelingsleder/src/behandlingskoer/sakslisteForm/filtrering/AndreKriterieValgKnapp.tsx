@@ -61,17 +61,19 @@ export const AndreKriterieValgKnapp = ({ andreKriterierType, lagreAndreKriterier
     }
   };
   return (
-    <HStack gap="space-4" data-testid={`av-og-pa-knapper-${andreKriterierType.kode}`}>
-      <PlussKnapp
-        iconTittel={intl.formatMessage({ id: 'AndreKriterieValgKnapp.PlusKnappIconTittel' })}
-        filterStatus={filterStatus}
-        toggle={toggleKnapp}
-      />
-      <MinusKnapp
-        iconTittel={intl.formatMessage({ id: 'AndreKriterieValgKnapp.MinusKnappIconTittel' })}
-        filterStatus={filterStatus}
-        toggle={toggleKnapp}
-      />
+    <HStack gap="space-8" data-testid={`av-og-pa-knapper-${andreKriterierType.kode}`}>
+      <HStack gap="space-4">
+        <PlussKnapp
+          iconTittel={intl.formatMessage({ id: 'AndreKriterieValgKnapp.PlusKnappIconTittel' })}
+          filterStatus={filterStatus}
+          toggle={toggleKnapp}
+        />
+        <MinusKnapp
+          iconTittel={intl.formatMessage({ id: 'AndreKriterieValgKnapp.MinusKnappIconTittel' })}
+          filterStatus={filterStatus}
+          toggle={toggleKnapp}
+        />
+      </HStack>
       <BodyShort>{andreKriterierType.navn}</BodyShort>
     </HStack>
   );
