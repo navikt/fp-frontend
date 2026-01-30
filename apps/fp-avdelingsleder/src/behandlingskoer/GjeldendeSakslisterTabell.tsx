@@ -158,6 +158,9 @@ export const GjeldendeSakslisterTabell = ({
                 <FormattedMessage id="GjeldendeSakslisterTabell.AntallSaksbehandlere" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col">
+                <FormattedMessage id="GjeldendeSakslisterTabell.BehandlingerPåVent" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
                 <FormattedMessage id="GjeldendeSakslisterTabell.AntallOppgaver" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col">
@@ -183,6 +186,7 @@ export const GjeldendeSakslisterTabell = ({
                 <Table.DataCell>{formatStonadstyper(fagsakYtelseTyper, saksliste.fagsakYtelseTyper)}</Table.DataCell>
                 <Table.DataCell>{formatBehandlingstyper(behandlingTyper, saksliste.behandlingTyper)}</Table.DataCell>
                 <Table.DataCell>{saksliste.saksbehandlerIdenter.length}</Table.DataCell>
+                <Table.DataCell>{saksliste.gjeldendeStatistikk?.behandlingerPåVent ?? '-'}</Table.DataCell>
                 <Table.DataCell>{saksliste.gjeldendeStatistikk?.alleOppgaver ?? '-'}</Table.DataCell>
                 <Table.DataCell>{saksliste.gjeldendeStatistikk?.tilgjengeligeOppgaver ?? '-'}</Table.DataCell>
                 <Table.DataCell>

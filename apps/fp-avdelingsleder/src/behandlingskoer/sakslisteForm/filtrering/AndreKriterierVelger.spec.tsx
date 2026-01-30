@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
@@ -8,28 +8,36 @@ import * as stories from './AndreKriterierVelger.stories';
 const { Default } = composeStories(stories);
 
 describe('AndreKriterierVelger', () => {
-  it('skal vise checkboxer for arbeid inntekt der Til beslutter er valgt fra før', async () => {
+  it('skal vise pluss/minus-knapper for Arbeid og inntekt der Til beslutter er valgt å inkluderes fra før', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    const { getByLabelText } = render(<Default />);
+    render(<Default />);
     expect(await screen.findByText('Arbeid og inntekt')).toBeInTheDocument();
-    expect(getByLabelText('Arbeid og inntekt')).toBeChecked();
-    expect(getByLabelText('Ta med i køen')).toBeChecked();
-    expect(getByLabelText('Fjern fra køen')).not.toBeChecked();
+
+    const container = screen.getByTestId('av-og-pa-knapper-ARBEID_INNTEKT');
+    const plusButton = within(container).getByRole('button', { name: 'pluss' });
+    const minusButton = within(container).getByRole('button', { name: 'minus' });
+    expect(plusButton).toHaveAttribute('data-variant', 'primary');
+    expect(minusButton).toHaveAttribute('data-variant', 'secondary');
   });
 
   it('skal velge Registrer papirsøknad og fjerne dette fra køen', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    const { getAllByLabelText } = render(<Default />);
+    render(<Default />);
     expect(await screen.findByText('Registrer papirsøknad')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Registrer papirsøknad'));
+    const container = screen.getByTestId('av-og-pa-knapper-PAPIRSOKNAD');
+    const plusButton = within(container).getByRole('button', { name: 'pluss' });
+    const minusButton = within(container).getByRole('button', { name: 'minus' });
+    expect(plusButton).toHaveAttribute('data-variant', 'secondary');
+    expect(minusButton).toHaveAttribute('data-variant', 'secondary');
+    await userEvent.click(plusButton);
 
-    expect(getAllByLabelText('Ta med i køen')[1]!).toBeChecked();
-    expect(getAllByLabelText('Fjern fra køen')[1]!).not.toBeChecked();
+    expect(plusButton).toHaveAttribute('data-variant', 'primary');
+    expect(minusButton).toHaveAttribute('data-variant', 'secondary');
 
-    await userEvent.click(getAllByLabelText('Fjern fra køen')[1]!);
-
-    await waitFor(() => expect(getAllByLabelText('Fjern fra køen')[1]!).toBeChecked());
-    expect(getAllByLabelText('Ta med i køen')[1]!).not.toBeChecked();
+    await userEvent.click(minusButton);
+    expect(plusButton).toHaveAttribute('data-variant', 'secondary');
+    expect(minusButton).toHaveAttribute('data-variant', 'primary');
+    expect(minusButton).toHaveAttribute('data-color', 'danger');
   });
 });

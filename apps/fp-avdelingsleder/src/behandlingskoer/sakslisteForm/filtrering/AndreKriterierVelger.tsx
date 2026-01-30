@@ -1,21 +1,13 @@
-import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Box, HStack, Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfRadioGroup } from '@navikt/ft-form-hooks';
-import { ArrowBox } from '@navikt/ft-ui-komponenter';
+import { Box, HStack, Label, VStack } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { AndreKriterierType, LosKodeverkMedNavn } from '@navikt/fp-types';
+import type { AndreKriterierType } from '@navikt/fp-types';
 
 import { lagreSakslisteAndreKriterier, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-
-import styles from './andreKriterierVelger.module.css';
-
-export type FormValues = { [key in AndreKriterierType]?: boolean } & {
-  [K in AndreKriterierType as `${K}_inkluder`]?: boolean;
-};
+import { AndreKriterieValgKnapp } from './AndreKriterieValgKnapp';
 
 interface Props {
   valgtSakslisteId: number;
@@ -52,92 +44,31 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
 
   return (
     <Box borderWidth="1" borderColor="neutral-subtle" padding="space-40">
-      <VStack gap="space-8">
+      <VStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="AndreKriterierVelger.AndreKriterier" />
         </Label>
         <HStack gap="space-8">
-          <div>
+          <VStack gap="space-8">
             {andreKriterierTyper.slice(0, half).map(akt => (
-              <AndreKriterierCheckbox
+              <AndreKriterieValgKnapp
                 key={akt.kode}
                 andreKriterierType={akt}
                 lagreAndreKriterier={lagreAndreKriterier}
               />
             ))}
-          </div>
-          <div>
+          </VStack>
+          <VStack gap="space-8">
             {andreKriterierTyper.slice(half).map(akt => (
-              <AndreKriterierCheckbox
+              <AndreKriterieValgKnapp
                 key={akt.kode}
                 andreKriterierType={akt}
                 lagreAndreKriterier={lagreAndreKriterier}
               />
             ))}
-          </div>
+          </VStack>
         </HStack>
       </VStack>
     </Box>
-  );
-};
-
-const AndreKriterierCheckbox = ({
-  andreKriterierType,
-  lagreAndreKriterier,
-}: {
-  andreKriterierType: LosKodeverkMedNavn<'AndreKriterierType'>;
-  lagreAndreKriterier: (valuesToStore: {
-    andreKriterierType: AndreKriterierType;
-    checked: boolean;
-    inkluder: boolean;
-  }) => void;
-}) => {
-  const { setValue, watch, control } = useFormContext<FormValues>();
-
-  const values = watch();
-
-  return (
-    <VStack gap="space-8" key={andreKriterierType.kode}>
-      <RhfCheckbox
-        key={andreKriterierType.kode}
-        name={andreKriterierType.kode}
-        control={control}
-        label={andreKriterierType.navn}
-        onChange={isChecked => {
-          setValue(`${andreKriterierType.kode}_inkluder`, true);
-          return lagreAndreKriterier({
-            andreKriterierType: andreKriterierType.kode,
-            checked: isChecked,
-            inkluder: true,
-          });
-        }}
-      />
-      {values[andreKriterierType.kode] && (
-        <div className={styles['arrowbox']}>
-          <ArrowBox alignOffset={30}>
-            <RhfRadioGroup
-              name={`${andreKriterierType.kode}_inkluder`}
-              control={control}
-              legend=""
-              hideLegend
-              onChange={skalInkludere =>
-                lagreAndreKriterier({
-                  andreKriterierType: andreKriterierType.kode,
-                  checked: true,
-                  inkluder: skalInkludere === true,
-                })
-              }
-            >
-              <Radio value={true} size="small">
-                <FormattedMessage id="AndreKriterierVelger.TaMed" />
-              </Radio>
-              <Radio value={false} size="small">
-                <FormattedMessage id="AndreKriterierVelger.Fjern" />
-              </Radio>
-            </RhfRadioGroup>
-          </ArrowBox>
-        </div>
-      )}
-    </VStack>
   );
 };

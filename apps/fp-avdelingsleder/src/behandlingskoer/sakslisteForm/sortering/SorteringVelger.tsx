@@ -9,7 +9,7 @@ import { notEmpty } from '@navikt/fp-utils';
 
 import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import type { KøSorteringFelt } from '../../../typer/sakslisteAvdelingTsType';
+import type { KøSorteringFelt, Periodefilter } from '../../../typer/sakslisteAvdelingTsType';
 import { BelopSorteringValg, type FormValues as BelopSorteringValgFormValues } from './BelopSorteringValg';
 import { DatoSorteringValg, type FormValues as DatoSorteringValgFormValues } from './DatoSorteringValg';
 
@@ -26,7 +26,7 @@ interface Props {
   valgtSakslisteId: number;
   valgteBehandlingtyper?: string[];
   valgtAvdelingEnhet: string;
-  erDynamiskPeriode: boolean;
+  periodefilter: Periodefilter;
   muligeSorteringer: KøSorteringFelt[];
 }
 
@@ -34,7 +34,7 @@ export const SorteringVelger = ({
   valgtSakslisteId,
   valgteBehandlingtyper,
   valgtAvdelingEnhet,
-  erDynamiskPeriode,
+  periodefilter,
   muligeSorteringer,
 }: Props) => {
   const queryClient = useQueryClient();
@@ -72,7 +72,7 @@ export const SorteringVelger = ({
           resetField('til', { defaultValue: '' });
           resetField('fomDato', { defaultValue: '' });
           resetField('tomDato', { defaultValue: '' });
-          resetField('erDynamiskPeriode', { defaultValue: false });
+          resetField('periodefilter', { defaultValue: 'FAST_PERIODE' });
 
           return lagreSortering({
             sorteringType: String(sorteringType),
@@ -95,7 +95,7 @@ export const SorteringVelger = ({
                     <DatoSorteringValg
                       valgtSakslisteId={valgtSakslisteId}
                       valgtAvdelingEnhet={valgtAvdelingEnhet}
-                      erDynamiskPeriode={erDynamiskPeriode}
+                      periodefilter={periodefilter}
                     />
                   )}
                   {koSortering.feltType === 'HELTALL' && (

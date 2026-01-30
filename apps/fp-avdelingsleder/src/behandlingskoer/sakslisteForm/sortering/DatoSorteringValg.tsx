@@ -3,8 +3,8 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Detail, HStack, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfDatepicker, RhfTextField } from '@navikt/ft-form-hooks';
+import { Detail, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
 import { ArrowBox, DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -13,11 +13,11 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import {
-  lagreSakslisteSorteringDynamiskPeriode,
   lagreSakslisteSorteringIntervall,
   lagreSakslisteSorteringTidsintervallDato,
   LosUrl,
 } from '../../../data/fplosAvdelingslederApi';
+import { type Periodefilter } from '../../../typer/sakslisteAvdelingTsType';
 import { useDebounce } from '../useDebounce';
 
 import styles from './sorteringVelger.module.css';
@@ -29,37 +29,28 @@ export type FormValues = {
   til?: string;
   fomDato?: string;
   tomDato?: string;
-  erDynamiskPeriode?: boolean;
+  periodefilter: Periodefilter;
 };
 
 interface Props {
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
-  erDynamiskPeriode: boolean;
+  periodefilter: Periodefilter;
 }
 
-export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDynamiskPeriode }: Props) => {
+export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, periodefilter }: Props) => {
   const queryClient = useQueryClient();
   const intl = useIntl();
 
-  const { mutate: lagreSakslisteSorteringTidsintervallDager } = useMutation({
-    mutationFn: (valuesToStore: { fra: string | undefined; til: string | undefined }) =>
-      lagreSakslisteSorteringIntervall(valgtSakslisteId, valuesToStore.fra, valuesToStore.til, valgtAvdelingEnhet),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
-      });
-    },
-  });
-
-  const { mutate: lagreSakslisteSorteringErDynamiskPeriode } = useMutation({
-    mutationFn: () => lagreSakslisteSorteringDynamiskPeriode(valgtSakslisteId, valgtAvdelingEnhet),
+  const { mutate: lagreSakslisteSorteringRelativPeriode } = useMutation({
+    mutationFn: (valuesToStore: { fra: string | undefined; til: string | undefined; periodefilter: Periodefilter }) =>
+      lagreSakslisteSorteringIntervall(
+        valgtSakslisteId,
+        valuesToStore.fra,
+        valuesToStore.til,
+        valgtAvdelingEnhet,
+        valuesToStore.periodefilter,
+      ),
     onSuccess: () => {
       void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
@@ -101,14 +92,16 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
   const tomDatoVerdi = watch('tomDato');
 
   const lagreFra = (nyFraVerdi: string) =>
-    lagreSakslisteSorteringTidsintervallDager({
+    lagreSakslisteSorteringRelativPeriode({
       fra: nyFraVerdi,
       til: tilVerdi,
+      periodefilter: periodefilter,
     });
   const lagreTil = (nyTilVerdi: string) =>
-    lagreSakslisteSorteringTidsintervallDager({
+    lagreSakslisteSorteringRelativPeriode({
       fra: fraVerdi,
       til: nyTilVerdi,
+      periodefilter: periodefilter,
     });
 
   const lagreFomDato = getLagreDatoFn(lagreSorteringTidsintervallDato, true, tomDatoVerdi);
@@ -124,7 +117,36 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
           <Detail>
             <FormattedMessage id="SorteringVelger.FiltrerPaTidsintervall" />
           </Detail>
-          {erDynamiskPeriode && (
+          <RhfRadioGroup
+            control={control}
+            name="periodefilter"
+            legend={intl.formatMessage({ id: 'SorteringVelger.FilterForPeriode' })}
+            onChange={value => {
+              if (value === ('FAST_PERIODE' satisfies Periodefilter)) {
+                lagreSorteringTidsintervallDato({
+                  fomDato: fomDatoVerdi,
+                  tomDato: tomDatoVerdi,
+                });
+              } else {
+                lagreSakslisteSorteringRelativPeriode({
+                  fra: fraVerdi,
+                  til: tilVerdi,
+                  periodefilter: value as Periodefilter,
+                });
+              }
+            }}
+          >
+            <Radio value={'FAST_PERIODE' satisfies Periodefilter}>
+              <FormattedMessage id="SorteringVelger.FastPeriode" />
+            </Radio>
+            <Radio value={'RELATIV_PERIODE_DAGER' satisfies Periodefilter}>
+              <FormattedMessage id="SorteringVelger.RelativPeriodeDag" />
+            </Radio>
+            <Radio value={'RELATIV_PERIODE_MÅNEDER' satisfies Periodefilter}>
+              <FormattedMessage id="SorteringVelger.RelativPeriodeMåned" />
+            </Radio>
+          </RhfRadioGroup>
+          {periodefilter !== 'FAST_PERIODE' && (
             <HStack gap="space-16">
               <div>
                 <RhfTextField
@@ -137,12 +159,20 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                 />
                 {(fraVerdi || fraVerdi === '0') && (
                   <Detail>
-                    <DateLabel dateString={finnDato(fraVerdi)} />
+                    {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
+                      <DateLabel dateString={finnDato(fraVerdi)} />
+                    ) : (
+                      <DateLabel dateString={finnDatoMåned(fraVerdi, true)} />
+                    )}
                   </Detail>
                 )}
               </div>
               <Detail className={styles['dager']}>
-                <FormattedMessage id="SorteringVelger.DagerMedBindestrek" />
+                {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
+                  <FormattedMessage id="SorteringVelger.DagerMedBindestrek" />
+                ) : (
+                  <FormattedMessage id="SorteringVelger.MånedMedBindestrek" />
+                )}
               </Detail>
               <div>
                 <RhfTextField
@@ -155,17 +185,25 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                 />
                 {(tilVerdi || tilVerdi === '0') && (
                   <Detail>
-                    <DateLabel dateString={finnDato(tilVerdi)} />
+                    {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
+                      <DateLabel dateString={finnDato(tilVerdi)} />
+                    ) : (
+                      <DateLabel dateString={finnDatoMåned(tilVerdi, false)} />
+                    )}
                   </Detail>
                 )}
               </div>
               <Detail className={styles['dagerMedBindestrek']}>
-                <FormattedMessage id="SorteringVelger.Dager" />
+                {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
+                  <FormattedMessage id="SorteringVelger.Dager" />
+                ) : (
+                  <FormattedMessage id="SorteringVelger.Måneder" />
+                )}
               </Detail>
             </HStack>
           )}
-          {!erDynamiskPeriode && (
-            <VStack gap="space-16">
+          {periodefilter === 'FAST_PERIODE' && (
+            <HStack gap="space-16">
               <RhfDatepicker
                 name="fomDato"
                 control={control}
@@ -183,14 +221,8 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                 validate={[hasValidDate]}
                 onChange={lagreTomDatoDebounce}
               />
-            </VStack>
+            </HStack>
           )}
-          <RhfCheckbox
-            name="erDynamiskPeriode"
-            control={control}
-            label={intl.formatMessage({ id: 'SorteringVelger.DynamiskPeriode' })}
-            onChange={() => lagreSakslisteSorteringErDynamiskPeriode()}
-          />
         </VStack>
       </ArrowBox>
     </div>
@@ -198,6 +230,11 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
 };
 
 const finnDato = (antallDager: string) => dayjs().add(Number(antallDager), 'd').format();
+
+const finnDatoMåned = (antallMåneder: string, erStartenAvMåned: boolean) => {
+  const baseDato = erStartenAvMåned ? dayjs().startOf('month') : dayjs().endOf('month');
+  return baseDato.add(Number(antallMåneder), 'month').format();
+};
 
 const getLagreDatoFn =
   (

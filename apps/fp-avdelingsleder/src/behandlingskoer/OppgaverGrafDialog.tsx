@@ -6,8 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { AktiveOgTilgjengeligeOppgaverGraf } from '@navikt/fp-los-felles';
 
-import { oppgaveFilterStatistikkOptions } from '../data/fplosAvdelingslederApi.ts';
-import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType.ts';
+import { oppgaveFilterStatistikkOptions } from '../data/fplosAvdelingslederApi';
+import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 
 interface Props {
   saksliste: SakslisteAvdeling;
@@ -26,7 +26,7 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
           disabled={saksliste.gjeldendeStatistikk == null}
         ></Button>
       </Dialog.Trigger>
-      <Dialog.Popup onClick={(e) => e.stopPropagation()}>
+      <Dialog.Popup onClick={e => e.stopPropagation()}>
         <Dialog.Header>
           <Dialog.Title>
             <FormattedMessage id="OppgaverGrafDialog.Overskrift" />
@@ -48,7 +48,13 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
   );
 };
 
-const OppgaverGrafDialogBody = ({ valgtSakslisteId, valgtAvdelingEnhet }: { valgtSakslisteId: number; valgtAvdelingEnhet: string }) => {
+const OppgaverGrafDialogBody = ({
+  valgtSakslisteId,
+  valgtAvdelingEnhet,
+}: {
+  valgtSakslisteId: number;
+  valgtAvdelingEnhet: string;
+}) => {
   const aktiveOgLedigeTidslinje =
     useQuery({
       ...oppgaveFilterStatistikkOptions(valgtSakslisteId, valgtAvdelingEnhet),

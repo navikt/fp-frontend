@@ -13,7 +13,7 @@ import type { OppgaverForForsteStonadsdagUkeMnd } from '../typer/oppgaverForFors
 import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import type { Reservasjon } from '../typer/reservasjonTsType';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
-import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
+import type { Periodefilter, SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 
 export type InitDataLos = {
   innloggetBruker: InnloggetBruker;
@@ -49,9 +49,6 @@ export const LosUrl = {
   LAGRE_SAKSLISTE_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/sakslister/saksbehandler'),
   LAGRE_SAKSLISTE_SORTERING: wrapUrl('/fplos/api/avdelingsleder/sakslister/sortering'),
   LAGRE_SAKSLISTE_SORTERING_INTERVALL: wrapUrl('/fplos/api/avdelingsleder/sakslister/sortering-numerisk-intervall'),
-  LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE: wrapUrl(
-    '/fplos/api/avdelingsleder/sakslister/sortering-tidsintervall-type',
-  ),
   LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO: wrapUrl(
     '/fplos/api/avdelingsleder/sakslister/sortering-tidsintervall-dato',
   ),
@@ -223,15 +220,11 @@ export const lagreSakslisteSorteringIntervall = (
   fra: string | undefined,
   til: string | undefined,
   avdelingEnhet: string,
+  periodefilter?: Periodefilter,
 ) =>
   kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, { json: { sakslisteId, fra, til, avdelingEnhet } })
-    .json();
-
-export const lagreSakslisteSorteringDynamiskPeriode = (sakslisteId: number, avdelingEnhet: string) =>
-  kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_SORTERING_DYNAMISK_PERIDE, {
-      json: { sakslisteId, avdelingEnhet },
+    .post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, {
+      json: { sakslisteId, fra, til, periodefilter, avdelingEnhet },
     })
     .json();
 

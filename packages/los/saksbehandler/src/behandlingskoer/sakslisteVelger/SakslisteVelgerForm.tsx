@@ -127,6 +127,7 @@ const getSorteringsnavnForDynamiskPeriode = (
   intl: IntlShape,
   køSorteringTyper: LosKodeverkMedNavn<'KøSortering'>[],
   sorteringType: string,
+  periodefilter: 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER',
   fra?: number,
   til?: number,
 ) => {
@@ -135,11 +136,29 @@ const getSorteringsnavnForDynamiskPeriode = (
   }
   const values = {
     navn: køSorteringTyper.find(kst => kst.kode === sorteringType)?.navn ?? '',
-    fomDato: fra ? dayjs().add(fra, 'days').format(DDMMYYYY_DATE_FORMAT) : undefined,
-    tomDato: til ? dayjs().add(til, 'days').format(DDMMYYYY_DATE_FORMAT) : undefined,
+    fomDato: datoForRelativPeriode(periodefilter, true, fra),
+    tomDato: datoForRelativPeriode(periodefilter, false, til),
     br: <br />,
   };
   return getNavn(values, intl);
+};
+
+const datoForRelativPeriode = (
+  periodefilter: 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER',
+  erFom: boolean,
+  fraTilAntall?: number,
+) => {
+  if (fraTilAntall === undefined) {
+    return undefined;
+  }
+  return periodefilter === 'RELATIV_PERIODE_DAGER' ? finnDato(fraTilAntall) : finnDatoMåned(fraTilAntall, erFom);
+};
+
+const finnDato = (antallDager: number) => dayjs().add(antallDager, 'd').format(DDMMYYYY_DATE_FORMAT);
+
+const finnDatoMåned = (antallMåneder: number, erStartenAvMåned: boolean) => {
+  const baseDato = erStartenAvMåned ? dayjs().startOf('month') : dayjs().endOf('month');
+  return baseDato.add(antallMåneder, 'month').format(DDMMYYYY_DATE_FORMAT);
 };
 
 const getSorteringsnavn = (
@@ -151,11 +170,11 @@ const getSorteringsnavn = (
     return '';
   }
 
-  const { erDynamiskPeriode, sorteringType, fra, til, fomDato, tomDato } = saksliste.sortering;
+  const { periodefilter, sorteringType, fra, til, fomDato, tomDato } = saksliste.sortering;
 
-  return erDynamiskPeriode
-    ? getSorteringsnavnForDynamiskPeriode(intl, køSorteringTyper, sorteringType, fra, til)
-    : getSorteringsnavnForPeriode(intl, køSorteringTyper, sorteringType, fomDato, tomDato);
+  return periodefilter === 'FAST_PERIODE'
+    ? getSorteringsnavnForPeriode(intl, køSorteringTyper, sorteringType, fomDato, tomDato)
+    : getSorteringsnavnForDynamiskPeriode(intl, køSorteringTyper, sorteringType, periodefilter, fra, til);
 };
 
 type FormValues = {

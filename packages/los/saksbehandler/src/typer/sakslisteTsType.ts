@@ -5,6 +5,8 @@ type AnnetKriterie = Readonly<{
   inkluder: boolean;
 }>;
 
+export type Periodefilter = 'FAST_PERIODE' | 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER';
+
 export type Saksliste = Readonly<{
   sakslisteId: number;
   navn: string;
@@ -13,10 +15,10 @@ export type Saksliste = Readonly<{
   andreKriterier: AnnetKriterie[];
   sortering?: {
     sorteringType: string;
+    periodefilter: Periodefilter;
     fra?: number;
     til?: number;
     fomDato?: string;
     tomDato?: string;
-    erDynamiskPeriode: boolean;
   };
 }>;
