@@ -298,6 +298,6 @@ export type {
 export type { FagsakBehandlingDto } from './src/fagsakBehandlingDto';
 export type { Behandling } from './src/behandling';
 export type {
-  PollingResponse,
+  AsyncPollingStatus,
   PollingStatus,
-} from './src/polling';
+} from './src/asyncPollingStatus';

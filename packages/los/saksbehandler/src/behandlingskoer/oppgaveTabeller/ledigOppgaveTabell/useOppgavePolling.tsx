@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
-import type { PollingResponse, PollingStatus } from '@navikt/fp-types';
+import type { AsyncPollingStatus, PollingStatus } from '@navikt/fp-types';
 
 import { doGetRequest, getOppgaverTilBehandling } from '../../../data/fplosSaksbehandlerApi';
 import type { Oppgave } from '../../../typer/oppgaveTsType';
@@ -19,7 +19,7 @@ const pollOgHentData = async (
   getSakslisteId: () => number,
   pollingCounter = 0,
 ) => {
-  const response = await doGetRequest<PollingResponse | Oppgave[]>(location);
+  const response = await doGetRequest<AsyncPollingStatus | Oppgave[]>(location);
   if (getSakslisteId() !== valgtSakslisteId) {
     return [];
   }
@@ -111,7 +111,7 @@ const wait = (ms: number) =>
     setTimeout(resolve, ms);
   });
 
-const isPollingResponse = (response: PollingResponse | Oppgave[]): response is PollingResponse => {
+const isPollingResponse = (response: AsyncPollingStatus | Oppgave[]): response is AsyncPollingStatus => {
   return (
     !Array.isArray(response) &&
     ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status as PollingStatus)

@@ -3,7 +3,7 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { NavAnsatt, PollingResponse } from '@navikt/fp-types';
+import type { NavAnsatt, AsyncPollingStatus } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
@@ -200,7 +200,7 @@ const meta = {
             : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
         }),
         http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json<PollingResponse>({
+          HttpResponse.json<AsyncPollingStatus>({
             status: 'PENDING',
             pollIntervalMillis: 100000000,
             message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',

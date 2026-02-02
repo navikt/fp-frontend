@@ -7,7 +7,7 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { PollingResponse } from '@navikt/fp-types';
+import type { AsyncPollingStatus } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
 import { type Oppgave } from '../../../typer/oppgaveTsType';
@@ -74,7 +74,7 @@ export const Default: Story = {
             : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
         }),
         http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json<PollingResponse>({
+          HttpResponse.json<AsyncPollingStatus>({
             status: 'PENDING',
             pollIntervalMillis: 100000000,
             message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
@@ -103,7 +103,7 @@ export const TomOppgaveTabell: Story = {
             : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
         }),
         http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json<PollingResponse>({
+          HttpResponse.json<AsyncPollingStatus>({
             status: 'PENDING',
             pollIntervalMillis: 100000000,
             message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',

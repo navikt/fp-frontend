@@ -1,7 +1,7 @@
 import { HTTPError, type KyResponse } from 'ky';
 
 import { ErrorType, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
-import type { Behandling, PollingResponse, PollingStatus } from '@navikt/fp-types';
+import type { AsyncPollingStatus, Behandling, PollingStatus } from '@navikt/fp-types';
 
 import { doGetRequest } from '../fagsakApi';
 
@@ -31,7 +31,7 @@ export const doPolling = async <T>(response: KyResponse<T>, setPollingPending: P
       return await pollOgHentData(setPollingPending, location);
     } catch (error) {
       if (error instanceof HTTPError) {
-        const data = await error.response.json<PollingResponse>();
+        const data = await error.response.json<AsyncPollingStatus>();
         if (isPollingDelayedOrHalted(data) && data.location) {
           setPollingPending(false);
           //Ikke vent på at behandling blir oppdatert, men hent gammel versjon (som da er read only)
@@ -46,7 +46,7 @@ export const doPolling = async <T>(response: KyResponse<T>, setPollingPending: P
 };
 
 const pollOgHentData = async (setPollingPending: PollingPendingFn, location: string, pollingCounter = 0) => {
-  const response = await doGetRequest<PollingResponse | Behandling>(location);
+  const response = await doGetRequest<AsyncPollingStatus | Behandling>(location);
 
   if (isPollingResponse(response)) {
     if (pollingCounter === MAX_POLLING_ATTEMPTS) {
@@ -103,11 +103,11 @@ const calculatePollingInterval = (pollIntervalMillis: number | undefined, pollin
   return pollingCounter < 30 ? pollIntervalMillis : pollIntervalMillis + (pollingCounter - 30) * pollIntervalMillis;
 };
 
-const isPollingResponse = (response: PollingResponse | Behandling): response is PollingResponse => {
+const isPollingResponse = (response: AsyncPollingStatus | Behandling): response is AsyncPollingStatus => {
   return ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status as PollingStatus);
 };
 
-const isPollingDelayedOrHalted = (pollingResponse: PollingResponse): boolean => {
+const isPollingDelayedOrHalted = (pollingResponse: AsyncPollingStatus): boolean => {
   return pollingResponse.status === 'DELAYED' || pollingResponse.status === 'HALTED';
 };
 
