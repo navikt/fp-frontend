@@ -4,8 +4,7 @@ export default defineConfig({
   input: './swagger.json',
   output: {
     clean: false,
-    format: 'prettier',
-    lint: 'eslint',
+    postProcess: ['prettier', 'eslint'],
     path: 'packages/types/src/',
     fileName: {
       name: 'apiDtoGenerert',
