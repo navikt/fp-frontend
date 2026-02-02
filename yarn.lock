@@ -1571,15 +1571,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/codegen-core@npm:^0.5.2":
-  version: 0.5.2
-  resolution: "@hey-api/codegen-core@npm:0.5.2"
+"@hey-api/codegen-core@npm:^0.5.5":
+  version: 0.5.5
+  resolution: "@hey-api/codegen-core@npm:0.5.5"
   dependencies:
+    "@hey-api/types": "npm:0.1.2"
     ansi-colors: "npm:4.1.3"
+    c12: "npm:3.3.3"
     color-support: "npm:1.1.3"
   peerDependencies:
     typescript: ">=5.5.3"
-  checksum: 10/3843a58b3c533bdbd17107c0467055d85f69094d54a194bef2044ef62e41b67f6dd819683db884093da74db77f2a39e6ec6723a250fc06c5e651b6b70c036d37
+  checksum: 10/83fe11942f93cf2cdfb4344540384279b4290b444dc2abd127d36f7b78dc2d4d80997b8441cc12674731d5001f1e8ee57f3c1fd9d6beb34cb2eb63b8520fdc18
   languageName: node
   linkType: hard
 
@@ -1595,14 +1597,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/openapi-ts@npm:0.90.6":
-  version: 0.90.6
-  resolution: "@hey-api/openapi-ts@npm:0.90.6"
+"@hey-api/openapi-ts@npm:0.90.10":
+  version: 0.90.10
+  resolution: "@hey-api/openapi-ts@npm:0.90.10"
   dependencies:
-    "@hey-api/codegen-core": "npm:^0.5.2"
+    "@hey-api/codegen-core": "npm:^0.5.5"
     "@hey-api/json-schema-ref-parser": "npm:1.2.2"
+    "@hey-api/types": "npm:0.1.2"
     ansi-colors: "npm:4.1.3"
-    c12: "npm:3.3.3"
     color-support: "npm:1.1.3"
     commander: "npm:14.0.2"
     open: "npm:11.0.0"
@@ -1611,7 +1613,14 @@ __metadata:
     typescript: ">=5.5.3"
   bin:
     openapi-ts: bin/run.js
-  checksum: 10/d6dbcf992a4489c825eee713e089d40d76236797bf03e17a065930cd64951618d95cbac5df8ead38a4382a4b41d6ddbd624463f4e4b2eedf00ce0d59ff8f1b15
+  checksum: 10/e50f875b55318b6fb0211d48fc79dfaeb90c8571a865e8ce0fb919b115c61a2daeb026a4aad7087ad4d5f12bc9de4b570e66dcb26a6fc6d79678f4aa608479de
+  languageName: node
+  linkType: hard
+
+"@hey-api/types@npm:0.1.2":
+  version: 0.1.2
+  resolution: "@hey-api/types@npm:0.1.2"
+  checksum: 10/8c7e690f849d22d09b7486bffed5637fa1b267f595cf4a9769618129badff6e3ef30c13f57a5b9c5801fc85f6c389ab27b558cec25a18133a0cdb2208427974a
   languageName: node
   linkType: hard
 
@@ -8687,7 +8696,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
-    "@hey-api/openapi-ts": "npm:0.90.6"
+    "@hey-api/openapi-ts": "npm:0.90.10"
     "@navikt/aksel-stylelint": "npm:8.0.1"
     "@storybook/addon-a11y": "npm:10.1.11"
     "@storybook/addon-links": "npm:10.1.11"
