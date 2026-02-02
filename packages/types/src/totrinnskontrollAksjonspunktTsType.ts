@@ -1,4 +1,5 @@
 import type {
+  foreldrepenger_domene_uttak_UttakPeriodeEndringDto_TypeEndring,
   tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto,
   tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto,
 } from './apiDtoGenerert';
@@ -6,3 +7,5 @@ import type {
 export type OpptjeningAktiviteter = tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto;
 
 export type TotrinnskontrollAksjonspunkt = tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto;
+
+export type TypeEndring = foreldrepenger_domene_uttak_UttakPeriodeEndringDto_TypeEndring;

@@ -37,27 +37,25 @@ const buildUttakText = (
       const tom = dateFormat(uttakperiode.tom);
       let id;
 
-      if (uttakperiode.erSlettet) {
+      if (uttakperiode.typeEndring === 'SLETTET') {
         id = 'ToTrinnsForm.AvklarUttak.PeriodeSlettet';
-      } else if (uttakperiode.erLagtTil) {
+      } else if (uttakperiode.typeEndring === 'LAGT_TIL') {
         id = 'ToTrinnsForm.AvklarUttak.PeriodeLagtTil';
       } else if (
-        uttakperiode.erEndret &&
-        (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAKPERIODER ||
-          aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT)
+        aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAKPERIODER ||
+        aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT
       ) {
         id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
       } else if (
-        uttakperiode.erEndret &&
         aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
       ) {
         id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-      } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK) {
+      } else if (
+        aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK
+      ) {
         id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-      } else if (uttakperiode.erEndret) {
-        id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
       } else {
-        id = 'ToTrinnsForm.AvklarUttak.PeriodeAvklart';
+        id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
       }
 
       return <FormattedMessage key={id} id={id} values={{ a: fom, b: tom }} />;

@@ -35,7 +35,7 @@ export const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding
               <FormattedMessage
                 id="InntektsmeldingFaktaPanel.refusjon.endring.periode"
                 values={{
-                  kroner: <BeløpLabel beløp={refusjon.refusjonsbeløp?.verdi} />,
+                  kroner: <BeløpLabel beløp={refusjon.refusjonsbeløpMnd?.verdi} />,
                   fom: <DateLabel dateString={refusjon.fom} />,
                 }}
               />

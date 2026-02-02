@@ -114,7 +114,7 @@ export type {
   FerdiglignetNæring,
 } from './src/opptjeningTsType';
 export type { TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
-export type { TotrinnskontrollAksjonspunkt, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';
+export type { TotrinnskontrollAksjonspunkt, OpptjeningAktiviteter, TypeEndring } from './src/totrinnskontrollAksjonspunktTsType';
 export type { Historikkinnslag, HistorikkInnslagDokumentLink } from './src/historikkinnslagTsType';
 export type {
   ArbeidsgiverOpplysningerPerId,

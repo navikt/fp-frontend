@@ -5,6 +5,7 @@ import type {
   FaktaOmBeregningTilfelle,
   KodeverkMedNavn,
   TotrinnskontrollAksjonspunkt,
+  TypeEndring,
 } from '@navikt/fp-types';
 
 import { getAksjonspunkttekst } from './aksjonspunktTekstUtleder';
@@ -181,9 +182,9 @@ describe('aksjonspunktTekstUtleder', () => {
       fom: '2024-05-01',
       tom: '2025-01-20',
       erSlettet: true,
-      erAvklart: false,
       erLagtTil: false,
       erEndret: false,
+      typeEndring: 'SLETTET' as TypeEndring,
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -200,9 +201,9 @@ describe('aksjonspunktTekstUtleder', () => {
       fom: '2024-05-01',
       tom: '2025-01-20',
       erSlettet: true,
-      erAvklart: false,
       erLagtTil: false,
       erEndret: false,
+      typeEndring: 'SLETTET' as TypeEndring,
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -219,9 +220,9 @@ describe('aksjonspunktTekstUtleder', () => {
       fom: '2024-05-01',
       tom: '2025-01-20',
       erSlettet: false,
-      erAvklart: false,
       erLagtTil: true,
       erEndret: false,
+      typeEndring: 'LAGT_TIL' as TypeEndring,
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -241,9 +242,9 @@ describe('aksjonspunktTekstUtleder', () => {
       fom: '2024-05-01',
       tom: '2025-01-20',
       erSlettet: false,
-      erAvklart: false,
       erLagtTil: true,
       erEndret: false,
+      typeEndring: 'LAGT_TIL' as TypeEndring,
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -263,8 +264,8 @@ describe('aksjonspunktTekstUtleder', () => {
     const uttakPeriode = {
       fom: '2024-05-01',
       tom: '2025-01-20',
+      typeEndring: 'ENDRET' as TypeEndring,
       erSlettet: false,
-      erAvklart: false,
       erLagtTil: false,
       erEndret: true,
     };
@@ -286,9 +287,9 @@ describe('aksjonspunktTekstUtleder', () => {
       fom: '2024-05-01',
       tom: '2025-01-20',
       erSlettet: false,
-      erAvklart: false,
       erLagtTil: false,
       erEndret: true,
+      typeEndring: 'ENDRET' as TypeEndring,
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -302,49 +303,6 @@ describe('aksjonspunktTekstUtleder', () => {
 
     const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret');
-  });
-
-  it('skal vise korrekt tekst for aksjonspunkt 6008 avklart', () => {
-    const uttakPeriode = {
-      fom: '2024-05-01',
-      tom: '2025-01-20',
-      erSlettet: false,
-      erAvklart: true,
-      erLagtTil: false,
-      erEndret: false,
-    };
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
-      beregningDto: {
-        fastsattVarigEndringNaering: false,
-      },
-      uttakPerioder: [uttakPeriode],
-    } satisfies TotrinnskontrollAksjonspunkt;
-
-    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
-  });
-  it('skal vise korrekt tekst for aksjonspunkt 5071 avklart', () => {
-    const uttakPeriode = {
-      fom: '2024-05-01',
-      tom: '2025-01-20',
-      erSlettet: false,
-      erAvklart: true,
-      erLagtTil: false,
-      erEndret: false,
-    };
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
-      beregningDto: {
-        fastsattVarigEndringNaering: false,
-      },
-      uttakPerioder: [uttakPeriode],
-    } satisfies TotrinnskontrollAksjonspunkt;
-
-    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
 
   // Klage

@@ -2498,7 +2498,7 @@ export type foreldrepenger_behandlingslager_behandling_arbeidsforhold_Arbeidsfor
   | '-';
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto = {
-  aktiveNaturalytelser: Array<foreldrepenger_domene_iay_modell_NaturalYtelse>;
+  aktiveNaturalytelser: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto>;
   arbeidsgiverIdent: string;
   begrunnelse?: string;
   dokumentId: string;
@@ -2513,11 +2513,38 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto =
   kontaktpersonNummer: string;
   motattDato: string;
   refusjonPrMnd?: number;
-  refusjonsperioder: Array<foreldrepenger_domene_iay_modell_Refusjon>;
+  refusjonsperioder: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_RefusjonDto>;
   saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
   startDatoPermisjon?: string;
   tilknyttedeBehandlingIder: Array<string>;
   årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
+};
+
+export type foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto = {
+  beloepPerMnd: foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Beløp;
+  indexKey: string;
+  periode: foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Periode;
+  type: foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType;
+};
+
+export type foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Beløp = {
+  verdi: number;
+};
+
+export type foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Periode = {
+  fomDato: string;
+  tomDato: string;
+};
+
+export type foreldrepenger_domene_arbeidInntektsmelding_dto_RefusjonDto = {
+  fom: string;
+  indexKey: string;
+  refusjonsbeløp?: foreldrepenger_domene_arbeidInntektsmelding_dto_RefusjonDto_Beløp;
+  refusjonsbeløpMnd?: foreldrepenger_domene_arbeidInntektsmelding_dto_RefusjonDto_Beløp;
+};
+
+export type foreldrepenger_domene_arbeidInntektsmelding_dto_RefusjonDto_Beløp = {
+  verdi: number;
 };
 
 export type foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak =
@@ -2526,19 +2553,6 @@ export type foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak =
   | 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD'
   | 'ENDRING_I_ARBEIDSFORHOLDS_ID'
   | 'PERMISJON_UTEN_SLUTTDATO';
-
-export type foreldrepenger_domene_iay_modell_NaturalYtelse = {
-  beloepPerMnd: foreldrepenger_domene_typer_Beløp;
-  indexKey?: string;
-  periode: foreldrepenger_domene_tid_DatoIntervallEntitet;
-  type: foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType;
-};
-
-export type foreldrepenger_domene_iay_modell_Refusjon = {
-  fom: string;
-  indexKey?: string;
-  refusjonsbeløp?: foreldrepenger_domene_typer_Beløp;
-};
 
 export type foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak = 'NY' | 'ENDRING' | '-';
 
@@ -2563,16 +2577,6 @@ export type foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType =
   | 'YRKESBIL_LISTEPRIS'
   | 'UTENLANDSK_PENSJONSORDNING'
   | '-';
-
-export type foreldrepenger_domene_tid_DatoIntervallEntitet = {
-  fomDato: string;
-  tomDato: string;
-};
-
-export type foreldrepenger_domene_typer_Beløp = {
-  indexKey?: string;
-  verdi?: number;
-};
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidOgInntektsmeldingDto = {
   arbeidsforhold: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto>;
@@ -4972,7 +4976,10 @@ export type foreldrepenger_domene_uttak_UttakPeriodeEndringDto = {
   erSlettet?: boolean;
   fom: string;
   tom: string;
+  typeEndring: foreldrepenger_domene_uttak_UttakPeriodeEndringDto_TypeEndring;
 };
+
+export type foreldrepenger_domene_uttak_UttakPeriodeEndringDto_TypeEndring = 'ENDRET' | 'SLETTET' | 'LAGT_TIL';
 
 export type foreldrepenger_kontrakter_formidling_v3_BrevmalDto = {
   kode: string;

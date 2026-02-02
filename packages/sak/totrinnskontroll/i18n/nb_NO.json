@@ -65,7 +65,6 @@
   "ToTrinnsForm.AvklarUttak.OverstyrtRettOgOmsorg": "Rettighetstype er overstyrt.",
   "ToTrinnsForm.AvklarUttak.PeriodeLagtTil": "Perioden {a} til {b} er lagt til.",
   "ToTrinnsForm.AvklarUttak.PeriodeSlettet": "Perioden {a} til {b} er slettet.",
-  "ToTrinnsForm.AvklarUttak.PeriodeAvklart": "Perioden {a} til {b} er avklart.",
   "ToTrinnsForm.AvklarUttak.PeriodeEndret": "Perioden {a} til {b} er endret.",
   "ToTrinnsForm.OverstyrUttak.PeriodeEndret": "Perioden {a} til {b} er overstyrt.",
   "ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret": "Perioden {a} til {b} er fastsatt manuelt.",
