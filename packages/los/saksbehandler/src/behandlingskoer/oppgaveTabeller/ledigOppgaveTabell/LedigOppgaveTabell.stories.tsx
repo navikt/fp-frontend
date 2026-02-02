@@ -6,8 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import type { PollingResponse } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
 import { type Oppgave } from '../../../typer/oppgaveTsType';
@@ -74,9 +74,10 @@ export const Default: Story = {
             : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
         }),
         http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json({
-            status: ApiPollingStatus.PENDING,
+          HttpResponse.json<PollingResponse>({
+            status: 'PENDING',
             pollIntervalMillis: 100000000,
+            message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
           }),
         ),
         http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
@@ -102,9 +103,10 @@ export const TomOppgaveTabell: Story = {
             : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
         }),
         http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json({
-            status: ApiPollingStatus.PENDING,
+          HttpResponse.json<PollingResponse>({
+            status: 'PENDING',
             pollIntervalMillis: 100000000,
+            message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
           }),
         ),
         http.get('https://www.test.com/api/result', () => HttpResponse.json([])),

@@ -2,36 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { ApiPollingStatus } from '@navikt/fp-konstanter';
+import type { PollingResponse, PollingStatus } from '@navikt/fp-types';
 
 import { doGetRequest, getOppgaverTilBehandling } from '../../../data/fplosSaksbehandlerApi';
 import type { Oppgave } from '../../../typer/oppgaveTsType';
-
-//TODO (TOR) Vurder å bruke Websocket i staden for denne pollemekanismen. Alternativt gå spesifikt mot status og resultat-tjenestane
 
 const EMPTY_ARRAY = new Array<Oppgave>();
 const HTTP_ACCEPTED = 202;
 const MAX_POLLING_ATTEMPTS = 1800;
 const MAX_POLLING_REACHED = 'MAX_POLLING';
-
-type PollingResponse = {
-  status: ApiPollingStatus;
-  message: string;
-  pollIntervalMillis: number;
-  location: string;
-  readOnly: string;
-  pending: string;
-};
-
-const wait = (ms: number) =>
-  new Promise(resolve => {
-    setTimeout(resolve, ms);
-  });
-
-const isPollingResponse = (response: PollingResponse | Oppgave[]): response is PollingResponse => {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] fiks senere
-  return (response as PollingResponse).status !== undefined;
-};
+const MAX_POLLING_INTERVAL = 1000 * 60 * 5;
 
 const pollOgHentData = async (
   valgtSakslisteId: number,
@@ -49,8 +29,8 @@ const pollOgHentData = async (
       throw new Error(MAX_POLLING_REACHED);
     }
     const { pollIntervalMillis } = response;
-    const interval =
-      pollingCounter < 30 ? pollIntervalMillis : pollIntervalMillis + (pollingCounter - 30) * pollIntervalMillis;
+    const interval = calculatePollingInterval(pollIntervalMillis, pollingCounter);
+
     await wait(interval);
 
     return await pollOgHentData(valgtSakslisteId, location, getSakslisteId, pollingCounter + 1);
@@ -117,4 +97,23 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
     nyeBehandlinger,
     isMaxPollingAttemptsReached: tilBehandlingError?.message === MAX_POLLING_REACHED,
   };
+};
+
+const calculatePollingInterval = (pollIntervalMillis: number | undefined, pollingCounter: number): number => {
+  if (!pollIntervalMillis) {
+    return MAX_POLLING_INTERVAL;
+  }
+  return pollingCounter < 30 ? pollIntervalMillis : pollIntervalMillis + (pollingCounter - 30) * pollIntervalMillis;
+};
+
+const wait = (ms: number) =>
+  new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+
+const isPollingResponse = (response: PollingResponse | Oppgave[]): response is PollingResponse => {
+  return (
+    !Array.isArray(response) &&
+    ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status as PollingStatus)
+  );
 };

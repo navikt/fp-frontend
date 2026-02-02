@@ -3,7 +3,7 @@ import React, { type ComponentProps } from 'react';
 import type { Theme } from '@navikt/ds-react';
 import { createIntl, dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 
-import { ApiPollingStatus, RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
+import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
 import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
 
 import { ErrorType, type FpError } from '../restApiError/errorType';
@@ -119,7 +119,7 @@ const parseErrorDetails = (details: string) => {
 const prosesserFeilmelding = (feilmelding: FpError, feilmeldinger: Feilmelding[]) => {
   switch (feilmelding.type) {
     case ErrorType.POLLING_HALTED_OR_DELAYED:
-      if (feilmelding.status === ApiPollingStatus.HALTED) {
+      if (feilmelding.status === 'HALTED') {
         const decoded = decodeHtmlEntity(feilmelding.message);
         addIfNotExists(feilmeldinger, {
           melding: intl.formatMessage({ id: 'Rest.ErrorMessage.General' }),
@@ -127,7 +127,7 @@ const prosesserFeilmelding = (feilmelding: FpError, feilmeldinger: Feilmelding[]
           tilleggsInfo: decoded ? parseErrorDetails(decoded) : undefined,
         });
       }
-      if (feilmelding.status === ApiPollingStatus.DELAYED) {
+      if (feilmelding.status === 'DELAYED') {
         addIfNotExists(feilmeldinger, {
           melding: intl.formatMessage(
             { id: 'Rest.ErrorMessage.DownTime' },

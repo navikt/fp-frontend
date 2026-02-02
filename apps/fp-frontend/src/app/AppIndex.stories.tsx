@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { cleanUrl, http, HttpResponse, type JsonBodyType } from 'msw';
 
 import { RestApiErrorProvider } from '@navikt/fp-app-felles';
-import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { LosUrl } from '@navikt/fp-los-saksbehandler';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
@@ -98,7 +97,7 @@ const HANDLERS = [
   ),
   http.get('https://www.test.com/api/status', () =>
     HttpResponse.json({
-      status: ApiPollingStatus.PENDING,
+      status: 'PENDING',
       pollIntervalMillis: 100000000,
     }),
   ),

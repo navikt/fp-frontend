@@ -297,3 +297,7 @@ export type {
 
 export type { FagsakBehandlingDto } from './src/fagsakBehandlingDto';
 export type { Behandling } from './src/behandling';
+export type {
+  PollingResponse,
+  PollingStatus,
+} from './src/polling';
