@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
-import type { AsyncPollingStatus, PollingStatus } from '@navikt/fp-types';
+import type { AsyncPollingStatus } from '@navikt/fp-types';
 
 import { doGetRequest, getOppgaverTilBehandling } from '../../../data/fplosSaksbehandlerApi';
 import type { Oppgave } from '../../../typer/oppgaveTsType';
@@ -114,6 +114,6 @@ const wait = (ms: number) =>
 const isPollingResponse = (response: AsyncPollingStatus | Oppgave[]): response is AsyncPollingStatus => {
   return (
     !Array.isArray(response) &&
-    ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status as PollingStatus)
+    ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status)
   );
 };

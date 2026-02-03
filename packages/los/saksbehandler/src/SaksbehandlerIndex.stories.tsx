@@ -3,7 +3,7 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { NavAnsatt, AsyncPollingStatus } from '@navikt/fp-types';
+import type { AsyncPollingStatus,NavAnsatt } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
