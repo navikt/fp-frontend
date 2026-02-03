@@ -18,11 +18,11 @@
     "storybook": "storybook dev --quiet -p 7018"
   },
   "dependencies": {
-    "@navikt/ds-react": "8.1.0",
+    "@navikt/ds-react": "8.2.0",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-utils": "3.11.0",
+    "@navikt/ft-utils": "3.11.5",
     "dayjs": "1.11.19",
-    "react": "19.2.3",
+    "react": "19.2.4",
     "react-intl": "8.1.1"
   },
   "devDependencies": {
@@ -30,7 +30,7 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "@storybook/react": "10.2.0",
-    "@storybook/react-vite": "10.1.11",
+    "@storybook/react-vite": "10.2.0",
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.2",
     "eslint": "9.39.2",
