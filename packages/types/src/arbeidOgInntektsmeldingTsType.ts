@@ -3,7 +3,7 @@ import type {
   foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto,
   foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto,
   foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto,
-  foreldrepenger_domene_iay_modell_NaturalYtelse,
+  foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto,
 } from './apiDtoGenerert';
 
 export enum AksjonspunktÅrsak {
@@ -14,7 +14,7 @@ export enum AksjonspunktÅrsak {
 
 export type Inntektsmelding = foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto;
 
-export type AktivNaturalYtelse = foreldrepenger_domene_iay_modell_NaturalYtelse;
+export type AktivNaturalYtelse = foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto;
 
 export type Arbeidsforhold = foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto;
 
