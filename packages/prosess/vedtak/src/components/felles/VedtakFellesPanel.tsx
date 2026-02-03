@@ -6,7 +6,6 @@ import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFill
 import { Alert, BodyShort, Button, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import {
   type Aksjonspunkt,
   type BehandlingFpSak,
@@ -108,8 +107,8 @@ export const VedtakFellesPanel = ({
   const skalViseLink = finnSkalViseLink(behandlingsresultat);
   const kanBehandles =
     !behandlingHenlagt &&
-    taskStatus?.status !== ApiPollingStatus.HALTED &&
-    taskStatus?.status !== ApiPollingStatus.DELAYED;
+    taskStatus?.status !== 'HALTED' &&
+    taskStatus?.status !== 'DELAYED';
 
   const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
     ['ENDRING_I_FORDELING_AV_YTELSEN', 'INGEN_ENDRING'],

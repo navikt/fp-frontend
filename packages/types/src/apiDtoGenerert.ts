@@ -475,7 +475,7 @@ export type tjenester_behandling_dto_AsyncPollingStatus = {
   pending?: boolean;
   pollIntervalMillis?: number;
   readOnly?: boolean;
-  status?: tjenester_behandling_dto_AsyncPollingStatus_Status;
+  status: tjenester_behandling_dto_AsyncPollingStatus_Status;
 };
 
 export type tjenester_behandling_dto_AsyncPollingStatus_Status =

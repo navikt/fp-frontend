@@ -1,27 +1,15 @@
 import { HTTPError, type KyResponse } from 'ky';
 
 import { ErrorType, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
-import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import type { Behandling } from '@navikt/fp-types';
+import type { AsyncPollingStatus, Behandling, PollingStatus } from '@navikt/fp-types';
 
 import { doGetRequest } from '../fagsakApi';
 
-//TODO (TOR) Vurder å bruke Websocket i staden for denne pollemekanismen.
-
 type PollingPendingFn = (isPending: boolean) => void;
 
-const MAX_POLLING_ATTEMPTS = 200;
 const HTTP_ACCEPTED = 202;
-
-type PollingResponse = {
-  status: ApiPollingStatus;
-  message: string;
-  pollIntervalMillis: number;
-  location: string;
-  readOnly: string;
-  pending: string;
-  eta?: string;
-};
+const MAX_POLLING_ATTEMPTS = 200;
+const MAX_POLLING_INTERVAL = 1000 * 60 * 5;
 
 export class PollingTimeoutError extends Error {
   location: string;
@@ -43,8 +31,8 @@ export const doPolling = async <T>(response: KyResponse<T>, setPollingPending: P
       return await pollOgHentData(setPollingPending, location);
     } catch (error) {
       if (error instanceof HTTPError) {
-        const data = await error.response.json<PollingResponse>();
-        if (isPollingDelayedOrHalted(data)) {
+        const data = await error.response.json<AsyncPollingStatus>();
+        if (isPollingDelayedOrHalted(data) && data.location) {
           setPollingPending(false);
           //Ikke vent på at behandling blir oppdatert, men hent gammel versjon (som da er read only)
           return await doGetRequest<Behandling>(data.location);
@@ -58,7 +46,7 @@ export const doPolling = async <T>(response: KyResponse<T>, setPollingPending: P
 };
 
 const pollOgHentData = async (setPollingPending: PollingPendingFn, location: string, pollingCounter = 0) => {
-  const response = await doGetRequest<PollingResponse | Behandling>(location);
+  const response = await doGetRequest<AsyncPollingStatus | Behandling>(location);
 
   if (isPollingResponse(response)) {
     if (pollingCounter === MAX_POLLING_ATTEMPTS) {
@@ -66,8 +54,7 @@ const pollOgHentData = async (setPollingPending: PollingPendingFn, location: str
       throw new PollingTimeoutError(location);
     }
     const { pollIntervalMillis } = response;
-    const interval =
-      pollingCounter < 30 ? pollIntervalMillis : pollIntervalMillis + (pollingCounter - 30) * pollIntervalMillis;
+    const interval = calculatePollingInterval(pollIntervalMillis, pollingCounter);
 
     setPollingPending(true);
 
@@ -81,26 +68,11 @@ const pollOgHentData = async (setPollingPending: PollingPendingFn, location: str
   return response;
 };
 
-const isPollingResponse = (response: PollingResponse | Behandling): response is PollingResponse => {
-  const pollingResponse = response as PollingResponse;
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  return pollingResponse.pending !== undefined && pollingResponse.location !== undefined;
-};
-
-const isPollingDelayedOrHalted = (pollingResponse: PollingResponse): boolean => {
-  return pollingResponse.status === ApiPollingStatus.DELAYED || pollingResponse.status === ApiPollingStatus.HALTED;
-};
-
-const wait = (ms: number) =>
-  new Promise(resolve => {
-    setTimeout(resolve, ms);
-  });
-
 export const useTaskStatusChecker = (setBehandling: (behandling: Behandling) => void) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   const onBehandlingSuccess = (behandling: Behandling) => {
-    if (behandling.taskStatus?.status === ApiPollingStatus.HALTED) {
+    if (behandling.taskStatus?.status === 'HALTED') {
       const { message, status } = behandling.taskStatus;
       addErrorMessage({
         type: ErrorType.POLLING_HALTED_OR_DELAYED,
@@ -108,7 +80,7 @@ export const useTaskStatusChecker = (setBehandling: (behandling: Behandling) => 
         status,
       });
     }
-    if (behandling.taskStatus?.status === ApiPollingStatus.DELAYED) {
+    if (behandling.taskStatus?.status === 'DELAYED') {
       const { message, status, eta } = behandling.taskStatus;
       addErrorMessage({
         type: ErrorType.POLLING_HALTED_OR_DELAYED,
@@ -123,3 +95,23 @@ export const useTaskStatusChecker = (setBehandling: (behandling: Behandling) => 
 
   return { onBehandlingSuccess };
 };
+
+const calculatePollingInterval = (pollIntervalMillis: number | undefined, pollingCounter: number): number => {
+  if (!pollIntervalMillis) {
+    return MAX_POLLING_INTERVAL;
+  }
+  return pollingCounter < 30 ? pollIntervalMillis : pollIntervalMillis + (pollingCounter - 30) * pollIntervalMillis;
+};
+
+const isPollingResponse = (response: AsyncPollingStatus | Behandling): response is AsyncPollingStatus => {
+  return ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status as PollingStatus);
+};
+
+const isPollingDelayedOrHalted = (pollingResponse: AsyncPollingStatus): boolean => {
+  return pollingResponse.status === 'DELAYED' || pollingResponse.status === 'HALTED';
+};
+
+const wait = (ms: number) =>
+  new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
