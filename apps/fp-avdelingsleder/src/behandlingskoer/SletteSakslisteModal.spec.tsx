@@ -2,6 +2,7 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType.ts';
 import * as stories from './SletteSakslisteModal.stories';
 
 const { Default } = composeStories(stories);
@@ -16,11 +17,15 @@ describe('SletteSakslisteModal', () => {
 
     await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
     expect(submit).toHaveBeenNthCalledWith(1, {
+      sakslisteId: 1,
       navn: 'Saksliste 1',
       sorteringTyper: [],
       saksbehandlerIdenter: [],
-      sakslisteId: 1,
-    });
+      andreKriterie: {
+        inkluder: [],
+        ekskluder: [],
+      },
+    } satisfies SakslisteAvdeling);
   });
 
   it('skal vise modal for sletting av saksliste og så svare nei', async () => {

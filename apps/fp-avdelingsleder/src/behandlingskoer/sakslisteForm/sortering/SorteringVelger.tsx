@@ -1,82 +1,44 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Box, Radio, VStack } from '@navikt/ds-react';
+import { Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { notEmpty } from '@navikt/fp-utils';
 
-import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import type { KøSorteringFelt, Periodefilter } from '../../../typer/sakslisteAvdelingTsType';
-import { BelopSorteringValg, type FormValues as BelopSorteringValgFormValues } from './BelopSorteringValg';
-import { DatoSorteringValg, type FormValues as DatoSorteringValgFormValues } from './DatoSorteringValg';
+import type { KøSorteringFelt, Sortering } from '../../../typer/sakslisteAvdelingTsType';
+import { BelopSorteringValg } from './BelopSorteringValg';
+import { DatoSorteringValg } from './DatoSorteringValg';
 
 export type FormValues = {
-  sortering?: string;
-} & (BelopSorteringValgFormValues & DatoSorteringValgFormValues);
-
-const bareTilbakekrevingValgt = (valgteBehandlingtyper?: string[]) =>
-  valgteBehandlingtyper &&
-  valgteBehandlingtyper.some(type => type === 'BT-007' || type === 'BT-009') &&
-  !valgteBehandlingtyper.some(type => type !== 'BT-007' && type !== 'BT-009');
+  sortering?: Sortering;
+};
 
 interface Props {
-  valgtSakslisteId: number;
   valgteBehandlingtyper?: string[];
-  valgtAvdelingEnhet: string;
-  periodefilter: Periodefilter;
   muligeSorteringer: KøSorteringFelt[];
 }
 
-export const SorteringVelger = ({
-  valgtSakslisteId,
-  valgteBehandlingtyper,
-  valgtAvdelingEnhet,
-  periodefilter,
-  muligeSorteringer,
-}: Props) => {
-  const queryClient = useQueryClient();
-
+export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Props) => {
   const { resetField, control, watch } = useFormContext<FormValues>();
-
-  const { mutate: lagreSortering } = useMutation({
-    mutationFn: (valuesToStore: { sorteringType: string }) =>
-      lagreSakslisteSortering(valgtSakslisteId, valuesToStore.sorteringType, valgtAvdelingEnhet),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
-      });
-    },
-  });
 
   const sorteringKoder = useLosKodeverk('KøSortering');
 
-  const sortering = watch('sortering');
+  const values = watch('sortering');
 
   return (
-    <Box borderWidth="1" borderColor="neutral-subtle" padding="space-40">
+    <VStack padding="space-20">
       <RhfRadioGroup
-        name="sortering"
+        name="sortering.sorteringType"
         control={control}
         legend={<FormattedMessage id="SorteringVelger.Sortering" />}
-        onChange={sorteringType => {
-          resetField('fra', { defaultValue: '' });
-          resetField('til', { defaultValue: '' });
-          resetField('fomDato', { defaultValue: '' });
-          resetField('tomDato', { defaultValue: '' });
-          resetField('periodefilter', { defaultValue: 'FAST_PERIODE' });
-
-          return lagreSortering({
-            sorteringType: String(sorteringType),
-          });
+        onChange={() => {
+          resetField('sortering.fra');
+          resetField('sortering.til');
+          resetField('sortering.fomDato', { defaultValue: '' });
+          resetField('sortering.tomDato', { defaultValue: '' });
+          resetField('sortering.periodefilter', { defaultValue: 'FAST_PERIODE' });
         }}
       >
         {muligeSorteringer
@@ -89,23 +51,20 @@ export const SorteringVelger = ({
               <Radio value={koSortering.sorteringType} size="small">
                 {notEmpty(sorteringKoder.find(k => k.kode === koSortering.sorteringType)?.navn, 'Mangler kodeverk')}
               </Radio>
-              {sortering === koSortering.sorteringType && (
+              {values?.sorteringType === koSortering.sorteringType && (
                 <>
-                  {koSortering.feltType === 'DATO' && (
-                    <DatoSorteringValg
-                      valgtSakslisteId={valgtSakslisteId}
-                      valgtAvdelingEnhet={valgtAvdelingEnhet}
-                      periodefilter={periodefilter}
-                    />
-                  )}
-                  {koSortering.feltType === 'HELTALL' && (
-                    <BelopSorteringValg valgtSakslisteId={valgtSakslisteId} valgtAvdelingEnhet={valgtAvdelingEnhet} />
-                  )}
+                  {koSortering.feltType === 'DATO' && <DatoSorteringValg />}
+                  {koSortering.feltType === 'HELTALL' && <BelopSorteringValg />}
                 </>
               )}
             </VStack>
           ))}
       </RhfRadioGroup>
-    </Box>
+    </VStack>
   );
 };
+
+const bareTilbakekrevingValgt = (valgteBehandlingtyper?: string[]) =>
+  valgteBehandlingtyper &&
+  valgteBehandlingtyper.some(type => type === 'BT-007' || type === 'BT-009') &&
+  !valgteBehandlingtyper.some(type => type !== 'BT-007' && type !== 'BT-009');

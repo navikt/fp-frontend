@@ -36,6 +36,10 @@ export const IngenSaksbehandlere: Story = {
       sakslisteId: 1,
       navn: 'Saksliste 1',
       sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+      andreKriterie: {
+        inkluder: [],
+        ekskluder: [],
+      },
       saksbehandlerIdenter: ['S34354'],
     },
     avdelingensSaksbehandlere: [],
@@ -56,6 +60,10 @@ export const ToSaksbehandlere: Story = {
       sakslisteId: 1,
       navn: 'Saksliste 1',
       sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+      andreKriterie: {
+        inkluder: [],
+        ekskluder: [],
+      },
       saksbehandlerIdenter: ['S34354'],
     },
     avdelingensSaksbehandlere: [
@@ -87,6 +95,10 @@ export const TreSaksbehandlere: Story = {
       sakslisteId: 1,
       navn: 'Saksliste 1',
       sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+      andreKriterie: {
+        inkluder: [],
+        ekskluder: [],
+      },
       saksbehandlerIdenter: ['S34354'],
     },
     avdelingensSaksbehandlere: [
@@ -174,6 +186,10 @@ export const SaksbehandlereSomErGruppert: Story = {
       sakslisteId: 1,
       navn: 'Saksliste 1',
       sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+      andreKriterie: {
+        inkluder: [],
+        ekskluder: [],
+      },
       saksbehandlerIdenter: ['S34354'],
     },
     avdelingensSaksbehandlere: [

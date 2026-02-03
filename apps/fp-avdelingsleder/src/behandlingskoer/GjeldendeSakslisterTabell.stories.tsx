@@ -58,6 +58,10 @@ const meta = {
           navn: 'Ny liste',
           sorteringTyper: [],
           saksbehandlerIdenter: [],
+          andreKriterie: {
+            inkluder: [],
+            ekskluder: [],
+          },
         }),
       }));
     };
@@ -83,6 +87,10 @@ export const TabellNårDetFinnesEnBehandlingskø: Story = {
         navn: 'Saksliste 1',
         sorteringTyper: [],
         saksbehandlerIdenter: ['R23233'],
+        andreKriterie: {
+          inkluder: [],
+          ekskluder: [],
+        },
         gjeldendeStatistikk: {
           alleOppgaver: 33,
           tilgjengeligeOppgaver: 25,

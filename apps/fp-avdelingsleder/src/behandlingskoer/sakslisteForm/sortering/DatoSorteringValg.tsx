@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument -- [JOHANNES] vent på typet form */
-
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -7,108 +5,23 @@ import { Detail, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
 import { ArrowBox, DateLabel } from '@navikt/ft-ui-komponenter';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
-import {
-  lagreSakslisteSorteringIntervall,
-  lagreSakslisteSorteringTidsintervallDato,
-  LosUrl,
-} from '../../../data/fplosAvdelingslederApi';
 import { type Periodefilter } from '../../../typer/sakslisteAvdelingTsType';
-import { useDebounce } from '../useDebounce';
+import type { FormValues } from './SorteringVelger';
 
 import styles from './sorteringVelger.module.css';
 
 dayjs.extend(customParseFormat);
 
-export type FormValues = {
-  fra?: string;
-  til?: string;
-  fomDato?: string;
-  tomDato?: string;
-  periodefilter: Periodefilter;
-};
-
-interface Props {
-  valgtSakslisteId: number;
-  valgtAvdelingEnhet: string;
-  periodefilter: Periodefilter;
-}
-
-export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, periodefilter }: Props) => {
-  const queryClient = useQueryClient();
+export const DatoSorteringValg = () => {
   const intl = useIntl();
 
-  const { mutate: lagreSakslisteSorteringRelativPeriode } = useMutation({
-    mutationFn: (valuesToStore: { fra: string | undefined; til: string | undefined; periodefilter: Periodefilter }) =>
-      lagreSakslisteSorteringIntervall(
-        valgtSakslisteId,
-        valuesToStore.fra,
-        valuesToStore.til,
-        valgtAvdelingEnhet,
-        valuesToStore.periodefilter,
-      ),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
-      });
-    },
-  });
-
-  const { mutate: lagreSorteringTidsintervallDato } = useMutation({
-    mutationFn: (valuesToStore: { fomDato?: string; tomDato?: string }) =>
-      lagreSakslisteSorteringTidsintervallDato(
-        valgtSakslisteId,
-        valgtAvdelingEnhet,
-        valuesToStore.fomDato,
-        valuesToStore.tomDato,
-      ),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
-      });
-    },
-  });
-
   const { watch, control } = useFormContext<FormValues>();
-  const fraVerdi = watch('fra');
-  const tilVerdi = watch('til');
-  const fomDatoVerdi = watch('fomDato');
-  const tomDatoVerdi = watch('tomDato');
-
-  const lagreFra = (nyFraVerdi: string) =>
-    lagreSakslisteSorteringRelativPeriode({
-      fra: nyFraVerdi,
-      til: tilVerdi,
-      periodefilter: periodefilter,
-    });
-  const lagreTil = (nyTilVerdi: string) =>
-    lagreSakslisteSorteringRelativPeriode({
-      fra: fraVerdi,
-      til: nyTilVerdi,
-      periodefilter: periodefilter,
-    });
-
-  const lagreFomDato = getLagreDatoFn(lagreSorteringTidsintervallDato, true, tomDatoVerdi);
-  const lagreTomDato = getLagreDatoFn(lagreSorteringTidsintervallDato, false, fomDatoVerdi);
-
-  const lagreFomDatoDebounce = useDebounce('fomDato', lagreFomDato);
-  const lagreTomDatoDebounce = useDebounce('tomDato', lagreTomDato);
+  const periodefilter = watch('sortering.periodefilter');
+  const fraVerdi = watch('sortering.fra');
+  const tilVerdi = watch('sortering.til');
 
   return (
     <div className={styles['arrowBoxWidth']}>
@@ -119,22 +32,8 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
           </Detail>
           <RhfRadioGroup
             control={control}
-            name="periodefilter"
+            name="sortering.periodefilter"
             legend={intl.formatMessage({ id: 'SorteringVelger.FilterForPeriode' })}
-            onChange={value => {
-              if (value === ('FAST_PERIODE' satisfies Periodefilter)) {
-                lagreSorteringTidsintervallDato({
-                  fomDato: fomDatoVerdi,
-                  tomDato: tomDatoVerdi,
-                });
-              } else {
-                lagreSakslisteSorteringRelativPeriode({
-                  fra: fraVerdi,
-                  til: tilVerdi,
-                  periodefilter: value as Periodefilter,
-                });
-              }
-            }}
           >
             <Radio value={'FAST_PERIODE' satisfies Periodefilter}>
               <FormattedMessage id="SorteringVelger.FastPeriode" />
@@ -150,14 +49,13 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
             <HStack gap="space-16">
               <div>
                 <RhfTextField
-                  name="fra"
+                  name="sortering.fra"
                   control={control}
                   className={styles['dato']}
                   label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
                   validate={[hasValidPosOrNegInteger]}
-                  onBlur={value => lagreFra(value)}
                 />
-                {(fraVerdi || fraVerdi === '0') && (
+                {fraVerdi !== undefined && (
                   <Detail>
                     {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                       <DateLabel dateString={finnDato(fraVerdi)} />
@@ -176,14 +74,13 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
               </Detail>
               <div>
                 <RhfTextField
-                  name="til"
+                  name="sortering.til"
                   control={control}
                   className={styles['dato']}
                   label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
                   validate={[hasValidPosOrNegInteger]}
-                  onBlur={value => lagreTil(value)}
                 />
-                {(tilVerdi || tilVerdi === '0') && (
+                {tilVerdi !== undefined && (
                   <Detail>
                     {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                       <DateLabel dateString={finnDato(tilVerdi)} />
@@ -205,21 +102,19 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
           {periodefilter === 'FAST_PERIODE' && (
             <HStack gap="space-16">
               <RhfDatepicker
-                name="fomDato"
+                name="sortering.fomDato"
                 control={control}
                 label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
                 validate={[hasValidDate]}
-                onChange={lagreFomDatoDebounce}
               />
               <Detail>
                 <FormattedMessage id="SorteringVelger.Bindestrek" />
               </Detail>
               <RhfDatepicker
-                name="tomDato"
+                name="sortering.tomDato"
                 control={control}
                 label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
                 validate={[hasValidDate]}
-                onChange={lagreTomDatoDebounce}
               />
             </HStack>
           )}
@@ -229,38 +124,9 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, period
   );
 };
 
-const finnDato = (antallDager: string) => dayjs().add(Number(antallDager), 'd').format();
+const finnDato = (antallDager: number) => dayjs().add(antallDager, 'd').format();
 
-const finnDatoMåned = (antallMåneder: string, erStartenAvMåned: boolean) => {
+const finnDatoMåned = (antallMåneder: number, erStartenAvMåned: boolean) => {
   const baseDato = erStartenAvMåned ? dayjs().startOf('month') : dayjs().endOf('month');
-  return baseDato.add(Number(antallMåneder), 'month').format();
+  return baseDato.add(antallMåneder, 'month').format();
 };
-
-const getLagreDatoFn =
-  (
-    lagreSorteringTidsintervallDato: (valuesToStore: { fomDato?: string; tomDato?: string }) => void,
-    erFomDato: boolean,
-    annenDato?: string,
-  ) =>
-  (inputdato: string) => {
-    let dato;
-    if (inputdato) {
-      dato = dayjs(inputdato);
-    }
-    if (!dato || dato.isValid()) {
-      const d = dato ? dato.format(ISO_DATE_FORMAT) : dato;
-
-      const params = erFomDato
-        ? {
-            fomDato: d,
-            tomDato: annenDato,
-          }
-        : {
-            fomDato: annenDato,
-            tomDato: d,
-          };
-
-      return lagreSorteringTidsintervallDato(params);
-    }
-    return undefined;
-  };
