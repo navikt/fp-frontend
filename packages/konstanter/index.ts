@@ -1,6 +1,5 @@
 export { ProsessStegCode } from './src/prosessStegCodes';
 export { FaktaPanelCode } from './src/faktaPanelCodes';
-export { ApiPollingStatus } from './src/apiPollingStatus';
 export { skjermlenkeCodes } from './src/skjermlenkeCodes';
 
 export {

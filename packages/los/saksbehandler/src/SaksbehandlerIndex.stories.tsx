@@ -2,9 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { NavAnsatt } from '@navikt/fp-types';
+import type { AsyncPollingStatus,NavAnsatt } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
@@ -201,9 +200,10 @@ const meta = {
             : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
         }),
         http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json({
-            status: ApiPollingStatus.PENDING,
+          HttpResponse.json<AsyncPollingStatus>({
+            status: 'PENDING',
             pollIntervalMillis: 100000000,
+            message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
           }),
         ),
         http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
