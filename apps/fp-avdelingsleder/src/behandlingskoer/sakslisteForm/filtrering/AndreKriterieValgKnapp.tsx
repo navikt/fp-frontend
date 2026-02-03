@@ -9,8 +9,11 @@ import type { AndreKriterierType, LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './AvOgPåKnapper.module.css';
 
-export type FormValues = { [key in AndreKriterierType]?: boolean } & {
-  [K in AndreKriterierType as `${K}_inkluder`]?: boolean;
+export type FormValues = {
+  andreKriterie: {
+    inkluder: AndreKriterierType[];
+    ekskluder: AndreKriterierType[];
+  };
 };
 
 enum FilterStatus {
@@ -21,40 +24,37 @@ enum FilterStatus {
 
 type Props = {
   andreKriterierType: LosKodeverkMedNavn<'AndreKriterierType'>;
-  lagreAndreKriterier: (valuesToStore: {
-    andreKriterierType: AndreKriterierType;
-    checked: boolean;
-    inkluder: boolean;
-  }) => void;
 };
 
-export const AndreKriterieValgKnapp = ({ andreKriterierType, lagreAndreKriterier }: Props): ReactElement => {
+export const AndreKriterieValgKnapp = ({ andreKriterierType }: Props): ReactElement => {
   const intl = useIntl();
-  const { setValue, watch } = useFormContext<FormValues>();
-  const inkluderVerdi = watch(`${andreKriterierType.kode}_inkluder`);
-  const filterStatus = getFilterStatus(inkluderVerdi);
+  const { watch, setValue } = useFormContext<FormValues>();
+  const andreKriterier = watch('andreKriterie');
+  const inkluderVerdi = andreKriterier.inkluder;
+  const ekskluderVerdi = andreKriterier.ekskluder;
 
   const deaktiverKnapp = () => {
-    setValue(`${andreKriterierType.kode}_inkluder`, undefined);
-    lagreAndreKriterier({
-      andreKriterierType: andreKriterierType.kode,
-      checked: false,
-      inkluder: false,
-    });
+    const inkluderKriterier = inkluderVerdi.filter(k => k !== andreKriterierType.kode);
+    const eksluderKriterier = ekskluderVerdi.filter(k => k !== andreKriterierType.kode);
+    setValue('andreKriterie', { inkluder: inkluderKriterier, ekskluder: eksluderKriterier }, { shouldDirty: true });
   };
 
   const aktiverKnapp = (knapp: FilterStatus.PLUS | FilterStatus.MINUS) => {
-    const inkluder = knapp === FilterStatus.PLUS;
-    setValue(`${andreKriterierType.kode}_inkluder`, inkluder);
-    lagreAndreKriterier({
-      andreKriterierType: andreKriterierType.kode,
-      checked: true,
-      inkluder: inkluder,
-    });
+    const nyInkluder = inkluderVerdi.filter(k => k !== andreKriterierType.kode);
+    const nyEkskluder = ekskluderVerdi.filter(k => k !== andreKriterierType.kode);
+
+    if (knapp === FilterStatus.PLUS) {
+      nyInkluder.push(andreKriterierType.kode);
+    } else {
+      nyEkskluder.push(andreKriterierType.kode);
+    }
+
+    setValue('andreKriterie', { inkluder: nyInkluder, ekskluder: nyEkskluder }, { shouldDirty: true });
   };
 
+  const filterStatus = getFilterStatus(andreKriterierType.kode, inkluderVerdi, ekskluderVerdi);
   const toggleKnapp = (knapp: FilterStatus.PLUS | FilterStatus.MINUS) => {
-    if (knapp == filterStatus) {
+    if (knapp === filterStatus) {
       deaktiverKnapp();
     } else {
       aktiverKnapp(knapp);
@@ -110,13 +110,16 @@ const MinusKnapp = ({ iconTittel, filterStatus, toggle }: KnappProps): ReactElem
   />
 );
 
-const getFilterStatus = (inkluder: boolean | undefined): FilterStatus => {
-  switch (inkluder) {
-    case undefined:
-      return FilterStatus.OFF;
-    case true:
-      return FilterStatus.PLUS;
-    case false:
-      return FilterStatus.MINUS;
+const getFilterStatus = (
+  kode: AndreKriterierType,
+  inkluder: AndreKriterierType[],
+  ekskluder: AndreKriterierType[],
+): FilterStatus => {
+  if (inkluder.includes(kode)) {
+    return FilterStatus.PLUS;
   }
+  if (ekskluder.includes(kode)) {
+    return FilterStatus.MINUS;
+  }
+  return FilterStatus.OFF;
 };

@@ -7,7 +7,6 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { AndreKriterierType } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { AndreKriterierVelger } from './AndreKriterierVelger';
@@ -24,19 +23,17 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.post(LosUrl.LAGRE_SAKSLISTE_ANDRE_KRITERIER, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.ENDRE_EKSISTRENDE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
       ],
     },
   },
-  args: {
-    valgtSakslisteId: 1,
-    valgtAvdelingEnhet: 'Nav Vikafossen',
-  },
-  render: args => {
+  render: () => {
     const formMethods = useForm({
       defaultValues: {
-        ['ARBEID_INNTEKT' satisfies AndreKriterierType]: true,
-        [`${'ARBEID_INNTEKT' satisfies AndreKriterierType}_inkluder`]: true,
+        andreKriterie: {
+          inkluder: ['ARBEID_INNTEKT'],
+          ekskluder: [],
+        },
       },
     });
 
@@ -45,7 +42,7 @@ const meta = {
 
     return alleKodeverk ? (
       <RhfForm formMethods={formMethods}>
-        <AndreKriterierVelger {...args} />
+        <AndreKriterierVelger />
       </RhfForm>
     ) : (
       <LoadingPanel />

@@ -23,19 +23,14 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.post(LosUrl.LAGRE_SAKSLISTE_FAGSAK_YTELSE_TYPE, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.ENDRE_EKSISTRENDE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
       ],
     },
   },
-  args: {
-    valgtSakslisteId: 1,
-    valgtAvdelingEnhet: 'Nav Vikafossen',
-  },
-  render: args => {
+  render: () => {
     const formMethods = useForm({
       defaultValues: {
-        ['FP']: true,
-        ['ES']: true,
+        fagsakYtelseTyper: ['FP', 'ES'],
       },
     });
 
@@ -44,7 +39,7 @@ const meta = {
 
     return alleKodeverk ? (
       <RhfForm formMethods={formMethods}>
-        <FagsakYtelseTypeVelger {...args} />
+        <FagsakYtelseTypeVelger />
       </RhfForm>
     ) : (
       <LoadingPanel />

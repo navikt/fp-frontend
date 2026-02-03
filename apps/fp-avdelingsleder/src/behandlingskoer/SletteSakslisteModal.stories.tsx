@@ -29,6 +29,10 @@ export const Default: Story = {
       navn: 'Saksliste 1',
       sorteringTyper: [],
       saksbehandlerIdenter: [],
+      andreKriterie: {
+        inkluder: [],
+        ekskluder: [],
+      },
     },
   },
 };

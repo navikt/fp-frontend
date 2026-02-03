@@ -2,7 +2,7 @@ import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
 import type { OppgaveFilterStatistikk, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import type { AlleKodeverkLos, AndreKriterierType } from '@navikt/fp-types';
+import type { AlleKodeverkLos } from '@navikt/fp-types';
 
 import type { Avdeling } from '../typer/avdelingTsType';
 import type { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';
@@ -13,7 +13,7 @@ import type { OppgaverForForsteStonadsdagUkeMnd } from '../typer/oppgaverForFors
 import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import type { Reservasjon } from '../typer/reservasjonTsType';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
-import type { Periodefilter, SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
+import type { SakslisteAvdeling, SakslisteDto } from '../typer/sakslisteAvdelingTsType';
 
 export type InitDataLos = {
   innloggetBruker: InnloggetBruker;
@@ -44,17 +44,9 @@ export const LosUrl = {
   OPPGAVE_AVDELING_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/avdelingantall'),
   SAKSLISTER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/sakslister'),
   OPPRETT_NY_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister'),
+  ENDRE_EKSISTRENDE_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister/endre-eksisterende'),
   OPPGAVE_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/antall'),
-  LAGRE_SAKSLISTE_NAVN: wrapUrl('/fplos/api/avdelingsleder/sakslister/navn'),
   LAGRE_SAKSLISTE_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/sakslister/saksbehandler'),
-  LAGRE_SAKSLISTE_SORTERING: wrapUrl('/fplos/api/avdelingsleder/sakslister/sortering'),
-  LAGRE_SAKSLISTE_SORTERING_INTERVALL: wrapUrl('/fplos/api/avdelingsleder/sakslister/sortering-numerisk-intervall'),
-  LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO: wrapUrl(
-    '/fplos/api/avdelingsleder/sakslister/sortering-tidsintervall-dato',
-  ),
-  LAGRE_SAKSLISTE_FAGSAK_YTELSE_TYPE: wrapUrl('/fplos/api/avdelingsleder/sakslister/ytelsetyper'),
-  LAGRE_SAKSLISTE_BEHANDLINGSTYPE: wrapUrl('/fplos/api/avdelingsleder/sakslister/behandlingstype'),
-  LAGRE_SAKSLISTE_ANDRE_KRITERIER: wrapUrl('/fplos/api/avdelingsleder/sakslister/andre-kriterier'),
   HENT_OPPGAVER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid'),
   HENT_OPPGAVER_PER_DATO: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid-historikk'),
   HENT_OPPGAVER_APNE_ELLER_PA_VENT: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/åpne-behandlinger'),
@@ -197,8 +189,8 @@ export const reservasjonerForAvdelingOptions = (avdelingEnhet: string) =>
 export const opprettNySaksliste = (avdelingEnhet: string) =>
   kyExtended.post(LosUrl.OPPRETT_NY_SAKSLISTE, { json: { avdelingEnhet } }).json<{ sakslisteId: string }>();
 
-export const lagreSakslisteNavn = (sakslisteId: number, navn: string, avdelingEnhet: string) =>
-  kyExtended.post(LosUrl.LAGRE_SAKSLISTE_NAVN, { json: { sakslisteId, navn, avdelingEnhet } }).json();
+export const lagreUtvalgskriterierForKø = (sakslisteDto: SakslisteDto) =>
+  kyExtended.post(LosUrl.ENDRE_EKSISTRENDE_SAKSLISTE, { json: sakslisteDto }).json();
 
 export const lagreSakslisteSaksbehandler = (
   sakslisteId: number,
@@ -208,73 +200,6 @@ export const lagreSakslisteSaksbehandler = (
 ) =>
   kyExtended
     .post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, { json: { sakslisteId, brukerIdent, checked, avdelingEnhet } })
-    .json();
-
-export const lagreSakslisteSortering = (sakslisteId: number, sakslisteSorteringValg: string, avdelingEnhet: string) =>
-  kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_SORTERING, { json: { sakslisteId, sakslisteSorteringValg, avdelingEnhet } })
-    .json();
-
-export const lagreSakslisteSorteringIntervall = (
-  sakslisteId: number,
-  fra: string | undefined,
-  til: string | undefined,
-  avdelingEnhet: string,
-  periodefilter?: Periodefilter,
-) =>
-  kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, {
-      json: { sakslisteId, fra, til, periodefilter, avdelingEnhet },
-    })
-    .json();
-
-export const lagreSakslisteSorteringTidsintervallDato = (
-  sakslisteId: number,
-  avdelingEnhet: string,
-  fomDato?: string,
-  tomDato?: string,
-) =>
-  kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO, {
-      json: { sakslisteId, avdelingEnhet, fomDato, tomDato },
-    })
-    .json();
-
-export const lagreSakslisteFagsakYtelseType = (
-  sakslisteId: number,
-  avdelingEnhet: string,
-  fagsakYtelseType: string,
-  checked: boolean,
-) =>
-  kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_FAGSAK_YTELSE_TYPE, {
-      json: { sakslisteId, avdelingEnhet, fagsakYtelseType, checked },
-    })
-    .json();
-
-export const lagreSakslisteBehandlingstype = (
-  sakslisteId: number,
-  avdelingEnhet: string,
-  behandlingType: string,
-  checked: boolean,
-) =>
-  kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_BEHANDLINGSTYPE, {
-      json: { sakslisteId, avdelingEnhet, behandlingType, checked },
-    })
-    .json();
-
-export const lagreSakslisteAndreKriterier = (
-  sakslisteId: number,
-  avdelingEnhet: string,
-  andreKriterierType: AndreKriterierType,
-  checked: boolean,
-  inkluder: boolean,
-) =>
-  kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_ANDRE_KRITERIER, {
-      json: { sakslisteId, avdelingEnhet, andreKriterierType, checked, inkluder },
-    })
     .json();
 
 export const slettSaksliste = (sakslisteId: number, avdelingEnhet: string) =>

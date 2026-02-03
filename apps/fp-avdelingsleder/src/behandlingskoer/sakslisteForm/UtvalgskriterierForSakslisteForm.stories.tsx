@@ -21,13 +21,7 @@ const meta = {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.get(LosUrl.OPPGAVE_ANTALL, () => HttpResponse.json(1)),
-        http.post(LosUrl.LAGRE_SAKSLISTE_NAVN, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_FAGSAK_YTELSE_TYPE, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_BEHANDLINGSTYPE, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_ANDRE_KRITERIER, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.ENDRE_EKSISTRENDE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
       ],
     },
   },
@@ -59,16 +53,10 @@ export const MedGittNavn: Story = {
       behandlingTyper: ['BT-002'],
       fagsakYtelseTyper: ['FP'],
       sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
-      andreKriterier: [
-        {
-          andreKriterierType: 'TIL_BESLUTTER',
-          inkluder: true,
-        },
-        {
-          andreKriterierType: 'PAPIRSOKNAD',
-          inkluder: false,
-        },
-      ],
+      andreKriterie: {
+        inkluder: ['TIL_BESLUTTER'],
+        ekskluder: ['PAPIRSOKNAD'],
+      },
     },
   },
 };
@@ -88,16 +76,10 @@ export const MedDefaultNavn: Story = {
       behandlingTyper: ['BT-002'],
       fagsakYtelseTyper: ['FP'],
       sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
-      andreKriterier: [
-        {
-          andreKriterierType: 'TIL_BESLUTTER',
-          inkluder: true,
-        },
-        {
-          andreKriterierType: 'PAPIRSOKNAD',
-          inkluder: false,
-        },
-      ],
+      andreKriterie: {
+        inkluder: ['TIL_BESLUTTER'],
+        ekskluder: ['PAPIRSOKNAD'],
+      },
     },
   },
 };

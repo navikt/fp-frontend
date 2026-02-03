@@ -34,16 +34,10 @@ const SAKSLISTER = [
     behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],
     sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
-    andreKriterier: [
-      {
-        andreKriterierType: 'TIL_BESLUTTER',
-        inkluder: true,
-      },
-      {
-        andreKriterierType: 'PAPIRSOKNAD',
-        inkluder: false,
-      },
-    ],
+    andreKriterie: {
+      inkluder: [],
+      ekskluder: ['PAPIRSOKNAD', 'TIL_BESLUTTER'],
+    },
     gjeldendeStatistikk: {
       alleOppgaver: 33,
       tilgjengeligeOppgaver: 25,
@@ -63,16 +57,10 @@ const SAKSLISTER = [
     behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],
     sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
-    andreKriterier: [
-      {
-        andreKriterierType: 'TIL_BESLUTTER',
-        inkluder: true,
-      },
-      {
-        andreKriterierType: 'PAPIRSOKNAD',
-        inkluder: false,
-      },
-    ],
+    andreKriterie: {
+      inkluder: ['TIL_BESLUTTER'],
+      ekskluder: ['PAPIRSOKNAD'],
+    },
     gjeldendeStatistikk: {
       alleOppgaver: 12,
       tilgjengeligeOppgaver: 8,
@@ -124,12 +112,7 @@ const meta = {
         http.get(urlEncodeNorskeBokstaver(LosUrl.OPPGAVE_FILTER_STATISTIKK), () =>
           HttpResponse.json(OPPGAVE_FILTER_STATISTIKK),
         ),
-        http.post(LosUrl.LAGRE_SAKSLISTE_NAVN, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_FAGSAK_YTELSE_TYPE, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_BEHANDLINGSTYPE, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_ANDRE_KRITERIER, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.ENDRE_EKSISTRENDE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
       ],
     },
   },
