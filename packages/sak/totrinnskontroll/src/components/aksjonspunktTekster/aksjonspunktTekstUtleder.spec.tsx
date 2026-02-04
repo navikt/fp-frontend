@@ -5,7 +5,7 @@ import type {
   FaktaOmBeregningTilfelle,
   KodeverkMedNavn,
   TotrinnskontrollAksjonspunkt,
-  TypeEndring,
+  UttakPeriodeEndring,
 } from '@navikt/fp-types';
 
 import { getAksjonspunkttekst } from './aksjonspunktTekstUtleder';
@@ -181,11 +181,8 @@ describe('aksjonspunktTekstUtleder', () => {
     const uttakPeriode = {
       fom: '2024-05-01',
       tom: '2025-01-20',
-      erSlettet: true,
-      erLagtTil: false,
-      erEndret: false,
-      typeEndring: 'SLETTET' as TypeEndring,
-    };
+      typeEndring: 'SLETTET',
+    } as UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
@@ -200,11 +197,8 @@ describe('aksjonspunktTekstUtleder', () => {
     const uttakPeriode = {
       fom: '2024-05-01',
       tom: '2025-01-20',
-      erSlettet: true,
-      erLagtTil: false,
-      erEndret: false,
-      typeEndring: 'SLETTET' as TypeEndring,
-    };
+      typeEndring: 'SLETTET',
+    } as UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
@@ -219,11 +213,8 @@ describe('aksjonspunktTekstUtleder', () => {
     const uttakPeriode = {
       fom: '2024-05-01',
       tom: '2025-01-20',
-      erSlettet: false,
-      erLagtTil: true,
-      erEndret: false,
-      typeEndring: 'LAGT_TIL' as TypeEndring,
-    };
+      typeEndring: 'LAGT_TIL',
+    } as UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
@@ -241,11 +232,8 @@ describe('aksjonspunktTekstUtleder', () => {
     const uttakPeriode = {
       fom: '2024-05-01',
       tom: '2025-01-20',
-      erSlettet: false,
-      erLagtTil: true,
-      erEndret: false,
-      typeEndring: 'LAGT_TIL' as TypeEndring,
-    };
+      typeEndring: 'LAGT_TIL',
+    } as UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
@@ -264,11 +252,8 @@ describe('aksjonspunktTekstUtleder', () => {
     const uttakPeriode = {
       fom: '2024-05-01',
       tom: '2025-01-20',
-      typeEndring: 'ENDRET' as TypeEndring,
-      erSlettet: false,
-      erLagtTil: false,
-      erEndret: true,
-    };
+      typeEndring: 'ENDRET',
+    } as UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
@@ -286,11 +271,8 @@ describe('aksjonspunktTekstUtleder', () => {
     const uttakPeriode = {
       fom: '2024-05-01',
       tom: '2025-01-20',
-      erSlettet: false,
-      erLagtTil: false,
-      erEndret: true,
-      typeEndring: 'ENDRET' as TypeEndring,
-    };
+      typeEndring: 'ENDRET',
+    } as UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,

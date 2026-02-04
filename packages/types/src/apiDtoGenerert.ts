@@ -472,7 +472,6 @@ export type tjenester_behandling_dto_AsyncPollingStatus = {
   eta?: string;
   location?: string;
   message: string;
-  pending?: boolean;
   pollIntervalMillis?: number;
   readOnly?: boolean;
   status: tjenester_behandling_dto_AsyncPollingStatus_Status;
@@ -1103,10 +1102,6 @@ export type foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak =
   | '4116'
   | '4117';
 
-export type foreldrepenger_behandlingslager_uttak_fp_Trekkdager = {
-  [key: string]: unknown;
-};
-
 export type foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType =
   | 'ARBEID'
   | 'FERIE'
@@ -1132,14 +1127,6 @@ export type foreldrepenger_behandlingslager_virksomhet_ArbeidType =
   | 'UTENLANDSK_ARBEIDSFORHOLD'
   | 'VENTELØNN_VARTPENGER'
   | 'VANLIG';
-
-export type foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver = {
-  aktørId?: string;
-  erVirksomhet?: boolean;
-  identifikator?: string;
-  indexKey?: string;
-  orgnr?: string;
-};
 
 export type foreldrepenger_domene_arbeidInntektsmelding_AvklarPermisjonUtenSluttdatoDto = {
   arbeidsgiverIdent: string;
@@ -1316,7 +1303,6 @@ export type foreldrepenger_domene_rest_dto_FastsattePerioderTidsbegrensetDto = {
 export type foreldrepenger_domene_rest_dto_FastsatteVerdierForBesteberegningDto = {
   fastsattBeløp: number;
   inntektskategori: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
-  skalHaBesteberegning?: boolean;
 };
 
 export type foreldrepenger_domene_rest_dto_FastsettBGTidsbegrensetArbeidsforholdDto = {
@@ -1389,7 +1375,7 @@ export type foreldrepenger_domene_rest_dto_VurderATogFLiSammeOrganisasjonDto = {
 };
 
 export type foreldrepenger_domene_rest_dto_VurderEtterlønnSluttpakkeDto = {
-  erEtterlønnSluttpakke?: boolean;
+  erEtterlønnSluttpakke: boolean;
 };
 
 export type foreldrepenger_domene_rest_dto_VurderFaktaOmBeregningDto = {
@@ -1398,7 +1384,7 @@ export type foreldrepenger_domene_rest_dto_VurderFaktaOmBeregningDto = {
 };
 
 export type foreldrepenger_domene_rest_dto_VurderLønnsendringDto = {
-  erLønnsendringIBeregningsperioden?: boolean;
+  erLønnsendringIBeregningsperioden: boolean;
 };
 
 export type foreldrepenger_domene_rest_dto_VurderMilitærDto = {
@@ -1406,7 +1392,7 @@ export type foreldrepenger_domene_rest_dto_VurderMilitærDto = {
 };
 
 export type foreldrepenger_domene_rest_dto_VurderNyoppstartetFLDto = {
-  erNyoppstartetFL?: boolean;
+  erNyoppstartetFL: boolean;
 };
 
 export type foreldrepenger_domene_rest_dto_VurderRefusjonAndelBeregningsgrunnlagDto = {
@@ -1423,7 +1409,7 @@ export type foreldrepenger_domene_rest_dto_VurderRefusjonBeregningsgrunnlagDto =
 };
 
 export type foreldrepenger_domene_rest_dto_VurderSelvstendigNæringsdrivendeNyIArbeidslivetDto = {
-  erNyIArbeidslivet?: boolean;
+  erNyIArbeidslivet: boolean;
 };
 
 export type foreldrepenger_domene_rest_dto_VurderTidsbegrensetArbeidsforholdDto = {
@@ -1445,7 +1431,7 @@ export type foreldrepenger_domene_rest_dto_VurderteArbeidsforholdDto = {
 export type foreldrepenger_domene_rest_dto_fordeling_FordelBeregningsgrunnlagAndelDto = {
   aktivitetStatus?: foreldrepenger_behandlingslager_behandling_beregning_AktivitetStatus;
   andelsnr?: number;
-  arbeidsforholdId?: foreldrepenger_domene_typer_InternArbeidsforholdRef;
+  arbeidsforholdId?: string;
   arbeidsforholdType?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
   arbeidsgiverId?: string;
   beregningsperiodeFom?: string;
@@ -1474,12 +1460,6 @@ export type foreldrepenger_domene_rest_dto_fordeling_FordelFastsatteVerdierDto =
   fastsattÅrsbeløpInklNaturalytelse: number;
   inntektskategori: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
   refusjonPrÅr?: number;
-};
-
-export type foreldrepenger_domene_typer_InternArbeidsforholdRef = {
-  indexKey?: string;
-  referanse?: string;
-  uuidreferanse?: string;
 };
 
 export type foreldrepenger_domene_uttak_fakta_uttak_DokumentasjonVurderingBehov_Behov_Type =
@@ -1744,12 +1724,17 @@ export type tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehov
 
 export type tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDto = {
   begrunnelse?: string;
-  vurderingBehov?: Array<tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto>;
+  vurderingBehov: Array<tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto>;
 };
 
 export type tjenester_behandling_uttak_dto_ArbeidsforholdDto = {
   arbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
   arbeidsgiverReferanse?: string;
+};
+
+export type tjenester_behandling_uttak_dto_ArbeidsgiverLagreDto = {
+  aktørId?: string;
+  identifikator?: string;
 };
 
 export type tjenester_behandling_uttak_dto_AvklarAleneomsorgVurderingDto = {
@@ -1794,11 +1779,11 @@ export type tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakStort
 };
 
 export type tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetLagreDto = {
-  arbeidsforholdId?: foreldrepenger_domene_typer_InternArbeidsforholdRef;
-  arbeidsgiver?: foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver;
+  arbeidsforholdId?: string;
+  arbeidsgiver?: tjenester_behandling_uttak_dto_ArbeidsgiverLagreDto;
   arbeidsgiverReferanse?: string;
   stønadskontoType?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType;
-  trekkdagerDesimaler: foreldrepenger_behandlingslager_uttak_fp_Trekkdager;
+  trekkdagerDesimaler: number;
   utbetalingsgrad?: number;
   uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
 };
@@ -2307,7 +2292,7 @@ export type foreldrepenger_domene_rest_dto_FastsatteVerdierDto = {
 export type foreldrepenger_domene_rest_dto_FastsettBeregningsgrunnlagAndelDto = {
   aktivitetStatus?: foreldrepenger_behandlingslager_behandling_beregning_AktivitetStatus;
   andelsnr?: number;
-  arbeidsforholdId?: foreldrepenger_domene_typer_InternArbeidsforholdRef;
+  arbeidsforholdId?: string;
   arbeidsforholdType?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
   arbeidsgiverId?: string;
   beregningsperiodeFom?: string;
@@ -2327,25 +2312,8 @@ export type foreldrepenger_domene_rest_dto_OverstyrBeregningsaktiviteterDto = {
 
 export type foreldrepenger_domene_rest_dto_OverstyrBeregningsgrunnlagDto = {
   begrunnelse?: string;
-  endringer?: Array<foreldrepenger_domene_rest_historikk_Lønnsendring>;
   fakta?: foreldrepenger_domene_rest_dto_FaktaBeregningLagreDto;
   overstyrteAndeler: Array<foreldrepenger_domene_rest_dto_FastsettBeregningsgrunnlagAndelDto>;
-};
-
-export type foreldrepenger_domene_rest_historikk_Lønnsendring = {
-  aktivitetStatus?: foreldrepenger_behandlingslager_behandling_beregning_AktivitetStatus;
-  arbeidsforholdRef?: foreldrepenger_domene_typer_InternArbeidsforholdRef;
-  arbeidsgiver?: foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver;
-  gammelArbeidsinntekt?: number;
-  gammelArbeidsinntektPrÅr?: number;
-  gammelInntektskategori?: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
-  gammelRefusjonPrÅr?: number;
-  nyAndel?: boolean;
-  nyArbeidsinntekt?: number;
-  nyArbeidsinntektPrÅr?: number;
-  nyInntektskategori?: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
-  nyRefusjonPrÅr?: number;
-  nyTotalRefusjonPrÅr?: number;
 };
 
 export type foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_OverstyringFaktaOmFødselDto = {
@@ -4490,6 +4458,7 @@ export type foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_Simul
 };
 
 export type tjenester_behandling_tilbakekreving_TilbakekrevingValgDto = {
+  erTilbakekrevingVilkårOppfylt?: boolean;
   varseltekst?: string;
   videreBehandling: foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling;
 };
@@ -4971,9 +4940,6 @@ export type foreldrepenger_behandlingslager_risikoklassifisering_Kontrollresulta
 export type foreldrepenger_domene_person_verge_dto_VergeBehandlingsmenyEnum = 'SKJUL' | 'OPPRETT' | 'FJERN';
 
 export type foreldrepenger_domene_uttak_UttakPeriodeEndringDto = {
-  erEndret?: boolean;
-  erLagtTil?: boolean;
-  erSlettet?: boolean;
   fom: string;
   tom: string;
   typeEndring: foreldrepenger_domene_uttak_UttakPeriodeEndringDto_TypeEndring;
