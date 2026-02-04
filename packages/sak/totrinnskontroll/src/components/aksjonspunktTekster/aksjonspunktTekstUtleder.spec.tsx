@@ -182,7 +182,7 @@ describe('aksjonspunktTekstUtleder', () => {
       fom: '2024-05-01',
       tom: '2025-01-20',
       typeEndring: 'SLETTET',
-    } as UttakPeriodeEndring;
+    } satisfies UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
@@ -198,7 +198,7 @@ describe('aksjonspunktTekstUtleder', () => {
       fom: '2024-05-01',
       tom: '2025-01-20',
       typeEndring: 'SLETTET',
-    } as UttakPeriodeEndring;
+    } satisfies UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
@@ -214,7 +214,7 @@ describe('aksjonspunktTekstUtleder', () => {
       fom: '2024-05-01',
       tom: '2025-01-20',
       typeEndring: 'LAGT_TIL',
-    } as UttakPeriodeEndring;
+    } satisfies UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
@@ -233,7 +233,7 @@ describe('aksjonspunktTekstUtleder', () => {
       fom: '2024-05-01',
       tom: '2025-01-20',
       typeEndring: 'LAGT_TIL',
-    } as UttakPeriodeEndring;
+    } satisfies UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
@@ -253,7 +253,7 @@ describe('aksjonspunktTekstUtleder', () => {
       fom: '2024-05-01',
       tom: '2025-01-20',
       typeEndring: 'ENDRET',
-    } as UttakPeriodeEndring;
+    } satisfies UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
@@ -272,7 +272,7 @@ describe('aksjonspunktTekstUtleder', () => {
       fom: '2024-05-01',
       tom: '2025-01-20',
       typeEndring: 'ENDRET',
-    } as UttakPeriodeEndring;
+    } satisfies UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
