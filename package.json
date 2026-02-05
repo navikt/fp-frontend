@@ -39,11 +39,11 @@
     "packages/**/*"
   ],
   "devDependencies": {
-    "@hey-api/openapi-ts": "0.90.10",
+    "@hey-api/openapi-ts": "0.91.0",
     "@navikt/aksel-stylelint": "8.2.0",
-    "@storybook/addon-a11y": "10.2.0",
-    "@storybook/addon-links": "10.2.0",
-    "@storybook/react": "10.2.0",
+    "@storybook/addon-a11y": "10.2.1",
+    "@storybook/addon-links": "10.2.1",
+    "@storybook/react": "10.2.1",
     "@testing-library/jest-dom": "6.9.1",
     "@types/react": "19.2.9",
     "@types/react-dom": "19.2.3",
@@ -57,7 +57,7 @@
     "shelljs": "0.10.0",
     "stylelint": "17.0.0",
     "stylelint-order": "7.0.1",
-    "turbo": "2.7.6",
+    "turbo": "2.8.0",
     "typescript": "5.9.3",
     "vitest": "4.0.18"
   },
