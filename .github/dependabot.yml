@@ -1,32 +1,45 @@
 version: 2
 registries:
-  ft-frontend-saksbehandling: # Gir tilgang til registre innad i nav med ft-frontend-saksbehandling som inngang (PATen bestemmer)
-    type: maven-repository
-    url: https://maven.pkg.github.com/navikt/ft-frontend-saksbehandling
-    username: x-access-token
-    password: ${{ secrets.READER_TOKEN }}
+  npm-github:
+    type: npm-registry
+    url: https://npm.pkg.github.com
+    token: ${{secrets.READER_TOKEN}}
 
 updates:
   - package-ecosystem: npm
     directory: '/'
     registries:
-      - ft-frontend-saksbehandling
+      - npm-github
     schedule:
       interval: weekly
     cooldown:
       default-days: 7
     open-pull-requests-limit: 10
     groups:
-      prod-minor-deps:
-        dependency-type: 'production'
+      patch-and-minor:
+        patterns:
+          - '*'
         update-types:
-          - 'minor'
           - 'patch'
-      dev-minor-deps:
-        dependency-type: 'development'
-        update-types:
           - 'minor'
-          - 'patch'
+        exclude-patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@navikt*'
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+      designsystem:
+        patterns:
+          - '@navikt/aksel-*'
+          - '@navikt/ds-*'
+      ft-frontend-saksbehandling:
+        patterns:
+          - '@navikt/ft-*'
+
   - package-ecosystem: github-actions
     directory: '/'
     schedule:
@@ -34,3 +47,7 @@ updates:
     cooldown:
       default-days: 7
     open-pull-requests-limit: 10
+    groups:
+      github:
+        patterns:
+          - '*'
