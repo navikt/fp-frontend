@@ -1,6 +1,7 @@
 import path from "node:path";
 
 import { serveViteMode } from "@navikt/vite-mode";
+import compression from "compression";
 import timeout from "connect-timeout";
 import cors from "cors";
 import express from "express";
@@ -115,6 +116,7 @@ function startApp() {
   serveViteMode(server, { port: "9010" });
 
   // serve static files
+  server.use(compression());
   server.use(express.static("./public"));
   server.use("*splat", (request, response) => {
     // Siden dette er et internt system med begrenset antall brukere anser vi å sette en rate-limiter som en unødvendig fallgruve. Ignorer dermed denne sonarklagen.
