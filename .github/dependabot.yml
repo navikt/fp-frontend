@@ -37,8 +37,6 @@ updates:
           - '@navikt/aksel-*'
           - '@navikt/ds-*'
       ft-frontend-saksbehandling:
-        schedule:
-          interval: daily
         patterns:
           - '@navikt/ft-*'
 
