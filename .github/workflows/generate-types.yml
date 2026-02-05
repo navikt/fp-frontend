@@ -1,0 +1,55 @@
+name: Generer typer fra fpsak
+
+on:
+  schedule:
+    - cron: '0 9 * * 3' # Every Wednesday at 09:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22.17.1
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+
+      - name: Generer typer
+        run: yarn generate
+
+      - name: Sjekk etter endringer
+        id: changes
+        run: |
+          echo "has_changes=$(! git diff --quiet packages && echo true || echo false)" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          BRANCH_NAME="chore/oppdater-genererte-typer-$(date +%s)"
+          git checkout -b $BRANCH_NAME
+          git add -A
+          git commit -m "chore: oppdater genererte typer"
+          git push origin $BRANCH_NAME
+
+          gh pr create \
+            --title "chore: oppdater genererte typer" \
+            --body "Denne PR oppgraderer genererte typer fra fpsak \`yarn generate\`." \
+            --base main \
+            --head $BRANCH_NAME
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
