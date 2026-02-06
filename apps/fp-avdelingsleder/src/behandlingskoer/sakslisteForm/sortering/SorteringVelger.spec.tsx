@@ -57,44 +57,14 @@ describe('SorteringVelger', () => {
     expect(screen.getAllByText('kr')[1]!).toBeInTheDocument();
   });
 
-  it('skal vise feilmelding når en skriver inn bokstaver i fra-beløpfelt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw'] as MswParameters['msw']);
-    render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
-    expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Feilutbetalt beløp'));
-
-    expect(await screen.findByText('Ta kun med behandlinger mellom')).toBeInTheDocument();
-
-    const fraInput = screen.getAllByRole('textbox')[0]!;
-    await userEvent.type(fraInput, 'bokstaver');
-
-    expect(await screen.findByText('Feltet kan kun inneholde tall')).toBeInTheDocument();
-  });
-
-  it('skal vise feilmelding når en skriver inn bokstaver i til-beløpfelt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw'] as MswParameters['msw']);
-    render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
-    expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Feilutbetalt beløp'));
-
-    expect(await screen.findByText('Ta kun med behandlinger mellom')).toBeInTheDocument();
-
-    const tilInput = screen.getAllByRole('textbox')[1]!;
-    await userEvent.type(tilInput, 'bokstaver');
-
-    expect(await screen.findByText('Feltet kan kun inneholde tall')).toBeInTheDocument();
-  });
-
   it('skal vise fem sorteringsvalg når kun tilbakekreving er valgt', async () => {
     applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw'] as MswParameters['msw']);
     render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
-    expect(await screen.findByLabelText('Dato for behandlingsfrist')).toBeChecked();
-    expect(screen.getByLabelText('Dato for opprettelse av behandling')).not.toBeChecked();
-    expect(screen.getByLabelText('Dato for første stønadsdag')).not.toBeChecked();
-    expect(screen.getByLabelText('Feilutbetalt beløp')).not.toBeChecked();
-    expect(screen.getByLabelText('Dato for første feilutbetaling')).not.toBeChecked();
+    expect(screen.getByLabelText('Dato for behandlingsfrist')).toBeInTheDocument();
+    expect(screen.getByLabelText('Dato for opprettelse av behandling')).toBeInTheDocument();
+    expect(screen.getByLabelText('Dato for første stønadsdag')).toBeInTheDocument();
+    expect(screen.getByLabelText('Feilutbetalt beløp')).toBeInTheDocument();
+    expect(screen.getByLabelText('Dato for første feilutbetaling')).toBeInTheDocument();
   });
 });

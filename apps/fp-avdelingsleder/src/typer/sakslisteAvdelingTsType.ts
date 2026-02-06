@@ -1,8 +1,8 @@
-import type { AndreKriterierType, BehandlingType, KøSortering } from '@navikt/fp-types';
+import type { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-types';
 
-type AnnetKriterie = Readonly<{
-  andreKriterierType: AndreKriterierType;
-  inkluder: boolean;
+export type AnnetKriterie = Readonly<{
+  inkluder: AndreKriterierType[];
+  ekskluder: AndreKriterierType[];
 }>;
 
 export type KøSorteringFelt = Readonly<{
@@ -17,23 +17,34 @@ export type Statistikk = {
   behandlingerPåVent: number;
 };
 
+export type Sortering = {
+  sorteringType: KøSortering;
+  periodefilter: Periodefilter;
+  fra?: number;
+  til?: number;
+  fomDato?: string;
+  tomDato?: string;
+};
+
+export type TilBeslutter = 'TA_MED_ALLE' | 'TA_MED' | 'FJERN';
+
 export type Periodefilter = 'FAST_PERIODE' | 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER';
 
 export type SakslisteAvdeling = Readonly<{
   sakslisteId: number;
   navn?: string;
   behandlingTyper?: BehandlingType[];
-  fagsakYtelseTyper?: string[];
-  sortering?: {
-    sorteringType: KøSortering;
-    periodefilter: Periodefilter;
-    fra?: number;
-    til?: number;
-    fomDato?: string;
-    tomDato?: string;
-  };
+  fagsakYtelseTyper?: FagsakYtelseType[];
+  sortering?: Sortering;
   sorteringTyper: KøSorteringFelt[];
-  andreKriterier?: AnnetKriterie[];
+  andreKriterie: AnnetKriterie;
   saksbehandlerIdenter: string[];
   gjeldendeStatistikk?: Statistikk;
 }>;
+
+export type SakslisteDto = Omit<
+  SakslisteAvdeling,
+  'sorteringTyper' | 'saksbehandlerIdenter' | 'gjeldendeStatistikk'
+> & {
+  avdelingEnhet: string;
+};
