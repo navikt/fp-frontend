@@ -112,7 +112,7 @@ const meta = {
         http.get(urlEncodeNorskeBokstaver(LosUrl.OPPGAVE_FILTER_STATISTIKK), () =>
           HttpResponse.json(OPPGAVE_FILTER_STATISTIKK),
         ),
-        http.post(LosUrl.ENDRE_EKSISTRENDE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.ENDRE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
       ],
     },
   },
