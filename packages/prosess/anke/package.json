@@ -21,7 +21,7 @@
     "@navikt/ds-react": "8.2.0",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-utils": "3.11.7",
+    "@navikt/ft-utils": "3.11.9",
     "dayjs": "1.11.19",
     "react": "19.2.4",
     "react-intl": "8.1.1"
