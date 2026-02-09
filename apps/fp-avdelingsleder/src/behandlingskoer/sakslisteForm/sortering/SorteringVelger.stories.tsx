@@ -60,9 +60,9 @@ type Story = StoryObj<typeof meta>;
 export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
   args: {
     muligeSorteringer: [
-      { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
-      { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
-      { sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
+      { sorteringType: 'BEHFRIST', feltType: 'DATO' },
+      { sorteringType: 'OPPRBEH', feltType: 'DATO' },
+      { sorteringType: 'FORSTONAD', feltType: 'DATO' },
     ],
   },
 };
@@ -70,8 +70,8 @@ export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
 export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
   args: {
     muligeSorteringer: [
-      { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
-      { sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
+      { sorteringType: 'BEHFRIST', feltType: 'DATO' },
+      { sorteringType: 'FORSTONAD', feltType: 'DATO' },
     ],
   },
   render: args => {
@@ -101,11 +101,11 @@ export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
 export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
   args: {
     muligeSorteringer: [
-      { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
-      { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
-      { sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
-      { sorteringType: 'BELOP', feltType: 'HELTALL', feltKategori: 'TILBAKEKREVING' },
-      { sorteringType: 'FEILUTBETALINGSTART', feltType: 'DATO', feltKategori: 'TILBAKEKREVING' },
+      { sorteringType: 'BEHFRIST', feltType: 'DATO' },
+      { sorteringType: 'OPPRBEH', feltType: 'DATO' },
+      { sorteringType: 'FORSTONAD', feltType: 'DATO' },
+      { sorteringType: 'BELOP', feltType: 'HELTALL' },
+      { sorteringType: 'FEILUTBETALINGSTART', feltType: 'DATO' },
     ],
   },
   render: args => {
