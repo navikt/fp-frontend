@@ -3,86 +3,46 @@ import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { BehandlingType } from '@navikt/fp-types';
 
-import { lagreSakslisteBehandlingstype, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 
-export type FormValues = { [key in BehandlingType]?: boolean };
+export type FormValues = {
+  behandlingTyper: BehandlingType[];
+};
 
-const behandlingstypeOrder = [
-  'BT-002',
-  'BT-003',
-  'BT-004',
-  'BT-006',
-  'BT-007',
-  'BT-008',
-  'BT-009',
-] satisfies BehandlingType[];
+export const BehandlingstypeVelger = () => {
+  const { watch, control, setValue } = useFormContext<FormValues>();
 
-interface Props {
-  valgtSakslisteId: number;
-  valgtAvdelingEnhet: string;
-}
+  const values = watch('behandlingTyper');
 
-export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
-  const queryClient = useQueryClient();
-
-  const { control } = useFormContext<FormValues>();
-
-  const { mutate: lagreBehandlingstype } = useMutation({
-    mutationFn: (valuesToStore: { behandlingType: string; checked: boolean }) =>
-      lagreSakslisteBehandlingstype(
-        valgtSakslisteId,
-        valgtAvdelingEnhet,
-        valuesToStore.behandlingType,
-        valuesToStore.checked,
-      ),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
-      });
-    },
-  });
-
-  const alleBehandlingTyper = useLosKodeverk('BehandlingType');
-
-  const behandlingTyper = behandlingstypeOrder.map(kode => alleBehandlingTyper.find(bt => bt.kode === kode));
+  const behandlingTyper = useLosKodeverk('BehandlingType')
+    .filter(bt => bt.kode !== '-')
+    .sort((a, b) => a.kode.localeCompare(b.kode));
 
   return (
     <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="BehandlingstypeVelger.Behandlingstype" />
       </Label>
-      {behandlingTyper
-        .map(bt => {
-          if (!bt) {
-            return null;
-          }
-          return (
-            <RhfCheckbox
-              key={bt.kode}
-              name={bt.kode}
-              control={control}
-              label={bt.navn}
-              onChange={isChecked =>
-                lagreBehandlingstype({
-                  behandlingType: bt.kode,
-                  checked: isChecked,
-                })
-              }
-            />
-          );
-        })
-        .filter(bt => !!bt)}
+      {behandlingTyper.map(bt => {
+        const kode = bt.kode;
+        return (
+          <RhfCheckbox
+            key={kode}
+            name="behandlingTyper"
+            label={bt.navn}
+            control={control}
+            checked={values.includes(kode)}
+            onChange={checked => {
+              setValue('behandlingTyper', checked ? [...values, kode] : values.filter(v => v !== kode), {
+                shouldDirty: true,
+              });
+            }}
+          />
+        );
+      })}
     </VStack>
   );
 };

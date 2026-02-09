@@ -23,25 +23,21 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING_INTERVALL, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SORTERING_TIDSINTERVALL_DATO, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
       ],
     },
-  },
-  args: {
-    valgtSakslisteId: 1,
-    valgtAvdelingEnhet: 'Nav Vikafossen',
   },
   render: args => {
     const formMethods = useForm({
       defaultValues: {
-        sortering: 'BEHFRIST',
-        fra: 2,
-        til: 3,
-        fomDato: '2020-01-10',
-        tomDato: '2020-10-01',
-        periodefilter: args.periodefilter,
+        sortering: {
+          sorteringType: 'BEHFRIST',
+          fra: 2,
+          til: 3,
+          fomDato: '2020-01-10',
+          tomDato: '2020-10-01',
+          periodefilter: 'FAST_PERIODE',
+        },
       },
     });
 
@@ -63,7 +59,6 @@ type Story = StoryObj<typeof meta>;
 export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-002', 'BT-006'],
-    periodefilter: 'FAST_PERIODE',
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
@@ -75,18 +70,38 @@ export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
 export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-002', 'BT-006'],
-    periodefilter: 'RELATIV_PERIODE_DAGER',
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
     ],
+  },
+  render: args => {
+    const formMethods = useForm({
+      defaultValues: {
+        sortering: {
+          sorteringType: 'BEHFRIST',
+          fra: 2,
+          til: 3,
+          periodefilter: 'RELATIV_PERIODE_DAGER',
+        },
+      },
+    });
+
+    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+
+    return kodeverkLos ? (
+      <RhfForm formMethods={formMethods}>
+        <SorteringVelger {...args} />
+      </RhfForm>
+    ) : (
+      <LoadingPanel />
+    );
   },
 };
 
 export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
   args: {
     valgteBehandlingtyper: ['BT-007'],
-    periodefilter: 'FAST_PERIODE',
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
@@ -94,5 +109,27 @@ export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
       { sorteringType: 'BELOP', feltType: 'HELTALL', feltKategori: 'TILBAKEKREVING' },
       { sorteringType: 'FEILUTBETALINGSTART', feltType: 'DATO', feltKategori: 'TILBAKEKREVING' },
     ],
+  },
+  render: args => {
+    const formMethods = useForm({
+      defaultValues: {
+        sortering: {
+          sorteringType: 'BELOP',
+          periodefilter: 'RELATIV_PERIODE_DAGER',
+          fra: 0,
+          til: 1000,
+        },
+      },
+    });
+
+    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+
+    return kodeverkLos ? (
+      <RhfForm formMethods={formMethods}>
+        <SorteringVelger {...args} />
+      </RhfForm>
+    ) : (
+      <LoadingPanel />
+    );
   },
 };

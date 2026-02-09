@@ -63,7 +63,7 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
         {valgtSakId && valgtSaksliste && (
           <React.Fragment key={valgtSaksliste.sakslisteId}>
             <UtvalgskriterierForSakslisteForm valgtSaksliste={valgtSaksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
-            <HStack gap="space-16" justify="center">
+            <HStack gap="space-16" justify="center" align="center">
               <ArrowDownIcon
                 className={styles['arrow']}
                 title={intl.formatMessage({ id: 'EndreSakslisterPanel.KnyttetMotSaksbehandlere' })}
