@@ -1,13 +1,20 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
+import { Button, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { lagreSakslisteNavn, LosUrl } from '../../data/fplosAvdelingslederApi';
-import { type SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
+import type { AndreKriterierType } from '@navikt/fp-types';
+
+import { lagreUtvalgskriterierForKø, LosUrl } from '../../data/fplosAvdelingslederApi';
+import {
+  type AnnetKriterie,
+  type SakslisteAvdeling,
+  type SakslisteDto,
+  type TilBeslutter,
+} from '../../typer/sakslisteAvdelingTsType';
 import { AndreKriterierVelger } from './filtrering/AndreKriterierVelger';
 import { type FormValues as AndreKriterieValgKnappFormTypes } from './filtrering/AndreKriterieValgKnapp';
 import {
@@ -20,7 +27,6 @@ import {
 } from './filtrering/FagsakYtelseTypeVelger';
 import { type FormValues as TilBeslutterFormValues, TilBeslutterVelger } from './filtrering/TilBeslutterVelger';
 import { type FormValues as SorteringVelgerFormValues, SorteringVelger } from './sortering/SorteringVelger';
-import { useDebounce } from './useDebounce';
 
 import styles from './utvalgskriterierForSakslisteForm.module.css';
 
@@ -36,84 +42,42 @@ type FormValues = {
   SorteringVelgerFormValues &
   TilBeslutterFormValues;
 
-const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling): FormValues => {
-  const behandlingTypes = valgtSaksliste.behandlingTyper
-    ? valgtSaksliste.behandlingTyper.reduce((acc, bt) => ({ ...acc, [bt]: true }), {})
-    : {};
-  const fagsakYtelseTypes = valgtSaksliste.fagsakYtelseTyper
-    ? valgtSaksliste.fagsakYtelseTyper.reduce((acc, fyt) => ({ ...acc, [fyt]: true }), {})
-    : {};
-
-  const andreKriterierTyper = valgtSaksliste.andreKriterier
-    ? valgtSaksliste.andreKriterier.reduce((acc, ak) => ({ ...acc, [ak.andreKriterierType]: true }), {})
-    : {};
-  const andreKriterierInkluder = valgtSaksliste.andreKriterier
-    ? valgtSaksliste.andreKriterier.reduce(
-        (acc, ak) => ({ ...acc, [`${ak.andreKriterierType}_inkluder`]: ak.inkluder }),
-        {},
-      )
-    : {};
-
-  const tilBeslutterKriterie = valgtSaksliste.andreKriterier?.find(ak => ak.andreKriterierType === 'TIL_BESLUTTER');
-
-  let tilBeslutter: 'TA_MED_ALLE' | 'TA_MED' | 'FJERN' = 'TA_MED_ALLE';
-  if (tilBeslutterKriterie) {
-    tilBeslutter = tilBeslutterKriterie.inkluder ? 'TA_MED' : 'FJERN';
-  }
-
-  return {
-    sakslisteId: valgtSaksliste.sakslisteId,
-    navn: valgtSaksliste.navn ?? intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.NyListe' }),
-    sortering: valgtSaksliste.sortering?.sorteringType,
-    fomDato: valgtSaksliste.sortering?.fomDato,
-    tomDato: valgtSaksliste.sortering?.tomDato,
-    fra: valgtSaksliste.sortering?.fra?.toString(),
-    til: valgtSaksliste.sortering?.til?.toString(),
-    periodefilter: valgtSaksliste.sortering?.periodefilter ?? 'FAST_PERIODE',
-    tilBeslutter,
-    ...andreKriterierTyper,
-    ...andreKriterierInkluder,
-    ...behandlingTypes,
-    ...fagsakYtelseTypes,
-  };
-};
-
 interface Props {
   valgtSaksliste: SakslisteAvdeling;
   valgtAvdelingEnhet: string;
 }
 
 export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdelingEnhet }: Props) => {
-  const queryClient = useQueryClient();
   const intl = useIntl();
-
-  const { mutate: lagreSakslistensNavn } = useMutation({
-    mutationFn: (values: { sakslisteId: number; navn: string; avdelingEnhet: string }) =>
-      lagreSakslisteNavn(values.sakslisteId, values.navn, values.avdelingEnhet),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
-      });
-    },
-  });
+  const queryClient = useQueryClient();
 
   const formMethods = useForm<FormValues>({
     defaultValues: buildDefaultValues(intl, valgtSaksliste),
   });
 
-  const values = formMethods.watch();
+  const { mutate: lagreSaksliste, isPending } = useMutation({
+    mutationFn: (valuesToStore: SakslisteDto) => lagreUtvalgskriterierForKø(valuesToStore),
+  });
 
-  const tranformValues = (nyttNavn: string): void => {
-    lagreSakslistensNavn({
-      sakslisteId: valgtSaksliste.sakslisteId,
-      navn: nyttNavn,
-      avdelingEnhet: valgtAvdelingEnhet,
+  const lagre = (values: FormValues) => {
+    lagreSaksliste(transformValues(values, valgtAvdelingEnhet), {
+      onSuccess: () => {
+        formMethods.reset(values);
+        void queryClient.invalidateQueries({
+          queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSaksliste.sakslisteId, valgtAvdelingEnhet],
+        });
+        void queryClient.invalidateQueries({
+          queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
+        });
+        void queryClient.invalidateQueries({
+          queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+        });
+      },
     });
   };
-  const lagreNavn = useDebounce('navn', tranformValues, formMethods.trigger);
 
   return (
-    <RhfForm formMethods={formMethods}>
+    <RhfForm formMethods={formMethods} onSubmit={lagre}>
       <ExpansionCard
         className={styles['expansion-card']}
         size="small"
@@ -126,46 +90,83 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
           </ExpansionCard.Title>
         </ExpansionCard.Header>
         <ExpansionCard.Content>
-          <HStack gap="space-44" wrap={false}>
-            <Box borderWidth="1" borderColor="neutral-subtle" padding="space-40">
-              <VStack gap="space-24">
-                <RhfTextField
-                  name="navn"
-                  control={formMethods.control}
-                  label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Navn' })}
-                  validate={[required, minLength3, maxLength100, hasValidName]}
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
-                  onChange={value => lagreNavn(value)}
-                  className={styles['bredde']}
+          <div style={{ maxWidth: '2000px' }}>
+            <VStack gap="space-8">
+              <HStack justify="end">
+                <Button
+                  size="small"
+                  variant="primary"
+                  disabled={!formMethods.formState.isDirty || isPending}
+                  loading={isPending}
+                  data-color="info"
+                >
+                  <FormattedMessage id="UtvalgskriterierForSakslisteForm.Lagre" />
+                </Button>
+              </HStack>
+              <HStack justify="space-between">
+                <VStack gap="space-24" padding="space-20">
+                  <RhfTextField
+                    name="navn"
+                    control={formMethods.control}
+                    label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Navn' })}
+                    validate={[required, minLength3, maxLength100, hasValidName]}
+                    className={styles['bredde']}
+                  />
+                  <FagsakYtelseTypeVelger />
+                  <BehandlingstypeVelger />
+                  <TilBeslutterVelger />
+                </VStack>
+                <AndreKriterierVelger />
+                <SorteringVelger
+                  valgteBehandlingtyper={valgtSaksliste.behandlingTyper}
+                  muligeSorteringer={valgtSaksliste.sorteringTyper}
                 />
-                <FagsakYtelseTypeVelger
-                  valgtSakslisteId={valgtSaksliste.sakslisteId}
-                  valgtAvdelingEnhet={valgtAvdelingEnhet}
-                />
-                <BehandlingstypeVelger
-                  valgtSakslisteId={valgtSaksliste.sakslisteId}
-                  valgtAvdelingEnhet={valgtAvdelingEnhet}
-                />
-                <TilBeslutterVelger
-                  valgtSakslisteId={valgtSaksliste.sakslisteId}
-                  valgtAvdelingEnhet={valgtAvdelingEnhet}
-                />
-              </VStack>
-            </Box>
-            <AndreKriterierVelger
-              valgtSakslisteId={valgtSaksliste.sakslisteId}
-              valgtAvdelingEnhet={valgtAvdelingEnhet}
-            />
-            <SorteringVelger
-              valgtSakslisteId={valgtSaksliste.sakslisteId}
-              valgteBehandlingtyper={valgtSaksliste.behandlingTyper}
-              valgtAvdelingEnhet={valgtAvdelingEnhet}
-              periodefilter={values.periodefilter}
-              muligeSorteringer={valgtSaksliste.sorteringTyper}
-            />
-          </HStack>
+              </HStack>
+            </VStack>
+          </div>
         </ExpansionCard.Content>
       </ExpansionCard>
     </RhfForm>
   );
+};
+
+const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling): FormValues => {
+  return {
+    sakslisteId: valgtSaksliste.sakslisteId,
+    navn: valgtSaksliste.navn ?? intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.NyListe' }),
+    sortering: valgtSaksliste.sortering,
+    tilBeslutter: fraAndreKriterierTilBeslutter(valgtSaksliste.andreKriterie),
+    andreKriterie: valgtSaksliste.andreKriterie,
+    behandlingTyper: valgtSaksliste.behandlingTyper ?? [],
+    fagsakYtelseTyper: valgtSaksliste.fagsakYtelseTyper ?? [],
+  };
+};
+
+const fraAndreKriterierTilBeslutter = (andreKriterier?: AnnetKriterie): TilBeslutter => {
+  if (andreKriterier?.inkluder.includes('TIL_BESLUTTER')) {
+    return 'TA_MED';
+  } else if (andreKriterier?.ekskluder.includes('TIL_BESLUTTER')) {
+    return 'FJERN';
+  } else {
+    return 'TA_MED_ALLE';
+  }
+};
+
+const transformValues = (values: FormValues, valgtAvdelingEnhet: string): SakslisteDto => {
+  const { tilBeslutter, andreKriterie, ...rest } = values;
+  const inkluder = andreKriterie.inkluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
+  const ekskluder = andreKriterie.ekskluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
+  if (tilBeslutter === 'TA_MED') {
+    inkluder.push('TIL_BESLUTTER');
+  } else if (tilBeslutter === 'FJERN') {
+    ekskluder.push('TIL_BESLUTTER');
+  }
+  return {
+    ...rest,
+    andreKriterie: {
+      inkluder,
+      ekskluder,
+    },
+    avdelingEnhet: valgtAvdelingEnhet,
+  };
 };

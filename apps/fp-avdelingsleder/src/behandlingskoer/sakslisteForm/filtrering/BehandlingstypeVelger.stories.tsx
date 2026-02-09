@@ -23,18 +23,14 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.post(LosUrl.LAGRE_SAKSLISTE_BEHANDLINGSTYPE, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
       ],
     },
   },
-  args: {
-    valgtSakslisteId: 1,
-    valgtAvdelingEnhet: 'Nav Vikafossen',
-  },
-  render: args => {
+  render: () => {
     const formMethods = useForm({
       defaultValues: {
-        ['BT-002']: true,
+        behandlingTyper: ['BT-002'],
       },
     });
 
@@ -43,7 +39,7 @@ const meta = {
 
     return alleKodeverk ? (
       <RhfForm formMethods={formMethods}>
-        <BehandlingstypeVelger {...args} />
+        <BehandlingstypeVelger />
       </RhfForm>
     ) : (
       <LoadingPanel />
