@@ -4,10 +4,10 @@ import { FormattedMessage } from 'react-intl';
 import { Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 
-import type { KøSorteringFelt } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
+import type { AnnetKriterie, KøSorteringFelt, Sortering } from '../../../typer/sakslisteAvdelingTsType';
 import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 import { BelopSorteringValg } from './BelopSorteringValg';
 import { DatoSorteringValg } from './DatoSorteringValg';
@@ -39,10 +39,7 @@ export const SorteringVelger = ({ muligeSorteringer }: Props) => {
         }}
       >
         {muligeSorteringer
-          .filter(
-            koSortering =>
-              koSortering.feltKategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgtBehandlingstyper),
-          )
+          .filter(koSortering => skalViseSortering(koSortering, valgteBehandlingtyper, valgteAndreKriterier))
           .map(koSortering => (
             <VStack key={koSortering.sorteringType} gap="space-2">
               <Radio value={koSortering.sorteringType} size="small">
@@ -63,3 +60,26 @@ export const SorteringVelger = ({ muligeSorteringer }: Props) => {
 
 export const bareTilbakekrevingValgt = (valgteBehandlingtyper: string[]) =>
   valgteBehandlingtyper.length > 0 && valgteBehandlingtyper.every(type => ['BT-007', 'BT-009'].includes(type));
+
+const skalViseSortering = (
+  koSorteringFelt: KøSorteringFelt,
+  valgteBehandlingtyper?: string[],
+  valgteAndreKriterier?: AnnetKriterie,
+) => {
+  const køSortering = koSorteringFelt.sorteringType;
+  if (køSortering === 'OPPGAVE_OPPRETTET') {
+    return valgteAndreKriterier && valgteAndreKriterier.inkluder.some(type => type === 'TIL_BESLUTTER');
+  }
+
+  if (køSortering === 'BELOP' || køSortering === 'FEILUTBETALINGSTART') {
+    return (
+      valgteBehandlingtyper &&
+      valgteBehandlingtyper.some(type => type === 'BT-007' || type === 'BT-009') &&
+      !valgteBehandlingtyper.some(type => type !== 'BT-007' && type !== 'BT-009')
+    );
+  }
+
+  // TODO: bytt til exhaustive switch
+
+  return true;
+};
