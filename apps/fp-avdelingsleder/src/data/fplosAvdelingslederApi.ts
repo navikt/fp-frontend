@@ -44,7 +44,7 @@ export const LosUrl = {
   OPPGAVE_AVDELING_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/avdelingantall'),
   SAKSLISTER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/sakslister'),
   OPPRETT_NY_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister'),
-  ENDRE_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister/endre'),
+  ENDRE_EKSISTERENDE_SAKSLISTE: wrapUrl('/fplos/api/avdelingsleder/sakslister/endre'),
   OPPGAVE_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/antall'),
   LAGRE_SAKSLISTE_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/sakslister/saksbehandler'),
   HENT_OPPGAVER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid'),
@@ -190,7 +190,7 @@ export const opprettNySaksliste = (avdelingEnhet: string) =>
   kyExtended.post(LosUrl.OPPRETT_NY_SAKSLISTE, { json: { avdelingEnhet } }).json<{ sakslisteId: string }>();
 
 export const lagreUtvalgskriterierForKø = (sakslisteDto: SakslisteDto) =>
-  kyExtended.post(LosUrl.ENDRE_SAKSLISTE, { json: sakslisteDto }).json();
+  kyExtended.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, { json: sakslisteDto }).json();
 
 export const lagreSakslisteSaksbehandler = (
   sakslisteId: number,

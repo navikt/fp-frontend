@@ -57,26 +57,27 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
 
   const { mutate: lagreSaksliste, isPending } = useMutation({
     mutationFn: (valuesToStore: SakslisteDto) => lagreUtvalgskriterierForKø(valuesToStore),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSaksliste.sakslisteId, valgtAvdelingEnhet],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
-      });
-    },
   });
 
   const lagre = (values: FormValues) => {
-    lagreSaksliste(transformValues(values, valgtAvdelingEnhet));
-    formMethods.reset(values);
+    lagreSaksliste(transformValues(values, valgtAvdelingEnhet), {
+      onSuccess: () => {
+        formMethods.reset(values);
+        void queryClient.invalidateQueries({
+          queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSaksliste.sakslisteId, valgtAvdelingEnhet],
+        });
+        void queryClient.invalidateQueries({
+          queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
+        });
+        void queryClient.invalidateQueries({
+          queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
+        });
+      },
+    });
   };
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={values => lagre(values)}>
+    <RhfForm formMethods={formMethods} onSubmit={lagre}>
       <ExpansionCard
         className={styles['expansion-card']}
         size="small"

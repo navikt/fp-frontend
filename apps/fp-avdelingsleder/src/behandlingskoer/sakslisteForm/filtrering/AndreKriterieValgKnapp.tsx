@@ -32,36 +32,31 @@ export const AndreKriterieValgKnapp = ({ andreKriterierType }: Props): ReactElem
   const andreKriterier = watch('andreKriterie');
   const inkluderVerdi = andreKriterier.inkluder;
   const ekskluderVerdi = andreKriterier.ekskluder;
+  const kode = andreKriterierType.kode;
 
-  const deaktiverKnapp = () => {
-    const inkluderKriterier = inkluderVerdi.filter(k => k !== andreKriterierType.kode);
-    const eksluderKriterier = ekskluderVerdi.filter(k => k !== andreKriterierType.kode);
-    setValue('andreKriterie', { inkluder: inkluderKriterier, ekskluder: eksluderKriterier }, { shouldDirty: true });
-  };
-
-  const aktiverKnapp = (knapp: FilterStatus.PLUS | FilterStatus.MINUS) => {
-    const nyInkluder = inkluderVerdi.filter(k => k !== andreKriterierType.kode);
-    const nyEkskluder = ekskluderVerdi.filter(k => k !== andreKriterierType.kode);
-
-    if (knapp === FilterStatus.PLUS) {
-      nyInkluder.push(andreKriterierType.kode);
-    } else {
-      nyEkskluder.push(andreKriterierType.kode);
+  const oppdaterKriterier = (nyStatus: FilterStatus) => {
+    const base = {
+      inkluder: inkluderVerdi.filter(k => k !== kode),
+      ekskluder: ekskluderVerdi.filter(k => k !== kode),
+    };
+    if (nyStatus === FilterStatus.PLUS) {
+      base.inkluder = [...base.inkluder, kode];
     }
 
-    setValue('andreKriterie', { inkluder: nyInkluder, ekskluder: nyEkskluder }, { shouldDirty: true });
+    if (nyStatus === FilterStatus.MINUS) {
+      base.ekskluder = [...base.ekskluder, kode];
+    }
+
+    setValue('andreKriterie', base, { shouldDirty: true });
   };
 
-  const filterStatus = getFilterStatus(andreKriterierType.kode, inkluderVerdi, ekskluderVerdi);
+  const filterStatus = getFilterStatus(kode, inkluderVerdi, ekskluderVerdi);
   const toggleKnapp = (knapp: FilterStatus.PLUS | FilterStatus.MINUS) => {
-    if (knapp === filterStatus) {
-      deaktiverKnapp();
-    } else {
-      aktiverKnapp(knapp);
-    }
+    oppdaterKriterier(knapp === filterStatus ? FilterStatus.OFF : knapp);
   };
+
   return (
-    <HStack gap="space-8" data-testid={`av-og-pa-knapper-${andreKriterierType.kode}`}>
+    <HStack gap="space-8" data-testid={`av-og-pa-knapper-${kode}`}>
       <HStack gap="space-4">
         <PlussKnapp
           iconTittel={intl.formatMessage({ id: 'AndreKriterieValgKnapp.PlusKnappIconTittel' })}

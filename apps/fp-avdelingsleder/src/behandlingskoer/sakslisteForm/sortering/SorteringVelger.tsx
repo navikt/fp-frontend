@@ -65,6 +65,4 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
 };
 
 const bareTilbakekrevingValgt = (valgteBehandlingtyper?: string[]) =>
-  valgteBehandlingtyper &&
-  valgteBehandlingtyper.some(type => type === 'BT-007' || type === 'BT-009') &&
-  !valgteBehandlingtyper.some(type => type !== 'BT-007' && type !== 'BT-009');
+  valgteBehandlingtyper?.every(type => ['BT-007', 'BT-009'].includes(type));
