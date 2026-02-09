@@ -154,8 +154,8 @@ const fraAndreKriterierTilBeslutter = (andreKriterier?: AnnetKriterie): TilBeslu
 
 const transformValues = (values: FormValues, valgtAvdelingEnhet: string): SakslisteDto => {
   const { tilBeslutter, andreKriterie, ...rest } = values;
-  const inkluder = andreKriterie.inkluder.filter(t => t !== 'TIL_BESLUTTER') as AndreKriterierType[];
-  const ekskluder = andreKriterie.ekskluder.filter(t => t !== 'TIL_BESLUTTER') as AndreKriterierType[];
+  const inkluder = andreKriterie.inkluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
+  const ekskluder = andreKriterie.ekskluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   if (tilBeslutter === 'TA_MED') {
     inkluder.push('TIL_BESLUTTER');
   } else if (tilBeslutter === 'FJERN') {
