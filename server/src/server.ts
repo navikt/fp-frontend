@@ -13,6 +13,7 @@ import logger from "./logger.js";
 import { getUserGroups, getUserInfoFromGraphApi } from "./msgraph.js";
 import { setupProxies } from "./reverse-proxy.js";
 import { verifyToken } from "./tokenValidation.js";
+import { serveKomprimerteFilerHvisMulig } from "./compression.js";
 
 const server = express();
 const { port } = config.server;
@@ -114,6 +115,8 @@ function startApp() {
 
   serveViteMode(server, { port: "9010" });
 
+  // Server ferdig komprimerte gzip/br filer hvis mulig.
+  server.use(serveKomprimerteFilerHvisMulig);
   // serve static files
   server.use(express.static("./public"));
   server.use("*splat", (request, response) => {
