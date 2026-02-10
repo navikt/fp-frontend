@@ -1953,6 +1953,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:5.1.2"
     rollup-plugin-sourcemaps: "npm:0.6.3"
     vite: "npm:7.3.1"
+    vite-plugin-compression2: "npm:2.4.0"
     vitest: "npm:4.0.18"
   languageName: unknown
   linkType: soft
@@ -2744,7 +2745,7 @@ __metadata:
     "@navikt/ft-form-hooks": "npm:10.6.10"
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-plattform-komponenter": "npm:10.5.9"
-    "@navikt/ft-prosess-beregning": "npm:0.5.6"
+    "@navikt/ft-prosess-beregning": "npm:0.5.7"
     "@navikt/ft-prosess-beregningsgrunnlag": "npm:11.7.10"
     "@navikt/ft-prosess-tilbakekreving": "npm:9.6.10"
     "@navikt/ft-prosess-tilbakekreving-foreldelse": "npm:8.7.10"
@@ -4725,9 +4726,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-beregning@npm:0.5.6":
-  version: 0.5.6
-  resolution: "@navikt/ft-prosess-beregning@npm:0.5.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregning%2F0.5.6%2Faf3af07be0496516b500221f5e6e8079403416d0"
+"@navikt/ft-prosess-beregning@npm:0.5.7":
+  version: 0.5.7
+  resolution: "@navikt/ft-prosess-beregning@npm:0.5.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregning%2F0.5.7%2F1b73e9868d7e77d4c8e6e62e3092b053b6f6e1c6"
   dependencies:
     "@navikt/aksel-icons": "npm:8.2.0"
     "@navikt/ds-css": "npm:8.2.0"
@@ -4757,7 +4758,7 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.x
     react-intl: 8.x
-  checksum: 10/2b8e70f3f5ee90f1342a6b193c0d86b79ad2fc756d618a7ef7efe56faeb70a27f280b45df7bffdc239e4f18255bfa7424638f8d1ef5c2272250698403a6fc833
+  checksum: 10/9997967215e4f82df4429532af9f6d0439f12dd2a787f91f86e02dd67dce1730bcbb164c8838eb860632f8eae4c2675802256b1642249933423c21203d27dd07
   languageName: node
   linkType: hard
 
@@ -5193,7 +5194,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/pluginutils@npm:^5.0.2":
+"@rollup/pluginutils@npm:^5.0.2, @rollup/pluginutils@npm:^5.1.0":
   version: 5.3.0
   resolution: "@rollup/pluginutils@npm:5.3.0"
   dependencies:
@@ -12271,6 +12272,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tar-mini@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "tar-mini@npm:0.2.0"
+  checksum: 10/56f1ff01196244c82bbc4a93a5cbb47a075efcbc6f2fdd11d64988fe3405f2660f5fd9bf08e06677e8c64648b7b253e2e38d7288957a199a97a33cee64f53606
+  languageName: node
+  linkType: hard
+
 "tar@npm:^7.4.3":
   version: 7.5.6
   resolution: "tar@npm:7.5.6"
@@ -12766,6 +12774,16 @@ __metadata:
   version: 1.1.0
   resolution: "vanilla-caret-js@npm:1.1.0"
   checksum: 10/1197f803b15432996443178d1ae6d46b9310353b379a734d5afdb1fb7bd99db9db22a89cbf31a0cddfc34b8b8bad1823eed8d722e7505c9b19249907b6c94d46
+  languageName: node
+  linkType: hard
+
+"vite-plugin-compression2@npm:2.4.0":
+  version: 2.4.0
+  resolution: "vite-plugin-compression2@npm:2.4.0"
+  dependencies:
+    "@rollup/pluginutils": "npm:^5.1.0"
+    tar-mini: "npm:^0.2.0"
+  checksum: 10/03448422a3299a067ff48624dc6df321c7d0170b0781023f0f6a405436d80057456438f46afbf392780370273d0a6f5d1d0863a76cfd1cec444d863a4549c719
   languageName: node
   linkType: hard
 
