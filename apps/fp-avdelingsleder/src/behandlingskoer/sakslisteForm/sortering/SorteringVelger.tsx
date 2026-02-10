@@ -33,7 +33,7 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
 
   const sorteringKoder = useLosKodeverk('KøSortering');
 
-  const values = watch('sortering.sorteringType');
+  const sorteringstype = watch('sortering.sorteringType');
   return (
     <VStack padding="space-20">
       <RhfRadioGroup
@@ -58,7 +58,7 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
               <Radio value={koSortering.sorteringType} size="small">
                 {notEmpty(sorteringKoder.find(k => k.kode === koSortering.sorteringType)?.navn, 'Mangler kodeverk')}
               </Radio>
-              {values === koSortering.sorteringType && (
+              {sorteringstype === koSortering.sorteringType && (
                 <>
                   {koSortering.feltType === 'DATO' && <DatoSorteringValg />}
                   {koSortering.feltType === 'HELTALL' && <BelopSorteringValg />}
