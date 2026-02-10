@@ -27,6 +27,12 @@ export const Default: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      sortering: {
+        sorteringType: 'BEHFRIST',
+        fra: 1,
+        til: 4,
+        periodefilter: 'RELATIV_PERIODE_DAGER',
+      },
       sorteringTyper: [],
       saksbehandlerIdenter: [],
       andreKriterie: {

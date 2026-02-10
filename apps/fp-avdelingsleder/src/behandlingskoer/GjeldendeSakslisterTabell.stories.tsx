@@ -56,6 +56,10 @@ const meta = {
         sakslister: oldArgs.sakslister.concat({
           sakslisteId: oldArgs.sakslister.length === 1 ? 1 : 2,
           navn: 'Ny liste',
+          sortering: {
+            sorteringType: 'BEHFRIST',
+            periodefilter: 'FAST_PERIODE',
+          },
           sorteringTyper: [],
           saksbehandlerIdenter: [],
           andreKriterie: {
@@ -85,6 +89,10 @@ export const TabellNårDetFinnesEnBehandlingskø: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
+        sortering: {
+          sorteringType: 'BEHFRIST',
+          periodefilter: 'FAST_PERIODE',
+        },
         sorteringTyper: [],
         saksbehandlerIdenter: ['R23233'],
         andreKriterie: {

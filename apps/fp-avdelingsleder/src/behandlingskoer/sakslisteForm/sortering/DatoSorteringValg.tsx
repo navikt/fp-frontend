@@ -26,13 +26,8 @@ export const DatoSorteringValg = () => {
 
   const { setValue, watch, control } = useFormContext<FormValues>();
   const periodefilter = watch('sortering.periodefilter');
-  const fomDato = watch('sortering.fomDato');
   const fraVerdi = watch('sortering.fra');
   const tilVerdi = watch('sortering.til');
-
-  const validerTomDatoLikEllerEtterFomDato = (tomDato: string) => {
-    return fomDato && tomDato ? dateAfterOrEqual(fomDato)(tomDato) : null;
-  };
 
   return (
     <div className={styles['arrowBoxWidth']}>
@@ -136,7 +131,7 @@ export const DatoSorteringValg = () => {
                 name="sortering.tomDato"
                 control={control}
                 label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
-                validate={[hasValidDate, validerTomDatoLikEllerEtterFomDato]}
+                validate={[hasValidDate, validerTomDatoLikEllerEtterFomDato(watch('sortering.fomDato'))]}
               />
             </HStack>
           )}
@@ -151,6 +146,10 @@ const finnDato = (antallDager: number) => dayjs().add(antallDager, 'd').format()
 const finnDatoMåned = (antallMåneder: number, erStartenAvMåned: boolean) => {
   const baseDato = erStartenAvMåned ? dayjs().startOf('month') : dayjs().endOf('month');
   return baseDato.add(antallMåneder, 'month').format();
+};
+
+const validerTomDatoLikEllerEtterFomDato = (fomDato: string | null) => (tomDato: string) => {
+  return fomDato && tomDato ? dateAfterOrEqual(fomDato)(tomDato) : null;
 };
 
 export const validerTilLikEllerStørreEnnFra = (fra: number | null) => (til: number | string) => {
