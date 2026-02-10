@@ -30,24 +30,21 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
   const { data: oppgaverForAvdelingAntall } = useQuery(oppgaverForAvdelingAntallOptions(valgtAvdelingEnhet));
   const { data: sakslister, refetch: refetchSakslister } = useQuery(sakslisterForAvdelingOptions(valgtAvdelingEnhet));
 
-  const { mutate: lagNySakslisteOgHentAvdelingensSakslisterPåNytt, data: nySakslisteObject } = useMutation({
+  const { mutate: lagNySakslisteOgHentAvdelingensSakslisterPåNytt } = useMutation({
     mutationFn: () => opprettNySaksliste(valgtAvdelingEnhet),
-    onSuccess: () => {
-      setValgtSakslisteId(undefined);
+    onSuccess: data => {
+      setValgtSakslisteId(Number.parseInt(data.sakslisteId, 10));
       void refetchSakslister();
     },
   });
 
-  const nyId = nySakslisteObject ? Number.parseInt(nySakslisteObject.sakslisteId, 10) : undefined;
-  const valgtSakId = valgtSakslisteId === undefined ? nyId : valgtSakslisteId;
-
-  const valgtSaksliste = sakslister.find(s => s.sakslisteId === valgtSakId);
+  const valgtSaksliste = sakslister.find(s => s.sakslisteId === valgtSakslisteId);
 
   return (
     <GjeldendeSakslisterTabell
       sakslister={sakslister}
       setValgtSakslisteId={setValgtSakslisteId}
-      valgtSakslisteId={valgtSakId}
+      valgtSakslisteId={valgtSakslisteId}
       valgtAvdelingEnhet={valgtAvdelingEnhet}
       oppgaverForAvdelingAntall={oppgaverForAvdelingAntall}
       lagNySaksliste={lagNySakslisteOgHentAvdelingensSakslisterPåNytt}
@@ -60,7 +57,7 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
           marginRight: '-55px',
         }}
       >
-        {valgtSakId && valgtSaksliste && (
+        {valgtSakslisteId && valgtSaksliste && (
           <React.Fragment key={valgtSaksliste.sakslisteId}>
             <UtvalgskriterierForSakslisteForm valgtSaksliste={valgtSaksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
             <HStack gap="space-16" justify="center" align="center">
