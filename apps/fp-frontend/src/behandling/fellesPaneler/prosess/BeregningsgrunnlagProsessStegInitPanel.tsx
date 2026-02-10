@@ -188,7 +188,7 @@ const Wrapper = (props: Omit<ComponentProps<typeof BeregningsgrunnlagProsessInde
     .flatMap(bg => bg.aktivitetStatus)
     .every(status => status === 'AT');
 
-  const [valgtVisning, setValgtVisning] = useState<Visning>(erAktivitetKunAT && !erProd ? 'ny' : 'gammel');
+  const [valgtVisning, setValgtVisning] = useState<Visning>(erAktivitetKunAT ? 'ny' : 'gammel');
 
   return (
     <VStack gap="space-16">

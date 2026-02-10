@@ -3,44 +3,23 @@ import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { FagsakYtelseType } from '@navikt/fp-types';
 
-import { lagreSakslisteFagsakYtelseType, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 
 export type FormValues = {
-  [key in FagsakYtelseType]?: boolean;
+  fagsakYtelseTyper: FagsakYtelseType[];
 };
 
-interface Props {
-  valgtSakslisteId: number;
-  valgtAvdelingEnhet: string;
-}
+export const FagsakYtelseTypeVelger = () => {
+  const { watch, control, setValue } = useFormContext<FormValues>();
 
-export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
-  const queryClient = useQueryClient();
+  const values = watch('fagsakYtelseTyper');
 
-  const { control } = useFormContext<FormValues>();
-
-  const { mutate: lagreFagsakYtelseType } = useMutation({
-    mutationFn: (values: { sakslisteId: number; avdelingEnhet: string; fagsakYtelseType: string; checked: boolean }) =>
-      lagreSakslisteFagsakYtelseType(values.sakslisteId, values.avdelingEnhet, values.fagsakYtelseType, values.checked),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
-      });
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
-      });
-    },
-  });
-
-  const alleFagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
+  const alleFagsakYtelseTyper = useLosKodeverk('FagsakYtelseType')
+    .filter(bt => bt.kode !== '-')
+    .sort((a, b) => a.kode.localeCompare(b.kode));
 
   return (
     <VStack gap="space-4">
@@ -50,17 +29,15 @@ export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }:
       {alleFagsakYtelseTyper.map(fyt => (
         <RhfCheckbox
           key={fyt.kode}
-          name={fyt.kode}
+          name="fagsakYtelseTyper"
+          label={fyt.navn}
           control={control}
-          label={alleFagsakYtelseTyper.find(type => type.kode === fyt.kode)?.navn ?? ''}
-          onChange={isChecked =>
-            lagreFagsakYtelseType({
-              sakslisteId: valgtSakslisteId,
-              avdelingEnhet: valgtAvdelingEnhet,
-              fagsakYtelseType: fyt.kode,
-              checked: isChecked,
-            })
-          }
+          checked={values.includes(fyt.kode)}
+          onChange={checked => {
+            setValue('fagsakYtelseTyper', checked ? [...values, fyt.kode] : values.filter(v => v !== fyt.kode), {
+              shouldDirty: true,
+            });
+          }}
         />
       ))}
     </VStack>
