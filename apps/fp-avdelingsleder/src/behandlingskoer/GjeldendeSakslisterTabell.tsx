@@ -19,7 +19,11 @@ const formatStonadstyper = (
   fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
   valgteFagsakYtelseTyper?: string[],
 ) => {
-  if (!valgteFagsakYtelseTyper || valgteFagsakYtelseTyper.length === 0) {
+  if (
+    !valgteFagsakYtelseTyper ||
+    valgteFagsakYtelseTyper.length === 0 ||
+    valgteFagsakYtelseTyper.length === fagsakYtelseTyper.length
+  ) {
     return <FormattedMessage id="GjeldendeSakslisterTabell.Alle" />;
   }
 
