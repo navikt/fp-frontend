@@ -16,6 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: navikt/fp-gha-workflows/.github/actions/setup-yarnrc@main
+        with:
+          npmAuthToken: ${{ secrets.READER_TOKEN }}
+
       - uses: actions/setup-node@v6
         with:
           node-version: 22.17.1
@@ -23,8 +27,9 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --immutable
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+
+      - name: Restore .yarnrc.yml
+        run: git restore .yarnrc.yml
 
       - name: Generer typer
         run: yarn generate
@@ -48,7 +53,7 @@ jobs:
 
           gh pr create \
             --title "chore: oppdater genererte typer" \
-            --body "Denne PR oppgraderer genererte typer fra fpsak \`yarn generate\`." \
+            --body "Denne PR oppdaterer genererte typer fra fpsak \`yarn generate\`." \
             --base main \
             --head $BRANCH_NAME
         env:
