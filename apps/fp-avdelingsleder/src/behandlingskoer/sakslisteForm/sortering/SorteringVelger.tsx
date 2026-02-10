@@ -21,12 +21,11 @@ interface Props {
 }
 
 export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Props) => {
-  const { resetField, control, watch } = useFormContext<FormValues>();
+  const { unregister, resetField, control, watch } = useFormContext<FormValues>();
 
   const sorteringKoder = useLosKodeverk('KøSortering');
 
-  const values = watch('sortering');
-
+  const values = watch('sortering.sorteringType');
   return (
     <VStack padding="space-20">
       <RhfRadioGroup
@@ -34,10 +33,14 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
         control={control}
         legend={<FormattedMessage id="SorteringVelger.Sortering" />}
         onChange={() => {
-          resetField('sortering.fra');
-          resetField('sortering.til');
-          resetField('sortering.fomDato', { defaultValue: '' });
-          resetField('sortering.tomDato', { defaultValue: '' });
+          unregister('sortering.fra', { keepIsValid: false });
+          unregister('sortering.til', { keepIsValid: false });
+          unregister('sortering.fomDato', { keepIsValid: false });
+          unregister('sortering.tomDato', { keepIsValid: false });
+          //resetField('sortering.fra', { defaultValue: null });
+          //resetField('sortering.til', { defaultValue: null });
+          //resetField('sortering.fomDato', { defaultValue: null });
+          //resetField('sortering.tomDato', { defaultValue: null });
           resetField('sortering.periodefilter', { defaultValue: 'FAST_PERIODE' });
         }}
       >
@@ -51,7 +54,7 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
               <Radio value={koSortering.sorteringType} size="small">
                 {notEmpty(sorteringKoder.find(k => k.kode === koSortering.sorteringType)?.navn, 'Mangler kodeverk')}
               </Radio>
-              {values?.sorteringType === koSortering.sorteringType && (
+              {values === koSortering.sorteringType && (
                 <>
                   {koSortering.feltType === 'DATO' && <DatoSorteringValg />}
                   {koSortering.feltType === 'HELTALL' && <BelopSorteringValg />}
@@ -65,4 +68,6 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
 };
 
 const bareTilbakekrevingValgt = (valgteBehandlingtyper?: string[]) =>
-  valgteBehandlingtyper?.every(type => ['BT-007', 'BT-009'].includes(type));
+  valgteBehandlingtyper &&
+  valgteBehandlingtyper.length > 0 &&
+  valgteBehandlingtyper.every(type => ['BT-007', 'BT-009'].includes(type));

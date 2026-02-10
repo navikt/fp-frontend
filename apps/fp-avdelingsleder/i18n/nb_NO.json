@@ -40,6 +40,7 @@
   "SorteringVelger.Valuta": "kr",
   "SorteringVelger.Fra": "Fra",
   "SorteringVelger.Til": "Til",
+  "SorteringVelger.TilMåVæreMindreEllerLik": "Fra {fra} kan ikke være større enn til {til}",
 
   "UtvalgskriterierForSakslisteForm.Utvalgskriterier": "Utvalgskriterier",
   "UtvalgskriterierForSakslisteForm.Navn": "Navn",

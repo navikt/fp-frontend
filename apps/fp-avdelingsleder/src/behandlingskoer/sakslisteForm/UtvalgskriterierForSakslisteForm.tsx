@@ -34,7 +34,6 @@ const minLength3 = minLength(3);
 const maxLength100 = maxLength(100);
 
 type FormValues = {
-  sakslisteId: number;
   navn: string;
 } & AndreKriterieValgKnappFormTypes &
   BehandlingstypeVelgerFormValues &
@@ -53,14 +52,16 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
 
   const formMethods = useForm<FormValues>({
     defaultValues: buildDefaultValues(intl, valgtSaksliste),
+    //shouldUnregister: true,
   });
+  console.log('formMethods.watch()', formMethods.watch());
 
   const { mutate: lagreSaksliste, isPending } = useMutation({
     mutationFn: (valuesToStore: SakslisteDto) => lagreUtvalgskriterierForKø(valuesToStore),
   });
 
   const lagre = (values: FormValues) => {
-    lagreSaksliste(transformValues(values, valgtAvdelingEnhet), {
+    lagreSaksliste(transformValues(values, valgtAvdelingEnhet, valgtSaksliste.sakslisteId), {
       onSuccess: () => {
         formMethods.reset(values);
         void queryClient.invalidateQueries({
@@ -118,7 +119,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
                 </VStack>
                 <AndreKriterierVelger />
                 <SorteringVelger
-                  valgteBehandlingtyper={valgtSaksliste.behandlingTyper}
+                  valgteBehandlingtyper={formMethods.watch('behandlingTyper')}
                   muligeSorteringer={valgtSaksliste.sorteringTyper}
                 />
               </HStack>
@@ -132,7 +133,6 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
 
 const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling): FormValues => {
   return {
-    sakslisteId: valgtSaksliste.sakslisteId,
     navn: valgtSaksliste.navn ?? intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.NyListe' }),
     sortering: valgtSaksliste.sortering,
     tilBeslutter: fraAndreKriterierTilBeslutter(valgtSaksliste.andreKriterie),
@@ -152,7 +152,7 @@ const fraAndreKriterierTilBeslutter = (andreKriterier?: AnnetKriterie): TilBeslu
   }
 };
 
-const transformValues = (values: FormValues, valgtAvdelingEnhet: string): SakslisteDto => {
+const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslisteId: number): SakslisteDto => {
   const { tilBeslutter, andreKriterie, ...rest } = values;
   const inkluder = andreKriterie.inkluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   const ekskluder = andreKriterie.ekskluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
@@ -168,5 +168,6 @@ const transformValues = (values: FormValues, valgtAvdelingEnhet: string): Saksli
       ekskluder,
     },
     avdelingEnhet: valgtAvdelingEnhet,
+    sakslisteId: sakslisteId,
   };
 };

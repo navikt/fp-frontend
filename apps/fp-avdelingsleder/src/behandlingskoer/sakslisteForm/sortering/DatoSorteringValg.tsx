@@ -3,7 +3,13 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Detail, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
-import { hasValidDate, hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
+import {
+  dateAfterOrEqual,
+  hasValidDate,
+  hasValidPosOrNegInteger,
+  maxValue,
+  minValue,
+} from '@navikt/ft-form-validators';
 import { ArrowBox, DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -18,10 +24,22 @@ dayjs.extend(customParseFormat);
 export const DatoSorteringValg = () => {
   const intl = useIntl();
 
-  const { watch, control } = useFormContext<FormValues>();
+  const { resetField, watch, control } = useFormContext<FormValues>();
   const periodefilter = watch('sortering.periodefilter');
+  const fomDato = watch('sortering.fomDato');
   const fraVerdi = watch('sortering.fra');
   const tilVerdi = watch('sortering.til');
+
+  const validerTomDatoLikEllerEtterFomDato = (tomDato: string) => {
+    return fomDato && tomDato ? dateAfterOrEqual(fomDato)(tomDato) : null;
+  };
+
+  const validerTilLikEllerStørreEnnFra = (til: string) => {
+    if (!fraVerdi || !til || Number.isNaN(til)) {
+      return null;
+    }
+    return minValue(fraVerdi)(til);
+  };
 
   return (
     <div className={styles['arrowBoxWidth']}>
@@ -34,6 +52,12 @@ export const DatoSorteringValg = () => {
             control={control}
             name="sortering.periodefilter"
             legend={intl.formatMessage({ id: 'SorteringVelger.FilterForPeriode' })}
+            onChange={() => {
+              resetField('sortering.fra', { defaultValue: undefined });
+              resetField('sortering.til', { defaultValue: undefined });
+              resetField('sortering.fomDato', { defaultValue: undefined });
+              resetField('sortering.tomDato', { defaultValue: undefined });
+            }}
           >
             <Radio value={'FAST_PERIODE' satisfies Periodefilter}>
               <FormattedMessage id="SorteringVelger.FastPeriode" />
@@ -53,9 +77,9 @@ export const DatoSorteringValg = () => {
                   control={control}
                   className={styles['dato']}
                   label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
-                  validate={[hasValidPosOrNegInteger]}
+                  validate={[hasValidPosOrNegInteger, minValue(-500), maxValue(1100)]}
                 />
-                {fraVerdi !== undefined && (
+                {fraVerdi && (
                   <Detail>
                     {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                       <DateLabel dateString={finnDato(fraVerdi)} />
@@ -78,9 +102,9 @@ export const DatoSorteringValg = () => {
                   control={control}
                   className={styles['dato']}
                   label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
-                  validate={[hasValidPosOrNegInteger]}
+                  validate={[hasValidPosOrNegInteger, validerTilLikEllerStørreEnnFra, minValue(-500), maxValue(1100)]}
                 />
-                {tilVerdi !== undefined && (
+                {tilVerdi && (
                   <Detail>
                     {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                       <DateLabel dateString={finnDato(tilVerdi)} />
@@ -114,7 +138,7 @@ export const DatoSorteringValg = () => {
                 name="sortering.tomDato"
                 control={control}
                 label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
-                validate={[hasValidDate]}
+                validate={[hasValidDate, validerTomDatoLikEllerEtterFomDato]}
               />
             </HStack>
           )}
