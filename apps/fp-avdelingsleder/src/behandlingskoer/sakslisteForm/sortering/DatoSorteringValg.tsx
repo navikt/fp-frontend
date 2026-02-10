@@ -41,10 +41,10 @@ export const DatoSorteringValg = () => {
             name="sortering.periodefilter"
             legend={intl.formatMessage({ id: 'SorteringVelger.FilterForPeriode' })}
             onChange={() => {
-              setValue('sortering.fra', null);
-              setValue('sortering.til', null);
-              setValue('sortering.fomDato', null);
-              setValue('sortering.tomDato', null);
+              setValue('sortering.fra', null, { shouldValidate: true });
+              setValue('sortering.til', null, { shouldValidate: true });
+              setValue('sortering.fomDato', null, { shouldValidate: true });
+              setValue('sortering.tomDato', null, { shouldValidate: true });
             }}
           >
             <Radio value={'FAST_PERIODE' satisfies Periodefilter}>

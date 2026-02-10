@@ -41,10 +41,10 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
         control={control}
         legend={<FormattedMessage id="SorteringVelger.Sortering" />}
         onChange={() => {
-          setValue('sortering.fra', null);
-          setValue('sortering.til', null);
-          setValue('sortering.fomDato', null);
-          setValue('sortering.tomDato', null);
+          setValue('sortering.fra', null, { shouldValidate: true });
+          setValue('sortering.til', null, { shouldValidate: true });
+          setValue('sortering.fomDato', null, { shouldValidate: true });
+          setValue('sortering.tomDato', null, { shouldValidate: true });
           setValue('sortering.periodefilter', 'FAST_PERIODE');
         }}
       >
