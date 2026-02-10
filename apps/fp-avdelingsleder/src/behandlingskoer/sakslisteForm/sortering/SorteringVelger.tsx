@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 
+import type { KøSortering } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
@@ -66,20 +67,26 @@ const skalViseSortering = (
   valgteBehandlingtyper?: string[],
   valgteAndreKriterier?: AnnetKriterie,
 ) => {
-  const køSortering = koSorteringFelt.sorteringType;
-  if (køSortering === 'OPPGAVE_OPPRETTET') {
-    return valgteAndreKriterier && valgteAndreKriterier.inkluder.some(type => type === 'TIL_BESLUTTER');
+  const køSortering: KøSortering = koSorteringFelt.sorteringType;
+  switch (køSortering) {
+    case 'OPPRBEH':
+    case 'BEHFRIST':
+    case 'FORSTONAD':
+    case 'FORSTONAD_SYNK':
+      return true;
+
+    case 'OPPGAVE_OPPRETTET':
+      return valgteAndreKriterier && valgteAndreKriterier.inkluder.some(type => type === 'TIL_BESLUTTER');
+
+    case 'BELOP':
+    case 'FEILUTBETALINGSTART':
+      return (
+        valgteBehandlingtyper &&
+        valgteBehandlingtyper.some(type => type === 'BT-007' || type === 'BT-009') &&
+        !valgteBehandlingtyper.some(type => type !== 'BT-007' && type !== 'BT-009')
+      );
+
+    default:
+      return køSortering satisfies never;
   }
-
-  if (køSortering === 'BELOP' || køSortering === 'FEILUTBETALINGSTART') {
-    return (
-      valgteBehandlingtyper &&
-      valgteBehandlingtyper.some(type => type === 'BT-007' || type === 'BT-009') &&
-      !valgteBehandlingtyper.some(type => type !== 'BT-007' && type !== 'BT-009')
-    );
-  }
-
-  // TODO: bytt til exhaustive switch
-
-  return true;
 };
