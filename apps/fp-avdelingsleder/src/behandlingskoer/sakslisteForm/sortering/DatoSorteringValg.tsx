@@ -24,7 +24,7 @@ dayjs.extend(customParseFormat);
 export const DatoSorteringValg = () => {
   const intl = useIntl();
 
-  const { resetField, watch, control } = useFormContext<FormValues>();
+  const { setValue, watch, control } = useFormContext<FormValues>();
   const periodefilter = watch('sortering.periodefilter');
   const fomDato = watch('sortering.fomDato');
   const fraVerdi = watch('sortering.fra');
@@ -53,10 +53,10 @@ export const DatoSorteringValg = () => {
             name="sortering.periodefilter"
             legend={intl.formatMessage({ id: 'SorteringVelger.FilterForPeriode' })}
             onChange={() => {
-              resetField('sortering.fra', { defaultValue: undefined });
-              resetField('sortering.til', { defaultValue: undefined });
-              resetField('sortering.fomDato', { defaultValue: undefined });
-              resetField('sortering.tomDato', { defaultValue: undefined });
+              setValue('sortering.fra', null);
+              setValue('sortering.til', null);
+              setValue('sortering.fomDato', null);
+              setValue('sortering.tomDato', null);
             }}
           >
             <Radio value={'FAST_PERIODE' satisfies Periodefilter}>

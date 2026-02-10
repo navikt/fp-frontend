@@ -35,7 +35,7 @@ export type SakslisteAvdeling = Readonly<{
   navn?: string;
   behandlingTyper?: BehandlingType[];
   fagsakYtelseTyper?: FagsakYtelseType[];
-  sortering?: Sortering;
+  sortering: Sortering;
   sorteringTyper: KøSorteringFelt[];
   andreKriterie: AnnetKriterie;
   saksbehandlerIdenter: string[];

@@ -30,8 +30,8 @@ export const AndreKriterieValgKnapp = ({ andreKriterierType }: Props): ReactElem
   const intl = useIntl();
   const { watch, setValue } = useFormContext<FormValues>();
   const andreKriterier = watch('andreKriterie');
-  const inkluderVerdi = andreKriterier.inkluder ?? [];
-  const ekskluderVerdi = andreKriterier.ekskluder ?? [];
+  const inkluderVerdi = andreKriterier.inkluder;
+  const ekskluderVerdi = andreKriterier.ekskluder;
   const kode = andreKriterierType.kode;
 
   const oppdaterKriterier = (nyStatus: FilterStatus) => {

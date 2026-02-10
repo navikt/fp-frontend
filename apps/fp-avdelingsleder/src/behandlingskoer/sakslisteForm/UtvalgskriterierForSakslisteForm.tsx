@@ -134,7 +134,14 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
 const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling): FormValues => {
   return {
     navn: valgtSaksliste.navn ?? intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.NyListe' }),
-    sortering: valgtSaksliste.sortering,
+    sortering: {
+      sorteringType: valgtSaksliste.sortering.sorteringType,
+      periodefilter: valgtSaksliste.sortering.periodefilter,
+      fra: valgtSaksliste.sortering.fra ?? null,
+      til: valgtSaksliste.sortering.til ?? null,
+      fomDato: valgtSaksliste.sortering.fomDato ?? null,
+      tomDato: valgtSaksliste.sortering.tomDato ?? null,
+    },
     tilBeslutter: fraAndreKriterierTilBeslutter(valgtSaksliste.andreKriterie),
     andreKriterie: valgtSaksliste.andreKriterie,
     behandlingTyper: valgtSaksliste.behandlingTyper ?? [],
@@ -153,7 +160,7 @@ const fraAndreKriterierTilBeslutter = (andreKriterier?: AnnetKriterie): TilBeslu
 };
 
 const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslisteId: number): SakslisteDto => {
-  const { tilBeslutter, andreKriterie, ...rest } = values;
+  const { tilBeslutter, andreKriterie, sortering, ...rest } = values;
   const inkluder = andreKriterie.inkluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   const ekskluder = andreKriterie.ekskluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   if (tilBeslutter === 'TA_MED') {
@@ -161,11 +168,19 @@ const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslis
   } else if (tilBeslutter === 'FJERN') {
     ekskluder.push('TIL_BESLUTTER');
   }
+
   return {
     ...rest,
     andreKriterie: {
       inkluder,
       ekskluder,
+    },
+    sortering: {
+      ...sortering,
+      fra: sortering.fra ?? undefined,
+      til: sortering.til ?? undefined,
+      fomDato: sortering.fomDato ?? undefined,
+      tomDato: sortering.tomDato ?? undefined,
     },
     avdelingEnhet: valgtAvdelingEnhet,
     sakslisteId: sakslisteId,

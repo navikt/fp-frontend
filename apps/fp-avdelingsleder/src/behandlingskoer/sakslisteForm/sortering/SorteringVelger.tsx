@@ -4,15 +4,23 @@ import { FormattedMessage } from 'react-intl';
 import { Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 
+import type { KøSortering } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import type { KøSorteringFelt, Sortering } from '../../../typer/sakslisteAvdelingTsType';
+import type { KøSorteringFelt, Periodefilter } from '../../../typer/sakslisteAvdelingTsType';
 import { BelopSorteringValg } from './BelopSorteringValg';
 import { DatoSorteringValg } from './DatoSorteringValg';
 
 export type FormValues = {
-  sortering?: Sortering;
+  sortering: {
+    sorteringType: KøSortering;
+    periodefilter: Periodefilter;
+    fra: number | null;
+    til: number | null;
+    fomDato: string | null;
+    tomDato: string | null;
+  };
 };
 
 interface Props {
@@ -21,7 +29,7 @@ interface Props {
 }
 
 export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Props) => {
-  const { unregister, resetField, control, watch } = useFormContext<FormValues>();
+  const { setValue, control, watch } = useFormContext<FormValues>();
 
   const sorteringKoder = useLosKodeverk('KøSortering');
 
@@ -33,15 +41,11 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
         control={control}
         legend={<FormattedMessage id="SorteringVelger.Sortering" />}
         onChange={() => {
-          unregister('sortering.fra', { keepIsValid: false });
-          unregister('sortering.til', { keepIsValid: false });
-          unregister('sortering.fomDato', { keepIsValid: false });
-          unregister('sortering.tomDato', { keepIsValid: false });
-          //resetField('sortering.fra', { defaultValue: null });
-          //resetField('sortering.til', { defaultValue: null });
-          //resetField('sortering.fomDato', { defaultValue: null });
-          //resetField('sortering.tomDato', { defaultValue: null });
-          resetField('sortering.periodefilter', { defaultValue: 'FAST_PERIODE' });
+          setValue('sortering.fra', null);
+          setValue('sortering.til', null);
+          setValue('sortering.fomDato', null);
+          setValue('sortering.tomDato', null);
+          setValue('sortering.periodefilter', 'FAST_PERIODE');
         }}
       >
         {muligeSorteringer
