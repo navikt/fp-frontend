@@ -3,6 +3,7 @@ import sourcemaps from 'rollup-plugin-sourcemaps';
 import { defineConfig, mergeConfig } from 'vite';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import compression from 'vite-plugin-compression2';
 
 const __filename = fileURLToPath(import.meta.url);
 const folder = path.dirname(__filename);
@@ -22,6 +23,7 @@ export const createSharedPackagesConfig = setupFileDirName => createConfig(setup
 export const createConfig = setupFileDirName =>
   defineConfig({
     plugins: [
+      compression(),
       react({
         include: '**/*.{ts,tsx,js,jsx}',
       }),
