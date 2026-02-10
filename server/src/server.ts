@@ -1,7 +1,6 @@
 import path from "node:path";
 
 import { serveViteMode } from "@navikt/vite-mode";
-import compression from "compression";
 import timeout from "connect-timeout";
 import cors from "cors";
 import express from "express";
