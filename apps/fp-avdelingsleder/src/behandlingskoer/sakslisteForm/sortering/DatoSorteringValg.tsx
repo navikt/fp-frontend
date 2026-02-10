@@ -34,13 +34,6 @@ export const DatoSorteringValg = () => {
     return fomDato && tomDato ? dateAfterOrEqual(fomDato)(tomDato) : null;
   };
 
-  const validerTilLikEllerStørreEnnFra = (til: string) => {
-    if (!fraVerdi || !til || Number.isNaN(til)) {
-      return null;
-    }
-    return minValue(fraVerdi)(til);
-  };
-
   return (
     <div className={styles['arrowBoxWidth']}>
       <ArrowBox>
@@ -102,7 +95,12 @@ export const DatoSorteringValg = () => {
                   control={control}
                   className={styles['dato']}
                   label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
-                  validate={[hasValidPosOrNegInteger, validerTilLikEllerStørreEnnFra, minValue(-500), maxValue(1100)]}
+                  validate={[
+                    hasValidPosOrNegInteger,
+                    validerTilLikEllerStørreEnnFra(fraVerdi),
+                    minValue(-500),
+                    maxValue(1100),
+                  ]}
                 />
                 {tilVerdi && (
                   <Detail>
@@ -153,4 +151,11 @@ const finnDato = (antallDager: number) => dayjs().add(antallDager, 'd').format()
 const finnDatoMåned = (antallMåneder: number, erStartenAvMåned: boolean) => {
   const baseDato = erStartenAvMåned ? dayjs().startOf('month') : dayjs().endOf('month');
   return baseDato.add(antallMåneder, 'month').format();
+};
+
+export const validerTilLikEllerStørreEnnFra = (fra: number | null) => (til: number | string) => {
+  if (!fra || !til || Number.isNaN(til)) {
+    return null;
+  }
+  return minValue(fra)(til);
 };

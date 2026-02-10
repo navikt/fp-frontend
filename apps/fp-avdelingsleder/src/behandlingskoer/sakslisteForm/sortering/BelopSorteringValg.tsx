@@ -3,15 +3,17 @@ import { FormattedMessage } from 'react-intl';
 
 import { Detail, HStack } from '@navikt/ds-react';
 import { RhfTextField } from '@navikt/ft-form-hooks';
-import { hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
+import { hasValidPosOrNegInteger, maxValue, minValue } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
+import { validerTilLikEllerStørreEnnFra } from './DatoSorteringValg.tsx';
 import type { FormValues } from './SorteringVelger';
 
 import styles from './sorteringVelger.module.css';
 
 export const BelopSorteringValg = () => {
-  const { control } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<FormValues>();
+  const fraVerdi = watch('sortering.fra');
   return (
     <ArrowBox>
       <Detail>
@@ -22,7 +24,7 @@ export const BelopSorteringValg = () => {
           name="sortering.fra"
           control={control}
           className={styles['dato']}
-          validate={[hasValidPosOrNegInteger]}
+          validate={[hasValidPosOrNegInteger, minValue(0), maxValue(10_000_000)]}
         />
         <Detail className={styles['beløp']}>
           <FormattedMessage id="SorteringVelger.Valuta" />
@@ -31,7 +33,12 @@ export const BelopSorteringValg = () => {
           name="sortering.til"
           control={control}
           className={styles['dato']}
-          validate={[hasValidPosOrNegInteger]}
+          validate={[
+            hasValidPosOrNegInteger,
+            minValue(0),
+            maxValue(10_000_000),
+            validerTilLikEllerStørreEnnFra(fraVerdi),
+          ]}
         />
         <Detail className={styles['beløp']}>
           <FormattedMessage id="SorteringVelger.Valuta" />

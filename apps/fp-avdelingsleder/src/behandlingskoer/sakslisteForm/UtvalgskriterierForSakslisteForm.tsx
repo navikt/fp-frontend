@@ -52,9 +52,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
 
   const formMethods = useForm<FormValues>({
     defaultValues: buildDefaultValues(intl, valgtSaksliste),
-    //shouldUnregister: true,
   });
-  console.log('formMethods.watch()', formMethods.watch());
 
   const { mutate: lagreSaksliste, isPending } = useMutation({
     mutationFn: (valuesToStore: SakslisteDto) => lagreUtvalgskriterierForKø(valuesToStore),
