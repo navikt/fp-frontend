@@ -25,7 +25,7 @@ export const BelopSorteringValg = () => {
           name="sortering.fra"
           control={control}
           className={styles['dato']}
-          label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
+          label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
           validate={[minValue(0), maxValue(10_000_000)]}
         />
         <Detail className={styles['beløp']}>
@@ -35,7 +35,7 @@ export const BelopSorteringValg = () => {
           name="sortering.til"
           control={control}
           className={styles['dato']}
-          label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
+          label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
           validate={[minValue(0), maxValue(10_000_000), validerTilLikEllerStørreEnnFra(fraVerdi)]}
         />
         <Detail className={styles['beløp']}>
