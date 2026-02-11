@@ -106,7 +106,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
 
   const { mutateAsync: ferdigstillOppgave } = useMutation({
     mutationFn: (values: string) => api.ferdigstillOppgave(values),
-    onSuccess: () => refetchOppgaver(),
+    onSettled: () => refetchOppgaver(),
   });
 
   const lukkIverksetterModal = () => {
