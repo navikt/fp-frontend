@@ -10,7 +10,7 @@ import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 import { LosUrl, slettSaksliste } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
 import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
-import { OppgaverGrafDialog } from './OppgaverGrafDialog.tsx';
+import { OppgaverGrafDialog } from './OppgaverGrafDialog';
 import { SletteSakslisteModal } from './SletteSakslisteModal';
 
 import styles from './gjeldendeSakslisterTabell.module.css';

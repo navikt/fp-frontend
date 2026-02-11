@@ -6,8 +6,8 @@ import { RhfNumericField } from '@navikt/ft-form-hooks';
 import { maxValue, minValue } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import type { FormValues } from '../UtvalgskriterierForSakslisteForm.tsx';
-import { validerTilLikEllerStørreEnnFra } from './DatoSorteringValg.tsx';
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
+import { validerTilLikEllerStørreEnnFra } from './DatoSorteringValg';
 
 import styles from './sorteringVelger.module.css';
 

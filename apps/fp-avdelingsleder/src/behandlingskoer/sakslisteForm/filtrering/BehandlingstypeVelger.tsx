@@ -5,8 +5,8 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import { bareTilbakekrevingValgt } from '../sortering/SorteringVelger.tsx';
-import type { FormValues } from '../UtvalgskriterierForSakslisteForm.tsx';
+import { bareTilbakekrevingValgt } from '../sortering/SorteringVelger';
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 
 export const BehandlingstypeVelger = () => {
   const { watch, control, setValue } = useFormContext<FormValues>();

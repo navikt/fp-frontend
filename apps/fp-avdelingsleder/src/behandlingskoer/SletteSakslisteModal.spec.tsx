@@ -2,7 +2,7 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType.ts';
+import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import * as stories from './SletteSakslisteModal.stories';
 
 const { Default } = composeStories(stories);

@@ -7,7 +7,7 @@ import { BodyShort, Button, HStack } from '@navikt/ds-react';
 
 import type { AndreKriterierType, LosKodeverkMedNavn } from '@navikt/fp-types';
 
-import type { FormValues } from '../UtvalgskriterierForSakslisteForm.tsx';
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 
 import styles from './AvOgPåKnapper.module.css';
 
