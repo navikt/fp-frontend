@@ -4,36 +4,26 @@ import { FormattedMessage } from 'react-intl';
 import { Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 
-import type { KøSortering } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import type { KøSorteringFelt, Periodefilter } from '../../../typer/sakslisteAvdelingTsType';
+import type { KøSorteringFelt } from '../../../typer/sakslisteAvdelingTsType';
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 import { BelopSorteringValg } from './BelopSorteringValg';
 import { DatoSorteringValg } from './DatoSorteringValg';
 
-export type FormValues = {
-  sortering: {
-    sorteringType: KøSortering;
-    periodefilter: Periodefilter;
-    fra: number | null;
-    til: number | null;
-    fomDato: string | null;
-    tomDato: string | null;
-  };
-};
-
 interface Props {
-  valgteBehandlingtyper?: string[];
   muligeSorteringer: KøSorteringFelt[];
 }
 
-export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Props) => {
+export const SorteringVelger = ({ muligeSorteringer }: Props) => {
   const { setValue, control, watch } = useFormContext<FormValues>();
 
   const sorteringKoder = useLosKodeverk('KøSortering');
 
+  const valgtBehandlingstyper = watch('behandlingTyper');
   const sorteringstype = watch('sortering.sorteringType');
+
   return (
     <VStack padding="space-20">
       <RhfRadioGroup
@@ -51,7 +41,7 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
         {muligeSorteringer
           .filter(
             koSortering =>
-              koSortering.feltKategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
+              koSortering.feltKategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgtBehandlingstyper),
           )
           .map(koSortering => (
             <VStack key={koSortering.sorteringType} gap="space-2">
@@ -71,7 +61,5 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
   );
 };
 
-const bareTilbakekrevingValgt = (valgteBehandlingtyper?: string[]) =>
-  valgteBehandlingtyper &&
-  valgteBehandlingtyper.length > 0 &&
-  valgteBehandlingtyper.every(type => ['BT-007', 'BT-009'].includes(type));
+export const bareTilbakekrevingValgt = (valgteBehandlingtyper: string[]) =>
+  valgteBehandlingtyper.length > 0 && valgteBehandlingtyper.every(type => ['BT-007', 'BT-009'].includes(type));

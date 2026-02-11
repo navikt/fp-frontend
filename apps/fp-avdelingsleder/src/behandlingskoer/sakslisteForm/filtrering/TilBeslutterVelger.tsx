@@ -5,10 +5,7 @@ import { Radio } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 
 import type { TilBeslutter } from '../../../typer/sakslisteAvdelingTsType';
-
-export type FormValues = {
-  tilBeslutter: TilBeslutter;
-};
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 
 export const TilBeslutterVelger = () => {
   const { control } = useFormContext<FormValues>();

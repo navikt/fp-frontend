@@ -1,17 +1,18 @@
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Detail, HStack } from '@navikt/ds-react';
-import { RhfTextField } from '@navikt/ft-form-hooks';
-import { hasValidPosOrNegInteger, maxValue, minValue } from '@navikt/ft-form-validators';
+import { RhfNumericField } from '@navikt/ft-form-hooks';
+import { maxValue, minValue } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm.tsx';
 import { validerTilLikEllerStørreEnnFra } from './DatoSorteringValg.tsx';
-import type { FormValues } from './SorteringVelger';
 
 import styles from './sorteringVelger.module.css';
 
 export const BelopSorteringValg = () => {
+  const intl = useIntl();
   const { watch, control } = useFormContext<FormValues>();
   const fraVerdi = watch('sortering.fra');
   return (
@@ -20,25 +21,22 @@ export const BelopSorteringValg = () => {
         <FormattedMessage id="SorteringVelger.FiltrerPaHeltall" />
       </Detail>
       <HStack gap="space-16">
-        <RhfTextField
+        <RhfNumericField
           name="sortering.fra"
           control={control}
           className={styles['dato']}
-          validate={[hasValidPosOrNegInteger, minValue(0), maxValue(10_000_000)]}
+          label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
+          validate={[minValue(0), maxValue(10_000_000)]}
         />
         <Detail className={styles['beløp']}>
           <FormattedMessage id="SorteringVelger.Valuta" />
         </Detail>
-        <RhfTextField
+        <RhfNumericField
           name="sortering.til"
           control={control}
           className={styles['dato']}
-          validate={[
-            hasValidPosOrNegInteger,
-            minValue(0),
-            maxValue(10_000_000),
-            validerTilLikEllerStørreEnnFra(fraVerdi),
-          ]}
+          label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
+          validate={[minValue(0), maxValue(10_000_000), validerTilLikEllerStørreEnnFra(fraVerdi)]}
         />
         <Detail className={styles['beløp']}>
           <FormattedMessage id="SorteringVelger.Valuta" />

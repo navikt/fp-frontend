@@ -15,7 +15,7 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import { type Periodefilter } from '../../../typer/sakslisteAvdelingTsType';
-import type { FormValues } from './SorteringVelger';
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 
 import styles from './sorteringVelger.module.css';
 
