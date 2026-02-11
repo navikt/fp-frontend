@@ -5,8 +5,10 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import { bareTilbakekrevingValgt } from '../sortering/SorteringVelger';
 import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
+
+export const bareTilbakekrevingValgt = (valgteBehandlingtyper: string[]) =>
+  valgteBehandlingtyper.length > 0 && valgteBehandlingtyper.every(type => ['BT-007', 'BT-009'].includes(type));
 
 export const BehandlingstypeVelger = () => {
   const { watch, control, setValue } = useFormContext<FormValues>();
