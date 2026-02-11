@@ -35,6 +35,8 @@ export const IngenSaksbehandlere: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      behandlingTyper: [],
+      fagsakYtelseTyper: [],
       sortering: {
         sorteringType: 'BEHFRIST',
         periodefilter: 'FAST_PERIODE',
@@ -63,6 +65,8 @@ export const ToSaksbehandlere: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      behandlingTyper: [],
+      fagsakYtelseTyper: [],
       sortering: {
         sorteringType: 'BEHFRIST',
         periodefilter: 'FAST_PERIODE',
@@ -102,6 +106,8 @@ export const TreSaksbehandlere: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      behandlingTyper: [],
+      fagsakYtelseTyper: [],
       sortering: {
         sorteringType: 'BEHFRIST',
         periodefilter: 'FAST_PERIODE',
@@ -197,6 +203,8 @@ export const SaksbehandlereSomErGruppert: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      behandlingTyper: [],
+      fagsakYtelseTyper: [],
       sortering: {
         sorteringType: 'BEHFRIST',
         periodefilter: 'FAST_PERIODE',

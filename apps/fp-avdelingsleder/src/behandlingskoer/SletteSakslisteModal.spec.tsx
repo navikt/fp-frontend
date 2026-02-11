@@ -19,6 +19,8 @@ describe('SletteSakslisteModal', () => {
     expect(submit).toHaveBeenNthCalledWith(1, {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      behandlingTyper: [],
+      fagsakYtelseTyper: [],
       sortering: {
         sorteringType: 'BEHFRIST',
         fra: 1,
