@@ -4,11 +4,11 @@ import { FormattedMessage } from 'react-intl';
 import { Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 
-import type { AndreKriterierType, KøSortering } from '@navikt/fp-types';
+import type { KøSortering } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import type { KøSorteringFelt } from '../../../typer/sakslisteAvdelingTsType';
+import type { KøSorteringFelt, TilBeslutter } from '../../../typer/sakslisteAvdelingTsType';
 import { bareTilbakekrevingValgt } from '../filtrering/BehandlingstypeVelger.tsx';
 import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 import { BelopSorteringValg } from './BelopSorteringValg';
@@ -24,7 +24,7 @@ export const SorteringVelger = ({ muligeSorteringer }: Props) => {
   const sorteringKoder = useLosKodeverk('KøSortering');
 
   const valgtBehandlingstyper = watch('behandlingTyper');
-  const inkluderteAndreKriterier = watch('andreKriterie.inkluder')
+  const tilBeslutter = watch('tilBeslutter');
   const sorteringstype = watch('sortering.sorteringType');
 
   return (
@@ -42,7 +42,7 @@ export const SorteringVelger = ({ muligeSorteringer }: Props) => {
         }}
       >
         {muligeSorteringer
-          .filter(koSortering => skalViseSortering(koSortering, valgtBehandlingstyper, inkluderteAndreKriterier))
+          .filter(koSortering => skalViseSortering(koSortering, valgtBehandlingstyper, tilBeslutter))
           .map(koSortering => (
             <VStack key={koSortering.sorteringType} gap="space-2">
               <Radio value={koSortering.sorteringType} size="small">
@@ -64,7 +64,7 @@ export const SorteringVelger = ({ muligeSorteringer }: Props) => {
 const skalViseSortering = (
   koSorteringFelt: KøSorteringFelt,
   valgteBehandlingtyper: string[],
-  valgteAndreKriterier: AndreKriterierType[],
+  tilBeslutter: TilBeslutter,
 ) => {
   const køSortering: KøSortering = koSorteringFelt.sorteringType;
   switch (køSortering) {
@@ -75,7 +75,7 @@ const skalViseSortering = (
       return true;
 
     case 'OPPGAVE_OPPRETTET':
-      return valgteAndreKriterier.some(type => type === 'TIL_BESLUTTER');
+      return tilBeslutter === 'TA_MED';
 
     case 'BELOP':
     case 'FEILUTBETALINGSTART':
