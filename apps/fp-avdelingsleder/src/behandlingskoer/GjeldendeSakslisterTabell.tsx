@@ -10,16 +10,16 @@ import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 import { LosUrl, slettSaksliste } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
 import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
-import { OppgaverGrafDialog } from './OppgaverGrafDialog.tsx';
+import { OppgaverGrafDialog } from './OppgaverGrafDialog';
 import { SletteSakslisteModal } from './SletteSakslisteModal';
 
 import styles from './gjeldendeSakslisterTabell.module.css';
 
 const formatStonadstyper = (
   fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
-  valgteFagsakYtelseTyper?: string[],
+  valgteFagsakYtelseTyper: string[],
 ) => {
-  if (!valgteFagsakYtelseTyper || valgteFagsakYtelseTyper.length === 0) {
+  if (valgteFagsakYtelseTyper.length === 0 || valgteFagsakYtelseTyper.length === fagsakYtelseTyper.length) {
     return <FormattedMessage id="GjeldendeSakslisterTabell.Alle" />;
   }
 
@@ -34,13 +34,9 @@ const formatStonadstyper = (
 
 const formatBehandlingstyper = (
   behandlingTyper: LosKodeverkMedNavn<'BehandlingType'>[],
-  valgteBehandlingTyper?: string[],
+  valgteBehandlingTyper: string[],
 ) => {
-  if (
-    !valgteBehandlingTyper ||
-    valgteBehandlingTyper.length === 0 ||
-    valgteBehandlingTyper.length === behandlingTyper.length
-  ) {
+  if (valgteBehandlingTyper.length === 0 || valgteBehandlingTyper.length === behandlingTyper.length) {
     return <FormattedMessage id="GjeldendeSakslisterTabell.Alle" />;
   }
 
@@ -63,11 +59,6 @@ interface Props {
   resetValgtSakslisteId: () => void;
   children: ReactElement;
 }
-
-const wait = (ms: number): Promise<void> =>
-  new Promise(resolve => {
-    setTimeout(resolve, ms);
-  });
 
 export const GjeldendeSakslisterTabell = ({
   sakslister,
@@ -100,16 +91,6 @@ export const GjeldendeSakslisterTabell = ({
   useEffect(() => {
     tabRef.current = tabRef.current.slice(0, sakslister.length);
   }, [sakslister]);
-
-  const setValgtSaksliste = async (isOpen: boolean, id: number): Promise<void> => {
-    // Må vente 100 ms før en byttar behandlingskø i tabell. Dette fordi lagring av navn skjer som blur-event. Så i tilfellet
-    // der en endrer navn og så trykker direkte på en annen behandlingskø vil ikke lagringen skje før etter at ny kø er valgt.
-    await wait(100);
-
-    if (id) {
-      setValgtSakslisteId(isOpen ? id : undefined);
-    }
-  };
 
   const lagNySakslisteFn = (event: KeyboardEvent<HTMLAnchorElement>): void => {
     if (event.key === 'Enter') {
@@ -177,7 +158,7 @@ export const GjeldendeSakslisterTabell = ({
               <Table.ExpandableRow
                 key={saksliste.sakslisteId}
                 className={saksliste.sakslisteId === valgtSakslisteId ? styles['isSelected'] : undefined}
-                onOpenChange={isOpen => setValgtSaksliste(isOpen, saksliste.sakslisteId)}
+                onOpenChange={isOpen => setValgtSakslisteId(isOpen ? saksliste.sakslisteId : undefined)}
                 content={saksliste.sakslisteId === valgtSakslisteId ? children : undefined}
                 open={saksliste.sakslisteId === valgtSakslisteId}
                 expandOnRowClick

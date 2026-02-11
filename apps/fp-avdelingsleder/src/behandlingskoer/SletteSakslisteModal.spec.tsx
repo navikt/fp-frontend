@@ -2,7 +2,7 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType.ts';
+import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import * as stories from './SletteSakslisteModal.stories';
 
 const { Default } = composeStories(stories);
@@ -19,6 +19,14 @@ describe('SletteSakslisteModal', () => {
     expect(submit).toHaveBeenNthCalledWith(1, {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      behandlingTyper: [],
+      fagsakYtelseTyper: [],
+      sortering: {
+        sorteringType: 'BEHFRIST',
+        fra: 1,
+        til: 4,
+        periodefilter: 'RELATIV_PERIODE_DAGER',
+      },
       sorteringTyper: [],
       saksbehandlerIdenter: [],
       andreKriterie: {

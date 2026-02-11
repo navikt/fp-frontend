@@ -30,6 +30,7 @@ const meta = {
   render: args => {
     const formMethods = useForm({
       defaultValues: {
+        behandlingTyper: ['BT-002', 'BT-006'],
         sortering: {
           sorteringType: 'BEHFRIST',
           fra: 2,
@@ -58,7 +59,6 @@ type Story = StoryObj<typeof meta>;
 
 export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
   args: {
-    valgteBehandlingtyper: ['BT-002', 'BT-006'],
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
@@ -69,7 +69,6 @@ export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
 
 export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
   args: {
-    valgteBehandlingtyper: ['BT-002', 'BT-006'],
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'FORSTONAD', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
@@ -101,7 +100,6 @@ export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
 
 export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
   args: {
-    valgteBehandlingtyper: ['BT-007'],
     muligeSorteringer: [
       { sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
       { sorteringType: 'OPPRBEH', feltType: 'DATO', feltKategori: 'UNIVERSAL' },
@@ -113,6 +111,7 @@ export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
   render: args => {
     const formMethods = useForm({
       defaultValues: {
+        behandlingTyper: ['BT-007'],
         sortering: {
           sorteringType: 'BELOP',
           periodefilter: 'RELATIV_PERIODE_DAGER',

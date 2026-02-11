@@ -33,9 +33,9 @@ export type Periodefilter = 'FAST_PERIODE' | 'RELATIV_PERIODE_DAGER' | 'RELATIV_
 export type SakslisteAvdeling = Readonly<{
   sakslisteId: number;
   navn?: string;
-  behandlingTyper?: BehandlingType[];
-  fagsakYtelseTyper?: FagsakYtelseType[];
-  sortering?: Sortering;
+  behandlingTyper: BehandlingType[];
+  fagsakYtelseTyper: FagsakYtelseType[];
+  sortering: Sortering;
   sorteringTyper: KøSorteringFelt[];
   andreKriterie: AnnetKriterie;
   saksbehandlerIdenter: string[];

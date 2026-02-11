@@ -3,13 +3,19 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Detail, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
-import { hasValidDate, hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
+import {
+  dateAfterOrEqual,
+  hasValidDate,
+  hasValidPosOrNegInteger,
+  maxValue,
+  minValue,
+} from '@navikt/ft-form-validators';
 import { ArrowBox, DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import { type Periodefilter } from '../../../typer/sakslisteAvdelingTsType';
-import type { FormValues } from './SorteringVelger';
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 
 import styles from './sorteringVelger.module.css';
 
@@ -18,7 +24,7 @@ dayjs.extend(customParseFormat);
 export const DatoSorteringValg = () => {
   const intl = useIntl();
 
-  const { watch, control } = useFormContext<FormValues>();
+  const { setValue, watch, control } = useFormContext<FormValues>();
   const periodefilter = watch('sortering.periodefilter');
   const fraVerdi = watch('sortering.fra');
   const tilVerdi = watch('sortering.til');
@@ -34,6 +40,12 @@ export const DatoSorteringValg = () => {
             control={control}
             name="sortering.periodefilter"
             legend={intl.formatMessage({ id: 'SorteringVelger.FilterForPeriode' })}
+            onChange={() => {
+              setValue('sortering.fra', null, { shouldValidate: true });
+              setValue('sortering.til', null, { shouldValidate: true });
+              setValue('sortering.fomDato', null, { shouldValidate: true });
+              setValue('sortering.tomDato', null, { shouldValidate: true });
+            }}
           >
             <Radio value={'FAST_PERIODE' satisfies Periodefilter}>
               <FormattedMessage id="SorteringVelger.FastPeriode" />
@@ -53,9 +65,9 @@ export const DatoSorteringValg = () => {
                   control={control}
                   className={styles['dato']}
                   label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
-                  validate={[hasValidPosOrNegInteger]}
+                  validate={[hasValidPosOrNegInteger, minValue(-500), maxValue(1100)]}
                 />
-                {fraVerdi !== undefined && (
+                {fraVerdi && (
                   <Detail>
                     {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                       <DateLabel dateString={finnDato(fraVerdi)} />
@@ -78,9 +90,14 @@ export const DatoSorteringValg = () => {
                   control={control}
                   className={styles['dato']}
                   label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
-                  validate={[hasValidPosOrNegInteger]}
+                  validate={[
+                    hasValidPosOrNegInteger,
+                    validerTilLikEllerStørreEnnFra(fraVerdi),
+                    minValue(-500),
+                    maxValue(1100),
+                  ]}
                 />
-                {tilVerdi !== undefined && (
+                {tilVerdi && (
                   <Detail>
                     {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                       <DateLabel dateString={finnDato(tilVerdi)} />
@@ -114,7 +131,7 @@ export const DatoSorteringValg = () => {
                 name="sortering.tomDato"
                 control={control}
                 label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
-                validate={[hasValidDate]}
+                validate={[hasValidDate, validerTomDatoLikEllerEtterFomDato(watch('sortering.fomDato'))]}
               />
             </HStack>
           )}
@@ -129,4 +146,15 @@ const finnDato = (antallDager: number) => dayjs().add(antallDager, 'd').format()
 const finnDatoMåned = (antallMåneder: number, erStartenAvMåned: boolean) => {
   const baseDato = erStartenAvMåned ? dayjs().startOf('month') : dayjs().endOf('month');
   return baseDato.add(antallMåneder, 'month').format();
+};
+
+const validerTomDatoLikEllerEtterFomDato = (fomDato: string | null) => (tomDato: string) => {
+  return fomDato && tomDato ? dateAfterOrEqual(fomDato)(tomDato) : null;
+};
+
+export const validerTilLikEllerStørreEnnFra = (fra: number | null) => (til: number | string) => {
+  if (!fra || !til || Number.isNaN(til)) {
+    return null;
+  }
+  return minValue(fra)(til);
 };

@@ -4,18 +4,15 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import type { BehandlingType } from '@navikt/fp-types';
-
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-
-export type FormValues = {
-  behandlingTyper: BehandlingType[];
-};
+import { bareTilbakekrevingValgt } from '../sortering/SorteringVelger';
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 
 export const BehandlingstypeVelger = () => {
   const { watch, control, setValue } = useFormContext<FormValues>();
 
   const values = watch('behandlingTyper');
+  const sorteringstype = watch('sortering.sorteringType');
 
   const behandlingTyper = useLosKodeverk('BehandlingType')
     .filter(bt => bt.kode !== '-')
@@ -36,9 +33,16 @@ export const BehandlingstypeVelger = () => {
             control={control}
             checked={values.includes(kode)}
             onChange={checked => {
-              setValue('behandlingTyper', checked ? [...values, kode] : values.filter(v => v !== kode), {
+              const nyBehandlingtyper = checked ? [...values, kode] : values.filter(v => v !== kode);
+              setValue('behandlingTyper', nyBehandlingtyper, {
                 shouldDirty: true,
               });
+              if (
+                ['BELOP', 'FEILUTBETALINGSTART'].includes(sorteringstype) &&
+                !bareTilbakekrevingValgt(nyBehandlingtyper)
+              ) {
+                setValue('sortering.sorteringType', 'BEHFRIST');
+              }
             }}
           />
         );

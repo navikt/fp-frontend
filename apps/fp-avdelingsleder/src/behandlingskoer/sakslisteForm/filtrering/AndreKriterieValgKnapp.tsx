@@ -7,14 +7,9 @@ import { BodyShort, Button, HStack } from '@navikt/ds-react';
 
 import type { AndreKriterierType, LosKodeverkMedNavn } from '@navikt/fp-types';
 
-import styles from './AvOgPåKnapper.module.css';
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 
-export type FormValues = {
-  andreKriterie: {
-    inkluder: AndreKriterierType[];
-    ekskluder: AndreKriterierType[];
-  };
-};
+import styles from './AvOgPåKnapper.module.css';
 
 enum FilterStatus {
   PLUS = 'PLUS',

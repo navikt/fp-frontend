@@ -35,6 +35,12 @@ export const IngenSaksbehandlere: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      behandlingTyper: [],
+      fagsakYtelseTyper: [],
+      sortering: {
+        sorteringType: 'BEHFRIST',
+        periodefilter: 'FAST_PERIODE',
+      },
       sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
       andreKriterie: {
         inkluder: [],
@@ -59,6 +65,12 @@ export const ToSaksbehandlere: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      behandlingTyper: [],
+      fagsakYtelseTyper: [],
+      sortering: {
+        sorteringType: 'BEHFRIST',
+        periodefilter: 'FAST_PERIODE',
+      },
       sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
       andreKriterie: {
         inkluder: [],
@@ -94,6 +106,12 @@ export const TreSaksbehandlere: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      behandlingTyper: [],
+      fagsakYtelseTyper: [],
+      sortering: {
+        sorteringType: 'BEHFRIST',
+        periodefilter: 'FAST_PERIODE',
+      },
       sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
       andreKriterie: {
         inkluder: [],
@@ -185,6 +203,12 @@ export const SaksbehandlereSomErGruppert: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Saksliste 1',
+      behandlingTyper: [],
+      fagsakYtelseTyper: [],
+      sortering: {
+        sorteringType: 'BEHFRIST',
+        periodefilter: 'FAST_PERIODE',
+      },
       sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
       andreKriterie: {
         inkluder: [],

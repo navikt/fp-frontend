@@ -4,13 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import type { FagsakYtelseType } from '@navikt/fp-types';
-
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-
-export type FormValues = {
-  fagsakYtelseTyper: FagsakYtelseType[];
-};
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 
 export const FagsakYtelseTypeVelger = () => {
   const { watch, control, setValue } = useFormContext<FormValues>();

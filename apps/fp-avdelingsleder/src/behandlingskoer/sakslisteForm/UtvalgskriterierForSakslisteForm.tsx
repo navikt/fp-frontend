@@ -6,41 +6,45 @@ import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { AndreKriterierType } from '@navikt/fp-types';
+import type { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-types';
 
 import { lagreUtvalgskriterierForKø, LosUrl } from '../../data/fplosAvdelingslederApi';
 import {
   type AnnetKriterie,
+  type Periodefilter,
   type SakslisteAvdeling,
   type SakslisteDto,
   type TilBeslutter,
 } from '../../typer/sakslisteAvdelingTsType';
 import { AndreKriterierVelger } from './filtrering/AndreKriterierVelger';
-import { type FormValues as AndreKriterieValgKnappFormTypes } from './filtrering/AndreKriterieValgKnapp';
-import {
-  BehandlingstypeVelger,
-  type FormValues as BehandlingstypeVelgerFormValues,
-} from './filtrering/BehandlingstypeVelger';
-import {
-  FagsakYtelseTypeVelger,
-  type FormValues as FagsakYtelseTypeVelgerFormValues,
-} from './filtrering/FagsakYtelseTypeVelger';
-import { type FormValues as TilBeslutterFormValues, TilBeslutterVelger } from './filtrering/TilBeslutterVelger';
-import { type FormValues as SorteringVelgerFormValues, SorteringVelger } from './sortering/SorteringVelger';
+import { BehandlingstypeVelger } from './filtrering/BehandlingstypeVelger';
+import { FagsakYtelseTypeVelger } from './filtrering/FagsakYtelseTypeVelger';
+import { TilBeslutterVelger } from './filtrering/TilBeslutterVelger';
+import { SorteringVelger } from './sortering/SorteringVelger';
 
 import styles from './utvalgskriterierForSakslisteForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength100 = maxLength(100);
 
-type FormValues = {
-  sakslisteId: number;
+export type FormValues = {
   navn: string;
-} & AndreKriterieValgKnappFormTypes &
-  BehandlingstypeVelgerFormValues &
-  FagsakYtelseTypeVelgerFormValues &
-  SorteringVelgerFormValues &
-  TilBeslutterFormValues;
+  behandlingTyper: BehandlingType[];
+  sortering: {
+    sorteringType: KøSortering;
+    periodefilter: Periodefilter;
+    fra: number | null;
+    til: number | null;
+    fomDato: string | null;
+    tomDato: string | null;
+  };
+  fagsakYtelseTyper: FagsakYtelseType[];
+  andreKriterie: {
+    inkluder: AndreKriterierType[];
+    ekskluder: AndreKriterierType[];
+  };
+  tilBeslutter: TilBeslutter;
+};
 
 interface Props {
   valgtSaksliste: SakslisteAvdeling;
@@ -60,7 +64,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
   });
 
   const lagre = (values: FormValues) => {
-    lagreSaksliste(transformValues(values, valgtAvdelingEnhet), {
+    lagreSaksliste(transformValues(values, valgtAvdelingEnhet, valgtSaksliste.sakslisteId), {
       onSuccess: () => {
         formMethods.reset(values);
         void queryClient.invalidateQueries({
@@ -117,10 +121,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
                   <TilBeslutterVelger />
                 </VStack>
                 <AndreKriterierVelger />
-                <SorteringVelger
-                  valgteBehandlingtyper={valgtSaksliste.behandlingTyper}
-                  muligeSorteringer={valgtSaksliste.sorteringTyper}
-                />
+                <SorteringVelger muligeSorteringer={valgtSaksliste.sorteringTyper} />
               </HStack>
             </VStack>
           </div>
@@ -132,13 +133,19 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
 
 const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling): FormValues => {
   return {
-    sakslisteId: valgtSaksliste.sakslisteId,
     navn: valgtSaksliste.navn ?? intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.NyListe' }),
-    sortering: valgtSaksliste.sortering,
+    sortering: {
+      sorteringType: valgtSaksliste.sortering.sorteringType,
+      periodefilter: valgtSaksliste.sortering.periodefilter,
+      fra: valgtSaksliste.sortering.fra ?? null,
+      til: valgtSaksliste.sortering.til ?? null,
+      fomDato: valgtSaksliste.sortering.fomDato ?? null,
+      tomDato: valgtSaksliste.sortering.tomDato ?? null,
+    },
     tilBeslutter: fraAndreKriterierTilBeslutter(valgtSaksliste.andreKriterie),
     andreKriterie: valgtSaksliste.andreKriterie,
-    behandlingTyper: valgtSaksliste.behandlingTyper ?? [],
-    fagsakYtelseTyper: valgtSaksliste.fagsakYtelseTyper ?? [],
+    behandlingTyper: valgtSaksliste.behandlingTyper,
+    fagsakYtelseTyper: valgtSaksliste.fagsakYtelseTyper,
   };
 };
 
@@ -152,8 +159,8 @@ const fraAndreKriterierTilBeslutter = (andreKriterier?: AnnetKriterie): TilBeslu
   }
 };
 
-const transformValues = (values: FormValues, valgtAvdelingEnhet: string): SakslisteDto => {
-  const { tilBeslutter, andreKriterie, ...rest } = values;
+const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslisteId: number): SakslisteDto => {
+  const { tilBeslutter, andreKriterie, sortering, ...rest } = values;
   const inkluder = andreKriterie.inkluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   const ekskluder = andreKriterie.ekskluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   if (tilBeslutter === 'TA_MED') {
@@ -161,12 +168,21 @@ const transformValues = (values: FormValues, valgtAvdelingEnhet: string): Saksli
   } else if (tilBeslutter === 'FJERN') {
     ekskluder.push('TIL_BESLUTTER');
   }
+
   return {
     ...rest,
     andreKriterie: {
       inkluder,
       ekskluder,
     },
+    sortering: {
+      ...sortering,
+      fra: sortering.fra ?? undefined,
+      til: sortering.til ?? undefined,
+      fomDato: sortering.fomDato ?? undefined,
+      tomDato: sortering.tomDato ?? undefined,
+    },
     avdelingEnhet: valgtAvdelingEnhet,
+    sakslisteId: sakslisteId,
   };
 };

@@ -7,25 +7,22 @@ import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import type { KøSorteringFelt, Sortering } from '../../../typer/sakslisteAvdelingTsType';
+import type { KøSorteringFelt } from '../../../typer/sakslisteAvdelingTsType';
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 import { BelopSorteringValg } from './BelopSorteringValg';
 import { DatoSorteringValg } from './DatoSorteringValg';
 
-export type FormValues = {
-  sortering?: Sortering;
-};
-
 interface Props {
-  valgteBehandlingtyper?: string[];
   muligeSorteringer: KøSorteringFelt[];
 }
 
-export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Props) => {
-  const { resetField, control, watch } = useFormContext<FormValues>();
+export const SorteringVelger = ({ muligeSorteringer }: Props) => {
+  const { setValue, control, watch } = useFormContext<FormValues>();
 
   const sorteringKoder = useLosKodeverk('KøSortering');
 
-  const values = watch('sortering');
+  const valgtBehandlingstyper = watch('behandlingTyper');
+  const sorteringstype = watch('sortering.sorteringType');
 
   return (
     <VStack padding="space-20">
@@ -34,24 +31,24 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
         control={control}
         legend={<FormattedMessage id="SorteringVelger.Sortering" />}
         onChange={() => {
-          resetField('sortering.fra');
-          resetField('sortering.til');
-          resetField('sortering.fomDato', { defaultValue: '' });
-          resetField('sortering.tomDato', { defaultValue: '' });
-          resetField('sortering.periodefilter', { defaultValue: 'FAST_PERIODE' });
+          setValue('sortering.fra', null, { shouldValidate: true });
+          setValue('sortering.til', null, { shouldValidate: true });
+          setValue('sortering.fomDato', null, { shouldValidate: true });
+          setValue('sortering.tomDato', null, { shouldValidate: true });
+          setValue('sortering.periodefilter', 'FAST_PERIODE');
         }}
       >
         {muligeSorteringer
           .filter(
             koSortering =>
-              koSortering.feltKategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
+              koSortering.feltKategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgtBehandlingstyper),
           )
           .map(koSortering => (
             <VStack key={koSortering.sorteringType} gap="space-2">
               <Radio value={koSortering.sorteringType} size="small">
                 {notEmpty(sorteringKoder.find(k => k.kode === koSortering.sorteringType)?.navn, 'Mangler kodeverk')}
               </Radio>
-              {values?.sorteringType === koSortering.sorteringType && (
+              {sorteringstype === koSortering.sorteringType && (
                 <>
                   {koSortering.feltType === 'DATO' && <DatoSorteringValg />}
                   {koSortering.feltType === 'HELTALL' && <BelopSorteringValg />}
@@ -64,5 +61,5 @@ export const SorteringVelger = ({ valgteBehandlingtyper, muligeSorteringer }: Pr
   );
 };
 
-const bareTilbakekrevingValgt = (valgteBehandlingtyper?: string[]) =>
-  valgteBehandlingtyper?.every(type => ['BT-007', 'BT-009'].includes(type));
+export const bareTilbakekrevingValgt = (valgteBehandlingtyper: string[]) =>
+  valgteBehandlingtyper.length > 0 && valgteBehandlingtyper.every(type => ['BT-007', 'BT-009'].includes(type));
