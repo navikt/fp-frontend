@@ -7,10 +7,10 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
 import { type SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { SakslisteAvdeling } from '@navikt/fp-types';
 
 import { grupperOptions } from '../../data/fplosAvdelingslederApi';
 import type { SaksbehandlerGruppe } from '../../typer/saksbehandlereOgSaksbehandlerGrupper';
-import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
 import { type FormValues, ValgAvSaksbehandlere } from './ValgAvSaksbehandlere';
 
 interface Props {

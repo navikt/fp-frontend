@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Button, Dialog } from '@navikt/ds-react';
 
-import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
+import type { SakslisteAvdeling } from '@navikt/fp-types';
 
 interface Props {
   valgtSaksliste: SakslisteAvdeling;

@@ -5,11 +5,10 @@ import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, Link, Table, VStack } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { LosKodeverkMedNavn } from '@navikt/fp-types';
+import type { LosKodeverkMedNavn, SakslisteAvdeling } from '@navikt/fp-types';
 
 import { LosUrl, slettSaksliste } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
-import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { OppgaverGrafDialog } from './OppgaverGrafDialog';
 import { SletteSakslisteModal } from './SletteSakslisteModal';
 

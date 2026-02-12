@@ -4,14 +4,14 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import type { ReservasjonStatus } from '@navikt/fp-los-felles';
+import type { SakslisteAvdeling } from '@navikt/fp-types';
 
 import { reserverOppgavePost, sakslisteOptions } from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
 import type { Oppgave } from '../typer/oppgaveTsType';
-import type { Saksliste } from '../typer/sakslisteTsType';
 import { SakslistePanel } from './SakslistePanel';
 
-const EMPTY_ARRAY: Saksliste[] = [];
+const EMPTY_ARRAY: SakslisteAvdeling[] = [];
 
 interface Props {
   valgtSakslisteId?: number;

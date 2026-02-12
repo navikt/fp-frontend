@@ -2,12 +2,11 @@ import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
 import type { ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import type { AlleKodeverkLos, FagsakEnkel } from '@navikt/fp-types';
+import type { AlleKodeverkLos, FagsakEnkel, SakslisteAvdeling } from '@navikt/fp-types';
 
 import type { Driftsmelding } from '../typer/driftsmeldingTsType';
 import type { Oppgave, OppgaveMedStatus } from '../typer/oppgaveTsType';
 import type { Saksbehandler } from '../typer/saksbehandlerTsType';
-import type { Saksliste } from '../typer/sakslisteTsType';
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -97,7 +96,7 @@ export const driftsmeldingerOptions = () =>
 export const sakslisteOptions = () =>
   queryOptions({
     queryKey: [LosUrl.SAKSLISTE],
-    queryFn: () => kyExtended.get(LosUrl.SAKSLISTE).json<Saksliste[]>(),
+    queryFn: () => kyExtended.get(LosUrl.SAKSLISTE).json<SakslisteAvdeling[]>(),
   });
 
 export const reserverteOppgaverOptions = () =>

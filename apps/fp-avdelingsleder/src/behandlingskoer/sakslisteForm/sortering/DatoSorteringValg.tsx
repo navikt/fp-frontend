@@ -14,7 +14,8 @@ import { ArrowBox, DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
-import { type Periodefilter } from '../../../typer/sakslisteAvdelingTsType';
+import type { Periodefilter } from '@navikt/fp-types';
+
 import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 
 import styles from './sorteringVelger.module.css';

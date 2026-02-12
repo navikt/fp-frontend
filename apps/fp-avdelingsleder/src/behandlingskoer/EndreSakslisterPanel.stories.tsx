@@ -11,9 +11,9 @@ import {
   urlEncodeNorskeBokstaver,
   withQueryClient,
 } from '@navikt/fp-storybook-utils';
+import type { SakslisteAvdeling } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
-import { type SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
 
 import messages from '../../i18n/nb_NO.json';
