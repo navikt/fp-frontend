@@ -1,7 +1,7 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Label, Table } from '@navikt/ds-react';
+import { BodyShort, Button, Label, Table } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
@@ -9,8 +9,6 @@ import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import { LosUrl, slettGruppe } from '../data/fplosAvdelingslederApi';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
 import { GruppeSaksbehandlere } from './GruppeSaksbehandlere';
-
-import styles from './grupperTabell.module.css';
 
 interface Props {
   valgAvdeldingEnhet: string;
@@ -20,6 +18,7 @@ interface Props {
 
 export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbehandlere }: Props) => {
   const queryClient = useQueryClient();
+  const intl = useIntl();
 
   const { mutate: fjernGruppe } = useMutation({
     mutationFn: (valuesToStore: { gruppeId: number }) => slettGruppe(valuesToStore.gruppeId, valgAvdeldingEnhet),
@@ -44,12 +43,14 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
                 <FormattedMessage id="GrupperTabell.Id" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col">
-                <FormattedMessage id="GrupperTabell.Navn" />
+                <FormattedMessage id="Label.Navn" />
               </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="GrupperTabell.AntallSaksbehandlere" />
+              <Table.HeaderCell scope="col" align="right">
+                <FormattedMessage id="Label.AntallSaksbehandlere" />
               </Table.HeaderCell>
-              <Table.HeaderCell />
+              <Table.HeaderCell scope="col" align="right">
+                <FormattedMessage id="Label.Slett" />
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -67,12 +68,18 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
               >
                 <Table.DataCell scope="row">{saksbehandlerGruppe.gruppeId}</Table.DataCell>
                 <Table.DataCell>{saksbehandlerGruppe.gruppeNavn ?? '-'}</Table.DataCell>
-                <Table.DataCell>{saksbehandlerGruppe.saksbehandlere.length}</Table.DataCell>
-                <Table.DataCell>
-                  <XMarkIcon
-                    className={styles['removeIcon']}
-                    onMouseDown={() => fjernGruppe({ gruppeId: saksbehandlerGruppe.gruppeId })}
-                    onKeyDown={() => fjernGruppe({ gruppeId: saksbehandlerGruppe.gruppeId })}
+                <Table.DataCell align="right">{saksbehandlerGruppe.saksbehandlere.length}</Table.DataCell>
+                <Table.DataCell align="right">
+                  <Button
+                    variant="tertiary"
+                    data-color="danger"
+                    size="small"
+                    title={intl.formatMessage(
+                      { id: 'GrupperTabell.SlettGruppe' },
+                      { navn: saksbehandlerGruppe.gruppeNavn },
+                    )}
+                    icon={<XMarkIcon aria-hidden />}
+                    onClick={() => fjernGruppe({ gruppeId: saksbehandlerGruppe.gruppeId })}
                   />
                 </Table.DataCell>
               </Table.ExpandableRow>

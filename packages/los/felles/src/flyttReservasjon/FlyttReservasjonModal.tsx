@@ -1,27 +1,22 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { BodyShort, Button, HStack, Label, Modal as NavModal, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Modal, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { createIntl } from '@navikt/ft-utils';
 
 import type { SaksbehandlerProfil } from '../typer/saksbehandlerProfilTsType';
 
-import styles from './flyttReservasjonModal.module.css';
+import messages from '../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 const minLength3 = minLength(3);
 const maxLength500 = maxLength(500);
 const minLength7 = minLength(7);
 const maxLength7 = maxLength(7);
-
-const formatText = (intl: IntlShape, saksbehandler?: SaksbehandlerProfil): string => {
-  if (!saksbehandler) {
-    return intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesIkke' });
-  }
-
-  return `${saksbehandler.navn}`;
-};
 
 type SøkFormValues = {
   brukerIdent: string;
@@ -56,8 +51,6 @@ export const FlyttReservasjonModal = ({
   saksbehandler,
   resetHentSaksbehandler,
 }: Props) => {
-  const intl = useIntl();
-
   useEffect(
     () => () => {
       resetHentSaksbehandler();
@@ -74,81 +67,75 @@ export const FlyttReservasjonModal = ({
   const begrunnelseValue = lagreFormMethods.watch('begrunnelse');
 
   return (
-    <NavModal
-      className={styles['modal']}
-      open
-      aria-label={intl.formatMessage({ id: 'FlyttReservasjonModal.FlyttReservasjon' })}
-      onClose={closeModal}
-    >
-      <NavModal.Header>
-        <Label size="small">
-          <FormattedMessage id="FlyttReservasjonModal.FlyttReservasjon" />
-        </Label>
-      </NavModal.Header>
-      <NavModal.Body>
-        <VStack gap="space-16">
-          <RhfForm
-            formMethods={søkFormMethods}
-            onSubmit={(formValues: SøkFormValues) => hentSaksbehandler(formValues.brukerIdent)}
-          >
-            <HStack gap="space-16" align="end">
-              <RhfTextField
-                name="brukerIdent"
-                control={søkFormMethods.control}
-                label={intl.formatMessage({ id: 'FlyttReservasjonModal.Brukerident' })}
-                validate={[required, minLength7, maxLength7]}
-                autoFocus
+    <RawIntlProvider value={intl}>
+      <Modal
+        open
+        onClose={closeModal}
+        header={{ heading: intl.formatMessage({ id: 'FlyttReservasjonModal.FlyttReservasjon' }), size: 'small' }}
+      >
+        <Modal.Body>
+          <VStack gap="space-16">
+            <RhfForm
+              formMethods={søkFormMethods}
+              onSubmit={(formValues: SøkFormValues) => hentSaksbehandler(formValues.brukerIdent)}
+            >
+              <HStack gap="space-16" align="end">
+                <RhfTextField
+                  name="brukerIdent"
+                  control={søkFormMethods.control}
+                  label={<FormattedMessage id="FlyttReservasjonModal.Brukerident" />}
+                  validate={[required, minLength7, maxLength7]}
+                  autoFocus
+                />
+                <Button
+                  size="small"
+                  variant="primary"
+                  loading={hentSaksbehandlerIsPending}
+                  disabled={!brukerIdentValue || hentSaksbehandlerIsPending}
+                >
+                  <FormattedMessage id="FlyttReservasjonModal.Sok" />
+                </Button>
+              </HStack>
+              {hentSaksbehandlerIsSuccess && (
+                <BodyShort size="small">
+                  {saksbehandler?.navn ?? <FormattedMessage id="LeggTilSaksbehandlerForm.FinnesIkke" />}
+                </BodyShort>
+              )}
+            </RhfForm>
+            <RhfForm
+              formMethods={lagreFormMethods}
+              onSubmit={values => {
+                closeModal();
+                flyttOppgavereservasjon({
+                  brukerIdent: saksbehandler ? saksbehandler.brukerIdent : '',
+                  begrunnelse: values.begrunnelse,
+                });
+              }}
+            >
+              <RhfTextarea
+                name="begrunnelse"
+                control={lagreFormMethods.control}
+                label={<FormattedMessage id="FlyttReservasjonModal.Begrunn" />}
+                validate={[required, maxLength500, minLength3, hasValidText]}
+                maxLength={500}
               />
-              <Button
-                size="small"
-                variant="primary"
-                loading={hentSaksbehandlerIsPending}
-                disabled={!brukerIdentValue || hentSaksbehandlerIsPending}
-              >
-                <FormattedMessage id="FlyttReservasjonModal.Sok" />
-              </Button>
-            </HStack>
-            {hentSaksbehandlerIsSuccess && <BodyShort size="small">{formatText(intl, saksbehandler)}</BodyShort>}
-          </RhfForm>
-          <RhfForm
-            formMethods={lagreFormMethods}
-            onSubmit={values => {
-              closeModal();
-              flyttOppgavereservasjon({
-                brukerIdent: saksbehandler ? saksbehandler.brukerIdent : '',
-                begrunnelse: values.begrunnelse,
-              });
-            }}
-          >
-            <RhfTextarea
-              name="begrunnelse"
-              control={lagreFormMethods.control}
-              label={intl.formatMessage({ id: 'FlyttReservasjonModal.Begrunn' })}
-              validate={[required, maxLength500, minLength3, hasValidText]}
-              maxLength={500}
-            />
-            <HStack gap="space-8" justify="end">
-              <Button
-                className={styles['cancelButton']}
-                size="small"
-                variant="secondary"
-                onClick={closeModal}
-                type="button"
-              >
-                <FormattedMessage id="FlyttReservasjonModal.Avbryt" />
-              </Button>
-              <Button
-                className={styles['submitButton']}
-                size="small"
-                variant="primary"
-                disabled={!saksbehandler || !begrunnelseValue || begrunnelseValue.length < 3}
-              >
-                <FormattedMessage id="FlyttReservasjonModal.Ok" />
-              </Button>
-            </HStack>
-          </RhfForm>
-        </VStack>
-      </NavModal.Body>
-    </NavModal>
+              <HStack gap="space-8" justify="end">
+                <Button size="small" variant="secondary" onClick={closeModal} type="button">
+                  <FormattedMessage id="Label.Avbryt" />
+                </Button>
+                <Button
+                  type="submit"
+                  size="small"
+                  variant="primary"
+                  disabled={!saksbehandler || !begrunnelseValue || begrunnelseValue.length < 3}
+                >
+                  <FormattedMessage id="Label.Ok" />
+                </Button>
+              </HStack>
+            </RhfForm>
+          </VStack>
+        </Modal.Body>
+      </Modal>
+    </RawIntlProvider>
   );
 };

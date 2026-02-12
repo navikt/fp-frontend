@@ -29,10 +29,10 @@ export const SletteSakslisteModal = ({ valgtSaksliste, cancel, submit }: Props) 
         </Dialog.Header>
         <Dialog.Footer>
           <Button size="small" variant="secondary" onClick={cancel} type="button">
-            <FormattedMessage id="SletteSakslisteModal.Nei" />
+            <FormattedMessage id="Label.Nei" />
           </Button>
           <Button size="small" variant="primary" onClick={() => submit(valgtSaksliste)} autoFocus type="button">
-            <FormattedMessage id="SletteSakslisteModal.Ja" />
+            <FormattedMessage id="Label.Ja" />
           </Button>
         </Dialog.Footer>
       </Dialog.Popup>

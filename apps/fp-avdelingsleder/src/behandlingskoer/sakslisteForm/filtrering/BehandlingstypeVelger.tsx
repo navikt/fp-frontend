@@ -21,7 +21,7 @@ export const BehandlingstypeVelger = () => {
   return (
     <VStack gap="space-4">
       <Label size="small">
-        <FormattedMessage id="BehandlingstypeVelger.Behandlingstype" />
+        <FormattedMessage id="Label.Behandlingstype" />
       </Label>
       {behandlingTyper.map(bt => {
         const kode = bt.kode;

@@ -107,7 +107,8 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
                 title={intl.formatMessage({ id: 'OppgaveHandlingerMenu.OppgaveHandlinger' })}
               />
             }
-            size="small" />
+            size="small"
+          />
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group aria-label={intl.formatMessage({ id: 'OppgaveHandlingerMenu.Meny' })}>

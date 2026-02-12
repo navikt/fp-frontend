@@ -34,7 +34,6 @@ describe('GjeldendeSakslisterTabell', () => {
     expect(headerRow).toHaveTextContent('Antall saksbehandlere');
     expect(headerRow).toHaveTextContent('Alle oppgaver');
     expect(headerRow).toHaveTextContent('Reserverte oppgaver');
-    expect(headerRow).toHaveTextContent('Graf');
 
     const dataRow = rows[1]!;
     expect(dataRow).toHaveTextContent('Saksliste 1');
@@ -65,7 +64,7 @@ describe('GjeldendeSakslisterTabell', () => {
     render(<TabellNårDetFinnesEnBehandlingskø />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('img')[2]!);
+    await userEvent.click(screen.getByTitle('Slett saksliste Saksliste 1'));
 
     expect(await screen.findByText('Ønsker du å slette Saksliste 1?')).toBeInTheDocument();
 

@@ -67,8 +67,7 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
           {/* TODO (TOR) Denne selecten bør flyttast til dekoratøren */}
           <Select
             size="small"
-            hideLabel
-            label=""
+            label={<FormattedMessage id="AvdelingslederIndex.Avdeling" />}
             onChange={e => {
               const index = e.target.value;
               setValueInLocalStorage('avdelingEnhet', index);

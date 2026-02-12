@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Label, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
+import { Button, HStack, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
@@ -138,36 +139,36 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
           />
 
           <VStack gap="space-8">
-            <Label size="small">
-              <FormattedMessage id="GruppeSaksbehandlere.ValgteSaksbehandlere" />
-            </Label>
-            {sorterteGrupperteSaksbehandlere.length === 0 && (
-              <BodyShort size="small">
-                <FormattedMessage id="GruppeSaksbehandlere.Ingen" />
-              </BodyShort>
-            )}
-            {sorterteGrupperteSaksbehandlere.map(saksbehandler => (
-              <HStack gap="space-8" align="center" key={saksbehandler.brukerIdent}>
-                <div>{`${saksbehandler.navn} (${saksbehandler.brukerIdent})`}</div>
-                <div>
-                  <XMarkIcon
-                    className={styles['removeIcon']}
-                    onMouseDown={() =>
-                      fjernSaksbehandler({
-                        brukerIdent: saksbehandler.brukerIdent,
-                        gruppeId: saksbehandlerGruppe.gruppeId,
-                      })
-                    }
-                    onKeyDown={() =>
-                      fjernSaksbehandler({
-                        brukerIdent: saksbehandler.brukerIdent,
-                        gruppeId: saksbehandlerGruppe.gruppeId,
-                      })
-                    }
-                  />
-                </div>
-              </HStack>
-            ))}
+            <LabeledValue
+              size="small"
+              label={<FormattedMessage id="GruppeSaksbehandlere.ValgteSaksbehandlere" />}
+              value={
+                <>
+                  {sorterteGrupperteSaksbehandlere.length === 0 && <FormattedMessage id="GruppeSaksbehandlere.Ingen" />}
+                  {sorterteGrupperteSaksbehandlere.map(saksbehandler => (
+                    <HStack as="span" gap="space-8" align="center" key={saksbehandler.brukerIdent}>
+                      {`${saksbehandler.navn} (${saksbehandler.brukerIdent})`}
+                      <Button
+                        variant="tertiary"
+                        data-color="danger"
+                        size="small"
+                        title={intl.formatMessage(
+                          { id: 'GruppeSaksbehandlere.SlettSaksbehandler' },
+                          { navn: saksbehandler.navn },
+                        )}
+                        icon={<XMarkIcon aria-hidden />}
+                        onClick={() =>
+                          fjernSaksbehandler({
+                            brukerIdent: saksbehandler.brukerIdent,
+                            gruppeId: saksbehandlerGruppe.gruppeId,
+                          })
+                        }
+                      />
+                    </HStack>
+                  ))}
+                </>
+              }
+            />
           </VStack>
         </VStack>
       </VStack>

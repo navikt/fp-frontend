@@ -2,28 +2,8 @@
   background-color: var(--ax-neutral-200);
 }
 
-.addCircleIcon,
 .imageText {
   display: inline-block;
   margin-right: 1ex;
   vertical-align: text-bottom;
-}
-
-.grayBox {
-  background-color: var(--ax-neutral-200);
-  padding: 5px 15px 5px 15px;
-}
-
-.margin {
-  margin-left: auto;
-}
-
-.addPeriode {
-  cursor: pointer;
-  width: 200px;
-}
-
-.removeImage {
-  color: var(--ax-danger-500);
-  margin-top: 5px;
 }

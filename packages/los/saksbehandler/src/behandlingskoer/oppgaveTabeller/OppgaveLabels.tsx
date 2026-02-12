@@ -24,14 +24,16 @@ export const OppgaveLabels = ({ oppgave }: Props) => {
         data-color="success"
         size="small"
         variant="outline"
-        title={fagsakYtelseTyper.find(b => b.kode === oppgave.fagsakYtelseType)?.navn}>
+        title={fagsakYtelseTyper.find(b => b.kode === oppgave.fagsakYtelseType)?.navn}
+      >
         {oppgave.fagsakYtelseType}
       </Tag>
       <Tag
         data-color="danger"
         size="small"
         variant="outline"
-        title={behandlingTyper.find(b => b.kode === oppgave.behandlingstype)?.navn}>
+        title={behandlingTyper.find(b => b.kode === oppgave.behandlingstype)?.navn}
+      >
         {hentAlleBehandlingstypeKortnavn(intl)[oppgave.behandlingstype]}
       </Tag>
       {oppgave.andreKriterier.sort(sorterAndreKriterier).map(kode => (

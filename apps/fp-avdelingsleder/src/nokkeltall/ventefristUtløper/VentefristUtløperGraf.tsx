@@ -1,7 +1,14 @@
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-import { ReactECharts } from '@navikt/fp-los-felles';
+import {
+  createBarSeries,
+  createToolboxWithFilename,
+  formaterMånedÅr,
+  getAkselVariable,
+  getStyle,
+  ReactECharts,
+} from '@navikt/fp-los-felles';
 
 import type { BehandlingVentefrist } from '../../typer/behandlingVentefristTsType';
 
@@ -20,45 +27,45 @@ interface Props {
 export const VentefristUtløperGraf = ({ height, behandlingerPaVent }: Props) => {
   const koordinater = lagKoordinater(behandlingerPaVent);
   const data = lagDatastruktur(koordinater);
+  const options = getStyle();
   return (
     <ReactECharts
       height={height}
       option={{
+        ...options,
         tooltip: {
+          ...options.tooltip,
           trigger: 'axis',
           axisPointer: {
-            snap: true,
+            type: 'shadow',
             label: {
-              formatter: params => {
-                if (params.axisDimension === 'y') {
-                  return Number.parseInt(params.value as string, 10).toString();
-                }
-                return params.value.toString();
-              },
+              formatter: params => formaterMånedÅr(params.value as string),
             },
           },
         },
-        toolbox: {
-          feature: {
-            saveAsImage: {
-              title: 'Lagre ',
-              name: 'Antall_forstegangsbehandlinger_der_frist_utloper',
-            },
-          },
-        },
+        toolbox: createToolboxWithFilename('Antall_forstegangsbehandlinger_der_frist_utloper'),
         xAxis: {
           type: 'category',
+          axisLabel: {
+            ...options.textStyle,
+            formatter: value => formaterMånedÅr(value),
+          },
         },
         yAxis: {
           type: 'value',
+          axisLabel: {
+            ...options.textStyle,
+          },
         },
         series: [
-          {
+          createBarSeries({
             data,
-            type: 'bar',
-          },
+            color: getAkselVariable('--ax-bg-info-moderate-pressed'),
+            itemStyle: {
+              borderColor: getAkselVariable('--ax-bg-accent-strong'),
+            },
+          }),
         ],
-        color: ['#337c9b'],
       }}
     />
   );

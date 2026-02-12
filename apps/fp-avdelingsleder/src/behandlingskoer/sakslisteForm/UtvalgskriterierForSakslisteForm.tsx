@@ -116,9 +116,9 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
                   <RhfTextField
                     name="navn"
                     control={formMethods.control}
-                    label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Navn' })}
+                    label={<FormattedMessage id="Label.Navn" />}
                     validate={[required, minLength3, maxLength100, hasValidName]}
-                    className={styles['bredde']}
+                    htmlSize={40}
                   />
                   <FagsakYtelseTypeVelger />
                   <BehandlingstypeVelger />

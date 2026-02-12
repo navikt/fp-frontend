@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { ToggleGroup } from '@navikt/ds-react';
+import { ToggleGroup, VStack } from '@navikt/ds-react';
 import { ToggleGroupItem } from '@navikt/ds-react/ToggleGroup';
-import { createIntl } from '@navikt/ft-utils';
+import { capitalizeFirstLetter, createIntl, timeFormat } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
+import { getAkselVariable, getStyle } from '../echartUtils';
 import { ReactECharts } from '../ReactECharts';
 import type { OppgaveFilterStatistikk } from '../typer/oppgaveFilterStatistikk';
 
@@ -24,9 +26,6 @@ interface Props {
 
 export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
   const height = 400;
-  const ledigLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Ledig' });
-  const reserverteLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Reserverte' });
-  const ventendeLabel = intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.PaVent' });
 
   const [tidsintervall, setTidsintervall] = useState<Tidsintervall>(Tidsintervall.UKE);
   const filtrertTidslinje = filtererTidslinjeBasertPåValgIntervall(aktiveOgLedigeTidslinje, tidsintervall);
@@ -51,92 +50,97 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
     sortertOgFiltrertTidslinje.map(o => o.aktive - o.tilgjengelige),
     granularitet,
   );
+  const options = getStyle();
 
   return (
     <RawIntlProvider value={intl}>
-      <ToggleGroup size="small" value={tidsintervall} onChange={value => setTidsintervall(value as Tidsintervall)}>
-        <ToggleGroupItem value="måned">
-          <FormattedMessage id="AktiveOgTilgjengeligeOppgaverGraf.SisteMåned" />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="uke">
-          <FormattedMessage id="AktiveOgTilgjengeligeOppgaverGraf.SisteUke" />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="dag">
-          <FormattedMessage id="AktiveOgTilgjengeligeOppgaverGraf.SisteDag" />
-        </ToggleGroupItem>
-      </ToggleGroup>
-      <ReactECharts
-        key={`chart-${aktiveOgLedigeTidslinje.length}`}
-        height={height}
-        option={{
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-              type: 'shadow',
+      <VStack gap="space-16">
+        <ToggleGroup size="small" value={tidsintervall} onChange={value => setTidsintervall(value as Tidsintervall)}>
+          <ToggleGroupItem value="måned">
+            <FormattedMessage id="AktiveOgTilgjengeligeOppgaverGraf.SisteMåned" />
+          </ToggleGroupItem>
+          <ToggleGroupItem value="uke">
+            <FormattedMessage id="AktiveOgTilgjengeligeOppgaverGraf.SisteUke" />
+          </ToggleGroupItem>
+          <ToggleGroupItem value="dag">
+            <FormattedMessage id="AktiveOgTilgjengeligeOppgaverGraf.SisteDag" />
+          </ToggleGroupItem>
+        </ToggleGroup>
+        <ReactECharts
+          key={`chart-${aktiveOgLedigeTidslinje.length}`}
+          height={height}
+          option={{
+            ...options,
+            grid: {
+              ...options.grid,
+              left: '0%',
+              right: '0%',
             },
-          },
-          legend: {
-            data: [ledigLabel, reserverteLabel, ventendeLabel],
-          },
-          xAxis: {
-            name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.xAkse' }),
-            type: 'category',
-            data: sampletTidspunkter,
-            boundaryGap: true,
-            axisLabel: {
-              formatter: (value: string) => {
-                const date = new Date(value);
-                if (tidsintervall === 'dag') {
-                  return date.toLocaleTimeString('no-NO', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  });
-                } else if (tidsintervall === 'uke') {
-                  return date.toLocaleDateString('no-NO', {
-                    weekday: 'short',
-                    day: '2-digit',
-                    month: '2-digit',
-                  });
-                } else {
-                  return date.toLocaleDateString('no-NO', {
-                    day: '2-digit',
-                    month: 'short',
-                  });
-                }
+            tooltip: {
+              ...options.tooltip,
+              trigger: 'axis',
+              axisPointer: {
+                type: 'shadow',
+                label: {
+                  formatter: param => capitalizeFirstLetter(dayjs(param.value).format('dddd DD.MM.YYYY')),
+                },
               },
             },
-          },
-          yAxis: {
-            type: 'value',
-            name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.yAkse' }),
-            scale: true,
-          },
-          series: [
-            {
-              name: ventendeLabel,
-              type: 'line',
-              data: sampletVentendeData,
-              stack: 'total',
-              areaStyle: {},
+            xAxis: {
+              name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.xAkse' }),
+              type: 'category',
+              data: sampletTidspunkter,
+              axisLabel: {
+                ...options.textStyle,
+                formatter: (value: string) => {
+                  const date = dayjs(value);
+                  if (tidsintervall === 'dag') {
+                    return timeFormat(value);
+                  } else if (tidsintervall === 'uke') {
+                    return date.format('ddd DD.MM');
+                  } else {
+                    return date.format('DD.MM');
+                  }
+                },
+              },
             },
-            {
-              name: reserverteLabel,
-              type: 'line',
-              data: sampletReserverteData,
-              stack: 'total',
-              areaStyle: {},
+            yAxis: {
+              axisLabel: {
+                ...options.textStyle,
+              },
+              type: 'value',
+              name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.yAkse' }),
+              scale: true,
             },
-            {
-              name: ledigLabel,
-              type: 'line',
-              data: sampletLedigeData,
-              stack: 'total',
-              areaStyle: {},
-            },
-          ],
-          color: ['#a8d5ba', '#7ec8c2', '#7bbbcd'],
-        }}
-      />
+            series: [
+              {
+                name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.PaVent' }),
+                type: 'line',
+                data: sampletVentendeData,
+                stack: 'total',
+                areaStyle: {},
+                color: getAkselVariable('--ax-bg-accent-moderate-pressed'),
+              },
+              {
+                name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Reserverte' }),
+                type: 'line',
+                data: sampletReserverteData,
+                stack: 'total',
+                areaStyle: {},
+                color: getAkselVariable('--ax-bg-warning-moderate-hover'),
+              },
+              {
+                name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Ledig' }),
+                type: 'line',
+                data: sampletLedigeData,
+                stack: 'total',
+                areaStyle: {},
+                color: getAkselVariable('--ax-bg-success-moderate-pressed'),
+              },
+            ],
+          }}
+        />
+      </VStack>
     </RawIntlProvider>
   );
 };
