@@ -34,7 +34,7 @@ describe('OppgaveHandlingerMenu', () => {
 
     await userEvent.click(screen.getByText('Forleng reservasjon (24t)'));
 
-    expect(await screen.findAllByText('Behandlingen er reservert på deg')).toHaveLength(2);
+    expect(await screen.findByText('Behandlingen er reservert på deg')).toBeInTheDocument();
   });
 
   it('skal åpne modal for å reservere med dato', async () => {
