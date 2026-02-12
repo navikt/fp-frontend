@@ -112,11 +112,6 @@
   "ReservasjonerTabell.IngenReservasjoner": "Ingen reservasjoner funnet",
   "ReservasjonerTabell.SlettReservasjon": "Slett reservasjon {oppgaveId}",
 
-  "OppgaveReservasjonEndringDatoModal.Header": "Velg dato som reservasjonen avsluttes",
-
-  "FlyttReservasjonModal.FlyttReservasjon": "Flytt reservasjonen til annen saksbehandler",
-  "FlyttReservasjonModal.Begrunn": "Begrunn flytting av reservasjonen",
-
   "SaksbehandlereTabell.AnsattVed": "Ansatt ved avdeling",
   "SaksbehandlereTabell.IngenSaksbehandlere": "Ingen saksbehandlere lagt til",
   "SaksbehandlereTabell.SlettSaksbehandler": "Slett {navn}",
