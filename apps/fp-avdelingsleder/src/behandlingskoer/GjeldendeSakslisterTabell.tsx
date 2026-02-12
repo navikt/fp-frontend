@@ -48,6 +48,13 @@ const formatBehandlingstyper = (
     .join(', ');
 };
 
+const reserverteOppgaver = (saksliste: SakslisteAvdeling) => {
+  if (saksliste.gjeldendeStatistikk === undefined) {
+    return '-';
+  }
+  return saksliste.gjeldendeStatistikk.alleOppgaver - saksliste.gjeldendeStatistikk.tilgjengeligeOppgaver;
+};
+
 interface Props {
   sakslister: SakslisteAvdeling[];
   setValgtSakslisteId: (sakslisteId?: number) => void;
@@ -144,7 +151,7 @@ export const GjeldendeSakslisterTabell = ({
                 <FormattedMessage id="GjeldendeSakslisterTabell.AntallOppgaver" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col">
-                <FormattedMessage id="GjeldendeSakslisterTabell.AntallTilgjengelige" />
+                <FormattedMessage id="GjeldendeSakslisterTabell.AntallReserverte" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col">
                 <FormattedMessage id="GjeldendeSakslisterTabell.Graf" />
@@ -168,7 +175,7 @@ export const GjeldendeSakslisterTabell = ({
                 <Table.DataCell>{saksliste.saksbehandlerIdenter.length}</Table.DataCell>
                 <Table.DataCell>{saksliste.gjeldendeStatistikk?.behandlingerPåVent ?? '-'}</Table.DataCell>
                 <Table.DataCell>{saksliste.gjeldendeStatistikk?.alleOppgaver ?? '-'}</Table.DataCell>
-                <Table.DataCell>{saksliste.gjeldendeStatistikk?.tilgjengeligeOppgaver ?? '-'}</Table.DataCell>
+                <Table.DataCell>{reserverteOppgaver(saksliste)}</Table.DataCell>
                 <Table.DataCell>
                   <OppgaverGrafDialog saksliste={saksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
                 </Table.DataCell>
