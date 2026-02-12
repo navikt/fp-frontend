@@ -8,7 +8,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { SakslisteAvdeling } from '@navikt/fp-types';
 
 import { lagreSakslisteSaksbehandler, LosUrl } from '../../data/fplosAvdelingslederApi';
-import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
 
 export type FormValues = {
   [key: string]: boolean;
