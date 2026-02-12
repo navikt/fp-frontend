@@ -82,7 +82,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
               axisPointer: {
                 type: 'shadow',
                 label: {
-                  formatter: param => capitalizeFirstLetter(dayjs(param.value).format('dddd MM.DD.YYYY')),
+                  formatter: param => capitalizeFirstLetter(dayjs(param.value).format('dddd DD.MM.YYYY')),
                 },
               },
             },
