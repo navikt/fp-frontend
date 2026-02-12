@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CalendarIcon, PersonGroupIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label, Table, VStack } from '@navikt/ds-react';
@@ -23,6 +23,7 @@ interface Props {
 }
 
 export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
+  const intl = useIntl();
   const [showReservasjonEndringDatoModal, setShowReservasjonEndringDatoModal] = useState(false);
   const [showFlyttReservasjonModal, setShowFlyttReservasjonModal] = useState(false);
   const [valgtReservasjon, setValgtReservasjon] = useState<Reservasjon | undefined>(undefined);
@@ -157,7 +158,14 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                     variant="tertiary"
                     data-color="danger"
                     size="small"
-                    icon={<XMarkIcon title={`Slett reservasjon ${reservasjon.oppgaveId}`} />}
+                    icon={
+                      <XMarkIcon
+                        title={intl.formatMessage(
+                          { id: 'ReservasjonerTabell.SlettReservasjon' },
+                          { oppgaveId: reservasjon.oppgaveId },
+                        )}
+                      />
+                    }
                     onClick={() => opphevOppgaveReservasjon({ oppgaveId: reservasjon.oppgaveId })}
                   />
                 </Table.DataCell>

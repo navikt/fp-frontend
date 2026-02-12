@@ -1,5 +1,5 @@
 import { type KeyboardEvent, type ReactElement, useEffect, useRef, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Detail, HStack, Label, Link, Table, VStack } from '@navikt/ds-react';
@@ -71,6 +71,7 @@ export const GjeldendeSakslisterTabell = ({
   children,
 }: Props) => {
   const queryClient = useQueryClient();
+  const intl = useIntl();
 
   const [valgtSakslisteForSletting, setValgtSakslisteForSletting] = useState<SakslisteAvdeling>();
   const tabRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -183,7 +184,14 @@ export const GjeldendeSakslisterTabell = ({
                         variant="tertiary"
                         data-color="danger"
                         size="small"
-                        icon={<XMarkIcon title={'Slett saksliste ' + saksliste.navn} />}
+                        icon={
+                          <XMarkIcon
+                            title={intl.formatMessage(
+                              { id: 'GjeldendeSakslisterTabell.SlettSaksliste' },
+                              { navn: saksliste.navn },
+                            )}
+                          />
+                        }
                         onClick={() => setValgtSakslisteForSletting(saksliste)}
                       />
                     </div>

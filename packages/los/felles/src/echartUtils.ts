@@ -32,7 +32,7 @@ export const layoutOptions: EChartsOption = {
 export const createToolboxWithFilename = (name: string) => ({
   feature: {
     saveAsImage: {
-      title: 'Lagre ',
+      title: 'Lagre som bilde',
       name,
     },
   },
@@ -53,7 +53,7 @@ export const getStyle = () => {
       borderRadius: 12,
       padding: [16, 20],
       borderWidth: 1,
-      backgroundColor: getAkselVariable('--ax-bg-default'),
+      backgroundColor: getAkselVariable('--ax-bg-raised'),
     },
     textStyle,
     animation: false,
@@ -75,5 +75,3 @@ export const getAkselVariable = (akselVariable: string) => {
   const element = document.body.getElementsByClassName('aksel-theme')[0] ?? document.documentElement;
   return getComputedStyle(element).getPropertyValue(akselVariable);
 };
-
-// aksel-theme dark

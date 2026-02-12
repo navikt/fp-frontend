@@ -56,7 +56,7 @@ export const TilBehandlingGraf = ({ height, oppgaverPerDato, isToUkerValgt, beha
             label: {
               formatter: params => {
                 if (params.axisDimension === 'y') {
-                  return Number.parseInt(params.value as string, 10).toString();
+                  return Number.parseInt(params.value as string, 10).toLocaleString('nb-NO');
                 }
                 return dayjs(params.value).format(DDMMYYYY_DATE_FORMAT);
               },
@@ -120,7 +120,7 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
   periodeStart: dayjs.Dayjs,
   periodeSlutt: dayjs.Dayjs,
 ): Map<BehandlingType, [string, number][]> =>
-  data.entries().reduce((acc, [behandlingstype, behandlingstypeData]) => {
+  Array.from(data.entries()).reduce((acc, [behandlingstype, behandlingstypeData]) => {
     const koordinater: [string, number][] = [];
 
     for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {

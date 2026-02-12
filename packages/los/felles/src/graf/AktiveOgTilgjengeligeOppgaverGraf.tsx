@@ -3,7 +3,7 @@ import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { ToggleGroup, VStack } from '@navikt/ds-react';
 import { ToggleGroupItem } from '@navikt/ds-react/ToggleGroup';
-import { capitalizeFirstLetter, createIntl } from '@navikt/ft-utils';
+import { capitalizeFirstLetter, createIntl, timeFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { getAkselVariable, getStyle } from '../echartUtils';
@@ -50,7 +50,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
     sortertOgFiltrertTidslinje.map(o => o.aktive - o.tilgjengelige),
     granularitet,
   );
-  const { tooltip, ...rest } = getStyle();
+  const options = getStyle();
 
   return (
     <RawIntlProvider value={intl}>
@@ -70,15 +70,14 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
           key={`chart-${aktiveOgLedigeTidslinje.length}`}
           height={height}
           option={{
-            ...rest,
+            ...options,
             grid: {
-              ...rest.grid,
-              top: '5%',
+              ...options.grid,
               left: '0%',
               right: '0%',
             },
             tooltip: {
-              ...tooltip,
+              ...options.tooltip,
               trigger: 'axis',
               axisPointer: {
                 type: 'shadow',
@@ -87,41 +86,27 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
                 },
               },
             },
-            legend: {
-              top: 'top',
-              icon: 'roundRect',
-            },
             xAxis: {
               name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.xAkse' }),
               type: 'category',
               data: sampletTidspunkter,
               axisLabel: {
-                ...rest.textStyle,
+                ...options.textStyle,
                 formatter: (value: string) => {
-                  const date = new Date(value);
+                  const date = dayjs(value);
                   if (tidsintervall === 'dag') {
-                    return date.toLocaleTimeString('nb-NO', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    });
+                    return timeFormat(value);
                   } else if (tidsintervall === 'uke') {
-                    return date.toLocaleDateString('nb-NO', {
-                      weekday: 'short',
-                      day: '2-digit',
-                      month: '2-digit',
-                    });
+                    return date.format('ddd DD.MM');
                   } else {
-                    return date.toLocaleDateString('nb-NO', {
-                      day: '2-digit',
-                      month: 'short',
-                    });
+                    return date.format('DD.MM');
                   }
                 },
               },
             },
             yAxis: {
               axisLabel: {
-                ...rest.textStyle,
+                ...options.textStyle,
               },
               type: 'value',
               name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.yAkse' }),

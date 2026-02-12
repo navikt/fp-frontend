@@ -17,6 +17,7 @@
   "Dekorator.Avdelingsleder": "LOS - Avdelingsleder",
   "Dekorator.Foreldrepenger": "Svangerskap, fødsel og adopsjon",
 
+  "AvdelingslederIndex.Avdeling": "Avdeling",
   "AvdelingslederIndex.Behandlingskoer": "Behandlingskøer",
   "AvdelingslederIndex.Saksbehandlere": "Saksbehandlere",
   "AvdelingslederIndex.Grupper": "Grupper",
@@ -72,8 +73,10 @@
   "GjeldendeSakslisterTabell.AntallReserverte": "Reserverte oppgaver",
   "GjeldendeSakslisterTabell.Graf": "Graf",
   "GjeldendeSakslisterTabell.OppgaverForAvdeling": "Antall åpne behandlinger totalt",
+  "GjeldendeSakslisterTabell.SlettSaksliste": "Slett saksliste {navn}",
 
   "OppgaverGrafDialog.Overskrift": "Antall oppgaver",
+  "OppgaverGrafDialog.VisOppgaveGraf": "Vis oppgave graf",
 
   "AntallOppgaverForSaksliste.HentingAvAntallOppgaverFeilet": "Henting av antall feilet",
   "AntallOppgaverForSaksliste.HentingAvAntallOppgaverHentes": "Henter antall oppgaver for behandlingskøen",
@@ -82,7 +85,7 @@
   "SaksbehandlereForSakslisteForm.Gruppenavn": "Gruppenavn",
   "SaksbehandlereForSakslisteForm.AntallSaksbehandlere": "Antall tilknyttet køen",
   "SaksbehandlereForSakslisteForm.VisAlle": "Alle saksbehandlere",
-  "ValgAvSaksbehandlere.IngenSaksbehandlere" : "Det finnes ingen saksbehandlere i gruppen",
+  "ValgAvSaksbehandlere.IngenSaksbehandlere": "Det finnes ingen saksbehandlere i gruppen",
 
   "SletteSaksbehandlerModal.SletteModal": "Ønsker du å slette saksbehandler?",
   "SletteSaksbehandlerModal.SletteSaksbehandler": "Ønsker du å slette {saksbehandlerNavn}?",
@@ -107,6 +110,7 @@
   "ReservasjonerTabell.Flytt": "Flytt",
   "ReservasjonerTabell.Reservasjoner": "Reservasjoner for avdelingen",
   "ReservasjonerTabell.IngenReservasjoner": "Ingen reservasjoner funnet",
+  "ReservasjonerTabell.SlettReservasjon": "Slett reservasjon {oppgaveId}",
 
   "OppgaveReservasjonEndringDatoModal.Header": "Velg dato som reservasjonen avsluttes",
 
@@ -115,6 +119,7 @@
 
   "SaksbehandlereTabell.AnsattVed": "Ansatt ved avdeling",
   "SaksbehandlereTabell.IngenSaksbehandlere": "Ingen saksbehandlere lagt til",
+  "SaksbehandlereTabell.SlettSaksbehandler": "Slett {navn}",
 
   "OppgaverPerForsteStonadsdagPanel.FordeltPaForsteStonadsdag": "Antall åpne oppgaver for førstegangsbehandlinger fordelt på første stønadsdag - alle ytelser",
 
@@ -125,11 +130,13 @@
   "GrupperTabell.Grupper": "Grupper",
   "GrupperTabell.Id": "Id",
   "GrupperTabell.IngenGrupper": "Ingen grupper",
+  "GrupperTabell.SlettGruppe": "Slett {navn}",
 
   "GruppeSaksbehandlere.ValgteSaksbehandlere": "Valgte saksbehandlere",
   "GruppeSaksbehandlere.Ingen": "Ingen valgte saksbehandlere",
   "GruppeSaksbehandlere.Navn": "Navn på gruppe",
   "GruppeSaksbehandlere.VelgSaksbehandlere": "Velg saksbehandlere",
+  "GruppeSaksbehandlere.SlettSaksbehandler": "Slett {navn}",
 
   "NøkkeltallbokserPanel.Status": "Status",
   "NøkkeltallbokserPanel.TilBeslutter": "{antall} til beslutter",

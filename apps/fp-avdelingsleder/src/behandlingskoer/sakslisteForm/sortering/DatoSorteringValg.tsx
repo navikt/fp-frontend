@@ -38,12 +38,13 @@ export const DatoSorteringValg = () => {
           control={control}
           name="sortering.periodefilter"
           legend={<FormattedMessage id="SorteringVelger.FilterForPeriode" />}
-        onChange={() => {
-              setValue('sortering.fra', null, { shouldValidate: true });
-              setValue('sortering.til', null, { shouldValidate: true });
-              setValue('sortering.fomDato', null, { shouldValidate: true });
-              setValue('sortering.tomDato', null, { shouldValidate: true });
-            }}>
+          onChange={() => {
+            setValue('sortering.fra', null, { shouldValidate: true });
+            setValue('sortering.til', null, { shouldValidate: true });
+            setValue('sortering.fomDato', null, { shouldValidate: true });
+            setValue('sortering.tomDato', null, { shouldValidate: true });
+          }}
+        >
           <Radio value={'FAST_PERIODE' satisfies Periodefilter}>
             <FormattedMessage id="SorteringVelger.FastPeriode" />
           </Radio>

@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label, Table } from '@navikt/ds-react';
@@ -18,6 +18,7 @@ interface Props {
 
 export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbehandlere }: Props) => {
   const queryClient = useQueryClient();
+  const intl = useIntl();
 
   const { mutate: fjernGruppe } = useMutation({
     mutationFn: (valuesToStore: { gruppeId: number }) => slettGruppe(valuesToStore.gruppeId, valgAvdeldingEnhet),
@@ -44,10 +45,10 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
               <Table.HeaderCell scope="col">
                 <FormattedMessage id="Label.Navn" />
               </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
+              <Table.HeaderCell scope="col" align="right">
                 <FormattedMessage id="Label.AntallSaksbehandlere" />
               </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
+              <Table.HeaderCell scope="col" align="right">
                 <FormattedMessage id="Label.Slett" />
               </Table.HeaderCell>
             </Table.Row>
@@ -67,13 +68,20 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
               >
                 <Table.DataCell scope="row">{saksbehandlerGruppe.gruppeId}</Table.DataCell>
                 <Table.DataCell>{saksbehandlerGruppe.gruppeNavn ?? '-'}</Table.DataCell>
-                <Table.DataCell>{saksbehandlerGruppe.saksbehandlere.length}</Table.DataCell>
-                <Table.DataCell>
+                <Table.DataCell align="right">{saksbehandlerGruppe.saksbehandlere.length}</Table.DataCell>
+                <Table.DataCell align="right">
                   <Button
                     variant="tertiary"
                     data-color="danger"
                     size="small"
-                    icon={<XMarkIcon title={`Slett ${saksbehandlerGruppe.gruppeNavn}`} />}
+                    icon={
+                      <XMarkIcon
+                        title={intl.formatMessage(
+                          { id: 'GrupperTabell.SlettGruppe' },
+                          { navn: saksbehandlerGruppe.gruppeNavn },
+                        )}
+                      />
+                    }
                     onClick={() => fjernGruppe({ gruppeId: saksbehandlerGruppe.gruppeId })}
                   />
                 </Table.DataCell>

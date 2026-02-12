@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Table, VStack } from '@navikt/ds-react';
@@ -17,6 +17,7 @@ interface Props {
 
 export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
+  const intl = useIntl();
   const [valgtSaksbehandler, setValgtSaksbehandler] = useState<SaksbehandlerProfil>();
 
   const { mutate: fjernSaksbehandler } = useMutation({
@@ -64,7 +65,7 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
               <Table.HeaderCell scope="col">
                 <FormattedMessage id="SaksbehandlereTabell.AnsattVed" />
               </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
+              <Table.HeaderCell scope="col" align="right">
                 <FormattedMessage id="Label.Slett" />
               </Table.HeaderCell>
             </Table.Row>
@@ -75,12 +76,19 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
                 <Table.DataCell scope="row">{saksbehandler.navn}</Table.DataCell>
                 <Table.DataCell>{saksbehandler.brukerIdent}</Table.DataCell>
                 <Table.DataCell>{saksbehandler.ansattAvdeling}</Table.DataCell>
-                <Table.DataCell>
+                <Table.DataCell align="right">
                   <Button
                     variant="tertiary"
                     data-color="danger"
                     size="small"
-                    icon={<XMarkIcon title={`Slett ${saksbehandler.navn}`} />}
+                    icon={
+                      <XMarkIcon
+                        title={intl.formatMessage(
+                          { id: 'SaksbehandlereTabell.SlettSaksbehandler' },
+                          { navn: saksbehandler.navn },
+                        )}
+                      />
+                    }
                     onClick={() => setValgtSaksbehandler(saksbehandler)}
                   />
                 </Table.DataCell>

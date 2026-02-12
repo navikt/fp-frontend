@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { LineGraphDotIcon } from '@navikt/aksel-icons';
 import { Button, Dialog } from '@navikt/ds-react';
@@ -15,13 +15,14 @@ interface Props {
 }
 
 export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => {
+  const intl = useIntl();
   return (
     <Dialog>
       <Dialog.Trigger>
         <Button
           variant="secondary"
           size="small"
-          icon={<LineGraphDotIcon title="Vis oppgave graf" />}
+          icon={<LineGraphDotIcon title={intl.formatMessage({ id: 'OppgaverGrafDialog.VisOppgaveGraf' })} />}
           disabled={saksliste.gjeldendeStatistikk == null}
         ></Button>
       </Dialog.Trigger>

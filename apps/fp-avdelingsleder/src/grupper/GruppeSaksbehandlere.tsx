@@ -6,6 +6,7 @@ import { XMarkIcon } from '@navikt/aksel-icons';
 import { Button, HStack, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
@@ -20,7 +21,6 @@ import {
 import type { SaksbehandlerGruppe } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
 
 import styles from './gruppeSaksbehandlere.module.css';
-import { LabeledValue } from '@navikt/ft-ui-komponenter';
 
 const minLength3 = minLength(3);
 const maxLength100 = maxLength(100);
@@ -152,7 +152,14 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
                         variant="tertiary"
                         data-color="danger"
                         size="small"
-                        icon={<XMarkIcon title={`Slett ${saksbehandler.navn}`} />}
+                        icon={
+                          <XMarkIcon
+                            title={intl.formatMessage(
+                              { id: 'GruppeSaksbehandlere.SlettSaksbehandler' },
+                              { navn: saksbehandler.navn },
+                            )}
+                          />
+                        }
                         onClick={() =>
                           fjernSaksbehandler({
                             brukerIdent: saksbehandler.brukerIdent,

@@ -1,5 +1,7 @@
 import { useFormContext } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
 
+import { Detail } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -7,8 +9,6 @@ import type { SakslisteAvdeling } from '@navikt/fp-types';
 
 import { lagreSakslisteSaksbehandler, LosUrl } from '../../data/fplosAvdelingslederApi';
 import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
-import { FormattedMessage } from 'react-intl';
-import { Detail } from '@navikt/ds-react';
 
 export type FormValues = {
   [key: string]: boolean;
