@@ -2,3 +2,9 @@
   padding-top: 10px;
   width: 75%;
 }
+
+.columnFirstGrid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(auto-fit, minmax(auto, 1fr));
+}

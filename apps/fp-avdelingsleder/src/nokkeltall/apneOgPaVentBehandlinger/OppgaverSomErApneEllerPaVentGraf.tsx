@@ -1,17 +1,21 @@
-import { type IntlShape, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { ReactECharts } from '@navikt/fp-los-felles';
+import {
+  createBarSeries,
+  createToolboxWithFilename,
+  formaterMånedÅr,
+  getAkselVariable,
+  getStyle,
+  ReactECharts,
+} from '@navikt/fp-los-felles';
 
 import { BehandlingVenteStatus } from '../../kodeverk/behandlingVenteStatus';
 import type { OppgaverSomErApneEllerPaVent } from '../../typer/oppgaverSomErApneEllerPaVentTsType';
 
 const UKJENT_DATO = 'UKJENT_DATO';
-
-const getYearText = (month: number, intl: IntlShape): string =>
-  intl.formatMessage({ id: `OppgaverSomErApneEllerPaVentGraf.${month}` });
 
 interface KoordinatDatoEllerUkjent {
   x: string;
@@ -25,10 +29,7 @@ interface Props {
 
 export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVent }: Props) => {
   const intl = useIntl();
-  const paVentTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.PaVent' });
-  const ikkePaVentTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.IkkePaVent' });
-  const ukjentTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.Ukjent' });
-  const datoTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.Dato' });
+  const ukjentTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.UkjentDato' });
 
   const oppgaverPaVentPerDato = finnAntallPerDato(
     oppgaverApneEllerPaVent.filter(o => o.behandlingVenteStatus === BehandlingVenteStatus.PA_VENT),
@@ -46,12 +47,15 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
     oppgaverIkkePaVentPerDato,
     periodeSlutt,
   );
+  const options = getStyle();
 
   return (
     <ReactECharts
       height={height}
       option={{
+        ...options,
         tooltip: {
+          ...options.tooltip,
           trigger: 'axis',
           axisPointer: {
             type: 'shadow',
@@ -59,80 +63,55 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
               formatter: params => {
                 const dato = dayjs(params.value);
                 if (dato.isSame(periodeSlutt)) {
-                  return `${ukjentTekst} ${datoTekst}`;
+                  return ukjentTekst;
                 }
-                return `${getYearText(dato.month(), intl)} - ${dato.year()}`;
+                return formaterMånedÅr(params.value as string);
               },
             },
           },
         },
-        toolbox: {
-          feature: {
-            saveAsImage: {
-              title: 'Lagre ',
-              name: 'Status_åpne_behandlinger',
-            },
-          },
-        },
-        legend: {
-          data: [paVentTekst, ikkePaVentTekst],
-          top: 'top',
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true,
-        },
+        toolbox: createToolboxWithFilename('Status_åpne_behandlinger'),
         xAxis: [
           {
             type: 'category',
-            boundaryGap: true,
             data: maaneder,
             axisLabel: {
+              ...options.textStyle,
               formatter: value => {
                 const dato = dayjs(value);
                 if (dato.isSame(periodeSlutt)) {
-                  return `${ukjentTekst}\n${datoTekst}`;
+                  return ukjentTekst;
                 }
-                return `${getYearText(dato.month(), intl)}\n${dato.year()}`;
+                return formaterMånedÅr(value);
               },
             },
           },
         ],
-        yAxis: [
-          {
-            type: 'value',
-            name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.AntallGraf' }),
+        yAxis: {
+          type: 'value',
+          name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.AntallGraf' }),
+          axisLabel: {
+            ...options.textStyle,
           },
-        ],
+        },
         series: [
-          {
-            name: ikkePaVentTekst,
-            type: 'bar',
-            stack: 'total',
-            label: {
-              show: true,
-            },
-            emphasis: {
-              focus: 'series',
-            },
+          createBarSeries({
+            name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.IkkePaVent' }),
             data: koordinaterIkkePaVent,
-          },
-          {
-            name: paVentTekst,
-            type: 'bar',
-            stack: 'total',
-            label: {
-              show: true,
+            color: getAkselVariable('--ax-bg-success-moderate-pressed'),
+            itemStyle: {
+              borderColor: getAkselVariable('--ax-bg-success-strong'),
             },
-            emphasis: {
-              focus: 'series',
-            },
+          }),
+          createBarSeries({
+            name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.PaVent' }),
             data: koordinaterPaVent,
-          },
+            color: getAkselVariable('--ax-bg-accent-moderate-pressed'),
+            itemStyle: {
+              borderColor: getAkselVariable('--ax-bg-accent-strong'),
+            },
+          }),
         ],
-        color: ['#38a161', '#85d5f0'],
       }}
     />
   );

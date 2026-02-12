@@ -2,15 +2,13 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Table, VStack } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 
 import { LosUrl, slettSaksbehandler } from '../data/fplosAvdelingslederApi';
 import { SletteSaksbehandlerModal } from './SletteSaksbehandlerModal';
-
-import styles from './saksbehandlereTabell.module.css';
 
 interface Props {
   saksbehandlere: SaksbehandlerProfil[];
@@ -58,15 +56,17 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell scope="col">
-                <FormattedMessage id="SaksbehandlereTabell.Navn" />
+                <FormattedMessage id="Label.Navn" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col">
-                <FormattedMessage id="SaksbehandlereTabell.Brukerident" />
+                <FormattedMessage id="Label.Brukerident" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col">
                 <FormattedMessage id="SaksbehandlereTabell.AnsattVed" />
               </Table.HeaderCell>
-              <Table.HeaderCell scope="col" />
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="Label.Slett" />
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -76,10 +76,12 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
                 <Table.DataCell>{saksbehandler.brukerIdent}</Table.DataCell>
                 <Table.DataCell>{saksbehandler.ansattAvdeling}</Table.DataCell>
                 <Table.DataCell>
-                  <XMarkIcon
-                    className={styles['removeIcon']}
-                    onMouseDown={() => setValgtSaksbehandler(saksbehandler)}
-                    onKeyDown={() => setValgtSaksbehandler(saksbehandler)}
+                  <Button
+                    variant="tertiary"
+                    data-color="danger"
+                    size="small"
+                    icon={<XMarkIcon title={`Slett ${saksbehandler.navn}`} />}
+                    onClick={() => setValgtSaksbehandler(saksbehandler)}
                   />
                 </Table.DataCell>
               </Table.Row>

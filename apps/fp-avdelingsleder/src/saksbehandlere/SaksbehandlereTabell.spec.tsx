@@ -34,7 +34,7 @@ describe('SaksbehandlereTabell', () => {
 
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('img')[1]!);
+    await userEvent.click(screen.getByTitle('Slett Espen Utvikler'));
 
     expect(await screen.findByText('Ønsker du å slette Espen Utvikler?')).toBeInTheDocument();
   });

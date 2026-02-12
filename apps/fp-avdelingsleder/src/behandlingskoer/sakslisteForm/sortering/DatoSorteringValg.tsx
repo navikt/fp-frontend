@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Detail, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
@@ -23,49 +23,47 @@ import styles from './sorteringVelger.module.css';
 dayjs.extend(customParseFormat);
 
 export const DatoSorteringValg = () => {
-  const intl = useIntl();
-
   const { setValue, watch, control } = useFormContext<FormValues>();
   const periodefilter = watch('sortering.periodefilter');
   const fraVerdi = watch('sortering.fra');
   const tilVerdi = watch('sortering.til');
 
   return (
-    <div className={styles['arrowBoxWidth']}>
-      <ArrowBox>
-        <VStack gap="space-8">
-          <Detail>
-            <FormattedMessage id="SorteringVelger.FiltrerPaTidsintervall" />
-          </Detail>
-          <RhfRadioGroup
-            control={control}
-            name="sortering.periodefilter"
-            legend={intl.formatMessage({ id: 'SorteringVelger.FilterForPeriode' })}
-            onChange={() => {
+    <ArrowBox marginTop={4}>
+      <VStack gap="space-8">
+        <Detail>
+          <FormattedMessage id="SorteringVelger.FiltrerPaTidsintervall" />
+        </Detail>
+        <RhfRadioGroup
+          control={control}
+          name="sortering.periodefilter"
+          legend={<FormattedMessage id="SorteringVelger.FilterForPeriode" />}
+        onChange={() => {
               setValue('sortering.fra', null, { shouldValidate: true });
               setValue('sortering.til', null, { shouldValidate: true });
               setValue('sortering.fomDato', null, { shouldValidate: true });
               setValue('sortering.tomDato', null, { shouldValidate: true });
-            }}
-          >
-            <Radio value={'FAST_PERIODE' satisfies Periodefilter}>
-              <FormattedMessage id="SorteringVelger.FastPeriode" />
-            </Radio>
-            <Radio value={'RELATIV_PERIODE_DAGER' satisfies Periodefilter}>
-              <FormattedMessage id="SorteringVelger.RelativPeriodeDag" />
-            </Radio>
-            <Radio value={'RELATIV_PERIODE_MÅNEDER' satisfies Periodefilter}>
-              <FormattedMessage id="SorteringVelger.RelativPeriodeMåned" />
-            </Radio>
-          </RhfRadioGroup>
-          {periodefilter !== 'FAST_PERIODE' && (
-            <HStack gap="space-16">
+            }}>
+          <Radio value={'FAST_PERIODE' satisfies Periodefilter}>
+            <FormattedMessage id="SorteringVelger.FastPeriode" />
+          </Radio>
+          <Radio value={'RELATIV_PERIODE_DAGER' satisfies Periodefilter}>
+            <FormattedMessage id="SorteringVelger.RelativPeriodeDag" />
+          </Radio>
+          <Radio value={'RELATIV_PERIODE_MÅNEDER' satisfies Periodefilter}>
+            <FormattedMessage id="SorteringVelger.RelativPeriodeMåned" />
+          </Radio>
+        </RhfRadioGroup>
+        {periodefilter !== 'FAST_PERIODE' && (
+          <HStack gap="space-16">
+            <HStack gap="space-4">
               <div>
                 <RhfTextField
                   name="sortering.fra"
                   control={control}
-                  className={styles['dato']}
-                  label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
+                  htmlSize={5}
+                  align="right"
+                  label={<FormattedMessage id="SorteringVelger.Fom" />}
                   validate={[hasValidPosOrNegInteger, minValue(-500), maxValue(1100)]}
                 />
                 {fraVerdi && (
@@ -80,17 +78,20 @@ export const DatoSorteringValg = () => {
               </div>
               <Detail className={styles['dager']}>
                 {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
-                  <FormattedMessage id="SorteringVelger.DagerMedBindestrek" />
+                  <FormattedMessage id="SorteringVelger.DagerFrem" />
                 ) : (
-                  <FormattedMessage id="SorteringVelger.MånedMedBindestrek" />
+                  <FormattedMessage id="SorteringVelger.MånederFrem" />
                 )}
               </Detail>
+            </HStack>
+            <HStack gap="space-4">
               <div>
                 <RhfTextField
                   name="sortering.til"
                   control={control}
-                  className={styles['dato']}
-                  label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
+                  htmlSize={5}
+                  align="right"
+                  label={<FormattedMessage id="SorteringVelger.Tom" />}
                   validate={[
                     hasValidPosOrNegInteger,
                     validerTilLikEllerStørreEnnFra(fraVerdi),
@@ -108,37 +109,34 @@ export const DatoSorteringValg = () => {
                   </Detail>
                 )}
               </div>
-              <Detail className={styles['dagerMedBindestrek']}>
+              <Detail className={styles['dager']}>
                 {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
-                  <FormattedMessage id="SorteringVelger.Dager" />
+                  <FormattedMessage id="SorteringVelger.DagerFrem" />
                 ) : (
-                  <FormattedMessage id="SorteringVelger.Måneder" />
+                  <FormattedMessage id="SorteringVelger.MånederFrem" />
                 )}
               </Detail>
             </HStack>
-          )}
-          {periodefilter === 'FAST_PERIODE' && (
-            <HStack gap="space-16">
-              <RhfDatepicker
-                name="sortering.fomDato"
-                control={control}
-                label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
-                validate={[hasValidDate]}
-              />
-              <Detail>
-                <FormattedMessage id="SorteringVelger.Bindestrek" />
-              </Detail>
-              <RhfDatepicker
-                name="sortering.tomDato"
-                control={control}
-                label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
-                validate={[hasValidDate, validerTomDatoLikEllerEtterFomDato(watch('sortering.fomDato'))]}
-              />
-            </HStack>
-          )}
-        </VStack>
-      </ArrowBox>
-    </div>
+          </HStack>
+        )}
+        {periodefilter === 'FAST_PERIODE' && (
+          <HStack gap="space-16">
+            <RhfDatepicker
+              name="sortering.fomDato"
+              control={control}
+              label={<FormattedMessage id="SorteringVelger.Fom" />}
+              validate={[hasValidDate]}
+            />
+            <RhfDatepicker
+              name="sortering.tomDato"
+              control={control}
+              label={<FormattedMessage id="SorteringVelger.Tom" />}
+              validate={[hasValidDate, validerTomDatoLikEllerEtterFomDato(watch('sortering.fomDato'))]}
+            />
+          </HStack>
+        )}
+      </VStack>
+    </ArrowBox>
   );
 };
 

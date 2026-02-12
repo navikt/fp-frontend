@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { CalendarIcon, PersonGroupIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Label, Table, VStack } from '@navikt/ds-react';
-import { getDateAndTime } from '@navikt/ft-utils';
+import { BodyShort, Button, Label, Table, VStack } from '@navikt/ds-react';
+import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { FlyttReservasjonModal, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
@@ -17,8 +17,6 @@ import {
 } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
 import type { Reservasjon } from '../typer/reservasjonTsType';
-
-import styles from './reservasjonerTabell.module.css';
 
 interface Props {
   valgtAvdelingEnhet: string;
@@ -105,13 +103,13 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader>
-                <FormattedMessage id="ReservasjonerTabell.Navn" />
+                <FormattedMessage id="Label.Navn" />
               </Table.ColumnHeader>
               <Table.ColumnHeader>
                 <FormattedMessage id="ReservasjonerTabell.Saksnr" />
               </Table.ColumnHeader>
               <Table.ColumnHeader>
-                <FormattedMessage id="ReservasjonerTabell.BehandlingType" />
+                <FormattedMessage id="Label.Behandlingstype" />
               </Table.ColumnHeader>
               <Table.ColumnHeader>
                 <FormattedMessage id="ReservasjonerTabell.ReservertTil" />
@@ -123,7 +121,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                 <FormattedMessage id="ReservasjonerTabell.Flytt" />
               </Table.ColumnHeader>
               <Table.ColumnHeader>
-                <FormattedMessage id="ReservasjonerTabell.Slett" />
+                <FormattedMessage id="Label.Slett" />
               </Table.ColumnHeader>
             </Table.Row>
           </Table.Header>
@@ -136,23 +134,30 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                   {behandlingTyper.find(t => t.kode === reservasjon.behandlingType)?.navn}
                 </Table.DataCell>
                 <Table.DataCell>
-                  <FormattedMessage
-                    id="ReservasjonerTabell.ReservertTilFormat"
-                    values={getDateAndTime(reservasjon.reservertTilTidspunkt)}
-                  />
+                  <DateTimeLabel dateTimeString={reservasjon.reservertTilTidspunkt} />
                 </Table.DataCell>
                 <Table.DataCell>
-                  <CalendarIcon
-                    className={styles['calendarIcon']}
+                  <Button
+                    variant="tertiary"
+                    size="small"
+                    icon={<CalendarIcon aria-hidden />}
                     onClick={() => showReservasjonEndringDato(reservasjon)}
                   />
                 </Table.DataCell>
                 <Table.DataCell>
-                  <PersonGroupIcon className={styles['flyttIcon']} onClick={() => showFlytteModal(reservasjon)} />
+                  <Button
+                    variant="tertiary"
+                    size="small"
+                    icon={<PersonGroupIcon aria-hidden />}
+                    onClick={() => showFlytteModal(reservasjon)}
+                  />
                 </Table.DataCell>
                 <Table.DataCell>
-                  <XMarkIcon
-                    className={styles['removeIcon']}
+                  <Button
+                    variant="tertiary"
+                    data-color="danger"
+                    size="small"
+                    icon={<XMarkIcon title={`Slett reservasjon ${reservasjon.oppgaveId}`} />}
                     onClick={() => opphevOppgaveReservasjon({ oppgaveId: reservasjon.oppgaveId })}
                   />
                 </Table.DataCell>

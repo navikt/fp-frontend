@@ -85,7 +85,7 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
           <RhfTextField
             name="brukerIdent"
             control={formMethods.control}
-            label={intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.Brukerident' })}
+            label={intl.formatMessage({ id: 'Label.Brukerident' })}
             validate={[required]}
           />
           <div className={styles['button']}>
@@ -96,7 +96,7 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
               disabled={formMethods.formState.isSubmitting || isPending}
               tabIndex={0}
             >
-              <FormattedMessage id="LeggTilSaksbehandlerForm.Sok" />
+              <FormattedMessage id="Label.Sok" />
             </Button>
           </div>
         </HStack>

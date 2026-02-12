@@ -2,7 +2,7 @@ import { type KeyboardEvent, type ReactElement, useEffect, useRef, useState } fr
 import { FormattedMessage } from 'react-intl';
 
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, HStack, Label, Link, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Button, Detail, HStack, Label, Link, Table, VStack } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { LosKodeverkMedNavn, SakslisteAvdeling } from '@navikt/fp-types';
@@ -19,14 +19,11 @@ const formatStonadstyper = (
   valgteFagsakYtelseTyper: string[],
 ) => {
   if (valgteFagsakYtelseTyper.length === 0 || valgteFagsakYtelseTyper.length === fagsakYtelseTyper.length) {
-    return <FormattedMessage id="GjeldendeSakslisterTabell.Alle" />;
+    return <FormattedMessage id="Label.Alle" />;
   }
 
   return valgteFagsakYtelseTyper
-    .map<string>(fyt => {
-      const type = fagsakYtelseTyper.find(def => def.kode === fyt);
-      return type ? type.navn : '';
-    })
+    .map(fyt => fagsakYtelseTyper.find(def => def.kode === fyt)?.navn ?? '')
     .sort((a, b) => a.localeCompare(b))
     .join(', ');
 };
@@ -36,14 +33,11 @@ const formatBehandlingstyper = (
   valgteBehandlingTyper: string[],
 ) => {
   if (valgteBehandlingTyper.length === 0 || valgteBehandlingTyper.length === behandlingTyper.length) {
-    return <FormattedMessage id="GjeldendeSakslisterTabell.Alle" />;
+    return <FormattedMessage id="Label.Alle" />;
   }
 
   return valgteBehandlingTyper
-    .map<string>(bt => {
-      const type = behandlingTyper.find(def => def.kode === bt);
-      return type ? type.navn : '';
-    })
+    .map(bt => behandlingTyper.find(def => def.kode === bt)?.navn ?? '')
     .sort((a, b) => a.localeCompare(b))
     .join(', ');
 };
@@ -115,12 +109,12 @@ export const GjeldendeSakslisterTabell = ({
         <Label size="small">
           <FormattedMessage id="GjeldendeSakslisterTabell.GjeldendeLister" />
         </Label>
-        <div className={styles['grayBox']}>
-          <BodyShort size="small">
+        <Box background="neutral-moderate" paddingBlock="space-8" paddingInline="space-16">
+          <Detail>
             <FormattedMessage id="GjeldendeSakslisterTabell.OppgaverForAvdeling" />
-          </BodyShort>
+          </Detail>
           <BodyShort size="large">{oppgaverForAvdelingAntall ?? '0'}</BodyShort>
-        </div>
+        </Box>
       </HStack>
       {sakslister.length === 0 && (
         <BodyShort size="small">
@@ -133,28 +127,25 @@ export const GjeldendeSakslisterTabell = ({
             <Table.Row>
               <Table.HeaderCell scope="col" />
               <Table.HeaderCell scope="col">
-                <FormattedMessage id="GjeldendeSakslisterTabell.Listenavn" />
+                <FormattedMessage id="Label.Navn" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col">
-                <FormattedMessage id="GjeldendeSakslisterTabell.Stonadstype" />
+                <FormattedMessage id="Label.Stønadstype" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col">
-                <FormattedMessage id="GjeldendeSakslisterTabell.Behandlingtype" />
+                <FormattedMessage id="Label.Behandlingstype" />
               </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="GjeldendeSakslisterTabell.AntallSaksbehandlere" />
+              <Table.HeaderCell scope="col" align="right" textSize="small">
+                <FormattedMessage id="Label.AntallSaksbehandlere" />
               </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
+              <Table.HeaderCell scope="col" align="right" textSize="small">
                 <FormattedMessage id="GjeldendeSakslisterTabell.BehandlingerPåVent" />
               </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
+              <Table.HeaderCell scope="col" align="right" textSize="small">
                 <FormattedMessage id="GjeldendeSakslisterTabell.AntallOppgaver" />
               </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
+              <Table.HeaderCell scope="col" align="right" textSize="small">
                 <FormattedMessage id="GjeldendeSakslisterTabell.AntallReserverte" />
-              </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="GjeldendeSakslisterTabell.Graf" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col" />
             </Table.Row>
@@ -172,25 +163,31 @@ export const GjeldendeSakslisterTabell = ({
                 <Table.DataCell>{saksliste.navn}</Table.DataCell>
                 <Table.DataCell>{formatStonadstyper(fagsakYtelseTyper, saksliste.fagsakYtelseTyper)}</Table.DataCell>
                 <Table.DataCell>{formatBehandlingstyper(behandlingTyper, saksliste.behandlingTyper)}</Table.DataCell>
-                <Table.DataCell>{saksliste.saksbehandlerIdenter.length}</Table.DataCell>
-                <Table.DataCell>{saksliste.gjeldendeStatistikk?.behandlingerPåVent ?? '-'}</Table.DataCell>
-                <Table.DataCell>{saksliste.gjeldendeStatistikk?.alleOppgaver ?? '-'}</Table.DataCell>
-                <Table.DataCell>{reserverteOppgaver(saksliste)}</Table.DataCell>
-                <Table.DataCell>
-                  <OppgaverGrafDialog saksliste={saksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
+                <Table.DataCell align="right">{saksliste.saksbehandlerIdenter.length}</Table.DataCell>
+                <Table.DataCell align="right">
+                  {saksliste.gjeldendeStatistikk?.behandlingerPåVent ?? '-'}
                 </Table.DataCell>
-                <Table.DataCell>
-                  <div
-                    ref={el => {
-                      tabRef.current[index] = el;
-                    }}
-                  >
-                    <XMarkIcon
-                      className={styles['removeImage']}
-                      onMouseDown={() => setValgtSakslisteForSletting(saksliste)}
-                      onKeyDown={() => setValgtSakslisteForSletting(saksliste)}
-                    />
-                  </div>
+                <Table.DataCell align="right">{saksliste.gjeldendeStatistikk?.alleOppgaver ?? '-'}</Table.DataCell>
+                <Table.DataCell align="right">{reserverteOppgaver(saksliste)}</Table.DataCell>
+                <Table.DataCell align="right">
+                  <HStack gap="space-8" justify="end">
+                    <div>
+                      <OppgaverGrafDialog saksliste={saksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
+                    </div>
+                    <div
+                      ref={el => {
+                        tabRef.current[index] = el;
+                      }}
+                    >
+                      <Button
+                        variant="tertiary"
+                        data-color="danger"
+                        size="small"
+                        icon={<XMarkIcon title={'Slett saksliste ' + saksliste.navn} />}
+                        onClick={() => setValgtSakslisteForSletting(saksliste)}
+                      />
+                    </div>
+                  </HStack>
                 </Table.DataCell>
               </Table.ExpandableRow>
             ))}
@@ -198,7 +195,7 @@ export const GjeldendeSakslisterTabell = ({
         </Table>
       )}
       <Link onClick={lagNySaksliste} onKeyDown={lagNySakslisteFn}>
-        <Detail className={styles['imageText']}>
+        <Detail>
           <FormattedMessage id="GjeldendeSakslisterTabell.LeggTilListe" />
         </Detail>
         <PlusCircleIcon />

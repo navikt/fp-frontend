@@ -21,12 +21,11 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
         <Button
           variant="secondary"
           size="small"
-          icon={<LineGraphDotIcon title="Vis oppgave graf" fontSize="1.5rem" />}
-          iconPosition="right"
+          icon={<LineGraphDotIcon title="Vis oppgave graf" />}
           disabled={saksliste.gjeldendeStatistikk == null}
         ></Button>
       </Dialog.Trigger>
-      <Dialog.Popup onClick={e => e.stopPropagation()}>
+      <Dialog.Popup onClick={e => e.stopPropagation()} width="large">
         <Dialog.Header>
           <Dialog.Title>
             <FormattedMessage id="OppgaverGrafDialog.Overskrift" />
@@ -39,7 +38,7 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
         <Dialog.Footer>
           <Dialog.CloseTrigger>
             <Button>
-              <FormattedMessage id="OppgaverGrafDialog.Lukk" />
+              <FormattedMessage id="Dialog.Lukk" />
             </Button>
           </Dialog.CloseTrigger>
         </Dialog.Footer>

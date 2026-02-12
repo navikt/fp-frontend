@@ -1,12 +1,16 @@
-import type { IntlShape } from 'react-intl';
-import { useIntl } from 'react-intl';
-
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-import { ReactECharts } from '@navikt/fp-los-felles';
+import {
+  createBarSeries,
+  createToolboxWithFilename,
+  formaterMånedÅr,
+  getAkselVariable,
+  getStyle,
+  ReactECharts,
+} from '@navikt/fp-los-felles';
 
 import type { OppgaverForForsteStonadsdagUkeMnd } from '../../typer/oppgaverForForsteStonadsdagUkeMndTsType';
 
@@ -23,57 +27,51 @@ interface Props {
   oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdagUkeMnd[];
 }
 
-const getYearText = (month: number, intl: IntlShape): string =>
-  intl.formatMessage({ id: `OppgaverPerForsteStonadsdagGraf.${month}` });
-
 export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStonadsdag }: Props) => {
-  const intl = useIntl();
   const koordinater = lagKoordinater(oppgaverPerForsteStonadsdag);
   const data = lagDatastruktur(koordinater);
+  const options = getStyle();
   return (
     <ReactECharts
       height={height}
       option={{
+        ...options,
         tooltip: {
+          ...options.tooltip,
           trigger: 'axis',
           axisPointer: {
             type: 'shadow',
             label: {
-              formatter: params => {
-                const dato = dayjs(params.value);
-                return `${getYearText(dato.month(), intl)} - ${dato.year()}`;
-              },
+              formatter: params => formaterMånedÅr(params.value as string),
             },
           },
         },
-        toolbox: {
-          feature: {
-            saveAsImage: {
-              title: 'Lagre ',
-              name: 'Antall_førstegangsbehandling_oppgaver_fordelt_på_første_stønadsdag',
-            },
-          },
-        },
+        toolbox: createToolboxWithFilename('Antall_førstegangsbehandling_oppgaver_fordelt_på_første_stønadsdag'),
         xAxis: {
           type: 'category',
-          boundaryGap: true,
           axisLabel: {
-            formatter: value => {
-              const dato = dayjs(value);
-              return `${getYearText(dato.month(), intl)}\n${dato.year()}`;
-            },
+            ...options.textStyle,
+            formatter: value => formaterMånedÅr(value),
           },
         },
         yAxis: {
           type: 'value',
+          axisLabel: {
+            ...options.textStyle,
+          },
+        },
+        legend: {
+          show: false,
         },
         series: [
-          {
+          createBarSeries({
             data,
-            type: 'bar',
-          },
+            color: getAkselVariable('--ax-bg-info-moderate-pressed'),
+            itemStyle: {
+              borderColor: getAkselVariable('--ax-bg-accent-strong'),
+            },
+          }),
         ],
-        color: ['#337c9b'],
       }}
     />
   );

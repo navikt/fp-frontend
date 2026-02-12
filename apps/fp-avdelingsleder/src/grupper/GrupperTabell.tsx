@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Label, Table } from '@navikt/ds-react';
+import { BodyShort, Button, Label, Table } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
@@ -9,8 +9,6 @@ import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import { LosUrl, slettGruppe } from '../data/fplosAvdelingslederApi';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
 import { GruppeSaksbehandlere } from './GruppeSaksbehandlere';
-
-import styles from './grupperTabell.module.css';
 
 interface Props {
   valgAvdeldingEnhet: string;
@@ -44,12 +42,14 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
                 <FormattedMessage id="GrupperTabell.Id" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col">
-                <FormattedMessage id="GrupperTabell.Navn" />
+                <FormattedMessage id="Label.Navn" />
               </Table.HeaderCell>
               <Table.HeaderCell scope="col">
-                <FormattedMessage id="GrupperTabell.AntallSaksbehandlere" />
+                <FormattedMessage id="Label.AntallSaksbehandlere" />
               </Table.HeaderCell>
-              <Table.HeaderCell />
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="Label.Slett" />
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -69,10 +69,12 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
                 <Table.DataCell>{saksbehandlerGruppe.gruppeNavn ?? '-'}</Table.DataCell>
                 <Table.DataCell>{saksbehandlerGruppe.saksbehandlere.length}</Table.DataCell>
                 <Table.DataCell>
-                  <XMarkIcon
-                    className={styles['removeIcon']}
-                    onMouseDown={() => fjernGruppe({ gruppeId: saksbehandlerGruppe.gruppeId })}
-                    onKeyDown={() => fjernGruppe({ gruppeId: saksbehandlerGruppe.gruppeId })}
+                  <Button
+                    variant="tertiary"
+                    data-color="danger"
+                    size="small"
+                    icon={<XMarkIcon title={`Slett ${saksbehandlerGruppe.gruppeNavn}`} />}
+                    onClick={() => fjernGruppe({ gruppeId: saksbehandlerGruppe.gruppeId })}
                   />
                 </Table.DataCell>
               </Table.ExpandableRow>

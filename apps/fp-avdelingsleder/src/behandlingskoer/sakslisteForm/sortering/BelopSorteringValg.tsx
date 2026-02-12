@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Detail, HStack } from '@navikt/ds-react';
 import { RhfNumericField } from '@navikt/ft-form-hooks';
@@ -12,20 +12,19 @@ import { validerTilLikEllerStørreEnnFra } from './DatoSorteringValg';
 import styles from './sorteringVelger.module.css';
 
 export const BelopSorteringValg = () => {
-  const intl = useIntl();
   const { watch, control } = useFormContext<FormValues>();
   const fraVerdi = watch('sortering.fra');
   return (
-    <ArrowBox>
+    <ArrowBox marginTop={4}>
       <Detail>
         <FormattedMessage id="SorteringVelger.FiltrerPaHeltall" />
       </Detail>
-      <HStack gap="space-16">
+      <HStack gap="space-8">
         <RhfNumericField
           name="sortering.fra"
+          label={<FormattedMessage id="SorteringVelger.Fra" />}
           control={control}
-          className={styles['dato']}
-          label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
+          htmlSize={6}
           validate={[minValue(0), maxValue(10_000_000)]}
         />
         <Detail className={styles['beløp']}>
@@ -33,9 +32,9 @@ export const BelopSorteringValg = () => {
         </Detail>
         <RhfNumericField
           name="sortering.til"
+          label={<FormattedMessage id="SorteringVelger.Til" />}
           control={control}
-          className={styles['dato']}
-          label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
+          htmlSize={6}
           validate={[minValue(0), maxValue(10_000_000), validerTilLikEllerStørreEnnFra(fraVerdi)]}
         />
         <Detail className={styles['beløp']}>

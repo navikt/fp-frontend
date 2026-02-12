@@ -22,13 +22,13 @@ describe('SaksbehandlereForSakslisteForm', () => {
     expect(screen.getByText('Steffen')).toBeInTheDocument();
   });
 
-  it.skip('skal vise gruppe og liste med alle saksbehandlere', async () => {
+  it('skal vise gruppe og liste med alle saksbehandlere', async () => {
     applyRequestHandlers(SaksbehandlereSomErGruppert.parameters['msw'] as MswParameters['msw']);
     render(<SaksbehandlereSomErGruppert />);
-    expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
-    expect(screen.getByText('Gruppenavn')).toBeInTheDocument();
+    expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
+    expect(screen.getByText('Saksbehandlere')).toBeInTheDocument();
     expect(screen.getByText('Gruppe 1')).toBeInTheDocument();
-    expect(screen.getByText('Antall tilknyttet køen')).toBeInTheDocument();
+    expect(screen.getByText('Antall saksbehandlere')).toBeInTheDocument();
     expect(screen.getByText('1')).toBeInTheDocument();
 
     expect(screen.getAllByText('Steffen')).toHaveLength(2);

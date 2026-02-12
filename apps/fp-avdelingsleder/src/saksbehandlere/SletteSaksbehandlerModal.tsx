@@ -44,7 +44,7 @@ export const SletteSaksbehandlerModal = ({ valgtSaksbehandler, closeSletteModal,
           autoFocus
           type="button"
         >
-          <FormattedMessage id="SletteSaksbehandlerModal.Ja" />
+          <FormattedMessage id="Label.Ja" />
         </Button>
         <Button
           className={styles['cancelButton']}
@@ -53,7 +53,7 @@ export const SletteSaksbehandlerModal = ({ valgtSaksbehandler, closeSletteModal,
           onClick={closeSletteModal}
           type="button"
         >
-          <FormattedMessage id="SletteSaksbehandlerModal.Nei" />
+          <FormattedMessage id="Label.Nei" />
         </Button>
       </NavModal.Footer>
     </NavModal>

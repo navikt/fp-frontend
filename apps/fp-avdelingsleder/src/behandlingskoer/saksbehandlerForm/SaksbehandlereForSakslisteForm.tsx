@@ -55,10 +55,10 @@ export const SaksbehandlereForSakslisteForm = ({
       <Box padding="space-20" borderColor="neutral-subtle" borderRadius="0" borderWidth="1">
         <VStack gap="space-8">
           <Label size="small">
-            <FormattedMessage id="SaksbehandlereForSakslisteForm.Saksbehandlere" />
+            <FormattedMessage id="Label.Saksbehandlere" />
           </Label>
           {sorterteAvdelingensSaksbehandlere.length === 0 && (
-            <BodyShort>
+            <BodyShort size="small">
               <FormattedMessage id="SaksbehandlereForSakslisteForm.IngenSaksbehandlere" />
             </BodyShort>
           )}
@@ -71,8 +71,8 @@ export const SaksbehandlereForSakslisteForm = ({
                     <Table.HeaderCell scope="col">
                       <FormattedMessage id="SaksbehandlereForSakslisteForm.Gruppenavn" />
                     </Table.HeaderCell>
-                    <Table.HeaderCell scope="col">
-                      <FormattedMessage id="SaksbehandlereForSakslisteForm.AntallSaksbehandlere" />
+                    <Table.HeaderCell scope="col" align="right">
+                      <FormattedMessage id="Label.AntallSaksbehandlere" />
                     </Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
@@ -90,7 +90,7 @@ export const SaksbehandlereForSakslisteForm = ({
                       expandOnRowClick
                     >
                       <Table.DataCell scope="row">{sg.gruppeNavn}</Table.DataCell>
-                      <Table.DataCell>{antallTilknyttetSaksliste(valgtSaksliste, sg)}</Table.DataCell>
+                      <Table.DataCell align="right">{antallTilknyttetSaksliste(valgtSaksliste, sg)}</Table.DataCell>
                     </Table.ExpandableRow>
                   ))}
                 </Table.Body>
