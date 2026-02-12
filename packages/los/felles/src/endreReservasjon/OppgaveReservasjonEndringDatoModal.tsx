@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
+import { Button, Modal as NavModal } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqualToToday, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -37,32 +37,26 @@ export const OppgaveReservasjonEndringDatoModal = ({
   return (
     <RhfForm<FormValues> formMethods={søkFormMethods} onSubmit={values => endreOppgavereservasjon(values.reserverTil)}>
       <NavModal
-        width="small"
         open
-        aria-label={intl.formatMessage({ id: 'OppgaveReservasjonEndringDatoModal.Header' })}
+        header={{ heading: intl.formatMessage({ id: 'OppgaveReservasjonEndringDatoModal.Header' }), size: 'small' }}
         onClose={closeModal}
       >
-        <NavModal.Header>
-          <Heading size="small">
-            <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Header" />
-          </Heading>
-        </NavModal.Header>
         <NavModal.Body>
           <RhfDatepicker
             name="reserverTil"
             control={søkFormMethods.control}
-            label=""
+            label={<FormattedMessage id="OppgaveReservasjonEndringDatoModal.ReserverTil" />}
             validate={[hasValidDate, dateAfterOrEqualToToday, dateBeforeOrEqual(thirtyDaysFromNow())]}
             fromDate={new Date()}
             toDate={thirtyDaysFromNow().toDate()}
           />
         </NavModal.Body>
         <NavModal.Footer>
-          <Button size="small">
-            <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Ok" />
+          <Button size="small" type="submit">
+            <FormattedMessage id="Label.Ok" />
           </Button>
           <Button size="small" variant="secondary" onClick={closeModal} type="button">
-            <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Avbryt" />
+            <FormattedMessage id="Label.Avbryt" />
           </Button>
         </NavModal.Footer>
       </NavModal>
