@@ -113,7 +113,6 @@ const wait = (ms: number) =>
 
 const isPollingResponse = (response: AsyncPollingStatus | Oppgave[]): response is AsyncPollingStatus => {
   return (
-    !Array.isArray(response) &&
-    ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status)
+    !Array.isArray(response) && ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status)
   );
 };

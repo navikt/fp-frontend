@@ -82,7 +82,7 @@
   "LeggTilSaksbehandlerForm.FinnesIkke": "Kan ikke finne brukerident",
 
   "OppgaveReservasjonForlengetModal.Reservert": "Behandlingen er reservert på deg",
-  "OppgaveReservasjonForlengetModal.Til": "t.o.m. {date} - {time}",
+  "OppgaveReservasjonForlengetModal.ReservertTil": "Behandlingen er reservert frem til {datetime}",
 
   "BehandlingPollingTimoutModal.TimeoutMelding": "Din økt er gått ut på tid, trykk Fortsett",
   "BehandlingPollingTimoutModal.Fortsett": "Fortsett",
