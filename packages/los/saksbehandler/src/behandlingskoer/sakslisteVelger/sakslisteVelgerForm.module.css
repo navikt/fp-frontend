@@ -12,14 +12,9 @@
   border-bottom: 1px solid var(--ax-neutral-700);
 }
 
-.grayout {
+.grayIcon {
   color: var(--ax-neutral-600);
-  height: 24px;
-  width: 24px;
-}
-
-.paddingBottom {
-  padding-bottom: 16px;
+  font-size: 1.5rem;
 }
 
 .hidden {

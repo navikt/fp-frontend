@@ -12,7 +12,7 @@ describe('OppgaveHandlingerMenu', () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
-    expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
+    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button'));
 
@@ -26,7 +26,7 @@ describe('OppgaveHandlingerMenu', () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
-    expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
+    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button'));
 
@@ -41,7 +41,7 @@ describe('OppgaveHandlingerMenu', () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
-    expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
+    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button'));
 
@@ -56,7 +56,7 @@ describe('OppgaveHandlingerMenu', () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
-    expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
+    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button'));
 

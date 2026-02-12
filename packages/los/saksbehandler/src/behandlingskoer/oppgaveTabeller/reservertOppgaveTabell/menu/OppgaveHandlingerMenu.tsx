@@ -25,8 +25,6 @@ import { type Oppgave } from '../../../../typer/oppgaveTsType';
 import { OppgaveReservasjonForlengetModal } from './forleng/OppgaveReservasjonForlengetModal';
 import { NotatModal } from './notat/NotatModal';
 
-import styles from './oppgaveHandlingerMenu.module.css';
-
 interface Props {
   oppgave: Oppgave;
   setEnableTableEvents: (shouldDisable: boolean) => void;
@@ -99,24 +97,19 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
       <ActionMenu onOpenChange={open => setEnableTableEvents(!open)}>
         <ActionMenu.Trigger>
           <Button
-            data-color="neutral"
             variant="tertiary"
-            icon={
-              <MenuElipsisVerticalCircleIcon
-                className={styles['image']}
-                title={intl.formatMessage({ id: 'OppgaveHandlingerMenu.OppgaveHandlinger' })}
-              />
-            }
             size="small"
+            title={intl.formatMessage({ id: 'OppgaveHandlingerMenu.OppgaveHandlinger' })}
+            icon={<MenuElipsisVerticalCircleIcon aria-hidden />}
           />
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group aria-label={intl.formatMessage({ id: 'OppgaveHandlingerMenu.Meny' })}>
             <ActionMenu.Item onSelect={() => opphevOppgavereservasjon()} icon={<ArrowUndoIcon aria-hidden />}>
-              <FormattedMessage id="OppgaveHandlingerMenu.LeggTilbake" values={{ br: <br /> }} />
+              <FormattedMessage id="OppgaveHandlingerMenu.LeggTilbake" />
             </ActionMenu.Item>
             <ActionMenu.Item onSelect={() => forlengOppgavereservasjon()} icon={<HourglassTopFilledIcon aria-hidden />}>
-              <FormattedMessage id="OppgaveHandlingerMenu.ForlengReservasjon" values={{ br: <br /> }} />
+              <FormattedMessage id="OppgaveHandlingerMenu.ForlengReservasjon" />
             </ActionMenu.Item>
             <ActionMenu.Item
               onSelect={() => setVisReservasjonEndringDatoModal(true)}
@@ -128,10 +121,10 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
               onSelect={() => setVisFlyttReservasjonModal(true)}
               icon={<PersonHeadsetIcon aria-hidden />}
             >
-              <FormattedMessage id="OppgaveHandlingerMenu.FlyttReservasjon" values={{ br: <br /> }} />
+              <FormattedMessage id="OppgaveHandlingerMenu.FlyttReservasjon" />
             </ActionMenu.Item>
             <ActionMenu.Item onSelect={() => setVisNotatModal(true)} icon={<PersonHeadsetIcon aria-hidden />}>
-              <FormattedMessage id="OppgaveHandlingerMenu.Notat" values={{ br: <br /> }} />
+              <FormattedMessage id="OppgaveHandlingerMenu.Notat" />
             </ActionMenu.Item>
           </ActionMenu.Group>
         </ActionMenu.Content>

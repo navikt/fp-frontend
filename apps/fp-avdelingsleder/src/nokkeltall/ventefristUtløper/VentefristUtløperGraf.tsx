@@ -36,6 +36,7 @@ export const VentefristUtløperGraf = ({ height, behandlingerPaVent }: Props) =>
         tooltip: {
           ...options.tooltip,
           trigger: 'axis',
+          valueFormatter: value => (value as number).toLocaleString('nb-NO'),
           axisPointer: {
             type: 'shadow',
             label: {
@@ -55,6 +56,7 @@ export const VentefristUtløperGraf = ({ height, behandlingerPaVent }: Props) =>
           type: 'value',
           axisLabel: {
             ...options.textStyle,
+            formatter: (value: number) => value.toLocaleString('nb-NO'),
           },
         },
         series: [

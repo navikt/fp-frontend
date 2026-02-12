@@ -56,4 +56,3 @@ export const SorteringVelger = ({ muligeSorteringer }: Props) => {
     </VStack>
   );
 };
-

@@ -277,66 +277,60 @@ export const SakslisteVelgerForm = ({
               {valgtSaksliste && (
                 <HStack gap="space-20" align="stretch">
                   <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
-                    <VStack gap="space-16">
-                      <HStack justify="space-between">
-                        <Label size="small">
-                          <FormattedMessage id="SakslisteVelgerForm.Stonadstype" />
-                        </Label>
-                        <SackKronerIcon aria-hidden className={styles['grayout']} />
-                      </HStack>
-                      {valgtSaksliste.fagsakYtelseTyper.length > 0 ? (
-                        <VStack gap="space-4">
-                          {valgtSaksliste.fagsakYtelseTyper.map(type => (
-                            <BodyShort key={type}>{fagsakYtelseTyper.find(fyt => fyt.kode === type)?.navn}</BodyShort>
-                          ))}
-                        </VStack>
-                      ) : (
-                        <BodyShort>
-                          <FormattedMessage id="SakslisteVelgerForm.Alle" />
-                        </BodyShort>
-                      )}
-                    </VStack>
-                  </Box>
-                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
-                    <VStack gap="space-16">
-                      <HStack justify="space-between">
-                        <Label size="small">
-                          <FormattedMessage id="SakslisteVelgerForm.Behandlingstype" />
-                        </Label>
-                        <DocPencilIcon aria-hidden className={styles['grayout']} />
-                      </HStack>
-                      {valgtSaksliste.behandlingTyper.length > 0 ? (
-                        <VStack gap="space-4">
-                          {valgtSaksliste.behandlingTyper.map(type => (
-                            <BodyShort key={type}>{behandlingsTyper.find(bt => bt.kode === type)?.navn}</BodyShort>
-                          ))}
-                        </VStack>
-                      ) : (
+                    <HStack justify="space-between">
+                      <Label size="small">
+                        <FormattedMessage id="SakslisteVelgerForm.Stonadstype" />
+                      </Label>
+                      <SackKronerIcon aria-hidden className={styles['grayIcon']} />
+                    </HStack>
+                    {valgtSaksliste.fagsakYtelseTyper.length > 0 ? (
+                      <VStack gap="space-4">
+                        {valgtSaksliste.fagsakYtelseTyper.map(type => (
+                          <BodyShort key={type}>{fagsakYtelseTyper.find(fyt => fyt.kode === type)?.navn}</BodyShort>
+                        ))}
+                      </VStack>
+                    ) : (
+                      <BodyShort>
                         <FormattedMessage id="SakslisteVelgerForm.Alle" />
-                      )}
-                    </VStack>
+                      </BodyShort>
+                    )}
                   </Box>
                   <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
-                    <VStack gap="space-16">
-                      <HStack justify="space-between">
-                        <Label size="small">
-                          <FormattedMessage id="SakslisteVelgerForm.AndreKriterier" />
-                        </Label>
-                        <FunnelIcon aria-hidden className={styles['grayout']} />
-                      </HStack>
-                      <AndreKriterier saksliste={valgtSaksliste} />
-                    </VStack>
+                    <HStack justify="space-between">
+                      <Label size="small">
+                        <FormattedMessage id="SakslisteVelgerForm.Behandlingstype" />
+                      </Label>
+                      <DocPencilIcon aria-hidden className={styles['grayIcon']} />
+                    </HStack>
+                    {valgtSaksliste.behandlingTyper.length > 0 ? (
+                      <VStack gap="space-4">
+                        {valgtSaksliste.behandlingTyper.map(type => (
+                          <BodyShort key={type}>{behandlingsTyper.find(bt => bt.kode === type)?.navn}</BodyShort>
+                        ))}
+                      </VStack>
+                    ) : (
+                      <BodyShort>
+                        <FormattedMessage id="SakslisteVelgerForm.Alle" />
+                      </BodyShort>
+                    )}
                   </Box>
                   <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
-                    <VStack gap="space-16">
-                      <HStack justify="space-between">
-                        <Label size="small">
-                          <FormattedMessage id="SakslisteVelgerForm.Sortering" />
-                        </Label>
-                        <ArrowsUpDownIcon aria-hidden className={styles['grayout']} />
-                      </HStack>
-                      <BodyShort>{getSorteringsnavn(intl, køSorteringTyper, valgtSaksliste)}</BodyShort>
-                    </VStack>
+                    <HStack justify="space-between">
+                      <Label size="small">
+                        <FormattedMessage id="SakslisteVelgerForm.AndreKriterier" />
+                      </Label>
+                      <FunnelIcon aria-hidden className={styles['grayIcon']} />
+                    </HStack>
+                    <AndreKriterier saksliste={valgtSaksliste} />
+                  </Box>
+                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
+                    <HStack justify="space-between">
+                      <Label size="small">
+                        <FormattedMessage id="SakslisteVelgerForm.Sortering" />
+                      </Label>
+                      <ArrowsUpDownIcon aria-hidden className={styles['grayIcon']} />
+                    </HStack>
+                    <BodyShort>{getSorteringsnavn(intl, køSorteringTyper, valgtSaksliste)}</BodyShort>
                   </Box>
                 </HStack>
               )}
@@ -344,7 +338,7 @@ export const SakslisteVelgerForm = ({
                 <Label size="small">
                   <FormattedMessage id="SakslisteVelgerForm.AndreSomJobber" />
                 </Label>
-                <HStack gap="space-8" className={styles['paddingBottom']}>
+                <HStack gap="space-8">
                   {sorterteSaksbehandlere
                     ?.slice(
                       0,
@@ -358,7 +352,7 @@ export const SakslisteVelgerForm = ({
                         key={s.brukerIdent.brukerIdent}
                       >
                         <HStack gap="space-8" align="center">
-                          <PersonHeadsetIcon aria-hidden className={styles['grayout']} />
+                          <PersonHeadsetIcon aria-hidden className={styles['grayIcon']} />
                           <BodyShort>{s.navn}</BodyShort>
                         </HStack>
                       </Box>
@@ -368,7 +362,7 @@ export const SakslisteVelgerForm = ({
                       {!visAlleSaksbehandlere && (
                         <Box background="neutral-moderateA" padding="space-8" borderRadius="full">
                           <HStack gap="space-8" align="center">
-                            <PlusIcon aria-hidden className={styles['grayout']} />
+                            <PlusIcon aria-hidden className={styles['grayIcon']} />
                             <BodyShort>
                               <FormattedMessage
                                 id="SakslisteVelgerForm.Andre"
