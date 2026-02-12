@@ -1,10 +1,9 @@
 import { useEffect, useMemo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import type { KøSortering } from '@navikt/fp-types';
+import type { KøSortering, KøSorteringFelt } from '@navikt/fp-types';
 
-import type { KøSorteringFelt, TilBeslutter } from '../../../typer/sakslisteAvdelingTsType';
-import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
+import type { FormValues, TilBeslutter } from '../UtvalgskriterierForSakslisteForm';
 
 export function useGyldigeSorteringer(muligeSorteringer: KøSorteringFelt[]) {
   const { setValue, control } = useFormContext<FormValues>();

@@ -22,7 +22,7 @@ const SAKSLISTER = [
     },
     behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],
-    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
     saksbehandlerIdenter: [],
     andreKriterie: {
       inkluder: ['TIL_BESLUTTER', 'HASTER'],
@@ -40,7 +40,7 @@ const SAKSLISTER = [
     },
     behandlingTyper: ['BT-002', 'BT-004'],
     fagsakYtelseTyper: ['FP', 'SVP', 'ES'],
-    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
     saksbehandlerIdenter: [],
     andreKriterie: {
       inkluder: [],

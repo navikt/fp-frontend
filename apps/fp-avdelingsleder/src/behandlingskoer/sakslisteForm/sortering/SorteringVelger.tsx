@@ -4,10 +4,10 @@ import { FormattedMessage } from 'react-intl';
 import { Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 
+import type { KøSorteringFelt } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import type { KøSorteringFelt } from '../../../typer/sakslisteAvdelingTsType';
 import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 import { BelopSorteringValg } from './BelopSorteringValg';
 import { DatoSorteringValg } from './DatoSorteringValg';
