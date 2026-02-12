@@ -1,44 +1,45 @@
 import { useEffect, useMemo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import type { KøSortering, KøSorteringFelt } from '@navikt/fp-types';
+import type { BehandlingType, KøSortering, KøSorteringFelt } from '@navikt/fp-types';
 
 import type { FormValues, TilBeslutter } from '../UtvalgskriterierForSakslisteForm';
 
 export function useGyldigeSorteringer(muligeSorteringer: KøSorteringFelt[]) {
   const { setValue, control } = useFormContext<FormValues>();
 
-  const behandlingTyper = useWatch({ control, name: 'behandlingTyper' });
-  const tilBeslutter = useWatch({ control, name: 'tilBeslutter' });
-  const sorteringType = useWatch({ control, name: 'sortering.sorteringType' });
+  const [behandlingTyper, tilBeslutter, currentSorteringType] = useWatch({
+    control,
+    name: ['behandlingTyper', 'tilBeslutter', 'sortering.sorteringType'],
+  });
 
   const gyldigeSorteringer = useMemo(
-    () => muligeSorteringer.filter(s => skalViseSortering(s, behandlingTyper, tilBeslutter)),
+    () => muligeSorteringer.filter(s => erSorteringGyldig(s, behandlingTyper, tilBeslutter)),
     [muligeSorteringer, behandlingTyper, tilBeslutter],
   );
 
-  const synligeTyper = useMemo(() => gyldigeSorteringer.map(s => s.sorteringType), [gyldigeSorteringer]);
-
   useEffect(() => {
-    if (!synligeTyper.includes(sorteringType)) {
-      setValue('sortering.sorteringType', 'BEHFRIST', { shouldValidate: true, shouldDirty: false });
-      setValue('sortering.fra', null, { shouldValidate: true, shouldDirty: false });
-      setValue('sortering.til', null, { shouldValidate: true, shouldDirty: false });
-      setValue('sortering.fomDato', null, { shouldValidate: true, shouldDirty: false });
-      setValue('sortering.tomDato', null, { shouldValidate: true, shouldDirty: false });
-      setValue('sortering.periodefilter', 'FAST_PERIODE', { shouldValidate: true, shouldDirty: false });
+    const erCurrentSorteringGyldig = gyldigeSorteringer.some(s => s.sorteringType === currentSorteringType);
+    if (!erCurrentSorteringGyldig) {
+      const opts = { shouldValidate: true, shouldDirty: false } as const;
+      setValue('sortering.sorteringType', 'BEHFRIST', opts);
+      setValue('sortering.fra', null, opts);
+      setValue('sortering.til', null, opts);
+      setValue('sortering.fomDato', null, opts);
+      setValue('sortering.tomDato', null, opts);
+      setValue('sortering.periodefilter', 'FAST_PERIODE', opts);
     }
-  }, [sorteringType, synligeTyper, setValue]);
+  }, [currentSorteringType, gyldigeSorteringer, setValue]);
 
   return gyldigeSorteringer;
 }
 
-const skalViseSortering = (
-  koSorteringFelt: KøSorteringFelt,
-  valgteBehandlingtyper: string[],
+const erSorteringGyldig = (
+  sorteringFelt: KøSorteringFelt,
+  behandlingtyper: BehandlingType[],
   tilBeslutter: TilBeslutter,
 ) => {
-  const køSortering: KøSortering = koSorteringFelt.sorteringType;
+  const køSortering: KøSortering = sorteringFelt.sorteringType;
   switch (køSortering) {
     case 'OPPRBEH':
     case 'BEHFRIST':
@@ -51,12 +52,12 @@ const skalViseSortering = (
 
     case 'BELOP':
     case 'FEILUTBETALINGSTART':
-      return bareTilbakekrevingValgt(valgteBehandlingtyper);
+      return kunTilbakekrevingValgt(behandlingtyper);
 
     default:
       return køSortering satisfies never;
   }
 };
 
-const bareTilbakekrevingValgt = (valgteBehandlingtyper: string[]) =>
+const kunTilbakekrevingValgt = (valgteBehandlingtyper: BehandlingType[]) =>
   valgteBehandlingtyper.length > 0 && valgteBehandlingtyper.every(type => ['BT-007', 'BT-009'].includes(type));
