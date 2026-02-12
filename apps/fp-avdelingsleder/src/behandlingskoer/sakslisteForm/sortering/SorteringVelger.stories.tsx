@@ -125,6 +125,13 @@ export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
 
     return kodeverkLos ? (
       <RhfForm formMethods={formMethods}>
+        <button
+          type="button"
+          data-testid="endre-behandlingstyper"
+          onClick={() => formMethods.setValue('behandlingTyper', ['BT-007', 'BT-003'])}
+        >
+          Knapp for å trigge endring av behandlingstyper
+        </button>
         <SorteringVelger {...args} />
       </RhfForm>
     ) : (

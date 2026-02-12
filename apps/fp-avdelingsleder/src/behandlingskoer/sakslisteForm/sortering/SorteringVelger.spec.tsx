@@ -67,4 +67,16 @@ describe('SorteringVelger', () => {
     expect(screen.getByLabelText('Feilutbetalt beløp')).toBeInTheDocument();
     expect(screen.getByLabelText('Dato for første feilutbetaling')).toBeInTheDocument();
   });
+
+  it('skal resette sortering til default BEHFRIST når gjeldende sortering er ugyldig', async () => {
+    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw'] as MswParameters['msw']);
+    render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
+    expect(await screen.findByText('Ta kun med behandlinger mellom')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByTestId('endre-behandlingstyper'));
+
+    expect(screen.queryByText('Ta kun med behandlinger mellom')).not.toBeInTheDocument();
+    expect(await screen.findByLabelText('Dato for behandlingsfrist')).toBeChecked();
+    expect(screen.getByLabelText('Fast periode')).toBeChecked();
+  });
 });
