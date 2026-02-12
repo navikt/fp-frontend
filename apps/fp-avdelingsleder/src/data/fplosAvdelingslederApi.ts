@@ -2,7 +2,7 @@ import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
 import type { OppgaveFilterStatistikk, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import type { AlleKodeverkLos } from '@navikt/fp-types';
+import type { AlleKodeverkLos, SakslisteAvdeling, SakslisteDto } from '@navikt/fp-types';
 
 import type { Avdeling } from '../typer/avdelingTsType';
 import type { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';
@@ -13,7 +13,6 @@ import type { OppgaverForForsteStonadsdagUkeMnd } from '../typer/oppgaverForFors
 import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import type { Reservasjon } from '../typer/reservasjonTsType';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
-import type { SakslisteAvdeling, SakslisteDto } from '../typer/sakslisteAvdelingTsType';
 
 export type InitDataLos = {
   innloggetBruker: InnloggetBruker;

@@ -1,10 +1,11 @@
 import { VStack } from '@navikt/ds-react';
 import { useMutation } from '@tanstack/react-query';
 
+import type { SakslisteAvdeling } from '@navikt/fp-types';
+
 import { getBehandlingskøOppgaveAntall } from '../data/fplosSaksbehandlerApi';
 import { removeValueFromLocalStorage, setValueInLocalStorage } from '../data/localStorageHelper';
 import type { Oppgave } from '../typer/oppgaveTsType';
-import type { Saksliste } from '../typer/sakslisteTsType';
 import { LedigOppgaveTabell } from './oppgaveTabeller/ledigOppgaveTabell/LedigOppgaveTabell';
 import { ReservertOppgaveTabell } from './oppgaveTabeller/reservertOppgaveTabell/ReservertOppgaveTabell';
 import { SakslisteVelgerForm } from './sakslisteVelger/SakslisteVelgerForm';
@@ -12,7 +13,7 @@ import { SakslisteVelgerForm } from './sakslisteVelger/SakslisteVelgerForm';
 interface Props {
   valgtSakslisteId?: number;
   setValgtSakslisteId: (sakslisteId: number) => void;
-  sakslister: Saksliste[];
+  sakslister: SakslisteAvdeling[];
   reserverOppgave: (oppgaveId: Oppgave) => void;
   brukernavn: string;
 }

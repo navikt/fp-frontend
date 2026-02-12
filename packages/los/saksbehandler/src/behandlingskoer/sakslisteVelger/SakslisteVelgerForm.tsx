@@ -18,17 +18,16 @@ import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
-import type { LosKodeverkMedNavn } from '@navikt/fp-types';
+import type { LosKodeverkMedNavn, SakslisteAvdeling } from '@navikt/fp-types';
 
 import { getSakslisteSaksbehandlere } from '../../data/fplosSaksbehandlerApi';
 import { getValueFromLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
-import type { Saksliste } from '../../typer/sakslisteTsType';
 
 import styles from './sakslisteVelgerForm.module.css';
 
 const getDefaultSaksliste = (
-  sorterteSakslister: Saksliste[],
+  sorterteSakslister: SakslisteAvdeling[],
   removeValueFromLocalStorage: (key: string) => void,
 ): number | undefined => {
   const lagretSakslisteId = getValueFromLocalStorage('sakslisteId');
@@ -43,7 +42,7 @@ const getDefaultSaksliste = (
 };
 
 const getFormDefaultValues = (
-  sorterteSakslister: Saksliste[],
+  sorterteSakslister: SakslisteAvdeling[],
   removeValueFromLocalStorage: (key: string) => void,
 ): { sakslisteId: string | undefined } => {
   if (sorterteSakslister.length === 0) {
@@ -57,23 +56,22 @@ const getFormDefaultValues = (
   };
 };
 
-const AndreKriterier = ({ saksliste }: { saksliste?: Saksliste }): ReactNode => {
+const AndreKriterier = ({ saksliste }: { saksliste?: SakslisteAvdeling }): ReactNode => {
   const intl = useIntl();
   const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
 
-  if (saksliste && saksliste.andreKriterier.length > 0) {
+  if (saksliste && (saksliste.andreKriterie.inkluder.length > 0 || saksliste.andreKriterie.ekskluder.length > 0)) {
     return (
       <VStack gap="space-4">
-        {saksliste.andreKriterier.map(ak => (
-          <BodyShort key={ak.andreKriterierType}>
-            {ak.inkluder
-              ? andreKriterierTyper.find(akt => akt.kode === ak.andreKriterierType)?.navn
-              : intl.formatMessage(
-                  { id: 'SakslisteVelgerForm.Uten' },
-                  {
-                    kriterie: andreKriterierTyper.find(akt => akt.kode === ak.andreKriterierType)?.navn,
-                  },
-                )}
+        {saksliste.andreKriterie.inkluder.map(ak => (
+          <BodyShort key={ak}>{andreKriterierTyper.find(akt => akt.kode === ak)?.navn}</BodyShort>
+        ))}
+        {saksliste.andreKriterie.ekskluder.map(ak => (
+          <BodyShort key={ak}>
+            {intl.formatMessage(
+              { id: 'SakslisteVelgerForm.Uten' },
+              { kriterie: andreKriterierTyper.find(akt => akt.kode === ak)?.navn },
+            )}
           </BodyShort>
         ))}
       </VStack>
@@ -164,7 +162,7 @@ const finnDatoMåned = (antallMåneder: number, erStartenAvMåned: boolean) => {
 const getSorteringsnavn = (
   intl: IntlShape,
   køSorteringTyper: LosKodeverkMedNavn<'KøSortering'>[],
-  saksliste?: Saksliste,
+  saksliste?: SakslisteAvdeling,
 ) => {
   if (!saksliste?.sortering) {
     return '';
@@ -182,7 +180,7 @@ type FormValues = {
 };
 
 interface Props {
-  sakslister: Saksliste[];
+  sakslister: SakslisteAvdeling[];
   setValgtSakslisteId: (sakslisteId: number) => void;
   fetchAntallOppgaver: (sakslisteId: number) => void;
   setValueInLocalStorage: (key: string, value: string) => void;

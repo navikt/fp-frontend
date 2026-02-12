@@ -65,7 +65,7 @@ export const MedDefaultNavn: Story = {
   args: {
     valgtSaksliste: {
       sakslisteId: 1,
-      navn: undefined,
+      navn: 'Ny liste',
       saksbehandlerIdenter: [],
       sortering: {
         sorteringType: 'BEHFRIST',

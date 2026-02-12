@@ -117,7 +117,7 @@ export type { TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
 export type {
   TotrinnskontrollAksjonspunkt,
   OpptjeningAktiviteter,
-  UttakPeriodeEndring
+  UttakPeriodeEndring,
 } from './src/totrinnskontrollAksjonspunktTsType';
 export type { Historikkinnslag, HistorikkInnslagDokumentLink } from './src/historikkinnslagTsType';
 export type {
@@ -263,6 +263,15 @@ export type { PeriodeResultatType } from './src/periodeResultatType';
 export type { SkjermlenkeTypeTilbakekreving } from './src/tilbakekreving/skjermlenkeTypeTilbakekreving';
 export type { OppgaveBehandlingStatus } from './src/los/oppgaveBehandlingStatus';
 export type { KøSortering } from './src/los/køSortering';
+export type {
+  AnnetKriterie,
+  KøSorteringFelt,
+  Statistikk,
+  Sortering,
+  Periodefilter,
+  SakslisteAvdeling,
+  SakslisteDto,
+} from './src/los/sakslisteType';
 export type { HendelseUnderType } from './src/tilbakekreving/hendelseUnderType';
 export type { HendelseType } from './src/tilbakekreving/hendelseType';
 export type { Arbeidskategori } from './src/arbeidskategori';
@@ -301,7 +310,4 @@ export type {
 
 export type { FagsakBehandlingDto } from './src/fagsakBehandlingDto';
 export type { Behandling } from './src/behandling';
-export type {
-  AsyncPollingStatus,
-  PollingStatus,
-} from './src/asyncPollingStatus';
+export type { AsyncPollingStatus, PollingStatus } from './src/asyncPollingStatus';

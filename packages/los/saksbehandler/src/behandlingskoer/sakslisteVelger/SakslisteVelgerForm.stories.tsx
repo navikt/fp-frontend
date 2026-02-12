@@ -67,17 +67,17 @@ export const Default: Story = {
         navn: 'Saksliste 1',
         behandlingTyper: ['BT-002', 'BT-004'],
         fagsakYtelseTyper: ['FP'],
-        andreKriterier: [
-          {
-            andreKriterierType: 'TIL_BESLUTTER',
-            inkluder: true,
-          },
-        ],
         sortering: {
           sorteringType: 'BEHFRIST',
           fra: 2,
           til: 4,
           periodefilter: 'RELATIV_PERIODE_DAGER',
+        },
+        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+        saksbehandlerIdenter: [],
+        andreKriterie: {
+          inkluder: ['TIL_BESLUTTER'],
+          ekskluder: [],
         },
       },
     ],
@@ -92,17 +92,17 @@ export const MedToSakslister: Story = {
         navn: 'Saksliste 1',
         behandlingTyper: ['BT-002', 'BT-004'],
         fagsakYtelseTyper: ['FP'],
-        andreKriterier: [
-          {
-            andreKriterierType: 'TIL_BESLUTTER',
-            inkluder: true,
-          },
-        ],
         sortering: {
           sorteringType: 'BEHFRIST',
           fra: 2,
           til: 4,
           periodefilter: 'RELATIV_PERIODE_DAGER',
+        },
+        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+        saksbehandlerIdenter: [],
+        andreKriterie: {
+          inkluder: ['TIL_BESLUTTER'],
+          ekskluder: [],
         },
       },
       {
@@ -110,17 +110,17 @@ export const MedToSakslister: Story = {
         navn: 'Saksliste 2',
         behandlingTyper: ['BT-002', 'BT-003'],
         fagsakYtelseTyper: ['SVP'],
-        andreKriterier: [
-          {
-            andreKriterierType: 'UTBETALING_TIL_BRUKER',
-            inkluder: true,
-          },
-        ],
         sortering: {
           sorteringType: 'BEHFRIST',
           fra: 2,
           til: 4,
           periodefilter: 'RELATIV_PERIODE_DAGER',
+        },
+        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+        saksbehandlerIdenter: [],
+        andreKriterie: {
+          inkluder: ['UTBETALING_TIL_BRUKER'],
+          ekskluder: [],
         },
       },
     ],
@@ -187,17 +187,17 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
         navn: 'Saksliste 1',
         behandlingTyper: ['BT-002', 'BT-004'],
         fagsakYtelseTyper: ['FP'],
-        andreKriterier: [
-          {
-            andreKriterierType: 'TIL_BESLUTTER',
-            inkluder: true,
-          },
-        ],
         sortering: {
           sorteringType: 'BEHFRIST',
           fra: 2,
           til: 4,
           periodefilter: 'RELATIV_PERIODE_DAGER',
+        },
+        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+        saksbehandlerIdenter: [],
+        andreKriterie: {
+          inkluder: ['TIL_BESLUTTER'],
+          ekskluder: [],
         },
       },
     ],

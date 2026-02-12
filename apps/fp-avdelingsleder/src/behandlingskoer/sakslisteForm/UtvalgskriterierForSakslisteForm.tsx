@@ -1,21 +1,23 @@
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-types';
+import type {
+  AndreKriterierType,
+  AnnetKriterie,
+  BehandlingType,
+  FagsakYtelseType,
+  KøSortering,
+  Periodefilter,
+  SakslisteAvdeling,
+  SakslisteDto,
+} from '@navikt/fp-types';
 
 import { lagreUtvalgskriterierForKø, LosUrl } from '../../data/fplosAvdelingslederApi';
-import {
-  type AnnetKriterie,
-  type Periodefilter,
-  type SakslisteAvdeling,
-  type SakslisteDto,
-  type TilBeslutter,
-} from '../../typer/sakslisteAvdelingTsType';
 import { AndreKriterierVelger } from './filtrering/AndreKriterierVelger';
 import { BehandlingstypeVelger } from './filtrering/BehandlingstypeVelger';
 import { FagsakYtelseTypeVelger } from './filtrering/FagsakYtelseTypeVelger';
@@ -46,6 +48,8 @@ export type FormValues = {
   tilBeslutter: TilBeslutter;
 };
 
+export type TilBeslutter = 'TA_MED_ALLE' | 'TA_MED' | 'FJERN';
+
 interface Props {
   valgtSaksliste: SakslisteAvdeling;
   valgtAvdelingEnhet: string;
@@ -56,7 +60,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
   const queryClient = useQueryClient();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: buildDefaultValues(intl, valgtSaksliste),
+    defaultValues: buildDefaultValues(valgtSaksliste),
   });
 
   const { mutate: lagreSaksliste, isPending } = useMutation({
@@ -131,9 +135,9 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
   );
 };
 
-const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling): FormValues => {
+const buildDefaultValues = (valgtSaksliste: SakslisteAvdeling): FormValues => {
   return {
-    navn: valgtSaksliste.navn ?? intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.NyListe' }),
+    navn: valgtSaksliste.navn,
     sortering: {
       sorteringType: valgtSaksliste.sortering.sorteringType,
       periodefilter: valgtSaksliste.sortering.periodefilter,
