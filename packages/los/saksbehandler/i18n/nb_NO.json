@@ -1,4 +1,7 @@
 {
+  "Label.Ok": "OK",
+  "Label.Avbryt": "Avbryt",
+
   "LedigOppgaveTabell.DineNesteSaker": "Neste i køen",
   "LedigOppgaveTabell.DineNesteSakerAntall": "{totaltAntall} totalt",
   "LedigOppgaveTabell.Soker": "Søker",
@@ -69,7 +72,6 @@
 
   "OppgaveErReservertAvAnnenModal.ReservertAv": "{saksbehandlernavn} ({saksbehandlerid}) arbeider nå med denne behandlingen (reservert fram t.o.m {date} - {time})",
   "OppgaveErReservertAvAnnenModal.ReservertAvEnkel": "En annen saksbehandler arbeider nå med denne behandlingen",
-  "OppgaveErReservertAvAnnenModal.Ok": "OK",
 
   "LeggTilSaksbehandlerForm.LeggTil": "Legg til saksbehandler",
   "LeggTilSaksbehandlerForm.Brukerident": "Brukerident",
@@ -81,10 +83,9 @@
 
   "OppgaveReservasjonForlengetModal.Reservert": "Behandlingen er reservert på deg",
   "OppgaveReservasjonForlengetModal.Til": "t.o.m. {date} - {time}",
-  "OppgaveReservasjonForlengetModal.Ok": "OK",
 
   "BehandlingPollingTimoutModal.TimeoutMelding": "Din økt er gått ut på tid, trykk Fortsett",
-  "BehandlingPollingTimoutModal.Oppfrisk": "Fortsett",
+  "BehandlingPollingTimoutModal.Fortsett": "Fortsett",
 
   "FagsakSearch.ZeroSearchResults": "Søket ga ingen treff eller du mangler tilgang til saken",
   "FagsakSearch.FlereSakerEllerBehandlinger": "Velg sak eller behandling du ønsker å åpne/reservere. (Fagsak kan ikke reserveres.)",

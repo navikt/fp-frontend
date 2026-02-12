@@ -44,8 +44,8 @@ export const OppgaveReservasjonForlengetModal = ({ oppgave, closeModal }: Props)
         </HStack>
       </NavModal.Body>
       <NavModal.Footer>
-        <Button size="small" variant="secondary" onClick={closeModal} autoFocus type="button">
-          <FormattedMessage id="OppgaveReservasjonForlengetModal.Ok" />
+        <Button size="small" variant="primary" onClick={closeModal} autoFocus type="button">
+          <FormattedMessage id="Label.Ok" />
         </Button>
       </NavModal.Footer>
     </NavModal>
