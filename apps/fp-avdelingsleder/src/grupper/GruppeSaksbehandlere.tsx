@@ -152,14 +152,11 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
                         variant="tertiary"
                         data-color="danger"
                         size="small"
-                        icon={
-                          <XMarkIcon
-                            title={intl.formatMessage(
-                              { id: 'GruppeSaksbehandlere.SlettSaksbehandler' },
-                              { navn: saksbehandler.navn },
-                            )}
-                          />
-                        }
+                        title={intl.formatMessage(
+                          { id: 'GruppeSaksbehandlere.SlettSaksbehandler' },
+                          { navn: saksbehandler.navn },
+                        )}
+                        icon={<XMarkIcon aria-hidden />}
                         onClick={() =>
                           fjernSaksbehandler({
                             brukerIdent: saksbehandler.brukerIdent,

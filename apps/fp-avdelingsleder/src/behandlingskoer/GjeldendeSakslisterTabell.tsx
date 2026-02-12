@@ -184,14 +184,11 @@ export const GjeldendeSakslisterTabell = ({
                         variant="tertiary"
                         data-color="danger"
                         size="small"
-                        icon={
-                          <XMarkIcon
-                            title={intl.formatMessage(
-                              { id: 'GjeldendeSakslisterTabell.SlettSaksliste' },
-                              { navn: saksliste.navn },
-                            )}
-                          />
-                        }
+                        title={intl.formatMessage(
+                          { id: 'GjeldendeSakslisterTabell.SlettSaksliste' },
+                          { navn: saksliste.navn },
+                        )}
+                        icon={<XMarkIcon aria-hidden />}
                         onClick={() => setValgtSakslisteForSletting(saksliste)}
                       />
                     </div>

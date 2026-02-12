@@ -81,14 +81,11 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
                     variant="tertiary"
                     data-color="danger"
                     size="small"
-                    icon={
-                      <XMarkIcon
-                        title={intl.formatMessage(
-                          { id: 'SaksbehandlereTabell.SlettSaksbehandler' },
-                          { navn: saksbehandler.navn },
-                        )}
-                      />
-                    }
+                    title={intl.formatMessage(
+                      { id: 'SaksbehandlereTabell.SlettSaksbehandler' },
+                      { navn: saksbehandler.navn },
+                    )}
+                    icon={<XMarkIcon aria-hidden />}
                     onClick={() => setValgtSaksbehandler(saksbehandler)}
                   />
                 </Table.DataCell>

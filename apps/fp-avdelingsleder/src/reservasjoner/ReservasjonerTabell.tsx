@@ -158,14 +158,11 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                     variant="tertiary"
                     data-color="danger"
                     size="small"
-                    icon={
-                      <XMarkIcon
-                        title={intl.formatMessage(
-                          { id: 'ReservasjonerTabell.SlettReservasjon' },
-                          { oppgaveId: reservasjon.oppgaveId },
-                        )}
-                      />
-                    }
+                    title={intl.formatMessage(
+                      { id: 'ReservasjonerTabell.SlettReservasjon' },
+                      { oppgaveId: reservasjon.oppgaveId },
+                    )}
+                    icon={<XMarkIcon aria-hidden />}
                     onClick={() => opphevOppgaveReservasjon({ oppgaveId: reservasjon.oppgaveId })}
                   />
                 </Table.DataCell>

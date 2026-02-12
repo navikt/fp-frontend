@@ -22,7 +22,8 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
         <Button
           variant="secondary"
           size="small"
-          icon={<LineGraphDotIcon title={intl.formatMessage({ id: 'OppgaverGrafDialog.VisOppgaveGraf' })} />}
+          title={intl.formatMessage({ id: 'OppgaverGrafDialog.VisOppgaveGraf' })}
+          icon={<LineGraphDotIcon aria-hidden />}
           disabled={saksliste.gjeldendeStatistikk == null}
         ></Button>
       </Dialog.Trigger>

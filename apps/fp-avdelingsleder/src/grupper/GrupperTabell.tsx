@@ -74,14 +74,11 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
                     variant="tertiary"
                     data-color="danger"
                     size="small"
-                    icon={
-                      <XMarkIcon
-                        title={intl.formatMessage(
-                          { id: 'GrupperTabell.SlettGruppe' },
-                          { navn: saksbehandlerGruppe.gruppeNavn },
-                        )}
-                      />
-                    }
+                    title={intl.formatMessage(
+                      { id: 'GrupperTabell.SlettGruppe' },
+                      { navn: saksbehandlerGruppe.gruppeNavn },
+                    )}
+                    icon={<XMarkIcon aria-hidden />}
                     onClick={() => fjernGruppe({ gruppeId: saksbehandlerGruppe.gruppeId })}
                   />
                 </Table.DataCell>
