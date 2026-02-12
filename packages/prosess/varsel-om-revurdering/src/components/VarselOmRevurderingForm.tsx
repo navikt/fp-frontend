@@ -20,7 +20,7 @@ const minLength3 = minLength(3);
 const maxLength10000 = maxLength(10000);
 
 export type ForhandsvisData = {
-  arsakskode: RevurderingVarslingÅrsak;
+  årsakskode: RevurderingVarslingÅrsak;
   dokumentMal: DokumentMalType;
   fritekst: string;
 };
@@ -87,7 +87,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
     e.preventDefault();
     previewCallback({
       dokumentMal: 'VARREV',
-      arsakskode: 'ANNET',
+      årsakskode: 'ANNET',
       fritekst: formVerdier.fritekst ?? ' ',
     });
   };

@@ -52,7 +52,7 @@ describe('MeldingerSakIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      arsakskode: 'BARNIKKEREG',
+      årsakskode: 'BARNIKKEREG',
       brevmalkode: 'VARREV',
       fritekst: ' ',
     });
@@ -73,7 +73,7 @@ describe('MeldingerSakIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      arsakskode: 'ANNET',
+      årsakskode: 'ANNET',
       brevmalkode: 'VARREV',
       fritekst: 'Dette er en begrunnelse',
     });

@@ -81,7 +81,6 @@ const defaultSak = {
     diskresjonskode: undefined,
     fødselsdato: '',
     dødsdato: undefined,
-    dodsdato: undefined,
     språkkode: '-',
   },
   brukerManglerAdresse: false,

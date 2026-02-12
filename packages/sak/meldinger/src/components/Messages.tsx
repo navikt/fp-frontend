@@ -25,13 +25,13 @@ const minLength3 = minLength(3);
 export type FormValues = {
   brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake;
   fritekst?: string;
-  arsakskode?: RevurderingVarslingÅrsak;
+  årsakskode?: RevurderingVarslingÅrsak;
 };
 
 export type ForhåndsvisBrevParams = {
   brevmalkode: DokumentMalType | DokumentMalTypeFpTilbake;
   fritekst?: string;
-  arsakskode?: RevurderingVarslingÅrsak;
+  årsakskode?: RevurderingVarslingÅrsak;
 };
 
 interface Props {
@@ -71,7 +71,7 @@ export const Messages = ({
 
   const brevmalkode = formMethods.watch('brevmalkode');
   const fritekst = formMethods.watch('fritekst');
-  const arsakskode = formMethods.watch('arsakskode');
+  const årsakskode = formMethods.watch('årsakskode');
 
   const filtrerteRevurderingVarslingArsaker = getfiltrerteRevurderingVarslingArsaker(
     revurderingVarslingArsak,
@@ -82,7 +82,7 @@ export const Messages = ({
 
   const forhåndsvis = (e: React.MouseEvent | React.KeyboardEvent) => {
     if (brevmalkode) {
-      forhåndsvisBrev({ brevmalkode, fritekst, arsakskode });
+      forhåndsvisBrev({ brevmalkode, fritekst, årsakskode: årsakskode });
     }
     e.preventDefault();
   };
@@ -112,7 +112,7 @@ export const Messages = ({
         />
         {erVarselOmRevurdering && (
           <RhfSelect
-            name="arsakskode"
+            name="årsakskode"
             control={control}
             label={intl.formatMessage({ id: 'Messages.Årsak' })}
             validate={[required]}
@@ -124,7 +124,7 @@ export const Messages = ({
             className={styles['bredde']}
           />
         )}
-        {showFritekst(brevmalkode, arsakskode) && (
+        {showFritekst(brevmalkode, årsakskode) && (
           <RhfTextarea
             name="fritekst"
             control={control}
@@ -137,7 +137,7 @@ export const Messages = ({
         )}
         {brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
         <HStack justify="space-between">
-          {(!erVarselOmRevurdering || arsakskode !== undefined) && (
+          {(!erVarselOmRevurdering || årsakskode !== undefined) && (
             <Link href="#" onClick={forhåndsvis} onKeyDown={e => (e.key === 'Enter' ? forhåndsvis(e) : null)}>
               <FormattedMessage id="Messages.Preview" />
             </Link>
@@ -198,7 +198,7 @@ const buildInitialValues = (behandling: FagsakBehandlingDto): FormValues => {
 
 const transformValues = (values: FormValues) => {
   const newValues = values;
-  if (values.brevmalkode === 'VARREV' && newValues.arsakskode !== 'ANNET') {
+  if (values.brevmalkode === 'VARREV' && newValues.årsakskode !== 'ANNET') {
     newValues.fritekst = ' ';
   }
   return newValues;

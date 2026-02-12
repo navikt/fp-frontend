@@ -40,7 +40,7 @@ const adresse2 = {
 
 const defaultBruker: PersonopplysningerBasis = {
   navn: 'Espen Utvikler',
-  aktoerId: '1',
+  aktørId: '1',
   kjønn: KjønnkodeEnum.MANN,
   sivilstand: 'SAMB',
   fødselsdato: '1989-01-01',
@@ -49,7 +49,7 @@ const defaultBruker: PersonopplysningerBasis = {
 };
 const defaultAnnenPart: PersonopplysningerBasis = {
   navn: 'Petra Utvikler',
-  aktoerId: '2',
+  aktørId: '2',
   kjønn: KjønnkodeEnum.KVINNE,
   sivilstand: 'SAMB',
   fødselsdato: '1989-01-01',
@@ -61,7 +61,7 @@ const defaultBarn: PersonopplysningerBasis = {
   dødsdato: '2023-04-01',
   fødselsdato: '2023-04-01',
   adresser: [adresse2],
-  aktoerId: '3',
+  aktørId: '3',
   kjønn: KjønnkodeEnum.KVINNE,
   sivilstand: 'UGIF',
 };

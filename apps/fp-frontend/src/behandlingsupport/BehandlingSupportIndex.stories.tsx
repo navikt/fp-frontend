@@ -105,10 +105,8 @@ const FAGSAK = {
     navn: '',
     fødselsnummer: '',
     kjønn: '-',
-
     fødselsdato: '',
-
-    dodsdato: undefined,
+    dødsdato: undefined,
     språkkode: '-',
   },
   brukerManglerAdresse: false,

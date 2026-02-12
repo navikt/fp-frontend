@@ -30,7 +30,7 @@ const getCorrectEmptyArbeidsForhold = (
   periodeTypeKode: UttakPeriodeType,
   stonadskonto: UttakStonadskontoer,
 ): string[] => {
-  const konto = stonadskonto.stonadskontoer[periodeTypeKode];
+  const konto = stonadskonto.stønadskonti[periodeTypeKode];
   const aktiviteter = konto?.aktivitetSaldoDtoList ?? [];
 
   if (aktiviteter.length === 0) return [];

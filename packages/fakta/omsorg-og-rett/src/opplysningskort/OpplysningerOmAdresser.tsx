@@ -54,7 +54,7 @@ export const OpplysningerOmAdresser = ({ personoversikt: { bruker, annenPart, ba
       <AvsnittSkiller dividerParagraf />
       {barn.map(b => (
         <Personopplysninger
-          key={b.aktoerId}
+          key={b.aktørId}
           showIcon={false}
           navn={b.navn}
           alleKodeverk={alleKodeverk}

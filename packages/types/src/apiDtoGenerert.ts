@@ -3872,6 +3872,7 @@ export type tjenester_behandling_personopplysning_PersonadresseDto = {
 export type tjenester_behandling_personopplysning_PersonopplysningBasisDto = {
   adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
   aktoerId?: string;
+  aktørId?: string;
   diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
   dødsdato?: string;
   fnr?: string;
@@ -4479,7 +4480,7 @@ export type tjenester_behandling_uttak_dto_AktivitetSaldoDto = {
 };
 
 export type tjenester_behandling_uttak_dto_SaldoerDto = {
-  stonadskontoer: {
+  stønadskonti: {
     [key: string]: tjenester_behandling_uttak_dto_StønadskontoDto;
   };
   tapteDagerFpff: number;
@@ -4769,6 +4770,7 @@ export type foreldrepenger_dokumentbestiller_dto_BestillDokumentDto = {
   behandlingUuid?: string;
   brevmalkode: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
   fritekst?: string;
+  årsakskode?: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
 };
 
 export type foreldrepenger_dokumentbestiller_dto_ForhåndsvisDokumentDto = {
@@ -4778,6 +4780,7 @@ export type foreldrepenger_dokumentbestiller_dto_ForhåndsvisDokumentDto = {
   dokumentMal?: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
   fritekst?: string;
   tittel?: string;
+  årsakskode?: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
 };
 
 export type foreldrepenger_kontrakter_formidling_kodeverk_Saksnummer = {
@@ -4821,7 +4824,7 @@ export type tjenester_dokument_dto_DokumentIdDto = {
 
 export type foreldrepenger_behandlingslager_fagsak_FagsakStatus = 'OPPR' | 'UBEH' | 'LOP' | 'AVSLU';
 
-export type tjenester_fagsak_dto_AktoerInfoDto = {
+export type tjenester_fagsak_dto_AktørInfoDto = {
   aktørId?: string;
   fagsaker: Array<tjenester_fagsak_dto_FagsakSøkDto>;
   person: tjenester_fagsak_dto_PersonDto;
@@ -4842,7 +4845,6 @@ export type tjenester_fagsak_dto_FagsakSøkDto = {
 export type tjenester_fagsak_dto_PersonDto = {
   aktørId?: string;
   diskresjonskode?: string;
-  dodsdato?: string;
   dødsdato?: string;
   fødselsdato: string;
   fødselsnummer: string;
@@ -5174,6 +5176,7 @@ export type tjenester_infotrygd_InfotrygdVedtakDto_Periode = {
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_SakDto = {
   nivaa?: string;
+  nivå?: string;
   registrert: string;
   resultat?: string;
   sakId?: string;
@@ -6559,7 +6562,7 @@ export type HentDokumentResponses = {
   default: unknown;
 };
 
-export type GetAktoerInfoData = {
+export type GetAktørInfoData = {
   body?: never;
   path?: never;
   query: {
@@ -6568,14 +6571,14 @@ export type GetAktoerInfoData = {
   url: '/api/aktoer-info';
 };
 
-export type GetAktoerInfoResponses = {
+export type GetAktørInfoResponses = {
   /**
    * Returnerer basisinformasjon om en aktør og hvilke fagsaker vedkommede har i fpsak.
    */
-  200: tjenester_fagsak_dto_AktoerInfoDto;
+  200: tjenester_fagsak_dto_AktørInfoDto;
 };
 
-export type GetAktoerInfoResponse = GetAktoerInfoResponses[keyof GetAktoerInfoResponses];
+export type GetAktørInfoResponse = GetAktørInfoResponses[keyof GetAktørInfoResponses];
 
 export type EndreFagsakMerkingData = {
   /**

@@ -13,7 +13,7 @@ export const PersonopplysningerForFamilie = ({ personoversikt: { barn, bruker, a
   return (
     <VStack gap="space-8">
       {barn.map(b => (
-        <Personopplysninger key={b.aktoerId} {...b} alleKodeverk={alleKodeverk} rolle="BARN" />
+        <Personopplysninger key={b.aktørId} {...b} alleKodeverk={alleKodeverk} rolle="BARN" />
       ))}
       <Personopplysninger rolle="BRUKER" alleKodeverk={alleKodeverk} {...bruker} />
       {annenPart && <Personopplysninger {...annenPart} rolle="ANNEN_PART" alleKodeverk={alleKodeverk} />}

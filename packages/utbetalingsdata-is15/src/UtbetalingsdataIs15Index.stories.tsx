@@ -44,7 +44,7 @@ export const Default: Story = {
         {
           resultat: 'Avslag',
           type: 'Søknad',
-          nivaa: 'Trygdekontor',
+          nivå: 'Trygdekontor',
           vedtatt: '2024-02-01',
           registrert: '2024-03-01',
           sakId: 'B01',
@@ -54,7 +54,7 @@ export const Default: Story = {
         {
           resultat: 'Innvilget',
           type: 'Revurdering',
-          nivaa: 'Trygdekontor',
+          nivå: 'Trygdekontor',
           vedtatt: '2024-02-01',
           registrert: '2024-03-01',
           sakId: 'B02',
