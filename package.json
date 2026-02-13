@@ -32,14 +32,15 @@
     "prepare": "husky install",
     "update-swagger": "node scripts/hent-openapi-spec.js",
     "generate:local": "yarn update-swagger lokal && openapi-ts",
-    "generate": "yarn update-swagger && openapi-ts"
+    "generate": "yarn update-swagger && openapi-ts",
+    "generate:local": "pnpm --filter @navikt/fp-types run generate:local",
+    "generate": "pnpm --filter @navikt/fp-types run generate"
   },
   "workspaces": [
     "apps/**/*",
     "packages/**/*"
   ],
   "devDependencies": {
-    "@hey-api/openapi-ts": "0.90.10",
     "@navikt/aksel-stylelint": "8.2.0",
     "@storybook/addon-a11y": "10.2.0",
     "@storybook/addon-links": "10.2.0",
