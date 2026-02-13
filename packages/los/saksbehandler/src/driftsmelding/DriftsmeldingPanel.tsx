@@ -1,5 +1,4 @@
-import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { Detail, HStack, VStack } from '@navikt/ds-react';
+import { GlobalAlert } from '@navikt/ds-react';
 
 import type { Driftsmelding } from '../typer/driftsmeldingTsType';
 
@@ -9,26 +8,22 @@ interface Props {
   driftsmeldinger: Driftsmelding[];
 }
 
-/**
- * DriftsmeldingPanel
- *
- * Definerer hvordan driftsmeldinger vises.
- */
 export const DriftsmeldingPanel = ({ driftsmeldinger }: Props) => {
   if (driftsmeldinger.length === 0) {
     return null;
   }
 
   return (
-    <div className={styles['container']}>
-      <VStack gap="space-8">
-        {driftsmeldinger.map(message => (
-          <HStack gap="space-8" key={message.id}>
-            <ExclamationmarkTriangleFillIcon className={styles['driftsInfo']} />
-            <Detail className={styles['wordWrap']}>{message.melding}</Detail>
-          </HStack>
-        ))}
-      </VStack>
-    </div>
+    <>
+      {driftsmeldinger.map(message => (
+        <GlobalAlert size="small" status="warning" centered={false} key={message.id}>
+          <GlobalAlert.Header>
+            <GlobalAlert.Title as="div" className={styles['driftmeldingsTekst']}>
+              {message.melding}
+            </GlobalAlert.Title>
+          </GlobalAlert.Header>
+        </GlobalAlert>
+      ))}
+    </>
   );
 };
