@@ -62,7 +62,7 @@ const AndreKriterier = ({ saksliste }: { saksliste?: SakslisteAvdeling }): React
 
   if (saksliste && (saksliste.andreKriterie.inkluder.length > 0 || saksliste.andreKriterie.ekskluder.length > 0)) {
     return (
-      <VStack gap="space-4">
+      <>
         {saksliste.andreKriterie.inkluder.map(ak => (
           <BodyShort key={ak}>{andreKriterierTyper.find(akt => akt.kode === ak)?.navn}</BodyShort>
         ))}
@@ -74,14 +74,10 @@ const AndreKriterier = ({ saksliste }: { saksliste?: SakslisteAvdeling }): React
             )}
           </BodyShort>
         ))}
-      </VStack>
+      </>
     );
   }
-  return (
-    <BodyShort>
-      <FormattedMessage id="SakslisteVelgerForm.Alle" />
-    </BodyShort>
-  );
+  return <FormattedMessage tagName={BodyShort} id="SakslisteVelgerForm.Alle" />;
 };
 
 type TextValues = {
@@ -247,9 +243,9 @@ export const SakslisteVelgerForm = ({
   const sorterteSaksbehandlere = saksbehandlere?.toSorted((s1, s2) => s1.navn.localeCompare(s2.navn));
 
   return (
-    <RhfForm formMethods={formMethods} className={styles['container']}>
-      <VStack gap="space-24">
-        <HStack justify="space-between" align="end">
+    <VStack gap="space-24" className={styles['container']}>
+      <HStack justify="space-between" align="end">
+        <RhfForm formMethods={formMethods}>
           <RhfSelect
             name="sakslisteId"
             control={formMethods.control}
@@ -259,139 +255,148 @@ export const SakslisteVelgerForm = ({
                 {saksliste.navn}
               </option>
             ))}
-            className={styles['koInput']}
+            className={styles['sakslisteSelect']}
           />
-          <Button
-            variant="tertiary"
-            type="button"
-            onClick={() => setVisKøFiltere(!visKøFiltere)}
-            icon={visKøFiltere ? <ChevronUpIcon aria-hidden /> : <ChevronDownIcon aria-hidden />}
-            iconPosition="right"
-          >
-            <FormattedMessage id="SakslisteVelgerForm.FilterForKoen" />
-          </Button>
-        </HStack>
-        <div className={visKøFiltere ? styles['active'] : styles['hidden']}>
-          {visKøFiltere && (
-            <VStack gap="space-24">
-              {valgtSaksliste && (
-                <HStack gap="space-20" align="stretch">
-                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
-                    <HStack justify="space-between">
-                      <Label size="small">
-                        <FormattedMessage id="SakslisteVelgerForm.Stonadstype" />
-                      </Label>
-                      <SackKronerIcon aria-hidden className={styles['grayIcon']} />
-                    </HStack>
-                    {valgtSaksliste.fagsakYtelseTyper.length > 0 ? (
-                      <VStack gap="space-4">
-                        {valgtSaksliste.fagsakYtelseTyper.map(type => (
-                          <BodyShort key={type}>{fagsakYtelseTyper.find(fyt => fyt.kode === type)?.navn}</BodyShort>
-                        ))}
-                      </VStack>
-                    ) : (
-                      <BodyShort>
-                        <FormattedMessage id="SakslisteVelgerForm.Alle" />
-                      </BodyShort>
-                    )}
-                  </Box>
-                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
-                    <HStack justify="space-between">
-                      <Label size="small">
-                        <FormattedMessage id="SakslisteVelgerForm.Behandlingstype" />
-                      </Label>
-                      <DocPencilIcon aria-hidden className={styles['grayIcon']} />
-                    </HStack>
-                    {valgtSaksliste.behandlingTyper.length > 0 ? (
-                      <VStack gap="space-4">
-                        {valgtSaksliste.behandlingTyper.map(type => (
-                          <BodyShort key={type}>{behandlingsTyper.find(bt => bt.kode === type)?.navn}</BodyShort>
-                        ))}
-                      </VStack>
-                    ) : (
-                      <BodyShort>
-                        <FormattedMessage id="SakslisteVelgerForm.Alle" />
-                      </BodyShort>
-                    )}
-                  </Box>
-                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
-                    <HStack justify="space-between">
-                      <Label size="small">
-                        <FormattedMessage id="SakslisteVelgerForm.AndreKriterier" />
-                      </Label>
-                      <FunnelIcon aria-hidden className={styles['grayIcon']} />
-                    </HStack>
-                    <AndreKriterier saksliste={valgtSaksliste} />
-                  </Box>
-                  <Box background="neutral-moderateA" padding="space-16" borderRadius="12" width="200px">
-                    <HStack justify="space-between">
-                      <Label size="small">
-                        <FormattedMessage id="SakslisteVelgerForm.Sortering" />
-                      </Label>
-                      <ArrowsUpDownIcon aria-hidden className={styles['grayIcon']} />
-                    </HStack>
-                    <BodyShort>{getSorteringsnavn(intl, køSorteringTyper, valgtSaksliste)}</BodyShort>
-                  </Box>
-                </HStack>
-              )}
-              <VStack gap="space-8">
-                <Label size="small">
-                  <FormattedMessage id="SakslisteVelgerForm.AndreSomJobber" />
-                </Label>
-                <HStack gap="space-8">
-                  {sorterteSaksbehandlere
-                    ?.slice(
-                      0,
-                      sorterteSaksbehandlere.length > 3 && !visAlleSaksbehandlere ? 3 : sorterteSaksbehandlere.length,
-                    )
-                    .map(s => (
-                      <Box
-                        background="neutral-moderateA"
-                        padding="space-8"
-                        borderRadius="full"
-                        key={s.brukerIdent.brukerIdent}
-                      >
-                        <HStack gap="space-8" align="center">
-                          <PersonHeadsetIcon aria-hidden className={styles['grayIcon']} />
-                          <BodyShort>{s.navn}</BodyShort>
-                        </HStack>
-                      </Box>
-                    ))}
-                  {sorterteSaksbehandlere && sorterteSaksbehandlere.length > 3 && (
-                    <HStack gap="space-8">
-                      {!visAlleSaksbehandlere && (
-                        <Box background="neutral-moderateA" padding="space-8" borderRadius="full">
-                          <HStack gap="space-8" align="center">
-                            <PlusIcon aria-hidden className={styles['grayIcon']} />
-                            <BodyShort>
-                              <FormattedMessage
-                                id="SakslisteVelgerForm.Andre"
-                                values={{ antallAndre: sorterteSaksbehandlere.length - 3 }}
-                              />
-                            </BodyShort>
-                          </HStack>
-                        </Box>
+        </RhfForm>
+        <Button
+          variant="tertiary"
+          type="button"
+          onClick={() => setVisKøFiltere(!visKøFiltere)}
+          icon={visKøFiltere ? <ChevronUpIcon aria-hidden /> : <ChevronDownIcon aria-hidden />}
+          iconPosition="right"
+        >
+          <FormattedMessage id="SakslisteVelgerForm.FilterForKoen" />
+        </Button>
+      </HStack>
+
+      {visKøFiltere && (
+        <Box maxHeight="500px" className={styles['køFilterBoks']}>
+          <VStack gap="space-24">
+            {valgtSaksliste && (
+              <HStack gap="space-20">
+                <FilterBox
+                  label={<FormattedMessage id="SakslisteVelgerForm.Stonadstype" />}
+                  icon={<SackKronerIcon aria-hidden />}
+                  value={
+                    <>
+                      {valgtSaksliste.fagsakYtelseTyper.map(type => (
+                        <BodyShort key={type}>{fagsakYtelseTyper.find(fyt => fyt.kode === type)?.navn}</BodyShort>
+                      ))}
+
+                      {valgtSaksliste.fagsakYtelseTyper.length === 0 && (
+                        <FormattedMessage tagName={BodyShort} id="SakslisteVelgerForm.Alle" />
                       )}
-                      <Button
-                        variant="tertiary"
-                        size="xsmall"
-                        type="button"
-                        onClick={() => setVisAlleSaksbehandlere(!visAlleSaksbehandlere)}
-                      >
-                        {visAlleSaksbehandlere ? (
-                          <FormattedMessage id="SakslisteVelgerForm.VisFærre" />
-                        ) : (
-                          <FormattedMessage id="SakslisteVelgerForm.VisFlere" />
-                        )}
-                      </Button>
-                    </HStack>
-                  )}
-                </HStack>
-              </VStack>
+                    </>
+                  }
+                />
+                <FilterBox
+                  label={<FormattedMessage id="SakslisteVelgerForm.Behandlingstype" />}
+                  icon={<DocPencilIcon aria-hidden />}
+                  value={
+                    <>
+                      {valgtSaksliste.behandlingTyper.map(type => (
+                        <BodyShort key={type}>{behandlingsTyper.find(bt => bt.kode === type)?.navn}</BodyShort>
+                      ))}
+                      {valgtSaksliste.behandlingTyper.length === 0 && (
+                        <FormattedMessage tagName={BodyShort} id="SakslisteVelgerForm.Alle" />
+                      )}
+                    </>
+                  }
+                />
+                <FilterBox
+                  label={<FormattedMessage id="SakslisteVelgerForm.AndreKriterier" />}
+                  icon={<FunnelIcon aria-hidden />}
+                  value={<AndreKriterier saksliste={valgtSaksliste} />}
+                />
+                <FilterBox
+                  label={<FormattedMessage id="SakslisteVelgerForm.Sortering" />}
+                  icon={<ArrowsUpDownIcon aria-hidden />}
+                  value={<BodyShort>{getSorteringsnavn(intl, køSorteringTyper, valgtSaksliste)}</BodyShort>}
+                />
+              </HStack>
+            )}
+
+            <VStack gap="space-8">
+              <Label size="small">
+                <FormattedMessage id="SakslisteVelgerForm.AndreSomJobber" />
+              </Label>
+              <HStack gap="space-8">
+                {sorterteSaksbehandlere
+                  ?.slice(
+                    0,
+                    sorterteSaksbehandlere.length > 3 && !visAlleSaksbehandlere ? 3 : sorterteSaksbehandlere.length,
+                  )
+                  .map(s => (
+                    <SaksbehandlerBadge
+                      key={s.brukerIdent.brukerIdent}
+                      icon={<PersonHeadsetIcon aria-hidden />}
+                      label={s.navn}
+                    />
+                  ))}
+                {sorterteSaksbehandlere && sorterteSaksbehandlere.length > 3 && (
+                  <HStack gap="space-8">
+                    {!visAlleSaksbehandlere && (
+                      <SaksbehandlerBadge
+                        icon={<PlusIcon aria-hidden />}
+                        label={
+                          <FormattedMessage
+                            id="SakslisteVelgerForm.Andre"
+                            values={{ antallAndre: sorterteSaksbehandlere.length - 3 }}
+                          />
+                        }
+                      />
+                    )}
+                    <Button
+                      variant="tertiary"
+                      size="xsmall"
+                      type="button"
+                      onClick={() => setVisAlleSaksbehandlere(!visAlleSaksbehandlere)}
+                    >
+                      {visAlleSaksbehandlere ? (
+                        <FormattedMessage id="SakslisteVelgerForm.VisFærre" />
+                      ) : (
+                        <FormattedMessage id="SakslisteVelgerForm.VisFlere" />
+                      )}
+                    </Button>
+                  </HStack>
+                )}
+              </HStack>
             </VStack>
-          )}
-        </div>
-      </VStack>
-    </RhfForm>
+          </VStack>
+        </Box>
+      )}
+    </VStack>
   );
 };
+
+interface FilterBoxProps {
+  label: ReactNode;
+  icon: ReactNode;
+  value: ReactNode;
+}
+
+const FilterBox = ({ label, icon, value }: FilterBoxProps) => (
+  <Box background="neutral-moderateA" padding="space-16" borderRadius="8" flexBasis="0%" flexGrow="1">
+    <HStack justify="space-between">
+      <Label size="small">{label}</Label>
+      <div className={styles['grayIcon']}>{icon}</div>
+    </HStack>
+    {value}
+  </Box>
+);
+
+interface SaksbehandlerBadgeProps {
+  icon: ReactNode;
+  label: ReactNode;
+}
+
+const SaksbehandlerBadge = ({ icon, label }: SaksbehandlerBadgeProps) => (
+  <Box background="neutral-moderateA" paddingInline="space-12" paddingBlock="space-4" borderRadius="full">
+    <HStack asChild gap="space-4" align="center">
+      <BodyShort>
+        <span className={styles['grayIcon']}>{icon}</span>
+        {label}
+      </BodyShort>
+    </HStack>
+  </Box>
+);

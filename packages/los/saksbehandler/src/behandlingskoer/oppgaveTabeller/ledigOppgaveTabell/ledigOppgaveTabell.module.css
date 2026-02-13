@@ -1,12 +1,8 @@
-.grayout {
-  color: var(--ax-text-neutral-decoration);
-}
-
 .container {
-  border-bottom: 1px solid var(--ax-neutral-400);
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
   padding-bottom: 50px;
 }
 
 :global(.dark) .container {
-  border-bottom: 1px solid var(--ax-neutral-700);
+  border-bottom: 1px solid var(--ax-border-neutral-strong);
 }

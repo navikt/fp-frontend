@@ -59,7 +59,7 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
           <Label size="small">
             <FormattedMessage id="ReservertOppgaveTabell.ReserverteOppgaver" />
           </Label>
-          <BodyShort size="small" className={styles['grayout']}>
+          <BodyShort size="small" textColor="subtle">
             <FormattedMessage
               id="ReservertOppgaveTabell.AntallOppgaver"
               values={{ reservertAntall: reserverteOppgaver.length }}

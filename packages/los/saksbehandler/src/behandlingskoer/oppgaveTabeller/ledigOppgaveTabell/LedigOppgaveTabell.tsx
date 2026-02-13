@@ -26,7 +26,7 @@ export const LedigOppgaveTabell = ({ reserverOppgave, antallOppgaver = 0, valgtS
           <Label size="small">
             <FormattedMessage id="LedigOppgaveTabell.DineNesteSaker" />
           </Label>
-          <BodyShort size="small" className={styles['grayout']}>
+          <BodyShort size="small" textColor="subtle">
             <FormattedMessage id="LedigOppgaveTabell.DineNesteSakerAntall" values={{ totaltAntall: antallOppgaver }} />
           </BodyShort>
         </HStack>
