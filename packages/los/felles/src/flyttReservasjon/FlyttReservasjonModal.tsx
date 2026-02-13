@@ -99,7 +99,12 @@ export const FlyttReservasjonModal = ({
                   type="button"
                   size="small"
                   variant="primary"
-                  onClick={() => hentSaksbehandler(brukerIdentValue)}
+                  onClick={async () => {
+                    const isValid = await lagreFormMethods.trigger('brukerIdent');
+                    if (isValid) {
+                      hentSaksbehandler(brukerIdentValue);
+                    }
+                  }}
                   loading={hentSaksbehandlerIsPending}
                   disabled={!brukerIdentValue || hentSaksbehandlerIsPending}
                 >
