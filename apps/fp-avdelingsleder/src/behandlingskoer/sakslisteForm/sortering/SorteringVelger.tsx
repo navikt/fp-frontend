@@ -11,17 +11,18 @@ import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 import { BelopSorteringValg } from './BelopSorteringValg';
 import { DatoSorteringValg } from './DatoSorteringValg';
+import { useGyldigeSorteringer } from './useGyldigeSorteringer.tsx';
 
 interface Props {
   muligeSorteringer: KøSorteringFelt[];
 }
 
 export const SorteringVelger = ({ muligeSorteringer }: Props) => {
+  const sorteringKoder = useLosKodeverk('KøSortering');
   const { setValue, control, watch } = useFormContext<FormValues>();
 
-  const sorteringKoder = useLosKodeverk('KøSortering');
+  const gyldigeSorteringer = useGyldigeSorteringer(muligeSorteringer);
 
-  const valgtBehandlingstyper = watch('behandlingTyper');
   const sorteringstype = watch('sortering.sorteringType');
 
   return (
@@ -38,28 +39,21 @@ export const SorteringVelger = ({ muligeSorteringer }: Props) => {
           setValue('sortering.periodefilter', 'FAST_PERIODE');
         }}
       >
-        {muligeSorteringer
-          .filter(
-            koSortering =>
-              koSortering.feltKategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgtBehandlingstyper),
-          )
-          .map(koSortering => (
-            <VStack key={koSortering.sorteringType} gap="space-2">
-              <Radio value={koSortering.sorteringType} size="small">
-                {notEmpty(sorteringKoder.find(k => k.kode === koSortering.sorteringType)?.navn, 'Mangler kodeverk')}
-              </Radio>
-              {sorteringstype === koSortering.sorteringType && (
-                <>
-                  {koSortering.feltType === 'DATO' && <DatoSorteringValg />}
-                  {koSortering.feltType === 'HELTALL' && <BelopSorteringValg />}
-                </>
-              )}
-            </VStack>
-          ))}
+        {gyldigeSorteringer.map(koSortering => (
+          <VStack key={koSortering.sorteringType} gap="space-2">
+            <Radio value={koSortering.sorteringType} size="small">
+              {notEmpty(sorteringKoder.find(k => k.kode === koSortering.sorteringType)?.navn, 'Mangler kodeverk')}
+            </Radio>
+            {sorteringstype === koSortering.sorteringType && (
+              <>
+                {koSortering.feltType === 'DATO' && <DatoSorteringValg />}
+                {koSortering.feltType === 'HELTALL' && <BelopSorteringValg />}
+              </>
+            )}
+          </VStack>
+        ))}
       </RhfRadioGroup>
     </VStack>
   );
 };
 
-export const bareTilbakekrevingValgt = (valgteBehandlingtyper: string[]) =>
-  valgteBehandlingtyper.length > 0 && valgteBehandlingtyper.every(type => ['BT-007', 'BT-009'].includes(type));

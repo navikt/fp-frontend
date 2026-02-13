@@ -1,1 +1,8 @@
-export type KøSortering = 'OPPRBEH' | 'BEHFRIST' | 'BELOP' | 'FEILUTBETALINGSTART' | 'FORSTONAD' | 'FORSTONAD_SYNK';
+export type KøSortering =
+  | 'OPPRBEH'
+  | 'BEHFRIST'
+  | 'BELOP'
+  | 'FEILUTBETALINGSTART'
+  | 'FORSTONAD'
+  | 'FORSTONAD_SYNK'
+  | 'OPPGAVE_OPPRETTET';

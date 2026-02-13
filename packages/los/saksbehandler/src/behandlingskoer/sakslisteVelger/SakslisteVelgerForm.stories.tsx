@@ -73,7 +73,7 @@ export const Default: Story = {
           til: 4,
           periodefilter: 'RELATIV_PERIODE_DAGER',
         },
-        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
         saksbehandlerIdenter: [],
         andreKriterie: {
           inkluder: ['TIL_BESLUTTER'],
@@ -98,7 +98,7 @@ export const MedToSakslister: Story = {
           til: 4,
           periodefilter: 'RELATIV_PERIODE_DAGER',
         },
-        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
         saksbehandlerIdenter: [],
         andreKriterie: {
           inkluder: ['TIL_BESLUTTER'],
@@ -116,7 +116,7 @@ export const MedToSakslister: Story = {
           til: 4,
           periodefilter: 'RELATIV_PERIODE_DAGER',
         },
-        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
         saksbehandlerIdenter: [],
         andreKriterie: {
           inkluder: ['UTBETALING_TIL_BRUKER'],
@@ -193,7 +193,7 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
           til: 4,
           periodefilter: 'RELATIV_PERIODE_DAGER',
         },
-        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
         saksbehandlerIdenter: [],
         andreKriterie: {
           inkluder: ['TIL_BESLUTTER'],

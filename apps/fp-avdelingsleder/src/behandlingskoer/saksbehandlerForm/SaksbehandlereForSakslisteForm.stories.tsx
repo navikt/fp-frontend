@@ -41,7 +41,7 @@ export const IngenSaksbehandlere: Story = {
         sorteringType: 'BEHFRIST',
         periodefilter: 'FAST_PERIODE',
       },
-      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
       andreKriterie: {
         inkluder: [],
         ekskluder: [],
@@ -71,7 +71,7 @@ export const ToSaksbehandlere: Story = {
         sorteringType: 'BEHFRIST',
         periodefilter: 'FAST_PERIODE',
       },
-      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
       andreKriterie: {
         inkluder: [],
         ekskluder: [],
@@ -112,7 +112,7 @@ export const TreSaksbehandlere: Story = {
         sorteringType: 'BEHFRIST',
         periodefilter: 'FAST_PERIODE',
       },
-      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
       andreKriterie: {
         inkluder: [],
         ekskluder: [],
@@ -209,7 +209,7 @@ export const SaksbehandlereSomErGruppert: Story = {
         sorteringType: 'BEHFRIST',
         periodefilter: 'FAST_PERIODE',
       },
-      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
       andreKriterie: {
         inkluder: [],
         ekskluder: [],
