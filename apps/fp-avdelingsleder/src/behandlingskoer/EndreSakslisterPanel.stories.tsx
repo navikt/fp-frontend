@@ -11,9 +11,9 @@ import {
   urlEncodeNorskeBokstaver,
   withQueryClient,
 } from '@navikt/fp-storybook-utils';
+import type { SakslisteAvdeling } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
-import { type SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
 
 import messages from '../../i18n/nb_NO.json';
@@ -33,7 +33,7 @@ const SAKSLISTER = [
     },
     behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],
-    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
     andreKriterie: {
       inkluder: [],
       ekskluder: ['PAPIRSOKNAD', 'TIL_BESLUTTER'],
@@ -56,7 +56,7 @@ const SAKSLISTER = [
     },
     behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],
-    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
     andreKriterie: {
       inkluder: ['TIL_BESLUTTER'],
       ekskluder: ['PAPIRSOKNAD'],

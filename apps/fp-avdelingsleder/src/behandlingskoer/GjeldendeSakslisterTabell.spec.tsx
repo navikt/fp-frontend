@@ -33,14 +33,13 @@ describe('GjeldendeSakslisterTabell', () => {
     expect(headerRow).toHaveTextContent('Navn');
     expect(headerRow).toHaveTextContent('Antall saksbehandlere');
     expect(headerRow).toHaveTextContent('Alle oppgaver');
-    expect(headerRow).toHaveTextContent('Tilgjengelige oppgaver');
-    expect(headerRow).toHaveTextContent('Graf');
+    expect(headerRow).toHaveTextContent('Reserverte oppgaver');
 
     const dataRow = rows[1]!;
     expect(dataRow).toHaveTextContent('Saksliste 1');
     expect(dataRow).toHaveTextContent('1'); // Antall saksbehandlere
     expect(dataRow).toHaveTextContent('33'); // Antall oppgaver
-    expect(dataRow).toHaveTextContent('25'); // Antall tilgjengelige oppgaver
+    expect(dataRow).toHaveTextContent('8'); // Antall tilgjengelige oppgaver
   });
 
   it('skal vise graf ved å trykke på graf ikon', async () => {
@@ -65,7 +64,7 @@ describe('GjeldendeSakslisterTabell', () => {
     render(<TabellNårDetFinnesEnBehandlingskø />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('img')[2]!);
+    await userEvent.click(screen.getByTitle('Slett saksliste Saksliste 1'));
 
     expect(await screen.findByText('Ønsker du å slette Saksliste 1?')).toBeInTheDocument();
 

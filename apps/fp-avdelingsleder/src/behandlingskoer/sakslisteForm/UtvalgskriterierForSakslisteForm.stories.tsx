@@ -52,7 +52,7 @@ export const MedGittNavn: Story = {
       },
       behandlingTyper: ['BT-002'],
       fagsakYtelseTyper: ['FP'],
-      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
       andreKriterie: {
         inkluder: ['TIL_BESLUTTER'],
         ekskluder: ['PAPIRSOKNAD'],
@@ -65,7 +65,7 @@ export const MedDefaultNavn: Story = {
   args: {
     valgtSaksliste: {
       sakslisteId: 1,
-      navn: undefined,
+      navn: 'Ny liste',
       saksbehandlerIdenter: [],
       sortering: {
         sorteringType: 'BEHFRIST',
@@ -75,7 +75,7 @@ export const MedDefaultNavn: Story = {
       },
       behandlingTyper: ['BT-002'],
       fagsakYtelseTyper: ['FP'],
-      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO', feltKategori: 'UNIVERSAL' }],
+      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
       andreKriterie: {
         inkluder: ['TIL_BESLUTTER'],
         ekskluder: ['PAPIRSOKNAD'],

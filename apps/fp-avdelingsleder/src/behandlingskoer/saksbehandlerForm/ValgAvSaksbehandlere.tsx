@@ -1,10 +1,13 @@
 import { useFormContext } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
 
+import { Detail } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import type { SakslisteAvdeling } from '@navikt/fp-types';
+
 import { lagreSakslisteSaksbehandler, LosUrl } from '../../data/fplosAvdelingslederApi';
-import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
 
 export type FormValues = {
   [key: string]: boolean;
@@ -34,22 +37,25 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
     },
   });
 
-  return (
-    <div style={{ columnCount: 3, columnGap: '32px' }}>
+  return saksbehandlere.length === 0 ? (
+    <Detail>
+      <FormattedMessage id="ValgAvSaksbehandlere.IngenSaksbehandlere" />
+    </Detail>
+  ) : (
+    <div style={{ columns: '200px auto', columnGap: '50px' }}>
       {saksbehandlere.map(s => (
-        <div key={s.brukerIdent} style={{ breakInside: 'avoid', marginBottom: '16px' }}>
-          <RhfCheckbox
-            name={s.brukerIdent}
-            control={control}
-            label={s.navn}
-            onChange={isChecked =>
-              knyttSaksbehandlerTilSaksliste({
-                brukerIdent: s.brukerIdent,
-                checked: isChecked,
-              })
-            }
-          />
-        </div>
+        <RhfCheckbox
+          key={s.brukerIdent}
+          name={s.brukerIdent}
+          control={control}
+          label={s.navn}
+          onChange={isChecked =>
+            knyttSaksbehandlerTilSaksliste({
+              brukerIdent: s.brukerIdent,
+              checked: isChecked,
+            })
+          }
+        />
       ))}
     </div>
   );

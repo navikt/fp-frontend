@@ -68,7 +68,7 @@ export const OppgaverPerForsteStonadsdagPanel = ({ height, valgtAvdelingEnhet }:
               {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'SVP')}
             </Radio>
             <Radio value={ALLE_YTELSETYPER_VALGT} size="small">
-              <FormattedMessage id="OppgaverPerForsteStonadsdagPanel.Alle" />
+              <FormattedMessage id="Label.Alle" />
             </Radio>
           </HStack>
         </RhfRadioGroup>

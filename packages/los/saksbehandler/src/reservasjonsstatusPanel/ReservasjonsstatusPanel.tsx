@@ -63,18 +63,14 @@ export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid, kanVeilede
               size="small"
               variant="primary"
               onClick={() => opphevOppgavereservasjon(oppgaveForBehandling.id)}
-              disabled={kanVeilede}>
+              disabled={kanVeilede}
+            >
               <FormattedMessage id="ReservasjonsstatusPanel.OpphevReservasjon" />
             </Button>
           </Tooltip>
         )}
         {erReservert && !oppgaveForBehandling.reservasjonStatus.erReservertAvInnloggetBruker && (
-          <Button
-            data-color="neutral"
-            size="small"
-            variant="primary"
-            disabled
-            icon={<PadlockLockedIcon aria-hidden />}>
+          <Button data-color="neutral" size="small" variant="primary" disabled icon={<PadlockLockedIcon aria-hidden />}>
             <FormattedMessage
               id="ReservasjonsstatusPanel.Reservert"
               values={{ navn: oppgaveForBehandling.reservasjonStatus.reservertAvNavn }}

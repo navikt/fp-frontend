@@ -53,7 +53,7 @@ export const OppgaveErReservertAvAnnenModal = ({
             />
           </Label>
           <Button className={styles['okButton']} size="small" variant="primary" onClick={lukk} autoFocus type="button">
-            <FormattedMessage id="OppgaveErReservertAvAnnenModal.Ok" />
+            <FormattedMessage id="Label.Ok" />
           </Button>
         </HStack>
       </NavModal.Body>

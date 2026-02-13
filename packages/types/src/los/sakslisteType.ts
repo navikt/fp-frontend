@@ -8,7 +8,6 @@ export type AnnetKriterie = Readonly<{
 export type KøSorteringFelt = Readonly<{
   sorteringType: KøSortering;
   feltType: string;
-  feltKategori: string;
 }>;
 
 export type Statistikk = {
@@ -26,13 +25,11 @@ export type Sortering = {
   tomDato?: string;
 };
 
-export type TilBeslutter = 'TA_MED_ALLE' | 'TA_MED' | 'FJERN';
-
 export type Periodefilter = 'FAST_PERIODE' | 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER';
 
 export type SakslisteAvdeling = Readonly<{
   sakslisteId: number;
-  navn?: string;
+  navn: string;
   behandlingTyper: BehandlingType[];
   fagsakYtelseTyper: FagsakYtelseType[];
   sortering: Sortering;

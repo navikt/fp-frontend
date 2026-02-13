@@ -19,7 +19,7 @@ export const FagsakYtelseTypeVelger = () => {
   return (
     <VStack gap="space-4">
       <Label size="small">
-        <FormattedMessage id="FagsakYtelseTypeVelger.Stonadstype" />
+        <FormattedMessage id="Label.Stønadstype" />
       </Label>
       {alleFagsakYtelseTyper.map(fyt => (
         <RhfCheckbox

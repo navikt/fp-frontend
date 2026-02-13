@@ -2,12 +2,10 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, Modal as NavModal, VStack } from '@navikt/ds-react';
-import { getDateAndTime } from '@navikt/ft-utils';
+import { BodyShort, Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';
+import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import { type Oppgave } from '../../../../../typer/oppgaveTsType';
-
-import styles from './oppgaveReservasjonForlengetModal.module.css';
 
 interface Props {
   oppgave: Oppgave;
@@ -24,28 +22,27 @@ export const OppgaveReservasjonForlengetModal = ({ oppgave, closeModal }: Props)
       aria-label={intl.formatMessage({ id: 'OppgaveReservasjonForlengetModal.Reservert' })}
       onClose={closeModal as () => void}
     >
-      <NavModal.Body>
-        <HStack gap="space-20" align="center" className={styles['padding']}>
-          <CheckmarkCircleFillIcon
-            className={styles['image']}
-            title={intl.formatMessage({ id: 'OppgaveReservasjonForlengetModal.Reservert' })}
-          />
-          <VStack gap="space-4">
-            <Label size="small">
-              <FormattedMessage id="OppgaveReservasjonForlengetModal.Reservert" />
-            </Label>
-            <BodyShort>
-              <FormattedMessage
-                id="OppgaveReservasjonForlengetModal.Til"
-                values={getDateAndTime(oppgave.reservasjonStatus.reservertTilTidspunkt)}
-              />
-            </BodyShort>
-          </VStack>
+      <NavModal.Header>
+        <HStack gap="space-16" align="center">
+          <CheckmarkCircleFillIcon color="var(--ax-bg-success-strong)" fontSize="2rem" aria-hidden />
+          <Label size="medium">
+            <FormattedMessage id="OppgaveReservasjonForlengetModal.Reservert" />
+          </Label>
         </HStack>
-      </NavModal.Body>
+      </NavModal.Header>
+      {oppgave.reservasjonStatus.reservertTilTidspunkt && (
+        <NavModal.Body>
+          <BodyShort>
+            <FormattedMessage
+              id="OppgaveReservasjonForlengetModal.ReservertTil"
+              values={{ datetime: <DateTimeLabel dateTimeString={oppgave.reservasjonStatus.reservertTilTidspunkt} /> }}
+            />
+          </BodyShort>
+        </NavModal.Body>
+      )}
       <NavModal.Footer>
-        <Button size="small" variant="secondary" onClick={closeModal} autoFocus type="button">
-          <FormattedMessage id="OppgaveReservasjonForlengetModal.Ok" />
+        <Button size="small" variant="primary" onClick={closeModal} autoFocus type="button">
+          <FormattedMessage id="Label.Ok" />
         </Button>
       </NavModal.Footer>
     </NavModal>

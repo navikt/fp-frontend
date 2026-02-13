@@ -3,18 +3,11 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-
 import { FlyttReservasjonModal } from './FlyttReservasjonModal';
-
-import messages from '../../i18n/nb_NO.json';
-
-const withIntl = getIntlDecorator(messages);
 
 const meta = {
   title: 'los/FlyttReservasjonModal',
   component: FlyttReservasjonModal,
-  decorators: [withIntl],
   args: {
     closeModal: action('button-click'),
     hentSaksbehandler: action('button-click'),

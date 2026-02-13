@@ -1,13 +1,13 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { LineGraphDotIcon } from '@navikt/aksel-icons';
 import { Button, Dialog } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { AktiveOgTilgjengeligeOppgaverGraf } from '@navikt/fp-los-felles';
+import type { SakslisteAvdeling } from '@navikt/fp-types';
 
 import { oppgaveFilterStatistikkOptions } from '../data/fplosAvdelingslederApi';
-import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 
 interface Props {
   saksliste: SakslisteAvdeling;
@@ -15,18 +15,19 @@ interface Props {
 }
 
 export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => {
+  const intl = useIntl();
   return (
     <Dialog>
       <Dialog.Trigger>
         <Button
           variant="secondary"
           size="small"
-          icon={<LineGraphDotIcon title="Vis oppgave graf" fontSize="1.5rem" />}
-          iconPosition="right"
+          title={intl.formatMessage({ id: 'OppgaverGrafDialog.VisOppgaveGraf' })}
+          icon={<LineGraphDotIcon aria-hidden />}
           disabled={saksliste.gjeldendeStatistikk == null}
         ></Button>
       </Dialog.Trigger>
-      <Dialog.Popup onClick={e => e.stopPropagation()}>
+      <Dialog.Popup onClick={e => e.stopPropagation()} width="large">
         <Dialog.Header>
           <Dialog.Title>
             <FormattedMessage id="OppgaverGrafDialog.Overskrift" />
@@ -39,7 +40,7 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
         <Dialog.Footer>
           <Dialog.CloseTrigger>
             <Button>
-              <FormattedMessage id="OppgaverGrafDialog.Lukk" />
+              <FormattedMessage id="Dialog.Lukk" />
             </Button>
           </Dialog.CloseTrigger>
         </Dialog.Footer>

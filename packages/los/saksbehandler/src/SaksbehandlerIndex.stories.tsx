@@ -3,13 +3,12 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { AsyncPollingStatus,NavAnsatt } from '@navikt/fp-types';
+import type { AsyncPollingStatus, NavAnsatt, SakslisteAvdeling } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
 import { type Oppgave, type OppgaveMedStatus } from './typer/oppgaveTsType';
 import type { Saksbehandler } from './typer/saksbehandlerTsType';
-import type { Saksliste } from './typer/sakslisteTsType';
 
 const SAKSLISTER = [
   {
@@ -23,16 +22,12 @@ const SAKSLISTER = [
     },
     behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],
-    andreKriterier: [
-      {
-        andreKriterierType: 'TIL_BESLUTTER',
-        inkluder: true,
-      },
-      {
-        andreKriterierType: 'PAPIRSOKNAD',
-        inkluder: false,
-      },
-    ],
+    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
+    saksbehandlerIdenter: [],
+    andreKriterie: {
+      inkluder: ['TIL_BESLUTTER', 'HASTER'],
+      ekskluder: ['PAPIRSOKNAD', 'REVURDERING_INNTEKTSMELDING', 'KODE7_SAK', 'ARBEID_INNTEKT'],
+    },
   },
   {
     sakslisteId: 2,
@@ -45,14 +40,14 @@ const SAKSLISTER = [
     },
     behandlingTyper: ['BT-002', 'BT-004'],
     fagsakYtelseTyper: ['FP', 'SVP', 'ES'],
-    andreKriterier: [
-      {
-        andreKriterierType: 'TIL_BESLUTTER',
-        inkluder: false,
-      },
-    ],
+    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
+    saksbehandlerIdenter: [],
+    andreKriterie: {
+      inkluder: [],
+      ekskluder: ['TIL_BESLUTTER'],
+    },
   },
-] satisfies Saksliste[];
+] satisfies SakslisteAvdeling[];
 
 const OPPGAVER_TIL_BEHANDLING = [
   {

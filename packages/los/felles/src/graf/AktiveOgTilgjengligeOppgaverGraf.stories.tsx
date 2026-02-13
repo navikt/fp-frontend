@@ -1,14 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-
 import type { OppgaveFilterStatistikk } from '../typer/oppgaveFilterStatistikk';
 import { AktiveOgTilgjengeligeOppgaverGraf } from './AktiveOgTilgjengeligeOppgaverGraf';
-
-import messages from '../../i18n/nb_NO.json';
-
-const withIntl = getIntlDecorator(messages);
 
 // Hjelpefunksjon for relative datoer
 const getTidspunktForAntallTimerSiden = (hours: number): string => {
@@ -18,7 +12,6 @@ const getTidspunktForAntallTimerSiden = (hours: number): string => {
 const meta = {
   title: 'los/AktiveOgTilgjengeligeOppgaverGraf',
   component: AktiveOgTilgjengeligeOppgaverGraf,
-  decorators: [withIntl],
 } satisfies Meta<typeof AktiveOgTilgjengeligeOppgaverGraf>;
 
 export default meta;

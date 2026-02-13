@@ -64,7 +64,7 @@ export const AndreKriterieValgKnapp = ({ andreKriterierType }: Props): ReactElem
           toggle={toggleKnapp}
         />
       </HStack>
-      <BodyShort>{andreKriterierType.navn}</BodyShort>
+      <BodyShort size="small">{andreKriterierType.navn}</BodyShort>
     </HStack>
   );
 };
