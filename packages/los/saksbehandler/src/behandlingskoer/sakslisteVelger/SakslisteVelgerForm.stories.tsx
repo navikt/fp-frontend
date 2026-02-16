@@ -203,3 +203,76 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
     ],
   },
 };
+
+export const MedBelopFraOgTil: Story = {
+  args: {
+    sakslister: [
+      {
+        sakslisteId: 1,
+        navn: 'Saksliste 1',
+        behandlingTyper: ['BT-007'],
+        fagsakYtelseTyper: ['FP'],
+        sortering: {
+          sorteringType: 'BELOP',
+          fra: 2,
+          til: 3,
+          periodefilter: 'FAST_PERIODE',
+        },
+        sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],
+        saksbehandlerIdenter: [],
+        andreKriterie: {
+          inkluder: [],
+          ekskluder: [],
+        },
+      },
+    ],
+  },
+};
+
+export const MedBelopKunFra: Story = {
+  args: {
+    sakslister: [
+      {
+        sakslisteId: 1,
+        navn: 'Saksliste 1',
+        behandlingTyper: ['BT-007'],
+        fagsakYtelseTyper: ['FP'],
+        sortering: {
+          sorteringType: 'BELOP',
+          fra: 2,
+          periodefilter: 'FAST_PERIODE',
+        },
+        sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],
+        saksbehandlerIdenter: [],
+        andreKriterie: {
+          inkluder: [],
+          ekskluder: [],
+        },
+      },
+    ],
+  },
+};
+
+export const MedBelopKunTil: Story = {
+  args: {
+    sakslister: [
+      {
+        sakslisteId: 1,
+        navn: 'Saksliste 1',
+        behandlingTyper: ['BT-007'],
+        fagsakYtelseTyper: ['FP'],
+        sortering: {
+          sorteringType: 'BELOP',
+          til: 3,
+          periodefilter: 'FAST_PERIODE',
+        },
+        sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],
+        saksbehandlerIdenter: [],
+        andreKriterie: {
+          inkluder: [],
+          ekskluder: [],
+        },
+      },
+    ],
+  },
+};

@@ -226,6 +226,9 @@ export const SakslisteVelgerForm = ({
   }, [sakslisteId]);
 
   const valgtSaksliste = sorterteSakslister.find(s => sakslisteId === `${s.sakslisteId}`);
+  const sortering = valgtSaksliste?.sortering;
+  const harBelopFra = sortering?.sorteringType === 'BELOP' ? sortering.fra !== undefined : false;
+  const harBelopTil = sortering?.sorteringType === 'BELOP' ? sortering.til !== undefined : false;
 
   if (sakslister.length === 0) {
     return (
@@ -311,7 +314,30 @@ export const SakslisteVelgerForm = ({
                 <FilterBox
                   label={<FormattedMessage id="SakslisteVelgerForm.Sortering" />}
                   icon={<ArrowsUpDownIcon aria-hidden />}
-                  value={<BodyShort>{getSorteringsnavn(intl, køSorteringTyper, valgtSaksliste)}</BodyShort>}
+                  value={
+                    <BodyShort>
+                      {getSorteringsnavn(intl, køSorteringTyper, valgtSaksliste)}
+
+                      {(harBelopFra || harBelopTil) && (
+                        <>
+                          <br />
+                          {harBelopFra && (
+                            <>
+                              <FormattedMessage id="SakslisteVelgerForm.SorteringsinfoFra" />{' '}
+                              {valgtSaksliste.sortering.fra}
+                            </>
+                          )}
+                          {harBelopTil && (
+                            <span>
+                              {harBelopFra && ' - '}
+                              <FormattedMessage id="SakslisteVelgerForm.SorteringsinfoTil" />{' '}
+                              {valgtSaksliste.sortering.til}
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </BodyShort>
+                  }
                 />
               </HStack>
             )}
