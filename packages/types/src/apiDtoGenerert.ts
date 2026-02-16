@@ -3871,7 +3871,6 @@ export type tjenester_behandling_personopplysning_PersonadresseDto = {
 
 export type tjenester_behandling_personopplysning_PersonopplysningBasisDto = {
   adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
-  aktoerId?: string;
   aktørId?: string;
   diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
   dødsdato?: string;
@@ -4766,7 +4765,6 @@ export type foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType 
   | 'KGEHJE';
 
 export type foreldrepenger_dokumentbestiller_dto_BestillDokumentDto = {
-  arsakskode?: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
   behandlingUuid?: string;
   brevmalkode: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
   fritekst?: string;
@@ -4774,7 +4772,6 @@ export type foreldrepenger_dokumentbestiller_dto_BestillDokumentDto = {
 };
 
 export type foreldrepenger_dokumentbestiller_dto_ForhåndsvisDokumentDto = {
-  arsakskode?: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
   automatiskVedtaksbrev?: boolean;
   behandlingUuid: string;
   dokumentMal?: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
@@ -5175,7 +5172,6 @@ export type tjenester_infotrygd_InfotrygdVedtakDto_Periode = {
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_SakDto = {
-  nivaa?: string;
   nivå?: string;
   registrert: string;
   resultat?: string;
