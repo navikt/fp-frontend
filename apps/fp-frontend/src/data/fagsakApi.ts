@@ -50,7 +50,7 @@ export type SubmitMessageParams = {
   behandlingUuid?: string;
   brevmalkode?: string;
   fritekst?: string;
-  arsakskode?: string;
+  årsakskode?: string;
 };
 
 export type NyBehandlingParams = {

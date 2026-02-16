@@ -162,13 +162,13 @@ const getFritekstMessage = (brevmalkode?: DokumentMalType | DokumentMalTypeFpTil
 // TODO (TOR) Bør erstattast av ein markør fra backend
 const showFritekst = (
   brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake,
-  arsakskode?: RevurderingVarslingÅrsak,
+  årsakskode?: RevurderingVarslingÅrsak,
 ): boolean =>
   brevmalkode === 'INNOPP' ||
   brevmalkode === 'KORRIGVARS' ||
   brevmalkode === 'VARS' ||
   brevmalkode === 'INNHEN' ||
-  (brevmalkode === 'VARREV' && arsakskode === 'ANNET');
+  (brevmalkode === 'VARREV' && årsakskode === 'ANNET');
 
 const getfiltrerteRevurderingVarslingArsaker = (
   revurderingVarslingArsaker: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[],
