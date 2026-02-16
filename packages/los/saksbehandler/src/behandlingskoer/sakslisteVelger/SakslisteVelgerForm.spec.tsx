@@ -8,6 +8,15 @@ import * as stories from './SakslisteVelgerForm.stories';
 const { Default, MedToSakslister, MedFlereEnnTreSaksbehandlere, MedBelopFraOgTil, MedBelopKunFra, MedBelopKunTil } =
   composeStories(stories);
 
+const hentSorteringBoks = () => {
+  const sorteringLabel = screen.getByText('Sortering');
+  const sorteringBoks = sorteringLabel.parentElement?.parentElement;
+  if (!sorteringBoks) {
+    throw new Error('Fant ikke sortering-boksen i testen');
+  }
+  return sorteringBoks;
+};
+
 describe('SakslisteVelgerForm', () => {
   it('skal vise dropdown med en saksliste', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
@@ -101,11 +110,7 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    const matcherTreff = screen.getAllByText((_content, node) => {
-      const text = node?.textContent?.replace(/\s+/g, ' ').trim() ?? '';
-      return text.includes('Fra 2 - Til 3');
-    });
-    expect(matcherTreff.length).toBeGreaterThan(0);
+    expect(hentSorteringBoks()).toHaveTextContent('Fra 2 - Til 3');
   });
 
   it('skal vise kun fra uten bindestrek når til mangler for BELOP', async () => {
@@ -116,9 +121,9 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(screen.getByText(/Fra\s+2/i)).toBeInTheDocument();
-    expect(screen.queryByText(/Til\s+3/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Fra\s+2\s*-/i)).not.toBeInTheDocument();
+    expect(hentSorteringBoks()).toHaveTextContent('Fra 2');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Til 3');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Fra 2 -');
   });
 
   it('skal vise kun til uten bindestrek når fra mangler for BELOP', async () => {
@@ -129,9 +134,9 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(screen.getByText(/Til\s+3/i)).toBeInTheDocument();
-    expect(screen.queryByText(/Fra\s+2/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/^\s*-\s*Til\s+3/i)).not.toBeInTheDocument();
+    expect(hentSorteringBoks()).toHaveTextContent('Til 3');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Fra 2');
+    expect(hentSorteringBoks()).not.toHaveTextContent(' - Til 3');
   });
 
   it('skal ikke vise fra/til når sorteringstype ikke er BELOP', async () => {
@@ -142,7 +147,7 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(screen.queryByText(/^Fra\s+\d+/i)).not.toBeInTheDocument();
-    expect(screen.queryByText(/^Til\s+\d+/i)).not.toBeInTheDocument();
+    expect(hentSorteringBoks()).not.toHaveTextContent('Fra 2');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Til 3');
   });
 });
