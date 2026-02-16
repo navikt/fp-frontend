@@ -329,9 +329,14 @@ export const SakslisteVelgerForm = ({
                           )}
                           {harBelopTil && (
                             <span>
-                              {harBelopFra && ' - '}
-                              <FormattedMessage id="SakslisteVelgerForm.SorteringsinfoTil" />{' '}
-                              {valgtSaksliste.sortering.til}
+                              {harBelopFra ? (
+                                <> - {valgtSaksliste.sortering.til}</>
+                              ) : (
+                                <>
+                                  <FormattedMessage id="SakslisteVelgerForm.SorteringsinfoTil" />{' '}
+                                  {valgtSaksliste.sortering.til}
+                                </>
+                              )}
                             </span>
                           )}
                         </>

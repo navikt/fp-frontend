@@ -110,7 +110,7 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(hentSorteringBoks()).toHaveTextContent('Fra 2 - Til 3');
+    expect(hentSorteringBoks()).toHaveTextContent('Fra 2 - 3');
   });
 
   it('skal vise kun fra uten bindestrek når til mangler for BELOP', async () => {
