@@ -30,7 +30,7 @@ const adresse2 = {
 const personoversikt: Personoversikt = {
   bruker: {
     navn: 'Espen Utvikler',
-    aktoerId: '1',
+    aktørId: '1',
     kjønn: KjønnkodeEnum.MANN,
     sivilstand: 'SAMB',
     fødselsdato: '1989-01-01',
@@ -39,7 +39,7 @@ const personoversikt: Personoversikt = {
   },
   annenPart: {
     navn: 'Petra Utvikler',
-    aktoerId: '2',
+    aktørId: '2',
     kjønn: KjønnkodeEnum.KVINNE,
     sivilstand: 'SAMB',
     fødselsdato: '1989-01-01',
@@ -52,7 +52,7 @@ const personoversikt: Personoversikt = {
       fødselsdato: '2023-01-01',
 
       adresser: [adresse1],
-      aktoerId: '3',
+      aktørId: '3',
       kjønn: KjønnkodeEnum.KVINNE,
       sivilstand: 'UGIF',
     },
@@ -61,7 +61,7 @@ const personoversikt: Personoversikt = {
       fødselsdato: '2023-01-01',
       dødsdato: '2023-04-01',
       adresser: [adresse1],
-      aktoerId: '4',
+      aktørId: '4',
       kjønn: KjønnkodeEnum.KVINNE,
       sivilstand: 'UGIF',
     },

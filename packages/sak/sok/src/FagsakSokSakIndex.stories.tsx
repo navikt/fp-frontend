@@ -21,7 +21,7 @@ const defaultSak = {
 
     fødselsdato: '',
 
-    dodsdato: undefined,
+    dødsdato: undefined,
     språkkode: '-',
   },
   barnFødt: '',

@@ -2,7 +2,7 @@ import type { Personoversikt } from '@navikt/fp-types';
 
 export const personoversikt: Personoversikt = {
   bruker: {
-    aktoerId: '9921487132273',
+    aktørId: '9921487132273',
     navn: 'Kristine Kalv',
     kjønn: 'K',
     sivilstand: 'UGIF',
@@ -21,7 +21,7 @@ export const personoversikt: Personoversikt = {
     ],
   },
   annenPart: {
-    aktoerId: '9921528317364',
+    aktørId: '9921528317364',
     navn: 'Asbjørn Lemur',
     kjønn: 'M',
     sivilstand: 'UGIF',
@@ -41,7 +41,7 @@ export const personoversikt: Personoversikt = {
   },
   barn: [
     {
-      aktoerId: '9902442362885',
+      aktørId: '9902442362885',
       navn: 'Ole Duck',
       kjønn: 'K',
       sivilstand: 'UGIF',

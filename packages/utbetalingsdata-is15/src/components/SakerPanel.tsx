@@ -50,7 +50,7 @@ export const SakerPanel = ({ saker }: Props) => (
             <Table.DataCell>
               <DateLabel dateString={sak.vedtatt} />
             </Table.DataCell>
-            <Table.DataCell>{sak.nivaa}</Table.DataCell>
+            <Table.DataCell>{sak.nivå}</Table.DataCell>
           </Table.Row>
         ))}
       </Table.Body>
