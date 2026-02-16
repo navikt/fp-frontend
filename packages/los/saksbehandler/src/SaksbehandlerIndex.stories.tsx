@@ -179,7 +179,6 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.DRIFTSMELDINGER, () => HttpResponse.json([])),
         http.get(LosUrl.SAKSLISTE, () => HttpResponse.json(SAKSLISTER)),
         http.get(LosUrl.RESERVER_OPPGAVE, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json(RESERVERTE_OPPGAVER)),
