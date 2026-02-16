@@ -227,8 +227,8 @@ export const SakslisteVelgerForm = ({
 
   const valgtSaksliste = sorterteSakslister.find(s => sakslisteId === `${s.sakslisteId}`);
   const sortering = valgtSaksliste?.sortering;
-  const harBelopFra = sortering?.sorteringType === 'BELOP' ? sortering.fra !== undefined : false;
-  const harBelopTil = sortering?.sorteringType === 'BELOP' ? sortering.til !== undefined : false;
+  const harBelopFra = sortering?.sorteringType === 'BELOP' && sortering.fra !== undefined;
+  const harBelopTil = sortering?.sorteringType === 'BELOP' && sortering.til !== undefined;
 
   if (sakslister.length === 0) {
     return (
