@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { useIntl } from 'react-intl';
 
-import { CheckmarkIcon, FilesIcon } from '@navikt/aksel-icons';
-import { BodyShort, CopyButton, HStack, Table, Tooltip } from '@navikt/ds-react';
+import { FilesIcon } from '@navikt/aksel-icons';
+import { BodyShort, CopyButton, HStack, Table } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Oppgave } from '../../../typer/oppgaveTsType';
@@ -40,15 +40,15 @@ export const LedigOppgaveRad = ({ oppgave, reserverOppgave, erNyBehandling }: Pr
     >
       <Table.DataCell>{oppgave.navn}</Table.DataCell>
       <Table.DataCell>
-        <HStack align="center" ref={refCopyButton} wrap={false}>
+        <HStack align="center" gap="space-8" ref={refCopyButton} wrap={false}>
           <BodyShort>{oppgave.saksnummer}</BodyShort>
-          <Tooltip content={intl.formatMessage({ id: 'LedigOppgaveRad.Saksnr' })}>
-            <CopyButton
-              activeIcon={<CheckmarkIcon className={styles['image']} aria-hidden />}
-              copyText={oppgave.saksnummer}
-              icon={<FilesIcon aria-hidden className={styles['image']} />}
-            />
-          </Tooltip>
+          <CopyButton
+            size="small"
+            data-color="accent"
+            aria-label={intl.formatMessage({ id: 'LedigOppgaveRad.Saksnr' })}
+            copyText={oppgave.saksnummer}
+            icon={<FilesIcon aria-hidden />}
+          />
         </HStack>
       </Table.DataCell>
       <Table.DataCell>

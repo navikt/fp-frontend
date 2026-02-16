@@ -78,6 +78,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
             },
             tooltip: {
               ...options.tooltip,
+              valueFormatter: value => (value as number).toLocaleString('nb-NO'),
               trigger: 'axis',
               axisPointer: {
                 type: 'shadow',
@@ -107,6 +108,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
             yAxis: {
               axisLabel: {
                 ...options.textStyle,
+                formatter: (value: number) => value.toLocaleString('nb-NO'),
               },
               type: 'value',
               name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.yAkse' }),

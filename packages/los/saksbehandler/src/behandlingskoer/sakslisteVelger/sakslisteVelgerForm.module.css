@@ -1,33 +1,23 @@
-.koInput {
-  width: 250px;
+.sakslisteSelect {
+  min-width: 250px;
 }
 
 .container {
   background-color: var(--ax-bg-neutral-soft);
-  border-bottom: 1px solid var(--ax-neutral-400);
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
   padding: 16px;
 }
 
 :global(.dark) .container {
-  border-bottom: 1px solid var(--ax-neutral-700);
+  border-bottom: 1px solid var(--ax-border-neutral-strong);
 }
 
-.grayout {
-  color: var(--ax-neutral-600);
-  height: 24px;
-  width: 24px;
+.grayIcon {
+  color: var(--ax-text-neutral-decoration);
+  font-size: 1.5rem;
 }
 
-.paddingBottom {
-  padding-bottom: 16px;
-}
-
-.hidden {
-  max-height: 0;
-  overflow: hidden;
-}
-
-.active {
+.køFilterBoks {
   max-height: 500px;
   overflow: hidden;
   transition: max-height 1s;

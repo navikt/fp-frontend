@@ -1,16 +1,8 @@
-.grayout {
-  color: var(--ax-neutral-600);
-}
-
-.headerPadding {
-  padding-left: 12px;
-}
-
-.tabell {
-  border-bottom: 1px solid var(--ax-neutral-400);
+.container {
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
   padding-bottom: 50px;
 }
 
-:global(.dark) .tabell {
-  border-bottom: 1px solid var(--ax-neutral-700);
+:global(.dark) .container {
+  border-bottom: 1px solid var(--ax-border-neutral-strong);
 }

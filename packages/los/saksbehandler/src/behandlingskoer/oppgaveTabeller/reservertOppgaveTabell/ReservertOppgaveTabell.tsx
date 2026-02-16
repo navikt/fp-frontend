@@ -53,13 +53,13 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
       : sorterteOppgaver;
 
   return (
-    <div className={styles['tabell']}>
-      <VStack gap="space-8" className={styles['headerPadding']}>
+    <div className={styles['container']}>
+      <VStack gap="space-8" paddingInline="space-12">
         <HStack gap="space-8">
           <Label size="small">
             <FormattedMessage id="ReservertOppgaveTabell.ReserverteOppgaver" />
           </Label>
-          <BodyShort size="small" className={styles['grayout']}>
+          <BodyShort size="small" textColor="subtle">
             <FormattedMessage
               id="ReservertOppgaveTabell.AntallOppgaver"
               values={{ reservertAntall: reserverteOppgaver.length }}

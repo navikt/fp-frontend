@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Box, Chips, Detail, Heading, HStack, VStack } from '@navikt/ds-react';
+import { NoWrap } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
@@ -46,7 +47,7 @@ export const NøkkeltallbokserPanel = ({ valgtAvdelingEnhet, children }: Props) 
           </Heading>
           {children}
         </HStack>
-        <HStack justify="space-between" align="center" style={{ maxWidth: '1100px' }}>
+        <HStack justify="space-between" align="center" gap="space-8" maxWidth={{ xl: '1600px' }}>
           <Detail>
             <FormattedMessage
               id="NøkkeltallbokserPanel.SistOppdatert"
@@ -73,7 +74,7 @@ export const NøkkeltallbokserPanel = ({ valgtAvdelingEnhet, children }: Props) 
               ))}
           </Chips>
         </HStack>
-        <HStack gap="space-32" style={{ maxWidth: '1200px' }}>
+        <HStack gap="space-16" maxWidth={{ xl: '1600px' }}>
           <NøkkeltallBoks oppgaverForAvdeling={oppgaverFiltrertPåYtelseType} behandlingType="BT-002" />
           <NøkkeltallBoks oppgaverForAvdeling={oppgaverFiltrertPåYtelseType} behandlingType="BT-004" />
           <NøkkeltallBoks oppgaverForAvdeling={oppgaverFiltrertPåYtelseType} behandlingType="BT-003" />
@@ -103,7 +104,7 @@ const NøkkeltallBoks = ({
   const behandlingTypeKodeverk = behandlingTyper.find(bt => bt.kode === behandlingType);
 
   return (
-    <Box background="neutral-moderate" borderRadius="8" padding="space-16" width="200px">
+    <Box background="neutral-moderate" borderRadius="8" padding="space-16" flexBasis="0%" flexGrow="1">
       <VStack
         gap="space-16"
         align="center"
@@ -114,7 +115,11 @@ const NøkkeltallBoks = ({
         </BodyShort>
         <Heading size="medium">{antall}</Heading>
         <Detail>
-          <FormattedMessage id="NøkkeltallbokserPanel.TilBeslutter" values={{ antall: antallTilBeslutter }} />
+          <FormattedMessage
+            tagName={NoWrap}
+            id="NøkkeltallbokserPanel.TilBeslutter"
+            values={{ antall: antallTilBeslutter }}
+          />
         </Detail>
       </VStack>
     </Box>

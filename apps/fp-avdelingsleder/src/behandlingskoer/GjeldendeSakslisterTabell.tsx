@@ -110,7 +110,7 @@ export const GjeldendeSakslisterTabell = ({
         <Label size="small">
           <FormattedMessage id="GjeldendeSakslisterTabell.GjeldendeLister" />
         </Label>
-        <Box background="neutral-moderate" paddingBlock="space-8" paddingInline="space-16">
+        <Box background="neutral-moderate" borderRadius="8" paddingBlock="space-8" paddingInline="space-16">
           <Detail>
             <FormattedMessage id="GjeldendeSakslisterTabell.OppgaverForAvdeling" />
           </Detail>
@@ -171,7 +171,7 @@ export const GjeldendeSakslisterTabell = ({
                 <Table.DataCell align="right">{saksliste.gjeldendeStatistikk?.alleOppgaver ?? '-'}</Table.DataCell>
                 <Table.DataCell align="right">{reserverteOppgaver(saksliste)}</Table.DataCell>
                 <Table.DataCell align="right">
-                  <HStack gap="space-8" justify="end">
+                  <HStack gap="space-8" justify="end" wrap={false}>
                     <div>
                       <OppgaverGrafDialog saksliste={saksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
                     </div>

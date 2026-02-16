@@ -42,21 +42,21 @@
 
 @media all and (min-width: 1350px) {
   .rightColumn {
-    border-left: 1px solid var(--ax-neutral-400);
+    border-left: 1px solid var(--ax-border-neutral-subtle);
   }
 
   :global(.dark) .rightColumn {
-    border-left: 1px solid var(--ax-neutral-700);
+    border-left: 1px solid var(--ax-border-neutral-strong);
   }
 }
 
 @media all and (max-width: 1350px) {
   .rightColumn {
-    border-top: 1px solid var(--ax-neutral-400);
+    border-top: 1px solid var(--ax-border-neutral-subtle);
     margin-top: 40px;
   }
 
   :global(.dark) .rightColumn {
-    border-top-color: 1px solid var(--ax-neutral-700);
+    border-top-color: 1px solid var(--ax-border-neutral-strong);
   }
 }
