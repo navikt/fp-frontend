@@ -110,8 +110,8 @@
   "ReservasjonerTabell.Reservasjoner": "Reservasjoner for avdelingen",
   "ReservasjonerTabell.IngenReservasjoner": "Ingen reservasjoner funnet",
   "ReservasjonerTabell.SlettReservasjon": "Slett reservasjon {oppgaveId}",
-  "ReservasjonerTabell.Sok": "Filtrer på navn",
-  "ReservasjonerTabell.Sok.PlaceHolder": "Filtrer på navn",
+  "ReservasjonerTabell.Sok": "Søk",
+  "ReservasjonerTabell.Sok.PlaceHolder": "Søk etter saksbehandler på navn",
 
   "SaksbehandlereTabell.AnsattVed": "Ansatt ved avdeling",
   "SaksbehandlereTabell.IngenSaksbehandlere": "Ingen saksbehandlere lagt til",
