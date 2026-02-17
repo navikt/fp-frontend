@@ -1,5 +1,5 @@
 export type Reservasjon = Readonly<{
-  reservertAvUid: string;
+  reservertAvIdent: string;
   reservertAvNavn: string;
   reservertTilTidspunkt: string;
   oppgaveId: number;

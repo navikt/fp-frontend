@@ -24,7 +24,7 @@ const SAKSLISTER = [
   {
     sakslisteId: 1,
     navn: 'A00 Hurtig kø',
-    saksbehandlerIdenter: [],
+    saksbehandlere: [],
     sortering: {
       sorteringType: 'BEHFRIST',
       fra: 1,
@@ -47,7 +47,7 @@ const SAKSLISTER = [
   {
     sakslisteId: 2,
     navn: 'A02 - Registrere papirsøknad',
-    saksbehandlerIdenter: [],
+    saksbehandlere: [],
     sortering: {
       sorteringType: 'BEHFRIST',
       fra: 1,

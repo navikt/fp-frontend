@@ -24,7 +24,7 @@ const RESERVERTE_OPPGAVER = [
       reservertTilTidspunkt: '2019-01-01T00:54:25.455',
       flyttetReservasjon: {
         tidspunkt: '2019-02-02',
-        uid: '23423',
+        flyttetAvIdent: '23423',
         navn: 'Espen Utvikler',
         begrunnelse: 'Dette er en begrunnelse',
       },

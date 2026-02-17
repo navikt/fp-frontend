@@ -47,7 +47,7 @@ export const OppgaveErReservertAvAnnenModal = ({
               id="OppgaveErReservertAvAnnenModal.ReservertAv"
               values={{
                 saksbehandlernavn: reservasjonStatus.reservertAvNavn,
-                saksbehandlerid: reservasjonStatus.reservertAvUid,
+                saksbehandlerid: reservasjonStatus.reservertAvIdent,
                 ...getDateAndTime(reservasjonStatus.reservertTilTidspunkt),
               }}
             />

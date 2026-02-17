@@ -1,3 +1,4 @@
+import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-types';
 
 export type AnnetKriterie = Readonly<{
@@ -35,13 +36,13 @@ export type SakslisteAvdeling = Readonly<{
   sortering: Sortering;
   sorteringTyper: KøSorteringFelt[];
   andreKriterie: AnnetKriterie;
-  saksbehandlerIdenter: string[];
+  saksbehandlere: SaksbehandlerProfil[];
   gjeldendeStatistikk?: Statistikk;
 }>;
 
 export type SakslisteDto = Omit<
   SakslisteAvdeling,
-  'sorteringTyper' | 'saksbehandlerIdenter' | 'gjeldendeStatistikk'
+  'sorteringTyper' | 'saksbehandlere' | 'gjeldendeStatistikk'
 > & {
   avdelingEnhet: string;
 };
