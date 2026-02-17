@@ -18,7 +18,7 @@ export const oppgaverForFagsaker: Oppgave[] = [
       erReservert: true,
       reservertTilTidspunkt: '2025-11-12T21:49:56.181',
       erReservertAvInnloggetBruker: true,
-      reservertAvUid: 'S123456',
+      reservertAvIdent: 'S123456',
       reservertAvNavn: 'Sara Saksbehandler',
       flyttetReservasjon: null,
     },

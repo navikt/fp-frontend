@@ -16,7 +16,7 @@ const oppgaveForResevertAvAnnenModal = {
     erReservert: false,
     flyttetReservasjon: {
       tidspunkt: '2019-02-02',
-      uid: '23423',
+      flyttetAvIdent: '23423',
       navn: 'Espen Utvikler',
       begrunnelse: 'Flyttet',
     },
@@ -50,7 +50,7 @@ export const Default: Story = {
     reservasjonStatus: {
       erReservert: false,
       reservertAvNavn: 'Espen Utvikler',
-      reservertAvUid: 'E232323',
+      reservertAvIdent: 'E232323',
       reservertTilTidspunkt: '2020-01-01',
     },
   },

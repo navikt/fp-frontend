@@ -15,12 +15,10 @@ import {
 import { BodyShort, Box, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
 import type { LosKodeverkMedNavn, SakslisteAvdeling } from '@navikt/fp-types';
 
-import { getSakslisteSaksbehandlere } from '../../data/fplosSaksbehandlerApi';
 import { getValueFromLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 
@@ -204,10 +202,6 @@ export const SakslisteVelgerForm = ({
     saksliste1.navn.localeCompare(saksliste2.navn),
   );
 
-  const { mutate: fetchSaksbehandlere, data: saksbehandlere } = useMutation({
-    mutationFn: getSakslisteSaksbehandlere,
-  });
-
   const formMethods = useForm<FormValues>({
     defaultValues: getFormDefaultValues(sorterteSakslister, removeValueFromLocalStorage),
   });
@@ -220,7 +214,6 @@ export const SakslisteVelgerForm = ({
       setValueInLocalStorage('sakslisteId', sakslisteId);
       const id = Number.parseInt(sakslisteId, 10);
       setValgtSakslisteId(id);
-      fetchSaksbehandlere(id);
       fetchAntallOppgaver(id);
     }
   }, [sakslisteId]);
@@ -240,6 +233,7 @@ export const SakslisteVelgerForm = ({
     );
   }
 
+  const saksbehandlere = valgtSaksliste?.saksbehandlere;
   const sorterteSaksbehandlere = saksbehandlere?.toSorted((s1, s2) => s1.navn.localeCompare(s2.navn));
 
   return (
@@ -328,7 +322,7 @@ export const SakslisteVelgerForm = ({
                   )
                   .map(s => (
                     <SaksbehandlerBadge
-                      key={s.brukerIdent.brukerIdent}
+                      key={s.brukerIdent}
                       icon={<PersonHeadsetIcon aria-hidden />}
                       label={s.navn}
                     />

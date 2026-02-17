@@ -46,13 +46,13 @@ export const ViseAtIngenReservasjonerBleFunnet: Story = {
 
 const generateReservasjoner = () => {
   const saksbehandlere = [
-    { uid: 'espen-001', navn: 'Espen Utvikler' },
-    { uid: 'espen-002', navn: 'Espen Tester' },
-    { uid: 'eirik-001', navn: 'Eirik Utvikler' },
-    { uid: 'jens-otto-001', navn: 'Jens-Otto Techer' },
-    { uid: 'tor-001', navn: 'Tor På Spore' },
-    { uid: 'siri-001', navn: 'Siri Utvikler' },
-    { uid: 'steffen-001', navn: 'Steffen Heffen' },
+    { brukerIdent: 'espen-001', navn: 'Espen Utvikler' },
+    { brukerIdent: 'espen-002', navn: 'Espen Tester' },
+    { brukerIdent: 'eirik-001', navn: 'Eirik Utvikler' },
+    { brukerIdent: 'jens-otto-001', navn: 'Jens-Otto Techer' },
+    { brukerIdent: 'tor-001', navn: 'Tor På Spore' },
+    { brukerIdent: 'siri-001', navn: 'Siri Utvikler' },
+    { brukerIdent: 'steffen-001', navn: 'Steffen Heffen' },
   ];
 
   const behandlingTyper = ['BT-002', 'BT-003', 'BT-004', 'BT-005', 'BT-006'];
@@ -67,7 +67,7 @@ const generateReservasjoner = () => {
     reservertTilDato.setDate(reservertTilDato.getDate() + Math.floor(Math.random() * 30) + 1);
 
     reservasjoner.push({
-      reservertAvUid: saksbehandler.uid,
+      reservertAvIdent: saksbehandler.brukerIdent,
       reservertAvNavn: saksbehandler.navn,
       reservertTilTidspunkt: reservertTilDato.toISOString().split('T')[0],
       oppgaveId: oppgaveId++,

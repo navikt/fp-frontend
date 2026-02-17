@@ -46,7 +46,13 @@ export const IngenSaksbehandlere: Story = {
         inkluder: [],
         ekskluder: [],
       },
-      saksbehandlerIdenter: ['S34354'],
+      saksbehandlere: [
+        {
+          brukerIdent: 'S34354',
+          navn: 'Steffen',
+          ansattAvdeling: '1234',
+        },
+      ],
     },
     avdelingensSaksbehandlere: [],
   },
@@ -76,7 +82,13 @@ export const ToSaksbehandlere: Story = {
         inkluder: [],
         ekskluder: [],
       },
-      saksbehandlerIdenter: ['S34354'],
+      saksbehandlere: [
+        {
+          brukerIdent: 'S34354',
+          navn: 'Steffen',
+          ansattAvdeling: 'Avdeling Å',
+        },
+      ],
     },
     avdelingensSaksbehandlere: [
       {
@@ -117,7 +129,13 @@ export const TreSaksbehandlere: Story = {
         inkluder: [],
         ekskluder: [],
       },
-      saksbehandlerIdenter: ['S34354'],
+      saksbehandlere: [
+        {
+          brukerIdent: 'S34354',
+          navn: 'Steffen',
+          ansattAvdeling: 'Avdeling Å',
+        },
+      ],
     },
     avdelingensSaksbehandlere: [
       {
@@ -267,7 +285,13 @@ export const SaksbehandlereSomErGruppert: Story = {
         inkluder: [],
         ekskluder: [],
       },
-      saksbehandlerIdenter: ['S34354'],
+      saksbehandlere: [
+        {
+          brukerIdent: 'S34354',
+          navn: 'Steffen',
+          ansattAvdeling: 'Avdeling Å',
+        },
+      ],
     },
     avdelingensSaksbehandlere: [
       {

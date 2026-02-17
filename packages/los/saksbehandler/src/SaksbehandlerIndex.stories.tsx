@@ -8,7 +8,6 @@ import type { AsyncPollingStatus, NavAnsatt, SakslisteAvdeling } from '@navikt/f
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
 import { type Oppgave, type OppgaveMedStatus } from './typer/oppgaveTsType';
-import type { Saksbehandler } from './typer/saksbehandlerTsType';
 
 const SAKSLISTER = [
   {
@@ -23,7 +22,7 @@ const SAKSLISTER = [
     behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],
     sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-    saksbehandlerIdenter: [],
+    saksbehandlere: [],
     andreKriterie: {
       inkluder: ['TIL_BESLUTTER', 'HASTER'],
       ekskluder: ['PAPIRSOKNAD', 'REVURDERING_INNTEKTSMELDING', 'KODE7_SAK', 'ARBEID_INNTEKT'],
@@ -41,7 +40,7 @@ const SAKSLISTER = [
     behandlingTyper: ['BT-002', 'BT-004'],
     fagsakYtelseTyper: ['FP', 'SVP', 'ES'],
     sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-    saksbehandlerIdenter: [],
+    saksbehandlere: [],
     andreKriterie: {
       inkluder: [],
       ekskluder: ['TIL_BESLUTTER'],
@@ -112,7 +111,7 @@ const RESERVERTE_OPPGAVER = [
       flyttetReservasjon: {
         navn: 'Petter',
         tidspunkt: '2019-08-02T00:54:25.455',
-        uid: 'uid',
+        flyttetAvIdent: 'Ident',
         begrunnelse: 'Denne er flyttet',
       },
     },
@@ -129,23 +128,6 @@ const RESERVERTE_OPPGAVER = [
     andreKriterier: ['REVURDERING_INNTEKTSMELDING'],
   },
 ] satisfies Oppgave[];
-
-const SAKSLISTE_SAKSBEHANDLERE = [
-  {
-    brukerIdent: {
-      brukerIdent: '32434',
-      verdi: '32434',
-    },
-    navn: 'Espen Utvikler',
-  },
-  {
-    brukerIdent: {
-      brukerIdent: '31111',
-      verdi: '32111',
-    },
-    navn: 'Auto Joakim',
-  },
-] satisfies Saksbehandler[];
 
 const BEHANDLEDE_OPPGAVER = [
   {
@@ -182,7 +164,6 @@ const meta = {
         http.get(LosUrl.SAKSLISTE, () => HttpResponse.json(SAKSLISTER)),
         http.get(LosUrl.RESERVER_OPPGAVE, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json(RESERVERTE_OPPGAVER)),
-        http.get(LosUrl.SAKSLISTE_SAKSBEHANDLERE, () => HttpResponse.json(SAKSLISTE_SAKSBEHANDLERE)),
         http.get(LosUrl.BEHANDLINGSKO_OPPGAVE_ANTALL, () => HttpResponse.json(100)),
         http.get(LosUrl.RESERVER_OPPGAVE, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.SØK_FAGSAK, () => new HttpResponse(null, { status: 200 })),

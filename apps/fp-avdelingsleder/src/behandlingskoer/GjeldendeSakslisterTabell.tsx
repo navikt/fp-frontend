@@ -164,7 +164,7 @@ export const GjeldendeSakslisterTabell = ({
                 <Table.DataCell>{saksliste.navn}</Table.DataCell>
                 <Table.DataCell>{formatStonadstyper(fagsakYtelseTyper, saksliste.fagsakYtelseTyper)}</Table.DataCell>
                 <Table.DataCell>{formatBehandlingstyper(behandlingTyper, saksliste.behandlingTyper)}</Table.DataCell>
-                <Table.DataCell align="right">{saksliste.saksbehandlerIdenter.length}</Table.DataCell>
+                <Table.DataCell align="right">{saksliste.saksbehandlere.length}</Table.DataCell>
                 <Table.DataCell align="right">
                   {saksliste.gjeldendeStatistikk?.behandlingerPåVent ?? '-'}
                 </Table.DataCell>

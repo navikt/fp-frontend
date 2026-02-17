@@ -99,7 +99,7 @@ const lagFlyttetReservasjonPopover = (oppgaveStatus: ReservasjonStatus, brukerna
   }
   const datoOgTid = getDateAndTime(flyttetReservasjon.tidspunkt);
 
-  const erLagetAvInnloggetBruker = brukernavn === flyttetReservasjon.uid;
+  const erLagetAvInnloggetBruker = brukernavn === flyttetReservasjon.flyttetAvIdent;
 
   return (
     <VStack gap="space-8">
@@ -114,7 +114,7 @@ const lagFlyttetReservasjonPopover = (oppgaveStatus: ReservasjonStatus, brukerna
               values={{
                 dato: datoOgTid?.date,
                 tid: datoOgTid?.time,
-                uid: flyttetReservasjon.uid,
+                flyttetAvIdent: flyttetReservasjon.flyttetAvIdent,
                 navn: flyttetReservasjon.navn,
               }}
             />

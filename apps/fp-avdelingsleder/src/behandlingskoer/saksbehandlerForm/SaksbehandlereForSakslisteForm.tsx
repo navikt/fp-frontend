@@ -32,7 +32,7 @@ export const SaksbehandlereForSakslisteForm = ({
 
   const { data: grupper } = useQuery(grupperOptions(valgtAvdelingEnhet));
 
-  const defaultValues = valgtSaksliste.saksbehandlerIdenter.reduce(
+  const defaultValues = valgtSaksliste.saksbehandlere.map(sb => sb.brukerIdent).reduce(
     (acc, brukerIdent) => ({ ...acc, [brukerIdent]: true }),
     {},
   );
@@ -152,7 +152,7 @@ export const SaksbehandlereForSakslisteForm = ({
 
 const antallTilknyttetSaksliste = (saksliste: SakslisteAvdeling, gruppe: SaksbehandlerGruppe) => {
   let matchCount = 0;
-  for (const ident of saksliste.saksbehandlerIdenter) {
+  for (const ident of saksliste.saksbehandlere.map(sb => sb.brukerIdent)) {
     const matches = gruppe.saksbehandlere.filter(saksbehandler => saksbehandler.brukerIdent === ident);
     matchCount += matches.length;
   }
