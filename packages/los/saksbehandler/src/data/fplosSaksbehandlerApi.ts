@@ -4,7 +4,6 @@ import ky from 'ky';
 import type { ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AlleKodeverkLos, FagsakEnkel, SakslisteAvdeling } from '@navikt/fp-types';
 
-import type { Driftsmelding } from '../typer/driftsmeldingTsType';
 import type { Oppgave, OppgaveMedStatus } from '../typer/oppgaveTsType';
 import type { Saksbehandler } from '../typer/saksbehandlerTsType';
 
@@ -27,7 +26,6 @@ const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 export const LosUrl = {
   KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
-  DRIFTSMELDINGER: wrapUrl('/fplos/api/driftsmeldinger'),
   SØK_FAGSAK: wrapUrl('/fpsak/api/fagsak/sok'),
   SAKSLISTE: wrapUrl('/fplos/api/saksbehandler/saksliste'),
   RESERVERTE_OPPGAVER: wrapUrl('/fplos/api/reservasjon/reserverte-oppgaver'),
@@ -85,12 +83,6 @@ export const losKodeverkOptions = () =>
     queryKey: [LosUrl.KODEVERK_LOS],
     queryFn: () => kyExtended.get(LosUrl.KODEVERK_LOS).json<AlleKodeverkLos>(),
     staleTime: Infinity,
-  });
-
-export const driftsmeldingerOptions = () =>
-  queryOptions({
-    queryKey: [LosUrl.DRIFTSMELDINGER],
-    queryFn: () => kyExtended.get(LosUrl.DRIFTSMELDINGER).json<Driftsmelding[]>(),
   });
 
 export const sakslisteOptions = () =>
