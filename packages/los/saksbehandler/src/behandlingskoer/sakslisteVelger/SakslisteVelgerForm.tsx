@@ -155,20 +155,48 @@ const finnDatoMåned = (antallMåneder: number, erStartenAvMåned: boolean) => {
   return baseDato.add(antallMåneder, 'month').format(DDMMYYYY_DATE_FORMAT);
 };
 
-const getSorteringsnavn = (
+const getSorteringsInformasjon = (
   intl: IntlShape,
   køSorteringTyper: LosKodeverkMedNavn<'KøSortering'>[],
   saksliste?: SakslisteAvdeling,
-) => {
+): ReactNode => {
   if (!saksliste?.sortering) {
     return '';
   }
 
   const { periodefilter, sorteringType, fra, til, fomDato, tomDato } = saksliste.sortering;
 
-  return periodefilter === 'FAST_PERIODE'
-    ? getSorteringsnavnForPeriode(intl, køSorteringTyper, sorteringType, fomDato, tomDato)
-    : getSorteringsnavnForDynamiskPeriode(intl, køSorteringTyper, sorteringType, periodefilter, fra, til);
+  const sorteringsnavn =
+    periodefilter === 'FAST_PERIODE'
+      ? getSorteringsnavnForPeriode(intl, køSorteringTyper, sorteringType, fomDato, tomDato)
+      : getSorteringsnavnForDynamiskPeriode(intl, køSorteringTyper, sorteringType, periodefilter, fra, til);
+
+  if (sorteringType !== 'BELOP') {
+    return <BodyShort>{sorteringsnavn}</BodyShort>;
+  }
+
+  const harBelopFra = fra !== undefined;
+  const harBelopTil = til !== undefined;
+
+  if (!harBelopFra && !harBelopTil) {
+    return <BodyShort>{sorteringsnavn}</BodyShort>;
+  }
+
+  return (
+    <VStack gap="space-0">
+      <BodyShort>{sorteringsnavn}</BodyShort>
+      {harBelopFra && (
+        <BodyShort>
+          {intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoFra' })}: {fra} kr
+        </BodyShort>
+      )}
+      {harBelopTil && (
+        <BodyShort>
+          {intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoTil' })}: {til} kr
+        </BodyShort>
+      )}
+    </VStack>
+  );
 };
 
 type FormValues = {
@@ -226,10 +254,6 @@ export const SakslisteVelgerForm = ({
   }, [sakslisteId]);
 
   const valgtSaksliste = sorterteSakslister.find(s => sakslisteId === `${s.sakslisteId}`);
-  const sortering = valgtSaksliste?.sortering;
-  const harBelopFra = sortering?.sorteringType === 'BELOP' && sortering.fra !== undefined;
-  const harBelopTil = sortering?.sorteringType === 'BELOP' && sortering.til !== undefined;
-
   if (sakslister.length === 0) {
     return (
       <VStack gap="space-8" className={styles['container']}>
@@ -314,30 +338,7 @@ export const SakslisteVelgerForm = ({
                 <FilterBox
                   label={<FormattedMessage id="SakslisteVelgerForm.Sortering" />}
                   icon={<ArrowsUpDownIcon aria-hidden />}
-                  value={
-                    <BodyShort>
-                      {getSorteringsnavn(intl, køSorteringTyper, valgtSaksliste)}
-
-                      {(harBelopFra || harBelopTil) && (
-                        <>
-                          <br />
-                          {harBelopFra && (
-                            <>
-                              <FormattedMessage id="SakslisteVelgerForm.SorteringsinfoFra" />:{' '}
-                              {sortering.fra} kr
-                            </>
-                          )}
-                          {harBelopTil && (
-                            <>
-                              {harBelopFra && <br />}
-                              <FormattedMessage id="SakslisteVelgerForm.SorteringsinfoTil" />:{' '}
-                              {sortering.til} kr
-                            </>
-                          )}
-                        </>
-                      )}
-                    </BodyShort>
-                  }
+                  value={getSorteringsInformasjon(intl, køSorteringTyper, valgtSaksliste)}
                 />
               </HStack>
             )}
