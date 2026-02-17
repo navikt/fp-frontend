@@ -81,7 +81,6 @@ const meta = {
         http.get(getHref(FagsakRel.SEARCH_UTBETALINGSDATA_IS15), () => HttpResponse.json({})),
         http.get(FagsakUrl.AKTOER_INFO, () => HttpResponse.json(AKTØR_INFO)),
         http.get(wrapUrl('fplos/api/kodeverk'), () => HttpResponse.json(alleKodeverkLos)),
-        http.get(wrapUrl('fplos/api/driftsmeldinger'), () => HttpResponse.json([])),
         http.get(wrapUrl('fplos/api/reservasjon/tidligere-reserverte'), () => HttpResponse.json([])),
         http.get(wrapUrl('fplos/api/saksbehandler/saksliste'), () => HttpResponse.json([])),
       ],
