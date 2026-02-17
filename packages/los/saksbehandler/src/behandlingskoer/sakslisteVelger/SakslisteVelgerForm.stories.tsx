@@ -22,24 +22,6 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.SAKSLISTE_SAKSBEHANDLERE, () =>
-          HttpResponse.json([
-            {
-              brukerIdent: {
-                brukerIdent: '32434',
-                verdi: '32434',
-              },
-              navn: 'Espen Utvikler',
-            },
-            {
-              brukerIdent: {
-                brukerIdent: '31111',
-                verdi: '32111',
-              },
-              navn: 'Auto Joakim',
-            },
-          ]),
-        ),
       ],
     },
   },
@@ -74,7 +56,18 @@ export const Default: Story = {
           periodefilter: 'RELATIV_PERIODE_DAGER',
         },
         sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-        saksbehandlerIdenter: [],
+        saksbehandlere: [
+          {
+            brukerIdent: '32434',
+            navn: 'Espen Utvikler',
+            ansattAvdeling: '1234',
+          },
+          {
+            brukerIdent: '31111',
+            navn: 'Auto Joakim',
+            ansattAvdeling: '1234',
+          },
+        ],
         andreKriterie: {
           inkluder: ['TIL_BESLUTTER'],
           ekskluder: [],
@@ -99,7 +92,18 @@ export const MedToSakslister: Story = {
           periodefilter: 'RELATIV_PERIODE_DAGER',
         },
         sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-        saksbehandlerIdenter: [],
+        saksbehandlere: [
+          {
+            brukerIdent: '32434',
+            navn: 'Espen Utvikler',
+            ansattAvdeling: '1234',
+          },
+          {
+            brukerIdent: '31111',
+            navn: 'Auto Joakim',
+            ansattAvdeling: '1234',
+          },
+        ],
         andreKriterie: {
           inkluder: ['TIL_BESLUTTER'],
           ekskluder: [],
@@ -117,7 +121,7 @@ export const MedToSakslister: Story = {
           periodefilter: 'RELATIV_PERIODE_DAGER',
         },
         sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-        saksbehandlerIdenter: [],
+        saksbehandlere: [],
         andreKriterie: {
           inkluder: ['UTBETALING_TIL_BRUKER'],
           ekskluder: [],
@@ -138,45 +142,6 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.SAKSLISTE_SAKSBEHANDLERE, () =>
-          HttpResponse.json([
-            {
-              brukerIdent: {
-                brukerIdent: '32434',
-                verdi: '32434',
-              },
-              navn: 'Espen Utvikler',
-            },
-            {
-              brukerIdent: {
-                brukerIdent: '31111',
-                verdi: '32111',
-              },
-              navn: 'Auto Joakim',
-            },
-            {
-              brukerIdent: {
-                brukerIdent: '3111123',
-                verdi: '3211123',
-              },
-              navn: 'Hans Haugerud',
-            },
-            {
-              brukerIdent: {
-                brukerIdent: '232323',
-                verdi: '23343',
-              },
-              navn: 'Olav Hellerud',
-            },
-            {
-              brukerIdent: {
-                brukerIdent: '311112',
-                verdi: '321112',
-              },
-              navn: 'Bente Frogner',
-            },
-          ]),
-        ),
       ],
     },
   },
@@ -194,7 +159,33 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
           periodefilter: 'RELATIV_PERIODE_DAGER',
         },
         sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-        saksbehandlerIdenter: [],
+        saksbehandlere: [
+          {
+            brukerIdent: '32434',
+            navn: 'Espen Utvikler',
+            ansattAvdeling: '1234',
+          },
+          {
+            brukerIdent: '31111',
+            navn: 'Auto Joakim',
+            ansattAvdeling: '1234',
+          },
+          {
+            brukerIdent: '3111123',
+            navn: 'Hans Haugerud',
+            ansattAvdeling: '1234',
+          },
+          {
+            brukerIdent: '232323',
+            navn: 'Olav Hellerud',
+            ansattAvdeling: '1234',
+          },
+          {
+            brukerIdent: '311112',
+            navn: 'Bente Frogner',
+            ansattAvdeling: '1234',
+          }
+        ],
         andreKriterie: {
           inkluder: ['TIL_BESLUTTER'],
           ekskluder: [],

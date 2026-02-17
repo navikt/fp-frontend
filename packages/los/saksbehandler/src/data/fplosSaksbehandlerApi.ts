@@ -5,7 +5,6 @@ import type { ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-fell
 import type { AlleKodeverkLos, FagsakEnkel, SakslisteAvdeling } from '@navikt/fp-types';
 
 import type { Oppgave, OppgaveMedStatus } from '../typer/oppgaveTsType';
-import type { Saksbehandler } from '../typer/saksbehandlerTsType';
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -38,13 +37,9 @@ export const LosUrl = {
   FLYTT_RESERVASJON: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon'),
   FORLENG_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/forleng'),
   FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon/søk'),
-  SAKSLISTE_SAKSBEHANDLERE: wrapUrl('/fplos/api/saksbehandler/saksliste/saksbehandlere'),
   BEHANDLINGSKO_OPPGAVE_ANTALL: wrapUrl('/fplos/api/saksbehandler/oppgaver/antall'),
   OPPGAVER_TIL_BEHANDLING: wrapUrl('/fplos/api/saksbehandler/oppgaver'),
 };
-
-export const getSakslisteSaksbehandlere = (sakslisteId: number) =>
-  kyExtended.get(LosUrl.SAKSLISTE_SAKSBEHANDLERE, { searchParams: { sakslisteId } }).json<Saksbehandler[]>();
 
 export const getBehandlingskøOppgaveAntall = (sakslisteId: number) =>
   kyExtended.get(LosUrl.BEHANDLINGSKO_OPPGAVE_ANTALL, { searchParams: { sakslisteId } }).json<number>();

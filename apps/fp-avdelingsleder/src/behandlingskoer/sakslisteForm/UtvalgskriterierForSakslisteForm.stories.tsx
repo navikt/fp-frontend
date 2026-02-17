@@ -43,7 +43,7 @@ export const MedGittNavn: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'liste',
-      saksbehandlerIdenter: [],
+      saksbehandlere: [],
       sortering: {
         sorteringType: 'BEHFRIST',
         fra: 1,
@@ -66,7 +66,7 @@ export const MedDefaultNavn: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Ny liste',
-      saksbehandlerIdenter: [],
+      saksbehandlere: [],
       sortering: {
         sorteringType: 'BEHFRIST',
         fra: 1,
