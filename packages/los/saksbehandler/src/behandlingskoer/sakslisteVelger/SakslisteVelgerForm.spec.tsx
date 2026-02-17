@@ -110,10 +110,11 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(hentSorteringBoks()).toHaveTextContent('Fra 2 - 3');
+    expect(hentSorteringBoks()).toHaveTextContent('Fra: 2 kr');
+    expect(hentSorteringBoks()).toHaveTextContent('Til: 3 kr');
   });
 
-  it('skal vise kun fra uten bindestrek når til mangler for BELOP', async () => {
+  it('skal vise kun fra når til mangler for BELOP', async () => {
     applyRequestHandlers(MedBelopKunFra.parameters['msw'] as MswParameters['msw']);
     render(<MedBelopKunFra />);
 
@@ -121,12 +122,11 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(hentSorteringBoks()).toHaveTextContent('Fra 2');
-    expect(hentSorteringBoks()).not.toHaveTextContent('Til 3');
-    expect(hentSorteringBoks()).not.toHaveTextContent('Fra 2 -');
+    expect(hentSorteringBoks()).toHaveTextContent('Fra: 2 kr');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Til: 3 kr');
   });
 
-  it('skal vise kun til uten bindestrek når fra mangler for BELOP', async () => {
+  it('skal vise kun til når fra mangler for BELOP', async () => {
     applyRequestHandlers(MedBelopKunTil.parameters['msw'] as MswParameters['msw']);
     render(<MedBelopKunTil />);
 
@@ -134,9 +134,8 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(hentSorteringBoks()).toHaveTextContent('Til 3');
-    expect(hentSorteringBoks()).not.toHaveTextContent('Fra 2');
-    expect(hentSorteringBoks()).not.toHaveTextContent(' - Til 3');
+    expect(hentSorteringBoks()).toHaveTextContent('Til: 3 kr');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Fra: 2 kr');
   });
 
   it('skal ikke vise fra/til når sorteringstype ikke er BELOP', async () => {
@@ -147,7 +146,7 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(hentSorteringBoks()).not.toHaveTextContent('Fra 2');
-    expect(hentSorteringBoks()).not.toHaveTextContent('Til 3');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Fra: 2 kr');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Til: 3 kr');
   });
 });

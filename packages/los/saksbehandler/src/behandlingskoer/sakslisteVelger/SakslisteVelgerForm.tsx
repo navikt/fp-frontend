@@ -323,21 +323,16 @@ export const SakslisteVelgerForm = ({
                           <br />
                           {harBelopFra && (
                             <>
-                              <FormattedMessage id="SakslisteVelgerForm.SorteringsinfoFra" />{' '}
-                              {valgtSaksliste.sortering.fra}
+                              <FormattedMessage id="SakslisteVelgerForm.SorteringsinfoFra" />:{' '}
+                              {valgtSaksliste.sortering.fra} kr
                             </>
                           )}
                           {harBelopTil && (
-                            <span>
-                              {harBelopFra ? (
-                                <> - {valgtSaksliste.sortering.til}</>
-                              ) : (
-                                <>
-                                  <FormattedMessage id="SakslisteVelgerForm.SorteringsinfoTil" />{' '}
-                                  {valgtSaksliste.sortering.til}
-                                </>
-                              )}
-                            </span>
+                            <>
+                              {harBelopFra && <br />}
+                              <FormattedMessage id="SakslisteVelgerForm.SorteringsinfoTil" />:{' '}
+                              {valgtSaksliste.sortering.til} kr
+                            </>
                           )}
                         </>
                       )}
