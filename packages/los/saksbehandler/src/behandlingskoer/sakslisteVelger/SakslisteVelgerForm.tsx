@@ -180,17 +180,20 @@ const getSorteringsInformasjon = (
     return <BodyShort>{sorteringsnavn}</BodyShort>;
   }
 
+  const formatertFra = harBelopFra ? Number(fra).toLocaleString('nb-NO') : undefined;
+  const formatertTil = harBelopTil ? Number(til).toLocaleString('nb-NO') : undefined;
+
   return (
     <VStack gap="space-0">
       <BodyShort>{sorteringsnavn}</BodyShort>
       {harBelopFra && (
         <BodyShort>
-          {intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoFra' })}: {fra} kr
+          {intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoFra' })}: {formatertFra} kr
         </BodyShort>
       )}
       {harBelopTil && (
         <BodyShort>
-          {intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoTil' })}: {til} kr
+          {intl.formatMessage({ id: 'SakslisteVelgerForm.SorteringsinfoTil' })}: {formatertTil} kr
         </BodyShort>
       )}
     </VStack>
