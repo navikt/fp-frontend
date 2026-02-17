@@ -20,9 +20,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
     msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-      ],
+      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
     },
   },
   args: {
@@ -140,9 +138,7 @@ export const MedIngenSakslister: Story = {
 export const MedFlereEnnTreSaksbehandlere: Story = {
   parameters: {
     msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-      ],
+      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
     },
   },
   args: {
@@ -184,7 +180,7 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
             brukerIdent: '311112',
             navn: 'Bente Frogner',
             ansattAvdeling: '1234',
-          }
+          },
         ],
         andreKriterie: {
           inkluder: ['TIL_BESLUTTER'],
@@ -210,7 +206,7 @@ export const MedBelopFraOgTil: Story = {
           periodefilter: 'FAST_PERIODE',
         },
         sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],
-        saksbehandlerIdenter: [],
+        saksbehandlere: [],
         andreKriterie: {
           inkluder: [],
           ekskluder: [],
@@ -234,7 +230,7 @@ export const MedBelopKunFra: Story = {
           periodefilter: 'FAST_PERIODE',
         },
         sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],
-        saksbehandlerIdenter: [],
+        saksbehandlere: [],
         andreKriterie: {
           inkluder: [],
           ekskluder: [],
@@ -258,7 +254,7 @@ export const MedBelopKunTil: Story = {
           periodefilter: 'FAST_PERIODE',
         },
         sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],
-        saksbehandlerIdenter: [],
+        saksbehandlere: [],
         andreKriterie: {
           inkluder: [],
           ekskluder: [],
