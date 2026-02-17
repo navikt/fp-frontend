@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Detail } from '@navikt/ds-react';
+import { Detail, HGrid } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -42,7 +42,7 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
       <FormattedMessage id="ValgAvSaksbehandlere.IngenSaksbehandlere" />
     </Detail>
   ) : (
-    <div style={{ columns: '200px auto', columnGap: '50px' }}>
+    <HGrid columns="repeat(auto-fit, minmax(200px, 1fr))" gap="space-0 space-48">
       {saksbehandlere.map(s => (
         <RhfCheckbox
           key={s.brukerIdent}
@@ -57,6 +57,6 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
           }
         />
       ))}
-    </div>
+    </HGrid>
   );
 };
