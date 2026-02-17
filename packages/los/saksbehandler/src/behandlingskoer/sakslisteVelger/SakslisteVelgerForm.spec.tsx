@@ -102,7 +102,7 @@ describe('SakslisteVelgerForm', () => {
     expect(screen.getByText('Olav Hellerud')).toBeInTheDocument();
   });
 
-  it('skal vise både fra og til med bindestrek for BELOP', async () => {
+  it('skal vise både fra og til for BELOP', async () => {
     applyRequestHandlers(MedBelopFraOgTil.parameters['msw'] as MswParameters['msw']);
     render(<MedBelopFraOgTil />);
 
