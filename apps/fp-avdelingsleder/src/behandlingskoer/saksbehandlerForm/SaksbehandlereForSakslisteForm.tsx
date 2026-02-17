@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Box, ExpansionCard, Label, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Checkbox, ExpansionCard, Label, Table, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
@@ -41,6 +41,8 @@ export const SaksbehandlereForSakslisteForm = ({
     defaultValues,
   });
 
+  const formvalues = formMethods.watch();
+
   useEffect(() => {
     formMethods.reset(defaultValues);
   }, [valgtSaksliste.sakslisteId]);
@@ -68,6 +70,7 @@ export const SaksbehandlereForSakslisteForm = ({
                 <Table.Header>
                   <Table.Row>
                     <Table.HeaderCell />
+                    <Table.HeaderCell />
                     <Table.HeaderCell scope="col">
                       <FormattedMessage id="SaksbehandlereForSakslisteForm.Gruppenavn" />
                     </Table.HeaderCell>
@@ -89,6 +92,24 @@ export const SaksbehandlereForSakslisteForm = ({
                       }
                       expandOnRowClick
                     >
+                      <Table.DataCell>
+                        <Checkbox
+                          aria-label={sg.gruppeId + '-checkbox'}
+                          hideLabel
+                          indeterminate={
+                            !sg.saksbehandlere.every(saksbehandler => formvalues[saksbehandler.brukerIdent]) &&
+                            sg.saksbehandlere.some(saksbehandler => formvalues[saksbehandler.brukerIdent])
+                          }
+                          checked={sg.saksbehandlere.every(saksbehandler => formvalues[saksbehandler.brukerIdent])}
+                          onChange={event => {
+                            sg.saksbehandlere.forEach(saksbehandler => {
+                              formMethods.setValue(saksbehandler.brukerIdent, event.target.checked);
+                            });
+                          }}
+                        >
+                          {' '}
+                        </Checkbox>
+                      </Table.DataCell>
                       <Table.DataCell scope="row">{sg.gruppeNavn}</Table.DataCell>
                       <Table.DataCell align="right">{antallTilknyttetSaksliste(valgtSaksliste, sg)}</Table.DataCell>
                     </Table.ExpandableRow>

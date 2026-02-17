@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CalendarIcon, PersonGroupIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Label, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Label, Table, TextField, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -27,6 +27,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
   const [showReservasjonEndringDatoModal, setShowReservasjonEndringDatoModal] = useState(false);
   const [showFlyttReservasjonModal, setShowFlyttReservasjonModal] = useState(false);
   const [valgtReservasjon, setValgtReservasjon] = useState<Reservasjon | undefined>(undefined);
+  const [søketekst, setSøketekst] = useState('');
 
   const behandlingTyper = useLosKodeverk('BehandlingType');
 
@@ -34,9 +35,9 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
     reservasjonerForAvdelingOptions(valgtAvdelingEnhet),
   );
 
-  const sorterteReservasjoner = reservasjoner.toSorted((reservasjon1, reservasjon2) =>
-    reservasjon1.reservertAvNavn.localeCompare(reservasjon2.reservertAvNavn),
-  );
+  const sorterteReservasjoner = reservasjoner
+    .filter(reservasjon => reservasjon.reservertAvNavn.toLowerCase().includes(søketekst.toLowerCase()))
+    .toSorted((reservasjon1, reservasjon2) => reservasjon1.reservertAvNavn.localeCompare(reservasjon2.reservertAvNavn));
 
   const { mutate: opphevOppgaveReservasjon } = useMutation({
     mutationFn: (valuesToStore: { oppgaveId: number }) => opphevReservasjon(valuesToStore.oppgaveId),
@@ -94,13 +95,24 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
       <Label size="small">
         <FormattedMessage id="ReservasjonerTabell.Reservasjoner" />
       </Label>
+      <HStack>
+        <TextField
+          hideLabel
+          label={<FormattedMessage id="ReservasjonerTabell.Sok.PlaceHolder" />}
+          placeholder={intl.formatMessage({ id: 'ReservasjonerTabell.Sok.PlaceHolder' })}
+          value={søketekst}
+          onChange={e => setSøketekst(e.target.value)}
+          size="small"
+          htmlSize={30}
+        />
+      </HStack>
       {sorterteReservasjoner.length === 0 && (
         <BodyShort size="small">
           <FormattedMessage id="ReservasjonerTabell.IngenReservasjoner" />
         </BodyShort>
       )}
       {sorterteReservasjoner.length > 0 && (
-        <Table>
+        <Table zebraStripes size="small">
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader>
