@@ -202,7 +202,7 @@ export const MedBelopFraOgTil: Story = {
         sortering: {
           sorteringType: 'BELOP',
           fra: 2,
-          til: 3,
+          til: 30000,
           periodefilter: 'FAST_PERIODE',
         },
         sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],
@@ -226,7 +226,7 @@ export const MedBelopKunFra: Story = {
         fagsakYtelseTyper: ['FP'],
         sortering: {
           sorteringType: 'BELOP',
-          fra: 2,
+          fra: 20000,
           periodefilter: 'FAST_PERIODE',
         },
         sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],
@@ -250,7 +250,7 @@ export const MedBelopKunTil: Story = {
         fagsakYtelseTyper: ['FP'],
         sortering: {
           sorteringType: 'BELOP',
-          til: 3,
+          til: 30000,
           periodefilter: 'FAST_PERIODE',
         },
         sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],

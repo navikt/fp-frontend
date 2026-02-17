@@ -122,8 +122,8 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(hentSorteringBoks()).toHaveTextContent('Fra: 2 kr');
-    expect(hentSorteringBoks()).not.toHaveTextContent('Til: 3 kr');
+    expect(hentSorteringBoks()).toHaveTextContent('Fra: 20 000 kr');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Til: 30 000 kr');
   });
 
   it('skal vise kun til når fra mangler for BELOP', async () => {
@@ -134,8 +134,8 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(hentSorteringBoks()).toHaveTextContent('Til: 3 kr');
-    expect(hentSorteringBoks()).not.toHaveTextContent('Fra: 2 kr');
+    expect(hentSorteringBoks()).toHaveTextContent('Til: 30 000 kr');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Fra: 20 000 kr');
   });
 
   it('skal ikke vise fra/til når sorteringstype ikke er BELOP', async () => {
@@ -146,7 +146,7 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(hentSorteringBoks()).not.toHaveTextContent('Fra: 2 kr');
-    expect(hentSorteringBoks()).not.toHaveTextContent('Til: 3 kr');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Fra: 20 000 kr');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Til: 30 000 kr');
   });
 });
