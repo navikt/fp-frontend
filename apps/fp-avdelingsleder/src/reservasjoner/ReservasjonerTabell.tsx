@@ -97,11 +97,13 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
       </Label>
       <HStack>
         <TextField
-          label={<FormattedMessage id="ReservasjonerTabell.Sok" />}
+          hideLabel
+          label={<FormattedMessage id="ReservasjonerTabell.Sok.PlaceHolder" />}
           placeholder={intl.formatMessage({ id: 'ReservasjonerTabell.Sok.PlaceHolder' })}
           value={søketekst}
           onChange={e => setSøketekst(e.target.value)}
           size="small"
+          htmlSize={30}
         />
       </HStack>
       {sorterteReservasjoner.length === 0 && (

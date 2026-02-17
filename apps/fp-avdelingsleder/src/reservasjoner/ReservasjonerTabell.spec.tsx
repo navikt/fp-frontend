@@ -37,7 +37,7 @@ describe('ReservasjonerTabell', () => {
 
     expect(await screen.findByText('Reservasjoner for avdelingen')).toBeInTheDocument();
 
-    const searchInput = screen.getByRole('textbox', { name: /filtrer på navn/i });
+    const searchInput = screen.getByRole('textbox', { name: /Søk etter saksbehandler på navn/i });
     await user.type(searchInput, 'Esp');
 
     expect(await screen.findAllByText('Espen Utvikler')).toHaveLength(6);
