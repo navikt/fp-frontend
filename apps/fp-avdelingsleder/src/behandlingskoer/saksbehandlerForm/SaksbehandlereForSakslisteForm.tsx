@@ -32,10 +32,9 @@ export const SaksbehandlereForSakslisteForm = ({
 
   const { data: grupper } = useQuery(grupperOptions(valgtAvdelingEnhet));
 
-  const defaultValues = valgtSaksliste.saksbehandlere.map(sb => sb.brukerIdent).reduce(
-    (acc, brukerIdent) => ({ ...acc, [brukerIdent]: true }),
-    {},
-  );
+  const defaultValues = valgtSaksliste.saksbehandlere
+    .map(sb => sb.brukerIdent)
+    .reduce((acc, brukerIdent) => ({ ...acc, [brukerIdent]: true }), {});
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -64,60 +63,62 @@ export const SaksbehandlereForSakslisteForm = ({
               <FormattedMessage id="SaksbehandlereForSakslisteForm.IngenSaksbehandlere" />
             </BodyShort>
           )}
-          <VStack gap="space-40">
-            {harGrupper && (
-              <Table>
-                <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell />
-                    <Table.HeaderCell />
-                    <Table.HeaderCell scope="col">
-                      <FormattedMessage id="SaksbehandlereForSakslisteForm.Gruppenavn" />
-                    </Table.HeaderCell>
-                    <Table.HeaderCell scope="col" align="right">
-                      <FormattedMessage id="Label.AntallSaksbehandlere" />
-                    </Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  {grupper.saksbehandlerGrupper.map(sg => (
-                    <Table.ExpandableRow
-                      key={sg.gruppeId}
-                      content={
-                        <ValgAvSaksbehandlere
-                          saksbehandlere={sg.saksbehandlere.toSorted((sb1, sb2) => sb1.navn.localeCompare(sb2.navn))}
-                          valgtSaksliste={valgtSaksliste}
-                          valgtAvdelingEnhet={valgtAvdelingEnhet}
+          {harGrupper && (
+            <Table size="small">
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell />
+                  <Table.HeaderCell scope="col">
+                    <FormattedMessage id="SaksbehandlereForSakslisteForm.Gruppenavn" />
+                  </Table.HeaderCell>
+                  <Table.HeaderCell scope="col" align="right">
+                    <FormattedMessage id="Label.AntallSaksbehandlere" />
+                  </Table.HeaderCell>
+                  <Table.HeaderCell />
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {grupper.saksbehandlerGrupper.map(sg => (
+                  <Table.ExpandableRow
+                    key={sg.gruppeId}
+                    expandOnRowClick
+                    togglePlacement="right"
+                    contentGutter="left"
+                    content={
+                      <ValgAvSaksbehandlere
+                        saksbehandlere={sg.saksbehandlere.toSorted((sb1, sb2) => sb1.navn.localeCompare(sb2.navn))}
+                        valgtSaksliste={valgtSaksliste}
+                        valgtAvdelingEnhet={valgtAvdelingEnhet}
+                      />
+                    }
+                  >
+                    <Table.DataCell width="44px">
+                      <Checkbox
+                        hideLabel
+                        indeterminate={
+                          !sg.saksbehandlere.every(saksbehandler => formvalues[saksbehandler.brukerIdent]) &&
+                          sg.saksbehandlere.some(saksbehandler => formvalues[saksbehandler.brukerIdent])
+                        }
+                        checked={sg.saksbehandlere.every(saksbehandler => formvalues[saksbehandler.brukerIdent])}
+                        onChange={event => {
+                          sg.saksbehandlere.forEach(saksbehandler => {
+                            formMethods.setValue(saksbehandler.brukerIdent, event.target.checked);
+                          });
+                        }}
+                      >
+                        <FormattedMessage
+                          id="SaksbehandlereForSakslisteForm.VelgAlleIGruppe"
+                          values={{ gruppeNavn: sg.gruppeNavn }}
                         />
-                      }
-                      expandOnRowClick
-                    >
-                      <Table.DataCell>
-                        <Checkbox
-                          aria-label={sg.gruppeId + '-checkbox'}
-                          hideLabel
-                          indeterminate={
-                            !sg.saksbehandlere.every(saksbehandler => formvalues[saksbehandler.brukerIdent]) &&
-                            sg.saksbehandlere.some(saksbehandler => formvalues[saksbehandler.brukerIdent])
-                          }
-                          checked={sg.saksbehandlere.every(saksbehandler => formvalues[saksbehandler.brukerIdent])}
-                          onChange={event => {
-                            sg.saksbehandlere.forEach(saksbehandler => {
-                              formMethods.setValue(saksbehandler.brukerIdent, event.target.checked);
-                            });
-                          }}
-                        >
-                          {' '}
-                        </Checkbox>
-                      </Table.DataCell>
-                      <Table.DataCell scope="row">{sg.gruppeNavn}</Table.DataCell>
-                      <Table.DataCell align="right">{antallTilknyttetSaksliste(valgtSaksliste, sg)}</Table.DataCell>
-                    </Table.ExpandableRow>
-                  ))}
-                </Table.Body>
-              </Table>
-            )}
-          </VStack>
+                      </Checkbox>
+                    </Table.DataCell>
+                    <Table.DataCell>{sg.gruppeNavn}</Table.DataCell>
+                    <Table.DataCell align="right">{antallTilknyttetSaksliste(valgtSaksliste, sg)}</Table.DataCell>
+                  </Table.ExpandableRow>
+                ))}
+              </Table.Body>
+            </Table>
+          )}
           {sorterteAvdelingensSaksbehandlere.length > 0 && !harGrupper && (
             <ValgAvSaksbehandlere
               saksbehandlere={sorterteAvdelingensSaksbehandlere}

@@ -84,6 +84,7 @@
   "SaksbehandlereForSakslisteForm.Gruppenavn": "Gruppenavn",
   "SaksbehandlereForSakslisteForm.AntallSaksbehandlere": "Antall tilknyttet køen",
   "SaksbehandlereForSakslisteForm.VisAlle": "Alle saksbehandlere",
+  "SaksbehandlereForSakslisteForm.VelgAlleIGruppe": "Velg alle i {gruppeNavn}",
   "ValgAvSaksbehandlere.IngenSaksbehandlere": "Det finnes ingen saksbehandlere i gruppen",
 
   "SletteSaksbehandlerModal.SletteModal": "Ønsker du å slette saksbehandler?",
