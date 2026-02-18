@@ -32,7 +32,7 @@ describe('SaksbehandlereForSakslisteForm', () => {
     expect(screen.getByText('Antall saksbehandlere')).toBeInTheDocument();
     expect(screen.getAllByText('1')).toHaveLength(3);
 
-    expect(screen.getAllByText('Steffen')).toHaveLength(4);
+    expect(screen.getByLabelText('Alle saksbehandlere')).toHaveTextContent('Steffen');
     expect(screen.getAllByText('Espen Utvikler')).toHaveLength(4);
     expect(screen.getByText('Eirik')).toBeInTheDocument();
   });
@@ -43,12 +43,11 @@ describe('SaksbehandlereForSakslisteForm', () => {
 
     expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
 
-    const gruppeCheckbox = screen.getByRole('checkbox', { name: '1001-checkbox' });
+    const gruppeCheckbox = screen.getByRole('checkbox', { name: 'Velg alle i Gruppe 1' });
     await userEvent.click(gruppeCheckbox);
 
     // Expander gruppe 1 for å vise medlemmene
-    const expandGruppeKnapp = screen.getByRole('cell', { name: /Gruppe 1/i });
-    await userEvent.click(expandGruppeKnapp);
+    await userEvent.click(screen.getByText('Gruppe 1'));
 
     // Verifiserer at alle medlemmer av Gruppe 1 er huket
     expect(screen.getByRole('checkbox', { name: 'Steffen' })).toBeChecked();
@@ -79,24 +78,19 @@ describe('SaksbehandlereForSakslisteForm', () => {
     render(<SaksbehandlereSomErGruppert />);
 
     expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
-    const ekspanderKnappForGruppe = screen.getByRole('cell', { name: 'Drammen' });
-    await userEvent.click(ekspanderKnappForGruppe);
 
-    const gruppeCheckbox = screen.getByRole('checkbox', { name: '1002-checkbox' });
+    await userEvent.click(screen.getByRole('cell', { name: 'Drammen' }));
+
+    const gruppeCheckbox = screen.getByRole<HTMLInputElement>('checkbox', { name: 'Velg alle i Drammen' });
     expect(gruppeCheckbox).not.toBeChecked();
-    expect(gruppeCheckbox).not.toHaveAttribute('data-state', 'indeterminate');
+    expect(gruppeCheckbox.indeterminate).toBeFalsy();
     expect(screen.getByRole('checkbox', { name: 'Kari Kanari' })).not.toBeChecked();
     expect(screen.getByRole('checkbox', { name: 'Marte' })).not.toBeChecked();
 
-    // Velger en av saksbehandlerene i gruppen
-    const førsteCheckboxIGruppen = screen.getByRole('checkbox', { name: 'Kari Kanari' });
-    await userEvent.click(førsteCheckboxIGruppen);
+    await userEvent.click(screen.getByRole('checkbox', { name: 'Kari Kanari' }));
 
-    // Verifiserer at steffen er valgt, men ingen av de andre
+    expect(gruppeCheckbox.indeterminate).toBeTruthy();
     expect(screen.getByRole('checkbox', { name: 'Kari Kanari' })).toBeChecked();
     expect(screen.getByRole('checkbox', { name: 'Marte' })).not.toBeChecked();
-
-    // Verifiserer at gruppe-checkboxen er i indeterminate tilstand
-    expect(screen.getByRole<HTMLInputElement>('checkbox', { name: '1002-checkbox' }).indeterminate).toBeTruthy();
   });
 });
