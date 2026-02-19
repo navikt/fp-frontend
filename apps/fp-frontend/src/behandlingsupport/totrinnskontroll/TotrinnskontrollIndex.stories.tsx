@@ -151,7 +151,7 @@ const FAGSAK = {
 
     fødselsdato: '',
 
-    dodsdato: undefined,
+    dødsdato: undefined,
     språkkode: '-',
   },
   brukerManglerAdresse: false,

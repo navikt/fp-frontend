@@ -46,7 +46,13 @@ export const IngenSaksbehandlere: Story = {
         inkluder: [],
         ekskluder: [],
       },
-      saksbehandlerIdenter: ['S34354'],
+      saksbehandlere: [
+        {
+          brukerIdent: 'S34354',
+          navn: 'Steffen',
+          ansattAvdeling: '1234',
+        },
+      ],
     },
     avdelingensSaksbehandlere: [],
   },
@@ -76,7 +82,13 @@ export const ToSaksbehandlere: Story = {
         inkluder: [],
         ekskluder: [],
       },
-      saksbehandlerIdenter: ['S34354'],
+      saksbehandlere: [
+        {
+          brukerIdent: 'S34354',
+          navn: 'Steffen',
+          ansattAvdeling: 'Avdeling Å',
+        },
+      ],
     },
     avdelingensSaksbehandlere: [
       {
@@ -117,7 +129,13 @@ export const TreSaksbehandlere: Story = {
         inkluder: [],
         ekskluder: [],
       },
-      saksbehandlerIdenter: ['S34354'],
+      saksbehandlere: [
+        {
+          brukerIdent: 'S34354',
+          navn: 'Steffen',
+          ansattAvdeling: 'Avdeling Å',
+        },
+      ],
     },
     avdelingensSaksbehandlere: [
       {
@@ -147,7 +165,7 @@ export const SaksbehandlereSomErGruppert: Story = {
           HttpResponse.json({
             saksbehandlerGrupper: [
               {
-                gruppeId: 1,
+                gruppeId: 1001,
                 gruppeNavn: 'Gruppe 1',
                 saksbehandlere: [
                   {
@@ -192,6 +210,59 @@ export const SaksbehandlereSomErGruppert: Story = {
                   },
                 ],
               },
+              {
+                gruppeId: 1002,
+                gruppeNavn: 'Drammen',
+                saksbehandlere: [
+                  {
+                    brukerIdent: 'M00002',
+                    navn: 'Marte',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                  {
+                    brukerIdent: 'K123456',
+                    navn: 'Kari Kanari',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                ],
+              },
+              {
+                gruppeId: 1003,
+                gruppeNavn: 'Besluttergruppen',
+                saksbehandlere: [
+                  {
+                    brukerIdent: 'S34354',
+                    navn: 'Steffen',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                  {
+                    brukerIdent: 'E23232',
+                    navn: 'Espen Utvikler',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                  {
+                    brukerIdent: 'K123456',
+                    navn: 'Kari Kanari',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                ],
+              },
+              {
+                gruppeId: 1004,
+                gruppeNavn: 'Hastefolket',
+                saksbehandlere: [
+                  {
+                    brukerIdent: 'S34354',
+                    navn: 'Steffen',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                  {
+                    brukerIdent: 'E23232',
+                    navn: 'Espen Utvikler',
+                    ansattAvdeling: 'Avdeling Å',
+                  },
+                ],
+              },
             ],
           }),
         ),
@@ -214,7 +285,13 @@ export const SaksbehandlereSomErGruppert: Story = {
         inkluder: [],
         ekskluder: [],
       },
-      saksbehandlerIdenter: ['S34354'],
+      saksbehandlere: [
+        {
+          brukerIdent: 'S34354',
+          navn: 'Steffen',
+          ansattAvdeling: 'Avdeling Å',
+        },
+      ],
     },
     avdelingensSaksbehandlere: [
       {

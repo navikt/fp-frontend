@@ -36,7 +36,7 @@ export const Default: Story = {
         periodefilter: 'RELATIV_PERIODE_DAGER',
       },
       sorteringTyper: [],
-      saksbehandlerIdenter: [],
+      saksbehandlere: [],
       andreKriterie: {
         inkluder: [],
         ekskluder: [],

@@ -71,7 +71,6 @@
   "GjeldendeSakslisterTabell.BehandlingerPåVent": "Behandlinger på vent",
   "GjeldendeSakslisterTabell.AntallOppgaver": "Alle oppgaver",
   "GjeldendeSakslisterTabell.AntallReserverte": "Reserverte oppgaver",
-  "GjeldendeSakslisterTabell.Graf": "Graf",
   "GjeldendeSakslisterTabell.OppgaverForAvdeling": "Antall åpne behandlinger totalt",
   "GjeldendeSakslisterTabell.SlettSaksliste": "Slett saksliste {navn}",
 
@@ -85,6 +84,7 @@
   "SaksbehandlereForSakslisteForm.Gruppenavn": "Gruppenavn",
   "SaksbehandlereForSakslisteForm.AntallSaksbehandlere": "Antall tilknyttet køen",
   "SaksbehandlereForSakslisteForm.VisAlle": "Alle saksbehandlere",
+  "SaksbehandlereForSakslisteForm.VelgAlleIGruppe": "Velg alle i {gruppeNavn}",
   "ValgAvSaksbehandlere.IngenSaksbehandlere": "Det finnes ingen saksbehandlere i gruppen",
 
   "SletteSaksbehandlerModal.SletteModal": "Ønsker du å slette saksbehandler?",
@@ -111,6 +111,7 @@
   "ReservasjonerTabell.Reservasjoner": "Reservasjoner for avdelingen",
   "ReservasjonerTabell.IngenReservasjoner": "Ingen reservasjoner funnet",
   "ReservasjonerTabell.SlettReservasjon": "Slett reservasjon {oppgaveId}",
+  "ReservasjonerTabell.Sok.PlaceHolder": "Søk etter saksbehandler på navn",
 
   "SaksbehandlereTabell.AnsattVed": "Ansatt ved avdeling",
   "SaksbehandlereTabell.IngenSaksbehandlere": "Ingen saksbehandlere lagt til",

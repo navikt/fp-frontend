@@ -63,7 +63,7 @@ const meta = {
             periodefilter: 'FAST_PERIODE',
           },
           sorteringTyper: [],
-          saksbehandlerIdenter: [],
+          saksbehandlere: [],
           andreKriterie: {
             inkluder: [],
             ekskluder: [],
@@ -98,7 +98,13 @@ export const TabellNårDetFinnesEnBehandlingskø: Story = {
           periodefilter: 'FAST_PERIODE',
         },
         sorteringTyper: [],
-        saksbehandlerIdenter: ['R23233'],
+        saksbehandlere: [
+          {
+            brukerIdent: 'R23233',
+            navn: 'Ola Nordmann',
+            ansattAvdeling: '1234',
+          },
+        ],
         andreKriterie: {
           inkluder: [],
           ekskluder: [],

@@ -2,11 +2,11 @@ export type ReservasjonStatus = {
   erReservert: boolean;
   reservertTilTidspunkt?: string;
   erReservertAvInnloggetBruker?: boolean;
-  reservertAvUid?: string;
+  reservertAvIdent?: string;
   reservertAvNavn?: string;
   flyttetReservasjon?: {
     tidspunkt: string;
-    uid: string;
+    flyttetAvIdent: string;
     navn: string;
     begrunnelse: string;
   } | null;

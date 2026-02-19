@@ -86,7 +86,7 @@ const behandling = {
 
 const uttakStonadskontoer = {
   tapteDagerFpff: 1,
-  stonadskontoer: {
+  stønadskonti: {
     FEDREKVOTE: {
       stonadskontotype: 'FEDREKVOTE',
       maxDager: 75,
@@ -1041,10 +1041,10 @@ export const AksjonspunktForFar: Story = {
 
 const uttakStønadskontoerForUgyldigForbrukt = {
   ...uttakStonadskontoer,
-  stonadskontoer: {
-    ...uttakStonadskontoer.stonadskontoer,
+  stønadskonti: {
+    ...uttakStonadskontoer.stønadskonti,
     MØDREKVOTE: {
-      ...uttakStonadskontoer.stonadskontoer.MØDREKVOTE,
+      ...uttakStonadskontoer.stønadskonti.MØDREKVOTE,
       gyldigForbruk: false,
     },
   },
@@ -1342,8 +1342,8 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
     } as Fagsak,
     uttakStonadskontoer: {
       ...uttakStonadskontoer,
-      stonadskontoer: {
-        ...uttakStonadskontoer.stonadskontoer,
+      stønadskonti: {
+        ...uttakStonadskontoer.stønadskonti,
         FELLESPERIODE: {
           stonadskontotype: 'FELLESPERIODE',
           maxDager: 80,

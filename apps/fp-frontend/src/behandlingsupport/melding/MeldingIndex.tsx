@@ -173,7 +173,7 @@ const getSubmitCallback =
           behandlingUuid: behandling.uuid,
           brevmalkode: values.brevmalkode,
           fritekst: values.fritekst,
-          arsakskode: values.arsakskode,
+          årsakskode: values.årsakskode,
         };
     return submitMessage(data).then(() => {
       setMeldingFormData();
@@ -204,7 +204,7 @@ const useVisForhandsvisningAvMelding = (behandling: FagsakBehandlingDto) => {
         behandlingUuid: behandling.uuid,
         dokumentMal: params.brevmalkode as DokumentMalType,
         fritekst: params.fritekst || ' ',
-        arsakskode: params.arsakskode,
+        årsakskode: params.årsakskode,
       }),
     onSuccess: response => {
       forhandsvisDokument(response);

@@ -28,7 +28,7 @@
   "ReservertOppgaveRad.OverfortReservasjonBegrunnelse": "Begrunnelse",
   "ReservertOppgaveRad.Notat": "Notat",
   "ReservertOppgaveRad.OverfortReservasjonHeader": "Overført reservasjon",
-  "ReservertOppgaveRad.OverfortReservasjonBody": "{dato} - {tid} fra {uid} {navn}",
+  "ReservertOppgaveRad.OverfortReservasjonBody": "{dato} - {tid} fra {flyttetAvIdent} {navn}",
   "ReservertOppgaveRad.Saksnr": "Kopier saksnummer",
 
   "OppgaveLabels.Anke": "Anke",

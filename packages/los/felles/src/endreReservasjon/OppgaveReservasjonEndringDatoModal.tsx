@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { Button, Modal as NavModal } from '@navikt/ds-react';
+import { Button, Label, Modal as NavModal } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqualToToday, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
 import { createIntl, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -44,9 +44,14 @@ export const OppgaveReservasjonEndringDatoModal = ({
       >
         <NavModal
           open
-          header={{ heading: intl.formatMessage({ id: 'OppgaveReservasjonEndringDatoModal.Header' }), size: 'small' }}
+          aria-label={intl.formatMessage({ id: 'OppgaveReservasjonEndringDatoModal.Header' })}
           onClose={closeModal}
         >
+          <NavModal.Header>
+            <Label size="medium">
+              <FormattedMessage id="OppgaveReservasjonEndringDatoModal.Header" />
+            </Label>
+          </NavModal.Header>
           <NavModal.Body>
             <RhfDatepicker
               name="reserverTil"

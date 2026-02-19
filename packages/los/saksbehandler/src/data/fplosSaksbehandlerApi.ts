@@ -4,9 +4,7 @@ import ky from 'ky';
 import type { ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AlleKodeverkLos, FagsakEnkel, SakslisteAvdeling } from '@navikt/fp-types';
 
-import type { Driftsmelding } from '../typer/driftsmeldingTsType';
 import type { Oppgave, OppgaveMedStatus } from '../typer/oppgaveTsType';
-import type { Saksbehandler } from '../typer/saksbehandlerTsType';
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -27,7 +25,6 @@ const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 export const LosUrl = {
   KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
-  DRIFTSMELDINGER: wrapUrl('/fplos/api/driftsmeldinger'),
   SØK_FAGSAK: wrapUrl('/fpsak/api/fagsak/sok'),
   SAKSLISTE: wrapUrl('/fplos/api/saksbehandler/saksliste'),
   RESERVERTE_OPPGAVER: wrapUrl('/fplos/api/reservasjon/reserverte-oppgaver'),
@@ -40,13 +37,9 @@ export const LosUrl = {
   FLYTT_RESERVASJON: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon'),
   FORLENG_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/forleng'),
   FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon/søk'),
-  SAKSLISTE_SAKSBEHANDLERE: wrapUrl('/fplos/api/saksbehandler/saksliste/saksbehandlere'),
   BEHANDLINGSKO_OPPGAVE_ANTALL: wrapUrl('/fplos/api/saksbehandler/oppgaver/antall'),
   OPPGAVER_TIL_BEHANDLING: wrapUrl('/fplos/api/saksbehandler/oppgaver'),
 };
-
-export const getSakslisteSaksbehandlere = (sakslisteId: number) =>
-  kyExtended.get(LosUrl.SAKSLISTE_SAKSBEHANDLERE, { searchParams: { sakslisteId } }).json<Saksbehandler[]>();
 
 export const getBehandlingskøOppgaveAntall = (sakslisteId: number) =>
   kyExtended.get(LosUrl.BEHANDLINGSKO_OPPGAVE_ANTALL, { searchParams: { sakslisteId } }).json<number>();
@@ -85,12 +78,6 @@ export const losKodeverkOptions = () =>
     queryKey: [LosUrl.KODEVERK_LOS],
     queryFn: () => kyExtended.get(LosUrl.KODEVERK_LOS).json<AlleKodeverkLos>(),
     staleTime: Infinity,
-  });
-
-export const driftsmeldingerOptions = () =>
-  queryOptions({
-    queryKey: [LosUrl.DRIFTSMELDINGER],
-    queryFn: () => kyExtended.get(LosUrl.DRIFTSMELDINGER).json<Driftsmelding[]>(),
   });
 
 export const sakslisteOptions = () =>

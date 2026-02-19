@@ -46,7 +46,7 @@ export const Default: Story = {
         erReservert: false,
         flyttetReservasjon: {
           tidspunkt: '2019-02-02',
-          uid: '23423',
+          flyttetAvIdent: '23423',
           navn: 'Espen Utvikler',
           begrunnelse: 'Flyttet',
         },

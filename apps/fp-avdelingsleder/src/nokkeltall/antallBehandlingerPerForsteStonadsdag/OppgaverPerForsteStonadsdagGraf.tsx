@@ -39,6 +39,7 @@ export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStona
         tooltip: {
           ...options.tooltip,
           trigger: 'axis',
+          valueFormatter: value => (value as number).toLocaleString('nb-NO'),
           axisPointer: {
             type: 'shadow',
             label: {
@@ -58,6 +59,7 @@ export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStona
           type: 'value',
           axisLabel: {
             ...options.textStyle,
+            formatter: (value: number) => value.toLocaleString('nb-NO'),
           },
         },
         legend: {

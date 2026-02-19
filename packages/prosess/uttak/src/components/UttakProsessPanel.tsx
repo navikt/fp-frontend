@@ -91,7 +91,7 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
   for (const p of perioder) {
     const ikkeGyldigeAktiviteter = p.aktiviteter.filter(
       a =>
-        stønadskonto.stonadskontoer[a.stønadskontoType ?? ''] === undefined &&
+        stønadskonto.stønadskonti[a.stønadskontoType ?? ''] === undefined &&
         !!a.trekkdagerDesimaler &&
         a.trekkdagerDesimaler > 0,
     );
@@ -109,7 +109,7 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
   }
 
   if (feil.length === 0) {
-    const kontoerMedUgyldigForbruk = Object.values(stønadskonto.stonadskontoer).filter(s => !s.gyldigForbruk);
+    const kontoerMedUgyldigForbruk = Object.values(stønadskonto.stønadskonti).filter(s => !s.gyldigForbruk);
     const kontoMedUgyldigForbruk = kontoerMedUgyldigForbruk.at(0)?.stonadskontotype;
     if (kontoMedUgyldigForbruk) {
       feil.push(
@@ -121,7 +121,7 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
     }
   }
 
-  const konto = stønadskonto.stonadskontoer['FLERBARNSDAGER' satisfies StønadskontoType];
+  const konto = stønadskonto.stønadskonti['FLERBARNSDAGER' satisfies StønadskontoType];
   if (feil.length === 0 && konto && !konto.gyldigForbruk) {
     feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidTrekkDagerFlerbarnsdager' }, { maxDays: konto.maxDager }));
   }
@@ -319,7 +319,7 @@ export const UttakProsessPanel = ({
         <AksjonspunktHelpTextHTML>{hentApTekster(uttaksresultat, aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
       <DisponibleStonadskontoerPanel
-        stønadskontoer={Object.values(stønadskonto.stonadskontoer)}
+        stønadskontoer={Object.values(stønadskonto.stønadskonti)}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       <UttakTidslinjeIndex

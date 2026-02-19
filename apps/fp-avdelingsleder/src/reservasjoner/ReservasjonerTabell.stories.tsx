@@ -44,31 +44,47 @@ export const ViseAtIngenReservasjonerBleFunnet: Story = {
   },
 };
 
+const generateReservasjoner = () => {
+  const saksbehandlere = [
+    { brukerIdent: 'espen-001', navn: 'Espen Utvikler' },
+    { brukerIdent: 'espen-002', navn: 'Espen Tester' },
+    { brukerIdent: 'eirik-001', navn: 'Eirik Utvikler' },
+    { brukerIdent: 'jens-otto-001', navn: 'Jens-Otto Techer' },
+    { brukerIdent: 'tor-001', navn: 'Tor På Spore' },
+    { brukerIdent: 'siri-001', navn: 'Siri Utvikler' },
+    { brukerIdent: 'steffen-001', navn: 'Steffen Heffen' },
+  ];
+
+  const behandlingTyper = ['BT-002', 'BT-003', 'BT-004', 'BT-005', 'BT-006'];
+
+  const reservasjoner = [];
+  let oppgaveId = 1;
+
+  for (let i = 0; i < 40; i++) {
+    const saksbehandler = saksbehandlere[i % saksbehandlere.length]!;
+    const behandlingType = behandlingTyper[i % behandlingTyper.length]!;
+    const reservertTilDato = new Date();
+    reservertTilDato.setDate(reservertTilDato.getDate() + Math.floor(Math.random() * 30) + 1);
+
+    reservasjoner.push({
+      reservertAvIdent: saksbehandler.brukerIdent,
+      reservertAvNavn: saksbehandler.navn,
+      reservertTilTidspunkt: reservertTilDato.toISOString().split('T')[0],
+      oppgaveId: oppgaveId++,
+      oppgaveSaksNr: `${100000 + i}`,
+      behandlingType: behandlingType,
+    });
+  }
+
+  return reservasjoner;
+};
+
 export const VisTabellMedReservasjoner: Story = {
   parameters: {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.RESERVASJONER_FOR_AVDELING, () =>
-          HttpResponse.json([
-            {
-              reservertAvUid: 'wsfwer-sdsfd',
-              reservertAvNavn: 'Espen Utvikler',
-              reservertTilTidspunkt: '2020-01-10',
-              oppgaveId: 1,
-              oppgaveSaksNr: '122234',
-              behandlingType: 'BT-002',
-            },
-            {
-              reservertAvUid: 'gtfbrt-tbrtb',
-              reservertAvNavn: 'Eirik Utvikler',
-              reservertTilTidspunkt: '2020-01-01',
-              oppgaveId: 2,
-              oppgaveSaksNr: '23454',
-              behandlingType: 'BT-003',
-            },
-          ]),
-        ),
+        http.get(LosUrl.RESERVASJONER_FOR_AVDELING, () => HttpResponse.json(generateReservasjoner())),
         http.post(LosUrl.AVDELINGSLEDER_OPPHEVER_RESERVASJON, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, () => new HttpResponse(null, { status: 200 })),

@@ -24,7 +24,7 @@ const OPPGAVER_TIL_BEHANDLING = [
       erReservert: false,
       flyttetReservasjon: {
         tidspunkt: '2019-02-02',
-        uid: '23423',
+        flyttetAvIdent: '23423',
         navn: 'Espen Utvikler',
         begrunnelse: 'Flyttet fordi...',
       },

@@ -1,8 +1,8 @@
 import React, { type ReactNode, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { ChatElipsisIcon, CheckmarkIcon, FilesIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, Tooltip, VStack } from '@navikt/ds-react';
+import { ChatElipsisIcon, FilesIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, VStack } from '@navikt/ds-react';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
@@ -50,15 +50,15 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
     >
       <Table.DataCell>{oppgave.navn}</Table.DataCell>
       <Table.DataCell>
-        <HStack align="center" ref={refCopyButton} wrap={false}>
+        <HStack align="center" gap="space-8" ref={refCopyButton} wrap={false}>
           <BodyShort>{oppgave.saksnummer}</BodyShort>
-          <Tooltip content={intl.formatMessage({ id: 'ReservertOppgaveRad.Saksnr' })}>
-            <CopyButton
-              activeIcon={<CheckmarkIcon className={styles['image']} aria-hidden />}
-              copyText={oppgave.saksnummer}
-              icon={<FilesIcon aria-hidden className={styles['image']} />}
-            />
-          </Tooltip>
+          <CopyButton
+            size="small"
+            data-color="accent"
+            aria-label={intl.formatMessage({ id: 'ReservertOppgaveRad.Saksnr' })}
+            copyText={oppgave.saksnummer}
+            icon={<FilesIcon aria-hidden />}
+          />
         </HStack>
       </Table.DataCell>
       <Table.DataCell>
@@ -99,7 +99,7 @@ const lagFlyttetReservasjonPopover = (oppgaveStatus: ReservasjonStatus, brukerna
   }
   const datoOgTid = getDateAndTime(flyttetReservasjon.tidspunkt);
 
-  const erLagetAvInnloggetBruker = brukernavn === flyttetReservasjon.uid;
+  const erLagetAvInnloggetBruker = brukernavn === flyttetReservasjon.flyttetAvIdent;
 
   return (
     <VStack gap="space-8">
@@ -114,7 +114,7 @@ const lagFlyttetReservasjonPopover = (oppgaveStatus: ReservasjonStatus, brukerna
               values={{
                 dato: datoOgTid?.date,
                 tid: datoOgTid?.time,
-                uid: flyttetReservasjon.uid,
+                flyttetAvIdent: flyttetReservasjon.flyttetAvIdent,
                 navn: flyttetReservasjon.navn,
               }}
             />

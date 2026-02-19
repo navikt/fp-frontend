@@ -57,6 +57,7 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
         tooltip: {
           ...options.tooltip,
           trigger: 'axis',
+          valueFormatter: value => (value as number).toLocaleString('nb-NO'),
           axisPointer: {
             type: 'shadow',
             label: {
@@ -92,6 +93,7 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
           name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.AntallGraf' }),
           axisLabel: {
             ...options.textStyle,
+            formatter: (value: number) => value.toLocaleString('nb-NO'),
           },
         },
         series: [

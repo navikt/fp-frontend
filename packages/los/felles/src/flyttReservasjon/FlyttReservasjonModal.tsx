@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { BodyShort, Button, HStack, Modal, VStack } from '@navikt/ds-react';
+import { Button, Detail, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
@@ -18,10 +18,8 @@ const maxLength500 = maxLength(500);
 const minLength7 = minLength(7);
 const maxLength7 = maxLength(7);
 
-type SøkFormValues = {
+type FormValues = {
   brukerIdent: string;
-};
-type LagreFormValues = {
   begrunnelse: string;
 };
 
@@ -58,38 +56,55 @@ export const FlyttReservasjonModal = ({
     [],
   );
 
-  const søkFormMethods = useForm<SøkFormValues>();
-  const brukerIdentValue = søkFormMethods.watch('brukerIdent');
-
-  const lagreFormMethods = useForm<LagreFormValues>({
+  const lagreFormMethods = useForm<FormValues>({
     defaultValues: { begrunnelse: flyttetBegrunnelse },
   });
+
+  const brukerIdentValue = lagreFormMethods.watch('brukerIdent');
   const begrunnelseValue = lagreFormMethods.watch('begrunnelse');
 
   return (
     <RawIntlProvider value={intl}>
-      <Modal
-        open
-        onClose={closeModal}
-        header={{ heading: intl.formatMessage({ id: 'FlyttReservasjonModal.FlyttReservasjon' }), size: 'small' }}
+      <RhfForm
+        formMethods={lagreFormMethods}
+        onSubmit={values => {
+          closeModal();
+          flyttOppgavereservasjon({
+            brukerIdent: saksbehandler ? saksbehandler.brukerIdent : '',
+            begrunnelse: values.begrunnelse,
+          });
+        }}
       >
-        <Modal.Body>
-          <VStack gap="space-16">
-            <RhfForm
-              formMethods={søkFormMethods}
-              onSubmit={(formValues: SøkFormValues) => hentSaksbehandler(formValues.brukerIdent)}
-            >
+        <Modal
+          open
+          onClose={closeModal}
+          aria-label={intl.formatMessage({ id: 'FlyttReservasjonModal.FlyttReservasjon' })}
+        >
+          <Modal.Header>
+            <Label size="medium">
+              <FormattedMessage id="FlyttReservasjonModal.FlyttReservasjon" />
+            </Label>
+          </Modal.Header>
+          <Modal.Body>
+            <VStack gap="space-8">
               <HStack gap="space-16" align="end">
                 <RhfTextField
                   name="brukerIdent"
-                  control={søkFormMethods.control}
+                  control={lagreFormMethods.control}
                   label={<FormattedMessage id="FlyttReservasjonModal.Brukerident" />}
                   validate={[required, minLength7, maxLength7]}
                   autoFocus
                 />
                 <Button
+                  type="button"
                   size="small"
                   variant="primary"
+                  onClick={async () => {
+                    const isValid = await lagreFormMethods.trigger('brukerIdent');
+                    if (isValid) {
+                      hentSaksbehandler(brukerIdentValue);
+                    }
+                  }}
                   loading={hentSaksbehandlerIsPending}
                   disabled={!brukerIdentValue || hentSaksbehandlerIsPending}
                 >
@@ -97,45 +112,33 @@ export const FlyttReservasjonModal = ({
                 </Button>
               </HStack>
               {hentSaksbehandlerIsSuccess && (
-                <BodyShort size="small">
-                  {saksbehandler?.navn ?? <FormattedMessage id="LeggTilSaksbehandlerForm.FinnesIkke" />}
-                </BodyShort>
+                <Detail>{saksbehandler?.navn ?? <FormattedMessage id="LeggTilSaksbehandlerForm.FinnesIkke" />}</Detail>
               )}
-            </RhfForm>
-            <RhfForm
-              formMethods={lagreFormMethods}
-              onSubmit={values => {
-                closeModal();
-                flyttOppgavereservasjon({
-                  brukerIdent: saksbehandler ? saksbehandler.brukerIdent : '',
-                  begrunnelse: values.begrunnelse,
-                });
-              }}
-            >
               <RhfTextarea
+                size="small"
                 name="begrunnelse"
                 control={lagreFormMethods.control}
                 label={<FormattedMessage id="FlyttReservasjonModal.Begrunn" />}
                 validate={[required, maxLength500, minLength3, hasValidText]}
                 maxLength={500}
               />
-              <HStack gap="space-8" justify="end">
-                <Button size="small" variant="secondary" onClick={closeModal} type="button">
-                  <FormattedMessage id="Label.Avbryt" />
-                </Button>
-                <Button
-                  type="submit"
-                  size="small"
-                  variant="primary"
-                  disabled={!saksbehandler || !begrunnelseValue || begrunnelseValue.length < 3}
-                >
-                  <FormattedMessage id="Label.Ok" />
-                </Button>
-              </HStack>
-            </RhfForm>
-          </VStack>
-        </Modal.Body>
-      </Modal>
+            </VStack>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              type="submit"
+              size="small"
+              variant="primary"
+              disabled={!saksbehandler || !begrunnelseValue || begrunnelseValue.length < 3}
+            >
+              <FormattedMessage id="Label.Ok" />
+            </Button>
+            <Button size="small" variant="secondary" onClick={closeModal} type="button">
+              <FormattedMessage id="Label.Avbryt" />
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </RhfForm>
     </RawIntlProvider>
   );
 };
