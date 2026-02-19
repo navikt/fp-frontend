@@ -9,9 +9,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type {
   AndreKriterierType,
   AnnetKriterie,
-  BehandlingType,
-  FagsakYtelseType,
   KøSortering,
+  oppgave_BehandlingType,
+  oppgave_FagsakYtelseType,
   Periodefilter,
   SakslisteAvdeling,
   SakslisteDto,
@@ -31,7 +31,7 @@ const maxLength100 = maxLength(100);
 
 export type FormValues = {
   navn: string;
-  behandlingTyper: BehandlingType[];
+  behandlingTyper: oppgave_BehandlingType[];
   sortering: {
     sorteringType: KøSortering;
     periodefilter: Periodefilter;
@@ -40,7 +40,7 @@ export type FormValues = {
     fomDato: string | null;
     tomDato: string | null;
   };
-  fagsakYtelseTyper: FagsakYtelseType[];
+  fagsakYtelseTyper: oppgave_FagsakYtelseType[];
   andreKriterie: {
     inkluder: AndreKriterierType[];
     ekskluder: AndreKriterierType[];

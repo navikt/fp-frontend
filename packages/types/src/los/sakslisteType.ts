@@ -1,5 +1,6 @@
 import type {
   oppgave_Periodefilter,
+  tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto,
   tjenester_avdelingsleder_saksliste_dto_SorteringDto,
   tjenester_felles_dto_KøSorteringFeltDto,
   tjenester_felles_dto_SakslisteDto,
@@ -19,9 +20,4 @@ export type Periodefilter = oppgave_Periodefilter;
 
 export type SakslisteAvdeling = tjenester_felles_dto_SakslisteDto;
 
-export type SakslisteDto = Omit<
-  SakslisteAvdeling,
-  'sorteringTyper' | 'saksbehandlerIdenter' | 'gjeldendeStatistikk'
-> & {
-  avdelingEnhet: string;
-};
+export type SakslisteDto = tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto;

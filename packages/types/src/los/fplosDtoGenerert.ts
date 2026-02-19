@@ -111,7 +111,7 @@ export type tjenester_felles_dto_SaksbehandlerBrukerIdentDto = {
 export type tjenester_felles_dto_SaksbehandlerDto = {
   ansattAvdeling?: string;
   brukerIdent: string;
-  navn?: string;
+  navn: string;
 };
 
 export type tjenester_avdelingsleder_saksbehandler_dto_SaksbehandlerGruppeDto = {
@@ -210,9 +210,9 @@ export type tjenester_felles_dto_SakslisteDto_AndreKriterieDto = {
 };
 
 export type tjenester_felles_dto_SakslisteDto_StatistikkDto = {
-  alleOppgaver?: number;
+  alleOppgaver: number;
   behandlingerPåVent?: number;
-  tilgjengeligeOppgaver?: number;
+  tilgjengeligeOppgaver: number;
 };
 
 export type tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto = {

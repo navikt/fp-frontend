@@ -262,6 +262,7 @@ export type { TilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereB
 export type { PeriodeResultatType } from './src/periodeResultatType';
 export type { SkjermlenkeTypeTilbakekreving } from './src/tilbakekreving/skjermlenkeTypeTilbakekreving';
 export type { OppgaveBehandlingStatus } from './src/los/oppgaveBehandlingStatus';
+export type { oppgave_BehandlingType, oppgave_FagsakYtelseType } from './src/los/fplosDtoGenerert';
 export type { KøSortering } from './src/los/køSortering';
 export type {
   AnnetKriterie,

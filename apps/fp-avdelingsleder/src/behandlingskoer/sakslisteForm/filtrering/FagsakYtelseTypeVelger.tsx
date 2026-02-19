@@ -12,9 +12,7 @@ export const FagsakYtelseTypeVelger = () => {
 
   const values = watch('fagsakYtelseTyper');
 
-  const alleFagsakYtelseTyper = useLosKodeverk('FagsakYtelseType')
-    .filter(bt => bt.kode !== '-')
-    .sort((a, b) => a.kode.localeCompare(b.kode));
+  const alleFagsakYtelseTyper = useLosKodeverk('FagsakYtelseType').sort((a, b) => a.kode.localeCompare(b.kode));
 
   return (
     <VStack gap="space-4">
