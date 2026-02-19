@@ -44,11 +44,7 @@ export type { Dokument } from './src/dokumentTsType';
 export type { FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export type { InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
 export type { AlleKodeverk, KodeverkType, KodeverkMedNavn } from './src/kodeverkAlle';
-export type {
-  AlleKodeverkTilbakekreving,
-  TilbakekrevingKodeverkType,
-  KodeverkMedNavnTilbakekreving,
-} from './src/tilbakekreving/kodeverkAlleTilbakekreving';
+
 export type { NavAnsatt } from './src/navAnsattTsType';
 export type {
   SimuleringResultat,
@@ -102,7 +98,6 @@ export type {
   UtlandsoppholdPeriode,
 } from './src/medlemskapTsType';
 export type { Risikoklassifisering } from './src/risikoklassifiseringTsType';
-export type { AnkeVurdering } from './src/ankeVurderingTsType';
 export type { KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';
 export type { Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/innsynTsType';
 export type {
@@ -124,10 +119,6 @@ export type {
   ArbeidsgiverOpplysningerWrapper,
   ArbeidsgiverOpplysninger,
 } from './src/arbeidsgiverOpplysningerTsType';
-export type {
-  BeregningsresultatTilbakekreving,
-  BeregningResultatPeriode,
-} from './src/tilbakekreving/beregningsresultatTilbakekrevingTsType';
 export type { Aktor } from './src/aktorTsType';
 export type { Kjønnkode } from './src/Kjonnkode';
 export { KjønnkodeEnum } from './src/Kjonnkode';
@@ -144,11 +135,6 @@ export type {
   AktivitetskravGrunnlagArbeid,
 } from './src/dokumentasjonVurderingBehovTsType';
 export type { UttakType, UttakVurdering, UttakÅrsak } from './src/dokumentasjonVurderingBehovTsType';
-export type {
-  VilkårsVurderingDto,
-  VilkarsVurdertPeriode,
-  AktsomhetInfo,
-} from './src/tilbakekreving/vilkarsVurdertePerioderTsType';
 export type {
   ArbeidOgInntektsmelding,
   Arbeidsforhold as AoIArbeidsforhold,
@@ -194,9 +180,7 @@ export type { AksjonspunktType } from './src/aksjonspunktType';
 export type { AktivitetStatus } from './src/aktivitetStatus';
 export type { AktivitetskravPermisjonType } from './src/aktivitetskravPermisjonType';
 export type { ArbeidType } from './src/arbeidType';
-export type { AnkeVurderingType } from './src/ankeVurdering';
-export type { AnkeOmgjorArsak } from './src/ankeOmgjorArsak';
-export type { AnkeVurderingOmgjoer } from './src/ankeVurderingOmgjoer';
+export type { AnkeVurdering, AnkeVurderingType, AnkeVurderingOmgjoer } from './src/ankeVurdering';
 export type { Avslagsarsak } from './src/avslagsarsakCodes';
 export type { ArbeidsforholdKomplettVurderingType } from './src/arbeidsforholdKomplettVurderingType';
 export type { DiskresjonskodeType } from './src/diskresjonskodeType';
@@ -253,18 +237,10 @@ export type { UttakUtsettelseType } from './src/uttakUtsettelseType';
 export type { VurderÅrsak } from './src/vurderÅrsak';
 export type { VilkarUtfallType } from './src/vilkarUtfallType';
 export type { VenteArsakType } from './src/venteArsakType';
-export type { VilkårResultat } from './src/tilbakekreving/vilkårResultat';
-export type { VedtakResultatType } from './src/tilbakekreving/vedtakResultatType';
-export type { SærligGrunn } from './src/tilbakekreving/særligGrunn';
 export type { VedtakbrevType } from './src/vedtakbrevType';
-export type { TilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereBehandling';
 export type { PeriodeResultatType } from './src/periodeResultatType';
-export type { SkjermlenkeTypeTilbakekreving } from './src/tilbakekreving/skjermlenkeTypeTilbakekreving';
-export type { HendelseUnderType } from './src/tilbakekreving/hendelseUnderType';
-export type { HendelseType } from './src/tilbakekreving/hendelseType';
 export type { Arbeidskategori } from './src/arbeidskategori';
-export type { AksjonspunktKodeTilbakekreving } from './src/tilbakekreving/aksjonspunktCodesTilbakekreving';
-export type { ForeldelseVurderingType } from './src/tilbakekreving/foreldelseVurderingType';
+export type { TilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereBehandling';
 export type { Rettighetstype } from './src/rettighetstype';
 export type { AksjonspunktDefinisjon } from './src/aksjonspunktDefinisjon';
 export type { GraderingAvslagÅrsak } from './src/graderingAvslagÅrsak';
@@ -277,26 +253,9 @@ export {
   isKlageAvvist,
 } from './src/behandlingResultatType';
 export type { OmsorgsovertakelseDto } from './src/omsorgsovertakelse';
-
-export type { VenteÅrsakTypeFpTilbake } from './src/tilbakekreving/venteÅrsakTypeFpTilbake';
-export type { BehandlingResultatTypeFpTilbake } from './src/tilbakekreving/behandlingResultatTypeFpTilbake';
-export type {
-  FagsakBehandlingDtoFpTilbake,
-  TotrinnskontrollSkjermlenkeContextDtoFpTilbake,
-  TotrinnskontrollAksjonspunkterDtoFpTilbake,
-} from './src/tilbakekreving/fagsakBehandlingDtoFpTilbake';
-export type { BehandlingFpTilbake } from './src/tilbakekreving/behandlingFpTilbake';
-export type { BehandlingsresultatDtoFpTilbake } from './src/tilbakekreving/behandlingsresultatDtoFpTilbake';
-export type { BehandlingÅrsakTypeFpTilbake } from './src/tilbakekreving/behandlingÅrsakTypeFpTilbake';
-export type { DokumentMalTypeFpTilbake } from './src/tilbakekreving/dokumentMalTypeFpTilbake';
-export type {
-  SakFullDtoFpTilbake,
-  HistorikkinnslagDtoFpTilbake,
-  SkjermlenkeTypeFpTilbake,
-} from './src/tilbakekreving/sakFullDtoFpTilbake';
-
 export type { FagsakBehandlingDto } from './src/fagsakBehandlingDto';
 export type { Behandling } from './src/behandling';
 export type { AsyncPollingStatus, PollingStatus } from './src/asyncPollingStatus';
 
 export * from './src/los';
+export * from './src/tilbakekreving';
