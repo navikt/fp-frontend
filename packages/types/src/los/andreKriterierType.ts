@@ -1,30 +1,3 @@
-export type AndreKriterierType =
-  | 'TIL_BESLUTTER'
-  | 'PAPIRSOKNAD'
-  | 'UTBETALING_TIL_BRUKER'
-  | 'ENDRINGSSOKNAD'
-  | 'REVURDERING_INNTEKTSMELDING'
-  | 'KLAGE_PÅ_TILBAKEBETALING'
-  | 'BERØRT_BEHANDLING'
-  | 'PLEIEPENGER'
-  | 'UTSATT_START'
-  | 'ARBEID_INNTEKT'
-  | 'BARE_FAR_RETT'
-  | 'UTLANDSSAK'
-  | 'DØD'
-  | 'EØS_SAK'
-  | 'MOR_UKJENT_UTLAND'
-  | 'KODE7_SAK'
-  | 'NYTT_VEDTAK'
-  | 'PRAKSIS_UTSETTELSE'
-  | 'RETURNERT_FRA_BESLUTTER'
-  | 'SAMMENSATT_KONTROLL'
-  | 'NÆRING'
-  | 'TERMINBEKREFTELSE'
-  | 'VURDER_EØS_OPPTJENING'
-  | 'VURDER_FARESIGNALER'
-  | 'VURDER_SYKDOM'
-  | 'VURDER_FORMKRAV'
-  | 'IKKE_VARSLET'
-  | 'OVER_FIRE_RETTSGEBYR'
-  | 'HASTER';
+import type { oppgave_AndreKriterierType } from './fplosDtoGenerert.ts';
+
+export type AndreKriterierType = oppgave_AndreKriterierType;

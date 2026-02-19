@@ -9,4 +9,3 @@ export type OpptjeningAktiviteter = tjenester_behandling_vedtak_dto_Totrinnskont
 export type TotrinnskontrollAksjonspunkt = tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto;
 
 export type UttakPeriodeEndring = foreldrepenger_domene_uttak_UttakPeriodeEndringDto;
-

@@ -1,8 +1,3 @@
-export type KøSortering =
-  | 'OPPRBEH'
-  | 'BEHFRIST'
-  | 'BELOP'
-  | 'FEILUTBETALINGSTART'
-  | 'FORSTONAD'
-  | 'FORSTONAD_SYNK'
-  | 'OPPGAVE_OPPRETTET';
+import type { oppgavekø_KøSortering } from './fplosDtoGenerert.ts';
+
+export type KøSortering = oppgavekø_KøSortering;

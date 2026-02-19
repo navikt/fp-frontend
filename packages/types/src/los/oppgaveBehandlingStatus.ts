@@ -1,6 +1,3 @@
-export type OppgaveBehandlingStatus =
-  | 'UNDER_ARBEID'
-  | 'PÅ_VENT'
-  | 'FERDIG'
-  | 'TIL_BESLUTTER'
-  | 'RETURNERT_FRA_BESLUTTER';
+import type { tjenester_felles_dto_OppgaveBehandlingStatus } from './fplosDtoGenerert.ts';
+
+export type OppgaveBehandlingStatus = tjenester_felles_dto_OppgaveBehandlingStatus;

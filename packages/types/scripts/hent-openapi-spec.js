@@ -14,8 +14,8 @@ const SOURCES = [
   },
   {
     name: 'fplos',
-    url: 'https://fplos.dev-fss-pub.nais.io/fplos/forvaltning/api/openapi.json',
-    localUrl: 'http://localhost:8071/fplos/forvaltning/api/openapi.json',
+    url: 'https://fplos.dev-fss-pub.nais.io/fplos/api/openapi.json',
+    localUrl: 'http://localhost:8071/fplos/api/openapi.json',
     aud: 'dev-fss:teamforeldrepenger:fplos',
   },
 ];

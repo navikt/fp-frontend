@@ -15,7 +15,7 @@ export default defineConfig({
     {
       clean: false,
       postProcess: ['prettier', 'eslint'],
-      path: 'src/',
+      path: 'src/los',
       fileName: {
         name: 'fplosDtoGenerert',
         suffix: null,

@@ -1,43 +1,23 @@
-import type { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-types';
+import type {
+  oppgave_Periodefilter,
+  tjenester_avdelingsleder_saksliste_dto_SorteringDto,
+  tjenester_felles_dto_KøSorteringFeltDto,
+  tjenester_felles_dto_SakslisteDto,
+  tjenester_felles_dto_SakslisteDto_AndreKriterieDto,
+  tjenester_felles_dto_SakslisteDto_StatistikkDto,
+} from './fplosDtoGenerert.ts';
 
-export type AnnetKriterie = Readonly<{
-  inkluder: AndreKriterierType[];
-  ekskluder: AndreKriterierType[];
-}>;
+export type AnnetKriterie = tjenester_felles_dto_SakslisteDto_AndreKriterieDto;
 
-export type KøSorteringFelt = Readonly<{
-  sorteringType: KøSortering;
-  feltType: string;
-}>;
+export type KøSorteringFelt = tjenester_felles_dto_KøSorteringFeltDto;
 
-export type Statistikk = {
-  alleOppgaver: number;
-  tilgjengeligeOppgaver: number;
-  behandlingerPåVent: number;
-};
+export type Statistikk = tjenester_felles_dto_SakslisteDto_StatistikkDto;
 
-export type Sortering = {
-  sorteringType: KøSortering;
-  periodefilter: Periodefilter;
-  fra?: number;
-  til?: number;
-  fomDato?: string;
-  tomDato?: string;
-};
+export type Sortering = tjenester_avdelingsleder_saksliste_dto_SorteringDto;
 
-export type Periodefilter = 'FAST_PERIODE' | 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER';
+export type Periodefilter = oppgave_Periodefilter;
 
-export type SakslisteAvdeling = Readonly<{
-  sakslisteId: number;
-  navn: string;
-  behandlingTyper: BehandlingType[];
-  fagsakYtelseTyper: FagsakYtelseType[];
-  sortering: Sortering;
-  sorteringTyper: KøSorteringFelt[];
-  andreKriterie: AnnetKriterie;
-  saksbehandlerIdenter: string[];
-  gjeldendeStatistikk?: Statistikk;
-}>;
+export type SakslisteAvdeling = tjenester_felles_dto_SakslisteDto;
 
 export type SakslisteDto = Omit<
   SakslisteAvdeling,
