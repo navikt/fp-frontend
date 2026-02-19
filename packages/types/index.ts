@@ -95,7 +95,7 @@ export type {
   PersonstatusPeriode,
   MedlemskapAvvik,
   MedlemskapPeriode,
-  OppholdstillatelsePeriode,
+  Oppholdstillatelse,
   UtlandsoppholdPeriode,
 } from './src/medlemskapTsType';
 export type { Risikoklassifisering } from './src/risikoklassifiseringTsType';
@@ -114,7 +114,7 @@ export type {
   OpptjeningAktiviteter,
   UttakPeriodeEndring,
 } from './src/totrinnskontrollAksjonspunktTsType';
-export type { Historikkinnslag, HistorikkInnslagDokumentLink } from './src/historikkinnslagTsType';
+export type { Historikkinnslag, HistorikkInnslagDokumentLink, HistorikkAktor } from './src/historikkinnslagTsType';
 export type {
   ArbeidsgiverOpplysningerPerId,
   ArbeidsgiverOpplysningerWrapper,
@@ -173,7 +173,6 @@ export type { BehandlingStatus } from './src/behandlingStatus';
 export type { BehandlingType } from './src/behandlingType';
 export type { FagsakStatus } from './src/fagsakStatus';
 export type { FagsakYtelseType } from './src/fagsakYtelseType';
-export type { HistorikkAktor } from './src/historikkAktor';
 export type { AksjonspunktStatus } from './src/aksjonspunktStatus';
 export type { AksjonspunktType } from './src/aksjonspunktType';
 export type { AktivitetStatus } from './src/aktivitetStatus';
@@ -197,8 +196,7 @@ export type { Landkode } from './src/landkode';
 export type { ManuellBehandlingÅrsak } from './src/manuellBehandlingÅrsak';
 export type { KlageMedholdÅrsak } from './src/klageMedholdÅrsak';
 export type { Inntektskategori } from './src/inntektskategorier';
-export type { MedlemskapDekningType } from './src/medlemskapDekningType';
-export type { MedlemskapType } from './src/medlemskapType';
+export type { MedlemskapManuellVurderingType } from './src/medlemskapTsType';
 export type { MorsAktivitet } from './src/morsAktivitet';
 export type { OmsorgsovertakelseVilkårType } from './src/omsorgsovertakelseVilkårType';
 export type { NavBrukerKjønn } from './src/navBrukerKjonn';
@@ -210,12 +208,10 @@ export type { OppholdÅrsakType } from './src/oppholdÅrsakType';
 export type { Organisasjonstype } from './src/organisasjonstype';
 export type { PeriodeResultatÅrsak } from './src/periodeResultatÅrsak';
 export type { PeriodeResultatÅrsakMuligeÅrsaker } from './src/periodeResultatÅrsakMuligeÅrsaker';
-export type { OppholdstillatelseType } from './src/oppholdstillatelseType';
 export type { PeriodeÅrsak } from './src/periodeÅrsak';
 export type { SivilstandType } from './src/sivilstandType';
 export type { PermisjonsbeskrivelseType } from './src/permisjonsbeskrivelseType';
 export type { RelasjonsRolleType } from './src/relasjonsRolleType';
-export type { MedlemskapManuellVurderingType } from './src/medlemskapManuellVurderingType';
 export type { RevurderingVarslingÅrsak } from './src/revurderingVarslingÅrsak';
 export type { UtsettelseArsakCode } from './src/utsettelseArsakCodes';
 export type { PersonstatusType } from './src/personstatusType';

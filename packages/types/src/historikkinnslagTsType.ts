@@ -1,4 +1,5 @@
 import type {
+  foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør,
   tjenester_behandling_historikk_HistorikkInnslagDokumentLinkDto,
   tjenester_behandling_historikk_HistorikkinnslagDto,
 } from './apiDtoGenerert';
@@ -6,3 +7,5 @@ import type {
 export type Historikkinnslag = tjenester_behandling_historikk_HistorikkinnslagDto;
 
 export type HistorikkInnslagDokumentLink = tjenester_behandling_historikk_HistorikkInnslagDokumentLinkDto;
+
+export type HistorikkAktor = foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør;
