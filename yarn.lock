@@ -4465,6 +4465,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-types@workspace:packages/types"
   dependencies:
+    "@hey-api/openapi-ts": "npm:0.90.10"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     eslint: "npm:9.39.2"
@@ -8611,7 +8612,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
-    "@hey-api/openapi-ts": "npm:0.90.10"
     "@navikt/aksel-stylelint": "npm:8.2.0"
     "@storybook/addon-a11y": "npm:10.2.0"
     "@storybook/addon-links": "npm:10.2.0"

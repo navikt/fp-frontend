@@ -181,8 +181,8 @@ export type oppgavekø_KøSortering_FeltType = 'HELTALL' | 'DATO' | 'DATO_UTEN_F
 export type tjenester_avdelingsleder_saksliste_dto_SorteringDto = {
   fomDato?: string;
   fra?: number;
-  periodefilter?: oppgave_Periodefilter;
-  sorteringType?: oppgavekø_KøSortering;
+  periodefilter: oppgave_Periodefilter;
+  sorteringType: oppgavekø_KøSortering;
   til?: number;
   tomDato?: string;
 };
@@ -194,8 +194,8 @@ export type tjenester_felles_dto_KøSorteringFeltDto = {
 
 export type tjenester_felles_dto_SakslisteDto = {
   andreKriterie: tjenester_felles_dto_SakslisteDto_AndreKriterieDto;
-  behandlingTyper?: Array<oppgave_BehandlingType>;
-  fagsakYtelseTyper?: Array<oppgave_FagsakYtelseType>;
+  behandlingTyper: Array<oppgave_BehandlingType>;
+  fagsakYtelseTyper: Array<oppgave_FagsakYtelseType>;
   gjeldendeStatistikk?: tjenester_felles_dto_SakslisteDto_StatistikkDto;
   navn: string;
   saksbehandlere: Array<tjenester_felles_dto_SaksbehandlerDto>;
