@@ -7,14 +7,15 @@ export type {
   TotrinnskontrollSkjermlenkeContext,
 } from './src/fagsakBehandlingDtoFpSak';
 export { VergeBehandlingmenyValg } from './src/fagsakBehandlingDtoFpSak';
-export type { Behandlingsresultat } from './src/behandlingsresultatTsType';
+export type { Behandlingsresultat, KonsekvensForYtelsen, BehandlingResultatType } from './src/behandlingsresultat';
+export { isAvslag, isInnvilget, isOpphor, isKlageOmgjort, isKlageAvvist } from './src/behandlingsresultat';
 export type {
   Beregningsgrunnlag,
   BeregningsgrunnlagAndel,
   SammenligningsgrunlagProp,
   BeregningsgrunnlagPeriodeProp,
   PgiVerdier,
-  Næring,
+  VirksomhetType,
 } from './src/beregningsgrunnlagTsType';
 export type {
   FaktaOmBeregning,
@@ -67,7 +68,7 @@ export type {
   AktivitetSaldo,
   AktivitetIdentifikator,
 } from './src/uttakStonadskontoerTsType';
-export type { Vilkar } from './src/vilkarTsType';
+export type { Vilkar } from './src/vilkår';
 export type { Ytelsefordeling } from './src/ytelsefordelingTsType';
 export type { OmsorgOgRett } from './src/omsorgOgRettTsType';
 export type {
@@ -122,9 +123,8 @@ export type {
 export type { Aktor } from './src/aktorTsType';
 export type { Kjønnkode } from './src/Kjonnkode';
 export { KjønnkodeEnum } from './src/Kjonnkode';
-export type { Personoversikt, PersonopplysningerBasis } from './src/personoversiktTsType';
-export type { Personadresse } from './src/personadresseTsType';
-export type { KontrollerFaktaPeriode } from './src/kontrollerFaktaPeriode';
+export type { Personoversikt, PersonopplysningerBasis, Personadresse, AdresseType } from './src/personoversikt';
+export type { FaktaUttakPeriode } from './src/faktaUttakPeriode';
 export type { AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
 export type { Verge, VergeType } from './src/vergeTsType';
 export type { ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
@@ -141,6 +141,7 @@ export type {
   Inntektsmelding,
   Inntektspost,
   AktivNaturalYtelse,
+  NaturalYtelseType,
 } from './src/arbeidOgInntektsmeldingTsType';
 export { AksjonspunktÅrsak } from './src/arbeidOgInntektsmeldingTsType';
 export type {
@@ -173,8 +174,6 @@ export type { BehandlingType } from './src/behandlingType';
 export type { FagsakStatus } from './src/fagsakStatus';
 export type { FagsakYtelseType } from './src/fagsakYtelseType';
 export type { HistorikkAktor } from './src/historikkAktor';
-export type { KonsekvensForYtelsen } from './src/konsekvensForYtelsen';
-export type { AdresseType } from './src/adresseType';
 export type { AksjonspunktStatus } from './src/aksjonspunktStatus';
 export type { AksjonspunktType } from './src/aksjonspunktType';
 export type { AktivitetStatus } from './src/aktivitetStatus';
@@ -183,7 +182,6 @@ export type { ArbeidType } from './src/arbeidType';
 export type { AnkeVurdering, AnkeVurderingType, AnkeVurderingOmgjoer } from './src/ankeVurdering';
 export type { Avslagsarsak } from './src/avslagsarsakCodes';
 export type { ArbeidsforholdKomplettVurderingType } from './src/arbeidsforholdKomplettVurderingType';
-export type { DiskresjonskodeType } from './src/diskresjonskodeType';
 export type { DokumentMalType } from './src/dokumentMalType';
 export type { FagsakMarkeringType } from './src/fagsakMarkeringType';
 export type { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
@@ -199,13 +197,9 @@ export type { Landkode } from './src/landkode';
 export type { ManuellBehandlingÅrsak } from './src/manuellBehandlingÅrsak';
 export type { KlageMedholdÅrsak } from './src/klageMedholdÅrsak';
 export type { Inntektskategori } from './src/inntektskategorier';
-export type { Kommunikasjonsretning } from './src/kommunikasjonsretning';
 export type { MedlemskapDekningType } from './src/medlemskapDekningType';
 export type { MedlemskapType } from './src/medlemskapType';
 export type { MorsAktivitet } from './src/morsAktivitet';
-export type { MottakerType } from './src/mottakerTyper';
-export type { NaturalYtelseType } from './src/naturalYtelseType';
-export type { VirksomhetType } from './src/virksomhetType';
 export type { OmsorgsovertakelseVilkårType } from './src/omsorgsovertakelseVilkårType';
 export type { NavBrukerKjønn } from './src/navBrukerKjonn';
 export type { KlageVurderingOmgjørType } from './src/klageVurderingOmgjørType';
@@ -221,7 +215,6 @@ export type { PeriodeÅrsak } from './src/periodeÅrsak';
 export type { SivilstandType } from './src/sivilstandType';
 export type { PermisjonsbeskrivelseType } from './src/permisjonsbeskrivelseType';
 export type { RelasjonsRolleType } from './src/relasjonsRolleType';
-export type { Region } from './src/region';
 export type { MedlemskapManuellVurderingType } from './src/medlemskapManuellVurderingType';
 export type { RevurderingVarslingÅrsak } from './src/revurderingVarslingÅrsak';
 export type { UtsettelseArsakCode } from './src/utsettelseArsakCodes';
@@ -230,12 +223,11 @@ export type { SkjermlenkeType } from './src/skjermlenkeType';
 export type { UttakPeriodeType } from './src/uttakPeriodeType';
 export type { SammenligningType } from './src/sammenligningType';
 export type { StønadskontoType } from './src/stønadskontoType';
-export type { VilkårType } from './src/vilkårType';
 export type { UtsettelseÅrsak } from './src/utsettelseÅrsak';
 export type { UttakArbeidType } from './src/uttakArbeidType';
 export type { UttakUtsettelseType } from './src/uttakUtsettelseType';
 export type { VurderÅrsak } from './src/vurderÅrsak';
-export type { VilkarUtfallType } from './src/vilkarUtfallType';
+export type { VilkårType, VilkarUtfallType } from './src/vilkår';
 export type { VenteArsakType } from './src/venteArsakType';
 export type { VedtakbrevType } from './src/vedtakbrevType';
 export type { PeriodeResultatType } from './src/periodeResultatType';
@@ -244,14 +236,6 @@ export type { TilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereB
 export type { Rettighetstype } from './src/rettighetstype';
 export type { AksjonspunktDefinisjon } from './src/aksjonspunktDefinisjon';
 export type { GraderingAvslagÅrsak } from './src/graderingAvslagÅrsak';
-export {
-  type BehandlingResultatType,
-  isAvslag,
-  isInnvilget,
-  isOpphor,
-  isKlageOmgjort,
-  isKlageAvvist,
-} from './src/behandlingResultatType';
 export type { OmsorgsovertakelseDto } from './src/omsorgsovertakelse';
 export type { FagsakBehandlingDto } from './src/fagsakBehandlingDto';
 export type { Behandling } from './src/behandling';

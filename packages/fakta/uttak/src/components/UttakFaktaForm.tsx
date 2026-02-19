@@ -16,7 +16,7 @@ import type {
   ArbeidsgiverOpplysningerPerId,
   Fagsak,
   FaktaArbeidsforhold,
-  KontrollerFaktaPeriode,
+  FaktaUttakPeriode,
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -42,7 +42,7 @@ const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling
   });
 
 const leggTilAksjonspunktMarkering = (
-  perioder: KontrollerFaktaPeriode[],
+  perioder: FaktaUttakPeriode[],
   aksjonspunkter: Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): KontrollerFaktaPeriodeMedApMarkering[] =>
@@ -70,7 +70,7 @@ const leggTilAksjonspunktMarkering = (
     };
   });
 
-const periodeSkalVurderesIftFørsteDato = (periode: KontrollerFaktaPeriode): boolean =>
+const periodeSkalVurderesIftFørsteDato = (periode: FaktaUttakPeriode): boolean =>
   !(periode.utsettelseÅrsak ?? periode.oppholdÅrsak);
 
 const valider = (
@@ -138,7 +138,7 @@ const validerPerioder = (
 
 interface Props {
   ytelsefordeling: Ytelsefordeling;
-  uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
+  uttakKontrollerFaktaPerioder: FaktaUttakPeriode[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
   kanOverstyre: boolean;

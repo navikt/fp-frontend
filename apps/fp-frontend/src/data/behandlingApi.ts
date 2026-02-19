@@ -37,7 +37,7 @@ import type {
   InntektArbeidYtelse,
   Inntektsmelding,
   KlageVurdering,
-  KontrollerFaktaPeriode,
+  FaktaUttakPeriode,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
   Medlemskap,
@@ -479,7 +479,7 @@ const getUttakKontrollerFaktaPerioderOptions = (links: ApiLink[]) => (behandling
   queryOptions({
     queryKey: [BehandlingRel.UTTAK_KONTROLLER_FAKTA_PERIODER_V2, behandling.uuid, behandling.versjon],
     queryFn: () =>
-      kyExtended.get(getUrlFromRel('UTTAK_KONTROLLER_FAKTA_PERIODER_V2', links)).json<KontrollerFaktaPeriode[]>(),
+      kyExtended.get(getUrlFromRel('UTTAK_KONTROLLER_FAKTA_PERIODER_V2', links)).json<FaktaUttakPeriode[]>(),
     enabled: harLenke(behandling, 'UTTAK_KONTROLLER_FAKTA_PERIODER_V2'),
     staleTime: Infinity,
   });
