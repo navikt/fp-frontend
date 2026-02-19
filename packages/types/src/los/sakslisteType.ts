@@ -1,4 +1,3 @@
-import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-types';
 
 export type AnnetKriterie = Readonly<{
@@ -27,6 +26,13 @@ export type Sortering = {
 };
 
 export type Periodefilter = 'FAST_PERIODE' | 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER';
+
+export type SaksbehandlerProfil = Readonly<{
+  brukerIdent: string;
+  navn: string;
+  ansattAvdeling: string | null;
+}>;
+
 
 export type SakslisteAvdeling = Readonly<{
   sakslisteId: number;
