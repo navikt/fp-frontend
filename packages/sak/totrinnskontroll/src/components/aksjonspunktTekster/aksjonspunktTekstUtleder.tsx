@@ -22,7 +22,7 @@ import { OpptjeningTotrinnText } from './OpptjeningTotrinnText';
 const buildVarigEndringBeregningText = (
   beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto'],
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> =>
-  beregningDto?.fastsattVarigEndringNaering ? (
+  beregningDto?.fastsattVarigEndringNæring ? (
     <FormattedMessage id="ToTrinnsForm.Beregning.VarigEndring" />
   ) : (
     <FormattedMessage id="ToTrinnsForm.Beregning.IkkeVarigEndring" />

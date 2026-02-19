@@ -193,7 +193,7 @@ export const ArbeidsforholdRad = ({
       <Table.DataCell>
         <BodyShort>
           {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
-            <DateLabel dateString={inntektsmeldingerForRad[0]!.motattDato} />
+            <DateLabel dateString={inntektsmeldingerForRad[0]!.mottattDato} />
           )}
           {!manglerInntektsmelding &&
             arbeidsforholdForRad.length > 1 &&

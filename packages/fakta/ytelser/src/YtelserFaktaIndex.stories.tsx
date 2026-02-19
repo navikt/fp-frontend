@@ -13,6 +13,30 @@ const defaultInntektArbeidYtelse = {
       arbeidsgiverReferanse: '345',
     },
   ],
+  relatertTilgrensendeYtelserForSøker: [
+    {
+      relatertYtelseNavn: 'Svangerskapspenger',
+      tilgrensendeYtelserListe: [
+        {
+          periodeFraDato: '2019-02-03',
+          periodeTilDato: '2019-02-04',
+          statusNavn: 'Åpen',
+          saksNummer: '12',
+        },
+      ],
+    },
+    {
+      relatertYtelseNavn: 'Sykepenger',
+      tilgrensendeYtelserListe: [
+        {
+          periodeFraDato: '2019-02-05',
+          periodeTilDato: '2019-02-06',
+          statusNavn: 'Løpende',
+          saksNummer: '13',
+        },
+      ],
+    },
+  ],
   relatertTilgrensendeYtelserForSoker: [
     {
       relatertYtelseNavn: 'Svangerskapspenger',
@@ -80,6 +104,12 @@ export const YtelserForHovedsøkerOgAnnenPart: Story = {
 export const UtenTilgrensedeYtelser: Story = {
   args: {
     inntektArbeidYtelse: {
+      relatertTilgrensendeYtelserForSøker: [
+        {
+          relatertYtelseNavn: 'Svangerskapspenger',
+          tilgrensendeYtelserListe: [],
+        },
+      ],
       relatertTilgrensendeYtelserForSoker: [
         {
           relatertYtelseNavn: 'Svangerskapspenger',

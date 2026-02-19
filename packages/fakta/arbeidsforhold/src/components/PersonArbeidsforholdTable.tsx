@@ -47,7 +47,7 @@ export const PersonArbeidsforholdTable = ({
       <Table.Body>
         {alleArbeidsforhold.map(arbeidsforhold => {
           const stillingsprosent = `${arbeidsforhold.stillingsprosent?.toFixed(2)} %`;
-          const mottattDato = inntektsmeldinger.find(im => erMatch(arbeidsforhold, im))?.motattDato;
+          const mottattDato = inntektsmeldinger.find(im => erMatch(arbeidsforhold, im))?.mottattDato;
           return (
             <Table.ExpandableRow
               key={utledNøkkel(arbeidsforhold, arbeidsgiverOpplysningerPerId)}

@@ -108,6 +108,7 @@ export const ManueltOpprettetArbeidsforhold: Story = {
           kontaktpersonNummer: '99999999',
           journalpostId: '510870400',
           motattDato: '2021-12-13',
+          mottattDato: '2021-12-13',
           dokumentId: '1',
         },
       ],
@@ -257,6 +258,7 @@ export const ArbeidsforholdetErOpprettetBasertPåIM: Story = {
           journalpostId: '524273715',
           dokumentId: '548466069',
           motattDato: '2022-01-19',
+          mottattDato: '2022-01-19',
         },
       ],
       arbeidsforhold: [
@@ -340,6 +342,7 @@ export const FlereArbeidsforholdITabell: Story = {
           journalpostId: '1',
           dokumentId: '2',
           motattDato: '2021-11-06',
+          mottattDato: '2021-11-06',
         },
         {
           ...fellesInntektsmeldingFelter,
@@ -352,6 +355,7 @@ export const FlereArbeidsforholdITabell: Story = {
           journalpostId: '1',
           dokumentId: '2',
           motattDato: '2021-12-06',
+          mottattDato: '2021-12-06',
         },
       ],
       inntekter: [],

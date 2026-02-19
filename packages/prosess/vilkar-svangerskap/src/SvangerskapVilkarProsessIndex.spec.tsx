@@ -30,7 +30,7 @@ describe('SvangerskapVilkarProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       avslagskode: '1065',
       begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: false,
+      erVilkårOk: false,
       kode: '5092',
     });
   });
@@ -55,7 +55,7 @@ describe('SvangerskapVilkarProsessIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      erVilkarOk: true,
+      erVilkårOk: true,
       begrunnelse: 'Dette er en vurdering',
       kode: '5092',
     });

@@ -102,7 +102,7 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                       <>
                         <Spacer />
                         <BodyShort size="small">
-                          <DateLabel dateString={im.motattDato} />
+                          <DateLabel dateString={im.mottattDato} />
                         </BodyShort>
                       </>
                     )}

@@ -135,8 +135,8 @@ export const ArbeidsforholdField = ({
                 <FormattedMessage id="ArbeidsforholdFieldArray.InntektsmeldingMottatt" />
               </Label>
               <BodyShort size="small">
-                {inntektsmelding?.motattDato && <DateLabel dateString={inntektsmelding.motattDato} />}
-                {!inntektsmelding?.motattDato && <FormattedMessage id="ArbeidsforholdFieldArray.IkkeMottatt" />}
+                {inntektsmelding?.mottattDato && <DateLabel dateString={inntektsmelding.mottattDato} />}
+                {!inntektsmelding?.mottattDato && <FormattedMessage id="ArbeidsforholdFieldArray.IkkeMottatt" />}
               </BodyShort>
             </div>
           </HStack>

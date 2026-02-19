@@ -16,7 +16,7 @@ export const LastNedPdfKnapp = ({
   inntektsmelding: Inntektsmelding;
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger;
 }) => {
-  const tittel = `IM ${arbeidsgiverOpplysninger.navn} - ${dateFormat(inntektsmelding.motattDato)}`;
+  const tittel = `IM ${arbeidsgiverOpplysninger.navn} - ${dateFormat(inntektsmelding.mottattDato)}`;
   return (
     <Button
       type="button"

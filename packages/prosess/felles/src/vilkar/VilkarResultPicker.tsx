@@ -18,7 +18,7 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 export type VilkarResultPickerFormValues = {
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
   avslagskode?: string;
 };
 
@@ -43,7 +43,7 @@ export const VilkarResultPicker = ({
 }: Props) => {
   const { getValues, watch, control } = useFormContext<VilkarResultPickerFormValues>();
 
-  const erVilkårOk = watch('erVilkarOk');
+  const erVilkårOk = watch('erVilkårOk');
 
   const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
 
@@ -73,7 +73,7 @@ export const VilkarResultPicker = ({
       )}
       {(!isReadOnly || erVilkårOk === undefined) && (
         <RhfRadioGroup
-          name="erVilkarOk"
+          name="erVilkårOk"
           control={control}
           legend={legend}
           validate={radioValidators}
@@ -109,17 +109,17 @@ VilkarResultPicker.buildInitialValues = (
 ): VilkarResultPickerFormValues => {
   const erVilkårOk = aksjonspunkter.some(erAksjonspunktÅpent) ? undefined : 'OPPFYLT' === status;
   return {
-    erVilkarOk: erVilkårOk,
+    erVilkårOk: erVilkårOk,
     avslagskode:
       erVilkårOk === false && behandlingsresultat?.avslagsarsak ? behandlingsresultat.avslagsarsak : undefined,
   };
 };
 
 VilkarResultPicker.transformValues = (values: VilkarResultPickerFormValues) =>
-  values.erVilkarOk
-    ? { erVilkarOk: true }
+  values.erVilkårOk
+    ? { erVilkårOk: true }
     : {
-        erVilkarOk: false,
+        erVilkårOk: false,
         avslagskode: values.avslagskode,
       };
 

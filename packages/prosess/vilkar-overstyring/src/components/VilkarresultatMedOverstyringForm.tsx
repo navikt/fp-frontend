@@ -33,7 +33,7 @@ const isHidden = (kanOverstyre: boolean, aksjonspunkter: Aksjonspunkt[], aksjons
   !isOverridden(aksjonspunkter, aksjonspunktCode) && !kanOverstyre;
 
 type FormValues = {
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
   vurdering?: MedlemskapVurdering;
   avslagskode?: string;
   opphørFom?: string;
@@ -147,7 +147,7 @@ export const VilkarresultatMedOverstyringForm = ({
     toggleOverstyring();
   };
 
-  const erVilkårOk = formMethods.watch('erVilkarOk');
+  const erVilkårOk = formMethods.watch('erVilkårOk');
 
   const aksjonspunkt = behandling.aksjonspunkt.find(ap => ap.definisjon === overstyringApKode);
   const hasAksjonspunkt = aksjonspunkt !== undefined;

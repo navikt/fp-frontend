@@ -192,7 +192,7 @@ const SPESIELL_ARBEID_OG_INNTEKT = {
   inntektsmeldinger: [
     {
       arbeidsgiverIdent: '999999999',
-      motattDato: '2020-03-20',
+      mottattDato: '2020-03-20',
       refusjonPrMnd: 5170.0,
       inntektPrMnd: 0,
       kontaktpersonNavn: '',

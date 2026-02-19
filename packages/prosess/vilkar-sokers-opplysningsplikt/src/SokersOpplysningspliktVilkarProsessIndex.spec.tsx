@@ -47,7 +47,7 @@ describe('SokersOpplysningspliktVilkarProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       avslagskode: undefined,
       begrunnelse: 'Dette er en begrunnelse',
-      erVilkarOk: false,
+      erVilkårOk: false,
       kode: '6002',
     });
   });
