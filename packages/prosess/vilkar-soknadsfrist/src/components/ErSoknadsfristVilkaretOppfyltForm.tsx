@@ -20,7 +20,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 import { SøknadsfristDetaljer } from './SøknadsfristDetaljer';
 
 type FormValues = {
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
 } & ProsessStegBegrunnelseTextFieldFormValues;
 
 const buildInitialValues = (

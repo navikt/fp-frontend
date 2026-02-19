@@ -87,13 +87,13 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const erVilkarOk = formMethods.watch('erVilkarOk');
+  const erVilkårOk = formMethods.watch('erVilkårOk');
 
   useEffect(() => {
-    if (erVilkarOk) {
+    if (erVilkårOk) {
       formMethods.clearErrors();
     }
-  }, [erVilkarOk]);
+  }, [erVilkårOk]);
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
@@ -128,7 +128,7 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
               <FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" />
             </Detail>
           )}
-          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} notRequired={erVilkarOk} />
+          <ProsessStegBegrunnelseTextField readOnly={isReadOnly} notRequired={erVilkårOk} />
         </VStack>
       </ProsessPanelTemplate>
     </RhfForm>

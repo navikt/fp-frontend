@@ -37,7 +37,7 @@ describe('VilkarresultatMedOverstyringProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       avslagskode: '1003',
       begrunnelse: 'Dette er en begrunnelse',
-      erVilkarOk: false,
+      erVilkårOk: false,
       kode: '6003',
     });
   });

@@ -168,7 +168,7 @@ export const TilkjentYtelseTimelineData = ({
                     </BodyShort>
                   </Table.DataCell>
                   <Table.DataCell>
-                    <BodyShort size="small">{andel.tilSoker ? andel.tilSoker : ''}</BodyShort>
+                    <BodyShort size="small">{andel.tilSøker ? andel.tilSøker : ''}</BodyShort>
                   </Table.DataCell>
                   <Table.DataCell>
                     <BodyShort size="small">
