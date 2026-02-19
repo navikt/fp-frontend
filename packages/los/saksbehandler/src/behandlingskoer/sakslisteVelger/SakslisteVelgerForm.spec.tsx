@@ -110,8 +110,8 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
-    expect(hentSorteringBoks()).toHaveTextContent('Fra: 2 kr');
-    expect(hentSorteringBoks()).toHaveTextContent('Til: 3 kr');
+    expect(hentSorteringBoks()).toHaveTextContent('Fra: 20 000 kr');
+    expect(hentSorteringBoks()).toHaveTextContent('Til: 30 000 kr');
   });
 
   it('skal vise kun fra når til mangler for BELOP', async () => {

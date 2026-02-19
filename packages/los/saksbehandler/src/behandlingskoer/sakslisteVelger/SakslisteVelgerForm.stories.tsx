@@ -201,7 +201,7 @@ export const MedBelopFraOgTil: Story = {
         fagsakYtelseTyper: ['FP'],
         sortering: {
           sorteringType: 'BELOP',
-          fra: 2,
+          fra: 20000,
           til: 30000,
           periodefilter: 'FAST_PERIODE',
         },
