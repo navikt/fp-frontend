@@ -1,14 +1,14 @@
 import { defineConfig } from '@hey-api/openapi-ts';
 
 export default defineConfig({
-  input: ['./fp-sak-swagger.json', './fp-los-swagger.json'],
+  input: ['./fpsak-swagger.json', './fplos-swagger.json'],
   output: [
     {
       clean: false,
       postProcess: ['prettier', 'eslint'],
       path: 'src/',
       fileName: {
-        name: 'fpsakDtoGenerert',
+        name: 'apiDtoGenerert',
         suffix: null,
       },
     },
