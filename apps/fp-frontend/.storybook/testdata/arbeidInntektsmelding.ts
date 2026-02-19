@@ -12,7 +12,7 @@ export const arbeidInntektsmelding: ArbeidOgInntektsmelding = {
       kontaktpersonNummer: '41925090',
       journalpostId: '35164102',
       dokumentId: '35164102',
-      motattDato: '2025-03-05',
+      mottattDato: '2025-03-05',
       innsendingstidspunkt: '2025-03-05T16:43:02.948918',
 
       kildeSystem: 'FS22',

@@ -10,7 +10,7 @@ export const beregningresultatDagytelse: BeregningsresultatDagytelse = {
         {
           arbeidsgiverReferanse: '992257822',
           refusjon: 262,
-          tilSoker: 0,
+          tilSøker: 0,
           uttak: {
             stonadskontoType: 'FORELDREPENGER_FØR_FØDSEL',
             periodeResultatType: 'INNVILGET',
@@ -26,7 +26,7 @@ export const beregningresultatDagytelse: BeregningsresultatDagytelse = {
         },
         {
           refusjon: 0,
-          tilSoker: 0,
+          tilSøker: 0,
           uttak: {
             stonadskontoType: 'FORELDREPENGER_FØR_FØDSEL',
             periodeResultatType: 'INNVILGET',
@@ -50,7 +50,7 @@ export const beregningresultatDagytelse: BeregningsresultatDagytelse = {
         {
           arbeidsgiverReferanse: '992257822',
           refusjon: 262,
-          tilSoker: 0,
+          tilSøker: 0,
           uttak: {
             stonadskontoType: 'MØDREKVOTE',
             periodeResultatType: 'INNVILGET',
@@ -66,7 +66,7 @@ export const beregningresultatDagytelse: BeregningsresultatDagytelse = {
         },
         {
           refusjon: 0,
-          tilSoker: 0,
+          tilSøker: 0,
           uttak: {
             stonadskontoType: 'MØDREKVOTE',
             periodeResultatType: 'INNVILGET',
@@ -90,7 +90,7 @@ export const beregningresultatDagytelse: BeregningsresultatDagytelse = {
         {
           arbeidsgiverReferanse: '992257822',
           refusjon: 262,
-          tilSoker: 0,
+          tilSøker: 0,
           uttak: {
             stonadskontoType: 'MØDREKVOTE',
             periodeResultatType: 'INNVILGET',
@@ -106,7 +106,7 @@ export const beregningresultatDagytelse: BeregningsresultatDagytelse = {
         },
         {
           refusjon: 0,
-          tilSoker: 0,
+          tilSøker: 0,
           uttak: {
             stonadskontoType: 'MØDREKVOTE',
             periodeResultatType: 'INNVILGET',
@@ -130,7 +130,7 @@ export const beregningresultatDagytelse: BeregningsresultatDagytelse = {
         {
           arbeidsgiverReferanse: '992257822',
           refusjon: 262,
-          tilSoker: 0,
+          tilSøker: 0,
           uttak: {
             stonadskontoType: 'FELLESPERIODE',
             periodeResultatType: 'INNVILGET',
@@ -146,7 +146,7 @@ export const beregningresultatDagytelse: BeregningsresultatDagytelse = {
         },
         {
           refusjon: 0,
-          tilSoker: 0,
+          tilSøker: 0,
           uttak: {
             stonadskontoType: 'FELLESPERIODE',
             periodeResultatType: 'INNVILGET',

@@ -1209,7 +1209,7 @@ export type foreldrepenger_domene_opptjening_dto_AvklarOpptjeningAktivitetDto = 
 export type foreldrepenger_domene_opptjening_dto_AvklarOpptjeningsvilkåretDto = {
   avslagskode?: string;
   begrunnelse?: string;
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
 };
 
 export type foreldrepenger_domene_opptjening_dto_MerkOpptjeningUtlandDto = {
@@ -1523,7 +1523,7 @@ export type foreldrepenger_familiehendelse_aksjonspunkt_omsorgsovertakelse_dto_V
 export type foreldrepenger_familiehendelse_aksjonspunkt_sammebarn_dto_VurdereYtelseSammeBarnSøkerAksjonspunktDto = {
   avslagskode?: string;
   begrunnelse?: string;
-  erVilkarOk: boolean;
+  erVilkårOk: boolean;
 };
 
 export type tjenester_behandling_aksjonspunkt_BekreftedeAksjonspunkterDto = {
@@ -1554,7 +1554,7 @@ export type tjenester_behandling_innsyn_aksjonspunkt_VurderInnsynDto = {
   innsynDokumenter: Array<tjenester_behandling_innsyn_aksjonspunkt_VurderInnsynDokumentDto>;
   innsynResultatType: foreldrepenger_behandlingslager_behandling_innsyn_InnsynResultatType;
   mottattDato: string;
-  sattPaVent?: boolean;
+  sattPåVent?: boolean;
 };
 
 export type tjenester_behandling_klage_aksjonspunkt_KlageFormkravAksjonspunktDto = {
@@ -1676,7 +1676,7 @@ export type tjenester_behandling_svp_VelferdspermisjonDto = {
 export type tjenester_behandling_søknad_aksjonspunkt_SoknadsfristAksjonspunktDto = {
   avslagskode?: string;
   begrunnelse?: string;
-  erVilkarOk: boolean;
+  erVilkårOk: boolean;
 };
 
 export type tjenester_behandling_søknad_aksjonspunkt_VurderSøknadsfristDto = {
@@ -2356,50 +2356,50 @@ export type tjenester_behandling_uttak_fakta_OverstyringFaktaUttakDto = {
 export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringForutgåendeMedlemskapsvilkårDto = {
   avslagskode?: string;
   begrunnelse?: string;
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
   medlemFom?: string;
 };
 
 export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringFødselsvilkåretDto = {
   avslagskode?: string;
   begrunnelse?: string;
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
 };
 
 export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringFødselvilkåretFarMedmorDto = {
   avslagskode?: string;
   begrunnelse?: string;
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
 };
 
 export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringMedlemskapsvilkåretDto = {
   avslagskode?: string;
   begrunnelse?: string;
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
   opphørFom?: string;
 };
 
 export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringOpptjeningsvilkåretDto = {
   avslagskode?: string;
   begrunnelse?: string;
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
 };
 
 export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSokersOpplysingspliktDto = {
   begrunnelse?: string;
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
 };
 
 export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSøknadsfristvilkåretDto = {
   avslagskode?: string;
   begrunnelse?: string;
-  erVilkarOk: boolean;
+  erVilkårOk: boolean;
 };
 
 export type tjenester_behandling_ytelsefordeling_OverstyringAvklarStartdatoForPeriodenDto = {
   begrunnelse?: string;
   opprinneligDato?: string;
-  startdatoFraSoknad?: string;
+  startdatoFraSøknad?: string;
 };
 
 export type foreldrepenger_behandlingslager_behandling_anke_AnkeOmgjørÅrsak =
@@ -2479,7 +2479,8 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto =
   kildeSystem: string;
   kontaktpersonNavn: string;
   kontaktpersonNummer: string;
-  motattDato: string;
+  motattDato?: string;
+  mottattDato: string;
   refusjonPrMnd?: number;
   refusjonsperioder: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_RefusjonDto>;
   saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
@@ -2489,7 +2490,8 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto =
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto = {
-  beloepPerMnd: foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Beløp;
+  beloepPerMnd?: foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Beløp;
+  beløpPerMnd: foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Beløp;
   indexKey: string;
   periode: foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Periode;
   type: foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType;
@@ -2638,7 +2640,8 @@ export type tjenester_behandling_arbeidsforhold_ArbeidsgiverOversiktDto = {
 export type foreldrepenger_domene_arbeidsforhold_dto_IAYYtelseDto = {
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
   relatertTilgrensendeYtelserForAnnenForelder: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
-  relatertTilgrensendeYtelserForSoker: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
+  relatertTilgrensendeYtelserForSoker?: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
+  relatertTilgrensendeYtelserForSøker: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
 };
 
 export type foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto = {
@@ -3552,7 +3555,8 @@ export type tjenester_behandling_beregningsresultat_dto_BeregningsresultatPeriod
   refusjon: number;
   sisteUtbetalingsdato: string;
   stillingsprosent?: number;
-  tilSoker: number;
+  tilSoker?: number;
+  tilSøker: number;
   utbetalingsgrad: number;
   uttak: tjenester_behandling_beregningsresultat_dto_UttakDto;
 };
@@ -5049,7 +5053,8 @@ export type tjenester_behandling_kontroll_dto_KontrollresultatDto_Faresignalgrup
 
 export type tjenester_behandling_vedtak_dto_TotrinnsBeregningDto = {
   faktaOmBeregningTilfeller?: Array<foreldrepenger_domene_modell_kodeverk_FaktaOmBeregningTilfelle>;
-  fastsattVarigEndringNaering?: boolean;
+  fastsattVarigEndringNaering: boolean;
+  fastsattVarigEndringNæring: boolean;
 };
 
 export type tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto = {

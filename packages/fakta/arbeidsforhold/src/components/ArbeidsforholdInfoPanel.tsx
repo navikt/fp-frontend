@@ -64,8 +64,8 @@ const getSortArbeidsforholdFn =
     const a2HarInntektsmelding = harInntektmelding(a2, inntektsmeldinger);
 
     if (a1HarInntektsmelding && a2HarInntektsmelding) {
-      const a1MottattDato = inntektsmeldinger.find(im => erMatch(a1, im))?.motattDato;
-      const a2MottattDato = inntektsmeldinger.find(im => erMatch(a2, im))?.motattDato;
+      const a1MottattDato = inntektsmeldinger.find(im => erMatch(a1, im))?.mottattDato;
+      const a2MottattDato = inntektsmeldinger.find(im => erMatch(a2, im))?.mottattDato;
       return dayjs(a2MottattDato, ISO_DATE_FORMAT).diff(dayjs(a1MottattDato, ISO_DATE_FORMAT));
     }
     if (a1HarInntektsmelding) {
