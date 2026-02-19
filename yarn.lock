@@ -2862,6 +2862,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
+    "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": "npm:10.6.10"
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
