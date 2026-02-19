@@ -106,7 +106,7 @@ export const BortfalteNaturalYtelser = ({
                     )}
                     <li>
                       <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
-                      <BeløpLabel beløp={naturalytelse.beloepPerMnd.verdi} />
+                      <BeløpLabel beløp={naturalytelse.beløpPerMnd.verdi} />
                     </li>
                   </React.Fragment>
                 ))}

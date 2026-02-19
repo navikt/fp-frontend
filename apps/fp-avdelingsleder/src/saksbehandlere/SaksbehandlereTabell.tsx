@@ -5,7 +5,7 @@ import { XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Table, VStack } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { SaksbehandlerProfil } from '@navikt/fp-types';
 
 import { LosUrl, slettSaksbehandler } from '../data/fplosAvdelingslederApi';
 import { SletteSaksbehandlerModal } from './SletteSaksbehandlerModal';

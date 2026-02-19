@@ -16,7 +16,7 @@ export const YtelserFaktaPanel = ({ inntektArbeidYtelse }: Props) => (
       <Heading size="small" level="2">
         <FormattedMessage id="YtelserFaktaPanel.SokersYtelser" />
       </Heading>
-      <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker} />
+      <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSøker} />
     </VStack>
     {inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder.length > 0 && (
       <VStack gap="space-16">

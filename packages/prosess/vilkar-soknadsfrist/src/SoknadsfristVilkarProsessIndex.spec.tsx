@@ -29,7 +29,7 @@ describe('SoknadsfristVilkarProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: true,
+      erVilkårOk: true,
       kode: '5007',
     });
   });

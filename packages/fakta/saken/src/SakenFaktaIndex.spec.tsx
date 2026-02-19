@@ -90,7 +90,7 @@ describe('SakenFaktaIndex', () => {
       begrunnelse: 'Dette er en vurdering',
       kode: '6045',
       opprinneligDato: '2019-01-01',
-      startdatoFraSoknad: '2020-01-01',
+      startdatoFraSøknad: '2020-01-01',
     });
   });
 
