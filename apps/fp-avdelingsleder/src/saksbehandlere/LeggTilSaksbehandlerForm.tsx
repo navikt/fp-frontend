@@ -7,7 +7,7 @@ import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { SaksbehandlerProfil } from '@navikt/fp-types';
 
 import { LosUrl, opprettNySaksbehandler, saksbehandlgerSøk } from '../data/fplosAvdelingslederApi';
 

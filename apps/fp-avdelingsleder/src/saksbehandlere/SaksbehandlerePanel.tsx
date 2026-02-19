@@ -1,6 +1,6 @@
 import { VStack } from '@navikt/ds-react';
 
-import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { SaksbehandlerProfil } from '@navikt/fp-types';
 
 import { LeggTilSaksbehandlerForm } from './LeggTilSaksbehandlerForm';
 import { SaksbehandlereTabell } from './SaksbehandlereTabell';
