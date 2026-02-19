@@ -8,4 +8,4 @@ export type Historikkinnslag = tjenester_behandling_historikk_HistorikkinnslagDt
 
 export type HistorikkInnslagDokumentLink = tjenester_behandling_historikk_HistorikkInnslagDokumentLinkDto;
 
-export type HistorikkAktor = foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør;
+export type HistorikkAktør = foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør;

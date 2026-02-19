@@ -114,7 +114,7 @@ export type {
   OpptjeningAktiviteter,
   UttakPeriodeEndring,
 } from './src/totrinnskontrollAksjonspunktTsType';
-export type { Historikkinnslag, HistorikkInnslagDokumentLink, HistorikkAktor } from './src/historikkinnslagTsType';
+export type { Historikkinnslag, HistorikkInnslagDokumentLink, HistorikkAktør } from './src/historikkinnslagTsType';
 export type {
   ArbeidsgiverOpplysningerPerId,
   ArbeidsgiverOpplysningerWrapper,

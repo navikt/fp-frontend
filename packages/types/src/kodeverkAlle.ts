@@ -20,6 +20,7 @@ import type { FaresignalVurdering } from './faresignalVurdering';
 import type { FordelingPeriodeKilde } from './fordelingPeriodeKilde';
 import type { ForeldreType } from './foreldreType';
 import type { GraderingAvslagÅrsak } from './graderingAvslagÅrsak';
+import type { HistorikkAktør } from './historikkinnslagTsType';
 import type { InnsynResultatType } from './innsynResultatType';
 import type { Inntektskategori } from './inntektskategorier';
 import type { KlageAvvistÅrsak } from './klageAvvistÅrsak';
@@ -52,7 +53,6 @@ import type { VenteArsakType } from './venteArsakType';
 import type { VergeType } from './vergeTsType';
 import type { VilkårType } from './vilkår';
 import type { VurderÅrsak } from './vurderÅrsak';
-import type { HistorikkAktor } from './historikkinnslagTsType.ts';
 
 //Mapping mellom KodeverkType og union-types med verdier
 type KodeverkEnumMap = {
@@ -74,7 +74,7 @@ type KodeverkEnumMap = {
   FaktaOmBeregningTilfelle: FaktaOmBeregningTilfelle;
   FordelingPeriodeKilde: FordelingPeriodeKilde;
   ForeldreType: ForeldreType;
-  HistorikkAktør: HistorikkAktor;
+  HistorikkAktør: HistorikkAktør;
   GraderingAvslagÅrsak: GraderingAvslagÅrsak;
   KlageHjemmel: KlageHjemmel;
   KlageAvvistÅrsak: KlageAvvistÅrsak;
