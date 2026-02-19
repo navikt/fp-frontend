@@ -2,7 +2,14 @@ import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
 import type { OppgaveFilterStatistikk, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import type { AlleKodeverkLos, SakslisteAvdeling, SakslisteDto } from '@navikt/fp-types';
+import type {
+  AlleKodeverkLos,
+  AndreKriterierType,
+  BehandlingType,
+  FagsakYtelseType,
+  SakslisteAvdeling,
+  SakslisteDto,
+} from '@navikt/fp-types';
 
 import type { Avdeling } from '../typer/avdelingTsType';
 import type { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';
@@ -18,6 +25,14 @@ export type InitDataLos = {
   innloggetBruker: InnloggetBruker;
   avdelinger: Avdeling[];
 };
+
+export type KriterieFilterDtoLos = {
+  andreKriterierType: AndreKriterierType;
+  valgbarForBehandlingTyper: BehandlingType[];
+  valgbarForYtelseTyper: FagsakYtelseType[];
+};
+
+export type KriterieFilterLos = Record<AndreKriterierType, KriterieFilterDtoLos>;
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -38,6 +53,7 @@ const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 export const LosUrl = {
   KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
+  KODEVERK_KRITERIE_FILTER: wrapUrl('/fplos/api/kodeverk/kriterie-filter'),
   INIT_FETCH: wrapUrl('/fplos/api/avdelingsleder/init-fetch'),
   SAKSBEHANDLERE_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
   OPPGAVE_AVDELING_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/avdelingantall'),
@@ -117,6 +133,13 @@ export const losKodeverkOptions = () =>
   queryOptions({
     queryKey: [LosUrl.KODEVERK_LOS],
     queryFn: () => kyExtended.get(LosUrl.KODEVERK_LOS).json<AlleKodeverkLos>(),
+    staleTime: Infinity,
+  });
+
+export const kriterieFilterOptions = () =>
+  queryOptions({
+    queryKey: [LosUrl.KODEVERK_KRITERIE_FILTER],
+    queryFn: () => kyExtended.get(LosUrl.KODEVERK_KRITERIE_FILTER).json<KriterieFilterLos>(),
     staleTime: Infinity,
   });
 
