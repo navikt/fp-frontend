@@ -123,6 +123,8 @@
   "SakslisteVelgerForm.Sorteringsinfo": "{navn}{br}Gjeldende intervall:{br}{fomDato} - {tomDato}",
   "SakslisteVelgerForm.SorteringsinfoFom": "{navn}{br}Fra og med: {fomDato}",
   "SakslisteVelgerForm.SorteringsinfoTom": "{navn}{br}Til og med: {tomDato}",
+  "SakslisteVelgerForm.SorteringsinfoFra": "Fra",
+  "SakslisteVelgerForm.SorteringsinfoTil": "Til",
   "SakslisteVelgerForm.VisFlere": "Se alle",
   "SakslisteVelgerForm.VisFærre": "Se færre",
   "SakslisteVelgerForm.Andre": "{antallAndre} andre",

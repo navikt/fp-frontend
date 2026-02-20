@@ -5,7 +5,17 @@ import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './SakslisteVelgerForm.stories';
 
-const { Default, MedToSakslister, MedFlereEnnTreSaksbehandlere } = composeStories(stories);
+const { Default, MedToSakslister, MedFlereEnnTreSaksbehandlere, MedBelopFraOgTil, MedBelopKunFra, MedBelopKunTil } =
+  composeStories(stories);
+
+const hentSorteringBoks = () => {
+  const sorteringLabel = screen.getByText('Sortering');
+  const sorteringBoks = sorteringLabel.parentElement?.parentElement;
+  if (!sorteringBoks) {
+    throw new Error('Fant ikke sortering-boksen i testen');
+  }
+  return sorteringBoks;
+};
 
 describe('SakslisteVelgerForm', () => {
   it('skal vise dropdown med en saksliste', async () => {
@@ -90,5 +100,53 @@ describe('SakslisteVelgerForm', () => {
     expect(screen.queryByText('2 andre')).not.toBeInTheDocument();
     expect(screen.getByText('Hans Haugerud')).toBeInTheDocument();
     expect(screen.getByText('Olav Hellerud')).toBeInTheDocument();
+  });
+
+  it('skal vise både fra og til for BELOP', async () => {
+    applyRequestHandlers(MedBelopFraOgTil.parameters['msw'] as MswParameters['msw']);
+    render(<MedBelopFraOgTil />);
+
+    expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Filtere for køen'));
+
+    expect(hentSorteringBoks()).toHaveTextContent('Fra: 20 000 kr');
+    expect(hentSorteringBoks()).toHaveTextContent('Til: 30 000 kr');
+  });
+
+  it('skal vise kun fra når til mangler for BELOP', async () => {
+    applyRequestHandlers(MedBelopKunFra.parameters['msw'] as MswParameters['msw']);
+    render(<MedBelopKunFra />);
+
+    expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Filtere for køen'));
+
+    expect(hentSorteringBoks()).toHaveTextContent('Fra: 20 000 kr');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Til: 30 000 kr');
+  });
+
+  it('skal vise kun til når fra mangler for BELOP', async () => {
+    applyRequestHandlers(MedBelopKunTil.parameters['msw'] as MswParameters['msw']);
+    render(<MedBelopKunTil />);
+
+    expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Filtere for køen'));
+
+    expect(hentSorteringBoks()).toHaveTextContent('Til: 30 000 kr');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Fra: 20 000 kr');
+  });
+
+  it('skal ikke vise fra/til når sorteringstype ikke er BELOP', async () => {
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
+    render(<Default />);
+
+    expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Filtere for køen'));
+
+    expect(hentSorteringBoks()).not.toHaveTextContent('Fra: 20 000 kr');
+    expect(hentSorteringBoks()).not.toHaveTextContent('Til: 30 000 kr');
   });
 });

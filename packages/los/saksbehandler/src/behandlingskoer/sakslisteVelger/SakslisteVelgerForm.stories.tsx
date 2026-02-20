@@ -20,9 +20,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
     msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-      ],
+      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
     },
   },
   args: {
@@ -140,9 +138,7 @@ export const MedIngenSakslister: Story = {
 export const MedFlereEnnTreSaksbehandlere: Story = {
   parameters: {
     msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-      ],
+      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
     },
   },
   args: {
@@ -184,10 +180,83 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
             brukerIdent: '311112',
             navn: 'Bente Frogner',
             ansattAvdeling: '1234',
-          }
+          },
         ],
         andreKriterie: {
           inkluder: ['TIL_BESLUTTER'],
+          ekskluder: [],
+        },
+      },
+    ],
+  },
+};
+
+export const MedBelopFraOgTil: Story = {
+  args: {
+    sakslister: [
+      {
+        sakslisteId: 1,
+        navn: 'Saksliste 1',
+        behandlingTyper: ['BT-007'],
+        fagsakYtelseTyper: ['FP'],
+        sortering: {
+          sorteringType: 'BELOP',
+          fra: 20000,
+          til: 30000,
+          periodefilter: 'FAST_PERIODE',
+        },
+        sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],
+        saksbehandlere: [],
+        andreKriterie: {
+          inkluder: [],
+          ekskluder: [],
+        },
+      },
+    ],
+  },
+};
+
+export const MedBelopKunFra: Story = {
+  args: {
+    sakslister: [
+      {
+        sakslisteId: 1,
+        navn: 'Saksliste 1',
+        behandlingTyper: ['BT-007'],
+        fagsakYtelseTyper: ['FP'],
+        sortering: {
+          sorteringType: 'BELOP',
+          fra: 20000,
+          periodefilter: 'FAST_PERIODE',
+        },
+        sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],
+        saksbehandlere: [],
+        andreKriterie: {
+          inkluder: [],
+          ekskluder: [],
+        },
+      },
+    ],
+  },
+};
+
+export const MedBelopKunTil: Story = {
+  args: {
+    sakslister: [
+      {
+        sakslisteId: 1,
+        navn: 'Saksliste 1',
+        behandlingTyper: ['BT-007'],
+        fagsakYtelseTyper: ['FP'],
+        sortering: {
+          sorteringType: 'BELOP',
+          til: 30000,
+          periodefilter: 'FAST_PERIODE',
+        },
+        sorteringTyper: [{ sorteringType: 'BELOP', feltType: 'HELTALL' }],
+        saksbehandlere: [],
+        andreKriterie: {
+          inkluder: [],
           ekskluder: [],
         },
       },
