@@ -17,7 +17,7 @@ import type {
   BehandlingÅrsakTypeFpTilbake,
   BehandlingFpTilbake,
   BehandlingsresultatDtoFpTilbake,
-  VilkarUtfallType,
+  VilkårUtfallType,
 } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
@@ -122,7 +122,7 @@ const Wrapper = (props: Omit<ComponentProps<typeof VedtakTilbakekrevingProsessIn
 const erTilbakekrevingÅrsakKlage = (årsak: BehandlingÅrsakTypeFpTilbake): boolean =>
   tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
 
-const getVedtakStatus = (beregningsresultat?: BehandlingsresultatDtoFpTilbake): VilkarUtfallType => {
+const getVedtakStatus = (beregningsresultat?: BehandlingsresultatDtoFpTilbake): VilkårUtfallType => {
   if (!beregningsresultat) {
     return 'IKKE_VURDERT';
   }

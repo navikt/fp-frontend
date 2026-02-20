@@ -1,5 +1,5 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, Vilkår } from '@navikt/fp-types';
 
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 
@@ -25,7 +25,7 @@ describe('skalViseProsessPanel', () => {
     const vilkar = [
       {
         vilkarType: 'FP_VK_2_L',
-      } as Vilkar,
+      } as Vilkår,
     ];
     const skalVise = skalViseProsessPanel([], ['FP_VK_2_L'], vilkar);
 
@@ -41,7 +41,7 @@ describe('skalViseProsessPanel', () => {
     const vilkar = [
       {
         vilkarType: 'FP_VK_2_L',
-      } as Vilkar,
+      } as Vilkår,
     ];
 
     const skalVise = skalViseProsessPanel(aksjonspunkter, ['FP_VK_2_L'], vilkar);

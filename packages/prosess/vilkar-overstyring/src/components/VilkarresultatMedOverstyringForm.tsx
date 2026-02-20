@@ -10,7 +10,7 @@ import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak, ManuellBehandlingResultat, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
 import type {
   OverstyringAp,
   OverstyringMedlemskapsvilkaretAp,
@@ -105,7 +105,7 @@ const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyri
 
 interface Props {
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined;
-  vilkår: Vilkar | undefined;
+  vilkår: Vilkår | undefined;
   status: string;
   panelTekstKode: string;
 }

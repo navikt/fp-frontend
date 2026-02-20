@@ -13,8 +13,8 @@ import {
   type Aksjonspunkt,
   type BehandlingFpSak,
   isAvslag,
-  type Vilkar,
-  type VilkarUtfallType,
+  type Vilkår,
+  type VilkårUtfallType,
 } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
@@ -196,11 +196,11 @@ const harRelevantOgÅpentAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): boolea
   return aksjonspunkter.some(ap => harRelevantAksjonspunktDefinisjon(ap) && erAksjonspunktÅpent(ap));
 };
 
-const harVilkarMedStatus = (vilkår: Vilkar[], status: VilkarUtfallType): boolean => {
+const harVilkarMedStatus = (vilkår: Vilkår[], status: VilkårUtfallType): boolean => {
   return vilkår.some(v => v.vilkarStatus === status);
 };
 
-const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps<BehandlingFpSak>): VilkarUtfallType => {
+const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps<BehandlingFpSak>): VilkårUtfallType => {
   const { vilkår, aksjonspunkt, behandlingsresultat } = standardPanelProps.behandling;
   if (vilkår.length === 0) {
     return 'IKKE_VURDERT';

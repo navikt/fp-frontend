@@ -6,7 +6,7 @@ import { RhfDatepicker, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import type { AlleKodeverk, ManuellBehandlingResultat, Vilkar } from '@navikt/fp-types';
+import type { AlleKodeverk, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { MedlemskapVurdering, SØKER_INNFLYTTET_FOR_SENT_KODE } from '../../types/vurderingMedlemskapForm';
@@ -24,7 +24,7 @@ export type MedlemskapVurderingerFormValues = {
 };
 
 interface Props {
-  vilkår: Vilkar;
+  vilkår: Vilkår;
   readOnly: boolean;
   ytelse: string;
   erForutgående: boolean;
@@ -96,7 +96,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, vilkår, erForutgåend
   );
 };
 
-const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkar) => {
+const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkår) => {
   return alleKodeverk['Avslagsårsak']
     .filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))
     .toSorted((k1, k2) => k1.navn.localeCompare(k2.navn))

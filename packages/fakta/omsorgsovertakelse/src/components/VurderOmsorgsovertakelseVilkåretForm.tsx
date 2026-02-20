@@ -19,7 +19,7 @@ import {
   type Avslagsarsak,
   type OmsorgsovertakelseDto,
   type OmsorgsovertakelseVilkårType,
-  type VilkarUtfallType,
+  type VilkårUtfallType,
 } from '@navikt/fp-types';
 import type { VurderOmsorgsovertakelseVilkåretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
@@ -29,7 +29,7 @@ import { Over15Markering } from './Markering';
 
 type FormValues = {
   avslagskode?: Avslagsarsak;
-  vilkårUtfallType?: VilkarUtfallType;
+  vilkårUtfallType?: VilkårUtfallType;
   delvilkår?: OmsorgsovertakelseVilkårType;
   omsorgsovertakelseDato?: string;
   barnSomSkalVurderes: number[];

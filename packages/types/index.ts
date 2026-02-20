@@ -68,7 +68,7 @@ export type {
   AktivitetSaldo,
   AktivitetIdentifikator,
 } from './src/uttakStonadskontoerTsType';
-export type { Vilkar } from './src/vilkår';
+export type { Vilkår } from './src/vilkår';
 export type { Ytelsefordeling } from './src/ytelsefordelingTsType';
 export type { OmsorgOgRett } from './src/omsorgOgRettTsType';
 export type {
@@ -223,7 +223,7 @@ export type { UtsettelseÅrsak } from './src/utsettelseÅrsak';
 export type { UttakArbeidType } from './src/uttakArbeidType';
 export type { UttakUtsettelseType } from './src/uttakUtsettelseType';
 export type { VurderÅrsak } from './src/vurderÅrsak';
-export type { VilkårType, VilkarUtfallType } from './src/vilkår';
+export type { VilkårType, VilkårUtfallType } from './src/vilkår';
 export type { VenteArsakType } from './src/venteArsakType';
 export type { VedtakbrevType } from './src/vedtakbrevType';
 export type { PeriodeResultatType } from './src/periodeResultatType';
