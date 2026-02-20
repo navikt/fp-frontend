@@ -21,7 +21,7 @@ import type {
   ArbeidsforholdTilretteleggingDato,
   BehandlingFpSak,
   FodselOgTilrettelegging,
-  VilkarUtfallType,
+  VilkårUtfallType,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -58,7 +58,7 @@ const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp 
 });
 
 interface Props {
-  status: VilkarUtfallType;
+  status: VilkårUtfallType;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
 }
 

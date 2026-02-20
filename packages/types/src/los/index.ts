@@ -9,6 +9,6 @@ export type {
   Periodefilter,
   SakslisteAvdeling,
   SakslisteDto,
-  SaksbehandlerProfil
+  SaksbehandlerProfil,
 } from './sakslisteType';
 export type { AndreKriterierType } from './andreKriterierType';

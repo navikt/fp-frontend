@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
-import type { ArbeidsgiverOpplysningerPerId, Personoversikt, VilkarUtfallType } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Personoversikt, VilkårUtfallType } from '@navikt/fp-types';
 
 import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -25,7 +25,7 @@ export const TilkjentYtelseFpProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
   const { behandling } = useBehandlingDataContext();
 
-  const overstyrtStatus: VilkarUtfallType = behandling.links.some(
+  const overstyrtStatus: VilkårUtfallType = behandling.links.some(
     link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE,
   )
     ? 'OPPFYLT'

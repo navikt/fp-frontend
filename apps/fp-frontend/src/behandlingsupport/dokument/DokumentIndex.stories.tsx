@@ -5,7 +5,7 @@ import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { Kommunikasjonsretning } from '@navikt/fp-types';
+import type { Dokument } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak } from '../../../.storybook/testdata/index';
@@ -50,27 +50,27 @@ export const DetFinnesDokumenterPåSak: Story = {
       handlers: [
         http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
         http.get(getHref(FagsakRel.ALL_DOCUMENTS), () =>
-          HttpResponse.json([
+          HttpResponse.json<Dokument[]>([
             {
               journalpostId: '1',
               dokumentId: '1',
               tittel: 'dok',
               tidspunkt: '10.10.2017 10:23',
-              kommunikasjonsretning: 'INN' as Kommunikasjonsretning,
+              kommunikasjonsretning: 'INN',
             },
             {
               journalpostId: '2',
               dokumentId: '2',
               tittel: 'dok1',
               tidspunkt: '10.10.2019 10:23',
-              kommunikasjonsretning: 'INN' as Kommunikasjonsretning,
+              kommunikasjonsretning: 'INN',
             },
             {
               journalpostId: '3',
               dokumentId: '3',
               tittel: 'dok2',
               tidspunkt: '10.10.2018 10:23',
-              kommunikasjonsretning: 'INN' as Kommunikasjonsretning,
+              kommunikasjonsretning: 'INN',
             },
           ]),
         ),

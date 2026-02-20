@@ -7,7 +7,7 @@ import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
+import type { AlleKodeverk, Behandlingsresultat, Vilkår } from '@navikt/fp-types';
 
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
 
@@ -18,7 +18,7 @@ const minLength3 = minLength(3);
 
 const getAvslagArsak = (
   alleKodeverk: AlleKodeverk,
-  vilkar: Vilkar[],
+  vilkar: Vilkår[],
   behandlingsresultat?: Behandlingsresultat,
 ): string | ReactElement => {
   const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === 'IKKE_OPPFYLT');
@@ -38,7 +38,7 @@ const getAvslagArsak = (
 };
 
 interface Props {
-  vilkår: Vilkar[];
+  vilkår: Vilkår[];
   behandlingsresultat?: Behandlingsresultat;
   språkkode: string;
   isReadOnly: boolean;

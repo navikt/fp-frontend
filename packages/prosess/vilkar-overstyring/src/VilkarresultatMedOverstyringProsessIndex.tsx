@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { ManuellBehandlingResultat, Vilkar } from '@navikt/fp-types';
+import type { ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
 
 import { VilkarresultatMedOverstyringForm } from './components/VilkarresultatMedOverstyringForm';
 
@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined;
-  vilkår: Vilkar | undefined;
+  vilkår: Vilkår | undefined;
   panelTekstKode: string;
   status: string;
 }
