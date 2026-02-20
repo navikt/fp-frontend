@@ -22,7 +22,7 @@ const defaultAksjonspunkt = {
   opptjeningAktiviteter: [],
   besluttersBegrunnelse: 'begrunnelse',
   totrinnskontrollGodkjent: false,
-  beregningDto: { fastsattVarigEndringNæring: false, fastsattVarigEndringNaering: false, faktaOmBeregningTilfeller: [] },
+  beregningDto: { fastsattVarigEndringNæring: false, faktaOmBeregningTilfeller: [] },
   vurderPaNyttArsaker: [],
   uttakPerioder: [],
 } satisfies TotrinnskontrollAksjonspunkt;
@@ -159,7 +159,6 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE,
       beregningDto: {
         fastsattVarigEndringNæring: true,
-        fastsattVarigEndringNaering: true,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
@@ -172,7 +171,6 @@ describe('aksjonspunktTekstUtleder', () => {
 
       beregningDto: {
         fastsattVarigEndringNæring: false,
-        fastsattVarigEndringNaering: false,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
@@ -188,7 +186,7 @@ describe('aksjonspunktTekstUtleder', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
-      beregningDto: { fastsattVarigEndringNæring: false, fastsattVarigEndringNaering: false, faktaOmBeregningTilfeller: [] },
+      beregningDto: { fastsattVarigEndringNæring: false, faktaOmBeregningTilfeller: [] },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
 
@@ -223,7 +221,6 @@ describe('aksjonspunktTekstUtleder', () => {
 
       beregningDto: {
         fastsattVarigEndringNæring: false,
-        fastsattVarigEndringNaering: false,
       },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -243,7 +240,6 @@ describe('aksjonspunktTekstUtleder', () => {
 
       beregningDto: {
         fastsattVarigEndringNæring: false,
-        fastsattVarigEndringNaering: false,
       },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -264,7 +260,6 @@ describe('aksjonspunktTekstUtleder', () => {
 
       beregningDto: {
         fastsattVarigEndringNæring: false,
-        fastsattVarigEndringNaering: false,
       },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -284,7 +279,6 @@ describe('aksjonspunktTekstUtleder', () => {
 
       beregningDto: {
         fastsattVarigEndringNæring: false,
-        fastsattVarigEndringNaering: false,
       },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -373,7 +367,6 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
       beregningDto: {
         faktaOmBeregningTilfeller: ['VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'],
-        fastsattVarigEndringNaering: false,
         fastsattVarigEndringNæring: false,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -394,7 +387,6 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
       beregningDto: {
         faktaOmBeregningTilfeller: ['VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'],
-        fastsattVarigEndringNaering: false,
         fastsattVarigEndringNæring: false,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -418,7 +410,6 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
       beregningDto: {
         faktaOmBeregningTilfeller: ['VURDER_BESTEBEREGNING', 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'],
-        fastsattVarigEndringNaering: false,
         fastsattVarigEndringNæring: false,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
