@@ -2479,7 +2479,7 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto =
   kildeSystem: string;
   kontaktpersonNavn: string;
   kontaktpersonNummer: string;
-  motattDato?: string;
+  motattDato: string;
   mottattDato: string;
   refusjonPrMnd?: number;
   refusjonsperioder: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_RefusjonDto>;
@@ -2490,7 +2490,7 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto =
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto = {
-  beloepPerMnd?: foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Beløp;
+  beloepPerMnd: foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Beløp;
   beløpPerMnd: foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Beløp;
   indexKey: string;
   periode: foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto_Periode;
@@ -2640,7 +2640,7 @@ export type tjenester_behandling_arbeidsforhold_ArbeidsgiverOversiktDto = {
 export type foreldrepenger_domene_arbeidsforhold_dto_IAYYtelseDto = {
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
   relatertTilgrensendeYtelserForAnnenForelder: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
-  relatertTilgrensendeYtelserForSoker?: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
+  relatertTilgrensendeYtelserForSoker: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
   relatertTilgrensendeYtelserForSøker: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
 };
 
@@ -3555,7 +3555,7 @@ export type tjenester_behandling_beregningsresultat_dto_BeregningsresultatPeriod
   refusjon: number;
   sisteUtbetalingsdato: string;
   stillingsprosent?: number;
-  tilSoker?: number;
+  tilSoker: number;
   tilSøker: number;
   utbetalingsgrad: number;
   uttak: tjenester_behandling_beregningsresultat_dto_UttakDto;
