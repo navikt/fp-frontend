@@ -121,7 +121,7 @@ const erDatoInnenforPeriode = (oppgaveForAvdeling: OppgaveForDato, ukevalg: stri
     return true;
   }
   const toUkerSiden = dayjs().subtract(2, 'w');
-  return dayjs(oppgaveForAvdeling.opprettetDato).isSameOrAfter(toUkerSiden);
+  return dayjs(oppgaveForAvdeling.statistikkDato).isSameOrAfter(toUkerSiden);
 };
 
 const finnFagsakYtelseTypeNavn = (
@@ -137,14 +137,14 @@ const slaSammenLikeBehandlingstyperOgDatoer = (oppgaverForAvdeling: OppgaveForDa
 
   for (const o of oppgaverForAvdeling) {
     const index = sammenslatte.findIndex(
-      s => s.behandlingType === o.behandlingType && s.opprettetDato === o.opprettetDato,
+      s => s.behandlingType === o.behandlingType && s.statistikkDato === o.statistikkDato,
     );
     if (index === -1) {
       sammenslatte.push(o);
     } else {
       sammenslatte[index] = {
         behandlingType: sammenslatte[index]!.behandlingType,
-        opprettetDato: sammenslatte[index]!.opprettetDato,
+        statistikkDato: sammenslatte[index]!.statistikkDato,
         antall: sammenslatte[index]!.antall + o.antall,
       };
     }

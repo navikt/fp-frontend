@@ -1,4 +1,12 @@
-import type { foreldrepenger_behandlingslager_behandling_BehandlingResultatType } from './apiDtoGenerert';
+import type {
+  foreldrepenger_behandlingslager_behandling_BehandlingResultatType,
+  foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen,
+  tjenester_behandling_dto_behandling_BehandlingsresultatDto,
+} from './apiDtoGenerert';
+
+export type Behandlingsresultat = tjenester_behandling_dto_behandling_BehandlingsresultatDto;
+
+export type KonsekvensForYtelsen = foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen;
 
 export type BehandlingResultatType = foreldrepenger_behandlingslager_behandling_BehandlingResultatType;
 

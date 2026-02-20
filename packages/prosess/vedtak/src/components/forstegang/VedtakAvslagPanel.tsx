@@ -3,12 +3,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
 
-import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
+import type { AlleKodeverk, Behandlingsresultat, Vilkår } from '@navikt/fp-types';
 
 import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 
 interface Props {
-  vilkår: Vilkar[];
+  vilkår: Vilkår[];
   behandlingsresultat?: Behandlingsresultat;
   språkkode: string;
   isReadOnly: boolean;
@@ -49,7 +49,7 @@ export const VedtakAvslagPanel = ({
 };
 
 const getAvslagÅrsak = (
-  vilkar: Vilkar[],
+  vilkar: Vilkår[],
   alleKodeverk: AlleKodeverk,
   behandlingsresultat?: Behandlingsresultat,
 ): ReactElement | string => {

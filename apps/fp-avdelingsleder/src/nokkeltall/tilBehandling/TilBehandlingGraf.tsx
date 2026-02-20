@@ -17,7 +17,7 @@ const behandlingstypeFarger = {
 
 export interface OppgaveForDatoGraf {
   behandlingType: BehandlingType;
-  opprettetDato: string;
+  statistikkDato: string;
   antall: number;
 }
 
@@ -106,7 +106,7 @@ const konverterTilKoordinaterGruppertPaBehandlingstype = (
 ): Map<BehandlingType, Koordinat[]> =>
   oppgaverForAvdeling.reduce<Map<BehandlingType, Koordinat[]>>((acc, o) => {
     const nyKoordinat = {
-      x: dayjs(o.opprettetDato).startOf('day').toDate(),
+      x: dayjs(o.statistikkDato).startOf('day').toDate(),
       y: o.antall,
     };
 

@@ -1,7 +1,13 @@
 import type {
+  foreldrepenger_behandlingslager_aktør_AdresseType,
+  tjenester_behandling_personopplysning_PersonadresseDto,
   tjenester_behandling_personopplysning_PersonopplysningBasisDto,
   tjenester_behandling_personopplysning_PersonoversiktDto,
 } from './apiDtoGenerert';
+
+export type AdresseType = foreldrepenger_behandlingslager_aktør_AdresseType;
+
+export type Personadresse = tjenester_behandling_personopplysning_PersonadresseDto;
 
 export type PersonopplysningerBasis = tjenester_behandling_personopplysning_PersonopplysningBasisDto;
 

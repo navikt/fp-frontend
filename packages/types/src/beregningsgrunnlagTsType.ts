@@ -1,13 +1,13 @@
 import type {
+  folketrygdloven_kalkulus_kodeverk_VirksomhetType,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPeriodeDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelSNDto,
-  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNæringDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PgiDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SammenligningsgrunnlagDto,
 } from './apiDtoGenerert';
 
-export type Næring = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNæringDto;
+export type VirksomhetType = folketrygdloven_kalkulus_kodeverk_VirksomhetType;
 
 export type PgiVerdier = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PgiDto;
 

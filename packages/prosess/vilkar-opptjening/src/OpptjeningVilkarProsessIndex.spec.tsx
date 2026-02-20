@@ -28,7 +28,7 @@ describe('OpptjeningVilkarProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: true,
+      erVilkårOk: true,
       kode: '5089',
     });
   });
@@ -61,7 +61,7 @@ describe('OpptjeningVilkarProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: false,
+      erVilkårOk: false,
       kode: '5089',
       avslagskode: undefined,
     });

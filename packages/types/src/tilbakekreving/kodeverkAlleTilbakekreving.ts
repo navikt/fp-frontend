@@ -1,5 +1,5 @@
 import type { BehandlingType } from '../behandlingType';
-import type { HistorikkAktor } from '../historikkAktor';
+import type { HistorikkAktør } from '../historikkinnslagTsType';
 import type { TilbakekrevingVidereBehandling } from '../tilbakekrevingVidereBehandling';
 import type { VergeType } from '../vergeTsType';
 import type { VurderÅrsak } from '../vurderÅrsak';
@@ -22,7 +22,7 @@ type KodeverkEnumMap = {
   BehandlingType: BehandlingType;
   BehandlingÅrsakType: BehandlingÅrsakTypeFpTilbake;
   BehandlingResultatType: BehandlingResultatTypeFpTilbake;
-  HistorikkAktør: HistorikkAktor;
+  HistorikkAktør: HistorikkAktør;
   SkjermlenkeType: SkjermlenkeTypeTilbakekreving;
   Venteårsak: VenteÅrsakTypeFpTilbake;
   VurderÅrsak: VurderÅrsak;

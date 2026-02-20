@@ -13,19 +13,19 @@ import {
   type ProsessStegBegrunnelseTextFieldFormValues,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Behandlingsresultat, FamilieHendelse, Soknad, VilkarUtfallType } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandlingsresultat, FamilieHendelse, Soknad, VilkårUtfallType } from '@navikt/fp-types';
 import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { SøknadsfristDetaljer } from './SøknadsfristDetaljer';
 
 type FormValues = {
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
 } & ProsessStegBegrunnelseTextFieldFormValues;
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
-  status: VilkarUtfallType,
+  status: VilkårUtfallType,
   behandlingsresultat?: Behandlingsresultat,
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
@@ -41,7 +41,7 @@ const transformValues = (values: FormValues): SoknadsfristAp => ({
 interface Props {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  status: VilkarUtfallType;
+  status: VilkårUtfallType;
 }
 
 /**

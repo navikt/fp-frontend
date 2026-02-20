@@ -18,7 +18,7 @@ const inntektsmeldingmal = {
   internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
   kontaktpersonNavn: 'Corpolarsen',
   kontaktpersonNummer: '41925090',
-  motattDato: '2021-12-06',
+  mottattDato: '2021-12-06',
   refusjonPrMnd: 20000,
   journalpostId: '1',
   dokumentId: '2',
@@ -75,12 +75,12 @@ export const InntektsmeldingDefault: Story = {
         journalpostId: '1',
         refusjonsperioder: [
           {
-            refusjonsbeløp: { verdi: 5000 },
+            refusjonsbeløpMnd: { verdi: 5000 },
             indexKey: '1',
             fom: '2024-01-10',
           },
           {
-            refusjonsbeløp: { verdi: 3000 },
+            refusjonsbeløpMnd: { verdi: 3000 },
             indexKey: '2',
             fom: '2024-01-09',
           },
@@ -110,13 +110,13 @@ export const InntektsmeldingDefault: Story = {
           {
             periode: { fomDato: '2024-01-09', tomDato: '2024-10-09' },
             type: 'ELEKTRISK_KOMMUNIKASJON',
-            beloepPerMnd: { verdi: 999 },
+            beløpPerMnd: { verdi: 999 },
             indexKey: '1',
           },
           {
             periode: { fomDato: '2024-01-11', tomDato: '2024-10-11' },
             type: 'LOSJI',
-            beloepPerMnd: { verdi: 10 },
+            beløpPerMnd: { verdi: 10 },
             indexKey: '2',
           },
         ],

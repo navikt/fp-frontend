@@ -74,7 +74,7 @@ export const ForBeslutter: Story = {
               aksjonspunktKode: '5082',
               opptjeningAktiviteter: [],
               beregningDto: {
-                fastsattVarigEndringNaering: false,
+                fastsattVarigEndringNæring: false,
                 faktaOmBeregningTilfeller: ['-'],
               },
               vurderPaNyttArsaker: [],
@@ -91,7 +91,7 @@ export const ForBeslutter: Story = {
               aksjonspunktKode: '5035',
               opptjeningAktiviteter: [],
               beregningDto: {
-                fastsattVarigEndringNaering: false,
+                fastsattVarigEndringNæring: false,
                 faktaOmBeregningTilfeller: ['-'],
               },
               vurderPaNyttArsaker: [],
@@ -120,7 +120,7 @@ export const ForSaksbehandler: Story = {
               aksjonspunktKode: '5082',
               opptjeningAktiviteter: [],
               beregningDto: {
-                fastsattVarigEndringNaering: false,
+                fastsattVarigEndringNæring: false,
                 faktaOmBeregningTilfeller: ['-'],
               },
               besluttersBegrunnelse: 'Denne er ikke godkjent fordi...',
@@ -137,7 +137,7 @@ export const ForSaksbehandler: Story = {
               aksjonspunktKode: '5035',
               opptjeningAktiviteter: [],
               beregningDto: {
-                fastsattVarigEndringNaering: false,
+                fastsattVarigEndringNæring: false,
                 faktaOmBeregningTilfeller: ['-'],
               },
               totrinnskontrollGodkjent: true,

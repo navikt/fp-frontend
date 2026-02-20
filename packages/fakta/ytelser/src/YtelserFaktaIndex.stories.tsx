@@ -13,7 +13,7 @@ const defaultInntektArbeidYtelse = {
       arbeidsgiverReferanse: '345',
     },
   ],
-  relatertTilgrensendeYtelserForSoker: [
+  relatertTilgrensendeYtelserForSøker: [
     {
       relatertYtelseNavn: 'Svangerskapspenger',
       tilgrensendeYtelserListe: [
@@ -80,7 +80,7 @@ export const YtelserForHovedsøkerOgAnnenPart: Story = {
 export const UtenTilgrensedeYtelser: Story = {
   args: {
     inntektArbeidYtelse: {
-      relatertTilgrensendeYtelserForSoker: [
+      relatertTilgrensendeYtelserForSøker: [
         {
           relatertYtelseNavn: 'Svangerskapspenger',
           tilgrensendeYtelserListe: [],

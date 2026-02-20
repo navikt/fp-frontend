@@ -8,7 +8,7 @@ import { type Location } from 'history';
 import type {
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
-  HistorikkAktor,
+  HistorikkAktør,
   Historikkinnslag,
   HistorikkinnslagDtoFpTilbake,
   SkjermlenkeType,
@@ -31,7 +31,7 @@ interface Props {
   saksnummer: string;
 }
 
-const backgrounds: Record<HistorikkAktor, BoxNewProps['background']> = {
+const backgrounds: Record<HistorikkAktør, BoxNewProps['background']> = {
   ['ARBEIDSGIVER']: 'info-moderate',
   ['BESL']: 'success-moderate',
   ['VL']: 'neutral-moderate',

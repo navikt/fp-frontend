@@ -103,7 +103,7 @@ export const TabellNårDetFinnesEnBehandlingskø: Story = {
             brukerIdent: 'R23233',
             navn: 'Ola Nordmann',
             ansattAvdeling: '1234',
-          }
+          },
         ],
         andreKriterie: {
           inkluder: [],

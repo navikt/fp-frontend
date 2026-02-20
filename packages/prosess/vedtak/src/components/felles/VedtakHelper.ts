@@ -1,4 +1,4 @@
-import type { SimuleringResultat, TilbakekrevingValg, TilbakekrevingVidereBehandling, Vilkar } from '@navikt/fp-types';
+import type { SimuleringResultat, TilbakekrevingValg, TilbakekrevingVidereBehandling, Vilkår } from '@navikt/fp-types';
 
 const tilbakekrevingMedInntrekk = (
   tilbakekrevingKode: TilbakekrevingVidereBehandling,
@@ -18,5 +18,5 @@ export const getTilbakekrevingText = (
     : undefined;
 };
 
-export const hasIkkeOppfyltSoknadsfristvilkar = (vilkar: Vilkar[]): boolean =>
+export const hasIkkeOppfyltSoknadsfristvilkar = (vilkar: Vilkår[]): boolean =>
   vilkar.some(v => v.vilkarType === 'FP_VK_3' && v.vilkarStatus === 'IKKE_OPPFYLT');

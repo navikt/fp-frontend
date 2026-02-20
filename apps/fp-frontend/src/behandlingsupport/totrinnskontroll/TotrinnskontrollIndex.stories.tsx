@@ -50,7 +50,7 @@ const createAksjonspunkt = (aksjonspunktKode: string) =>
     opptjeningAktiviteter: [],
     besluttersBegrunnelse: 'begrunnelse',
     totrinnskontrollGodkjent: false,
-    beregningDto: { fastsattVarigEndringNaering: false, faktaOmBeregningTilfeller: [] },
+    beregningDto: { fastsattVarigEndringNæring: false, faktaOmBeregningTilfeller: [] },
     vurderPaNyttArsaker: [],
     uttakPerioder: [],
   }) satisfies TotrinnskontrollAksjonspunkt;

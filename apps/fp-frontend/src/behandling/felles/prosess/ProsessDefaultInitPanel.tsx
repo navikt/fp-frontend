@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type { Behandling, BehandlingFpSak, VilkarUtfallType } from '@navikt/fp-types';
+import type { Behandling, BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
 import { MellomlagretFormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
@@ -11,7 +11,7 @@ import type { StandardProsessPanelProps } from './useStandardProsessPanelProps';
 
 interface Props<T extends Behandling> {
   skalPanelVisesIMeny: boolean;
-  overstyrtStatus?: VilkarUtfallType;
+  overstyrtStatus?: VilkårUtfallType;
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
   skalMarkeresSomAktiv?: boolean;

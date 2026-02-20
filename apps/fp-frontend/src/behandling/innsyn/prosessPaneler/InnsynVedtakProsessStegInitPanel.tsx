@@ -9,7 +9,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakInnsynForhandsvisData, VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
-import type { BehandlingFpSak, VilkarUtfallType } from '@navikt/fp-types';
+import type { BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -74,7 +74,7 @@ export const InnsynVedtakProsessStegInitPanel = () => {
   );
 };
 
-const getVedtakStatus = (behandling: BehandlingFpSak): VilkarUtfallType => {
+const getVedtakStatus = (behandling: BehandlingFpSak): VilkårUtfallType => {
   const { aksjonspunkt, behandlingsresultat } = behandling;
   const harÅpentAksjonspunkt = aksjonspunkt.some(erAksjonspunktÅpent);
   if (aksjonspunkt.length === 0 || harÅpentAksjonspunkt) {

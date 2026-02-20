@@ -21,12 +21,12 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 type FormValues = {
-  startdatoFraSoknad?: string;
+  startdatoFraSøknad?: string;
   begrunnelse?: string;
 };
 
 const buildInitialValues = (ytelseFordeling: Ytelsefordeling, aksjonspunkt?: Aksjonspunkt): FormValues => ({
-  startdatoFraSoknad: ytelseFordeling.startDatoForPermisjon,
+  startdatoFraSøknad: ytelseFordeling.startDatoForPermisjon,
   begrunnelse: aksjonspunkt?.begrunnelse ?? '',
 });
 
@@ -36,13 +36,13 @@ const transformValues = (
 ): OverstyringAvklarStartdatoForPeriodenAp => ({
   kode: AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
   opprinneligDato: ytelseFordeling.startDatoForPermisjon,
-  startdatoFraSoknad: notEmpty(values.startdatoFraSoknad),
+  startdatoFraSøknad: notEmpty(values.startdatoFraSøknad),
   begrunnelse: values.begrunnelse,
 });
 
 const getValidateIsBefore2019 = (getValues: UseFormGetValues<FormValues>, intl: IntlShape) => () => {
-  const startdatoFraSoknad = getValues('startdatoFraSoknad');
-  return dayjs(startdatoFraSoknad).isBefore('2019-01-01')
+  const startdatoFraSøknad = getValues('startdatoFraSøknad');
+  return dayjs(startdatoFraSøknad).isBefore('2019-01-01')
     ? intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoFør2019' })
     : undefined;
 };
@@ -108,7 +108,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, ytelseFor
           >
             <VStack gap="space-16">
               <RhfDatepicker
-                name="startdatoFraSoknad"
+                name="startdatoFraSøknad"
                 control={formMethods.control}
                 label={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Startdato' })}
                 validate={[required, hasValidDate, getValidateIsBefore2019(formMethods.getValues, intl)]}

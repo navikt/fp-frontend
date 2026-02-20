@@ -1,12 +1,13 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { OppgaveFilterStatistikk, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { OppgaveFilterStatistikk, ReservasjonStatus } from '@navikt/fp-los-felles';
 import type {
   AlleKodeverkLos,
   AndreKriterierType,
   BehandlingType,
   FagsakYtelseType,
+  SaksbehandlerProfil,
   SakslisteAvdeling,
   SakslisteDto,
 } from '@navikt/fp-types';

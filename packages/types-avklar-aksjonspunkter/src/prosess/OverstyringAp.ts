@@ -3,7 +3,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type OverstyringAp = {
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
   avslagskode?: string;
 } & AksjonspunktTilBekreftelse<
   | AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET

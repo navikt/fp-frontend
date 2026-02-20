@@ -26,7 +26,7 @@ describe('FodselVilkarProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: true,
+      erVilkårOk: true,
       kode: '5031',
     });
   });
@@ -55,7 +55,7 @@ describe('FodselVilkarProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       avslagskode: '1031',
       begrunnelse: 'Dette er en vurdering',
-      erVilkarOk: false,
+      erVilkårOk: false,
       kode: '5031',
     });
   });
