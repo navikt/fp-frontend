@@ -1,6 +1,6 @@
-import type { Avslagsarsak, Vilkar, VilkårType } from '@navikt/fp-types';
+import type { Avslagsarsak, Vilkår, VilkårType } from '@navikt/fp-types';
 
-export const lagVilkår = (vilkarType: VilkårType, options?: Partial<Vilkar>): Vilkar => {
+export const lagVilkår = (vilkarType: VilkårType, options?: Partial<Vilkår>): Vilkår => {
   return {
     vilkarType,
     aktuelleAvslagsårsaker: avslagsårsakerPerVilkår[vilkarType],

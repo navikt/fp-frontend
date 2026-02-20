@@ -10,7 +10,7 @@ import type {
   ArbeidsgiverOpplysningerPerId,
   BehandlingFpSak,
   Personoversikt,
-  VilkarUtfallType,
+  VilkårUtfallType,
 } from '@navikt/fp-types';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
@@ -18,7 +18,7 @@ import { useBehandlingDataContext } from '../../felles/context/BehandlingDataCon
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const getStatusFromUttakresultat = (behandling: BehandlingFpSak): VilkarUtfallType => {
+const getStatusFromUttakresultat = (behandling: BehandlingFpSak): VilkårUtfallType => {
   if (!harLenke(behandling, 'UTTAKSRESULTAT')) {
     return 'IKKE_VURDERT';
   }

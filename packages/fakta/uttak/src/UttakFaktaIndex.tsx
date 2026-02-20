@@ -5,7 +5,7 @@ import { createIntl } from '@navikt/ft-utils';
 import type {
   ArbeidsgiverOpplysningerPerId,
   FaktaArbeidsforhold,
-  KontrollerFaktaPeriode,
+  FaktaUttakPeriode,
   Ytelsefordeling,
 } from '@navikt/fp-types';
 
@@ -17,7 +17,7 @@ const intl = createIntl(messages);
 
 interface Props {
   ytelsefordeling: Ytelsefordeling;
-  uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
+  uttakKontrollerFaktaPerioder: FaktaUttakPeriode[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
   kanOverstyre: boolean;

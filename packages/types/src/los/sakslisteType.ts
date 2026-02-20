@@ -33,7 +33,6 @@ export type SaksbehandlerProfil = Readonly<{
   ansattAvdeling: string | null;
 }>;
 
-
 export type SakslisteAvdeling = Readonly<{
   sakslisteId: number;
   navn: string;
@@ -46,9 +45,6 @@ export type SakslisteAvdeling = Readonly<{
   gjeldendeStatistikk?: Statistikk;
 }>;
 
-export type SakslisteDto = Omit<
-  SakslisteAvdeling,
-  'sorteringTyper' | 'saksbehandlere' | 'gjeldendeStatistikk'
-> & {
+export type SakslisteDto = Omit<SakslisteAvdeling, 'sorteringTyper' | 'saksbehandlere' | 'gjeldendeStatistikk'> & {
   avdelingEnhet: string;
 };

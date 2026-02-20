@@ -2,7 +2,7 @@ import { type ReactRenderer } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import type { Aksjonspunkt, BehandlingFpSak, Fagsak, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, Fagsak, Vilkår } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, PanelDataProvider } from '@navikt/fp-utils';
 
@@ -15,7 +15,7 @@ export type PanelDataArgs = {
   behandling?: BehandlingFpSak;
   alleMerknaderFraBeslutter?: { [key: string]: { notAccepted?: boolean } };
   aksjonspunkterForPanel?: Aksjonspunkt[];
-  vilkårForPanel?: Vilkar[];
+  vilkårForPanel?: Vilkår[];
   isReadOnly?: boolean;
   isSubmittable?: boolean;
   submitCallback?: (data: AksjonspunktType) => Promise<void>;

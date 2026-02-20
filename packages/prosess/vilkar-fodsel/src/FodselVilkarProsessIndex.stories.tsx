@@ -10,7 +10,7 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak, Vilkar } from '@navikt/fp-types';
+import type { BehandlingFpSak, Vilkår } from '@navikt/fp-types';
 
 import { FodselVilkarProsessIndex } from './FodselVilkarProsessIndex';
 
@@ -19,7 +19,7 @@ const meta = {
   component: FodselVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    vilkårForPanel: [lagVilkår('FP_VK_1')] as Vilkar[],
+    vilkårForPanel: [lagVilkår('FP_VK_1')] as Vilkår[],
   },
   render: args => <FodselVilkarProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselVilkarProsessIndex>>;

@@ -1,6 +1,6 @@
-import type { KontrollerFaktaPeriode } from '@navikt/fp-types';
+import type { FaktaUttakPeriode } from '@navikt/fp-types';
 
-export const kontrollerFaktaPeriode: KontrollerFaktaPeriode[] = [
+export const kontrollerFaktaPeriode: FaktaUttakPeriode[] = [
   {
     fom: '2025-02-12',
     tom: '2025-03-04',

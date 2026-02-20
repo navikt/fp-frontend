@@ -1,4 +1,7 @@
 import type {
+  foreldrepenger_behandlingslager_aktør_OppholdstillatelseType,
+  foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapManuellVurderingType,
+  foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapType,
   foreldrepenger_inngangsvilkaar_medlemskap_MedlemskapAvvik,
   tjenester_behandling_medlem_MedlemskapDto,
   tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling,
@@ -15,13 +18,20 @@ export type RegionPeriode = tjenester_behandling_medlem_MedlemskapDto_Region;
 
 export type PersonstatusPeriode = tjenester_behandling_medlem_MedlemskapDto_Personstatus;
 
-export type OppholdstillatelsePeriode = tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse;
+export type Oppholdstillatelse = tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse;
+
+export type OppholdstillatelseType = foreldrepenger_behandlingslager_aktør_OppholdstillatelseType;
 
 export type MedlemskapPeriode = tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode;
+
+export type MedlemskapType = foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapType;
 
 export type MedlemskapAvvik = foreldrepenger_inngangsvilkaar_medlemskap_MedlemskapAvvik;
 
 export type LegacyMedlemPeriode = tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling_MedlemPeriode;
+
+export type MedlemskapManuellVurderingType =
+  foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapManuellVurderingType;
 
 export type LegacyManuellMedlemskapsBehandling = tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling;
 
