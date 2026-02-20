@@ -1,8 +1,8 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { OppgaveFilterStatistikk, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import type { AlleKodeverkLos, SakslisteAvdeling, SakslisteDto } from '@navikt/fp-types';
+import type { OppgaveFilterStatistikk, ReservasjonStatus } from '@navikt/fp-los-felles';
+import type { AlleKodeverkLos, SaksbehandlerProfil, SakslisteAvdeling, SakslisteDto } from '@navikt/fp-types';
 
 import type { Avdeling } from '../typer/avdelingTsType';
 import type { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';

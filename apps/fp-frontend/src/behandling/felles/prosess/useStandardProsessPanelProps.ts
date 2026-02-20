@@ -4,8 +4,8 @@ import type {
   Behandling,
   BehandlingFpSak,
   Fagsak,
-  Vilkar,
-  VilkarUtfallType,
+  Vilkår,
+  VilkårUtfallType,
 } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
@@ -24,8 +24,8 @@ export type StandardProsessPanelProps<T extends Behandling> = {
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   aksjonspunkterForPanel: Aksjonspunkt[];
-  vilkårForPanel: Vilkar[];
-  status: VilkarUtfallType;
+  vilkårForPanel: Vilkår[];
+  status: VilkårUtfallType;
   isReadOnly: boolean;
   isSubmittable: boolean;
   harÅpentAksjonspunkt: boolean;
@@ -144,7 +144,7 @@ const getBekreftAksjonspunktProsessCallback =
     }).then(etterLagringCallback);
   };
 
-const finnStatus = (vilkår: Vilkar[], aksjonspunkter: Aksjonspunkt[]): VilkarUtfallType => {
+const finnStatus = (vilkår: Vilkår[], aksjonspunkter: Aksjonspunkt[]): VilkårUtfallType => {
   if (vilkår.length > 0) {
     if (vilkår.some(v => v.vilkarStatus === 'IKKE_VURDERT')) {
       return 'IKKE_VURDERT';

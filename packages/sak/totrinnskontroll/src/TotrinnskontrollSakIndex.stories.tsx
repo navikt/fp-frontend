@@ -74,6 +74,7 @@ export const ForBeslutter: Story = {
               aksjonspunktKode: '5082',
               opptjeningAktiviteter: [],
               beregningDto: {
+                fastsattVarigEndringNæring: false,
                 fastsattVarigEndringNaering: false,
                 faktaOmBeregningTilfeller: ['-'],
               },
@@ -91,6 +92,7 @@ export const ForBeslutter: Story = {
               aksjonspunktKode: '5035',
               opptjeningAktiviteter: [],
               beregningDto: {
+                fastsattVarigEndringNæring: false,
                 fastsattVarigEndringNaering: false,
                 faktaOmBeregningTilfeller: ['-'],
               },
@@ -120,6 +122,7 @@ export const ForSaksbehandler: Story = {
               aksjonspunktKode: '5082',
               opptjeningAktiviteter: [],
               beregningDto: {
+                fastsattVarigEndringNæring: false,
                 fastsattVarigEndringNaering: false,
                 faktaOmBeregningTilfeller: ['-'],
               },
@@ -137,6 +140,7 @@ export const ForSaksbehandler: Story = {
               aksjonspunktKode: '5035',
               opptjeningAktiviteter: [],
               beregningDto: {
+                fastsattVarigEndringNæring: false,
                 fastsattVarigEndringNaering: false,
                 faktaOmBeregningTilfeller: ['-'],
               },

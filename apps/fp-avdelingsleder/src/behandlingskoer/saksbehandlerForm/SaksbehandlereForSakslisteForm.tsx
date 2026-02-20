@@ -6,8 +6,7 @@ import { BodyShort, Box, Checkbox, ExpansionCard, Label, Table, VStack } from '@
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { type SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import type { SakslisteAvdeling } from '@navikt/fp-types';
+import type { SaksbehandlerProfil, SakslisteAvdeling } from '@navikt/fp-types';
 
 import { grupperOptions } from '../../data/fplosAvdelingslederApi';
 import type { SaksbehandlerGruppe } from '../../typer/saksbehandlereOgSaksbehandlerGrupper';

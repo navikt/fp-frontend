@@ -1,7 +1,7 @@
 import type { InntektArbeidYtelse } from '@navikt/fp-types';
 
 export const inntektArbeidYtelse: InntektArbeidYtelse = {
-  relatertTilgrensendeYtelserForSoker: [
+  relatertTilgrensendeYtelserForSøker: [
     {
       relatertYtelseNavn: 'Foreldrepenger',
       tilgrensendeYtelserListe: [

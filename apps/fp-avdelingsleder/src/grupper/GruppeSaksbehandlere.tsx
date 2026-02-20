@@ -9,7 +9,7 @@ import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-va
 import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { SaksbehandlerProfil } from '@navikt/fp-types';
 
 import { useDebounce } from '../behandlingskoer/sakslisteForm/useDebounce';
 import {

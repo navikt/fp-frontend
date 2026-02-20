@@ -5,7 +5,7 @@ import { HStack, Link, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type { BehandlingFpSak, VilkarUtfallType } from '@navikt/fp-types';
+import type { BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
 
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
@@ -104,10 +104,10 @@ const InngangsvilkårPanelDataProvider = (props: PropsContext): JSX.Element => {
   return <InngangsvilkårPanelDataContext.Provider value={values}>{children}</InngangsvilkårPanelDataContext.Provider>;
 };
 
-const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: VilkarUtfallType): boolean =>
+const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: VilkårUtfallType): boolean =>
   paneler.some(p => p.status === vuType);
 
-const getStatus = (paneler: InngangsvilkarPanelData[]): VilkarUtfallType => {
+const getStatus = (paneler: InngangsvilkarPanelData[]): VilkårUtfallType => {
   const harStatusIkkeVurdert = harMinstEttDelPanelStatus(paneler, 'IKKE_VURDERT');
   const harStatusOppfylt = harMinstEttDelPanelStatus(paneler, 'OPPFYLT');
   const tempStatus = harStatusOppfylt && !harStatusIkkeVurdert ? 'OPPFYLT' : 'IKKE_VURDERT';

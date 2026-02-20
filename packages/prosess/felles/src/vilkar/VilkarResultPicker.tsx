@@ -8,7 +8,7 @@ import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-val
 import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import type { Aksjonspunkt, AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Behandlingsresultat, Vilkår } from '@navikt/fp-types';
 import { erAksjonspunktÅpent, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './vilkarResultPicker.module.css';
@@ -18,12 +18,12 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 export type VilkarResultPickerFormValues = {
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
   avslagskode?: string;
 };
 
 interface Props {
-  vilkår: Vilkar | undefined;
+  vilkår: Vilkår | undefined;
   legend: ReactNode;
   vilkårIkkeOppfyltLabel: string | ReactElement;
   vilkårOppfyltLabel: string | ReactElement;
@@ -43,7 +43,7 @@ export const VilkarResultPicker = ({
 }: Props) => {
   const { getValues, watch, control } = useFormContext<VilkarResultPickerFormValues>();
 
-  const erVilkårOk = watch('erVilkarOk');
+  const erVilkårOk = watch('erVilkårOk');
 
   const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
 
@@ -73,7 +73,7 @@ export const VilkarResultPicker = ({
       )}
       {(!isReadOnly || erVilkårOk === undefined) && (
         <RhfRadioGroup
-          name="erVilkarOk"
+          name="erVilkårOk"
           control={control}
           legend={legend}
           validate={radioValidators}
@@ -109,21 +109,21 @@ VilkarResultPicker.buildInitialValues = (
 ): VilkarResultPickerFormValues => {
   const erVilkårOk = aksjonspunkter.some(erAksjonspunktÅpent) ? undefined : 'OPPFYLT' === status;
   return {
-    erVilkarOk: erVilkårOk,
+    erVilkårOk: erVilkårOk,
     avslagskode:
       erVilkårOk === false && behandlingsresultat?.avslagsarsak ? behandlingsresultat.avslagsarsak : undefined,
   };
 };
 
 VilkarResultPicker.transformValues = (values: VilkarResultPickerFormValues) =>
-  values.erVilkarOk
-    ? { erVilkarOk: true }
+  values.erVilkårOk
+    ? { erVilkårOk: true }
     : {
-        erVilkarOk: false,
+        erVilkårOk: false,
         avslagskode: values.avslagskode,
       };
 
-const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkar | undefined) => {
+const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkår | undefined) => {
   if (vilkår) {
     return alleKodeverk['Avslagsårsak']
       .filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))

@@ -11,7 +11,6 @@ import type {
   ArbeidsgiverOpplysningerPerId,
   DetaljertSimuleringResultat,
   Mottaker,
-  MottakerType,
   SimuleringResultatPerFagområde,
   SimuleringResultatRad,
 } from '@navikt/fp-types';
@@ -219,7 +218,7 @@ const getResultatRadene = (
     : [];
 };
 
-const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: MottakerType): boolean =>
+const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: Mottaker['mottakerType']): boolean =>
   !!(ingenPerioderMedAvvik && mottakerTypeKode === 'BRUKER');
 
 const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string): string => periodeFom || nesteUtbPeriodeFom;
