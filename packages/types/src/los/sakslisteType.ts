@@ -1,4 +1,7 @@
-import type { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-types';
+import type { BehandlingType } from '../behandlingType';
+import type { FagsakYtelseType } from '../fagsakYtelseType';
+import type { AndreKriterierType } from './andreKriterierType';
+import type { KøSortering } from './køSortering';
 
 export type AnnetKriterie = Readonly<{
   inkluder: AndreKriterierType[];
