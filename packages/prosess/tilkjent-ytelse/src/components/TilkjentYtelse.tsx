@@ -174,7 +174,8 @@ export const TilkjentYtelse = ({
           onClick={zoomIn}
           variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomInn' })} />
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomInn' })}
+        />
         <Button
           data-color="neutral"
           size="small"
@@ -182,7 +183,8 @@ export const TilkjentYtelse = ({
           onClick={zoomOut}
           variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomUt' })} />
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ZoomUt' })}
+        />
         <Button
           data-color="neutral"
           size="small"
@@ -190,7 +192,8 @@ export const TilkjentYtelse = ({
           onClick={goBackward}
           variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilVenstre' })} />
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilVenstre' })}
+        />
         <Button
           data-color="neutral"
           size="small"
@@ -198,7 +201,8 @@ export const TilkjentYtelse = ({
           onClick={goForward}
           variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilHogre' })} />
+          title={intl.formatMessage({ id: 'TilkjentYtelse.ScrollTilHogre' })}
+        />
       </HStack>
       {valgtPeriode && (
         <TilkjentYtelseTimelineData

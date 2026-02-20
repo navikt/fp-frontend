@@ -18,7 +18,8 @@ export const SidePanelProfileKnapp = ({ toggleSideMeny, visSideMeny }: Props) =>
         aria-label={visSideMeny ? 'Skjul profil sidepanel' : 'Vis profil sidepanel'}
         variant="tertiary"
         size="small"
-        onClick={toggleSideMeny} />
+        onClick={toggleSideMeny}
+      />
     </Tooltip>
   );
 };

@@ -16,7 +16,8 @@ const utvidKnapp = (
       icon={<ExpandVerticalIcon fontSize="1.4rem" aria-hidden />}
       aria-label="Utvid behandling detaljer panel"
       variant="tertiary"
-      size="xsmall" />
+      size="xsmall"
+    />
   </Tooltip>
 );
 

@@ -351,11 +351,7 @@ export const SakslisteVelgerForm = ({
                     sorterteSaksbehandlere.length > 3 && !visAlleSaksbehandlere ? 3 : sorterteSaksbehandlere.length,
                   )
                   .map(s => (
-                    <SaksbehandlerBadge
-                      key={s.brukerIdent}
-                      icon={<PersonHeadsetIcon aria-hidden />}
-                      label={s.navn}
-                    />
+                    <SaksbehandlerBadge key={s.brukerIdent} icon={<PersonHeadsetIcon aria-hidden />} label={s.navn} />
                   ))}
                 {sorterteSaksbehandlere && sorterteSaksbehandlere.length > 3 && (
                   <HStack gap="space-8">

@@ -457,7 +457,8 @@ export const UttakTidslinje = ({
           onClick={zoomIn}
           variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'UttakTidslinje.ZoomInn' })} />
+          title={intl.formatMessage({ id: 'UttakTidslinje.ZoomInn' })}
+        />
         <Button
           data-color="neutral"
           size="small"
@@ -465,7 +466,8 @@ export const UttakTidslinje = ({
           onClick={zoomOut}
           variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'UttakTidslinje.ZoomUt' })} />
+          title={intl.formatMessage({ id: 'UttakTidslinje.ZoomUt' })}
+        />
         <Button
           data-color="neutral"
           size="small"
@@ -473,7 +475,8 @@ export const UttakTidslinje = ({
           onClick={goBackward}
           variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilVenstre' })} />
+          title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilVenstre' })}
+        />
         <Button
           data-color="neutral"
           size="small"
@@ -481,7 +484,8 @@ export const UttakTidslinje = ({
           onClick={goForward}
           variant="primary"
           type="button"
-          title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilHogre' })} />
+          title={intl.formatMessage({ id: 'UttakTidslinje.ScrollTilHogre' })}
+        />
       </HStack>
     </VStack>
   );

@@ -19,7 +19,8 @@ export const SidePanelKnapp = ({ toggleSideMeny, visSideMeny }: Props) => {
         variant="tertiary"
         size="small"
         onClick={toggleSideMeny}
-        style={{ marginTop: '18px', backgroundColor: 'var(--ax-neutral-400)' }} />
+        style={{ marginTop: '18px', backgroundColor: 'var(--ax-neutral-400)' }}
+      />
     </Tooltip>
   );
 };
