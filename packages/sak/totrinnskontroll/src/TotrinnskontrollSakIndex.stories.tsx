@@ -75,7 +75,6 @@ export const ForBeslutter: Story = {
               opptjeningAktiviteter: [],
               beregningDto: {
                 fastsattVarigEndringNæring: false,
-                fastsattVarigEndringNaering: false,
                 faktaOmBeregningTilfeller: ['-'],
               },
               vurderPaNyttArsaker: [],
@@ -93,7 +92,6 @@ export const ForBeslutter: Story = {
               opptjeningAktiviteter: [],
               beregningDto: {
                 fastsattVarigEndringNæring: false,
-                fastsattVarigEndringNaering: false,
                 faktaOmBeregningTilfeller: ['-'],
               },
               vurderPaNyttArsaker: [],
@@ -123,7 +121,6 @@ export const ForSaksbehandler: Story = {
               opptjeningAktiviteter: [],
               beregningDto: {
                 fastsattVarigEndringNæring: false,
-                fastsattVarigEndringNaering: false,
                 faktaOmBeregningTilfeller: ['-'],
               },
               besluttersBegrunnelse: 'Denne er ikke godkjent fordi...',
@@ -141,7 +138,6 @@ export const ForSaksbehandler: Story = {
               opptjeningAktiviteter: [],
               beregningDto: {
                 fastsattVarigEndringNæring: false,
-                fastsattVarigEndringNaering: false,
                 faktaOmBeregningTilfeller: ['-'],
               },
               totrinnskontrollGodkjent: true,
