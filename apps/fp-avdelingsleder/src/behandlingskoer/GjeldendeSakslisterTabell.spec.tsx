@@ -7,7 +7,8 @@ import { vi } from 'vitest';
 import * as stories from './GjeldendeSakslisterTabell.stories';
 
 vi.mock('@navikt/fp-los-felles', () => ({
-  AktiveOgTilgjengeligeOppgaverGraf: () => <div data-testid="mocked-graph">Mocked Graph</div>,
+  AktiveOgTilgjengeligeOppgaverGraf: vi.fn(() => null),
+  LukkedeOppgaverPanel: vi.fn(() => null),
 }));
 
 const { TabellNårDetIkkeFinnesBehandlingskøer, TabellNårDetFinnesEnBehandlingskø } = composeStories(stories);

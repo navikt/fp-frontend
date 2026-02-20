@@ -1,10 +1,10 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { LineGraphDotIcon } from '@navikt/aksel-icons';
-import { Button, Dialog } from '@navikt/ds-react';
+import { Button, Dialog, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
-import { AktiveOgTilgjengeligeOppgaverGraf } from '@navikt/fp-los-felles';
+import { AktiveOgTilgjengeligeOppgaverGraf, LukkedeOppgaverPanel } from '@navikt/fp-los-felles';
 import type { SakslisteDto } from '@navikt/fp-types';
 
 import { oppgaveFilterStatistikkOptions } from '../data/fplosAvdelingslederApi';
@@ -56,9 +56,14 @@ const OppgaverGrafDialogBody = ({
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
 }) => {
-  const aktiveOgLedigeTidslinje =
+  const oppgaveFilterStatistikk =
     useQuery({
       ...oppgaveFilterStatistikkOptions(valgtSakslisteId, valgtAvdelingEnhet),
     }).data ?? [];
-  return <AktiveOgTilgjengeligeOppgaverGraf aktiveOgLedigeTidslinje={aktiveOgLedigeTidslinje} />;
+  return (
+    <VStack gap="space-32">
+      <AktiveOgTilgjengeligeOppgaverGraf aktiveOgLedigeTidslinje={oppgaveFilterStatistikk} />
+      <LukkedeOppgaverPanel køStatistikk={oppgaveFilterStatistikk} />
+    </VStack>
+  );
 };

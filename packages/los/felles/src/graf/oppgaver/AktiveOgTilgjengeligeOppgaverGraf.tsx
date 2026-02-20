@@ -9,10 +9,10 @@ import dayjs from 'dayjs';
 
 import type { KøStatistikkDto } from '@navikt/fp-types';
 
-import { createLineSeries, getStyle } from '../echartUtils';
-import { ReactECharts } from '../ReactECharts';
+import { createLineSeries, getStyle } from '../../echartUtils';
+import { ReactECharts } from '../../ReactECharts';
 
-import messages from '../../i18n/nb_NO.json';
+import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
@@ -22,6 +22,7 @@ enum Tidsintervall {
   MÅNED = 'måned',
 }
 type SerieConfig = { akselColor: AkselColor; data: (string | number)[]; name: string };
+
 interface Props {
   aktiveOgLedigeTidslinje: KøStatistikkDto[];
 }
