@@ -3,6 +3,7 @@ import type {
   tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto,
   tjenester_avdelingsleder_saksliste_dto_SorteringDto,
   tjenester_felles_dto_KøSorteringFeltDto,
+  tjenester_felles_dto_SaksbehandlerDto,
   tjenester_felles_dto_SakslisteDto,
   tjenester_felles_dto_SakslisteDto_AndreKriterieDto,
   tjenester_felles_dto_SakslisteDto_StatistikkDto,
@@ -21,3 +22,4 @@ export type Periodefilter = oppgave_Periodefilter;
 export type SakslisteAvdeling = tjenester_felles_dto_SakslisteDto;
 
 export type SakslisteDto = tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto;
+export type SaksbehandlerProfil = tjenester_felles_dto_SaksbehandlerDto;
