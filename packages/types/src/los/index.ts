@@ -15,7 +15,7 @@ export type { AndreKriterierType } from './andreKriterierType';
 export type {
   oppgave_BehandlingType,
   oppgave_FagsakYtelseType,
-  statistikk_AktiveOgTilgjenglige,
+  statistikk_KøStatistikkDto,
   tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdeling as OppgaverForAvdeling,
   tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingVentefristUtløperDto as NøkkeltallBehandlingVentefristUtløperDto,
   tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForFørsteStønadsdagUkeMåned as OppgaverForFørsteStønadsdagUkeMåned,

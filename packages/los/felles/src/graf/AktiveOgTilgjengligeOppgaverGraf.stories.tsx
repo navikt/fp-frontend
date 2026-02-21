@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
 import { AktiveOgTilgjengeligeOppgaverGraf } from './AktiveOgTilgjengeligeOppgaverGraf';
-import type { statistikk_AktiveOgTilgjenglige } from '@navikt/fp-types';
+import type { statistikk_KøStatistikkDto } from '@navikt/fp-types';
 
 // Hjelpefunksjon for relative datoer
 const getTidspunktForAntallTimerSiden = (hours: number): string => {
@@ -17,7 +17,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const HURTIG_KO_DATA: statistikk_AktiveOgTilgjenglige[] = [
+const HURTIG_KO_DATA: statistikk_KøStatistikkDto[] = [
   // gap på ~13 timer
   { tidspunkt: getTidspunktForAntallTimerSiden(43), aktive: 21, tilgjengelige: 5, ventende: 32 },
   { tidspunkt: getTidspunktForAntallTimerSiden(42), aktive: 21, tilgjengelige: 4, ventende: 31 },
@@ -49,7 +49,7 @@ export const HurtigKo: Story = {
   },
 };
 
-const A02_REGISTRERE_PAPIRSOKNAD_DATA: statistikk_AktiveOgTilgjenglige[] = [
+const A02_REGISTRERE_PAPIRSOKNAD_DATA: statistikk_KøStatistikkDto[] = [
   // gap på ~13 timer
   { tidspunkt: getTidspunktForAntallTimerSiden(43), aktive: 22, tilgjengelige: 21, ventende: 34 },
   { tidspunkt: getTidspunktForAntallTimerSiden(42), aktive: 22, tilgjengelige: 21, ventende: 34 },
@@ -82,7 +82,7 @@ export const A02RegistrerePapirsøknad: Story = {
   },
 };
 
-const ALLE_SAKER_DATA: statistikk_AktiveOgTilgjenglige[] = [
+const ALLE_SAKER_DATA: statistikk_KøStatistikkDto[] = [
   // gap på ~13 timer
   { tidspunkt: getTidspunktForAntallTimerSiden(43), aktive: 15601, tilgjengelige: 15382, ventende: 23401 },
   { tidspunkt: getTidspunktForAntallTimerSiden(42), aktive: 15599, tilgjengelige: 15376, ventende: 23398 },

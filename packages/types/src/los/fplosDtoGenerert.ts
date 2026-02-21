@@ -21,8 +21,9 @@ export type tjenester_avdelingsleder_dto_InitLinksDto = {
   innloggetBruker: avdelingsleder_innlogget_InnloggetNavAnsattDto;
 };
 
-export type statistikk_AktiveOgTilgjenglige = {
+export type statistikk_KøStatistikkDto = {
   aktive: number;
+  avsluttet?: number;
   tidspunkt: string;
   tilgjengelige: number;
   ventende: number;
@@ -30,10 +31,6 @@ export type statistikk_AktiveOgTilgjenglige = {
 
 export type tjenester_felles_dto_SakslisteIdDto = {
   sakslisteId: number;
-};
-
-export type tjenester_avdelingsleder_dto_AvdelingEnhetDto = {
-  avdelingEnhet: string;
 };
 
 export type oppgave_BehandlingType = 'BT-002' | 'BT-003' | 'BT-004' | 'BT-006' | 'BT-007' | 'BT-008' | 'BT-009';
@@ -44,7 +41,11 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingFørst
   antall: number;
   behandlingType: oppgave_BehandlingType;
   behandlingVenteStatus: tjenester_avdelingsleder_nøkkeltall_dto_BehandlingVenteStatus;
-  førsteUttakMåned: string;
+  førsteUttakMåned?: string;
+};
+
+export type tjenester_avdelingsleder_dto_AvdelingEnhetDto = {
+  avdelingEnhet: string;
 };
 
 export type oppgave_FagsakYtelseType = 'ES' | 'FP' | 'SVP';
@@ -60,6 +61,14 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingVentef
   antall: number;
   fagsakYtelseType: oppgave_FagsakYtelseType;
   fristUke: string;
+};
+
+export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaveEndringForAvdelingPerDato = {
+  avsluttet?: number;
+  behandlingType?: oppgave_BehandlingType;
+  fagsakYtelseType?: oppgave_FagsakYtelseType;
+  opprettet?: number;
+  statistikkDato?: string;
 };
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdelingPerDato = {
@@ -472,7 +481,6 @@ export type AktiveOgTilgjengligeOppgaverStatistikkForKøData = {
   path?: never;
   query: {
     sakslisteId: tjenester_felles_dto_SakslisteIdDto;
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
   };
   url: '/api/avdelingsleder/nøkkeltall/statistikk-oppgave-filter';
 };
@@ -481,7 +489,7 @@ export type AktiveOgTilgjengligeOppgaverStatistikkForKøResponses = {
   /**
    * default response
    */
-  default: Array<statistikk_AktiveOgTilgjenglige>;
+  default: Array<statistikk_KøStatistikkDto>;
 };
 
 export type AktiveOgTilgjengligeOppgaverStatistikkForKøResponse =
@@ -543,6 +551,25 @@ export type GetAlleVentefristerForAvdelingResponses = {
 
 export type GetAlleVentefristerForAvdelingResponse =
   GetAlleVentefristerForAvdelingResponses[keyof GetAlleVentefristerForAvdelingResponses];
+
+export type GetAntallOppgaverEndretForAvdelingPerDatoData = {
+  body?: never;
+  path?: never;
+  query: {
+    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+  };
+  url: '/api/avdelingsleder/nøkkeltall/behandlinger-opprettet-avsluttet';
+};
+
+export type GetAntallOppgaverEndretForAvdelingPerDatoResponses = {
+  /**
+   * default response
+   */
+  default: Array<tjenester_avdelingsleder_nøkkeltall_dto_OppgaveEndringForAvdelingPerDato>;
+};
+
+export type GetAntallOppgaverEndretForAvdelingPerDatoResponse =
+  GetAntallOppgaverEndretForAvdelingPerDatoResponses[keyof GetAntallOppgaverEndretForAvdelingPerDatoResponses];
 
 export type GetAntallOppgaverForAvdelingPerDatoData = {
   body?: never;

@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { vi } from 'vitest';
 
 import { AktiveOgTilgjengeligeOppgaverGraf } from './AktiveOgTilgjengeligeOppgaverGraf';
-import type { statistikk_AktiveOgTilgjenglige } from '@navikt/fp-types';
+import type { statistikk_KøStatistikkDto } from '@navikt/fp-types';
 
 // Mock ReactECharts for å unngå canvas-problemer i tests
 vi.mock('../ReactECharts', () => ({
@@ -28,7 +28,7 @@ const getTidspunktForAntallTimerSiden = (hours: number): string => {
   return dayjs().subtract(hours, 'hour').toISOString();
 };
 
-const mockData: statistikk_AktiveOgTilgjenglige[] = [
+const mockData: statistikk_KøStatistikkDto[] = [
   { tidspunkt: getTidspunktForAntallTimerSiden(200), aktive: 21, tilgjengelige: 5, ventende: 32 }, // Eldre enn 7 dager (200 timer)
   { tidspunkt: getTidspunktForAntallTimerSiden(180), aktive: 21, tilgjengelige: 4, ventende: 31 }, // Eldre enn 7 dager (180 timer)
   { tidspunkt: getTidspunktForAntallTimerSiden(170), aktive: 21, tilgjengelige: 6, ventende: 33 }, // Eldre enn 7 dager (170 timer)
@@ -101,7 +101,7 @@ describe('AktiveOgTilgjengeligeOppgaverGraf', () => {
   });
 
   it('skal oppdatere grafen når data endres og vise nye datapunkter', () => {
-    const initialData: statistikk_AktiveOgTilgjenglige[] = [
+    const initialData: statistikk_KøStatistikkDto[] = [
       { tidspunkt: getTidspunktForAntallTimerSiden(2), aktive: 10, tilgjengelige: 5, ventende: 15 },
     ];
 
@@ -113,7 +113,7 @@ describe('AktiveOgTilgjengeligeOppgaverGraf', () => {
     expect(option.xAxis.data).toHaveLength(1);
 
     // Oppdater med nye data
-    const newData: statistikk_AktiveOgTilgjenglige[] = [
+    const newData: statistikk_KøStatistikkDto[] = [
       { tidspunkt: getTidspunktForAntallTimerSiden(2), aktive: 10, tilgjengelige: 5, ventende: 15 },
       { tidspunkt: getTidspunktForAntallTimerSiden(1), aktive: 15, tilgjengelige: 8, ventende: 23 },
       { tidspunkt: getTidspunktForAntallTimerSiden(0), aktive: 20, tilgjengelige: 12, ventende: 30 },

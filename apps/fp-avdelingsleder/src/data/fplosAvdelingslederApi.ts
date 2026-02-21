@@ -1,7 +1,6 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { ReservasjonStatus } from '@navikt/fp-los-felles';
 import {
   type AlleKodeverkLos,
   type fplosInitLinksDto,
@@ -11,11 +10,12 @@ import {
   type OppgaverForAvdelingPerDato,
   type OppgaverForFørsteStønadsdagUkeMåned,
   type ReservasjonDto,
+  type ReservasjonStatusDto,
   type SaksbehandlereOgSaksbehandlerGrupper,
   type SaksbehandlerProfil,
   type SakslisteAvdeling,
   type SakslisteDto,
-  type statistikk_AktiveOgTilgjenglige,
+  type statistikk_KøStatistikkDto,
 } from '@navikt/fp-types';
 
 const kyExtended = ky.extend({
@@ -79,7 +79,7 @@ export const initFetchOptions = () =>
 const getOppgaveFilterStatistikk = (sakslisteId: number, avdelingEnhet: string) =>
   kyExtended
     .get(LosUrl.OPPGAVE_FILTER_STATISTIKK, { searchParams: { sakslisteId, avdelingEnhet } })
-    .json<statistikk_AktiveOgTilgjenglige[]>();
+    .json<statistikk_KøStatistikkDto[]>();
 
 export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number, valgtAvdelingEnhet: string) =>
   queryOptions({
@@ -256,14 +256,14 @@ export const flyttReservasjon = (oppgaveId: number, brukerIdent: string, begrunn
     .post(LosUrl.FLYTT_RESERVASJON, {
       json: { oppgaveId, brukerIdent, begrunnelse },
     })
-    .json<ReservasjonStatus>();
+    .json<ReservasjonStatusDto>();
 
 export const endreReservasjon = (oppgaveId: number, reserverTil: string) =>
   kyExtended
     .post(LosUrl.ENDRE_OPPGAVERESERVASJON, {
       json: { oppgaveId, reserverTil },
     })
-    .json<ReservasjonStatus>();
+    .json<ReservasjonStatusDto>();
 
 export const flyttReservasjonSaksbehandlerSøk = (brukerIdent: string) =>
   kyExtended

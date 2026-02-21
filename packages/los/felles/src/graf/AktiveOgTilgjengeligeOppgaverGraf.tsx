@@ -10,7 +10,7 @@ import { getAkselVariable, getStyle } from '../echartUtils';
 import { ReactECharts } from '../ReactECharts';
 
 import messages from '../../i18n/nb_NO.json';
-import type { statistikk_AktiveOgTilgjenglige } from '@navikt/fp-types';
+import type { statistikk_KøStatistikkDto } from '@navikt/fp-types';
 
 const intl = createIntl(messages);
 
@@ -21,7 +21,7 @@ enum Tidsintervall {
 }
 
 interface Props {
-  aktiveOgLedigeTidslinje: statistikk_AktiveOgTilgjenglige[];
+  aktiveOgLedigeTidslinje: statistikk_KøStatistikkDto[];
 }
 
 export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
@@ -148,7 +148,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
 };
 
 const filtererTidslinjeBasertPåValgIntervall = (
-  aktiveOgLedigeTidslinje: statistikk_AktiveOgTilgjenglige[],
+  aktiveOgLedigeTidslinje: statistikk_KøStatistikkDto[],
   timeRange: Tidsintervall,
 ) => {
   return aktiveOgLedigeTidslinje.filter(o => {
