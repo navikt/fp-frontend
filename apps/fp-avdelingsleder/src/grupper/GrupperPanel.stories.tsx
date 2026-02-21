@@ -15,7 +15,6 @@ const AVDELING_SAKSBEHANDLERE = [
   {
     brukerIdent: 'ident1',
     navn: 'Anders Utvikler',
-    ansattAvdeling: null,
   },
   {
     brukerIdent: 'ident12',

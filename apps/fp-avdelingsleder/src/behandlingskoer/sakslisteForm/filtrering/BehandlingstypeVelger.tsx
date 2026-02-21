@@ -12,9 +12,7 @@ export const BehandlingstypeVelger = () => {
 
   const values = watch('behandlingTyper');
 
-  const behandlingTyper = useLosKodeverk('BehandlingType')
-    .filter(bt => bt.kode !== '-')
-    .sort((a, b) => a.kode.localeCompare(b.kode));
+  const behandlingTyper = useLosKodeverk('BehandlingType').sort((a, b) => a.kode.localeCompare(b.kode));
 
   return (
     <VStack gap="space-4">

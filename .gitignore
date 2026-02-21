@@ -25,5 +25,5 @@ ssh.exe.stackdump
 /.nx
 
 .turbo
-swagger.json
+/packages/types/*-swagger.json
 .nx

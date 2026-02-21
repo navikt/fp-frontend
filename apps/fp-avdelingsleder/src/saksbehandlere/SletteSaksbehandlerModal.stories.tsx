@@ -19,7 +19,6 @@ const meta = {
     valgtSaksbehandler: {
       brukerIdent: 'R12122',
       navn: 'Espen Utvikler',
-      ansattAvdeling: null,
     },
   },
 } satisfies Meta<typeof SletteSaksbehandlerModal>;
