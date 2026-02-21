@@ -32,17 +32,17 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
   });
 
   const sorterteSaksbehandlere = saksbehandlere.toSorted((saksbehandler1, saksbehandler2) => {
-    const compareWithNullsLast = (a: string | null, b: string | null) => {
-      if (a != null && b != null) return a.localeCompare(b);
-      if (a == null && b == null) return 0;
-      return a == null ? 1 : -1;
+    const compareWithUndefinedLast = (a: string | undefined, b: string | undefined) => {
+      if (a != undefined && b != undefined) return a.localeCompare(b);
+      if (a == undefined && b == undefined) return 0;
+      return a == undefined ? 1 : -1;
     };
 
-    const enhetComparison = compareWithNullsLast(saksbehandler1.ansattAvdeling, saksbehandler2.ansattAvdeling);
+    const enhetComparison = compareWithUndefinedLast(saksbehandler1.ansattAvdeling, saksbehandler2.ansattAvdeling);
     if (enhetComparison !== 0) {
       return enhetComparison;
     }
-    return compareWithNullsLast(saksbehandler1.navn, saksbehandler2.navn);
+    return compareWithUndefinedLast(saksbehandler1.navn, saksbehandler2.navn);
   });
 
   return (
