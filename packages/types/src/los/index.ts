@@ -12,3 +12,4 @@ export type {
   SaksbehandlerProfil,
 } from './sakslisteType';
 export type { AndreKriterierType } from './andreKriterierType';
+export type { oppgave_BehandlingType, oppgave_FagsakYtelseType } from './fplosDtoGenerert';

@@ -1,16 +1,15 @@
-import type { BehandlingType } from '../behandlingType';
 import type { FagsakStatus } from '../fagsakStatus';
-import type { FagsakYtelseType } from '../fagsakYtelseType';
 import type { AndreKriterierType } from './andreKriterierType';
 import type { BehandlingVenteStatus } from './behandlingVenteStatus';
+import type { oppgave_BehandlingType, oppgave_FagsakYtelseType } from './fplosDtoGenerert.ts';
 import type { KøSortering } from './køSortering';
 import type { OppgaveBehandlingStatus } from './oppgaveBehandlingStatus';
 
 //Mapping mellom LosKodeverkType og union-types med verdier
 type KodeverkEnumMap = {
-  BehandlingType: BehandlingType;
+  BehandlingType: oppgave_BehandlingType;
   AndreKriterierType: AndreKriterierType;
-  FagsakYtelseType: FagsakYtelseType;
+  FagsakYtelseType: oppgave_FagsakYtelseType;
   KøSortering: KøSortering;
   FagsakStatus: FagsakStatus;
   OppgaveBehandlingStatus: OppgaveBehandlingStatus;
