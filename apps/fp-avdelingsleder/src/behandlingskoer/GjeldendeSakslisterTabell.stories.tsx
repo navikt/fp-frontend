@@ -7,7 +7,6 @@ import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import type { statistikk_AktiveOgTilgjenglige } from '@navikt/fp-los-felles';
 import {
   alleKodeverkLos,
   getIntlDecorator,
@@ -19,6 +18,7 @@ import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
 
 import messages from '../../i18n/nb_NO.json';
+import type { statistikk_AktiveOgTilgjenglige } from '@navikt/fp-types';
 
 const withIntl = getIntlDecorator(messages);
 

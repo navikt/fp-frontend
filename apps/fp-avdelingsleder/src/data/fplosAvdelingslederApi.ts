@@ -1,19 +1,20 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { statistikk_AktiveOgTilgjenglige, ReservasjonStatus } from '@navikt/fp-los-felles';
+import type { ReservasjonStatus } from '@navikt/fp-los-felles';
 import type {
   AlleKodeverkLos,
   fplosInitLinksDto,
+  NøkkeltallBehandlingFørsteUttakDto,
   NøkkeltallBehandlingVentefristUtløperDto,
   OppgaverForAvdeling,
+  OppgaverForFørsteStønadsdagUkeMåned,
   SaksbehandlerProfil,
   SakslisteAvdeling,
   SakslisteDto,
+  statistikk_AktiveOgTilgjenglige,
 } from '@navikt/fp-types';
 import type { OppgaveForDato } from '../typer/oppgaverForDatoTsType';
-import type { OppgaverForForsteStonadsdagUkeMnd } from '../typer/oppgaverForForsteStonadsdagUkeMndTsType';
-import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import type { Reservasjon } from '../typer/reservasjonTsType';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
 
@@ -133,7 +134,7 @@ export const oppgaverPerFørsteStønadsdagMånedOptions = (avdelingEnhet: string
     queryFn: () =>
       kyExtended
         .get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND, { searchParams: { avdelingEnhet } })
-        .json<OppgaverForForsteStonadsdagUkeMnd[]>(),
+        .json<OppgaverForFørsteStønadsdagUkeMåned[]>(),
     initialData: [],
   });
 
@@ -143,7 +144,7 @@ export const oppgaverÅpneEllerPåVentOptions = (avdelingEnhet: string) =>
     queryFn: () =>
       kyExtended
         .get(LosUrl.HENT_OPPGAVER_APNE_ELLER_PA_VENT, { searchParams: { avdelingEnhet } })
-        .json<OppgaverSomErApneEllerPaVent[]>(),
+        .json<NøkkeltallBehandlingFørsteUttakDto[]>(),
     initialData: [],
   });
 

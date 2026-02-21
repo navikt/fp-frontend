@@ -4,14 +4,13 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
-import type { statistikk_AktiveOgTilgjenglige } from '@navikt/fp-los-felles';
 import {
   alleKodeverkLos,
   getIntlDecorator,
   urlEncodeNorskeBokstaver,
   withQueryClient,
 } from '@navikt/fp-storybook-utils';
-import type { SakslisteAvdeling } from '@navikt/fp-types';
+import type { SakslisteAvdeling, statistikk_AktiveOgTilgjenglige } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';

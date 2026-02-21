@@ -13,7 +13,7 @@ export type tjenester_avdelingsleder_dto_AvdelingDto = {
 export type avdelingsleder_innlogget_InnloggetNavAnsattDto = {
   brukernavn?: string;
   kanOppgavestyre?: boolean;
-  navn?: string;
+  navn: string;
 };
 
 export type tjenester_avdelingsleder_dto_InitLinksDto = {
@@ -41,10 +41,10 @@ export type oppgave_BehandlingType = 'BT-002' | 'BT-003' | 'BT-004' | 'BT-006' |
 export type tjenester_avdelingsleder_nøkkeltall_dto_BehandlingVenteStatus = 'PÅ_VENT' | 'IKKE_PÅ_VENT';
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingFørsteUttakDto = {
-  antall?: number;
-  behandlingType?: oppgave_BehandlingType;
-  behandlingVenteStatus?: tjenester_avdelingsleder_nøkkeltall_dto_BehandlingVenteStatus;
-  førsteUttakMåned?: string;
+  antall: number;
+  behandlingType: oppgave_BehandlingType;
+  behandlingVenteStatus: tjenester_avdelingsleder_nøkkeltall_dto_BehandlingVenteStatus;
+  førsteUttakMåned: string;
 };
 
 export type oppgave_FagsakYtelseType = 'ES' | 'FP' | 'SVP';

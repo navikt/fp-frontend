@@ -19,5 +19,6 @@ export type {
   tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdeling as OppgaverForAvdeling,
   tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingVentefristUtløperDto as NøkkeltallBehandlingVentefristUtløperDto,
   tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForFørsteStønadsdagUkeMåned as OppgaverForFørsteStønadsdagUkeMåned,
+  tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingFørsteUttakDto as NøkkeltallBehandlingFørsteUttakDto,
   tjenester_avdelingsleder_dto_InitLinksDto as fplosInitLinksDto,
 } from './fplosDtoGenerert';

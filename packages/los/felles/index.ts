@@ -4,7 +4,6 @@ export { FlyttReservasjonModal } from './src/flyttReservasjon/FlyttReservasjonMo
 export { AktiveOgTilgjengeligeOppgaverGraf } from './src/graf/AktiveOgTilgjengeligeOppgaverGraf';
 
 export type { ReservasjonStatus } from './src/typer/reservasjonStatus';
-export type { statistikk_AktiveOgTilgjenglige } from './src/typer/oppgaveFilterStatistikk';
 export {
   getAkselVariable,
   createBarSeries,

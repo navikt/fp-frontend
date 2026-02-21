@@ -11,8 +11,7 @@ import {
   getStyle,
   ReactECharts,
 } from '@navikt/fp-los-felles';
-
-import type { OppgaverForForsteStonadsdagUkeMnd } from '../../typer/oppgaverForForsteStonadsdagUkeMndTsType';
+import { type OppgaverForFørsteStønadsdagUkeMåned } from '@navikt/fp-types';
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
@@ -24,7 +23,7 @@ interface Koordinat {
 
 interface Props {
   height: number;
-  oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdagUkeMnd[];
+  oppgaverPerForsteStonadsdag: OppgaverForFørsteStønadsdagUkeMåned[];
 }
 
 export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStonadsdag }: Props) => {
@@ -79,7 +78,7 @@ export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStona
   );
 };
 
-const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdagUkeMnd[]): Koordinat[] =>
+const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForFørsteStønadsdagUkeMåned[]): Koordinat[] =>
   oppgaverPerForsteStonadsdag.map(o => ({
     x: dayjs(o.førsteStønadsdag).startOf('month').format(ISO_DATE_FORMAT),
     y: o.antall,
