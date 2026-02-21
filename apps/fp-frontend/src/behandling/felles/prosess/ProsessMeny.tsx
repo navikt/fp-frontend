@@ -2,7 +2,7 @@ import { createContext, type JSX, type ReactNode, useMemo } from 'react';
 
 import { ProcessMenu, ProcessMenuStepType } from '@navikt/ft-plattform-komponenter';
 
-import type { Behandling, VilkarUtfallType } from '@navikt/fp-types';
+import type { Behandling, VilkårUtfallType } from '@navikt/fp-types';
 
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
@@ -82,7 +82,7 @@ const ProsessMenyProvider = (props: PropsContext): JSX.Element => {
   return <ProsessMenyContext.Provider value={values}>{children}</ProsessMenyContext.Provider>;
 };
 
-const finnProsessmenyType = (status?: VilkarUtfallType, harÅpentAksjonspunkt?: boolean): ProcessMenuStepType => {
+const finnProsessmenyType = (status?: VilkårUtfallType, harÅpentAksjonspunkt?: boolean): ProcessMenuStepType => {
   if (harÅpentAksjonspunkt) {
     return ProcessMenuStepType.warning;
   }

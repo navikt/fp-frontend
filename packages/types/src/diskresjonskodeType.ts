@@ -1,3 +1,0 @@
-import type { foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode } from './apiDtoGenerert';
-
-export type DiskresjonskodeType = foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;

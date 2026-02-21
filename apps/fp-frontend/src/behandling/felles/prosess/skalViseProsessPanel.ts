@@ -1,9 +1,9 @@
-import type { Aksjonspunkt, Vilkar, VilkårType } from '@navikt/fp-types';
+import type { Aksjonspunkt, Vilkår, VilkårType } from '@navikt/fp-types';
 
 export const skalViseProsessPanel = (
   aksjonspunkter: Aksjonspunkt[] = [],
   vilkårKoder: VilkårType[] = [],
-  vilkår: Vilkar[] = [],
+  vilkår: Vilkår[] = [],
 ): boolean => {
   const harAksjonspunkter = aksjonspunkter.length > 0;
   if (vilkårKoder.length === 0) {

@@ -1,10 +1,10 @@
-import type { AksessRettigheter, Behandling, Vilkar } from '@navikt/fp-types';
+import type { AksessRettigheter, Behandling, Vilkår } from '@navikt/fp-types';
 
 export const harBehandlingReadOnlyStatus = (behandling: Behandling) => behandling.taskStatus?.readOnly ?? false;
 
 export const erReadOnly = (
   behandling: Behandling,
-  vilkarlisteForPunkt: Vilkar[],
+  vilkarlisteForPunkt: Vilkår[],
   rettigheter: AksessRettigheter,
   hasFetchError: boolean,
 ) => {

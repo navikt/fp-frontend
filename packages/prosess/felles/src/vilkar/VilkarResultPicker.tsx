@@ -8,7 +8,7 @@ import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-val
 import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import type { Aksjonspunkt, AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Behandlingsresultat, Vilkår } from '@navikt/fp-types';
 import { erAksjonspunktÅpent, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './vilkarResultPicker.module.css';
@@ -23,7 +23,7 @@ export type VilkarResultPickerFormValues = {
 };
 
 interface Props {
-  vilkår: Vilkar | undefined;
+  vilkår: Vilkår | undefined;
   legend: ReactNode;
   vilkårIkkeOppfyltLabel: string | ReactElement;
   vilkårOppfyltLabel: string | ReactElement;
@@ -123,7 +123,7 @@ VilkarResultPicker.transformValues = (values: VilkarResultPickerFormValues) =>
         avslagskode: values.avslagskode,
       };
 
-const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkar | undefined) => {
+const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkår | undefined) => {
   if (vilkår) {
     return alleKodeverk['Avslagsårsak']
       .filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))

@@ -53,7 +53,7 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
         </BodyShort>
       )}
       {sorterteSaksbehandlere.length > 0 && (
-        <Table>
+        <Table zebraStripes size="small">
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell scope="col">
