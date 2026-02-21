@@ -1,23 +1,21 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { OppgaveFilterStatistikk, ReservasjonStatus } from '@navikt/fp-los-felles';
-import type { AlleKodeverkLos, SaksbehandlerProfil, SakslisteAvdeling, SakslisteDto } from '@navikt/fp-types';
-
-import type { Avdeling } from '../typer/avdelingTsType';
-import type { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';
-import type { InnloggetBruker } from '../typer/innloggetBruker';
-import type { OppgaverForAvdeling } from '../typer/oppgaverForAvdelingTsType';
+import type { statistikk_AktiveOgTilgjenglige, ReservasjonStatus } from '@navikt/fp-los-felles';
+import type {
+  AlleKodeverkLos,
+  fplosInitLinksDto,
+  NøkkeltallBehandlingVentefristUtløperDto,
+  OppgaverForAvdeling,
+  SaksbehandlerProfil,
+  SakslisteAvdeling,
+  SakslisteDto,
+} from '@navikt/fp-types';
 import type { OppgaveForDato } from '../typer/oppgaverForDatoTsType';
 import type { OppgaverForForsteStonadsdagUkeMnd } from '../typer/oppgaverForForsteStonadsdagUkeMndTsType';
 import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
 import type { Reservasjon } from '../typer/reservasjonTsType';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
-
-export type InitDataLos = {
-  innloggetBruker: InnloggetBruker;
-  avdelinger: Avdeling[];
-};
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -74,13 +72,13 @@ export const LosUrl = {
 export const initFetchOptions = () =>
   queryOptions({
     queryKey: [LosUrl.INIT_FETCH],
-    queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<InitDataLos>(),
+    queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<fplosInitLinksDto>(),
   });
 
 const getOppgaveFilterStatistikk = (sakslisteId: number, avdelingEnhet: string) =>
   kyExtended
     .get(LosUrl.OPPGAVE_FILTER_STATISTIKK, { searchParams: { sakslisteId, avdelingEnhet } })
-    .json<OppgaveFilterStatistikk[]>();
+    .json<statistikk_AktiveOgTilgjenglige[]>();
 
 export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number, valgtAvdelingEnhet: string) =>
   queryOptions({
@@ -173,7 +171,7 @@ export const behandlingerFristUtløptOptions = (avdelingEnhet: string) =>
     queryFn: () =>
       kyExtended
         .get(LosUrl.HENT_BEHANDLINGER_FRISTUTLOP, { searchParams: { avdelingEnhet } })
-        .json<BehandlingVentefrist[]>(),
+        .json<NøkkeltallBehandlingVentefristUtløperDto[]>(),
     initialData: [],
   });
 

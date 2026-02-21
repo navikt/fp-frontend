@@ -17,15 +17,15 @@ export type avdelingsleder_innlogget_InnloggetNavAnsattDto = {
 };
 
 export type tjenester_avdelingsleder_dto_InitLinksDto = {
-  avdelinger?: Array<tjenester_avdelingsleder_dto_AvdelingDto>;
-  innloggetBruker?: avdelingsleder_innlogget_InnloggetNavAnsattDto;
+  avdelinger: Array<tjenester_avdelingsleder_dto_AvdelingDto>;
+  innloggetBruker: avdelingsleder_innlogget_InnloggetNavAnsattDto;
 };
 
 export type statistikk_AktiveOgTilgjenglige = {
-  aktive?: number;
-  tidspunkt?: string;
-  tilgjengelige?: number;
-  ventende?: number;
+  aktive: number;
+  tidspunkt: string;
+  tilgjengelige: number;
+  ventende: number;
 };
 
 export type tjenester_felles_dto_SakslisteIdDto = {
@@ -50,16 +50,16 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingFørst
 export type oppgave_FagsakYtelseType = 'ES' | 'FP' | 'SVP';
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdeling = {
-  antall?: number;
-  behandlingType?: oppgave_BehandlingType;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  tilBehandling?: boolean;
+  antall: number;
+  behandlingType: oppgave_BehandlingType;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  tilBehandling: boolean;
 };
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingVentefristUtløperDto = {
-  antall?: number;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  fristUke?: string;
+  antall: number;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  fristUke: string;
 };
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdelingPerDato = {
@@ -70,9 +70,9 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdelingPerDato 
 };
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForFørsteStønadsdagUkeMåned = {
-  antall?: number;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  førsteStønadsdag?: string;
+  antall: number;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  førsteStønadsdag: string;
 };
 
 export type tjenester_felles_dto_ReservasjonDto = {

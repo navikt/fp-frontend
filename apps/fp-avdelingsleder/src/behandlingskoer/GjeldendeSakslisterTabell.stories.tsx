@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import type { OppgaveFilterStatistikk } from '@navikt/fp-los-felles';
+import type { statistikk_AktiveOgTilgjenglige } from '@navikt/fp-los-felles';
 import {
   alleKodeverkLos,
   getIntlDecorator,
@@ -125,7 +125,7 @@ const getTidspunktForAntallTimerSiden = (hours: number): string => {
   return dayjs().subtract(hours, 'hour').toISOString();
 };
 
-const OPPGAVE_FILTER_STATISTIKK: OppgaveFilterStatistikk[] = [
+const OPPGAVE_FILTER_STATISTIKK: statistikk_AktiveOgTilgjenglige[] = [
   // gap på ~13 timer
   { tidspunkt: getTidspunktForAntallTimerSiden(43), aktive: 21, tilgjengelige: 5, ventende: 32 },
   { tidspunkt: getTidspunktForAntallTimerSiden(42), aktive: 21, tilgjengelige: 4, ventende: 31 },

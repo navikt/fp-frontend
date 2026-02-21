@@ -8,9 +8,9 @@ import dayjs from 'dayjs';
 
 import { getAkselVariable, getStyle } from '../echartUtils';
 import { ReactECharts } from '../ReactECharts';
-import type { OppgaveFilterStatistikk } from '../typer/oppgaveFilterStatistikk';
 
 import messages from '../../i18n/nb_NO.json';
+import type { statistikk_AktiveOgTilgjenglige } from '@navikt/fp-types';
 
 const intl = createIntl(messages);
 
@@ -21,7 +21,7 @@ enum Tidsintervall {
 }
 
 interface Props {
-  aktiveOgLedigeTidslinje: OppgaveFilterStatistikk[];
+  aktiveOgLedigeTidslinje: statistikk_AktiveOgTilgjenglige[];
 }
 
 export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
@@ -148,7 +148,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
 };
 
 const filtererTidslinjeBasertPåValgIntervall = (
-  aktiveOgLedigeTidslinje: OppgaveFilterStatistikk[],
+  aktiveOgLedigeTidslinje: statistikk_AktiveOgTilgjenglige[],
   timeRange: Tidsintervall,
 ) => {
   return aktiveOgLedigeTidslinje.filter(o => {
