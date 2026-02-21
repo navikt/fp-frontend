@@ -3,11 +3,16 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { AsyncPollingStatus, NavAnsatt, SakslisteAvdeling } from '@navikt/fp-types';
+import {
+  type AsyncPollingStatus,
+  type NavAnsatt,
+  type OppgaveDto,
+  type OppgaveDtoMedStatus,
+  type SakslisteAvdeling,
+} from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
-import { type Oppgave, type OppgaveMedStatus } from './typer/oppgaveTsType';
 
 const SAKSLISTER = [
   {
@@ -57,7 +62,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     saksnummer: '46435',
     personnummer: '3433434434',
     navn: 'Sara Sahara',
-    system: 'SAK',
+    system: 'FPSAK',
     behandlingstype: 'BT-002',
     opprettetTidspunkt: '2024-11-01',
     behandlingsfrist: '2024-11-01',
@@ -74,7 +79,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     saksnummer: '43546',
     personnummer: '53343423232',
     navn: 'Petter Utvikler',
-    system: 'SAK',
+    system: 'FPSAK',
     behandlingstype: 'BT-002',
     opprettetTidspunkt: '2024-01-01',
     behandlingsfrist: '2024-01-01',
@@ -91,7 +96,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     saksnummer: '35344',
     personnummer: '34343535423',
     navn: 'Helga Tester',
-    system: 'SAK',
+    system: 'FPSAK',
     behandlingstype: 'BT-002',
     opprettetTidspunkt: '2023-04-01',
     behandlingsfrist: '2023-04-05',
@@ -100,7 +105,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     behandlingId: '34',
     andreKriterier: [],
   },
-] satisfies Oppgave[];
+] satisfies OppgaveDto[];
 
 const RESERVERTE_OPPGAVER = [
   {
@@ -118,7 +123,7 @@ const RESERVERTE_OPPGAVER = [
     saksnummer: '23233',
     personnummer: '5434231232',
     navn: 'Espen Utvikler',
-    system: 'SAK',
+    system: 'FPSAK',
     behandlingstype: 'BT-002',
     opprettetTidspunkt: '2019-01-01',
     behandlingsfrist: '2019-01-01',
@@ -127,7 +132,7 @@ const RESERVERTE_OPPGAVER = [
     behandlingId: '2',
     andreKriterier: ['REVURDERING_INNTEKTSMELDING'],
   },
-] satisfies Oppgave[];
+] satisfies OppgaveDto[];
 
 const BEHANDLEDE_OPPGAVER = [
   {
@@ -139,7 +144,7 @@ const BEHANDLEDE_OPPGAVER = [
       erReservert: false,
     },
     oppgaveBehandlingStatus: 'UNDER_ARBEID',
-  } as OppgaveMedStatus,
+  } as OppgaveDtoMedStatus,
   {
     id: 2,
     personnummer: '334342323',
@@ -149,7 +154,7 @@ const BEHANDLEDE_OPPGAVER = [
       erReservert: false,
     },
     oppgaveBehandlingStatus: 'UNDER_ARBEID',
-  } as OppgaveMedStatus,
+  } as OppgaveDtoMedStatus,
 ];
 
 const meta = {

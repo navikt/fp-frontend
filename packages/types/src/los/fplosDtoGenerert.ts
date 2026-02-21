@@ -371,19 +371,19 @@ export type tjenester_saksbehandler_oppgave_dto_OppgaveFlyttingDto = {
 export type domene_typer_Fagsystem = 'FPSAK' | 'FPTILBAKE';
 
 export type tjenester_felles_dto_OppgaveDto = {
-  andreKriterier?: Array<oppgave_AndreKriterierType>;
-  behandlingId?: string;
-  behandlingsfrist?: string;
-  behandlingstype?: oppgave_BehandlingType;
-  erTilSaksbehandling?: boolean;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  id?: number;
-  navn?: string;
-  opprettetTidspunkt?: string;
-  personnummer?: string;
-  reservasjonStatus?: tjenester_felles_dto_ReservasjonStatusDto;
-  saksnummer?: string;
-  system?: domene_typer_Fagsystem;
+  andreKriterier: Array<oppgave_AndreKriterierType>;
+  behandlingId: string;
+  behandlingsfrist: string;
+  behandlingstype: oppgave_BehandlingType;
+  erTilSaksbehandling: boolean;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  id: number;
+  navn: string;
+  opprettetTidspunkt: string;
+  personnummer: string;
+  reservasjonStatus: tjenester_felles_dto_ReservasjonStatusDto;
+  saksnummer: string;
+  system: domene_typer_Fagsystem;
 };
 
 export type tjenester_felles_dto_OppgaveBehandlingStatus =
@@ -394,20 +394,20 @@ export type tjenester_felles_dto_OppgaveBehandlingStatus =
   | 'UNDER_ARBEID';
 
 export type tjenester_felles_dto_OppgaveDtoMedStatus = {
-  andreKriterier?: Array<oppgave_AndreKriterierType>;
-  behandlingId?: string;
-  behandlingsfrist?: string;
-  behandlingstype?: oppgave_BehandlingType;
-  erTilSaksbehandling?: boolean;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  id?: number;
-  navn?: string;
-  oppgaveBehandlingStatus?: tjenester_felles_dto_OppgaveBehandlingStatus;
-  opprettetTidspunkt?: string;
-  personnummer?: string;
-  reservasjonStatus?: tjenester_felles_dto_ReservasjonStatusDto;
-  saksnummer?: string;
-  system?: domene_typer_Fagsystem;
+  andreKriterier: Array<oppgave_AndreKriterierType>;
+  behandlingId: string;
+  behandlingsfrist: string;
+  behandlingstype: oppgave_BehandlingType;
+  erTilSaksbehandling: boolean;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  id: number;
+  navn: string;
+  oppgaveBehandlingStatus: tjenester_felles_dto_OppgaveBehandlingStatus;
+  opprettetTidspunkt: string;
+  personnummer: string;
+  reservasjonStatus: tjenester_felles_dto_ReservasjonStatusDto;
+  saksnummer: string;
+  system: domene_typer_Fagsystem;
 };
 
 export type tjenester_felles_dto_AsyncPollingStatus = {

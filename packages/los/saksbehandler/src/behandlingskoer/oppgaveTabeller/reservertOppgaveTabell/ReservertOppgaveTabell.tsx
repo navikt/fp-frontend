@@ -7,17 +7,17 @@ import { useQuery } from '@tanstack/react-query';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { reserverteOppgaverOptions } from '../../../data/fplosSaksbehandlerApi';
-import { type Oppgave } from '../../../typer/oppgaveTsType';
 import { ReservertOppgaveRad } from './ReservertOppgaveRad';
 
 import styles from './reservertOppgaveTabell.module.css';
+import { type OppgaveDto } from '@navikt/fp-types';
 
-const EMPTY_ARRAY = new Array<Oppgave>();
+const EMPTY_ARRAY = new Array<OppgaveDto>();
 
 type TableHeaders = 'navn' | 'saksnummer' | 'behandlingstype' | 'opprettetTidspunkt' | 'status';
 
 interface Props {
-  reserverOppgave: (oppgave: Oppgave) => void;
+  reserverOppgave: (oppgave: OppgaveDto) => void;
   brukernavn: string;
 }
 
@@ -124,7 +124,7 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
   );
 };
 
-const comparator = (a: Oppgave, b: Oppgave, orderBy: TableHeaders) => {
+const comparator = (a: OppgaveDto, b: OppgaveDto, orderBy: TableHeaders) => {
   if (orderBy === 'status') {
     return notEmpty(a.reservasjonStatus.reservertTilTidspunkt) < notEmpty(b.reservasjonStatus.reservertTilTidspunkt)
       ? -1
@@ -137,7 +137,7 @@ const comparator = (a: Oppgave, b: Oppgave, orderBy: TableHeaders) => {
   return b[orderBy] > a[orderBy] ? 1 : 0;
 };
 
-const getSorterOppgaver = (sort: SortState | undefined) => (a: Oppgave, b: Oppgave) => {
+const getSorterOppgaver = (sort: SortState | undefined) => (a: OppgaveDto, b: OppgaveDto) => {
   if (sort) {
     return sort.direction === 'ascending'
       ? comparator(b, a, sort.orderBy as TableHeaders)

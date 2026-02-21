@@ -237,5 +237,5 @@ export type { FagsakBehandlingDto } from './src/fagsakBehandlingDto';
 export type { Behandling } from './src/behandling';
 export type { AsyncPollingStatus, PollingStatus } from './src/asyncPollingStatus';
 
-export * from './src/los';
-export * from './src/tilbakekreving';
+export type * from './src/los';
+export type * from './src/tilbakekreving';

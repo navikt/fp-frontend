@@ -17,9 +17,9 @@ import { useQuery } from '@tanstack/react-query';
 
 import { behandlendeOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
-import { type OppgaveMedStatus } from '../../typer/oppgaveTsType';
 
 import styles from './sistBehandledeSaker.module.css';
+import { type OppgaveDtoMedStatus } from '@navikt/fp-types';
 
 interface Props {
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
@@ -59,7 +59,7 @@ const SistBehandledeSakerContent = ({
   åpneFagsak,
 }: {
   isFetching: boolean;
-  sisteReserverte: OppgaveMedStatus[];
+  sisteReserverte: OppgaveDtoMedStatus[];
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
 }) => {
   if (isFetching) return <LoadingPanel />;
@@ -116,7 +116,7 @@ const SistBehandledeSakerContent = ({
   );
 };
 
-const StatusIcon = ({ oppgave }: { oppgave: OppgaveMedStatus }) => {
+const StatusIcon = ({ oppgave }: { oppgave: OppgaveDtoMedStatus }) => {
   const oppgaveBehandlingStatuser = useLosKodeverk('OppgaveBehandlingStatus');
   const statusNavn = oppgaveBehandlingStatuser.find(obs => obs.kode === oppgave.oppgaveBehandlingStatus)?.navn ?? '-';
 

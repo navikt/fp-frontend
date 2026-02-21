@@ -21,12 +21,12 @@ import {
   LosUrl,
   opphevReservasjon,
 } from '../../../../data/fplosSaksbehandlerApi';
-import { type Oppgave } from '../../../../typer/oppgaveTsType';
 import { OppgaveReservasjonForlengetModal } from './forleng/OppgaveReservasjonForlengetModal';
 import { NotatModal } from './notat/NotatModal';
+import { type OppgaveDto } from '@navikt/fp-types';
 
 interface Props {
-  oppgave: Oppgave;
+  oppgave: OppgaveDto;
   setEnableTableEvents: (shouldDisable: boolean) => void;
   brukernavn: string;
 }

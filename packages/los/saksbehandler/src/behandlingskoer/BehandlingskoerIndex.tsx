@@ -3,11 +3,10 @@ import { useState } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { type ReservasjonStatusDto, type SakslisteAvdeling } from '@navikt/fp-types';
+import { type OppgaveDto, type ReservasjonStatusDto, type SakslisteAvdeling } from '@navikt/fp-types';
 
 import { reserverOppgavePost, sakslisteOptions } from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
-import type { Oppgave } from '../typer/oppgaveTsType';
 import { SakslistePanel } from './SakslistePanel';
 
 const EMPTY_ARRAY: SakslisteAvdeling[] = [];
@@ -21,7 +20,7 @@ interface Props {
 
 export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, åpneFagsak, brukernavn }: Props) => {
   const [reservertAvAnnenSaksbehandler, setReservertAvAnnenSaksbehandler] = useState<boolean>(false);
-  const [reservertOppgave, setReservertOppgave] = useState<Oppgave>();
+  const [reservertOppgave, setReservertOppgave] = useState<OppgaveDto>();
   const [reservertOppgaveStatus, setReservertOppgaveStatus] = useState<ReservasjonStatusDto>();
 
   const { data: sakslister = EMPTY_ARRAY, isSuccess } = useQuery(sakslisteOptions());
@@ -30,7 +29,7 @@ export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, å
     mutationFn: reserverOppgavePost,
   });
 
-  const reserverOppgaveOgApne = (oppgave: Oppgave) => {
+  const reserverOppgaveOgApne = (oppgave: OppgaveDto) => {
     if (oppgave.reservasjonStatus.erReservert) {
       åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
     } else {
@@ -46,7 +45,7 @@ export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, å
     }
   };
 
-  const lukkErReservertModalOgOpneOppgave = (oppgave: Oppgave) => {
+  const lukkErReservertModalOgOpneOppgave = (oppgave: OppgaveDto) => {
     setReservertAvAnnenSaksbehandler(false);
     setReservertOppgave(undefined);
     setReservertOppgaveStatus(undefined);

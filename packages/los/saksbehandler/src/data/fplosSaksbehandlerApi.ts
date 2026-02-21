@@ -4,12 +4,12 @@ import ky from 'ky';
 import {
   type AlleKodeverkLos,
   type FagsakEnkel,
+  type OppgaveDto,
+  type OppgaveDtoMedStatus,
   type ReservasjonStatusDto,
   type SaksbehandlerProfil,
   type SakslisteAvdeling,
 } from '@navikt/fp-types';
-
-import type { Oppgave, OppgaveMedStatus } from '../typer/oppgaveTsType';
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -53,7 +53,7 @@ export const getReservasjonsstatus = (oppgaveId: number) =>
   kyExtended.get(LosUrl.HENT_RESERVASJONSSTATUS, { searchParams: { oppgaveId } }).json<ReservasjonStatusDto>();
 
 export const getOppgaverTilBehandling = (sakslisteId: number, oppgaveIder?: string) =>
-  kyExtended.get<Oppgave[]>(LosUrl.OPPGAVER_TIL_BEHANDLING, {
+  kyExtended.get<OppgaveDto[]>(LosUrl.OPPGAVER_TIL_BEHANDLING, {
     searchParams: oppgaveIder
       ? {
           sakslisteId,
@@ -69,7 +69,7 @@ export const getOppgaverForFagsaker = (saksnummer: string[]) =>
     .get(LosUrl.OPPGAVER_FOR_FAGSAKER, {
       searchParams: { saksnummerListe: saksnummer.join(',') },
     })
-    .json<Oppgave[]>();
+    .json<OppgaveDto[]>();
 
 export const oppgaverForFagsakerOptions = (saksnummer: string[]) =>
   queryOptions({
@@ -94,7 +94,7 @@ export const sakslisteOptions = () =>
 export const reserverteOppgaverOptions = () =>
   queryOptions({
     queryKey: [LosUrl.RESERVERTE_OPPGAVER],
-    queryFn: () => kyExtended.get(LosUrl.RESERVERTE_OPPGAVER).json<Oppgave[]>(),
+    queryFn: () => kyExtended.get(LosUrl.RESERVERTE_OPPGAVER).json<OppgaveDto[]>(),
   });
 
 export const behandlendeOppgaverOptions = (kunAktive: boolean) =>
@@ -103,7 +103,7 @@ export const behandlendeOppgaverOptions = (kunAktive: boolean) =>
     queryFn: () =>
       kyExtended
         .get(LosUrl.TIDLIGERE_RESERVERTE, { searchParams: { kunAktive: kunAktive } })
-        .json<OppgaveMedStatus[]>(),
+        .json<OppgaveDtoMedStatus[]>(),
   });
 
 export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>

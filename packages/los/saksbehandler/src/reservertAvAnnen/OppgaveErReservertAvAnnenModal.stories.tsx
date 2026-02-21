@@ -3,10 +3,10 @@ import { action } from 'storybook/actions';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
-import type { Oppgave } from '../typer/oppgaveTsType';
 import { OppgaveErReservertAvAnnenModal } from './OppgaveErReservertAvAnnenModal';
 
 import messages from '../../i18n/nb_NO.json';
+import { type OppgaveDto } from '@navikt/fp-types';
 
 const withIntl = getIntlDecorator(messages);
 
@@ -24,7 +24,7 @@ const oppgaveForResevertAvAnnenModal = {
   saksnummer: '1234',
   personnummer: '1212',
   navn: 'Espen Utvikler',
-  system: 'SAK',
+  system: 'FPSAK',
   behandlingstype: 'BT-002',
   opprettetTidspunkt: '2019-01-01',
   behandlingsfrist: '2019-01-01',
@@ -32,7 +32,7 @@ const oppgaveForResevertAvAnnenModal = {
   erTilSaksbehandling: true,
   behandlingId: '1',
   andreKriterier: [],
-} satisfies Oppgave;
+} satisfies OppgaveDto;
 
 const meta = {
   title: 'OppgaveErReservertAvAnnenModal',

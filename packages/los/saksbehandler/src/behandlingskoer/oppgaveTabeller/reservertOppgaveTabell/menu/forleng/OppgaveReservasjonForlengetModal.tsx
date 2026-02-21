@@ -4,11 +4,10 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
-
-import { type Oppgave } from '../../../../../typer/oppgaveTsType';
+import { type OppgaveDto } from '@navikt/fp-types';
 
 interface Props {
-  oppgave: Oppgave;
+  oppgave: OppgaveDto;
   closeModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
