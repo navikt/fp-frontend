@@ -4,10 +4,10 @@ import { http, HttpResponse } from 'msw';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../data/fplosAvdelingslederApi';
-import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
 import { GrupperPanel } from './GrupperPanel';
 
 import messages from '../../i18n/nb_NO.json';
+import { type SaksbehandlereOgSaksbehandlerGrupper } from '@navikt/fp-types';
 
 const withIntl = getIntlDecorator(messages);
 

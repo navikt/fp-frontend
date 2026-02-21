@@ -9,7 +9,7 @@ import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-va
 import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { SaksbehandlerProfil } from '@navikt/fp-types';
+import { type SaksbehandlerGruppeDto, type SaksbehandlerProfil } from '@navikt/fp-types';
 
 import { useDebounce } from '../behandlingskoer/sakslisteForm/useDebounce';
 import {
@@ -18,7 +18,6 @@ import {
   leggSaksbehandlerTilGruppe,
   LosUrl,
 } from '../data/fplosAvdelingslederApi';
-import type { SaksbehandlerGruppe } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
 
 import styles from './gruppeSaksbehandlere.module.css';
 
@@ -38,7 +37,7 @@ const sortAvdelingensSaksbehandlere = (
 
 interface Props {
   valgAvdeldingEnhet: string;
-  saksbehandlerGruppe: SaksbehandlerGruppe;
+  saksbehandlerGruppe: SaksbehandlerGruppeDto;
   avdelingensSaksbehandlere: SaksbehandlerProfil[];
 }
 

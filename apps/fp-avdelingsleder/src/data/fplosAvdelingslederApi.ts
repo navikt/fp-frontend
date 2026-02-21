@@ -2,21 +2,21 @@ import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
 import type { ReservasjonStatus } from '@navikt/fp-los-felles';
-import type {
-  AlleKodeverkLos,
-  fplosInitLinksDto,
-  NøkkeltallBehandlingFørsteUttakDto,
-  NøkkeltallBehandlingVentefristUtløperDto,
-  OppgaverForAvdeling,
-  OppgaverForFørsteStønadsdagUkeMåned,
-  SaksbehandlerProfil,
-  SakslisteAvdeling,
-  SakslisteDto,
-  statistikk_AktiveOgTilgjenglige,
+import {
+  type AlleKodeverkLos,
+  type fplosInitLinksDto,
+  type NøkkeltallBehandlingFørsteUttakDto,
+  type NøkkeltallBehandlingVentefristUtløperDto,
+  type OppgaverForAvdeling,
+  type OppgaverForFørsteStønadsdagUkeMåned,
+  type ReservasjonDto,
+  type SaksbehandlereOgSaksbehandlerGrupper,
+  type SaksbehandlerProfil,
+  type SakslisteAvdeling,
+  type SakslisteDto,
+  type statistikk_AktiveOgTilgjenglige,
 } from '@navikt/fp-types';
 import type { OppgaveForDato } from '../typer/oppgaverForDatoTsType';
-import type { Reservasjon } from '../typer/reservasjonTsType';
-import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -180,7 +180,7 @@ export const reservasjonerForAvdelingOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.RESERVASJONER_FOR_AVDELING, avdelingEnhet],
     queryFn: () =>
-      kyExtended.get(LosUrl.RESERVASJONER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<Reservasjon[]>(),
+      kyExtended.get(LosUrl.RESERVASJONER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<ReservasjonDto[]>(),
     initialData: [],
   });
 

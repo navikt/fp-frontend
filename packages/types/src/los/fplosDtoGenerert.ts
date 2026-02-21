@@ -77,15 +77,15 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForFørsteStønadsd
 
 export type tjenester_felles_dto_ReservasjonDto = {
   begrunnelse?: string;
-  behandlingType?: oppgave_BehandlingType;
+  behandlingType: oppgave_BehandlingType;
   flyttetAvIdent?: string;
   flyttetAvNavn?: string;
   flyttetTidspunkt?: string;
-  oppgaveId?: number;
-  oppgaveSaksNr?: string;
-  reservertAvIdent?: string;
-  reservertAvNavn?: string;
-  reservertTilTidspunkt?: string;
+  oppgaveId: number;
+  oppgaveSaksNr: string;
+  reservertAvIdent: string;
+  reservertAvNavn: string;
+  reservertTilTidspunkt: string;
 };
 
 export type tjenester_saksbehandler_oppgave_dto_OppgaveIdDto = {
