@@ -6,13 +6,12 @@ import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, VStack } 
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import type { ReservasjonStatus } from '@navikt/fp-los-felles';
-
 import type { Oppgave } from '../../../typer/oppgaveTsType';
 import { OppgaveLabels } from '../OppgaveLabels';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 
 import styles from './ReservertOppgaveRad.module.css';
+import { type ReservasjonStatusDto } from '@navikt/fp-types';
 
 interface Props {
   oppgave: Oppgave;
@@ -92,7 +91,10 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
   );
 };
 
-const lagFlyttetReservasjonPopover = (oppgaveStatus: ReservasjonStatus, brukernavn: string): ReactNode | undefined => {
+const lagFlyttetReservasjonPopover = (
+  oppgaveStatus: ReservasjonStatusDto,
+  brukernavn: string,
+): ReactNode | undefined => {
   const { flyttetReservasjon } = oppgaveStatus;
   if (!flyttetReservasjon) {
     return undefined;

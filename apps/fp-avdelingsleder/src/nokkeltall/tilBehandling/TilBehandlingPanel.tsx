@@ -8,12 +8,11 @@ import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-import type { LosKodeverkMedNavn } from '@navikt/fp-types';
+import { type LosKodeverkMedNavn, type OppgaverForAvdelingPerDato } from '@navikt/fp-types';
 
 import { oppgaverPerDatoOptions } from '../../data/fplosAvdelingslederApi';
 import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
-import type { OppgaveForDato } from '../../typer/oppgaverForDatoTsType';
 import { type OppgaveForDatoGraf, TilBehandlingGraf } from './TilBehandlingGraf';
 
 dayjs.extend(isSameOrAfter);
@@ -116,7 +115,7 @@ const uker = [
   },
 ];
 
-const erDatoInnenforPeriode = (oppgaveForAvdeling: OppgaveForDato, ukevalg: string): boolean => {
+const erDatoInnenforPeriode = (oppgaveForAvdeling: OppgaverForAvdelingPerDato, ukevalg: string): boolean => {
   if (ukevalg === uker[1]?.kode) {
     return true;
   }
@@ -132,7 +131,9 @@ const finnFagsakYtelseTypeNavn = (
   return type ? type.navn : '';
 };
 
-const slaSammenLikeBehandlingstyperOgDatoer = (oppgaverForAvdeling: OppgaveForDato[]): OppgaveForDatoGraf[] => {
+const slaSammenLikeBehandlingstyperOgDatoer = (
+  oppgaverForAvdeling: OppgaverForAvdelingPerDato[],
+): OppgaveForDatoGraf[] => {
   const sammenslatte: OppgaveForDatoGraf[] = [];
 
   for (const o of oppgaverForAvdeling) {

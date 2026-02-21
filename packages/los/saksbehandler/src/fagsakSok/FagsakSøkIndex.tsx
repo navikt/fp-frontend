@@ -3,8 +3,7 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 
-import type { ReservasjonStatus } from '@navikt/fp-los-felles';
-import type { FagsakEnkel } from '@navikt/fp-types';
+import { type FagsakEnkel, type ReservasjonStatusDto } from '@navikt/fp-types';
 
 import {
   getOppgaverForFagsaker,
@@ -92,7 +91,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
 
   const erSøkFerdig = isSøkFagsakSuccess && !isHentOppgaverPending;
 
-  const goToFagsakEllerApneModal = (oppgave: Oppgave, reservasjonStatus?: ReservasjonStatus) => {
+  const goToFagsakEllerApneModal = (oppgave: Oppgave, reservasjonStatus?: ReservasjonStatusDto) => {
     if (reservasjonStatus && (!reservasjonStatus.erReservert || reservasjonStatus.erReservertAvInnloggetBruker)) {
       åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
     } else if (reservasjonStatus?.erReservert && !reservasjonStatus.erReservertAvInnloggetBruker) {

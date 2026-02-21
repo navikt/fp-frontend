@@ -3,8 +3,7 @@ import { useState } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import type { ReservasjonStatus } from '@navikt/fp-los-felles';
-import type { SakslisteAvdeling } from '@navikt/fp-types';
+import { type ReservasjonStatusDto, type SakslisteAvdeling } from '@navikt/fp-types';
 
 import { reserverOppgavePost, sakslisteOptions } from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
@@ -23,7 +22,7 @@ interface Props {
 export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, åpneFagsak, brukernavn }: Props) => {
   const [reservertAvAnnenSaksbehandler, setReservertAvAnnenSaksbehandler] = useState<boolean>(false);
   const [reservertOppgave, setReservertOppgave] = useState<Oppgave>();
-  const [reservertOppgaveStatus, setReservertOppgaveStatus] = useState<ReservasjonStatus>();
+  const [reservertOppgaveStatus, setReservertOppgaveStatus] = useState<ReservasjonStatusDto>();
 
   const { data: sakslister = EMPTY_ARRAY, isSuccess } = useQuery(sakslisteOptions());
 

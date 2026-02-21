@@ -1,9 +1,14 @@
-import type { ReservasjonStatus } from '@navikt/fp-los-felles';
-import type { AndreKriterierType, BehandlingType, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-types';
+import {
+  type AndreKriterierType,
+  type BehandlingType,
+  type FagsakYtelseType,
+  type OppgaveBehandlingStatus,
+  type ReservasjonStatusDto,
+} from '@navikt/fp-types';
 
 export type Oppgave = {
   id: number;
-  reservasjonStatus: ReservasjonStatus;
+  reservasjonStatus: ReservasjonStatusDto;
   saksnummer: string;
   personnummer: string;
   navn: string;

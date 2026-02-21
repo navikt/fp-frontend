@@ -8,6 +8,7 @@ import {
   type NøkkeltallBehandlingFørsteUttakDto,
   type NøkkeltallBehandlingVentefristUtløperDto,
   type OppgaverForAvdeling,
+  type OppgaverForAvdelingPerDato,
   type OppgaverForFørsteStønadsdagUkeMåned,
   type ReservasjonDto,
   type SaksbehandlereOgSaksbehandlerGrupper,
@@ -16,7 +17,6 @@ import {
   type SakslisteDto,
   type statistikk_AktiveOgTilgjenglige,
 } from '@navikt/fp-types';
-import type { OppgaveForDato } from '../typer/oppgaverForDatoTsType';
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -162,7 +162,9 @@ export const oppgaverPerDatoOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.HENT_OPPGAVER_PER_DATO, avdelingEnhet],
     queryFn: () =>
-      kyExtended.get(LosUrl.HENT_OPPGAVER_PER_DATO, { searchParams: { avdelingEnhet } }).json<OppgaveForDato[]>(),
+      kyExtended
+        .get(LosUrl.HENT_OPPGAVER_PER_DATO, { searchParams: { avdelingEnhet } })
+        .json<OppgaverForAvdelingPerDato[]>(),
     initialData: [],
   });
 

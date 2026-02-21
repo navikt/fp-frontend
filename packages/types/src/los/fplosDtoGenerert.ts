@@ -63,10 +63,11 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingVentef
 };
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdelingPerDato = {
-  antall?: number;
-  behandlingType?: oppgave_BehandlingType;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  opprettetDato?: string;
+  antall: number;
+  behandlingType: oppgave_BehandlingType;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  opprettetDato: string;
+  statistikkDato: string;
 };
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForFørsteStønadsdagUkeMåned = {
@@ -341,14 +342,14 @@ export type vedtak_hendelser_behandling_los_LosBehandlingDto_LosTilbakeDto = {
 };
 
 export type tjenester_felles_dto_FlyttetReservasjonDto = {
-  begrunnelse?: string;
-  flyttetAvIdent?: string;
-  navn?: string;
-  tidspunkt?: string;
+  begrunnelse: string;
+  flyttetAvIdent: string;
+  navn: string;
+  tidspunkt: string;
 };
 
 export type tjenester_felles_dto_ReservasjonStatusDto = {
-  erReservert?: boolean;
+  erReservert: boolean;
   erReservertAvInnloggetBruker?: boolean;
   flyttetReservasjon?: tjenester_felles_dto_FlyttetReservasjonDto;
   reservertAvIdent?: string;
