@@ -75,12 +75,12 @@ export const InntektsmeldingDefault: Story = {
         journalpostId: '1',
         refusjonsperioder: [
           {
-            refusjonsbeløp: { verdi: 5000 },
+            refusjonsbeløpMnd: { verdi: 5000 },
             indexKey: '1',
             fom: '2024-01-10',
           },
           {
-            refusjonsbeløp: { verdi: 3000 },
+            refusjonsbeløpMnd: { verdi: 3000 },
             indexKey: '2',
             fom: '2024-01-09',
           },
