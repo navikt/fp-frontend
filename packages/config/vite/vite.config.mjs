@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react';
 import sourcemaps from 'rollup-plugin-sourcemaps';
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, mergeConfig } from 'vite';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -23,6 +24,7 @@ export const createSharedPackagesConfig = setupFileDirName => createConfig(setup
 export const createConfig = setupFileDirName =>
   defineConfig({
     plugins: [
+      tailwindcss(),
       compression(),
       react({
         include: '**/*.{ts,tsx,js,jsx}',

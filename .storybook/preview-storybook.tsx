@@ -12,6 +12,8 @@ import '@navikt/ft-ui-komponenter/dist/style.css';
 
 dayjs.locale('nb');
 
+import './index.css';
+
 export const decorators = [withThemeDecorator];
 
 export const globalTypes = {
