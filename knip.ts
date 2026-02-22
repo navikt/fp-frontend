@@ -8,6 +8,7 @@ const config: KnipConfig = {
     'packages/types/src/los/fplosDtoGenerert.ts',
     'packages/types/src/apiDtoGenerert.ts',
     'packages/kodeverk/src/aksjonspunktCodes.ts',
+    'apps/*/src/index.css',
   ],
   ignoreBinaries: ['docker-compose'],
   ignoreDependencies: ['glob'],
