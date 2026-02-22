@@ -15,60 +15,128 @@ import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const BEHANDLING_TYPES: OppgaverForAvdelingPerDato['behandlingType'][] = [
-  'BT-002',
-  'BT-003',
-  'BT-004',
-  'BT-006',
-  'BT-007',
-  'BT-008',
-  'BT-009',
+const OPPGAVER_PER_DATO = [
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-002',
+    statistikkDato: dayjs().format(ISO_DATE_FORMAT),
+    antall: 9,
+    opprettet: 0,
+    avsluttet: 0,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-002',
+    statistikkDato: dayjs().subtract(1, 'd').format(ISO_DATE_FORMAT),
+    antall: 8,
+    opprettet: 2,
+    avsluttet: 2,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-002',
+    statistikkDato: dayjs().subtract(2, 'd').format(ISO_DATE_FORMAT),
+    antall: 8,
+    opprettet: 5,
+    avsluttet: 4,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-002',
+    statistikkDato: dayjs().subtract(3, 'd').format(ISO_DATE_FORMAT),
+    antall: 7,
+    opprettet: 2,
+    avsluttet: 8,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-002',
+    statistikkDato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
+    antall: 13,
+    opprettet: 3,
+    avsluttet: 5,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-002',
+    statistikkDato: dayjs().subtract(5, 'd').format(ISO_DATE_FORMAT),
+    antall: 15,
+    opprettet: 4,
+    avsluttet: 1,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-002',
+    statistikkDato: dayjs().subtract(6, 'd').format(ISO_DATE_FORMAT),
+    antall: 12,
+    opprettet: 6,
+    avsluttet: 4,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-002',
+    statistikkDato: dayjs().subtract(7, 'd').format(ISO_DATE_FORMAT),
+    antall: 10,
+    opprettet: 5,
+    avsluttet: 12,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-002',
+    statistikkDato: dayjs().subtract(8, 'd').format(ISO_DATE_FORMAT),
+    antall: 17,
+    opprettet: 1,
+    avsluttet: 4,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-002',
+    statistikkDato: dayjs().subtract(9, 'd').format(ISO_DATE_FORMAT),
+    antall: 20,
+    opprettet: 12,
+    avsluttet: 3,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-002',
+    statistikkDato: dayjs().subtract(10, 'd').format(ISO_DATE_FORMAT),
+    antall: 11,
+    opprettet: 5,
+    avsluttet: 5,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-003',
+    statistikkDato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
+    antall: 2,
+    opprettet: 1,
+    avsluttet: 1,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-004',
+    statistikkDato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
+    antall: 6,
+    opprettet: 14,
+    avsluttet: 8,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-006',
+    statistikkDato: dayjs().subtract(10, 'd').format(ISO_DATE_FORMAT),
+    antall: 3,
+    opprettet: 0,
+    avsluttet: 0,
+  },
+  {
+    fagsakYtelseType: 'FP',
+    behandlingType: 'BT-006',
+    statistikkDato: dayjs().subtract(16, 'd').format(ISO_DATE_FORMAT),
+    antall: 3,
+    opprettet: 3,
+    avsluttet: 0,
+  },
 ];
-const FAGSAK_YTELSE_TYPES: OppgaverForAvdelingPerDato['fagsakYtelseType'][] = ['FP', 'ES', 'SVP'];
-
-const MAX_PERIODE_LENGDE = 28;
-
-/**
- * Genererer en liste med statistikk. Generering tar for seg de siste 28 dagene(MAX_PERIODE_LENGDE).
- *
- * Det opprettes et element for hver kombinasjon av `behandlingType` og `fagsakYtelseType`.
- * For å oppnå et relativt realistisk tall som blir `antall` bruker vi indexen til både BEHANDLING_TYPES
- * og FAGSAK_YTELSE_TYPES i kalkuleringen av `antall`.
- */
-const generateOppgaverPerDato = (): OppgaverForAvdelingPerDato[] => {
-  const oppgaver: OppgaverForAvdelingPerDato[] = [];
-  const today = dayjs();
-
-  for (let daysAgo = MAX_PERIODE_LENGDE; daysAgo >= 0; daysAgo--) {
-    const statistikkDato = today.subtract(daysAgo, 'day').format(ISO_DATE_FORMAT);
-
-    BEHANDLING_TYPES.forEach((behandlingType, behandlingTypeIndex) => {
-      FAGSAK_YTELSE_TYPES.forEach((fagsakYtelseType, fagsakYtelseTypeIndex) => {
-        /**
-         * For å få litt spill i dataen bruker vi indexen til behandlingType og fagsakYtelseType for å beregne antallet.
-         * Da vil
-         *    FP x førstegangsbehandling  >  SVP x førstegangsbehandling.
-         *    ES x klage  >  ES x tilbakebetaling revurdering.
-         */
-        const behandlingsTypeMultippel = BEHANDLING_TYPES.length - behandlingTypeIndex;
-        const fagsakYtelseTypeMultippel = (FAGSAK_YTELSE_TYPES.length - fagsakYtelseTypeIndex) * 10;
-
-        const maxAntallForKombinasjon = behandlingsTypeMultippel * fagsakYtelseTypeMultippel;
-        const antall = Math.floor(Math.random() * maxAntallForKombinasjon);
-
-        oppgaver.push({
-          fagsakYtelseType,
-          behandlingType,
-          statistikkDato,
-          antall,
-          opprettetDato: '',
-        });
-      });
-    });
-  }
-
-  return oppgaver;
-};
 
 const meta = {
   title: 'los/avdelingsleder/nokkeltall/TilBehandlingPanel',
@@ -78,7 +146,7 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(encodeURI(LosUrl.HENT_OPPGAVER_PER_DATO), () => HttpResponse.json(generateOppgaverPerDato())),
+        http.get(LosUrl.HENT_OPPGAVER_PER_DATO.replace('ø', '%C3%B8'), () => HttpResponse.json(OPPGAVER_PER_DATO)),
       ],
     },
   },
