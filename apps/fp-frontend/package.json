@@ -114,7 +114,6 @@
     "@navikt/ft-utils": "3.11.9",
     "@popperjs/core": "2.11.8",
     "@sentry/vite-plugin": "4.8.0",
-    "@tailwindcss/vite": "4.1.18",
     "@tanstack/react-query": "5.90.20",
     "@tanstack/react-query-devtools": "5.91.2",
     "classnames": "2.5.1",

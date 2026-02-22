@@ -62,7 +62,7 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
 
   return (
     <div>
-      <VStack gap="space-16">
+      <VStack gap="space-16" className="bg-ax-brand-blue-200A">
         <NøkkeltallbokserPanel valgtAvdelingEnhet={valgtAvdelingEnhet}>
           {/* TODO (TOR) Denne selecten bør flyttast til dekoratøren */}
           <Select
