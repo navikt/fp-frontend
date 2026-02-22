@@ -3,8 +3,9 @@ import userEvent from '@testing-library/user-event';
 import dayjs from 'dayjs';
 import { vi } from 'vitest';
 
-import { AktiveOgTilgjengeligeOppgaverGraf } from './AktiveOgTilgjengeligeOppgaverGraf';
 import type { statistikk_KøStatistikkDto } from '@navikt/fp-types';
+
+import { AktiveOgTilgjengeligeOppgaverGraf } from './AktiveOgTilgjengeligeOppgaverGraf';
 
 // Mock ReactECharts for å unngå canvas-problemer i tests
 vi.mock('../ReactECharts', () => ({

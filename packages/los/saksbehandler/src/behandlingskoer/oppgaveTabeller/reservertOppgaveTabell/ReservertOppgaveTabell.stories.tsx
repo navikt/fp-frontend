@@ -7,12 +7,12 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import { type OppgaveDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
 import { ReservertOppgaveTabell } from './ReservertOppgaveTabell';
 
 import messages from '../../../../i18n/nb_NO.json';
-import { type OppgaveDto } from '@navikt/fp-types';
 
 const withIntl = getIntlDecorator(messages);
 

@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import { AktiveOgTilgjengeligeOppgaverGraf } from './AktiveOgTilgjengeligeOppgaverGraf';
 import type { statistikk_KøStatistikkDto } from '@navikt/fp-types';
+
+import { AktiveOgTilgjengeligeOppgaverGraf } from './AktiveOgTilgjengeligeOppgaverGraf';
 
 // Hjelpefunksjon for relative datoer
 const getTidspunktForAntallTimerSiden = (hours: number): string => {

@@ -5,12 +5,12 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import { type OppgaveDtoMedStatus } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
 import { SistBehandledeSaker } from './SistBehandledeSaker';
 
 import messages from '../../../i18n/nb_NO.json';
-import { type OppgaveDtoMedStatus } from '@navikt/fp-types';
 
 const withIntl = getIntlDecorator(messages);
 

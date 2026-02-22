@@ -13,12 +13,12 @@ import {
   urlEncodeNorskeBokstaver,
   withQueryClient,
 } from '@navikt/fp-storybook-utils';
+import type { statistikk_KøStatistikkDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
 
 import messages from '../../i18n/nb_NO.json';
-import type { statistikk_KøStatistikkDto } from '@navikt/fp-types';
 
 const withIntl = getIntlDecorator(messages);
 

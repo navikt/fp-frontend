@@ -7,6 +7,7 @@ import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { FlyttReservasjonModal, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
+import type { ReservasjonDto } from '@navikt/fp-types';
 
 import {
   endreReservasjon,
@@ -16,7 +17,6 @@ import {
   reservasjonerForAvdelingOptions,
 } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
-import type { ReservasjonDto } from '@navikt/fp-types';
 
 interface Props {
   valgtAvdelingEnhet: string;

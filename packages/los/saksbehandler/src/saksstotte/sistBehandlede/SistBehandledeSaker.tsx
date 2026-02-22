@@ -15,11 +15,12 @@ import { BodyShort, Heading, HStack, Spacer, Switch, Table, VStack } from '@navi
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
+import { type OppgaveDtoMedStatus } from '@navikt/fp-types';
+
 import { behandlendeOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 
 import styles from './sistBehandledeSaker.module.css';
-import { type OppgaveDtoMedStatus } from '@navikt/fp-types';
 
 interface Props {
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;

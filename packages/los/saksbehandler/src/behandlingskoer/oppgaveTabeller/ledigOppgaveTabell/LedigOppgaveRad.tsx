@@ -5,10 +5,11 @@ import { FilesIcon } from '@navikt/aksel-icons';
 import { BodyShort, CopyButton, HStack, Table } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
+import { type OppgaveDto } from '@navikt/fp-types';
+
 import { OppgaveLabels } from '../OppgaveLabels';
 
 import styles from './ledigOppgaveRad.module.css';
-import { type OppgaveDto } from '@navikt/fp-types';
 
 interface Props {
   oppgave: OppgaveDto;

@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { type OppgaveDto } from '@navikt/fp-types';
 
 import { OppgaveErReservertAvAnnenModal } from './OppgaveErReservertAvAnnenModal';
 
 import messages from '../../i18n/nb_NO.json';
-import { type OppgaveDto } from '@navikt/fp-types';
 
 const withIntl = getIntlDecorator(messages);
 

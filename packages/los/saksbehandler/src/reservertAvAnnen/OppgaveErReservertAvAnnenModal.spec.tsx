@@ -2,8 +2,9 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import * as stories from './OppgaveErReservertAvAnnenModal.stories';
 import { type OppgaveDto } from '@navikt/fp-types';
+
+import * as stories from './OppgaveErReservertAvAnnenModal.stories';
 
 const { Default } = composeStories(stories);
 

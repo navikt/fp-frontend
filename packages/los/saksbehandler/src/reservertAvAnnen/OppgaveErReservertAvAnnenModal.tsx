@@ -4,8 +4,9 @@ import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import styles from './oppgaveErReservertAvAnnenModal.module.css';
 import { type OppgaveDto, type ReservasjonStatusDto } from '@navikt/fp-types';
+
+import styles from './oppgaveErReservertAvAnnenModal.module.css';
 
 type Props = Readonly<{
   lukkErReservertModalOgOpneOppgave: (oppgave: OppgaveDto) => void;

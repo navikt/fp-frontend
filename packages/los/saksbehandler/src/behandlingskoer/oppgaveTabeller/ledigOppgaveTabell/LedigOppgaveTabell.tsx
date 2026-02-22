@@ -2,12 +2,13 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
 
+import { type OppgaveDto } from '@navikt/fp-types';
+
 import { BehandlingPollingTimoutModal } from '../../timeoutModal/BehandlingPollingTimoutModal';
 import { LedigOppgaveRad } from './LedigOppgaveRad';
 import { useOppgavePolling } from './useOppgavePolling';
 
 import styles from './ledigOppgaveTabell.module.css';
-import { type OppgaveDto } from '@navikt/fp-types';
 
 interface Props {
   reserverOppgave: (oppgave: OppgaveDto) => void;

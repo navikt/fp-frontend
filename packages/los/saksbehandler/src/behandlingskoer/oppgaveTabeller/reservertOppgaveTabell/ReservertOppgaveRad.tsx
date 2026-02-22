@@ -6,11 +6,12 @@ import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, VStack } 
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
+import { type OppgaveDto, type ReservasjonStatusDto } from '@navikt/fp-types';
+
 import { OppgaveLabels } from '../OppgaveLabels';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 
 import styles from './ReservertOppgaveRad.module.css';
-import { type OppgaveDto, type ReservasjonStatusDto } from '@navikt/fp-types';
 
 interface Props {
   oppgave: OppgaveDto;

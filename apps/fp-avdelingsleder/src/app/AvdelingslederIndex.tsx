@@ -8,6 +8,7 @@ import { formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 import { type Location } from 'history';
 
+import type { fplosInitLinksDto } from '@navikt/fp-types';
 import { useTrackRouteParam } from '@navikt/fp-utils';
 
 import { EndreSakslisterPanel } from '../behandlingskoer/EndreSakslisterPanel';
@@ -24,7 +25,6 @@ import { ReservasjonerTabell } from '../reservasjoner/ReservasjonerTabell';
 import { SaksbehandlerePanel } from '../saksbehandlere/SaksbehandlerePanel';
 import { NøkkeltallbokserPanel } from '../status/NøkkeltallbokserPanel';
 import { AvdelingslederPanels } from './avdelingslederPanels';
-import type { fplosInitLinksDto } from '@navikt/fp-types';
 
 interface Props {
   initData: fplosInitLinksDto;

@@ -4,13 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, HStack, Label, Pagination, type SortState, Table, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
+import { type OppgaveDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { reserverteOppgaverOptions } from '../../../data/fplosSaksbehandlerApi';
 import { ReservertOppgaveRad } from './ReservertOppgaveRad';
 
 import styles from './reservertOppgaveTabell.module.css';
-import { type OppgaveDto } from '@navikt/fp-types';
 
 const EMPTY_ARRAY = new Array<OppgaveDto>();
 

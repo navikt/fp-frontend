@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
+
 import { type OppgaveDto } from '@navikt/fp-types';
 
 interface Props {

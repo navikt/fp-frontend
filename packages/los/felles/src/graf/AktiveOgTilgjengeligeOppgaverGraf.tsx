@@ -6,11 +6,12 @@ import { ToggleGroupItem } from '@navikt/ds-react/ToggleGroup';
 import { capitalizeFirstLetter, createIntl, timeFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
+import type { statistikk_KøStatistikkDto } from '@navikt/fp-types';
+
 import { getAkselVariable, getStyle } from '../echartUtils';
 import { ReactECharts } from '../ReactECharts';
 
 import messages from '../../i18n/nb_NO.json';
-import type { statistikk_KøStatistikkDto } from '@navikt/fp-types';
 
 const intl = createIntl(messages);
 
