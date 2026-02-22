@@ -9,8 +9,6 @@ import type { AndreKriterierType, LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 
-import styles from './AvOgPåKnapper.module.css';
-
 enum FilterStatus {
   PLUS = 'PLUS',
   MINUS = 'MINUS',
@@ -77,7 +75,6 @@ type KnappProps = {
 
 const PlussKnapp = ({ iconTittel, filterStatus, toggle }: KnappProps): ReactElement => (
   <Button
-    className={styles['knapp']}
     variant={filterStatus === FilterStatus.PLUS ? 'primary' : 'secondary'}
     size="xsmall"
     icon={<PlusIcon title={iconTittel} />}
@@ -89,7 +86,6 @@ const PlussKnapp = ({ iconTittel, filterStatus, toggle }: KnappProps): ReactElem
 
 const MinusKnapp = ({ iconTittel, filterStatus, toggle }: KnappProps): ReactElement => (
   <Button
-    className={styles['knapp']}
     variant={filterStatus === FilterStatus.MINUS ? 'primary' : 'secondary'}
     data-color={filterStatus === FilterStatus.MINUS ? 'danger' : undefined}
     size="xsmall"
