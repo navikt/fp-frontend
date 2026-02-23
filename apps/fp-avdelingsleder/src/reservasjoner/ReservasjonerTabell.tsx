@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { CalendarIcon, PersonGroupIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, Table, TextField, VStack } from '@navikt/ds-react';
+import { ArrowUndoIcon, CalendarIcon, MenuElipsisVerticalIcon, PersonGroupIcon } from '@navikt/aksel-icons';
+import { ActionMenu, BodyShort, Button, HStack, Label, Table, TextField, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -127,15 +127,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
               <Table.ColumnHeader>
                 <FormattedMessage id="ReservasjonerTabell.ReservertTil" />
               </Table.ColumnHeader>
-              <Table.ColumnHeader>
-                <FormattedMessage id="ReservasjonerTabell.Endre" />
-              </Table.ColumnHeader>
-              <Table.ColumnHeader>
-                <FormattedMessage id="ReservasjonerTabell.Flytt" />
-              </Table.ColumnHeader>
-              <Table.ColumnHeader>
-                <FormattedMessage id="Label.Slett" />
-              </Table.ColumnHeader>
+              <Table.ColumnHeader />
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -150,33 +142,38 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                   <DateTimeLabel dateTimeString={reservasjon.reservertTilTidspunkt} />
                 </Table.DataCell>
                 <Table.DataCell>
-                  <Button
-                    variant="tertiary"
-                    size="small"
-                    icon={<CalendarIcon aria-hidden />}
-                    onClick={() => showReservasjonEndringDato(reservasjon)}
-                  />
-                </Table.DataCell>
-                <Table.DataCell>
-                  <Button
-                    variant="tertiary"
-                    size="small"
-                    icon={<PersonGroupIcon aria-hidden />}
-                    onClick={() => showFlytteModal(reservasjon)}
-                  />
-                </Table.DataCell>
-                <Table.DataCell>
-                  <Button
-                    variant="tertiary"
-                    data-color="danger"
-                    size="small"
-                    title={intl.formatMessage(
-                      { id: 'ReservasjonerTabell.SlettReservasjon' },
-                      { oppgaveId: reservasjon.oppgaveId },
-                    )}
-                    icon={<XMarkIcon aria-hidden />}
-                    onClick={() => opphevOppgaveReservasjon({ oppgaveId: reservasjon.oppgaveId })}
-                  />
+                  <ActionMenu>
+                    <ActionMenu.Trigger>
+                      <Button
+                        data-color="neutral"
+                        variant="tertiary"
+                        icon={<MenuElipsisVerticalIcon title={intl.formatMessage({ id: 'ReservasjonerTabell.Meny' })} />}
+                        size="small"
+                      />
+                    </ActionMenu.Trigger>
+                    <ActionMenu.Content>
+                      <ActionMenu.Group label={intl.formatMessage({ id: 'ReservasjonerTabell.MenyLabel' }, { saksnummer: reservasjon.oppgaveSaksNr })}>
+                        <ActionMenu.Item
+                          icon={<CalendarIcon aria-hidden />}
+                          onSelect={() => showReservasjonEndringDato(reservasjon)}
+                        >
+                          <FormattedMessage id="ReservasjonerTabell.Endre" />
+                        </ActionMenu.Item>
+                        <ActionMenu.Item
+                          icon={<PersonGroupIcon aria-hidden />}
+                          onSelect={() => showFlytteModal(reservasjon)}
+                        >
+                          <FormattedMessage id="ReservasjonerTabell.Flytt" />
+                        </ActionMenu.Item>
+                        <ActionMenu.Item
+                          icon={<ArrowUndoIcon aria-hidden />}
+                          onSelect={() => opphevOppgaveReservasjon({ oppgaveId: reservasjon.oppgaveId })}
+                        >
+                          <FormattedMessage id="ReservasjonerTabell.LeggTilbake" />
+                        </ActionMenu.Item>
+                      </ActionMenu.Group>
+                    </ActionMenu.Content>
+                  </ActionMenu>
                 </Table.DataCell>
               </Table.Row>
             ))}

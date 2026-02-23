@@ -107,11 +107,13 @@
 
   "ReservasjonerTabell.Saksnr": "Saksnummer",
   "ReservasjonerTabell.ReservertTil": "Reservert til",
-  "ReservasjonerTabell.Endre": "Endre",
-  "ReservasjonerTabell.Flytt": "Flytt",
+  "ReservasjonerTabell.Meny": "Reservasjonsmeny",
+  "ReservasjonerTabell.MenyLabel": "Reservasjon av sak #{saksnummer}",
+  "ReservasjonerTabell.Endre": "Endre dato",
+  "ReservasjonerTabell.Flytt": "Flytt til ny saksbehandler",
+  "ReservasjonerTabell.LeggTilbake": "Legg tilbake i felles kø",
   "ReservasjonerTabell.Reservasjoner": "Reservasjoner for avdelingen",
   "ReservasjonerTabell.IngenReservasjoner": "Ingen reservasjoner funnet",
-  "ReservasjonerTabell.SlettReservasjon": "Slett reservasjon {oppgaveId}",
   "ReservasjonerTabell.Sok.PlaceHolder": "Søk etter saksbehandler på navn",
 
   "SaksbehandlereTabell.AnsattVed": "Ansatt ved avdeling",
