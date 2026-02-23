@@ -23,9 +23,8 @@ export type {
   tjenester_felles_dto_OppgaveBehandlingStatus as OppgaveBehandlingStatus,
   tjenester_felles_dto_SakslisteDto_AndreKriterieDto as AndreKriterieDto,
   tjenester_felles_dto_KøSorteringFeltDto as KøSorteringFeltDto,
-  tjenester_avdelingsleder_saksliste_dto_SorteringDto as Sortering,
   oppgave_Periodefilter as Periodefilter,
   tjenester_felles_dto_SakslisteDto as SakslisteDto,
   tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto as SakslisteLagreDto,
-  tjenester_felles_dto_SaksbehandlerDto as SaksbehandlerProfil,
+  tjenester_felles_dto_SaksbehandlerDto as SaksbehandlerDto,
 } from './fplosDtoGenerert';

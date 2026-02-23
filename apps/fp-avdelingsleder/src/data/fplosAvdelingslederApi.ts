@@ -13,7 +13,7 @@ import {
   type ReservasjonDto,
   type ReservasjonStatusDto,
   type SaksbehandlereOgSaksbehandlerGrupper,
-  type SaksbehandlerProfil,
+  type SaksbehandlerDto,
   type SakslisteDto,
   type SakslisteLagreDto,
 } from '@navikt/fp-types';
@@ -107,7 +107,7 @@ export const saksbehandlareForAvdelingOptions = (avdelingEnhet?: string) =>
     queryFn: () =>
       kyExtended
         .get(LosUrl.SAKSBEHANDLERE_FOR_AVDELING, { searchParams: { avdelingEnhet: avdelingEnhet ?? '' } })
-        .json<SaksbehandlerProfil[]>(),
+        .json<SaksbehandlerDto[]>(),
     initialData: [],
     enabled: !!avdelingEnhet,
   });
@@ -270,7 +270,7 @@ export const flyttReservasjonSaksbehandlerSøk = (brukerIdent: string) =>
     .post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, {
       json: { brukerIdent },
     })
-    .json<SaksbehandlerProfil>();
+    .json<SaksbehandlerDto>();
 
 export const slettSaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended
@@ -284,7 +284,7 @@ export const saksbehandlgerSøk = (brukerIdent: string) =>
     .post(LosUrl.SAKSBEHANDLER_SOK, {
       json: { brukerIdent },
     })
-    .json<SaksbehandlerProfil | null>();
+    .json<SaksbehandlerDto | null>();
 
 export const opprettNySaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended

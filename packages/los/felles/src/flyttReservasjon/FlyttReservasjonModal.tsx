@@ -7,7 +7,7 @@ import { RhfForm, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import type { SaksbehandlerProfil } from '@navikt/fp-types';
+import type { SaksbehandlerDto } from '@navikt/fp-types';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -30,7 +30,7 @@ interface Props {
   hentSaksbehandler: (brukerIdent: string) => void;
   hentSaksbehandlerIsPending: boolean;
   hentSaksbehandlerIsSuccess: boolean;
-  saksbehandler?: SaksbehandlerProfil;
+  saksbehandler?: SaksbehandlerDto;
   resetHentSaksbehandler: () => void;
 }
 
