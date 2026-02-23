@@ -11,8 +11,6 @@ import type { SaksbehandlerProfil } from '@navikt/fp-types';
 
 import { LosUrl, opprettNySaksbehandler, saksbehandlgerSøk } from '../data/fplosAvdelingslederApi';
 
-import styles from './leggTilSaksbehandlerForm.module.css';
-
 type FormValues = {
   brukerIdent: string;
 };
@@ -88,17 +86,16 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
             label={intl.formatMessage({ id: 'Label.Brukerident' })}
             validate={[required]}
           />
-          <div className={styles['button']}>
-            <Button
-              size="small"
-              variant="secondary"
-              loading={formMethods.formState.isSubmitting}
-              disabled={formMethods.formState.isSubmitting || isPending}
-              tabIndex={0}
-            >
-              <FormattedMessage id="Label.Sok" />
-            </Button>
-          </div>
+          <Button
+            className="mt-7"
+            size="small"
+            variant="secondary"
+            loading={formMethods.formState.isSubmitting}
+            disabled={formMethods.formState.isSubmitting || isPending}
+            tabIndex={0}
+          >
+            <FormattedMessage id="Label.Sok" />
+          </Button>
         </HStack>
         {saksbehandlerStatus === 'success' && (
           <VStack gap="space-8">
