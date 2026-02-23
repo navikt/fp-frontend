@@ -21,7 +21,7 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND.replaceAll('ø', '%C3%B8'), () =>
+        http.get(encodeURI(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND), () =>
           HttpResponse.json(oppgaverFørsteStønadsdagPerMnd),
         ),
       ],

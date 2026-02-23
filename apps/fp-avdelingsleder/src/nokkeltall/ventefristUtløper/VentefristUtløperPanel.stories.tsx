@@ -83,7 +83,7 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.HENT_BEHANDLINGER_FRISTUTLOP.replaceAll('ø', '%C3%B8'), () =>
+        http.get(encodeURI(LosUrl.HENT_BEHANDLINGER_FRISTUTLOP), () =>
           HttpResponse.json(BEHANDLINGER_PÅ_VENT),
         ),
       ],
