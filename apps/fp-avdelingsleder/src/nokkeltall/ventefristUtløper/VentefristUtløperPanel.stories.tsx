@@ -63,6 +63,16 @@ const BEHANDLINGER_PÅ_VENT = [
     fristUke: '2025-29',
     antall: 4,
   },
+  {
+    fagsakYtelseType: 'SVP',
+    fristUke: '2025-33',
+    antall: 11,
+  },
+  {
+    fagsakYtelseType: 'SVP',
+    fristUke: '2025-27',
+    antall: 12,
+  },
 ];
 
 const meta = {
@@ -73,9 +83,7 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.HENT_BEHANDLINGER_FRISTUTLOP.replaceAll('ø', '%C3%B8'), () =>
-          HttpResponse.json(BEHANDLINGER_PÅ_VENT),
-        ),
+        http.get(encodeURI(LosUrl.HENT_BEHANDLINGER_FRISTUTLOP), () => HttpResponse.json(BEHANDLINGER_PÅ_VENT)),
       ],
     },
   },

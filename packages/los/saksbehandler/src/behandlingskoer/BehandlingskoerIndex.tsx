@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { type OppgaveDto, type ReservasjonStatusDto, type SakslisteAvdeling } from '@navikt/fp-types';
+import { type OppgaveDto, type ReservasjonStatusDto, type SakslisteDto } from '@navikt/fp-types';
 
 import { reserverOppgavePost, sakslisteOptions } from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
 import { SakslistePanel } from './SakslistePanel';
 
-const EMPTY_ARRAY: SakslisteAvdeling[] = [];
+const EMPTY_ARRAY: SakslisteDto[] = [];
 
 interface Props {
   valgtSakslisteId?: number;

@@ -2,7 +2,7 @@ import type {
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningInntektDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type Månedsgrunnlag =
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto;

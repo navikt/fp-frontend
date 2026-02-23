@@ -1,4 +1,4 @@
-import type { foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_FordelingPeriodeKilde } from './apiDtoGenerert';
+import type { foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_FordelingPeriodeKilde } from './fpsak.gen';
 
 export type FordelingPeriodeKilde =
   foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_FordelingPeriodeKilde;

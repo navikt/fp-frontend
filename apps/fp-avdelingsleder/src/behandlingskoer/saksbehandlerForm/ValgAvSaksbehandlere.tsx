@@ -5,7 +5,7 @@ import { Detail, HGrid } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { SakslisteAvdeling } from '@navikt/fp-types';
+import type { SakslisteDto } from '@navikt/fp-types';
 
 import { lagreSakslisteSaksbehandler, LosUrl } from '../../data/fplosAvdelingslederApi';
 
@@ -14,7 +14,7 @@ export type FormValues = {
 };
 
 interface Props {
-  valgtSaksliste: SakslisteAvdeling;
+  valgtSaksliste: SakslisteDto;
   valgtAvdelingEnhet: string;
   saksbehandlere: {
     brukerIdent: string;

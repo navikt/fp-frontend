@@ -4,7 +4,7 @@ import type {
   foreldrepenger_domene_opptjening_dto_FerdiglignetNæringDto,
   foreldrepenger_domene_opptjening_dto_OpptjeningAktivitetDto,
   foreldrepenger_domene_opptjening_dto_OpptjeningDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type OpptjeningAktivitet = foreldrepenger_domene_opptjening_dto_OpptjeningAktivitetDto;
 

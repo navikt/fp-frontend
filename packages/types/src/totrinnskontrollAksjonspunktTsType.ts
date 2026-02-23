@@ -2,7 +2,7 @@ import type {
   foreldrepenger_domene_uttak_UttakPeriodeEndringDto,
   tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto,
   tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type OpptjeningAktiviteter = tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto;
 

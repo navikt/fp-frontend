@@ -1,12 +1,12 @@
 import { VStack } from '@navikt/ds-react';
 
-import type { SaksbehandlerProfil } from '@navikt/fp-types';
+import type { SaksbehandlerDto } from '@navikt/fp-types';
 
 import { LeggTilSaksbehandlerForm } from './LeggTilSaksbehandlerForm';
 import { SaksbehandlereTabell } from './SaksbehandlereTabell';
 
 interface Props {
-  avdelingensSaksbehandlere: SaksbehandlerProfil[];
+  avdelingensSaksbehandlere: SaksbehandlerDto[];
   valgtAvdelingEnhet: string;
 }
 

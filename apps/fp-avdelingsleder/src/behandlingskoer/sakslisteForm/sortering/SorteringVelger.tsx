@@ -4,17 +4,17 @@ import { FormattedMessage } from 'react-intl';
 import { Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 
-import type { KøSorteringFelt } from '@navikt/fp-types';
+import type { KøSorteringFeltDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 import { BelopSorteringValg } from './BelopSorteringValg';
 import { DatoSorteringValg } from './DatoSorteringValg';
-import { useGyldigeSorteringer } from './useGyldigeSorteringer.tsx';
+import { useGyldigeSorteringer } from './useGyldigeSorteringer';
 
 interface Props {
-  muligeSorteringer: KøSorteringFelt[];
+  muligeSorteringer: KøSorteringFeltDto[];
 }
 
 export const SorteringVelger = ({ muligeSorteringer }: Props) => {

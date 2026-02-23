@@ -1,4 +1,4 @@
-import type { foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType } from './apiDtoGenerert';
+import type { foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType } from './fpsak.gen';
 
 export type OmsorgsovertakelseVilkårType =
   foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType;

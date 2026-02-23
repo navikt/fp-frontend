@@ -12,7 +12,7 @@ import type {
   tjenester_behandling_medlem_MedlemskapDto_Personstatus,
   tjenester_behandling_medlem_MedlemskapDto_Region,
   tjenester_behandling_medlem_MedlemskapDto_Utlandsopphold,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type RegionPeriode = tjenester_behandling_medlem_MedlemskapDto_Region;
 

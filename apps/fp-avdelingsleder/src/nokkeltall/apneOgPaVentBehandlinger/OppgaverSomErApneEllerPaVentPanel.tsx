@@ -51,12 +51,18 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet }
   return (
     <RhfForm formMethods={formMethods}>
       <VStack gap="space-16">
-        <Label size="small">
+        <Label>
           <FormattedMessage id="OppgaverSomErApneEllerPaVentPanel.Apne" />
         </Label>
-        <HStack gap="space-16">
+        <HStack gap="space-0 space-16">
           {filtrerteBehandlingstyper.map(type => (
-            <RhfCheckbox key={type.kode} name={type.kode} control={formMethods.control} label={type.navn} />
+            <RhfCheckbox
+              size="small"
+              key={type.kode}
+              name={type.kode}
+              control={formMethods.control}
+              label={type.navn}
+            />
           ))}
         </HStack>
         <OppgaverSomErApneEllerPaVentGraf

@@ -78,7 +78,8 @@ export const VisittkortBarnInfoFodselPanel = ({ familiehendelse }: Props) => {
           data-color="neutral"
           variant="outline"
           size="small"
-          title={intl.formatMessage({ id: 'VisittkortBarnInfoFodselPanel.DodTittel' })}>
+          title={intl.formatMessage({ id: 'VisittkortBarnInfoFodselPanel.DodTittel' })}
+        >
           <FormattedMessage id="VisittkortBarnInfoFodselPanel.Dod" />
         </Tag>
       )}

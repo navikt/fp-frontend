@@ -32,7 +32,7 @@ export const Default: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.post(LosUrl.SAKSBEHANDLER_SOK.replace('søk', 's%C3%B8k'), () => HttpResponse.json(saksbehandler)),
+        http.post(encodeURI(LosUrl.SAKSBEHANDLER_SOK), () => HttpResponse.json(saksbehandler)),
         http.post(LosUrl.OPPRETT_NY_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
       ],
     },
@@ -46,7 +46,7 @@ export const AlleredeLagtTil: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.post(LosUrl.SAKSBEHANDLER_SOK.replace('søk', 's%C3%B8k'), () => HttpResponse.json(saksbehandler)),
+        http.post(encodeURI(LosUrl.SAKSBEHANDLER_SOK), () => HttpResponse.json(saksbehandler)),
         http.post(LosUrl.OPPRETT_NY_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
       ],
     },
@@ -60,7 +60,7 @@ export const SaksbehandlerFinnesIkke: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.post(LosUrl.SAKSBEHANDLER_SOK.replace('søk', 's%C3%B8k'), () => new HttpResponse(null, { status: 200 })),
+        http.post(encodeURI(LosUrl.SAKSBEHANDLER_SOK), () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.OPPRETT_NY_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
       ],
     },

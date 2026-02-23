@@ -3,7 +3,7 @@ import type {
   tjenester_behandling_uttak_dto_UttakResultatPeriodeDto,
   tjenester_behandling_uttak_dto_UttakResultatPerioderDto,
   tjenester_behandling_uttak_dto_UttakResultatPerioderDto_FilterDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type PeriodeSokerAktivitet = tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto;
 

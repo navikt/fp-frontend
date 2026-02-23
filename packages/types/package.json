@@ -13,12 +13,12 @@
     "prettier": "prettier --write src",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "update-swagger": "node scripts/hent-openapi-spec.js",
-    "generate:local": "pnpm run update-swagger lokal && openapi-ts",
-    "generate": "pnpm run update-swagger && openapi-ts",
+    "generate:local": "yarn run update-swagger lokal && openapi-ts",
+    "generate": "yarn run update-swagger && openapi-ts",
     "openapi-ts": "openapi-ts"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "0.90.10",
+    "@hey-api/openapi-ts": "0.92.4",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "eslint": "9.39.2",

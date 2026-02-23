@@ -2,7 +2,7 @@ import type {
   foreldrepenger_behandlingslager_behandling_vilkår_VilkårType,
   foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType,
   tjenester_behandling_vilkår_VilkårDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type Vilkår = tjenester_behandling_vilkår_VilkårDto;
 

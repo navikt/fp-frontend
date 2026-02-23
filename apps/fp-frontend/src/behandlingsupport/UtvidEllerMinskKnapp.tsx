@@ -32,7 +32,8 @@ export const UtvidEllerMinskKnapp = ({ toggleVisUtvidetBehandlingDetaljer, visUt
         aria-label="Utvid behandling detaljer panel"
         variant="tertiary"
         size="xsmall"
-        onClick={toggleVisUtvidetBehandlingDetaljer} />
+        onClick={toggleVisUtvidetBehandlingDetaljer}
+      />
     </Tooltip>
   );
 };

@@ -35,6 +35,8 @@ describe('SaksbehandlereForSakslisteForm', () => {
     expect(screen.getByLabelText('Alle saksbehandlere')).toHaveTextContent('Steffen');
     expect(screen.getAllByText('Espen Utvikler')).toHaveLength(4);
     expect(screen.getByText('Eirik')).toBeInTheDocument();
+
+    expect(screen.getByRole<HTMLInputElement>('checkbox', { name: 'Velg alle i Gruppe 1' }).indeterminate).toBeTruthy();
   });
 
   it('skal huke av alle saksbehandler i gruppe ved gruppe avhukning og fjerne ved avhuking', async () => {

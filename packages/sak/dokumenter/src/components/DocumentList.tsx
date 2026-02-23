@@ -25,7 +25,11 @@ interface Props {
 
 type TableHeaders = 'kommunikasjonsretning' | 'tittel' | 'gjelderFor' | 'tidspunkt';
 
-const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsretning: Dokument['kommunikasjonsretning'] }) => {
+const KommunikasjonsretningIkon = ({
+  kommunikasjonsretning,
+}: {
+  kommunikasjonsretning: Dokument['kommunikasjonsretning'];
+}) => {
   const intl = useIntl();
   if (kommunikasjonsretning === 'INN') {
     return (

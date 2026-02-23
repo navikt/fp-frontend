@@ -3,7 +3,7 @@ import type {
   tjenester_behandling_uttak_dto_AktivitetSaldoDto,
   tjenester_behandling_uttak_dto_SaldoerDto,
   tjenester_behandling_uttak_dto_StønadskontoDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type AktivitetIdentifikator = tjenester_behandling_uttak_dto_AktivitetIdentifikatorDto;
 

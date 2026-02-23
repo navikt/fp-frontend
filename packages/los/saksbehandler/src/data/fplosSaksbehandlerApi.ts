@@ -1,14 +1,14 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import {
-  type AlleKodeverkLos,
-  type FagsakEnkel,
-  type OppgaveDto,
-  type OppgaveDtoMedStatus,
-  type ReservasjonStatusDto,
-  type SaksbehandlerProfil,
-  type SakslisteAvdeling,
+import type {
+  AlleKodeverkLos,
+  FagsakEnkel,
+  OppgaveDto,
+  OppgaveDtoMedStatus,
+  ReservasjonStatusDto,
+  SaksbehandlerDto,
+  SakslisteDto,
 } from '@navikt/fp-types';
 
 const kyExtended = ky.extend({
@@ -88,7 +88,7 @@ export const losKodeverkOptions = () =>
 export const sakslisteOptions = () =>
   queryOptions({
     queryKey: [LosUrl.SAKSLISTE],
-    queryFn: () => kyExtended.get(LosUrl.SAKSLISTE).json<SakslisteAvdeling[]>(),
+    queryFn: () => kyExtended.get(LosUrl.SAKSLISTE).json<SakslisteDto[]>(),
   });
 
 export const reserverteOppgaverOptions = () =>
@@ -127,4 +127,4 @@ export const reserverOppgavePost = (oppgaveId: number) =>
   kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: { oppgaveId } }).json<ReservasjonStatusDto>();
 
 export const flyttReservasjonSaksbehandlerSøkPost = (brukerIdent: string) =>
-  kyExtended.post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, { json: { brukerIdent } }).json<SaksbehandlerProfil>();
+  kyExtended.post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, { json: { brukerIdent } }).json<SaksbehandlerDto>();
