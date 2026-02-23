@@ -1,6 +1,6 @@
-import type { OppgaverForForsteStonadsdagUkeMnd } from '../src/typer/oppgaverForForsteStonadsdagUkeMndTsType';
+import type { OppgaverForFørsteStønadsdagUkeMåned } from '@navikt/fp-types';
 
-export const oppgaverFørsteStønadsdagPerMnd: OppgaverForForsteStonadsdagUkeMnd[] = [
+export const oppgaverFørsteStønadsdagPerMnd: OppgaverForFørsteStønadsdagUkeMåned[] = [
   {
     fagsakYtelseType: 'ES',
     førsteStønadsdag: '2025-06-01',
