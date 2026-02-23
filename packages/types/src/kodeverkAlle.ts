@@ -1,14 +1,12 @@
-import type { AktivitetskravPermisjonType } from './index';
-import type { AnkeOmgjørÅrsak } from './index';
 import type { NaturalYtelseType } from './arbeidOgInntektsmeldingTsType';
 import type { Arbeidskategori } from './arbeidskategori';
 import type { BehandlingResultatType, KonsekvensForYtelsen } from './behandlingsresultat';
-import type { VirksomhetType } from './index';
-import type { FordelingPeriodeKilde } from './index';
 import type { foreldrepenger_behandlingslager_geografisk_Region as Region } from './fpsak.gen';
-import type { HistorikkAktør } from './index';
 import type {
+  AdresseType,
+  AktivitetskravPermisjonType,
   AktivitetStatus,
+  AnkeOmgjørÅrsak,
   ArbeidType,
   Avslagsarsak,
   BehandlingArsakType,
@@ -20,8 +18,10 @@ import type {
   FaktaOmBeregningTilfelle,
   FamilieHendelseType,
   FaresignalVurdering,
+  FordelingPeriodeKilde,
   ForeldreType,
   GraderingAvslagÅrsak,
+  HistorikkAktør,
   InnsynResultatType,
   Inntektskategori,
   KlageAvvistÅrsak,
@@ -30,9 +30,13 @@ import type {
   Landkode,
   ManuellBehandlingÅrsak,
   MedlemskapDekningType,
+  MedlemskapManuellVurderingType,
+  MedlemskapType,
   MorsAktivitet,
+  OmsorgsovertakelseVilkårType,
   OppgaveType,
   OppholdÅrsakType,
+  OppholdstillatelseType,
   OpptjeningAktivitetType,
   OverføringÅrsak,
   PeriodeResultatÅrsak,
@@ -47,14 +51,12 @@ import type {
   UttakPeriodeType,
   UttakUtsettelseType,
   VenteArsakType,
+  VergeType,
+  VilkårType,
+  VirksomhetType,
   VurderÅrsak,
 } from './index';
-import type { MedlemskapManuellVurderingType, MedlemskapType, OppholdstillatelseType } from './index';
-import type { OmsorgsovertakelseVilkårType } from './index';
-import type { AdresseType } from './index';
 import type { SkjermlenkeType } from './skjermlenkeType';
-import type { VergeType } from './index';
-import type { VilkårType } from './index';
 
 //Mapping mellom KodeverkType og union-types med verdier
 type KodeverkEnumMap = {
