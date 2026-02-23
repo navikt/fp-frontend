@@ -1,8 +1,8 @@
 export type { AlleKodeverkLos, LosKodeverkType, LosKodeverkMedNavn } from './kodeverkAlleLos';
 
 export type {
-  oppgave_BehandlingType,
-  oppgave_FagsakYtelseType,
+  oppgave_FagsakYtelseType as LosFagsakYtelseType,
+  oppgave_BehandlingType as LosBehandlingType,
   statistikk_KøStatistikkDto as KøStatistikkDto,
   tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdeling as OppgaverForAvdeling,
   tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingVentefristUtløperDto as NøkkeltallBehandlingVentefristUtløperDto,
@@ -21,9 +21,8 @@ export type {
   oppgavekø_KøSortering as KøSortering,
   tjenester_avdelingsleder_nøkkeltall_dto_BehandlingVenteStatus as BehandlingVenteStatus,
   tjenester_felles_dto_OppgaveBehandlingStatus as OppgaveBehandlingStatus,
-  tjenester_felles_dto_SakslisteDto_AndreKriterieDto as AnnetKriterie,
-  tjenester_felles_dto_KøSorteringFeltDto as KøSorteringFelt,
-  tjenester_felles_dto_SakslisteDto_StatistikkDto as Statistikk,
+  tjenester_felles_dto_SakslisteDto_AndreKriterieDto as AndreKriterieDto,
+  tjenester_felles_dto_KøSorteringFeltDto as KøSorteringFeltDto,
   tjenester_avdelingsleder_saksliste_dto_SorteringDto as Sortering,
   oppgave_Periodefilter as Periodefilter,
   tjenester_felles_dto_SakslisteDto as SakslisteAvdeling,

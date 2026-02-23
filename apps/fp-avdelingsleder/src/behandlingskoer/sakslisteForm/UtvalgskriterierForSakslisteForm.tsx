@@ -8,10 +8,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type {
   AndreKriterierType,
-  AnnetKriterie,
+  AndreKriterieDto,
   KøSortering,
-  oppgave_BehandlingType,
-  oppgave_FagsakYtelseType,
+  LosBehandlingType,
+  LosFagsakYtelseType,
   Periodefilter,
   SakslisteAvdeling,
   SakslisteDto,
@@ -31,7 +31,7 @@ const maxLength100 = maxLength(100);
 
 export type FormValues = {
   navn: string;
-  behandlingTyper: oppgave_BehandlingType[];
+  behandlingTyper: LosBehandlingType[];
   sortering: {
     sorteringType: KøSortering;
     periodefilter: Periodefilter;
@@ -40,7 +40,7 @@ export type FormValues = {
     fomDato: string | null;
     tomDato: string | null;
   };
-  fagsakYtelseTyper: oppgave_FagsakYtelseType[];
+  fagsakYtelseTyper: LosFagsakYtelseType[];
   andreKriterie: {
     inkluder: AndreKriterierType[];
     ekskluder: AndreKriterierType[];
@@ -153,7 +153,7 @@ const buildDefaultValues = (valgtSaksliste: SakslisteAvdeling): FormValues => {
   };
 };
 
-const fraAndreKriterierTilBeslutter = (andreKriterier?: AnnetKriterie): TilBeslutter => {
+const fraAndreKriterierTilBeslutter = (andreKriterier?: AndreKriterieDto): TilBeslutter => {
   if (andreKriterier?.inkluder.includes('TIL_BESLUTTER')) {
     return 'TA_MED';
   } else if (andreKriterier?.ekskluder.includes('TIL_BESLUTTER')) {
