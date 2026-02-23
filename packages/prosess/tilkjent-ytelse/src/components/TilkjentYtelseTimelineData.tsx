@@ -68,7 +68,8 @@ export const TilkjentYtelseTimelineData = ({
               onClick={velgForrigePeriode}
               variant="secondary"
               type="button"
-              title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}>
+              title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
+            >
               <FormattedMessage id="Timeline.prevPeriodShort" />
             </Button>
             <Button
@@ -79,7 +80,8 @@ export const TilkjentYtelseTimelineData = ({
               variant="secondary"
               type="button"
               title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
-              iconPosition="right">
+              iconPosition="right"
+            >
               <FormattedMessage id="Timeline.nextPeriodShort" />
             </Button>
             <Button
@@ -89,7 +91,8 @@ export const TilkjentYtelseTimelineData = ({
               onClick={lukkPeriode}
               variant="tertiary"
               type="button"
-              title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })} />
+              title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
+            />
           </HStack>
         </HStack>
         <Box background="success-moderate" padding="space-16" width="370px">

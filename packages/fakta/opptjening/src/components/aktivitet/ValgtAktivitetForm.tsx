@@ -137,7 +137,8 @@ export const ValgtAktivitetForm = ({
                   onClick={velgForrigeAktivitet}
                   variant="secondary"
                   type="button"
-                  title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}>
+                  title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
+                >
                   <FormattedMessage id="Timeline.prevPeriodShort" />
                 </Button>
                 <Button
@@ -148,7 +149,8 @@ export const ValgtAktivitetForm = ({
                   variant="secondary"
                   type="button"
                   title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
-                  iconPosition="right">
+                  iconPosition="right"
+                >
                   <FormattedMessage id="Timeline.nextPeriodShort" />
                 </Button>
                 <Button
@@ -158,7 +160,8 @@ export const ValgtAktivitetForm = ({
                   onClick={lukkPeriode}
                   variant="tertiary"
                   type="button"
-                  title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })} />
+                  title={intl.formatMessage({ id: 'Timeline.lukkPeriode' })}
+                />
               </HStack>
             </HStack>
             <HStack gap="space-32">

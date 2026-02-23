@@ -236,7 +236,8 @@ export const UttakPeriodePanel = ({
                 onClick={toggleVisningAvModal}
                 variant="tertiary"
                 type="button"
-                title={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}>
+                title={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
+              >
                 <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
               </Button>
               {visModal && (
@@ -258,7 +259,8 @@ export const UttakPeriodePanel = ({
               onClick={visForrigePeriode}
               variant="secondary"
               type="button"
-              title={intl.formatMessage({ id: 'UttakPeriodePanel.prevPeriod' })}>
+              title={intl.formatMessage({ id: 'UttakPeriodePanel.prevPeriod' })}
+            >
               <FormattedMessage id="UttakPeriodePanel.prevPeriodShort" />
             </Button>
             <Button
@@ -269,7 +271,8 @@ export const UttakPeriodePanel = ({
               variant="secondary"
               type="button"
               title={intl.formatMessage({ id: 'UttakPeriodePanel.nextPeriod' })}
-              iconPosition="right">
+              iconPosition="right"
+            >
               <FormattedMessage id="UttakPeriodePanel.nextPeriodShort" />
             </Button>
             <Button
@@ -279,7 +282,8 @@ export const UttakPeriodePanel = ({
               onClick={lukkPeriode}
               variant="tertiary"
               type="button"
-              title={intl.formatMessage({ id: 'UttakPeriodePanel.LukkPeriode' })} />
+              title={intl.formatMessage({ id: 'UttakPeriodePanel.LukkPeriode' })}
+            />
           </HStack>
         </HStack>
         {erValgtPeriodeEøsPeriode && <UttakPeriodeInfoEØS valgtPeriode={valgtPeriode} alleKodeverk={alleKodeverk} />}

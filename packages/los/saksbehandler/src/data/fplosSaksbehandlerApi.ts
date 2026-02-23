@@ -1,14 +1,14 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import {
-  type AlleKodeverkLos,
-  type FagsakEnkel,
-  type OppgaveDto,
-  type OppgaveDtoMedStatus,
-  type ReservasjonStatusDto,
-  type SaksbehandlerProfil,
-  type SakslisteAvdeling,
+import type {
+  AlleKodeverkLos,
+  FagsakEnkel,
+  OppgaveDto,
+  OppgaveDtoMedStatus,
+  ReservasjonStatusDto,
+  SaksbehandlerProfil,
+  SakslisteAvdeling,
 } from '@navikt/fp-types';
 
 const kyExtended = ky.extend({

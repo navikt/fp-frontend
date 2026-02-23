@@ -39,7 +39,8 @@ export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, rem
           type="button"
           variant="tertiary"
           onClick={() => setIsOpen(curr => !curr)}
-          icon={isOpen ? <ChevronUpIcon aria-label="Vis mindre" /> : <ChevronDownIcon aria-label="Vis mer" />} />
+          icon={isOpen ? <ChevronUpIcon aria-label="Vis mindre" /> : <ChevronDownIcon aria-label="Vis mer" />}
+        />
       </Table.DataCell>
       <Table.DataCell valign="top">
         <Box hidden={isOpen} paddingBlock="space-12">
@@ -67,7 +68,8 @@ export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, rem
           variant="tertiary"
           onClick={remove}
           onKeyDown={remove}
-          icon={<TrashIcon aria-label="Slett rad" />} />
+          icon={<TrashIcon aria-label="Slett rad" />}
+        />
       </Table.DataCell>
     </Table.Row>
   );
