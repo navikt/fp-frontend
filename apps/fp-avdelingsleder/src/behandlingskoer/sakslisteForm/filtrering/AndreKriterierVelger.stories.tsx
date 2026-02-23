@@ -42,19 +42,22 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const lagRender = (defaultValues: Record<string, unknown>) => () => {
-  const formMethods = useForm({ defaultValues });
+const lagRender = (defaultValues: Record<string, unknown>) => {
+  const AndreKriterierVelgerStory = () => {
+    const formMethods = useForm({ defaultValues });
 
-  const alleKodeverk = useQuery(losKodeverkOptions()).data;
-  const filter = useQuery(kriterieFilterOptions()).data;
+    const alleKodeverk = useQuery(losKodeverkOptions()).data;
+    const filter = useQuery(kriterieFilterOptions()).data;
 
-  return alleKodeverk && filter ? (
-    <RhfForm formMethods={formMethods}>
-      <AndreKriterierVelger />
-    </RhfForm>
-  ) : (
-    <LoadingPanel />
-  );
+    return alleKodeverk && filter ? (
+      <RhfForm formMethods={formMethods}>
+        <AndreKriterierVelger />
+      </RhfForm>
+    ) : (
+      <LoadingPanel />
+    );
+  };
+  return AndreKriterierVelgerStory;
 };
 
 export const Default: Story = {
