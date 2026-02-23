@@ -1,14 +1,13 @@
-import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import { HStack, Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { Chips, HStack, Label, ToggleGroup, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-import { type LosKodeverkMedNavn, type OppgaverForAvdelingPerDato } from '@navikt/fp-types';
+import { type OppgaverForAvdelingPerDato } from '@navikt/fp-types';
 
 import { oppgaverPerDatoOptions } from '../../data/fplosAvdelingslederApi';
 import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper';
@@ -18,16 +17,15 @@ import { type OppgaveForDatoGraf, TilBehandlingGraf } from './TilBehandlingGraf'
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
-const ALLE_YTELSETYPER_VALGT = 'ALLE';
+const ALLE_YTELSETYPER = ['FP', 'SVP', 'ES'];
 const UKE_2 = '2';
 
 type FormValues = {
   ukevalg: string;
-  ytelseType: string;
+  ytelseTyper: string[];
 };
 
 const formName = 'tilBehandlingForm';
-const formDefaultValues = { ytelseType: ALLE_YTELSETYPER_VALGT, ukevalg: UKE_2 };
 
 interface Props {
   height: number;
@@ -35,8 +33,6 @@ interface Props {
 }
 
 export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
-  const intl = useIntl();
-
   const { data: oppgaverPerDato } = useQuery(oppgaverPerDatoOptions(valgtAvdelingEnhet));
 
   const behandlingTyper = useLosKodeverk('BehandlingType');
@@ -44,63 +40,57 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
 
   const lagretFilter = getParsedValueFromLocalStorage<FormValues>(formName);
 
-  const formMethods = useForm<FormValues>({
-    defaultValues: lagretFilter ?? formDefaultValues,
-  });
+  const [ukevalg, setUkevalg] = useState(lagretFilter?.ukevalg ?? UKE_2);
+  const [ytelseTyper, setYtelseTyper] = useState(
+    lagretFilter?.ytelseTyper && lagretFilter.ytelseTyper.length > 0 ? lagretFilter.ytelseTyper : [],
+  );
 
-  const values = formMethods.watch();
-
-  useStoreValuesInLocalStorage(formName, values);
+  useStoreValuesInLocalStorage(formName, { ukevalg, ytelseTyper });
 
   return (
-    <RhfForm<FormValues> formMethods={formMethods}>
-      <VStack gap="space-16">
-        <Label size="small">
-          <FormattedMessage id="TilBehandlingPanel.TilBehandling" />
-        </Label>
-        <HStack gap="space-16">
-          <RhfSelect
-            name="ukevalg"
-            control={formMethods.control}
-            label=""
-            hideLabel
-            selectValues={uker.map(u => (
-              <option key={u.kode} value={u.kode}>
-                {intl.formatMessage({ id: u.tekstKode })}
-              </option>
-            ))}
-          />
-          <RhfRadioGroup name="ytelseType" control={formMethods.control} legend="" hideLegend>
-            <HStack gap="space-16">
-              <Radio value="FP" size="small">
-                {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'FP')}
-              </Radio>
-              <Radio value="ES" size="small">
-                {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'ES')}
-              </Radio>
-              <Radio value="SVP" size="small">
-                {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'SVP')}
-              </Radio>
-              <Radio value={ALLE_YTELSETYPER_VALGT} size="small">
-                <FormattedMessage id="Label.Alle" />
-              </Radio>
-            </HStack>
-          </RhfRadioGroup>
-        </HStack>
-        <TilBehandlingGraf
-          height={height}
-          isToUkerValgt={values.ukevalg === UKE_2}
-          behandlingTyper={behandlingTyper}
-          oppgaverPerDato={slaSammenLikeBehandlingstyperOgDatoer(
-            oppgaverPerDato
-              .filter(ofa =>
-                values.ytelseType === ALLE_YTELSETYPER_VALGT ? true : values.ytelseType === ofa.fagsakYtelseType,
-              )
-              .filter(ofa => erDatoInnenforPeriode(ofa, values.ukevalg)),
-          )}
-        />
-      </VStack>
-    </RhfForm>
+    <VStack gap="space-16">
+      <Label>
+        <FormattedMessage id="TilBehandlingPanel.TilBehandling" />
+      </Label>
+      <HStack gap="space-8 space-32" align="end" justify="space-between">
+        <ToggleGroup size="small" value={ukevalg} onChange={value => setUkevalg(value)}>
+          <ToggleGroup.Item value={UKE_2}>
+            <FormattedMessage id="TilBehandlingPanel.ToSisteUker" />
+          </ToggleGroup.Item>
+          <ToggleGroup.Item value="4">
+            <FormattedMessage id="TilBehandlingPanel.FireSisteUker" />
+          </ToggleGroup.Item>
+        </ToggleGroup>
+
+        <Chips size="small">
+          {ALLE_YTELSETYPER.map(option => (
+            <Chips.Toggle
+              key={option}
+              checkmark={false}
+              selected={ytelseTyper.includes(option)}
+              onClick={() =>
+                setYtelseTyper(
+                  ytelseTyper.includes(option) ? ytelseTyper.filter(x => x !== option) : [...ytelseTyper, option],
+                )
+              }
+            >
+              {fagsakYtelseTyper.find(b => b.kode === option)?.navn ?? ''}
+            </Chips.Toggle>
+          ))}
+        </Chips>
+      </HStack>
+
+      <TilBehandlingGraf
+        height={height}
+        isToUkerValgt={ukevalg === UKE_2}
+        behandlingTyper={behandlingTyper}
+        oppgaverPerDato={slaSammenLikeBehandlingstyperOgDatoer(
+          oppgaverPerDato
+            .filter(ofa => ytelseTyper.length === 0 || ytelseTyper.includes(ofa.fagsakYtelseType))
+            .filter(ofa => erDatoInnenforPeriode(ofa, ukevalg)),
+        )}
+      />
+    </VStack>
   );
 };
 
@@ -121,14 +111,6 @@ const erDatoInnenforPeriode = (oppgaveForAvdeling: OppgaverForAvdelingPerDato, u
   }
   const toUkerSiden = dayjs().subtract(2, 'w');
   return dayjs(oppgaveForAvdeling.statistikkDato).isSameOrAfter(toUkerSiden);
-};
-
-const finnFagsakYtelseTypeNavn = (
-  fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
-  valgtFagsakYtelseType: string,
-): string => {
-  const type = fagsakYtelseTyper.find(fyt => fyt.kode === valgtFagsakYtelseType);
-  return type ? type.navn : '';
 };
 
 const slaSammenLikeBehandlingstyperOgDatoer = (

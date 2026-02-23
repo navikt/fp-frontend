@@ -7,7 +7,6 @@ import {
   createBarSeries,
   createToolboxWithFilename,
   formaterMånedÅr,
-  getAkselVariable,
   getStyle,
   ReactECharts,
 } from '@navikt/fp-los-felles';
@@ -95,22 +94,20 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
           },
         },
         series: [
-          createBarSeries({
-            name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.IkkePaVent' }),
-            data: koordinaterIkkePaVent,
-            color: getAkselVariable('--ax-bg-success-moderate-pressed'),
-            itemStyle: {
-              borderColor: getAkselVariable('--ax-bg-success-strong'),
+          createBarSeries(
+            {
+              name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.IkkePaVent' }),
+              data: koordinaterIkkePaVent,
             },
-          }),
-          createBarSeries({
-            name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.PaVent' }),
-            data: koordinaterPaVent,
-            color: getAkselVariable('--ax-bg-accent-moderate-pressed'),
-            itemStyle: {
-              borderColor: getAkselVariable('--ax-bg-accent-strong'),
+            'success',
+          ),
+          createBarSeries(
+            {
+              name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.PaVent' }),
+              data: koordinaterPaVent,
             },
-          }),
+            'accent',
+          ),
         ],
       }}
     />

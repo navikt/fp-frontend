@@ -11,7 +11,7 @@ import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 import { BelopSorteringValg } from './BelopSorteringValg';
 import { DatoSorteringValg } from './DatoSorteringValg';
-import { useGyldigeSorteringer } from './useGyldigeSorteringer.tsx';
+import { useGyldigeSorteringer } from './useGyldigeSorteringer';
 
 interface Props {
   muligeSorteringer: KøSorteringFelt[];
