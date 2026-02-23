@@ -7,12 +7,7 @@ import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import {
-  alleKodeverkLos,
-  getIntlDecorator,
-  urlEncodeNorskeBokstaver,
-  withQueryClient,
-} from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { KøStatistikkDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
@@ -31,9 +26,7 @@ const meta = {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.post(LosUrl.SLETT_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
-        http.get(urlEncodeNorskeBokstaver(LosUrl.OPPGAVE_FILTER_STATISTIKK), () =>
-          HttpResponse.json(OPPGAVE_FILTER_STATISTIKK),
-        ),
+        http.get(encodeURI(LosUrl.OPPGAVE_FILTER_STATISTIKK), () => HttpResponse.json(OPPGAVE_FILTER_STATISTIKK)),
       ],
     },
   },
