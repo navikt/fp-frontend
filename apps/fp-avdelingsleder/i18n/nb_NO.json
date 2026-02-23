@@ -91,6 +91,7 @@
   "SletteSaksbehandlerModal.SletteSaksbehandler": "Ønsker du å slette {saksbehandlerNavn}?",
 
   "TilBehandlingPanel.TilBehandling": "Antall åpne oppgaver pr dato",
+  "TilBehandlingPanel.UkevalgLabel": "Periode",
   "TilBehandlingPanel.ToSisteUker": "2 siste uker",
   "TilBehandlingPanel.FireSisteUker": "4 siste uker",
 
@@ -117,7 +118,7 @@
   "SaksbehandlereTabell.IngenSaksbehandlere": "Ingen saksbehandlere lagt til",
   "SaksbehandlereTabell.SlettSaksbehandler": "Slett {navn}",
 
-  "OppgaverPerForsteStonadsdagPanel.FordeltPaForsteStonadsdag": "Antall åpne oppgaver for førstegangsbehandlinger fordelt på første stønadsdag - alle ytelser",
+  "OppgaverPerForsteStonadsdagPanel.FordeltPaForsteStonadsdag": "Antall åpne oppgaver for førstegangsbehandlinger fordelt på første stønadsdag",
 
   "SletteSakslisteModal.SletteSaksliste": "Ønsker du å slette {sakslisteNavn}?",
 

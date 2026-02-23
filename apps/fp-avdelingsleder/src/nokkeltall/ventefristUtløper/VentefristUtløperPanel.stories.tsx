@@ -63,6 +63,16 @@ const BEHANDLINGER_PÅ_VENT = [
     fristUke: '2025-29',
     antall: 4,
   },
+  {
+    fagsakYtelseType: 'SVP',
+    fristUke: '2025-33',
+    antall: 11,
+  },
+  {
+    fagsakYtelseType: 'SVP',
+    fristUke: '2025-27',
+    antall: 12,
+  },
 ];
 
 const meta = {

@@ -1,25 +1,26 @@
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import type { AkselColor } from '@navikt/ds-react/types/theme';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { createToolboxWithFilename, getStyle, ReactECharts } from '@navikt/fp-los-felles';
+import { createLineSeries, createToolboxWithFilename, getStyle, ReactECharts } from '@navikt/fp-los-felles';
 import type { BehandlingType, LosKodeverkMedNavn } from '@navikt/fp-types';
 
-const behandlingstypeFarger = {
-  ['BT-009']: '#ef5d28',
-  ['BT-007']: '#ff842f',
-  ['BT-006']: '#ffd23b',
-  ['BT-003']: '#826ba1',
-  ['BT-004']: '#3385d1',
-  ['BT-002']: '#85d5f0',
-  ['BT-008']: '#85d5f0',
-  '-': '#85d5f0', // Eksisterer for TS: burde ikke inntreffe
+const behandlingstypeAkselFarger: Record<BehandlingType, AkselColor> = {
+  ['BT-002']: 'accent', // Førstegangsbehandling
+  ['BT-003']: 'meta-purple', // Klage
+  ['BT-004']: 'success', // Revurdering
+  ['BT-006']: 'warning', // Innsyn
+  ['BT-007']: 'brand-beige', // Tilbakebetaling
+  ['BT-008']: 'meta-lime', // Anke
+  ['BT-009']: 'danger', // Tilbakebetaling revurdering
+  '-': 'neutral', // Eksisterer for TS: burde ikke inntreffe
 };
 
-export interface OppgaveForDatoGraf {
+export type OppgaveForDatoGraf = {
   behandlingType: BehandlingType;
   statistikkDato: string;
   antall: number;
-}
+};
 
 type Koordinat = {
   x: Date;
@@ -40,8 +41,7 @@ export const TilBehandlingGraf = ({ height, oppgaverPerDato, isToUkerValgt, beha
   const periodeSlutt = dayjs();
 
   const koordinater = konverterTilKoordinaterGruppertPaBehandlingstype(oppgaverPerDato);
-  const data = fyllInnManglendeDatoerOgSorterEtterDato(koordinater, periodeStart, periodeSlutt);
-
+  const serieConfig = fyllInnManglendeDatoerOgSorterEtterDato(koordinater, periodeStart, periodeSlutt);
   const options = getStyle();
   return (
     <ReactECharts
@@ -58,7 +58,7 @@ export const TilBehandlingGraf = ({ height, oppgaverPerDato, isToUkerValgt, beha
                 if (params.axisDimension === 'y') {
                   return Number.parseInt(params.value as string, 10).toLocaleString('nb-NO');
                 }
-                return dayjs(params.value).format(DDMMYYYY_DATE_FORMAT);
+                return dayjs(params.value).format('D. MMMM YYYY');
               },
             },
           },
@@ -68,26 +68,22 @@ export const TilBehandlingGraf = ({ height, oppgaverPerDato, isToUkerValgt, beha
           type: 'time',
           axisLabel: {
             ...options.textStyle,
-            formatter: '{dd}.{MM}.{yyyy}',
+            formatter: '{d}. {MMM}',
           },
         },
         yAxis: {
           type: 'value',
           axisLabel: {
             ...options.textStyle,
+            formatter: (value: number) => value.toLocaleString('nb-NO'),
           },
         },
-        series: Array.from(data.entries()).map(([type, value]) => ({
-          name: finnBehandlingTypeNavn(behandlingTyper, type),
-          type: 'line',
-          stack: 'stackname',
-          areaStyle: {},
-          emphasis: {
-            focus: 'series',
-          },
-          data: value,
-          color: behandlingstypeFarger[type],
-        })),
+        series: serieConfig.map(([type, data]) =>
+          createLineSeries(
+            { name: finnBehandlingTypeNavn(behandlingTyper, type), data },
+            behandlingstypeAkselFarger[type],
+          ),
+        ),
       }}
     />
   );
@@ -119,17 +115,20 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
   data: Map<BehandlingType, Koordinat[]>,
   periodeStart: dayjs.Dayjs,
   periodeSlutt: dayjs.Dayjs,
-): Map<BehandlingType, [string, number][]> =>
-  Array.from(data.entries()).reduce((acc, [behandlingstype, behandlingstypeData]) => {
-    const koordinater: [string, number][] = [];
+): [BehandlingType, [string, number][]][] =>
+  Array.from(data.entries())
+    .reduce((acc, [behandlingstype, behandlingstypeData]) => {
+      const koordinater: [string, number][] = [];
 
-    for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {
-      const funnetDato = behandlingstypeData.find(d => dayjs(d.x).startOf('day').isSame(dato.startOf('day')));
-      koordinater.push(
-        funnetDato ? [dayjs(funnetDato.x).format(ISO_DATE_FORMAT), funnetDato.y] : [dato.format(ISO_DATE_FORMAT), 0],
-      );
-    }
+      for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {
+        const funnetDato = behandlingstypeData.find(d => dayjs(d.x).startOf('day').isSame(dato.startOf('day')));
+        koordinater.push(
+          funnetDato ? [dayjs(funnetDato.x).format(ISO_DATE_FORMAT), funnetDato.y] : [dato.format(ISO_DATE_FORMAT), 0],
+        );
+      }
 
-    acc.set(behandlingstype, koordinater);
-    return acc;
-  }, new Map<BehandlingType, [string, number][]>());
+      acc.set(behandlingstype, koordinater);
+      return acc;
+    }, new Map<BehandlingType, [string, number][]>())
+    .entries()
+    .toArray();

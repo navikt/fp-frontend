@@ -1,24 +1,56 @@
+import type { AkselColor } from '@navikt/ds-react/types/theme';
 import { capitalizeFirstLetter } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
-import type { BarSeriesOption, EChartsOption } from 'echarts';
+import { type BarSeriesOption, type EChartsOption, type LineSeriesOption } from 'echarts';
 
 export const formaterMånedÅr = (dato: string) =>
   capitalizeFirstLetter(`${dayjs(dato).format('MMM YYYY')}`).replaceAll('.', '');
 
-export const createBarSeries = (options: BarSeriesOption): BarSeriesOption => ({
-  type: 'bar',
-  barMaxWidth: '150px',
-  stack: 'total',
-  label: {
-    show: true,
-  },
-  ...options,
-  itemStyle: {
-    borderWidth: 1,
-    borderRadius: 4,
-    ...options.itemStyle,
-  },
-});
+export const createBarSeries = (options: BarSeriesOption, akselColor: AkselColor): BarSeriesOption => {
+  const { primaryColor, secondaryColor } = getAkselColorPair(akselColor);
+  return {
+    type: 'bar',
+    barMaxWidth: '150px',
+    stack: 'total',
+    label: {
+      show: true,
+    },
+    color: primaryColor,
+    ...options,
+    itemStyle: {
+      borderColor: secondaryColor,
+      borderWidth: 1,
+      borderRadius: 4,
+      ...options.itemStyle,
+    },
+  };
+};
+
+export const createLineSeries = (options: LineSeriesOption, akselColor: AkselColor): LineSeriesOption => {
+  const { primaryColor, secondaryColor } = getAkselColorPair(akselColor);
+  return {
+    type: 'line',
+    stack: 'total',
+    areaStyle: {
+      opacity: 1,
+    },
+    emphasis: {
+      focus: 'series',
+    },
+    symbol: 'circle',
+    lineStyle: {
+      type: 'solid',
+      color: secondaryColor,
+    },
+    ...options,
+    itemStyle: {
+      borderWidth: 2,
+      borderColor: secondaryColor,
+      color: primaryColor,
+      ...options.itemStyle,
+    },
+  };
+};
 
 export const layoutOptions: EChartsOption = {
   animation: false,
@@ -58,6 +90,7 @@ export const getStyle = () => {
     textStyle,
     animation: false,
     legend: {
+      type: 'scroll',
       icon: 'roundRect',
       textStyle,
       top: 'top',
@@ -75,3 +108,8 @@ export const getAkselVariable = (akselVariable: string) => {
   const element = document.body.getElementsByClassName('aksel-theme')[0] ?? document.documentElement;
   return getComputedStyle(element).getPropertyValue(akselVariable);
 };
+
+export const getAkselColorPair = (akselColor: AkselColor): { primaryColor: string; secondaryColor: string } => ({
+  primaryColor: getAkselVariable(`--ax-bg-${akselColor}-moderate-pressed`),
+  secondaryColor: getAkselVariable(`--ax-border-${akselColor}`),
+});

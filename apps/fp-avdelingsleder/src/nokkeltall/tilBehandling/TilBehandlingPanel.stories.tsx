@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import type { OppgaverForAvdelingPerDato } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
 import { TilBehandlingPanel } from './TilBehandlingPanel';
@@ -14,98 +15,49 @@ import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const OPPGAVER_PER_DATO = [
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().format(ISO_DATE_FORMAT),
-    antall: 9,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().subtract(1, 'd').format(ISO_DATE_FORMAT),
-    antall: 8,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().subtract(2, 'd').format(ISO_DATE_FORMAT),
-    antall: 8,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().subtract(3, 'd').format(ISO_DATE_FORMAT),
-    antall: 7,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
-    antall: 13,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().subtract(5, 'd').format(ISO_DATE_FORMAT),
-    antall: 15,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().subtract(6, 'd').format(ISO_DATE_FORMAT),
-    antall: 12,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().subtract(7, 'd').format(ISO_DATE_FORMAT),
-    antall: 10,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().subtract(8, 'd').format(ISO_DATE_FORMAT),
-    antall: 17,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().subtract(9, 'd').format(ISO_DATE_FORMAT),
-    antall: 20,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().subtract(10, 'd').format(ISO_DATE_FORMAT),
-    antall: 11,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-003',
-    statistikkDato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
-    antall: 2,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-002',
-    statistikkDato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
-    antall: 6,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-006',
-    statistikkDato: dayjs().subtract(10, 'd').format(ISO_DATE_FORMAT),
-    antall: 3,
-  },
-  {
-    fagsakYtelseType: 'FP',
-    behandlingType: 'BT-006',
-    statistikkDato: dayjs().subtract(16, 'd').format(ISO_DATE_FORMAT),
-    antall: 3,
-  },
+const BEHANDLING_TYPES: OppgaverForAvdelingPerDato['behandlingType'][] = [
+  'BT-002',
+  'BT-003',
+  'BT-004',
+  'BT-006',
+  'BT-007',
+  'BT-008',
+  'BT-009',
 ];
+const FAGSAK_YTELSE_TYPES: OppgaverForAvdelingPerDato['fagsakYtelseType'][] = ['FP', 'ES', 'SVP'];
+
+const generateOppgaverPerDato = (): OppgaverForAvdelingPerDato[] => {
+  const oppgaver: OppgaverForAvdelingPerDato[] = [];
+  const today = dayjs();
+  const periodeDaysBack = 28; // 4 weeks (matches default display period)
+
+  // Generate for each date in the period (4 weeks back to today)
+  for (let daysAgo = periodeDaysBack; daysAgo >= 0; daysAgo--) {
+    const dato = today.subtract(daysAgo, 'day').format(ISO_DATE_FORMAT);
+
+    // Generate for each combination of behandlingType and fagsakYtelseType
+    BEHANDLING_TYPES.forEach((behandlingType, typeIndex) => {
+      FAGSAK_YTELSE_TYPES.forEach(fagsakYtelseType => {
+        // Higher antall for earlier treatment types (lower index)
+        // typeIndex 0 gets max 25, typeIndex 6 gets max ~6
+        const maxAntall = Math.max(1, Math.round(25 - typeIndex * 3.2));
+        const antall = Math.floor(Math.random() * (maxAntall + 1));
+
+        oppgaver.push({
+          fagsakYtelseType,
+          behandlingType,
+          statistikkDato: dato,
+          opprettetDato: dato,
+          antall,
+        });
+      });
+    });
+  }
+
+  return oppgaver;
+};
+
+const OPPGAVER_PER_DATO = generateOppgaverPerDato();
 
 const meta = {
   title: 'los/avdelingsleder/nokkeltall/TilBehandlingPanel',
@@ -125,6 +77,7 @@ const meta = {
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
+    console.log(generateOppgaverPerDato());
     const alleKodeverk = useQuery(losKodeverkOptions()).data;
     return alleKodeverk ? <TilBehandlingPanel {...props} /> : <LoadingPanel />;
   },
