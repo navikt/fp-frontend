@@ -1,17 +1,5 @@
 export type { AlleKodeverkLos, LosKodeverkType, LosKodeverkMedNavn } from './kodeverkAlleLos';
-export type { OppgaveBehandlingStatus } from './oppgaveBehandlingStatus';
-export type { KøSortering } from './køSortering';
-export type {
-  AnnetKriterie,
-  KøSorteringFelt,
-  Statistikk,
-  Sortering,
-  Periodefilter,
-  SakslisteAvdeling,
-  SakslisteDto,
-  SaksbehandlerProfil,
-} from './sakslisteType';
-export type { AndreKriterierType } from './andreKriterierType';
+
 export type {
   oppgave_BehandlingType,
   oppgave_FagsakYtelseType,
@@ -29,4 +17,16 @@ export type {
   tjenester_felles_dto_OppgaveDtoMedStatus as OppgaveDtoMedStatus,
   tjenester_felles_dto_OppgaveDto as OppgaveDto,
   tjenester_avdelingsleder_dto_AvdelingDto as AvdelingDto,
+  oppgave_AndreKriterierType as AndreKriterierType,
+  oppgavekø_KøSortering as KøSortering,
+  tjenester_avdelingsleder_nøkkeltall_dto_BehandlingVenteStatus as BehandlingVenteStatus,
+  tjenester_felles_dto_OppgaveBehandlingStatus as OppgaveBehandlingStatus,
+  tjenester_felles_dto_SakslisteDto_AndreKriterieDto as AnnetKriterie,
+  tjenester_felles_dto_KøSorteringFeltDto as KøSorteringFelt,
+  tjenester_felles_dto_SakslisteDto_StatistikkDto as Statistikk,
+  tjenester_avdelingsleder_saksliste_dto_SorteringDto as Sortering,
+  oppgave_Periodefilter as Periodefilter,
+  tjenester_felles_dto_SakslisteDto as SakslisteAvdeling,
+  tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto as SakslisteDto,
+  tjenester_felles_dto_SaksbehandlerDto as SaksbehandlerProfil,
 } from './fplosDtoGenerert';
