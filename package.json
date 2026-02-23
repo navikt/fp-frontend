@@ -30,7 +30,8 @@
     "build:storybook": "turbo run build-storybook && yarn storybook-create-deploy-folder",
     "storybook-create-deploy-folder": "node scripts/create-storybook-index.cjs",
     "prepare": "husky install",
-    "update-swagger": "node scripts/hent-openapi-spec.js"
+    "generate": "turbo run generate --filter @navikt/fp-types",
+    "generate:local": "turbo run generate:local --filter @navikt/fp-types"
   },
   "workspaces": [
     "apps/**/*",
