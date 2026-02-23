@@ -57,8 +57,6 @@ const generateOppgaverPerDato = (): OppgaverForAvdelingPerDato[] => {
   return oppgaver;
 };
 
-const OPPGAVER_PER_DATO = generateOppgaverPerDato();
-
 const meta = {
   title: 'los/avdelingsleder/nokkeltall/TilBehandlingPanel',
   component: TilBehandlingPanel,
@@ -67,7 +65,9 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.HENT_OPPGAVER_PER_DATO.replace('ø', '%C3%B8'), () => HttpResponse.json(OPPGAVER_PER_DATO)),
+        http.get(LosUrl.HENT_OPPGAVER_PER_DATO.replace('ø', '%C3%B8'), () =>
+          HttpResponse.json(generateOppgaverPerDato()),
+        ),
       ],
     },
   },
@@ -77,7 +77,6 @@ const meta = {
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
-    console.log(generateOppgaverPerDato());
     const alleKodeverk = useQuery(losKodeverkOptions()).data;
     return alleKodeverk ? <TilBehandlingPanel {...props} /> : <LoadingPanel />;
   },
