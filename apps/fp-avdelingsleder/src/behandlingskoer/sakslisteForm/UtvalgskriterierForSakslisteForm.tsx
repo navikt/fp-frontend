@@ -7,8 +7,8 @@ import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-va
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type {
-  AndreKriterierType,
   AndreKriterieDto,
+  AndreKriterierType,
   KøSortering,
   LosBehandlingType,
   LosFagsakYtelseType,

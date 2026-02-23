@@ -4,7 +4,7 @@ import { XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label, Table } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { type SaksbehandlereOgSaksbehandlerGrupper, type SaksbehandlerDto } from '@navikt/fp-types';
+import { type SaksbehandlerDto,type SaksbehandlereOgSaksbehandlerGrupper } from '@navikt/fp-types';
 
 import { LosUrl, slettGruppe } from '../data/fplosAvdelingslederApi';
 import { GruppeSaksbehandlere } from './GruppeSaksbehandlere';

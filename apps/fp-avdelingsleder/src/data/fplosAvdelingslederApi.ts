@@ -12,8 +12,8 @@ import {
   type OppgaverForFørsteStønadsdagUkeMåned,
   type ReservasjonDto,
   type ReservasjonStatusDto,
-  type SaksbehandlereOgSaksbehandlerGrupper,
   type SaksbehandlerDto,
+  type SaksbehandlereOgSaksbehandlerGrupper,
   type SakslisteDto,
   type SakslisteLagreDto,
 } from '@navikt/fp-types';
