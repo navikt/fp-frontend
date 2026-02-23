@@ -230,7 +230,6 @@ export type { PeriodeResultatType } from './src/periodeResultatType';
 export type { Arbeidskategori } from './src/arbeidskategori';
 export type { TilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereBehandling';
 export type { Rettighetstype } from './src/rettighetstype';
-export type { AksjonspunktDefinisjon } from './src/aksjonspunktDefinisjon';
 export type { GraderingAvslagÅrsak } from './src/graderingAvslagÅrsak';
 export type { OmsorgsovertakelseDto } from './src/omsorgsovertakelse';
 export type { FagsakBehandlingDto } from './src/fagsakBehandlingDto';
@@ -239,3 +238,4 @@ export type { AsyncPollingStatus, PollingStatus } from './src/asyncPollingStatus
 
 export type * from './src/los';
 export type * from './src/tilbakekreving';
+export type * from './src/index';
