@@ -1,4 +1,0 @@
-import type { folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto } from './fpsak.gen';
-
-export type BeregningsgrunnlagArbeidsforhold =
-  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
