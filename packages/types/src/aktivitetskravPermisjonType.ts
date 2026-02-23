@@ -1,4 +1,4 @@
-import type { foreldrepenger_behandlingslager_behandling_aktivitetskrav_AktivitetskravPermisjonType } from './apiDtoGenerert';
+import type { foreldrepenger_behandlingslager_behandling_aktivitetskrav_AktivitetskravPermisjonType } from './fpsak.gen';
 
 export type AktivitetskravPermisjonType =
   foreldrepenger_behandlingslager_behandling_aktivitetskrav_AktivitetskravPermisjonType;

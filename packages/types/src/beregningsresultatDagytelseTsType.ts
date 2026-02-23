@@ -2,7 +2,7 @@ import type {
   tjenester_behandling_beregningsresultat_dto_BeregningsresultatMedUttaksplanDto,
   tjenester_behandling_beregningsresultat_dto_BeregningsresultatPeriodeAndelDto,
   tjenester_behandling_beregningsresultat_dto_BeregningsresultatPeriodeDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type BeregningsresultatPeriodeAndel =
   tjenester_behandling_beregningsresultat_dto_BeregningsresultatPeriodeAndelDto;

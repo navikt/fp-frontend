@@ -29,4 +29,4 @@ export type {
   tjenester_felles_dto_OppgaveDtoMedStatus as OppgaveDtoMedStatus,
   tjenester_felles_dto_OppgaveDto as OppgaveDto,
   tjenester_avdelingsleder_dto_AvdelingDto as AvdelingDto,
-} from './fplosDtoGenerert';
+} from './fplos.gen';

@@ -1,3 +1,3 @@
-import type { foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType } from './apiDtoGenerert';
+import type { foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType } from './fpsak.gen';
 
 export type RelasjonsRolleType = foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType;

@@ -1,7 +1,7 @@
 import type { FagsakStatus } from '../fagsakStatus';
 import type { AndreKriterierType } from './andreKriterierType';
 import type { BehandlingVenteStatus } from './behandlingVenteStatus';
-import type { oppgave_BehandlingType, oppgave_FagsakYtelseType } from './fplosDtoGenerert.ts';
+import type { oppgave_BehandlingType, oppgave_FagsakYtelseType } from './fplos.gen';
 import type { KøSortering } from './køSortering';
 import type { OppgaveBehandlingStatus } from './oppgaveBehandlingStatus';
 

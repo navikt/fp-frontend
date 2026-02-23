@@ -7,7 +7,7 @@ import type {
   tjenester_felles_dto_SakslisteDto,
   tjenester_felles_dto_SakslisteDto_AndreKriterieDto,
   tjenester_felles_dto_SakslisteDto_StatistikkDto,
-} from './fplosDtoGenerert.ts';
+} from './fplos.gen';
 
 export type AnnetKriterie = tjenester_felles_dto_SakslisteDto_AndreKriterieDto;
 
