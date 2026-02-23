@@ -46,13 +46,9 @@ const buildUttakText = (
         aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT
       ) {
         id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
-      } else if (
-        aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
-      ) {
+      } else if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER) {
         id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-      } else if (
-        aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK
-      ) {
+      } else if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK) {
         id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
       } else {
         id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';

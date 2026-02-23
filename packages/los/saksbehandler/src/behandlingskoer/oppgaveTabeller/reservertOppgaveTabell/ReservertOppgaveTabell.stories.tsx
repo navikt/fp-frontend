@@ -7,9 +7,9 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import { type OppgaveDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
-import { type Oppgave } from '../../../typer/oppgaveTsType';
 import { ReservertOppgaveTabell } from './ReservertOppgaveTabell';
 
 import messages from '../../../../i18n/nb_NO.json';
@@ -32,7 +32,7 @@ const RESERVERTE_OPPGAVER = [
     saksnummer: '1234',
     personnummer: '233',
     navn: 'Helge Utvikler',
-    system: 'SAK',
+    system: 'FPSAK',
     behandlingstype: 'BT-003',
     opprettetTidspunkt: '2019-01-01',
     behandlingsfrist: '2019-01-01',
@@ -50,7 +50,7 @@ const RESERVERTE_OPPGAVER = [
     saksnummer: '964545',
     personnummer: '233',
     navn: 'Bjarne Bjærke',
-    system: 'SAK',
+    system: 'FPSAK',
     behandlingstype: 'BT-003',
     opprettetTidspunkt: '2023-01-01',
     behandlingsfrist: '2023-01-01',
@@ -68,7 +68,7 @@ const RESERVERTE_OPPGAVER = [
     saksnummer: '3454626',
     personnummer: '233',
     navn: 'Borgil Bø',
-    system: 'SAK',
+    system: 'FPSAK',
     behandlingstype: 'BT-004',
     opprettetTidspunkt: '2024-01-01',
     behandlingsfrist: '2024-01-01',
@@ -77,7 +77,7 @@ const RESERVERTE_OPPGAVER = [
     behandlingId: '2',
     andreKriterier: ['REVURDERING_INNTEKTSMELDING'],
   },
-] satisfies Oppgave[];
+] satisfies OppgaveDto[];
 
 const meta = {
   title: 'behandlingskoer/ReservertOppgaveTabell',
@@ -121,7 +121,7 @@ export const TomOppgaveTabell: Story = {
   },
 };
 
-const oppdatertId = (oppgaver: Oppgave[], idnumber: number): Oppgave[] => {
+const oppdatertId = (oppgaver: OppgaveDto[], idnumber: number): OppgaveDto[] => {
   return oppgaver.map(o => ({
     ...o,
     id: o.id + idnumber,

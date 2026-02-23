@@ -1,23 +1,22 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { OppgaveFilterStatistikk, ReservasjonStatus } from '@navikt/fp-los-felles';
-import type { AlleKodeverkLos, SaksbehandlerProfil, SakslisteAvdeling, SakslisteDto } from '@navikt/fp-types';
-
-import type { Avdeling } from '../typer/avdelingTsType';
-import type { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';
-import type { InnloggetBruker } from '../typer/innloggetBruker';
-import type { OppgaverForAvdeling } from '../typer/oppgaverForAvdelingTsType';
-import type { OppgaveForDato } from '../typer/oppgaverForDatoTsType';
-import type { OppgaverForForsteStonadsdagUkeMnd } from '../typer/oppgaverForForsteStonadsdagUkeMndTsType';
-import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEllerPaVentTsType';
-import type { Reservasjon } from '../typer/reservasjonTsType';
-import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
-
-export type InitDataLos = {
-  innloggetBruker: InnloggetBruker;
-  avdelinger: Avdeling[];
-};
+import {
+  type AlleKodeverkLos,
+  type InitLinksDto,
+  type KøStatistikkDto,
+  type NøkkeltallBehandlingFørsteUttakDto,
+  type NøkkeltallBehandlingVentefristUtløperDto,
+  type OppgaverForAvdeling,
+  type OppgaverForAvdelingPerDato,
+  type OppgaverForFørsteStønadsdagUkeMåned,
+  type ReservasjonDto,
+  type ReservasjonStatusDto,
+  type SaksbehandlereOgSaksbehandlerGrupper,
+  type SaksbehandlerProfil,
+  type SakslisteAvdeling,
+  type SakslisteDto,
+} from '@navikt/fp-types';
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -74,13 +73,13 @@ export const LosUrl = {
 export const initFetchOptions = () =>
   queryOptions({
     queryKey: [LosUrl.INIT_FETCH],
-    queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<InitDataLos>(),
+    queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<InitLinksDto>(),
   });
 
 const getOppgaveFilterStatistikk = (sakslisteId: number, avdelingEnhet: string) =>
   kyExtended
     .get(LosUrl.OPPGAVE_FILTER_STATISTIKK, { searchParams: { sakslisteId, avdelingEnhet } })
-    .json<OppgaveFilterStatistikk[]>();
+    .json<KøStatistikkDto[]>();
 
 export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number, valgtAvdelingEnhet: string) =>
   queryOptions({
@@ -135,7 +134,7 @@ export const oppgaverPerFørsteStønadsdagMånedOptions = (avdelingEnhet: string
     queryFn: () =>
       kyExtended
         .get(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND, { searchParams: { avdelingEnhet } })
-        .json<OppgaverForForsteStonadsdagUkeMnd[]>(),
+        .json<OppgaverForFørsteStønadsdagUkeMåned[]>(),
     initialData: [],
   });
 
@@ -145,7 +144,7 @@ export const oppgaverÅpneEllerPåVentOptions = (avdelingEnhet: string) =>
     queryFn: () =>
       kyExtended
         .get(LosUrl.HENT_OPPGAVER_APNE_ELLER_PA_VENT, { searchParams: { avdelingEnhet } })
-        .json<OppgaverSomErApneEllerPaVent[]>(),
+        .json<NøkkeltallBehandlingFørsteUttakDto[]>(),
     initialData: [],
   });
 
@@ -163,7 +162,9 @@ export const oppgaverPerDatoOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.HENT_OPPGAVER_PER_DATO, avdelingEnhet],
     queryFn: () =>
-      kyExtended.get(LosUrl.HENT_OPPGAVER_PER_DATO, { searchParams: { avdelingEnhet } }).json<OppgaveForDato[]>(),
+      kyExtended
+        .get(LosUrl.HENT_OPPGAVER_PER_DATO, { searchParams: { avdelingEnhet } })
+        .json<OppgaverForAvdelingPerDato[]>(),
     initialData: [],
   });
 
@@ -173,7 +174,7 @@ export const behandlingerFristUtløptOptions = (avdelingEnhet: string) =>
     queryFn: () =>
       kyExtended
         .get(LosUrl.HENT_BEHANDLINGER_FRISTUTLOP, { searchParams: { avdelingEnhet } })
-        .json<BehandlingVentefrist[]>(),
+        .json<NøkkeltallBehandlingVentefristUtløperDto[]>(),
     initialData: [],
   });
 
@@ -181,7 +182,7 @@ export const reservasjonerForAvdelingOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.RESERVASJONER_FOR_AVDELING, avdelingEnhet],
     queryFn: () =>
-      kyExtended.get(LosUrl.RESERVASJONER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<Reservasjon[]>(),
+      kyExtended.get(LosUrl.RESERVASJONER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<ReservasjonDto[]>(),
     initialData: [],
   });
 
@@ -255,14 +256,14 @@ export const flyttReservasjon = (oppgaveId: number, brukerIdent: string, begrunn
     .post(LosUrl.FLYTT_RESERVASJON, {
       json: { oppgaveId, brukerIdent, begrunnelse },
     })
-    .json<ReservasjonStatus>();
+    .json<ReservasjonStatusDto>();
 
 export const endreReservasjon = (oppgaveId: number, reserverTil: string) =>
   kyExtended
     .post(LosUrl.ENDRE_OPPGAVERESERVASJON, {
       json: { oppgaveId, reserverTil },
     })
-    .json<ReservasjonStatus>();
+    .json<ReservasjonStatusDto>();
 
 export const flyttReservasjonSaksbehandlerSøk = (brukerIdent: string) =>
   kyExtended

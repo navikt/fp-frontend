@@ -7,30 +7,24 @@ import {
   createBarSeries,
   createToolboxWithFilename,
   formaterMånedÅr,
-  getAkselVariable,
   getStyle,
   ReactECharts,
 } from '@navikt/fp-los-felles';
+import type { FagsakYtelseType, OppgaverForFørsteStønadsdagUkeMåned } from '@navikt/fp-types';
 
-import type { OppgaverForForsteStonadsdagUkeMnd } from '../../typer/oppgaverForForsteStonadsdagUkeMndTsType';
+import { useLosKodeverk } from '../../data/useLosKodeverk';
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
 
-interface Koordinat {
-  x: string;
-  y: number;
-}
-
 interface Props {
   height: number;
-  oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdagUkeMnd[];
+  oppgaverPerForsteStonadsdag: OppgaverForFørsteStønadsdagUkeMåned[];
 }
 
 export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStonadsdag }: Props) => {
-  const koordinater = lagKoordinater(oppgaverPerForsteStonadsdag);
-  const data = lagDatastruktur(koordinater);
   const options = getStyle();
+  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
   return (
     <ReactECharts
       height={height}
@@ -62,36 +56,50 @@ export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStona
             formatter: (value: number) => value.toLocaleString('nb-NO'),
           },
         },
-        legend: {
-          show: false,
-        },
         series: [
-          createBarSeries({
-            data,
-            color: getAkselVariable('--ax-bg-info-moderate-pressed'),
-            itemStyle: {
-              borderColor: getAkselVariable('--ax-bg-accent-strong'),
+          createBarSeries(
+            {
+              name: fagsakYtelseTyper.find(b => b.kode === 'FP')?.navn,
+              data: lagDatastruktur(oppgaverPerForsteStonadsdag, 'FP'),
             },
-          }),
+            'accent',
+          ),
+          createBarSeries(
+            {
+              name: fagsakYtelseTyper.find(b => b.kode === 'SVP')?.navn,
+              data: lagDatastruktur(oppgaverPerForsteStonadsdag, 'SVP'),
+            },
+            'warning',
+          ),
+          createBarSeries(
+            {
+              name: fagsakYtelseTyper.find(b => b.kode === 'ES')?.navn,
+              data: lagDatastruktur(oppgaverPerForsteStonadsdag, 'ES'),
+            },
+            'success',
+          ),
         ],
       }}
     />
   );
 };
 
-const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdagUkeMnd[]): Koordinat[] =>
-  oppgaverPerForsteStonadsdag.map(o => ({
-    x: dayjs(o.førsteStønadsdag).startOf('month').format(ISO_DATE_FORMAT),
-    y: o.antall,
-  }));
-
-const lagDatastruktur = (koordinater: Koordinat[]): (number | string)[][] => {
-  const nyeKoordinater: Record<string, number> = koordinater.reduce(
-    (acc, { x, y }) => {
-      acc[x] = (acc[x] || 0) + y;
-      return acc;
-    },
-    {} as Record<string, number>,
-  );
+const lagDatastruktur = (
+  oppgaverPerForsteStonadsdag: OppgaverForFørsteStønadsdagUkeMåned[],
+  fagsakYtelseType: FagsakYtelseType,
+): [string, number][] => {
+  const nyeKoordinater = oppgaverPerForsteStonadsdag
+    .filter(o => o.fagsakYtelseType === fagsakYtelseType)
+    .map(o => ({
+      x: dayjs(o.førsteStønadsdag).startOf('month').format(ISO_DATE_FORMAT),
+      y: o.antall,
+    }))
+    .reduce(
+      (acc, { x, y }) => {
+        acc[x] = (acc[x] || 0) + y;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
   return Object.entries(nyeKoordinater).sort((a, b) => a[0].localeCompare(b[0]));
 };

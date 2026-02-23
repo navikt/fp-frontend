@@ -13,27 +13,24 @@ export type tjenester_avdelingsleder_dto_AvdelingDto = {
 export type avdelingsleder_innlogget_InnloggetNavAnsattDto = {
   brukernavn?: string;
   kanOppgavestyre?: boolean;
-  navn?: string;
+  navn: string;
 };
 
 export type tjenester_avdelingsleder_dto_InitLinksDto = {
-  avdelinger?: Array<tjenester_avdelingsleder_dto_AvdelingDto>;
-  innloggetBruker?: avdelingsleder_innlogget_InnloggetNavAnsattDto;
+  avdelinger: Array<tjenester_avdelingsleder_dto_AvdelingDto>;
+  innloggetBruker: avdelingsleder_innlogget_InnloggetNavAnsattDto;
 };
 
-export type statistikk_AktiveOgTilgjenglige = {
-  aktive?: number;
-  tidspunkt?: string;
-  tilgjengelige?: number;
-  ventende?: number;
+export type statistikk_KøStatistikkDto = {
+  aktive: number;
+  avsluttet?: number;
+  tidspunkt: string;
+  tilgjengelige: number;
+  ventende: number;
 };
 
 export type tjenester_felles_dto_SakslisteIdDto = {
   sakslisteId: number;
-};
-
-export type tjenester_avdelingsleder_dto_AvdelingEnhetDto = {
-  avdelingEnhet: string;
 };
 
 export type oppgave_BehandlingType = 'BT-002' | 'BT-003' | 'BT-004' | 'BT-006' | 'BT-007' | 'BT-008' | 'BT-009';
@@ -41,51 +38,64 @@ export type oppgave_BehandlingType = 'BT-002' | 'BT-003' | 'BT-004' | 'BT-006' |
 export type tjenester_avdelingsleder_nøkkeltall_dto_BehandlingVenteStatus = 'PÅ_VENT' | 'IKKE_PÅ_VENT';
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingFørsteUttakDto = {
-  antall?: number;
-  behandlingType?: oppgave_BehandlingType;
-  behandlingVenteStatus?: tjenester_avdelingsleder_nøkkeltall_dto_BehandlingVenteStatus;
+  antall: number;
+  behandlingType: oppgave_BehandlingType;
+  behandlingVenteStatus: tjenester_avdelingsleder_nøkkeltall_dto_BehandlingVenteStatus;
   førsteUttakMåned?: string;
+};
+
+export type tjenester_avdelingsleder_dto_AvdelingEnhetDto = {
+  avdelingEnhet: string;
 };
 
 export type oppgave_FagsakYtelseType = 'ES' | 'FP' | 'SVP';
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdeling = {
-  antall?: number;
-  behandlingType?: oppgave_BehandlingType;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  tilBehandling?: boolean;
+  antall: number;
+  behandlingType: oppgave_BehandlingType;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  tilBehandling: boolean;
 };
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingVentefristUtløperDto = {
-  antall?: number;
+  antall: number;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  fristUke: string;
+};
+
+export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaveEndringForAvdelingPerDato = {
+  avsluttet?: number;
+  behandlingType?: oppgave_BehandlingType;
   fagsakYtelseType?: oppgave_FagsakYtelseType;
-  fristUke?: string;
+  opprettet?: number;
+  statistikkDato?: string;
 };
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdelingPerDato = {
-  antall?: number;
-  behandlingType?: oppgave_BehandlingType;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  opprettetDato?: string;
+  antall: number;
+  behandlingType: oppgave_BehandlingType;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  opprettetDato: string;
+  statistikkDato: string;
 };
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForFørsteStønadsdagUkeMåned = {
-  antall?: number;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  førsteStønadsdag?: string;
+  antall: number;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  førsteStønadsdag: string;
 };
 
 export type tjenester_felles_dto_ReservasjonDto = {
   begrunnelse?: string;
-  behandlingType?: oppgave_BehandlingType;
+  behandlingType: oppgave_BehandlingType;
   flyttetAvIdent?: string;
   flyttetAvNavn?: string;
   flyttetTidspunkt?: string;
-  oppgaveId?: number;
-  oppgaveSaksNr?: string;
-  reservertAvIdent?: string;
-  reservertAvNavn?: string;
-  reservertTilTidspunkt?: string;
+  oppgaveId: number;
+  oppgaveSaksNr: string;
+  reservertAvIdent: string;
+  reservertAvNavn: string;
+  reservertTilTidspunkt: string;
 };
 
 export type tjenester_saksbehandler_oppgave_dto_OppgaveIdDto = {
@@ -341,14 +351,14 @@ export type vedtak_hendelser_behandling_los_LosBehandlingDto_LosTilbakeDto = {
 };
 
 export type tjenester_felles_dto_FlyttetReservasjonDto = {
-  begrunnelse?: string;
-  flyttetAvIdent?: string;
-  navn?: string;
-  tidspunkt?: string;
+  begrunnelse: string;
+  flyttetAvIdent: string;
+  navn: string;
+  tidspunkt: string;
 };
 
 export type tjenester_felles_dto_ReservasjonStatusDto = {
-  erReservert?: boolean;
+  erReservert: boolean;
   erReservertAvInnloggetBruker?: boolean;
   flyttetReservasjon?: tjenester_felles_dto_FlyttetReservasjonDto;
   reservertAvIdent?: string;
@@ -370,19 +380,19 @@ export type tjenester_saksbehandler_oppgave_dto_OppgaveFlyttingDto = {
 export type domene_typer_Fagsystem = 'FPSAK' | 'FPTILBAKE';
 
 export type tjenester_felles_dto_OppgaveDto = {
-  andreKriterier?: Array<oppgave_AndreKriterierType>;
-  behandlingId?: string;
-  behandlingsfrist?: string;
-  behandlingstype?: oppgave_BehandlingType;
-  erTilSaksbehandling?: boolean;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  id?: number;
-  navn?: string;
-  opprettetTidspunkt?: string;
-  personnummer?: string;
-  reservasjonStatus?: tjenester_felles_dto_ReservasjonStatusDto;
-  saksnummer?: string;
-  system?: domene_typer_Fagsystem;
+  andreKriterier: Array<oppgave_AndreKriterierType>;
+  behandlingId: string;
+  behandlingsfrist: string;
+  behandlingstype: oppgave_BehandlingType;
+  erTilSaksbehandling: boolean;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  id: number;
+  navn: string;
+  opprettetTidspunkt: string;
+  personnummer: string;
+  reservasjonStatus: tjenester_felles_dto_ReservasjonStatusDto;
+  saksnummer: string;
+  system: domene_typer_Fagsystem;
 };
 
 export type tjenester_felles_dto_OppgaveBehandlingStatus =
@@ -393,20 +403,20 @@ export type tjenester_felles_dto_OppgaveBehandlingStatus =
   | 'UNDER_ARBEID';
 
 export type tjenester_felles_dto_OppgaveDtoMedStatus = {
-  andreKriterier?: Array<oppgave_AndreKriterierType>;
-  behandlingId?: string;
-  behandlingsfrist?: string;
-  behandlingstype?: oppgave_BehandlingType;
-  erTilSaksbehandling?: boolean;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  id?: number;
-  navn?: string;
-  oppgaveBehandlingStatus?: tjenester_felles_dto_OppgaveBehandlingStatus;
-  opprettetTidspunkt?: string;
-  personnummer?: string;
-  reservasjonStatus?: tjenester_felles_dto_ReservasjonStatusDto;
-  saksnummer?: string;
-  system?: domene_typer_Fagsystem;
+  andreKriterier: Array<oppgave_AndreKriterierType>;
+  behandlingId: string;
+  behandlingsfrist: string;
+  behandlingstype: oppgave_BehandlingType;
+  erTilSaksbehandling: boolean;
+  fagsakYtelseType: oppgave_FagsakYtelseType;
+  id: number;
+  navn: string;
+  oppgaveBehandlingStatus: tjenester_felles_dto_OppgaveBehandlingStatus;
+  opprettetTidspunkt: string;
+  personnummer: string;
+  reservasjonStatus: tjenester_felles_dto_ReservasjonStatusDto;
+  saksnummer: string;
+  system: domene_typer_Fagsystem;
 };
 
 export type tjenester_felles_dto_AsyncPollingStatus = {
@@ -471,7 +481,6 @@ export type AktiveOgTilgjengligeOppgaverStatistikkForKøData = {
   path?: never;
   query: {
     sakslisteId: tjenester_felles_dto_SakslisteIdDto;
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
   };
   url: '/api/avdelingsleder/nøkkeltall/statistikk-oppgave-filter';
 };
@@ -480,7 +489,7 @@ export type AktiveOgTilgjengligeOppgaverStatistikkForKøResponses = {
   /**
    * default response
    */
-  default: Array<statistikk_AktiveOgTilgjenglige>;
+  default: Array<statistikk_KøStatistikkDto>;
 };
 
 export type AktiveOgTilgjengligeOppgaverStatistikkForKøResponse =
@@ -542,6 +551,25 @@ export type GetAlleVentefristerForAvdelingResponses = {
 
 export type GetAlleVentefristerForAvdelingResponse =
   GetAlleVentefristerForAvdelingResponses[keyof GetAlleVentefristerForAvdelingResponses];
+
+export type GetAntallOppgaverEndretForAvdelingPerDatoData = {
+  body?: never;
+  path?: never;
+  query: {
+    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+  };
+  url: '/api/avdelingsleder/nøkkeltall/behandlinger-opprettet-avsluttet';
+};
+
+export type GetAntallOppgaverEndretForAvdelingPerDatoResponses = {
+  /**
+   * default response
+   */
+  default: Array<tjenester_avdelingsleder_nøkkeltall_dto_OppgaveEndringForAvdelingPerDato>;
+};
+
+export type GetAntallOppgaverEndretForAvdelingPerDatoResponse =
+  GetAntallOppgaverEndretForAvdelingPerDatoResponses[keyof GetAntallOppgaverEndretForAvdelingPerDatoResponses];
 
 export type GetAntallOppgaverForAvdelingPerDatoData = {
   body?: never;

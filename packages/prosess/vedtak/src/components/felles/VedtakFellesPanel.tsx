@@ -105,10 +105,7 @@ export const VedtakFellesPanel = ({
   const erOpphor = isOpphor(behandlingsresultat.type);
 
   const skalViseLink = finnSkalViseLink(behandlingsresultat);
-  const kanBehandles =
-    !behandlingHenlagt &&
-    taskStatus?.status !== 'HALTED' &&
-    taskStatus?.status !== 'DELAYED';
+  const kanBehandles = !behandlingHenlagt && taskStatus?.status !== 'HALTED' && taskStatus?.status !== 'DELAYED';
 
   const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
     ['ENDRING_I_FORDELING_AV_YTELSEN', 'INGEN_ENDRING'],

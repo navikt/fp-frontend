@@ -2,7 +2,8 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import type { Oppgave } from '../typer/oppgaveTsType';
+import { type OppgaveDto } from '@navikt/fp-types';
+
 import * as stories from './OppgaveErReservertAvAnnenModal.stories';
 
 const { Default } = composeStories(stories);
@@ -21,7 +22,7 @@ const oppgaveForResevertAvAnnenModal = {
   saksnummer: '1234',
   personnummer: '1212',
   navn: 'Espen Utvikler',
-  system: 'SAK',
+  system: 'FPSAK',
   behandlingstype: 'BT-002',
   opprettetTidspunkt: '2019-01-01',
   behandlingsfrist: '2019-01-01',
@@ -29,7 +30,7 @@ const oppgaveForResevertAvAnnenModal = {
   erTilSaksbehandling: true,
   behandlingId: '1',
   andreKriterier: [],
-} satisfies Oppgave;
+} satisfies OppgaveDto;
 
 describe('OppgaveErReservertAvAnnenModal', () => {
   it('skal modal og lukke den ved trykk på Ok-knappen', async () => {

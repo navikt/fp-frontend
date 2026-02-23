@@ -7,13 +7,8 @@ import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import type { OppgaveFilterStatistikk } from '@navikt/fp-los-felles';
-import {
-  alleKodeverkLos,
-  getIntlDecorator,
-  urlEncodeNorskeBokstaver,
-  withQueryClient,
-} from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import type { KøStatistikkDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
@@ -31,9 +26,7 @@ const meta = {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.post(LosUrl.SLETT_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
-        http.get(urlEncodeNorskeBokstaver(LosUrl.OPPGAVE_FILTER_STATISTIKK), () =>
-          HttpResponse.json(OPPGAVE_FILTER_STATISTIKK),
-        ),
+        http.get(encodeURI(LosUrl.OPPGAVE_FILTER_STATISTIKK), () => HttpResponse.json(OPPGAVE_FILTER_STATISTIKK)),
       ],
     },
   },
@@ -125,7 +118,7 @@ const getTidspunktForAntallTimerSiden = (hours: number): string => {
   return dayjs().subtract(hours, 'hour').toISOString();
 };
 
-const OPPGAVE_FILTER_STATISTIKK: OppgaveFilterStatistikk[] = [
+const OPPGAVE_FILTER_STATISTIKK: KøStatistikkDto[] = [
   // gap på ~13 timer
   { tidspunkt: getTidspunktForAntallTimerSiden(43), aktive: 21, tilgjengelige: 5, ventende: 32 },
   { tidspunkt: getTidspunktForAntallTimerSiden(42), aktive: 21, tilgjengelige: 4, ventende: 31 },

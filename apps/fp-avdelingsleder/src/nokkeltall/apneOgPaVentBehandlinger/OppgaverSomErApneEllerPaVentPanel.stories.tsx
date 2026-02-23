@@ -8,7 +8,6 @@ import { http, HttpResponse } from 'msw';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
-import { BehandlingVenteStatus } from '../../kodeverk/behandlingVenteStatus';
 import { OppgaverSomErApneEllerPaVentPanel } from './OppgaverSomErApneEllerPaVentPanel';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -17,53 +16,53 @@ const withIntl = getIntlDecorator(messages);
 
 const OPPGAVER_ÅPNE_ELLER_PÅ_VENT = [
   {
-    behandlingVenteStatus: BehandlingVenteStatus.PA_VENT,
+    behandlingVenteStatus: 'PÅ_VENT',
     behandlingType: 'BT-002',
     førsteUttakMåned: dayjs().startOf('month').format(ISO_DATE_FORMAT),
     antall: 2,
   },
   {
-    behandlingVenteStatus: BehandlingVenteStatus.IKKE_PA_VENT,
+    behandlingVenteStatus: 'IKKE_PÅ_VENT',
     behandlingType: 'BT-002',
     førsteUttakMåned: dayjs().startOf('month').format(ISO_DATE_FORMAT),
     antall: 5,
   },
   {
-    behandlingVenteStatus: BehandlingVenteStatus.IKKE_PA_VENT,
+    behandlingVenteStatus: 'IKKE_PÅ_VENT',
     behandlingType: 'BT-004',
     førsteUttakMåned: dayjs().startOf('month').subtract(4, 'M').format(ISO_DATE_FORMAT),
     antall: 2,
   },
   {
-    behandlingVenteStatus: BehandlingVenteStatus.IKKE_PA_VENT,
+    behandlingVenteStatus: 'IKKE_PÅ_VENT',
     behandlingType: 'BT-003',
     antall: 2,
   },
   {
-    behandlingVenteStatus: BehandlingVenteStatus.PA_VENT,
+    behandlingVenteStatus: 'PÅ_VENT',
     behandlingType: 'BT-003',
     antall: 6,
   },
   {
-    behandlingVenteStatus: BehandlingVenteStatus.IKKE_PA_VENT,
+    behandlingVenteStatus: 'IKKE_PÅ_VENT',
     behandlingType: 'BT-004',
     førsteUttakMåned: null,
     antall: 5,
   },
   {
-    behandlingVenteStatus: BehandlingVenteStatus.PA_VENT,
+    behandlingVenteStatus: 'PÅ_VENT',
     behandlingType: 'BT-004',
     førsteUttakMåned: dayjs().startOf('month').subtract(4, 'M').format(ISO_DATE_FORMAT),
     antall: 6,
   },
   {
-    behandlingVenteStatus: BehandlingVenteStatus.PA_VENT,
+    behandlingVenteStatus: 'PÅ_VENT',
     behandlingType: 'BT-006',
     førsteUttakMåned: dayjs().startOf('month').subtract(10, 'M').format(ISO_DATE_FORMAT),
     antall: 3,
   },
   {
-    behandlingVenteStatus: BehandlingVenteStatus.IKKE_PA_VENT,
+    behandlingVenteStatus: 'IKKE_PÅ_VENT',
     behandlingType: 'BT-006',
     førsteUttakMåned: dayjs().startOf('month').subtract(10, 'M').format(ISO_DATE_FORMAT),
     antall: 5,
@@ -78,7 +77,7 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.HENT_OPPGAVER_APNE_ELLER_PA_VENT.replaceAll('ø', '%C3%B8').replaceAll('å', '%C3%A5'), () =>
+        http.get(encodeURI(LosUrl.HENT_OPPGAVER_APNE_ELLER_PA_VENT), () =>
           HttpResponse.json(OPPGAVER_ÅPNE_ELLER_PÅ_VENT),
         ),
       ],

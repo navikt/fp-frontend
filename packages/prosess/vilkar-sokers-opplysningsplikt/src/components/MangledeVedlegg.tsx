@@ -20,7 +20,8 @@ export const MangledeVedlegg = ({ søknad, arbeidsgiverOpplysningerPerId }: Prop
       <Label>
         <FormattedMessage id="MangledeVedlegg.Tittel" />
       </Label>
-      <Box marginBlock="space-16" asChild><List data-aksel-migrated-v8>
+      <Box marginBlock="space-16" asChild>
+        <List data-aksel-migrated-v8>
           {sorterteManglendeVedlegg.map(vedlegg => (
             <List.Item key={vedlegg.dokumentType + vedlegg.arbeidsgiverReferanse}>
               {vedlegg.dokumentTittel}
@@ -34,7 +35,8 @@ export const MangledeVedlegg = ({ søknad, arbeidsgiverOpplysningerPerId }: Prop
               )}
             </List.Item>
           ))}
-        </List></Box>
+        </List>
+      </Box>
     </Box>
   );
 };

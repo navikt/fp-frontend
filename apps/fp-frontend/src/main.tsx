@@ -9,6 +9,7 @@ import { initSentry, RestApiErrorProvider } from '@navikt/fp-app-felles';
 import { AppIndexWrapper } from './app/AppIndex';
 
 import 'dayjs/locale/nb.js';
+import './index.css';
 
 dayjs.locale('nb');
 

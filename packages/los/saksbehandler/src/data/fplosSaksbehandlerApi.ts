@@ -1,10 +1,15 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { ReservasjonStatus } from '@navikt/fp-los-felles';
-import type { AlleKodeverkLos, FagsakEnkel, SaksbehandlerProfil,SakslisteAvdeling } from '@navikt/fp-types';
-
-import type { Oppgave, OppgaveMedStatus } from '../typer/oppgaveTsType';
+import type {
+  AlleKodeverkLos,
+  FagsakEnkel,
+  OppgaveDto,
+  OppgaveDtoMedStatus,
+  ReservasjonStatusDto,
+  SaksbehandlerProfil,
+  SakslisteAvdeling,
+} from '@navikt/fp-types';
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -45,10 +50,10 @@ export const getBehandlingskøOppgaveAntall = (sakslisteId: number) =>
   kyExtended.get(LosUrl.BEHANDLINGSKO_OPPGAVE_ANTALL, { searchParams: { sakslisteId } }).json<number>();
 
 export const getReservasjonsstatus = (oppgaveId: number) =>
-  kyExtended.get(LosUrl.HENT_RESERVASJONSSTATUS, { searchParams: { oppgaveId } }).json<ReservasjonStatus>();
+  kyExtended.get(LosUrl.HENT_RESERVASJONSSTATUS, { searchParams: { oppgaveId } }).json<ReservasjonStatusDto>();
 
 export const getOppgaverTilBehandling = (sakslisteId: number, oppgaveIder?: string) =>
-  kyExtended.get<Oppgave[]>(LosUrl.OPPGAVER_TIL_BEHANDLING, {
+  kyExtended.get<OppgaveDto[]>(LosUrl.OPPGAVER_TIL_BEHANDLING, {
     searchParams: oppgaveIder
       ? {
           sakslisteId,
@@ -64,7 +69,7 @@ export const getOppgaverForFagsaker = (saksnummer: string[]) =>
     .get(LosUrl.OPPGAVER_FOR_FAGSAKER, {
       searchParams: { saksnummerListe: saksnummer.join(',') },
     })
-    .json<Oppgave[]>();
+    .json<OppgaveDto[]>();
 
 export const oppgaverForFagsakerOptions = (saksnummer: string[]) =>
   queryOptions({
@@ -89,7 +94,7 @@ export const sakslisteOptions = () =>
 export const reserverteOppgaverOptions = () =>
   queryOptions({
     queryKey: [LosUrl.RESERVERTE_OPPGAVER],
-    queryFn: () => kyExtended.get(LosUrl.RESERVERTE_OPPGAVER).json<Oppgave[]>(),
+    queryFn: () => kyExtended.get(LosUrl.RESERVERTE_OPPGAVER).json<OppgaveDto[]>(),
   });
 
 export const behandlendeOppgaverOptions = (kunAktive: boolean) =>
@@ -98,7 +103,7 @@ export const behandlendeOppgaverOptions = (kunAktive: boolean) =>
     queryFn: () =>
       kyExtended
         .get(LosUrl.TIDLIGERE_RESERVERTE, { searchParams: { kunAktive: kunAktive } })
-        .json<OppgaveMedStatus[]>(),
+        .json<OppgaveDtoMedStatus[]>(),
   });
 
 export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>
@@ -108,18 +113,18 @@ export const opphevReservasjon = (oppgaveId: number) =>
   kyExtended.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, { json: { oppgaveId } });
 
 export const forlengReservasjonPost = (oppgaveId: number) =>
-  kyExtended.post(LosUrl.FORLENG_OPPGAVERESERVASJON, { json: { oppgaveId } }).json<ReservasjonStatus>();
+  kyExtended.post(LosUrl.FORLENG_OPPGAVERESERVASJON, { json: { oppgaveId } }).json<ReservasjonStatusDto>();
 
 export const endreReservasjonPost = (oppgaveId: number, reserverTil: string) =>
-  kyExtended.post(LosUrl.ENDRE_OPPGAVERESERVASJON, { json: { oppgaveId, reserverTil } }).json<ReservasjonStatus>();
+  kyExtended.post(LosUrl.ENDRE_OPPGAVERESERVASJON, { json: { oppgaveId, reserverTil } }).json<ReservasjonStatusDto>();
 
 export const flyttReservasjonPost = (oppgaveId: number, brukerIdent: string, begrunnelse: string) =>
   kyExtended
     .post(LosUrl.FLYTT_RESERVASJON, { json: { oppgaveId, brukerIdent, begrunnelse } })
-    .json<ReservasjonStatus>();
+    .json<ReservasjonStatusDto>();
 
 export const reserverOppgavePost = (oppgaveId: number) =>
-  kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: { oppgaveId } }).json<ReservasjonStatus>();
+  kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: { oppgaveId } }).json<ReservasjonStatusDto>();
 
 export const flyttReservasjonSaksbehandlerSøkPost = (brukerIdent: string) =>
   kyExtended.post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, { json: { brukerIdent } }).json<SaksbehandlerProfil>();

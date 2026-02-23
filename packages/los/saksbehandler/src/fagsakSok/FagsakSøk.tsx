@@ -2,14 +2,13 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, VStack } from '@navikt/ds-react';
 
-import type { FagsakEnkel } from '@navikt/fp-types';
+import { type FagsakEnkel, type OppgaveDto } from '@navikt/fp-types';
 
-import type { Oppgave } from '../typer/oppgaveTsType';
 import { SøkForm, type SøkFormValues } from './form/SøkForm';
 import { PersonInfo } from './person/PersonInfo';
 import { SøkResultat } from './resultat/SøkResultat';
 
-const skalViseListe = (fagsaker: FagsakEnkel[], fagsakOppgaver: Oppgave[]): boolean => {
+const skalViseListe = (fagsaker: FagsakEnkel[], fagsakOppgaver: OppgaveDto[]): boolean => {
   return (
     fagsaker.length > 1 ||
     (fagsaker.length === 1 &&
@@ -19,11 +18,11 @@ const skalViseListe = (fagsaker: FagsakEnkel[], fagsakOppgaver: Oppgave[]): bool
 
 interface Props {
   fagsaker: FagsakEnkel[];
-  fagsakOppgaver: Oppgave[];
+  fagsakOppgaver: OppgaveDto[];
   searchFagsakCallback: (values: SøkFormValues) => void;
   searchResultReceived: boolean;
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
-  selectOppgaveCallback: (oppgave: Oppgave) => void;
+  selectOppgaveCallback: (oppgave: OppgaveDto) => void;
   searchStarted: boolean;
   searchResultAccessDenied?: {
     feilmelding?: string;

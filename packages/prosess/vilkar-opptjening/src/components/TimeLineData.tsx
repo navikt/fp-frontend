@@ -37,7 +37,8 @@ export const TimeLineData = ({
               onClick={velgForrigePeriode}
               variant="secondary"
               type="button"
-              title={intl.formatMessage({ id: 'TimeLineData.prevPeriod' })}>
+              title={intl.formatMessage({ id: 'TimeLineData.prevPeriod' })}
+            >
               <FormattedMessage id="TimeLineData.prevPeriodShort" />
             </Button>
             <Button
@@ -48,7 +49,8 @@ export const TimeLineData = ({
               variant="secondary"
               type="button"
               title={intl.formatMessage({ id: 'TimeLineData.nextPeriod' })}
-              iconPosition="right">
+              iconPosition="right"
+            >
               <FormattedMessage id="TimeLineData.nextPeriodShort" />
             </Button>
             <Button
@@ -58,7 +60,8 @@ export const TimeLineData = ({
               onClick={lukkPeriode}
               variant="tertiary"
               type="button"
-              title={intl.formatMessage({ id: 'TimeLineData.lukkPeriode' })} />
+              title={intl.formatMessage({ id: 'TimeLineData.lukkPeriode' })}
+            />
           </HStack>
         </HStack>
         <BodyShort size="small">

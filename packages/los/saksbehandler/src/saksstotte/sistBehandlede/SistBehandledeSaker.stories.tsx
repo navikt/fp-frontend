@@ -5,9 +5,9 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import { type OppgaveDtoMedStatus } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
-import { type OppgaveMedStatus } from '../../typer/oppgaveTsType';
 import { SistBehandledeSaker } from './SistBehandledeSaker';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -48,7 +48,7 @@ export const Default: Story = {
                 erReservert: true,
                 reservertAvNavn: 'Ola Nordmann',
               },
-            } as OppgaveMedStatus,
+            } as OppgaveDtoMedStatus,
           ]),
         ),
       ],
@@ -61,7 +61,7 @@ export const IngenBehandlinger: Story = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json<OppgaveMedStatus[]>([])),
+        http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json<OppgaveDtoMedStatus[]>([])),
       ],
     },
   },

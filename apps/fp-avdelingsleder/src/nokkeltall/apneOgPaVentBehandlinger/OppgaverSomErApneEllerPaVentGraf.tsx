@@ -7,13 +7,10 @@ import {
   createBarSeries,
   createToolboxWithFilename,
   formaterMånedÅr,
-  getAkselVariable,
   getStyle,
   ReactECharts,
 } from '@navikt/fp-los-felles';
-
-import { BehandlingVenteStatus } from '../../kodeverk/behandlingVenteStatus';
-import type { OppgaverSomErApneEllerPaVent } from '../../typer/oppgaverSomErApneEllerPaVentTsType';
+import { type NøkkeltallBehandlingFørsteUttakDto } from '@navikt/fp-types';
 
 const UKJENT_DATO = 'UKJENT_DATO';
 
@@ -24,7 +21,7 @@ interface KoordinatDatoEllerUkjent {
 
 interface Props {
   height: number;
-  oppgaverApneEllerPaVent: OppgaverSomErApneEllerPaVent[];
+  oppgaverApneEllerPaVent: NøkkeltallBehandlingFørsteUttakDto[];
 }
 
 export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVent }: Props) => {
@@ -32,10 +29,10 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
   const ukjentTekst = intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.UkjentDato' });
 
   const oppgaverPaVentPerDato = finnAntallPerDato(
-    oppgaverApneEllerPaVent.filter(o => o.behandlingVenteStatus === BehandlingVenteStatus.PA_VENT),
+    oppgaverApneEllerPaVent.filter(o => o.behandlingVenteStatus === 'PÅ_VENT'),
   );
   const oppgaverIkkePaVentPerDato = finnAntallPerDato(
-    oppgaverApneEllerPaVent.filter(o => o.behandlingVenteStatus === BehandlingVenteStatus.IKKE_PA_VENT),
+    oppgaverApneEllerPaVent.filter(o => o.behandlingVenteStatus === 'IKKE_PÅ_VENT'),
   );
 
   const maaneder: string[] = finnMaaneder(oppgaverApneEllerPaVent);
@@ -97,29 +94,27 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
           },
         },
         series: [
-          createBarSeries({
-            name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.IkkePaVent' }),
-            data: koordinaterIkkePaVent,
-            color: getAkselVariable('--ax-bg-success-moderate-pressed'),
-            itemStyle: {
-              borderColor: getAkselVariable('--ax-bg-success-strong'),
+          createBarSeries(
+            {
+              name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.IkkePaVent' }),
+              data: koordinaterIkkePaVent,
             },
-          }),
-          createBarSeries({
-            name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.PaVent' }),
-            data: koordinaterPaVent,
-            color: getAkselVariable('--ax-bg-accent-moderate-pressed'),
-            itemStyle: {
-              borderColor: getAkselVariable('--ax-bg-accent-strong'),
+            'success',
+          ),
+          createBarSeries(
+            {
+              name: intl.formatMessage({ id: 'OppgaverSomErApneEllerPaVentGraf.PaVent' }),
+              data: koordinaterPaVent,
             },
-          }),
+            'accent',
+          ),
         ],
       }}
     />
   );
 };
 
-const finnMaaneder = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent[]): string[] => {
+const finnMaaneder = (oppgaverSomErApneEllerPaVent: NøkkeltallBehandlingFørsteUttakDto[]): string[] => {
   const alledatoer = new Set<string>(
     oppgaverSomErApneEllerPaVent
       .filter(oppgave => !!oppgave.førsteUttakMåned)
@@ -137,7 +132,7 @@ const finnMaaneder = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent
 };
 
 const finnAntallPerDato = (
-  oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent[],
+  oppgaverSomErApneEllerPaVent: NøkkeltallBehandlingFørsteUttakDto[],
 ): KoordinatDatoEllerUkjent[] => {
   const antallPerDatoOgUkjent = oppgaverSomErApneEllerPaVent.reduce(
     (acc, oppgave) => {

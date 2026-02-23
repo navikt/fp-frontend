@@ -3,12 +3,14 @@ import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { ToggleGroup, VStack } from '@navikt/ds-react';
 import { ToggleGroupItem } from '@navikt/ds-react/ToggleGroup';
+import type { AkselColor } from '@navikt/ds-react/types/theme';
 import { capitalizeFirstLetter, createIntl, timeFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { getAkselVariable, getStyle } from '../echartUtils';
+import type { KøStatistikkDto } from '@navikt/fp-types';
+
+import { createLineSeries, getStyle } from '../echartUtils';
 import { ReactECharts } from '../ReactECharts';
-import type { OppgaveFilterStatistikk } from '../typer/oppgaveFilterStatistikk';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -19,37 +21,38 @@ enum Tidsintervall {
   UKE = 'uke',
   MÅNED = 'måned',
 }
-
+type SerieConfig = { akselColor: AkselColor; data: (string | number)[]; name: string };
 interface Props {
-  aktiveOgLedigeTidslinje: OppgaveFilterStatistikk[];
+  aktiveOgLedigeTidslinje: KøStatistikkDto[];
 }
 
 export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
-  const height = 400;
-
-  const [tidsintervall, setTidsintervall] = useState<Tidsintervall>(Tidsintervall.UKE);
+  const [tidsintervall, setTidsintervall] = useState(Tidsintervall.UKE);
   const filtrertTidslinje = filtererTidslinjeBasertPåValgIntervall(aktiveOgLedigeTidslinje, tidsintervall);
-  const sortertOgFiltrertTidslinje = filtrertTidslinje.toSorted(
-    (a, b) => new Date(a.tidspunkt).getTime() - new Date(b.tidspunkt).getTime(),
-  );
-  // Bruk sampling på tidspunkter og data
-  const granularitet = 40;
+  const sortertOgFiltrertTidslinje = filtrertTidslinje.toSorted(sorterKøStatistikkPåTidspunkt);
+
   const sampletTidspunkter = reduserDatapunkterTilSpesifisertMaxAntall(
     sortertOgFiltrertTidslinje.map(o => o.tidspunkt),
-    granularitet,
   );
-  const sampletVentendeData = reduserDatapunkterTilSpesifisertMaxAntall(
-    sortertOgFiltrertTidslinje.map(o => o.ventende),
-    granularitet,
-  );
-  const sampletLedigeData = reduserDatapunkterTilSpesifisertMaxAntall(
-    sortertOgFiltrertTidslinje.map(o => o.tilgjengelige),
-    granularitet,
-  );
-  const sampletReserverteData = reduserDatapunkterTilSpesifisertMaxAntall(
-    sortertOgFiltrertTidslinje.map(o => o.aktive - o.tilgjengelige),
-    granularitet,
-  );
+
+  const serieConfig: SerieConfig[] = [
+    {
+      name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.PaVent' }),
+      akselColor: 'accent',
+      data: reduserDatapunkterTilSpesifisertMaxAntall(sortertOgFiltrertTidslinje.map(o => o.ventende)),
+    },
+    {
+      name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Reserverte' }),
+      akselColor: 'warning',
+      data: reduserDatapunkterTilSpesifisertMaxAntall(sortertOgFiltrertTidslinje.map(o => o.aktive - o.tilgjengelige)),
+    },
+    {
+      name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Ledig' }),
+      akselColor: 'success',
+      data: reduserDatapunkterTilSpesifisertMaxAntall(sortertOgFiltrertTidslinje.map(o => o.tilgjengelige)),
+    },
+  ];
+
   const options = getStyle();
 
   return (
@@ -68,7 +71,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
         </ToggleGroup>
         <ReactECharts
           key={`chart-${aktiveOgLedigeTidslinje.length}`}
-          height={height}
+          height={400}
           option={{
             ...options,
             grid: {
@@ -114,32 +117,15 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
               name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.yAkse' }),
               scale: true,
             },
-            series: [
-              {
-                name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.PaVent' }),
-                type: 'line',
-                data: sampletVentendeData,
-                stack: 'total',
-                areaStyle: {},
-                color: getAkselVariable('--ax-bg-accent-moderate-pressed'),
-              },
-              {
-                name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Reserverte' }),
-                type: 'line',
-                data: sampletReserverteData,
-                stack: 'total',
-                areaStyle: {},
-                color: getAkselVariable('--ax-bg-warning-moderate-hover'),
-              },
-              {
-                name: intl.formatMessage({ id: 'AktiveOgTilgjengeligeOppgaverGraf.Ledig' }),
-                type: 'line',
-                data: sampletLedigeData,
-                stack: 'total',
-                areaStyle: {},
-                color: getAkselVariable('--ax-bg-success-moderate-pressed'),
-              },
-            ],
+            series: serieConfig.map(({ name, akselColor, data }) =>
+              createLineSeries(
+                {
+                  name,
+                  data,
+                },
+                akselColor,
+              ),
+            ),
           }}
         />
       </VStack>
@@ -148,7 +134,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
 };
 
 const filtererTidslinjeBasertPåValgIntervall = (
-  aktiveOgLedigeTidslinje: OppgaveFilterStatistikk[],
+  aktiveOgLedigeTidslinje: KøStatistikkDto[],
   timeRange: Tidsintervall,
 ) => {
   return aktiveOgLedigeTidslinje.filter(o => {
@@ -168,7 +154,7 @@ const filtererTidslinjeBasertPåValgIntervall = (
   });
 };
 
-const reduserDatapunkterTilSpesifisertMaxAntall = (data: (string | number)[], maxPoints: number) => {
+const reduserDatapunkterTilSpesifisertMaxAntall = (data: (string | number)[], maxPoints: number = 40) => {
   if (data.length <= maxPoints) {
     return data;
   }
@@ -176,3 +162,6 @@ const reduserDatapunkterTilSpesifisertMaxAntall = (data: (string | number)[], ma
   const step = Math.ceil(data.length / maxPoints);
   return data.filter((_, index) => index % step === 0);
 };
+
+const sorterKøStatistikkPåTidspunkt = (a: KøStatistikkDto, b: KøStatistikkDto) =>
+  new Date(a.tidspunkt).getTime() - new Date(b.tidspunkt).getTime();

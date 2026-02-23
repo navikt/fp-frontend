@@ -4,16 +4,14 @@ import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import type { ReservasjonStatus } from '@navikt/fp-los-felles';
-
-import type { Oppgave } from '../typer/oppgaveTsType';
+import { type OppgaveDto, type ReservasjonStatusDto } from '@navikt/fp-types';
 
 import styles from './oppgaveErReservertAvAnnenModal.module.css';
 
 type Props = Readonly<{
-  lukkErReservertModalOgOpneOppgave: (oppgave: Oppgave) => void;
-  oppgave: Oppgave;
-  reservasjonStatus: ReservasjonStatus;
+  lukkErReservertModalOgOpneOppgave: (oppgave: OppgaveDto) => void;
+  oppgave: OppgaveDto;
+  reservasjonStatus: ReservasjonStatusDto;
 }>;
 
 /**

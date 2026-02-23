@@ -67,12 +67,7 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
                 toDate={dayjs(periode.tom, ISO_DATE_FORMAT).subtract(1, 'day').toDate()}
               />
               {perioder && (
-                <Box
-                  background="neutral-moderate"
-                  padding="space-8"
-                  borderRadius="8"
-                  style={{ width: 'max-content' }}
-                >
+                <Box background="neutral-moderate" padding="space-8" borderRadius="8" style={{ width: 'max-content' }}>
                   <VStack gap="space-4">
                     <Label>
                       <FormattedMessage id="DelOppPeriodeModal.NyePeriodeLabel" />

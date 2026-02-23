@@ -6,17 +6,16 @@ import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, VStack } 
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import type { ReservasjonStatus } from '@navikt/fp-los-felles';
+import { type OppgaveDto, type ReservasjonStatusDto } from '@navikt/fp-types';
 
-import type { Oppgave } from '../../../typer/oppgaveTsType';
 import { OppgaveLabels } from '../OppgaveLabels';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 
 import styles from './ReservertOppgaveRad.module.css';
 
 interface Props {
-  oppgave: Oppgave;
-  reserverOppgave: (oppgave: Oppgave) => void;
+  oppgave: OppgaveDto;
+  reserverOppgave: (oppgave: OppgaveDto) => void;
   brukernavn: string;
 }
 
@@ -29,7 +28,7 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
   const refPopover = useRef<HTMLDivElement | null>(null);
   const refCopyButton = useRef<HTMLDivElement | null>(null);
 
-  const goToFagsak = (event: React.MouseEvent | React.KeyboardEvent, valgtOppgave: Oppgave) => {
+  const goToFagsak = (event: React.MouseEvent | React.KeyboardEvent, valgtOppgave: OppgaveDto) => {
     const erMenyKlikk = refMeny.current?.contains(event.target as Node);
     const erPopoverKlikk = refPopover.current?.contains(event.target as Node);
     const erCopyButtonKlikk = refCopyButton.current?.contains(event.target as Node);
@@ -92,7 +91,10 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
   );
 };
 
-const lagFlyttetReservasjonPopover = (oppgaveStatus: ReservasjonStatus, brukernavn: string): ReactNode | undefined => {
+const lagFlyttetReservasjonPopover = (
+  oppgaveStatus: ReservasjonStatusDto,
+  brukernavn: string,
+): ReactNode | undefined => {
   const { flyttetReservasjon } = oppgaveStatus;
   if (!flyttetReservasjon) {
     return undefined;
@@ -135,7 +137,7 @@ const lagFlyttetReservasjonPopover = (oppgaveStatus: ReservasjonStatus, brukerna
   );
 };
 
-const NotatKnapp = ({ oppgave, brukernavn }: { oppgave: Oppgave; brukernavn: string }) => {
+const NotatKnapp = ({ oppgave, brukernavn }: { oppgave: OppgaveDto; brukernavn: string }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [openState, setOpenState] = useState(false);
   return (
