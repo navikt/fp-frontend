@@ -1,3 +1,0 @@
-import type { foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType } from './fpsak.gen';
-
-export type FamilieHendelseType = foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType;

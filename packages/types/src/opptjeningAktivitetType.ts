@@ -1,3 +1,0 @@
-import type { foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType } from './fpsak.gen';
-
-export type OpptjeningAktivitetType = foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
