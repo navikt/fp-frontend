@@ -14,8 +14,8 @@ import {
   type ReservasjonStatusDto,
   type SaksbehandlereOgSaksbehandlerGrupper,
   type SaksbehandlerProfil,
-  type SakslisteAvdeling,
   type SakslisteDto,
+  type SakslisteLagreDto,
 } from '@navikt/fp-types';
 
 const kyExtended = ky.extend({
@@ -97,7 +97,7 @@ export const sakslisterForAvdelingOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING, avdelingEnhet],
     queryFn: () =>
-      kyExtended.get(LosUrl.SAKSLISTER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<SakslisteAvdeling[]>(),
+      kyExtended.get(LosUrl.SAKSLISTER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<SakslisteDto[]>(),
     initialData: [],
   });
 
@@ -189,7 +189,7 @@ export const reservasjonerForAvdelingOptions = (avdelingEnhet: string) =>
 export const opprettNySaksliste = (avdelingEnhet: string) =>
   kyExtended.post(LosUrl.OPPRETT_NY_SAKSLISTE, { json: { avdelingEnhet } }).json<{ sakslisteId: string }>();
 
-export const lagreUtvalgskriterierForKø = (sakslisteDto: SakslisteDto) =>
+export const lagreUtvalgskriterierForKø = (sakslisteDto: SakslisteLagreDto) =>
   kyExtended.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, { json: sakslisteDto }).json();
 
 export const lagreSakslisteSaksbehandler = (

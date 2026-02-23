@@ -6,13 +6,13 @@ import { BodyShort, Box, Checkbox, ExpansionCard, Label, Table, VStack } from '@
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { type SaksbehandlerGruppeDto, type SaksbehandlerProfil, type SakslisteAvdeling } from '@navikt/fp-types';
+import { type SaksbehandlerGruppeDto, type SaksbehandlerProfil, type SakslisteDto } from '@navikt/fp-types';
 
 import { grupperOptions } from '../../data/fplosAvdelingslederApi';
 import { type FormValues, ValgAvSaksbehandlere } from './ValgAvSaksbehandlere';
 
 interface Props {
-  valgtSaksliste: SakslisteAvdeling;
+  valgtSaksliste: SakslisteDto;
   avdelingensSaksbehandlere: SaksbehandlerProfil[];
   valgtAvdelingEnhet: string;
 }
@@ -149,7 +149,7 @@ export const SaksbehandlereForSakslisteForm = ({
   );
 };
 
-const antallTilknyttetSaksliste = (saksliste: SakslisteAvdeling, gruppe: SaksbehandlerGruppeDto) => {
+const antallTilknyttetSaksliste = (saksliste: SakslisteDto, gruppe: SaksbehandlerGruppeDto) => {
   let matchCount = 0;
   for (const ident of saksliste.saksbehandlere.map(sb => sb.brukerIdent)) {
     const matches = gruppe.saksbehandlere.filter(saksbehandler => saksbehandler.brukerIdent === ident);

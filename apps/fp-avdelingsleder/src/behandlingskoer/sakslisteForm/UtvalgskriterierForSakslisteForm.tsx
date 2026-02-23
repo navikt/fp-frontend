@@ -13,8 +13,8 @@ import type {
   LosBehandlingType,
   LosFagsakYtelseType,
   Periodefilter,
-  SakslisteAvdeling,
   SakslisteDto,
+  SakslisteLagreDto,
 } from '@navikt/fp-types';
 
 import { lagreUtvalgskriterierForKø, LosUrl } from '../../data/fplosAvdelingslederApi';
@@ -51,7 +51,7 @@ export type FormValues = {
 export type TilBeslutter = 'TA_MED_ALLE' | 'TA_MED' | 'FJERN';
 
 interface Props {
-  valgtSaksliste: SakslisteAvdeling;
+  valgtSaksliste: SakslisteDto;
   valgtAvdelingEnhet: string;
 }
 
@@ -64,7 +64,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
   });
 
   const { mutate: lagreSaksliste, isPending } = useMutation({
-    mutationFn: (valuesToStore: SakslisteDto) => lagreUtvalgskriterierForKø(valuesToStore),
+    mutationFn: (valuesToStore: SakslisteLagreDto) => lagreUtvalgskriterierForKø(valuesToStore),
   });
 
   const lagre = (values: FormValues) => {
@@ -135,7 +135,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
   );
 };
 
-const buildDefaultValues = (valgtSaksliste: SakslisteAvdeling): FormValues => {
+const buildDefaultValues = (valgtSaksliste: SakslisteDto): FormValues => {
   return {
     navn: valgtSaksliste.navn,
     sortering: {
@@ -163,7 +163,7 @@ const fraAndreKriterierTilBeslutter = (andreKriterier?: AndreKriterieDto): TilBe
   }
 };
 
-const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslisteId: number): SakslisteDto => {
+const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslisteId: number): SakslisteLagreDto => {
   const { tilBeslutter, andreKriterie, sortering, ...rest } = values;
   const inkluder = andreKriterie.inkluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   const ekskluder = andreKriterie.ekskluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');

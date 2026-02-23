@@ -8,7 +8,7 @@ import {
   type NavAnsatt,
   type OppgaveDto,
   type OppgaveDtoMedStatus,
-  type SakslisteAvdeling,
+  type SakslisteDto,
 } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
@@ -51,7 +51,7 @@ const SAKSLISTER = [
       ekskluder: ['TIL_BESLUTTER'],
     },
   },
-] satisfies SakslisteAvdeling[];
+] satisfies SakslisteDto[];
 
 const OPPGAVER_TIL_BEHANDLING = [
   {

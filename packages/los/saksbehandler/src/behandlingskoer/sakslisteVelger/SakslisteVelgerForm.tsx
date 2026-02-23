@@ -17,7 +17,7 @@ import { RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { LosKodeverkMedNavn, SakslisteAvdeling } from '@navikt/fp-types';
+import type { LosKodeverkMedNavn, SakslisteDto } from '@navikt/fp-types';
 
 import { getValueFromLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
@@ -25,7 +25,7 @@ import { useLosKodeverk } from '../../data/useLosKodeverk';
 import styles from './sakslisteVelgerForm.module.css';
 
 const getDefaultSaksliste = (
-  sorterteSakslister: SakslisteAvdeling[],
+  sorterteSakslister: SakslisteDto[],
   removeValueFromLocalStorage: (key: string) => void,
 ): number | undefined => {
   const lagretSakslisteId = getValueFromLocalStorage('sakslisteId');
@@ -40,7 +40,7 @@ const getDefaultSaksliste = (
 };
 
 const getFormDefaultValues = (
-  sorterteSakslister: SakslisteAvdeling[],
+  sorterteSakslister: SakslisteDto[],
   removeValueFromLocalStorage: (key: string) => void,
 ): { sakslisteId: string | undefined } => {
   if (sorterteSakslister.length === 0) {
@@ -54,7 +54,7 @@ const getFormDefaultValues = (
   };
 };
 
-const AndreKriterier = ({ saksliste }: { saksliste?: SakslisteAvdeling }): ReactNode => {
+const AndreKriterier = ({ saksliste }: { saksliste?: SakslisteDto }): ReactNode => {
   const intl = useIntl();
   const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
 
@@ -156,7 +156,7 @@ const finnDatoMåned = (antallMåneder: number, erStartenAvMåned: boolean) => {
 const getSorteringsInformasjon = (
   intl: IntlShape,
   køSorteringTyper: LosKodeverkMedNavn<'KøSortering'>[],
-  saksliste?: SakslisteAvdeling,
+  saksliste?: SakslisteDto,
 ): ReactNode => {
   if (!saksliste?.sortering) {
     return '';
@@ -205,7 +205,7 @@ type FormValues = {
 };
 
 interface Props {
-  sakslister: SakslisteAvdeling[];
+  sakslister: SakslisteDto[];
   setValgtSakslisteId: (sakslisteId: number) => void;
   fetchAntallOppgaver: (sakslisteId: number) => void;
   setValueInLocalStorage: (key: string, value: string) => void;

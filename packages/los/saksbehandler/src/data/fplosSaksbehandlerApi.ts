@@ -8,7 +8,7 @@ import type {
   OppgaveDtoMedStatus,
   ReservasjonStatusDto,
   SaksbehandlerProfil,
-  SakslisteAvdeling,
+  SakslisteDto,
 } from '@navikt/fp-types';
 
 const kyExtended = ky.extend({
@@ -88,7 +88,7 @@ export const losKodeverkOptions = () =>
 export const sakslisteOptions = () =>
   queryOptions({
     queryKey: [LosUrl.SAKSLISTE],
-    queryFn: () => kyExtended.get(LosUrl.SAKSLISTE).json<SakslisteAvdeling[]>(),
+    queryFn: () => kyExtended.get(LosUrl.SAKSLISTE).json<SakslisteDto[]>(),
   });
 
 export const reserverteOppgaverOptions = () =>

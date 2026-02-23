@@ -5,7 +5,7 @@ import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Detail, HStack, Label, Link, Table, VStack } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { LosKodeverkMedNavn, SakslisteAvdeling } from '@navikt/fp-types';
+import type { LosKodeverkMedNavn, SakslisteDto } from '@navikt/fp-types';
 
 import { LosUrl, slettSaksliste } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
@@ -42,7 +42,7 @@ const formatBehandlingstyper = (
     .join(', ');
 };
 
-const reserverteOppgaver = (saksliste: SakslisteAvdeling) => {
+const reserverteOppgaver = (saksliste: SakslisteDto) => {
   if (saksliste.gjeldendeStatistikk === undefined) {
     return '-';
   }
@@ -50,7 +50,7 @@ const reserverteOppgaver = (saksliste: SakslisteAvdeling) => {
 };
 
 interface Props {
-  sakslister: SakslisteAvdeling[];
+  sakslister: SakslisteDto[];
   setValgtSakslisteId: (sakslisteId?: number) => void;
   valgtSakslisteId?: number;
   valgtAvdelingEnhet: string;
@@ -73,7 +73,7 @@ export const GjeldendeSakslisterTabell = ({
   const queryClient = useQueryClient();
   const intl = useIntl();
 
-  const [valgtSakslisteForSletting, setValgtSakslisteForSletting] = useState<SakslisteAvdeling>();
+  const [valgtSakslisteForSletting, setValgtSakslisteForSletting] = useState<SakslisteDto>();
   const tabRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const behandlingTyper = useLosKodeverk('BehandlingType');
@@ -99,7 +99,7 @@ export const GjeldendeSakslisterTabell = ({
     }
   };
 
-  const fjernSakslisteOgSkjulModal = (saksliste: SakslisteAvdeling): void => {
+  const fjernSakslisteOgSkjulModal = (saksliste: SakslisteDto): void => {
     setValgtSakslisteForSletting(undefined);
     fjernSaksliste({ sakslisteId: saksliste.sakslisteId });
   };
