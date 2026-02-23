@@ -2,7 +2,7 @@ import type {
   foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør,
   tjenester_behandling_historikk_HistorikkInnslagDokumentLinkDto,
   tjenester_behandling_historikk_HistorikkinnslagDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type Historikkinnslag = tjenester_behandling_historikk_HistorikkinnslagDto;
 

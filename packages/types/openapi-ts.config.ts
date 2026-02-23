@@ -8,8 +8,7 @@ export default defineConfig({
       postProcess: ['prettier', 'eslint'],
       path: 'src/',
       fileName: {
-        name: 'apiDtoGenerert',
-        suffix: null,
+        name: 'fpsak',
       },
     },
     {
@@ -17,8 +16,7 @@ export default defineConfig({
       postProcess: ['prettier', 'eslint'],
       path: 'src/los',
       fileName: {
-        name: 'fplosDtoGenerert',
-        suffix: null,
+        name: 'fplos',
       },
     },
   ],

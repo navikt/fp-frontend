@@ -1,4 +1,4 @@
-import type { foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling } from './apiDtoGenerert';
+import type { foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling } from './fpsak.gen';
 
 export type TilbakekrevingVidereBehandling =
   foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling;

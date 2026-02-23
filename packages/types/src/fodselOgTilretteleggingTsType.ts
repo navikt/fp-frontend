@@ -6,7 +6,7 @@ import type {
   tjenester_behandling_svp_SvpTilretteleggingDatoDto,
   tjenester_behandling_svp_SvpTilretteleggingDto,
   tjenester_behandling_svp_VelferdspermisjonDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type Permisjon = tjenester_behandling_svp_VelferdspermisjonDto;
 

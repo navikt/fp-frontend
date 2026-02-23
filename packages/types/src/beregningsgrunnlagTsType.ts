@@ -5,7 +5,7 @@ import type {
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelSNDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PgiDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SammenligningsgrunnlagDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type VirksomhetType = folketrygdloven_kalkulus_kodeverk_VirksomhetType;
 

@@ -4,7 +4,7 @@ import type {
   tjenester_infotrygd_InfotrygdVedtakDto_SakDto,
   tjenester_infotrygd_InfotrygdVedtakDto_Utbetaling,
   tjenester_infotrygd_InfotrygdVedtakDto_Vedtak,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type VedtakArbeidsforhold = tjenester_infotrygd_InfotrygdVedtakDto_Arbeidsforhold;
 

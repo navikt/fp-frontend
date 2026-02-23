@@ -1,3 +1,3 @@
-import type { oppgavekø_KøSortering } from './fplosDtoGenerert.ts';
+import type { oppgavekø_KøSortering } from './fplos.gen';
 
 export type KøSortering = oppgavekø_KøSortering;

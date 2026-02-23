@@ -3,7 +3,7 @@ import type {
   tjenester_behandling_personopplysning_PersonadresseDto,
   tjenester_behandling_personopplysning_PersonopplysningBasisDto,
   tjenester_behandling_personopplysning_PersonoversiktDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type AdresseType = foreldrepenger_behandlingslager_aktør_AdresseType;
 

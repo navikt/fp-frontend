@@ -1,7 +1,7 @@
 import type {
   tjenester_behandling_klage_KlagebehandlingDto,
   tjenester_behandling_klage_KlageVurderingResultatDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type KlageVurderingResultat = tjenester_behandling_klage_KlageVurderingResultatDto;
 

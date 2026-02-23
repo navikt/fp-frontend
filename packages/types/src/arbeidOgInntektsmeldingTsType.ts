@@ -5,7 +5,7 @@ import type {
   foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto,
   foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto,
   foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export enum AksjonspunktÅrsak {
   MANGLENDE_INNTEKTSMELDING = 'MANGLENDE_INNTEKTSMELDING',

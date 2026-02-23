@@ -1,3 +1,3 @@
-import type { folketrygdloven_kalkulus_kodeverk_Organisasjonstype } from './apiDtoGenerert';
+import type { folketrygdloven_kalkulus_kodeverk_Organisasjonstype } from './fpsak.gen';
 
 export type Organisasjonstype = folketrygdloven_kalkulus_kodeverk_Organisasjonstype;

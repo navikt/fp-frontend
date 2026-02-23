@@ -2,7 +2,7 @@ import type {
   tjenester_familiehendelse_FamiliehendelseRestTjeneste_AdopsjonFamilieHendelseDto,
   tjenester_familiehendelse_FamiliehendelseRestTjeneste_FamilieHendelseDto,
   tjenester_familiehendelse_FamiliehendelseRestTjeneste_FødselTerminFamilieHendelseDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type FamilieHendelse = tjenester_familiehendelse_FamiliehendelseRestTjeneste_FamilieHendelseDto;
 
