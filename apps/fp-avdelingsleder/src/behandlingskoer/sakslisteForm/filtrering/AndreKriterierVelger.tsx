@@ -1,13 +1,31 @@
+import { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
 
-import { useLosKodeverk } from '../../../data/useLosKodeverk';
+import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 import { AndreKriterieValgKnapp } from './AndreKriterieValgKnapp';
+import { useAktuelleAndreKriterier } from './useAktuelleAndreKriterier';
 
 export const AndreKriterierVelger = () => {
-  const andreKriterierTyper = useLosKodeverk('AndreKriterierType').filter(akt => akt.kode !== 'TIL_BESLUTTER');
-  const half = Math.ceil(andreKriterierTyper.length / 2);
+  const { watch, setValue } = useFormContext<FormValues>();
+  const aktuelleKriterier = useAktuelleAndreKriterier();
+  const half = Math.ceil(aktuelleKriterier.length / 2);
+
+  useEffect(() => {
+    const aktuelleKoder = new Set(aktuelleKriterier.map(k => k.kode));
+    const andreKriterie = watch('andreKriterie');
+    const nyInkluder = andreKriterie.inkluder.filter(k => aktuelleKoder.has(k));
+    const nyEkskluder = andreKriterie.ekskluder.filter(k => aktuelleKoder.has(k));
+
+    if (
+      nyInkluder.length !== andreKriterie.inkluder.length ||
+      nyEkskluder.length !== andreKriterie.ekskluder.length
+    ) {
+      setValue('andreKriterie', { inkluder: nyInkluder, ekskluder: nyEkskluder }, { shouldDirty: true });
+    }
+  }, [aktuelleKriterier]);
 
   return (
     <VStack gap="space-16" padding="space-20">
@@ -16,12 +34,12 @@ export const AndreKriterierVelger = () => {
       </Label>
       <HStack gap="space-32">
         <VStack gap="space-8">
-          {andreKriterierTyper.slice(0, half).map(akt => (
+          {aktuelleKriterier.slice(0, half).map(akt => (
             <AndreKriterieValgKnapp key={akt.kode} andreKriterierType={akt} />
           ))}
         </VStack>
         <VStack gap="space-8">
-          {andreKriterierTyper.slice(half).map(akt => (
+          {aktuelleKriterier.slice(half).map(akt => (
             <AndreKriterieValgKnapp key={akt.kode} andreKriterierType={akt} />
           ))}
         </VStack>

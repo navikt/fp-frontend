@@ -29,4 +29,5 @@ export type {
   tjenester_felles_dto_OppgaveDtoMedStatus as OppgaveDtoMedStatus,
   tjenester_felles_dto_OppgaveDto as OppgaveDto,
   tjenester_avdelingsleder_dto_AvdelingDto as AvdelingDto,
+  tjenester_kodeverk_KodeverkRestTjeneste_KriterieFilterDto as KriterieFilterDto,
 } from './fplosDtoGenerert';

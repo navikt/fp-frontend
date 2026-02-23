@@ -1,14 +1,14 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './AndreKriterierVelger.stories';
 
-const { Default } = composeStories(stories);
+const { Default, MedFpOgFørstegang, MedEngangsstønad } = composeStories(stories);
 
 describe('AndreKriterierVelger', () => {
-  it('skal vise pluss/minus-knapper for Arbeid og inntekt der Til beslutter er valgt å inkluderes fra før', async () => {
+  it('skal vise pluss/minus-knapper for Arbeid og inntekt der det er inkludert fra før', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
     expect(await screen.findByText('Arbeid og inntekt')).toBeInTheDocument();
@@ -39,5 +39,32 @@ describe('AndreKriterierVelger', () => {
     expect(plusButton).toHaveAttribute('data-variant', 'secondary');
     expect(minusButton).toHaveAttribute('data-variant', 'primary');
     expect(minusButton).toHaveAttribute('data-color', 'danger');
+  });
+
+  it('skal vise Bare far har rett og skjule Klage på tilbakebetaling når FP og Førstegangsbehandling er valgt', async () => {
+    applyRequestHandlers(MedFpOgFørstegang.parameters['msw'] as MswParameters['msw']);
+    render(<MedFpOgFørstegang />);
+
+    expect(await screen.findByText('Bare far har rett')).toBeInTheDocument();
+    expect(screen.queryByText('Klage på tilbakebetaling')).not.toBeInTheDocument();
+  });
+
+  it('skal skjule Bare far har rett når Engangsstønad er valgt og rense ugyldig valgt kriterie fra form', async () => {
+    applyRequestHandlers(MedEngangsstønad.parameters['msw'] as MswParameters['msw']);
+    render(<MedEngangsstønad />);
+
+    await waitFor(() => {
+      expect(screen.queryByText('Bare far har rett')).not.toBeInTheDocument();
+    });
+
+    expect(screen.queryByTestId('av-og-pa-knapper-BARE_FAR_RETT')).not.toBeInTheDocument();
+  });
+
+  it('skal vise alle kriterier uten filter når ingen stønadstype eller behandlingstype er valgt', async () => {
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
+    render(<Default />);
+
+    expect(await screen.findByText('Bare far har rett')).toBeInTheDocument();
+    expect(screen.getByText('Klage på tilbakebetaling')).toBeInTheDocument();
   });
 });
