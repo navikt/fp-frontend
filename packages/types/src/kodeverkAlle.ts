@@ -1,4 +1,4 @@
-import type { NaturalYtelseType } from './arbeidOgInntektsmeldingTsType';
+import type { NaturalYtelseType } from './index';
 import type { Arbeidskategori } from './arbeidskategori';
 import type { BehandlingResultatType, KonsekvensForYtelsen } from './behandlingsresultat';
 import type { foreldrepenger_behandlingslager_geografisk_Region as Region } from './fpsak.gen';

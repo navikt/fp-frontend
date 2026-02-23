@@ -1,9 +1,3 @@
-export type {
-  FagsakBehandlingDtoFpSak,
-  BehandlingTillatteOperasjoner,
-  BehandlingÅrsak,
-  TotrinnskontrollSkjermlenkeContext,
-} from './src/fagsakBehandlingDtoFpSak';
 export { VergeBehandlingmenyValg } from './src/fagsakBehandlingDtoFpSak';
 export type { Behandlingsresultat, KonsekvensForYtelsen, BehandlingResultatType } from './src/behandlingsresultat';
 export { isAvslag, isInnvilget, isOpphor, isKlageOmgjort, isKlageAvvist } from './src/behandlingsresultat';
@@ -17,14 +11,7 @@ export type {
 export type { Kjønnkode } from './src/Kjonnkode';
 export { KjønnkodeEnum } from './src/Kjonnkode';
 export type { AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
-export type {
-  ArbeidOgInntektsmelding,
-  Arbeidsforhold as AoIArbeidsforhold,
-  Inntektsmelding,
-  Inntektspost,
-  AktivNaturalYtelse,
-  NaturalYtelseType,
-} from './src/arbeidOgInntektsmeldingTsType';
+export type { Arbeidsforhold as AoIArbeidsforhold } from './src/index';
 export { AksjonspunktÅrsak } from './src/arbeidOgInntektsmeldingTsType';
 export type { BrevOverstyring } from './src/brevOverstyring';
 export type { SkjermlenkeType } from './src/skjermlenkeType';
