@@ -3,7 +3,7 @@ import ky from 'ky';
 
 import {
   type AlleKodeverkLos,
-  type fplosInitLinksDto,
+  type InitLinksDto,
   type NøkkeltallBehandlingFørsteUttakDto,
   type NøkkeltallBehandlingVentefristUtløperDto,
   type OppgaverForAvdeling,
@@ -73,7 +73,7 @@ export const LosUrl = {
 export const initFetchOptions = () =>
   queryOptions({
     queryKey: [LosUrl.INIT_FETCH],
-    queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<fplosInitLinksDto>(),
+    queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<InitLinksDto>(),
   });
 
 const getOppgaveFilterStatistikk = (sakslisteId: number, avdelingEnhet: string) =>

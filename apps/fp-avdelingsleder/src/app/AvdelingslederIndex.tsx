@@ -8,7 +8,7 @@ import { formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 import { type Location } from 'history';
 
-import type { fplosInitLinksDto } from '@navikt/fp-types';
+import { type AvdelingDto, type InitLinksDto } from '@navikt/fp-types';
 import { useTrackRouteParam } from '@navikt/fp-utils';
 
 import { EndreSakslisterPanel } from '../behandlingskoer/EndreSakslisterPanel';
@@ -27,7 +27,7 @@ import { NøkkeltallbokserPanel } from '../status/NøkkeltallbokserPanel';
 import { AvdelingslederPanels } from './avdelingslederPanels';
 
 interface Props {
-  initData: fplosInitLinksDto;
+  initData: InitLinksDto;
 }
 
 export const AvdelingslederIndex = ({ initData }: Props) => {
@@ -164,7 +164,7 @@ const nasjonalEnhet = '4867';
 
 const setAvdeling = (
   setValgtAvdeling: (avdelingEnhet: string) => void,
-  avdelinger: fplosInitLinksDto['avdelinger'],
+  avdelinger: AvdelingDto[],
   valgtAvdelingEnhet?: string,
 ) => {
   if (avdelinger.length > 0 && !valgtAvdelingEnhet) {
