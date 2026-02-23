@@ -15,7 +15,7 @@ import {
   type SaksbehandlerProfil,
   type SakslisteAvdeling,
   type SakslisteDto,
-  type statistikk_KøStatistikkDto,
+  type KøStatistikkDto,
 } from '@navikt/fp-types';
 
 const kyExtended = ky.extend({
@@ -79,7 +79,7 @@ export const initFetchOptions = () =>
 const getOppgaveFilterStatistikk = (sakslisteId: number, avdelingEnhet: string) =>
   kyExtended
     .get(LosUrl.OPPGAVE_FILTER_STATISTIKK, { searchParams: { sakslisteId, avdelingEnhet } })
-    .json<statistikk_KøStatistikkDto[]>();
+    .json<KøStatistikkDto[]>();
 
 export const oppgaveFilterStatistikkOptions = (valgtSakslisteId: number, valgtAvdelingEnhet: string) =>
   queryOptions({

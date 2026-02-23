@@ -10,7 +10,7 @@ import {
   urlEncodeNorskeBokstaver,
   withQueryClient,
 } from '@navikt/fp-storybook-utils';
-import type { SakslisteAvdeling, statistikk_KøStatistikkDto } from '@navikt/fp-types';
+import type { SakslisteAvdeling, KøStatistikkDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
@@ -73,7 +73,7 @@ const getTidspunktForAntallTimerSiden = (hours: number): string => {
   return dayjs().subtract(hours, 'hour').toISOString();
 };
 
-const OPPGAVE_FILTER_STATISTIKK: statistikk_KøStatistikkDto[] = [
+const OPPGAVE_FILTER_STATISTIKK: KøStatistikkDto[] = [
   { tidspunkt: getTidspunktForAntallTimerSiden(43), aktive: 21, tilgjengelige: 5, ventende: 32 },
   { tidspunkt: getTidspunktForAntallTimerSiden(42), aktive: 21, tilgjengelige: 4, ventende: 31 },
   { tidspunkt: getTidspunktForAntallTimerSiden(41), aktive: 21, tilgjengelige: 6, ventende: 33 },

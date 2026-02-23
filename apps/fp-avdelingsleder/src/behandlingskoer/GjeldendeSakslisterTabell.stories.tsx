@@ -13,7 +13,7 @@ import {
   urlEncodeNorskeBokstaver,
   withQueryClient,
 } from '@navikt/fp-storybook-utils';
-import type { statistikk_KøStatistikkDto } from '@navikt/fp-types';
+import type { KøStatistikkDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
@@ -125,7 +125,7 @@ const getTidspunktForAntallTimerSiden = (hours: number): string => {
   return dayjs().subtract(hours, 'hour').toISOString();
 };
 
-const OPPGAVE_FILTER_STATISTIKK: statistikk_KøStatistikkDto[] = [
+const OPPGAVE_FILTER_STATISTIKK: KøStatistikkDto[] = [
   // gap på ~13 timer
   { tidspunkt: getTidspunktForAntallTimerSiden(43), aktive: 21, tilgjengelige: 5, ventende: 32 },
   { tidspunkt: getTidspunktForAntallTimerSiden(42), aktive: 21, tilgjengelige: 4, ventende: 31 },

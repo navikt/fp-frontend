@@ -6,7 +6,7 @@ import { ToggleGroupItem } from '@navikt/ds-react/ToggleGroup';
 import { capitalizeFirstLetter, createIntl, timeFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { statistikk_KøStatistikkDto } from '@navikt/fp-types';
+import type { KøStatistikkDto } from '@navikt/fp-types';
 
 import { getAkselVariable, getStyle } from '../echartUtils';
 import { ReactECharts } from '../ReactECharts';
@@ -22,7 +22,7 @@ enum Tidsintervall {
 }
 
 interface Props {
-  aktiveOgLedigeTidslinje: statistikk_KøStatistikkDto[];
+  aktiveOgLedigeTidslinje: KøStatistikkDto[];
 }
 
 export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
@@ -149,7 +149,7 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
 };
 
 const filtererTidslinjeBasertPåValgIntervall = (
-  aktiveOgLedigeTidslinje: statistikk_KøStatistikkDto[],
+  aktiveOgLedigeTidslinje: KøStatistikkDto[],
   timeRange: Tidsintervall,
 ) => {
   return aktiveOgLedigeTidslinje.filter(o => {
