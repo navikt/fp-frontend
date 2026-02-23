@@ -1,13 +1,13 @@
 import { Link, Route, Routes } from 'react-router-dom';
 
 import { NotFoundPage } from '@navikt/fp-sak-infosider';
+import type { InitLinksDto } from '@navikt/fp-types';
 
-import type { InitDataLos } from '../data/fplosAvdelingslederApi';
 import { AvdelingslederIndex } from './AvdelingslederIndex';
 
 interface Props {
   headerHeight: number;
-  initData: InitDataLos;
+  initData: InitLinksDto;
 }
 
 /**

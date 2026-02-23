@@ -9,8 +9,7 @@ import {
   getStyle,
   ReactECharts,
 } from '@navikt/fp-los-felles';
-
-import type { BehandlingVentefrist } from '../../typer/behandlingVentefristTsType';
+import type { NøkkeltallBehandlingVentefristUtløperDto } from '@navikt/fp-types';
 
 dayjs.extend(isSameOrBefore);
 
@@ -21,7 +20,7 @@ interface Koordinat {
 
 interface Props {
   height: number;
-  behandlingerPaVent: BehandlingVentefrist[];
+  behandlingerPaVent: NøkkeltallBehandlingVentefristUtløperDto[];
 }
 
 export const VentefristUtløperGraf = ({ height, behandlingerPaVent }: Props) => {
@@ -73,7 +72,7 @@ export const VentefristUtløperGraf = ({ height, behandlingerPaVent }: Props) =>
   );
 };
 
-const lagKoordinater = (oppgaverManueltPaVent: BehandlingVentefrist[]): Koordinat[] =>
+const lagKoordinater = (oppgaverManueltPaVent: NøkkeltallBehandlingVentefristUtløperDto[]): Koordinat[] =>
   oppgaverManueltPaVent.map(o => ({
     x: o.fristUke,
     y: o.antall,

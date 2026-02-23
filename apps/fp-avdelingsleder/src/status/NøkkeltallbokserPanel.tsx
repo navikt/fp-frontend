@@ -6,12 +6,11 @@ import { NoWrap } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
-import type { BehandlingType, FagsakYtelseType } from '@navikt/fp-types';
+import { type BehandlingType, type FagsakYtelseType, type OppgaverForAvdeling } from '@navikt/fp-types';
 
 import { oppgaverForAvdelingOptions } from '../data/fplosAvdelingslederApi';
 import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../data/localStorageHelper';
 import { useLosKodeverk } from '../data/useLosKodeverk';
-import type { OppgaverForAvdeling } from '../typer/oppgaverForAvdelingTsType';
 
 const STATE_KEY = 'nokkeltallbokser';
 const fagsakYtelseTypeOrder = ['FP', 'ES', 'SVP', '-'] satisfies FagsakYtelseType[];

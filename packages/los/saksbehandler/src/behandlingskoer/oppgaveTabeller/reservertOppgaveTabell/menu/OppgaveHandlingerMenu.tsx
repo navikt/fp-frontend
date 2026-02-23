@@ -12,6 +12,7 @@ import { ActionMenu, Button } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { FlyttReservasjonModal, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
+import { type OppgaveDto } from '@navikt/fp-types';
 
 import {
   endreReservasjonPost,
@@ -21,12 +22,11 @@ import {
   LosUrl,
   opphevReservasjon,
 } from '../../../../data/fplosSaksbehandlerApi';
-import { type Oppgave } from '../../../../typer/oppgaveTsType';
 import { OppgaveReservasjonForlengetModal } from './forleng/OppgaveReservasjonForlengetModal';
 import { NotatModal } from './notat/NotatModal';
 
 interface Props {
-  oppgave: Oppgave;
+  oppgave: OppgaveDto;
   setEnableTableEvents: (shouldDisable: boolean) => void;
   brukernavn: string;
 }

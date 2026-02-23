@@ -8,11 +8,12 @@ import { formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 import { type Location } from 'history';
 
+import { type AvdelingDto, type InitLinksDto } from '@navikt/fp-types';
 import { useTrackRouteParam } from '@navikt/fp-utils';
 
 import { EndreSakslisterPanel } from '../behandlingskoer/EndreSakslisterPanel';
 import { IkkeTilgangTilAvdelingslederPanel } from '../components/IkkeTilgangTilAvdelingslederPanel';
-import { type InitDataLos, losKodeverkOptions, saksbehandlareForAvdelingOptions } from '../data/fplosAvdelingslederApi';
+import { losKodeverkOptions, saksbehandlareForAvdelingOptions } from '../data/fplosAvdelingslederApi';
 import {
   getValueFromLocalStorage,
   removeValueFromLocalStorage,
@@ -23,11 +24,10 @@ import { NokkeltallPanel } from '../nokkeltall/NokkeltallPanel';
 import { ReservasjonerTabell } from '../reservasjoner/ReservasjonerTabell';
 import { SaksbehandlerePanel } from '../saksbehandlere/SaksbehandlerePanel';
 import { NøkkeltallbokserPanel } from '../status/NøkkeltallbokserPanel';
-import type { Avdeling } from '../typer/avdelingTsType';
 import { AvdelingslederPanels } from './avdelingslederPanels';
 
 interface Props {
-  initData: InitDataLos;
+  initData: InitLinksDto;
 }
 
 export const AvdelingslederIndex = ({ initData }: Props) => {
@@ -164,7 +164,7 @@ const nasjonalEnhet = '4867';
 
 const setAvdeling = (
   setValgtAvdeling: (avdelingEnhet: string) => void,
-  avdelinger: Avdeling[],
+  avdelinger: AvdelingDto[],
   valgtAvdelingEnhet?: string,
 ) => {
   if (avdelinger.length > 0 && !valgtAvdelingEnhet) {

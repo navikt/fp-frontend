@@ -69,7 +69,7 @@ export const Default: Story = {
         saksnummer: '12213234',
         personnummer: '1010',
         navn: 'Espen Utvikler',
-        system: 'SAK',
+        system: 'FPSAK',
         behandlingstype: 'BT-002',
         opprettetTidspunkt: '2020-01-01',
         behandlingsfrist: '2020-01-01',

@@ -1,6 +1,6 @@
-import type { Oppgave } from '@navikt/fp-los-saksbehandler';
+import { type OppgaveDto } from '@navikt/fp-types';
 
-export const oppgaverForFagsaker: Oppgave[] = [
+export const oppgaverForFagsaker: OppgaveDto[] = [
   {
     id: 46567,
     saksnummer: '1',
@@ -20,7 +20,6 @@ export const oppgaverForFagsaker: Oppgave[] = [
       erReservertAvInnloggetBruker: true,
       reservertAvIdent: 'S123456',
       reservertAvNavn: 'Sara Saksbehandler',
-      flyttetReservasjon: null,
     },
   },
 ];

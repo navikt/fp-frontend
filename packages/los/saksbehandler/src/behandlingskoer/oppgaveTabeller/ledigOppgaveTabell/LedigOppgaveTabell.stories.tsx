@@ -7,10 +7,9 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { AsyncPollingStatus } from '@navikt/fp-types';
+import { type AsyncPollingStatus, type OppgaveDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
-import { type Oppgave } from '../../../typer/oppgaveTsType';
 import { LedigOppgaveTabell } from './LedigOppgaveTabell';
 
 import messages from '../../../../i18n/nb_NO.json';
@@ -32,7 +31,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     saksnummer: '345325',
     personnummer: '1212',
     navn: 'Espen Utvikler',
-    system: 'SAK',
+    system: 'FPSAK',
     behandlingstype: 'BT-002',
     opprettetTidspunkt: '2019-01-01',
     behandlingsfrist: '2019-01-01',
@@ -41,7 +40,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     behandlingId: '1',
     andreKriterier: ['REVURDERING_INNTEKTSMELDING'],
   },
-] satisfies Oppgave[];
+] satisfies OppgaveDto[];
 
 const meta = {
   title: 'behandlingskoer/LedigOppgaveTabell',

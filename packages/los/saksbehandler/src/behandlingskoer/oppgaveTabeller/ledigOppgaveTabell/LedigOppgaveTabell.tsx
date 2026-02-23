@@ -2,7 +2,8 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
 
-import { type Oppgave } from '../../../typer/oppgaveTsType';
+import { type OppgaveDto } from '@navikt/fp-types';
+
 import { BehandlingPollingTimoutModal } from '../../timeoutModal/BehandlingPollingTimoutModal';
 import { LedigOppgaveRad } from './LedigOppgaveRad';
 import { useOppgavePolling } from './useOppgavePolling';
@@ -10,7 +11,7 @@ import { useOppgavePolling } from './useOppgavePolling';
 import styles from './ledigOppgaveTabell.module.css';
 
 interface Props {
-  reserverOppgave: (oppgave: Oppgave) => void;
+  reserverOppgave: (oppgave: OppgaveDto) => void;
   antallOppgaver?: number;
   valgtSakslisteId: number;
 }

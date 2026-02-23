@@ -2,12 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
-import type { AsyncPollingStatus } from '@navikt/fp-types';
+import { type AsyncPollingStatus, type OppgaveDto } from '@navikt/fp-types';
 
 import { doGetRequest, getOppgaverTilBehandling } from '../../../data/fplosSaksbehandlerApi';
-import type { Oppgave } from '../../../typer/oppgaveTsType';
 
-const EMPTY_ARRAY = new Array<Oppgave>();
+const EMPTY_ARRAY = new Array<OppgaveDto>();
 const HTTP_ACCEPTED = 202;
 const MAX_POLLING_ATTEMPTS = 1800;
 const MAX_POLLING_REACHED = 'MAX_POLLING';
@@ -19,7 +18,7 @@ const pollOgHentData = async (
   getSakslisteId: () => number,
   pollingCounter = 0,
 ) => {
-  const response = await doGetRequest<AsyncPollingStatus | Oppgave[]>(location);
+  const response = await doGetRequest<AsyncPollingStatus | OppgaveDto[]>(location);
   if (getSakslisteId() !== valgtSakslisteId) {
     return [];
   }
@@ -51,8 +50,8 @@ const hentOppgaver = async (valgtSakslisteId: number, getSakslisteId: () => numb
 };
 
 export const useOppgavePolling = (valgtSakslisteId: number) => {
-  const [oppgaverTilBehandling, setOppgaverTilBehandling] = useState<Oppgave[]>(EMPTY_ARRAY);
-  const [nyeBehandlinger, setNyeBehandlinger] = useState<Oppgave[]>(EMPTY_ARRAY);
+  const [oppgaverTilBehandling, setOppgaverTilBehandling] = useState<OppgaveDto[]>(EMPTY_ARRAY);
+  const [nyeBehandlinger, setNyeBehandlinger] = useState<OppgaveDto[]>(EMPTY_ARRAY);
 
   const idRef = useRef(valgtSakslisteId);
   const getSakslisteId = () => idRef.current;
@@ -111,7 +110,7 @@ const wait = (ms: number) =>
     setTimeout(resolve, ms);
   });
 
-const isPollingResponse = (response: AsyncPollingStatus | Oppgave[]): response is AsyncPollingStatus => {
+const isPollingResponse = (response: AsyncPollingStatus | OppgaveDto[]): response is AsyncPollingStatus => {
   return (
     !Array.isArray(response) && ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status)
   );

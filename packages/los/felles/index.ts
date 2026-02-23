@@ -3,8 +3,6 @@ export { OppgaveReservasjonEndringDatoModal } from './src/endreReservasjon/Oppga
 export { FlyttReservasjonModal } from './src/flyttReservasjon/FlyttReservasjonModal';
 export { AktiveOgTilgjengeligeOppgaverGraf } from './src/graf/AktiveOgTilgjengeligeOppgaverGraf';
 
-export type { ReservasjonStatus } from './src/typer/reservasjonStatus';
-export type { OppgaveFilterStatistikk } from './src/typer/oppgaveFilterStatistikk';
 export {
   getAkselVariable,
   createBarSeries,

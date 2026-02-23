@@ -5,14 +5,15 @@ import { FilesIcon } from '@navikt/aksel-icons';
 import { BodyShort, CopyButton, HStack, Table } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
-import type { Oppgave } from '../../../typer/oppgaveTsType';
+import { type OppgaveDto } from '@navikt/fp-types';
+
 import { OppgaveLabels } from '../OppgaveLabels';
 
 import styles from './ledigOppgaveRad.module.css';
 
 interface Props {
-  oppgave: Oppgave;
-  reserverOppgave: (oppgave: Oppgave) => void;
+  oppgave: OppgaveDto;
+  reserverOppgave: (oppgave: OppgaveDto) => void;
   erNyBehandling: boolean;
 }
 
@@ -21,7 +22,7 @@ export const LedigOppgaveRad = ({ oppgave, reserverOppgave, erNyBehandling }: Pr
 
   const refCopyButton = useRef<HTMLDivElement | null>(null);
 
-  const goToFagsak = (event: React.MouseEvent | React.KeyboardEvent, valgtOppgave: Oppgave) => {
+  const goToFagsak = (event: React.MouseEvent | React.KeyboardEvent, valgtOppgave: OppgaveDto) => {
     const erCopyButtonKlikk = refCopyButton.current?.contains(event.target as Node);
 
     if (erCopyButtonKlikk) {
