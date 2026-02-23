@@ -9,6 +9,9 @@ import { kriterieFilterOptions } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import type { FormValues } from '../UtvalgskriterierForSakslisteForm';
 
+const erAktuell = (valgte: string[], tillatte: string[] | undefined): boolean =>
+  tillatte === undefined || tillatte.length === 0 || valgte.length === 0 || valgte.some(v => tillatte.includes(v));
+
 export const useAktuelleAndreKriterier = (): LosKodeverkMedNavn<'AndreKriterierType'>[] => {
   const { control, getValues, setValue } = useFormContext<FormValues>();
 
@@ -19,29 +22,20 @@ export const useAktuelleAndreKriterier = (): LosKodeverkMedNavn<'AndreKriterierT
 
   const { data: kriterieFilter } = useQuery(kriterieFilterOptions());
 
-  const aktuelleKriterier = !kriterieFilter
-    ? alleAndreKriterierTyper
-    : alleAndreKriterierTyper.filter(akt => {
+  const aktuelleKriterier = kriterieFilter
+    ? alleAndreKriterierTyper.filter(akt => {
         const filter = kriterieFilter[akt.kode];
 
         if (!filter) {
           return true;
         }
 
-        const ytelseMatch =
-          !filter.valgbarForYtelseTyper ||
-          filter.valgbarForYtelseTyper.length === 0 ||
-          fagsakYtelseTyper.length === 0 ||
-          fagsakYtelseTyper.some(v => filter.valgbarForYtelseTyper!.includes(v));
-
-        const behandlingMatch =
-          !filter.valgbarForBehandlingTyper ||
-          filter.valgbarForBehandlingTyper.length === 0 ||
-          behandlingTyper.length === 0 ||
-          behandlingTyper.some(v => filter.valgbarForBehandlingTyper!.includes(v));
+        const ytelseMatch = erAktuell(fagsakYtelseTyper, filter.valgbarForYtelseTyper);
+        const behandlingMatch = erAktuell(behandlingTyper, filter.valgbarForBehandlingTyper);
 
         return ytelseMatch && behandlingMatch;
-      });
+      })
+    : alleAndreKriterierTyper;
 
   useEffect(() => {
     const aktuelleKoder = new Set(aktuelleKriterier.map(k => k.kode));
