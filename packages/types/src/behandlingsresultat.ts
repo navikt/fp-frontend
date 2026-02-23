@@ -2,7 +2,7 @@ import type {
   foreldrepenger_behandlingslager_behandling_BehandlingResultatType,
   foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen,
   tjenester_behandling_dto_behandling_BehandlingsresultatDto,
-} from './apiDtoGenerert';
+} from './fpsak.gen';
 
 export type Behandlingsresultat = tjenester_behandling_dto_behandling_BehandlingsresultatDto;
 

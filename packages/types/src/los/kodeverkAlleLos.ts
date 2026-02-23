@@ -1,5 +1,5 @@
 import type { FagsakStatus } from '../fagsakStatus';
-import type { oppgave_BehandlingType, oppgave_FagsakYtelseType } from './fplosDtoGenerert';
+import type { oppgave_BehandlingType, oppgave_FagsakYtelseType } from './fplos.gen';
 import type { AndreKriterierType, BehandlingVenteStatus, KøSortering, OppgaveBehandlingStatus } from './index';
 
 //Mapping mellom LosKodeverkType og union-types med verdier

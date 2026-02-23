@@ -1,7 +1,6 @@
 import type { AktivitetskravPermisjonType } from './aktivitetskravPermisjonType';
 import type { AktivitetStatus } from './aktivitetStatus';
 import type { AnkeOmgjørÅrsak } from './ankeVurdering';
-import type { foreldrepenger_behandlingslager_geografisk_Region as Region } from './apiDtoGenerert';
 import type { NaturalYtelseType } from './arbeidOgInntektsmeldingTsType';
 import type { Arbeidskategori } from './arbeidskategori';
 import type { ArbeidType } from './arbeidType';
@@ -19,6 +18,7 @@ import type { FamilieHendelseType } from './familieHendelseType';
 import type { FaresignalVurdering } from './faresignalVurdering';
 import type { FordelingPeriodeKilde } from './fordelingPeriodeKilde';
 import type { ForeldreType } from './foreldreType';
+import type { foreldrepenger_behandlingslager_geografisk_Region as Region } from './fpsak.gen';
 import type { GraderingAvslagÅrsak } from './graderingAvslagÅrsak';
 import type { HistorikkAktør } from './historikkinnslagTsType';
 import type { InnsynResultatType } from './innsynResultatType';
