@@ -29,7 +29,7 @@ interface Props {
 export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: Props) => {
   const [tidsintervall, setTidsintervall] = useState(Tidsintervall.UKE);
   const filtrertTidslinje = filtererTidslinjeBasertPåValgIntervall(aktiveOgLedigeTidslinje, tidsintervall);
-  const sortertOgFiltrertTidslinje = filtrertTidslinje.toSorted(sorterOppgaveFilterSatistikk);
+  const sortertOgFiltrertTidslinje = filtrertTidslinje.toSorted(sorterKøStatistikkPåTidspunkt);
 
   const sampletTidspunkter = reduserDatapunkterTilSpesifisertMaxAntall(
     sortertOgFiltrertTidslinje.map(o => o.tidspunkt),
@@ -163,5 +163,5 @@ const reduserDatapunkterTilSpesifisertMaxAntall = (data: (string | number)[], ma
   return data.filter((_, index) => index % step === 0);
 };
 
-const sorterOppgaveFilterSatistikk = (a: KøStatistikkDto, b: KøStatistikkDto) =>
+const sorterKøStatistikkPåTidspunkt = (a: KøStatistikkDto, b: KøStatistikkDto) =>
   new Date(a.tidspunkt).getTime() - new Date(b.tidspunkt).getTime();
