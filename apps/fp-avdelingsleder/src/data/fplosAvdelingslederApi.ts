@@ -12,10 +12,10 @@ import {
   type OppgaverForFørsteStønadsdagUkeMåned,
   type ReservasjonDto,
   type ReservasjonStatusDto,
+  type SaksbehandlerDto,
   type SaksbehandlereOgSaksbehandlerGrupper,
-  type SaksbehandlerProfil,
-  type SakslisteAvdeling,
   type SakslisteDto,
+  type SakslisteLagreDto,
 } from '@navikt/fp-types';
 
 const kyExtended = ky.extend({
@@ -97,7 +97,7 @@ export const sakslisterForAvdelingOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING, avdelingEnhet],
     queryFn: () =>
-      kyExtended.get(LosUrl.SAKSLISTER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<SakslisteAvdeling[]>(),
+      kyExtended.get(LosUrl.SAKSLISTER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<SakslisteDto[]>(),
     initialData: [],
   });
 
@@ -107,7 +107,7 @@ export const saksbehandlareForAvdelingOptions = (avdelingEnhet?: string) =>
     queryFn: () =>
       kyExtended
         .get(LosUrl.SAKSBEHANDLERE_FOR_AVDELING, { searchParams: { avdelingEnhet: avdelingEnhet ?? '' } })
-        .json<SaksbehandlerProfil[]>(),
+        .json<SaksbehandlerDto[]>(),
     initialData: [],
     enabled: !!avdelingEnhet,
   });
@@ -189,7 +189,7 @@ export const reservasjonerForAvdelingOptions = (avdelingEnhet: string) =>
 export const opprettNySaksliste = (avdelingEnhet: string) =>
   kyExtended.post(LosUrl.OPPRETT_NY_SAKSLISTE, { json: { avdelingEnhet } }).json<{ sakslisteId: string }>();
 
-export const lagreUtvalgskriterierForKø = (sakslisteDto: SakslisteDto) =>
+export const lagreUtvalgskriterierForKø = (sakslisteDto: SakslisteLagreDto) =>
   kyExtended.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, { json: sakslisteDto }).json();
 
 export const lagreSakslisteSaksbehandler = (
@@ -270,7 +270,7 @@ export const flyttReservasjonSaksbehandlerSøk = (brukerIdent: string) =>
     .post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, {
       json: { brukerIdent },
     })
-    .json<SaksbehandlerProfil>();
+    .json<SaksbehandlerDto>();
 
 export const slettSaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended
@@ -284,7 +284,7 @@ export const saksbehandlgerSøk = (brukerIdent: string) =>
     .post(LosUrl.SAKSBEHANDLER_SOK, {
       json: { brukerIdent },
     })
-    .json<SaksbehandlerProfil | null>();
+    .json<SaksbehandlerDto | null>();
 
 export const opprettNySaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended

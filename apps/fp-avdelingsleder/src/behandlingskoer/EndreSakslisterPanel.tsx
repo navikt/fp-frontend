@@ -5,7 +5,7 @@ import { ArrowDownIcon } from '@navikt/aksel-icons';
 import { HStack } from '@navikt/ds-react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import type { SaksbehandlerProfil } from '@navikt/fp-types';
+import type { SaksbehandlerDto } from '@navikt/fp-types';
 
 import {
   oppgaverForAvdelingAntallOptions,
@@ -20,7 +20,7 @@ import styles from './endreSakslisterPanel.module.css';
 
 interface Props {
   valgtAvdelingEnhet: string;
-  avdelingensSaksbehandlere: SaksbehandlerProfil[];
+  avdelingensSaksbehandlere: SaksbehandlerDto[];
 }
 
 export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehandlere }: Props) => {

@@ -1,11 +1,11 @@
 import { useEffect, useMemo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
-import type { BehandlingType, KøSortering, KøSorteringFelt } from '@navikt/fp-types';
+import type { BehandlingType, KøSortering, KøSorteringFeltDto } from '@navikt/fp-types';
 
 import type { FormValues, TilBeslutter } from '../UtvalgskriterierForSakslisteForm';
 
-export function useGyldigeSorteringer(muligeSorteringer: KøSorteringFelt[]) {
+export function useGyldigeSorteringer(muligeSorteringer: KøSorteringFeltDto[]) {
   const { setValue, control } = useFormContext<FormValues>();
 
   const [behandlingTyper, tilBeslutter, currentSorteringType] = useWatch({
@@ -35,7 +35,7 @@ export function useGyldigeSorteringer(muligeSorteringer: KøSorteringFelt[]) {
 }
 
 const erSorteringGyldig = (
-  sorteringFelt: KøSorteringFelt,
+  sorteringFelt: KøSorteringFeltDto,
   behandlingtyper: BehandlingType[],
   tilBeslutter: TilBeslutter,
 ) => {

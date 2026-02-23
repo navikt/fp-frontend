@@ -4,7 +4,7 @@ import { XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Label, Table } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { type SaksbehandlereOgSaksbehandlerGrupper, type SaksbehandlerProfil } from '@navikt/fp-types';
+import { type SaksbehandlerDto,type SaksbehandlereOgSaksbehandlerGrupper } from '@navikt/fp-types';
 
 import { LosUrl, slettGruppe } from '../data/fplosAvdelingslederApi';
 import { GruppeSaksbehandlere } from './GruppeSaksbehandlere';
@@ -12,7 +12,7 @@ import { GruppeSaksbehandlere } from './GruppeSaksbehandlere';
 interface Props {
   valgAvdeldingEnhet: string;
   grupper: SaksbehandlereOgSaksbehandlerGrupper;
-  avdelingensSaksbehandlere: SaksbehandlerProfil[];
+  avdelingensSaksbehandlere: SaksbehandlerDto[];
 }
 
 export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbehandlere }: Props) => {

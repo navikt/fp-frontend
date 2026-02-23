@@ -4,14 +4,14 @@ import { Button, VStack } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import type { SaksbehandlerProfil } from '@navikt/fp-types';
+import type { SaksbehandlerDto } from '@navikt/fp-types';
 
 import { grupperOptions, opprettGruppe } from '../data/fplosAvdelingslederApi';
 import { GrupperTabell } from './GrupperTabell';
 
 interface Props {
   valgtAvdelingEnhet: string;
-  avdelingensSaksbehandlere: SaksbehandlerProfil[];
+  avdelingensSaksbehandlere: SaksbehandlerDto[];
 }
 
 export const GrupperPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehandlere }: Props) => {

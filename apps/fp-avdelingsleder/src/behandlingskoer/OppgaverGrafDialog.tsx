@@ -5,12 +5,12 @@ import { Button, Dialog } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { AktiveOgTilgjengeligeOppgaverGraf } from '@navikt/fp-los-felles';
-import type { SakslisteAvdeling } from '@navikt/fp-types';
+import type { SakslisteDto } from '@navikt/fp-types';
 
 import { oppgaveFilterStatistikkOptions } from '../data/fplosAvdelingslederApi';
 
 interface Props {
-  saksliste: SakslisteAvdeling;
+  saksliste: SakslisteDto;
   valgtAvdelingEnhet: string;
 }
 

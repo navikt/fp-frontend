@@ -5,24 +5,23 @@ import { XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Table, VStack } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { SaksbehandlerProfil } from '@navikt/fp-types';
+import type { SaksbehandlerDto } from '@navikt/fp-types';
 
 import { LosUrl, slettSaksbehandler } from '../data/fplosAvdelingslederApi';
 import { SletteSaksbehandlerModal } from './SletteSaksbehandlerModal';
 
 interface Props {
-  saksbehandlere: SaksbehandlerProfil[];
+  saksbehandlere: SaksbehandlerDto[];
   valgtAvdelingEnhet: string;
 }
 
 export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
   const intl = useIntl();
-  const [valgtSaksbehandler, setValgtSaksbehandler] = useState<SaksbehandlerProfil>();
+  const [valgtSaksbehandler, setValgtSaksbehandler] = useState<SaksbehandlerDto>();
 
   const { mutate: fjernSaksbehandler } = useMutation({
-    mutationFn: (valuesToStore: SaksbehandlerProfil) =>
-      slettSaksbehandler(valuesToStore.brukerIdent, valgtAvdelingEnhet),
+    mutationFn: (valuesToStore: SaksbehandlerDto) => slettSaksbehandler(valuesToStore.brukerIdent, valgtAvdelingEnhet),
     onSuccess: () => {
       void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSBEHANDLERE_FOR_AVDELING],
