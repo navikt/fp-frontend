@@ -4,6 +4,7 @@ import ky from 'ky';
 import {
   type AlleKodeverkLos,
   type InitLinksDto,
+  type KøStatistikkDto,
   type NøkkeltallBehandlingFørsteUttakDto,
   type NøkkeltallBehandlingVentefristUtløperDto,
   type OppgaverForAvdeling,
@@ -15,7 +16,6 @@ import {
   type SaksbehandlerProfil,
   type SakslisteAvdeling,
   type SakslisteDto,
-  type KøStatistikkDto,
 } from '@navikt/fp-types';
 
 const kyExtended = ky.extend({

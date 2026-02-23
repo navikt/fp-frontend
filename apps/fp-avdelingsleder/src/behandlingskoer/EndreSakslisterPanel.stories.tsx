@@ -10,7 +10,7 @@ import {
   urlEncodeNorskeBokstaver,
   withQueryClient,
 } from '@navikt/fp-storybook-utils';
-import type { SakslisteAvdeling, KøStatistikkDto } from '@navikt/fp-types';
+import type { KøStatistikkDto,SakslisteAvdeling } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
