@@ -147,12 +147,19 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                       <Button
                         data-color="neutral"
                         variant="tertiary"
-                        icon={<MenuElipsisVerticalIcon title={intl.formatMessage({ id: 'ReservasjonerTabell.Meny' })} />}
+                        icon={
+                          <MenuElipsisVerticalIcon title={intl.formatMessage({ id: 'ReservasjonerTabell.Meny' })} />
+                        }
                         size="small"
                       />
                     </ActionMenu.Trigger>
                     <ActionMenu.Content>
-                      <ActionMenu.Group label={intl.formatMessage({ id: 'ReservasjonerTabell.MenyLabel' }, { saksnummer: reservasjon.oppgaveSaksNr })}>
+                      <ActionMenu.Group
+                        label={intl.formatMessage(
+                          { id: 'ReservasjonerTabell.MenyLabel' },
+                          { saksnummer: reservasjon.oppgaveSaksNr },
+                        )}
+                      >
                         <ActionMenu.Item
                           icon={<CalendarIcon aria-hidden />}
                           onSelect={() => showReservasjonEndringDato(reservasjon)}
