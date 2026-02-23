@@ -26,29 +26,42 @@ const BEHANDLING_TYPES: OppgaverForAvdelingPerDato['behandlingType'][] = [
 ];
 const FAGSAK_YTELSE_TYPES: OppgaverForAvdelingPerDato['fagsakYtelseType'][] = ['FP', 'ES', 'SVP'];
 
+const MAX_PERIODE_LENGDE = 28;
+
+/**
+ * Genererer en liste med statistikk. Generering tar for seg de siste 28 dagene(MAX_PERIODE_LENGDE).
+ *
+ * Det opprettes et element for hver kombinasjon av `behandlingType` og `fagsakYtelseType`.
+ * For å oppnå et relativt realistisk tall som blir `antall` bruker vi indexen til både BEHANDLING_TYPES
+ * og FAGSAK_YTELSE_TYPES i kalkuleringen av `antall`.
+ */
 const generateOppgaverPerDato = (): OppgaverForAvdelingPerDato[] => {
   const oppgaver: OppgaverForAvdelingPerDato[] = [];
   const today = dayjs();
-  const periodeDaysBack = 28; // 4 weeks (matches default display period)
 
-  // Generate for each date in the period (4 weeks back to today)
-  for (let daysAgo = periodeDaysBack; daysAgo >= 0; daysAgo--) {
-    const dato = today.subtract(daysAgo, 'day').format(ISO_DATE_FORMAT);
+  for (let daysAgo = MAX_PERIODE_LENGDE; daysAgo >= 0; daysAgo--) {
+    const statistikkDato = today.subtract(daysAgo, 'day').format(ISO_DATE_FORMAT);
 
-    // Generate for each combination of behandlingType and fagsakYtelseType
-    BEHANDLING_TYPES.forEach((behandlingType, typeIndex) => {
-      FAGSAK_YTELSE_TYPES.forEach(fagsakYtelseType => {
-        // Higher antall for earlier treatment types (lower index)
-        // typeIndex 0 gets max 25, typeIndex 6 gets max ~6
-        const maxAntall = Math.max(1, Math.round(25 - typeIndex * 3.2));
-        const antall = Math.floor(Math.random() * (maxAntall + 1));
+    BEHANDLING_TYPES.forEach((behandlingType, behandlingTypeIndex) => {
+      FAGSAK_YTELSE_TYPES.forEach((fagsakYtelseType, fagsakYtelseTypeIndex) => {
+        /**
+         * For å få litt spill i dataen bruker vi indexen til behandlingType og fagsakYtelseType for å beregne antallet.
+         * Da vil
+         *    FP x førstegangsbehandling  >  SVP x førstegangsbehandling.
+         *    ES x klage  >  ES x tilbakebetaling revurdering.
+         */
+        const behandlingsTypeMultippel = BEHANDLING_TYPES.length - behandlingTypeIndex;
+        const fagsakYtelseTypeMultippel = (FAGSAK_YTELSE_TYPES.length - fagsakYtelseTypeIndex) * 10;
+
+        const maxAntallForKombinasjon = behandlingsTypeMultippel * fagsakYtelseTypeMultippel;
+        const antall = Math.floor(Math.random() * maxAntallForKombinasjon);
 
         oppgaver.push({
           fagsakYtelseType,
           behandlingType,
-          statistikkDato: dato,
-          opprettetDato: dato,
+          statistikkDato,
           antall,
+          opprettetDato: '',
         });
       });
     });
@@ -65,9 +78,7 @@ const meta = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.HENT_OPPGAVER_PER_DATO.replace('ø', '%C3%B8'), () =>
-          HttpResponse.json(generateOppgaverPerDato()),
-        ),
+        http.get(encodeURI(LosUrl.HENT_OPPGAVER_PER_DATO), () => HttpResponse.json(generateOppgaverPerDato())),
       ],
     },
   },
