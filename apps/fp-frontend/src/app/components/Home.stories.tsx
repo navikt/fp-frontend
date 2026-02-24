@@ -7,7 +7,6 @@ import { cleanUrl, http, HttpResponse } from 'msw';
 
 import { alleKodeverk, alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { Aktor, NavAnsatt, Person } from '@navikt/fp-types';
-import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
@@ -23,7 +22,7 @@ const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.
 const PERSON = {
   navn: 'Espen Utvikler',
   fødselsnummer: '121221',
-  kjønn: KjønnkodeEnum.MANN,
+  kjønn: 'M',
   fødselsdato: '2000-01-02',
   aktørId: '12121221',
 

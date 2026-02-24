@@ -4,7 +4,7 @@ import { FigureInwardFillIcon, FigureOutwardFillIcon } from '@navikt/aksel-icons
 import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
-import { KjønnkodeEnum, type Person } from '@navikt/fp-types';
+import { type Person } from '@navikt/fp-types';
 
 import { Aldersvisning } from './Aldersvisning';
 import { MerkePanel } from './Merkepanel';
@@ -23,13 +23,13 @@ export const PersonInfo = ({ person }: Props) => {
 
   return (
     <HStack gap="space-16">
-      {kjønn === KjønnkodeEnum.KVINNE && (
+      {kjønn === 'K' && (
         <FigureOutwardFillIcon
           className={styles['kvinneIcon']}
           title={intl.formatMessage({ id: 'Person.ImageText' })}
         />
       )}
-      {kjønn === KjønnkodeEnum.MANN && (
+      {kjønn === 'M' && (
         <FigureInwardFillIcon className={styles['MannIcon']} title={intl.formatMessage({ id: 'Person.ImageText' })} />
       )}
       <VStack gap="space-4">

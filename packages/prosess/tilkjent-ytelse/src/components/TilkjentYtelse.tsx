@@ -23,7 +23,6 @@ import type {
   FamilieHendelse,
   Kjønnkode,
 } from '@navikt/fp-types';
-import { KjønnkodeEnum } from '@navikt/fp-types';
 
 import { TilkjentYtelseTimelineData } from './TilkjentYtelseTimelineData';
 
@@ -145,7 +144,7 @@ export const TilkjentYtelse = ({
         <Timeline.Row
           label={finnRolle(fagsak, alleKodeverk)}
           icon={
-            hovedsøkerKjønnKode === KjønnkodeEnum.KVINNE ? (
+            hovedsøkerKjønnKode === 'K' ? (
               <FigureOutwardFillIcon width={20} height={20} color="var(--ax-danger-300)" />
             ) : (
               <SilhouetteFillIcon width={20} height={20} color="var(--ax-accent-700)" />

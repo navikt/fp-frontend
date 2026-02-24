@@ -8,8 +8,6 @@ export type {
   ArbeidsgiverOpplysningerWrapper,
   ArbeidsgiverOpplysninger,
 } from './src/arbeidsgiverOpplysningerTsType';
-export type { Kjønnkode } from './src/Kjonnkode';
-export { KjønnkodeEnum } from './src/Kjonnkode';
 export type { AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
 export type { Arbeidsforhold as AoIArbeidsforhold } from './src/index';
 export { AksjonspunktÅrsak } from './src/arbeidOgInntektsmeldingTsType';

@@ -5,7 +5,6 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import { KjønnkodeEnum } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
 import { SøkResultat } from './SøkResultat';
@@ -51,8 +50,7 @@ export const Default: Story = {
           aktørId: '1234',
 
           fødselsnummer: '1010',
-          kjønn: KjønnkodeEnum.MANN,
-
+          kjønn: 'M',
           språkkode: 'NB',
         },
         barnFødt: '2019-12-12',

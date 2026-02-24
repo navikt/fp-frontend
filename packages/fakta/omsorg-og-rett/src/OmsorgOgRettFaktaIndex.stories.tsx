@@ -10,7 +10,7 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import { KjønnkodeEnum, type OmsorgOgRett, type Personadresse, type PersonopplysningerBasis } from '@navikt/fp-types';
+import { type OmsorgOgRett, type Personadresse, type PersonopplysningerBasis } from '@navikt/fp-types';
 
 import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
 
@@ -37,7 +37,7 @@ const adresse2 = {
 const defaultBruker: PersonopplysningerBasis = {
   navn: 'Espen Utvikler',
   aktørId: '1',
-  kjønn: KjønnkodeEnum.MANN,
+  kjønn: 'M',
   sivilstand: 'SAMB',
   fødselsdato: '1989-01-01',
 
@@ -47,7 +47,7 @@ const defaultBruker: PersonopplysningerBasis = {
 const defaultAnnenPart: PersonopplysningerBasis = {
   navn: 'Petra Utvikler',
   aktørId: '2',
-  kjønn: KjønnkodeEnum.KVINNE,
+  kjønn: 'K',
   sivilstand: 'SAMB',
   fødselsdato: '1989-01-01',
 
@@ -60,7 +60,7 @@ const defaultBarn: PersonopplysningerBasis = {
 
   adresser: [adresse2],
   aktørId: '3',
-  kjønn: KjønnkodeEnum.KVINNE,
+  kjønn: 'K',
   sivilstand: 'UGIF',
 };
 
@@ -131,7 +131,7 @@ export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn: Story = {
           navn: 'Petter Tester',
           fødselsdato: '2018-01-01',
           aktørId: '4',
-          kjønn: KjønnkodeEnum.MANN,
+          kjønn: 'M',
         },
       ],
       annenPart: defaultAnnenPart,
