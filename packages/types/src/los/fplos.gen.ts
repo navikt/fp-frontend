@@ -78,6 +78,37 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForFørsteStønadsd
   førsteStønadsdag: string;
 };
 
+export type oppgave_AndreKriterierType =
+  | 'VURDER_SYKDOM'
+  | 'PLEIEPENGER'
+  | 'BARE_FAR_RETT'
+  | 'MOR_UKJENT_UTLAND'
+  | 'UTSATT_START'
+  | 'PRAKSIS_UTSETTELSE'
+  | 'BERØRT_BEHANDLING'
+  | 'ENDRINGSSOKNAD'
+  | 'PAPIRSOKNAD'
+  | 'UTBETALING_TIL_BRUKER'
+  | 'VURDER_FARESIGNALER'
+  | 'VURDER_EØS_OPPTJENING'
+  | 'ARBEID_INNTEKT'
+  | 'NÆRING'
+  | 'REVURDERING_INNTEKTSMELDING'
+  | 'TERMINBEKREFTELSE'
+  | 'NYTT_VEDTAK'
+  | 'KLAGE_PÅ_TILBAKEBETALING'
+  | 'VURDER_FORMKRAV'
+  | 'IKKE_VARSLET'
+  | 'OVER_FIRE_RETTSGEBYR'
+  | 'TIL_BESLUTTER'
+  | 'SAMMENSATT_KONTROLL'
+  | 'UTLANDSSAK'
+  | 'EØS_SAK'
+  | 'KODE7_SAK'
+  | 'RETURNERT_FRA_BESLUTTER'
+  | 'DØD'
+  | 'HASTER';
+
 export type tjenester_avdelingsleder_reservasjon_AvdelingReservasjonDto = {
   andreKriterier: Array<oppgave_AndreKriterierType>;
   behandlingType: oppgave_BehandlingType;
@@ -134,37 +165,6 @@ export type tjenester_avdelingsleder_saksbehandler_dto_SaksbehandlerGruppeSlette
   avdelingEnhet?: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
   gruppeId?: number;
 };
-
-export type oppgave_AndreKriterierType =
-  | 'VURDER_SYKDOM'
-  | 'PLEIEPENGER'
-  | 'BARE_FAR_RETT'
-  | 'MOR_UKJENT_UTLAND'
-  | 'UTSATT_START'
-  | 'PRAKSIS_UTSETTELSE'
-  | 'BERØRT_BEHANDLING'
-  | 'ENDRINGSSOKNAD'
-  | 'PAPIRSOKNAD'
-  | 'UTBETALING_TIL_BRUKER'
-  | 'VURDER_FARESIGNALER'
-  | 'VURDER_EØS_OPPTJENING'
-  | 'ARBEID_INNTEKT'
-  | 'NÆRING'
-  | 'REVURDERING_INNTEKTSMELDING'
-  | 'TERMINBEKREFTELSE'
-  | 'NYTT_VEDTAK'
-  | 'KLAGE_PÅ_TILBAKEBETALING'
-  | 'VURDER_FORMKRAV'
-  | 'IKKE_VARSLET'
-  | 'OVER_FIRE_RETTSGEBYR'
-  | 'TIL_BESLUTTER'
-  | 'SAMMENSATT_KONTROLL'
-  | 'UTLANDSSAK'
-  | 'EØS_SAK'
-  | 'KODE7_SAK'
-  | 'RETURNERT_FRA_BESLUTTER'
-  | 'DØD'
-  | 'HASTER';
 
 export type oppgave_Periodefilter = 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER' | 'FAST_PERIODE';
 
@@ -256,89 +256,6 @@ export type tjenester_kodeverk_KodeverkRestTjeneste_KriterieFilterDto = {
   andreKriterierType?: oppgave_AndreKriterierType;
   valgbarForBehandlingTyper?: Array<oppgave_BehandlingType>;
   valgbarForYtelseTyper?: Array<oppgave_FagsakYtelseType>;
-};
-
-export type vedtak_hendelser_behandling_Aksjonspunktstatus = 'AVBRUTT' | 'OPPRETTET' | 'UTFØRT';
-
-export type vedtak_hendelser_behandling_Aksjonspunkttype =
-  | 'AKSJONSPUNKT'
-  | 'OVERSTYRING'
-  | 'BESLUTTER'
-  | 'PAPIRSØKNAD'
-  | 'VENT';
-
-export type vedtak_hendelser_behandling_Behandlingsstatus =
-  | 'OPPRETTET'
-  | 'UTREDES'
-  | 'FATTER_VEDTAK'
-  | 'IVERKSETTER_VEDTAK'
-  | 'AVSLUTTET';
-
-export type vedtak_hendelser_behandling_Behandlingstype =
-  | 'FØRSTEGANGS'
-  | 'REVURDERING'
-  | 'TILBAKEBETALING'
-  | 'TILBAKEBETALING_REVURDERING'
-  | 'KLAGE'
-  | 'ANKE'
-  | 'INNSYN';
-
-export type vedtak_hendelser_behandling_Behandlingsårsak =
-  | 'SØKNAD'
-  | 'INNTEKTSMELDING'
-  | 'FOLKEREGISTER'
-  | 'PLEIEPENGER'
-  | 'ETTERKONTROLL'
-  | 'MANUELL'
-  | 'BERØRT'
-  | 'UTSATT_START'
-  | 'OPPHØR_NY_SAK'
-  | 'REGULERING'
-  | 'KLAGE_OMGJØRING'
-  | 'KLAGE_TILBAKEBETALING'
-  | 'ANNET';
-
-export type vedtak_hendelser_behandling_Kildesystem = 'FPSAK' | 'FPTILBAKE';
-
-export type vedtak_hendelser_behandling_Ytelse = 'ENGANGSTØNAD' | 'FORELDREPENGER' | 'SVANGERSKAPSPENGER';
-
-export type vedtak_hendelser_behandling_los_LosBehandlingDto = {
-  aksjonspunkt?: Array<vedtak_hendelser_behandling_los_LosBehandlingDto_LosAksjonspunktDto>;
-  aktørId: string;
-  ansvarligSaksbehandlerIdent?: string;
-  avsluttetTidspunkt?: string;
-  behandlendeEnhetId?: string;
-  behandlingUuid: string;
-  behandlingsegenskaper?: Array<string>;
-  behandlingsfrist?: string;
-  behandlingsstatus: vedtak_hendelser_behandling_Behandlingsstatus;
-  behandlingstype: vedtak_hendelser_behandling_Behandlingstype;
-  behandlingsårsaker?: Array<vedtak_hendelser_behandling_Behandlingsårsak>;
-  faresignaler?: boolean;
-  foreldrepengerDto?: vedtak_hendelser_behandling_los_LosBehandlingDto_LosForeldrepengerDto;
-  kildesystem: vedtak_hendelser_behandling_Kildesystem;
-  opprettetTidspunkt: string;
-  refusjonskrav?: boolean;
-  saksegenskaper?: Array<string>;
-  saksnummer: string;
-  tilbakeDto?: vedtak_hendelser_behandling_los_LosBehandlingDto_LosTilbakeDto;
-  ytelse: vedtak_hendelser_behandling_Ytelse;
-};
-
-export type vedtak_hendelser_behandling_los_LosBehandlingDto_LosAksjonspunktDto = {
-  definisjon?: string;
-  fristTid?: string;
-  status?: vedtak_hendelser_behandling_Aksjonspunktstatus;
-  type?: vedtak_hendelser_behandling_Aksjonspunkttype;
-};
-
-export type vedtak_hendelser_behandling_los_LosBehandlingDto_LosForeldrepengerDto = {
-  førsteUttakDato?: string;
-};
-
-export type vedtak_hendelser_behandling_los_LosBehandlingDto_LosTilbakeDto = {
-  feilutbetaltBeløp?: number;
-  førsteFeilutbetalingDato?: string;
 };
 
 export type tjenester_felles_dto_FlyttetReservasjonDto = {
@@ -955,20 +872,6 @@ export type HentKriterieFilterResponses = {
 };
 
 export type HentKriterieFilterResponse = HentKriterieFilterResponses[keyof HentKriterieFilterResponses];
-
-export type LagreBehandlingData = {
-  body: vedtak_hendelser_behandling_los_LosBehandlingDto;
-  path?: never;
-  query?: never;
-  url: '/api/migrering/lagrebehandling';
-};
-
-export type LagreBehandlingResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
 
 export type EndreOppgaveReservasjonData = {
   /**
