@@ -7,7 +7,7 @@ import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { FlyttReservasjonModal, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
-import type { ReservasjonDto } from '@navikt/fp-types';
+import type { AvdelingReservasjonDto } from '@navikt/fp-types';
 
 import {
   endreReservasjon,
@@ -26,7 +26,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
   const intl = useIntl();
   const [showReservasjonEndringDatoModal, setShowReservasjonEndringDatoModal] = useState(false);
   const [showFlyttReservasjonModal, setShowFlyttReservasjonModal] = useState(false);
-  const [valgtReservasjon, setValgtReservasjon] = useState<ReservasjonDto | undefined>(undefined);
+  const [valgtReservasjon, setValgtReservasjon] = useState<AvdelingReservasjonDto | undefined>(undefined);
   const [søketekst, setSøketekst] = useState('');
 
   const behandlingTyper = useLosKodeverk('BehandlingType');
@@ -53,12 +53,12 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
     mutationFn: (valuesToStore: { brukerIdent: string }) => flyttReservasjonSaksbehandlerSøk(valuesToStore.brukerIdent),
   });
 
-  const showReservasjonEndringDato = (reservasjon: ReservasjonDto): void => {
+  const showReservasjonEndringDato = (reservasjon: AvdelingReservasjonDto): void => {
     setShowReservasjonEndringDatoModal(true);
     setValgtReservasjon(reservasjon);
   };
 
-  const showFlytteModal = (reservasjon: ReservasjonDto): void => {
+  const showFlytteModal = (reservasjon: AvdelingReservasjonDto): void => {
     setShowFlyttReservasjonModal(true);
     setValgtReservasjon(reservasjon);
   };
