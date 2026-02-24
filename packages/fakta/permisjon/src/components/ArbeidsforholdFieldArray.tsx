@@ -2,8 +2,8 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 
 import type {
   AlleKodeverk,
-  Arbeidsforhold,
   ArbeidOgInntektsmelding,
+  Arbeidsforhold,
   ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
 

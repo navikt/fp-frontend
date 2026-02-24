@@ -10,8 +10,8 @@ import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type {
   AlleKodeverk,
-  Arbeidsforhold,
   ArbeidOgInntektsmelding,
+  Arbeidsforhold,
   ArbeidsgiverOpplysningerPerId,
   Inntektsmelding,
 } from '@navikt/fp-types';

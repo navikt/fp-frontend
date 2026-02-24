@@ -5,8 +5,8 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type {
-  Arbeidsforhold,
   ArbeidOgInntektsmelding,
+  Arbeidsforhold,
   ArbeidsgiverOpplysningerPerId,
   Inntektsmelding,
 } from '@navikt/fp-types';

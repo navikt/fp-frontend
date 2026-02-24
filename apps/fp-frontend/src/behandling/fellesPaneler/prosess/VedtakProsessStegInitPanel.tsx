@@ -9,15 +9,9 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakEditeringProvider, type VedtakForhåndsvisData, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import {
-  type Aksjonspunkt,
-  type BehandlingFpSak,
-  isAvslag,
-  type Vilkår,
-  type VilkårUtfallType,
-} from '@navikt/fp-types';
+import { type Aksjonspunkt, type BehandlingFpSak, type Vilkår, type VilkårUtfallType } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { erAksjonspunktÅpent } from '@navikt/fp-utils';
+import { erAksjonspunktÅpent, isAvslag } from '@navikt/fp-utils';
 
 import { forhåndsvisMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';

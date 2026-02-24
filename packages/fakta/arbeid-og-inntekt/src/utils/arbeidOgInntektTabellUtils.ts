@@ -1,4 +1,4 @@
-import type { Arbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { ArbeidOgInntektsmelding, Arbeidsforhold, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
 import { harMatchendeArbeidsgiverIdent, lagArbeidsgiver } from './arbeidsgiverUtils';

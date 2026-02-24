@@ -5,7 +5,6 @@ import { cleanUrl, http, HttpResponse } from 'msw';
 
 import { alleKodeverk, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
-
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak } from '../../.storybook/testdata';
