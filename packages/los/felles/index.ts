@@ -6,10 +6,14 @@ export { AktiveOgTilgjengeligeOppgaverGraf } from './src/graf/AktiveOgTilgjengel
 export {
   getAkselVariable,
   createBarSeries,
+  createBarSeriesWithColorResolver,
   createLineSeries,
   createToolboxWithFilename,
   formaterMånedÅr,
   getStyle,
   getAkselColorPair,
+  getSoftAkselColorPair,
   layoutOptions,
 } from './src/echartUtils';
+
+export type { AkselColorResolver, ColorPair } from './src/echartUtils';

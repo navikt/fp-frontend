@@ -3,6 +3,7 @@ import ky from 'ky';
 
 import {
   type AlleKodeverkLos,
+  type AvdelingReservasjonDto,
   type InitLinksDto,
   type KøStatistikkDto,
   type KriterieFilterDto,
@@ -11,7 +12,6 @@ import {
   type OppgaverForAvdeling,
   type OppgaverForAvdelingPerDato,
   type OppgaverForFørsteStønadsdagUkeMåned,
-  type ReservasjonDto,
   type ReservasjonStatusDto,
   type SaksbehandlerDto,
   type SaksbehandlereOgSaksbehandlerGrupper,
@@ -192,7 +192,7 @@ export const reservasjonerForAvdelingOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.RESERVASJONER_FOR_AVDELING, avdelingEnhet],
     queryFn: () =>
-      kyExtended.get(LosUrl.RESERVASJONER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<ReservasjonDto[]>(),
+      kyExtended.get(LosUrl.RESERVASJONER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<AvdelingReservasjonDto[]>(),
     initialData: [],
   });
 

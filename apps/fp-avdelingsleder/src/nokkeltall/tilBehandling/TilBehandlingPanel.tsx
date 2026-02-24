@@ -12,6 +12,7 @@ import { type OppgaverForAvdelingPerDato } from '@navikt/fp-types';
 import { oppgaverPerDatoOptions } from '../../data/fplosAvdelingslederApi';
 import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
+import { type EndringForDatoGraf, OpprettetAvsluttetGraf } from './OpprettetAvsluttetGraf.tsx';
 import { type OppgaveForDatoGraf, TilBehandlingGraf } from './TilBehandlingGraf';
 
 dayjs.extend(isSameOrAfter);
@@ -90,6 +91,19 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
             .filter(ofa => erDatoInnenforPeriode(ofa, ukevalg)),
         )}
       />
+      <div
+        /* Ekstra mellomrom pga legends */
+      />
+      <OpprettetAvsluttetGraf
+        height={height}
+        isToUkerValgt={ukevalg === UKE_2}
+        behandlingTyper={behandlingTyper}
+        endringPerDato={slaSammenLikeEndringerOgDatoer(
+          oppgaverPerDato
+            .filter(ofa => ytelseTyper.length === 0 || ytelseTyper.includes(ofa.fagsakYtelseType))
+            .filter(ofa => erDatoInnenforPeriode(ofa, ukevalg)),
+        )}
+      />
     </VStack>
   );
 };
@@ -129,6 +143,28 @@ const slaSammenLikeBehandlingstyperOgDatoer = (
         behandlingType: sammenslatte[index]!.behandlingType,
         statistikkDato: sammenslatte[index]!.statistikkDato,
         antall: sammenslatte[index]!.antall + o.antall,
+      };
+    }
+  }
+
+  return sammenslatte;
+};
+
+const slaSammenLikeEndringerOgDatoer = (oppgaverForAvdeling: OppgaverForAvdelingPerDato[]): EndringForDatoGraf[] => {
+  const sammenslatte: EndringForDatoGraf[] = [];
+
+  for (const o of oppgaverForAvdeling) {
+    const index = sammenslatte.findIndex(
+      s => s.behandlingType === o.behandlingType && s.statistikkDato === o.statistikkDato,
+    );
+    if (index === -1) {
+      sammenslatte.push(o);
+    } else {
+      sammenslatte[index] = {
+        behandlingType: sammenslatte[index]!.behandlingType,
+        statistikkDato: sammenslatte[index]!.statistikkDato,
+        opprettet: sammenslatte[index]!.opprettet + o.opprettet,
+        avsluttet: sammenslatte[index]!.avsluttet + o.avsluttet,
       };
     }
   }
