@@ -41,8 +41,6 @@ const beregnFellesYMax = (denneUken: LukkedeOppgaverData, forrigeUke: LukkedeOpp
   return Math.ceil(maksMedMargin / steg) * steg;
 };
 
-// TODO: tekst på linje for forrige uke (ukenummer?), commit signatur, diverse fikser, sjekke mulighet for null horisontal avstand mellom bokser., popup labels
-
 export const LukkedeOppgaverPanel = ({ køStatistikk, height = 400 }: Props) => {
   const [valgtUke, setValgtUke] = useState<UkeValg>(UkeValg.DENNE_UKEN);
 

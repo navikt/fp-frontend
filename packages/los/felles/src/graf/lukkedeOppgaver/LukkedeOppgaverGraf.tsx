@@ -1,8 +1,9 @@
 import { useIntl } from 'react-intl';
 
-import { DDMMYY_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
+import { capitalizeFirstLetter, DDMMYY_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs, { type Dayjs } from 'dayjs';
 import type { BarSeriesOption, EChartsOption } from 'echarts';
+import type { CallbackDataParams } from 'echarts/types/dist/shared';
 
 import {
   createBarSeries,
@@ -25,9 +26,9 @@ type MarkLine = NonNullable<BarSeriesOption['markLine']>;
 type MarkLineItem = NonNullable<MarkLine['data']>[number];
 type YAxisMarkLine = Extract<MarkLineItem, { yAxis?: unknown }>;
 
-const lagDagLabels = (aktuellMandag: string, erInneværendeUke: boolean): string[] => {
+const lagUkedatoer = (aktuellMandag: string): Array<Dayjs> => {
   const mandag = dayjs(aktuellMandag);
-  return Array.from({ length: 7 }, (_, i) => mandag.add(i, 'day').format(erInneværendeUke ? 'ddd' : 'ddd DD.MM'));
+  return Array.from({ length: 7 }, (_, i) => mandag.add(i, 'day'));
 };
 
 const lagStackOffsetSerieData = (antallPerDag: readonly number[]): number[] => {
@@ -45,13 +46,31 @@ const filename = (ukeStart: dayjs.Dayjs): string => {
   return `Lukkede_oppgaver_${ukeStart.format(DDMMYY_DATE_FORMAT)}-${ukeSlutt}`;
 };
 
+const formatTooltipContent = (dato: Dayjs, antall: number, antallTotalt: number): string => {
+  const xLabel = dato.isSame(dayjs(), 'day') ? 'I dag' : capitalizeFirstLetter(dato.format('dddd'));
+  const antallFormattert = antall.toLocaleString('nb-NO');
+  const totalFormattert = antallTotalt.toLocaleString('nb-NO');
+  return `
+    <b>${xLabel}</b><br/>
+    <div style="display: flex; justify-content: space-between; gap: 16px;">
+      <span>Dag:</span>
+      <span>${antallFormattert}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; gap: 16px;">
+      <span>Total:</span>
+      <span>${totalFormattert}</span>
+    </div>
+  `;
+};
+
+
 export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) => {
   const intl = useIntl();
   const options = getStyle();
 
   const { antallPerDag, mandagDato } = lukkedeOppgaver;
   const erInneværendeUke = dayjs(mandagDato).startOf('day').isSame(startAvIsoUke(dayjs()), 'day');
-  const xAxisLabels = lagDagLabels(mandagDato, erInneværendeUke);
+  const xAxisDatoer = lagUkedatoer(mandagDato);
   const offsetSerieData = lagStackOffsetSerieData(antallPerDag);
 
   const placeholderSerie: BarSeriesOption = {
@@ -139,13 +158,22 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
       ...options.tooltip,
       trigger: 'axis',
       axisPointer: { type: 'shadow' },
-      valueFormatter: value => (value as number).toLocaleString('nb-NO'),
+      formatter: raw => {
+        const params = Array.isArray(raw) ? raw : [raw];
+        if (!params.length) return '';
+        const idx = (params[0] as CallbackDataParams).dataIndex;
+        const xLabelDato = xAxisDatoer[idx];
+        if (!xLabelDato || xLabelDato.isAfter(dayjs(), 'day')) return '';
+        const antall = antallPerDag[idx] ?? 0;
+        const antallTotalt = (offsetSerieData[idx] ?? 0) + antall;
+        return formatTooltipContent(xLabelDato, antall, antallTotalt);
+      },
     },
     legend: { ...options.legend, show: true },
     xAxis: [
       {
         type: 'category',
-        data: xAxisLabels,
+        data: xAxisDatoer.map(dato => dato.format(erInneværendeUke ? 'ddd' : 'ddd DD.MM')),
         axisLabel: { ...options.textStyle },
       },
     ],
