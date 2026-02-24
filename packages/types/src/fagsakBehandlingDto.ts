@@ -1,4 +1,4 @@
-import type { FagsakBehandlingDtoFpSak } from './fagsakBehandlingDtoFpSak';
-import type { FagsakBehandlingDtoFpTilbake } from './tilbakekreving/fagsakBehandlingDtoFpTilbake';
+import type { FagsakBehandlingDtoFpSak } from './index';
+import type { FagsakBehandlingDtoFpTilbake } from './tilbakekreving';
 
 export type FagsakBehandlingDto = FagsakBehandlingDtoFpSak | FagsakBehandlingDtoFpTilbake;

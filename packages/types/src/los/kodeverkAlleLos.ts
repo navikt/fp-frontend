@@ -1,4 +1,4 @@
-import type { FagsakStatus } from '../fagsakStatus';
+import type { FagsakStatus } from '../index';
 import type { oppgave_BehandlingType, oppgave_FagsakYtelseType } from './fplos.gen';
 import type { AndreKriterierType, BehandlingVenteStatus, KøSortering, OppgaveBehandlingStatus } from './index';
 
