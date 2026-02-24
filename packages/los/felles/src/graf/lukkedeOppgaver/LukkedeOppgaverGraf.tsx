@@ -95,8 +95,11 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
   }
 
   if (lukkedeOppgaver.forrigeUkeTotal > 0) {
+    const nameFormatted = erInneværendeUke
+      ? intl.formatMessage({ id: 'LukkedeOppgaverGraf.TotalForrigeUke' })
+      : intl.formatMessage({ id: 'LukkedeOppgaverGraf.TotalForrigeUkeAlternativ' });
     markLines.push({
-      name: intl.formatMessage({ id: 'LukkedeOppgaverGraf.TotalForrigeUke' }),
+      name: nameFormatted,
       yAxis: lukkedeOppgaver.forrigeUkeTotal,
       label: {
         formatter: p => {
