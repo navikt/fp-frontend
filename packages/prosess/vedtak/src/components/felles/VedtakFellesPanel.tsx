@@ -11,11 +11,9 @@ import {
   type BehandlingFpSak,
   type Behandlingsresultat,
   type BehandlingStatus,
-  isAvslag,
-  isOpphor,
   type Oppgave,
 } from '@navikt/fp-types';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { isAvslag, isInnvilget, isOpphor, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
@@ -26,7 +24,6 @@ import { OverstyringVedtaksbrev } from './OverstyringVedtaksbrev';
 import { VedtakHelpTextPanel } from './VedtakHelpTextPanel';
 
 import styles from './vedtakFellesPanel.module.css';
-import { isInnvilget } from '../../vedtakUtils.ts';
 
 const finnTekstkodeFraBehandlingstatus = (behandlingStatus: BehandlingStatus): string =>
   behandlingStatus === 'AVSLU' || behandlingStatus === 'IVED' ? 'VedtakForm.vedtak' : 'VedtakForm.ForslagTilVedtak';

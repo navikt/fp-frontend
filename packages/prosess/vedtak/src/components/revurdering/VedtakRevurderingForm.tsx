@@ -16,8 +16,6 @@ import {
   type BeregningsresultatDagytelse,
   type BeregningsresultatEs,
   type Fagsak,
-  isAvslag,
-  isOpphor,
   type KonsekvensForYtelsen,
   type Oppgave,
   type SimuleringResultat,
@@ -32,7 +30,7 @@ import type {
   VurdereDokumentForVedtakAp,
   VurdereInntektsmeldingKlageForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { isAvslag, isInnvilget, isOpphor, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakResultType } from '../../kodeverk/vedtakResultType';
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
@@ -44,7 +42,6 @@ import { buildInitialValues } from '../forstegang/VedtakForm';
 import { VedtakAvslagArsakOgBegrunnelsePanel } from './VedtakAvslagArsakOgBegrunnelsePanel';
 import { VedtakInnvilgetRevurderingPanel } from './VedtakInnvilgetRevurderingPanel';
 import { VedtakOpphorRevurderingPanel } from './VedtakOpphorRevurderingPanel';
-import { isInnvilget } from '../../vedtakUtils.ts';
 
 type RevurderingVedtakAksjonspunkter =
   | ForeslaVedtakAp

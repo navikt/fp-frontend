@@ -14,8 +14,6 @@ import {
   type Behandlingsresultat,
   type BeregningsresultatDagytelse,
   type BeregningsresultatEs,
-  isAvslag,
-  isKlageOmgjort,
   type Oppgave,
   type SimuleringResultat,
   type TilbakekrevingValg,
@@ -26,7 +24,7 @@ import type {
   VurdereAnnenYtelseForVedtakAp,
   VurdereDokumentForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { isAvslag, isInnvilget, isKlageOmgjort, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
@@ -35,7 +33,6 @@ import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import { VedtakAvslagPanel } from './VedtakAvslagPanel';
 import { VedtakInnvilgetPanel } from './VedtakInnvilgetPanel';
-import { isInnvilget } from '../../vedtakUtils.ts';
 
 const finnAvslagResultatText = (behandlingResultatTypeKode: BehandlingResultatType, ytelseType: string): string => {
   if (behandlingResultatTypeKode === 'KLAGE_YTELSESVEDTAK_OPPHEVET') {
