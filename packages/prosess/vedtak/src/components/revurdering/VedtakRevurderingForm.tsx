@@ -17,7 +17,6 @@ import {
   type BeregningsresultatEs,
   type Fagsak,
   isAvslag,
-  isInnvilget,
   isOpphor,
   type KonsekvensForYtelsen,
   type Oppgave,
@@ -45,6 +44,7 @@ import { buildInitialValues } from '../forstegang/VedtakForm';
 import { VedtakAvslagArsakOgBegrunnelsePanel } from './VedtakAvslagArsakOgBegrunnelsePanel';
 import { VedtakInnvilgetRevurderingPanel } from './VedtakInnvilgetRevurderingPanel';
 import { VedtakOpphorRevurderingPanel } from './VedtakOpphorRevurderingPanel';
+import { isInnvilget } from '../../vedtakUtils.ts';
 
 type RevurderingVedtakAksjonspunkter =
   | ForeslaVedtakAp

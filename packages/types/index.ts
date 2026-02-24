@@ -1,5 +1,5 @@
 export type { Behandlingsresultat, KonsekvensForYtelsen, BehandlingResultatType } from './src/behandlingsresultat';
-export { isAvslag, isInnvilget, isOpphor, isKlageOmgjort, isKlageAvvist } from './src/behandlingsresultat';
+export { isAvslag, isOpphor, isKlageOmgjort, isKlageAvvist } from './src/behandlingsresultat';
 export type { AlleKodeverk, KodeverkType, KodeverkMedNavn } from './src/kodeverkAlle';
 
 export type { Arbeidsforhold as AoIArbeidsforhold } from './src/index';

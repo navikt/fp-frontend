@@ -10,32 +10,11 @@ export type KonsekvensForYtelsen = foreldrepenger_behandlingslager_behandling_Ko
 
 export type BehandlingResultatType = foreldrepenger_behandlingslager_behandling_BehandlingResultatType;
 
-const innvilgetKlageResultatTyper = new Set<BehandlingResultatType>([
-  'KLAGE_MEDHOLD',
-  'KLAGE_DELVIS_MEDHOLD',
-  'KLAGE_OMGJORT_UGUNST',
-  'KLAGE_YTELSESVEDTAK_OPPHEVET',
-  'KLAGE_YTELSESVEDTAK_STADFESTET',
-  'KLAGE_TILBAKEKREVING_VEDTAK_STADFESTET',
-  'HJEMSENDE_UTEN_OPPHEVE',
-]);
-
 const klageOmgjortResultatTyper = new Set<BehandlingResultatType>([
   'KLAGE_MEDHOLD',
   'KLAGE_DELVIS_MEDHOLD',
   'KLAGE_OMGJORT_UGUNST',
 ]);
-
-const innvilgetRevurderingFPResultatTyper = new Set<BehandlingResultatType>([
-  'FORELDREPENGER_ENDRET',
-  'FORELDREPENGER_SENERE',
-  'INGEN_ENDRING',
-]);
-
-export const isInnvilget = (behandlingResultatTypeKode: BehandlingResultatType): boolean =>
-  innvilgetKlageResultatTyper.has(behandlingResultatTypeKode) ||
-  innvilgetRevurderingFPResultatTyper.has(behandlingResultatTypeKode) ||
-  behandlingResultatTypeKode === 'INNVILGET';
 
 export const isAvslag = (behandlingResultatTypeKode: BehandlingResultatType): boolean =>
   behandlingResultatTypeKode === 'AVSLÅTT' ||

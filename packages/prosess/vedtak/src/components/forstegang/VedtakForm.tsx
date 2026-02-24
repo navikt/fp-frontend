@@ -15,7 +15,6 @@ import {
   type BeregningsresultatDagytelse,
   type BeregningsresultatEs,
   isAvslag,
-  isInnvilget,
   isKlageOmgjort,
   type Oppgave,
   type SimuleringResultat,
@@ -36,6 +35,7 @@ import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import { VedtakAvslagPanel } from './VedtakAvslagPanel';
 import { VedtakInnvilgetPanel } from './VedtakInnvilgetPanel';
+import { isInnvilget } from '../../vedtakUtils.ts';
 
 const finnAvslagResultatText = (behandlingResultatTypeKode: BehandlingResultatType, ytelseType: string): string => {
   if (behandlingResultatTypeKode === 'KLAGE_YTELSESVEDTAK_OPPHEVET') {
