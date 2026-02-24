@@ -3,9 +3,9 @@ import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import {
-  createBarSeries,
   createBarSeriesWithColorResolver,
   createToolboxWithFilename,
+  getAkselColorPair,
   getSoftAkselColorPair,
   getStyle,
   ReactECharts,
@@ -108,9 +108,10 @@ export const OpprettetAvsluttetGraf = ({ height, endringPerDato, isToUkerValgt, 
         },
         series: [
           ...Array.from(dataOpprettet.entries()).map(([type, verdi]) =>
-            createBarSeries(
+            createBarSeriesWithColorResolver(
               { name: `${finnBehandlingTypeNavn(behandlingTyper, type)} (opprettet)`, data: verdi, stack: 'opprettet' },
               behandlingstypeAkselFarger[type],
+              getAkselColorPair,
             ),
           ),
           ...Array.from(dataAvsluttet.entries()).map(([type, verdi]) =>
