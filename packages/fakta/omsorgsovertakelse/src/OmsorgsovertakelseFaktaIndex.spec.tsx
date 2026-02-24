@@ -80,7 +80,7 @@ describe('OmsorgsovertakelseFaktaIndex', () => {
     await userEvent.click(apBoks.getByRole('radio', { name: 'Ja' }));
     await userEvent.click(apBoks.getByRole('checkbox', { name: 'Barn 2 født 09.10.2005Over 15 år' }));
     await userEvent.click(apBoks.getByRole('radio', { name: 'Foreldreansvar § 14-17 andre ledd' }));
-    await userEvent.click(screen.getByText('Ikke oppfylt'));
+    await userEvent.click(screen.getByLabelText('Ikke oppfylt'));
     await userEvent.selectOptions(screen.getByLabelText('Velg en avslagsårsak'), '1004');
     await userEvent.type(apBoks.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));

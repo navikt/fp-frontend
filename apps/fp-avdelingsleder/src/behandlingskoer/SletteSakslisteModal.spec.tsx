@@ -2,7 +2,7 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import type { SakslisteAvdeling } from '@navikt/fp-types';
+import type { SakslisteDto } from '@navikt/fp-types';
 
 import * as stories from './SletteSakslisteModal.stories';
 
@@ -34,7 +34,7 @@ describe('SletteSakslisteModal', () => {
         inkluder: [],
         ekskluder: [],
       },
-    } satisfies SakslisteAvdeling);
+    } satisfies SakslisteDto);
   });
 
   it('skal vise modal for sletting av saksliste og så svare nei', async () => {

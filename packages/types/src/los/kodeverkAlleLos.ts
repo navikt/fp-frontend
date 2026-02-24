@@ -1,9 +1,6 @@
-import type {  FagsakStatus  } from '../index';
-import type { AndreKriterierType } from './andreKriterierType';
-import type { BehandlingVenteStatus } from './behandlingVenteStatus';
+import type { FagsakStatus } from '../index';
 import type { oppgave_BehandlingType, oppgave_FagsakYtelseType } from './fplos.gen';
-import type { KøSortering } from './køSortering';
-import type { OppgaveBehandlingStatus } from './oppgaveBehandlingStatus';
+import type { AndreKriterierType, BehandlingVenteStatus, KøSortering, OppgaveBehandlingStatus } from './index';
 
 //Mapping mellom LosKodeverkType og union-types med verdier
 type KodeverkEnumMap = {

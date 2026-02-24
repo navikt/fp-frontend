@@ -2,14 +2,14 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
 
-import type { SaksbehandlerProfil } from '@navikt/fp-types';
+import type { SaksbehandlerDto } from '@navikt/fp-types';
 
 import styles from './sletteSaksbehandlerModal.module.css';
 
 type Props = Readonly<{
-  valgtSaksbehandler: SaksbehandlerProfil;
+  valgtSaksbehandler: SaksbehandlerDto;
   closeSletteModal: () => void;
-  fjernSaksbehandler: (saksbehandler: SaksbehandlerProfil) => void;
+  fjernSaksbehandler: (saksbehandler: SaksbehandlerDto) => void;
 }>;
 
 /**

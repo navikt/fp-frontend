@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { KøStatistikkDto, SakslisteAvdeling } from '@navikt/fp-types';
+import type { KøStatistikkDto, SakslisteDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
@@ -61,7 +61,7 @@ const SAKSLISTER = [
       behandlingerPåVent: 10,
     },
   },
-] satisfies SakslisteAvdeling[];
+] satisfies SakslisteDto[];
 
 // Hjelpefunksjon for relative datoer
 const getTidspunktForAntallTimerSiden = (hours: number): string => {

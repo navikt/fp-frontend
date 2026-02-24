@@ -2,12 +2,12 @@ import { FormattedMessage } from 'react-intl';
 
 import { Button, Dialog } from '@navikt/ds-react';
 
-import type { SakslisteAvdeling } from '@navikt/fp-types';
+import type { SakslisteDto } from '@navikt/fp-types';
 
 interface Props {
-  valgtSaksliste: SakslisteAvdeling;
+  valgtSaksliste: SakslisteDto;
   cancel: () => void;
-  submit: (saksliste: SakslisteAvdeling) => void;
+  submit: (saksliste: SakslisteDto) => void;
 }
 
 /**

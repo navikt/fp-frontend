@@ -9,7 +9,7 @@ import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-va
 import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { type SaksbehandlerGruppeDto, type SaksbehandlerProfil } from '@navikt/fp-types';
+import { type SaksbehandlerDto,type SaksbehandlerGruppeDto } from '@navikt/fp-types';
 
 import { useDebounce } from '../behandlingskoer/sakslisteForm/useDebounce';
 import {
@@ -24,12 +24,12 @@ import styles from './gruppeSaksbehandlere.module.css';
 const minLength3 = minLength(3);
 const maxLength100 = maxLength(100);
 
-const sortGrupperteSaksbehandlere = (saksbehandlere: SaksbehandlerProfil[]) =>
+const sortGrupperteSaksbehandlere = (saksbehandlere: SaksbehandlerDto[]) =>
   [...saksbehandlere].sort((saksbehandler1, saksbehandler2) => saksbehandler1.navn.localeCompare(saksbehandler2.navn));
 
 const sortAvdelingensSaksbehandlere = (
-  saksbehandlere: SaksbehandlerProfil[],
-  grupperteSaksbehandlere: SaksbehandlerProfil[],
+  saksbehandlere: SaksbehandlerDto[],
+  grupperteSaksbehandlere: SaksbehandlerDto[],
 ) =>
   saksbehandlere
     .filter(s => !grupperteSaksbehandlere.some(gs => gs.brukerIdent === s.brukerIdent))
@@ -38,7 +38,7 @@ const sortAvdelingensSaksbehandlere = (
 interface Props {
   valgAvdeldingEnhet: string;
   saksbehandlerGruppe: SaksbehandlerGruppeDto;
-  avdelingensSaksbehandlere: SaksbehandlerProfil[];
+  avdelingensSaksbehandlere: SaksbehandlerDto[];
 }
 
 export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, avdelingensSaksbehandlere }: Props) => {
