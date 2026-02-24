@@ -136,7 +136,7 @@ const OPPGAVER_PER_DATO = [
     opprettet: 3,
     avsluttet: 0,
   },
-];
+] satisfies OppgaverForAvdelingPerDato[];
 
 const meta = {
   title: 'los/avdelingsleder/nokkeltall/TilBehandlingPanel',

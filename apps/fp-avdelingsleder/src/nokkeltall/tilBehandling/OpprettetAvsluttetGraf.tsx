@@ -1,26 +1,28 @@
+import type { AkselColor } from '@navikt/ds-react/types/theme';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { createToolboxWithFilename, getStyle, ReactECharts } from '@navikt/fp-los-felles';
+import {
+  createBarSeries,
+  createBarSeriesWithColorResolver,
+  createToolboxWithFilename,
+  getSoftAkselColorPair,
+  getStyle,
+  ReactECharts,
+} from '@navikt/fp-los-felles';
 import type { BehandlingType, LosKodeverkMedNavn } from '@navikt/fp-types';
 
-const behandlingstypeFarger = {
-  ['BT-009']: '#ef5d28',
-  ['BT-007']: '#ff842f',
-  ['BT-006']: '#ffd23b',
-  ['BT-003']: '#826ba1',
-  ['BT-004']: '#3385d1',
-  ['BT-002']: '#85d5f0',
-  ['BT-008']: '#85d5f0',
-  '-': '#85d5f0', // Eksisterer for TS: burde ikke inntreffe
-} as const;
+const behandlingstypeAkselFarger: Record<BehandlingType, AkselColor> = {
+  ['BT-002']: 'accent', // Førstegangsbehandling
+  ['BT-003']: 'meta-purple', // Klage
+  ['BT-004']: 'success', // Revurdering
+  ['BT-006']: 'warning', // Innsyn
+  ['BT-007']: 'brand-beige', // Tilbakebetaling
+  ['BT-008']: 'meta-lime', // Anke
+  ['BT-009']: 'danger', // Tilbakebetaling revurdering
+  '-': 'neutral', // Eksisterer for TS: burde ikke inntreffe
+};
 
-// Avsluttet uses the same hue but with a light (semi-transparent) fill and a solid border
-const lagAvsluttetFarge = (farge: string): { color: string; borderColor: string; borderWidth: number } => ({
-  color: farge + '55', // ~33% opacity
-  borderColor: farge,
-  borderWidth: 2,
-});
 
 export interface EndringForDatoGraf {
   behandlingType: BehandlingType;
@@ -75,13 +77,17 @@ export const OpprettetAvsluttetGraf = ({ height, endringPerDato, isToUkerValgt, 
         toolbox: createToolboxWithFilename('Antall_til_behandling'),
         legend: [
           {
-            data: Array.from(dataOpprettet.keys()).map(type => `${finnBehandlingTypeNavn(behandlingTyper, type)} (opprettet)`),
+            data: Array.from(dataOpprettet.keys()).map(
+              type => `${finnBehandlingTypeNavn(behandlingTyper, type)} (opprettet)`,
+            ),
             top: 0,
             left: 'center',
             textStyle: { ...options.textStyle },
           },
           {
-            data: Array.from(dataAvsluttet.keys()).map(type => `${finnBehandlingTypeNavn(behandlingTyper, type)} (avsluttet)`),
+            data: Array.from(dataAvsluttet.keys()).map(
+              type => `${finnBehandlingTypeNavn(behandlingTyper, type)} (avsluttet)`,
+            ),
             top: 25,
             left: 'center',
             textStyle: { ...options.textStyle },
@@ -101,21 +107,31 @@ export const OpprettetAvsluttetGraf = ({ height, endringPerDato, isToUkerValgt, 
           axisLabel: { ...options.textStyle },
         },
         series: [
-          ...Array.from(dataOpprettet.entries()).map(([type, value]) => ({
-            name: `${finnBehandlingTypeNavn(behandlingTyper, type)} (opprettet)`,
-            type: 'bar' as const,
-            stack: 'opprettet',
-            data: value,
-            color: behandlingstypeFarger[type],
-          })),
-          ...Array.from(dataAvsluttet.entries()).map(([type, value]) => ({
-            name: `${finnBehandlingTypeNavn(behandlingTyper, type)} (avsluttet)`,
-            type: 'bar' as const,
-            stack: 'avsluttet',
-            data: value,
-            itemStyle: lagAvsluttetFarge(behandlingstypeFarger[type]),
-          })),
-        ]
+          ...Array.from(dataOpprettet.entries()).map(([type, verdi]) =>
+            createBarSeries(
+              { name: `${finnBehandlingTypeNavn(behandlingTyper, type)} (opprettet)`, data: verdi, stack: 'opprettet' },
+              behandlingstypeAkselFarger[type],
+            ),
+          ),
+          ...Array.from(dataAvsluttet.entries()).map(([type, verdi]) =>
+            createBarSeriesWithColorResolver(
+              {
+                name: `${finnBehandlingTypeNavn(behandlingTyper, type)} (avsluttet)`,
+                data: verdi,
+                stack: 'avsluttet',
+                label: {
+                  show: true,
+                  formatter: params => {
+                    const val = Array.isArray(params.value) ? params.value[1] : params.value;
+                    return typeof val === 'number' && val !== 0 ? val.toLocaleString('nb-NO') : '';
+                  },
+                },
+              },
+              behandlingstypeAkselFarger[type],
+              getSoftAkselColorPair,
+            ),
+          ),
+        ],
       }}
     />
   );

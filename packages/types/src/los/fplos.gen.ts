@@ -63,19 +63,12 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingVentef
   fristUke: string;
 };
 
-export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaveEndringForAvdelingPerDato = {
-  avsluttet?: number;
-  behandlingType?: oppgave_BehandlingType;
-  fagsakYtelseType?: oppgave_FagsakYtelseType;
-  opprettet?: number;
-  statistikkDato?: string;
-};
-
 export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdelingPerDato = {
   antall: number;
+  avsluttet: number;
   behandlingType: oppgave_BehandlingType;
   fagsakYtelseType: oppgave_FagsakYtelseType;
-  opprettetDato: string;
+  opprettet: number;
   statistikkDato: string;
 };
 
@@ -85,12 +78,8 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForFørsteStønadsd
   førsteStønadsdag: string;
 };
 
-export type tjenester_felles_dto_ReservasjonDto = {
-  begrunnelse?: string;
+export type tjenester_avdelingsleder_reservasjon_AvdelingReservasjonDto = {
   behandlingType: oppgave_BehandlingType;
-  flyttetAvIdent?: string;
-  flyttetAvNavn?: string;
-  flyttetTidspunkt?: string;
   oppgaveId: number;
   oppgaveSaksNr: string;
   reservertAvIdent: string;
@@ -552,25 +541,6 @@ export type GetAlleVentefristerForAvdelingResponses = {
 export type GetAlleVentefristerForAvdelingResponse =
   GetAlleVentefristerForAvdelingResponses[keyof GetAlleVentefristerForAvdelingResponses];
 
-export type GetAntallOppgaverEndretForAvdelingPerDatoData = {
-  body?: never;
-  path?: never;
-  query: {
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
-  };
-  url: '/api/avdelingsleder/nøkkeltall/behandlinger-opprettet-avsluttet';
-};
-
-export type GetAntallOppgaverEndretForAvdelingPerDatoResponses = {
-  /**
-   * default response
-   */
-  default: Array<tjenester_avdelingsleder_nøkkeltall_dto_OppgaveEndringForAvdelingPerDato>;
-};
-
-export type GetAntallOppgaverEndretForAvdelingPerDatoResponse =
-  GetAntallOppgaverEndretForAvdelingPerDatoResponses[keyof GetAntallOppgaverEndretForAvdelingPerDatoResponses];
-
 export type GetAntallOppgaverForAvdelingPerDatoData = {
   body?: never;
   path?: never;
@@ -661,7 +631,7 @@ export type HentAvdelingensReservasjonerResponses = {
   /**
    * default response
    */
-  default: Array<tjenester_felles_dto_ReservasjonDto>;
+  default: Array<tjenester_avdelingsleder_reservasjon_AvdelingReservasjonDto>;
 };
 
 export type HentAvdelingensReservasjonerResponse =

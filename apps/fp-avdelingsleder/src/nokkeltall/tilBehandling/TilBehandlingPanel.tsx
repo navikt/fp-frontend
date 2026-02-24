@@ -12,7 +12,6 @@ import { type OppgaverForAvdelingPerDato } from '@navikt/fp-types';
 import { oppgaverPerDatoOptions } from '../../data/fplosAvdelingslederApi';
 import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
-import type { OppgaveForDato } from '../../typer/oppgaverForDatoTsType';
 import { type EndringForDatoGraf, OpprettetAvsluttetGraf } from './OpprettetAvsluttetGraf.tsx';
 import { type OppgaveForDatoGraf, TilBehandlingGraf } from './TilBehandlingGraf';
 
