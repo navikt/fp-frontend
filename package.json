@@ -49,7 +49,7 @@
     "@types/react-router-dom": "5.3.3",
     "husky": "9.1.7",
     "jsdom": "28.1.0",
-    "knip": "5.83.1",
+    "knip": "5.85.0",
     "lint-staged": "16.2.7",
     "prettier": "3.8.1",
     "shelljs": "0.10.0",
