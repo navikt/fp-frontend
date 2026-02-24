@@ -18,7 +18,11 @@ export const useAktuelleAndreKriterier = (): LosKodeverkMedNavn<'AndreKriterierT
   const fagsakYtelseTyper = useWatch({ control, name: 'fagsakYtelseTyper' });
   const behandlingTyper = useWatch({ control, name: 'behandlingTyper' });
 
-  const alleAndreKriterierTyper = useLosKodeverk('AndreKriterierType').filter(akt => akt.kode !== 'TIL_BESLUTTER');
+  const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
+  const alleAndreKriterierTyper = useMemo(
+    () => andreKriterierTyper.filter(akt => akt.kode !== 'TIL_BESLUTTER'),
+    [andreKriterierTyper],
+  );
 
   const { data: kriterieFilter } = useQuery(kriterieFilterOptions());
 
