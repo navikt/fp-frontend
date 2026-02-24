@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
 import { useQuery } from '@tanstack/react-query';
@@ -22,20 +22,24 @@ export const useAktuelleAndreKriterier = (): LosKodeverkMedNavn<'AndreKriterierT
 
   const { data: kriterieFilter } = useQuery(kriterieFilterOptions());
 
-  const aktuelleKriterier = kriterieFilter
-    ? alleAndreKriterierTyper.filter(akt => {
-        const filter = kriterieFilter[akt.kode];
+  const aktuelleKriterier = useMemo(
+    () =>
+      kriterieFilter
+        ? alleAndreKriterierTyper.filter(akt => {
+            const filter = kriterieFilter[akt.kode];
 
-        if (!filter) {
-          return true;
-        }
+            if (!filter) {
+              return true;
+            }
 
-        const ytelseMatch = erAktuell(fagsakYtelseTyper, filter.valgbarForYtelseTyper);
-        const behandlingMatch = erAktuell(behandlingTyper, filter.valgbarForBehandlingTyper);
+            const ytelseMatch = erAktuell(fagsakYtelseTyper, filter.valgbarForYtelseTyper);
+            const behandlingMatch = erAktuell(behandlingTyper, filter.valgbarForBehandlingTyper);
 
-        return ytelseMatch && behandlingMatch;
-      })
-    : alleAndreKriterierTyper;
+            return ytelseMatch && behandlingMatch;
+          })
+        : alleAndreKriterierTyper,
+    [fagsakYtelseTyper, behandlingTyper, kriterieFilter, alleAndreKriterierTyper],
+  );
 
   useEffect(() => {
     const aktuelleKoder = new Set(aktuelleKriterier.map(k => k.kode));
