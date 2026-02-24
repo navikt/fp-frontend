@@ -56,7 +56,7 @@ import type {
   VirksomhetType,
   VurderÅrsak,
 } from './index';
-import type { SkjermlenkeType } from './skjermlenkeType';
+import type { SkjermlenkeType } from './felles.ts';
 
 //Mapping mellom KodeverkType og union-types med verdier
 type KodeverkEnumMap = {
