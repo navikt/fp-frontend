@@ -21,7 +21,6 @@ import type {
   Fagsak,
   FagsakBehandlingDto,
 } from '@navikt/fp-types';
-import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake, oppgaverForFagsaker } from '../../.storybook/testdata';
@@ -54,7 +53,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanGjenopptas: false,
   behandlingKanOpnesForEndringer: true,
   behandlingKanSettesPaVent: true,
-  vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+  vergeBehandlingsmeny: 'OPPRETT',
   uuid: '',
   behandlingKanMerkesHaster: false,
 } satisfies BehandlingTillatteOperasjoner;

@@ -15,7 +15,6 @@ import {
   withRouter,
 } from '@navikt/fp-storybook-utils';
 import type { BehandlingFpSak, Fagsak } from '@navikt/fp-types';
-import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
@@ -71,7 +70,7 @@ const FAGSAK = {
         behandlingKanGjenopptas: false,
         behandlingKanOpnesForEndringer: true,
         behandlingKanSettesPaVent: true,
-        vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+        vergeBehandlingsmeny: 'OPPRETT',
         uuid: '',
         behandlingKanMerkesHaster: false,
       },

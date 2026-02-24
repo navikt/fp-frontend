@@ -12,7 +12,6 @@ import {
   withRouter,
 } from '@navikt/fp-storybook-utils';
 import type { BehandlingOppretting, Fagsak, FagsakBehandlingDtoFpSak } from '@navikt/fp-types';
-import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../.storybook/testdata';
@@ -46,7 +45,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanOpnesForEndringer: true,
   behandlingKanSettesPaVent: true,
   behandlingKanMerkesHaster: true,
-  vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+  vergeBehandlingsmeny: 'OPPRETT',
 };
 
 const ALLE_BEHANDLINGER = [
@@ -152,7 +151,7 @@ export const ValgNårVeileder: Story = {
             behandlingKanOpnesForEndringer: false,
             behandlingKanSettesPaVent: false,
             behandlingKanMerkesHaster: true,
-            vergeBehandlingsmeny: VergeBehandlingmenyValg.SKJUL,
+            vergeBehandlingsmeny: 'SKJUL',
           },
         },
       ],
