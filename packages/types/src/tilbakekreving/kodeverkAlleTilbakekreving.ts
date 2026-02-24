@@ -1,7 +1,4 @@
-import type { BehandlingType, VurderÅrsak } from '../index';
-import type { HistorikkAktør } from '../index';
-import type { TilbakekrevingVidereBehandling } from '../index';
-import type { VergeType } from '../index';
+import type { BehandlingType, HistorikkAktør, TilbakekrevingVidereBehandling, VergeType, VurderÅrsak } from '../index';
 import type { Aktsomhet } from './aktsomhet';
 import type { BehandlingÅrsakTypeFpTilbake } from './behandlingÅrsakTypeFpTilbake';
 import type { BehandlingResultatTypeFpTilbake } from './behandlingResultatTypeFpTilbake';
