@@ -4,7 +4,7 @@
   "type": "module",
   "version": "1.0.0",
   "dependencies": {
-    "@storybook/react": "10.2.8",
+    "@storybook/react": "10.2.9",
     "@tailwindcss/vite": "4.1.18",
     "@vitejs/plugin-react": "5.1.4",
     "rollup-plugin-sourcemaps": "0.6.3",

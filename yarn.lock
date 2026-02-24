@@ -1817,22 +1817,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@isaacs/balanced-match@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "@isaacs/balanced-match@npm:4.0.1"
-  checksum: 10/102fbc6d2c0d5edf8f6dbf2b3feb21695a21bc850f11bc47c4f06aa83bd8884fde3fe9d6d797d619901d96865fdcb4569ac2a54c937992c48885c5e3d9967fe8
-  languageName: node
-  linkType: hard
-
-"@isaacs/brace-expansion@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "@isaacs/brace-expansion@npm:5.0.0"
-  dependencies:
-    "@isaacs/balanced-match": "npm:^4.0.1"
-  checksum: 10/cf3b7f206aff12128214a1df764ac8cdbc517c110db85249b945282407e3dfc5c6e66286383a7c9391a059fc8e6e6a8ca82262fc9d2590bd615376141fbebd2d
-  languageName: node
-  linkType: hard
-
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -1847,6 +1831,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@isaacs/cliui@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "@isaacs/cliui@npm:9.0.0"
+  checksum: 10/8ea3d1009fd29071419209bb91ede20cf27e6e2a1630c5e0702d8b3f47f9e1a3f1c5a587fa2cb96d22d18219790327df49db1bcced573346bbaf4577cf46b643
+  languageName: node
+  linkType: hard
+
 "@isaacs/fs-minipass@npm:^4.0.0":
   version: 4.0.1
   resolution: "@isaacs/fs-minipass@npm:4.0.1"
@@ -1856,11 +1847,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@joshwooding/vite-plugin-react-docgen-typescript@npm:^0.6.3":
-  version: 0.6.3
-  resolution: "@joshwooding/vite-plugin-react-docgen-typescript@npm:0.6.3"
+"@joshwooding/vite-plugin-react-docgen-typescript@npm:^0.6.4":
+  version: 0.6.4
+  resolution: "@joshwooding/vite-plugin-react-docgen-typescript@npm:0.6.4"
   dependencies:
-    glob: "npm:^11.1.0"
+    glob: "npm:^13.0.1"
     react-docgen-typescript: "npm:^2.2.2"
   peerDependencies:
     typescript: ">= 4.3.x"
@@ -1868,7 +1859,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/8a0f2c52b99e0dff4eeee574cf373b794e5398ee3c6b4d272378ccfe3b7dc2f3dc647d446716998ee2d88ee26df617e7b10da949702edcb625ee49e93b7daa95
+  checksum: 10/9e1ead0120036e3acb2bfe4772c5c1f352ca43e19e3e59ef37aa7d08843302118a8d2313124c6058af60246058a6aa9c8895683e6d56d56b5c8cf20102078e04
   languageName: node
   linkType: hard
 
@@ -2087,13 +2078,13 @@ __metadata:
     "@navikt/fp-sak-infosider": "workspace:*"
     "@navikt/ft-utils": "npm:3.11.9"
     "@sentry/browser": "npm:10.39.0"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     fast-glob: "npm:3.3.3"
     react: "npm:19.2.4"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -2125,8 +2116,8 @@ __metadata:
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
     "@sentry/vite-plugin": "npm:4.9.1"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@tanstack/react-query": "npm:5.90.21"
     "@tanstack/react-query-devtools": "npm:5.91.3"
     "@testing-library/dom": "npm:10.4.1"
@@ -2144,7 +2135,7 @@ __metadata:
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
     react-router-dom: "npm:7.13.0"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     tailwindcss: "npm:4.1.18"
     typescript: "npm:5.9.3"
@@ -2166,7 +2157,7 @@ __metadata:
     eslint-plugin-simple-import-sort: "npm:12.1.1"
     eslint-plugin-vitest: "npm:0.5.4"
     globals: "npm:17.3.0"
-    typescript-eslint: "npm:8.55.0"
+    typescript-eslint: "npm:8.56.0"
   peerDependencies:
     eslint: 9.32.0
   languageName: unknown
@@ -2186,7 +2177,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-config-vite@workspace:packages/config/vite"
   dependencies:
-    "@storybook/react": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
     "@tailwindcss/vite": "npm:4.1.18"
     "@vitejs/plugin-react": "npm:5.1.4"
     rollup-plugin-sourcemaps: "npm:0.6.3"
@@ -2217,8 +2208,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2228,7 +2219,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2250,8 +2241,8 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2259,7 +2250,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -2285,8 +2276,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2295,7 +2286,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2322,7 +2313,7 @@ __metadata:
     "@navikt/ft-plattform-komponenter": "npm:10.5.9"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     classnames: "npm:2.5.1"
@@ -2331,7 +2322,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vitest: "npm:4.0.18"
@@ -2359,8 +2350,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2369,7 +2360,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2393,15 +2384,15 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2430,8 +2421,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2440,7 +2431,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -2467,8 +2458,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2478,7 +2469,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -2505,8 +2496,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2516,7 +2507,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -2545,8 +2536,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     dayjs: "npm:1.11.19"
@@ -2555,7 +2546,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2582,8 +2573,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2593,7 +2584,7 @@ __metadata:
     react-dom: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -2619,8 +2610,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2630,7 +2621,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2658,8 +2649,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2668,7 +2659,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2697,8 +2688,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2709,7 +2700,7 @@ __metadata:
     react-dom: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2737,8 +2728,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2747,7 +2738,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2775,8 +2766,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2786,7 +2777,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2815,8 +2806,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2825,7 +2816,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -2854,8 +2845,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -2863,7 +2854,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -2880,15 +2871,15 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -2994,9 +2985,9 @@ __metadata:
     "@navikt/ft-utils": "npm:3.11.9"
     "@popperjs/core": "npm:2.11.8"
     "@sentry/vite-plugin": "npm:4.9.1"
-    "@storybook/addon-a11y": "npm:10.2.8"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/addon-a11y": "npm:10.2.9"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@tanstack/react-query": "npm:5.90.21"
     "@tanstack/react-query-devtools": "npm:5.91.3"
     "@testing-library/dom": "npm:10.4.1"
@@ -3016,7 +3007,7 @@ __metadata:
     react-modal: "npm:3.16.3"
     react-responsive: "npm:10.0.1"
     react-router-dom: "npm:7.13.0"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     tailwindcss: "npm:4.1.18"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3048,8 +3039,8 @@ __metadata:
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
     "@sentry/vite-plugin": "npm:4.9.1"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@tanstack/react-query": "npm:5.90.21"
     "@tanstack/react-query-devtools": "npm:5.91.3"
     "@testing-library/dom": "npm:10.4.1"
@@ -3063,7 +3054,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     tailwindcss: "npm:4.1.18"
     typescript: "npm:5.9.3"
@@ -3109,8 +3100,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3120,7 +3111,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -3145,8 +3136,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@tanstack/react-query": "npm:5.90.21"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
@@ -3160,7 +3151,7 @@ __metadata:
     react-dom: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3183,8 +3174,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3193,7 +3184,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -3217,8 +3208,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3228,7 +3219,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3252,14 +3243,14 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
     react-router-dom: "npm:7.13.0"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
   languageName: unknown
@@ -3277,14 +3268,14 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -3303,14 +3294,14 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -3329,15 +3320,15 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -3356,14 +3347,14 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3416,8 +3407,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3426,7 +3417,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3455,8 +3446,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3466,7 +3457,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3493,8 +3484,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3503,7 +3494,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3530,8 +3521,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3541,7 +3532,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3568,8 +3559,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3578,7 +3569,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3602,8 +3593,8 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3612,7 +3603,7 @@ __metadata:
     react: "npm:19.2.4"
     react-dom: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -3639,8 +3630,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3650,7 +3641,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3678,8 +3669,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3688,7 +3679,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -3714,8 +3705,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3723,7 +3714,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3746,15 +3737,15 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -3786,8 +3777,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3802,7 +3793,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3828,8 +3819,8 @@ __metadata:
     "@navikt/ft-form-hooks": "npm:10.6.10"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3837,7 +3828,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -3863,8 +3854,8 @@ __metadata:
     "@navikt/ft-form-hooks": "npm:10.6.10"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3874,7 +3865,7 @@ __metadata:
     react-dom: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3902,8 +3893,8 @@ __metadata:
     "@navikt/ft-form-hooks": "npm:10.6.10"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3912,7 +3903,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -3939,8 +3930,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3949,7 +3940,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -3975,8 +3966,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -3985,7 +3976,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4010,8 +4001,8 @@ __metadata:
     "@navikt/ft-form-hooks": "npm:10.6.10"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4020,7 +4011,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4042,14 +4033,14 @@ __metadata:
     "@navikt/ft-plattform-komponenter": "npm:10.5.9"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4070,8 +4061,8 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4080,7 +4071,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4101,8 +4092,8 @@ __metadata:
     "@navikt/ft-plattform-komponenter": "npm:10.5.9"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4110,7 +4101,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4132,14 +4123,14 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4161,14 +4152,14 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4187,8 +4178,8 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4198,7 +4189,7 @@ __metadata:
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
     react-router-dom: "npm:7.13.0"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4215,14 +4206,14 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4247,8 +4238,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4257,7 +4248,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4275,15 +4266,15 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4305,8 +4296,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4314,7 +4305,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4337,8 +4328,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4346,7 +4337,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4364,15 +4355,15 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4394,8 +4385,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4403,7 +4394,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4422,8 +4413,8 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4431,7 +4422,7 @@ __metadata:
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4454,8 +4445,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4463,7 +4454,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4484,8 +4475,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4494,7 +4485,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4520,8 +4511,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4530,7 +4521,7 @@ __metadata:
     react-dom: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4554,8 +4545,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4563,7 +4554,7 @@ __metadata:
     react: "npm:19.2.4"
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4591,8 +4582,8 @@ __metadata:
     "@navikt/ft-form-validators": "npm:4.4.22"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4603,7 +4594,7 @@ __metadata:
     react-hook-form: "npm:7.71.1"
     react-intl: "npm:8.1.3"
     react-router-dom: "npm:7.13.0"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4620,14 +4611,14 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -4647,15 +4638,15 @@ __metadata:
     "@navikt/fp-types": "workspace:^"
     "@navikt/ft-plattform-komponenter": "npm:10.5.9"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     stylelint: "npm:17.3.0"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
@@ -4674,14 +4665,14 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@storybook/react": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
     "@tanstack/react-query": "npm:5.90.21"
     "@tanstack/react-query-devtools": "npm:5.91.3"
     eslint: "npm:9.39.2"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
     react-router-dom: "npm:7.13.0"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
   languageName: unknown
   linkType: soft
@@ -4745,8 +4736,8 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": "npm:6.8.10"
     "@navikt/ft-utils": "npm:3.11.9"
-    "@storybook/react": "npm:10.2.8"
-    "@storybook/react-vite": "npm:10.2.8"
+    "@storybook/react": "npm:10.2.9"
+    "@storybook/react-vite": "npm:10.2.9"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
@@ -4754,7 +4745,7 @@ __metadata:
     fast-glob: "npm:3.3.3"
     react: "npm:19.2.4"
     react-intl: "npm:8.1.3"
-    storybook: "npm:10.2.8"
+    storybook: "npm:10.2.9"
     typescript: "npm:5.9.3"
     vite: "npm:7.3.1"
     vitest: "npm:4.0.18"
@@ -5807,55 +5798,55 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-a11y@npm:10.2.8":
-  version: 10.2.8
-  resolution: "@storybook/addon-a11y@npm:10.2.8"
+"@storybook/addon-a11y@npm:10.2.9":
+  version: 10.2.9
+  resolution: "@storybook/addon-a11y@npm:10.2.9"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
     axe-core: "npm:^4.2.0"
   peerDependencies:
-    storybook: ^10.2.8
-  checksum: 10/92cf09e98e517e5e10139c85a5f006ec1a552d3b28934dba6e0bf60729500f81ea03af6858268e0415e0604b5ea30ad0952399e151b36b3e7868f6a6d00a4cea
+    storybook: ^10.2.9
+  checksum: 10/d9ca669a76b08a8c28325d1f04ed334ddb466655cc02207597c6ee698a1674eb81d7fe153d03ab241d69bd16ff9709fcfb5cc05fa11eaec2e9a6df24d8655fa4
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:10.2.8":
-  version: 10.2.8
-  resolution: "@storybook/addon-links@npm:10.2.8"
+"@storybook/addon-links@npm:10.2.9":
+  version: 10.2.9
+  resolution: "@storybook/addon-links@npm:10.2.9"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.2.8
+    storybook: ^10.2.9
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: 10/0619754455f5a98f072cdf3e8aa7a929475bb061d3c91f2b4daf4571136f7b1db59f29c5d09cdf82f89dc2b509adf35788d82b7f8c2345030f7def5a447819ce
+  checksum: 10/8f53d28f510872c7b38c2c72ac4d51faa12a6f202d3b9b9f4dab2dd410ae8a0b2a4ce5260642ad98fb1a91daa190213479e8303556f388f71c5c94bd9c8cd7cd
   languageName: node
   linkType: hard
 
-"@storybook/builder-vite@npm:10.2.8":
-  version: 10.2.8
-  resolution: "@storybook/builder-vite@npm:10.2.8"
+"@storybook/builder-vite@npm:10.2.9":
+  version: 10.2.9
+  resolution: "@storybook/builder-vite@npm:10.2.9"
   dependencies:
-    "@storybook/csf-plugin": "npm:10.2.8"
+    "@storybook/csf-plugin": "npm:10.2.9"
     ts-dedent: "npm:^2.0.0"
   peerDependencies:
-    storybook: ^10.2.8
+    storybook: ^10.2.9
     vite: ^5.0.0 || ^6.0.0 || ^7.0.0
-  checksum: 10/9ddbb7f25eb8667b53e35e9982a300ca6f323f6cdd13067141327d285e2e967deb1214c0b4880998620a46e477f8fad4ccce1719282e11a6b757d5a368e38903
+  checksum: 10/a4507a476cfc33990300ecf63d855e973dba40f0f7d6a13eda32e1c70e0aa854027ff01ad8a4f2d822de3cee1b2f95a89ca61ec067e908fe2c57631fb002947b
   languageName: node
   linkType: hard
 
-"@storybook/csf-plugin@npm:10.2.8":
-  version: 10.2.8
-  resolution: "@storybook/csf-plugin@npm:10.2.8"
+"@storybook/csf-plugin@npm:10.2.9":
+  version: 10.2.9
+  resolution: "@storybook/csf-plugin@npm:10.2.9"
   dependencies:
     unplugin: "npm:^2.3.5"
   peerDependencies:
     esbuild: "*"
     rollup: "*"
-    storybook: ^10.2.8
+    storybook: ^10.2.9
     vite: "*"
     webpack: "*"
   peerDependenciesMeta:
@@ -5867,7 +5858,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10/e468ed2749b6f6a99784357727b73da57912e00d95bc9a95c96d664189f0e7f6b3660340fbec072eb2edd14d21007b47f9253712069703c2a28ec8c7e99251e0
+  checksum: 10/f4f4a44a38f13959af3945a082ac1dc63e894e2f8db10d946c70c22a6a53c390f566de781ed9f741d3a2b5c4863f257c53f3e00e59626a2cb3ed79ec368b2fc8
   languageName: node
   linkType: hard
 
@@ -5888,25 +5879,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/react-dom-shim@npm:10.2.8":
-  version: 10.2.8
-  resolution: "@storybook/react-dom-shim@npm:10.2.8"
+"@storybook/react-dom-shim@npm:10.2.9":
+  version: 10.2.9
+  resolution: "@storybook/react-dom-shim@npm:10.2.9"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.2.8
-  checksum: 10/385b27a633f41c5923806502863b458bdc29c2948b306020a8598734edcc92bd95648b2d0e285f17a3e3d140b79dce5a871d6ddc786525eb1beac269a05a17b2
+    storybook: ^10.2.9
+  checksum: 10/dd746a284ce43792c8eec01777792fcf12a84b903c9af0793ee75733160c93f2af776171a105ee4c64589f8f166866dcda0c97b62b87837780c77c5dad542eb5
   languageName: node
   linkType: hard
 
-"@storybook/react-vite@npm:10.2.8":
-  version: 10.2.8
-  resolution: "@storybook/react-vite@npm:10.2.8"
+"@storybook/react-vite@npm:10.2.9":
+  version: 10.2.9
+  resolution: "@storybook/react-vite@npm:10.2.9"
   dependencies:
-    "@joshwooding/vite-plugin-react-docgen-typescript": "npm:^0.6.3"
+    "@joshwooding/vite-plugin-react-docgen-typescript": "npm:^0.6.4"
     "@rollup/pluginutils": "npm:^5.0.2"
-    "@storybook/builder-vite": "npm:10.2.8"
-    "@storybook/react": "npm:10.2.8"
+    "@storybook/builder-vite": "npm:10.2.9"
+    "@storybook/react": "npm:10.2.9"
     empathic: "npm:^2.0.0"
     magic-string: "npm:^0.30.0"
     react-docgen: "npm:^8.0.0"
@@ -5915,28 +5906,28 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.2.8
+    storybook: ^10.2.9
     vite: ^5.0.0 || ^6.0.0 || ^7.0.0
-  checksum: 10/84e75f41f480147437f207ff153457d43d13b5b1cef07c13a355d88f3515e665a127158012f03988f5a4e33f1eeb3d1cd31e825eba13f6519697afa5fc924fc0
+  checksum: 10/ed9df7a68a8e542b8ddb14e8a96504b6b8c60467cc588f585cc51b7b0426cf10d377aa0c055e7e096abf84b40fe2ed9c4c86f582602f1af47bf02e74908420de
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:10.2.8":
-  version: 10.2.8
-  resolution: "@storybook/react@npm:10.2.8"
+"@storybook/react@npm:10.2.9":
+  version: 10.2.9
+  resolution: "@storybook/react@npm:10.2.9"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
-    "@storybook/react-dom-shim": "npm:10.2.8"
+    "@storybook/react-dom-shim": "npm:10.2.9"
     react-docgen: "npm:^8.0.2"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^10.2.8
+    storybook: ^10.2.9
     typescript: ">= 4.9.x"
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/8365c47a3ab9b191c367aedfa2c2737d2e90d575c9ea096d70bc4f680d579b4687afdd6b0512558522b593aeb83a3b7cb535cc05dc4a140b0e8429ff6f9e4d8e
+  checksum: 10/90ef199fc118c595d74f962bd38c278705f2975c31ae4266b92383852b6217f06d5f815321338fb655cd487a5e629cd6c7518fa6197a38b739d9c634d1dee2a3
   languageName: node
   linkType: hard
 
@@ -6462,52 +6453,52 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.55.0":
-  version: 8.55.0
-  resolution: "@typescript-eslint/eslint-plugin@npm:8.55.0"
+"@typescript-eslint/eslint-plugin@npm:8.56.0":
+  version: 8.56.0
+  resolution: "@typescript-eslint/eslint-plugin@npm:8.56.0"
   dependencies:
     "@eslint-community/regexpp": "npm:^4.12.2"
-    "@typescript-eslint/scope-manager": "npm:8.55.0"
-    "@typescript-eslint/type-utils": "npm:8.55.0"
-    "@typescript-eslint/utils": "npm:8.55.0"
-    "@typescript-eslint/visitor-keys": "npm:8.55.0"
+    "@typescript-eslint/scope-manager": "npm:8.56.0"
+    "@typescript-eslint/type-utils": "npm:8.56.0"
+    "@typescript-eslint/utils": "npm:8.56.0"
+    "@typescript-eslint/visitor-keys": "npm:8.56.0"
     ignore: "npm:^7.0.5"
     natural-compare: "npm:^1.4.0"
     ts-api-utils: "npm:^2.4.0"
   peerDependencies:
-    "@typescript-eslint/parser": ^8.55.0
-    eslint: ^8.57.0 || ^9.0.0
+    "@typescript-eslint/parser": ^8.56.0
+    eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/b654130700b45077c6892f703c14e964d1facb76e1816e38d0707501e7f331ff0acf2b0b88daa2c5f4fffeabd2f04a5a723e1a28ff4e88bc267e60515584ce3a
+  checksum: 10/44201eae518c759cf3110f7e0a374372ef22bffa3cca61685aebe916b06bcb5f3ed6ffedba252199dca0006dfc22c54b132cd0337fd15e8c083eda22f9cf6b0c
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.55.0":
-  version: 8.55.0
-  resolution: "@typescript-eslint/parser@npm:8.55.0"
+"@typescript-eslint/parser@npm:8.56.0":
+  version: 8.56.0
+  resolution: "@typescript-eslint/parser@npm:8.56.0"
   dependencies:
-    "@typescript-eslint/scope-manager": "npm:8.55.0"
-    "@typescript-eslint/types": "npm:8.55.0"
-    "@typescript-eslint/typescript-estree": "npm:8.55.0"
-    "@typescript-eslint/visitor-keys": "npm:8.55.0"
+    "@typescript-eslint/scope-manager": "npm:8.56.0"
+    "@typescript-eslint/types": "npm:8.56.0"
+    "@typescript-eslint/typescript-estree": "npm:8.56.0"
+    "@typescript-eslint/visitor-keys": "npm:8.56.0"
     debug: "npm:^4.4.3"
   peerDependencies:
-    eslint: ^8.57.0 || ^9.0.0
+    eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/f6140b163ce1fd460fbcc51c79fdaf2825d95764741c2d73271416e13d2302c25fa578fc1e46cb0f4a78867264f7df5ed424c500737cc49084fe0af8ad33c541
+  checksum: 10/9bdb2c7915665a1031499049974997020bbc34557803a8c3718b323d5583a3fdfc27797ec714b617743225c8dce9ab589eb442b71c435b464ad45365a6fbba57
   languageName: node
   linkType: hard
 
-"@typescript-eslint/project-service@npm:8.55.0":
-  version: 8.55.0
-  resolution: "@typescript-eslint/project-service@npm:8.55.0"
+"@typescript-eslint/project-service@npm:8.56.0":
+  version: 8.56.0
+  resolution: "@typescript-eslint/project-service@npm:8.56.0"
   dependencies:
-    "@typescript-eslint/tsconfig-utils": "npm:^8.55.0"
-    "@typescript-eslint/types": "npm:^8.55.0"
+    "@typescript-eslint/tsconfig-utils": "npm:^8.56.0"
+    "@typescript-eslint/types": "npm:^8.56.0"
     debug: "npm:^4.4.3"
   peerDependencies:
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/50f5b65b2c7901c78cf5c3353e46cf84710d304c9b0211b8484e67345158660a50b492d4b774a07aac9b74a4289cb9ff3b637ae37619bbd5ccace5d20806688e
+  checksum: 10/b46cc78bfb50ee84cb12e2e99c1a3d9606161980cf56ba33be6244ccff2ba4c78ceec46706ad597508fda167e0f965d849c1c516400ad41259027be3fbd815eb
   languageName: node
   linkType: hard
 
@@ -6521,38 +6512,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:8.55.0":
-  version: 8.55.0
-  resolution: "@typescript-eslint/scope-manager@npm:8.55.0"
+"@typescript-eslint/scope-manager@npm:8.56.0":
+  version: 8.56.0
+  resolution: "@typescript-eslint/scope-manager@npm:8.56.0"
   dependencies:
-    "@typescript-eslint/types": "npm:8.55.0"
-    "@typescript-eslint/visitor-keys": "npm:8.55.0"
-  checksum: 10/6da96d6459f6c53a5337071ac71e78ce7922928c00f3d1dafe2a8eafcac194bca815d178c0ca1b69f89ca9c5a24d6c0e9131ed4447d64a6511295909553e3960
+    "@typescript-eslint/types": "npm:8.56.0"
+    "@typescript-eslint/visitor-keys": "npm:8.56.0"
+  checksum: 10/3662355120ea8e21ce01c999decbd2a09fe4edb1c01e376fe347952d968ecfedff99b9484334e133e41284a15f2e1bc8efd490b1e73a16980614445c25b07b0d
   languageName: node
   linkType: hard
 
-"@typescript-eslint/tsconfig-utils@npm:8.55.0, @typescript-eslint/tsconfig-utils@npm:^8.55.0":
-  version: 8.55.0
-  resolution: "@typescript-eslint/tsconfig-utils@npm:8.55.0"
+"@typescript-eslint/tsconfig-utils@npm:8.56.0, @typescript-eslint/tsconfig-utils@npm:^8.56.0":
+  version: 8.56.0
+  resolution: "@typescript-eslint/tsconfig-utils@npm:8.56.0"
   peerDependencies:
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/281764b85f6bcae6de9865b5133b7be313f212bffe63cb3b5f09f94a2b7c7bfc83319935ed044de4b95f9043a16553d027107de6cb6f0c6e75fba900e26eb831
+  checksum: 10/b1834aeffcdc07835eae0bf52aca573cba7e6528b5c1483e9b1f7f4f9e1f6450a8650796be11140e0437caf7eb1b0f9711c22989c8294547534f12614a759760
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:8.55.0":
-  version: 8.55.0
-  resolution: "@typescript-eslint/type-utils@npm:8.55.0"
+"@typescript-eslint/type-utils@npm:8.56.0":
+  version: 8.56.0
+  resolution: "@typescript-eslint/type-utils@npm:8.56.0"
   dependencies:
-    "@typescript-eslint/types": "npm:8.55.0"
-    "@typescript-eslint/typescript-estree": "npm:8.55.0"
-    "@typescript-eslint/utils": "npm:8.55.0"
+    "@typescript-eslint/types": "npm:8.56.0"
+    "@typescript-eslint/typescript-estree": "npm:8.56.0"
+    "@typescript-eslint/utils": "npm:8.56.0"
     debug: "npm:^4.4.3"
     ts-api-utils: "npm:^2.4.0"
   peerDependencies:
-    eslint: ^8.57.0 || ^9.0.0
+    eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/0d13b5eedfae55feb3ea4e16d20a20ba79b3126d7ad526016967fa16062415b048c1aa1ee6255a34d4752d683cef2e47c7411bcb4495b9f00e1f3435804c0589
+  checksum: 10/f272b9acc004f125cbf0df18265a43ba50cd3666262afc663585acdd1be6b6b30724bd8cf4cd5aa2757b7f10ceafa92fd1af30c1931fb22ac38521eda7f79c89
   languageName: node
   linkType: hard
 
@@ -6563,10 +6554,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:8.55.0, @typescript-eslint/types@npm:^8.55.0":
-  version: 8.55.0
-  resolution: "@typescript-eslint/types@npm:8.55.0"
-  checksum: 10/4069e8691d0651e298ec78908401cc792a11e29809da3e5f3eeba0e76509a2b394563ee0932a7c5d8cad19accc4f7d835dcd8b4faa4372e6af013df322a3bd58
+"@typescript-eslint/types@npm:8.56.0, @typescript-eslint/types@npm:^8.56.0":
+  version: 8.56.0
+  resolution: "@typescript-eslint/types@npm:8.56.0"
+  checksum: 10/d7549535c99d9202742bf0191bcc2822c2d18a03e206be9ad5a6f6b0902de7381c93e8c238754fe5d1dfdcc22d7e3bbafa032f63ba165d6dc03e180f84b138f9
   languageName: node
   linkType: hard
 
@@ -6589,14 +6580,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:8.55.0":
-  version: 8.55.0
-  resolution: "@typescript-eslint/typescript-estree@npm:8.55.0"
+"@typescript-eslint/typescript-estree@npm:8.56.0":
+  version: 8.56.0
+  resolution: "@typescript-eslint/typescript-estree@npm:8.56.0"
   dependencies:
-    "@typescript-eslint/project-service": "npm:8.55.0"
-    "@typescript-eslint/tsconfig-utils": "npm:8.55.0"
-    "@typescript-eslint/types": "npm:8.55.0"
-    "@typescript-eslint/visitor-keys": "npm:8.55.0"
+    "@typescript-eslint/project-service": "npm:8.56.0"
+    "@typescript-eslint/tsconfig-utils": "npm:8.56.0"
+    "@typescript-eslint/types": "npm:8.56.0"
+    "@typescript-eslint/visitor-keys": "npm:8.56.0"
     debug: "npm:^4.4.3"
     minimatch: "npm:^9.0.5"
     semver: "npm:^7.7.3"
@@ -6604,22 +6595,22 @@ __metadata:
     ts-api-utils: "npm:^2.4.0"
   peerDependencies:
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/219468b2bfc5abd3ee057ac6bc6bf5cb58da4accd5455dbf6f1cdce150c794a13677b1f82adb6f80b2488c8df40d4c0730c42df9f7e924ce122d9a6b933055c3
+  checksum: 10/55c8cfc7e265f320d780e69a677838821225fad8b853108ce2095f01509bf2ee8943280df9ac75560ed86265ef0e0a979ae4cb375d712f648b336032de79d19b
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:8.55.0":
-  version: 8.55.0
-  resolution: "@typescript-eslint/utils@npm:8.55.0"
+"@typescript-eslint/utils@npm:8.56.0":
+  version: 8.56.0
+  resolution: "@typescript-eslint/utils@npm:8.56.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.9.1"
-    "@typescript-eslint/scope-manager": "npm:8.55.0"
-    "@typescript-eslint/types": "npm:8.55.0"
-    "@typescript-eslint/typescript-estree": "npm:8.55.0"
+    "@typescript-eslint/scope-manager": "npm:8.56.0"
+    "@typescript-eslint/types": "npm:8.56.0"
+    "@typescript-eslint/typescript-estree": "npm:8.56.0"
   peerDependencies:
-    eslint: ^8.57.0 || ^9.0.0
+    eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/a2218103328905977a67735b55b30dc851084bd086e7f469355f8056577ec79eb30fc42cec16f1881803c764a0ee60aeb62fe0caa4c407bdba3fd72f67c2d114
+  checksum: 10/f357bd15fe568cba0b89371e9a724eda38d78361a21dc0c4f49b0af4a23a140c77e2a8c6285c6fe8d8277e256a8a137aef7bcf6d97428eecd0c6e72ef08849ae
   languageName: node
   linkType: hard
 
@@ -6647,13 +6638,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:8.55.0":
-  version: 8.55.0
-  resolution: "@typescript-eslint/visitor-keys@npm:8.55.0"
+"@typescript-eslint/visitor-keys@npm:8.56.0":
+  version: 8.56.0
+  resolution: "@typescript-eslint/visitor-keys@npm:8.56.0"
   dependencies:
-    "@typescript-eslint/types": "npm:8.55.0"
-    eslint-visitor-keys: "npm:^4.2.1"
-  checksum: 10/c35f2b1b69d103edb78dca5ba28acb2454c2eb75a97e4c90a205059df73790185627326c8816b671d5734f1d966196ece605cf592dfa10d323ec6530b3260140
+    "@typescript-eslint/types": "npm:8.56.0"
+    eslint-visitor-keys: "npm:^5.0.0"
+  checksum: 10/1eaa26ffe8a2c83d42d428beef207d793aef73c2e306f94e716d39519eaaa07547da898c7d63a5c406a3662895d735b4b1f33b513a1addb69473c65e7d92a2b5
   languageName: node
   linkType: hard
 
@@ -7150,6 +7141,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"balanced-match@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "balanced-match@npm:4.0.2"
+  dependencies:
+    jackspeak: "npm:^4.2.3"
+  checksum: 10/862d6e14832a45558bdd2bc4663ba6d8e7ba60670a6cb1ef952a62348d5f086b16ee71a21b369f0fee808432590c724c823a80cb59eddd140b5ffa3f55497b62
+  languageName: node
+  linkType: hard
+
 "baseline-browser-mapping@npm:^2.8.2":
   version: 2.8.3
   resolution: "baseline-browser-mapping@npm:2.8.3"
@@ -7191,6 +7191,15 @@ __metadata:
   dependencies:
     balanced-match: "npm:^1.0.0"
   checksum: 10/01dff195e3646bc4b0d27b63d9bab84d2ebc06121ff5013ad6e5356daa5a9d6b60fa26cf73c74797f2dc3fbec112af13578d51f75228c1112b26c790a87b0488
+  languageName: node
+  linkType: hard
+
+"brace-expansion@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "brace-expansion@npm:5.0.2"
+  dependencies:
+    balanced-match: "npm:^4.0.2"
+  checksum: 10/18d382c0919c68f8bb56fbe4a9cb1181a0bf10e6786b5683e586493dfbb517bdcf972f4a3a8d560486627fd9c9c6ecef0a2b8fd454eb6082780307ffd5586251
   languageName: node
   linkType: hard
 
@@ -8655,6 +8664,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-visitor-keys@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "eslint-visitor-keys@npm:5.0.0"
+  checksum: 10/05334d637c73d02f644b8dbfd6f555f049a229654b543b4b701944051072808d944368164c8b291cecb60e157a54d05f221eb45945a1bdd06c3e0e298ddb4678
+  languageName: node
+  linkType: hard
+
 "eslint@npm:9.39.2":
   version: 9.39.2
   resolution: "eslint@npm:9.39.2"
@@ -8991,7 +9007,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"foreground-child@npm:^3.1.0, foreground-child@npm:^3.3.1":
+"foreground-child@npm:^3.1.0":
   version: 3.3.1
   resolution: "foreground-child@npm:3.3.1"
   dependencies:
@@ -9017,9 +9033,9 @@ __metadata:
   resolution: "fp-frontend@workspace:."
   dependencies:
     "@navikt/aksel-stylelint": "npm:8.5.0"
-    "@storybook/addon-a11y": "npm:10.2.8"
-    "@storybook/addon-links": "npm:10.2.8"
-    "@storybook/react": "npm:10.2.8"
+    "@storybook/addon-a11y": "npm:10.2.9"
+    "@storybook/addon-links": "npm:10.2.9"
+    "@storybook/react": "npm:10.2.9"
     "@testing-library/jest-dom": "npm:6.9.1"
     "@types/react": "npm:19.2.9"
     "@types/react-dom": "npm:19.2.3"
@@ -9239,19 +9255,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "glob@npm:11.1.0"
+"glob@npm:^13.0.1":
+  version: 13.0.4
+  resolution: "glob@npm:13.0.4"
   dependencies:
-    foreground-child: "npm:^3.3.1"
-    jackspeak: "npm:^4.1.1"
-    minimatch: "npm:^10.1.1"
+    minimatch: "npm:^10.2.1"
     minipass: "npm:^7.1.2"
-    package-json-from-dist: "npm:^1.0.0"
     path-scurry: "npm:^2.0.0"
-  bin:
-    glob: dist/esm/bin.mjs
-  checksum: 10/da4501819633daff8822c007bb3f93d5c4d2cbc7b15a8e886660f4497dd251a1fb4f53a85fba1e760b31704eff7164aeb2c7a82db10f9f2c362d12c02fe52cf3
+  checksum: 10/a320e2116cd503ff54d8fefd84a2c07fa8ad821ac81356778a8547f83ac86432584f3956e26eaa521874249c24f9f7f73b9adf2379f6024753e9e069d3809826
   languageName: node
   linkType: hard
 
@@ -10038,12 +10049,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jackspeak@npm:^4.1.1":
-  version: 4.1.1
-  resolution: "jackspeak@npm:4.1.1"
+"jackspeak@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "jackspeak@npm:4.2.3"
   dependencies:
-    "@isaacs/cliui": "npm:^8.0.2"
-  checksum: 10/ffceb270ec286841f48413bfb4a50b188662dfd599378ce142b6540f3f0a66821dc9dcb1e9ebc55c6c3b24dc2226c96e5819ba9bd7a241bd29031b61911718c7
+    "@isaacs/cliui": "npm:^9.0.0"
+  checksum: 10/b88e3fe5fa04d34f0f939a15b7cef4a8589999b7a366ef89a3e0f2c45d2a7666066b67cbf46d57c3a4796a76d27b9d869b23d96a803dd834200d222c2a70de7e
   languageName: node
   linkType: hard
 
@@ -10722,12 +10733,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^10.1.1":
-  version: 10.1.1
-  resolution: "minimatch@npm:10.1.1"
+"minimatch@npm:^10.2.1":
+  version: 10.2.1
+  resolution: "minimatch@npm:10.2.1"
   dependencies:
-    "@isaacs/brace-expansion": "npm:^5.0.0"
-  checksum: 10/110f38921ea527022e90f7a5f43721838ac740d0a0c26881c03b57c261354fb9a0430e40b2c56dfcea2ef3c773768f27210d1106f1f2be19cde3eea93f26f45e
+    brace-expansion: "npm:^5.0.2"
+  checksum: 10/d41c195ee1f2c70a75641088e36d0fa5fa286cb6fe48558e6d3bf3d95f640eda453c217707215389b12234df12175f65f338c0b841b36b0125177dbd6a80d026
   languageName: node
   linkType: hard
 
@@ -12469,9 +12480,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook@npm:10.2.8":
-  version: 10.2.8
-  resolution: "storybook@npm:10.2.8"
+"storybook@npm:10.2.9":
+  version: 10.2.9
+  resolution: "storybook@npm:10.2.9"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
     "@storybook/icons": "npm:^2.0.1"
@@ -12492,7 +12503,7 @@ __metadata:
       optional: true
   bin:
     storybook: ./dist/bin/dispatcher.js
-  checksum: 10/2a401ee42c303f44199f0bb5be2983a22c0a3c8962cba31401bb6a3f75eefc909238c32d4a2bc2040df853f4f813432c9e6ac7223740cdc7d4e83b5f76c3c2cd
+  checksum: 10/d6cc4627ed48fff3bb57d3ff5821a989e4398a24268bdb46db35d1c520bdb6fc113676ab9fcef0a5bd25b81598d13f3d24d6d83b1dae18ce3f3810858b363964
   languageName: node
   linkType: hard
 
@@ -13189,18 +13200,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:8.55.0":
-  version: 8.55.0
-  resolution: "typescript-eslint@npm:8.55.0"
+"typescript-eslint@npm:8.56.0":
+  version: 8.56.0
+  resolution: "typescript-eslint@npm:8.56.0"
   dependencies:
-    "@typescript-eslint/eslint-plugin": "npm:8.55.0"
-    "@typescript-eslint/parser": "npm:8.55.0"
-    "@typescript-eslint/typescript-estree": "npm:8.55.0"
-    "@typescript-eslint/utils": "npm:8.55.0"
+    "@typescript-eslint/eslint-plugin": "npm:8.56.0"
+    "@typescript-eslint/parser": "npm:8.56.0"
+    "@typescript-eslint/typescript-estree": "npm:8.56.0"
+    "@typescript-eslint/utils": "npm:8.56.0"
   peerDependencies:
-    eslint: ^8.57.0 || ^9.0.0
+    eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.0.0"
-  checksum: 10/60f8c9a57a5ce2b1ce74a4287ce03171440a911c451755a5c8192a2f0770e89b629836e6ab455ffbf165e64c18e254926156627ff314bcd8e4fd3d7badfc40be
+  checksum: 10/7c07af35e6b4eaaebad4b50c37bc6dd50f0cecebe5a4e648ef117fd43a8496f3132020061e19a2fbaf826978e91c100054e638701bf89db8f342dd1353bb5b7e
   languageName: node
   linkType: hard
 

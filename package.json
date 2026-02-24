@@ -39,9 +39,9 @@
   ],
   "devDependencies": {
     "@navikt/aksel-stylelint": "8.5.0",
-    "@storybook/addon-a11y": "10.2.8",
-    "@storybook/addon-links": "10.2.8",
-    "@storybook/react": "10.2.8",
+    "@storybook/addon-a11y": "10.2.9",
+    "@storybook/addon-links": "10.2.9",
+    "@storybook/react": "10.2.9",
     "@testing-library/jest-dom": "6.9.1",
     "@types/react": "19.2.9",
     "@types/react-dom": "19.2.3",
