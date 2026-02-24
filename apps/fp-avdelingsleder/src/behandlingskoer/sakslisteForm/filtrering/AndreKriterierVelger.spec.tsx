@@ -49,7 +49,10 @@ describe('AndreKriterierVelger', () => {
     expect(screen.queryByText('Klage på tilbakebetaling')).not.toBeInTheDocument();
   });
 
-  it('skal skjule Bare far har rett når Engangsstønad er valgt og rense ugyldig valgt kriterie fra form', async () => {
+  it('skal skjule Bare far har rett i UI når Engangsstønad er valgt', async () => {
+    // Merk: testen verifiserer kun at kriteriet skjules i UI.
+    // Opprydding av BARE_FAR_RETT fra andreKriterie i formstate (via setValue i useEffect)
+    // dekkes ikke her, da composeStories ikke eksponerer formstate utad.
     applyRequestHandlers(MedEngangsstønad.parameters['msw'] as MswParameters['msw']);
     render(<MedEngangsstønad />);
 
