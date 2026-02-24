@@ -1,21 +1,27 @@
-import { type IntlShape, useIntl } from 'react-intl';
-
 import { HStack, Tag } from '@navikt/ds-react';
+import { createIntl } from '@navikt/ft-utils';
 
-import { type AndreKriterierType, type LosKodeverkMedNavn, type OppgaveDto } from '@navikt/fp-types';
+import {
+  type AndreKriterierType,
+  type LosBehandlingType,
+  type LosFagsakYtelseType,
+  type LosKodeverkMedNavn,
+} from '@navikt/fp-types';
 
-import { useLosKodeverk } from '../../data/useLosKodeverk';
+import messages from '../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 type Props = {
-  oppgave: OppgaveDto;
+  behandlingType: LosBehandlingType;
+  fagsakYtelseType: LosFagsakYtelseType;
+  kriterier: AndreKriterierType[];
+  behandlingTyper: LosKodeverkMedNavn<'BehandlingType'>[];
+  fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[];
+  andreKriterier: LosKodeverkMedNavn<'AndreKriterierType'>[];
 };
 
-export const OppgaveLabels = ({ oppgave }: Props) => {
-  const intl = useIntl();
-
-  const behandlingTyper = useLosKodeverk('BehandlingType');
-  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
-  const andreKriterier = useLosKodeverk('AndreKriterierType');
+export const OppgaveLabels = ({ behandlingType, fagsakYtelseType, kriterier, behandlingTyper, fagsakYtelseTyper, andreKriterier }: Props) => {
 
   return (
     <HStack gap="space-8">
@@ -23,26 +29,26 @@ export const OppgaveLabels = ({ oppgave }: Props) => {
         data-color="success"
         size="small"
         variant="outline"
-        title={fagsakYtelseTyper.find(b => b.kode === oppgave.fagsakYtelseType)?.navn}
+        title={fagsakYtelseTyper.find(b => b.kode === fagsakYtelseType)?.navn}
       >
-        {oppgave.fagsakYtelseType}
+        {fagsakYtelseType}
       </Tag>
       <Tag
         data-color="danger"
         size="small"
         variant="outline"
-        title={behandlingTyper.find(b => b.kode === oppgave.behandlingstype)?.navn}
+        title={behandlingTyper.find(b => b.kode === behandlingType)?.navn}
       >
-        {hentAlleBehandlingstypeKortnavn(intl)[oppgave.behandlingstype]}
+        {hentAlleBehandlingstypeKortnavn()[behandlingType]}
       </Tag>
-      {oppgave.andreKriterier.sort(sorterAndreKriterier).map(kode => (
+      {kriterier.sort(sorterAndreKriterier).map(kode => (
         <Tag
           key={kode}
           size="small"
           variant={MAP_ANDRE_KRITERIER_TIL_LABEL_FARGE_SORTERT[kode]}
           title={andreKriterier.find(b => b.kode === kode)?.navn}
         >
-          {hentAndreKriterierNavn(intl, kode, andreKriterier)}
+          {hentAndreKriterierNavn(kode, andreKriterier)}
         </Tag>
       ))}
     </HStack>
@@ -87,7 +93,7 @@ const sorterAndreKriterier = (a: AndreKriterierType, b: AndreKriterierType) => {
   return kriterier.indexOf(a) - kriterier.indexOf(b);
 };
 
-const hentAlleBehandlingstypeKortnavn = (intl: IntlShape) => ({
+const hentAlleBehandlingstypeKortnavn = () => ({
   ['BT-008']: intl.formatMessage({ id: 'OppgaveLabels.Anke' }),
   ['BT-006']: intl.formatMessage({ id: 'OppgaveLabels.Innsyn' }),
   ['BT-002']: intl.formatMessage({ id: 'OppgaveLabels.Forstegang' }),
@@ -99,9 +105,8 @@ const hentAlleBehandlingstypeKortnavn = (intl: IntlShape) => ({
 });
 
 const hentAndreKriterierNavn = (
-  intl: IntlShape,
   kode: AndreKriterierType,
-  andreKriterier: LosKodeverkMedNavn<'AndreKriterierType'>[],
+  andreKriterier: LosKodeverkMedNavn<"AndreKriterierType">[],
 ) => {
   if ('REVURDERING_INNTEKTSMELDING' === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.RevurderingInntekstmelding' });

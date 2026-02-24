@@ -116,18 +116,7 @@ export const OpprettetAvsluttetGraf = ({ height, endringPerDato, isToUkerValgt, 
           ),
           ...Array.from(dataAvsluttet.entries()).map(([type, verdi]) =>
             createBarSeriesWithColorResolver(
-              {
-                name: `${finnBehandlingTypeNavn(behandlingTyper, type)} (avsluttet)`,
-                data: verdi,
-                stack: 'avsluttet',
-                label: {
-                  show: true,
-                  formatter: params => {
-                    const val = Array.isArray(params.value) ? params.value[1] : params.value;
-                    return typeof val === 'number' && val !== 0 ? val.toLocaleString('nb-NO') : '';
-                  },
-                },
-              },
+              { name: `${finnBehandlingTypeNavn(behandlingTyper, type)} (avsluttet)`, data: verdi, stack: 'avsluttet' },
               behandlingstypeAkselFarger[type],
               getSoftAkselColorPair,
             ),

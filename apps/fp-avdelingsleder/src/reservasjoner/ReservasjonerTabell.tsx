@@ -6,7 +6,7 @@ import { BodyShort, Button, HStack, Label, Table, TextField, VStack } from '@nav
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { FlyttReservasjonModal, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
+import { FlyttReservasjonModal, OppgaveLabels, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
 import type { AvdelingReservasjonDto } from '@navikt/fp-types';
 
 import {
@@ -28,8 +28,6 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
   const [showFlyttReservasjonModal, setShowFlyttReservasjonModal] = useState(false);
   const [valgtReservasjon, setValgtReservasjon] = useState<AvdelingReservasjonDto | undefined>(undefined);
   const [søketekst, setSøketekst] = useState('');
-
-  const behandlingTyper = useLosKodeverk('BehandlingType');
 
   const { data: reservasjoner, refetch: hentAvdelingensReservasjoner } = useQuery(
     reservasjonerForAvdelingOptions(valgtAvdelingEnhet),
@@ -67,6 +65,10 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
     mutationFn: (valuesToStore: { oppgaveId: number; reserverTil: string }) =>
       endreReservasjon(valuesToStore.oppgaveId, valuesToStore.reserverTil),
   });
+
+  const behandlingTyper = useLosKodeverk('BehandlingType');
+  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
+  const andreKriterier = useLosKodeverk('AndreKriterierType');
 
   const endreOppgavereservasjon = async (reserverTil: string) => {
     if (!valgtReservasjon) {
@@ -122,7 +124,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                 <FormattedMessage id="ReservasjonerTabell.Saksnr" />
               </Table.ColumnHeader>
               <Table.ColumnHeader>
-                <FormattedMessage id="Label.Behandlingstype" />
+                <FormattedMessage id="ReservasjonerTabell.Egenskaper" />
               </Table.ColumnHeader>
               <Table.ColumnHeader>
                 <FormattedMessage id="ReservasjonerTabell.ReservertTil" />
@@ -144,7 +146,14 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                 <Table.DataCell>{reservasjon.reservertAvNavn}</Table.DataCell>
                 <Table.DataCell>{reservasjon.oppgaveSaksNr}</Table.DataCell>
                 <Table.DataCell>
-                  {behandlingTyper.find(t => t.kode === reservasjon.behandlingType)?.navn}
+                  <OppgaveLabels
+                    behandlingType={reservasjon.behandlingType}
+                    fagsakYtelseType={reservasjon.ytelseType}
+                    kriterier={reservasjon.andreKriterier}
+                    behandlingTyper={behandlingTyper}
+                    fagsakYtelseTyper={fagsakYtelseTyper}
+                    andreKriterier={andreKriterier}
+                  />
                 </Table.DataCell>
                 <Table.DataCell>
                   <DateTimeLabel dateTimeString={reservasjon.reservertTilTidspunkt} />

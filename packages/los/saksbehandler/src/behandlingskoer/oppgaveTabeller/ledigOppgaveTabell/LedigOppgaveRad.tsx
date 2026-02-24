@@ -5,9 +5,10 @@ import { FilesIcon } from '@navikt/aksel-icons';
 import { BodyShort, CopyButton, HStack, Table } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
+import { OppgaveLabels } from '@navikt/fp-los-felles';
 import { type OppgaveDto } from '@navikt/fp-types';
 
-import { OppgaveLabels } from '../OppgaveLabels';
+import { useLosKodeverk } from '../../../data/useLosKodeverk.ts';
 
 import styles from './ledigOppgaveRad.module.css';
 
@@ -53,7 +54,14 @@ export const LedigOppgaveRad = ({ oppgave, reserverOppgave, erNyBehandling }: Pr
         </HStack>
       </Table.DataCell>
       <Table.DataCell>
-        <OppgaveLabels oppgave={oppgave} />
+        <OppgaveLabels
+          behandlingType={oppgave.behandlingstype}
+          fagsakYtelseType={oppgave.fagsakYtelseType}
+          kriterier={oppgave.andreKriterier}
+          behandlingTyper={useLosKodeverk('BehandlingType')}
+          fagsakYtelseTyper={useLosKodeverk('FagsakYtelseType')}
+          andreKriterier={useLosKodeverk('AndreKriterierType')}
+        />
       </Table.DataCell>
       <Table.DataCell>
         {oppgave.opprettetTidspunkt && <DateLabel dateString={oppgave.opprettetTidspunkt} />}

@@ -15,6 +15,10 @@ const buildBarSeries = (options: BarSeriesOption, { primaryColor, secondaryColor
   stack: 'total',
   label: {
     show: true,
+    formatter: params => {
+      const val = Array.isArray(params.value) ? params.value[1] : params.value;
+      return typeof val === 'number' && val !== 0 ? val.toLocaleString('nb-NO') : '';
+    },
   },
   color: primaryColor,
   ...options,

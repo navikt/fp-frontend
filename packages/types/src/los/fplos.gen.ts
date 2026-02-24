@@ -23,7 +23,7 @@ export type tjenester_avdelingsleder_dto_InitLinksDto = {
 
 export type statistikk_KøStatistikkDto = {
   aktive: number;
-  avsluttet?: number;
+  avsluttet: number;
   tidspunkt: string;
   tilgjengelige: number;
   ventende: number;
@@ -79,12 +79,14 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForFørsteStønadsd
 };
 
 export type tjenester_avdelingsleder_reservasjon_AvdelingReservasjonDto = {
+  andreKriterier: Array<oppgave_AndreKriterierType>;
   behandlingType: oppgave_BehandlingType;
   oppgaveId: number;
   oppgaveSaksNr: string;
   reservertAvIdent: string;
   reservertAvNavn: string;
   reservertTilTidspunkt: string;
+  ytelseType: oppgave_FagsakYtelseType;
 };
 
 export type tjenester_saksbehandler_oppgave_dto_OppgaveIdDto = {
