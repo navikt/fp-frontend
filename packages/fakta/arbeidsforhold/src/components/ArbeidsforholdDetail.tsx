@@ -3,13 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
-import type { AoIArbeidsforhold } from '@navikt/fp-types';
+import type { Arbeidsforhold } from '@navikt/fp-types';
 
 import { BekreftetPermisjonStatus } from '../kodeverk/bekreftetPermisjonStatus';
 import { PermisjonPeriode } from './PermisjonPeriode';
 
 interface Props {
-  valgtArbeidsforhold: AoIArbeidsforhold;
+  valgtArbeidsforhold: Arbeidsforhold;
 }
 
 export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
@@ -94,7 +94,7 @@ export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
   );
 };
 
-const finnOverstyrtTom = (arbeidsforhold: AoIArbeidsforhold): string | undefined => {
+const finnOverstyrtTom = (arbeidsforhold: Arbeidsforhold): string | undefined => {
   if (arbeidsforhold.saksbehandlersVurdering === 'BRUK_MED_OVERSTYRT_PERIODE') {
     return arbeidsforhold.tom;
   }
@@ -102,7 +102,7 @@ const finnOverstyrtTom = (arbeidsforhold: AoIArbeidsforhold): string | undefined
   return undefined;
 };
 
-const utledAktivtArbeidsforholdLabel = (arbeidsforhold: AoIArbeidsforhold): string => {
+const utledAktivtArbeidsforholdLabel = (arbeidsforhold: Arbeidsforhold): string => {
   if (arbeidsforhold.permisjonOgMangel) {
     return 'ArbeidsforholdDetail.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon';
   }

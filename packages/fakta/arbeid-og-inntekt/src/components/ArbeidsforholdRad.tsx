@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 
 import type {
   AlleKodeverk,
-  AoIArbeidsforhold,
+  Arbeidsforhold,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
@@ -217,7 +217,7 @@ const finnKildekode = (erManueltOpprettet: boolean, harArbeidsforhold: boolean):
 };
 
 const finnPeriode = (
-  arbeidsforhold: AoIArbeidsforhold[],
+  arbeidsforhold: Arbeidsforhold[],
   avklaring?: Avklaring,
 ): { fom?: string; tom?: string } | undefined => {
   if (

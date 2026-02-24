@@ -11,7 +11,7 @@ import { FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
-  AoIArbeidsforhold,
+  Arbeidsforhold,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsgiverOpplysningerPerId,
   FodselOgTilrettelegging,
@@ -58,7 +58,7 @@ const FeilmeldingAlert = ({ children }: { children: ReactNode }) => <Alert varia
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
-  aoiArbeidsforhold: AoIArbeidsforhold[];
+  aoiArbeidsforhold: Arbeidsforhold[];
 }
 
 /**

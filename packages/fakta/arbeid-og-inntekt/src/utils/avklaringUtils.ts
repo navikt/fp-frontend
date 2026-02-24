@@ -1,9 +1,9 @@
-import type { AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+import type { Arbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 
 import type { Avklaring } from '../types/arbeidsforholdOgInntekt';
 
 export const lagAvklaringFraArbeidsforhold = (
-  arbeidsforhold: AoIArbeidsforhold,
+  arbeidsforhold: Arbeidsforhold,
   arbeidsgiverNavn: string,
 ): Avklaring | undefined => {
   const { fom, tom, saksbehandlersVurdering, stillingsprosent, begrunnelse } = arbeidsforhold;

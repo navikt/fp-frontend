@@ -1,11 +1,11 @@
-import type { AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { Arbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
 import { harMatchendeArbeidsgiverIdent, lagArbeidsgiver } from './arbeidsgiverUtils';
 import { lagAvklaringFraArbeidsforhold, lagAvklaringFraInntektsmelding } from './avklaringUtils';
 import { finnInntektsmeldingerForArbeidsgiver } from './inntektsmeldingUtils';
 
-const sorterGittÅrsak = (arbeidsforhold1: AoIArbeidsforhold) => (arbeidsforhold1.årsak ? -1 : 1);
+const sorterGittÅrsak = (arbeidsforhold1: Arbeidsforhold) => (arbeidsforhold1.årsak ? -1 : 1);
 
 const sorterTabell = (radX: ArbeidsforholdOgInntektRadData, radY: ArbeidsforholdOgInntektRadData): number => {
   const radXHarAp = radX.årsak;

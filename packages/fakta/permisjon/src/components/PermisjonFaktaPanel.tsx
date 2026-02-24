@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { Arbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -27,7 +27,7 @@ type FormValues = {
 
 const getSorterArbeidsforhold =
   (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) =>
-  (a1: AoIArbeidsforhold, a2: AoIArbeidsforhold): number =>
+  (a1: Arbeidsforhold, a2: Arbeidsforhold): number =>
     arbeidsgiverOpplysningerPerId[a1.arbeidsgiverIdent]!.navn.localeCompare(
       arbeidsgiverOpplysningerPerId[a2.arbeidsgiverIdent]!.navn,
     );

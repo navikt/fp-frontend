@@ -1,5 +1,5 @@
 import type {
-  AoIArbeidsforhold,
+  Arbeidsforhold,
   ArbeidsforholdKomplettVurderingType,
   Inntektsmelding,
   Inntektspost,
@@ -29,7 +29,7 @@ export type AGOpplysninger =
 
 export type ArbeidsforholdOgInntektRadData = {
   inntektsmeldingerForRad: Inntektsmelding[];
-  arbeidsforholdForRad: AoIArbeidsforhold[];
+  arbeidsforholdForRad: Arbeidsforhold[];
   inntektsposter: Inntektspost[];
   årsak?: string;
   avklaring?: Avklaring;

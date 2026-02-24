@@ -2,7 +2,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 
 import type {
   AlleKodeverk,
-  AoIArbeidsforhold,
+  Arbeidsforhold,
   ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
@@ -13,7 +13,7 @@ const FIELD_ARRAY_NAME = 'arbeidsforhold';
 
 interface Props {
   saksnummer: string;
-  sorterteArbeidsforhold: AoIArbeidsforhold[];
+  sorterteArbeidsforhold: Arbeidsforhold[];
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   isReadOnly: boolean;

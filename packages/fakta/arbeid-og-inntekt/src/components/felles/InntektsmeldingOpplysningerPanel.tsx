@@ -4,7 +4,7 @@ import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { BeløpLabel, DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+import type { AlleKodeverk, Arbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 import { DokumentLink } from '@navikt/fp-ui-komponenter';
 
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
@@ -13,7 +13,7 @@ import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
 interface Props {
   saksnummer: string;
-  arbeidsforhold?: AoIArbeidsforhold;
+  arbeidsforhold?: Arbeidsforhold;
   inntektsmelding: Inntektsmelding;
   skalViseArbeidsforholdId: boolean;
   alleKodeverk: AlleKodeverk;

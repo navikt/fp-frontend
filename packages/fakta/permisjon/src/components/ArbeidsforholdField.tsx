@@ -10,7 +10,7 @@ import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type {
   AlleKodeverk,
-  AoIArbeidsforhold,
+  Arbeidsforhold,
   ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerPerId,
   Inntektsmelding,
@@ -35,7 +35,7 @@ interface Props {
   index: number;
   fieldId: string;
   saksnummer: string;
-  sorterteArbeidsforhold: AoIArbeidsforhold[];
+  sorterteArbeidsforhold: Arbeidsforhold[];
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   isReadOnly: boolean;
@@ -256,7 +256,7 @@ export const ArbeidsforholdField = ({
   );
 };
 
-const erMatch = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
+const erMatch = (arbeidsforhold: Arbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
   inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent &&
   (!inntektsmelding.internArbeidsforholdId ||
     inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);

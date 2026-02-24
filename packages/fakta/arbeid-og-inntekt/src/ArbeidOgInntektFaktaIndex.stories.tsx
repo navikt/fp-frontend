@@ -10,7 +10,7 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import { type AoIArbeidsforhold } from '@navikt/fp-types';
+import { type Arbeidsforhold } from '@navikt/fp-types';
 
 import { ArbeidOgInntektFaktaIndex } from './ArbeidOgInntektFaktaIndex';
 
@@ -34,7 +34,7 @@ const defaultArbeidsforhold = {
   fom: '2019-12-06',
   stillingsprosent: 100,
   tom: '2022-12-31',
-} satisfies AoIArbeidsforhold;
+} satisfies Arbeidsforhold;
 
 const meta = {
   title: 'fakta/fakta-arbeid-og-inntekter',
