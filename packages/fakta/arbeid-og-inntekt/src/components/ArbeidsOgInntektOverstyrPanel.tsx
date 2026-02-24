@@ -7,7 +7,6 @@ import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-kompon
 import { dateFormat } from '@navikt/ft-utils';
 
 import type { Aksjonspunkt, ArbeidOgInntektsmelding, BehandlingFpSak, ManueltArbeidsforhold } from '@navikt/fp-types';
-import { AksjonspunktÅrsak } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
 import { MANUELT_ORG_NR, ManueltLagtTilArbeidsforholdForm } from './manuelt/ManueltLagtTilArbeidsforholdForm';
@@ -126,10 +125,8 @@ const finnAksjonspunktTekstKoder = (
   tabellData: ArbeidsforholdOgInntektRadData[],
   aksjonspunkt?: Aksjonspunkt,
 ): string[] => {
-  const harManglendeInntektsmeldinger = tabellData.some(d => d.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING);
-  const harManglandeOpplysninger = tabellData.some(
-    d => d.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-  );
+  const harManglendeInntektsmeldinger = tabellData.some(d => d.årsak === 'MANGLENDE_INNTEKTSMELDING');
+  const harManglandeOpplysninger = tabellData.some(d => d.årsak === 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD');
   const erApÅpent = aksjonspunkt?.status === 'OPPR';
 
   const koder = [];

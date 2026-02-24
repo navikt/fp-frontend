@@ -12,7 +12,6 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
-import { AksjonspunktÅrsak } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
 import { ArbeidsforholdInformasjonPanel } from './felles/ArbeidsforholdInformasjonPanel';
@@ -64,8 +63,8 @@ export const ArbeidsforholdRad = ({
   const erManueltOpprettet = avklaring?.saksbehandlersVurdering === 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER';
   const harArbeidsforholdOgInntektsmelding =
     arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length > 0 && !årsak;
-  const manglerInntektsmelding = årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING;
-  const manglerArbeidsforhold = årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD;
+  const manglerInntektsmelding = årsak === 'MANGLENDE_INNTEKTSMELDING';
+  const manglerArbeidsforhold = årsak === 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD';
   const harÅpentAksjonspunkt = !!årsak && !avklaring?.saksbehandlersVurdering;
   const harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak =
     arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length === 0 && !årsak && !erManueltOpprettet;

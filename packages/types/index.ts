@@ -9,7 +9,6 @@ export type {
 } from './src/arbeidsgiverOpplysningerTsType';
 export type { AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
 export type { Arbeidsforhold as AoIArbeidsforhold } from './src/index';
-export { AksjonspunktÅrsak } from './src/arbeidOgInntektsmeldingTsType';
 export type { BrevOverstyring } from './src/brevOverstyring';
 export type { SkjermlenkeType } from './src/skjermlenkeType';
 export type { Arbeidskategori } from './src/arbeidskategori';
