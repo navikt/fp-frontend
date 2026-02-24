@@ -1,5 +1,5 @@
-import type { Arbeidskategori } from './arbeidskategori';
 import type { BehandlingResultatType, KonsekvensForYtelsen } from './behandlingsresultat';
+import type { SkjermlenkeType } from './felles.ts';
 import type { foreldrepenger_behandlingslager_geografisk_Region as Region } from './fpsak.gen';
 import type {
   AdresseType,
@@ -56,7 +56,7 @@ import type {
   VirksomhetType,
   VurderÅrsak,
 } from './index';
-import type { SkjermlenkeType } from './felles.ts';
+import type { Arbeidskategori } from './interne-typer';
 
 //Mapping mellom KodeverkType og union-types med verdier
 type KodeverkEnumMap = {

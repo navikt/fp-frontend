@@ -2,17 +2,10 @@ export type { Behandlingsresultat, KonsekvensForYtelsen, BehandlingResultatType 
 export { isAvslag, isInnvilget, isOpphor, isKlageOmgjort, isKlageAvvist } from './src/behandlingsresultat';
 export type { AlleKodeverk, KodeverkType, KodeverkMedNavn } from './src/kodeverkAlle';
 
-export type {
-  ArbeidsgiverOpplysningerPerId,
-  ArbeidsgiverOpplysningerWrapper,
-  ArbeidsgiverOpplysninger,
-} from './src/arbeidsgiverOpplysningerTsType';
-export type { AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
 export type { Arbeidsforhold as AoIArbeidsforhold } from './src/index';
-export type { BrevOverstyring } from './src/brevOverstyring';
-export type { Arbeidskategori } from './src/arbeidskategori';
 
 export type * from './src/los';
 export type * from './src/tilbakekreving';
 export type * from './src/index';
 export type * from './src/felles';
+export type * from './src/interne-typer';
