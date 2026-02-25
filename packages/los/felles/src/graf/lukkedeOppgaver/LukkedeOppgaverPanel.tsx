@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
-import { FormattedMessage, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
-import { Label, ToggleGroup, VStack } from '@navikt/ds-react';
+import { ToggleGroup, VStack } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import { type KøStatistikkDto } from '@navikt/fp-types';
@@ -52,9 +52,6 @@ export const LukkedeOppgaverPanel = ({ køStatistikk, height = 400 }: Props) => 
   return (
     <RawIntlProvider value={intl}>
       <VStack gap="space-16">
-        <Label size="small">
-          <FormattedMessage id="LukkedeOppgaverPanel.Tittel" />
-        </Label>
         <ToggleGroup size="small" value={valgtUke} onChange={value => setValgtUke(value as UkeValg)}>
           <ToggleGroup.Item value={UkeValg.FORRIGE_UKE}>
             {intl.formatMessage({ id: 'LukkedeOppgaverPanel.ForrigeUke' })}
