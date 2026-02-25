@@ -12,13 +12,14 @@ import { type OppgaverForAvdelingPerDato } from '@navikt/fp-types';
 import { oppgaverPerDatoOptions } from '../../data/fplosAvdelingslederApi';
 import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
-import { type EndringForDatoGraf, OpprettetAvsluttetGraf } from './OpprettetAvsluttetGraf.tsx';
-import { type OppgaveForDatoGraf, TilBehandlingGraf } from './TilBehandlingGraf';
+import { ALLE_YTELSER } from '../fagsakYtelseTypeUtils';
+import { slaSammenLikeBehandlingstyperOgDatoer } from './oppgaveUtils';
+import { OpprettetAvsluttetGraf } from './OpprettetAvsluttetGraf';
+import { TilBehandlingGraf } from './TilBehandlingGraf';
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
-const ALLE_YTELSETYPER = ['FP', 'SVP', 'ES'];
 const UKE_2 = '2';
 
 type FormValues = {
@@ -48,6 +49,16 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
 
   useStoreValuesInLocalStorage(formName, { ukevalg, ytelseTyper });
 
+  const periodeStart = dayjs()
+    .subtract(ukevalg === UKE_2 ? 2 : 4, 'w')
+    .startOf('day');
+  const periodeSlutt = dayjs().subtract(1, 'd').endOf('day');
+
+  const filtrerteOppgaverPerDato = oppgaverPerDato
+    .filter(ofa => ytelseTyper.length === 0 || ytelseTyper.includes(ofa.fagsakYtelseType))
+    .filter(ofa => erDatoInnenforPeriode(ofa, periodeStart, periodeSlutt));
+  const sammenslåtteFiltrerteOppgaverPerDato = slaSammenLikeBehandlingstyperOgDatoer(filtrerteOppgaverPerDato);
+
   return (
     <VStack gap="space-16">
       <Label>
@@ -64,7 +75,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
         </ToggleGroup>
 
         <Chips size="small">
-          {ALLE_YTELSETYPER.map(option => (
+          {ALLE_YTELSER.map(option => (
             <Chips.Toggle
               key={option}
               checkmark={false}
@@ -80,94 +91,33 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
           ))}
         </Chips>
       </HStack>
-
-      <TilBehandlingGraf
-        height={height}
-        isToUkerValgt={ukevalg === UKE_2}
-        behandlingTyper={behandlingTyper}
-        oppgaverPerDato={slaSammenLikeBehandlingstyperOgDatoer(
-          oppgaverPerDato
-            .filter(ofa => ytelseTyper.length === 0 || ytelseTyper.includes(ofa.fagsakYtelseType))
-            .filter(ofa => erDatoInnenforPeriode(ofa, ukevalg)),
-        )}
-      />
-      <div
-      /* Ekstra mellomrom pga legends */
-      />
-      <OpprettetAvsluttetGraf
-        height={height}
-        isToUkerValgt={ukevalg === UKE_2}
-        behandlingTyper={behandlingTyper}
-        endringPerDato={slaSammenLikeEndringerOgDatoer(
-          oppgaverPerDato
-            .filter(ofa => ytelseTyper.length === 0 || ytelseTyper.includes(ofa.fagsakYtelseType))
-            .filter(ofa => erDatoInnenforPeriode(ofa, ukevalg)),
-        )}
-      />
+      <VStack gap="space-32">
+        <TilBehandlingGraf
+          height={height}
+          behandlingTyper={behandlingTyper}
+          periodeStart={periodeStart}
+          periodeSlutt={periodeSlutt}
+          oppgaverPerDato={sammenslåtteFiltrerteOppgaverPerDato}
+        />
+        <OpprettetAvsluttetGraf
+          height={height}
+          behandlingTyper={behandlingTyper}
+          periodeStart={periodeStart}
+          periodeSlutt={periodeSlutt}
+          oppgaverPerDato={sammenslåtteFiltrerteOppgaverPerDato}
+        />
+      </VStack>
     </VStack>
   );
 };
 
-const uker = [
-  {
-    kode: UKE_2,
-    tekstKode: 'TilBehandlingPanel.ToSisteUker',
-  },
-  {
-    kode: '4',
-    tekstKode: 'TilBehandlingPanel.FireSisteUker',
-  },
-];
-
-const erDatoInnenforPeriode = (oppgaveForAvdeling: OppgaverForAvdelingPerDato, ukevalg: string): boolean => {
-  if (ukevalg === uker[1]?.kode) {
-    return true;
-  }
-  const toUkerSiden = dayjs().subtract(2, 'w');
-  return dayjs(oppgaveForAvdeling.statistikkDato).isSameOrAfter(toUkerSiden);
-};
-
-const slaSammenLikeBehandlingstyperOgDatoer = (
-  oppgaverForAvdeling: OppgaverForAvdelingPerDato[],
-): OppgaveForDatoGraf[] => {
-  const sammenslatte: OppgaveForDatoGraf[] = [];
-
-  for (const o of oppgaverForAvdeling) {
-    const index = sammenslatte.findIndex(
-      s => s.behandlingType === o.behandlingType && s.statistikkDato === o.statistikkDato,
-    );
-    if (index === -1) {
-      sammenslatte.push(o);
-    } else {
-      sammenslatte[index] = {
-        behandlingType: sammenslatte[index]!.behandlingType,
-        statistikkDato: sammenslatte[index]!.statistikkDato,
-        antall: sammenslatte[index]!.antall + o.antall,
-      };
-    }
-  }
-
-  return sammenslatte;
-};
-
-const slaSammenLikeEndringerOgDatoer = (oppgaverForAvdeling: OppgaverForAvdelingPerDato[]): EndringForDatoGraf[] => {
-  const sammenslatte: EndringForDatoGraf[] = [];
-
-  for (const o of oppgaverForAvdeling) {
-    const index = sammenslatte.findIndex(
-      s => s.behandlingType === o.behandlingType && s.statistikkDato === o.statistikkDato,
-    );
-    if (index === -1) {
-      sammenslatte.push(o);
-    } else {
-      sammenslatte[index] = {
-        behandlingType: sammenslatte[index]!.behandlingType,
-        statistikkDato: sammenslatte[index]!.statistikkDato,
-        opprettet: sammenslatte[index]!.opprettet + o.opprettet,
-        avsluttet: sammenslatte[index]!.avsluttet + o.avsluttet,
-      };
-    }
-  }
-
-  return sammenslatte;
+const erDatoInnenforPeriode = (
+  oppgaveForAvdeling: OppgaverForAvdelingPerDato,
+  periodeStart: dayjs.Dayjs,
+  periodeSlutt: dayjs.Dayjs,
+): boolean => {
+  return (
+    dayjs(oppgaveForAvdeling.statistikkDato).isSameOrAfter(periodeStart) &&
+    dayjs(oppgaveForAvdeling.statistikkDato).isSameOrBefore(periodeSlutt)
+  );
 };

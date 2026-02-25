@@ -27,6 +27,7 @@
     "@navikt/ds-css": "8.5.0",
     "@navikt/ds-css-internal": "3.4.3",
     "@navikt/ds-react": "8.5.0",
+    "@navikt/ds-tokens": "8.5.0",
     "@navikt/ds-tailwind": "8.5.0",
     "@navikt/fp-app-felles": "workspace:*",
     "@navikt/fp-konstanter": "workspace:*",
