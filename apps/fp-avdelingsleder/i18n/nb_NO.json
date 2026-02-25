@@ -74,7 +74,6 @@
   "GjeldendeSakslisterTabell.OppgaverForAvdeling": "Antall åpne behandlinger totalt",
   "GjeldendeSakslisterTabell.SlettSaksliste": "Slett saksliste {navn}",
 
-  "OppgaverGrafDialog.Overskrift": "Antall oppgaver",
   "OppgaverGrafDialog.VisOppgaveGraf": "Vis oppgave graf",
 
   "AntallOppgaverForSaksliste.HentingAvAntallOppgaverFeilet": "Henting av antall feilet",

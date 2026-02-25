@@ -1,7 +1,8 @@
 export { ReactECharts } from './src/ReactECharts';
 export { OppgaveReservasjonEndringDatoModal } from './src/endreReservasjon/OppgaveReservasjonEndringDatoModal';
 export { FlyttReservasjonModal } from './src/flyttReservasjon/FlyttReservasjonModal';
-export { AktiveOgTilgjengeligeOppgaverGraf } from './src/graf/AktiveOgTilgjengeligeOppgaverGraf';
+export { AktiveOgTilgjengeligeOppgaverGraf } from './src/graf/oppgaver/AktiveOgTilgjengeligeOppgaverGraf';
+export { LukkedeOppgaverPanel } from './src/graf/lukkedeOppgaver/LukkedeOppgaverPanel';
 
 export {
   getAkselVariable,
