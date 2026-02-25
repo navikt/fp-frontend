@@ -2059,6 +2059,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/ds-tokens@npm:8.5.0":
+  version: 8.5.0
+  resolution: "@navikt/ds-tokens@npm:8.5.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.5.0%2F29599e403ef6820c462c7a8190ccbfc41b2e8f70"
+  checksum: 10/17d47cec86dec3e733b1ef1950a463cc7a11aff69b43248c38def89396aa700130049365783aa3b7dc04a0fb4518da8f171a8492f6ca9af24cec2e1c8f7f39b8
+  languageName: node
+  linkType: hard
+
 "@navikt/ds-tokens@npm:^8.2.0":
   version: 8.2.0
   resolution: "@navikt/ds-tokens@npm:8.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.2.0%2F5e15fcf3bffb277f8730edb0c033ee289d2798e4"
@@ -2109,6 +2116,7 @@ __metadata:
     "@navikt/ds-css-internal": "npm:3.4.3"
     "@navikt/ds-react": "npm:8.5.0"
     "@navikt/ds-tailwind": "npm:8.5.0"
+    "@navikt/ds-tokens": "npm:8.5.0"
     "@navikt/fp-app-felles": "workspace:*"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -3101,6 +3109,7 @@ __metadata:
   dependencies:
     "@navikt/ds-css": "npm:8.5.0"
     "@navikt/ds-react": "npm:8.5.0"
+    "@navikt/ds-tokens": "npm:8.5.0"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
