@@ -13,7 +13,7 @@ import { oppgaverPerDatoOptions } from '../../data/fplosAvdelingslederApi';
 import { getParsedValueFromLocalStorage, useStoreValuesInLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { ALLE_YTELSER } from '../fagsakYtelseTypeUtils';
-import { slaSammenLikeBehandlingstyperOgDatoer } from './oppgaveUtils';
+import { slåSammenLikeBehandlingstyperOgDatoer } from './oppgaveUtils';
 import { OpprettetAvsluttetGraf } from './OpprettetAvsluttetGraf';
 import { TilBehandlingGraf } from './TilBehandlingGraf';
 
@@ -57,7 +57,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
   const filtrerteOppgaverPerDato = oppgaverPerDato
     .filter(ofa => ytelseTyper.length === 0 || ytelseTyper.includes(ofa.fagsakYtelseType))
     .filter(ofa => erDatoInnenforPeriode(ofa, periodeStart, periodeSlutt));
-  const sammenslåtteFiltrerteOppgaverPerDato = slaSammenLikeBehandlingstyperOgDatoer(filtrerteOppgaverPerDato);
+  const sammenslåtteFiltrerteOppgaverPerDato = slåSammenLikeBehandlingstyperOgDatoer(filtrerteOppgaverPerDato);
 
   return (
     <VStack gap="space-16">

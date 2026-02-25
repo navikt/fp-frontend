@@ -32,40 +32,50 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
   periodeStart: dayjs.Dayjs,
   periodeSlutt: dayjs.Dayjs,
 ): [LosBehandlingType, DataPunkt[]][] =>
-  Array.from(data.entries())
-    .reduce((acc, [behandlingstype, behandlingstypeData]) => {
-      const koordinater: DataPunkt[] = [];
-      for (let dato = periodeStart; dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'day').startOf('day')) {
-        const funnetDato = behandlingstypeData.find(d => dayjs(d[0]).isSame(dato));
-        koordinater.push(funnetDato ?? [dato.toDate(), undefined]);
-      }
-      acc.set(behandlingstype, koordinater);
-      return acc;
-    }, new Map<LosBehandlingType, DataPunkt[]>())
-    .entries()
-    .toArray();
+  Array.from(
+    Array.from(data.entries())
+      .reduce((acc, [behandlingstype, behandlingstypeData]) => {
+        const koordinater: DataPunkt[] = [];
+        for (let dato = periodeStart; dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'day').startOf('day')) {
+          const funnetDato = behandlingstypeData.find(d => dayjs(d[0]).isSame(dato));
+          koordinater.push(funnetDato ?? [dato.toDate(), undefined]);
+        }
+        acc.set(behandlingstype, koordinater);
+        return acc;
+      }, new Map<LosBehandlingType, DataPunkt[]>())
+      .entries(),
+  );
 
-export const slaSammenLikeBehandlingstyperOgDatoer = (
+export const slåSammenLikeBehandlingstyperOgDatoer = (
   oppgaverForAvdeling: OppgaverForAvdelingPerDato[],
 ): OppgaverForDato[] => {
-  const sammenslatte: OppgaverForDato[] = [];
+  const gruppertPåBehandlingsTypeOgDato = Map.groupBy(
+    oppgaverForAvdeling,
+    o => `${o.behandlingType}|${o.statistikkDato}`,
+  );
 
-  for (const o of oppgaverForAvdeling) {
-    const index = sammenslatte.findIndex(
-      s => s.behandlingType === o.behandlingType && s.statistikkDato === o.statistikkDato,
-    );
-    if (index === -1) {
-      sammenslatte.push(o);
-    } else {
-      sammenslatte[index] = {
-        behandlingType: sammenslatte[index]!.behandlingType,
-        statistikkDato: sammenslatte[index]!.statistikkDato,
-        opprettet: sammenslatte[index]!.opprettet + o.opprettet,
-        avsluttet: sammenslatte[index]!.avsluttet + o.avsluttet,
-        antall: sammenslatte[index]!.antall + o.antall,
-      };
-    }
+  return Array.from(gruppertPåBehandlingsTypeOgDato.entries()).map(summerOppgaverIGruppe);
+};
+const summerOppgaverIGruppe = ([, oppgaver]: [string, OppgaverForAvdelingPerDato[]]): OppgaverForDato => {
+  const [første, ...resten] = oppgaver;
+  if (!første) {
+    throw new Error('Gruppen må inneholde minst én oppgave');
   }
 
-  return sammenslatte;
+  return resten.reduce<OppgaverForDato>(
+    (acc, o) => ({
+      behandlingType: acc.behandlingType,
+      statistikkDato: acc.statistikkDato,
+      opprettet: acc.opprettet + o.opprettet,
+      avsluttet: acc.avsluttet + o.avsluttet,
+      antall: acc.antall + o.antall,
+    }),
+    {
+      behandlingType: første.behandlingType,
+      statistikkDato: første.statistikkDato,
+      antall: første.antall,
+      avsluttet: første.avsluttet,
+      opprettet: første.opprettet,
+    },
+  );
 };
