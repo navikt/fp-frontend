@@ -20,7 +20,7 @@ const summerLukkedePerDato = (statistikk: KøStatistikkDto[]): Map<string, numbe
   const lukkedePerDato = new Map<string, number>();
   for (const s of statistikk) {
     const dato = dayjs(s.tidspunkt).format('YYYY-MM-DD');
-    lukkedePerDato.set(dato, (lukkedePerDato.get(dato) ?? 0) + (s.avsluttet ?? 0));
+    lukkedePerDato.set(dato, (lukkedePerDato.get(dato) ?? 0) + s.avsluttet);
   }
   return lukkedePerDato;
 };

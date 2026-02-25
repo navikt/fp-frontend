@@ -6,9 +6,10 @@ import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, VStack } 
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
+import { OppgaveLabels } from '@navikt/fp-los-felles';
 import { type OppgaveDto, type ReservasjonStatusDto } from '@navikt/fp-types';
 
-import { OppgaveLabels } from '../OppgaveLabels';
+import { useLosKodeverk } from '../../../data/useLosKodeverk.ts';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 
 import styles from './ReservertOppgaveRad.module.css';
@@ -61,7 +62,12 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
         </HStack>
       </Table.DataCell>
       <Table.DataCell>
-        <OppgaveLabels oppgave={oppgave} />
+        <OppgaveLabels
+          behandlingType={oppgave.behandlingstype}
+          fagsakYtelseType={oppgave.fagsakYtelseType}
+          kriterier={oppgave.andreKriterier}
+          hentKodeverk={useLosKodeverk}
+        />
       </Table.DataCell>
       <Table.DataCell>
         {oppgave.opprettetTidspunkt && <DateLabel dateString={oppgave.opprettetTidspunkt} />}

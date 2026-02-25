@@ -24,5 +24,22 @@
   "LukkedeOppgaverGraf.TotalForrigeUke": "Totalt forrige uke",
   "LukkedeOppgaverGraf.TotalForrigeUkeAlternativ": "Totalt uken før",
   "LukkedeOppgaverPanel.DenneUken": "Denne uken",
-  "LukkedeOppgaverPanel.ForrigeUke": "Forrige uke"
+  "LukkedeOppgaverPanel.ForrigeUke": "Forrige uke",
+
+  "OppgaveLabels.Anke": "Anke",
+  "OppgaveLabels.Innsyn": "Innsyn",
+  "OppgaveLabels.Forstegang": "Søknad",
+  "OppgaveLabels.Klage": "Klage",
+  "OppgaveLabels.Revurdering": "Rev",
+  "OppgaveLabels.Tilbake": "Tilbake",
+  "OppgaveLabels.TilbakeRev": "Tilb-Rev",
+  "OppgaveLabels.RevurderingInntekstmelding": "Inntektsmelding",
+  "OppgaveLabels.BerortBehandling": "Berørt",
+  "OppgaveLabels.KlageTilbakebetaling": "Klage TB",
+  "OppgaveLabels.Dod": "Død",
+  "OppgaveLabels.Papirsoknad": "Papirsøknad",
+  "OppgaveLabels.FraBeslutter": "Retur",
+  "OppgaveLabels.Naring": "Næring",
+  "OppgaveLabels.Utbetaling": "Direkteutbet.",
+  "OppgaveLabels.VurderSed": "Vurder SED"
 }
