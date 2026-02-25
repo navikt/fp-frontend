@@ -2,10 +2,12 @@ import { HStack, Tag } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import {
+  type AlleKodeverkLos,
   type AndreKriterierType,
   type LosBehandlingType,
   type LosFagsakYtelseType,
   type LosKodeverkMedNavn,
+  type LosKodeverkType,
 } from '@navikt/fp-types';
 
 import messages from '../../i18n/nb_NO.json';
@@ -16,12 +18,13 @@ type Props = {
   behandlingType: LosBehandlingType;
   fagsakYtelseType: LosFagsakYtelseType;
   kriterier: AndreKriterierType[];
-  behandlingTyper: LosKodeverkMedNavn<'BehandlingType'>[];
-  fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[];
-  andreKriterier: LosKodeverkMedNavn<'AndreKriterierType'>[];
+  hentKodeverk: <T extends LosKodeverkType>(type: T) => AlleKodeverkLos[T];
 };
 
-export const OppgaveLabels = ({ behandlingType, fagsakYtelseType, kriterier, behandlingTyper, fagsakYtelseTyper, andreKriterier }: Props) => {
+export const OppgaveLabels = ({ behandlingType, fagsakYtelseType, kriterier, hentKodeverk }: Props) => {
+  const behandlingTyper = hentKodeverk('BehandlingType');
+  const fagsakYtelseTyper = hentKodeverk('FagsakYtelseType');
+  const andreKriterier = hentKodeverk('AndreKriterierType');
 
   return (
     <HStack gap="space-8">
@@ -39,9 +42,9 @@ export const OppgaveLabels = ({ behandlingType, fagsakYtelseType, kriterier, beh
         variant="outline"
         title={behandlingTyper.find(b => b.kode === behandlingType)?.navn}
       >
-        {hentAlleBehandlingstypeKortnavn()[behandlingType]}
+        {MAP_BEHANDLINGTYPE_TIL_KORTNAVN[behandlingType]}
       </Tag>
-      {kriterier.sort(sorterAndreKriterier).map(kode => (
+      {kriterier.toSorted(sorterAndreKriterier).map(kode => (
         <Tag
           key={kode}
           size="small"
@@ -93,48 +96,40 @@ const sorterAndreKriterier = (a: AndreKriterierType, b: AndreKriterierType) => {
   return kriterier.indexOf(a) - kriterier.indexOf(b);
 };
 
-const hentAlleBehandlingstypeKortnavn = () => ({
-  ['BT-008']: intl.formatMessage({ id: 'OppgaveLabels.Anke' }),
-  ['BT-006']: intl.formatMessage({ id: 'OppgaveLabels.Innsyn' }),
+const MAP_BEHANDLINGTYPE_TIL_KORTNAVN = {
   ['BT-002']: intl.formatMessage({ id: 'OppgaveLabels.Forstegang' }),
   ['BT-003']: intl.formatMessage({ id: 'OppgaveLabels.Klage' }),
   ['BT-004']: intl.formatMessage({ id: 'OppgaveLabels.Revurdering' }),
+  ['BT-006']: intl.formatMessage({ id: 'OppgaveLabels.Innsyn' }),
   ['BT-007']: intl.formatMessage({ id: 'OppgaveLabels.Tilbake' }),
+  ['BT-008']: intl.formatMessage({ id: 'OppgaveLabels.Anke' }),
   ['BT-009']: intl.formatMessage({ id: 'OppgaveLabels.TilbakeRev' }),
-  '-': intl.formatMessage({ id: 'OppgaveLabels.TilbakeRev' }), // TODO: finnes bare for TS, fjernes?
-});
+} satisfies Record<LosBehandlingType, string>;
 
 const hentAndreKriterierNavn = (
   kode: AndreKriterierType,
-  andreKriterier: LosKodeverkMedNavn<"AndreKriterierType">[],
+  andreKriterier: LosKodeverkMedNavn<'AndreKriterierType'>[],
 ) => {
-  if ('REVURDERING_INNTEKTSMELDING' === kode) {
-    return intl.formatMessage({ id: 'OppgaveLabels.RevurderingInntekstmelding' });
+  switch (kode) {
+    case 'REVURDERING_INNTEKTSMELDING':
+      return intl.formatMessage({ id: 'OppgaveLabels.RevurderingInntekstmelding' });
+    case 'BERØRT_BEHANDLING':
+      return intl.formatMessage({ id: 'OppgaveLabels.BerortBehandling' });
+    case 'KLAGE_PÅ_TILBAKEBETALING':
+      return intl.formatMessage({ id: 'OppgaveLabels.KlageTilbakebetaling' });
+    case 'DØD':
+      return intl.formatMessage({ id: 'OppgaveLabels.Dod' });
+    case 'PAPIRSOKNAD':
+      return intl.formatMessage({ id: 'OppgaveLabels.Papirsoknad' });
+    case 'RETURNERT_FRA_BESLUTTER':
+      return intl.formatMessage({ id: 'OppgaveLabels.FraBeslutter' });
+    case 'NÆRING':
+      return intl.formatMessage({ id: 'OppgaveLabels.Naring' });
+    case 'UTBETALING_TIL_BRUKER':
+      return intl.formatMessage({ id: 'OppgaveLabels.Utbetaling' });
+    case 'VURDER_EØS_OPPTJENING':
+      return intl.formatMessage({ id: 'OppgaveLabels.VurderSed' });
+    default:
+      return andreKriterier.find(b => b.kode === kode)?.navn;
   }
-  if ('BERØRT_BEHANDLING' === kode) {
-    return intl.formatMessage({ id: 'OppgaveLabels.BerortBehandling' });
-  }
-  if ('KLAGE_PÅ_TILBAKEBETALING' === kode) {
-    return intl.formatMessage({ id: 'OppgaveLabels.KlageTilbakebetaling' });
-  }
-  if ('DØD' === kode) {
-    return intl.formatMessage({ id: 'OppgaveLabels.Dod' });
-  }
-  if ('PAPIRSOKNAD' === kode) {
-    return intl.formatMessage({ id: 'OppgaveLabels.Papirsoknad' });
-  }
-  if ('RETURNERT_FRA_BESLUTTER' === kode) {
-    return intl.formatMessage({ id: 'OppgaveLabels.FraBeslutter' });
-  }
-  if ('NÆRING' === kode) {
-    return intl.formatMessage({ id: 'OppgaveLabels.Naring' });
-  }
-  if ('UTBETALING_TIL_BRUKER' === kode) {
-    return intl.formatMessage({ id: 'OppgaveLabels.Utbetaling' });
-  }
-  if ('VURDER_EØS_OPPTJENING' === kode) {
-    return intl.formatMessage({ id: 'OppgaveLabels.VurderSed' });
-  }
-
-  return andreKriterier.find(b => b.kode === kode)?.navn;
 };

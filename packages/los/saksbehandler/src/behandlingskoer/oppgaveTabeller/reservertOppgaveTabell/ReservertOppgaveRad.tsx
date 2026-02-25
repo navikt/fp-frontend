@@ -66,9 +66,7 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
           behandlingType={oppgave.behandlingstype}
           fagsakYtelseType={oppgave.fagsakYtelseType}
           kriterier={oppgave.andreKriterier}
-          behandlingTyper={useLosKodeverk('BehandlingType')}
-          fagsakYtelseTyper={useLosKodeverk('FagsakYtelseType')}
-          andreKriterier={useLosKodeverk('AndreKriterierType')}
+          hentKodeverk={useLosKodeverk}
         />
       </Table.DataCell>
       <Table.DataCell>

@@ -66,10 +66,6 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
       endreReservasjon(valuesToStore.oppgaveId, valuesToStore.reserverTil),
   });
 
-  const behandlingTyper = useLosKodeverk('BehandlingType');
-  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
-  const andreKriterier = useLosKodeverk('AndreKriterierType');
-
   const endreOppgavereservasjon = async (reserverTil: string) => {
     if (!valgtReservasjon) {
       throw new Error('Reservasjon må være valgt');
@@ -150,9 +146,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                     behandlingType={reservasjon.behandlingType}
                     fagsakYtelseType={reservasjon.ytelseType}
                     kriterier={reservasjon.andreKriterier}
-                    behandlingTyper={behandlingTyper}
-                    fagsakYtelseTyper={fagsakYtelseTyper}
-                    andreKriterier={andreKriterier}
+                    hentKodeverk={useLosKodeverk}
                   />
                 </Table.DataCell>
                 <Table.DataCell>
