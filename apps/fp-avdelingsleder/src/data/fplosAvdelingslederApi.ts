@@ -3,6 +3,7 @@ import ky from 'ky';
 
 import {
   type AlleKodeverkLos,
+  type AndreKriterierType,
   type AvdelingReservasjonDto,
   type InitLinksDto,
   type KøStatistikkDto,
@@ -125,7 +126,7 @@ export const kriterieFilterOptions = () =>
   queryOptions({
     queryKey: [LosUrl.KODEVERK_KRITERIE_FILTER],
     queryFn: () =>
-      kyExtended.get(LosUrl.KODEVERK_KRITERIE_FILTER).json<Record<string, KriterieFilterDto>>(),
+      kyExtended.get(LosUrl.KODEVERK_KRITERIE_FILTER).json<Partial<Record<AndreKriterierType, KriterieFilterDto>>>(),
     staleTime: Infinity,
   });
 
@@ -192,7 +193,9 @@ export const reservasjonerForAvdelingOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.RESERVASJONER_FOR_AVDELING, avdelingEnhet],
     queryFn: () =>
-      kyExtended.get(LosUrl.RESERVASJONER_FOR_AVDELING, { searchParams: { avdelingEnhet } }).json<AvdelingReservasjonDto[]>(),
+      kyExtended
+        .get(LosUrl.RESERVASJONER_FOR_AVDELING, { searchParams: { avdelingEnhet } })
+        .json<AvdelingReservasjonDto[]>(),
     initialData: [],
   });
 
