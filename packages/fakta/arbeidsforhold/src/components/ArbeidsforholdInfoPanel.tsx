@@ -5,8 +5,8 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type {
-  AoIArbeidsforhold,
   ArbeidOgInntektsmelding,
+  Arbeidsforhold,
   ArbeidsgiverOpplysningerPerId,
   Inntektsmelding,
 } from '@navikt/fp-types';
@@ -44,12 +44,12 @@ export const ArbeidsforholdInfoPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysnin
   );
 };
 
-const harInntektmelding = (arbeidsforhold: AoIArbeidsforhold, inntektsmeldinger: Inntektsmelding[]): boolean =>
+const harInntektmelding = (arbeidsforhold: Arbeidsforhold, inntektsmeldinger: Inntektsmelding[]): boolean =>
   inntektsmeldinger.some(im => erMatch(arbeidsforhold, im));
 
 const getSortArbeidsforholdFn =
   (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId, inntektsmeldinger: Inntektsmelding[]) =>
-  (a1: AoIArbeidsforhold, a2: AoIArbeidsforhold): number => {
+  (a1: Arbeidsforhold, a2: Arbeidsforhold): number => {
     const arbeidsgiverOpplysningerA1 = arbeidsgiverOpplysningerPerId[a1.arbeidsgiverIdent];
     const arbeidsgiverOpplysningerA2 = arbeidsgiverOpplysningerPerId[a2.arbeidsgiverIdent];
 

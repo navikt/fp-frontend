@@ -12,10 +12,9 @@ import {
   withRouter,
 } from '@navikt/fp-storybook-utils';
 import type { BehandlingOppretting, DokumentMalType, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
-import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata/index';
+import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp';
@@ -51,7 +50,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanGjenopptas: false,
   behandlingKanOpnesForEndringer: true,
   behandlingKanSettesPaVent: true,
-  vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+  vergeBehandlingsmeny: 'OPPRETT',
 };
 
 const ALLE_BEHANDLINGER = [

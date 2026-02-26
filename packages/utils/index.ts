@@ -21,3 +21,5 @@ export {
 export { finnDager, finnUker } from './src/virkedagerUtil';
 export { harAksjonspunkt, erAksjonspunktÅpent } from './src/aksjonspunktUtils';
 export { erTilbakekrevingBehandling } from './src/tilbakekrevingUtils';
+
+export * from './src/behandlingResultatUtils';

@@ -11,12 +11,9 @@ import {
   type BehandlingFpSak,
   type Behandlingsresultat,
   type BehandlingStatus,
-  isAvslag,
-  isInnvilget,
-  isOpphor,
   type Oppgave,
 } from '@navikt/fp-types';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { isAvslag, isInnvilget, isOpphor, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import type { VedtakFormValues } from '../../types/VedtakFormValues';

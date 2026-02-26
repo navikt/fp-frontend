@@ -1,4 +1,4 @@
-import type { AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+import type { Arbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 
 export const finnInntektsmeldingerForArbeidsgiver = (
   inntektsmeldinger: Inntektsmelding[],
@@ -9,15 +9,15 @@ export const finnInntektsmeldingerForArbeidsgiver = (
 
 export const grupperArbeidsforholdMedInntektsmelding = (
   inntektsmeldingerForArbeidsgiver: Inntektsmelding[],
-  arbeidsforholdHosArbeidsgiver: AoIArbeidsforhold[],
-): { arbeidsforhold: AoIArbeidsforhold; inntektsmelding: Inntektsmelding | undefined }[] => {
+  arbeidsforholdHosArbeidsgiver: Arbeidsforhold[],
+): { arbeidsforhold: Arbeidsforhold; inntektsmelding: Inntektsmelding | undefined }[] => {
   return arbeidsforholdHosArbeidsgiver.map(arbeidsforhold => {
     const inntektsmelding = inntektsmeldingerForArbeidsgiver.find(im => erMatchendeArbeidsforhold(arbeidsforhold, im));
     return { arbeidsforhold, inntektsmelding };
   });
 };
 
-const erMatchendeArbeidsforhold = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
+const erMatchendeArbeidsforhold = (arbeidsforhold: Arbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
   inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent &&
   (!inntektsmelding.internArbeidsforholdId ||
     inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);

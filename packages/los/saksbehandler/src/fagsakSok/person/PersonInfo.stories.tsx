@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { KjønnkodeEnum } from '@navikt/fp-types';
 
 import { DiskresjonskodeType } from '../../kodeverk/diskresjonskodeType';
 import { PersonInfo } from './PersonInfo';
@@ -23,7 +22,7 @@ export const PersonkortMedDiskresjonskodeForMann: Story = {
   args: {
     person: {
       navn: 'Espen Utvikler',
-      kjønn: KjønnkodeEnum.MANN,
+      kjønn: 'M',
       diskresjonskode: DiskresjonskodeType.KODE7,
       fødselsdato: '1980-10-10',
 
@@ -38,7 +37,7 @@ export const PersonkortForDødKvinne: Story = {
   args: {
     person: {
       navn: 'Olga Pettersen',
-      kjønn: KjønnkodeEnum.KVINNE,
+      kjønn: 'K',
       fødselsdato: '1980-10-10',
       dødsdato: '2020-10-10',
       fødselsnummer: '23232332',

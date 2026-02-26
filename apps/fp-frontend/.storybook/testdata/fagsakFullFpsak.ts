@@ -1,4 +1,4 @@
-import { type Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
+import { type Fagsak } from '@navikt/fp-types';
 
 export const fagsakFullFpsak: Fagsak = {
   saksnummer: '1',
@@ -126,7 +126,7 @@ export const fagsakFullFpsak: Fagsak = {
         behandlingFraBeslutter: false,
         behandlingTilGodkjenning: false,
         behandlingKanMerkesHaster: false,
-        vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+        vergeBehandlingsmeny: 'OPPRETT',
         uuid: '',
       },
       brevmaler: [

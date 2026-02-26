@@ -26,7 +26,6 @@ import {
   type AlleKodeverk,
   type AnnenforelderUttakEøsPeriode,
   type Fagsak,
-  KjønnkodeEnum,
   type PeriodeSoker,
   type RelasjonsRolleType,
   type UttakPeriodeType,
@@ -323,7 +322,7 @@ const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: bo
 const rolleAnnenpart = (fagsak: Fagsak): RelasjonsRolleType => {
   if (fagsak.relasjonsRolleType === 'MORA') {
     const kjønnAnnenpart = fagsak.annenPart?.kjønn;
-    return kjønnAnnenpart === KjønnkodeEnum.KVINNE ? 'MMOR' : 'FARA';
+    return kjønnAnnenpart === 'K' ? 'MMOR' : 'FARA';
   }
   return 'MORA';
 };

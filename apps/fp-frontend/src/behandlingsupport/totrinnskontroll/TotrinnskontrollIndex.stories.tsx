@@ -20,7 +20,6 @@ import type {
   TotrinnskontrollAksjonspunkt,
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
-import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata/index';
@@ -87,7 +86,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanGjenopptas: false,
   behandlingKanOpnesForEndringer: true,
   behandlingKanSettesPaVent: true,
-  vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+  vergeBehandlingsmeny: 'OPPRETT',
 
   behandlingKanMerkesHaster: false,
 } satisfies BehandlingTillatteOperasjoner;

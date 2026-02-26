@@ -5,7 +5,6 @@ import { cleanUrl, http, HttpResponse } from 'msw';
 
 import { alleKodeverk, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
-import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak } from '../../.storybook/testdata';
@@ -27,8 +26,7 @@ const FAGSAK_1 = {
     fødselsdato: '1980-10-10',
 
     aktørId: '111111',
-    kjønn: KjønnkodeEnum.KVINNE,
-
+    kjønn: 'K',
     språkkode: '-',
   },
   relasjonsRolleType: '-',

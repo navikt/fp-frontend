@@ -13,7 +13,6 @@ import { getMenytekst as getMerkSomHasterMenytekst } from '@navikt/fp-sak-meny-m
 import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
 import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
 import type { Behandling, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
-import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchOptions } from '../data/fagsakApi';
@@ -158,10 +157,8 @@ const hentMenyData = (behandling: FagsakBehandlingDto | undefined, fagsak: Fagsa
   const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
 
   const vergeMenyvalg = behandlingTillatteOperasjoner?.vergeBehandlingsmeny;
-  const skalViseFjernVerge =
-    vergeMenyvalg === VergeBehandlingmenyValg.FJERN && !!behandling?.uuid && !!behandling.versjon;
-  const skalViseOpprettVerge =
-    vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT && !!behandling?.uuid && !!behandling.versjon;
+  const skalViseFjernVerge = vergeMenyvalg === 'FJERN' && !!behandling?.uuid && !!behandling.versjon;
+  const skalViseOpprettVerge = vergeMenyvalg === 'OPPRETT' && !!behandling?.uuid && !!behandling.versjon;
 
   return {
     [ModalType.TA_AV_VENT]: {
