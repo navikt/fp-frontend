@@ -2,7 +2,7 @@
 
 Monorepo for Frontend kode for foreldrepenger.
 
-[![Build](https://github.com/navikt/fp-frontend/workflows/Build,%20push%20and%20deploy%20Fpsak-frontend/badge.svg)](https://github.com/navikt/fp-frontend/workflows/Build,%20push%20and%20deploy%20Fpsak-frontend/badge.svg)
+[![Build](https://github.com/navikt/fp-frontend/actions/workflows/build-fp-frontend.yml/badge.svg)](https://github.com/navikt/fp-frontend/actions/workflows/build-fp-frontend.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=navikt_fp-frontend&metric=alert_status)](https://sonarcloud.io/dashboard?id=navikt_fp-frontend)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=navikt_fp-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=navikt_fp-frontend)
 [![Known Vulnerabilities](https://snyk.io/test/github/navikt/fp-frontend/badge.svg)](https://snyk.io/test/github/navikt/fp-frontend)
@@ -119,7 +119,7 @@ yarn upgrade-interactive
 ## Turborepo
 
 - Hovedregelen ved bruk av Turborepo er at dependencies skal installeres i pakkene de blir brukt.
-  https://turborepo.com/docs/crafting-your-repository/managing-dependencies
+  https://turbo.build/docs/crafting-your-repository/managing-dependencies
 
 ### Licenses and attribution
 
