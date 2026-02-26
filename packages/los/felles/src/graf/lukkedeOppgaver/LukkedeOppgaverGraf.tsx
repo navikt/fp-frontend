@@ -63,7 +63,6 @@ const formatTooltipContent = (dato: Dayjs, antall: number, antallTotalt: number)
   `;
 };
 
-
 export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) => {
   const intl = useIntl();
   const options = getStyle();
@@ -90,16 +89,19 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
     label: antall === 0 ? { show: false } : undefined,
   }));
 
-  const baseSerie: BarSeriesOption = createBarSeries({
-    data: dataMedSkjulte0Verdier,
-    barGap: '0%',
-    barCategoryGap: '0%',
-  }, 'success');
+  const baseSerie: BarSeriesOption = createBarSeries(
+    {
+      data: dataMedSkjulte0Verdier,
+      barGap: '0%',
+      barCategoryGap: '0%',
+    },
+    'success',
+  );
 
   const markLines: YAxisMarkLine[] = [];
   const dagIUken = getIsoUkedag(dayjs());
 
-  if ((erInneværendeUke && dagIUken <= 4) && lukkedeOppgaver.onsdagForrigeUke > 0) {
+  if (erInneværendeUke && dagIUken <= 4 && lukkedeOppgaver.onsdagForrigeUke > 0) {
     const name = intl.formatMessage({ id: 'LukkedeOppgaverGraf.OnsdagForrigeUke' });
     markLines.push({
       name: name,

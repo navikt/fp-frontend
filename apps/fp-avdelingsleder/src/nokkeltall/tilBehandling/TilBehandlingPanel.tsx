@@ -92,7 +92,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
         )}
       />
       <div
-        /* Ekstra mellomrom pga legends */
+      /* Ekstra mellomrom pga legends */
       />
       <OpprettetAvsluttetGraf
         height={height}

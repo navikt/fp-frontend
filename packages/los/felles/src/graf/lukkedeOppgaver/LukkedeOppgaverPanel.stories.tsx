@@ -41,9 +41,9 @@ const DENNE_UKEN_VERDIER = [145, 24, 50, 41, 34];
 
 const lagData = (dagensDato: dayjs.Dayjs): KøStatistikkDto[] => {
   const dagNr = getIsoUkedag(dagensDato);
-  const denneUken = DENNE_UKEN_VERDIER
-    .slice(0, dagNr)
-    .map((avsluttet, i) => lagStatistikk(mandagInneværendeUke, i, avsluttet));
+  const denneUken = DENNE_UKEN_VERDIER.slice(0, dagNr).map((avsluttet, i) =>
+    lagStatistikk(mandagInneværendeUke, i, avsluttet),
+  );
   return [...HISTORISK_DATA, ...denneUken];
 };
 
