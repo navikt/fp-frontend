@@ -19,5 +19,27 @@
   "AktiveOgTilgjengeligeOppgaverGraf.yAkse": "Antall",
   "AktiveOgTilgjengeligeOppgaverGraf.SisteDag": "Siste døgn",
   "AktiveOgTilgjengeligeOppgaverGraf.SisteUke": "Siste uke",
-  "AktiveOgTilgjengeligeOppgaverGraf.SisteMåned": "Siste måned"
+  "AktiveOgTilgjengeligeOppgaverGraf.SisteMåned": "Siste måned",
+  "LukkedeOppgaverGraf.OnsdagForrigeUke": "Onsdag forrige uke",
+  "LukkedeOppgaverGraf.TotalForrigeUke": "Totalt forrige uke",
+  "LukkedeOppgaverGraf.TotalForrigeUkeAlternativ": "Totalt uken før",
+  "LukkedeOppgaverPanel.DenneUken": "Denne uken",
+  "LukkedeOppgaverPanel.ForrigeUke": "Forrige uke",
+
+  "OppgaveLabels.Anke": "Anke",
+  "OppgaveLabels.Innsyn": "Innsyn",
+  "OppgaveLabels.Forstegang": "Søknad",
+  "OppgaveLabels.Klage": "Klage",
+  "OppgaveLabels.Revurdering": "Rev",
+  "OppgaveLabels.Tilbake": "Tilbake",
+  "OppgaveLabels.TilbakeRev": "Tilb-Rev",
+  "OppgaveLabels.RevurderingInntekstmelding": "Inntektsmelding",
+  "OppgaveLabels.BerortBehandling": "Berørt",
+  "OppgaveLabels.KlageTilbakebetaling": "Klage TB",
+  "OppgaveLabels.Dod": "Død",
+  "OppgaveLabels.Papirsoknad": "Papirsøknad",
+  "OppgaveLabels.FraBeslutter": "Retur",
+  "OppgaveLabels.Naring": "Næring",
+  "OppgaveLabels.Utbetaling": "Direkteutbet.",
+  "OppgaveLabels.VurderSed": "Vurder SED"
 }

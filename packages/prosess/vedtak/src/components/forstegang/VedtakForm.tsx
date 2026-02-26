@@ -14,9 +14,6 @@ import {
   type Behandlingsresultat,
   type BeregningsresultatDagytelse,
   type BeregningsresultatEs,
-  isAvslag,
-  isInnvilget,
-  isKlageOmgjort,
   type Oppgave,
   type SimuleringResultat,
   type TilbakekrevingValg,
@@ -27,7 +24,7 @@ import type {
   VurdereAnnenYtelseForVedtakAp,
   VurdereDokumentForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { isAvslag, isInnvilget, isKlageOmgjort, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import type { VedtakFormValues } from '../../types/VedtakFormValues';

@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 import { vi } from 'vitest';
@@ -7,7 +7,8 @@ import { vi } from 'vitest';
 import * as stories from './GjeldendeSakslisterTabell.stories';
 
 vi.mock('@navikt/fp-los-felles', () => ({
-  AktiveOgTilgjengeligeOppgaverGraf: () => <div data-testid="mocked-graph">Mocked Graph</div>,
+  AktiveOgTilgjengeligeOppgaverGraf: vi.fn(() => null),
+  LukkedeOppgaverPanel: vi.fn(() => null),
 }));
 
 const { TabellNårDetIkkeFinnesBehandlingskøer, TabellNårDetFinnesEnBehandlingskø } = composeStories(stories);
@@ -50,7 +51,8 @@ describe('GjeldendeSakslisterTabell', () => {
     // Klikk på graf-ikonet (index 1)
     await userEvent.click(screen.getByTitle('Vis oppgave graf'));
 
-    expect(await screen.findByText('Antall oppgaver')).toBeInTheDocument();
+    const dialog = await screen.findByRole('dialog');
+    expect(await within(dialog).findByText('Velg en av grafene.')).toBeInTheDocument();
 
     // Lukk dialogen ved å klikke på Lukk-knappen
     const lukkeKnapper = screen.getAllByRole('button', { name: /lukk/i });

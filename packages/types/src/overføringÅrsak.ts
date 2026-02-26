@@ -1,3 +1,0 @@
-import type { foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OverføringÅrsak } from './fpsak.gen';
-
-export type OverføringÅrsak = foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OverføringÅrsak;

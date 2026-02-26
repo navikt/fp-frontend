@@ -3,10 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import type { AoIArbeidsforhold } from '@navikt/fp-types';
+import type { Arbeidsforhold } from '@navikt/fp-types';
 
 interface Props {
-  arbeidsforhold: AoIArbeidsforhold;
+  arbeidsforhold: Arbeidsforhold;
 }
 
 export const PermisjonPeriode = ({ arbeidsforhold }: Props) => {

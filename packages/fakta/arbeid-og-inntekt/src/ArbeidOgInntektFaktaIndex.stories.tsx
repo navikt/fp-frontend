@@ -10,7 +10,7 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import { AksjonspunktÅrsak, type AoIArbeidsforhold } from '@navikt/fp-types';
+import { type Arbeidsforhold } from '@navikt/fp-types';
 
 import { ArbeidOgInntektFaktaIndex } from './ArbeidOgInntektFaktaIndex';
 
@@ -34,7 +34,7 @@ const defaultArbeidsforhold = {
   fom: '2019-12-06',
   stillingsprosent: 100,
   tom: '2022-12-31',
-} satisfies AoIArbeidsforhold;
+} satisfies Arbeidsforhold;
 
 const meta = {
   title: 'fakta/fakta-arbeid-og-inntekter',
@@ -76,7 +76,7 @@ export const InnhentInntektsmelding: Story = {
           fom: '2019-12-06',
           tom: '9999-12-31',
           stillingsprosent: 100,
-          årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          årsak: 'MANGLENDE_INNTEKTSMELDING',
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
             permisjonTom: '2022-12-01',
@@ -148,7 +148,7 @@ export const InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret: Story =
           fom: '2019-12-06',
           tom: '9999-12-31',
           stillingsprosent: 100,
-          årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          årsak: 'MANGLENDE_INNTEKTSMELDING',
         },
       ],
       inntektsmeldinger: [],
@@ -181,7 +181,7 @@ export const InnhentInntektsmeldingDerBehandlingErAvsluttet: Story = {
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
           stillingsprosent: 100,
           tom: '9999-12-31',
-          årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          årsak: 'MANGLENDE_INNTEKTSMELDING',
           saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
           begrunnelse: 'Vil innehente inntektsmelding fordi...',
         },
@@ -220,7 +220,7 @@ export const AvklarManglendeArbeidsforhold: Story = {
           journalpostId: '1',
           dokumentId: '2',
           mottattDato: '2021-12-06',
-          årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
+          årsak: 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD',
         },
       ],
       inntekter: [],
@@ -269,7 +269,7 @@ export const AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet: Story = {
 
           journalpostId: '1',
           dokumentId: '2',
-          årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
+          årsak: 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD',
         },
       ],
       inntekter: [],
@@ -319,7 +319,7 @@ export const AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppM
 
           journalpostId: '1',
           dokumentId: '2',
-          årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
+          årsak: 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD',
         },
       ],
       inntekter: [],
@@ -694,7 +694,7 @@ export const FlereArbeidsforholdOgInntekstemeldinger: Story = {
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
           stillingsprosent: 80,
           tom: '2021-12-31',
-          årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          årsak: 'MANGLENDE_INNTEKTSMELDING',
         },
       ],
       inntektsmeldinger: [
@@ -723,7 +723,7 @@ export const FlereArbeidsforholdOgInntekstemeldinger: Story = {
           refusjonPrMnd: 5000,
           journalpostId: '1',
           dokumentId: '2',
-          årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
+          årsak: 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD',
         },
       ],
       inntekter: [
@@ -831,7 +831,7 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
           stillingsprosent: 100,
           tom: '9999-12-31',
-          årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          årsak: 'MANGLENDE_INNTEKTSMELDING',
         },
         {
           ...defaultArbeidsforhold,
@@ -842,7 +842,7 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
           stillingsprosent: 80,
           tom: '2021-12-31',
-          årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          årsak: 'MANGLENDE_INNTEKTSMELDING',
         },
       ],
       inntektsmeldinger: [
@@ -858,7 +858,7 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
           journalpostId: '1',
           dokumentId: '1',
           mottattDato: '2021-12-01',
-          årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
+          årsak: 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD',
         },
         {
           ...fellesInntektsmeldingFelter,
@@ -872,7 +872,7 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
           journalpostId: '1',
           dokumentId: '2',
           mottattDato: '2021-12-06',
-          årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
+          årsak: 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD',
         },
       ],
       inntekter: [
@@ -959,7 +959,7 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d3',
           stillingsprosent: 80,
           tom: '2021-12-31',
-          årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          årsak: 'MANGLENDE_INNTEKTSMELDING',
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
             permisjonTom: '2022-12-01',
@@ -1142,7 +1142,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
           fom: '2018-10-01',
           tom: '9999-12-31',
           stillingsprosent: 50.0,
-          årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+          årsak: 'MANGLENDE_INNTEKTSMELDING',
           saksbehandlersVurdering: 'FORTSETT_UTEN_INNTEKTSMELDING',
           begrunnelse: 'her trenger jeg ikke IM. ja ja',
         },

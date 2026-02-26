@@ -1,8 +1,0 @@
-import type {
-  tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagAndelDto,
-  tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagDto,
-} from './fpsak.gen';
-
-export type FeriepengegrunnlagAndel = tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagAndelDto;
-
-export type Feriepengegrunnlag = tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagDto;

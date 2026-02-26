@@ -1,58 +1,63 @@
-import type { AktivitetskravPermisjonType } from './aktivitetskravPermisjonType';
-import type { AktivitetStatus } from './aktivitetStatus';
-import type { AnkeOmgjørÅrsak } from './ankeVurdering';
-import type { NaturalYtelseType } from './arbeidOgInntektsmeldingTsType';
-import type { Arbeidskategori } from './arbeidskategori';
-import type { ArbeidType } from './arbeidType';
-import type { Avslagsarsak } from './avslagsarsakCodes';
-import type { BehandlingArsakType } from './behandlingArsakType';
-import type { BehandlingResultatType, KonsekvensForYtelsen } from './behandlingsresultat';
-import type { BehandlingStatus } from './behandlingStatus';
-import type { BehandlingType } from './behandlingType';
-import type { VirksomhetType } from './beregningsgrunnlagTsType';
-import type { FagsakMarkeringType } from './fagsakMarkeringType';
-import type { FagsakStatus } from './fagsakStatus';
-import type { FagsakYtelseType } from './fagsakYtelseType';
-import type { FaktaOmBeregningTilfelle } from './faktaOmBeregningTilfelle';
-import type { FamilieHendelseType } from './familieHendelseType';
-import type { FaresignalVurdering } from './faresignalVurdering';
-import type { FordelingPeriodeKilde } from './fordelingPeriodeKilde';
-import type { ForeldreType } from './foreldreType';
+import type { SkjermlenkeType } from './felles.ts';
 import type { foreldrepenger_behandlingslager_geografisk_Region as Region } from './fpsak.gen';
-import type { GraderingAvslagÅrsak } from './graderingAvslagÅrsak';
-import type { HistorikkAktør } from './historikkinnslagTsType';
-import type { InnsynResultatType } from './innsynResultatType';
-import type { Inntektskategori } from './inntektskategorier';
-import type { KlageAvvistÅrsak } from './klageAvvistÅrsak';
-import type { KlageHjemmel } from './klageHjemmel';
-import type { KlageMedholdÅrsak } from './klageMedholdÅrsak';
-import type { Landkode } from './landkode';
-import type { ManuellBehandlingÅrsak } from './manuellBehandlingÅrsak';
-import type { MedlemskapDekningType } from './medlemskapDekningType';
-import type { MedlemskapManuellVurderingType, MedlemskapType, OppholdstillatelseType } from './medlemskapTsType';
-import type { MorsAktivitet } from './morsAktivitet';
-import type { OmsorgsovertakelseVilkårType } from './omsorgsovertakelseVilkårType';
-import type { OppgaveType } from './oppgaveType';
-import type { OppholdÅrsakType } from './oppholdÅrsakType';
-import type { OpptjeningAktivitetType } from './opptjeningAktivitetType';
-import type { OverføringÅrsak } from './overføringÅrsak';
-import type { PeriodeResultatÅrsak } from './periodeResultatÅrsak';
-import type { PermisjonsbeskrivelseType } from './permisjonsbeskrivelseType';
-import type { AdresseType } from './personoversikt';
-import type { PersonstatusType } from './personstatusType';
-import type { RelasjonsRolleType } from './relasjonsRolleType';
-import type { RevurderingVarslingÅrsak } from './revurderingVarslingÅrsak';
-import type { SivilstandType } from './sivilstandType';
-import type { SkjermlenkeType } from './skjermlenkeType';
-import type { StønadskontoType } from './stønadskontoType';
-import type { UtsettelseÅrsak } from './utsettelseÅrsak';
-import type { UttakArbeidType } from './uttakArbeidType';
-import type { UttakPeriodeType } from './uttakPeriodeType';
-import type { UttakUtsettelseType } from './uttakUtsettelseType';
-import type { VenteArsakType } from './venteArsakType';
-import type { VergeType } from './vergeTsType';
-import type { VilkårType } from './vilkår';
-import type { VurderÅrsak } from './vurderÅrsak';
+import {
+  type AdresseType,
+  type AktivitetskravPermisjonType,
+  type AktivitetStatus,
+  type AnkeOmgjørÅrsak,
+  type ArbeidType,
+  type Avslagsarsak,
+  type BehandlingArsakType,
+  type BehandlingResultatType,
+  type BehandlingStatus,
+  type BehandlingType,
+  type FagsakMarkeringType,
+  type FagsakStatus,
+  type FagsakYtelseType,
+  type FaktaOmBeregningTilfelle,
+  type FamilieHendelseType,
+  type FaresignalVurdering,
+  type FordelingPeriodeKilde,
+  type ForeldreType,
+  type GraderingAvslagÅrsak,
+  type HistorikkAktør,
+  type InnsynResultatType,
+  type Inntektskategori,
+  type KlageAvvistÅrsak,
+  type KlageHjemmel,
+  type KlageMedholdÅrsak,
+  type KonsekvensForYtelsen,
+  type Landkode,
+  type ManuellBehandlingÅrsak,
+  type MedlemskapDekningType,
+  type MedlemskapManuellVurderingType,
+  type MedlemskapType,
+  type MorsAktivitet,
+  type NaturalYtelseType,
+  type OmsorgsovertakelseVilkårType,
+  type OppgaveType,
+  type OppholdÅrsakType,
+  type OppholdstillatelseType,
+  type OpptjeningAktivitetType,
+  type OverføringÅrsak,
+  type PeriodeResultatÅrsak,
+  type PermisjonsbeskrivelseType,
+  type PersonstatusType,
+  type RelasjonsRolleType,
+  type RevurderingVarslingÅrsak,
+  type SivilstandType,
+  type StønadskontoType,
+  type UtsettelseÅrsak,
+  type UttakArbeidType,
+  type UttakPeriodeType,
+  type UttakUtsettelseType,
+  type VenteArsakType,
+  type VergeType,
+  type VilkårType,
+  type VirksomhetType,
+  type VurderÅrsak,
+} from './index';
+import type { Arbeidskategori } from './interne-typer';
 
 //Mapping mellom KodeverkType og union-types med verdier
 type KodeverkEnumMap = {

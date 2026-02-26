@@ -3,7 +3,7 @@ import { render, screen, within } from '@testing-library/react';
 import { expect } from 'vitest';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { KjønnkodeEnum, type Personadresse, type Personoversikt } from '@navikt/fp-types';
+import { type Personadresse, type Personoversikt } from '@navikt/fp-types';
 
 import { PersonopplysningerForFamilie } from './PersonopplysningerForFamilie';
 
@@ -31,7 +31,7 @@ const personoversikt: Personoversikt = {
   bruker: {
     navn: 'Espen Utvikler',
     aktørId: '1',
-    kjønn: KjønnkodeEnum.MANN,
+    kjønn: 'M',
     sivilstand: 'SAMB',
     fødselsdato: '1989-01-01',
 
@@ -40,7 +40,7 @@ const personoversikt: Personoversikt = {
   annenPart: {
     navn: 'Petra Utvikler',
     aktørId: '2',
-    kjønn: KjønnkodeEnum.KVINNE,
+    kjønn: 'K',
     sivilstand: 'SAMB',
     fødselsdato: '1989-01-01',
 
@@ -53,7 +53,7 @@ const personoversikt: Personoversikt = {
 
       adresser: [adresse1],
       aktørId: '3',
-      kjønn: KjønnkodeEnum.KVINNE,
+      kjønn: 'K',
       sivilstand: 'UGIF',
     },
     {
@@ -62,7 +62,7 @@ const personoversikt: Personoversikt = {
       dødsdato: '2023-04-01',
       adresser: [adresse1],
       aktørId: '4',
-      kjønn: KjønnkodeEnum.KVINNE,
+      kjønn: 'K',
       sivilstand: 'UGIF',
     },
   ],

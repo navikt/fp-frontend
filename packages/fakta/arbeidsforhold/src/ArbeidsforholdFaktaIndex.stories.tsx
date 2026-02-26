@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { AksjonspunktÅrsak, type AoIArbeidsforhold, type ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import { type Arbeidsforhold, type ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { ArbeidsforholdFaktaIndex } from './ArbeidsforholdFaktaIndex';
 import { BekreftetPermisjonStatus } from './kodeverk/bekreftetPermisjonStatus';
@@ -27,7 +27,7 @@ const defaultArbeidsforhold = {
   stillingsprosent: 100,
   tom: '2022-12-31',
   begrunnelse: 'Dette er en begrunnelse',
-} satisfies AoIArbeidsforhold;
+} satisfies Arbeidsforhold;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   11212: {
@@ -157,7 +157,7 @@ export const SokerErIPermisjon: Story = {
           permisjonOgMangel: {
             permisjonFom: '2020-01-01',
             type: 'PERMISJON',
-            årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+            årsak: 'PERMISJON_UTEN_SLUTTDATO',
             permisjonStatus: BekreftetPermisjonStatus.BRUK_PERMISJON,
           },
         },

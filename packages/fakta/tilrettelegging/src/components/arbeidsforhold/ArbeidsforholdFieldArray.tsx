@@ -7,7 +7,7 @@ import { BodyShort, ExpansionCard, Heading, HStack, Tag } from '@navikt/ds-react
 import dayjs from 'dayjs';
 
 import type {
-  AoIArbeidsforhold,
+  Arbeidsforhold,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsgiverOpplysningerPerId,
   KodeverkMedNavn,
@@ -21,9 +21,9 @@ import styles from './arbeidsforholdFieldArray.module.css';
 const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
 const finnArbeidsforhold = (
-  alleIafAf: AoIArbeidsforhold[],
+  alleIafAf: Arbeidsforhold[],
   internArbeidsforholdReferanse?: string,
-): AoIArbeidsforhold | undefined => {
+): Arbeidsforhold | undefined => {
   if (alleIafAf.length > 1) {
     return alleIafAf.find(iafAf => iafAf.internArbeidsforholdId === internArbeidsforholdReferanse);
   }
@@ -46,7 +46,7 @@ const finnSvpTagTekst = (skalBrukes: boolean, visInfoAlert: boolean) => {
   );
 };
 
-const finnStillingsprosent = (aoiArbeidsforhold: AoIArbeidsforhold[], tilretteleggingBehovFom: string) => {
+const finnStillingsprosent = (aoiArbeidsforhold: Arbeidsforhold[], tilretteleggingBehovFom: string) => {
   const aoiListe = aoiArbeidsforhold.filter(a => erInnenforIntervall(tilretteleggingBehovFom, a.fom, a.tom));
   return aoiListe.reduce((sum, aoi) => sum + (aoi.stillingsprosent ?? 0), 0);
 };
@@ -54,7 +54,7 @@ const finnStillingsprosent = (aoiArbeidsforhold: AoIArbeidsforhold[], tilrettele
 interface Props {
   readOnly: boolean;
   sorterteArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
-  aoiArbeidsforhold: AoIArbeidsforhold[];
+  aoiArbeidsforhold: Arbeidsforhold[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttakArbeidTyper: KodeverkMedNavn<'UttakArbeidType'>[];
 }

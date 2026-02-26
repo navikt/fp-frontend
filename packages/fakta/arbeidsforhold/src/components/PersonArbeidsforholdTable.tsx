@@ -5,12 +5,12 @@ import { Table } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
-import type { AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
+import type { Arbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
 
 import { ArbeidsforholdDetail } from './ArbeidsforholdDetail';
 
 interface Props {
-  alleArbeidsforhold: AoIArbeidsforhold[];
+  alleArbeidsforhold: Arbeidsforhold[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   inntektsmeldinger: Inntektsmelding[];
 }
@@ -89,7 +89,7 @@ export const PersonArbeidsforholdTable = ({
 
 const Br = <br key="break-line" />;
 
-const finnKilde = (arbeidsforhold: AoIArbeidsforhold, intl: IntlShape) => {
+const finnKilde = (arbeidsforhold: Arbeidsforhold, intl: IntlShape) => {
   if (arbeidsforhold.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING')
     return intl.formatMessage({ id: 'PersonArbeidsforholdTable.Inntektsmelding' });
 
@@ -99,14 +99,14 @@ const finnKilde = (arbeidsforhold: AoIArbeidsforhold, intl: IntlShape) => {
   return intl.formatMessage({ id: 'PersonArbeidsforholdTable.AaRegisteret' });
 };
 
-export const erMatch = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
+export const erMatch = (arbeidsforhold: Arbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
   inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent &&
   (!inntektsmelding.internArbeidsforholdId ||
     inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
 
 const utledNavn = (
-  { saksbehandlersVurdering, eksternArbeidsforholdId, arbeidsgiverIdent }: AoIArbeidsforhold,
-  alleArbeidsforhold: AoIArbeidsforhold[],
+  { saksbehandlersVurdering, eksternArbeidsforholdId, arbeidsgiverIdent }: Arbeidsforhold,
+  alleArbeidsforhold: Arbeidsforhold[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverIdent];
@@ -128,7 +128,7 @@ const utledNavn = (
 };
 
 const utledNøkkel = (
-  arbeidsforhold: AoIArbeidsforhold,
+  arbeidsforhold: Arbeidsforhold,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];

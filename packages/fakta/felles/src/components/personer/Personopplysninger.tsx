@@ -4,7 +4,7 @@ import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react'
 import { Gender, GenderIcon } from '@navikt/ft-plattform-komponenter';
 import { createIntl, dateFormat } from '@navikt/ft-utils';
 
-import { type AlleKodeverk, KjønnkodeEnum, type Personadresse, type SivilstandType } from '@navikt/fp-types';
+import { type AlleKodeverk, type Kjønnkode, type Personadresse, type SivilstandType } from '@navikt/fp-types';
 
 import { AdresseTabell } from '../adresser/AdresseTabell';
 
@@ -21,15 +21,15 @@ interface Props {
   dødsdato?: string | null;
   fødselsdato?: string;
   adresser: Personadresse[];
-  kjønn?: string;
+  kjønn?: Kjønnkode;
   showIcon?: boolean;
 }
 
-const hentKjønn = (kjønn: string | undefined): Gender => {
+const hentKjønn = (kjønn: Kjønnkode | undefined): Gender => {
   switch (kjønn) {
-    case KjønnkodeEnum.KVINNE:
+    case 'K':
       return Gender.female;
-    case KjønnkodeEnum.MANN:
+    case 'M':
       return Gender.male;
     default:
       return Gender.unknown;

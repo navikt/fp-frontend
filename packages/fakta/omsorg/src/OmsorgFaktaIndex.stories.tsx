@@ -10,12 +10,7 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import {
-  KjønnkodeEnum,
-  type Personadresse,
-  type PersonopplysningerBasis,
-  type Ytelsefordeling,
-} from '@navikt/fp-types';
+import { type Personadresse, type PersonopplysningerBasis, type Ytelsefordeling } from '@navikt/fp-types';
 
 import { OmsorgFaktaIndex } from './OmsorgFaktaIndex';
 
@@ -41,7 +36,7 @@ const adresse2 = {
 const defaultBruker: PersonopplysningerBasis = {
   navn: 'Espen Utvikler',
   aktørId: '1',
-  kjønn: KjønnkodeEnum.MANN,
+  kjønn: 'M',
   sivilstand: 'SAMB',
   fødselsdato: '1989-01-01',
 
@@ -50,7 +45,7 @@ const defaultBruker: PersonopplysningerBasis = {
 const defaultAnnenPart: PersonopplysningerBasis = {
   navn: 'Petra Utvikler',
   aktørId: '2',
-  kjønn: KjønnkodeEnum.KVINNE,
+  kjønn: 'K',
   sivilstand: 'SAMB',
   fødselsdato: '1989-01-01',
 
@@ -62,7 +57,7 @@ const defaultBarn: PersonopplysningerBasis = {
   fødselsdato: '2023-04-01',
   adresser: [adresse2],
   aktørId: '3',
-  kjønn: KjønnkodeEnum.KVINNE,
+  kjønn: 'K',
   sivilstand: 'UGIF',
 };
 
