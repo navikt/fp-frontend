@@ -49,7 +49,7 @@ export const SakslistePanel = ({
       <ReservertOppgaveTabell
         reserverOppgave={reserverOppgave}
         brukernavn={brukernavn}
-        saksbehandlereForSaksliste={sakslister.find(s => s.sakslisteId === valgtSakslisteId)?.saksbehandlere}
+        saksbehandlereForSaksliste={sakslister.find(s => s.sakslisteId === valgtSakslisteId)?.saksbehandlere ?? []}
       />
     </VStack>
   );

@@ -29,7 +29,7 @@ interface Props {
   oppgave: OppgaveDto;
   setEnableTableEvents: (shouldDisable: boolean) => void;
   brukernavn: string;
-  saksbehandlereForSaksliste: SaksbehandlerDto[] | undefined;
+  saksbehandlereForSaksliste: SaksbehandlerDto[];
 }
 
 export const OppgaveHandlingerMenu = ({
@@ -116,7 +116,6 @@ export const OppgaveHandlingerMenu = ({
             <ActionMenu.Item
               onSelect={() => setVisFlyttReservasjonModal(true)}
               icon={<PersonHeadsetIcon aria-hidden />}
-              disabled={!saksbehandlereForSaksliste}
             >
               <FormattedMessage id="OppgaveHandlingerMenu.FlyttReservasjon" />
             </ActionMenu.Item>
@@ -136,7 +135,7 @@ export const OppgaveHandlingerMenu = ({
       {visForlengetReservasjonModal && (
         <OppgaveReservasjonForlengetModal oppgave={oppgave} closeModal={() => setVisForlengetReservasjonModal(false)} />
       )}
-      {visFlyttReservasjonModal && saksbehandlereForSaksliste && (
+      {visFlyttReservasjonModal && (
         <FlyttReservasjonModal
           flyttetBegrunnelse={oppgave.reservasjonStatus.flyttetReservasjon?.begrunnelse}
           closeModal={() => setVisFlyttReservasjonModal(false)}

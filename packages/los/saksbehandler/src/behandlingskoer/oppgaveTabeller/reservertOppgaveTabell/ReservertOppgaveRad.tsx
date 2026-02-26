@@ -18,7 +18,7 @@ interface Props {
   oppgave: OppgaveDto;
   reserverOppgave: (oppgave: OppgaveDto) => void;
   brukernavn: string;
-  saksbehandlereForSaksliste: SaksbehandlerDto[] | undefined;
+  saksbehandlereForSaksliste: SaksbehandlerDto[];
 }
 
 export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn, saksbehandlereForSaksliste }: Props) => {

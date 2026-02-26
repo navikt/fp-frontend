@@ -19,7 +19,7 @@ type TableHeaders = 'navn' | 'saksnummer' | 'behandlingstype' | 'opprettetTidspu
 interface Props {
   reserverOppgave: (oppgave: OppgaveDto) => void;
   brukernavn: string;
-  saksbehandlereForSaksliste: SaksbehandlerDto[] | undefined;
+  saksbehandlereForSaksliste: SaksbehandlerDto[];
 }
 
 export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn, saksbehandlereForSaksliste }: Props) => {
