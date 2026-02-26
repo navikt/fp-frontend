@@ -267,13 +267,6 @@ export const endreReservasjon = (oppgaveId: number, reserverTil: string) =>
     })
     .json<ReservasjonStatusDto>();
 
-export const flyttReservasjonSaksbehandlerSøk = (brukerIdent: string) =>
-  kyExtended
-    .post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, {
-      json: { brukerIdent },
-    })
-    .json<SaksbehandlerDto>();
-
 export const slettSaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.SLETT_SAKSBEHANDLER, {

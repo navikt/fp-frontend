@@ -6,18 +6,18 @@ import {
   CalendarIcon,
   HourglassTopFilledIcon,
   MenuElipsisVerticalCircleIcon,
+  NotePencilIcon,
   PersonHeadsetIcon,
 } from '@navikt/aksel-icons';
 import { ActionMenu, Button } from '@navikt/ds-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { FlyttReservasjonModal, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
-import { type OppgaveDto } from '@navikt/fp-types';
+import type { OppgaveDto, SaksbehandlerDto } from '@navikt/fp-types';
 
 import {
   endreReservasjonPost,
   flyttReservasjonPost,
-  flyttReservasjonSaksbehandlerSøkPost,
   forlengReservasjonPost,
   LosUrl,
   opphevReservasjon,
@@ -29,9 +29,15 @@ interface Props {
   oppgave: OppgaveDto;
   setEnableTableEvents: (shouldDisable: boolean) => void;
   brukernavn: string;
+  saksbehandlereForSaksliste: SaksbehandlerDto[] | undefined;
 }
 
-export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernavn }: Props) => {
+export const OppgaveHandlingerMenu = ({
+  oppgave,
+  setEnableTableEvents,
+  brukernavn,
+  saksbehandlereForSaksliste,
+}: Props) => {
   const intl = useIntl();
   const queryClient = useQueryClient();
 
@@ -82,16 +88,6 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
     },
   });
 
-  const {
-    mutate: hentSaksbehandler,
-    data: saksbehandler,
-    reset: resetHentSaksbehandler,
-    isPending,
-    isSuccess,
-  } = useMutation({
-    mutationFn: (brukerIdent: string) => flyttReservasjonSaksbehandlerSøkPost(brukerIdent),
-  });
-
   return (
     <>
       <ActionMenu onOpenChange={open => setEnableTableEvents(!open)}>
@@ -120,10 +116,11 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
             <ActionMenu.Item
               onSelect={() => setVisFlyttReservasjonModal(true)}
               icon={<PersonHeadsetIcon aria-hidden />}
+              disabled={!saksbehandlereForSaksliste}
             >
               <FormattedMessage id="OppgaveHandlingerMenu.FlyttReservasjon" />
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={() => setVisNotatModal(true)} icon={<PersonHeadsetIcon aria-hidden />}>
+            <ActionMenu.Item onSelect={() => setVisNotatModal(true)} icon={<NotePencilIcon aria-hidden />}>
               <FormattedMessage id="OppgaveHandlingerMenu.Notat" />
             </ActionMenu.Item>
           </ActionMenu.Group>
@@ -139,16 +136,12 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
       {visForlengetReservasjonModal && (
         <OppgaveReservasjonForlengetModal oppgave={oppgave} closeModal={() => setVisForlengetReservasjonModal(false)} />
       )}
-      {visFlyttReservasjonModal && (
+      {visFlyttReservasjonModal && saksbehandlereForSaksliste && (
         <FlyttReservasjonModal
           flyttetBegrunnelse={oppgave.reservasjonStatus.flyttetReservasjon?.begrunnelse}
           closeModal={() => setVisFlyttReservasjonModal(false)}
           flyttOppgavereservasjon={flyttOppgavereservasjon}
-          hentSaksbehandler={hentSaksbehandler}
-          hentSaksbehandlerIsPending={isPending}
-          hentSaksbehandlerIsSuccess={isSuccess}
-          saksbehandler={saksbehandler}
-          resetHentSaksbehandler={resetHentSaksbehandler}
+          tilgjengeligeSakbehandlere={saksbehandlereForSaksliste.filter(sbh => sbh.brukerIdent !== brukernavn)}
         />
       )}
       {visNotatModal && (

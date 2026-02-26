@@ -84,8 +84,20 @@ const meta = {
   component: ReservertOppgaveTabell,
   decorators: [withIntl, withQueryClient],
   args: {
-    reserverOppgave: action('button-click'),
+    reserverOppgave: action('reserverOppgave'),
     brukernavn: 'T232332',
+    saksbehandlereForSaksliste: [
+      {
+        navn: 'Espen Utvikler',
+        brukerIdent: 'P123456',
+        ansattAvdeling: 'Avdeling A',
+      },
+      {
+        navn: 'Kari Konsulent',
+        brukerIdent: 'S12345',
+        ansattAvdeling: 'Avdeling B',
+      },
+    ],
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla

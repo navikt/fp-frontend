@@ -7,7 +7,7 @@ import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
 import { OppgaveLabels } from '@navikt/fp-los-felles';
-import { type OppgaveDto, type ReservasjonStatusDto } from '@navikt/fp-types';
+import type { OppgaveDto, ReservasjonStatusDto, SaksbehandlerDto } from '@navikt/fp-types';
 
 import { useLosKodeverk } from '../../../data/useLosKodeverk.ts';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
@@ -18,9 +18,10 @@ interface Props {
   oppgave: OppgaveDto;
   reserverOppgave: (oppgave: OppgaveDto) => void;
   brukernavn: string;
+  saksbehandlereForSaksliste: SaksbehandlerDto[] | undefined;
 }
 
-export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Props) => {
+export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn, saksbehandlereForSaksliste }: Props) => {
   const intl = useIntl();
 
   const [enableTableEvents, setEnableTableEvents] = useState(true);
@@ -90,6 +91,7 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
             oppgave={oppgave}
             setEnableTableEvents={setEnableTableEvents}
             brukernavn={brukernavn}
+            saksbehandlereForSaksliste={saksbehandlereForSaksliste}
           />
         </div>
       </Table.DataCell>

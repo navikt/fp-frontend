@@ -11,7 +11,7 @@ import messages from '../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const saksbehandler = {
-  brukerIdent: 'R232323',
+  brukerIdent: 'P123456',
   navn: 'Espen Utvikler',
   ansattAvdeling: 'Avdeling Å',
 };

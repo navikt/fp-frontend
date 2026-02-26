@@ -12,9 +12,9 @@ import type { AvdelingReservasjonDto } from '@navikt/fp-types';
 import {
   endreReservasjon,
   flyttReservasjon,
-  flyttReservasjonSaksbehandlerSøk,
   opphevReservasjon,
   reservasjonerForAvdelingOptions,
+  saksbehandlareForAvdelingOptions,
 } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
 
@@ -42,14 +42,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
     onSuccess: () => hentAvdelingensReservasjoner(),
   });
 
-  const {
-    mutateAsync: hentSaksbehandler,
-    data: saksbehandler,
-    status: hentSaksbehandlerStatus,
-    reset: resetHentSaksbehandler,
-  } = useMutation({
-    mutationFn: (valuesToStore: { brukerIdent: string }) => flyttReservasjonSaksbehandlerSøk(valuesToStore.brukerIdent),
-  });
+  const { data: avdelingensSaksbehandlere } = useQuery(saksbehandlareForAvdelingOptions(valgtAvdelingEnhet));
 
   const showReservasjonEndringDato = (reservasjon: AvdelingReservasjonDto): void => {
     setShowReservasjonEndringDatoModal(true);
@@ -186,6 +179,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
           </Table.Body>
         </Table>
       )}
+
       {valgtReservasjon && showReservasjonEndringDatoModal && (
         <OppgaveReservasjonEndringDatoModal
           closeModal={() => setShowReservasjonEndringDatoModal(false)}
@@ -193,15 +187,12 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
           endreOppgavereservasjon={endreOppgavereservasjon}
         />
       )}
+
       {valgtReservasjon && showFlyttReservasjonModal && (
         <FlyttReservasjonModal
           closeModal={() => setShowFlyttReservasjonModal(false)}
           flyttOppgavereservasjon={flyttOppgavereservasjon}
-          hentSaksbehandler={(brukerIdent: string) => hentSaksbehandler({ brukerIdent })}
-          hentSaksbehandlerIsPending={hentSaksbehandlerStatus === 'pending'}
-          hentSaksbehandlerIsSuccess={hentSaksbehandlerStatus === 'success'}
-          saksbehandler={saksbehandler}
-          resetHentSaksbehandler={resetHentSaksbehandler}
+          tilgjengeligeSakbehandlere={avdelingensSaksbehandlere}
         />
       )}
     </VStack>
