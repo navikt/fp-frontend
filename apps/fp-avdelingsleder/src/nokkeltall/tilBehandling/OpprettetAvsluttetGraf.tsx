@@ -23,7 +23,6 @@ const behandlingstypeAkselFarger: Record<BehandlingType, AkselColor> = {
   '-': 'neutral', // Eksisterer for TS: burde ikke inntreffe
 };
 
-
 export interface EndringForDatoGraf {
   behandlingType: BehandlingType;
   statistikkDato: string;
@@ -44,8 +43,7 @@ interface Props {
 }
 
 export const OpprettetAvsluttetGraf = ({ height, endringPerDato, isToUkerValgt, behandlingTyper }: Props) => {
-  const periodeStart = dayjs()
-    .subtract(isToUkerValgt ? 2 : 4, 'w');
+  const periodeStart = dayjs().subtract(isToUkerValgt ? 2 : 4, 'w');
   const periodeSlutt = dayjs().subtract(1, 'd');
 
   const kOpprettet = konverterTilKoordinaterGruppertPaBehandlingstype(endringPerDato, o => o.opprettet);
@@ -126,8 +124,6 @@ export const OpprettetAvsluttetGraf = ({ height, endringPerDato, isToUkerValgt, 
     />
   );
 };
-
-
 
 const finnBehandlingTypeNavn = (
   behandlingTyper: LosKodeverkMedNavn<'BehandlingType'>[],

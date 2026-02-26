@@ -15,4 +15,3 @@ export const startAvIsoUke = (dato: dayjs.Dayjs): dayjs.Dayjs => {
   const isoUkedag = getIsoUkedag(dato);
   return dato.subtract(isoUkedag - 1, 'day').startOf('day');
 };
-

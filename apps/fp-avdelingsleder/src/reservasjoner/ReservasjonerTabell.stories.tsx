@@ -81,7 +81,10 @@ const generateReservasjoner = () => {
     const behandlingType = behandlingTyper[i % behandlingTyper.length]!;
     const ytelseType = ytelseTyper[i % ytelseTyper.length]!;
     const andreKriterierCount = i % 2 === 0 ? 3 : 2;
-    const andreKriterier = Array.from({ length: andreKriterierCount }, (_, j) => kriterier[(i + j) % kriterier.length]!);
+    const andreKriterier = Array.from(
+      { length: andreKriterierCount },
+      (_, j) => kriterier[(i + j) % kriterier.length]!,
+    );
 
     const reservertTilDato = new Date();
     reservertTilDato.setDate(reservertTilDato.getDate() + Math.floor(Math.random() * 30) + 1);
