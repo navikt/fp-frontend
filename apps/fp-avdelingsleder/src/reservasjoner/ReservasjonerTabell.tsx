@@ -192,7 +192,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
         <FlyttReservasjonModal
           closeModal={() => setShowFlyttReservasjonModal(false)}
           flyttOppgavereservasjon={flyttOppgavereservasjon}
-          tilgjengeligeSakbehandlere={avdelingensSaksbehandlere}
+          tilgjengeligeSaksbehandlere={avdelingensSaksbehandlere}
         />
       )}
     </VStack>

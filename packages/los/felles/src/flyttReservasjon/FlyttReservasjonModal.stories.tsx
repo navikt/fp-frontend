@@ -8,7 +8,7 @@ const meta = {
   component: FlyttReservasjonModal,
   args: {
     closeModal: action('button-click'),
-    tilgjengeligeSakbehandlere: [
+    tilgjengeligeSaksbehandlere: [
       {
         navn: 'Espen Utvikler',
         brukerIdent: 'P123456',

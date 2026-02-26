@@ -24,7 +24,7 @@ interface Props {
   flyttetBegrunnelse?: string;
   closeModal: () => void;
   flyttOppgavereservasjon: (params: { brukerIdent: string; begrunnelse: string }) => void;
-  tilgjengeligeSakbehandlere: SaksbehandlerDto[];
+  tilgjengeligeSaksbehandlere: SaksbehandlerDto[];
 }
 
 /**
@@ -36,13 +36,13 @@ export const FlyttReservasjonModal = ({
   flyttetBegrunnelse,
   closeModal,
   flyttOppgavereservasjon,
-  tilgjengeligeSakbehandlere,
+  tilgjengeligeSaksbehandlere,
 }: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: { begrunnelse: flyttetBegrunnelse },
   });
 
-  const saksbehanderOptions = tilgjengeligeSakbehandlere.map(s => ({
+  const saksbehandlerOptions = tilgjengeligeSaksbehandlere.map(s => ({
     value: s.brukerIdent,
     label: `${s.navn} (${s.brukerIdent})`,
   }));
@@ -82,7 +82,7 @@ export const FlyttReservasjonModal = ({
                     size="small"
                     error={error?.message}
                     label={<FormattedMessage id="FlyttReservasjonModal.Saksbehandler" />}
-                    options={saksbehanderOptions}
+                    options={saksbehandlerOptions}
                     autoFocus
                     ref={field.ref}
                     name={field.name}

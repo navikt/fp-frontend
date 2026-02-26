@@ -141,7 +141,7 @@ export const OppgaveHandlingerMenu = ({
           flyttetBegrunnelse={oppgave.reservasjonStatus.flyttetReservasjon?.begrunnelse}
           closeModal={() => setVisFlyttReservasjonModal(false)}
           flyttOppgavereservasjon={flyttOppgavereservasjon}
-          tilgjengeligeSakbehandlere={saksbehandlereForSaksliste.filter(sbh => sbh.brukerIdent !== brukernavn)}
+          tilgjengeligeSaksbehandlere={saksbehandlereForSaksliste.filter(sbh => sbh.brukerIdent !== brukernavn)}
         />
       )}
       {visNotatModal && (
