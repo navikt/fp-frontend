@@ -55,7 +55,23 @@ const generateReservasjoner = () => {
     { brukerIdent: 'steffen-001', navn: 'Steffen Heffen' },
   ];
 
-  const behandlingTyper = ['BT-002', 'BT-003', 'BT-004', 'BT-005', 'BT-006'];
+  const behandlingTyper = ['BT-002', 'BT-003', 'BT-004', 'BT-006', 'BT-007'];
+  const ytelseTyper = ['ES', 'FP', 'SVP'];
+  const kriterier = [
+    'BARE_FAR_RETT',
+    'MOR_UKJENT_UTLAND',
+    'UTBETALING_TIL_BRUKER',
+    'NÆRING',
+    'DØD',
+    'NYTT_VEDTAK',
+    'UTLANDSSAK',
+    'TIL_BESLUTTER',
+    'SAMMENSATT_KONTROLL',
+    'EØS_SAK',
+    'KODE7_SAK',
+    'RETURNERT_FRA_BESLUTTER',
+    'HASTER',
+  ];
 
   const reservasjoner = [];
   let oppgaveId = 1;
@@ -63,6 +79,10 @@ const generateReservasjoner = () => {
   for (let i = 0; i < 40; i++) {
     const saksbehandler = saksbehandlere[i % saksbehandlere.length]!;
     const behandlingType = behandlingTyper[i % behandlingTyper.length]!;
+    const ytelseType = ytelseTyper[i % ytelseTyper.length]!;
+    const andreKriterierCount = i % 2 === 0 ? 3 : 2;
+    const andreKriterier = Array.from({ length: andreKriterierCount }, (_, j) => kriterier[(i + j) % kriterier.length]!);
+
     const reservertTilDato = new Date();
     reservertTilDato.setDate(reservertTilDato.getDate() + Math.floor(Math.random() * 30) + 1);
 
@@ -73,6 +93,8 @@ const generateReservasjoner = () => {
       oppgaveId: oppgaveId++,
       oppgaveSaksNr: `${100000 + i}`,
       behandlingType: behandlingType,
+      ytelseType: ytelseType,
+      andreKriterier: andreKriterier,
     });
   }
 

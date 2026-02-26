@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { LineGraphDotIcon } from '@navikt/aksel-icons';
-import { Button, Dialog } from '@navikt/ds-react';
+import { BodyLong, BodyShort, Button, Dialog, HStack, ToggleGroup, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
-import { AktiveOgTilgjengeligeOppgaverGraf } from '@navikt/fp-los-felles';
+import { AktiveOgTilgjengeligeOppgaverGraf, LukkedeOppgaverPanel } from '@navikt/fp-los-felles';
 import type { SakslisteDto } from '@navikt/fp-types';
 
 import { oppgaveFilterStatistikkOptions } from '../data/fplosAvdelingslederApi';
@@ -29,13 +30,12 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
       </Dialog.Trigger>
       <Dialog.Popup onClick={e => e.stopPropagation()} width="large">
         <Dialog.Header>
-          <Dialog.Title>
-            <FormattedMessage id="OppgaverGrafDialog.Overskrift" />
-          </Dialog.Title>
-          <Dialog.Description>{saksliste.navn}</Dialog.Description>
+          <Dialog.Title>{saksliste.navn}</Dialog.Title>
         </Dialog.Header>
         <Dialog.Body>
-          <OppgaverGrafDialogBody valgtSakslisteId={saksliste.sakslisteId} valgtAvdelingEnhet={valgtAvdelingEnhet} />
+          <VStack gap="space-16">
+            <OppgaverGrafDialogBody valgtSakslisteId={saksliste.sakslisteId} valgtAvdelingEnhet={valgtAvdelingEnhet} />
+          </VStack>
         </Dialog.Body>
         <Dialog.Footer>
           <Dialog.CloseTrigger>
@@ -49,6 +49,8 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
   );
 };
 
+type VisningType = 'intro' | 'aktive' | 'lukkede';
+
 const OppgaverGrafDialogBody = ({
   valgtSakslisteId,
   valgtAvdelingEnhet,
@@ -56,9 +58,43 @@ const OppgaverGrafDialogBody = ({
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
 }) => {
-  const aktiveOgLedigeTidslinje =
+  const køStatistikk =
     useQuery({
       ...oppgaveFilterStatistikkOptions(valgtSakslisteId, valgtAvdelingEnhet),
     }).data ?? [];
-  return <AktiveOgTilgjengeligeOppgaverGraf aktiveOgLedigeTidslinje={aktiveOgLedigeTidslinje} />;
+  const [visningType, setVisningType] = useState<VisningType>('intro');
+  const aktiveOgLedige = 'Aktive og ledige oppgaver';
+  const lukkedeOppgaverTittel = 'Lukkede oppgaver';
+
+  return (
+    <>
+      <HStack justify="end">
+        <ToggleGroup
+          value={visningType}
+          data-color="neutral"
+          onChange={value => setVisningType(value as VisningType)}
+          size="small"
+        >
+          <ToggleGroup.Item value="intro" label="Intro" />
+          <ToggleGroup.Item value="aktive" label={aktiveOgLedige} />
+          <ToggleGroup.Item value="lukkede" label={lukkedeOppgaverTittel} />
+        </ToggleGroup>
+      </HStack>
+      {visningType === 'intro' && <BodyShort size="small">Velg en av grafene.</BodyShort>}
+      {visningType === 'aktive' && (
+        <>
+          <AktiveOgTilgjengeligeOppgaverGraf aktiveOgLedigeTidslinje={køStatistikk} />
+        </>
+      )}
+      {visningType === 'lukkede' && (
+        <>
+          <BodyLong size="small">
+            Dette fossefallsdiagrammet er et ukesdiagram som viser antall lukkede oppgaver per dag. Vi tenker dette gir
+            et bilde av aktivitet på køen.
+          </BodyLong>
+          <LukkedeOppgaverPanel køStatistikk={køStatistikk} />
+        </>
+      )}
+    </>
+  );
 };
