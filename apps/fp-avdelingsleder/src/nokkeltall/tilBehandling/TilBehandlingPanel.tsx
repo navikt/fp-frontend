@@ -44,7 +44,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
 
   const [ukevalg, setUkevalg] = useState(lagretFilter?.ukevalg ?? UKE_2);
   const [ytelseTyper, setYtelseTyper] = useState(
-    lagretFilter?.ytelseTyper && lagretFilter.ytelseTyper.length > 0 ? lagretFilter.ytelseTyper : ALLE_YTELSETYPER,
+    lagretFilter?.ytelseTyper && lagretFilter.ytelseTyper.length > 0 ? lagretFilter.ytelseTyper : ALLE_YTELSER,
   );
 
   useStoreValuesInLocalStorage(formName, { ukevalg, ytelseTyper });

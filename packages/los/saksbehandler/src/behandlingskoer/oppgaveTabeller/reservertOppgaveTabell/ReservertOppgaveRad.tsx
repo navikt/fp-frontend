@@ -9,7 +9,7 @@ import { getDateAndTime } from '@navikt/ft-utils';
 import { OppgaveLabels } from '@navikt/fp-los-felles';
 import type { OppgaveDto, ReservasjonStatusDto, SaksbehandlerDto } from '@navikt/fp-types';
 
-import { useLosKodeverk } from '../../../data/useLosKodeverk.ts';
+import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 
 import styles from './ReservertOppgaveRad.module.css';
