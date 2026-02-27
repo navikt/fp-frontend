@@ -1,4 +1,4 @@
-import type { SkjermlenkeType } from './felles.ts';
+import type { SkjermlenkeType } from './felles';
 import type { foreldrepenger_behandlingslager_geografisk_Region as Region } from './fpsak.gen';
 import {
   type AdresseType,

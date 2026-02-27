@@ -7,7 +7,7 @@
   "FlyttReservasjonModal.FlyttReservasjon": "Flytt reservasjonen til annen saksbehandler",
   "FlyttReservasjonModal.Saksbehandler": "Saksbehandler",
   "FlyttReservasjonModal.Sok": "Søk",
-  "FlyttReservasjonModal.Begrunn": "Begrunn flytting av reservasjonen",
+  "FlyttReservasjonModal.Notat": "Notat til annen saksbehandler",
   "FlyttReservasjonModal.ManglerSaksbehandler": "Du må velge en saksbehandler",
 
   "OppgaveReservasjonEndringDatoModal.Header": "Velg dato som reservasjonen avsluttes",
