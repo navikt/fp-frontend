@@ -27,4 +27,5 @@ export type {
   tjenester_felles_dto_SakslisteDto as SakslisteDto,
   tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto as SakslisteLagreDto,
   tjenester_felles_dto_SaksbehandlerDto as SaksbehandlerDto,
+  tjenester_kodeverk_KodeverkRestTjeneste_KriterieFilterDto as KriterieFilterDto,
 } from './fplos.gen';

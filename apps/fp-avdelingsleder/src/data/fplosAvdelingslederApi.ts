@@ -3,9 +3,11 @@ import ky from 'ky';
 
 import {
   type AlleKodeverkLos,
+  type AndreKriterierType,
   type AvdelingReservasjonDto,
   type InitLinksDto,
   type KøStatistikkDto,
+  type KriterieFilterDto,
   type NøkkeltallBehandlingFørsteUttakDto,
   type NøkkeltallBehandlingVentefristUtløperDto,
   type OppgaverForAvdeling,
@@ -37,6 +39,7 @@ const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 export const LosUrl = {
   KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
+  KODEVERK_KRITERIE_FILTER: wrapUrl('/fplos/api/kodeverk/kriterie-filter'),
   INIT_FETCH: wrapUrl('/fplos/api/avdelingsleder/init-fetch'),
   SAKSBEHANDLERE_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
   OPPGAVE_AVDELING_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/avdelingantall'),
@@ -115,6 +118,14 @@ export const losKodeverkOptions = () =>
   queryOptions({
     queryKey: [LosUrl.KODEVERK_LOS],
     queryFn: () => kyExtended.get(LosUrl.KODEVERK_LOS).json<AlleKodeverkLos>(),
+    staleTime: Infinity,
+  });
+
+export const kriterieFilterOptions = () =>
+  queryOptions({
+    queryKey: [LosUrl.KODEVERK_KRITERIE_FILTER],
+    queryFn: () =>
+      kyExtended.get(LosUrl.KODEVERK_KRITERIE_FILTER).json<Partial<Record<AndreKriterierType, KriterieFilterDto>>>(),
     staleTime: Infinity,
   });
 
