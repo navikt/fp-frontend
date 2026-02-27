@@ -32,7 +32,7 @@ export const ReactECharts = ({ option, style, height }: Props): JSX.Element => {
     if (chartRef.current !== null) {
       const chart = getInstanceByDom(chartRef.current);
       if (chart) {
-        chart.setOption(option);
+        chart.setOption(option, { notMerge: true });
       }
     }
     // eslint-disable-next-line react-hooks/refs

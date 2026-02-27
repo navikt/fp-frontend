@@ -1,7 +1,8 @@
 import { createBarSeries, createToolboxWithFilename, getStyle, ReactECharts } from '@navikt/fp-los-felles';
-import type { FagsakYtelseType, NøkkeltallBehandlingVentefristUtløperDto } from '@navikt/fp-types';
+import type { LosFagsakYtelseType, NøkkeltallBehandlingVentefristUtløperDto } from '@navikt/fp-types';
 
 import { useLosKodeverk } from '../../data/useLosKodeverk';
+import { ALLE_YTELSER, fagsakYtelseTypeAkselFarger } from '../fagsakYtelseTypeUtils';
 
 interface Props {
   height: number;
@@ -44,29 +45,15 @@ export const VentefristUtløperGraf = ({ height, behandlingerPaVent }: Props) =>
             formatter: (value: number) => value.toLocaleString('nb-NO'),
           },
         },
-        series: [
+        series: ALLE_YTELSER.map(type =>
           createBarSeries(
             {
-              name: fagsakYtelseTyper.find(b => b.kode === 'FP')?.navn,
-              data: lagDatastruktur(behandlingerPaVent, 'FP'),
+              name: fagsakYtelseTyper.find(b => b.kode === type)?.navn,
+              data: lagDatastruktur(behandlingerPaVent, type),
             },
-            'accent',
+            fagsakYtelseTypeAkselFarger[type],
           ),
-          createBarSeries(
-            {
-              name: fagsakYtelseTyper.find(b => b.kode === 'SVP')?.navn,
-              data: lagDatastruktur(behandlingerPaVent, 'SVP'),
-            },
-            'warning',
-          ),
-          createBarSeries(
-            {
-              name: fagsakYtelseTyper.find(b => b.kode === 'ES')?.navn,
-              data: lagDatastruktur(behandlingerPaVent, 'ES'),
-            },
-            'success',
-          ),
-        ],
+        ),
       }}
     />
   );
@@ -74,7 +61,7 @@ export const VentefristUtløperGraf = ({ height, behandlingerPaVent }: Props) =>
 
 const lagDatastruktur = (
   oppgaverManueltPaVent: NøkkeltallBehandlingVentefristUtløperDto[],
-  fagsakYtelseType: FagsakYtelseType,
+  fagsakYtelseType: LosFagsakYtelseType,
 ): [string, number][] => {
   const nyeKoordinater = oppgaverManueltPaVent
     .filter(o => o.fagsakYtelseType === fagsakYtelseType)

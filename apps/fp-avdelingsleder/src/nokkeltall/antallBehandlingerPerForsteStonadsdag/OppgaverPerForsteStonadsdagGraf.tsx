@@ -13,6 +13,7 @@ import {
 import type { FagsakYtelseType, OppgaverForFørsteStønadsdagUkeMåned } from '@navikt/fp-types';
 
 import { useLosKodeverk } from '../../data/useLosKodeverk';
+import { ALLE_YTELSER, fagsakYtelseTypeAkselFarger } from '../fagsakYtelseTypeUtils';
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
@@ -56,29 +57,15 @@ export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStona
             formatter: (value: number) => value.toLocaleString('nb-NO'),
           },
         },
-        series: [
+        series: ALLE_YTELSER.map(type =>
           createBarSeries(
             {
-              name: fagsakYtelseTyper.find(b => b.kode === 'FP')?.navn,
-              data: lagDatastruktur(oppgaverPerForsteStonadsdag, 'FP'),
+              name: fagsakYtelseTyper.find(b => b.kode === type)?.navn,
+              data: lagDatastruktur(oppgaverPerForsteStonadsdag, type),
             },
-            'accent',
+            fagsakYtelseTypeAkselFarger[type],
           ),
-          createBarSeries(
-            {
-              name: fagsakYtelseTyper.find(b => b.kode === 'SVP')?.navn,
-              data: lagDatastruktur(oppgaverPerForsteStonadsdag, 'SVP'),
-            },
-            'warning',
-          ),
-          createBarSeries(
-            {
-              name: fagsakYtelseTyper.find(b => b.kode === 'ES')?.navn,
-              data: lagDatastruktur(oppgaverPerForsteStonadsdag, 'ES'),
-            },
-            'success',
-          ),
-        ],
+        ),
       }}
     />
   );

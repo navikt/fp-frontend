@@ -1,46 +1,56 @@
-import type { AkselColor } from '@navikt/ds-react/types/theme';
+import type {
+  AkselColorRole,
+  AkselDynamicStatefulBackgroundToken,
+  AkselDynamicStatelessBackgroundToken,
+} from '@navikt/ds-tokens/types';
 import { capitalizeFirstLetter } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
-import { type BarSeriesOption, type EChartsOption, type LineSeriesOption } from 'echarts';
+import { type BarSeriesOption, type LineSeriesOption } from 'echarts';
 
 export const formaterMånedÅr = (dato: string) =>
   capitalizeFirstLetter(`${dayjs(dato).format('MMM YYYY')}`).replaceAll('.', '');
 
 export type ColorPair = { primaryColor: string; secondaryColor: string };
-export type AkselColorResolver = (akselColor: AkselColor) => ColorPair;
+type ColorVariant = AkselDynamicStatelessBackgroundToken | AkselDynamicStatefulBackgroundToken;
 
-const buildBarSeries = (options: BarSeriesOption, { primaryColor, secondaryColor }: ColorPair): BarSeriesOption => ({
-  type: 'bar',
-  barMaxWidth: '150px',
-  stack: 'total',
-  label: {
-    show: true,
-    formatter: params => {
-      const val = Array.isArray(params.value) ? params.value[1] : params.value;
-      return typeof val === 'number' && val !== 0 ? val.toLocaleString('nb-NO') : '';
-    },
-  },
-  color: primaryColor,
-  ...options,
-  itemStyle: {
-    borderColor: secondaryColor,
-    borderWidth: 1,
-    borderRadius: 4,
-    ...options.itemStyle,
-  },
-});
-
-export const createBarSeries = (options: BarSeriesOption, akselColor: AkselColor): BarSeriesOption =>
-  buildBarSeries(options, getAkselColorPair(akselColor));
-
-export const createBarSeriesWithColorResolver = (
+export const createBarSeries = (
   options: BarSeriesOption,
-  akselColor: AkselColor,
-  colorResolver: AkselColorResolver,
-): BarSeriesOption => buildBarSeries(options, colorResolver(akselColor));
+  akselColor: AkselColorRole,
+  variant?: ColorVariant,
+): BarSeriesOption => {
+  const { primaryColor, secondaryColor } = getAkselColorPair(akselColor, variant);
 
-export const createLineSeries = (options: LineSeriesOption, akselColor: AkselColor): LineSeriesOption => {
-  const { primaryColor, secondaryColor } = getAkselColorPair(akselColor);
+  return {
+    type: 'bar',
+    barMaxWidth: '150px',
+    stack: 'total',
+    label: {
+      show: true,
+      formatter: params => {
+        const val = Array.isArray(params.value) ? params.value[1] : params.value;
+        return typeof val === 'number' && val !== 0 ? val.toLocaleString('nb-NO') : '';
+      },
+    },
+    labelLayout: {
+      hideOverlap: true,
+    },
+    color: primaryColor,
+    ...options,
+    itemStyle: {
+      borderColor: secondaryColor,
+      borderWidth: 1,
+      borderRadius: 4,
+      ...options.itemStyle,
+    },
+  };
+};
+
+export const createLineSeries = (
+  options: LineSeriesOption,
+  akselColor: AkselColorRole,
+  variant?: ColorVariant,
+): LineSeriesOption => {
+  const { primaryColor, secondaryColor } = getAkselColorPair(akselColor, variant);
   return {
     type: 'line',
     stack: 'total',
@@ -65,15 +75,6 @@ export const createLineSeries = (options: LineSeriesOption, akselColor: AkselCol
   };
 };
 
-export const layoutOptions: EChartsOption = {
-  animation: false,
-  grid: {
-    top: '30px',
-    left: '100px',
-    right: '100px',
-    bottom: '30px',
-  },
-};
 export const createToolboxWithFilename = (name: string) => ({
   feature: {
     saveAsImage: {
@@ -122,12 +123,7 @@ export const getAkselVariable = (akselVariable: string) => {
   return getComputedStyle(element).getPropertyValue(akselVariable);
 };
 
-export const getAkselColorPair = (akselColor: AkselColor): ColorPair => ({
-  primaryColor: getAkselVariable(`--ax-bg-${akselColor}-moderate-pressed`),
-  secondaryColor: getAkselVariable(`--ax-border-${akselColor}`),
-});
-
-export const getSoftAkselColorPair = (akselColor: AkselColor): ColorPair => ({
-  primaryColor: getAkselVariable(`--ax-bg-${akselColor}-soft`),
+const getAkselColorPair = (akselColor: AkselColorRole, variant: ColorVariant = 'moderate-pressed'): ColorPair => ({
+  primaryColor: getAkselVariable(`--ax-bg-${akselColor}-${variant}`),
   secondaryColor: getAkselVariable(`--ax-border-${akselColor}`),
 });
