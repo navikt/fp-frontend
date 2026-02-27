@@ -1,66 +1,63 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { expect } from 'vitest';
 
 import * as stories from './FlyttReservasjonModal.stories';
 
-const { Default, MedTreffPåSøk } = composeStories(stories);
+const { Default } = composeStories(stories);
 
 describe('FlyttReservasjonModal', () => {
-  it('skal vise søkeknapp som disablet når en ikke har skrevet inn noen tegn i brukerident-feltet', async () => {
-    render(<Default />);
+  it('skal vise feilmelding når flytting blir forsøkt utført uten at skjemaet er fylt ut', async () => {
+    const flyttOppgavereservasjon = vi.fn();
 
-    expect(await screen.findByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
+    render(<Default flyttOppgavereservasjon={flyttOppgavereservasjon} />);
+    expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
-    expect(screen.getByText('Søk').closest('button')).toBeDisabled();
-    expect(screen.getByText('OK').closest('button')).toBeDisabled();
+    expect(screen.getByText('Begrunn flytting av reservasjonen')).toBeInTheDocument();
+    expect(screen.getByLabelText('Saksbehandler')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'OK' })).toBeDisabled();
+
+    await userEvent.type(screen.getByLabelText('Begrunn flytting av reservasjonen'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('OK'));
+
+    expect(await screen.findByText('Du må velge en saksbehandler')).toBeInTheDocument();
+    expect(flyttOppgavereservasjon).not.toHaveBeenCalled();
   });
 
-  it('skal vise at oppgitt brukerident ikke finnes', async () => {
+  it('skal vise at oppgitt bruker ikke finnes', async () => {
     render(<Default />);
 
-    expect(await screen.findByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
+    expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
-    const brukerIdentInput = screen.getByLabelText('Brukerident');
-    await userEvent.type(brukerIdentInput, 'TESTTES');
+    expect(screen.getByLabelText('Kari Konsulent (S12345)')).toBeInTheDocument();
+    expect(screen.getByLabelText('Espen Utvikler (P123456)')).toBeInTheDocument();
 
-    expect(await screen.findByText('Søk')).toBeInTheDocument();
-    expect(screen.getByText('Søk')).toBeEnabled();
+    const saksbehandlerInput = screen.getByLabelText('Saksbehandler');
+    await userEvent.type(saksbehandlerInput, 'TESTTES');
 
-    await userEvent.click(screen.getByText('Søk'));
-
-    expect(await screen.findByText('Kan ikke finne brukerident')).toBeInTheDocument();
-    expect(screen.getByText('OK').closest('button')).toBeDisabled();
+    expect(await screen.findByText('Ingen søketreff')).toBeInTheDocument();
   });
 
   it('skal vise finne brukerident og så lagre begrunnelse for flytting', async () => {
     const flyttOppgavereservasjon = vi.fn();
-    render(<MedTreffPåSøk flyttOppgavereservasjon={flyttOppgavereservasjon} />);
+    render(<Default flyttOppgavereservasjon={flyttOppgavereservasjon} />);
 
-    expect(await screen.findByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
+    expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
-    const brukerIdentInput = screen.getByLabelText('Brukerident');
-    await userEvent.type(brukerIdentInput, 'TESTTES');
+    expect(screen.getByLabelText('Kari Konsulent (S12345)')).toBeInTheDocument();
+    expect(screen.getByLabelText('Espen Utvikler (P123456)')).toBeInTheDocument();
 
-    expect(await screen.findByText('Søk')).toBeInTheDocument();
-    expect(screen.getByText('Søk')).toBeEnabled();
-
-    await userEvent.click(screen.getByText('Søk'));
-
-    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('OK').closest('button')).toBeDisabled();
-
-    const begrunnelseInput = screen.getByLabelText('Begrunn flytting av reservasjonen');
-    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
-
-    await waitFor(() => expect(screen.getByText('OK')).toBeEnabled());
+    await userEvent.click(screen.getByLabelText('Saksbehandler'));
+    await userEvent.click(screen.getByLabelText('Espen Utvikler (P123456)'));
+    await userEvent.type(screen.getByLabelText('Begrunn flytting av reservasjonen'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('OK'));
 
-    await waitFor(() => expect(flyttOppgavereservasjon).toHaveBeenCalledTimes(1));
     expect(flyttOppgavereservasjon).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      brukerIdent: 'R232323',
+      brukerIdent: 'P123456',
     });
   });
 });

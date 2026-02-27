@@ -19,27 +19,26 @@ const meta = {
     msw: {
       handlers: [
         http.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, () => HttpResponse.json({})),
-        http.post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, () =>
-          HttpResponse.json({
-            brukerIdent: 'teasdfa',
-            navn: 'Espen Utvikler',
-          }),
-        ),
         http.post(LosUrl.FLYTT_RESERVASJON, () => HttpResponse.json({})),
         http.post(LosUrl.FORLENG_OPPGAVERESERVASJON, () => HttpResponse.json({})),
       ],
     },
   },
   args: {
-    setEnableTableEvents: action('button-click'),
-    brukernavn: 'T232332',
-  },
-} satisfies Meta<typeof OppgaveHandlingerMenu>;
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-export const Default: Story = {
-  args: {
+    setEnableTableEvents: action('setEnableTableEvents'),
+    brukernavn: 'P123456',
+    saksbehandlereForSaksliste: [
+      {
+        navn: 'Espen Utvikler',
+        brukerIdent: 'P123456',
+        ansattAvdeling: 'Avdeling A',
+      },
+      {
+        navn: 'Kari Konsulent',
+        brukerIdent: 'S12345',
+        ansattAvdeling: 'Avdeling B',
+      },
+    ],
     oppgave: {
       id: 1,
       reservasjonStatus: {
@@ -65,4 +64,10 @@ export const Default: Story = {
       andreKriterier: [],
     },
   },
+} satisfies Meta<typeof OppgaveHandlingerMenu>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+export const Default: Story = {
+  args: {},
 };

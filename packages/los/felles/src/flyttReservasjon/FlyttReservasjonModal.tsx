@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { Button, Detail, HStack, Label, Modal, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
+import { Button, Label, Modal, UNSAFE_Combobox as Combobox, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -15,8 +14,6 @@ const intl = createIntl(messages);
 
 const minLength3 = minLength(3);
 const maxLength500 = maxLength(500);
-const minLength7 = minLength(7);
-const maxLength7 = maxLength(7);
 
 type FormValues = {
   brukerIdent: string;
@@ -27,11 +24,7 @@ interface Props {
   flyttetBegrunnelse?: string;
   closeModal: () => void;
   flyttOppgavereservasjon: (params: { brukerIdent: string; begrunnelse: string }) => void;
-  hentSaksbehandler: (brukerIdent: string) => void;
-  hentSaksbehandlerIsPending: boolean;
-  hentSaksbehandlerIsSuccess: boolean;
-  saksbehandler?: SaksbehandlerDto;
-  resetHentSaksbehandler: () => void;
+  tilgjengeligeSaksbehandlere: SaksbehandlerDto[];
 }
 
 /**
@@ -43,34 +36,25 @@ export const FlyttReservasjonModal = ({
   flyttetBegrunnelse,
   closeModal,
   flyttOppgavereservasjon,
-  hentSaksbehandler,
-  hentSaksbehandlerIsPending,
-  hentSaksbehandlerIsSuccess,
-  saksbehandler,
-  resetHentSaksbehandler,
+  tilgjengeligeSaksbehandlere,
 }: Props) => {
-  useEffect(
-    () => () => {
-      resetHentSaksbehandler();
-    },
-    [],
-  );
-
-  const lagreFormMethods = useForm<FormValues>({
+  const formMethods = useForm<FormValues>({
     defaultValues: { begrunnelse: flyttetBegrunnelse },
   });
 
-  const brukerIdentValue = lagreFormMethods.watch('brukerIdent');
-  const begrunnelseValue = lagreFormMethods.watch('begrunnelse');
+  const saksbehandlerOptions = tilgjengeligeSaksbehandlere.map(s => ({
+    value: s.brukerIdent,
+    label: `${s.navn} (${s.brukerIdent})`,
+  }));
 
   return (
     <RawIntlProvider value={intl}>
       <RhfForm
-        formMethods={lagreFormMethods}
+        formMethods={formMethods}
         onSubmit={values => {
           closeModal();
           flyttOppgavereservasjon({
-            brukerIdent: saksbehandler ? saksbehandler.brukerIdent : '',
+            brukerIdent: values.brukerIdent,
             begrunnelse: values.begrunnelse,
           });
         }}
@@ -86,38 +70,32 @@ export const FlyttReservasjonModal = ({
             </Label>
           </Modal.Header>
           <Modal.Body>
-            <VStack gap="space-8">
-              <HStack gap="space-16" align="end">
-                <RhfTextField
-                  name="brukerIdent"
-                  control={lagreFormMethods.control}
-                  label={<FormattedMessage id="FlyttReservasjonModal.Brukerident" />}
-                  validate={[required, minLength7, maxLength7]}
-                  autoFocus
-                />
-                <Button
-                  type="button"
-                  size="small"
-                  variant="primary"
-                  onClick={async () => {
-                    const isValid = await lagreFormMethods.trigger('brukerIdent');
-                    if (isValid) {
-                      hentSaksbehandler(brukerIdentValue);
-                    }
-                  }}
-                  loading={hentSaksbehandlerIsPending}
-                  disabled={!brukerIdentValue || hentSaksbehandlerIsPending}
-                >
-                  <FormattedMessage id="FlyttReservasjonModal.Sok" />
-                </Button>
-              </HStack>
-              {hentSaksbehandlerIsSuccess && (
-                <Detail>{saksbehandler?.navn ?? <FormattedMessage id="LeggTilSaksbehandlerForm.FinnesIkke" />}</Detail>
-              )}
+            <VStack gap="space-16">
+              <Controller
+                control={formMethods.control}
+                name="brukerIdent"
+                rules={{
+                  required: intl.formatMessage({ id: 'FlyttReservasjonModal.ManglerSaksbehandler' }),
+                }}
+                render={({ field, fieldState: { error } }) => (
+                  <Combobox
+                    size="small"
+                    error={error?.message}
+                    label={<FormattedMessage id="FlyttReservasjonModal.Saksbehandler" />}
+                    options={saksbehandlerOptions}
+                    autoFocus
+                    ref={field.ref}
+                    name={field.name}
+                    onBlur={field.onBlur}
+                    onToggleSelected={(option, isSelected) => field.onChange(isSelected ? option : undefined)}
+                  />
+                )}
+              />
+
               <RhfTextarea
                 size="small"
                 name="begrunnelse"
-                control={lagreFormMethods.control}
+                control={formMethods.control}
                 label={<FormattedMessage id="FlyttReservasjonModal.Begrunn" />}
                 validate={[required, maxLength500, minLength3, hasValidText]}
                 maxLength={500}
@@ -129,7 +107,8 @@ export const FlyttReservasjonModal = ({
               type="submit"
               size="small"
               variant="primary"
-              disabled={!saksbehandler || !begrunnelseValue || begrunnelseValue.length < 3}
+              loading={formMethods.formState.isSubmitting}
+              disabled={!formMethods.formState.isDirty}
             >
               <FormattedMessage id="Label.Ok" />
             </Button>

@@ -7,7 +7,6 @@ import type {
   OppgaveDto,
   OppgaveDtoMedStatus,
   ReservasjonStatusDto,
-  SaksbehandlerDto,
   SakslisteDto,
 } from '@navikt/fp-types';
 
@@ -41,7 +40,6 @@ export const LosUrl = {
   ENDRE_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/endre-varighet'),
   FLYTT_RESERVASJON: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon'),
   FORLENG_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/forleng'),
-  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon/søk'),
   BEHANDLINGSKO_OPPGAVE_ANTALL: wrapUrl('/fplos/api/saksbehandler/oppgaver/antall'),
   OPPGAVER_TIL_BEHANDLING: wrapUrl('/fplos/api/saksbehandler/oppgaver'),
 };
@@ -125,6 +123,3 @@ export const flyttReservasjonPost = (oppgaveId: number, brukerIdent: string, beg
 
 export const reserverOppgavePost = (oppgaveId: number) =>
   kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: { oppgaveId } }).json<ReservasjonStatusDto>();
-
-export const flyttReservasjonSaksbehandlerSøkPost = (brukerIdent: string) =>
-  kyExtended.post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, { json: { brukerIdent } }).json<SaksbehandlerDto>();
