@@ -52,7 +52,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
   const periodeStart = dayjs()
     .subtract(ukevalg === UKE_2 ? 2 : 4, 'w')
     .startOf('day');
-  const periodeSlutt = dayjs().subtract(1, 'd').endOf('day');
+  const periodeSlutt = dayjs().endOf('day');
 
   const filtrerteOppgaverPerDato = oppgaverPerDato
     .filter(ofa => ytelseTyper.length === 0 || ytelseTyper.includes(ofa.fagsakYtelseType))
@@ -103,7 +103,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
           height={height}
           behandlingTyper={behandlingTyper}
           periodeStart={periodeStart}
-          periodeSlutt={periodeSlutt}
+          periodeSlutt={periodeSlutt.subtract(1, 'day')}
           oppgaverPerDato={sammenslåtteFiltrerteOppgaverPerDato}
         />
       </VStack>
