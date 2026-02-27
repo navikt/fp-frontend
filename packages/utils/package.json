@@ -18,8 +18,8 @@
     "@navikt/fp-konstanter": "workspace:^",
     "@navikt/fp-types": "workspace:^",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^",
-    "@navikt/ft-form-validators": "4.4.22",
-    "@navikt/ft-utils": "3.11.9",
+    "@navikt/ft-form-validators": "4.4.23",
+    "@navikt/ft-utils": "3.11.10",
     "dayjs": "1.11.19",
     "history": "5.3.0",
     "react": "19.2.4"
