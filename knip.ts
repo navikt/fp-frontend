@@ -7,8 +7,7 @@ const config: KnipConfig = {
     'packages/types/openapi-ts.config.ts',
     'packages/types/src/los/fplos.gen.ts',
     'packages/types/src/fpsak.gen.ts',
-    'packages/kodeverk/src/aksjonspunktCodes.ts',
-    'apps/*/src/index.css',
+    'packages/kodeverk/src/aksjonspunktCodes.ts'
   ],
   ignoreBinaries: ['docker-compose'],
   ignoreDependencies: ['glob'],

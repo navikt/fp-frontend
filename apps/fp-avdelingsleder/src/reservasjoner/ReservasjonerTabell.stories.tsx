@@ -37,7 +37,6 @@ export const ViseAtIngenReservasjonerBleFunnet: Story = {
         http.get(LosUrl.RESERVASJONER_FOR_AVDELING, () => HttpResponse.json([])),
         http.post(LosUrl.AVDELINGSLEDER_OPPHEVER_RESERVASJON, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.FLYTT_RESERVASJON, () => new HttpResponse(null, { status: 200 })),
       ],
     },
@@ -81,7 +80,10 @@ const generateReservasjoner = () => {
     const behandlingType = behandlingTyper[i % behandlingTyper.length]!;
     const ytelseType = ytelseTyper[i % ytelseTyper.length]!;
     const andreKriterierCount = i % 2 === 0 ? 3 : 2;
-    const andreKriterier = Array.from({ length: andreKriterierCount }, (_, j) => kriterier[(i + j) % kriterier.length]!);
+    const andreKriterier = Array.from(
+      { length: andreKriterierCount },
+      (_, j) => kriterier[(i + j) % kriterier.length]!,
+    );
 
     const reservertTilDato = new Date();
     reservertTilDato.setDate(reservertTilDato.getDate() + Math.floor(Math.random() * 30) + 1);
@@ -109,7 +111,6 @@ export const VisTabellMedReservasjoner: Story = {
         http.get(LosUrl.RESERVASJONER_FOR_AVDELING, () => HttpResponse.json(generateReservasjoner())),
         http.post(LosUrl.AVDELINGSLEDER_OPPHEVER_RESERVASJON, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.FLYTT_RESERVASJON, () => new HttpResponse(null, { status: 200 })),
       ],
     },

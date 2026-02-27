@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, HStack, Label, Pagination, type SortState, Table, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
-import { type OppgaveDto } from '@navikt/fp-types';
+import type { OppgaveDto, SaksbehandlerDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { reserverteOppgaverOptions } from '../../../data/fplosSaksbehandlerApi';
@@ -19,9 +19,10 @@ type TableHeaders = 'navn' | 'saksnummer' | 'behandlingstype' | 'opprettetTidspu
 interface Props {
   reserverOppgave: (oppgave: OppgaveDto) => void;
   brukernavn: string;
+  saksbehandlereForSaksliste: SaksbehandlerDto[];
 }
 
-export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) => {
+export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn, saksbehandlereForSaksliste }: Props) => {
   const [sidetall, setSidetall] = useState(1);
   const raderPerSide = 15;
 
@@ -105,6 +106,7 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
                   oppgave={oppgave}
                   reserverOppgave={reserverOppgave}
                   brukernavn={brukernavn}
+                  saksbehandlereForSaksliste={saksbehandlereForSaksliste}
                 />
               ))}
             </Table.Body>

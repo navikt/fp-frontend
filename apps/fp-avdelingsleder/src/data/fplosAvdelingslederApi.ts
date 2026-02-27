@@ -66,7 +66,6 @@ export const LosUrl = {
   AVDELINGSLEDER_OPPHEVER_RESERVASJON: wrapUrl('/fplos/api/avdelingsleder/reservasjoner/opphev'),
   FLYTT_RESERVASJON: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon'),
   ENDRE_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/endre-varighet'),
-  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon/søk'),
   SLETT_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/slett'),
   SAKSBEHANDLER_SOK: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/søk'),
   OPPRETT_NY_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
@@ -277,13 +276,6 @@ export const endreReservasjon = (oppgaveId: number, reserverTil: string) =>
       json: { oppgaveId, reserverTil },
     })
     .json<ReservasjonStatusDto>();
-
-export const flyttReservasjonSaksbehandlerSøk = (brukerIdent: string) =>
-  kyExtended
-    .post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, {
-      json: { brukerIdent },
-    })
-    .json<SaksbehandlerDto>();
 
 export const slettSaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended
