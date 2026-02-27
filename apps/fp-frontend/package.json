@@ -23,11 +23,11 @@
     "storybook": "storybook dev --quiet -p 7001"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.5.0",
-    "@navikt/ds-css": "8.5.0",
+    "@navikt/aksel-icons": "8.6.0",
+    "@navikt/ds-css": "8.6.0",
     "@navikt/ds-css-internal": "3.4.3",
-    "@navikt/ds-react": "8.5.0",
-    "@navikt/ds-tailwind": "8.5.0",
+    "@navikt/ds-react": "8.6.0",
+    "@navikt/ds-tailwind": "8.6.0",
     "@navikt/fp-app-felles": "workspace:*",
     "@navikt/fp-fakta-arbeid-og-inntekt": "workspace:*",
     "@navikt/fp-fakta-arbeidsforhold": "workspace:*",
@@ -143,7 +143,7 @@
     "msw": "2.12.10",
     "msw-storybook-addon": "2.0.6",
     "storybook": "10.2.8",
-    "tailwindcss": "4.1.18",
+    "tailwindcss": "4.2.0",
     "typescript": "5.9.3",
     "vite": "7.3.1",
     "vitest": "4.0.18"

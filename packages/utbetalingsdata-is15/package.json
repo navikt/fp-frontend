@@ -18,7 +18,7 @@
     "storybook": "storybook dev --quiet -p 7019"
   },
   "dependencies": {
-    "@navikt/ds-react": "8.5.0",
+    "@navikt/ds-react": "8.6.0",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-ui-komponenter": "6.8.12",
     "@navikt/ft-utils": "3.11.10",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@formatjs/cli-lib": "8.3.0",
-    "@navikt/ds-css": "8.5.0",
+    "@navikt/ds-css": "8.6.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",

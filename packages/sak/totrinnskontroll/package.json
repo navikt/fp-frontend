@@ -20,8 +20,8 @@
     "storybook": "storybook dev --quiet -p 7067"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.5.0",
-    "@navikt/ds-react": "8.5.0",
+    "@navikt/aksel-icons": "8.6.0",
+    "@navikt/ds-react": "8.6.0",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
@@ -38,7 +38,7 @@
     "react-router-dom": "7.13.0"
   },
   "devDependencies": {
-    "@navikt/ds-css": "8.5.0",
+    "@navikt/ds-css": "8.6.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
