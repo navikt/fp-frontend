@@ -43,9 +43,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
   const lagretFilter = getParsedValueFromLocalStorage<FormValues>(formName);
 
   const [ukevalg, setUkevalg] = useState(lagretFilter?.ukevalg ?? UKE_2);
-  const [ytelseTyper, setYtelseTyper] = useState(
-    lagretFilter?.ytelseTyper && lagretFilter.ytelseTyper.length > 0 ? lagretFilter.ytelseTyper : [],
-  );
+  const [ytelseTyper, setYtelseTyper] = useState(lagretFilter?.ytelseTyper ? lagretFilter.ytelseTyper : []);
 
   useStoreValuesInLocalStorage(formName, { ukevalg, ytelseTyper });
 
@@ -64,7 +62,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
       <Label>
         <FormattedMessage id="TilBehandlingPanel.TilBehandling" />
       </Label>
-      <HStack gap="space-8 space-32" align="end" justify="space-between">
+      <HStack gap="space-8 space-16" align="center">
         <ToggleGroup size="small" value={ukevalg} onChange={value => setUkevalg(value)}>
           <ToggleGroup.Item value={UKE_2}>
             <FormattedMessage id="TilBehandlingPanel.ToSisteUker" />
@@ -78,7 +76,6 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet }: Props) => {
           {ALLE_YTELSER.map(option => (
             <Chips.Toggle
               key={option}
-              checkmark={false}
               selected={ytelseTyper.includes(option)}
               onClick={() =>
                 setYtelseTyper(
