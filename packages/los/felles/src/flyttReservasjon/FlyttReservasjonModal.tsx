@@ -96,7 +96,7 @@ export const FlyttReservasjonModal = ({
                 size="small"
                 name="begrunnelse"
                 control={formMethods.control}
-                label={<FormattedMessage id="FlyttReservasjonModal.Begrunn" />}
+                label={<FormattedMessage id="FlyttReservasjonModal.Notat" />}
                 validate={[required, maxLength500, minLength3, hasValidText]}
                 maxLength={500}
               />

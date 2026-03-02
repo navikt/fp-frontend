@@ -8,7 +8,7 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { OppgaveLabels } from '@navikt/fp-los-felles';
 import { type OppgaveDto } from '@navikt/fp-types';
 
-import { useLosKodeverk } from '../../../data/useLosKodeverk.ts';
+import { useLosKodeverk } from '../../../data/useLosKodeverk';
 
 import styles from './ledigOppgaveRad.module.css';
 

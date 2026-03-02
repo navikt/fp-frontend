@@ -14,11 +14,11 @@ describe('FlyttReservasjonModal', () => {
     render(<Default flyttOppgavereservasjon={flyttOppgavereservasjon} />);
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
-    expect(screen.getByText('Begrunn flytting av reservasjonen')).toBeInTheDocument();
+    expect(screen.getByText('Notat til annen saksbehandler')).toBeInTheDocument();
     expect(screen.getByLabelText('Saksbehandler')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'OK' })).toBeDisabled();
 
-    await userEvent.type(screen.getByLabelText('Begrunn flytting av reservasjonen'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Notat til annen saksbehandler'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('OK'));
 
@@ -51,7 +51,7 @@ describe('FlyttReservasjonModal', () => {
 
     await userEvent.click(screen.getByLabelText('Saksbehandler'));
     await userEvent.click(screen.getByLabelText('Espen Utvikler (P123456)'));
-    await userEvent.type(screen.getByLabelText('Begrunn flytting av reservasjonen'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Notat til annen saksbehandler'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('OK'));
 
