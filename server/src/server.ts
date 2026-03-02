@@ -6,6 +6,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 
+import { serveKomprimerteFilerHvisMulig } from "./compression.js";
 // for debugging during development
 import config from "./config.js";
 import { addHeaders } from "./headers.js";
@@ -13,7 +14,6 @@ import logger from "./logger.js";
 import { getUserGroups, getUserInfoFromGraphApi } from "./msgraph.js";
 import { setupProxies } from "./reverse-proxy.js";
 import { verifyToken } from "./tokenValidation.js";
-import { serveKomprimerteFilerHvisMulig } from "./compression.js";
 
 const server = express();
 const { port } = config.server;
