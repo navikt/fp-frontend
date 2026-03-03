@@ -39,9 +39,9 @@
   ],
   "devDependencies": {
     "@navikt/aksel-stylelint": "8.6.0",
-    "@storybook/addon-a11y": "10.2.8",
-    "@storybook/addon-links": "10.2.8",
-    "@storybook/react": "10.2.8",
+    "@storybook/addon-a11y": "10.2.12",
+    "@storybook/addon-links": "10.2.12",
+    "@storybook/react": "10.2.12",
     "@testing-library/jest-dom": "6.9.1",
     "@types/react": "19.2.9",
     "@types/react-dom": "19.2.3",
@@ -55,7 +55,7 @@
     "shelljs": "0.10.0",
     "stylelint": "17.3.0",
     "stylelint-order": "7.0.1",
-    "turbo": "2.8.9",
+    "turbo": "2.8.10",
     "typescript": "5.9.3",
     "vitest": "4.0.18"
   },
