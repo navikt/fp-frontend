@@ -10,7 +10,18 @@ import { OppgaveHandlingerMenu } from './OppgaveHandlingerMenu';
 import messages from '../../../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
-
+const saksbehandlereForSaksliste = [
+  {
+    navn: 'Espen Utvikler',
+    brukerIdent: 'P123456',
+    ansattAvdeling: 'Avdeling A',
+  },
+  {
+    navn: 'Kari Konsulent',
+    brukerIdent: 'S12345',
+    ansattAvdeling: 'Avdeling B',
+  },
+];
 const meta = {
   title: 'behandlingskoer/OppgaveHandlingerMenu',
   component: OppgaveHandlingerMenu,
@@ -21,24 +32,13 @@ const meta = {
         http.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, () => HttpResponse.json({})),
         http.post(LosUrl.FLYTT_RESERVASJON, () => HttpResponse.json({})),
         http.post(LosUrl.FORLENG_OPPGAVERESERVASJON, () => HttpResponse.json({})),
+        http.post(LosUrl.HENT_AKTUELLE_SAKSBEHANDLERE, () => HttpResponse.json(saksbehandlereForSaksliste)),
       ],
     },
   },
   args: {
     setEnableTableEvents: action('setEnableTableEvents'),
     brukernavn: 'P123456',
-    saksbehandlereForSaksliste: [
-      {
-        navn: 'Espen Utvikler',
-        brukerIdent: 'P123456',
-        ansattAvdeling: 'Avdeling A',
-      },
-      {
-        navn: 'Kari Konsulent',
-        brukerIdent: 'S12345',
-        ansattAvdeling: 'Avdeling B',
-      },
-    ],
     oppgave: {
       id: 1,
       reservasjonStatus: {

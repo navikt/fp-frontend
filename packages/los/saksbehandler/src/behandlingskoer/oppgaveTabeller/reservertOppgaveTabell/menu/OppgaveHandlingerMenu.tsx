@@ -10,15 +10,16 @@ import {
   PersonHeadsetIcon,
 } from '@navikt/aksel-icons';
 import { ActionMenu, Button } from '@navikt/ds-react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { FlyttReservasjonModal, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
-import type { OppgaveDto, SaksbehandlerDto } from '@navikt/fp-types';
+import type { OppgaveDto } from '@navikt/fp-types';
 
 import {
   endreReservasjonPost,
   flyttReservasjonPost,
   forlengReservasjonPost,
+  hentAktuelleSaksbehandlere,
   LosUrl,
   opphevReservasjon,
 } from '../../../../data/fplosSaksbehandlerApi';
@@ -29,15 +30,9 @@ interface Props {
   oppgave: OppgaveDto;
   setEnableTableEvents: (shouldDisable: boolean) => void;
   brukernavn: string;
-  saksbehandlereForSaksliste: SaksbehandlerDto[];
 }
 
-export const OppgaveHandlingerMenu = ({
-  oppgave,
-  setEnableTableEvents,
-  brukernavn,
-  saksbehandlereForSaksliste,
-}: Props) => {
+export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernavn }: Props) => {
   const intl = useIntl();
   const queryClient = useQueryClient();
 
@@ -87,6 +82,10 @@ export const OppgaveHandlingerMenu = ({
       });
     },
   });
+
+  const { data: aktuelleSaksbehandlere, isPending: isLoadingSaksbehandlere } = useQuery(
+    hentAktuelleSaksbehandlere(oppgave.id, visFlyttReservasjonModal),
+  );
 
   return (
     <>
@@ -140,7 +139,8 @@ export const OppgaveHandlingerMenu = ({
           flyttetBegrunnelse={oppgave.reservasjonStatus.flyttetReservasjon?.begrunnelse}
           closeModal={() => setVisFlyttReservasjonModal(false)}
           flyttOppgavereservasjon={flyttOppgavereservasjon}
-          tilgjengeligeSaksbehandlere={saksbehandlereForSaksliste.filter(sbh => sbh.brukerIdent !== brukernavn)}
+          tilgjengeligeSaksbehandlere={(aktuelleSaksbehandlere ?? []).filter(sbh => sbh.brukerIdent !== brukernavn)}
+          isLoadingSaksbehandlere={isLoadingSaksbehandlere}
         />
       )}
       {visNotatModal && (

@@ -42,7 +42,9 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
     onSuccess: () => hentAvdelingensReservasjoner(),
   });
 
-  const { data: avdelingensSaksbehandlere } = useQuery(saksbehandlareForAvdelingOptions(valgtAvdelingEnhet));
+  const { data: avdelingensSaksbehandlere, isPending: isLoadingAvdelingensSaksbehandlere } = useQuery(
+    saksbehandlareForAvdelingOptions(valgtAvdelingEnhet),
+  );
 
   const showReservasjonEndringDato = (reservasjon: AvdelingReservasjonDto): void => {
     setShowReservasjonEndringDatoModal(true);
@@ -193,6 +195,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
           closeModal={() => setShowFlyttReservasjonModal(false)}
           flyttOppgavereservasjon={flyttOppgavereservasjon}
           tilgjengeligeSaksbehandlere={avdelingensSaksbehandlere}
+          isLoadingSaksbehandlere={isLoadingAvdelingensSaksbehandlere}
         />
       )}
     </VStack>
