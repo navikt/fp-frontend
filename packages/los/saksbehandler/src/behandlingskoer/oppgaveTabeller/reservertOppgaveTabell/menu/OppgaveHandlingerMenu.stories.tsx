@@ -32,7 +32,7 @@ const meta = {
         http.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, () => HttpResponse.json({})),
         http.post(LosUrl.FLYTT_RESERVASJON, () => HttpResponse.json({})),
         http.post(LosUrl.FORLENG_OPPGAVERESERVASJON, () => HttpResponse.json({})),
-        http.post(LosUrl.HENT_AKTUELLE_SAKSBEHANDLERE, () => HttpResponse.json(saksbehandlereForSaksliste)),
+        http.get(LosUrl.HENT_AKTUELLE_SAKSBEHANDLERE, () => HttpResponse.json(saksbehandlereForSaksliste)),
       ],
     },
   },
