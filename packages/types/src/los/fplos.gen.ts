@@ -947,6 +947,28 @@ export type GetReserverteOppgaverResponses = {
 
 export type GetReserverteOppgaverResponse = GetReserverteOppgaverResponses[keyof GetReserverteOppgaverResponses];
 
+export type HentAktuelleSaksbehandlereData = {
+  body?: never;
+  path?: never;
+  query: {
+    /**
+     * oppgaveId
+     */
+    oppgaveId: tjenester_saksbehandler_oppgave_dto_OppgaveIdDto;
+  };
+  url: '/api/reservasjon/hent-aktuelle-saksbehandlere';
+};
+
+export type HentAktuelleSaksbehandlereResponses = {
+  /**
+   * default response
+   */
+  default: Array<tjenester_felles_dto_SaksbehandlerDto>;
+};
+
+export type HentAktuelleSaksbehandlereResponse =
+  HentAktuelleSaksbehandlereResponses[keyof HentAktuelleSaksbehandlereResponses];
+
 export type HentReservasjonData = {
   body?: never;
   path?: never;
