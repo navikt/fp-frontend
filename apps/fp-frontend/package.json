@@ -104,7 +104,7 @@
     "@navikt/ft-form-hooks": "10.6.12",
     "@navikt/ft-form-validators": "4.4.23",
     "@navikt/ft-plattform-komponenter": "10.5.11",
-    "@navikt/ft-prosess-beregning": "0.5.9",
+    "@navikt/ft-prosess-beregning": "0.5.10",
     "@navikt/ft-prosess-beregningsgrunnlag": "11.7.12",
     "@navikt/ft-prosess-tilbakekreving": "9.6.12",
     "@navikt/ft-prosess-tilbakekreving-foreldelse": "8.7.12",
