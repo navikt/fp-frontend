@@ -25,6 +25,7 @@ interface Props {
   closeModal: () => void;
   flyttOppgavereservasjon: (params: { brukerIdent: string; begrunnelse: string }) => void;
   tilgjengeligeSaksbehandlere: SaksbehandlerDto[];
+  isLoadingSaksbehandlere: boolean;
 }
 
 /**
@@ -37,6 +38,7 @@ export const FlyttReservasjonModal = ({
   closeModal,
   flyttOppgavereservasjon,
   tilgjengeligeSaksbehandlere,
+  isLoadingSaksbehandlere,
 }: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: { begrunnelse: flyttetBegrunnelse },
@@ -88,6 +90,7 @@ export const FlyttReservasjonModal = ({
                     name={field.name}
                     onBlur={field.onBlur}
                     onToggleSelected={(option, isSelected) => field.onChange(isSelected ? option : undefined)}
+                    isLoading={isLoadingSaksbehandlere}
                   />
                 )}
               />

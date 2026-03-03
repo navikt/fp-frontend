@@ -7,6 +7,7 @@ import type {
   OppgaveDto,
   OppgaveDtoMedStatus,
   ReservasjonStatusDto,
+  SaksbehandlerDto,
   SakslisteDto,
 } from '@navikt/fp-types';
 
@@ -42,6 +43,7 @@ export const LosUrl = {
   FORLENG_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/forleng'),
   BEHANDLINGSKO_OPPGAVE_ANTALL: wrapUrl('/fplos/api/saksbehandler/oppgaver/antall'),
   OPPGAVER_TIL_BEHANDLING: wrapUrl('/fplos/api/saksbehandler/oppgaver'),
+  HENT_AKTUELLE_SAKSBEHANDLERE: wrapUrl('/fplos/api/reservasjon/hent-aktuelle-saksbehandlere'),
 };
 
 export const getBehandlingskøOppgaveAntall = (sakslisteId: number) =>
@@ -102,6 +104,21 @@ export const behandlendeOppgaverOptions = (kunAktive: boolean) =>
       kyExtended
         .get(LosUrl.TIDLIGERE_RESERVERTE, { searchParams: { kunAktive: kunAktive } })
         .json<OppgaveDtoMedStatus[]>(),
+  });
+
+export const hentAktuelleSaksbehandlere = (oppgaveId: number, skalKjøres: boolean) =>
+  queryOptions({
+    queryKey: [LosUrl.HENT_AKTUELLE_SAKSBEHANDLERE, oppgaveId],
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.HENT_AKTUELLE_SAKSBEHANDLERE, {
+          searchParams: {
+            oppgaveId: oppgaveId,
+          },
+        })
+        .json<SaksbehandlerDto[]>(),
+    staleTime: Infinity,
+    enabled: skalKjøres,
   });
 
 export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>

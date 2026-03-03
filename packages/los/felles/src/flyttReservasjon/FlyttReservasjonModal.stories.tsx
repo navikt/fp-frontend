@@ -21,6 +21,7 @@ const meta = {
       },
     ],
     flyttOppgavereservasjon: action('flyttOppgavereservasjon'),
+    isLoadingSaksbehandlere: false,
   },
 } satisfies Meta<typeof FlyttReservasjonModal>;
 export default meta;

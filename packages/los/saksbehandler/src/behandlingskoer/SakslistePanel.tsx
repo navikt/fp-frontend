@@ -46,11 +46,7 @@ export const SakslistePanel = ({
         />
       )}
 
-      <ReservertOppgaveTabell
-        reserverOppgave={reserverOppgave}
-        brukernavn={brukernavn}
-        saksbehandlereForSaksliste={sakslister.find(s => s.sakslisteId === valgtSakslisteId)?.saksbehandlere ?? []}
-      />
+      <ReservertOppgaveTabell reserverOppgave={reserverOppgave} brukernavn={brukernavn} />
     </VStack>
   );
 };
