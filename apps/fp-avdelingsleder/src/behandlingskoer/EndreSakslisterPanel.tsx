@@ -65,10 +65,10 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
             <Detail>
               <FormattedMessage id="GjeldendeSakslisterTabell.OppgaverForAvdeling" />
             </Detail>
-            {oppgaverForAvdelingAntall ? (
-              <BodyShort size="large">{oppgaverForAvdelingAntall}</BodyShort>
-            ) : (
+            {oppgaverForAvdelingAntall === undefined ? (
               <Loader size="xsmall" />
+            ) : (
+              <BodyShort size="large">{oppgaverForAvdelingAntall}</BodyShort>
             )}
           </VStack>
         </Box>

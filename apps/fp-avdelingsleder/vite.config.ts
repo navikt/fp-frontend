@@ -22,7 +22,7 @@ export default mergeConfig(createSharedAppConfig(), {
         secure: false,
       },
       '/fplos/api': {
-        target: 'http://127.0.0.1:9004',
+        target: 'http://127.0.0.1:9000',
         changeOrigin: false,
         secure: false,
       },
