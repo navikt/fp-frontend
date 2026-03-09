@@ -14,6 +14,7 @@ import {
 } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Detail, Heading, HStack, Label, Spacer, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -23,7 +24,6 @@ import { getValueFromLocalStorage } from '../../data/localStorageHelper';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 
 import styles from './sakslisteVelgerForm.module.css';
-import { LabeledValue } from '@navikt/ft-ui-komponenter';
 
 const getDefaultSaksliste = (
   sorterteSakslister: SakslisteDto[],
