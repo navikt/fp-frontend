@@ -147,7 +147,7 @@ const FAGSAK = {
   historikkinnslag: [],
   notater: [],
   kontrollResultat: {
-    kontrollresultat: '-',
+    kontrollresultat: 'IKKE_KLASSIFISERT',
   },
   harVergeIÅpenBehandling: false,
 } satisfies Fagsak;

@@ -27,7 +27,7 @@ type AsyncPollingStatusFpTilbake = {
 
 type AksjonspunktStatusFpTilbake = 'AVBR' | 'OPPR' | 'UTFO';
 
-type AksjonspunktTypeFpTilbake = 'AUTO' | 'MANU' | 'OVST' | 'SAOV' | '-';
+type AksjonspunktTypeFpTilbake = 'AUTO' | 'MANU' | 'OVST' | 'SAOV';
 
 type AksjonspunktDefinisjonFpTilbake = '5002' | '5003' | '5004' | '5005' | '5030' | '7003' | '7001' | '7002';
 

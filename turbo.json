@@ -18,8 +18,12 @@
       "persistent": true,
       "dependsOn": ["^build"]
     },
-    "generate": {},
-    "generate:local": {},
+    "generate": {
+      "cache": false
+    },
+    "generate:local": {
+      "cache": false
+    },
     "tsc": {
       "outputs": []
     },

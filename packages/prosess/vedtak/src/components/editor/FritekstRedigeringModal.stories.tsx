@@ -51,10 +51,7 @@ const FAGSAK_MED_MARKERING_PRAKSIS_UTSETTELSE = {
   historikkinnslag: [],
   notater: [],
   kontrollResultat: {
-    kontrollresultat: '-',
-    iayFaresignaler: undefined,
-    medlFaresignaler: undefined,
-    faresignalVurdering: undefined,
+    kontrollresultat: 'IKKE_KLASSIFISERT',
   },
   harVergeIÅpenBehandling: false,
 } satisfies Fagsak;
