@@ -24,6 +24,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    valgtSaksliste: lagNySaksliste({ navn: 'Saksliste 1', sakslisteId: 1234})
+    valgtSaksliste: lagNySaksliste({ navn: 'Saksliste 1', sakslisteId: 1234 }),
   },
 };

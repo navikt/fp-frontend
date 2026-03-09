@@ -24,6 +24,6 @@ describe('SletteSakslisteModal', () => {
 
     await userEvent.click(screen.getByText('Nei'));
 
-   expect(cancel).toHaveBeenCalledOnce()
+    expect(cancel).toHaveBeenCalledOnce();
   });
 });
