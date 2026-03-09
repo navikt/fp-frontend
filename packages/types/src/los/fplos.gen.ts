@@ -196,6 +196,7 @@ export type tjenester_felles_dto_KøSorteringFeltDto = {
 export type tjenester_felles_dto_SakslisteDto = {
   andreKriterie: tjenester_felles_dto_SakslisteDto_AndreKriterieDto;
   behandlingTyper: Array<oppgave_BehandlingType>;
+  beskrivelse?: string;
   fagsakYtelseTyper: Array<oppgave_FagsakYtelseType>;
   gjeldendeStatistikk?: tjenester_felles_dto_SakslisteDto_StatistikkDto;
   navn: string;
@@ -220,6 +221,7 @@ export type tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto = {
   andreKriterie: tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto_AndreKriterieDto;
   avdelingEnhet: string;
   behandlingTyper?: Array<oppgave_BehandlingType>;
+  beskrivelse?: string;
   fagsakYtelseTyper?: Array<oppgave_FagsakYtelseType>;
   navn: string;
   sakslisteId: number;

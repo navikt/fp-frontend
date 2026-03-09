@@ -42,7 +42,7 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
       <FormattedMessage id="ValgAvSaksbehandlere.IngenSaksbehandlere" />
     </Detail>
   ) : (
-    <HGrid columns="repeat(auto-fit, 250px" gap="space-0 space-40">
+    <HGrid columns="repeat(auto-fit, 250px)" gap="space-0 space-40">
       {saksbehandlere.map(s => (
         <RhfCheckbox
           key={s.brukerIdent}

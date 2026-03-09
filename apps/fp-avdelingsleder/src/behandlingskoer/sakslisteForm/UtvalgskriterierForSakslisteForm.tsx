@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
-import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { Button, ExpansionCard, HGrid, HStack, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
+import { hasValidName, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type {
@@ -24,13 +24,12 @@ import { FagsakYtelseTypeVelger } from './filtrering/FagsakYtelseTypeVelger';
 import { TilBeslutterVelger } from './filtrering/TilBeslutterVelger';
 import { SorteringVelger } from './sortering/SorteringVelger';
 
-import styles from './utvalgskriterierForSakslisteForm.module.css';
-
 const minLength3 = minLength(3);
 const maxLength100 = maxLength(100);
 
 export type FormValues = {
   navn: string;
+  beskrivelse: string;
   behandlingTyper: LosBehandlingType[];
   sortering: {
     sorteringType: KøSortering;
@@ -85,59 +84,68 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
   };
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={lagre}>
-      <ExpansionCard
-        className={styles['expansion-card']}
-        size="small"
-        defaultOpen
-        aria-label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Utvalgskriterier' })}
-      >
-        <ExpansionCard.Header>
-          <ExpansionCard.Title>
-            <FormattedMessage id="UtvalgskriterierForSakslisteForm.Utvalgskriterier" />
-          </ExpansionCard.Title>
-        </ExpansionCard.Header>
-        <ExpansionCard.Content>
-          <div style={{ maxWidth: '2000px' }}>
-            <VStack gap="space-8">
-              <HStack justify="end">
-                <Button
-                  size="small"
-                  variant="primary"
-                  disabled={!formMethods.formState.isDirty || isPending}
-                  loading={isPending}
-                  data-color="info"
-                >
-                  <FormattedMessage id="UtvalgskriterierForSakslisteForm.Lagre" />
-                </Button>
-              </HStack>
-              <HStack justify="space-between">
-                <VStack gap="space-24" padding="space-20">
-                  <RhfTextField
-                    name="navn"
-                    control={formMethods.control}
-                    label={<FormattedMessage id="Label.Navn" />}
-                    validate={[required, minLength3, maxLength100, hasValidName]}
-                    htmlSize={40}
-                  />
-                  <FagsakYtelseTypeVelger />
-                  <BehandlingstypeVelger />
-                  <TilBeslutterVelger />
-                </VStack>
-                <AndreKriterierVelger />
-                <SorteringVelger muligeSorteringer={valgtSaksliste.sorteringTyper} />
-              </HStack>
-            </VStack>
-          </div>
-        </ExpansionCard.Content>
-      </ExpansionCard>
-    </RhfForm>
+    <ExpansionCard
+      size="small"
+      defaultOpen
+      aria-label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Utvalgskriterier' })}
+    >
+      <ExpansionCard.Header>
+        <ExpansionCard.Title>
+          <FormattedMessage id="UtvalgskriterierForSakslisteForm.Utvalgskriterier" />
+        </ExpansionCard.Title>
+      </ExpansionCard.Header>
+      <ExpansionCard.Content>
+        <RhfForm formMethods={formMethods} onSubmit={lagre}>
+          <VStack gap="space-16" maxWidth="2000px">
+            <HStack justify="space-between">
+              <RhfTextField
+                name="navn"
+                control={formMethods.control}
+                label={<FormattedMessage id="Label.Navn" />}
+                validate={[required, minLength3, maxLength100, hasValidName]}
+                htmlSize={40}
+              />
+              <Button
+                size="small"
+                variant="primary"
+                disabled={!formMethods.formState.isDirty || isPending}
+                loading={isPending}
+                data-color="info"
+                className="self-start"
+              >
+                <FormattedMessage id="UtvalgskriterierForSakslisteForm.Lagre" />
+              </Button>
+            </HStack>
+
+            <HGrid columns={{ md: 2, lg: 3 }} gap="space-20">
+              <VStack gap="space-16">
+                <RhfTextarea
+                  name="beskrivelse"
+                  control={formMethods.control}
+                  label={<FormattedMessage id="Label.Beskrivelse" />}
+                  validate={[minLength3, maxLength(250), hasValidText]}
+                  maxLength={250}
+                  minRows={3}
+                  className="max-w-sm"
+                />
+                <FagsakYtelseTypeVelger />
+                <BehandlingstypeVelger />
+                <TilBeslutterVelger />
+              </VStack>
+              <AndreKriterierVelger />
+              <SorteringVelger muligeSorteringer={valgtSaksliste.sorteringTyper} />
+            </HGrid>
+          </VStack>
+        </RhfForm>
+      </ExpansionCard.Content>
+    </ExpansionCard>
   );
 };
 
 const buildDefaultValues = (valgtSaksliste: SakslisteDto): FormValues => {
   return {
     navn: valgtSaksliste.navn,
+    beskrivelse: valgtSaksliste.beskrivelse ?? '',
     sortering: {
       sorteringType: valgtSaksliste.sortering.sorteringType,
       periodefilter: valgtSaksliste.sortering.periodefilter,
@@ -164,7 +172,7 @@ const fraAndreKriterierTilBeslutter = (andreKriterier?: AndreKriterieDto): TilBe
 };
 
 const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslisteId: number): SakslisteLagreDto => {
-  const { tilBeslutter, andreKriterie, sortering, ...rest } = values;
+  const { tilBeslutter, andreKriterie, sortering, beskrivelse, ...rest } = values;
   const inkluder = andreKriterie.inkluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   const ekskluder = andreKriterie.ekskluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   if (tilBeslutter === 'TA_MED') {
@@ -175,6 +183,7 @@ const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslis
 
   return {
     ...rest,
+    beskrivelse: beskrivelse === '' ? undefined : beskrivelse,
     andreKriterie: {
       inkluder,
       ekskluder,

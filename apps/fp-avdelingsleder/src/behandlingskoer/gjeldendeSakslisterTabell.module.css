@@ -1,9 +1,7 @@
 .isSelected {
-  background-color: var(--ax-neutral-200);
-}
+  background-color: var(--ax-neutral-100);
 
-.imageText {
-  display: inline-block;
-  margin-right: 1ex;
-  vertical-align: text-bottom;
+  + tr {
+    background-color: var(--ax-neutral-100);
+  }
 }

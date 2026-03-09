@@ -103,6 +103,7 @@
   "SakslisteVelgerForm.AndreKriterier": "Andre filter",
   "SakslisteVelgerForm.Uten": "Uten: {kriterie}",
   "SakslisteVelgerForm.AndreSomJobber": "Andre som jobber med denne køen nå",
+  "SakslisteVelgerForm.Ingen": "Det er ingen saksbehandlere som jobber med denne køen nå",
   "SakslisteVelgerForm.Sorteringsinfo": "{navn}{br}Gjeldende intervall:{br}{fomDato} - {tomDato}",
   "SakslisteVelgerForm.SorteringsinfoFom": "{navn}{br}Fra og med: {fomDato}",
   "SakslisteVelgerForm.SorteringsinfoTom": "{navn}{br}Til og med: {tomDato}",

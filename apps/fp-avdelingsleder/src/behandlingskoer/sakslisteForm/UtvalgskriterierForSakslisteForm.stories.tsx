@@ -9,6 +9,7 @@ import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
 import { UtvalgskriterierForSakslisteForm } from './UtvalgskriterierForSakslisteForm';
 
 import messages from '../../../i18n/nb_NO.json';
+import { lagNySaksliste } from '../../../testdata/lagNySaksliste.ts';
 
 const withIntl = getIntlDecorator(messages);
 
@@ -21,7 +22,7 @@ const meta = {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.get(LosUrl.OPPGAVE_ANTALL, () => HttpResponse.json(1)),
-        http.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, () => new HttpResponse(null, { status: 204 })),
       ],
     },
   },
@@ -40,46 +41,6 @@ type Story = StoryObj<typeof meta>;
 
 export const MedGittNavn: Story = {
   args: {
-    valgtSaksliste: {
-      sakslisteId: 1,
-      navn: 'liste',
-      saksbehandlere: [],
-      sortering: {
-        sorteringType: 'BEHFRIST',
-        fra: 1,
-        til: 4,
-        periodefilter: 'RELATIV_PERIODE_DAGER',
-      },
-      behandlingTyper: ['BT-002'],
-      fagsakYtelseTyper: ['FP'],
-      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-      andreKriterie: {
-        inkluder: ['TIL_BESLUTTER'],
-        ekskluder: ['PAPIRSOKNAD'],
-      },
-    },
-  },
-};
-
-export const MedDefaultNavn: Story = {
-  args: {
-    valgtSaksliste: {
-      sakslisteId: 1,
-      navn: 'Ny liste',
-      saksbehandlere: [],
-      sortering: {
-        sorteringType: 'BEHFRIST',
-        fra: 1,
-        til: 4,
-        periodefilter: 'RELATIV_PERIODE_DAGER',
-      },
-      behandlingTyper: ['BT-002'],
-      fagsakYtelseTyper: ['FP'],
-      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-      andreKriterie: {
-        inkluder: ['TIL_BESLUTTER'],
-        ekskluder: ['PAPIRSOKNAD'],
-      },
-    },
+    valgtSaksliste: lagNySaksliste({ navn: 'liste' }),
   },
 };

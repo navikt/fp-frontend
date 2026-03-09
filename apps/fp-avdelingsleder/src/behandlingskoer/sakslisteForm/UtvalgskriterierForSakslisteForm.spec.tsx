@@ -36,6 +36,8 @@ describe('UtvalgskriterierForSakslisteForm', () => {
 
     expect(await screen.findByText('Utvalgskriterier')).toBeInTheDocument();
 
+    await userEvent.click(screen.getByLabelText('Relativ periode (dager)'));
+
     const fomInput = screen.getByLabelText('F.o.m.');
     await userEvent.clear(fomInput);
     await userEvent.type(fomInput, 'bokstaver');
@@ -47,10 +49,18 @@ describe('UtvalgskriterierForSakslisteForm', () => {
   });
 
   it('skal vise feilmelding når en skriver inn bokstaver i tom-datofeltet', async () => {
+    /**
+     * TODO: fiks at ikke denne kaster formatDate error, men heller validerer
+     * midlertidig fiks er å absorberer error log for å redusere støy i testlogger.
+     * Vurder å flytte til SorteringVelger.spec.ts
+     */
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
     applyRequestHandlers(MedGittNavn.parameters['msw'] as MswParameters['msw']);
     render(<MedGittNavn />);
 
     expect(await screen.findByText('Utvalgskriterier')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByLabelText('Relativ periode (dager)'));
 
     const tomInput = screen.getByLabelText('T.o.m.');
     await userEvent.clear(tomInput);
@@ -60,5 +70,6 @@ describe('UtvalgskriterierForSakslisteForm', () => {
     await userEvent.click(lagreKnapp);
 
     expect(await screen.findByText(/Feltet kan kun inneholde tall/i)).toBeInTheDocument();
+    spy.mockRestore();
   });
 });

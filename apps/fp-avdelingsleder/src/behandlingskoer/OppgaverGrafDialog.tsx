@@ -23,7 +23,7 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
         <Button
           variant="secondary"
           size="small"
-          title={intl.formatMessage({ id: 'OppgaverGrafDialog.VisOppgaveGraf' })}
+          title={intl.formatMessage({ id: 'OppgaverGrafDialog.VisOppgaveGraf' }, { sakslisteNavn: saksliste.navn })}
           icon={<LineGraphDotIcon aria-hidden />}
           disabled={saksliste.gjeldendeStatistikk == null}
         ></Button>
@@ -81,11 +81,7 @@ const OppgaverGrafDialogBody = ({
         </ToggleGroup>
       </HStack>
       {visningType === 'intro' && <BodyShort size="small">Velg en av grafene.</BodyShort>}
-      {visningType === 'aktive' && (
-        <>
-          <AktiveOgTilgjengeligeOppgaverGraf aktiveOgLedigeTidslinje={køStatistikk} />
-        </>
-      )}
+      {visningType === 'aktive' && <AktiveOgTilgjengeligeOppgaverGraf aktiveOgLedigeTidslinje={køStatistikk} />}
       {visningType === 'lukkede' && (
         <>
           <BodyLong size="small">
