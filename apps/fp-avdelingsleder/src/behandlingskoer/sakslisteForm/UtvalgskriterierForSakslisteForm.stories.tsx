@@ -5,7 +5,7 @@ import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
-import { lagNySaksliste } from '../../../testdata/lagNySaksliste.ts';
+import { lagNySaksliste } from '../../../testdata/lagNySaksliste';
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
 import { UtvalgskriterierForSakslisteForm } from './UtvalgskriterierForSakslisteForm';
 

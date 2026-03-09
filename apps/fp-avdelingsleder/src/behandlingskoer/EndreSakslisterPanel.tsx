@@ -40,7 +40,7 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
     },
   });
   const { mutate: fjernSaksliste } = useMutation({
-    mutationFn: (values: { sakslisteId: number }) => slettSaksliste(values.sakslisteId, valgtAvdelingEnhet),
+    mutationFn: (sakslisteId: number) => slettSaksliste(sakslisteId, valgtAvdelingEnhet),
     onSuccess: () => {
       setValgtSakslisteId(undefined);
       void queryClient.invalidateQueries({
@@ -49,9 +49,9 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
     },
   });
 
-  const fjernSakslisteOgSkjulModal = (saksliste: SakslisteDto): void => {
+  const fjernSakslisteOgSkjulModal = (sakslisteId: number): void => {
     setValgtSakslisteForSletting(undefined);
-    fjernSaksliste({ sakslisteId: saksliste.sakslisteId });
+    fjernSaksliste(sakslisteId);
   };
 
   return (

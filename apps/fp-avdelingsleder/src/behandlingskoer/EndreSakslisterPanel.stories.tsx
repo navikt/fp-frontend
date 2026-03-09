@@ -7,7 +7,7 @@ import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-s
 import type { SakslisteDto } from '@navikt/fp-types';
 
 import { kriterieFilter } from '../../testdata/kriterieFilter';
-import { lagNySaksliste } from '../../testdata/lagNySaksliste.ts';
+import { lagNySaksliste } from '../../testdata/lagNySaksliste';
 import { statistikkOppgaveFilter } from '../../testdata/statistikkOppgaveFilter';
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
@@ -37,7 +37,6 @@ const lagHandlersMedSakslister = (initialSakslister: SakslisteDto[]) => {
 };
 
 const meta = {
-  title: 'los/avdelingsleder/behandlingskoer/EndreSakslisterPanel',
   component: EndreSakslisterPanel,
   decorators: [withIntl, withQueryClient],
   args: {

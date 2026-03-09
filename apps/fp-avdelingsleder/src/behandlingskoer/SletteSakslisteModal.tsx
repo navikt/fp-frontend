@@ -7,7 +7,7 @@ import type { SakslisteDto } from '@navikt/fp-types';
 interface Props {
   valgtSaksliste: SakslisteDto;
   cancel: () => void;
-  submit: (saksliste: SakslisteDto) => void;
+  submit: (sakslisteId: number) => void;
 }
 
 /**
@@ -31,7 +31,7 @@ export const SletteSakslisteModal = ({ valgtSaksliste, cancel, submit }: Props) 
           <Button size="small" variant="secondary" onClick={cancel} type="button">
             <FormattedMessage id="Label.Nei" />
           </Button>
-          <Button size="small" variant="primary" onClick={() => submit(valgtSaksliste)} autoFocus type="button">
+          <Button size="small" variant="primary" onClick={() => submit(valgtSaksliste.sakslisteId)} autoFocus type="button">
             <FormattedMessage id="Label.Ja" />
           </Button>
         </Dialog.Footer>
