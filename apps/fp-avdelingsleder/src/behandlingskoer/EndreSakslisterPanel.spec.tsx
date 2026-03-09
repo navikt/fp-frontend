@@ -56,17 +56,16 @@ describe('EndreSakslisterPanel', () => {
     render(<ToSakslister />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
-    // Klikk på graf-ikonet (index 1)
     await userEvent.click(screen.getByTitle('Vis oppgave graf for A00 Hurtig kø'));
 
     const dialog = await screen.findByRole('dialog');
-    expect(await within(dialog).findByText('Velg en av grafene.')).toBeInTheDocument();
+    expect(await within(dialog).findByText('Aktive og ledige oppgaver')).toBeInTheDocument();
 
     // Lukk dialogen ved å klikke på Lukk-knappen
-    const lukkeKnapper = screen.getAllByRole('button', { name: /lukk/i });
-    await userEvent.click(lukkeKnapper[lukkeKnapper.length - 1]!);
+    const lukkeKnapp = screen.getAllByRole('button', { name: 'Lukk' })[1]!;
+    await userEvent.click(lukkeKnapp);
 
-    expect(screen.queryByText('Antall oppgaver')).not.toBeInTheDocument();
+    expect(screen.queryByText('Aktive og ledige oppgaver')).not.toBeInTheDocument();
   });
 
   it('skal vise slette kø ved å trykke på ikon for sletting', async () => {

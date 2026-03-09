@@ -5,11 +5,11 @@ import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
+import { lagNySaksliste } from '../../../testdata/lagNySaksliste.ts';
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
 import { UtvalgskriterierForSakslisteForm } from './UtvalgskriterierForSakslisteForm';
 
 import messages from '../../../i18n/nb_NO.json';
-import { lagNySaksliste } from '../../../testdata/lagNySaksliste.ts';
 
 const withIntl = getIntlDecorator(messages);
 
