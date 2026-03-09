@@ -87,7 +87,6 @@ export const OmsorgOgAdopsjonPanel = ({
         </Heading>
         {isForeldrepengerFagsak && familieHendelseType === 'ADPSJN' && (
           <RhfRadioGroup
-            // @ts-expect-error Her er det noko rart med typane
             name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
             control={control}
             legend={<FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />}
