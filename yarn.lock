@@ -1925,13 +1925,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-css-internal@npm:3.4.3":
-  version: 3.4.3
-  resolution: "@navikt/ds-css-internal@npm:3.4.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css-internal%2F3.4.3%2F7c67c4b52264eb7833ca35788a83cc29af01d1ae"
-  checksum: 10/61d486a784059d8b2bf83296b9f786e450e5925d5e43ac73705d4237c9695b8e3e011bb04d3d74aa9ea0ce10b95b224288acb0efa3a9b33707ec9d94565a3cc2
-  languageName: node
-  linkType: hard
-
 "@navikt/ds-css@npm:8.5.2":
   version: 8.5.2
   resolution: "@navikt/ds-css@npm:8.5.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F8.5.2%2F221a7b7e362e8fe8fd8a510ab45fb6d8eb7632f4"
@@ -2029,7 +2022,6 @@ __metadata:
   dependencies:
     "@navikt/aksel-icons": "npm:8.6.0"
     "@navikt/ds-css": "npm:8.6.0"
-    "@navikt/ds-css-internal": "npm:3.4.3"
     "@navikt/ds-react": "npm:8.6.0"
     "@navikt/ds-tailwind": "npm:8.6.0"
     "@navikt/ds-tokens": "npm:8.6.0"
@@ -2825,7 +2817,6 @@ __metadata:
   dependencies:
     "@navikt/aksel-icons": "npm:8.6.0"
     "@navikt/ds-css": "npm:8.6.0"
-    "@navikt/ds-css-internal": "npm:3.4.3"
     "@navikt/ds-react": "npm:8.6.0"
     "@navikt/ds-tailwind": "npm:8.6.0"
     "@navikt/fp-app-felles": "workspace:*"
@@ -2954,7 +2945,6 @@ __metadata:
   dependencies:
     "@navikt/aksel-icons": "npm:8.6.0"
     "@navikt/ds-css": "npm:8.6.0"
-    "@navikt/ds-css-internal": "npm:3.4.3"
     "@navikt/ds-react": "npm:8.6.0"
     "@navikt/ds-tailwind": "npm:8.6.0"
     "@navikt/fp-app-felles": "workspace:*"
