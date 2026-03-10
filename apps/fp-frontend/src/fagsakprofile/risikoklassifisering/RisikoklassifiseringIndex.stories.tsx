@@ -11,10 +11,11 @@ import {
   alleKodeverkTilbakekreving,
   getIntlDecorator,
   lagAksjonspunkt,
+  lagFagsak,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak, Fagsak } from '@navikt/fp-types';
+import type { BehandlingFpSak } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
@@ -47,10 +48,8 @@ const getHref = (rel: string) =>
     ),
   );
 
-const FAGSAK = {
+const FAGSAK = lagFagsak({
   saksnummer: '123',
-  fagsakYtelseType: 'FP',
-  status: 'UBEH',
   behandlinger: [
     {
       versjon: 2,
@@ -100,8 +99,6 @@ const FAGSAK = {
       totrinnskontrollÅrsaker: [],
     },
   ],
-  sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [],
   relasjonsRolleType: '-',
   aktørId: '',
   dekningsgrad: 0,
@@ -113,16 +110,10 @@ const FAGSAK = {
     dødsdato: undefined,
     språkkode: '-',
   },
-  brukerManglerAdresse: false,
-
-  fagsakMarkeringer: [],
-  historikkinnslag: [],
-  notater: [],
   kontrollResultat: {
     kontrollresultat: 'IKKE_KLASSIFISERT',
   },
-  harVergeIÅpenBehandling: false,
-} satisfies Fagsak;
+});
 
 const meta = {
   title: 'fagsak/RisikoklassifiseringIndex',
@@ -163,7 +154,23 @@ export const FaresignalerOppdaget: Story = {
     behandling: {
       uuid: '1',
       versjon: 1,
-    } as BehandlingFpSak,
+      aksjonspunkt: [],
+      aktivPapirsøknad: false,
+      behandlendeEnhetId: '4820',
+      behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
+      behandlingHenlagt: false,
+      behandlingPåVent: false,
+      behandlingÅrsaker: [],
+      harSattEndringsdato: false,
+      harSøknad: true,
+      id: 1,
+      links: [],
+      opprettet: '2020-01-01',
+      språkkode: 'NB',
+      status: 'UTRED',
+      type: 'BT-002',
+      vilkår: [],
+    } satisfies BehandlingFpSak,
   },
 };
 

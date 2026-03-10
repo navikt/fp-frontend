@@ -6,7 +6,13 @@ import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
-import type { AlleKodeverk, FagsakYtelseType, FamilieHendelseType, ForeldreType } from '@navikt/fp-types';
+import type {
+  AlleKodeverk,
+  FagsakYtelseType,
+  FamilieHendelseType,
+  ForeldreType,
+  KodeverkMedNavn,
+} from '@navikt/fp-types';
 
 const SØKNAD_TYPER = new Set<FamilieHendelseType>(['ADPSJN', 'FODSL']);
 
@@ -93,7 +99,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
               legend={<FormattedMessage id="Registrering.Omsoknaden.Soker" />}
               validate={[required]}
             >
-              {foreldreTyper.map(ft => (
+              {utledForeldreTyper(foreldreTyper, selectedFagsakYtelseType).map(ft => (
                 <Radio key={ft.kode} value={ft.kode} size="small">
                   {ft.navn}
                 </Radio>
@@ -110,4 +116,14 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
       </Box>
     </RhfForm>
   );
+};
+
+const utledForeldreTyper = (
+  foreldreTyper: KodeverkMedNavn<'ForeldreType'>[],
+  fagsakYtelseType: FagsakYtelseType,
+): KodeverkMedNavn<'ForeldreType'>[] => {
+  if (fagsakYtelseType === 'SVP') {
+    return foreldreTyper.filter(({ kode }) => kode !== 'ANDRE');
+  }
+  return foreldreTyper;
 };

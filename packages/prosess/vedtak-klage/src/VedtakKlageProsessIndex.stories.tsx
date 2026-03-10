@@ -4,19 +4,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { lagAksjonspunkt, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak, KlageVurdering } from '@navikt/fp-types';
+import { lagAksjonspunkt, lagBehandling, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import type { KlageVurdering } from '@navikt/fp-types';
 
 import { VedtakKlageProsessIndex } from './VedtakKlageProsessIndex';
 
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-  behandlingsresultat: {
-    type: 'KLAGE_AVVIST',
-  },
-  behandlingPåVent: false,
-} as BehandlingFpSak;
+const behandling = lagBehandling({
+  behandlingsresultat: { harRedigertVedtaksbrev: false, id: 1, type: 'KLAGE_AVVIST', vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+});
 
 const meta = {
   title: 'prosess/klage/prosess-vedtak-klage',
@@ -44,8 +39,14 @@ export const VedtakspanelDerKlageErVurdertAvNk: Story = {
       },
       klageFormkravResultatKA: {
         avvistÅrsaker: ['IKKE_KONKRET'],
+        begrunnelse: '',
+        erKlageKonkret: false,
+        erKlagefirstOverholdt: false,
+        erKlagerPart: false,
+        erSignert: false,
+        påKlagdBehandlingUuid: '',
       },
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
   },
 };
 
@@ -60,7 +61,13 @@ export const VedtakspanelDerKlageErVurdertAvNfp: Story = {
       },
       klageFormkravResultatKA: {
         avvistÅrsaker: ['IKKE_KONKRET'],
+        begrunnelse: '',
+        erKlageKonkret: false,
+        erKlagefirstOverholdt: false,
+        erKlagerPart: false,
+        erSignert: false,
+        påKlagdBehandlingUuid: '',
       },
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
   },
 };

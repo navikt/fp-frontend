@@ -6,20 +6,13 @@ import { action } from 'storybook/actions';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagBehandling,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak } from '@navikt/fp-types';
 
 import { VarselOmRevurderingProsessIndex } from './VarselOmRevurderingProsessIndex';
-
-const defaultBehandling = {
-  uuid: '1',
-  versjon: 1,
-  språkkode: 'NN',
-  type: 'BT-002',
-} as BehandlingFpSak;
 
 const meta = {
   component: VarselOmRevurderingProsessIndex,
@@ -37,22 +30,19 @@ type Story = StoryObj<typeof meta>;
 
 export const ForFørstegangsbehandling: Story = {
   args: {
-    behandling: defaultBehandling,
+    behandling: lagBehandling({ språkkode: 'NN' }),
   },
 };
 
 export const ForRevurdering: Story = {
   args: {
-    behandling: {
-      ...defaultBehandling,
-      type: 'BT-004',
-    },
+    behandling: lagBehandling({ språkkode: 'NN', type: 'BT-004' }),
   },
 };
 
 export const Readonly: Story = {
   args: {
-    behandling: defaultBehandling,
+    behandling: lagBehandling({ språkkode: 'NN' }),
     isReadOnly: true,
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.VARSEL_REVURDERING_MANUELL, { begrunnelse: 'Test begrunnelse' }),

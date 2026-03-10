@@ -20,13 +20,17 @@ const defaultFamiliehendelse = {
     fødselsdato: '2019-01-01',
     termindato: '2019-01-01',
   },
-} as FamilieHendelse;
+} satisfies FamilieHendelse;
 
 const personoversikt = {
+  barn: [],
   bruker: {
+    adresser: [],
+    fødselsdato: '1979-01-01',
     kjønn: 'K',
+    sivilstand: 'UGIF',
   },
-} as Personoversikt;
+} satisfies Personoversikt;
 
 const beregningresultat: BeregningsresultatDagytelse = {
   perioder: [
@@ -151,6 +155,6 @@ export const MedBarnFodtLengeForForstePeriode: Story = {
       fødselTermin: {
         fødselsdato: '2017-01-01',
       },
-    } as FamilieHendelse,
+    } satisfies FamilieHendelse,
   },
 };

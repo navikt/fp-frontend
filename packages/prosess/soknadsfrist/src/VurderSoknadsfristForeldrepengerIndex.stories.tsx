@@ -23,7 +23,7 @@ const soknad = {
     utledetSøknadsfrist: '2019-10-01',
   },
   manglendeVedlegg: [],
-} as Soknad;
+} satisfies Soknad;
 
 const meta = {
   title: 'prosess/prosess-soknadsfrist',

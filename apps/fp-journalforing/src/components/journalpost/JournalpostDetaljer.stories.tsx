@@ -73,16 +73,16 @@ const detaljertJournalpostMal = {
       saksnummer: '155462542',
       ytelseType: 'SVP',
       opprettetDato: '2022-01-02',
-      status: 'AVSL',
+      status: 'AVSLU',
     },
     {
       saksnummer: '175419131',
       ytelseType: 'FP',
       opprettetDato: '2022-01-03',
-      status: 'AVSL',
+      status: 'AVSLU',
     },
   ],
-} as Journalpost;
+} satisfies Journalpost;
 
 const journalpostKlage = {
   journalpostId: journalpost.toString(),
@@ -115,7 +115,7 @@ const journalpostKlage = {
       status: 'LOP',
     },
   ],
-} as Journalpost;
+} satisfies Journalpost;
 
 const meta = {
   title: 'journalføring/journalføring/Journalpost',

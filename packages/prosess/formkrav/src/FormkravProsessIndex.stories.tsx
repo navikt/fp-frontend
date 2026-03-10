@@ -47,7 +47,7 @@ export const FormkravPanelForAksjonspunktNfp: Story = {
         fritekstTilBrev: 'test',
       },
       mottattDato: '2025-08-26',
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP, {
         status: 'UTFO',
@@ -63,9 +63,13 @@ export const FormkravPanelForAksjonspunktKaIkkePåklagd: Story = {
         begrunnelse: 'Dette er en begrunnelse',
         erKlagefirstOverholdt: true,
         erKlageKonkret: true,
+        avvistÅrsaker: [],
+        erKlagerPart: false,
+        erSignert: false,
+        påKlagdBehandlingUuid: '',
       },
       mottattDato: '2025-08-26',
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
     aksjonspunkterForPanel: [],
   },
 };
@@ -78,9 +82,12 @@ export const FormkravPanelForAksjonspunktKaValgtBehandling: Story = {
         begrunnelse: 'Dette er en begrunnelse',
         erKlagerPart: true,
         erSignert: true,
+        avvistÅrsaker: [],
+        erKlageKonkret: false,
+        erKlagefirstOverholdt: false,
       },
       mottattDato: '2025-08-26',
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
     aksjonspunkterForPanel: [],
   },
 };

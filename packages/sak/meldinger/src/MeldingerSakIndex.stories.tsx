@@ -2,8 +2,8 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import type { DokumentMalType, FagsakBehandlingDto } from '@navikt/fp-types';
+import { alleKodeverk, lagFagsakBehandling } from '@navikt/fp-storybook-utils';
+import type { DokumentMalType } from '@navikt/fp-types';
 
 import { MeldingerSakIndex } from './MeldingerSakIndex';
 
@@ -40,10 +40,7 @@ const meta = {
   args: {
     kanVeilede: false,
     revurderingVarslingArsak: alleKodeverk.RevurderingVarslingÅrsak,
-    behandling: {
-      brevmaler: TEMPLATES,
-      språkkode: 'NB',
-    } as FagsakBehandlingDto,
+    behandling: lagFagsakBehandling({ brevmaler: TEMPLATES }),
     forhåndsvisBrev: action('button-click'),
     submitCallback: action('button-click'),
     setMeldingFormData: action('button-click'),

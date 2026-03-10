@@ -46,7 +46,7 @@ const SAKSBEHANDLERE_OG_SAKSBEHANDLER_GRUPPER = {
       ],
     },
   ],
-} as SaksbehandlereOgSaksbehandlerGrupper;
+} satisfies SaksbehandlereOgSaksbehandlerGrupper;
 
 const meta = {
   title: 'los/avdelingsleder/grupper/GrupperPanel',

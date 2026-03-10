@@ -95,6 +95,14 @@ const defaultSak = {
   harVergeIÅpenBehandling: false,
 } satisfies Fagsak;
 
+const defaultBeregningsgrunnlag = {
+  avklaringsbehov: [],
+  beregningsgrunnlagPeriode: [],
+  erOverstyrtInntekt: false,
+  skjaeringstidspunktBeregning: '2021-01-01',
+  skjæringstidspunkt: '2021-01-01',
+} satisfies Beregningsgrunnlag;
+
 const meta = {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
@@ -226,16 +234,19 @@ export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
   args: {
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {
+      ...defaultBeregningsgrunnlag,
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
             {
+              dtoType: 'GENERELL',
+              aktivitetStatus: 'AT',
               overstyrtPrAar: 0,
             },
           ],
         },
       ],
-    } as Beregningsgrunnlag,
+    } satisfies Beregningsgrunnlag,
   },
 };
 
@@ -253,16 +264,19 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
     } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {
+      ...defaultBeregningsgrunnlag,
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
             {
+              dtoType: 'GENERELL',
+              aktivitetStatus: 'AT',
               overstyrtPrAar: 0,
             },
           ],
         },
       ],
-    } as Beregningsgrunnlag,
+    } satisfies Beregningsgrunnlag,
   },
 };
 
@@ -285,16 +299,19 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
     ],
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {
+      ...defaultBeregningsgrunnlag,
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
             {
+              dtoType: 'GENERELL',
+              aktivitetStatus: 'AT',
               overstyrtPrAar: 0,
             },
           ],
         },
       ],
-    } as Beregningsgrunnlag,
+    } satisfies Beregningsgrunnlag,
   },
 };
 
@@ -422,7 +439,8 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyrin
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
-    } as BeregningsresultatEs,
+      satsVerdi: 0,
+    } satisfies BeregningsresultatEs,
     fagsak: {
       ...defaultSak,
       fagsakYtelseType: 'ES',
@@ -439,7 +457,8 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
-    } as BeregningsresultatEs,
+      satsVerdi: 0,
+    } satisfies BeregningsresultatEs,
     fagsak: {
       ...defaultSak,
       fagsakYtelseType: 'ES',
@@ -453,7 +472,8 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
-    } as BeregningsresultatEs,
+      satsVerdi: 0,
+    } satisfies BeregningsresultatEs,
     fagsak: {
       ...defaultSak,
       fagsakYtelseType: 'ES',
@@ -466,22 +486,26 @@ export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
-    } as BeregningsresultatEs,
+      satsVerdi: 0,
+    } satisfies BeregningsresultatEs,
     fagsak: {
       ...defaultSak,
       fagsakYtelseType: 'ES',
     },
     beregningsgrunnlag: {
+      ...defaultBeregningsgrunnlag,
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
             {
+              dtoType: 'GENERELL',
+              aktivitetStatus: 'AT',
               overstyrtPrAar: 0,
             },
           ],
         },
       ],
-    } as Beregningsgrunnlag,
+    } satisfies Beregningsgrunnlag,
   },
 };
 
@@ -500,7 +524,8 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
-    } as BeregningsresultatEs,
+      satsVerdi: 0,
+    } satisfies BeregningsresultatEs,
     fagsak: {
       ...defaultSak,
       fagsakYtelseType: 'ES',
@@ -683,16 +708,19 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
     } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {
+      ...defaultBeregningsgrunnlag,
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
             {
+              dtoType: 'GENERELL',
+              aktivitetStatus: 'AT',
               overstyrtPrAar: 0,
             },
           ],
         },
       ],
-    } as Beregningsgrunnlag,
+    } satisfies Beregningsgrunnlag,
   },
 };
 
@@ -713,16 +741,19 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
     } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {
+      ...defaultBeregningsgrunnlag,
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
             {
+              dtoType: 'GENERELL',
+              aktivitetStatus: 'AT',
               overstyrtPrAar: 0,
             },
           ],
         },
       ],
-    } as Beregningsgrunnlag,
+    } satisfies Beregningsgrunnlag,
   },
 };
 
@@ -741,16 +772,19 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
     } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
     beregningsgrunnlag: {
+      ...defaultBeregningsgrunnlag,
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
             {
+              dtoType: 'GENERELL',
+              aktivitetStatus: 'AT',
               overstyrtPrAar: 0,
             },
           ],
         },
       ],
-    } as Beregningsgrunnlag,
+    } satisfies Beregningsgrunnlag,
   },
 };
 
@@ -846,7 +880,8 @@ export const SkalIkkeProduseresBrev: Story = {
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
-    } as BeregningsresultatEs,
+      satsVerdi: 0,
+    } satisfies BeregningsresultatEs,
   },
 };
 

@@ -5,11 +5,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagFagsak,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { Fagsak } from '@navikt/fp-types';
 
 import { UttakFaktaEøsIndex } from './UttakFaktaEøsIndex';
 
@@ -18,9 +18,7 @@ const meta = {
   component: UttakFaktaEøsIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    fagsak: {
-      relasjonsRolleType: 'FARA',
-    } as Fagsak,
+    fagsak: lagFagsak({ relasjonsRolleType: 'FARA' }),
     kanOverstyre: false,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART)],
   },
