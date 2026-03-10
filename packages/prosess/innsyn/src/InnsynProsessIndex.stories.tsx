@@ -57,7 +57,6 @@ type Story = StoryObj<typeof meta>;
 
 export const PanelForVurderingAvInnsyn: Story = {
   args: {
-    behandling: defaultBehandling,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_INNSYN)],
     innsyn: {
       dokumenter: [],
