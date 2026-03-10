@@ -112,10 +112,7 @@ const FAGSAK = {
   fagsakMarkeringer: [],
   historikkinnslag: [],
   kontrollResultat: {
-    kontrollresultat: '-',
-    iayFaresignaler: undefined,
-    medlFaresignaler: undefined,
-    faresignalVurdering: undefined,
+    kontrollresultat: 'IKKE_KLASSIFISERT',
   },
   harVergeIÅpenBehandling: false,
 } satisfies Fagsak;

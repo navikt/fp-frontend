@@ -83,10 +83,7 @@ const DEFAULT_FAGSAK = {
   historikkinnslag: [],
   notater: [],
   kontrollResultat: {
-    kontrollresultat: '-',
-    iayFaresignaler: undefined,
-    medlFaresignaler: undefined,
-    faresignalVurdering: undefined,
+    kontrollresultat: 'IKKE_KLASSIFISERT',
   },
   harVergeIÅpenBehandling: false,
 } satisfies Fagsak;

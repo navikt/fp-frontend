@@ -363,8 +363,7 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | 'AUTO'
   | 'MANU'
   | 'OVST'
-  | 'SAOV'
-  | '-';
+  | 'SAOV';
 
 export type foreldrepenger_behandlingslager_behandling_vedtak_Vedtaksbrev = 'AUTOMATISK' | 'FRITEKST' | 'INGEN' | '-';
 
@@ -873,7 +872,7 @@ export type foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAkti
   | 'UTDANNINGSPERMISJON'
   | '-';
 
-export type foreldrepenger_behandlingslager_behandling_søknad_ForeldreType = 'MOR' | 'FAR' | 'MEDMOR' | 'ANDRE' | '-';
+export type foreldrepenger_behandlingslager_behandling_søknad_ForeldreType = 'MOR' | 'FAR' | 'MEDMOR' | 'ANDRE';
 
 export type foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling =
   | '-'
@@ -966,8 +965,7 @@ export type foreldrepenger_behandlingslager_risikoklassifisering_FaresignalVurde
   | 'INNVILGET_UENDRET'
   | 'AVSLAG_FARESIGNAL'
   | 'AVSLAG_ANNET'
-  | 'INGEN_INNVIRKNING'
-  | '-';
+  | 'INGEN_INNVIRKNING';
 
 export type foreldrepenger_behandlingslager_uttak_PeriodeResultatType = 'INNVILGET' | 'AVSLÅTT' | 'MANUELL_BEHANDLING';
 
@@ -3712,8 +3710,7 @@ export type foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak =
   | 'IKKE_PAKLAGD_VEDTAK'
   | 'KLAGER_IKKE_PART'
   | 'IKKE_KONKRET'
-  | 'IKKE_SIGNERT'
-  | '-';
+  | 'IKKE_SIGNERT';
 
 export type tjenester_behandling_klage_KlageFormkravResultatDto = {
   avvistÅrsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
@@ -4187,7 +4184,7 @@ export type foreldrepenger_behandlingslager_geografisk_Landkoder =
   | 'ZWE'
   | '-';
 
-export type foreldrepenger_behandlingslager_geografisk_Region = 'NORDEN' | 'EOS' | 'ANNET' | '-';
+export type foreldrepenger_behandlingslager_geografisk_Region = 'NORDEN' | 'EOS' | 'ANNET';
 
 export type foreldrepenger_inngangsvilkaar_medlemskap_MedlemskapAvvik =
   | 'BOSATT_UTENLANDSOPPHOLD'
@@ -4932,8 +4929,7 @@ export type foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeTy
 export type foreldrepenger_behandlingslager_risikoklassifisering_Kontrollresultat =
   | 'HOY'
   | 'IKKE_HOY'
-  | 'IKKE_KLASSIFISERT'
-  | '-';
+  | 'IKKE_KLASSIFISERT';
 
 export type foreldrepenger_domene_person_verge_dto_VergeBehandlingsmenyEnum = 'SKJUL' | 'OPPRETT' | 'FJERN';
 
