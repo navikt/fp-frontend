@@ -1,8 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
-import type { SakslisteDto } from '@navikt/fp-types';
 
 import * as stories from './SletteSakslisteModal.stories';
 
@@ -16,25 +14,7 @@ describe('SletteSakslisteModal', () => {
 
     await userEvent.click(screen.getByText('Ja'));
 
-    await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
-    expect(submit).toHaveBeenNthCalledWith(1, {
-      sakslisteId: 1,
-      navn: 'Saksliste 1',
-      behandlingTyper: [],
-      fagsakYtelseTyper: [],
-      sortering: {
-        sorteringType: 'BEHFRIST',
-        fra: 1,
-        til: 4,
-        periodefilter: 'RELATIV_PERIODE_DAGER',
-      },
-      sorteringTyper: [],
-      saksbehandlere: [],
-      andreKriterie: {
-        inkluder: [],
-        ekskluder: [],
-      },
-    } satisfies SakslisteDto);
+    expect(submit).toHaveBeenCalledExactlyOnceWith(1234);
   });
 
   it('skal vise modal for sletting av saksliste og så svare nei', async () => {
@@ -44,6 +24,6 @@ describe('SletteSakslisteModal', () => {
 
     await userEvent.click(screen.getByText('Nei'));
 
-    await waitFor(() => expect(cancel).toHaveBeenCalledTimes(1));
+    expect(cancel).toHaveBeenCalledOnce();
   });
 });

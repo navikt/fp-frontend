@@ -3,6 +3,7 @@ import { http, HttpResponse } from 'msw';
 
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
+import { lagNySaksliste } from '../../../testdata/lagNySaksliste';
 import { LosUrl } from '../../data/fplosAvdelingslederApi';
 import { SaksbehandlereForSakslisteForm } from './SaksbehandlereForSakslisteForm';
 
@@ -21,6 +22,30 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
+
+const SbhSteffen = {
+  brukerIdent: 'S34354',
+  navn: 'Steffen',
+  ansattAvdeling: 'Avdeling Å',
+};
+
+const SbhEspen = {
+  brukerIdent: 'E23232',
+  navn: 'Espen Utvikler',
+  ansattAvdeling: 'Avdeling Å',
+};
+
+const SbhEirik = {
+  brukerIdent: 'E24353',
+  navn: 'Eirik',
+  ansattAvdeling: 'Avdeling Å',
+};
+
+const SbhKari = {
+  brukerIdent: 'K123456',
+  navn: 'Kari Kanari',
+  ansattAvdeling: 'Avdeling Å',
+};
 
 export const IngenSaksbehandlere: Story = {
   parameters: {
@@ -46,13 +71,7 @@ export const IngenSaksbehandlere: Story = {
         inkluder: [],
         ekskluder: [],
       },
-      saksbehandlere: [
-        {
-          brukerIdent: 'S34354',
-          navn: 'Steffen',
-          ansattAvdeling: '1234',
-        },
-      ],
+      saksbehandlere: [SbhSteffen],
     },
     avdelingensSaksbehandlere: [],
   },
@@ -68,40 +87,10 @@ export const ToSaksbehandlere: Story = {
     },
   },
   args: {
-    valgtSaksliste: {
-      sakslisteId: 1,
-      navn: 'Saksliste 1',
-      behandlingTyper: [],
-      fagsakYtelseTyper: [],
-      sortering: {
-        sorteringType: 'BEHFRIST',
-        periodefilter: 'FAST_PERIODE',
-      },
-      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-      andreKriterie: {
-        inkluder: [],
-        ekskluder: [],
-      },
-      saksbehandlere: [
-        {
-          brukerIdent: 'S34354',
-          navn: 'Steffen',
-          ansattAvdeling: 'Avdeling Å',
-        },
-      ],
-    },
-    avdelingensSaksbehandlere: [
-      {
-        brukerIdent: 'E23232',
-        navn: 'Espen Utvikler',
-        ansattAvdeling: 'Avdeling Å',
-      },
-      {
-        brukerIdent: 'S34354',
-        navn: 'Steffen',
-        ansattAvdeling: 'Avdeling Å',
-      },
-    ],
+    valgtSaksliste: lagNySaksliste({
+      saksbehandlere: [SbhSteffen],
+    }),
+    avdelingensSaksbehandlere: [SbhEspen, SbhSteffen],
   },
 };
 
@@ -115,45 +104,10 @@ export const TreSaksbehandlere: Story = {
     },
   },
   args: {
-    valgtSaksliste: {
-      sakslisteId: 1,
-      navn: 'Saksliste 1',
-      behandlingTyper: [],
-      fagsakYtelseTyper: [],
-      sortering: {
-        sorteringType: 'BEHFRIST',
-        periodefilter: 'FAST_PERIODE',
-      },
-      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-      andreKriterie: {
-        inkluder: [],
-        ekskluder: [],
-      },
-      saksbehandlere: [
-        {
-          brukerIdent: 'S34354',
-          navn: 'Steffen',
-          ansattAvdeling: 'Avdeling Å',
-        },
-      ],
-    },
-    avdelingensSaksbehandlere: [
-      {
-        brukerIdent: 'E23232',
-        navn: 'Espen Utvikler',
-        ansattAvdeling: 'Avdeling Å',
-      },
-      {
-        brukerIdent: 'S34354',
-        navn: 'Steffen',
-        ansattAvdeling: 'Avdeling Å',
-      },
-      {
-        brukerIdent: 'E24353',
-        navn: 'Eirik',
-        ansattAvdeling: 'Avdeling Å',
-      },
-    ],
+    valgtSaksliste: lagNySaksliste({
+      saksbehandlere: [SbhSteffen],
+    }),
+    avdelingensSaksbehandlere: [SbhEspen, SbhSteffen, SbhEirik],
   },
 };
 
@@ -168,16 +122,8 @@ export const SaksbehandlereSomErGruppert: Story = {
                 gruppeId: 1001,
                 gruppeNavn: 'Gruppe 1',
                 saksbehandlere: [
-                  {
-                    brukerIdent: 'S34354',
-                    navn: 'Steffen',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                  {
-                    brukerIdent: 'E23232',
-                    navn: 'Espen Utvikler',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
+                  SbhSteffen,
+                  SbhEspen,
                   {
                     brukerIdent: 'A123456',
                     navn: 'Anders Utvikler',
@@ -203,11 +149,7 @@ export const SaksbehandlereSomErGruppert: Story = {
                     navn: 'Marte',
                     ansattAvdeling: 'Avdeling Å',
                   },
-                  {
-                    brukerIdent: 'K123456',
-                    navn: 'Kari Kanari',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
+                  SbhKari,
                 ],
               },
               {
@@ -219,49 +161,18 @@ export const SaksbehandlereSomErGruppert: Story = {
                     navn: 'Marte',
                     ansattAvdeling: 'Avdeling Å',
                   },
-                  {
-                    brukerIdent: 'K123456',
-                    navn: 'Kari Kanari',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
+                  SbhKari,
                 ],
               },
               {
                 gruppeId: 1003,
                 gruppeNavn: 'Besluttergruppen',
-                saksbehandlere: [
-                  {
-                    brukerIdent: 'S34354',
-                    navn: 'Steffen',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                  {
-                    brukerIdent: 'E23232',
-                    navn: 'Espen Utvikler',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                  {
-                    brukerIdent: 'K123456',
-                    navn: 'Kari Kanari',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                ],
+                saksbehandlere: [SbhSteffen, SbhEspen, SbhKari],
               },
               {
                 gruppeId: 1004,
                 gruppeNavn: 'Hastefolket',
-                saksbehandlere: [
-                  {
-                    brukerIdent: 'S34354',
-                    navn: 'Steffen',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                  {
-                    brukerIdent: 'E23232',
-                    navn: 'Espen Utvikler',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                ],
+                saksbehandlere: [SbhSteffen, SbhEspen],
               },
             ],
           }),
@@ -271,44 +182,9 @@ export const SaksbehandlereSomErGruppert: Story = {
     },
   },
   args: {
-    valgtSaksliste: {
-      sakslisteId: 1,
-      navn: 'Saksliste 1',
-      behandlingTyper: [],
-      fagsakYtelseTyper: [],
-      sortering: {
-        sorteringType: 'BEHFRIST',
-        periodefilter: 'FAST_PERIODE',
-      },
-      sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-      andreKriterie: {
-        inkluder: [],
-        ekskluder: [],
-      },
-      saksbehandlere: [
-        {
-          brukerIdent: 'S34354',
-          navn: 'Steffen',
-          ansattAvdeling: 'Avdeling Å',
-        },
-      ],
-    },
-    avdelingensSaksbehandlere: [
-      {
-        brukerIdent: 'E23232',
-        navn: 'Espen Utvikler',
-        ansattAvdeling: 'Avdeling Å',
-      },
-      {
-        brukerIdent: 'S34354',
-        navn: 'Steffen',
-        ansattAvdeling: 'Avdeling Å',
-      },
-      {
-        brukerIdent: 'E24353',
-        navn: 'Eirik',
-        ansattAvdeling: 'Avdeling Å',
-      },
-    ],
+    valgtSaksliste: lagNySaksliste({
+      saksbehandlere: [SbhSteffen],
+    }),
+    avdelingensSaksbehandlere: [SbhEspen, SbhSteffen, SbhEirik],
   },
 };

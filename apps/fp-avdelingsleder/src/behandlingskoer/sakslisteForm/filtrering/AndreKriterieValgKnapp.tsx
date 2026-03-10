@@ -49,19 +49,17 @@ export const AndreKriterieValgKnapp = ({ andreKriterierType }: Props): ReactElem
   };
 
   return (
-    <HStack gap="space-8" data-testid={`av-og-pa-knapper-${kode}`}>
-      <HStack gap="space-4">
-        <PlussKnapp
-          iconTittel={intl.formatMessage({ id: 'AndreKriterieValgKnapp.PlusKnappIconTittel' })}
-          filterStatus={filterStatus}
-          toggle={toggleKnapp}
-        />
-        <MinusKnapp
-          iconTittel={intl.formatMessage({ id: 'AndreKriterieValgKnapp.MinusKnappIconTittel' })}
-          filterStatus={filterStatus}
-          toggle={toggleKnapp}
-        />
-      </HStack>
+    <HStack wrap={false} as="li" data-testid={`av-og-pa-knapper-${kode}`} className="pb-2">
+      <PlussKnapp
+        iconTittel={intl.formatMessage({ id: 'AndreKriterieValgKnapp.PlusKnappIconTittel' })}
+        filterStatus={filterStatus}
+        toggle={toggleKnapp}
+      />
+      <MinusKnapp
+        iconTittel={intl.formatMessage({ id: 'AndreKriterieValgKnapp.MinusKnappIconTittel' })}
+        filterStatus={filterStatus}
+        toggle={toggleKnapp}
+      />
       <BodyShort size="small">{andreKriterierType.navn}</BodyShort>
     </HStack>
   );
@@ -81,6 +79,7 @@ const PlussKnapp = ({ iconTittel, filterStatus, toggle }: KnappProps): ReactElem
     type="button"
     onClick={() => toggle(FilterStatus.PLUS)}
     aria-label="pluss"
+    className="mr-1 self-start"
   />
 );
 
@@ -93,6 +92,7 @@ const MinusKnapp = ({ iconTittel, filterStatus, toggle }: KnappProps): ReactElem
     type="button"
     onClick={() => toggle(FilterStatus.MINUS)}
     aria-label="minus"
+    className="mr-2 self-start"
   />
 );
 

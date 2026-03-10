@@ -1,5 +1,6 @@
 {
   "Label.Navn": "Navn",
+  "Label.Beskrivelse": "Beskrivelse",
   "Label.Behandlingstype": "Behandlingstype",
   "Label.Stønadstype": "Stønadstype",
   "Label.Alle": "Alle",
@@ -72,9 +73,9 @@
   "GjeldendeSakslisterTabell.AntallOppgaver": "Alle oppgaver",
   "GjeldendeSakslisterTabell.AntallReserverte": "Reserverte oppgaver",
   "GjeldendeSakslisterTabell.OppgaverForAvdeling": "Antall åpne behandlinger totalt",
-  "GjeldendeSakslisterTabell.SlettSaksliste": "Slett saksliste {navn}",
+  "GjeldendeSakslisterTabell.SlettSaksliste": "Slett saksliste {sakslisteNavn}",
 
-  "OppgaverGrafDialog.VisOppgaveGraf": "Vis oppgave graf",
+  "OppgaverGrafDialog.VisOppgaveGraf": "Vis oppgave graf for {sakslisteNavn}",
 
   "AntallOppgaverForSaksliste.HentingAvAntallOppgaverFeilet": "Henting av antall feilet",
   "AntallOppgaverForSaksliste.HentingAvAntallOppgaverHentes": "Henter antall oppgaver for behandlingskøen",

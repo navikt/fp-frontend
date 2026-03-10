@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import { ArrowDownIcon } from '@navikt/aksel-icons';
-import { HStack } from '@navikt/ds-react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { PlusCircleIcon } from '@navikt/aksel-icons';
+import { BodyShort, Box, Button, Detail, HStack, Label, Loader, VStack } from '@navikt/ds-react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import type { SaksbehandlerDto } from '@navikt/fp-types';
+import type { SaksbehandlerDto, SakslisteDto } from '@navikt/fp-types';
 
 import {
+  LosUrl,
   oppgaverForAvdelingAntallOptions,
   opprettNySaksliste,
   sakslisterForAvdelingOptions,
+  slettSaksliste,
 } from '../data/fplosAvdelingslederApi';
 import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
-import { SaksbehandlereForSakslisteForm } from './saksbehandlerForm/SaksbehandlereForSakslisteForm';
-import { UtvalgskriterierForSakslisteForm } from './sakslisteForm/UtvalgskriterierForSakslisteForm';
-
-import styles from './endreSakslisterPanel.module.css';
+import { SletteSakslisteModal } from './SletteSakslisteModal';
 
 interface Props {
   valgtAvdelingEnhet: string;
@@ -24,10 +23,13 @@ interface Props {
 }
 
 export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehandlere }: Props) => {
-  const intl = useIntl();
   const [valgtSakslisteId, setValgtSakslisteId] = useState<number>();
+  const [valgtSakslisteForSletting, setValgtSakslisteForSletting] = useState<SakslisteDto>();
+
+  const queryClient = useQueryClient();
 
   const { data: oppgaverForAvdelingAntall } = useQuery(oppgaverForAvdelingAntallOptions(valgtAvdelingEnhet));
+
   const { data: sakslister, refetch: refetchSakslister } = useQuery(sakslisterForAvdelingOptions(valgtAvdelingEnhet));
 
   const { mutate: lagNySakslisteOgHentAvdelingensSakslisterPåNytt } = useMutation({
@@ -37,44 +39,67 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
       void refetchSakslister();
     },
   });
+  const { mutate: fjernSaksliste } = useMutation({
+    mutationFn: (sakslisteId: number) => slettSaksliste(sakslisteId, valgtAvdelingEnhet),
+    onSuccess: () => {
+      setValgtSakslisteId(undefined);
+      void queryClient.invalidateQueries({
+        queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING, valgtAvdelingEnhet],
+      });
+    },
+  });
 
-  const valgtSaksliste = sakslister.find(s => s.sakslisteId === valgtSakslisteId);
+  const fjernSakslisteOgSkjulModal = (sakslisteId: number): void => {
+    setValgtSakslisteForSletting(undefined);
+    fjernSaksliste(sakslisteId);
+  };
 
   return (
-    <GjeldendeSakslisterTabell
-      sakslister={sakslister}
-      setValgtSakslisteId={setValgtSakslisteId}
-      valgtSakslisteId={valgtSakslisteId}
-      valgtAvdelingEnhet={valgtAvdelingEnhet}
-      oppgaverForAvdelingAntall={oppgaverForAvdelingAntall}
-      lagNySaksliste={lagNySakslisteOgHentAvdelingensSakslisterPåNytt}
-      resetValgtSakslisteId={() => setValgtSakslisteId(undefined)}
-    >
-      <div
-        style={{
-          marginBottom: '20px',
-          marginLeft: '-55px',
-          marginRight: '-55px',
-        }}
+    <VStack gap="space-16">
+      <HStack justify="space-between">
+        <Label size="small">
+          <FormattedMessage id="GjeldendeSakslisterTabell.GjeldendeLister" />
+        </Label>
+        <Box background="neutral-moderate" borderRadius="8" paddingBlock="space-8" paddingInline="space-16">
+          <VStack align="end">
+            <Detail>
+              <FormattedMessage id="GjeldendeSakslisterTabell.OppgaverForAvdeling" />
+            </Detail>
+            {oppgaverForAvdelingAntall === undefined ? (
+              <Loader size="xsmall" />
+            ) : (
+              <BodyShort size="large">{oppgaverForAvdelingAntall}</BodyShort>
+            )}
+          </VStack>
+        </Box>
+      </HStack>
+
+      <GjeldendeSakslisterTabell
+        valgtAvdelingEnhet={valgtAvdelingEnhet}
+        valgtSakslisteId={valgtSakslisteId}
+        setValgtSakslisteId={setValgtSakslisteId}
+        setValgtSakslisteForSletting={setValgtSakslisteForSletting}
+        sakslister={sakslister}
+        avdelingensSaksbehandlere={avdelingensSaksbehandlere}
+      />
+
+      <Button
+        className="self-start"
+        size="xsmall"
+        variant="tertiary"
+        onClick={() => lagNySakslisteOgHentAvdelingensSakslisterPåNytt()}
+        icon={<PlusCircleIcon />}
+        iconPosition="right"
       >
-        {valgtSakslisteId && valgtSaksliste && (
-          <React.Fragment key={valgtSaksliste.sakslisteId}>
-            <UtvalgskriterierForSakslisteForm valgtSaksliste={valgtSaksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
-            <HStack gap="space-16" justify="center" align="center">
-              <ArrowDownIcon
-                className={styles['arrow']}
-                title={intl.formatMessage({ id: 'EndreSakslisterPanel.KnyttetMotSaksbehandlere' })}
-              />
-              <FormattedMessage id="EndreSakslisterPanel.KnyttetMotSaksbehandlere" />
-            </HStack>
-            <SaksbehandlereForSakslisteForm
-              valgtSaksliste={valgtSaksliste}
-              valgtAvdelingEnhet={valgtAvdelingEnhet}
-              avdelingensSaksbehandlere={avdelingensSaksbehandlere}
-            />
-          </React.Fragment>
-        )}
-      </div>
-    </GjeldendeSakslisterTabell>
+        <FormattedMessage id="GjeldendeSakslisterTabell.LeggTilListe" />
+      </Button>
+      {valgtSakslisteForSletting && (
+        <SletteSakslisteModal
+          valgtSaksliste={valgtSakslisteForSletting}
+          cancel={() => setValgtSakslisteForSletting(undefined)}
+          submit={fjernSakslisteOgSkjulModal}
+        />
+      )}
+    </VStack>
   );
 };

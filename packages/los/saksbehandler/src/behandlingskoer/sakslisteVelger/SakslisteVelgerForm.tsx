@@ -12,8 +12,9 @@ import {
   PlusIcon,
   SackKronerIcon,
 } from '@navikt/aksel-icons';
-import { BodyShort, Box, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Button, Detail, Heading, HStack, Label, Spacer, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -268,7 +269,7 @@ export const SakslisteVelgerForm = ({
 
   return (
     <VStack gap="space-24" className={styles['container']}>
-      <HStack justify="space-between" align="end">
+      <HStack wrap={false} gap="space-20">
         <RhfForm formMethods={formMethods}>
           <RhfSelect
             name="sakslisteId"
@@ -279,15 +280,21 @@ export const SakslisteVelgerForm = ({
                 {saksliste.navn}
               </option>
             ))}
-            className={styles['sakslisteSelect']}
+            className="min-w-2xs max-w-2xl"
           />
         </RhfForm>
+        {valgtSaksliste?.beskrivelse && (
+          <Detail className="content-end pb-1 whitespace-pre-line">{valgtSaksliste.beskrivelse}</Detail>
+        )}
+        <Spacer />
         <Button
+          size="small"
           variant="tertiary"
           type="button"
           onClick={() => setVisKøFiltere(!visKøFiltere)}
           icon={visKøFiltere ? <ChevronUpIcon aria-hidden /> : <ChevronDownIcon aria-hidden />}
           iconPosition="right"
+          className="self-end"
         >
           <FormattedMessage id="SakslisteVelgerForm.FilterForKoen" />
         </Button>
@@ -340,48 +347,60 @@ export const SakslisteVelgerForm = ({
               </HStack>
             )}
 
-            <VStack gap="space-8">
-              <Label size="small">
-                <FormattedMessage id="SakslisteVelgerForm.AndreSomJobber" />
-              </Label>
-              <HStack gap="space-8">
-                {sorterteSaksbehandlere
-                  ?.slice(
-                    0,
-                    sorterteSaksbehandlere.length > 3 && !visAlleSaksbehandlere ? 3 : sorterteSaksbehandlere.length,
-                  )
-                  .map(s => (
-                    <SaksbehandlerBadge key={s.brukerIdent} icon={<PersonHeadsetIcon aria-hidden />} label={s.navn} />
-                  ))}
-                {sorterteSaksbehandlere && sorterteSaksbehandlere.length > 3 && (
-                  <HStack gap="space-8">
-                    {!visAlleSaksbehandlere && (
-                      <SaksbehandlerBadge
-                        icon={<PlusIcon aria-hidden />}
-                        label={
-                          <FormattedMessage
-                            id="SakslisteVelgerForm.Andre"
-                            values={{ antallAndre: sorterteSaksbehandlere.length - 3 }}
+            <LabeledValue
+              size="small"
+              label={<FormattedMessage id="SakslisteVelgerForm.AndreSomJobber" />}
+              fieldType="component"
+              value={
+                sorterteSaksbehandlere?.length === 0 ? (
+                  <BodyShort size="small">
+                    <FormattedMessage id="SakslisteVelgerForm.Ingen" />
+                  </BodyShort>
+                ) : (
+                  <HStack gap="space-8" paddingBlock="space-8">
+                    {sorterteSaksbehandlere
+                      ?.slice(
+                        0,
+                        sorterteSaksbehandlere.length > 3 && !visAlleSaksbehandlere ? 3 : sorterteSaksbehandlere.length,
+                      )
+                      .map(s => (
+                        <SaksbehandlerBadge
+                          key={s.brukerIdent}
+                          icon={<PersonHeadsetIcon aria-hidden />}
+                          label={s.navn}
+                        />
+                      ))}
+                    {sorterteSaksbehandlere && sorterteSaksbehandlere.length > 3 && (
+                      <>
+                        {!visAlleSaksbehandlere && (
+                          <SaksbehandlerBadge
+                            icon={<PlusIcon aria-hidden />}
+                            label={
+                              <FormattedMessage
+                                id="SakslisteVelgerForm.Andre"
+                                values={{ antallAndre: sorterteSaksbehandlere.length - 3 }}
+                              />
+                            }
                           />
-                        }
-                      />
+                        )}
+                        <Button
+                          variant="tertiary"
+                          size="xsmall"
+                          type="button"
+                          onClick={() => setVisAlleSaksbehandlere(!visAlleSaksbehandlere)}
+                        >
+                          {visAlleSaksbehandlere ? (
+                            <FormattedMessage id="SakslisteVelgerForm.VisFærre" />
+                          ) : (
+                            <FormattedMessage id="SakslisteVelgerForm.VisFlere" />
+                          )}
+                        </Button>
+                      </>
                     )}
-                    <Button
-                      variant="tertiary"
-                      size="xsmall"
-                      type="button"
-                      onClick={() => setVisAlleSaksbehandlere(!visAlleSaksbehandlere)}
-                    >
-                      {visAlleSaksbehandlere ? (
-                        <FormattedMessage id="SakslisteVelgerForm.VisFærre" />
-                      ) : (
-                        <FormattedMessage id="SakslisteVelgerForm.VisFlere" />
-                      )}
-                    </Button>
                   </HStack>
-                )}
-              </HStack>
-            </VStack>
+                )
+              }
+            />
           </VStack>
         </Box>
       )}

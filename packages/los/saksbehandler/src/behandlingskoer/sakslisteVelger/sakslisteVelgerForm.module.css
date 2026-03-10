@@ -1,7 +1,3 @@
-.sakslisteSelect {
-  min-width: 250px;
-}
-
 .container {
   background-color: var(--ax-bg-neutral-soft);
   border-bottom: 1px solid var(--ax-border-neutral-subtle);

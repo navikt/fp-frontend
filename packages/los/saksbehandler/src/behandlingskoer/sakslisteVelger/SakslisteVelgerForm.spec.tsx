@@ -22,10 +22,11 @@ describe('SakslisteVelgerForm', () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     const { getByText } = render(<Default />);
 
-    expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
-    expect(screen.queryByText('Saksliste 2')).not.toBeInTheDocument();
+    expect(await screen.findByText('A03 Førstegangsbehandling')).toBeInTheDocument();
+    expect(screen.queryByText('A04 Revurdering')).not.toBeInTheDocument();
 
-    expect((getByText('Saksliste 1') as HTMLOptionElement).selected).toBeTruthy();
+    expect((getByText('A03 Førstegangsbehandling') as HTMLOptionElement).selected).toBeTruthy();
+    expect(screen.getByText('Direkte utbetaling')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
@@ -48,12 +49,12 @@ describe('SakslisteVelgerForm', () => {
     applyRequestHandlers(MedToSakslister.parameters['msw'] as MswParameters['msw']);
     const { getByLabelText, getByText } = render(<MedToSakslister />);
 
-    expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
+    expect(await screen.findByText('A03 Førstegangsbehandling')).toBeInTheDocument();
 
-    expect(screen.getByText('Saksliste 2')).toBeInTheDocument();
+    expect(screen.getByText('A04 Revurdering')).toBeInTheDocument();
 
-    expect((getByText('Saksliste 1') as HTMLOptionElement).selected).toBeTruthy();
-    expect((getByText('Saksliste 2') as HTMLOptionElement).selected).toBeFalsy();
+    expect((getByText('A03 Førstegangsbehandling') as HTMLOptionElement).selected).toBeTruthy();
+    expect((getByText('A04 Revurdering') as HTMLOptionElement).selected).toBeFalsy();
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
@@ -63,8 +64,8 @@ describe('SakslisteVelgerForm', () => {
 
     await userEvent.selectOptions(getByLabelText('Behandlingskø'), '2');
 
-    expect((getByText('Saksliste 1') as HTMLOptionElement).selected).toBeFalsy();
-    expect((getByText('Saksliste 2') as HTMLOptionElement).selected).toBeTruthy();
+    expect((getByText('A03 Førstegangsbehandling') as HTMLOptionElement).selected).toBeFalsy();
+    expect((getByText('A04 Revurdering') as HTMLOptionElement).selected).toBeTruthy();
 
     expect(screen.getByText('Svangerskapspenger')).toBeInTheDocument();
 
@@ -142,7 +143,7 @@ describe('SakslisteVelgerForm', () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
-    expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
+    expect(await screen.findByText('A03 Førstegangsbehandling')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Filtere for køen'));
 
