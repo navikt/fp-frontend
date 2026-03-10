@@ -10,13 +10,31 @@ import type { BehandlingFpSak, KlageVurdering } from '@navikt/fp-types';
 import { VedtakKlageProsessIndex } from './VedtakKlageProsessIndex';
 
 const behandling = {
+  aksjonspunkt: [],
+  aktivPapirsøknad: false,
+  behandlendeEnhetId: '4820',
+  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
+  behandlingHenlagt: false,
+  behandlingPåVent: false,
+  behandlingÅrsaker: [],
+  behandlingsresultat: {
+    harRedigertVedtaksbrev: false,
+    id: 1,
+    type: 'KLAGE_AVVIST',
+    vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+  },
+  harSattEndringsdato: false,
+  harSøknad: true,
+  id: 1,
+  links: [],
+  opprettet: '2020-01-01',
+  språkkode: 'NB',
+  status: 'UTRED',
+  type: 'BT-002',
   uuid: '1',
   versjon: 1,
-  behandlingsresultat: {
-    type: 'KLAGE_AVVIST',
-  },
-  behandlingPåVent: false,
-} as BehandlingFpSak;
+  vilkår: [],
+} satisfies BehandlingFpSak;
 
 const meta = {
   title: 'prosess/klage/prosess-vedtak-klage',
@@ -44,8 +62,14 @@ export const VedtakspanelDerKlageErVurdertAvNk: Story = {
       },
       klageFormkravResultatKA: {
         avvistÅrsaker: ['IKKE_KONKRET'],
+        begrunnelse: '',
+        erKlageKonkret: false,
+        erKlagefirstOverholdt: false,
+        erKlagerPart: false,
+        erSignert: false,
+        påKlagdBehandlingUuid: '',
       },
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
   },
 };
 
@@ -60,7 +84,13 @@ export const VedtakspanelDerKlageErVurdertAvNfp: Story = {
       },
       klageFormkravResultatKA: {
         avvistÅrsaker: ['IKKE_KONKRET'],
+        begrunnelse: '',
+        erKlageKonkret: false,
+        erKlagefirstOverholdt: false,
+        erKlagerPart: false,
+        erSignert: false,
+        påKlagdBehandlingUuid: '',
       },
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
   },
 };

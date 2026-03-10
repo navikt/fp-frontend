@@ -18,18 +18,17 @@ const soknad = {
   mottattDato: '2019-01-01',
   begrunnelseForSenInnsending: 'Dette er en begrunnelse',
   søknadsfrist: {
-    mottattDato: '2019-01-01',
     utledetSøknadsfrist: '2019-07-01',
     dagerOversittetFrist: 2,
   },
   manglendeVedlegg: [],
-} as Soknad;
+} satisfies Soknad;
 
 const familiehendelse = {
   fødselTermin: {
     fødselsdato: '2019-01-02',
   },
-} as FamilieHendelse;
+} satisfies FamilieHendelse;
 
 const meta = {
   title: 'prosess/prosess-vilkar-soknadsfrist',
@@ -72,12 +71,32 @@ export const OppfyltVilkår: Story = {
 export const AvslåttVilkår: Story = {
   args: {
     behandling: {
-      uuid: '1',
-      versjon: 1,
+      aksjonspunkt: [],
+      aktivPapirsøknad: false,
+      behandlendeEnhetId: '4820',
+      behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
+      behandlingHenlagt: false,
+      behandlingPåVent: false,
+      behandlingÅrsaker: [],
       behandlingsresultat: {
         avslagsarsak: '1099',
+        harRedigertVedtaksbrev: false,
+        id: 1,
+        type: 'AVSLÅTT',
+        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
       },
-    } as BehandlingFpSak,
+      harSattEndringsdato: false,
+      harSøknad: true,
+      id: 1,
+      links: [],
+      opprettet: '2020-01-01',
+      språkkode: 'NB',
+      status: 'UTRED',
+      type: 'BT-002',
+      uuid: '1',
+      versjon: 1,
+      vilkår: [],
+    } satisfies BehandlingFpSak,
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET, {
         status: 'UTFO',

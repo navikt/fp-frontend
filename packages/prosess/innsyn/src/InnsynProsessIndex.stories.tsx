@@ -14,10 +14,25 @@ import type { BehandlingFpSak, Innsyn, InnsynDokument } from '@navikt/fp-types';
 import { InnsynProsessIndex } from './InnsynProsessIndex';
 
 const defaultBehandling = {
+  aksjonspunkt: [],
+  aktivPapirsøknad: false,
+  behandlendeEnhetId: '4820',
+  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
+  behandlingHenlagt: false,
+  behandlingPåVent: false,
+  behandlingÅrsaker: [],
+  harSattEndringsdato: false,
+  harSøknad: true,
+  id: 1,
+  links: [],
+  opprettet: '2020-01-01',
+  språkkode: 'NB',
+  status: 'UTRED',
+  type: 'BT-002',
   uuid: '1',
   versjon: 1,
-  behandlingPåVent: false,
-} as BehandlingFpSak;
+  vilkår: [],
+} satisfies BehandlingFpSak;
 
 const meta = {
   title: 'prosess/innsyn/prosess-innsyn',
@@ -45,7 +60,9 @@ export const PanelForVurderingAvInnsyn: Story = {
     behandling: defaultBehandling,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_INNSYN)],
     innsyn: {
-      dokumenter: [] as InnsynDokument[],
+      dokumenter: [],
+      innsynMottattDato: '2021-01-01',
+      innsynResultatType: 'INNV',
       vedtaksdokumentasjon: [
         {
           behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
@@ -53,7 +70,7 @@ export const PanelForVurderingAvInnsyn: Story = {
           opprettetDato: '2019-01-01',
         },
       ],
-    } as Innsyn,
+    } satisfies Innsyn,
   },
 };
 
@@ -70,7 +87,7 @@ export const InnsynSattPaVent: Story = {
     ],
     isReadOnly: true,
     innsyn: {
-      dokumenter: [] as InnsynDokument[],
+      dokumenter: [],
       innsynResultatType: 'INNV',
       innsynMottattDato: '2021-12-12',
       vedtaksdokumentasjon: [
@@ -80,6 +97,6 @@ export const InnsynSattPaVent: Story = {
           opprettetDato: '2019-01-01',
         },
       ],
-    } as Innsyn,
+    } satisfies Innsyn,
   },
 };

@@ -11,7 +11,8 @@ import { BehandlingPaVent } from './BehandlingPaVent';
 const link = {
   href: '/fpsak/api/behandlinger/endre-pa-vent',
   rel: 'endre-pa-vent',
-};
+  type: 'POST',
+} as const;
 
 const meta = {
   title: 'app/BehandlingPaVent',
@@ -31,36 +32,43 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const DEFAULT_BEHANDLING = {
+  uuid: '121212',
+  versjon: 1,
+  behandlingPåVent: true,
+  status: 'UTRED',
+  type: 'BT-002',
+  behandlingHenlagt: false,
+  fristBehandlingPåVent: '2030-10-10',
+  venteÅrsakKode: 'AVV_FODSEL',
+  links: [link],
+  aksjonspunkt: [],
+  aktivPapirsøknad: false,
+  behandlendeEnhetId: '4820',
+  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
+  behandlingÅrsaker: [],
+  harSattEndringsdato: false,
+  harSøknad: true,
+  id: 1,
+  opprettet: '2020-01-01',
+  språkkode: 'NB',
+  vilkår: [],
+} satisfies BehandlingFpSak;
+
 export const BehandlingSattPåVent: Story = {
   args: {
     behandling: {
-      uuid: '121212',
-      versjon: 1,
-      behandlingPåVent: true,
-      status: 'UTRED',
-      type: 'BT-002',
-      behandlingHenlagt: false,
-      fristBehandlingPåVent: '2030-10-10',
-      venteÅrsakKode: 'AVV_FODSEL',
+      ...DEFAULT_BEHANDLING,
       aksjonspunkt: [lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5069)],
-      links: [link],
-    } as BehandlingFpSak,
+    } satisfies BehandlingFpSak,
   },
 };
 
 export const BehandlingSattManueltPåVent: Story = {
   args: {
     behandling: {
-      uuid: '121212',
-      versjon: 1,
-      behandlingPåVent: true,
-      status: 'UTRED',
-      type: 'BT-002',
-      behandlingHenlagt: false,
-      fristBehandlingPåVent: '2030-10-10',
-      venteÅrsakKode: 'AVV_FODSEL',
+      ...DEFAULT_BEHANDLING,
       aksjonspunkt: [lagAksjonspunkt(AksjonspunktKode.AUTO_MANUELT_SATT_PÅ_VENT)],
-      links: [link],
-    } as BehandlingFpSak,
+    } satisfies BehandlingFpSak,
   },
 };

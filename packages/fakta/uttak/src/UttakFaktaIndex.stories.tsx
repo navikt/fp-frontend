@@ -23,6 +23,25 @@ const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   },
 };
 
+const defaultFagsak = {
+  aktørId: '9999999999999',
+  behandlingTypeKanOpprettes: [],
+  behandlinger: [],
+  bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K' as const, navn: 'Søker Søkersen', språkkode: 'NB' as const },
+  brukerManglerAdresse: false,
+  dekningsgrad: 100,
+  fagsakMarkeringer: [],
+  fagsakYtelseType: 'FP' as const,
+  harVergeIÅpenBehandling: false,
+  historikkinnslag: [],
+  kontrollResultat: { kontrollresultat: 'IKKE_KLASSIFISERT' as const },
+  notater: [],
+  relasjonsRolleType: 'MORA' as const,
+  sakSkalTilInfotrygd: false,
+  saksnummer: '12345',
+  status: 'UBEH' as const,
+} satisfies Fagsak;
+
 const meta = {
   title: 'fakta/fakta-uttak',
   component: UttakFaktaIndex,
@@ -469,6 +488,6 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
       },
     ],
     kanOverstyre: false,
-    fagsak: { relasjonsRolleType: 'FARA' } as Fagsak,
+    fagsak: { ...defaultFagsak, relasjonsRolleType: 'FARA' as const } satisfies Fagsak,
   },
 };

@@ -51,14 +51,23 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
     svangerskapspengerTilrettelegging: {
       arbeidsforholdListe: [
         {
+          avklarteOppholdPerioder: [],
+          kanTilrettelegges: true,
+          skalBrukes: true,
+          tilretteleggingBehovFom: '2019-01-01',
           tilretteleggingDatoer: [
             {
+              fom: '2019-01-01',
+              kilde: 'SØKNAD',
               type: 'DELVIS_TILRETTELEGGING',
             },
           ],
-        } as ArbeidsforholdFodselOgTilrettelegging,
+          tilretteleggingId: 1,
+          velferdspermisjoner: [],
+        } satisfies ArbeidsforholdFodselOgTilrettelegging,
       ],
-    } as FodselOgTilrettelegging,
+      saksbehandlet: false,
+    } satisfies FodselOgTilrettelegging,
   },
 };
 
@@ -82,10 +91,30 @@ export const AvslåttVilkår: Story = {
     behandling: {
       uuid: '1',
       versjon: 1,
+      type: 'BT-002',
+      status: 'UTRED',
+      språkkode: '-',
       behandlingsresultat: {
         avslagsarsak: '1099',
+        harRedigertVedtaksbrev: false,
+        id: 0,
+        type: 'AVSLÅTT',
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
-    } as BehandlingFpSak,
+      behandlingPåVent: false,
+      behandlingHenlagt: false,
+      aksjonspunkt: [],
+      behandlingÅrsaker: [],
+      behandlendeEnhetId: '',
+      behandlendeEnhetNavn: '',
+      aktivPapirsøknad: false,
+      vilkår: [],
+      links: [],
+      harSøknad: false,
+      harSattEndringsdato: false,
+      id: 1,
+      opprettet: '2020-01-01',
+    } satisfies BehandlingFpSak,
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET, {
         status: 'UTFO',

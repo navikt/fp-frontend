@@ -7,6 +7,15 @@ import type { AnkeVurdering } from '@navikt/fp-types';
 
 import { AnkeProsessIndex } from './AnkeProsessIndex';
 
+const defaultAnkeVurderingResultat = {
+  begrunnelse: '',
+  erAnkerIkkePart: false,
+  erFristIkkeOverholdt: false,
+  erIkkeKonkret: false,
+  erIkkeSignert: false,
+  erSubsidiartRealitetsbehandles: false,
+};
+
 const meta = {
   title: 'prosess/anke/prosess-anke',
   component: AnkeProsessIndex,
@@ -24,13 +33,14 @@ export const OmjørResultatTilUgunst: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         ankeVurdering: 'ANKE_OMGJOER',
         begrunnelse: 'Dette er en begrunnelse',
         ankeOmgjørÅrsak: 'ULIK_VURDERING',
         ankeVurderingOmgjør: 'ANKE_TIL_UGUNST',
         fritekstTilBrev: 'Dette er en fritekst',
       },
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -38,12 +48,13 @@ export const OpphevResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         ankeVurdering: 'ANKE_OPPHEVE_OG_HJEMSENDE',
         begrunnelse: 'Dette er en begrunnelse',
         ankeOmgjørÅrsak: 'ULIK_REGELVERKSTOLKNING',
         fritekstTilBrev: 'Dette er en fritekst',
       },
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -51,12 +62,13 @@ export const HjemsendResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         ankeVurdering: 'ANKE_HJEMSENDE_UTEN_OPPHEV',
         begrunnelse: 'Dette er en begrunnelse',
         ankeOmgjørÅrsak: 'ULIK_REGELVERKSTOLKNING',
         fritekstTilBrev: 'Dette er en fritekst',
       },
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -64,6 +76,7 @@ export const AvvisResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         ankeVurdering: 'ANKE_AVVIS',
         begrunnelse: 'Dette er en begrunnelse',
         ankeOmgjørÅrsak: 'ULIK_REGELVERKSTOLKNING',
@@ -72,7 +85,7 @@ export const AvvisResultat: Story = {
         erIkkeKonkret: true,
         fritekstTilBrev: 'Dette er en fritekst',
       },
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -80,11 +93,12 @@ export const StadfestResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         ankeVurdering: 'ANKE_STADFESTE_YTELSESVEDTAK',
         begrunnelse: 'Dette er en begrunnelse',
         fritekstTilBrev: 'Dette er en fritekst',
       },
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -93,7 +107,7 @@ export const UnderBehandlingIKabal: Story = {
     ankeVurdering: {
       underBehandlingKabal: true,
       behandletAvKabal: false,
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -101,6 +115,7 @@ export const ErBehandletIKabal: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         ankeVurdering: 'ANKE_OMGJOER',
         ankeVurderingOmgjør: 'ANKE_DELVIS_OMGJOERING_TIL_GUNST',
         begrunnelse: '',
@@ -112,6 +127,6 @@ export const ErBehandletIKabal: Story = {
       },
       underBehandlingKabal: false,
       behandletAvKabal: true,
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };

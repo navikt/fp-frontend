@@ -14,6 +14,25 @@ import type { Fagsak, FastsattOpptjening } from '@navikt/fp-types';
 
 import { OpptjeningVilkarProsessIndex } from './OpptjeningVilkarProsessIndex';
 
+const defaultFagsak = {
+  aktørId: '',
+  behandlingTypeKanOpprettes: [],
+  behandlinger: [],
+  bruker: { navn: '', fødselsnummer: '', kjønn: '-' as const, fødselsdato: '', språkkode: '-' as const },
+  brukerManglerAdresse: false,
+  dekningsgrad: 0,
+  fagsakMarkeringer: [],
+  fagsakYtelseType: 'FP' as const,
+  harVergeIÅpenBehandling: false,
+  historikkinnslag: [],
+  kontrollResultat: { kontrollresultat: '-' as const },
+  notater: [],
+  relasjonsRolleType: '-' as const,
+  sakSkalTilInfotrygd: false,
+  saksnummer: '',
+  status: 'LOP' as const,
+} satisfies Fagsak;
+
 const defaultFastsattOpptjening = {
   opptjeningperiode: {
     måneder: 2,
@@ -45,8 +64,9 @@ const meta = {
     isReadOnly: false,
     status: 'IKKE_VURDERT',
     fagsak: {
+      ...defaultFagsak,
       fagsakYtelseType: 'FP',
-    } as Fagsak,
+    } satisfies Fagsak,
     vilkårForPanel: [lagVilkår('FP_VK_21')],
   },
   render: args => <OpptjeningVilkarProsessIndex {...args} />,
@@ -65,8 +85,9 @@ export const ÅpentAksjonspunkt: Story = {
 export const ÅpentAksjonspunktSvangerskapspenger: Story = {
   args: {
     fagsak: {
+      ...defaultFagsak,
       fagsakYtelseType: 'SVP',
-    } as Fagsak,
+    } satisfies Fagsak,
     fastsattOpptjening: defaultFastsattOpptjening,
     aksjonspunkterForPanel: [defaultAksjonspunkt],
   },

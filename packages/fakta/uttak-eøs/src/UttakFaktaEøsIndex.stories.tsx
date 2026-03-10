@@ -13,14 +13,31 @@ import type { Fagsak } from '@navikt/fp-types';
 
 import { UttakFaktaEøsIndex } from './UttakFaktaEøsIndex';
 
+const defaultFagsak = {
+  aktørId: '9999999999999',
+  behandlingTypeKanOpprettes: [],
+  behandlinger: [],
+  bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K' as const, navn: 'Søker Søkersen', språkkode: 'NB' as const },
+  brukerManglerAdresse: false,
+  dekningsgrad: 100,
+  fagsakMarkeringer: [],
+  fagsakYtelseType: 'FP' as const,
+  harVergeIÅpenBehandling: false,
+  historikkinnslag: [],
+  kontrollResultat: { kontrollresultat: 'IKKE_KLASSIFISERT' as const },
+  notater: [],
+  relasjonsRolleType: 'MORA' as const,
+  sakSkalTilInfotrygd: false,
+  saksnummer: '12345',
+  status: 'UBEH' as const,
+} satisfies Fagsak;
+
 const meta = {
   title: 'fakta/fakta-uttak-eøs',
   component: UttakFaktaEøsIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    fagsak: {
-      relasjonsRolleType: 'FARA',
-    } as Fagsak,
+    fagsak: { ...defaultFagsak, relasjonsRolleType: 'FARA' as const } satisfies Fagsak,
     kanOverstyre: false,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART)],
   },

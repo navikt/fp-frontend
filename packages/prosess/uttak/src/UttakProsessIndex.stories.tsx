@@ -24,6 +24,25 @@ import type {
 
 import { UttakProsessIndex } from './UttakProsessIndex';
 
+const defaultFagsak = {
+  aktørId: '',
+  behandlingTypeKanOpprettes: [],
+  behandlinger: [],
+  bruker: { navn: '', fødselsnummer: '', kjønn: '-' as const, fødselsdato: '', språkkode: '-' as const },
+  brukerManglerAdresse: false,
+  dekningsgrad: 0,
+  fagsakMarkeringer: [],
+  fagsakYtelseType: 'FP' as const,
+  harVergeIÅpenBehandling: false,
+  historikkinnslag: [],
+  kontrollResultat: { kontrollresultat: '-' as const },
+  notater: [],
+  relasjonsRolleType: '-' as const,
+  sakSkalTilInfotrygd: false,
+  saksnummer: '',
+  status: 'LOP' as const,
+} satisfies Fagsak;
+
 const defaultAksjonspunkt = lagAksjonspunkt(AksjonspunktKode.FASTSETT_UTTAKPERIODER);
 
 const defaultMuligeÅrsaker: PeriodeResultatÅrsakMuligeÅrsaker[] = [
@@ -69,20 +88,37 @@ const familiehendelse = {
   fødselTermin: {
     fødselsdato: '2019-11-04',
   },
-} as FamilieHendelse;
+} satisfies FamilieHendelse;
 
-const behandling = {
+const behandling: BehandlingFpSak = {
   uuid: '1',
   versjon: 1,
   type: 'BT-002',
   behandlingsresultat: {
+    harRedigertVedtaksbrev: false,
+    id: 0,
+    type: 'INNVILGET',
+    vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
     skjæringstidspunkt: {
       dato: '2019-10-14',
     },
   },
   status: 'UTRED',
   språkkode: '-',
-} as BehandlingFpSak;
+  behandlingPåVent: false,
+  behandlingHenlagt: false,
+  aksjonspunkt: [],
+  behandlingÅrsaker: [],
+  behandlendeEnhetId: '',
+  behandlendeEnhetNavn: '',
+  aktivPapirsøknad: false,
+  vilkår: [],
+  links: [],
+  harSøknad: false,
+  harSattEndringsdato: false,
+  id: 1,
+  opprettet: '2020-01-01',
+};
 
 const uttakStonadskontoer = {
   tapteDagerFpff: 1,
@@ -154,13 +190,12 @@ const soknad = {
   manglendeVedlegg: [],
   mottattDato: '2019-11-18',
   søknadsfrist: {
-    mottattDato: '2019-11-18',
     utledetSøknadsfrist: '2020-01-31',
     søknadsperiodeStart: '2019-10-14',
     søknadsperiodeSlutt: '2020-02-02',
     dagerOversittetFrist: -74,
   },
-} as Soknad;
+} satisfies Soknad;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   342352362: {
@@ -192,10 +227,14 @@ const meta = {
     uttakStonadskontoer,
     soknad,
     personoversikt: {
+      barn: [],
       bruker: {
+        adresser: [],
+        fødselsdato: '1979-01-01',
         kjønn: 'K',
+        sivilstand: 'UGIF',
       },
-    } as Personoversikt,
+    } satisfies Personoversikt,
     kanOverstyre: false,
     familiehendelse,
     oppdaterStønadskontoer: v => {
@@ -859,10 +898,14 @@ export const AksjonspunktForFar: Story = {
   args: {
     aksjonspunkterForPanel: [defaultAksjonspunkt],
     personoversikt: {
+      barn: [],
       bruker: {
+        adresser: [],
+        fødselsdato: '1979-01-01',
         kjønn: 'M',
+        sivilstand: 'UGIF',
       },
-    } as Personoversikt,
+    } satisfies Personoversikt,
     uttaksresultat: {
       perioderSøker: [
         {
@@ -1333,13 +1376,18 @@ export const VisOppholdsperiode: Story = {
 export const MorPerioderI_EØSFarSamtidigUttak: Story = {
   args: {
     personoversikt: {
+      barn: [],
       bruker: {
+        adresser: [],
+        fødselsdato: '1979-01-01',
         kjønn: 'M',
+        sivilstand: 'UGIF',
       },
-    } as Personoversikt,
+    } satisfies Personoversikt,
     fagsak: {
+      ...defaultFagsak,
       relasjonsRolleType: 'FARA',
-    } as Fagsak,
+    } satisfies Fagsak,
     uttakStonadskontoer: {
       ...uttakStonadskontoer,
       stønadskonti: {

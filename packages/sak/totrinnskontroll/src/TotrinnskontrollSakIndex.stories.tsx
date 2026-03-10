@@ -25,12 +25,40 @@ const DEFAULT_BEHANDLING = {
   versjon: 2,
   status: 'FVED',
   type: 'BT-002',
-  behandlingÅrsaker: [] as BehandlingÅrsak[],
+  behandlingÅrsaker: [],
   toTrinnsBehandling: true,
   behandlingsresultat: {
     type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
+    harRedigertVedtaksbrev: false,
+    id: 1,
+    vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
   },
-} as FagsakBehandlingDtoFpSak;
+  aktivPapirsøknad: false,
+  behandlendeEnhetId: '4820',
+  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
+  behandlingHenlagt: false,
+  behandlingPåVent: false,
+  behandlingTillatteOperasjoner: {
+    behandlingFraBeslutter: false,
+    behandlingKanBytteEnhet: false,
+    behandlingKanGjenopptas: false,
+    behandlingKanHenlegges: false,
+    behandlingKanMerkesHaster: false,
+    behandlingKanOpnesForEndringer: false,
+    behandlingKanSendeMelding: false,
+    behandlingKanSettesPaVent: false,
+    behandlingTilGodkjenning: false,
+    vergeBehandlingsmeny: 'SKJUL',
+  },
+  brevmaler: [],
+  gjeldendeVedtak: false,
+  links: [],
+  opprettet: '2020-01-01',
+  språkkode: 'NB',
+  totrinnskontrollÅrsaker: [],
+  ugunstAksjonspunkt: false,
+  vilkår: [],
+} satisfies FagsakBehandlingDtoFpSak;
 
 const withDiv: DecoratorFunction<ReactRenderer> = Story => (
   <div

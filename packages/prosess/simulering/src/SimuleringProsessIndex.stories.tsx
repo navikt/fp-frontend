@@ -115,7 +115,7 @@ const simuleringResultat = {
     ],
   },
   slåttAvInntrekk: false,
-} as SimuleringResultat;
+} satisfies SimuleringResultat;
 
 const meta = {
   title: 'prosess/prosess-simulering',
@@ -159,6 +159,6 @@ export const SimuleringspanelUtenAksjonspunkt: Story = {
     tilbakekrevingvalg: {
       videreBehandling: 'TILBAKEKR_OPPDATER',
       varseltekst: 'varsel-eksempel',
-    } as TilbakekrevingValg,
+    } satisfies TilbakekrevingValg,
   },
 };

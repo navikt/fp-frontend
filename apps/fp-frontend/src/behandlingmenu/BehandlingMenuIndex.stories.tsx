@@ -11,7 +11,7 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingOppretting, Fagsak, FagsakBehandlingDtoFpSak } from '@navikt/fp-types';
+import type { BehandlingOppretting, BehandlingTillatteOperasjoner, Fagsak, FagsakBehandlingDtoFpSak } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../.storybook/testdata';
@@ -46,7 +46,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanSettesPaVent: true,
   behandlingKanMerkesHaster: true,
   vergeBehandlingsmeny: 'OPPRETT',
-};
+} satisfies BehandlingTillatteOperasjoner;
 
 const ALLE_BEHANDLINGER = [
   {
@@ -59,8 +59,19 @@ const ALLE_BEHANDLINGER = [
     behandlendeEnhetNavn: 'Nav Vikafossen',
     aktivPapirsøknad: false,
     behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
+    behandlingHenlagt: false,
+    behandlingÅrsaker: [],
+    brevmaler: [],
+    gjeldendeVedtak: false,
+    links: [],
+    opprettet: '2020-01-01',
+    språkkode: 'NB',
+    toTrinnsBehandling: false,
+    totrinnskontrollÅrsaker: [],
+    ugunstAksjonspunkt: false,
+    vilkår: [],
   },
-] as FagsakBehandlingDtoFpSak[];
+] satisfies FagsakBehandlingDtoFpSak[];
 
 const FAGSAK = {
   saksnummer: '123',
@@ -68,8 +79,18 @@ const FAGSAK = {
   status: 'UBEH',
   behandlinger: ALLE_BEHANDLINGER,
   sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
-} as Fagsak;
+  behandlingTypeKanOpprettes: [],
+  aktørId: '9999999999999',
+  bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Søker Søkersen', språkkode: 'NB' },
+  brukerManglerAdresse: false,
+  dekningsgrad: 100,
+  fagsakMarkeringer: [],
+  harVergeIÅpenBehandling: false,
+  historikkinnslag: [],
+  kontrollResultat: { kontrollresultat: 'IKKE_KLASSIFISERT' },
+  notater: [],
+  relasjonsRolleType: 'MORA',
+} satisfies Fagsak;
 
 const HANDLERS = [
   http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),

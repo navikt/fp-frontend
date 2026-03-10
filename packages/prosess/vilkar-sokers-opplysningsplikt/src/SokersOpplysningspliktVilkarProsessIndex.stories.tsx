@@ -37,7 +37,32 @@ const søknad = {
       brukerHarSagtAtIkkeKommer: false,
     },
   ],
-} as Soknad;
+  mottattDato: '2019-01-01',
+  søknadsfrist: {
+    dagerOversittetFrist: 0,
+  },
+} satisfies Soknad;
+
+const defaultBehandling = {
+  aksjonspunkt: [],
+  aktivPapirsøknad: false,
+  behandlendeEnhetId: '4820',
+  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
+  behandlingHenlagt: false,
+  behandlingPåVent: false,
+  behandlingÅrsaker: [],
+  harSattEndringsdato: false,
+  harSøknad: true,
+  id: 1,
+  links: [],
+  opprettet: '2020-01-01',
+  språkkode: 'NB',
+  status: 'UTRED',
+  type: 'BT-002',
+  uuid: '1',
+  versjon: 1,
+  vilkår: [],
+} satisfies BehandlingFpSak;
 
 const meta = {
   title: 'prosess/prosess-vilkar-sokers-opplysningsplikt',
@@ -69,12 +94,15 @@ export const UtførtAPMedOppfyltVilkår: Story = {
 export const UtførtAPMedAvslåttVilkår: Story = {
   args: {
     behandling: {
-      uuid: '1',
-      versjon: 1,
+      ...defaultBehandling,
       behandlingsresultat: {
         avslagsarsak: '1099',
+        harRedigertVedtaksbrev: false,
+        id: 1,
+        type: 'AVSLÅTT',
+        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
       },
-    } as BehandlingFpSak,
+    } satisfies BehandlingFpSak,
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5017, {
         status: 'UTFO',
@@ -98,12 +126,15 @@ export const KanOverstyreVilkår: Story = {
 export const HarOverstyrtMedOppfyltVilkår: Story = {
   args: {
     behandling: {
-      uuid: '1',
-      versjon: 1,
+      ...defaultBehandling,
       behandlingsresultat: {
         avslagsarsak: undefined,
+        harRedigertVedtaksbrev: false,
+        id: 1,
+        type: 'INNVILGET',
+        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
       },
-    } as BehandlingFpSak,
+    } satisfies BehandlingFpSak,
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
     ],
@@ -116,12 +147,15 @@ export const HarOverstyrtMedOppfyltVilkår: Story = {
 export const HarOverstyrtMedAvslåttVilkår: Story = {
   args: {
     behandling: {
-      uuid: '1',
-      versjon: 1,
+      ...defaultBehandling,
       behandlingsresultat: {
         avslagsarsak: '1099',
+        harRedigertVedtaksbrev: false,
+        id: 1,
+        type: 'AVSLÅTT',
+        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
       },
-    } as BehandlingFpSak,
+    } satisfies BehandlingFpSak,
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
     ],

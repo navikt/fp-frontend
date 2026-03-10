@@ -11,7 +11,7 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingOppretting, DokumentMalType, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
+import type { BehandlingOppretting, BehandlingTillatteOperasjoner, DokumentMalType, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
@@ -50,8 +50,9 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanGjenopptas: false,
   behandlingKanOpnesForEndringer: true,
   behandlingKanSettesPaVent: true,
+  behandlingKanMerkesHaster: false,
   vergeBehandlingsmeny: 'OPPRETT',
-};
+} satisfies BehandlingTillatteOperasjoner;
 
 const ALLE_BEHANDLINGER = [
   {
@@ -70,10 +71,19 @@ const ALLE_BEHANDLINGER = [
       {
         href: '/fpsak/bestill',
         rel: 'brev-bestill',
+        type: 'POST',
       },
     ],
+    behandlingHenlagt: false,
+    behandlingÅrsaker: [],
+    gjeldendeVedtak: false,
+    opprettet: '2020-01-01',
+    toTrinnsBehandling: false,
+    totrinnskontrollÅrsaker: [],
+    ugunstAksjonspunkt: false,
+    vilkår: [],
   },
-] as FagsakBehandlingDto[];
+] satisfies FagsakBehandlingDto[];
 
 const FAGSAK = {
   saksnummer: '123',
@@ -81,9 +91,18 @@ const FAGSAK = {
   status: 'UBEH',
   behandlinger: ALLE_BEHANDLINGER,
   sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
+  behandlingTypeKanOpprettes: [],
   brukerManglerAdresse: true,
-} as Fagsak;
+  aktørId: '9999999999999',
+  bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Søker Søkersen', språkkode: 'NB' },
+  dekningsgrad: 100,
+  fagsakMarkeringer: [],
+  harVergeIÅpenBehandling: false,
+  historikkinnslag: [],
+  kontrollResultat: { kontrollresultat: 'IKKE_KLASSIFISERT' },
+  notater: [],
+  relasjonsRolleType: 'MORA',
+} satisfies Fagsak;
 
 const meta = {
   title: 'fagsak/MeldingIndex',

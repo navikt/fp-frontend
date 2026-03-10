@@ -4,11 +4,37 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
-import type { Behandlingsresultat, FagsakBehandlingDto } from '@navikt/fp-types';
+import type { FagsakBehandlingDtoFpSak } from '@navikt/fp-types';
 
 import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
+
+const COMMON_FIELDS = {
+  aktivPapirsøknad: false,
+  behandlendeEnhetId: '4812',
+  behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
+  behandlingHenlagt: false,
+  behandlingPåVent: false,
+  behandlingTillatteOperasjoner: {
+    behandlingFraBeslutter: false,
+    behandlingKanBytteEnhet: false,
+    behandlingKanGjenopptas: false,
+    behandlingKanHenlegges: false,
+    behandlingKanMerkesHaster: false,
+    behandlingKanOpnesForEndringer: false,
+    behandlingKanSendeMelding: false,
+    behandlingKanSettesPaVent: false,
+    behandlingTilGodkjenning: false,
+    vergeBehandlingsmeny: 'SKJUL',
+  },
+  behandlingÅrsaker: [],
+  brevmaler: [],
+  links: [],
+  totrinnskontrollÅrsaker: [],
+  ugunstAksjonspunkt: false,
+  vilkår: [],
+} as const;
 
 const meta = {
   title: 'sak/sak-behandling-velger',
@@ -52,78 +78,71 @@ export const Default: Story = {
   args: {
     behandlinger: [
       {
+        ...COMMON_FIELDS,
         versjon: 2,
         uuid: '1',
         type: 'BT-002',
         status: 'AVSLU',
         språkkode: 'NB',
-        aktivPapirsøknad: false,
         opprettet: '2017-08-02T02:04:25.455',
         avsluttet: '2017-08-03T02:04:25.455',
-        behandlendeEnhetId: '4812',
-        behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
         gjeldendeVedtak: true,
-        behandlingPåVent: false,
-        behandlingHenlagt: false,
         toTrinnsBehandling: false,
         behandlingsresultat: {
           type: 'AVSLÅTT',
-        } as Behandlingsresultat,
-      },
+          harRedigertVedtaksbrev: false,
+          id: 1,
+          vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+        },
+      } satisfies FagsakBehandlingDtoFpSak,
       {
+        ...COMMON_FIELDS,
         versjon: 2,
         uuid: '2',
         type: 'BT-006',
         status: 'OPPRE',
         språkkode: 'NB',
-        aktivPapirsøknad: false,
         opprettet: '2017-08-01T02:04:25.455',
         avsluttet: '2017-08-01T02:04:25.455',
-        behandlendeEnhetId: '4812',
-        behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
         gjeldendeVedtak: false,
-        behandlingPåVent: false,
-        behandlingHenlagt: false,
         toTrinnsBehandling: false,
         behandlingsresultat: {
           type: 'INNVILGET',
-        } as Behandlingsresultat,
-      },
+          harRedigertVedtaksbrev: false,
+          id: 2,
+          vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+        },
+      } satisfies FagsakBehandlingDtoFpSak,
       {
+        ...COMMON_FIELDS,
         versjon: 2,
         uuid: '3',
         type: 'BT-004',
         status: 'OPPRE',
         språkkode: 'NB',
-        aktivPapirsøknad: false,
         opprettet: '2017-10-02T02:04:25.455',
-        behandlendeEnhetId: '4812',
-        behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
         gjeldendeVedtak: false,
-        behandlingPåVent: false,
-        behandlingHenlagt: false,
         toTrinnsBehandling: false,
-      },
+      } satisfies FagsakBehandlingDtoFpSak,
       {
+        ...COMMON_FIELDS,
         versjon: 2,
         uuid: '4',
         type: 'BT-002',
         status: 'AVSLU',
         språkkode: 'NB',
-        aktivPapirsøknad: false,
         opprettet: '2017-07-12T02:04:25.455',
         avsluttet: '2017-07-13T02:04:25.455',
-        behandlendeEnhetId: '4812',
-        behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser Bergen',
         gjeldendeVedtak: false,
-        behandlingPåVent: false,
-        behandlingHenlagt: false,
         toTrinnsBehandling: false,
         behandlingsresultat: {
           type: 'HENLAGT_SØKNAD_TRUKKET',
-        } as Behandlingsresultat,
-      },
-    ] as FagsakBehandlingDto[],
+          harRedigertVedtaksbrev: false,
+          id: 4,
+          vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+        },
+      } satisfies FagsakBehandlingDtoFpSak,
+    ],
   },
 };
 

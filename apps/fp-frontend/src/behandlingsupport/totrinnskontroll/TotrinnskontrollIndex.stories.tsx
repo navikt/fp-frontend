@@ -132,7 +132,7 @@ const FAGSAK = {
   status: 'UBEH',
   behandlinger: [BEHANDLING],
   sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
+  behandlingTypeKanOpprettes: [],
   notater: [
     {
       notat: 'Dette er et notat',

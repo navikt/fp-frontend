@@ -81,7 +81,7 @@ export const Default: Story = {
         kommunikasjonsretning: 'INN',
         gjelderFor: 'test5',
       },
-    ] as Dokument[],
+    ] satisfies Dokument[],
   },
 };
 
