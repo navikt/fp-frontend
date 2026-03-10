@@ -2,13 +2,8 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
-import type {
-  BehandlingÅrsak,
-  FagsakBehandlingDtoFpSak,
-  SkjermlenkeType,
-  TotrinnskontrollSkjermlenkeContext,
-} from '@navikt/fp-types';
+import { alleKodeverk, lagFagsakBehandling, withRouter } from '@navikt/fp-storybook-utils';
+import type { SkjermlenkeType, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
 import { type ApData, TotrinnskontrollSakIndex } from './TotrinnskontrollSakIndex';
 
@@ -20,17 +15,17 @@ const LOCATION = {
   hash: '',
 };
 
-const DEFAULT_BEHANDLING = {
-  uuid: '1',
-  versjon: 2,
+const DEFAULT_BEHANDLING = lagFagsakBehandling({
   status: 'FVED',
-  type: 'BT-002',
-  behandlingÅrsaker: [] as BehandlingÅrsak[],
+  versjon: 2,
   toTrinnsBehandling: true,
   behandlingsresultat: {
     type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
+    harRedigertVedtaksbrev: false,
+    id: 1,
+    vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
   },
-} as FagsakBehandlingDtoFpSak;
+});
 
 const withDiv: DecoratorFunction<ReactRenderer> = Story => (
   <div

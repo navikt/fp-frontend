@@ -14,7 +14,17 @@ const FAGSAK = {
   status: 'UBEH',
   opprettet: '2020-01-01',
   endret: '2020-01-01',
-} as FagsakEnkel;
+  aktørId: '123',
+  barnFødt: '2020-01-01',
+  person: {
+    fødselsdato: '1979-01-01',
+    fødselsnummer: '12345678901',
+    kjønn: 'M',
+    navn: 'Test Person',
+    språkkode: 'NB',
+  },
+  relasjonsRolleType: 'MORA',
+} satisfies FagsakEnkel;
 
 const meta = {
   title: 'sak/sak-aktor',

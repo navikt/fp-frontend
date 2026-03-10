@@ -18,6 +18,7 @@ describe('InnsynProsessIndex', () => {
     expect(screen.getByText('Følg manuelle rutiner for innsynsbehandling')).toBeInTheDocument();
 
     const datoMottattKravInput = screen.getByLabelText('Dato for mottatt krav om innsyn');
+    await userEvent.clear(datoMottattKravInput);
     await userEvent.type(datoMottattKravInput, '23.12.2021');
     fireEvent.blur(datoMottattKravInput);
 
@@ -73,6 +74,7 @@ describe('InnsynProsessIndex', () => {
     expect(await screen.findByText('Innsynsbehandling')).toBeInTheDocument();
 
     const datoMottattKravInput = screen.getByLabelText('Dato for mottatt krav om innsyn');
+    await userEvent.clear(datoMottattKravInput);
     await userEvent.type(datoMottattKravInput, '23.12.2021');
     fireEvent.blur(datoMottattKravInput);
 

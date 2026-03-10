@@ -19,7 +19,7 @@ const meta = {
   component: FodselVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    vilkårForPanel: [lagVilkår('FP_VK_1')] as Vilkår[],
+    vilkårForPanel: [lagVilkår('FP_VK_1')] satisfies Vilkår[],
   },
   render: args => <FodselVilkarProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselVilkarProsessIndex>>;
@@ -57,10 +57,30 @@ export const AvslåttVilkår: Story = {
     behandling: {
       uuid: '1',
       versjon: 1,
+      type: 'BT-002',
+      status: 'UTRED',
+      språkkode: '-',
       behandlingsresultat: {
         avslagsarsak: '1002',
+        harRedigertVedtaksbrev: false,
+        id: 0,
+        type: 'AVSLÅTT',
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
-    } as BehandlingFpSak,
+      behandlingPåVent: false,
+      behandlingHenlagt: false,
+      aksjonspunkt: [],
+      behandlingÅrsaker: [],
+      behandlendeEnhetId: '',
+      behandlendeEnhetNavn: '',
+      aktivPapirsøknad: false,
+      vilkår: [],
+      links: [],
+      harSøknad: false,
+      harSattEndringsdato: false,
+      id: 1,
+      opprettet: '2020-01-01',
+    } satisfies BehandlingFpSak,
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE, {
         status: 'UTFO',

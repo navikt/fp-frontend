@@ -8,10 +8,11 @@ import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
   getIntlDecorator,
+  lagFagsak,
+  lagFagsakBehandling,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingOppretting, Fagsak, FagsakBehandlingDtoFpSak } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../.storybook/testdata';
@@ -35,41 +36,29 @@ const getHref = (rel: string) =>
     ),
   );
 
-const BEHANDLING_TILLATTE_OPERASJONER = {
-  behandlingFraBeslutter: false,
-  behandlingKanSendeMelding: true,
-  behandlingTilGodkjenning: false,
-  behandlingKanBytteEnhet: true,
-  behandlingKanHenlegges: true,
-  behandlingKanGjenopptas: false,
-  behandlingKanOpnesForEndringer: true,
-  behandlingKanSettesPaVent: true,
-  behandlingKanMerkesHaster: true,
-  vergeBehandlingsmeny: 'OPPRETT',
-};
-
 const ALLE_BEHANDLINGER = [
-  {
+  lagFagsakBehandling({
     versjon: 2,
     uuid: '1',
-    behandlingPåVent: false,
     type: 'BT-004',
-    status: 'UTRED',
     behandlendeEnhetId: '2323',
     behandlendeEnhetNavn: 'Nav Vikafossen',
-    aktivPapirsøknad: false,
-    behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
-  },
-] as FagsakBehandlingDtoFpSak[];
+    behandlingTillatteOperasjoner: {
+      behandlingFraBeslutter: false,
+      behandlingKanBytteEnhet: true,
+      behandlingKanGjenopptas: false,
+      behandlingKanHenlegges: true,
+      behandlingKanMerkesHaster: true,
+      behandlingKanOpnesForEndringer: true,
+      behandlingKanSendeMelding: true,
+      behandlingKanSettesPaVent: true,
+      behandlingTilGodkjenning: false,
+      vergeBehandlingsmeny: 'OPPRETT',
+    },
+  }),
+];
 
-const FAGSAK = {
-  saksnummer: '123',
-  fagsakYtelseType: 'FP',
-  status: 'UBEH',
-  behandlinger: ALLE_BEHANDLINGER,
-  sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
-} as Fagsak;
+const FAGSAK = lagFagsak({ saksnummer: '123', behandlinger: ALLE_BEHANDLINGER });
 
 const HANDLERS = [
   http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),

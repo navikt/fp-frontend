@@ -5,12 +5,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagFagsak,
   lagVilkår,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { Fagsak, FastsattOpptjening } from '@navikt/fp-types';
+import type { FastsattOpptjening } from '@navikt/fp-types';
 
 import { OpptjeningVilkarProsessIndex } from './OpptjeningVilkarProsessIndex';
 
@@ -44,9 +45,7 @@ const meta = {
   args: {
     isReadOnly: false,
     status: 'IKKE_VURDERT',
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: lagFagsak(),
     vilkårForPanel: [lagVilkår('FP_VK_21')],
   },
   render: args => <OpptjeningVilkarProsessIndex {...args} />,
@@ -64,9 +63,7 @@ export const ÅpentAksjonspunkt: Story = {
 
 export const ÅpentAksjonspunktSvangerskapspenger: Story = {
   args: {
-    fagsak: {
-      fagsakYtelseType: 'SVP',
-    } as Fagsak,
+    fagsak: lagFagsak({ fagsakYtelseType: 'SVP' }),
     fastsattOpptjening: defaultFastsattOpptjening,
     aksjonspunkterForPanel: [defaultAksjonspunkt],
   },
