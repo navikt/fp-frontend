@@ -14,12 +14,7 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type {
-  BehandlingFpSak,
-  BehandlingTillatteOperasjoner,
-  Fagsak,
-  FagsakBehandlingDto,
-} from '@navikt/fp-types';
+import type { BehandlingTillatteOperasjoner, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake, oppgaverForFagsaker } from '../../.storybook/testdata';
@@ -193,26 +188,6 @@ export const BehandlingErValgt: Story = {
   args: {
     fagsakData: new FagsakData(FAGSAK),
     behandlingUuid: '1',
-    behandling: {
-      versjon: 1,
-      uuid: '1',
-      aksjonspunkt: [],
-      aktivPapirsøknad: false,
-      behandlendeEnhetId: '4820',
-      behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
-      behandlingHenlagt: false,
-      behandlingPåVent: false,
-      behandlingÅrsaker: [],
-      harSattEndringsdato: false,
-      harSøknad: true,
-      id: 1,
-      links: [],
-      opprettet: '2020-01-01',
-      språkkode: 'NB',
-      status: 'UTRED',
-      type: 'BT-002',
-      vilkår: [],
-    } satisfies BehandlingFpSak,
   },
 };
 
