@@ -1,43 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
+import { lagFagsakBehandling } from '@navikt/fp-storybook-utils';
 import type { FagsakBehandlingDtoFpSak } from '@navikt/fp-types';
 
 import { FatterVedtakTotrinnskontrollModalSakIndex } from './FatterVedtakTotrinnskontrollModalSakIndex';
 
-const DEFAULT_BEHANDLING = {
-  uuid: '1',
-  versjon: 1,
-  status: 'FVED',
-  type: 'BT-002',
-  aktivPapirsøknad: false,
-  behandlendeEnhetId: '4820',
-  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
-  behandlingHenlagt: false,
-  behandlingPåVent: false,
-  behandlingTillatteOperasjoner: {
-    behandlingFraBeslutter: false,
-    behandlingKanBytteEnhet: false,
-    behandlingKanGjenopptas: false,
-    behandlingKanHenlegges: false,
-    behandlingKanMerkesHaster: false,
-    behandlingKanOpnesForEndringer: false,
-    behandlingKanSendeMelding: false,
-    behandlingKanSettesPaVent: false,
-    behandlingTilGodkjenning: false,
-    vergeBehandlingsmeny: 'SKJUL',
-  },
-  behandlingÅrsaker: [],
-  brevmaler: [],
-  gjeldendeVedtak: false,
-  links: [],
-  opprettet: '2020-01-01',
-  språkkode: 'NB',
-  toTrinnsBehandling: false,
-  totrinnskontrollÅrsaker: [],
-  ugunstAksjonspunkt: false,
-  vilkår: [],
-} satisfies FagsakBehandlingDtoFpSak;
+const DEFAULT_BEHANDLING = lagFagsakBehandling({ status: 'FVED' });
 
 const BEHANDLINGSRESULTAT_OPPHØR = {
   type: 'OPPHØR',

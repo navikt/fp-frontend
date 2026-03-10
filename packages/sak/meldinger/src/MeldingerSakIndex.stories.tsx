@@ -2,8 +2,8 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import type { DokumentMalType, FagsakBehandlingDtoFpSak } from '@navikt/fp-types';
+import { alleKodeverk, lagFagsakBehandling } from '@navikt/fp-storybook-utils';
+import type { DokumentMalType } from '@navikt/fp-types';
 
 import { MeldingerSakIndex } from './MeldingerSakIndex';
 
@@ -40,39 +40,7 @@ const meta = {
   args: {
     kanVeilede: false,
     revurderingVarslingArsak: alleKodeverk.RevurderingVarslingÅrsak,
-    behandling: {
-      brevmaler: TEMPLATES,
-      språkkode: 'NB',
-      uuid: '1',
-      versjon: 1,
-      status: 'UTRED',
-      type: 'BT-002',
-      aktivPapirsøknad: false,
-      behandlendeEnhetId: '4820',
-      behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
-      behandlingHenlagt: false,
-      behandlingPåVent: false,
-      behandlingTillatteOperasjoner: {
-        behandlingFraBeslutter: false,
-        behandlingKanBytteEnhet: false,
-        behandlingKanGjenopptas: false,
-        behandlingKanHenlegges: false,
-        behandlingKanMerkesHaster: false,
-        behandlingKanOpnesForEndringer: false,
-        behandlingKanSendeMelding: false,
-        behandlingKanSettesPaVent: false,
-        behandlingTilGodkjenning: false,
-        vergeBehandlingsmeny: 'SKJUL',
-      },
-      behandlingÅrsaker: [],
-      gjeldendeVedtak: false,
-      links: [],
-      opprettet: '2020-01-01',
-      toTrinnsBehandling: false,
-      totrinnskontrollÅrsaker: [],
-      ugunstAksjonspunkt: false,
-      vilkår: [],
-    } satisfies FagsakBehandlingDtoFpSak,
+    behandling: lagFagsakBehandling({ brevmaler: TEMPLATES }),
     forhåndsvisBrev: action('button-click'),
     submitCallback: action('button-click'),
     setMeldingFormData: action('button-click'),

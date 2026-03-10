@@ -3,8 +3,8 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
-import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import type { ArbeidsgiverOpplysninger, BehandlingFpSak, FagsakBehandlingDto } from '@navikt/fp-types';
+import { lagFagsakBehandling, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import type { ArbeidsgiverOpplysninger, BehandlingFpSak } from '@navikt/fp-types';
 
 const inntektsmeldingmal = {
   innsendingstidspunkt: '2024-08-08T00:00:00',
@@ -24,40 +24,6 @@ const inntektsmeldingmal = {
   dokumentId: '2',
 };
 
-const defaultFagsakBehandling = {
-  aktivPapirsøknad: false,
-  behandlendeEnhetId: '4820',
-  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
-  behandlingHenlagt: false,
-  behandlingPåVent: false,
-  behandlingTillatteOperasjoner: {
-    behandlingFraBeslutter: false,
-    behandlingKanBytteEnhet: false,
-    behandlingKanGjenopptas: false,
-    behandlingKanHenlegges: false,
-    behandlingKanMerkesHaster: false,
-    behandlingKanOpnesForEndringer: false,
-    behandlingKanSendeMelding: false,
-    behandlingKanSettesPaVent: false,
-    behandlingTilGodkjenning: false,
-    vergeBehandlingsmeny: 'SKJUL' as const,
-  },
-  behandlingÅrsaker: [],
-  brevmaler: [],
-  gjeldendeVedtak: false,
-  links: [],
-  opprettet: '2020-01-01',
-  språkkode: 'NB' as const,
-  status: 'UTRED' as const,
-  toTrinnsBehandling: false,
-  totrinnskontrollÅrsaker: [],
-  type: 'BT-002' as const,
-  ugunstAksjonspunkt: false,
-  uuid: '1',
-  versjon: 1,
-  vilkår: [],
-} satisfies FagsakBehandlingDto;
-
 const meta = {
   title: 'fakta/fakta-inntektsmelding',
   component: InntektsmeldingFaktaIndex,
@@ -71,10 +37,10 @@ type Story = StoryObj<typeof meta>;
 export const InntektsmeldingDefault: Story = {
   args: {
     alleBehandlinger: [
-      { ...defaultFagsakBehandling, uuid: 'UUID1', type: 'BT-002' as const, opprettet: '2024-07-13', avsluttet: '2024-08-13' },
-      { ...defaultFagsakBehandling, uuid: 'UUID2', type: 'BT-003' as const, opprettet: '2024-07-14', avsluttet: '2024-08-14' },
-      { ...defaultFagsakBehandling, uuid: 'UUID3', type: 'BT-004' as const, opprettet: '2024-07-15', avsluttet: '2024-08-15' },
-    ] satisfies FagsakBehandlingDto[],
+      lagFagsakBehandling({ uuid: 'UUID1', opprettet: '2024-07-13', avsluttet: '2024-08-13' }),
+      lagFagsakBehandling({ uuid: 'UUID2', type: 'BT-003', opprettet: '2024-07-14', avsluttet: '2024-08-14' }),
+      lagFagsakBehandling({ uuid: 'UUID3', type: 'BT-004', opprettet: '2024-07-15', avsluttet: '2024-08-15' }),
+    ],
     arbeidsgiverOpplysningerPerId: {
       ['1']: { erPrivatPerson: false, identifikator: '1', referanse: '1', navn: 'Rema 1000' } satisfies ArbeidsgiverOpplysninger,
       ['2']: { erPrivatPerson: false, identifikator: '2', referanse: '2', navn: 'Kiwi' } satisfies ArbeidsgiverOpplysninger,

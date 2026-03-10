@@ -2,12 +2,8 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
-import type {
-  FagsakBehandlingDtoFpSak,
-  SkjermlenkeType,
-  TotrinnskontrollSkjermlenkeContext,
-} from '@navikt/fp-types';
+import { alleKodeverk, lagFagsakBehandling, withRouter } from '@navikt/fp-storybook-utils';
+import type { SkjermlenkeType, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
 import { type ApData, TotrinnskontrollSakIndex } from './TotrinnskontrollSakIndex';
 
@@ -19,12 +15,9 @@ const LOCATION = {
   hash: '',
 };
 
-const DEFAULT_BEHANDLING = {
-  uuid: '1',
-  versjon: 2,
+const DEFAULT_BEHANDLING = lagFagsakBehandling({
   status: 'FVED',
-  type: 'BT-002',
-  behandlingÅrsaker: [],
+  versjon: 2,
   toTrinnsBehandling: true,
   behandlingsresultat: {
     type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
@@ -32,32 +25,7 @@ const DEFAULT_BEHANDLING = {
     id: 1,
     vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
   },
-  aktivPapirsøknad: false,
-  behandlendeEnhetId: '4820',
-  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
-  behandlingHenlagt: false,
-  behandlingPåVent: false,
-  behandlingTillatteOperasjoner: {
-    behandlingFraBeslutter: false,
-    behandlingKanBytteEnhet: false,
-    behandlingKanGjenopptas: false,
-    behandlingKanHenlegges: false,
-    behandlingKanMerkesHaster: false,
-    behandlingKanOpnesForEndringer: false,
-    behandlingKanSendeMelding: false,
-    behandlingKanSettesPaVent: false,
-    behandlingTilGodkjenning: false,
-    vergeBehandlingsmeny: 'SKJUL',
-  },
-  brevmaler: [],
-  gjeldendeVedtak: false,
-  links: [],
-  opprettet: '2020-01-01',
-  språkkode: 'NB',
-  totrinnskontrollÅrsaker: [],
-  ugunstAksjonspunkt: false,
-  vilkår: [],
-} satisfies FagsakBehandlingDtoFpSak;
+});
 
 const withDiv: DecoratorFunction<ReactRenderer> = Story => (
   <div

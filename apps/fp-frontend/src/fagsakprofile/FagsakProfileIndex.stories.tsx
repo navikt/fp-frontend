@@ -12,10 +12,11 @@ import {
   getIntlDecorator,
   lagAksjonspunkt,
   lagFagsak,
+  lagFagsakBehandling,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingTillatteOperasjoner, FagsakBehandlingDto } from '@navikt/fp-types';
+import type { BehandlingTillatteOperasjoner } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake, oppgaverForFagsaker } from '../../.storybook/testdata';
@@ -39,84 +40,43 @@ const getHref = (rel: string) =>
     ),
   );
 
-const BEHANDLING_TILLATTE_OPERASJONER = {
+const TILLATTE_OPERASJONER = {
   behandlingFraBeslutter: false,
-  behandlingKanSendeMelding: true,
-  behandlingTilGodkjenning: false,
   behandlingKanBytteEnhet: true,
-  behandlingKanHenlegges: true,
   behandlingKanGjenopptas: false,
+  behandlingKanHenlegges: true,
+  behandlingKanMerkesHaster: false,
   behandlingKanOpnesForEndringer: true,
+  behandlingKanSendeMelding: true,
   behandlingKanSettesPaVent: true,
+  behandlingTilGodkjenning: false,
   vergeBehandlingsmeny: 'OPPRETT',
   uuid: '',
-  behandlingKanMerkesHaster: false,
 } satisfies BehandlingTillatteOperasjoner;
 
 const ALLE_BEHANDLINGER = [
-  {
+  lagFagsakBehandling({
     uuid: '1',
-    versjon: 1,
-    behandlingPåVent: false,
     type: 'BT-002',
     status: 'AVSLU',
     behandlendeEnhetId: '2323',
     behandlendeEnhetNavn: 'Nav Vikafossen',
-    aktivPapirsøknad: false,
     opprettet: '2024-01-02T00:54:25.455',
-    behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
-
-    gjeldendeVedtak: false,
-
-    behandlingHenlagt: false,
-
     språkkode: '-',
-
-    toTrinnsBehandling: false,
-
-    ugunstAksjonspunkt: false,
-
-    behandlingÅrsaker: [],
-    vilkår: [],
-    links: [],
-    brevmaler: [],
-    totrinnskontrollÅrsaker: [],
-  },
-  {
+    behandlingTillatteOperasjoner: TILLATTE_OPERASJONER,
+  }),
+  lagFagsakBehandling({
     uuid: '2',
-    versjon: 1,
-    behandlingPåVent: false,
     type: 'BT-004',
-    status: 'UTRED',
     behandlendeEnhetId: '2323',
     behandlendeEnhetNavn: 'Nav Vikafossen',
-    aktivPapirsøknad: false,
-    behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
     opprettet: '2024-08-02T00:54:25.455',
-    kontrollResultat: {
-      kontrollresultat: 'HOY',
-    },
-    risikoAksjonspunkt: lagAksjonspunkt(AksjonspunktKode.VURDER_FARESIGNALER, {
-      kanLoses: false,
-    }),
-
-    gjeldendeVedtak: false,
-
-    behandlingHenlagt: false,
-
+    kontrollResultat: { kontrollresultat: 'HOY' },
+    risikoAksjonspunkt: lagAksjonspunkt(AksjonspunktKode.VURDER_FARESIGNALER, { kanLoses: false }),
     språkkode: '-',
-
-    toTrinnsBehandling: false,
-
-    ugunstAksjonspunkt: false,
-
-    behandlingÅrsaker: [],
-    vilkår: [],
-    links: [],
-    brevmaler: [],
-    totrinnskontrollÅrsaker: [],
-  },
-] satisfies FagsakBehandlingDto[];
+    behandlingTillatteOperasjoner: TILLATTE_OPERASJONER,
+  }),
+];
 
 const FAGSAK = lagFagsak({
   saksnummer: '123',

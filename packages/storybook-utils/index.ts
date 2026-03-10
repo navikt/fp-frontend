@@ -12,5 +12,6 @@ export { alleKodeverkLos } from './mocks/alleKodeverkLos';
 export { alleKodeverkTilbakekreving } from './mocks/alleKodeverkTilbakekreving';
 export { lagAksjonspunkt } from './testdata/lagAksjonspunkt';
 export { lagBehandling } from './testdata/lagBehandling';
+export { lagFagsakBehandling } from './testdata/lagFagsakBehandling';
 export { lagFagsak } from './testdata/lagFagsak';
 export { lagVilkår } from './testdata/lagVilkår';

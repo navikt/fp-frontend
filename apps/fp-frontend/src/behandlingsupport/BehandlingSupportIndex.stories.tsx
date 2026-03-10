@@ -9,13 +9,10 @@ import {
   alleKodeverkTilbakekreving,
   getIntlDecorator,
   lagFagsak,
+  lagFagsakBehandling,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type {
-  BehandlingTillatteOperasjoner,
-  FagsakBehandlingDto,
-} from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../.storybook/testdata';
@@ -39,48 +36,27 @@ const getHref = (rel: string) =>
     ),
   );
 
-const BEHANDLING_TILLATTE_OPERASJONER = {
-  behandlingFraBeslutter: false,
-  behandlingKanSendeMelding: true,
-  behandlingTilGodkjenning: false,
-  behandlingKanBytteEnhet: true,
-  behandlingKanHenlegges: true,
-  behandlingKanGjenopptas: false,
-  behandlingKanOpnesForEndringer: true,
-  behandlingKanSettesPaVent: true,
-  behandlingKanMerkesHaster: false,
-  vergeBehandlingsmeny: 'OPPRETT',
-} satisfies BehandlingTillatteOperasjoner;
-
-const BEHANDLING = {
+const BEHANDLING = lagFagsakBehandling({
   versjon: 2,
   uuid: '1',
-  behandlingPåVent: false,
   type: 'BT-004',
-  status: 'UTRED',
   behandlendeEnhetId: '2323',
   behandlendeEnhetNavn: 'Nav Vikafossen',
-  aktivPapirsøknad: false,
-  behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
-
   opprettet: '',
-
-  gjeldendeVedtak: false,
-
-  behandlingHenlagt: false,
-
   språkkode: '-',
-
-  toTrinnsBehandling: false,
-
-  ugunstAksjonspunkt: false,
-
-  behandlingÅrsaker: [],
-  vilkår: [],
-  links: [],
-  brevmaler: [],
-  totrinnskontrollÅrsaker: [],
-} satisfies FagsakBehandlingDto;
+  behandlingTillatteOperasjoner: {
+    behandlingFraBeslutter: false,
+    behandlingKanBytteEnhet: true,
+    behandlingKanGjenopptas: false,
+    behandlingKanHenlegges: true,
+    behandlingKanMerkesHaster: false,
+    behandlingKanOpnesForEndringer: true,
+    behandlingKanSendeMelding: true,
+    behandlingKanSettesPaVent: true,
+    behandlingTilGodkjenning: false,
+    vergeBehandlingsmeny: 'OPPRETT',
+  },
+});
 
 const FAGSAK = lagFagsak({
   saksnummer: '123',
@@ -159,7 +135,7 @@ export const SkalViseFraBeslutter: Story = {
         {
           ...BEHANDLING,
           behandlingTillatteOperasjoner: {
-            ...BEHANDLING_TILLATTE_OPERASJONER,
+            ...BEHANDLING.behandlingTillatteOperasjoner,
             behandlingFraBeslutter: true,
             uuid: '',
           },
@@ -179,7 +155,7 @@ export const SkalViseFraGodkjenning: Story = {
         {
           ...BEHANDLING,
           behandlingTillatteOperasjoner: {
-            ...BEHANDLING_TILLATTE_OPERASJONER,
+            ...BEHANDLING.behandlingTillatteOperasjoner,
             behandlingTilGodkjenning: true,
             uuid: '',
           },
