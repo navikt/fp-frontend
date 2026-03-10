@@ -26,7 +26,7 @@ const COMMON_FIELDS = {
     behandlingKanSendeMelding: false,
     behandlingKanSettesPaVent: false,
     behandlingTilGodkjenning: false,
-    vergeBehandlingsmeny: 'SKJUL',
+    vergeBehandlingsmeny: 'SKJUL' as const,
   },
   behandlingÅrsaker: [],
   brevmaler: [],
@@ -34,7 +34,7 @@ const COMMON_FIELDS = {
   totrinnskontrollÅrsaker: [],
   ugunstAksjonspunkt: false,
   vilkår: [],
-} as const;
+};
 
 const meta = {
   title: 'sak/sak-behandling-velger',

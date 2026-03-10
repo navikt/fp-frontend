@@ -11,7 +11,7 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingOppretting, BehandlingTillatteOperasjoner, Fagsak, FagsakBehandlingDtoFpSak } from '@navikt/fp-types';
+import type { BehandlingTillatteOperasjoner, Fagsak, FagsakBehandlingDtoFpSak } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../.storybook/testdata';

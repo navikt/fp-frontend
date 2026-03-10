@@ -102,27 +102,3 @@ export const BrukerManglerAdresse: Story = {
     brukerManglerAdresse: true,
   },
 };
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
-  args: {
-    fagsakYtelseType: 'FP',
-    brukerManglerAdresse: false,
-  },
-};
-
-export const ForSvangerskapspenger: Story = {
-  args: {
-    fagsakYtelseType: 'SVP',
-    brukerManglerAdresse: false,
-  },
-};
-
-export const BrukerManglerAdresse: Story = {
-  args: {
-    fagsakYtelseType: 'FP',
-    brukerManglerAdresse: true,
-  },
-};

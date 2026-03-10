@@ -13,7 +13,6 @@ import {
   withRouter,
 } from '@navikt/fp-storybook-utils';
 import type {
-  BehandlingOppretting,
   BehandlingTillatteOperasjoner,
   Fagsak,
   FagsakBehandlingDto,

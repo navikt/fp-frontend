@@ -9,7 +9,7 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak, Innsyn, InnsynDokument } from '@navikt/fp-types';
+import type { BehandlingFpSak, Innsyn } from '@navikt/fp-types';
 
 import { InnsynProsessIndex } from './InnsynProsessIndex';
 

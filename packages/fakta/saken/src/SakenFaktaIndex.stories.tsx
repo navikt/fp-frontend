@@ -77,6 +77,10 @@ export const StartdatoForForeldrepengerOgDekningsgradMedAnnenPart: Story = {
       bruker: { ...defaultFagsak.bruker, navn: 'Helga Utvikler' },
       annenPart: {
         navn: 'Espen Utvikler',
+        fødselsdato: '1990-01-01',
+        fødselsnummer: '01019012345',
+        kjønn: 'M' as const,
+        språkkode: 'NB' as const,
       },
     } satisfies Fagsak,
   },
@@ -91,6 +95,10 @@ export const KanIkkeOverstyreDekningsgrad: Story = {
       bruker: { ...defaultFagsak.bruker, navn: 'Helga Utvikler' },
       annenPart: {
         navn: 'Espen Utvikler',
+        fødselsdato: '1990-01-01',
+        fødselsnummer: '01019012345',
+        kjønn: 'M' as const,
+        språkkode: 'NB' as const,
       },
     } satisfies Fagsak,
     kanOverstyreAccess: false,
@@ -156,7 +164,10 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
       bruker: { ...defaultFagsak.bruker, navn: 'Helga Utvikler', kjønn: 'K' as const },
       annenPart: {
         navn: 'Espen Utvikler',
-        kjønn: 'M',
+        kjønn: 'M' as const,
+        fødselsdato: '1990-01-01',
+        fødselsnummer: '01019012345',
+        språkkode: 'NB' as const,
       },
     } satisfies Fagsak,
     ytelsefordeling: {
@@ -185,7 +196,10 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
       bruker: { ...defaultFagsak.bruker, navn: 'Helga Utvikler', kjønn: 'K' as const },
       annenPart: {
         navn: 'Espen Utvikler',
-        kjønn: '-',
+        kjønn: '-' as const,
+        fødselsdato: '1990-01-01',
+        fødselsnummer: '01019012345',
+        språkkode: 'NB' as const,
       },
     } satisfies Fagsak,
     ytelsefordeling: {
@@ -218,7 +232,10 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
       bruker: { ...defaultFagsak.bruker, navn: 'Helga Utvikler', kjønn: 'K' as const },
       annenPart: {
         navn: 'Espen Utvikler',
-        kjønn: 'M',
+        kjønn: 'M' as const,
+        fødselsdato: '1990-01-01',
+        fødselsnummer: '01019012345',
+        språkkode: 'NB' as const,
       },
     } satisfies Fagsak,
     alleMerknaderFraBeslutter: {

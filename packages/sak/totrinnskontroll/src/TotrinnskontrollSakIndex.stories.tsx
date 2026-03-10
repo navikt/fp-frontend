@@ -4,7 +4,6 @@ import type { DecoratorFunction } from 'storybook/internal/types';
 
 import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
 import type {
-  BehandlingÅrsak,
   FagsakBehandlingDtoFpSak,
   SkjermlenkeType,
   TotrinnskontrollSkjermlenkeContext,

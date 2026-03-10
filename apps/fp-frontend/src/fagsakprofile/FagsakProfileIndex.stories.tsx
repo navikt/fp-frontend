@@ -16,7 +16,6 @@ import {
 } from '@navikt/fp-storybook-utils';
 import type {
   BehandlingFpSak,
-  BehandlingOppretting,
   BehandlingTillatteOperasjoner,
   Fagsak,
   FagsakBehandlingDto,
