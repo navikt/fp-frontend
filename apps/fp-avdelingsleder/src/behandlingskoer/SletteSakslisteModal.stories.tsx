@@ -3,6 +3,7 @@ import { action } from 'storybook/actions';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
+import { lagNySaksliste } from '../../testdata/lagNySaksliste';
 import { SletteSakslisteModal } from './SletteSakslisteModal';
 
 import messages from '../../i18n/nb_NO.json';
@@ -10,12 +11,11 @@ import messages from '../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const meta = {
-  title: 'los/avdelingsleder/behandlingskoer/SletteSakslisteModal',
   component: SletteSakslisteModal,
   decorators: [withIntl],
   args: {
-    cancel: action('button-click'),
-    submit: action('button-click'),
+    cancel: action('cancel'),
+    submit: action('submit'),
   },
 } satisfies Meta<typeof SletteSakslisteModal>;
 export default meta;
@@ -24,23 +24,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    valgtSaksliste: {
-      sakslisteId: 1,
-      navn: 'Saksliste 1',
-      behandlingTyper: [],
-      fagsakYtelseTyper: [],
-      sortering: {
-        sorteringType: 'BEHFRIST',
-        fra: 1,
-        til: 4,
-        periodefilter: 'RELATIV_PERIODE_DAGER',
-      },
-      sorteringTyper: [],
-      saksbehandlere: [],
-      andreKriterie: {
-        inkluder: [],
-        ekskluder: [],
-      },
-    },
+    valgtSaksliste: lagNySaksliste({ navn: 'Saksliste 1', sakslisteId: 1234 }),
   },
 };

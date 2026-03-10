@@ -111,7 +111,7 @@ const FAGSAK = lagFagsak({
     språkkode: '-',
   },
   kontrollResultat: {
-    kontrollresultat: '-',
+    kontrollresultat: 'IKKE_KLASSIFISERT',
   },
 });
 

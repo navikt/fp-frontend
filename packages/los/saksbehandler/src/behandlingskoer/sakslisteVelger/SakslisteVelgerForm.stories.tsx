@@ -5,6 +5,7 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import type { SakslisteDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
 import { SakslisteVelgerForm } from './SakslisteVelgerForm';
@@ -12,6 +13,36 @@ import { SakslisteVelgerForm } from './SakslisteVelgerForm';
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
+const saksliste1: SakslisteDto = {
+  sakslisteId: 1,
+  navn: 'A03 Førstegangsbehandling',
+  beskrivelse: 'Direkte utbetaling',
+  behandlingTyper: ['BT-002', 'BT-004'],
+  fagsakYtelseTyper: ['FP'],
+  sortering: {
+    sorteringType: 'BEHFRIST',
+    fra: 2,
+    til: 4,
+    periodefilter: 'RELATIV_PERIODE_DAGER',
+  },
+  sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
+  saksbehandlere: [
+    {
+      brukerIdent: '32434',
+      navn: 'Espen Utvikler',
+      ansattAvdeling: '1234',
+    },
+    {
+      brukerIdent: '31111',
+      navn: 'Auto Joakim',
+      ansattAvdeling: '1234',
+    },
+  ],
+  andreKriterie: {
+    inkluder: ['TIL_BESLUTTER'],
+    ekskluder: [],
+  },
+};
 
 const meta = {
   title: 'behandlingskoer/SakslisteVelgerForm',
@@ -24,10 +55,10 @@ const meta = {
     },
   },
   args: {
-    setValgtSakslisteId: action('button-click'),
-    fetchAntallOppgaver: action('button-click'),
-    setValueInLocalStorage: action('button-click'),
-    removeValueFromLocalStorage: action('button-click'),
+    setValgtSakslisteId: action('setValgtSakslisteId'),
+    fetchAntallOppgaver: action('fetchAntallOppgaver'),
+    setValueInLocalStorage: action('setValueInLocalStorage'),
+    removeValueFromLocalStorage: action('removeValueFromLocalStorage'),
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
@@ -41,75 +72,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    sakslister: [
-      {
-        sakslisteId: 1,
-        navn: 'Saksliste 1',
-        behandlingTyper: ['BT-002', 'BT-004'],
-        fagsakYtelseTyper: ['FP'],
-        sortering: {
-          sorteringType: 'BEHFRIST',
-          fra: 2,
-          til: 4,
-          periodefilter: 'RELATIV_PERIODE_DAGER',
-        },
-        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-        saksbehandlere: [
-          {
-            brukerIdent: '32434',
-            navn: 'Espen Utvikler',
-            ansattAvdeling: '1234',
-          },
-          {
-            brukerIdent: '31111',
-            navn: 'Auto Joakim',
-            ansattAvdeling: '1234',
-          },
-        ],
-        andreKriterie: {
-          inkluder: ['TIL_BESLUTTER'],
-          ekskluder: [],
-        },
-      },
-    ],
+    sakslister: [saksliste1],
   },
 };
 
 export const MedToSakslister: Story = {
   args: {
     sakslister: [
-      {
-        sakslisteId: 1,
-        navn: 'Saksliste 1',
-        behandlingTyper: ['BT-002', 'BT-004'],
-        fagsakYtelseTyper: ['FP'],
-        sortering: {
-          sorteringType: 'BEHFRIST',
-          fra: 2,
-          til: 4,
-          periodefilter: 'RELATIV_PERIODE_DAGER',
-        },
-        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-        saksbehandlere: [
-          {
-            brukerIdent: '32434',
-            navn: 'Espen Utvikler',
-            ansattAvdeling: '1234',
-          },
-          {
-            brukerIdent: '31111',
-            navn: 'Auto Joakim',
-            ansattAvdeling: '1234',
-          },
-        ],
-        andreKriterie: {
-          inkluder: ['TIL_BESLUTTER'],
-          ekskluder: [],
-        },
-      },
+      saksliste1,
       {
         sakslisteId: 2,
-        navn: 'Saksliste 2',
+        navn: 'A04 Revurdering',
+        beskrivelse:
+          'Endringsøknad fra desember. \nLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sodales neque ' +
+          'id quam gravida, sit amet euismod lorem convallis. Ut non dui id libero, sed pharetra nisl at, scelerisque ' +
+          'ligula. \nHasta la vista.',
         behandlingTyper: ['BT-002', 'BT-003'],
         fagsakYtelseTyper: ['SVP'],
         sortering: {
@@ -144,17 +121,7 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
   args: {
     sakslister: [
       {
-        sakslisteId: 1,
-        navn: 'Saksliste 1',
-        behandlingTyper: ['BT-002', 'BT-004'],
-        fagsakYtelseTyper: ['FP'],
-        sortering: {
-          sorteringType: 'BEHFRIST',
-          fra: 2,
-          til: 4,
-          periodefilter: 'RELATIV_PERIODE_DAGER',
-        },
-        sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
+        ...saksliste1,
         saksbehandlere: [
           {
             brukerIdent: '32434',
@@ -182,10 +149,6 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
             ansattAvdeling: '1234',
           },
         ],
-        andreKriterie: {
-          inkluder: ['TIL_BESLUTTER'],
-          ekskluder: [],
-        },
       },
     ],
   },

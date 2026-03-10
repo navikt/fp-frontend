@@ -93,7 +93,7 @@ const FAGSAK = lagFagsak({
   aktørId: '',
   dekningsgrad: 0,
   kontrollResultat: {
-    kontrollresultat: '-',
+    kontrollresultat: 'IKKE_KLASSIFISERT',
   },
 });
 

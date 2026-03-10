@@ -1,12 +1,14 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { KøStatistikkDto, SakslisteDto } from '@navikt/fp-types';
+import type { SakslisteDto } from '@navikt/fp-types';
 
+import { kriterieFilter } from '../../testdata/kriterieFilter';
+import { lagNySaksliste } from '../../testdata/lagNySaksliste';
+import { statistikkOppgaveFilter } from '../../testdata/statistikkOppgaveFilter';
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
 
@@ -14,103 +16,41 @@ import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const SAKSLISTER = [
-  {
-    sakslisteId: 1,
-    navn: 'A00 Hurtig kø',
-    saksbehandlere: [],
-    sortering: {
-      sorteringType: 'BEHFRIST',
-      fra: 1,
-      til: 4,
-      periodefilter: 'RELATIV_PERIODE_DAGER',
-    },
-    behandlingTyper: ['BT-002'],
-    fagsakYtelseTyper: ['FP'],
-    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-    andreKriterie: {
-      inkluder: [],
-      ekskluder: ['PAPIRSOKNAD', 'TIL_BESLUTTER'],
-    },
-    gjeldendeStatistikk: {
-      alleOppgaver: 33,
-      tilgjengeligeOppgaver: 25,
-      behandlingerPåVent: 22,
-    },
-  },
-  {
-    sakslisteId: 2,
-    navn: 'A02 - Registrere papirsøknad',
-    saksbehandlere: [],
-    sortering: {
-      sorteringType: 'BEHFRIST',
-      fra: 1,
-      til: 4,
-      periodefilter: 'RELATIV_PERIODE_DAGER',
-    },
-    behandlingTyper: ['BT-002'],
-    fagsakYtelseTyper: ['FP'],
-    sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
-    andreKriterie: {
-      inkluder: ['TIL_BESLUTTER'],
-      ekskluder: ['PAPIRSOKNAD'],
-    },
-    gjeldendeStatistikk: {
-      alleOppgaver: 12,
-      tilgjengeligeOppgaver: 8,
-      behandlingerPåVent: 10,
-    },
-  },
-] satisfies SakslisteDto[];
-
-// Hjelpefunksjon for relative datoer
-const getTidspunktForAntallTimerSiden = (hours: number): string => {
-  return dayjs().subtract(hours, 'hour').toISOString();
+const lagHandlersMedSakslister = (initialSakslister: SakslisteDto[]) => {
+  const SAKSLISTER = initialSakslister;
+  return [
+    http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+    http.get(LosUrl.OPPGAVE_AVDELING_ANTALL, () => HttpResponse.json(1)),
+    http.get(LosUrl.OPPGAVE_ANTALL, () => HttpResponse.json(1)),
+    http.get(LosUrl.SAKSLISTER_FOR_AVDELING, () => HttpResponse.json(SAKSLISTER)),
+    http.get(LosUrl.HENT_GRUPPER, () => HttpResponse.json({ saksbehandlerGrupper: [] })),
+    http.get(encodeURI(LosUrl.OPPGAVE_FILTER_STATISTIKK), () => HttpResponse.json(statistikkOppgaveFilter)),
+    http.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, () => new HttpResponse(null, { status: 204 })),
+    http.post(LosUrl.SLETT_SAKSLISTE, () => new HttpResponse(null, { status: 204 })),
+    http.get(LosUrl.KODEVERK_KRITERIE_FILTER, () => HttpResponse.json(kriterieFilter)),
+    http.post(LosUrl.OPPRETT_NY_SAKSLISTE, () => {
+      const nySakslisteId = (SAKSLISTER.at(-1)?.sakslisteId ?? 0) + 1;
+      SAKSLISTER.push(lagNySaksliste({ sakslisteId: nySakslisteId }));
+      return HttpResponse.json({ sakslisteId: nySakslisteId });
+    }),
+  ];
 };
 
-const OPPGAVE_FILTER_STATISTIKK: KøStatistikkDto[] = [
-  { tidspunkt: getTidspunktForAntallTimerSiden(43), aktive: 21, tilgjengelige: 5, ventende: 32, avsluttet: 14 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(42), aktive: 21, tilgjengelige: 4, ventende: 31, avsluttet: 8 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(41), aktive: 21, tilgjengelige: 6, ventende: 33, avsluttet: 22 },
-  // gap på ~13 timer
-  { tidspunkt: getTidspunktForAntallTimerSiden(28), aktive: 19, tilgjengelige: 8, ventende: 29, avsluttet: 31 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(27), aktive: 19, tilgjengelige: 8, ventende: 30, avsluttet: 17 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(26), aktive: 19, tilgjengelige: 6, ventende: 28, avsluttet: 26 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(25), aktive: 18, tilgjengelige: 3, ventende: 27, avsluttet: 39 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(24), aktive: 18, tilgjengelige: 1, ventende: 26, avsluttet: 35 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(23), aktive: 24, tilgjengelige: 5, ventende: 37, avsluttet: 12 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(22), aktive: 27, tilgjengelige: 7, ventende: 41, avsluttet: 7 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(21), aktive: 27, tilgjengelige: 7, ventende: 40, avsluttet: 19 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(20), aktive: 25, tilgjengelige: 9, ventende: 38, avsluttet: 28 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(19), aktive: 21, tilgjengelige: 5, ventende: 32, avsluttet: 33 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(18), aktive: 18, tilgjengelige: 3, ventende: 27, avsluttet: 24 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(17), aktive: 18, tilgjengelige: 6, ventende: 28, avsluttet: 11 },
-  // gap på ~13 timer
-  { tidspunkt: getTidspunktForAntallTimerSiden(4), aktive: 20, tilgjengelige: 10, ventende: 31, avsluttet: 29 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(3), aktive: 20, tilgjengelige: 9, ventende: 30, avsluttet: 16 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(2), aktive: 18, tilgjengelige: 6, ventende: 27, avsluttet: 37 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(1), aktive: 21, tilgjengelige: 4, ventende: 32, avsluttet: 5 },
-  { tidspunkt: getTidspunktForAntallTimerSiden(0), aktive: 29, tilgjengelige: 9, ventende: 44, avsluttet: 21 },
-];
-
 const meta = {
-  title: 'los/avdelingsleder/behandlingskoer/EndreSakslisterPanel',
   component: EndreSakslisterPanel,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.OPPGAVE_ANTALL, () => HttpResponse.json(1)),
-        http.get(LosUrl.SAKSLISTER_FOR_AVDELING, () => HttpResponse.json(SAKSLISTER)),
-        http.get(encodeURI(LosUrl.OPPGAVE_FILTER_STATISTIKK), () => HttpResponse.json(OPPGAVE_FILTER_STATISTIKK)),
-        http.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
-      ],
-    },
+  args: {
+    valgtAvdelingEnhet: '5555',
+    avdelingensSaksbehandlere: [
+      {
+        brukerIdent: 'R23233',
+        navn: 'Ola Nordmann',
+        ansattAvdeling: '1234',
+      },
+    ],
   },
   render: args => {
     const { data: kodeverkLos } = useQuery(losKodeverkOptions());
-
     return kodeverkLos ? <EndreSakslisterPanel {...args} /> : <LoadingPanel />;
   },
 } satisfies Meta<typeof EndreSakslisterPanel>;
@@ -118,9 +58,50 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    valgtAvdelingEnhet: 'NAV Oslo',
-    avdelingensSaksbehandlere: [],
+export const ToSakslister: Story = {
+  parameters: {
+    msw: {
+      handlers: lagHandlersMedSakslister([
+        lagNySaksliste({
+          sakslisteId: 1,
+          navn: 'A00 Hurtig kø',
+          sortering: {
+            sorteringType: 'BEHFRIST',
+            fra: 1,
+            til: 4,
+            periodefilter: 'RELATIV_PERIODE_DAGER',
+          },
+          behandlingTyper: ['BT-002'],
+          fagsakYtelseTyper: ['FP'],
+          sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
+          andreKriterie: {
+            inkluder: [],
+            ekskluder: ['PAPIRSOKNAD', 'TIL_BESLUTTER'],
+          },
+          gjeldendeStatistikk: {
+            alleOppgaver: 33,
+            tilgjengeligeOppgaver: 25,
+            behandlingerPåVent: 22,
+          },
+        }),
+        lagNySaksliste({
+          sakslisteId: 2,
+          navn: 'A02 - Registrere papirsøknad',
+          gjeldendeStatistikk: {
+            alleOppgaver: 12,
+            tilgjengeligeOppgaver: 8,
+            behandlingerPåVent: 10,
+          },
+        }),
+      ]),
+    },
+  },
+};
+
+export const IngenSakslister: Story = {
+  parameters: {
+    msw: {
+      handlers: lagHandlersMedSakslister([]),
+    },
   },
 };
