@@ -11,10 +11,11 @@ import {
   alleKodeverkTilbakekreving,
   getIntlDecorator,
   lagAksjonspunkt,
+  lagFagsak,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingTillatteOperasjoner, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
+import type { BehandlingTillatteOperasjoner, FagsakBehandlingDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake, oppgaverForFagsaker } from '../../.storybook/testdata';
@@ -117,7 +118,7 @@ const ALLE_BEHANDLINGER = [
   },
 ] satisfies FagsakBehandlingDto[];
 
-const FAGSAK = {
+const FAGSAK = lagFagsak({
   saksnummer: '123',
   bruker: {
     navn: 'Espen Utvikler',
@@ -127,24 +128,14 @@ const FAGSAK = {
 
     språkkode: '-',
   },
-  fagsakYtelseType: 'FP',
-  status: 'UBEH',
   behandlinger: ALLE_BEHANDLINGER,
-  sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [],
   relasjonsRolleType: '-',
   aktørId: '',
   dekningsgrad: 0,
-  brukerManglerAdresse: false,
-
-  fagsakMarkeringer: [],
-  historikkinnslag: [],
-  notater: [],
   kontrollResultat: {
     kontrollresultat: '-',
   },
-  harVergeIÅpenBehandling: false,
-} satisfies Fagsak;
+});
 
 const meta = {
   title: 'fagsak/FagsakProfileIndex',

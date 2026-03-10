@@ -8,12 +8,12 @@ import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
   getIntlDecorator,
+  lagFagsak,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
 import type {
   BehandlingTillatteOperasjoner,
-  Fagsak,
   FagsakBehandlingDto,
 } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -82,13 +82,9 @@ const BEHANDLING = {
   totrinnskontrollÅrsaker: [],
 } satisfies FagsakBehandlingDto;
 
-const FAGSAK = {
+const FAGSAK = lagFagsak({
   saksnummer: '123',
-  fagsakYtelseType: 'FP',
-  status: 'UBEH',
   behandlinger: [BEHANDLING],
-  sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [],
   notater: [
     {
       notat: 'Dette er et notat',
@@ -107,15 +103,10 @@ const FAGSAK = {
     dødsdato: undefined,
     språkkode: '-',
   },
-  brukerManglerAdresse: false,
-
-  fagsakMarkeringer: [],
-  historikkinnslag: [],
   kontrollResultat: {
     kontrollresultat: '-',
   },
-  harVergeIÅpenBehandling: false,
-} satisfies Fagsak;
+});
 
 const meta = {
   title: 'fagsak/BehandlingSupportIndex',

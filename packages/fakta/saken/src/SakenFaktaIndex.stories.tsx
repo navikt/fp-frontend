@@ -5,32 +5,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagFagsak,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { Fagsak, Ytelsefordeling } from '@navikt/fp-types';
+import type { Ytelsefordeling } from '@navikt/fp-types';
 
 import { SakenFaktaIndex } from './SakenFaktaIndex';
-
-const defaultFagsak = {
-  aktørId: '9999999999999',
-  behandlingTypeKanOpprettes: [],
-  behandlinger: [],
-  bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K' as const, navn: 'Søker Søkersen', språkkode: 'NB' as const },
-  brukerManglerAdresse: false,
-  dekningsgrad: 100,
-  fagsakMarkeringer: [],
-  fagsakYtelseType: 'FP' as const,
-  harVergeIÅpenBehandling: false,
-  historikkinnslag: [],
-  kontrollResultat: { kontrollresultat: 'IKKE_KLASSIFISERT' as const },
-  notater: [],
-  relasjonsRolleType: 'MORA' as const,
-  sakSkalTilInfotrygd: false,
-  saksnummer: '12345',
-  status: 'UBEH' as const,
-} satisfies Fagsak;
 
 const defaultYtelsefordeling = {
   førsteUttaksdato: '2019-01-01',
@@ -71,36 +53,32 @@ export const StartdatoForForeldrepengerOgDekningsgrad: Story = {
 export const StartdatoForForeldrepengerOgDekningsgradMedAnnenPart: Story = {
   args: {
     aksjonspunkterForPanel: [],
-    fagsak: {
-      ...defaultFagsak,
-      fagsakYtelseType: 'FP' as const,
-      bruker: { ...defaultFagsak.bruker, navn: 'Helga Utvikler' },
+    fagsak: lagFagsak({
+      bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Helga Utvikler', språkkode: 'NB' },
       annenPart: {
         navn: 'Espen Utvikler',
         fødselsdato: '1990-01-01',
         fødselsnummer: '01019012345',
-        kjønn: 'M' as const,
-        språkkode: 'NB' as const,
+        kjønn: 'M',
+        språkkode: 'NB',
       },
-    } satisfies Fagsak,
+    }),
   },
 };
 
 export const KanIkkeOverstyreDekningsgrad: Story = {
   args: {
     aksjonspunkterForPanel: [],
-    fagsak: {
-      ...defaultFagsak,
-      fagsakYtelseType: 'FP' as const,
-      bruker: { ...defaultFagsak.bruker, navn: 'Helga Utvikler' },
+    fagsak: lagFagsak({
+      bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Helga Utvikler', språkkode: 'NB' },
       annenPart: {
         navn: 'Espen Utvikler',
         fødselsdato: '1990-01-01',
         fødselsnummer: '01019012345',
-        kjønn: 'M' as const,
-        språkkode: 'NB' as const,
+        kjønn: 'M',
+        språkkode: 'NB',
       },
-    } satisfies Fagsak,
+    }),
     kanOverstyreAccess: false,
   },
 };
@@ -114,10 +92,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjon: Story = {
 export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK)],
-    fagsak: {
-      ...defaultFagsak,
-      fagsakYtelseType: 'SVP' as const,
-    } satisfies Fagsak,
+    fagsak: lagFagsak({ fagsakYtelseType: 'SVP' }),
   },
 };
 
@@ -158,18 +133,16 @@ export const DekningsgradErEndret: Story = {
 export const HarFåttDekningsgradAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_DEKNINGSGRAD)],
-    fagsak: {
-      ...defaultFagsak,
-      fagsakYtelseType: 'FP' as const,
-      bruker: { ...defaultFagsak.bruker, navn: 'Helga Utvikler', kjønn: 'K' as const },
+    fagsak: lagFagsak({
+      bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Helga Utvikler', språkkode: 'NB' },
       annenPart: {
         navn: 'Espen Utvikler',
-        kjønn: 'M' as const,
+        kjønn: 'M',
         fødselsdato: '1990-01-01',
         fødselsnummer: '01019012345',
-        språkkode: 'NB' as const,
+        språkkode: 'NB',
       },
-    } satisfies Fagsak,
+    }),
     ytelsefordeling: {
       førsteUttaksdato: '2019-01-01',
       startDatoForPermisjon: '2019-01-01',
@@ -190,18 +163,16 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
 export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_DEKNINGSGRAD)],
-    fagsak: {
-      ...defaultFagsak,
-      fagsakYtelseType: 'FP' as const,
-      bruker: { ...defaultFagsak.bruker, navn: 'Helga Utvikler', kjønn: 'K' as const },
+    fagsak: lagFagsak({
+      bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Helga Utvikler', språkkode: 'NB' },
       annenPart: {
         navn: 'Espen Utvikler',
-        kjønn: '-' as const,
+        kjønn: '-',
         fødselsdato: '1990-01-01',
         fødselsnummer: '01019012345',
-        språkkode: 'NB' as const,
+        språkkode: 'NB',
       },
-    } satisfies Fagsak,
+    }),
     ytelsefordeling: {
       førsteUttaksdato: '2019-01-01',
       startDatoForPermisjon: '2019-01-01',
@@ -226,18 +197,16 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
         begrunnelse: 'Dette er en begrunnelse',
       }),
     ],
-    fagsak: {
-      ...defaultFagsak,
-      fagsakYtelseType: 'FP' as const,
-      bruker: { ...defaultFagsak.bruker, navn: 'Helga Utvikler', kjønn: 'K' as const },
+    fagsak: lagFagsak({
+      bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Helga Utvikler', språkkode: 'NB' },
       annenPart: {
         navn: 'Espen Utvikler',
-        kjønn: 'M' as const,
+        kjønn: 'M',
         fødselsdato: '1990-01-01',
         fødselsnummer: '01019012345',
-        språkkode: 'NB' as const,
+        språkkode: 'NB',
       },
-    } satisfies Fagsak,
+    }),
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AVKLAR_DEKNINGSGRAD]: {
         notAccepted: true,

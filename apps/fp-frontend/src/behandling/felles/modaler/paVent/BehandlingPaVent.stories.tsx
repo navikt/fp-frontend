@@ -3,8 +3,7 @@ import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { alleKodeverk, lagAksjonspunkt, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak } from '@navikt/fp-types';
+import { alleKodeverk, lagAksjonspunkt, lagBehandling, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { BehandlingPaVent } from './BehandlingPaVent';
 
@@ -32,43 +31,28 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const DEFAULT_BEHANDLING = {
-  uuid: '121212',
-  versjon: 1,
-  behandlingPåVent: true,
-  status: 'UTRED',
-  type: 'BT-002',
-  behandlingHenlagt: false,
-  fristBehandlingPåVent: '2030-10-10',
-  venteÅrsakKode: 'AVV_FODSEL',
-  links: [link],
-  aksjonspunkt: [],
-  aktivPapirsøknad: false,
-  behandlendeEnhetId: '4820',
-  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
-  behandlingÅrsaker: [],
-  harSattEndringsdato: false,
-  harSøknad: true,
-  id: 1,
-  opprettet: '2020-01-01',
-  språkkode: 'NB',
-  vilkår: [],
-} satisfies BehandlingFpSak;
-
 export const BehandlingSattPåVent: Story = {
   args: {
-    behandling: {
-      ...DEFAULT_BEHANDLING,
+    behandling: lagBehandling({
+      uuid: '121212',
+      behandlingPåVent: true,
+      fristBehandlingPåVent: '2030-10-10',
+      venteÅrsakKode: 'AVV_FODSEL',
+      links: [link],
       aksjonspunkt: [lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5069)],
-    } satisfies BehandlingFpSak,
+    }),
   },
 };
 
 export const BehandlingSattManueltPåVent: Story = {
   args: {
-    behandling: {
-      ...DEFAULT_BEHANDLING,
+    behandling: lagBehandling({
+      uuid: '121212',
+      behandlingPåVent: true,
+      fristBehandlingPåVent: '2030-10-10',
+      venteÅrsakKode: 'AVV_FODSEL',
+      links: [link],
       aksjonspunkt: [lagAksjonspunkt(AksjonspunktKode.AUTO_MANUELT_SATT_PÅ_VENT)],
-    } satisfies BehandlingFpSak,
+    }),
   },
 };

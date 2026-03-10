@@ -5,34 +5,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagBehandling,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak, Innsyn } from '@navikt/fp-types';
+import type { Innsyn } from '@navikt/fp-types';
 
 import { InnsynProsessIndex } from './InnsynProsessIndex';
-
-const defaultBehandling = {
-  aksjonspunkt: [],
-  aktivPapirsøknad: false,
-  behandlendeEnhetId: '4820',
-  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
-  behandlingHenlagt: false,
-  behandlingPåVent: false,
-  behandlingÅrsaker: [],
-  harSattEndringsdato: false,
-  harSøknad: true,
-  id: 1,
-  links: [],
-  opprettet: '2020-01-01',
-  språkkode: 'NB',
-  status: 'UTRED',
-  type: 'BT-002',
-  uuid: '1',
-  versjon: 1,
-  vilkår: [],
-} satisfies BehandlingFpSak;
 
 const meta = {
   title: 'prosess/innsyn/prosess-innsyn',
@@ -75,10 +55,7 @@ export const PanelForVurderingAvInnsyn: Story = {
 
 export const InnsynSattPaVent: Story = {
   args: {
-    behandling: {
-      ...defaultBehandling,
-      fristBehandlingPåVent: '2021-12-25',
-    },
+    behandling: lagBehandling({ fristBehandlingPåVent: '2021-12-25' }),
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.VURDER_INNSYN, {
         status: 'UTFO',

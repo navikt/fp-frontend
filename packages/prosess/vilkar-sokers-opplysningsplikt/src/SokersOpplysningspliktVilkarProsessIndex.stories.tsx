@@ -5,11 +5,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagBehandling,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { ArbeidsgiverOpplysningerPerId, BehandlingFpSak, Soknad } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
 
 import { SokersOpplysningspliktVilkarProsessIndex } from './SokersOpplysningspliktVilkarProsessIndex';
 
@@ -43,27 +44,6 @@ const søknad = {
   },
 } satisfies Soknad;
 
-const defaultBehandling = {
-  aksjonspunkt: [],
-  aktivPapirsøknad: false,
-  behandlendeEnhetId: '4820',
-  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
-  behandlingHenlagt: false,
-  behandlingPåVent: false,
-  behandlingÅrsaker: [],
-  harSattEndringsdato: false,
-  harSøknad: true,
-  id: 1,
-  links: [],
-  opprettet: '2020-01-01',
-  språkkode: 'NB',
-  status: 'UTRED',
-  type: 'BT-002',
-  uuid: '1',
-  versjon: 1,
-  vilkår: [],
-} satisfies BehandlingFpSak;
-
 const meta = {
   title: 'prosess/prosess-vilkar-sokers-opplysningsplikt',
   component: SokersOpplysningspliktVilkarProsessIndex,
@@ -93,21 +73,10 @@ export const UtførtAPMedOppfyltVilkår: Story = {
 
 export const UtførtAPMedAvslåttVilkår: Story = {
   args: {
-    behandling: {
-      ...defaultBehandling,
-      behandlingsresultat: {
-        avslagsarsak: '1099',
-        harRedigertVedtaksbrev: false,
-        id: 1,
-        type: 'AVSLÅTT',
-        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
-      },
-    } satisfies BehandlingFpSak,
-    aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5017, {
-        status: 'UTFO',
-      }),
-    ],
+    behandling: lagBehandling({
+      behandlingsresultat: { avslagsarsak: '1099', harRedigertVedtaksbrev: false, id: 1, type: 'AVSLÅTT', vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+    }),
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5017, { status: 'UTFO' })],
     isReadOnly: true,
     isSubmittable: false,
     status: 'IKKE_OPPFYLT',
@@ -125,16 +94,9 @@ export const KanOverstyreVilkår: Story = {
 
 export const HarOverstyrtMedOppfyltVilkår: Story = {
   args: {
-    behandling: {
-      ...defaultBehandling,
-      behandlingsresultat: {
-        avslagsarsak: undefined,
-        harRedigertVedtaksbrev: false,
-        id: 1,
-        type: 'INNVILGET',
-        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
-      },
-    } satisfies BehandlingFpSak,
+    behandling: lagBehandling({
+      behandlingsresultat: { avslagsarsak: undefined, harRedigertVedtaksbrev: false, id: 1, type: 'INNVILGET', vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+    }),
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
     ],
@@ -146,16 +108,9 @@ export const HarOverstyrtMedOppfyltVilkår: Story = {
 
 export const HarOverstyrtMedAvslåttVilkår: Story = {
   args: {
-    behandling: {
-      ...defaultBehandling,
-      behandlingsresultat: {
-        avslagsarsak: '1099',
-        harRedigertVedtaksbrev: false,
-        id: 1,
-        type: 'AVSLÅTT',
-        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
-      },
-    } satisfies BehandlingFpSak,
+    behandling: lagBehandling({
+      behandlingsresultat: { avslagsarsak: '1099', harRedigertVedtaksbrev: false, id: 1, type: 'AVSLÅTT', vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+    }),
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
     ],

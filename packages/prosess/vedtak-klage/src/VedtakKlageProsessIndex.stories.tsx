@@ -4,37 +4,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { lagAksjonspunkt, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak, KlageVurdering } from '@navikt/fp-types';
+import { lagAksjonspunkt, lagBehandling, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import type { KlageVurdering } from '@navikt/fp-types';
 
 import { VedtakKlageProsessIndex } from './VedtakKlageProsessIndex';
 
-const behandling = {
-  aksjonspunkt: [],
-  aktivPapirsøknad: false,
-  behandlendeEnhetId: '4820',
-  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
-  behandlingHenlagt: false,
-  behandlingPåVent: false,
-  behandlingÅrsaker: [],
-  behandlingsresultat: {
-    harRedigertVedtaksbrev: false,
-    id: 1,
-    type: 'KLAGE_AVVIST',
-    vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
-  },
-  harSattEndringsdato: false,
-  harSøknad: true,
-  id: 1,
-  links: [],
-  opprettet: '2020-01-01',
-  språkkode: 'NB',
-  status: 'UTRED',
-  type: 'BT-002',
-  uuid: '1',
-  versjon: 1,
-  vilkår: [],
-} satisfies BehandlingFpSak;
+const behandling = lagBehandling({
+  behandlingsresultat: { harRedigertVedtaksbrev: false, id: 1, type: 'KLAGE_AVVIST', vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+});
 
 const meta = {
   title: 'prosess/klage/prosess-vedtak-klage',

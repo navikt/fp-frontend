@@ -1,33 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak, Fagsak } from '@navikt/fp-types';
+import { alleKodeverk, getIntlDecorator, lagBehandling, withRouter } from '@navikt/fp-storybook-utils';
+import type { Fagsak } from '@navikt/fp-types';
 
 import { RegistrerPapirsoknadPanel } from './RegistrerPapirsoknadPanel';
 
 import messages from '../i18n/nb_NO.json';
 
-const DEFAULT_BEHANDLING_FPSAK = {
-  aksjonspunkt: [],
-  aktivPapirsøknad: false,
-  behandlendeEnhetId: '4820',
-  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
-  behandlingHenlagt: false,
-  behandlingPåVent: false,
-  behandlingÅrsaker: [],
-  harSattEndringsdato: false,
-  harSøknad: true,
-  id: 1,
-  links: [],
-  opprettet: '2020-01-01',
-  språkkode: 'NB',
-  status: 'UTRED',
-  type: 'BT-002',
-  uuid: '1',
-  versjon: 1,
-  vilkår: [],
-} satisfies BehandlingFpSak;
+const DEFAULT_BEHANDLING_FPSAK = lagBehandling();
 
 const DEFAULT_FAGSAK = {
   aktørId: '9999999999999',

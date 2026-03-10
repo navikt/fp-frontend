@@ -6,6 +6,7 @@ import { action } from 'storybook/actions';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagFagsak,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -13,7 +14,6 @@ import {
 import type {
   ArbeidsgiverOpplysningerPerId,
   BehandlingFpSak,
-  Fagsak,
   FamilieHendelse,
   PeriodeResultatÅrsakMuligeÅrsaker,
   Personoversikt,
@@ -23,25 +23,6 @@ import type {
 } from '@navikt/fp-types';
 
 import { UttakProsessIndex } from './UttakProsessIndex';
-
-const defaultFagsak = {
-  aktørId: '',
-  behandlingTypeKanOpprettes: [],
-  behandlinger: [],
-  bruker: { navn: '', fødselsnummer: '', kjønn: '-' as const, fødselsdato: '', språkkode: '-' as const },
-  brukerManglerAdresse: false,
-  dekningsgrad: 0,
-  fagsakMarkeringer: [],
-  fagsakYtelseType: 'FP' as const,
-  harVergeIÅpenBehandling: false,
-  historikkinnslag: [],
-  kontrollResultat: { kontrollresultat: '-' as const },
-  notater: [],
-  relasjonsRolleType: '-' as const,
-  sakSkalTilInfotrygd: false,
-  saksnummer: '',
-  status: 'LOP' as const,
-} satisfies Fagsak;
 
 const defaultAksjonspunkt = lagAksjonspunkt(AksjonspunktKode.FASTSETT_UTTAKPERIODER);
 
@@ -1384,10 +1365,7 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
         sivilstand: 'UGIF',
       },
     } satisfies Personoversikt,
-    fagsak: {
-      ...defaultFagsak,
-      relasjonsRolleType: 'FARA',
-    } satisfies Fagsak,
+    fagsak: lagFagsak({ relasjonsRolleType: 'FARA' }),
     uttakStonadskontoer: {
       ...uttakStonadskontoer,
       stønadskonti: {

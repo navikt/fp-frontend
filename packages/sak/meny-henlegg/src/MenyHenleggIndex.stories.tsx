@@ -1,30 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak, BehandlingFpTilbake } from '@navikt/fp-types';
+import { alleKodeverk, alleKodeverkTilbakekreving, lagBehandling } from '@navikt/fp-storybook-utils';
+import type { BehandlingFpTilbake } from '@navikt/fp-types';
 
 import { MenyHenleggIndex } from './MenyHenleggIndex';
-
-const DEFAULT_FPSAK_BEHANDLING = {
-  aksjonspunkt: [],
-  aktivPapirsøknad: false,
-  behandlendeEnhetId: '4820',
-  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
-  behandlingHenlagt: false,
-  behandlingPåVent: false,
-  behandlingÅrsaker: [],
-  harSattEndringsdato: false,
-  harSøknad: true,
-  id: 1,
-  links: [],
-  opprettet: '2020-01-01',
-  språkkode: 'NB',
-  status: 'UTRED',
-  uuid: '23r2323',
-  versjon: 2,
-  vilkår: [],
-} satisfies Omit<BehandlingFpSak, 'type'>;
 
 const DEFAULT_TILBAKE_BEHANDLING = {
   aksjonspunkt: [],
@@ -64,21 +44,21 @@ type Story = StoryObj<typeof meta>;
 
 export const ForFørstegangssøknad: Story = {
   args: {
-    valgtBehandling: { ...DEFAULT_FPSAK_BEHANDLING, type: 'BT-002' } satisfies BehandlingFpSak,
+    valgtBehandling: lagBehandling({ uuid: '23r2323', versjon: 2 }),
     behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };
 
 export const ForKlage: Story = {
   args: {
-    valgtBehandling: { ...DEFAULT_FPSAK_BEHANDLING, type: 'BT-003' } satisfies BehandlingFpSak,
+    valgtBehandling: lagBehandling({ uuid: '23r2323', versjon: 2, type: 'BT-003' }),
     behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };
 
 export const ForInnsyn: Story = {
   args: {
-    valgtBehandling: { ...DEFAULT_FPSAK_BEHANDLING, type: 'BT-006' } satisfies BehandlingFpSak,
+    valgtBehandling: lagBehandling({ uuid: '23r2323', versjon: 2, type: 'BT-006' }),
     behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };
@@ -99,7 +79,7 @@ export const ForTilbakekrevingRevurdering: Story = {
 
 export const ForRevurdering: Story = {
   args: {
-    valgtBehandling: { ...DEFAULT_FPSAK_BEHANDLING, type: 'BT-004' } satisfies BehandlingFpSak,
+    valgtBehandling: lagBehandling({ uuid: '23r2323', versjon: 2, type: 'BT-004' }),
     behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };

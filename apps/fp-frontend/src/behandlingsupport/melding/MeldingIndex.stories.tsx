@@ -8,10 +8,11 @@ import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
   getIntlDecorator,
+  lagFagsak,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingTillatteOperasjoner, DokumentMalType, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
+import type { BehandlingTillatteOperasjoner, DokumentMalType, FagsakBehandlingDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
@@ -85,24 +86,7 @@ const ALLE_BEHANDLINGER = [
   },
 ] satisfies FagsakBehandlingDto[];
 
-const FAGSAK = {
-  saksnummer: '123',
-  fagsakYtelseType: 'FP',
-  status: 'UBEH',
-  behandlinger: ALLE_BEHANDLINGER,
-  sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [],
-  brukerManglerAdresse: true,
-  aktørId: '9999999999999',
-  bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Søker Søkersen', språkkode: 'NB' },
-  dekningsgrad: 100,
-  fagsakMarkeringer: [],
-  harVergeIÅpenBehandling: false,
-  historikkinnslag: [],
-  kontrollResultat: { kontrollresultat: 'IKKE_KLASSIFISERT' },
-  notater: [],
-  relasjonsRolleType: 'MORA',
-} satisfies Fagsak;
+const FAGSAK = lagFagsak({ saksnummer: '123', behandlinger: ALLE_BEHANDLINGER, brukerManglerAdresse: true });
 
 const meta = {
   title: 'fagsak/MeldingIndex',

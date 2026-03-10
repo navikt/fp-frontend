@@ -5,33 +5,15 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagFagsak,
   lagVilkår,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { Fagsak, FastsattOpptjening } from '@navikt/fp-types';
+import type { FastsattOpptjening } from '@navikt/fp-types';
 
 import { OpptjeningVilkarProsessIndex } from './OpptjeningVilkarProsessIndex';
-
-const defaultFagsak = {
-  aktørId: '',
-  behandlingTypeKanOpprettes: [],
-  behandlinger: [],
-  bruker: { navn: '', fødselsnummer: '', kjønn: '-' as const, fødselsdato: '', språkkode: '-' as const },
-  brukerManglerAdresse: false,
-  dekningsgrad: 0,
-  fagsakMarkeringer: [],
-  fagsakYtelseType: 'FP' as const,
-  harVergeIÅpenBehandling: false,
-  historikkinnslag: [],
-  kontrollResultat: { kontrollresultat: '-' as const },
-  notater: [],
-  relasjonsRolleType: '-' as const,
-  sakSkalTilInfotrygd: false,
-  saksnummer: '',
-  status: 'LOP' as const,
-} satisfies Fagsak;
 
 const defaultFastsattOpptjening = {
   opptjeningperiode: {
@@ -63,10 +45,7 @@ const meta = {
   args: {
     isReadOnly: false,
     status: 'IKKE_VURDERT',
-    fagsak: {
-      ...defaultFagsak,
-      fagsakYtelseType: 'FP',
-    } satisfies Fagsak,
+    fagsak: lagFagsak(),
     vilkårForPanel: [lagVilkår('FP_VK_21')],
   },
   render: args => <OpptjeningVilkarProsessIndex {...args} />,
@@ -84,10 +63,7 @@ export const ÅpentAksjonspunkt: Story = {
 
 export const ÅpentAksjonspunktSvangerskapspenger: Story = {
   args: {
-    fagsak: {
-      ...defaultFagsak,
-      fagsakYtelseType: 'SVP',
-    } satisfies Fagsak,
+    fagsak: lagFagsak({ fagsakYtelseType: 'SVP' }),
     fastsattOpptjening: defaultFastsattOpptjening,
     aksjonspunkterForPanel: [defaultAksjonspunkt],
   },
