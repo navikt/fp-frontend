@@ -61,10 +61,10 @@
   },
   "resolutions": {
     "@adobe/css-tools": "4.3.2",
-    "@types/react": "19.1.2",
+    "@types/react": "19.2.9",
     "axios": "1.11.0",
-    "react": "19.1.1",
-    "react-dom": "19.1.1"
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "lint-staged": {
     "apps/**/*.{ts,tsx,js,jsx, css}": "prettier --write",
