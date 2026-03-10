@@ -2,10 +2,9 @@
 
 Monorepo for Frontend kode for foreldrepenger.
 
-[![Build](https://github.com/navikt/fp-frontend/workflows/Build,%20push%20and%20deploy%20Fpsak-frontend/badge.svg)](https://github.com/navikt/fp-frontend/workflows/Build,%20push%20and%20deploy%20Fpsak-frontend/badge.svg)
+[![Build](https://github.com/navikt/fp-frontend/actions/workflows/build-fp-frontend.yml/badge.svg)](https://github.com/navikt/fp-frontend/actions/workflows/build-fp-frontend.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=navikt_fp-frontend&metric=alert_status)](https://sonarcloud.io/dashboard?id=navikt_fp-frontend)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=navikt_fp-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=navikt_fp-frontend)
-[![Known Vulnerabilities](https://snyk.io/test/github/navikt/fp-frontend/badge.svg)](https://snyk.io/test/github/navikt/fp-frontend)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ## Storybook
@@ -17,10 +16,11 @@ https://navikt.github.io/fp-frontend
 Lag en .yarnrc.yml-fil i hjemmefolderen din: (Bytt ut <token> med ditt genererte token)
 
 ```
-npmRegistries:
-  https://npm.pkg.github.com:
+npmScopes:
+  navikt:
     npmAlwaysAuth: true
     npmAuthToken: <token>
+    npmRegistryServer: "https://npm.pkg.github.com"
 ```
 
 Kjør så desse kommandoene for å installere og bygge applikasjonen:
@@ -89,10 +89,6 @@ du ønsker å teste med, så fortsett å jobbe videre med den lokale frontenden 
 Om man skulle få problemer med at `authserver:8085` ikke finnes så må man legge inn `authserver` i `hosts` fila på
 maskinen:
 `127.0.0.1 localhost authserver`
-
-#### TODO
-
-- Legge inn readme for pakkene!
 
 ## Synkroniser TS-typer for med fpsak DTO-er
 
