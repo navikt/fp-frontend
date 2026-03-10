@@ -7,6 +7,15 @@ import type { AnkeVurdering } from '@navikt/fp-types';
 
 import { AnkeTrygderettsbehandlingProsessIndex } from './AnkeTrygderettsbehandlingProsessIndex';
 
+const defaultAnkeVurderingResultat = {
+  begrunnelse: '',
+  erAnkerIkkePart: false,
+  erFristIkkeOverholdt: false,
+  erIkkeKonkret: false,
+  erIkkeSignert: false,
+  erSubsidiartRealitetsbehandles: false,
+};
+
 const meta = {
   title: 'prosess/anke/prosess-anke-trygderettsbehandling',
   component: AnkeTrygderettsbehandlingProsessIndex,
@@ -21,13 +30,14 @@ export const ResultatVedOmgjortResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         erMerknaderMottatt: true,
         merknadKommentar: 'Dette er en merknad',
         trygderettVurdering: 'ANKE_OMGJOER',
         trygderettOmgjørÅrsak: 'NYE_OPPLYSNINGER',
         trygderettVurderingOmgjør: 'ANKE_TIL_GUNST',
       },
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -35,12 +45,13 @@ export const ResultatVedOpphevetResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         erMerknaderMottatt: true,
         merknadKommentar: 'Dette er en kommentar',
         trygderettVurdering: 'ANKE_OPPHEVE_OG_HJEMSENDE',
         trygderettOmgjørÅrsak: 'NYE_OPPLYSNINGER',
       },
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -48,12 +59,13 @@ export const ResultatVedHjemsendtResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         erMerknaderMottatt: true,
         merknadKommentar: 'Dette er en merknad',
         trygderettVurdering: 'ANKE_HJEMSENDE_UTEN_OPPHEV',
         trygderettOmgjørÅrsak: 'NYE_OPPLYSNINGER',
       },
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -61,11 +73,12 @@ export const ResultatVedAvvistResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         erMerknaderMottatt: true,
         merknadKommentar: 'Dette er en kommentar',
         trygderettVurdering: 'ANKE_AVVIS',
       },
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -73,11 +86,12 @@ export const ResultatVedStadfestetResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         erMerknaderMottatt: true,
         merknadKommentar: 'Dette er en kommentar',
         trygderettVurdering: 'ANKE_STADFESTE_YTELSESVEDTAK',
       },
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -85,10 +99,11 @@ export const ErBehandletIKabel: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         trygderettVurdering: 'ANKE_STADFESTE_YTELSESVEDTAK',
       },
       behandletAvKabal: true,
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };
 
@@ -96,9 +111,10 @@ export const ErUnderBehandlingIKabel: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
+        ...defaultAnkeVurderingResultat,
         trygderettVurdering: 'ANKE_STADFESTE_YTELSESVEDTAK',
       },
       underBehandlingKabal: true,
-    } as AnkeVurdering,
+    } satisfies AnkeVurdering,
   },
 };

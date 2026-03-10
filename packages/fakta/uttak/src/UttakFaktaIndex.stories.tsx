@@ -5,11 +5,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagFagsak,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { OverføringÅrsak } from './kodeverk/overføringÅrsak';
 import { UttakFaktaIndex } from './UttakFaktaIndex';
@@ -469,6 +470,6 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
       },
     ],
     kanOverstyre: false,
-    fagsak: { relasjonsRolleType: 'FARA' } as Fagsak,
+    fagsak: lagFagsak({ relasjonsRolleType: 'FARA' }),
   },
 };

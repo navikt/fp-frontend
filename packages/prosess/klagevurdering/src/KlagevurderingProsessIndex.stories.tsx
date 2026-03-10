@@ -16,6 +16,16 @@ import { type TransformedValues } from './components/nfp/BehandleKlageFormNfp';
 import type { KlagevurderingForhåndsvisData } from './components/nfp/PreviewKlageLink';
 import { KlagevurderingProsessIndex } from './KlagevurderingProsessIndex';
 
+const defaultKlageFormkravResultat = {
+  avvistÅrsaker: [],
+  begrunnelse: '',
+  erKlageKonkret: false,
+  erKlagefirstOverholdt: false,
+  erKlagerPart: false,
+  erSignert: false,
+  påKlagdBehandlingUuid: '',
+};
+
 const meta = {
   title: 'prosess/klage/prosess-klagevurdering',
   component: KlagevurderingProsessIndex,
@@ -45,10 +55,11 @@ export const MedholdIKlageNk: Story = {
         begrunnelse: 'Dette er en begrunnelse',
       },
       klageFormkravResultatKA: {
+        ...defaultKlageFormkravResultat,
         avvistÅrsaker: ['IKKE_KONKRET'],
       },
       aktuelleHjemler: ['14-17'],
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
   },
 };
 
@@ -63,10 +74,11 @@ export const StadfestKlageNk: Story = {
         begrunnelse: 'Dette er en begrunnelse',
       },
       klageFormkravResultatKA: {
+        ...defaultKlageFormkravResultat,
         avvistÅrsaker: ['IKKE_KONKRET'],
       },
       aktuelleHjemler: ['14-17'],
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
   },
 };
 
@@ -82,10 +94,11 @@ export const HjemsendtIKlageNk: Story = {
         begrunnelse: 'Dette er en begrunnelse',
       },
       klageFormkravResultatKA: {
+        ...defaultKlageFormkravResultat,
         avvistÅrsaker: ['IKKE_KONKRET'],
       },
       aktuelleHjemler: ['14-17'],
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
   },
 };
 
@@ -101,10 +114,11 @@ export const OpphevIKlageNk: Story = {
         begrunnelse: 'Dette er en begrunnelse',
       },
       klageFormkravResultatKA: {
+        ...defaultKlageFormkravResultat,
         avvistÅrsaker: ['IKKE_KONKRET'],
       },
       aktuelleHjemler: ['14-17'],
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
   },
 };
 
@@ -113,9 +127,10 @@ export const KlagevurderingMedAksjonspunktNfp: Story = {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP)],
     klageVurdering: {
       klageFormkravResultatKA: {
+        ...defaultKlageFormkravResultat,
         avvistÅrsaker: ['IKKE_KONKRET'],
       },
       aktuelleHjemler: ['14-17'],
-    } as KlageVurdering,
+    } satisfies KlageVurdering,
   },
 };

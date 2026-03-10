@@ -5,19 +5,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagBehandling,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak, Innsyn, InnsynDokument } from '@navikt/fp-types';
+import type { Innsyn } from '@navikt/fp-types';
 
 import { InnsynProsessIndex } from './InnsynProsessIndex';
-
-const defaultBehandling = {
-  uuid: '1',
-  versjon: 1,
-  behandlingPåVent: false,
-} as BehandlingFpSak;
 
 const meta = {
   title: 'prosess/innsyn/prosess-innsyn',
@@ -42,10 +37,11 @@ type Story = StoryObj<typeof meta>;
 
 export const PanelForVurderingAvInnsyn: Story = {
   args: {
-    behandling: defaultBehandling,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_INNSYN)],
     innsyn: {
-      dokumenter: [] as InnsynDokument[],
+      dokumenter: [],
+      innsynMottattDato: '2021-01-01',
+      innsynResultatType: 'INNV',
       vedtaksdokumentasjon: [
         {
           behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
@@ -53,16 +49,13 @@ export const PanelForVurderingAvInnsyn: Story = {
           opprettetDato: '2019-01-01',
         },
       ],
-    } as Innsyn,
+    } satisfies Innsyn,
   },
 };
 
 export const InnsynSattPaVent: Story = {
   args: {
-    behandling: {
-      ...defaultBehandling,
-      fristBehandlingPåVent: '2021-12-25',
-    },
+    behandling: lagBehandling({ fristBehandlingPåVent: '2021-12-25' }),
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.VURDER_INNSYN, {
         status: 'UTFO',
@@ -70,7 +63,7 @@ export const InnsynSattPaVent: Story = {
     ],
     isReadOnly: true,
     innsyn: {
-      dokumenter: [] as InnsynDokument[],
+      dokumenter: [],
       innsynResultatType: 'INNV',
       innsynMottattDato: '2021-12-12',
       vedtaksdokumentasjon: [
@@ -80,6 +73,6 @@ export const InnsynSattPaVent: Story = {
           opprettetDato: '2019-01-01',
         },
       ],
-    } as Innsyn,
+    } satisfies Innsyn,
   },
 };

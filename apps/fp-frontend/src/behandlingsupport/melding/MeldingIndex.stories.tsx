@@ -8,10 +8,12 @@ import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
   getIntlDecorator,
+  lagFagsak,
+  lagFagsakBehandling,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingOppretting, DokumentMalType, Fagsak, FagsakBehandlingDto } from '@navikt/fp-types';
+import type { DokumentMalType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
@@ -41,49 +43,31 @@ const MALER = [
   { kode: 'INNOPP' satisfies DokumentMalType, navn: 'Innhent', tilgjengelig: true },
 ];
 
-const BEHANDLING_TILLATTE_OPERASJONER = {
-  behandlingFraBeslutter: false,
-  behandlingKanSendeMelding: true,
-  behandlingTilGodkjenning: false,
-  behandlingKanBytteEnhet: true,
-  behandlingKanHenlegges: true,
-  behandlingKanGjenopptas: false,
-  behandlingKanOpnesForEndringer: true,
-  behandlingKanSettesPaVent: true,
-  vergeBehandlingsmeny: 'OPPRETT',
-};
-
 const ALLE_BEHANDLINGER = [
-  {
+  lagFagsakBehandling({
     versjon: 2,
     uuid: '1',
-    behandlingPåVent: false,
     type: 'BT-004',
-    status: 'UTRED',
     behandlendeEnhetId: '2323',
     behandlendeEnhetNavn: 'Nav Vikafossen',
-    aktivPapirsøknad: false,
-    behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
     brevmaler: MALER,
-    språkkode: 'NB',
-    links: [
-      {
-        href: '/fpsak/bestill',
-        rel: 'brev-bestill',
-      },
-    ],
-  },
-] as FagsakBehandlingDto[];
+    behandlingTillatteOperasjoner: {
+      behandlingFraBeslutter: false,
+      behandlingKanBytteEnhet: true,
+      behandlingKanGjenopptas: false,
+      behandlingKanHenlegges: true,
+      behandlingKanMerkesHaster: false,
+      behandlingKanOpnesForEndringer: true,
+      behandlingKanSendeMelding: true,
+      behandlingKanSettesPaVent: true,
+      behandlingTilGodkjenning: false,
+      vergeBehandlingsmeny: 'OPPRETT',
+    },
+    links: [{ href: '/fpsak/bestill', rel: 'brev-bestill', type: 'POST' }],
+  }),
+];
 
-const FAGSAK = {
-  saksnummer: '123',
-  fagsakYtelseType: 'FP',
-  status: 'UBEH',
-  behandlinger: ALLE_BEHANDLINGER,
-  sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
-  brukerManglerAdresse: true,
-} as Fagsak;
+const FAGSAK = lagFagsak({ saksnummer: '123', behandlinger: ALLE_BEHANDLINGER, brukerManglerAdresse: true });
 
 const meta = {
   title: 'fagsak/MeldingIndex',

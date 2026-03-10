@@ -1,10 +1,28 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
-import type { BehandlingFpSak, BehandlingFpTilbake } from '@navikt/fp-types';
+import { alleKodeverk, alleKodeverkTilbakekreving, lagBehandling } from '@navikt/fp-storybook-utils';
+import type { BehandlingFpTilbake } from '@navikt/fp-types';
 
 import { MenyHenleggIndex } from './MenyHenleggIndex';
+
+const DEFAULT_TILBAKE_BEHANDLING = {
+  aksjonspunkt: [],
+  behandlendeEnhetId: '4820',
+  behandlendeEnhetNavn: 'NAV Familie- og pensjonsytelser Oslo 1',
+  behandlingHenlagt: false,
+  behandlingKøet: false,
+  behandlingPåVent: false,
+  behandlingÅrsaker: [],
+  harVerge: false,
+  links: [],
+  opprettet: '2020-01-01',
+  språkkode: 'NB',
+  status: 'UTRED',
+  toTrinnsBehandling: false,
+  uuid: '23r2323',
+  versjon: 2,
+} satisfies Omit<BehandlingFpTilbake, 'type'>;
 
 const meta = {
   title: 'sak/sak-meny-henlegg',
@@ -26,66 +44,42 @@ type Story = StoryObj<typeof meta>;
 
 export const ForFørstegangssøknad: Story = {
   args: {
-    valgtBehandling: {
-      versjon: 2,
-      uuid: '23r2323',
-      type: 'BT-002',
-    } as BehandlingFpSak,
+    valgtBehandling: lagBehandling({ uuid: '23r2323', versjon: 2 }),
     behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };
 
 export const ForKlage: Story = {
   args: {
-    valgtBehandling: {
-      versjon: 2,
-      uuid: '23r2323',
-      type: 'BT-003',
-    } as BehandlingFpSak,
+    valgtBehandling: lagBehandling({ uuid: '23r2323', versjon: 2, type: 'BT-003' }),
     behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };
 
 export const ForInnsyn: Story = {
   args: {
-    valgtBehandling: {
-      versjon: 2,
-      uuid: '23r2323',
-      type: 'BT-006',
-    } as BehandlingFpSak,
+    valgtBehandling: lagBehandling({ uuid: '23r2323', versjon: 2, type: 'BT-006' }),
     behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };
 
 export const ForTilbakekreving: Story = {
   args: {
-    valgtBehandling: {
-      versjon: 2,
-      uuid: '23r2323',
-      type: 'BT-007',
-    } as BehandlingFpTilbake,
+    valgtBehandling: { ...DEFAULT_TILBAKE_BEHANDLING, type: 'BT-007' } satisfies BehandlingFpTilbake,
     behandlingResultatTyper: alleKodeverkTilbakekreving.BehandlingResultatType,
   },
 };
 
 export const ForTilbakekrevingRevurdering: Story = {
   args: {
-    valgtBehandling: {
-      versjon: 2,
-      uuid: '23r2323',
-      type: 'BT-009',
-    } as BehandlingFpTilbake,
+    valgtBehandling: { ...DEFAULT_TILBAKE_BEHANDLING, type: 'BT-009' } satisfies BehandlingFpTilbake,
     behandlingResultatTyper: alleKodeverkTilbakekreving.BehandlingResultatType,
   },
 };
 
 export const ForRevurdering: Story = {
   args: {
-    valgtBehandling: {
-      versjon: 2,
-      uuid: '23r2323',
-      type: 'BT-004',
-    } as BehandlingFpSak,
+    valgtBehandling: lagBehandling({ uuid: '23r2323', versjon: 2, type: 'BT-004' }),
     behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
   },
 };

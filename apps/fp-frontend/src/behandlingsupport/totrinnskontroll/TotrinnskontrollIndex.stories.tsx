@@ -9,17 +9,12 @@ import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
   getIntlDecorator,
+  lagFagsak,
+  lagFagsakBehandling,
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type {
-  BehandlingOppretting,
-  BehandlingTillatteOperasjoner,
-  Fagsak,
-  FagsakBehandlingDto,
-  TotrinnskontrollAksjonspunkt,
-  TotrinnskontrollSkjermlenkeContext,
-} from '@navikt/fp-types';
+import type { TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata/index';
@@ -77,62 +72,35 @@ const TOTRINNSKONTROLL_AKSJONSPUNKTER: TotrinnskontrollSkjermlenkeContext[] = [
   },
 ];
 
-const BEHANDLING_TILLATTE_OPERASJONER = {
-  behandlingFraBeslutter: false,
-  behandlingKanSendeMelding: true,
-  behandlingTilGodkjenning: true,
-  behandlingKanBytteEnhet: true,
-  behandlingKanHenlegges: true,
-  behandlingKanGjenopptas: false,
-  behandlingKanOpnesForEndringer: true,
-  behandlingKanSettesPaVent: true,
-  vergeBehandlingsmeny: 'OPPRETT',
-
-  behandlingKanMerkesHaster: false,
-} satisfies BehandlingTillatteOperasjoner;
-
-const BEHANDLING = {
+const BEHANDLING = lagFagsakBehandling({
   versjon: 2,
   uuid: '1',
-  behandlingPåVent: false,
   type: 'BT-002',
   status: 'FVED',
   behandlendeEnhetId: '2323',
   behandlendeEnhetNavn: 'Nav Vikafossen',
-  aktivPapirsøknad: false,
   toTrinnsBehandling: true,
-  behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
   totrinnskontrollÅrsaker: TOTRINNSKONTROLL_AKSJONSPUNKTER,
-  behandlingÅrsaker: [
-    {
-      behandlingArsakType: 'RE-ANNET',
-      manueltOpprettet: false,
-      erAutomatiskRevurdering: false,
-    },
-  ],
-
+  behandlingÅrsaker: [{ behandlingArsakType: 'RE-ANNET', manueltOpprettet: false, erAutomatiskRevurdering: false }],
   opprettet: '',
-
-  gjeldendeVedtak: false,
-
-  behandlingHenlagt: false,
-
   språkkode: '-',
+  behandlingTillatteOperasjoner: {
+    behandlingFraBeslutter: false,
+    behandlingKanBytteEnhet: true,
+    behandlingKanGjenopptas: false,
+    behandlingKanHenlegges: true,
+    behandlingKanMerkesHaster: false,
+    behandlingKanOpnesForEndringer: true,
+    behandlingKanSendeMelding: true,
+    behandlingKanSettesPaVent: true,
+    behandlingTilGodkjenning: true,
+    vergeBehandlingsmeny: 'OPPRETT',
+  },
+});
 
-  ugunstAksjonspunkt: false,
-
-  vilkår: [],
-  links: [],
-  brevmaler: [],
-} satisfies FagsakBehandlingDto;
-
-const FAGSAK = {
+const FAGSAK = lagFagsak({
   saksnummer: '123',
-  fagsakYtelseType: 'FP',
-  status: 'UBEH',
   behandlinger: [BEHANDLING],
-  sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
   notater: [
     {
       notat: 'Dette er et notat',
@@ -153,15 +121,10 @@ const FAGSAK = {
     dødsdato: undefined,
     språkkode: '-',
   },
-  brukerManglerAdresse: false,
-
-  fagsakMarkeringer: [],
-  historikkinnslag: [],
   kontrollResultat: {
     kontrollresultat: 'IKKE_KLASSIFISERT',
   },
-  harVergeIÅpenBehandling: false,
-} satisfies Fagsak;
+});
 
 const meta = {
   title: 'fagsak/TotrinnskontrollIndex',

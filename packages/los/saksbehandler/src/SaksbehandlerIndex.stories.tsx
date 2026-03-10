@@ -144,7 +144,15 @@ const BEHANDLEDE_OPPGAVER = [
       erReservert: false,
     },
     oppgaveBehandlingStatus: 'UNDER_ARBEID',
-  } as OppgaveDtoMedStatus,
+    andreKriterier: [],
+    behandlingId: '1',
+    behandlingsfrist: '2024-01-01',
+    behandlingstype: 'BT-002',
+    erTilSaksbehandling: true,
+    fagsakYtelseType: 'FP',
+    opprettetTidspunkt: '2024-01-01',
+    system: 'FPSAK',
+  } satisfies OppgaveDtoMedStatus,
   {
     id: 2,
     personnummer: '334342323',
@@ -154,7 +162,15 @@ const BEHANDLEDE_OPPGAVER = [
       erReservert: false,
     },
     oppgaveBehandlingStatus: 'UNDER_ARBEID',
-  } as OppgaveDtoMedStatus,
+    andreKriterier: [],
+    behandlingId: '2',
+    behandlingsfrist: '2024-01-01',
+    behandlingstype: 'BT-002',
+    erTilSaksbehandling: true,
+    fagsakYtelseType: 'FP',
+    opprettetTidspunkt: '2024-01-01',
+    system: 'FPSAK',
+  } satisfies OppgaveDtoMedStatus,
 ];
 
 const meta = {
@@ -205,6 +221,11 @@ export const Default: Story = {
     navAnsatt: {
       brukernavn: 'T232332',
       kanSaksbehandle: true,
-    } as NavAnsatt,
+      kanBehandleKode6: false,
+      kanOppgavestyre: false,
+      kanOverstyre: false,
+      kanVeilede: false,
+      navn: 'Test Testesen',
+    } satisfies NavAnsatt,
   },
 };

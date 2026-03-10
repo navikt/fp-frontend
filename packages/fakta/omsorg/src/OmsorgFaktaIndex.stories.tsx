@@ -61,7 +61,13 @@ const defaultBarn: PersonopplysningerBasis = {
   sivilstand: 'UGIF',
 };
 
-const ytelsefordeling = {} as Ytelsefordeling;
+const ytelsefordeling = {
+  dekningsgrader: {
+    søker: { søknadsdato: '2019-01-01', dekningsgrad: 100 },
+  },
+  førsteUttaksdato: '2019-01-01',
+  startDatoForPermisjon: '2019-01-01',
+} satisfies Ytelsefordeling;
 
 const merknaderFraBeslutter = {
   notAccepted: false,

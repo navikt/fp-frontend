@@ -6,6 +6,7 @@ import { action } from 'storybook/actions';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagFagsak,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -13,7 +14,6 @@ import {
 import type {
   ArbeidsgiverOpplysningerPerId,
   BehandlingFpSak,
-  Fagsak,
   FamilieHendelse,
   PeriodeResultatÅrsakMuligeÅrsaker,
   Personoversikt,
@@ -69,20 +69,37 @@ const familiehendelse = {
   fødselTermin: {
     fødselsdato: '2019-11-04',
   },
-} as FamilieHendelse;
+} satisfies FamilieHendelse;
 
-const behandling = {
+const behandling: BehandlingFpSak = {
   uuid: '1',
   versjon: 1,
   type: 'BT-002',
   behandlingsresultat: {
+    harRedigertVedtaksbrev: false,
+    id: 0,
+    type: 'INNVILGET',
+    vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
     skjæringstidspunkt: {
       dato: '2019-10-14',
     },
   },
   status: 'UTRED',
   språkkode: '-',
-} as BehandlingFpSak;
+  behandlingPåVent: false,
+  behandlingHenlagt: false,
+  aksjonspunkt: [],
+  behandlingÅrsaker: [],
+  behandlendeEnhetId: '',
+  behandlendeEnhetNavn: '',
+  aktivPapirsøknad: false,
+  vilkår: [],
+  links: [],
+  harSøknad: false,
+  harSattEndringsdato: false,
+  id: 1,
+  opprettet: '2020-01-01',
+};
 
 const uttakStonadskontoer = {
   tapteDagerFpff: 1,
@@ -154,13 +171,12 @@ const soknad = {
   manglendeVedlegg: [],
   mottattDato: '2019-11-18',
   søknadsfrist: {
-    mottattDato: '2019-11-18',
     utledetSøknadsfrist: '2020-01-31',
     søknadsperiodeStart: '2019-10-14',
     søknadsperiodeSlutt: '2020-02-02',
     dagerOversittetFrist: -74,
   },
-} as Soknad;
+} satisfies Soknad;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   342352362: {
@@ -192,10 +208,14 @@ const meta = {
     uttakStonadskontoer,
     soknad,
     personoversikt: {
+      barn: [],
       bruker: {
+        adresser: [],
+        fødselsdato: '1979-01-01',
         kjønn: 'K',
+        sivilstand: 'UGIF',
       },
-    } as Personoversikt,
+    } satisfies Personoversikt,
     kanOverstyre: false,
     familiehendelse,
     oppdaterStønadskontoer: v => {
@@ -859,10 +879,14 @@ export const AksjonspunktForFar: Story = {
   args: {
     aksjonspunkterForPanel: [defaultAksjonspunkt],
     personoversikt: {
+      barn: [],
       bruker: {
+        adresser: [],
+        fødselsdato: '1979-01-01',
         kjønn: 'M',
+        sivilstand: 'UGIF',
       },
-    } as Personoversikt,
+    } satisfies Personoversikt,
     uttaksresultat: {
       perioderSøker: [
         {
@@ -1333,13 +1357,15 @@ export const VisOppholdsperiode: Story = {
 export const MorPerioderI_EØSFarSamtidigUttak: Story = {
   args: {
     personoversikt: {
+      barn: [],
       bruker: {
+        adresser: [],
+        fødselsdato: '1979-01-01',
         kjønn: 'M',
+        sivilstand: 'UGIF',
       },
-    } as Personoversikt,
-    fagsak: {
-      relasjonsRolleType: 'FARA',
-    } as Fagsak,
+    } satisfies Personoversikt,
+    fagsak: lagFagsak({ relasjonsRolleType: 'FARA' }),
     uttakStonadskontoer: {
       ...uttakStonadskontoer,
       stønadskonti: {
