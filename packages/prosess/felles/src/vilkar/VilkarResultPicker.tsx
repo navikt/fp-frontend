@@ -29,7 +29,6 @@ interface Props {
   vilkårOppfyltLabel: string | ReactElement;
   isReadOnly: boolean;
   skalKunneInnvilge?: boolean;
-  validatorsForRadioOptions?: ((value: string | number | boolean) => string | null | undefined)[];
 }
 
 export const VilkarResultPicker = ({
@@ -39,13 +38,10 @@ export const VilkarResultPicker = ({
   vilkårOppfyltLabel,
   isReadOnly,
   skalKunneInnvilge = true,
-  validatorsForRadioOptions,
 }: Props) => {
   const { getValues, watch, control } = useFormContext<VilkarResultPickerFormValues>();
 
   const erVilkårOk = watch('erVilkårOk');
-
-  const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
 
   const { alleKodeverk } = usePanelDataContext();
   const avslagsårsakerOptions = getAvslagsårsakerOptions(alleKodeverk, vilkår);
@@ -72,13 +68,7 @@ export const VilkarResultPicker = ({
         />
       )}
       {(!isReadOnly || erVilkårOk === undefined) && (
-        <RhfRadioGroup
-          name="erVilkårOk"
-          control={control}
-          legend={legend}
-          validate={radioValidators}
-          readOnly={isReadOnly}
-        >
+        <RhfRadioGroup name="erVilkårOk" control={control} legend={legend} validate={[required]} readOnly={isReadOnly}>
           <Radio value={true} size="small" disabled={!skalKunneInnvilge}>
             {vilkårOppfyltLabel}
           </Radio>
