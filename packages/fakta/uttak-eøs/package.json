@@ -16,7 +16,7 @@
     "prettier": "prettier --write src",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "build-storybook": "storybook build -o .storybook-static-build",
-    "storybook": "storybook dev --quiet -p 7015"
+    "storybook": "storybook dev --quiet -p 7035"
   },
   "dependencies": {
     "@navikt/aksel-icons": "8.6.0",

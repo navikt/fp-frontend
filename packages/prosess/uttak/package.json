@@ -17,7 +17,7 @@
     "dev": "vite build --mode development --watch",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "build-storybook": "storybook build -o .storybook-static-build",
-    "storybook": "storybook dev --quiet -p 7041"
+    "storybook": "storybook dev --quiet -p 7080"
   },
   "dependencies": {
     "@navikt/aksel-icons": "8.6.0",
