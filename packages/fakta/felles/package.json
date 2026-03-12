@@ -15,7 +15,7 @@
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
     "prettier": "prettier --write src",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
-    "storybook": "storybook dev --quiet -p 7022"
+    "storybook": "storybook dev --quiet -p 7023"
   },
   "dependencies": {
     "@navikt/ds-react": "8.6.0",
