@@ -16,7 +16,7 @@ import { setupProxies } from "./reverse-proxy.js";
 import { verifyToken } from "./tokenValidation.js";
 
 const server = express();
-const { port } = config.server;
+const { port, viteModePort } = config.server;
 const spaFilePath = path.resolve("./public", "index.html");
 
 function startApp() {
@@ -113,7 +113,7 @@ function startApp() {
 
   setupProxies(server);
 
-  serveViteMode(server, { port: "9010" });
+  serveViteMode(server, { port: viteModePort });
 
   // Server ferdig komprimerte gzip/br filer hvis mulig.
   server.use(serveKomprimerteFilerHvisMulig);

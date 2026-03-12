@@ -1,9 +1,6 @@
 {
   "app": "fp-avdelingsleder",
-  "ingresses": [
-    "https://fp-avdelingsleder.intern.nav.no",
-    "https://fpavdelingsleder.intern.nav.no"
-  ],
+  "ingresses": ["https://fp-avdelingsleder.intern.nav.no", "https://fpavdelingsleder.intern.nav.no"],
   "minReplicas": "2",
   "maxReplicas": "4",
   "limits": {
@@ -25,14 +22,13 @@
       "kommentar": "oppgavestyrer"
     }
   ],
-  "externals": [
-    "fplos.prod-fss-pub.nais.io"
-  ],
+  "externals": ["fplos.prod-fss-pub.nais.io"],
   "proxyRedirects": [
     {
       "path": "/fplos/api",
       "url": "https://fplos.prod-fss-pub.nais.io",
       "scope": "api://prod-fss.teamforeldrepenger.fplos/.default"
     }
-  ]
+  ],
+  "viteModePort": "9014"
 }

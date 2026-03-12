@@ -20,7 +20,7 @@
     "preview": "vite preview",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "build-storybook": "storybook build -o .storybook-static-build",
-    "storybook": "storybook dev --quiet -p 7020"
+    "storybook": "storybook dev --quiet -p 7004"
   },
   "dependencies": {
     "@navikt/aksel-icons": "8.6.0",

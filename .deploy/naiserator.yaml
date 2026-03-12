@@ -72,6 +72,8 @@ spec:
       value: {{ingress}}
     - name: PORT
       value: "8080"
+    - name: VITE_MODE_PORT
+      value: "{{viteModePort}}"
     - name: CORS_ALLOWED_HEADERS
       value: "Referer, Origin, Content-Type, Accept, X-Requested-With, cache-control, Nav-CallId, pragma, expires, X-Forwarded-Proto"
     - name: CORS_EXPOSED_HEADERS

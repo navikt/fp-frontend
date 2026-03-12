@@ -1,8 +1,6 @@
 {
   "app": "fp-journalforing",
-  "ingresses": [
-    "https://fpjournalforing.intern.nav.no"
-  ],
+  "ingresses": ["https://fpjournalforing.intern.nav.no"],
   "minReplicas": "2",
   "maxReplicas": "4",
   "limits": {
@@ -25,9 +23,7 @@
       "application": "fpmottak"
     }
   ],
-  "externals": [
-    "fpsak-api.prod-fss-pub.nais.io"
-  ],
+  "externals": ["fpsak-api.prod-fss-pub.nais.io"],
   "proxyRedirects": [
     {
       "path": "/fpsak/api",
@@ -39,5 +35,6 @@
       "url": "http://fpmottak",
       "scope": "api://prod-gcp.teamforeldrepenger.fpmottak/.default"
     }
-  ]
+  ],
+  "viteModePort": "9015"
 }

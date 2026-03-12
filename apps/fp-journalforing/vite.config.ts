@@ -7,7 +7,7 @@ import { createSharedAppConfig } from '@navikt/fp-config-vite';
 // eslint-disable-next-line import/no-default-export
 export default mergeConfig(createSharedAppConfig(), {
   server: {
-    port: 9010,
+    port: 9015,
     cors: {
       origin: [
         'https://fpjournalforing.intern.dev.nav.no',
@@ -16,13 +16,8 @@ export default mergeConfig(createSharedAppConfig(), {
       ],
     },
     proxy: {
-      '/fpsak/api': {
-        target: 'http://127.0.0.1:9000',
-        changeOrigin: false,
-        secure: false,
-      },
       '/fpmottak/api': {
-        target: 'http://127.0.0.1:9000',
+        target: 'http://127.0.0.1:9005',
         changeOrigin: false,
         secure: false,
       },
