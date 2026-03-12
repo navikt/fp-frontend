@@ -1,8 +1,6 @@
 {
   "app": "fp-frontend",
-  "ingresses": [
-    "https://fpsak.intern.dev.nav.no"
-  ],
+  "ingresses": ["https://fpsak.intern.dev.nav.no"],
   "minReplicas": "1",
   "maxReplicas": "2",
   "limits": {
@@ -29,11 +27,7 @@
       "application": "fpmottak"
     }
   ],
-  "externals": [
-    "fpsak-api.dev-fss-pub.nais.io",
-    "fplos.dev-fss-pub.nais.io",
-    "fptilbake.dev-fss-pub.nais.io"
-  ],
+  "externals": ["fpsak-api.dev-fss-pub.nais.io", "fplos.dev-fss-pub.nais.io", "fptilbake.dev-fss-pub.nais.io"],
   "proxyRedirects": [
     {
       "path": "/fpsak/api",
@@ -55,5 +49,6 @@
       "url": "http://fpmottak",
       "scope": "api://dev-gcp.teamforeldrepenger.fpmottak/.default"
     }
-  ]
+  ],
+  "viteModePort": "9010"
 }
