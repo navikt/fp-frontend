@@ -31,7 +31,7 @@ const server = {
 
   // port for your application
   port: envVar("PORT", false) ?? 3000,
-  viteModePort: envVar("VITE_MODE_PORT", false) ?? 9010,
+  viteModePort: envVar("VITE_MODE_PORT", false) ?? "9010",
 };
 
 const azureAd = {

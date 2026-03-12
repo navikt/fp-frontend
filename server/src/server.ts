@@ -113,7 +113,7 @@ function startApp() {
 
   setupProxies(server);
 
-  serveViteMode(server, { port: `${viteModePort}` });
+  serveViteMode(server, { port: viteModePort });
 
   // Server ferdig komprimerte gzip/br filer hvis mulig.
   server.use(serveKomprimerteFilerHvisMulig);
