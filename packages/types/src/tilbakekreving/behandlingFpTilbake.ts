@@ -79,6 +79,13 @@ export type BehandlingFpTilbake = {
   toTrinnsBehandling: boolean;
   type: 'BT-007' | 'BT-009';
   uuid: string;
-  venteÅrsakKode?: string;
+  venteÅrsakKode?:
+    | 'VENT_PÅ_BRUKERTILBAKEMELDING'
+    | 'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG'
+    | 'AVV_DOK'
+    | 'UTV_TIL_FRIST'
+    | 'ENDRE_TILKJENT_YTELSE'
+    | 'VENT_PÅ_MULIG_MOTREGNING'
+    | '-';
   versjon: number;
 };
