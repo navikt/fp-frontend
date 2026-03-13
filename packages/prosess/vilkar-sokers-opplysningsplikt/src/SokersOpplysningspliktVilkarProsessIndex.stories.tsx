@@ -74,7 +74,13 @@ export const UtførtAPMedOppfyltVilkår: Story = {
 export const UtførtAPMedAvslåttVilkår: Story = {
   args: {
     behandling: lagBehandling({
-      behandlingsresultat: { avslagsarsak: '1099', harRedigertVedtaksbrev: false, id: 1, type: 'AVSLÅTT', vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+      behandlingsresultat: {
+        avslagsarsak: '1099',
+        harRedigertVedtaksbrev: false,
+        id: 1,
+        type: 'AVSLÅTT',
+        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+      },
     }),
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5017, { status: 'UTFO' })],
     isReadOnly: true,
@@ -95,7 +101,13 @@ export const KanOverstyreVilkår: Story = {
 export const HarOverstyrtMedOppfyltVilkår: Story = {
   args: {
     behandling: lagBehandling({
-      behandlingsresultat: { avslagsarsak: undefined, harRedigertVedtaksbrev: false, id: 1, type: 'INNVILGET', vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+      behandlingsresultat: {
+        avslagsarsak: undefined,
+        harRedigertVedtaksbrev: false,
+        id: 1,
+        type: 'INNVILGET',
+        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+      },
     }),
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
@@ -109,7 +121,13 @@ export const HarOverstyrtMedOppfyltVilkår: Story = {
 export const HarOverstyrtMedAvslåttVilkår: Story = {
   args: {
     behandling: lagBehandling({
-      behandlingsresultat: { avslagsarsak: '1099', harRedigertVedtaksbrev: false, id: 1, type: 'AVSLÅTT', vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+      behandlingsresultat: {
+        avslagsarsak: '1099',
+        harRedigertVedtaksbrev: false,
+        id: 1,
+        type: 'AVSLÅTT',
+        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+      },
     }),
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),

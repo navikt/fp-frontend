@@ -12,9 +12,9 @@ import {
 } from '@navikt/aksel-icons';
 import { Tabs } from '@navikt/ds-react';
 
+import { useTrackRouteParam } from '@navikt/fp-app-felles';
 import type { MessagesFormValues } from '@navikt/fp-sak-meldinger';
 import type { TotrinnskontrollFormValues } from '@navikt/fp-sak-totrinnskontroll';
-import { useTrackRouteParam } from '@navikt/fp-utils';
 
 import { getSupportPanelLocationCreator } from '../app/paths';
 import { FagsakData } from '../fagsak/FagsakData';

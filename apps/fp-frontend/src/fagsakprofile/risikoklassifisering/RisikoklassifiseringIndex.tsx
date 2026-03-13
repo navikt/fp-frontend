@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 
+import { useTrackRouteParam } from '@navikt/fp-app-felles';
 import { type AvklartRisikoklassifiseringAp, RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
 import type {
   AksessRettigheter,
@@ -12,7 +13,7 @@ import type {
   FagsakBehandlingDtoFpSak,
   NavAnsatt,
 } from '@navikt/fp-types';
-import { erAksjonspunktÅpent, erTilbakekrevingBehandling, notEmpty, useTrackRouteParam } from '@navikt/fp-utils';
+import { erAksjonspunktÅpent, erTilbakekrevingBehandling, notEmpty } from '@navikt/fp-utils';
 
 import { getRiskPanelLocationCreator } from '../../app/paths';
 import { getAccessRights } from '../../app/util/access';

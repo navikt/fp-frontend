@@ -54,7 +54,13 @@ export const StartdatoForForeldrepengerOgDekningsgradMedAnnenPart: Story = {
   args: {
     aksjonspunkterForPanel: [],
     fagsak: lagFagsak({
-      bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Helga Utvikler', språkkode: 'NB' },
+      bruker: {
+        fødselsdato: '1979-01-01',
+        fødselsnummer: '12345678901',
+        kjønn: 'K',
+        navn: 'Helga Utvikler',
+        språkkode: 'NB',
+      },
       annenPart: {
         navn: 'Espen Utvikler',
         fødselsdato: '1990-01-01',
@@ -70,7 +76,13 @@ export const KanIkkeOverstyreDekningsgrad: Story = {
   args: {
     aksjonspunkterForPanel: [],
     fagsak: lagFagsak({
-      bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Helga Utvikler', språkkode: 'NB' },
+      bruker: {
+        fødselsdato: '1979-01-01',
+        fødselsnummer: '12345678901',
+        kjønn: 'K',
+        navn: 'Helga Utvikler',
+        språkkode: 'NB',
+      },
       annenPart: {
         navn: 'Espen Utvikler',
         fødselsdato: '1990-01-01',
@@ -134,7 +146,13 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_DEKNINGSGRAD)],
     fagsak: lagFagsak({
-      bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Helga Utvikler', språkkode: 'NB' },
+      bruker: {
+        fødselsdato: '1979-01-01',
+        fødselsnummer: '12345678901',
+        kjønn: 'K',
+        navn: 'Helga Utvikler',
+        språkkode: 'NB',
+      },
       annenPart: {
         navn: 'Espen Utvikler',
         kjønn: 'M',
@@ -164,7 +182,13 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_DEKNINGSGRAD)],
     fagsak: lagFagsak({
-      bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Helga Utvikler', språkkode: 'NB' },
+      bruker: {
+        fødselsdato: '1979-01-01',
+        fødselsnummer: '12345678901',
+        kjønn: 'K',
+        navn: 'Helga Utvikler',
+        språkkode: 'NB',
+      },
       annenPart: {
         navn: 'Espen Utvikler',
         kjønn: '-',
@@ -198,7 +222,13 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
       }),
     ],
     fagsak: lagFagsak({
-      bruker: { fødselsdato: '1979-01-01', fødselsnummer: '12345678901', kjønn: 'K', navn: 'Helga Utvikler', språkkode: 'NB' },
+      bruker: {
+        fødselsdato: '1979-01-01',
+        fødselsnummer: '12345678901',
+        kjønn: 'K',
+        navn: 'Helga Utvikler',
+        språkkode: 'NB',
+      },
       annenPart: {
         navn: 'Espen Utvikler',
         kjønn: 'M',

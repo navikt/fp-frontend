@@ -17,7 +17,6 @@ import {
 
 import { VilkarresultatMedOverstyringProsessIndex } from './VilkarresultatMedOverstyringProsessIndex';
 
-
 const meta = {
   title: 'prosess/prosess-vilkar-overstyring',
   component: VilkarresultatMedOverstyringProsessIndex,
@@ -87,7 +86,9 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
     vilkår: lagVilkår('FP_VK_2_F'),
     behandling: lagBehandling({
-      aksjonspunkt: [lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR, { status: 'UTFO' })],
+      aksjonspunkt: [
+        lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR, { status: 'UTFO' }),
+      ],
     }),
     status: 'IKKE_OPPFYLT',
     medlemskapManuellBehandlingResultat: {
@@ -108,7 +109,13 @@ export const OverstyringspanelForOpptjening: Story = {
 export const OverstyrtAksjonspunktSomErBekreftet: Story = {
   args: {
     behandling: lagBehandling({
-      behandlingsresultat: { avslagsarsak: '1002', harRedigertVedtaksbrev: false, id: 1, type: 'AVSLÅTT', vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+      behandlingsresultat: {
+        avslagsarsak: '1002',
+        harRedigertVedtaksbrev: false,
+        id: 1,
+        type: 'AVSLÅTT',
+        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+      },
       aksjonspunkt: [lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET, { status: 'UTFO' })],
     }),
     status: 'IKKE_OPPFYLT',
@@ -121,7 +128,13 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
 export const OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert: Story = {
   args: {
     behandling: lagBehandling({
-      behandlingsresultat: { avslagsarsak: '1035', harRedigertVedtaksbrev: false, id: 1, type: 'OPPHØR', vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+      behandlingsresultat: {
+        avslagsarsak: '1035',
+        harRedigertVedtaksbrev: false,
+        id: 1,
+        type: 'OPPHØR',
+        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+      },
     }),
     status: 'IKKE_VURDERT',
     panelTekstKode: 'Inngangsvilkar.Opptjeningsvilkaret',

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
+import { useTrackRouteParam } from '@navikt/fp-app-felles';
 import { AktørSakIndex } from '@navikt/fp-sak-aktor';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
-import { useTrackRouteParam } from '@navikt/fp-utils';
 
 import { pathToFagsak } from '../app/paths';
 import { aktørInfoOptions } from '../data/fagsakApi';

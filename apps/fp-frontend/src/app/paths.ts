@@ -1,6 +1,6 @@
-import { buildPath, formatQueryString, parseQueryString } from '@navikt/ft-utils';
-import type { Location, Search } from 'history';
+import type { Location } from 'history';
 
+import { getLocationWithQueryParams } from '@navikt/fp-app-felles';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 import type { SkjermlenkeType, SkjermlenkeTypeFpTilbake } from '@navikt/fp-types';
 
@@ -9,50 +9,27 @@ export const UTBETALINGSDATA_PATH = 'utbetalingsdata';
 const DEFAULT_FAKTA = 'default';
 const DEFAULT_PROSESS_STEG = 'default';
 
-type QueryParams = {
-  punkt?: string;
-  fakta?: string;
-  stotte?: string;
-  risiko?: boolean;
-};
-
 export const utbetalingsdataIs15RoutePath = `/${UTBETALINGSDATA_PATH}`;
 export const fagsakRoutePath = '/fagsak/:saksnummer//*';
 export const aktoerRoutePath = '/aktoer/:aktoerId';
 export const behandlingerRoutePath = '/behandling//*';
 export const behandlingRoutePath = '/:behandlingUuid/';
-const fagsakPath = '/fagsak/:saksnummer/';
-const behandlingerPath = `${fagsakPath}behandling/`;
-const behandlingPath = `${behandlingerPath}:behandlingUuid(.*)/`;
 
-export const pathToFagsak = (saksnummer: string): string => buildPath(fagsakPath, { saksnummer });
-export const pathToBehandlinger = (saksnummer: string): string => buildPath(behandlingerPath, { saksnummer });
-export const pathToBehandling = (saksnummer: string, behandlingUuid?: string): string =>
-  buildPath(behandlingPath, { saksnummer, behandlingUuid });
+export const pathToFagsak = (saksnummer: string): string => `/fagsak/${saksnummer}/`;
+export const pathToBehandlinger = (saksnummer: string): string => `/fagsak/${saksnummer}/behandling/`;
+export const pathToBehandling = (saksnummer: string, behandlingUuid?: string): string => {
+  const base = `/fagsak/${saksnummer}/behandling/`;
+  return behandlingUuid ? `${base}${behandlingUuid}/` : base;
+};
 export const pathToMissingPage = (): string => '/404';
 
 export const pathToAnnenPart = (saksnummer: string, behandlingUuid: string): string =>
   `/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=${DEFAULT_PROSESS_STEG}&fakta=${DEFAULT_FAKTA}`;
 
-const emptyQueryString = (queryString: string): boolean => queryString === '?' || !queryString;
-
-const updateQueryParams = (queryString: string, nextParams: QueryParams): Search => {
-  const prevParams = emptyQueryString(queryString) ? {} : parseQueryString(queryString);
-  return formatQueryString({
-    ...prevParams,
-    ...nextParams,
-  });
-};
-
 export const getFagsakHref = (saksnummer: string, behandlingUuid?: string) =>
   behandlingUuid
     ? `/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=default&fakta=default`
     : `/fagsak/${saksnummer}/`;
-
-const getLocationWithQueryParams = (location: Location, queryParams: QueryParams): Location => ({
-  ...location,
-  search: updateQueryParams(location.search, queryParams),
-});
 
 export const getSupportPanelLocationCreator =
   (location: Location) =>

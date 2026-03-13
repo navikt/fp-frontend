@@ -2008,6 +2008,7 @@ __metadata:
     "@testing-library/react": "npm:16.3.2"
     eslint: "npm:9.39.2"
     fast-glob: "npm:3.3.3"
+    history: "npm:5.3.0"
     react: "npm:19.2.4"
     storybook: "npm:10.2.10"
     typescript: "npm:5.9.3"
@@ -4703,7 +4704,6 @@ __metadata:
     "@navikt/ft-utils": "npm:3.11.11"
     dayjs: "npm:1.11.19"
     eslint: "npm:9.39.2"
-    history: "npm:5.3.0"
     react: "npm:19.2.4"
     typescript: "npm:5.9.3"
   languageName: unknown

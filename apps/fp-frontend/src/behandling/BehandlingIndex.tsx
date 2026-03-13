@@ -6,9 +6,9 @@ import { replaceNorwegianCharacters } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 import type { Location } from 'history';
 
-import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
+import { ErrorBoundary, useRestApiErrorDispatcher, useTrackRouteParam } from '@navikt/fp-app-felles';
 import type { Behandling } from '@navikt/fp-types';
-import { notEmpty, useTrackRouteParam } from '@navikt/fp-utils';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
 import { getAccessRights } from '../app/util/access';
