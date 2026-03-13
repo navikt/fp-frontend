@@ -2,7 +2,7 @@ import { useLocation, useParams } from 'react-router-dom';
 
 import type { Location } from 'history';
 
-import { parseQueryString } from '@navikt/fp-app-felles';
+import { parseQueryString } from '../utils/urlUtils';
 
 type ParamType = string | boolean | number;
 
