@@ -36,7 +36,7 @@ type BrevmalDtoFpTilbake = {
   tilgjengelig?: boolean;
 };
 
-type VurderÅrsakFpTilbake =
+export type VurderÅrsakFpTilbake =
   | 'FEIL_FAKTA'
   | 'FEIL_LOV'
   | 'SKJØNN'

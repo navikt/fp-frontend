@@ -2,9 +2,17 @@
  * Denne fila inneholder typer som ofte brukes som union mellom fpsak og fptilbake
  */
 
-import type { foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType } from './fpsak.gen';
+import type {
+  foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak,
+  foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType,
+} from './fpsak.gen';
 import type { BehandlingFpSak, FagsakBehandlingDtoFpSak } from './index';
-import type { BehandlingFpTilbake, FagsakBehandlingDtoFpTilbake, SkjermlenkeTypeFpTilbake } from './tilbakekreving';
+import type {
+  BehandlingFpTilbake,
+  FagsakBehandlingDtoFpTilbake,
+  SkjermlenkeTypeFpTilbake,
+  VurderÅrsakFpTilbake,
+} from './tilbakekreving';
 
 export type SkjermlenkeType =
   | foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType
@@ -13,3 +21,5 @@ export type SkjermlenkeType =
 export type FagsakBehandlingDto = FagsakBehandlingDtoFpSak | FagsakBehandlingDtoFpTilbake;
 
 export type Behandling = BehandlingFpSak | BehandlingFpTilbake;
+
+export type VurderÅrsak = VurderÅrsakFpTilbake | foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak;
