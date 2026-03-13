@@ -1,4 +1,4 @@
-import type { SkjermlenkeType } from './felles';
+import type { SkjermlenkeType, VurderÅrsak } from './felles';
 import type { foreldrepenger_behandlingslager_geografisk_Region as Region } from './fpsak.gen';
 import {
   type AdresseType,
@@ -55,7 +55,6 @@ import {
   type VergeType,
   type VilkårType,
   type VirksomhetType,
-  type VurderÅrsak,
 } from './index';
 import type { Arbeidskategori } from './interne-typer';
 

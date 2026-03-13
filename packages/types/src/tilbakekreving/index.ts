@@ -23,6 +23,7 @@ export type { ForeldelseVurderingType } from './foreldelseVurderingType';
 export type { VenteÅrsakTypeFpTilbake } from './venteÅrsakTypeFpTilbake';
 export type { BehandlingResultatTypeFpTilbake } from './behandlingResultatTypeFpTilbake';
 export type {
+  VurderÅrsakFpTilbake,
   FagsakBehandlingDtoFpTilbake,
   TotrinnskontrollSkjermlenkeContextDtoFpTilbake,
   TotrinnskontrollAksjonspunkterDtoFpTilbake,

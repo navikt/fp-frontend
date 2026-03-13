@@ -425,8 +425,7 @@ export type foreldrepenger_behandlingslager_behandling_vilkår_VilkårType =
   | 'FP_VK_21'
   | 'FP_VK_23'
   | 'FP_VK_41'
-  | 'SVP_VK_1'
-  | '-';
+  | 'SVP_VK_1';
 
 export type foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType =
   | 'OPPFYLT'
@@ -746,7 +745,6 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak
   | 'UTREDNING'
   | 'SAKSFLYT'
   | 'BEGRUNNELSE'
-  | '-'
   | 'ANNET'
   | 'FEIL_REGEL';
 
@@ -804,7 +802,7 @@ export type foreldrepenger_behandlingslager_behandling_familiehendelse_Omsorgsov
   | 'FP_VK_16S'
   | '-';
 
-export type foreldrepenger_behandlingslager_behandling_innsyn_InnsynResultatType = 'INNV' | 'DELV' | 'AVVIST' | '-';
+export type foreldrepenger_behandlingslager_behandling_innsyn_InnsynResultatType = 'INNV' | 'DELV' | 'AVVIST';
 
 export type foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel =
   | '14-02'
@@ -3777,8 +3775,7 @@ export type foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAkti
   | 'BEKREFTET_GODKJENT'
   | 'BEKREFTET_AVVIST'
   | 'ANTATT_GODKJENT'
-  | 'MELLOMLIGGENDE_PERIODE'
-  | '-';
+  | 'MELLOMLIGGENDE_PERIODE';
 
 export type foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto = {
   fastsattOpptjeningAktivitetList: Array<foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_FastsattOpptjeningAktivitetDto>;
@@ -3918,11 +3915,7 @@ export type foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapManu
   | 'IKKE_RELEVANT'
   | 'OPPHOR_PGA_ENDRING_I_TPS';
 
-export type foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapType =
-  | 'ENDELIG'
-  | 'FORELOPIG'
-  | 'AVKLARES'
-  | '-';
+export type foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapType = 'ENDELIG' | 'FORELOPIG' | 'AVKLARES';
 
 export type foreldrepenger_behandlingslager_geografisk_Landkoder =
   | '???'

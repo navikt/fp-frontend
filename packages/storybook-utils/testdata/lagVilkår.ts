@@ -24,7 +24,6 @@ const lovReferansePerVilkår: Record<VilkårType, string> = {
   FP_VK_23: '§ 14-6',
   FP_VK_41: '§ 14-7',
   SVP_VK_1: '§ 14-4',
-  '-': '',
 };
 
 const avslagsårsakerPerVilkår: Record<VilkårType, Array<Avslagsarsak>> = {
@@ -58,5 +57,4 @@ const avslagsårsakerPerVilkår: Record<VilkårType, Array<Avslagsarsak>> = {
   FP_VK_34: ['1019'],
   FP_VK_41: ['1041'],
   SVP_VK_1: ['1062', '1066', '1065', '1063', '1064', '1060', '1061'],
-  '-': [],
 };
