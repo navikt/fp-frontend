@@ -14,7 +14,7 @@ interface Props {
   crashMessage?: string;
   hideErrorMessages?: boolean;
   theme: ComponentProps<typeof Theme>['theme'];
-  setTheme: (theme: ComponentProps<typeof Theme>['theme']) => void;
+  setTheme: (theme: NonNullable<ComponentProps<typeof Theme>['theme']>) => void;
   ansattnavn: string;
 }
 
