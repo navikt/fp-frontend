@@ -2,10 +2,9 @@ import { Suspense } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
+import { ErrorBoundary, parseQueryString, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 import { notEmpty } from '@navikt/fp-utils';
 

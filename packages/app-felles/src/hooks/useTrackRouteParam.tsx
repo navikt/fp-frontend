@@ -1,7 +1,8 @@
 import { useLocation, useParams } from 'react-router-dom';
 
-import { parseQueryString } from '@navikt/ft-utils';
 import type { Location } from 'history';
+
+import { parseQueryString } from '@navikt/fp-app-felles';
 
 type ParamType = string | boolean | number;
 

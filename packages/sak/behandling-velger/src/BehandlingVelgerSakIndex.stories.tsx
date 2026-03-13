@@ -9,7 +9,6 @@ import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-
 const meta = {
   title: 'sak/sak-behandling-velger',
   component: BehandlingVelgerSakIndex,
@@ -62,7 +61,12 @@ export const Default: Story = {
         opprettet: '2017-08-02T02:04:25.455',
         avsluttet: '2017-08-03T02:04:25.455',
         gjeldendeVedtak: true,
-        behandlingsresultat: { type: 'AVSLÅTT', harRedigertVedtaksbrev: false, id: 1, vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+        behandlingsresultat: {
+          type: 'AVSLÅTT',
+          harRedigertVedtaksbrev: false,
+          id: 1,
+          vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+        },
       }),
       lagFagsakBehandling({
         behandlendeEnhetId: '4812',
@@ -75,7 +79,12 @@ export const Default: Story = {
         opprettet: '2017-08-01T02:04:25.455',
         avsluttet: '2017-08-01T02:04:25.455',
         gjeldendeVedtak: false,
-        behandlingsresultat: { type: 'INNVILGET', harRedigertVedtaksbrev: false, id: 2, vedtaksbrevStatus: 'INGEN_VEDTAKSBREV' },
+        behandlingsresultat: {
+          type: 'INNVILGET',
+          harRedigertVedtaksbrev: false,
+          id: 2,
+          vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+        },
       }),
       lagFagsakBehandling({
         behandlendeEnhetId: '4812',

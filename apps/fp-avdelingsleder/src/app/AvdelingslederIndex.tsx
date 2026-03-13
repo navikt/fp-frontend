@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { Box, Heading, Select, Tabs, VStack } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 import { type Location } from 'history';
 
+import { getLocationWithQueryParams, parseQueryString, useTrackRouteParam } from '@navikt/fp-app-felles';
 import { type AvdelingDto, type InitLinksDto } from '@navikt/fp-types';
-import { useTrackRouteParam } from '@navikt/fp-utils';
 
 import { EndreSakslisterPanel } from '../behandlingskoer/EndreSakslisterPanel';
 import { IkkeTilgangTilAvdelingslederPanel } from '../components/IkkeTilgangTilAvdelingslederPanel';
@@ -47,10 +46,6 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
     setAvdeling(setValgtAvdelingEnhet, initData.avdelinger, valgtAvdelingEnhet);
   }, []);
 
-  const getAvdelingslederPanelLocation = (avdelingslederPanel: string) => ({
-    ...location,
-    search: updateQueryParams(location.search, { fane: avdelingslederPanel }),
-  });
   const activeAvdelingslederPanel = activeAvdelingslederPanelTemp || getPanelFromUrlOrDefault(location);
 
   if (!initData.innloggetBruker.kanOppgavestyre) {
@@ -86,7 +81,7 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
           size="small"
           value={activeAvdelingslederPanel}
           onChange={(avdelingslederPanel: string) => {
-            void navigate(getAvdelingslederPanelLocation(avdelingslederPanel));
+            void navigate(getLocationWithQueryParams(location, { fane: avdelingslederPanel }));
           }}
         >
           <Tabs.List>
@@ -181,16 +176,6 @@ const setAvdeling = (
     }
     setValgtAvdeling(valgtEnhet);
   }
-};
-
-const emptyQueryString = (queryString: string) => queryString === '?' || !queryString;
-
-const updateQueryParams = (queryString: string, nextParams: Record<string, string>) => {
-  const prevParams = emptyQueryString(queryString) ? {} : parseQueryString(queryString);
-  return formatQueryString({
-    ...prevParams,
-    ...nextParams,
-  });
 };
 
 const getPanelFromUrlOrDefault = (location: Location) => {

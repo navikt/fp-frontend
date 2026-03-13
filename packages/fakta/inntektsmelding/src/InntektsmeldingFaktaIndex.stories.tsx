@@ -42,9 +42,24 @@ export const InntektsmeldingDefault: Story = {
       lagFagsakBehandling({ uuid: 'UUID3', type: 'BT-004', opprettet: '2024-07-15', avsluttet: '2024-08-15' }),
     ],
     arbeidsgiverOpplysningerPerId: {
-      ['1']: { erPrivatPerson: false, identifikator: '1', referanse: '1', navn: 'Rema 1000' } satisfies ArbeidsgiverOpplysninger,
-      ['2']: { erPrivatPerson: false, identifikator: '2', referanse: '2', navn: 'Kiwi' } satisfies ArbeidsgiverOpplysninger,
-      ['3']: { erPrivatPerson: false, identifikator: '3', referanse: '3', navn: 'Meny' } satisfies ArbeidsgiverOpplysninger,
+      ['1']: {
+        erPrivatPerson: false,
+        identifikator: '1',
+        referanse: '1',
+        navn: 'Rema 1000',
+      } satisfies ArbeidsgiverOpplysninger,
+      ['2']: {
+        erPrivatPerson: false,
+        identifikator: '2',
+        referanse: '2',
+        navn: 'Kiwi',
+      } satisfies ArbeidsgiverOpplysninger,
+      ['3']: {
+        erPrivatPerson: false,
+        identifikator: '3',
+        referanse: '3',
+        navn: 'Meny',
+      } satisfies ArbeidsgiverOpplysninger,
     },
     behandling: {
       aksjonspunkt: [],

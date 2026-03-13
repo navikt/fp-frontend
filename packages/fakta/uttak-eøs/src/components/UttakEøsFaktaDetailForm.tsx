@@ -83,7 +83,6 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
                 validate={[required, hasValidDate]}
                 readOnly={isReadOnly}
                 onChange={value => {
-                   
                   oppdaterTrekkdagerOgTrekkuker(value, formMethods.getValues('tom'));
                 }}
               />
@@ -95,7 +94,6 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
                 readOnly={isReadOnly}
                 fromDate={dayjs(fom, ISO_DATE_FORMAT).toDate()}
                 onChange={value => {
-                   
                   oppdaterTrekkdagerOgTrekkuker(formMethods.getValues('fom'), value);
                 }}
               />

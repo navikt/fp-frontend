@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Theme } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { createIntl, parseQueryString } from '@navikt/ft-utils';
+import { createIntl } from '@navikt/ft-utils';
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
@@ -13,6 +13,7 @@ import {
   ErrorBoundary,
   ErrorType,
   type FpError,
+  parseQueryString,
   useRestApiError,
   useRestApiErrorDispatcher,
 } from '@navikt/fp-app-felles';

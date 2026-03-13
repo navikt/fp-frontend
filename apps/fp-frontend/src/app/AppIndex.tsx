@@ -3,11 +3,12 @@ import { RawIntlProvider } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Theme } from '@navikt/ds-react';
-import { createIntl, parseQueryString } from '@navikt/ft-utils';
+import { createIntl } from '@navikt/ft-utils';
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 
+import { parseQueryString } from '@navikt/fp-app-felles';
 import {
   ErrorBoundary,
   ErrorType,
