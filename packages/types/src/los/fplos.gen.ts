@@ -1052,26 +1052,6 @@ export type SisteReserverteResponses = {
 
 export type SisteReserverteResponse = SisteReserverteResponses[keyof SisteReserverteResponses];
 
-export type SøkAvdelingensSaksbehandlere1Data = {
-  /**
-   * Brukeridentifikasjon
-   */
-  body: tjenester_felles_dto_SaksbehandlerBrukerIdentDto;
-  path?: never;
-  query?: never;
-  url: '/api/reservasjon/flytt-reservasjon/søk';
-};
-
-export type SøkAvdelingensSaksbehandlere1Responses = {
-  /**
-   * default response
-   */
-  default: tjenester_felles_dto_SaksbehandlerDto;
-};
-
-export type SøkAvdelingensSaksbehandlere1Response =
-  SøkAvdelingensSaksbehandlere1Responses[keyof SøkAvdelingensSaksbehandlere1Responses];
-
 export type GetOppgaverTilBehandlingData = {
   body?: never;
   path?: never;

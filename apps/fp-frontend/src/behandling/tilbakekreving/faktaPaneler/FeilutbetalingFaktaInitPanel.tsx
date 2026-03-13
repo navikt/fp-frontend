@@ -48,6 +48,7 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
           feilutbetalingFakta={feilutbetalingFakta}
           feilutbetalingAarsak={feilutbetalingÅrsak}
           fagsakYtelseTypeKode={fagsak.fagsakYtelseType}
+          // @ts-expect-error -- venter på at "-" skal fjernes fra API type
           kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
           kodeverkSamlingFpsak={standardPanelProps.alleKodeverk}
           isAksjonspunktOpen={standardPanelProps.harÅpentAksjonspunkt}
