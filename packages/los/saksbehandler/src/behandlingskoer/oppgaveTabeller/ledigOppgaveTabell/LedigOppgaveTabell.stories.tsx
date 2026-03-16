@@ -65,7 +65,7 @@ export const Default: Story = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
           const doPolling = t.request.url.includes('oppgaveIder');
           return doPolling
@@ -93,7 +93,7 @@ export const TomOppgaveTabell: Story = {
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json([])),
         http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
           const doPolling = t.request.url.includes('oppgaveIder');

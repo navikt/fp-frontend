@@ -20,13 +20,13 @@ const meta = {
       handlers: [
         http.post(LosUrl.RESERVER_OPPGAVE, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.SØK_FAGSAK, () => HttpResponse.json({})),
-        http.post(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json([])),
-        http.post(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
+        http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json([])),
+        http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
       ],
     },
   },
   args: {
-    åpneFagsak: action('button-click'),
+    åpneFagsak: action('åpneFagsak'),
     kanSaksbehandle: true,
   },
 } satisfies Meta<typeof FagsakSøkIndex>;
