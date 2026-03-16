@@ -54,7 +54,6 @@ export const FlyttReservasjonModal = ({
       <RhfForm
         formMethods={formMethods}
         onSubmit={values => {
-          closeModal();
           flyttOppgavereservasjon({
             brukerIdent: values.brukerIdent,
             begrunnelse: values.begrunnelse,

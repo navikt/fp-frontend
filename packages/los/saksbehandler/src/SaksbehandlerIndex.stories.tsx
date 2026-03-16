@@ -205,7 +205,7 @@ const meta = {
         http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
         http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
-        http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+        http.get(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
       ],
     },
   },
@@ -216,8 +216,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    setLosErIkkeTilgjengelig: action('button-click'),
-    åpneFagsak: action('button-click'),
+    setLosErIkkeTilgjengelig: action('setLosErIkkeTilgjengelig'),
+    åpneFagsak: action('46435'),
     navAnsatt: {
       brukernavn: 'T232332',
       kanSaksbehandle: true,

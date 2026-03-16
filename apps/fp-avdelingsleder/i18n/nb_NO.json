@@ -112,7 +112,7 @@
   "ReservasjonerTabell.Flytt": "Flytt",
   "ReservasjonerTabell.Reservasjoner": "Reservasjoner for avdelingen",
   "ReservasjonerTabell.IngenReservasjoner": "Ingen reservasjoner funnet",
-  "ReservasjonerTabell.SlettReservasjon": "Slett reservasjon {oppgaveId}",
+  "ReservasjonerTabell.OpphevReservasjon": "Opphev reservasjon {oppgaveId}",
   "ReservasjonerTabell.Sok.PlaceHolder": "Søk etter saksbehandler på navn",
 
   "SaksbehandlereTabell.AnsattVed": "Ansatt ved avdeling",

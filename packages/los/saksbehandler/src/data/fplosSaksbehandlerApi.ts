@@ -127,9 +127,6 @@ export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>
 export const opphevReservasjon = (oppgaveId: number) =>
   kyExtended.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, { json: { oppgaveId } });
 
-export const forlengReservasjonPost = (oppgaveId: number) =>
-  kyExtended.post(LosUrl.FORLENG_OPPGAVERESERVASJON, { json: { oppgaveId } }).json<ReservasjonStatusDto>();
-
 export const endreReservasjonPost = (oppgaveId: number, reserverTil: string) =>
   kyExtended.post(LosUrl.ENDRE_OPPGAVERESERVASJON, { json: { oppgaveId, reserverTil } }).json<ReservasjonStatusDto>();
 
