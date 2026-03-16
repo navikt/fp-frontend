@@ -50,7 +50,6 @@ export const BehandlingPaVent = ({
       submitCallback={endrePaVent}
       cancelEvent={skjulModal}
       frist={behandling.fristBehandlingPåVent}
-      // @ts-expect-error fiks type på behandling
       ventearsak={behandling.venteÅrsakKode}
       hasManualPaVent={erManueltSattPaVent}
       ventearsaker={kodeverk['Venteårsak']}

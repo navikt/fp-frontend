@@ -207,8 +207,7 @@ export const UttakPeriodeInfo = ({
               label={intl.formatMessage({ id: 'UttakActivity.SamtidigUttak' })}
               readOnly={isReadOnly}
               validate={[
-                // @ts-expect-error FIX type i RhfCheckbox
-                (samtidigUttak: boolean) =>
+                samtidigUttak =>
                   erOppfylt && samtidigUttak !== true && valgtInnvilgelsesÅrsak === '2038'
                     ? intl.formatMessage({ id: 'ValidationMessage.SamtidigUttakErObligatorisk' })
                     : null,

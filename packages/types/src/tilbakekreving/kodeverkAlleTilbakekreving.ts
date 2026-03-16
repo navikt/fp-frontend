@@ -1,4 +1,5 @@
-import type { BehandlingType, HistorikkAktør, TilbakekrevingVidereBehandling, VergeType, VurderÅrsak } from '../index';
+import type { VurderÅrsak } from '../felles';
+import type { BehandlingType, HistorikkAktør, TilbakekrevingVidereBehandling, VergeType } from '../index';
 import type { Aktsomhet } from './aktsomhet';
 import type { BehandlingÅrsakTypeFpTilbake } from './behandlingÅrsakTypeFpTilbake';
 import type { BehandlingResultatTypeFpTilbake } from './behandlingResultatTypeFpTilbake';

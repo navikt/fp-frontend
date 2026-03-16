@@ -213,7 +213,6 @@ export type {
   folketrygdloven_kalkulus_kodeverk_VirksomhetType as VirksomhetType,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderBesteberegningDto as VurderBesteberegning,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderMottarYtelseDto as VurderMottarYtelse,
-  foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak as VurderÅrsak,
   tjenester_behandling_ytelsefordeling_YtelseFordelingDto as Ytelsefordeling,
   foreldrepenger_behandlingslager_aktør_NavBrukerKjønn as Kjønnkode,
   tjenester_behandling_dto_behandling_BehandlingsresultatDto as Behandlingsresultat,
