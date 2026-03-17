@@ -10,7 +10,7 @@
     "eslint": "eslint {decorators,mocks,testdata}/**/*.ts* --color",
     "eslint:fix": "eslint --fix {decorators,mocks,testdata}/**/*.ts* --color",
     "prettier:fix": "prettier --write decorators mocks testdata",
-    "tsc": "tsc --pretty",
+    "tsc": "tsc --noEmit",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {

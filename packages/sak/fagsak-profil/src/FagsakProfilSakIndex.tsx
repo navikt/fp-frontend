@@ -11,7 +11,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  saksnummer: string;
+  saksnummer: number;
   fagsakYtelseType: KodeverkMedNavn<'FagsakYtelseType'>;
   fagsakStatus: KodeverkMedNavn<'FagsakStatus'>;
   dekningsgrad?: number;

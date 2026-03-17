@@ -15,7 +15,7 @@
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
     "prettier:fix": "prettier --write src",
-    "tsc": "tsc --pretty",
+    "tsc": "tsc --noEmit",
     "dev": "vite serve",
     "preview": "vite preview",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",

@@ -12,7 +12,7 @@
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
     "prettier:fix": "prettier --write src",
-    "tsc": "tsc --pretty",
+    "tsc": "tsc --noEmit",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "storybook": "storybook dev --quiet -p 7027"
   },
