@@ -218,7 +218,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     setLosErIkkeTilgjengelig: action('setLosErIkkeTilgjengelig'),
-    åpneFagsak: action('46435'),
+    åpneFagsak: action('åpneFagsak'),
     navAnsatt: {
       brukernavn: 'T232332',
       kanSaksbehandle: true,

@@ -23,8 +23,8 @@ export const SaksbehandlerDashboard = ({ setLosErIkkeTilgjengelig, åpneFagsak, 
   const alleKodeverkQuery = useQuery(losKodeverkOptions());
 
   useEffect(() => {
-    if (alleKodeverkQuery.isError) {
       setLosErIkkeTilgjengelig();
+    if (alleKodeverkQuery.isError) {
     }
   }, [alleKodeverkQuery.isError]);
 
