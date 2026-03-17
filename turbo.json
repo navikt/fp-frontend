@@ -36,14 +36,14 @@
     "stylelint": {
       "outputs": []
     },
-    "prettier": {
+    "prettier:fix": {
       "outputs": []
     },
     "test": {
       "dependsOn": ["build", "^test"],
       "outputs": []
     },
-    "build-storybook": {
+    "build:storybook": {
       "outputs": [".storybook-static-build/**"]
     },
     "build": {

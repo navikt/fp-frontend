@@ -8,14 +8,13 @@
     ".": "./index.ts"
   },
   "scripts": {
+    "build:storybook": "storybook build -o .storybook-static-build",
     "test": "vitest",
-    "test:watch": "vitest --watch=true",
-    "tsc": "tsc --pretty",
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
-    "prettier": "prettier --write src",
+    "prettier:fix": "prettier --write src",
+    "tsc": "tsc --pretty",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
-    "build-storybook": "storybook build -o .storybook-static-build",
     "storybook": "storybook dev --quiet -p 7044"
   },
   "dependencies": {
