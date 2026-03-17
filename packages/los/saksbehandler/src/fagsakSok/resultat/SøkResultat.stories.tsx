@@ -18,7 +18,7 @@ const meta = {
   component: SøkResultat,
   decorators: [withIntl, withQueryClient],
   args: {
-    åpneFagsak: action('onÅpneFagsak'),
+    åpneFagsak: action('åpneFagsak'),
     selectOppgaveCallback: action('onSelectOppgave'),
   },
   parameters: {

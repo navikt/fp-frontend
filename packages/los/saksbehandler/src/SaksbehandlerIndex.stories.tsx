@@ -183,11 +183,10 @@ const meta = {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.get(LosUrl.SAKSLISTE, () => HttpResponse.json(SAKSLISTER)),
-        http.get(LosUrl.RESERVER_OPPGAVE, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.RESERVER_OPPGAVE, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json(RESERVERTE_OPPGAVER)),
         http.get(LosUrl.BEHANDLINGSKO_OPPGAVE_ANTALL, () => HttpResponse.json(100)),
-        http.get(LosUrl.RESERVER_OPPGAVE, () => new HttpResponse(null, { status: 200 })),
-        http.get(LosUrl.SØK_FAGSAK, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.SØK_FAGSAK, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
           const doPolling = t.request.url.includes('oppgaveIder');
@@ -205,7 +204,9 @@ const meta = {
         http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
         http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
-        http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+        http.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, () => HttpResponse.json({})),
+        http.post(LosUrl.FLYTT_RESERVASJON, () => HttpResponse.json({})),
       ],
     },
   },
@@ -216,8 +217,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    setLosErIkkeTilgjengelig: action('button-click'),
-    åpneFagsak: action('button-click'),
+    setLosErIkkeTilgjengelig: action('setLosErIkkeTilgjengelig'),
+    åpneFagsak: action('åpneFagsak'),
     navAnsatt: {
       brukernavn: 'T232332',
       kanSaksbehandle: true,

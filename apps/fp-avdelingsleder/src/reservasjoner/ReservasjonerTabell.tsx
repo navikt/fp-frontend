@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CalendarIcon, PersonGroupIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Table, TextField, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { FlyttReservasjonModal, OppgaveLabels, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
 import type { AvdelingReservasjonDto } from '@navikt/fp-types';
@@ -12,6 +12,7 @@ import type { AvdelingReservasjonDto } from '@navikt/fp-types';
 import {
   endreReservasjon,
   flyttReservasjon,
+  LosUrl,
   opphevReservasjon,
   reservasjonerForAvdelingOptions,
   saksbehandlareForAvdelingOptions,
@@ -24,14 +25,14 @@ interface Props {
 
 export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
   const intl = useIntl();
+  const queryClient = useQueryClient();
+
   const [showReservasjonEndringDatoModal, setShowReservasjonEndringDatoModal] = useState(false);
   const [showFlyttReservasjonModal, setShowFlyttReservasjonModal] = useState(false);
   const [valgtReservasjon, setValgtReservasjon] = useState<AvdelingReservasjonDto | undefined>(undefined);
   const [søketekst, setSøketekst] = useState('');
 
-  const { data: reservasjoner, refetch: hentAvdelingensReservasjoner } = useQuery(
-    reservasjonerForAvdelingOptions(valgtAvdelingEnhet),
-  );
+  const { data: reservasjoner } = useQuery(reservasjonerForAvdelingOptions(valgtAvdelingEnhet));
 
   const sorterteReservasjoner = reservasjoner
     .filter(reservasjon => reservasjon.reservertAvNavn.toLowerCase().includes(søketekst.toLowerCase()))
@@ -39,7 +40,9 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
 
   const { mutate: opphevOppgaveReservasjon } = useMutation({
     mutationFn: (valuesToStore: { oppgaveId: number }) => opphevReservasjon(valuesToStore.oppgaveId),
-    onSuccess: () => hentAvdelingensReservasjoner(),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: [LosUrl.RESERVASJONER_FOR_AVDELING, valgtAvdelingEnhet] });
+    },
   });
 
   const { data: avdelingensSaksbehandlere, isPending: isLoadingAvdelingensSaksbehandlere } = useQuery(
@@ -47,41 +50,32 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
   );
 
   const showReservasjonEndringDato = (reservasjon: AvdelingReservasjonDto): void => {
-    setShowReservasjonEndringDatoModal(true);
     setValgtReservasjon(reservasjon);
+    setShowReservasjonEndringDatoModal(true);
   };
 
   const showFlytteModal = (reservasjon: AvdelingReservasjonDto): void => {
-    setShowFlyttReservasjonModal(true);
     setValgtReservasjon(reservasjon);
+    setShowFlyttReservasjonModal(true);
   };
 
   const { mutateAsync: endreOppgavereservasjonRequest } = useMutation({
     mutationFn: (valuesToStore: { oppgaveId: number; reserverTil: string }) =>
       endreReservasjon(valuesToStore.oppgaveId, valuesToStore.reserverTil),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: [LosUrl.RESERVASJONER_FOR_AVDELING, valgtAvdelingEnhet] });
+      setShowReservasjonEndringDatoModal(false);
+    },
   });
-
-  const endreOppgavereservasjon = async (reserverTil: string) => {
-    if (!valgtReservasjon) {
-      throw new Error('Reservasjon må være valgt');
-    }
-    await endreOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, reserverTil });
-    setShowReservasjonEndringDatoModal(false);
-    void hentAvdelingensReservasjoner();
-  };
 
   const { mutateAsync: flyttOppgavereservasjonRequest } = useMutation({
     mutationFn: (valuesToStore: { oppgaveId: number; brukerIdent: string; begrunnelse: string }) =>
       flyttReservasjon(valuesToStore.oppgaveId, valuesToStore.brukerIdent, valuesToStore.begrunnelse),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: [LosUrl.RESERVASJONER_FOR_AVDELING, valgtAvdelingEnhet] });
+      setShowFlyttReservasjonModal(false);
+    },
   });
-
-  const flyttOppgavereservasjon = async (params: { brukerIdent: string; begrunnelse: string }) => {
-    if (!valgtReservasjon) {
-      throw new Error('Reservasjon må være valgt');
-    }
-    await flyttOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, ...params });
-    void hentAvdelingensReservasjoner();
-  };
 
   return (
     <VStack gap="space-8">
@@ -169,7 +163,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                     data-color="danger"
                     size="small"
                     title={intl.formatMessage(
-                      { id: 'ReservasjonerTabell.SlettReservasjon' },
+                      { id: 'ReservasjonerTabell.OpphevReservasjon' },
                       { oppgaveId: reservasjon.oppgaveId },
                     )}
                     icon={<XMarkIcon aria-hidden />}
@@ -186,14 +180,18 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
         <OppgaveReservasjonEndringDatoModal
           closeModal={() => setShowReservasjonEndringDatoModal(false)}
           reserverTilDefault={valgtReservasjon.reservertTilTidspunkt}
-          endreOppgavereservasjon={endreOppgavereservasjon}
+          endreOppgavereservasjon={reserverTil =>
+            endreOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, reserverTil })
+          }
         />
       )}
 
       {valgtReservasjon && showFlyttReservasjonModal && (
         <FlyttReservasjonModal
           closeModal={() => setShowFlyttReservasjonModal(false)}
-          flyttOppgavereservasjon={flyttOppgavereservasjon}
+          flyttOppgavereservasjon={params =>
+            flyttOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, ...params })
+          }
           tilgjengeligeSaksbehandlere={avdelingensSaksbehandlere}
           isLoadingSaksbehandlere={isLoadingAvdelingensSaksbehandlere}
         />

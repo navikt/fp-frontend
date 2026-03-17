@@ -10,7 +10,9 @@ import {
   PersonHeadsetIcon,
 } from '@navikt/aksel-icons';
 import { ActionMenu, Button } from '@navikt/ds-react';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 
 import { FlyttReservasjonModal, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
 import type { OppgaveDto } from '@navikt/fp-types';
@@ -18,7 +20,6 @@ import type { OppgaveDto } from '@navikt/fp-types';
 import {
   endreReservasjonPost,
   flyttReservasjonPost,
-  forlengReservasjonPost,
   hentAktuelleSaksbehandlere,
   LosUrl,
   opphevReservasjon,
@@ -44,12 +45,11 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
   const { mutate: endreOppgavereservasjon } = useMutation({
     mutationFn: (reserverTil: string) => endreReservasjonPost(oppgave.id, reserverTil),
     onSuccess: () => {
-      setVisForlengetReservasjonModal(true);
-
       void queryClient.invalidateQueries({
         queryKey: [LosUrl.RESERVERTE_OPPGAVER],
       });
 
+      setVisForlengetReservasjonModal(true);
       setVisReservasjonEndringDatoModal(false);
     },
   });
@@ -58,16 +58,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
     mutationFn: (values: { brukerIdent: string; begrunnelse: string }) =>
       flyttReservasjonPost(oppgave.id, values.brukerIdent, values.begrunnelse),
     onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
-      });
-    },
-  });
-
-  const { mutate: forlengOppgavereservasjon } = useMutation({
-    mutationFn: () => forlengReservasjonPost(oppgave.id),
-    onSuccess: () => {
-      setVisForlengetReservasjonModal(true);
+      setVisFlyttReservasjonModal(false);
       void queryClient.invalidateQueries({
         queryKey: [LosUrl.RESERVERTE_OPPGAVER],
       });
@@ -103,7 +94,10 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
             <ActionMenu.Item onSelect={() => opphevOppgavereservasjon()} icon={<ArrowUndoIcon aria-hidden />}>
               <FormattedMessage id="OppgaveHandlingerMenu.LeggTilbake" />
             </ActionMenu.Item>
-            <ActionMenu.Item onSelect={() => forlengOppgavereservasjon()} icon={<HourglassTopFilledIcon aria-hidden />}>
+            <ActionMenu.Item
+              onSelect={() => endreOppgavereservasjon(getForlengetDato(oppgave))}
+              icon={<HourglassTopFilledIcon aria-hidden />}
+            >
               <FormattedMessage id="OppgaveHandlingerMenu.ForlengReservasjon" />
             </ActionMenu.Item>
             <ActionMenu.Item
@@ -154,3 +148,6 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
     </>
   );
 };
+
+const getForlengetDato = (oppgave: OppgaveDto) =>
+  dayjs(oppgave.reservasjonStatus.reservertTilTidspunkt).add(1, 'day').format(ISO_DATE_FORMAT);

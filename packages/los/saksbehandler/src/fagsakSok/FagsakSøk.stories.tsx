@@ -26,10 +26,10 @@ const meta = {
     kanSaksbehandle: true,
     searchResultReceived: true,
     searchStarted: false,
-    searchFagsakCallback: action('button-click'),
-    åpneFagsak: action('button-click'),
-    selectOppgaveCallback: action('button-click'),
-    resetSearch: action('button-click'),
+    searchFagsakCallback: action('searchFagsakCallback'),
+    åpneFagsak: action('åpneFagsak'),
+    selectOppgaveCallback: action('selectOppgaveCallback'),
+    resetSearch: action('resetSearch'),
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla

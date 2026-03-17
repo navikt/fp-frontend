@@ -19,7 +19,7 @@ const meta = {
   component: SistBehandledeSaker,
   decorators: [withIntl, withQueryClient],
   args: {
-    åpneFagsak: action('button-click'),
+    åpneFagsak: action('åpneFagsak'),
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla

@@ -18,7 +18,7 @@ describe('OppgaveHandlingerMenu', () => {
 
     expect(await screen.findByText('Legg tilbake i felles kø')).toBeInTheDocument();
     expect(screen.getByText('Forleng reservasjon (24t)')).toBeInTheDocument();
-    expect(screen.getByText('Reserver med dato')).toBeInTheDocument();
+    expect(screen.getByText('Endre reservasjonsdato')).toBeInTheDocument();
     expect(screen.getByText('Flytt til ny saksbehandler')).toBeInTheDocument();
   });
 
@@ -47,7 +47,7 @@ describe('OppgaveHandlingerMenu', () => {
 
     expect(await screen.findByText('Legg tilbake i felles kø')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Reserver med dato'));
+    await userEvent.click(screen.getByText('Endre reservasjonsdato'));
 
     expect(await screen.findByText('Velg dato som reservasjonen avsluttes')).toBeInTheDocument();
   });
