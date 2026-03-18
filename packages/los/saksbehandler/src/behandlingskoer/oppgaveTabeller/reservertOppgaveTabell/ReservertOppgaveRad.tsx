@@ -54,7 +54,9 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
         )}
       </Table.DataCell>
       <Table.DataCell>
-        {oppgave.reservasjonStatus.flyttetReservasjon && <NotatKnapp oppgave={oppgave} brukernavn={brukernavn} />}
+        {oppgave.reservasjonStatus.flyttetReservasjon && (
+          <NotatKnapp flyttetReservasjon={oppgave.reservasjonStatus.flyttetReservasjon} brukernavn={brukernavn} />
+        )}
       </Table.DataCell>
       <Table.DataCell>
         <OppgaveHandlingerMenu oppgave={oppgave} brukernavn={brukernavn} />

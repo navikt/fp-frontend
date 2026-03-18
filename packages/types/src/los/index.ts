@@ -13,6 +13,7 @@ export type {
   tjenester_avdelingsleder_saksbehandler_dto_SaksbehandlereOgSaksbehandlerGrupper as SaksbehandlereOgSaksbehandlerGrupper,
   tjenester_avdelingsleder_saksbehandler_dto_SaksbehandlerGruppeDto as SaksbehandlerGruppeDto,
   tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForAvdelingPerDato as OppgaverForAvdelingPerDato,
+  tjenester_felles_dto_FlyttetReservasjonDto as FlyttetReservasjonDto,
   tjenester_felles_dto_ReservasjonStatusDto as ReservasjonStatusDto,
   tjenester_felles_dto_OppgaveDtoMedStatus as OppgaveDtoMedStatus,
   tjenester_felles_dto_OppgaveDto as OppgaveDto,
