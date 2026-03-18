@@ -116,7 +116,7 @@ const RESERVERTE_OPPGAVER = [
       flyttetReservasjon: {
         navn: 'Petter',
         tidspunkt: '2019-08-02T00:54:25.455',
-        flyttetAvIdent: 'Ident',
+        flyttetAvIdent: 'S123456',
         begrunnelse: 'Denne er flyttet',
       },
     },

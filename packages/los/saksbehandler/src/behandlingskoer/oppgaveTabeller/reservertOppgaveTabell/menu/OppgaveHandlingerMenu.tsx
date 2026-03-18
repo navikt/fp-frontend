@@ -29,11 +29,10 @@ import { NotatModal } from './notat/NotatModal';
 
 interface Props {
   oppgave: OppgaveDto;
-  setEnableTableEvents: (shouldDisable: boolean) => void;
   brukernavn: string;
 }
 
-export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernavn }: Props) => {
+export const OppgaveHandlingerMenu = ({ oppgave, brukernavn }: Props) => {
   const intl = useIntl();
   const queryClient = useQueryClient();
 
@@ -80,7 +79,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
 
   return (
     <>
-      <ActionMenu onOpenChange={open => setEnableTableEvents(!open)}>
+      <ActionMenu>
         <ActionMenu.Trigger>
           <Button
             variant="tertiary"
