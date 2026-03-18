@@ -58,7 +58,7 @@ export const OppgaveReservasjonEndringDatoModal = ({
               control={søkFormMethods.control}
               label={<FormattedMessage id="OppgaveReservasjonEndringDatoModal.ReserverTil" />}
               validate={[hasValidDate, dateAfterOrEqualToToday, dateBeforeOrEqual(thirtyDaysFromNow())]}
-              disabledDays={[(date)=> dayjs(date).day() === 0 || dayjs(date).day() === 6]}
+              disabledDays={[{ dayOfWeek: [0, 6] }]}
               fromDate={new Date()}
               toDate={thirtyDaysFromNow().toDate()}
             />

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
-import { action } from 'storybook/actions';
 
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
@@ -37,7 +36,6 @@ const meta = {
     },
   },
   args: {
-    setEnableTableEvents: action('setEnableTableEvents'),
     brukernavn: 'P123456',
     oppgave: {
       id: 1,
