@@ -28,7 +28,7 @@
   "ReservertOppgaveRad.OverfortReservasjonBegrunnelse": "Begrunnelse",
   "ReservertOppgaveRad.Notat": "Notat",
   "ReservertOppgaveRad.OverfortReservasjonHeader": "Overført reservasjon",
-  "ReservertOppgaveRad.OverfortReservasjonBody": "{dato} - {tid} fra {flyttetAvIdent} {navn}",
+  "ReservertOppgaveRad.OverfortReservasjonBody": "{tidspunkt} av {navn} ({flyttetAvIdent})",
   "ReservertOppgaveRad.Saksnr": "Kopier saksnummer",
 
   "Person.Age": "{age} år",
