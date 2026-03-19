@@ -1,22 +1,9 @@
-import { type ComponentProps, useMemo, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
-import { Link, useLocation } from 'react-router-dom';
 
-import { Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
-import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { HTTPError } from 'ky';
+import { useQuery } from '@tanstack/react-query';
 
-import { parseQueryString } from '@navikt/fp-app-felles';
-import {
-  ErrorBoundary,
-  ErrorType,
-  type FpError,
-  useRestApiError,
-  useRestApiErrorDispatcher,
-} from '@navikt/fp-app-felles';
-import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
+import { AppShell, type AppShellInnerRenderProps, ErrorBoundary, ErrorType, type FpError } from '@navikt/fp-app-felles';
 
 import { initFetchOptions } from '../data/fagsakApi';
 import { PollingTimeoutError } from '../data/polling/pollingUtils';
@@ -36,167 +23,55 @@ const THEME_LOCALE_STORAGE_KEY = 'fp-frontend-theme';
 
 const intl = createIntl(messages);
 
-export const AppIndexWrapper = () => {
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-  const queryClient = useMemo(() => createQueryClient(getErrorHandler(addErrorMessage)), [addErrorMessage]);
+const handlePollingError = (error: Error, addErrorMessage: (data: FpError) => void): boolean => {
+  if (error instanceof PollingTimeoutError) {
+    addErrorMessage({ type: ErrorType.POLLING_TIMEOUT, message: error.message, location: error.location });
+    return true;
+  }
+  return false;
+};
+
+const AppIndex = ({
+  headerHeight,
+  crashMessage,
+  theme,
+  setTheme,
+  setSiteHeight,
+  queryStrings,
+  hasForbiddenOrUnauthorizedErrors,
+  shouldRenderHome,
+  addErrorMessageAndSetAsCrashed,
+}: AppShellInnerRenderProps) => {
+  const initFetchQuery = useQuery(initFetchOptions());
+  const navAnsatt = initFetchQuery.data?.innloggetBruker;
 
   return (
     <RawIntlProvider value={intl}>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools />
-        <AppIndex />
-      </QueryClientProvider>
+      <AppConfigResolver>
+        <>
+          <Dekorator
+            hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
+            queryStrings={queryStrings}
+            setSiteHeight={setSiteHeight}
+            crashMessage={crashMessage}
+            theme={theme}
+            setTheme={setTheme}
+          />
+          <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
+            {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
+          </ErrorBoundary>
+        </>
+      </AppConfigResolver>
     </RawIntlProvider>
   );
 };
 
-/**
- * AppIndex
- *
- * Dette er toppkomponenten i applikasjonen. Denne vil rendre header
- * og home-komponentene. Home-komponenten vil rendre barn-komponenter via ruter.
- */
-const AppIndex = () => {
-  const [headerHeight, setHeaderHeight] = useState(0);
-  const [crashMessage, setCrashMessage] = useState<string>();
-
-  const { theme, setTheme } = useThemeFromLocalStorage();
-
-  const initFetchQuery = useQuery(initFetchOptions());
-  const navAnsatt = initFetchQuery.data?.innloggetBruker;
-
-  const location = useLocation();
-
-  const setSiteHeight = (newHeaderHeight: number): void => {
-    document.documentElement.style.setProperty('--header-height', `${newHeaderHeight}px`);
-    setHeaderHeight(newHeaderHeight);
-  };
-
-  const addErrorMessageAndSetAsCrashed = (error: FpError) => {
-    setCrashMessage(
-      error.type === ErrorType.GENERAL_ERROR
-        ? error.message
-        : 'Det oppstod en feilsituasjon som ikke blir håndtert korrekt',
-    );
-  };
-
-  const errorMessages = useRestApiError();
-  const queryStrings = parseQueryString(location.search);
-  const hasForbiddenErrors = errorMessages.some(o => o.type === ErrorType.REQUEST_FORBIDDEN);
-  const hasUnauthorizedErrors = errorMessages.some(o => o.type === ErrorType.REQUEST_UNAUTHORIZED);
-  const hasForbiddenOrUnauthorizedErrors = hasForbiddenErrors || hasUnauthorizedErrors;
-  const shouldRenderHome = !crashMessage && !hasForbiddenOrUnauthorizedErrors;
-
-  return (
-    <Theme theme={theme}>
-      <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed}>
-        <AppConfigResolver>
-          <>
-            <Dekorator
-              hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
-              queryStrings={queryStrings}
-              setSiteHeight={setSiteHeight}
-              crashMessage={crashMessage}
-              theme={theme}
-              setTheme={setTheme}
-            />
-            <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
-              {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
-            </ErrorBoundary>
-            {hasForbiddenErrors && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-            {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-          </>
-        </AppConfigResolver>
-      </ErrorBoundary>
-    </Theme>
-  );
-};
-
-const createQueryClient = (errorHandler: (error: Error) => void) =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: retryHandler(),
-      },
-      mutations: {
-        retry: retryHandler(),
-      },
-    },
-    queryCache: new QueryCache({
-      onError: errorHandler,
-    }),
-    mutationCache: new MutationCache({
-      onError: errorHandler,
-    }),
-  });
-
-const ZERO_RETRIES = false;
-
-const retryHandler = () => {
-  if (import.meta.env.MODE === 'test') {
-    return ZERO_RETRIES;
-  }
-
-  return (failureCount: number, error: Error) => {
-    if (error instanceof HTTPError) {
-      if (error.response.status === 401 || error.response.status === 403) {
-        return ZERO_RETRIES;
-      }
-      if (error.response.status === 500) {
-        return failureCount < 1;
-      }
-    }
-    return failureCount < 3;
-  };
-};
-
-const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (error: Error) => {
-  // eslint-disable-next-line no-console
-  console.log(error);
-
-  if (error instanceof PollingTimeoutError) {
-    addErrorMessage({ type: ErrorType.POLLING_TIMEOUT, message: error.message, location: error.location });
-  } else if (error instanceof HTTPError) {
-    if (error.response.status === 403) {
-      addErrorMessage({ type: ErrorType.REQUEST_FORBIDDEN, message: error.message });
-    } else if (error.response.status === 401) {
-      addErrorMessage({ type: ErrorType.REQUEST_UNAUTHORIZED, message: error.message });
-    } else if (error.response.status === 504 || error.response.status === 404) {
-      addErrorMessage({
-        type: ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
-        location: error.response.url,
-      });
-    } else {
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const feildataJson = await error.response.json();
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
-        addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: feildataJson.feilmelding ?? error.message });
-      } catch {
-        addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
-      }
-    }
-  } else {
-    addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
-  }
-};
-
-type Theme = NonNullable<ComponentProps<typeof Theme>['theme']>;
-
-const useThemeFromLocalStorage = () => {
-  const body = document.body;
-
-  const [theme, setTheme] = useState<Theme>(() => {
-    const currentTheme = (localStorage.getItem(THEME_LOCALE_STORAGE_KEY) ?? 'light') as Theme;
-    body.classList.add(currentTheme);
-    return currentTheme;
-  });
-
-  const updateTheme = (newTheme: Theme) => {
-    setTheme(newTheme);
-    body.classList.replace(newTheme === 'dark' ? 'light' : 'dark', newTheme);
-    localStorage.setItem(THEME_LOCALE_STORAGE_KEY, newTheme);
-  };
-
-  return { theme, setTheme: updateTheme };
-};
+export const AppIndexWrapper = () => (
+  <AppShell
+    themeLocalStorageKey={THEME_LOCALE_STORAGE_KEY}
+    onHeaderHeightChange={h => document.documentElement.style.setProperty('--header-height', `${h}px`)}
+    additionalErrorHandler={handlePollingError}
+  >
+    {props => <AppIndex {...props} />}
+  </AppShell>
+);
