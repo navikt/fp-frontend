@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Label, Modal as NavModal } from '@navikt/ds-react';
+import { Button, Label, Modal } from '@navikt/ds-react';
 import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
@@ -42,18 +42,13 @@ export const NotatModal = ({ notat, closeModal, flyttOppgavereservasjon, brukern
         });
       }}
     >
-      <NavModal
-        width="small"
-        open
-        aria-label={intl.formatMessage({ id: 'NotatModal.SkrivNotat' })}
-        onClose={closeModal}
-      >
-        <NavModal.Header>
+      <Modal width="small" open aria-label={intl.formatMessage({ id: 'NotatModal.SkrivNotat' })} onClose={closeModal}>
+        <Modal.Header>
           <Label size="medium">
             <FormattedMessage id="NotatModal.SkrivNotat" />
           </Label>
-        </NavModal.Header>
-        <NavModal.Body>
+        </Modal.Header>
+        <Modal.Body>
           <RhfTextarea
             name="notat"
             control={lagreFormMethods.control}
@@ -61,16 +56,16 @@ export const NotatModal = ({ notat, closeModal, flyttOppgavereservasjon, brukern
             validate={[required, maxLength500, minLength3, hasValidText]}
             maxLength={500}
           />
-        </NavModal.Body>
-        <NavModal.Footer>
+        </Modal.Body>
+        <Modal.Footer>
           <Button size="small" variant="primary">
             <FormattedMessage id="Label.Ok" />
           </Button>
           <Button size="small" variant="secondary" onClick={closeModal} type="button">
             <FormattedMessage id="Label.Avbryt" />
           </Button>
-        </NavModal.Footer>
-      </NavModal>
+        </Modal.Footer>
+      </Modal>
     </RhfForm>
   );
 };

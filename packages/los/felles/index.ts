@@ -1,5 +1,5 @@
 export { ReactECharts } from './src/ReactECharts';
-export { OppgaveReservasjonEndringDatoModal } from './src/endreReservasjon/OppgaveReservasjonEndringDatoModal';
+export { EndreReservasjonDato } from './src/endreReservasjondato/EndreReservasjonDato';
 export { FlyttReservasjonModal } from './src/flyttReservasjon/FlyttReservasjonModal';
 export { AktiveOgTilgjengeligeOppgaverGraf } from './src/graf/oppgaver/AktiveOgTilgjengeligeOppgaverGraf';
 export { LukkedeOppgaverPanel } from './src/graf/lukkedeOppgaver/LukkedeOppgaverPanel';
