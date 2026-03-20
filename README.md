@@ -108,10 +108,13 @@ yarn generate
 ```
 
 ## Oppgradere avhengigheter
+
 Avhengigheter kan oppgraderes på tvers av alle pakker med
+
 ```bash
 yarn upgrade-interactive
 ```
+
 ## Turborepo
 
 - Hovedregelen ved bruk av Turborepo er at dependencies skal installeres i pakkene de blir brukt.
