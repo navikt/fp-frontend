@@ -107,8 +107,7 @@
 
   "ReservasjonerTabell.Saksnr": "Saksnummer",
   "ReservasjonerTabell.Egenskaper": "Egenskaper",
-  "ReservasjonerTabell.ReservertTil": "Reservert til",
-  "ReservasjonerTabell.Endre": "Endre",
+  "ReservasjonerTabell.ReservertUt": "Reservert ut",
   "ReservasjonerTabell.Flytt": "Flytt",
   "ReservasjonerTabell.Reservasjoner": "Reservasjoner for avdelingen",
   "ReservasjonerTabell.IngenReservasjoner": "Ingen reservasjoner funnet",

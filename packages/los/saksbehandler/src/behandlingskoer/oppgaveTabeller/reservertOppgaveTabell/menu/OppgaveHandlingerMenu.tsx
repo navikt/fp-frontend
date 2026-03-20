@@ -1,30 +1,19 @@
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import {
-  ArrowUndoIcon,
-  CalendarIcon,
-  HourglassTopFilledIcon,
-  MenuElipsisVerticalCircleIcon,
-  NotePencilIcon,
-  PersonHeadsetIcon,
-} from '@navikt/aksel-icons';
+import { ArrowUndoIcon, MenuElipsisVerticalCircleIcon, NotePencilIcon, PersonHeadsetIcon } from '@navikt/aksel-icons';
 import { ActionMenu, Button } from '@navikt/ds-react';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import dayjs from 'dayjs';
 
-import { FlyttReservasjonModal, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
+import { FlyttReservasjonModal } from '@navikt/fp-los-felles';
 import type { OppgaveDto } from '@navikt/fp-types';
 
 import {
-  endreReservasjonPost,
   flyttReservasjonPost,
   hentAktuelleSaksbehandlere,
   LosUrl,
   opphevReservasjon,
 } from '../../../../data/fplosSaksbehandlerApi';
-import { OppgaveReservasjonForlengetModal } from './forleng/OppgaveReservasjonForlengetModal';
 import { NotatModal } from './notat/NotatModal';
 
 interface Props {
@@ -36,22 +25,8 @@ export const OppgaveHandlingerMenu = ({ oppgave, brukernavn }: Props) => {
   const intl = useIntl();
   const queryClient = useQueryClient();
 
-  const [visForlengetReservasjonModal, setVisForlengetReservasjonModal] = useState(false);
-  const [visReservasjonEndringDatoModal, setVisReservasjonEndringDatoModal] = useState(false);
   const [visFlyttReservasjonModal, setVisFlyttReservasjonModal] = useState(false);
   const [visNotatModal, setVisNotatModal] = useState(false);
-
-  const { mutate: endreOppgavereservasjon } = useMutation({
-    mutationFn: (reserverTil: string) => endreReservasjonPost(oppgave.id, reserverTil),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
-      });
-
-      setVisForlengetReservasjonModal(true);
-      setVisReservasjonEndringDatoModal(false);
-    },
-  });
 
   const { mutate: flyttOppgavereservasjon } = useMutation({
     mutationFn: (values: { brukerIdent: string; begrunnelse: string }) =>
@@ -94,18 +69,6 @@ export const OppgaveHandlingerMenu = ({ oppgave, brukernavn }: Props) => {
               <FormattedMessage id="OppgaveHandlingerMenu.LeggTilbake" />
             </ActionMenu.Item>
             <ActionMenu.Item
-              onSelect={() => endreOppgavereservasjon(getForlengetDato(oppgave))}
-              icon={<HourglassTopFilledIcon aria-hidden />}
-            >
-              <FormattedMessage id="OppgaveHandlingerMenu.ForlengReservasjon" />
-            </ActionMenu.Item>
-            <ActionMenu.Item
-              onSelect={() => setVisReservasjonEndringDatoModal(true)}
-              icon={<CalendarIcon aria-hidden />}
-            >
-              <FormattedMessage id="OppgaveHandlingerMenu.EndreReservasjon" />
-            </ActionMenu.Item>
-            <ActionMenu.Item
               onSelect={() => setVisFlyttReservasjonModal(true)}
               icon={<PersonHeadsetIcon aria-hidden />}
             >
@@ -117,16 +80,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, brukernavn }: Props) => {
           </ActionMenu.Group>
         </ActionMenu.Content>
       </ActionMenu>
-      {visReservasjonEndringDatoModal && (
-        <OppgaveReservasjonEndringDatoModal
-          closeModal={() => setVisReservasjonEndringDatoModal(false)}
-          reserverTilDefault={oppgave.reservasjonStatus.reservertTilTidspunkt}
-          endreOppgavereservasjon={endreOppgavereservasjon}
-        />
-      )}
-      {visForlengetReservasjonModal && (
-        <OppgaveReservasjonForlengetModal oppgave={oppgave} closeModal={() => setVisForlengetReservasjonModal(false)} />
-      )}
+
       {visFlyttReservasjonModal && (
         <FlyttReservasjonModal
           flyttetBegrunnelse={oppgave.reservasjonStatus.flyttetReservasjon?.begrunnelse}
@@ -147,6 +101,3 @@ export const OppgaveHandlingerMenu = ({ oppgave, brukernavn }: Props) => {
     </>
   );
 };
-
-const getForlengetDato = (oppgave: OppgaveDto) =>
-  dayjs(oppgave.reservasjonStatus.reservertTilTidspunkt).add(1, 'day').format(ISO_DATE_FORMAT);

@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, Pagination, type SortState, Table, VStack } from '@navikt/ds-react';
+import { notEmpty } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
 import type { OppgaveDto } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
 
 import { reserverteOppgaverOptions } from '../../../data/fplosSaksbehandlerApi';
 import { ReservertOppgaveRad } from './ReservertOppgaveRad';
@@ -14,7 +14,7 @@ import styles from './reservertOppgaveTabell.module.css';
 
 const EMPTY_ARRAY = new Array<OppgaveDto>();
 
-type TableHeaders = 'navn' | 'saksnummer' | 'behandlingstype' | 'opprettetTidspunkt' | 'status';
+type TableHeaders = 'navn' | 'saksnummer' | 'behandlingstype' | 'opprettetTidspunkt' | 'reservertTilTidspunkt';
 
 interface Props {
   reserverOppgave: (oppgave: OppgaveDto) => void;
@@ -125,7 +125,7 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
 };
 
 const comparator = (a: OppgaveDto, b: OppgaveDto, orderBy: TableHeaders) => {
-  if (orderBy === 'status') {
+  if (orderBy === 'reservertTilTidspunkt') {
     return notEmpty(a.reservasjonStatus.reservertTilTidspunkt) < notEmpty(b.reservasjonStatus.reservertTilTidspunkt)
       ? -1
       : 1;

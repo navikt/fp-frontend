@@ -2979,6 +2979,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-los-felles@workspace:packages/los/felles"
   dependencies:
+    "@navikt/aksel-icons": "npm:8.6.0"
     "@navikt/ds-css": "npm:8.6.0"
     "@navikt/ds-react": "npm:8.6.0"
     "@navikt/ds-tokens": "npm:8.6.0"

@@ -2,16 +2,16 @@ import { useIntl } from 'react-intl';
 
 import { FilesIcon } from '@navikt/aksel-icons';
 import { CopyButton, HStack, Table } from '@navikt/ds-react';
-import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { OppgaveLabels } from '@navikt/fp-los-felles';
+import { EndreReservasjonDato, OppgaveLabels } from '@navikt/fp-los-felles';
 import type { OppgaveDto } from '@navikt/fp-types';
 
+import { endreReservasjonPost, LosUrl } from '../../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 import { NotatKnapp } from './NotatKnapp';
-
-import styles from './ReservertOppgaveRad.module.css';
 
 interface Props {
   oppgave: OppgaveDto;
@@ -21,9 +21,17 @@ interface Props {
 
 export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Props) => {
   const intl = useIntl();
+  const queryClient = useQueryClient();
+
+  const { mutateAsync: endreReservasjonAsync } = useMutation({
+    mutationFn: (reserverTil: string) => endreReservasjonPost(oppgave.id, reserverTil),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: [LosUrl.RESERVERTE_OPPGAVER] });
+    },
+  });
 
   return (
-    <Table.Row key={oppgave.id} onRowClick={() => reserverOppgave(oppgave)} className={styles['isUnderBehandling']}>
+    <Table.Row key={oppgave.id} onRowClick={() => reserverOppgave(oppgave)} className="bg-ax-bg-warning-moderate">
       <Table.DataCell>{oppgave.navn}</Table.DataCell>
       <Table.DataCell>
         <HStack align="center" gap="space-8" wrap={false}>
@@ -50,7 +58,10 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
       </Table.DataCell>
       <Table.DataCell>
         {oppgave.reservasjonStatus.reservertTilTidspunkt && (
-          <DateTimeLabel dateTimeString={oppgave.reservasjonStatus.reservertTilTidspunkt} separator="kl" />
+          <EndreReservasjonDato
+            reservertTilTidspunkt={oppgave.reservasjonStatus.reservertTilTidspunkt}
+            endreReservasjon={endreReservasjonAsync}
+          />
         )}
       </Table.DataCell>
       <Table.DataCell>
