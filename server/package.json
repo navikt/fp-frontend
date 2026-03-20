@@ -10,7 +10,7 @@
     "build": "tsc",
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
-    "prettier": "prettier --write src"
+    "prettier:fix": "prettier --write src"
   },
   "dependencies": {
     "@navikt/oasis": "4.1.4",

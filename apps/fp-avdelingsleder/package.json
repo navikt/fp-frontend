@@ -8,18 +8,17 @@
     ".": "./index.html"
   },
   "scripts": {
+    "build": "vite build",
+    "build:storybook": "storybook build -o .storybook-static-build",
     "test": "vitest",
-    "test:watch": "vitest --watch=true",
-    "tsc": "tsc --pretty",
     "eslint": "eslint {src,testdata}/**/*.ts* --color",
     "eslint:fix": "eslint --fix {src,testdata}/**/*.ts* --color",
+    "prettier:fix": "prettier --write {src,testdata}",
+    "tsc": "tsc --noEmit",
     "stylelint": "stylelint src/**/*.module.css",
-    "prettier": "prettier --write {src,testdata}",
     "dev": "vite serve",
-    "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
-    "build-storybook": "storybook build -o .storybook-static-build",
     "storybook": "storybook dev --quiet -p 7004"
   },
   "dependencies": {

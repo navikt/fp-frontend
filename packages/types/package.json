@@ -9,8 +9,8 @@
   "scripts": {
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
-    "tsc": "tsc --pretty",
-    "prettier": "prettier --write src",
+    "prettier:fix": "prettier --write src",
+    "tsc": "tsc --noEmit",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "update-swagger": "node scripts/hent-openapi-spec.js",
     "generate:local": "yarn run update-swagger lokal && openapi-ts",

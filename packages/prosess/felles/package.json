@@ -7,11 +7,11 @@
     ".": "./index.ts"
   },
   "scripts": {
-    "tsc": "tsc --pretty",
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
+    "prettier:fix": "prettier --write src",
+    "tsc": "tsc --noEmit",
     "stylelint": "stylelint src/**/*.module.css",
-    "prettier": "prettier --write src",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {

@@ -7,10 +7,10 @@
     ".": "./index.ts"
   },
   "scripts": {
-    "tsc": "tsc --pretty",
     "eslint": "eslint {decorators,mocks,testdata}/**/*.ts* --color",
     "eslint:fix": "eslint --fix {decorators,mocks,testdata}/**/*.ts* --color",
-    "prettier": "prettier --write decorators mocks testdata",
+    "prettier:fix": "prettier --write decorators mocks testdata",
+    "tsc": "tsc --noEmit",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {

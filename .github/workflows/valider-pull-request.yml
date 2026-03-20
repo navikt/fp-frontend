@@ -27,8 +27,11 @@ jobs:
       - name: Installere dependencies
         run: yarn install --immutable
 
-      - name: Lint
-        run: yarn lint
+      - name: Stylelint
+        run: yarn stylelint
+
+      - name: ESLint
+        run: yarn eslint
 
   knip-it:
     name: Kjør knip
