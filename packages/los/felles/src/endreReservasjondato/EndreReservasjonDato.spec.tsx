@@ -10,20 +10,7 @@ import * as stories from './EndreReservasjonDato.stories';
 
 const { Default } = composeStories(stories);
 
-const STATIC_DATE = new Date('2026-01-10');
-const NEXT_WEEKDAY_DAY = '12';
-const NEXT_WEEKDAY_ISO = '2026-01-12';
-
 describe('EndreReservasjonDato', () => {
-  beforeAll(() => {
-    vi.useFakeTimers({ shouldAdvanceTime: true });
-    vi.setSystemTime(STATIC_DATE);
-  });
-
-  afterAll(() => {
-    vi.useRealTimers();
-  });
-
   it('skal vise ukedag og dato for reservertTilTidspunkt', async () => {
     render(<Default reservertTilTidspunkt="2026-01-15" />);
 
@@ -33,36 +20,36 @@ describe('EndreReservasjonDato', () => {
   });
 
   it('skal endre dato på reservasjon', async () => {
-    const endreReservasjon = lagUtsattPromise();
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    vi.setSystemTime(new Date('2026-01-10'));
+
+    let resolve!: (value: ReservasjonStatusDto) => void;
+    const promise = new Promise<ReservasjonStatusDto>(res => {
+      resolve = res;
+    });
+    const endreReservasjon = vi.fn().mockReturnValue(promise);
 
     render(<Default endreReservasjon={endreReservasjon} />);
 
     await userEvent.click(screen.getByRole('button'));
-    const datoKnapp = await screen.findByRole('button', { name: `mandag ${NEXT_WEEKDAY_DAY}` });
+    const datoKnapp = await screen.findByRole('button', { name: 'mandag 12' });
     await userEvent.click(datoKnapp);
 
     expect(await screen.findByTitle('Lagrer...')).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeDisabled();
 
-    endreReservasjon.resolve({ erReservert: true });
+    expect(endreReservasjon).toHaveBeenCalledWith('2026-01-12');
 
-    expect(endreReservasjon).toHaveBeenCalledWith(NEXT_WEEKDAY_ISO);
-    expect(await screen.findByTitle('Lagret')).toBeInTheDocument();
+    resolve({ erReservert: true });
 
-    act(() => {
-      vi.advanceTimersByTime(2000);
-    });
+    await waitFor(() => expect(screen.queryByTitle('Lagrer...')).not.toBeInTheDocument());
+    expect(screen.getByTitle('Lagret')).toBeInTheDocument();
 
-    await waitFor(() => expect(screen.queryByTitle('Lagret')).not.toBeInTheDocument());
+    await act(async () => vi.advanceTimersByTimeAsync(2000));
+
+    expect(screen.queryByTitle('Lagret')).not.toBeInTheDocument();
     expect(screen.getByTitle('Åpne datovelger')).toBeInTheDocument();
+
+    vi.useRealTimers();
   });
 });
-
-const lagUtsattPromise = () => {
-  let resolve!: (value: ReservasjonStatusDto) => void;
-  const promise = new Promise<ReservasjonStatusDto>(res => {
-    resolve = res;
-  });
-  const mockFn = vi.fn(() => promise);
-  return Object.assign(mockFn, { resolve });
-};
