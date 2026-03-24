@@ -12,12 +12,12 @@ describe('OppgaveHandlingerMenu', () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
-    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
+    expect(await screen.findByTitle('Åpne meny')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button'));
     expect(screen.getAllByRole('menuitem')).toHaveLength(3);
     expect(await screen.findByText('Legg tilbake i felles kø')).toBeInTheDocument();
-    expect(screen.getByText('Flytt til ny saksbehandler')).toBeInTheDocument();
+    expect(screen.getByText('Flytt til annen saksbehandler')).toBeInTheDocument();
     expect(screen.getByText('Legg til notat')).toBeInTheDocument();
   });
 
@@ -25,13 +25,13 @@ describe('OppgaveHandlingerMenu', () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
-    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
+    expect(await screen.findByTitle('Åpne meny')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button'));
 
     expect(await screen.findByText('Legg tilbake i felles kø')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Flytt til ny saksbehandler'));
+    await userEvent.click(screen.getByText('Flytt til annen saksbehandler'));
 
     expect(await screen.findByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
@@ -46,7 +46,7 @@ describe('OppgaveHandlingerMenu', () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
-    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
+    expect(await screen.findByTitle('Åpne meny')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button'));
 
@@ -61,7 +61,7 @@ describe('OppgaveHandlingerMenu', () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
-    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
+    expect(await screen.findByTitle('Åpne meny')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button'));
 

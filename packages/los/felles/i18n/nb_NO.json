@@ -24,6 +24,10 @@
   "LukkedeOppgaverPanel.DenneUken": "Denne uken",
   "LukkedeOppgaverPanel.ForrigeUke": "Forrige uke",
 
+  "EndreReservasjonDato.Lagrer": "Lagrer...",
+  "EndreReservasjonDato.Lagret": "Lagret",
+  "EndreReservasjonDato.ÅpneDatovelger": "Åpne datovelger",
+
   "OppgaveLabels.Anke": "Anke",
   "OppgaveLabels.Innsyn": "Innsyn",
   "OppgaveLabels.Forstegang": "Søknad",

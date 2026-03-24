@@ -39,22 +39,20 @@ describe('EndreReservasjonDato', () => {
 
     render(<Default />);
 
-    await userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByTitle('Åpne datovelger'));
     const datoKnapp = await screen.findByRole('button', { name: 'mandag 12' });
     await userEvent.click(datoKnapp);
 
-    expect(await screen.findByTitle('Lagrer...')).toBeInTheDocument();
-    expect(screen.getByRole('button')).toBeDisabled();
+    expect(screen.getByTitle('Lagrer...')).toBeDisabled();
 
     resolve();
 
     await waitFor(() => expect(requestBody).toHaveBeenCalledWith({ oppgaveId: 123, reserverTil: '2026-01-12' }));
-    expect(await screen.findByTitle('Lagret')).toBeInTheDocument();
+    expect(screen.getByTitle('Lagret')).toBeInTheDocument();
 
-    await waitFor(() => expect(screen.queryByTitle('Lagret')).not.toBeInTheDocument(), {
-      timeout: 2000,
+    await waitFor(() => expect(screen.getByTitle('Åpne datovelger')).toBeInTheDocument(), {
+      timeout: 2500,
     });
-    expect(screen.getByTitle('Åpne datovelger')).toBeInTheDocument();
 
     vi.useRealTimers();
   });
