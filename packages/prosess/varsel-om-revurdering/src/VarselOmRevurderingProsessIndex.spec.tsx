@@ -42,9 +42,6 @@ describe('VarselOmRevurderingProsessIndex', () => {
 
     await userEvent.click(screen.getByText('Send varsel til søker'));
 
-    const fritekstInput = screen.getByLabelText('Fritekst i brev');
-    await userEvent.type(fritekstInput, 'Dette er en fritekst');
-
     const vurderingInput = screen.getByLabelText('Begrunnelse');
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
@@ -53,8 +50,6 @@ describe('VarselOmRevurderingProsessIndex', () => {
     await waitFor(() => expect(forhåndsvis).toHaveBeenCalledTimes(1));
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
       dokumentMal: 'VARREV',
-      fritekst: 'Dette er en fritekst',
-      årsakskode: 'ANNET',
     });
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -69,7 +64,6 @@ describe('VarselOmRevurderingProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       frist: dayjs().add(28, 'days').format(ISO_DATE_FORMAT),
-      fritekst: 'Dette er en fritekst',
       kode: '5026',
       sendVarsel: true,
       ventearsak: 'AVV_DOK',
