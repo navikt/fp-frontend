@@ -20,6 +20,8 @@ describe('EndreReservasjonDato', () => {
   });
 
   it('skal endre dato på reservasjon', async () => {
+    vi.setSystemTime('2026-01-12');
+
     let resolve!: () => void;
     const requestBody = vi.fn();
 
