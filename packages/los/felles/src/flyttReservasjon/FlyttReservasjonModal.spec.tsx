@@ -1,17 +1,18 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { http, HttpResponse } from 'msw';
+import { applyRequestHandlers } from 'msw-storybook-addon';
 import { expect } from 'vitest';
 
+import { LosUrlFelles } from '../api/fplosFellesApi';
 import * as stories from './FlyttReservasjonModal.stories';
 
 const { Default } = composeStories(stories);
 
 describe('FlyttReservasjonModal', () => {
   it('skal vise feilmelding når flytting blir forsøkt utført uten at skjemaet er fylt ut', async () => {
-    const flyttOppgavereservasjon = vi.fn();
-
-    render(<Default flyttOppgavereservasjon={flyttOppgavereservasjon} />);
+    render(<Default />);
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
     expect(screen.getByText('Notat til annen saksbehandler')).toBeInTheDocument();
@@ -23,7 +24,6 @@ describe('FlyttReservasjonModal', () => {
     await userEvent.click(screen.getByText('OK'));
 
     expect(await screen.findByText('Du må velge en saksbehandler')).toBeInTheDocument();
-    expect(flyttOppgavereservasjon).not.toHaveBeenCalled();
   });
 
   it('skal vise at oppgitt bruker ikke finnes', async () => {
@@ -41,8 +41,17 @@ describe('FlyttReservasjonModal', () => {
   });
 
   it('skal vise finne brukerident og så lagre begrunnelse for flytting', async () => {
-    const flyttOppgavereservasjon = vi.fn();
-    render(<Default flyttOppgavereservasjon={flyttOppgavereservasjon} />);
+    const requestBody = vi.fn();
+
+    applyRequestHandlers({
+      handlers: [
+        http.post(LosUrlFelles.FLYTT_RESERVASJON, async ({ request }) => {
+          requestBody(await request.json());
+          return HttpResponse.json({ erReservert: true });
+        }),
+      ],
+    });
+    render(<Default />);
 
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
@@ -55,9 +64,12 @@ describe('FlyttReservasjonModal', () => {
 
     await userEvent.click(screen.getByText('OK'));
 
-    expect(flyttOppgavereservasjon).toHaveBeenNthCalledWith(1, {
-      begrunnelse: 'Dette er en begrunnelse',
-      brukerIdent: 'P123456',
-    });
+    await waitFor(() =>
+      expect(requestBody).toHaveBeenCalledExactlyOnceWith({
+        oppgaveId: 123,
+        begrunnelse: 'Dette er en begrunnelse',
+        brukerIdent: 'P123456',
+      }),
+    );
   });
 });

@@ -1,17 +1,17 @@
-import { act } from 'react';
-
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { http, HttpResponse } from 'msw';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
-import type { ReservasjonStatusDto } from '@navikt/fp-types';
-
+import { LosUrlFelles } from '../api/fplosFellesApi';
 import * as stories from './EndreReservasjonDato.stories';
 
 const { Default } = composeStories(stories);
 
 describe('EndreReservasjonDato', () => {
   it('skal vise ukedag og dato for reservertTilTidspunkt', async () => {
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default reservertTilTidspunkt="2026-01-15" />);
 
     expect(await screen.findByText('Torsdag')).toBeInTheDocument();
@@ -20,16 +20,22 @@ describe('EndreReservasjonDato', () => {
   });
 
   it('skal endre dato på reservasjon', async () => {
-    vi.useFakeTimers({ shouldAdvanceTime: true });
-    vi.setSystemTime(new Date('2026-01-10'));
+    let resolve!: () => void;
+    const requestBody = vi.fn();
 
-    let resolve!: (value: ReservasjonStatusDto) => void;
-    const promise = new Promise<ReservasjonStatusDto>(res => {
-      resolve = res;
+    applyRequestHandlers({
+      handlers: [
+        http.post(LosUrlFelles.ENDRE_OPPGAVERESERVASJON, async ({ request }) => {
+          requestBody(await request.json());
+          await new Promise<void>(res => {
+            resolve = res;
+          });
+          return HttpResponse.json({ erReservert: true });
+        }),
+      ],
     });
-    const endreReservasjon = vi.fn().mockReturnValue(promise);
 
-    render(<Default endreReservasjon={endreReservasjon} />);
+    render(<Default />);
 
     await userEvent.click(screen.getByRole('button'));
     const datoKnapp = await screen.findByRole('button', { name: 'mandag 12' });
@@ -38,16 +44,14 @@ describe('EndreReservasjonDato', () => {
     expect(await screen.findByTitle('Lagrer...')).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeDisabled();
 
-    expect(endreReservasjon).toHaveBeenCalledWith('2026-01-12');
+    resolve();
 
-    resolve({ erReservert: true });
+    await waitFor(() => expect(requestBody).toHaveBeenCalledWith({ oppgaveId: 123, reserverTil: '2026-01-12' }));
+    expect(await screen.findByTitle('Lagret')).toBeInTheDocument();
 
-    await waitFor(() => expect(screen.queryByTitle('Lagrer...')).not.toBeInTheDocument());
-    expect(screen.getByTitle('Lagret')).toBeInTheDocument();
-
-    await act(async () => vi.advanceTimersByTimeAsync(2000));
-
-    expect(screen.queryByTitle('Lagret')).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByTitle('Lagret')).not.toBeInTheDocument(), {
+      timeout: 2000,
+    });
     expect(screen.getByTitle('Åpne datovelger')).toBeInTheDocument();
 
     vi.useRealTimers();

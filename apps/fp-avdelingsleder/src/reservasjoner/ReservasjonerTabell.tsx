@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { PersonGroupIcon, XMarkIcon } from '@navikt/aksel-icons';
+import { ArrowUndoIcon, PersonGroupIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Table, TextField, VStack } from '@navikt/ds-react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -9,8 +9,6 @@ import { EndreReservasjonDato, FlyttReservasjonModal, OppgaveLabels } from '@nav
 import type { AvdelingReservasjonDto } from '@navikt/fp-types';
 
 import {
-  endreReservasjon,
-  flyttReservasjon,
   LosUrl,
   opphevReservasjon,
   reservasjonerForAvdelingOptions,
@@ -52,23 +50,6 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
     setShowFlyttReservasjonModal(true);
   };
 
-  const { mutateAsync: endreOppgaveReservasjonAsync } = useMutation({
-    mutationFn: ({ oppgaveId, reserverTil }: { oppgaveId: number; reserverTil: string }) =>
-      endreReservasjon(oppgaveId, reserverTil),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: [LosUrl.RESERVASJONER_FOR_AVDELING, valgtAvdelingEnhet] });
-    },
-  });
-
-  const { mutateAsync: flyttOppgavereservasjonRequest } = useMutation({
-    mutationFn: (valuesToStore: { oppgaveId: number; brukerIdent: string; begrunnelse: string }) =>
-      flyttReservasjon(valuesToStore.oppgaveId, valuesToStore.brukerIdent, valuesToStore.begrunnelse),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: [LosUrl.RESERVASJONER_FOR_AVDELING, valgtAvdelingEnhet] });
-      setShowFlyttReservasjonModal(false);
-    },
-  });
-
   return (
     <VStack gap="space-8">
       <Label size="small">
@@ -104,14 +85,9 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                 <FormattedMessage id="ReservasjonerTabell.Egenskaper" />
               </Table.ColumnHeader>
               <Table.ColumnHeader>
-                <FormattedMessage id="ReservasjonerTabell.ReservertUt" />
+                <FormattedMessage id="ReservasjonerTabell.ReservertTil" />
               </Table.ColumnHeader>
-              <Table.ColumnHeader>
-                <FormattedMessage id="ReservasjonerTabell.Flytt" />
-              </Table.ColumnHeader>
-              <Table.ColumnHeader>
-                <FormattedMessage id="Label.Slett" />
-              </Table.ColumnHeader>
+              <Table.ColumnHeader />
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -130,31 +106,28 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                 <Table.DataCell>
                   <EndreReservasjonDato
                     reservertTilTidspunkt={reservasjon.reservertTilTidspunkt}
-                    endreReservasjon={reserverTil =>
-                      endreOppgaveReservasjonAsync({ oppgaveId: reservasjon.oppgaveId, reserverTil })
-                    }
+                    oppgaveId={reservasjon.oppgaveId}
+                    invalidateQueryKeys={[LosUrl.RESERVASJONER_FOR_AVDELING, valgtAvdelingEnhet]}
                   />
                 </Table.DataCell>
                 <Table.DataCell>
-                  <Button
-                    variant="tertiary"
-                    size="small"
-                    icon={<PersonGroupIcon aria-hidden />}
-                    onClick={() => showFlytteModal(reservasjon)}
-                  />
-                </Table.DataCell>
-                <Table.DataCell>
-                  <Button
-                    variant="tertiary"
-                    data-color="danger"
-                    size="small"
-                    title={intl.formatMessage(
-                      { id: 'ReservasjonerTabell.OpphevReservasjon' },
-                      { oppgaveId: reservasjon.oppgaveId },
-                    )}
-                    icon={<XMarkIcon aria-hidden />}
-                    onClick={() => opphevOppgaveReservasjon({ oppgaveId: reservasjon.oppgaveId })}
-                  />
+                  <HStack gap="space-8">
+                    <Button
+                      variant="tertiary"
+                      size="small"
+                      title={intl.formatMessage({ id: 'ReservasjonerTabell.FlyttReservasjon' })}
+                      icon={<PersonGroupIcon aria-hidden />}
+                      onClick={() => showFlytteModal(reservasjon)}
+                    />
+
+                    <Button
+                      variant="tertiary"
+                      size="small"
+                      title={intl.formatMessage({ id: 'ReservasjonerTabell.OpphevReservasjon' })}
+                      icon={<ArrowUndoIcon aria-hidden />}
+                      onClick={() => opphevOppgaveReservasjon({ oppgaveId: reservasjon.oppgaveId })}
+                    />
+                  </HStack>
                 </Table.DataCell>
               </Table.Row>
             ))}
@@ -165,9 +138,8 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
       {valgtReservasjon && showFlyttReservasjonModal && (
         <FlyttReservasjonModal
           closeModal={() => setShowFlyttReservasjonModal(false)}
-          flyttOppgavereservasjon={params =>
-            flyttOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, ...params })
-          }
+          oppgaveId={valgtReservasjon.oppgaveId}
+          invalidateQueryKeys={[LosUrl.RESERVASJONER_FOR_AVDELING, valgtAvdelingEnhet]}
           tilgjengeligeSaksbehandlere={avdelingensSaksbehandlere}
           isLoadingSaksbehandlere={isLoadingAvdelingensSaksbehandlere}
         />

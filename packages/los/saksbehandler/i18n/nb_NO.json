@@ -19,7 +19,7 @@
 
   "ReservertOppgaveTabell.Soker": "Søker",
   "ReservertOppgaveTabell.Sak": "Sak",
-  "ReservertOppgaveTabell.ReservertTilTidspunkt": "Reservert ut",
+  "ReservertOppgaveTabell.ReservertTil": "Reservert til",
   "ReservertOppgaveTabell.BehandlingOpprettet": "Opprettet",
   "ReservertOppgaveTabell.ReserverteOppgaver": "Reserverte",
   "ReservertOppgaveTabell.AntallOppgaver": "{reservertAntall}",
@@ -72,9 +72,9 @@
 
   "OppgaveHandlingerMenu.Meny": "Oppgavemeny",
   "OppgaveHandlingerMenu.LeggTilbake": "Legg tilbake i felles kø",
-  "OppgaveHandlingerMenu.FlyttReservasjon": "Flytt til ny saksbehandler",
+  "OppgaveHandlingerMenu.FlyttReservasjon": "Flytt til annen saksbehandler",
   "OppgaveHandlingerMenu.Notat": "Legg til notat",
-  "OppgaveHandlingerMenu.OppgaveHandlinger": "Handlinger på oppgave",
+  "OppgaveHandlingerMenu.ÅpneMeny": "Åpne meny",
 
   "FagsakList.Saksnummer": "Saksnummer",
   "FagsakList.Stonadstype": "Stønadstype",

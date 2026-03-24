@@ -1,5 +1,6 @@
 import { queryOptions } from '@tanstack/react-query';
 
+import { kyExtended, LosUrlFelles, wrapUrl } from '@navikt/fp-los-felles';
 import type {
   FagsakEnkel,
   OppgaveDto,
@@ -9,9 +10,7 @@ import type {
   SakslisteDto,
 } from '@navikt/fp-types';
 
-import { kyExtended, LosUrl as LosUrlFelles, wrapUrl } from '@navikt/fp-los-felles';
-
-export { losKodeverkOptions, endreReservasjon, flyttReservasjon } from '@navikt/fp-los-felles';
+export { losKodeverkOptions, flyttReservasjon } from '@navikt/fp-los-felles';
 
 export const LosUrl = {
   ...LosUrlFelles,

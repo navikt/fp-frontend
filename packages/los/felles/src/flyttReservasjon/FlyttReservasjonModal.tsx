@@ -5,8 +5,11 @@ import { Button, Label, Modal, UNSAFE_Combobox as Combobox, VStack } from '@navi
 import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { SaksbehandlerDto } from '@navikt/fp-types';
+
+import { flyttReservasjon } from '../api/fplosFellesApi';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -21,10 +24,11 @@ type FormValues = {
 };
 
 interface Props {
+  oppgaveId: number;
+  invalidateQueryKeys: string[];
+  tilgjengeligeSaksbehandlere: SaksbehandlerDto[];
   flyttetBegrunnelse?: string;
   closeModal: () => void;
-  flyttOppgavereservasjon: (params: { brukerIdent: string; begrunnelse: string }) => void;
-  tilgjengeligeSaksbehandlere: SaksbehandlerDto[];
   isLoadingSaksbehandlere: boolean;
 }
 
@@ -36,10 +40,21 @@ interface Props {
 export const FlyttReservasjonModal = ({
   flyttetBegrunnelse,
   closeModal,
-  flyttOppgavereservasjon,
+  oppgaveId,
+  invalidateQueryKeys,
   tilgjengeligeSaksbehandlere,
   isLoadingSaksbehandlere,
 }: Props) => {
+  const queryClient = useQueryClient();
+
+  const { mutate: flyttOppgavereservasjon } = useMutation({
+    mutationFn: ({ brukerIdent, begrunnelse }: FormValues) => flyttReservasjon(oppgaveId, brukerIdent, begrunnelse),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: invalidateQueryKeys });
+      closeModal();
+    },
+  });
+
   const formMethods = useForm<FormValues>({
     defaultValues: { begrunnelse: flyttetBegrunnelse },
   });
@@ -51,15 +66,7 @@ export const FlyttReservasjonModal = ({
 
   return (
     <RawIntlProvider value={intl}>
-      <RhfForm
-        formMethods={formMethods}
-        onSubmit={values => {
-          flyttOppgavereservasjon({
-            brukerIdent: values.brukerIdent,
-            begrunnelse: values.begrunnelse,
-          });
-        }}
-      >
+      <RhfForm formMethods={formMethods} onSubmit={values => flyttOppgavereservasjon(values)}>
         <Modal
           open
           onClose={closeModal}

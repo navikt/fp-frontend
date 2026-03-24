@@ -1,57 +1,51 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { CalendarIcon, CheckmarkIcon } from '@navikt/aksel-icons';
 import { Button, DatePicker, HStack, Loader } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { capitalizeFirstLetter, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
-import type { ReservasjonStatusDto } from '@navikt/fp-types';
+import { endreReservasjon } from '../api/fplosFellesApi';
+
+import styles from './endreReservasjonDato.module.css';
 
 interface Props {
   reservertTilTidspunkt: string;
-  endreReservasjon: (reserverTil: string) => Promise<ReservasjonStatusDto>;
+  oppgaveId: number;
+  invalidateQueryKeys: string[];
 }
 
-export const EndreReservasjonDato = ({ reservertTilTidspunkt, endreReservasjon }: Props) => {
+export const EndreReservasjonDato = ({ reservertTilTidspunkt, oppgaveId, invalidateQueryKeys }: Props) => {
+  const queryClient = useQueryClient();
   const [openDatepicker, setOpenDatepicker] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  const { mutateAsync } = useMutation({
+    mutationFn: (reserverTil: string) => endreReservasjon(oppgaveId, reserverTil),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: invalidateQueryKeys });
+    },
+  });
+
   const handleSelect = async (date: Date) => {
     setIsPending(true);
     try {
-      await endreReservasjon(dayjs(date).format(ISO_DATE_FORMAT));
+      await mutateAsync(dayjs(date).format(ISO_DATE_FORMAT));
       setOpenDatepicker(false);
       setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 2000);
     } finally {
       setIsPending(false);
     }
   };
-
-  useEffect(() => {
-    if (!showSuccess) {
-      return undefined;
-    }
-    const timer = setTimeout(() => {
-      setShowSuccess(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [showSuccess]);
-
-  const getButtonIcon = () => {
-    if (isPending) {
-      return <Loader size="small" title="Lagrer..." />;
-    }
-    if (showSuccess) {
-      return <CheckmarkIcon title="Lagret" />;
-    }
-    return <CalendarIcon title="Åpne datovelger" />;
-  };
+  const { title, icon } = getState(isPending, showSuccess);
 
   return (
     <HStack gap="space-8" align="center" wrap={false}>
-      <span className="w-14">{capitalizeFirstLetter(dayjs(reservertTilTidspunkt).format('dddd'))}</span>
+      <span className="w-[7ch]">{capitalizeFirstLetter(dayjs(reservertTilTidspunkt).format('dddd'))}</span>
       <DateLabel dateString={reservertTilTidspunkt} />
       <DatePicker
         mode="single"
@@ -69,10 +63,29 @@ export const EndreReservasjonDato = ({ reservertTilTidspunkt, endreReservasjon }
           onClick={() => {
             setOpenDatepicker(x => !x);
           }}
-          icon={getButtonIcon()}
+          aria-label={title}
+          title={title}
+          icon={icon}
           disabled={isPending}
+          data-active={showSuccess}
         />
       </DatePicker>
     </HStack>
   );
+};
+
+const getState = (isPending: boolean, showSuccess: boolean) => {
+  if (isPending) {
+    return {
+      title: 'Lagrer...',
+      icon: <Loader size="small" aria-hidden />,
+    };
+  }
+  if (showSuccess) {
+    return { title: 'Lagret', icon: <CheckmarkIcon aria-hidden className={styles['successIcon']} /> };
+  }
+  return {
+    title: 'Åpne datovelger',
+    icon: <CalendarIcon aria-hidden />,
+  };
 };

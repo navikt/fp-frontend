@@ -1,13 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
+import { withQueryClient } from '@navikt/fp-storybook-utils';
+
+import { LosUrlFelles } from '../api/fplosFellesApi';
 import { FlyttReservasjonModal } from './FlyttReservasjonModal';
 
 const meta = {
   title: 'los/FlyttReservasjonModal',
   component: FlyttReservasjonModal,
+  decorators: [withQueryClient],
+  parameters: {
+    msw: {
+      handlers: [http.post(LosUrlFelles.FLYTT_RESERVASJON, () => HttpResponse.json({}))],
+    },
+  },
   args: {
-    closeModal: action('button-click'),
+    oppgaveId: 123,
+    invalidateQueryKeys: [],
+    closeModal: action('closeModal'),
     tilgjengeligeSaksbehandlere: [
       {
         navn: 'Espen Utvikler',
@@ -20,7 +32,6 @@ const meta = {
         ansattAvdeling: 'Avdeling B',
       },
     ],
-    flyttOppgavereservasjon: action('flyttOppgavereservasjon'),
     isLoadingSaksbehandlere: false,
   },
 } satisfies Meta<typeof FlyttReservasjonModal>;

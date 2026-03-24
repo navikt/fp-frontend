@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { LosUrlFelles } from '@navikt/fp-los-felles';
+import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { NotatModal } from './NotatModal';
 
@@ -12,11 +14,16 @@ const withIntl = getIntlDecorator(messages);
 const meta = {
   title: 'behandlingskoer/NotatModal',
   component: NotatModal,
-  decorators: [withIntl],
+  decorators: [withIntl, withQueryClient],
+  parameters: {
+    msw: {
+      handlers: [http.post(LosUrlFelles.FLYTT_RESERVASJON, () => HttpResponse.json({}))],
+    },
+  },
   args: {
-    closeModal: action('button-click'),
-    flyttOppgavereservasjon: () => Promise.resolve(),
-    brukernavn: 'T232332',
+    oppgaveId: 123,
+    brukerIdent: 'T232332',
+    closeModal: action('closeModal'),
   },
 } satisfies Meta<typeof NotatModal>;
 export default meta;

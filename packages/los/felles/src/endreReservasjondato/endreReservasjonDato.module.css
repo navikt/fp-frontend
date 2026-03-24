@@ -1,4 +1,7 @@
+.successIcon {
+  --copy-anim-name: akselCopyButtonIconAnimation;
 
-.editReservasjonDato svg {
-    animation: :global(akselCopyButtonIconAnimation) 2s cubic-bezier(0.05, 0.7, 0.1, 1);
+  animation-duration: 2s;
+  animation-name: var(--copy-anim-name);
+  animation-timing-function: cubic-bezier(0.05, 0.7, 0.1, 1);
 }

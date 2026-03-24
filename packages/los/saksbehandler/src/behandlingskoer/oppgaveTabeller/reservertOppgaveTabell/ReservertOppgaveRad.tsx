@@ -3,12 +3,11 @@ import { useIntl } from 'react-intl';
 import { FilesIcon } from '@navikt/aksel-icons';
 import { CopyButton, HStack, Table } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { EndreReservasjonDato, OppgaveLabels } from '@navikt/fp-los-felles';
 import type { OppgaveDto } from '@navikt/fp-types';
 
-import { endreReservasjon, LosUrl } from '../../../data/fplosSaksbehandlerApi';
+import { LosUrl } from '../../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 import { NotatKnapp } from './NotatKnapp';
@@ -21,14 +20,6 @@ interface Props {
 
 export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Props) => {
   const intl = useIntl();
-  const queryClient = useQueryClient();
-
-  const { mutateAsync: endreReservasjonAsync } = useMutation({
-    mutationFn: (reserverTil: string) => endreReservasjon(oppgave.id, reserverTil),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: [LosUrl.RESERVERTE_OPPGAVER] });
-    },
-  });
 
   return (
     <Table.Row key={oppgave.id} onRowClick={() => reserverOppgave(oppgave)} className="bg-ax-bg-warning-moderate">
@@ -60,7 +51,8 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
         {oppgave.reservasjonStatus.reservertTilTidspunkt && (
           <EndreReservasjonDato
             reservertTilTidspunkt={oppgave.reservasjonStatus.reservertTilTidspunkt}
-            endreReservasjon={endreReservasjonAsync}
+            oppgaveId={oppgave.id}
+            invalidateQueryKeys={[LosUrl.RESERVERTE_OPPGAVER]}
           />
         )}
       </Table.DataCell>

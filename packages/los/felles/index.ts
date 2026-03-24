@@ -16,11 +16,4 @@ export {
 
 export type { ColorPair } from './src/echartUtils';
 
-export {
-  kyExtended,
-  wrapUrl,
-  LosUrl,
-  losKodeverkOptions,
-  endreReservasjon,
-  flyttReservasjon,
-} from './src/api/fplosFellesApi';
+export { kyExtended, wrapUrl, LosUrlFelles, losKodeverkOptions, flyttReservasjon } from './src/api/fplosFellesApi';

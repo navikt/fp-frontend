@@ -1,22 +1,34 @@
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
-import { action } from 'storybook/actions';
+import { delay, http, HttpResponse } from 'msw';
 
-import type { ReservasjonStatusDto } from '@navikt/fp-types';
+import { withQueryClient } from '@navikt/fp-storybook-utils';
 
+import { LosUrlFelles } from '../api/fplosFellesApi';
 import { EndreReservasjonDato } from './EndreReservasjonDato';
 
 const meta = {
   title: 'los/EndreReservasjonDato',
   component: EndreReservasjonDato,
+  decorators: [withQueryClient],
+  parameters: {
+    msw: {
+      handlers: [
+        http.post(LosUrlFelles.ENDRE_OPPGAVERESERVASJON, async () => {
+          await delay(1000);
+          return HttpResponse.json({});
+        }),
+      ],
+    },
+  },
   args: {
-    endreReservasjon: (date: string) =>
-      new Promise(resolve => {
-        action('endreReservasjon')(date);
-        setTimeout(() => resolve({} as ReservasjonStatusDto), 1000);
-      }),
+    oppgaveId: 123,
+    invalidateQueryKeys: [],
     reservertTilTidspunkt: dayjs().add(1, 'week').format(ISO_DATE_FORMAT),
+  },
+  render: props => {
+    return <EndreReservasjonDato {...props} />;
   },
 } satisfies Meta<typeof EndreReservasjonDato>;
 export default meta;

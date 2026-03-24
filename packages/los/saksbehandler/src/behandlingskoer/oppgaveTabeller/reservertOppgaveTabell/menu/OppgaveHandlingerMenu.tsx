@@ -8,12 +8,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { FlyttReservasjonModal } from '@navikt/fp-los-felles';
 import type { OppgaveDto } from '@navikt/fp-types';
 
-import {
-  flyttReservasjon,
-  hentAktuelleSaksbehandlere,
-  LosUrl,
-  opphevReservasjon,
-} from '../../../../data/fplosSaksbehandlerApi';
+import { hentAktuelleSaksbehandlere, LosUrl, opphevReservasjon } from '../../../../data/fplosSaksbehandlerApi';
 import { NotatModal } from './notat/NotatModal';
 
 interface Props {
@@ -27,17 +22,6 @@ export const OppgaveHandlingerMenu = ({ oppgave, brukernavn }: Props) => {
 
   const [visFlyttReservasjonModal, setVisFlyttReservasjonModal] = useState(false);
   const [visNotatModal, setVisNotatModal] = useState(false);
-
-  const { mutate: flyttOppgavereservasjon } = useMutation({
-    mutationFn: (values: { brukerIdent: string; begrunnelse: string }) =>
-      flyttReservasjon(oppgave.id, values.brukerIdent, values.begrunnelse),
-    onSuccess: () => {
-      setVisFlyttReservasjonModal(false);
-      void queryClient.invalidateQueries({
-        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
-      });
-    },
-  });
 
   const { mutate: opphevOppgavereservasjon } = useMutation({
     mutationFn: () => opphevReservasjon(oppgave.id),
@@ -86,7 +70,8 @@ export const OppgaveHandlingerMenu = ({ oppgave, brukernavn }: Props) => {
         <FlyttReservasjonModal
           flyttetBegrunnelse={oppgave.reservasjonStatus.flyttetReservasjon?.begrunnelse}
           closeModal={() => setVisFlyttReservasjonModal(false)}
-          flyttOppgavereservasjon={flyttOppgavereservasjon}
+          oppgaveId={oppgave.id}
+          invalidateQueryKeys={[LosUrl.RESERVERTE_OPPGAVER]}
           tilgjengeligeSaksbehandlere={(aktuelleSaksbehandlere ?? []).filter(sbh => sbh.brukerIdent !== brukernavn)}
           isLoadingSaksbehandlere={isLoadingSaksbehandlere}
         />
@@ -94,9 +79,9 @@ export const OppgaveHandlingerMenu = ({ oppgave, brukernavn }: Props) => {
       {visNotatModal && (
         <NotatModal
           closeModal={() => setVisNotatModal(false)}
-          flyttOppgavereservasjon={flyttOppgavereservasjon}
-          brukernavn={brukernavn}
-          notat={oppgave.reservasjonStatus.flyttetReservasjon?.begrunnelse}
+          brukerIdent={brukernavn}
+          oppgaveId={oppgave.id}
+          begrunnelse={oppgave.reservasjonStatus.flyttetReservasjon?.begrunnelse}
         />
       )}
     </>

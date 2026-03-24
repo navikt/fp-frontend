@@ -107,11 +107,13 @@
 
   "ReservasjonerTabell.Saksnr": "Saksnummer",
   "ReservasjonerTabell.Egenskaper": "Egenskaper",
-  "ReservasjonerTabell.ReservertUt": "Reservert ut",
+  "ReservasjonerTabell.ReservertTil": "Reservert til",
   "ReservasjonerTabell.Flytt": "Flytt",
+  "ReservasjonerTabell.Opphev": "Opphev",
   "ReservasjonerTabell.Reservasjoner": "Reservasjoner for avdelingen",
   "ReservasjonerTabell.IngenReservasjoner": "Ingen reservasjoner funnet",
-  "ReservasjonerTabell.OpphevReservasjon": "Opphev reservasjon {oppgaveId}",
+  "ReservasjonerTabell.OpphevReservasjon": "Legg tilbake i felles kø",
+  "ReservasjonerTabell.FlyttReservasjon": "Flytt til annen saksbehandler",
   "ReservasjonerTabell.Sok.PlaceHolder": "Søk etter saksbehandler på navn",
 
   "SaksbehandlereTabell.AnsattVed": "Ansatt ved avdeling",
