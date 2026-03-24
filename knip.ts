@@ -2,6 +2,7 @@ import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
   ignore: [
+    '@types/editorjs-undo.d.ts',
     '.storybook/**',
     'server/**',
     'packages/types/openapi-ts.config.ts',
