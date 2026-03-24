@@ -27,7 +27,7 @@
     "react": "19.2.4"
   },
   "devDependencies": {
-    "@formatjs/cli-lib": "8.3.2",
+    "@formatjs/cli-lib": "8.4.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
