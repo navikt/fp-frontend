@@ -197,6 +197,7 @@ export const BehandlingRel = {
   FERDIGSTILL_OPPGAVE: 'ferdigstill-oppgave',
   HENT_BREV_OVERSTYRING: 'hent-brev-overstyring',
   MELLOMLAGRE_BREV_OVERSTYRING: 'mellomlagre-brev-overstyring',
+  HENT_BREV_HTML: 'hent-brev-html',
 };
 
 const getArbeidsgiverOversiktOptions =
@@ -640,12 +641,21 @@ const getHentBrevOverstyring = (links: ApiLink[]) => () =>
   kyExtended.get(getUrlFromRel('HENT_BREV_OVERSTYRING', links)).json<BrevOverstyring>();
 
 const getMellomlagreBrevOverstyring =
-  (links: ApiLink[]) => (params: { behandlingUuid: string; redigertInnhold: string | null }) =>
+  (links: ApiLink[]) =>
+  (params: { behandlingUuid: string; redigertInnhold: string | null; dokumentMal?: string }) =>
     kyExtended
       .post<string>(getUrlFromRel('MELLOMLAGRE_BREV_OVERSTYRING', links), {
         json: params,
       })
       .json<void>();
+
+const getHentBrevHtml = (links: ApiLink[]) => (dokumentMalType: string) => {
+  const baseUrl = getUrlFromRel('HENT_BREV_HTML', links);
+  const separator = baseUrl.includes('?') ? '&' : '?';
+  return kyExtended
+    .get(`${baseUrl}${separator}dokumentMal=${encodeURIComponent(dokumentMalType)}`)
+    .json<BrevOverstyring>();
+};
 
 const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRel('VERGE_FJERN_V2', links));
 
@@ -764,6 +774,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     vergeOptions: getVergeOptions(links),
     hentBrevOverstyring: getHentBrevOverstyring(links),
     mellomlagreBrevOverstyring: getMellomlagreBrevOverstyring(links),
+    hentBrevHtml: getHentBrevHtml(links),
     merkSomHaster: getMerkSomHaster(links),
     verge: {
       hent: getVerge(links),
