@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { ArrowUndoIcon, MenuElipsisVerticalCircleIcon, NotePencilIcon, PersonHeadsetIcon } from '@navikt/aksel-icons';
+import { ArrowUndoIcon, MenuElipsisHorizontalIcon, NotePencilIcon, PersonHeadsetIcon } from '@navikt/aksel-icons';
 import { ActionMenu, Button } from '@navikt/ds-react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -9,7 +9,7 @@ import { FlyttReservasjonModal } from '@navikt/fp-los-felles';
 import type { OppgaveDto } from '@navikt/fp-types';
 
 import {
-  flyttReservasjonPost,
+  flyttReservasjon,
   hentAktuelleSaksbehandlere,
   LosUrl,
   opphevReservasjon,
@@ -30,7 +30,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, brukernavn }: Props) => {
 
   const { mutate: flyttOppgavereservasjon } = useMutation({
     mutationFn: (values: { brukerIdent: string; begrunnelse: string }) =>
-      flyttReservasjonPost(oppgave.id, values.brukerIdent, values.begrunnelse),
+      flyttReservasjon(oppgave.id, values.brukerIdent, values.begrunnelse),
     onSuccess: () => {
       setVisFlyttReservasjonModal(false);
       void queryClient.invalidateQueries({
@@ -59,8 +59,9 @@ export const OppgaveHandlingerMenu = ({ oppgave, brukernavn }: Props) => {
           <Button
             variant="tertiary"
             size="small"
-            title={intl.formatMessage({ id: 'OppgaveHandlingerMenu.OppgaveHandlinger' })}
-            icon={<MenuElipsisVerticalCircleIcon aria-hidden />}
+            aria-label={intl.formatMessage({ id: 'OppgaveHandlingerMenu.ÅpneMeny' })}
+            title={intl.formatMessage({ id: 'OppgaveHandlingerMenu.ÅpneMeny' })}
+            icon={<MenuElipsisHorizontalIcon aria-hidden />}
           />
         </ActionMenu.Trigger>
         <ActionMenu.Content>

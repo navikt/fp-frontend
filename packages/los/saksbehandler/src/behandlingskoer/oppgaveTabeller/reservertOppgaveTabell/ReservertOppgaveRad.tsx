@@ -8,7 +8,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { EndreReservasjonDato, OppgaveLabels } from '@navikt/fp-los-felles';
 import type { OppgaveDto } from '@navikt/fp-types';
 
-import { endreReservasjonPost, LosUrl } from '../../../data/fplosSaksbehandlerApi';
+import { endreReservasjon, LosUrl } from '../../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 import { NotatKnapp } from './NotatKnapp';
@@ -24,7 +24,7 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
   const queryClient = useQueryClient();
 
   const { mutateAsync: endreReservasjonAsync } = useMutation({
-    mutationFn: (reserverTil: string) => endreReservasjonPost(oppgave.id, reserverTil),
+    mutationFn: (reserverTil: string) => endreReservasjon(oppgave.id, reserverTil),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: [LosUrl.RESERVERTE_OPPGAVER] });
     },

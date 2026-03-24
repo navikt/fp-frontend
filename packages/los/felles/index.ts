@@ -15,3 +15,12 @@ export {
 } from './src/echartUtils';
 
 export type { ColorPair } from './src/echartUtils';
+
+export {
+  kyExtended,
+  wrapUrl,
+  LosUrl,
+  losKodeverkOptions,
+  endreReservasjon,
+  flyttReservasjon,
+} from './src/api/fplosFellesApi';

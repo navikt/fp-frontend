@@ -1,8 +1,6 @@
 import { queryOptions } from '@tanstack/react-query';
-import ky from 'ky';
 
 import type {
-  AlleKodeverkLos,
   FagsakEnkel,
   OppgaveDto,
   OppgaveDtoMedStatus,
@@ -11,25 +9,12 @@ import type {
   SakslisteDto,
 } from '@navikt/fp-types';
 
-const kyExtended = ky.extend({
-  retry: 0,
-  timeout: 15000,
-  hooks: {
-    beforeRequest: [
-      request => {
-        const navCallId = `CallId_${Date.now()}_${Math.floor(Math.random() * 1000000000)}`;
-        request.headers.set('Nav-Callid', navCallId);
-      },
-    ],
-  },
-});
+import { kyExtended, LosUrl as LosUrlFelles, wrapUrl } from '@navikt/fp-los-felles';
 
-//MÅ være en gyldig URL for at KY skal fungere i test
-const isTest = import.meta.env.MODE === 'test';
-const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
+export { losKodeverkOptions, endreReservasjon, flyttReservasjon } from '@navikt/fp-los-felles';
 
 export const LosUrl = {
-  KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
+  ...LosUrlFelles,
   SØK_FAGSAK: wrapUrl('/fpsak/api/fagsak/sok'),
   SAKSLISTE: wrapUrl('/fplos/api/saksbehandler/saksliste'),
   RESERVERTE_OPPGAVER: wrapUrl('/fplos/api/reservasjon/reserverte-oppgaver'),
@@ -38,8 +23,6 @@ export const LosUrl = {
   OPPGAVER_FOR_FAGSAKER: wrapUrl('/fplos/api/saksbehandler/oppgaver/oppgaver-for-fagsaker'),
   HENT_RESERVASJONSSTATUS: wrapUrl('/fplos/api/reservasjon/reservasjon-status'),
   OPPHEV_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/opphev-reservasjon'),
-  ENDRE_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/endre-varighet'),
-  FLYTT_RESERVASJON: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon'),
   FORLENG_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/forleng'),
   BEHANDLINGSKO_OPPGAVE_ANTALL: wrapUrl('/fplos/api/saksbehandler/oppgaver/antall'),
   OPPGAVER_TIL_BEHANDLING: wrapUrl('/fplos/api/saksbehandler/oppgaver'),
@@ -75,13 +58,6 @@ export const oppgaverForFagsakerOptions = (saksnummer: string[]) =>
   queryOptions({
     queryKey: [LosUrl.OPPGAVER_FOR_FAGSAKER, saksnummer],
     queryFn: () => getOppgaverForFagsaker(saksnummer),
-    staleTime: Infinity,
-  });
-
-export const losKodeverkOptions = () =>
-  queryOptions({
-    queryKey: [LosUrl.KODEVERK_LOS],
-    queryFn: () => kyExtended.get(LosUrl.KODEVERK_LOS).json<AlleKodeverkLos>(),
     staleTime: Infinity,
   });
 
@@ -126,14 +102,6 @@ export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>
 
 export const opphevReservasjon = (oppgaveId: number) =>
   kyExtended.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, { json: { oppgaveId } });
-
-export const endreReservasjonPost = (oppgaveId: number, reserverTil: string) =>
-  kyExtended.post(LosUrl.ENDRE_OPPGAVERESERVASJON, { json: { oppgaveId, reserverTil } }).json<ReservasjonStatusDto>();
-
-export const flyttReservasjonPost = (oppgaveId: number, brukerIdent: string, begrunnelse: string) =>
-  kyExtended
-    .post(LosUrl.FLYTT_RESERVASJON, { json: { oppgaveId, brukerIdent, begrunnelse } })
-    .json<ReservasjonStatusDto>();
 
 export const reserverOppgavePost = (oppgaveId: number) =>
   kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: { oppgaveId } }).json<ReservasjonStatusDto>();
