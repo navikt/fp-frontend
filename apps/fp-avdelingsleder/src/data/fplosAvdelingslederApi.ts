@@ -1,6 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
+import ky from 'ky';
 
-import { kyExtended, LosUrlFelles, wrapUrl } from '@navikt/fp-los-felles';
+import { LosUrlFelles } from '@navikt/fp-los-felles';
 import {
   type AndreKriterierType,
   type AvdelingReservasjonDto,
@@ -19,6 +20,23 @@ import {
 } from '@navikt/fp-types';
 
 export { losKodeverkOptions } from '@navikt/fp-los-felles';
+
+const kyExtended = ky.extend({
+  retry: 0,
+  timeout: 15000,
+  hooks: {
+    beforeRequest: [
+      request => {
+        const navCallId = `CallId_${Date.now()}_${Math.floor(Math.random() * 1000000000)}`;
+        request.headers.set('Nav-Callid', navCallId);
+      },
+    ],
+  },
+});
+
+//MÅ være en gyldig URL for at KY skal fungere i test
+const isTest = import.meta.env.MODE === 'test';
+export const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 export const LosUrl = {
   ...LosUrlFelles,

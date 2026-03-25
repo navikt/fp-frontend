@@ -3,7 +3,7 @@ import ky from 'ky';
 
 import type { AlleKodeverkLos, ReservasjonStatusDto } from '@navikt/fp-types';
 
-export const kyExtended = ky.extend({
+const kyExtended = ky.extend({
   retry: 0,
   timeout: 15000,
   hooks: {
@@ -18,7 +18,7 @@ export const kyExtended = ky.extend({
 
 //MÅ være en gyldig URL for at KY skal fungere i test
 const isTest = import.meta.env.MODE === 'test';
-export const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
+const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 export const LosUrlFelles = {
   KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
