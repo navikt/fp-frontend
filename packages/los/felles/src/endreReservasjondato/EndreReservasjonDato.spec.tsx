@@ -31,7 +31,7 @@ describe('EndreReservasjonDato', () => {
     const datoKnapp = await screen.findByRole('button', { name: 'mandag 12' });
     await userEvent.click(datoKnapp);
 
-    await waitFor(() => expect(spy).toHaveBeenCalledWith(123, '2026-01-12'));
+    expect(spy).toHaveBeenCalledExactlyOnceWith(123, '2026-01-12');
     expect(screen.getByTitle('Lagret')).toBeInTheDocument();
 
     await waitFor(() => expect(screen.getByTitle('Åpne datovelger')).toBeInTheDocument(), {

@@ -1,11 +1,10 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { http, HttpResponse } from 'msw';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 import { expect } from 'vitest';
 
-import { LosUrlFelles } from '../api/fplosFellesApi';
+import * as api from '../api/fplosFellesApi';
 import * as stories from './FlyttReservasjonModal.stories';
 
 const { Default } = composeStories(stories);
@@ -41,16 +40,9 @@ describe('FlyttReservasjonModal', () => {
   });
 
   it('skal vise finne brukerident og så lagre begrunnelse for flytting', async () => {
-    const requestBody = vi.fn();
+    const spy = vi.spyOn(api, 'flyttReservasjon');
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
 
-    applyRequestHandlers({
-      handlers: [
-        http.post(LosUrlFelles.FLYTT_RESERVASJON, async ({ request }) => {
-          requestBody(await request.json());
-          return HttpResponse.json({ erReservert: true });
-        }),
-      ],
-    });
     render(<Default />);
 
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
@@ -64,12 +56,6 @@ describe('FlyttReservasjonModal', () => {
 
     await userEvent.click(screen.getByText('OK'));
 
-    await waitFor(() =>
-      expect(requestBody).toHaveBeenCalledExactlyOnceWith({
-        oppgaveId: 123,
-        begrunnelse: 'Dette er en begrunnelse',
-        brukerIdent: 'P123456',
-      }),
-    );
+    expect(spy).toHaveBeenCalledExactlyOnceWith(123, 'P123456', 'Dette er en begrunnelse');
   });
 });
