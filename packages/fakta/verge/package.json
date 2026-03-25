@@ -35,7 +35,6 @@
     "react-intl": "10.0.0"
   },
   "devDependencies": {
-    "@navikt/ds-css": "8.8.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
