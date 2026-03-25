@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { ChatElipsisIcon } from '@navikt/aksel-icons';
+import { ClipboardIcon } from '@navikt/aksel-icons';
 import { Button, Popover, VStack } from '@navikt/ds-react';
 import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat } from '@navikt/ft-utils';
@@ -25,7 +25,7 @@ export const NotatKnapp = ({
         onClick={event => setAnchorEl(isOpen ? null : event.currentTarget)}
         aria-expanded={isOpen}
         size="small"
-        icon={<ChatElipsisIcon title="Vis notat" />}
+        icon={<ClipboardIcon title="Vis notat" />}
         variant="tertiary"
       />
       <Popover open={isOpen} onClose={() => setAnchorEl(null)} anchorEl={anchorEl}>

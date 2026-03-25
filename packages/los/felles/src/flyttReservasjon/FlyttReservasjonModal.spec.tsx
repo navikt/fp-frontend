@@ -1,17 +1,17 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 import { expect } from 'vitest';
 
+import * as api from '../api/fplosFellesApi';
 import * as stories from './FlyttReservasjonModal.stories';
 
 const { Default } = composeStories(stories);
 
 describe('FlyttReservasjonModal', () => {
   it('skal vise feilmelding når flytting blir forsøkt utført uten at skjemaet er fylt ut', async () => {
-    const flyttOppgavereservasjon = vi.fn();
-
-    render(<Default flyttOppgavereservasjon={flyttOppgavereservasjon} />);
+    render(<Default />);
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
     expect(screen.getByText('Notat til annen saksbehandler')).toBeInTheDocument();
@@ -23,7 +23,6 @@ describe('FlyttReservasjonModal', () => {
     await userEvent.click(screen.getByText('OK'));
 
     expect(await screen.findByText('Du må velge en saksbehandler')).toBeInTheDocument();
-    expect(flyttOppgavereservasjon).not.toHaveBeenCalled();
   });
 
   it('skal vise at oppgitt bruker ikke finnes', async () => {
@@ -41,8 +40,10 @@ describe('FlyttReservasjonModal', () => {
   });
 
   it('skal vise finne brukerident og så lagre begrunnelse for flytting', async () => {
-    const flyttOppgavereservasjon = vi.fn();
-    render(<Default flyttOppgavereservasjon={flyttOppgavereservasjon} />);
+    const spy = vi.spyOn(api, 'flyttReservasjon');
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
+
+    render(<Default />);
 
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
@@ -55,9 +56,6 @@ describe('FlyttReservasjonModal', () => {
 
     await userEvent.click(screen.getByText('OK'));
 
-    expect(flyttOppgavereservasjon).toHaveBeenNthCalledWith(1, {
-      begrunnelse: 'Dette er en begrunnelse',
-      brukerIdent: 'P123456',
-    });
+    expect(spy).toHaveBeenCalledExactlyOnceWith(123, 'P123456', 'Dette er en begrunnelse');
   });
 });

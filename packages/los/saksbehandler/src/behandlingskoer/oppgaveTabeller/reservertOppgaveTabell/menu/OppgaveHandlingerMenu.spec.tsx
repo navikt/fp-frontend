@@ -8,61 +8,30 @@ import * as stories from './OppgaveHandlingerMenu.stories';
 const { Default } = composeStories(stories);
 
 describe('OppgaveHandlingerMenu', () => {
-  it('skal vise fire meny-knapper for reserverte oppgaver', async () => {
+  it('skal vise tre meny-knapper for reserverte oppgaver', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
-    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
+    expect(await screen.findByTitle('Åpne meny')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button'));
-
+    expect(screen.getAllByRole('menuitem')).toHaveLength(3);
     expect(await screen.findByText('Legg tilbake i felles kø')).toBeInTheDocument();
-    expect(screen.getByText('Forleng reservasjon (24t)')).toBeInTheDocument();
-    expect(screen.getByText('Endre reservasjonsdato')).toBeInTheDocument();
-    expect(screen.getByText('Flytt til ny saksbehandler')).toBeInTheDocument();
-  });
-
-  it('skal åpne modal for å forlenge reservasjon', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
-
-    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole('button'));
-
-    expect(await screen.findByText('Legg tilbake i felles kø')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Forleng reservasjon (24t)'));
-
-    expect(await screen.findByText('Behandlingen er reservert på deg')).toBeInTheDocument();
-  });
-
-  it('skal åpne modal for å reservere med dato', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
-
-    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole('button'));
-
-    expect(await screen.findByText('Legg tilbake i felles kø')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Endre reservasjonsdato'));
-
-    expect(await screen.findByText('Velg dato som reservasjonen avsluttes')).toBeInTheDocument();
+    expect(screen.getByText('Flytt til annen saksbehandler')).toBeInTheDocument();
+    expect(screen.getByText('Legg til notat')).toBeInTheDocument();
   });
 
   it('skal åpne og lukke modal for å flytte reservasjon', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
-    expect(await screen.findByTitle('Handlinger på oppgave')).toBeInTheDocument();
+    expect(await screen.findByTitle('Åpne meny')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button'));
 
     expect(await screen.findByText('Legg tilbake i felles kø')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Flytt til ny saksbehandler'));
+    await userEvent.click(screen.getByText('Flytt til annen saksbehandler'));
 
     expect(await screen.findByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
@@ -71,5 +40,39 @@ describe('OppgaveHandlingerMenu', () => {
     await waitFor(() =>
       expect(screen.queryByText('Flytt reservasjonen til annen saksbehandler')).not.toBeInTheDocument(),
     );
+  });
+
+  it('skal legge tilbake oppgave i felles kø', async () => {
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
+    render(<Default />);
+
+    expect(await screen.findByTitle('Åpne meny')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button'));
+
+    expect(await screen.findByText('Legg tilbake i felles kø')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Legg tilbake i felles kø'));
+
+    await waitFor(() => expect(screen.queryByText('Legg tilbake i felles kø')).not.toBeInTheDocument());
+  });
+
+  it('skal åpne og lukke modal for å legge til notat', async () => {
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
+    render(<Default />);
+
+    expect(await screen.findByTitle('Åpne meny')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button'));
+
+    expect(await screen.findByText('Legg til notat')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Legg til notat'));
+
+    expect(await screen.findByText('Legg til notat på reservasjon')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Avbryt'));
+
+    await waitFor(() => expect(screen.queryByText('Legg til notat på reservasjon')).not.toBeInTheDocument());
   });
 });

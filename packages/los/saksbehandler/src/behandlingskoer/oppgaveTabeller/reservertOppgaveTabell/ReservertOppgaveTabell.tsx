@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, Pagination, type SortState, Table, VStack } from '@navikt/ds-react';
+import { sortPeriodsBy, TIDENES_ENDE } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 
 import type { OppgaveDto } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
 
 import { reserverteOppgaverOptions } from '../../../data/fplosSaksbehandlerApi';
 import { ReservertOppgaveRad } from './ReservertOppgaveRad';
@@ -14,7 +15,7 @@ import styles from './reservertOppgaveTabell.module.css';
 
 const EMPTY_ARRAY = new Array<OppgaveDto>();
 
-type TableHeaders = 'navn' | 'saksnummer' | 'behandlingstype' | 'opprettetTidspunkt' | 'status';
+type TableHeaders = 'navn' | 'saksnummer' | 'behandlingstype' | 'opprettetTidspunkt' | 'reservertTilTidspunkt';
 
 interface Props {
   reserverOppgave: (oppgave: OppgaveDto) => void;
@@ -92,7 +93,7 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
                   <FormattedMessage id="ReservertOppgaveTabell.BehandlingOpprettet" />
                 </Table.ColumnHeader>
                 <Table.ColumnHeader sortKey="reservertTilTidspunkt" sortable>
-                  <FormattedMessage id="ReservertOppgaveTabell.ReservertTilTidspunkt" />
+                  <FormattedMessage id="ReservertOppgaveTabell.ReservertTil" />
                 </Table.ColumnHeader>
                 <Table.ColumnHeader />
                 <Table.ColumnHeader />
@@ -125,10 +126,13 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
 };
 
 const comparator = (a: OppgaveDto, b: OppgaveDto, orderBy: TableHeaders) => {
-  if (orderBy === 'status') {
-    return notEmpty(a.reservasjonStatus.reservertTilTidspunkt) < notEmpty(b.reservasjonStatus.reservertTilTidspunkt)
-      ? -1
-      : 1;
+  if (orderBy === 'reservertTilTidspunkt') {
+    return dayjs(a.reservasjonStatus.reservertTilTidspunkt ?? TIDENES_ENDE).diff(
+      dayjs(b.reservasjonStatus.reservertTilTidspunkt ?? TIDENES_ENDE),
+    );
+  }
+  if (orderBy === 'opprettetTidspunkt') {
+    return sortPeriodsBy('opprettetTidspunkt')(a, b);
   }
 
   if (b[orderBy] < a[orderBy]) {

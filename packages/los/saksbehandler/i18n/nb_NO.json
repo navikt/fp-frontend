@@ -19,7 +19,7 @@
 
   "ReservertOppgaveTabell.Soker": "Søker",
   "ReservertOppgaveTabell.Sak": "Sak",
-  "ReservertOppgaveTabell.ReservertTilTidspunkt": "Reservert til",
+  "ReservertOppgaveTabell.ReservertTil": "Reservert til",
   "ReservertOppgaveTabell.BehandlingOpprettet": "Opprettet",
   "ReservertOppgaveTabell.ReserverteOppgaver": "Reserverte",
   "ReservertOppgaveTabell.AntallOppgaver": "{reservertAntall}",
@@ -64,9 +64,6 @@
   "LeggTilSaksbehandlerForm.FinnesAllerede": "Saksbehandler finnes allerede i listen",
   "LeggTilSaksbehandlerForm.FinnesIkke": "Kan ikke finne brukerident",
 
-  "OppgaveReservasjonForlengetModal.Reservert": "Behandlingen er reservert på deg",
-  "OppgaveReservasjonForlengetModal.ReservertTil": "Behandlingen er reservert frem til {datetime}",
-
   "BehandlingPollingTimoutModal.TimeoutMelding": "Din økt er gått ut på tid, trykk Fortsett",
   "BehandlingPollingTimoutModal.Fortsett": "Fortsett",
 
@@ -75,11 +72,9 @@
 
   "OppgaveHandlingerMenu.Meny": "Oppgavemeny",
   "OppgaveHandlingerMenu.LeggTilbake": "Legg tilbake i felles kø",
-  "OppgaveHandlingerMenu.ForlengReservasjon": "Forleng reservasjon (24t)",
-  "OppgaveHandlingerMenu.EndreReservasjon": "Endre reservasjonsdato",
-  "OppgaveHandlingerMenu.FlyttReservasjon": "Flytt til ny saksbehandler",
+  "OppgaveHandlingerMenu.FlyttReservasjon": "Flytt til annen saksbehandler",
   "OppgaveHandlingerMenu.Notat": "Legg til notat",
-  "OppgaveHandlingerMenu.OppgaveHandlinger": "Handlinger på oppgave",
+  "OppgaveHandlingerMenu.ÅpneMeny": "Åpne meny",
 
   "FagsakList.Saksnummer": "Saksnummer",
   "FagsakList.Stonadstype": "Stønadstype",

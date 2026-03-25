@@ -10,9 +10,6 @@
   "FlyttReservasjonModal.Notat": "Notat til annen saksbehandler",
   "FlyttReservasjonModal.ManglerSaksbehandler": "Du må velge en saksbehandler",
 
-  "OppgaveReservasjonEndringDatoModal.Header": "Velg dato som reservasjonen avsluttes",
-  "OppgaveReservasjonEndringDatoModal.ReserverTil": "Reserver til",
-
   "AktiveOgTilgjengeligeOppgaverGraf.Ledig": "Ledig",
   "AktiveOgTilgjengeligeOppgaverGraf.Reserverte": "Reserverte",
   "AktiveOgTilgjengeligeOppgaverGraf.PaVent": "På vent",
@@ -26,6 +23,10 @@
   "LukkedeOppgaverGraf.TotalForrigeUkeAlternativ": "Totalt uken før",
   "LukkedeOppgaverPanel.DenneUken": "Denne uken",
   "LukkedeOppgaverPanel.ForrigeUke": "Forrige uke",
+
+  "EndreReservasjonDato.Lagrer": "Lagrer...",
+  "EndreReservasjonDato.Lagret": "Lagret",
+  "EndreReservasjonDato.ÅpneDatovelger": "Åpne datovelger",
 
   "OppgaveLabels.Anke": "Anke",
   "OppgaveLabels.Innsyn": "Innsyn",

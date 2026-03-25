@@ -1,8 +1,8 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
+import { LosUrlFelles } from '@navikt/fp-los-felles';
 import {
-  type AlleKodeverkLos,
   type AndreKriterierType,
   type AvdelingReservasjonDto,
   type InitLinksDto,
@@ -13,12 +13,13 @@ import {
   type OppgaverForAvdeling,
   type OppgaverForAvdelingPerDato,
   type OppgaverForFørsteStønadsdagUkeMåned,
-  type ReservasjonStatusDto,
   type SaksbehandlerDto,
   type SaksbehandlereOgSaksbehandlerGrupper,
   type SakslisteDto,
   type SakslisteLagreDto,
 } from '@navikt/fp-types';
+
+export { losKodeverkOptions } from '@navikt/fp-los-felles';
 
 const kyExtended = ky.extend({
   retry: 0,
@@ -38,7 +39,7 @@ const isTest = import.meta.env.MODE === 'test';
 const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 export const LosUrl = {
-  KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
+  ...LosUrlFelles,
   KODEVERK_KRITERIE_FILTER: wrapUrl('/fplos/api/kodeverk/kriterie-filter'),
   INIT_FETCH: wrapUrl('/fplos/api/avdelingsleder/init-fetch'),
   SAKSBEHANDLERE_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
@@ -64,8 +65,6 @@ export const LosUrl = {
   ENDRE_GRUPPENAVN: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/grupper/endre-gruppenavn'),
   SLETT_GRUPPE: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/grupper/slett-saksbehandlergruppe'),
   AVDELINGSLEDER_OPPHEVER_RESERVASJON: wrapUrl('/fplos/api/avdelingsleder/reservasjoner/opphev'),
-  FLYTT_RESERVASJON: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon'),
-  ENDRE_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/endre-varighet'),
   SLETT_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/slett'),
   SAKSBEHANDLER_SOK: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere/søk'),
   OPPRETT_NY_SAKSBEHANDLER: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
@@ -112,13 +111,6 @@ export const saksbehandlareForAvdelingOptions = (avdelingEnhet?: string) =>
         .json<SaksbehandlerDto[]>(),
     initialData: [],
     enabled: !!avdelingEnhet,
-  });
-
-export const losKodeverkOptions = () =>
-  queryOptions({
-    queryKey: [LosUrl.KODEVERK_LOS],
-    queryFn: () => kyExtended.get(LosUrl.KODEVERK_LOS).json<AlleKodeverkLos>(),
-    staleTime: Infinity,
   });
 
 export const kriterieFilterOptions = () =>
@@ -262,20 +254,6 @@ export const opphevReservasjon = (oppgaveId: number) =>
       json: { oppgaveId },
     })
     .json();
-
-export const flyttReservasjon = (oppgaveId: number, brukerIdent: string, begrunnelse: string) =>
-  kyExtended
-    .post(LosUrl.FLYTT_RESERVASJON, {
-      json: { oppgaveId, brukerIdent, begrunnelse },
-    })
-    .json<ReservasjonStatusDto>();
-
-export const endreReservasjon = (oppgaveId: number, reserverTil: string) =>
-  kyExtended
-    .post(LosUrl.ENDRE_OPPGAVERESERVASJON, {
-      json: { oppgaveId, reserverTil },
-    })
-    .json<ReservasjonStatusDto>();
 
 export const slettSaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended

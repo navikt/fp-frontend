@@ -2,16 +2,15 @@ import { useIntl } from 'react-intl';
 
 import { FilesIcon } from '@navikt/aksel-icons';
 import { CopyButton, HStack, Table } from '@navikt/ds-react';
-import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 
-import { OppgaveLabels } from '@navikt/fp-los-felles';
+import { EndreReservasjonDato, OppgaveLabels } from '@navikt/fp-los-felles';
 import type { OppgaveDto } from '@navikt/fp-types';
 
+import { LosUrl } from '../../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 import { NotatKnapp } from './NotatKnapp';
-
-import styles from './ReservertOppgaveRad.module.css';
 
 interface Props {
   oppgave: OppgaveDto;
@@ -23,7 +22,7 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
   const intl = useIntl();
 
   return (
-    <Table.Row key={oppgave.id} onRowClick={() => reserverOppgave(oppgave)} className={styles['isUnderBehandling']}>
+    <Table.Row key={oppgave.id} onRowClick={() => reserverOppgave(oppgave)} className="bg-ax-bg-warning-moderate">
       <Table.DataCell>{oppgave.navn}</Table.DataCell>
       <Table.DataCell>
         <HStack align="center" gap="space-8" wrap={false}>
@@ -50,7 +49,11 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
       </Table.DataCell>
       <Table.DataCell>
         {oppgave.reservasjonStatus.reservertTilTidspunkt && (
-          <DateTimeLabel dateTimeString={oppgave.reservasjonStatus.reservertTilTidspunkt} separator="kl" />
+          <EndreReservasjonDato
+            reservertTilTidspunkt={oppgave.reservasjonStatus.reservertTilTidspunkt}
+            oppgaveId={oppgave.id}
+            invalidateQueryKeys={[LosUrl.RESERVERTE_OPPGAVER]}
+          />
         )}
       </Table.DataCell>
       <Table.DataCell>

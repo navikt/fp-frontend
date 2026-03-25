@@ -6,7 +6,8 @@ import { vi } from 'vitest';
 
 import * as stories from './EndreSakslisterPanel.stories';
 
-vi.mock('@navikt/fp-los-felles', () => ({
+vi.mock('@navikt/fp-los-felles', async importOriginal => ({
+  ...(await importOriginal()),
   AktiveOgTilgjengeligeOppgaverGraf: vi.fn(() => null),
   LukkedeOppgaverPanel: vi.fn(() => null),
 }));

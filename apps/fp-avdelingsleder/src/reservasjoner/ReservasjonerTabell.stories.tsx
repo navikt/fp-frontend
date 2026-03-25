@@ -1,6 +1,8 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -85,13 +87,14 @@ const generateReservasjoner = () => {
       (_, j) => kriterier[(i + j) % kriterier.length]!,
     );
 
-    const reservertTilDato = new Date();
-    reservertTilDato.setDate(reservertTilDato.getDate() + Math.floor(Math.random() * 30) + 1);
+    const reservertTilTidspunkt = dayjs()
+      .add(i + 1, 'day')
+      .format(ISO_DATE_FORMAT);
 
     reservasjoner.push({
       reservertAvIdent: saksbehandler.brukerIdent,
       reservertAvNavn: saksbehandler.navn,
-      reservertTilTidspunkt: reservertTilDato.toISOString().split('T')[0],
+      reservertTilTidspunkt,
       oppgaveId: oppgaveId++,
       oppgaveSaksNr: `${100000 + i}`,
       behandlingType: behandlingType,
