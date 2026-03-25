@@ -1941,7 +1941,7 @@ __metadata:
     globals: "npm:17.4.0"
     typescript-eslint: "npm:8.57.0"
   peerDependencies:
-    eslint: 9.32.0
+    eslint: 9.39.4
   languageName: unknown
   linkType: soft
 
@@ -8838,6 +8838,7 @@ __metadata:
     "@types/react-dom": "npm:19.2.3"
     "@types/react-responsive": "npm:9.0.0"
     "@types/react-router-dom": "npm:5.3.3"
+    eslint: "npm:9.39.4"
     husky: "npm:9.1.7"
     jsdom: "npm:28.1.0"
     knip: "npm:5.86.0"
