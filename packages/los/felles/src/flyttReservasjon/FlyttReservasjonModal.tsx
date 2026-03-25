@@ -47,7 +47,7 @@ export const FlyttReservasjonModal = ({
 }: Props) => {
   const queryClient = useQueryClient();
 
-  const { mutate: flyttOppgavereservasjon } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: ({ brukerIdent, begrunnelse }: FormValues) => flyttReservasjon(oppgaveId, brukerIdent, begrunnelse),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: invalidateQueryKeys });
@@ -66,7 +66,7 @@ export const FlyttReservasjonModal = ({
 
   return (
     <RawIntlProvider value={intl}>
-      <RhfForm formMethods={formMethods} onSubmit={values => flyttOppgavereservasjon(values)}>
+      <RhfForm formMethods={formMethods} onSubmit={values => mutateAsync(values)}>
         <Modal
           open
           onClose={closeModal}
