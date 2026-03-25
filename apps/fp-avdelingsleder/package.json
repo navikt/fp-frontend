@@ -62,7 +62,7 @@
     "@testing-library/user-event": "14.6.1",
     "@types/lodash.debounce": "4.0.9",
     "eslint": "9.39.4",
-    "msw": "2.12.11",
+    "msw": "2.12.13",
     "msw-storybook-addon": "2.0.6",
     "storybook": "10.2.19",
     "stylelint": "17.4.0",
