@@ -39,7 +39,7 @@ export const EndreReservasjonDato = ({ reservertTilTidspunkt, oppgaveId, invalid
   });
 
   const { title, icon } = getState(isPending, showSuccess);
-  const gjeldendeDato = dayjs(reservertTilTidspunkt).toDate();
+  const gjeldendeDato = new Date(reservertTilTidspunkt);
   return (
     <HStack gap="space-8" align="center" wrap={false}>
       <span className="w-[7ch]">{capitalizeFirstLetter(dayjs(reservertTilTidspunkt).format('dddd'))}</span>
