@@ -29,7 +29,9 @@ export const EndreReservasjonDato = ({ reservertTilTidspunkt, oppgaveId, invalid
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (reserverTil: Date) => endreReservasjon(oppgaveId, dayjs(reserverTil).format(ISO_DATE_FORMAT)),
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: invalidateQueryKeys });
+      if (invalidateQueryKeys.length > 0) {
+        void queryClient.invalidateQueries({ queryKey: invalidateQueryKeys });
+      }
       setOpenDatepicker(false);
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 2000);

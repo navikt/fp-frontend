@@ -50,7 +50,9 @@ export const FlyttReservasjonModal = ({
   const { mutateAsync } = useMutation({
     mutationFn: ({ brukerIdent, begrunnelse }: FormValues) => flyttReservasjon(oppgaveId, brukerIdent, begrunnelse),
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: invalidateQueryKeys });
+      if (invalidateQueryKeys.length > 0) {
+        void queryClient.invalidateQueries({ queryKey: invalidateQueryKeys });
+      }
       closeModal();
     },
   });

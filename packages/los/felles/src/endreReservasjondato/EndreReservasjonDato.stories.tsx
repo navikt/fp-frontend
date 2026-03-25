@@ -1,7 +1,7 @@
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
-import { delay, http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 import { withQueryClient } from '@navikt/fp-storybook-utils';
 
@@ -14,12 +14,7 @@ const meta = {
   decorators: [withQueryClient],
   parameters: {
     msw: {
-      handlers: [
-        http.post(LosUrlFelles.ENDRE_OPPGAVERESERVASJON, async () => {
-          await delay(1000);
-          return HttpResponse.json({});
-        }),
-      ],
+      handlers: [http.post(LosUrlFelles.ENDRE_OPPGAVERESERVASJON, () => HttpResponse.json({}))],
     },
   },
   args: {

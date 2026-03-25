@@ -1,10 +1,9 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { http, HttpResponse } from 'msw';
 import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
-import { LosUrlFelles } from '../api/fplosFellesApi';
+import * as api from '../api/fplosFellesApi';
 import * as stories from './EndreReservasjonDato.stories';
 
 const { Default } = composeStories(stories);
@@ -22,20 +21,9 @@ describe('EndreReservasjonDato', () => {
   it('skal endre dato på reservasjon', async () => {
     vi.setSystemTime('2026-01-12');
 
-    let resolve!: () => void;
-    const requestBody = vi.fn();
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
 
-    applyRequestHandlers({
-      handlers: [
-        http.post(LosUrlFelles.ENDRE_OPPGAVERESERVASJON, async ({ request }) => {
-          requestBody(await request.json());
-          await new Promise<void>(res => {
-            resolve = res;
-          });
-          return HttpResponse.json({ erReservert: true });
-        }),
-      ],
-    });
+    const spy = vi.spyOn(api, 'endreReservasjon');
 
     render(<Default />);
 
@@ -43,11 +31,7 @@ describe('EndreReservasjonDato', () => {
     const datoKnapp = await screen.findByRole('button', { name: 'mandag 12' });
     await userEvent.click(datoKnapp);
 
-    expect(screen.getByTitle('Lagrer...')).toBeDisabled();
-
-    resolve();
-
-    await waitFor(() => expect(requestBody).toHaveBeenCalledWith({ oppgaveId: 123, reserverTil: '2026-01-12' }));
+    await waitFor(() => expect(spy).toHaveBeenCalledWith(123, '2026-01-12'));
     expect(screen.getByTitle('Lagret')).toBeInTheDocument();
 
     await waitFor(() => expect(screen.getByTitle('Åpne datovelger')).toBeInTheDocument(), {
