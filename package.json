@@ -27,7 +27,7 @@
     "storybook-create-deploy-folder": "node scripts/create-storybook-index.cjs",
     "generate": "turbo run generate --filter @navikt/fp-types",
     "generate:local": "turbo run generate:local --filter @navikt/fp-types",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "workspaces": [
     "apps/**/*",
@@ -43,6 +43,7 @@
     "@types/react-dom": "19.2.3",
     "@types/react-responsive": "9.0.0",
     "@types/react-router-dom": "5.3.3",
+    "eslint": "9.39.4",
     "husky": "9.1.7",
     "jsdom": "29.0.0",
     "knip": "5.88.0",
@@ -63,8 +64,9 @@
     "react-dom": "19.2.4"
   },
   "lint-staged": {
-    "apps/**/*.{ts,tsx,js,jsx, css}": "prettier --write",
-    "packages/**/*.{ts,tsx,js,jsx, css}": "prettier --write"
+    "{packages,apps,server}/**/*.{js,jsx,ts,tsx,cjs,mjs}": "eslint --cache --fix  --config packages/config/eslint/eslint.config.mjs",
+    "*.{js,jsx,ts,tsx,cjs,mjs,json,yaml,yml,md,css}": "prettier --write",
+    "*.css": "stylelint --fix"
   },
   "version": "0.0.0",
   "packageManager": "yarn@4.12.0",
