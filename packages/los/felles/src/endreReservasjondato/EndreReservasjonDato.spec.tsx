@@ -25,7 +25,7 @@ describe('EndreReservasjonDato', () => {
 
     const spy = vi.spyOn(api, 'endreReservasjon');
 
-    render(<Default />);
+    render(<Default reservertTilTidspunkt="2026-01-18" />);
 
     await userEvent.click(screen.getByTitle('Åpne datovelger'));
     const datoKnapp = await screen.findByRole('button', { name: 'mandag 12' });
