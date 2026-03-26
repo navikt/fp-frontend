@@ -39,6 +39,15 @@ const FAGSAK_2 = {
 
 const FAGSAKER = [FAGSAK_1, FAGSAK_2];
 
+const RenderFagsakSearchIndex = () => {
+  //Må hente data til cache før testa komponent blir kalla
+  const { status } = useQuery(initFetchOptions());
+  const { kodeverkOptions } = useFagsakApi();
+  const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
+
+  return kodeverk ? <FagsakSearchIndex /> : <LoadingPanel />;
+};
+
 const meta = {
   title: 'fagsak/FagsakSearchIndex',
   decorators: [withRouter, withQueryClient],
@@ -52,14 +61,7 @@ const meta = {
       ],
     },
   },
-  render: () => {
-    //Må hente data til cache før testa komponent blir kalla
-    const { status } = useQuery(initFetchOptions());
-    const { kodeverkOptions } = useFagsakApi();
-    const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
-
-    return kodeverk ? <FagsakSearchIndex /> : <LoadingPanel />;
-  },
+  render: () => <RenderFagsakSearchIndex />,
 } satisfies Meta<typeof FagsakSearchIndex>;
 export default meta;
 

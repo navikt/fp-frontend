@@ -1,10 +1,33 @@
-import { useState } from 'react';
+import { useState, type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 import { action } from 'storybook/actions';
 
 import { NotatSakIndex } from './NotatSakIndex';
+
+const RenderNotatSakIndex = (storyArgs: ComponentProps<typeof NotatSakIndex>) => {
+  const [args, setArgs] = useState(storyArgs);
+
+  const lagreNotat = (params: { saksnummer: string; notat: string }) => {
+    args.lagreNotat(params);
+    setArgs(oldArgs => ({
+      ...oldArgs,
+      notater: oldArgs.notater.concat({
+        opprettetTidspunkt: dayjs().format(),
+        opprettetAv: 'Saksbehandler Espen',
+        notat: params.notat,
+      }),
+    }));
+    return Promise.resolve();
+  };
+
+  return (
+    <div style={{ height: '700px', width: '800px' }}>
+      <NotatSakIndex {...args} lagreNotat={lagreNotat} />
+    </div>
+  );
+};
 
 const meta = {
   title: 'sak/sak-notat',
@@ -14,28 +37,7 @@ const meta = {
     saksnummer: '12343432',
     lagreNotat: action('button-click'),
   },
-  render: storyArgs => {
-    const [args, setArgs] = useState(storyArgs);
-
-    const lagreNotat = (params: { saksnummer: string; notat: string }) => {
-      args.lagreNotat(params);
-      setArgs(oldArgs => ({
-        ...oldArgs,
-        notater: oldArgs.notater.concat({
-          opprettetTidspunkt: dayjs().format(),
-          opprettetAv: 'Saksbehandler Espen',
-          notat: params.notat,
-        }),
-      }));
-      return Promise.resolve();
-    };
-
-    return (
-      <div style={{ height: '700px', width: '800px' }}>
-        <NotatSakIndex {...args} lagreNotat={lagreNotat} />
-      </div>
-    );
-  },
+  render: storyArgs => <RenderNotatSakIndex {...storyArgs} />,
 } satisfies Meta<typeof NotatSakIndex>;
 export default meta;
 

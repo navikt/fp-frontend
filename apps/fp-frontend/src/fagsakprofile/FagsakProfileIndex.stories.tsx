@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -97,6 +99,16 @@ const FAGSAK = lagFagsak({
   },
 });
 
+const RenderFagsakProfileIndex = (props: ComponentProps<typeof FagsakProfileIndex>) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const { status } = useQuery(initFetchOptions());
+  const { kodeverkOptions, fptilbake } = useFagsakApi();
+  const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
+  const { data: kodeverkFpTilbake } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
+
+  return kodeverk && kodeverkFpTilbake ? <FagsakProfileIndex {...props} /> : <LoadingPanel />;
+};
+
 const meta = {
   title: 'fagsak/FagsakProfileIndex',
   decorators: [withIntl, withRouter, withQueryClient],
@@ -121,15 +133,7 @@ const meta = {
     visSideMeny: true,
     visUtvidetBehandlingDetaljer: false,
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const { status } = useQuery(initFetchOptions());
-    const { kodeverkOptions, fptilbake } = useFagsakApi();
-    const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
-    const { data: kodeverkFpTilbake } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
-
-    return kodeverk && kodeverkFpTilbake ? <FagsakProfileIndex {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderFagsakProfileIndex {...props} />,
 } satisfies Meta<typeof FagsakProfileIndex>;
 export default meta;
 

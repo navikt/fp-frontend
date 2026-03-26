@@ -1,5 +1,6 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
@@ -12,6 +13,14 @@ import { OppgaverPerForsteStonadsdagPanel } from './OppgaverPerForsteStonadsdagP
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
+
+type StoryProps = ComponentProps<typeof OppgaverPerForsteStonadsdagPanel>;
+
+const RenderOppgaverPerForsteStonadsdagPanel = (props: StoryProps) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const alleKodeverk = useQuery(losKodeverkOptions()).data;
+  return alleKodeverk ? <OppgaverPerForsteStonadsdagPanel {...props} /> : <LoadingPanel />;
+};
 
 const meta = {
   title: 'los/avdelingsleder/nokkeltall/OppgaverPerForsteStonadsdagPanel',
@@ -31,11 +40,7 @@ const meta = {
     height: 300,
     valgtAvdelingEnhet: '1',
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const alleKodeverk = useQuery(losKodeverkOptions()).data;
-    return alleKodeverk ? <OppgaverPerForsteStonadsdagPanel {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderOppgaverPerForsteStonadsdagPanel {...props} />,
 } satisfies Meta<typeof OppgaverPerForsteStonadsdagPanel>;
 export default meta;
 

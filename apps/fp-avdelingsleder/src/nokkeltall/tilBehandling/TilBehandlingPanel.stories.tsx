@@ -1,6 +1,7 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
@@ -138,6 +139,14 @@ const OPPGAVER_PER_DATO = [
   },
 ] satisfies OppgaverForAvdelingPerDato[];
 
+type StoryProps = ComponentProps<typeof TilBehandlingPanel>;
+
+const RenderTilBehandlingPanel = (props: StoryProps) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const alleKodeverk = useQuery(losKodeverkOptions()).data;
+  return alleKodeverk ? <TilBehandlingPanel {...props} /> : <LoadingPanel />;
+};
+
 const meta = {
   title: 'los/avdelingsleder/nokkeltall/TilBehandlingPanel',
   component: TilBehandlingPanel,
@@ -154,11 +163,7 @@ const meta = {
     height: 300,
     valgtAvdelingEnhet: '1',
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const alleKodeverk = useQuery(losKodeverkOptions()).data;
-    return alleKodeverk ? <TilBehandlingPanel {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderTilBehandlingPanel {...props} />,
 } satisfies Meta<typeof TilBehandlingPanel>;
 export default meta;
 

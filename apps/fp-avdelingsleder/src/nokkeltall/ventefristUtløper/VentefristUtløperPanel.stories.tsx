@@ -8,6 +8,8 @@ import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-s
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
 import { VentefristUtløperPanel } from './VentefristUtløperPanel';
 
+import type { ComponentProps } from 'react';
+
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
@@ -75,6 +77,14 @@ const BEHANDLINGER_PÅ_VENT = [
   },
 ];
 
+type StoryProps = ComponentProps<typeof VentefristUtløperPanel>;
+
+const RenderVentefristUtløperPanel = (props: StoryProps) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const alleKodeverk = useQuery(losKodeverkOptions()).data;
+  return alleKodeverk ? <VentefristUtløperPanel {...props} /> : <LoadingPanel />;
+};
+
 const meta = {
   title: 'los/avdelingsleder/nokkeltall/VentefristUtløperPanel',
   component: VentefristUtløperPanel,
@@ -91,11 +101,7 @@ const meta = {
     height: 300,
     valgtAvdelingEnhet: '1',
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const alleKodeverk = useQuery(losKodeverkOptions()).data;
-    return alleKodeverk ? <VentefristUtløperPanel {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderVentefristUtløperPanel {...props} />,
 } satisfies Meta<typeof VentefristUtløperPanel>;
 export default meta;
 

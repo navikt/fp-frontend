@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -44,6 +46,12 @@ const saksliste1: SakslisteDto = {
   },
 };
 
+const RenderSakslisteVelgerForm = (props: ComponentProps<typeof SakslisteVelgerForm>) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const alleKodeverk = useQuery(losKodeverkOptions()).data;
+  return alleKodeverk ? <SakslisteVelgerForm {...props} /> : <LoadingPanel />;
+};
+
 const meta = {
   title: 'behandlingskoer/SakslisteVelgerForm',
   component: SakslisteVelgerForm,
@@ -60,11 +68,7 @@ const meta = {
     setValueInLocalStorage: action('setValueInLocalStorage'),
     removeValueFromLocalStorage: action('removeValueFromLocalStorage'),
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const alleKodeverk = useQuery(losKodeverkOptions()).data;
-    return alleKodeverk ? <SakslisteVelgerForm {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderSakslisteVelgerForm {...props} />,
 } satisfies Meta<typeof SakslisteVelgerForm>;
 export default meta;
 

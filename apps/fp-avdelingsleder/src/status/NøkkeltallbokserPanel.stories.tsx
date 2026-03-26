@@ -1,5 +1,6 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
+import type { ComponentProps } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
@@ -45,6 +46,15 @@ const OPPGAVER_FOR_AVDELING = [
 
 const withIntl = getIntlDecorator(messages);
 
+type StoryProps = ComponentProps<typeof NøkkeltallbokserPanel>;
+
+const RenderNøkkeltallbokserPanel = (props: StoryProps) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const alleKodeverk = useQuery(losKodeverkOptions()).data;
+  const oppgaverForAvdeling = useQuery(oppgaverForAvdelingOptions(props.valgtAvdelingEnhet)).data;
+  return alleKodeverk && oppgaverForAvdeling.length > 0 ? <NøkkeltallbokserPanel {...props} /> : <LoadingPanel />;
+};
+
 const meta = {
   title: 'los/avdelingsleder/status/NøkkeltallbokserPanel',
   component: NøkkeltallbokserPanel,
@@ -61,12 +71,7 @@ const meta = {
     valgtAvdelingEnhet: '1',
     children: <div>Avdelingsvelger</div>,
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const alleKodeverk = useQuery(losKodeverkOptions()).data;
-    const oppgaverForAvdeling = useQuery(oppgaverForAvdelingOptions(props.valgtAvdelingEnhet)).data;
-    return alleKodeverk && oppgaverForAvdeling.length > 0 ? <NøkkeltallbokserPanel {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderNøkkeltallbokserPanel {...props} />,
 } satisfies Meta<typeof NøkkeltallbokserPanel>;
 export default meta;
 
