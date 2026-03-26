@@ -30,7 +30,7 @@
     "@navikt/ft-utils": "3.11.13",
     "react": "19.2.4",
     "react-hook-form": "7.71.2",
-    "react-intl": "10.0.0"
+    "react-intl": "10.1.0"
   },
   "devDependencies": {
     "@navikt/ds-css": "8.8.0",

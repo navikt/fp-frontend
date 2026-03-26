@@ -22,7 +22,7 @@
     "@navikt/ft-utils": "3.11.13",
     "dayjs": "1.11.20",
     "react": "19.2.4",
-    "react-intl": "10.0.0"
+    "react-intl": "10.1.0"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
