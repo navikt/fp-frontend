@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { type IntlShape, useIntl } from 'react-intl';
+import { type IntlShape } from 'react-intl';
 
 import EditorJS, { type EditorConfig, type I18nConfig, type ToolConstructable } from '@editorjs/editorjs';
 import Header from '@editorjs/header';
@@ -8,58 +8,52 @@ import Paragraph from '@editorjs/paragraph';
 import edjsHTML from 'editorjs-html';
 import Undo from 'editorjs-undo';
 import debounce from 'lodash.debounce';
+import { createIntl } from '@navikt/ft-utils';
 
-import type { BrevOverstyring } from '@navikt/fp-types';
-import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty } from '@navikt/fp-utils';
 
-import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
-import {
-  erRedigertHtmlGyldig,
-  konverterHtmlToEditorJsFormat,
-  lagRedigerbartInnholdWrapper,
-  leggTilPTagsILiTags,
-  utledDelerFraBrev,
-  utledRedigerbartInnhold,
-} from './redigeringsUtils';
+import messages from '../i18n/nb_NO.json';
+import { erRedigertHtmlGyldig, konverterHtmlToEditorJsFormat, lagRedigerbartInnholdWrapper } from './redigeringsUtils';
+
+const intl = createIntl(messages);
 
 const EDITOR_IKKE_INITIALISERT = 'Editor er ikke initialisert';
 
-export const useEditorJs = (
+interface Options {
+  onAutoSave?: (html: string | null) => Promise<void>;
+}
+
+/**
+ * Generisk Editor.js-hook for redigering av brev.
+ *
+ * @param editorHolderId   - ID til DOM-elementet som Editor.js skal monteres i
+ * @param redigerbartInnhold - Pre-beregnet HTML som vises i editoren (kallende kode håndterer domenlogikk)
+ * @param footer           - Valgfri readonly-seksjon som vises under editoren, men ikke er redigerbar
+ * @param options.onAutoSave - Valgfri callback for debounce-mellomlagring (1 sek etter siste endring)
+ */
+export const useBrevEditorJs = (
   editorHolderId: string,
-  brevOverstyring: BrevOverstyring,
-  mellomlagreOgHentPåNytt: (redigertInnhold: string | null) => Promise<void>,
-  forhåndsvisBrev: (data: VedtakForhåndsvisData) => void,
+  redigerbartInnhold: string,
+  footer: string | undefined,
+  options?: Options,
 ) => {
-  const intl = useIntl();
+  const { onAutoSave } = options ?? {};
 
-  const { fagsak } = usePanelDataContext();
-  const harPraksisUtsettelse = fagsak.fagsakMarkeringer.some(
-    markering => markering.fagsakMarkering === 'PRAKSIS_UTSETTELSE',
-  );
-
-  //Denne blir kun brukt for å hindre tullball grunna to renders i DEV => React.StrictMode
+  // Hindrar tullball grunna to renders i DEV => React.StrictMode
   const refMounted = useRef<boolean>(false);
-
   const refEditorJs = useRef<EditorJS>(null);
   const refCurrentHtml = useRef('');
 
-  const { opprinneligHtml, redigertHtml } = brevOverstyring;
+  const autoSaveDebouncer = useAutoSaveDebouncer();
 
-  const { footer } = utledDelerFraBrev(opprinneligHtml);
-  const redigerbartInnhold = utledRedigerbartInnhold(redigertHtml ?? opprinneligHtml, harPraksisUtsettelse);
-
-  const lagreBrevDebouncer = useLagreBrevDebouncer();
-
-  const validerOgLagre = async () => {
+  const validerOgAutoLagre = async () => {
+    if (!onAutoSave) return;
     const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     const innhold = await editor.save();
     const html = edjsHTML().parse(innhold);
 
     if (refCurrentHtml.current !== html && erRedigertHtmlGyldig(html)) {
-      const redigertTekst = harPraksisUtsettelse
-        ? lagRedigerbartInnholdWrapper(html, undefined)
-        : lagRedigerbartInnholdWrapper(html, footer);
-      void mellomlagreOgHentPåNytt(redigertTekst);
+      void onAutoSave(lagRedigerbartInnholdWrapper(html, footer));
     }
   };
 
@@ -75,14 +69,16 @@ export const useEditorJs = (
           new Undo({ editor });
           refEditorJs.current = editor;
 
-          // Dette er for å seinare kunne finna ut om innhaldet er endra
+          // For å seinare kunne finna ut om innhaldet er endra
           const innhold = await editor.save();
           refCurrentHtml.current = edjsHTML().parse(innhold);
         },
         tools: getTools(intl),
-        onChange: () => {
-          lagreBrevDebouncer(validerOgLagre);
-        },
+        onChange: onAutoSave
+          ? () => {
+              autoSaveDebouncer(validerOgAutoLagre);
+            }
+          : undefined,
       });
     }
 
@@ -91,31 +87,19 @@ export const useEditorJs = (
         refEditorJs.current.destroy();
       }
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const tilbakestillEndringer = async () => {
+  const tilbakestillEndringer = async (opprinneligRedigerbartInnhold: string) => {
     const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     await editor.blocks.clear();
-    const opprinneligRedigerbartInnhold = utledRedigerbartInnhold(opprinneligHtml, harPraksisUtsettelse);
     await editor.blocks.render(konverterHtmlToEditorJsFormat(opprinneligRedigerbartInnhold));
     await editor.isReady;
 
     const innhold = await editor.save();
     refCurrentHtml.current = edjsHTML().parse(innhold);
 
-    void mellomlagreOgHentPåNytt(null);
-  };
-
-  const lagreEndringer = async () => {
-    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
-    const innhold = await editor.save();
-    const html = edjsHTML().parse(innhold);
-
-    if (refCurrentHtml.current !== html) {
-      const redigertTekst = harPraksisUtsettelse
-        ? lagRedigerbartInnholdWrapper(html, undefined)
-        : lagRedigerbartInnholdWrapper(html, footer);
-      void mellomlagreOgHentPåNytt(redigertTekst);
+    if (onAutoSave) {
+      void onAutoSave(null);
     }
   };
 
@@ -123,28 +107,41 @@ export const useEditorJs = (
     const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     const innhold = await editor.save();
     const html = edjsHTML().parse(innhold);
-
     return erRedigertHtmlGyldig(html);
   };
 
-  const forhåndsvis = async () => {
+  const hentRedigertHtml = async (): Promise<string> => {
     const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     const innhold = await editor.save();
     const html = edjsHTML().parse(innhold);
-
-    forhåndsvisBrev({
-      automatiskVedtaksbrev: false,
-      dokumentMal: 'FRIHTM',
-      fritekst: harPraksisUtsettelse ? leggTilPTagsILiTags(html) : lagRedigerbartInnholdWrapper(html, footer),
-    });
+    return lagRedigerbartInnholdWrapper(html, footer);
   };
 
-  return { tilbakestillEndringer, lagreEndringer, validerEndringer, forhåndsvis };
+  const harEndringer = async (): Promise<boolean> => {
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
+    const innhold = await editor.save();
+    const html = edjsHTML().parse(innhold);
+    return refCurrentHtml.current !== html;
+  };
+
+  /** Kombinerer validering, endringssjekk og HTML-henting i ett editor.save()-kall */
+  const hentEditorStatus = async () => {
+    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
+    const innhold = await editor.save();
+    const html = edjsHTML().parse(innhold);
+    return {
+      erGyldig: erRedigertHtmlGyldig(html),
+      erEndret: refCurrentHtml.current !== html,
+      redigertHtml: lagRedigerbartInnholdWrapper(html, footer),
+    };
+  };
+
+  return { tilbakestillEndringer, validerEndringer, hentRedigertHtml, harEndringer, hentEditorStatus };
 };
 
 const getTimeoutValue = () => (import.meta.env.MODE === 'test' ? 0 : 1000);
 
-const useLagreBrevDebouncer = () => {
+const useAutoSaveDebouncer = () => {
   const lagre = debounce((lagreFn: () => void) => {
     lagreFn();
   }, getTimeoutValue());
@@ -213,13 +210,13 @@ const getTools = (intl: IntlShape): EditorConfig['tools'] => ({
     },
     toolbox: [
       {
-        title: intl.formatMessage({ id: 'useEditorJs.Heading1' }),
+        title: intl.formatMessage({ id: 'useBrevEditorJs.Heading1' }),
         data: {
           level: 1,
         },
       },
       {
-        title: intl.formatMessage({ id: 'useEditorJs.Heading2' }),
+        title: intl.formatMessage({ id: 'useBrevEditorJs.Heading2' }),
         data: {
           level: 2,
         },
@@ -246,34 +243,34 @@ const getTools = (intl: IntlShape): EditorConfig['tools'] => ({
 const lagEditorJsI18n = (intl: IntlShape): I18nConfig => ({
   messages: {
     toolNames: {
-      Text: intl.formatMessage({ id: 'useEditorJs.Text' }),
-      Heading: intl.formatMessage({ id: 'useEditorJs.Heading' }),
-      'Unordered List': intl.formatMessage({ id: 'useEditorJs.UnorderedList' }),
+      Text: intl.formatMessage({ id: 'useBrevEditorJs.Text' }),
+      Heading: intl.formatMessage({ id: 'useBrevEditorJs.Heading' }),
+      'Unordered List': intl.formatMessage({ id: 'useBrevEditorJs.UnorderedList' }),
     },
     tools: {
       link: {
-        'Add a link': intl.formatMessage({ id: 'useEditorJs.AddALink' }),
+        'Add a link': intl.formatMessage({ id: 'useBrevEditorJs.AddALink' }),
       },
       List: {
-        Unordered: intl.formatMessage({ id: 'useEditorJs.Unordered' }),
+        Unordered: intl.formatMessage({ id: 'useBrevEditorJs.Unordered' }),
       },
     },
     ui: {
       popover: {
-        'Nothing found': intl.formatMessage({ id: 'useEditorJs.NothingFound' }),
-        'Convert to': intl.formatMessage({ id: 'useEditorJs.ConvertTo' }),
+        'Nothing found': intl.formatMessage({ id: 'useBrevEditorJs.NothingFound' }),
+        'Convert to': intl.formatMessage({ id: 'useBrevEditorJs.ConvertTo' }),
       },
     },
     blockTunes: {
       delete: {
-        Delete: intl.formatMessage({ id: 'useEditorJs.Delete' }),
-        'Click to delete': intl.formatMessage({ id: 'useEditorJs.KlikkForFjern' }),
+        Delete: intl.formatMessage({ id: 'useBrevEditorJs.Delete' }),
+        'Click to delete': intl.formatMessage({ id: 'useBrevEditorJs.KlikkForFjern' }),
       },
       moveUp: {
-        'Move up': intl.formatMessage({ id: 'useEditorJs.MoveUp' }),
+        'Move up': intl.formatMessage({ id: 'useBrevEditorJs.MoveUp' }),
       },
       moveDown: {
-        'Move down': intl.formatMessage({ id: 'useEditorJs.MoveDown' }),
+        'Move down': intl.formatMessage({ id: 'useBrevEditorJs.MoveDown' }),
       },
     },
   },
