@@ -1,4 +1,4 @@
-import { useState, type ComponentProps } from 'react';
+import { type ComponentProps,useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';

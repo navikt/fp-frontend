@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -7,8 +9,6 @@ import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-s
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
 import { VentefristUtløperPanel } from './VentefristUtløperPanel';
-
-import type { ComponentProps } from 'react';
 
 import messages from '../../../i18n/nb_NO.json';
 
