@@ -16,7 +16,7 @@ import type { Aksjonspunkt, BrevOverstyring, DokumentMalType, RevurderingVarslin
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import { VarselBrevRedigeringModal } from './editor/VarselBrevRedigeringModal';
+import { BrevRedigeringModal, utledDelerFraBrev, utledRedigerbartInnhold } from '@navikt/fp-prosess-brev-editor';
 
 const minLength3 = minLength(3);
 
@@ -116,6 +116,16 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
     }
   };
   const ventearsaker = alleKodeverk['Venteårsak'];
+
+  const varselBrevRedigeringVerdier =
+    brevData && visRedigeringModal
+      ? {
+          footer: utledDelerFraBrev(brevData.opprinneligHtml).footer,
+          redigerbartInnhold: utledRedigerbartInnhold(brevData.redigertHtml ?? brevData.opprinneligHtml, false),
+          opprinneligRedigerbartInnhold: utledRedigerbartInnhold(brevData.opprinneligHtml, false),
+        }
+      : null;
+
   return (
     <>
       <RhfForm formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
@@ -209,18 +219,22 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
           )}
         </VStack>
       </RhfForm>
-      {brevData && visRedigeringModal && (
-        <VarselBrevRedigeringModal
+      {varselBrevRedigeringVerdier && brevData && visRedigeringModal && (
+        <BrevRedigeringModal
           opprinneligHtml={brevData.opprinneligHtml}
-          redigertHtml={brevData.redigertHtml}
-          forhåndsvisBrev={previewCallback}
-          setVisRedigeringModal={setVisRedigeringModal}
-          onLagre={async html => {
+          redigerbartInnhold={varselBrevRedigeringVerdier.redigerbartInnhold}
+          opprinneligRedigerbartInnhold={varselBrevRedigeringVerdier.opprinneligRedigerbartInnhold}
+          footer={varselBrevRedigeringVerdier.footer}
+          mellomlagreOgHentPåNytt={async html => {
             if (mellomlagreBrev) {
               await mellomlagreBrev(html);
             }
             setBrevData(prev => (prev ? { ...prev, redigertHtml: html } : null));
           }}
+          forhåndsvisBrev={html =>
+            previewCallback({ dokumentMal: 'FRIHTM', årsakskode: 'ANNET', fritekst: html })
+          }
+          setVisRedigeringModal={setVisRedigeringModal}
         />
       )}
       <SettPaVentModalIndex
