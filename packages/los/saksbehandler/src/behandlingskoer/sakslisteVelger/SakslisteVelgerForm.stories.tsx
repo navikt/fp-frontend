@@ -61,8 +61,6 @@ const meta = {
   args: {
     setValgtSakslisteId: action('setValgtSakslisteId'),
     fetchAntallOppgaver: action('fetchAntallOppgaver'),
-    setValueInLocalStorage: action('setValueInLocalStorage'),
-    removeValueFromLocalStorage: action('removeValueFromLocalStorage'),
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
