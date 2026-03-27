@@ -278,6 +278,7 @@ export const SakslisteVelgerForm = ({
             selectValues={sorterteSakslister.map(saksliste => (
               <option key={saksliste.sakslisteId} value={`${saksliste.sakslisteId}`}>
                 {saksliste.navn}
+                {getAntallSaker(saksliste)}
               </option>
             ))}
             className="min-w-2xs max-w-2xl"
@@ -439,3 +440,12 @@ const SaksbehandlerBadge = ({ icon, label }: SaksbehandlerBadgeProps) => (
     </HStack>
   </Box>
 );
+
+const getAntallSaker = ({ gjeldendeStatistikk }: SakslisteDto) => {
+  if (gjeldendeStatistikk) {
+    const { tilgjengeligeOppgaver } = gjeldendeStatistikk;
+
+    return ` (${tilgjengeligeOppgaver} ${tilgjengeligeOppgaver === 1 ? 'sak' : 'saker'})`;
+  }
+  return '';
+};
