@@ -48,8 +48,8 @@ export const EndreReservasjonDato = ({ reservertTilTidspunkt, oppgaveId, invalid
         mode="single"
         disableWeekends
         open={openDatepicker}
-        month={gjeldendeDato}
-        selected={gjeldendeDato}
+        defaultMonth={gjeldendeDato}
+        defaultSelected={gjeldendeDato}
         onSelect={date => (date ? mutateAsync(date) : null)}
         onClose={() => setOpenDatepicker(false)}
         fromDate={new Date()}
