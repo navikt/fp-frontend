@@ -53,7 +53,7 @@
   "SistBehandledeSaker.Status": "Status",
   "SistBehandledeSaker.ErReservert": "Reservert",
 
-  "OppgaveErReservertAvAnnenModal.ReservertAv": "{saksbehandlernavn} ({saksbehandlerid}) arbeider nå med denne behandlingen (reservert fram t.o.m {date} - {time})",
+  "OppgaveErReservertAvAnnenModal.ReservertAv": "{saksbehandlernavn} ({saksbehandlerid}) arbeider nå med denne behandlingen (reservert fram t.o.m {datetime})",
   "OppgaveErReservertAvAnnenModal.ReservertAvEnkel": "En annen saksbehandler arbeider nå med denne behandlingen",
 
   "LeggTilSaksbehandlerForm.LeggTil": "Legg til saksbehandler",
