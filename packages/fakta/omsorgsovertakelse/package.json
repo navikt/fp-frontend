@@ -13,7 +13,6 @@
     "eslint:fix": "eslint --fix {src,i18n}/**/*.ts* --color",
     "prettier:fix": "prettier --write src",
     "tsc": "tsc --noEmit",
-    "stylelint": "stylelint src/**/*.module.css",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "storybook": "storybook dev --quiet -p 7029"
   },
@@ -49,7 +48,6 @@
     "eslint": "9.39.4",
     "fast-glob": "3.3.3",
     "storybook": "10.2.19",
-    "stylelint": "17.4.0",
     "typescript": "5.9.3",
     "vite": "8.0.5",
     "vitest": "4.1.0"
