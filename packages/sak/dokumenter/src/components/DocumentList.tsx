@@ -95,7 +95,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
         ? undefined
         : {
             orderBy: sortKey,
-            direction: sort && sortKey === sort.orderBy && sort.direction === 'ascending' ? 'descending' : 'ascending',
+            direction: sortKey === sort?.orderBy && sort?.direction === 'ascending' ? 'descending' : 'ascending',
           },
     );
   };

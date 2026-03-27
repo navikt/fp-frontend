@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type ComponentProps, useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
@@ -28,27 +28,29 @@ const defaultSak = {
   opprettet: '',
 } satisfies FagsakEnkel;
 
+const RenderFagsakSokSakIndex = (storyArgs: ComponentProps<typeof FagsakSokSakIndex>) => {
+  const [args, setArgs] = useState(storyArgs);
+
+  const searchFagsakCallback = (params: { searchString: string }) => {
+    args.searchFagsakCallback(params);
+    setArgs(oldArgs => ({ ...oldArgs, searchResultReceived: true }));
+    return Promise.resolve<FagsakEnkel[] | undefined>(args.fagsaker);
+  };
+
+  return <FagsakSokSakIndex {...args} searchFagsakCallback={searchFagsakCallback} />;
+};
+
 const meta = {
   title: 'sak/sak-sok',
   component: FagsakSokSakIndex,
   args: {
     selectFagsakCallback: action('button-click'),
-    searchFagsakCallback: action('button-click') as (params?: { searchString: string }) => Promise<FagsakEnkel[]>,
+    searchFagsakCallback: action('button-click'),
     alleKodeverk: alleKodeverk,
     searchResultReceived: false,
     searchStarted: false,
   },
-  render: storyArgs => {
-    const [args, setArgs] = useState(storyArgs);
-
-    const searchFagsakCallback = (params: { searchString: string }) => {
-      args.searchFagsakCallback(params);
-      setArgs(oldArgs => ({ ...oldArgs, searchResultReceived: true }));
-      return Promise.resolve<FagsakEnkel[] | undefined>(args.fagsaker);
-    };
-
-    return <FagsakSokSakIndex {...args} searchFagsakCallback={searchFagsakCallback} />;
-  },
+  render: storyArgs => <RenderFagsakSokSakIndex {...storyArgs} />,
 } satisfies Meta<typeof FagsakSokSakIndex>;
 export default meta;
 

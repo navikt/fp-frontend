@@ -15,6 +15,25 @@ import messages from '../../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
+const RenderFagsakYtelseTypeVelger = () => {
+  const formMethods = useForm({
+    defaultValues: {
+      fagsakYtelseTyper: ['FP', 'ES'],
+    },
+  });
+
+  //Må hente data til cache før testa komponent blir kalla
+  const alleKodeverk = useQuery(losKodeverkOptions()).data;
+
+  return alleKodeverk ? (
+    <RhfForm formMethods={formMethods}>
+      <FagsakYtelseTypeVelger />
+    </RhfForm>
+  ) : (
+    <LoadingPanel />
+  );
+};
+
 const meta = {
   title: 'los/avdelingsleder/behandlingskoer/FagsakYtelseTypeVelger',
   component: FagsakYtelseTypeVelger,
@@ -27,24 +46,7 @@ const meta = {
       ],
     },
   },
-  render: () => {
-    const formMethods = useForm({
-      defaultValues: {
-        fagsakYtelseTyper: ['FP', 'ES'],
-      },
-    });
-
-    //Må hente data til cache før testa komponent blir kalla
-    const alleKodeverk = useQuery(losKodeverkOptions()).data;
-
-    return alleKodeverk ? (
-      <RhfForm formMethods={formMethods}>
-        <FagsakYtelseTypeVelger />
-      </RhfForm>
-    ) : (
-      <LoadingPanel />
-    );
-  },
+  render: () => <RenderFagsakYtelseTypeVelger />,
 } satisfies Meta<typeof FagsakYtelseTypeVelger>;
 export default meta;
 

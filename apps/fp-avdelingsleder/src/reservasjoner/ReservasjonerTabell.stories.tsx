@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
@@ -14,6 +16,13 @@ import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
+type StoryProps = ComponentProps<typeof ReservasjonerTabell>;
+
+const RenderReservasjonerTabell = (args: StoryProps) => {
+  const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+  return kodeverkLos ? <ReservasjonerTabell {...args} /> : <LoadingPanel />;
+};
+
 const meta = {
   title: 'los/avdelingsleder/reservasjoner/ReservasjonerTabell',
   component: ReservasjonerTabell,
@@ -22,10 +31,7 @@ const meta = {
   args: {
     valgtAvdelingEnhet: '1',
   },
-  render: args => {
-    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
-    return kodeverkLos ? <ReservasjonerTabell {...args} /> : <LoadingPanel />;
-  },
+  render: args => <RenderReservasjonerTabell {...args} />,
 } satisfies Meta<typeof ReservasjonerTabell>;
 export default meta;
 

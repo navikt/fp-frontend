@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -75,6 +77,14 @@ const BEHANDLINGER_PÅ_VENT = [
   },
 ];
 
+type StoryProps = ComponentProps<typeof VentefristUtløperPanel>;
+
+const RenderVentefristUtløperPanel = (props: StoryProps) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const alleKodeverk = useQuery(losKodeverkOptions()).data;
+  return alleKodeverk ? <VentefristUtløperPanel {...props} /> : <LoadingPanel />;
+};
+
 const meta = {
   title: 'los/avdelingsleder/nokkeltall/VentefristUtløperPanel',
   component: VentefristUtløperPanel,
@@ -91,11 +101,7 @@ const meta = {
     height: 300,
     valgtAvdelingEnhet: '1',
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const alleKodeverk = useQuery(losKodeverkOptions()).data;
-    return alleKodeverk ? <VentefristUtløperPanel {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderVentefristUtløperPanel {...props} />,
 } satisfies Meta<typeof VentefristUtløperPanel>;
 export default meta;
 

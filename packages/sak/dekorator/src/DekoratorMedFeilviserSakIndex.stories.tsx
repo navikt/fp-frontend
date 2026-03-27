@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type ComponentProps,useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
@@ -7,6 +7,21 @@ import { DekoratorMedFeilviserSakIndex } from './DekoratorMedFeilviserSakIndex';
 
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
+
+const RenderDekoratorMedFeilviserSakIndex = (storyArgs: ComponentProps<typeof DekoratorMedFeilviserSakIndex>) => {
+  const [args, setArgs] = useState(storyArgs);
+
+  const fjernFeilmeldinger = () => {
+    args.fjernFeilmeldinger();
+    setArgs(oldArgs => ({ ...oldArgs, feilmeldinger: [] }));
+  };
+
+  return (
+    <div style={{ marginLeft: '-56px' }}>
+      <DekoratorMedFeilviserSakIndex {...args} fjernFeilmeldinger={fjernFeilmeldinger} />
+    </div>
+  );
+};
 
 const meta = {
   title: 'sak/sak-dekoratør',
@@ -26,20 +41,7 @@ const meta = {
     theme: 'light',
     setTheme: action('setTheme'),
   },
-  render: storyArgs => {
-    const [args, setArgs] = useState(storyArgs);
-
-    const fjernFeilmeldinger = () => {
-      args.fjernFeilmeldinger();
-      setArgs(oldArgs => ({ ...oldArgs, feilmeldinger: [] }));
-    };
-
-    return (
-      <div style={{ marginLeft: '-56px' }}>
-        <DekoratorMedFeilviserSakIndex {...args} fjernFeilmeldinger={fjernFeilmeldinger} />
-      </div>
-    );
-  },
+  render: storyArgs => <RenderDekoratorMedFeilviserSakIndex {...storyArgs} />,
 } satisfies Meta<typeof DekoratorMedFeilviserSakIndex>;
 export default meta;
 
