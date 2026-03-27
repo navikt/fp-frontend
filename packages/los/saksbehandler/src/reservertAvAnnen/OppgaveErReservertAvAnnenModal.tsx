@@ -2,7 +2,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';
-import { getDateAndTime } from '@navikt/ft-utils';
+import { dateFormat } from '@navikt/ft-utils';
 
 import { type OppgaveDto, type ReservasjonStatusDto } from '@navikt/fp-types';
 
@@ -46,7 +46,9 @@ export const OppgaveErReservertAvAnnenModal = ({
               values={{
                 saksbehandlernavn: reservasjonStatus.reservertAvNavn,
                 saksbehandlerid: reservasjonStatus.reservertAvIdent,
-                ...getDateAndTime(reservasjonStatus.reservertTilTidspunkt),
+                datetime: reservasjonStatus.reservertTilTidspunkt
+                  ? dateFormat(reservasjonStatus.reservertTilTidspunkt)
+                  : '',
               }}
             />
           </Label>
