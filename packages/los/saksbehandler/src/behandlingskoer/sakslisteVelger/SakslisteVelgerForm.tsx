@@ -277,7 +277,8 @@ export const SakslisteVelgerForm = ({
             label={intl.formatMessage({ id: 'SakslisteVelgerForm.Saksliste' })}
             selectValues={sorterteSakslister.map(saksliste => (
               <option key={saksliste.sakslisteId} value={`${saksliste.sakslisteId}`}>
-                {`${saksliste.navn}${getAntallSaker(saksliste)}`}
+                {saksliste.navn}
+                {getAntallSaker(saksliste)}
               </option>
             ))}
             className="min-w-2xs max-w-2xl"
