@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Heading, Table } from '@navikt/ds-react';
 import { BeløpLabel } from '@navikt/ft-ui-komponenter';
-import { getRangeOfMonths } from '@navikt/ft-utils';
+import { YYYY_MM_FORMAT } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
@@ -232,4 +232,27 @@ const getPeriod = (
     ? dayjs(mottaker.nesteUtbPeriode.tom).subtract(1, 'months').format()
     : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriode.fom);
   return getRangeOfMonths(fomDato, mottaker.nesteUtbPeriode.tom);
+};
+
+const getRangeOfMonths = (fom: string, tom: string): { month: string; year: string }[] => {
+  dayjs.locale('nb');
+  const fraMåned = dayjs(fom, YYYY_MM_FORMAT);
+  const tilMåned = dayjs(tom, YYYY_MM_FORMAT);
+  let currentMonth = fraMåned;
+  const range = [
+    {
+      month: currentMonth.format('MMMM'),
+      year: currentMonth.format('YY'),
+    },
+  ];
+
+  while (currentMonth.isBefore(tilMåned)) {
+    currentMonth = currentMonth.add(1, 'month');
+    range.push({
+      month: currentMonth.format('MMMM'),
+      year: currentMonth.format('YY'),
+    });
+  }
+
+  return range;
 };
