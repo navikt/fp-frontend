@@ -1,3 +1,5 @@
+import type React from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -15,6 +17,11 @@ import { EndreSakslisterPanel } from './EndreSakslisterPanel';
 import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
+
+const EndreSakslisterPanelStory = (args: React.ComponentProps<typeof EndreSakslisterPanel>) => {
+  const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+  return kodeverkLos ? <EndreSakslisterPanel {...args} /> : <LoadingPanel />;
+};
 
 const lagHandlersMedSakslister = (initialSakslister: SakslisteDto[]) => {
   const SAKSLISTER = initialSakslister;
@@ -49,10 +56,7 @@ const meta = {
       },
     ],
   },
-  render: args => {
-    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
-    return kodeverkLos ? <EndreSakslisterPanel {...args} /> : <LoadingPanel />;
-  },
+  render: args => <EndreSakslisterPanelStory {...args} />,
 } satisfies Meta<typeof EndreSakslisterPanel>;
 export default meta;
 
