@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -12,6 +14,12 @@ import { UtvalgskriterierForSakslisteForm } from './UtvalgskriterierForSaksliste
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
+
+const RenderUtvalgskriterierForSakslisteForm = (args: ComponentProps<typeof UtvalgskriterierForSakslisteForm>) => {
+  const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+
+  return kodeverkLos ? <UtvalgskriterierForSakslisteForm {...args} /> : <LoadingPanel />;
+};
 
 const meta = {
   title: 'los/avdelingsleder/behandlingskoer/UtvalgskriterierForSakslisteForm',
@@ -29,11 +37,7 @@ const meta = {
   args: {
     valgtAvdelingEnhet: '',
   },
-  render: args => {
-    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
-
-    return kodeverkLos ? <UtvalgskriterierForSakslisteForm {...args} /> : <LoadingPanel />;
-  },
+  render: args => <RenderUtvalgskriterierForSakslisteForm {...args} />,
 } satisfies Meta<typeof UtvalgskriterierForSakslisteForm>;
 export default meta;
 

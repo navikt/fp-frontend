@@ -42,6 +42,12 @@ const OPPGAVER_TIL_BEHANDLING = [
   },
 ] satisfies OppgaveDto[];
 
+const RenderLedigOppgaveTabell = (props: ComponentProps<typeof LedigOppgaveTabell>) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const alleKodeverk = useQuery(losKodeverkOptions()).data;
+  return alleKodeverk ? <LedigOppgaveTabell {...props} /> : <LoadingPanel />;
+}
+
 const meta = {
   title: 'behandlingskoer/LedigOppgaveTabell',
   component: LedigOppgaveTabell,
@@ -50,11 +56,7 @@ const meta = {
     valgtSakslisteId: 1,
     reserverOppgave: action('button-click'),
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const alleKodeverk = useQuery(losKodeverkOptions()).data;
-    return alleKodeverk ? <LedigOppgaveTabell {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderLedigOppgaveTabell {...props} />,
 } satisfies Meta<ComponentProps<typeof LedigOppgaveTabell>>;
 export default meta;
 

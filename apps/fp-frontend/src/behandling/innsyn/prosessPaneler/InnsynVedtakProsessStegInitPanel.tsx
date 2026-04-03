@@ -23,9 +23,9 @@ export const InnsynVedtakProsessStegInitPanel = () => {
 
   const { behandling, setSkalOppdatereEtterBekreftelseAvAp } = useBehandlingDataContext();
 
-  const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
+  const [visIverksetterVedtakModal, setVisIverksetterVedtakModal] = useState(false);
   const lagringSideeffekterCallback = getLagringSideeffekter(
-    toggleIverksetterVedtakModal,
+    setVisIverksetterVedtakModal,
     setSkalOppdatereEtterBekreftelseAvAp,
   );
 
@@ -59,7 +59,7 @@ export const InnsynVedtakProsessStegInitPanel = () => {
         <IverksetterVedtakStatusModal
           visModal={visIverksetterVedtakModal}
           lukkModal={() => {
-            toggleIverksetterVedtakModal(false);
+            setVisIverksetterVedtakModal(false);
             void navigate('/');
           }}
           behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
@@ -87,7 +87,7 @@ const getVedtakStatus = (behandling: BehandlingFpSak): VilkårUtfallType => {
 
 const getLagringSideeffekter =
   (
-    toggleIverksetterVedtakModal: (skalViseModal: boolean) => void,
+    setVisIverksetterVedtakModal: (skalViseModal: boolean) => void,
     setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
   ) =>
   () => {
@@ -95,7 +95,7 @@ const getLagringSideeffekter =
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
-      toggleIverksetterVedtakModal(true);
+      setVisIverksetterVedtakModal(true);
     };
   };
 

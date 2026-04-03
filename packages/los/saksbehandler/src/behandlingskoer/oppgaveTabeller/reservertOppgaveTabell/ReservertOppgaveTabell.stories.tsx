@@ -79,6 +79,12 @@ const RESERVERTE_OPPGAVER = [
   },
 ] satisfies OppgaveDto[];
 
+const RenderReservertOppgaveTabell = (props: ComponentProps<typeof ReservertOppgaveTabell>) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const alleKodeverk = useQuery(losKodeverkOptions()).data;
+  return alleKodeverk ? <ReservertOppgaveTabell {...props} /> : <LoadingPanel />;
+};
+
 const meta = {
   title: 'behandlingskoer/ReservertOppgaveTabell',
   component: ReservertOppgaveTabell,
@@ -87,11 +93,7 @@ const meta = {
     reserverOppgave: action('reserverOppgave'),
     brukernavn: 'T232332',
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const alleKodeverk = useQuery(losKodeverkOptions()).data;
-    return alleKodeverk ? <ReservertOppgaveTabell {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderReservertOppgaveTabell {...props} />,
 } satisfies Meta<ComponentProps<typeof ReservertOppgaveTabell>>;
 export default meta;
 
