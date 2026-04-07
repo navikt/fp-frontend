@@ -23,7 +23,7 @@
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-utils": "3.11.13",
+    "@navikt/ft-utils": "3.12.0",
     "react": "19.2.4",
     "react-intl": "10.0.0"
   },
