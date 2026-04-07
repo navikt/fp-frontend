@@ -1,11 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
-
-import styles from './collapseButton.module.css';
-
-const buttonText = (showDetails: boolean): string =>
-  showDetails ? 'Simulering.headerText.VisFærreDetaljer' : 'Simulering.headerText.VisFlereDetaljer';
+import { Button } from '@navikt/ds-react';
 
 interface Props {
   toggleDetails: (id: number) => void;
@@ -14,8 +10,19 @@ interface Props {
 }
 
 export const CollapseButton = ({ toggleDetails, showDetails, mottakerIndex }: Props) => (
-  <button type="button" className={styles['invisibleButton']} onClick={() => toggleDetails(mottakerIndex)}>
-    <FormattedMessage id={buttonText(showDetails)} />
-    {showDetails ? <ChevronUpIcon /> : <ChevronDownIcon />}
-  </button>
+  <Button
+    type="button"
+    size="small"
+    variant="tertiary"
+    icon={showDetails ? <ChevronUpIcon /> : <ChevronDownIcon />}
+    iconPosition="right"
+    className="focus:bg-ax-bg-warning-moderate-pressed"
+    onClick={() => toggleDetails(mottakerIndex)}
+  >
+    {showDetails ? (
+      <FormattedMessage id="Simulering.headerText.VisFærreDetaljer" />
+    ) : (
+      <FormattedMessage id="Simulering.headerText.VisFlereDetaljer" />
+    )}
+  </Button>
 );
