@@ -4,7 +4,6 @@ import { useMutation } from '@tanstack/react-query';
 import { type OppgaveDto, type SakslisteDto } from '@navikt/fp-types';
 
 import { getBehandlingskøOppgaveAntall } from '../data/fplosSaksbehandlerApi';
-import { removeValueFromLocalStorage, setValueInLocalStorage } from '../data/localStorageHelper';
 import { LedigOppgaveTabell } from './oppgaveTabeller/ledigOppgaveTabell/LedigOppgaveTabell';
 import { ReservertOppgaveTabell } from './oppgaveTabeller/reservertOppgaveTabell/ReservertOppgaveTabell';
 import { SakslisteVelgerForm } from './sakslisteVelger/SakslisteVelgerForm';
@@ -34,8 +33,6 @@ export const SakslistePanel = ({
         sakslister={sakslister}
         setValgtSakslisteId={setValgtSakslisteId}
         fetchAntallOppgaver={fetchAntallOppgaver}
-        setValueInLocalStorage={setValueInLocalStorage}
-        removeValueFromLocalStorage={removeValueFromLocalStorage}
       />
 
       {!!valgtSakslisteId && (

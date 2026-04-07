@@ -40,6 +40,10 @@ const saksliste1: SakslisteDto = {
       ansattAvdeling: '1234',
     },
   ],
+  gjeldendeStatistikk: {
+    alleOppgaver: 9,
+    tilgjengeligeOppgaver: 3,
+  },
   andreKriterie: {
     inkluder: ['TIL_BESLUTTER'],
     ekskluder: [],
@@ -65,8 +69,6 @@ const meta = {
   args: {
     setValgtSakslisteId: action('setValgtSakslisteId'),
     fetchAntallOppgaver: action('fetchAntallOppgaver'),
-    setValueInLocalStorage: action('setValueInLocalStorage'),
-    removeValueFromLocalStorage: action('removeValueFromLocalStorage'),
   },
   render: props => <RenderSakslisteVelgerForm {...props} />,
 } satisfies Meta<typeof SakslisteVelgerForm>;
@@ -101,6 +103,10 @@ export const MedToSakslister: Story = {
         },
         sorteringTyper: [{ sorteringType: 'BEHFRIST', feltType: 'DATO' }],
         saksbehandlere: [],
+        gjeldendeStatistikk: {
+          alleOppgaver: 9,
+          tilgjengeligeOppgaver: 114,
+        },
         andreKriterie: {
           inkluder: ['UTBETALING_TIL_BRUKER'],
           ekskluder: [],

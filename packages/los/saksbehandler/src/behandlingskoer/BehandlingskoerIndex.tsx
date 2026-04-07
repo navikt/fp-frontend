@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { type OppgaveDto, type ReservasjonStatusDto, type SakslisteDto } from '@navikt/fp-types';
+import type { OppgaveDto, ReservasjonStatusDto, SakslisteDto } from '@navikt/fp-types';
 
 import { reserverOppgavePost, sakslisteOptions } from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';

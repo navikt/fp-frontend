@@ -57,6 +57,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+// Første gangs review: backend returnerer totrinnskontrollGodkjent=false som default.
+// Radioknappene skal vises uten forhåndsvalg (ingen "Vurder på nytt" forhåndsmarkert).
 export const ForBeslutter: Story = {
   args: {
     behandling: {
@@ -74,7 +76,6 @@ export const ForBeslutter: Story = {
               },
               vurderPaNyttArsaker: [],
               uttakPerioder: [],
-
               totrinnskontrollGodkjent: false,
             },
           ],
@@ -91,7 +92,53 @@ export const ForBeslutter: Story = {
               },
               vurderPaNyttArsaker: [],
               uttakPerioder: [],
+              totrinnskontrollGodkjent: false,
+            },
+          ],
+        },
+      ] satisfies TotrinnskontrollSkjermlenkeContext[],
+    },
+    readOnly: false,
+  },
+};
 
+// Andre gangs review: beslutter har tidligere sendt tilbake med årsaker.
+// Backend returnerer totrinnskontrollGodkjent=false med vurderPaNyttArsaker utfylt.
+// "Vurder på nytt" skal vises forhåndsvalgt med tilhørende årsaker.
+export const ForBeslutterMedTidligereRetur: Story = {
+  args: {
+    behandling: {
+      ...DEFAULT_BEHANDLING,
+      totrinnskontrollÅrsaker: [
+        {
+          skjermlenkeType: 'FORMKRAV_KLAGE_NFP' satisfies SkjermlenkeType,
+          totrinnskontrollAksjonspunkter: [
+            {
+              aksjonspunktKode: '5082',
+              opptjeningAktiviteter: [],
+              beregningDto: {
+                fastsattVarigEndringNæring: false,
+                faktaOmBeregningTilfeller: ['-'],
+              },
+              vurderPaNyttArsaker: ['FEIL_FAKTA', 'FEIL_LOV'],
+              besluttersBegrunnelse: 'Fakta er feil og lovanvendelse er mangelfull',
+              uttakPerioder: [],
+              totrinnskontrollGodkjent: false,
+            },
+          ],
+        },
+        {
+          skjermlenkeType: 'KLAGE_BEH_NFP' satisfies SkjermlenkeType,
+          totrinnskontrollAksjonspunkter: [
+            {
+              aksjonspunktKode: '5035',
+              opptjeningAktiviteter: [],
+              beregningDto: {
+                fastsattVarigEndringNæring: false,
+                faktaOmBeregningTilfeller: ['-'],
+              },
+              vurderPaNyttArsaker: [],
+              uttakPerioder: [],
               totrinnskontrollGodkjent: false,
             },
           ],

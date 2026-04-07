@@ -86,7 +86,10 @@ const buildInitialValues = (
     .flat()
     .map(ap => ({
       aksjonspunktKode: ap.aksjonspunktKode,
-      totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
+      totrinnskontrollGodkjent:
+        ap.totrinnskontrollGodkjent === false && ap.vurderPaNyttArsaker.length === 0
+          ? undefined
+          : ap.totrinnskontrollGodkjent,
       besluttersBegrunnelse: decodeHtmlEntity(ap.besluttersBegrunnelse ?? undefined),
       ...finnArsaker(ap.vurderPaNyttArsaker),
     })),

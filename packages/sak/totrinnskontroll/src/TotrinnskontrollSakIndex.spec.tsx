@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './TotrinnskontrollSakIndex.stories';
 
-const { ForBeslutter, ForSaksbehandler } = composeStories(stories);
+const { ForBeslutter, ForBeslutterMedTidligereRetur, ForSaksbehandler } = composeStories(stories);
 
 describe('TotrinnskontrollSakIndex', () => {
   it('skal godkjenne begge aksjonspunktene', async () => {
@@ -17,7 +17,7 @@ describe('TotrinnskontrollSakIndex', () => {
     expect(screen.getByText('Klageresultat NFP')).toBeInTheDocument();
 
     expect(screen.getByText('Godkjenn vedtaket').closest('button')).toBeDisabled();
-    expect(screen.getByText('Send til saksbehandler')).toBeEnabled();
+    expect(screen.getByText('Send til saksbehandler').closest('button')).toBeDisabled();
 
     const checkboxes = screen.getAllByText('Godkjent');
     await userEvent.click(checkboxes[0]!);
@@ -134,5 +134,29 @@ describe('TotrinnskontrollSakIndex', () => {
 
     expect(screen.getByText('Klageresultat NFP')).toBeInTheDocument();
     expect(screen.getAllByText('Godkjent')).toHaveLength(2);
+  });
+
+  it('skal ikke forhåndsvise åpne "Vurder på nytt"-bokser når AP aldri har vært sendt tilbake (FAGSYSTEM-424226)', async () => {
+    render(<ForBeslutter />);
+
+    expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
+
+    // Ingen radioknapp skal være forhåndsvalgt – "Årsak til retur"-seksjonen skal ikke vises
+    expect(screen.queryByText('Årsak til retur')).not.toBeInTheDocument();
+
+    // Begge knapper skal være disabled fordi ingenting er vurdert ennå
+    expect(screen.getByText('Godkjenn vedtaket').closest('button')).toBeDisabled();
+    expect(screen.getByText('Send til saksbehandler').closest('button')).toBeDisabled();
+  });
+
+  it('skal forhåndsutfylle "Vurder på nytt" med årsaker når AP faktisk har vært sendt tilbake', async () => {
+    render(<ForBeslutterMedTidligereRetur />);
+
+    expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
+
+    // Det første AP ble tidligere sendt tilbake – årsak-seksjonen skal vises forhåndsutfylt
+    expect(screen.getByText('Årsak til retur')).toBeInTheDocument();
+    expect(screen.getByLabelText('Fakta')).toBeChecked();
+    expect(screen.getByLabelText('Regel-/lovanvendelse')).toBeChecked();
   });
 });

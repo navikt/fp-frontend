@@ -8,11 +8,6 @@
   border-bottom: 1px solid var(--ax-border-neutral-strong);
 }
 
-.grayIcon {
-  color: var(--ax-text-neutral-decoration);
-  font-size: 1.5rem;
-}
-
 .køFilterBoks {
   max-height: 500px;
   overflow: hidden;

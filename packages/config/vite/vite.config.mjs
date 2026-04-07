@@ -27,7 +27,7 @@ export const createConfig = setupFileDirName =>
       tailwindcss(),
       compression(),
       react({
-        include: '**/*.{ts,tsx,js,jsx}',
+        include: '**/*.{tsx,jsx}',
       }),
     ],
     css: {
