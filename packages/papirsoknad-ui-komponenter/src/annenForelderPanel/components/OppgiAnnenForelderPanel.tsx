@@ -57,7 +57,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
         name={`${ANNEN_FORELDER_NAME_PREFIX}.fødselsnummer`}
         control={control}
         label={formatMessage({ id: 'Registrering.TheOtherParent.Fodselsnummer' })}
-        parse={value => (value ? value.toString().replace(/\s/g, '') : value)}
+        parse={value => (value ? value.toString().replaceAll(/\s/g, '') : value)}
         readOnly={readOnly}
         className={styles['inputBredde']}
         validate={
