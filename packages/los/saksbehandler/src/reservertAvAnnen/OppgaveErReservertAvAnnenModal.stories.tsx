@@ -51,7 +51,7 @@ export const Default: Story = {
       erReservert: false,
       reservertAvNavn: 'Espen Utvikler',
       reservertAvIdent: 'E232323',
-      reservertTilTidspunkt: '2020-01-01',
+      reservertTilTidspunkt: '2020-01-01T23:59:59',
     },
   },
 };

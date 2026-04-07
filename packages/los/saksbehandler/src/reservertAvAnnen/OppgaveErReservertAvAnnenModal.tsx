@@ -1,12 +1,11 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';
-import { dateFormat } from '@navikt/ft-utils';
+import { Button, HStack, Label, Modal } from '@navikt/ds-react';
+import { dateTimeFormat } from '@navikt/ft-utils';
 
 import { type OppgaveDto, type ReservasjonStatusDto } from '@navikt/fp-types';
 
-import styles from './oppgaveErReservertAvAnnenModal.module.css';
 
 type Props = Readonly<{
   lukkErReservertModalOgOpneOppgave: (oppgave: OppgaveDto) => void;
@@ -28,16 +27,18 @@ export const OppgaveErReservertAvAnnenModal = ({
   const lukk = () => lukkErReservertModalOgOpneOppgave(oppgave);
 
   return (
-    <NavModal
-      className={styles['modal']}
+    <Modal
+      width="600px"
       open
       aria-label={intl.formatMessage({ id: 'OppgaveErReservertAvAnnenModal.ReservertAvEnkel' })}
       onClose={lukk}
     >
-      <NavModal.Body>
+      <Modal.Body>
         <HStack gap="space-16" wrap={false} align="center">
           <ExclamationmarkTriangleFillIcon
-            className={styles['image']}
+            color="var(--ax-warning-600)"
+            height="55px"
+            width="55px"
             title={intl.formatMessage({ id: 'OppgaveErReservertAvAnnenModal.ReservertAvEnkel' })}
           />
           <Label size="small">
@@ -47,16 +48,16 @@ export const OppgaveErReservertAvAnnenModal = ({
                 saksbehandlernavn: reservasjonStatus.reservertAvNavn,
                 saksbehandlerid: reservasjonStatus.reservertAvIdent,
                 datetime: reservasjonStatus.reservertTilTidspunkt
-                  ? dateFormat(reservasjonStatus.reservertTilTidspunkt)
+                  ? dateTimeFormat(reservasjonStatus.reservertTilTidspunkt)
                   : '',
               }}
             />
           </Label>
-          <Button className={styles['okButton']} size="small" variant="primary" onClick={lukk} autoFocus type="button">
+          <Button size="small" variant="primary" onClick={lukk} autoFocus type="button">
             <FormattedMessage id="Label.Ok" />
           </Button>
         </HStack>
-      </NavModal.Body>
-    </NavModal>
+      </Modal.Body>
+    </Modal>
   );
 };
