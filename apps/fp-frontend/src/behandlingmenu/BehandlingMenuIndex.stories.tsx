@@ -1,5 +1,3 @@
-import type { ComponentProps } from 'react';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -71,16 +69,6 @@ const HANDLERS = [
   http.post(getHref(FagsakRel.ENDRE_SAK_MARKERING), () => new HttpResponse(null, { status: 200 })),
 ];
 
-const RenderBehandlingMenuIndex = (props: ComponentProps<typeof BehandlingMenuIndex>) => {
-  //Må hente data til cache før testa komponent blir kalla
-  const { status } = useQuery(initFetchOptions());
-  const { kodeverkOptions, fptilbake } = useFagsakApi();
-  const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
-  const { data: kodeverkFpTilbake } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
-
-  return kodeverk && kodeverkFpTilbake ? <BehandlingMenuIndex {...props} /> : <LoadingPanel />;
-};
-
 const meta = {
   title: 'fagsak/BehandlingMenuIndex',
   decorators: [withIntl, withRouter, withQueryClient],
@@ -94,7 +82,15 @@ const meta = {
     setBehandling: action('button-click'),
     hentOgSettBehandling: action('button-click'),
   },
-  render: props => <RenderBehandlingMenuIndex {...props} />,
+  render: function Render(props) {
+    //Må hente data til cache før testa komponent blir kalla
+    const { status } = useQuery(initFetchOptions());
+    const { kodeverkOptions, fptilbake } = useFagsakApi();
+    const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
+    const { data: kodeverkFpTilbake } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
+
+    return kodeverk && kodeverkFpTilbake ? <BehandlingMenuIndex {...props} /> : <LoadingPanel />;
+  },
 } satisfies Meta<typeof BehandlingMenuIndex>;
 export default meta;
 

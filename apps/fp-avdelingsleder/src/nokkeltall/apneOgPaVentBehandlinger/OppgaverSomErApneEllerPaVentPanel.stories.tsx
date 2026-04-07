@@ -1,5 +1,3 @@
-import type { ComponentProps } from 'react';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
@@ -71,14 +69,6 @@ const OPPGAVER_ÅPNE_ELLER_PÅ_VENT = [
   },
 ];
 
-type StoryProps = ComponentProps<typeof OppgaverSomErApneEllerPaVentPanel>;
-
-const RenderOppgaverSomErApneEllerPaVentPanel = (props: StoryProps) => {
-  //Må hente data til cache før testa komponent blir kalla
-  const alleKodeverk = useQuery(losKodeverkOptions()).data;
-  return alleKodeverk ? <OppgaverSomErApneEllerPaVentPanel {...props} /> : <LoadingPanel />;
-};
-
 const meta = {
   title: 'los/avdelingsleder/nokkeltall/OppgaverSomErApneEllerPaVentPanel',
   component: OppgaverSomErApneEllerPaVentPanel,
@@ -97,7 +87,11 @@ const meta = {
     height: 300,
     valgtAvdelingEnhet: '1',
   },
-  render: props => <RenderOppgaverSomErApneEllerPaVentPanel {...props} />,
+  render: function Render(props) {
+    //Må hente data til cache før testa komponent blir kalla
+    const alleKodeverk = useQuery(losKodeverkOptions()).data;
+    return alleKodeverk ? <OppgaverSomErApneEllerPaVentPanel {...props} /> : <LoadingPanel />;
+  },
 } satisfies Meta<typeof OppgaverSomErApneEllerPaVentPanel>;
 export default meta;
 

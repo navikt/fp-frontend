@@ -1,5 +1,3 @@
-import type { ComponentProps } from 'react';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -15,13 +13,6 @@ import { Dekorator } from './Dekorator';
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
-
-const RenderDekorator = (props: ComponentProps<typeof Dekorator>) => {
-  //Må hente data til cache før testa komponent blir kalla
-  const { status } = useQuery(initFetchOptions());
-
-  return status === 'success' ? <Dekorator {...props} /> : <LoadingPanel />;
-};
 
 const meta = {
   title: 'app/Dekorator',
@@ -44,7 +35,12 @@ const meta = {
     theme: 'light',
     setTheme: action('setTheme'),
   },
-  render: props => <RenderDekorator {...props} />,
+  render: function Render(props) {
+    //Må hente data til cache før testa komponent blir kalla
+    const { status } = useQuery(initFetchOptions());
+
+    return status === 'success' ? <Dekorator {...props} /> : <LoadingPanel />;
+  },
 } satisfies Meta<typeof Dekorator>;
 export default meta;
 

@@ -1,4 +1,4 @@
-import { type ComponentProps, useState } from 'react';
+import { useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
@@ -7,21 +7,6 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { alleKodeverk, lagAksjonspunkt } from '@navikt/fp-storybook-utils';
 
 import { RisikoklassifiseringSakIndex } from './RisikoklassifiseringSakIndex';
-
-const RenderRisikoklassifiseringSakIndex = (storyArgs: ComponentProps<typeof RisikoklassifiseringSakIndex>) => {
-  const [args, setArgs] = useState(storyArgs);
-
-  const toggleRiskPanel = () => {
-    args.toggleRiskPanel();
-    setArgs(oldArgs => ({ ...oldArgs, isPanelOpen: true }));
-  };
-
-  return (
-    <div style={{ width: '600px' }}>
-      <RisikoklassifiseringSakIndex {...args} toggleRiskPanel={toggleRiskPanel} />
-    </div>
-  );
-};
 
 const meta = {
   title: 'sak/sak-risikoklassifisering',
@@ -33,7 +18,20 @@ const meta = {
     isPanelOpen: false,
     readOnly: false,
   },
-  render: storyArgs => <RenderRisikoklassifiseringSakIndex {...storyArgs} />,
+  render: function Render(storyArgs) {
+    const [args, setArgs] = useState(storyArgs);
+
+    const toggleRiskPanel = () => {
+      args.toggleRiskPanel();
+      setArgs(oldArgs => ({ ...oldArgs, isPanelOpen: true }));
+    };
+
+    return (
+      <div style={{ width: '600px' }}>
+        <RisikoklassifiseringSakIndex {...args} toggleRiskPanel={toggleRiskPanel} />
+      </div>
+    );
+  },
 } satisfies Meta<typeof RisikoklassifiseringSakIndex>;
 export default meta;
 

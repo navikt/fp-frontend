@@ -1,5 +1,3 @@
-import type { ComponentProps } from 'react';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -16,12 +14,6 @@ import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const RenderSistBehandledeSaker = (props: ComponentProps<typeof SistBehandledeSaker>) => {
-  //Må hente data til cache før testa komponent blir kalla
-  const alleKodeverk = useQuery(losKodeverkOptions()).data;
-  return alleKodeverk ? <SistBehandledeSaker {...props} /> : <LoadingPanel />;
-};
-
 const meta = {
   title: 'saksstotte/SistBehandledeSaker',
   component: SistBehandledeSaker,
@@ -29,7 +21,11 @@ const meta = {
   args: {
     åpneFagsak: action('åpneFagsak'),
   },
-  render: props => <RenderSistBehandledeSaker {...props} />,
+  render: function Render(props) {
+    //Må hente data til cache før testa komponent blir kalla
+    const alleKodeverk = useQuery(losKodeverkOptions()).data;
+    return alleKodeverk ? <SistBehandledeSaker {...props} /> : <LoadingPanel />;
+  },
 } satisfies Meta<typeof SistBehandledeSaker>;
 export default meta;
 
