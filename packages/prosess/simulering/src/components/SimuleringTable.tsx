@@ -236,8 +236,8 @@ const getPeriod = (
 
 const getRangeOfMonths = (fom: string, tom: string): { month: string; year: string }[] => {
   dayjs.locale('nb');
-  const fraMåned = dayjs(fom, YYYY_MM_FORMAT);
-  const tilMåned = dayjs(tom, YYYY_MM_FORMAT);
+  const fraMåned = dayjs(fom).startOf('month');
+  const tilMåned = dayjs(tom).startOf('month');
   let currentMonth = fraMåned;
   const range = [
     {
