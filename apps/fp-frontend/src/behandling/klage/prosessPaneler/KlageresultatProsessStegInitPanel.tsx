@@ -31,9 +31,9 @@ export const KlageresultatProsessStegInitPanel = () => {
 
   const { aksjonspunkt: aksjonspunkter } = behandling;
 
-  const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
+  const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
 
-  const lagringSideEffekter = getLagringSideeffekter(toggleFatterVedtakModal, setSkalOppdatereEtterBekreftelseAvAp);
+  const lagringSideEffekter = getLagringSideeffekter(setVisFatterVedtakModal, setSkalOppdatereEtterBekreftelseAvAp);
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
 
   const vedtakStatus = getVedtakStatus(behandling.behandlingsresultat, aksjonspunkter);
@@ -58,7 +58,7 @@ export const KlageresultatProsessStegInitPanel = () => {
       <FatterVedtakStatusModal
         visModal={visFatterVedtakModal}
         lukkModal={() => {
-          toggleFatterVedtakModal(false);
+          setVisFatterVedtakModal(false);
           void navigate('/');
         }}
         tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.KlagenErFerdigbehandlet' })}
@@ -102,7 +102,7 @@ const getVedtakStatus = (
 
 const getLagringSideeffekter =
   (
-    toggleFatterVedtakModal: (skalViseModal: boolean) => void,
+    setVisFatterVedtakModal: (skalViseModal: boolean) => void,
     setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
   ) =>
   () => {
@@ -110,6 +110,6 @@ const getLagringSideeffekter =
 
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
-      toggleFatterVedtakModal(true);
+      setVisFatterVedtakModal(true);
     };
   };

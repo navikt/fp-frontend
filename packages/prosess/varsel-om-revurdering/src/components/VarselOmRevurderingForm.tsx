@@ -67,9 +67,9 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
 
   const formVerdier = formMethods.watch();
 
-  const [skalVisePåVentModal, settSkalVisePåVentModal] = useState(false);
-  const lukkModal = () => settSkalVisePåVentModal(false);
-  const åpneModal = () => settSkalVisePåVentModal(true);
+  const [skalVisePåVentModal, setSkalVisePåVentModal] = useState(false);
+  const lukkModal = () => setSkalVisePåVentModal(false);
+  const åpneModal = () => setSkalVisePåVentModal(true);
 
   const håndterSubmitFraModal = (modalValues: ModalFormValues) => {
     void formMethods.trigger().then(isValid => {
@@ -79,7 +79,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
           ...modalValues,
         });
       }
-      settSkalVisePåVentModal(false);
+      setSkalVisePåVentModal(false);
     });
   };
 

@@ -27,7 +27,7 @@ interface Props {
 }
 
 export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt, alleKodeverk, radData }: Props) => {
-  const [visAlleMåneder, setVisAlleMånader] = useState(false);
+  const [visAlleMåneder, setVisAlleMåneder] = useState(false);
 
   const { inntektsposter, arbeidsforholdForRad } = radData;
   const sorterteInntektsposter = behandleInntektsposter(skjæringstidspunkt, inntektsposter);
@@ -69,7 +69,7 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
           <Link
             onClick={e => {
               e.preventDefault();
-              setVisAlleMånader(!visAlleMåneder);
+              setVisAlleMåneder(!visAlleMåneder);
             }}
             href=""
           >

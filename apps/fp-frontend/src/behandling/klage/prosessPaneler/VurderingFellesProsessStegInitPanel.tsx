@@ -32,7 +32,7 @@ export const VurderingFellesProsessStegInitPanel = ({
   prosessPanelKode,
   prosessPanelMenyTekst,
 }: Props) => {
-  const [visModalKlageBehandling, toggleKlageModal] = useState(false);
+  const [visModalKlageBehandling, setVisModalKlageBehandling] = useState(false);
 
   const {
     behandling,
@@ -42,7 +42,7 @@ export const VurderingFellesProsessStegInitPanel = ({
   } = useBehandlingDataContext();
 
   const lagringSideEffekter = getLagringSideeffekter(
-    toggleKlageModal,
+    setVisModalKlageBehandling,
     setSkalOppdatereEtterBekreftelseAvAp,
     oppdaterProsessStegOgFaktaPanelIUrl,
   );
@@ -84,7 +84,7 @@ export const VurderingFellesProsessStegInitPanel = ({
         <KlageBehandlingModal
           visModal={visModalKlageBehandling}
           lukkModal={() => {
-            toggleKlageModal(false);
+            setVisModalKlageBehandling(false);
             void navigate('/');
           }}
         />
@@ -104,7 +104,7 @@ export const VurderingFellesProsessStegInitPanel = ({
 
 const getLagringSideeffekter =
   (
-    toggleKlageModal: (skalViseModal: boolean) => void,
+    setVisModalKlageBehandling: (skalViseModal: boolean) => void,
     setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
     oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void,
   ) =>
@@ -123,7 +123,7 @@ const getLagringSideeffekter =
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
       if (skalByttTilKlageinstans) {
-        toggleKlageModal(true);
+        setVisModalKlageBehandling(true);
       } else if (oppdaterProsessStegOgFaktaPanelIUrl) {
         oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
         globalThis.scrollTo({
