@@ -44,7 +44,7 @@ const meta = {
   title: 'sak/sak-totrinnskontroll',
   component: TotrinnskontrollSakIndex,
   args: {
-    onSubmit: action('button-click') as (params: ApData) => Promise<void>,
+    onSubmit: action('button-click'),
     location: LOCATION,
     forhandsvisVedtaksbrev: action('button-click'),
     alleKodeverk: alleKodeverk,

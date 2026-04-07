@@ -48,7 +48,7 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
   });
 
   const erLagtTilAllerede = avdelingensSaksbehandlere.some(
-    s => saksbehandler && s.brukerIdent.toLowerCase() === saksbehandler.brukerIdent.toLowerCase(),
+    s => s.brukerIdent.toLowerCase() === saksbehandler?.brukerIdent.toLowerCase(),
   );
 
   const leggTilSaksbehandlerFn = () => {

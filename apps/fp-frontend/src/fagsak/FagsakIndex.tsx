@@ -130,30 +130,28 @@ export const FagsakIndex = () => {
             visUtvidetBehandlingDetaljer={visUtvidetBehandlingDetaljer}
           />
         }
-        visittkortContent={() => {
-          if (skalIkkeHenteData) {
-            return null;
-          }
-
-          return (
-            <ErrorBoundary
-              errorMessageCallback={addErrorMessage}
-              errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Visittkort' })}
-            >
-              <VisittkortSakIndex
-                erMor={fagsak.relasjonsRolleType === 'MORA'}
-                bruker={fagsak.bruker}
-                annenPart={fagsak.annenPart}
-                familiehendelse={fagsak.familiehendelse}
-                harVergeIÅpenBehandling={fagsak.harVergeIÅpenBehandling}
-                erTilbakekreving={erTilbakekreving}
-                lenkeTilAnnenPart={
-                  fagsak.annenpartBehandling ? finnLenkeTilAnnenPart(fagsak.annenpartBehandling) : undefined
-                }
-              />
-            </ErrorBoundary>
-          );
-        }}
+        visittkortContent={
+          skalIkkeHenteData
+            ? () => null
+            : () => (
+                <ErrorBoundary
+                  errorMessageCallback={addErrorMessage}
+                  errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Visittkort' })}
+                >
+                  <VisittkortSakIndex
+                    erMor={fagsak.relasjonsRolleType === 'MORA'}
+                    bruker={fagsak.bruker}
+                    annenPart={fagsak.annenPart}
+                    familiehendelse={fagsak.familiehendelse}
+                    harVergeIÅpenBehandling={fagsak.harVergeIÅpenBehandling}
+                    erTilbakekreving={erTilbakekreving}
+                    lenkeTilAnnenPart={
+                      fagsak.annenpartBehandling ? finnLenkeTilAnnenPart(fagsak.annenpartBehandling) : undefined
+                    }
+                  />
+                </ErrorBoundary>
+              )
+        }
       />
       {isRequestPending && <DataFetchPendingModal pendingMessage="" />}
     </>
