@@ -5,7 +5,6 @@ const config: KnipConfig = {
     '@types/editorjs-undo.d.ts',
     '.storybook/**',
     'server/**',
-    'packages/types/openapi-ts.config.ts',
     'packages/types/src/los/fplos.gen.ts',
     'packages/types/src/fpsak.gen.ts',
     'packages/kodeverk/src/aksjonspunktCodes.ts',
