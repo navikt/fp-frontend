@@ -11,9 +11,8 @@ import { BodyShort, Button, Checkbox, type SortState, Table } from '@navikt/ds-r
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Dokument } from '@navikt/fp-types';
+import { DokumentLink } from '@navikt/fp-ui-komponenter';
 import { åpneDokument } from '@navikt/fp-utils';
-
-import { DokumentLink } from '../../../../ui-komponenter';
 
 import styles from './documentList.module.css';
 
@@ -95,7 +94,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
         ? undefined
         : {
             orderBy: sortKey,
-            direction: sortKey === sort?.orderBy && sort?.direction === 'ascending' ? 'descending' : 'ascending',
+            direction: sortKey === sort?.orderBy && sort.direction === 'ascending' ? 'descending' : 'ascending',
           },
     );
   };
