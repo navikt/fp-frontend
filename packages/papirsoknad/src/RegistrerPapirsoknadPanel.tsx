@@ -91,7 +91,7 @@ export const RegistrerPapirsoknadPanel = ({
           fagsakYtelseType={fagsak.fagsakYtelseType}
           alleKodeverk={kodeverk}
         />
-        {soknadData && soknadData.getFagsakYtelseType() === 'ES' && (
+        {soknadData?.getFagsakYtelseType() === 'ES' && (
           <EngangsstonadPapirsoknadIndex
             onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
             onSubmit={lagreFullstendigSøknad}
@@ -100,7 +100,7 @@ export const RegistrerPapirsoknadPanel = ({
             alleKodeverk={kodeverk}
           />
         )}
-        {soknadData && soknadData.getFagsakYtelseType() === 'FP' && (
+        {soknadData?.getFagsakYtelseType() === 'FP' && (
           <ForeldrepengerPapirsoknadIndex
             onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
             onSubmit={lagreFullstendigSøknad}
@@ -111,7 +111,7 @@ export const RegistrerPapirsoknadPanel = ({
             erEndringssøknad={erEndringssøknad}
           />
         )}
-        {soknadData && soknadData.getFagsakYtelseType() === 'SVP' && (
+        {soknadData?.getFagsakYtelseType() === 'SVP' && (
           <SvangerskapspengerPapirsoknadIndex
             onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
             onSubmit={lagreFullstendigSøknad}

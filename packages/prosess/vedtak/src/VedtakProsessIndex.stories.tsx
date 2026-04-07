@@ -103,6 +103,42 @@ const defaultBeregningsgrunnlag = {
   skjæringstidspunkt: '2021-01-01',
 } satisfies Beregningsgrunnlag;
 
+type MetaArgs = PanelDataArgs & { brevOverstyring: BrevOverstyring; harHentBrevOverstyringLenke?: boolean } & ComponentProps<
+  typeof VedtakProsessIndex
+>;
+
+const RenderVedtakProsessIndex = (args: MetaArgs) => {
+  const [redigertHtml, setRedigertHtml] = useState<string | null>(null);
+
+  const mellomlagreBrevOverstyring = (redigert: string | null) => {
+    setRedigertHtml(redigert);
+    action('mellomlagre')(redigert);
+    return Promise.resolve();
+  };
+
+  return (
+    <VedtakEditeringProvider
+      behandling={args.behandling ?? defaultBehandling}
+      hentBrevOverstyring={
+        args.harHentBrevOverstyringLenke
+          ? () => {
+              return redigertHtml
+                ? Promise.resolve({
+                    opprinneligHtml: args.brevOverstyring.opprinneligHtml,
+                    redigertHtml,
+                  })
+                : Promise.resolve(args.brevOverstyring);
+            }
+          : undefined
+      }
+      hentBrevOverstyringIsPending={false}
+      mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+    >
+      <VedtakProsessIndex {...args} />
+    </VedtakEditeringProvider>
+  );
+};
+
 const meta = {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
@@ -117,42 +153,8 @@ const meta = {
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     harHentBrevOverstyringLenke: true,
   },
-  render: args => {
-    const [redigertHtml, setRedigertHtml] = useState<string | null>(null);
-
-    const mellomlagreBrevOverstyring = (redigert: string | null) => {
-      setRedigertHtml(redigert);
-      action('mellomlagre')(redigert);
-      return Promise.resolve();
-    };
-
-    return (
-      <VedtakEditeringProvider
-        behandling={args.behandling ?? defaultBehandling}
-        hentBrevOverstyring={
-          args.harHentBrevOverstyringLenke
-            ? () => {
-                return redigertHtml
-                  ? Promise.resolve({
-                      opprinneligHtml: args.brevOverstyring.opprinneligHtml,
-                      redigertHtml,
-                    })
-                  : Promise.resolve(args.brevOverstyring);
-              }
-            : undefined
-        }
-        hentBrevOverstyringIsPending={false}
-        mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
-      >
-        <VedtakProsessIndex {...args} />
-      </VedtakEditeringProvider>
-    );
-  },
-} satisfies Meta<
-  PanelDataArgs & { brevOverstyring: BrevOverstyring; harHentBrevOverstyringLenke?: boolean } & ComponentProps<
-      typeof VedtakProsessIndex
-    >
->;
+  render: args => <RenderVedtakProsessIndex {...args} />,
+} satisfies Meta<MetaArgs>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

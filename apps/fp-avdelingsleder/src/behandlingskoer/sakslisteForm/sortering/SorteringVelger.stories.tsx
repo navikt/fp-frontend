@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { RhfForm } from '@navikt/ft-form-hooks';
@@ -15,6 +16,32 @@ import messages from '../../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
+const RenderSorteringVelger = (args: ComponentProps<typeof SorteringVelger>) => {
+  const formMethods = useForm({
+    defaultValues: {
+      behandlingTyper: ['BT-002', 'BT-006'],
+      sortering: {
+        sorteringType: 'BEHFRIST',
+        fra: 2,
+        til: 3,
+        fomDato: '2020-01-10',
+        tomDato: '2020-10-01',
+        periodefilter: 'FAST_PERIODE',
+      },
+    },
+  });
+
+  const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+
+  return kodeverkLos ? (
+    <RhfForm formMethods={formMethods}>
+      <SorteringVelger {...args} />
+    </RhfForm>
+  ) : (
+    <LoadingPanel />
+  );
+};
+
 const meta = {
   title: 'los/avdelingsleder/behandlingskoer/SorteringVelger',
   component: SorteringVelger,
@@ -27,31 +54,7 @@ const meta = {
       ],
     },
   },
-  render: args => {
-    const formMethods = useForm({
-      defaultValues: {
-        behandlingTyper: ['BT-002', 'BT-006'],
-        sortering: {
-          sorteringType: 'BEHFRIST',
-          fra: 2,
-          til: 3,
-          fomDato: '2020-01-10',
-          tomDato: '2020-10-01',
-          periodefilter: 'FAST_PERIODE',
-        },
-      },
-    });
-
-    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
-
-    return kodeverkLos ? (
-      <RhfForm formMethods={formMethods}>
-        <SorteringVelger {...args} />
-      </RhfForm>
-    ) : (
-      <LoadingPanel />
-    );
-  },
+  render: args => <RenderSorteringVelger {...args} />,
 } satisfies Meta<typeof SorteringVelger>;
 export default meta;
 
@@ -67,6 +70,29 @@ export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
   },
 };
 
+const RenderSorteringsvelgerDynamiskPeriode = (args: ComponentProps<typeof SorteringVelger>) => {
+  const formMethods = useForm({
+    defaultValues: {
+      sortering: {
+        sorteringType: 'BEHFRIST',
+        fra: 2,
+        til: 3,
+        periodefilter: 'RELATIV_PERIODE_DAGER',
+      },
+    },
+  });
+
+  const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+
+  return kodeverkLos ? (
+    <RhfForm formMethods={formMethods}>
+      <SorteringVelger {...args} />
+    </RhfForm>
+  ) : (
+    <LoadingPanel />
+  );
+};
+
 export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
   args: {
     muligeSorteringer: [
@@ -74,28 +100,38 @@ export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
       { sorteringType: 'FORSTONAD', feltType: 'DATO' },
     ],
   },
-  render: args => {
-    const formMethods = useForm({
-      defaultValues: {
-        sortering: {
-          sorteringType: 'BEHFRIST',
-          fra: 2,
-          til: 3,
-          periodefilter: 'RELATIV_PERIODE_DAGER',
-        },
+  render: args => <RenderSorteringsvelgerDynamiskPeriode {...args} />,
+};
+
+const RenderSorteringsvelgerTilbakekreving = (args: ComponentProps<typeof SorteringVelger>) => {
+  const formMethods = useForm({
+    defaultValues: {
+      behandlingTyper: ['BT-007'],
+      sortering: {
+        sorteringType: 'BELOP',
+        periodefilter: 'RELATIV_PERIODE_DAGER',
+        fra: 0,
+        til: 1000,
       },
-    });
+    },
+  });
 
-    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+  const { data: kodeverkLos } = useQuery(losKodeverkOptions());
 
-    return kodeverkLos ? (
-      <RhfForm formMethods={formMethods}>
-        <SorteringVelger {...args} />
-      </RhfForm>
-    ) : (
-      <LoadingPanel />
-    );
-  },
+  return kodeverkLos ? (
+    <RhfForm formMethods={formMethods}>
+      <button
+        type="button"
+        data-testid="endre-behandlingstyper"
+        onClick={() => formMethods.setValue('behandlingTyper', ['BT-007', 'BT-003'])}
+      >
+        Knapp for å trigge endring av behandlingstyper
+      </button>
+      <SorteringVelger {...args} />
+    </RhfForm>
+  ) : (
+    <LoadingPanel />
+  );
 };
 
 export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
@@ -108,34 +144,5 @@ export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
       { sorteringType: 'FEILUTBETALINGSTART', feltType: 'DATO' },
     ],
   },
-  render: args => {
-    const formMethods = useForm({
-      defaultValues: {
-        behandlingTyper: ['BT-007'],
-        sortering: {
-          sorteringType: 'BELOP',
-          periodefilter: 'RELATIV_PERIODE_DAGER',
-          fra: 0,
-          til: 1000,
-        },
-      },
-    });
-
-    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
-
-    return kodeverkLos ? (
-      <RhfForm formMethods={formMethods}>
-        <button
-          type="button"
-          data-testid="endre-behandlingstyper"
-          onClick={() => formMethods.setValue('behandlingTyper', ['BT-007', 'BT-003'])}
-        >
-          Knapp for å trigge endring av behandlingstyper
-        </button>
-        <SorteringVelger {...args} />
-      </RhfForm>
-    ) : (
-      <LoadingPanel />
-    );
-  },
+  render: args => <RenderSorteringsvelgerTilbakekreving {...args} />,
 };

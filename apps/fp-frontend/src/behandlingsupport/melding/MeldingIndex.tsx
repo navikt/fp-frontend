@@ -53,7 +53,7 @@ export const MeldingIndex = ({
 }: Props) => {
   const intl = useIntl();
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
-  const [showMessagesModal, setShowMessageModal] = useState(false);
+  const [showMessageModal, setShowMessageModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -104,8 +104,8 @@ export const MeldingIndex = ({
 
   return (
     <>
-      {showMessagesModal && (
-        <MessagesModalSakIndex showModal={submitFinished && showMessagesModal} closeEvent={afterSubmit} />
+      {showMessageModal && (
+        <MessagesModalSakIndex showModal={submitFinished && showMessageModal} closeEvent={afterSubmit} />
       )}
 
       <SupportHeaderAndContent
