@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { Heading, Table } from '@navikt/ds-react';
 import { BeløpLabel } from '@navikt/ft-ui-komponenter';
-import { YYYY_MM_FORMAT } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
@@ -235,7 +234,6 @@ const getPeriod = (
 };
 
 const getRangeOfMonths = (fom: string, tom: string): { month: string; year: string }[] => {
-  dayjs.locale('nb');
   const fraMåned = dayjs(fom).startOf('month');
   const tilMåned = dayjs(tom).startOf('month');
   let currentMonth = fraMåned;
