@@ -16,7 +16,7 @@ const {
 
 const lagNyDato = (nyDato: string) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const backspace = [...new Array(10)].reduce(prev => `${prev}{backspace}`, '');
+  const backspace = Array.from({ length: 10 }).reduce(prev => `${prev}{backspace}`, '');
   return backspace + nyDato;
 };
 

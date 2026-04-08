@@ -7,7 +7,7 @@ import type { Location } from 'history';
 
 import { ErrorBoundary, useRestApiErrorDispatcher, useTrackRouteParam } from '@navikt/fp-app-felles';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
-import type { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
+import type { AnnenPartBehandling, Behandling, Fagsak } from '@navikt/fp-types';
 
 import {
   behandlingerRoutePath,
@@ -30,17 +30,41 @@ const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string
 const finnSkalIkkeHenteData = (location: Location, selectedSaksnummer?: string, behandlingUuid?: string) =>
   !selectedSaksnummer || erUrlUnderBehandling(location) || (erBehandlingValgt(location) && !behandlingUuid);
 
+const Visittkort = ({
+  fagsak,
+  erTilbakekreving,
+}: {
+  fagsak: Fagsak;
+  erTilbakekreving: boolean;
+}) => {
+  const intl = useIntl();
+  const { addErrorMessage } = useRestApiErrorDispatcher();
+
+  return (
+    <ErrorBoundary
+      errorMessageCallback={addErrorMessage}
+      errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Visittkort' })}
+    >
+      <VisittkortSakIndex
+        erMor={fagsak.relasjonsRolleType === 'MORA'}
+        bruker={fagsak.bruker}
+        annenPart={fagsak.annenPart}
+        familiehendelse={fagsak.familiehendelse}
+        harVergeIÅpenBehandling={fagsak.harVergeIÅpenBehandling}
+        erTilbakekreving={erTilbakekreving}
+        lenkeTilAnnenPart={fagsak.annenpartBehandling ? finnLenkeTilAnnenPart(fagsak.annenpartBehandling) : undefined}
+      />
+    </ErrorBoundary>
+  );
+};
+
 /**
  * FagsakIndex
  *
  * Er rot for for fagsakdelen av hovedvinduet, og har ansvar å legge valgt saksnummer fra URL-en i staten.
  */
 export const FagsakIndex = () => {
-  const intl = useIntl();
-
   const { isRequestPending } = useRequestPendingContext();
-
-  const { addErrorMessage } = useRestApiErrorDispatcher();
 
   const { selected: selectedSaksnummer } = useTrackRouteParam<string>({
     paramName: 'saksnummer',
@@ -131,26 +155,7 @@ export const FagsakIndex = () => {
           />
         }
         visittkortContent={
-          skalIkkeHenteData
-            ? () => null
-            : () => (
-                <ErrorBoundary
-                  errorMessageCallback={addErrorMessage}
-                  errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Visittkort' })}
-                >
-                  <VisittkortSakIndex
-                    erMor={fagsak.relasjonsRolleType === 'MORA'}
-                    bruker={fagsak.bruker}
-                    annenPart={fagsak.annenPart}
-                    familiehendelse={fagsak.familiehendelse}
-                    harVergeIÅpenBehandling={fagsak.harVergeIÅpenBehandling}
-                    erTilbakekreving={erTilbakekreving}
-                    lenkeTilAnnenPart={
-                      fagsak.annenpartBehandling ? finnLenkeTilAnnenPart(fagsak.annenpartBehandling) : undefined
-                    }
-                  />
-                </ErrorBoundary>
-              )
+          skalIkkeHenteData ? undefined : <Visittkort fagsak={fagsak} erTilbakekreving={erTilbakekreving} />
         }
       />
       {isRequestPending && <DataFetchPendingModal pendingMessage="" />}
