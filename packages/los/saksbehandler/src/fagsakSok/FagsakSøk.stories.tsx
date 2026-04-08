@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -12,6 +14,12 @@ import { FagsakSøk } from './FagsakSøk';
 import messages from '../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
+
+const RenderFagsakSøk = (props: ComponentProps<typeof FagsakSøk>) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const alleKodeverk = useQuery(losKodeverkOptions()).data;
+  return alleKodeverk ? <FagsakSøk {...props} /> : <LoadingPanel />;
+};
 
 const meta = {
   title: 'søk/FagsakSøk',
@@ -31,11 +39,7 @@ const meta = {
     selectOppgaveCallback: action('selectOppgaveCallback'),
     resetSearch: action('resetSearch'),
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const alleKodeverk = useQuery(losKodeverkOptions()).data;
-    return alleKodeverk ? <FagsakSøk {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderFagsakSøk {...props} />,
 } satisfies Meta<typeof FagsakSøk>;
 export default meta;
 

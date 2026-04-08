@@ -10,13 +10,13 @@ body {
 }
 
 .main-header {
-  color: rgb(153, 153, 153);
+  color: rgb(200, 200, 200);
   padding-top: 20px;
   text-align: center;
 }
 
 .header {
-  color: rgb(153, 153, 153);
+  color: rgb(200, 200, 200);
 }
 
 .grid-container {
@@ -27,14 +27,14 @@ body {
 
 .box {
   background-color: #444;
-  color: rgb(153, 153, 153);
+  color: rgb(200, 200, 200);
   border-radius: 5px;
   padding: 15px;
   font-size: 150%;
 }
 
 .package-row {
-  color: #666;
+  color: #aaa;
   display: flex;
   align-items: stretch;
   text-decoration: none;
@@ -46,7 +46,7 @@ body {
 }
 
 .package-row .title {
-  color: rgb(153, 153, 153);
+  color: rgb(200, 200, 200);
   border-top-left-radius: 5%;
   border-bottom-left-radius: 5%;
   font-weight: bold;

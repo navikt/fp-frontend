@@ -101,13 +101,15 @@ const getBehandlingTyper = (
   behandlingstyper: KodeverkMedNavn<'BehandlingType'>[],
 ): KodeverkMedNavn<'BehandlingType'>[] => [...behandlingstyper].sort((bt1, bt2) => bt1.navn.localeCompare(bt2.navn));
 
+const defaultKanTilbakekrevingOpprettes = {
+  kanBehandlingOpprettes: false,
+  kanRevurderingOpprettes: false,
+};
+
 const getEnabledBehandlingstyper = (
   behandlingstyper: KodeverkMedNavn<'BehandlingType'>[],
   behandlingOppretting: BehandlingOppretting[],
-  kanTilbakekrevingOpprettes = {
-    kanBehandlingOpprettes: false,
-    kanRevurderingOpprettes: false,
-  },
+  kanTilbakekrevingOpprettes = defaultKanTilbakekrevingOpprettes,
 ) =>
   behandlingstyper.filter(bt => {
     if (bt.kode === 'BT-007') {

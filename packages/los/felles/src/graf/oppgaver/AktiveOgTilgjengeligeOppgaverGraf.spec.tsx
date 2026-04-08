@@ -21,7 +21,7 @@ type ChartOption = {
 };
 
 const getChartOption = (chartElement: HTMLElement): ChartOption => {
-  const json = chartElement.getAttribute('data-option');
+  const json = chartElement.dataset['option'];
   return JSON.parse(json || '{}') as ChartOption;
 };
 
