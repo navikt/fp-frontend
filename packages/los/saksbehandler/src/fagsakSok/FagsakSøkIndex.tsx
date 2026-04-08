@@ -103,7 +103,11 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     if (oppgave.reservasjonStatus.erReservert && !oppgave.reservasjonStatus.erReservertAvInnloggetBruker) {
       setReservertOppgave(oppgave);
       setReservertAvAnnenSaksbehandler(true);
-    } else if (!skalReservere) {
+    } else if (skalReservere) {
+      void reserverOppgave(oppgave.id).then(data => {
+        goToFagsakEllerApneModal(oppgave, data);
+      });
+    } else {
       if (skalSjekkeOmReservert) {
         void hentReservasjonsstatus(oppgave.id).then(status => {
           goToFagsakEllerApneModal(oppgave, status);
@@ -111,10 +115,6 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
       } else {
         åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
       }
-    } else {
-      void reserverOppgave(oppgave.id).then(data => {
-        goToFagsakEllerApneModal(oppgave, data);
-      });
     }
   };
 

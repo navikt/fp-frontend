@@ -49,7 +49,7 @@ const harIkkeKonsekvenserForYtelsen = (
   if (!Array.isArray(konsekvenserForYtelsen) || konsekvenserForYtelsen.length !== 1) {
     return true;
   }
-  return !konsekvenserForYtelsenKoder.some(kode => kode === konsekvenserForYtelsen[0]);
+  return !konsekvenserForYtelsenKoder.includes(konsekvenserForYtelsen[0]!);
 };
 
 interface Props {
