@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -69,6 +71,15 @@ const ALLE_BEHANDLINGER = [
 
 const FAGSAK = lagFagsak({ saksnummer: '123', behandlinger: ALLE_BEHANDLINGER, brukerManglerAdresse: true });
 
+const RenderMeldingIndex = (props: ComponentProps<typeof MeldingIndex>) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const { status } = useQuery(initFetchOptions());
+  const { kodeverkOptions } = useFagsakApi();
+  const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
+
+  return kodeverk ? <MeldingIndex {...props} /> : <LoadingPanel />;
+};
+
 const meta = {
   title: 'fagsak/MeldingIndex',
   decorators: [withIntl, withRouter, withQueryClient],
@@ -96,14 +107,7 @@ const meta = {
       />
     ),
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const { status } = useQuery(initFetchOptions());
-    const { kodeverkOptions } = useFagsakApi();
-    const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
-
-    return kodeverk ? <MeldingIndex {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderMeldingIndex {...props} />,
 } satisfies Meta<typeof MeldingIndex>;
 export default meta;
 

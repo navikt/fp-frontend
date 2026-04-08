@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -115,6 +117,16 @@ const FAGSAK = lagFagsak({
   },
 });
 
+const RenderRisikoklassifiseringIndex = (props: ComponentProps<typeof RisikoklassifiseringIndex>) => {
+  //Må hente data til cache før testa komponent blir kalla
+  const { status } = useQuery(initFetchOptions());
+  const { kodeverkOptions, fptilbake } = useFagsakApi();
+  const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
+  const { data: kodeverkFpTilbake } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
+
+  return kodeverk && kodeverkFpTilbake ? <RisikoklassifiseringIndex {...props} /> : <LoadingPanel />;
+};
+
 const meta = {
   title: 'fagsak/RisikoklassifiseringIndex',
   decorators: [withIntl, withRouter, withQueryClient, withRequestPendingProvider],
@@ -134,15 +146,7 @@ const meta = {
   args: {
     setBehandling: action('button-click'),
   },
-  render: props => {
-    //Må hente data til cache før testa komponent blir kalla
-    const { status } = useQuery(initFetchOptions());
-    const { kodeverkOptions, fptilbake } = useFagsakApi();
-    const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
-    const { data: kodeverkFpTilbake } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
-
-    return kodeverk && kodeverkFpTilbake ? <RisikoklassifiseringIndex {...props} /> : <LoadingPanel />;
-  },
+  render: props => <RenderRisikoklassifiseringIndex {...props} />,
 } satisfies Meta<typeof RisikoklassifiseringIndex>;
 export default meta;
 

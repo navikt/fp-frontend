@@ -18,8 +18,8 @@
     "storybook": "storybook dev --quiet -p 7008"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.8.0",
-    "@navikt/ds-react": "8.8.0",
+    "@navikt/aksel-icons": "8.9.0",
+    "@navikt/ds-react": "8.9.0",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:^",
@@ -33,7 +33,7 @@
     "react-intl": "10.0.0"
   },
   "devDependencies": {
-    "@navikt/ds-css": "8.8.0",
+    "@navikt/ds-css": "8.9.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",

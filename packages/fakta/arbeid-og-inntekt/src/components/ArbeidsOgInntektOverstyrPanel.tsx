@@ -42,7 +42,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
   const [erLokaltOverstyrt, setErLokaltOverstyrt] = useState(false);
-  const [skalToggleVisningAvLeggTilArbeidsforhold, toggleVisningAvLeggTilArbeidsforhold] = useState(false);
+  const [skalToggleVisningAvLeggTilArbeidsforhold, setSkalToggleVisningAvLeggTilArbeidsforhold] = useState(false);
 
   const toggleOverstyring = () => {
     setErOverstyrt(true);
@@ -98,7 +98,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
                 size="small"
                 variant="tertiary"
                 icon={<PlusCircleIcon aria-hidden />}
-                onClick={() => toggleVisningAvLeggTilArbeidsforhold(true)}
+                onClick={() => setSkalToggleVisningAvLeggTilArbeidsforhold(true)}
               >
                 <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
               </Button>
@@ -110,7 +110,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
             behandlingVersjon={behandling.versjon}
             isReadOnly={false}
             registrerArbeidsforhold={registrerArbeidsforhold}
-            lukkArbeidsforholdRad={() => toggleVisningAvLeggTilArbeidsforhold(false)}
+            lukkArbeidsforholdRad={() => setSkalToggleVisningAvLeggTilArbeidsforhold(false)}
             oppdaterTabell={oppdaterTabell}
             erOverstyrt
             erNyttArbeidsforhold
