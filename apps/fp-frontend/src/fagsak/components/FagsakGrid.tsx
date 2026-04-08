@@ -9,7 +9,7 @@ interface Props {
   behandlingContent: ReactNode;
   profileAndNavigationContent: ReactNode;
   supportContent: ReactNode;
-  visittkortContent: () => ReactNode;
+  visittkortContent?: ReactNode;
   visSideMeny: boolean;
   toggleSideMeny: () => void;
 }
@@ -64,20 +64,20 @@ const VisittkortMedKnapp = ({
   visSideMeny,
   toggleSideMeny,
 }: {
-  visittkortContent: () => ReactNode;
+  visittkortContent?: ReactNode;
   visSideMeny: boolean;
   toggleSideMeny: () => void;
 }) => {
   const isWrappedUnder = useMediaQuery({ maxWidth: 1408 });
   if (visSideMeny || isWrappedUnder) {
-    return visittkortContent();
+    return visittkortContent;
   }
   return (
     <>
       <span className={styles['floatRight']}>
         <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />
       </span>
-      {visittkortContent()}
+      {visittkortContent}
     </>
   );
 };

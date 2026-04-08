@@ -175,9 +175,9 @@ export const TilretteleggingForm = ({
     const v = {
       ...lagreFormValues,
       overstyrtUtbetalingsgrad:
-        lagreFormValues.overstyrtUtbetalingsgrad !== prosentSvangerskapspenger
-          ? lagreFormValues.overstyrtUtbetalingsgrad
-          : undefined,
+        lagreFormValues.overstyrtUtbetalingsgrad === prosentSvangerskapspenger
+          ? undefined
+          : lagreFormValues.overstyrtUtbetalingsgrad,
       kilde,
     } as const;
     oppdaterTilrettelegging(v);

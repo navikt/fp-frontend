@@ -250,7 +250,7 @@ export const ArbeidsforholdetErOpprettetBasertPåIM: Story = {
       inntektsmeldinger: [
         {
           ...fellesInntektsmeldingFelter,
-          inntektPrMnd: 25500.0,
+          inntektPrMnd: 25500,
           arbeidsgiverIdent: '999999999',
           kontaktpersonNavn: 'Dolly Dollesen',
           kontaktpersonNummer: '99999999',
@@ -265,7 +265,7 @@ export const ArbeidsforholdetErOpprettetBasertPåIM: Story = {
           arbeidsgiverIdent: '999999999',
           fom: '2022-01-19',
           tom: '9999-12-31',
-          stillingsprosent: 100.0,
+          stillingsprosent: 100,
           saksbehandlersVurdering: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
           begrunnelse: 'Mottatt IM',
         },

@@ -1,5 +1,3 @@
-import type { ComponentProps } from 'react';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -86,16 +84,6 @@ const FAGSAK = lagFagsak({
   },
 });
 
-const RenderBehandlingSupportIndex = (props: ComponentProps<typeof BehandlingSupportIndex>) => {
-  //Må hente data til cache før testa komponent blir kalla
-  const { status } = useQuery(initFetchOptions());
-  const { kodeverkOptions, fptilbake } = useFagsakApi();
-  const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
-  const { data: kodeverkFpTilbake } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
-
-  return kodeverk && kodeverkFpTilbake ? <BehandlingSupportIndex {...props} /> : <LoadingPanel />;
-};
-
 const meta = {
   title: 'fagsak/BehandlingSupportIndex',
   decorators: [withIntl, withRouter, withQueryClient],
@@ -117,7 +105,15 @@ const meta = {
     toggleVisUtvidetBehandlingDetaljer: action('button-click'),
     visUtvidetBehandlingDetaljer: false,
   },
-  render: props => <RenderBehandlingSupportIndex {...props} />,
+  render: function Render(props) {
+    //Må hente data til cache før testa komponent blir kalla
+    const { status } = useQuery(initFetchOptions());
+    const { kodeverkOptions, fptilbake } = useFagsakApi();
+    const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
+    const { data: kodeverkFpTilbake } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
+
+    return kodeverk && kodeverkFpTilbake ? <BehandlingSupportIndex {...props} /> : <LoadingPanel />;
+  },
 } satisfies Meta<typeof BehandlingSupportIndex>;
 export default meta;
 

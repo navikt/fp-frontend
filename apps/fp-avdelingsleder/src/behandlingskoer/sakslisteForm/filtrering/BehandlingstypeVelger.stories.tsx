@@ -15,25 +15,6 @@ import messages from '../../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const RenderBehandlingstypeVelger = () => {
-  const formMethods = useForm({
-    defaultValues: {
-      behandlingTyper: ['BT-002'],
-    },
-  });
-
-  //Må hente data til cache før testa komponent blir kalla
-  const alleKodeverk = useQuery(losKodeverkOptions()).data;
-
-  return alleKodeverk ? (
-    <RhfForm formMethods={formMethods}>
-      <BehandlingstypeVelger />
-    </RhfForm>
-  ) : (
-    <LoadingPanel />
-  );
-};
-
 const meta = {
   title: 'los/avdelingsleder/behandlingskoer/BehandlingstypeVelger',
   component: BehandlingstypeVelger,
@@ -46,7 +27,24 @@ const meta = {
       ],
     },
   },
-  render: () => <RenderBehandlingstypeVelger />,
+  render: function Render() {
+    const formMethods = useForm({
+      defaultValues: {
+        behandlingTyper: ['BT-002'],
+      },
+    });
+
+    //Må hente data til cache før testa komponent blir kalla
+    const alleKodeverk = useQuery(losKodeverkOptions()).data;
+
+    return alleKodeverk ? (
+      <RhfForm formMethods={formMethods}>
+        <BehandlingstypeVelger />
+      </RhfForm>
+    ) : (
+      <LoadingPanel />
+    );
+  },
 } satisfies Meta<typeof BehandlingstypeVelger>;
 export default meta;
 

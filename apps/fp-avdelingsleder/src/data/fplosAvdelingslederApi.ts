@@ -262,12 +262,15 @@ export const slettSaksbehandler = (brukerIdent: string, avdelingEnhet: string) =
     })
     .json();
 
-export const saksbehandlgerSøk = (brukerIdent: string) =>
-  kyExtended
-    .post(LosUrl.SAKSBEHANDLER_SOK, {
-      json: { brukerIdent },
-    })
-    .json<SaksbehandlerDto | null>();
+export const saksbehandlerSøk = async (brukerIdent: string) => {
+  const response = await kyExtended.post(LosUrl.SAKSBEHANDLER_SOK, {
+    json: { brukerIdent },
+  });
+  if (response.status === 204) {
+    return undefined;
+  }
+  return response.json<SaksbehandlerDto>();
+};
 
 export const opprettNySaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended

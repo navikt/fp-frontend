@@ -5,7 +5,7 @@ import type { DecoratorFunction } from 'storybook/internal/types';
 import { alleKodeverk, lagFagsakBehandling, withRouter } from '@navikt/fp-storybook-utils';
 import type { SkjermlenkeType, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
-import { type ApData, TotrinnskontrollSakIndex } from './TotrinnskontrollSakIndex';
+import { TotrinnskontrollSakIndex } from './TotrinnskontrollSakIndex';
 
 const LOCATION = {
   key: '1',
@@ -44,7 +44,7 @@ const meta = {
   title: 'sak/sak-totrinnskontroll',
   component: TotrinnskontrollSakIndex,
   args: {
-    onSubmit: action('button-click') as (params: ApData) => Promise<void>,
+    onSubmit: action('button-click'),
     location: LOCATION,
     forhandsvisVedtaksbrev: action('button-click'),
     alleKodeverk: alleKodeverk,

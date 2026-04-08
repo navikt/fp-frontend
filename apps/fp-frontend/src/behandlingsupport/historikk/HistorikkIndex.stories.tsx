@@ -1,5 +1,3 @@
-import type { ComponentProps } from 'react';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -33,15 +31,6 @@ const getHref = (rel: string) =>
     ),
   );
 
-const RenderHistorikkIndex = (props: ComponentProps<typeof HistorikkIndex>) => {
-  //Må hente data til cache før testa komponent blir kalla
-  const { status } = useQuery(initFetchOptions());
-  const { kodeverkOptions } = useFagsakApi();
-  const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
-
-  return kodeverk ? <HistorikkIndex {...props} /> : <LoadingPanel />;
-};
-
 const meta = {
   title: 'fagsak/HistorikkIndex',
   decorators: [withIntl, withRouter, withQueryClient],
@@ -65,7 +54,14 @@ const meta = {
       />
     ),
   },
-  render: props => <RenderHistorikkIndex {...props} />,
+  render: function Render(props) {
+    //Må hente data til cache før testa komponent blir kalla
+    const { status } = useQuery(initFetchOptions());
+    const { kodeverkOptions } = useFagsakApi();
+    const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
+
+    return kodeverk ? <HistorikkIndex {...props} /> : <LoadingPanel />;
+  },
 } satisfies Meta<typeof HistorikkIndex>;
 export default meta;
 

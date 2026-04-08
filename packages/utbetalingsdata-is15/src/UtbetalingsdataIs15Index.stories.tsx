@@ -1,4 +1,4 @@
-import { type ComponentProps, useState } from 'react';
+import { useState } from 'react';
 
 import { VStack } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
@@ -8,23 +8,6 @@ import type { InfotrygdVedtak } from '@navikt/fp-types';
 
 import { UtbetalingsdataIs15Index } from './UtbetalingsdataIs15Index';
 
-const RenderUtbetalingsdataIs15Index = (storyArgs: ComponentProps<typeof UtbetalingsdataIs15Index>) => {
-  const [args, setArgs] = useState(storyArgs);
-
-  const søkInfotrygdVedtak = (params: { searchString: string }) => {
-    args.søkInfotrygdVedtak(params);
-    setArgs(oldArgs => ({ ...oldArgs, isSuccess: true }));
-    return Promise.resolve<InfotrygdVedtak | undefined>(args.infotrygdVedtak);
-  };
-
-  return (
-    <VStack gap="space-20">
-      <div style={{ color: 'var(--ax-bg-danger-soft)' }}>Gyldig fødselsnummer for testing: 07078518434</div>
-      <UtbetalingsdataIs15Index {...args} søkInfotrygdVedtak={søkInfotrygdVedtak} />
-    </VStack>
-  );
-};
-
 const meta = {
   title: 'utbetalingsdata/UtbetalingsdataIs15Index',
   component: UtbetalingsdataIs15Index,
@@ -33,7 +16,22 @@ const meta = {
     isSuccess: false,
     søkInfotrygdVedtak: action('button-click'),
   },
-  render: storyArgs => <RenderUtbetalingsdataIs15Index {...storyArgs} />,
+  render: function Render(storyArgs) {
+    const [args, setArgs] = useState(storyArgs);
+
+    const søkInfotrygdVedtak = (params: { searchString: string }) => {
+      args.søkInfotrygdVedtak(params);
+      setArgs(oldArgs => ({ ...oldArgs, isSuccess: true }));
+      return Promise.resolve<InfotrygdVedtak | undefined>(args.infotrygdVedtak);
+    };
+
+    return (
+      <VStack gap="space-20">
+        <div style={{ color: 'var(--ax-bg-danger-soft)' }}>Gyldig fødselsnummer for testing: 07078518434</div>
+        <UtbetalingsdataIs15Index {...args} søkInfotrygdVedtak={søkInfotrygdVedtak} />
+      </VStack>
+    );
+  },
 } satisfies Meta<typeof UtbetalingsdataIs15Index>;
 export default meta;
 

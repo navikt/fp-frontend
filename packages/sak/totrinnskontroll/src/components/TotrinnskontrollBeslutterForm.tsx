@@ -18,8 +18,8 @@ import type {
   TotrinnskontrollSkjermlenkeContextDtoFpTilbake,
   VurderÅrsak,
 } from '@navikt/fp-types';
+import { erTilbakekrevingBehandling } from '@navikt/fp-utils';
 
-import { erTilbakekrevingBehandling } from '../../../../utils/src/tilbakekrevingUtils';
 import {
   type AksjonspunktGodkjenningData,
   AksjonspunktGodkjenningFieldArray,
@@ -42,7 +42,7 @@ const harIkkeKonsekvenserForYtelsen = (
   if (!Array.isArray(konsekvenserForYtelsen) || konsekvenserForYtelsen.length !== 1) {
     return true;
   }
-  return !konsekvenserForYtelsenKoder.some(kode => kode === konsekvenserForYtelsen[0]);
+  return !konsekvenserForYtelsenKoder.includes(konsekvenserForYtelsen[0]!);
 };
 
 const finnArsaker = (vurderPaNyttArsaker: VurderÅrsak[]) =>
@@ -82,8 +82,7 @@ const buildInitialValues = (
   )[],
 ): FormValues => ({
   aksjonspunktGodkjenning: totrinnskontrollSkjermlenkeContext
-    .map(context => context.totrinnskontrollAksjonspunkter)
-    .flat()
+    .flatMap(context => context.totrinnskontrollAksjonspunkter)
     .map(ap => ({
       aksjonspunktKode: ap.aksjonspunktKode,
       totrinnskontrollGodkjent:

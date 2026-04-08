@@ -21,7 +21,7 @@ interface State {
 }
 
 export class ErrorBoundary extends Component<Props, State> {
-  static defaultProps = {
+  static readonly defaultProps = {
     showChild: false,
   };
 

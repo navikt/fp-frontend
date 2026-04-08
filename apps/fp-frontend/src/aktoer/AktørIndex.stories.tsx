@@ -52,23 +52,6 @@ const AKTØR_INFO = {
   person: PERSON,
 } satisfies Aktor;
 
-const RenderAktørIndex = () => {
-  //Må hente data til cache før testa komponent blir kalla
-  const { status } = useQuery(initFetchOptions());
-  const { kodeverkOptions } = useFagsakApi();
-  const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
-
-  return kodeverk ? (
-    <MemoryRouter initialEntries={[`/fagsak/352011079`]}>
-      <Routes>
-        <Route element={<AktørIndex />} path="/fagsak/:aktoerId" />
-      </Routes>
-    </MemoryRouter>
-  ) : (
-    <LoadingPanel />
-  );
-};
-
 const meta = {
   title: 'app/AktørIndex',
   decorators: [withQueryClient],
@@ -76,7 +59,22 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => <RenderAktørIndex />,
+  render: function Render() {
+    //Må hente data til cache før testa komponent blir kalla
+    const { status } = useQuery(initFetchOptions());
+    const { kodeverkOptions } = useFagsakApi();
+    const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
+
+    return kodeverk ? (
+      <MemoryRouter initialEntries={[`/fagsak/352011079`]}>
+        <Routes>
+          <Route element={<AktørIndex />} path="/fagsak/:aktoerId" />
+        </Routes>
+      </MemoryRouter>
+    ) : (
+      <LoadingPanel />
+    );
+  },
 } satisfies Meta<typeof AktørIndex>;
 export default meta;
 

@@ -21,7 +21,7 @@ const meta = {
     alleKodeverk: alleKodeverk,
     mottattDato: '2022-05-30',
   },
-  render: (args, { parameters: { submitCallback } }) => {
+  render: function Render(args, { parameters: { submitCallback } }) {
     const formMethods = useForm({
       defaultValues: OppholdINorgePapirsoknadIndex.initialValues(),
     });
