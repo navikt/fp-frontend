@@ -54,7 +54,7 @@ const getArsaker = (apData: AksjonspunktGodkjenningData): VurderÅrsak[] => {
 const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) =>
   'FaktaOmBeregningTilfelle' in alleKodeverk ? alleKodeverk['FaktaOmBeregningTilfelle'] : [];
 
-export type ApData = {
+type ApData = {
   fatterVedtakAksjonspunktDto: {
     '@type': AksjonspunktKode.FATTER_VEDTAK | '5005';
   } & FatterVedtakAp;
