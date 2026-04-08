@@ -107,14 +107,12 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
       void reserverOppgave(oppgave.id).then(data => {
         goToFagsakEllerApneModal(oppgave, data);
       });
+    } else if (skalSjekkeOmReservert) {
+      void hentReservasjonsstatus(oppgave.id).then(status => {
+        goToFagsakEllerApneModal(oppgave, status);
+      });
     } else {
-      if (skalSjekkeOmReservert) {
-        void hentReservasjonsstatus(oppgave.id).then(status => {
-          goToFagsakEllerApneModal(oppgave, status);
-        });
-      } else {
-        åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
-      }
+      åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
     }
   };
 
