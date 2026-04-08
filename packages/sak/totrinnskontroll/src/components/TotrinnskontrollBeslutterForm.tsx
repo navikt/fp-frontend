@@ -18,8 +18,8 @@ import type {
   TotrinnskontrollSkjermlenkeContextDtoFpTilbake,
   VurderÅrsak,
 } from '@navikt/fp-types';
-
 import { erTilbakekrevingBehandling } from '@navikt/fp-utils';
+
 import {
   type AksjonspunktGodkjenningData,
   AksjonspunktGodkjenningFieldArray,
