@@ -5,7 +5,7 @@ import type { DecoratorFunction } from 'storybook/internal/types';
 import { alleKodeverk, lagFagsakBehandling, withRouter } from '@navikt/fp-storybook-utils';
 import type { SkjermlenkeType, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
-import { type ApData, TotrinnskontrollSakIndex } from './TotrinnskontrollSakIndex';
+import { TotrinnskontrollSakIndex } from './TotrinnskontrollSakIndex';
 
 const LOCATION = {
   key: '1',
