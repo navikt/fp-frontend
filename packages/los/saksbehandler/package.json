@@ -26,13 +26,13 @@
     "@navikt/ft-form-validators": "4.4.26",
     "@navikt/ft-ui-komponenter": "6.8.15",
     "@navikt/ft-utils": "3.11.13",
-    "@tanstack/react-query": "5.90.21",
+    "@tanstack/react-query": "5.96.0",
     "dayjs": "1.11.20",
     "ky": "1.14.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "react-hook-form": "7.71.2",
-    "react-intl": "10.0.0"
+    "react-hook-form": "7.72.0",
+    "react-intl": "10.1.1"
   },
   "devDependencies": {
     "@navikt/ds-css": "8.9.0",
@@ -40,18 +40,18 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
-    "@storybook/react": "10.2.19",
-    "@storybook/react-vite": "10.2.19",
+    "@storybook/react": "10.3.3",
+    "@storybook/react-vite": "10.3.3",
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "eslint": "9.39.4",
-    "msw": "2.12.13",
+    "msw": "2.12.14",
     "msw-storybook-addon": "2.0.6",
-    "storybook": "10.2.19",
-    "stylelint": "17.4.0",
+    "storybook": "10.3.3",
+    "stylelint": "17.6.0",
     "typescript": "5.9.3",
     "vite": "8.0.5",
-    "vitest": "4.1.0"
+    "vitest": "4.1.2"
   }
 }
