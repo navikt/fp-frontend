@@ -96,7 +96,7 @@ const lagAndelPrId = (
   identifikator: lagIdentifikator(ferieAndel),
   visningsnavn: lagVisningsnavn(ferieAndel, arbeidsgiverOpplysningerPerId, alleKodeverk),
   utbetaltTilSøker: ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0,
-  utbetaltIRefusjon: !ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0,
+  utbetaltIRefusjon: ferieAndel.erBrukerMottaker ? 0 : ferieAndel.årsbeløp,
 });
 
 const lagAndelerPrIdMap = (
@@ -107,7 +107,7 @@ const lagAndelerPrIdMap = (
   const listeMedAndelerPrId = new Array<AndelerPrId>();
   for (const ferieAndel of andeler) {
     const andelTilSøker = ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0;
-    const andelTilRefusjon = !ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0;
+    const andelTilRefusjon = ferieAndel.erBrukerMottaker ? 0 : ferieAndel.årsbeløp;
     const id = lagIdentifikator(ferieAndel);
     const eksisterendeAndelPrId = listeMedAndelerPrId.find(andel => andel.identifikator === id);
     if (eksisterendeAndelPrId) {

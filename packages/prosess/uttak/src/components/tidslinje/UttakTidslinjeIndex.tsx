@@ -141,7 +141,7 @@ export const UttakTidslinjeIndex = ({
   return (
     <UttakTidslinje
       tidslinjeTider={tidslinjeTider}
-      selectedPeriod={valgtPeriodeIndex !== undefined ? alleUttaksperioderMedId[valgtPeriodeIndex] : undefined}
+      selectedPeriod={valgtPeriodeIndex === undefined ? undefined : alleUttaksperioderMedId[valgtPeriodeIndex]}
       uttakPerioder={alleUttaksperioderMedId}
       tilknyttetStortinget={tilknyttetStortinget}
       setValgtPeriodeIndex={setValgtPeriodeIndex}
