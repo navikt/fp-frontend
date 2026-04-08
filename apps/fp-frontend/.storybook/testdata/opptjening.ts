@@ -32,7 +32,7 @@ export const opptjening: Opptjening = {
       opptjeningTom: '9999-12-31',
       arbeidsgiverReferanse: '992257822',
       arbeidsforholdRef: 'c33a8ee0-84cb-4705-a249-40cf52b51b48',
-      stillingsandel: 75.0,
+      stillingsandel: 75,
 
       erGodkjent: true,
       erEndret: false,

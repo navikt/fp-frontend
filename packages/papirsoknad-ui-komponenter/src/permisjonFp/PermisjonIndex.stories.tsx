@@ -20,7 +20,7 @@ const meta = {
     readOnly: false,
     alleKodeverk: alleKodeverk,
   },
-  render: (args, { parameters: { submitCallback } }) => {
+  render: function Render(args, { parameters: { submitCallback } }) {
     const formMethods = useForm({
       defaultValues: PermisjonIndex.initialValues(),
     });

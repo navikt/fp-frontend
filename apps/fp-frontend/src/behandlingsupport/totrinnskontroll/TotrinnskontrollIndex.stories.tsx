@@ -1,5 +1,3 @@
-import type { ComponentProps } from 'react';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -128,15 +126,6 @@ const FAGSAK = lagFagsak({
   },
 });
 
-const RenderTotrinnskontrollIndex = (props: ComponentProps<typeof TotrinnskontrollIndex>) => {
-  //Må hente data til cache før testa komponent blir kalla
-  const { status } = useQuery(initFetchOptions());
-  const { kodeverkOptions } = useFagsakApi();
-  const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
-
-  return kodeverk ? <TotrinnskontrollIndex {...props} /> : <LoadingPanel />;
-};
-
 const meta = {
   title: 'fagsak/TotrinnskontrollIndex',
   decorators: [withIntl, withRouter, withQueryClient],
@@ -163,7 +152,14 @@ const meta = {
       />
     ),
   },
-  render: props => <RenderTotrinnskontrollIndex {...props} />,
+  render: function Render(props) {
+    //Må hente data til cache før testa komponent blir kalla
+    const { status } = useQuery(initFetchOptions());
+    const { kodeverkOptions } = useFagsakApi();
+    const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
+
+    return kodeverk ? <TotrinnskontrollIndex {...props} /> : <LoadingPanel />;
+  },
 } satisfies Meta<typeof TotrinnskontrollIndex>;
 export default meta;
 

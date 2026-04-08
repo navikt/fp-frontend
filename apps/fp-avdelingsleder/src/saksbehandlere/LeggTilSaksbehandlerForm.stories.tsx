@@ -60,7 +60,7 @@ export const SaksbehandlerFinnesIkke: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.post(encodeURI(LosUrl.SAKSBEHANDLER_SOK), () => new HttpResponse(null, { status: 200 })),
+        http.post(encodeURI(LosUrl.SAKSBEHANDLER_SOK), () => new HttpResponse(null, { status: 204 })),
         http.post(LosUrl.OPPRETT_NY_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
       ],
     },

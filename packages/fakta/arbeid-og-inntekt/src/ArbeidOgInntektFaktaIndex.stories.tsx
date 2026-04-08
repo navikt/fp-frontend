@@ -1042,7 +1042,7 @@ export const FoerRegisterinnhenting: Story = {
       inntektsmeldinger: [
         {
           ...fellesInntektsmeldingFelter,
-          inntektPrMnd: 40000.0,
+          inntektPrMnd: 40000,
 
           arbeidsgiverIdent: '947064649',
 
@@ -1082,7 +1082,7 @@ export const AutomatiskIgnorertInntektsmelding: Story = {
           eksternArbeidsforholdId: '2',
           fom: '2002-02-16',
           tom: '9999-12-31',
-          stillingsprosent: 20.0,
+          stillingsprosent: 20,
         },
       ],
       inntekter: [],
@@ -1119,7 +1119,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
       inntektsmeldinger: [
         {
           ...fellesInntektsmeldingFelter,
-          inntektPrMnd: 20000.0,
+          inntektPrMnd: 20000,
 
           arbeidsgiverIdent: '972674818',
 
@@ -1141,7 +1141,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
           eksternArbeidsforholdId: '2',
           fom: '2018-10-01',
           tom: '9999-12-31',
-          stillingsprosent: 50.0,
+          stillingsprosent: 50,
           årsak: 'MANGLENDE_INNTEKTSMELDING',
           saksbehandlersVurdering: 'FORTSETT_UTEN_INNTEKTSMELDING',
           begrunnelse: 'her trenger jeg ikke IM. ja ja',
@@ -1160,7 +1160,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
           arbeidsgiverIdent: '947064649',
           inntekter: [
             {
-              beløp: 15000.0,
+              beløp: 15000,
               fom: '2021-10-01',
               tom: '2021-02-28',
               type: 'LØNN',
@@ -1171,7 +1171,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
           arbeidsgiverIdent: '972674818',
           inntekter: [
             {
-              beløp: 20000.0,
+              beløp: 20000,
               fom: '2021-10-01',
               tom: '2021-02-28',
               type: 'LØNN',

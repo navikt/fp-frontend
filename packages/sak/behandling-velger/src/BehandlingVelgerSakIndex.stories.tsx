@@ -1,4 +1,4 @@
-import { type ComponentProps,useState } from 'react';
+import { useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
@@ -8,29 +8,6 @@ import { alleKodeverk, alleKodeverkTilbakekreving, lagFagsakBehandling } from '@
 import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const RenderBehandlingVelgerSakIndex = (storyArgs: ComponentProps<typeof BehandlingVelgerSakIndex>) => {
-  const [args, setArgs] = useState(storyArgs);
-
-  const toggleVisAlleBehandlinger = () => {
-    args.toggleVisAlleBehandlinger();
-    setArgs(oldArgs => ({ ...oldArgs, skalViseAlleBehandlinger: !oldArgs.skalViseAlleBehandlinger }));
-  };
-
-  return (
-    <div style={{ width: '600px' }}>
-      <BehandlingVelgerSakIndex
-        {...args}
-        toggleVisAlleBehandlinger={toggleVisAlleBehandlinger}
-        renderRadSomLenke={(className, behandlingInfoKomponent) => (
-          <button type="button" className={className} onClick={toggleVisAlleBehandlinger}>
-            {behandlingInfoKomponent}
-          </button>
-        )}
-      />
-    </div>
-  );
-};
 
 const meta = {
   title: 'sak/sak-behandling-velger',
@@ -43,7 +20,28 @@ const meta = {
     alleKodeverk: alleKodeverk,
     alleKodeverkTilbakekreving: alleKodeverkTilbakekreving,
   },
-  render: storyArgs => <RenderBehandlingVelgerSakIndex {...storyArgs} />,
+  render: function Render(storyArgs) {
+    const [args, setArgs] = useState(storyArgs);
+
+    const toggleVisAlleBehandlinger = () => {
+      args.toggleVisAlleBehandlinger();
+      setArgs(oldArgs => ({ ...oldArgs, skalViseAlleBehandlinger: !oldArgs.skalViseAlleBehandlinger }));
+    };
+
+    return (
+      <div style={{ width: '600px' }}>
+        <BehandlingVelgerSakIndex
+          {...args}
+          toggleVisAlleBehandlinger={toggleVisAlleBehandlinger}
+          renderRadSomLenke={(className, behandlingInfoKomponent) => (
+            <button type="button" className={className} onClick={toggleVisAlleBehandlinger}>
+              {behandlingInfoKomponent}
+            </button>
+          )}
+        />
+      </div>
+    );
+  },
 } satisfies Meta<typeof BehandlingVelgerSakIndex>;
 export default meta;
 

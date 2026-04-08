@@ -57,8 +57,7 @@ export const SimuleringPanel = ({
 
   const [showDetails, setShowDetails] = useState<Details[]>([]);
 
-  const hasOpenTilbakekrevingsbehandling =
-    tilbakekrevingvalg !== undefined && tilbakekrevingvalg.videreBehandling === 'TILBAKEKR_OPPDATER';
+  const hasOpenTilbakekrevingsbehandling = tilbakekrevingvalg?.videreBehandling === 'TILBAKEKR_OPPDATER';
 
   const toggleDetaljer = hentToggleDetaljer(showDetails, setShowDetails);
 

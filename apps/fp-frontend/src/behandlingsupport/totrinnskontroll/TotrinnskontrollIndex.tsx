@@ -45,7 +45,7 @@ export const TotrinnskontrollIndex = ({
 }: Props) => {
   const intl = useIntl();
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
-  const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
+  const [erAlleAksjonspunktGodkjent, setErAlleAksjonspunktGodkjent] = useState(false);
 
   const valgtBehandling = notEmpty(fagsakData.getBehandling(valgtBehandlingUuid));
 
@@ -79,7 +79,7 @@ export const TotrinnskontrollIndex = ({
       behandlingVersjon: valgtBehandling.versjon,
       bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
     };
-    setAlleAksjonspunktTilGodkjent(totrinnskontrollData.erAlleAksjonspunktGodkjent);
+    setErAlleAksjonspunktGodkjent(totrinnskontrollData.erAlleAksjonspunktGodkjent);
     setVisBeslutterModal(true);
     godkjennTotrinnsaksjonspunkter(params);
   };

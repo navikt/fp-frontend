@@ -67,7 +67,7 @@ export const ArbeidOgInntektFaktaPanel = ({
   );
 
   const toggleÅpenRad = (index: number) => {
-    if (åpneRadIndexer.some(radIndex => radIndex === index)) {
+    if (åpneRadIndexer.includes(index)) {
       setÅpneRadIndexer(åpneRadIndexer.filter(i => i !== index));
     } else {
       setÅpneRadIndexer(åpneRadIndexer.concat(index));

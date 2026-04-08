@@ -1,5 +1,3 @@
-import type { ComponentProps } from 'react';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -50,12 +48,6 @@ const saksliste1: SakslisteDto = {
   },
 };
 
-const RenderSakslisteVelgerForm = (props: ComponentProps<typeof SakslisteVelgerForm>) => {
-  //Må hente data til cache før testa komponent blir kalla
-  const alleKodeverk = useQuery(losKodeverkOptions()).data;
-  return alleKodeverk ? <SakslisteVelgerForm {...props} /> : <LoadingPanel />;
-};
-
 const meta = {
   title: 'behandlingskoer/SakslisteVelgerForm',
   component: SakslisteVelgerForm,
@@ -70,7 +62,11 @@ const meta = {
     setValgtSakslisteId: action('setValgtSakslisteId'),
     fetchAntallOppgaver: action('fetchAntallOppgaver'),
   },
-  render: props => <RenderSakslisteVelgerForm {...props} />,
+  render: function Render(props) {
+    //Må hente data til cache før testa komponent blir kalla
+    const alleKodeverk = useQuery(losKodeverkOptions()).data;
+    return alleKodeverk ? <SakslisteVelgerForm {...props} /> : <LoadingPanel />;
+  },
 } satisfies Meta<typeof SakslisteVelgerForm>;
 export default meta;
 

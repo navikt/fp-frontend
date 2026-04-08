@@ -1,5 +1,3 @@
-import type { ComponentProps } from 'react';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -38,11 +36,6 @@ const lagHandlersMedSakslister = (initialSakslister: SakslisteDto[]) => {
   ];
 };
 
-const RenderEndreSakslisterPanel = (args: ComponentProps<typeof EndreSakslisterPanel>) => {
-  const { data: kodeverkLos } = useQuery(losKodeverkOptions());
-  return kodeverkLos ? <EndreSakslisterPanel {...args} /> : <LoadingPanel />;
-};
-
 const meta = {
   component: EndreSakslisterPanel,
   decorators: [withIntl, withQueryClient],
@@ -56,7 +49,10 @@ const meta = {
       },
     ],
   },
-  render: args => <RenderEndreSakslisterPanel {...args} />,
+  render: function Render(args) {
+    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+    return kodeverkLos ? <EndreSakslisterPanel {...args} /> : <LoadingPanel />;
+  },
 } satisfies Meta<typeof EndreSakslisterPanel>;
 export default meta;
 

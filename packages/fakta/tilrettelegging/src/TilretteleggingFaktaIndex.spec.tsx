@@ -15,8 +15,7 @@ const {
 } = composeStories(stories);
 
 const lagNyDato = (nyDato: string) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const backspace = [...Array(10)].reduce(prev => `${prev}{backspace}`, '');
+  const backspace = Array.from({ length: 10 }).reduce<string>((prev) => `${prev}{backspace}`, '');
   return backspace + nyDato;
 };
 

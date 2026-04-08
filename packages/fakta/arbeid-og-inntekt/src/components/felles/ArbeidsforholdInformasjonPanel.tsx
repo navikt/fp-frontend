@@ -27,14 +27,14 @@ interface Props {
 }
 
 export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt, alleKodeverk, radData }: Props) => {
-  const [visAlleMåneder, setVisAlleMånader] = useState(false);
+  const [visAlleMåneder, setVisAlleMåneder] = useState(false);
 
   const { inntektsposter, arbeidsforholdForRad } = radData;
   const sorterteInntektsposter = behandleInntektsposter(skjæringstidspunkt, inntektsposter);
 
   const harEttArbeidsforhold = arbeidsforholdForRad.length === 1;
 
-  const visInntektsposter = inntektsposter.length > 0 && inntektsposter.some(i => i.beløp > 0);
+  const visInntektsposter = inntektsposter.some(i => i.beløp > 0);
 
   return (
     <VStack gap="space-32">
@@ -69,7 +69,7 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
           <Link
             onClick={e => {
               e.preventDefault();
-              setVisAlleMånader(!visAlleMåneder);
+              setVisAlleMåneder(!visAlleMåneder);
             }}
             href=""
           >

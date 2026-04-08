@@ -122,24 +122,6 @@ const fagsakFpTilbake = {
   behandlinger: [],
 };
 
-const RenderFagsakIndex = () => {
-  //Må hente data til cache før testa komponent blir kalla
-  const { status } = useQuery(initFetchOptions());
-  const { kodeverkOptions, fptilbake } = useFagsakApi();
-  const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
-  const { data: kodeverkFpTilbake } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
-
-  return kodeverk && kodeverkFpTilbake ? (
-    <MemoryRouter initialEntries={['/fagsak/352018689/']}>
-      <Routes>
-        <Route element={<FagsakIndex />} path="/fagsak/:saksnummer/*" />
-      </Routes>
-    </MemoryRouter>
-  ) : (
-    <LoadingPanel />
-  );
-};
-
 const meta = {
   title: 'fagsak/FagsakIndex',
   decorators: [withIntl, withQueryClient, withRequestPendingProvider],
@@ -158,7 +140,23 @@ const meta = {
       ],
     },
   },
-  render: () => <RenderFagsakIndex />,
+  render: function Render() {
+    //Må hente data til cache før testa komponent blir kalla
+    const { status } = useQuery(initFetchOptions());
+    const { kodeverkOptions, fptilbake } = useFagsakApi();
+    const { data: kodeverk } = useQuery(kodeverkOptions(status === 'success'));
+    const { data: kodeverkFpTilbake } = useQuery(fptilbake.kodeverkOptions(status === 'success'));
+
+    return kodeverk && kodeverkFpTilbake ? (
+      <MemoryRouter initialEntries={['/fagsak/352018689/']}>
+        <Routes>
+          <Route element={<FagsakIndex />} path="/fagsak/:saksnummer/*" />
+        </Routes>
+      </MemoryRouter>
+    ) : (
+      <LoadingPanel />
+    );
+  },
 } satisfies Meta<typeof FagsakIndex>;
 export default meta;
 

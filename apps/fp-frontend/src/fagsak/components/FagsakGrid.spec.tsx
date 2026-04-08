@@ -9,7 +9,7 @@ describe('FagsakGrid', () => {
         behandlingContent={<div>behandlingContent</div>}
         profileAndNavigationContent={<div>profileContent</div>}
         supportContent={<div>supportContent</div>}
-        visittkortContent={() => <div>visittkort</div>}
+        visittkortContent={<div>visittkort</div>}
         visSideMeny
         toggleSideMeny={() => {}}
       />,

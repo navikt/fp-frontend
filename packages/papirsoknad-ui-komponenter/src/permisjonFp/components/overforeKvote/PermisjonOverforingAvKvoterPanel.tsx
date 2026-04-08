@@ -30,13 +30,13 @@ const mapArsaker = (
   arsaker
     .filter(({ kode }) => erEndringssøknad || (kode !== 'ALENEOMSORG' && kode !== 'IKKE_RETT_ANNEN_FORELDER'))
     .map(({ kode, navn }) =>
-      !søkerErMor ? (
+      søkerErMor ? (
         <option value={kode} key={kode}>
-          {getText(intl, kode, navn)}
+          {navn}
         </option>
       ) : (
         <option value={kode} key={kode}>
-          {navn}
+          {getText(intl, kode, navn)}
         </option>
       ),
     );

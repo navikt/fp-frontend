@@ -2,8 +2,8 @@ import type { Inntektsmelding } from '@navikt/fp-types';
 
 export const alleInntektsmeldinger: Inntektsmelding[] = [
   {
-    inntektPrMnd: 20000.0,
-    refusjonPrMnd: 41666.0,
+    inntektPrMnd: 20000,
+    refusjonPrMnd: 41666,
     arbeidsgiverIdent: '992257822',
 
     internArbeidsforholdId: 'c33a8ee0-84cb-4705-a249-40cf52b51b48',

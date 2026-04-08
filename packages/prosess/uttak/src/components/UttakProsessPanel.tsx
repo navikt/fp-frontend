@@ -75,10 +75,10 @@ const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspu
   }
 
   if (aksjonspunkter.length === 1 && aksjonspunkter[0]?.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER) {
-    if (aksjonspunkter[0].status !== 'UTFO') {
-      aksjonspunktTekster.push(<FormattedMessage key="aksjonspunktTekst" id="UttakPanel.Overstyrt.KontrollerPaNytt" />);
-    } else {
+    if (aksjonspunkter[0].status === 'UTFO') {
       aksjonspunktTekster.push(<FormattedMessage key="aksjonspunktTekst" id="UttakPanel.Overstyrt.Utfort" />);
+    } else {
+      aksjonspunktTekster.push(<FormattedMessage key="aksjonspunktTekst" id="UttakPanel.Overstyrt.KontrollerPaNytt" />);
     }
   }
 
@@ -259,7 +259,7 @@ export const UttakProsessPanel = ({
 
   const oppdaterPeriode = (oppdatertePerioder: PeriodeSoker[]) => {
     const andrePerioder = perioder.filter(p => p.fom !== oppdatertePerioder[0]?.fom);
-    const nyePerioder = [...andrePerioder.concat(oppdatertePerioder)].sort(sortByDate);
+    const nyePerioder = andrePerioder.concat(oppdatertePerioder).sort(sortByDate);
     setPerioder(nyePerioder);
     setIsDirty(true);
 

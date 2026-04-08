@@ -40,7 +40,7 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
 ): { prosentArbeidText: string; arbeidsforhold: string } => {
   const { prosentArbeid, arbeidsgiverReferanse, eksternArbeidsforholdId, uttakArbeidType } = aktivitet;
 
-  const prosentArbeidText = typeof prosentArbeid !== 'undefined' ? `${prosentArbeid}%` : '';
+  const prosentArbeidText = prosentArbeid !== undefined ? `${prosentArbeid}%` : '';
   let arbeidsforhold;
   if (uttakArbeidType && uttakArbeidType !== 'ORDINÆRT_ARBEID') {
     arbeidsforhold = intl.formatMessage({ id: uttakArbeidTypeTekstCodes[uttakArbeidType] });

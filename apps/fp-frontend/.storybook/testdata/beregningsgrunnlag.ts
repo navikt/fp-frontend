@@ -18,9 +18,9 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
     {
       beregningsgrunnlagPeriodeFom: '2025-02-12',
       beregningsgrunnlagPeriodeTom: '9999-12-31',
-      beregnetPrAar: 360000.0,
-      bruttoPrAar: 360000.0,
-      bruttoInkludertBortfaltNaturalytelsePrAar: 360000.0,
+      beregnetPrAar: 360000,
+      bruttoPrAar: 360000,
+      bruttoInkludertBortfaltNaturalytelsePrAar: 360000,
       periodeAarsaker: [],
       beregningsgrunnlagPrStatusOgAndel: [
         {
@@ -28,8 +28,8 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
           aktivitetStatus: 'AT',
           beregningsperiodeFom: '2024-11-01',
           beregningsperiodeTom: '2025-01-31',
-          beregnetPrAar: 240000.0,
-          bruttoPrAar: 240000.0,
+          beregnetPrAar: 240000,
+          bruttoPrAar: 240000,
           andelsnr: 2,
           inntektskategori: 'ARBEIDSTAKER',
           arbeidsforhold: {
@@ -37,7 +37,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
             startdato: '2024-03-05',
             arbeidsforholdId: 'c33a8ee0-84cb-4705-a249-40cf52b51b48',
             arbeidsforholdType: 'ARBEID',
-            belopFraInntektsmeldingPrMnd: 20000.0,
+            belopFraInntektsmeldingPrMnd: 20000,
           },
           lagtTilAvSaksbehandler: false,
           erTilkommetAndel: false,
@@ -48,8 +48,8 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
           aktivitetStatus: 'FL',
           beregningsperiodeFom: '2024-11-01',
           beregningsperiodeTom: '2025-01-31',
-          beregnetPrAar: 120000.0,
-          bruttoPrAar: 120000.0,
+          beregnetPrAar: 120000,
+          bruttoPrAar: 120000,
           andelsnr: 1,
           inntektskategori: 'FRILANSER',
           arbeidsforhold: {
@@ -66,14 +66,14 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
     {
       sammenligningsgrunnlagFom: '2024-02-01',
       sammenligningsgrunnlagTom: '2025-01-31',
-      rapportertPrAar: 560000.0,
+      rapportertPrAar: 560000,
       avvikPromille: 357.1428571,
       avvikProsent: 35.71428571,
       sammenligningsgrunnlagType: 'SAMMENLIGNING_AT_FL',
-      differanseBeregnet: -200000.0,
+      differanseBeregnet: -200000,
     },
   ],
-  grunnbeløp: 124028.0,
+  grunnbeløp: 124028,
   faktaOmBeregning: {
     avklarAktiviteter: {
       aktiviteterTomDatoMapping: [
@@ -99,8 +99,8 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
     },
     andelerForFaktaOmBeregning: [
       {
-        belopReadOnly: 10000.0,
-        fastsattBelop: 10000.0,
+        belopReadOnly: 10000,
+        fastsattBelop: 10000,
         inntektskategori: 'FRILANSER',
         aktivitetStatus: 'FL',
         arbeidsforhold: {
@@ -111,17 +111,17 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         lagtTilAvSaksbehandler: false,
       },
       {
-        belopReadOnly: 20000.0,
-        fastsattBelop: 20000.0,
+        belopReadOnly: 20000,
+        fastsattBelop: 20000,
         inntektskategori: 'ARBEIDSTAKER',
         aktivitetStatus: 'AT',
-        refusjonskrav: 41666.0,
+        refusjonskrav: 41666,
         arbeidsforhold: {
           arbeidsgiverIdent: '992257822',
           startdato: '2024-03-05',
           arbeidsforholdId: 'c33a8ee0-84cb-4705-a249-40cf52b51b48',
           arbeidsforholdType: 'ARBEID',
-          belopFraInntektsmeldingPrMnd: 20000.0,
+          belopFraInntektsmeldingPrMnd: 20000,
         },
         andelsnr: 2,
         skalKunneEndreAktivitet: false,
@@ -177,11 +177,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'ARBEIDSTAKERINNTEKT',
-            beløp: 40000.0,
+            beløp: 40000,
           },
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },
@@ -191,11 +191,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'ARBEIDSTAKERINNTEKT',
-            beløp: 40000.0,
+            beløp: 40000,
           },
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },
@@ -205,11 +205,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'ARBEIDSTAKERINNTEKT',
-            beløp: 40000.0,
+            beløp: 40000,
           },
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },
@@ -219,11 +219,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'ARBEIDSTAKERINNTEKT',
-            beløp: 40000.0,
+            beløp: 40000,
           },
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },
@@ -233,11 +233,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'ARBEIDSTAKERINNTEKT',
-            beløp: 40000.0,
+            beløp: 40000,
           },
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },
@@ -247,11 +247,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'ARBEIDSTAKERINNTEKT',
-            beløp: 40000.0,
+            beløp: 40000,
           },
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },
@@ -261,11 +261,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'ARBEIDSTAKERINNTEKT',
-            beløp: 40000.0,
+            beløp: 40000,
           },
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },
@@ -275,11 +275,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'ARBEIDSTAKERINNTEKT',
-            beløp: 40000.0,
+            beløp: 40000,
           },
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },
@@ -289,11 +289,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'ARBEIDSTAKERINNTEKT',
-            beløp: 40000.0,
+            beløp: 40000,
           },
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },
@@ -303,11 +303,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'ARBEIDSTAKERINNTEKT',
-            beløp: 40000.0,
+            beløp: 40000,
           },
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },
@@ -317,11 +317,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'ARBEIDSTAKERINNTEKT',
-            beløp: 40000.0,
+            beløp: 40000,
           },
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },
@@ -331,7 +331,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         inntekter: [
           {
             inntektAktivitetType: 'FRILANSINNTEKT',
-            beløp: 10000.0,
+            beløp: 10000,
           },
         ],
       },

@@ -1,5 +1,3 @@
-import type { ComponentProps } from 'react';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -22,13 +20,6 @@ const withIntl = getIntlDecorator(messages);
 const getHref = (rel: string) =>
   cleanUrl(wrapUrl(notEmpty(initFetchFpsak.sakLinks.find(link => link.rel === rel)).href));
 
-const RenderDokumentIndex = (props: ComponentProps<typeof DokumentIndex>) => {
-  //Må hente data til cache før testa komponent blir kalla
-  const { status } = useQuery(initFetchOptions());
-
-  return status === 'success' ? <DokumentIndex {...props} /> : <LoadingPanel />;
-};
-
 const meta = {
   title: 'fagsak/DokumentIndex',
   decorators: [withIntl, withQueryClient],
@@ -42,7 +33,12 @@ const meta = {
       />
     ),
   },
-  render: props => <RenderDokumentIndex {...props} />,
+  render: function Render(props) {
+    //Må hente data til cache før testa komponent blir kalla
+    const { status } = useQuery(initFetchOptions());
+
+    return status === 'success' ? <DokumentIndex {...props} /> : <LoadingPanel />;
+  },
 } satisfies Meta<typeof DokumentIndex>;
 export default meta;
 

@@ -9,7 +9,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { SaksbehandlerDto } from '@navikt/fp-types';
 
-import { LosUrl, opprettNySaksbehandler, saksbehandlgerSøk } from '../data/fplosAvdelingslederApi';
+import { LosUrl, opprettNySaksbehandler, saksbehandlerSøk } from '../data/fplosAvdelingslederApi';
 
 type FormValues = {
   brukerIdent: string;
@@ -32,7 +32,7 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
     status: saksbehandlerStatus,
     reset: resetSaksbehandlerSøk,
   } = useMutation({
-    mutationFn: (valuesToStore: { brukerIdent: string }) => saksbehandlgerSøk(valuesToStore.brukerIdent),
+    mutationFn: (valuesToStore: { brukerIdent: string }) => saksbehandlerSøk(valuesToStore.brukerIdent),
   });
 
   const { mutate: leggTilSaksbehandler, isPending } = useMutation({
@@ -48,7 +48,7 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
   });
 
   const erLagtTilAllerede = avdelingensSaksbehandlere.some(
-    s => saksbehandler && s.brukerIdent.toLowerCase() === saksbehandler.brukerIdent.toLowerCase(),
+    s => s.brukerIdent.toLowerCase() === saksbehandler?.brukerIdent.toLowerCase(),
   );
 
   const leggTilSaksbehandlerFn = () => {

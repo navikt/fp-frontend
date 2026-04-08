@@ -84,12 +84,12 @@ export const BrukerAvsenderPanel = ({
   const forhåndsvisSøker = (fnr: string | undefined) => {
     if (!fnr) {
       setSøkerFeilmelding(undefined);
-    } else if (!isValidFodselsnummer(fnr)) {
-      setSøkerFeilmelding(intl.formatMessage({ id: 'ValgtOppgave.Søk.BrukerFeil' }, { fødselsnummer: fnr }));
-    } else {
+    } else if (isValidFodselsnummer(fnr)) {
       setFnrSomSkalForhåndsvises(fnr);
       setSøkerFeilmelding(undefined);
       hentForhåndsvisningAvSøker(fnr);
+    } else {
+      setSøkerFeilmelding(intl.formatMessage({ id: 'ValgtOppgave.Søk.BrukerFeil' }, { fødselsnummer: fnr }));
     }
   };
 

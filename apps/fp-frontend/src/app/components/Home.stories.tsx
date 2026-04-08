@@ -90,7 +90,7 @@ const meta = {
     headerHeight: 100,
     navAnsatt: NAV_ANSATT,
   },
-  render: (props, { parameters: { url } }) => {
+  render: function Render(props, { parameters: { url } }) {
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());
     const { kodeverkOptions } = useFagsakApi();
