@@ -24,10 +24,11 @@ git checkout -b oppdater-ft-pakker-$(date +%Y%m%d)
 
 ### 2. Oppdater alle @navikt/ft-\* pakker i alle workspaces
 
-Bruk `yarn up --exact --recursive` for å oppdatere i alle workspaces:
+> **Merk:** `--exact` og `--recursive` kan ikke brukes samtidig i Yarn Berry.
+> Siden pakkene allerede bruker eksakte versjoner er `--recursive` alene tilstrekkelig:
 
 ```bash
-yarn up --exact --recursive '@navikt/ft-*'
+yarn up --recursive '@navikt/ft-*'
 ```
 
 ### 3. Installer oppdaterte avhengigheter
@@ -41,11 +42,10 @@ yarn install
 Kjør dette skriptet for å finne hvilke versjoner av peer dependencies ft-pakkene krever:
 
 ```bash
-node -e "
+node << 'SCRIPT'
 const fs = require('fs');
 const path = require('path');
 const nm = 'node_modules/@navikt';
-
 const peerPkgs = {};
 const dirs = fs.readdirSync(nm).filter(d => d.startsWith('ft-'));
 for (const dir of dirs) {
@@ -63,26 +63,51 @@ for (const dir of dirs) {
 for (const [dep, ranges] of Object.entries(peerPkgs)) {
   console.log(dep + ': ' + [...ranges].join(', '));
 }
-"
+SCRIPT
 ```
 
 ### 5. Oppdater peer dependencies til riktig versjon
 
-Bruk `yarn up --exact --recursive` for å oppdatere peer dependencies.
-Versjonene skal matche det ft-pakkene krever (f.eks. `8.x` betyr nyeste `8.*`-versjon).
+Siden pakkene er eksakt-pinnet i package.json kan ikke `yarn up` bumpe dem uten `--exact`.
+Bruk dette Node.js-skriptet til å oppdatere alle package.json-filer direkte.
+Tilpass versjonene basert på output fra steg 4 (f.eks. `8.x` → bruk nyeste `8.*` fra npm):
 
 ```bash
-yarn up --exact --recursive '@navikt/aksel-*' '@navikt/ds-*' 'react-hook-form'
+node << 'SCRIPT'
+const fs = require('fs');
+const { execSync } = require('child_process');
+
+// Tilpass disse versjonene basert på hva ft-pakkene krever (fra steg 4):
+const pkgs = {
+  '@navikt/aksel-icons': 'FYLL_INN',      // f.eks. '8.9.1'
+  '@navikt/ds-css': 'FYLL_INN',
+  '@navikt/ds-react': 'FYLL_INN',
+  '@navikt/ds-tailwind': 'FYLL_INN',
+  '@navikt/ds-tokens': 'FYLL_INN',
+  '@navikt/aksel-stylelint': 'FYLL_INN',
+  'react-hook-form': 'FYLL_INN',          // f.eks. '7.72.1'
+};
+
+const result = execSync("find . -name 'package.json' -not -path '*/node_modules/*'", { encoding: 'utf8' });
+const files = result.trim().split('\n');
+let updatedFiles = 0;
+for (const file of files) {
+  const json = JSON.parse(fs.readFileSync(file, 'utf8'));
+  let changed = false;
+  for (const section of ['dependencies', 'devDependencies', 'peerDependencies']) {
+    if (!json[section]) continue;
+    for (const [pkg, newVer] of Object.entries(pkgs)) {
+      if (json[section][pkg] && json[section][pkg] !== newVer) {
+        json[section][pkg] = newVer;
+        changed = true;
+      }
+    }
+  }
+  if (changed) { fs.writeFileSync(file, JSON.stringify(json, null, 2) + '\n'); updatedFiles++; }
+}
+console.log('Oppdaterte ' + updatedFiles + ' filer');
+SCRIPT
 ```
-
-Dersom ft-pakkene krever en spesifikk major (f.eks. `8.x`), bruk:
-
-```bash
-yarn up --exact --recursive '@navikt/aksel-*@8' '@navikt/ds-*@8' 'react-hook-form@7'
-```
-
-> **Viktig:** Tilpass major-versjonen basert på output fra steg 4. Hvis ft-pakkene
-> krever `9.x`, bruk `@9`, osv.
 
 ### 6. Installer igjen for å oppdatere yarn.lock
 
@@ -121,6 +146,9 @@ Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
 
 ```bash
 git push --set-upstream origin $(git branch --show-current)
+```
+
+```bash
 gh pr create \
   --title "deps: oppdater @navikt/ft-* og peer dependencies" \
   --body "## Endringer
@@ -141,6 +169,7 @@ Oppdaterer alle \`@navikt/ft-*\` pakker til nyeste versjon og synkroniserer peer
 
 ## Feilsøking
 
-- Hvis `yarn up` feiler for enkeltpakker som ikke finnes i alle workspaces, er det normalt — yarn hopper over dem.
+- `--exact` og `--recursive` kan ikke brukes samtidig — bruk `--recursive` alene, og oppdater package.json-filer med Node.js-skriptet i steg 5.
+- Hvis `yarn up` ikke finner oppdateringer, kan pakkene allerede være på nyeste versjon.
 - Hvis bygget feiler etter oppdatering, sjekk changelog for ft-pakkene for breaking changes.
 - Hvis peer dependency-versjoner er motstridende mellom ulike ft-pakker, velg den høyeste major-versjonen som er kompatibel med alle.
