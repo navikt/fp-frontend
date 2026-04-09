@@ -28,7 +28,7 @@
     "@navikt/ft-ui-komponenter": "6.9.0",
     "@navikt/ft-utils": "3.12.0",
     "classnames": "2.5.1",
-    "lodash": "^4.17.23",
+    "lodash": "^4.18.1",
     "react": "19.2.4",
     "react-hook-form": "7.72.1",
     "react-intl": "10.1.1"
