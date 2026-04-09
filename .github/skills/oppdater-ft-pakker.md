@@ -6,7 +6,7 @@ description: >
   slik at de matcher versjonene brukt av ft-pakkene. Lager en PR med endringene.
 ---
 
-# Oppdater @navikt/ft-* pakker og peer dependencies
+# Oppdater @navikt/ft-\* pakker og peer dependencies
 
 ## Mål
 
@@ -22,9 +22,8 @@ slik at de matcher versjonskravene spesifisert av de oppdaterte ft-pakkene.
 git checkout -b oppdater-ft-pakker-$(date +%Y%m%d)
 ```
 
-### 2. Oppdater alle @navikt/ft-* pakker i alle workspaces
+### 2. Oppdater alle @navikt/ft-\* pakker i alle workspaces
 
-> **Merk:** `--exact` og `--recursive` kan ikke brukes samtidig i Yarn Berry.
 > Siden pakkene allerede bruker eksakte versjoner er `--recursive` alene tilstrekkelig:
 
 ```bash
@@ -39,32 +38,32 @@ yarn install
 
 ### 4. Finn versjoner som skal brukes for aksel og react-hook-form
 
-Les peerDependencies direkte fra de installerte ft-pakkene i node_modules:
+Les dependencies direkte fra de installerte ft-pakkene i node_modules:
 
 ```bash
-node -e "console.log(require('./node_modules/@navikt/ft-form-hooks/package.json').peerDependencies['@navikt/ds-react'])"
+node -e "console.log(require('./node_modules/@navikt/ft-form-hooks/package.json').dependencies['@navikt/ds-react'])"
 ```
 
 ```bash
-node -e "console.log(require('./node_modules/@navikt/ft-form-hooks/package.json').peerDependencies['react-hook-form'])"
+node -e "console.log(require('./node_modules/@navikt/ft-form-hooks/package.json').dependencies['react-hook-form'])"
 ```
 
-Eksempel på output: `8.x` og `7.x`. Bruk disse versjonene i neste steg.
+Eksempel på output: `8.5.2` og `7.71.1`. Bruk disse versjonene i neste steg.
 
 ### 5. Oppdater peer dependencies med yarn up
 
 Bruk versjonene fra steg 4 direkte med `yarn up --recursive`.
-Erstatt `8` og `7` med major-versjonene fra steg 4 om de har endret seg:
+Erstatt `8.5.2` og `7.71.1` med nøyaktig-versjonene fra steg 4 om de har endret seg:
 
 ```bash
 yarn up --recursive \
-  '@navikt/ds-react@8' \
-  '@navikt/ds-css@8' \
-  '@navikt/ds-tailwind@8' \
-  '@navikt/ds-tokens@8' \
-  '@navikt/aksel-icons@8' \
-  '@navikt/aksel-stylelint@8' \
-  'react-hook-form@7'
+  '@navikt/ds-react@8.5.2' \
+  '@navikt/ds-css@8.5.2' \
+  '@navikt/ds-tailwind@8.5.2' \
+  '@navikt/ds-tokens@8.5.2' \
+  '@navikt/aksel-icons@8.5.2' \
+  '@navikt/aksel-stylelint@8.5.2' \
+  'react-hook-form@7.71.1'
 ```
 
 Verifiser de eksakte versjonene som ble installert:
@@ -122,13 +121,17 @@ Oppdaterer alle \`@navikt/ft-*\` pakker til nyeste versjon og synkroniserer peer
 
 ### Verifisering
 - [ ] Bygg passerer
-- [ ] Ingen breaking changes i API" \
   --label "dependencies"
 ```
 
 ## Feilsøking
 
-- `--exact` og `--recursive` kan ikke brukes samtidig — bruk `--recursive` med `pkg@major` (f.eks. `react-hook-form@7`).
-- Hvis `yarn up` ikke finner oppdateringer, kan pakkene allerede være på nyeste versjon.
+- Hvis `yarn up` ikke finner oppdateringer, kan pakkene allerede være på nyeste versjon. Eventuelt sjekk om når siste
+  publisering i ft-frontend-saksbehandling ble kjørt.
+  `gh run list --workflow=publish.yml --limit=1 --repo navikt/ft-frontend-saksbehandling`
 - Hvis bygget feiler etter oppdatering, sjekk changelog for ft-pakkene for breaking changes.
-- Hvis peer dependency-versjoner er motstridende mellom ulike ft-pakker, velg den høyeste major-versjonen som er kompatibel med alle.
+- Hvis yarn ikke finner ny versjon av react-hook-form, kan dette skyldes `npmMinimalAgeGate`. I såfall midlertidig legg
+  til `react-hook-form@x.y.z` under `npmPreapprovedPackages`-seksjonen i `.yarnrc.yml`-filen, der `x.y.z` er den eksakte
+  versjonen brukt av ft-pakkene.
+- Hvis dependency-versjoner er motstridende mellom ulike ft-pakker, velg den høyeste major-versjonen som er kompatibel
+  med alle.
