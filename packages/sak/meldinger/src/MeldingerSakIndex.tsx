@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FagsakBehandlingDto, KodeverkMedNavn } from '@navikt/fp-types';
+import type { BrevOverstyring, FagsakBehandlingDto, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { type ForhåndsvisBrevParams, type FormValues, Messages } from './components/Messages';
 
@@ -20,6 +20,8 @@ interface Props {
   setMeldingFormData: (data?: FormValues) => void;
   brukerManglerAdresse: boolean;
   behandling: FagsakBehandlingDto;
+  hentBrevHtml?: (brevmalkode: string, årsak?: string) => Promise<BrevOverstyring>;
+  mellomlagreBrev?: (brevmalkode: string, html: string | null) => Promise<void>;
 }
 
 export const MeldingerSakIndex = (props: Props) => (

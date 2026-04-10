@@ -16,6 +16,7 @@ import type { DokumentMalType, FagsakBehandlingDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import {
+  FagsakRel,
   forhåndsvisTilbakekreving,
   initFetchOptions,
   type SubmitMessageParams,
@@ -72,6 +73,22 @@ export const MeldingIndex = ({
 
   const { mutateAsync: sendMelding, status: meldingStatus } = useMutation({
     mutationFn: (valuesToStore: SubmitMessageParams) => api.sendMelding(valuesToStore),
+  });
+
+  const harBrevHtmlLenke = valgtBehandling.links.some(l => l.rel === FagsakRel.HENT_BREV_HTML);
+  const harMellomlagreLenke = valgtBehandling.links.some(l => l.rel === FagsakRel.MELLOMLAGRE_BREV_OVERSTYRING);
+
+  const { mutateAsync: hentBrevHtml } = useMutation({
+    mutationFn: ({ brevmalkode, årsak }: { brevmalkode: string; årsak?: string }) => api.hentBrevHtml(brevmalkode, årsak),
+  });
+
+  const { mutateAsync: mellomlagreBrev } = useMutation({
+    mutationFn: ({ brevmalkode, html }: { brevmalkode: string; html: string | null }) =>
+      api.mellomlagreBrevOverstyring({
+        behandlingUuid: valgtBehandling.uuid,
+        redigertInnhold: html,
+        dokumentMal: brevmalkode,
+      }),
   });
 
   const submitCallback = getSubmitCallback(
@@ -131,6 +148,8 @@ export const MeldingIndex = ({
               meldingFormData={meldingFormData}
               setMeldingFormData={setMeldingFormData}
               brukerManglerAdresse={fagsak.brukerManglerAdresse}
+              hentBrevHtml={harBrevHtmlLenke ? (brevmalkode, årsak) => hentBrevHtml({ brevmalkode, årsak }) : undefined}
+              mellomlagreBrev={harMellomlagreLenke ? (brevmalkode, html) => mellomlagreBrev({ brevmalkode, html }) : undefined}
             />
           )}
         </VStack>
@@ -174,6 +193,7 @@ const getSubmitCallback =
           brevmalkode: values.brevmalkode,
           fritekst: values.fritekst,
           årsakskode: values.årsakskode,
+          htmlFritekst: values.htmlFritekst,
         };
     return submitMessage(data).then(() => {
       setMeldingFormData();
