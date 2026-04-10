@@ -1,10 +1,9 @@
-
 import { useState } from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
 import { BarChartIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Dialog } from '@navikt/ds-react';
+import { Button, Dialog, Loader } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { LukkedeOppgaverPanel } from '@navikt/fp-los-felles';
@@ -18,14 +17,22 @@ interface Props {
 
 export const AvsluttedeOppgaverDialog = ({ valgtSakslisteId, sakslisteNavn }: Props) => {
   const [open, setOpen] = useState(false);
-  const { data: køStatistikk = [] } = useQuery({
+  const { data: køStatistikk = [], isPending } = useQuery({
     ...saksbehandlerKøStatistikkOptions(valgtSakslisteId),
     enabled: open,
   });
+
   return (
     <Dialog open={open} onOpenChange={nextOpen => setOpen(nextOpen)}>
       <Dialog.Trigger>
-        <Button variant="secondary" size="small" className="self-end" title="Åpne dialog" aria-label="Åpne dialog" icon={<BarChartIcon />}></Button>
+        <Button
+          variant="secondary"
+          size="small"
+          className="self-end"
+          title="Åpne dialog"
+          aria-label="Åpne dialog"
+          icon={<BarChartIcon />}
+        ></Button>
       </Dialog.Trigger>
       <Dialog.Popup>
         <Dialog.Header>
@@ -34,13 +41,7 @@ export const AvsluttedeOppgaverDialog = ({ valgtSakslisteId, sakslisteNavn }: Pr
           </Dialog.Title>
         </Dialog.Header>
         <Dialog.Body>
-          {køStatistikk.length === 0 ? (
-            <BodyShort>
-              <FormattedMessage id="AvsluttedeOppgaverDialog.IngenData" />
-            </BodyShort>
-          ) : (
-            <LukkedeOppgaverPanel køStatistikk={køStatistikk} />
-          )}
+          {isPending ? <Loader /> : <LukkedeOppgaverPanel køStatistikk={køStatistikk} />}
         </Dialog.Body>
         <Dialog.Footer>
           <Dialog.CloseTrigger>
