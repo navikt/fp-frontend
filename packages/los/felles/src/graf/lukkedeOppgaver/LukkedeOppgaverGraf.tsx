@@ -1,17 +1,11 @@
 import { useIntl } from 'react-intl';
 
-import { capitalizeFirstLetter, DDMMYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { capitalizeFirstLetter } from '@navikt/ft-utils';
 import dayjs, { type Dayjs } from 'dayjs';
 import type { BarSeriesOption, EChartsOption } from 'echarts';
 import type { CallbackDataParams } from 'echarts/types/dist/shared';
 
-import {
-  createBarSeries,
-  createToolboxWithFilename,
-  getAkselVariable,
-  getStyle,
-  ReactECharts,
-} from '@navikt/fp-los-felles';
+import { createBarSeries, getAkselVariable, getStyle, ReactECharts } from '@navikt/fp-los-felles';
 
 import type { LukkedeOppgaverData } from './lukkedeOppgaverMapper';
 import { getIsoUkedag, startAvIsoUke } from './ukeUtils';
@@ -31,33 +25,28 @@ const lagUkedatoer = (aktuellMandag: string): Array<Dayjs> => {
   return Array.from({ length: 7 }, (_, i) => mandag.add(i, 'day'));
 };
 
-const lagStackOffsetSerieData = (antallPerDag: readonly number[]): number[] => {
+const lagStackOffsetSerieData = (antallPerDag: readonly (number | undefined)[]): number[] => {
   const data: number[] = [];
   let sum = 0;
   for (const antall of antallPerDag) {
     data.push(sum);
-    sum += antall;
+    sum += antall ?? 0;
   }
   return data;
 };
 
-const filename = (ukeStart: dayjs.Dayjs): string => {
-  const ukeSlutt = ukeStart.add(6, 'day').format(DDMMYY_DATE_FORMAT);
-  return `Lukkede_oppgaver_${ukeStart.format(DDMMYY_DATE_FORMAT)}-${ukeSlutt}`;
-};
-
-const formatTooltipContent = (dato: Dayjs, antall: number, antallTotalt: number): string => {
-  const xLabel = dato.isSame(dayjs(), 'day') ? 'I dag' : capitalizeFirstLetter(dato.format('dddd'));
-  const antallFormattert = antall.toLocaleString('nb-NO');
-  const totalFormattert = antallTotalt.toLocaleString('nb-NO');
+const formatTooltipContent = (dato: Dayjs, antall: number | undefined, antallTotalt: number | undefined): string => {
+  const xLabel = dato.isSame(dayjs(), 'day') ? 'I dag' : dato.format('dddd');
+  const antallFormattert = antall?.toLocaleString('nb-NO') ?? '-';
+  const totalFormattert = antallTotalt?.toLocaleString('nb-NO') ?? '-';
   return `
-    <b>${xLabel}</b><br/>
+    <b>${capitalizeFirstLetter(xLabel)}</b><br/>
     <div style="display: flex; justify-content: space-between; gap: 16px;">
-      <span>Dag:</span>
+      <span>Antall avsluttet:</span>
       <span>${antallFormattert}</span>
     </div>
     <div style="display: flex; justify-content: space-between; gap: 16px;">
-      <span>Total:</span>
+      <span>Total avsluttet:</span>
       <span>${totalFormattert}</span>
     </div>
   `;
@@ -68,6 +57,20 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
   const options = getStyle();
 
   const { antallPerDag, mandagDato } = lukkedeOppgaver;
+  const ingenData = antallPerDag.every(v => v === 0) && lukkedeOppgaver.forrigeUkeTotal === 0;
+
+  if (ingenData) {
+    const emptyOption: EChartsOption = {
+      ...options,
+      title: {
+        text: intl.formatMessage({ id: 'LukkedeOppgaverGraf.IngenData' }),
+        left: 'center',
+        top: 'middle',
+      },
+    };
+    return <ReactECharts height={height} option={emptyOption} />;
+  }
+
   const erInneværendeUke = dayjs(mandagDato).startOf('day').isSame(startAvIsoUke(dayjs()), 'day');
   const xAxisDatoer = lagUkedatoer(mandagDato);
   const offsetSerieData = lagStackOffsetSerieData(antallPerDag);
@@ -86,7 +89,6 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
   const dataMedSkjulte0Verdier = antallPerDag.map(antall => ({
     value: antall,
     itemStyle: antall === 0 ? { opacity: 0, borderWidth: 0 } : undefined, // får med farget markør for serie
-    label: antall === 0 ? { show: false } : undefined,
   }));
 
   const baseSerie: BarSeriesOption = createBarSeries(
@@ -94,6 +96,7 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
       data: dataMedSkjulte0Verdier,
       barGap: '0%',
       barCategoryGap: '0%',
+      label: { show: false },
     },
     'success',
   );
@@ -102,9 +105,8 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
   const dagIUken = getIsoUkedag(dayjs());
 
   if (erInneværendeUke && dagIUken <= 4 && lukkedeOppgaver.onsdagForrigeUke > 0) {
-    const name = intl.formatMessage({ id: 'LukkedeOppgaverGraf.OnsdagForrigeUke' });
     markLines.push({
-      name: name,
+      name: intl.formatMessage({ id: 'LukkedeOppgaverGraf.OnsdagForrigeUke' }),
       yAxis: lukkedeOppgaver.onsdagForrigeUke,
       label: {
         formatter: p => {
@@ -116,11 +118,8 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
   }
 
   if (lukkedeOppgaver.forrigeUkeTotal > 0) {
-    const nameFormatted = erInneværendeUke
-      ? intl.formatMessage({ id: 'LukkedeOppgaverGraf.TotalForrigeUke' })
-      : intl.formatMessage({ id: 'LukkedeOppgaverGraf.TotalForrigeUkeAlternativ' });
     markLines.push({
-      name: nameFormatted,
+      name: intl.formatMessage({ id: 'LukkedeOppgaverGraf.TotalForrigeUke' }, { erInneværendeUke }),
       yAxis: lukkedeOppgaver.forrigeUkeTotal,
       label: {
         formatter: p => {
@@ -155,7 +154,6 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
 
   const option: EChartsOption = {
     ...options,
-    toolbox: createToolboxWithFilename(filename(dayjs(mandagDato))),
     tooltip: {
       ...options.tooltip,
       trigger: 'axis',
@@ -164,10 +162,9 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
         const params = Array.isArray(raw) ? raw : [raw];
         if (!params.length) return '';
         const idx = (params[0] as CallbackDataParams).dataIndex;
-        const xLabelDato = xAxisDatoer[idx];
-        if (!xLabelDato || xLabelDato.isAfter(dayjs(), 'day')) return '';
-        const antall = antallPerDag[idx] ?? 0;
-        const antallTotalt = (offsetSerieData[idx] ?? 0) + antall;
+        const xLabelDato = xAxisDatoer[idx]!;
+        const antall = antallPerDag[idx];
+        const antallTotalt =antall === undefined ? undefined : (offsetSerieData[idx] ?? 0) + antall;
         return formatTooltipContent(xLabelDato, antall, antallTotalt);
       },
     },
@@ -175,7 +172,7 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
     xAxis: [
       {
         type: 'category',
-        data: xAxisDatoer.map(dato => dato.format(erInneværendeUke ? 'ddd' : 'ddd DD.MM')),
+        data: xAxisDatoer.map(dato => dato.format('ddd DD.MM')),
         axisLabel: { ...options.textStyle },
       },
     ],

@@ -1,3 +1,4 @@
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs, { Dayjs } from 'dayjs';
 
 import type { KøStatistikkDto } from '@navikt/fp-types';
@@ -5,7 +6,7 @@ import type { KøStatistikkDto } from '@navikt/fp-types';
 import { startAvIsoUke } from './ukeUtils';
 
 export type LukkedeOppgaverData = Readonly<{
-  antallPerDag: number[];
+  antallPerDag: (number | undefined)[];
   forrigeUkeTotal: number;
   onsdagForrigeUke: number;
   mandagDato: string;
@@ -19,28 +20,32 @@ type LukkedeOppgaverUker = Readonly<{
 const summerLukkedePerDato = (statistikk: KøStatistikkDto[]): Map<string, number> => {
   const lukkedePerDato = new Map<string, number>();
   for (const s of statistikk) {
-    const dato = dayjs(s.tidspunkt).format('YYYY-MM-DD');
+    const dato = dayjs(s.tidspunkt).format(ISO_DATE_FORMAT);
     lukkedePerDato.set(dato, (lukkedePerDato.get(dato) ?? 0) + s.avsluttet);
   }
   return lukkedePerDato;
 };
 
-const hentUkeverdier = (avsluttetPerDato: Map<string, number>, mandagDato: dayjs.Dayjs): number[] =>
+const hentUkeverdier = (avsluttetPerDato: Map<string, number>, mandagDato: dayjs.Dayjs): (number | undefined)[] =>
   Array.from({ length: 7 }, (_, i) => {
-    const dato = mandagDato.add(i, 'day').format('YYYY-MM-DD');
-    return avsluttetPerDato.get(dato) ?? 0;
+    const dato = mandagDato.add(i, 'day').format(ISO_DATE_FORMAT);
+    return avsluttetPerDato.get(dato);
   });
 
-const summer = (dager: number[], kunTilOgMedOnsdag = false): number => {
+const summer = (dager: (number | undefined)[], kunTilOgMedOnsdag = false): number => {
   const utsnitt = kunTilOgMedOnsdag ? dager.slice(0, 3) : dager;
-  return utsnitt.reduce((sum, v) => sum + v, 0);
+  return utsnitt.reduce<number>((sum, v) => sum + (v ?? 0), 0);
 };
 
-const lagUkeData = (ukeDager: number[], referanseUkeDager: number[], mandagDato: Dayjs): LukkedeOppgaverData => ({
+const lagUkeData = (
+  ukeDager: (number | undefined)[],
+  referanseUkeDager: (number | undefined)[],
+  mandagDato: Dayjs,
+): LukkedeOppgaverData => ({
   antallPerDag: ukeDager,
   forrigeUkeTotal: summer(referanseUkeDager),
   onsdagForrigeUke: summer(referanseUkeDager, true),
-  mandagDato: mandagDato.format('YYYY-MM-DD'),
+  mandagDato: mandagDato.format(ISO_DATE_FORMAT),
 });
 
 export const mapLukkedeOppgaver = (køStatistikk: KøStatistikkDto[]): LukkedeOppgaverUker => {

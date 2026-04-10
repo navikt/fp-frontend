@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { LineGraphDotIcon } from '@navikt/aksel-icons';
-import { BodyLong, BodyShort, Button, Dialog, HStack, ToggleGroup, VStack } from '@navikt/ds-react';
+import { BarChartIcon, LineGraphDotIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, Dialog, HStack, ToggleGroup, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { AktiveOgTilgjengeligeOppgaverGraf, LukkedeOppgaverPanel } from '@navikt/fp-los-felles';
@@ -49,7 +49,7 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
   );
 };
 
-type VisningType = 'intro' | 'aktive' | 'lukkede';
+type VisningType = 'aktive' | 'lukkede';
 
 const OppgaverGrafDialogBody = ({
   valgtSakslisteId,
@@ -58,39 +58,40 @@ const OppgaverGrafDialogBody = ({
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
 }) => {
-  const køStatistikk =
-    useQuery({
-      ...oppgaveFilterStatistikkOptions(valgtSakslisteId, valgtAvdelingEnhet),
-    }).data ?? [];
-  const [visningType, setVisningType] = useState<VisningType>('intro');
-  const aktiveOgLedige = 'Aktive og ledige oppgaver';
-  const lukkedeOppgaverTittel = 'Lukkede oppgaver';
+  const intl = useIntl();
+  const { data: køStatistikk, isPending } = useQuery({
+    ...oppgaveFilterStatistikkOptions(valgtSakslisteId, valgtAvdelingEnhet),
+  });
+  const [visningType, setVisningType] = useState<VisningType>();
 
   return (
     <>
-      <HStack justify="end">
+      <HStack>
         <ToggleGroup
           value={visningType}
           data-color="neutral"
           onChange={value => setVisningType(value as VisningType)}
           size="small"
         >
-          <ToggleGroup.Item value="intro" label="Intro" />
-          <ToggleGroup.Item value="aktive" label={aktiveOgLedige} />
-          <ToggleGroup.Item value="lukkede" label={lukkedeOppgaverTittel} />
+          <ToggleGroup.Item
+            icon={<BarChartIcon aria-hidden />}
+            value="aktive"
+            label={intl.formatMessage({ id: 'OppgaverGrafDialog.AktiveOgLedige' })}
+          />
+          <ToggleGroup.Item
+            icon={<BarChartIcon aria-hidden />}
+            value="lukkede"
+            label={intl.formatMessage({ id: 'OppgaverGrafDialog.LukkedeOppgaver' })}
+          />
         </ToggleGroup>
       </HStack>
-      {visningType === 'intro' && <BodyShort size="small">Velg en av grafene.</BodyShort>}
-      {visningType === 'aktive' && <AktiveOgTilgjengeligeOppgaverGraf aktiveOgLedigeTidslinje={køStatistikk} />}
-      {visningType === 'lukkede' && (
-        <>
-          <BodyLong size="small">
-            Dette fossefallsdiagrammet er et ukesdiagram som viser antall lukkede oppgaver per dag. Vi tenker dette gir
-            et bilde av aktivitet på køen.
-          </BodyLong>
-          <LukkedeOppgaverPanel køStatistikk={køStatistikk} />
-        </>
+      {visningType === undefined && (
+        <BodyShort size="small">
+          <FormattedMessage id="OppgaverGrafDialog.VelgGraf" />
+        </BodyShort>
       )}
+      {visningType === 'aktive' && <AktiveOgTilgjengeligeOppgaverGraf aktiveOgLedigeTidslinje={køStatistikk ?? []} />}
+      {visningType === 'lukkede' && <LukkedeOppgaverPanel køStatistikk={køStatistikk} isPending={isPending} />}
     </>
   );
 };

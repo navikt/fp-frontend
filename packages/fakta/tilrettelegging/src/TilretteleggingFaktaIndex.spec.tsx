@@ -15,7 +15,7 @@ const {
 } = composeStories(stories);
 
 const lagNyDato = (nyDato: string) => {
-  const backspace = Array.from({ length: 10 }).reduce<string>((prev) => `${prev}{backspace}`, '');
+  const backspace = Array.from({ length: 10 }).reduce<string>(prev => `${prev}{backspace}`, '');
   return backspace + nyDato;
 };
 
