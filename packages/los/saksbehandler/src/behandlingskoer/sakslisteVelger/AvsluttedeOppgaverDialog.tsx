@@ -9,19 +9,20 @@ import { saksbehandlerKøStatistikkOptions } from '../../data/fplosSaksbehandler
 
 interface Props {
   valgtSakslisteId: number;
+  sakslisteNavn: string;
 }
 
-export const AvsluttedeOppgaverDialog = ({ valgtSakslisteId }: Props) => {
+export const AvsluttedeOppgaverDialog = ({ valgtSakslisteId, sakslisteNavn }: Props) => {
   const { data: køStatistikk = [] } = useQuery(saksbehandlerKøStatistikkOptions(valgtSakslisteId));
   return (
     <Dialog>
       <Dialog.Trigger>
-        <Button title="Åpne dialog" aria-label="Åpne dialog" icon={<BarChartIcon />}></Button>
+        <Button variant="secondary" size="small" className="self-end" title="Åpne dialog" aria-label="Åpne dialog" icon={<BarChartIcon />}></Button>
       </Dialog.Trigger>
       <Dialog.Popup>
         <Dialog.Header>
           <Dialog.Title>
-            <FormattedMessage id="AvsluttedeOppgaverDialog.Tittel" />
+            <FormattedMessage id="AvsluttedeOppgaverDialog.Tittel" values={{ sakslisteNavn }} />
           </Dialog.Title>
         </Dialog.Header>
         <Dialog.Body>

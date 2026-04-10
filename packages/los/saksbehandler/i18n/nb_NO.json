@@ -116,6 +116,6 @@
   "NotatModal.SkrivNotat": "Legg til notat på reservasjon",
   "NotatModal.Notat": "Notat",
 
-  "AvsluttedeOppgaverDialog.Tittel": "Avsluttede oppgaver",
+  "AvsluttedeOppgaverDialog.Tittel": "Avsluttede oppgaver – {sakslisteNavn}",
   "AvsluttedeOppgaverDialog.IngenData": "Ingen statistikk tilgjengelig for denne køen."
 }
