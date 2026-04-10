@@ -5,9 +5,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
-import messages from '../i18n/nb_NO.json';
-
 import { BrevInnhold } from './BrevInnhold';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

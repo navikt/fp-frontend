@@ -114,7 +114,8 @@ export const Messages = ({
   const language = getLanguageFromSprakkode(behandling.språkkode);
 
   const erVarselOmRevurdering = brevmalkode === 'VARREV';
-  const brukBreveditor = erVarselOmRevurdering && hentBrevHtml !== undefined;
+  const erInnhenteOpplysninger = brevmalkode === 'INNOPP';
+  const brukBreveditor = (erVarselOmRevurdering || erInnhenteOpplysninger) && hentBrevHtml !== undefined;
 
   const varselBrevRedigeringVerdier =
     brevData && visRedigeringModal
@@ -159,14 +160,14 @@ export const Messages = ({
               className={styles['bredde']}
             />
           )}
-          {brukBreveditor && årsakskode !== undefined && (
+          {brukBreveditor && (!erVarselOmRevurdering || årsakskode !== undefined) && (
             <VStack gap="space-8">
               <Button
                 variant="secondary"
                 size="small"
                 type="button"
                 onClick={async () => {
-                  if (!brevData && brevmalkode) {
+                  if (!brevData) {
                     try {
                       const result = await hentBrevHtml(brevmalkode, årsakskode);
                       setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
@@ -208,7 +209,7 @@ export const Messages = ({
               size="small"
               variant="primary"
               loading={formState.isSubmitting}
-              disabled={formState.isSubmitting || kanVeilede}
+              disabled={formState.isSubmitting || kanVeilede || (erInnhenteOpplysninger && brukBreveditor && !brevData?.redigertHtml)}
             >
               <FormattedMessage id="Messages.Submit" />
             </Button>

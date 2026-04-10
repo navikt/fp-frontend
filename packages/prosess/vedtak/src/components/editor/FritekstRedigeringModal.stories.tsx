@@ -3,8 +3,8 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { withRouter } from '@navikt/fp-storybook-utils';
 import { BrevRedigeringModal, utledDelerFraBrev, utledRedigerbartInnhold } from '@navikt/fp-prosess-brev-editor';
+import { withRouter } from '@navikt/fp-storybook-utils';
 
 import mal from '../../../.storybook/brevmal/mal.html?raw';
 import redigertInnhold from '../../../.storybook/brevmal/redigertInnhold.html?raw';

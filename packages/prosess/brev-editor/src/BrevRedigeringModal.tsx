@@ -6,10 +6,10 @@ import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import { Alert, Button, Dialog } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
-import messages from '../i18n/nb_NO.json';
-
 import { BrevInnhold } from './BrevInnhold';
 import { useBrevEditorJs } from './useBrevEditorJs';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

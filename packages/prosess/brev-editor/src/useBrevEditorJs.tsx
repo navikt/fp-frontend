@@ -5,15 +5,16 @@ import EditorJS, { type EditorConfig, type I18nConfig, type ToolConstructable } 
 import Header from '@editorjs/header';
 import EditorjsList from '@editorjs/list';
 import Paragraph from '@editorjs/paragraph';
+import { createIntl } from '@navikt/ft-utils';
 import edjsHTML from 'editorjs-html';
 import Undo from 'editorjs-undo';
 import debounce from 'lodash.debounce';
-import { createIntl } from '@navikt/ft-utils';
 
 import { notEmpty } from '@navikt/fp-utils';
 
-import messages from '../i18n/nb_NO.json';
 import { erRedigertHtmlGyldig, konverterHtmlToEditorJsFormat, lagRedigerbartInnholdWrapper } from './redigeringsUtils';
+
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
@@ -87,7 +88,7 @@ export const useBrevEditorJs = (
         refEditorJs.current.destroy();
       }
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);  
 
   const tilbakestillEndringer = async (opprinneligRedigerbartInnhold: string) => {
     const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
@@ -192,7 +193,7 @@ class CustomParagraph extends Paragraph {
   }
 }
 
-const getTools = (intl: IntlShape): EditorConfig['tools'] => ({
+const getTools = (i18n: IntlShape): EditorConfig['tools'] => ({
   paragraph: {
     class: CustomParagraph as unknown as ToolConstructable,
     inlineToolbar: ['bold'],
@@ -210,13 +211,13 @@ const getTools = (intl: IntlShape): EditorConfig['tools'] => ({
     },
     toolbox: [
       {
-        title: intl.formatMessage({ id: 'useBrevEditorJs.Heading1' }),
+        title: i18n.formatMessage({ id: 'useBrevEditorJs.Heading1' }),
         data: {
           level: 1,
         },
       },
       {
-        title: intl.formatMessage({ id: 'useBrevEditorJs.Heading2' }),
+        title: i18n.formatMessage({ id: 'useBrevEditorJs.Heading2' }),
         data: {
           level: 2,
         },
@@ -240,37 +241,37 @@ const getTools = (intl: IntlShape): EditorConfig['tools'] => ({
   },
 });
 
-const lagEditorJsI18n = (intl: IntlShape): I18nConfig => ({
+const lagEditorJsI18n = (i18n: IntlShape): I18nConfig => ({
   messages: {
     toolNames: {
-      Text: intl.formatMessage({ id: 'useBrevEditorJs.Text' }),
-      Heading: intl.formatMessage({ id: 'useBrevEditorJs.Heading' }),
-      'Unordered List': intl.formatMessage({ id: 'useBrevEditorJs.UnorderedList' }),
+      Text: i18n.formatMessage({ id: 'useBrevEditorJs.Text' }),
+      Heading: i18n.formatMessage({ id: 'useBrevEditorJs.Heading' }),
+      'Unordered List': i18n.formatMessage({ id: 'useBrevEditorJs.UnorderedList' }),
     },
     tools: {
       link: {
-        'Add a link': intl.formatMessage({ id: 'useBrevEditorJs.AddALink' }),
+        'Add a link': i18n.formatMessage({ id: 'useBrevEditorJs.AddALink' }),
       },
       List: {
-        Unordered: intl.formatMessage({ id: 'useBrevEditorJs.Unordered' }),
+        Unordered: i18n.formatMessage({ id: 'useBrevEditorJs.Unordered' }),
       },
     },
     ui: {
       popover: {
-        'Nothing found': intl.formatMessage({ id: 'useBrevEditorJs.NothingFound' }),
-        'Convert to': intl.formatMessage({ id: 'useBrevEditorJs.ConvertTo' }),
+        'Nothing found': i18n.formatMessage({ id: 'useBrevEditorJs.NothingFound' }),
+        'Convert to': i18n.formatMessage({ id: 'useBrevEditorJs.ConvertTo' }),
       },
     },
     blockTunes: {
       delete: {
-        Delete: intl.formatMessage({ id: 'useBrevEditorJs.Delete' }),
-        'Click to delete': intl.formatMessage({ id: 'useBrevEditorJs.KlikkForFjern' }),
+        Delete: i18n.formatMessage({ id: 'useBrevEditorJs.Delete' }),
+        'Click to delete': i18n.formatMessage({ id: 'useBrevEditorJs.KlikkForFjern' }),
       },
       moveUp: {
-        'Move up': intl.formatMessage({ id: 'useBrevEditorJs.MoveUp' }),
+        'Move up': i18n.formatMessage({ id: 'useBrevEditorJs.MoveUp' }),
       },
       moveDown: {
-        'Move down': intl.formatMessage({ id: 'useBrevEditorJs.MoveDown' }),
+        'Move down': i18n.formatMessage({ id: 'useBrevEditorJs.MoveDown' }),
       },
     },
   },
