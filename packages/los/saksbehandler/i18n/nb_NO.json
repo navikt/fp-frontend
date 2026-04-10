@@ -114,5 +114,8 @@
   "SaksbehandlerNokkeltallPanel.ForAlleDetaljer": "Statistikk for alle som jobber med foreldrepenger, engangsstønad og svangerskapspenger",
 
   "NotatModal.SkrivNotat": "Legg til notat på reservasjon",
-  "NotatModal.Notat": "Notat"
+  "NotatModal.Notat": "Notat",
+
+  "AvsluttedeOppgaverDialog.Tittel": "Avsluttede oppgaver",
+  "AvsluttedeOppgaverDialog.IngenData": "Ingen statistikk tilgjengelig for denne køen."
 }
