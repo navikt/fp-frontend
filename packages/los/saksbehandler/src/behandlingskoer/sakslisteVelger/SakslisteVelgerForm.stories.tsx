@@ -48,6 +48,13 @@ const saksliste1: SakslisteDto = {
   },
 };
 
+const køStatistikkMock = [
+  { tidspunkt: '2024-04-08T08:00:00', aktive: 21, tilgjengelige: 5, ventende: 32, avsluttet: 14 },
+  { tidspunkt: '2024-04-08T10:00:00', aktive: 19, tilgjengelige: 3, ventende: 28, avsluttet: 22 },
+  { tidspunkt: '2024-04-09T08:00:00', aktive: 24, tilgjengelige: 8, ventende: 37, avsluttet: 31 },
+  { tidspunkt: '2024-04-09T10:00:00', aktive: 27, tilgjengelige: 7, ventende: 41, avsluttet: 19 },
+];
+
 const meta = {
   title: 'behandlingskoer/SakslisteVelgerForm',
   component: SakslisteVelgerForm,
@@ -55,7 +62,10 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
     msw: {
-      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
+      handlers: [
+        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+        http.get(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK, () => HttpResponse.json([])),
+      ],
     },
   },
   args: {
@@ -73,6 +83,34 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    sakslister: [saksliste1],
+  },
+};
+
+export const MedAvsluttedeOppgaver: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+        http.get(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK, () => HttpResponse.json(køStatistikkMock)),
+      ],
+    },
+  },
+  args: {
+    sakslister: [saksliste1],
+  },
+};
+
+export const MedAvsluttedeOppgaverTomListe: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+        http.get(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK, () => HttpResponse.json([])),
+      ],
+    },
+  },
   args: {
     sakslister: [saksliste1],
   },

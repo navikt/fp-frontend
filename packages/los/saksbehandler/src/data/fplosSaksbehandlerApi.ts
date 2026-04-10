@@ -4,6 +4,7 @@ import ky from 'ky';
 import { LosUrlFelles } from '@navikt/fp-los-felles';
 import type {
   FagsakEnkel,
+  KøStatistikkDto,
   OppgaveDto,
   OppgaveDtoMedStatus,
   ReservasjonStatusDto,
@@ -33,6 +34,7 @@ const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 export const LosUrl = {
   ...LosUrlFelles,
   SØK_FAGSAK: wrapUrl('/fpsak/api/fagsak/sok'),
+  SAKSBEHANDLER_KØ_STATISTIKK: wrapUrl('/fplos/api/saksbehandler/nøkkeltall/statistikk-oppgave-filter'),
   SAKSLISTE: wrapUrl('/fplos/api/saksbehandler/saksliste'),
   RESERVERTE_OPPGAVER: wrapUrl('/fplos/api/reservasjon/reserverte-oppgaver'),
   TIDLIGERE_RESERVERTE: wrapUrl('/fplos/api/reservasjon/tidligere-reserverte'),
@@ -76,6 +78,15 @@ export const oppgaverForFagsakerOptions = (saksnummer: string[]) =>
     queryKey: [LosUrl.OPPGAVER_FOR_FAGSAKER, saksnummer],
     queryFn: () => getOppgaverForFagsaker(saksnummer),
     staleTime: Infinity,
+  });
+
+export const saksbehandlerKøStatistikkOptions = (sakslisteId: number) =>
+  queryOptions({
+    queryKey: [LosUrl.SAKSBEHANDLER_KØ_STATISTIKK, sakslisteId],
+    queryFn: () =>
+      kyExtended
+        .get(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK, { searchParams: { sakslisteId } })
+        .json<KøStatistikkDto[]>(),
   });
 
 export const sakslisteOptions = () =>

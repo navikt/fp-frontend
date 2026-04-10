@@ -5,8 +5,16 @@ import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './SakslisteVelgerForm.stories';
 
-const { Default, MedToSakslister, MedFlereEnnTreSaksbehandlere, MedBelopFraOgTil, MedBelopKunFra, MedBelopKunTil } =
-  composeStories(stories);
+const {
+  Default,
+  MedToSakslister,
+  MedFlereEnnTreSaksbehandlere,
+  MedBelopFraOgTil,
+  MedBelopKunFra,
+  MedBelopKunTil,
+  MedAvsluttedeOppgaver,
+  MedAvsluttedeOppgaverTomListe,
+} = composeStories(stories);
 
 const hentSorteringBoks = () => {
   const sorteringLabel = screen.getByText('Sortering');
@@ -148,5 +156,30 @@ describe('SakslisteVelgerForm', () => {
 
     expect(hentSorteringBoks()).not.toHaveTextContent('Fra: 20 000 kr');
     expect(hentSorteringBoks()).not.toHaveTextContent('Til: 30 000 kr');
+  });
+
+  it('skal åpne dialog og vise graf med avsluttede oppgaver', async () => {
+    applyRequestHandlers(MedAvsluttedeOppgaver.parameters['msw'] as MswParameters['msw']);
+    render(<MedAvsluttedeOppgaver />);
+
+    expect(await screen.findByText('A03 Førstegangsbehandling (3 saker)')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Åpne dialog' }));
+
+    expect(await screen.findByText('Avsluttede oppgaver – A03 Førstegangsbehandling')).toBeInTheDocument();
+    expect(screen.getByText('Denne uken')).toBeInTheDocument();
+    expect(screen.getByText('Forrige uke')).toBeInTheDocument();
+  });
+
+  it('skal vise melding om ingen data når køStatistikk er tom', async () => {
+    applyRequestHandlers(MedAvsluttedeOppgaverTomListe.parameters['msw'] as MswParameters['msw']);
+    render(<MedAvsluttedeOppgaverTomListe />);
+
+    expect(await screen.findByText('A03 Førstegangsbehandling (3 saker)')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Åpne dialog' }));
+
+    expect(await screen.findByText('Avsluttede oppgaver – A03 Førstegangsbehandling')).toBeInTheDocument();
+    expect(screen.getByText('Ingen statistikk tilgjengelig for denne køen.')).toBeInTheDocument();
   });
 });

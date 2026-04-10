@@ -23,6 +23,10 @@
   "LukkedeOppgaverGraf.TotalForrigeUkeAlternativ": "Totalt uken før",
   "LukkedeOppgaverPanel.DenneUken": "Denne uken",
   "LukkedeOppgaverPanel.ForrigeUke": "Forrige uke",
+  "LukkedeOppgaverPanel.Beskrivelse": "En oppgave er et saksbehandlingspunkt i en behandling. Én behandling kan generere flere oppgaver over tid, og en oppgave er ikke det samme som en sak eller en behandling.",
+  "LukkedeOppgaverPanel.GrafBeskrivelse": "Grafen viser antall avsluttede oppgaver per dag i valgt uke, fordelt på ukedager. Stiplede linjer viser totalt og onsdag forrige uke som sammenligningsgrunnlag.",
+  "LukkedeOppgaverPanel.SistOppdatert": "Sist oppdatert: {tidspunkt}",
+  "LukkedeOppgaverGraf.IngenData": "Ingen statistikk tilgjengelig for denne køen",
 
   "EndreReservasjonDato.Lagrer": "Lagrer...",
   "EndreReservasjonDato.Lagret": "Lagret",

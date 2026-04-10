@@ -68,6 +68,27 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
   const options = getStyle();
 
   const { antallPerDag, mandagDato } = lukkedeOppgaver;
+  const ingenData = antallPerDag.every(v => v === 0) && lukkedeOppgaver.forrigeUkeTotal === 0;
+
+  if (ingenData) {
+    const emptyOption: EChartsOption = {
+      title: {
+        text: intl.formatMessage({ id: 'LukkedeOppgaverGraf.IngenData' }),
+        left: 'center',
+        top: 'middle',
+        textStyle: {
+          color: getAkselVariable('--ax-text-neutral-subtle'),
+          fontSize: 14,
+          fontWeight: 'normal',
+        },
+      },
+      xAxis: { show: false },
+      yAxis: { show: false },
+      series: [],
+    };
+    return <ReactECharts height={height} option={emptyOption} />;
+  }
+
   const erInneværendeUke = dayjs(mandagDato).startOf('day').isSame(startAvIsoUke(dayjs()), 'day');
   const xAxisDatoer = lagUkedatoer(mandagDato);
   const offsetSerieData = lagStackOffsetSerieData(antallPerDag);

@@ -16,6 +16,7 @@ import {
 import { KøFiltere } from './KøFiltere';
 
 import styles from './sakslisteVelgerForm.module.css';
+import { AvsluttedeOppgaverDialog } from './AvsluttedeOppgaverDialog';
 
 type FormValues = {
   sakslisteId: string | undefined;
@@ -85,6 +86,7 @@ export const SakslisteVelgerForm = ({ sakslister, setValgtSakslisteId, fetchAnta
           <Detail className="content-end pb-1 whitespace-pre-line">{valgtSaksliste.beskrivelse}</Detail>
         )}
         <Spacer />
+        {valgtSaksliste && <AvsluttedeOppgaverDialog valgtSakslisteId={valgtSaksliste.sakslisteId} sakslisteNavn={valgtSaksliste.navn} />}
         <Button
           size="small"
           variant="tertiary"
