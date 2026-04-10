@@ -11,12 +11,11 @@ import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
+import { BrevRedigeringModal, utledDelerFraBrev, utledRedigerbartInnhold } from '@navikt/fp-prosess-brev-editor';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, BrevOverstyring, DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-types';
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
-
-import { BrevRedigeringModal, utledDelerFraBrev, utledRedigerbartInnhold } from '@navikt/fp-prosess-brev-editor';
 
 const minLength3 = minLength(3);
 
@@ -85,7 +84,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
     return () => {
       ignore = true;
     };
-  }, [formVerdier.sendVarsel]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [formVerdier.sendVarsel]);
   const lukkModal = () => settSkalVisePåVentModal(false);
   const åpneModal = () => settSkalVisePåVentModal(true);
 

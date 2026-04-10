@@ -1,4 +1,4 @@
-import { type ReactElement, useState } from 'react';
+import { type ReactElement, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -91,6 +91,20 @@ export const MeldingIndex = ({
       }),
   });
 
+  const hentBrevHtmlStabil = useCallback(
+    (brevmalkode: string, årsak?: string) => hentBrevHtml({ brevmalkode, årsak }),
+    [hentBrevHtml],
+  );
+
+  const mellomlagreBrevStabil = useCallback(
+    (brevmalkode: string, html: string | null) =>
+      mellomlagreBrev({
+        brevmalkode,
+        html,
+      }),
+    [mellomlagreBrev],
+  );
+
   const submitCallback = getSubmitCallback(
     setShowMessageModal,
     sendMelding,
@@ -148,8 +162,8 @@ export const MeldingIndex = ({
               meldingFormData={meldingFormData}
               setMeldingFormData={setMeldingFormData}
               brukerManglerAdresse={fagsak.brukerManglerAdresse}
-              hentBrevHtml={harBrevHtmlLenke ? (brevmalkode, årsak) => hentBrevHtml({ brevmalkode, årsak }) : undefined}
-              mellomlagreBrev={harMellomlagreLenke ? (brevmalkode, html) => mellomlagreBrev({ brevmalkode, html }) : undefined}
+              hentBrevHtml={harBrevHtmlLenke ? hentBrevHtmlStabil : undefined}
+              mellomlagreBrev={harMellomlagreLenke ? mellomlagreBrevStabil : undefined}
             />
           )}
         </VStack>
