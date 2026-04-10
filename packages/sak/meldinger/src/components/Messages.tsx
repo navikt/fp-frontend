@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, HStack, Link, VStack } from '@navikt/ds-react';
+import { Alert, Button, HStack, Link, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
+import { BrevRedigeringModal, utledDelerFraBrev, utledRedigerbartInnhold } from '@navikt/fp-prosess-brev-editor';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import type {
+  BrevOverstyring,
   DokumentMalType,
   DokumentMalTypeFpTilbake,
   FagsakBehandlingDto,
@@ -26,6 +28,7 @@ export type FormValues = {
   brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake;
   fritekst?: string;
   årsakskode?: RevurderingVarslingÅrsak;
+  htmlFritekst?: boolean;
 };
 
 export type ForhåndsvisBrevParams = {
@@ -44,6 +47,8 @@ interface Props {
   meldingFormData?: FormValues;
   setMeldingFormData: (data?: FormValues) => void;
   brukerManglerAdresse: boolean;
+  hentBrevHtml?: (brevmalkode: string, årsak?: string) => Promise<BrevOverstyring>;
+  mellomlagreBrev?: (brevmalkode: string, html: string | null) => Promise<void>;
 }
 
 /**
@@ -62,6 +67,8 @@ export const Messages = ({
   meldingFormData,
   setMeldingFormData,
   brukerManglerAdresse,
+  hentBrevHtml,
+  mellomlagreBrev,
 }: Props) => {
   const intl = useIntl();
 
@@ -80,9 +87,26 @@ export const Messages = ({
 
   const { formState, control } = formMethods;
 
+  const [brevData, setBrevData] = useState<{ opprinneligHtml: string; redigertHtml: string | null } | null>(null);
+  const [visRedigeringModal, setVisRedigeringModal] = useState(false);
+
+  const brevDataRef = React.useRef(brevData);
+  brevDataRef.current = brevData;
+
+  useEffect(() => {
+    if (brevDataRef.current && brevmalkode) {
+      void mellomlagreBrev?.(brevmalkode, null).catch(() => {});
+    }
+    setBrevData(null);
+  }, [årsakskode, mellomlagreBrev, brevmalkode]);
+
   const forhåndsvis = (e: React.MouseEvent | React.KeyboardEvent) => {
     if (brevmalkode) {
-      forhåndsvisBrev({ brevmalkode, fritekst, årsakskode: årsakskode });
+      if (brevData?.redigertHtml) {
+        forhåndsvisBrev({ brevmalkode: 'FRIHTM' as DokumentMalType, fritekst: brevData.redigertHtml });
+      } else {
+        forhåndsvisBrev({ brevmalkode, fritekst, årsakskode: årsakskode });
+      }
     }
     e.preventDefault();
   };
@@ -90,69 +114,127 @@ export const Messages = ({
   const language = getLanguageFromSprakkode(behandling.språkkode);
 
   const erVarselOmRevurdering = brevmalkode === 'VARREV';
+  const erInnhenteOpplysninger = brevmalkode === 'INNOPP';
+  const brukBreveditor = (erVarselOmRevurdering || erInnhenteOpplysninger) && hentBrevHtml !== undefined;
+
+  const varselBrevRedigeringVerdier =
+    brevData && visRedigeringModal
+      ? {
+          footer: utledDelerFraBrev(brevData.opprinneligHtml).footer,
+          redigerbartInnhold: utledRedigerbartInnhold(brevData.redigertHtml ?? brevData.opprinneligHtml, false),
+          opprinneligRedigerbartInnhold: utledRedigerbartInnhold(brevData.opprinneligHtml, false),
+        }
+      : null;
 
   return (
-    <RhfForm
-      formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setMeldingFormData}
-    >
-      <VStack gap="space-16">
-        <RhfSelect
-          name="brevmalkode"
-          control={control}
-          label={intl.formatMessage({ id: 'Messages.Template' })}
-          validate={[required]}
-          selectValues={behandling.brevmaler.map(mal => (
-            <option key={mal.kode} value={mal.kode} disabled={!mal.tilgjengelig}>
-              {mal.navn}
-            </option>
-          ))}
-          className={styles['bredde']}
-        />
-        {erVarselOmRevurdering && (
+    <>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={(values: FormValues) => submitCallback(transformValues(values, brukBreveditor, brevData))}
+        setDataOnUnmount={setMeldingFormData}
+      >
+        <VStack gap="space-16">
           <RhfSelect
-            name="årsakskode"
+            name="brevmalkode"
             control={control}
-            label={intl.formatMessage({ id: 'Messages.Årsak' })}
+            label={intl.formatMessage({ id: 'Messages.Template' })}
             validate={[required]}
-            selectValues={filtrerteRevurderingVarslingArsaker.map(cause => (
-              <option key={cause.kode} value={cause.kode}>
-                {cause.navn}
+            selectValues={behandling.brevmaler.map(mal => (
+              <option key={mal.kode} value={mal.kode} disabled={!mal.tilgjengelig}>
+                {mal.navn}
               </option>
             ))}
             className={styles['bredde']}
           />
-        )}
-        {showFritekst(brevmalkode, årsakskode) && (
-          <RhfTextarea
-            name="fritekst"
-            control={control}
-            label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
-            validate={[required, erVarselOmRevurdering ? maxLength10000 : maxLength4000, minLength3, hasValidText]}
-            maxLength={erVarselOmRevurdering ? 10000 : 4000}
-            badges={[{ type: 'info', titleText: language }]}
-            parse={formaterFritekst}
-          />
-        )}
-        {brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
-        <HStack justify="space-between">
-          {(!erVarselOmRevurdering || årsakskode !== undefined) && (
-            <Link href="#" onClick={forhåndsvis} onKeyDown={e => (e.key === 'Enter' ? forhåndsvis(e) : null)}>
-              <FormattedMessage id="Messages.Preview" />
-            </Link>
+          {erVarselOmRevurdering && (
+            <RhfSelect
+              name="årsakskode"
+              control={control}
+              label={intl.formatMessage({ id: 'Messages.Årsak' })}
+              validate={[required]}
+              selectValues={filtrerteRevurderingVarslingArsaker.map(cause => (
+                <option key={cause.kode} value={cause.kode}>
+                  {cause.navn}
+                </option>
+              ))}
+              className={styles['bredde']}
+            />
           )}
-          <Button
-            size="small"
-            variant="primary"
-            loading={formState.isSubmitting}
-            disabled={formState.isSubmitting || kanVeilede}
-          >
-            <FormattedMessage id="Messages.Submit" />
-          </Button>
-        </HStack>
-      </VStack>
-    </RhfForm>
+          {brukBreveditor && (!erVarselOmRevurdering || årsakskode !== undefined) && (
+            <VStack gap="space-8">
+              <Button
+                variant="secondary"
+                size="small"
+                type="button"
+                onClick={async () => {
+                  if (!brevData) {
+                    try {
+                      const result = await hentBrevHtml(brevmalkode, årsakskode);
+                      setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+                    } catch {
+                      return;
+                    }
+                  }
+                  setVisRedigeringModal(true);
+                }}
+              >
+                <FormattedMessage id="Messages.RedigerBrev" />
+              </Button>
+              {brevData?.redigertHtml && (
+                <Alert variant="success" size="small">
+                  <FormattedMessage id="Messages.BrevErRedigert" />
+                </Alert>
+              )}
+            </VStack>
+          )}
+          {!brukBreveditor && showFritekst(brevmalkode, årsakskode) && (
+            <RhfTextarea
+              name="fritekst"
+              control={control}
+              label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
+              validate={[required, erVarselOmRevurdering ? maxLength10000 : maxLength4000, minLength3, hasValidText]}
+              maxLength={erVarselOmRevurdering ? 10000 : 4000}
+              badges={[{ type: 'info', titleText: language }]}
+              parse={formaterFritekst}
+            />
+          )}
+          {brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
+          <HStack justify="space-between">
+            {(!erVarselOmRevurdering || årsakskode !== undefined) && (
+              <Link href="#" onClick={forhåndsvis} onKeyDown={e => (e.key === 'Enter' ? forhåndsvis(e) : null)}>
+                <FormattedMessage id="Messages.Preview" />
+              </Link>
+            )}
+            <Button
+              size="small"
+              variant="primary"
+              loading={formState.isSubmitting}
+              disabled={formState.isSubmitting || kanVeilede || (erInnhenteOpplysninger && brukBreveditor && !brevData?.redigertHtml)}
+            >
+              <FormattedMessage id="Messages.Submit" />
+            </Button>
+          </HStack>
+        </VStack>
+      </RhfForm>
+      {varselBrevRedigeringVerdier && brevData && visRedigeringModal && (
+        <BrevRedigeringModal
+          opprinneligHtml={brevData.opprinneligHtml}
+          redigerbartInnhold={varselBrevRedigeringVerdier.redigerbartInnhold}
+          opprinneligRedigerbartInnhold={varselBrevRedigeringVerdier.opprinneligRedigerbartInnhold}
+          footer={varselBrevRedigeringVerdier.footer}
+          mellomlagreOgHentPåNytt={async html => {
+            if (mellomlagreBrev && brevmalkode) {
+              await mellomlagreBrev(brevmalkode, html);
+            }
+            setBrevData(prev => (prev ? { ...prev, redigertHtml: html } : null));
+          }}
+          forhåndsvisBrev={html =>
+            forhåndsvisBrev({ brevmalkode: 'FRIHTM' as DokumentMalType, fritekst: html })
+          }
+          setVisRedigeringModal={setVisRedigeringModal}
+        />
+      )}
+    </>
   );
 };
 
@@ -196,9 +278,12 @@ const buildInitialValues = (behandling: FagsakBehandlingDto): FormValues => {
   return { ...initialValues };
 };
 
-const transformValues = (values: FormValues) => {
-  const newValues = values;
-  if (values.brevmalkode === 'VARREV' && newValues.årsakskode !== 'ANNET') {
+const transformValues = (values: FormValues, brukBreveditor: boolean, brevData: { opprinneligHtml: string; redigertHtml: string | null } | null) => {
+  const newValues = { ...values };
+  if (brukBreveditor && brevData?.redigertHtml) {
+    newValues.fritekst = brevData.redigertHtml;
+    newValues.htmlFritekst = true;
+  } else if (values.brevmalkode === 'VARREV' && (brukBreveditor || newValues.årsakskode !== 'ANNET')) {
     newValues.fritekst = ' ';
   }
   return newValues;

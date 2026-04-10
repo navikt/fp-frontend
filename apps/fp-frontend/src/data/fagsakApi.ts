@@ -10,6 +10,7 @@ import type {
   ApiLink,
   BehandlingFpSak,
   BehandlingFpTilbake,
+  BrevOverstyring,
   Dokument,
   Fagsak,
   FagsakBehandlingDto,
@@ -51,6 +52,7 @@ export type SubmitMessageParams = {
   brevmalkode?: string;
   fritekst?: string;
   årsakskode?: string;
+  htmlFritekst?: boolean;
 };
 
 export type NyBehandlingParams = {
@@ -105,6 +107,8 @@ export const FagsakRel = {
   ALL_DOCUMENTS: 'sak-dokumentliste',
   KAN_TILBAKEKREVING_OPPRETTES: 'tilbake-kan-opprette-behandling',
   KAN_TILBAKEKREVING_REVURDERING_OPPRETTES: 'tilbake-kan-opprette-revurdering',
+  HENT_BREV_HTML: 'hent-brev-html',
+  MELLOMLAGRE_BREV_OVERSTYRING: 'mellomlagre-brev-overstyring',
 };
 
 export const initFetchOptions = () =>
@@ -273,6 +277,24 @@ const getSendMelding = (links?: ApiLink[]) => (params: SubmitMessageParams) =>
     })
     .json();
 
+const getHentBrevHtml = (links: ApiLink[]) => (dokumentMalType: string, revurderingÅrsak?: string) => {
+  const baseUrl = getUrlFromRel('HENT_BREV_HTML', links);
+  const separator = baseUrl.includes('?') ? '&' : '?';
+  const årsakParam = revurderingÅrsak ? `&revurderingÅrsak=${encodeURIComponent(revurderingÅrsak)}` : '';
+  return kyExtended
+    .get(`${baseUrl}${separator}dokumentMal=${encodeURIComponent(dokumentMalType)}${årsakParam}`)
+    .json<BrevOverstyring>();
+};
+
+const getMellomlagreBrevOverstyring =
+  (links: ApiLink[]) =>
+  (params: { behandlingUuid: string; redigertInnhold: string | null; dokumentMal?: string }) =>
+    kyExtended
+      .post(getUrlFromRel('MELLOMLAGRE_BREV_OVERSTYRING', links), {
+        json: params,
+      })
+      .json<void>();
+
 export const useFagsakApi = () => {
   const { data: initFetchFpSak } = useQuery(initFetchOptions());
   const { data: initFetchFpTilbake } = useQuery(initFetchFpTilbakeOptions());
@@ -302,5 +324,7 @@ export const useFagsakBehandlingApi = (valgtBehandling: FagsakBehandlingDto) => 
     lagreTotrinnsaksjonspunkt: getLagreTotrinnsaksjonspunkt(links),
     sendMelding: getSendMelding(links),
     forhåndsvisMelding: getForhåndsvisMelding(links),
+    hentBrevHtml: getHentBrevHtml(links),
+    mellomlagreBrevOverstyring: getMellomlagreBrevOverstyring(links),
   };
 };

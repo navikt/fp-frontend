@@ -62,30 +62,36 @@ export const utledDelerFraBrev = (html: string) => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
   const navLogo = notEmpty(heleBrevet.getElementById('logo')?.innerHTML, 'Nav-logo finnes ikke i mal');
   const header = notEmpty(heleBrevet.getElementById('header')?.innerHTML, 'Header finnes ikke i mal');
-  const footer = notEmpty(
-    heleBrevet.getElementById('readonly-innhold')?.innerHTML,
-    'Readonly-innhold finnes ikke i mal',
-  );
+  const footer = heleBrevet.getElementById('readonly-innhold')?.innerHTML;
 
   return { navLogo, header, footer };
 };
 
-export const utledRedigerbartInnhold = (html: string, harPraksisUtsettelse: boolean): string => {
+export const utledRedigerbartInnhold = (html: string, inkluderReadonlyInnhold = false): string => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
 
-  const editertbartInnhold = notEmpty(
-    heleBrevet.querySelector('[data-editable]')?.innerHTML,
-    'Redigerbart innhold finnes ikke i mal',
-  );
+  const editerbartInnholdEl = heleBrevet.querySelector('[data-editable]');
 
-  if (harPraksisUtsettelse) {
-    return fjernMellomromOgPTagsILiTags(
-      editertbartInnhold +
-        notEmpty(heleBrevet.getElementById('readonly-innhold')?.innerHTML, 'Readonly-innhold finnes ikke i mal'),
-    );
+  if (editerbartInnholdEl) {
+    const editerbartInnhold = editerbartInnholdEl.innerHTML;
+    if (inkluderReadonlyInnhold) {
+      return fjernMellomromOgPTagsILiTags(
+        editerbartInnhold +
+          (heleBrevet.getElementById('readonly-innhold')?.innerHTML ?? ''),
+      );
+    }
+    return fjernMellomromOgPTagsILiTags(editerbartInnhold);
   }
 
-  return fjernMellomromOgPTagsILiTags(editertbartInnhold);
+  // Fallback: opprinneligHtml har ikke data-editable wrapper — bruk #content minus #header
+  const contentEl = heleBrevet.getElementById('content');
+  if (contentEl) {
+    const klone = contentEl.cloneNode(true) as HTMLElement;
+    klone.querySelector('#header')?.remove();
+    return fjernMellomromOgPTagsILiTags(klone.innerHTML);
+  }
+
+  throw new Error('Redigerbart innhold finnes ikke i mal');
 };
 
 export const erRedigertHtmlGyldig = (html: string): boolean => {

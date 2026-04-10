@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
+import {
+  BrevRedigeringModal,
+  utledDelerFraBrev,
+  utledRedigerbartInnhold,
+} from '@navikt/fp-prosess-brev-editor';
 import type { BrevOverstyring } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
-import { FritekstRedigeringModal } from '../editor/FritekstRedigeringModal';
 
 interface Props {
   forhåndsvisBrev: (data: VedtakForhåndsvisData) => void;
@@ -19,7 +23,11 @@ interface Props {
 
 export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigereVedtaksbrev }: Props) => {
   const intl = useIntl();
-  const { isReadOnly } = usePanelDataContext();
+  const { isReadOnly, fagsak } = usePanelDataContext();
+
+  const harPraksisUtsettelse = fagsak.fagsakMarkeringer.some(
+    markering => markering.fagsakMarkering === 'PRAKSIS_UTSETTELSE',
+  );
 
   const {
     harRedigertBrev,
@@ -30,13 +38,13 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
   } = useVedtakEditeringContext();
 
   const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
-
   const [visFritekstRedigeringModal, setVisFritekstRedigeringModal] = useState(false);
-
   const [brevOverstyring, setBrevOverstyring] = useState<BrevOverstyring | null>(null);
+  const hasFetchedBrevOverstyring = useRef(false);
 
   useEffect(() => {
-    if (harRedigertBrev && hentBrevOverstyring) {
+    if (!hasFetchedBrevOverstyring.current && harRedigertBrev && hentBrevOverstyring) {
+      hasFetchedBrevOverstyring.current = true;
       void hentBrevOverstyring().then(setBrevOverstyring);
     }
   }, []);
@@ -62,7 +70,6 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
     setVisForkastOverstyringModal(false);
     setHarRedigertBrev(false);
     setHarValgtÅRedigereVedtaksbrev(false);
-
     await mellomlagreBrevOverstyring(null);
   };
 
@@ -75,6 +82,30 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
       });
     }
   };
+
+  const forhåndsvisRedigertBrevFraEditor = (html: string) => {
+    const fritekst = harPraksisUtsettelse
+      ? // For praksisUtsettelse: send kun innholdet (uten wrapper), p-tags er allerede lagt til av wrapperen
+        new DOMParser().parseFromString(html, 'text/html').querySelector('[data-editable]')?.innerHTML ?? html
+      : html;
+    forhåndsvisBrev({
+      automatiskVedtaksbrev: false,
+      dokumentMal: 'FRIHTM',
+      fritekst,
+    });
+  };
+
+  const beregnEditorVerdier = (brevData: BrevOverstyring) => {
+    const { footer } = harPraksisUtsettelse ? { footer: undefined } : utledDelerFraBrev(brevData.opprinneligHtml);
+    const redigerbartInnhold = utledRedigerbartInnhold(
+      brevData.redigertHtml ?? brevData.opprinneligHtml,
+      harPraksisUtsettelse,
+    );
+    const opprinneligRedigerbartInnhold = utledRedigerbartInnhold(brevData.opprinneligHtml, harPraksisUtsettelse);
+    return { footer, redigerbartInnhold, opprinneligRedigerbartInnhold };
+  };
+
+  const editorVerdier = brevOverstyring && visFritekstRedigeringModal ? beregnEditorVerdier(brevOverstyring) : null;
 
   return (
     <div style={{ maxWidth: '500px' }}>
@@ -150,14 +181,20 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
           </VStack>
         </Box>
       </VStack>
-      {brevOverstyring && visFritekstRedigeringModal && (
-        <FritekstRedigeringModal
-          setVisFritekstRedigeringModal={setVisFritekstRedigeringModal}
-          brevOverstyring={brevOverstyring}
-          forhåndsvisBrev={forhåndsvisBrev}
+      {editorVerdier && brevOverstyring && visFritekstRedigeringModal && (
+        <BrevRedigeringModal
+          opprinneligHtml={brevOverstyring.opprinneligHtml}
+          redigerbartInnhold={editorVerdier.redigerbartInnhold}
+          opprinneligRedigerbartInnhold={editorVerdier.opprinneligRedigerbartInnhold}
+          footer={editorVerdier.footer}
           mellomlagreOgHentPåNytt={mellomlagreOgHentPåNytt}
+          forhåndsvisBrev={forhåndsvisRedigertBrevFraEditor}
+          setVisRedigeringModal={setVisFritekstRedigeringModal}
+          isReadOnly={isReadOnly}
+          visÅpneINyFaneKnapp
         />
       )}
     </div>
   );
 };
+

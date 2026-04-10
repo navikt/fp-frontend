@@ -1,35 +1,34 @@
-import { type MouseEvent, useState } from 'react';
+import { type MouseEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Heading, HStack, Link, Radio, VStack } from '@navikt/ds-react';
+import { Alert, Button, Heading, HStack, Link, Radio, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { hasValidText, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox, LabeledValue } from '@navikt/ft-ui-komponenter';
-import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
+import { BrevRedigeringModal, utledDelerFraBrev, utledRedigerbartInnhold } from '@navikt/fp-prosess-brev-editor';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-types';
+import type { Aksjonspunkt, BrevOverstyring, DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-types';
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);
-const maxLength10000 = maxLength(10000);
 
 export type ForhandsvisData = {
-  årsakskode: RevurderingVarslingÅrsak;
+  årsakskode?: RevurderingVarslingÅrsak;
   dokumentMal: DokumentMalType;
-  fritekst: string;
+  fritekst?: string;
 };
 
 type FormValues = {
   kode: AksjonspunktKode.UTGÅTT_5025 | AksjonspunktKode.VARSEL_REVURDERING_MANUELL;
   begrunnelse?: string;
   sendVarsel?: boolean;
-  fritekst?: string;
 };
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
@@ -44,6 +43,8 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
 
 interface Props {
   previewCallback: (data: ForhandsvisData) => void;
+  hentVarselHtml?: () => Promise<BrevOverstyring>;
+  mellomlagreBrev?: (html: string | null) => Promise<void>;
 }
 
 /**
@@ -51,7 +52,7 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av varsel om revurdering i søknad.
  */
-export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
+export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mellomlagreBrev }: Props) => {
   const intl = useIntl();
 
   const { isReadOnly, alleKodeverk, behandling, submitCallback, aksjonspunkterForPanel } =
@@ -68,6 +69,22 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
   const formVerdier = formMethods.watch();
 
   const [skalVisePåVentModal, setSkalVisePåVentModal] = useState(false);
+  const [brevData, setBrevData] = useState<{ opprinneligHtml: string; redigertHtml: string | null } | null>(null);
+  const [visRedigeringModal, setVisRedigeringModal] = useState(false);
+
+  const erÅpentAksjonspunkt = !isReadOnly && aksjonspunkterForPanel[0]?.status === 'OPPR';
+
+  useEffect(() => {
+    if (!hentVarselHtml || !erÅpentAksjonspunkt || !formVerdier.sendVarsel || brevData !== null) return;
+    let ignore = false;
+    void hentVarselHtml().then(result => {
+      if (ignore) return;
+      setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+    });
+    return () => {
+      ignore = true;
+    };
+  }, [formVerdier.sendVarsel]);
   const lukkModal = () => setSkalVisePåVentModal(false);
   const åpneModal = () => setSkalVisePåVentModal(true);
 
@@ -85,14 +102,29 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
 
   const forhåndsvisMelding = (e: MouseEvent) => {
     e.preventDefault();
-    previewCallback({
-      dokumentMal: 'VARREV',
-      årsakskode: 'ANNET',
-      fritekst: formVerdier.fritekst ?? ' ',
-    });
+    if (brevData?.redigertHtml) {
+      previewCallback({
+        dokumentMal: 'FRIHTM',
+        årsakskode: 'ANNET',
+        fritekst: brevData.redigertHtml,
+      });
+    } else {
+      previewCallback({
+        dokumentMal: 'VARREV',
+      });
+    }
   };
   const ventearsaker = alleKodeverk['Venteårsak'];
-  const language = getLanguageFromSprakkode(behandling.språkkode);
+
+  const varselBrevRedigeringVerdier =
+    brevData && visRedigeringModal
+      ? {
+          footer: utledDelerFraBrev(brevData.opprinneligHtml).footer,
+          redigerbartInnhold: utledRedigerbartInnhold(brevData.redigertHtml ?? brevData.opprinneligHtml, false),
+          opprinneligRedigerbartInnhold: utledRedigerbartInnhold(brevData.opprinneligHtml, false),
+        }
+      : null;
+
   return (
     <>
       <RhfForm formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
@@ -100,7 +132,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
           <Heading size="small" level="2">
             <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
           </Heading>
-          {!isReadOnly && aksjonspunkterForPanel[0]?.status === 'OPPR' && (
+          {erÅpentAksjonspunkt && (
             <>
               <AksjonspunktHelpTextHTML>
                 <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />
@@ -125,20 +157,34 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
                 {formVerdier.sendVarsel && (
                   <ArrowBox>
                     <VStack gap="space-8">
-                      <RhfTextarea
-                        name="fritekst"
-                        control={formMethods.control}
-                        badges={[{ type: 'info', titleText: language }]}
-                        label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
-                        validate={[required, minLength3, maxLength10000, hasValidText]}
-                        maxLength={10000}
-                        parse={formaterFritekst}
-                      />
                       <div>
                         <Link href="#" onClick={forhåndsvisMelding}>
                           <FormattedMessage id="VarselOmRevurderingForm.Preview" />
                         </Link>
                       </div>
+                      {hentVarselHtml && (
+                        <div>
+                          <Button
+                            variant="secondary"
+                            size="small"
+                            type="button"
+                            onClick={async () => {
+                              if (!brevData) {
+                                const result = await hentVarselHtml();
+                                setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+                              }
+                              setVisRedigeringModal(true);
+                            }}
+                          >
+                            <FormattedMessage id="VarselOmRevurderingForm.RedigerBrev" />
+                          </Button>
+                        </div>
+                      )}
+                      {brevData?.redigertHtml && (
+                        <Alert variant="success" size="small">
+                          <FormattedMessage id="VarselOmRevurderingForm.BrevErRedigert" />
+                        </Alert>
+                      )}
                     </VStack>
                   </ArrowBox>
                 )}
@@ -163,7 +209,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
               </div>
             </>
           )}
-          {(isReadOnly || aksjonspunkterForPanel[0]?.status !== 'OPPR') && (
+          {!erÅpentAksjonspunkt && (
             <LabeledValue
               size="small"
               label={<FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" />}
@@ -172,6 +218,24 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
           )}
         </VStack>
       </RhfForm>
+      {varselBrevRedigeringVerdier && brevData && visRedigeringModal && (
+        <BrevRedigeringModal
+          opprinneligHtml={brevData.opprinneligHtml}
+          redigerbartInnhold={varselBrevRedigeringVerdier.redigerbartInnhold}
+          opprinneligRedigerbartInnhold={varselBrevRedigeringVerdier.opprinneligRedigerbartInnhold}
+          footer={varselBrevRedigeringVerdier.footer}
+          mellomlagreOgHentPåNytt={async html => {
+            if (mellomlagreBrev) {
+              await mellomlagreBrev(html);
+            }
+            setBrevData(prev => (prev ? { ...prev, redigertHtml: html } : null));
+          }}
+          forhåndsvisBrev={html =>
+            previewCallback({ dokumentMal: 'FRIHTM', årsakskode: 'ANNET', fritekst: html })
+          }
+          setVisRedigeringModal={setVisRedigeringModal}
+        />
+      )}
       <SettPaVentModalIndex
         showModal={skalVisePåVentModal}
         frist={dayjs().add(28, 'days').format(ISO_DATE_FORMAT)}

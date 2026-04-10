@@ -2,14 +2,13 @@ import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
   ignore: [
-    '@types/editorjs-undo.d.ts',
     '.storybook/**',
     'server/**',
     'packages/types/src/los/fplos.gen.ts',
     'packages/types/src/fpsak.gen.ts',
     'packages/kodeverk/src/aksjonspunktCodes.ts',
   ],
-  ignoreDependencies: ['glob'],
+  ignoreDependencies: ['glob', '@editorjs/editorjs'],
 };
 
 export default config;

@@ -2848,6 +2848,41 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@navikt/fp-prosess-brev-editor@workspace:*, @navikt/fp-prosess-brev-editor@workspace:packages/prosess/brev-editor":
+  version: 0.0.0-use.local
+  resolution: "@navikt/fp-prosess-brev-editor@workspace:packages/prosess/brev-editor"
+  dependencies:
+    "@editorjs/editorjs": "npm:2.31.5"
+    "@editorjs/header": "npm:2.8.8"
+    "@editorjs/list": "npm:2.0.9"
+    "@editorjs/paragraph": "npm:2.11.7"
+    "@navikt/aksel-icons": "npm:8.9.0"
+    "@navikt/ds-react": "npm:8.9.0"
+    "@navikt/fp-config-eslint": "workspace:*"
+    "@navikt/fp-config-typescript": "workspace:*"
+    "@navikt/fp-config-vite": "workspace:*"
+    "@navikt/fp-utils": "workspace:*"
+    "@navikt/ft-utils": "npm:3.12.0"
+    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/react": "npm:16.3.2"
+    "@testing-library/user-event": "npm:14.6.1"
+    "@types/css-tree": "npm:2.3.11"
+    "@types/lodash.debounce": "npm:4.0.9"
+    css-tree: "npm:3.2.1"
+    editorjs-html: "npm:4.0.5"
+    editorjs-undo: "npm:2.0.28"
+    eslint: "npm:9.39.4"
+    lodash.debounce: "npm:4.0.8"
+    react: "npm:19.2.4"
+    react-intl: "npm:10.1.1"
+    react-router-dom: "npm:7.13.2"
+    stylelint: "npm:17.6.0"
+    typescript: "npm:5.9.3"
+    vite: "npm:8.0.5"
+    vitest: "npm:4.1.2"
+  languageName: unknown
+  linkType: soft
+
 "@navikt/fp-prosess-felles@workspace:*, @navikt/fp-prosess-felles@workspace:packages/prosess/felles":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-felles@workspace:packages/prosess/felles"
@@ -3137,6 +3172,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-varsel-om-revurdering@workspace:packages/prosess/varsel-om-revurdering"
   dependencies:
+    "@navikt/aksel-icons": "npm:8.9.0"
     "@navikt/ds-css": "npm:8.9.0"
     "@navikt/ds-react": "npm:8.9.0"
     "@navikt/fp-config-eslint": "workspace:*"
@@ -3144,6 +3180,7 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-modal-sett-pa-vent": "workspace:*"
+    "@navikt/fp-prosess-brev-editor": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -3240,10 +3277,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak@workspace:packages/prosess/vedtak"
   dependencies:
-    "@editorjs/editorjs": "npm:2.31.5"
-    "@editorjs/header": "npm:2.8.8"
-    "@editorjs/list": "npm:2.0.9"
-    "@editorjs/paragraph": "npm:2.11.7"
     "@navikt/aksel-icons": "npm:8.9.0"
     "@navikt/ds-css": "npm:8.9.0"
     "@navikt/ds-react": "npm:8.9.0"
@@ -3251,6 +3284,7 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
+    "@navikt/fp-prosess-brev-editor": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -3266,14 +3300,8 @@ __metadata:
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/react": "npm:16.3.2"
     "@testing-library/user-event": "npm:14.6.1"
-    "@types/css-tree": "npm:2.3.11"
-    "@types/lodash.debounce": "npm:4.0.9"
-    css-tree: "npm:3.2.1"
     dayjs: "npm:1.11.20"
-    editorjs-html: "npm:4.0.5"
-    editorjs-undo: "npm:2.0.28"
     eslint: "npm:9.39.4"
-    lodash.debounce: "npm:4.0.8"
     react: "npm:19.2.4"
     react-hook-form: "npm:7.72.1"
     react-intl: "npm:10.1.1"
@@ -3715,6 +3743,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
+    "@navikt/fp-prosess-brev-editor": "workspace:*"
     "@navikt/fp-sak-ukjent-adresse": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"

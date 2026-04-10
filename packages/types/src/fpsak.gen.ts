@@ -4784,6 +4784,7 @@ export type foreldrepenger_kontrakter_formidling_v3_DokumentKvitteringDto = {
 export type tjenester_brev_BrevRestTjeneste_MellomlagreHtmlDto = {
   behandlingUuid: string;
   redigertInnhold?: string;
+  dokumentMal?: string;
 };
 
 export type foreldrepenger_dokumentarkiv_Kommunikasjonsretning = 'INN' | 'UT' | 'NOTAT';
