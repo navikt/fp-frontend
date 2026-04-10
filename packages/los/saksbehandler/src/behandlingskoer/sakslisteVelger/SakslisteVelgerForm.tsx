@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Detail, HStack, Label, Spacer, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Detail, HStack, Label, Modal, Spacer, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 
 import type { SakslisteDto } from '@navikt/fp-types';
@@ -16,6 +16,7 @@ import {
 import { KøFiltere } from './KøFiltere';
 
 import styles from './sakslisteVelgerForm.module.css';
+import { AvsluttedeOppgaverDialog } from './AvsluttedeOppgaverDialog.tsx';
 
 type FormValues = {
   sakslisteId: string | undefined;
@@ -85,6 +86,7 @@ export const SakslisteVelgerForm = ({ sakslister, setValgtSakslisteId, fetchAnta
           <Detail className="content-end pb-1 whitespace-pre-line">{valgtSaksliste.beskrivelse}</Detail>
         )}
         <Spacer />
+        {valgtSaksliste && <AvsluttedeOppgaverDialog valgtSakslisteId={valgtSaksliste.sakslisteId} />}
         <Button
           size="small"
           variant="tertiary"
