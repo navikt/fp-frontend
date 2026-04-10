@@ -68,7 +68,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
 
   const formVerdier = formMethods.watch();
 
-  const [skalVisePåVentModal, settSkalVisePåVentModal] = useState(false);
+  const [skalVisePåVentModal, setSkalVisePåVentModal] = useState(false);
   const [brevData, setBrevData] = useState<{ opprinneligHtml: string; redigertHtml: string | null } | null>(null);
   const [visRedigeringModal, setVisRedigeringModal] = useState(false);
 
@@ -85,8 +85,8 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
       ignore = true;
     };
   }, [formVerdier.sendVarsel]);
-  const lukkModal = () => settSkalVisePåVentModal(false);
-  const åpneModal = () => settSkalVisePåVentModal(true);
+  const lukkModal = () => setSkalVisePåVentModal(false);
+  const åpneModal = () => setSkalVisePåVentModal(true);
 
   const håndterSubmitFraModal = (modalValues: ModalFormValues) => {
     void formMethods.trigger().then(isValid => {
