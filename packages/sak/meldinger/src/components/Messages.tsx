@@ -159,12 +159,8 @@ export const Messages = ({
                 type="button"
                 onClick={async () => {
                   if (!brevData) {
-                    try {
-                      const result = await hentBrevHtml(brevmalkode, årsakskode);
-                      setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
-                    } catch {
-                      return;
-                    }
+                    const result = await hentBrevHtml(brevmalkode, årsakskode);
+                    setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
                   }
                   setVisRedigeringModal(true);
                 }}
