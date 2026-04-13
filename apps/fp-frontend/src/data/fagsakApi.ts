@@ -277,14 +277,12 @@ const getSendMelding = (links?: ApiLink[]) => (params: SubmitMessageParams) =>
     })
     .json();
 
-const getHentBrevHtml = (links: ApiLink[]) => (dokumentMalType: string, revurderingÅrsak?: string) => {
-  const baseUrl = getUrlFromRel('HENT_BREV_HTML', links);
-  const separator = baseUrl.includes('?') ? '&' : '?';
-  const årsakParam = revurderingÅrsak ? `&revurderingÅrsak=${encodeURIComponent(revurderingÅrsak)}` : '';
-  return kyExtended
-    .get(`${baseUrl}${separator}dokumentMal=${encodeURIComponent(dokumentMalType)}${årsakParam}`)
+const getHentBrevHtml = (links: ApiLink[]) => (dokumentMalType: string, revurderingÅrsak?: string) =>
+  kyExtended
+    .get(getUrlFromRel('HENT_BREV_HTML', links), {
+      searchParams: { dokumentMal: dokumentMalType, ...(revurderingÅrsak ? { revurderingÅrsak } : {}) },
+    })
     .json<BrevOverstyring>();
-};
 
 const getMellomlagreBrevOverstyring =
   (links: ApiLink[]) =>

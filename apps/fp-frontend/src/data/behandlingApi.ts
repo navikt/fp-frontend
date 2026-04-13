@@ -649,13 +649,10 @@ const getMellomlagreBrevOverstyring =
       })
       .json<void>();
 
-const getHentBrevHtml = (links: ApiLink[]) => (dokumentMalType: string) => {
-  const baseUrl = getUrlFromRel('HENT_BREV_HTML', links);
-  const separator = baseUrl.includes('?') ? '&' : '?';
-  return kyExtended
-    .get(`${baseUrl}${separator}dokumentMal=${encodeURIComponent(dokumentMalType)}`)
+const getHentBrevHtml = (links: ApiLink[]) => (dokumentMalType: string) =>
+  kyExtended
+    .get(getUrlFromRel('HENT_BREV_HTML', links), { searchParams: { dokumentMal: dokumentMalType } })
     .json<BrevOverstyring>();
-};
 
 const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRel('VERGE_FJERN_V2', links));
 
