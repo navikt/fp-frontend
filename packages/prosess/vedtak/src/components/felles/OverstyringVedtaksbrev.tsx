@@ -9,7 +9,7 @@ import {
   BrevRedigeringModal,
   utledDelerFraBrev,
   utledRedigerbartInnhold,
-} from '@navikt/fp-prosess-brev-editor';
+} from '@navikt/fp-brev-editor';
 import type { BrevOverstyring } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
