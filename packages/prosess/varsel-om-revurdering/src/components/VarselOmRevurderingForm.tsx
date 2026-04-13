@@ -1,4 +1,4 @@
-import { type MouseEvent, useState } from 'react';
+import { type MouseEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -71,6 +71,21 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
   const [skalVisePåVentModal, setSkalVisePåVentModal] = useState(false);
   const [brevData, setBrevData] = useState<{ opprinneligHtml: string; redigertHtml: string | null } | null>(null);
   const [visRedigeringModal, setVisRedigeringModal] = useState(false);
+
+  useEffect(() => {
+    if (!hentVarselHtml || !erÅpentAksjonspunkt) {
+      return;
+    }
+    let ignore = false;
+    void hentVarselHtml().then(result => {
+      if (!ignore) {
+        setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+      }
+    });
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const erÅpentAksjonspunkt = !isReadOnly && aksjonspunkterForPanel[0]?.status === 'OPPR';
 
