@@ -827,44 +827,6 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
   },
 };
 
-export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: Story = {
-  args: {
-    behandling: defaultBehandling,
-    beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      ...defaultSak,
-      saksnummer: '1234567',
-      fagsakYtelseType: 'FP',
-      bruker: {
-        navn: 'Kari Nordmann',
-        fødselsnummer: '',
-        kjønn: '-',
-        fødselsdato: '',
-        språkkode: '-',
-      },
-      annenPart: {
-        navn: 'Ola Nordmann',
-        fødselsnummer: '',
-        kjønn: '-',
-        fødselsdato: '',
-        språkkode: '-',
-      },
-      relasjonsRolleType: 'MORA',
-      annenpartBehandling: {
-        relasjonsRolleType: 'FARA',
-        saksnummer: '',
-        behandlingUuid: '',
-      },
-      fagsakMarkeringer: [
-        {
-          fagsakMarkering: 'PRAKSIS_UTSETTELSE',
-          kortNavn: 'Utsettelse',
-        },
-      ],
-    },
-  },
-};
-
 export const SkalIkkeProduseresBrev: Story = {
   args: {
     behandling: {

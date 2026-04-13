@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { useHref, useLocation } from 'react-router-dom';
 
@@ -7,6 +7,7 @@ import { Alert, Button, Dialog } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import { BrevInnhold } from './BrevInnhold';
+import { utledDelerFraBrev, utledRedigerbartInnhold } from './redigeringsUtils';
 import { useBrevEditorJs } from './useBrevEditorJs';
 
 import messages from '../i18n/nb_NO.json';
@@ -16,17 +17,13 @@ const intl = createIntl(messages);
 const BREV_EDITOR_HOLDER_ID = 'brev-rediger-innhold';
 
 interface Props {
-  /** Opprinnelig HTML fra backend – brukes til å hente ut CSS-stiler, logo og header */
+  /** Full opprinnelig HTML fra backend */
   opprinneligHtml: string;
-  /** Pre-beregnet redigerbart innhold (kallende kode håndterer domenregler som harPraksisUtsettelse) */
-  redigerbartInnhold: string;
-  /** Pre-beregnet opprinnelig redigerbart innhold – brukes ved tilbakestilling */
-  opprinneligRedigerbartInnhold: string;
-  /** Valgfri readonly-seksjon som vises under editoren (undefined = ingen separat footer) */
-  footer?: string;
+  /** Redigert HTML fra mellomlagring, eller null hvis ikke redigert */
+  redigertHtml: string | null;
   /** Kalles med pakket HTML ved auto-mellomlagring og eksplisitt lagring */
   mellomlagreOgHentPåNytt: (html: string | null) => Promise<void>;
-  /** Kalles med pakket HTML for forhåndsvisning */
+  /** Kalles med ferdig HTML for forhåndsvisning */
   forhåndsvisBrev: (html: string) => void;
   setVisRedigeringModal: (vis: boolean) => void;
   isReadOnly?: boolean;
@@ -36,14 +33,13 @@ interface Props {
 /**
  * Generisk modal for redigering av brev med Editor.js.
  *
- * Kallende kode er ansvarlig for å pre-beregne `redigerbartInnhold`, `opprinneligRedigerbartInnhold`
- * og `footer` ut fra domeneregler (f.eks. harPraksisUtsettelse for vedtak).
+ * HTML-parsing skjer internt. Backend-malene (fp-dokgen) bestemmer hva som er
+ * redigerbart (`redigerbart_innhold`) og hva som er readonly (`readonly_innhold`).
+ * Eventuelt readonly-innhold vises som footer under editoren.
  */
 export const BrevRedigeringModal = ({
   opprinneligHtml,
-  redigerbartInnhold,
-  opprinneligRedigerbartInnhold,
-  footer,
+  redigertHtml,
   mellomlagreOgHentPåNytt,
   forhåndsvisBrev,
   setVisRedigeringModal,
@@ -56,6 +52,15 @@ export const BrevRedigeringModal = ({
   const { pathname } = useLocation();
   const href = useHref(pathname);
 
+  const { footer, redigerbartInnhold, opprinneligRedigerbartInnhold } = useMemo(() => {
+    const { footer: detectedFooter } = utledDelerFraBrev(opprinneligHtml);
+    return {
+      footer: detectedFooter,
+      redigerbartInnhold: utledRedigerbartInnhold(redigertHtml ?? opprinneligHtml),
+      opprinneligRedigerbartInnhold: utledRedigerbartInnhold(opprinneligHtml),
+    };
+  }, [opprinneligHtml, redigertHtml]);
+
   const { tilbakestillEndringer, hentEditorStatus } = useBrevEditorJs(
     BREV_EDITOR_HOLDER_ID,
     redigerbartInnhold,
@@ -64,11 +69,11 @@ export const BrevRedigeringModal = ({
   );
 
   const lagreOgLukk = async () => {
-    const { erGyldig, erEndret, redigertHtml } = await hentEditorStatus();
+    const { erGyldig, erEndret, redigertHtml: editorHtml } = await hentEditorStatus();
     if (erGyldig) {
       setVisValideringsFeil(false);
       if (erEndret) {
-        await mellomlagreOgHentPåNytt(redigertHtml);
+        await mellomlagreOgHentPåNytt(editorHtml);
       }
       setVisRedigeringModal(false);
     } else {
@@ -77,10 +82,10 @@ export const BrevRedigeringModal = ({
   };
 
   const forhåndsvisEditertBrev = async () => {
-    const { erGyldig, redigertHtml } = await hentEditorStatus();
+    const { erGyldig, redigertHtml: editorHtml } = await hentEditorStatus();
     if (erGyldig) {
       setVisValideringsFeil(false);
-      forhåndsvisBrev(redigertHtml);
+      forhåndsvisBrev(editorHtml);
     } else {
       setVisValideringsFeil(true);
     }

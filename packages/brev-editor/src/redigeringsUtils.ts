@@ -67,20 +67,13 @@ export const utledDelerFraBrev = (html: string) => {
   return { navLogo, header, footer };
 };
 
-export const utledRedigerbartInnhold = (html: string, inkluderReadonlyInnhold = false): string => {
+export const utledRedigerbartInnhold = (html: string): string => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
 
   const editerbartInnholdEl = heleBrevet.querySelector('[data-editable]');
 
   if (editerbartInnholdEl) {
-    const editerbartInnhold = editerbartInnholdEl.innerHTML;
-    if (inkluderReadonlyInnhold) {
-      return fjernMellomromOgPTagsILiTags(
-        editerbartInnhold +
-          (heleBrevet.getElementById('readonly-innhold')?.innerHTML ?? ''),
-      );
-    }
-    return fjernMellomromOgPTagsILiTags(editerbartInnhold);
+    return fjernMellomromOgPTagsILiTags(editerbartInnholdEl.innerHTML);
   }
 
   // Fallback: opprinneligHtml har ikke data-editable wrapper — bruk #content minus #header

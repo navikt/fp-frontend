@@ -7,7 +7,7 @@ import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { BrevRedigeringModal, utledDelerFraBrev, utledRedigerbartInnhold } from '@navikt/fp-brev-editor';
+import { BrevRedigeringModal } from '@navikt/fp-brev-editor';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import type {
   BrevOverstyring,
@@ -117,15 +117,6 @@ export const Messages = ({
   const erInnhenteOpplysninger = brevmalkode === 'INNOPP';
   const brukBreveditor = (erVarselOmRevurdering || erInnhenteOpplysninger) && hentBrevHtml !== undefined;
 
-  const varselBrevRedigeringVerdier =
-    brevData && visRedigeringModal
-      ? {
-          footer: utledDelerFraBrev(brevData.opprinneligHtml).footer,
-          redigerbartInnhold: utledRedigerbartInnhold(brevData.redigertHtml ?? brevData.opprinneligHtml, false),
-          opprinneligRedigerbartInnhold: utledRedigerbartInnhold(brevData.opprinneligHtml, false),
-        }
-      : null;
-
   return (
     <>
       <RhfForm
@@ -216,12 +207,10 @@ export const Messages = ({
           </HStack>
         </VStack>
       </RhfForm>
-      {varselBrevRedigeringVerdier && brevData && visRedigeringModal && (
+      {brevData && visRedigeringModal && (
         <BrevRedigeringModal
           opprinneligHtml={brevData.opprinneligHtml}
-          redigerbartInnhold={varselBrevRedigeringVerdier.redigerbartInnhold}
-          opprinneligRedigerbartInnhold={varselBrevRedigeringVerdier.opprinneligRedigerbartInnhold}
-          footer={varselBrevRedigeringVerdier.footer}
+          redigertHtml={brevData.redigertHtml}
           mellomlagreOgHentPåNytt={async html => {
             if (mellomlagreBrev && brevmalkode) {
               await mellomlagreBrev(brevmalkode, html);

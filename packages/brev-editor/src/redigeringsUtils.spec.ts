@@ -191,24 +191,14 @@ describe('redigeringsUtils', () => {
       expect(result).toContain('Redigerbart innhold');
     });
 
-    it('skal inkludere readonly-innhold når inkluderReadonlyInnhold er true', () => {
-      const html = lagBrevHtml({
-        redigerbartInnhold: '<p>Redigerbart</p>',
-        readonlyInnhold: '<p>Readonly</p>',
-      });
-
-      const result = utledRedigerbartInnhold(html, true);
-      expect(result).toContain('Redigerbart');
-      expect(result).toContain('Readonly');
-    });
-
-    it('skal ikke inkludere readonly-innhold når inkluderReadonlyInnhold er false (standard)', () => {
+    it('skal ikke inkludere readonly-innhold', () => {
       const html = lagBrevHtml({
         redigerbartInnhold: '<p>Redigerbart</p>',
         readonlyInnhold: '<p>KunReadonly</p>',
       });
 
       const result = utledRedigerbartInnhold(html);
+      expect(result).toContain('Redigerbart');
       expect(result).not.toContain('KunReadonly');
     });
 

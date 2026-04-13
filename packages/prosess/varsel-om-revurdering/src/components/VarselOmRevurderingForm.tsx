@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextHTML, ArrowBox, LabeledValue } from '@navikt/ft-ui-
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { BrevRedigeringModal, utledDelerFraBrev, utledRedigerbartInnhold } from '@navikt/fp-brev-editor';
+import { BrevRedigeringModal } from '@navikt/fp-brev-editor';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
@@ -116,15 +116,6 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
   };
   const ventearsaker = alleKodeverk['Venteårsak'];
 
-  const varselBrevRedigeringVerdier =
-    brevData && visRedigeringModal
-      ? {
-          footer: utledDelerFraBrev(brevData.opprinneligHtml).footer,
-          redigerbartInnhold: utledRedigerbartInnhold(brevData.redigertHtml ?? brevData.opprinneligHtml, false),
-          opprinneligRedigerbartInnhold: utledRedigerbartInnhold(brevData.opprinneligHtml, false),
-        }
-      : null;
-
   return (
     <>
       <RhfForm formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
@@ -218,12 +209,10 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
           )}
         </VStack>
       </RhfForm>
-      {varselBrevRedigeringVerdier && brevData && visRedigeringModal && (
+      {brevData && visRedigeringModal && (
         <BrevRedigeringModal
           opprinneligHtml={brevData.opprinneligHtml}
-          redigerbartInnhold={varselBrevRedigeringVerdier.redigerbartInnhold}
-          opprinneligRedigerbartInnhold={varselBrevRedigeringVerdier.opprinneligRedigerbartInnhold}
-          footer={varselBrevRedigeringVerdier.footer}
+          redigertHtml={brevData.redigertHtml}
           mellomlagreOgHentPåNytt={async html => {
             if (mellomlagreBrev) {
               await mellomlagreBrev(html);
