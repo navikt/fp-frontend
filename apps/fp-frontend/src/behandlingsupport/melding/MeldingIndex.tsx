@@ -79,7 +79,8 @@ export const MeldingIndex = ({
   const harMellomlagreLenke = valgtBehandling.links.some(l => l.rel === FagsakRel.MELLOMLAGRE_BREV_OVERSTYRING);
 
   const { mutateAsync: hentBrevHtml } = useMutation({
-    mutationFn: ({ brevmalkode, årsak }: { brevmalkode: string; årsak?: string }) => api.hentBrevHtml(brevmalkode, årsak),
+    mutationFn: ({ brevmalkode, årsak }: { brevmalkode: string; årsak?: string }) =>
+      api.hentBrevHtml(valgtBehandling.uuid, brevmalkode, årsak),
   });
 
   const { mutateAsync: mellomlagreBrev } = useMutation({

@@ -62,7 +62,7 @@ export const VarselProsessStegInitPanel = () => {
   const api = useBehandlingApi(behandling);
 
   const { mutateAsync: hentVarselHtml } = useMutation({
-    mutationFn: () => api.hentBrevHtml('VARREV'),
+    mutationFn: () => api.hentBrevHtml(behandling.uuid, 'VARREV'),
   });
 
   const { mutateAsync: mellomlagreBrev } = useMutation({

@@ -277,10 +277,14 @@ const getSendMelding = (links?: ApiLink[]) => (params: SubmitMessageParams) =>
     })
     .json();
 
-const getHentBrevHtml = (links: ApiLink[]) => (dokumentMalType: string, revurderingÅrsak?: string) =>
+const getHentBrevHtml = (links: ApiLink[]) => (behandlingUuid: string, dokumentMalType: string, revurderingÅrsak?: string) =>
   kyExtended
     .get(getUrlFromRel('HENT_BREV_HTML', links), {
-      searchParams: { dokumentMal: dokumentMalType, ...(revurderingÅrsak ? { revurderingÅrsak } : {}) },
+      searchParams: {
+        uuid: behandlingUuid,
+        dokumentMal: dokumentMalType,
+        ...(revurderingÅrsak ? { revurderingÅrsak } : {}),
+      },
     })
     .json<BrevOverstyring>();
 
