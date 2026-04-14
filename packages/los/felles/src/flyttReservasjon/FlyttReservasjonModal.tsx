@@ -69,10 +69,12 @@ export const FlyttReservasjonModal = ({
   return (
     <RawIntlProvider value={intl}>
       <RhfForm formMethods={formMethods} onSubmit={values => mutateAsync(values)}>
+        {/* Stopper click-propagation så raden bak modalen ikke trigges via React portal event bubbling */}
         <Modal
           open
           onClose={closeModal}
           aria-label={intl.formatMessage({ id: 'FlyttReservasjonModal.FlyttReservasjon' })}
+          onClick={e => e.stopPropagation()}
         >
           <Modal.Header>
             <Label size="medium">

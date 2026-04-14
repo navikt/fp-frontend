@@ -45,7 +45,14 @@ export const NotatModal = ({ begrunnelse, oppgaveId, closeModal, brukerIdent }: 
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={values => mutate(values)}>
-      <Modal width="small" open aria-label={intl.formatMessage({ id: 'NotatModal.SkrivNotat' })} onClose={closeModal}>
+      {/* Stopper click-propagation så raden bak modalen ikke trigges via React portal event bubbling */}
+      <Modal
+        width="small"
+        open
+        aria-label={intl.formatMessage({ id: 'NotatModal.SkrivNotat' })}
+        onClose={closeModal}
+        onClick={e => e.stopPropagation()}
+      >
         <Modal.Header>
           <Label size="medium">
             <FormattedMessage id="NotatModal.SkrivNotat" />
