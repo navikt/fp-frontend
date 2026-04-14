@@ -1,4 +1,4 @@
-import { type MouseEvent, useEffect, useState } from 'react';
+import { type MouseEvent, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -68,26 +68,21 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
 
   const formVerdier = formMethods.watch();
 
+  const erÅpentAksjonspunkt = !isReadOnly && aksjonspunkterForPanel[0]?.status === 'OPPR';
+
   const [skalVisePåVentModal, setSkalVisePåVentModal] = useState(false);
   const [brevData, setBrevData] = useState<{ opprinneligHtml: string; redigertHtml: string | null } | null>(null);
   const [visRedigeringModal, setVisRedigeringModal] = useState(false);
+  const hasFetchedBrevData = useRef(false);
 
   useEffect(() => {
-    if (!hentVarselHtml || !erÅpentAksjonspunkt) {
-      return;
-    }
-    let ignore = false;
-    void hentVarselHtml().then(result => {
-      if (!ignore) {
+    if (!hasFetchedBrevData.current && erÅpentAksjonspunkt && hentVarselHtml) {
+      hasFetchedBrevData.current = true;
+      void hentVarselHtml().then(result => {
         setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
-      }
-    });
-    return () => {
-      ignore = true;
-    };
+      });
+    }
   }, []);
-
-  const erÅpentAksjonspunkt = !isReadOnly && aksjonspunkterForPanel[0]?.status === 'OPPR';
 
   const lukkModal = () => setSkalVisePåVentModal(false);
   const åpneModal = () => setSkalVisePåVentModal(true);
@@ -221,7 +216,10 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
             if (mellomlagreBrev) {
               await mellomlagreBrev(html);
             }
-            setBrevData(prev => (prev ? { ...prev, redigertHtml: html } : null));
+            if (hentVarselHtml) {
+              const res = await hentVarselHtml();
+              setBrevData({ opprinneligHtml: res.opprinneligHtml, redigertHtml: res.redigertHtml });
+            }
           }}
           forhåndsvisBrev={html =>
             previewCallback({ dokumentMal: 'FRIHTM', årsakskode: 'ANNET', fritekst: html })
