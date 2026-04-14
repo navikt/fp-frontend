@@ -14,17 +14,32 @@
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
+    "@navikt/aksel-icons": "8.9.0",
+    "@navikt/ds-css": "8.9.0",
+    "@navikt/ds-react": "8.9.0",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-fakta-beregning": "13.0.0",
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "15.0.0",
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "9.0.0",
+    "@navikt/ft-form-hooks": "11.0.0",
+    "@navikt/ft-form-validators": "5.0.0",
+    "@navikt/ft-plattform-komponenter": "11.0.0",
     "@navikt/ft-prosess-beregningsgrunnlag": "12.0.0",
-    "@navikt/ft-prosess-tilbakekreving-vedtak": "8.0.0"
+    "@navikt/ft-prosess-tilbakekreving-vedtak": "8.0.0",
+    "@navikt/ft-types": "6.0.0",
+    "@navikt/ft-ui-komponenter": "7.0.0",
+    "@navikt/ft-utils": "4.0.0",
+    "dayjs": "1.11.20",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-hook-form": "7.72.1",
+    "react-intl": "10.1.1"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
+    "@types/react": "19.2.9",
     "eslint": "9.39.4",
     "typescript": "5.9.3"
   }
