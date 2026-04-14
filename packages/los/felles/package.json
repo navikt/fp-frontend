@@ -22,10 +22,10 @@
     "@navikt/ds-react": "8.9.0",
     "@navikt/ds-tokens": "8.9.0",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-form-hooks": "10.7.0",
-    "@navikt/ft-form-validators": "4.5.0",
-    "@navikt/ft-ui-komponenter": "6.9.0",
-    "@navikt/ft-utils": "3.12.0",
+    "@navikt/ft-form-hooks": "11.0.0",
+    "@navikt/ft-form-validators": "5.0.0",
+    "@navikt/ft-ui-komponenter": "7.0.0",
+    "@navikt/ft-utils": "4.0.0",
     "@tanstack/react-query": "5.96.1",
     "dayjs": "1.11.20",
     "echarts": "6.0.0",
@@ -35,7 +35,6 @@
     "react-intl": "10.1.1"
   },
   "devDependencies": {
-    "@navikt/ds-css": "8.9.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",

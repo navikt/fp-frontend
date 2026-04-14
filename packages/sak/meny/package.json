@@ -18,14 +18,13 @@
     "storybook": "storybook dev --quiet -p 7048"
   },
   "dependencies": {
-    "@navikt/ds-css": "8.9.0",
     "@navikt/ds-react": "8.9.0",
     "@navikt/fp-fakta-verge": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-form-hooks": "10.7.0",
-    "@navikt/ft-form-validators": "4.5.0",
-    "@navikt/ft-ui-komponenter": "6.9.0",
-    "@navikt/ft-utils": "3.12.0",
+    "@navikt/ft-form-hooks": "11.0.0",
+    "@navikt/ft-form-validators": "5.0.0",
+    "@navikt/ft-ui-komponenter": "7.0.0",
+    "@navikt/ft-utils": "4.0.0",
     "react": "19.2.4",
     "react-hook-form": "7.72.1",
     "react-intl": "10.1.1"
