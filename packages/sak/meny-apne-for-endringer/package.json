@@ -18,10 +18,13 @@
     "storybook": "storybook dev --quiet -p 7049"
   },
   "dependencies": {
+    "@navikt/aksel-icons": "8.9.0",
     "@navikt/ds-react": "8.9.0",
     "@navikt/ft-ui-komponenter": "7.0.0",
     "@navikt/ft-utils": "4.0.0",
+    "dayjs": "1.11.20",
     "react": "19.2.4",
+    "react-dom": "19.2.4",
     "react-intl": "10.1.1"
   },
   "devDependencies": {
@@ -33,6 +36,7 @@
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
+    "@types/react": "19.2.9",
     "eslint": "9.39.4",
     "storybook": "10.3.3",
     "typescript": "5.9.3",

@@ -40,6 +40,7 @@
     "editorjs-undo": "2.0.28",
     "lodash.debounce": "4.0.8",
     "react": "19.2.4",
+    "react-dom": "19.2.4",
     "react-hook-form": "7.72.1",
     "react-intl": "10.1.1"
   },
@@ -55,6 +56,7 @@
     "@testing-library/user-event": "14.6.1",
     "@types/css-tree": "2.3.11",
     "@types/lodash.debounce": "4.0.9",
+    "@types/react": "19.2.9",
     "eslint": "9.39.4",
     "storybook": "10.3.3",
     "stylelint": "17.6.0",
