@@ -100,6 +100,8 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
                 formatter: (value: string) => {
                   if (tidsintervall === 'dag') {
                     return timeFormat(value);
+                  } else if (tidsintervall === 'måned') {
+                    return dayjs(value).format('DD.MM');
                   } else {
                     return dayjs(value).format('ddd DD.MM');
                   }
