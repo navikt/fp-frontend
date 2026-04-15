@@ -7,9 +7,10 @@ import { startAvIsoUke } from './ukeUtils';
 
 export type LukkedeOppgaverData = Readonly<{
   antallPerDag: (number | undefined)[];
-  forrigeUkeTotal: number;
-  onsdagForrigeUke: number;
+  forrigeUkeTotal: number | undefined;
+  onsdagForrigeUke: number | undefined;
   mandagDato: string;
+  erInneværendeUke: boolean;
 }>;
 
 type LukkedeOppgaverUker = Readonly<{
@@ -32,20 +33,25 @@ const hentUkeverdier = (avsluttetPerDato: Map<string, number>, mandagDato: dayjs
     return avsluttetPerDato.get(dato);
   });
 
-const summer = (dager: (number | undefined)[], kunTilOgMedOnsdag = false): number => {
-  const utsnitt = kunTilOgMedOnsdag ? dager.slice(0, 3) : dager;
-  return utsnitt.reduce<number>((sum, v) => sum + (v ?? 0), 0);
+const summer = (dager: (number | undefined)[]): number | undefined => {
+  const filtrerteDager = dager.filter(v => v !== undefined);
+  if (filtrerteDager.length === 0) {
+    return undefined;
+  }
+  return filtrerteDager.reduce((sum, v) => sum + v, 0);
 };
 
 const lagUkeData = (
   ukeDager: (number | undefined)[],
   referanseUkeDager: (number | undefined)[],
   mandagDato: Dayjs,
+  erInneværendeUke = false,
 ): LukkedeOppgaverData => ({
   antallPerDag: ukeDager,
   forrigeUkeTotal: summer(referanseUkeDager),
-  onsdagForrigeUke: summer(referanseUkeDager, true),
+  onsdagForrigeUke: summer(referanseUkeDager.slice(0, 3)),
   mandagDato: mandagDato.format(ISO_DATE_FORMAT),
+  erInneværendeUke,
 });
 
 export const mapLukkedeOppgaver = (køStatistikk: KøStatistikkDto[]): LukkedeOppgaverUker => {
@@ -60,7 +66,7 @@ export const mapLukkedeOppgaver = (køStatistikk: KøStatistikkDto[]): LukkedeOp
   const dagerDenneUken = hentUkeverdier(perDag, mandagDenneUken);
 
   return {
-    denneUken: lagUkeData(dagerDenneUken, dagerForrigeUke, mandagDenneUken),
+    denneUken: lagUkeData(dagerDenneUken, dagerForrigeUke, mandagDenneUken, true),
     forrigeUke: lagUkeData(dagerForrigeUke, dagerToUkerTilbake, mandagForrigeUke),
   };
 };

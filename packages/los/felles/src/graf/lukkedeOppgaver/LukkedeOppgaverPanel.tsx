@@ -3,6 +3,7 @@ import { FormattedRelativeTime, RawIntlProvider } from 'react-intl';
 
 import { BodyShort, HStack, Loader, ToggleGroup, VStack } from '@navikt/ds-react';
 import { createIntl, dateTimeFormat, sortPeriodsBy } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import { type KøStatistikkDto } from '@navikt/fp-types';
 
@@ -10,7 +11,6 @@ import { LukkedeOppgaverGraf } from './LukkedeOppgaverGraf';
 import { type LukkedeOppgaverData, mapLukkedeOppgaver } from './lukkedeOppgaverMapper';
 
 import messages from '../../../i18n/nb_NO.json';
-import dayjs from 'dayjs';
 
 const intl = createIntl(messages);
 
@@ -34,8 +34,7 @@ export const LukkedeOppgaverPanel = ({ køStatistikk, height = 400, isPending }:
   const valgtData = valgtUke === UkeValg.DENNE_UKEN ? denneUken : forrigeUke;
 
   const sistOppdatert = useMemo(() => {
-    const nyeste = køStatistikk?.toSorted(sortPeriodsBy('tidspunkt')).at(-1);
-    return nyeste?.tidspunkt;
+    return køStatistikk?.toSorted(sortPeriodsBy('tidspunkt')).at(-1)?.tidspunkt;
   }, [køStatistikk]);
 
   return (
@@ -52,33 +51,23 @@ export const LukkedeOppgaverPanel = ({ køStatistikk, height = 400, isPending }:
               {intl.formatMessage({ id: 'LukkedeOppgaverPanel.DenneUken' })}
             </ToggleGroup.Item>
           </ToggleGroup>
+
           {sistOppdatert && (
             <BodyShort size="small" textColor="subtle">
               {intl.formatMessage(
-                {
-                  id: 'LukkedeOppgaverPanel.SistOppdatert',
-                },
-                {
-                  tidspunkt:
-                    Math.abs(dayjs(sistOppdatert).diff(dayjs(), 'day')) === 0 ? (
-                      <FormattedRelativeTime
-                        value={dayjs(sistOppdatert).diff(dayjs(), 'second')}
-                        unit="second"
-                        updateIntervalInSeconds={1}
-                      />
-                    ) : (
-                      dateTimeFormat(sistOppdatert)
-                    ),
-                },
+                { id: 'LukkedeOppgaverPanel.SistOppdatert' },
+                { tidspunkt: formaterRelativTid(sistOppdatert) },
               )}
             </BodyShort>
           )}
         </HStack>
+
         {isPending && (
           <HStack justify="center" height={`${height}px`}>
             <Loader size="2xlarge" variant="interaction" />
           </HStack>
         )}
+
         {køStatistikk && <LukkedeOppgaverGraf height={height} lukkedeOppgaver={valgtData} yMax={yMax} />}
       </VStack>
     </RawIntlProvider>
@@ -90,7 +79,7 @@ export const LukkedeOppgaverPanel = ({ køStatistikk, height = 400, isPending }:
  */
 const beregnFellesYMax = (denneUken: LukkedeOppgaverData, forrigeUke: LukkedeOppgaverData): number => {
   const totalDenneUken = denneUken.antallPerDag.reduce<number>((sum, v) => sum + (v ?? 0), 0);
-  const maksVerdi = Math.max(totalDenneUken, denneUken.forrigeUkeTotal, forrigeUke.forrigeUkeTotal);
+  const maksVerdi = Math.max(totalDenneUken, denneUken.forrigeUkeTotal ?? 0, forrigeUke.forrigeUkeTotal ?? 0);
 
   if (maksVerdi === 0) return 50;
 
@@ -101,4 +90,17 @@ const beregnFellesYMax = (denneUken: LukkedeOppgaverData, forrigeUke: LukkedeOpp
   if (maksMedMargin <= 500) steg = 50;
 
   return Math.ceil(maksMedMargin / steg) * steg;
+};
+
+const formaterRelativTid = (tidspunkt: string) => {
+  if (Math.abs(dayjs(tidspunkt).diff(dayjs(), 'day')) === 0) {
+    return (
+      <FormattedRelativeTime
+        value={dayjs(tidspunkt).diff(dayjs(), 'second')}
+        unit="second"
+        updateIntervalInSeconds={1}
+      />
+    );
+  }
+  return dateTimeFormat(tidspunkt);
 };
