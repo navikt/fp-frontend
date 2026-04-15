@@ -26,6 +26,9 @@
   "LukkedeOppgaverPanel.Beskrivelse": "En oppgave er et saksbehandlingspunkt i en behandling, og kan typisk være en vurdering som saksbehandler må gjøre. En behandling kan derfor inneholde flere oppgaver, og nye oppgaver kan oppstå når andre lukkes. Her teller vi alle de lukkede oppgavene.",
   "LukkedeOppgaverPanel.SistOppdatert": "Sist oppdatert {tidspunkt}",
   "LukkedeOppgaverGraf.IngenData": "Ingen statistikk tilgjengelig for denne køen",
+  "LukkedeOppgaverGraf.IDag": "I dag",
+  "LukkedeOppgaverGraf.AntallAvsluttet": "Antall avsluttet:",
+  "LukkedeOppgaverGraf.TotalAvsluttet": "Total avsluttet:",
 
   "EndreReservasjonDato.Lagrer": "Lagrer...",
   "EndreReservasjonDato.Lagret": "Lagret",

@@ -74,13 +74,13 @@ const OppgaverGrafDialogBody = ({
           size="small"
         >
           <ToggleGroup.Item
-            icon={<BarChartIcon aria-hidden />}
-            value="aktive"
+            icon={<LineGraphDotIcon aria-hidden />}
+            value={'aktive' satisfies VisningType}
             label={intl.formatMessage({ id: 'OppgaverGrafDialog.AktiveOgLedige' })}
           />
           <ToggleGroup.Item
             icon={<BarChartIcon aria-hidden />}
-            value="lukkede"
+            value={'lukkede' satisfies VisningType}
             label={intl.formatMessage({ id: 'OppgaverGrafDialog.LukkedeOppgaver' })}
           />
         </ToggleGroup>

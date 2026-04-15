@@ -80,12 +80,11 @@ export const oppgaverForFagsakerOptions = (saksnummer: string[]) =>
     staleTime: Infinity,
   });
 
-export const saksbehandlerKøStatistikkOptions = (sakslisteId: number, skalKjøres: boolean) =>
+export const saksbehandlerKøStatistikkOptions = (sakslisteId: number) =>
   queryOptions({
     queryKey: [LosUrl.SAKSBEHANDLER_KØ_STATISTIKK, sakslisteId],
     queryFn: () =>
       kyExtended.get(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK, { searchParams: { sakslisteId } }).json<KøStatistikkDto[]>(),
-    enabled: skalKjøres,
   });
 
 export const sakslisteOptions = () =>

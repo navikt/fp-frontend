@@ -17,7 +17,11 @@ interface Props {
 export const AvsluttedeOppgaverDialog = ({ valgtSakslisteId, sakslisteNavn }: Props) => {
   const [open, setOpen] = useState(false);
 
-  const { data: køStatistikk, isPending } = useQuery(saksbehandlerKøStatistikkOptions(valgtSakslisteId, open));
+  const { data: køStatistikk, isPending } = useQuery({
+    ...saksbehandlerKøStatistikkOptions(valgtSakslisteId),
+    enabled: open,
+  });
+
   return (
     <Dialog open={open} onOpenChange={nextOpen => setOpen(nextOpen)}>
       <Dialog.Trigger>

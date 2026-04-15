@@ -5,10 +5,12 @@ import type { KøStatistikkDto } from '@navikt/fp-types';
 
 import { startAvIsoUke } from './ukeUtils';
 
+export type DataPunkt = number | undefined;
+
 export type LukkedeOppgaverData = Readonly<{
-  antallPerDag: (number | undefined)[];
-  forrigeUkeTotal: number | undefined;
-  onsdagForrigeUke: number | undefined;
+  antallPerDag: DataPunkt[];
+  forrigeUkeTotal: DataPunkt;
+  onsdagForrigeUke: DataPunkt;
   mandagDato: string;
   erInneværendeUke: boolean;
 }>;
@@ -27,13 +29,13 @@ const summerLukkedePerDato = (statistikk: KøStatistikkDto[]): Map<string, numbe
   return lukkedePerDato;
 };
 
-const hentUkeverdier = (avsluttetPerDato: Map<string, number>, mandagDato: dayjs.Dayjs): (number | undefined)[] =>
+const hentUkeverdier = (avsluttetPerDato: Map<string, number>, mandagDato: dayjs.Dayjs): DataPunkt[] =>
   Array.from({ length: 7 }, (_, i) => {
     const dato = mandagDato.add(i, 'day').format(ISO_DATE_FORMAT);
     return avsluttetPerDato.get(dato);
   });
 
-const summer = (dager: (number | undefined)[]): number | undefined => {
+const summer = (dager: DataPunkt[]): DataPunkt => {
   const filtrerteDager = dager.filter(v => v !== undefined);
   if (filtrerteDager.length === 0) {
     return undefined;
@@ -42,8 +44,8 @@ const summer = (dager: (number | undefined)[]): number | undefined => {
 };
 
 const lagUkeData = (
-  ukeDager: (number | undefined)[],
-  referanseUkeDager: (number | undefined)[],
+  ukeDager: DataPunkt[],
+  referanseUkeDager: DataPunkt[],
   mandagDato: Dayjs,
   erInneværendeUke = false,
 ): LukkedeOppgaverData => ({

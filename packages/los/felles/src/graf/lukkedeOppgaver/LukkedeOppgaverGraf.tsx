@@ -34,18 +34,25 @@ const lagStackOffsetSerieData = (antallPerDag: readonly (number | undefined)[]):
   return data;
 };
 
-const formatTooltipContent = (dato: Dayjs, antall: number | undefined, antallTotalt: number | undefined): string => {
-  const xLabel = dato.isSame(dayjs(), 'day') ? 'I dag' : dato.format('dddd');
+const formatTooltipContent = (
+  intl: IntlShape,
+  dato: Dayjs,
+  antall: number | undefined,
+  antallTotalt: number | undefined,
+): string => {
+  const xLabel = dato.isSame(dayjs(), 'day')
+    ? intl.formatMessage({ id: 'LukkedeOppgaverGraf.IDag' })
+    : dato.format('dddd');
   const antallFormattert = antall?.toLocaleString('nb-NO') ?? '-';
   const totalFormattert = antallTotalt?.toLocaleString('nb-NO') ?? '-';
   return `
     <b>${capitalizeFirstLetter(xLabel)}</b><br/>
     <div style="display: flex; justify-content: space-between; gap: 16px;">
-      <span>Antall avsluttet:</span>
+      <span>${intl.formatMessage({ id: 'LukkedeOppgaverGraf.AntallAvsluttet' })}</span>
       <span>${antallFormattert}</span>
     </div>
     <div style="display: flex; justify-content: space-between; gap: 16px;">
-      <span>Total avsluttet:</span>
+      <span>${intl.formatMessage({ id: 'LukkedeOppgaverGraf.TotalAvsluttet' })}</span>
       <span>${totalFormattert}</span>
     </div>
   `;
@@ -111,12 +118,14 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
           axisPointer: { type: 'shadow' },
           formatter: raw => {
             const params = Array.isArray(raw) ? raw : [raw];
-            if (!params.length) return '';
+            if (params.length === 0) {
+              return '';
+            }
             const idx = (params[0] as CallbackDataParams).dataIndex;
             const xLabelDato = xAxisDatoer[idx]!;
             const antall = antallPerDag[idx];
             const antallTotalt = antall === undefined ? undefined : (offsetSerieData[idx] ?? 0) + antall;
-            return formatTooltipContent(xLabelDato, antall, antallTotalt);
+            return formatTooltipContent(intl, xLabelDato, antall, antallTotalt);
           },
         },
         legend: { ...options.legend, show: true },
