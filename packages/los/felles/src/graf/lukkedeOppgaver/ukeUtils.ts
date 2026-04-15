@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 /**
  * Returnerer ISO-ukedag: 1=Mandag, 2=Tirsdag, ..., 7=Søndag.
  */
-export const getIsoUkedag = (dato: dayjs.Dayjs): number => {
+const getIsoUkedag = (dato: dayjs.Dayjs): number => {
   const dag = dato.day();
   return dag === 0 ? 7 : dag;
 };

@@ -27,7 +27,7 @@ export const AvsluttedeOppgaverDialog = ({ valgtSakslisteId, sakslisteNavn }: Pr
           className="self-end"
           title="Åpne dialog"
           aria-label="Åpne dialog"
-          icon={<BarChartIcon />}
+          icon={<BarChartIcon aria-hidden />}
         />
       </Dialog.Trigger>
       <Dialog.Popup width="large">
