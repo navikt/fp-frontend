@@ -22,12 +22,16 @@
       "kommentar": "oppgavestyrer"
     }
   ],
-  "externals": ["fplos.prod-fss-pub.nais.io"],
+  "outboundRules": [
+    {
+      "application": "fplos"
+    }
+  ],
   "proxyRedirects": [
     {
       "path": "/fplos/api",
-      "url": "https://fplos.prod-fss-pub.nais.io",
-      "scope": "api://prod-fss.teamforeldrepenger.fplos/.default"
+      "url": "http://fplos",
+      "scope": "api://prod-gcp.teamforeldrepenger.fplos/.default"
     }
   ],
   "viteModePort": "9014"
