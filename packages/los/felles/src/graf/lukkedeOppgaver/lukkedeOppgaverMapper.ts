@@ -35,7 +35,7 @@ const hentUkeverdier = (avsluttetPerDato: Map<string, number>, mandagDato: dayjs
     return avsluttetPerDato.get(dato);
   });
 
-const summer = (dager: DataPunkt[]): DataPunkt => {
+export const summer = (dager: DataPunkt[]): DataPunkt => {
   const filtrerteDager = dager.filter(v => v !== undefined);
   if (filtrerteDager.length === 0) {
     return undefined;

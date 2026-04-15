@@ -7,7 +7,7 @@ import type { CallbackDataParams } from 'echarts/types/dist/shared';
 
 import { createBarSeries, getAkselVariable, getStyle, ReactECharts } from '@navikt/fp-los-felles';
 
-import type { LukkedeOppgaverData } from './lukkedeOppgaverMapper';
+import { type DataPunkt, type LukkedeOppgaverData, summer } from './lukkedeOppgaverMapper';
 
 interface Props {
   height: number;
@@ -18,45 +18,6 @@ interface Props {
 type MarkLine = NonNullable<BarSeriesOption['markLine']>;
 type MarkLineItem = NonNullable<MarkLine['data']>[number];
 type YAxisMarkLine = Extract<MarkLineItem, { yAxis?: unknown }>;
-
-const lagUkedatoer = (aktuellMandag: string): Array<Dayjs> => {
-  const mandag = dayjs(aktuellMandag);
-  return Array.from({ length: 7 }, (_, i) => mandag.add(i, 'day'));
-};
-
-const lagStackOffsetSerieData = (antallPerDag: readonly (number | undefined)[]): number[] => {
-  const data: number[] = [];
-  let sum = 0;
-  for (const antall of antallPerDag) {
-    data.push(sum);
-    sum += antall ?? 0;
-  }
-  return data;
-};
-
-const formatTooltipContent = (
-  intl: IntlShape,
-  dato: Dayjs,
-  antall: number | undefined,
-  antallTotalt: number | undefined,
-): string => {
-  const xLabel = dato.isSame(dayjs(), 'day')
-    ? intl.formatMessage({ id: 'LukkedeOppgaverGraf.IDag' })
-    : dato.format('dddd');
-  const antallFormattert = antall?.toLocaleString('nb-NO') ?? '-';
-  const totalFormattert = antallTotalt?.toLocaleString('nb-NO') ?? '-';
-  return `
-    <b>${capitalizeFirstLetter(xLabel)}</b><br/>
-    <div style="display: flex; justify-content: space-between; gap: 16px;">
-      <span>${intl.formatMessage({ id: 'LukkedeOppgaverGraf.AntallAvsluttet' })}</span>
-      <span>${antallFormattert}</span>
-    </div>
-    <div style="display: flex; justify-content: space-between; gap: 16px;">
-      <span>${intl.formatMessage({ id: 'LukkedeOppgaverGraf.TotalAvsluttet' })}</span>
-      <span>${totalFormattert}</span>
-    </div>
-  `;
-};
 
 export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) => {
   const intl = useIntl();
@@ -123,8 +84,8 @@ export const LukkedeOppgaverGraf = ({ height, lukkedeOppgaver, yMax }: Props) =>
             }
             const idx = (params[0] as CallbackDataParams).dataIndex;
             const xLabelDato = xAxisDatoer[idx]!;
-            const antall = antallPerDag[idx];
-            const antallTotalt = antall === undefined ? undefined : (offsetSerieData[idx] ?? 0) + antall;
+            const antall = antallPerDag.at(idx);
+            const antallTotalt = antall === undefined ? undefined : summer(antallPerDag.slice(0, idx + 1));
             return formatTooltipContent(intl, xLabelDato, antall, antallTotalt);
           },
         },
@@ -189,4 +150,38 @@ const lagMarkLine = (
     emphasis: { disabled: true },
     data,
   };
+};
+
+const lagUkedatoer = (aktuellMandag: string): Array<Dayjs> => {
+  const mandag = dayjs(aktuellMandag);
+  return Array.from({ length: 7 }, (_, i) => mandag.add(i, 'day'));
+};
+
+const lagStackOffsetSerieData = (antallPerDag: readonly (number | undefined)[]): number[] => {
+  const data: number[] = [];
+  let sum = 0;
+  for (const antall of antallPerDag) {
+    data.push(sum);
+    sum += antall ?? 0;
+  }
+  return data;
+};
+
+const formatTooltipContent = (intl: IntlShape, dato: Dayjs, antall: DataPunkt, antallTotalt: DataPunkt): string => {
+  const xLabel = dato.isSame(dayjs(), 'day')
+    ? intl.formatMessage({ id: 'LukkedeOppgaverGraf.IDag' })
+    : dato.format('dddd');
+  const antallFormattert = antall?.toLocaleString('nb-NO') ?? '-';
+  const totalFormattert = antallTotalt?.toLocaleString('nb-NO') ?? '-';
+  return `
+    <b>${capitalizeFirstLetter(xLabel)}</b><br/>
+    <div style="display: flex; justify-content: space-between; gap: 16px;">
+      <span>${intl.formatMessage({ id: 'LukkedeOppgaverGraf.AntallAvsluttet' })}</span>
+      <span>${antallFormattert}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; gap: 16px;">
+      <span>${intl.formatMessage({ id: 'LukkedeOppgaverGraf.TotalAvsluttet' })}</span>
+      <span>${totalFormattert}</span>
+    </div>
+  `;
 };
