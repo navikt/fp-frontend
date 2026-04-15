@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { FormattedRelativeTime, RawIntlProvider } from 'react-intl';
+import { FormattedMessage, FormattedRelativeTime, RawIntlProvider } from 'react-intl';
 
 import { BodyShort, HStack, Loader, ToggleGroup, VStack } from '@navikt/ds-react';
 import { createIntl, dateTimeFormat, sortPeriodsBy } from '@navikt/ft-utils';
@@ -54,10 +54,10 @@ export const LukkedeOppgaverPanel = ({ køStatistikk, height = 400, isPending }:
 
           {sistOppdatert && (
             <BodyShort size="small" textColor="subtle">
-              {intl.formatMessage(
-                { id: 'LukkedeOppgaverPanel.SistOppdatert' },
-                { tidspunkt: formaterRelativTid(sistOppdatert) },
-              )}
+              <FormattedMessage
+                id="LukkedeOppgaverPanel.SistOppdatert"
+                values={{ tidspunkt: formaterRelativTid(sistOppdatert) }}
+              />
             </BodyShort>
           )}
         </HStack>
