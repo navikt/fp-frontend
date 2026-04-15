@@ -119,7 +119,7 @@ describe('lukkedeOppgaverMapper', () => {
     expect(forrigeUke.forrigeUkeTotal).toBe(155);
   });
 
-  it('skal summer onsdagForrigeUke og forrigeUkeTotal som undefined når referanseuken er uten data', () => {
+  it('skal summere onsdagForrigeUke og forrigeUkeTotal som undefined når referanseuken er uten data', () => {
     const statistikk = [
       lagStatistikk('2024-01-01', 10), // man
       lagStatistikk('2024-01-02', 20), // tir
