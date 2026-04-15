@@ -25,9 +25,12 @@
   "outboundRules": [
     {
       "application": "fpmottak"
+    },
+    {
+      "application": "fplos"
     }
   ],
-  "externals": ["fpsak-api.dev-fss-pub.nais.io", "fplos.dev-fss-pub.nais.io", "fptilbake.dev-fss-pub.nais.io"],
+  "externals": ["fpsak-api.dev-fss-pub.nais.io", "fptilbake.dev-fss-pub.nais.io"],
   "proxyRedirects": [
     {
       "path": "/fpsak/api",
@@ -41,8 +44,8 @@
     },
     {
       "path": "/fplos/api",
-      "url": "https://fplos.dev-fss-pub.nais.io",
-      "scope": "api://dev-fss.teamforeldrepenger.fplos/.default"
+      "url": "http://fplos",
+      "scope": "api://dev-gcp.teamforeldrepenger.fplos/.default"
     },
     {
       "path": "/fpmottak/api",
