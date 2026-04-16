@@ -102,7 +102,7 @@ const kyExtended = ky.extend({
   timeout: 15000,
   hooks: {
     beforeRequest: [
-      request => {
+      ({ request }) => {
         const navCallId = `CallId_${Date.now()}_${Math.floor(Math.random() * 1000000000)}`;
         request.headers.set('Nav-Callid', navCallId);
       },
@@ -547,7 +547,7 @@ const getFerdigstillOppgave = (links: ApiLink[]) => (oppgaveId: string) =>
     .post(getUrlFromRel('FERDIGSTILL_OPPGAVE', links), {
       json: oppgaveId,
     })
-    .json<void>();
+    .then(() => {});
 
 export const hentBehandling = (behandlingUuid: string) =>
   kyExtended.post<BehandlingFpSak>(BehandlingUrl.BEHANDLING, {
@@ -599,7 +599,7 @@ const getNyBehandlendeEnhet = (links: ApiLink[]) => (params: NyBehandlendeEnhet)
     .post(getUrlFromRel('BEHANDLING_NY_BEHANDLENDE_ENHET', links), {
       json: params,
     })
-    .json<void>();
+    .then(() => {});
 
 const getHenleggBehandling =
   (links: ApiLink[]) =>
@@ -608,7 +608,7 @@ const getHenleggBehandling =
       .post(getUrlFromRel('HENLEGG_BEHANDLING', links), {
         json: params,
       })
-      .json<void>();
+      .then(() => {});
 
 const getSettBehandlingPåVent =
   (links: ApiLink[]) =>
@@ -617,14 +617,14 @@ const getSettBehandlingPåVent =
       .post(getUrlFromRel('BEHANDLING_ON_HOLD', links), {
         json: params,
       })
-      .json<void>();
+      .then(() => {});
 
 const getOppdaterPåVent = (links: ApiLink[]) => (params: SettPaVentParams) =>
   kyExtended
     .post(getUrlFromRel('UPDATE_ON_HOLD', links), {
       json: params,
     })
-    .json<void>();
+    .then(() => {});
 
 const getFortsettBehandling = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
   kyExtended.post<BehandlingFpSak>(getUrlFromRel('RESUME_BEHANDLING', links), {
@@ -645,7 +645,7 @@ const getMellomlagreBrevOverstyring =
       .post<string>(getUrlFromRel('MELLOMLAGRE_BREV_OVERSTYRING', links), {
         json: params,
       })
-      .json<void>();
+      .then(() => {});
 
 const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRel('VERGE_FJERN_V2', links));
 
@@ -672,14 +672,14 @@ const getRegistrerArbeidsforholdForAOI = (links: ApiLink[]) => (params: ManueltA
     .post(getUrlFromRel('ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD', links), {
       json: params,
     })
-    .json<void>();
+    .then(() => {});
 
 const getLagreVurderingForAOI = (links: ApiLink[]) => (params: ManglendeInntektsmeldingVurdering) =>
   kyExtended
     .post(getUrlFromRel('ARBEID_OG_INNTEKT_LAGRE_VURDERING', links), {
       json: params,
     })
-    .json<void>();
+    .then(() => {});
 
 const getÅpneForNyVurderingAOI =
   (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
@@ -687,14 +687,14 @@ const getÅpneForNyVurderingAOI =
       .post(getUrlFromRel('ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING', links), {
         json: params,
       })
-      .json<void>();
+      .then(() => {});
 
 const getMellomlagreFormkravVurdering = (links: ApiLink[]) => (params: FormkravMellomlagretDataType) =>
   kyExtended
     .post(getUrlFromRel('SAVE_FORMKRAV_VURDERING', links), {
       json: params,
     })
-    .json<void>();
+    .then(() => {});
 
 const getMellomlagreKlageVurdering =
   (links: ApiLink[]) =>
@@ -707,7 +707,7 @@ const getMellomlagreKlageVurdering =
       .post(getUrlFromRel('SAVE_KLAGE_VURDERING', links), {
         json: params,
       })
-      .json<void>();
+      .then(() => {});
 
 const getBeregneBeløp = (links: ApiLink[]) => (params: BeregnBeløpParams) =>
   kyExtended

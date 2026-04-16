@@ -141,7 +141,7 @@ const retryHandler = () => {
   };
 };
 
-const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (error: Error) => {
+const getErrorHandler = (addErrorMessage: (data: FpError) => void) => (error: Error) => {
   // eslint-disable-next-line no-console
   console.log(error);
 
@@ -156,14 +156,8 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (err
         location: error.response.url,
       });
     } else {
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const feildataJson = await error.response.json();
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
-        addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: feildataJson.feilmelding ?? error.message });
-      } catch {
-        addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
-      }
+      const feildataJson = error.data as { feilmelding?: string } | undefined;
+      addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: feildataJson?.feilmelding ?? error.message });
     }
   } else {
     addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });

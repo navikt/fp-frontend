@@ -63,7 +63,7 @@ const kyExtended = ky.extend({
   timeout: 15000,
   hooks: {
     beforeRequest: [
-      request => {
+      ({ request }) => {
         const navCallId = `CallId_${Date.now()}_${Math.floor(Math.random() * 1000000000)}`;
         request.headers.set('Nav-Callid', navCallId);
       },
@@ -243,14 +243,14 @@ const getEndreSakMarkering = (links?: ApiLink[]) => (params: EndreUtlandFormValu
     .post(getUrlFromRel('ENDRE_SAK_MARKERING', links), {
       json: params,
     })
-    .json();
+    .then(() => {});
 
 const getLagreNotat = (links?: ApiLink[]) => (saksnummer: string, notat: string) =>
   kyExtended
     .post(getUrlFromRel('LAGRE_NOTAT', links), {
       json: { saksnummer, notat },
     })
-    .json();
+    .then(() => {});
 
 const getForhåndsvisMelding = (links?: ApiLink[]) => (params: ForhåndsvisMeldingParams) =>
   kyExtended
@@ -271,7 +271,7 @@ const getSendMelding = (links?: ApiLink[]) => (params: SubmitMessageParams) =>
     .post(getUrlFromRel('SUBMIT_MESSAGE', links), {
       json: params,
     })
-    .json();
+    .then(() => {});
 
 export const useFagsakApi = () => {
   const { data: initFetchFpSak } = useQuery(initFetchOptions());

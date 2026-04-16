@@ -41,11 +41,8 @@ export const FagsakSearchIndex = () => {
   });
 
   const searchResultAccessDenied =
-    fagsakError &&
-    fagsakError instanceof HTTPError &&
-    fagsakError.response.status === 403 &&
-    'data' in fagsakError.response
-      ? (fagsakError.response.data as { feilmelding: string })
+    fagsakError instanceof HTTPError && fagsakError.response.status === 403
+      ? (fagsakError.data as { feilmelding: string })
       : undefined;
 
   return (
