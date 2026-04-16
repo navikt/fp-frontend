@@ -1,11 +1,12 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
+import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { SakslisteDto } from '@navikt/fp-types';
+import type { KøStatistikkDto, SakslisteDto } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
 import { SakslisteVelgerForm } from './SakslisteVelgerForm';
@@ -48,6 +49,32 @@ const saksliste1: SakslisteDto = {
   },
 };
 
+const daysToMonday = (dayjs().day() + 6) % 7;
+const startOfPeriod = dayjs()
+  .subtract(daysToMonday + 14, 'day')
+  .startOf('day');
+
+const lagStatistikk = (avsluttet: number, dagIndex: number): KøStatistikkDto => ({
+  tidspunkt: startOfPeriod.add(dagIndex, 'day').subtract(1, 'minute').toISOString(),
+  aktive: 20,
+  tilgjengelige: 10,
+  ventende: 30,
+  avsluttet,
+});
+
+const VERDIER = [
+  // to uker siden
+  87, 35, 75, 44, 4, 11, 3,
+  // forrige uke
+  90, 40, 65, 20, 35, 10, 5,
+  // denne uken
+  145, 24, 50, 41, 34, 1, 0,
+];
+
+const køStatistikkMock = VERDIER.map((avsluttet, i) => lagStatistikk(avsluttet, i)).filter(statistikk =>
+  dayjs(statistikk.tidspunkt).isBefore(dayjs().add(1, 'second')),
+);
+
 const meta = {
   title: 'behandlingskoer/SakslisteVelgerForm',
   component: SakslisteVelgerForm,
@@ -55,7 +82,10 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
     msw: {
-      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
+      handlers: [
+        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+        http.get(encodeURI(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK), () => HttpResponse.json([])),
+      ],
     },
   },
   args: {
@@ -73,6 +103,20 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    sakslister: [saksliste1],
+  },
+};
+
+export const MedAvsluttedeOppgaver: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+        http.get(encodeURI(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK), () => HttpResponse.json(køStatistikkMock)),
+      ],
+    },
+  },
   args: {
     sakslister: [saksliste1],
   },
@@ -119,11 +163,6 @@ export const MedIngenSakslister: Story = {
 };
 
 export const MedFlereEnnTreSaksbehandlere: Story = {
-  parameters: {
-    msw: {
-      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
-    },
-  },
   args: {
     sakslister: [
       {
