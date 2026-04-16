@@ -437,8 +437,7 @@ describe('UttakProsessIndex', () => {
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
   });
 
-  // TODO FIX!
-  it.fails('skal vise varsel når samlet utbetalingsgrad og andel i arbeid overskrider 100%', async () => {
+  it('skal vise varsel når samlet utbetalingsgrad og andel i arbeid overskrider 100%', async () => {
     render(<VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent />);
 
     expect(
