@@ -29,5 +29,5 @@
     "jsx": "react-jsx",
     "skipLibCheck": true
   },
-  "exclude": ["node_modules", "**.spec.ts", "vite.config.js", "dist"]
+  "exclude": ["node_modules", "**.spec.ts", "vite.config.js", "dist", "eslint.config.mjs"]
 }
