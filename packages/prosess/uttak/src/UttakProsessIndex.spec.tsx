@@ -102,9 +102,6 @@ describe('UttakProsessIndex', () => {
 
   // TODO FIX
   it.fails('skal validere at stønadskonto ikke er gyldig, endre og så bekrefte', async () => {
-    // Vil gi ein warning sidan ein prøver å setta ein ikkje gyldig verdi i dropdown
-    vi.spyOn(console, 'warn').mockImplementation(() => {});
-
     const lagre = vi.fn();
 
     render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
