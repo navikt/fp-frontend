@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { BodyShort, Button, DatePicker, Detail, Dialog, HStack, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Detail, Dialog, HStack, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
@@ -53,9 +53,6 @@ export const SplittPeriodeModal = ({ fomDato, tomDato, submit, cancel }: Props) 
                 </BodyShort>
               </VStack>
               <HStack justify="space-between">
-                <DatePicker strategy="fixed">
-                  <DatePicker.Input label="Velg dato" />
-                </DatePicker>
                 <RhfDatepicker
                   name="dato"
                   control={formMethods.control}
