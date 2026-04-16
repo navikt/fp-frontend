@@ -19,8 +19,7 @@ describe('RettigheterPapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       rettigheter: 'ANNEN_FORELDER_DOED',
     });
   });
@@ -37,8 +36,7 @@ describe('RettigheterPapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       rettigheter: 'MANN_ADOPTERER_ALENE',
     });
   });

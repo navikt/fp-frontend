@@ -29,8 +29,7 @@ describe('VirksomhetPapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       egenVirksomhet: {
         harArbeidetIEgenVirksomhet: false,
       },
@@ -94,8 +93,7 @@ describe('VirksomhetPapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       egenVirksomhet: {
         harArbeidetIEgenVirksomhet: true,
         virksomheter: [

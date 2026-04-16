@@ -29,8 +29,7 @@ describe('LagreSoknadPapirsoknadIndex', () => {
 
     expect(screen.queryByText('Bekreft og avslutt behandling')).not.toBeInTheDocument();
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       kommentarEndring: 'Dette er en begrunnelse',
       registrerVerge: true,
       ufullstendigSøknad: undefined,

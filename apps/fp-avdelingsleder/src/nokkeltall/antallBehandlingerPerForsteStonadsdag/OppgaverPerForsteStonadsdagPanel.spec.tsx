@@ -7,7 +7,7 @@ const { Default } = composeStories(stories);
 
 describe('OppgaverPerForsteStonadsdagPanel', () => {
   // TODO echarts-testing
-  it.skip('skal rendre graf', async () => {
+  it.todo('skal rendre graf', async () => {
     render(<Default />);
     expect(
       await screen.findByText(

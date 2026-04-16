@@ -9,9 +9,9 @@
   "scripts": {
     "build:storybook": "storybook build -o .storybook-static-build",
     "test": "vitest",
-    "eslint": "eslint src/**/*.ts* --color",
-    "eslint:fix": "eslint --fix src/**/*.ts* --color",
-    "prettier:fix": "prettier --write src",
+    "eslint": "eslint {src,testdata}/**/*.ts* --color",
+    "eslint:fix": "eslint --fix {src,testdata}/**/*.ts* --color",
+    "prettier:fix": "prettier --write {src,testdata}",
     "tsc": "tsc --noEmit",
     "stylelint": "stylelint src/**/*.module.css",
     "dev": "vite build --mode development --watch",

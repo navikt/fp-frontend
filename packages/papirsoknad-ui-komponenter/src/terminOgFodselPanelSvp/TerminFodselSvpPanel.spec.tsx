@@ -30,8 +30,7 @@ describe('TerminFodselSvpPanel', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       erBarnetFødt: true,
       fødselsdato: fødselsdato.format(ISO_DATE_FORMAT),
       termindato: termindato.format(ISO_DATE_FORMAT),

@@ -31,8 +31,7 @@ describe('OppholdINorgePapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       fremtidigeOppholdUtenlands: undefined,
       harFremtidigeOppholdUtenlands: false,
       harTidligereOppholdUtenlands: false,
@@ -115,8 +114,7 @@ describe('OppholdINorgePapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       fremtidigeOppholdUtenlands: undefined,
       harFremtidigeOppholdUtenlands: false,
       harTidligereOppholdUtenlands: true,
@@ -187,8 +185,7 @@ describe('OppholdINorgePapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       fremtidigeOppholdUtenlands: [
         {
           land: 'AND',

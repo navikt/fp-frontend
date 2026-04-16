@@ -41,8 +41,7 @@ describe('AndreYtelserPapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       andreYtelser: [
         {
           periodeFom: '2022-09-14',
@@ -80,8 +79,7 @@ describe('AndreYtelserPapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       andreYtelser: [
         {
           periodeFom: '2022-09-14',
@@ -138,8 +136,7 @@ describe('AndreYtelserPapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       andreYtelser: [],
     });
   });

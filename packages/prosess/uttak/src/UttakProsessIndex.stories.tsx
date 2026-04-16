@@ -15,55 +15,16 @@ import type {
   ArbeidsgiverOpplysningerPerId,
   BehandlingFpSak,
   FamilieHendelse,
-  PeriodeResultatÅrsakMuligeÅrsaker,
   Personoversikt,
   Soknad,
   StønadskontoType,
   UttakStonadskontoer,
 } from '@navikt/fp-types';
 
+import { muligeÅrsaker } from '../testdata/muligeÅrsaker';
 import { UttakProsessIndex } from './UttakProsessIndex';
 
 const defaultAksjonspunkt = lagAksjonspunkt(AksjonspunktKode.FASTSETT_UTTAKPERIODER);
-
-const defaultMuligeÅrsaker: PeriodeResultatÅrsakMuligeÅrsaker[] = [
-  {
-    kode: '4072',
-    utfallType: 'AVSLÅTT',
-    sortering: '1',
-    gyldigForLovendringer: ['MINSTERETT_2022', 'KREVER_SAMMENHENGENDE_UTTAK', 'FRITT_UTTAK'],
-    synligForRolle: ['IKKE_MOR', 'MOR'],
-    uttakTyper: ['UTTAK'],
-    valgbarForKonto: ['FORELDREPENGER_FØR_FØDSEL', 'FEDREKVOTE', 'FORELDREPENGER', 'FELLESPERIODE', 'MØDREKVOTE'],
-  },
-  {
-    kode: '4103',
-    utfallType: 'AVSLÅTT',
-    sortering: '2',
-    gyldigForLovendringer: ['MINSTERETT_2022', 'FRITT_UTTAK'],
-    synligForRolle: ['MOR'],
-    uttakTyper: ['UTTAK'],
-    valgbarForKonto: ['FORELDREPENGER', 'MØDREKVOTE'],
-  },
-  {
-    kode: '2002',
-    utfallType: 'INNVILGET',
-    sortering: '3',
-    gyldigForLovendringer: ['MINSTERETT_2022', 'KREVER_SAMMENHENGENDE_UTTAK', 'FRITT_UTTAK'],
-    synligForRolle: ['IKKE_MOR', 'MOR'],
-    uttakTyper: ['UTTAK'],
-    valgbarForKonto: ['FORELDREPENGER', 'FELLESPERIODE'],
-  },
-  {
-    kode: '2003',
-    utfallType: 'INNVILGET',
-    sortering: '4',
-    gyldigForLovendringer: ['MINSTERETT_2022', 'KREVER_SAMMENHENGENDE_UTTAK', 'FRITT_UTTAK'],
-    synligForRolle: ['IKKE_MOR', 'MOR'],
-    uttakTyper: ['UTTAK'],
-    valgbarForKonto: ['FEDREKVOTE', 'MØDREKVOTE'],
-  },
-];
 
 const familiehendelse = {
   fødselTermin: {
@@ -101,7 +62,7 @@ const behandling: BehandlingFpSak = {
   opprettet: '2020-01-01',
 };
 
-const uttakStonadskontoer = {
+export const uttakStonadskontoer = {
   tapteDagerFpff: 1,
   stønadskonti: {
     FEDREKVOTE: {
@@ -311,7 +272,7 @@ export const AksjonspunktDerValgtStønadskontoIkkeFinnes: Story = {
         },
       ],
       perioderAnnenpart: [],
-      muligeÅrsaker: defaultMuligeÅrsaker,
+      muligeÅrsaker,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
       endringsdato: '2022-10-20',
     },
@@ -489,7 +450,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
         },
       ],
       perioderAnnenpart: [],
-      muligeÅrsaker: defaultMuligeÅrsaker,
+      muligeÅrsaker,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: true, søkerErMor: true },
       endringsdato: '2019-10-11',
     },
@@ -636,7 +597,7 @@ export const AksjonspunktIRevurdering: Story = {
           gradertAktivitet: undefined,
         },
       ],
-      muligeÅrsaker: defaultMuligeÅrsaker,
+      muligeÅrsaker,
       perioderAnnenpart: [],
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: true, søkerErMor: true },
       endringsdato: '2019-10-11',
@@ -868,7 +829,7 @@ export const ProsessUttakToParter: Story = {
           gradertAktivitet: undefined,
         },
       ],
-      muligeÅrsaker: defaultMuligeÅrsaker,
+      muligeÅrsaker,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
       endringsdato: '2022-10-20',
     },
@@ -1056,7 +1017,7 @@ export const AksjonspunktForFar: Story = {
           gradertAktivitet: undefined,
         },
       ],
-      muligeÅrsaker: defaultMuligeÅrsaker,
+      muligeÅrsaker,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: false },
       endringsdato: '2022-11-10',
     },
@@ -1117,7 +1078,7 @@ export const StønadskontoMedUgyldigForbruk: Story = {
         },
       ],
       perioderAnnenpart: [],
-      muligeÅrsaker: defaultMuligeÅrsaker,
+      muligeÅrsaker,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
       endringsdato: '2022-10-20',
     },
@@ -1162,7 +1123,7 @@ export const VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent: Story = {
         },
       ],
       perioderAnnenpart: [],
-      muligeÅrsaker: defaultMuligeÅrsaker,
+      muligeÅrsaker,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
       endringsdato: '2022-10-20',
     },
@@ -1207,7 +1168,7 @@ export const VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent: 
         },
       ],
       perioderAnnenpart: [],
-      muligeÅrsaker: defaultMuligeÅrsaker,
+      muligeÅrsaker,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
       endringsdato: '2022-10-20',
     },
@@ -1347,7 +1308,7 @@ export const VisOppholdsperiode: Story = {
           gradertAktivitet: undefined,
         },
       ],
-      muligeÅrsaker: defaultMuligeÅrsaker,
+      muligeÅrsaker,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: true, søkerErMor: true },
       endringsdato: '2023-02-03',
     },
@@ -1456,7 +1417,7 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
         },
       ],
       perioderAnnenpart: [],
-      muligeÅrsaker: defaultMuligeÅrsaker,
+      muligeÅrsaker,
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
       endringsdato: '2022-10-20',
     },
