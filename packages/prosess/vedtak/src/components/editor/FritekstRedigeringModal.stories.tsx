@@ -3,73 +3,25 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { getIntlDecorator, type PanelDataArgs, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
-import type { Fagsak } from '@navikt/fp-types';
+import { BrevRedigeringModal } from '@navikt/fp-brev-editor';
+import { withRouter } from '@navikt/fp-storybook-utils';
 
 import mal from '../../../.storybook/brevmal/mal.html?raw';
 import redigertInnhold from '../../../.storybook/brevmal/redigertInnhold.html?raw';
-import { FritekstRedigeringModal } from './FritekstRedigeringModal';
-
-import messages from '../../../i18n/nb_NO.json';
-
-const FAGSAK_MED_MARKERING_PRAKSIS_UTSETTELSE = {
-  saksnummer: '1234567',
-  fagsakYtelseType: 'FP',
-  bruker: {
-    navn: 'Kari Nordmann',
-    fødselsnummer: '',
-    kjønn: '-',
-    fødselsdato: '',
-    språkkode: '-',
-  },
-  annenPart: {
-    navn: 'Ola Nordmann',
-    fødselsnummer: '',
-    kjønn: '-',
-    fødselsdato: '',
-    språkkode: '-',
-  },
-  relasjonsRolleType: 'MORA',
-  annenpartBehandling: {
-    relasjonsRolleType: 'FARA',
-    saksnummer: '',
-    behandlingUuid: '',
-  },
-  fagsakMarkeringer: [
-    {
-      fagsakMarkering: 'PRAKSIS_UTSETTELSE',
-      kortNavn: 'Utsettelse',
-    },
-  ],
-  status: 'OPPR',
-  aktørId: '',
-  sakSkalTilInfotrygd: false,
-  dekningsgrad: 0,
-  brukerManglerAdresse: false,
-  behandlingTypeKanOpprettes: [],
-  behandlinger: [],
-  historikkinnslag: [],
-  notater: [],
-  kontrollResultat: {
-    kontrollresultat: 'IKKE_KLASSIFISERT',
-  },
-  harVergeIÅpenBehandling: false,
-} satisfies Fagsak;
-
-const withIntl = getIntlDecorator(messages);
 
 const meta = {
   title: 'prosess/prosess-vedtak-editor',
-  component: FritekstRedigeringModal,
-  decorators: [withIntl, withPanelData, withRouter],
+  component: BrevRedigeringModal,
+  decorators: [withRouter],
   args: {
     mellomlagreOgHentPåNytt: action('button-click') as (html: string | null) => Promise<void>,
-    setVisFritekstRedigeringModal: action('button-click'),
+    setVisRedigeringModal: action('button-click'),
     forhåndsvisBrev: action('button-click'),
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
+    opprinneligHtml: mal,
+    redigertHtml: null,
   },
-  render: args => <FritekstRedigeringModal {...args} />,
-} satisfies Meta<PanelDataArgs & ComponentProps<typeof FritekstRedigeringModal>>;
+  render: args => <BrevRedigeringModal {...args} />,
+} satisfies Meta<ComponentProps<typeof BrevRedigeringModal>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -78,19 +30,6 @@ export const MedOpprinneligHtml: Story = {};
 
 export const MedRedigertHtml: Story = {
   args: {
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
-  },
-};
-
-export const MedOpprinneligHtmlOgMarkeringPraksisUtsettelse: Story = {
-  args: {
-    fagsak: FAGSAK_MED_MARKERING_PRAKSIS_UTSETTELSE,
-  },
-};
-
-export const MedRedigertHtmlOgMarkeringPraksisUtsettelse: Story = {
-  args: {
-    brevOverstyring: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
-    fagsak: FAGSAK_MED_MARKERING_PRAKSIS_UTSETTELSE,
+    redigertHtml: redigertInnhold,
   },
 };

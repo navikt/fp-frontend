@@ -62,30 +62,20 @@ export const utledDelerFraBrev = (html: string) => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
   const navLogo = notEmpty(heleBrevet.getElementById('logo')?.innerHTML, 'Nav-logo finnes ikke i mal');
   const header = notEmpty(heleBrevet.getElementById('header')?.innerHTML, 'Header finnes ikke i mal');
-  const footer = notEmpty(
-    heleBrevet.getElementById('readonly-innhold')?.innerHTML,
-    'Readonly-innhold finnes ikke i mal',
-  );
+  const footer = heleBrevet.getElementById('readonly-innhold')?.innerHTML;
 
   return { navLogo, header, footer };
 };
 
-export const utledRedigerbartInnhold = (html: string, harPraksisUtsettelse: boolean): string => {
+export const utledRedigerbartInnhold = (html: string): string => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
 
-  const editertbartInnhold = notEmpty(
+  const editerbartInnhold = notEmpty(
     heleBrevet.querySelector('[data-editable]')?.innerHTML,
     'Redigerbart innhold finnes ikke i mal',
   );
 
-  if (harPraksisUtsettelse) {
-    return fjernMellomromOgPTagsILiTags(
-      editertbartInnhold +
-        notEmpty(heleBrevet.getElementById('readonly-innhold')?.innerHTML, 'Readonly-innhold finnes ikke i mal'),
-    );
-  }
-
-  return fjernMellomromOgPTagsILiTags(editertbartInnhold);
+  return fjernMellomromOgPTagsILiTags(editerbartInnhold);
 };
 
 export const erRedigertHtmlGyldig = (html: string): boolean => {

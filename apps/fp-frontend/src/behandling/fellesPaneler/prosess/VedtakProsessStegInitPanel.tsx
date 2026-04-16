@@ -80,13 +80,13 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
     refetch: refetchOppgaver,
   } = useQuery(api.oppgaverOptions(behandling));
 
-  const { mutateAsync: hentBrevOverstyring, isPending } = useMutation({
-    mutationFn: () => api.hentBrevOverstyring(),
+  const { mutateAsync: hentBrevHtml, isPending } = useMutation({
+    mutationFn: () => api.hentBrevHtml(behandling.uuid),
   });
 
-  const { mutateAsync: mellomlagreBrevOverstyring } = useMutation({
+  const { mutateAsync: mellomlagreBrev } = useMutation({
     mutationFn: (redigertInnhold: string | null) =>
-      api.mellomlagreBrevOverstyring({ behandlingUuid: behandling.uuid, redigertInnhold }),
+      api.mellomlagring({ behandlingUuid: behandling.uuid, innhold: redigertInnhold }),
   });
 
   const { mutate: forhandsvis } = useMutation({
@@ -125,9 +125,9 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
   return (
     <VedtakEditeringProvider
       behandling={behandling}
-      hentBrevOverstyring={harLenke(behandling, 'HENT_BREV_OVERSTYRING') ? hentBrevOverstyring : undefined}
-      hentBrevOverstyringIsPending={isPending}
-      mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+      hentBrevHtml={harLenke(behandling, 'HENT_BREV_HTML') ? hentBrevHtml : undefined}
+      hentBrevHtmlIsPending={isPending}
+      mellomlagreBrev={mellomlagreBrev}
     >
       <ProsessDefaultInitPanel
         standardPanelProps={standardPanelProps}

@@ -3,38 +3,33 @@ import { FormattedMessage } from 'react-intl';
 import { ArrowUndoIcon, FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
 
-import type { BrevOverstyring } from '@navikt/fp-types';
-import { usePanelDataContext } from '@navikt/fp-utils';
-
 import { utledDelerFraBrev, utledStiler } from './redigeringsUtils';
 
 import styles from './brevInnhold.module.css';
 
-export const EDITOR_HOLDER_ID = 'rediger-brev';
-
 interface Props {
-  brevOverstyring: BrevOverstyring;
+  opprinneligHtml: string;
+  editorHolderId: string;
+  footer?: string;
+  isReadOnly?: boolean;
+  visForhåndsvisValideringsFeil: boolean;
   setVisTilbakestillAdvarselModal: (skalVise: boolean) => void;
   lagreOgLukk: () => void;
   forhåndsvis: () => void;
-  visForhåndsvisValideringsFeil: boolean;
 }
 
 export const BrevInnhold = ({
-  brevOverstyring,
-  setVisTilbakestillAdvarselModal,
+  opprinneligHtml,
+  editorHolderId,
+  footer,
+  isReadOnly = false,
   visForhåndsvisValideringsFeil,
-  forhåndsvis,
+  setVisTilbakestillAdvarselModal,
   lagreOgLukk,
+  forhåndsvis,
 }: Props) => {
-  const { isReadOnly, fagsak } = usePanelDataContext();
-
-  const harPraksisUtsettelse = fagsak.fagsakMarkeringer.some(
-    markering => markering.fagsakMarkering === 'PRAKSIS_UTSETTELSE',
-  );
-
-  const brevStiler = utledStiler(brevOverstyring.opprinneligHtml);
-  const { navLogo, header, footer } = utledDelerFraBrev(brevOverstyring.opprinneligHtml);
+  const brevStiler = utledStiler(opprinneligHtml);
+  const { navLogo, header } = utledDelerFraBrev(opprinneligHtml);
 
   return (
     <>
@@ -44,16 +39,16 @@ export const BrevInnhold = ({
           <div className={styles['logo']} dangerouslySetInnerHTML={{ __html: navLogo }} />
           <div className={styles['header']} dangerouslySetInnerHTML={{ __html: header }} />
           <div id="content">
-            <div id={EDITOR_HOLDER_ID} className={styles['redigerbartInnhold']} />
+            <div id={editorHolderId} className={styles['redigerbartInnhold']} />
           </div>
-          {!harPraksisUtsettelse && <div className={styles['footer']} dangerouslySetInnerHTML={{ __html: footer }} />}
+          {footer !== undefined && <div className={styles['footer']} dangerouslySetInnerHTML={{ __html: footer }} />}
         </div>
       </div>
       <footer>
         <VStack gap="space-16">
           {visForhåndsvisValideringsFeil && (
             <Alert variant="error">
-              <FormattedMessage id="BrevInnhold.InnholdMangler" />
+              <FormattedMessage id="BrevEditor.InnholdMangler" />
             </Alert>
           )}
           <HStack justify="center">
@@ -65,12 +60,12 @@ export const BrevInnhold = ({
               onKeyDown={e => (e.key === 'Enter' ? forhåndsvis() : null)}
               type="button"
             >
-              <FormattedMessage id="BrevInnhold.ForhandvisBrev" />
+              <FormattedMessage id="BrevEditor.ForhandvisBrev" />
             </Button>
           </HStack>
           <HStack justify="space-between">
             <Button type="button" variant="primary" onClick={lagreOgLukk} disabled={isReadOnly} size="small">
-              <FormattedMessage id="BrevInnhold.Lagre" />
+              <FormattedMessage id="BrevEditor.Lagre" />
             </Button>
             <Button
               variant="tertiary"
@@ -80,7 +75,7 @@ export const BrevInnhold = ({
               disabled={isReadOnly}
               size="small"
             >
-              <FormattedMessage id="BrevInnhold.Tilbakestill" />
+              <FormattedMessage id="BrevEditor.Tilbakestill" />
             </Button>
           </HStack>
         </VStack>

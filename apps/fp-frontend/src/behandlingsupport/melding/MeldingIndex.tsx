@@ -1,4 +1,4 @@
-import { type ReactElement, useState } from 'react';
+import { type ReactElement, useCallback, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,6 +16,7 @@ import type { DokumentMalType, FagsakBehandlingDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import {
+  FagsakRel,
   forhåndsvisTilbakekreving,
   initFetchOptions,
   type SubmitMessageParams,
@@ -74,6 +75,37 @@ export const MeldingIndex = ({
     mutationFn: (valuesToStore: SubmitMessageParams) => api.sendMelding(valuesToStore),
   });
 
+  const harBrevHtmlLenke = valgtBehandling.links.some(l => l.rel === FagsakRel.HENT_BREV_HTML);
+  const harMellomlagreLenke = valgtBehandling.links.some(l => l.rel === FagsakRel.MELLOMLAGRING);
+
+  const { mutateAsync: hentBrevHtml } = useMutation({
+    mutationFn: ({ brevmalkode, årsak }: { brevmalkode: string; årsak?: string }) =>
+      api.hentBrevHtml(valgtBehandling.uuid, brevmalkode, årsak),
+  });
+
+  const { mutateAsync: mellomlagreBrev } = useMutation({
+    mutationFn: ({ brevmalkode, html }: { brevmalkode: string; html: string | null }) =>
+      api.mellomlagring({
+        behandlingUuid: valgtBehandling.uuid,
+        dokumentMal: brevmalkode,
+        innhold: html,
+      }),
+  });
+
+  const hentBrevHtmlStabil = useCallback(
+    (brevmalkode: string, årsak?: string) => hentBrevHtml({ brevmalkode, årsak }),
+    [hentBrevHtml],
+  );
+
+  const mellomlagreBrevStabil = useCallback(
+    (brevmalkode: string, html: string | null) =>
+      mellomlagreBrev({
+        brevmalkode,
+        html,
+      }),
+    [mellomlagreBrev],
+  );
+
   const submitCallback = getSubmitCallback(
     setShowMessageModal,
     sendMelding,
@@ -131,6 +163,8 @@ export const MeldingIndex = ({
               meldingFormData={meldingFormData}
               setMeldingFormData={setMeldingFormData}
               brukerManglerAdresse={fagsak.brukerManglerAdresse}
+              hentBrevHtml={harBrevHtmlLenke ? hentBrevHtmlStabil : undefined}
+              mellomlagreBrev={harMellomlagreLenke ? mellomlagreBrevStabil : undefined}
             />
           )}
         </VStack>
@@ -203,7 +237,7 @@ const useVisForhandsvisningAvMelding = (behandling: FagsakBehandlingDto) => {
       api.forhåndsvisMelding({
         behandlingUuid: behandling.uuid,
         dokumentMal: params.brevmalkode as DokumentMalType,
-        fritekst: params.fritekst || ' ',
+        fritekst: params.fritekst,
         årsakskode: params.årsakskode,
       }),
     onSuccess: response => {

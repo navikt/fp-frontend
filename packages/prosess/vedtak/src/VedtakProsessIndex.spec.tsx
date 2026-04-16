@@ -117,7 +117,7 @@ describe('VedtakProsessIndex', () => {
 
     expect(screen.getByText(/Gjør nødvendige endringer i brevet nedenfor/)).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Lagre og lukk'));
+    await userEvent.click(screen.getByText('Lagre'));
 
     await userEvent.click(screen.getAllByText('Forkast redigert brev')[0]!);
 
