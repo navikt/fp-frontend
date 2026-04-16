@@ -46,8 +46,7 @@ describe('PermisjonIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
         fulltUttak: true,
         permisjonsPerioder: [
@@ -96,8 +95,7 @@ describe('PermisjonIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
         fulltUttak: false,
         overføringsperioder: [
@@ -155,8 +153,7 @@ describe('PermisjonIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
         fulltUttak: false,
         utsettelsePeriode: [
@@ -223,8 +220,7 @@ describe('PermisjonIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
         fulltUttak: false,
         graderingPeriode: [
@@ -304,8 +300,7 @@ describe('PermisjonIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
         fulltUttak: true,
         oppholdPerioder: [

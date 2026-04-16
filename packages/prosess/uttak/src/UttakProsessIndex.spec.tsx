@@ -101,7 +101,7 @@ describe('UttakProsessIndex', () => {
   });
 
   // TODO FIX
-  it.skip('skal validere at stønadskonto ikke er gyldig, endre og så bekrefte', async () => {
+  it.fails('skal validere at stønadskonto ikke er gyldig, endre og så bekrefte', async () => {
     // Vil gi ein warning sidan ein prøver å setta ein ikkje gyldig verdi i dropdown
     vi.spyOn(console, 'warn').mockImplementation(() => {});
 
@@ -438,7 +438,7 @@ describe('UttakProsessIndex', () => {
   });
 
   // TODO FIX!
-  it.skip('skal vise varsel når samlet utbetalingsgrad og andel i arbeid overskrider 100%', async () => {
+  it.fails('skal vise varsel når samlet utbetalingsgrad og andel i arbeid overskrider 100%', async () => {
     render(<VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent />);
 
     expect(

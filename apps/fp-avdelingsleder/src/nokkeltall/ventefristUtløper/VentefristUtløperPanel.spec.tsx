@@ -7,7 +7,7 @@ const { Default } = composeStories(stories);
 
 describe('VentefristUtløperPanel', () => {
   // TODO echarts-testing
-  it.skip('skal vise graffilter', async () => {
+  it.todo('skal vise graffilter', async () => {
     const { getByLabelText } = render(<Default />);
     expect(
       await screen.findByText('Førstegangsbehandlinger på vent fordelt på utløp av ventefrist'),

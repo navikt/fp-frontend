@@ -27,8 +27,7 @@ describe('MottattDatoPapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       mottattDato: enMaanedSiden.format(ISO_DATE_FORMAT),
     });
   });

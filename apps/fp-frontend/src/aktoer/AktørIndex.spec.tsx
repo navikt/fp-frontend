@@ -26,7 +26,7 @@ describe('AktørIndex', () => {
   });
 
   //TODO Denne feilar av og til
-  it.skip('skal feile på api-kall', async () => {
+  it.fails('skal feile på api-kall', async () => {
     applyRequestHandlers(AktørInfoKallFeilet.parameters['msw'] as MswParameters['msw']);
     render(<AktørInfoKallFeilet />);
 

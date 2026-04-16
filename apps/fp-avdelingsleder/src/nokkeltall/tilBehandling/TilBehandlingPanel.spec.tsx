@@ -8,7 +8,7 @@ const { Default } = composeStories(stories);
 
 describe('TilBehandlingPanel', () => {
   // TODO echarts-testing
-  it.skip('skal vise graffilter', async () => {
+  it.todo('skal vise graffilter', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Antall åpne oppgaver pr dato')).toBeInTheDocument();
