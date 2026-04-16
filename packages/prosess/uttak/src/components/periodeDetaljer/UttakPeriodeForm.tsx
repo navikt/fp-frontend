@@ -102,21 +102,13 @@ const lagOptionsTilPeriodeÅrsakSelect = (
     );
   };
 
-  const hiddenDashOption = <option key="-" value="-" style={{ display: 'none' }} />;
-
   if (utsettelseType && utsettelseType !== '-') {
-    return [
-      hiddenDashOption,
-      ...filteredNyKodeArray.filter(kv => kv.uttakTyper.includes('UTSETTELSE')).map(mapTilOption),
-    ];
+    return filteredNyKodeArray.filter(kv => kv.uttakTyper.includes('UTSETTELSE')).map(mapTilOption);
   }
-  return [
-    hiddenDashOption,
-    ...filteredNyKodeArray
-      .filter(kv => kv.uttakTyper.includes('UTTAK'))
-      .filter(kv => periodeType === '-' || kv.valgbarForKonto.includes(periodeType))
-      .map(mapTilOption),
-  ];
+  return filteredNyKodeArray
+    .filter(kv => kv.uttakTyper.includes('UTTAK'))
+    .filter(kv => periodeType === '-' || kv.valgbarForKonto.includes(periodeType))
+    .map(mapTilOption);
 };
 
 const getFiltrerPåGyldighetForLovendringer =

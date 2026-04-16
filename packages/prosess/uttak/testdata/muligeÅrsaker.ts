@@ -1,4 +1,6 @@
-export const muligeÅrsaker = [
+import type { PeriodeResultatÅrsakMuligeÅrsaker } from '@navikt/fp-types';
+
+export const muligeÅrsaker: PeriodeResultatÅrsakMuligeÅrsaker[] = [
   {
     kode: '2002',
     sortering: '14-09',
