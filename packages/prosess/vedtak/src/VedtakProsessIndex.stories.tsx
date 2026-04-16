@@ -103,9 +103,10 @@ const defaultBeregningsgrunnlag = {
   skjæringstidspunkt: '2021-01-01',
 } satisfies Beregningsgrunnlag;
 
-type MetaArgs = PanelDataArgs & { brevOverstyring: BrevOverstyring; harHentBrevOverstyringLenke?: boolean } & ComponentProps<
-  typeof VedtakProsessIndex
->;
+type MetaArgs = PanelDataArgs & {
+  brevOverstyring: BrevOverstyring;
+  harHentBrevOverstyringLenke?: boolean;
+} & ComponentProps<typeof VedtakProsessIndex>;
 
 const meta = {
   title: 'prosess/prosess-vedtak',
