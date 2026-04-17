@@ -642,7 +642,7 @@ const getHentBrevOverstyring = (links: ApiLink[]) => () =>
 const getMellomlagreBrevOverstyring =
   (links: ApiLink[]) => (params: { behandlingUuid: string; redigertInnhold: string | null }) =>
     kyExtended
-      .post<string>(getUrlFromRel('MELLOMLAGRE_BREV_OVERSTYRING', links), {
+      .post(getUrlFromRel('MELLOMLAGRE_BREV_OVERSTYRING', links), {
         json: params,
       })
       .then(() => {});

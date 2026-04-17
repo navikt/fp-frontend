@@ -194,7 +194,7 @@ export const opprettNySaksliste = (avdelingEnhet: string) =>
   kyExtended.post(LosUrl.OPPRETT_NY_SAKSLISTE, { json: { avdelingEnhet } }).json<{ sakslisteId: string }>();
 
 export const lagreUtvalgskriterierForKø = (sakslisteDto: SakslisteLagreDto) =>
-  kyExtended.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, { json: sakslisteDto });
+  kyExtended.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, { json: sakslisteDto }).then(() => {});
 
 export const lagreSakslisteSaksbehandler = (
   sakslisteId: number,
@@ -203,55 +203,64 @@ export const lagreSakslisteSaksbehandler = (
   avdelingEnhet: string,
 ) =>
   kyExtended
-    .post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, { json: { sakslisteId, brukerIdent, checked, avdelingEnhet } });
+    .post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, { json: { sakslisteId, brukerIdent, checked, avdelingEnhet } })
+    .then(() => {});
 
 export const slettSaksliste = (sakslisteId: number, avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.SLETT_SAKSLISTE, {
       json: { sakslisteId, avdelingEnhet },
-    });
+    })
+    .then(() => {});
 
 export const opprettGruppe = (avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.OPPRETT_GRUPPE, {
       json: { avdelingEnhet },
-    });
+    })
+    .then(() => {});
 
 export const leggSaksbehandlerTilGruppe = (brukerIdent: string, avdelingEnhet: string, gruppeId: number) =>
   kyExtended
     .post(LosUrl.LEGG_SAKSBEHANDLER_TIL_GRUPPE, {
       json: { brukerIdent, avdelingEnhet, gruppeId },
-    });
+    })
+    .then(() => {});
 
 export const fjernSaksbehandlerFraGruppe = (brukerIdent: string, avdelingEnhet: string, gruppeId: number) =>
   kyExtended
     .post(LosUrl.FJERN_SAKSBEHANDLER_FRA_GRUPPE, {
       json: { brukerIdent, avdelingEnhet, gruppeId },
-    });
+    })
+    .then(() => {});
 
 export const endreGruppenavn = (gruppeId: number, gruppeNavn: string, avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.ENDRE_GRUPPENAVN, {
       json: { gruppeId, gruppeNavn, avdelingEnhet },
-    });
+    })
+    .then(() => {});
 
 export const slettGruppe = (gruppeId: number, avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.SLETT_GRUPPE, {
       json: { gruppeId, avdelingEnhet },
-    });
+    })
+    .then(() => {});
 
 export const opphevReservasjon = (oppgaveId: number) =>
   kyExtended
     .post(LosUrl.AVDELINGSLEDER_OPPHEVER_RESERVASJON, {
       json: { oppgaveId },
-    });
+    })
+    .then(() => {});
 
 export const slettSaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended
     .post(LosUrl.SLETT_SAKSBEHANDLER, {
       json: { brukerIdent, avdelingEnhet },
-    });
+    })
+    .then(() => {});
 
 export const saksbehandlerSøk = async (brukerIdent: string) => {
   const response = await kyExtended.post(LosUrl.SAKSBEHANDLER_SOK, {
@@ -267,4 +276,5 @@ export const opprettNySaksbehandler = (brukerIdent: string, avdelingEnhet: strin
   kyExtended
     .post(LosUrl.OPPRETT_NY_SAKSBEHANDLER, {
       json: { brukerIdent, avdelingEnhet },
-    });
+    })
+    .then(() => {});
