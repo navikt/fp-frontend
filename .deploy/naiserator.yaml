@@ -59,10 +59,12 @@ spec:
         - application: "{{outboundRule.application}}"
         {{/each }}
       {{/if}}
+      {{#if externals}}
       external:
         {{#each externals as |external|}}
         - host: "{{external}}"
         {{/each}}
+      {{/if}}
   observability:
     autoInstrumentation:
       enabled: true

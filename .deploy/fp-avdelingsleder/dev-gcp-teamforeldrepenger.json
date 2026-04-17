@@ -27,7 +27,6 @@
       "application": "fplos"
     }
   ],
-  "externals": [],
   "proxyRedirects": [
     {
       "path": "/fplos/api",
