@@ -1560,6 +1560,7 @@ __metadata:
     eslint: "npm:9.39.4"
     fast-glob: "npm:3.3.3"
     history: "npm:5.3.0"
+    ky: "npm:1.14.3"
     react: "npm:19.2.4"
     react-dom: "npm:19.2.4"
     react-intl: "npm:8.1.4"
