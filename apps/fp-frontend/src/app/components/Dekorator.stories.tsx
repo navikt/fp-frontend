@@ -1,13 +1,9 @@
-import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
-import { useQuery } from '@tanstack/react-query';
-import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
 import { getIntlDecorator, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 
 import { initFetchFpsak } from '../../../.storybook/testdata';
-import { FagsakUrl, initFetchOptions } from '../../data/fagsakApi';
 import { Dekorator } from './Dekorator';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -19,9 +15,6 @@ const meta = {
   decorators: [withIntl, withRouter, withQueryClient],
   component: Dekorator,
   parameters: {
-    msw: {
-      handlers: [http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak))],
-    },
     layout: 'fullscreen',
   },
   args: {
@@ -34,12 +27,7 @@ const meta = {
     hideErrorMessages: false,
     theme: 'light',
     setTheme: action('setTheme'),
-  },
-  render: function Render(props) {
-    //Må hente data til cache før testa komponent blir kalla
-    const { status } = useQuery(initFetchOptions());
-
-    return status === 'success' ? <Dekorator {...props} /> : <LoadingPanel />;
+    navAnsatt: initFetchFpsak.innloggetBruker,
   },
 } satisfies Meta<typeof Dekorator>;
 export default meta;

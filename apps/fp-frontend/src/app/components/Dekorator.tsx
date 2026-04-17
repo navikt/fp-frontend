@@ -3,14 +3,12 @@ import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
 import type { Theme } from '@navikt/ds-react';
-import { useQuery } from '@tanstack/react-query';
 
 import { FellesDekorator, type QueryStrings } from '@navikt/fp-app-felles';
 import { getAvdelingslederLenke, getJournalføringLenke } from '@navikt/fp-konstanter';
 import { type DekoratorLenke } from '@navikt/fp-sak-dekorator';
-import { notEmpty } from '@navikt/fp-utils';
+import type { NavAnsatt } from '@navikt/fp-types';
 
-import { initFetchOptions } from '../../data/fagsakApi';
 import { UTBETALINGSDATA_PATH } from '../paths';
 
 interface Props {
@@ -20,13 +18,14 @@ interface Props {
   hideErrorMessages?: boolean;
   theme: ComponentProps<typeof Theme>['theme'];
   setTheme: (theme: NonNullable<ComponentProps<typeof Theme>['theme']>) => void;
+  navAnsatt?: NavAnsatt;
 }
 
 export const Dekorator = (props: Props) => {
   const intl = useIntl();
 
-  const initFetchQuery = useQuery(initFetchOptions());
-  const { innloggetBruker: navAnsatt } = notEmpty(initFetchQuery.data);
+  const { navAnsatt, ...rest } = props;
+  const { navn = '', kanOppgavestyre = false, kanSaksbehandle = false } = navAnsatt ?? {};
 
   const navigate = useNavigate();
   const gotToAppRoot = () => {
@@ -37,8 +36,6 @@ export const Dekorator = (props: Props) => {
     void navigate(UTBETALINGSDATA_PATH);
     e.preventDefault();
   };
-
-  const { navn, kanOppgavestyre, kanSaksbehandle } = navAnsatt;
 
   const interneLenker: DekoratorLenke[] = [];
   if (kanOppgavestyre) {
@@ -64,7 +61,7 @@ export const Dekorator = (props: Props) => {
       interneLenker={interneLenker}
       ansattnavn={navn}
       gotToAppRoot={gotToAppRoot}
-      {...props}
+      {...rest}
     />
   );
 };
