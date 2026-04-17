@@ -33,7 +33,7 @@
     "history": "5.3.0",
     "react": "19.2.4",
     "react-hook-form": "7.72.1",
-    "react-intl": "10.1.1",
+    "react-intl": "8.1.4",
     "react-router-dom": "7.13.2"
   },
   "devDependencies": {
