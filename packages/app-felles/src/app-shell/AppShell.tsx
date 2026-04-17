@@ -1,4 +1,4 @@
-import { type ComponentProps, createContext, type ReactNode, useContext, useMemo, useState } from 'react';
+import { type ComponentProps, createContext, type ReactNode, use, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Theme } from '@navikt/ds-react';
@@ -31,7 +31,7 @@ export type AppShellContextValue = {
 const AppShellContext = createContext<AppShellContextValue | null>(null);
 
 export const useAppShell = (): AppShellContextValue => {
-  const ctx = useContext(AppShellContext);
+  const ctx = use(AppShellContext);
   if (!ctx) {
     throw new Error('useAppShell must be used within an AppShell');
   }
