@@ -531,10 +531,11 @@ const getVergeOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak, isEn
     queryKey: [BehandlingRel.VERGE, behandling.uuid, behandling.versjon],
     queryFn: async () => {
       const response = await kyExtended.get(getUrlFromRel('VERGE', links));
-      return response.status === 204 ? undefined : response.json<Verge>();
+      return response.status === 204 ? null : response.json<Verge>();
     },
     enabled: isEnabled,
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getOppgaverOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
@@ -657,10 +658,11 @@ const getVerge = (links: ApiLink[]) => (behandling: Behandling) =>
     queryKey: [BehandlingRel.VERGE_HENT, behandling.uuid, behandling.versjon],
     queryFn: async () => {
       const response = await kyExtended.get(getUrlFromRel('VERGE_HENT', links));
-      return response.status === 204 ? undefined : response.json<Verge>();
+      return response.status === 204 ? null : response.json<Verge>();
     },
     enabled: harLenke(behandling, 'VERGE_HENT'),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getLagreAksjonspunkt = (links: ApiLink[]) => (params: AksjonspunktArgs) =>
