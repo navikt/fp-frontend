@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { getIntlDecorator, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
+import { getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
 
 import { initFetchFpsak } from '../../../.storybook/testdata';
 import { Dekorator } from './Dekorator';
@@ -12,7 +12,7 @@ const withIntl = getIntlDecorator(messages);
 
 const meta = {
   title: 'app/Dekorator',
-  decorators: [withIntl, withRouter, withQueryClient],
+  decorators: [withIntl, withRouter],
   component: Dekorator,
   parameters: {
     layout: 'fullscreen',

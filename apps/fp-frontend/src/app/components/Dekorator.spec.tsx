@@ -1,6 +1,5 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './Dekorator.stories';
 
@@ -8,14 +7,12 @@ const { Default, VisFeilmeldingSomLiggIUrl, VisTekniskFeilmelding, SkjulFeilmeld
 
 describe('Dekorator', () => {
   it('skal vise dekorator', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
     expect(await screen.findByText('Sara Saksbehandler')).toBeInTheDocument();
   });
 
   it('skal vise feilmeldinger som ligger i URL', async () => {
-    applyRequestHandlers(VisFeilmeldingSomLiggIUrl.parameters['msw'] as MswParameters['msw']);
     render(<VisFeilmeldingSomLiggIUrl />);
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
@@ -23,7 +20,6 @@ describe('Dekorator', () => {
   });
 
   it('skal vise feilmeldinger som oppstår ved kodefeil', async () => {
-    applyRequestHandlers(VisTekniskFeilmelding.parameters['msw'] as MswParameters['msw']);
     render(<VisTekniskFeilmelding />);
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
@@ -31,7 +27,6 @@ describe('Dekorator', () => {
   });
 
   it('skal ikke vise feilmelding når den er skjult manuelt', async () => {
-    applyRequestHandlers(SkjulFeilmelding.parameters['msw'] as MswParameters['msw']);
     render(<SkjulFeilmelding />);
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
