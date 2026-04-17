@@ -36,8 +36,7 @@ describe('InntektsgivendeArbeidPapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       arbeidsforhold: [
         {
           periodeFom: '2022-06-15',
@@ -68,8 +67,7 @@ describe('InntektsgivendeArbeidPapirsoknadIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       arbeidsforhold: [],
     });
   });

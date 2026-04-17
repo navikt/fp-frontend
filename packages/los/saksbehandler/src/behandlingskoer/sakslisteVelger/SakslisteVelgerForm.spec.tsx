@@ -5,8 +5,15 @@ import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './SakslisteVelgerForm.stories';
 
-const { Default, MedToSakslister, MedFlereEnnTreSaksbehandlere, MedBelopFraOgTil, MedBelopKunFra, MedBelopKunTil } =
-  composeStories(stories);
+const {
+  Default,
+  MedToSakslister,
+  MedFlereEnnTreSaksbehandlere,
+  MedBelopFraOgTil,
+  MedBelopKunFra,
+  MedBelopKunTil,
+  MedAvsluttedeOppgaver,
+} = composeStories(stories);
 
 const hentSorteringBoks = () => {
   const sorteringLabel = screen.getByText('Sortering');
@@ -16,6 +23,22 @@ const hentSorteringBoks = () => {
   }
   return sorteringBoks;
 };
+
+vi.mock('echarts', () => ({
+  init: vi.fn(() => ({
+    setOption: vi.fn(),
+    resize: vi.fn(),
+    dispose: vi.fn(),
+    on: vi.fn(),
+    off: vi.fn(),
+    showLoading: vi.fn(),
+    hideLoading: vi.fn(),
+  })),
+  registerTheme: vi.fn(),
+  registerMap: vi.fn(),
+  getInstanceByDom: vi.fn(),
+  use: vi.fn(),
+}));
 
 describe('SakslisteVelgerForm', () => {
   it('skal vise dropdown med en saksliste', async () => {
@@ -148,5 +171,18 @@ describe('SakslisteVelgerForm', () => {
 
     expect(hentSorteringBoks()).not.toHaveTextContent('Fra: 20 000 kr');
     expect(hentSorteringBoks()).not.toHaveTextContent('Til: 30 000 kr');
+  });
+
+  it('skal åpne dialog og vise graf med avsluttede oppgaver', async () => {
+    applyRequestHandlers(MedAvsluttedeOppgaver.parameters['msw'] as MswParameters['msw']);
+    render(<MedAvsluttedeOppgaver />);
+
+    expect(await screen.findByText('A03 Førstegangsbehandling (3 saker)')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Åpne dialog' }));
+
+    expect(await screen.findByText('Avsluttede oppgaver – A03 Førstegangsbehandling')).toBeInTheDocument();
+    expect(screen.getByText('Denne uken')).toBeInTheDocument();
+    expect(screen.getByText('Forrige uke')).toBeInTheDocument();
   });
 });

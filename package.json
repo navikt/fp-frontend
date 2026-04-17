@@ -35,11 +35,11 @@
   ],
   "devDependencies": {
     "@navikt/aksel-stylelint": "8.9.1",
-    "@storybook/addon-a11y": "10.3.3",
-    "@storybook/addon-links": "10.3.3",
-    "@storybook/react": "10.3.3",
+    "@storybook/addon-a11y": "10.3.5",
+    "@storybook/addon-links": "10.3.5",
+    "@storybook/react": "10.3.5",
     "@testing-library/jest-dom": "6.9.1",
-    "@types/react": "19.2.14",
+    "@types/react": "19.2.9",
     "@types/react-dom": "19.2.3",
     "@types/react-responsive": "9.0.0",
     "@types/react-router-dom": "5.3.3",
@@ -50,6 +50,7 @@
     "lint-staged": "16.4.0",
     "prettier": "3.8.1",
     "shelljs": "0.10.0",
+    "storybook": "10.3.5",
     "stylelint": "17.6.0",
     "stylelint-order": "8.1.1",
     "turbo": "2.9.3",
@@ -57,9 +58,6 @@
     "vitest": "4.1.2"
   },
   "resolutions": {
-    "@adobe/css-tools": "4.3.2",
-    "@types/react": "19.2.9",
-    "axios": "1.11.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -74,5 +72,9 @@
     "workerDirectory": [
       "./.storybook/mock"
     ]
+  },
+  "dependencies": {
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   }
 }

@@ -98,13 +98,12 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
               axisLabel: {
                 ...options.textStyle,
                 formatter: (value: string) => {
-                  const date = dayjs(value);
                   if (tidsintervall === 'dag') {
                     return timeFormat(value);
-                  } else if (tidsintervall === 'uke') {
-                    return date.format('ddd DD.MM');
+                  } else if (tidsintervall === 'måned') {
+                    return dayjs(value).format('DD.MM');
                   } else {
-                    return date.format('DD.MM');
+                    return dayjs(value).format('ddd DD.MM');
                   }
                 },
               },

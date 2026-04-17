@@ -47,8 +47,7 @@ describe('TerminOgFodselPanel', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       antallBarn: 2,
       erBarnetFødt: true,
       fødselsdato: dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT),
@@ -82,8 +81,7 @@ describe('TerminOgFodselPanel', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       antallBarn: 1,
       erBarnetFødt: true,
       fødselsdato: '2022-09-14',
@@ -131,8 +129,7 @@ describe('TerminOgFodselPanel', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(lagre).toHaveBeenCalledOnce();
-    expect(lagre).toHaveBeenCalledWith({
+    expect(lagre).toHaveBeenCalledExactlyOnceWith({
       antallBarnFraTerminbekreftelse: 2,
       erBarnetFødt: false,
       terminbekreftelseDato: '2022-05-27',

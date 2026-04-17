@@ -30,13 +30,7 @@ const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string
 const finnSkalIkkeHenteData = (location: Location, selectedSaksnummer?: string, behandlingUuid?: string) =>
   !selectedSaksnummer || erUrlUnderBehandling(location) || (erBehandlingValgt(location) && !behandlingUuid);
 
-const Visittkort = ({
-  fagsak,
-  erTilbakekreving,
-}: {
-  fagsak: Fagsak;
-  erTilbakekreving: boolean;
-}) => {
+const Visittkort = ({ fagsak, erTilbakekreving }: { fagsak: Fagsak; erTilbakekreving: boolean }) => {
   const intl = useIntl();
   const { addErrorMessage } = useRestApiErrorDispatcher();
 

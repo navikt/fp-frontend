@@ -25,7 +25,7 @@ describe('DekoratorMedFeilviserSakIndex', () => {
   });
 
   // TODO Fiks denne
-  it.skip('skal vise feilmelding med lenke som åpner feilmeldingsdetaljer', async () => {
+  it.todo('skal vise feilmelding med lenke som åpner feilmeldingsdetaljer', async () => {
     render(<MedFeilmeldingDetaljer />);
     expect(
       await screen.findByText(

@@ -207,6 +207,7 @@ const meta = {
         http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, () => HttpResponse.json({})),
         http.post(LosUrl.FLYTT_RESERVASJON, () => HttpResponse.json({})),
+        http.get(encodeURI(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK), () => HttpResponse.json([])),
       ],
     },
   },
