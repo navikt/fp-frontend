@@ -21,10 +21,9 @@ interface Props {
   navAnsatt?: NavAnsatt;
 }
 
-export const Dekorator = (props: Props) => {
+export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
   const intl = useIntl();
 
-  const { navAnsatt, ...rest } = props;
   const { navn = '', kanOppgavestyre = false, kanSaksbehandle = false } = navAnsatt ?? {};
 
   const navigate = useNavigate();
