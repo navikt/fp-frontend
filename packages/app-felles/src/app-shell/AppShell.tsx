@@ -2,7 +2,6 @@ import { type ComponentProps, createContext, type ReactNode, useContext, useMemo
 import { Link, useLocation } from 'react-router-dom';
 
 import { Theme } from '@navikt/ds-react';
-import { parseQueryString } from '../utils/urlUtils';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -12,6 +11,7 @@ import type { QueryStrings } from '../dekorator/FellesDekorator';
 import { ErrorBoundary } from '../ErrorBoundary';
 import { ErrorType, type FpError } from '../restApiError/errorType';
 import { useRestApiError, useRestApiErrorDispatcher } from '../restApiError/RestApiErrorContext';
+import { parseQueryString } from '../utils/urlUtils';
 import { createQueryClient, getErrorHandler } from './queryUtils';
 
 type ThemeType = NonNullable<ComponentProps<typeof Theme>['theme']>;
