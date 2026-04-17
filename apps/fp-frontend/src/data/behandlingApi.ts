@@ -529,7 +529,10 @@ const getUtlandDokStatusOptions = (links: ApiLink[]) => (behandling: BehandlingF
 const getVergeOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.VERGE, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('VERGE', links)).json<Verge>(),
+    queryFn: async () => {
+      const response = await kyExtended.get(getUrlFromRel('VERGE', links));
+      return response.status === 204 ? undefined : response.json<Verge>();
+    },
     enabled: isEnabled,
     staleTime: Infinity,
   });
@@ -652,7 +655,10 @@ const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRe
 const getVerge = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VERGE_HENT, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('VERGE_HENT', links)).json<Verge>(),
+    queryFn: async () => {
+      const response = await kyExtended.get(getUrlFromRel('VERGE_HENT', links));
+      return response.status === 204 ? undefined : response.json<Verge>();
+    },
     enabled: harLenke(behandling, 'VERGE_HENT'),
     staleTime: Infinity,
   });
