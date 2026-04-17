@@ -99,6 +99,7 @@ const AppIndex = () => {
               crashMessage={crashMessage}
               theme={theme}
               setTheme={setTheme}
+              navAnsatt={navAnsatt}
             />
             <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
               {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
