@@ -1,4 +1,4 @@
-import { type ComponentProps, createContext, type ReactNode, use, useMemo, useState } from 'react';
+import { type ComponentProps, createContext, type ReactNode, use, useCallback, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Theme } from '@navikt/ds-react';
@@ -80,18 +80,21 @@ const AppShellInner = ({ onHeaderHeightChange, themeLocalStorageKey, children }:
 
   const location = useLocation();
 
-  const setSiteHeight = (newHeaderHeight: number): void => {
-    setHeaderHeight(newHeaderHeight);
-    onHeaderHeightChange?.(newHeaderHeight);
-  };
+  const setSiteHeight = useCallback(
+    (newHeaderHeight: number): void => {
+      setHeaderHeight(newHeaderHeight);
+      onHeaderHeightChange?.(newHeaderHeight);
+    },
+    [onHeaderHeightChange],
+  );
 
-  const addErrorMessageAndSetAsCrashed = (error: FpError) => {
+  const addErrorMessageAndSetAsCrashed = useCallback((error: FpError) => {
     setCrashMessage(
       error.type === ErrorType.GENERAL_ERROR
         ? error.message
         : 'Det oppstod en feilsituasjon som ikke blir håndtert korrekt',
     );
-  };
+  }, []);
 
   const errorMessages = useRestApiError();
   const queryStrings = parseQueryString(location.search) as QueryStrings;
@@ -100,17 +103,30 @@ const AppShellInner = ({ onHeaderHeightChange, themeLocalStorageKey, children }:
   const hasForbiddenOrUnauthorizedErrors = hasForbiddenErrors || hasUnauthorizedErrors;
   const shouldRenderHome = !crashMessage && !hasForbiddenOrUnauthorizedErrors;
 
-  const contextValue: AppShellContextValue = {
-    headerHeight,
-    crashMessage,
-    theme,
-    queryStrings,
-    hasForbiddenOrUnauthorizedErrors,
-    shouldRenderHome,
-    setTheme,
-    setSiteHeight,
-    addErrorMessageAndSetAsCrashed,
-  };
+  const contextValue = useMemo<AppShellContextValue>(
+    () => ({
+      headerHeight,
+      crashMessage,
+      theme,
+      queryStrings,
+      hasForbiddenOrUnauthorizedErrors,
+      shouldRenderHome,
+      setTheme,
+      setSiteHeight,
+      addErrorMessageAndSetAsCrashed,
+    }),
+    [
+      headerHeight,
+      crashMessage,
+      theme,
+      queryStrings,
+      hasForbiddenOrUnauthorizedErrors,
+      shouldRenderHome,
+      setTheme,
+      setSiteHeight,
+      addErrorMessageAndSetAsCrashed,
+    ],
+  );
 
   return (
     <AppShellContext.Provider value={contextValue}>
