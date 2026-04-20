@@ -222,6 +222,7 @@ const getBehandlingPersonoversiktOptions =
       queryFn: () => jsonEllerNull<Personoversikt>(kyExtended.get(getUrlFromRel('BEHANDLING_PERSONOVERSIKT', links))),
       enabled: erFørstegangssøknadEllerRevurdering,
       staleTime: Infinity,
+      select: data => data ?? undefined,
     });
 
 const getAnkeVurderingOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
@@ -250,6 +251,7 @@ const getInnsynOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
     queryKey: [BehandlingRel.INNSYN, behandling.uuid, behandling.versjon],
     queryFn: () => jsonEllerNull<Innsyn>(kyExtended.get(getUrlFromRel('INNSYN', links))),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getPerioderForeldelseOptions = (links: ApiLink[]) => (behandling: BehandlingFpTilbake) =>
@@ -318,6 +320,7 @@ const getBeregningsresultatDagytelseOptions =
         jsonEllerNull<BeregningsresultatDagytelse>(kyExtended.get(getUrlFromRel('BEREGNINGRESULTAT_DAGYTELSE', links))),
       enabled: harLenke(behandling, 'BEREGNINGRESULTAT_DAGYTELSE') && isEnabled,
       staleTime: Infinity,
+      select: data => data ?? undefined,
     });
 
 const getFaktaFødselOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) => {
@@ -351,6 +354,7 @@ const getSøknadOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
     queryKey: [BehandlingRel.SØKNAD, behandling.uuid, behandling.versjon],
     queryFn: () => jsonEllerNull<Soknad>(kyExtended.get(getUrlFromRel('SØKNAD', links))),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getFeriepengegrunnlagOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak, isEnabled: boolean) =>
@@ -359,6 +363,7 @@ const getFeriepengegrunnlagOptions = (links: ApiLink[]) => (behandling: Behandli
     queryFn: () => jsonEllerNull<Feriepengegrunnlag>(kyExtended.get(getUrlFromRel('FERIEPENGEGRUNNLAG', links))),
     enabled: harLenke(behandling, 'FERIEPENGEGRUNNLAG') && isEnabled,
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getTilbakekrevingValgOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
@@ -367,6 +372,7 @@ const getTilbakekrevingValgOptions = (links: ApiLink[]) => (behandling: Behandli
     queryFn: () => jsonEllerNull<TilbakekrevingValg>(kyExtended.get(getUrlFromRel('TILBAKEKREVINGVALG', links))),
     enabled: harLenke(behandling, 'TILBAKEKREVINGVALG'),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getBeregningsgrunnlagOptions =
@@ -377,6 +383,7 @@ const getBeregningsgrunnlagOptions =
       queryFn: () => jsonEllerNull<Beregningsgrunnlag>(kyExtended.get(getUrlFromRel('BEREGNINGSGRUNNLAG', links))),
       enabled: harLenke(behandling, 'BEREGNINGSGRUNNLAG') && isEnabled,
       staleTime: Infinity,
+      select: data => data ?? undefined,
     });
 
 const getSimuleringResultatOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
@@ -385,6 +392,7 @@ const getSimuleringResultatOptions = (links: ApiLink[]) => (behandling: Behandli
     queryFn: () => jsonEllerNull<SimuleringResultat>(kyExtended.get(getUrlFromRel('SIMULERING_RESULTAT', links))),
     enabled: harLenke(behandling, 'SIMULERING_RESULTAT'),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getBeregningDagytelseOriginalBehandlingOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
@@ -405,6 +413,7 @@ const getArbeidOgInntektOptions = (links: ApiLink[]) => (behandling: BehandlingF
     queryFn: () => jsonEllerNull<ArbeidOgInntektsmelding>(kyExtended.get(getUrlFromRel('ARBEID_OG_INNTEKT', links))),
     enabled: harLenke(behandling, 'ARBEID_OG_INNTEKT'),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getSvangerskapspengerTilretteleggingOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
@@ -421,6 +430,7 @@ const getOpptjeningOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak,
     queryFn: () => jsonEllerNull<Opptjening>(kyExtended.get(getUrlFromRel('OPPTJENING', links))),
     enabled: harLenke(behandling, 'OPPTJENING') && isEnabled,
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getBeregningsresultatEngangsstønadOptions =
@@ -439,6 +449,7 @@ const getMedlemskapOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak)
     queryKey: [BehandlingRel.MEDLEMSKAP, behandling.uuid, behandling.versjon],
     queryFn: () => jsonEllerNull<Medlemskap>(kyExtended.get(getUrlFromRel('MEDLEMSKAP', links))),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getUttaksresultatOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
@@ -463,6 +474,7 @@ const getYtelsefordelingOptions = (links: ApiLink[]) => (behandling: BehandlingF
     queryFn: () => jsonEllerNull<Ytelsefordeling>(kyExtended.get(getUrlFromRel('YTELSEFORDELING', links))),
     enabled: harLenke(behandling, 'YTELSEFORDELING'),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getFaktaOmsorgOgRettOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
@@ -470,6 +482,7 @@ const getFaktaOmsorgOgRettOptions = (links: ApiLink[]) => (behandling: Behandlin
     queryKey: [BehandlingRel.OMSORG_OG_RETT, behandling.uuid, behandling.versjon],
     queryFn: () => jsonEllerNull<OmsorgOgRett>(kyExtended.get(getUrlFromRel('OMSORG_OG_RETT', links))),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getDokumentasjonVurderingBehovOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
@@ -519,6 +532,7 @@ const getInntektArbeidYtelseOptions = (links: ApiLink[]) => (behandling: Behandl
     queryKey: [BehandlingRel.INNTEKT_ARBEID_YTELSE, behandling.uuid, behandling.versjon],
     queryFn: () => jsonEllerNull<InntektArbeidYtelse>(kyExtended.get(getUrlFromRel('INNTEKT_ARBEID_YTELSE', links))),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getUtlandDokStatusOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
