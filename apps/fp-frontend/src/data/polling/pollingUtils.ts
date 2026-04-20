@@ -31,7 +31,7 @@ export const doPolling = async <T>(response: KyResponse<T>, setPollingPending: P
       return await pollOgHentData(setPollingPending, location);
     } catch (error) {
       if (error instanceof HTTPError) {
-        const data = await error.response.json<AsyncPollingStatus>();
+        const data = error.data as AsyncPollingStatus;
         if (isPollingDelayedOrHalted(data) && data.location) {
           setPollingPending(false);
           //Ikke vent på at behandling blir oppdatert, men hent gammel versjon (som da er read only)

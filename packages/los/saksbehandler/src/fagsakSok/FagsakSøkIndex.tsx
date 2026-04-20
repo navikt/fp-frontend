@@ -83,10 +83,10 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     mutationFn: getReservasjonsstatus,
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const searchResultAccessDenied =
-    // @ts-expect-error response.data når ein refaktorerar feilhåndteringa
-    fagsakError instanceof HTTPError && fagsakError.response.status === 403 ? fagsakError.response.data : undefined;
+    fagsakError instanceof HTTPError && fagsakError.response.status === 403
+      ? (fagsakError.data as { feilmelding: string } | undefined)
+      : undefined;
 
   const erSøkFerdig = isSøkFagsakSuccess && !isHentOppgaverPending;
 
