@@ -7,8 +7,6 @@ import { ErrorPage } from '@navikt/fp-sak-infosider';
 
 import { ErrorType, type FpError } from './restApiError/errorType';
 
-const isDevelopment = import.meta.env.MODE === 'development';
-
 interface Props {
   errorMessageCallback: (error: FpError) => void;
   children: ReactNode;
@@ -38,14 +36,12 @@ export class ErrorBoundary extends Component<Props, State> {
   override componentDidCatch(error: Error, info: ErrorInfo): void {
     const { errorMessageCallback } = this.props;
 
-    if (!isDevelopment) {
-      withScope(scope => {
-        for (const entry of Object.entries(info)) {
-          scope.setExtra(entry[0], entry[1]);
-          captureException(error);
-        }
-      });
-    }
+    withScope(scope => {
+      for (const entry of Object.entries(info)) {
+        scope.setExtra(entry[0], entry[1]);
+      }
+      captureException(error);
+    });
 
     const errorStrings = info.componentStack
       ? [
