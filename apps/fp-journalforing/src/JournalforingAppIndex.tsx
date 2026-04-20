@@ -10,10 +10,10 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 
 import {
+  captureException,
   ErrorBoundary,
   ErrorType,
   type FpError,
-  captureException,
   parseQueryString,
   useRestApiError,
   useRestApiErrorDispatcher,
