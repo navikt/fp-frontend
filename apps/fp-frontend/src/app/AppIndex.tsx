@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
+import { captureException } from '@sentry/browser';
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
@@ -156,18 +157,21 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (err
   console.log(error);
 
   if (error instanceof PollingTimeoutError) {
+    captureException(error);
     addErrorMessage({ type: ErrorType.POLLING_TIMEOUT, message: error.message, location: error.location });
   } else if (error instanceof HTTPError) {
-    if (error.response.status === 403) {
+    const { status } = error.response;
+    if (status === 403) {
       addErrorMessage({ type: ErrorType.REQUEST_FORBIDDEN, message: error.message });
-    } else if (error.response.status === 401) {
+    } else if (status === 401) {
       addErrorMessage({ type: ErrorType.REQUEST_UNAUTHORIZED, message: error.message });
-    } else if (error.response.status === 504 || error.response.status === 404) {
+    } else if (status === 504 || status === 404) {
       addErrorMessage({
         type: ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
         location: error.response.url,
       });
     } else {
+      captureException(error);
       try {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const feildataJson = await error.response.json();
@@ -178,6 +182,7 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (err
       }
     }
   } else {
+    captureException(error);
     addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
   }
 };
