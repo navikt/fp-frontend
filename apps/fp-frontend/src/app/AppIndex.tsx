@@ -157,7 +157,6 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (err
   console.log(error);
 
   if (error instanceof PollingTimeoutError) {
-    captureException(error);
     addErrorMessage({ type: ErrorType.POLLING_TIMEOUT, message: error.message, location: error.location });
   } else if (error instanceof HTTPError) {
     const { status } = error.response;
