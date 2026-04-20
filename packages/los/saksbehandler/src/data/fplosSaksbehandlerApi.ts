@@ -19,7 +19,7 @@ const kyExtended = ky.extend({
   timeout: 15000,
   hooks: {
     beforeRequest: [
-      ({ request }) => {
+      request => {
         const navCallId = `CallId_${Date.now()}_${Math.floor(Math.random() * 1000000000)}`;
         request.headers.set('Nav-Callid', navCallId);
       },

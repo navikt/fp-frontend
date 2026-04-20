@@ -18,12 +18,10 @@ const meta = {
   parameters: {
     msw: {
       handlers: [
-        http.post(LosUrl.RESERVER_OPPGAVE, () =>
-          HttpResponse.json({ erReservert: true, erReservertAvInnloggetBruker: true }),
-        ),
+        http.post(LosUrl.RESERVER_OPPGAVE, () => new HttpResponse(null, { status: 200 })),
         http.post(LosUrl.SØK_FAGSAK, () => HttpResponse.json({})),
         http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json([])),
-        http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => HttpResponse.json({ erReservert: false })),
+        http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
       ],
     },
   },
