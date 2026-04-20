@@ -25,7 +25,7 @@ export const OppgaverGrafDialog = ({ valgtAvdelingEnhet, saksliste }: Props) => 
           size="small"
           title={intl.formatMessage({ id: 'OppgaverGrafDialog.VisOppgaveGraf' }, { sakslisteNavn: saksliste.navn })}
           icon={<LineGraphDotIcon aria-hidden />}
-          disabled={saksliste.gjeldendeStatistikk === null}
+          disabled={saksliste.gjeldendeStatistikk === undefined}
         ></Button>
       </Dialog.Trigger>
       <Dialog.Popup onClick={e => e.stopPropagation()} width="large">
