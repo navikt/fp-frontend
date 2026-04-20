@@ -25,7 +25,7 @@ export const compareByOrder =
       case 'descending':
         return comparator(sort.orderBy, b, a);
       default:
-        return 1;
+        return 0;
     }
   };
 

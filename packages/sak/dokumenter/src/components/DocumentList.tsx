@@ -29,21 +29,14 @@ interface Props {
 export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) => {
   const intl = useIntl();
 
-  const [valgteDokumenter, setValgteDokumenter] = useState<string[]>([]);
+  const [valgteDokumentKeys, setValgteDokumentKeys] = useState<string[]>([]);
   const toggleValgDokument = (dokument: Dokument) =>
-    setValgteDokumenter(dokumentKeys => {
+    setValgteDokumentKeys(dokumentKeys => {
       const key = getDokumentKey(dokument);
       return dokumentKeys.includes(key) ? dokumentKeys.filter(id => id !== key) : [...dokumentKeys, key];
     });
 
   const [sort, setSort] = useState<SortConfig>({ orderBy: 'tidspunkt', direction: 'descending' });
-  const handleSort = (sortKey: TableHeaders) => {
-    setSort({ orderBy: sortKey, direction: getNextSortingDirection(sortKey, sort) });
-  };
-
-  const sortedDocuments = documents.toSorted(compareByOrder(sort));
-
-  const visGjelderForKolonne = documents.some(d => d.gjelderFor !== undefined);
 
   if (documents.length === 0) {
     return (
@@ -52,21 +45,29 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
       </BodyShort>
     );
   }
+
+  const visGjelderForKolonne = documents.some(d => d.gjelderFor !== undefined);
+  const sortedDocuments = documents.toSorted(compareByOrder(sort));
+
+  const handleSort = (sortKey: TableHeaders) => {
+    setSort({ orderBy: sortKey, direction: getNextSortingDirection(sortKey, sort) });
+  };
+
   return (
     <HStack gap="space-8">
-      {valgteDokumenter.length > 0 && (
+      {valgteDokumentKeys.length > 0 && (
         <Button
           size="small"
           variant="primary"
-          onClick={() =>
+          onClick={() => {
             documents
-              .filter(d => valgteDokumenter.includes(getDokumentKey(d)))
+              .filter(d => valgteDokumentKeys.includes(getDokumentKey(d)))
               .forEach(dokument => {
                 åpneDokument(saksnummer, dokument.journalpostId, dokument.dokumentId, dokument.tittel ?? undefined);
-              })
-          }
+              });
+          }}
         >
-          <FormattedMessage id="DocumentList.LastNedKnapp" values={{ antall: valgteDokumenter.length }} />
+          <FormattedMessage id="DocumentList.LastNedKnapp" values={{ antall: valgteDokumentKeys.length }} />
         </Button>
       )}
 
@@ -76,12 +77,12 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
             <Table.HeaderCell>
               <Checkbox
                 size="small"
-                checked={valgteDokumenter.length === sortedDocuments.length}
-                indeterminate={valgteDokumenter.length > 0 && valgteDokumenter.length !== sortedDocuments.length}
+                checked={valgteDokumentKeys.length === sortedDocuments.length}
+                indeterminate={valgteDokumentKeys.length > 0 && valgteDokumentKeys.length !== sortedDocuments.length}
                 onChange={() =>
-                  valgteDokumenter.length > 0
-                    ? setValgteDokumenter([])
-                    : setValgteDokumenter(sortedDocuments.map(getDokumentKey))
+                  valgteDokumentKeys.length > 0
+                    ? setValgteDokumentKeys([])
+                    : setValgteDokumentKeys(sortedDocuments.map(getDokumentKey))
                 }
                 hideLabel
               >
@@ -111,7 +112,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                 <Checkbox
                   size="small"
                   hideLabel
-                  checked={valgteDokumenter.includes(getDokumentKey(document))}
+                  checked={valgteDokumentKeys.includes(getDokumentKey(document))}
                   onChange={() => toggleValgDokument(document)}
                   aria-labelledby={document.tittel ?? undefined}
                 >
