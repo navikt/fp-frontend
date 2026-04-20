@@ -4,16 +4,16 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
-import { captureException } from '@sentry/browser';
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 
-import { parseQueryString } from '@navikt/fp-app-felles';
 import {
   ErrorBoundary,
   ErrorType,
   type FpError,
+  captureException,
+  parseQueryString,
   useRestApiError,
   useRestApiErrorDispatcher,
 } from '@navikt/fp-app-felles';

@@ -6,6 +6,7 @@ export {
 export { ErrorType, type FpError } from './src/restApiError/errorType';
 export { ErrorBoundary } from './src/ErrorBoundary';
 export { initSentry } from './src/initSentry';
+export { captureException } from '@sentry/browser';
 export { FellesDekorator, type QueryStrings } from './src/dekorator/FellesDekorator';
 export { getLocationWithQueryParams, parseQueryString } from './src/utils/urlUtils';
 export { useTrackRouteParam } from './src/hooks/useTrackRouteParam';

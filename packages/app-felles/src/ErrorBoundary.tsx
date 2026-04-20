@@ -39,8 +39,8 @@ export class ErrorBoundary extends Component<Props, State> {
     withScope(scope => {
       for (const entry of Object.entries(info)) {
         scope.setExtra(entry[0], entry[1]);
-        captureException(error);
       }
+      captureException(error);
     });
 
     const errorStrings = info.componentStack
