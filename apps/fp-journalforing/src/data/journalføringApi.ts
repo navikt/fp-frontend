@@ -46,14 +46,24 @@ export const hentAlleJournalOppgaver = (ident?: string) =>
     staleTime: Infinity,
   });
 
-export const hentJournalpostDetaljer = (journalpostId: string) =>
-  kyExtended.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, { searchParams: { journalpostId } }).json<Journalpost>();
+export const hentJournalpostDetaljer = async (journalpostId: string) => {
+  const response = await kyExtended.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, { searchParams: { journalpostId } });
+  if (response.status === 204) {
+    return null;
+  }
+  return response.json<Journalpost>();
+};
 
 export const ferdigstillJournalføring = (values: JournalførSubmitValue) =>
   kyExtended.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, { json: values }).json<SaksnummerType>();
 
-export const knyttJournalpostTilAnnenSak = (values: JournalførSubmitValue) =>
-  kyExtended.post(FpmottakUrl.KNYTT_JOURNALPOST_TIL_ANNEN_SAK, { json: values }).json<SaksnummerType>();
+export const knyttJournalpostTilAnnenSak = async (values: JournalførSubmitValue) => {
+  const response = await kyExtended.post(FpmottakUrl.KNYTT_JOURNALPOST_TIL_ANNEN_SAK, { json: values });
+  if (response.status === 204) {
+    return null;
+  }
+  return response.json<SaksnummerType>();
+};
 
 export const oppdaterMedBruker = (values: OppdaterMedBruker) =>
   kyExtended.post(FpmottakUrl.OPPDATER_MED_BRUKER, { json: values }).json<Journalpost>();
