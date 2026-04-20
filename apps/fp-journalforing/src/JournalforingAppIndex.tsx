@@ -10,6 +10,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 
 import {
+  captureException,
   ErrorBoundary,
   ErrorType,
   type FpError,
@@ -146,20 +147,23 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => (error: Er
   console.log(error);
 
   if (error instanceof HTTPError) {
-    if (error.response.status === 403) {
+    const { status } = error.response;
+    if (status === 403) {
       addErrorMessage({ type: ErrorType.REQUEST_FORBIDDEN, message: error.message });
-    } else if (error.response.status === 401) {
+    } else if (status === 401) {
       addErrorMessage({ type: ErrorType.REQUEST_UNAUTHORIZED, message: error.message });
-    } else if (error.response.status === 504 || error.response.status === 404) {
+    } else if (status === 504 || status === 404) {
       addErrorMessage({
         type: ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
         location: error.response.url,
       });
     } else {
+      captureException(error);
       const feildataJson = error.data as { feilmelding?: string } | undefined;
       addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: feildataJson?.feilmelding ?? error.message });
     }
   } else {
+    captureException(error);
     addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
   }
 };
