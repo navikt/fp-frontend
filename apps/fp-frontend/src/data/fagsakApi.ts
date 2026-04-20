@@ -264,7 +264,7 @@ const getLagreTotrinnsaksjonspunkt = (links?: ApiLink[]) => (params: BekreftedeT
     .post(getUrlFromRel('SAVE_TOTRINNSAKSJONSPUNKT', links), {
       json: params,
     })
-    .json<BehandlingFpSak>();
+    .then(() => {});
 
 const getSendMelding = (links?: ApiLink[]) => (params: SubmitMessageParams) =>
   kyExtended
