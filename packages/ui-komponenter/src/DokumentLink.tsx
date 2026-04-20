@@ -23,7 +23,13 @@ export const DokumentLink = ({
   const url = hentDokumentLenke(saksnummer, journalpostId, dokumentId);
 
   return (
-    <Link href={url} target={target} rel="noopener noreferrer" onClick={openDocumentFromLink(dokumentTittel)}>
+    <Link
+      href={url}
+      target={target}
+      rel="noopener noreferrer"
+      onClick={openDocumentFromLink(dokumentTittel)}
+      className="wrap-anywhere"
+    >
       {children ?? dokumentTittel}
     </Link>
   );

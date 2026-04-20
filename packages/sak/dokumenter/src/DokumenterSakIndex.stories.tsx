@@ -7,9 +7,6 @@ import { DokumenterSakIndex } from './DokumenterSakIndex';
 const meta = {
   title: 'sak/sak-dokumenter',
   component: DokumenterSakIndex,
-  decorators: [
-
-  ],
   args: {
     saksnummer: '2',
     behandlingUuid: '1',
@@ -62,7 +59,7 @@ export const Default: Story = {
         journalpostId: '5',
         dokumentId: '5',
         behandlingUuidList: [],
-        tittel: 'Dette er et femte dokument',
+        tittel: '2023.11.11_NAV_Innvilgelsesbrev_svangerskapspenger.pdf',
         tidspunkt: '2017-04-01T02:54:25.455',
         kommunikasjonsretning: 'INN',
         gjelderFor: 'test5',
