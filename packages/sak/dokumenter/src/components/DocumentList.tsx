@@ -115,8 +115,9 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                   hideLabel
                   checked={valgteDokumentKeys.includes(getDokumentKey(document))}
                   onChange={() => toggleValgDokument(document)}
+                  aria-label={document.tittel}
                 >
-                  {document.tittel}
+                  {' '}
                 </Checkbox>
               </Table.DataCell>
               <Table.DataCell>
