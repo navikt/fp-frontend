@@ -60,7 +60,7 @@ export const Situasjon = ({ gjeldende: { barn, termin, utstedtdato, antallBarn }
           value={<DateLabel dateString={utstedtdato.utstedtdato} />}
         />
       )}
-      {antallBarn.kilde != 'SØKNAD' && (
+      {antallBarn.kilde !== 'SØKNAD' && (
         <FaktaBox
           kilde={antallBarn.kilde}
           label={intl.formatMessage({ id: 'Label.AntallBarn' })}

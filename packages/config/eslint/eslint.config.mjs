@@ -52,6 +52,7 @@ export default [
   {
     rules: {
       ...vitest.configs.recommended.rules,
+      eqeqeq: ERROR,
       'max-len': [ERROR, 160],
       'no-console': ERROR,
       'no-debugger': WARNING,

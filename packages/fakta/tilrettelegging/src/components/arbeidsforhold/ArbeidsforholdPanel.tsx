@@ -48,7 +48,7 @@ export const filtrerVelferdspermisjoner = (
   velferdspermisjoner.filter(
     permisjon =>
       !dayjs(permisjon.permisjonFom).isAfter(tilretteleggingBehovFom) &&
-      (permisjon.permisjonTom == null || !dayjs(permisjon.permisjonTom).isBefore(tilretteleggingBehovFom)),
+      (permisjon.permisjonTom === null || !dayjs(permisjon.permisjonTom).isBefore(tilretteleggingBehovFom)),
   );
 
 interface Props {
