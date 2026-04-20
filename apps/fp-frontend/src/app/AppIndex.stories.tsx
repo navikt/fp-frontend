@@ -77,20 +77,18 @@ const isStrictResponse = (response: any): response is HttpResponse<JsonBodyType>
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   response !== undefined && response.body !== undefined;
 
-// null i map → 204 No Content (matcher JAX-RS som returnerer null fra @GET)
-const getMockResponse = (rel: string, map: Record<string, unknown> = ressursMap): (() => HttpResponse<JsonBodyType>) => {
-  if (!(rel in map))
+const getMockResponse = (rel: string): (() => HttpResponse<JsonBodyType>) => {
+  const responseData = ressursMap[rel] ?? undefined;
+
+  if (responseData === undefined)
     return () =>
       HttpResponse.json({ error: `Mangler mock for relasjonslenke i ressursMap for rel: ${rel}` }, { status: 500 });
 
-  const responseData = map[rel];
-
-  if (responseData === null) return () => new HttpResponse(null, { status: 204 }) as HttpResponse<JsonBodyType>;
   if (isStrictResponse(responseData)) return () => responseData;
   return () => HttpResponse.json(responseData);
 };
 
-const STATIC_HANDLERS = [
+const HANDLERS = [
   http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
   http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
   http.post(
@@ -105,34 +103,14 @@ const STATIC_HANDLERS = [
   ),
   http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json(oppgaverForFagsaker)),
   http.get('https://www.test.com/api/result', () => HttpResponse.json(behandling)),
-];
-
-const buildLinkHandlers = (map: Record<string, unknown> = ressursMap) =>
-  [
+  ...[
     ...initFetchFpsak.links,
     ...initFetchFpsak.sakLinks,
     ...initFetchFptilbake.links,
     ...initFetchFptilbake.sakLinks,
     ...behandling.links,
-  ].map(link => http.all(encodeURI(cleanUrl(wrapUrl(link.href))), getMockResponse(link.rel, map)));
-
-const HANDLERS = [...STATIC_HANDLERS, ...buildLinkHandlers()];
-
-// Endepunkter der backend returnerer 204 No Content når data ikke finnes (Optional.orElse(null) i JAX-RS)
-const ressursMapMed204: Record<string, unknown> = {
-  ...ressursMap,
-  [BehandlingRel.BEHANDLING_PERSONOVERSIKT]: null,
-  [BehandlingRel.SØKNAD]: null,
-  [BehandlingRel.MEDLEMSKAP]: null,
-  [BehandlingRel.ARBEID_OG_INNTEKT]: null,
-  [BehandlingRel.INNTEKT_ARBEID_YTELSE]: null,
-  [BehandlingRel.OPPTJENING]: null,
-  [BehandlingRel.YTELSEFORDELING]: null,
-  [BehandlingRel.FERIEPENGEGRUNNLAG]: null,
-  [BehandlingRel.BEREGNINGSGRUNNLAG]: null,
-  [BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE]: null,
-  [BehandlingRel.OMSORG_OG_RETT]: null,
-};
+  ].map(link => http.all(encodeURI(cleanUrl(wrapUrl(link.href))), getMockResponse(link.rel))),
+];
 
 const meta = {
   title: 'AppIndex',
@@ -160,14 +138,6 @@ export const Default: Story = {
   parameters: {
     msw: {
       handlers: HANDLERS,
-    },
-  },
-};
-
-export const EndepunkterSomReturnerer204: Story = {
-  parameters: {
-    msw: {
-      handlers: [...STATIC_HANDLERS, ...buildLinkHandlers(ressursMapMed204)],
     },
   },
 };
