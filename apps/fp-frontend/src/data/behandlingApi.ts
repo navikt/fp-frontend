@@ -399,12 +399,13 @@ const getBeregningDagytelseOriginalBehandlingOptions = (links: ApiLink[]) => (be
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING, behandling.uuid, behandling.versjon],
     queryFn: () =>
-      kyExtended.get(getUrlFromRel('BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING', links)).json<{
+      jsonEllerNull<{
         'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
         'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
-      }>(),
+      }>(kyExtended.get(getUrlFromRel('BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING', links))),
     enabled: harLenke(behandling, 'BEREGNINGSRESULTAT_DAGYTELSE_ORIGINAL_BEHANDLING'),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getArbeidOgInntektOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
@@ -439,9 +440,10 @@ const getBeregningsresultatEngangsstønadOptions =
     queryOptions({
       queryKey: [BehandlingRel.BEREGNINGRESULTAT_ENGANGSSTONAD, behandling.uuid, behandling.versjon],
       queryFn: () =>
-        kyExtended.get(getUrlFromRel('BEREGNINGRESULTAT_ENGANGSSTONAD', links)).json<BeregningsresultatEs>(),
+        jsonEllerNull<BeregningsresultatEs>(kyExtended.get(getUrlFromRel('BEREGNINGRESULTAT_ENGANGSSTONAD', links))),
       enabled: harLenke(behandling, 'BEREGNINGRESULTAT_ENGANGSSTONAD') && isEnabled,
       staleTime: Infinity,
+      select: data => data ?? undefined,
     });
 
 const getMedlemskapOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
@@ -539,11 +541,12 @@ const getUtlandDokStatusOptions = (links: ApiLink[]) => (behandling: BehandlingF
   queryOptions({
     queryKey: [BehandlingRel.UTLAND_DOK_STATUS, behandling.uuid, behandling.versjon],
     queryFn: () =>
-      kyExtended.get(getUrlFromRel('UTLAND_DOK_STATUS', links)).json<{
+      jsonEllerNull<{
         dokStatus?: string;
-      }>(),
+      }>(kyExtended.get(getUrlFromRel('UTLAND_DOK_STATUS', links))),
     enabled: harLenke(behandling, 'UTLAND_DOK_STATUS'),
     staleTime: Infinity,
+    select: data => data ?? undefined,
   });
 
 const getVergeOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak, isEnabled: boolean) =>
