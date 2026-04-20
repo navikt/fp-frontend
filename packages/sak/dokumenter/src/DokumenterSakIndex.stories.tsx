@@ -1,29 +1,19 @@
-import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import type { DecoratorFunction } from 'storybook/internal/types';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import type { Dokument } from '@navikt/fp-types';
 
 import { DokumenterSakIndex } from './DokumenterSakIndex';
 
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const withStyleProvider: DecoratorFunction<ReactRenderer> = Story => (
-  <div
-    style={{
-      width: '700px',
-      margin: '50px',
-      padding: '20px',
-      backgroundColor: 'var(--ax-bg-default)',
-    }}
-  >
-    <Story />
-  </div>
-);
-
 const meta = {
   title: 'sak/sak-dokumenter',
   component: DokumenterSakIndex,
-  decorators: [withStyleProvider],
+  decorators: [
+    Story => (
+      <div>
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     saksnummer: '2',
     behandlingUuid: '1',
