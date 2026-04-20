@@ -100,6 +100,7 @@ export type OverstyrteAksjonspunktArgs = {
 const kyExtended = ky.extend({
   retry: 0,
   timeout: 15000,
+  parseJson: text => (text ? (JSON.parse(text) as unknown) : null),
   hooks: {
     beforeRequest: [
       ({ request }) => {
