@@ -8,11 +8,7 @@ const meta = {
   title: 'sak/sak-dokumenter',
   component: DokumenterSakIndex,
   decorators: [
-    Story => (
-      <div>
-        <Story />
-      </div>
-    ),
+
   ],
   args: {
     saksnummer: '2',

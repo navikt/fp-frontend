@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { StarFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Checkbox, HStack, Table } from '@navikt/ds-react';
+import { BodyShort, Button, Checkbox, HStack, Table, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Dokument } from '@navikt/fp-types';
@@ -54,11 +54,12 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
   };
 
   return (
-    <HStack gap="space-8">
+    <VStack gap="space-8">
       {valgteDokumentKeys.length > 0 && (
         <Button
           size="small"
           variant="primary"
+          className="self-start"
           onClick={() => {
             documents
               .filter(d => valgteDokumentKeys.includes(getDokumentKey(d)))
@@ -114,9 +115,8 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                   hideLabel
                   checked={valgteDokumentKeys.includes(getDokumentKey(document))}
                   onChange={() => toggleValgDokument(document)}
-                  aria-labelledby={document.tittel ?? undefined}
                 >
-                  {' '}
+                  {document.tittel}
                 </Checkbox>
               </Table.DataCell>
               <Table.DataCell>
@@ -153,6 +153,6 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
           ))}
         </Table.Body>
       </Table>
-    </HStack>
+    </VStack>
   );
 };
