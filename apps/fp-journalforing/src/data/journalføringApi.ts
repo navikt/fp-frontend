@@ -1,5 +1,5 @@
 import { queryOptions } from '@tanstack/react-query';
-import ky from 'ky';
+import ky, { type ResponsePromise } from 'ky';
 
 import type { JournalførSubmitValue } from '../typer/ferdigstillJournalføringSubmit';
 import type { ForhåndsvisBrukerRespons } from '../typer/forhåndsvisBrukerResponsTsType';
@@ -37,6 +37,12 @@ export const FpmottakUrl = {
   FLYTT_OPPGAVE_TIL_GOSYS: wrapUrl('/fpmottak/api/journalfoering/oppgave/tilgosys'),
 };
 
+/** Backend returnerer null for Optional.orElse(null), som JAX-RS oversetter til 204 No Content */
+const jsonEllerNull = async <T>(responsePromise: ResponsePromise): Promise<T | null> => {
+  const response = await responsePromise;
+  return response.status === 204 ? null : response.json();
+};
+
 export const hentAlleJournalOppgaver = (ident?: string) =>
   queryOptions({
     queryKey: [FpmottakUrl.ALLE_JOURNAL_OPPGAVER, ident],
@@ -46,24 +52,14 @@ export const hentAlleJournalOppgaver = (ident?: string) =>
     staleTime: Infinity,
   });
 
-export const hentJournalpostDetaljer = async (journalpostId: string) => {
-  const response = await kyExtended.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, { searchParams: { journalpostId } });
-  if (response.status === 204) {
-    return null;
-  }
-  return response.json<Journalpost>();
-};
+export const hentJournalpostDetaljer = (journalpostId: string) =>
+  jsonEllerNull<Journalpost>(kyExtended.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, { searchParams: { journalpostId } }));
 
 export const ferdigstillJournalføring = (values: JournalførSubmitValue) =>
   kyExtended.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, { json: values }).json<SaksnummerType>();
 
-export const knyttJournalpostTilAnnenSak = async (values: JournalførSubmitValue) => {
-  const response = await kyExtended.post(FpmottakUrl.KNYTT_JOURNALPOST_TIL_ANNEN_SAK, { json: values });
-  if (response.status === 204) {
-    return null;
-  }
-  return response.json<SaksnummerType>();
-};
+export const knyttJournalpostTilAnnenSak = (values: JournalførSubmitValue) =>
+  jsonEllerNull<SaksnummerType>(kyExtended.post(FpmottakUrl.KNYTT_JOURNALPOST_TIL_ANNEN_SAK, { json: values }));
 
 export const oppdaterMedBruker = (values: OppdaterMedBruker) =>
   kyExtended.post(FpmottakUrl.OPPDATER_MED_BRUKER, { json: values }).json<Journalpost>();
