@@ -9828,6 +9828,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ky@npm:1.14.3":
+  version: 1.14.3
+  resolution: "ky@npm:1.14.3"
+  checksum: 10/afd6a6ff10e33138d5338c014a051ca920c6ced7f8452748dfe960c26fb5456f36e103cd8b5868ebf2a38bf13c2b3f53b74cbea44a1b53923e1921bb9a6447b1
+  languageName: node
+  linkType: hard
+
 "ky@npm:2.0.0":
   version: 2.0.0
   resolution: "ky@npm:2.0.0"
