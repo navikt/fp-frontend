@@ -55,7 +55,7 @@ export const SimuleringSummary = ({
               <BeløpLabel beløp={feilutbetaling} rød={feilutbetaling < 0} />
             </BodyShort>
           </HStack>
-          {inntrekk != undefined && (
+          {inntrekk !== undefined && (
             <HStack gap="space-16">
               <BodyShort size="small">
                 <FormattedMessage id="Simulering.inntrekk" />:

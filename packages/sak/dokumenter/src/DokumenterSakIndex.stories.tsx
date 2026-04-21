@@ -1,29 +1,12 @@
-import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import type { DecoratorFunction } from 'storybook/internal/types';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import type { Dokument } from '@navikt/fp-types';
 
 import { DokumenterSakIndex } from './DokumenterSakIndex';
 
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const withStyleProvider: DecoratorFunction<ReactRenderer> = Story => (
-  <div
-    style={{
-      width: '700px',
-      margin: '50px',
-      padding: '20px',
-      backgroundColor: 'var(--ax-bg-default)',
-    }}
-  >
-    <Story />
-  </div>
-);
-
 const meta = {
   title: 'sak/sak-dokumenter',
   component: DokumenterSakIndex,
-  decorators: [withStyleProvider],
   args: {
     saksnummer: '2',
     behandlingUuid: '1',
@@ -76,7 +59,7 @@ export const Default: Story = {
         journalpostId: '5',
         dokumentId: '5',
         behandlingUuidList: [],
-        tittel: 'Dette er et femte dokument',
+        tittel: '2023.11.11_NAV_Innvilgelsesbrev_svangerskapspenger.pdf',
         tidspunkt: '2017-04-01T02:54:25.455',
         kommunikasjonsretning: 'INN',
         gjelderFor: 'test5',

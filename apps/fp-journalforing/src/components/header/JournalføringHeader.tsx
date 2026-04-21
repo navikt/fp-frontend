@@ -50,7 +50,7 @@ export const JournalføringHeader = ({
             <FormattedMessage id="Journalforing.Tittel" />
           </Heading>
         </HStack>
-        {!valgtJournalpost && antallOppgaver != undefined && antallOppgaver > 0 && (
+        {!valgtJournalpost && antallOppgaver !== undefined && antallOppgaver > 0 && (
           <BodyShort>
             <FormattedMessage id="Journalforing.Antall.Oppgaver" values={{ antall: antallOppgaver }} />
           </BodyShort>
