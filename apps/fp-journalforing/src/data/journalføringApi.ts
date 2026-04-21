@@ -38,9 +38,9 @@ export const FpmottakUrl = {
 };
 
 /** Backend returnerer null for Optional.orElse(null), som JAX-RS oversetter til 204 No Content */
-const jsonEllerNull = async <T>(responsePromise: ResponsePromise): Promise<T | null> => {
+const jsonEllerNull = async <T>(responsePromise: ResponsePromise) => {
   const response = await responsePromise;
-  return response.status === 204 ? null : response.json();
+  return response.status === 204 ? null : response.json<T>();
 };
 
 export const hentAlleJournalOppgaver = (ident?: string) =>
@@ -53,7 +53,9 @@ export const hentAlleJournalOppgaver = (ident?: string) =>
   });
 
 export const hentJournalpostDetaljer = (journalpostId: string) =>
-  jsonEllerNull<Journalpost>(kyExtended.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, { searchParams: { journalpostId } }));
+  jsonEllerNull<Journalpost>(
+    kyExtended.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, { searchParams: { journalpostId } }),
+  );
 
 export const ferdigstillJournalføring = (values: JournalførSubmitValue) =>
   kyExtended.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, { json: values }).json<SaksnummerType>();
