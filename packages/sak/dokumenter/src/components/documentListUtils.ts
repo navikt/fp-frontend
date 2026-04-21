@@ -7,13 +7,13 @@ const comparator = (orderBy: TableHeaders, aDok: Dokument, bDok: Dokument): numb
   const a = aDok[orderBy]?.trim();
   const b = bDok[orderBy]?.trim();
 
-  if (a != undefined && b != undefined) {
+  if (a !== undefined && b !== undefined) {
     return a.localeCompare(b);
   }
-  if (a == undefined && b == undefined) {
+  if (a === undefined && b === undefined) {
     return 0;
   }
-  return a == undefined ? 1 : -1;
+  return a === undefined ? 1 : -1;
 };
 
 export const compareByOrder =
