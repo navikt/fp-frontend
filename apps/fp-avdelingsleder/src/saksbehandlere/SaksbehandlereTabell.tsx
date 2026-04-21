@@ -32,9 +32,9 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
 
   const sorterteSaksbehandlere = saksbehandlere.toSorted((saksbehandler1, saksbehandler2) => {
     const compareWithUndefinedLast = (a: string | undefined, b: string | undefined) => {
-      if (a != undefined && b != undefined) return a.localeCompare(b);
-      if (a == undefined && b == undefined) return 0;
-      return a == undefined ? 1 : -1;
+      if (a !== undefined && b !== undefined) return a.localeCompare(b);
+      if (a === undefined && b === undefined) return 0;
+      return a === undefined ? 1 : -1;
     };
 
     const enhetComparison = compareWithUndefinedLast(saksbehandler1.ansattAvdeling, saksbehandler2.ansattAvdeling);
