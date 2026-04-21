@@ -676,10 +676,7 @@ const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRe
 const getVerge = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.VERGE_HENT, behandling.uuid, behandling.versjon],
-    queryFn: async () => {
-      const response = await kyExtended.get(getUrlFromRel('VERGE_HENT', links));
-      return response.status === 204 ? null : response.json<Verge>();
-    },
+    queryFn: () => jsonEllerNull<Verge>(kyExtended.get(getUrlFromRel('VERGE_HENT', links))),
     enabled: harLenke(behandling, 'VERGE_HENT'),
     staleTime: Infinity,
     select: data => data ?? undefined,
