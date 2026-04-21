@@ -81,7 +81,6 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_OppgaverForFørsteStønadsd
 export type oppgave_AndreKriterierType =
   | 'VURDER_SYKDOM'
   | 'PLEIEPENGER'
-  | 'BARE_FAR_RETT'
   | 'MOR_UKJENT_UTLAND'
   | 'UTSATT_START'
   | 'PRAKSIS_UTSETTELSE'
@@ -92,10 +91,11 @@ export type oppgave_AndreKriterierType =
   | 'VURDER_FARESIGNALER'
   | 'VURDER_EØS_OPPTJENING'
   | 'ARBEID_INNTEKT'
-  | 'NÆRING'
   | 'REVURDERING_INNTEKTSMELDING'
   | 'TERMINBEKREFTELSE'
   | 'NYTT_VEDTAK'
+  | 'BARE_FAR_RETT'
+  | 'NÆRING'
   | 'KLAGE_PÅ_TILBAKEBETALING'
   | 'VURDER_FORMKRAV'
   | 'IKKE_VARSLET'
@@ -913,26 +913,6 @@ export type FlyttOppgaveReservasjonResponses = {
 
 export type FlyttOppgaveReservasjonResponse = FlyttOppgaveReservasjonResponses[keyof FlyttOppgaveReservasjonResponses];
 
-export type ForlengOppgaveReservasjonData = {
-  /**
-   * id til oppgaven
-   */
-  body: tjenester_saksbehandler_oppgave_dto_OppgaveIdDto;
-  path?: never;
-  query?: never;
-  url: '/api/reservasjon/forleng';
-};
-
-export type ForlengOppgaveReservasjonResponses = {
-  /**
-   * default response
-   */
-  default: tjenester_felles_dto_ReservasjonStatusDto;
-};
-
-export type ForlengOppgaveReservasjonResponse =
-  ForlengOppgaveReservasjonResponses[keyof ForlengOppgaveReservasjonResponses];
-
 export type GetReserverteOppgaverData = {
   body?: never;
   path?: never;
@@ -1051,6 +1031,25 @@ export type SisteReserverteResponses = {
 };
 
 export type SisteReserverteResponse = SisteReserverteResponses[keyof SisteReserverteResponses];
+
+export type KøStatistikkForSakslisteData = {
+  body?: never;
+  path?: never;
+  query: {
+    sakslisteId: tjenester_felles_dto_SakslisteIdDto;
+  };
+  url: '/api/saksbehandler/nøkkeltall/statistikk-oppgave-filter';
+};
+
+export type KøStatistikkForSakslisteResponses = {
+  /**
+   * default response
+   */
+  default: Array<statistikk_KøStatistikkDto>;
+};
+
+export type KøStatistikkForSakslisteResponse =
+  KøStatistikkForSakslisteResponses[keyof KøStatistikkForSakslisteResponses];
 
 export type GetOppgaverTilBehandlingData = {
   body?: never;

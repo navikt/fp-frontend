@@ -10,7 +10,7 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { ArbeidsforholdFodselOgTilrettelegging, BehandlingFpSak, FodselOgTilrettelegging } from '@navikt/fp-types';
+import type { ArbeidsforholdFodselOgTilrettelegging, BehandlingFpSak, SvpTilrettelegging } from '@navikt/fp-types';
 
 import { SvangerskapVilkarProsessIndex } from './SvangerskapVilkarProsessIndex';
 
@@ -22,7 +22,7 @@ const meta = {
     svangerskapspengerTilrettelegging: {
       arbeidsforholdListe: [],
       saksbehandlet: false,
-    } satisfies FodselOgTilrettelegging,
+    } satisfies SvpTilrettelegging,
   },
   render: args => <SvangerskapVilkarProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof SvangerskapVilkarProsessIndex>>;
@@ -67,7 +67,7 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
         } satisfies ArbeidsforholdFodselOgTilrettelegging,
       ],
       saksbehandlet: false,
-    } satisfies FodselOgTilrettelegging,
+    } satisfies SvpTilrettelegging,
   },
 };
 

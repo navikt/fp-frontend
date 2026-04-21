@@ -14,7 +14,7 @@ import type {
   Arbeidsforhold,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsgiverOpplysningerPerId,
-  FodselOgTilrettelegging,
+  SvpTilrettelegging,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -57,7 +57,7 @@ const FeilmeldingAlert = ({ children }: { children: ReactNode }) => <Alert varia
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
+  svangerskapspengerTilrettelegging: SvpTilrettelegging;
   aoiArbeidsforhold: Arbeidsforhold[];
 }
 

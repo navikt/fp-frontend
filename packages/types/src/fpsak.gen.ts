@@ -1121,8 +1121,7 @@ export type foreldrepenger_behandlingslager_virksomhet_ArbeidType =
   | 'PENSJON_OG_ANDRE_TYPER_YTELSER_UTEN_ANSETTELSESFORHOLD'
   | 'NÆRING'
   | 'UTENLANDSK_ARBEIDSFORHOLD'
-  | 'VENTELØNN_VARTPENGER'
-  | 'VANLIG';
+  | 'VENTELØNN_VARTPENGER';
 
 export type foreldrepenger_domene_arbeidInntektsmelding_AvklarPermisjonUtenSluttdatoDto = {
   arbeidsgiverIdent: string;
@@ -1146,7 +1145,6 @@ export type foreldrepenger_domene_iay_modell_kodeverk_BekreftetPermisjonStatus =
   | 'UGYLDIGE_PERIODER';
 
 export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType =
-  | '-'
   | 'PERMISJON'
   | 'UTDANNINGSPERMISJON'
   | 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
@@ -2517,7 +2515,7 @@ export type foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak =
   | 'ENDRING_I_ARBEIDSFORHOLDS_ID'
   | 'PERMISJON_UTEN_SLUTTDATO';
 
-export type foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak = 'NY' | 'ENDRING' | '-';
+export type foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak = 'NY' | 'ENDRING';
 
 export type foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType =
   | 'ELEKTRISK_KOMMUNIKASJON'
@@ -2538,8 +2536,7 @@ export type foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType =
   | 'BEDRIFTSBARNEHAGE'
   | 'YRKESBIL_KILOMETER'
   | 'YRKESBIL_LISTEPRIS'
-  | 'UTENLANDSK_PENSJONSORDNING'
-  | '-';
+  | 'UTENLANDSK_PENSJONSORDNING';
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidOgInntektsmeldingDto = {
   arbeidsforhold: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto>;
@@ -2582,10 +2579,8 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto
 };
 
 export type foreldrepenger_domene_iay_modell_kodeverk_InntektspostType =
-  | '-'
   | 'LØNN'
   | 'YTELSE'
-  | 'VANLIG'
   | 'SELVSTENDIG_NÆRINGSDRIVENDE'
   | 'NÆRING_FISKE_FANGST_FAMBARNEHAGE';
 
