@@ -5,6 +5,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagArbeidsgiver,
+  lagPrivatArbeidsgiver,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -15,19 +17,8 @@ import { BesteberegningFaktaIndex } from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
 
 const arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId = {
-  974652269: {
-    erPrivatPerson: false,
-    navn: 'BEDRIFT AS',
-    identifikator: '974652269',
-    referanse: '974652269',
-  },
-  6823424234232: {
-    erPrivatPerson: true,
-    navn: 'Testy Test',
-    identifikator: '6823424234232',
-    referanse: '123',
-    fødselsdato: '1943-03-03',
-  },
+  974652269: lagArbeidsgiver('974652269', 'BEDRIFT AS'),
+  6823424234232: lagPrivatArbeidsgiver('6823424234232', 'Testy Test', '1943-03-03'),
 };
 
 const meta = {

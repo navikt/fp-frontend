@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagArbeidsgiver,
   lagFagsak,
   type PanelDataArgs,
   withMellomlagretFormData,
@@ -16,12 +17,7 @@ import { OverføringÅrsak } from './kodeverk/overføringÅrsak';
 import { UttakFaktaIndex } from './UttakFaktaIndex';
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
-  910909088: {
-    erPrivatPerson: false,
-    identifikator: '910909088',
-    referanse: '910909088',
-    navn: 'BEDRIFT AS',
-  },
+  910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
 };
 
 const meta = {

@@ -6,6 +6,7 @@ import { action } from 'storybook/actions';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagArbeidsgiver,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -15,12 +16,7 @@ import type { ArbeidsgiverOpplysningerPerId, SimuleringResultat, TilbakekrevingV
 import { SimuleringProsessIndex } from './SimuleringProsessIndex';
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
-  123: {
-    erPrivatPerson: false,
-    identifikator: '123',
-    referanse: '123',
-    navn: 'test',
-  },
+  123: lagArbeidsgiver('123', 'test'),
 };
 
 const simuleringResultat = {

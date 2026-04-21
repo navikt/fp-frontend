@@ -3,9 +3,8 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { lagAksjonspunkt, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import { lagAksjonspunkt, lagArbeidsgiver, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
-  ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
   FamilieHendelse,
   Personoversikt,
@@ -87,15 +86,6 @@ const søknad = {
   },
 } satisfies Soknad;
 
-const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
-  1: {
-    erPrivatPerson: false,
-    identifikator: '973861778',
-    referanse: '973861778',
-    navn: 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET',
-  },
-};
-
 const meta = {
   title: 'prosess/prosess-tilkjent-ytelse',
   component: TilkjentYtelseProsessIndex,
@@ -105,7 +95,9 @@ const meta = {
     familiehendelse: defaultFamiliehendelse,
     personoversikt,
     søknad,
-    arbeidsgiverOpplysningerPerId,
+    arbeidsgiverOpplysningerPerId: {
+      123456789: lagArbeidsgiver('123456789', 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET'),
+    },
   },
   render: args => <TilkjentYtelseProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof TilkjentYtelseProsessIndex>>;
