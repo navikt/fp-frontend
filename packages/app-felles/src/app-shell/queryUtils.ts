@@ -69,7 +69,7 @@ export const getErrorHandler =
         captureException(error);
         try {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          const feildataJson = await error.response.json();
+          const feildataJson = error.data;
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
           addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: feildataJson.feilmelding ?? error.message });
         } catch {
