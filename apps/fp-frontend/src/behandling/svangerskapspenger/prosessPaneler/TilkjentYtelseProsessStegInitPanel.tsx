@@ -7,7 +7,6 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
 import type { ArbeidsgiverOpplysningerPerId, VilkårUtfallType } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
 
 import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -49,10 +48,10 @@ export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPer
       skalPanelVisesIMeny
       overstyrtStatus={overstyrtStatus}
     >
-      {beregningsresultatDagytelse && familiehendelse && søknad ? (
+      {beregningsresultatDagytelse && familiehendelse && søknad && personoversikt ? (
         <TilkjentYtelseProsessIndex
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          personoversikt={notEmpty(personoversikt)}
+          personoversikt={personoversikt}
           beregningresultat={beregningsresultatDagytelse}
           familiehendelse={familiehendelse}
           søknad={søknad}
