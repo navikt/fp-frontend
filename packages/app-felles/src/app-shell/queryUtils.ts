@@ -46,7 +46,7 @@ export const getErrorHandler =
     addErrorMessage: (data: FpError) => void,
     additionalErrorHandler?: (error: Error, addErrorMessage: (data: FpError) => void) => boolean,
   ) =>
-  async (error: Error) => {
+  (error: Error) => {
     // eslint-disable-next-line no-console
     console.log(error);
 

@@ -34,16 +34,16 @@
     "packages/**/*"
   ],
   "devDependencies": {
-    "@navikt/aksel-stylelint": "8.9.1",
+    "@navikt/aksel-stylelint": "8.10.1",
     "@storybook/addon-a11y": "10.3.5",
     "@storybook/addon-links": "10.3.5",
     "@storybook/react": "10.3.5",
     "@testing-library/jest-dom": "6.9.1",
-    "@types/react": "19.2.9",
+    "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@types/react-responsive": "9.0.0",
     "@types/react-router-dom": "5.3.3",
-    "eslint": "9.39.4",
+    "eslint": "10.2.0",
     "husky": "9.1.7",
     "jsdom": "29.0.2",
     "knip": "6.4.1",
@@ -54,7 +54,7 @@
     "stylelint": "17.7.0",
     "stylelint-order": "8.1.1",
     "turbo": "2.9.6",
-    "typescript": "5.9.3",
+    "typescript": "6.0.2",
     "vitest": "4.1.4"
   },
   "resolutions": {
