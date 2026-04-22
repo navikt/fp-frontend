@@ -58,8 +58,8 @@
     "vitest": "4.1.2"
   },
   "resolutions": {
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
   },
   "lint-staged": {
     "{packages,apps,server}/**/*.{js,jsx,ts,tsx,cjs,mjs}": "eslint --cache --fix  --config packages/config/eslint/eslint.config.mjs",
@@ -74,7 +74,7 @@
     ]
   },
   "dependencies": {
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
   }
 }
