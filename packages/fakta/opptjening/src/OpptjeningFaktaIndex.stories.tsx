@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagArbeidsgiver,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -18,12 +19,7 @@ const merknaderFraBeslutter = {
 };
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
-  1: {
-    erPrivatPerson: false,
-    identifikator: '973861778',
-    referanse: '973861778',
-    navn: 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET',
-  },
+  123456789: lagArbeidsgiver('123456789', 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET'),
 };
 
 const meta = {

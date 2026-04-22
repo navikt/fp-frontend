@@ -4270,6 +4270,7 @@ __metadata:
     "@tanstack/react-query": "npm:5.96.1"
     "@tanstack/react-query-devtools": "npm:5.96.1"
     "@types/react": "npm:19.2.9"
+    dayjs: "npm:1.11.20"
     eslint: "npm:9.39.4"
     react: "npm:19.2.5"
     react-dom: "npm:19.2.5"

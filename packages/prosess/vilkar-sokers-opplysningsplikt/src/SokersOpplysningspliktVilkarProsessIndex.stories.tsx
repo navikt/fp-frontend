@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagArbeidsgiver,
   lagBehandling,
   type PanelDataArgs,
   withMellomlagretFormData,
@@ -15,12 +16,7 @@ import type { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
 import { SokersOpplysningspliktVilkarProsessIndex } from './SokersOpplysningspliktVilkarProsessIndex';
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
-  1234: {
-    erPrivatPerson: false,
-    identifikator: '1234',
-    referanse: '1234',
-    navn: 'arbeidsgiver1',
-  },
+  1234: lagArbeidsgiver('1234', 'arbeidsgiver1'),
 };
 
 const søknad = {

@@ -120,7 +120,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(screen.getByText('06.12.2021')).toBeInTheDocument();
     expect(screen.getByTitle('Arbeidsforhold skal brukes')).toBeInTheDocument();
 
-    expect(screen.getByText('Vy (23232)')).toBeInTheDocument();
+    expect(screen.getByText('Vy (11212)')).toBeInTheDocument();
     expect(screen.getByText(/06.12.2020/)).toBeInTheDocument();
 
     expect(await screen.findAllByText('Detaljer')).toHaveLength(2);
