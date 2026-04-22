@@ -114,7 +114,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
   };
 
   return (
-    <RhfForm formMethods={formMethods}>
+    <RhfForm formMethods={formMethods} onSubmit={() => undefined}>
       <VStack gap="space-20">
         <RhfTextField
           name="navn"
