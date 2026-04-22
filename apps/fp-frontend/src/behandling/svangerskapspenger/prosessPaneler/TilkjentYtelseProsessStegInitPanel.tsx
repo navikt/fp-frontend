@@ -21,7 +21,7 @@ interface Props {
 
 export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
-
+  const intl = useIntl();
   const { behandling } = useBehandlingDataContext();
 
   const api = useBehandlingApi(behandling);
@@ -44,7 +44,7 @@ export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPer
     <ProsessDefaultInitPanel
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.TILKJENT_YTELSE}
-      prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
       skalPanelVisesIMeny
       overstyrtStatus={overstyrtStatus}
     >
