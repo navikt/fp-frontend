@@ -6,7 +6,6 @@ import { useQuery } from '@tanstack/react-query';
 import { OmsorgOgRettFaktaIndex } from '@navikt/fp-fakta-omsorg-og-rett';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { Personoversikt } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -19,11 +18,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
 ];
 
-interface Props {
-  personoversikt?: Personoversikt;
-}
-
-export const OmsorgOgRettFaktaInitPanel = ({ personoversikt }: Props) => {
+export const OmsorgOgRettFaktaInitPanel = () => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const { behandling, rettigheter } = useBehandlingDataContext();
@@ -31,6 +26,7 @@ export const OmsorgOgRettFaktaInitPanel = ({ personoversikt }: Props) => {
   const api = useBehandlingApi(behandling);
 
   const { data: omsorgOgRett } = useQuery(api.omsorgOgRettOptions(behandling));
+  const { data: personoversikt } = useQuery(api.behandlingPersonoversiktOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -39,7 +35,7 @@ export const OmsorgOgRettFaktaInitPanel = ({ personoversikt }: Props) => {
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgRett' })}
       skalPanelVisesIMeny
     >
-      {omsorgOgRett ? (
+      {omsorgOgRett && personoversikt ? (
         <OmsorgOgRettFaktaIndex
           omsorgOgRett={omsorgOgRett}
           personoversikt={personoversikt}

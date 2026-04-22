@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
-import type { ArbeidsgiverOpplysningerPerId, Personoversikt, VilkårUtfallType } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, VilkårUtfallType } from '@navikt/fp-types';
 
 import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -17,10 +17,9 @@ const AKSJONSPUNKT_KODER = [AksjonspunktKode.UTGÅTT_5090];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  personoversikt: Personoversikt;
 }
 
-export const TilkjentYtelseFpProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, personoversikt }: Props) => {
+export const TilkjentYtelseFpProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
   const { behandling } = useBehandlingDataContext();
@@ -39,6 +38,7 @@ export const TilkjentYtelseFpProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
   const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
   const { data: feriepengegrunnlag } = useQuery(api.feriepengegrunnlagOptions(behandling, skalHenteData));
+  const { data: personoversikt } = useQuery(api.behandlingPersonoversiktOptions(behandling));
 
   return (
     <ProsessDefaultInitPanel
@@ -48,7 +48,7 @@ export const TilkjentYtelseFpProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
       skalPanelVisesIMeny
       overstyrtStatus={overstyrtStatus}
     >
-      {beregningsresultatDagytelse && familiehendelse && søknad ? (
+      {beregningsresultatDagytelse && familiehendelse && søknad && personoversikt ? (
         <TilkjentYtelseProsessIndex
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           personoversikt={personoversikt}
