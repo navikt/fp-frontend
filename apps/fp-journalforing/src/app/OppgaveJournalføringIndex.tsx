@@ -146,7 +146,7 @@ const JournalforingIndex = ({ ansattIdent }: Props) => {
       <JournalføringHeader
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
         harHentetFerdigJournalpost={hentJournalpostStatus === 'success'}
-        valgtJournalpost={valgtJournalpost}
+        valgtJournalpost={valgtJournalpost ?? undefined}
         hentJournalpost={hentJournalpost}
         antallOppgaver={alleOppgaver.length}
       />
@@ -157,12 +157,12 @@ const JournalforingIndex = ({ ansattIdent }: Props) => {
             setVisModal(false);
           }}
           showModal={visModal}
-          saksnummer={saksnumerJournalføringNySak || saksnummerNySakKnyttAnnenSak}
+          saksnummer={saksnumerJournalføringNySak ?? saksnummerNySakKnyttAnnenSak ?? undefined}
         />
       )}
       <JournalføringIndex
         valgtOppgave={valgtOppgave}
-        valgtJournalpost={valgtJournalpost}
+        valgtJournalpost={valgtJournalpost ?? undefined}
         ansattIdent={ansattIdent}
         velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
         avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
