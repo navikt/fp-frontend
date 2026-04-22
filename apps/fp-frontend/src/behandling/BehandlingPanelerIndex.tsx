@@ -73,7 +73,7 @@ export const BehandlingPanelerIndex = () => {
               valgtProsessSteg={query['punkt']}
               valgtFaktaSteg={query['fakta']}
               arbeidsgivere={notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere}
-              personoversikt={notEmpty(behandlingPersonoversiktQuery.data)}
+              personoversikt={behandlingPersonoversiktQuery.data!} // TODO: [JOHANNES]: midlertidig fiks frme til vi finner en god løsning
             />
           </ErrorBoundary>
         </Suspense>
@@ -85,7 +85,7 @@ export const BehandlingPanelerIndex = () => {
               valgtProsessSteg={query['punkt']}
               valgtFaktaSteg={query['fakta']}
               arbeidsgivere={notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere}
-              personoversikt={notEmpty(behandlingPersonoversiktQuery.data)}
+              personoversikt={behandlingPersonoversiktQuery.data!} // TODO: [JOHANNES]: midlertidig fiks frme til vi finner en god løsning
             />
           </ErrorBoundary>
         </Suspense>
