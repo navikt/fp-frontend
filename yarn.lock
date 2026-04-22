@@ -1575,7 +1575,7 @@ __metadata:
     eslint: "npm:9.39.4"
     fast-glob: "npm:3.3.3"
     history: "npm:5.3.0"
-    ky: "npm:1.14.3"
+    ky: "npm:2.0.1"
     react: "npm:19.2.5"
     react-intl: "npm:8.1.4"
     react-router-dom: "npm:7.14.1"
@@ -1622,7 +1622,7 @@ __metadata:
     dayjs: "npm:1.11.20"
     eslint: "npm:9.39.4"
     history: "npm:5.3.0"
-    ky: "npm:2.0.0"
+    ky: "npm:2.0.1"
     lodash.debounce: "npm:4.0.8"
     msw: "npm:2.13.3"
     msw-storybook-addon: "npm:2.0.7"
@@ -2517,7 +2517,7 @@ __metadata:
     dayjs: "npm:1.11.20"
     eslint: "npm:9.39.4"
     history: "npm:5.3.0"
-    ky: "npm:2.0.0"
+    ky: "npm:2.0.1"
     msw: "npm:2.13.3"
     msw-storybook-addon: "npm:2.0.7"
     react: "npm:19.2.5"
@@ -2566,7 +2566,7 @@ __metadata:
     "@types/react": "npm:19.2.9"
     dayjs: "npm:1.11.20"
     eslint: "npm:9.39.4"
-    ky: "npm:2.0.0"
+    ky: "npm:2.0.1"
     msw: "npm:2.13.3"
     msw-storybook-addon: "npm:2.0.7"
     react: "npm:19.2.5"
@@ -2631,7 +2631,7 @@ __metadata:
     dayjs: "npm:1.11.20"
     echarts: "npm:6.0.0"
     eslint: "npm:9.39.4"
-    ky: "npm:2.0.0"
+    ky: "npm:2.0.1"
     msw: "npm:2.13.3"
     msw-storybook-addon: "npm:2.0.7"
     react: "npm:19.2.5"
@@ -2671,7 +2671,7 @@ __metadata:
     "@types/react": "npm:19.2.9"
     dayjs: "npm:1.11.20"
     eslint: "npm:9.39.4"
-    ky: "npm:2.0.0"
+    ky: "npm:2.0.1"
     msw: "npm:2.13.3"
     msw-storybook-addon: "npm:2.0.7"
     react: "npm:19.2.5"
@@ -9971,17 +9971,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ky@npm:1.14.3":
-  version: 1.14.3
-  resolution: "ky@npm:1.14.3"
-  checksum: 10/afd6a6ff10e33138d5338c014a051ca920c6ced7f8452748dfe960c26fb5456f36e103cd8b5868ebf2a38bf13c2b3f53b74cbea44a1b53923e1921bb9a6447b1
-  languageName: node
-  linkType: hard
-
-"ky@npm:2.0.0":
-  version: 2.0.0
-  resolution: "ky@npm:2.0.0"
-  checksum: 10/f150b8910778f0b6e5f2a4e5cef1377fc2162d0ebb060bb1b64fe8a8b43ba0255d9aaa1f4266a012750d989e475a92ae82d0cc8a535501eafa5a0ddbc9dded33
+"ky@npm:2.0.1":
+  version: 2.0.1
+  resolution: "ky@npm:2.0.1"
+  checksum: 10/163861c876a1885cc6047c8e3295aba4378369b2507b2f4851e19207a0c8ea1ab0c3ce0fbb58746b78d2af95329c7f9f5cf5286a2382ed12b488b57d3baa8b13
   languageName: node
   linkType: hard
 
