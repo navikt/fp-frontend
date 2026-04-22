@@ -35,7 +35,7 @@ export const OmsorgOgRettFaktaInitPanel = () => {
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgRett' })}
       skalPanelVisesIMeny
     >
-      {omsorgOgRett && personoversikt ? (
+      {omsorgOgRett ? (
         <OmsorgOgRettFaktaIndex
           omsorgOgRett={omsorgOgRett}
           personoversikt={personoversikt}

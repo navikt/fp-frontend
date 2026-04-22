@@ -32,7 +32,7 @@ const transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
 });
 
 interface Props {
-  personoversikt: Personoversikt;
+  personoversikt: Personoversikt | undefined;
   ytelsefordeling: Ytelsefordeling;
 }
 
@@ -62,7 +62,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling }: Props) => {
           <FormattedMessage id="OmsorgInfoPanel.VurderOmsorg" />
         </AksjonspunktHelpTextHTML>
       )}
-      <PersonopplysningerForFamilie alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
+      {personoversikt && <PersonopplysningerForFamilie alleKodeverk={alleKodeverk} personoversikt={personoversikt} />}
       {harAksjonspunkt && (
         <RhfForm
           formMethods={formMethods}

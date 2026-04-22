@@ -31,7 +31,7 @@ export const OmsorgFaktaInitPanel = () => {
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Omsorg' })}
       skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => harAksjonspunkt(kode, behandling.aksjonspunkt))}
     >
-      {ytelsefordeling && personoversikt ? (
+      {ytelsefordeling ? (
         <OmsorgFaktaIndex ytelsefordeling={ytelsefordeling} personoversikt={personoversikt} />
       ) : (
         <LoadingPanel />
