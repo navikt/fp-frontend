@@ -2,7 +2,12 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import {
+  lagArbeidsgiver,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
 import { type Arbeidsforhold, type ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { ArbeidsforholdFaktaIndex } from './ArbeidsforholdFaktaIndex';
@@ -30,24 +35,9 @@ const defaultArbeidsforhold = {
 } satisfies Arbeidsforhold;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
-  11212: {
-    erPrivatPerson: false,
-    identifikator: '23232',
-    referanse: '11212',
-    navn: 'Vy',
-  },
-  999999999: {
-    erPrivatPerson: false,
-    identifikator: '999999999',
-    referanse: '999999999',
-    navn: 'KIWI',
-  },
-  999999998: {
-    erPrivatPerson: false,
-    identifikator: '999999998',
-    referanse: '999999998',
-    navn: 'REMA 1000',
-  },
+  11212: lagArbeidsgiver('11212', 'Vy'),
+  999999999: lagArbeidsgiver('999999999', 'KIWI'),
+  999999998: lagArbeidsgiver('999999998', 'REMA 1000'),
 };
 
 const meta = {

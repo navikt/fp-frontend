@@ -6,6 +6,7 @@ import { action } from 'storybook/actions';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagArbeidsgiver,
   lagFagsak,
   type PanelDataArgs,
   withMellomlagretFormData,
@@ -140,24 +141,9 @@ const soknad = {
 } satisfies Soknad;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
-  342352362: {
-    erPrivatPerson: false,
-    referanse: '342352362',
-    identifikator: '342352362',
-    navn: 'Lagt til av saksbehandler',
-  },
-  910909088: {
-    erPrivatPerson: false,
-    referanse: '910909088',
-    identifikator: '910909088',
-    navn: 'BEDRIFT AS',
-  },
-  994884174: {
-    erPrivatPerson: false,
-    referanse: '994884174',
-    identifikator: '994884174',
-    navn: 'Nav',
-  },
+  342352362: lagArbeidsgiver('342352362', 'Lagt til av saksbehandler'),
+  910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
+  994884174: lagArbeidsgiver('994884174', 'Nav'),
 };
 
 const meta = {

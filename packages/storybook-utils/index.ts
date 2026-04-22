@@ -15,3 +15,4 @@ export { lagBehandling } from './testdata/lagBehandling';
 export { lagFagsakBehandling } from './testdata/lagFagsakBehandling';
 export { lagFagsak } from './testdata/lagFagsak';
 export { lagVilkår } from './testdata/lagVilkår';
+export { lagArbeidsgiver, lagPrivatArbeidsgiver } from './testdata/lagArbeidsgiver';

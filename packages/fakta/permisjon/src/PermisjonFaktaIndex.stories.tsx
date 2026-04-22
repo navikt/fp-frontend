@@ -5,6 +5,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagArbeidsgiver,
+  lagPrivatArbeidsgiver,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -39,12 +41,7 @@ type Story = StoryObj<typeof meta>;
 export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
   args: {
     arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
+      910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
     },
     arbeidOgInntekt: {
       arbeidsforhold: [
@@ -127,24 +124,9 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
 export const FlereArbeidsforhold: Story = {
   args: {
     arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-      910909090: {
-        erPrivatPerson: false,
-        identifikator: '910909090',
-        navn: 'Autoservice AS',
-        referanse: '910909090',
-      },
-      910909092: {
-        erPrivatPerson: false,
-        identifikator: '910909092',
-        navn: 'DNB',
-        referanse: '910909092',
-      },
+      910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
+      910909090: lagArbeidsgiver('910909090', 'Autoservice AS'),
+      910909092: lagArbeidsgiver('910909092', 'DNB'),
     },
     arbeidOgInntekt: {
       arbeidsforhold: [
@@ -275,12 +257,7 @@ export const FlereArbeidsforhold: Story = {
 export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
   args: {
     arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
+      910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
     },
     arbeidOgInntekt: {
       arbeidsforhold: [
@@ -375,13 +352,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
 export const VisFødselsdatoNårPrivatperson: Story = {
   args: {
     arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: true,
-        fødselsdato: '2000-01-01',
-        identifikator: '910909088',
-        navn: 'Bettan',
-        referanse: '910909088',
-      },
+      910909088: lagPrivatArbeidsgiver('910909088', 'Bettan', '2000-01-01'),
     },
     arbeidOgInntekt: {
       arbeidsforhold: [

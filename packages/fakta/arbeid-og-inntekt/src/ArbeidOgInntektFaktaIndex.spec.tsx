@@ -470,7 +470,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     await waitFor(() => expect(registrerArbeidsforhold).toHaveBeenCalledTimes(1));
     expect(registrerArbeidsforhold).toHaveBeenNthCalledWith(1, {
       arbeidsgiverIdent: '342352362',
-      arbeidsgiverNavn: 'Telenor',
+      arbeidsgiverNavn: 'Lagt til av saksbehandler',
       begrunnelse: 'Dette er en begrunnelse',
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,

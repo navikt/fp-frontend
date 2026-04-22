@@ -1,24 +1,10 @@
+import { lagArbeidsgiver } from '@navikt/fp-storybook-utils';
 import type { ArbeidsgiverOpplysningerWrapper } from '@navikt/fp-types';
 
 export const arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerWrapper = {
   arbeidsgivere: {
-    '342352362': {
-      referanse: '342352362',
-      identifikator: '342352362',
-      navn: 'Lagt til av saksbehandler',
-      erPrivatPerson: false,
-    },
-    '992260475': {
-      referanse: '992260475',
-      identifikator: '992260475',
-      navn: 'NAV FAMILIE- OG PENSJONSYTELSER STORD',
-      erPrivatPerson: false,
-    },
-    '992257822': {
-      referanse: '992257822',
-      identifikator: '992257822',
-      navn: 'NAV FAMILIE- OG PENSJONSYTELSER OSLO',
-      erPrivatPerson: false,
-    },
+    '342352362': lagArbeidsgiver('342352362', 'Lagt til av saksbehandler'),
+    '992260475': lagArbeidsgiver('992260475', 'NAV FAMILIE- OG PENSJONSYTELSER STORD'),
+    '992257822': lagArbeidsgiver('992257822', 'NAV FAMILIE- OG PENSJONSYTELSER OSLO'),
   },
 };

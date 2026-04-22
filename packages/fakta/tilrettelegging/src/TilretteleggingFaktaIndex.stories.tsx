@@ -5,6 +5,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagArbeidsgiver,
+  lagPrivatArbeidsgiver,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -203,7 +205,7 @@ const SPESIELL_ARBEID_OG_INNTEKT = {
       kildeSystem: '',
       aktiveNaturalytelser: [],
       refusjonsperioder: [],
-      innsendingsårsak: '-',
+      innsendingsårsak: 'NY',
       tilknyttedeBehandlingIder: [],
     },
   ],
@@ -221,49 +223,13 @@ const SPESIELL_ARBEID_OG_INNTEKT = {
 } satisfies ArbeidOgInntektsmelding;
 
 const ARBEIDSGIVEROPPLYSNINGER_PER_ID: ArbeidsgiverOpplysningerPerId = {
-  1: {
-    erPrivatPerson: false,
-    identifikator: '973861778',
-    referanse: '973861778',
-    navn: 'Frilanser, samlet aktivitet',
-  },
-  2: {
-    erPrivatPerson: true,
-    identifikator: '12345678910',
-    referanse: '123',
-    fødselsdato: '1990-01-01',
-    navn: 'Halvor Hansen',
-  },
-  3: {
-    erPrivatPerson: false,
-    identifikator: '973861779',
-    referanse: '973861779',
-    navn: 'Test',
-  },
-  555864629: {
-    erPrivatPerson: false,
-    identifikator: '555864629',
-    referanse: '555864629',
-    navn: 'WWW.EIENDOMSDRIFT.CC SA',
-  },
-  999999999: {
-    erPrivatPerson: false,
-    identifikator: '999999999',
-    referanse: '999999999',
-    navn: 'Arbeidsgiveren AS',
-  },
-  1111111: {
-    erPrivatPerson: false,
-    identifikator: '1111111',
-    referanse: '1111111',
-    navn: 'STATOIL',
-  },
-  342352362: {
-    erPrivatPerson: false,
-    identifikator: '342352362',
-    referanse: '342352362',
-    navn: 'Lagt til av saksbehandler',
-  },
+  1: lagArbeidsgiver('1', 'Frilanser, samlet aktivitet'),
+  2: lagPrivatArbeidsgiver('2', 'Halvor Hansen', '1990-01-01'),
+  3: lagArbeidsgiver('3', 'Test'),
+  555864629: lagArbeidsgiver('555864629', 'WWW.EIENDOMSDRIFT.CC SA'),
+  999999999: lagArbeidsgiver('999999999', 'Arbeidsgiveren AS'),
+  1111111: lagArbeidsgiver('1111111', 'STATOIL'),
+  342352362: lagArbeidsgiver('342352362', 'Lagt til av saksbehandler'),
 };
 
 const meta = {

@@ -3,8 +3,8 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
-import { lagFagsakBehandling, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import type { ArbeidsgiverOpplysninger, BehandlingFpSak } from '@navikt/fp-types';
+import { lagArbeidsgiver, lagFagsakBehandling, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
+import type { BehandlingFpSak } from '@navikt/fp-types';
 
 const inntektsmeldingmal = {
   innsendingstidspunkt: '2024-08-08T00:00:00',
@@ -42,24 +42,9 @@ export const InntektsmeldingDefault: Story = {
       lagFagsakBehandling({ uuid: 'UUID3', type: 'BT-004', opprettet: '2024-07-15', avsluttet: '2024-08-15' }),
     ],
     arbeidsgiverOpplysningerPerId: {
-      ['1']: {
-        erPrivatPerson: false,
-        identifikator: '1',
-        referanse: '1',
-        navn: 'Rema 1000',
-      } satisfies ArbeidsgiverOpplysninger,
-      ['2']: {
-        erPrivatPerson: false,
-        identifikator: '2',
-        referanse: '2',
-        navn: 'Kiwi',
-      } satisfies ArbeidsgiverOpplysninger,
-      ['3']: {
-        erPrivatPerson: false,
-        identifikator: '3',
-        referanse: '3',
-        navn: 'Meny',
-      } satisfies ArbeidsgiverOpplysninger,
+      1: lagArbeidsgiver('1', 'Rema 1000'),
+      2: lagArbeidsgiver('2', 'Kiwi'),
+      3: lagArbeidsgiver('3', 'Meny'),
     },
     behandling: {
       aksjonspunkt: [],

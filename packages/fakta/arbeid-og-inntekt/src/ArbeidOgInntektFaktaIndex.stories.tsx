@@ -6,6 +6,8 @@ import { action } from 'storybook/actions';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagArbeidsgiver,
+  lagPrivatArbeidsgiver,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -41,7 +43,14 @@ const meta = {
   component: ArbeidOgInntektFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    arbeidsgiverOpplysningerPerId: {},
+    arbeidsgiverOpplysningerPerId: {
+      910909090: lagArbeidsgiver('910909090', 'Autoservice AS'),
+      910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
+      910909092: lagArbeidsgiver('910909092', 'DNB'),
+      947064649: lagArbeidsgiver('947064649', 'SJOKKERENDE ELEKTRIKER'),
+      972674818: lagArbeidsgiver('972674818', 'PENGELØS SPAREBANK'),
+      [MANUELT_ORG_NR]: lagArbeidsgiver(MANUELT_ORG_NR, 'Lagt til av saksbehandler'),
+    },
     lagreVurdering: action('onLagreVurdering') as () => Promise<void>,
     registrerArbeidsforhold: action('onRegistrerArbeidsforhold') as () => Promise<void>,
     åpneForNyVurdering: action('onÅpneForNyVurdering'),
@@ -58,14 +67,6 @@ type Story = StoryObj<typeof meta>;
 export const InnhentInntektsmelding: Story = {
   args: {
     aksjonspunkterForPanel: [defaultAksjonspunkt],
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -130,14 +131,6 @@ export const InnhentInntektsmelding: Story = {
 export const InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret: Story = {
   args: {
     aksjonspunkterForPanel: [defaultAksjonspunkt],
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -163,14 +156,6 @@ export const InnhentInntektsmeldingDerBehandlingErAvsluttet: Story = {
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING, { status: 'UTFO' }),
     ],
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -197,14 +182,6 @@ export const InnhentInntektsmeldingDerBehandlingErAvsluttet: Story = {
 export const AvklarManglendeArbeidsforhold: Story = {
   args: {
     aksjonspunkterForPanel: [defaultAksjonspunkt],
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [],
       inntektsmeldinger: [
@@ -234,14 +211,6 @@ export const AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet: Story = {
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING, { status: 'UTFO' }),
     ],
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -284,14 +253,6 @@ export const AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppM
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING, { status: 'UTFO' }),
     ],
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -333,14 +294,6 @@ export const AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppM
 export const IngenAksjonspunktMenTilbakehoppMuligForOverstyrer: Story = {
   args: {
     aksjonspunkterForPanel: [],
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -381,7 +334,6 @@ export const SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInnt
   {
     args: {
       aksjonspunkterForPanel: [defaultAksjonspunkt],
-      arbeidsgiverOpplysningerPerId: {},
       arbeidOgInntekt: {
         arbeidsforhold: [],
         inntektsmeldinger: [],
@@ -407,14 +359,6 @@ export const SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEller
 export const ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet: Story = {
   args: {
     aksjonspunkterForPanel: [defaultAksjonspunkt],
-    arbeidsgiverOpplysningerPerId: {
-      [MANUELT_ORG_NR]: {
-        erPrivatPerson: false,
-        identifikator: MANUELT_ORG_NR,
-        navn: 'Telenor',
-        referanse: MANUELT_ORG_NR,
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -437,14 +381,6 @@ export const ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet: Story = {
 
 export const ArbeidsforholdErManueltLagtTilOgBehandlingErAvsluttet: Story = {
   args: {
-    arbeidsgiverOpplysningerPerId: {
-      [MANUELT_ORG_NR]: {
-        erPrivatPerson: false,
-        identifikator: MANUELT_ORG_NR,
-        navn: 'Telenor',
-        referanse: MANUELT_ORG_NR,
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -469,14 +405,6 @@ export const ArbeidsforholdErManueltLagtTilOgBehandlingErAvsluttet: Story = {
 
 export const ArbeidsforholdErOK: Story = {
   args: {
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -553,14 +481,6 @@ export const ArbeidsforholdErOK: Story = {
 
 export const ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet: Story = {
   args: {
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -655,26 +575,6 @@ export const FlereArbeidsforholdOgInntekstemeldinger: Story = {
   args: {
     erOverstyrer: true,
     aksjonspunkterForPanel: [defaultAksjonspunkt],
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-      910909090: {
-        erPrivatPerson: false,
-        identifikator: '910909090',
-        navn: 'Autoservice AS',
-        referanse: '910909090',
-      },
-      910909092: {
-        erPrivatPerson: false,
-        identifikator: '910909092',
-        navn: 'DNB',
-        referanse: '910909092',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -807,20 +707,6 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
   args: {
     erOverstyrer: true,
     aksjonspunkterForPanel: [defaultAksjonspunkt],
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-      910909090: {
-        erPrivatPerson: false,
-        identifikator: '910909090',
-        navn: 'Autoservice AS',
-        referanse: '910909090',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -921,20 +807,6 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
   args: {
     erOverstyrer: true,
     aksjonspunkterForPanel: [defaultAksjonspunkt],
-    arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: false,
-        identifikator: '910909088',
-        navn: 'BEDRIFT AS',
-        referanse: '910909088',
-      },
-      910909090: {
-        erPrivatPerson: false,
-        identifikator: '910909090',
-        navn: 'Autoservice AS',
-        referanse: '910909090',
-      },
-    },
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
@@ -1030,14 +902,6 @@ export const FoerRegisterinnhenting: Story = {
     erOverstyrer: true,
     isReadOnly: true,
     aksjonspunkterForPanel: [],
-    arbeidsgiverOpplysningerPerId: {
-      947064649: {
-        erPrivatPerson: false,
-        identifikator: '947064649',
-        navn: 'BEDRIFT AS',
-        referanse: '947064649',
-      },
-    },
     arbeidOgInntekt: {
       inntektsmeldinger: [
         {
@@ -1064,14 +928,6 @@ export const AutomatiskIgnorertInntektsmelding: Story = {
   args: {
     erOverstyrer: false,
     aksjonspunkterForPanel: [],
-    arbeidsgiverOpplysningerPerId: {
-      947064649: {
-        erPrivatPerson: false,
-        identifikator: '947064649',
-        navn: 'BEDRIFT AS',
-        referanse: '947064649',
-      },
-    },
     arbeidOgInntekt: {
       inntektsmeldinger: [],
       arbeidsforhold: [
@@ -1095,26 +951,6 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
   args: {
     erOverstyrer: false,
     aksjonspunkterForPanel: [defaultAksjonspunkt],
-    arbeidsgiverOpplysningerPerId: {
-      342352362: {
-        erPrivatPerson: false,
-        referanse: '342352362',
-        identifikator: '342352362',
-        navn: 'Lagt til av saksbehandler',
-      },
-      947064649: {
-        erPrivatPerson: false,
-        referanse: '947064649',
-        identifikator: '947064649',
-        navn: 'SJOKKERENDE ELEKTRIKER',
-      },
-      972674818: {
-        erPrivatPerson: false,
-        referanse: '972674818',
-        identifikator: '972674818',
-        navn: 'PENGELØS SPAREBANK',
-      },
-    },
     arbeidOgInntekt: {
       inntektsmeldinger: [
         {
@@ -1187,13 +1023,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
 export const SkalViseFødselsnummerForPrivatperson: Story = {
   args: {
     arbeidsgiverOpplysningerPerId: {
-      910909088: {
-        erPrivatPerson: true,
-        fødselsdato: '2000-01-01',
-        identifikator: '910909088',
-        navn: 'Bettan',
-        referanse: '910909088',
-      },
+      910909088: lagPrivatArbeidsgiver('910909088', 'Bettan', '2000-01-01'),
     },
     arbeidOgInntekt: {
       arbeidsforhold: [
