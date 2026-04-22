@@ -37,7 +37,7 @@
     "react-intl": "8.1.4"
   },
   "devDependencies": {
-    "@formatjs/cli-lib": "8.5.1",
+    "@formatjs/cli-lib": "8.5.2",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
@@ -50,9 +50,9 @@
     "eslint": "9.39.4",
     "fast-glob": "3.3.3",
     "storybook": "10.3.5",
-    "stylelint": "17.6.0",
+    "stylelint": "17.7.0",
     "typescript": "5.9.3",
-    "vite": "8.0.5",
-    "vitest": "4.1.2"
+    "vite": "8.0.8",
+    "vitest": "4.1.4"
   }
 }
