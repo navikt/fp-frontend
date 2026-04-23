@@ -1610,7 +1610,7 @@ export type tjenester_behandling_risikoklassifisering_VurderFaresignalerDto = {
 
 export type tjenester_behandling_svp_BekreftSvangerskapspengerDto = {
   begrunnelse?: string;
-  bekreftetSvpArbeidsforholdList?: Array<tjenester_behandling_svp_SvpArbeidsforholdDto>;
+  bekreftetSvpArbeidsforholdList?: Array<tjenester_behandling_svp_BekreftTilrettelegging>;
   fødselsdato?: string;
   termindato?: string;
 };
@@ -1620,7 +1620,7 @@ export type tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto = {
   begrunnelse?: string;
 };
 
-export type tjenester_behandling_svp_SvpArbeidsforholdDto = {
+export type tjenester_behandling_svp_BekreftTilrettelegging = {
   arbeidsgiverReferanse?: string;
   avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
   begrunnelse?: string;
@@ -4263,6 +4263,22 @@ export type tjenester_behandling_medlem_MedlemskapDto_Utlandsopphold = {
   landNavn: string;
   landkode: foreldrepenger_behandlingslager_geografisk_Landkoder;
   tom?: string;
+};
+
+export type tjenester_behandling_svp_SvpArbeidsforholdDto = {
+  arbeidsgiverReferanse?: string;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  internArbeidsforholdReferanse?: string;
+  kanTilrettelegges: boolean;
+  skalBrukes: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  tilretteleggingId: number;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
 };
 
 export type tjenester_behandling_svp_SvpTilretteleggingDto = {
