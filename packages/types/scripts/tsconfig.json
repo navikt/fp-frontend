@@ -1,0 +1,10 @@
+{
+  "extends": "@navikt/fp-config-typescript",
+  "compilerOptions": {
+    "moduleResolution": "node16",
+    "module": "node16",
+    "types": ["node"],
+    "allowImportingTsExtensions": false
+  },
+  "include": ["./**/*.js"]
+}
