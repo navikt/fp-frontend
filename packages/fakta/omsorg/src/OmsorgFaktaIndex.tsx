@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   ytelsefordeling: Ytelsefordeling;
-  personoversikt: Personoversikt;
+  personoversikt: Personoversikt | undefined;
 }
 
 export const OmsorgFaktaIndex = (props: Props) => (

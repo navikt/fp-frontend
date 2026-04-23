@@ -215,15 +215,14 @@ const getArbeidsgiverOversiktOptions =
       staleTime: Infinity,
     });
 
-const getBehandlingPersonoversiktOptions =
-  (links: ApiLink[]) => (behandling: BehandlingFpSak, erFørstegangssøknadEllerRevurdering: boolean) =>
-    queryOptions({
-      queryKey: [BehandlingRel.BEHANDLING_PERSONOVERSIKT, behandling.uuid, behandling.versjon],
-      queryFn: () => jsonEllerNull<Personoversikt>(kyExtended.get(getUrlFromRel('BEHANDLING_PERSONOVERSIKT', links))),
-      enabled: erFørstegangssøknadEllerRevurdering,
-      staleTime: Infinity,
-      select: data => data ?? undefined,
-    });
+const getBehandlingPersonoversiktOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
+  queryOptions({
+    queryKey: [BehandlingRel.BEHANDLING_PERSONOVERSIKT, behandling.uuid, behandling.versjon],
+    queryFn: () => jsonEllerNull<Personoversikt>(kyExtended.get(getUrlFromRel('BEHANDLING_PERSONOVERSIKT', links))),
+    enabled: harLenke(behandling, 'BEHANDLING_PERSONOVERSIKT'),
+    staleTime: Infinity,
+    select: data => data ?? undefined,
+  });
 
 const getAnkeVurderingOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
   queryOptions({

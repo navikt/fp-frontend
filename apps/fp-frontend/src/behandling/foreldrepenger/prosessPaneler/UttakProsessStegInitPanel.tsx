@@ -6,12 +6,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
-import type {
-  ArbeidsgiverOpplysningerPerId,
-  BehandlingFpSak,
-  Personoversikt,
-  VilkårUtfallType,
-} from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -41,10 +36,9 @@ const AKSJONSPUNKT_KODER = [
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  personoversikt: Personoversikt;
 }
 
-export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, personoversikt }: Props) => {
+export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const intl = useIntl();
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
@@ -62,6 +56,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
   const { data: familieHendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));
   const { data: uttakStønadskontoer } = useQuery(api.uttakStønadskontoerOptions(behandling));
   const { data: annenForelderUttakEøs } = useQuery(api.uttakAnnenpartEøsOptions(behandling));
+  const { data: personoversikt } = useQuery(api.behandlingPersonoversiktOptions(behandling));
 
   const { mutateAsync: oppdaterStønadskontoer } = useMutation({
     mutationFn: api.oppdaterStønadskontoer,
@@ -75,7 +70,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
       skalPanelVisesIMeny
       overstyrtStatus={overstyrtStatus}
     >
-      {uttaksresultat && søknad && familieHendelse && uttakStønadskontoer ? (
+      {uttaksresultat && søknad && familieHendelse && uttakStønadskontoer && personoversikt ? (
         <UttakProsessIndex
           kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
