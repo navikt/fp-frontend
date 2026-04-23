@@ -22,15 +22,6 @@ import type { TilretteleggingFormValues } from '../types/TilretteleggingFormValu
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
 import { harUvurderteVelferdspermisjoner, useTilretteleggingFeil } from './useTilretteleggingFeil';
 
-/*
-
-const minTermindato = () => dayjs().subtract(8, 'year');
-const maxTermindato = () => dayjs().add(9, 'months');
-fromDate={minTermindato().toDate()}
-toDate={maxTermindato().toDate()}
-defaultMonth={new Date()}
- */
-
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   svangerskapspengerTilrettelegging: SvpTilrettelegging;
