@@ -160,7 +160,6 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(await screen.findByText('Mor har ikke rett og er uføretrygded i pesys.')).toBeInTheDocument();
     const bekreftOgFortsettKnapp = screen.queryByText('Bekreft og fortsett');
     expect(bekreftOgFortsettKnapp).not.toBeInTheDocument();
-    screen.logTestingPlaygroundURL();
     const radiogrupper = screen.getAllByRole('radiogroup');
     expect(radiogrupper).toHaveLength(3);
     for (const rg of radiogrupper) {
