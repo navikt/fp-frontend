@@ -32,7 +32,6 @@ import type {
   FamilieHendelse,
   Feriepengegrunnlag,
   Fødsel,
-  FodselOgTilrettelegging,
   ForhåndsvisMeldingParams,
   Innsyn,
   InntektArbeidYtelse,
@@ -49,6 +48,7 @@ import type {
   Personoversikt,
   SimuleringResultat,
   Soknad,
+  SvpTilrettelegging,
   TilbakekrevingValg,
   Uttaksresultat,
   UttakStonadskontoer,
@@ -420,7 +420,7 @@ const getSvangerskapspengerTilretteleggingOptions = (links: ApiLink[]) => (behan
   queryOptions({
     queryKey: [BehandlingRel.SVANGERSKAPSPENGER_TILRETTELEGGING, behandling.uuid, behandling.versjon],
     queryFn: () =>
-      kyExtended.get(getUrlFromRel('SVANGERSKAPSPENGER_TILRETTELEGGING', links)).json<FodselOgTilrettelegging>(),
+      kyExtended.get(getUrlFromRel('SVANGERSKAPSPENGER_TILRETTELEGGING', links)).json<SvpTilrettelegging>(),
     staleTime: Infinity,
   });
 

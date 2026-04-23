@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, FodselOgTilrettelegging } from '@navikt/fp-types';
+import type { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, SvpTilrettelegging } from '@navikt/fp-types';
 
 import { TilretteleggingFaktaForm } from './components/TilretteleggingFaktaForm';
 
@@ -11,7 +11,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
+  svangerskapspengerTilrettelegging: SvpTilrettelegging;
   arbeidOgInntekt?: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }

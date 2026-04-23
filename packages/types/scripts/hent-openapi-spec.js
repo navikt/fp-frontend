@@ -1,10 +1,16 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 import fs from 'node:fs';
+import process from 'node:process';
 
-// eslint-disable-next-line no-undef
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
 const isLokal = process.argv.includes('lokal');
 
+/**
+ * @typedef {{ name: string, url: string, localUrl: string, aud: string }} Source
+ */
+
+/** @type {Source[]} */
 const SOURCES = [
   {
     name: 'fpsak',
@@ -14,12 +20,16 @@ const SOURCES = [
   },
   {
     name: 'fplos',
-    url: 'https://fplos.dev-fss-pub.nais.io/fplos/api/openapi.json',
+    url: 'https://fplos.intern.dev.nav.no/fplos/api/openapi.json',
     localUrl: 'http://localhost:8071/fplos/api/openapi.json',
-    aud: 'dev-fss:teamforeldrepenger:fplos',
+    aud: 'dev-gcp:teamforeldrepenger:fplos',
   },
 ];
 
+/**
+ * @param {string} aud
+ * @returns {Promise<string>}
+ */
 async function hentToken(aud) {
   if (isLokal) {
     console.log('Henter token fra VTP.');
@@ -35,6 +45,8 @@ async function hentToken(aud) {
         scope: 'api://vtp.teamforeldrepenger.vtp/.default',
       }).toString(),
     });
+    /** @type {{ id_token?: string }} */
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = await res.json();
     if ('id_token' in data) {
       return data.id_token;
@@ -56,6 +68,10 @@ async function hentToken(aud) {
   }
 }
 
+/**
+ * @param {Source} source
+ * @param {string} token
+ */
 async function hentOpenAPISpec(source, token) {
   const fileName = `${source.name}-swagger.json`;
   const url = isLokal ? source.localUrl : source.url;
@@ -69,6 +85,7 @@ async function hentOpenAPISpec(source, token) {
   });
   const json = await res.text();
   console.log(`Oppdaterer ${fileName}`);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
   fs.writeFileSync(fileName, json);
 }
 
@@ -81,6 +98,6 @@ try {
   }
 } catch (error) {
   console.error(error);
-  // eslint-disable-next-line no-undef
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
   process.exit(1);
 }
