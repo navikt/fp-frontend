@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
 import type { FaktaPanelMedÅpentApInfo } from '../felles/fakta/useFaktaPanelMenyData';
@@ -30,10 +30,9 @@ interface Props {
   valgtProsessSteg: string | undefined;
   valgtFaktaSteg: string | undefined;
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
-  personoversikt: Personoversikt;
 }
 
-const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere, personoversikt }: Props) => {
+const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere }: Props) => {
   const [faktaPanelMedÅpentApInfo, setFaktaPanelMedÅpentApInfo] = useState<FaktaPanelMedÅpentApInfo>();
 
   return (
@@ -44,10 +43,7 @@ const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgi
         <BeregningsgrunnlagProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <SoknadsfristProsessStegInitPanel />
         <FortsattMedlemskapProsessStegInitPanel />
-        <TilkjentYtelseProsessStegInitPanel
-          arbeidsgiverOpplysningerPerId={arbeidsgivere}
-          personoversikt={personoversikt}
-        />
+        <TilkjentYtelseProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <VedtakProsessStegInitPanel />
       </ProsessMeny>

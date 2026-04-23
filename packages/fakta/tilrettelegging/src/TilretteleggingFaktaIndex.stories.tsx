@@ -15,7 +15,7 @@ import {
   type ArbeidOgInntektsmelding,
   type ArbeidsforholdFodselOgTilrettelegging,
   type ArbeidsgiverOpplysningerPerId,
-  type FodselOgTilrettelegging,
+  type SvpTilrettelegging,
 } from '@navikt/fp-types';
 
 import { TilretteleggingFaktaIndex } from './TilretteleggingFaktaIndex';
@@ -71,7 +71,7 @@ const TILRETTELEGGING_PERMISJON = {
     },
   ],
   saksbehandlet: true,
-} satisfies FodselOgTilrettelegging;
+} satisfies SvpTilrettelegging;
 
 const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
   termindato: '2020-11-06',
@@ -126,7 +126,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
     },
   ],
   saksbehandlet: true,
-} satisfies FodselOgTilrettelegging;
+} satisfies SvpTilrettelegging;
 
 const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
   termindato: '2020-02-27',

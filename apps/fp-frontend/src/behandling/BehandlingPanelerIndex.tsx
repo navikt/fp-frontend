@@ -36,18 +36,12 @@ export const BehandlingPanelerIndex = () => {
   const arbeidsgivereOversiktQuery = useQuery(
     behandlingApi.arbeidsgiverOversiktOptions(behandling, erFørstegangssøknadEllerRevurdering),
   );
-  const behandlingPersonoversiktQuery = useQuery(
-    behandlingApi.behandlingPersonoversiktOptions(behandling, erFørstegangssøknadEllerRevurdering),
-  );
 
-  if (
-    erFørstegangssøknadEllerRevurdering &&
-    (arbeidsgivereOversiktQuery.isPending || behandlingPersonoversiktQuery.isPending)
-  ) {
+  if (erFørstegangssøknadEllerRevurdering && arbeidsgivereOversiktQuery.isPending) {
     return <LoadingPanel />;
   }
 
-  if (arbeidsgivereOversiktQuery.isError || behandlingPersonoversiktQuery.isError) {
+  if (arbeidsgivereOversiktQuery.isError) {
     return <ErrorPage />;
   }
 
@@ -73,7 +67,6 @@ export const BehandlingPanelerIndex = () => {
               valgtProsessSteg={query['punkt']}
               valgtFaktaSteg={query['fakta']}
               arbeidsgivere={notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere}
-              personoversikt={behandlingPersonoversiktQuery.data!} // TODO: [JOHANNES]: midlertidig fiks frme til vi finner en god løsning
             />
           </ErrorBoundary>
         </Suspense>
@@ -85,7 +78,6 @@ export const BehandlingPanelerIndex = () => {
               valgtProsessSteg={query['punkt']}
               valgtFaktaSteg={query['fakta']}
               arbeidsgivere={notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere}
-              personoversikt={behandlingPersonoversiktQuery.data!} // TODO: [JOHANNES]: midlertidig fiks frme til vi finner en god løsning
             />
           </ErrorBoundary>
         </Suspense>

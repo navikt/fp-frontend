@@ -20,7 +20,7 @@ import type {
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
   BehandlingFpSak,
-  FodselOgTilrettelegging,
+  SvpTilrettelegging,
   VilkårUtfallType,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -37,7 +37,7 @@ const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): bo
   return finnesAnnenTilretteleggingEnnHel || finnesHelTilretteleggingEtterBehovOppstår;
 };
 
-const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrettelegging): boolean =>
+const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: SvpTilrettelegging): boolean =>
   svangerskapspengerTilrettelegging.arbeidsforholdListe.some(arbfor => finnesUttakPåArbfor(arbfor));
 
 type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextFieldFormValues;
@@ -59,7 +59,7 @@ const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp 
 
 interface Props {
   status: VilkårUtfallType;
-  svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
+  svangerskapspengerTilrettelegging: SvpTilrettelegging;
 }
 
 export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, status }: Props) => {

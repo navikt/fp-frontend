@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
-import type { ArbeidsgiverOpplysningerPerId, Personoversikt, VilkårUtfallType } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, VilkårUtfallType } from '@navikt/fp-types';
 
 import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -17,12 +17,11 @@ const AKSJONSPUNKT_KODER = [AksjonspunktKode.UTGÅTT_5090];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  personoversikt: Personoversikt;
 }
 
-export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, personoversikt }: Props) => {
+export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
-
+  const intl = useIntl();
   const { behandling } = useBehandlingDataContext();
 
   const api = useBehandlingApi(behandling);
@@ -39,16 +38,17 @@ export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPer
   const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
   const { data: feriepengegrunnlag } = useQuery(api.feriepengegrunnlagOptions(behandling, skalHenteData));
+  const { data: personoversikt } = useQuery(api.behandlingPersonoversiktOptions(behandling));
 
   return (
     <ProsessDefaultInitPanel
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.TILKJENT_YTELSE}
-      prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
+      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
       skalPanelVisesIMeny
       overstyrtStatus={overstyrtStatus}
     >
-      {beregningsresultatDagytelse && familiehendelse && søknad ? (
+      {beregningsresultatDagytelse && familiehendelse && søknad && personoversikt ? (
         <TilkjentYtelseProsessIndex
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           personoversikt={personoversikt}

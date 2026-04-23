@@ -32,7 +32,6 @@ import type {
   FamilieHendelse,
   Feriepengegrunnlag,
   Fødsel,
-  FodselOgTilrettelegging,
   ForhåndsvisMeldingParams,
   Innsyn,
   InntektArbeidYtelse,
@@ -49,6 +48,7 @@ import type {
   Personoversikt,
   SimuleringResultat,
   Soknad,
+  SvpTilrettelegging,
   TilbakekrevingValg,
   Uttaksresultat,
   UttakStonadskontoer,
@@ -215,15 +215,14 @@ const getArbeidsgiverOversiktOptions =
       staleTime: Infinity,
     });
 
-const getBehandlingPersonoversiktOptions =
-  (links: ApiLink[]) => (behandling: BehandlingFpSak, erFørstegangssøknadEllerRevurdering: boolean) =>
-    queryOptions({
-      queryKey: [BehandlingRel.BEHANDLING_PERSONOVERSIKT, behandling.uuid, behandling.versjon],
-      queryFn: () => jsonEllerNull<Personoversikt>(kyExtended.get(getUrlFromRel('BEHANDLING_PERSONOVERSIKT', links))),
-      enabled: erFørstegangssøknadEllerRevurdering,
-      staleTime: Infinity,
-      select: data => data ?? undefined,
-    });
+const getBehandlingPersonoversiktOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
+  queryOptions({
+    queryKey: [BehandlingRel.BEHANDLING_PERSONOVERSIKT, behandling.uuid, behandling.versjon],
+    queryFn: () => jsonEllerNull<Personoversikt>(kyExtended.get(getUrlFromRel('BEHANDLING_PERSONOVERSIKT', links))),
+    enabled: harLenke(behandling, 'BEHANDLING_PERSONOVERSIKT'),
+    staleTime: Infinity,
+    select: data => data ?? undefined,
+  });
 
 const getAnkeVurderingOptions = (links: ApiLink[]) => (behandling: BehandlingFpSak) =>
   queryOptions({
@@ -421,7 +420,7 @@ const getSvangerskapspengerTilretteleggingOptions = (links: ApiLink[]) => (behan
   queryOptions({
     queryKey: [BehandlingRel.SVANGERSKAPSPENGER_TILRETTELEGGING, behandling.uuid, behandling.versjon],
     queryFn: () =>
-      kyExtended.get(getUrlFromRel('SVANGERSKAPSPENGER_TILRETTELEGGING', links)).json<FodselOgTilrettelegging>(),
+      kyExtended.get(getUrlFromRel('SVANGERSKAPSPENGER_TILRETTELEGGING', links)).json<SvpTilrettelegging>(),
     staleTime: Infinity,
   });
 
