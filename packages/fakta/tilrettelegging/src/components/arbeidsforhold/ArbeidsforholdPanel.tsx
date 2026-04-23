@@ -9,7 +9,7 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import minMax from 'dayjs/plugin/minMax';
 
-import type { ArbeidsforholdFodselOgTilrettelegging, Permisjon } from '@navikt/fp-types';
+import type { BekreftTilrettelegging, Permisjon } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
@@ -31,7 +31,7 @@ const validerTidligereEnn =
     if (tilretteleggingFomDato.isValid() && !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)) {
       return intl.formatMessage(
         {
-          id: 'TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn',
+          id: 'ArbeidsforholdPanel.TilretteleggingTidligereEnn',
         },
         {
           dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT),
@@ -52,7 +52,7 @@ export const filtrerVelferdspermisjoner = (
   );
 
 interface Props {
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
+  arbeidsforhold: BekreftTilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   visInfoAlert: boolean;
@@ -109,15 +109,13 @@ export const ArbeidsforholdPanel = ({
         name={`arbeidsforhold.${arbeidsforholdIndex}.skalBrukes`}
         control={control}
         readOnly={readOnly}
-        label={<FormattedMessage id="TilretteleggingForArbeidsgiverPanel.SkalHaSvpForArbeidsforhold" />}
+        label={<FormattedMessage id="ArbeidsforholdPanel.SkalHaSvpForArbeidsforhold" />}
       />
       <VStack gap="space-32">
         <RhfDatepicker
           name={`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`}
           control={control}
-          label={intl.formatMessage({
-            id: 'TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging',
-          })}
+          label={<FormattedMessage id="ArbeidsforholdPanel.DatoForTilrettelegging" />}
           validate={[required, hasValidDate, validerTidligereEnn(intl, getValues, tilretteleggingBehovFom)]}
           readOnly={readOnly}
         />
@@ -131,7 +129,7 @@ export const ArbeidsforholdPanel = ({
         )}
         <VStack gap="space-8">
           <Label size="small">
-            <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Perioder" />
+            <FormattedMessage id="ArbeidsforholdPanel.Perioder" />
           </Label>
           <TilretteleggingOgOppholdPerioderPanel
             arbeidsforhold={arbeidsforhold}

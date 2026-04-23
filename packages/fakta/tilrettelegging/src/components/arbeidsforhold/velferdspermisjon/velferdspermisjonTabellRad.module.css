@@ -1,13 +1,7 @@
-.row {
-  cursor: pointer;
-}
-
 .openRow {
   background-color: var(--ax-bg-neutral-moderate);
-  cursor: pointer;
 }
 
 .apRow {
   background-color: var(--ax-warning-200);
-  cursor: pointer;
 }
