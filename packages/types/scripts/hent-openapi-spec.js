@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
+/* eslint-disable */
 import fs from 'node:fs';
 
-// eslint-disable-next-line no-undef
 const isLokal = process.argv.includes('lokal');
 
 const SOURCES = [
@@ -14,9 +13,9 @@ const SOURCES = [
   },
   {
     name: 'fplos',
-    url: 'https://fplos.dev-fss-pub.nais.io/fplos/api/openapi.json',
+    url: 'https://fplos.intern.dev.nav.no/fplos/api/openapi.json',
     localUrl: 'http://localhost:8071/fplos/api/openapi.json',
-    aud: 'dev-fss:teamforeldrepenger:fplos',
+    aud: 'dev-gcp:teamforeldrepenger:fplos',
   },
 ];
 
@@ -81,6 +80,5 @@ try {
   }
 } catch (error) {
   console.error(error);
-  // eslint-disable-next-line no-undef
   process.exit(1);
 }
