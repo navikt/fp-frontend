@@ -5,7 +5,7 @@ import { Alert, VStack } from '@navikt/ds-react';
 
 import type { BekreftTilrettelegging } from '@navikt/fp-types';
 
-import { filtrerVelferdspermisjoner } from './arbeidsforhold/ArbeidsforholdPanel';
+import { filtrerVelferdspermisjoner } from './arbeidsforholdUtils';
 
 export const harUvurderteVelferdspermisjoner = (arbeidsforhold: BekreftTilrettelegging[]) =>
   arbeidsforhold.some(a =>

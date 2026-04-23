@@ -9,9 +9,10 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import minMax from 'dayjs/plugin/minMax';
 
-import type { BekreftTilrettelegging, Permisjon } from '@navikt/fp-types';
+import type { BekreftTilrettelegging } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
+import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
 import { VelferdspermisjonPanel } from './velferdspermisjon/VelferdspermisjonPanel';
@@ -40,16 +41,6 @@ const validerTidligereEnn =
     }
     return null;
   };
-
-export const filtrerVelferdspermisjoner = (
-  velferdspermisjoner: Permisjon[],
-  tilretteleggingBehovFom: string,
-): Permisjon[] =>
-  velferdspermisjoner.filter(
-    permisjon =>
-      !dayjs(permisjon.permisjonFom).isAfter(tilretteleggingBehovFom) &&
-      (permisjon.permisjonTom === undefined || !dayjs(permisjon.permisjonTom).isBefore(tilretteleggingBehovFom)),
-  );
 
 interface Props {
   arbeidsforhold: BekreftTilrettelegging;
