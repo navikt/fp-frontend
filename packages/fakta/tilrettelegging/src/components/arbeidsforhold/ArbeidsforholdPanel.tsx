@@ -15,7 +15,7 @@ import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormV
 import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
-import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTabell.tsx';
+import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTabell';
 
 dayjs.extend(minMax);
 
