@@ -7,8 +7,6 @@ import type { Permisjon } from '@navikt/fp-types';
 
 import { VelferdspermisjonTabellRad } from './VelferdspermisjonTabellRad';
 
-import styles from './velferdspermisjonPanel.module.css';
-
 interface Props {
   velferdspermisjoner: Permisjon[];
   arbeidsforholdIndex: number;
@@ -27,12 +25,13 @@ export const VelferdspermisjonPanel = ({
     <VStack gap="space-8">
       <HStack gap="space-16" align="center">
         <Label size="small">
-          <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Velferdspermisjon" />
+          <FormattedMessage id="VelferdspermisjonPanel.Velferdspermisjon" />
         </Label>
         {velferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined) && (
           <ExclamationmarkTriangleFillIcon
-            title={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg' })}
-            className={styles['image']}
+            title={intl.formatMessage({ id: 'VelferdspermisjonPanel.ErPermisjonGyldg' })}
+            fontSize="1.25rem"
+            color="var(--ax-warning-700)"
           />
         )}
       </HStack>
