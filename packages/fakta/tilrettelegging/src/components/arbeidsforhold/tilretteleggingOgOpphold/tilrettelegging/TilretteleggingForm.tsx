@@ -16,8 +16,6 @@ import { notEmpty } from '@navikt/fp-utils';
 
 import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
 
-import styles from './tilretteleggingForm.module.css';
-
 const maxValue100 = maxValue(100);
 const minValue0 = minValue(0);
 
@@ -262,7 +260,7 @@ export const TilretteleggingForm = ({
                 <RhfNumericField
                   name={`${index}.stillingsprosent`}
                   control={formMethods.control}
-                  className={styles['arbeidsprosent']}
+                  htmlSize={10}
                   readOnly={readOnly}
                   label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
                   description={intl.formatMessage({ id: 'TilretteleggingForm.ArbeidsprosentBeskrivelse' })}
@@ -282,7 +280,7 @@ export const TilretteleggingForm = ({
               <RhfNumericField
                 name={`${index}.overstyrtUtbetalingsgrad`}
                 control={formMethods.control}
-                className={styles['utbetalingsgrad']}
+                htmlSize={10}
                 readOnly={readOnly}
                 label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}
                 description={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvpBeskrivelse' })}

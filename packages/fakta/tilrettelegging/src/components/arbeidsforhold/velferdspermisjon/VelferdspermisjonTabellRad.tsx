@@ -14,7 +14,7 @@ const utledStyleForRad = (open: boolean, erIkkeValgt: boolean) => {
   if (erIkkeValgt) {
     return styles['apRow'];
   }
-  return open ? styles['openRow'] : styles['row'];
+  return open ? styles['openRow'] : undefined;
 };
 
 interface Props {
