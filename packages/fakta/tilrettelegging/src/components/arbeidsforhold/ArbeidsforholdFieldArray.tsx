@@ -97,7 +97,7 @@ export const ArbeidsforholdFieldArray = ({
 
         return (
           <React.Fragment key={field.id}>
-            <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles['card']} data-color="info">
+            <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles['card']}>
               <ExpansionCard.Header className={styles['cardHeader']}>
                 <HStack gap="space-8 space-56" align="center" paddingBlock="space-8">
                   <HStack gap="space-16" align="center">

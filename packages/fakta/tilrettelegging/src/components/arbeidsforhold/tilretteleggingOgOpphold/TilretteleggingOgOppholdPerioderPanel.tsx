@@ -3,8 +3,8 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { PlusIcon } from '@navikt/aksel-icons';
-import { Button, HStack, Table, VStack } from '@navikt/ds-react';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { Button, HStack, Table } from '@navikt/ds-react';
+import { ISO_DATE_FORMAT, sortPeriodsByFom } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type {
@@ -98,19 +98,18 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
     );
   };
 
-  const alleRaderSortert = [...tilretteleggingDatoer, ...avklarteOppholdPerioder].sort((d1, d2) => {
-    if (!d1.fom) {
-      return 1;
-    }
-    if (!d2.fom) {
-      return -1;
-    }
-    return dayjs(d1.fom).diff(dayjs(d2.fom));
-  });
+  const alleRaderSortert = [...tilretteleggingDatoer, ...avklarteOppholdPerioder].sort(sortPeriodsByFom);
 
   return (
-    <VStack gap="space-24">
+    <>
       <Table size="small">
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell colSpan={4} textSize="small">
+              <FormattedMessage id="ArbeidsforholdPanel.Perioder" />
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
         <Table.Body>
           {alleRaderSortert.map((rad, index) => {
             if ('kilde' in rad) {
@@ -184,6 +183,6 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
           </Button>
         </HStack>
       )}
-    </VStack>
+    </>
   );
 };

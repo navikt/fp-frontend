@@ -1,7 +1,7 @@
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Label, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
@@ -61,15 +61,13 @@ export const ArbeidsforholdPanel = ({
 
   const { getValues, watch, setValue, control } = useFormContext<TilretteleggingFormValues>();
 
+  const termindato = watch('termindato');
   const tilretteleggingBehovFom = watch(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`);
 
   const filtrerteVelferdspermisjoner = filtrerVelferdspermisjoner(
     arbeidsforhold.velferdspermisjoner,
     tilretteleggingBehovFom,
   );
-
-  const termindato = watch('termindato');
-
   const harUavklartVelferdspermisjon = filtrerteVelferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined);
 
   const oppdaterOverstyrtUtbetalingsgrad = (velferdspermisjonprosent: number) => {
@@ -112,24 +110,21 @@ export const ArbeidsforholdPanel = ({
         />
         {filtrerteVelferdspermisjoner.length > 0 && (
           <VelferdspermisjonPanel
-            velferdspermisjoner={filtrerteVelferdspermisjoner}
+            filtrerteVelferdspermisjoner={filtrerteVelferdspermisjoner}
+            harUavklartVelferdspermisjon={harUavklartVelferdspermisjon}
             arbeidsforholdIndex={arbeidsforholdIndex}
             readOnly={readOnly}
             oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
           />
         )}
-        <VStack gap="space-8">
-          <Label size="small">
-            <FormattedMessage id="ArbeidsforholdPanel.Perioder" />
-          </Label>
-          <TilretteleggingOgOppholdPerioderPanel
-            arbeidsforhold={arbeidsforhold}
-            arbeidsforholdIndex={arbeidsforholdIndex}
-            readOnly={readOnly || harUavklartVelferdspermisjon}
-            stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-            termindato={termindato}
-          />
-        </VStack>
+
+        <TilretteleggingOgOppholdPerioderPanel
+          arbeidsforhold={arbeidsforhold}
+          arbeidsforholdIndex={arbeidsforholdIndex}
+          readOnly={readOnly || harUavklartVelferdspermisjon}
+          stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+          termindato={termindato}
+        />
       </VStack>
     </VStack>
   );
