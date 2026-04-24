@@ -15,7 +15,7 @@ interface Props {
   oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;
 }
 
-export const VelferdspermisjonPanel = ({
+export const VelferdspermisjonTabell = ({
   filtrerteVelferdspermisjoner,
   harUavklartVelferdspermisjon,
   arbeidsforholdIndex,
@@ -23,6 +23,7 @@ export const VelferdspermisjonPanel = ({
   oppdaterOverstyrtUtbetalingsgrad,
 }: Props) => {
   const intl = useIntl();
+
   return (
     <Table size="small">
       <Table.Header>

@@ -15,7 +15,7 @@ import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormV
 import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
-import { VelferdspermisjonPanel } from './velferdspermisjon/VelferdspermisjonPanel';
+import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTabell.tsx';
 
 dayjs.extend(minMax);
 
@@ -109,7 +109,7 @@ export const ArbeidsforholdPanel = ({
           readOnly={readOnly}
         />
         {filtrerteVelferdspermisjoner.length > 0 && (
-          <VelferdspermisjonPanel
+          <VelferdspermisjonTabell
             filtrerteVelferdspermisjoner={filtrerteVelferdspermisjoner}
             harUavklartVelferdspermisjon={harUavklartVelferdspermisjon}
             arbeidsforholdIndex={arbeidsforholdIndex}

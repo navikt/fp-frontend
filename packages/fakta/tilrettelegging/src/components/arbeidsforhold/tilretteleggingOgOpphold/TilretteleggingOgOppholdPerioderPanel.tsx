@@ -105,7 +105,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
       <Table size="small">
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell colSpan={4} textSize="small">
+            <Table.HeaderCell colSpan={4}>
               <FormattedMessage id="ArbeidsforholdPanel.Perioder" />
             </Table.HeaderCell>
           </Table.Row>
@@ -164,6 +164,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
           <Button
             size="small"
             variant="secondary"
+            data-color="accent"
             type="button"
             icon={<PlusIcon aria-hidden />}
             onClick={leggTilTilrettelegging}
@@ -174,6 +175,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
           <Button
             size="small"
             variant="secondary"
+            data-color="accent"
             onClick={leggTilOpphold}
             icon={<PlusIcon aria-hidden />}
             type="button"
