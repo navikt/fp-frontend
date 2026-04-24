@@ -2,6 +2,11 @@
 
 Monorepo for NAV's foreldrepenger saksbehandler frontend (FPSAK). Built with Yarn workspaces + Turborepo.
 
+## Setup
+
+- Node version is pinned in `.tool-versions` (currently Node 24); package manager is Yarn 4 (declared via `packageManager` in `package.json`).
+- Internal `@navikt/*` packages are pulled from GitHub Packages. A `~/.yarnrc.yml` with `npmAuthToken` for the `navikt` scope is required before `yarn install`. See README for the snippet.
+
 ## Commands
 
 ```bash
@@ -10,6 +15,8 @@ yarn build          # Build all packages
 yarn test           # Run all tests
 yarn tsc            # Type-check all packages
 yarn eslint         # Lint all packages
+yarn eslint:fix     # Lint and autofix
+yarn prettier:fix   # Format all packages
 yarn stylelint      # Lint CSS modules
 
 # Dev servers (from root)
@@ -24,7 +31,7 @@ yarn storybook              # Start Storybook for that package
 
 # Type generation
 yarn generate               # Sync TS types from deployed fpsak/fplos OpenAPI specs
-yarn generate:local         # Sync from local fpsak running on port 8080
+yarn generate:local         # Sync from local fpsak (port 8080) and fplos (port 8071)
 ```
 
 ## Architecture
@@ -59,7 +66,7 @@ Each `fakta/*` and `prosess/*` package exports a single index component (e.g. `A
 
 ### TypeScript types
 
-All DTO types from upstream services are in `packages/types`. The file `src/fpsak.gen.ts` is auto-generated — do not edit it manually. Run `yarn generate` to update from the live dev environment, or `yarn generate:local` when fpsak runs locally on port 8080.
+All DTO types from upstream services are in `packages/types`. The files `src/fpsak.gen.ts` and `src/los/fplos.gen.ts` are auto-generated from OpenAPI specs — do not edit either manually. Run `yarn generate` to update from the live dev environment, or `yarn generate:local` when fpsak (port 8080) and fplos (port 8071) run locally.
 
 ## Key conventions
 
@@ -81,13 +88,13 @@ const MyComponent: FC<Props> = ({ prop }) => <div>{prop}</div>;
 
 ### Non-null assertions
 
-Only allowed on array/object index access (`arr[0]!`, `obj[key]!`). Banned on plain variables or property access (`value!`, `obj.prop!`).
+Prefer non-null assertions only on array/object index access (`arr[0]!`, `obj[key]!`). ESLint bans them on plain variables and direct property access (`value!`, `obj.prop!`).
 
-### Import order (enforced by ESLint)
+### Import order (enforced by ESLint via `simple-import-sort`)
 
 1. `react`
-2. External packages (`@storybook/*`, etc.)
-3. Internal `@navikt/fp-*` workspace packages
+2. External packages (including `@navikt/fp-*`, `@storybook/*`, etc.)
+3. Internal alias imports (`@/...`)
 4. Relative imports
 5. CSS modules (`*.module.css`)
 6. JSON files
@@ -135,3 +142,7 @@ Use NAV Aksel Design System (`@navikt/ds-react`, `@navikt/aksel-icons`). Tailwin
 ### Vite mode (local development against deployed backend)
 
 Run `yarn dev` in `apps/fp-frontend`, then visit the deployed dev environment (e.g. `https://fpsak.intern.dev.nav.no/vite-on`) to set the cookie that redirects the server to serve JS from `localhost:9010`.
+
+### Turborepo dependency placement
+
+Install dependencies in the package(s) that actually use them, not at the repo root. This keeps Turborepo's caching and task graph correct. See https://turborepo.com/docs/crafting-your-repository/managing-dependencies.
