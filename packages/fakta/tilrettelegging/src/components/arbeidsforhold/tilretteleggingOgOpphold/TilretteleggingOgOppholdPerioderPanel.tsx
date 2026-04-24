@@ -105,7 +105,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
       <Table size="small">
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell colSpan={4}>
+            <Table.HeaderCell colSpan={4} textSize="small">
               <FormattedMessage id="ArbeidsforholdPanel.Perioder" />
             </Table.HeaderCell>
           </Table.Row>
