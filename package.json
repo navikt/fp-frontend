@@ -61,8 +61,7 @@
   },
   "resolutions": {
     "react": "19.2.5",
-    "react-dom": "19.2.5",
-    "vite": ">=8.0.8"
+    "react-dom": "19.2.5"
   },
   "lint-staged": {
     "{packages,apps,server}/**/*.{js,jsx,ts,tsx,cjs,mjs}": "eslint --cache --fix  --config packages/config/eslint/eslint.config.mjs",
