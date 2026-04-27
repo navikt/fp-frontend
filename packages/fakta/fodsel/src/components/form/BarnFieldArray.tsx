@@ -230,14 +230,7 @@ const validateAlleFødselsdatoer = (
   const barn = getValues('barn');
   const termindato = getValues('termindato');
 
-  const { minDate, maxDate } = barn.reduce<{ minDate?: dayjs.Dayjs; maxDate?: dayjs.Dayjs }>((acc, b) => {
-    if (!b.fødselsdato) return acc;
-    const date = dayjs(b.fødselsdato);
-    if (!date.isValid()) return acc;
-    if (!acc.minDate || date.isBefore(acc.minDate)) acc.minDate = date;
-    if (!acc.maxDate || date.isAfter(acc.maxDate)) acc.maxDate = date;
-    return acc;
-  }, {});
+  const { minDate, maxDate } = finnMaksOgMinDato(barn);
 
   if (minDate && maxDate && maxDate.diff(minDate, 'day') > 2) {
     setError(FIELD_ARRAY_NAME, { type: 'manual', message: 'Fødseldatoer må være innenfor 2 dager av hverandre' });
@@ -255,3 +248,18 @@ const validateAlleFødselsdatoer = (
   clearErrors(FIELD_ARRAY_NAME);
   return true;
 };
+
+type MaksOgMinDato = { minDate: dayjs.Dayjs | undefined; maxDate: dayjs.Dayjs | undefined };
+
+const finnMaksOgMinDato = (barn: FieldArrayRow[]) =>
+  barn.reduce<MaksOgMinDato>(
+    (acc, b) => {
+      if (!b.fødselsdato) return acc;
+      const date = dayjs(b.fødselsdato);
+      if (!date.isValid()) return acc;
+      if (!acc.minDate || date.isBefore(acc.minDate)) acc.minDate = date;
+      if (!acc.maxDate || date.isAfter(acc.maxDate)) acc.maxDate = date;
+      return acc;
+    },
+    { minDate: undefined, maxDate: undefined },
+  );

@@ -42,17 +42,17 @@ describe('fødselOgTerminValidator', () => {
 
     it('skal feile for passert terminbekreftelsedato etter overgått termin', () => {
       const result = terminBekreftelseBeforeTodayOrTermindato(terminPassert, terminbekreftelse2ukerPassert);
-      expect(result).toEqual(`Dato må være før eller lik ${dayjs(terminPassert).format('DD.MM.YYYY')}`);
+      expect(result).toEqual(`Dato må være før eller lik ${dayjs(terminPassert).format(DDMMYYYY_DATE_FORMAT)}`);
     });
 
     it('skal feile for foranliggende terminbekreftelsedato etter overgått termin', () => {
       const result = terminBekreftelseBeforeTodayOrTermindato(terminPassert, terminbekreftelseFremtid);
-      expect(result).toEqual(`Dato må være før eller lik ${dayjs(terminPassert).format('DD.MM.YYYY')}`);
+      expect(result).toEqual(`Dato må være før eller lik ${dayjs(terminPassert).format(DDMMYYYY_DATE_FORMAT)}`);
     });
 
     it('skal feile for foranliggende terminbekreftelsedato etter dagens dato', () => {
       const result = terminBekreftelseBeforeTodayOrTermindato(terminFremtidig, terminbekreftelseFremtid);
-      expect(result).toEqual(`Dato må være før eller lik ${dayjs(dagensDato).format('DD.MM.YYYY')}`);
+      expect(result).toEqual(`Dato må være før eller lik ${dayjs(dagensDato).format(DDMMYYYY_DATE_FORMAT)}`);
     });
   });
 
