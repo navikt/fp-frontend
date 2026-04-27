@@ -10,6 +10,7 @@
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
     "prettier:fix": "prettier --write src",
+    "test": "vitest",
     "tsc": "tsc --noEmit",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
@@ -27,8 +28,10 @@
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
+    "@navikt/fp-config-vite": "workspace:*",
     "@types/react": "19.2.9",
     "eslint": "9.39.4",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "4.1.4"
   }
 }
