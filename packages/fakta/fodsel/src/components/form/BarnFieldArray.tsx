@@ -12,11 +12,17 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Detail, ErrorMessage, HelpText, HStack, Table, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfFieldArrayAppendButton, RhfFieldArrayRemoveButton } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { type FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
 import type { FødselGjeldende } from '@navikt/fp-types';
-import { dødsdatoAfterOrEqualFødselsdato, maxFodselsdato, minFodselsdato } from '@navikt/fp-utils';
+import {
+  dødsdatoAfterOrEqualFødselsdato,
+  fødselErINærhetenAvTermin,
+  maxFodselsdato,
+  minFodselsdato,
+} from '@navikt/fp-utils';
 
 import styles from './barnFieldArray.module.css';
 
@@ -40,6 +46,8 @@ export type BarnFormValues = {
   [FIELD_ARRAY_NAME]: FieldArrayRow[];
 };
 
+type FormValuesMedTermin = BarnFormValues & { termindato?: string };
+
 interface Props {
   isReadOnly: boolean;
 }
@@ -53,17 +61,21 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
     setError,
     clearErrors,
     formState: { dirtyFields, errors },
-  } = useFormContext<BarnFormValues>();
+  } = useFormContext<FormValuesMedTermin>();
   const { fields, remove, append } = useFieldArray({ control, name: FIELD_ARRAY_NAME });
 
   const barn = useWatch({
     control,
     name: FIELD_ARRAY_NAME,
   });
+  const termindato = useWatch({
+    control,
+    name: 'termindato',
+  });
 
   useEffect(() => {
     validateAlleFødselsdatoer(getValues, setError, clearErrors);
-  }, [barn]);
+  }, [barn, termindato]);
 
   const today = dayjs().toDate();
 
@@ -211,14 +223,17 @@ const validerDødsdato = (getValues: UseFormGetValues<BarnFormValues>, index: nu
 };
 
 const validateAlleFødselsdatoer = (
-  getValues: UseFormGetValues<BarnFormValues>,
-  setError: UseFormSetError<BarnFormValues>,
-  clearErrors: (name: FieldPath<BarnFormValues>) => void,
+  getValues: UseFormGetValues<FormValuesMedTermin>,
+  setError: UseFormSetError<FormValuesMedTermin>,
+  clearErrors: (name: FieldPath<FormValuesMedTermin>) => void,
 ) => {
   const barn = getValues('barn');
+  const termindato = getValues('termindato');
 
   const { minDate, maxDate } = barn.reduce<{ minDate?: dayjs.Dayjs; maxDate?: dayjs.Dayjs }>((acc, b) => {
+    if (!b.fødselsdato) return acc;
     const date = dayjs(b.fødselsdato);
+    if (!date.isValid()) return acc;
     if (!acc.minDate || date.isBefore(acc.minDate)) acc.minDate = date;
     if (!acc.maxDate || date.isAfter(acc.maxDate)) acc.maxDate = date;
     return acc;
@@ -227,6 +242,14 @@ const validateAlleFødselsdatoer = (
   if (minDate && maxDate && maxDate.diff(minDate, 'day') > 2) {
     setError(FIELD_ARRAY_NAME, { type: 'manual', message: 'Fødseldatoer må være innenfor 2 dager av hverandre' });
     return false;
+  }
+
+  if (minDate) {
+    const avvikFeil = fødselErINærhetenAvTermin(minDate.format(ISO_DATE_FORMAT), termindato);
+    if (avvikFeil) {
+      setError(FIELD_ARRAY_NAME, { type: 'manual', message: avvikFeil });
+      return false;
+    }
   }
 
   clearErrors(FIELD_ARRAY_NAME);

@@ -4,6 +4,7 @@ import { expect } from 'vitest';
 
 import {
   dødsdatoAfterOrEqualFødselsdato,
+  fødselErINærhetenAvTermin,
   terminBekreftelseBeforeTodayOrTermindato,
   terminErRundtFodselsdato,
 } from './fødselOgTerminValidator';
@@ -116,6 +117,45 @@ describe('fødselOgTerminValidator', () => {
     it('skal feile for dødsdato etter i dag', () => {
       const result = dødsdatoAfterOrEqualFødselsdato(undefined, dayjs().add(1, 'week').format(ISO_DATE_FORMAT));
       expect(result).toEqual(`Dato må være før eller lik ${dayjs().format(DDMMYYYY_DATE_FORMAT)}`);
+    });
+  });
+
+  describe('fødselErINærhetenAvTermin', () => {
+    const termin = dayjs('2025-06-01');
+    const termindato = termin.format(ISO_DATE_FORMAT);
+    const avvikMelding =
+      'For stort avvik mellom termin og fødsel. Fødsel må være tidligst 19 uker før og senest 6 uker etter termin.';
+
+    it('skal godta fødsel på termindato', () => {
+      expect(fødselErINærhetenAvTermin(termindato, termindato)).toBeNull();
+    });
+
+    it('skal godta fødsel akkurat 19 uker før termin', () => {
+      const fødsel = termin.subtract(19, 'weeks').format(ISO_DATE_FORMAT);
+      expect(fødselErINærhetenAvTermin(fødsel, termindato)).toBeNull();
+    });
+
+    it('skal godta fødsel akkurat 6 uker etter termin', () => {
+      const fødsel = termin.add(6, 'weeks').format(ISO_DATE_FORMAT);
+      expect(fødselErINærhetenAvTermin(fødsel, termindato)).toBeNull();
+    });
+
+    it('skal feile for fødsel mer enn 19 uker før termin', () => {
+      const fødsel = termin.subtract(19, 'weeks').subtract(1, 'day').format(ISO_DATE_FORMAT);
+      expect(fødselErINærhetenAvTermin(fødsel, termindato)).toEqual(avvikMelding);
+    });
+
+    it('skal feile for fødsel mer enn 6 uker etter termin', () => {
+      const fødsel = termin.add(6, 'weeks').add(1, 'day').format(ISO_DATE_FORMAT);
+      expect(fødselErINærhetenAvTermin(fødsel, termindato)).toEqual(avvikMelding);
+    });
+
+    it('skal returnere null når termindato mangler', () => {
+      expect(fødselErINærhetenAvTermin(termindato, undefined)).toBeNull();
+    });
+
+    it('skal returnere null når fødselsdato mangler', () => {
+      expect(fødselErINærhetenAvTermin(undefined, termindato)).toBeNull();
     });
   });
 });
