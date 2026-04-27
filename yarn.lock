@@ -2913,7 +2913,6 @@ __metadata:
     "@navikt/ds-react": "npm:8.9.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
-    "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
@@ -4347,7 +4346,6 @@ __metadata:
     "@navikt/ds-react": "npm:8.9.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
-    "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-konstanter": "workspace:^"
     "@navikt/fp-utils": "workspace:^"
     "@types/react": "npm:19.2.9"
@@ -4410,6 +4408,7 @@ __metadata:
   dependencies:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
+    "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:^"
     "@navikt/fp-konstanter": "workspace:^"
     "@navikt/fp-types": "workspace:^"
@@ -4422,6 +4421,7 @@ __metadata:
     react: "npm:19.2.5"
     react-intl: "npm:8.1.4"
     typescript: "npm:5.9.3"
+    vitest: "npm:4.1.4"
   languageName: unknown
   linkType: soft
 
@@ -8660,7 +8660,6 @@ __metadata:
     stylelint-order: "npm:8.1.1"
     turbo: "npm:2.9.6"
     typescript: "npm:5.9.3"
-    vitest: "npm:4.1.4"
   languageName: unknown
   linkType: soft
 
