@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@navikt/ds-react": "8.9.1",
-    "@navikt/ft-utils": "4.1.1",
+    "@navikt/ft-utils": "5.0.0",
     "dayjs": "1.11.20",
     "react": "19.2.5",
     "react-dom": "19.2.5",
