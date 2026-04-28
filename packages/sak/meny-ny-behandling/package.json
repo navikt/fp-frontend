@@ -29,7 +29,7 @@
     "dayjs": "1.11.20",
     "react": "19.2.5",
     "react-dom": "19.2.5",
-    "react-hook-form": "7.72.1",
+    "react-hook-form": "7.73.1",
     "react-intl": "8.1.4"
   },
   "devDependencies": {
@@ -45,9 +45,9 @@
     "@types/react": "19.2.9",
     "eslint": "9.39.4",
     "storybook": "10.3.5",
-    "stylelint": "17.7.0",
+    "stylelint": "17.8.0",
     "typescript": "5.9.3",
-    "vite": "8.0.8",
-    "vitest": "4.1.4"
+    "vite": "8.0.9",
+    "vitest": "4.1.5"
   }
 }
