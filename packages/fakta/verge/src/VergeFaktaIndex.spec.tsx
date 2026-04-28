@@ -9,7 +9,7 @@ import * as stories from './VergeFaktaIndex.stories';
 const { Default } = composeStories(stories);
 
 describe('VergeFaktaIndex', () => {
-  it('skal trimme whitespace fra organisasjonsnummer ved innsending', async () => {
+  it('skal trimme trailing whitespace fra organisasjonsnummer ved innsending', async () => {
     const lagre = vi.fn();
 
     render(<Default submitCallback={lagre} />);
