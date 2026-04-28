@@ -29,7 +29,7 @@
     "dayjs": "1.11.20",
     "react": "19.2.5",
     "react-dom": "19.2.5",
-    "react-intl": "8.1.4"
+    "react-intl": "10.1.2"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
