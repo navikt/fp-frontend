@@ -1,4 +1,5 @@
 {
   "ValidationMessage.ForTidligTermin": "Termin kan ikke være mer enn 3 uker før fødsel",
-  "ValidationMessage.ForSenTermin": "Termin kan ikke være mer enn 5 måneder etter fødsel"
+  "ValidationMessage.ForSenTermin": "Termin kan ikke være mer enn 5 måneder etter fødsel",
+  "ValidationMessage.ForStortAvvikTerminFødsel": "For stort avvik mellom termin og fødsel. Fødsel må være tidligst 19 uker før og senest 6 uker etter termin."
 }
