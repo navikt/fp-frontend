@@ -80,7 +80,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
       hasFetchedBrevData.current = true;
       void hentVarselHtml().then(result => {
         setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
-      });
+      }).catch(() => {});
     }
   }, []);
 
@@ -152,8 +152,12 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
                             type="button"
                             onClick={async () => {
                               if (!brevData) {
-                                const result = await hentVarselHtml();
-                                setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+                                try {
+                                  const result = await hentVarselHtml();
+                                  setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+                                } catch {
+                                  return;
+                                }
                               }
                               setVisRedigeringModal(true);
                             }}
@@ -214,7 +218,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
             if (mellomlagreBrev) {
               await mellomlagreBrev(html);
             }
-            previewCallback({ dokumentMal: 'VARREV' });
+            previewCallback({ dokumentMal: 'VARREV', fritekst: html });
           }}
           setVisRedigeringModal={setVisRedigeringModal}
         />

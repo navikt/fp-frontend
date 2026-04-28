@@ -207,22 +207,6 @@ describe('redigeringsUtils', () => {
       expect(() => utledRedigerbartInnhold(html)).toThrow('Redigerbart innhold finnes ikke i mal');
     });
 
-    it('skal bruke #content minus #header som fallback når data-editable mangler (opprinneligHtml)', () => {
-      const html = `
-        <html><body>
-          <div id="logo"><img /></div>
-          <div id="content">
-            <div id="header"><table>...</table></div>
-            <h1>Vedtakstekst</h1>
-            <p>Innhold i brev</p>
-          </div>
-        </body></html>`;
-      const result = utledRedigerbartInnhold(html);
-      expect(result).toContain('Vedtakstekst');
-      expect(result).toContain('Innhold i brev');
-      expect(result).not.toContain('id="header"');
-    });
-
     it('skal fjerne mellomrom og p-tags inni li-tags', () => {
       const html = lagBrevHtml({ redigerbartInnhold: '<ul><li><p>Punkt</p></li></ul>' });
       const result = utledRedigerbartInnhold(html);

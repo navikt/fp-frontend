@@ -3,20 +3,20 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BrevRedigeringModal } from '@navikt/fp-brev-editor';
 import { withRouter } from '@navikt/fp-storybook-utils';
 
-import mal from '../../../.storybook/brevmal/mal.html?raw';
-import redigertInnhold from '../../../.storybook/brevmal/redigertInnhold.html?raw';
+import mal from '../.storybook/brevmal/mal.html?raw';
+import redigertInnhold from '../.storybook/brevmal/redigertInnhold.html?raw';
+import { BrevRedigeringModal } from './BrevRedigeringModal';
 
 const meta = {
-  title: 'prosess/prosess-vedtak-editor',
+  title: 'brev-editor/BrevRedigeringModal',
   component: BrevRedigeringModal,
   decorators: [withRouter],
   args: {
-    mellomlagreOgHentPåNytt: action('button-click') as (html: string | null) => Promise<void>,
-    setVisRedigeringModal: action('button-click'),
-    forhåndsvisBrev: action('button-click'),
+    mellomlagreOgHentPåNytt: action('mellomlagreOgHentPåNytt') as (html: string | null) => Promise<void>,
+    setVisRedigeringModal: action('setVisRedigeringModal'),
+    forhåndsvisBrev: action('forhåndsvisBrev'),
     opprinneligHtml: mal,
     redigertHtml: null,
   },
@@ -31,5 +31,11 @@ export const MedOpprinneligHtml: Story = {};
 export const MedRedigertHtml: Story = {
   args: {
     redigertHtml: redigertInnhold,
+  },
+};
+
+export const ReadOnly: Story = {
+  args: {
+    isReadOnly: true,
   },
 };

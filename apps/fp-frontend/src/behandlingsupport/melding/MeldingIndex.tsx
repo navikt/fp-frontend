@@ -16,7 +16,6 @@ import type { DokumentMalType, FagsakBehandlingDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import {
-  FagsakRel,
   forhåndsvisTilbakekreving,
   initFetchOptions,
   type SubmitMessageParams,
@@ -74,9 +73,6 @@ export const MeldingIndex = ({
   const { mutateAsync: sendMelding, status: meldingStatus } = useMutation({
     mutationFn: (valuesToStore: SubmitMessageParams) => api.sendMelding(valuesToStore),
   });
-
-  const harBrevHtmlLenke = valgtBehandling.links.some(l => l.rel === FagsakRel.HENT_BREV_HTML);
-  const harMellomlagreLenke = valgtBehandling.links.some(l => l.rel === FagsakRel.MELLOMLAGRING);
 
   const { mutateAsync: hentBrevHtml } = useMutation({
     mutationFn: ({ brevmalkode, årsak }: { brevmalkode: string; årsak?: string }) =>
@@ -163,8 +159,8 @@ export const MeldingIndex = ({
               meldingFormData={meldingFormData}
               setMeldingFormData={setMeldingFormData}
               brukerManglerAdresse={fagsak.brukerManglerAdresse}
-              hentBrevHtml={harBrevHtmlLenke ? hentBrevHtmlStabil : undefined}
-              mellomlagreBrev={harMellomlagreLenke ? mellomlagreBrevStabil : undefined}
+              hentBrevHtml={hentBrevHtmlStabil}
+              mellomlagreBrev={mellomlagreBrevStabil}
             />
           )}
         </VStack>

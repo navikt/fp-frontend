@@ -33,7 +33,7 @@ interface Props {
  * Generisk modal for redigering av brev med Editor.js.
  *
  * HTML-parsing skjer internt. Backend-malene (fp-dokgen) bestemmer hva som er
- * redigerbart (`redigerbart_innhold`) og hva som er readonly (`readonly_innhold`).
+ * redigerbart (`[data-editable]`) og hva som er readonly (`#readonly-innhold`).
  * Eventuelt readonly-innhold vises som footer under editoren.
  */
 export const BrevRedigeringModal = ({

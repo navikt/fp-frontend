@@ -20,8 +20,8 @@ interface Props {
   setMeldingFormData: (data?: FormValues) => void;
   brukerManglerAdresse: boolean;
   behandling: FagsakBehandlingDto;
-  hentBrevHtml?: (brevmalkode: string, årsak?: string) => Promise<BrevOverstyring>;
-  mellomlagreBrev?: (brevmalkode: string, html: string | null) => Promise<void>;
+  hentBrevHtml: (brevmalkode: string, årsak?: string) => Promise<BrevOverstyring>;
+  mellomlagreBrev: (brevmalkode: string, html: string | null) => Promise<void>;
 }
 
 export const MeldingerSakIndex = (props: Props) => (

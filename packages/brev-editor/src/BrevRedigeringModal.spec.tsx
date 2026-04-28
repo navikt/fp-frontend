@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
-import * as stories from './FritekstRedigeringModal.stories';
+import * as stories from './BrevRedigeringModal.stories';
 
 const { MedOpprinneligHtml } = composeStories(stories);
 

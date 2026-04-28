@@ -21,7 +21,6 @@ import type {
 import styles from './messages.module.css';
 
 const maxLength4000 = maxLength(4000);
-const maxLength10000 = maxLength(10000);
 const minLength3 = minLength(3);
 
 export type FormValues = {
@@ -46,8 +45,8 @@ interface Props {
   meldingFormData?: FormValues;
   setMeldingFormData: (data?: FormValues) => void;
   brukerManglerAdresse: boolean;
-  hentBrevHtml?: (brevmalkode: string, årsak?: string) => Promise<BrevOverstyring>;
-  mellomlagreBrev?: (brevmalkode: string, html: string | null) => Promise<void>;
+  hentBrevHtml: (brevmalkode: string, årsak?: string) => Promise<BrevOverstyring>;
+  mellomlagreBrev: (brevmalkode: string, html: string | null) => Promise<void>;
 }
 
 /**
@@ -94,20 +93,22 @@ export const Messages = ({
 
   const erVarselOmRevurdering = brevmalkode === 'VARREV';
   const erInnhenteOpplysninger = brevmalkode === 'INNOPP';
-  const brukBreveditor = (erVarselOmRevurdering || erInnhenteOpplysninger) && hentBrevHtml !== undefined;
+  const brukBreveditor = erVarselOmRevurdering || erInnhenteOpplysninger;
 
   useEffect(() => {
-    if (brevDataRef.current && brevmalkode) {
-      void mellomlagreBrev?.(brevmalkode, null).catch(() => {});
-    }
     setBrevData(null);
+    return () => {
+      if (brevDataRef.current && brevmalkode) {
+        void mellomlagreBrev(brevmalkode, null).catch(() => {});
+      }
+    };
   }, [årsakskode, mellomlagreBrev, brevmalkode]);
 
   useEffect(() => {
     if (brukBreveditor && !brevData && (!erVarselOmRevurdering || årsakskode)) {
       void hentBrevHtml(brevmalkode, årsakskode).then(result => {
         setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
-      });
+      }).catch(() => {});
     }
   }, [brukBreveditor, brevData, hentBrevHtml, brevmalkode, årsakskode, erVarselOmRevurdering]);
 
@@ -167,8 +168,12 @@ export const Messages = ({
                   type="button"
                   onClick={async () => {
                     if (!brevData) {
-                      const result = await hentBrevHtml(brevmalkode, årsakskode);
-                      setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+                      try {
+                        const result = await hentBrevHtml(brevmalkode, årsakskode);
+                        setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+                      } catch {
+                        return;
+                      }
                     }
                     setVisRedigeringModal(true);
                   }}
@@ -188,8 +193,8 @@ export const Messages = ({
               name="fritekst"
               control={control}
               label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
-              validate={[required, erVarselOmRevurdering ? maxLength10000 : maxLength4000, minLength3, hasValidText]}
-              maxLength={erVarselOmRevurdering ? 10000 : 4000}
+              validate={[required, maxLength4000, minLength3, hasValidText]}
+              maxLength={4000}
               badges={[{ type: 'info', titleText: language }]}
               parse={formaterFritekst}
             />
@@ -222,16 +227,16 @@ export const Messages = ({
           opprinneligHtml={brevData.opprinneligHtml}
           redigertHtml={brevData.redigertHtml}
           mellomlagreOgHentPåNytt={async html => {
-            if (mellomlagreBrev && brevmalkode) {
+            if (brevmalkode) {
               await mellomlagreBrev(brevmalkode, html);
             }
             setBrevData(prev => (prev ? { ...prev, redigertHtml: html } : null));
           }}
           forhåndsvisBrev={async html => {
-            if (mellomlagreBrev && brevmalkode) {
+            if (brevmalkode) {
               await mellomlagreBrev(brevmalkode, html);
+              forhåndsvisBrev({ brevmalkode, fritekst: html, årsakskode });
             }
-            forhåndsvisBrev({ brevmalkode: brevmalkode!, fritekst: html, årsakskode });
           }}
           setVisRedigeringModal={setVisRedigeringModal}
         />
