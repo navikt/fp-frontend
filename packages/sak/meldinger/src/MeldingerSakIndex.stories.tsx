@@ -33,6 +33,18 @@ const TEMPLATES = [
   },
 ];
 
+const brevHtml =
+  '<html><body><div id="logo"><img /></div><div id="content"><div id="header"><table></table></div>' +
+  '<div data-editable="true"><p>Brevinnhold</p></div></div></body></html>';
+
+const hentBrevHtml = (): Promise<{ opprinneligHtml: string; redigertHtml: null }> =>
+  Promise.resolve({
+    opprinneligHtml: brevHtml,
+    redigertHtml: null,
+  });
+
+const mellomlagreBrev = async () => {};
+
 const meta = {
   title: 'sak/sak-meldinger',
   component: MeldingerSakIndex,
@@ -44,6 +56,8 @@ const meta = {
     forhåndsvisBrev: action('button-click'),
     submitCallback: action('button-click'),
     setMeldingFormData: action('button-click'),
+    hentBrevHtml,
+    mellomlagreBrev,
   },
 } satisfies Meta<typeof MeldingerSakIndex>;
 export default meta;

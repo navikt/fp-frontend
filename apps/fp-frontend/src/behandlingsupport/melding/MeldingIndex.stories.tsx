@@ -63,7 +63,11 @@ const ALLE_BEHANDLINGER = [
       behandlingTilGodkjenning: false,
       vergeBehandlingsmeny: 'OPPRETT',
     },
-    links: [{ href: '/fpsak/bestill', rel: 'brev-bestill', type: 'POST' }],
+    links: [
+      { href: '/fpsak/bestill', rel: 'brev-bestill', type: 'POST' },
+      { href: '/fpsak/hent-brev-html', rel: 'hent-brev-html', type: 'GET' },
+      { href: '/fpsak/mellomlagring', rel: 'mellomlagring', type: 'POST' },
+    ],
   }),
 ];
 
@@ -80,7 +84,16 @@ const meta = {
         http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
         http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
         http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
-        http.post(wrapUrl(notEmpty(ALLE_BEHANDLINGER[0]?.links[0]).href), () => HttpResponse.json()),
+        http.post(wrapUrl('/fpsak/bestill'), () => HttpResponse.json()),
+        http.get(wrapUrl('/fpsak/hent-brev-html'), () =>
+          HttpResponse.json({
+            opprinneligHtml:
+              '<html><body><div id="logo"><img /></div><div id="content">' +
+              '<div id="header"><table></table></div><div data-editable="true"><p>Brevinnhold</p></div></div></body></html>',
+            redigertHtml: null,
+          }),
+        ),
+        http.post(wrapUrl('/fpsak/mellomlagring'), () => HttpResponse.json()),
       ],
     },
   },

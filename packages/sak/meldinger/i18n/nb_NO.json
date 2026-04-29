@@ -8,6 +8,8 @@
   "Messages.PreviewText": "Forhåndsvis varselbrev",
   "Messages.Beskrivelse": "Foretrukket språk",
   "Messages.FritekstRequired": "Feltet må fylles ut",
+  "Messages.RedigerBrev": "Rediger brev",
+  "Messages.BrevErRedigert": "Brevet er redigert",
 
   "MessagesModal.text": "Brevet er bestilt",
   "MessagesModal.OK": "OK",

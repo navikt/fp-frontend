@@ -10,6 +10,7 @@ import type {
   ApiLink,
   BehandlingFpSak,
   BehandlingFpTilbake,
+  BrevOverstyring,
   Dokument,
   Fagsak,
   FagsakBehandlingDto,
@@ -105,6 +106,8 @@ export const FagsakRel = {
   ALL_DOCUMENTS: 'sak-dokumentliste',
   KAN_TILBAKEKREVING_OPPRETTES: 'tilbake-kan-opprette-behandling',
   KAN_TILBAKEKREVING_REVURDERING_OPPRETTES: 'tilbake-kan-opprette-revurdering',
+  HENT_BREV_HTML: 'hent-brev-html',
+  MELLOMLAGRING: 'mellomlagring',
 };
 
 export const initFetchOptions = () =>
@@ -273,6 +276,26 @@ const getSendMelding = (links?: ApiLink[]) => (params: SubmitMessageParams) =>
     })
     .then(() => {});
 
+const getHentBrevHtml =
+  (links: ApiLink[]) => (behandlingUuid: string, dokumentMalType: string, revurderingÅrsak?: string) =>
+    kyExtended
+      .get(getUrlFromRel('HENT_BREV_HTML', links), {
+        searchParams: {
+          uuid: behandlingUuid,
+          dokumentMal: dokumentMalType,
+          ...(revurderingÅrsak ? { revurderingÅrsak } : {}),
+        },
+      })
+      .json<BrevOverstyring>();
+
+const getMellomlagring =
+  (links: ApiLink[]) => (params: { behandlingUuid: string; dokumentMal?: string; innhold: string | null }) =>
+    kyExtended
+      .post(getUrlFromRel('MELLOMLAGRING', links), {
+        json: params,
+      })
+      .then(() => {});
+
 export const useFagsakApi = () => {
   const { data: initFetchFpSak } = useQuery(initFetchOptions());
   const { data: initFetchFpTilbake } = useQuery(initFetchFpTilbakeOptions());
@@ -302,5 +325,7 @@ export const useFagsakBehandlingApi = (valgtBehandling: FagsakBehandlingDto) => 
     lagreTotrinnsaksjonspunkt: getLagreTotrinnsaksjonspunkt(links),
     sendMelding: getSendMelding(links),
     forhåndsvisMelding: getForhåndsvisMelding(links),
+    hentBrevHtml: getHentBrevHtml(links),
+    mellomlagring: getMellomlagring(links),
   };
 };
