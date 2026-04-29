@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "react": "19.2.5",
-    "react-intl": "8.1.4"
+    "react-intl": "10.1.2"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
-    "@types/react": "19.2.9",
+    "@types/react": "19.2.14",
     "eslint": "9.39.4",
     "typescript": "5.9.3"
   }
