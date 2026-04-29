@@ -125,7 +125,7 @@ const meta = {
   render: function Render(args) {
     const [redigertHtml, setRedigertHtml] = useState<string | null>(null);
 
-    const mellomlagreBrevOverstyring = (redigert: string | null) => {
+    const mellomlagreBrev = (redigert: string | null) => {
       setRedigertHtml(redigert);
       action('mellomlagre')(redigert);
       return Promise.resolve();
@@ -134,7 +134,7 @@ const meta = {
     return (
       <VedtakEditeringProvider
         behandling={args.behandling ?? defaultBehandling}
-        hentBrevOverstyring={
+        hentBrevHtml={
           args.harHentBrevOverstyringLenke
             ? () => {
                 return redigertHtml
@@ -146,8 +146,8 @@ const meta = {
               }
             : undefined
         }
-        hentBrevOverstyringIsPending={false}
-        mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+        hentBrevHtmlIsPending={false}
+        mellomlagreBrev={mellomlagreBrev}
       >
         <VedtakProsessIndex {...args} />
       </VedtakEditeringProvider>
@@ -825,44 +825,6 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
       },
     } satisfies BehandlingFpSak,
     beregningsresultat: defaultberegningresultatDagytelse,
-  },
-};
-
-export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: Story = {
-  args: {
-    behandling: defaultBehandling,
-    beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      ...defaultSak,
-      saksnummer: '1234567',
-      fagsakYtelseType: 'FP',
-      bruker: {
-        navn: 'Kari Nordmann',
-        fødselsnummer: '',
-        kjønn: '-',
-        fødselsdato: '',
-        språkkode: '-',
-      },
-      annenPart: {
-        navn: 'Ola Nordmann',
-        fødselsnummer: '',
-        kjønn: '-',
-        fødselsdato: '',
-        språkkode: '-',
-      },
-      relasjonsRolleType: 'MORA',
-      annenpartBehandling: {
-        relasjonsRolleType: 'FARA',
-        saksnummer: '',
-        behandlingUuid: '',
-      },
-      fagsakMarkeringer: [
-        {
-          fagsakMarkering: 'PRAKSIS_UTSETTELSE',
-          kortNavn: 'Utsettelse',
-        },
-      ],
-    },
   },
 };
 
