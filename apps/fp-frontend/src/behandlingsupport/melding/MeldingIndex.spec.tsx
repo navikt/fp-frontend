@@ -5,6 +5,14 @@ import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import type { DokumentMalType } from '@navikt/fp-types';
 
+// EditorJS refererer til `Element` ved modul-lasting, som ikkje finst i JSDOM
+vi.mock('@editorjs/editorjs', () => ({ default: vi.fn() }));
+vi.mock('@editorjs/header', () => ({ default: vi.fn() }));
+vi.mock('@editorjs/list', () => ({ default: vi.fn() }));
+vi.mock('@editorjs/paragraph', () => ({ default: vi.fn() }));
+vi.mock('editorjs-html', () => ({ default: vi.fn() }));
+vi.mock('editorjs-undo', () => ({ default: vi.fn() }));
+
 import * as stories from './MeldingIndex.stories';
 
 const { Default } = composeStories(stories);
@@ -35,22 +43,16 @@ describe('MeldingIndex', () => {
     await userEvent.click(screen.getByText('OK'));
   });
 
-  it('skal sende melding og sette saken på vent hvis INNHENT_DOK', async () => {
+  it('skal vise breveditor-knapp for INNOPP i stedet for fritekst', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Meldinger')).toBeInTheDocument();
-    expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
 
     await userEvent.selectOptions(screen.getByLabelText('Mal'), 'INNOPP' satisfies DokumentMalType);
 
-    const begrunnelseInput = screen.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
-    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
-
-    await userEvent.click(screen.getByText('Send brev'));
-
-    expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Gå til forsiden'));
+    expect(await screen.findByText('Rediger brev')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Send brev' })).toBeDisabled();
   });
 });

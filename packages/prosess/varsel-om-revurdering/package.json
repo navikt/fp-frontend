@@ -19,6 +19,7 @@
   "dependencies": {
     "@navikt/aksel-icons": "8.10.4",
     "@navikt/ds-react": "8.10.4",
+    "@navikt/fp-brev-editor": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-modal-sett-pa-vent": "workspace:*",
     "@navikt/fp-prosess-felles": "workspace:*",

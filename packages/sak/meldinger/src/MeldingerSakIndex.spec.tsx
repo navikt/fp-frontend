@@ -1,8 +1,16 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import type { DokumentMalType } from '@navikt/fp-types';
+
+// EditorJS refererer til `Element` ved modul-lasting, som ikkje finst i JSDOM
+vi.mock('@editorjs/editorjs', () => ({ default: vi.fn() }));
+vi.mock('@editorjs/header', () => ({ default: vi.fn() }));
+vi.mock('@editorjs/list', () => ({ default: vi.fn() }));
+vi.mock('@editorjs/paragraph', () => ({ default: vi.fn() }));
+vi.mock('editorjs-html', () => ({ default: vi.fn() }));
+vi.mock('editorjs-undo', () => ({ default: vi.fn() }));
 
 import * as stories from './MeldingerSakIndex.stories';
 
@@ -12,72 +20,34 @@ const brukerenHarIkkeAdresseText =
   'Brukeren har ikke en registrert adresse. Utsendelse av brev kan feile om brukeren ikke er digital.';
 
 describe('MeldingerSakIndex', () => {
-  it('skal bruke default mal og sende brev', async () => {
-    const lagre = vi.fn();
-    render(<Default submitCallback={lagre} />);
+  it('skal vise "Rediger brev"-knapp for INNOPP og ha deaktivert send-knapp før brev er redigert', async () => {
+    render(<Default />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    const begrunnelseInput = screen.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
-    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
-
-    await userEvent.click(screen.getByText('Send brev'));
-
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
-      brevmalkode: 'INNOPP',
-      fritekst: 'Dette er en begrunnelse',
-    });
+    expect(screen.getByText('Rediger brev')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Send brev' })).toBeDisabled();
   });
 
-  it('skal få feilmelding når en ikke har fylt ut liste over dokumenter', async () => {
-    const lagre = vi.fn();
-    render(<Default submitCallback={lagre} />);
-    expect(await screen.findByText('Mal')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Send brev'));
-
-    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
-    expect(lagre).toHaveBeenCalledTimes(0);
-  });
-
-  it('skal vise feltet årsak men ikke fritekst når en velger mal Revurderingsdokumentasjon og ikke Annet', async () => {
-    const lagre = vi.fn();
-    render(<Default submitCallback={lagre} />);
+  it('skal vise "Rediger brev"-knapp for VARREV med årsak BARNIKKEREG og kunne sende uten redigering', async () => {
+    render(<Default />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
     await userEvent.selectOptions(screen.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
     await userEvent.selectOptions(screen.getByLabelText('Årsak'), 'BARNIKKEREG');
 
-    await userEvent.click(screen.getByText('Send brev'));
-
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
-      årsakskode: 'BARNIKKEREG',
-      brevmalkode: 'VARREV',
-      fritekst: ' ',
-    });
+    expect(await screen.findByText('Rediger brev')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Send brev' })).not.toBeDisabled();
   });
 
-  it('skal vise feltet årsak og fritekst når en velger mal Revurderingsdokumentasjon og Annet', async () => {
-    const lagre = vi.fn();
-    render(<Default submitCallback={lagre} />);
+  it('skal vise "Rediger brev"-knapp for VARREV med årsak ANNET og ha deaktivert send-knapp', async () => {
+    render(<Default />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
     await userEvent.selectOptions(screen.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
     await userEvent.selectOptions(screen.getByLabelText('Årsak'), 'ANNET');
 
-    const begrunnelseInput = screen.getByLabelText('Fritekst');
-    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
-
-    await userEvent.click(screen.getByText('Send brev'));
-
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
-      årsakskode: 'ANNET',
-      brevmalkode: 'VARREV',
-      fritekst: 'Dette er en begrunnelse',
-    });
-    expect(screen.queryByText(brukerenHarIkkeAdresseText)).not.toBeInTheDocument();
+    expect(await screen.findByText('Rediger brev')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Send brev' })).toBeDisabled();
   });
 
   it('skal ikke vise årsaksverdi Barn ikke registrert for Svangerskapspenger', async () => {

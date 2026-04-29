@@ -4,7 +4,6 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type VarselRevurderingAp = {
   sendVarsel?: boolean;
-  fritekst?: string;
   frist?: string;
   ventearsak?: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.UTGÅTT_5025 | AksjonspunktKode.VARSEL_REVURDERING_MANUELL>;

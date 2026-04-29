@@ -201,8 +201,8 @@ export const BehandlingRel = {
   UPDATE_ON_HOLD: 'endre-pa-vent',
   HENT_OPPGAVER: 'hent-oppgaver',
   FERDIGSTILL_OPPGAVE: 'ferdigstill-oppgave',
-  HENT_BREV_OVERSTYRING: 'hent-brev-overstyring',
-  MELLOMLAGRE_BREV_OVERSTYRING: 'mellomlagre-brev-overstyring',
+  HENT_BREV_HTML: 'hent-brev-html',
+  MELLOMLAGRING: 'mellomlagring',
 };
 
 const getArbeidsgiverOversiktOptions =
@@ -659,13 +659,20 @@ const getOpprettVergeV2 = (links: ApiLink[]) => (params: Verge) =>
     json: params,
   });
 
-const getHentBrevOverstyring = (links: ApiLink[]) => () =>
-  kyExtended.get(getUrlFromRel('HENT_BREV_OVERSTYRING', links)).json<BrevOverstyring>();
+const getHentBrevHtml = (links: ApiLink[]) => (behandlingUuid: string, dokumentMalType?: string) =>
+  kyExtended
+    .get(getUrlFromRel('HENT_BREV_HTML', links), {
+      searchParams: {
+        uuid: behandlingUuid,
+        ...(dokumentMalType ? { dokumentMal: dokumentMalType } : {}),
+      },
+    })
+    .json<BrevOverstyring>();
 
-const getMellomlagreBrevOverstyring =
-  (links: ApiLink[]) => (params: { behandlingUuid: string; redigertInnhold: string | null }) =>
+const getMellomlagring =
+  (links: ApiLink[]) => (params: { behandlingUuid: string; dokumentMal?: string; innhold?: string }) =>
     kyExtended
-      .post(getUrlFromRel('MELLOMLAGRE_BREV_OVERSTYRING', links), {
+      .post(getUrlFromRel('MELLOMLAGRING', links), {
         json: params,
       })
       .then(() => {});
@@ -786,8 +793,8 @@ export const useBehandlingApi = (behandling: Behandling) => {
     inntektArbeidYtelseOptions: getInntektArbeidYtelseOptions(links),
     utlandDokStatusOptions: getUtlandDokStatusOptions(links),
     vergeOptions: getVergeOptions(links),
-    hentBrevOverstyring: getHentBrevOverstyring(links),
-    mellomlagreBrevOverstyring: getMellomlagreBrevOverstyring(links),
+    hentBrevHtml: getHentBrevHtml(links),
+    mellomlagring: getMellomlagring(links),
     merkSomHaster: getMerkSomHaster(links),
     verge: {
       hent: getVerge(links),
