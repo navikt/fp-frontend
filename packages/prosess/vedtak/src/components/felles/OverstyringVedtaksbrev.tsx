@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
+import { BrevRedigeringModal } from '@navikt/fp-brev-editor';
 import type { BrevOverstyring } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
-import { FritekstRedigeringModal } from '../editor/FritekstRedigeringModal';
 
 interface Props {
   forhåndsvisBrev: (data: VedtakForhåndsvisData) => void;
@@ -24,46 +24,42 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
   const {
     harRedigertBrev,
     setHarRedigertBrev,
-    hentBrevOverstyring,
-    hentBrevOverstyringIsPending,
-    mellomlagreBrevOverstyring,
+    hentBrevHtml,
+    hentBrevHtmlIsPending,
+    mellomlagreBrev,
   } = useVedtakEditeringContext();
 
   const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
-
   const [visFritekstRedigeringModal, setVisFritekstRedigeringModal] = useState(false);
-
   const [brevOverstyring, setBrevOverstyring] = useState<BrevOverstyring | null>(null);
+  const hasFetchedBrevOverstyring = useRef(false);
 
   useEffect(() => {
-    if (harRedigertBrev && hentBrevOverstyring) {
-      void hentBrevOverstyring().then(setBrevOverstyring);
+    if (!hasFetchedBrevOverstyring.current && harRedigertBrev && hentBrevHtml) {
+      hasFetchedBrevOverstyring.current = true;
+      void hentBrevHtml().then(setBrevOverstyring);
     }
   }, []);
 
   const visFritekstModalOgHentBrev = async () => {
-    if (!brevOverstyring && hentBrevOverstyring) {
-      const res = await hentBrevOverstyring();
+    if (!brevOverstyring && hentBrevHtml) {
+      const res = await hentBrevHtml();
       setBrevOverstyring(res);
     }
     setVisFritekstRedigeringModal(true);
   };
 
-  const mellomlagreOgHentPåNytt = async (html: string | null) => {
-    setHarRedigertBrev(html !== null);
-    await mellomlagreBrevOverstyring(html);
-    if (hentBrevOverstyring) {
-      const res = await hentBrevOverstyring();
-      setBrevOverstyring(res);
-    }
+  const mellomlagreOgHentPåNytt = async (html?: string) => {
+    setHarRedigertBrev(html !== undefined);
+    await mellomlagreBrev(html);
+    setBrevOverstyring(prev => (prev ? { ...prev, redigertHtml: html ?? null } : null));
   };
 
   const forkastOverstyrtBrev = async () => {
     setVisForkastOverstyringModal(false);
     setHarRedigertBrev(false);
     setHarValgtÅRedigereVedtaksbrev(false);
-
-    await mellomlagreBrevOverstyring(null);
+    await mellomlagreBrev(undefined);
   };
 
   const forhåndsvisRedigertHtmlBrev = () => {
@@ -74,6 +70,14 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
         fritekst: brevOverstyring.redigertHtml,
       });
     }
+  };
+
+  const forhåndsvisRedigertBrevFraEditor = (html: string) => {
+    forhåndsvisBrev({
+      automatiskVedtaksbrev: false,
+      dokumentMal: 'FRIHTM',
+      fritekst: html,
+    });
   };
 
   return (
@@ -88,12 +92,12 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
       <VStack gap="space-16">
         <Box padding="space-16" borderRadius="4" background="neutral-soft">
           <VStack gap="space-16">
-            {!isReadOnly && !brevOverstyring?.redigertHtml && !hentBrevOverstyringIsPending && (
+            {!isReadOnly && !brevOverstyring?.redigertHtml && !hentBrevHtmlIsPending && (
               <Alert variant="info" size="small">
                 <FormattedMessage id="OverstyringVedtaksbrev.KanRedigeres" />
               </Alert>
             )}
-            {!!brevOverstyring?.redigertHtml && !hentBrevOverstyringIsPending && (
+            {!!brevOverstyring?.redigertHtml && !hentBrevHtmlIsPending && (
               <Alert variant="success" size="small">
                 <FormattedMessage id="OverstyringVedtaksbrev.ErOverstyrt" />
               </Alert>
@@ -151,13 +155,16 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
         </Box>
       </VStack>
       {brevOverstyring && visFritekstRedigeringModal && (
-        <FritekstRedigeringModal
-          setVisFritekstRedigeringModal={setVisFritekstRedigeringModal}
-          brevOverstyring={brevOverstyring}
-          forhåndsvisBrev={forhåndsvisBrev}
+        <BrevRedigeringModal
+          opprinneligHtml={brevOverstyring.opprinneligHtml}
+          redigertHtml={brevOverstyring.redigertHtml}
           mellomlagreOgHentPåNytt={mellomlagreOgHentPåNytt}
+          forhåndsvisBrev={forhåndsvisRedigertBrevFraEditor}
+          setVisRedigeringModal={setVisFritekstRedigeringModal}
+          isReadOnly={isReadOnly}
         />
       )}
     </div>
   );
 };
+

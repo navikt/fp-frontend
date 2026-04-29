@@ -3,9 +3,9 @@ import { createContext, type ReactElement, useContext, useEffect, useMemo, useSt
 import type { BehandlingFpSak, BrevOverstyring } from '@navikt/fp-types';
 
 type VedtakEditeringData = {
-  hentBrevOverstyring?: () => Promise<BrevOverstyring>;
-  hentBrevOverstyringIsPending: boolean;
-  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
+  hentBrevHtml?: () => Promise<BrevOverstyring>;
+  hentBrevHtmlIsPending: boolean;
+  mellomlagreBrev: (redigertInnhold?: string) => Promise<void>;
   harRedigertBrev: boolean;
   setHarRedigertBrev: (erRedigert: boolean) => void;
 };
@@ -14,15 +14,15 @@ const VedtakEditeringContext = createContext<VedtakEditeringData | null>(null);
 
 export const VedtakEditeringProvider = ({
   behandling,
-  hentBrevOverstyring,
-  hentBrevOverstyringIsPending,
-  mellomlagreBrevOverstyring,
+  hentBrevHtml,
+  hentBrevHtmlIsPending,
+  mellomlagreBrev,
   children,
 }: {
   behandling: BehandlingFpSak;
-  hentBrevOverstyring?: () => Promise<BrevOverstyring>;
-  hentBrevOverstyringIsPending: boolean;
-  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
+  hentBrevHtml?: () => Promise<BrevOverstyring>;
+  hentBrevHtmlIsPending: boolean;
+  mellomlagreBrev: (redigertInnhold?: string) => Promise<void>;
   children: ReactElement;
 }) => {
   const [harRedigertBrev, setHarRedigertBrev] = useState(
@@ -36,16 +36,16 @@ export const VedtakEditeringProvider = ({
 
   const value = useMemo(
     () => ({
-      hentBrevOverstyring,
-      hentBrevOverstyringIsPending,
-      mellomlagreBrevOverstyring,
+      hentBrevHtml,
+      hentBrevHtmlIsPending,
+      mellomlagreBrev,
       harRedigertBrev,
       setHarRedigertBrev,
     }),
     [
-      hentBrevOverstyring,
-      hentBrevOverstyringIsPending,
-      mellomlagreBrevOverstyring,
+      hentBrevHtml,
+      hentBrevHtmlIsPending,
+      mellomlagreBrev,
       harRedigertBrev,
       setHarRedigertBrev,
     ],
