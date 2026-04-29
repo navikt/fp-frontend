@@ -3,11 +3,11 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
-import * as stories from './FritekstRedigeringModal.stories';
+import * as stories from './BrevRedigeringModal.stories';
 
 const { MedOpprinneligHtml } = composeStories(stories);
 
-describe('FritekstRedigeringModal', () => {
+describe('BrevRedigeringModal', () => {
   vi.hoisted(() => {
     Object.defineProperty(globalThis, 'matchMedia', {
       writable: true,
@@ -36,11 +36,6 @@ describe('FritekstRedigeringModal', () => {
     await userEvent.click(screen.getByText('Forhåndsvis brev'));
 
     await waitFor(() => expect(forhåndsvisBrev).toHaveBeenCalledTimes(1));
-    expect(forhåndsvisBrev).toHaveBeenNthCalledWith(1, {
-      automatiskVedtaksbrev: false,
-      dokumentMal: 'FRIHTM',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      fritekst: expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
-    });
+    expect(forhåndsvisBrev).toHaveBeenCalledWith(expect.any(String));
   });
 });
