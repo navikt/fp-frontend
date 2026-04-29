@@ -161,7 +161,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
     const bekreftOgFortsettKnapp = screen.queryByText('Bekreft og fortsett');
     expect(bekreftOgFortsettKnapp).not.toBeInTheDocument();
 
-    const radiogrupper = screen.getAllByRole('group');
+    const radiogrupper = screen.getAllByRole('radiogroup');
     expect(radiogrupper).toHaveLength(3);
     for (const rg of radiogrupper) {
       expect(rg).toHaveAttribute('aria-readonly', 'true');
@@ -192,7 +192,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
     ).toBeInTheDocument();
     expect(screen.getByLabelText(/Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?/)).toBeInTheDocument();
 
-    const radiogrupper = screen.getAllByRole('group');
+    const radiogrupper = screen.getAllByRole('radiogroup');
 
     expect(radiogrupper).toHaveLength(3);
     for (const rg of radiogrupper) {
