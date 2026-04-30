@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { type IntlShape } from 'react-intl';
 
 import EditorJS, { type EditorConfig, type I18nConfig, type ToolConstructable } from '@editorjs/editorjs';
 import Header from '@editorjs/header';
@@ -40,7 +39,7 @@ export const useBrevEditorJs = (
   const refEditorJs = useRef<EditorJS>(null);
   const refCurrentHtml = useRef('');
 
-  // Refs for å unngå stale closures i useEffect-onChange
+  // Refs for å unngå stale closures i EditorJS onChange-callback
   const onAutoSaveRef = useRef(onAutoSave);
   const footerRef = useRef(footer);
 
@@ -71,7 +70,7 @@ export const useBrevEditorJs = (
         minHeight: 20,
         data: konverterHtmlToEditorJsFormat(redigerbartInnhold),
         holder: editorHolderId,
-        i18n: lagEditorJsI18n(intl),
+        i18n: lagEditorJsI18n(),
         onReady: async () => {
           new Undo({ editor });
 
@@ -79,7 +78,7 @@ export const useBrevEditorJs = (
           const innhold = await editor.save();
           refCurrentHtml.current = edjsHTML().parse(innhold);
         },
-        tools: getTools(intl),
+        tools: getTools(),
         onChange: () => {
           autoSaveDebouncer(validerOgAutoLagre);
         },
@@ -94,7 +93,7 @@ export const useBrevEditorJs = (
         refEditorJs.current.destroy();
       }
     };
-  }, []);  
+  }, []);
 
   const tilbakestillEndringer = async (opprinneligRedigerbartInnhold: string) => {
     const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
@@ -176,7 +175,7 @@ class CustomParagraph extends Paragraph {
   }
 }
 
-const getTools = (i18n: IntlShape): EditorConfig['tools'] => ({
+const getTools = (): EditorConfig['tools'] => ({
   paragraph: {
     class: CustomParagraph as unknown as ToolConstructable,
     inlineToolbar: ['bold'],
@@ -194,13 +193,13 @@ const getTools = (i18n: IntlShape): EditorConfig['tools'] => ({
     },
     toolbox: [
       {
-        title: i18n.formatMessage({ id: 'useBrevEditorJs.Heading1' }),
+        title: intl.formatMessage({ id: 'useBrevEditorJs.Heading1' }),
         data: {
           level: 1,
         },
       },
       {
-        title: i18n.formatMessage({ id: 'useBrevEditorJs.Heading2' }),
+        title: intl.formatMessage({ id: 'useBrevEditorJs.Heading2' }),
         data: {
           level: 2,
         },
@@ -224,37 +223,37 @@ const getTools = (i18n: IntlShape): EditorConfig['tools'] => ({
   },
 });
 
-const lagEditorJsI18n = (i18n: IntlShape): I18nConfig => ({
+const lagEditorJsI18n = (): I18nConfig => ({
   messages: {
     toolNames: {
-      Text: i18n.formatMessage({ id: 'useBrevEditorJs.Text' }),
-      Heading: i18n.formatMessage({ id: 'useBrevEditorJs.Heading' }),
-      'Unordered List': i18n.formatMessage({ id: 'useBrevEditorJs.UnorderedList' }),
+      Text: intl.formatMessage({ id: 'useBrevEditorJs.Text' }),
+      Heading: intl.formatMessage({ id: 'useBrevEditorJs.Heading' }),
+      'Unordered List': intl.formatMessage({ id: 'useBrevEditorJs.UnorderedList' }),
     },
     tools: {
       link: {
-        'Add a link': i18n.formatMessage({ id: 'useBrevEditorJs.AddALink' }),
+        'Add a link': intl.formatMessage({ id: 'useBrevEditorJs.AddALink' }),
       },
       List: {
-        Unordered: i18n.formatMessage({ id: 'useBrevEditorJs.Unordered' }),
+        Unordered: intl.formatMessage({ id: 'useBrevEditorJs.Unordered' }),
       },
     },
     ui: {
       popover: {
-        'Nothing found': i18n.formatMessage({ id: 'useBrevEditorJs.NothingFound' }),
-        'Convert to': i18n.formatMessage({ id: 'useBrevEditorJs.ConvertTo' }),
+        'Nothing found': intl.formatMessage({ id: 'useBrevEditorJs.NothingFound' }),
+        'Convert to': intl.formatMessage({ id: 'useBrevEditorJs.ConvertTo' }),
       },
     },
     blockTunes: {
       delete: {
-        Delete: i18n.formatMessage({ id: 'useBrevEditorJs.Delete' }),
-        'Click to delete': i18n.formatMessage({ id: 'useBrevEditorJs.KlikkForFjern' }),
+        Delete: intl.formatMessage({ id: 'useBrevEditorJs.Delete' }),
+        'Click to delete': intl.formatMessage({ id: 'useBrevEditorJs.KlikkForFjern' }),
       },
       moveUp: {
-        'Move up': i18n.formatMessage({ id: 'useBrevEditorJs.MoveUp' }),
+        'Move up': intl.formatMessage({ id: 'useBrevEditorJs.MoveUp' }),
       },
       moveDown: {
-        'Move down': i18n.formatMessage({ id: 'useBrevEditorJs.MoveDown' }),
+        'Move down': intl.formatMessage({ id: 'useBrevEditorJs.MoveDown' }),
       },
     },
   },

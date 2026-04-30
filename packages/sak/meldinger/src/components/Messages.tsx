@@ -239,6 +239,7 @@ export const Messages = ({
             }
           }}
           setVisRedigeringModal={setVisRedigeringModal}
+          isReadOnly={kanVeilede}
         />
       )}
     </>

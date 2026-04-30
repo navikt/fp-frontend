@@ -36,6 +36,8 @@ describe('BrevRedigeringModal', () => {
     await userEvent.click(screen.getByText('Forhåndsvis brev'));
 
     await waitFor(() => expect(forhåndsvisBrev).toHaveBeenCalledTimes(1));
-    expect(forhåndsvisBrev).toHaveBeenCalledWith(expect.any(String));
+    expect(forhåndsvisBrev).toHaveBeenCalledWith(
+      expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
+    );
   });
 });

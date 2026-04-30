@@ -19,8 +19,8 @@ const meta = {
     forhåndsvisBrev: action('forhåndsvisBrev'),
     opprinneligHtml: mal,
     redigertHtml: null,
+    isReadOnly: false,
   },
-  render: args => <BrevRedigeringModal {...args} />,
 } satisfies Meta<ComponentProps<typeof BrevRedigeringModal>>;
 export default meta;
 

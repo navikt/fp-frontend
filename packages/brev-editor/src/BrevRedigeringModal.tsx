@@ -26,7 +26,7 @@ interface Props {
   /** Kalles med ferdig HTML for forhåndsvisning */
   forhåndsvisBrev: (html: string) => void;
   setVisRedigeringModal: (vis: boolean) => void;
-  isReadOnly?: boolean;
+  isReadOnly: boolean;
 }
 
 /**
@@ -42,7 +42,7 @@ export const BrevRedigeringModal = ({
   mellomlagreOgHentPåNytt,
   forhåndsvisBrev,
   setVisRedigeringModal,
-  isReadOnly = false,
+  isReadOnly,
 }: Props) => {
   const [visTilbakestillAdvarselModal, setVisTilbakestillAdvarselModal] = useState(false);
   const [visValideringsFeil, setVisValideringsFeil] = useState(false);

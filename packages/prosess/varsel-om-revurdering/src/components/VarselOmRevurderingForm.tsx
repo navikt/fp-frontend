@@ -222,6 +222,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
             previewCallback({ dokumentMal: 'VARREV', fritekst: html });
           }}
           setVisRedigeringModal={setVisRedigeringModal}
+          isReadOnly={!erÅpentAksjonspunkt}
         />
       )}
       <SettPaVentModalIndex

@@ -1,4 +1,4 @@
-import { type ReactElement, useCallback, useState } from 'react';
+import { type ReactElement, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -88,19 +88,13 @@ export const MeldingIndex = ({
       }),
   });
 
-  const hentBrevHtmlStabil = useCallback(
-    (brevmalkode: string, årsak?: string) => hentBrevHtml({ brevmalkode, årsak }),
-    [hentBrevHtml],
-  );
+  const hentBrevHtmlStabil = (brevmalkode: string, årsak?: string) => hentBrevHtml({ brevmalkode, årsak });
 
-  const mellomlagreBrevStabil = useCallback(
-    (brevmalkode: string, html?: string) =>
-      mellomlagreBrev({
-        brevmalkode,
-        html,
-      }),
-    [mellomlagreBrev],
-  );
+  const mellomlagreBrevStabil = (brevmalkode: string, html?: string) =>
+    mellomlagreBrev({
+      brevmalkode,
+      html,
+    });
 
   const submitCallback = getSubmitCallback(
     setShowMessageModal,
