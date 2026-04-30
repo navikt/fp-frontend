@@ -1,7 +1,7 @@
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Label, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
@@ -9,12 +9,13 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import minMax from 'dayjs/plugin/minMax';
 
-import type { ArbeidsforholdFodselOgTilrettelegging, Permisjon } from '@navikt/fp-types';
+import type { BekreftTilrettelegging } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
+import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
-import { VelferdspermisjonPanel } from './velferdspermisjon/VelferdspermisjonPanel';
+import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTabell';
 
 dayjs.extend(minMax);
 
@@ -31,7 +32,7 @@ const validerTidligereEnn =
     if (tilretteleggingFomDato.isValid() && !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)) {
       return intl.formatMessage(
         {
-          id: 'TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn',
+          id: 'ArbeidsforholdPanel.TilretteleggingTidligereEnn',
         },
         {
           dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT),
@@ -41,18 +42,8 @@ const validerTidligereEnn =
     return null;
   };
 
-export const filtrerVelferdspermisjoner = (
-  velferdspermisjoner: Permisjon[],
-  tilretteleggingBehovFom: string,
-): Permisjon[] =>
-  velferdspermisjoner.filter(
-    permisjon =>
-      !dayjs(permisjon.permisjonFom).isAfter(tilretteleggingBehovFom) &&
-      (permisjon.permisjonTom === undefined || !dayjs(permisjon.permisjonTom).isBefore(tilretteleggingBehovFom)),
-  );
-
 interface Props {
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
+  arbeidsforhold: BekreftTilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   visInfoAlert: boolean;
@@ -70,15 +61,13 @@ export const ArbeidsforholdPanel = ({
 
   const { getValues, watch, setValue, control } = useFormContext<TilretteleggingFormValues>();
 
+  const termindato = watch('termindato');
   const tilretteleggingBehovFom = watch(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`);
 
   const filtrerteVelferdspermisjoner = filtrerVelferdspermisjoner(
     arbeidsforhold.velferdspermisjoner,
     tilretteleggingBehovFom,
   );
-
-  const termindato = watch('termindato');
-
   const harUavklartVelferdspermisjon = filtrerteVelferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined);
 
   const oppdaterOverstyrtUtbetalingsgrad = (velferdspermisjonprosent: number) => {
@@ -109,38 +98,33 @@ export const ArbeidsforholdPanel = ({
         name={`arbeidsforhold.${arbeidsforholdIndex}.skalBrukes`}
         control={control}
         readOnly={readOnly}
-        label={<FormattedMessage id="TilretteleggingForArbeidsgiverPanel.SkalHaSvpForArbeidsforhold" />}
+        label={<FormattedMessage id="ArbeidsforholdPanel.SkalHaSvpForArbeidsforhold" />}
       />
       <VStack gap="space-32">
         <RhfDatepicker
           name={`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`}
           control={control}
-          label={intl.formatMessage({
-            id: 'TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging',
-          })}
+          label={<FormattedMessage id="ArbeidsforholdPanel.DatoForTilrettelegging" />}
           validate={[required, hasValidDate, validerTidligereEnn(intl, getValues, tilretteleggingBehovFom)]}
           readOnly={readOnly}
         />
         {filtrerteVelferdspermisjoner.length > 0 && (
-          <VelferdspermisjonPanel
-            velferdspermisjoner={filtrerteVelferdspermisjoner}
+          <VelferdspermisjonTabell
+            filtrerteVelferdspermisjoner={filtrerteVelferdspermisjoner}
+            harUavklartVelferdspermisjon={harUavklartVelferdspermisjon}
             arbeidsforholdIndex={arbeidsforholdIndex}
             readOnly={readOnly}
             oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
           />
         )}
-        <VStack gap="space-8">
-          <Label size="small">
-            <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Perioder" />
-          </Label>
-          <TilretteleggingOgOppholdPerioderPanel
-            arbeidsforhold={arbeidsforhold}
-            arbeidsforholdIndex={arbeidsforholdIndex}
-            readOnly={readOnly || harUavklartVelferdspermisjon}
-            stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-            termindato={termindato}
-          />
-        </VStack>
+
+        <TilretteleggingOgOppholdPerioderPanel
+          arbeidsforhold={arbeidsforhold}
+          arbeidsforholdIndex={arbeidsforholdIndex}
+          readOnly={readOnly || harUavklartVelferdspermisjon}
+          stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+          termindato={termindato}
+        />
       </VStack>
     </VStack>
   );

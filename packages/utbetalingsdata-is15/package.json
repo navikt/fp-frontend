@@ -17,15 +17,15 @@
     "storybook": "storybook dev --quiet -p 7010"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.10.1",
-    "@navikt/ds-react": "8.10.1",
+    "@navikt/aksel-icons": "8.10.3",
+    "@navikt/ds-react": "8.10.3",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "7.1.1",
-    "@navikt/ft-utils": "4.1.1",
+    "@navikt/ft-ui-komponenter": "8.0.2",
+    "@navikt/ft-utils": "5.0.1",
     "dayjs": "1.11.20",
     "react": "19.2.5",
     "react-dom": "19.2.5",
-    "react-intl": "8.1.4"
+    "react-intl": "10.1.2"
   },
   "devDependencies": {
     "@formatjs/cli-lib": "8.5.2",
@@ -42,7 +42,7 @@
     "fast-glob": "3.3.3",
     "storybook": "10.3.5",
     "typescript": "6.0.2",
-    "vite": "8.0.8",
-    "vitest": "4.1.4"
+    "vite": "8.0.9",
+    "vitest": "4.1.5"
   }
 }

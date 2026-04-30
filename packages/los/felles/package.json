@@ -18,22 +18,22 @@
     "storybook": "storybook dev --quiet -p 7011"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.10.1",
-    "@navikt/ds-react": "8.10.1",
-    "@navikt/ds-tokens": "8.10.1",
+    "@navikt/aksel-icons": "8.10.3",
+    "@navikt/ds-react": "8.10.3",
+    "@navikt/ds-tokens": "8.10.3",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-form-hooks": "11.1.1",
-    "@navikt/ft-form-validators": "5.1.1",
-    "@navikt/ft-ui-komponenter": "7.1.1",
-    "@navikt/ft-utils": "4.1.1",
-    "@tanstack/react-query": "5.99.0",
+    "@navikt/ft-form-hooks": "12.0.2",
+    "@navikt/ft-form-validators": "6.0.1",
+    "@navikt/ft-ui-komponenter": "8.0.2",
+    "@navikt/ft-utils": "5.0.1",
+    "@tanstack/react-query": "5.99.2",
     "dayjs": "1.11.20",
     "echarts": "6.0.0",
-    "ky": "2.0.1",
+    "ky": "2.0.2",
     "react": "19.2.5",
     "react-dom": "19.2.5",
-    "react-hook-form": "7.72.1",
-    "react-intl": "8.1.4"
+    "react-hook-form": "7.73.1",
+    "react-intl": "10.1.2"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
@@ -47,12 +47,12 @@
     "@testing-library/user-event": "14.6.1",
     "@types/react": "19.2.14",
     "eslint": "10.2.0",
-    "msw": "2.13.3",
+    "msw": "2.13.4",
     "msw-storybook-addon": "2.0.7",
     "storybook": "10.3.5",
-    "stylelint": "17.7.0",
+    "stylelint": "17.8.0",
     "typescript": "6.0.2",
-    "vite": "8.0.8",
-    "vitest": "4.1.4"
+    "vite": "8.0.9",
+    "vitest": "4.1.5"
   }
 }

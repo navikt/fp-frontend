@@ -60,3 +60,26 @@ export const terminErRundtFodselsdato = (fodselsdato: string | undefined, termin
   if (senesteTermin.isSameOrBefore(termin)) return intl.formatMessage({ id: 'ValidationMessage.ForSenTermin' });
   return null;
 };
+
+// Speiler backend-validering i fpsak (FaktaFødselTjeneste / FamilieHendelseTjeneste.intervallForTermindato):
+// Fødselsdato må ligge i intervallet [termindato - 19 uker, termindato + 6 uker].
+// Hvis denne grensen brytes kaster backend FunksjonellException FP-076346 «For stort avvik termin/fødsel».
+const MAKS_UKER_FØDSEL_FØR_TERMIN = 19;
+const MAKS_UKER_FØDSEL_ETTER_TERMIN = 6;
+
+export const fødselErINærhetenAvTermin = (fødselsdato: string | undefined, termindato: string | undefined) => {
+  const fødsel = fødselsdato ? dayjs(fødselsdato, ISO_DATE_FORMAT) : undefined;
+  const termin = termindato ? dayjs(termindato, ISO_DATE_FORMAT) : undefined;
+
+  if (!fødsel?.isValid() || !termin?.isValid()) {
+    return null;
+  }
+
+  const tidligsteFødsel = termin.subtract(MAKS_UKER_FØDSEL_FØR_TERMIN, 'weeks');
+  const senesteFødsel = termin.add(MAKS_UKER_FØDSEL_ETTER_TERMIN, 'weeks');
+
+  if (fødsel.isBefore(tidligsteFødsel) || fødsel.isAfter(senesteFødsel)) {
+    return intl.formatMessage({ id: 'ValidationMessage.ForStortAvvikTerminFødsel' });
+  }
+  return null;
+};

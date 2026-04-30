@@ -6,12 +6,7 @@ import { Buildings3Icon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-i
 import { BodyShort, ExpansionCard, Heading, HStack, Tag } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
-import type {
-  Arbeidsforhold,
-  ArbeidsforholdFodselOgTilrettelegging,
-  ArbeidsgiverOpplysningerPerId,
-  KodeverkMedNavn,
-} from '@navikt/fp-types';
+import { type Arbeidsforhold, type ArbeidsgiverOpplysningerPerId, type KodeverkMedNavn } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { ArbeidsforholdPanel } from './ArbeidsforholdPanel';
@@ -53,29 +48,29 @@ const finnStillingsprosent = (aoiArbeidsforhold: Arbeidsforhold[], tilretteleggi
 
 interface Props {
   readOnly: boolean;
-  sorterteArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
   aoiArbeidsforhold: Arbeidsforhold[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttakArbeidTyper: KodeverkMedNavn<'UttakArbeidType'>[];
 }
 
 export const ArbeidsforholdFieldArray = ({
-  sorterteArbeidsforhold,
   aoiArbeidsforhold,
   arbeidsgiverOpplysningerPerId,
   readOnly,
   uttakArbeidTyper,
 }: Props) => {
-  const { control } = useFormContext<TilretteleggingFormValues>();
+  const { control, watch } = useFormContext<TilretteleggingFormValues>();
   const { fields } = useFieldArray({
     control,
     name: 'arbeidsforhold',
   });
 
+  const arbeidsforholdListe = watch('arbeidsforhold');
+
   return (
     <>
       {fields.map((field, index: number) => {
-        const arbeidsforhold = sorterteArbeidsforhold[index];
+        const arbeidsforhold = arbeidsforholdListe[index];
 
         if (!arbeidsforhold) {
           return null;
@@ -94,7 +89,7 @@ export const ArbeidsforholdFieldArray = ({
           : alleIafAf.length > 0 &&
             alleIafAf.every(a => !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, a.fom, a.tom));
 
-        const stillingsprosentArbeidsforhold = af
+        const stillingsprosent = af
           ? af.stillingsprosent
           : finnStillingsprosent(alleIafAf, arbeidsforhold.tilretteleggingBehovFom);
 
@@ -104,38 +99,33 @@ export const ArbeidsforholdFieldArray = ({
           <React.Fragment key={field.id}>
             <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles['card']}>
               <ExpansionCard.Header className={styles['cardHeader']}>
-                <div className={styles['padding']}>
-                  <HStack gap="space-56" align="center">
-                    <HStack gap="space-16" align="center">
-                      <Buildings3Icon color="var(--ax-accent-700)" className={styles['image']} />
-                      <Heading size="small" level="3">
-                        {arbeidsgiverOpplysning?.navn ?? arbeidType?.navn}
-                      </Heading>
-                      {arbeidsgiverOpplysning?.identifikator && (
-                        <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
-                      )}
-                      {arbeidsforhold.eksternArbeidsforholdReferanse && (
-                        <BodyShort size="small">
-                          {getEndCharFromId(arbeidsforhold.eksternArbeidsforholdReferanse)}
-                        </BodyShort>
-                      )}
-                    </HStack>
-                    <HStack gap="space-16" align="center">
-                      <Tag data-color="neutral" size="small" variant="moderate">
-                        <FormattedMessage
-                          id="ArbeidsforholdFieldArray.Stillingsprosent"
-                          values={{ stillingsprosent: stillingsprosentArbeidsforhold }}
-                        />
-                      </Tag>
-                      <Tag data-color="neutral" size="small" variant="moderate">
-                        {finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)}
-                      </Tag>
-                      {arbeidsforhold.skalBrukes && visInfoAlert && (
-                        <ExclamationmarkTriangleFillIcon color="var(--ax-warning-700)" className={styles['image']} />
-                      )}
-                    </HStack>
+                <HStack gap="space-8 space-56" align="center" paddingBlock="space-8">
+                  <HStack gap="space-16" align="center">
+                    <Buildings3Icon color="var(--ax-accent-700)" fontSize="1.5rem" />
+                    <Heading size="small" level="3">
+                      {arbeidsgiverOpplysning?.navn ?? arbeidType?.navn}
+                    </Heading>
+                    {arbeidsgiverOpplysning?.identifikator && (
+                      <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
+                    )}
+                    {arbeidsforhold.eksternArbeidsforholdReferanse && (
+                      <BodyShort size="small">
+                        {getEndCharFromId(arbeidsforhold.eksternArbeidsforholdReferanse)}
+                      </BodyShort>
+                    )}
                   </HStack>
-                </div>
+                  <HStack gap="space-16" align="center">
+                    <Tag data-color="neutral" size="small" variant="moderate">
+                      <FormattedMessage id="ArbeidsforholdFieldArray.Stillingsprosent" values={{ stillingsprosent }} />
+                    </Tag>
+                    <Tag data-color="neutral" size="small" variant="moderate">
+                      {finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)}
+                    </Tag>
+                    {arbeidsforhold.skalBrukes && visInfoAlert && (
+                      <ExclamationmarkTriangleFillIcon color="var(--ax-warning-700)" fontSize="1.5rem" />
+                    )}
+                  </HStack>
+                </HStack>
               </ExpansionCard.Header>
               <ExpansionCard.Content>
                 <ArbeidsforholdPanel
@@ -143,7 +133,7 @@ export const ArbeidsforholdFieldArray = ({
                   arbeidsforholdIndex={index}
                   readOnly={readOnly}
                   visInfoAlert={arbeidsforhold.skalBrukes && visInfoAlert}
-                  stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold ?? 0}
+                  stillingsprosentArbeidsforhold={stillingsprosent ?? 0}
                 />
               </ExpansionCard.Content>
             </ExpansionCard>

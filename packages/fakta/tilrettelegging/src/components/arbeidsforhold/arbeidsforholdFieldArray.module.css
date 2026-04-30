@@ -5,12 +5,3 @@
 .cardHeader {
   background-color: var(--ax-neutral-300);
 }
-
-.padding {
-  padding-top: 10px;
-}
-
-.image {
-  height: 25px;
-  width: 25px;
-}

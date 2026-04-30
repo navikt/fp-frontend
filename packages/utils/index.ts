@@ -14,6 +14,7 @@ export {
   maxTerminbekreftelseDato,
   terminBekreftelseBeforeTodayOrTermindato,
   terminErRundtFodselsdato,
+  fødselErINærhetenAvTermin,
   dødsdatoAfterOrEqualFødselsdato,
   validateMinAntallBarn,
   validateMaxAntallBarn,

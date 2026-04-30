@@ -9,6 +9,33 @@ import * as stories from './VergeFaktaIndex.stories';
 const { Default } = composeStories(stories);
 
 describe('VergeFaktaIndex', () => {
+  it('skal trimme trailing whitespace fra organisasjonsnummer ved innsending', async () => {
+    const lagre = vi.fn();
+
+    render(<Default submitCallback={lagre} />);
+
+    await userEvent.selectOptions(screen.getByLabelText('Type verge'), 'ADVOKAT');
+
+    await userEvent.type(screen.getByLabelText('Navn'), 'Espen Utvikler');
+
+    // Simulerer copy-paste med trailing space
+    await userEvent.type(screen.getByLabelText('Organisasjonsnummer'), '232232323 ');
+
+    const fomInput = screen.getByLabelText('Fra og med');
+    await userEvent.type(fomInput, '14.09.2022');
+    fireEvent.blur(fomInput);
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(lagre).toHaveBeenCalledWith(
+      expect.objectContaining({
+        organisasjonsnummer: '232232323', // skal være trimmet
+      }),
+    );
+  });
+
   it('skal velge vergetype og bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn();
 
