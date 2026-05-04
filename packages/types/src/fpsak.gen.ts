@@ -1611,7 +1611,7 @@ export type tjenester_behandling_svp_BekreftSvangerskapspengerDto = {
   begrunnelse?: string;
   bekreftetSvpArbeidsforholdList?: Array<tjenester_behandling_svp_BekreftTilrettelegging>;
   fødselsdato?: string;
-  termindato?: string;
+  termindato: string;
 };
 
 export type tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto = {
@@ -1626,6 +1626,7 @@ export type tjenester_behandling_svp_BekreftTilrettelegging = {
   eksternArbeidsforholdReferanse?: string;
   internArbeidsforholdReferanse?: string;
   kanTilrettelegges: boolean;
+  representererFAISU?: boolean;
   skalBrukes: boolean;
   stillingsprosentStartTilrettelegging?: number;
   tilretteleggingBehovFom: string;
@@ -4269,8 +4270,10 @@ export type tjenester_behandling_svp_SvpArbeidsforholdDto = {
   avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
   begrunnelse?: string;
   eksternArbeidsforholdReferanse?: string;
+  harFlereArbeidsforholdUnderSammeVirksomhet?: boolean;
   internArbeidsforholdReferanse?: string;
   kanTilrettelegges: boolean;
+  representererFAISU?: boolean;
   skalBrukes: boolean;
   stillingsprosentStartTilrettelegging?: number;
   tilretteleggingBehovFom: string;
