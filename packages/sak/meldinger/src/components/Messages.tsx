@@ -273,7 +273,7 @@ const getfiltrerteRevurderingVarslingArsaker = (
 const buildInitialValues = (behandling: FagsakBehandlingDto): FormValues => {
   const initialValues = {
     brevmalkode: (behandling.brevmaler[0]?.kode as DokumentMalType | DokumentMalTypeFpTilbake | undefined) ?? undefined,
-    fritekst: '',
+    fritekst: undefined,
   };
 
   if ('ugunstAksjonspunkt' in behandling && behandling.ugunstAksjonspunkt) {
