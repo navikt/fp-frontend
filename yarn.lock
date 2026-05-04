@@ -1657,7 +1657,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     react-router-dom: "npm:7.14.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -1711,7 +1711,7 @@ __metadata:
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
     tailwindcss: "npm:4.2.4"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -1731,7 +1731,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:7.1.1"
     eslint-plugin-simple-import-sort: "npm:13.0.0"
     globals: "npm:17.5.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     typescript-eslint: "npm:8.59.0"
   peerDependencies:
     eslint: 10.2.0
@@ -1760,7 +1760,7 @@ __metadata:
     rollup: "npm:4.60.2"
     rollup-plugin-sourcemaps: "npm:0.6.3"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vite-plugin-compression2: "npm:2.5.3"
     vitest: "npm:4.1.5"
@@ -1802,7 +1802,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -1833,7 +1833,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -1871,7 +1871,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -1910,7 +1910,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -1950,7 +1950,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -1984,7 +1984,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2023,7 +2023,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2061,7 +2061,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2098,7 +2098,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2138,7 +2138,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2175,7 +2175,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2214,7 +2214,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2253,7 +2253,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2294,7 +2294,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2333,7 +2333,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2373,7 +2373,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2413,7 +2413,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2452,7 +2452,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2479,7 +2479,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2605,7 +2605,7 @@ __metadata:
     react-router-dom: "npm:7.14.2"
     storybook: "npm:10.3.5"
     tailwindcss: "npm:4.2.4"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2653,7 +2653,7 @@ __metadata:
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
     tailwindcss: "npm:4.2.4"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2666,7 +2666,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     eslint: "npm:10.2.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
 
@@ -2678,7 +2678,7 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     eslint: "npm:10.2.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
 
@@ -2717,7 +2717,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2757,7 +2757,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2791,7 +2791,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2827,7 +2827,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2860,7 +2860,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     react-router-dom: "npm:7.14.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
   languageName: unknown
   linkType: soft
@@ -2888,7 +2888,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2917,7 +2917,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2946,7 +2946,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -2976,7 +2976,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3005,7 +3005,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
 
@@ -3042,7 +3042,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3082,7 +3082,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3121,7 +3121,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3160,7 +3160,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3199,7 +3199,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3232,7 +3232,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3272,7 +3272,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3311,7 +3311,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3350,7 +3350,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3383,7 +3383,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3433,7 +3433,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3470,7 +3470,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3508,7 +3508,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3547,7 +3547,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3584,7 +3584,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3621,7 +3621,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3658,7 +3658,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3690,7 +3690,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3722,7 +3722,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3754,7 +3754,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3786,7 +3786,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3817,7 +3817,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     react-responsive: "npm:10.0.1"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3850,7 +3850,7 @@ __metadata:
     react-router-dom: "npm:7.14.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3877,7 +3877,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3912,7 +3912,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3941,7 +3941,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -3974,7 +3974,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4008,7 +4008,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4037,7 +4037,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4072,7 +4072,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4101,7 +4101,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4136,7 +4136,7 @@ __metadata:
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4170,7 +4170,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4207,7 +4207,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4242,7 +4242,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4283,7 +4283,7 @@ __metadata:
     react-router-dom: "npm:7.14.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4309,7 +4309,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4339,7 +4339,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
     stylelint: "npm:17.8.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4367,7 +4367,7 @@ __metadata:
     react-intl: "npm:10.1.2"
     react-router-dom: "npm:7.14.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
 
@@ -4400,7 +4400,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-hook-form: "npm:7.73.1"
     react-intl: "npm:10.1.2"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
 
@@ -4412,7 +4412,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     eslint: "npm:10.2.0"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
 
@@ -4429,7 +4429,7 @@ __metadata:
     eslint: "npm:10.2.0"
     react: "npm:19.2.5"
     react-dom: "npm:19.2.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
 
@@ -4459,7 +4459,7 @@ __metadata:
     react-dom: "npm:19.2.5"
     react-intl: "npm:10.1.2"
     storybook: "npm:10.3.5"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vite: "npm:8.0.9"
     vitest: "npm:4.1.5"
   languageName: unknown
@@ -4475,7 +4475,7 @@ __metadata:
     eslint: "npm:10.2.0"
     react: "npm:19.2.5"
     react-intl: "npm:10.1.2"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
 
@@ -4497,7 +4497,7 @@ __metadata:
     eslint: "npm:10.2.0"
     react: "npm:19.2.5"
     react-intl: "npm:10.1.2"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
     vitest: "npm:4.1.5"
   languageName: unknown
   linkType: soft
@@ -9146,7 +9146,7 @@ __metadata:
     stylelint: "npm:17.8.0"
     stylelint-order: "npm:8.1.1"
     turbo: "npm:2.9.6"
-    typescript: "npm:6.0.2"
+    typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
 
@@ -13193,7 +13193,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:6.0.2, typescript@npm:^5.6 || 6":
+"typescript@npm:6.0.3":
+  version: 6.0.3
+  resolution: "typescript@npm:6.0.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10/0ef2357a4cffd916b52b683a021cdab0f81eea4e9aa35f2d254581c9a5106da02224e3392e1b0ed42b7a48f80c966e5f52b8e1a27941fa0523c1705a9c2e0330
+  languageName: node
+  linkType: hard
+
+"typescript@npm:^5.6 || 6":
   version: 6.0.2
   resolution: "typescript@npm:6.0.2"
   bin:
@@ -13203,7 +13213,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A6.0.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.6 || 6#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>":
+  version: 6.0.3
+  resolution: "typescript@patch:typescript@npm%3A6.0.3#optional!builtin<compat/typescript>::version=6.0.3&hash=5786d5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10/22b67a18dafedf9b1468b64ca20d9aa02ea61d449b65413d8aa6552aeb63f52ef369e86beb25b6b4c91a803d9726ee5c196f391a9b64201263263410a4223ee6
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^5.6 || 6#optional!builtin<compat/typescript>":
   version: 6.0.2
   resolution: "typescript@patch:typescript@npm%3A6.0.2#optional!builtin<compat/typescript>::version=6.0.2&hash=5786d5"
   bin:

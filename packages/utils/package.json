@@ -31,7 +31,7 @@
     "@navikt/fp-config-vite": "workspace:*",
     "@types/react": "19.2.14",
     "eslint": "10.2.0",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "vitest": "4.1.5"
   }
 }
