@@ -53,6 +53,9 @@ export const TilretteleggingFaktaForm = ({
   const skalVurdereVelferdspermisjoner = harUvurderteVelferdspermisjoner(
     svangerskapspengerTilrettelegging.arbeidsforholdListe,
   );
+  const harFAISU = svangerskapspengerTilrettelegging.arbeidsforholdListe.some(
+    af => af.skalVurdereSplittAvArbeidsforholdet,
+  );
 
   const onSubmit = (values: TilretteleggingFormValues) => {
     return submitCallback(transformValues(values));
@@ -68,6 +71,7 @@ export const TilretteleggingFaktaForm = ({
             ) : (
               <FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" />
             )}
+            {harFAISU && <FormattedMessage id="TilretteleggingFaktaForm.AksjonpunktFAISU" />}
           </AksjonspunktHelpTextHTML>
         )}
         <HStack gap="space-16">

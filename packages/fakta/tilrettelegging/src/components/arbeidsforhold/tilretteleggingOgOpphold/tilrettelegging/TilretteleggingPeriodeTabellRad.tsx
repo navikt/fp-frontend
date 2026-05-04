@@ -139,7 +139,7 @@ const TilretteleggingType = ({
   return tilrettelegging.fom ? (
     <FormattedMessage id="TilretteleggingPeriodeTabellRad.SVPprosent" values={{ prosent: prosent ?? '0' }} />
   ) : (
-    <FormattedMessage id="TilretteleggingPeriodeTabellRad.Tilrettelegging" />
+    <FormattedMessage id="TilretteleggingPeriodeTabellRad.IkkeSatt" />
   );
 };
 

@@ -94,22 +94,23 @@ export const VelferdspermisjonForm = ({
             </Radio>
           </HStack>
         </RhfRadioGroup>
+
         {erGyldig && velferdspermisjon.permisjonsprosent === 100 && (
           <Alert variant="info" size="small" className="self-start">
             <FormattedMessage id="VelferdspermisjonForm.Permisjon100ProsentOgGyldig" />
           </Alert>
         )}
-        <div>
-          <Button
-            size="small"
-            variant="primary"
-            type="button"
-            disabled={!formMethods.formState.isDirty || false}
-            onClick={formMethods.handleSubmit(lagreForm)}
-          >
-            <FormattedMessage id="VelferdspermisjonForm.Oppdater" />
-          </Button>
-        </div>
+
+        <Button
+          size="small"
+          variant="primary"
+          type="button"
+          disabled={!formMethods.formState.isDirty || false}
+          onClick={formMethods.handleSubmit(lagreForm)}
+          className="self-start"
+        >
+          <FormattedMessage id="VelferdspermisjonForm.Oppdater" />
+        </Button>
       </VStack>
     </FormProvider>
   );

@@ -112,7 +112,7 @@ export const OppholdPeriodeTabellRad = ({
 
 const OppholdType = ({ opphold }: { opphold: Partial<SvpAvklartOppholdPeriode> }) => {
   if (opphold.oppholdÅrsak === undefined) {
-    return <FormattedMessage id="OppholdPeriodeTabellRad.Opphold" />;
+    return <FormattedMessage id="OppholdPeriodeTabellRad.IkkeSatt" />;
   }
 
   return opphold.oppholdÅrsak === 'FERIE' ? (

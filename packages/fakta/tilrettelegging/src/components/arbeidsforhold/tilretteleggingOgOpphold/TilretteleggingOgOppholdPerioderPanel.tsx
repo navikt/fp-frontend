@@ -81,12 +81,12 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
     });
   };
 
-  const fjernTilrettelegging = (fomDato?: string) => {
+  const slettTilrettelegging = (fomDato?: string) => {
     removeTilrettelegging(
       fomDato ? tilretteleggingDatoer.findIndex(t => t.fom === fomDato) : tilretteleggingDatoer.length - 1,
     );
   };
-  const fjernOpphold = (opphold?: SvpAvklartOppholdPeriode) => {
+  const slettOpphold = (opphold?: SvpAvklartOppholdPeriode) => {
     removeOpphold(
       opphold
         ? avklarteOppholdPerioder.findIndex(
@@ -100,7 +100,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
 
   return (
     <>
-      <Table size="small">
+      <Table size="small" width="fit-content">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell colSpan={3} textSize="small">
@@ -126,12 +126,12 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                 <TilretteleggingPeriodeTabellRad
                   key={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
                   navn={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
-                  tilrettelegging={rad}
-                  disabled={disabled}
-                  readOnly={readOnly}
                   index={arbeidsforholdIndex + tilretteleggingIndex}
+                  tilrettelegging={rad}
+                  readOnly={readOnly}
+                  disabled={disabled}
                   openRad={rad.fom === ''}
-                  fjernTilrettelegging={fjernTilrettelegging}
+                  fjernTilrettelegging={slettTilrettelegging}
                   setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                   stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
                   arbeidsforhold={arbeidsforhold}
@@ -153,7 +153,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                 disabled={disabled}
                 index={arbeidsforholdIndex + oppholdIndex}
                 openRad={rad.fom === ''}
-                fjernOpphold={fjernOpphold}
+                fjernOpphold={slettOpphold}
                 setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                 arbeidsforhold={arbeidsforhold}
                 termindato={termindato}
@@ -162,7 +162,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
           })}
         </Table.Body>
       </Table>
-      {!readOnly && (
+      {!(readOnly || disabled) && !arbeidsforhold.arbeidsforholdetErSplittet && (
         <HStack gap="space-16">
           <Button
             size="small"

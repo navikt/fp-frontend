@@ -1,6 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { expect } from 'vitest';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -52,7 +53,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Ja'));
 
-    await userEvent.click(screen.getAllByText('Oppdater')[0]!);
+    await userEvent.click(screen.getByText('Oppdater'));
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -122,7 +123,7 @@ describe('TilretteleggingFaktaIndex', () => {
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Skal ha svangerskapspenger for arbeidsforholdet'));
+    await userEvent.click(screen.getByLabelText('Skal ha svangerskapspenger for arbeidsforholdet'));
 
     await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
@@ -137,7 +138,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
+    await userEvent.click(screen.getByRole('button', { name: 'Periode med svangerskapspenger' }));
 
     await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
@@ -151,7 +152,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Opphold'));
+    await userEvent.click(screen.getByRole('button', { name: 'Opphold' }));
 
     await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
@@ -247,12 +248,12 @@ describe('TilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Ja'));
     await userEvent.click(screen.getByText('Oppdater'));
 
-    await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
+    await userEvent.click(screen.getByRole('button', { name: 'Periode med svangerskapspenger' }));
 
-    expect(await screen.findByText('Ikke satt')).toBeInTheDocument();
-    expect(screen.getByText('Tilrettelegging')).toBeInTheDocument();
+    expect(await screen.findAllByText('Ikke satt')).toHaveLength(2);
     expect(screen.getByText('Saksbehandler')).toBeInTheDocument();
-    expect(screen.getByText('Legg til ny periode')).toBeInTheDocument();
+
+    expect(screen.getByRole('button', { name: 'Legg til ny periode' })).toBeInTheDocument();
     expect(screen.getAllByText('Avbryt')).toHaveLength(3);
 
     await userEvent.click(screen.getAllByText('Arbeidstakeren kan fortsette med redusert arbeidstid')[2]!);
@@ -300,10 +301,9 @@ describe('TilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Ja'));
     await userEvent.click(screen.getByText('Oppdater'));
 
-    await userEvent.click(screen.getByText('Opphold'));
+    await userEvent.click(screen.getByRole('button', { name: 'Opphold' }));
 
-    expect(await screen.findByText('Ikke satt')).toBeInTheDocument();
-    expect(screen.getAllByText('Opphold')).toHaveLength(2);
+    expect(await screen.findAllByText('Ikke satt')).toHaveLength(2);
     expect(screen.getByText('Saksbehandler')).toBeInTheDocument();
     expect(screen.getByText('Legg til ny periode')).toBeInTheDocument();
     expect(screen.getAllByText('Avbryt')).toHaveLength(3);
@@ -513,7 +513,7 @@ describe('TilretteleggingFaktaIndex', () => {
       ),
     ).toHaveLength(1);
 
-    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]!);
+    await userEvent.click(screen.getAllByLabelText('Skal ha svangerskapspenger for arbeidsforholdet')[0]!);
 
     expect(await screen.findByText('Skal ikke ha svangerskapspenger')).toBeInTheDocument();
   });

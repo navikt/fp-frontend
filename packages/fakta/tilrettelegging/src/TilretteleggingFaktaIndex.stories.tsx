@@ -20,7 +20,7 @@ import {
 
 import { TilretteleggingFaktaIndex } from './TilretteleggingFaktaIndex';
 
-const TILRETTELEGGING_PERMISJON = {
+const TILRETTELEGGING_PERMISJON: SvpTilrettelegging = {
   termindato: '2020-11-06',
   arbeidsforholdListe: [
     {
@@ -72,9 +72,9 @@ const TILRETTELEGGING_PERMISJON = {
     },
   ],
   saksbehandlet: true,
-} satisfies SvpTilrettelegging;
+};
 
-const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
+const TILRETTELEGGING_MED_100_PROSENT_PERMISJON: SvpTilrettelegging = {
   termindato: '2020-11-06',
   arbeidsforholdListe: [
     {
@@ -129,9 +129,9 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
     },
   ],
   saksbehandlet: true,
-} satisfies SvpTilrettelegging;
+};
 
-const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
+const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER: SvpTilrettelegging = {
   termindato: '2020-02-27',
   saksbehandlet: false,
   arbeidsforholdListe: [
@@ -180,7 +180,7 @@ const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
   ] satisfies SvpArbeidsforholdDto[],
 };
 
-const DEFAULT_ARBEID_OG_INNTEKT = {
+const DEFAULT_ARBEID_OG_INNTEKT: ArbeidOgInntektsmelding = {
   arbeidsforhold: [
     {
       arbeidsgiverIdent: '1',
@@ -194,9 +194,9 @@ const DEFAULT_ARBEID_OG_INNTEKT = {
   inntektsmeldinger: [],
   inntekter: [],
   skjæringstidspunkt: '',
-} satisfies ArbeidOgInntektsmelding;
+};
 
-const SPESIELL_ARBEID_OG_INNTEKT = {
+const SPESIELL_ARBEID_OG_INNTEKT: ArbeidOgInntektsmelding = {
   inntektsmeldinger: [
     {
       arbeidsgiverIdent: '999999999',
@@ -227,7 +227,7 @@ const SPESIELL_ARBEID_OG_INNTEKT = {
   ],
   inntekter: [],
   skjæringstidspunkt: '',
-} satisfies ArbeidOgInntektsmelding;
+};
 
 const ARBEIDSGIVEROPPLYSNINGER_PER_ID: ArbeidsgiverOpplysningerPerId = {
   1: lagArbeidsgiver('1', 'Frilanser, samlet aktivitet'),
@@ -448,6 +448,64 @@ export const ErRevurdering: Story = {
           skalVurdereSplittAvArbeidsforholdet: false,
         },
       ],
+    },
+    arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
+  },
+};
+
+export const KanSplittes: Story = {
+  args: {
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
+    svangerskapspengerTilrettelegging: {
+      termindato: '2020-11-06',
+      arbeidsforholdListe: [
+        {
+          tilretteleggingId: 1116961,
+          tilretteleggingBehovFom: '2020-03-17',
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-03-17',
+              type: 'DELVIS_TILRETTELEGGING',
+              mottattDato: '2020-02-20',
+              kilde: 'SØKNAD',
+              stillingsprosent: 50,
+            },
+            {
+              fom: '2020-08-15',
+              type: 'HEL_TILRETTELEGGING',
+              mottattDato: '2020-02-20',
+              kilde: 'SØKNAD',
+            },
+          ],
+          arbeidsgiverReferanse: '999999999',
+          uttakArbeidType: 'ORDINÆRT_ARBEID',
+          skalBrukes: true,
+          kanTilrettelegges: true,
+          velferdspermisjoner: [
+            {
+              permisjonFom: '2020-02-17',
+              permisjonTom: '2020-07-12',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+            {
+              permisjonFom: '2019-08-06',
+              permisjonTom: '2019-08-06',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+            {
+              permisjonFom: '2019-10-03',
+              permisjonTom: '2019-10-03',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+          ],
+          avklarteOppholdPerioder: [],
+          stillingsprosentStartTilrettelegging: 100,
+        },
+      ],
+      saksbehandlet: true,
     },
     arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
   },

@@ -132,6 +132,10 @@ export const OppholdForm = ({
 
   const forVisning = readOnly || opphold.oppholdKilde === 'INNTEKTSMELDING';
 
+  /*
+  const minDato = førsteDatoForTilrettelegging(alleTilrettelegginger);
+  const maksDato = treUkerFørTermindato(termindato);
+  */
   return (
     <FormProvider {...formMethods}>
       <VStack gap="space-16" paddingBlock="space-8">
@@ -140,19 +144,22 @@ export const OppholdForm = ({
             name={`${index}.fom`}
             control={formMethods.control}
             label={<FormattedMessage id="OppholdForm.FraOgMed" />}
+            readOnly={forVisning}
+            disabled={disabled}
             validate={[
               required,
               hasValidDate,
               validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold, formMethods.getValues, index),
               validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
             ]}
-            readOnly={forVisning}
-            disabled={disabled}
+
           />
           <RhfDatepicker
             name={`${index}.tom`}
             control={formMethods.control}
             label={<FormattedMessage id="OppholdForm.TilOgMed" />}
+            readOnly={forVisning}
+            disabled={disabled}
             validate={[
               required,
               hasValidDate,
@@ -160,8 +167,6 @@ export const OppholdForm = ({
               validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
               validerAtPeriodeIkkeOverlapper(formMethods.getValues, index, opphold, alleOpphold),
             ]}
-            readOnly={forVisning}
-            disabled={disabled}
           />
         </HStack>
         <RhfRadioGroup

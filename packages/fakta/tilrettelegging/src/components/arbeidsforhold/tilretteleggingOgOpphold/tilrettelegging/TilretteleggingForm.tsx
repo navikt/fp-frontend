@@ -5,7 +5,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Button, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
-import dayjs from 'dayjs';
+import dayjs, { type Dayjs } from 'dayjs';
 
 import type { SvpArbeidsforholdDto, SvpAvklartOppholdPeriode, SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -37,16 +37,17 @@ const validerAtDatoErUnik =
       : null;
   };
 
-const validerAtPeriodeErGyldig =
-  (intl: IntlShape, tilretteleggingBehovFom: string, termindato: string) => (dato?: string) => {
-    if (dayjs(dato).isAfter(dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day'))) {
-      return intl.formatMessage({ id: 'TilretteleggingForm.EtterTermindato' });
-    }
-    if (dayjs(dato).isBefore(tilretteleggingBehovFom)) {
-      return intl.formatMessage({ id: 'TilretteleggingForm.ForForsteDato' });
-    }
-    return null;
-  };
+const treUkerFørTermindato = (termindato: string) => dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day');
+
+const validerAtPeriodeErGyldig = (intl: IntlShape, minDato: Dayjs, maksDato: Dayjs) => (dato?: string) => {
+  if (dayjs(dato).isAfter(maksDato)) {
+    return intl.formatMessage({ id: 'TilretteleggingForm.EtterTermindato' });
+  }
+  if (dayjs(dato).isBefore(minDato)) {
+    return intl.formatMessage({ id: 'TilretteleggingForm.ForForsteDato' });
+  }
+  return null;
+};
 
 export const finnVelferdspermisjonprosent = (arbeidsforhold: SvpArbeidsforholdDto): number =>
   arbeidsforhold.velferdspermisjoner
@@ -78,18 +79,17 @@ export const finnProsentSvangerskapspenger = (
     return tilrettelegging.overstyrtUtbetalingsgrad;
   }
 
-  return tilrettelegging.type === 'INGEN_TILRETTELEGGING'
-    ? 100
-    : finnUtbetalingsgradForTilrettelegging(
-        stillingsprosentArbeidsforhold,
-        velferdspermisjonprosent,
-        // Har alltid stillingsprosent her. Bør fikse sjekk mot type så || 0 er unødvendig
-        tilrettelegging.stillingsprosent ?? 0,
-      );
-};
+  if (tilrettelegging.type === 'INGEN_TILRETTELEGGING') {
+    return 100;
+  }
 
-const sjekkOmTomDatoErTreUkerFørTermin = (termindato: string, tom?: string): boolean =>
-  dayjs(termindato).subtract(3, 'week').subtract(1, 'day').isSame(dayjs(tom));
+  return finnUtbetalingsgradForTilrettelegging(
+    stillingsprosentArbeidsforhold,
+    velferdspermisjonprosent,
+    // Har alltid stillingsprosent her. Bør fikse sjekk mot type så || 0 er unødvendig
+    tilrettelegging.stillingsprosent ?? 0,
+  );
+};
 
 interface Props {
   tilrettelegging: SvpTilretteleggingDatoDto;
@@ -119,8 +119,6 @@ export const TilretteleggingForm = ({
   const intl = useIntl();
 
   const erNyPeriode = !tilrettelegging.fom;
-
-  const erTomDatoTreUkerFørTermin = sjekkOmTomDatoErTreUkerFørTermin(termindato, tomDatoForTilrettelegging);
 
   const velferdspermisjonprosent = finnVelferdspermisjonprosent(arbeidsforhold);
 
@@ -187,6 +185,9 @@ export const TilretteleggingForm = ({
     formMethods.reset();
   };
 
+  const minDato = dayjs(arbeidsforhold.tilretteleggingBehovFom);
+  const maksDato = treUkerFørTermindato(termindato);
+
   return (
     <FormProvider {...formMethods}>
       <VStack gap="space-16" paddingBlock="space-8">
@@ -194,11 +195,12 @@ export const TilretteleggingForm = ({
           <TilretteleggingInfoPanel
             tilrettelegging={formValues}
             termindato={termindato}
-            erTomDatoTreUkerFørTermin={erTomDatoTreUkerFørTermin}
             stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-            tomDato={tomDatoForTilrettelegging}
+            tomDatoForTilrettelegging={tomDatoForTilrettelegging}
+            arbeidsforholdErSplittet={arbeidsforhold.arbeidsforholdetErSplittet}
           />
         )}
+
         <RhfDatepicker
           name={`${index}.fom`}
           control={formMethods.control}
@@ -212,11 +214,14 @@ export const TilretteleggingForm = ({
               arbeidsforhold.avklarteOppholdPerioder,
               tilrettelegging,
             ),
-            validerAtPeriodeErGyldig(intl, arbeidsforhold.tilretteleggingBehovFom, termindato),
+            validerAtPeriodeErGyldig(intl, minDato, maksDato),
           ]}
           readOnly={readOnly}
           disabled={disabled}
+          fromDate={minDato.toDate()}
+          toDate={maksDato.toDate()}
         />
+
         <RhfRadioGroup
           name={`${index}.type`}
           control={formMethods.control}
@@ -237,39 +242,42 @@ export const TilretteleggingForm = ({
         </RhfRadioGroup>
         {formValues.type === 'DELVIS_TILRETTELEGGING' && (
           <>
-            {(tilrettelegging.stillingsprosent === undefined ||
-              tilrettelegging.type !== 'DELVIS_TILRETTELEGGING' ||
-              erNyPeriode ||
-              formValues.kilde === 'REGISTRERT_AV_SAKSBEHANDLER') && (
-              <RhfNumericField
-                name={`${index}.stillingsprosent`}
-                control={formMethods.control}
-                htmlSize={10}
-                readOnly={readOnly}
-                disabled={disabled}
-                label={<FormattedMessage id="TilretteleggingForm.Arbeidsprosent" />}
-                description={<FormattedMessage id="TilretteleggingForm.ArbeidsprosentBeskrivelse" />}
-                validate={[required, minValue0, maxValue100, hasValidDecimal]}
-                forceTwoDecimalDigits
-                onChange={value => {
-                  const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
-                    stillingsprosentArbeidsforhold,
-                    velferdspermisjonprosent,
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
-                    value,
-                  );
-                  formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
-                }}
-              />
-            )}
+            {!arbeidsforhold.arbeidsforholdetErSplittet &&
+              (tilrettelegging.stillingsprosent === undefined ||
+                tilrettelegging.type !== 'DELVIS_TILRETTELEGGING' ||
+                erNyPeriode ||
+                formValues.kilde === 'REGISTRERT_AV_SAKSBEHANDLER') && (
+                <RhfNumericField
+                  name={`${index}.stillingsprosent`}
+                  control={formMethods.control}
+                  htmlSize={10}
+                  readOnly={readOnly}
+                  disabled={disabled}
+                  label={<FormattedMessage id="TilretteleggingForm.Arbeidsprosent" />}
+                  description={<FormattedMessage id="TilretteleggingForm.ArbeidsprosentBeskrivelse" />}
+                  validate={[required, minValue0, maxValue100, hasValidDecimal]}
+                  forceTwoDecimalDigits
+                  onChange={value => {
+                    const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
+                      stillingsprosentArbeidsforhold,
+                      velferdspermisjonprosent,
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
+                      value,
+                    );
+                    formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
+                  }}
+                />
+              )}
             <RhfNumericField
               name={`${index}.overstyrtUtbetalingsgrad`}
               control={formMethods.control}
               htmlSize={10}
               readOnly={readOnly}
-              disabled={disabled || formValues.stillingsprosent === undefined}
-              label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}
-              description={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvpBeskrivelse' })}
+              disabled={
+                disabled || (formValues.stillingsprosent === undefined && !arbeidsforhold.arbeidsforholdetErSplittet)
+              }
+              label={<FormattedMessage id="TilretteleggingForm.ProsentSvp" />}
+              description={<FormattedMessage id="TilretteleggingForm.ProsentSvpBeskrivelse" />}
               validate={[
                 required,
                 minValue0,

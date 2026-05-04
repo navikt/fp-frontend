@@ -1,7 +1,7 @@
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
+import { HStack, Spacer, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
@@ -13,6 +13,7 @@ import type { SvpArbeidsforholdDto } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
+import type { FAISUProps } from './faisuUtils.tsx';
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
 import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTabell';
@@ -20,8 +21,8 @@ import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTa
 dayjs.extend(minMax);
 
 const validerTidligereEnn =
-  (intl: IntlShape, getValues: UseFormGetValues<TilretteleggingFormValues>, tilretteleggingBehovFom: string) =>
-  (): string | null => {
+  (intl: IntlShape, getValues: UseFormGetValues<TilretteleggingFormValues>) =>
+  (tilretteleggingBehovFom: string): string | null => {
     const termindato = getValues('termindato');
     const fødselsdato = getValues('fødselsdato');
 
@@ -31,12 +32,8 @@ const validerTidligereEnn =
 
     if (tilretteleggingFomDato.isValid() && !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)) {
       return intl.formatMessage(
-        {
-          id: 'ArbeidsforholdPanel.TilretteleggingTidligereEnn',
-        },
-        {
-          dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT),
-        },
+        { id: 'ArbeidsforholdPanel.TilretteleggingTidligereEnn' },
+        { dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT) },
       );
     }
     return null;
@@ -48,6 +45,7 @@ interface Props {
   readOnly: boolean;
   visInfoAlert: boolean;
   stillingsprosentArbeidsforhold: number;
+  faisu: FAISUProps | undefined;
 }
 
 export const ArbeidsforholdPanel = ({
@@ -56,6 +54,7 @@ export const ArbeidsforholdPanel = ({
   readOnly,
   visInfoAlert,
   stillingsprosentArbeidsforhold,
+  faisu,
 }: Props) => {
   const intl = useIntl();
 
@@ -94,18 +93,22 @@ export const ArbeidsforholdPanel = ({
           <FormattedMessage id="TilretteleggingFaktaForm.UndersokNarmere" />
         </AksjonspunktHelpTextHTML>
       )}
-      <RhfCheckbox
-        name={`arbeidsforhold.${arbeidsforholdIndex}.skalBrukes`}
-        control={control}
-        readOnly={readOnly}
-        label={<FormattedMessage id="ArbeidsforholdPanel.SkalHaSvpForArbeidsforhold" />}
-      />
+      <HStack gap="space-16">
+        <RhfCheckbox
+          name={`arbeidsforhold.${arbeidsforholdIndex}.skalBrukes`}
+          control={control}
+          readOnly={readOnly}
+          label={<FormattedMessage id="ArbeidsforholdPanel.SkalHaSvpForArbeidsforhold" />}
+        />
+        <Spacer />
+        {faisu?.action}
+      </HStack>
       <VStack gap="space-32">
         <RhfDatepicker
           name={`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`}
           control={control}
           label={<FormattedMessage id="ArbeidsforholdPanel.DatoForTilrettelegging" />}
-          validate={[required, hasValidDate, validerTidligereEnn(intl, getValues, tilretteleggingBehovFom)]}
+          validate={[required, hasValidDate, validerTidligereEnn(intl, getValues)]}
           readOnly={readOnly}
         />
 
