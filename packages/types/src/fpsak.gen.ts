@@ -643,7 +643,7 @@ export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto = (
     } & tjenester_behandling_revurdering_aksjonspunkt_KontrollerRevurderingsBehandlingDto)
   | ({
       '@type': '5026';
-    } & tjenester_behandling_revurdering_aksjonspunkt_VarselRevurderingManuellDto)
+    } & tjenester_behandling_revurdering_aksjonspunkt_VarselRevurderingDto)
   | ({
       '@type': '5095';
     } & tjenester_behandling_risikoklassifisering_VurderFaresignalerDto)
@@ -1595,10 +1595,9 @@ export type tjenester_behandling_revurdering_aksjonspunkt_KontrollerRevurderings
   begrunnelse?: string;
 };
 
-export type tjenester_behandling_revurdering_aksjonspunkt_VarselRevurderingManuellDto = {
+export type tjenester_behandling_revurdering_aksjonspunkt_VarselRevurderingDto = {
   begrunnelse?: string;
   frist?: string;
-  fritekst?: string;
   sendVarsel?: boolean;
   ventearsak?: foreldrepenger_behandlingslager_behandling_aksjonspunkt_Venteårsak;
 };
@@ -4780,6 +4779,12 @@ export type foreldrepenger_dokumentbestiller_dto_ForhåndsvisDokumentDto = {
   årsakskode?: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
 };
 
+export type tjenester_brev_BrevRestTjeneste_BrevHtmlDto = {
+  behandlingUuid: string;
+  dokumentMal?: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
+  revurderingÅrsak?: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
+};
+
 export type foreldrepenger_kontrakter_formidling_kodeverk_Saksnummer = {
   saksnummer: string;
 };
@@ -5211,6 +5216,25 @@ export type tjenester_infotrygd_InfotrygdVedtakDto_VedtakKjede = {
   behandlingstema: tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode;
   opprinneligIdentdato: string;
   vedtak: Array<tjenester_infotrygd_InfotrygdVedtakDto_Vedtak>;
+};
+
+export type foreldrepenger_behandlingslager_behandling_dokument_MellomlagringType =
+  | 'VARSEL_REVURDERING'
+  | 'INNHENT_OPPLYSNINGER'
+  | 'VEDTAKSBREV'
+  | 'PAPIRSØKNAD';
+
+export type tjenester_mellomlagring_MellomlagringRestTjeneste_HentMellomlagringDto = {
+  behandlingUuid: string;
+  dokumentMal?: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
+  type?: foreldrepenger_behandlingslager_behandling_dokument_MellomlagringType;
+};
+
+export type tjenester_mellomlagring_MellomlagringRestTjeneste_MellomlagringDto = {
+  behandlingUuid: string;
+  dokumentMal?: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
+  innhold?: string;
+  type?: foreldrepenger_behandlingslager_behandling_dokument_MellomlagringType;
 };
 
 export type foreldrepenger_behandlingslager_aktør_OrganisasjonsEnhet = {
@@ -6461,6 +6485,20 @@ export type ForhåndsvisDokumentResponses = {
   default: unknown;
 };
 
+export type HentBrevHtmlData = {
+  body: tjenester_brev_BrevRestTjeneste_BrevHtmlDto;
+  path?: never;
+  query?: never;
+  url: '/api/brev/html';
+};
+
+export type HentBrevHtmlResponses = {
+  /**
+   * default response
+   */
+  default: unknown;
+};
+
 export type HentOverstyringAvBrevMedOrginaltBrevPåHtmlFormatData = {
   body?: never;
   path?: never;
@@ -6756,6 +6794,34 @@ export type HentGruppertKodelisteMedNavnData = {
 };
 
 export type HentGruppertKodelisteMedNavnResponses = {
+  /**
+   * default response
+   */
+  default: unknown;
+};
+
+export type HentMellomlagringData = {
+  body: tjenester_mellomlagring_MellomlagringRestTjeneste_HentMellomlagringDto;
+  path?: never;
+  query?: never;
+  url: '/api/mellomlagring/hent';
+};
+
+export type HentMellomlagringResponses = {
+  /**
+   * default response
+   */
+  default: unknown;
+};
+
+export type LagreMellomlagringData = {
+  body: tjenester_mellomlagring_MellomlagringRestTjeneste_MellomlagringDto;
+  path?: never;
+  query?: never;
+  url: '/api/mellomlagring';
+};
+
+export type LagreMellomlagringResponses = {
   /**
    * default response
    */

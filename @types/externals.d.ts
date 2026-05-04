@@ -5,3 +5,26 @@ declare module '*.module.css' {
   export default classes;
 }
 declare module '@navikt/ds-css' {}
+
+declare module 'editorjs-undo' {
+  import type EditorJS from '@editorjs/editorjs';
+
+  interface UndoConfig {
+    editor: EditorJS;
+    maxLength?: number;
+    onUpdate?: () => void;
+    config?: {
+      debounceTimer?: number;
+      shortcuts?: {
+        undo?: string;
+        redo?: string;
+      };
+    };
+  }
+
+  // eslint-disable-next-line import/no-default-export
+  export default class Undo {
+    constructor(options: UndoConfig);
+    initialize?(initialData: unknown): void;
+  }
+}
