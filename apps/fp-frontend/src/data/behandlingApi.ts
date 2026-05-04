@@ -659,15 +659,17 @@ const getOpprettVergeV2 = (links: ApiLink[]) => (params: Verge) =>
     json: params,
   });
 
-const getHentBrevHtml = (links: ApiLink[]) => (behandlingUuid: string, dokumentMalType?: string) =>
-  kyExtended
-    .get(getUrlFromRel('HENT_BREV_HTML', links), {
-      searchParams: {
-        uuid: behandlingUuid,
-        ...(dokumentMalType ? { dokumentMal: dokumentMalType } : {}),
-      },
-    })
-    .json<BrevOverstyring>();
+const getHentBrevHtml =
+  (links: ApiLink[]) => (behandlingUuid: string, dokumentMalType?: string, revurderingÅrsak?: string) =>
+    kyExtended
+      .post(getUrlFromRel('HENT_BREV_HTML', links), {
+        json: {
+          behandlingUuid,
+          ...(dokumentMalType ? { dokumentMal: dokumentMalType } : {}),
+          ...(revurderingÅrsak ? { revurderingÅrsak } : {}),
+        },
+      })
+      .json<BrevOverstyring>();
 
 const getMellomlagring =
   (links: ApiLink[]) => (params: { behandlingUuid: string; dokumentMal?: string; innhold?: string }) =>

@@ -279,9 +279,9 @@ const getSendMelding = (links?: ApiLink[]) => (params: SubmitMessageParams) =>
 const getHentBrevHtml =
   (links: ApiLink[]) => (behandlingUuid: string, dokumentMalType: string, revurderingÅrsak?: string) =>
     kyExtended
-      .get(getUrlFromRel('HENT_BREV_HTML', links), {
-        searchParams: {
-          uuid: behandlingUuid,
+      .post(getUrlFromRel('HENT_BREV_HTML', links), {
+        json: {
+          behandlingUuid,
           dokumentMal: dokumentMalType,
           ...(revurderingÅrsak ? { revurderingÅrsak } : {}),
         },

@@ -65,7 +65,7 @@ const ALLE_BEHANDLINGER = [
     },
     links: [
       { href: '/fpsak/bestill', rel: 'brev-bestill', type: 'POST' },
-      { href: '/fpsak/hent-brev-html', rel: 'hent-brev-html', type: 'GET' },
+      { href: '/fpsak/hent-brev-html', rel: 'hent-brev-html', type: 'POST' },
       { href: '/fpsak/mellomlagring', rel: 'mellomlagring', type: 'POST' },
     ],
   }),
@@ -85,7 +85,7 @@ const meta = {
         http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
         http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
         http.post(wrapUrl('/fpsak/bestill'), () => HttpResponse.json()),
-        http.get(wrapUrl('/fpsak/hent-brev-html'), () =>
+        http.post(wrapUrl('/fpsak/hent-brev-html'), () =>
           HttpResponse.json({
             opprinneligHtml:
               '<html><body><div id="logo"><img /></div><div id="content">' +

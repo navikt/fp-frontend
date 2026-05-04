@@ -4779,6 +4779,12 @@ export type foreldrepenger_dokumentbestiller_dto_ForhåndsvisDokumentDto = {
   årsakskode?: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
 };
 
+export type tjenester_brev_BrevRestTjeneste_BrevHtmlDto = {
+  behandlingUuid: string;
+  dokumentMal?: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
+  revurderingÅrsak?: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
+};
+
 export type foreldrepenger_kontrakter_formidling_kodeverk_Saksnummer = {
   saksnummer: string;
 };
@@ -5218,9 +5224,15 @@ export type foreldrepenger_behandlingslager_behandling_dokument_MellomlagringTyp
   | 'VEDTAKSBREV'
   | 'PAPIRSØKNAD';
 
+export type tjenester_mellomlagring_MellomlagringRestTjeneste_HentMellomlagringDto = {
+  behandlingUuid: string;
+  dokumentMal?: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
+  type?: foreldrepenger_behandlingslager_behandling_dokument_MellomlagringType;
+};
+
 export type tjenester_mellomlagring_MellomlagringRestTjeneste_MellomlagringDto = {
   behandlingUuid: string;
-  dokumentMal?: string;
+  dokumentMal?: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
   innhold?: string;
   type?: foreldrepenger_behandlingslager_behandling_dokument_MellomlagringType;
 };
@@ -6474,22 +6486,9 @@ export type ForhåndsvisDokumentResponses = {
 };
 
 export type HentBrevHtmlData = {
-  body?: never;
+  body: tjenester_brev_BrevRestTjeneste_BrevHtmlDto;
   path?: never;
-  query?: {
-    /**
-     * behandlingUUID
-     */
-    uuid?: tjenester_behandling_dto_UuidDto;
-    /**
-     * Brevmaltype for HTML-generering, f.eks. VARREV for varsel om revurdering. Utelates for vedtaksbrev.
-     */
-    dokumentMal?: string;
-    /**
-     * Årsak for revurdering, brukes kun ved VARREV
-     */
-    revurderingÅrsak?: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
-  };
+  query?: never;
   url: '/api/brev/html';
 };
 
@@ -6802,23 +6801,10 @@ export type HentGruppertKodelisteMedNavnResponses = {
 };
 
 export type HentMellomlagringData = {
-  body?: never;
+  body: tjenester_mellomlagring_MellomlagringRestTjeneste_HentMellomlagringDto;
   path?: never;
-  query?: {
-    /**
-     * behandlingUUID
-     */
-    uuid?: tjenester_behandling_dto_UuidDto;
-    /**
-     * Type mellomlagring (f.eks. VARSEL_REVURDERING). Alternativ til dokumentMal.
-     */
-    type?: foreldrepenger_behandlingslager_behandling_dokument_MellomlagringType;
-    /**
-     * Dokumentmal (f.eks. VARREV). Backend utleder mellomlagringstype. Utelates for vedtaksbrev.
-     */
-    dokumentMal?: string;
-  };
-  url: '/api/mellomlagring';
+  query?: never;
+  url: '/api/mellomlagring/hent';
 };
 
 export type HentMellomlagringResponses = {
