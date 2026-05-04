@@ -14,7 +14,7 @@ declare module 'editorjs-undo' {
     };
   }
 
-  // eslint-disable-next-line import/no-default-export
+  // eslint-disable-next-line import-x/no-default-export
   export default class Undo {
     constructor(options: UndoConfig);
     initialize?(initialData: unknown): void;

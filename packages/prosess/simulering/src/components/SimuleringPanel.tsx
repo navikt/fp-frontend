@@ -147,25 +147,15 @@ const hentToggleDetaljer =
   (showDetails: Details[], setShowDetails: (details: Details[]) => void) =>
   (id: number): void => {
     const tableIndex = showDetails.findIndex((table: Details) => table.id === id);
-    let newShowDetailsArray = [];
 
-    if (tableIndex === -1) {
-      newShowDetailsArray = showDetails.concat({
-        id,
-        show: true,
-      });
-    } else {
-      const updatedTable = {
-        id,
-        show: !showDetails[tableIndex]?.show,
-      };
-
-      newShowDetailsArray = [
-        ...showDetails.slice(0, tableIndex),
-        updatedTable,
-        ...showDetails.slice(tableIndex + 1, -1),
-      ];
-    }
+    const newShowDetailsArray =
+      tableIndex === -1
+        ? showDetails.concat({ id, show: true })
+        : [
+            ...showDetails.slice(0, tableIndex),
+            { id, show: !showDetails[tableIndex]?.show },
+            ...showDetails.slice(tableIndex + 1, -1),
+          ];
     setShowDetails(newShowDetailsArray);
   };
 

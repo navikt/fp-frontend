@@ -17,6 +17,6 @@
   },
   "devDependencies": {
     "storybook": "10.3.5",
-    "typescript": "5.9.3"
+    "typescript": "6.0.2"
   }
 }

@@ -1,8 +1,8 @@
+import eslintReact from '@eslint-react/eslint-plugin';
 import pluginJs from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
-import importPlugin from 'eslint-plugin-import';
+import * as importPlugin from 'eslint-plugin-import-x';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
-import pluginReact from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import vitest from '@vitest/eslint-plugin';
@@ -26,6 +26,7 @@ export default [
     plugins: {
       vitest,
       'simple-import-sort': simpleImportSort,
+      'import-x': importPlugin,
       local: {
         rules: {
           'describe-name-matches-filename': describeNameMatchesFilename,
@@ -44,9 +45,8 @@ export default [
       },
     },
   },
-  pluginReact.configs.flat.recommended,
+  eslintReact.configs['recommended-typescript'],
   jsxA11y.flatConfigs.recommended,
-  importPlugin.flatConfigs.recommended,
   reactHooks.configs.flat.recommended,
   eslintConfigPrettier,
   {
@@ -56,18 +56,8 @@ export default [
       'max-len': [ERROR, 160],
       'no-console': ERROR,
       'no-debugger': WARNING,
-      'react/function-component-definition': [
-        'error',
-        {
-          namedComponents: 'arrow-function',
-          unnamedComponents: 'arrow-function',
-        },
-      ],
-      'react/jsx-curly-brace-presence': ['error', { props: 'never' }],
-      'react/prop-types': OFF,
       'jsx-a11y/no-autofocus': OFF,
-      'import/no-duplicates': ERROR,
-      'react/react-in-jsx-scope': OFF,
+      'import-x/no-duplicates': ERROR,
       '@typescript-eslint/no-restricted-types': [
         'error',
         {
@@ -94,10 +84,9 @@ export default [
       '@typescript-eslint/no-unsafe-enum-comparison': OFF,
       '@typescript-eslint/no-misused-promises': OFF,
       '@typescript-eslint/no-unsafe-call': ERROR,
-      'import/no-default-export': ERROR,
-      'react-hooks/rules-of-hooks': ERROR,
-      'react-hooks/exhaustive-deps': OFF,
-      'react-hooks/incompatible-library': OFF,
+      'import-x/no-default-export': ERROR,
+      '@eslint-react/rules-of-hooks': ERROR,
+      '@eslint-react/exhaustive-deps': OFF,
 
       // Note: you must disable the base rule as it can report incorrect errors
       'no-use-before-define': OFF,
@@ -108,7 +97,7 @@ export default [
       '@typescript-eslint/no-unused-vars': [ERROR],
 
       // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
-      'import/no-unresolved': OFF,
+      'import-x/no-unresolved': OFF,
 
       'no-restricted-syntax': [
         'error',
@@ -133,8 +122,9 @@ export default [
     files: ['**/*.stories.tsx', 'eslint.config.mjs'],
     rules: {
       '@typescript-eslint/no-unsafe-call': OFF, // Denne feiler for .stories pga parameters
-      'import/no-default-export': OFF,
-      'react-hooks/rules-of-hooks': OFF,
+      'import-x/no-default-export': OFF,
+      '@eslint-react/rules-of-hooks': OFF,
+      '@eslint-react/component-hook-factories': OFF,
     },
   },
   { files: ['**/apiDtoGenerert.ts'], rules: { '@typescript-eslint/no-redundant-type-constituents': OFF } },

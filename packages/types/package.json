@@ -21,7 +21,7 @@
     "@hey-api/openapi-ts": "0.96.1",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
-    "eslint": "9.39.4",
-    "typescript": "5.9.3"
+    "eslint": "10.2.0",
+    "typescript": "6.0.2"
   }
 }

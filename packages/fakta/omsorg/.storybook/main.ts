@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/no-default-export
+// eslint-disable-next-line import-x/no-default-export
 export { configWithDifferentStaticDirs as default } from '../../../../.storybook/main-storybook';
