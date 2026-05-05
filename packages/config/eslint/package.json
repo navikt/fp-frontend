@@ -13,7 +13,7 @@
     "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-simple-import-sort": "13.0.0",
     "globals": "17.5.0",
-    "typescript-eslint": "8.59.0"
+    "typescript-eslint": "8.59.1"
   },
   "peerDependencies": {
     "eslint": "10.x"
