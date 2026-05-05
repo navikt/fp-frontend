@@ -13,7 +13,7 @@
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
     "tsc": "tsc --noEmit",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
-    "storybook": "storybook dev --quiet -p 7022"
+    "storybook": "storybook dev --quiet -p 7039"
   },
   "dependencies": {
     "@navikt/ds-react": "8.10.4",
