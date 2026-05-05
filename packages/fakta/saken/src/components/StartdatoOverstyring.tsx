@@ -118,7 +118,9 @@ export const StartdatoOverstyring = ({ aksjonspunkt, ytelseFordeling }: Props) =
     >
       <RhfForm
         formMethods={formMethods}
-        onSubmit={(values: FormValues) => submitCallback(transformValues(ytelseFordeling, values))}
+        onSubmit={(values: FormValues) =>
+          submitCallback(transformValues(ytelseFordeling, values)).then(slaAvEditeringAvStartdato)
+        }
         setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="space-16">

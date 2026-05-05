@@ -7,17 +7,18 @@ import { BodyShort, Button, HStack, Label, Radio, Textarea, VStack } from '@navi
 import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBoks, EditedIcon } from '@navikt/ft-ui-komponenter';
+import { notEmpty } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 type FormValues = {
-  dekningsgrad: number;
+  dekningsgrad: number | undefined;
   begrunnelse: string;
 };
 
@@ -37,13 +38,10 @@ export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverst
     ytelseFordeling.dekningsgrader.søker.dekningsgrad ??
     undefined;
 
-  const defaultValues = {
-    dekningsgrad,
-    begrunnelse: aksjonspunkt?.begrunnelse ?? '',
-  };
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues,
+    defaultValues: mellomlagretFormData ?? buildInitialValues(dekningsgrad, aksjonspunkt),
   });
 
   const [visEditeringsmodus, setVisEditeringsmodus] = useState(false);
@@ -85,7 +83,7 @@ export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverst
           <Textarea
             size="small"
             readOnly
-            label={<FormattedMessage id="Overstyring.Begrunnelse" />}
+            label={<FormattedMessage id="Label.Begrunnelse" />}
             hideLabel
             value={aksjonspunkt.begrunnelse}
           />
@@ -98,13 +96,8 @@ export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverst
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) =>
-        submitCallback({
-          kode: AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
-          dekningsgrad: values.dekningsgrad,
-          begrunnelse: values.begrunnelse,
-        }).then(slåAvEditeringAvDekningsgrad)
-      }
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values)).then(slåAvEditeringAvDekningsgrad)}
+      setDataOnUnmount={setMellomlagretFormData}
     >
       <AksjonspunktBoks
         tittel={intl.formatMessage({ id: 'DekningradOverstyring.EndreDekningsgrad' })}
@@ -154,7 +147,7 @@ export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverst
             <Button
               size="small"
               variant="primary"
-              disabled={isReadOnly || !formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
               loading={formMethods.formState.isSubmitting}
             >
               <FormattedMessage id="Label.Overstyr" />
@@ -169,9 +162,21 @@ export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverst
   );
 };
 
-const validateIkkeLikEksisterende = (intl: IntlShape, dekningsgrad: number | undefined) => (value: number) => {
-  if (value === dekningsgrad) {
-    return intl.formatMessage({ id: 'DekningradOverstyring.LikEksisterende' });
-  }
-  return null;
-};
+const validateIkkeLikEksisterende =
+  (intl: IntlShape, dekningsgrad: number | undefined) => (value: number | undefined) => {
+    if (value === dekningsgrad) {
+      return intl.formatMessage({ id: 'DekningradOverstyring.LikEksisterende' });
+    }
+    return null;
+  };
+
+const buildInitialValues = (dekningsgrad: number | undefined, aksjonspunkt?: Aksjonspunkt): FormValues => ({
+  dekningsgrad,
+  begrunnelse: aksjonspunkt?.begrunnelse ?? '',
+});
+
+const transformValues = (values: FormValues): OverstyringDekningsgradAp => ({
+  kode: AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
+  dekningsgrad: notEmpty(values.dekningsgrad),
+  begrunnelse: values.begrunnelse,
+});

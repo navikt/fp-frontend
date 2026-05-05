@@ -15,7 +15,7 @@ const {
 
 describe('SakenFaktaIndex', () => {
   it('skal få aksjonspunkt om innehenting av dokumentasjon, svar at vil bli innhentet og bekreft', async () => {
-    const lagre = vi.fn();
+    const lagre = vi.fn(() => Promise.resolve());
 
     render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
@@ -42,7 +42,7 @@ describe('SakenFaktaIndex', () => {
   });
 
   it('skal få feilmelding når en ikke har fylt ut alle feltene under Opptjening utland', async () => {
-    const lagre = vi.fn();
+    const lagre = vi.fn(() => Promise.resolve());
 
     render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
@@ -63,7 +63,7 @@ describe('SakenFaktaIndex', () => {
   });
 
   it('skal lagre ny startdato for foreldrepenger', async () => {
-    const lagre = vi.fn();
+    const lagre = vi.fn(() => Promise.resolve());
 
     render(<StartdatoForForeldrepengerOgDekningsgrad submitCallback={lagre} />);
 
@@ -142,7 +142,7 @@ describe('SakenFaktaIndex', () => {
 
     expect(screen.getByText('Dekningsgrad')).toBeInTheDocument();
     expect(screen.getByText('80% foreldrepenger')).toBeInTheDocument();
-    expect(screen.getByText('Dekninggraden er endret til 80 fordi...')).toBeInTheDocument();
+    expect(screen.getByText('Dekningsgraden er endret til 80 fordi...')).toBeInTheDocument();
     expect(screen.getAllByTitle('Saksbehandler har endret feltets verdi')).toHaveLength(2);
   });
 

@@ -124,7 +124,7 @@ export const DekningsgradOgStartdatoErEndret: Story = {
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD, {
         status: 'UTFO',
-        begrunnelse: 'Dekninggraden er endret til 80 fordi...',
+        begrunnelse: 'Dekningsgraden er endret til 80 fordi...',
       }),
       lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO, {
         status: 'UTFO',
