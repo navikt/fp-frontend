@@ -27,7 +27,7 @@ interface Props {
   kanOverstyreAccess: boolean;
 }
 
-export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAccess }: Props) => {
+export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAccess }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, isReadOnly } = usePanelDataContext<OverstyringDekningsgradAp>();
@@ -59,21 +59,21 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
         <div>
           <HStack gap="space-8">
             <Label>
-              <FormattedMessage id="DekningsgradForm.Dekningsgrad" />
+              <FormattedMessage id="DekningradOverstyring.Dekningsgrad" />
             </Label>
             {aksjonspunkt?.begrunnelse && <EditedIcon />}
           </HStack>
           <HStack gap="space-16" align="center">
             <BodyShort>
-              <FormattedMessage id="DekningsgradForm.DekningsgradForeldrepenger" values={{ dekningsgrad }} />
+              <FormattedMessage id="DekningradOverstyring.DekningsgradForeldrepenger" values={{ dekningsgrad }} />
             </BodyShort>
 
             {kanOverstyreAccess && (
               <Button
                 variant="tertiary"
                 size="small"
-                title={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
-                aria-label={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
+                title={intl.formatMessage({ id: 'DekningradOverstyring.EndreDekningsgrad' })}
+                aria-label={intl.formatMessage({ id: 'DekningradOverstyring.EndreDekningsgrad' })}
                 disabled={isReadOnly}
                 onClick={() => setVisEditeringsmodus(true)}
                 icon={<PencilFillIcon aria-hidden />}
@@ -107,10 +107,10 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
       }
     >
       <AksjonspunktBoks
-        tittel={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
+        tittel={intl.formatMessage({ id: 'DekningradOverstyring.EndreDekningsgrad' })}
         aksjonspunkt={aksjonspunkt}
       >
-        <VStack gap="space-24">
+        <VStack gap="space-16">
           <RhfRadioGroup
             name="dekningsgrad"
             control={formMethods.control}
@@ -144,7 +144,7 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
           <RhfTextarea
             name="begrunnelse"
             control={formMethods.control}
-            label={<FormattedMessage id="Overstyring.Begrunnelse" />}
+            label={<FormattedMessage id="Label.Begrunnelse" />}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly}
@@ -157,10 +157,10 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
               disabled={isReadOnly || !formMethods.formState.isDirty || formMethods.formState.isSubmitting}
               loading={formMethods.formState.isSubmitting}
             >
-              <FormattedMessage id="Overstyring.Lagre" />
+              <FormattedMessage id="Label.Overstyr" />
             </Button>
             <Button variant="secondary" size="small" onClick={slåAvEditeringAvDekningsgrad} type="button">
-              <FormattedMessage id="Overstyring.Avbryt" />
+              <FormattedMessage id="Label.Avbryt" />
             </Button>
           </HStack>
         </VStack>
@@ -171,7 +171,7 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
 
 const validateIkkeLikEksisterende = (intl: IntlShape, dekningsgrad: number | undefined) => (value: number) => {
   if (value === dekningsgrad) {
-    return intl.formatMessage({ id: 'DekningsgradForm.LikEksisterende' });
+    return intl.formatMessage({ id: 'DekningradOverstyring.LikEksisterende' });
   }
   return null;
 };

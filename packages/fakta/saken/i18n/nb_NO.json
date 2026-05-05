@@ -2,21 +2,19 @@
   "SakenFaktaPanel.OpptjeningUtland": "Se søknad for informasjon om oppgitt rettighet fra EØS. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov",
   "SakenFaktaPanel.AvklarDekningsgrad": "Mor og far har søkt med ulik dekningsgrad. Kontroller hvilken som stemmer.",
 
-  "Aksjonspunkt.Begrunnelse": "Begrunnelse",
+  "Label.Begrunnelse": "Begrunnelse",
+  "Label.Overstyr": "Overstyr",
+  "Label.Avbryt": "Avbryt",
 
-  "Overstyring.Begrunnelse": "Begrunnelse",
-  "Overstyring.Lagre": "Overstyr",
-  "Overstyring.Avbryt": "Avbryt",
+  "InnhentDokOpptjeningUtlandAP.OpptjeningUtland": "Vurder om SED skal innhentes",
+  "InnhentDokOpptjeningUtlandAP.InnhentelseDok": "Innhentelse av dokumentasjon",
+  "InnhentDokOpptjeningUtlandAP.Innhentes": "Dokumentasjon vil bli innhentet",
+  "InnhentDokOpptjeningUtlandAP.InnhentesIkke": "Dokumentasjon vil <b>ikke</b> bli innhentet",
 
-  "InnhentDokOpptjeningUtlandPanel.OpptjeningUtland": "Vurder om SED skal innhentes",
-  "InnhentDokOpptjeningUtlandPanel.InnhentelseDok": "Innhentelse av dokumentasjon",
-  "InnhentDokOpptjeningUtlandPanel.Innhentes": "Dokumentasjon vil bli innhentet",
-  "InnhentDokOpptjeningUtlandPanel.InnhentesIkke": "Dokumentasjon vil <b>ikke</b> bli innhentet",
-
-  "StartdatoForForeldrepengerperiodenForm.StartdatoFør2019": "Startdato kan ikke være før 01.01.2019",
-  "StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden": "Startdato for foreldrepengeperioden",
-  "StartdatoForForeldrepengerperiodenForm.Startdato": "Startdato som skal benyttes (fra søknad eller fødsel)",
-  "StartdatoForForeldrepengerperiodenForm.EndreStartdato": "Endre startdato for foreldrepenger",
+  "StartdatoOverstyring.StartdatoFør2019": "Startdato kan ikke være før 01.01.2019",
+  "StartdatoOverstyring.StartdatoForPerioden": "Startdato for foreldrepengeperioden",
+  "StartdatoOverstyring.Startdato": "Startdato som skal benyttes (fra søknad eller fødsel)",
+  "StartdatoOverstyring.EndreStartdato": "Endre startdato for foreldrepenger",
 
   "Dekningsgrad.80": "80",
   "Dekningsgrad.80.Nåværende": "80 (Nåværende)",
@@ -24,11 +22,11 @@
   "Dekningsgrad.100.Nåværende": "100 (Nåværende)",
   "Dekningsgrad.HvilkenDekningsgrad": "Hvilken dekningsgrad skal gjelde{harAnnenPart, select, true{ for begge} other {}}?",
 
-  "DekningsgradForm.Dekningsgrad": "Dekningsgrad",
-  "DekningsgradForm.DekningsgradForeldrepenger": "{dekningsgrad}% foreldrepenger",
-  "DekningsgradForm.EndreDekningsgrad": "Endre dekningsgrad",
-  "DekningsgradForm.LikEksisterende": "Du må endre dekningsgrad",
+  "DekningradOverstyring.Dekningsgrad": "Dekningsgrad",
+  "DekningradOverstyring.DekningsgradForeldrepenger": "{dekningsgrad}% foreldrepenger",
+  "DekningradOverstyring.EndreDekningsgrad": "Endre dekningsgrad",
+  "DekningradOverstyring.LikEksisterende": "Du må endre dekningsgrad",
 
-  "DekningradApForm.HarValgt": "Har valgt {dekningsgrad}% foreldrepenger",
-  "DekningradApForm.SøknadSendt": "Søknad sendt {dato}"
+  "DekningradAP.HarValgt": "Har valgt {dekningsgrad}% foreldrepenger",
+  "DekningradAP.SøknadSendt": "Søknad sendt {dato}"
 }

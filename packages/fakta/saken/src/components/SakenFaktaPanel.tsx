@@ -8,10 +8,10 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Ytelsefordeling } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { DekningradApForm } from './dekningsgrad/DekningradApForm';
-import { DekningradForm } from './dekningsgrad/DekningradForm';
-import { InnhentDokOpptjeningUtlandAP } from './innhentDok/InnhentDokOpptjeningUtlandAP.tsx';
-import { StartdatoForForeldrepengerperiodenForm } from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
+import { DekningradAP } from './dekningsgrad/DekningradAP';
+import { DekningradOverstyring } from './dekningsgrad/DekningradOverstyring';
+import { InnhentDokOpptjeningUtlandAP } from './InnhentDokOpptjeningUtlandAP';
+import { StartdatoOverstyring } from './StartdatoOverstyring';
 
 interface Props {
   ytelsefordeling?: Ytelsefordeling;
@@ -51,7 +51,7 @@ export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyre
       )}
 
       {ytelsefordeling && avklarDekningsgradAP && (
-        <DekningradApForm ytelseFordeling={ytelsefordeling} aksjonspunkt={avklarDekningsgradAP} />
+        <DekningradAP ytelseFordeling={ytelsefordeling} aksjonspunkt={avklarDekningsgradAP} />
       )}
       {automatiskMarkeringAvUtenlandssakAp && (
         <InnhentDokOpptjeningUtlandAP
@@ -60,10 +60,10 @@ export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyre
         />
       )}
       {fagsak.fagsakYtelseType === 'FP' && !!ytelsefordeling && (
-        <StartdatoForForeldrepengerperiodenForm ytelseFordeling={ytelsefordeling} aksjonspunkt={overstyrStartdatoAp} />
+        <StartdatoOverstyring ytelseFordeling={ytelsefordeling} aksjonspunkt={overstyrStartdatoAp} />
       )}
       {ytelsefordeling && !avklarDekningsgradAP && fagsak.fagsakYtelseType === 'FP' && (
-        <DekningradForm
+        <DekningradOverstyring
           ytelseFordeling={ytelsefordeling}
           aksjonspunkt={overstyrDekningsgradAp}
           kanOverstyreAccess={kanOverstyreAccess}

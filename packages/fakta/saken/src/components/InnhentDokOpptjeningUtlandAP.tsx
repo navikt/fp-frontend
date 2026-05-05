@@ -52,7 +52,7 @@ export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props)
     >
       <VStack gap="space-24">
         <Heading size="small" level="3">
-          <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.OpptjeningUtland" />
+          <FormattedMessage id="InnhentDokOpptjeningUtlandAP.OpptjeningUtland" />
         </Heading>
         <RhfForm
           formMethods={formMethods}
@@ -63,15 +63,15 @@ export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props)
             <RhfRadioGroup
               name="dokStatus"
               control={formMethods.control}
-              legend={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
+              legend={<FormattedMessage id="InnhentDokOpptjeningUtlandAP.InnhentelseDok" />}
               validate={[required]}
               readOnly={isReadOnly}
             >
               <Radio value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET} size="small">
-                <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />
+                <FormattedMessage id="InnhentDokOpptjeningUtlandAP.Innhentes" />
               </Radio>
               <Radio value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET} size="small">
-                <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke" values={{ b: BTag }} />
+                <FormattedMessage id="InnhentDokOpptjeningUtlandAP.InnhentesIkke" values={{ b: BTag }} />
               </Radio>
             </RhfRadioGroup>
 
@@ -80,7 +80,7 @@ export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props)
               isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}
               hasBegrunnelse={!!begrunnelse}
-              label={intl.formatMessage({ id: 'Aksjonspunkt.Begrunnelse' })}
+              label={intl.formatMessage({ id: 'Label.Begrunnelse' })}
             />
 
             <FaktaSubmitButton

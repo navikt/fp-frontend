@@ -24,7 +24,7 @@ interface Props {
   aksjonspunkt: Aksjonspunkt;
 }
 
-export const DekningradApForm = ({ ytelseFordeling, aksjonspunkt }: Props) => {
+export const DekningradAP = ({ ytelseFordeling, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, alleMerknaderFraBeslutter, fagsak, isReadOnly, isSubmittable } =
@@ -99,7 +99,7 @@ export const DekningradApForm = ({ ytelseFordeling, aksjonspunkt }: Props) => {
             isReadOnly={isReadOnly}
             isSubmittable={isSubmittable}
             hasBegrunnelse={!!begrunnelse}
-            label={intl.formatMessage({ id: 'Aksjonspunkt.Begrunnelse' })}
+            label={intl.formatMessage({ id: 'Label.Begrunnelse' })}
           />
 
           <FaktaSubmitButton

@@ -20,14 +20,14 @@ export const DekningsgradVisning = ({ navn, kjønn, søknadsdato, dekningsgrad }
           <Label size="medium">{navn}</Label>
           <Detail>
             <FormattedMessage
-              id="DekningradApForm.SøknadSendt"
+              id="DekningradAP.SøknadSendt"
               values={{ dato: dateFormat(søknadsdato, { month: 'long' }) }}
             />
           </Detail>
         </VStack>
       </HStack>
       <Label size="medium">
-        <FormattedMessage id="DekningradApForm.HarValgt" values={{ dekningsgrad }} />
+        <FormattedMessage id="DekningradAP.HarValgt" values={{ dekningsgrad }} />
       </Label>
     </VStack>
   </Box>

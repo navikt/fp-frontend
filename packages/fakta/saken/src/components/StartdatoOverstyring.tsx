@@ -41,7 +41,7 @@ const transformValues = (
 const getValidateIsBefore2019 = (getValues: UseFormGetValues<FormValues>, intl: IntlShape) => () => {
   const startdatoFraSøknad = getValues('startdatoFraSøknad');
   return dayjs(startdatoFraSøknad).isBefore('2019-01-01')
-    ? intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoFør2019' })
+    ? intl.formatMessage({ id: 'StartdatoOverstyring.StartdatoFør2019' })
     : undefined;
 };
 
@@ -51,11 +51,11 @@ interface Props {
 }
 
 /**
- * StartdatoForForeldrepengerperiodenForm
+ * StartdatoOverstyring
  *
  * Overstyring av startdato for foreldrepengerperioden.
  */
-export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, ytelseFordeling }: Props) => {
+export const StartdatoOverstyring = ({ aksjonspunkt, ytelseFordeling }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, isReadOnly } = usePanelDataContext<OverstyringAvklarStartdatoForPeriodenAp>();
@@ -79,7 +79,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, ytelseFor
         <div>
           <HStack gap="space-8">
             <Label>
-              <FormattedMessage id="StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden" />
+              <FormattedMessage id="StartdatoOverstyring.StartdatoForPerioden" />
             </Label>
             {aksjonspunkt?.begrunnelse && <EditedIcon />}
           </HStack>
@@ -90,7 +90,8 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, ytelseFor
             <Button
               variant="tertiary"
               size="small"
-              title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
+              aria-label={intl.formatMessage({ id: 'StartdatoOverstyring.EndreStartdato' })}
+              title={intl.formatMessage({ id: 'StartdatoOverstyring.EndreStartdato' })}
               disabled={isReadOnly}
               onClick={slåPåEditering}
               icon={<PencilFillIcon aria-hidden />}
@@ -101,7 +102,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, ytelseFor
           <Textarea
             size="small"
             readOnly
-            label={<FormattedMessage id="Overstyring.Begrunnelse" />}
+            label={<FormattedMessage id="Label.Begrunnelse" />}
             hideLabel
             value={aksjonspunkt.begrunnelse}
           />
@@ -113,7 +114,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, ytelseFor
   return (
     <AksjonspunktBoks
       aksjonspunkt={aksjonspunkt}
-      tittel={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
+      tittel={intl.formatMessage({ id: 'StartdatoOverstyring.EndreStartdato' })}
     >
       <RhfForm
         formMethods={formMethods}
@@ -124,14 +125,14 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, ytelseFor
           <RhfDatepicker
             name="startdatoFraSøknad"
             control={formMethods.control}
-            label={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Startdato' })}
+            label={intl.formatMessage({ id: 'StartdatoOverstyring.Startdato' })}
             validate={[required, hasValidDate, getValidateIsBefore2019(formMethods.getValues, intl)]}
             readOnly={isReadOnly}
           />
           <RhfTextarea
             name="begrunnelse"
             control={formMethods.control}
-            label={<FormattedMessage id="Overstyring.Begrunnelse" />}
+            label={<FormattedMessage id="Label.Begrunnelse" />}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly}
@@ -144,10 +145,10 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, ytelseFor
               disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
               loading={formMethods.formState.isSubmitting}
             >
-              <FormattedMessage id="Overstyring.Lagre" />
+              <FormattedMessage id="Label.Overstyr" />
             </Button>
             <Button variant="secondary" size="small" onClick={slaAvEditeringAvStartdato} type="button">
-              <FormattedMessage id="Overstyring.Avbryt" />
+              <FormattedMessage id="Label.Avbryt" />
             </Button>
           </HStack>
         </VStack>
