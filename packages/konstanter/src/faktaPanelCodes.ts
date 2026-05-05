@@ -5,6 +5,7 @@ export enum FaktaPanelCode {
   ARBEID_OG_INNTEKT = 'arbeidoginntekt',
   BEREGNING = 'beregning',
   BESTEBEREGNING = 'besteberegning',
+  AAP_KOMBINERT_ATFL = 'aapkombinertatfl',
   DEFAULT = 'default',
   FORDELING = 'fordeling',
   INNTEKTSMELDINGER = 'inntektsmeldinger',
