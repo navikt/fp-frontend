@@ -36,6 +36,7 @@ export const useBrevEditorJs = (
 
   // Hindrar tullball grunna to renders i DEV => React.StrictMode
   const refMounted = useRef<boolean>(false);
+  const refDestroyed = useRef<boolean>(false);
   const refEditorJs = useRef<EditorJS>(null);
   const refCurrentHtml = useRef('');
 
@@ -72,6 +73,9 @@ export const useBrevEditorJs = (
         holder: editorHolderId,
         i18n: lagEditorJsI18n(),
         onReady: async () => {
+          if (refDestroyed.current) {
+            return;
+          }
           new Undo({ editor });
 
           // For å seinare kunne finna ut om innhaldet er endra
@@ -89,6 +93,7 @@ export const useBrevEditorJs = (
     }
 
     return () => {
+      refDestroyed.current = true;
       if (refEditorJs.current?.destroy) {
         refEditorJs.current.destroy();
       }
