@@ -72,6 +72,10 @@ export const useBrevEditorJs = (
         holder: editorHolderId,
         i18n: lagEditorJsI18n(),
         onReady: async () => {
+          // Guard: skip if editor holder was destroyed before onReady fired (e.g. fast unmount)
+          if (!document.getElementById(editorHolderId)?.querySelector('.codex-editor__redactor')) {
+            return;
+          }
           new Undo({ editor });
 
           // For å seinare kunne finna ut om innhaldet er endra
