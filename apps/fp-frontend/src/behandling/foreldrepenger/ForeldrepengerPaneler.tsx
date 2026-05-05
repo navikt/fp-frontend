@@ -26,6 +26,7 @@ import { SoknadsfristProsessStegInitPanel } from '../fellesPaneler/prosess/Sokna
 import { VarselProsessStegInitPanel } from '../fellesPaneler/prosess/VarselProsessStegInitPanel';
 import { VedtakProsessStegInitPanel } from '../fellesPaneler/prosess/VedtakProsessStegInitPanel';
 import { BesteberegningFaktaInitPanel } from './faktaPaneler/BesteberegningFaktaInitPanel';
+import { AapKombinertAtflFaktaInitPanel } from './faktaPaneler/AapKombinertAtflFaktaInitPanel';
 import { OmsorgFaktaInitPanel } from './faktaPaneler/OmsorgFaktaInitPanel';
 import { OmsorgOgRettFaktaInitPanel } from './faktaPaneler/OmsorgOgRettFaktaInitPanel';
 import { UttakDokumentasjonFaktaInitPanel } from './faktaPaneler/UttakDokumentasjonFaktaInitPanel';
@@ -76,6 +77,7 @@ const ForeldrepengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere
         <PermisjonFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <BeregningFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <BesteberegningFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <AapKombinertAtflFaktaInitPanel />
         <FordelingFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <OmsorgOgRettFaktaInitPanel />
         <OmsorgFaktaInitPanel />

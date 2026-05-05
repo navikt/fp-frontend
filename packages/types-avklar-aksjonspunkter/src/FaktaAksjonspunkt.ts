@@ -28,6 +28,7 @@ import type { OverstyringFaktaFødselAp } from './fakta/fødsel/OverstyringFakta
 import type { SjekkManglendeFødselAp } from './fakta/fødsel/SjekkManglendeFødselAp';
 import type { SjekkTerminbekreftelseAp } from './fakta/fødsel/SjekkTerminbekreftelseAp';
 import type { KontrollerBesteberegningAP, ManuellKontrollBesteberegningAP } from './fakta/KontrollerBesteberegningAP';
+import type { ManuellKontrollAapKombinertAtflAP } from './fakta/ManuellKontrollAapKombinertAtflAP';
 import type { MerkOpptjeningUtlandAp } from './fakta/MerkOpptjeningUtlandAp';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import type { OverstyringDekningsgradAp } from './fakta/OverstyringDekningsgradAp';
@@ -75,4 +76,5 @@ export type FaktaAksjonspunkt =
   | OverstyringRettigheterAp
   | BekreftAnnenpartsUttakEøsAp
   | AvklarDekningsgradAp
-  | AvklartFaktaFeilutbetalingAp;
+  | AvklartFaktaFeilutbetalingAp
+  | ManuellKontrollAapKombinertAtflAP;

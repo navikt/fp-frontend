@@ -28,6 +28,7 @@
     "@navikt/ds-react": "8.10.6",
     "@navikt/ds-tailwind": "8.10.6",
     "@navikt/fp-app-felles": "workspace:*",
+    "@navikt/fp-fakta-aap-kombinert-atfl": "workspace:*",
     "@navikt/fp-fakta-arbeid-og-inntekt": "workspace:*",
     "@navikt/fp-fakta-arbeidsforhold": "workspace:*",
     "@navikt/fp-fakta-besteberegning": "workspace:*",
