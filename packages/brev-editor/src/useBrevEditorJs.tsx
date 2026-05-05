@@ -36,6 +36,7 @@ export const useBrevEditorJs = (
 
   // Hindrar tullball grunna to renders i DEV => React.StrictMode
   const refMounted = useRef<boolean>(false);
+  const refDestroyed = useRef<boolean>(false);
   const refEditorJs = useRef<EditorJS>(null);
   const refCurrentHtml = useRef('');
 
@@ -72,8 +73,7 @@ export const useBrevEditorJs = (
         holder: editorHolderId,
         i18n: lagEditorJsI18n(),
         onReady: async () => {
-          // Guard: skip if editor holder was destroyed before onReady fired (e.g. fast unmount)
-          if (!document.getElementById(editorHolderId)?.querySelector('.codex-editor__redactor')) {
+          if (refDestroyed.current) {
             return;
           }
           new Undo({ editor });
@@ -93,6 +93,7 @@ export const useBrevEditorJs = (
     }
 
     return () => {
+      refDestroyed.current = true;
       if (refEditorJs.current?.destroy) {
         refEditorJs.current.destroy();
       }
