@@ -119,13 +119,16 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
   },
 };
 
-export const DekningsgradErEndret: Story = {
+export const DekningsgradOgStartdatoErEndret: Story = {
   args: {
     aksjonspunkterForPanel: [
       lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD, {
         status: 'UTFO',
-        kanLoses: true,
-        begrunnelse: 'Er endret til 80 fordi...',
+        begrunnelse: 'Dekninggraden er endret til 80 fordi...',
+      }),
+      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO, {
+        status: 'UTFO',
+        begrunnelse: 'Startdato er endret fordi...',
       }),
     ],
     ytelsefordeling: {
@@ -189,13 +192,7 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
         navn: 'Helga Utvikler',
         språkkode: 'NB',
       },
-      annenPart: {
-        navn: 'Espen Utvikler',
-        kjønn: '-',
-        fødselsdato: '1990-01-01',
-        fødselsnummer: '01019012345',
-        språkkode: 'NB',
-      },
+      annenPart: undefined,
     }),
     ytelsefordeling: {
       førsteUttaksdato: '2019-01-01',
@@ -205,10 +202,7 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
           søknadsdato: '2019-01-02',
           dekningsgrad: 100,
         },
-        annenPart: {
-          søknadsdato: '2019-01-01',
-          dekningsgrad: 80,
-        },
+        annenPart: undefined,
       },
     } satisfies Ytelsefordeling,
   },

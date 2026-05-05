@@ -1,15 +1,16 @@
 import { FormattedMessage } from 'react-intl';
 
-import { HStack, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+import { isAksjonspunktOpen } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
+import type { Ytelsefordeling } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { DekningradApForm } from './dekningsgrad/DekningradApForm';
 import { DekningradForm } from './dekningsgrad/DekningradForm';
-import { InnhentDokOpptjeningUtlandPanel } from './innhentDok/InnhentDokOpptjeningUtlandPanel';
+import { InnhentDokOpptjeningUtlandAP } from './innhentDok/InnhentDokOpptjeningUtlandAP.tsx';
 import { StartdatoForForeldrepengerperiodenForm } from './startdatoForForeldrepenger/StartdatoForForeldrepengerperiodenForm';
 
 interface Props {
@@ -20,61 +21,54 @@ interface Props {
   kanOverstyreAccess: boolean;
 }
 
-const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean =>
-  aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
-
 export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyreAccess }: Props) => {
-  const { aksjonspunkterForPanel, harÅpentAksjonspunkt, fagsak } = usePanelDataContext();
+  const { aksjonspunkterForPanel, fagsak } = usePanelDataContext();
 
   const automatiskMarkeringAvUtenlandssakAp = aksjonspunkterForPanel.find(
     ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   );
-  const automatiskAp = aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD);
-  const overstyringsAp = aksjonspunkterForPanel.find(
+  const avklarDekningsgradAP = aksjonspunkterForPanel.find(
+    ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+  );
+  const overstyrDekningsgradAp = aksjonspunkterForPanel.find(
     ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
+  );
+  const overstyrStartdatoAp = aksjonspunkterForPanel.find(
+    ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
   );
 
   return (
-    <VStack gap="space-32">
-      {harÅpentAksjonspunkt && erMarkertUtenlandssak(aksjonspunkterForPanel) && (
+    <VStack gap="space-32" maxWidth="700px">
+      {isAksjonspunktOpen(automatiskMarkeringAvUtenlandssakAp) && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="SakenFaktaPanel.OpptjeningUtland" />
         </AksjonspunktHelpTextHTML>
       )}
-      {harÅpentAksjonspunkt &&
-        aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD) && (
-          <AksjonspunktHelpTextHTML>
-            <FormattedMessage id="SakenFaktaPanel.AvklarDekningsgrad" />
-          </AksjonspunktHelpTextHTML>
-        )}
-      <VStack gap="space-40">
-        {ytelsefordeling && automatiskAp && (
-          <DekningradApForm ytelseFordeling={ytelsefordeling} aksjonspunkt={automatiskAp} />
-        )}
-        <HStack gap="space-40">
-          {automatiskMarkeringAvUtenlandssakAp && (
-            <InnhentDokOpptjeningUtlandPanel
-              dokStatus={utlandDokStatus?.dokStatus}
-              aksjonspunkt={automatiskMarkeringAvUtenlandssakAp}
-            />
-          )}
-          {fagsak.fagsakYtelseType === 'FP' && !!ytelsefordeling && (
-            <StartdatoForForeldrepengerperiodenForm
-              aksjonspunkt={aksjonspunkterForPanel.find(
-                ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
-              )}
-              ytelseFordeling={ytelsefordeling}
-            />
-          )}
-        </HStack>
-        {ytelsefordeling && !automatiskAp && fagsak.fagsakYtelseType === 'FP' && (
-          <DekningradForm
-            ytelseFordeling={ytelsefordeling}
-            aksjonspunkt={overstyringsAp}
-            kanOverstyreAccess={kanOverstyreAccess}
-          />
-        )}
-      </VStack>
+      {isAksjonspunktOpen(avklarDekningsgradAP) && (
+        <AksjonspunktHelpTextHTML>
+          <FormattedMessage id="SakenFaktaPanel.AvklarDekningsgrad" />
+        </AksjonspunktHelpTextHTML>
+      )}
+
+      {ytelsefordeling && avklarDekningsgradAP && (
+        <DekningradApForm ytelseFordeling={ytelsefordeling} aksjonspunkt={avklarDekningsgradAP} />
+      )}
+      {automatiskMarkeringAvUtenlandssakAp && (
+        <InnhentDokOpptjeningUtlandAP
+          dokStatus={utlandDokStatus?.dokStatus}
+          aksjonspunkt={automatiskMarkeringAvUtenlandssakAp}
+        />
+      )}
+      {fagsak.fagsakYtelseType === 'FP' && !!ytelsefordeling && (
+        <StartdatoForForeldrepengerperiodenForm ytelseFordeling={ytelsefordeling} aksjonspunkt={overstyrStartdatoAp} />
+      )}
+      {ytelsefordeling && !avklarDekningsgradAP && fagsak.fagsakYtelseType === 'FP' && (
+        <DekningradForm
+          ytelseFordeling={ytelsefordeling}
+          aksjonspunkt={overstyrDekningsgradAp}
+          kanOverstyreAccess={kanOverstyreAccess}
+        />
+      )}
     </VStack>
   );
 };

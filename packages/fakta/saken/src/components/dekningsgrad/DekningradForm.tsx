@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { PencilFillIcon, PencilIcon } from '@navikt/aksel-icons';
-import { BodyShort, Box, Button, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { PencilFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, HStack, Label, Radio, Textarea, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { AksjonspunktBoks, EditedIcon } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
-
-import styles from './dekningradForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -31,7 +30,7 @@ interface Props {
 export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAccess }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, fagsak, isReadOnly } = usePanelDataContext<OverstyringDekningsgradAp>();
+  const { submitCallback, isReadOnly } = usePanelDataContext<OverstyringDekningsgradAp>();
 
   const dekningsgrad =
     ytelseFordeling.dekningsgrader.avklartDekningsgrad ??
@@ -49,7 +48,7 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
 
   const [visEditeringsmodus, setVisEditeringsmodus] = useState(false);
 
-  const slåAvEditeringAvStartdato = () => {
+  const slåAvEditeringAvDekningsgrad = () => {
     formMethods.reset();
     setVisEditeringsmodus(false);
   };
@@ -57,44 +56,44 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
   if (!visEditeringsmodus) {
     return (
       <VStack gap="space-8">
-        <HStack gap="space-8" align="center">
-          <Heading size="small" level="3">
-            <FormattedMessage id="DekningsgradForm.Dekningsgrad" />
-          </Heading>
-          {aksjonspunkt?.begrunnelse && (
-            <BodyShort size="small">
-              <FormattedMessage id="DekningsgradForm.ErEndret" />
+        <div>
+          <HStack gap="space-8">
+            <Label>
+              <FormattedMessage id="DekningsgradForm.Dekningsgrad" />
+            </Label>
+            {aksjonspunkt?.begrunnelse && <EditedIcon />}
+          </HStack>
+          <HStack gap="space-16" align="center">
+            <BodyShort>
+              <FormattedMessage id="DekningsgradForm.DekningsgradForeldrepenger" values={{ dekningsgrad }} />
             </BodyShort>
-          )}
-        </HStack>
-        <HStack gap="space-8">
-          <FormattedMessage
-            id="DekningsgradForm.DekningsgradForeldrepenger"
-            values={{
-              dekningsgrad,
-            }}
-          />
-          {kanOverstyreAccess && (
-            <PencilFillIcon
-              title={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
-              className={isReadOnly ? styles['editIconReadonly'] : styles['editIcon']}
-              onClick={isReadOnly ? undefined : () => setVisEditeringsmodus(true)}
-            />
-          )}
-        </HStack>
+
+            {kanOverstyreAccess && (
+              <Button
+                variant="tertiary"
+                size="small"
+                title={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
+                aria-label={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
+                disabled={isReadOnly}
+                onClick={() => setVisEditeringsmodus(true)}
+                icon={<PencilFillIcon aria-hidden />}
+              />
+            )}
+          </HStack>
+        </div>
         {aksjonspunkt?.begrunnelse && (
-          <Box background="neutral-moderate" padding="space-20" borderRadius="4">
-            <VStack gap="space-8">
-              <Label size="small">
-                <FormattedMessage id="DekningsgradForm.BeskrivelseAvEndring" />
-              </Label>
-              <BodyShort size="small">{aksjonspunkt.begrunnelse}</BodyShort>
-            </VStack>
-          </Box>
+          <Textarea
+            size="small"
+            readOnly
+            label={<FormattedMessage id="Overstyring.Begrunnelse" />}
+            hideLabel
+            value={aksjonspunkt.begrunnelse}
+          />
         )}
       </VStack>
     );
   }
+  const { avklartDekningsgrad } = ytelseFordeling.dekningsgrader;
 
   return (
     <RhfForm
@@ -104,79 +103,75 @@ export const DekningradForm = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAcce
           kode: AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
           dekningsgrad: values.dekningsgrad,
           begrunnelse: values.begrunnelse,
-        }).then(slåAvEditeringAvStartdato)
+        }).then(slåAvEditeringAvDekningsgrad)
       }
     >
-      <div className={styles['header']}>
-        <HStack gap="space-8" align="center">
-          <PencilIcon aria-hidden height={24} width={24} />
-          <Heading size="small" level="3">
-            <FormattedMessage id="DekningsgradForm.EndreDekningsgrad" />
-          </Heading>
-        </HStack>
-      </div>
-      <Box background="neutral-moderate" padding="space-20">
+      <AksjonspunktBoks
+        tittel={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
+        aksjonspunkt={aksjonspunkt}
+      >
         <VStack gap="space-24">
           <RhfRadioGroup
             name="dekningsgrad"
             control={formMethods.control}
-            legend={<FormattedMessage id="DekningsgradForm.Dekningsgrad" />}
-            description={
-              fagsak.annenPart
-                ? intl.formatMessage(
-                    {
-                      id: 'DekningsgradForm.GjelderFor',
-                    },
-                    { søker: fagsak.bruker.navn, annenPart: fagsak.annenPart.navn },
-                  )
-                : undefined
+            legend={
+              <FormattedMessage
+                id="Dekningsgrad.HvilkenDekningsgrad"
+                values={{ harAnnenPart: !!ytelseFordeling.dekningsgrader.annenPart }}
+              />
             }
-            validate={[
-              required,
-              value => {
-                if (value === dekningsgrad) {
-                  return intl.formatMessage({ id: 'DekningsgradForm.LikEksisterende' });
-                }
-                return null;
-              },
-            ]}
+            validate={[required, validateIkkeLikEksisterende(intl, dekningsgrad)]}
             readOnly={isReadOnly}
           >
             <HStack gap="space-16">
               <Radio value={80} size="small">
-                {intl.formatMessage(
-                  { id: 'DekningsgradForm.80' },
-                  { erSatt: ytelseFordeling.dekningsgrader.avklartDekningsgrad === 80 },
+                {avklartDekningsgrad === 80 ? (
+                  <FormattedMessage id="Dekningsgrad.80.Nåværende" />
+                ) : (
+                  <FormattedMessage id="Dekningsgrad.80" />
                 )}
               </Radio>
               <Radio value={100} size="small">
-                {intl.formatMessage(
-                  { id: 'DekningsgradForm.100' },
-                  { erSatt: ytelseFordeling.dekningsgrader.avklartDekningsgrad === 100 },
+                {avklartDekningsgrad === 100 ? (
+                  <FormattedMessage id="Dekningsgrad.100.Nåværende" />
+                ) : (
+                  <FormattedMessage id="Dekningsgrad.100" />
                 )}
               </Radio>
             </HStack>
           </RhfRadioGroup>
+
           <RhfTextarea
             name="begrunnelse"
             control={formMethods.control}
-            label={<FormattedMessage id="DekningsgradForm.Begrunnelse" />}
+            label={<FormattedMessage id="Overstyring.Begrunnelse" />}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly}
           />
-          <div>
+
+          <HStack gap="space-8">
             <Button
-              variant="primary"
               size="small"
+              variant="primary"
               disabled={isReadOnly || !formMethods.formState.isDirty || formMethods.formState.isSubmitting}
               loading={formMethods.formState.isSubmitting}
             >
-              <FormattedMessage id="DekningsgradForm.Bekreft" />
+              <FormattedMessage id="Overstyring.Lagre" />
             </Button>
-          </div>
+            <Button variant="secondary" size="small" onClick={slåAvEditeringAvDekningsgrad} type="button">
+              <FormattedMessage id="Overstyring.Avbryt" />
+            </Button>
+          </HStack>
         </VStack>
-      </Box>
+      </AksjonspunktBoks>
     </RhfForm>
   );
+};
+
+const validateIkkeLikEksisterende = (intl: IntlShape, dekningsgrad: number | undefined) => (value: number) => {
+  if (value === dekningsgrad) {
+    return intl.formatMessage({ id: 'DekningsgradForm.LikEksisterende' });
+  }
+  return null;
 };

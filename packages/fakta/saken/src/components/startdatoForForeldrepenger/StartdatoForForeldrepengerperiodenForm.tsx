@@ -3,10 +3,10 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PencilFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading, HStack, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Label, Textarea, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktBoks, EditedIcon } from '@navikt/ft-ui-komponenter';
 import { capitalizeFirstLetter } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -14,8 +14,6 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
-
-import styles from './startdatoForForeldrepengerperiodenForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -60,8 +58,7 @@ interface Props {
 export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, ytelseFordeling }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } =
-    usePanelDataContext<OverstyringAvklarStartdatoForPeriodenAp>();
+  const { submitCallback, isReadOnly } = usePanelDataContext<OverstyringAvklarStartdatoForPeriodenAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -76,69 +73,85 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, ytelseFor
     setVisEditeringsmodus(false);
   };
 
-  return (
-    <RhfForm
-      formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(ytelseFordeling, values))}
-      setDataOnUnmount={setMellomlagretFormData}
-    >
-      <VStack gap="space-16">
-        <Heading size="small" level="3">
-          <FormattedMessage id="StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden" />
-        </Heading>
-        {!visEditeringsmodus && (
+  if (!visEditeringsmodus) {
+    return (
+      <VStack gap="space-8">
+        <div>
           <HStack gap="space-8">
-            <BodyShort size="small">
-              {capitalizeFirstLetter(dayjs(ytelseFordeling.startDatoForPermisjon).format('dddd D MMMM YYYY'))}
+            <Label>
+              <FormattedMessage id="StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden" />
+            </Label>
+            {aksjonspunkt?.begrunnelse && <EditedIcon />}
+          </HStack>
+          <HStack gap="space-16" align="center">
+            <BodyShort>
+              {capitalizeFirstLetter(dayjs(ytelseFordeling.startDatoForPermisjon).format('dddd D. MMMM YYYY'))}
             </BodyShort>
-            <PencilFillIcon
+            <Button
+              variant="tertiary"
+              size="small"
               title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
-              className={isReadOnly ? styles['editIconReadonly'] : styles['editIcon']}
-              onClick={isReadOnly ? undefined : slåPåEditering}
+              disabled={isReadOnly}
+              onClick={slåPåEditering}
+              icon={<PencilFillIcon aria-hidden />}
             />
           </HStack>
-        )}
-        {visEditeringsmodus && (
-          <AksjonspunktBox
-            className={styles['aksjonspunktMargin']}
-            erAksjonspunktApent={false}
-            erIkkeGodkjentAvBeslutter={
-              !!alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO]?.notAccepted
-            }
-          >
-            <VStack gap="space-16">
-              <RhfDatepicker
-                name="startdatoFraSøknad"
-                control={formMethods.control}
-                label={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Startdato' })}
-                validate={[required, hasValidDate, getValidateIsBefore2019(formMethods.getValues, intl)]}
-                readOnly={isReadOnly}
-              />
-              <RhfTextarea
-                name="begrunnelse"
-                control={formMethods.control}
-                label={<FormattedMessage id="StartdatoForForeldrepengerperiodenForm.Vurdering" />}
-                validate={[required, minLength3, maxLength1500, hasValidText]}
-                maxLength={1500}
-                readOnly={isReadOnly}
-              />
-              <HStack gap="space-8">
-                <Button
-                  size="small"
-                  variant="primary"
-                  disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                  loading={formMethods.formState.isSubmitting}
-                >
-                  <FormattedMessage id="UtlandPanel.lagre" />
-                </Button>
-                <Button variant="secondary" size="small" onClick={slaAvEditeringAvStartdato} type="button">
-                  <FormattedMessage id="UtlandPanel.avbryt" />
-                </Button>
-              </HStack>
-            </VStack>
-          </AksjonspunktBox>
+        </div>
+        {aksjonspunkt?.begrunnelse && (
+          <Textarea
+            size="small"
+            readOnly
+            label={<FormattedMessage id="Overstyring.Begrunnelse" />}
+            hideLabel
+            value={aksjonspunkt.begrunnelse}
+          />
         )}
       </VStack>
-    </RhfForm>
+    );
+  }
+
+  return (
+    <AksjonspunktBoks
+      aksjonspunkt={aksjonspunkt}
+      tittel={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
+    >
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={(values: FormValues) => submitCallback(transformValues(ytelseFordeling, values))}
+        setDataOnUnmount={setMellomlagretFormData}
+      >
+        <VStack gap="space-16">
+          <RhfDatepicker
+            name="startdatoFraSøknad"
+            control={formMethods.control}
+            label={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Startdato' })}
+            validate={[required, hasValidDate, getValidateIsBefore2019(formMethods.getValues, intl)]}
+            readOnly={isReadOnly}
+          />
+          <RhfTextarea
+            name="begrunnelse"
+            control={formMethods.control}
+            label={<FormattedMessage id="Overstyring.Begrunnelse" />}
+            validate={[required, minLength3, maxLength1500, hasValidText]}
+            maxLength={1500}
+            readOnly={isReadOnly}
+          />
+
+          <HStack gap="space-8">
+            <Button
+              size="small"
+              variant="primary"
+              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+              loading={formMethods.formState.isSubmitting}
+            >
+              <FormattedMessage id="Overstyring.Lagre" />
+            </Button>
+            <Button variant="secondary" size="small" onClick={slaAvEditeringAvStartdato} type="button">
+              <FormattedMessage id="Overstyring.Avbryt" />
+            </Button>
+          </HStack>
+        </VStack>
+      </RhfForm>
+    </AksjonspunktBoks>
   );
 };

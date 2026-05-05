@@ -40,7 +40,7 @@ interface Props {
 export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, isSubmittable, alleMerknaderFraBeslutter, isReadOnly } =
+  const { submitCallback, isSubmittable, isReadOnly, alleMerknaderFraBeslutter } =
     usePanelDataContext<SjekkTerminbekreftelseAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();

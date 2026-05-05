@@ -1,32 +1,18 @@
 import { useForm } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Box, Button, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
-import { dateFormat } from '@navikt/ft-utils';
 
+import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import { ManIcon } from '../../icons/Man';
-import { UnknownIcon } from '../../icons/Unknown';
-import { WomanIcon } from '../../icons/Woman';
-
-import styles from './dekningradApForm.module.css';
-
-const minLength3 = minLength(3);
-const maxLength1500 = maxLength(1500);
-
-const finnIkonForKjønn = (kjonn: string) => {
-  if (kjonn === 'K') {
-    return <WomanIcon />;
-  }
-  return kjonn === 'M' ? <ManIcon /> : <UnknownIcon />;
-};
+import { DekningsgradVisning } from './DekningsgradVisning';
 
 type FormValues = {
   dekningsgrad: number;
@@ -39,125 +25,96 @@ interface Props {
 }
 
 export const DekningradApForm = ({ ytelseFordeling, aksjonspunkt }: Props) => {
-  const { submitCallback, alleMerknaderFraBeslutter, fagsak, isReadOnly } = usePanelDataContext<AvklarDekningsgradAp>();
+  const intl = useIntl();
+
+  const { submitCallback, alleMerknaderFraBeslutter, fagsak, isReadOnly, isSubmittable } =
+    usePanelDataContext<AvklarDekningsgradAp>();
+
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: {
+    defaultValues: mellomlagretFormData ?? {
       dekningsgrad: ytelseFordeling.dekningsgrader.avklartDekningsgrad ?? undefined,
-      begrunnelse: aksjonspunkt.begrunnelse ?? '',
+      ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });
-  const { annenPart: dgAnnenpart, søker: dgSøker } = ytelseFordeling.dekningsgrader;
 
-  const erAksjonspunktApent = aksjonspunkt.status === 'OPPR';
+  const begrunnelse = formMethods.watch('begrunnelse');
 
-  const erIkkeGodkjentAvBeslutter = !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted;
+  const { dekningsgrader } = ytelseFordeling;
+  const { bruker, annenPart } = fagsak;
 
   return (
-    <VStack gap="space-16">
-      <AksjonspunktBox erAksjonspunktApent={erAksjonspunktApent} erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}>
-        <RhfForm
-          formMethods={formMethods}
-          onSubmit={(values: FormValues) =>
-            submitCallback({
-              kode: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-              begrunnelse: values.begrunnelse,
-              dekningsgrad: values.dekningsgrad,
-            })
-          }
-        >
-          <VStack gap="space-40">
+    <AksjonspunktBox
+      erAksjonspunktApent={aksjonspunkt.status === 'OPPR'}
+      erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
+    >
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(transformValues(values))}
+        setDataOnUnmount={setMellomlagretFormData}
+      >
+        <VStack gap="space-16">
+          <HStack gap="space-16">
+            <DekningsgradVisning
+              navn={bruker.navn}
+              kjønn={bruker.kjønn}
+              dekningsgrad={dekningsgrader.søker.dekningsgrad}
+              søknadsdato={dekningsgrader.søker.søknadsdato}
+            />
+            {annenPart && dekningsgrader.annenPart && (
+              <DekningsgradVisning
+                navn={annenPart.navn}
+                kjønn={annenPart.kjønn}
+                dekningsgrad={dekningsgrader.annenPart.dekningsgrad}
+                søknadsdato={dekningsgrader.annenPart.søknadsdato}
+              />
+            )}
+          </HStack>
+
+          <RhfRadioGroup
+            name="dekningsgrad"
+            control={formMethods.control}
+            legend={
+              <FormattedMessage
+                id="Dekningsgrad.HvilkenDekningsgrad"
+                values={{ harAnnenPart: !!ytelseFordeling.dekningsgrader.annenPart }}
+              />
+            }
+            validate={[required]}
+            readOnly={isReadOnly}
+          >
             <HStack gap="space-16">
-              <Box background="brand-blue-moderate" padding="space-20" borderColor="neutral" borderRadius="4">
-                <VStack gap="space-8">
-                  <HStack gap="space-16" align="center">
-                    {finnIkonForKjønn(fagsak.bruker.kjønn)}
-                    <VStack gap="space-0">
-                      <BodyShort size="medium">{fagsak.bruker.navn}</BodyShort>
-                      <BodyShort size="small">
-                        <FormattedMessage
-                          id="DekningradApForm.SøknadSendt"
-                          values={{
-                            dato: dateFormat(dgSøker.søknadsdato, {
-                              month: 'long',
-                            }),
-                          }}
-                        />
-                      </BodyShort>
-                    </VStack>
-                  </HStack>
-                  <Heading size="xsmall" level="3">
-                    <FormattedMessage id="DekningradApForm.HarValgt" values={{ dekningsgrad: dgSøker.dekningsgrad }} />
-                  </Heading>
-                </VStack>
-              </Box>
-              {fagsak.annenPart && (
-                <Box background="brand-blue-moderate" padding="space-20" borderColor="neutral" borderRadius="4">
-                  <VStack gap="space-8">
-                    <HStack gap="space-16" align="center">
-                      {finnIkonForKjønn(fagsak.annenPart.kjønn)}
-                      <VStack gap="space-0">
-                        <BodyShort size="medium">{fagsak.annenPart.navn} </BodyShort>
-                        <BodyShort size="small">
-                          <FormattedMessage
-                            id="DekningradApForm.SøknadSendt"
-                            values={{
-                              dato: dgAnnenpart
-                                ? dateFormat(dgAnnenpart.søknadsdato, {
-                                    month: 'long',
-                                  })
-                                : '-',
-                            }}
-                          />
-                        </BodyShort>
-                      </VStack>
-                    </HStack>
-                    <Heading size="xsmall" level="3">
-                      <FormattedMessage
-                        id="DekningradApForm.HarValgt"
-                        values={{ dekningsgrad: dgAnnenpart?.dekningsgrad }}
-                      />
-                    </Heading>
-                  </VStack>
-                </Box>
-              )}
-            </HStack>
-            <RhfRadioGroup
-              name="dekningsgrad"
-              control={formMethods.control}
-              legend={<FormattedMessage id="DekningradApForm.HvilkenDekningsgrad" />}
-              validate={[required]}
-              readOnly={isReadOnly}
-            >
               <Radio value={80} size="small">
-                <FormattedMessage id="DekningradApForm.80" />
+                <FormattedMessage id="Dekningsgrad.80" />
               </Radio>
               <Radio value={100} size="small">
-                <FormattedMessage id="DekningradApForm.100" />
+                <FormattedMessage id="Dekningsgrad.100" />
               </Radio>
-            </RhfRadioGroup>
-            <RhfTextarea
-              name="begrunnelse"
-              control={formMethods.control}
-              label={<FormattedMessage id="DekningradApForm.Begrunnelse" />}
-              validate={[required, minLength3, maxLength1500, hasValidText]}
-              maxLength={1500}
-              readOnly={isReadOnly}
-            />
-            <div>
-              <Button
-                variant="primary"
-                size="small"
-                disabled={isReadOnly || !formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                loading={formMethods.formState.isSubmitting}
-              >
-                <FormattedMessage id="DekningradApForm.Bekreft" />
-              </Button>
-            </div>
-          </VStack>
-        </RhfForm>
-      </AksjonspunktBox>
-      {!erIkkeGodkjentAvBeslutter && !erAksjonspunktApent && <hr className={styles['hr']} />}
-    </VStack>
+            </HStack>
+          </RhfRadioGroup>
+
+          <FaktaBegrunnelseTextField
+            control={formMethods.control}
+            isReadOnly={isReadOnly}
+            isSubmittable={isSubmittable}
+            hasBegrunnelse={!!begrunnelse}
+            label={intl.formatMessage({ id: 'Aksjonspunkt.Begrunnelse' })}
+          />
+
+          <FaktaSubmitButton
+            isSubmittable={isSubmittable}
+            isSubmitting={formMethods.formState.isSubmitting}
+            isDirty={formMethods.formState.isDirty}
+            isReadOnly={isReadOnly}
+          />
+        </VStack>
+      </RhfForm>
+    </AksjonspunktBox>
   );
 };
+
+const transformValues = (values: FormValues): AvklarDekningsgradAp => ({
+  kode: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+  ...values,
+});

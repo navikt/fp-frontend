@@ -13,8 +13,6 @@ import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import styles from './innhentDokOpptjeningUtlandPanel.module.css';
-
 const OpptjeningIUtlandDokStatus = {
   DOKUMENTASJON_VIL_BLI_INNHENTET: 'DOKUMENTASJON_VIL_BLI_INNHENTET',
   DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET: 'DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET',
@@ -30,10 +28,10 @@ interface Props {
   dokStatus?: string;
 }
 
-export const InnhentDokOpptjeningUtlandPanel = ({ aksjonspunkt, dokStatus }: Props) => {
+export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, harÅpentAksjonspunkt, isSubmittable } =
+  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, isSubmittable } =
     usePanelDataContext<MerkOpptjeningUtlandAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
@@ -48,19 +46,18 @@ export const InnhentDokOpptjeningUtlandPanel = ({ aksjonspunkt, dokStatus }: Pro
   const begrunnelse = formMethods.watch('begrunnelse');
 
   return (
-    <RhfForm
-      formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-      setDataOnUnmount={setMellomlagretFormData}
+    <AksjonspunktBox
+      erAksjonspunktApent={aksjonspunkt.status === 'OPPR'}
+      erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
     >
       <VStack gap="space-24">
         <Heading size="small" level="3">
           <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.OpptjeningUtland" />
         </Heading>
-        <AksjonspunktBox
-          className={styles['aksjonspunktMargin']}
-          erAksjonspunktApent={harÅpentAksjonspunkt}
-          erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
+        <RhfForm
+          formMethods={formMethods}
+          onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+          setDataOnUnmount={setMellomlagretFormData}
         >
           <VStack gap="space-16">
             <RhfRadioGroup
@@ -77,13 +74,15 @@ export const InnhentDokOpptjeningUtlandPanel = ({ aksjonspunkt, dokStatus }: Pro
                 <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke" values={{ b: BTag }} />
               </Radio>
             </RhfRadioGroup>
+
             <FaktaBegrunnelseTextField
               control={formMethods.control}
               isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}
               hasBegrunnelse={!!begrunnelse}
-              label={intl.formatMessage({ id: 'InnhentDokOpptjeningUtlandPanel.Begrunnelse' })}
+              label={intl.formatMessage({ id: 'Aksjonspunkt.Begrunnelse' })}
             />
+
             <FaktaSubmitButton
               isSubmittable={isSubmittable}
               isSubmitting={formMethods.formState.isSubmitting}
@@ -91,9 +90,9 @@ export const InnhentDokOpptjeningUtlandPanel = ({ aksjonspunkt, dokStatus }: Pro
               isReadOnly={isReadOnly}
             />
           </VStack>
-        </AksjonspunktBox>
+        </RhfForm>
       </VStack>
-    </RhfForm>
+    </AksjonspunktBox>
   );
 };
 
