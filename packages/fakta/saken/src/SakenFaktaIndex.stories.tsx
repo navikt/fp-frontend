@@ -35,8 +35,9 @@ const meta = {
   component: SakenFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    ytelsefordeling: defaultYtelsefordeling,
+    isReadOnly: false,
     kanOverstyreAccess: true,
+    ytelsefordeling: defaultYtelsefordeling,
   },
   render: args => <SakenFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof SakenFaktaIndex>>;

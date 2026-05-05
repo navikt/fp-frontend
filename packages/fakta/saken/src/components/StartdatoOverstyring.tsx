@@ -87,15 +87,16 @@ export const StartdatoOverstyring = ({ aksjonspunkt, ytelseFordeling }: Props) =
             <BodyShort>
               {capitalizeFirstLetter(dayjs(ytelseFordeling.startDatoForPermisjon).format('dddd D. MMMM YYYY'))}
             </BodyShort>
-            <Button
-              variant="tertiary"
-              size="small"
-              aria-label={intl.formatMessage({ id: 'StartdatoOverstyring.EndreStartdato' })}
-              title={intl.formatMessage({ id: 'StartdatoOverstyring.EndreStartdato' })}
-              disabled={isReadOnly}
-              onClick={slåPåEditering}
-              icon={<PencilFillIcon aria-hidden />}
-            />
+            {!isReadOnly && (
+              <Button
+                variant="tertiary"
+                size="small"
+                aria-label={intl.formatMessage({ id: 'StartdatoOverstyring.EndreStartdato' })}
+                title={intl.formatMessage({ id: 'StartdatoOverstyring.EndreStartdato' })}
+                onClick={slåPåEditering}
+                icon={<PencilFillIcon aria-hidden />}
+              />
+            )}
           </HStack>
         </div>
         {aksjonspunkt?.begrunnelse && (

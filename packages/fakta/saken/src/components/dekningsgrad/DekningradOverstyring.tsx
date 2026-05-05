@@ -66,13 +66,12 @@ export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverst
               <FormattedMessage id="DekningradOverstyring.DekningsgradForeldrepenger" values={{ dekningsgrad }} />
             </BodyShort>
 
-            {kanOverstyreAccess && (
+            {kanOverstyreAccess && !isReadOnly && (
               <Button
                 variant="tertiary"
                 size="small"
                 title={intl.formatMessage({ id: 'DekningradOverstyring.EndreDekningsgrad' })}
                 aria-label={intl.formatMessage({ id: 'DekningradOverstyring.EndreDekningsgrad' })}
-                disabled={isReadOnly}
                 onClick={() => setVisEditeringsmodus(true)}
                 icon={<PencilFillIcon aria-hidden />}
               />
