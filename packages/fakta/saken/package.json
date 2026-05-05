@@ -13,7 +13,6 @@
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
     "prettier:fix": "prettier --write src",
     "tsc": "tsc --noEmit",
-    "stylelint": "stylelint src/**/*.module.css",
     "dev": "vite build --mode development --watch",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "storybook": "storybook dev --quiet -p 7032"
@@ -28,6 +27,7 @@
     "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-form-hooks": "12.0.4",
     "@navikt/ft-form-validators": "6.0.3",
+    "@navikt/ft-plattform-komponenter": "12.0.4",
     "@navikt/ft-ui-komponenter": "8.0.4",
     "@navikt/ft-utils": "5.0.1",
     "dayjs": "1.11.20",
@@ -49,7 +49,6 @@
     "@types/react": "19.2.14",
     "eslint": "10.2.1",
     "storybook": "10.3.5",
-    "stylelint": "17.9.1",
     "typescript": "6.0.3",
     "vite": "8.0.10",
     "vitest": "4.1.5"
