@@ -83,7 +83,7 @@ export const TilretteleggingFormFeil = () => {
     }
     // Re-valider når arbeidsforhold endres, men kun etter første submit (unngå feil før brukeren har prøvd)
     if (isSubmitted) {
-      void trigger(FEIL_SJEKKER.map(({ type }) => `tilretteleggingFeil.${type}`));
+      void trigger(FEIL_SJEKKER.map(({ type }) => `tilretteleggingFeil.${type}`) as Parameters<typeof trigger>[0]);
     }
   }, [arbeidsforhold, isSubmitted, register, trigger]);
 
