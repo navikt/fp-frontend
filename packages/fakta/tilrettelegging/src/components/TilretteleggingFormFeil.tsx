@@ -94,11 +94,7 @@ export const TilretteleggingFormFeil = () => {
 
   const aktiveFeil = FEIL_SJEKKER.filter(({ type }) => errors.tilretteleggingFeil?.[type]);
 
-  if (aktiveFeil.length === 0) {
-    return null;
-  }
-
-  return (
+  return aktiveFeil.length === 0 ? null : (
     <VStack gap="space-8">
       {aktiveFeil.map(({ type, melding }) => (
         <Alert key={type} variant="error" size="small">
