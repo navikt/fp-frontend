@@ -18,14 +18,12 @@ export const AapKombinertAtflFaktaInitPanel = () => {
     ap => ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL,
   );
 
-  const skalPanelVisesIMeny = !!aksjonspunkt;
-
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.AAP_KOMBINERT_ATFL}
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.AapKombinertBeregning' })}
-      skalPanelVisesIMeny={skalPanelVisesIMeny}
+      skalPanelVisesIMeny={!!aksjonspunkt}
     >
       {aksjonspunkt ? <AapKombinertAtflFaktaIndex aksjonspunkt={aksjonspunkt} /> : <></>}
     </FaktaDefaultInitPanel>
