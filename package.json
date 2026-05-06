@@ -47,7 +47,7 @@
     "eslint": "10.2.1",
     "husky": "9.1.7",
     "jsdom": "29.1.0",
-    "knip": "6.7.0",
+    "knip": "6.8.0",
     "lint-staged": "16.4.0",
     "prettier": "3.8.3",
     "shelljs": "0.10.0",
