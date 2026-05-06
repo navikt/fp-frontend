@@ -88,20 +88,12 @@ export const Messages = ({
   const [brevData, setBrevData] = useState<{ opprinneligHtml: string; redigertHtml: string | null } | null>(null);
   const [visRedigeringModal, setVisRedigeringModal] = useState(false);
 
-  const brevDataRef = React.useRef(brevData);
-  brevDataRef.current = brevData;
-
   const erVarselOmRevurdering = brevmalkode === 'VARREV';
   const erInnhenteOpplysninger = brevmalkode === 'INNOPP';
   const brukBreveditor = erVarselOmRevurdering || erInnhenteOpplysninger;
 
   useEffect(() => {
     setBrevData(null);
-    return () => {
-      if (brevDataRef.current?.redigertHtml && brevmalkode) {
-        void mellomlagreBrev(brevmalkode, undefined).catch(() => {});
-      }
-    };
   }, [årsakskode, mellomlagreBrev, brevmalkode]);
 
   useEffect(() => {

@@ -91,6 +91,7 @@ export const BrevRedigeringModal = ({
 
   const tilbakestill = () => {
     void tilbakestillEndringer(opprinneligRedigerbartInnhold);
+    void mellomlagreOgHentPåNytt(undefined);
     setVisTilbakestillAdvarselModal(false);
   };
 
