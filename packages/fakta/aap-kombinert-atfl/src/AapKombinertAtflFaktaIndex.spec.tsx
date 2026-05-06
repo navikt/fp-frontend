@@ -7,7 +7,7 @@ import * as stories from './AapKombinertAtflFaktaIndex.stories';
 const { ÅpentAksjonspunkt, LøstAksjonspunkt } = composeStories(stories);
 
 describe('AapKombinertAtflFaktaIndex', () => {
-  it('skal vise hjelpetekst og deaktivert knapp når aksjonspunktet er åpent', async () => {
+  it('skal vise hjelpetekst og skjema når aksjonspunktet er åpent', async () => {
     render(<ÅpentAksjonspunkt />);
 
     expect(
@@ -17,28 +17,26 @@ describe('AapKombinertAtflFaktaIndex', () => {
       ),
     ).toBeInTheDocument();
     expect(screen.getByText('Beregningen er korrekt, fortsett behandlingen.')).toBeInTheDocument();
-    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
   });
 
-  it('skal aktivere knappen når checkbox hukes av og sende korrekte verdier ved submit', async () => {
+  it('skal gi valideringsfeil og sende korrekte verdier ved submit når checkbox er huket av', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
     render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
-    expect(await screen.findByText('Bekreft og fortsett')).toBeInTheDocument();
-    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
+    await screen.findByText('Bekreft og fortsett');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+    expect(lagre).not.toHaveBeenCalled();
 
     await userEvent.click(screen.getByRole('checkbox'));
     await userEvent.type(screen.getByLabelText('Vurdering'), 'Beregningen er kontrollert og korrekt.');
-
-    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeEnabled();
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5104',
       begrunnelse: 'Beregningen er kontrollert og korrekt.',
-      erBeregningenKorrekt: true,
     });
   });
 
