@@ -9,11 +9,12 @@
   "TilretteleggingFaktaForm.Termindato": "Termindato",
   "TilretteleggingFaktaForm.Fodselsdato": "Fødselsdato",
   "TilretteleggingFaktaForm.UndersokNarmere": "Søker var ikke ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.",
-  "TilretteleggingFaktaForm.IkkeAllePermisjonerVurdert": "Ikke alle velferdspermisjoner er vurdert",
-  "TilretteleggingFaktaForm.HarIkkeValgtArbeidsforhold": "Minst ett arbeidsforhold må brukes",
-  "TilretteleggingFaktaForm.PeriodeIkkeLagtTil": "Det er minst en periode som er lagt til men ikke ferdigstilt",
-  "TilretteleggingFaktaForm.ArbeidsforholdUtenTilrettelegging": "Alle arbeidsforhold med svangerskapspenger må ha minst en tilretteleggingsperiode",
-  "TilretteleggingFaktaForm.ValgtSvpVedGyldig100Permisjon": "Arbeidsforhold med gyldig permisjon på 100% kan ikke ha svangerskapspenger",
+
+  "TilretteleggingFormFeil.IkkeAllePermisjonerVurdert": "Ikke alle velferdspermisjoner er vurdert",
+  "TilretteleggingFormFeil.HarIkkeValgtArbeidsforhold": "Minst ett arbeidsforhold må brukes",
+  "TilretteleggingFormFeil.PeriodeIkkeLagtTil": "Det er minst en periode som er lagt til men ikke ferdigstilt",
+  "TilretteleggingFormFeil.ArbeidsforholdUtenTilrettelegging": "Alle arbeidsforhold med svangerskapspenger må ha minst en tilretteleggingsperiode",
+  "TilretteleggingFormFeil.ValgtSvpVedGyldig100Permisjon": "Arbeidsforhold med gyldig permisjon på 100% kan ikke ha svangerskapspenger",
 
   "ArbeidsforholdPanel.TilretteleggingTidligereEnn": "Tilrettelegging fra og med må være tidligere enn {dato}",
   "ArbeidsforholdPanel.DatoForTilrettelegging": "Dato for tilrettelegging fra lege eller jordmor",

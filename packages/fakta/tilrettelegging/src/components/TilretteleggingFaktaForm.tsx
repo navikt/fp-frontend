@@ -20,7 +20,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
-import { harUvurderteVelferdspermisjoner, useTilretteleggingFeil } from './useTilretteleggingFeil';
+import { harUvurderteVelferdspermisjoner, TilretteleggingFormFeil } from './TilretteleggingFormFeil.tsx';
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -47,20 +47,13 @@ export const TilretteleggingFaktaForm = ({
       buildInitialValues(svangerskapspengerTilrettelegging, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId),
   });
 
-  const arbeidsforhold = formMethods.watch('arbeidsforhold');
   const begrunnelse = formMethods.watch('begrunnelse');
 
   const skalVurdereVelferdspermisjoner = harUvurderteVelferdspermisjoner(
     svangerskapspengerTilrettelegging.arbeidsforholdListe,
   );
 
-  const { harFeil, visFeilmelding, feilkomponent } = useTilretteleggingFeil(arbeidsforhold);
-
   const onSubmit = (values: TilretteleggingFormValues) => {
-    if (harFeil) {
-      visFeilmelding();
-      return Promise.resolve();
-    }
     return submitCallback({
       kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
       termindato: values.termindato,
@@ -106,7 +99,7 @@ export const TilretteleggingFaktaForm = ({
           readOnly={isReadOnly}
           uttakArbeidTyper={uttakArbeidTyper}
         />
-        {feilkomponent}
+        <TilretteleggingFormFeil />
         <FaktaBegrunnelseTextField
           control={formMethods.control}
           isReadOnly={isReadOnly}
