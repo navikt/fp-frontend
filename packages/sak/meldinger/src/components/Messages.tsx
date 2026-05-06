@@ -94,7 +94,7 @@ export const Messages = ({
 
   useEffect(() => {
     setBrevData(null);
-  }, [årsakskode, mellomlagreBrev, brevmalkode]);
+  }, [årsakskode, brevmalkode]);
 
   useEffect(() => {
     if (brukBreveditor && !brevData && (!erVarselOmRevurdering || årsakskode)) {
@@ -263,9 +263,12 @@ const getfiltrerteRevurderingVarslingArsaker = (
 };
 
 const buildInitialValues = (behandling: FagsakBehandlingDto): FormValues => {
-  const harInnopp = behandling.brevmaler.some(mal => mal.kode === 'INNOPP');
+  const innoppTilgjengelig = behandling.brevmaler.some(mal => mal.kode === 'INNOPP' && mal.tilgjengelig);
+  const defaultMalkode = innoppTilgjengelig
+    ? 'INNOPP'
+    : behandling.brevmaler.find(mal => mal.tilgjengelig)?.kode;
   const initialValues = {
-    brevmalkode: (harInnopp ? 'INNOPP' : behandling.brevmaler[0]?.kode) as DokumentMalType | DokumentMalTypeFpTilbake | undefined,
+    brevmalkode: defaultMalkode as DokumentMalType | DokumentMalTypeFpTilbake | undefined,
     fritekst: undefined,
   };
 
