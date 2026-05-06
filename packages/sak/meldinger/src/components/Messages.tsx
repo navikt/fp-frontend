@@ -263,8 +263,9 @@ const getfiltrerteRevurderingVarslingArsaker = (
 };
 
 const buildInitialValues = (behandling: FagsakBehandlingDto): FormValues => {
+  const harInnopp = behandling.brevmaler.some(mal => mal.kode === 'INNOPP');
   const initialValues = {
-    brevmalkode: (behandling.brevmaler[0]?.kode as DokumentMalType | DokumentMalTypeFpTilbake | undefined) ?? undefined,
+    brevmalkode: (harInnopp ? 'INNOPP' : behandling.brevmaler[0]?.kode) as DokumentMalType | DokumentMalTypeFpTilbake | undefined,
     fritekst: undefined,
   };
 
