@@ -19,7 +19,7 @@ type FeilType =
 // Hvert feil-felt registreres individuelt i RHF — ett felt per FeilType —
 // slik at validering og feilvisning henger naturlig sammen uten join/split.
 type FormValuesMedFeil = TilretteleggingFormValues & {
-  tilretteleggingFeil: Record<FeilType, unknown>;
+  tilretteleggingFeil: Record<FeilType, boolean>;
 };
 
 export const harUvurderteVelferdspermisjoner = (arbeidsforhold: BekreftTilrettelegging[]) =>
