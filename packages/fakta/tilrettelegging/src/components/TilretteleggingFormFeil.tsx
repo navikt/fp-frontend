@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { type FieldPath, useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Alert, VStack } from '@navikt/ds-react';
@@ -27,8 +27,14 @@ export const harUvurderteVelferdspermisjoner = (arbeidsforhold: BekreftTilrettel
     filtrerVelferdspermisjoner(a.velferdspermisjoner, a.tilretteleggingBehovFom).some(p => p.erGyldig === undefined),
   );
 
+const harUferdigstiltPeriode = (a: BekreftTilrettelegging) =>
+  a.tilretteleggingDatoer.some(td => !td.fom) || a.avklarteOppholdPerioder.some(td => !td.fom);
+
 const harGyldig100Permisjon = (a: BekreftTilrettelegging) =>
   a.skalBrukes && a.velferdspermisjoner.some(vp => vp.erGyldig && vp.permisjonsprosent === 100);
+
+const erArbeidsforholdUtenTilrettelegging = (a: BekreftTilrettelegging) =>
+  a.skalBrukes && a.tilretteleggingDatoer.length === 0;
 
 type FeilSjekk = {
   type: FeilType;
@@ -49,13 +55,12 @@ const FEIL_SJEKKER: FeilSjekk[] = [
   },
   {
     type: 'PeriodeIkkeLagtTil',
-    harFeil: af =>
-      af.some(a => a.tilretteleggingDatoer.some(td => !td.fom) || a.avklarteOppholdPerioder.some(td => !td.fom)),
+    harFeil: af => af.some(harUferdigstiltPeriode),
     melding: <FormattedMessage id="TilretteleggingFormFeil.PeriodeIkkeLagtTil" />,
   },
   {
     type: 'ArbeidsforholdUtenTilrettelegging',
-    harFeil: af => af.some(a => a.skalBrukes && a.tilretteleggingDatoer.length === 0),
+    harFeil: af => af.some(erArbeidsforholdUtenTilrettelegging),
     melding: <FormattedMessage id="TilretteleggingFormFeil.ArbeidsforholdUtenTilrettelegging" />,
   },
   {
@@ -83,7 +88,7 @@ export const TilretteleggingFormFeil = () => {
     }
     // Re-valider når arbeidsforhold endres, men kun etter første submit (unngå feil før brukeren har prøvd)
     if (isSubmitted) {
-      void trigger(FEIL_SJEKKER.map(({ type }) => `tilretteleggingFeil.${type}`) as Parameters<typeof trigger>[0]);
+      void trigger(FEIL_SJEKKER.map<FieldPath<FormValuesMedFeil>>(({ type }) => `tilretteleggingFeil.${type}`));
     }
   }, [arbeidsforhold, isSubmitted, register, trigger]);
 
