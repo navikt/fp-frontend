@@ -1,10 +1,10 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
+import { DateLabel, FaktaBoks, LabeledValue } from '@navikt/ft-ui-komponenter';
 
 import type { FødselSøknad } from '@navikt/fp-types';
-import { DokumentLink, type DokumentLinkReferanse, FaktaKort } from '@navikt/fp-ui-komponenter';
+import { DokumentLink, type DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
 
 interface Props {
   søknad: FødselSøknad;
@@ -18,7 +18,7 @@ export const FaktaFraSøknad = ({
   const intl = useIntl();
   const barnet = barn[0];
   return (
-    <FaktaKort label={intl.formatMessage({ id: 'FaktaFraSøknad.Tittel' })}>
+    <FaktaBoks tittel={intl.formatMessage({ id: 'FaktaFraSøknad.Tittel' })}>
       <VStack gap="space-16">
         {termindato && (
           <LabeledValue
@@ -59,6 +59,6 @@ export const FaktaFraSøknad = ({
           />
         )}
       </VStack>
-    </FaktaKort>
+    </FaktaBoks>
   );
 };
