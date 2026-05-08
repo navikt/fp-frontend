@@ -1,5 +1,4 @@
 import react from '@vitejs/plugin-react';
-import sourcemaps from 'rollup-plugin-sourcemaps';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, mergeConfig } from 'vite';
 import path from 'node:path';
@@ -13,9 +12,6 @@ export const createSharedAppConfig = setupFileDirName =>
   mergeConfig(createConfig(setupFileDirName), {
     build: {
       sourcemap: true,
-      rollupOptions: {
-        plugins: [sourcemaps({ exclude: /@sentry/ })],
-      },
     },
   });
 
