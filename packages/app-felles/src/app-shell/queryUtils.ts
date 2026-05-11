@@ -6,6 +6,11 @@ import { ErrorType, type FpError } from '../restApiError/errorType';
 
 const ZERO_RETRIES = false;
 
+type FeilDto = {
+  feilmelding?: string;
+  callId?: string;
+};
+
 const retryHandler = () => {
   if (import.meta.env.MODE === 'test') {
     return ZERO_RETRIES;
@@ -41,10 +46,10 @@ export const createQueryClient = (errorHandler: (error: Error) => void) =>
     }),
   });
 
-const lagServerfeilmelding = (feilmelding?: string, callId?: string): string => {
-  const melding = feilmelding ?? 'Ukjent feil';
-  if (callId) {
-    return `Det oppstod en serverfeil: ${melding}. Meld til support med referanse-id: ${callId}`;
+const lagServerfeilmelding = (feilDto?: FeilDto): string => {
+  const melding = feilDto?.feilmelding ?? 'Ukjent feil';
+  if (feilDto?.callId) {
+    return `Det oppstod en serverfeil: ${melding}. Meld til support med referanse-id: ${feilDto.callId}`;
   }
   return `Det oppstod en serverfeil: ${melding}`;
 };
@@ -75,13 +80,8 @@ export const getErrorHandler =
         });
       } else if (status === 500) {
         captureException(error);
-        try {
-          const feilDto = error.data as { feilmelding?: string; callId?: string } | undefined;
-          const melding = lagServerfeilmelding(feilDto?.feilmelding, feilDto?.callId);
-          addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: melding });
-        } catch {
-          addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
-        }
+        const feilDto = error.data as FeilDto | undefined;
+        addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: lagServerfeilmelding(feilDto) });
       } else {
         captureException(error);
         try {
