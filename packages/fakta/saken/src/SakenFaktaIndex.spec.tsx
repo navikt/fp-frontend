@@ -8,14 +8,14 @@ const {
   StartdatoForForeldrepengerOgDekningsgrad,
   ApentAksjonspunktForInnhentingAvDokumentasjon,
   KanIkkeOverstyreDekningsgrad,
-  DekningsgradErEndret,
+  DekningsgradOgStartdatoErEndret,
   StartdatoForForeldrepengerOgDekningsgradMedAnnenPart,
   HarFåttDekningsgradAksjonspunkt,
 } = composeStories(stories);
 
 describe('SakenFaktaIndex', () => {
   it('skal få aksjonspunkt om innehenting av dokumentasjon, svar at vil bli innhentet og bekreft', async () => {
-    const lagre = vi.fn();
+    const lagre = vi.fn(() => Promise.resolve());
 
     render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
@@ -42,7 +42,7 @@ describe('SakenFaktaIndex', () => {
   });
 
   it('skal få feilmelding når en ikke har fylt ut alle feltene under Opptjening utland', async () => {
-    const lagre = vi.fn();
+    const lagre = vi.fn(() => Promise.resolve());
 
     render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
@@ -63,12 +63,12 @@ describe('SakenFaktaIndex', () => {
   });
 
   it('skal lagre ny startdato for foreldrepenger', async () => {
-    const lagre = vi.fn();
+    const lagre = vi.fn(() => Promise.resolve());
 
     render(<StartdatoForForeldrepengerOgDekningsgrad submitCallback={lagre} />);
 
     expect(await screen.findByText('Startdato for foreldrepengeperioden')).toBeInTheDocument();
-    expect(screen.getByText('Tirsdag 1 januar 2019')).toBeInTheDocument();
+    expect(screen.getByText('Tirsdag 1. januar 2019')).toBeInTheDocument();
 
     expect(screen.queryByText('Startdato som skal benyttes (fra søknad eller fødsel)')).not.toBeInTheDocument();
 
@@ -78,12 +78,12 @@ describe('SakenFaktaIndex', () => {
     await userEvent.type(startdato, '{backspace}{backspace}20');
     fireEvent.blur(startdato);
 
-    const vurdering = screen.getByText('Vurdering');
+    const vurdering = screen.getByText('Begrunnelse');
     await userEvent.type(vurdering, 'Dette er en vurdering');
 
-    expect(await screen.findByText('Lagre')).toBeEnabled();
+    expect(await screen.findByText('Overstyr')).toBeEnabled();
 
-    await userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByText('Overstyr'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -108,7 +108,7 @@ describe('SakenFaktaIndex', () => {
     const vurdering = screen.getByText('Begrunnelse');
     await userEvent.type(vurdering, 'Dette er en begrunnelse');
 
-    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Overstyr'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -125,7 +125,7 @@ describe('SakenFaktaIndex', () => {
 
     await userEvent.click(screen.getByTitle('Endre dekningsgrad'));
 
-    expect(screen.getByText('Gjelder for Helga Utvikler og Espen Utvikler')).toBeInTheDocument();
+    expect(screen.getByText('Hvilken dekningsgrad skal gjelde for begge?')).toBeInTheDocument();
   });
 
   it('skal ikke kunne overstyre dekningsgrad når en ikke er overstyrer', async () => {
@@ -135,11 +135,15 @@ describe('SakenFaktaIndex', () => {
   });
 
   it('skal vise at dekningsgrad er endret', async () => {
-    render(<DekningsgradErEndret />);
-    expect(await screen.findByText('Dekningsgrad')).toBeInTheDocument();
-    expect(screen.getByText('Er endret')).toBeInTheDocument();
-    expect(screen.getByText('Beskrivelse av endring')).toBeInTheDocument();
-    expect(screen.getByText('Er endret til 80 fordi...')).toBeInTheDocument();
+    render(<DekningsgradOgStartdatoErEndret />);
+    expect(await screen.findByText('Startdato for foreldrepengeperioden')).toBeInTheDocument();
+    expect(screen.getByText('Tirsdag 1. januar 2019')).toBeInTheDocument();
+    expect(screen.getByText('Startdato er endret fordi...')).toBeInTheDocument();
+
+    expect(screen.getByText('Dekningsgrad')).toBeInTheDocument();
+    expect(screen.getByText('80% foreldrepenger')).toBeInTheDocument();
+    expect(screen.getByText('Dekningsgraden er endret til 80 fordi...')).toBeInTheDocument();
+    expect(screen.getAllByTitle('Saksbehandler har endret feltets verdi')).toHaveLength(2);
   });
 
   it('skal løse dekningsgrad AP', async () => {

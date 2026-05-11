@@ -1,7 +1,7 @@
 import { HTTPError, type KyResponse } from 'ky';
 
 import { ErrorType, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
-import type { AsyncPollingStatus, Behandling, PollingStatus } from '@navikt/fp-types';
+import type { AsyncPollingStatus, Behandling } from '@navikt/fp-types';
 
 import { doGetRequest } from '../fagsakApi';
 
@@ -104,7 +104,7 @@ const calculatePollingInterval = (pollIntervalMillis: number | undefined, pollin
 };
 
 const isPollingResponse = (response: AsyncPollingStatus | Behandling): response is AsyncPollingStatus => {
-  return ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status as PollingStatus);
+  return ['PENDING', 'COMPLETE', 'DELAYED', 'CANCELLED', 'HALTED'].includes(response.status);
 };
 
 const isPollingDelayedOrHalted = (pollingResponse: AsyncPollingStatus): boolean => {

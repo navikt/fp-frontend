@@ -141,7 +141,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
         åpneFagsak={åpneFagsak}
         selectOppgaveCallback={reserverOppgaveOgApne}
         searchStarted={isHentOppgaverPending || isSøkFagsakPending}
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+         
         searchResultAccessDenied={searchResultAccessDenied}
         resetSearch={resetFagsakSøk}
         kanSaksbehandle={kanSaksbehandle}

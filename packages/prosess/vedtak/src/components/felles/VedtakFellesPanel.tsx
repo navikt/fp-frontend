@@ -91,7 +91,7 @@ export const VedtakFellesPanel = ({
     formState: { isSubmitting },
   } = useFormContext<VedtakFormValues>();
 
-  const { harRedigertBrev, hentBrevOverstyring } = useVedtakEditeringContext();
+  const { harRedigertBrev, hentBrevHtml } = useVedtakEditeringContext();
 
   if (!behandlingsresultat) {
     throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
@@ -161,12 +161,11 @@ export const VedtakFellesPanel = ({
           )}
         </div>
         <div>
-          {hentBrevOverstyring && skalProdusereBrev && !isReadOnly && !harValgtÅRedigereVedtaksbrev && (
+          {hentBrevHtml && skalProdusereBrev && !isReadOnly && !harValgtÅRedigereVedtaksbrev && (
             <Link
               href="#"
-              onClick={(e: React.MouseEvent) => {
+              onClick={e => {
                 setHarValgtÅRedigereVedtaksbrev(true);
-
                 e.preventDefault();
               }}
             >
@@ -177,12 +176,12 @@ export const VedtakFellesPanel = ({
             </Link>
           )}
           {skalProdusereBrev && (isReadOnly || harValgtÅRedigereVedtaksbrev) && (
-            <>
-              <PencilIcon className={styles['blyantDisablet']} />
-              <BodyShort size="small" className={styles['disabletLink']}>
+            <HStack gap="space-2" className="opacity-ax-disabled">
+              <PencilIcon />
+              <BodyShort size="small">
                 <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
               </BodyShort>
-            </>
+            </HStack>
           )}
         </div>
       </HStack>

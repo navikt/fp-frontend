@@ -1,11 +1,10 @@
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { BodyShort, HStack, VStack } from '@navikt/ds-react';
-import { DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
+import { DateLabel, FaktaBoks, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { BarnHendelseData } from '@navikt/fp-types';
-import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 import styles from './faktaFraFReg.module.css';
 
@@ -20,7 +19,7 @@ interface Props {
 export const FaktaFraFReg = ({ barna }: Props) => {
   return (
     <RawIntlProvider value={intl}>
-      <FaktaKort label={intl.formatMessage({ id: 'FaktaFraFReg.Tittel' })}>
+      <FaktaBoks tittel={intl.formatMessage({ id: 'FaktaFraFReg.Tittel' })}>
         {barna.length === 0 ? (
           <BodyShort>
             <FormattedMessage id="FaktaFraFReg.IngenBarn" />
@@ -28,7 +27,7 @@ export const FaktaFraFReg = ({ barna }: Props) => {
         ) : (
           <BarnVisning barna={barna} />
         )}
-      </FaktaKort>
+      </FaktaBoks>
     </RawIntlProvider>
   );
 };
