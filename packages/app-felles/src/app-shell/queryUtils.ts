@@ -41,6 +41,14 @@ export const createQueryClient = (errorHandler: (error: Error) => void) =>
     }),
   });
 
+const lagServerfeilmelding = (feilmelding?: string, callId?: string): string => {
+  const melding = feilmelding ?? 'Ukjent feil';
+  if (callId) {
+    return `Det oppstod en serverfeil: ${melding}. Meld til support med referanse-id: ${callId}`;
+  }
+  return `Det oppstod en serverfeil: ${melding}`;
+};
+
 export const getErrorHandler =
   (
     addErrorMessage: (data: FpError) => void,
@@ -65,6 +73,15 @@ export const getErrorHandler =
           type: ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
           location: error.response.url,
         });
+      } else if (status === 500) {
+        captureException(error);
+        try {
+          const feilDto = error.data as { feilmelding?: string; callId?: string } | undefined;
+          const melding = lagServerfeilmelding(feilDto?.feilmelding, feilDto?.callId);
+          addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: melding });
+        } catch {
+          addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
+        }
       } else {
         captureException(error);
         try {
