@@ -57,84 +57,71 @@ export const TilretteleggingInfoPanel = ({
   const registrertAvSaksbehandler = tilrettelegging.kilde === 'REGISTRERT_AV_SAKSBEHANDLER';
 
   return (
-    <div
-      style={{
-        background: 'var(--ax-bg-neutral-soft)',
-        marginLeft: '-24px',
-        marginTop: '-24px',
-        marginRight: '-24px',
-        paddingBottom: '10px',
-        paddingLeft: '20px',
-        paddingRight: '50px',
-        paddingTop: '10px',
-      }}
-    >
-      <HStack justify="space-between">
-        <HStack gap="space-16">
-          <PersonPregnantIcon title="a11y-title" fontSize="1.5rem" />
+    <HStack justify="space-between" paddingInline="space-0 space-96">
+      <HStack gap="space-8">
+        <PersonPregnantIcon aria-hidden fontSize="2rem" />
+        <div>
+          <BodyShort size="small">
+            <FormattedMessage
+              id="TilretteleggingInfoPanel.SvpOgArbeid"
+              values={{
+                svp: finnProsentSvangerskapspenger(tilrettelegging),
+                arbeid: finnProsentArbeid(tilrettelegging),
+              }}
+            />
+          </BodyShort>
+          <Detail>
+            <FormattedMessage
+              id="TilretteleggingInfoPanel.AvStillingsprosent"
+              values={{
+                stillingsprosent: stillingsprosentArbeidsforhold,
+              }}
+            />
+          </Detail>
+        </div>
+      </HStack>
+      <HStack gap="space-8">
+        <CalendarIcon aria-hidden fontSize="2rem" />
+        <div>
+          <BodyShort size="small">
+            <FormattedMessage
+              id="TilretteleggingInfoPanel.Periode"
+              values={{
+                periode: dagerOgUker.formattedString,
+              }}
+            />
+          </BodyShort>
+          <Detail>{fremTilTidspunkt}</Detail>
+        </div>
+      </HStack>
+      {!registrertAvSaksbehandler && (
+        <HStack gap="space-8">
+          <BranchingIcon aria-hidden fontSize="2rem" />
           <div>
             <BodyShort size="small">
-              <FormattedMessage
-                id="TilretteleggingInfoPanel.SvpOgArbeid"
-                values={{
-                  svp: finnProsentSvangerskapspenger(tilrettelegging),
-                  arbeid: finnProsentArbeid(tilrettelegging),
-                }}
-              />
+              <FormattedMessage id="TilretteleggingInfoPanel.FraSoknad" />
             </BodyShort>
             <Detail>
-              <FormattedMessage
-                id="TilretteleggingInfoPanel.AvStillingsprosent"
-                values={{
-                  stillingsprosent: stillingsprosentArbeidsforhold,
-                }}
-              />
+              {tilrettelegging.mottattDato && (
+                <FormattedMessage
+                  id="TilretteleggingInfoPanel.Sendt"
+                  values={{
+                    dato: dateFormat(tilrettelegging.mottattDato),
+                  }}
+                />
+              )}
             </Detail>
           </div>
         </HStack>
-        <HStack gap="space-16">
-          <CalendarIcon title="a11y-title" fontSize="1.5rem" />
-          <div>
-            <BodyShort size="small">
-              <FormattedMessage
-                id="TilretteleggingInfoPanel.Periode"
-                values={{
-                  periode: dagerOgUker.formattedString,
-                }}
-              />
-            </BodyShort>
-            <Detail>{fremTilTidspunkt}</Detail>
-          </div>
+      )}
+      {registrertAvSaksbehandler && (
+        <HStack gap="space-8">
+          <BranchingIcon aria-hidden fontSize="2rem" />
+          <BodyShort size="small">
+            <FormattedMessage id="TilretteleggingInfoPanel.Saksbehandler" />
+          </BodyShort>
         </HStack>
-        {!registrertAvSaksbehandler && (
-          <HStack gap="space-16">
-            <BranchingIcon title="a11y-title" fontSize="1.5rem" />
-            <div>
-              <BodyShort size="small">
-                <FormattedMessage id="TilretteleggingInfoPanel.FraSoknad" />
-              </BodyShort>
-              <Detail>
-                {tilrettelegging.mottattDato && (
-                  <FormattedMessage
-                    id="TilretteleggingInfoPanel.Sendt"
-                    values={{
-                      dato: dateFormat(tilrettelegging.mottattDato),
-                    }}
-                  />
-                )}
-              </Detail>
-            </div>
-          </HStack>
-        )}
-        {registrertAvSaksbehandler && (
-          <HStack gap="space-16">
-            <BranchingIcon title="a11y-title" fontSize="1.5rem" />
-            <BodyShort size="small">
-              <FormattedMessage id="TilretteleggingInfoPanel.Saksbehandler" />
-            </BodyShort>
-          </HStack>
-        )}
-      </HStack>
-    </div>
+      )}
+    </HStack>
   );
 };

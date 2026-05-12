@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Table, Tag } from '@navikt/ds-react';
+import { Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Permisjon } from '@navikt/fp-types';
@@ -40,7 +40,6 @@ export const VelferdspermisjonTabellRad = ({
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
-      contentGutter="none"
       content={
         <VelferdspermisjonForm
           velferdspermisjon={velferdspermisjon}
@@ -50,7 +49,6 @@ export const VelferdspermisjonTabellRad = ({
           oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
         />
       }
-      togglePlacement="right"
       className={utledStyleForRad(open, erIkkeValgt)}
     >
       <Table.DataCell>
@@ -58,17 +56,12 @@ export const VelferdspermisjonTabellRad = ({
       </Table.DataCell>
       <Table.DataCell>
         <FormattedMessage
-          id="VelferdspermisjonPanel.Permisjon"
+          id="VelferdspermisjonTabellRad.Permisjon"
           values={{
             type: velferdspermisjon.type.toLowerCase(),
             permisjon: velferdspermisjon.permisjonsprosent,
           }}
         />
-      </Table.DataCell>
-      <Table.DataCell>
-        <Tag data-color="neutral" variant="moderate" size="small">
-          <FormattedMessage id="VelferdspermisjonPanel.AaRegisteret" />
-        </Tag>
       </Table.DataCell>
     </Table.ExpandableRow>
   );

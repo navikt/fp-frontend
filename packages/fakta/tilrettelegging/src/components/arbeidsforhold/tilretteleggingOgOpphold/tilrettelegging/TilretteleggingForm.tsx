@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Button, HStack, Radio, Spacer, VStack } from '@navikt/ds-react';
+import { Button, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
@@ -97,12 +97,12 @@ interface Props {
   termindato: string;
   index: number;
   readOnly: boolean;
+  disabled: boolean;
   oppdaterTilrettelegging: (values: ArbeidsforholdTilretteleggingDato) => void;
   avbrytEditering: () => void;
   stillingsprosentArbeidsforhold: number;
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   tomDatoForTilrettelegging: string;
-  slettTilrettelegging: (fomDato: string) => void;
 }
 
 export const TilretteleggingForm = ({
@@ -110,12 +110,12 @@ export const TilretteleggingForm = ({
   termindato,
   index,
   readOnly,
+  disabled,
   oppdaterTilrettelegging,
   avbrytEditering,
   stillingsprosentArbeidsforhold,
   arbeidsforhold,
   tomDatoForTilrettelegging,
-  slettTilrettelegging,
 }: Props) => {
   const intl = useIntl();
 
@@ -148,7 +148,7 @@ export const TilretteleggingForm = ({
         overstyrtUtbetalingsgrad: prosentSvangerskapspenger,
       },
     });
-  }, [prosentSvangerskapspenger]);
+  }, [formMethods, index, prosentSvangerskapspenger, tilrettelegging]);
 
   const formValuesRecord = formMethods.watch();
   const formValues = formValuesRecord[index];
@@ -188,152 +188,129 @@ export const TilretteleggingForm = ({
     formMethods.reset();
   };
 
-  const slett = () => {
-    slettTilrettelegging(tilrettelegging.fom);
-    return Promise.resolve();
-  };
-
   return (
     <FormProvider {...formMethods}>
-      <div
-        style={{
-          backgroundColor: 'var(--ax-bg-default)',
-          padding: '24px',
-          marginTop: '-8px',
-          marginBottom: '-8px',
-          marginLeft: '-8px',
-          marginRight: '-8px',
-        }}
-      >
-        <VStack gap="space-32">
-          {!erNyPeriode && (
-            <TilretteleggingInfoPanel
-              tilrettelegging={formValues}
-              termindato={termindato}
-              erTomDatoTreUkerFørTermin={erTomDatoTreUkerFørTermin}
-              stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-              tomDato={tomDatoForTilrettelegging}
-            />
-          )}
-          <RhfDatepicker
-            name={`${index}.fom`}
-            control={formMethods.control}
-            label={intl.formatMessage({
-              id: 'TilretteleggingForm.FraOgMed',
-            })}
-            validate={[
-              required,
-              hasValidDate,
-              validerAtDatoErUnik(
-                intl,
-                arbeidsforhold.tilretteleggingDatoer,
-                arbeidsforhold.avklarteOppholdPerioder,
-                tilrettelegging,
-              ),
-              validerAtPeriodeErGyldig(intl, arbeidsforhold.tilretteleggingBehovFom, termindato),
-            ]}
-            readOnly={readOnly}
+      <VStack gap="space-16" paddingBlock="space-8">
+        {!erNyPeriode && (
+          <TilretteleggingInfoPanel
+            tilrettelegging={formValues}
+            termindato={termindato}
+            erTomDatoTreUkerFørTermin={erTomDatoTreUkerFørTermin}
+            stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+            tomDato={tomDatoForTilrettelegging}
           />
-          <RhfRadioGroup
-            name={`${index}.type`}
-            control={formMethods.control}
-            legend={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
-            validate={[required]}
-            readOnly={readOnly}
-          >
-            <Radio value="HEL_TILRETTELEGGING" size="small">
-              <FormattedMessage id="TilretteleggingForm.KanGjennomfores" />
-            </Radio>
-            <Radio value="DELVIS_TILRETTELEGGING" size="small">
-              <FormattedMessage id="TilretteleggingForm.RedusertArbeid" />
-            </Radio>
-            <Radio value="INGEN_TILRETTELEGGING" size="small">
-              <FormattedMessage id="TilretteleggingForm.KanIkkeGjennomfores" />
-            </Radio>
-          </RhfRadioGroup>
-          {formValues.type === 'DELVIS_TILRETTELEGGING' && (
-            <>
-              {(tilrettelegging.stillingsprosent === undefined ||
-                tilrettelegging.type !== 'DELVIS_TILRETTELEGGING' ||
-                erNyPeriode ||
-                formValues.kilde === 'REGISTRERT_AV_SAKSBEHANDLER') && (
-                <RhfNumericField
-                  name={`${index}.stillingsprosent`}
-                  control={formMethods.control}
-                  htmlSize={10}
-                  readOnly={readOnly}
-                  label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
-                  description={intl.formatMessage({ id: 'TilretteleggingForm.ArbeidsprosentBeskrivelse' })}
-                  validate={[required, minValue0, maxValue100, hasValidDecimal]}
-                  forceTwoDecimalDigits
-                  onChange={value => {
-                    const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
-                      stillingsprosentArbeidsforhold,
-                      velferdspermisjonprosent,
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
-                      value,
-                    );
-                    formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
-                  }}
-                />
-              )}
+        )}
+        <RhfDatepicker
+          name={`${index}.fom`}
+          control={formMethods.control}
+          label={<FormattedMessage id="TilretteleggingForm.FraOgMed" />}
+          validate={[
+            required,
+            hasValidDate,
+            validerAtDatoErUnik(
+              intl,
+              arbeidsforhold.tilretteleggingDatoer,
+              arbeidsforhold.avklarteOppholdPerioder,
+              tilrettelegging,
+            ),
+            validerAtPeriodeErGyldig(intl, arbeidsforhold.tilretteleggingBehovFom, termindato),
+          ]}
+          readOnly={readOnly}
+          disabled={disabled}
+        />
+        <RhfRadioGroup
+          name={`${index}.type`}
+          control={formMethods.control}
+          legend={<FormattedMessage id="TilretteleggingForm.Tilretteleggingsbehov" />}
+          validate={[required]}
+          readOnly={readOnly}
+          disabled={disabled}
+        >
+          <Radio value="HEL_TILRETTELEGGING" size="small">
+            <FormattedMessage id="TilretteleggingForm.KanGjennomfores" />
+          </Radio>
+          <Radio value="DELVIS_TILRETTELEGGING" size="small">
+            <FormattedMessage id="TilretteleggingForm.RedusertArbeid" />
+          </Radio>
+          <Radio value="INGEN_TILRETTELEGGING" size="small">
+            <FormattedMessage id="TilretteleggingForm.KanIkkeGjennomfores" />
+          </Radio>
+        </RhfRadioGroup>
+        {formValues.type === 'DELVIS_TILRETTELEGGING' && (
+          <>
+            {(tilrettelegging.stillingsprosent === undefined ||
+              tilrettelegging.type !== 'DELVIS_TILRETTELEGGING' ||
+              erNyPeriode ||
+              formValues.kilde === 'REGISTRERT_AV_SAKSBEHANDLER') && (
               <RhfNumericField
-                name={`${index}.overstyrtUtbetalingsgrad`}
+                name={`${index}.stillingsprosent`}
                 control={formMethods.control}
                 htmlSize={10}
                 readOnly={readOnly}
-                label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}
-                description={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvpBeskrivelse' })}
-                validate={[
-                  required,
-                  minValue0,
-                  maxValue100,
-                  hasValidDecimal,
-                  (verdi: number) =>
-                    !stillingsprosentArbeidsforhold && verdi === 0
-                      ? intl.formatMessage({ id: 'TilretteleggingForm.AngiUtbetalingsgrad' })
-                      : null,
-                ]}
+                disabled={disabled}
+                label={<FormattedMessage id="TilretteleggingForm.Arbeidsprosent" />}
+                description={<FormattedMessage id="TilretteleggingForm.ArbeidsprosentBeskrivelse" />}
+                validate={[required, minValue0, maxValue100, hasValidDecimal]}
                 forceTwoDecimalDigits
-                disabled={formValues.stillingsprosent === undefined}
+                onChange={value => {
+                  const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
+                    stillingsprosentArbeidsforhold,
+                    velferdspermisjonprosent,
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
+                    value,
+                  );
+                  formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
+                }}
               />
-            </>
-          )}
-          {!readOnly && (
-            <HStack gap="space-8">
-              <Button
-                size="small"
-                variant="primary"
-                type="button"
-                disabled={!formMethods.formState.isDirty || false}
-                loading={false}
-                onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
-              >
-                {erNyPeriode ? (
-                  <FormattedMessage id="TilretteleggingForm.LeggTil" />
-                ) : (
-                  <FormattedMessage id="TilretteleggingForm.Oppdater" />
-                )}
-              </Button>
-              <Button size="small" variant="secondary" onClick={avbryt} type="button">
-                {erNyPeriode ? (
-                  <FormattedMessage id="TilretteleggingForm.AvsluttOgSlett" />
-                ) : (
-                  <FormattedMessage id="TilretteleggingForm.Avbryt" />
-                )}
-              </Button>
-              {!erNyPeriode && (
-                <>
-                  <Spacer />
-                  <Button size="small" variant="secondary" onClick={slett} type="button">
-                    <FormattedMessage id="TilretteleggingForm.SlettPeriode" />
-                  </Button>
-                </>
+            )}
+            <RhfNumericField
+              name={`${index}.overstyrtUtbetalingsgrad`}
+              control={formMethods.control}
+              htmlSize={10}
+              readOnly={readOnly}
+              disabled={disabled || formValues.stillingsprosent === undefined}
+              label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}
+              description={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvpBeskrivelse' })}
+              validate={[
+                required,
+                minValue0,
+                maxValue100,
+                hasValidDecimal,
+                (verdi: number) =>
+                  !stillingsprosentArbeidsforhold && verdi === 0
+                    ? intl.formatMessage({ id: 'TilretteleggingForm.AngiUtbetalingsgrad' })
+                    : null,
+              ]}
+              forceTwoDecimalDigits
+            />
+          </>
+        )}
+        {!(readOnly || disabled) && (
+          <HStack gap="space-8">
+            <Button
+              size="small"
+              variant="primary"
+              type="button"
+              disabled={!formMethods.formState.isDirty || false}
+              loading={false}
+              onClick={formMethods.handleSubmit(lagreIForm)}
+            >
+              {erNyPeriode ? (
+                <FormattedMessage id="TilretteleggingForm.LeggTil" />
+              ) : (
+                <FormattedMessage id="TilretteleggingForm.Oppdater" />
               )}
-            </HStack>
-          )}
-        </VStack>
-      </div>
+            </Button>
+            <Button size="small" variant="secondary" type="button" data-color="accent" onClick={avbryt}>
+              {erNyPeriode ? (
+                <FormattedMessage id="TilretteleggingForm.AvsluttOgSlett" />
+              ) : (
+                <FormattedMessage id="TilretteleggingForm.Avbryt" />
+              )}
+            </Button>
+          </HStack>
+        )}
+      </VStack>
     </FormProvider>
   );
 };

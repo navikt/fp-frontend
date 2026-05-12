@@ -115,10 +115,10 @@ export const ArbeidsforholdFieldArray = ({
                     )}
                   </HStack>
                   <HStack gap="space-16" align="center">
-                    <Tag data-color="neutral" size="small" variant="moderate">
+                    <Tag data-color="neutral" size="small">
                       <FormattedMessage id="ArbeidsforholdFieldArray.Stillingsprosent" values={{ stillingsprosent }} />
                     </Tag>
-                    <Tag data-color="neutral" size="small" variant="moderate">
+                    <Tag data-color="neutral" size="small">
                       {finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)}
                     </Tag>
                     {arbeidsforhold.skalBrukes && visInfoAlert && (
