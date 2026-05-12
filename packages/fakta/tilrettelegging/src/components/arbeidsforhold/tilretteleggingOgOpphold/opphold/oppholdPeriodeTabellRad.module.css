@@ -1,3 +1,7 @@
 .openRow {
   background-color: var(--ax-bg-neutral-moderate);
 }
+
+.openRow + tr[data-state='open'] {
+  background-color: var(--ax-bg-default);
+}

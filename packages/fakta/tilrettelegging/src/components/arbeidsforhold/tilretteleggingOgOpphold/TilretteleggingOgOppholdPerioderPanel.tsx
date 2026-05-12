@@ -36,6 +36,7 @@ interface Props {
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
+  disabled: boolean;
   stillingsprosentArbeidsforhold: number;
   termindato: string;
 }
@@ -44,6 +45,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
   arbeidsforhold,
   arbeidsforholdIndex,
   readOnly,
+  disabled,
   stillingsprosentArbeidsforhold,
   termindato,
 }: Props) => {
@@ -130,6 +132,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                   key={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
                   navn={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
                   tilrettelegging={rad}
+                  disabled={disabled}
                   readOnly={readOnly}
                   index={arbeidsforholdIndex + tilretteleggingIndex}
                   openRad={rad.fom === ''}
@@ -152,6 +155,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                 navn={`${oppholdPerioderStateName}.${oppholdIndex}`}
                 opphold={rad}
                 readOnly={readOnly}
+                disabled={disabled}
                 index={arbeidsforholdIndex + oppholdIndex}
                 openRad={rad.fom === ''}
                 fjernOpphold={fjernOpphold}

@@ -40,7 +40,6 @@ export const VelferdspermisjonTabellRad = ({
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
-      contentGutter="none"
       content={
         <VelferdspermisjonForm
           velferdspermisjon={velferdspermisjon}
@@ -50,7 +49,6 @@ export const VelferdspermisjonTabellRad = ({
           oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
         />
       }
-      togglePlacement="right"
       className={utledStyleForRad(open, erIkkeValgt)}
     >
       <Table.DataCell>

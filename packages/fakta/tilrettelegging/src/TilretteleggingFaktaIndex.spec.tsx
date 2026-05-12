@@ -281,7 +281,7 @@ describe('TilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Ja'));
     await userEvent.click(screen.getByText('Oppdater'));
 
-    await userEvent.click(screen.getAllByText('Slett periode')[1]!);
+    await userEvent.click(screen.getAllByTitle('Slett periode')[1]!);
 
     expect(await screen.findByText('17.03.2020 - 15.10.2020')).toBeInTheDocument();
   });
@@ -403,7 +403,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Slett periode')[1]!);
+    await userEvent.click(screen.getAllByTitle('Slett periode')[1]!);
 
     await waitFor(() => expect(screen.queryByText('15.09.2020 - 20.09.2020')).not.toBeInTheDocument());
   });
@@ -492,8 +492,9 @@ describe('TilretteleggingFaktaIndex', () => {
     // Kun for manuelt lagt til opphold kan en velge "sykepenger...". Derfor kun ett innslag i DOM
     expect(screen.getAllByText('Sykepenger 100% i perioden med svangerskapspenger')).toHaveLength(3);
 
+    const sletteKnapper = screen.getAllByRole<HTMLButtonElement>('button', { name: 'Slett periode' });
     // Kun for tilretteleggingene og manuelt lagt til opphold kan en slette.
-    expect(screen.getAllByText('Slett periode')).toHaveLength(4);
+    expect(sletteKnapper.filter(btn => !btn.disabled)).toHaveLength(4);
   });
 
   it('skal vise advarsel når søker ikke var ansatt da behovet for tilrettelegging oppstod', async () => {

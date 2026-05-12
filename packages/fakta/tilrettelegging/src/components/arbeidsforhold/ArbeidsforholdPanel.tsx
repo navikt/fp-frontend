@@ -121,7 +121,8 @@ export const ArbeidsforholdPanel = ({
         <TilretteleggingOgOppholdPerioderPanel
           arbeidsforhold={arbeidsforhold}
           arbeidsforholdIndex={arbeidsforholdIndex}
-          readOnly={readOnly || harUavklartVelferdspermisjon}
+          readOnly={readOnly}
+          disabled={harUavklartVelferdspermisjon}
           stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
           termindato={termindato}
         />

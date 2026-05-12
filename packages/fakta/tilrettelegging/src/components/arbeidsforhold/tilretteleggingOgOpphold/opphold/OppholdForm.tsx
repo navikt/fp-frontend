@@ -1,7 +1,7 @@
 import { FormProvider, useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Button, HStack, Radio, Spacer, VStack } from '@navikt/ds-react';
+import { Button, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
@@ -76,8 +76,8 @@ interface Props {
   opphold: SvpAvklartOppholdPeriode;
   index: number;
   readOnly: boolean;
+  disabled: boolean;
   oppdaterOpphold: (values: SvpAvklartOppholdPeriode) => void;
-  slettOpphold: (opphold: SvpAvklartOppholdPeriode) => void;
   avbrytEditering: () => void;
   alleTilrettelegginger: ArbeidsforholdTilretteleggingDato[];
   alleOpphold: SvpAvklartOppholdPeriode[];
@@ -88,9 +88,9 @@ export const OppholdForm = ({
   opphold,
   index,
   readOnly,
+  disabled,
   oppdaterOpphold,
   avbrytEditering,
-  slettOpphold,
   alleTilrettelegginger,
   alleOpphold,
   termindato,
@@ -111,11 +111,6 @@ export const OppholdForm = ({
     return Promise.resolve();
   };
 
-  const slett = () => {
-    slettOpphold(opphold);
-    return Promise.resolve();
-  };
-
   const avbryt = () => {
     avbrytEditering();
     formMethods.reset();
@@ -125,97 +120,77 @@ export const OppholdForm = ({
 
   return (
     <FormProvider {...formMethods}>
-      <div
-        style={{
-          backgroundColor: 'var(--ax-bg-default)',
-          padding: '24px',
-          marginTop: '-8px',
-          marginBottom: '-8px',
-          marginLeft: '-8px',
-          marginRight: '-8px',
-        }}
-      >
-        <VStack gap="space-40">
-          <HStack gap="space-16">
-            <RhfDatepicker
-              name={`${index}.fom`}
-              control={formMethods.control}
-              label={intl.formatMessage({
-                id: 'OppholdForm.FraOgMed',
-              })}
-              validate={[
-                required,
-                hasValidDate,
-                validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold),
-                validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
-              ]}
-              readOnly={forVisning}
-            />
-            <RhfDatepicker
-              name={`${index}.tom`}
-              control={formMethods.control}
-              label={intl.formatMessage({
-                id: 'OppholdForm.TilOgMed',
-              })}
-              validate={[
-                required,
-                hasValidDate,
-                validerTomEtterFom(intl, index, formMethods.getValues),
-                validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
-                validerAtPeriodeIkkeOverlapper(formMethods.getValues, index, opphold, alleOpphold),
-              ]}
-              readOnly={forVisning}
-            />
-          </HStack>
-          <RhfRadioGroup
-            name={`${index}.oppholdÅrsak`}
+      <VStack gap="space-16" paddingBlock="space-8">
+        <HStack gap="space-16">
+          <RhfDatepicker
+            name={`${index}.fom`}
             control={formMethods.control}
-            legend={intl.formatMessage({ id: 'OppholdForm.GrunnTilOpphold' })}
-            validate={[required]}
+            label={<FormattedMessage id="OppholdForm.FraOgMed" />}
+            validate={[
+              required,
+              hasValidDate,
+              validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold),
+              validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
+            ]}
             readOnly={forVisning}
-          >
-            <Radio value="SYKEPENGER" size="small">
-              <FormattedMessage id="OppholdForm.Sykepenger" />
-            </Radio>
-            <Radio value="FERIE" size="small">
-              <FormattedMessage id="OppholdForm.Ferie" />
-            </Radio>
-          </RhfRadioGroup>
-          {!forVisning && (
-            <HStack gap="space-8">
-              <Button
-                size="small"
-                variant="primary"
-                type="button"
-                disabled={!formMethods.formState.isDirty || false}
-                loading={false}
-                onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
-              >
-                {erNyPeriode ? (
-                  <FormattedMessage id="OppholdForm.LeggTil" />
-                ) : (
-                  <FormattedMessage id="OppholdForm.Oppdater" />
-                )}
-              </Button>
-              <Button size="small" variant="secondary" onClick={avbryt} type="button">
-                {erNyPeriode ? (
-                  <FormattedMessage id="OppholdForm.AvsluttOgSlett" />
-                ) : (
-                  <FormattedMessage id="OppholdForm.Avbryt" />
-                )}
-              </Button>
-              {!erNyPeriode && (
-                <>
-                  <Spacer />
-                  <Button size="small" variant="secondary" onClick={slett} type="button">
-                    <FormattedMessage id="OppholdForm.SlettPeriode" />
-                  </Button>
-                </>
+            disabled={disabled}
+          />
+          <RhfDatepicker
+            name={`${index}.tom`}
+            control={formMethods.control}
+            label={<FormattedMessage id="OppholdForm.TilOgMed" />}
+            validate={[
+              required,
+              hasValidDate,
+              validerTomEtterFom(intl, index, formMethods.getValues),
+              validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
+              validerAtPeriodeIkkeOverlapper(formMethods.getValues, index, opphold, alleOpphold),
+            ]}
+            readOnly={forVisning}
+            disabled={disabled}
+          />
+        </HStack>
+        <RhfRadioGroup
+          name={`${index}.oppholdÅrsak`}
+          control={formMethods.control}
+          legend={<FormattedMessage id="OppholdForm.GrunnTilOpphold" />}
+          validate={[required]}
+          readOnly={forVisning}
+          disabled={disabled}
+        >
+          <Radio value="SYKEPENGER" size="small">
+            <FormattedMessage id="OppholdForm.Sykepenger" />
+          </Radio>
+          <Radio value="FERIE" size="small">
+            <FormattedMessage id="OppholdForm.Ferie" />
+          </Radio>
+        </RhfRadioGroup>
+        {!(forVisning || disabled) && (
+          <HStack gap="space-8">
+            <Button
+              size="small"
+              variant="primary"
+              type="button"
+              disabled={!formMethods.formState.isDirty || false}
+              loading={false}
+              onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
+            >
+              {erNyPeriode ? (
+                <FormattedMessage id="OppholdForm.LeggTil" />
+              ) : (
+                <FormattedMessage id="OppholdForm.Oppdater" />
               )}
-            </HStack>
-          )}
-        </VStack>
-      </div>
+            </Button>
+            <Button size="small" variant="secondary" type="button" onClick={avbryt}>
+              {erNyPeriode ? (
+                <FormattedMessage id="OppholdForm.AvsluttOgSlett" />
+              ) : (
+                <FormattedMessage id="OppholdForm.Avbryt" />
+              )}
+            </Button>
+          </HStack>
+        )}
+      </VStack>
     </FormProvider>
   );
 };

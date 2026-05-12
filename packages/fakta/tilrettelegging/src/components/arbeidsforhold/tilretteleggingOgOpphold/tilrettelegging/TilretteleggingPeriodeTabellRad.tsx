@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Table } from '@navikt/ds-react';
+import { XMarkIcon } from '@navikt/aksel-icons';
+import { Button, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { type ArbeidsforholdFodselOgTilrettelegging, type ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
@@ -20,6 +21,7 @@ interface Props {
   navn: `arbeidsforhold.${number}.tilretteleggingDatoer.${number}`;
   tilrettelegging: ArbeidsforholdTilretteleggingDato;
   readOnly: boolean;
+  disabled: boolean;
   index: number;
   openRad: boolean;
   fjernTilrettelegging: (fomDato?: string) => void;
@@ -35,6 +37,7 @@ export const TilretteleggingPeriodeTabellRad = ({
   tilrettelegging,
   index,
   readOnly,
+  disabled,
   openRad,
   fjernTilrettelegging,
   setLeggTilKnapperDisablet,
@@ -43,6 +46,7 @@ export const TilretteleggingPeriodeTabellRad = ({
   tomDatoForTilrettelegging,
   termindato,
 }: Props) => {
+  const intl = useIntl();
   const [open, setOpen] = useState(openRad);
 
   const { setValue } = useFormContext<TilretteleggingFormValues>();
@@ -67,7 +71,6 @@ export const TilretteleggingPeriodeTabellRad = ({
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
-      contentGutter="none"
       content={
         <TilretteleggingForm
           tilrettelegging={tilrettelegging}
@@ -76,13 +79,12 @@ export const TilretteleggingPeriodeTabellRad = ({
           oppdaterTilrettelegging={oppdaterTilrettelegging}
           avbrytEditering={avbrytEditering}
           readOnly={readOnly}
+          disabled={disabled}
           stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
           arbeidsforhold={arbeidsforhold}
           tomDatoForTilrettelegging={tomDatoForTilrettelegging}
-          slettTilrettelegging={fjernTilrettelegging}
         />
       }
-      togglePlacement="right"
       className={open ? styles['openRow'] : undefined}
     >
       <Table.DataCell>
@@ -94,6 +96,19 @@ export const TilretteleggingPeriodeTabellRad = ({
       </Table.DataCell>
       <Table.DataCell>{utledTypeTekst(stillingsprosentArbeidsforhold, arbeidsforhold, tilrettelegging)}</Table.DataCell>
       <Table.DataCell>{utledKilde(tilrettelegging)}</Table.DataCell>
+      <Table.DataCell width={48}>
+        {tilrettelegging.fom && !(readOnly || disabled) && (
+          <Button
+            size="small"
+            variant="tertiary-neutral"
+            icon={<XMarkIcon aria-hidden />}
+            aria-label={intl.formatMessage({ id: 'TilretteleggingPeriodeTabellRad.SlettPeriode' })}
+            title={intl.formatMessage({ id: 'TilretteleggingPeriodeTabellRad.SlettPeriode' })}
+            onClick={() => fjernTilrettelegging(tilrettelegging.fom)}
+            type="button"
+          />
+        )}
+      </Table.DataCell>
     </Table.ExpandableRow>
   );
 };

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Table } from '@navikt/ds-react';
+import { XMarkIcon } from '@navikt/aksel-icons';
+import { Button, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { ArbeidsforholdFodselOgTilrettelegging, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
@@ -16,6 +17,7 @@ interface Props {
   navn: `arbeidsforhold.${number}.avklarteOppholdPerioder.${number}`;
   opphold: SvpAvklartOppholdPeriode;
   readOnly: boolean;
+  disabled: boolean;
   index: number;
   openRad: boolean;
   fjernOpphold: (opphold?: SvpAvklartOppholdPeriode) => void;
@@ -29,12 +31,14 @@ export const OppholdPeriodeTabellRad = ({
   opphold,
   index,
   readOnly,
+  disabled,
   openRad,
   fjernOpphold,
   setLeggTilKnapperDisablet,
   arbeidsforhold,
   termindato,
 }: Props) => {
+  const intl = useIntl();
   const [open, setOpen] = useState(openRad);
 
   const { setValue } = useFormContext<TilretteleggingFormValues>();
@@ -59,7 +63,6 @@ export const OppholdPeriodeTabellRad = ({
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
-      contentGutter="none"
       content={
         <OppholdForm
           opphold={opphold}
@@ -67,13 +70,12 @@ export const OppholdPeriodeTabellRad = ({
           oppdaterOpphold={oppdaterOpphold}
           avbrytEditering={avbrytEditering}
           readOnly={readOnly}
+          disabled={disabled}
           alleTilrettelegginger={arbeidsforhold.tilretteleggingDatoer}
           alleOpphold={arbeidsforhold.avklarteOppholdPerioder}
           termindato={termindato}
-          slettOpphold={fjernOpphold}
         />
       }
-      togglePlacement="right"
       className={open ? styles['openRow'] : undefined}
     >
       <Table.DataCell>
@@ -85,6 +87,20 @@ export const OppholdPeriodeTabellRad = ({
       </Table.DataCell>
       <Table.DataCell>{utledTypeTekst(opphold)}</Table.DataCell>
       <Table.DataCell>{utledKilde(opphold)}</Table.DataCell>
+      <Table.DataCell width={48}>
+        {!readOnly && !disabled && opphold.fom && (
+          <Button
+            size="small"
+            variant="tertiary-neutral"
+            icon={<XMarkIcon aria-hidden />}
+            aria-label={intl.formatMessage({ id: 'OppholdPeriodeTabellRad.SlettPeriode' })}
+            title={intl.formatMessage({ id: 'OppholdPeriodeTabellRad.SlettPeriode' })}
+            onClick={() => fjernOpphold(opphold)}
+            type="button"
+            disabled={opphold.oppholdKilde === 'INNTEKTSMELDING'}
+          />
+        )}
+      </Table.DataCell>
     </Table.ExpandableRow>
   );
 };
