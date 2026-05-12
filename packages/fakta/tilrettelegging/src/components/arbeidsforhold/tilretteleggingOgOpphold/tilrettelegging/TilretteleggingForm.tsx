@@ -89,9 +89,6 @@ export const finnProsentSvangerskapspenger = (
       );
 };
 
-const sjekkOmTomDatoErTreUkerFørTermin = (termindato: string, tom?: string): boolean =>
-  dayjs(termindato).subtract(3, 'week').subtract(1, 'day').isSame(dayjs(tom));
-
 interface Props {
   tilrettelegging: ArbeidsforholdTilretteleggingDato;
   termindato: string;
@@ -120,8 +117,6 @@ export const TilretteleggingForm = ({
   const intl = useIntl();
 
   const erNyPeriode = !tilrettelegging.fom;
-
-  const erTomDatoTreUkerFørTermin = sjekkOmTomDatoErTreUkerFørTermin(termindato, tomDatoForTilrettelegging);
 
   const velferdspermisjonprosent = finnVelferdspermisjonprosent(arbeidsforhold);
 
@@ -195,11 +190,11 @@ export const TilretteleggingForm = ({
           <TilretteleggingInfoPanel
             tilrettelegging={formValues}
             termindato={termindato}
-            erTomDatoTreUkerFørTermin={erTomDatoTreUkerFørTermin}
             stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-            tomDato={tomDatoForTilrettelegging}
+            tomDatoForTilrettelegging={tomDatoForTilrettelegging}
           />
         )}
+
         <RhfDatepicker
           name={`${index}.fom`}
           control={formMethods.control}

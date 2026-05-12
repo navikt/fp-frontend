@@ -1,11 +1,20 @@
 {
-  "ArbeidsforholdFieldArray.SkalHaSvp": "Skal ha svangerskapspenger",
-  "ArbeidsforholdFieldArray.SkalIkkeHaSvp": "Skal ikke ha svangerskapspenger",
-  "ArbeidsforholdFieldArray.SvpIkkeBeregnet": "Svangerskapspenger kan ikke beregnes",
-  "ArbeidsforholdFieldArray.Stillingsprosent": "{stillingsprosent}% stilling",
+  "ArbeidsforholdExpansionCard.SkalHaSvp": "Skal ha svangerskapspenger",
+  "ArbeidsforholdExpansionCard.SkalIkkeHaSvp": "Skal ikke ha svangerskapspenger",
+  "ArbeidsforholdExpansionCard.SvpIkkeBeregnet": "Svangerskapspenger kan ikke beregnes",
+  "ArbeidsforholdExpansionCard.Stillingsprosent": "{stillingsprosent}% stilling",
+
+  "ArbeidsforholdExpansionCard.AntallPeriode": "{antall, plural, one {# periode} other {# perioder}}",
+  "ArbeidsforholdExpansionCard.AntallVelferdspermisjon": "{antall, plural, one {# velferdspermisjon} other {# velferdspermisjon}}",
+
+  "FAISU.SplittTag": "Splitt",
+  "FAISU.SplittArbeidsforhold": "Splitt arbeidsforhold",
+  "FAISU.FjernSplitt": "Fjern splitt",
+  "FAISU.HarFlereArbeidsforhold": "Flere arbeidsforhold",
 
   "TilretteleggingFaktaForm.Aksjonspunkt": "Kontroller opplysninger fra jordmor og arbeidsgiver",
   "TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner": "Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer",
+  "TilretteleggingFaktaForm.AksjonpunktFAISU": "Søker har flere arbeidsforhold hos samme arbeidsgiver.",
   "TilretteleggingFaktaForm.Termindato": "Termindato",
   "TilretteleggingFaktaForm.Fodselsdato": "Fødselsdato",
   "TilretteleggingFaktaForm.UndersokNarmere": "Søker var ikke ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.",

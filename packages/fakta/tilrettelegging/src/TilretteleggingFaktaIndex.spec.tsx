@@ -1,6 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { expect } from 'vitest';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -66,6 +67,7 @@ describe('TilretteleggingFaktaIndex', () => {
           avklarteOppholdPerioder: [],
           eksternArbeidsforholdReferanse: '23422323',
           kanTilrettelegges: true,
+          representererFAISU: false,
           skalBrukes: true,
           tilretteleggingBehovFom: '2020-03-17',
           stillingsprosentStartTilrettelegging: 100,
@@ -120,7 +122,7 @@ describe('TilretteleggingFaktaIndex', () => {
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Skal ha svangerskapspenger for arbeidsforholdet'));
+    await userEvent.click(screen.getByLabelText('Skal ha svangerskapspenger for arbeidsforholdet'));
 
     await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
@@ -351,7 +353,9 @@ describe('TilretteleggingFaktaIndex', () => {
           ],
           stillingsprosentStartTilrettelegging: 100,
           eksternArbeidsforholdReferanse: '23422323',
+          internArbeidsforholdReferanse: undefined,
           kanTilrettelegges: true,
+          representererFAISU: false,
           skalBrukes: true,
           tilretteleggingBehovFom: '2020-03-17',
           tilretteleggingDatoer: [
@@ -510,7 +514,7 @@ describe('TilretteleggingFaktaIndex', () => {
       ),
     ).toHaveLength(1);
 
-    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]!);
+    await userEvent.click(screen.getAllByLabelText('Skal ha svangerskapspenger for arbeidsforholdet')[0]!);
 
     expect(await screen.findByText('Skal ikke ha svangerskapspenger')).toBeInTheDocument();
   });

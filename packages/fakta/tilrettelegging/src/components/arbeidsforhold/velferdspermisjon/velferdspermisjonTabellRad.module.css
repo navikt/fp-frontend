@@ -1,15 +1,13 @@
-.openRow {
-  background-color: var(--ax-bg-neutral-moderate);
-}
-
+.openRow,
 .openRow + tr[data-state='open'] {
-  background-color: var(--ax-bg-default);
+  background-color: var(--ax-bg-neutral-softA);
 }
 
-.apRow {
-  background-color: var(--ax-warning-200);
-}
-
+.apRow,
 .apRow + tr[data-state='open'] {
-  background-color: var(--ax-bg-default);
+  background-color: var(--ax-bg-neutral-softA);
+
+  > td:first-child {
+    border-left: 4px solid var(--ax-border-warning);
+  }
 }
