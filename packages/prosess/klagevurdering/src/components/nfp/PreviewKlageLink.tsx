@@ -5,14 +5,10 @@ import { Link } from '@navikt/ds-react';
 
 import type { DokumentMalType, KlageVurderingType } from '@navikt/fp-types';
 
-const getBrevKode = (klageVurdertAvKa: boolean, klageVurdering?: KlageVurderingType): DokumentMalType | undefined => {
+const getBrevKode = (klageVurdering?: KlageVurderingType): DokumentMalType | undefined => {
   switch (klageVurdering) {
     case 'STADFESTE_YTELSESVEDTAK':
-      return klageVurdertAvKa ? 'KGESTA' : 'KGEOVE';
-    case 'OPPHEVE_YTELSESVEDTAK':
-      return 'KGEHJE';
-    case 'HJEMSENDE_UTEN_Å_OPPHEVE':
-      return 'KGEHJE';
+      return 'KGEOVE';
     case 'MEDHOLD_I_KLAGE':
       return 'KGEOMG';
     default:
@@ -28,7 +24,7 @@ export type KlagevurderingForhåndsvisData = {
 
 const getBrevData = (klageVurdering?: KlageVurderingType, fritekstTilBrev?: string): KlagevurderingForhåndsvisData => ({
   fritekst: fritekstTilBrev ?? '',
-  dokumentMal: getBrevKode(false, klageVurdering),
+  dokumentMal: getBrevKode(klageVurdering),
   erOpphevetKlage: klageVurdering === 'OPPHEVE_YTELSESVEDTAK',
 });
 
