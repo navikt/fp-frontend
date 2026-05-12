@@ -14,7 +14,7 @@
 
   "TilretteleggingFaktaForm.Aksjonspunkt": "Kontroller opplysninger fra jordmor og arbeidsgiver",
   "TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner": "Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer",
-  "TilretteleggingFaktaForm.AksjonpunktFAISU": "Søker har flere arbeidsforhold hos samme arbeidsgiver.",
+  "TilretteleggingFaktaForm.AksjonpunktFAISU": "Søker har flere stillinger hos denne arbeidsgiveren og skal ha graderte svangerskapspenger. Vurder om arbeidsforholdet må splittes hvis det er forskjellig utbetalingsgrad for stillingene.",
   "TilretteleggingFaktaForm.Termindato": "Termindato",
   "TilretteleggingFaktaForm.Fodselsdato": "Fødselsdato",
   "TilretteleggingFaktaForm.UndersokNarmere": "Søker var ikke ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.",
