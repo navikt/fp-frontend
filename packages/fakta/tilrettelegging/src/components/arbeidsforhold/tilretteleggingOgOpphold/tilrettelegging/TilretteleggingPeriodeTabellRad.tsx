@@ -94,8 +94,16 @@ export const TilretteleggingPeriodeTabellRad = ({
           <FormattedMessage id="TilretteleggingPeriodeTabellRad.IkkeSatt" />
         )}
       </Table.DataCell>
-      <Table.DataCell>{utledTypeTekst(stillingsprosentArbeidsforhold, arbeidsforhold, tilrettelegging)}</Table.DataCell>
-      <Table.DataCell>{utledKilde(tilrettelegging)}</Table.DataCell>
+      <Table.DataCell>
+        <TilretteleggingType
+          stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+          arbeidsforhold={arbeidsforhold}
+          tilrettelegging={tilrettelegging}
+        />
+      </Table.DataCell>
+      <Table.DataCell>
+        <TilretteleggingKilde tilrettelegging={tilrettelegging} />
+      </Table.DataCell>
       <Table.DataCell width={48}>
         {tilrettelegging.fom && !(readOnly || disabled) && (
           <Button
@@ -113,11 +121,15 @@ export const TilretteleggingPeriodeTabellRad = ({
   );
 };
 
-const utledTypeTekst = (
-  stillingsprosentArbeidsforhold: number,
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
-  tilrettelegging: ArbeidsforholdTilretteleggingDato,
-) => {
+const TilretteleggingType = ({
+  stillingsprosentArbeidsforhold,
+  arbeidsforhold,
+  tilrettelegging,
+}: {
+  stillingsprosentArbeidsforhold: number;
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
+  tilrettelegging: ArbeidsforholdTilretteleggingDato;
+}) => {
   const velferdspermisjonsprosent = finnVelferdspermisjonprosent(arbeidsforhold);
   const stillingsprosent = tilrettelegging.type === 'INGEN_TILRETTELEGGING' ? 100 : tilrettelegging.stillingsprosent;
   const prosent =
@@ -131,7 +143,7 @@ const utledTypeTekst = (
   );
 };
 
-const utledKilde = (tilrettelegging: ArbeidsforholdTilretteleggingDato) => {
+const TilretteleggingKilde = ({ tilrettelegging }: { tilrettelegging: ArbeidsforholdTilretteleggingDato }) => {
   switch (tilrettelegging.kilde) {
     case 'ENDRET_AV_SAKSBEHANDLER':
       return <FormattedMessage id="Kilde.EndretAvSaksbehandler" />;

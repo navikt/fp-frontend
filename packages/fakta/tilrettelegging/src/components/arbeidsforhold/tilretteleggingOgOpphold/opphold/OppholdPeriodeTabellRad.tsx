@@ -85,8 +85,13 @@ export const OppholdPeriodeTabellRad = ({
           <FormattedMessage id="OppholdPeriodeTabellRad.IkkeSatt" />
         )}
       </Table.DataCell>
-      <Table.DataCell>{utledTypeTekst(opphold)}</Table.DataCell>
-      <Table.DataCell>{utledKilde(opphold)}</Table.DataCell>
+
+      <Table.DataCell>
+        <OppholdType opphold={opphold} />
+      </Table.DataCell>
+      <Table.DataCell>
+        <OppholdKilde opphold={opphold} />
+      </Table.DataCell>
       <Table.DataCell width={48}>
         {!readOnly && !disabled && opphold.fom && (
           <Button
@@ -105,7 +110,7 @@ export const OppholdPeriodeTabellRad = ({
   );
 };
 
-const utledTypeTekst = (opphold: Partial<SvpAvklartOppholdPeriode>) => {
+const OppholdType = ({ opphold }: { opphold: Partial<SvpAvklartOppholdPeriode> }) => {
   if (opphold.oppholdÅrsak === undefined) {
     return <FormattedMessage id="OppholdPeriodeTabellRad.Opphold" />;
   }
@@ -117,7 +122,7 @@ const utledTypeTekst = (opphold: Partial<SvpAvklartOppholdPeriode>) => {
   );
 };
 
-const utledKilde = (opphold: SvpAvklartOppholdPeriode) => {
+const OppholdKilde = ({ opphold }: { opphold: SvpAvklartOppholdPeriode }) => {
   switch (opphold.oppholdKilde) {
     case 'SØKNAD':
       return <FormattedMessage id="Kilde.Soknad" />;
