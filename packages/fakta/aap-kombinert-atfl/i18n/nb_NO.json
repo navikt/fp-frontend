@@ -1,6 +1,6 @@
 {
-  "AapKombinertAtfl.Aksjonspunkt.Tittel": "AAP kombinert med AT/FL",
-  "AapKombinertAtfl.Aksjonspunkt.HelpText": "Saken har AAP kombinert med arbeid eller frilans. Dette kan gi feil beregning. Kontroller beregningen og gå tilbake til Fakta om beregning for å overstyre dersom beregningen er feil.",
+  "AapKombinertAtfl.Aksjonspunkt.Tittel": "AAP kombinert med arbeidstaker og/eller frilans",
+  "AapKombinertAtfl.Aksjonspunkt.HelpText": "Saken har AAP kombinert med arbeidstaker og/eller frilans. Dette kan gi feil beregning. Kontroller beregningen og gå tilbake til Fakta om beregning for å overstyre dersom beregningen er feil.",
   "AapKombinertAtfl.Aksjonspunkt.Bekreft": "Beregningen er korrekt, fortsett behandlingen.",
   "AapKombinertAtfl.Aksjonspunkt.BekreftError": "Du må bekrefte at beregningen er korrekt"
 }
