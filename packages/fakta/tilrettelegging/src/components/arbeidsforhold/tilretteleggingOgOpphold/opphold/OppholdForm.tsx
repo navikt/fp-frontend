@@ -181,7 +181,7 @@ export const OppholdForm = ({
                 <FormattedMessage id="OppholdForm.Oppdater" />
               )}
             </Button>
-            <Button size="small" variant="secondary" type="button" onClick={avbryt}>
+            <Button size="small" variant="secondary" type="button" data-color="accent" onClick={avbryt}>
               {erNyPeriode ? (
                 <FormattedMessage id="OppholdForm.AvsluttOgSlett" />
               ) : (

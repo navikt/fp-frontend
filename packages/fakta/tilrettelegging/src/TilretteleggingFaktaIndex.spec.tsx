@@ -528,7 +528,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     expect(
       await screen.findByText(
-        'Permisjonen på 100% er satt som gyldig, og dette fører til at søker ikke får svangerskapsenger for arbeidsforholdet.',
+        'Permisjonen på 100% er satt som gyldig, og dette fører til at søker ikke får svangerskapspenger for arbeidsforholdet.',
       ),
     ).toBeInTheDocument();
 

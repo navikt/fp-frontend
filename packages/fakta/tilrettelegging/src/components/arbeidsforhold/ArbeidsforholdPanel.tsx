@@ -108,10 +108,10 @@ export const ArbeidsforholdPanel = ({
           validate={[required, hasValidDate, validerTidligereEnn(intl, getValues, tilretteleggingBehovFom)]}
           readOnly={readOnly}
         />
+
         {filtrerteVelferdspermisjoner.length > 0 && (
           <VelferdspermisjonTabell
             filtrerteVelferdspermisjoner={filtrerteVelferdspermisjoner}
-            harUavklartVelferdspermisjon={harUavklartVelferdspermisjon}
             arbeidsforholdIndex={arbeidsforholdIndex}
             readOnly={readOnly}
             oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}

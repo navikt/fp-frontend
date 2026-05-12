@@ -8,7 +8,6 @@ import { VelferdspermisjonTabellRad } from './VelferdspermisjonTabellRad';
 
 interface Props {
   filtrerteVelferdspermisjoner: Permisjon[];
-  harUavklartVelferdspermisjon: boolean;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;

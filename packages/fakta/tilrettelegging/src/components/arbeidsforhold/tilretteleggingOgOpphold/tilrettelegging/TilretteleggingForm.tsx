@@ -301,7 +301,7 @@ export const TilretteleggingForm = ({
                 <FormattedMessage id="TilretteleggingForm.Oppdater" />
               )}
             </Button>
-            <Button size="small" variant="secondary" type="button" onClick={avbryt}>
+            <Button size="small" variant="secondary" type="button" data-color="accent" onClick={avbryt}>
               {erNyPeriode ? (
                 <FormattedMessage id="TilretteleggingForm.AvsluttOgSlett" />
               ) : (
