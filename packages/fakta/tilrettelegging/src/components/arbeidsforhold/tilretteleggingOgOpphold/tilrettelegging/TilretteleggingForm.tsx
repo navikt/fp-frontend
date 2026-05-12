@@ -148,7 +148,7 @@ export const TilretteleggingForm = ({
         overstyrtUtbetalingsgrad: prosentSvangerskapspenger,
       },
     });
-  }, [prosentSvangerskapspenger]);
+  }, [formMethods, index, prosentSvangerskapspenger, tilrettelegging]);
 
   const formValuesRecord = formMethods.watch();
   const formValues = formValuesRecord[index];

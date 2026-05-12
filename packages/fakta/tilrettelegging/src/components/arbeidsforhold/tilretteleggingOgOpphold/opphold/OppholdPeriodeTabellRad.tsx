@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { Table, Tag } from '@navikt/ds-react';
+import { Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { ArbeidsforholdFodselOgTilrettelegging, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
@@ -11,33 +11,6 @@ import type { TilretteleggingFormValues } from '../../../../types/Tilretteleggin
 import { OppholdForm } from './OppholdForm';
 
 import styles from './oppholdPeriodeTabellRad.module.css';
-
-const utledTypeTekst = (intl: IntlShape, opphold: Partial<SvpAvklartOppholdPeriode>) => {
-  if (opphold.oppholdÅrsak === undefined) {
-    return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Opphold' });
-  }
-
-  return opphold.oppholdÅrsak === 'FERIE'
-    ? intl.formatMessage({
-        id: 'TilretteleggingPerioderTabellRad.Ferie',
-      })
-    : intl.formatMessage({
-        id: 'TilretteleggingPerioderTabellRad.Sykepenger',
-      });
-};
-
-const utledKilde = (intl: IntlShape, opphold: SvpAvklartOppholdPeriode) => {
-  switch (opphold.oppholdKilde) {
-    case 'SØKNAD':
-      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Soknad' });
-    case 'INNTEKTSMELDING':
-      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Inntektsmelding' });
-    case 'TIDLIGERE_VEDTAK':
-      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.TidligereVedtak' });
-    default:
-      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Saksbehandler' });
-  }
-};
 
 interface Props {
   navn: `arbeidsforhold.${number}.avklarteOppholdPerioder.${number}`;
@@ -62,7 +35,6 @@ export const OppholdPeriodeTabellRad = ({
   arbeidsforhold,
   termindato,
 }: Props) => {
-  const intl = useIntl();
   const [open, setOpen] = useState(openRad);
 
   const { setValue } = useFormContext<TilretteleggingFormValues>();
@@ -108,15 +80,36 @@ export const OppholdPeriodeTabellRad = ({
         {opphold.fom ? (
           <PeriodLabel dateStringFom={opphold.fom} dateStringTom={opphold.tom} />
         ) : (
-          <FormattedMessage id="TilretteleggingPerioderTabellRad.Periode" />
+          <FormattedMessage id="OppholdPeriodeTabellRad.IkkeSatt" />
         )}
       </Table.DataCell>
-      <Table.DataCell>{utledTypeTekst(intl, opphold)}</Table.DataCell>
-      <Table.DataCell>
-        <Tag data-color="neutral" size="small" variant="moderate">
-          {utledKilde(intl, opphold)}
-        </Tag>
-      </Table.DataCell>
+      <Table.DataCell>{utledTypeTekst(opphold)}</Table.DataCell>
+      <Table.DataCell>{utledKilde(opphold)}</Table.DataCell>
     </Table.ExpandableRow>
   );
+};
+
+const utledTypeTekst = (opphold: Partial<SvpAvklartOppholdPeriode>) => {
+  if (opphold.oppholdÅrsak === undefined) {
+    return <FormattedMessage id="OppholdPeriodeTabellRad.Opphold" />;
+  }
+
+  return opphold.oppholdÅrsak === 'FERIE' ? (
+    <FormattedMessage id="OppholdPeriodeTabellRad.Ferie" />
+  ) : (
+    <FormattedMessage id="OppholdPeriodeTabellRad.Sykepenger" />
+  );
+};
+
+const utledKilde = (opphold: SvpAvklartOppholdPeriode) => {
+  switch (opphold.oppholdKilde) {
+    case 'SØKNAD':
+      return <FormattedMessage id="Kilde.Soknad" />;
+    case 'INNTEKTSMELDING':
+      return <FormattedMessage id="Kilde.Inntektsmelding" />;
+    case 'TIDLIGERE_VEDTAK':
+      return <FormattedMessage id="Kilde.TidligereVedtak" />;
+    default:
+      return <FormattedMessage id="Kilde.Saksbehandler" />;
+  }
 };

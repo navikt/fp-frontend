@@ -35,10 +35,9 @@ describe('TilretteleggingFaktaIndex', () => {
     expect(screen.getByText('Skal ha svangerskapspenger for arbeidsforholdet')).toBeInTheDocument();
     expect(screen.getByText('Dato for tilrettelegging fra lege eller jordmor')).toBeInTheDocument();
 
-    expect(screen.getByText('Registrerte velferdspermisjoner')).toBeInTheDocument();
+    expect(screen.getByText('Registrerte velferdspermisjoner fra Aa-registeret')).toBeInTheDocument();
     expect(screen.getByText('17.02.2020 - 12.07.2020')).toBeInTheDocument();
     expect(screen.getByText('50% velferdspermisjon')).toBeInTheDocument();
-    expect(screen.getByText('Aa-registeret')).toBeInTheDocument();
 
     expect(screen.getByText('Perioder')).toBeInTheDocument();
     expect(screen.getByText('17.03.2020 - 14.08.2020')).toBeInTheDocument();
@@ -248,7 +247,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
 
-    expect(await screen.findByText('Periode')).toBeInTheDocument();
+    expect(await screen.findByText('Ikke satt')).toBeInTheDocument();
     expect(screen.getByText('Tilrettelegging')).toBeInTheDocument();
     expect(screen.getByText('Saksbehandler')).toBeInTheDocument();
     expect(screen.getByText('Legg til ny periode')).toBeInTheDocument();
@@ -301,7 +300,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Opphold'));
 
-    expect(await screen.findByText('Periode')).toBeInTheDocument();
+    expect(await screen.findByText('Ikke satt')).toBeInTheDocument();
     expect(screen.getAllByText('Opphold')).toHaveLength(2);
     expect(screen.getByText('Saksbehandler')).toBeInTheDocument();
     expect(screen.getByText('Legg til ny periode')).toBeInTheDocument();

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { Table, Tag } from '@navikt/ds-react';
+import { Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { type ArbeidsforholdFodselOgTilrettelegging, type ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
@@ -15,36 +15,6 @@ import {
 } from './TilretteleggingForm';
 
 import styles from './tilretteleggingPeriodeTabellRad.module.css';
-
-const utledTypeTekst = (
-  intl: IntlShape,
-  stillingsprosentArbeidsforhold: number,
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
-  tilrettelegging: ArbeidsforholdTilretteleggingDato,
-): string => {
-  const velferdspermisjonsprosent = finnVelferdspermisjonprosent(arbeidsforhold);
-  const stillingsprosent = tilrettelegging.type === 'INGEN_TILRETTELEGGING' ? 100 : tilrettelegging.stillingsprosent;
-  const prosent =
-    tilrettelegging.fom && stillingsprosent
-      ? finnProsentSvangerskapspenger(tilrettelegging, stillingsprosentArbeidsforhold, velferdspermisjonsprosent)
-      : 0;
-  return tilrettelegging.fom
-    ? intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.SVPprosent' }, { prosent: prosent ?? '0' })
-    : intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Tilrettelegging' });
-};
-
-const utledKilde = (intl: IntlShape, tilrettelegging: ArbeidsforholdTilretteleggingDato): string => {
-  if (tilrettelegging.kilde === 'REGISTRERT_AV_SAKSBEHANDLER' || tilrettelegging.fom === '') {
-    return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Saksbehandler' });
-  }
-  if (tilrettelegging.kilde === 'ENDRET_AV_SAKSBEHANDLER') {
-    return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.EndretAvSaksbehandler' });
-  }
-  if (tilrettelegging.kilde === 'TIDLIGERE_VEDTAK') {
-    return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.TidligereVedtak' });
-  }
-  return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Soknad' });
-};
 
 interface Props {
   navn: `arbeidsforhold.${number}.tilretteleggingDatoer.${number}`;
@@ -73,7 +43,6 @@ export const TilretteleggingPeriodeTabellRad = ({
   tomDatoForTilrettelegging,
   termindato,
 }: Props) => {
-  const intl = useIntl();
   const [open, setOpen] = useState(openRad);
 
   const { setValue } = useFormContext<TilretteleggingFormValues>();
@@ -120,17 +89,42 @@ export const TilretteleggingPeriodeTabellRad = ({
         {tilrettelegging.fom ? (
           <PeriodLabel dateStringFom={tilrettelegging.fom} dateStringTom={tomDatoForTilrettelegging} />
         ) : (
-          <FormattedMessage id="TilretteleggingPerioderTabellRad.Periode" />
+          <FormattedMessage id="TilretteleggingPeriodeTabellRad.IkkeSatt" />
         )}
       </Table.DataCell>
-      <Table.DataCell>
-        {utledTypeTekst(intl, stillingsprosentArbeidsforhold, arbeidsforhold, tilrettelegging)}
-      </Table.DataCell>
-      <Table.DataCell>
-        <Tag data-color="neutral" size="small" variant="moderate">
-          {utledKilde(intl, tilrettelegging)}
-        </Tag>
-      </Table.DataCell>
+      <Table.DataCell>{utledTypeTekst(stillingsprosentArbeidsforhold, arbeidsforhold, tilrettelegging)}</Table.DataCell>
+      <Table.DataCell>{utledKilde(tilrettelegging)}</Table.DataCell>
     </Table.ExpandableRow>
   );
+};
+
+const utledTypeTekst = (
+  stillingsprosentArbeidsforhold: number,
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
+  tilrettelegging: ArbeidsforholdTilretteleggingDato,
+) => {
+  const velferdspermisjonsprosent = finnVelferdspermisjonprosent(arbeidsforhold);
+  const stillingsprosent = tilrettelegging.type === 'INGEN_TILRETTELEGGING' ? 100 : tilrettelegging.stillingsprosent;
+  const prosent =
+    tilrettelegging.fom && stillingsprosent
+      ? finnProsentSvangerskapspenger(tilrettelegging, stillingsprosentArbeidsforhold, velferdspermisjonsprosent)
+      : 0;
+  return tilrettelegging.fom ? (
+    <FormattedMessage id="TilretteleggingPeriodeTabellRad.SVPprosent" values={{ prosent: prosent ?? '0' }} />
+  ) : (
+    <FormattedMessage id="TilretteleggingPeriodeTabellRad.Tilrettelegging" />
+  );
+};
+
+const utledKilde = (tilrettelegging: ArbeidsforholdTilretteleggingDato) => {
+  switch (tilrettelegging.kilde) {
+    case 'ENDRET_AV_SAKSBEHANDLER':
+      return <FormattedMessage id="Kilde.EndretAvSaksbehandler" />;
+    case 'TIDLIGERE_VEDTAK':
+      return <FormattedMessage id="Kilde.TidligereVedtak" />;
+    case 'SØKNAD':
+      return <FormattedMessage id="Kilde.Soknad" />;
+    default:
+      return <FormattedMessage id="Kilde.Saksbehandler" />;
+  }
 };

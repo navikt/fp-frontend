@@ -1,5 +1,5 @@
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Alert, Button, Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
@@ -26,8 +26,6 @@ export const VelferdspermisjonForm = ({
   lukkRad,
   oppdaterOverstyrtUtbetalingsgrad,
 }: Props) => {
-  const intl = useIntl();
-
   const { setValue, getValues } = useFormContext<TilretteleggingFormValues>();
 
   const alleVelferdpermisjoner = getValues(`arbeidsforhold.${arbeidsforholdIndex}.velferdspermisjoner`);
@@ -92,21 +90,21 @@ export const VelferdspermisjonForm = ({
           <RhfRadioGroup
             name={`${permisjonIndex}.erGyldig`}
             control={formMethods.control}
-            legend={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldig' })}
-            description={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldigDetaljer' })}
+            legend={<FormattedMessage id="VelferdspermisjonForm.PermisjonGyldig" />}
+            description={<FormattedMessage id="VelferdspermisjonForm.PermisjonGyldigDetaljer" />}
             validate={[required]}
             readOnly={readOnly}
           >
             <Radio value={true} size="small">
-              <FormattedMessage id="VelferdspermisjonPanel.Ja" />
+              <FormattedMessage id="VelferdspermisjonForm.Ja" />
             </Radio>
             <Radio value={false} size="small">
-              <FormattedMessage id="VelferdspermisjonPanel.Nei" />
+              <FormattedMessage id="VelferdspermisjonForm.Nei" />
             </Radio>
           </RhfRadioGroup>
           {erGyldig && velferdspermisjon.permisjonsprosent === 100 && (
             <Alert variant="info" size="small">
-              <FormattedMessage id="VelferdspermisjonPanel.Permisjon100ProsentOgGyldig" />
+              <FormattedMessage id="VelferdspermisjonForm.Permisjon100ProsentOgGyldig" />
             </Alert>
           )}
           <div>
@@ -117,7 +115,7 @@ export const VelferdspermisjonForm = ({
               disabled={!formMethods.formState.isDirty || false}
               onClick={formMethods.handleSubmit(lagreForm)}
             >
-              <FormattedMessage id="VelferdspermisjonPanel.Oppdater" />
+              <FormattedMessage id="VelferdspermisjonForm.Oppdater" />
             </Button>
           </div>
         </VStack>
