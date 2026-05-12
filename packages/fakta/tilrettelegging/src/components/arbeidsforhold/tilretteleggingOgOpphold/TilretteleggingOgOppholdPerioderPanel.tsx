@@ -36,6 +36,7 @@ interface Props {
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
+  disabled: boolean;
   stillingsprosentArbeidsforhold: number;
   termindato: string;
 }
@@ -44,6 +45,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
   arbeidsforhold,
   arbeidsforholdIndex,
   readOnly,
+  disabled,
   stillingsprosentArbeidsforhold,
   termindato,
 }: Props) => {
@@ -105,9 +107,13 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
       <Table size="small">
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell colSpan={4} textSize="small">
-              <FormattedMessage id="ArbeidsforholdPanel.Perioder" />
+            <Table.HeaderCell colSpan={3} textSize="small">
+              <FormattedMessage id="TilretteleggingOgOppholdPerioderPanel.Perioder" />
             </Table.HeaderCell>
+            <Table.HeaderCell textSize="small">
+              <FormattedMessage id="TilretteleggingOgOppholdPerioderPanel.Kilde" />
+            </Table.HeaderCell>
+            <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -126,6 +132,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                   key={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
                   navn={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
                   tilrettelegging={rad}
+                  disabled={disabled}
                   readOnly={readOnly}
                   index={arbeidsforholdIndex + tilretteleggingIndex}
                   openRad={rad.fom === ''}
@@ -148,6 +155,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                 navn={`${oppholdPerioderStateName}.${oppholdIndex}`}
                 opphold={rad}
                 readOnly={readOnly}
+                disabled={disabled}
                 index={arbeidsforholdIndex + oppholdIndex}
                 openRad={rad.fom === ''}
                 fjernOpphold={fjernOpphold}

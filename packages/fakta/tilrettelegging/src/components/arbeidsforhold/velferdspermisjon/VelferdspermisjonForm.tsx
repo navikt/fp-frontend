@@ -1,7 +1,7 @@
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { Alert, Button, Radio, VStack } from '@navikt/ds-react';
+import { Alert, Button, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
@@ -26,8 +26,6 @@ export const VelferdspermisjonForm = ({
   lukkRad,
   oppdaterOverstyrtUtbetalingsgrad,
 }: Props) => {
-  const intl = useIntl();
-
   const { setValue, getValues } = useFormContext<TilretteleggingFormValues>();
 
   const alleVelferdpermisjoner = getValues(`arbeidsforhold.${arbeidsforholdIndex}.velferdspermisjoner`);
@@ -78,50 +76,41 @@ export const VelferdspermisjonForm = ({
 
   return (
     <FormProvider {...formMethods}>
-      <div
-        style={{
-          backgroundColor: 'var(--ax-bg-default)',
-          padding: '24px',
-          marginTop: '-8px',
-          marginBottom: '-8px',
-          marginLeft: '-8px',
-          marginRight: '-8px',
-        }}
-      >
-        <VStack gap="space-20">
-          <RhfRadioGroup
-            name={`${permisjonIndex}.erGyldig`}
-            control={formMethods.control}
-            legend={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldig' })}
-            description={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldigDetaljer' })}
-            validate={[required]}
-            readOnly={readOnly}
-          >
+      <VStack gap="space-16" paddingBlock="space-8">
+        <RhfRadioGroup
+          name={`${permisjonIndex}.erGyldig`}
+          control={formMethods.control}
+          legend={<FormattedMessage id="VelferdspermisjonForm.PermisjonGyldig" />}
+          description={<FormattedMessage id="VelferdspermisjonForm.PermisjonGyldigDetaljer" />}
+          validate={[required]}
+          readOnly={readOnly}
+        >
+          <HStack gap="space-16">
             <Radio value={true} size="small">
-              <FormattedMessage id="VelferdspermisjonPanel.Ja" />
+              <FormattedMessage id="VelferdspermisjonForm.Ja" />
             </Radio>
             <Radio value={false} size="small">
-              <FormattedMessage id="VelferdspermisjonPanel.Nei" />
+              <FormattedMessage id="VelferdspermisjonForm.Nei" />
             </Radio>
-          </RhfRadioGroup>
-          {erGyldig && velferdspermisjon.permisjonsprosent === 100 && (
-            <Alert variant="info" size="small">
-              <FormattedMessage id="VelferdspermisjonPanel.Permisjon100ProsentOgGyldig" />
-            </Alert>
-          )}
-          <div>
-            <Button
-              size="small"
-              variant="primary"
-              type="button"
-              disabled={!formMethods.formState.isDirty || false}
-              onClick={formMethods.handleSubmit(lagreForm)}
-            >
-              <FormattedMessage id="VelferdspermisjonPanel.Oppdater" />
-            </Button>
-          </div>
-        </VStack>
-      </div>
+          </HStack>
+        </RhfRadioGroup>
+        {erGyldig && velferdspermisjon.permisjonsprosent === 100 && (
+          <Alert variant="info" size="small" className="self-start">
+            <FormattedMessage id="VelferdspermisjonForm.Permisjon100ProsentOgGyldig" />
+          </Alert>
+        )}
+        <div>
+          <Button
+            size="small"
+            variant="primary"
+            type="button"
+            disabled={!formMethods.formState.isDirty || false}
+            onClick={formMethods.handleSubmit(lagreForm)}
+          >
+            <FormattedMessage id="VelferdspermisjonForm.Oppdater" />
+          </Button>
+        </div>
+      </VStack>
     </FormProvider>
   );
 };

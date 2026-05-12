@@ -2,6 +2,14 @@
   background-color: var(--ax-bg-neutral-moderate);
 }
 
+.openRow + tr[data-state='open'] {
+  background-color: var(--ax-bg-default);
+}
+
 .apRow {
   background-color: var(--ax-warning-200);
+}
+
+.apRow + tr[data-state='open'] {
+  background-color: var(--ax-bg-default);
 }

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Table, Tag } from '@navikt/ds-react';
+import { XMarkIcon } from '@navikt/aksel-icons';
+import { Button, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { ArbeidsforholdFodselOgTilrettelegging, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
@@ -12,37 +13,11 @@ import { OppholdForm } from './OppholdForm';
 
 import styles from './oppholdPeriodeTabellRad.module.css';
 
-const utledTypeTekst = (intl: IntlShape, opphold: Partial<SvpAvklartOppholdPeriode>) => {
-  if (opphold.oppholdÅrsak === undefined) {
-    return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Opphold' });
-  }
-
-  return opphold.oppholdÅrsak === 'FERIE'
-    ? intl.formatMessage({
-        id: 'TilretteleggingPerioderTabellRad.Ferie',
-      })
-    : intl.formatMessage({
-        id: 'TilretteleggingPerioderTabellRad.Sykepenger',
-      });
-};
-
-const utledKilde = (intl: IntlShape, opphold: SvpAvklartOppholdPeriode) => {
-  switch (opphold.oppholdKilde) {
-    case 'SØKNAD':
-      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Soknad' });
-    case 'INNTEKTSMELDING':
-      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Inntektsmelding' });
-    case 'TIDLIGERE_VEDTAK':
-      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.TidligereVedtak' });
-    default:
-      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Saksbehandler' });
-  }
-};
-
 interface Props {
   navn: `arbeidsforhold.${number}.avklarteOppholdPerioder.${number}`;
   opphold: SvpAvklartOppholdPeriode;
   readOnly: boolean;
+  disabled: boolean;
   index: number;
   openRad: boolean;
   fjernOpphold: (opphold?: SvpAvklartOppholdPeriode) => void;
@@ -56,6 +31,7 @@ export const OppholdPeriodeTabellRad = ({
   opphold,
   index,
   readOnly,
+  disabled,
   openRad,
   fjernOpphold,
   setLeggTilKnapperDisablet,
@@ -87,7 +63,6 @@ export const OppholdPeriodeTabellRad = ({
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
-      contentGutter="none"
       content={
         <OppholdForm
           opphold={opphold}
@@ -95,28 +70,67 @@ export const OppholdPeriodeTabellRad = ({
           oppdaterOpphold={oppdaterOpphold}
           avbrytEditering={avbrytEditering}
           readOnly={readOnly}
+          disabled={disabled}
           alleTilrettelegginger={arbeidsforhold.tilretteleggingDatoer}
           alleOpphold={arbeidsforhold.avklarteOppholdPerioder}
           termindato={termindato}
-          slettOpphold={fjernOpphold}
         />
       }
-      togglePlacement="right"
       className={open ? styles['openRow'] : undefined}
     >
       <Table.DataCell>
         {opphold.fom ? (
           <PeriodLabel dateStringFom={opphold.fom} dateStringTom={opphold.tom} />
         ) : (
-          <FormattedMessage id="TilretteleggingPerioderTabellRad.Periode" />
+          <FormattedMessage id="OppholdPeriodeTabellRad.IkkeSatt" />
         )}
       </Table.DataCell>
-      <Table.DataCell>{utledTypeTekst(intl, opphold)}</Table.DataCell>
+
       <Table.DataCell>
-        <Tag data-color="neutral" size="small" variant="moderate">
-          {utledKilde(intl, opphold)}
-        </Tag>
+        <OppholdType opphold={opphold} />
+      </Table.DataCell>
+      <Table.DataCell>
+        <OppholdKilde opphold={opphold} />
+      </Table.DataCell>
+      <Table.DataCell width={48}>
+        {!readOnly && !disabled && opphold.fom && (
+          <Button
+            size="small"
+            variant="tertiary-neutral"
+            icon={<XMarkIcon aria-hidden />}
+            aria-label={intl.formatMessage({ id: 'OppholdPeriodeTabellRad.SlettPeriode' })}
+            title={intl.formatMessage({ id: 'OppholdPeriodeTabellRad.SlettPeriode' })}
+            onClick={() => fjernOpphold(opphold)}
+            type="button"
+            disabled={opphold.oppholdKilde === 'INNTEKTSMELDING'}
+          />
+        )}
       </Table.DataCell>
     </Table.ExpandableRow>
   );
+};
+
+const OppholdType = ({ opphold }: { opphold: Partial<SvpAvklartOppholdPeriode> }) => {
+  if (opphold.oppholdÅrsak === undefined) {
+    return <FormattedMessage id="OppholdPeriodeTabellRad.Opphold" />;
+  }
+
+  return opphold.oppholdÅrsak === 'FERIE' ? (
+    <FormattedMessage id="OppholdPeriodeTabellRad.Ferie" />
+  ) : (
+    <FormattedMessage id="OppholdPeriodeTabellRad.Sykepenger" />
+  );
+};
+
+const OppholdKilde = ({ opphold }: { opphold: SvpAvklartOppholdPeriode }) => {
+  switch (opphold.oppholdKilde) {
+    case 'SØKNAD':
+      return <FormattedMessage id="Kilde.Soknad" />;
+    case 'INNTEKTSMELDING':
+      return <FormattedMessage id="Kilde.Inntektsmelding" />;
+    case 'TIDLIGERE_VEDTAK':
+      return <FormattedMessage id="Kilde.TidligereVedtak" />;
+    default:
+      return <FormattedMessage id="Kilde.Saksbehandler" />;
+  }
 };

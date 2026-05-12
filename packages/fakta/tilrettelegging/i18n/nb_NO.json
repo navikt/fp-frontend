@@ -18,10 +18,7 @@
 
   "ArbeidsforholdPanel.TilretteleggingTidligereEnn": "Tilrettelegging fra og med må være tidligere enn {dato}",
   "ArbeidsforholdPanel.DatoForTilrettelegging": "Dato for tilrettelegging fra lege eller jordmor",
-  "ArbeidsforholdPanel.Perioder": "Perioder",
   "ArbeidsforholdPanel.SkalHaSvpForArbeidsforhold": "Skal ha svangerskapspenger for arbeidsforholdet",
-  "VelferdspermisjonPanel.Velferdspermisjon": "Registrerte velferdspermisjoner",
-  "VelferdspermisjonPanel.ErPermisjonGyldg": "Er permisjoner gyldige?",
 
   "TilretteleggingForm.Tilretteleggingsbehov": "Tilretteleggingsbehov",
   "TilretteleggingForm.FraOgMed": "Fra og med",
@@ -33,7 +30,6 @@
   "TilretteleggingForm.Oppdater": "Oppdater",
   "TilretteleggingForm.Avbryt": "Avbryt",
   "TilretteleggingForm.ProsentSvp": "Prosent svangerskapspenger",
-  "TilretteleggingForm.SlettPeriode": "Slett periode",
   "TilretteleggingForm.DuplikateDatoer": "Flere perioder med samme Fra og med",
   "TilretteleggingForm.EtterTermindato": "Dato kan ikke være senere enn tre uker før termindato",
   "TilretteleggingForm.ForForsteDato": "Dato kan ikke være før dato for tilrettelegging fra lege eller jordmor",
@@ -51,7 +47,9 @@
   "TilretteleggingInfoPanel.AvStillingsprosent": "Av stillingsprosent {stillingsprosent}%",
   "TilretteleggingInfoPanel.Saksbehandler": "Saksbehandler",
 
-  "OppholdForm.SlettPeriode": "Slett periode",
+  "TilretteleggingOgOppholdPerioderPanel.Perioder": "Perioder",
+  "TilretteleggingOgOppholdPerioderPanel.Kilde": "Kilde",
+
   "OppholdForm.LeggTil": "Legg til ny periode",
   "OppholdForm.AvsluttOgSlett": "Avbryt",
   "OppholdForm.Oppdater": "Oppdater",
@@ -68,24 +66,29 @@
   "TilretteleggingFieldArray.LeggTilTilrettelegging": "Periode med svangerskapspenger",
   "TilretteleggingFieldArray.LeggTilOpphold": "Opphold",
 
-  "VelferdspermisjonPanel.Permisjon": "{permisjon}% {type}",
-  "VelferdspermisjonPanel.PermisjonGyldig": "Er permisjon gyldig?",
-  "VelferdspermisjonPanel.PermisjonGyldigDetaljer": "Hvis den er gyldig vil utbetalingsgraden for alle perioder for denne arbeidsgiveren reduseres med permisjonsprosent.",
-  "VelferdspermisjonPanel.Ja": "Ja",
-  "VelferdspermisjonPanel.Nei": "Nei",
-  "VelferdspermisjonPanel.Oppdater": "Oppdater",
-  "VelferdspermisjonPanel.AaRegisteret": "Aa-registeret",
-  "VelferdspermisjonPanel.Permisjon100ProsentOgGyldig": "Permisjonen på 100% er satt som gyldig, og dette fører til at søker ikke får svangerskapsenger for arbeidsforholdet.",
+  "VelferdspermisjonTabell.RegistrerteVelferdspermisjoner": "Registrerte velferdspermisjoner fra Aa-registeret",
+  "VelferdspermisjonTabellRad.Permisjon": "{permisjon}% {type}",
+  "VelferdspermisjonForm.PermisjonGyldig": "Er permisjon gyldig?",
+  "VelferdspermisjonForm.PermisjonGyldigDetaljer": "Hvis den er gyldig vil utbetalingsgraden for alle perioder for denne arbeidsgiveren reduseres med permisjonsprosent.",
+  "VelferdspermisjonForm.Ja": "Ja",
+  "VelferdspermisjonForm.Nei": "Nei",
+  "VelferdspermisjonForm.Oppdater": "Oppdater",
+  "VelferdspermisjonForm.Permisjon100ProsentOgGyldig": "Permisjonen på 100% er satt som gyldig, og dette fører til at søker ikke får svangerskapspenger for arbeidsforholdet.",
 
-  "TilretteleggingPerioderTabellRad.Periode": "Periode",
-  "TilretteleggingPerioderTabellRad.Saksbehandler": "Saksbehandler",
-  "TilretteleggingPerioderTabellRad.EndretAvSaksbehandler": "Endret av saksbehandler",
-  "TilretteleggingPerioderTabellRad.TidligereVedtak": "Tidligere vedtak",
-  "TilretteleggingPerioderTabellRad.Inntektsmelding": "Inntektsmelding",
-  "TilretteleggingPerioderTabellRad.Soknad": "Søknad",
-  "TilretteleggingPerioderTabellRad.Tilrettelegging": "Tilrettelegging",
-  "TilretteleggingPerioderTabellRad.Opphold": "Opphold",
-  "TilretteleggingPerioderTabellRad.Sykepenger": "Sykepenger 100%",
-  "TilretteleggingPerioderTabellRad.Ferie": "Ferie",
-  "TilretteleggingPerioderTabellRad.SVPprosent": "{prosent}% svangerskapspenger"
+  "Kilde.Saksbehandler": "Saksbehandler",
+  "Kilde.EndretAvSaksbehandler": "Endret av saksbehandler",
+  "Kilde.TidligereVedtak": "Tidligere vedtak",
+  "Kilde.Inntektsmelding": "Inntektsmelding",
+  "Kilde.Soknad": "Søknad",
+
+  "TilretteleggingPeriodeTabellRad.SlettPeriode": "Slett periode",
+  "TilretteleggingPeriodeTabellRad.IkkeSatt": "Ikke satt",
+  "TilretteleggingPeriodeTabellRad.Tilrettelegging": "Tilrettelegging",
+  "TilretteleggingPeriodeTabellRad.SVPprosent": "{prosent}% svangerskapspenger",
+
+  "OppholdPeriodeTabellRad.SlettPeriode": "Slett periode",
+  "OppholdPeriodeTabellRad.IkkeSatt": "Ikke satt",
+  "OppholdPeriodeTabellRad.Opphold": "Opphold",
+  "OppholdPeriodeTabellRad.Sykepenger": "Sykepenger 100%",
+  "OppholdPeriodeTabellRad.Ferie": "Ferie"
 }
