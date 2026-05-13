@@ -252,6 +252,7 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '5101'
   | '5102'
   | '5103'
+  | '5104'
   | '6002'
   | '6003'
   | '6005'
@@ -4893,6 +4894,7 @@ export type foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør
 export type foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType =
   | 'ANKE_MERKNADER'
   | 'ANKE_VURDERING'
+  | 'AAP_KOMBINERT_ATFL'
   | 'BEREGNING_ENGANGSSTOENAD'
   | 'BEREGNING_FORELDREPENGER'
   | 'BESTEBEREGNING'

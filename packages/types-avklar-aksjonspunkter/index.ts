@@ -28,6 +28,7 @@ export type { VurderForutgaendeMedlemskapAp } from './src/fakta/VurderForutgaend
 export type { BekreftAnnenpartsUttakEøsAp } from './src/fakta/BekreftAnnenpartsUttakEøsAp';
 export type { BeregningAp } from './src/fakta/BeregningAp';
 export type { BesteberegningAP, ManuellKontrollBesteberegningAP } from './src/fakta/KontrollerBesteberegningAP';
+export type { ManuellKontrollAapKombinertAtflAP } from './src/fakta/ManuellKontrollAapKombinertAtflAP';
 
 export type { ProsessAksjonspunkt } from './src/ProsessAksjonspunkt';
 export type { BekreftSvangerskapspengervilkarAp } from './src/prosess/BekreftSvangerskapspengervilkarAp';
