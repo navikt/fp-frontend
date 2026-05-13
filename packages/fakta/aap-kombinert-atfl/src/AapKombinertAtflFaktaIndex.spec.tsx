@@ -12,7 +12,7 @@ describe('AapKombinertAtflFaktaIndex', () => {
 
     expect(
       await screen.findByText(
-        'Saken har AAP kombinert med arbeid eller frilans. Dette kan gi feil beregning. ' +
+        'Saken har AAP kombinert med arbeidstaker og/eller frilans. Dette kan gi feil beregning. ' +
           'Kontroller beregningen og gå tilbake til Fakta om beregning for å overstyre dersom beregningen er feil.',
       ),
     ).toBeInTheDocument();
