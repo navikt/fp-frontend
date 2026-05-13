@@ -82,7 +82,7 @@ const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
   const erAPLøst = aksjonspunkt.status === 'UTFO';
   return {
     ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
-    erBeregningenKorrekt: erAPLøst ? true : false,
+    erBeregningenKorrekt: erAPLøst,
   };
 };
 
