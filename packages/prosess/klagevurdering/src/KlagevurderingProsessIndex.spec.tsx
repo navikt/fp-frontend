@@ -56,7 +56,6 @@ describe('KlagevurderingProsessIndex', () => {
     await waitFor(() => expect(forhåndsvise).toHaveBeenCalledTimes(1));
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
       dokumentMal: 'KGEOMG',
-      erOpphevetKlage: false,
       fritekst: 'Dette er en fritekst',
     });
 

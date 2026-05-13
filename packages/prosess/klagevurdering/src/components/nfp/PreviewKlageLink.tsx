@@ -19,13 +19,11 @@ const getBrevKode = (klageVurdering?: KlageVurderingType): DokumentMalType | und
 export type KlagevurderingForhåndsvisData = {
   fritekst: string;
   dokumentMal?: DokumentMalType;
-  erOpphevetKlage: boolean;
 };
 
 const getBrevData = (klageVurdering?: KlageVurderingType, fritekstTilBrev?: string): KlagevurderingForhåndsvisData => ({
   fritekst: fritekstTilBrev ?? '',
   dokumentMal: getBrevKode(klageVurdering),
-  erOpphevetKlage: klageVurdering === 'OPPHEVE_YTELSESVEDTAK',
 });
 
 interface Props {
