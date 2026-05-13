@@ -17,10 +17,6 @@
   margin-bottom: 24px;
 }
 
-.lenke {
-  color: var(--ax-accent-800);
-}
-
 .checkmarkIcon {
   color: var(--ax-success-600);
   height: 35px;

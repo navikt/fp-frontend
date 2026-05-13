@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Link } from '@navikt/ds-react';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
@@ -77,9 +77,9 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
           return (
             <React.Fragment key={context.skjermlenkeType}>
               {lenke && skjermlenkeTypeKodeverk && (
-                <NavLink to={lenke} onClick={() => globalThis.scroll(0, 0)} className={styles['lenke']}>
+                <Link as={NavLink} to={lenke} onClick={() => globalThis.scroll(0, 0)}>
                   {skjermlenkeTypeKodeverk.navn}
-                </NavLink>
+                </Link>
               )}
               {aksjonspunkter.map(aksjonspunkt => {
                 const aksjonspunktTexts = getAksjonspunkttekst(
