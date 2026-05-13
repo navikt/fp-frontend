@@ -1,7 +1,7 @@
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
 
-import { BodyShort, VStack } from '@navikt/ds-react';
+import { BodyShort, Link, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
 import type {
@@ -96,9 +96,9 @@ export const AksjonspunktGodkjenningFieldArray = ({
         return (
           <div key={field.id}>
             {lenke && skjermlenkeTypeKodeverk && (
-              <NavLink to={lenke} onClick={() => globalThis.scroll(0, 0)} className={styles['lenke']}>
+              <Link as={NavLink} to={lenke} onClick={() => globalThis.scroll(0, 0)}>
                 {skjermlenkeTypeKodeverk.navn}
-              </NavLink>
+              </Link>
             )}
             {aksjonspunktText.map((formattedMessage, i) => (
               <div
