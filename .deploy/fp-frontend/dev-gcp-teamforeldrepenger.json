@@ -33,23 +33,23 @@
   "externals": ["fpsak-api.dev-fss-pub.nais.io", "fptilbake.dev-fss-pub.nais.io"],
   "proxyRedirects": [
     {
-      "path": "/fpsak/api",
-      "url": "https://fpsak-api.dev-fss-pub.nais.io",
+      "path": "/fpsak",
+      "url": "https://fpsak-api.dev-fss-pub.nais.io/fpsak",
       "scope": "api://dev-fss.teamforeldrepenger.fpsak/.default"
     },
     {
-      "path": "/fptilbake/api",
-      "url": "https://fptilbake.dev-fss-pub.nais.io",
+      "path": "/fptilbake",
+      "url": "https://fptilbake.dev-fss-pub.nais.io/fptilbake",
       "scope": "api://dev-fss.teamforeldrepenger.fptilbake/.default"
     },
     {
-      "path": "/fplos/api",
-      "url": "http://fplos",
+      "path": "/fplos",
+      "url": "http://fplos/fplos",
       "scope": "api://dev-gcp.teamforeldrepenger.fplos/.default"
     },
     {
-      "path": "/fpmottak/api",
-      "url": "http://fpmottak",
+      "path": "/fpmottak",
+      "url": "http://fpmottak/fpmottak",
       "scope": "api://dev-gcp.teamforeldrepenger.fpmottak/.default"
     }
   ],
