@@ -33,6 +33,8 @@ export const setupProxies = (router: Router) => {
         logger: logger.logger,
         on: {
           proxyReq: (proxyRequest, request) => {
+            // Express strips matched prefix from req.url, restore original path
+            proxyRequest.path = request.originalUrl;
             const obo = request.headers["obo-token"];
             if (obo) {
               proxyRequest.removeHeader("obo-token");
