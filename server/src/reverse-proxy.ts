@@ -7,6 +7,7 @@ import logger from "./logger.js";
 
 export const setupProxies = (router: Router) => {
   for (const api of config.reverseProxyConfig.apis) {
+    // OBO token exchange — mounted on path so it only runs for matching requests
     router.use(
       api.path,
       async (request: Request, response: Response, next: NextFunction) => {
@@ -27,8 +28,13 @@ export const setupProxies = (router: Router) => {
           response.status(403).send();
         }
       },
+    );
+
+    // Proxy — NOT mounted on path, uses pathFilter instead to preserve full URL
+    router.use(
       createProxyMiddleware({
         target: api.url,
+        pathFilter: api.path,
         changeOrigin: true,
         logger: logger.logger,
         on: {
