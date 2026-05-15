@@ -14,10 +14,10 @@
   },
   "dependencies": {
     "@navikt/oasis": "4.1.4",
-    "@navikt/vite-mode": "0.13.7",
+    "@navikt/vite-mode": "0.16.1",
     "connect-timeout": "1.9.1",
     "cors": "2.8.6",
-    "dotenv": "17.3.1",
+    "dotenv": "17.4.2",
     "express": "5.2.1",
     "express-http-proxy": "2.1.2",
     "helmet": "8.1.0",
@@ -25,19 +25,19 @@
     "winston": "3.19.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.3",
+    "@eslint/js": "10.0.1",
     "@types/connect-timeout": "^1.9.0",
     "@types/cors": "2.8.19",
     "@types/express": "5.0.6",
     "@types/express-http-proxy": "1.6.7",
     "@types/morgan": "1.9.10",
-    "eslint": "9.39.3",
+    "eslint": "10.3.0",
     "eslint-plugin-prettier": "5.5.5",
-    "eslint-plugin-simple-import-sort": "12.1.1",
-    "eslint-plugin-unicorn": "63.0.0",
-    "knip": "5.85.0",
-    "prettier": "3.8.1",
-    "typescript": "5.9.3",
-    "typescript-eslint": "8.56.0"
+    "eslint-plugin-simple-import-sort": "13.0.0",
+    "eslint-plugin-unicorn": "64.0.0",
+    "knip": "6.12.1",
+    "prettier": "3.8.3",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.59.2"
   }
 }
