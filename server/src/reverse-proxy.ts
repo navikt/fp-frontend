@@ -8,7 +8,7 @@ import logger from "./logger.js";
 export const setupProxies = (router: Router) => {
   for (const api of config.reverseProxyConfig.apis) {
     router.use(
-      `${api.path}/*splat`,
+      api.path,
       async (request: Request, response: Response, next: NextFunction) => {
         const token = getToken(request);
         if (!token) {
@@ -33,8 +33,6 @@ export const setupProxies = (router: Router) => {
         logger: logger.logger,
         on: {
           proxyReq: (proxyRequest, request) => {
-            // Express strips matched prefix from req.url, restore original path
-            proxyRequest.path = request.originalUrl;
             const obo = request.headers["obo-token"];
             if (obo) {
               proxyRequest.removeHeader("obo-token");
