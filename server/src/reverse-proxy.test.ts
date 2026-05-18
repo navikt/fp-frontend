@@ -107,6 +107,5 @@ test("rewrites Location header on redirect", async () => {
     .set("Authorization", "Bearer t")
     .redirects(0);
   expect(res.status).toBe(302);
-  expect(res.headers.location).not.toContain(`localhost:${backendPort}`);
-  expect(res.headers.location).toContain("/fpsak/api/behandlinger/123");
+  expect(res.headers.location).toBe("/fpsak/api/behandlinger/123");
 });
