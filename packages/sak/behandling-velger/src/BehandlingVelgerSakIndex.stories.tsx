@@ -96,6 +96,11 @@ export const Default: Story = {
         språkkode: 'NB',
         opprettet: '2017-10-02T02:04:25.455',
         gjeldendeVedtak: false,
+        førsteÅrsak: {
+          behandlingArsakType: 'RE-END-INNTEKTSMELD',
+          erAutomatiskRevurdering: true,
+          manueltOpprettet: false,
+        },
       }),
       lagFagsakBehandling({
         behandlendeEnhetId: '4812',
