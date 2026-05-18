@@ -30,7 +30,7 @@
     "editorjs-html": "4.0.5",
     "editorjs-undo": "2.0.28",
     "lodash.debounce": "4.0.8",
-    "react": "19.2.6",
+    "react": "19.2.5",
     "react-intl": "10.1.5",
     "react-router-dom": "7.15.0"
   },

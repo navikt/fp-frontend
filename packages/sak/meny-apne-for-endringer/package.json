@@ -23,8 +23,8 @@
     "@navikt/ft-ui-komponenter": "8.0.5",
     "@navikt/ft-utils": "5.0.1",
     "dayjs": "1.11.20",
-    "react": "19.2.6",
-    "react-dom": "19.2.6",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
     "react-intl": "10.1.5"
   },
   "devDependencies": {
