@@ -26,7 +26,7 @@
     "dev": "turbo run dev --filter=@navikt/fp-frontend",
     "dev-avdelingsleder": "turbo run dev --filter=@navikt/fp-avdelingsleder",
     "dev-journalforing": "turbo run dev --filter=@navikt/fp-journalforing",
-    "storybook-create-deploy-folder": "node scripts/create-storybook-index.cjs",
+    "storybook-create-deploy-folder": "node scripts/create-storybook-index.mjs",
     "generate": "turbo run generate --filter @navikt/fp-types",
     "generate:local": "turbo run generate:local --filter @navikt/fp-types",
     "prepare": "husky"
@@ -50,7 +50,6 @@
     "knip": "6.8.0",
     "lint-staged": "16.4.0",
     "prettier": "3.8.3",
-    "shelljs": "0.10.0",
     "storybook": "10.3.5",
     "stylelint": "17.9.1",
     "stylelint-order": "8.1.1",

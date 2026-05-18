@@ -1,5 +1,5 @@
 import { extract } from '@formatjs/cli-lib';
-import glob from 'fast-glob';
+import { globSync } from 'node:fs';
 
 import nb from './nb_NO.json';
 
@@ -8,7 +8,7 @@ const writeToConsole = (text: string) => console.log(text);
 
 describe('intl', () => {
   it('Check that i18n strings in code and in language file match', async () => {
-    const files = await glob('src/**/*.{ts,tsx}');
+    const files = globSync('src/**/*.{ts,tsx}');
 
     const foundTranslations = await extract(files, {
       idInterpolationPattern: '[sha512:contenthash:base64:6]',
