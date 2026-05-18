@@ -1,15 +1,7 @@
 import http from "node:http";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import express, { Router } from "express";
-
-/**
- * Integration test for reverse-proxy.
- * Verifies:
- * 1. Request path is correctly forwarded to backend
- * 2. Location headers with absolute backend URLs are rewritten
- * 3. OBO token is set as Authorization header
- * 4. Cookie header is stripped
- */
+import supertest from "supertest";
+import { afterAll, beforeAll, expect, test, vi } from "vitest";
 
 vi.mock("@navikt/oasis", () => ({
   getToken: () => "mock-wonderwall-token",
@@ -25,150 +17,71 @@ vi.mock("./logger.js", () => ({
   },
 }));
 
-// Mock backend that records requests and can return redirects
+let app: express.Express;
 let backendServer: http.Server;
 let backendPort: number;
-let lastBackendRequest: { path: string; headers: http.IncomingHttpHeaders };
+let lastRequest: { path: string; headers: http.IncomingHttpHeaders };
 
-// Proxy server
-let proxyServer: http.Server;
-let proxyPort: number;
-
-function createBackendServer(): Promise<{ server: http.Server; port: number }> {
-  return new Promise((resolve) => {
-    const server = http.createServer((req, res) => {
-      lastBackendRequest = {
-        path: req.url ?? "",
-        headers: req.headers,
-      };
-
-      // If request path contains "redirect", return a redirect with absolute backend URL
-      if (req.url?.includes("redirect")) {
-        res.writeHead(302, {
-          Location: `http://localhost:${backendPort}/fpsak/api/behandlinger/123`,
-        });
-        res.end();
-        return;
-      }
-
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ ok: true, path: req.url }));
-    });
-
-    server.listen(0, () => {
-      const addr = server.address();
-      const port = typeof addr === "object" ? addr!.port : 0;
-      resolve({ server, port });
-    });
+beforeAll(async () => {
+  // Start a simple backend server
+  backendServer = http.createServer((req, res) => {
+    lastRequest = { path: req.url ?? "", headers: req.headers };
+    if (req.url?.includes("redirect")) {
+      res.writeHead(302, { Location: `http://localhost:${backendPort}/fpsak/api/behandlinger/123` });
+      res.end();
+      return;
+    }
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ ok: true }));
   });
-}
-
-function makeRequest(
-  port: number,
-  path: string,
-  options: { followRedirect?: boolean; headers?: Record<string, string> } = {},
-): Promise<{ status: number; headers: http.IncomingHttpHeaders; body: string }> {
-  return new Promise((resolve, reject) => {
-    const req = http.get(
-      {
-        hostname: "localhost",
-        port,
-        path,
-        headers: {
-          Authorization: "Bearer wonderwall-token",
-          cookie: "session=abc123",
-          ...options.headers,
-        },
-      },
-      (res) => {
-        let body = "";
-        res.on("data", (chunk) => (body += chunk));
-        res.on("end", () =>
-          resolve({ status: res.statusCode ?? 0, headers: res.headers, body }),
-        );
-      },
-    );
-    req.on("error", reject);
-  });
-}
-
-describe("reverse-proxy", () => {
-  beforeAll(async () => {
-    const backend = await createBackendServer();
-    backendServer = backend.server;
-    backendPort = backend.port;
-
-    // Mock config with dynamic port
-    vi.doMock("./config.js", () => ({
-      default: {
-        reverseProxyConfig: {
-          apis: [
-            {
-              path: "/fpsak",
-              url: `http://localhost:${backendPort}/fpsak`,
-              scopes: "api://test.teamforeldrepenger.fpsak/.default",
-            },
-          ],
-        },
-      },
-    }));
-
-    const { setupProxies } = await import("./reverse-proxy.js");
-    const app = express();
-    const router = Router();
-    setupProxies(router);
-    app.use(router);
-
-    await new Promise<void>((resolve) => {
-      proxyServer = app.listen(0, () => {
-        const addr = proxyServer.address();
-        proxyPort = typeof addr === "object" ? addr!.port : 0;
-        resolve();
-      });
+  await new Promise<void>((resolve) => {
+    backendServer.listen(0, () => {
+      backendPort = (backendServer.address() as { port: number }).port;
+      resolve();
     });
   });
 
-  afterAll(() => {
-    backendServer?.close();
-    proxyServer?.close();
-  });
+  // Mock config with dynamic backend port
+  vi.doMock("./config.js", () => ({
+    default: {
+      reverseProxyConfig: {
+        apis: [{ path: "/fpsak", url: `http://localhost:${backendPort}/fpsak`, scopes: "api://test/.default" }],
+      },
+    },
+  }));
 
-  it("forwards full path to backend", async () => {
-    const res = await makeRequest(proxyPort, "/fpsak/api/init-fetch");
-    expect(res.status).toBe(200);
-    expect(lastBackendRequest.path).toBe("/fpsak/api/init-fetch");
-  });
+  const { setupProxies } = await import("./reverse-proxy.js");
+  app = express();
+  const router = Router();
+  setupProxies(router);
+  app.use(router);
+});
 
-  it("forwards path with query string", async () => {
-    const res = await makeRequest(
-      proxyPort,
-      "/fpsak/api/behandlinger?saksnummer=123",
-    );
-    expect(res.status).toBe(200);
-    expect(lastBackendRequest.path).toBe(
-      "/fpsak/api/behandlinger?saksnummer=123",
-    );
-  });
+afterAll(() => backendServer?.close());
 
-  it("sets OBO token as Authorization header", async () => {
-    await makeRequest(proxyPort, "/fpsak/api/init-fetch");
-    expect(lastBackendRequest.headers.authorization).toBe(
-      "Bearer mock-obo-token",
-    );
-  });
+test("forwards full path to backend", async () => {
+  await supertest(app).get("/fpsak/api/init-fetch").set("Authorization", "Bearer t").expect(200);
+  expect(lastRequest.path).toBe("/fpsak/api/init-fetch");
+});
 
-  it("strips cookie header", async () => {
-    await makeRequest(proxyPort, "/fpsak/api/init-fetch");
-    expect(lastBackendRequest.headers.cookie).toBeUndefined();
-  });
+test("forwards query string", async () => {
+  await supertest(app).get("/fpsak/api/behandlinger?saksnummer=123").set("Authorization", "Bearer t").expect(200);
+  expect(lastRequest.path).toBe("/fpsak/api/behandlinger?saksnummer=123");
+});
 
-  it("rewrites Location header on redirect", async () => {
-    const res = await makeRequest(proxyPort, "/fpsak/api/redirect-test");
-    expect(res.status).toBe(302);
-    const location = res.headers.location;
-    // Should NOT contain the backend host
-    expect(location).not.toContain(`localhost:${backendPort}`);
-    // Should contain the path
-    expect(location).toContain("/fpsak/api/behandlinger/123");
-  });
+test("sets OBO token as Authorization header", async () => {
+  await supertest(app).get("/fpsak/api/init-fetch").set("Authorization", "Bearer t").expect(200);
+  expect(lastRequest.headers.authorization).toBe("Bearer mock-obo-token");
+});
+
+test("strips cookie header", async () => {
+  await supertest(app).get("/fpsak/api/init-fetch").set("Authorization", "Bearer t").set("Cookie", "s=1").expect(200);
+  expect(lastRequest.headers.cookie).toBeUndefined();
+});
+
+test("rewrites Location header on redirect", async () => {
+  const res = await supertest(app).get("/fpsak/api/redirect").set("Authorization", "Bearer t").redirects(0);
+  expect(res.status).toBe(302);
+  expect(res.headers.location).not.toContain(`localhost:${backendPort}`);
+  expect(res.headers.location).toContain("/fpsak/api/behandlinger/123");
 });
