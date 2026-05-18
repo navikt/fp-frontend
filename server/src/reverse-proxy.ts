@@ -30,6 +30,8 @@ export const setupProxies = (router: Router) => {
       createProxyMiddleware({
         target: api.url,
         changeOrigin: true,
+        timeout: 600_000,
+        proxyTimeout: 60_000,
         logger: logger.logger,
         on: {
           proxyReq: (proxyRequest, request) => {
