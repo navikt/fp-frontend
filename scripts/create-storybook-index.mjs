@@ -1,7 +1,9 @@
-const path = require('node:path');
-const shell = require('shelljs');
-const glob = require('glob');
-const fs = require('node:fs');
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const scriptDir = dirname(fileURLToPath(import.meta.url));
+const DEPLOY_FOLDER = '../.storybook-static-build';
 
 const generateRow = packageJson => `
   <div class="box">
@@ -83,59 +85,53 @@ const generateHTML = packages => `
   </html>
 `;
 
-const DEPLOY_FOLDER = '../.storybook-static-build';
+const findPackageDirs = baseDir => {
+  if (!existsSync(baseDir)) return [];
+  return readdirSync(baseDir, { withFileTypes: true, recursive: true })
+    .filter(entry => entry.name === 'package.json' && !entry.parentPath.includes('node_modules'))
+    .map(entry => entry.parentPath);
+};
 
-const copyFiles = subPackage => {
-  shell.cd(subPackage);
-  if (!fs.existsSync('package.json') || !fs.existsSync('.storybook-static-build')) {
+const copyFiles = subPackagePath => {
+  const pkgJsonPath = join(subPackagePath, 'package.json');
+  const storybookBuildPath = join(subPackagePath, '.storybook-static-build');
+
+  if (!existsSync(pkgJsonPath) || !existsSync(storybookBuildPath)) {
     return null;
   }
 
-  const packagesJson = JSON.parse(fs.readFileSync(path.resolve('package.json'), 'utf8'));
+  const packageJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
+  const destFolder = join(scriptDir, DEPLOY_FOLDER, packageJson.name);
 
-  const packageDestFolder = path.join(__dirname, DEPLOY_FOLDER, packagesJson.name);
-  shell.mkdir(packageDestFolder);
-  shell.cp('-r', path.join(subPackage, '.storybook-static-build', '*'), packageDestFolder);
+  mkdirSync(destFolder, { recursive: true });
+  for (const entry of readdirSync(storybookBuildPath)) {
+    cpSync(join(storybookBuildPath, entry), join(destFolder, entry), { recursive: true });
+  }
 
-  return packagesJson;
+  return packageJson;
 };
 
-const creatIndexHtml = () => {
+const createIndexHtml = () => {
+  const origDir = process.cwd();
+
   // Lag folder-struktur for innholdet som skal deployes
-  shell.mkdir(path.join(__dirname, DEPLOY_FOLDER));
-  shell.mkdir(path.join(__dirname, DEPLOY_FOLDER, '@navikt'));
+  mkdirSync(join(scriptDir, DEPLOY_FOLDER, '@navikt'), { recursive: true });
 
   // Kopier css fil til folder som skal deployes
-  shell.cp(
-    path.join(__dirname, 'storybook-monorepo-index.css'),
-    path.join(__dirname, DEPLOY_FOLDER, 'monorepo-index.css'),
-  );
+  cpSync(join(scriptDir, 'storybook-monorepo-index.css'), join(scriptDir, DEPLOY_FOLDER, 'monorepo-index.css'));
 
   // For å støtte filer med '_' (Skip Jekyll-prosessering)
-  shell.cp(path.join(__dirname, '.nojekyll'), path.join(__dirname, DEPLOY_FOLDER, '.nojekyll'));
+  cpSync(join(scriptDir, '.nojekyll'), join(scriptDir, DEPLOY_FOLDER, '.nojekyll'));
 
   // Kopier storybook fra pakkene og inn i folder som skal deployes
-  const origDir = process.cwd();
-  const packagesApps = glob
-    .sync(path.join(origDir, 'apps', '**', 'package.json').split(path.sep).join('/'), {
-      ignore: '**/node_modules/**',
-    })
-    .map(path.dirname)
-    .map(copyFiles)
-    .filter(Boolean);
-  const packagesPackages = glob
-    .sync(path.join(origDir, 'packages', '**', 'package.json').split(path.sep).join('/'), {
-      ignore: '**/node_modules/**',
-    })
-    .map(path.dirname)
+  const packages = [...findPackageDirs(join(origDir, 'apps')), ...findPackageDirs(join(origDir, 'packages'))]
     .map(copyFiles)
     .filter(Boolean);
 
   // Lag index-fil
-  const index = generateHTML(packagesApps.concat(packagesPackages));
-  fs.writeFileSync(path.join(__dirname, DEPLOY_FOLDER, 'index.html'), index);
+  writeFileSync(join(scriptDir, DEPLOY_FOLDER, 'index.html'), generateHTML(packages));
 
   console.log('Done copying files');
 };
 
-creatIndexHtml();
+createIndexHtml();

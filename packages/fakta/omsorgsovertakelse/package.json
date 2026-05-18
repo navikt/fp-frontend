@@ -47,7 +47,6 @@
     "@testing-library/react": "16.3.2",
     "@types/react": "19.2.14",
     "eslint": "10.2.1",
-    "fast-glob": "3.3.3",
     "storybook": "10.3.5",
     "typescript": "6.0.3",
     "vite": "8.0.10",

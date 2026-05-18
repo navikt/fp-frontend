@@ -9,7 +9,7 @@ import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } 
 import { ErrorType, type FpError } from '../restApiError/errorType';
 import { useRestApiError, useRestApiErrorDispatcher } from '../restApiError/RestApiErrorContext';
 
-import messages from '../i18n/nb_NO.json';
+import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
