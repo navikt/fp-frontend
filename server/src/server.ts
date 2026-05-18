@@ -1,7 +1,6 @@
 import path from "node:path";
 
 import { serveViteMode } from "@navikt/vite-mode";
-import timeout from "connect-timeout";
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
@@ -20,7 +19,6 @@ const { port, viteModePort } = config.server;
 const spaFilePath = path.resolve("./public", "index.html");
 
 function startApp() {
-  server.use(timeout("10m"));
   addHeaders(server);
 
   // Logging i json format
