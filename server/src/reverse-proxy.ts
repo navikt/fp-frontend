@@ -32,6 +32,7 @@ export const setupProxies = (router: Router) => {
         changeOrigin: true,
         timeout: 600_000,
         proxyTimeout: 60_000,
+        autoRewrite: true,
         logger: logger.logger,
         on: {
           proxyReq: (proxyRequest, request) => {
