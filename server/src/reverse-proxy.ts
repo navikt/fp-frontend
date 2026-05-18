@@ -28,7 +28,7 @@ export const setupProxies = (router: Router) => {
         }
       },
       createProxyMiddleware({
-        target: api.url,
+        target: `${api.url}${api.path}`,
         changeOrigin: true,
         timeout: 600_000,
         proxyTimeout: 60_000,

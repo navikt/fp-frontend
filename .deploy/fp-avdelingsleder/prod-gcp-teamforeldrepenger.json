@@ -29,8 +29,8 @@
   ],
   "proxyRedirects": [
     {
-      "path": "/fplos",
-      "url": "http://fplos/fplos",
+      "path": "/fplos/api",
+      "url": "http://fplos",
       "scope": "api://prod-gcp.teamforeldrepenger.fplos/.default"
     }
   ],

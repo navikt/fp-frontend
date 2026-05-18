@@ -26,13 +26,13 @@
   "externals": ["fpsak-api.prod-fss-pub.nais.io"],
   "proxyRedirects": [
     {
-      "path": "/fpsak",
-      "url": "https://fpsak-api.prod-fss-pub.nais.io/fpsak",
+      "path": "/fpsak/api",
+      "url": "https://fpsak-api.prod-fss-pub.nais.io",
       "scope": "api://prod-fss.teamforeldrepenger.fpsak/.default"
     },
     {
-      "path": "/fpmottak",
-      "url": "http://fpmottak/fpmottak",
+      "path": "/fpmottak/api",
+      "url": "http://fpmottak",
       "scope": "api://prod-gcp.teamforeldrepenger.fpmottak/.default"
     }
   ],

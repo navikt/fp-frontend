@@ -50,8 +50,8 @@ beforeAll(async () => {
       reverseProxyConfig: {
         apis: [
           {
-            path: "/fpsak",
-            url: `http://localhost:${backendPort}/fpsak`,
+            path: "/fpsak/api",
+            url: `http://localhost:${backendPort}`,
             scopes: "api://test/.default",
           },
         ],
