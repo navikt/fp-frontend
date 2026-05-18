@@ -1,5 +1,5 @@
 import { extract } from '@formatjs/cli-lib';
-import glob from 'fast-glob';
+import { globSync } from 'node:fs';
 
 import nb from './nb_NO.json';
 
@@ -21,7 +21,7 @@ const NOT_FOUND_BECAUSE_ID_IS_STRING_UNION_IN_CODE = new Set([
 
 describe('intl', () => {
   it('Check that i18n strings in code and in language file match', async () => {
-    const files = await glob('src/**/*.{ts,tsx}');
+    const files = globSync('src/**/*.{ts,tsx}');
 
     const foundTranslations = await extract(files, {
       idInterpolationPattern: '[sha512:contenthash:base64:6]',
