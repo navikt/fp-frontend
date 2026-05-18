@@ -4,16 +4,10 @@ const glob = require('glob');
 const fs = require('node:fs');
 
 const generateRow = packageJson => `
-  <div class="box">
-    <a href="${packageJson.name}" class="package-row" target="blank">
-      <div class="title">
-        ${packageJson.name}
-      </div>
+    <a href="${packageJson.name}" class="package" target="blank">
+      <code>${packageJson.name}</code>
+      ${packageJson.description ? `<p>${packageJson.description}</p>` : ''}
     </a>
-    <div class="description">
-      Beskrivelse: ${packageJson.description || '-- Mangler --'}
-    </div>
-  </div>
 `;
 
 const generateHTML = packages => `
@@ -27,58 +21,80 @@ const generateHTML = packages => `
     <link rel="stylesheet" type="text/css" href="monorepo-index.css">
   </head>
   <body>
-    <h1 class="main-header">Storybook for FP-FRONTEND</h1>
-    <h2 class="header">Faktapaneler:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(p => p.name.includes('fp-fakta'))
-        .map(generateRow)
-        .join('')}
-    </div>
-    <br />
-    <h2 class="header">Prosesspaneler:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(p => p.name.includes('fp-prosess'))
-        .map(generateRow)
-        .join('')}
-    </div>
-    <br />
-    <h2 class="header">Sak-paneler:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(p => p.name.includes('fp-sak'))
-        .map(generateRow)
-        .join('')}
-    </div>
-    <h2 class="header">LOS-paneler:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(p => p.name.includes('fp-los'))
-        .map(generateRow)
-        .join('')}
-    </div>
-    <h2 class="header">Journalføring-paneler:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(p => p.name.includes('fp-journalforing'))
-        .map(generateRow)
-        .join('')}
-    </div>
-    <h2 class="header">Andre:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(
-          p =>
-            !p.name.includes('fp-sak') &&
-            !p.name.includes('fp-fakta') &&
-            !p.name.includes('fp-prosess') &&
-            !p.name.includes('fp-los') &&
-            !p.name.includes('fp-journalforing'),
-        )
-        .map(generateRow)
-        .join('')}
-    </div>
+    <h1>Storybook for FP-FRONTEND</h1>
+    
+    <section>
+      <h2>Apps</h2>
+      <div class="grid-container">
+        ${packages
+          .filter(
+            p =>
+              p.name.includes('fp-frontend') ||
+              p.name.includes('fp-avdelingsleder') ||
+              p.name.includes('fp-journalforing'),
+          )
+          .map(generateRow)
+          .join('')}
+      </div>
+    </section>
+    <section>
+      <h2>Faktapaneler</h2>
+      <div class="grid-container">
+        ${packages
+          .filter(p => p.name.includes('fp-fakta'))
+          .map(generateRow)
+          .join('')}
+      </div>
+    </section>
+ 
+    <section>
+      <h2>Prosesspaneler</h2>
+      <div class="grid-container">
+        ${packages
+          .filter(p => p.name.includes('fp-prosess'))
+          .map(generateRow)
+          .join('')}
+      </div>
+    </section>
+    
+    <section>
+      <h2>Sak-paneler</h2>
+      <div class="grid-container">
+        ${packages
+          .filter(p => p.name.includes('fp-sak'))
+          .map(generateRow)
+          .join('')}
+      </div>
+    </section>
+    
+    <section>
+      <h2>LOS-paneler</h2>
+      <div class="grid-container">
+        ${packages
+          .filter(p => p.name.includes('fp-los'))
+          .map(generateRow)
+          .join('')}
+      </div>
+    </section>
+    
+    <section>
+      <h2>Andre</h2>
+      <div class="grid-container">
+        ${packages
+          .filter(
+            p =>
+              !p.name.includes('fp-sak') &&
+              !p.name.includes('fp-fakta') &&
+              !p.name.includes('fp-prosess') &&
+              !p.name.includes('fp-los') &&
+              !p.name.includes('fp-avdelingsleder') &&
+              !p.name.includes('fp-journalforing') &&
+              !p.name.includes('fp-frontend'),
+          )
+          .map(generateRow)
+          .join('')}
+      </div>
+    </section>
   </body>
   </html>
 `;
@@ -110,9 +126,6 @@ const creatIndexHtml = () => {
     path.join(__dirname, 'storybook-monorepo-index.css'),
     path.join(__dirname, DEPLOY_FOLDER, 'monorepo-index.css'),
   );
-
-  // For å støtte filer med '_' (Skip Jekyll-prosessering)
-  shell.cp(path.join(__dirname, '.nojekyll'), path.join(__dirname, DEPLOY_FOLDER, '.nojekyll'));
 
   // Kopier storybook fra pakkene og inn i folder som skal deployes
   const origDir = process.cwd();
