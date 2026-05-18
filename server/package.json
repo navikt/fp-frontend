@@ -8,6 +8,7 @@
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
+    "test": "vitest run",
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
     "prettier:fix": "prettier --write src"
@@ -35,6 +36,7 @@
     "knip": "5.85.0",
     "prettier": "3.8.1",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.56.0"
+    "typescript-eslint": "8.56.0",
+    "vitest": "4.1.5"
   }
 }
