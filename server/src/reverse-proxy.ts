@@ -45,8 +45,10 @@ export const setupProxies = (router: Router) => {
                 `Access token ligger ikke i sesjon for scope ${api.scopes}`,
               );
             }
+            (request as unknown as Record<string, unknown>)._proxyStartTime = Date.now();
           },
-          proxyRes: (proxyResponse) => {
+          proxyRes: (proxyResponse, request, response) => {
+            // Location header rewrite — strip backend origin, keep relative path
             const location = proxyResponse.headers.location;
             if (location) {
               const targetOrigin = new URL(api.url).origin;
@@ -54,6 +56,19 @@ export const setupProxies = (router: Router) => {
                 proxyResponse.headers.location =
                   location.slice(targetOrigin.length);
               }
+            }
+
+            // Response logging
+            const { statusCode, statusMessage } = proxyResponse;
+            const startTime = (request as unknown as Record<string, unknown>)
+              ._proxyStartTime as number;
+            const duration = startTime ? Date.now() - startTime : 0;
+            const melding = `${statusCode} ${statusMessage}: ${request.method} - ${request.originalUrl} (${duration}ms)`;
+            const callIdValue = request.headers["nav-callid"];
+            if (Number(statusCode) >= 500) {
+              logger.logger.warn(melding, { callId: callIdValue });
+            } else {
+              logger.logger.info(melding, { callId: callIdValue });
             }
           },
         },
