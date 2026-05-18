@@ -1,4 +1,5 @@
 import http from "node:http";
+
 import express, { Router } from "express";
 import supertest from "supertest";
 import { afterAll, beforeAll, expect, test, vi } from "vitest";
@@ -27,7 +28,9 @@ beforeAll(async () => {
   backendServer = http.createServer((req, res) => {
     lastRequest = { path: req.url ?? "", headers: req.headers };
     if (req.url?.includes("redirect")) {
-      res.writeHead(302, { Location: `http://localhost:${backendPort}/fpsak/api/behandlinger/123` });
+      res.writeHead(302, {
+        Location: `http://localhost:${backendPort}/fpsak/api/behandlinger/123`,
+      });
       res.end();
       return;
     }
@@ -45,7 +48,13 @@ beforeAll(async () => {
   vi.doMock("./config.js", () => ({
     default: {
       reverseProxyConfig: {
-        apis: [{ path: "/fpsak", url: `http://localhost:${backendPort}/fpsak`, scopes: "api://test/.default" }],
+        apis: [
+          {
+            path: "/fpsak",
+            url: `http://localhost:${backendPort}/fpsak`,
+            scopes: "api://test/.default",
+          },
+        ],
       },
     },
   }));
@@ -60,27 +69,43 @@ beforeAll(async () => {
 afterAll(() => backendServer?.close());
 
 test("forwards full path to backend", async () => {
-  await supertest(app).get("/fpsak/api/init-fetch").set("Authorization", "Bearer t").expect(200);
+  await supertest(app)
+    .get("/fpsak/api/init-fetch")
+    .set("Authorization", "Bearer t")
+    .expect(200);
   expect(lastRequest.path).toBe("/fpsak/api/init-fetch");
 });
 
 test("forwards query string", async () => {
-  await supertest(app).get("/fpsak/api/behandlinger?saksnummer=123").set("Authorization", "Bearer t").expect(200);
+  await supertest(app)
+    .get("/fpsak/api/behandlinger?saksnummer=123")
+    .set("Authorization", "Bearer t")
+    .expect(200);
   expect(lastRequest.path).toBe("/fpsak/api/behandlinger?saksnummer=123");
 });
 
 test("sets OBO token as Authorization header", async () => {
-  await supertest(app).get("/fpsak/api/init-fetch").set("Authorization", "Bearer t").expect(200);
+  await supertest(app)
+    .get("/fpsak/api/init-fetch")
+    .set("Authorization", "Bearer t")
+    .expect(200);
   expect(lastRequest.headers.authorization).toBe("Bearer mock-obo-token");
 });
 
 test("strips cookie header", async () => {
-  await supertest(app).get("/fpsak/api/init-fetch").set("Authorization", "Bearer t").set("Cookie", "s=1").expect(200);
+  await supertest(app)
+    .get("/fpsak/api/init-fetch")
+    .set("Authorization", "Bearer t")
+    .set("Cookie", "s=1")
+    .expect(200);
   expect(lastRequest.headers.cookie).toBeUndefined();
 });
 
 test("rewrites Location header on redirect", async () => {
-  const res = await supertest(app).get("/fpsak/api/redirect").set("Authorization", "Bearer t").redirects(0);
+  const res = await supertest(app)
+    .get("/fpsak/api/redirect")
+    .set("Authorization", "Bearer t")
+    .redirects(0);
   expect(res.status).toBe(302);
   expect(res.headers.location).not.toContain(`localhost:${backendPort}`);
   expect(res.headers.location).toContain("/fpsak/api/behandlinger/123");
