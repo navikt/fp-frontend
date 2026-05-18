@@ -87,6 +87,7 @@ export default [
       'import-x/no-default-export': ERROR,
       '@eslint-react/rules-of-hooks': ERROR,
       '@eslint-react/exhaustive-deps': OFF,
+      '@eslint-react/static-components': OFF,
 
       // Note: you must disable the base rule as it can report incorrect errors
       'no-use-before-define': OFF,
