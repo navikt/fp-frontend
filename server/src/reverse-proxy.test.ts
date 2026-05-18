@@ -109,3 +109,10 @@ test("rewrites Location header on redirect", async () => {
   expect(res.status).toBe(302);
   expect(res.headers.location).toBe("/fpsak/api/behandlinger/123");
 });
+
+test("does not proxy requests outside /api path", async () => {
+  const res = await supertest(app)
+    .get("/fpsak/internal/health")
+    .set("Authorization", "Bearer t");
+  expect(res.status).toBe(404);
+});
