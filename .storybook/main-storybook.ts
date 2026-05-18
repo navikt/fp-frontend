@@ -10,6 +10,9 @@ export const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ['../../../.storybook/mock'],
+  core: {
+    disableTelemetry: true,
+  },
 };
 
 export const configWithDifferentStaticDirs: StorybookConfig = {
