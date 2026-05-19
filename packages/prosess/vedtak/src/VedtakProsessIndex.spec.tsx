@@ -13,8 +13,6 @@ const {
   InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyring,
   InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring,
   GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring,
-  LegacyOverstyring,
-  LegacyOverstyringHarSendtTilbakeFraBeslutter,
   SkalIkkeProduseresBrev,
   SkalIkkeKunneRedigereVedtaksbrevNårEnIkkeHarLenke,
 } = composeStories(stories);
@@ -65,9 +63,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: undefined,
-        fritekstBrev: undefined,
         kode: '5015',
-        overskrift: undefined,
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -130,9 +126,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: undefined,
-        fritekstBrev: undefined,
         kode: '5015',
-        overskrift: undefined,
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -154,9 +148,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: undefined,
-        fritekstBrev: undefined,
         kode: '5015',
-        overskrift: undefined,
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -189,9 +181,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: 'Dette er en tekst',
-        fritekstBrev: undefined,
         kode: '5015',
-        overskrift: undefined,
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -227,9 +217,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: 'Dette er en tekst',
-        fritekstBrev: undefined,
         kode: '5015',
-        overskrift: undefined,
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -348,9 +336,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: undefined,
-        fritekstBrev: undefined,
         kode: '5015',
-        overskrift: undefined,
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -375,9 +361,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: undefined,
-        fritekstBrev: undefined,
         kode: '5015',
-        overskrift: undefined,
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -392,40 +376,6 @@ describe('VedtakProsessIndex', () => {
 
     expect(screen.getByText('Brev er redigert')).toBeInTheDocument();
     expect(screen.getByText('Vis brev')).toBeInTheDocument();
-  });
-
-  it('skal vise panel der saksbehandler har redigert brev i gammel løsning og behandling er avsluttet', async () => {
-    render(<LegacyOverstyring />);
-
-    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
-    expect(screen.getByText('Vis manuelt brev')).toBeInTheDocument();
-
-    expect(screen.getByText('Overskrift')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en overskrift')).toBeInTheDocument();
-
-    expect(screen.getByText('Innhold i brev til søker')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en fritekst')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
-
-    expect(screen.queryByText('Innholdet fra det automatiske brevet kan nå redigeres')).not.toBeInTheDocument();
-  });
-
-  it('skal vise panel der saskbehandler har redigert brev i gammel løsning og fått tilbake frå beslutter i ny løsning', async () => {
-    render(<LegacyOverstyringHarSendtTilbakeFraBeslutter />);
-
-    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
-    expect(screen.getByText('Vis manuelt brev')).toBeInTheDocument();
-
-    expect(screen.getByText('Overskrift')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en overskrift')).toBeInTheDocument();
-
-    expect(screen.getByText('Innhold i brev til søker')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en fritekst')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
-
-    expect(screen.getByText('Innholdet fra det automatiske brevet kan nå redigeres')).toBeInTheDocument();
   });
 
   it('skal vise en infotekst og skjul editeringslenke når brev ikke skal sendes ut', async () => {

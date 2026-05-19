@@ -789,45 +789,6 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
   },
 };
 
-export const LegacyOverstyring: Story = {
-  args: {
-    behandling: {
-      ...defaultBehandling,
-      status: 'AVSLU',
-      behandlingsresultat: {
-        vedtaksbrev: 'FRITEKST',
-        type: 'INNVILGET',
-        overskrift: 'Dette er en overskrift',
-        fritekstbrev: 'Dette er en fritekst',
-        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
-        id: 0,
-        harRedigertVedtaksbrev: false,
-      },
-    } satisfies BehandlingFpSak,
-    beregningsresultat: defaultberegningresultatDagytelse,
-    isReadOnly: true,
-  },
-};
-
-export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
-  args: {
-    behandling: {
-      ...defaultBehandling,
-      status: 'OPPRE',
-      behandlingsresultat: {
-        vedtaksbrev: 'FRITEKST',
-        type: 'INNVILGET',
-        overskrift: 'Dette er en overskrift',
-        fritekstbrev: 'Dette er en fritekst',
-        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
-        id: 0,
-        harRedigertVedtaksbrev: false,
-      },
-    } satisfies BehandlingFpSak,
-    beregningsresultat: defaultberegningresultatDagytelse,
-  },
-};
-
 export const SkalIkkeProduseresBrev: Story = {
   args: {
     behandling: {
