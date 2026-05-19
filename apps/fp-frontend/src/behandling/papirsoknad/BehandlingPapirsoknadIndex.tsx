@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
@@ -13,7 +13,7 @@ import {
 } from '@navikt/fp-papirsoknad';
 import type { Aksjonspunkt, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
 
-import { useBehandlingApi } from '../../data/behandlingApi';
+import { BehandlingRel, useBehandlingApi } from '../../data/behandlingApi';
 import { useBehandlingDataContext } from '../felles/context/BehandlingDataContext';
 
 /**
@@ -46,6 +46,8 @@ const BehandlingPapirsoknadIndex = () => {
     ? (JSON.parse(mellomlagretResponse.innhold) as Record<string, unknown>)
     : undefined;
 
+  const queryClient = useQueryClient();
+
   // Mellomlagring-mutation
   const { mutate: mellomlagreMutation } = useMutation({
     mutationFn: (innhold: string | null) =>
@@ -54,6 +56,11 @@ const BehandlingPapirsoknadIndex = () => {
         type: 'PAPIRSØKNAD',
         innhold,
       }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({
+        queryKey: [BehandlingRel.HENT_MELLOMLAGRING, 'PAPIRSØKNAD', behandling.uuid],
+      });
+    },
   });
 
   const onMellomlagre = useCallback(
