@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
@@ -11,6 +13,7 @@ import {
 } from '@navikt/fp-papirsoknad';
 import type { Aksjonspunkt, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
 
+import { useBehandlingApi } from '../../data/behandlingApi';
 import { useBehandlingDataContext } from '../felles/context/BehandlingDataContext';
 
 /**
@@ -25,6 +28,7 @@ const BehandlingPapirsoknadIndex = () => {
 
   const { alleKodeverk, behandling, rettigheter, fagsak, setSkalOppdatereEtterBekreftelseAvAp } =
     useBehandlingDataContext();
+  const api = useBehandlingApi(behandling);
 
   const isReadOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPåVent;
 
@@ -33,6 +37,39 @@ const BehandlingPapirsoknadIndex = () => {
   const erEndringssøknad = behandling.aksjonspunkt.some(
     ap => ap.definisjon === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
   );
+
+  const apKode = getAktivPapirsøknadApKode(behandling.aksjonspunkt);
+
+  // Hent mellomlagret utkast (om det finnes)
+  const { data: mellomlagretResponse, isPending: mellomlagringLaster } = useQuery(api.mellomlagretPapirsøknadOptions(behandling));
+  const mellomlagretData = mellomlagretResponse?.innhold
+    ? (JSON.parse(mellomlagretResponse.innhold) as Record<string, unknown>)
+    : undefined;
+
+  // Mellomlagring-mutation
+  const { mutate: mellomlagreMutation } = useMutation({
+    mutationFn: (innhold: string | null) =>
+      api.mellomlagring({
+        behandlingUuid: behandling.uuid,
+        type: 'PAPIRSØKNAD',
+        innhold,
+      }),
+  });
+
+  const onMellomlagre = useCallback(
+    (formValues: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues) => {
+      const payload = JSON.stringify({
+        '@type': apKode,
+        ...formValues,
+      });
+      mellomlagreMutation(payload);
+    },
+    [mellomlagreMutation, apKode],
+  );
+
+  if (mellomlagringLaster) {
+    return null;
+  }
 
   return (
     <>
@@ -43,6 +80,8 @@ const BehandlingPapirsoknadIndex = () => {
         readOnly={isReadOnly}
         lagrePapirsøknad={lagrePapirsøknad}
         erEndringssøknad={erEndringssøknad}
+        mellomlagretData={mellomlagretData}
+        onMellomlagre={onMellomlagre}
       />
     </>
   );

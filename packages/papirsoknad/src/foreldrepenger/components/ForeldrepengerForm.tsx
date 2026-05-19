@@ -72,6 +72,8 @@ interface Props {
   fagsakPersonnummer: string;
   onSubmit: (values: ForeldrepengerValues) => Promise<void>;
   onSubmitUfullstendigsoknad: () => Promise<void>;
+  onMellomlagre?: (values: ForeldrepengerValues) => void;
+  mellomlagretData?: Record<string, unknown>;
 }
 
 /**
@@ -85,10 +87,12 @@ export const ForeldrepengerForm = ({
   alleKodeverk,
   onSubmit,
   onSubmitUfullstendigsoknad,
+  onMellomlagre,
+  mellomlagretData,
   fagsakPersonnummer,
 }: Props) => {
   const formMethods = useForm<FormValues>({
-    defaultValues: buildInitialValues(),
+    defaultValues: { ...buildInitialValues(), ...mellomlagretData },
   });
 
   const søkerHarAleneomsorg = formMethods.watch(`annenForelder.søkerHarAleneomsorg`);
@@ -143,6 +147,7 @@ export const ForeldrepengerForm = ({
       <LagreSoknadPapirsoknadIndex
         readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+        onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues() as unknown as ForeldrepengerValues) : undefined}
         submitting={formMethods.formState.isSubmitting}
         erEndringssøknad={false}
       />

@@ -80,7 +80,7 @@ const CheckboxWithInfo = ({
   readOnly: boolean;
 }) => {
   const { watch } = useFormContext<AndreYtelserFormValue>();
-  const valgteArbeidstyper = watch(`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_TYPER_NAME}`);
+  const valgteArbeidstyper = watch(`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_TYPER_NAME}`, []);
 
   const [visPerioder, setVisPerioder] = useState(valgteArbeidstyper.includes(arbeidstype.kode));
 

@@ -8,6 +8,8 @@ import { SvangerskapspengerForm, type SvangerskapsValues } from './components/Sv
 interface Props {
   onSubmitUfullstendigsoknad: () => Promise<void>;
   onSubmit: (values: SvangerskapsValues) => Promise<void>;
+  onMellomlagre?: (values: SvangerskapsValues) => void;
+  mellomlagretData?: Record<string, unknown>;
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
@@ -16,6 +18,8 @@ interface Props {
 export const SvangerskapspengerPapirsoknadIndex = ({
   onSubmitUfullstendigsoknad,
   onSubmit,
+  onMellomlagre,
+  mellomlagretData,
   readOnly,
   soknadData,
   alleKodeverk,
@@ -23,6 +27,8 @@ export const SvangerskapspengerPapirsoknadIndex = ({
   <SvangerskapspengerForm
     onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
     onSubmit={onSubmit}
+    onMellomlagre={onMellomlagre}
+    mellomlagretData={mellomlagretData}
     readOnly={readOnly}
     soknadData={soknadData}
     alleKodeverk={alleKodeverk}

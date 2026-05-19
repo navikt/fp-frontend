@@ -19,6 +19,8 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   onSubmitUfullstendigsoknad: () => Promise<void>;
   onSubmit: (values: EngangsstønadValues) => Promise<void>;
+  onMellomlagre?: (values: EngangsstønadValues) => void;
+  mellomlagretData?: Record<string, unknown>;
 }
 
 export type EngangsstønadValues = ReturnType<typeof transformValues>;
@@ -29,11 +31,13 @@ export const EngangsstonadForm = ({
   alleKodeverk,
   onSubmitUfullstendigsoknad,
   onSubmit,
+  onMellomlagre,
+  mellomlagretData,
 }: Props) => {
   const ComponentForFamilieHendelse = getComponentForFamiliehendelse(soknadData.getFamilieHendelseType());
 
   const formMethods = useForm({
-    defaultValues: initialValues(),
+    defaultValues: { ...initialValues(), ...mellomlagretData },
   });
 
   const foedselsDatoFraTerminOgFodelsPanel = formMethods.watch('fødselsdato');
@@ -55,6 +59,7 @@ export const EngangsstonadForm = ({
         readOnly={readOnly}
         submitting={formMethods.formState.isSubmitting}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+        onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues() as unknown as EngangsstønadValues) : undefined}
         erEndringssøknad={false}
       />
     </RhfForm>

@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Heading, VStack } from '@navikt/ds-react';
+import { Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
@@ -16,6 +16,7 @@ type LagreSoknadFormValues = {
 
 interface Props {
   onSubmitUfullstendigsoknad: () => Promise<void>;
+  onMellomlagre?: () => void;
   readOnly?: boolean;
   submitting: boolean;
   erEndringssøknad: boolean;
@@ -24,6 +25,7 @@ interface Props {
 export const LagreSoknadPanel = ({
   submitting,
   onSubmitUfullstendigsoknad,
+  onMellomlagre,
   readOnly = true,
   erEndringssøknad,
 }: Props) => {
@@ -63,7 +65,7 @@ export const LagreSoknadPanel = ({
             />
           </div>
         )}
-        <div>
+        <HStack gap="space-8">
           {!ufullstendigSøknad && (
             <Button
               id="saveButton"
@@ -88,7 +90,19 @@ export const LagreSoknadPanel = ({
               <FormattedMessage id="Registrering.SaveApplication.EndButton" />
             </Button>
           )}
-        </div>
+          {!ufullstendigSøknad && onMellomlagre && (
+            <Button
+              id="mellomlagreButton"
+              onClick={onMellomlagre}
+              size="small"
+              variant="secondary"
+              disabled={readOnly || submitting}
+              type="button"
+            >
+              <FormattedMessage id="Registrering.SaveApplication.MellomlagreButton" />
+            </Button>
+          )}
+        </HStack>
       </VStack>
     </BorderBox>
   );
