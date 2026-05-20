@@ -2435,6 +2435,7 @@ __metadata:
     react-dom: "npm:19.2.6"
     react-hook-form: "npm:7.75.0"
     react-intl: "npm:10.1.6"
+    react-router-dom: "npm:7.15.0"
     storybook: "npm:10.3.6"
     stylelint: "npm:17.11.0"
     tailwindcss: "npm:4.3.0"
