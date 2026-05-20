@@ -35,7 +35,7 @@ jobs:
 
       - name: Server tests
         working-directory: server
-        run: yarn test
+        run: yarn install --immutable && yarn test
 
   knip-it:
     name: Kjør knip
