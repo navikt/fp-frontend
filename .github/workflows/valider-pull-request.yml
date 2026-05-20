@@ -34,7 +34,8 @@ jobs:
         run: yarn eslint
 
       - name: Server tests
-        run: yarn workspace server test
+        working-directory: server
+        run: yarn test
 
   knip-it:
     name: Kjør knip
