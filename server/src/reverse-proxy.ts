@@ -34,7 +34,7 @@ export const setupProxies = (router: Router) => {
         logger: logger.logger,
         on: {
           proxyReq: (proxyRequest, request) => {
-            proxyRequest.socket?.setMaxListeners(0);
+            proxyRequest.socket?.setMaxListeners(50);
             const obo = request.headers["obo-token"];
             if (obo) {
               proxyRequest.removeHeader("obo-token");
