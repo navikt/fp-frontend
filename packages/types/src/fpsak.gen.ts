@@ -486,12 +486,10 @@ export type tjenester_behandling_dto_behandling_BehandlingsresultatDto = {
   avslagsarsak?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
   avslagsarsakFritekst?: string;
   erRevurderingMedUendretUtfall?: boolean;
-  fritekstbrev?: string;
   harRedigertVedtaksbrev: boolean;
   id: number;
   konsekvenserForYtelsen?: Array<foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen>;
   opphørsdato?: string;
-  overskrift?: string;
   skjæringstidspunkt?: tjenester_behandling_dto_behandling_SkjæringstidspunktDto;
   type: foreldrepenger_behandlingslager_behandling_BehandlingResultatType;
   vedtaksbrev?: foreldrepenger_behandlingslager_behandling_vedtak_Vedtaksbrev;
@@ -4717,7 +4715,6 @@ export type foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak
   | 'ANNET';
 
 export type foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType =
-  | 'FRITEK'
   | 'FRIHTM'
   | 'INNVES'
   | 'AVSLES'
@@ -4744,6 +4741,7 @@ export type foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType 
   | 'KGEOVE'
   | 'ELYSIM'
   | 'ENDUTB'
+  | 'FRITEK'
   | 'INFOPU'
   | 'FORPUS'
   | 'KLAGAV'
