@@ -120,9 +120,6 @@ const createIndexHtml = () => {
   // Kopier css fil til folder som skal deployes
   cpSync(join(scriptDir, 'storybook-monorepo-index.css'), join(scriptDir, DEPLOY_FOLDER, 'monorepo-index.css'));
 
-  // For å støtte filer med '_' (Skip Jekyll-prosessering)
-  cpSync(join(scriptDir, '.nojekyll'), join(scriptDir, DEPLOY_FOLDER, '.nojekyll'));
-
   // Kopier storybook fra pakkene og inn i folder som skal deployes
   const packages = [...findPackageDirs(join(origDir, 'apps')), ...findPackageDirs(join(origDir, 'packages'))]
     .map(copyFiles)
