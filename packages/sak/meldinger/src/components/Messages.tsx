@@ -98,9 +98,11 @@ export const Messages = ({
 
   useEffect(() => {
     if (brukBreveditor && !brevData && (!erVarselOmRevurdering || årsakskode)) {
-      void hentBrevHtml(brevmalkode, årsakskode).then(result => {
-        setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
-      }).catch(() => {});
+      void hentBrevHtml(brevmalkode, årsakskode)
+        .then(result => {
+          setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+        })
+        .catch(() => {});
     }
   }, [brukBreveditor, brevData, hentBrevHtml, brevmalkode, årsakskode, erVarselOmRevurdering]);
 
@@ -242,12 +244,8 @@ const getFritekstMessage = (brevmalkode?: DokumentMalType | DokumentMalTypeFpTil
   brevmalkode === 'INNHEN' ? 'Messages.DocumentList' : 'Messages.Fritekst';
 
 // TODO (TOR) Bør erstattast av ein markør fra backend
-const showFritekst = (
-  brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake,
-): boolean =>
-  brevmalkode === 'KORRIGVARS' ||
-  brevmalkode === 'VARS' ||
-  brevmalkode === 'INNHEN';
+const showFritekst = (brevmalkode?: DokumentMalType | DokumentMalTypeFpTilbake): boolean =>
+  brevmalkode === 'KORRIGVARS' || brevmalkode === 'VARS' || brevmalkode === 'INNHEN';
 
 const getfiltrerteRevurderingVarslingArsaker = (
   revurderingVarslingArsaker: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[],
@@ -264,9 +262,7 @@ const getfiltrerteRevurderingVarslingArsaker = (
 
 const buildInitialValues = (behandling: FagsakBehandlingDto): FormValues => {
   const innoppTilgjengelig = behandling.brevmaler.some(mal => mal.kode === 'INNOPP' && mal.tilgjengelig);
-  const defaultMalkode = innoppTilgjengelig
-    ? 'INNOPP'
-    : behandling.brevmaler.find(mal => mal.tilgjengelig)?.kode;
+  const defaultMalkode = innoppTilgjengelig ? 'INNOPP' : behandling.brevmaler.find(mal => mal.tilgjengelig)?.kode;
   const initialValues = {
     brevmalkode: defaultMalkode as DokumentMalType | DokumentMalTypeFpTilbake | undefined,
     fritekst: undefined,
@@ -278,5 +274,3 @@ const buildInitialValues = (behandling: FagsakBehandlingDto): FormValues => {
 
   return { ...initialValues };
 };
-
-

@@ -168,7 +168,8 @@ describe('redigeringsUtils', () => {
     });
 
     it('skal kaste feil om logo-element mangler', () => {
-      const html = '<html><body><div id="header"><h1>H</h1></div><div id="readonly-innhold"><p>F</p></div></body></html>';
+      const html =
+        '<html><body><div id="header"><h1>H</h1></div><div id="readonly-innhold"><p>F</p></div></body></html>';
       expect(() => utledDelerFraBrev(html)).toThrow('Nav-logo finnes ikke i mal');
     });
 
@@ -249,4 +250,3 @@ describe('redigeringsUtils', () => {
     });
   });
 });
-

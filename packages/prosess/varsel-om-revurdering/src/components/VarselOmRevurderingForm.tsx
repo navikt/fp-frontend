@@ -78,9 +78,11 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
   useEffect(() => {
     if (!hasFetchedBrevData.current && erÅpentAksjonspunkt && hentVarselHtml) {
       hasFetchedBrevData.current = true;
-      void hentVarselHtml().then(result => {
-        setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
-      }).catch(() => {});
+      void hentVarselHtml()
+        .then(result => {
+          setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+        })
+        .catch(() => {});
     }
   }, []);
 
@@ -155,7 +157,10 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
                               if (!brevData) {
                                 try {
                                   const result = await hentVarselHtml();
-                                  setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+                                  setBrevData({
+                                    opprinneligHtml: result.opprinneligHtml,
+                                    redigertHtml: result.redigertHtml,
+                                  });
                                 } catch {
                                   return;
                                 }

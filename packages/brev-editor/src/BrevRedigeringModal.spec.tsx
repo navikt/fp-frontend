@@ -7,24 +7,24 @@ import * as stories from './BrevRedigeringModal.stories';
 
 const { MedOpprinneligHtml } = composeStories(stories);
 
-describe('BrevRedigeringModal', () => {
-  vi.hoisted(() => {
-    Object.defineProperty(globalThis, 'matchMedia', {
-      writable: true,
-      value: vi.fn().mockImplementation(query => ({
-        matches: false,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        media: query,
-        onchange: null,
-        addListener: vi.fn(), // Deprecated
-        removeListener: vi.fn(), // Deprecated
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        dispatchEvent: vi.fn(),
-      })),
-    });
+vi.hoisted(() => {
+  Object.defineProperty(globalThis, 'matchMedia', {
+    writable: true,
+    value: vi.fn().mockImplementation(query => ({
+      matches: false,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      media: query,
+      onchange: null,
+      addListener: vi.fn(), // Deprecated
+      removeListener: vi.fn(), // Deprecated
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })),
   });
+});
 
+describe('BrevRedigeringModal', () => {
   it('skal vise redigering av opprinnelig brev', async () => {
     const forhåndsvisBrev = vi.fn();
 

@@ -33,7 +33,6 @@ export const useBrevEditorJs = (
   footer: string | undefined,
   onAutoSave: (html?: string) => Promise<void>,
 ) => {
-
   // Hindrar tullball grunna to renders i DEV => React.StrictMode
   const refMounted = useRef<boolean>(false);
   const refDestroyed = useRef<boolean>(false);
