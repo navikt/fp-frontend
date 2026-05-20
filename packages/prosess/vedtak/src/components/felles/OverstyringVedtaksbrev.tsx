@@ -21,13 +21,8 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
   const intl = useIntl();
   const { isReadOnly } = usePanelDataContext();
 
-  const {
-    harRedigertBrev,
-    setHarRedigertBrev,
-    hentBrevHtml,
-    hentBrevHtmlIsPending,
-    mellomlagreBrev,
-  } = useVedtakEditeringContext();
+  const { harRedigertBrev, setHarRedigertBrev, hentBrevHtml, hentBrevHtmlIsPending, mellomlagreBrev } =
+    useVedtakEditeringContext();
 
   const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
   const [visFritekstRedigeringModal, setVisFritekstRedigeringModal] = useState(false);
@@ -167,4 +162,3 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
     </div>
   );
 };
-

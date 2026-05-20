@@ -42,13 +42,7 @@ export const VedtakEditeringProvider = ({
       harRedigertBrev,
       setHarRedigertBrev,
     }),
-    [
-      hentBrevHtml,
-      hentBrevHtmlIsPending,
-      mellomlagreBrev,
-      harRedigertBrev,
-      setHarRedigertBrev,
-    ],
+    [hentBrevHtml, hentBrevHtmlIsPending, mellomlagreBrev, harRedigertBrev, setHarRedigertBrev],
   );
 
   return <VedtakEditeringContext value={value}>{children}</VedtakEditeringContext>;

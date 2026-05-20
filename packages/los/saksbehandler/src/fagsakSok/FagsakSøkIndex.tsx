@@ -141,7 +141,6 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
         åpneFagsak={åpneFagsak}
         selectOppgaveCallback={reserverOppgaveOgApne}
         searchStarted={isHentOppgaverPending || isSøkFagsakPending}
-         
         searchResultAccessDenied={searchResultAccessDenied}
         resetSearch={resetFagsakSøk}
         kanSaksbehandle={kanSaksbehandle}
