@@ -8,7 +8,6 @@ const config: KnipConfig = {
     'packages/types/src/fpsak.gen.ts',
     'packages/kodeverk/src/aksjonspunktCodes.ts',
   ],
-  ignoreDependencies: ['glob'],
 };
 
 export default config;
