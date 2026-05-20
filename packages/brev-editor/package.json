@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@editorjs/editorjs": "2.31.6",
-    "@editorjs/header": "2.8.8",
+    "@editorjs/header": "2.8.9",
     "@editorjs/list": "2.0.9",
     "@editorjs/paragraph": "2.11.7",
     "@navikt/aksel-icons": "8.10.6",
