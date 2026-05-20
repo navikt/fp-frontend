@@ -1,6 +1,7 @@
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, mergeConfig } from 'vite';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import compression from 'vite-plugin-compression2';
@@ -39,5 +40,6 @@ export const createConfig = setupFileDirName =>
       setupFiles: setupFileDirName || path.resolve(folder, './vitest-setup'),
       watch: false,
       testTimeout: 25000,
+      execArgv: ['--localstorage-file', path.resolve(os.tmpdir(), `vitest-${process.pid}.localstorage`)],
     },
   });
