@@ -33,6 +33,9 @@ jobs:
       - name: ESLint
         run: yarn eslint
 
+      - name: Server tests
+        run: yarn workspace server test
+
   knip-it:
     name: Kjør knip
     runs-on: ubuntu-latest
