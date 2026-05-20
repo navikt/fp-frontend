@@ -18,7 +18,6 @@ import { isAvslag, isInnvilget, isOpphor, usePanelDataContext } from '@navikt/fp
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
-import { LegacyOverstyrtVedtaksbrev } from './LegacyOverstyrtVedtaksbrev';
 import { OppgaveTabell } from './OppgaveTabell';
 import { OverstyringVedtaksbrev } from './OverstyringVedtaksbrev';
 import { VedtakHelpTextPanel } from './VedtakHelpTextPanel';
@@ -198,9 +197,6 @@ export const VedtakFellesPanel = ({
       )}
       <VStack gap="space-32">
         {renderPanel(harValgtÅRedigereVedtaksbrev, erInnvilget, erAvslatt, erOpphor)}
-        {behandling.behandlingsresultat?.overskrift && (
-          <LegacyOverstyrtVedtaksbrev forhåndsvisOverstyrtBrev={previewCallback} behandling={behandling} />
-        )}
         {harValgtÅRedigereVedtaksbrev && (
           <OverstyringVedtaksbrev
             forhåndsvisBrev={previewCallback}

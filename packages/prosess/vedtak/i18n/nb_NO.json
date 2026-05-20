@@ -65,10 +65,6 @@
 
   "FerdigstillOppgaveKnapp.FerdigstillOppgave": "Ferdigstill oppgave i Gosys",
 
-  "LegacyOverstyrtVedtaksbrev.ForhandsvisManueltVedtaksbrev": "Vis manuelt brev",
-  "LegacyOverstyrtVedtaksbrev.Overskrift": "Overskrift",
-  "LegacyOverstyrtVedtaksbrev.Innhold": "Innhold i brev til søker",
-
   "OverstyringVedtaksbrev.SkjeddEndringIBehandling": "Hvis det er skjedd en endring i saken må du kontrollere at innholdet i det redigerte brevet stemmer med den gjeldende informasjonen",
   "OverstyringVedtaksbrev.ForhandvisBrev": "Forhåndsvis brev",
   "OverstyringVedtaksbrev.VisBrev": "Vis brev",
