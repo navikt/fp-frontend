@@ -19,7 +19,7 @@
   "dependencies": {
     "@navikt/ds-react": "8.10.6",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-utils": "5.0.1",
+    "@navikt/ft-utils": "5.0.3",
     "dayjs": "1.11.20",
     "react": "19.2.6",
     "react-dom": "19.2.6",

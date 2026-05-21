@@ -20,8 +20,8 @@
   "dependencies": {
     "@navikt/aksel-icons": "8.10.6",
     "@navikt/ds-react": "8.10.6",
-    "@navikt/ft-ui-komponenter": "8.0.5",
-    "@navikt/ft-utils": "5.0.1",
+    "@navikt/ft-ui-komponenter": "8.0.6",
+    "@navikt/ft-utils": "5.0.3",
     "dayjs": "1.11.20",
     "react": "19.2.6",
     "react-dom": "19.2.6",
