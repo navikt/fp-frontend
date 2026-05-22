@@ -6,10 +6,11 @@ Monorepo for NAV's foreldrepenger saksbehandler frontend (FPSAK). Built with Yar
 
 - [fp-context](https://github.com/navikt/fp-context) — Team Foreldrepenger
   domain, architecture, conventions. Source of truth for shared context.
-- Copilot Space: navikt / **TeamForeldrepenger** — same content attached for
-  AI grounding (chat, IDE agent, CLI).
-- Backend counterpart: [fp-sak](https://github.com/navikt/fp-sak); types are
-  generated from its OpenAPI spec (see `yarn generate`).
+- GitHub Copilot Space: `navikt/TeamForeldrepenger` — same content attached
+  for AI grounding (chat, IDE agent, CLI).
+- Backend counterparts: [fp-sak](https://github.com/navikt/fp-sak) and
+  fplos; types are generated from the fpsak and fplos OpenAPI specs (see
+  `yarn generate`).
 
 ## Setup
 
