@@ -1,5 +1,6 @@
 {
   "name": "@navikt/fp-frontend",
+  "description": "Saksbehandlerflate for behandling av foreldrepengesaker.",
   "version": "1.0.0",
   "module": "src/main.tsx",
   "license": "MIT",

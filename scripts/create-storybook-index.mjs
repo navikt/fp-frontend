@@ -1,134 +1,93 @@
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, globSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
-const DEPLOY_FOLDER = '../.storybook-static-build';
+const DEPLOY_FOLDER = join(scriptDir, '../.storybook-static-build');
+const BUILD_FOLDER = '.storybook-static-build';
+const PACKAGE_JSON = 'package.json';
+const CSS_FILE = 'storybook-monorepo-index.css';
+
+const SECTIONS = [
+  { title: 'Apps', matches: ['fp-frontend', 'fp-avdelingsleder', 'fp-journalforing'] },
+  { title: 'Faktapaneler', matches: ['fp-fakta'] },
+  { title: 'Prosesspaneler', matches: ['fp-prosess'] },
+  { title: 'Sak-paneler', matches: ['fp-sak'] },
+  { title: 'LOS-paneler', matches: ['fp-los'] },
+  { title: 'Andre' },
+];
+const allMatches = SECTIONS.flatMap(s => s.matches);
 
 const generateRow = packageJson => `
-  <div class="box">
-    <a href="${packageJson.name}" class="package-row" target="blank">
-      <div class="title">
-        ${packageJson.name}
-      </div>
-    </a>
-    <div class="description">
-      Beskrivelse: ${packageJson.description || '-- Mangler --'}
-    </div>
-  </div>
+        <a href="${packageJson.name}" class="package" target="${packageJson.name}" rel="noopener">
+          <code>${packageJson.name}</code>${packageJson.description ? `<p>${packageJson.description}</p>` : ''}
+        </a>
 `;
 
-const generateHTML = packages => `
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Storybook - FP FRONTEND</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="monorepo-index.css">
-  </head>
-  <body>
-    <h1 class="main-header">Storybook for FP-FRONTEND</h1>
-    <h2 class="header">Faktapaneler:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(p => p.name.includes('fp-fakta'))
-        .map(generateRow)
-        .join('')}
-    </div>
-    <br />
-    <h2 class="header">Prosesspaneler:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(p => p.name.includes('fp-prosess'))
-        .map(generateRow)
-        .join('')}
-    </div>
-    <br />
-    <h2 class="header">Sak-paneler:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(p => p.name.includes('fp-sak'))
-        .map(generateRow)
-        .join('')}
-    </div>
-    <h2 class="header">LOS-paneler:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(p => p.name.includes('fp-los'))
-        .map(generateRow)
-        .join('')}
-    </div>
-    <h2 class="header">Journalføring-paneler:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(p => p.name.includes('fp-journalforing'))
-        .map(generateRow)
-        .join('')}
-    </div>
-    <h2 class="header">Andre:</h3>
-    <div class="grid-container">
-      ${packages
-        .filter(
-          p =>
-            !p.name.includes('fp-sak') &&
-            !p.name.includes('fp-fakta') &&
-            !p.name.includes('fp-prosess') &&
-            !p.name.includes('fp-los') &&
-            !p.name.includes('fp-journalforing'),
-        )
-        .map(generateRow)
-        .join('')}
-    </div>
-  </body>
+const generateHTML = packages => {
+  const sectionHTML = SECTIONS.map(({ title, matches }) => ({
+    title,
+    packages: packages.filter(p =>
+      matches ? matches.some(m => p.name.includes(m)) : !allMatches.some(m => p.name.includes(m)),
+    ),
+  })).map(
+    s => `
+    <section>
+      <h2>${s.title}</h2>
+      <div class="grid-container">
+        ${s.packages.map(generateRow).join('')}
+      </div>
+    </section>`,
+  );
+
+  return `<!DOCTYPE html>
+  <html lang="nb">
+    <head>
+      <meta charset="utf-8" />
+      <title>Storybook - FP FRONTEND</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="${CSS_FILE}">
+    </head>
+    <body>
+      <h1>Storybook for FP-FRONTEND</h1>
+      ${sectionHTML.join('')}
+    </body>
   </html>
 `;
-
-const findPackageDirs = baseDir => {
-  if (!existsSync(baseDir)) return [];
-  return readdirSync(baseDir, { withFileTypes: true, recursive: true })
-    .filter(entry => entry.name === 'package.json' && !entry.parentPath.includes('node_modules'))
-    .map(entry => entry.parentPath);
 };
 
-const copyFiles = subPackagePath => {
-  const pkgJsonPath = join(subPackagePath, 'package.json');
-  const storybookBuildPath = join(subPackagePath, '.storybook-static-build');
+const kopierPakke = subPackagePath => {
+  const storybookBuildPath = join(subPackagePath, BUILD_FOLDER);
 
-  if (!existsSync(pkgJsonPath) || !existsSync(storybookBuildPath)) {
+  if (!existsSync(storybookBuildPath)) {
     return null;
   }
 
-  const packageJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
-  const destFolder = join(scriptDir, DEPLOY_FOLDER, packageJson.name);
-
-  mkdirSync(destFolder, { recursive: true });
-  for (const entry of readdirSync(storybookBuildPath)) {
-    cpSync(join(storybookBuildPath, entry), join(destFolder, entry), { recursive: true });
-  }
+  const packageJson = JSON.parse(readFileSync(join(subPackagePath, PACKAGE_JSON), 'utf8'));
+  cpSync(storybookBuildPath, join(DEPLOY_FOLDER, packageJson.name), { recursive: true });
 
   return packageJson;
 };
 
-const createIndexHtml = () => {
-  const origDir = process.cwd();
-
-  // Lag folder-struktur for innholdet som skal deployes
-  mkdirSync(join(scriptDir, DEPLOY_FOLDER, '@navikt'), { recursive: true });
-
-  // Kopier css fil til folder som skal deployes
-  cpSync(join(scriptDir, 'storybook-monorepo-index.css'), join(scriptDir, DEPLOY_FOLDER, 'monorepo-index.css'));
-
-  // Kopier storybook fra pakkene og inn i folder som skal deployes
-  const packages = [...findPackageDirs(join(origDir, 'apps')), ...findPackageDirs(join(origDir, 'packages'))]
-    .map(copyFiles)
+const finnOgKopierPakker = () => {
+  return globSync(`{apps,packages}/**/${PACKAGE_JSON}`, {
+    exclude: [`**/{node_modules,dist,.turbo,${BUILD_FOLDER}}/**`],
+  })
+    .map(dirname)
+    .map(kopierPakke)
     .filter(Boolean);
-
-  // Lag index-fil
-  writeFileSync(join(scriptDir, DEPLOY_FOLDER, 'index.html'), generateHTML(packages));
-
-  console.log('Done copying files');
 };
 
-createIndexHtml();
+const startTime = performance.now();
+
+console.log('Kopierer storybook-bygg fra pakkene...');
+const packages = finnOgKopierPakker();
+
+console.log('Kopierer CSS...');
+cpSync(join(scriptDir, CSS_FILE), join(DEPLOY_FOLDER, CSS_FILE), { recursive: true });
+
+console.log('Genererer index.html...');
+writeFileSync(join(DEPLOY_FOLDER, 'index.html'), generateHTML(packages));
+
+const elapsed = ((performance.now() - startTime) / 1000).toFixed(2);
+console.log(`\nFerdig med å kopiere filer (${elapsed}s)`);
