@@ -2,6 +2,15 @@
 
 Monorepo for NAV's foreldrepenger saksbehandler frontend (FPSAK). Built with Yarn workspaces + Turborepo.
 
+## Team context
+
+- [fp-context](https://github.com/navikt/fp-context) — Team Foreldrepenger
+  domain, architecture, conventions. Source of truth for shared context.
+- Copilot Space: navikt / **TeamForeldrepenger** — same content attached for
+  AI grounding (chat, IDE agent, CLI).
+- Backend counterpart: [fp-sak](https://github.com/navikt/fp-sak); types are
+  generated from its OpenAPI spec (see `yarn generate`).
+
 ## Setup
 
 - Node version is pinned in `.tool-versions` (currently Node 24); package manager is Yarn 4 (declared via `packageManager` in `package.json`).
