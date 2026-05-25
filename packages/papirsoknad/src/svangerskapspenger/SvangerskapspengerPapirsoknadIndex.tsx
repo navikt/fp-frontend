@@ -8,7 +8,7 @@ import { SvangerskapspengerForm, type SvangerskapsValues } from './components/Sv
 interface Props {
   onSubmitUfullstendigsoknad: () => Promise<void>;
   onSubmit: (values: SvangerskapsValues) => Promise<void>;
-  onMellomlagre?: (values: SvangerskapsValues) => void;
+  onMellomlagre?: (values: Record<string, unknown>) => void;
   mellomlagretData?: Record<string, unknown>;
   readOnly: boolean;
   soknadData: SoknadData;

@@ -8,7 +8,7 @@ import { EngangsstonadForm, type EngangsstønadValues } from './components/Engan
 interface Props {
   onSubmitUfullstendigsoknad: () => Promise<void>;
   onSubmit: (values: EngangsstønadValues) => Promise<void>;
-  onMellomlagre?: (values: EngangsstønadValues) => void;
+  onMellomlagre?: (values: Record<string, unknown>) => void;
   mellomlagretData?: Record<string, unknown>;
   readOnly: boolean;
   soknadData: SoknadData;

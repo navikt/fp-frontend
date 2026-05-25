@@ -10,7 +10,7 @@ import { ForeldrepengerForm, type ForeldrepengerValues } from './components/Fore
 interface Props {
   onSubmitUfullstendigsoknad: () => Promise<void>;
   onSubmit: (values: ForeldrepengerValues | ForeldrepengerEndringssøknadValues) => Promise<void>;
-  onMellomlagre?: (values: ForeldrepengerValues | ForeldrepengerEndringssøknadValues) => void;
+  onMellomlagre?: (values: Record<string, unknown>) => void;
   mellomlagretData?: Record<string, unknown>;
   readOnly: boolean;
   soknadData: SoknadData;

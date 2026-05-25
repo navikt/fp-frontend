@@ -65,7 +65,7 @@ export const LagreSoknadPanel = ({
             />
           </div>
         )}
-        <HStack gap="space-8">
+        <HStack justify="space-between">
           {!ufullstendigSøknad && (
             <Button
               id="saveButton"

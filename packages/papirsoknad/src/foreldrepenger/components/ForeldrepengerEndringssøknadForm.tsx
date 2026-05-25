@@ -38,7 +38,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   onSubmit: (values: ForeldrepengerEndringssøknadValues) => Promise<void>;
   onSubmitUfullstendigsoknad: () => Promise<void>;
-  onMellomlagre?: (values: ForeldrepengerEndringssøknadValues) => void;
+  onMellomlagre?: (values: Record<string, unknown>) => void;
   mellomlagretData?: Record<string, unknown>;
 }
 
@@ -75,7 +75,7 @@ export const ForeldrepengerEndringssøknadForm = ({
       <LagreSoknadPapirsoknadIndex
         readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-        onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues() as unknown as ForeldrepengerEndringssøknadValues) : undefined}
+        onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues()) : undefined}
         submitting={formMethods.formState.isSubmitting}
         erEndringssøknad
       />

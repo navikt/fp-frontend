@@ -20,6 +20,7 @@ import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapi
 import type { ForeldrepengerEndringssøknadValues } from './foreldrepenger/components/ForeldrepengerEndringssøknadForm';
 import type { ForeldrepengerValues } from './foreldrepenger/components/ForeldrepengerForm';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
+import type { PapirsøknadMellomlagring } from './PapirsøknadMellomlagring';
 import { SoknadTypePickerForm } from './SoknadTypePickerForm';
 import type { SvangerskapsValues } from './svangerskapspenger/components/SvangerskapspengerForm';
 import { SvangerskapspengerPapirsoknadIndex } from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
@@ -41,8 +42,8 @@ interface Props {
     formValues?: AllFormValues,
   ) => Promise<BehandlingFpSak>;
   erEndringssøknad: boolean;
-  mellomlagretData?: Record<string, unknown>;
-  onMellomlagre?: (formValues: AllFormValues) => void;
+  mellomlagretData?: PapirsøknadMellomlagring;
+  onMellomlagre?: (values: PapirsøknadMellomlagring) => void;
 }
 
 export const RegistrerPapirsoknadPanel = ({
@@ -55,17 +56,9 @@ export const RegistrerPapirsoknadPanel = ({
   onMellomlagre,
 }: Props) => {
   const [soknadData, setSoknadData] = useState<SoknadData | undefined>(() => {
-    if (mellomlagretData?.['soknadstype'] && mellomlagretData['tema']) {
-      return new SoknadData(
-        mellomlagretData['soknadstype'] as FagsakYtelseType,
-        mellomlagretData['tema'] as FamilieHendelseType,
-        (mellomlagretData['foreldretype'] ?? 'MOR') as ForeldreType,
-      );
-    }
-    return undefined;
+    if (!mellomlagretData) return undefined;
+    return new SoknadData(mellomlagretData.fagsakYtelseType, mellomlagretData.familieHendelseType, mellomlagretData.foreldreType ?? 'MOR');
   });
-
-  const harMellomlagretSoknadData = !!mellomlagretData?.['soknadstype'];
 
   const lagreFullstendigSøknad = (
     formValues: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
@@ -89,12 +82,12 @@ export const RegistrerPapirsoknadPanel = ({
   };
 
   const mellomlagreWrapped = onMellomlagre && soknadData
-    ? (formValues: AllFormValues) => {
-        const payload = {
+    ? (formValues: Record<string, unknown>) => {
+        const payload: PapirsøknadMellomlagring = {
           ...formValues,
-          soknadstype: soknadData.fagsakYtelseType,
-          tema: soknadData.familieHendelseType,
-          foreldretype: soknadData.foreldreType,
+          fagsakYtelseType: soknadData.fagsakYtelseType,
+          familieHendelseType: soknadData.familieHendelseType,
+          foreldreType: soknadData.foreldreType,
         };
         onMellomlagre(payload);
       }
@@ -119,9 +112,8 @@ export const RegistrerPapirsoknadPanel = ({
           setSoknadData={setSoknadData}
           fagsakYtelseType={fagsak.fagsakYtelseType}
           alleKodeverk={kodeverk}
-          initialFamilieHendelseType={mellomlagretData?.['tema'] as FamilieHendelseType | undefined}
-          initialForeldreType={mellomlagretData?.['foreldretype'] as ForeldreType | undefined}
-          confirmed={harMellomlagretSoknadData}
+          initialFamilieHendelseType={soknadData?.familieHendelseType}
+          initialForeldreType={soknadData?.foreldreType}
         />
         {soknadData?.getFagsakYtelseType() === 'ES' && (
           <EngangsstonadPapirsoknadIndex

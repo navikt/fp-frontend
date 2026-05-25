@@ -28,7 +28,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   initialFamilieHendelseType?: FamilieHendelseType;
   initialForeldreType?: ForeldreType;
-  confirmed?: boolean;
+  skjemaErForhåndsutfylt?: boolean;
 }
 
 /**
@@ -36,7 +36,13 @@ interface Props {
  *
  * Toppkomponent for registrering av papirsøknad der søknadstype, tema og søker/foreldretype blir valgt.
  */
-export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKodeverk, initialFamilieHendelseType, initialForeldreType, confirmed }: Props) => {
+export const SoknadTypePickerForm = ({
+  setSoknadData,
+  fagsakYtelseType,
+  alleKodeverk,
+  initialFamilieHendelseType,
+  initialForeldreType,
+}: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: {
       fagsakYtelseType,
@@ -89,7 +95,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
                 {familieHendelseTyper
                   .filter(({ kode }) => SØKNAD_TYPER.has(kode))
                   .map(bmt => (
-                    <Radio key={bmt.kode} value={bmt.kode} size="small" disabled={confirmed}>
+                    <Radio key={bmt.kode} value={bmt.kode} size="small">
                       {bmt.navn}
                     </Radio>
                   ))}
@@ -103,20 +109,18 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
               validate={[required]}
             >
               {utledForeldreTyper(foreldreTyper, selectedFagsakYtelseType).map(ft => (
-                <Radio key={ft.kode} value={ft.kode} size="small" disabled={confirmed}>
+                <Radio key={ft.kode} value={ft.kode} size="small">
                   {ft.navn}
                 </Radio>
               ))}
             </RhfRadioGroup>
           </HStack>
 
-          {!confirmed && (
-            <Box style={{ textAlign: 'end' }}>
-              <Button type="submit" disabled={!formMethods.formState.isDirty}>
-                <FormattedMessage id="Registrering.Omsoknaden.VisSkjema" />
-              </Button>
-            </Box>
-          )}
+          <Box style={{ textAlign: 'end' }}>
+            <Button type="submit" disabled={!formMethods.formState.isDirty}>
+              <FormattedMessage id="Registrering.Omsoknaden.VisSkjema" />
+            </Button>
+          </Box>
         </VStack>
       </Box>
     </RhfForm>

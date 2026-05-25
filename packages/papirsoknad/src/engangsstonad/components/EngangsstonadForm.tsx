@@ -19,7 +19,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   onSubmitUfullstendigsoknad: () => Promise<void>;
   onSubmit: (values: EngangsstønadValues) => Promise<void>;
-  onMellomlagre?: (values: EngangsstønadValues) => void;
+  onMellomlagre?: (values: Record<string, unknown>) => void;
   mellomlagretData?: Record<string, unknown>;
 }
 
@@ -59,7 +59,7 @@ export const EngangsstonadForm = ({
         readOnly={readOnly}
         submitting={formMethods.formState.isSubmitting}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-        onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues() as unknown as EngangsstønadValues) : undefined}
+        onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues()) : undefined}
         erEndringssøknad={false}
       />
     </RhfForm>

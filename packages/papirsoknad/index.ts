@@ -1,3 +1,4 @@
+export { isPapirsøknadMellomlagring, type PapirsøknadMellomlagring } from './src/PapirsøknadMellomlagring';
 export { RegistrerPapirsoknadPanel } from './src/RegistrerPapirsoknadPanel';
 export { SoknadRegistrertModal } from './src/modal/SoknadRegistrertModal';
 export type { EngangsstønadValues } from './src/engangsstonad/components/EngangsstonadForm';

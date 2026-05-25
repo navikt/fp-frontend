@@ -72,7 +72,7 @@ interface Props {
   fagsakPersonnummer: string;
   onSubmit: (values: ForeldrepengerValues) => Promise<void>;
   onSubmitUfullstendigsoknad: () => Promise<void>;
-  onMellomlagre?: (values: ForeldrepengerValues) => void;
+  onMellomlagre?: (values: Record<string, unknown>) => void;
   mellomlagretData?: Record<string, unknown>;
 }
 
@@ -147,7 +147,7 @@ export const ForeldrepengerForm = ({
       <LagreSoknadPapirsoknadIndex
         readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-        onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues() as unknown as ForeldrepengerValues) : undefined}
+        onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues()) : undefined}
         submitting={formMethods.formState.isSubmitting}
         erEndringssøknad={false}
       />

@@ -7,6 +7,8 @@ import {
   type EngangsstønadValues,
   type ForeldrepengerEndringssøknadValues,
   type ForeldrepengerValues,
+  isPapirsøknadMellomlagring,
+  type PapirsøknadMellomlagring,
   RegistrerPapirsoknadPanel,
   SoknadRegistrertModal,
   type SvangerskapsValues,
@@ -41,10 +43,12 @@ const BehandlingPapirsoknadIndex = () => {
   const apKode = getAktivPapirsøknadApKode(behandling.aksjonspunkt);
 
   // Hent mellomlagret utkast (om det finnes)
-  const { data: mellomlagretResponse, isPending: mellomlagringLaster } = useQuery(api.mellomlagretPapirsøknadOptions(behandling));
-  const mellomlagretData = mellomlagretResponse?.innhold
-    ? (JSON.parse(mellomlagretResponse.innhold) as Record<string, unknown>)
-    : undefined;
+  const { data: mellomlagretResponse, isLoading: mellomlagringLaster } = useQuery(api.mellomlagretPapirsøknadOptions(behandling));
+  const mellomlagretData = (() => {
+    if (!mellomlagretResponse?.innhold) return undefined;
+    const parsed = JSON.parse(mellomlagretResponse.innhold) as Record<string, unknown>;
+    return isPapirsøknadMellomlagring(parsed) ? parsed : undefined;
+  })();
 
   const queryClient = useQueryClient();
 
@@ -64,7 +68,7 @@ const BehandlingPapirsoknadIndex = () => {
   });
 
   const onMellomlagre = useCallback(
-    (formValues: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues) => {
+    (formValues: PapirsøknadMellomlagring) => {
       const payload = JSON.stringify({
         '@type': apKode,
         ...formValues,
