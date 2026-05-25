@@ -46,8 +46,12 @@ const BehandlingPapirsoknadIndex = () => {
   const { data: mellomlagretResponse, isLoading: mellomlagringLaster } = useQuery(api.mellomlagretPapirsøknadOptions(behandling));
   const mellomlagretData = (() => {
     if (!mellomlagretResponse?.innhold) return undefined;
-    const parsed = JSON.parse(mellomlagretResponse.innhold) as Record<string, unknown>;
-    return isPapirsøknadMellomlagring(parsed) ? parsed : undefined;
+    try {
+      const parsed = JSON.parse(mellomlagretResponse.innhold) as Record<string, unknown>;
+      return isPapirsøknadMellomlagring(parsed) ? parsed : undefined;
+    } catch {
+      return undefined;
+    }
   })();
 
   const queryClient = useQueryClient();
