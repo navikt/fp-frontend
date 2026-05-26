@@ -4,7 +4,6 @@
   "minReplicas": "2",
   "maxReplicas": "4",
   "limits": {
-    "cpu": "1000m",
     "mem": "256Mi"
   },
   "requests": {
