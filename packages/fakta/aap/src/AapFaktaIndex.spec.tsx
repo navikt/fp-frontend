@@ -12,7 +12,7 @@ describe('AapFaktaIndex', () => {
 
     expect(
       await screen.findByText(
-        'Denne saken stopper pga. bruker har arbeidsavklaringspenger (AAP) i kombinasjon med arbeid og/eller frilansinntekt.',
+        'Denne saken stopper fordi bruker har arbeidsavklaringspenger (AAP) i kombinasjon med arbeid og/eller frilansinntekt.',
       ),
     ).toBeInTheDocument();
     expect(screen.getByText('Beregningen er korrekt, fortsett behandlingen.')).toBeInTheDocument();
