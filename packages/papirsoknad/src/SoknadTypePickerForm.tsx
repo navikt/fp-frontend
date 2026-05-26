@@ -28,7 +28,6 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   initialFamilieHendelseType?: FamilieHendelseType;
   initialForeldreType?: ForeldreType;
-  skjemaErForhåndsutfylt?: boolean;
 }
 
 /**
