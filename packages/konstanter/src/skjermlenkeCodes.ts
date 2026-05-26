@@ -18,7 +18,7 @@ export const skjermlenkeCodes: SkjermlenkeData = {
     faktaNavn: FaktaPanelCode.BESTEBEREGNING,
     punktNavn: ProsessStegCode.DEFAULT,
   },
-  ARBEIDSAVKLARINGSPENGER: {
+  FAKTA_OM_ARBEIDSAVKLARINGSPENGER: {
     faktaNavn: FaktaPanelCode.ARBEIDSAVKLARINGSPENGER,
     punktNavn: '',
   },

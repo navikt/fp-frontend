@@ -4887,12 +4887,12 @@ export type foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør
 export type foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType =
   | 'ANKE_MERKNADER'
   | 'ANKE_VURDERING'
-  | 'ARBEIDSAVKLARINGSPENGER'
   | 'BEREGNING_ENGANGSSTOENAD'
   | 'BEREGNING_FORELDREPENGER'
   | 'BESTEBEREGNING'
   | 'FAKTA_FOR_OMSORG'
   | 'FAKTA_FOR_OPPTJENING'
+  | 'FAKTA_OM_ARBEIDSAVKLARINGSPENGER'
   | 'FAKTA_OM_ARBEIDSFORHOLD'
   | 'FAKTA_OM_ARBEIDSFORHOLD_INNTEKTSMELDING'
   | 'FAKTA_OM_ARBEIDSFORHOLD_PERMISJON'
