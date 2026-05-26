@@ -28,20 +28,20 @@
     "dayjs": "1.11.20",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "react-hook-form": "7.75.0",
-    "react-intl": "10.1.6",
-    "react-router-dom": "7.15.0"
+    "react-hook-form": "7.76.0",
+    "react-intl": "10.1.8",
+    "react-router-dom": "7.15.1"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
-    "@storybook/react": "10.3.6",
-    "@storybook/react-vite": "10.3.6",
+    "@storybook/react": "10.4.0",
+    "@storybook/react-vite": "10.4.0",
     "@types/react": "19.2.14",
     "eslint": "10.3.0",
-    "storybook": "10.3.6",
+    "storybook": "10.4.0",
     "typescript": "6.0.3",
-    "vite": "8.0.12"
+    "vite": "8.0.13"
   }
 }

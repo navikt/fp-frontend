@@ -33,25 +33,25 @@
     "dayjs": "1.11.20",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "react-hook-form": "7.75.0",
-    "react-intl": "10.1.6"
+    "react-hook-form": "7.76.0",
+    "react-intl": "10.1.8"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
-    "@storybook/react": "10.3.6",
-    "@storybook/react-vite": "10.3.6",
+    "@storybook/react": "10.4.0",
+    "@storybook/react-vite": "10.4.0",
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "@types/react": "19.2.14",
     "eslint": "10.3.0",
-    "storybook": "10.3.6",
-    "stylelint": "17.11.0",
+    "storybook": "10.4.0",
+    "stylelint": "17.11.1",
     "typescript": "6.0.3",
-    "vite": "8.0.12",
+    "vite": "8.0.13",
     "vitest": "4.1.6"
   }
 }

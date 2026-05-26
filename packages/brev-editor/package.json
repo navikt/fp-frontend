@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@editorjs/editorjs": "2.31.6",
-    "@editorjs/header": "2.8.8",
+    "@editorjs/header": "2.8.9",
     "@editorjs/list": "2.0.9",
     "@editorjs/paragraph": "2.11.7",
     "@navikt/aksel-icons": "8.10.6",
@@ -33,26 +33,26 @@
     "lodash.debounce": "4.0.8",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "react-intl": "10.1.6",
-    "react-router-dom": "7.15.0"
+    "react-intl": "10.1.8",
+    "react-router-dom": "7.15.1"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
-    "@storybook/react": "10.3.6",
-    "@storybook/react-vite": "10.3.6",
+    "@storybook/react": "10.4.0",
+    "@storybook/react-vite": "10.4.0",
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "@types/css-tree": "2.3.11",
     "@types/react": "19.2.14",
     "eslint": "10.3.0",
-    "storybook": "10.3.6",
-    "stylelint": "17.11.0",
+    "storybook": "10.4.0",
+    "stylelint": "17.11.1",
     "typescript": "6.0.3",
-    "vite": "8.0.12",
+    "vite": "8.0.13",
     "vitest": "4.1.6"
   }
 }
