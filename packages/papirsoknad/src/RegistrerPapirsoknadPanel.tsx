@@ -56,7 +56,9 @@ export const RegistrerPapirsoknadPanel = ({
   onMellomlagre,
 }: Props) => {
   const [soknadData, setSoknadData] = useState<SoknadData | undefined>(() => {
-    if (!mellomlagretData) return undefined;
+    if (!mellomlagretData) {
+      return undefined;
+    }
     return new SoknadData(mellomlagretData.fagsakYtelseType, mellomlagretData.familieHendelseType, mellomlagretData.foreldreType ?? 'MOR');
   });
 
