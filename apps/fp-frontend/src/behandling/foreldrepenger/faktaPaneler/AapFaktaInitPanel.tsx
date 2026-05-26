@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl';
 
-import { AapKombinertAtflFaktaIndex } from '@navikt/fp-fakta-aap-kombinert-atfl';
+import { AapFaktaIndex } from '@navikt/fp-fakta-aap';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
@@ -10,7 +10,7 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL];
 
-export const AapKombinertAtflFaktaInitPanel = () => {
+export const AapFaktaInitPanel = () => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
   const { behandling } = useBehandlingDataContext();
 
@@ -21,11 +21,11 @@ export const AapKombinertAtflFaktaInitPanel = () => {
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.AAP_KOMBINERT_ATFL}
-      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.AapKombinertBeregning' })}
+      faktaPanelKode={FaktaPanelCode.ARBEIDSAVKLARINGSPENGER}
+      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Arbeidsavklaringspenger' })}
       skalPanelVisesIMeny={!!aksjonspunkt}
     >
-      {aksjonspunkt ? <AapKombinertAtflFaktaIndex aksjonspunkt={aksjonspunkt} /> : <></>}
+      {aksjonspunkt ? <AapFaktaIndex aksjonspunkt={aksjonspunkt} /> : <></>}
     </FaktaDefaultInitPanel>
   );
 };

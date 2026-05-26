@@ -4887,7 +4887,7 @@ export type foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør
 export type foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType =
   | 'ANKE_MERKNADER'
   | 'ANKE_VURDERING'
-  | 'AAP_KOMBINERT_ATFL'
+  | 'ARBEIDSAVKLARINGSPENGER'
   | 'BEREGNING_ENGANGSSTOENAD'
   | 'BEREGNING_FORELDREPENGER'
   | 'BESTEBEREGNING'

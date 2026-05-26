@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
+import { BodyShort, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktBoks, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
@@ -20,7 +20,7 @@ interface Props {
   aksjonspunkt: Aksjonspunkt;
 }
 
-export const KontrollerBeregningAapKombinertPanel = ({ aksjonspunkt }: Props) => {
+export const KontrollerBeregningAapKombinertAtflPanel = ({ aksjonspunkt }: Props) => {
   const intl = useIntl();
   const { submitCallback, isSubmittable, isReadOnly } = usePanelDataContext<ManuellKontrollAapKombinertAtflAP>();
 
@@ -35,11 +35,11 @@ export const KontrollerBeregningAapKombinertPanel = ({ aksjonspunkt }: Props) =>
     <VStack gap="space-16">
       {aksjonspunkt.status === 'OPPR' && (
         <AksjonspunktHelpTextHTML>
-          <FormattedMessage id="AapKombinertAtfl.Aksjonspunkt.HelpText" />
+          <FormattedMessage id="Arbeidsavklaringspenger.Aksjonspunkt.HelpText" />
         </AksjonspunktHelpTextHTML>
       )}
       <AksjonspunktBoks
-        tittel={intl.formatMessage({ id: 'AapKombinertAtfl.Aksjonspunkt.Tittel' })}
+        tittel={intl.formatMessage({ id: 'Arbeidsavklaringspenger.Aksjonspunkt.Tittel' })}
         aksjonspunkt={aksjonspunkt}
       >
         <RhfForm
@@ -48,14 +48,22 @@ export const KontrollerBeregningAapKombinertPanel = ({ aksjonspunkt }: Props) =>
           setDataOnUnmount={setMellomlagretFormData}
         >
           <VStack gap="space-16">
+            <VStack gap="space-8">
+              <BodyShort size="small">
+                <FormattedMessage id="Arbeidsavklaringspenger.Aksjonspunkt.Beskrivelse1" />
+              </BodyShort>
+              <BodyShort size="small">
+                <FormattedMessage id="Arbeidsavklaringspenger.Aksjonspunkt.Beskrivelse2" />
+              </BodyShort>
+            </VStack>
             <RhfCheckbox
               name="erBeregningenKorrekt"
               control={formMethods.control}
-              label={<FormattedMessage id="AapKombinertAtfl.Aksjonspunkt.Bekreft" />}
+              label={<FormattedMessage id="Arbeidsavklaringspenger.Aksjonspunkt.Bekreft" />}
               readOnly={isReadOnly}
               validate={[
-                (value) =>
-                  value ? null : intl.formatMessage({ id: 'AapKombinertAtfl.Aksjonspunkt.BekreftError' }),
+                value =>
+                  value ? null : intl.formatMessage({ id: 'Arbeidsavklaringspenger.Aksjonspunkt.BekreftError' }),
               ]}
             />
             <FaktaBegrunnelseTextField
@@ -79,10 +87,10 @@ export const KontrollerBeregningAapKombinertPanel = ({ aksjonspunkt }: Props) =>
 };
 
 const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
-  const erAPLøst = aksjonspunkt.status === 'UTFO';
+  const erApLøst = aksjonspunkt.status === 'UTFO';
   return {
     ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
-    erBeregningenKorrekt: erAPLøst,
+    erBeregningenKorrekt: erApLøst,
   };
 };
 

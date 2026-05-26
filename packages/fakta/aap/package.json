@@ -1,5 +1,5 @@
 {
-  "name": "@navikt/fp-fakta-aap-kombinert-atfl",
+  "name": "@navikt/fp-fakta-aap",
   "license": "MIT",
   "private": true,
   "type": "module",

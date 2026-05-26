@@ -18,8 +18,8 @@ export const skjermlenkeCodes: SkjermlenkeData = {
     faktaNavn: FaktaPanelCode.BESTEBEREGNING,
     punktNavn: ProsessStegCode.DEFAULT,
   },
-  AAP_KOMBINERT_ATFL: {
-    faktaNavn: FaktaPanelCode.AAP_KOMBINERT_ATFL,
+  ARBEIDSAVKLARINGSPENGER: {
+    faktaNavn: FaktaPanelCode.ARBEIDSAVKLARINGSPENGER,
     punktNavn: '',
   },
   FAKTA_OM_ARBEIDSFORHOLD_PERMISJON: {

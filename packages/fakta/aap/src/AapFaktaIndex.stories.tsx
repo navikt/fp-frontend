@@ -3,16 +3,21 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { lagAksjonspunkt, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import {
+  lagAksjonspunkt,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
 
-import { AapKombinertAtflFaktaIndex } from './AapKombinertAtflFaktaIndex';
+import { AapFaktaIndex } from './AapFaktaIndex';
 
 const meta = {
-  title: 'fakta/fakta-aap-kombinert-atfl',
-  component: AapKombinertAtflFaktaIndex,
+  title: 'fakta/fakta-aap',
+  component: AapFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
-  render: args => <AapKombinertAtflFaktaIndex {...args} />,
-} satisfies Meta<PanelDataArgs & ComponentProps<typeof AapKombinertAtflFaktaIndex>>;
+  render: args => <AapFaktaIndex {...args} />,
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof AapFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

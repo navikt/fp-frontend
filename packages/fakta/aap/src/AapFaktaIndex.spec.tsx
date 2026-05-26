@@ -2,18 +2,17 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import * as stories from './AapKombinertAtflFaktaIndex.stories';
+import * as stories from './AapFaktaIndex.stories';
 
 const { ÅpentAksjonspunkt, LøstAksjonspunkt } = composeStories(stories);
 
-describe('AapKombinertAtflFaktaIndex', () => {
+describe('AapFaktaIndex', () => {
   it('skal vise hjelpetekst og skjema når aksjonspunktet er åpent', async () => {
     render(<ÅpentAksjonspunkt />);
 
     expect(
       await screen.findByText(
-        'Saken har AAP kombinert med arbeidstaker og/eller frilans. Dette kan gi feil beregning. ' +
-          'Kontroller beregningen og gå tilbake til Fakta om beregning for å overstyre dersom beregningen er feil.',
+        'Denne saken stopper pga. bruker har arbeidsavklaringspenger (AAP) i kombinasjon med arbeid og/eller frilansinntekt.',
       ),
     ).toBeInTheDocument();
     expect(screen.getByText('Beregningen er korrekt, fortsett behandlingen.')).toBeInTheDocument();

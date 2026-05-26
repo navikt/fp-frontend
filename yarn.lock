@@ -1574,9 +1574,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-aap-kombinert-atfl@workspace:*, @navikt/fp-fakta-aap-kombinert-atfl@workspace:packages/fakta/aap-kombinert-atfl":
+"@navikt/fp-fakta-aap@workspace:*, @navikt/fp-fakta-aap@workspace:packages/fakta/aap":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-aap-kombinert-atfl@workspace:packages/fakta/aap-kombinert-atfl"
+  resolution: "@navikt/fp-fakta-aap@workspace:packages/fakta/aap"
   dependencies:
     "@navikt/ds-react": "npm:8.10.4"
     "@navikt/fp-config-eslint": "workspace:*"
@@ -2336,7 +2336,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-fakta-aap-kombinert-atfl": "workspace:*"
+    "@navikt/fp-fakta-aap": "workspace:*"
     "@navikt/fp-fakta-arbeid-og-inntekt": "workspace:*"
     "@navikt/fp-fakta-arbeidsforhold": "workspace:*"
     "@navikt/fp-fakta-besteberegning": "workspace:*"

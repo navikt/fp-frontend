@@ -4,7 +4,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
-import { KontrollerBeregningAapKombinertPanel } from './components/KontrollerBeregningAapKombinertPanel';
+import { KontrollerBeregningAapKombinertAtflPanel } from './components/KontrollerBeregningAapKombinertAtflPanel';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -14,8 +14,8 @@ interface Props {
   aksjonspunkt: Aksjonspunkt;
 }
 
-export const AapKombinertAtflFaktaIndex = ({ aksjonspunkt }: Props) => (
+export const AapFaktaIndex = ({ aksjonspunkt }: Props) => (
   <RawIntlProvider value={intl}>
-    <KontrollerBeregningAapKombinertPanel aksjonspunkt={aksjonspunkt} />
+    <KontrollerBeregningAapKombinertAtflPanel aksjonspunkt={aksjonspunkt} />
   </RawIntlProvider>
 );
