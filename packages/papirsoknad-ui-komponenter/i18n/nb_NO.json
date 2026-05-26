@@ -60,6 +60,7 @@
   "Registrering.SaveApplication.OpplysningspliktErIkkeOverholdt": "Søkers opplysningsplikt er ikke overholdt",
   "Registrering.SaveApplication.EndButton": "Bekreft og fortsett til avslag",
   "Registrering.SaveApplication.SaveButton": "Bekreft og fortsett",
+  "Registrering.SaveApplication.MellomlagreButton": "Mellomlagre",
   "Registrering.Verge": "Verge/fullmektig skal knyttes til saken",
 
   "Registrering.Omsoknaden.MottattDato": "Mottatt dato",

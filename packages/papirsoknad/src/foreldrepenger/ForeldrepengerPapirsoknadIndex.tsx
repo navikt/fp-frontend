@@ -10,6 +10,8 @@ import { ForeldrepengerForm, type ForeldrepengerValues } from './components/Fore
 interface Props {
   onSubmitUfullstendigsoknad: () => Promise<void>;
   onSubmit: (values: ForeldrepengerValues | ForeldrepengerEndringssøknadValues) => Promise<void>;
+  onMellomlagre?: (values: Record<string, unknown>) => void;
+  mellomlagretData?: Record<string, unknown>;
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
@@ -20,6 +22,8 @@ interface Props {
 export const ForeldrepengerPapirsoknadIndex = ({
   onSubmitUfullstendigsoknad,
   onSubmit,
+  onMellomlagre,
+  mellomlagretData,
   readOnly,
   soknadData,
   alleKodeverk,
@@ -30,6 +34,8 @@ export const ForeldrepengerPapirsoknadIndex = ({
     <ForeldrepengerEndringssøknadForm
       onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
       onSubmit={onSubmit}
+      onMellomlagre={onMellomlagre}
+      mellomlagretData={mellomlagretData}
       readOnly={readOnly}
       soknadData={soknadData}
       alleKodeverk={alleKodeverk}
@@ -38,6 +44,8 @@ export const ForeldrepengerPapirsoknadIndex = ({
     <ForeldrepengerForm
       onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
       onSubmit={onSubmit}
+      onMellomlagre={onMellomlagre}
+      mellomlagretData={mellomlagretData}
       readOnly={readOnly}
       soknadData={soknadData}
       alleKodeverk={alleKodeverk}

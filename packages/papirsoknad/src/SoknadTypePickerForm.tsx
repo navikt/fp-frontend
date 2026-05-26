@@ -26,6 +26,8 @@ interface Props {
   setSoknadData: (soknadData: SoknadData) => void;
   fagsakYtelseType: FagsakYtelseType;
   alleKodeverk: AlleKodeverk;
+  initialFamilieHendelseType?: FamilieHendelseType;
+  initialForeldreType?: ForeldreType;
 }
 
 /**
@@ -33,12 +35,18 @@ interface Props {
  *
  * Toppkomponent for registrering av papirsøknad der søknadstype, tema og søker/foreldretype blir valgt.
  */
-export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKodeverk }: Props) => {
+export const SoknadTypePickerForm = ({
+  setSoknadData,
+  fagsakYtelseType,
+  alleKodeverk,
+  initialFamilieHendelseType,
+  initialForeldreType,
+}: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: {
       fagsakYtelseType,
-      familieHendelseType: undefined,
-      foreldreType: undefined,
+      familieHendelseType: initialFamilieHendelseType ?? undefined,
+      foreldreType: initialForeldreType ?? undefined,
     },
   });
 
