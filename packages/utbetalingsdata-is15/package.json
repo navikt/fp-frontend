@@ -25,10 +25,10 @@
     "dayjs": "1.11.20",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "react-intl": "10.1.6"
+    "react-intl": "10.1.8"
   },
   "devDependencies": {
-    "@formatjs/cli-lib": "8.6.0",
+    "@formatjs/cli-lib": "8.7.1",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
