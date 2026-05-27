@@ -12,10 +12,10 @@ describe('AapFaktaIndex', () => {
 
     expect(
       await screen.findByText(
-        'Denne saken stopper fordi bruker har arbeidsavklaringspenger (AAP) i kombinasjon med arbeid og/eller frilansinntekt.',
+        'Denne saken stopper fordi søker har arbeidsavklaringspenger (AAP) i kombinasjon med arbeid og/eller frilans.',
       ),
     ).toBeInTheDocument();
-    expect(screen.getByText('Beregningen er korrekt, fortsett behandlingen.')).toBeInTheDocument();
+    expect(screen.getByText('Beregningen er korrekt, fortsett behandlingen')).toBeInTheDocument();
   });
 
   it('skal gi valideringsfeil og sende korrekte verdier ved submit når checkbox er huket av', async () => {
@@ -42,7 +42,7 @@ describe('AapFaktaIndex', () => {
   it('skal vise utfylt skjema i lesetilstand når aksjonspunktet er løst', async () => {
     render(<LøstAksjonspunkt />);
 
-    expect(await screen.findByText('Beregningen er korrekt, fortsett behandlingen.')).toBeInTheDocument();
+    expect(await screen.findByText('Beregningen er korrekt, fortsett behandlingen')).toBeInTheDocument();
     expect(screen.getByRole('checkbox')).toBeChecked();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
   });
