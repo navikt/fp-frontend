@@ -1,8 +1,8 @@
 {
-  "Arbeidsavklaringspenger.Aksjonspunkt.Tittel": "Arbeidsavklaringspenger i kombinasjon med arbeid og/eller frilansinntekt",
-  "Arbeidsavklaringspenger.Aksjonspunkt.HelpText": "Denne saken stopper fordi bruker har arbeidsavklaringspenger (AAP) i kombinasjon med arbeid og/eller frilansinntekt.",
+  "Arbeidsavklaringspenger.Aksjonspunkt.Tittel": "Arbeidsavklaringspenger i kombinasjon med arbeid og/eller frilans",
+  "Arbeidsavklaringspenger.Aksjonspunkt.HelpText": "Denne saken stopper fordi søker har arbeidsavklaringspenger (AAP) i kombinasjon med arbeid og/eller frilans.",
   "Arbeidsavklaringspenger.Aksjonspunkt.Beskrivelse1": "Du må undersøke om beregningen er riktig. Gå til beregning (grønn linje) og fakta om beregning for å se beregningen. Hvis den er godkjent, huker du av i dette panelet (Arbeidsavklaringspenger).",
-  "Arbeidsavklaringspenger.Aksjonspunkt.Beskrivelse2": "Hvis beregningen ikke er riktig skal du overstyre til et annet grunnlag. For å fastsette nytt beregningsgrunnlag, kan du se på de 3 siste månedene i a-inntekt. Her finner du både arbeids- og/eller frilansinntekt samt AAP (bruk pensjonsgivende filter for akkurat dette). For å overstyre gå til fakta om beregning.",
-  "Arbeidsavklaringspenger.Aksjonspunkt.Bekreft": "Beregningen er korrekt, fortsett behandlingen.",
+  "Arbeidsavklaringspenger.Aksjonspunkt.Beskrivelse2": "Hvis beregningen ikke er riktig skal du overstyre til et annet grunnlag. For å fastsette nytt beregningsgrunnlag, kan du se på de 3 siste månedene i a-inntekt. Her finner du arbeids- og/eller frilansinntekt samt AAP (bruk pensjonsgivende filter for akkurat dette). For å overstyre, gå til fakta om beregning.",
+  "Arbeidsavklaringspenger.Aksjonspunkt.Bekreft": "Beregningen er korrekt, fortsett behandlingen",
   "Arbeidsavklaringspenger.Aksjonspunkt.BekreftError": "Du må bekrefte at beregningen er korrekt"
 }
