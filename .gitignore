@@ -27,3 +27,4 @@ ssh.exe.stackdump
 .turbo
 /packages/types/*-swagger.json
 .nx
+.worktrees/
