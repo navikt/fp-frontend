@@ -1,16 +1,21 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   type EngangsstønadValues,
   type ForeldrepengerEndringssøknadValues,
   type ForeldrepengerValues,
+  isPapirsøknadMellomlagring,
+  type PapirsøknadMellomlagring,
   RegistrerPapirsoknadPanel,
   SoknadRegistrertModal,
   type SvangerskapsValues,
 } from '@navikt/fp-papirsoknad';
 import type { Aksjonspunkt, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
 
+import { BehandlingRel, useBehandlingApi } from '../../data/behandlingApi';
 import { useBehandlingDataContext } from '../felles/context/BehandlingDataContext';
 
 /**
@@ -25,6 +30,7 @@ const BehandlingPapirsoknadIndex = () => {
 
   const { alleKodeverk, behandling, rettigheter, fagsak, setSkalOppdatereEtterBekreftelseAvAp } =
     useBehandlingDataContext();
+  const api = useBehandlingApi(behandling);
 
   const isReadOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPåVent;
 
@@ -33,6 +39,54 @@ const BehandlingPapirsoknadIndex = () => {
   const erEndringssøknad = behandling.aksjonspunkt.some(
     ap => ap.definisjon === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
   );
+
+  const apKode = getAktivPapirsøknadApKode(behandling.aksjonspunkt);
+
+  // Hent mellomlagret utkast (om det finnes)
+  const { data: mellomlagretResponse, isLoading: mellomlagringLaster } = useQuery(api.mellomlagretPapirsøknadOptions(behandling));
+  const mellomlagretData = (() => {
+    if (!mellomlagretResponse?.innhold) {
+      return undefined;
+    }
+    try {
+      const parsed = JSON.parse(mellomlagretResponse.innhold) as Record<string, unknown>;
+      return isPapirsøknadMellomlagring(parsed) ? parsed : undefined;
+    } catch {
+      return undefined;
+    }
+  })();
+
+  const queryClient = useQueryClient();
+
+  // Mellomlagring-mutation
+  const { mutate: mellomlagreMutation } = useMutation({
+    mutationFn: (innhold: string | null) =>
+      api.mellomlagring({
+        behandlingUuid: behandling.uuid,
+        type: 'PAPIRSØKNAD',
+        innhold,
+      }),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({
+        queryKey: [BehandlingRel.HENT_MELLOMLAGRING, 'PAPIRSØKNAD', behandling.uuid],
+      });
+    },
+  });
+
+  const onMellomlagre = useCallback(
+    (formValues: PapirsøknadMellomlagring) => {
+      const payload = JSON.stringify({
+        '@type': apKode,
+        ...formValues,
+      });
+      mellomlagreMutation(payload);
+    },
+    [mellomlagreMutation, apKode],
+  );
+
+  if (mellomlagringLaster) {
+    return null;
+  }
 
   return (
     <>
@@ -43,6 +97,8 @@ const BehandlingPapirsoknadIndex = () => {
         readOnly={isReadOnly}
         lagrePapirsøknad={lagrePapirsøknad}
         erEndringssøknad={erEndringssøknad}
+        mellomlagretData={mellomlagretData}
+        onMellomlagre={onMellomlagre}
       />
     </>
   );

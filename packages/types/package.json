@@ -18,10 +18,10 @@
     "openapi-ts": "openapi-ts"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "0.97.0",
+    "@hey-api/openapi-ts": "0.97.2",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
-    "eslint": "10.2.1",
+    "eslint": "10.3.0",
     "typescript": "6.0.3"
   }
 }

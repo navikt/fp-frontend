@@ -54,6 +54,8 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   onSubmit: (values: SvangerskapsValues) => Promise<void>;
   onSubmitUfullstendigsoknad: () => Promise<void>;
+  onMellomlagre?: (values: Record<string, unknown>) => void;
+  mellomlagretData?: Record<string, unknown>;
 }
 
 /**
@@ -67,9 +69,11 @@ export const SvangerskapspengerForm = ({
   alleKodeverk,
   onSubmit,
   onSubmitUfullstendigsoknad,
+  onMellomlagre,
+  mellomlagretData,
 }: Props) => {
   const formMethods = useForm<FormValues>({
-    defaultValues: buildInitialValues(),
+    defaultValues: { ...buildInitialValues(), ...mellomlagretData },
   });
 
   const mottattDato = formMethods.watch('mottattDato');
@@ -95,6 +99,7 @@ export const SvangerskapspengerForm = ({
       <LagreSoknadPapirsoknadIndex
         readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+        onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues()) : undefined}
         submitting={formMethods.formState.isSubmitting}
         erEndringssøknad={false}
       />

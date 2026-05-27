@@ -203,6 +203,7 @@ export const BehandlingRel = {
   FERDIGSTILL_OPPGAVE: 'ferdigstill-oppgave',
   HENT_BREV_HTML: 'hent-brev-html',
   MELLOMLAGRING: 'mellomlagring',
+  HENT_MELLOMLAGRING: 'hent-mellomlagring',
 };
 
 const getArbeidsgiverOversiktOptions =
@@ -672,12 +673,26 @@ const getHentBrevHtml =
       .json<BrevOverstyring>();
 
 const getMellomlagring =
-  (links: ApiLink[]) => (params: { behandlingUuid: string; dokumentMal?: string; innhold?: string }) =>
+  (links: ApiLink[]) => (params: { behandlingUuid: string; type?: string; dokumentMal?: string; innhold?: string | null }) =>
     kyExtended
       .post(getUrlFromRel('MELLOMLAGRING', links), {
         json: params,
       })
       .then(() => {});
+
+const getMellomlagretPapirsøknadOptions =
+  (links: ApiLink[]) => (behandling: Behandling) =>
+    queryOptions({
+      queryKey: [BehandlingRel.HENT_MELLOMLAGRING, 'PAPIRSØKNAD', behandling.uuid, behandling.versjon],
+      queryFn: () =>
+        jsonEllerNull<{ innhold: string }>(
+          kyExtended.post(getUrlFromRel('HENT_MELLOMLAGRING', links), {
+            json: { behandlingUuid: behandling.uuid, type: 'PAPIRSØKNAD' },
+          }),
+        ),
+      enabled: harLenke(behandling, 'HENT_MELLOMLAGRING'),
+      staleTime: Infinity,
+    });
 
 const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRel('VERGE_FJERN_V2', links));
 
@@ -797,6 +812,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     vergeOptions: getVergeOptions(links),
     hentBrevHtml: getHentBrevHtml(links),
     mellomlagring: getMellomlagring(links),
+    mellomlagretPapirsøknadOptions: getMellomlagretPapirsøknadOptions(links),
     merkSomHaster: getMerkSomHaster(links),
     verge: {
       hent: getVerge(links),

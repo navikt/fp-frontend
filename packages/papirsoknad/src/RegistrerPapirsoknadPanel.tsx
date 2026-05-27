@@ -20,6 +20,7 @@ import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapi
 import type { ForeldrepengerEndringssøknadValues } from './foreldrepenger/components/ForeldrepengerEndringssøknadForm';
 import type { ForeldrepengerValues } from './foreldrepenger/components/ForeldrepengerForm';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
+import type { PapirsøknadMellomlagring } from './PapirsøknadMellomlagring';
 import { SoknadTypePickerForm } from './SoknadTypePickerForm';
 import type { SvangerskapsValues } from './svangerskapspenger/components/SvangerskapspengerForm';
 import { SvangerskapspengerPapirsoknadIndex } from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
@@ -27,6 +28,8 @@ import { SvangerskapspengerPapirsoknadIndex } from './svangerskapspenger/Svanger
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
+
+type AllFormValues = EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues;
 
 interface Props {
   fagsak: Fagsak;
@@ -36,9 +39,11 @@ interface Props {
     fagsakYtelseType: FagsakYtelseType,
     familieHendelseType: FamilieHendelseType,
     foreldreType: ForeldreType,
-    formValues?: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
+    formValues?: AllFormValues,
   ) => Promise<BehandlingFpSak>;
   erEndringssøknad: boolean;
+  mellomlagretData?: PapirsøknadMellomlagring;
+  onMellomlagre?: (values: PapirsøknadMellomlagring) => void;
 }
 
 export const RegistrerPapirsoknadPanel = ({
@@ -47,8 +52,15 @@ export const RegistrerPapirsoknadPanel = ({
   readOnly,
   lagrePapirsøknad,
   erEndringssøknad,
+  mellomlagretData,
+  onMellomlagre,
 }: Props) => {
-  const [soknadData, setSoknadData] = useState<SoknadData>();
+  const [soknadData, setSoknadData] = useState<SoknadData | undefined>(() => {
+    if (!mellomlagretData) {
+      return undefined;
+    }
+    return new SoknadData(mellomlagretData.fagsakYtelseType, mellomlagretData.familieHendelseType, mellomlagretData.foreldreType ?? 'MOR');
+  });
 
   const lagreFullstendigSøknad = (
     formValues: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
@@ -71,6 +83,18 @@ export const RegistrerPapirsoknadPanel = ({
     return Promise.resolve();
   };
 
+  const mellomlagreWrapped = onMellomlagre && soknadData
+    ? (formValues: Record<string, unknown>) => {
+        const payload: PapirsøknadMellomlagring = {
+          ...formValues,
+          fagsakYtelseType: soknadData.fagsakYtelseType,
+          familieHendelseType: soknadData.familieHendelseType,
+          foreldreType: soknadData.foreldreType,
+        };
+        onMellomlagre(payload);
+      }
+    : undefined;
+
   return (
     <RawIntlProvider value={intl}>
       <VStack gap="space-16" padding="space-16">
@@ -90,11 +114,15 @@ export const RegistrerPapirsoknadPanel = ({
           setSoknadData={setSoknadData}
           fagsakYtelseType={fagsak.fagsakYtelseType}
           alleKodeverk={kodeverk}
+          initialFamilieHendelseType={soknadData?.familieHendelseType}
+          initialForeldreType={soknadData?.foreldreType}
         />
         {soknadData?.getFagsakYtelseType() === 'ES' && (
           <EngangsstonadPapirsoknadIndex
             onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
             onSubmit={lagreFullstendigSøknad}
+            onMellomlagre={mellomlagreWrapped}
+            mellomlagretData={mellomlagretData}
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
@@ -104,6 +132,8 @@ export const RegistrerPapirsoknadPanel = ({
           <ForeldrepengerPapirsoknadIndex
             onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
             onSubmit={lagreFullstendigSøknad}
+            onMellomlagre={mellomlagreWrapped}
+            mellomlagretData={mellomlagretData}
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
@@ -115,6 +145,8 @@ export const RegistrerPapirsoknadPanel = ({
           <SvangerskapspengerPapirsoknadIndex
             onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
             onSubmit={lagreFullstendigSøknad}
+            onMellomlagre={mellomlagreWrapped}
+            mellomlagretData={mellomlagretData}
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}

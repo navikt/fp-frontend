@@ -129,7 +129,7 @@ const CheckboxWithInfo = ({
   index: number;
 }) => {
   const { watch, control } = useFormContext<VirksomhetFormValues>();
-  const valgteÅrsaker = watch(`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireArArsak`);
+  const valgteÅrsaker = watch(`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireArArsak`, []);
 
   const [visPerioder, setVisPerioder] = useState(valgteÅrsaker.includes(value));
 
