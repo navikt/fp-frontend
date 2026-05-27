@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
-import { Button } from '@navikt/ds-react';
+import { Button, Tooltip } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
 import type { ArbeidsgiverOpplysninger, Fagsak, Inntektsmelding } from '@navikt/fp-types';
@@ -17,7 +17,9 @@ export const LastNedPdfKnapp = ({
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger;
 }) => {
   const tittel = `IM ${arbeidsgiverOpplysninger.navn} - ${dateFormat(inntektsmelding.mottattDato)}`;
-  return (
+  const manglerTilgang = !inntektsmelding.dokumentId;
+
+  const knapp = (
     <Button
       type="button"
       onClick={() => {
@@ -26,9 +28,19 @@ export const LastNedPdfKnapp = ({
       variant="secondary"
       size="small"
       icon={<ArrowForwardIcon />}
-      disabled={!inntektsmelding.dokumentId}
+      disabled={manglerTilgang}
     >
       <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
     </Button>
   );
+
+  if (manglerTilgang) {
+    return (
+      <Tooltip content="Mangler tilgang">
+        <span>{knapp}</span>
+      </Tooltip>
+    );
+  }
+
+  return knapp;
 };
