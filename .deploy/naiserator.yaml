@@ -22,13 +22,16 @@ spec:
     path: /health/isReady
     initialDelay: 10
     timeout: 1
+  startup:
+    path: /health/isReady
+    initialDelay: 10
+    timeout: 1
   replicas:
     min: {{minReplicas}}
     max: {{maxReplicas}}
-    cpuThresholdPercentage: 80
+    cpuThresholdPercentage: 50
   resources:
     limits:
-      cpu: "{{limits.cpu}}"
       memory: "{{limits.mem}}"
     requests:
       cpu: "{{requests.cpu}}"
