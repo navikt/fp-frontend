@@ -17,13 +17,13 @@ export const LastNedPdfKnapp = ({
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger;
 }) => {
   const tittel = `IM ${arbeidsgiverOpplysninger.navn} - ${dateFormat(inntektsmelding.mottattDato)}`;
-  const manglerTilgang = !inntektsmelding.dokumentId;
+  const manglerTilgang = !inntektsmelding.dokumentId || !inntektsmelding.journalpostId;
 
   const knapp = (
     <Button
       type="button"
       onClick={() => {
-        åpneDokument(fagsak.saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId, tittel);
+        åpneDokument(fagsak.saksnummer, inntektsmelding.journalpostId!, inntektsmelding.dokumentId!, tittel);
       }}
       variant="secondary"
       size="small"
