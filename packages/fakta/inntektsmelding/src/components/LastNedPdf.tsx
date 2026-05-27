@@ -17,30 +17,32 @@ export const LastNedPdfKnapp = ({
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger;
 }) => {
   const tittel = `IM ${arbeidsgiverOpplysninger.navn} - ${dateFormat(inntektsmelding.mottattDato)}`;
-  const manglerTilgang = !inntektsmelding.dokumentId || !inntektsmelding.journalpostId;
 
-  const knapp = (
-    <Button
-      type="button"
-      onClick={() => {
-        åpneDokument(fagsak.saksnummer, inntektsmelding.journalpostId!, inntektsmelding.dokumentId!, tittel);
-      }}
-      variant="secondary"
-      size="small"
-      icon={<ArrowForwardIcon />}
-      disabled={manglerTilgang}
-    >
-      <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
-    </Button>
-  );
+  const { dokumentId, journalpostId } = inntektsmelding;
 
-  if (manglerTilgang) {
+  if (!dokumentId || !journalpostId) {
     return (
       <Tooltip content="Mangler tilgang">
-        <span>{knapp}</span>
+        <span>
+          <Button type="button" variant="secondary" size="small" icon={<ArrowForwardIcon />} disabled>
+            <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
+          </Button>
+        </span>
       </Tooltip>
     );
   }
 
-  return knapp;
+  return (
+    <Button
+      type="button"
+      onClick={() => {
+        åpneDokument(fagsak.saksnummer, journalpostId, dokumentId, tittel);
+      }}
+      variant="secondary"
+      size="small"
+      icon={<ArrowForwardIcon />}
+    >
+      <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
+    </Button>
+  );
 };
