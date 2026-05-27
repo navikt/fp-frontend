@@ -26,6 +26,7 @@ export const LastNedPdfKnapp = ({
       variant="secondary"
       size="small"
       icon={<ArrowForwardIcon />}
+      disabled={!inntektsmelding.dokumentId}
     >
       <FormattedMessage id="InntektsmeldingFaktaPanel.modal.trigger" />
     </Button>

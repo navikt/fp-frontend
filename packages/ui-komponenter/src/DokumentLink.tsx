@@ -8,7 +8,7 @@ import { åpneVindu } from '@navikt/fp-utils';
 export type DokumentLinkReferanse = {
   saksnummer: string;
   journalpostId: string;
-  dokumentId: string;
+  dokumentId?: string;
   dokumentTittel?: string;
 };
 
@@ -19,6 +19,10 @@ export const DokumentLink = ({
   dokumentTittel,
   children,
 }: PropsWithChildren<DokumentLinkReferanse>) => {
+  if (!dokumentId) {
+    return <span className="wrap-anywhere">{children ?? dokumentTittel ?? 'Dokument utilgjengelig'}</span>;
+  }
+
   const target = `${journalpostId}-${dokumentId}`;
   const url = hentDokumentLenke(saksnummer, journalpostId, dokumentId);
 
