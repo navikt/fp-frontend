@@ -175,10 +175,10 @@ export type foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType =
   | 'RE-HENDELSE-DØDFØD'
   | 'RE-HENDELSE-UTFLYTTING'
   | 'RE-VEDTAK-PSB'
+  | 'KLAGE_TILBAKE'
   | 'FEIL_PRAKSIS_UTSETTELSE'
   | 'FEIL_PRAKSIS_IVERKS_UTSET'
   | 'FEIL_PRAKSIS_BG_AAP_KOMBI'
-  | 'KLAGE_TILBAKE'
   | 'RE-YTELSE'
   | 'RE-REGISTEROPPL'
   | 'KØET-BEHANDLING'
@@ -1608,7 +1608,7 @@ export type tjenester_behandling_svp_BekreftSvangerskapspengerDto = {
   begrunnelse?: string;
   bekreftetSvpArbeidsforholdList?: Array<tjenester_behandling_svp_BekreftTilrettelegging>;
   fødselsdato?: string;
-  termindato?: string;
+  termindato: string;
 };
 
 export type tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto = {
@@ -1617,6 +1617,7 @@ export type tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto = {
 };
 
 export type tjenester_behandling_svp_BekreftTilrettelegging = {
+  arbeidsforholdetErSplittet?: boolean;
   arbeidsgiverReferanse?: string;
   avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
   begrunnelse?: string;
@@ -4262,6 +4263,7 @@ export type tjenester_behandling_medlem_MedlemskapDto_Utlandsopphold = {
 };
 
 export type tjenester_behandling_svp_SvpArbeidsforholdDto = {
+  arbeidsforholdetErSplittet: boolean;
   arbeidsgiverReferanse?: string;
   avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
   begrunnelse?: string;
@@ -4269,6 +4271,7 @@ export type tjenester_behandling_svp_SvpArbeidsforholdDto = {
   internArbeidsforholdReferanse?: string;
   kanTilrettelegges: boolean;
   skalBrukes: boolean;
+  skalVurdereSplittAvArbeidsforholdet: boolean;
   stillingsprosentStartTilrettelegging?: number;
   tilretteleggingBehovFom: string;
   tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
@@ -4792,11 +4795,6 @@ export type foreldrepenger_kontrakter_formidling_v3_DokumentKvitteringDto = {
   dokumentbestillingUuid: string;
   journalpostId: string;
   saksnummer: foreldrepenger_kontrakter_formidling_kodeverk_Saksnummer;
-};
-
-export type tjenester_brev_BrevRestTjeneste_MellomlagreHtmlDto = {
-  behandlingUuid: string;
-  redigertInnhold?: string;
 };
 
 export type foreldrepenger_dokumentarkiv_Kommunikasjonsretning = 'INN' | 'UT' | 'NOTAT';
@@ -6496,19 +6494,19 @@ export type HentBrevHtmlResponses = {
   default: unknown;
 };
 
-export type HentOverstyringAvBrevMedOrginaltBrevPåHtmlFormatData = {
+export type HentOverstyrtVedtaksbrevData = {
   body?: never;
   path?: never;
-  query?: {
+  query: {
     /**
      * behandlingUUID
      */
-    uuid?: tjenester_behandling_dto_UuidDto;
+    uuid: tjenester_behandling_dto_UuidDto;
   };
-  url: '/api/brev/overstyring';
+  url: '/api/brev/hent-overstyrt-vedtaksbrev';
 };
 
-export type HentOverstyringAvBrevMedOrginaltBrevPåHtmlFormatResponses = {
+export type HentOverstyrtVedtaksbrevResponses = {
   /**
    * default response
    */
@@ -6523,20 +6521,6 @@ export type KvitteringV3Data = {
 };
 
 export type KvitteringV3Responses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type MellomlagringAvOverstyringData = {
-  body: tjenester_brev_BrevRestTjeneste_MellomlagreHtmlDto;
-  path?: never;
-  query?: never;
-  url: '/api/brev/overstyring/mellomlagring';
-};
-
-export type MellomlagringAvOverstyringResponses = {
   /**
    * default response
    */
