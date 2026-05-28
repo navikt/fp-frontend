@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
+import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { BrevRedigeringModal } from '@navikt/fp-brev-editor';
 import type { BrevOverstyring } from '@navikt/fp-types';
@@ -24,11 +25,12 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
   const { harRedigertBrev, setHarRedigertBrev, hentBrevHtml, hentBrevHtmlIsPending, mellomlagreBrev } =
     useVedtakEditeringContext();
 
-  const vedtaksbrevDokumentLink = behandling.links.find(l => l.rel === 'vedtaksbrev-dokument');
+  const vedtaksbrevDokumentLink = behandling.links.find(l => l.rel === 'overstyrt-vedtaksbrev');
 
   const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
   const [visFritekstRedigeringModal, setVisFritekstRedigeringModal] = useState(false);
   const [brevOverstyring, setBrevOverstyring] = useState<BrevOverstyring | null>(null);
+  const [henterVedtaksbrevPdf, setHenterVedtaksbrevPdf] = useState(false);
   const hasFetchedBrevOverstyring = useRef(false);
 
   useEffect(() => {
@@ -75,6 +77,20 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
       dokumentMal: 'FRIHTM',
       fritekst: html,
     });
+  };
+
+  const visOverstyrtVedtaksbrevPdf = async () => {
+    if (!vedtaksbrevDokumentLink) return;
+    setHenterVedtaksbrevPdf(true);
+    try {
+      const response = await fetch(vedtaksbrevDokumentLink.href, { credentials: 'same-origin' });
+      if (response.ok) {
+        const blob = await response.blob();
+        forhandsvisDokument(blob);
+      }
+    } finally {
+      setHenterVedtaksbrevPdf(false);
+    }
   };
 
   return (
@@ -133,13 +149,12 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
             {isReadOnly && harRedigertBrev && vedtaksbrevDokumentLink && (
               <div>
                 <Button
-                  as="a"
-                  href={vedtaksbrevDokumentLink.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   variant="tertiary"
                   size="small"
                   icon={<FileSearchIcon aria-hidden />}
+                  onClick={visOverstyrtVedtaksbrevPdf}
+                  loading={henterVedtaksbrevPdf}
+                  type="button"
                 >
                   <FormattedMessage id="OverstyringVedtaksbrev.VisBrev" />
                 </Button>
