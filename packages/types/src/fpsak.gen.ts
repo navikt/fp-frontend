@@ -2460,13 +2460,13 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto =
   aktiveNaturalytelser: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_NaturalYtelseDto>;
   arbeidsgiverIdent: string;
   begrunnelse?: string;
-  dokumentId: string;
+  dokumentId?: string;
   eksternArbeidsforholdId?: string;
   innsendingstidspunkt: string;
   innsendingsårsak: foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak;
   inntektPrMnd: number;
   internArbeidsforholdId?: string;
-  journalpostId: string;
+  journalpostId?: string;
   kildeSystem: string;
   kontaktpersonNavn: string;
   kontaktpersonNummer: string;
