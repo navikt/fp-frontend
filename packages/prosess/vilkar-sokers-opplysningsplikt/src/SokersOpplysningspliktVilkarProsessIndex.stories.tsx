@@ -72,7 +72,6 @@ export const UtførtAPMedAvslåttVilkår: Story = {
     behandling: lagBehandling({
       behandlingsresultat: {
         avslagsarsak: '1099',
-        harRedigertVedtaksbrev: false,
         id: 1,
         type: 'AVSLÅTT',
         vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
@@ -99,7 +98,6 @@ export const HarOverstyrtMedOppfyltVilkår: Story = {
     behandling: lagBehandling({
       behandlingsresultat: {
         avslagsarsak: undefined,
-        harRedigertVedtaksbrev: false,
         id: 1,
         type: 'INNVILGET',
         vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
@@ -119,7 +117,6 @@ export const HarOverstyrtMedAvslåttVilkår: Story = {
     behandling: lagBehandling({
       behandlingsresultat: {
         avslagsarsak: '1099',
-        harRedigertVedtaksbrev: false,
         id: 1,
         type: 'AVSLÅTT',
         vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',

@@ -10,7 +10,6 @@ const DEFAULT_BEHANDLING = lagFagsakBehandling({ status: 'FVED' });
 
 const BEHANDLINGSRESULTAT_OPPHØR = {
   type: 'OPPHØR',
-  harRedigertVedtaksbrev: false,
   id: 1,
   vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
 } satisfies FagsakBehandlingDtoFpSak['behandlingsresultat'];

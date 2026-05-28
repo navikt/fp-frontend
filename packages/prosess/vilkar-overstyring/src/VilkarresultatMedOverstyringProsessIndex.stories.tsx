@@ -111,7 +111,6 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
     behandling: lagBehandling({
       behandlingsresultat: {
         avslagsarsak: '1002',
-        harRedigertVedtaksbrev: false,
         id: 1,
         type: 'AVSLÅTT',
         vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
@@ -130,7 +129,6 @@ export const OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert: Story = {
     behandling: lagBehandling({
       behandlingsresultat: {
         avslagsarsak: '1035',
-        harRedigertVedtaksbrev: false,
         id: 1,
         type: 'OPPHØR',
         vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',

@@ -38,7 +38,6 @@ const behandling: BehandlingFpSak = {
   versjon: 1,
   type: 'BT-002',
   behandlingsresultat: {
-    harRedigertVedtaksbrev: false,
     id: 0,
     type: 'INNVILGET',
     vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',

@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
+import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { BrevRedigeringModal } from '@navikt/fp-brev-editor';
 import type { BrevOverstyring } from '@navikt/fp-types';
@@ -19,18 +20,21 @@ interface Props {
 
 export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigereVedtaksbrev }: Props) => {
   const intl = useIntl();
-  const { isReadOnly } = usePanelDataContext();
+  const { isReadOnly, behandling } = usePanelDataContext();
 
   const { harRedigertBrev, setHarRedigertBrev, hentBrevHtml, hentBrevHtmlIsPending, mellomlagreBrev } =
     useVedtakEditeringContext();
 
+  const vedtaksbrevDokumentLink = behandling.links.find(l => l.rel === 'overstyrt-vedtaksbrev');
+
   const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
   const [visFritekstRedigeringModal, setVisFritekstRedigeringModal] = useState(false);
   const [brevOverstyring, setBrevOverstyring] = useState<BrevOverstyring | null>(null);
+  const [henterVedtaksbrevPdf, setHenterVedtaksbrevPdf] = useState(false);
   const hasFetchedBrevOverstyring = useRef(false);
 
   useEffect(() => {
-    if (!hasFetchedBrevOverstyring.current && harRedigertBrev && hentBrevHtml) {
+    if (!isReadOnly && !hasFetchedBrevOverstyring.current && harRedigertBrev && hentBrevHtml) {
       hasFetchedBrevOverstyring.current = true;
       void hentBrevHtml().then(setBrevOverstyring);
     }
@@ -75,6 +79,20 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
     });
   };
 
+  const visOverstyrtVedtaksbrevPdf = async () => {
+    if (!vedtaksbrevDokumentLink) return;
+    setHenterVedtaksbrevPdf(true);
+    try {
+      const response = await fetch(vedtaksbrevDokumentLink.href, { credentials: 'same-origin' });
+      if (response.ok) {
+        const blob = await response.blob();
+        forhandsvisDokument(blob);
+      }
+    } finally {
+      setHenterVedtaksbrevPdf(false);
+    }
+  };
+
   return (
     <div style={{ maxWidth: '500px' }}>
       <OkAvbrytModal
@@ -93,6 +111,11 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
               </Alert>
             )}
             {!!brevOverstyring?.redigertHtml && !hentBrevHtmlIsPending && (
+              <Alert variant="success" size="small">
+                <FormattedMessage id="OverstyringVedtaksbrev.ErOverstyrt" />
+              </Alert>
+            )}
+            {isReadOnly && harRedigertBrev && (
               <Alert variant="success" size="small">
                 <FormattedMessage id="OverstyringVedtaksbrev.ErOverstyrt" />
               </Alert>
@@ -123,7 +146,21 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
                 </HStack>
               </>
             )}
-            {(isReadOnly || !!brevOverstyring?.redigertHtml) && (
+            {isReadOnly && harRedigertBrev && vedtaksbrevDokumentLink && (
+              <div>
+                <Button
+                  variant="tertiary"
+                  size="small"
+                  icon={<FileSearchIcon aria-hidden />}
+                  onClick={visOverstyrtVedtaksbrevPdf}
+                  loading={henterVedtaksbrevPdf}
+                  type="button"
+                >
+                  <FormattedMessage id="OverstyringVedtaksbrev.VisBrev" />
+                </Button>
+              </div>
+            )}
+            {!isReadOnly && !!brevOverstyring?.redigertHtml && (
               <div>
                 <Button
                   variant="tertiary"
@@ -133,11 +170,7 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
                   onKeyDown={e => (e.key === 'Enter' ? forhåndsvisRedigertHtmlBrev() : null)}
                   type="button"
                 >
-                  {isReadOnly ? (
-                    <FormattedMessage id="OverstyringVedtaksbrev.VisBrev" />
-                  ) : (
-                    <FormattedMessage id="OverstyringVedtaksbrev.ForhandvisBrev" />
-                  )}
+                  <FormattedMessage id="OverstyringVedtaksbrev.ForhandvisBrev" />
                 </Button>
               </div>
             )}

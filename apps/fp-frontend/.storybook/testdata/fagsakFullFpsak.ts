@@ -84,7 +84,6 @@ export const fagsakFullFpsak: Fagsak = {
 
         konsekvenserForYtelsen: [],
 
-        harRedigertVedtaksbrev: false,
         erRevurderingMedUendretUtfall: false,
         skjæringstidspunkt: {
           dato: '2025-02-12',

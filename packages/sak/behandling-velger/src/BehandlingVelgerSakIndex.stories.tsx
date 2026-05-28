@@ -63,7 +63,6 @@ export const Default: Story = {
         gjeldendeVedtak: true,
         behandlingsresultat: {
           type: 'AVSLÅTT',
-          harRedigertVedtaksbrev: false,
           id: 1,
           vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
         },
@@ -81,7 +80,6 @@ export const Default: Story = {
         gjeldendeVedtak: false,
         behandlingsresultat: {
           type: 'INNVILGET',
-          harRedigertVedtaksbrev: false,
           id: 2,
           vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
         },
@@ -115,7 +113,6 @@ export const Default: Story = {
         gjeldendeVedtak: false,
         behandlingsresultat: {
           type: 'HENLAGT_SØKNAD_TRUKKET',
-          harRedigertVedtaksbrev: false,
           id: 4,
           vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
         },
