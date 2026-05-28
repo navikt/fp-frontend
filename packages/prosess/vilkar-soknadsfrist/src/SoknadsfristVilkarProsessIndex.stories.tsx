@@ -80,7 +80,6 @@ export const AvslåttVilkår: Story = {
       behandlingÅrsaker: [],
       behandlingsresultat: {
         avslagsarsak: '1099',
-        harRedigertVedtaksbrev: false,
         id: 1,
         type: 'AVSLÅTT',
         vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',

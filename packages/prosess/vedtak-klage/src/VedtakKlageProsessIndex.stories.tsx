@@ -11,7 +11,6 @@ import { VedtakKlageProsessIndex } from './VedtakKlageProsessIndex';
 
 const behandling = lagBehandling({
   behandlingsresultat: {
-    harRedigertVedtaksbrev: false,
     id: 1,
     type: 'KLAGE_AVVIST',
     vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',

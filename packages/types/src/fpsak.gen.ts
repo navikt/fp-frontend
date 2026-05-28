@@ -486,7 +486,6 @@ export type tjenester_behandling_dto_behandling_BehandlingsresultatDto = {
   avslagsarsak?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
   avslagsarsakFritekst?: string;
   erRevurderingMedUendretUtfall?: boolean;
-  harRedigertVedtaksbrev: boolean;
   id: number;
   konsekvenserForYtelsen?: Array<foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen>;
   opphørsdato?: string;

@@ -96,7 +96,6 @@ export const AvslåttVilkår: Story = {
       språkkode: '-',
       behandlingsresultat: {
         avslagsarsak: '1099',
-        harRedigertVedtaksbrev: false,
         id: 0,
         type: 'AVSLÅTT',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',

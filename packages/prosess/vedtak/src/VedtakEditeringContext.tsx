@@ -26,12 +26,12 @@ export const VedtakEditeringProvider = ({
   children: ReactElement;
 }) => {
   const [harRedigertBrev, setHarRedigertBrev] = useState(
-    behandling.behandlingsresultat?.harRedigertVedtaksbrev || false,
+    !!behandling.links.find(l => l.rel === 'vedtaksbrev-dokument'),
   );
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved endring av behandling
-    setHarRedigertBrev(behandling.behandlingsresultat?.harRedigertVedtaksbrev || false);
+    setHarRedigertBrev(!!behandling.links.find(l => l.rel === 'vedtaksbrev-dokument'));
   }, [behandling.uuid, behandling.versjon]);
 
   const value = useMemo(

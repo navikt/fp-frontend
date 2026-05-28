@@ -19,10 +19,12 @@ interface Props {
 
 export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigereVedtaksbrev }: Props) => {
   const intl = useIntl();
-  const { isReadOnly } = usePanelDataContext();
+  const { isReadOnly, behandling } = usePanelDataContext();
 
   const { harRedigertBrev, setHarRedigertBrev, hentBrevHtml, hentBrevHtmlIsPending, mellomlagreBrev } =
     useVedtakEditeringContext();
+
+  const vedtaksbrevDokumentLink = behandling.links.find(l => l.rel === 'vedtaksbrev-dokument');
 
   const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
   const [visFritekstRedigeringModal, setVisFritekstRedigeringModal] = useState(false);
@@ -30,7 +32,7 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
   const hasFetchedBrevOverstyring = useRef(false);
 
   useEffect(() => {
-    if (!hasFetchedBrevOverstyring.current && harRedigertBrev && hentBrevHtml) {
+    if (!isReadOnly && !hasFetchedBrevOverstyring.current && harRedigertBrev && hentBrevHtml) {
       hasFetchedBrevOverstyring.current = true;
       void hentBrevHtml().then(setBrevOverstyring);
     }
@@ -97,6 +99,11 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
                 <FormattedMessage id="OverstyringVedtaksbrev.ErOverstyrt" />
               </Alert>
             )}
+            {isReadOnly && harRedigertBrev && (
+              <Alert variant="success" size="small">
+                <FormattedMessage id="OverstyringVedtaksbrev.ErOverstyrt" />
+              </Alert>
+            )}
             {!isReadOnly && (
               <>
                 <Heading size="small" level="2">
@@ -123,7 +130,22 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
                 </HStack>
               </>
             )}
-            {(isReadOnly || !!brevOverstyring?.redigertHtml) && (
+            {isReadOnly && harRedigertBrev && vedtaksbrevDokumentLink && (
+              <div>
+                <Button
+                  as="a"
+                  href={vedtaksbrevDokumentLink.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="tertiary"
+                  size="small"
+                  icon={<FileSearchIcon aria-hidden />}
+                >
+                  <FormattedMessage id="OverstyringVedtaksbrev.VisBrev" />
+                </Button>
+              </div>
+            )}
+            {!isReadOnly && !!brevOverstyring?.redigertHtml && (
               <div>
                 <Button
                   variant="tertiary"
@@ -133,11 +155,7 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
                   onKeyDown={e => (e.key === 'Enter' ? forhåndsvisRedigertHtmlBrev() : null)}
                   type="button"
                 >
-                  {isReadOnly ? (
-                    <FormattedMessage id="OverstyringVedtaksbrev.VisBrev" />
-                  ) : (
-                    <FormattedMessage id="OverstyringVedtaksbrev.ForhandvisBrev" />
-                  )}
+                  <FormattedMessage id="OverstyringVedtaksbrev.ForhandvisBrev" />
                 </Button>
               </div>
             )}
