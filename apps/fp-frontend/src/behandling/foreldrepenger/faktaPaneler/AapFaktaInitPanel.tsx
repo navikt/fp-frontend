@@ -11,6 +11,7 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL];
 
 export const AapFaktaInitPanel = () => {
+  const intl = useIntl();
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
   const { behandling } = useBehandlingDataContext();
 
@@ -22,7 +23,7 @@ export const AapFaktaInitPanel = () => {
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.ARBEIDSAVKLARINGSPENGER}
-      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Arbeidsavklaringspenger' })}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Arbeidsavklaringspenger' })}
       skalPanelVisesIMeny={!!aksjonspunkt}
     >
       {aksjonspunkt ? <AapFaktaIndex aksjonspunkt={aksjonspunkt} /> : <></>}
