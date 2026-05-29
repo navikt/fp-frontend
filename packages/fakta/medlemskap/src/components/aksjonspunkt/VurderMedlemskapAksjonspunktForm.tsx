@@ -109,10 +109,18 @@ const createInitialValues = (
 const transformValues = (
   values: FormValues,
   erForutgåendeAksjonspunkt: boolean,
-): VurderMedlemskapAp | VurderForutgaendeMedlemskapAp => ({
-  kode: erForutgåendeAksjonspunkt
-    ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
-    : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-  ...MedlemskapVurderinger.transformValues(values),
-  ...FaktaBegrunnelseTextField.transformValues(values),
-});
+): VurderMedlemskapAp | VurderForutgaendeMedlemskapAp => {
+  if (erForutgåendeAksjonspunkt) {
+    return {
+      kode: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+      ...MedlemskapVurderinger.transformValues(values),
+      ...FaktaBegrunnelseTextField.transformValues(values),
+    };
+  }
+
+  return {
+    kode: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+    ...MedlemskapVurderinger.transformValues(values),
+    ...FaktaBegrunnelseTextField.transformValues(values),
+  };
+};

@@ -15,6 +15,8 @@ import {
 } from '@navikt/fp-papirsoknad';
 import type { Aksjonspunkt, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
 
+import type { PapirsøknarAp } from './PapirsøknarAp';
+
 import { BehandlingRel, useBehandlingApi } from '../../data/behandlingApi';
 import { useBehandlingDataContext } from '../felles/context/BehandlingDataContext';
 
@@ -119,7 +121,7 @@ const useLagrePapirsøknad = (
     formValues?: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
   ) => {
     const kode = getAktivPapirsøknadApKode(behandling.aksjonspunkt);
-    const bekreftedeAksjonspunktDtoer = [
+    const bekreftedeAksjonspunktDtoer: ({ '@type': string } & PapirsøknarAp)[] = [
       {
         '@type': kode,
         kode,
@@ -127,7 +129,7 @@ const useLagrePapirsøknad = (
         søknadstype: fagsakYtelseType,
         søker: foreldreType,
         ...formValues,
-      },
+      } as { '@type': string } & PapirsøknarAp,
     ];
 
     if (formValues) {

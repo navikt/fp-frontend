@@ -558,181 +558,182 @@ export type tjenester_behandling_dto_behandling_ProsessTaskGruppeIdDto = {
 
 export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto = (
   | ({
-      '@type': '5085';
+      kode: '5085';
     } & foreldrepenger_domene_arbeidInntektsmelding_BekreftArbeidInntektsmeldingAksjonspunktDto)
   | ({
-      '@type': '5041';
+      kode: '5041';
     } & foreldrepenger_domene_arbeidInntektsmelding_BekreftArbeidMedPermisjonUtenSluttdatoDto)
   | ({
-      '@type': '5051';
+      kode: '5051';
     } & foreldrepenger_domene_opptjening_dto_AvklarAktivitetsPerioderDto)
   | ({
-      '@type': '5089';
+      kode: '5089';
     } & foreldrepenger_domene_opptjening_dto_AvklarOpptjeningsvilkåretDto)
   | ({
-      '@type': '5068';
+      kode: '5068';
     } & foreldrepenger_domene_opptjening_dto_MerkOpptjeningUtlandDto)
   | ({
-      '@type': '5030';
+      kode: '5030';
     } & foreldrepenger_domene_person_verge_dto_AvklarVergeDto)
   | ({
-      '@type': '5052';
+      kode: '5052';
     } & foreldrepenger_domene_rest_dto_AvklarteAktiviteterDto)
   | ({
-      '@type': '5047';
+      kode: '5047';
     } & foreldrepenger_domene_rest_dto_FastsettBGTidsbegrensetArbeidsforholdDto)
   | ({
-      '@type': '5038';
+      kode: '5038';
     } & foreldrepenger_domene_rest_dto_FastsettBeregningsgrunnlagATFLDto)
   | ({
-      '@type': '5049';
+      kode: '5049';
     } & foreldrepenger_domene_rest_dto_FastsettBruttoBeregningsgrunnlagSNforNyIArbeidslivetDto)
   | ({
-      '@type': '5062';
+      kode: '5062';
     } & foreldrepenger_domene_rest_dto_KontrollerBesteberegningDto)
   | ({
-      '@type': '5058';
+      kode: '5058';
     } & foreldrepenger_domene_rest_dto_VurderFaktaOmBeregningDto)
   | ({
-      '@type': '5059';
+      kode: '5059';
     } & foreldrepenger_domene_rest_dto_VurderRefusjonBeregningsgrunnlagDto)
   | ({
-      '@type': '5039';
+      kode: '5039';
     } & foreldrepenger_domene_rest_dto_VurderVarigEndringEllerNyoppstartetSNDto)
   | ({
-      '@type': '5046';
+      kode: '5046';
     } & foreldrepenger_domene_rest_dto_fordeling_FordelBeregningsgrunnlagDto)
   | ({
-      '@type': '5027';
+      kode: '5027';
     } & foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_SjekkManglendeFødselAksjonspunktDto)
   | ({
-      '@type': '5001';
+      kode: '5001';
     } & foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_SjekkTerminbekreftelseAksjonspunktDto)
   | ({
-      '@type': '5018';
+      kode: '5018';
     } & foreldrepenger_familiehendelse_aksjonspunkt_omsorgsovertakelse_dto_VurderOmsorgsovertakelseVilkårAksjonspunktDto)
   | ({
-      '@type': '5031';
+      kode: '5031';
     } & foreldrepenger_familiehendelse_aksjonspunkt_sammebarn_dto_VurdereYtelseSammeBarnSøkerAksjonspunktDto)
   | ({
-      '@type': '5016';
+      kode: '5016';
     } & tjenester_behandling_aksjonspunkt_FatterVedtakAksjonspunktDto)
   | ({
-      '@type': '5002';
+      kode: '5002';
     } & tjenester_behandling_dekningsgrad_AvklarDekningsgradDto)
   | ({
-      '@type': '5037';
+      kode: '5037';
     } & tjenester_behandling_innsyn_aksjonspunkt_VurderInnsynDto)
   | ({
-      '@type': '5082';
+      kode: '5082';
     } & tjenester_behandling_klage_aksjonspunkt_KlageFormkravAksjonspunktDto)
   | ({
-      '@type': '5035';
+      kode: '5035';
     } & tjenester_behandling_klage_aksjonspunkt_KlageVurderingResultatAksjonspunktDto)
   | ({
-      '@type': '5102';
+      kode: '5102';
     } & tjenester_behandling_medlem_aksjonspunkt_VurderForutgåendeMedlemskapDto)
   | ({
-      '@type': '5101';
+      kode: '5101';
     } & tjenester_behandling_medlem_aksjonspunkt_VurderMedlemskapDto)
   | ({
-      '@type': '5055';
+      kode: '5055';
     } & tjenester_behandling_revurdering_aksjonspunkt_KontrollerRevurderingsBehandlingDto)
   | ({
-      '@type': '5026';
+      kode: '5026';
     } & tjenester_behandling_revurdering_aksjonspunkt_VarselRevurderingDto)
   | ({
-      '@type': '5095';
+      kode: '5095';
     } & tjenester_behandling_risikoklassifisering_VurderFaresignalerDto)
   | ({
-      '@type': '5091';
+      kode: '5091';
     } & tjenester_behandling_svp_BekreftSvangerskapspengerDto)
   | ({
-      '@type': '5092';
+      kode: '5092';
     } & tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto)
   | ({
-      '@type': '5007';
+      kode: '5007';
     } & tjenester_behandling_søknad_aksjonspunkt_SoknadsfristAksjonspunktDto)
   | ({
-      '@type': '5043';
+      kode: '5043';
     } & tjenester_behandling_søknad_aksjonspunkt_VurderSøknadsfristDto)
   | ({
-      '@type': '5029';
+      kode: '5029';
     } & tjenester_behandling_tilbakekreving_aksjonspunkt_KontrollerStorEtterbetalingSøkerDto)
   | ({
-      '@type': '5084';
+      kode: '5084';
     } & tjenester_behandling_tilbakekreving_aksjonspunkt_VurderFeilutbetalingDto)
   | ({
-      '@type': '5074';
+      kode: '5074';
     } & tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDto)
   | ({
-      '@type': '5060';
+      kode: '5060';
     } & tjenester_behandling_uttak_dto_AvklarAleneomsorgVurderingDto)
   | ({
-      '@type': '5086';
+      kode: '5086';
     } & tjenester_behandling_uttak_dto_AvklarAnnenforelderHarRettDto)
   | ({
-      '@type': '5076';
+      kode: '5076';
     } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerOpplysningerOmDødDto)
   | ({
-      '@type': '5077';
+      kode: '5077';
     } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerOpplysningerOmSøknadsfristDto)
   | ({
-      '@type': '5073';
+      kode: '5073';
     } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerRealitetsBehandlingEllerKlageDto)
   | ({
-      '@type': '5071';
+      kode: '5071';
     } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakPerioderDto)
   | ({
-      '@type': '5072';
+      kode: '5072';
     } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakStortingsrepresentantDto)
   | ({
-      '@type': '5103';
+      kode: '5103';
     } & tjenester_behandling_uttak_eøs_EøsUttakDto)
   | ({
-      '@type': '5066';
+      kode: '5066';
     } & tjenester_behandling_uttak_fakta_FaktaUttakDto_GraderingAktivitetUtenBGDto)
   | ({
-      '@type': '5063';
+      kode: '5063';
     } & tjenester_behandling_uttak_fakta_FaktaUttakDto_GraderingUkjentAktivitetDto)
   | ({
-      '@type': '5064';
+      kode: '5064';
     } & tjenester_behandling_uttak_fakta_FaktaUttakDto_IngenPerioderDto)
   | ({
-      '@type': '5065';
+      kode: '5065';
     } & tjenester_behandling_uttak_fakta_FaktaUttakDto_ManueltSattStartdatoDto)
   | ({
-      '@type': '5028';
+      kode: '5028';
     } & tjenester_behandling_vedtak_aksjonspunkt_ForeslaVedtakManueltAksjonspuntDto)
   | ({
-      '@type': '5015';
+      kode: '5015';
     } & tjenester_behandling_vedtak_aksjonspunkt_ForeslåVedtakAksjonspunktDto)
   | ({
-      '@type': '5033';
+      kode: '5033';
     } & tjenester_behandling_vedtak_aksjonspunkt_VurdereAnnenYteleseFørVedtakDto)
   | ({
-      '@type': '5034';
+      kode: '5034';
     } & tjenester_behandling_vedtak_aksjonspunkt_VurdereDokumentFørVedtakDto)
   | ({
-      '@type': '5003';
+      kode: '5003';
     } & tjenester_behandling_vedtak_aksjonspunkt_VurdereInntektsmeldingFørVedtakDto)
   | ({
-      '@type': '5061';
+      kode: '5061';
     } & tjenester_behandling_ytelsefordeling_BekreftFaktaForOmsorgVurderingDto)
   | ({
-      '@type': '5012';
+      kode: '5012';
     } & tjenester_registrering_es_ManuellRegistreringEngangsstonadDto)
   | ({
-      '@type': '5057';
+      kode: '5057';
     } & tjenester_registrering_fp_ManuellRegistreringEndringsøknadDto)
   | ({
-      '@type': '5040';
+      kode: '5040';
     } & tjenester_registrering_fp_ManuellRegistreringForeldrepengerDto)
   | ({
-      '@type': '5096';
+      kode: '5096';
     } & tjenester_registrering_svp_ManuellRegistreringSvangerskapspengerDto)
 ) & {
   begrunnelse?: string;
+  kode: string;
 };
 
 export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak =
@@ -1628,7 +1629,7 @@ export type tjenester_behandling_svp_BekreftTilrettelegging = {
   stillingsprosentStartTilrettelegging?: number;
   tilretteleggingBehovFom: string;
   tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
-  tilretteleggingId: number;
+  tilretteleggingId?: number;
   uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
   velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
 };
@@ -2211,55 +2212,56 @@ export type tjenester_registrering_svp_SvpTilretteleggingVirksomhetDto = {
 
 export type foreldrepenger_behandling_aksjonspunkt_OverstyringAksjonspunktDto = (
   | ({
-      '@type': '6014';
+      kode: '6014';
     } & foreldrepenger_domene_rest_dto_OverstyrBeregningsaktiviteterDto)
   | ({
-      '@type': '6015';
+      kode: '6015';
     } & foreldrepenger_domene_rest_dto_OverstyrBeregningsgrunnlagDto)
   | ({
-      '@type': '6019';
+      kode: '6019';
     } & foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_OverstyringFaktaOmFødselDto)
   | ({
-      '@type': '6016';
+      kode: '6016';
     } & tjenester_behandling_dekningsgrad_AvklarDekningsgradOverstyringDto)
   | ({
-      '@type': '6018';
+      kode: '6018';
     } & tjenester_behandling_uttak_dto_OverstyrOmsorgOgRettDto)
   | ({
-      '@type': '6008';
+      kode: '6008';
     } & tjenester_behandling_uttak_dto_OverstyringUttakDto)
   | ({
-      '@type': '6103';
+      kode: '6103';
     } & tjenester_behandling_uttak_eøs_OverstyringEøsUttakDto)
   | ({
-      '@type': '6065';
+      kode: '6065';
     } & tjenester_behandling_uttak_fakta_OverstyringFaktaUttakDto)
   | ({
-      '@type': '6017';
+      kode: '6017';
     } & tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringForutgåendeMedlemskapsvilkårDto)
   | ({
-      '@type': '6003';
+      kode: '6003';
     } & tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringFødselsvilkåretDto)
   | ({
-      '@type': '6009';
+      kode: '6009';
     } & tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringFødselvilkåretFarMedmorDto)
   | ({
-      '@type': '6005';
+      kode: '6005';
     } & tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringMedlemskapsvilkåretDto)
   | ({
-      '@type': '6011';
+      kode: '6011';
     } & tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringOpptjeningsvilkåretDto)
   | ({
-      '@type': '6002';
+      kode: '6002';
     } & tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSokersOpplysingspliktDto)
   | ({
-      '@type': '6006';
+      kode: '6006';
     } & tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSøknadsfristvilkåretDto)
   | ({
-      '@type': '6045';
+      kode: '6045';
     } & tjenester_behandling_ytelsefordeling_OverstyringAvklarStartdatoForPeriodenDto)
 ) & {
   begrunnelse?: string;
+  kode: string;
 };
 
 export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype =

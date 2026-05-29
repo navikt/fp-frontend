@@ -25,18 +25,10 @@ export type ForhandsvisData = {
   fritekst?: string;
 };
 
-type FormValues = {
-  kode: AksjonspunktKode.UTGÅTT_5025 | AksjonspunktKode.VARSEL_REVURDERING_MANUELL;
-  begrunnelse?: string;
-  sendVarsel?: boolean;
-};
+type FormValues = VarselRevurderingAp;
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
-  kode: validerApKodeOgHentApEnum(
-    aksjonspunkter[0]?.definisjon,
-    AksjonspunktKode.UTGÅTT_5025,
-    AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
-  ),
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0]?.definisjon, AksjonspunktKode.VARSEL_REVURDERING_MANUELL),
   begrunnelse: aksjonspunkter[0]?.begrunnelse ?? '',
   sendVarsel: undefined,
 });
@@ -95,7 +87,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
         void submitCallback({
           ...formVerdier,
           ...modalValues,
-        });
+        } as VarselRevurderingAp);
       }
       setSkalVisePåVentModal(false);
     });

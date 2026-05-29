@@ -107,10 +107,12 @@ const lagModifisertCallback =
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
 
-    const transformerteData = apListe.map<BeregningAp>(apData => ({
-      kode: mapBGKodeTilFpsakKode(apData.kode),
-      ...notEmpty(apData.grunnlag[0], 'Mangler grunnlag i be'),
-    }));
+    const transformerteData = apListe.map<BeregningAp>(apData =>
+      ({
+        kode: mapBGKodeTilFpsakKode(apData.kode),
+        ...notEmpty(apData.grunnlag[0], 'Mangler grunnlag i be'),
+      }) as BeregningAp,
+    );
     return submitCallback(transformerteData);
   };
 

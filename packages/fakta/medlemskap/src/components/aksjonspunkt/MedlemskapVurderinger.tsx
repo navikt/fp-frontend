@@ -6,7 +6,7 @@ import { RhfDatepicker, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import type { AlleKodeverk, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
+import type { AlleKodeverk, Avslagsarsak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { MedlemskapVurdering, SØKER_INNFLYTTET_FOR_SENT_KODE } from '../../types/vurderingMedlemskapForm';
@@ -20,7 +20,7 @@ export type MedlemskapVurderingerFormValues = {
   vurdering?: MedlemskapVurdering;
   opphørFom?: string;
   medlemFom?: string;
-  avslagskode?: string;
+  avslagskode?: Avslagsarsak;
 };
 
 interface Props {

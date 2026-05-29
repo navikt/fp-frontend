@@ -10,12 +10,12 @@ import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
+import type { Aksjonspunkt, Avslagsarsak, BehandlingFpSak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
 import type {
   OverstyringAp,
   OverstyringMedlemskapsvilkaretAp,
-  OverstyringMedlemskapsvilkaretLopendeAp,
   OverstyringMedlemskapvilkaretForutgaendeAp,
+  ProsessAksjonspunkt,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import {
   erAksjonspunktÅpent,
@@ -23,8 +23,15 @@ import {
   usePanelDataContext,
   usePanelOverstyring,
 } from '@navikt/fp-utils';
-
 import styles from './vilkarresultatMedOverstyringForm.module.css';
+
+type OverstyringMedlemskapsvilkaretLopendeAp = {
+  kode: AksjonspunktKode.UTGÅTT_6012;
+  begrunnelse?: string;
+  erVilkårOk?: boolean;
+  avslagskode?: string;
+  avslagDato?: string;
+};
 
 const isOverridden = (aksjonspunkter: Aksjonspunkt[], aksjonspunktCode: string): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktCode);
@@ -35,7 +42,7 @@ const isHidden = (kanOverstyre: boolean, aksjonspunkter: Aksjonspunkt[], aksjons
 type FormValues = {
   erVilkårOk?: boolean;
   vurdering?: MedlemskapVurdering;
-  avslagskode?: string;
+  avslagskode?: Avslagsarsak;
   opphørFom?: string;
   medlemFom?: string;
   begrunnelse?: string;
@@ -73,7 +80,7 @@ const createInitialValues = (
   return {
     ...felles,
     ...VilkarResultPicker.buildInitialValues(aksjonspunkt ? [aksjonspunkt] : [], status, behandlingsresultat),
-  };
+  } as FormValues;
 };
 
 type OverstyringVilkår =
@@ -83,21 +90,47 @@ type OverstyringVilkår =
   | OverstyringMedlemskapvilkaretForutgaendeAp;
 
 const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyringAksjonspunkter): OverstyringVilkår => {
-  const felles = {
-    kode: overstyringApKode,
-    begrunnelse: values.begrunnelse,
-  };
-
   switch (overstyringApKode) {
     case AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET:
-    case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR:
       return {
-        ...felles,
+        kode: AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+        begrunnelse: values.begrunnelse,
         ...MedlemskapVurderinger.transformValues(values),
       };
-    default:
+    case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR:
       return {
-        ...felles,
+        kode: AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+        begrunnelse: values.begrunnelse,
+        ...MedlemskapVurderinger.transformValues(values),
+      };
+    case AksjonspunktKode.UTGÅTT_6012:
+      return {
+        kode: AksjonspunktKode.UTGÅTT_6012,
+        begrunnelse: values.begrunnelse,
+        ...VilkarResultPicker.transformValues(values),
+      };
+    case AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET:
+      return {
+        kode: AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
+        begrunnelse: values.begrunnelse,
+        ...VilkarResultPicker.transformValues(values),
+      };
+    case AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET:
+      return {
+        kode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
+        begrunnelse: values.begrunnelse,
+        ...VilkarResultPicker.transformValues(values),
+      };
+    case AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR:
+      return {
+        kode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR,
+        begrunnelse: values.begrunnelse,
+        ...VilkarResultPicker.transformValues(values),
+      };
+    case AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET:
+      return {
+        kode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
+        begrunnelse: values.begrunnelse,
         ...VilkarResultPicker.transformValues(values),
       };
   }
@@ -122,7 +155,7 @@ export const VilkarresultatMedOverstyringForm = ({
   medlemskapManuellBehandlingResultat,
   status,
 }: Props) => {
-  const { behandling, fagsak, submitCallback, alleMerknaderFraBeslutter } = usePanelDataContext<OverstyringVilkår>();
+  const { behandling, fagsak, submitCallback, alleMerknaderFraBeslutter } = usePanelDataContext<ProsessAksjonspunkt>();
 
   const { erOverstyrt, toggleOverstyring, overstyringApKode, overrideReadOnly, kanOverstyreAccess } =
     usePanelOverstyring<VilkårOverstyringAksjonspunkter>();
@@ -159,7 +192,9 @@ export const VilkarresultatMedOverstyringForm = ({
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values, overstyringApKode))}
+      onSubmit={(values: FormValues) =>
+        submitCallback(transformValues(values, overstyringApKode) as unknown as ProsessAksjonspunkt)
+      }
       setDataOnUnmount={setMellomlagretFormData}
     >
       <HStack gap="space-16">

@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { ArbeidOgInntektsmelding, Arbeidsforhold, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { ArbeidOgInntektsmelding, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, BekreftetPermisjonStatus} from '@navikt/fp-types';
 import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -20,7 +20,7 @@ const maxLength1500 = maxLength(1500);
 
 type FormValues = {
   arbeidsforhold: {
-    permisjonStatus: string;
+    permisjonStatus: BekreftetPermisjonStatus;
   }[];
   begrunnelse: string;
 };
@@ -94,17 +94,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
       )}
       <RhfForm
         formMethods={formMethods}
-        onSubmit={values =>
-          submitCallback({
-            kode: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
-            arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
-              internArbeidsforholdId: sorterteArbeidsforhold[index]?.internArbeidsforholdId,
-              arbeidsgiverIdent: sorterteArbeidsforhold[index]?.arbeidsgiverIdent ?? '',
-              permisjonStatus: a.permisjonStatus,
-            })),
-            begrunnelse: values.begrunnelse,
-          })
-        }
+        onSubmit={values => submitCallback(transformValues(values, sorterteArbeidsforhold))}
       >
         <VStack gap="space-24">
           <ArbeidsforholdFieldArray
@@ -146,3 +136,17 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
     </VStack>
   );
 };
+
+const transformValues = (
+  values: FormValues,
+  sorterteArbeidsforhold: Arbeidsforhold[],
+): VurderArbeidsforholdPermisjonAp =>
+  ({
+    kode: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
+    arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
+      internArbeidsforholdId: sorterteArbeidsforhold[index]?.internArbeidsforholdId,
+      arbeidsgiverIdent: sorterteArbeidsforhold[index]?.arbeidsgiverIdent ?? '',
+      permisjonStatus: a.permisjonStatus,
+    })),
+    begrunnelse: values.begrunnelse,
+  });

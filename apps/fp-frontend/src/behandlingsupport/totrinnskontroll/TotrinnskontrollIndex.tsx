@@ -6,7 +6,6 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { type TotrinnskontrollFormValues, TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
-import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { createLocationForSkjermlenke } from '../../app/paths';
@@ -19,7 +18,15 @@ import { BeslutterModalIndex } from './BeslutterModalIndex';
 type Values = {
   fatterVedtakAksjonspunktDto: {
     '@type': string;
-  } & FatterVedtakAp;
+    kode: string;
+    begrunnelse: undefined;
+    aksjonspunktGodkjenningDtos: {
+      aksjonspunktKode: string;
+      godkjent: boolean;
+      begrunnelse: string | undefined;
+      arsaker: string[];
+    }[];
+  };
   erAlleAksjonspunktGodkjent: boolean;
 };
 
@@ -77,7 +84,9 @@ export const TotrinnskontrollIndex = ({
     const params = {
       behandlingUuid: valgtBehandling.uuid,
       behandlingVersjon: valgtBehandling.versjon,
-      bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
+      bekreftedeAksjonspunktDtoer: [
+        totrinnskontrollData.fatterVedtakAksjonspunktDto as BekreftedeTotrinnsaksjonspunkter['bekreftedeAksjonspunktDtoer'][number],
+      ],
     };
     setErAlleAksjonspunktGodkjent(totrinnskontrollData.erAlleAksjonspunktGodkjent);
     setVisBeslutterModal(true);

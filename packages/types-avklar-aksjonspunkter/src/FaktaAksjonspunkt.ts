@@ -1,12 +1,3 @@
-import type {
-  BeregningFaktaAP,
-  BeregningOverstyringAP,
-  OverstyrBeregningsaktiviteterAP,
-} from '@navikt/ft-fakta-beregning';
-import type {
-  FordelBeregningsgrunnlagAP,
-  VurderRefusjonBeregningsgrunnlagAP,
-} from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import type { AvklartFaktaFeilutbetalingAp } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 
 import type { AvklarAktivitetsPerioderAp } from './fakta/AvklarAktivitetsPerioderAp';
@@ -39,6 +30,7 @@ import type { VurderForutgaendeMedlemskapAp } from './fakta/VurderForutgaendeMed
 import type { VurderMedlemskapAp } from './fakta/VurderMedlemskapAp';
 import type { VurderOmsorgsovertakelseVilkåretAp } from './fakta/VurderOmsorgsovertakelseVilkåretAp';
 
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents, @typescript-eslint/no-duplicate-type-constituents */
 export type FaktaAksjonspunkt =
   | AvklarVergeAp
   | MerkOpptjeningUtlandAp
@@ -46,6 +38,7 @@ export type FaktaAksjonspunkt =
   | AvklarAktivitetsPerioderAp
   | BekreftAleneomsorgVurderingAp
   | ManuellKontrollBesteberegningAP
+  | KontrollerBesteberegningAP
   | VurderOmsorgsovertakelseVilkåretAp
   | VurderMedlemskapAp
   | BekreftSvangerskapspengerAp
@@ -62,12 +55,6 @@ export type FaktaAksjonspunkt =
   | AvklarAnnenforelderHarRettAp
   | BekreftUttaksperioderAp
   | OverstyringAvklarStartdatoForPeriodenAp
-  | KontrollerBesteberegningAP
-  | OverstyrBeregningsaktiviteterAP
-  | BeregningFaktaAP
-  | BeregningOverstyringAP
-  | FordelBeregningsgrunnlagAP
-  | VurderRefusjonBeregningsgrunnlagAP
   | VurderArbeidsforholdInntektsmeldingAp
   | VurderDokumentasjonAp
   | VurderArbeidsforholdPermisjonAp
@@ -76,3 +63,4 @@ export type FaktaAksjonspunkt =
   | BekreftAnnenpartsUttakEøsAp
   | AvklarDekningsgradAp
   | AvklartFaktaFeilutbetalingAp;
+/* eslint-enable @typescript-eslint/no-redundant-type-constituents, @typescript-eslint/no-duplicate-type-constituents */

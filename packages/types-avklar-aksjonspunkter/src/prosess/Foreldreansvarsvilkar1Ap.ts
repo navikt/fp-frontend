@@ -1,8 +1,6 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-export type Foreldreansvarsvilkar1Ap = {
-  erVilkårOk: boolean;
-  avslagskode?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.UTGÅTT_5013>;
+// UTGÅTT
+export type Foreldreansvarsvilkar1Ap = AksjonspunktTilBekreftelse<AksjonspunktKode.UTGÅTT_5013>;

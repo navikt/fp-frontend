@@ -96,7 +96,8 @@ export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props)
   );
 };
 
-const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
-  kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-  ...values,
-});
+const transformValues = (values: FormValues): MerkOpptjeningUtlandAp =>
+  ({
+    kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+    ...values,
+  }) as MerkOpptjeningUtlandAp;

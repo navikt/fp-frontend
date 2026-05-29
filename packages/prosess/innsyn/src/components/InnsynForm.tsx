@@ -35,7 +35,7 @@ const getDefaultValues = (
   mottattDato: innsyn?.innsynMottattDato,
   innsynResultatType: innsyn?.innsynResultatType,
   fristDato: fristBehandlingPåVent ?? dayjs().add(3, 'days').format(ISO_DATE_FORMAT),
-  sattPaVent: aksjonspunkter[0]?.status === 'OPPR' ? undefined : !!fristBehandlingPåVent,
+  sattPåVent: aksjonspunkter[0]?.status === 'OPPR' ? undefined : !!fristBehandlingPåVent,
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
   ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter ?? []),
 });
@@ -53,7 +53,7 @@ const transformValues = (values: InnsynFormValues, documents: Dokument[]): Vurde
   mottattDato: notEmpty(values.mottattDato),
   innsynResultatType: notEmpty(values.innsynResultatType),
   fristDato: values.fristDato,
-  sattPaVent: values.sattPaVent,
+  sattPåVent: values.sattPåVent,
   begrunnelse: values.begrunnelse,
 });
 
@@ -101,7 +101,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
   const isApOpen = aksjonspunkterForPanel[0]?.status === 'OPPR';
 
   const innsynResultatTypeKode = formMethods.watch('innsynResultatType');
-  const sattPaVent = formMethods.watch('sattPaVent');
+  const sattPaVent = formMethods.watch('sattPåVent');
 
   return (
     <RhfForm
@@ -153,7 +153,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
             <ArrowBox alignOffset={innsynResultatTypeKode === 'INNV' ? 28 : 176}>
               <VStack gap="space-16">
                 <RhfRadioGroup
-                  name="sattPaVent"
+                  name="sattPåVent"
                   control={formMethods.control}
                   legend={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
                   validate={[required]}

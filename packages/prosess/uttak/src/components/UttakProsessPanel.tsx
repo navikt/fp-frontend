@@ -139,23 +139,21 @@ const transformValues = (perioder: PeriodeSoker[], aksjonspunkter: Aksjonspunkt[
         .filter(a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER)
         .map(ap => ap.definisjon);
 
-  return apKoder.map(ap => ({
-    kode: validerApKodeOgHentApEnum(
-      ap,
-      AksjonspunktKode.FASTSETT_UTTAKPERIODER,
-      AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
-      AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT,
-      AksjonspunktKode.UTGÅTT_5069,
-      AksjonspunktKode.UTGÅTT_5067,
-      AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
-      AksjonspunktKode.UTGÅTT_5075,
-      AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD,
-      AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
-      AksjonspunktKode.UTGÅTT_5078,
-      AksjonspunktKode.UTGÅTT_5079,
-    ),
-    perioder,
-  }));
+  return apKoder.map(
+    ap =>
+      ({
+        kode: validerApKodeOgHentApEnum(
+          ap,
+          AksjonspunktKode.FASTSETT_UTTAKPERIODER,
+          AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+          AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT,
+          AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
+          AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD,
+          AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
+        ),
+        perioder,
+      }) as UttakAp,
+  );
 };
 
 interface Props {

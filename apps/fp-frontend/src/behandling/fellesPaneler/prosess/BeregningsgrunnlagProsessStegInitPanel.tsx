@@ -68,28 +68,27 @@ const lagModifisertCallback =
         return {
           ...felles,
           inntektPrAndelList: grunnlag.inntektPrAndelList,
-          inntektFrilanser: grunnlag.inntektFrilanser,
-        };
+          inntektFrilanser: grunnlag.inntektFrilanser ?? undefined,
+        } as BeregningsgrunnlagAp;
       }
       if ('erVarigEndretNaering' in grunnlag) {
         return {
           ...felles,
           erVarigEndretNaering: grunnlag.erVarigEndretNaering,
-          erVarigEndret: grunnlag.erVarigEndret,
-          bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
-        };
+          bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag ?? undefined,
+        } as BeregningsgrunnlagAp;
       }
       if ('fastsatteTidsbegrensedePerioder' in grunnlag) {
         return {
           ...felles,
           fastsatteTidsbegrensedePerioder: grunnlag.fastsatteTidsbegrensedePerioder,
-          frilansInntekt: grunnlag.frilansInntekt,
-        };
+          frilansInntekt: grunnlag.frilansInntekt ?? undefined,
+        } as BeregningsgrunnlagAp;
       }
       return {
         ...felles,
-        bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
-      };
+        bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag ?? undefined,
+      } as BeregningsgrunnlagAp;
     });
 
     return submitCallback(transformerteData);

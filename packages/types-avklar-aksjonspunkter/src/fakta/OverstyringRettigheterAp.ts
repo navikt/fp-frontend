@@ -1,8 +1,5 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type Rettighetstype } from '@navikt/fp-types';
+import type { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-export type OverstyringRettigheterAp = {
-  rettighetstype: Rettighetstype;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG>;
+export type OverstyringRettigheterAp = AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG>;
