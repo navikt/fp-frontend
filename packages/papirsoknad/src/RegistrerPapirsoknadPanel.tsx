@@ -29,7 +29,11 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-type AllFormValues = EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues;
+type AllFormValues =
+  | EngangsstønadValues
+  | ForeldrepengerValues
+  | ForeldrepengerEndringssøknadValues
+  | SvangerskapsValues;
 
 interface Props {
   fagsak: Fagsak;
@@ -59,7 +63,11 @@ export const RegistrerPapirsoknadPanel = ({
     if (!mellomlagretData) {
       return undefined;
     }
-    return new SoknadData(mellomlagretData.fagsakYtelseType, mellomlagretData.familieHendelseType, mellomlagretData.foreldreType ?? 'MOR');
+    return new SoknadData(
+      mellomlagretData.fagsakYtelseType,
+      mellomlagretData.familieHendelseType,
+      mellomlagretData.foreldreType ?? 'MOR',
+    );
   });
 
   const lagreFullstendigSøknad = (
@@ -83,17 +91,18 @@ export const RegistrerPapirsoknadPanel = ({
     return Promise.resolve();
   };
 
-  const mellomlagreWrapped = onMellomlagre && soknadData
-    ? (formValues: Record<string, unknown>) => {
-        const payload: PapirsøknadMellomlagring = {
-          ...formValues,
-          fagsakYtelseType: soknadData.fagsakYtelseType,
-          familieHendelseType: soknadData.familieHendelseType,
-          foreldreType: soknadData.foreldreType,
-        };
-        onMellomlagre(payload);
-      }
-    : undefined;
+  const mellomlagreWrapped =
+    onMellomlagre && soknadData
+      ? (formValues: Record<string, unknown>) => {
+          const payload: PapirsøknadMellomlagring = {
+            ...formValues,
+            fagsakYtelseType: soknadData.fagsakYtelseType,
+            familieHendelseType: soknadData.familieHendelseType,
+            foreldreType: soknadData.foreldreType,
+          };
+          onMellomlagre(payload);
+        }
+      : undefined;
 
   return (
     <RawIntlProvider value={intl}>

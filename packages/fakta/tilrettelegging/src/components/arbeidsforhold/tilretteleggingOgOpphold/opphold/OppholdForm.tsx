@@ -6,7 +6,7 @@ import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
-import type { SvpAvklartOppholdPeriode,SvpTilretteleggingDatoDto } from '@navikt/fp-types';
+import type { SvpAvklartOppholdPeriode, SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 
 type FormValues = Record<
   string,

@@ -7,7 +7,7 @@ import { RhfDatepicker, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-h
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
-import type { SvpArbeidsforholdDto, SvpAvklartOppholdPeriode,SvpTilretteleggingDatoDto } from '@navikt/fp-types';
+import type { SvpArbeidsforholdDto, SvpAvklartOppholdPeriode, SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
