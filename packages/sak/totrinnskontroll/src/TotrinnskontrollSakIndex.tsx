@@ -12,8 +12,6 @@ import type {
   SkjermlenkeTypeFpTilbake,
   VurderÅrsak,
 } from '@navikt/fp-types';
-import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-
 import { type AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
 import { type FormValues, TotrinnskontrollBeslutterForm } from './components/TotrinnskontrollBeslutterForm';
 import { TotrinnskontrollSaksbehandlerPanel } from './components/TotrinnskontrollSaksbehandlerPanel';
@@ -56,8 +54,15 @@ const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverk
 
 type ApData = {
   fatterVedtakAksjonspunktDto: {
-    '@type': AksjonspunktKode.FATTER_VEDTAK | '5005';
-  } & FatterVedtakAp;
+    kode: AksjonspunktKode.FATTER_VEDTAK | '5005';
+    begrunnelse: undefined;
+    aksjonspunktGodkjenningDtos: {
+      aksjonspunktKode: string;
+      godkjent: boolean;
+      begrunnelse: string | undefined;
+      arsaker: VurderÅrsak[];
+    }[];
+  };
   erAlleAksjonspunktGodkjent: boolean;
 };
 

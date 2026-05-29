@@ -5,7 +5,7 @@ import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { sortPeriodsByFom } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OvestyringKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -139,14 +139,14 @@ const transformValues = (søkersPerioder: PeriodeSoker[], aksjonspunkter: Aksjon
   if (skalSendeInnOverstyringAp) {
     return [
       {
-        kode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+        kode: OvestyringKode.OVERSTYRING_AV_UTTAKPERIODER,
         perioder,
       },
     ];
   }
 
   const apKoder = aksjonspunkter
-    .filter(a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER)
+    .filter(a => a.definisjon !== OvestyringKode.OVERSTYRING_AV_UTTAKPERIODER)
     .map(ap => ap.definisjon);
 
   return apKoder.map(ap => ({

@@ -1,13 +1,5 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import type { AksjonspunktTilBekreftelse } from '../../AksjonspunktTilBekreftelse';
 
-export type SjekkManglendeFødselAp = {
-  termindato: string | null;
-  barn:
-    | {
-        fødselsdato: string;
-        dødsdato?: string;
-      }[]
-    | null;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL>;
+export type SjekkManglendeFødselAp = AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL>;

@@ -137,7 +137,7 @@ const transformValues = (values: FormValues): SjekkTerminbekreftelseAp => ({
   kode: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
   utstedtdato: notEmpty(values.utstedtdato, 'utstedtdato må være satt ved submit'),
   antallBarn: notEmpty(values.antallBarn, 'antallBarn må være satt ved submit'),
-  ...Termindato.transformValues(values),
+  termindato: notEmpty(values.termindato, 'termindato må være satt ved submit'),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
 

@@ -4216,24 +4216,10 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-fakta-beregning": "npm:14.0.11"
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "npm:16.0.11"
-    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "npm:10.0.11"
-    "@navikt/ft-form-hooks": "npm:12.3.1"
-    "@navikt/ft-form-validators": "npm:6.0.9"
-    "@navikt/ft-plattform-komponenter": "npm:12.0.10"
-    "@navikt/ft-prosess-beregningsgrunnlag": "npm:13.0.11"
-    "@navikt/ft-prosess-tilbakekreving-vedtak": "npm:9.0.11"
-    "@navikt/ft-types": "npm:6.1.8"
-    "@navikt/ft-ui-komponenter": "npm:8.0.11"
-    "@navikt/ft-utils": "npm:5.0.8"
+    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "npm:10.0.10"
+    "@navikt/ft-prosess-tilbakekreving-vedtak": "npm:9.0.10"
     "@types/react": "npm:19.2.14"
-    dayjs: "npm:1.11.20"
     eslint: "npm:10.3.0"
-    react: "npm:19.2.7"
-    react-dom: "npm:19.2.7"
-    react-hook-form: "npm:7.75.0"
-    react-intl: "npm:10.1.6"
     typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
@@ -4381,6 +4367,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:10.0.10":
+  version: 10.0.10
+  resolution: "@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:10.0.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-tilbakekreving-feilutbetaling%2F10.0.10%2Fc0024f9598ce719708509865c0e3e2098d6931c6"
+  peerDependencies:
+    "@navikt/aksel-icons": 8.x
+    "@navikt/ds-css": 8.x
+    "@navikt/ds-react": 8.x
+    "@navikt/ft-form-hooks": 12.x
+    "@navikt/ft-form-validators": 6.x
+    "@navikt/ft-kodeverk": "workspace:^"
+    "@navikt/ft-types": 6.x
+    "@navikt/ft-ui-komponenter": 8.x
+    "@navikt/ft-utils": 5.x
+    dayjs: 1.x
+    react: 19.x
+    react-dom: 19.x
+    react-hook-form: 7.x
+    react-intl: 10.x
+  checksum: 10/76be5b3b072c7f18c1275909353eefde8cb3cfd35507a16184a786ac44dddb9a9233457e88979d95c8df23c7d00274be07ece145eaf1caf1882591d89ed7d1c8
+  languageName: node
+  linkType: hard
+
 "@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:10.0.11":
   version: 10.0.11
   resolution: "@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:10.0.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-tilbakekreving-feilutbetaling%2F10.0.11%2F8dd8c97abd90334849990012ad39d8f8bfc59cff"
@@ -4512,6 +4520,27 @@ __metadata:
     react-hook-form: 7.x
     react-intl: 10.x
   checksum: 10/de964e76bb07b1789b0a8227554bfbca41a84690af9fa93d2161f12e8820b6123afa34b6faebdfc2a879ee4735ece5ab0479c3807f9f93bdad06fae5b0ea033e
+  languageName: node
+  linkType: hard
+
+"@navikt/ft-prosess-tilbakekreving-vedtak@npm:9.0.10":
+  version: 9.0.10
+  resolution: "@navikt/ft-prosess-tilbakekreving-vedtak@npm:9.0.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving-vedtak%2F9.0.10%2Fab08964fac8beda22c3c9c576561f0166c8b5bb6"
+  peerDependencies:
+    "@navikt/aksel-icons": 8.x
+    "@navikt/ds-css": 8.x
+    "@navikt/ds-react": 8.x
+    "@navikt/ft-form-hooks": 12.x
+    "@navikt/ft-form-validators": 6.x
+    "@navikt/ft-types": 6.x
+    "@navikt/ft-ui-komponenter": 8.x
+    "@navikt/ft-utils": 5.x
+    dayjs: 1.x
+    react: 19.x
+    react-dom: 19.x
+    react-hook-form: 7.x
+    react-intl: 10.x
+  checksum: 10/60b04c15ee57a53e2782487cad1dc77fc224b285568017c14af712fe33b1424cebaf64d0de12f4c2c557387dfa1874b209d196e2476de1221402c5e3edf29f5f
   languageName: node
   linkType: hard
 

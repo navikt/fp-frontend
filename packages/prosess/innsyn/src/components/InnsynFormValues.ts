@@ -5,6 +5,6 @@ export type InnsynFormValues = {
   mottattDato?: string;
   innsynResultatType?: InnsynResultatType;
   fristDato?: string;
-  sattPaVent?: boolean;
+  sattPåVent?: boolean;
   [key: `dokument_${string}`]: boolean;
 } & ProsessStegBegrunnelseTextFieldFormValues;

@@ -1,9 +1,6 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-export type OverstyringMedlemskapsvilkaretLopendeAp = {
-  erVilkårOk?: boolean;
-  avslagskode?: string;
-  avslagDato?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.UTGÅTT_6012>;
+// UTGÅTT
+export type OverstyringMedlemskapsvilkaretLopendeAp = AksjonspunktTilBekreftelse<AksjonspunktKode.UTGÅTT_6012>;

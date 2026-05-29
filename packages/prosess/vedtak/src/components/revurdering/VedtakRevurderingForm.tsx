@@ -24,14 +24,13 @@ import {
 import type {
   ForeslaVedtakAp,
   ForeslaVedtakManueltAp,
-  KontrollAvManueltOpprettetRevurderingsbehandlingAp,
   KontrollerRevurderingsBehandlingAp,
+  ProsessAksjonspunkt,
   VurdereAnnenYtelseForVedtakAp,
   VurdereDokumentForVedtakAp,
   VurdereInntektsmeldingKlageForVedtakAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { isAvslag, isInnvilget, isOpphor, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
-
 import { VedtakResultType } from '../../kodeverk/vedtakResultType';
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
@@ -42,6 +41,12 @@ import { buildInitialValues } from '../forstegang/VedtakForm';
 import { VedtakAvslagArsakOgBegrunnelsePanel } from './VedtakAvslagArsakOgBegrunnelsePanel';
 import { VedtakInnvilgetRevurderingPanel } from './VedtakInnvilgetRevurderingPanel';
 import { VedtakOpphorRevurderingPanel } from './VedtakOpphorRevurderingPanel';
+
+type KontrollAvManueltOpprettetRevurderingsbehandlingAp = {
+  kode: AksjonspunktKode.UTGÅTT_5056;
+  begrunnelse?: string;
+  skalBrukeOverstyrendeFritekstBrev?: boolean;
+};
 
 type RevurderingVedtakAksjonspunkter =
   | ForeslaVedtakAp
@@ -193,7 +198,7 @@ export const VedtakRevurderingForm = ({
   const intl = useIntl();
 
   const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly, aksjonspunkterForPanel } =
-    usePanelDataContext<RevurderingVedtakAksjonspunkter[]>();
+    usePanelDataContext<ProsessAksjonspunkt[]>();
 
   const { harRedigertBrev } = useVedtakEditeringContext();
 
@@ -236,7 +241,9 @@ export const VedtakRevurderingForm = ({
     <RhfForm
       formMethods={formMethods}
       onSubmit={(values: VedtakFormValues) =>
-        submitCallback(transformValues(values, aksjonspunkterForPanel, harValgtÅRedigereVedtaksbrev))
+        submitCallback(
+          transformValues(values, aksjonspunkterForPanel, harValgtÅRedigereVedtaksbrev) as unknown as ProsessAksjonspunkt[],
+        )
       }
       setDataOnUnmount={setMellomlagretFormData}
     >

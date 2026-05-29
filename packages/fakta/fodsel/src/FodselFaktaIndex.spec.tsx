@@ -195,7 +195,7 @@ describe('FodselFaktaIndex', () => {
       await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
       expect(lagre).toHaveBeenNthCalledWith(1, {
         kode: '5027',
-        barn: null,
+        barn: undefined,
         termindato: '2025-05-06',
         begrunnelse: 'Dette er en begrunnelse',
       });

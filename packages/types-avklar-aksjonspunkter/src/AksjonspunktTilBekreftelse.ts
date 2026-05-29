@@ -1,7 +1,6 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { AksjonspunktKodeTilbakekreving } from '@navikt/fp-types';
+import type { BekreftetAksjonspunktDto, OverstyringAksjonspunktDto } from '@navikt/fp-types';
 
-export type AksjonspunktTilBekreftelse<T extends AksjonspunktKode | AksjonspunktKodeTilbakekreving> = {
-  kode: T;
-  begrunnelse?: string;
-};
+export type AksjonspunktTilBekreftelse<K extends string> = Extract<
+  BekreftetAksjonspunktDto | OverstyringAksjonspunktDto,
+  { kode: `${K}` }
+>;

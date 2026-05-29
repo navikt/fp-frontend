@@ -21,14 +21,19 @@ export type { OverstyringDekningsgradAp } from './src/fakta/OverstyringDekningsg
 export type { OverstyringRettigheterAp } from './src/fakta/OverstyringRettigheterAp';
 export type { AvklarDekningsgradAp } from './src/fakta/AvklarDekningsgradAp';
 export type { VurderOmsorgsovertakelseVilkåretAp } from './src/fakta/VurderOmsorgsovertakelseVilkåretAp';
-export type { AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';
+export type { AvklarAktivitetsPerioderAp } from './src/fakta/AvklarAktivitetsPerioderAp';
 export type { VurderDokumentasjonAp } from './src/fakta/VurderDokumentasjonAp';
 export type { VurderMedlemskapAp } from './src/fakta/VurderMedlemskapAp';
 export type { VurderForutgaendeMedlemskapAp } from './src/fakta/VurderForutgaendeMedlemskapAp';
 export type { BekreftAnnenpartsUttakEøsAp } from './src/fakta/BekreftAnnenpartsUttakEøsAp';
+export type { VurderArbeidsforholdInntektsmeldingAp } from './src/fakta/VurderArbeidsforholdInntektsmeldingAp';
 export type { BeregningAp } from './src/fakta/BeregningAp';
+<<<<<<< HEAD
 export type { BesteberegningAP, ManuellKontrollBesteberegningAP } from './src/fakta/KontrollerBesteberegningAP';
 export type { ManuellKontrollAapKombinertAtflAP } from './src/fakta/ManuellKontrollAapKombinertAtflAP';
+=======
+export type { BesteberegningAP, ManuellKontrollBesteberegningAP, KontrollerBesteberegningAP } from './src/fakta/KontrollerBesteberegningAP';
+>>>>>>> b82cb0267 (refactor: erstatt manuelle aksjonspunkt-typer med genererte DTO-er)
 
 export type { ProsessAksjonspunkt } from './src/ProsessAksjonspunkt';
 export type { BekreftSvangerskapspengervilkarAp } from './src/prosess/BekreftSvangerskapspengervilkarAp';

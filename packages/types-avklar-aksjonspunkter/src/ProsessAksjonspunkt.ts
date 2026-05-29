@@ -29,6 +29,7 @@ import type { VurderInnsynAp } from './prosess/VurderInnsynAp';
 import type { VurderSoknadsfristAp } from './prosess/VurderSoknadsfristAp';
 import type { VurderTilbaketrekkAp } from './prosess/VurderTilbaketrekkAp';
 
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents, @typescript-eslint/no-duplicate-type-constituents */
 export type ProsessAksjonspunkt =
   | BekreftSvangerskapspengervilkarAp
   | SoknadsfristAp
@@ -51,11 +52,12 @@ export type ProsessAksjonspunkt =
   | VurderTilbaketrekkAp
   | OverstyringAp
   | KontrollerRevurderingsBehandlingAp
-  | VarselRevurderingAp
   | KontrollAvManueltOpprettetRevurderingsbehandlingAp
+  | VarselRevurderingAp
   | OverstyringMedlemskapsvilkaretLopendeAp
   | OverstyringMedlemskapvilkaretForutgaendeAp
   | VurdereAnnenYtelseForVedtakAp
   | UttakAp
   | VurdereDokumentForVedtakAp
   | VurdereInntektsmeldingKlageForVedtakAp;
+/* eslint-enable @typescript-eslint/no-redundant-type-constituents, @typescript-eslint/no-duplicate-type-constituents */

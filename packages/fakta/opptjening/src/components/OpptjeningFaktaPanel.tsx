@@ -14,11 +14,13 @@ import type {
   Opptjening,
   OpptjeningAktivitet,
 } from '@navikt/fp-types';
-import type { AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type FormValues, ValgtAktivitetForm } from './aktivitet/ValgtAktivitetForm';
 import { OpptjeningTidslinje } from './tidslinje/OpptjeningTidslinje';
+
+type OpptjeningAktivitetAp = NonNullable<AvklarAktivitetsPerioderAp['opptjeningsaktiviteter']>[number];
 
 const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]): ReactElement[] => {
   const texts = new Array<ReactElement>();
