@@ -10,7 +10,7 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { ArbeidsforholdFodselOgTilrettelegging, BehandlingFpSak, SvpTilrettelegging } from '@navikt/fp-types';
+import type { BehandlingFpSak, SvpArbeidsforholdDto, SvpTilrettelegging } from '@navikt/fp-types';
 
 import { SvangerskapVilkarProsessIndex } from './SvangerskapVilkarProsessIndex';
 
@@ -66,7 +66,7 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
           velferdspermisjoner: [],
           arbeidsforholdetErSplittet: false,
           skalVurdereSplittAvArbeidsforholdet: false,
-        } satisfies ArbeidsforholdFodselOgTilrettelegging,
+        } satisfies SvpArbeidsforholdDto,
       ],
       saksbehandlet: false,
     } satisfies SvpTilrettelegging,

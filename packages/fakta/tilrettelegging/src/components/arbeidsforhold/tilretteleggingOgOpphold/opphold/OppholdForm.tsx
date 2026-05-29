@@ -6,7 +6,7 @@ import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
-import type { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
+import type { SvpAvklartOppholdPeriode,SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 
 type FormValues = Record<
   string,
@@ -19,7 +19,7 @@ const validerAtDatoErUnik =
   (
     intl: IntlShape,
     oppholdPerioder: SvpAvklartOppholdPeriode[],
-    alleTilrettelegginger: ArbeidsforholdTilretteleggingDato[],
+    alleTilrettelegginger: SvpTilretteleggingDatoDto[],
     opphold: SvpAvklartOppholdPeriode,
   ) =>
   (dato: string) => {
@@ -37,7 +37,7 @@ const validerTomEtterFom =
     dayjs(tom).isBefore(getValues(`${index}.fom`)) ? intl.formatMessage({ id: 'OppholdForm.TomForFom' }) : null;
 
 const validerAtPeriodeErGyldig =
-  (intl: IntlShape, tilrettelegginger: ArbeidsforholdTilretteleggingDato[], termindato: string) => (dato?: string) => {
+  (intl: IntlShape, tilrettelegginger: SvpTilretteleggingDatoDto[], termindato: string) => (dato?: string) => {
     if (dayjs(dato).isAfter(dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day'))) {
       return intl.formatMessage({ id: 'OppholdForm.EtterTermindato' });
     }
@@ -79,7 +79,7 @@ interface Props {
   disabled: boolean;
   oppdaterOpphold: (values: SvpAvklartOppholdPeriode) => void;
   avbrytEditering: () => void;
-  alleTilrettelegginger: ArbeidsforholdTilretteleggingDato[];
+  alleTilrettelegginger: SvpTilretteleggingDatoDto[];
   alleOpphold: SvpAvklartOppholdPeriode[];
   termindato: string;
 }

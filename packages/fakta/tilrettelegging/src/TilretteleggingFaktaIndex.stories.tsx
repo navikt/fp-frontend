@@ -13,8 +13,8 @@ import {
 } from '@navikt/fp-storybook-utils';
 import {
   type ArbeidOgInntektsmelding,
-  type ArbeidsforholdFodselOgTilrettelegging,
   type ArbeidsgiverOpplysningerPerId,
+  type SvpArbeidsforholdDto,
   type SvpTilrettelegging,
 } from '@navikt/fp-types';
 
@@ -182,7 +182,7 @@ const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
       arbeidsforholdetErSplittet: false,
       skalVurdereSplittAvArbeidsforholdet: false,
     },
-  ] satisfies ArbeidsforholdFodselOgTilrettelegging[],
+  ] satisfies SvpArbeidsforholdDto[],
 };
 
 const DEFAULT_ARBEID_OG_INNTEKT = {

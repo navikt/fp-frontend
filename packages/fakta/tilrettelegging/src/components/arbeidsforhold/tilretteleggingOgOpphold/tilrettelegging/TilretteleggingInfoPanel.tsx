@@ -5,14 +5,14 @@ import { BodyShort, Detail, HStack } from '@navikt/ds-react';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { type ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
+import { type SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 
 const finnTekst = (intl: IntlShape, termindato: string, fom?: string): string => {
   const dager = dayjs(termindato).diff(fom, 'days');
   return intl.formatMessage({ id: 'TilretteleggingInfoPanel.Dager' }, { dager });
 };
 
-const finnProsentSvangerskapspenger = (tilrettelegging: ArbeidsforholdTilretteleggingDato): number => {
+const finnProsentSvangerskapspenger = (tilrettelegging: SvpTilretteleggingDatoDto): number => {
   if (tilrettelegging.type === 'HEL_TILRETTELEGGING') {
     return 0;
   }
@@ -22,7 +22,7 @@ const finnProsentSvangerskapspenger = (tilrettelegging: ArbeidsforholdTilrettele
   return tilrettelegging.overstyrtUtbetalingsgrad ?? 0;
 };
 
-const finnProsentArbeid = (tilrettelegging: ArbeidsforholdTilretteleggingDato): number => {
+const finnProsentArbeid = (tilrettelegging: SvpTilretteleggingDatoDto): number => {
   if (tilrettelegging.type === 'HEL_TILRETTELEGGING') {
     return 100;
   }
@@ -33,7 +33,7 @@ const finnProsentArbeid = (tilrettelegging: ArbeidsforholdTilretteleggingDato): 
 };
 
 interface Props {
-  tilrettelegging: ArbeidsforholdTilretteleggingDato;
+  tilrettelegging: SvpTilretteleggingDatoDto;
   termindato: string;
   erTomDatoTreUkerFørTermin: boolean;
   stillingsprosentArbeidsforhold: number;

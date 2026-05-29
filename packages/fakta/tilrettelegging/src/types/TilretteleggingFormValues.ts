@@ -1,7 +1,7 @@
-import type { ArbeidsforholdFodselOgTilrettelegging } from '@navikt/fp-types';
+import type { SvpArbeidsforholdDto } from '@navikt/fp-types';
 
 export type TilretteleggingFormValues = {
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
+  arbeidsforhold: SvpArbeidsforholdDto[];
   termindato: string;
   fødselsdato: string;
   begrunnelse: string;

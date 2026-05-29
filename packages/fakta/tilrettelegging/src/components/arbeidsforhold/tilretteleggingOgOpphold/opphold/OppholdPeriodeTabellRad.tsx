@@ -6,7 +6,7 @@ import { XMarkIcon } from '@navikt/aksel-icons';
 import { Button, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import type { ArbeidsforholdFodselOgTilrettelegging, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
+import type { SvpArbeidsforholdDto, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
 import { OppholdForm } from './OppholdForm';
@@ -22,7 +22,7 @@ interface Props {
   openRad: boolean;
   fjernOpphold: (opphold?: SvpAvklartOppholdPeriode) => void;
   setLeggTilKnapperDisablet: React.Dispatch<React.SetStateAction<boolean>>;
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
+  arbeidsforhold: SvpArbeidsforholdDto;
   termindato: string;
 }
 

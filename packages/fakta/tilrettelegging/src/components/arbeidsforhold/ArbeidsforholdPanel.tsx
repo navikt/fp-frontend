@@ -9,7 +9,7 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import minMax from 'dayjs/plugin/minMax';
 
-import type { ArbeidsforholdFodselOgTilrettelegging } from '@navikt/fp-types';
+import type { SvpArbeidsforholdDto } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
@@ -43,7 +43,7 @@ const validerTidligereEnn =
   };
 
 interface Props {
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
+  arbeidsforhold: SvpArbeidsforholdDto;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   visInfoAlert: boolean;
