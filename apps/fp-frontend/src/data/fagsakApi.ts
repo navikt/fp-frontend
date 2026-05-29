@@ -20,7 +20,7 @@ import type {
   NavAnsatt,
   SakFullDtoFpTilbake,
 } from '@navikt/fp-types';
-import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { BekreftedeAksjonspunkterDto } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 type BehandlendeEnheter = {
   enhetId: string;
@@ -37,14 +37,6 @@ export type InitDataFpSak = {
 export type InitDataFpTilbake = {
   links: ApiLink[];
   sakLinks: ApiLink[];
-};
-
-export type BekreftedeTotrinnsaksjonspunkter = {
-  behandlingUuid: string;
-  behandlingVersjon: number;
-  bekreftedeAksjonspunktDtoer: ({
-    '@type': string;
-  } & FatterVedtakAp)[];
 };
 
 export type SubmitMessageParams = {
@@ -262,7 +254,7 @@ const getForhåndsvisMelding = (links?: ApiLink[]) => (params: ForhåndsvisMeldi
     })
     .blob();
 
-const getLagreTotrinnsaksjonspunkt = (links?: ApiLink[]) => (params: BekreftedeTotrinnsaksjonspunkter) =>
+const getLagreTotrinnsaksjonspunkt = (links?: ApiLink[]) => (params: BekreftedeAksjonspunkterDto) =>
   kyExtended
     .post(getUrlFromRel('SAVE_TOTRINNSAKSJONSPUNKT', links), {
       json: params,

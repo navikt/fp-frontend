@@ -12,9 +12,15 @@ import dayjs from 'dayjs';
 import { BrevRedigeringModal } from '@navikt/fp-brev-editor';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
-import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BrevOverstyring, DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-types';
-import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  Aksjonspunkt,
+  BrevOverstyring,
+  DokumentMalType,
+  KodeverkMedNavn,
+  RevurderingVarslingÅrsak,
+  VenteArsakType,
+} from '@navikt/fp-types';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);
@@ -50,7 +56,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
   const intl = useIntl();
 
   const { isReadOnly, alleKodeverk, behandling, submitCallback, aksjonspunkterForPanel } =
-    usePanelDataContext<VarselRevurderingAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.VARSEL_REVURDERING_MANUELL>>();
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel);
 
@@ -87,7 +93,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
   const håndterSubmitFraModal = (modalValues: ModalFormValues) => {
     void formMethods.trigger().then(isValid => {
       if (isValid) {
-        void submitCallback(transformValues(formVerdier, aksjonspunkterForPanel, modalValues));
+        void submitCallback(transformValues(formVerdier, ventearsaker, modalValues));
       }
       setSkalVisePåVentModal(false);
     });
@@ -106,7 +112,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
     <>
       <RhfForm
         formMethods={formMethods}
-        onSubmit={values => submitCallback(transformValues(values, aksjonspunkterForPanel))}
+        onSubmit={values => submitCallback(transformValues(values, ventearsaker))}
         setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="space-16">
@@ -242,12 +248,23 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
 
 const transformValues = (
   values: FormValues,
-  aksjonspunkter: Aksjonspunkt[],
+  ventearsaker: KodeverkMedNavn<'Venteårsak'>[],
   modalValues?: ModalFormValues,
-): VarselRevurderingAp => ({
-  kode: validerApKodeOgHentApEnum(aksjonspunkter[0]?.definisjon, AksjonspunktKode.VARSEL_REVURDERING_MANUELL),
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VARSEL_REVURDERING_MANUELL> => ({
+  kode: AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
   begrunnelse: values.begrunnelse,
   sendVarsel: values.sendVarsel,
   frist: modalValues?.frist,
-  ventearsak: modalValues?.ventearsak,
+  ventearsak: isFpsakVenteårsak(modalValues?.ventearsak, ventearsaker),
 });
+
+export const isFpsakVenteårsak = (
+  kode: ModalFormValues['ventearsak'],
+  kodeEnums: KodeverkMedNavn<'Venteårsak'>[],
+): VenteArsakType => {
+  const kodeEnum = kodeEnums.find(k => k.kode === kode);
+  if (!kodeEnum) {
+    throw new Error(`Det finnes ikke enum for kode ${kode}`);
+  }
+  return kodeEnum.kode;
+};

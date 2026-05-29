@@ -14,7 +14,7 @@ import {
   type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
-import type { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { OpptjeningVilkarView } from './OpptjeningVilkarView';
@@ -42,7 +42,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }
     harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
-  } = usePanelDataContext<AvklarOpptjeningsvilkaretAp>();
+  } = usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET>>();
   const intl = useIntl();
   const erSvpFagsak = fagsak.fagsakYtelseType === 'SVP';
 
@@ -112,7 +112,9 @@ const buildInitialValues = (
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
-const transformValues = (values: FormValues): AvklarOpptjeningsvilkaretAp => ({
+const transformValues = (
+  values: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET> => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
   kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET,

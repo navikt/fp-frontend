@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import * as stories from './TilretteleggingFaktaIndex.stories';
 
@@ -114,7 +114,7 @@ describe('TilretteleggingFaktaIndex', () => {
           ],
         },
       ],
-    } satisfies BekreftSvangerskapspengerAp);
+    } satisfies AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_SVP_TILRETTELEGGING>);
   });
 
   it('skal validere at en må velge minst ett arbeidsforhold og at alle velferdspermisjoner er vurdert', async () => {
@@ -399,7 +399,7 @@ describe('TilretteleggingFaktaIndex', () => {
           ],
         },
       ],
-    } satisfies BekreftSvangerskapspengerAp);
+    } satisfies AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_SVP_TILRETTELEGGING>);
   });
 
   it('skal slette oppholdsperiode', async () => {

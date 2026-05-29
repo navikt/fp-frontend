@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
-import type { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakDokumentasjonFaktaTable } from './UttakDokumentasjonFaktaTable/UttakDokumentasjonFaktaTable';
@@ -27,7 +27,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
     harÅpentAksjonspunkt,
     isReadOnly,
     isSubmittable: submittable,
-  } = usePanelDataContext<VurderDokumentasjonAp>();
+  } = usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON>>();
 
   const readOnly = isReadOnly || aksjonspunkterForPanel.length === 0;
 
@@ -106,9 +106,9 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FaktaBegrunnelseFor
 
 const transformValues = (
   values: FaktaBegrunnelseFormValues,
-  dokBehov: DokumentasjonVurderingBehov[],
-): VurderDokumentasjonAp => ({
+  vurderingBehov: DokumentasjonVurderingBehov[],
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON> => ({
   kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-  vurderingBehov: dokBehov,
-  begrunnelse: values.begrunnelse,
+  vurderingBehov,
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });

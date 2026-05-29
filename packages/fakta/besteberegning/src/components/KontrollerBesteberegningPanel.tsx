@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
-import type { BesteberegningAP, ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = {
@@ -28,7 +28,8 @@ interface Props {
 export const KontrollerBesteberegningPanel = ({ aksjonspunkt }: Props) => {
   const [erKnappEnabled, setErKnappEnabled] = useState(false);
 
-  const { submitCallback, isSubmittable, isReadOnly } = usePanelDataContext<BesteberegningAP>();
+  const { submitCallback, isSubmittable, isReadOnly } =
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING>>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -83,7 +84,9 @@ const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
   };
 };
 
-const transformValues = (values: FormValues): ManuellKontrollBesteberegningAP => ({
+const transformValues = (
+  values: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING> => ({
   kode: AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
   begrunnelse: values.begrunnelse,
   besteberegningErKorrekt: !!values.besteberegningErKorrektValg,

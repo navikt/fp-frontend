@@ -5,23 +5,21 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { AksjonspunktKode, AksjonspunktKodeTilbakekreving } from '@navikt/fp-kodeverk';
 import { type TotrinnskontrollFormValues, TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
-import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  AksjonspunktTilBekreftelse,
+  BekreftedeAksjonspunkterDto,
+  TilbakekrevingAksjonspunktTilBekreftelse,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { createLocationForSkjermlenke } from '../../app/paths';
-import { type BekreftedeTotrinnsaksjonspunkter, getFagsakBehandlingApi, initFetchOptions } from '../../data/fagsakApi';
+import { getFagsakBehandlingApi,initFetchOptions } from '../../data/fagsakApi';
 import { useKodeverk } from '../../data/useKodeverk';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { BeslutterModalIndex } from './BeslutterModalIndex';
-
-type Values = {
-  fatterVedtakAksjonspunktDto: {
-    '@type': string;
-  } & FatterVedtakAp;
-  erAlleAksjonspunktGodkjent: boolean;
-};
 
 interface Props {
   fagsakData: FagsakData;
@@ -60,7 +58,7 @@ export const TotrinnskontrollIndex = ({
   const alleKodeverk = useKodeverk(valgtBehandling.type);
 
   const { mutate: godkjennTotrinnsaksjonspunkter } = useMutation({
-    mutationFn: (valuesToStore: BekreftedeTotrinnsaksjonspunkter) => api.lagreTotrinnsaksjonspunkt(valuesToStore),
+    mutationFn: (valuesToStore: BekreftedeAksjonspunkterDto) => api.lagreTotrinnsaksjonspunkt(valuesToStore),
   });
 
   const { mutate: forhåndsvisVedtaksbrev } = useMutation({
@@ -73,13 +71,21 @@ export const TotrinnskontrollIndex = ({
     },
   });
 
-  const onSubmit = (totrinnskontrollData: Values) => {
-    const params = {
+  const onSubmit = (
+    aksjonspunktData:
+      | AksjonspunktTilBekreftelse<AksjonspunktKode.FATTER_VEDTAK>
+      | TilbakekrevingAksjonspunktTilBekreftelse<AksjonspunktKodeTilbakekreving.FATTER_VEDTAK>,
+    alleAksjonspunktGodkjent: boolean,
+  ) => {
+    const params: BekreftedeAksjonspunkterDto = {
       behandlingUuid: valgtBehandling.uuid,
       behandlingVersjon: valgtBehandling.versjon,
-      bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
+      bekreftedeAksjonspunktDtoer:
+        aksjonspunktData.kode === AksjonspunktKodeTilbakekreving.FATTER_VEDTAK
+          ? [aksjonspunktData]
+          : [aksjonspunktData],
     };
-    setErAlleAksjonspunktGodkjent(totrinnskontrollData.erAlleAksjonspunktGodkjent);
+    setErAlleAksjonspunktGodkjent(alleAksjonspunktGodkjent);
     setVisBeslutterModal(true);
     godkjennTotrinnsaksjonspunkter(params);
   };

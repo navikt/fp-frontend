@@ -11,8 +11,9 @@ import {
   FaktaSubmitButton,
   PersonopplysningerForFamilie,
 } from '@navikt/fp-fakta-felles';
+import type { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
-import type { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type FormValues as OmsorgFormValues, OmsorgFaktaFields } from './OmsorgFaktaFields';
@@ -33,7 +34,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling }: Props) => {
     isReadOnly,
     isSubmittable,
     alleMerknaderFraBeslutter,
-  } = usePanelDataContext<BekreftOmsorgVurderingAp>();
+  } = usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_LØPENDE_OMSORG>>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -87,7 +88,7 @@ const buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Ak
   };
 };
 
-const transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
+const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_LØPENDE_OMSORG> => ({
   ...OmsorgFaktaFields.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

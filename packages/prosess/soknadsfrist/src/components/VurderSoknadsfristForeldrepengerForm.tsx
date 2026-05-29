@@ -14,7 +14,7 @@ import {
   ProsessStegSubmitButton,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
-import type { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.module.css';
@@ -40,7 +40,9 @@ const buildInitialValues = (
   };
 };
 
-const transformValues = (values: FormValues): VurderSoknadsfristAp => ({
+const transformValues = (
+  values: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST> => ({
   harGyldigGrunn: values.gyldigSenFremsetting,
   ansesMottattDato: values.ansesMottatt,
   kode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST,
@@ -59,7 +61,7 @@ interface Props {
  */
 export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfrist }: Props) => {
   const { aksjonspunkterForPanel, isReadOnly, submitCallback, isSubmittable, harÅpentAksjonspunkt } =
-    usePanelDataContext<VurderSoknadsfristAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST>>();
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel, mottattDato, søknadsfrist);
 

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import type { VilkårType } from '@navikt/fp-types';
 
 import { getBehandlingApi } from '../../../../data/behandlingApi';
@@ -10,7 +10,7 @@ import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandar
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-  AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+  OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
 ];
 
 const VILKAR_KODER = ['FP_VK_2'] satisfies VilkårType[];
@@ -35,7 +35,7 @@ export const MedlemskapInngangsvilkarInitPanel = () => {
       vilkårKoder={VILKAR_KODER}
       inngangsvilkårPanelKode="MEDLEMSKAP"
       hentInngangsvilkårPanelTekst=""
-      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET}
+      overstyringApKode={OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET}
       overrideReadOnly={harMedlemskapsAksjonspunkt}
     >
       <>

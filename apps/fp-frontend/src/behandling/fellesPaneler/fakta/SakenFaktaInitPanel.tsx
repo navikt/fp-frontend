@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { useQuery } from '@tanstack/react-query';
 
 import { SakenFaktaIndex } from '@navikt/fp-fakta-saken';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
@@ -13,9 +13,9 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-  AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
+  OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO,
   AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-  AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
+  OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD,
 ];
 
 /**

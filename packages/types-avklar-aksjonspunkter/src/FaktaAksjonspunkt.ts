@@ -1,80 +1,49 @@
-import type {
-  BeregningFaktaAP,
-  BeregningOverstyringAP,
-  OverstyrBeregningsaktiviteterAP,
-} from '@navikt/ft-fakta-beregning';
-import type {
-  FordelBeregningsgrunnlagAP,
-  VurderRefusjonBeregningsgrunnlagAP,
-} from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import type { AvklartFaktaFeilutbetalingAp } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 
-import type { AvklarAktivitetsPerioderAp } from './fakta/AvklarAktivitetsPerioderAp';
-import type { AvklarAnnenforelderHarRettAp } from './fakta/AvklarAnnenforelderHarRettAp';
-import type { AvklarDekningsgradAp } from './fakta/AvklarDekningsgradAp';
-import type { AvklarFortsattMedlemskapAp } from './fakta/AvklarFortsattMedlemskapAp';
-import type { AvklarVergeAp } from './fakta/AvklarVergeAp';
-import type { BekreftAleneomsorgVurderingAp } from './fakta/BekreftAleneomsorgVurderingAp';
-import type { BekreftAnnenpartsUttakEøsAp } from './fakta/BekreftAnnenpartsUttakEøsAp';
-import type { BekreftBosattVurderingAp } from './fakta/BekreftBosattVurderingAp';
-import type { BekreftErMedlemVurderingAp } from './fakta/BekreftErMedlemVurderingAp';
-import type { BekreftLovligOppholdVurderingAp } from './fakta/BekreftLovligOppholdVurderingAp';
-import type { BekreftOmsorgVurderingAp } from './fakta/BekreftOmsorgVurderingAp';
-import type { BekreftOppholdsrettVurderingAp } from './fakta/BekreftOppholdsrettVurderingAp';
-import type { BekreftSvangerskapspengerAp } from './fakta/BekreftSvangerskapspengerAp';
-import type { BekreftUttaksperioderAp } from './fakta/BekreftUttaksperioderAp';
-import type { BeregningAp } from './fakta/BeregningAp';
-import type { OverstyringFaktaFødselAp } from './fakta/fødsel/OverstyringFaktaFødselAp';
-import type { SjekkManglendeFødselAp } from './fakta/fødsel/SjekkManglendeFødselAp';
-import type { SjekkTerminbekreftelseAp } from './fakta/fødsel/SjekkTerminbekreftelseAp';
-import type { KontrollerBesteberegningAP, ManuellKontrollBesteberegningAP } from './fakta/KontrollerBesteberegningAP';
-import type { ManuellKontrollAapKombinertAtflAP } from './fakta/ManuellKontrollAapKombinertAtflAP';
-import type { MerkOpptjeningUtlandAp } from './fakta/MerkOpptjeningUtlandAp';
-import type { OverstyringAvklarStartdatoForPeriodenAp } from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
-import type { OverstyringDekningsgradAp } from './fakta/OverstyringDekningsgradAp';
-import type { OverstyringRettigheterAp } from './fakta/OverstyringRettigheterAp';
-import type { VurderArbeidsforholdInntektsmeldingAp } from './fakta/VurderArbeidsforholdInntektsmeldingAp';
-import type { VurderArbeidsforholdPermisjonAp } from './fakta/VurderArbeidsforholdPermisjonAp';
-import type { VurderDokumentasjonAp } from './fakta/VurderDokumentasjonAp';
-import type { VurderForutgaendeMedlemskapAp } from './fakta/VurderForutgaendeMedlemskapAp';
-import type { VurderMedlemskapAp } from './fakta/VurderMedlemskapAp';
-import type { VurderOmsorgsovertakelseVilkåretAp } from './fakta/VurderOmsorgsovertakelseVilkåretAp';
+import { type AksjonspunktKode, AksjonspunktKodeTilbakekreving, OverstyringKode } from '@navikt/fp-kodeverk';
+
+import type {
+  AksjonspunktTilBekreftelse,
+  OverstyringAksjonspunktTilBekreftelse,
+  TilbakekrevingAksjonspunktTilBekreftelse,
+} from './AksjonspunktTilBekreftelse';
 
 export type FaktaAksjonspunkt =
-  | AvklarVergeAp
-  | MerkOpptjeningUtlandAp
-  | BeregningAp
-  | AvklarAktivitetsPerioderAp
-  | BekreftAleneomsorgVurderingAp
-  | ManuellKontrollBesteberegningAP
-  | VurderOmsorgsovertakelseVilkåretAp
-  | VurderMedlemskapAp
-  | BekreftSvangerskapspengerAp
-  | VurderForutgaendeMedlemskapAp
-  | BekreftOmsorgVurderingAp
-  | BekreftBosattVurderingAp
-  | BekreftErMedlemVurderingAp
-  | BekreftOppholdsrettVurderingAp
-  | BekreftLovligOppholdVurderingAp
-  | AvklarFortsattMedlemskapAp
-  | SjekkTerminbekreftelseAp
-  | SjekkManglendeFødselAp
-  | OverstyringFaktaFødselAp
-  | AvklarAnnenforelderHarRettAp
-  | BekreftUttaksperioderAp
-  | OverstyringAvklarStartdatoForPeriodenAp
-  | KontrollerBesteberegningAP
-  | OverstyrBeregningsaktiviteterAP
-  | BeregningFaktaAP
-  | BeregningOverstyringAP
-  | FordelBeregningsgrunnlagAP
-  | VurderRefusjonBeregningsgrunnlagAP
-  | VurderArbeidsforholdInntektsmeldingAp
-  | VurderDokumentasjonAp
-  | VurderArbeidsforholdPermisjonAp
-  | OverstyringDekningsgradAp
-  | OverstyringRettigheterAp
-  | BekreftAnnenpartsUttakEøsAp
-  | AvklarDekningsgradAp
-  | AvklartFaktaFeilutbetalingAp
-  | ManuellKontrollAapKombinertAtflAP;
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_VERGE>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_AKTIVITETER>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_SVP_TILRETTELEGGING>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_LØPENDE_OMSORG>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_TERMINBEKREFTELSE>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_DEKNINGSGRAD>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE>
+
+  // Overstyring
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER>
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG>
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL>
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_FAKTA_UTTAK>
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO>
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD>
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG>
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART>
+  // Tilbakekreving
+  | TilbakekrevingAksjonspunktTilBekreftelse<AksjonspunktKodeTilbakekreving.AVKLAR_VERGE>
+  | AvklartFaktaFeilutbetalingAp;

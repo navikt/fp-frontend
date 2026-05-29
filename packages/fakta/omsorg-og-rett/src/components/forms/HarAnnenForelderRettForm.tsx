@@ -7,7 +7,7 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, OmsorgOgRett } from '@navikt/fp-types';
-import type { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
@@ -25,7 +25,8 @@ interface Props {
 }
 
 export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: Props) => {
-  const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } = usePanelDataContext<AvklarAnnenforelderHarRettAp>();
+  const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } =
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT>>();
 
   const harUføretrygd = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd ?? undefined;
 
@@ -82,7 +83,7 @@ const buildInitialValues = (omsorgOgRett: OmsorgOgRett, aksjonspunkt?: Aksjonspu
   };
 };
 
-const transformValues = (values: FormValues): AvklarAnnenforelderHarRettAp => ({
+const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT> => ({
   kode: AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
   annenforelderHarRett: values.harAnnenForelderRett,
   annenforelderMottarUføretrygd: values.mottarAnnenForelderUforetrygd,

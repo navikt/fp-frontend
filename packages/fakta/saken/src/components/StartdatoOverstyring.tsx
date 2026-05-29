@@ -10,9 +10,11 @@ import { AksjonspunktBoks, EditedIcon } from '@navikt/ft-ui-komponenter';
 import { capitalizeFirstLetter } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { OverstyringKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
-import type { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  OverstyringAksjonspunktTilBekreftelse,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);
@@ -31,8 +33,8 @@ const buildInitialValues = (ytelseFordeling: Ytelsefordeling, aksjonspunkt?: Aks
 const transformValues = (
   ytelseFordeling: Ytelsefordeling,
   values: FormValues,
-): OverstyringAvklarStartdatoForPeriodenAp => ({
-  kode: AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
+): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO> => ({
+  kode: OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO,
   opprinneligDato: ytelseFordeling.startDatoForPermisjon,
   startdatoFraSøknad: notEmpty(values.startdatoFraSøknad),
   begrunnelse: values.begrunnelse,
@@ -58,7 +60,8 @@ interface Props {
 export const StartdatoOverstyring = ({ aksjonspunkt, ytelseFordeling }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, isReadOnly } = usePanelDataContext<OverstyringAvklarStartdatoForPeriodenAp>();
+  const { submitCallback, isReadOnly } =
+    usePanelDataContext<OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO>>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 

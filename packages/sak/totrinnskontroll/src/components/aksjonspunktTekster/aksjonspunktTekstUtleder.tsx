@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import type {
   Behandlingsresultat,
   BehandlingsresultatDtoFpTilbake,
@@ -46,9 +46,9 @@ const buildUttakText = (
         aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT
       ) {
         id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
-      } else if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER) {
+      } else if (aksjonspunkt.aksjonspunktKode === OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER) {
         id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-      } else if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK) {
+      } else if (aksjonspunkt.aksjonspunktKode === OverstyringKode.OVERSTYRING_FAKTA_UTTAK) {
         id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
       } else {
         id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
@@ -197,7 +197,7 @@ export const getAksjonspunkttekst = (
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT) {
     return [buildAvklarAnnenForelderText()];
   }
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG) {
+  if (aksjonspunkt.aksjonspunktKode === OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG) {
     return [buildOverstyrtRettOgOmsorgText()];
   }
   if (erKlageAksjonspunkt(aksjonspunkt)) {

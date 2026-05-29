@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SokersOpplysningspliktVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-sokers-opplysningsplikt';
 import type { ArbeidsgiverOpplysningerPerId, VilkårType } from '@navikt/fp-types';
@@ -14,7 +14,7 @@ import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInit
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, AksjonspunktKode.UTGÅTT_5017];
+const AKSJONSPUNKT_KODER = [OverstyringKode.SØKERS_OPPLYSNINGSPLIKT_OVST, AksjonspunktKode.UTGÅTT_5017];
 
 const VILKAR_KODER = ['FP_VK_34'] satisfies VilkårType[];
 

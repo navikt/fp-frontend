@@ -1,4 +1,4 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import type {
   Behandlingsresultat,
   BehandlingStatus,
@@ -18,7 +18,7 @@ const behandlingStatus = 'OPPRE' satisfies BehandlingStatus;
 const faktaOmBeregningTilfeller = {} as KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
 
 const defaultAksjonspunkt = {
-  aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+  aksjonspunktKode: OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
   opptjeningAktiviteter: [],
   besluttersBegrunnelse: 'begrunnelse',
   totrinnskontrollGodkjent: false,
@@ -55,7 +55,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 6003', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
+      aksjonspunktKode: OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Fødsel.VilkarOverstyrt');
@@ -106,7 +106,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 6006', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
+      aksjonspunktKode: OverstyringKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Soknadsfrist.VilkarOverstyrt');
@@ -147,7 +147,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 6005', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+      aksjonspunktKode: OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Medlemskap.VilkarOverstyrt');
@@ -185,7 +185,7 @@ describe('aksjonspunktTekstUtleder', () => {
     } satisfies UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+      aksjonspunktKode: OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
       beregningDto: { fastsattVarigEndringNæring: false, faktaOmBeregningTilfeller: [] },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -217,7 +217,7 @@ describe('aksjonspunktTekstUtleder', () => {
     } satisfies UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+      aksjonspunktKode: OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
 
       beregningDto: {
         fastsattVarigEndringNæring: false,
@@ -256,7 +256,7 @@ describe('aksjonspunktTekstUtleder', () => {
     } satisfies UttakPeriodeEndring;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+      aksjonspunktKode: OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
 
       beregningDto: {
         fastsattVarigEndringNæring: false,

@@ -3,9 +3,8 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
-import { sortPeriodsByFom } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -21,7 +20,10 @@ import type {
   Uttaksresultat,
   UttakStonadskontoer,
 } from '@navikt/fp-types';
-import type { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  AksjonspunktTilBekreftelse,
+  OverstyringAksjonspunktTilBekreftelse,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
@@ -60,7 +62,7 @@ const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspu
   const filtrerteAksjonspunkter = aksjonspunkter.filter(
     ap =>
       ap.definisjon !== AksjonspunktKode.FASTSETT_UTTAKPERIODER &&
-      ap.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+      ap.definisjon !== OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
   );
 
   const aksjonspunktTekster = [];
@@ -76,7 +78,7 @@ const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspu
     aksjonspunktTekster.push(<FormattedMessage key="generellTekst" id="UttakPanel.Aksjonspunkt.Generell" />);
   }
 
-  if (aksjonspunkter.length === 1 && aksjonspunkter[0]?.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER) {
+  if (aksjonspunkter.length === 1 && aksjonspunkter[0]?.definisjon === OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER) {
     if (aksjonspunkter[0].status === 'UTFO') {
       aksjonspunktTekster.push(<FormattedMessage key="aksjonspunktTekst" id="UttakPanel.Overstyrt.Utfort" />);
     } else {
@@ -131,22 +133,29 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
   return feil;
 };
 
-const transformValues = (søkersPerioder: PeriodeSoker[], aksjonspunkter: Aksjonspunkt[]): UttakAp[] => {
-  const harOverstyringAp = aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER);
+type UttakAp =
+  | AksjonspunktTilBekreftelse<
+      | AksjonspunktKode.FASTSETT_UTTAKPERIODER
+      | AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT
+      | AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE
+      | AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD
+      | AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST
+    >[]
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER>;
+
+const transformValues = (søkersPerioder: PeriodeSoker[], aksjonspunkter: Aksjonspunkt[]): UttakAp => {
+  const harOverstyringAp = aksjonspunkter.some(ap => ap.definisjon === OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER);
   const skalSendeInnOverstyringAp = aksjonspunkter.length === 0 || (aksjonspunkter.length === 1 && harOverstyringAp);
 
   const perioder = søkersPerioder.map(mapPerioderTilBekreftelse);
   if (skalSendeInnOverstyringAp) {
-    return [
-      {
-        kode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
-        perioder,
-      },
-    ];
+    return {
+      kode: OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
+      perioder,
+    };
   }
-
   const apKoder = aksjonspunkter
-    .filter(a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER)
+    .filter(a => a.definisjon !== OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER)
     .map(ap => ap.definisjon);
 
   return apKoder.map(ap => ({
@@ -176,6 +185,16 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[] | undefined;
 }
+
+const sortByDate = (a: PeriodeSoker, b: PeriodeSoker): number => {
+  if (a.fom < b.fom) {
+    return -1;
+  }
+  if (a.fom > b.fom) {
+    return 1;
+  }
+  return 0;
+};
 
 const erOrdinærPeriode = (periode: PeriodeSoker | AnnenforelderUttakEøsPeriode): periode is PeriodeSoker => {
   return 'periodeResultatType' in periode;
@@ -208,7 +227,7 @@ export const UttakProsessPanel = ({
   const intl = useIntl();
 
   const { fagsak, behandling, submitCallback, alleKodeverk, isReadOnly, aksjonspunkterForPanel } =
-    usePanelDataContext<UttakAp[]>();
+    usePanelDataContext<UttakAp>();
 
   const [erOverstyrt, setErOverstyrt] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
@@ -253,7 +272,7 @@ export const UttakProsessPanel = ({
 
   const oppdaterPeriode = (oppdatertePerioder: PeriodeSoker[]) => {
     const andrePerioder = perioder.filter(p => p.fom !== oppdatertePerioder[0]?.fom);
-    const nyePerioder = andrePerioder.concat(oppdatertePerioder).sort(sortPeriodsByFom);
+    const nyePerioder = andrePerioder.concat(oppdatertePerioder).sort(sortByDate);
     setPerioder(nyePerioder);
     setIsDirty(true);
 
@@ -292,11 +311,11 @@ export const UttakProsessPanel = ({
     !isDirty || valgtPeriodeIndex !== undefined ? [] : validerPerioder(perioder, stønadskonto, intl);
 
   const harIngenEllerLukkedeAksjonspunkt =
-    aksjonspunkterForPanel.filter(ap => ap.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER).length === 0 ||
+    aksjonspunkterForPanel.filter(ap => ap.definisjon !== OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER).length === 0 ||
     aksjonspunkterForPanel.some(ap => ap.toTrinnsBehandlingGodkjent === true && ap.status === 'UTFO');
 
   const harOverstyrAp = aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+    ap => ap.definisjon === OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
   );
 
   return (

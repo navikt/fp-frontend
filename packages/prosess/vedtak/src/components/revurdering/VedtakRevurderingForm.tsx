@@ -21,15 +21,7 @@ import {
   type SimuleringResultat,
   type TilbakekrevingValg,
 } from '@navikt/fp-types';
-import type {
-  ForeslaVedtakAp,
-  ForeslaVedtakManueltAp,
-  KontrollAvManueltOpprettetRevurderingsbehandlingAp,
-  KontrollerRevurderingsBehandlingAp,
-  VurdereAnnenYtelseForVedtakAp,
-  VurdereDokumentForVedtakAp,
-  VurdereInntektsmeldingKlageForVedtakAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { isAvslag, isInnvilget, isOpphor, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakResultType } from '../../kodeverk/vedtakResultType';
@@ -43,13 +35,19 @@ import { VedtakAvslagArsakOgBegrunnelsePanel } from './VedtakAvslagArsakOgBegrun
 import { VedtakInnvilgetRevurderingPanel } from './VedtakInnvilgetRevurderingPanel';
 import { VedtakOpphorRevurderingPanel } from './VedtakOpphorRevurderingPanel';
 
+type KontrollAvManueltOpprettetRevurderingsbehandlingAp = {
+  kode: AksjonspunktKode.UTGÅTT_5056;
+  begrunnelse?: string;
+  skalBrukeOverstyrendeFritekstBrev?: boolean;
+};
+
 type RevurderingVedtakAksjonspunkter =
-  | ForeslaVedtakAp
-  | ForeslaVedtakManueltAp
-  | VurdereAnnenYtelseForVedtakAp
-  | VurdereDokumentForVedtakAp
-  | VurdereInntektsmeldingKlageForVedtakAp
-  | KontrollerRevurderingsBehandlingAp
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLÅ_VEDTAK>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERE_INNTEKTSMELDING_FØR_VEDTAK>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST>
   | KontrollAvManueltOpprettetRevurderingsbehandlingAp;
 
 const hentForhåndsvisManueltBrevCallback =
@@ -193,7 +191,7 @@ export const VedtakRevurderingForm = ({
   const intl = useIntl();
 
   const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly, aksjonspunkterForPanel } =
-    usePanelDataContext<RevurderingVedtakAksjonspunkter[]>();
+    usePanelDataContext<ProsessAksjonspunkt[]>();
 
   const { harRedigertBrev } = useVedtakEditeringContext();
 
@@ -236,7 +234,13 @@ export const VedtakRevurderingForm = ({
     <RhfForm
       formMethods={formMethods}
       onSubmit={(values: VedtakFormValues) =>
-        submitCallback(transformValues(values, aksjonspunkterForPanel, harValgtÅRedigereVedtaksbrev))
+        submitCallback(
+          transformValues(
+            values,
+            aksjonspunkterForPanel,
+            harValgtÅRedigereVedtaksbrev,
+          ) as unknown as ProsessAksjonspunkt[],
+        )
       }
       setDataOnUnmount={setMellomlagretFormData}
     >

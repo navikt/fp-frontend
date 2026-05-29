@@ -7,7 +7,7 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
-import type { KontrollerEtterbetalingTilSøkerAP } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import type { EtterbetalingSøkerFormValues } from '../types/FormValues';
 
@@ -60,7 +60,9 @@ EtterbetalingSøkerForm.initialValues = (aksjonspunkt?: Aksjonspunkt): Etterbeta
   };
 };
 
-EtterbetalingSøkerForm.transformValues = (values: EtterbetalingSøkerFormValues): KontrollerEtterbetalingTilSøkerAP => ({
+EtterbetalingSøkerForm.transformValues = (
+  values: EtterbetalingSøkerFormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER> => ({
   kode: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
   begrunnelse: values.begrunnelseEtterbetaling,
 });

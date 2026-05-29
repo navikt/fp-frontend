@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fødsel, FødselGjeldende } from '@navikt/fp-types';
-import type { SjekkTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import {
   maxTerminbekreftelseDato,
@@ -42,7 +42,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
   const intl = useIntl();
 
   const { submitCallback, isSubmittable, alleMerknaderFraBeslutter, isReadOnly } =
-    usePanelDataContext<SjekkTerminbekreftelseAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_TERMINBEKREFTELSE>>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -136,11 +136,11 @@ const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt):
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
-const transformValues = (values: FormValues): SjekkTerminbekreftelseAp => ({
+const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_TERMINBEKREFTELSE> => ({
   kode: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
   utstedtdato: notEmpty(values.utstedtdato, 'utstedtdato må være satt ved submit'),
   antallBarn: notEmpty(values.antallBarn, 'antallBarn må være satt ved submit'),
-  ...Termindato.transformValues(values),
+  termindato: notEmpty(values.termindato, 'termindato må være satt ved submit'),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
 

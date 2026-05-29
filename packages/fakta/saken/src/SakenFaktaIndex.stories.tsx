@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
   lagFagsak,
@@ -124,11 +124,11 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
 export const DekningsgradOgStartdatoErEndret: Story = {
   args: {
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD, {
+      lagAksjonspunkt(OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD, {
         status: 'UTFO',
         begrunnelse: 'Dekningsgraden er endret til 80 fordi...',
       }),
-      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO, {
+      lagAksjonspunkt(OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO, {
         status: 'UTFO',
         begrunnelse: 'Startdato er endret fordi...',
       }),

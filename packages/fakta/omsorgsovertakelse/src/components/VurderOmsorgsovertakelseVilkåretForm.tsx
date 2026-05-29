@@ -21,7 +21,7 @@ import {
   type OmsorgsovertakelseVilkårType,
   type VilkårUtfallType,
 } from '@navikt/fp-types';
-import type { VurderOmsorgsovertakelseVilkåretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -44,7 +44,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
   const intl = useIntl();
 
   const { aksjonspunkterForPanel, alleMerknaderFraBeslutter, submitCallback, isReadOnly, isSubmittable, alleKodeverk } =
-    usePanelDataContext<VurderOmsorgsovertakelseVilkåretAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET>>();
   const alleBarn = mapBarn(omsorgsovertakelse);
   const formMethods = useForm<FormValues>({
     defaultValues: buildInitialValues(omsorgsovertakelse, aksjonspunkterForPanel, alleBarn),
@@ -237,7 +237,7 @@ const buildInitialValues = (
 const transformValues = (
   values: FormValues,
   alleBarn: ReturnType<typeof mapBarn>,
-): VurderOmsorgsovertakelseVilkåretAp => ({
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET> => ({
   omsorgsovertakelseDato: notEmpty(values.omsorgsovertakelseDato),
   delvilkår: notEmpty(values.delvilkår),
   avslagskode: values.vilkårUtfallType === 'IKKE_OPPFYLT' ? values.avslagskode : undefined,

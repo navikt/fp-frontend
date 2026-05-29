@@ -4,7 +4,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { UttakFaktaIndex } from '@navikt/fp-fakta-uttak';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
@@ -18,7 +18,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
   AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
   AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
-  AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+  OverstyringKode.OVERSTYRING_FAKTA_UTTAK,
 ];
 
 interface Props {

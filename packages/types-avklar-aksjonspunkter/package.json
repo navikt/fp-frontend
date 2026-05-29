@@ -20,22 +20,8 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-fakta-beregning": "14.1.0",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "16.1.0",
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "10.1.0",
-    "@navikt/ft-form-hooks": "12.4.0",
-    "@navikt/ft-form-validators": "6.1.0",
-    "@navikt/ft-plattform-komponenter": "12.1.0",
-    "@navikt/ft-prosess-beregningsgrunnlag": "13.1.0",
-    "@navikt/ft-prosess-tilbakekreving-vedtak": "9.1.0",
-    "@navikt/ft-types": "6.2.0",
-    "@navikt/ft-ui-komponenter": "8.1.0",
-    "@navikt/ft-utils": "5.1.0",
-    "dayjs": "1.11.20",
-    "react": "19.2.7",
-    "react-dom": "19.2.7",
-    "react-hook-form": "7.75.0",
-    "react-intl": "10.1.6"
+    "@navikt/ft-prosess-tilbakekreving-vedtak": "9.1.0"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",

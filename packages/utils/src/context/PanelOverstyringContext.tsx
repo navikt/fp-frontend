@@ -1,16 +1,16 @@
 import { createContext, type ReactElement, use, useCallback, useMemo, useState } from 'react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { OverstyringKode } from '@navikt/fp-kodeverk';
 
 interface ContextProps {
   overrideReadOnly: boolean;
   kanOverstyreAccess: { isEnabled: boolean; employeeHasAccess: boolean };
-  overstyringApKode: AksjonspunktKode;
+  overstyringApKode: OverstyringKode;
   initialToggleState?: boolean;
   toggleOverstyring?: (erOverstyrt: boolean) => void;
 }
 
-interface ContextValues<T extends AksjonspunktKode> {
+interface ContextValues<T extends OverstyringKode> {
   overrideReadOnly: boolean;
   kanOverstyreAccess: { isEnabled: boolean; employeeHasAccess: boolean };
   overstyringApKode: T;
@@ -18,7 +18,7 @@ interface ContextValues<T extends AksjonspunktKode> {
   toggleOverstyring: () => void;
 }
 
-const PanelOverstyringContext = createContext<ContextValues<AksjonspunktKode> | null>(null);
+const PanelOverstyringContext = createContext<ContextValues<OverstyringKode> | null>(null);
 
 export const PanelOverstyringProvider = (
   props: {
@@ -47,7 +47,7 @@ export const PanelOverstyringProvider = (
   return <PanelOverstyringContext value={value}>{children}</PanelOverstyringContext>;
 };
 
-export const usePanelOverstyring = <T extends AksjonspunktKode>() => {
+export const usePanelOverstyring = <T extends OverstyringKode>() => {
   const context = use(PanelOverstyringContext) as ContextValues<T> | null;
   if (!context) {
     throw new Error('PanelOverstyringContext.Provider er ikke satt opp');

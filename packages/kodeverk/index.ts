@@ -1,2 +1,4 @@
-export { AksjonspunktKode } from './src/aksjonspunktCodes';
-export type { OverstyringAksjonspunkter, VilkårOverstyringAksjonspunkter } from './src/aksjonspunktCodes';
+export { AksjonspunktKode, OverstyringKode } from './src/aksjonspunktCodes';
+export type { OverstyringAksjonspunkter } from './src/aksjonspunktCodes';
+
+export { AksjonspunktKodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';

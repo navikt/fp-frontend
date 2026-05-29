@@ -13,10 +13,11 @@ import {
   SoknadRegistrertModal,
   type SvangerskapsValues,
 } from '@navikt/fp-papirsoknad';
-import type { Aksjonspunkt, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
+import { type Aksjonspunkt, type FagsakYtelseType, type FamilieHendelseType, ForeldreType } from '@navikt/fp-types';
 
 import { BehandlingRel, getBehandlingApi } from '../../data/behandlingApi';
 import { useBehandlingDataContext } from '../felles/context/BehandlingDataContext';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 /**
  * BehandlingPapirsoknadIndex
@@ -115,13 +116,17 @@ const useLagrePapirsøknad = (
   return async (
     fagsakYtelseType: FagsakYtelseType,
     familieHendelseType: FamilieHendelseType,
-    foreldreType: string,
+    foreldreType: ForeldreType,
     formValues?: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
   ) => {
     const kode = getAktivPapirsøknadApKode(behandling.aksjonspunkt);
-    const bekreftedeAksjonspunktDtoer = [
+    const bekreftedeAksjonspunktDtoer: AksjonspunktTilBekreftelse<
+      | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
+      | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
+      | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
+      | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER
+    >[] = [
       {
-        '@type': kode,
         kode,
         tema: familieHendelseType,
         søknadstype: fagsakYtelseType,
