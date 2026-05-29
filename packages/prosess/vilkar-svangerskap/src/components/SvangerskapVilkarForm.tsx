@@ -17,21 +17,21 @@ import {
 } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
-  ArbeidsforholdFodselOgTilrettelegging,
-  ArbeidsforholdTilretteleggingDato,
   BehandlingFpSak,
+  SvpArbeidsforholdDto,
   SvpTilrettelegging,
+  SvpTilretteleggingDatoDto,
   VilkårUtfallType,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
+const finnesUttakPåArbfor = (arbfor: SvpArbeidsforholdDto): boolean => {
   const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer.some(
-    (dato: ArbeidsforholdTilretteleggingDato) => dato.type !== 'HEL_TILRETTELEGGING',
+    (dato: SvpTilretteleggingDatoDto) => dato.type !== 'HEL_TILRETTELEGGING',
   );
   const finnesHelTilretteleggingEtterBehovOppstår = arbfor.tilretteleggingDatoer.some(
-    (dato: ArbeidsforholdTilretteleggingDato) =>
+    (dato: SvpTilretteleggingDatoDto) =>
       dato.type === 'HEL_TILRETTELEGGING' && dayjs(dato.fom).isAfter(dayjs(arbfor.tilretteleggingBehovFom)),
   );
   return finnesAnnenTilretteleggingEnnHel || finnesHelTilretteleggingEtterBehovOppstår;

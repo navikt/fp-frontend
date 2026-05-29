@@ -184,7 +184,9 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
     behandling: {
       ...defaultBehandling,
       status: 'AVSLU',
-      links: [{ href: '/fpsak/api/brev/hent-overstyrt-vedtaksbrev?uuid=test', rel: 'overstyrt-vedtaksbrev', type: 'GET' }],
+      links: [
+        { href: '/fpsak/api/brev/hent-overstyrt-vedtaksbrev?uuid=test', rel: 'overstyrt-vedtaksbrev', type: 'GET' },
+      ],
       behandlingsresultat: {
         vedtaksbrev: 'FRITEKST',
         type: 'INNVILGET',

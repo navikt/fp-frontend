@@ -31,7 +31,6 @@ export const VisIverksetterVedtakAvslatt: Story = {
       id: 1,
 
       vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
-
     },
   },
 };

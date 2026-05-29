@@ -11,9 +11,9 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   Arbeidsforhold,
-  ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsgiverOpplysningerPerId,
   BekreftTilrettelegging,
+  SvpArbeidsforholdDto,
   SvpTilrettelegging,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -127,7 +127,7 @@ const buildInitialValues = (
 
 const alfabetiskArbeidsforhold =
   (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) =>
-  (a: ArbeidsforholdFodselOgTilrettelegging, b: ArbeidsforholdFodselOgTilrettelegging) => {
+  (a: SvpArbeidsforholdDto, b: SvpArbeidsforholdDto) => {
     const navnA = arbeidsgiverOpplysningerPerId[a.arbeidsgiverReferanse ?? '']?.navn;
     const navnB = arbeidsgiverOpplysningerPerId[b.arbeidsgiverReferanse ?? '']?.navn;
     return navnA && navnB ? navnA.localeCompare(navnB) : 0;
@@ -141,9 +141,7 @@ const transformValues = (values: TilretteleggingFormValues): BekreftSvangerskaps
   bekreftetSvpArbeidsforholdList: values.arbeidsforhold.map(mapTilBekreftTilrettelegging),
 });
 
-const mapTilBekreftTilrettelegging = (
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
-): BekreftTilrettelegging => ({
+const mapTilBekreftTilrettelegging = (arbeidsforhold: SvpArbeidsforholdDto): BekreftTilrettelegging => ({
   arbeidsgiverReferanse: arbeidsforhold.arbeidsgiverReferanse,
   avklarteOppholdPerioder: arbeidsforhold.avklarteOppholdPerioder,
   eksternArbeidsforholdReferanse: arbeidsforhold.eksternArbeidsforholdReferanse,

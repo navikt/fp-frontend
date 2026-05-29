@@ -7,11 +7,7 @@ import { RhfDatepicker, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-h
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
-import type {
-  ArbeidsforholdFodselOgTilrettelegging,
-  ArbeidsforholdTilretteleggingDato,
-  SvpAvklartOppholdPeriode,
-} from '@navikt/fp-types';
+import type { SvpArbeidsforholdDto, SvpAvklartOppholdPeriode, SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
@@ -19,14 +15,14 @@ import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
 const maxValue100 = maxValue(100);
 const minValue0 = minValue(0);
 
-type FormValues = Record<string, ArbeidsforholdTilretteleggingDato>;
+type FormValues = Record<string, SvpTilretteleggingDatoDto>;
 
 const validerAtDatoErUnik =
   (
     intl: IntlShape,
-    alleTilrettelegginger: ArbeidsforholdTilretteleggingDato[],
+    alleTilrettelegginger: SvpTilretteleggingDatoDto[],
     oppholdPerioder: SvpAvklartOppholdPeriode[],
-    tilrettelegging: ArbeidsforholdTilretteleggingDato,
+    tilrettelegging: SvpTilretteleggingDatoDto,
   ) =>
   (dato: string) => {
     const tilretteleggingerMinusEditert = alleTilrettelegginger.filter(alle => alle.fom !== tilrettelegging.fom);
@@ -49,7 +45,7 @@ const validerAtPeriodeErGyldig =
     return null;
   };
 
-export const finnVelferdspermisjonprosent = (arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging): number =>
+export const finnVelferdspermisjonprosent = (arbeidsforhold: SvpArbeidsforholdDto): number =>
   arbeidsforhold.velferdspermisjoner
     .filter(p => p.erGyldig)
     .map(p => p.permisjonsprosent)
@@ -67,7 +63,7 @@ const finnUtbetalingsgradForTilrettelegging = (
 };
 
 export const finnProsentSvangerskapspenger = (
-  tilrettelegging: ArbeidsforholdTilretteleggingDato,
+  tilrettelegging: SvpTilretteleggingDatoDto,
   stillingsprosentArbeidsforhold: number,
   velferdspermisjonprosent: number,
   brukOverstyrtUtbetalingsgrad = true,
@@ -93,15 +89,15 @@ const sjekkOmTomDatoErTreUkerFørTermin = (termindato: string, tom?: string): bo
   dayjs(termindato).subtract(3, 'week').subtract(1, 'day').isSame(dayjs(tom));
 
 interface Props {
-  tilrettelegging: ArbeidsforholdTilretteleggingDato;
+  tilrettelegging: SvpTilretteleggingDatoDto;
   termindato: string;
   index: number;
   readOnly: boolean;
   disabled: boolean;
-  oppdaterTilrettelegging: (values: ArbeidsforholdTilretteleggingDato) => void;
+  oppdaterTilrettelegging: (values: SvpTilretteleggingDatoDto) => void;
   avbrytEditering: () => void;
   stillingsprosentArbeidsforhold: number;
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
+  arbeidsforhold: SvpArbeidsforholdDto;
   tomDatoForTilrettelegging: string;
 }
 

@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
 
-import type { Permisjon } from '@navikt/fp-types';
+import type { VelferdspermisjonDto } from '@navikt/fp-types';
 
 export const filtrerVelferdspermisjoner = (
-  velferdspermisjoner: Permisjon[],
+  velferdspermisjoner: VelferdspermisjonDto[],
   tilretteleggingBehovFom: string,
-): Permisjon[] =>
+): VelferdspermisjonDto[] =>
   velferdspermisjoner.filter(
     permisjon =>
       !dayjs(permisjon.permisjonFom).isAfter(tilretteleggingBehovFom) &&
