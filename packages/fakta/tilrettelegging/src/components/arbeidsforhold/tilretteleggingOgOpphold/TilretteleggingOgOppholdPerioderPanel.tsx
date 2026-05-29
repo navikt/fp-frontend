@@ -8,14 +8,13 @@ import { ISO_DATE_FORMAT, sortPeriodsByFom } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type {
-  SvpArbeidsforholdDto,
   SvpAvklartOppholdPeriode,
   SvpOppholdÅrsak,
   SvpTilretteleggingDatoDto,
   TilretteleggingType,
 } from '@navikt/fp-types';
 
-import type { TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
+import type { Tilrettelegging, TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
 import { OppholdPeriodeTabellRad } from './opphold/OppholdPeriodeTabellRad';
 import { TilretteleggingPeriodeTabellRad } from './tilrettelegging/TilretteleggingPeriodeTabellRad';
 
@@ -29,7 +28,7 @@ const finnNesteTilretteleggingFom = (
     .sort((a, b) => dayjs(a).diff(dayjs(b)))[0];
 
 interface Props {
-  arbeidsforhold: SvpArbeidsforholdDto;
+  arbeidsforhold: Tilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   disabled: boolean;

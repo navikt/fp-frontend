@@ -19,7 +19,7 @@ import type {
 import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import type { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
+import type { Tilrettelegging, TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
 import { harUvurderteVelferdspermisjoner, TilretteleggingFormFeil } from './TilretteleggingFormFeil';
 
@@ -60,12 +60,12 @@ export const TilretteleggingFaktaForm = ({
     af => af.skalVurdereSplittAvArbeidsforholdet,
   );
 
-  const onSubmit = (values: TilretteleggingFormValues) => {
-    return submitCallback(transformValues(values));
-  };
-
   return (
-    <RhfForm formMethods={formMethods} setDataOnUnmount={setMellomlagretFormData} onSubmit={onSubmit}>
+    <RhfForm
+      formMethods={formMethods}
+      setDataOnUnmount={setMellomlagretFormData}
+      onSubmit={values => submitCallback(transformValues(values))}
+    >
       <VStack gap="space-32">
         {harÅpentAksjonspunkt && (
           <AksjonspunktHelpTextHTML>
@@ -148,7 +148,7 @@ const transformValues = (values: TilretteleggingFormValues): BekreftSvangerskaps
   bekreftetSvpArbeidsforholdList: values.arbeidsforhold.map(mapTilBekreftTilrettelegging),
 });
 
-const mapTilBekreftTilrettelegging = (arbeidsforhold: SvpArbeidsforholdDto): BekreftTilrettelegging => ({
+const mapTilBekreftTilrettelegging = (arbeidsforhold: Tilrettelegging): BekreftTilrettelegging => ({
   arbeidsgiverReferanse: arbeidsforhold.arbeidsgiverReferanse,
   avklarteOppholdPerioder: arbeidsforhold.avklarteOppholdPerioder,
   eksternArbeidsforholdReferanse: arbeidsforhold.eksternArbeidsforholdReferanse,

@@ -37,7 +37,7 @@ const finnProsentArbeid = (tilrettelegging: SvpTilretteleggingDatoDto): number =
 };
 
 interface Props {
-  tilrettelegging: SvpTilretteleggingDatoDto;
+  tilretteleggingDato: SvpTilretteleggingDatoDto;
   termindato: string;
   stillingsprosentArbeidsforhold: number;
   tomDatoForTilrettelegging: string;
@@ -45,7 +45,7 @@ interface Props {
 }
 
 export const TilretteleggingInfoPanel = ({
-  tilrettelegging,
+  tilretteleggingDato,
   termindato,
   stillingsprosentArbeidsforhold,
   tomDatoForTilrettelegging,
@@ -53,7 +53,7 @@ export const TilretteleggingInfoPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const dagerOgUker = calcDaysAndWeeks(tilrettelegging.fom, tomDatoForTilrettelegging);
+  const dagerOgUker = calcDaysAndWeeks(tilretteleggingDato.fom, tomDatoForTilrettelegging);
   const fremTilTidspunkt = finnFremTilTekst(intl, termindato, tomDatoForTilrettelegging);
 
   return (
@@ -81,8 +81,8 @@ export const TilretteleggingInfoPanel = ({
               <FormattedMessage
                 id="TilretteleggingInfoPanel.SvpOgArbeid"
                 values={{
-                  svp: finnProsentSvangerskapspenger(tilrettelegging),
-                  arbeid: finnProsentArbeid(tilrettelegging),
+                  svp: finnProsentSvangerskapspenger(tilretteleggingDato),
+                  arbeid: finnProsentArbeid(tilretteleggingDato),
                 }}
               />
             </BodyShort>
@@ -100,7 +100,7 @@ export const TilretteleggingInfoPanel = ({
 
       <HStack gap="space-8">
         <BranchingIcon aria-hidden fontSize="2rem" />
-        {tilrettelegging.kilde === 'REGISTRERT_AV_SAKSBEHANDLER' ? (
+        {tilretteleggingDato.kilde === 'REGISTRERT_AV_SAKSBEHANDLER' ? (
           <BodyShort size="small">
             <FormattedMessage id="TilretteleggingInfoPanel.Saksbehandler" />
           </BodyShort>
@@ -110,11 +110,11 @@ export const TilretteleggingInfoPanel = ({
               <FormattedMessage id="TilretteleggingInfoPanel.FraSoknad" />
             </BodyShort>
             <Detail>
-              {tilrettelegging.mottattDato && (
+              {tilretteleggingDato.mottattDato && (
                 <FormattedMessage
                   id="TilretteleggingInfoPanel.Sendt"
                   values={{
-                    dato: dateFormat(tilrettelegging.mottattDato),
+                    dato: dateFormat(tilretteleggingDato.mottattDato),
                   }}
                 />
               )}

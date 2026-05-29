@@ -5,12 +5,9 @@ import { BodyShort, ExpansionCard, HStack, Spacer, Tag, VStack } from '@navikt/d
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import type {
-  ArbeidsgiverOpplysninger,
-  KodeverkMedNavn,
-  SvpArbeidsforholdDto,
-} from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysninger, KodeverkMedNavn } from '@navikt/fp-types';
 
+import type { Tilrettelegging } from '../../types/TilretteleggingFormValues';
 import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
 import type { FAISUProps } from './faisuUtils';
 
@@ -20,7 +17,7 @@ interface Props {
   visInfoAlert: boolean;
   faisu: FAISUProps | undefined;
   stillingsprosent: number | undefined;
-  arbeidsforhold: SvpArbeidsforholdDto;
+  arbeidsforhold: Tilrettelegging;
 }
 
 export const ArbeidsforholdHeader = ({
@@ -84,7 +81,7 @@ export const ArbeidsforholdHeader = ({
                 />
               </>
             )}
-            {(!faisu || faisu.erHovedArbeidsforhold) && (
+            {faisu?.type !== 'splittet' && (
               <>
                 <span>{'\u2022'}</span>
                 <FormattedMessage

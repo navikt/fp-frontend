@@ -6,9 +6,9 @@ import { XMarkIcon } from '@navikt/aksel-icons';
 import { Button, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { type SvpArbeidsforholdDto, type SvpTilretteleggingDatoDto } from '@navikt/fp-types';
+import { type SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 
-import type { TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
+import type { Tilrettelegging, TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
 import {
   finnProsentSvangerskapspenger,
   finnVelferdspermisjonprosent,
@@ -27,7 +27,7 @@ interface Props {
   fjernTilrettelegging: (fomDato?: string) => void;
   setLeggTilKnapperDisablet: React.Dispatch<React.SetStateAction<boolean>>;
   stillingsprosentArbeidsforhold: number;
-  arbeidsforhold: SvpArbeidsforholdDto;
+  arbeidsforhold: Tilrettelegging;
   tomDatoForTilrettelegging: string;
   termindato: string;
 }
@@ -127,7 +127,7 @@ const TilretteleggingType = ({
   tilrettelegging,
 }: {
   stillingsprosentArbeidsforhold: number;
-  arbeidsforhold: SvpArbeidsforholdDto;
+  arbeidsforhold: Tilrettelegging;
   tilrettelegging: SvpTilretteleggingDatoDto;
 }) => {
   const velferdspermisjonsprosent = finnVelferdspermisjonprosent(arbeidsforhold);

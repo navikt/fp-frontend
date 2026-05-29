@@ -3,20 +3,15 @@ import { type FieldArrayWithId } from 'react-hook-form';
 import { ExpansionCard } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
-import type {
-  Arbeidsforhold,
-  ArbeidsgiverOpplysninger,
-  KodeverkMedNavn,
-  SvpArbeidsforholdDto,
-} from '@navikt/fp-types';
+import type { Arbeidsforhold, ArbeidsgiverOpplysninger, KodeverkMedNavn } from '@navikt/fp-types';
 
-import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
+import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { ArbeidsforholdHeader } from './ArbeidsforholdHeader';
 import { ArbeidsforholdPanel } from './ArbeidsforholdPanel';
 import type { FAISUProps } from './faisuUtils';
 
 interface Props {
-  arbeidsforhold: SvpArbeidsforholdDto;
+  arbeidsforhold: Tilrettelegging;
   index: number;
   readOnly: boolean;
   aoiArbeidsforhold: Arbeidsforhold[];

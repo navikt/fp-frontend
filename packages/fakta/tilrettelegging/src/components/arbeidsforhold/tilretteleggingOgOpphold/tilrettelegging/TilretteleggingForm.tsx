@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Button, HStack, Radio, VStack } from '@navikt/ds-react';
@@ -7,9 +7,10 @@ import { RhfDatepicker, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-h
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import dayjs, { type Dayjs } from 'dayjs';
 
-import type { SvpArbeidsforholdDto, SvpAvklartOppholdPeriode, SvpTilretteleggingDatoDto } from '@navikt/fp-types';
+import type { SvpAvklartOppholdPeriode, SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
+import type { Tilrettelegging } from '../../../../types/TilretteleggingFormValues';
 import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
 
 const maxValue100 = maxValue(100);
@@ -49,7 +50,7 @@ const validerAtPeriodeErGyldig = (intl: IntlShape, minDato: Dayjs, maksDato: Day
   return null;
 };
 
-export const finnVelferdspermisjonprosent = (arbeidsforhold: SvpArbeidsforholdDto): number =>
+export const finnVelferdspermisjonprosent = (arbeidsforhold: Tilrettelegging): number =>
   arbeidsforhold.velferdspermisjoner
     .filter(p => p.erGyldig)
     .map(p => p.permisjonsprosent)
@@ -100,7 +101,7 @@ interface Props {
   oppdaterTilrettelegging: (values: SvpTilretteleggingDatoDto) => void;
   avbrytEditering: () => void;
   stillingsprosentArbeidsforhold: number;
-  arbeidsforhold: SvpArbeidsforholdDto;
+  arbeidsforhold: Tilrettelegging;
   tomDatoForTilrettelegging: string;
 }
 
@@ -147,14 +148,10 @@ export const TilretteleggingForm = ({
     });
   }, [formMethods, index, prosentSvangerskapspenger, tilrettelegging]);
 
-  const formValuesRecord = formMethods.watch();
-  const formValues = formValuesRecord[index];
-
-  if (!formValues) {
-    // eslint-disable-next-line no-console -- logges vel til Sentry??
-    console.error(`FormValues finne ikke for ${index}`);
-    return null;
-  }
+  const formValues = useWatch({
+    control: formMethods.control,
+    name: `${index}`,
+  });
 
   const lagreIForm = (values: FormValues) => {
     const lagreFormValues = notEmpty(
@@ -193,7 +190,7 @@ export const TilretteleggingForm = ({
       <VStack gap="space-16" paddingBlock="space-8">
         {!erNyPeriode && (
           <TilretteleggingInfoPanel
-            tilrettelegging={formValues}
+            tilretteleggingDato={formValues}
             termindato={termindato}
             stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
             tomDatoForTilrettelegging={tomDatoForTilrettelegging}
