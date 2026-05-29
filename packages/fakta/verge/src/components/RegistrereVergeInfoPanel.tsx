@@ -6,9 +6,9 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktKodeTilbakekreving } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
-import type { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse, TilbakekrevingAksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -24,7 +24,11 @@ const buildInitialValues = (verge: Verge | undefined, aksjonspunkter: Aksjonspun
       }
     : undefined;
 
-const transformValues = (values: FormValues): AvklarVergeAp => ({
+const transformValues = (
+  values: FormValues,
+):
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_VERGE>
+  | TilbakekrevingAksjonspunktTilBekreftelse<AksjonspunktKodeTilbakekreving.AVKLAR_VERGE> => ({
   kode: AksjonspunktKode.AVKLAR_VERGE,
   ...RegistrereVergeForm.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
@@ -48,7 +52,10 @@ export const RegistrereVergeInfoPanel = ({ verge, alleKodeverk }: Props) => {
     alleMerknaderFraBeslutter,
     harÅpentAksjonspunkt,
     isReadOnly,
-  } = usePanelDataContext<AvklarVergeAp>();
+  } = usePanelDataContext<
+    | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_VERGE>
+    | TilbakekrevingAksjonspunktTilBekreftelse<AksjonspunktKodeTilbakekreving.AVKLAR_VERGE>
+  >();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 

@@ -4,7 +4,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { UttakFaktaEøsIndex } from '@navikt/fp-fakta-uttak-eos';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
@@ -14,7 +14,7 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-  AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART,
+  OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART,
 ];
 
 export const UttakEøsFaktaInitPanel = () => {

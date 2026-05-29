@@ -18,7 +18,7 @@ export type { SærligGrunn } from './særligGrunn';
 
 export type { HendelseUnderType } from './hendelseUnderType';
 export type { HendelseType } from './hendelseType';
-export type { AksjonspunktKodeTilbakekreving } from './aksjonspunktCodesTilbakekreving';
+export type { BekreftetTilbakekrevingAksjonspunktDto } from './bekreftetTilbakekrevingAksjonspunkt';
 export type { ForeldelseVurderingType } from './foreldelseVurderingType';
 export type { VenteÅrsakTypeFpTilbake } from './venteÅrsakTypeFpTilbake';
 export type { BehandlingResultatTypeFpTilbake } from './behandlingResultatTypeFpTilbake';

@@ -14,9 +14,9 @@ import type {
   Arbeidsforhold,
   ArbeidsgiverOpplysningerPerId,
   Inntektsmelding,
+  BekreftetPermisjonStatus,
 } from '@navikt/fp-types';
 
-import { BekreftetPermisjonStatus } from '../kodeverk/BekreftetPermisjonStatus';
 import { ArbeidsforholdBoks } from './ArbeidsforholdBoks';
 import { InntektsmeldingOpplysningerPanel } from './InntektsmeldingOpplysningerPanel';
 import { InntektsposterPanel } from './InntektsposterPanel';
@@ -237,7 +237,7 @@ export const ArbeidsforholdField = ({
             validate={[required]}
             readOnly={isReadOnly}
           >
-            <Radio value={BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON} size="small">
+            <Radio value={'IKKE_BRUK_PERMISJON' satisfies BekreftetPermisjonStatus} size="small">
               <FormattedMessage
                 id={
                   inntektsmelding
@@ -246,7 +246,7 @@ export const ArbeidsforholdField = ({
                 }
               />
             </Radio>
-            <Radio value={BekreftetPermisjonStatus.BRUK_PERMISJON} size="small">
+            <Radio value={'BRUK_PERMISJON' satisfies BekreftetPermisjonStatus} size="small">
               <FormattedMessage id="ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold" />
             </Radio>
           </RhfRadioGroup>

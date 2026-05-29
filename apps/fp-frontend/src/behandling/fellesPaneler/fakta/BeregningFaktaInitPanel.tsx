@@ -12,10 +12,14 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkår } from '@navikt/fp-types';
-import type { BeregningAp, FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  AksjonspunktTilBekreftelse,
+  FaktaAksjonspunkt,
+  OverstyringAksjonspunktTilBekreftelse,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
@@ -25,11 +29,18 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
 
+
+export type BeregningAp =
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_AKTIVITETER>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN>
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER>
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG>;
+
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
   AksjonspunktKode.AVKLAR_AKTIVITETER,
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+  OverstyringKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
+  OverstyringKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
 ];
 
 interface Props {
@@ -83,18 +94,18 @@ const mapBGKodeTilFpsakKode = (
   bgKode: string,
 ):
   | AksjonspunktKode.AVKLAR_AKTIVITETER
-  | AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER
+  | OverstyringKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER
   | AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN
-  | AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG => {
+  | OverstyringKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG => {
   switch (bgKode) {
     case FaktaBeregningAvklaringsbehovCode.AVKLAR_AKTIVITETER:
       return AksjonspunktKode.AVKLAR_AKTIVITETER;
     case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER:
-      return AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER;
+      return OverstyringKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER;
     case FaktaBeregningAvklaringsbehovCode.VURDER_FAKTA_FOR_ATFL_SN:
       return AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN;
     case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG:
-      return AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG;
+      return OverstyringKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG;
     default:
       throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
   }
@@ -107,10 +118,12 @@ const lagModifisertCallback =
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
 
-    const transformerteData = apListe.map<BeregningAp>(apData => ({
-      kode: mapBGKodeTilFpsakKode(apData.kode),
-      ...notEmpty(apData.grunnlag[0], 'Mangler grunnlag i be'),
-    }));
+    const transformerteData = apListe.map<BeregningAp>(apData =>
+      ({
+        kode: mapBGKodeTilFpsakKode(apData.kode),
+        ...notEmpty(apData.grunnlag[0], 'Mangler grunnlag i be'),
+      }) as BeregningAp,
+    );
     return submitCallback(transformerteData);
   };
 

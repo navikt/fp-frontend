@@ -1,7 +1,10 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, VilkårType } from '@navikt/fp-types';
 
-export const lagAksjonspunkt = (aksjonspunktKode: AksjonspunktKode, options?: Partial<Aksjonspunkt>): Aksjonspunkt => {
+export const lagAksjonspunkt = (
+  aksjonspunktKode: AksjonspunktKode | OverstyringKode,
+  options?: Partial<Aksjonspunkt>,
+): Aksjonspunkt => {
   const status = options?.status ?? 'OPPR';
   return {
     definisjon: aksjonspunktKode,
@@ -44,41 +47,41 @@ const aksjonspunktKoderMedToTrinnsBehandling = new Set([
   AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
   AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
   AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-  AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
-  AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
-  AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
-  AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
-  AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR,
-  AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
-  AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
-  AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
-  AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
-  AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
-  AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
-  AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-  AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART,
+  OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
+  OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+  OverstyringKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
+  OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
+  OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR,
+  OverstyringKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
+  OverstyringKode.OVERSTYRING_FAKTA_UTTAK,
+  OverstyringKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
+  OverstyringKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+  OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO,
+  OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD,
+  OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG,
+  OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+  OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+  OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART,
 ]);
 
-const aksjonspunktKodeTilVilkårType: Partial<Record<AksjonspunktKode, VilkårType>> = {
+const aksjonspunktKodeTilVilkårType: Partial<Record<AksjonspunktKode | OverstyringKode, VilkårType>> = {
   [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: 'FP_VK_1',
   [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: 'FP_VK_1',
-  [AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET]: 'FP_VK_1',
+  [OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET]: 'FP_VK_1',
   [AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET]: 'FP_VK_2',
-  [AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET]: 'FP_VK_2',
-  [AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO]: 'FP_VK_2',
+  [OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET]: 'FP_VK_2',
+  [OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO]: 'FP_VK_2',
   [AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR]: 'FP_VK_2_F',
-  [AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR]: 'FP_VK_2_F',
-  [AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET]: 'FP_VK_3',
+  [OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR]: 'FP_VK_2_F',
+  [OverstyringKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET]: 'FP_VK_3',
   [AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET]: 'FP_VK_3',
   [AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET]: 'FP_VK_6',
-  [AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR]: 'FP_VK_11',
+  [OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR]: 'FP_VK_11',
   [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]: 'FP_VK_23',
   [AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET]: 'FP_VK_23',
-  [AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET]: 'FP_VK_23',
+  [OverstyringKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET]: 'FP_VK_23',
   [AksjonspunktKode.UTGÅTT_5017]: 'FP_VK_34',
-  [AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST]: 'FP_VK_34',
+  [OverstyringKode.SØKERS_OPPLYSNINGSPLIKT_OVST]: 'FP_VK_34',
   [AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS]: 'FP_VK_41',
   [AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE]: 'FP_VK_41',
   [AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD]: 'FP_VK_41',

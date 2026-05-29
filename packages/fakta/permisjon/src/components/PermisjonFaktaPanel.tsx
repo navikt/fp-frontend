@@ -9,21 +9,21 @@ import { dateFormat } from '@navikt/ft-utils';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
-  Aksjonspunkt,
   ArbeidOgInntektsmelding,
   Arbeidsforhold,
   ArbeidsgiverOpplysningerPerId,
+  BekreftetPermisjonStatus,
 } from '@navikt/fp-types';
-import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ArbeidsforholdFieldArray } from './ArbeidsforholdFieldArray';
 
 type FormValues = {
   arbeidsforhold: {
+    permisjonStatus: BekreftetPermisjonStatus|undefined;
     arbeidsgiverIdent: string;
     internArbeidsforholdId: string | undefined;
-    permisjonStatus: string | undefined;
   }[];
 } & FaktaBegrunnelseFormValues;
 
@@ -41,7 +41,7 @@ interface Props {
 
 export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerPerId }: Props) => {
   const { aksjonspunkterForPanel, fagsak, submitCallback, isReadOnly, alleKodeverk, isSubmittable } =
-    usePanelDataContext<VurderArbeidsforholdPermisjonAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO>>();
 
   const arbeidOgInntektMedPermisjon = {
     inntektsmeldinger: arbeidOgInntekt.inntektsmeldinger,
@@ -127,7 +127,7 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], sorterteArbeidsforho
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
 });
 
-const transformValues = (values: FormValues): VurderArbeidsforholdPermisjonAp => ({
+const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO> => ({
   kode: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
   arbeidsforhold: values.arbeidsforhold.map(a => ({
     arbeidsgiverIdent: a.arbeidsgiverIdent,

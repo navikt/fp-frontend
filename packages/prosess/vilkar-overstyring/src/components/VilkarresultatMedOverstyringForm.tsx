@@ -8,15 +8,9 @@ import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 
 import { MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
-import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
+import { OverstyringKode } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
-import type {
-  OverstyringAp,
-  OverstyringMedlemskapsvilkaretAp,
-  OverstyringMedlemskapsvilkaretLopendeAp,
-  OverstyringMedlemskapvilkaretForutgaendeAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { Aksjonspunkt, Avslagsarsak, BehandlingFpSak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
 import {
   erAksjonspunktÅpent,
   useMellomlagretFormData,
@@ -25,6 +19,14 @@ import {
 } from '@navikt/fp-utils';
 
 import styles from './vilkarresultatMedOverstyringForm.module.css';
+
+export type VilkårOverstyringAksjonspunkter =
+  | OverstyringKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET
+  | OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET
+  | OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET
+  | OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
+  | OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR
+  | OverstyringKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET;
 
 const isOverridden = (aksjonspunkter: Aksjonspunkt[], aksjonspunktCode: string): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktCode);
@@ -35,25 +37,19 @@ const isHidden = (kanOverstyre: boolean, aksjonspunkter: Aksjonspunkt[], aksjons
 type FormValues = {
   erVilkårOk?: boolean;
   vurdering?: MedlemskapVurdering;
-  avslagskode?: string;
+  avslagskode?: Avslagsarsak;
   opphørFom?: string;
   medlemFom?: string;
   begrunnelse?: string;
   isOverstyrt?: boolean;
 };
 
-function erOverstyringAvMedlemskap(overstyringApKode: AksjonspunktKode) {
+function erOverstyringAvMedlemskap(overstyringApKode: OverstyringKode) {
   return [
-    AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
-    AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+    OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+    OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
   ].includes(overstyringApKode);
 }
-
-type OverstyringVilkår =
-  | OverstyringAp
-  | OverstyringMedlemskapsvilkaretLopendeAp
-  | OverstyringMedlemskapsvilkaretAp
-  | OverstyringMedlemskapvilkaretForutgaendeAp;
 
 interface Props {
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined;
@@ -171,7 +167,7 @@ export const VilkarresultatMedOverstyringForm = ({
                   readOnly={overrideReadOnly || !erOverstyrt}
                   ytelse={fagsak.fagsakYtelseType}
                   erRevurdering={behandling.type === 'BT-004'}
-                  erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
+                  erForutgående={overstyringApKode === OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
                 />
               ) : (
                 <VilkarResultPicker
@@ -219,7 +215,7 @@ const buildInitialValues = (
   };
 };
 
-const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyringAksjonspunkter): OverstyringVilkår => {
+const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyringAksjonspunkter): VilkårOverstyringAksjonspunkter => {
   const felles = {
     kode: overstyringApKode,
     begrunnelse: values.begrunnelse,

@@ -4,7 +4,7 @@ import { VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { isAksjonspunktOpen } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import type { OpptjeningIUtlandDokStatusDto, Ytelsefordeling } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -29,10 +29,10 @@ export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyre
     ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
   );
   const overstyrDekningsgradAp = aksjonspunkterForPanel.find(
-    ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
+    ap => ap.definisjon === OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD,
   );
   const overstyrStartdatoAp = aksjonspunkterForPanel.find(
-    ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
+    ap => ap.definisjon === OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO,
   );
 
   return (

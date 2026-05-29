@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import type { VilkårType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
@@ -12,7 +12,7 @@ import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandar
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-  AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+  OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
 ];
 
 const VILKAR_KODER = ['FP_VK_2_F'] satisfies VilkårType[];
@@ -39,7 +39,7 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
       vilkårKoder={VILKAR_KODER}
       inngangsvilkårPanelKode="MEDLEMSKAP"
       hentInngangsvilkårPanelTekst=""
-      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
+      overstyringApKode={OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
       overrideReadOnly={harMedlemskapsAksjonspunkt}
     >
       <>

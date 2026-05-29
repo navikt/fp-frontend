@@ -6,7 +6,7 @@ import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
-import { dateFormat } from '@navikt/ft-utils';
+import { dateFormat, sortPeriodsByFom } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import {
@@ -15,7 +15,7 @@ import {
   FaktaSubmitButton,
   validerApKodeOgHentApEnum,
 } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -24,11 +24,14 @@ import type {
   FaktaUttakPeriode,
   Ytelsefordeling,
 } from '@navikt/fp-types';
-import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { UttakFaktaTable } from './UttakFaktaTable';
+import type {
+  AksjonspunktTilBekreftelse,
+  OverstyringAksjonspunktTilBekreftelse,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling: Ytelsefordeling) =>
   aksjonspunkter.filter(erAksjonspunktÅpent).map(ap => {
@@ -141,6 +144,15 @@ const validerPerioder = (
     : '';
 };
 
+export type BekreftUttaksperioderAp =
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_FAKTA_UTTAK>
+  | AksjonspunktTilBekreftelse<
+      | AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO
+      | AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER
+      | AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET
+      | AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG
+    >[];
+
 interface Props {
   ytelsefordeling: Ytelsefordeling;
   uttakKontrollerFaktaPerioder: FaktaUttakPeriode[];
@@ -165,11 +177,9 @@ export const UttakFaktaForm = ({
     fagsak,
     aksjonspunkterForPanel,
     isReadOnly,
-  } = usePanelDataContext<BekreftUttaksperioderAp[]>();
+  } = usePanelDataContext<BekreftUttaksperioderAp>();
 
-  const sortertListe = [...uttakKontrollerFaktaPerioder].sort((krav1, krav2) =>
-    dayjs(krav1.fom).diff(dayjs(krav2.fom)),
-  );
+  const sortertListe = uttakKontrollerFaktaPerioder.toSorted(sortPeriodsByFom);
   const sortertePerioder = leggTilAksjonspunktMarkering(
     sortertListe,
     aksjonspunkterForPanel,
@@ -200,7 +210,7 @@ export const UttakFaktaForm = ({
   );
 
   const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
-    a => a.definisjon !== AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+    a => a.definisjon !== OverstyringKode.OVERSTYRING_FAKTA_UTTAK,
   );
 
   const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
@@ -292,9 +302,9 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FaktaBegrunnelseFor
 
 const transformValues = (
   values: FaktaBegrunnelseFormValues,
-  uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[],
+  perioder: KontrollerFaktaPeriodeMedApMarkering[],
   automatiskeAksjonspunkter: Aksjonspunkt[],
-): BekreftUttaksperioderAp[] => {
+): BekreftUttaksperioderAp => {
   return automatiskeAksjonspunkter.length > 0
     ? automatiskeAksjonspunkter.map(ap => ({
         kode: validerApKodeOgHentApEnum(
@@ -304,14 +314,13 @@ const transformValues = (
           AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
           AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
         ),
-        perioder: uttakPerioder,
+        perioder,
         ...FaktaBegrunnelseTextField.transformValues(values),
       }))
-    : [
+    :
         {
           kode: AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
-          perioder: uttakPerioder,
+          perioder,
           ...FaktaBegrunnelseTextField.transformValues(values),
-        },
-      ];
+        };
 };

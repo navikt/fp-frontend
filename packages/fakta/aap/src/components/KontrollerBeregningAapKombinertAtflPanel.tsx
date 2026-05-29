@@ -8,7 +8,7 @@ import { AksjonspunktBoks, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-kompon
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
-import type { ManuellKontrollAapKombinertAtflAP } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = {
@@ -21,7 +21,8 @@ interface Props {
 
 export const KontrollerBeregningAapKombinertAtflPanel = ({ aksjonspunkt }: Props) => {
   const intl = useIntl();
-  const { submitCallback, isSubmittable, isReadOnly } = usePanelDataContext<ManuellKontrollAapKombinertAtflAP>();
+  const { submitCallback, isSubmittable, isReadOnly } =
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE>>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -93,7 +94,9 @@ const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
   };
 };
 
-const transformValues = (values: FormValues): ManuellKontrollAapKombinertAtflAP => ({
-  kode: AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL,
-  begrunnelse: values.begrunnelse,
+const transformValues = (
+  values: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE> => ({
+  kode: AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE,
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });

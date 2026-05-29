@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
-import type { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
@@ -77,7 +77,10 @@ const buildInitialValues = (klageVurdering: KlageVurdering): FormValues | undefi
   };
 };
 
-const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBehandling[]): KlageFormkravAp => ({
+const transformValues = (
+  values: FormValues,
+  avsluttedeBehandlinger: AvsluttetBehandling[],
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP> => ({
   erKlagerPart: !!values.erKlagerPart,
   erFristOverholdt: !!values.erFristOverholdt,
   erKonkret: !!values.erKonkret,
@@ -106,7 +109,7 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
   const intl = useIntl();
 
   const { behandling, isSubmittable, alleKodeverk, submitCallback, isReadOnly } =
-    usePanelDataContext<KlageFormkravAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP>>();
 
   const klageBareVedtakOptions = getKlagBareVedtak(avsluttedeBehandlinger, intl, alleKodeverk);
 

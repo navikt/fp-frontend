@@ -1,6 +1,6 @@
 import { type IntlShape, useIntl } from 'react-intl';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
 import type { Aksjonspunkt, VilkårType } from '@navikt/fp-types';
 
@@ -28,7 +28,7 @@ export const FodselInngangsvilkarInitPanel = () => {
       vilkårKoder={VILKAR_KODER}
       inngangsvilkårPanelKode="FODSEL"
       hentInngangsvilkårPanelTekst={paneltekst}
-      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET}
+      overstyringApKode={OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET}
     >
       <OverstyringPanelDef vilkårKoder={VILKAR_KODER} panelTekstKode="Inngangsvilkar.Fodselsvilkaret" />
     </InngangsvilkarOverstyringDefaultInitPanel>

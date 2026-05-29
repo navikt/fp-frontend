@@ -2,7 +2,7 @@ import { useIntl } from 'react-intl';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjening';
 import type { VilkårType } from '@navikt/fp-types';
 
@@ -34,7 +34,7 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
       vilkårKoder={VILKAR_KODER}
       inngangsvilkårPanelKode="OPPTJENINGSVILKARET"
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
-      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET}
+      overstyringApKode={OverstyringKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET}
     >
       <OverstyringPanelDef vilkårKoder={VILKAR_KODER} panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret" />
     </InngangsvilkarOverstyringDefaultInitPanel>

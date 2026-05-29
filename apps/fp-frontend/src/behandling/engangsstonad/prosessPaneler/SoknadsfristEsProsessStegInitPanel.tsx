@@ -2,7 +2,7 @@ import { useIntl } from 'react-intl';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SoknadsfristVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-soknadsfrist';
 import type { VilkårType } from '@navikt/fp-types';
@@ -17,7 +17,7 @@ import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardPr
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
-  AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
+  OverstyringKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
 ];
 
 const VILKAR_KODER = ['FP_VK_3'] satisfies VilkårType[];
@@ -40,7 +40,7 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
 
   return (
     <PanelOverstyringProvider
-      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET}
+      overstyringApKode={OverstyringKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET}
       kanOverstyreAccess={rettigheter.kanOverstyreAccess}
       overrideReadOnly={standardPanelProps.isReadOnly}
     >

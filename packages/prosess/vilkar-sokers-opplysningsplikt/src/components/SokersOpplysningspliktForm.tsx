@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag, isObject } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { OverstyringKode } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextField,
@@ -14,7 +14,7 @@ import {
   type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandlingsresultat, Soknad } from '@navikt/fp-types';
-import type { OverstyringSokersOpplysingspliktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { OverstyringAksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { MangledeVedlegg } from './MangledeVedlegg';
@@ -42,7 +42,7 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
     harÅpentAksjonspunkt,
     isReadOnly,
     behandling,
-  } = usePanelDataContext<OverstyringSokersOpplysingspliktAp>();
+  } = usePanelDataContext<OverstyringAksjonspunktTilBekreftelse<OverstyringKode.SØKERS_OPPLYSNINGSPLIKT_OVST>>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
@@ -115,9 +115,11 @@ const buildInitialValues = (
   };
 };
 
-const transformValues = (values: FormValues): OverstyringSokersOpplysingspliktAp => {
+const transformValues = (
+  values: FormValues,
+): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.SØKERS_OPPLYSNINGSPLIKT_OVST> => {
   return {
-    kode: AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST,
+    kode: OverstyringKode.SØKERS_OPPLYSNINGSPLIKT_OVST,
     ...VilkarResultPicker.transformValues(values),
     ...ProsessStegBegrunnelseTextField.transformValues(values),
   };

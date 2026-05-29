@@ -4,7 +4,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { OmsorgsovertakelseFaktaIndex } from '@navikt/fp-fakta-omsorgsovertakelse';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
@@ -23,8 +23,8 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.UTGÅTT_5013,
   AksjonspunktKode.UTGÅTT_5014,
   AksjonspunktKode.UTGÅTT_5011,
-  AksjonspunktKode.UTGÅTT_6004,
-  AksjonspunktKode.UTGÅTT_6010,
+  OverstyringKode.UTGÅTT_6004,
+  OverstyringKode.UTGÅTT_6010,
 ];
 
 export const OmsorgsovertakelseFaktaInitPanel = () => {

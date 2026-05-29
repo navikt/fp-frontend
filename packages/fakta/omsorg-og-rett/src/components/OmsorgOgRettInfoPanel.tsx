@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Box, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { type OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
@@ -19,7 +19,7 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOversty
     usePanelDataContext();
 
   const aksjonspunkter = aksjonspunkterForPanel.filter(
-    a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
+    a => a.definisjon !== OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG,
   );
 
   const opprettetAleneomsorgAPUtenResultat = aksjonspunkter.some(
@@ -52,7 +52,7 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOversty
   const søkerHarAleneomsorgResultat = omsorgOgRett.manuellBehandlingResultat?.søkerHarAleneomsorg ?? 'IKKE_RELEVANT';
 
   const overstyringAksjonspunkter = aksjonspunkterForPanel.filter(
-    a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
+    a => a.definisjon === OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG,
   );
   const harUløsteAksjonspunkter = opprettetRettAPUtenResultat || opprettetAleneomsorgAPUtenResultat;
   return (

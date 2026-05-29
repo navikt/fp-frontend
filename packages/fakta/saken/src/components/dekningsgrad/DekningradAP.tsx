@@ -9,7 +9,7 @@ import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
-import type { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DekningsgradVisning } from './DekningsgradVisning';
@@ -27,7 +27,7 @@ export const DekningradAP = ({ ytelseFordeling, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, alleMerknaderFraBeslutter, fagsak, isReadOnly, isSubmittable } =
-    usePanelDataContext<AvklarDekningsgradAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_DEKNINGSGRAD>>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -115,7 +115,7 @@ const buildInitialValues = (ytelseFordeling: Ytelsefordeling, aksjonspunkt: Aksj
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
-const transformValues = (values: FormValues): AvklarDekningsgradAp => ({
+const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_DEKNINGSGRAD> => ({
   kode: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
   dekningsgrad: notEmpty(values.dekningsgrad),
   ...FaktaBegrunnelseTextField.transformValues(values),

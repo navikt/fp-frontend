@@ -7,7 +7,7 @@ import { BTag } from '@navikt/ft-utils';
 import { TrueFalseInput } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
-import type { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const { AVKLAR_LØPENDE_OMSORG } = AksjonspunktKode;
 
@@ -43,7 +43,9 @@ OmsorgFaktaFields.initialValues = (ytelsefordeling: Ytelsefordeling, omsorgAp: A
       : undefined,
 });
 
-OmsorgFaktaFields.transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
+OmsorgFaktaFields.transformValues = (
+  values: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_LØPENDE_OMSORG> => ({
   kode: AVKLAR_LØPENDE_OMSORG,
   omsorg: values.omsorg || false,
 });

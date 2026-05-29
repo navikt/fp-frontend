@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { OverstyringKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
   lagBehandling,
@@ -40,7 +40,7 @@ type Story = StoryObj<typeof meta>;
 export const OverstyringspanelForFødsel: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Fodselsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
+    overstyringApKode: OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
     vilkår: lagVilkår('FP_VK_1'),
   },
 };
@@ -48,7 +48,7 @@ export const OverstyringspanelForFødsel: Story = {
 export const OverstyringspanelForMedlemskap: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+    overstyringApKode: OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
     vilkår: lagVilkår('FP_VK_2'),
     behandling: lagBehandling({ type: 'BT-004' }),
   },
@@ -57,10 +57,10 @@ export const OverstyringspanelForMedlemskap: Story = {
 export const OverstyringErUtførtForMedlemskap: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+    overstyringApKode: OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
     vilkår: lagVilkår('FP_VK_2'),
     behandling: lagBehandling({
-      aksjonspunkt: [lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET, { status: 'UTFO' })],
+      aksjonspunkt: [lagAksjonspunkt(OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET, { status: 'UTFO' })],
     }),
     status: 'IKKE_OPPFYLT',
     medlemskapManuellBehandlingResultat: {
@@ -75,7 +75,7 @@ export const OverstyringForForutgåendeMedlemskap: Story = {
     fagsak: lagFagsak({ fagsakYtelseType: 'ES' }),
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     vilkår: lagVilkår('FP_VK_2_F'),
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+    overstyringApKode: OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
   },
 };
 
@@ -83,12 +83,10 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
   args: {
     fagsak: lagFagsak({ fagsakYtelseType: 'ES' }),
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+    overstyringApKode: OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
     vilkår: lagVilkår('FP_VK_2_F'),
     behandling: lagBehandling({
-      aksjonspunkt: [
-        lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR, { status: 'UTFO' }),
-      ],
+      aksjonspunkt: [lagAksjonspunkt(OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR, { status: 'UTFO' })],
     }),
     status: 'IKKE_OPPFYLT',
     medlemskapManuellBehandlingResultat: {
@@ -101,7 +99,7 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
 export const OverstyringspanelForOpptjening: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Opptjeningsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
+    overstyringApKode: OverstyringKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
     vilkår: lagVilkår('FP_VK_23'),
   },
 };
@@ -115,11 +113,11 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
         type: 'AVSLÅTT',
         vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
       },
-      aksjonspunkt: [lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET, { status: 'UTFO' })],
+      aksjonspunkt: [lagAksjonspunkt(OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET, { status: 'UTFO' })],
     }),
     status: 'IKKE_OPPFYLT',
     panelTekstKode: 'Inngangsvilkar.Fodselsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
+    overstyringApKode: OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
     vilkår: lagVilkår('FP_VK_1'),
   },
 };
@@ -136,7 +134,7 @@ export const OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert: Story = {
     }),
     status: 'IKKE_VURDERT',
     panelTekstKode: 'Inngangsvilkar.Opptjeningsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
+    overstyringApKode: OverstyringKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
     vilkår: lagVilkår('FP_VK_23'),
   },
 };
@@ -144,10 +142,10 @@ export const OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert: Story = {
 export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
   args: {
     panelTekstKode: 'Behandlingspunkt.FortsattMedlemskap',
-    overstyringApKode: AksjonspunktKode.UTGÅTT_6012,
+    overstyringApKode: OverstyringKode.UTGÅTT_6012,
     vilkår: lagVilkår('FP_VK_2_L'),
     behandling: lagBehandling({
-      aksjonspunkt: [lagAksjonspunkt(AksjonspunktKode.UTGÅTT_6012, { status: 'UTFO' })],
+      aksjonspunkt: [lagAksjonspunkt(OverstyringKode.UTGÅTT_6012, { status: 'UTFO' })],
     }),
     status: 'OPPFYLT',
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
@@ -158,7 +156,7 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
 export const LøpendeMedlemskapVisningSomIkkeErOverstyrt: Story = {
   args: {
     panelTekstKode: 'Behandlingspunkt.FortsattMedlemskap',
-    overstyringApKode: AksjonspunktKode.UTGÅTT_6012,
+    overstyringApKode: OverstyringKode.UTGÅTT_6012,
     vilkår: lagVilkår('FP_VK_2_L'),
     status: 'IKKE_OPPFYLT',
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },

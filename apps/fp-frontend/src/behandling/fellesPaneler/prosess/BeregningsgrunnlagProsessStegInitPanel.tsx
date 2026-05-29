@@ -17,7 +17,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkår, VilkårType } from '@navikt/fp-types';
-import type { BeregningsgrunnlagAp, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
@@ -27,6 +27,13 @@ import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardPr
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
 import '@navikt/ft-prosess-beregning/dist/style.css';
+
+export type BGAksjonpunktKoder =
+  | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS
+  | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD
+  | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET
+  | AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE;
+export type BeregningsgrunnlagAp = AksjonspunktTilBekreftelse<BGAksjonpunktKoder>;
 
 const mapBGKodeTilFpsakKode = (
   bgKode: string,
@@ -68,28 +75,27 @@ const lagModifisertCallback =
         return {
           ...felles,
           inntektPrAndelList: grunnlag.inntektPrAndelList,
-          inntektFrilanser: grunnlag.inntektFrilanser,
-        };
+          inntektFrilanser: grunnlag.inntektFrilanser ?? undefined,
+        } as AksjonspunktTilBekreftelse<BGAksjonpunktKoder>;
       }
       if ('erVarigEndretNaering' in grunnlag) {
         return {
           ...felles,
           erVarigEndretNaering: grunnlag.erVarigEndretNaering,
-          erVarigEndret: grunnlag.erVarigEndret,
-          bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
-        };
+          bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag ?? undefined,
+        } as AksjonspunktTilBekreftelse<BGAksjonpunktKoder>;
       }
       if ('fastsatteTidsbegrensedePerioder' in grunnlag) {
         return {
           ...felles,
           fastsatteTidsbegrensedePerioder: grunnlag.fastsatteTidsbegrensedePerioder,
-          frilansInntekt: grunnlag.frilansInntekt,
-        };
+          frilansInntekt: grunnlag.frilansInntekt ?? undefined,
+        } as AksjonspunktTilBekreftelse<BGAksjonpunktKoder>;
       }
       return {
         ...felles,
         bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
-      };
+      } as AksjonspunktTilBekreftelse<BGAksjonpunktKoder>;
     });
 
     return submitCallback(transformerteData);

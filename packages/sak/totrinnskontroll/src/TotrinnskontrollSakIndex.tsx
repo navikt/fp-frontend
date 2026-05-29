@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktKodeTilbakekreving } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
@@ -12,7 +12,10 @@ import type {
   SkjermlenkeTypeFpTilbake,
   VurderÅrsak,
 } from '@navikt/fp-types';
-import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  AksjonspunktTilBekreftelse,
+  TilbakekrevingAksjonspunktTilBekreftelse,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { type AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
 import { type FormValues, TotrinnskontrollBeslutterForm } from './components/TotrinnskontrollBeslutterForm';
@@ -29,8 +32,8 @@ const sorterteSkjermlenkeCodesForTilbakekreving: SkjermlenkeTypeFpTilbake[] = [
   'VEDTAK',
 ];
 
-const getArsaker = (apData: AksjonspunktGodkjenningData): VurderÅrsak[] => {
-  const arsaker = new Array<VurderÅrsak>();
+const getArsaker = (apData: AksjonspunktGodkjenningData) => {
+  const arsaker = new Array<Exclude<VurderÅrsak, '-'>>();
   if (apData.feilFakta) {
     arsaker.push('FEIL_FAKTA');
   }
@@ -51,22 +54,21 @@ const getArsaker = (apData: AksjonspunktGodkjenningData): VurderÅrsak[] => {
   }
   return arsaker;
 };
+
 const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) =>
   'FaktaOmBeregningTilfelle' in alleKodeverk ? alleKodeverk['FaktaOmBeregningTilfelle'] : [];
-
-type ApData = {
-  fatterVedtakAksjonspunktDto: {
-    '@type': AksjonspunktKode.FATTER_VEDTAK | '5005';
-  } & FatterVedtakAp;
-  erAlleAksjonspunktGodkjent: boolean;
-};
 
 interface Props {
   behandling: FagsakBehandlingDto;
   location: Location;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   readOnly: boolean;
-  onSubmit: (data: ApData) => void;
+  onSubmit: (
+    aksjonspunktData:
+      | AksjonspunktTilBekreftelse<AksjonspunktKode.FATTER_VEDTAK>
+      | TilbakekrevingAksjonspunktTilBekreftelse<AksjonspunktKodeTilbakekreving.FATTER_VEDTAK>,
+    alleAksjonspunktGodkjent: boolean,
+  ) => void;
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (
     behandlingLocation: Location,
@@ -90,25 +92,10 @@ export const TotrinnskontrollSakIndex = ({
   const erTilbakekreving = 'BT-007' === behandling.type || 'BT-009' === behandling.type;
 
   const submitHandler = (values: FormValues) => {
-    const aksjonspunktGodkjenningDtos = values.aksjonspunktGodkjenning.map(apData => ({
-      aksjonspunktKode: apData.aksjonspunktKode,
-      godkjent: !!apData.totrinnskontrollGodkjent,
-      begrunnelse: apData.besluttersBegrunnelse,
-      arsaker: getArsaker(apData),
-    }));
-
-    const kode = erTilbakekreving ? ('5005' as const) : (AksjonspunktKode.FATTER_VEDTAK as const);
-    const fatterVedtakAksjonspunktDto = {
-      '@type': kode,
-      kode,
-      begrunnelse: undefined,
-      aksjonspunktGodkjenningDtos,
-    };
-
-    return onSubmit({
-      fatterVedtakAksjonspunktDto,
-      erAlleAksjonspunktGodkjent: values.aksjonspunktGodkjenning.every(ap => ap.totrinnskontrollGodkjent),
-    });
+    return onSubmit(
+      transformValues(values, erTilbakekreving),
+      values.aksjonspunktGodkjenning.every(ap => ap.totrinnskontrollGodkjent),
+    );
   };
 
   const erBehandlingEtterKlage = behandling.behandlingÅrsaker
@@ -161,4 +148,25 @@ export const TotrinnskontrollSakIndex = ({
       )}
     </RawIntlProvider>
   );
+};
+
+const transformValues = (
+  values: FormValues,
+  erTilbakekreving: boolean,
+):
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.FATTER_VEDTAK>
+  | TilbakekrevingAksjonspunktTilBekreftelse<AksjonspunktKodeTilbakekreving.FATTER_VEDTAK> => {
+  const aksjonspunktGodkjenningDtos = values.aksjonspunktGodkjenning.map(apData => ({
+    aksjonspunktKode: apData.aksjonspunktKode,
+    godkjent: !!apData.totrinnskontrollGodkjent,
+    begrunnelse: apData.besluttersBegrunnelse,
+    arsaker: getArsaker(apData),
+  }));
+  const kode = erTilbakekreving ? AksjonspunktKodeTilbakekreving.FATTER_VEDTAK : AksjonspunktKode.FATTER_VEDTAK;
+
+  return {
+    kode,
+    begrunnelse: undefined,
+    aksjonspunktGodkjenningDtos,
+  };
 };

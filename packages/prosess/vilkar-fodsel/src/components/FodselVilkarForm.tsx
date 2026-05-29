@@ -15,7 +15,7 @@ import {
   type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
-import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextFieldFormValues;
@@ -39,7 +39,7 @@ export const FodselVilkarForm = ({ status }: Props) => {
     harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
-  } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
+  } = usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE>>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
@@ -94,7 +94,10 @@ const buildInitialValues = (
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): VurdereYtelseSammeBarnSokerAp => ({
+const transformValues = (
+  values: FormValues,
+  aksjonspunkter: Aksjonspunkt[],
+): AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE> => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
   kode: validerApKodeOgHentApEnum(aksjonspunkter[0]?.definisjon, AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE),

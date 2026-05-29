@@ -10,7 +10,7 @@ import { BTag } from '@navikt/ft-utils';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, UtlandDokumentasjonStatus } from '@navikt/fp-types';
-import type { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = {
@@ -26,7 +26,7 @@ export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props)
   const intl = useIntl();
 
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, isSubmittable } =
-    usePanelDataContext<MerkOpptjeningUtlandAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK>>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -95,7 +95,9 @@ const buildInitialValues = (
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
-const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
+const transformValues = (
+  values: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK> => ({
   kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   dokStatus: values.dokStatus,
   ...FaktaBegrunnelseTextField.transformValues(values),

@@ -13,6 +13,7 @@ import {
   type KodeverkMedNavn,
   type Risikoklassifisering,
 } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
 
@@ -137,9 +138,9 @@ const buildInitialValues = (
 
 const transformValues = (values: Values): AvklartRisikoklassifiseringAp => ({
   kode: AksjonspunktKode.VURDER_FARESIGNALER,
-  faresignalVurdering: utledFaresignalVurderingVerdi(
-    values[VURDERING_HOVEDKATEGORI],
-    values[IKKE_REELLE_VURDERINGER_UNDERKATEGORI],
+  faresignalVurdering: notEmpty(
+    utledFaresignalVurderingVerdi(values[VURDERING_HOVEDKATEGORI], values[IKKE_REELLE_VURDERINGER_UNDERKATEGORI]),
+    'faresignalVurdering må være satt ved submit',
   ),
   begrunnelse: values[begrunnelseFieldName],
 });

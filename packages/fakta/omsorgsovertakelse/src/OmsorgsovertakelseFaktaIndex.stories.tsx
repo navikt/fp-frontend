@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
   type PanelDataArgs,
@@ -105,8 +105,8 @@ export const LegacyAP: Story = {
       lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5013, { status: 'UTFO' }),
       lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5014, { status: 'UTFO' }),
       lagAksjonspunkt(AksjonspunktKode.UTGÅTT_5011, { status: 'UTFO' }),
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_6004, { status: 'UTFO' }),
-      lagAksjonspunkt(AksjonspunktKode.UTGÅTT_6010, { status: 'UTFO' }),
+      lagAksjonspunkt(OverstyringKode.UTGÅTT_6004, { status: 'UTFO' }),
+      lagAksjonspunkt(OverstyringKode.UTGÅTT_6010, { status: 'UTFO' }),
     ],
   },
 };

@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
 import type { ArbeidsgiverOpplysningerPerId, BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
@@ -22,7 +22,7 @@ const getStatusFromUttakresultat = (behandling: BehandlingFpSak): VilkårUtfallT
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FASTSETT_UTTAKPERIODER,
-  AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+  OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
   AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT,
   AksjonspunktKode.UTGÅTT_5069,
   AksjonspunktKode.UTGÅTT_5067,

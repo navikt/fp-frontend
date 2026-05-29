@@ -11,7 +11,7 @@ import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fagsak, TilbakekrevingValg, TilbakekrevingVidereBehandling } from '@navikt/fp-types';
-import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import type { FeilutbetalingFormValues } from '../types/FormValues';
 
@@ -144,7 +144,9 @@ TilbakekrevSøkerForm.initialValues = (
   };
 };
 
-TilbakekrevSøkerForm.transformValues = (values: FeilutbetalingFormValues): VurderFeilutbetalingAp => {
+TilbakekrevSøkerForm.transformValues = (
+  values: FeilutbetalingFormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FEILUTBETALING> => {
   const { videreBehandling, varseltekst, begrunnelse } = values;
   if (videreBehandling.endsWith(IKKE_SEND)) {
     return {

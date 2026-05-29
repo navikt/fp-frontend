@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
   lagArbeidsgiver,
@@ -104,7 +104,7 @@ export const HarOverstyrtMedOppfyltVilkår: Story = {
       },
     }),
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
+      lagAksjonspunkt(OverstyringKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
     ],
     isReadOnly: true,
     isSubmittable: false,
@@ -123,7 +123,7 @@ export const HarOverstyrtMedAvslåttVilkår: Story = {
       },
     }),
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
+      lagAksjonspunkt(OverstyringKode.SØKERS_OPPLYSNINGSPLIKT_OVST, { status: 'UTFO', aksjonspunktType: 'SAOV' }),
     ],
     isReadOnly: true,
     isSubmittable: false,

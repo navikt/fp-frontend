@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { type DefaultValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
@@ -8,9 +8,9 @@ import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { OverstyringKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett, type Rettighetstype } from '@navikt/fp-types';
-import type { OverstyringRettigheterAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { OverstyringAksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './overstyrRettigheterForm.module.css';
@@ -36,7 +36,7 @@ const RETTIGHETSTYPER = {
 
 export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }: Props) => {
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, isSubmittable } =
-    usePanelDataContext<OverstyringRettigheterAp>();
+    usePanelDataContext<OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG>>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: buildInitialValues(omsorgOgRett, aksjonspunkt),
@@ -53,7 +53,7 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }:
     <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(transformValues(values))}>
       <FaktaGruppe
         withoutBorder
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG]}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG]}
       >
         <VStack gap="space-24">
           <HStack gap="space-8" align="start">
@@ -94,13 +94,13 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }:
   );
 };
 
-const buildInitialValues = (omsorgOgRett: OmsorgOgRett, aksjonspunkt?: Aksjonspunkt): DefaultValues<FormValues> => ({
+const buildInitialValues = (omsorgOgRett: OmsorgOgRett, aksjonspunkt?: Aksjonspunkt): FormValues => ({
   rettighetstype: omsorgOgRett.rettighetstype ?? undefined,
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
-const transformValues = (values: FormValues): OverstyringRettigheterAp => ({
-  kode: AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
+const transformValues = (values: FormValues): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG> => ({
+  kode: OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG,
   rettighetstype: values.rettighetstype,
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
