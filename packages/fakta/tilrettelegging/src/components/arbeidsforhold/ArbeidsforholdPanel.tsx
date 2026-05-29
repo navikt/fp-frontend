@@ -13,7 +13,7 @@ import type { SvpArbeidsforholdDto } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
-import type { FAISUProps } from './faisuUtils.tsx';
+import type { FAISUProps } from './faisuUtils';
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
 import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTabell';

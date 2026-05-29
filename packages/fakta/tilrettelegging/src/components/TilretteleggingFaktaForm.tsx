@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
@@ -48,7 +48,10 @@ export const TilretteleggingFaktaForm = ({
       buildInitialValues(svangerskapspengerTilrettelegging, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId),
   });
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({
+    control: formMethods.control,
+    name: 'begrunnelse',
+  });
 
   const skalVurdereVelferdspermisjoner = harUvurderteVelferdspermisjoner(
     svangerskapspengerTilrettelegging.arbeidsforholdListe,

@@ -1,4 +1,4 @@
-import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+import { FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Alert, Button, HStack, Radio, VStack } from '@navikt/ds-react';
@@ -72,7 +72,10 @@ export const VelferdspermisjonForm = ({
     return Promise.resolve();
   };
 
-  const erGyldig = formMethods.watch(`${permisjonIndex}.erGyldig`);
+  const erGyldig = useWatch({
+    control: formMethods.control,
+    name: `${permisjonIndex}.erGyldig`,
+  });
 
   return (
     <FormProvider {...formMethods}>

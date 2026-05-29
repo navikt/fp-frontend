@@ -1,31 +1,28 @@
 import { type FieldArrayWithId } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
 
-import { Buildings3Icon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, ExpansionCard, HStack, Spacer, Tag, VStack } from '@navikt/ds-react';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { ExpansionCard } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
 import type {
   Arbeidsforhold,
-  ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsgiverOpplysninger,
   KodeverkMedNavn,
+  SvpArbeidsforholdDto,
 } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
-import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
+import { ArbeidsforholdHeader } from './ArbeidsforholdHeader';
 import { ArbeidsforholdPanel } from './ArbeidsforholdPanel';
-import type { FAISUProps } from './faisuUtils.tsx';
+import type { FAISUProps } from './faisuUtils';
 
 interface Props {
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
+  arbeidsforhold: SvpArbeidsforholdDto;
   index: number;
   readOnly: boolean;
   aoiArbeidsforhold: Arbeidsforhold[];
   arbeidsgiverOpplysning: ArbeidsgiverOpplysninger | undefined;
   uttakArbeidTyper: KodeverkMedNavn<'UttakArbeidType'>[];
-  field: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold', 'id'>;
+  field: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>;
   faisu: FAISUProps | undefined;
 }
 
@@ -53,75 +50,17 @@ export const ArbeidsforholdExpansionCard = ({
     ? af.stillingsprosent
     : finnStillingsprosent(alleIafAf, arbeidsforhold.tilretteleggingBehovFom);
 
-  const arbeidType = uttakArbeidTyper.find(type => type.kode === arbeidsforhold.uttakArbeidType);
-
   return (
     <ExpansionCard defaultOpen key={field.id} aria-label="arbeidsgiver">
       <ExpansionCard.Header>
-        <HStack gap="space-16" align="center" wrap={false}>
-          <VStack gap="space-8">
-            <HStack gap="space-4 space-16" align="center">
-              <Buildings3Icon fontSize="2rem" />
-              <ExpansionCard.Title>{arbeidsgiverOpplysning?.navn ?? arbeidType?.navn}</ExpansionCard.Title>
-              {arbeidsgiverOpplysning?.identifikator && (
-                <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
-              )}
-              {arbeidsforhold.eksternArbeidsforholdReferanse && (
-                <BodyShort size="small">{getEndCharFromId(arbeidsforhold.eksternArbeidsforholdReferanse)}</BodyShort>
-              )}
-              <Spacer />
-              <HStack gap="space-16" align="center">
-                {faisu?.tag}
-                {utledSVPTags(arbeidsforhold.skalBrukes, visInfoAlert)}
-              </HStack>
-            </HStack>
-
-            <BodyShort size="small">
-              <HStack gap="space-8" align="center" as="span">
-                <FormattedMessage
-                  id="ArbeidsforholdExpansionCard.AntallPeriode"
-                  tagName="span"
-                  values={{ antall: arbeidsforhold.tilretteleggingDatoer.length }}
-                />
-
-                {dayjs(arbeidsforhold.tilretteleggingBehovFom).isValid() && (
-                  <>
-                    <span>{'\u2022'}</span>
-                    <span>
-                      <DateLabel dateString={arbeidsforhold.tilretteleggingBehovFom} />
-                    </span>
-                  </>
-                )}
-
-                {arbeidsforhold.velferdspermisjoner.length > 0 && (
-                  <>
-                    <span>{'\u2022'}</span>
-                    <FormattedMessage
-                      id="ArbeidsforholdExpansionCard.AntallVelferdspermisjon"
-                      tagName="span"
-                      values={{
-                        antall: filtrerVelferdspermisjoner(
-                          arbeidsforhold.velferdspermisjoner,
-                          arbeidsforhold.tilretteleggingBehovFom,
-                        ).length,
-                      }}
-                    />
-                  </>
-                )}
-                {(!faisu || faisu.erHovedArbeidsforhold) && (
-                  <>
-                    <span>{'\u2022'}</span>
-                    <FormattedMessage
-                      id="ArbeidsforholdExpansionCard.Stillingsprosent"
-                      tagName="span"
-                      values={{ stillingsprosent }}
-                    />
-                  </>
-                )}
-              </HStack>
-            </BodyShort>
-          </VStack>
-        </HStack>
+        <ArbeidsforholdHeader
+          arbeidsgiverOpplysning={arbeidsgiverOpplysning}
+          arbeidsforhold={arbeidsforhold}
+          uttakArbeidTyper={uttakArbeidTyper}
+          visInfoAlert={visInfoAlert}
+          faisu={faisu}
+          stillingsprosent={stillingsprosent}
+        />
       </ExpansionCard.Header>
       <ExpansionCard.Content>
         <ArbeidsforholdPanel
@@ -137,8 +76,6 @@ export const ArbeidsforholdExpansionCard = ({
   );
 };
 
-const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-
 const finnArbeidsforhold = (
   alleIafAf: Arbeidsforhold[],
   internArbeidsforholdReferanse?: string,
@@ -152,25 +89,6 @@ const finnArbeidsforhold = (
 const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato: string, tomDato: string): boolean => {
   const dato = dayjs(tilretteleggingBehovFom);
   return !(dato.isBefore(dayjs(fomDato || undefined)) || dato.isAfter(dayjs(tomDato || undefined)));
-};
-
-const utledSVPTags = (skalBrukes: boolean, visInfoAlert: boolean) => {
-  if (visInfoAlert && skalBrukes) {
-    return (
-      <Tag data-color="warning" size="xsmall" icon={<ExclamationmarkTriangleFillIcon />}>
-        <FormattedMessage id="ArbeidsforholdExpansionCard.SvpIkkeBeregnet" />
-      </Tag>
-    );
-  }
-  return skalBrukes ? (
-    <Tag data-color="success" size="xsmall">
-      <FormattedMessage id="ArbeidsforholdExpansionCard.SkalHaSvp" />
-    </Tag>
-  ) : (
-    <Tag data-color="danger" size="xsmall">
-      <FormattedMessage id="ArbeidsforholdExpansionCard.SkalIkkeHaSvp" />
-    </Tag>
-  );
 };
 
 const finnStillingsprosent = (aoiArbeidsforhold: Arbeidsforhold[], tilretteleggingBehovFom: string) => {
