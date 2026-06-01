@@ -133,7 +133,7 @@ export const VedtakFellesPanel = ({
           </Label>
         </div>
         <div className={styles['space']}>
-          {skalViseLink && harIkkeKonsekvensForYtelse && kanBehandles && (
+          {skalViseLink && harIkkeKonsekvensForYtelse && kanBehandles && !(isReadOnly && harRedigertBrev) && (
             <Link href="#" onClick={previewAutomatiskBrev}>
               <span>
                 <FormattedMessage
@@ -147,7 +147,7 @@ export const VedtakFellesPanel = ({
               <ArrowForwardIcon className={styles['pil']} />
             </Link>
           )}
-          {skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles && (
+          {skalViseLink && harIkkeKonsekvensForYtelse && (!kanBehandles || (isReadOnly && harRedigertBrev)) && (
             <BodyShort size="small" className={styles['disabletLink']}>
               <FormattedMessage
                 id={

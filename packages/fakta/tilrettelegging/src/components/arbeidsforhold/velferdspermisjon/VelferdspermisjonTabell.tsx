@@ -2,12 +2,12 @@ import { FormattedMessage } from 'react-intl';
 
 import { Table } from '@navikt/ds-react';
 
-import type { Permisjon } from '@navikt/fp-types';
+import type { VelferdspermisjonDto } from '@navikt/fp-types';
 
 import { VelferdspermisjonTabellRad } from './VelferdspermisjonTabellRad';
 
 interface Props {
-  filtrerteVelferdspermisjoner: Permisjon[];
+  filtrerteVelferdspermisjoner: VelferdspermisjonDto[];
   arbeidsforholdIndex: number;
   readOnly: boolean;
   oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;

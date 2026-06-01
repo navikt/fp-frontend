@@ -5,14 +5,14 @@ import { Alert, Button, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import type { Permisjon } from '@navikt/fp-types';
+import type { VelferdspermisjonDto } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
 
-type FormValues = Record<string, Permisjon>;
+type FormValues = Record<string, VelferdspermisjonDto>;
 
 interface Props {
-  velferdspermisjon: Permisjon;
+  velferdspermisjon: VelferdspermisjonDto;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   lukkRad: () => void;

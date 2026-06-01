@@ -673,26 +673,26 @@ const getHentBrevHtml =
       .json<BrevOverstyring>();
 
 const getMellomlagring =
-  (links: ApiLink[]) => (params: { behandlingUuid: string; type?: string; dokumentMal?: string; innhold?: string | null }) =>
+  (links: ApiLink[]) =>
+  (params: { behandlingUuid: string; type?: string; dokumentMal?: string; innhold?: string | null }) =>
     kyExtended
       .post(getUrlFromRel('MELLOMLAGRING', links), {
         json: params,
       })
       .then(() => {});
 
-const getMellomlagretPapirsøknadOptions =
-  (links: ApiLink[]) => (behandling: Behandling) =>
-    queryOptions({
-      queryKey: [BehandlingRel.HENT_MELLOMLAGRING, 'PAPIRSØKNAD', behandling.uuid, behandling.versjon],
-      queryFn: () =>
-        jsonEllerNull<{ innhold: string }>(
-          kyExtended.post(getUrlFromRel('HENT_MELLOMLAGRING', links), {
-            json: { behandlingUuid: behandling.uuid, type: 'PAPIRSØKNAD' },
-          }),
-        ),
-      enabled: harLenke(behandling, 'HENT_MELLOMLAGRING'),
-      staleTime: Infinity,
-    });
+const getMellomlagretPapirsøknadOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+  queryOptions({
+    queryKey: [BehandlingRel.HENT_MELLOMLAGRING, 'PAPIRSØKNAD', behandling.uuid, behandling.versjon],
+    queryFn: () =>
+      jsonEllerNull<{ innhold: string }>(
+        kyExtended.post(getUrlFromRel('HENT_MELLOMLAGRING', links), {
+          json: { behandlingUuid: behandling.uuid, type: 'PAPIRSØKNAD' },
+        }),
+      ),
+    enabled: harLenke(behandling, 'HENT_MELLOMLAGRING'),
+    staleTime: Infinity,
+  });
 
 const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRel('VERGE_FJERN_V2', links));
 

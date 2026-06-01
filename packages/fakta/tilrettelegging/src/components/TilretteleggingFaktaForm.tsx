@@ -11,12 +11,13 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   Arbeidsforhold,
-  ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsgiverOpplysningerPerId,
+  BekreftTilrettelegging,
+  SvpArbeidsforholdDto,
   SvpTilrettelegging,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
@@ -54,13 +55,7 @@ export const TilretteleggingFaktaForm = ({
   );
 
   const onSubmit = (values: TilretteleggingFormValues) => {
-    return submitCallback({
-      kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
-      termindato: values.termindato,
-      fødselsdato: values.fødselsdato,
-      begrunnelse: values.begrunnelse,
-      bekreftetSvpArbeidsforholdList: values.arbeidsforhold,
-    });
+    return submitCallback(transformValues(values));
   };
 
   return (
@@ -132,8 +127,32 @@ const buildInitialValues = (
 
 const alfabetiskArbeidsforhold =
   (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) =>
-  (a: ArbeidsforholdFodselOgTilrettelegging, b: ArbeidsforholdFodselOgTilrettelegging) => {
+  (a: SvpArbeidsforholdDto, b: SvpArbeidsforholdDto) => {
     const navnA = arbeidsgiverOpplysningerPerId[a.arbeidsgiverReferanse ?? '']?.navn;
     const navnB = arbeidsgiverOpplysningerPerId[b.arbeidsgiverReferanse ?? '']?.navn;
     return navnA && navnB ? navnA.localeCompare(navnB) : 0;
   };
+
+const transformValues = (values: TilretteleggingFormValues): BekreftSvangerskapspengerAp => ({
+  kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
+  termindato: notEmpty(values.termindato),
+  fødselsdato: values.fødselsdato,
+  begrunnelse: values.begrunnelse,
+  bekreftetSvpArbeidsforholdList: values.arbeidsforhold.map(mapTilBekreftTilrettelegging),
+});
+
+const mapTilBekreftTilrettelegging = (arbeidsforhold: SvpArbeidsforholdDto): BekreftTilrettelegging => ({
+  arbeidsgiverReferanse: arbeidsforhold.arbeidsgiverReferanse,
+  avklarteOppholdPerioder: arbeidsforhold.avklarteOppholdPerioder,
+  eksternArbeidsforholdReferanse: arbeidsforhold.eksternArbeidsforholdReferanse,
+  internArbeidsforholdReferanse: arbeidsforhold.internArbeidsforholdReferanse,
+  kanTilrettelegges: arbeidsforhold.kanTilrettelegges,
+  arbeidsforholdetErSplittet: arbeidsforhold.arbeidsforholdetErSplittet,
+  skalBrukes: arbeidsforhold.skalBrukes,
+  stillingsprosentStartTilrettelegging: arbeidsforhold.stillingsprosentStartTilrettelegging,
+  tilretteleggingBehovFom: arbeidsforhold.tilretteleggingBehovFom,
+  tilretteleggingDatoer: arbeidsforhold.tilretteleggingDatoer,
+  tilretteleggingId: arbeidsforhold.tilretteleggingId,
+  uttakArbeidType: arbeidsforhold.uttakArbeidType,
+  velferdspermisjoner: arbeidsforhold.velferdspermisjoner,
+});

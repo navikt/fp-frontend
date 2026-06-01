@@ -10,7 +10,7 @@ import {
   withMellomlagretFormData,
   withPanelData,
 } from '@navikt/fp-storybook-utils';
-import type { ArbeidsforholdFodselOgTilrettelegging, BehandlingFpSak, SvpTilrettelegging } from '@navikt/fp-types';
+import type { BehandlingFpSak, SvpArbeidsforholdDto, SvpTilrettelegging } from '@navikt/fp-types';
 
 import { SvangerskapVilkarProsessIndex } from './SvangerskapVilkarProsessIndex';
 
@@ -64,7 +64,9 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
           ],
           tilretteleggingId: 1,
           velferdspermisjoner: [],
-        } satisfies ArbeidsforholdFodselOgTilrettelegging,
+          arbeidsforholdetErSplittet: false,
+          skalVurdereSplittAvArbeidsforholdet: false,
+        } satisfies SvpArbeidsforholdDto,
       ],
       saksbehandlet: false,
     } satisfies SvpTilrettelegging,
@@ -96,7 +98,6 @@ export const AvslåttVilkår: Story = {
       språkkode: '-',
       behandlingsresultat: {
         avslagsarsak: '1099',
-        harRedigertVedtaksbrev: false,
         id: 0,
         type: 'AVSLÅTT',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',

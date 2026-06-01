@@ -22,7 +22,6 @@ export const behandling: BehandlingFpSak = {
 
     konsekvenserForYtelsen: [],
 
-    harRedigertVedtaksbrev: false,
     erRevurderingMedUendretUtfall: false,
     skjæringstidspunkt: {
       dato: '2025-02-12',

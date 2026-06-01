@@ -6,7 +6,7 @@ import { XMarkIcon } from '@navikt/aksel-icons';
 import { Button, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { type ArbeidsforholdFodselOgTilrettelegging, type ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
+import { type SvpArbeidsforholdDto, type SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
 import {
@@ -19,7 +19,7 @@ import styles from './tilretteleggingPeriodeTabellRad.module.css';
 
 interface Props {
   navn: `arbeidsforhold.${number}.tilretteleggingDatoer.${number}`;
-  tilrettelegging: ArbeidsforholdTilretteleggingDato;
+  tilrettelegging: SvpTilretteleggingDatoDto;
   readOnly: boolean;
   disabled: boolean;
   index: number;
@@ -27,7 +27,7 @@ interface Props {
   fjernTilrettelegging: (fomDato?: string) => void;
   setLeggTilKnapperDisablet: React.Dispatch<React.SetStateAction<boolean>>;
   stillingsprosentArbeidsforhold: number;
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
+  arbeidsforhold: SvpArbeidsforholdDto;
   tomDatoForTilrettelegging: string;
   termindato: string;
 }
@@ -51,7 +51,7 @@ export const TilretteleggingPeriodeTabellRad = ({
 
   const { setValue } = useFormContext<TilretteleggingFormValues>();
 
-  const oppdaterTilrettelegging = (values: ArbeidsforholdTilretteleggingDato) => {
+  const oppdaterTilrettelegging = (values: SvpTilretteleggingDatoDto) => {
     setOpen(false);
     setLeggTilKnapperDisablet(false);
     setValue(navn, values, { shouldDirty: true });
@@ -127,8 +127,8 @@ const TilretteleggingType = ({
   tilrettelegging,
 }: {
   stillingsprosentArbeidsforhold: number;
-  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
-  tilrettelegging: ArbeidsforholdTilretteleggingDato;
+  arbeidsforhold: SvpArbeidsforholdDto;
+  tilrettelegging: SvpTilretteleggingDatoDto;
 }) => {
   const velferdspermisjonsprosent = finnVelferdspermisjonprosent(arbeidsforhold);
   const stillingsprosent = tilrettelegging.type === 'INGEN_TILRETTELEGGING' ? 100 : tilrettelegging.stillingsprosent;
@@ -143,7 +143,7 @@ const TilretteleggingType = ({
   );
 };
 
-const TilretteleggingKilde = ({ tilrettelegging }: { tilrettelegging: ArbeidsforholdTilretteleggingDato }) => {
+const TilretteleggingKilde = ({ tilrettelegging }: { tilrettelegging: SvpTilretteleggingDatoDto }) => {
   switch (tilrettelegging.kilde) {
     case 'ENDRET_AV_SAKSBEHANDLER':
       return <FormattedMessage id="Kilde.EndretAvSaksbehandler" />;

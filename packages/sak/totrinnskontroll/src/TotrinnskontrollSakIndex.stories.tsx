@@ -21,7 +21,6 @@ const DEFAULT_BEHANDLING = lagFagsakBehandling({
   toTrinnsBehandling: true,
   behandlingsresultat: {
     type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
-    harRedigertVedtaksbrev: false,
     id: 1,
     vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
   },

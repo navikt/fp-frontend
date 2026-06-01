@@ -13,8 +13,8 @@ import {
 } from '@navikt/fp-storybook-utils';
 import {
   type ArbeidOgInntektsmelding,
-  type ArbeidsforholdFodselOgTilrettelegging,
   type ArbeidsgiverOpplysningerPerId,
+  type SvpArbeidsforholdDto,
   type SvpTilrettelegging,
 } from '@navikt/fp-types';
 
@@ -68,6 +68,8 @@ const TILRETTELEGGING_PERMISJON = {
       ],
       avklarteOppholdPerioder: [],
       stillingsprosentStartTilrettelegging: 100,
+      arbeidsforholdetErSplittet: false,
+      skalVurdereSplittAvArbeidsforholdet: false,
     },
   ],
   saksbehandlet: true,
@@ -103,6 +105,8 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
       ],
       avklarteOppholdPerioder: [],
       stillingsprosentStartTilrettelegging: 100,
+      arbeidsforholdetErSplittet: false,
+      skalVurdereSplittAvArbeidsforholdet: false,
     },
     {
       tilretteleggingId: 1008654,
@@ -123,6 +127,8 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
       avklarteOppholdPerioder: [],
       eksternArbeidsforholdReferanse: '23422323',
       stillingsprosentStartTilrettelegging: 100,
+      arbeidsforholdetErSplittet: false,
+      skalVurdereSplittAvArbeidsforholdet: false,
     },
   ],
   saksbehandlet: true,
@@ -151,6 +157,8 @@ const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
       avklarteOppholdPerioder: [],
       eksternArbeidsforholdReferanse: '23422323',
       stillingsprosentStartTilrettelegging: 100,
+      arbeidsforholdetErSplittet: false,
+      skalVurdereSplittAvArbeidsforholdet: false,
     },
     {
       tilretteleggingId: 1008654,
@@ -171,8 +179,10 @@ const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
       avklarteOppholdPerioder: [],
       eksternArbeidsforholdReferanse: '23422323',
       stillingsprosentStartTilrettelegging: 100,
+      arbeidsforholdetErSplittet: false,
+      skalVurdereSplittAvArbeidsforholdet: false,
     },
-  ] satisfies ArbeidsforholdFodselOgTilrettelegging[],
+  ] satisfies SvpArbeidsforholdDto[],
 };
 
 const DEFAULT_ARBEID_OG_INNTEKT = {
@@ -321,6 +331,8 @@ export const HarOpphold: Story = {
             },
           ],
           stillingsprosentStartTilrettelegging: 100,
+          arbeidsforholdetErSplittet: false,
+          skalVurdereSplittAvArbeidsforholdet: false,
         },
       ],
     },
@@ -371,6 +383,8 @@ export const ErReadonly: Story = {
             },
           ],
           stillingsprosentStartTilrettelegging: 100,
+          arbeidsforholdetErSplittet: false,
+          skalVurdereSplittAvArbeidsforholdet: false,
         },
       ],
     },
@@ -413,6 +427,8 @@ export const ErRevurdering: Story = {
           velferdspermisjoner: [],
           avklarteOppholdPerioder: [],
           stillingsprosentStartTilrettelegging: 100,
+          arbeidsforholdetErSplittet: false,
+          skalVurdereSplittAvArbeidsforholdet: false,
         },
       ],
     },

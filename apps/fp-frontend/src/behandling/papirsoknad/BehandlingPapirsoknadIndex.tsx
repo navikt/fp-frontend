@@ -43,7 +43,9 @@ const BehandlingPapirsoknadIndex = () => {
   const apKode = getAktivPapirsøknadApKode(behandling.aksjonspunkt);
 
   // Hent mellomlagret utkast (om det finnes)
-  const { data: mellomlagretResponse, isLoading: mellomlagringLaster } = useQuery(api.mellomlagretPapirsøknadOptions(behandling));
+  const { data: mellomlagretResponse, isLoading: mellomlagringLaster } = useQuery(
+    api.mellomlagretPapirsøknadOptions(behandling),
+  );
   const mellomlagretData = (() => {
     if (!mellomlagretResponse?.innhold) {
       return undefined;

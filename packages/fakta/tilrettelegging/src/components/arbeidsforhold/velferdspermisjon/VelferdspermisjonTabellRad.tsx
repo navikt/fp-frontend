@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import type { Permisjon } from '@navikt/fp-types';
+import type { VelferdspermisjonDto } from '@navikt/fp-types';
 
 import { VelferdspermisjonForm } from './VelferdspermisjonForm';
 
@@ -18,7 +18,7 @@ const utledStyleForRad = (open: boolean, erIkkeValgt: boolean) => {
 };
 
 interface Props {
-  velferdspermisjon: Permisjon;
+  velferdspermisjon: VelferdspermisjonDto;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;
