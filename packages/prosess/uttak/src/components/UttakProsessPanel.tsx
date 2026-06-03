@@ -3,6 +3,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
+import { sortPeriodsByFom } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
@@ -16,11 +17,12 @@ import type {
   Personoversikt,
   Soknad,
   StønadskontoType,
+  UttakResultatPeriodeLagreDto,
   Uttaksresultat,
   UttakStonadskontoer,
 } from '@navikt/fp-types';
 import type { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { erAksjonspunktÅpent, notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
 import { DisponibleStonadskontoerPanel } from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
@@ -129,35 +131,34 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
   return feil;
 };
 
-const transformValues = (perioder: PeriodeSoker[], aksjonspunkter: Aksjonspunkt[]): UttakAp[] => {
+const transformValues = (søkersPerioder: PeriodeSoker[], aksjonspunkter: Aksjonspunkt[]): UttakAp[] => {
   const harOverstyringAp = aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER);
   const skalSendeInnOverstyringAp = aksjonspunkter.length === 0 || (aksjonspunkter.length === 1 && harOverstyringAp);
 
-  const apKoder = skalSendeInnOverstyringAp
-    ? [AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER]
-    : aksjonspunkter
-        .filter(a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER)
-        .map(ap => ap.definisjon);
+  const perioder = søkersPerioder.map(mapPerioderTilBekreftelse);
+  if (skalSendeInnOverstyringAp) {
+    return [
+      {
+        kode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+        perioder,
+      },
+    ];
+  }
 
-  const perioderTilBekreftelse = perioder.map(periode => ({
-    ...periode,
-    aktiviteter: periode.aktiviteter.map(aktivitet => ({
-      ...aktivitet,
-      trekkdager: aktivitet.trekkdagerDesimaler,
-    })),
-  }));
+  const apKoder = aksjonspunkter
+    .filter(a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER)
+    .map(ap => ap.definisjon);
 
   return apKoder.map(ap => ({
     kode: validerApKodeOgHentApEnum(
       ap,
       AksjonspunktKode.FASTSETT_UTTAKPERIODER,
-      AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
       AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT,
       AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
       AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD,
       AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
     ),
-    perioder: perioderTilBekreftelse,
+    perioder,
   }));
 };
 
@@ -175,16 +176,6 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[] | undefined;
 }
-
-const sortByDate = (a: PeriodeSoker, b: PeriodeSoker): number => {
-  if (a.fom < b.fom) {
-    return -1;
-  }
-  if (a.fom > b.fom) {
-    return 1;
-  }
-  return 0;
-};
 
 const erOrdinærPeriode = (periode: PeriodeSoker | AnnenforelderUttakEøsPeriode): periode is PeriodeSoker => {
   return 'periodeResultatType' in periode;
@@ -262,7 +253,7 @@ export const UttakProsessPanel = ({
 
   const oppdaterPeriode = (oppdatertePerioder: PeriodeSoker[]) => {
     const andrePerioder = perioder.filter(p => p.fom !== oppdatertePerioder[0]?.fom);
-    const nyePerioder = andrePerioder.concat(oppdatertePerioder).sort(sortByDate);
+    const nyePerioder = andrePerioder.concat(oppdatertePerioder).sort(sortPeriodsByFom);
     setPerioder(nyePerioder);
     setIsDirty(true);
 
@@ -385,4 +376,14 @@ export const UttakProsessPanel = ({
       )}
     </VStack>
   );
+};
+
+const mapPerioderTilBekreftelse = (periode: PeriodeSoker): UttakResultatPeriodeLagreDto => {
+  return {
+    ...periode,
+    graderingAvslagÅrsak: notEmpty(periode.graderingAvslagÅrsak),
+    periodeResultatÅrsak: notEmpty(periode.periodeResultatÅrsak),
+    periodeResultatType: notEmpty(periode.periodeResultatType),
+    utsettelseType: notEmpty(periode.utsettelseType),
+  };
 };

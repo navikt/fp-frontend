@@ -10,12 +10,12 @@ export type UttakAktivitet = {
 export type UttakAktivitetType = {
   begrunnelse?: string;
   erOppfylt?: boolean;
-  periodeAarsak: PeriodeResultatÅrsak;
+  periodeResultatÅrsak?: PeriodeResultatÅrsak;
   graderingInnvilget: boolean;
-  graderingAvslagAarsak: GraderingAvslagÅrsak;
+  graderingAvslagÅrsak?: GraderingAvslagÅrsak;
   samtidigUttaksprosent?: string;
   flerbarnsdager: boolean;
   samtidigUttak?: boolean;
-  oppholdArsak: OppholdÅrsakType;
+  oppholdÅrsak: OppholdÅrsakType;
   aktiviteter: UttakAktivitet[];
 };
