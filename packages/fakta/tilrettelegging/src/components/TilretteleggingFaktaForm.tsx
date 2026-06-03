@@ -107,6 +107,11 @@ export const TilretteleggingFaktaForm = ({
           isReadOnly={isReadOnly}
           isSubmittable={isSubmittable}
           hasBegrunnelse={!!begrunnelse}
+          description={
+            harFAISU
+              ? intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnelseDescription.MedSplitt' })
+              : intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnelseDescription.UtenSplitt' })
+          }
         />
         <FaktaSubmitButton
           isSubmittable={isSubmittable}

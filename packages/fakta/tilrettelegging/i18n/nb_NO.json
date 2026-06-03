@@ -12,12 +12,14 @@
   "FAISU.FjernSplitt": "Fjern splitt",
   "FAISU.HarFlereArbeidsforhold": "Flere arbeidsforhold",
 
-  "TilretteleggingFaktaForm.Aksjonspunkt": "Kontroller opplysninger fra jordmor og arbeidsgiver",
+  "TilretteleggingFaktaForm.Aksjonspunkt": "Kontroller opplysninger fra jordmor og arbeidsgiver ",
   "TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner": "Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer",
-  "TilretteleggingFaktaForm.AksjonpunktFAISU": "Søker har flere stillinger hos denne arbeidsgiveren og skal ha graderte svangerskapspenger. Vurder om arbeidsforholdet må splittes hvis det er forskjellig utbetalingsgrad for stillingene.",
+  "TilretteleggingFaktaForm.AksjonpunktFAISU": "Søker har flere stillinger hos denne arbeidsgiveren og skal ha graderte svangerskapspenger. Vurder om arbeidsforholdet må splittes hvis det er forskjellig utbetalingsgrad for stillingene.  ",
   "TilretteleggingFaktaForm.Termindato": "Termindato",
   "TilretteleggingFaktaForm.Fodselsdato": "Fødselsdato",
   "TilretteleggingFaktaForm.UndersokNarmere": "Søker var ikke ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.",
+  "TilretteleggingFaktaForm.BegrunnelseDescription.UtenSplitt": "Beskriv eventuelle avvik mellom opplysningene fra søknaden og tilretteleggingsskjemaet, og hva som er gjort for å avklare avvikene. Hvis det ikke har vært noen avvik i saken, trenger du ikke begrunne noe.",
+  "TilretteleggingFaktaForm.BegrunnelseDescription.MedSplitt": "Beskriv eventuelle avvik mellom opplysningene fra søknaden og tilretteleggingsskjemaet, og hva som er gjort for å avklare avvikene. Gi også en kort begrunnelse for hvorfor du velger å splitte arbeidsforholdet, eller hvorfor det ikke er nødvendig.",
 
   "TilretteleggingFormFeil.IkkeAllePermisjonerVurdert": "Ikke alle velferdspermisjoner er vurdert",
   "TilretteleggingFormFeil.HarIkkeValgtArbeidsforhold": "Minst ett arbeidsforhold må brukes",

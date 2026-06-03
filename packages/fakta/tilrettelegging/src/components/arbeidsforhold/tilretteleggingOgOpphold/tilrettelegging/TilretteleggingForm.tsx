@@ -23,10 +23,10 @@ const validerAtDatoErUnik =
     intl: IntlShape,
     alleTilrettelegginger: SvpTilretteleggingDatoDto[],
     oppholdPerioder: SvpAvklartOppholdPeriode[],
-    tilrettelegging: SvpTilretteleggingDatoDto,
+    tilretteleggingDato: SvpTilretteleggingDatoDto,
   ) =>
   (dato: string) => {
-    const tilretteleggingerMinusEditert = alleTilrettelegginger.filter(alle => alle.fom !== tilrettelegging.fom);
+    const tilretteleggingerMinusEditert = alleTilrettelegginger.filter(alle => alle.fom !== tilretteleggingDato.fom);
     const harDuplikatFomTilrettelegging = tilretteleggingerMinusEditert.some(t => t.fom === dato);
     // Ferie kan dele fom med en tilrettelegging, så ferieopphold skal ikke regnes som duplikat her.
     const harDuplikatFomOpphold = oppholdPerioder
