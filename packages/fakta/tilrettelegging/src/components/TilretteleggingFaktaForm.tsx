@@ -147,7 +147,6 @@ const mapTilBekreftTilrettelegging = (arbeidsforhold: SvpArbeidsforholdDto): Bek
   eksternArbeidsforholdReferanse: arbeidsforhold.eksternArbeidsforholdReferanse,
   internArbeidsforholdReferanse: arbeidsforhold.internArbeidsforholdReferanse,
   kanTilrettelegges: arbeidsforhold.kanTilrettelegges,
-  arbeidsforholdetErSplittet: arbeidsforhold.arbeidsforholdetErSplittet,
   skalBrukes: arbeidsforhold.skalBrukes,
   stillingsprosentStartTilrettelegging: arbeidsforhold.stillingsprosentStartTilrettelegging,
   tilretteleggingBehovFom: arbeidsforhold.tilretteleggingBehovFom,

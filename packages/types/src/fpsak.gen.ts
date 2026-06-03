@@ -1617,7 +1617,6 @@ export type tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto = {
 };
 
 export type tjenester_behandling_svp_BekreftTilrettelegging = {
-  arbeidsforholdetErSplittet?: boolean;
   arbeidsgiverReferanse?: string;
   avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
   begrunnelse?: string;
@@ -1628,7 +1627,7 @@ export type tjenester_behandling_svp_BekreftTilrettelegging = {
   stillingsprosentStartTilrettelegging?: number;
   tilretteleggingBehovFom: string;
   tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
-  tilretteleggingId: number;
+  tilretteleggingId?: number;
   uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
   velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
 };
@@ -4263,7 +4262,6 @@ export type tjenester_behandling_medlem_MedlemskapDto_Utlandsopphold = {
 };
 
 export type tjenester_behandling_svp_SvpArbeidsforholdDto = {
-  arbeidsforholdetErSplittet: boolean;
   arbeidsgiverReferanse?: string;
   avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
   begrunnelse?: string;
@@ -4271,7 +4269,6 @@ export type tjenester_behandling_svp_SvpArbeidsforholdDto = {
   internArbeidsforholdReferanse?: string;
   kanTilrettelegges: boolean;
   skalBrukes: boolean;
-  skalVurdereSplittAvArbeidsforholdet: boolean;
   stillingsprosentStartTilrettelegging?: number;
   tilretteleggingBehovFom: string;
   tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
@@ -4564,7 +4561,8 @@ export type tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto = {
   gradering?: boolean;
   prosentArbeid?: number;
   stønadskontoType?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType;
-  trekkdagerDesimaler?: number;
+  trekkdager: number;
+  trekkdagerDesimaler: number;
   utbetalingsgrad?: number;
   uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
 };

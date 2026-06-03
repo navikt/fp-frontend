@@ -89,6 +89,7 @@ const lagUttakMedOpphold = (perioderSøker: PeriodeSoker[]): PeriodeSoker[] =>
       const oppholdInfo = {
         stønadskontoType: stonadskonto,
         trekkdagerDesimaler: calcDays(uttak.fom, uttak.tom),
+        trekkdager: calcDays(uttak.fom, uttak.tom),
       };
       uttakPerioder.aktiviteter = [oppholdInfo];
     }
