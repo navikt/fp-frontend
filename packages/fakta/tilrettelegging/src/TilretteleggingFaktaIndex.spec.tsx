@@ -62,7 +62,6 @@ describe('TilretteleggingFaktaIndex', () => {
       termindato: '2020-11-06',
       bekreftetSvpArbeidsforholdList: [
         {
-          arbeidsforholdetErSplittet: false,
           arbeidsgiverReferanse: '999999999',
           avklarteOppholdPerioder: [],
           eksternArbeidsforholdReferanse: '23422323',
@@ -342,7 +341,6 @@ describe('TilretteleggingFaktaIndex', () => {
       termindato: '2020-11-06',
       bekreftetSvpArbeidsforholdList: [
         {
-          arbeidsforholdetErSplittet: false,
           arbeidsgiverReferanse: '999999999',
           avklarteOppholdPerioder: [
             {
