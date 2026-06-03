@@ -10,6 +10,7 @@ import * as stories from './TilretteleggingFaktaIndex.stories';
 const {
   TilretteleggingMedVelferdspermisjon,
   HarOpphold,
+  HarFerieOpphold,
   SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod,
   TilretteleggingMed100ProsentVelferdspermisjon,
 } = composeStories(stories);
@@ -515,6 +516,103 @@ describe('TilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]!);
 
     expect(await screen.findByText('Skal ikke ha svangerskapspenger')).toBeInTheDocument();
+  });
+
+  it('skal tillate at et ferieopphold starter på samme fom som en tilrettelegging (skjæringstidspunktet)', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    await userEvent.click(screen.getByText('Opphold'));
+
+    await userEvent.click(screen.getByText('Ferie'));
+
+    const fomDato = screen.getAllByText('Fra og med')[2]!;
+    await userEvent.type(fomDato, lagNyDato('17.03.2020'));
+    fireEvent.blur(fomDato);
+
+    const tomDato = screen.getByText('Til og med');
+    await userEvent.type(tomDato, lagNyDato('25.03.2020'));
+    fireEvent.blur(tomDato);
+
+    await userEvent.click(screen.getByText('Legg til ny periode'));
+
+    expect(await screen.findByText('17.03.2020 - 25.03.2020')).toBeInTheDocument();
+    expect(screen.queryByText('Flere perioder med samme Fra og med')).not.toBeInTheDocument();
+    // Regresjonsvern: tilretteleggingsraden skal fortsatt få tom-dato fra neste tilrettelegging, ikke fra ferieoppholdet
+    expect(screen.getByText('17.03.2020 - 14.08.2020')).toBeInTheDocument();
+  });
+
+  it('skal fortsatt blokkere sykepengeopphold på en tilretteleggings fom, men fjerne feilen når en bytter til ferie', async () => {
+    render(<TilretteleggingMedVelferdspermisjon />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    await userEvent.click(screen.getByText('Opphold'));
+
+    await userEvent.click(screen.getByText('Sykepenger 100% i perioden med svangerskapspenger'));
+
+    const fomDato = screen.getAllByText('Fra og med')[2]!;
+    await userEvent.type(fomDato, lagNyDato('17.03.2020'));
+    fireEvent.blur(fomDato);
+
+    const tomDato = screen.getByText('Til og med');
+    await userEvent.type(tomDato, lagNyDato('25.03.2020'));
+    fireEvent.blur(tomDato);
+
+    await userEvent.click(screen.getByText('Legg til ny periode'));
+
+    expect(await screen.findByText('Flere perioder med samme Fra og med')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ferie'));
+
+    await waitFor(() =>
+      expect(screen.queryByText('Flere perioder med samme Fra og med')).not.toBeInTheDocument(),
+    );
+
+    await userEvent.click(screen.getByText('Legg til ny periode'));
+
+    expect(await screen.findByText('17.03.2020 - 25.03.2020')).toBeInTheDocument();
+  });
+
+  it('skal tillate å legge til en tilrettelegging på samme fom som et eksisterende ferieopphold', async () => {
+    render(<HarFerieOpphold />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
+
+    await userEvent.click(screen.getAllByText('Arbeidstakeren kan fortsette med redusert arbeidstid')[2]!);
+
+    await userEvent.click(screen.getByText('Legg til ny periode'));
+
+    const dato = screen.getAllByText('Fra og med').at(-1)!;
+    await userEvent.type(dato, lagNyDato('14.07.2020'));
+    fireEvent.blur(dato);
+
+    await userEvent.type(screen.getByLabelText('Arbeidsprosent'), '40');
+
+    await userEvent.click(screen.getByText('Legg til ny periode'));
+
+    expect(await screen.findByText('14.07.2020 - 14.08.2020')).toBeInTheDocument();
+    expect(screen.queryByText('Flere perioder med samme Fra og med')).not.toBeInTheDocument();
   });
 
   it('skal vise infoboks når en velger at en 100% permisjon er gyldig og feilmelding om en bekrefter ved å velge arbeidsforhold på ny', async () => {

@@ -27,7 +27,10 @@ const validerAtDatoErUnik =
   (dato: string) => {
     const tilretteleggingerMinusEditert = alleTilrettelegginger.filter(alle => alle.fom !== tilrettelegging.fom);
     const harDuplikatFomTilrettelegging = tilretteleggingerMinusEditert.some(t => t.fom === dato);
-    const harDuplikatFomOpphold = oppholdPerioder.some(t => t.fom === dato);
+    // Ferie kan dele fom med en tilrettelegging, så ferieopphold skal ikke regnes som duplikat her.
+    const harDuplikatFomOpphold = oppholdPerioder
+      .filter(o => o.oppholdÅrsak !== 'FERIE')
+      .some(t => t.fom === dato);
 
     return harDuplikatFomTilrettelegging || harDuplikatFomOpphold
       ? intl.formatMessage({ id: 'TilretteleggingForm.DuplikateDatoer' })

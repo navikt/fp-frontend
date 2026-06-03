@@ -328,6 +328,29 @@ export const HarOpphold: Story = {
   },
 };
 
+export const HarFerieOpphold: Story = {
+  args: {
+    aksjonspunkterForPanel: [defaultAksjonspunkt],
+    svangerskapspengerTilrettelegging: {
+      ...TILRETTELEGGING_PERMISJON,
+      arbeidsforholdListe: [
+        {
+          ...TILRETTELEGGING_PERMISJON.arbeidsforholdListe[0]!,
+          avklarteOppholdPerioder: [
+            {
+              fom: '2020-07-14',
+              tom: '2020-07-25',
+              oppholdÅrsak: 'FERIE',
+              oppholdKilde: 'INNTEKTSMELDING',
+            },
+          ],
+        },
+      ],
+    },
+    arbeidOgInntekt: SPESIELL_ARBEID_OG_INNTEKT,
+  },
+};
+
 export const ErReadonly: Story = {
   args: {
     aksjonspunkterForPanel: [defaultAksjonspunkt],
