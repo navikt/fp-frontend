@@ -23,7 +23,7 @@
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "react-intl": "10.1.6",
-    "react-router-dom": "7.15.0",
+    "react-router-dom": "7.16.0",
     "storybook": "10.4.0"
   },
   "devDependencies": {
