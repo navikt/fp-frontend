@@ -19,18 +19,14 @@ import type { TilretteleggingFormValues } from '../../../types/TilretteleggingFo
 import { OppholdPeriodeTabellRad } from './opphold/OppholdPeriodeTabellRad';
 import { TilretteleggingPeriodeTabellRad } from './tilrettelegging/TilretteleggingPeriodeTabellRad';
 
-const finnTilrettelegging = (
-  alleFomDatoerSortert: string[],
+const finnNesteTilretteleggingFom = (
   tilretteleggingDatoer: SvpTilretteleggingDatoDto[],
-  index: number,
-): SvpTilretteleggingDatoDto | undefined => {
-  const nesteFomDato = alleFomDatoerSortert[index + 1];
-  if (!nesteFomDato) {
-    return undefined;
-  }
-  const nesteTilrettelegging = tilretteleggingDatoer.find(t => t.fom === nesteFomDato);
-  return nesteTilrettelegging ?? finnTilrettelegging(alleFomDatoerSortert, tilretteleggingDatoer, index + 1);
-};
+  gjeldendeFom: string,
+): string | undefined =>
+  tilretteleggingDatoer
+    .map(t => t.fom)
+    .filter(fom => !!fom && dayjs(fom).isAfter(gjeldendeFom))
+    .sort((a, b) => dayjs(a).diff(dayjs(b)))[0];
 
 interface Props {
   arbeidsforhold: SvpArbeidsforholdDto;
@@ -117,14 +113,13 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {alleRaderSortert.map((rad, index) => {
+          {alleRaderSortert.map(rad => {
             if ('kilde' in rad) {
-              const fomDatoer = alleRaderSortert.map(r => r.fom);
               const tilretteleggingIndex = tilretteleggingDatoer.findIndex(t => t.fom === rad.fom);
-              const nesteTilrettelegging = finnTilrettelegging(fomDatoer, tilretteleggingDatoer, index);
+              const nesteTilretteleggingFom = finnNesteTilretteleggingFom(tilretteleggingDatoer, rad.fom);
 
-              const tomDatoForTilrettelegging = nesteTilrettelegging?.fom
-                ? dayjs(nesteTilrettelegging.fom).subtract(1, 'day').format(ISO_DATE_FORMAT)
+              const tomDatoForTilrettelegging = nesteTilretteleggingFom
+                ? dayjs(nesteTilretteleggingFom).subtract(1, 'day').format(ISO_DATE_FORMAT)
                 : dayjs(termindato).subtract(3, 'week').subtract(1, 'day').format(ISO_DATE_FORMAT);
 
               return (

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { FormProvider, useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -21,11 +22,15 @@ const validerAtDatoErUnik =
     oppholdPerioder: SvpAvklartOppholdPeriode[],
     alleTilrettelegginger: SvpTilretteleggingDatoDto[],
     opphold: SvpAvklartOppholdPeriode,
+    getValues: UseFormGetValues<FormValues>,
+    index: number,
   ) =>
   (dato: string) => {
     const oppholdMinusEditert = oppholdPerioder.filter(alle => alle.fom !== opphold.fom);
     const harDuplikatFomOpphold = oppholdMinusEditert.some(t => t.fom === dato);
-    const harDuplikatFomTilrettelegging = alleTilrettelegginger.some(t => t.fom === dato);
+    // Ferie kan starte på samme dato som en tilrettelegging (inkludert skjæringstidspunktet)
+    const erFerie = getValues(`${index}.oppholdÅrsak`) === 'FERIE';
+    const harDuplikatFomTilrettelegging = !erFerie && alleTilrettelegginger.some(t => t.fom === dato);
 
     return harDuplikatFomTilrettelegging || harDuplikatFomOpphold
       ? intl.formatMessage({ id: 'TilretteleggingForm.DuplikateDatoer' })
@@ -105,6 +110,15 @@ export const OppholdForm = ({
     },
   });
 
+  // Når årsak endres må fom revalideres slik at en eventuell foreldet «samme fom»-feil
+  // forsvinner når bruker bytter til Ferie (ferie kan dele fom med en tilrettelegging).
+  const valgtÅrsak = formMethods.watch(`${index}.oppholdÅrsak`);
+  useEffect(() => {
+    if (formMethods.getValues(`${index}.fom`)) {
+      void formMethods.trigger(`${index}.fom`);
+    }
+  }, [valgtÅrsak, index, formMethods]);
+
   const lagreIForm = (values: FormValues) => {
     oppdaterOpphold(values[index]!);
     formMethods.reset(values);
@@ -129,7 +143,7 @@ export const OppholdForm = ({
             validate={[
               required,
               hasValidDate,
-              validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold),
+              validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold, formMethods.getValues, index),
               validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
             ]}
             readOnly={forVisning}
