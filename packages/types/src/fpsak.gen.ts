@@ -1608,7 +1608,7 @@ export type tjenester_behandling_svp_BekreftSvangerskapspengerDto = {
   begrunnelse?: string;
   bekreftetSvpArbeidsforholdList?: Array<tjenester_behandling_svp_BekreftTilrettelegging>;
   fødselsdato?: string;
-  termindato: string;
+  termindato?: string;
 };
 
 export type tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto = {
