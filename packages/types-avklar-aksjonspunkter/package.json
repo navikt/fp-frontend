@@ -31,11 +31,11 @@
     "@navikt/ft-types": "6.1.7",
     "@navikt/ft-ui-komponenter": "8.0.10",
     "@navikt/ft-utils": "5.0.7",
-    "dayjs": "1.11.20",
+    "dayjs": "1.11.21",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "react-hook-form": "7.75.0",
-    "react-intl": "10.1.6"
+    "react-hook-form": "7.76.1",
+    "react-intl": "10.1.11"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
