@@ -109,7 +109,7 @@ export const Messages = ({
   const forhåndsvis = (e: React.MouseEvent | React.KeyboardEvent) => {
     if (brevmalkode) {
       if (brevData?.redigertHtml) {
-        forhåndsvisBrev({ brevmalkode, fritekst: brevData.redigertHtml, årsakskode });
+        forhåndsvisBrev({ brevmalkode, årsakskode });
       } else {
         forhåndsvisBrev({ brevmalkode, fritekst, årsakskode: årsakskode });
       }
@@ -229,7 +229,7 @@ export const Messages = ({
           forhåndsvisBrev={async html => {
             if (brevmalkode) {
               await mellomlagreBrev(brevmalkode, html);
-              forhåndsvisBrev({ brevmalkode, fritekst: html, årsakskode });
+              forhåndsvisBrev({ brevmalkode, årsakskode });
             }
           }}
           setVisRedigeringModal={setVisRedigeringModal}

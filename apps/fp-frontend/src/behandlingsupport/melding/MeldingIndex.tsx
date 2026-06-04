@@ -202,7 +202,6 @@ const getSubmitCallback =
       : {
           behandlingUuid: behandling.uuid,
           brevmalkode: values.brevmalkode,
-          fritekst: values.fritekst,
           årsakskode: values.årsakskode,
         };
     return submitMessage(data).then(() => {
@@ -233,7 +232,6 @@ const useVisForhandsvisningAvMelding = (behandling: FagsakBehandlingDto) => {
       api.forhåndsvisMelding({
         behandlingUuid: behandling.uuid,
         dokumentMal: params.brevmalkode as DokumentMalType,
-        fritekst: params.fritekst,
         årsakskode: params.årsakskode,
       }),
     onSuccess: response => {
