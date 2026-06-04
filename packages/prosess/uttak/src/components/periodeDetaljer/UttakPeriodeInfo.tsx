@@ -263,7 +263,7 @@ export const UttakPeriodeInfo = ({
             <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
           </Detail>
           <RhfSelect
-            name="oppholdArsak"
+            name="oppholdÅrsak"
             control={control}
             selectValues={mapPeriodeTyper(oppholdArsakTyper)}
             label=""

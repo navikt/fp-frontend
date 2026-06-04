@@ -131,6 +131,7 @@ export type {
   tjenester_behandling_uttak_dto_UttakResultatPerioderDto_PeriodeResultatÅrsakDto as PeriodeResultatÅrsakMuligeÅrsaker,
   tjenester_behandling_uttak_dto_UttakResultatPeriodeDto as PeriodeSoker,
   tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto as PeriodeSokerAktivitet,
+  tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto as UttakResultatPeriodeLagreDto,
   tjenester_behandling_svp_VelferdspermisjonDto as VelferdspermisjonDto,
   foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType as PermisjonsbeskrivelseType,
   tjenester_fagsak_dto_PersonDto as Person,

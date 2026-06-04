@@ -227,15 +227,15 @@ const byggDefaultValues = (
   return {
     begrunnelse: valgtPeriode.begrunnelse,
     erOppfylt: erPeriodeOppfylt(valgtPeriode, periodeResultatårsakKoder),
-    periodeAarsak: valgtPeriode.periodeResultatÅrsak,
+    periodeResultatÅrsak: valgtPeriode.periodeResultatÅrsak,
     graderingInnvilget: valgtPeriode.graderingInnvilget,
     samtidigUttak: valgtPeriode.samtidigUttak,
-    graderingAvslagAarsak: valgtPeriode.graderingAvslagÅrsak ?? '-',
+    graderingAvslagÅrsak: valgtPeriode.graderingAvslagÅrsak,
     samtidigUttaksprosent: valgtPeriode.samtidigUttaksprosent
       ? valgtPeriode.samtidigUttaksprosent.toString()
       : undefined,
     flerbarnsdager: valgtPeriode.flerbarnsdager,
-    oppholdArsak: valgtPeriode.oppholdÅrsak,
+    oppholdÅrsak: valgtPeriode.oppholdÅrsak,
     aktiviteter: sorterteAktiviteter.map(a => ({
       stønadskontoType: a.stønadskontoType ?? '-',
       weeks: finnUker(a, valgtPeriode),
@@ -253,10 +253,10 @@ const transformValues = (
   ...valgtPeriode,
   begrunnelse: values.begrunnelse,
   graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
-  oppholdÅrsak: values.oppholdArsak,
-  periodeResultatType: values.erOppfylt || values.oppholdArsak !== '-' ? 'INNVILGET' : 'AVSLÅTT',
-  graderingAvslagÅrsak: values.graderingAvslagAarsak,
-  periodeResultatÅrsak: values.periodeAarsak,
+  oppholdÅrsak: values.oppholdÅrsak,
+  periodeResultatType: values.erOppfylt || values.oppholdÅrsak !== '-' ? 'INNVILGET' : 'AVSLÅTT',
+  graderingAvslagÅrsak: values.graderingAvslagÅrsak,
+  periodeResultatÅrsak: values.periodeResultatÅrsak,
   samtidigUttaksprosent: values.samtidigUttaksprosent ? Number.parseFloat(values.samtidigUttaksprosent) : undefined,
   samtidigUttak: values.samtidigUttak,
   flerbarnsdager: values.flerbarnsdager,
@@ -270,6 +270,7 @@ const transformValues = (
       stønadskontoType: aktivitet.stønadskontoType,
       utbetalingsgrad: Number.parseFloat(aktivitet.utbetalingsgrad),
       trekkdagerDesimaler: Number.parseFloat(aktivitet.weeks) * 5 + Number.parseFloat(aktivitet.days),
+      trekkdager: Number.parseFloat(aktivitet.weeks) * 5 + Number.parseFloat(aktivitet.days),
     };
   }),
 });
@@ -326,7 +327,7 @@ export const UttakPeriodeForm = ({
   const erOppfylt = formMethods.watch('erOppfylt');
   const graderingInnvilget = formMethods.watch('graderingInnvilget');
   const samtidigUttak = formMethods.watch('samtidigUttak');
-  const valgtInnvilgelsesÅrsak = formMethods.watch('periodeAarsak');
+  const valgtInnvilgelsesÅrsak = formMethods.watch('periodeResultatÅrsak');
   const aktiviteter = formMethods.watch('aktiviteter');
 
   const stønadskontoType: UttakPeriodeType = aktiviteter[0]?.stønadskontoType ?? '-';
@@ -406,7 +407,7 @@ export const UttakPeriodeForm = ({
                 legend=""
                 hideLegend
                 validate={[required]}
-                onClick={() => formMethods.setValue('periodeAarsak', '-')}
+                onClick={() => formMethods.setValue('periodeResultatÅrsak', '-')}
               >
                 <HStack gap="space-16">
                   <Radio value={true} size="small">
@@ -421,7 +422,7 @@ export const UttakPeriodeForm = ({
                 <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
                   <VStack gap="space-16">
                     <RhfSelect
-                      name="periodeAarsak"
+                      name="periodeResultatÅrsak"
                       control={formMethods.control}
                       label={intl.formatMessage({
                         id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak',
@@ -448,7 +449,7 @@ export const UttakPeriodeForm = ({
                         </RhfRadioGroup>
                         {graderingInnvilget === false && (
                           <RhfSelect
-                            name="graderingAvslagAarsak"
+                            name="graderingAvslagÅrsak"
                             control={formMethods.control}
                             label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
                             validate={[required, notDash]}

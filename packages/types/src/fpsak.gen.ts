@@ -1608,7 +1608,7 @@ export type tjenester_behandling_svp_BekreftSvangerskapspengerDto = {
   begrunnelse?: string;
   bekreftetSvpArbeidsforholdList?: Array<tjenester_behandling_svp_BekreftTilrettelegging>;
   fødselsdato?: string;
-  termindato: string;
+  termindato?: string;
 };
 
 export type tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto = {
@@ -4579,7 +4579,7 @@ export type tjenester_behandling_uttak_dto_UttakResultatPeriodeDto = {
   mottattDato?: string;
   oppholdÅrsak: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak;
   periodeResultatType?: foreldrepenger_behandlingslager_uttak_PeriodeResultatType;
-  periodeResultatÅrsak: foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak;
+  periodeResultatÅrsak?: foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak;
   periodeType?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType;
   samtidigUttak?: boolean;
   samtidigUttaksprosent?: number;
