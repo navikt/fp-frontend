@@ -22,6 +22,7 @@ const minLength3 = minLength(3);
 export type ForhandsvisData = {
   årsakskode?: RevurderingVarslingÅrsak;
   dokumentMal: DokumentMalType;
+  fritekst?: string;
 };
 
 type FormValues = {
@@ -104,6 +105,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
     e.preventDefault();
     previewCallback({
       dokumentMal: 'VARREV',
+      fritekst: brevData?.redigertHtml ?? undefined,
     });
   };
   const ventearsaker = alleKodeverk['Venteårsak'];
@@ -222,7 +224,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
             if (mellomlagreBrev) {
               await mellomlagreBrev(html);
             }
-            previewCallback({ dokumentMal: 'VARREV' });
+            previewCallback({ dokumentMal: 'VARREV', fritekst: html });
           }}
           setVisRedigeringModal={setVisRedigeringModal}
           isReadOnly={!erÅpentAksjonspunkt}
