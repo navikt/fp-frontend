@@ -1,11 +1,12 @@
+import { useEffect, useState } from 'react';
 import { type FieldArrayWithId } from 'react-hook-form';
 
 import { ExpansionCard } from '@navikt/ds-react';
-import dayjs from 'dayjs';
 
 import type { Arbeidsforhold, ArbeidsgiverOpplysninger, KodeverkMedNavn } from '@navikt/fp-types';
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
+import { erInnenforIntervall, finnStillingsprosent } from '../arbeidsforholdUtils.ts';
 import { ArbeidsforholdHeader } from './ArbeidsforholdHeader';
 import { ArbeidsforholdPanel } from './ArbeidsforholdPanel';
 import type { FAISUProps } from './faisuUtils';
@@ -31,6 +32,7 @@ export const ArbeidsforholdExpansionCard = ({
   readOnly,
   faisu,
 }: Props) => {
+  const [open, setOpen] = useState(arbeidsforhold.skalBrukes);
   const alleIafAf = aoiArbeidsforhold.filter(iaya => iaya.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverReferanse);
 
   const af = finnArbeidsforhold(alleIafAf, arbeidsforhold.internArbeidsforholdReferanse);
@@ -40,13 +42,17 @@ export const ArbeidsforholdExpansionCard = ({
     : alleIafAf.length > 0 &&
       alleIafAf.every(a => !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, a.fom, a.tom));
 
-  // todo fiks dette til å ikke være nested
   const stillingsprosent = af
     ? af.stillingsprosent
     : finnStillingsprosent(alleIafAf, arbeidsforhold.tilretteleggingBehovFom);
 
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOpen(arbeidsforhold.skalBrukes);
+  }, [arbeidsforhold.skalBrukes]);
+
   return (
-    <ExpansionCard defaultOpen key={field.id} aria-label="arbeidsgiver">
+    <ExpansionCard open={open} onToggle={o => setOpen(o)} key={field.id} aria-label="arbeidsgiver">
       <ExpansionCard.Header>
         <ArbeidsforholdHeader
           arbeidsgiverOpplysning={arbeidsgiverOpplysning}
@@ -81,12 +87,3 @@ const finnArbeidsforhold = (
   return alleIafAf.length === 1 ? alleIafAf[0] : undefined;
 };
 
-const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato: string, tomDato: string): boolean => {
-  const dato = dayjs(tilretteleggingBehovFom);
-  return !(dato.isBefore(dayjs(fomDato || undefined)) || dato.isAfter(dayjs(tomDato || undefined)));
-};
-
-const finnStillingsprosent = (aoiArbeidsforhold: Arbeidsforhold[], tilretteleggingBehovFom: string) => {
-  const aoiListe = aoiArbeidsforhold.filter(a => erInnenforIntervall(tilretteleggingBehovFom, a.fom, a.tom));
-  return aoiListe.reduce((sum, aoi) => sum + (aoi.stillingsprosent ?? 0), 0);
-};

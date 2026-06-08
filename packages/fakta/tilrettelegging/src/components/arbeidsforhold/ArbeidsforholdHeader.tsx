@@ -81,16 +81,14 @@ export const ArbeidsforholdHeader = ({
                 />
               </>
             )}
-            {faisu?.type !== 'splittet' && (
-              <>
-                <span>{'\u2022'}</span>
-                <FormattedMessage
-                  id="ArbeidsforholdExpansionCard.Stillingsprosent"
-                  tagName="span"
-                  values={{ stillingsprosent: stillingsprosent }}
-                />
-              </>
-            )}
+            <>
+              <span>{'\u2022'}</span>
+              <FormattedMessage
+                id="ArbeidsforholdExpansionCard.Stillingsprosent"
+                tagName="span"
+                values={{ stillingsprosent: stillingsprosent }}
+              />
+            </>
           </HStack>
         </BodyShort>
       </VStack>

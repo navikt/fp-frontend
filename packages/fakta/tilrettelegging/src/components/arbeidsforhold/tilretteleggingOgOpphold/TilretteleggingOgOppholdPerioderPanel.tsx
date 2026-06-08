@@ -161,7 +161,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
           })}
         </Table.Body>
       </Table>
-      {!(readOnly || disabled) && !arbeidsforhold.arbeidsforholdetErSplittet && (
+      {!(readOnly || disabled) && (
         <HStack gap="space-16">
           <Button
             size="small"

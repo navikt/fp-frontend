@@ -5,10 +5,12 @@ import { FormattedMessage } from 'react-intl';
 import { PlusIcon } from '@navikt/aksel-icons';
 import { Button, Tag } from '@navikt/ds-react';
 
+import type { Arbeidsforhold } from '@navikt/fp-types';
+
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 
 export type FAISUProps = {
-  type: 'splittet' | 'hoved';
+  type: 'splittet' | 'kanSplittes';
   action: ReactNode | undefined;
   tag: ReactNode | undefined;
 };
@@ -19,17 +21,22 @@ export const getFAISUProps = (
   append: UseFieldArrayAppend<TilretteleggingFormValues, 'arbeidsforhold'>,
   remove: UseFieldArrayRemove,
   alleArbeidsforhold: Tilrettelegging[],
+  aoiArbeidsforhold: Arbeidsforhold[],
 ): FAISUProps | undefined => {
   if (!arbeidsforhold.skalVurdereSplittAvArbeidsforholdet && !arbeidsforhold.arbeidsforholdetErSplittet) {
     return undefined;
   }
 
+  const tilretteleggingHosSammeAG = alleArbeidsforhold.filter(
+    af => af.arbeidsgiverReferanse === arbeidsforhold.arbeidsgiverReferanse,
+  );
+
   return {
-    type: arbeidsforhold.arbeidsforholdetErSplittet ? 'splittet' : 'hoved',
-    action: getAction(arbeidsforhold, index, append, remove, alleArbeidsforhold),
+    type: tilretteleggingHosSammeAG.length === 1 ? 'kanSplittes' : 'splittet',
+    action: getAction(arbeidsforhold, index, append, remove, tilretteleggingHosSammeAG, aoiArbeidsforhold),
     tag: (
       <Tag data-color="warning" size="xsmall">
-        {arbeidsforhold.arbeidsforholdetErSplittet ? (
+        {tilretteleggingHosSammeAG.length > 1 ? (
           <FormattedMessage id="FAISU.SplittTag" />
         ) : (
           <FormattedMessage id="FAISU.HarFlereArbeidsforhold" />
@@ -44,44 +51,44 @@ const getAction = (
   index: number,
   append: UseFieldArrayAppend<TilretteleggingFormValues, 'arbeidsforhold'>,
   remove: UseFieldArrayRemove,
-  alleArbeidsforhold: Tilrettelegging[],
+  tilretteleggingHosSammeAG: Tilrettelegging[],
+  aoiArbeidsforhold: Arbeidsforhold[],
 ) => {
-  if (arbeidsforhold.arbeidsforholdetErSplittet) {
-    return (
-      <Button size="small" variant="secondary" type="button" data-color="accent" onClick={() => remove(index)}>
-        <FormattedMessage id="FAISU.FjernSplitt" />
-      </Button>
-    );
+  const finnesSplitt = tilretteleggingHosSammeAG.length > 1;
+  if (finnesSplitt) {
+    return undefined;
   }
-  const finnesSplitt = alleArbeidsforhold.some(
-    af => af.arbeidsgiverReferanse === arbeidsforhold.arbeidsgiverReferanse && af.arbeidsforholdetErSplittet,
+  const arbeidsforholdHosSammeAG = aoiArbeidsforhold.filter(
+    a => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverReferanse,
   );
-  if (!finnesSplitt && arbeidsforhold.skalVurdereSplittAvArbeidsforholdet) {
-    return (
-      <Button
-        size="small"
-        variant="secondary"
-        type="button"
-        data-color="accent"
-        icon={<PlusIcon aria-hidden />}
-        onClick={() => append(kopierArbeidsforhold(arbeidsforhold))}
-      >
-        <FormattedMessage id="FAISU.SplittArbeidsforhold" />
-      </Button>
-    );
-  }
-  return undefined;
+  return (
+    <Button
+      size="small"
+      variant="secondary"
+      type="button"
+      data-color="accent"
+      icon={<PlusIcon aria-hidden />}
+      onClick={() => {
+        append(kopierArbeidsforhold(arbeidsforhold, arbeidsforholdHosSammeAG));
+        remove(index);
+      }}
+    >
+      <FormattedMessage id="FAISU.SplittArbeidsforhold" values={{ antall: arbeidsforholdHosSammeAG.length }} />
+    </Button>
+  );
 };
 
 const kopierArbeidsforhold = (
   arbeidsforhold: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>,
-): FieldArray<TilretteleggingFormValues, 'arbeidsforhold'> => ({
-  ...arbeidsforhold,
-  tilretteleggingId: undefined,
-  eksternArbeidsforholdReferanse: undefined,
-  internArbeidsforholdReferanse: undefined,
-  skalVurdereSplittAvArbeidsforholdet: false,
-  arbeidsforholdetErSplittet: true,
-  velferdspermisjoner: [],
-  stillingsprosentStartTilrettelegging: undefined,
-});
+  arbeidsforholdHosSammeAG: Arbeidsforhold[],
+): FieldArray<TilretteleggingFormValues, 'arbeidsforhold'>[] =>
+  arbeidsforholdHosSammeAG.map(a => ({
+    ...arbeidsforhold,
+    tilretteleggingId: undefined,
+    stillingsprosentStartTilrettelegging: a.stillingsprosent,
+    internArbeidsforholdReferanse: a.internArbeidsforholdId,
+    skalVurdereSplittAvArbeidsforholdet: false,
+    arbeidsforholdetErSplittet: true,
+    // TODO: velferdspermisjoner må filtreres på noe vis
+    velferdspermisjoner: arbeidsforhold.velferdspermisjoner,
+  }));
