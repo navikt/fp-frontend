@@ -27,7 +27,6 @@ import { erAksjonspunktÅpent, notEmpty, useMellomlagretFormData, usePanelDataCo
 import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
 import { DisponibleStonadskontoerPanel } from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
 import { UttakTidslinjeIndex } from './tidslinje/UttakTidslinjeIndex';
-import { sortPeriodsByFom } from '@navikt/ft-utils';
 
 const UTTAK_PANEL_AKSJONSPUNKT_KODER: Partial<Record<AksjonspunktDefinisjon, string>> = {
   5067: 'UttakPanel.Aksjonspunkt.5067',
