@@ -9,7 +9,7 @@
 
   "FAISU.SplittTag": "Splitt",
   "FAISU.SplittArbeidsforhold": "Splitt til {antall} arbeidsforhold",
-  "FAISU.FjernSplitt": "Fjern splitt",
+  "FAISU.FjernSplittArbeidsforhold": "Fjern splitt av tilrettelegging for {antall} arbeidsforhold",
   "FAISU.HarFlereArbeidsforhold": "Flere arbeidsforhold",
 
   "TilretteleggingFaktaForm.Aksjonspunkt": "Kontroller opplysninger fra jordmor og arbeidsgiver ",

@@ -48,7 +48,7 @@ export const ArbeidsforholdFieldArray = ({
             uttakArbeidTyper={uttakArbeidTyper}
             aoiArbeidsforhold={aoiArbeidsforhold}
             arbeidsgiverOpplysning={arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse ?? '']}
-            faisu={getFAISUProps(field, index, append, remove, arbeidsforholdListe, aoiArbeidsforhold)}
+            faisu={getFAISUProps(field, fields, aoiArbeidsforhold, append, remove)}
           />
         );
       })}
