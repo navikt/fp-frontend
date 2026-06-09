@@ -1342,56 +1342,56 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-icons@npm:8.10.6, @navikt/aksel-icons@npm:^8.10.6":
-  version: 8.10.6
-  resolution: "@navikt/aksel-icons@npm:8.10.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F8.10.6%2F3903bc63ecdf7c98f3819fca43cb52fcd8384cb8"
-  checksum: 10/a3af1b02152d29cbef1861bf91827109f19490a740204ea6d180713c182ddb04b8745f4e9d82f631d1c6a9b83c49cbf52bf433bfd0f64d580505f4818c710143
+"@navikt/aksel-icons@npm:8.11.1, @navikt/aksel-icons@npm:^8.11.1":
+  version: 8.11.1
+  resolution: "@navikt/aksel-icons@npm:8.11.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F8.11.1%2F3e09f9941a2cb819aaa2fe83771ab061b0a13456"
+  checksum: 10/c5a86552c1ba35e9b239f21719d866c636960b2102ea0483af58e1b4509d80eaabb7a694a26a68e53ee04c7c53f7d557850bf9f1683a8bd553c11c54d9885243
   languageName: node
   linkType: hard
 
-"@navikt/aksel-stylelint@npm:8.10.6":
-  version: 8.10.6
-  resolution: "@navikt/aksel-stylelint@npm:8.10.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F8.10.6%2F2d6d0da0654298e35e1c20434b3eaf5778d2a4cc"
-  checksum: 10/bfc39767368e86640f7574f0291e49483580d9b8c06f9f945170054bbcf43111e1045dbc494465e27590e06d282bf6cf7c4b0894945f7cad11a6e344ec47b9f5
+"@navikt/aksel-stylelint@npm:8.11.1":
+  version: 8.11.1
+  resolution: "@navikt/aksel-stylelint@npm:8.11.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F8.11.1%2F61cf7156f6a8108bab756be3688c2fedd516c685"
+  checksum: 10/3f42d066cf509dded9648e99356c55dc20e528a230a6212a252f052b516501ad787ce383c9d50b093cb398a9590ef553bc9509ccf696eae0d8495e7362fa4e59
   languageName: node
   linkType: hard
 
-"@navikt/ds-css@npm:8.10.6":
-  version: 8.10.6
-  resolution: "@navikt/ds-css@npm:8.10.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F8.10.6%2F5a49d9b7c2bf0326289ff0a69505df89f36a3e68"
-  checksum: 10/ec39c8229f536aadc59c2f7f6342ad8e35e4749b0378df7c88b82fb3b863dac396c3fd0b01e49afee0504ea84da921594d927bd2e5bdfeb49050ae6510a31afd
+"@navikt/ds-css@npm:8.11.1":
+  version: 8.11.1
+  resolution: "@navikt/ds-css@npm:8.11.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F8.11.1%2Fd2edadc20c615f882b95093aea06cdb5960fadd8"
+  checksum: 10/50967750ef2f7faa5082021489a1f9a2b0c705f897bacda56cc26dba0f98d7380222c406c5eeb27b0729bdf3df52e137bc6481de0ba125f80040245d14ef47cd
   languageName: node
   linkType: hard
 
-"@navikt/ds-react@npm:8.10.6":
-  version: 8.10.6
-  resolution: "@navikt/ds-react@npm:8.10.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F8.10.6%2F6b1f5751a41ab6025ac61a8375e9c59f8add65d7"
+"@navikt/ds-react@npm:8.11.1":
+  version: 8.11.1
+  resolution: "@navikt/ds-react@npm:8.11.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F8.11.1%2Fca7cc25e52c58a890ff5a721238a991b8a4a071e"
   dependencies:
     "@floating-ui/react": "npm:0.27.19"
     "@floating-ui/react-dom": "npm:^2.1.8"
-    "@navikt/aksel-icons": "npm:^8.10.6"
-    "@navikt/ds-tokens": "npm:^8.10.6"
+    "@navikt/aksel-icons": "npm:^8.11.1"
+    "@navikt/ds-tokens": "npm:^8.11.1"
     date-fns: "npm:^4.0.0"
     react-day-picker: "npm:9.14.0"
   peerDependencies:
     "@types/react": ^17.0.30 || ^18 || ^19
     react: ^17 || ^18 || ^19
     react-dom: ^17 || ^18 || ^19
-  checksum: 10/3bd9f2c77852c25e493fa7e2523b2651efd4b08896c2f1969539c49d557c683547a57c1b5d499781b055366b6bd15eb1f6cdade0e8710bc331ff2d78c9074325
+  checksum: 10/595695d47183d41bc0a5b30c1f32a4c2d0031e4f84819afe3478bf721bfe334a2d6891abddf5b8c3b9ba02398e7c15c6e8b532da2a0d6e756e6d035d4fcc0e64
   languageName: node
   linkType: hard
 
-"@navikt/ds-tailwind@npm:8.10.6":
-  version: 8.10.6
-  resolution: "@navikt/ds-tailwind@npm:8.10.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tailwind%2F8.10.6%2F996cbf5080b3925a352fb42fae024755b2bbad63"
-  checksum: 10/0c8dfac035e16052383b315f159c9949ef70ae3300bbc3ceaa9eaa63ccb9a319e1cf6ebc485d597f978a0ecddeaae2ba52beec48a25c3fa72fc3eb14f9c47c12
+"@navikt/ds-tailwind@npm:8.11.1":
+  version: 8.11.1
+  resolution: "@navikt/ds-tailwind@npm:8.11.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tailwind%2F8.11.1%2Fc6a24d2feb36a3b2affa9e5aa4025a1ef1123543"
+  checksum: 10/3c654e4fc14cbf9d4f5cdfe19795aa7c62e27d1c0116213fd4509f508536192a420a90a43f6804ffd2e67a0ad86c2df916842edfd73537ed50b2283c97396e73
   languageName: node
   linkType: hard
 
-"@navikt/ds-tokens@npm:8.10.6, @navikt/ds-tokens@npm:^8.10.6":
-  version: 8.10.6
-  resolution: "@navikt/ds-tokens@npm:8.10.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.10.6%2F3070167a2ab8445b7f04935d47175c87cc0167a3"
-  checksum: 10/1ea18dc621a0ac36e92753d489fadb8140e186f0820b90f4ca0cb2d57e4aa6dcf44a69e87731530490c4eda53251562ca85f8deb46571c3ecdd799a5eab1c671
+"@navikt/ds-tokens@npm:8.11.1, @navikt/ds-tokens@npm:^8.11.1":
+  version: 8.11.1
+  resolution: "@navikt/ds-tokens@npm:8.11.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-tokens%2F8.11.1%2F15883c8c993965a47c8e12dcf588687095a70a4e"
+  checksum: 10/a804f381eb0fbf00a01d29b1cabb45b4aa6240f86fe3accc8f281bdd61b7a8fa2ab1d95c5f7d31ecd7ca7e5e98adc9c46365073831d04266b71ffca0d36ab457
   languageName: node
   linkType: hard
 
@@ -1400,7 +1400,7 @@ __metadata:
   resolution: "@navikt/fp-app-felles@workspace:packages/app-felles"
   dependencies:
     "@formatjs/cli-lib": "npm:8.6.0"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1435,11 +1435,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-avdelingsleder@workspace:apps/fp-avdelingsleder"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-css": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
-    "@navikt/ds-tailwind": "npm:8.10.6"
-    "@navikt/ds-tokens": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-css": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
+    "@navikt/ds-tailwind": "npm:8.11.1"
+    "@navikt/ds-tokens": "npm:8.11.1"
     "@navikt/fp-app-felles": "workspace:*"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -1493,8 +1493,8 @@ __metadata:
     "@editorjs/header": "npm:2.8.8"
     "@editorjs/list": "npm:2.0.9"
     "@editorjs/paragraph": "npm:2.11.7"
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1578,7 +1578,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-aap@workspace:packages/fakta/aap"
   dependencies:
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1613,8 +1613,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-arbeid-og-inntekt@workspace:packages/fakta/arbeid-og-inntekt"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1654,8 +1654,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-arbeidsforhold@workspace:packages/fakta/arbeidsforhold"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1685,8 +1685,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-besteberegning@workspace:packages/fakta/besteberegning"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1723,8 +1723,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-felles@workspace:packages/fakta/felles"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1761,8 +1761,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-fodsel@workspace:packages/fakta/fodsel"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1801,8 +1801,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-inntektsmelding@workspace:packages/fakta/inntektsmelding"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1835,8 +1835,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-medlemskap@workspace:packages/fakta/medlemskap"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1874,8 +1874,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg-og-rett@workspace:packages/fakta/omsorg-og-rett"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1912,8 +1912,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg@workspace:packages/fakta/omsorg"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1950,8 +1950,8 @@ __metadata:
   resolution: "@navikt/fp-fakta-omsorgsovertakelse@workspace:packages/fakta/omsorgsovertakelse"
   dependencies:
     "@formatjs/cli-lib": "npm:8.6.0"
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1988,8 +1988,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-opptjening@workspace:packages/fakta/opptjening"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2025,8 +2025,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-permisjon@workspace:packages/fakta/permisjon"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2064,8 +2064,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-saken@workspace:packages/fakta/saken"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2104,8 +2104,8 @@ __metadata:
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta/tilrettelegging"
   dependencies:
     "@formatjs/cli-lib": "npm:8.6.0"
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2143,8 +2143,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttak-eos@workspace:packages/fakta/uttak-eøs"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2182,8 +2182,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttak@workspace:packages/fakta/uttak"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2222,8 +2222,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttaksdokumentasjon@workspace:packages/fakta/uttaksdokumentasjon"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2262,8 +2262,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-verge@workspace:packages/fakta/verge"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2301,7 +2301,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-ytelser@workspace:packages/fakta/ytelser"
   dependencies:
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2328,10 +2328,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-frontend@workspace:apps/fp-frontend"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-css": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
-    "@navikt/ds-tailwind": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-css": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
+    "@navikt/ds-tailwind": "npm:8.11.1"
     "@navikt/fp-app-felles": "workspace:*"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -2455,10 +2455,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-journalforing@workspace:apps/fp-journalforing"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-css": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
-    "@navikt/ds-tailwind": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-css": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
+    "@navikt/ds-tailwind": "npm:8.11.1"
     "@navikt/fp-app-felles": "workspace:*"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -2527,9 +2527,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-los-felles@workspace:packages/los/felles"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
-    "@navikt/ds-tokens": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
+    "@navikt/ds-tokens": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2568,8 +2568,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-los-saksbehandler@workspace:packages/los/saksbehandler"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2608,8 +2608,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-modal-sett-pa-vent@workspace:packages/modal-sett-pa-vent"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2642,8 +2642,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-papirsoknad-ui-komponenter@workspace:packages/papirsoknad-ui-komponenter"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2678,8 +2678,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-papirsoknad@workspace:packages/papirsoknad"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2710,7 +2710,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-anke-resultat@workspace:packages/prosess/anke-resultat"
   dependencies:
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2739,7 +2739,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-anke-trygderettsbehandling@workspace:packages/prosess/anke-trygderettsbehandling"
   dependencies:
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2768,7 +2768,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-anke@workspace:packages/prosess/anke"
   dependencies:
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2797,8 +2797,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-beregningsresultat@workspace:packages/prosess/beregningsresultat"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2827,8 +2827,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-felles@workspace:packages/prosess/felles"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
@@ -2854,8 +2854,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-formkrav@workspace:packages/prosess/formkrav"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2893,8 +2893,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-innsyn@workspace:packages/prosess/innsyn"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2933,8 +2933,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-klagevurdering@workspace:packages/prosess/klagevurdering"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2972,8 +2972,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-simulering@workspace:packages/prosess/simulering"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3011,8 +3011,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-soknadsfrist@workspace:packages/prosess/soknadsfrist"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3050,8 +3050,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-tilkjent-ytelse@workspace:packages/prosess/tilkjent-ytelse"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3083,8 +3083,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-uttak@workspace:packages/prosess/uttak"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3123,8 +3123,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-varsel-om-revurdering@workspace:packages/prosess/varsel-om-revurdering"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-brev-editor": "workspace:*"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -3163,8 +3163,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak-innsyn@workspace:packages/prosess/vedtak-innsyn"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3202,7 +3202,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak-klage@workspace:packages/prosess/vedtak-klage"
   dependencies:
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3235,8 +3235,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vedtak@workspace:packages/prosess/vedtak"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-brev-editor": "workspace:*"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -3276,8 +3276,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-fodsel@workspace:packages/prosess/vilkar-fodsel"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3313,8 +3313,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-opptjening@workspace:packages/prosess/vilkar-opptjening"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3351,8 +3351,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-overstyring@workspace:packages/prosess/vilkar-overstyring"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3390,8 +3390,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-sokers-opplysningsplikt@workspace:packages/prosess/vilkar-sokers-opplysningsplikt"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3427,8 +3427,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-soknadsfrist@workspace:packages/prosess/vilkar-soknadsfrist"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3464,8 +3464,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-prosess-vilkar-svangerskap@workspace:packages/prosess/vilkar-svangerskap"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3501,8 +3501,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-aktor@workspace:packages/sak/aktor"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3533,8 +3533,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-behandling-velger@workspace:packages/sak/behandling-velger"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3565,8 +3565,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-dekorator@workspace:packages/sak/dekorator"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3597,8 +3597,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-dokumenter@workspace:packages/sak/dokumenter"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3629,8 +3629,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-fagsak-profil@workspace:packages/sak/fagsak-profil"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3660,8 +3660,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-historikk@workspace:packages/sak/historikk"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3693,7 +3693,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-infosider@workspace:packages/sak/infosider"
   dependencies:
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3720,8 +3720,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meldinger@workspace:packages/sak/meldinger"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-brev-editor": "workspace:*"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -3756,8 +3756,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-apne-for-endringer@workspace:packages/sak/meny-apne-for-endringer"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3785,8 +3785,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-endre-utland@workspace:packages/sak/meny-endre-utland"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3818,8 +3818,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-henlegg@workspace:packages/sak/meny-henlegg"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3852,8 +3852,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-merk-som-haster@workspace:packages/sak/meny-merk-som-haster"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3881,8 +3881,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny-ny-behandling@workspace:packages/sak/meny-ny-behandling"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3945,8 +3945,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-meny@workspace:packages/sak/meny"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -3980,8 +3980,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-notat@workspace:packages/sak/notat"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -4014,8 +4014,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-risikoklassifisering@workspace:packages/sak/risikoklassifisering"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -4051,8 +4051,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-sok@workspace:packages/sak/sok"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -4086,8 +4086,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-totrinnskontroll@workspace:packages/sak/totrinnskontroll"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -4127,7 +4127,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-ukjent-adresse@workspace:packages/sak/ukjent-adresse"
   dependencies:
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -4153,8 +4153,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-visittkort@workspace:packages/sak/visittkort"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -4183,7 +4183,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-storybook-utils@workspace:packages/storybook-utils"
   dependencies:
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4209,9 +4209,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-types-avklar-aksjonspunkter@workspace:packages/types-avklar-aksjonspunkter"
   dependencies:
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-css": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-css": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
@@ -4254,7 +4254,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-ui-komponenter@workspace:packages/ui-komponenter"
   dependencies:
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-konstanter": "workspace:^"
@@ -4272,8 +4272,8 @@ __metadata:
   resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
   dependencies:
     "@formatjs/cli-lib": "npm:8.6.0"
-    "@navikt/aksel-icons": "npm:8.10.6"
-    "@navikt/ds-react": "npm:8.10.6"
+    "@navikt/aksel-icons": "npm:8.11.1"
+    "@navikt/ds-react": "npm:8.11.1"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -8593,7 +8593,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
-    "@navikt/aksel-stylelint": "npm:8.10.6"
+    "@navikt/aksel-stylelint": "npm:8.11.1"
     "@storybook/addon-a11y": "npm:10.4.0"
     "@storybook/addon-links": "npm:10.4.0"
     "@storybook/react": "npm:10.4.0"
