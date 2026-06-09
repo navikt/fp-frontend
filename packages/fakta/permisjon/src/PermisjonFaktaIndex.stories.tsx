@@ -60,6 +60,7 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
 
           årsak: 'PERMISJON',
           saksbehandlersVurdering: '-',
+          permisjoner: [],
         },
         {
           arbeidsgiverIdent: '91090909+',
@@ -76,6 +77,7 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
 
           årsak: 'PERMISJON',
           saksbehandlersVurdering: '-',
+          permisjoner: [],
         },
       ],
       inntektsmeldinger: [],
@@ -145,6 +147,7 @@ export const FlereArbeidsforhold: Story = {
 
           årsak: 'PERMISJON',
           saksbehandlersVurdering: '-',
+          permisjoner: [],
         },
         {
           arbeidsgiverIdent: '910909090',
@@ -160,6 +163,7 @@ export const FlereArbeidsforhold: Story = {
             årsak: 'PERMISJON_UTEN_SLUTTDATO',
           },
           saksbehandlersVurdering: '-',
+          permisjoner: [],
         },
       ],
       inntektsmeldinger: [
@@ -275,6 +279,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           },
 
           årsak: 'PERMISJON',
+          permisjoner: [],
         },
         {
           arbeidsgiverIdent: '910909088',
@@ -291,6 +296,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
 
           årsak: 'PERMISJON',
           saksbehandlersVurdering: '-',
+          permisjoner: [],
         },
       ],
       inntektsmeldinger: [
@@ -371,6 +377,7 @@ export const VisFødselsdatoNårPrivatperson: Story = {
 
           årsak: 'PERMISJON',
           saksbehandlersVurdering: '-',
+          permisjoner: [],
         },
       ],
       inntektsmeldinger: [],

@@ -32,6 +32,7 @@ const defaultArbeidsforhold = {
   stillingsprosent: 100,
   tom: '2022-12-31',
   begrunnelse: 'Dette er en begrunnelse',
+  permisjoner: [],
 } satisfies Arbeidsforhold;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {

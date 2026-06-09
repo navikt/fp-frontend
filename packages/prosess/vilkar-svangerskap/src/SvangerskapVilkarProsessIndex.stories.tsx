@@ -64,6 +64,7 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
           ],
           tilretteleggingId: 1,
           velferdspermisjoner: [],
+          skalVurdereSplittAvArbeidsforholdet: false,
         } satisfies SvpArbeidsforholdDto,
       ],
       saksbehandlet: false,
