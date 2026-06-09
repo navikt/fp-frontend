@@ -5,6 +5,7 @@ export enum FaktaPanelCode {
   ARBEID_OG_INNTEKT = 'arbeidoginntekt',
   BEREGNING = 'beregning',
   BESTEBEREGNING = 'besteberegning',
+  ARBEIDSAVKLARINGSPENGER = 'arbeidsavklaringspenger',
   DEFAULT = 'default',
   FORDELING = 'fordeling',
   INNTEKTSMELDINGER = 'inntektsmeldinger',
