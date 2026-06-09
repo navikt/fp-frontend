@@ -244,6 +244,7 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '5089'
   | '5041'
   | '5062'
+  | '5104'
   | '5091'
   | '5092'
   | '5095'
@@ -252,7 +253,6 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '5101'
   | '5102'
   | '5103'
-  | '5104'
   | '6002'
   | '6003'
   | '6005'
@@ -588,6 +588,9 @@ export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto = (
   | ({
       '@type': '5049';
     } & foreldrepenger_domene_rest_dto_FastsettBruttoBeregningsgrunnlagSNforNyIArbeidslivetDto)
+  | ({
+      '@type': '5104';
+    } & foreldrepenger_domene_rest_dto_KontrollerAAPKombinertATFLDto)
   | ({
       '@type': '5062';
     } & foreldrepenger_domene_rest_dto_KontrollerBesteberegningDto)
@@ -1342,6 +1345,10 @@ export type foreldrepenger_domene_rest_dto_InntektPrAndelDto = {
   inntekt?: number;
 };
 
+export type foreldrepenger_domene_rest_dto_KontrollerAAPKombinertATFLDto = {
+  begrunnelse?: string;
+};
+
 export type foreldrepenger_domene_rest_dto_KontrollerBesteberegningDto = {
   begrunnelse?: string;
   besteberegningErKorrekt: boolean;
@@ -1609,7 +1616,7 @@ export type tjenester_behandling_svp_BekreftSvangerskapspengerDto = {
   begrunnelse?: string;
   bekreftetSvpArbeidsforholdList?: Array<tjenester_behandling_svp_BekreftTilrettelegging>;
   fødselsdato?: string;
-  termindato?: string;
+  termindato: string;
 };
 
 export type tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto = {
@@ -2549,6 +2556,7 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto = 
   fom: string;
   internArbeidsforholdId?: string;
   permisjonOgMangel?: foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto;
+  permisjoner: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonDto>;
   saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
   stillingsprosent?: number;
   tom: string;
@@ -2565,6 +2573,13 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto = {
   fom?: string;
   tom?: string;
   type?: foreldrepenger_domene_iay_modell_kodeverk_InntektspostType;
+};
+
+export type foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonDto = {
+  permisjonFom: string;
+  permisjonTom?: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto = {
@@ -4270,6 +4285,7 @@ export type tjenester_behandling_svp_SvpArbeidsforholdDto = {
   internArbeidsforholdReferanse?: string;
   kanTilrettelegges: boolean;
   skalBrukes: boolean;
+  skalVurdereSplittAvArbeidsforholdet: boolean;
   stillingsprosentStartTilrettelegging?: number;
   tilretteleggingBehovFom: string;
   tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
@@ -4765,7 +4781,6 @@ export type foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType 
 export type foreldrepenger_dokumentbestiller_dto_BestillDokumentDto = {
   behandlingUuid?: string;
   brevmalkode: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
-  fritekst?: string;
   årsakskode?: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
 };
 
@@ -4774,7 +4789,6 @@ export type foreldrepenger_dokumentbestiller_dto_ForhåndsvisDokumentDto = {
   behandlingUuid: string;
   dokumentMal?: foreldrepenger_behandlingslager_behandling_dokument_DokumentMalType;
   fritekst?: string;
-  tittel?: string;
   årsakskode?: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
 };
 

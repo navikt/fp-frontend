@@ -36,6 +36,7 @@ const defaultArbeidsforhold = {
   fom: '2019-12-06',
   stillingsprosent: 100,
   tom: '2022-12-31',
+  permisjoner: [],
 } satisfies Arbeidsforhold;
 
 const meta = {
@@ -838,6 +839,7 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
             type: 'VELFERDSPERMISJON',
           },
           saksbehandlersVurdering: '-',
+          permisjoner: [],
         },
       ],
       inntektsmeldinger: [
