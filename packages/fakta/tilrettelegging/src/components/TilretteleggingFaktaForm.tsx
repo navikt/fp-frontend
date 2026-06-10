@@ -1,7 +1,7 @@
 import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, HStack, VStack } from '@navikt/ds-react';
+import { HStack, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
@@ -113,25 +113,12 @@ export const TilretteleggingFaktaForm = ({
               : intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnelseDescription.UtenSplitt' })
           }
         />
-        <HStack gap="space-16">
-          <FaktaSubmitButton
-            isSubmittable={isSubmittable}
-            isReadOnly={isReadOnly}
-            isSubmitting={formMethods.formState.isSubmitting}
-            isDirty={formMethods.formState.isDirty}
-          />
-          {!isReadOnly && (
-            <Button
-              type="reset"
-              size="small"
-              variant="secondary"
-              disabled={!formMethods.formState.isDirty}
-              className="self-start"
-            >
-              <FormattedMessage id="TilretteleggingFaktaForm.Reset" />
-            </Button>
-          )}
-        </HStack>
+        <FaktaSubmitButton
+          isSubmittable={isSubmittable}
+          isReadOnly={isReadOnly}
+          isSubmitting={formMethods.formState.isSubmitting}
+          isDirty={formMethods.formState.isDirty}
+        />
       </VStack>
     </RhfForm>
   );
