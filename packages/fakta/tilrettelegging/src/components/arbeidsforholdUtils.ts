@@ -21,4 +21,3 @@ export const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato: st
   const dato = dayjs(tilretteleggingBehovFom);
   return !(dato.isBefore(dayjs(fomDato || undefined)) || dato.isAfter(dayjs(tomDato || undefined)));
 };
-

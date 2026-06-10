@@ -86,4 +86,3 @@ const finnArbeidsforhold = (
   }
   return alleIafAf.length === 1 ? alleIafAf[0] : undefined;
 };
-

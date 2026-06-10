@@ -518,7 +518,20 @@ export const KanSplittes: Story = {
           fom: '2019-04-01',
           tom: '',
           stillingsprosent: 60,
-          permisjoner: [],
+          permisjoner: [
+            {
+              fom: '2020-02-17',
+              tom: '2020-07-12',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+            {
+              fom: '2019-08-06',
+              tom: '2019-08-06',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+          ],
         },
         {
           internArbeidsforholdId: '999999999-b',
@@ -527,7 +540,14 @@ export const KanSplittes: Story = {
           fom: '2019-07-01',
           tom: '',
           stillingsprosent: 20,
-          permisjoner: [],
+          permisjoner: [
+            {
+              fom: '2019-10-03',
+              tom: '2019-10-03',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+          ],
         },
       ],
     },

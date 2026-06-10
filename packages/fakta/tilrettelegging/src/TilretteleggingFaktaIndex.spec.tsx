@@ -578,9 +578,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Ferie'));
 
-    await waitFor(() =>
-      expect(screen.queryByText('Flere perioder med samme Fra og med')).not.toBeInTheDocument(),
-    );
+    await waitFor(() => expect(screen.queryByText('Flere perioder med samme Fra og med')).not.toBeInTheDocument());
 
     await userEvent.click(screen.getByText('Legg til ny periode'));
 

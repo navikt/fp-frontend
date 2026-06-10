@@ -152,7 +152,6 @@ export const OppholdForm = ({
               validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold, formMethods.getValues, index),
               validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
             ]}
-
           />
           <RhfDatepicker
             name={`${index}.tom`}
