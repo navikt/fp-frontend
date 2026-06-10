@@ -2576,9 +2576,9 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto = {
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonDto = {
-  permisjonFom: string;
-  permisjonTom?: string;
+  fom: string;
   permisjonsprosent: number;
+  tom?: string;
   type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
 };
 
