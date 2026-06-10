@@ -5,7 +5,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Button, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
-import dayjs from 'dayjs';
+import dayjs, { type Dayjs } from 'dayjs';
 
 import type { SvpAvklartOppholdPeriode, SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 
@@ -42,17 +42,12 @@ const validerTomEtterFom =
     dayjs(tom).isBefore(getValues(`${index}.fom`)) ? intl.formatMessage({ id: 'OppholdForm.TomForFom' }) : null;
 
 const validerAtPeriodeErGyldig =
-  (intl: IntlShape, tilrettelegginger: SvpTilretteleggingDatoDto[], termindato: string) => (dato?: string) => {
-    if (dayjs(dato).isAfter(dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day'))) {
+  (intl: IntlShape, førsteDagMedTilrettelegging: Dayjs | undefined, treUkerFørTermindato: Dayjs) => (dato?: string) => {
+    if (!dayjs(dato).isBefore(treUkerFørTermindato)) {
       return intl.formatMessage({ id: 'OppholdForm.EtterTermindato' });
     }
-    const førsteDato = tilrettelegginger.reduce<string | undefined>((a, t) => {
-      if (a === undefined || dayjs(t.fom).isBefore(a)) {
-        return t.fom;
-      }
-      return a;
-    }, undefined);
-    if (dayjs(dato).isBefore(førsteDato)) {
+
+    if (dayjs(dato).isBefore(førsteDagMedTilrettelegging)) {
       return intl.formatMessage({ id: 'OppholdForm.ForForsteDato' });
     }
     return null;
@@ -88,6 +83,16 @@ interface Props {
   alleOpphold: SvpAvklartOppholdPeriode[];
   termindato: string;
 }
+
+const finnTreUkerFørTermindato = (termindato: string) => dayjs(termindato).subtract(3, 'weeks');
+const finnFørsteDatoForTilrettelegging = (alleTilrettelegginger: SvpTilretteleggingDatoDto[]) => {
+  return alleTilrettelegginger.reduce<Dayjs | undefined>((a, t) => {
+    if (a === undefined || dayjs(t.fom).isBefore(a)) {
+      return dayjs(t.fom);
+    }
+    return a;
+  }, undefined);
+};
 
 export const OppholdForm = ({
   opphold,
@@ -132,10 +137,8 @@ export const OppholdForm = ({
 
   const forVisning = readOnly || opphold.oppholdKilde === 'INNTEKTSMELDING';
 
-  /*
-  const minDato = førsteDatoForTilrettelegging(alleTilrettelegginger);
-  const maksDato = treUkerFørTermindato(termindato);
-  */
+  const førsteDagMedTilrettelegging = finnFørsteDatoForTilrettelegging(alleTilrettelegginger);
+  const treUkerFørTermindato = finnTreUkerFørTermindato(termindato);
   return (
     <FormProvider {...formMethods}>
       <VStack gap="space-16" paddingBlock="space-8">
@@ -150,8 +153,10 @@ export const OppholdForm = ({
               required,
               hasValidDate,
               validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold, formMethods.getValues, index),
-              validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
+              validerAtPeriodeErGyldig(intl, førsteDagMedTilrettelegging, treUkerFørTermindato),
             ]}
+            fromDate={førsteDagMedTilrettelegging?.toDate()}
+            toDate={treUkerFørTermindato.toDate()}
           />
           <RhfDatepicker
             name={`${index}.tom`}
@@ -163,9 +168,11 @@ export const OppholdForm = ({
               required,
               hasValidDate,
               validerTomEtterFom(intl, index, formMethods.getValues),
-              validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
+              validerAtPeriodeErGyldig(intl, førsteDagMedTilrettelegging, treUkerFørTermindato),
               validerAtPeriodeIkkeOverlapper(formMethods.getValues, index, opphold, alleOpphold),
             ]}
+            fromDate={førsteDagMedTilrettelegging?.toDate()}
+            toDate={treUkerFørTermindato.toDate()}
           />
         </HStack>
         <RhfRadioGroup

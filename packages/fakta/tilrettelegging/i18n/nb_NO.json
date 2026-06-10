@@ -20,7 +20,6 @@
   "TilretteleggingFaktaForm.UndersokNarmere": "Søker var ikke ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.",
   "TilretteleggingFaktaForm.BegrunnelseDescription.UtenSplitt": "Beskriv eventuelle avvik mellom opplysningene fra søknaden og tilretteleggingsskjemaet, og hva som er gjort for å avklare avvikene. Hvis det ikke har vært noen avvik i saken, trenger du ikke begrunne noe.",
   "TilretteleggingFaktaForm.BegrunnelseDescription.MedSplitt": "Beskriv eventuelle avvik mellom opplysningene fra søknaden og tilretteleggingsskjemaet, og hva som er gjort for å avklare avvikene. Gi også en kort begrunnelse for hvorfor du velger å splitte arbeidsforholdet, eller hvorfor det ikke er nødvendig.",
-  "TilretteleggingFaktaForm.Reset": "Reset",
 
   "TilretteleggingFormFeil.IkkeAllePermisjonerVurdert": "Ikke alle velferdspermisjoner er vurdert",
   "TilretteleggingFormFeil.HarIkkeValgtArbeidsforhold": "Minst ett arbeidsforhold må brukes",
@@ -95,7 +94,7 @@
 
   "TilretteleggingPeriodeTabellRad.SlettPeriode": "Slett periode",
   "TilretteleggingPeriodeTabellRad.IkkeSatt": "Ikke satt",
-  "TilretteleggingPeriodeTabellRad.SVPprosent": "Svangerskapspenger {prosent}% ",
+  "TilretteleggingPeriodeTabellRad.SVPprosent": "Svangerskapspenger {prosent}%",
 
   "OppholdPeriodeTabellRad.SlettPeriode": "Slett periode",
   "OppholdPeriodeTabellRad.IkkeSatt": "Ikke satt",
