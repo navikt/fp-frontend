@@ -45,8 +45,14 @@ const validerTomEtterFom =
 
 const validerIkkeFørFørsteDato =
   (intl: IntlShape, førsteDagMedTilrettelegging: Dayjs | undefined) =>
-  (dato?: string): string | null =>
-    dayjs(dato).isBefore(førsteDagMedTilrettelegging) ? intl.formatMessage({ id: 'OppholdForm.ForForsteDato' }) : null;
+  (dato?: string): string | null => {
+    if (!dato || !førsteDagMedTilrettelegging) {
+      return null;
+    }
+    return dayjs(dato).isBefore(førsteDagMedTilrettelegging)
+      ? intl.formatMessage({ id: 'OppholdForm.ForForsteDato' })
+      : null;
+  };
 
 const validerAtPeriodeIkkeOverlapper =
   (
