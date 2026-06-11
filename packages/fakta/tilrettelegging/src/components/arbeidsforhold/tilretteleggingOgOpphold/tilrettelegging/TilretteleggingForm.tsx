@@ -11,6 +11,7 @@ import type { SvpAvklartOppholdPeriode, SvpTilretteleggingDatoDto } from '@navik
 import { notEmpty } from '@navikt/fp-utils';
 
 import type { Tilrettelegging } from '../../../../types/TilretteleggingFormValues';
+import { finnSisteGyldigeDatoFørTermindato, validerIkkeEtterSisteGyldigeDato } from '../../tilretteleggingsdatoer';
 import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
 
 const maxValue100 = maxValue(100);
@@ -36,17 +37,10 @@ const validerAtDatoErUnik =
       : null;
   };
 
-const treUkerFørTermindato = (termindato: string) => dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day');
-
-const validerAtPeriodeErGyldig = (intl: IntlShape, minDato: Dayjs, maksDato: Dayjs) => (dato?: string) => {
-  if (dayjs(dato).isAfter(maksDato)) {
-    return intl.formatMessage({ id: 'TilretteleggingForm.EtterTermindato' });
-  }
-  if (dayjs(dato).isBefore(minDato)) {
-    return intl.formatMessage({ id: 'TilretteleggingForm.ForForsteDato' });
-  }
-  return null;
-};
+const validerIkkeFørForsteDato =
+  (intl: IntlShape, minDato: Dayjs) =>
+  (dato?: string): string | null =>
+    dayjs(dato).isBefore(minDato) ? intl.formatMessage({ id: 'TilretteleggingForm.ForForsteDato' }) : null;
 
 export const finnVelferdspermisjonprosent = (arbeidsforhold: Tilrettelegging): number =>
   arbeidsforhold.velferdspermisjoner
@@ -181,7 +175,7 @@ export const TilretteleggingForm = ({
   };
 
   const minDato = dayjs(arbeidsforhold.tilretteleggingBehovFom);
-  const maksDato = treUkerFørTermindato(termindato);
+  const maksDato = finnSisteGyldigeDatoFørTermindato(termindato);
 
   return (
     <FormProvider {...formMethods}>
@@ -209,7 +203,8 @@ export const TilretteleggingForm = ({
               arbeidsforhold.avklarteOppholdPerioder,
               tilrettelegging,
             ),
-            validerAtPeriodeErGyldig(intl, minDato, maksDato),
+            validerIkkeEtterSisteGyldigeDato(intl, maksDato),
+            validerIkkeFørForsteDato(intl, minDato),
           ]}
           readOnly={readOnly}
           disabled={disabled}

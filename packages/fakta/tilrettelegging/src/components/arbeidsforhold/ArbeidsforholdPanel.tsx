@@ -1,4 +1,4 @@
-import { useFormContext, type UseFormGetValues } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { HStack, Spacer, VStack } from '@navikt/ds-react';
@@ -6,29 +6,22 @@ import { RhfCheckbox, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
-import minMax from 'dayjs/plugin/minMax';
+import dayjs, { type Dayjs } from 'dayjs';
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
 import type { FAISUProps } from './faisuUtils';
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
+import { finnTidligsteTilretteleggingsdato } from './tilretteleggingsdatoer';
 import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTabell';
 
-dayjs.extend(minMax);
-
 const validerTidligereEnn =
-  (intl: IntlShape, getValues: UseFormGetValues<TilretteleggingFormValues>) =>
+  (intl: IntlShape, tidligsteTidspunkt: Dayjs) =>
   (tilretteleggingBehovFom: string): string | null => {
-    const termindato = getValues('termindato');
-    const fødselsdato = getValues('fødselsdato');
-
     const tilretteleggingFomDato = dayjs(tilretteleggingBehovFom);
-    const treUkerFørTermindato = dayjs(termindato).subtract(3, 'week').subtract(1, 'day');
-    const tidligsteTidspunkt = fødselsdato ? dayjs.min(treUkerFørTermindato, dayjs(fødselsdato)) : treUkerFørTermindato;
 
-    if (tilretteleggingFomDato.isValid() && !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)) {
+    if (tilretteleggingFomDato.isValid() && tilretteleggingFomDato.isAfter(tidligsteTidspunkt)) {
       return intl.formatMessage(
         { id: 'ArbeidsforholdPanel.TilretteleggingTidligereEnn' },
         { dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT) },
@@ -56,10 +49,13 @@ export const ArbeidsforholdPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { getValues, watch, setValue, control } = useFormContext<TilretteleggingFormValues>();
+  const { watch, setValue, control } = useFormContext<TilretteleggingFormValues>();
 
   const termindato = watch('termindato');
+  const fødselsdato = watch('fødselsdato');
   const tilretteleggingBehovFom = watch(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`);
+
+  const tidligsteTilretteleggingsdato = finnTidligsteTilretteleggingsdato(termindato, fødselsdato);
 
   const filtrerteVelferdspermisjoner = filtrerVelferdspermisjoner(
     arbeidsforhold.velferdspermisjoner,
@@ -106,7 +102,9 @@ export const ArbeidsforholdPanel = ({
           name={`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`}
           control={control}
           label={<FormattedMessage id="ArbeidsforholdPanel.DatoForTilrettelegging" />}
-          validate={[required, hasValidDate, validerTidligereEnn(intl, getValues)]}
+          validate={[required, hasValidDate, validerTidligereEnn(intl, tidligsteTilretteleggingsdato)]}
+          fromDate={dayjs(termindato).subtract(9, 'months').toDate()}
+          toDate={tidligsteTilretteleggingsdato.toDate()}
           readOnly={readOnly}
         />
 
