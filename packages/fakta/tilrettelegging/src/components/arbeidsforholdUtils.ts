@@ -1,6 +1,14 @@
 import dayjs from 'dayjs';
 
-import type { Arbeidsforhold, VelferdspermisjonDto } from '@navikt/fp-types';
+import type { Arbeidsforhold, ArbeidsgiverOpplysningerPerId, VelferdspermisjonDto } from '@navikt/fp-types';
+
+export const alfabetiskArbeidsforhold =
+  (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) =>
+  (a: { arbeidsgiverReferanse?: string }, b: { arbeidsgiverReferanse?: string }) => {
+    const navnA = arbeidsgiverOpplysningerPerId[a.arbeidsgiverReferanse ?? '']?.navn;
+    const navnB = arbeidsgiverOpplysningerPerId[b.arbeidsgiverReferanse ?? '']?.navn;
+    return navnA && navnB ? navnA.localeCompare(navnB) : 0;
+  };
 
 export const filtrerVelferdspermisjoner = (
   velferdspermisjoner: VelferdspermisjonDto[],

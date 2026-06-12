@@ -21,6 +21,7 @@ import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
+import { alfabetiskArbeidsforhold } from './arbeidsforholdUtils';
 import { harUvurderteVelferdspermisjoner, TilretteleggingFormFeil } from './TilretteleggingFormFeil';
 
 interface Props {
@@ -138,14 +139,6 @@ const buildInitialValues = (
     ...FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel),
   };
 };
-
-const alfabetiskArbeidsforhold =
-  (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) =>
-  (a: SvpArbeidsforholdDto, b: SvpArbeidsforholdDto) => {
-    const navnA = arbeidsgiverOpplysningerPerId[a.arbeidsgiverReferanse ?? '']?.navn;
-    const navnB = arbeidsgiverOpplysningerPerId[b.arbeidsgiverReferanse ?? '']?.navn;
-    return navnA && navnB ? navnA.localeCompare(navnB) : 0;
-  };
 
 const mapTilTilrettelegging = (
   arbeidsforhold: SvpArbeidsforholdDto,

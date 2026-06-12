@@ -47,7 +47,7 @@ const klikkActionKnapp = (props: ReturnType<typeof getFAISUProps>) => {
 
 describe('faisuUtils', () => {
   it('skal returnere undefined når arbeidsforholdet verken skal vurderes splittet eller er splittet', () => {
-    const props = getFAISUProps(lagTilrettelegging(), [], [], vi.fn());
+    const props = getFAISUProps(lagTilrettelegging(), [], [], vi.fn(), {});
 
     expect(props).toBeUndefined();
   });
@@ -57,7 +57,7 @@ describe('faisuUtils', () => {
     const replace = vi.fn();
     const aoi = [lagAoiArbeidsforhold('a'), lagAoiArbeidsforhold('b')];
 
-    const props = getFAISUProps(arbeidsforhold, [arbeidsforhold], aoi, replace);
+    const props = getFAISUProps(arbeidsforhold, [arbeidsforhold], aoi, replace, {});
 
     render(
       <RawIntlProvider value={intl}>
@@ -77,7 +77,7 @@ describe('faisuUtils', () => {
     const splittet2 = lagTilrettelegging({ arbeidsforholdetErSplittet: true });
     const replace = vi.fn();
 
-    const props = getFAISUProps(splittet1, [splittet1, splittet2], [lagAoiArbeidsforhold('a')], replace);
+    const props = getFAISUProps(splittet1, [splittet1, splittet2], [lagAoiArbeidsforhold('a')], replace, {});
 
     render(
       <RawIntlProvider value={intl}>
@@ -112,7 +112,7 @@ describe('faisuUtils', () => {
     const originalFelt: Felt = { ...original, id: 'original' };
 
     const replaceSplitt = vi.fn();
-    klikkActionKnapp(getFAISUProps(originalFelt, [originalFelt], aoi, replaceSplitt));
+    klikkActionKnapp(getFAISUProps(originalFelt, [originalFelt], aoi, replaceSplitt, {}));
 
     const splittedeFelter: Felt[] = (replaceSplitt.mock.calls[0]![0] as Tilrettelegging[]).map((felt, index) => ({
       ...felt,
@@ -122,7 +122,7 @@ describe('faisuUtils', () => {
     expect(splittedeFelter.every(felt => felt.arbeidsforholdetErSplittet)).toBe(true);
 
     const replaceRevert = vi.fn();
-    klikkActionKnapp(getFAISUProps(splittedeFelter[0]!, splittedeFelter, aoi, replaceRevert));
+    klikkActionKnapp(getFAISUProps(splittedeFelter[0]!, splittedeFelter, aoi, replaceRevert, {}));
 
     expect(replaceRevert.mock.calls[0]![0]).toStrictEqual([original]);
   });

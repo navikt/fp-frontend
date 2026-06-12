@@ -672,7 +672,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     // Vurder velferdspermisjon og bekreft aksjonspunktet for de splittede arbeidsforholdene
     await userEvent.click(screen.getByText('Ja'));
-    await userEvent.click(screen.getAllByText('Oppdater')[0]!);
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
     await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'En begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -760,6 +760,27 @@ describe('TilretteleggingFaktaIndex', () => {
               type: 'VELFERDSPERMISJON',
             },
           ],
+        },
+        {
+          arbeidsgiverReferanse: '1111111',
+          avklarteOppholdPerioder: [],
+          eksternArbeidsforholdReferanse: undefined,
+          internArbeidsforholdReferanse: undefined,
+          kanTilrettelegges: true,
+          skalBrukes: true,
+          stillingsprosentStartTilrettelegging: 100,
+          tilretteleggingBehovFom: '2020-03-17',
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-03-17',
+              type: 'HEL_TILRETTELEGGING',
+              mottattDato: '2020-02-20',
+              kilde: 'SØKNAD',
+            },
+          ],
+          tilretteleggingId: 1116962,
+          uttakArbeidType: 'ORDINÆRT_ARBEID',
+          velferdspermisjoner: [],
         },
       ],
     } satisfies BekreftSvangerskapspengerAp);
