@@ -6,7 +6,7 @@ import { ExpansionCard } from '@navikt/ds-react';
 import type { Arbeidsforhold, ArbeidsgiverOpplysninger, KodeverkMedNavn } from '@navikt/fp-types';
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
-import { erInnenforIntervall, finnStillingsprosent } from '../arbeidsforholdUtils.ts';
+import { erInnenforIntervall, finnStillingsprosent } from '../arbeidsforholdUtils';
 import { ArbeidsforholdHeader } from './ArbeidsforholdHeader';
 import { ArbeidsforholdPanel } from './ArbeidsforholdPanel';
 import type { FAISUProps } from './faisuUtils';

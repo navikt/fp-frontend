@@ -9,7 +9,7 @@ import { sortPeriodsBy } from '@navikt/ft-utils';
 import type { Arbeidsforhold } from '@navikt/fp-types';
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
-import { finnStillingsprosent } from '../arbeidsforholdUtils.ts';
+import { finnStillingsprosent } from '../arbeidsforholdUtils';
 
 export type FAISUProps = {
   action: ReactNode | undefined;
