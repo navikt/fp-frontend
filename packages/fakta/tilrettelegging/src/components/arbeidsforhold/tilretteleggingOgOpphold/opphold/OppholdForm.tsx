@@ -22,7 +22,7 @@ const validerAtDatoErUnik =
   (
     intl: IntlShape,
     oppholdPerioder: SvpAvklartOppholdPeriode[],
-    alleTilrettelegginger: SvpTilretteleggingDatoDto[],
+    tilretteleggingDatoer: SvpTilretteleggingDatoDto[],
     opphold: SvpAvklartOppholdPeriode,
     getValues: UseFormGetValues<FormValues>,
     index: number,
@@ -32,7 +32,7 @@ const validerAtDatoErUnik =
     const harDuplikatFomOpphold = oppholdMinusEditert.some(t => t.fom === dato);
     // Ferie kan starte på samme dato som en tilrettelegging (inkludert skjæringstidspunktet)
     const erFerie = getValues(`${index}.oppholdÅrsak`) === 'FERIE';
-    const harDuplikatFomTilrettelegging = !erFerie && alleTilrettelegginger.some(t => t.fom === dato);
+    const harDuplikatFomTilrettelegging = !erFerie && tilretteleggingDatoer.some(t => t.fom === dato);
 
     return harDuplikatFomTilrettelegging || harDuplikatFomOpphold
       ? intl.formatMessage({ id: 'TilretteleggingForm.DuplikateDatoer' })
@@ -44,8 +44,7 @@ const validerTomEtterFom =
     dayjs(tom).isBefore(getValues(`${index}.fom`)) ? intl.formatMessage({ id: 'OppholdForm.TomForFom' }) : null;
 
 const validerIkkeFørFørsteDato =
-  (intl: IntlShape, førsteDagMedTilrettelegging: Dayjs | undefined) =>
-  (dato?: string): string | null => {
+  (intl: IntlShape, førsteDagMedTilrettelegging: Dayjs | undefined) => (dato?: string) => {
     if (!dato || !førsteDagMedTilrettelegging) {
       return null;
     }
@@ -80,13 +79,13 @@ interface Props {
   disabled: boolean;
   oppdaterOpphold: (values: SvpAvklartOppholdPeriode) => void;
   avbrytEditering: () => void;
-  alleTilrettelegginger: SvpTilretteleggingDatoDto[];
+  tilretteleggingDatoer: SvpTilretteleggingDatoDto[];
   alleOpphold: SvpAvklartOppholdPeriode[];
   termindato: string;
 }
 
-const finnFørsteDatoForTilrettelegging = (alleTilrettelegginger: SvpTilretteleggingDatoDto[]) => {
-  return alleTilrettelegginger.reduce<Dayjs | undefined>((a, t) => {
+const finnFørsteDatoForTilrettelegging = (tilretteleggingDatoer: SvpTilretteleggingDatoDto[]) => {
+  return tilretteleggingDatoer.reduce<Dayjs | undefined>((a, t) => {
     if (a === undefined || dayjs(t.fom).isBefore(a)) {
       return dayjs(t.fom);
     }
@@ -101,7 +100,7 @@ export const OppholdForm = ({
   disabled,
   oppdaterOpphold,
   avbrytEditering,
-  alleTilrettelegginger,
+  tilretteleggingDatoer,
   alleOpphold,
   termindato,
 }: Props) => {
@@ -137,7 +136,7 @@ export const OppholdForm = ({
 
   const forVisning = readOnly || opphold.oppholdKilde === 'INNTEKTSMELDING';
 
-  const førsteDagMedTilrettelegging = finnFørsteDatoForTilrettelegging(alleTilrettelegginger);
+  const førsteDagMedTilrettelegging = finnFørsteDatoForTilrettelegging(tilretteleggingDatoer);
   const sisteGyldigeDato = finnSisteGyldigeDatoFørTermindato(termindato);
   return (
     <FormProvider {...formMethods}>
@@ -152,7 +151,7 @@ export const OppholdForm = ({
             validate={[
               required,
               hasValidDate,
-              validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold, formMethods.getValues, index),
+              validerAtDatoErUnik(intl, alleOpphold, tilretteleggingDatoer, opphold, formMethods.getValues, index),
               validerIkkeEtterSisteGyldigeDato(intl, sisteGyldigeDato),
               validerIkkeFørFørsteDato(intl, førsteDagMedTilrettelegging),
             ]}

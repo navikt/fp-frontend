@@ -17,18 +17,18 @@ interface Props {
   visInfoAlert: boolean;
   faisu: FAISUProps | undefined;
   stillingsprosent: number | undefined;
-  arbeidsforhold: Tilrettelegging;
+  tilrettelegging: Tilrettelegging;
 }
 
 export const ArbeidsforholdHeader = ({
   faisu,
-  arbeidsforhold,
+  tilrettelegging,
   uttakArbeidTyper,
   visInfoAlert,
   arbeidsgiverOpplysning,
   stillingsprosent,
 }: Props) => {
-  const arbeidType = uttakArbeidTyper.find(type => type.kode === arbeidsforhold.uttakArbeidType);
+  const arbeidType = uttakArbeidTyper.find(type => type.kode === tilrettelegging.uttakArbeidType);
 
   return (
     <HStack gap="space-16" align="center" wrap={false}>
@@ -39,13 +39,13 @@ export const ArbeidsforholdHeader = ({
           {arbeidsgiverOpplysning?.identifikator && (
             <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
           )}
-          {arbeidsforhold.eksternArbeidsforholdReferanse && (
-            <BodyShort size="small">{getEndCharFromId(arbeidsforhold.eksternArbeidsforholdReferanse)}</BodyShort>
+          {tilrettelegging.eksternArbeidsforholdReferanse && (
+            <BodyShort size="small">{getEndCharFromId(tilrettelegging.eksternArbeidsforholdReferanse)}</BodyShort>
           )}
           <Spacer />
           <HStack gap="space-16" align="center">
             {faisu?.tag}
-            {utledSVPTags(arbeidsforhold.skalBrukes, visInfoAlert)}
+            {utledSVPTags(tilrettelegging.skalBrukes, visInfoAlert)}
           </HStack>
         </HStack>
 
@@ -54,19 +54,19 @@ export const ArbeidsforholdHeader = ({
             <FormattedMessage
               id="ArbeidsforholdExpansionCard.AntallPeriode"
               tagName="span"
-              values={{ antall: arbeidsforhold.tilretteleggingDatoer.length }}
+              values={{ antall: tilrettelegging.tilretteleggingDatoer.length }}
             />
 
-            {dayjs(arbeidsforhold.tilretteleggingBehovFom).isValid() && (
+            {dayjs(tilrettelegging.tilretteleggingBehovFom).isValid() && (
               <>
                 <span>{'\u2022'}</span>
                 <span>
-                  <DateLabel dateString={arbeidsforhold.tilretteleggingBehovFom} />
+                  <DateLabel dateString={tilrettelegging.tilretteleggingBehovFom} />
                 </span>
               </>
             )}
 
-            {arbeidsforhold.velferdspermisjoner.length > 0 && (
+            {tilrettelegging.velferdspermisjoner.length > 0 && (
               <>
                 <span>{'\u2022'}</span>
                 <FormattedMessage
@@ -74,8 +74,8 @@ export const ArbeidsforholdHeader = ({
                   tagName="span"
                   values={{
                     antall: filtrerVelferdspermisjoner(
-                      arbeidsforhold.velferdspermisjoner,
-                      arbeidsforhold.tilretteleggingBehovFom,
+                      tilrettelegging.velferdspermisjoner,
+                      tilrettelegging.tilretteleggingBehovFom,
                     ).length,
                   }}
                 />

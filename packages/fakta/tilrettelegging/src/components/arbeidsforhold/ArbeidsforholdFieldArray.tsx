@@ -41,7 +41,7 @@ export const ArbeidsforholdFieldArray = ({
         return (
           <ArbeidsforholdExpansionCard
             key={field.id}
-            arbeidsforhold={arbeidsforhold}
+            tilrettelegging={arbeidsforhold}
             field={field}
             index={index}
             readOnly={readOnly}

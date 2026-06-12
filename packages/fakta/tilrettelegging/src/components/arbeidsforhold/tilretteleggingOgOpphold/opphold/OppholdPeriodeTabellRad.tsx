@@ -22,7 +22,7 @@ interface Props {
   openRad: boolean;
   fjernOpphold: (opphold?: SvpAvklartOppholdPeriode) => void;
   setLeggTilKnapperDisablet: React.Dispatch<React.SetStateAction<boolean>>;
-  arbeidsforhold: Tilrettelegging;
+  tilrettelegging: Tilrettelegging;
   termindato: string;
 }
 
@@ -35,7 +35,7 @@ export const OppholdPeriodeTabellRad = ({
   openRad,
   fjernOpphold,
   setLeggTilKnapperDisablet,
-  arbeidsforhold,
+  tilrettelegging,
   termindato,
 }: Props) => {
   const intl = useIntl();
@@ -71,8 +71,8 @@ export const OppholdPeriodeTabellRad = ({
           avbrytEditering={avbrytEditering}
           readOnly={readOnly}
           disabled={disabled}
-          alleTilrettelegginger={arbeidsforhold.tilretteleggingDatoer}
-          alleOpphold={arbeidsforhold.avklarteOppholdPerioder}
+          tilretteleggingDatoer={tilrettelegging.tilretteleggingDatoer}
+          alleOpphold={tilrettelegging.avklarteOppholdPerioder}
           termindato={termindato}
         />
       }

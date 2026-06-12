@@ -12,7 +12,7 @@ import { ArbeidsforholdPanel } from './ArbeidsforholdPanel';
 import type { FAISUProps } from './faisuUtils';
 
 interface Props {
-  arbeidsforhold: Tilrettelegging;
+  tilrettelegging: Tilrettelegging;
   index: number;
   readOnly: boolean;
   aoiArbeidsforhold: Arbeidsforhold[];
@@ -23,7 +23,7 @@ interface Props {
 }
 
 export const ArbeidsforholdExpansionCard = ({
-  arbeidsforhold,
+  tilrettelegging,
   arbeidsgiverOpplysning,
   index,
   aoiArbeidsforhold,
@@ -32,31 +32,31 @@ export const ArbeidsforholdExpansionCard = ({
   readOnly,
   faisu,
 }: Props) => {
-  const [open, setOpen] = useState(arbeidsforhold.skalBrukes);
-  const alleIafAf = aoiArbeidsforhold.filter(iaya => iaya.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverReferanse);
+  const [open, setOpen] = useState(tilrettelegging.skalBrukes);
+  const alleIafAf = aoiArbeidsforhold.filter(iaya => iaya.arbeidsgiverIdent === tilrettelegging.arbeidsgiverReferanse);
 
-  const af = finnArbeidsforhold(alleIafAf, arbeidsforhold.internArbeidsforholdReferanse);
+  const af = finnArbeidsforhold(alleIafAf, tilrettelegging.internArbeidsforholdReferanse);
 
   const visInfoAlert = af
-    ? !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, af.fom, af.tom)
+    ? !erInnenforIntervall(tilrettelegging.tilretteleggingBehovFom, af.fom, af.tom)
     : alleIafAf.length > 0 &&
-      alleIafAf.every(a => !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, a.fom, a.tom));
+      alleIafAf.every(a => !erInnenforIntervall(tilrettelegging.tilretteleggingBehovFom, a.fom, a.tom));
 
   const stillingsprosent = af
     ? af.stillingsprosent
-    : finnStillingsprosent(alleIafAf, arbeidsforhold.tilretteleggingBehovFom);
+    : finnStillingsprosent(alleIafAf, tilrettelegging.tilretteleggingBehovFom);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setOpen(arbeidsforhold.skalBrukes);
-  }, [arbeidsforhold.skalBrukes]);
+    setOpen(tilrettelegging.skalBrukes);
+  }, [tilrettelegging.skalBrukes]);
 
   return (
     <ExpansionCard open={open} onToggle={o => setOpen(o)} key={field.id} aria-label="arbeidsgiver">
       <ExpansionCard.Header>
         <ArbeidsforholdHeader
           arbeidsgiverOpplysning={arbeidsgiverOpplysning}
-          arbeidsforhold={arbeidsforhold}
+          tilrettelegging={tilrettelegging}
           uttakArbeidTyper={uttakArbeidTyper}
           visInfoAlert={visInfoAlert}
           faisu={faisu}
@@ -65,10 +65,10 @@ export const ArbeidsforholdExpansionCard = ({
       </ExpansionCard.Header>
       <ExpansionCard.Content>
         <ArbeidsforholdPanel
-          arbeidsforhold={arbeidsforhold}
+          tilrettelegging={tilrettelegging}
           arbeidsforholdIndex={index}
           readOnly={readOnly}
-          visInfoAlert={arbeidsforhold.skalBrukes && visInfoAlert}
+          visInfoAlert={tilrettelegging.skalBrukes && visInfoAlert}
           stillingsprosentArbeidsforhold={stillingsprosent ?? 0}
           faisu={faisu}
         />

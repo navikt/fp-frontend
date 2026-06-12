@@ -28,7 +28,7 @@ const finnNesteTilretteleggingFom = (
     .sort((a, b) => dayjs(a).diff(dayjs(b)))[0];
 
 interface Props {
-  arbeidsforhold: Tilrettelegging;
+  tilrettelegging: Tilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   disabled: boolean;
@@ -37,7 +37,7 @@ interface Props {
 }
 
 export const TilretteleggingOgOppholdPerioderPanel = ({
-  arbeidsforhold,
+  tilrettelegging,
   arbeidsforholdIndex,
   readOnly,
   disabled,
@@ -57,7 +57,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
   });
   const { append: appendOpphold, remove: removeOpphold } = useFieldArray({ name: oppholdPerioderStateName, control });
 
-  const { tilretteleggingDatoer, avklarteOppholdPerioder } = arbeidsforhold;
+  const { tilretteleggingDatoer, avklarteOppholdPerioder } = tilrettelegging;
 
   const leggTilOpphold = () => {
     setErLeggTilKnapperDisablet(true);
@@ -126,14 +126,14 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                   key={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
                   navn={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
                   index={arbeidsforholdIndex + tilretteleggingIndex}
-                  tilrettelegging={rad}
+                  tilretteleggingDato={rad}
                   readOnly={readOnly}
                   disabled={disabled}
                   openRad={rad.fom === ''}
                   fjernTilrettelegging={slettTilrettelegging}
                   setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                   stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-                  arbeidsforhold={arbeidsforhold}
+                  tilrettelegging={tilrettelegging}
                   tomDatoForTilrettelegging={tomDatoForTilrettelegging}
                   termindato={termindato}
                 />
@@ -154,14 +154,14 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                 openRad={rad.fom === ''}
                 fjernOpphold={slettOpphold}
                 setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
-                arbeidsforhold={arbeidsforhold}
+                tilrettelegging={tilrettelegging}
                 termindato={termindato}
               />
             );
           })}
         </Table.Body>
       </Table>
-      {!(readOnly || disabled) && (
+      {!readOnly && !disabled && (
         <HStack gap="space-16">
           <Button
             size="small"

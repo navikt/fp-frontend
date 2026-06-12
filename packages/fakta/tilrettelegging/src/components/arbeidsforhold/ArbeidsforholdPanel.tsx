@@ -16,7 +16,7 @@ import { finnTidligsteTilretteleggingsdato, validerTidligereEnn } from './tilret
 import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTabell';
 
 interface Props {
-  arbeidsforhold: Tilrettelegging;
+  tilrettelegging: Tilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   visInfoAlert: boolean;
@@ -25,7 +25,7 @@ interface Props {
 }
 
 export const ArbeidsforholdPanel = ({
-  arbeidsforhold,
+  tilrettelegging,
   arbeidsforholdIndex,
   readOnly,
   visInfoAlert,
@@ -43,22 +43,22 @@ export const ArbeidsforholdPanel = ({
   const tidligsteTilretteleggingsdato = finnTidligsteTilretteleggingsdato(termindato, fødselsdato);
 
   const filtrerteVelferdspermisjoner = filtrerVelferdspermisjoner(
-    arbeidsforhold.velferdspermisjoner,
+    tilrettelegging.velferdspermisjoner,
     tilretteleggingBehovFom,
   );
   const harUavklartVelferdspermisjon = filtrerteVelferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined);
 
   const oppdaterOverstyrtUtbetalingsgrad = (velferdspermisjonprosent: number) => {
-    for (const [index, tilrettelegging] of arbeidsforhold.tilretteleggingDatoer.entries()) {
+    for (const [index, dato] of tilrettelegging.tilretteleggingDatoer.entries()) {
       const prosentSvangerskapspenger = finnProsentSvangerskapspenger(
-        tilrettelegging,
+        dato,
         stillingsprosentArbeidsforhold,
         velferdspermisjonprosent,
         false,
       );
       if (prosentSvangerskapspenger !== undefined) {
         setValue(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer.${index}`, {
-          ...tilrettelegging,
+          ...dato,
           overstyrtUtbetalingsgrad: prosentSvangerskapspenger,
         });
       }
@@ -103,7 +103,7 @@ export const ArbeidsforholdPanel = ({
         )}
 
         <TilretteleggingOgOppholdPerioderPanel
-          arbeidsforhold={arbeidsforhold}
+          tilrettelegging={tilrettelegging}
           arbeidsforholdIndex={arbeidsforholdIndex}
           readOnly={readOnly}
           disabled={harUavklartVelferdspermisjon}

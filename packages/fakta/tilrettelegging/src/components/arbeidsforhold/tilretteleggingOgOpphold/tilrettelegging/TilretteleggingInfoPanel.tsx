@@ -14,25 +14,25 @@ const finnFremTilTekst = (intl: IntlShape, termindato: string, tomDatoForTilrett
     : intl.formatMessage({ id: 'TilretteleggingInfoPanel.Dager' }, { dager });
 };
 
-const finnProsentSvangerskapspenger = (tilrettelegging: SvpTilretteleggingDatoDto): number => {
-  switch (tilrettelegging.type) {
+const finnProsentSvangerskapspenger = (tilretteleggingDato: SvpTilretteleggingDatoDto): number => {
+  switch (tilretteleggingDato.type) {
     case 'HEL_TILRETTELEGGING':
       return 0;
     case 'INGEN_TILRETTELEGGING':
       return 100;
     case 'DELVIS_TILRETTELEGGING':
-      return tilrettelegging.overstyrtUtbetalingsgrad ?? 0;
+      return tilretteleggingDato.overstyrtUtbetalingsgrad ?? 0;
   }
 };
 
-const finnProsentArbeid = (tilrettelegging: SvpTilretteleggingDatoDto): number => {
-  switch (tilrettelegging.type) {
+const finnProsentArbeid = (tilretteleggingDato: SvpTilretteleggingDatoDto): number => {
+  switch (tilretteleggingDato.type) {
     case 'HEL_TILRETTELEGGING':
       return 100;
     case 'INGEN_TILRETTELEGGING':
       return 0;
     case 'DELVIS_TILRETTELEGGING':
-      return tilrettelegging.stillingsprosent ?? 0;
+      return tilretteleggingDato.stillingsprosent ?? 0;
   }
 };
 
