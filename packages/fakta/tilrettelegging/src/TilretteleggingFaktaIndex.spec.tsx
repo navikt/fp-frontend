@@ -650,8 +650,9 @@ describe('TilretteleggingFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
   });
 
-  it('skal kunne splitte et arbeidsforhold med flere stillinger i samme underenhet og deretter reversere splitten', async () => {
-    render(<KanSplittes />);
+  it('skal kunne splitte et arbeidsforhold med flere stillinger i samme underenhet, bekrefte og deretter reversere splitten', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    render(<KanSplittes submitCallback={lagre} />);
 
     // Før splitt: ett samlet arbeidsforhold med 80% stilling (60% + 20%) som kan splittes
     expect(await screen.findByRole('button', { name: 'Splitt til 2 arbeidsforhold' })).toBeInTheDocument();
@@ -668,6 +669,100 @@ describe('TilretteleggingFaktaIndex', () => {
     expect(screen.getByText('60% stilling')).toBeInTheDocument();
     expect(screen.getByText('20% stilling')).toBeInTheDocument();
     expect(screen.queryByText('Flere arbeidsforhold')).not.toBeInTheDocument();
+
+    // Vurder velferdspermisjon og bekreft aksjonspunktet for de splittede arbeidsforholdene
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getAllByText('Oppdater')[0]!);
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'En begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
+      begrunnelse: 'En begrunnelse',
+      fødselsdato: undefined,
+      termindato: '2020-11-06',
+      bekreftetSvpArbeidsforholdList: [
+        {
+          arbeidsgiverReferanse: '999999999',
+          avklarteOppholdPerioder: [],
+          eksternArbeidsforholdReferanse: undefined,
+          internArbeidsforholdReferanse: '999999999-a',
+          kanTilrettelegges: true,
+          skalBrukes: true,
+          stillingsprosentStartTilrettelegging: 60,
+          tilretteleggingBehovFom: '2020-03-17',
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-03-17',
+              type: 'DELVIS_TILRETTELEGGING',
+              mottattDato: '2020-02-20',
+              kilde: 'SØKNAD',
+              stillingsprosent: 50,
+              overstyrtUtbetalingsgrad: 0,
+            },
+            {
+              fom: '2020-08-15',
+              type: 'HEL_TILRETTELEGGING',
+              mottattDato: '2020-02-20',
+              kilde: 'SØKNAD',
+            },
+          ],
+          tilretteleggingId: undefined,
+          uttakArbeidType: 'ORDINÆRT_ARBEID',
+          velferdspermisjoner: [
+            {
+              permisjonFom: '2020-02-17',
+              permisjonTom: '2020-07-12',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+              erGyldig: true,
+            },
+            {
+              permisjonFom: '2019-08-06',
+              permisjonTom: '2019-08-06',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+          ],
+        },
+        {
+          arbeidsgiverReferanse: '999999999',
+          avklarteOppholdPerioder: [],
+          eksternArbeidsforholdReferanse: undefined,
+          internArbeidsforholdReferanse: '999999999-b',
+          kanTilrettelegges: true,
+          skalBrukes: true,
+          stillingsprosentStartTilrettelegging: 20,
+          tilretteleggingBehovFom: '2020-03-17',
+          tilretteleggingDatoer: [
+            {
+              fom: '2020-03-17',
+              type: 'DELVIS_TILRETTELEGGING',
+              mottattDato: '2020-02-20',
+              kilde: 'SØKNAD',
+              stillingsprosent: 50,
+            },
+            {
+              fom: '2020-08-15',
+              type: 'HEL_TILRETTELEGGING',
+              mottattDato: '2020-02-20',
+              kilde: 'SØKNAD',
+            },
+          ],
+          tilretteleggingId: undefined,
+          uttakArbeidType: 'ORDINÆRT_ARBEID',
+          velferdspermisjoner: [
+            {
+              permisjonFom: '2019-10-03',
+              permisjonTom: '2019-10-03',
+              permisjonsprosent: 50,
+              type: 'VELFERDSPERMISJON',
+            },
+          ],
+        },
+      ],
+    } satisfies BekreftSvangerskapspengerAp);
 
     // Reverser splitten og verifiser at vi er tilbake til ett samlet arbeidsforhold
     await userEvent.click(
