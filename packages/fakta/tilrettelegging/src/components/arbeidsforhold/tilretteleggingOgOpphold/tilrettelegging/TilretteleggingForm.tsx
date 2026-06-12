@@ -177,6 +177,13 @@ export const TilretteleggingForm = ({
   const minDato = dayjs(tilrettelegging.tilretteleggingBehovFom);
   const maksDato = finnSisteGyldigeDatoFørTermindato(termindato);
 
+  const visStillingsprosentFelt =
+    !tilrettelegging.arbeidsforholdetErSplittet &&
+    (tilretteleggingDato.stillingsprosent === undefined ||
+      tilretteleggingDato.type !== 'DELVIS_TILRETTELEGGING' ||
+      erNyPeriode ||
+      formValues.kilde === 'REGISTRERT_AV_SAKSBEHANDLER');
+
   return (
     <FormProvider {...formMethods}>
       <VStack gap="space-16" paddingBlock="space-8">
@@ -232,32 +239,28 @@ export const TilretteleggingForm = ({
         </RhfRadioGroup>
         {formValues.type === 'DELVIS_TILRETTELEGGING' && (
           <>
-            {!tilrettelegging.arbeidsforholdetErSplittet &&
-              (tilretteleggingDato.stillingsprosent === undefined ||
-                tilretteleggingDato.type !== 'DELVIS_TILRETTELEGGING' ||
-                erNyPeriode ||
-                formValues.kilde === 'REGISTRERT_AV_SAKSBEHANDLER') && (
-                <RhfNumericField
-                  name={`${index}.stillingsprosent`}
-                  control={formMethods.control}
-                  htmlSize={10}
-                  readOnly={readOnly}
-                  disabled={disabled}
-                  label={<FormattedMessage id="TilretteleggingForm.Arbeidsprosent" />}
-                  description={<FormattedMessage id="TilretteleggingForm.ArbeidsprosentBeskrivelse" />}
-                  validate={[required, minValue0, maxValue100, hasValidDecimal]}
-                  forceTwoDecimalDigits
-                  onChange={value => {
-                    const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
-                      stillingsprosentArbeidsforhold,
-                      velferdspermisjonprosent,
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
-                      value,
-                    );
-                    formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
-                  }}
-                />
-              )}
+            {visStillingsprosentFelt && (
+              <RhfNumericField
+                name={`${index}.stillingsprosent`}
+                control={formMethods.control}
+                htmlSize={10}
+                readOnly={readOnly}
+                disabled={disabled}
+                label={<FormattedMessage id="TilretteleggingForm.Arbeidsprosent" />}
+                description={<FormattedMessage id="TilretteleggingForm.ArbeidsprosentBeskrivelse" />}
+                validate={[required, minValue0, maxValue100, hasValidDecimal]}
+                forceTwoDecimalDigits
+                onChange={value => {
+                  const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
+                    stillingsprosentArbeidsforhold,
+                    velferdspermisjonprosent,
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
+                    value,
+                  );
+                  formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
+                }}
+              />
+            )}
             <RhfNumericField
               name={`${index}.overstyrtUtbetalingsgrad`}
               control={formMethods.control}
