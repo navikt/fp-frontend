@@ -1,34 +1,19 @@
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, Spacer, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
-import dayjs, { type Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
 import type { FAISUProps } from './faisuUtils';
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
-import { finnTidligsteTilretteleggingsdato } from './tilretteleggingsdatoer';
+import { finnTidligsteTilretteleggingsdato, validerTidligereEnn } from './tilretteleggingsdatoer';
 import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTabell';
-
-const validerTidligereEnn =
-  (intl: IntlShape, tidligsteTidspunkt: Dayjs) =>
-  (tilretteleggingBehovFom: string): string | null => {
-    const tilretteleggingFomDato = dayjs(tilretteleggingBehovFom);
-
-    if (tilretteleggingFomDato.isValid() && tilretteleggingFomDato.isAfter(tidligsteTidspunkt)) {
-      return intl.formatMessage(
-        { id: 'ArbeidsforholdPanel.TilretteleggingTidligereEnn' },
-        { dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT) },
-      );
-    }
-    return null;
-  };
 
 interface Props {
   arbeidsforhold: Tilrettelegging;

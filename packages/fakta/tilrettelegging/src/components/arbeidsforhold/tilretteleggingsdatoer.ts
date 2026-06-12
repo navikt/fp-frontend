@@ -1,5 +1,6 @@
 import { type IntlShape } from 'react-intl';
 
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs, { type Dayjs } from 'dayjs';
 import minMax from 'dayjs/plugin/minMax';
 
@@ -21,3 +22,17 @@ export const validerIkkeEtterSisteGyldigeDato =
     dayjs(dato).isAfter(sisteGyldigeDato)
       ? intl.formatMessage({ id: 'TilretteleggingOgOppholdPerioderPanel.EtterTermindato' })
       : null;
+
+export const validerTidligereEnn =
+  (intl: IntlShape, tidligsteTidspunkt: Dayjs) =>
+  (tilretteleggingBehovFom: string): string | null => {
+    const tilretteleggingFomDato = dayjs(tilretteleggingBehovFom);
+
+    if (tilretteleggingFomDato.isValid() && tilretteleggingFomDato.isAfter(tidligsteTidspunkt)) {
+      return intl.formatMessage(
+        { id: 'ArbeidsforholdPanel.TilretteleggingTidligereEnn' },
+        { dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT) },
+      );
+    }
+    return null;
+  };
