@@ -14,6 +14,7 @@ const {
   HarFerieOpphold,
   SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod,
   TilretteleggingMed100ProsentVelferdspermisjon,
+  KanSplittes,
 } = composeStories(stories);
 
 const lagNyDato = (nyDato: string) => {
@@ -647,5 +648,35 @@ describe('TilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+  });
+
+  it('skal kunne splitte et arbeidsforhold med flere stillinger i samme underenhet og deretter reversere splitten', async () => {
+    render(<KanSplittes />);
+
+    // Før splitt: ett samlet arbeidsforhold med 80% stilling (60% + 20%) som kan splittes
+    expect(await screen.findByRole('button', { name: 'Splitt til 2 arbeidsforhold' })).toBeInTheDocument();
+    expect(screen.getByText('Flere arbeidsforhold')).toBeInTheDocument();
+    expect(screen.getByText('80% stilling')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Splitt til 2 arbeidsforhold' }));
+
+    // Etter splitt: to splittede arbeidsforhold med hver sin stillingsprosent
+    expect(await screen.findAllByText('Splitt')).toHaveLength(2);
+    expect(
+      screen.getAllByRole('button', { name: 'Fjern splitt av tilrettelegging for 2 arbeidsforhold' }),
+    ).toHaveLength(2);
+    expect(screen.getByText('60% stilling')).toBeInTheDocument();
+    expect(screen.getByText('20% stilling')).toBeInTheDocument();
+    expect(screen.queryByText('Flere arbeidsforhold')).not.toBeInTheDocument();
+
+    // Reverser splitten og verifiser at vi er tilbake til ett samlet arbeidsforhold
+    await userEvent.click(
+      screen.getAllByRole('button', { name: 'Fjern splitt av tilrettelegging for 2 arbeidsforhold' })[0]!,
+    );
+
+    expect(await screen.findByRole('button', { name: 'Splitt til 2 arbeidsforhold' })).toBeInTheDocument();
+    expect(screen.getByText('Flere arbeidsforhold')).toBeInTheDocument();
+    expect(screen.getByText('80% stilling')).toBeInTheDocument();
+    expect(screen.queryByText('Splitt')).not.toBeInTheDocument();
   });
 });
