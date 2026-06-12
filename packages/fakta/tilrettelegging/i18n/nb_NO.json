@@ -5,7 +5,7 @@
   "ArbeidsforholdExpansionCard.Stillingsprosent": "{stillingsprosent}% stilling",
 
   "ArbeidsforholdExpansionCard.AntallPeriode": "{antall, plural, one {# periode} other {# perioder}}",
-  "ArbeidsforholdExpansionCard.AntallVelferdspermisjon": "{antall, plural, one {# velferdspermisjon} other {# velferdspermisjon}}",
+  "ArbeidsforholdExpansionCard.AntallVelferdspermisjon": "{antall, plural, one {# velferdspermisjon} other {# velferdspermisjoner}}",
 
   "FAISU.SplittTag": "Splitt",
   "FAISU.SplittArbeidsforhold": "Splitt til {antall} arbeidsforhold",
