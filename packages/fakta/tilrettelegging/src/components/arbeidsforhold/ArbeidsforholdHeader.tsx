@@ -45,7 +45,7 @@ export const ArbeidsforholdHeader = ({
           <Spacer />
           <HStack gap="space-16" align="center">
             {faisu?.tag}
-            {utledSVPTags(tilrettelegging.skalBrukes, visInfoAlert)}
+            <SVPTag skalBrukes={tilrettelegging.skalBrukes} visInfoAlert={visInfoAlert} />
           </HStack>
         </HStack>
 
@@ -98,7 +98,12 @@ export const ArbeidsforholdHeader = ({
 
 const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const utledSVPTags = (skalBrukes: boolean, visInfoAlert: boolean) => {
+interface SVPTagProps {
+  skalBrukes: boolean;
+  visInfoAlert: boolean;
+}
+
+const SVPTag = ({ skalBrukes, visInfoAlert }: SVPTagProps) => {
   if (visInfoAlert && skalBrukes) {
     return (
       <Tag data-color="warning" size="xsmall" icon={<ExclamationmarkTriangleFillIcon />}>

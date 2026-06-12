@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { type FieldArrayWithId } from 'react-hook-form';
 
 import { ExpansionCard } from '@navikt/ds-react';
@@ -33,6 +33,14 @@ export const ArbeidsforholdExpansionCard = ({
   faisu,
 }: Props) => {
   const [open, setOpen] = useState(tilrettelegging.skalBrukes);
+  const [forrigeSkalBrukes, setForrigeSkalBrukes] = useState(tilrettelegging.skalBrukes);
+
+  // Kortet åpnes/lukkes automatisk når skalBrukes endres, men kan også styres manuelt av saksbehandler.
+  if (tilrettelegging.skalBrukes !== forrigeSkalBrukes) {
+    setForrigeSkalBrukes(tilrettelegging.skalBrukes);
+    setOpen(tilrettelegging.skalBrukes);
+  }
+
   const alleIafAf = aoiArbeidsforhold.filter(iaya => iaya.arbeidsgiverIdent === tilrettelegging.arbeidsgiverReferanse);
 
   const af = finnArbeidsforhold(alleIafAf, tilrettelegging.internArbeidsforholdReferanse);
@@ -45,11 +53,6 @@ export const ArbeidsforholdExpansionCard = ({
   const stillingsprosent = af
     ? af.stillingsprosent
     : finnStillingsprosent(alleIafAf, tilrettelegging.tilretteleggingBehovFom);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setOpen(tilrettelegging.skalBrukes);
-  }, [tilrettelegging.skalBrukes]);
 
   return (
     <ExpansionCard open={open} onToggle={o => setOpen(o)} key={field.id} aria-label="arbeidsgiver">

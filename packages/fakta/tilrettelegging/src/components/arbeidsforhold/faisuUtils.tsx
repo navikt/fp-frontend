@@ -11,6 +11,25 @@ import type { Arbeidsforhold } from '@navikt/fp-types';
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { finnStillingsprosent } from '../arbeidsforholdUtils';
 
+/**
+ * FAISU = «Flere Arbeidsforhold I Samme Underenhet».
+ *
+ * En søker kan ha flere stillinger (arbeidsforhold) hos samme arbeidsgiver/underenhet.
+ * Disse kommer som ett samlet arbeidsforhold i søknaden, men kan ha ulik utbetalingsgrad
+ * for hver stilling. Saksbehandler må da kunne splitte det samlede arbeidsforholdet i ett
+ * arbeidsforhold per underliggende stilling (fra arbeid og inntekt / AOI), slik at hver
+ * stilling kan vurderes for seg.
+ *
+ * - `getFAISUProps` gir en knapp (`action`) og en merkelapp (`tag`) for arbeidsforhold som
+ *   enten kan vurderes splittet eller allerede er splittet. For øvrige arbeidsforhold
+ *   returneres `undefined`.
+ * - Splitt: erstatter det samlede arbeidsforholdet med én kopi per AOI-arbeidsforhold hos
+ *   samme arbeidsgiver (`kopierArbeidsforhold`), der hver kopi får sin egen stillingsprosent
+ *   og interne arbeidsforholdreferanse.
+ * - Reversering: slår de splittede arbeidsforholdene sammen igjen til ett normalisert
+ *   arbeidsforhold (`reverterSplitt`), der perioder og permisjoner flettes og dupliserte
+ *   innslag fjernes.
+ */
 export type FAISUProps = {
   action: ReactNode | undefined;
   tag: ReactNode | undefined;
