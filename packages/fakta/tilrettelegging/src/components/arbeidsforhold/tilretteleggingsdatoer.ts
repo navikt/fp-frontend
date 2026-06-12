@@ -9,7 +9,7 @@ dayjs.extend(minMax);
 export const finnSisteGyldigeDatoFørTermindato = (termindato: string): Dayjs =>
   dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day');
 
-// Tilretteleggingen kan tidligst starte siste gyldige dato før termin, men ikke etter en eventuell fødsel.
+// Tilretteleggingen kan senest starte siste gyldige dato før termin, men ikke etter en eventuell fødsel.
 export const finnTidligsteTilretteleggingsdato = (termindato: string, fødselsdato?: string): Dayjs => {
   const sisteGyldigeDato = finnSisteGyldigeDatoFørTermindato(termindato);
   return fødselsdato ? dayjs.min(sisteGyldigeDato, dayjs(fødselsdato)) : sisteGyldigeDato;
