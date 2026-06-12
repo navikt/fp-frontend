@@ -47,18 +47,17 @@ const klikkActionKnapp = (props: ReturnType<typeof getFAISUProps>) => {
 
 describe('faisuUtils', () => {
   it('skal returnere undefined når arbeidsforholdet verken skal vurderes splittet eller er splittet', () => {
-    const props = getFAISUProps(lagTilrettelegging(), [], [], vi.fn(), vi.fn());
+    const props = getFAISUProps(lagTilrettelegging(), [], [], vi.fn());
 
     expect(props).toBeUndefined();
   });
 
   it('skal vise splitt-knapp og «flere arbeidsforhold»-tag når arbeidsforholdet skal vurderes splittet', () => {
     const arbeidsforhold = lagTilrettelegging({ skalVurdereSplittAvArbeidsforholdet: true });
-    const append = vi.fn();
-    const remove = vi.fn();
+    const replace = vi.fn();
     const aoi = [lagAoiArbeidsforhold('a'), lagAoiArbeidsforhold('b')];
 
-    const props = getFAISUProps(arbeidsforhold, [arbeidsforhold], aoi, append, remove);
+    const props = getFAISUProps(arbeidsforhold, [arbeidsforhold], aoi, replace);
 
     render(
       <RawIntlProvider value={intl}>
@@ -69,17 +68,16 @@ describe('faisuUtils', () => {
 
     expect(screen.getByText('Flere arbeidsforhold')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Splitt til 2 arbeidsforhold' }));
-    expect(append).toHaveBeenCalledTimes(1);
-    expect(remove).toHaveBeenCalledWith([0]);
+    expect(replace).toHaveBeenCalledTimes(1);
+    expect(replace.mock.calls[0]![0]).toHaveLength(2);
   });
 
   it('skal vise fjern-splitt-knapp og splitt-tag når flere tilrettelegginger er splittet hos samme arbeidsgiver', () => {
     const splittet1 = lagTilrettelegging({ arbeidsforholdetErSplittet: true });
     const splittet2 = lagTilrettelegging({ arbeidsforholdetErSplittet: true });
-    const append = vi.fn();
-    const remove = vi.fn();
+    const replace = vi.fn();
 
-    const props = getFAISUProps(splittet1, [splittet1, splittet2], [lagAoiArbeidsforhold('a')], append, remove);
+    const props = getFAISUProps(splittet1, [splittet1, splittet2], [lagAoiArbeidsforhold('a')], replace);
 
     render(
       <RawIntlProvider value={intl}>
@@ -90,8 +88,8 @@ describe('faisuUtils', () => {
 
     expect(screen.getByText('Splitt')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Fjern splitt av tilrettelegging for 2 arbeidsforhold' }));
-    expect(append).toHaveBeenCalledTimes(1);
-    expect(remove).toHaveBeenCalledWith([0, 1]);
+    expect(replace).toHaveBeenCalledTimes(1);
+    expect(replace.mock.calls[0]![0]).toHaveLength(1);
   });
 
   it('skal ende opp med opprinnelige felter etter splitt og påfølgende reversering', () => {
@@ -113,19 +111,19 @@ describe('faisuUtils', () => {
     };
     const originalFelt: Felt = { ...original, id: 'original' };
 
-    const appendSplitt = vi.fn();
-    klikkActionKnapp(getFAISUProps(originalFelt, [originalFelt], aoi, appendSplitt, vi.fn()));
+    const replaceSplitt = vi.fn();
+    klikkActionKnapp(getFAISUProps(originalFelt, [originalFelt], aoi, replaceSplitt));
 
-    const splittedeFelter: Felt[] = (appendSplitt.mock.calls[0]![0] as Tilrettelegging[]).map((felt, index) => ({
+    const splittedeFelter: Felt[] = (replaceSplitt.mock.calls[0]![0] as Tilrettelegging[]).map((felt, index) => ({
       ...felt,
       id: `splitt-${index}`,
     }));
     expect(splittedeFelter).toHaveLength(2);
     expect(splittedeFelter.every(felt => felt.arbeidsforholdetErSplittet)).toBe(true);
 
-    const appendRevert = vi.fn();
-    klikkActionKnapp(getFAISUProps(splittedeFelter[0]!, splittedeFelter, aoi, appendRevert, vi.fn()));
+    const replaceRevert = vi.fn();
+    klikkActionKnapp(getFAISUProps(splittedeFelter[0]!, splittedeFelter, aoi, replaceRevert));
 
-    expect(appendRevert.mock.calls[0]![0]).toStrictEqual(original);
+    expect(replaceRevert.mock.calls[0]![0]).toStrictEqual([original]);
   });
 });
