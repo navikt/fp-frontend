@@ -8,14 +8,13 @@ import { ISO_DATE_FORMAT, sortPeriodsByFom } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type {
-  SvpArbeidsforholdDto,
   SvpAvklartOppholdPeriode,
   SvpOppholdÅrsak,
   SvpTilretteleggingDatoDto,
   TilretteleggingType,
 } from '@navikt/fp-types';
 
-import type { TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
+import type { Tilrettelegging, TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
 import { OppholdPeriodeTabellRad } from './opphold/OppholdPeriodeTabellRad';
 import { TilretteleggingPeriodeTabellRad } from './tilrettelegging/TilretteleggingPeriodeTabellRad';
 
@@ -29,7 +28,7 @@ const finnNesteTilretteleggingFom = (
     .sort((a, b) => dayjs(a).diff(dayjs(b)))[0];
 
 interface Props {
-  arbeidsforhold: SvpArbeidsforholdDto;
+  tilrettelegging: Tilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   disabled: boolean;
@@ -38,7 +37,7 @@ interface Props {
 }
 
 export const TilretteleggingOgOppholdPerioderPanel = ({
-  arbeidsforhold,
+  tilrettelegging,
   arbeidsforholdIndex,
   readOnly,
   disabled,
@@ -58,7 +57,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
   });
   const { append: appendOpphold, remove: removeOpphold } = useFieldArray({ name: oppholdPerioderStateName, control });
 
-  const { tilretteleggingDatoer, avklarteOppholdPerioder } = arbeidsforhold;
+  const { tilretteleggingDatoer, avklarteOppholdPerioder } = tilrettelegging;
 
   const leggTilOpphold = () => {
     setErLeggTilKnapperDisablet(true);
@@ -81,12 +80,12 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
     });
   };
 
-  const fjernTilrettelegging = (fomDato?: string) => {
+  const slettTilrettelegging = (fomDato?: string) => {
     removeTilrettelegging(
       fomDato ? tilretteleggingDatoer.findIndex(t => t.fom === fomDato) : tilretteleggingDatoer.length - 1,
     );
   };
-  const fjernOpphold = (opphold?: SvpAvklartOppholdPeriode) => {
+  const slettOpphold = (opphold?: SvpAvklartOppholdPeriode) => {
     removeOpphold(
       opphold
         ? avklarteOppholdPerioder.findIndex(
@@ -100,7 +99,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
 
   return (
     <>
-      <Table size="small">
+      <Table size="small" width="fit-content">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell colSpan={3} textSize="small">
@@ -126,15 +125,15 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                 <TilretteleggingPeriodeTabellRad
                   key={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
                   navn={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
-                  tilrettelegging={rad}
-                  disabled={disabled}
-                  readOnly={readOnly}
                   index={arbeidsforholdIndex + tilretteleggingIndex}
+                  tilretteleggingDato={rad}
+                  readOnly={readOnly}
+                  disabled={disabled}
                   openRad={rad.fom === ''}
-                  fjernTilrettelegging={fjernTilrettelegging}
+                  fjernTilrettelegging={slettTilrettelegging}
                   setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                   stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-                  arbeidsforhold={arbeidsforhold}
+                  tilrettelegging={tilrettelegging}
                   tomDatoForTilrettelegging={tomDatoForTilrettelegging}
                   termindato={termindato}
                 />
@@ -153,16 +152,16 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                 disabled={disabled}
                 index={arbeidsforholdIndex + oppholdIndex}
                 openRad={rad.fom === ''}
-                fjernOpphold={fjernOpphold}
+                fjernOpphold={slettOpphold}
                 setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
-                arbeidsforhold={arbeidsforhold}
+                tilrettelegging={tilrettelegging}
                 termindato={termindato}
               />
             );
           })}
         </Table.Body>
       </Table>
-      {!readOnly && (
+      {!readOnly && !disabled && (
         <HStack gap="space-16">
           <Button
             size="small"

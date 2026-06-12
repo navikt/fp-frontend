@@ -1,14 +1,25 @@
 {
-  "ArbeidsforholdFieldArray.SkalHaSvp": "Skal ha svangerskapspenger",
-  "ArbeidsforholdFieldArray.SkalIkkeHaSvp": "Skal ikke ha svangerskapspenger",
-  "ArbeidsforholdFieldArray.SvpIkkeBeregnet": "Svangerskapspenger kan ikke beregnes",
-  "ArbeidsforholdFieldArray.Stillingsprosent": "{stillingsprosent}% stilling",
+  "ArbeidsforholdExpansionCard.SkalHaSvp": "Skal ha svangerskapspenger",
+  "ArbeidsforholdExpansionCard.SkalIkkeHaSvp": "Skal ikke ha svangerskapspenger",
+  "ArbeidsforholdExpansionCard.SvpIkkeBeregnet": "Svangerskapspenger kan ikke beregnes",
+  "ArbeidsforholdExpansionCard.Stillingsprosent": "{stillingsprosent}% stilling",
+
+  "ArbeidsforholdExpansionCard.AntallPeriode": "{antall, plural, one {# periode} other {# perioder}}",
+  "ArbeidsforholdExpansionCard.AntallVelferdspermisjon": "{antall, plural, one {# velferdspermisjon} other {# velferdspermisjoner}}",
+
+  "FAISU.SplittTag": "Splitt",
+  "FAISU.SplittArbeidsforhold": "Splitt til {antall} arbeidsforhold",
+  "FAISU.FjernSplittArbeidsforhold": "Fjern splitt av tilrettelegging for {antall} arbeidsforhold",
+  "FAISU.HarFlereArbeidsforhold": "Flere arbeidsforhold",
 
   "TilretteleggingFaktaForm.Aksjonspunkt": "Kontroller opplysninger fra jordmor og arbeidsgiver",
   "TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner": "Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer",
+  "TilretteleggingFaktaForm.AksjonpunktFAISU": "Søker har flere stillinger hos denne arbeidsgiveren og skal ha graderte svangerskapspenger. Vurder om arbeidsforholdet må splittes hvis det er forskjellig utbetalingsgrad for stillingene.",
   "TilretteleggingFaktaForm.Termindato": "Termindato",
   "TilretteleggingFaktaForm.Fodselsdato": "Fødselsdato",
   "TilretteleggingFaktaForm.UndersokNarmere": "Søker var ikke ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.",
+  "TilretteleggingFaktaForm.BegrunnelseDescription.UtenSplitt": "Beskriv eventuelle avvik mellom opplysningene fra søknaden og tilretteleggingsskjemaet, og hva som er gjort for å avklare avvikene. Hvis det ikke har vært noen avvik i saken, trenger du ikke begrunne noe.",
+  "TilretteleggingFaktaForm.BegrunnelseDescription.MedSplitt": "Beskriv eventuelle avvik mellom opplysningene fra søknaden og tilretteleggingsskjemaet, og hva som er gjort for å avklare avvikene. Gi også en kort begrunnelse for hvorfor du velger å splitte arbeidsforholdet, eller hvorfor det ikke er nødvendig.",
 
   "TilretteleggingFormFeil.IkkeAllePermisjonerVurdert": "Ikke alle velferdspermisjoner er vurdert",
   "TilretteleggingFormFeil.HarIkkeValgtArbeidsforhold": "Minst ett arbeidsforhold må brukes",
@@ -31,7 +42,6 @@
   "TilretteleggingForm.Avbryt": "Avbryt",
   "TilretteleggingForm.ProsentSvp": "Prosent svangerskapspenger",
   "TilretteleggingForm.DuplikateDatoer": "Flere perioder med samme Fra og med",
-  "TilretteleggingForm.EtterTermindato": "Dato kan ikke være senere enn tre uker før termindato",
   "TilretteleggingForm.ForForsteDato": "Dato kan ikke være før dato for tilrettelegging fra lege eller jordmor",
   "TilretteleggingForm.Arbeidsprosent": "Arbeidsprosent",
   "TilretteleggingForm.ArbeidsprosentBeskrivelse": "Dette er prosenten arbeidstaker skal jobbe i perioden",
@@ -49,6 +59,7 @@
 
   "TilretteleggingOgOppholdPerioderPanel.Perioder": "Perioder",
   "TilretteleggingOgOppholdPerioderPanel.Kilde": "Kilde",
+  "TilretteleggingOgOppholdPerioderPanel.EtterTermindato": "Dato kan ikke være senere enn tre uker før termindato",
 
   "OppholdForm.LeggTil": "Legg til ny periode",
   "OppholdForm.AvsluttOgSlett": "Avbryt",
@@ -60,7 +71,6 @@
   "OppholdForm.Sykepenger": "Sykepenger 100% i perioden med svangerskapspenger",
   "OppholdForm.Ferie": "Ferie",
   "OppholdForm.TomForFom": "Dato kan ikke være før fra og med",
-  "OppholdForm.EtterTermindato": "Dato kan ikke være senere enn tre uker før termindato",
   "OppholdForm.ForForsteDato": "Dato kan ikke være før første tilrettelegging",
 
   "TilretteleggingFieldArray.LeggTilTilrettelegging": "Periode med svangerskapspenger",
@@ -83,12 +93,10 @@
 
   "TilretteleggingPeriodeTabellRad.SlettPeriode": "Slett periode",
   "TilretteleggingPeriodeTabellRad.IkkeSatt": "Ikke satt",
-  "TilretteleggingPeriodeTabellRad.Tilrettelegging": "Tilrettelegging",
-  "TilretteleggingPeriodeTabellRad.SVPprosent": "{prosent}% svangerskapspenger",
+  "TilretteleggingPeriodeTabellRad.SVPprosent": "Svangerskapspenger {prosent}%",
 
   "OppholdPeriodeTabellRad.SlettPeriode": "Slett periode",
   "OppholdPeriodeTabellRad.IkkeSatt": "Ikke satt",
-  "OppholdPeriodeTabellRad.Opphold": "Opphold",
   "OppholdPeriodeTabellRad.Sykepenger": "Sykepenger 100%",
   "OppholdPeriodeTabellRad.Ferie": "Ferie"
 }

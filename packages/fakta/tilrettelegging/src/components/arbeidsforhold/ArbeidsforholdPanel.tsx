@@ -1,86 +1,64 @@
-import { useFormContext, type UseFormGetValues } from 'react-hook-form';
-import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
+import { useFormContext } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
+import { HStack, Spacer, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
-import minMax from 'dayjs/plugin/minMax';
 
-import type { SvpArbeidsforholdDto } from '@navikt/fp-types';
-
-import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
+import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
+import type { FAISUProps } from './faisuUtils';
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
+import { finnTidligsteTilretteleggingsdato, validerTidligereEnn } from './tilretteleggingsdatoer';
 import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTabell';
 
-dayjs.extend(minMax);
-
-const validerTidligereEnn =
-  (intl: IntlShape, getValues: UseFormGetValues<TilretteleggingFormValues>, tilretteleggingBehovFom: string) =>
-  (): string | null => {
-    const termindato = getValues('termindato');
-    const fødselsdato = getValues('fødselsdato');
-
-    const tilretteleggingFomDato = dayjs(tilretteleggingBehovFom);
-    const treUkerFørTermindato = dayjs(termindato).subtract(3, 'week').subtract(1, 'day');
-    const tidligsteTidspunkt = fødselsdato ? dayjs.min(treUkerFørTermindato, dayjs(fødselsdato)) : treUkerFørTermindato;
-
-    if (tilretteleggingFomDato.isValid() && !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)) {
-      return intl.formatMessage(
-        {
-          id: 'ArbeidsforholdPanel.TilretteleggingTidligereEnn',
-        },
-        {
-          dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT),
-        },
-      );
-    }
-    return null;
-  };
-
 interface Props {
-  arbeidsforhold: SvpArbeidsforholdDto;
+  tilrettelegging: Tilrettelegging;
   arbeidsforholdIndex: number;
   readOnly: boolean;
   visInfoAlert: boolean;
   stillingsprosentArbeidsforhold: number;
+  faisu: FAISUProps | undefined;
 }
 
 export const ArbeidsforholdPanel = ({
-  arbeidsforhold,
+  tilrettelegging,
   arbeidsforholdIndex,
   readOnly,
   visInfoAlert,
   stillingsprosentArbeidsforhold,
+  faisu,
 }: Props) => {
   const intl = useIntl();
 
-  const { getValues, watch, setValue, control } = useFormContext<TilretteleggingFormValues>();
+  const { watch, setValue, control } = useFormContext<TilretteleggingFormValues>();
 
   const termindato = watch('termindato');
+  const fødselsdato = watch('fødselsdato');
   const tilretteleggingBehovFom = watch(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`);
 
+  const tidligsteTilretteleggingsdato = finnTidligsteTilretteleggingsdato(termindato, fødselsdato);
+
   const filtrerteVelferdspermisjoner = filtrerVelferdspermisjoner(
-    arbeidsforhold.velferdspermisjoner,
+    tilrettelegging.velferdspermisjoner,
     tilretteleggingBehovFom,
   );
   const harUavklartVelferdspermisjon = filtrerteVelferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined);
 
   const oppdaterOverstyrtUtbetalingsgrad = (velferdspermisjonprosent: number) => {
-    for (const [index, tilrettelegging] of arbeidsforhold.tilretteleggingDatoer.entries()) {
+    for (const [index, dato] of tilrettelegging.tilretteleggingDatoer.entries()) {
       const prosentSvangerskapspenger = finnProsentSvangerskapspenger(
-        tilrettelegging,
+        dato,
         stillingsprosentArbeidsforhold,
         velferdspermisjonprosent,
         false,
       );
       if (prosentSvangerskapspenger !== undefined) {
         setValue(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer.${index}`, {
-          ...tilrettelegging,
+          ...dato,
           overstyrtUtbetalingsgrad: prosentSvangerskapspenger,
         });
       }
@@ -94,18 +72,24 @@ export const ArbeidsforholdPanel = ({
           <FormattedMessage id="TilretteleggingFaktaForm.UndersokNarmere" />
         </AksjonspunktHelpTextHTML>
       )}
-      <RhfCheckbox
-        name={`arbeidsforhold.${arbeidsforholdIndex}.skalBrukes`}
-        control={control}
-        readOnly={readOnly}
-        label={<FormattedMessage id="ArbeidsforholdPanel.SkalHaSvpForArbeidsforhold" />}
-      />
+      <HStack gap="space-16">
+        <RhfCheckbox
+          name={`arbeidsforhold.${arbeidsforholdIndex}.skalBrukes`}
+          control={control}
+          readOnly={readOnly}
+          label={<FormattedMessage id="ArbeidsforholdPanel.SkalHaSvpForArbeidsforhold" />}
+        />
+        <Spacer />
+        {faisu?.action}
+      </HStack>
       <VStack gap="space-32">
         <RhfDatepicker
           name={`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`}
           control={control}
           label={<FormattedMessage id="ArbeidsforholdPanel.DatoForTilrettelegging" />}
-          validate={[required, hasValidDate, validerTidligereEnn(intl, getValues, tilretteleggingBehovFom)]}
+          validate={[required, hasValidDate, validerTidligereEnn(intl, tidligsteTilretteleggingsdato)]}
+          fromDate={dayjs(termindato).subtract(9, 'months').toDate()}
+          toDate={tidligsteTilretteleggingsdato.toDate()}
           readOnly={readOnly}
         />
 
@@ -119,7 +103,7 @@ export const ArbeidsforholdPanel = ({
         )}
 
         <TilretteleggingOgOppholdPerioderPanel
-          arbeidsforhold={arbeidsforhold}
+          tilrettelegging={tilrettelegging}
           arbeidsforholdIndex={arbeidsforholdIndex}
           readOnly={readOnly}
           disabled={harUavklartVelferdspermisjon}
