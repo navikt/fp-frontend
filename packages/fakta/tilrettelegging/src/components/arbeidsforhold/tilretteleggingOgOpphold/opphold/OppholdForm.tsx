@@ -5,9 +5,11 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Button, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
-import dayjs from 'dayjs';
+import dayjs, { type Dayjs } from 'dayjs';
 
 import type { SvpAvklartOppholdPeriode, SvpTilretteleggingDatoDto } from '@navikt/fp-types';
+
+import { finnSisteGyldigeDatoFørTermindato, validerIkkeEtterSisteGyldigeDato } from '../../tilretteleggingsdatoer';
 
 type FormValues = Record<
   string,
@@ -20,7 +22,7 @@ const validerAtDatoErUnik =
   (
     intl: IntlShape,
     oppholdPerioder: SvpAvklartOppholdPeriode[],
-    alleTilrettelegginger: SvpTilretteleggingDatoDto[],
+    tilretteleggingDatoer: SvpTilretteleggingDatoDto[],
     opphold: SvpAvklartOppholdPeriode,
     getValues: UseFormGetValues<FormValues>,
     index: number,
@@ -30,7 +32,7 @@ const validerAtDatoErUnik =
     const harDuplikatFomOpphold = oppholdMinusEditert.some(t => t.fom === dato);
     // Ferie kan starte på samme dato som en tilrettelegging (inkludert skjæringstidspunktet)
     const erFerie = getValues(`${index}.oppholdÅrsak`) === 'FERIE';
-    const harDuplikatFomTilrettelegging = !erFerie && alleTilrettelegginger.some(t => t.fom === dato);
+    const harDuplikatFomTilrettelegging = !erFerie && tilretteleggingDatoer.some(t => t.fom === dato);
 
     return harDuplikatFomTilrettelegging || harDuplikatFomOpphold
       ? intl.formatMessage({ id: 'TilretteleggingForm.DuplikateDatoer' })
@@ -41,21 +43,14 @@ const validerTomEtterFom =
   (intl: IntlShape, index: number, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
     dayjs(tom).isBefore(getValues(`${index}.fom`)) ? intl.formatMessage({ id: 'OppholdForm.TomForFom' }) : null;
 
-const validerAtPeriodeErGyldig =
-  (intl: IntlShape, tilrettelegginger: SvpTilretteleggingDatoDto[], termindato: string) => (dato?: string) => {
-    if (dayjs(dato).isAfter(dayjs(termindato).subtract(3, 'weeks').subtract(1, 'day'))) {
-      return intl.formatMessage({ id: 'OppholdForm.EtterTermindato' });
+const validerIkkeFørFørsteDato =
+  (intl: IntlShape, førsteDagMedTilrettelegging: Dayjs | undefined) => (dato?: string) => {
+    if (!dato || !førsteDagMedTilrettelegging) {
+      return null;
     }
-    const førsteDato = tilrettelegginger.reduce<string | undefined>((a, t) => {
-      if (a === undefined || dayjs(t.fom).isBefore(a)) {
-        return t.fom;
-      }
-      return a;
-    }, undefined);
-    if (dayjs(dato).isBefore(førsteDato)) {
-      return intl.formatMessage({ id: 'OppholdForm.ForForsteDato' });
-    }
-    return null;
+    return dayjs(dato).isBefore(førsteDagMedTilrettelegging)
+      ? intl.formatMessage({ id: 'OppholdForm.ForForsteDato' })
+      : null;
   };
 
 const validerAtPeriodeIkkeOverlapper =
@@ -84,10 +79,19 @@ interface Props {
   disabled: boolean;
   oppdaterOpphold: (values: SvpAvklartOppholdPeriode) => void;
   avbrytEditering: () => void;
-  alleTilrettelegginger: SvpTilretteleggingDatoDto[];
+  tilretteleggingDatoer: SvpTilretteleggingDatoDto[];
   alleOpphold: SvpAvklartOppholdPeriode[];
   termindato: string;
 }
+
+const finnFørsteDatoForTilrettelegging = (tilretteleggingDatoer: SvpTilretteleggingDatoDto[]) => {
+  return tilretteleggingDatoer.reduce<Dayjs | undefined>((a, t) => {
+    if (a === undefined || dayjs(t.fom).isBefore(a)) {
+      return dayjs(t.fom);
+    }
+    return a;
+  }, undefined);
+};
 
 export const OppholdForm = ({
   opphold,
@@ -96,7 +100,7 @@ export const OppholdForm = ({
   disabled,
   oppdaterOpphold,
   avbrytEditering,
-  alleTilrettelegginger,
+  tilretteleggingDatoer,
   alleOpphold,
   termindato,
 }: Props) => {
@@ -132,6 +136,8 @@ export const OppholdForm = ({
 
   const forVisning = readOnly || opphold.oppholdKilde === 'INNTEKTSMELDING';
 
+  const førsteDagMedTilrettelegging = finnFørsteDatoForTilrettelegging(tilretteleggingDatoer);
+  const sisteGyldigeDato = finnSisteGyldigeDatoFørTermindato(termindato);
   return (
     <FormProvider {...formMethods}>
       <VStack gap="space-16" paddingBlock="space-8">
@@ -140,28 +146,34 @@ export const OppholdForm = ({
             name={`${index}.fom`}
             control={formMethods.control}
             label={<FormattedMessage id="OppholdForm.FraOgMed" />}
+            readOnly={forVisning}
+            disabled={disabled}
             validate={[
               required,
               hasValidDate,
-              validerAtDatoErUnik(intl, alleOpphold, alleTilrettelegginger, opphold, formMethods.getValues, index),
-              validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
+              validerAtDatoErUnik(intl, alleOpphold, tilretteleggingDatoer, opphold, formMethods.getValues, index),
+              validerIkkeEtterSisteGyldigeDato(intl, sisteGyldigeDato),
+              validerIkkeFørFørsteDato(intl, førsteDagMedTilrettelegging),
             ]}
-            readOnly={forVisning}
-            disabled={disabled}
+            fromDate={førsteDagMedTilrettelegging?.toDate()}
+            toDate={sisteGyldigeDato.toDate()}
           />
           <RhfDatepicker
             name={`${index}.tom`}
             control={formMethods.control}
             label={<FormattedMessage id="OppholdForm.TilOgMed" />}
+            readOnly={forVisning}
+            disabled={disabled}
             validate={[
               required,
               hasValidDate,
               validerTomEtterFom(intl, index, formMethods.getValues),
-              validerAtPeriodeErGyldig(intl, alleTilrettelegginger, termindato),
+              validerIkkeEtterSisteGyldigeDato(intl, sisteGyldigeDato),
+              validerIkkeFørFørsteDato(intl, førsteDagMedTilrettelegging),
               validerAtPeriodeIkkeOverlapper(formMethods.getValues, index, opphold, alleOpphold),
             ]}
-            readOnly={forVisning}
-            disabled={disabled}
+            fromDate={førsteDagMedTilrettelegging?.toDate()}
+            toDate={sisteGyldigeDato.toDate()}
           />
         </HStack>
         <RhfRadioGroup

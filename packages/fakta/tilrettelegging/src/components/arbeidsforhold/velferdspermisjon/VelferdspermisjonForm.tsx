@@ -1,4 +1,4 @@
-import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+import { FormProvider, useForm, useFormContext, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Alert, Button, HStack, Radio, VStack } from '@navikt/ds-react';
@@ -72,7 +72,10 @@ export const VelferdspermisjonForm = ({
     return Promise.resolve();
   };
 
-  const erGyldig = formMethods.watch(`${permisjonIndex}.erGyldig`);
+  const erGyldig = useWatch({
+    control: formMethods.control,
+    name: `${permisjonIndex}.erGyldig`,
+  });
 
   return (
     <FormProvider {...formMethods}>
@@ -94,22 +97,23 @@ export const VelferdspermisjonForm = ({
             </Radio>
           </HStack>
         </RhfRadioGroup>
+
         {erGyldig && velferdspermisjon.permisjonsprosent === 100 && (
           <Alert variant="info" size="small" className="self-start">
             <FormattedMessage id="VelferdspermisjonForm.Permisjon100ProsentOgGyldig" />
           </Alert>
         )}
-        <div>
-          <Button
-            size="small"
-            variant="primary"
-            type="button"
-            disabled={!formMethods.formState.isDirty || false}
-            onClick={formMethods.handleSubmit(lagreForm)}
-          >
-            <FormattedMessage id="VelferdspermisjonForm.Oppdater" />
-          </Button>
-        </div>
+
+        <Button
+          size="small"
+          variant="primary"
+          type="button"
+          disabled={!formMethods.formState.isDirty || false}
+          onClick={formMethods.handleSubmit(lagreForm)}
+          className="self-start"
+        >
+          <FormattedMessage id="VelferdspermisjonForm.Oppdater" />
+        </Button>
       </VStack>
     </FormProvider>
   );

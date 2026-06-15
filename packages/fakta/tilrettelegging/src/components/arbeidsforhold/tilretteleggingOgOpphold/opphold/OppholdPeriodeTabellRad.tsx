@@ -6,9 +6,9 @@ import { XMarkIcon } from '@navikt/aksel-icons';
 import { Button, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import type { SvpArbeidsforholdDto, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
+import type { SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 
-import type { TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
+import type { Tilrettelegging, TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
 import { OppholdForm } from './OppholdForm';
 
 import styles from './oppholdPeriodeTabellRad.module.css';
@@ -22,7 +22,7 @@ interface Props {
   openRad: boolean;
   fjernOpphold: (opphold?: SvpAvklartOppholdPeriode) => void;
   setLeggTilKnapperDisablet: React.Dispatch<React.SetStateAction<boolean>>;
-  arbeidsforhold: SvpArbeidsforholdDto;
+  tilrettelegging: Tilrettelegging;
   termindato: string;
 }
 
@@ -35,7 +35,7 @@ export const OppholdPeriodeTabellRad = ({
   openRad,
   fjernOpphold,
   setLeggTilKnapperDisablet,
-  arbeidsforhold,
+  tilrettelegging,
   termindato,
 }: Props) => {
   const intl = useIntl();
@@ -71,8 +71,8 @@ export const OppholdPeriodeTabellRad = ({
           avbrytEditering={avbrytEditering}
           readOnly={readOnly}
           disabled={disabled}
-          alleTilrettelegginger={arbeidsforhold.tilretteleggingDatoer}
-          alleOpphold={arbeidsforhold.avklarteOppholdPerioder}
+          tilretteleggingDatoer={tilrettelegging.tilretteleggingDatoer}
+          alleOpphold={tilrettelegging.avklarteOppholdPerioder}
           termindato={termindato}
         />
       }
@@ -112,7 +112,7 @@ export const OppholdPeriodeTabellRad = ({
 
 const OppholdType = ({ opphold }: { opphold: Partial<SvpAvklartOppholdPeriode> }) => {
   if (opphold.oppholdÅrsak === undefined) {
-    return <FormattedMessage id="OppholdPeriodeTabellRad.Opphold" />;
+    return <FormattedMessage id="OppholdPeriodeTabellRad.IkkeSatt" />;
   }
 
   return opphold.oppholdÅrsak === 'FERIE' ? (

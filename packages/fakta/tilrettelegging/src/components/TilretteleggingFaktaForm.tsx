@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
@@ -19,8 +19,9 @@ import type {
 import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import type { TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
+import type { Tilrettelegging, TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
+import { alfabetiskArbeidsforhold } from './arbeidsforholdUtils';
 import { harUvurderteVelferdspermisjoner, TilretteleggingFormFeil } from './TilretteleggingFormFeil';
 
 interface Props {
@@ -48,18 +49,24 @@ export const TilretteleggingFaktaForm = ({
       buildInitialValues(svangerskapspengerTilrettelegging, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId),
   });
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({
+    control: formMethods.control,
+    name: 'begrunnelse',
+  });
 
   const skalVurdereVelferdspermisjoner = harUvurderteVelferdspermisjoner(
     svangerskapspengerTilrettelegging.arbeidsforholdListe,
   );
-
-  const onSubmit = (values: TilretteleggingFormValues) => {
-    return submitCallback(transformValues(values));
-  };
+  const harFAISU = svangerskapspengerTilrettelegging.arbeidsforholdListe.some(
+    af => af.skalVurdereSplittAvArbeidsforholdet,
+  );
 
   return (
-    <RhfForm formMethods={formMethods} setDataOnUnmount={setMellomlagretFormData} onSubmit={onSubmit}>
+    <RhfForm
+      formMethods={formMethods}
+      setDataOnUnmount={setMellomlagretFormData}
+      onSubmit={values => submitCallback(transformValues(values))}
+    >
       <VStack gap="space-32">
         {harÅpentAksjonspunkt && (
           <AksjonspunktHelpTextHTML>
@@ -68,6 +75,7 @@ export const TilretteleggingFaktaForm = ({
             ) : (
               <FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" />
             )}
+            {harFAISU && <FormattedMessage id="TilretteleggingFaktaForm.AksjonpunktFAISU" />}
           </AksjonspunktHelpTextHTML>
         )}
         <HStack gap="space-16">
@@ -100,6 +108,11 @@ export const TilretteleggingFaktaForm = ({
           isReadOnly={isReadOnly}
           isSubmittable={isSubmittable}
           hasBegrunnelse={!!begrunnelse}
+          description={
+            harFAISU
+              ? intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnelseDescription.MedSplitt' })
+              : intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnelseDescription.UtenSplitt' })
+          }
         />
         <FaktaSubmitButton
           isSubmittable={isSubmittable}
@@ -120,18 +133,34 @@ const buildInitialValues = (
   return {
     termindato,
     fødselsdato,
-    arbeidsforhold: arbeidsforholdListe.toSorted(alfabetiskArbeidsforhold(arbeidsgiverOpplysningerPerId)),
+    arbeidsforhold: arbeidsforholdListe
+      .toSorted(alfabetiskArbeidsforhold(arbeidsgiverOpplysningerPerId))
+      .map(mapTilTilrettelegging),
     ...FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel),
   };
 };
 
-const alfabetiskArbeidsforhold =
-  (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) =>
-  (a: SvpArbeidsforholdDto, b: SvpArbeidsforholdDto) => {
-    const navnA = arbeidsgiverOpplysningerPerId[a.arbeidsgiverReferanse ?? '']?.navn;
-    const navnB = arbeidsgiverOpplysningerPerId[b.arbeidsgiverReferanse ?? '']?.navn;
-    return navnA && navnB ? navnA.localeCompare(navnB) : 0;
-  };
+const mapTilTilrettelegging = (
+  arbeidsforhold: SvpArbeidsforholdDto,
+  _: number,
+  alleArbeidsforhold: SvpArbeidsforholdDto[],
+): Tilrettelegging => ({
+  arbeidsgiverReferanse: arbeidsforhold.arbeidsgiverReferanse,
+  avklarteOppholdPerioder: arbeidsforhold.avklarteOppholdPerioder,
+  eksternArbeidsforholdReferanse: arbeidsforhold.eksternArbeidsforholdReferanse,
+  internArbeidsforholdReferanse: arbeidsforhold.internArbeidsforholdReferanse,
+  kanTilrettelegges: arbeidsforhold.kanTilrettelegges,
+  skalBrukes: arbeidsforhold.skalBrukes,
+  stillingsprosentStartTilrettelegging: arbeidsforhold.stillingsprosentStartTilrettelegging,
+  tilretteleggingBehovFom: arbeidsforhold.tilretteleggingBehovFom,
+  tilretteleggingDatoer: arbeidsforhold.tilretteleggingDatoer,
+  tilretteleggingId: arbeidsforhold.tilretteleggingId,
+  uttakArbeidType: arbeidsforhold.uttakArbeidType,
+  velferdspermisjoner: arbeidsforhold.velferdspermisjoner,
+  skalVurdereSplittAvArbeidsforholdet: arbeidsforhold.skalVurdereSplittAvArbeidsforholdet,
+  arbeidsforholdetErSplittet:
+    alleArbeidsforhold.filter(af => af.arbeidsgiverReferanse === arbeidsforhold.arbeidsgiverReferanse).length > 1,
+});
 
 const transformValues = (values: TilretteleggingFormValues): BekreftSvangerskapspengerAp => ({
   kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
@@ -141,7 +170,7 @@ const transformValues = (values: TilretteleggingFormValues): BekreftSvangerskaps
   bekreftetSvpArbeidsforholdList: values.arbeidsforhold.map(mapTilBekreftTilrettelegging),
 });
 
-const mapTilBekreftTilrettelegging = (arbeidsforhold: SvpArbeidsforholdDto): BekreftTilrettelegging => ({
+const mapTilBekreftTilrettelegging = (arbeidsforhold: Tilrettelegging): BekreftTilrettelegging => ({
   arbeidsgiverReferanse: arbeidsforhold.arbeidsgiverReferanse,
   avklarteOppholdPerioder: arbeidsforhold.avklarteOppholdPerioder,
   eksternArbeidsforholdReferanse: arbeidsforhold.eksternArbeidsforholdReferanse,

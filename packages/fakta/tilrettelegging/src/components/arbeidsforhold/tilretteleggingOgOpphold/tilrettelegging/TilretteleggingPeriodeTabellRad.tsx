@@ -6,9 +6,9 @@ import { XMarkIcon } from '@navikt/aksel-icons';
 import { Button, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { type SvpArbeidsforholdDto, type SvpTilretteleggingDatoDto } from '@navikt/fp-types';
+import { type SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 
-import type { TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
+import type { Tilrettelegging, TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
 import {
   finnProsentSvangerskapspenger,
   finnVelferdspermisjonprosent,
@@ -19,7 +19,7 @@ import styles from './tilretteleggingPeriodeTabellRad.module.css';
 
 interface Props {
   navn: `arbeidsforhold.${number}.tilretteleggingDatoer.${number}`;
-  tilrettelegging: SvpTilretteleggingDatoDto;
+  tilretteleggingDato: SvpTilretteleggingDatoDto;
   readOnly: boolean;
   disabled: boolean;
   index: number;
@@ -27,14 +27,14 @@ interface Props {
   fjernTilrettelegging: (fomDato?: string) => void;
   setLeggTilKnapperDisablet: React.Dispatch<React.SetStateAction<boolean>>;
   stillingsprosentArbeidsforhold: number;
-  arbeidsforhold: SvpArbeidsforholdDto;
+  tilrettelegging: Tilrettelegging;
   tomDatoForTilrettelegging: string;
   termindato: string;
 }
 
 export const TilretteleggingPeriodeTabellRad = ({
   navn,
-  tilrettelegging,
+  tilretteleggingDato,
   index,
   readOnly,
   disabled,
@@ -42,7 +42,7 @@ export const TilretteleggingPeriodeTabellRad = ({
   fjernTilrettelegging,
   setLeggTilKnapperDisablet,
   stillingsprosentArbeidsforhold,
-  arbeidsforhold,
+  tilrettelegging,
   tomDatoForTilrettelegging,
   termindato,
 }: Props) => {
@@ -58,7 +58,7 @@ export const TilretteleggingPeriodeTabellRad = ({
   };
 
   const avbrytEditering = () => {
-    if (!tilrettelegging.fom) {
+    if (!tilretteleggingDato.fom) {
       fjernTilrettelegging();
     }
     setLeggTilKnapperDisablet(false);
@@ -73,7 +73,7 @@ export const TilretteleggingPeriodeTabellRad = ({
       onClick={() => setOpen(!open)}
       content={
         <TilretteleggingForm
-          tilrettelegging={tilrettelegging}
+          tilretteleggingDato={tilretteleggingDato}
           termindato={termindato}
           index={index}
           oppdaterTilrettelegging={oppdaterTilrettelegging}
@@ -81,15 +81,15 @@ export const TilretteleggingPeriodeTabellRad = ({
           readOnly={readOnly}
           disabled={disabled}
           stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-          arbeidsforhold={arbeidsforhold}
+          tilrettelegging={tilrettelegging}
           tomDatoForTilrettelegging={tomDatoForTilrettelegging}
         />
       }
       className={open ? styles['openRow'] : undefined}
     >
       <Table.DataCell>
-        {tilrettelegging.fom ? (
-          <PeriodLabel dateStringFom={tilrettelegging.fom} dateStringTom={tomDatoForTilrettelegging} />
+        {tilretteleggingDato.fom ? (
+          <PeriodLabel dateStringFom={tilretteleggingDato.fom} dateStringTom={tomDatoForTilrettelegging} />
         ) : (
           <FormattedMessage id="TilretteleggingPeriodeTabellRad.IkkeSatt" />
         )}
@@ -97,22 +97,22 @@ export const TilretteleggingPeriodeTabellRad = ({
       <Table.DataCell>
         <TilretteleggingType
           stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-          arbeidsforhold={arbeidsforhold}
           tilrettelegging={tilrettelegging}
+          tilretteleggingDato={tilretteleggingDato}
         />
       </Table.DataCell>
       <Table.DataCell>
-        <TilretteleggingKilde tilrettelegging={tilrettelegging} />
+        <TilretteleggingKilde tilretteleggingDato={tilretteleggingDato} />
       </Table.DataCell>
       <Table.DataCell width={48}>
-        {tilrettelegging.fom && !(readOnly || disabled) && (
+        {tilretteleggingDato.fom && !(readOnly || disabled) && (
           <Button
             size="small"
             variant="tertiary-neutral"
             icon={<XMarkIcon aria-hidden />}
             aria-label={intl.formatMessage({ id: 'TilretteleggingPeriodeTabellRad.SlettPeriode' })}
             title={intl.formatMessage({ id: 'TilretteleggingPeriodeTabellRad.SlettPeriode' })}
-            onClick={() => fjernTilrettelegging(tilrettelegging.fom)}
+            onClick={() => fjernTilrettelegging(tilretteleggingDato.fom)}
             type="button"
           />
         )}
@@ -123,28 +123,29 @@ export const TilretteleggingPeriodeTabellRad = ({
 
 const TilretteleggingType = ({
   stillingsprosentArbeidsforhold,
-  arbeidsforhold,
   tilrettelegging,
+  tilretteleggingDato,
 }: {
   stillingsprosentArbeidsforhold: number;
-  arbeidsforhold: SvpArbeidsforholdDto;
-  tilrettelegging: SvpTilretteleggingDatoDto;
+  tilrettelegging: Tilrettelegging;
+  tilretteleggingDato: SvpTilretteleggingDatoDto;
 }) => {
-  const velferdspermisjonsprosent = finnVelferdspermisjonprosent(arbeidsforhold);
-  const stillingsprosent = tilrettelegging.type === 'INGEN_TILRETTELEGGING' ? 100 : tilrettelegging.stillingsprosent;
+  const velferdspermisjonsprosent = finnVelferdspermisjonprosent(tilrettelegging);
+  const stillingsprosent =
+    tilretteleggingDato.type === 'INGEN_TILRETTELEGGING' ? 100 : tilretteleggingDato.stillingsprosent;
   const prosent =
-    tilrettelegging.fom && stillingsprosent
-      ? finnProsentSvangerskapspenger(tilrettelegging, stillingsprosentArbeidsforhold, velferdspermisjonsprosent)
+    tilretteleggingDato.fom && stillingsprosent
+      ? finnProsentSvangerskapspenger(tilretteleggingDato, stillingsprosentArbeidsforhold, velferdspermisjonsprosent)
       : 0;
-  return tilrettelegging.fom ? (
+  return tilretteleggingDato.fom ? (
     <FormattedMessage id="TilretteleggingPeriodeTabellRad.SVPprosent" values={{ prosent: prosent ?? '0' }} />
   ) : (
-    <FormattedMessage id="TilretteleggingPeriodeTabellRad.Tilrettelegging" />
+    <FormattedMessage id="TilretteleggingPeriodeTabellRad.IkkeSatt" />
   );
 };
 
-const TilretteleggingKilde = ({ tilrettelegging }: { tilrettelegging: SvpTilretteleggingDatoDto }) => {
-  switch (tilrettelegging.kilde) {
+const TilretteleggingKilde = ({ tilretteleggingDato }: { tilretteleggingDato: SvpTilretteleggingDatoDto }) => {
+  switch (tilretteleggingDato.kilde) {
     case 'ENDRET_AV_SAKSBEHANDLER':
       return <FormattedMessage id="Kilde.EndretAvSaksbehandler" />;
     case 'TIDLIGERE_VEDTAK':

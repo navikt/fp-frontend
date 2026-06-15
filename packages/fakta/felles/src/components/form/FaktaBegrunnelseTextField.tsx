@@ -25,6 +25,7 @@ type Props<T extends FieldValues & FaktaBegrunnelseFormValues> = {
   isSubmittable: boolean;
   hasBegrunnelse: boolean;
   label?: string;
+  description?: string;
   hasReadOnlyLabel?: boolean;
   hasVurderingText?: boolean;
   size?: 'small' | 'medium';
@@ -40,6 +41,7 @@ export const FaktaBegrunnelseTextField = <T extends FieldValues & FaktaBegrunnel
   isSubmittable,
   hasBegrunnelse,
   label,
+  description,
   hasReadOnlyLabel = false,
   hasVurderingText = false,
   size,
@@ -58,6 +60,7 @@ export const FaktaBegrunnelseTextField = <T extends FieldValues & FaktaBegrunnel
           name={'begrunnelse' as Path<T>}
           control={control}
           label={getLabel()}
+          description={description}
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
           readOnly={isReadOnly}
