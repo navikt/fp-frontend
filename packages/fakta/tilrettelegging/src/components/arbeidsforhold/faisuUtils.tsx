@@ -150,6 +150,7 @@ const kopierArbeidsforhold = (
     tilretteleggingId: undefined,
     stillingsprosentStartTilrettelegging: a.stillingsprosent,
     internArbeidsforholdReferanse: a.internArbeidsforholdId,
+    eksternArbeidsforholdReferanse: a.eksternArbeidsforholdId,
     skalVurdereSplittAvArbeidsforholdet: false,
     arbeidsforholdetErSplittet: true,
     velferdspermisjoner: tilrettelegging.velferdspermisjoner.filter(vp =>
