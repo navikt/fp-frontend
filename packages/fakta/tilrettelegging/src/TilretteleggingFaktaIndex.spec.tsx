@@ -686,7 +686,7 @@ describe('TilretteleggingFaktaIndex', () => {
         {
           arbeidsgiverReferanse: '999999999',
           avklarteOppholdPerioder: [],
-          eksternArbeidsforholdReferanse: undefined,
+          eksternArbeidsforholdReferanse: 'a',
           internArbeidsforholdReferanse: '999999999-a',
           kanTilrettelegges: true,
           skalBrukes: true,
@@ -729,7 +729,7 @@ describe('TilretteleggingFaktaIndex', () => {
         {
           arbeidsgiverReferanse: '999999999',
           avklarteOppholdPerioder: [],
-          eksternArbeidsforholdReferanse: undefined,
+          eksternArbeidsforholdReferanse: 'b',
           internArbeidsforholdReferanse: '999999999-b',
           kanTilrettelegges: true,
           skalBrukes: true,
