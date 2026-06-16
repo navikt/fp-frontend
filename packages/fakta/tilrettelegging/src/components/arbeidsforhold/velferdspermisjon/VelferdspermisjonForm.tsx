@@ -104,7 +104,7 @@ export const VelferdspermisjonForm = ({
           </Alert>
         )}
 
-        <Button
+        {!readOnly && <Button
           size="small"
           variant="primary"
           type="button"
@@ -113,7 +113,7 @@ export const VelferdspermisjonForm = ({
           className="self-start"
         >
           <FormattedMessage id="VelferdspermisjonForm.Oppdater" />
-        </Button>
+        </Button>}
       </VStack>
     </FormProvider>
   );

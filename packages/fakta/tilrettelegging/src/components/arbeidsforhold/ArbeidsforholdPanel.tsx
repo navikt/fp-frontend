@@ -80,7 +80,7 @@ export const ArbeidsforholdPanel = ({
           label={<FormattedMessage id="ArbeidsforholdPanel.SkalHaSvpForArbeidsforhold" />}
         />
         <Spacer />
-        {faisu?.action}
+        {!readOnly && faisu?.action}
       </HStack>
       <VStack gap="space-32">
         <RhfDatepicker
