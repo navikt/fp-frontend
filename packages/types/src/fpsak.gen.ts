@@ -2655,7 +2655,12 @@ export type foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto_Tilgren
   statusNavn: string;
 };
 
-export type folketrygdloven_kalkulus_felles_v1_Periode = {
+export type folketrygdloven_kalkulus_felles_Arbeidsgiver = {
+  arbeidsgiverAktørId?: string;
+  arbeidsgiverOrgnr?: string;
+};
+
+export type folketrygdloven_kalkulus_felles_Periode = {
   fom: string;
   tom: string;
 };
@@ -2844,22 +2849,11 @@ export type folketrygdloven_kalkulus_kodeverk_VirksomhetType =
   | 'ANNEN'
   | '-';
 
-export type folketrygdloven_kalkulus_response_v1_Arbeidsgiver = {
-  arbeidsgiverAktørId?: string;
-  arbeidsgiverOrgnr?: string;
-};
-
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_frisinn_Avslagsårsak =
-  | 'FOR_LAVT_BG'
-  | 'INGEN_FRILANS_I_PERIODE_UTEN_YTELSE'
-  | 'AVKORTET_GRUNNET_LØPENDE_INNTEKT'
-  | 'AVKORTET_GRUNNET_ANNEN_INNTEKT';
-
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_ATogFLISammeOrganisasjonDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_ATogFLISammeOrganisasjonDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelIArbeid: Array<number>;
   andelsnr: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   fastsattAvSaksbehandler?: boolean;
   inntektPrMnd?: number;
   inntektskategori: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
@@ -2867,15 +2861,15 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_ATogFLIS
   lagtTilAvSaksbehandler?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AktivitetTomDatoMappingDto = {
-  aktiviteter: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningAktivitetDto>;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_AktivitetTomDatoMappingDto = {
+  aktiviteter: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningAktivitetDto>;
   tom: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AndelForFaktaOmBeregningDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_AndelForFaktaOmBeregningDto = {
   aktivitetStatus?: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelsnr?: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   belopReadOnly?: number;
   fastsattBelop?: number;
   inntektskategori?: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
@@ -2884,11 +2878,11 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AndelFor
   skalKunneEndreAktivitet?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AndelMedBeløpDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_AndelMedBeløpDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelIArbeid: Array<number>;
   andelsnr: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   fastsattAvSaksbehandler?: boolean;
   fastsattBelopPrMnd?: number;
   inntektskategori: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
@@ -2896,11 +2890,11 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AndelMed
   lagtTilAvSaksbehandler?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_ArbeidstakerUtenInntektsmeldingAndelDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_ArbeidstakerUtenInntektsmeldingAndelDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelIArbeid: Array<number>;
   andelsnr: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   fastsattAvSaksbehandler?: boolean;
   inntektPrMnd?: number;
   inntektskategori: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
@@ -2909,12 +2903,12 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Arbeidst
   mottarYtelse?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AvklarAktiviteterDto = {
-  aktiviteterTomDatoMapping?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AktivitetTomDatoMappingDto>;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_AvklarAktiviteterDto = {
+  aktiviteterTomDatoMapping?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_AktivitetTomDatoMappingDto>;
   skjæringstidspunkt: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AvklaringsbehovDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_AvklaringsbehovDto = {
   begrunnelse?: string;
   definisjon: folketrygdloven_kalkulus_kodeverk_AvklaringsbehovDefinisjon;
   erTrukket: boolean;
@@ -2924,7 +2918,7 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Avklarin
   vurdertTidspunkt?: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningAktivitetDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningAktivitetDto = {
   arbeidsforholdId?: string;
   arbeidsforholdType: folketrygdloven_kalkulus_kodeverk_OpptjeningAktivitetType;
   arbeidsgiverIdent?: string;
@@ -2934,7 +2928,7 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   tom: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto = {
   arbeidsforholdId?: string;
   arbeidsforholdType?: folketrygdloven_kalkulus_kodeverk_OpptjeningAktivitetType;
   arbeidsgiverIdent?: string;
@@ -2947,38 +2941,38 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   refusjonPrAar?: number;
   sisteLønnsendringsdato?: string;
   startdato?: string;
-  stillingsprosenter?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_StillingsprosentDto>;
+  stillingsprosenter?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_StillingsprosentDto>;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagDto = {
   aktivitetStatus?: Array<folketrygdloven_kalkulus_kodeverk_AktivitetStatus>;
-  andelerMedGraderingUtenBG?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto>;
-  avklaringsbehov: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AvklaringsbehovDto>;
-  beregningsgrunnlagPeriode: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPeriodeDto>;
+  andelerMedGraderingUtenBG?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto>;
+  avklaringsbehov: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_AvklaringsbehovDto>;
+  beregningsgrunnlagPeriode: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPeriodeDto>;
   dekningsgrad?: number;
   erOverstyrtInntekt: boolean;
-  faktaOmBeregning?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmBeregningDto;
-  faktaOmFordeling?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelingDto;
-  forlengelseperioder?: Array<folketrygdloven_kalkulus_felles_v1_Periode>;
+  faktaOmBeregning?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FaktaOmBeregningDto;
+  faktaOmFordeling?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FordelingDto;
+  forlengelseperioder?: Array<folketrygdloven_kalkulus_felles_Periode>;
   grunnbeløp?: number;
   halvG?: number;
   hjemmel?: folketrygdloven_kalkulus_kodeverk_Hjemmel;
-  inntektsgrunnlag?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagDto;
-  refusjonTilVurdering?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_RefusjonTilVurderingDto;
-  refusjonskravSomKommerForSentListe?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravForSentDto>;
-  sammenligningsgrunnlagPrStatus?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SammenligningsgrunnlagDto>;
+  inntektsgrunnlag?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagDto;
+  refusjonTilVurdering?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_refusjon_RefusjonTilVurderingDto;
+  refusjonskravSomKommerForSentListe?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_RefusjonskravForSentDto>;
+  sammenligningsgrunnlagPrStatus?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_SammenligningsgrunnlagDto>;
   skjaeringstidspunktBeregning: string;
   skjæringstidspunkt: string;
   vilkårsperiodeFom?: string;
-  ytelsesspesifiktGrunnlag?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_YtelsespesifiktGrunnlagDto;
+  ytelsesspesifiktGrunnlag?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_YtelsespesifiktGrunnlagDto;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPeriodeDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPeriodeDto = {
   avkortetPrAar?: number;
   beregnetPrAar?: number;
   beregningsgrunnlagPeriodeFom?: string;
   beregningsgrunnlagPeriodeTom?: string;
-  beregningsgrunnlagPrStatusOgAndel?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto>;
+  beregningsgrunnlagPrStatusOgAndel?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto>;
   bruttoInkludertBortfaltNaturalytelsePrAar?: number;
   bruttoPrAar?: number;
   dagsats?: number;
@@ -2987,10 +2981,10 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   redusertPrAar?: number;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelATDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelATDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelsnr?: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   avkortetPrAar?: number;
   belopPrAarEtterAOrdningen?: number;
   belopPrMndEtterAOrdningen?: number;
@@ -3015,26 +3009,26 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   skalFastsetteGrunnlag?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto = (
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto = (
   | ({
       dtoType: 'AT';
-    } & folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelATDto)
+    } & folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelATDto)
   | ({
       dtoType: 'GENERELL';
-    } & folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDtoFelles)
+    } & folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDtoFelles)
   | ({
       dtoType: 'FL';
-    } & folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelFLDto)
+    } & folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelFLDto)
   | ({
       dtoType: 'SN';
-    } & folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelSNDto)
+    } & folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelSNDto)
   | ({
       dtoType: 'KUN_YTELSE';
-    } & folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelYtelseDto)
+    } & folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelYtelseDto)
 ) & {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelsnr?: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   avkortetPrAar?: number;
   belopPrAarEtterAOrdningen?: number;
   belopPrMndEtterAOrdningen?: number;
@@ -3059,10 +3053,10 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   dtoType: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDtoFelles = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDtoFelles = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelsnr?: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   avkortetPrAar?: number;
   belopPrAarEtterAOrdningen?: number;
   belopPrMndEtterAOrdningen?: number;
@@ -3086,10 +3080,10 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   skalFastsetteGrunnlag?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelFLDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelFLDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelsnr?: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   avkortetPrAar?: number;
   belopPrAarEtterAOrdningen?: number;
   belopPrMndEtterAOrdningen?: number;
@@ -3114,10 +3108,10 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   skalFastsetteGrunnlag?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelSNDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelSNDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelsnr?: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   avkortetPrAar?: number;
   belopPrAarEtterAOrdningen?: number;
   belopPrMndEtterAOrdningen?: number;
@@ -3135,19 +3129,19 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   inntektskategori?: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
   lagtTilAvSaksbehandler?: boolean;
   lonnsendringIBeregningsperioden?: boolean;
-  næringer?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNæringDto>;
+  næringer?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_EgenNæringDto>;
   originalDagsatsFraTilstøtendeYtelse?: number;
   overstyrtPrAar?: number;
   pgiSnitt?: number;
-  pgiVerdier?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PgiDto>;
+  pgiVerdier?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_PgiDto>;
   redusertPrAar?: number;
   skalFastsetteGrunnlag?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelYtelseDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelYtelseDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelsnr?: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   avkortetPrAar?: number;
   belopFraMeldekortPrAar?: number;
   belopFraMeldekortPrMnd?: number;
@@ -3174,7 +3168,7 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   skalFastsetteGrunnlag?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNæringDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_EgenNæringDto = {
   begrunnelse?: string;
   endringsdato?: string;
   erNyIArbeidslivet?: boolean;
@@ -3191,38 +3185,38 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNær
   virksomhetType?: folketrygdloven_kalkulus_kodeverk_VirksomhetType;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmBeregningAndelDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FaktaOmBeregningAndelDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelIArbeid: Array<number>;
   andelsnr: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   fastsattAvSaksbehandler?: boolean;
   inntektskategori: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
   kilde: folketrygdloven_kalkulus_kodeverk_AndelKilde;
   lagtTilAvSaksbehandler?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmBeregningDto = {
-  andelerForFaktaOmBeregning?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AndelForFaktaOmBeregningDto>;
-  arbeidsforholdMedLønnsendringUtenIM?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmBeregningAndelDto>;
-  arbeidstakerOgFrilanserISammeOrganisasjonListe?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_ATogFLISammeOrganisasjonDto>;
-  avklarAktiviteter?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AvklarAktiviteterDto;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FaktaOmBeregningDto = {
+  andelerForFaktaOmBeregning?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_AndelForFaktaOmBeregningDto>;
+  arbeidsforholdMedLønnsendringUtenIM?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FaktaOmBeregningAndelDto>;
+  arbeidstakerOgFrilanserISammeOrganisasjonListe?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_ATogFLISammeOrganisasjonDto>;
+  avklarAktiviteter?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_AvklarAktiviteterDto;
   faktaOmBeregningTilfeller?: Array<folketrygdloven_kalkulus_kodeverk_FaktaOmBeregningTilfelle>;
-  frilansAndel?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmBeregningAndelDto;
-  kortvarigeArbeidsforhold?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_KortvarigeArbeidsforholdDto>;
-  kunYtelse?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_KunYtelseDto;
-  refusjonskravSomKommerForSentListe?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravForSentDto>;
-  saksopplysninger?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fakta_Saksopplysninger;
-  vurderBesteberegning?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderBesteberegningDto;
-  vurderMilitaer?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderMilitærDto;
-  vurderMottarYtelse?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderMottarYtelseDto;
+  frilansAndel?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FaktaOmBeregningAndelDto;
+  kortvarigeArbeidsforhold?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_KortvarigeArbeidsforholdDto>;
+  kunYtelse?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_KunYtelseDto;
+  refusjonskravSomKommerForSentListe?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_RefusjonskravForSentDto>;
+  saksopplysninger?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fakta_Saksopplysninger;
+  vurderBesteberegning?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderBesteberegningDto;
+  vurderMilitaer?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderMilitærDto;
+  vurderMottarYtelse?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderMottarYtelseDto;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagAndelDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FordelBeregningsgrunnlagAndelDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelIArbeid: Array<number>;
   andelsnr: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   arbeidsforholdType: folketrygdloven_kalkulus_kodeverk_OpptjeningAktivitetType;
   belopFraInntektsmeldingPrAar?: number;
   fastsattAvSaksbehandler?: boolean;
@@ -3234,9 +3228,10 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBe
   nyttArbeidsforhold?: boolean;
   refusjonskravFraInntektsmeldingPrAar?: number;
   refusjonskravPrAar?: number;
+  utbetalingsgrad?: number;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagArbeidsforholdDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FordelBeregningsgrunnlagArbeidsforholdDto = {
   arbeidsforholdId?: string;
   arbeidsforholdType?: folketrygdloven_kalkulus_kodeverk_OpptjeningAktivitetType;
   arbeidsgiverIdent?: string;
@@ -3246,22 +3241,22 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBe
   naturalytelseTilkommetPrÅr?: number;
   opphoersdato?: string;
   organisasjonstype?: folketrygdloven_kalkulus_kodeverk_Organisasjonstype;
-  perioderMedGraderingEllerRefusjon: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_NyPeriodeDto>;
-  permisjon?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PermisjonDto;
+  perioderMedGraderingEllerRefusjon: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_NyPeriodeDto>;
+  permisjon?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_PermisjonDto;
   refusjonPrAar?: number;
   sisteLønnsendringsdato?: string;
   startdato?: string;
-  stillingsprosenter?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_StillingsprosentDto>;
+  stillingsprosenter?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_StillingsprosentDto>;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagDto = {
-  arbeidsforholdTilFordeling: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagArbeidsforholdDto>;
-  fordelBeregningsgrunnlagPerioder: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagPeriodeDto>;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FordelBeregningsgrunnlagDto = {
+  arbeidsforholdTilFordeling: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FordelBeregningsgrunnlagArbeidsforholdDto>;
+  fordelBeregningsgrunnlagPerioder: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FordelBeregningsgrunnlagPeriodeDto>;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagPeriodeDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FordelBeregningsgrunnlagPeriodeDto = {
   fom: string;
-  fordelBeregningsgrunnlagAndeler: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagAndelDto>;
+  fordelBeregningsgrunnlagAndeler: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FordelBeregningsgrunnlagAndelDto>;
   harPeriodeAarsakGraderingEllerRefusjon?: boolean;
   skalKunneEndreRefusjon?: boolean;
   skalPreutfyllesMedBeregningsgrunnlag?: boolean;
@@ -3269,28 +3264,28 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBe
   tom?: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelingDto = {
-  fordelBeregningsgrunnlag?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagDto;
-  vurderNyttInntektsforholdDto?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderNyttInntektsforholdDto;
-  vurderRepresentererStortinget?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderRepresentererStortingetDto;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FordelingDto = {
+  fordelBeregningsgrunnlag?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_FordelBeregningsgrunnlagDto;
+  vurderNyttInntektsforholdDto?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderNyttInntektsforholdDto;
+  vurderRepresentererStortinget?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderRepresentererStortingetDto;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_InntektsforholdDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_InntektsforholdDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   arbeidsforholdId?: string;
   arbeidsgiverId?: string;
   bruttoInntektPrÅr?: number;
   eksternArbeidsforholdId?: string;
   inntektFraInntektsmeldingPrÅr?: number;
-  periode: folketrygdloven_kalkulus_felles_v1_Periode;
+  periode: folketrygdloven_kalkulus_felles_Periode;
   skalRedusereUtbetaling?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_KortvarigeArbeidsforholdDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_KortvarigeArbeidsforholdDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   andelIArbeid: Array<number>;
   andelsnr: number;
-  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
   erTidsbegrensetArbeidsforhold?: boolean;
   fastsattAvSaksbehandler?: boolean;
   inntektskategori: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
@@ -3298,13 +3293,13 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Kortvari
   lagtTilAvSaksbehandler?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_KunYtelseDto = {
-  andeler?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AndelMedBeløpDto>;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_KunYtelseDto = {
+  andeler?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_AndelMedBeløpDto>;
   erBesteberegning?: boolean;
   fodendeKvinneMedDP?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_NyPeriodeDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_NyPeriodeDto = {
   erGradering?: boolean;
   erRefusjon?: boolean;
   erSøktYtelse?: boolean;
@@ -3312,26 +3307,26 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_NyPeriod
   tom?: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_OmsorgspengeGrunnlagDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_OmsorgspengeGrunnlagDto = {
   skalAvviksvurdere?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PermisjonDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_PermisjonDto = {
   permisjonFom: string;
   permisjonTom: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PgiDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_PgiDto = {
   beløp?: number;
   årstall?: number;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravForSentDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_RefusjonskravForSentDto = {
   arbeidsgiverIdent: string;
   erRefusjonskravGyldig?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SammenligningsgrunnlagDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_SammenligningsgrunnlagDto = {
   avvikPromille?: number;
   avvikProsent?: number;
   differanseBeregnet?: number;
@@ -3341,84 +3336,84 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Sammenli
   sammenligningsgrunnlagType?: folketrygdloven_kalkulus_kodeverk_SammenligningsgrunnlagType;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_StillingsprosentDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_StillingsprosentDto = {
   fomDato: string;
   prosent: number;
   tomDato: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SvangerskapspengerGrunnlagDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_SvangerskapspengerGrunnlagDto = {
   [key: string]: unknown;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderBesteberegningDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderBesteberegningDto = {
   skalHaBesteberegning?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderInntektsforholdPeriodeDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderInntektsforholdPeriodeDto = {
   fom: string;
-  inntektsforholdListe: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_InntektsforholdDto>;
+  inntektsforholdListe: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_InntektsforholdDto>;
   tom: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderMilitærDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderMilitærDto = {
   harMilitaer?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderMottarYtelseDto = {
-  arbeidstakerAndelerUtenIM?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_ArbeidstakerUtenInntektsmeldingAndelDto>;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderMottarYtelseDto = {
+  arbeidstakerAndelerUtenIM?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_ArbeidstakerUtenInntektsmeldingAndelDto>;
   erFrilans?: boolean;
   frilansInntektPrMnd?: number;
   frilansMottarYtelse?: boolean;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderNyttInntektsforholdDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderNyttInntektsforholdDto = {
   harMottattOmsorgsstønadEllerFosterhjemsgodtgjørelse: boolean;
-  vurderInntektsforholdPerioder: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderInntektsforholdPeriodeDto>;
+  vurderInntektsforholdPerioder: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderInntektsforholdPeriodeDto>;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderRepresentererStortingetDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_VurderRepresentererStortingetDto = {
   representererStortinget?: boolean;
   stortingsperiodeFom?: string;
   stortingsperiodeTom?: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_YtelsespesifiktGrunnlagDto = (
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_YtelsespesifiktGrunnlagDto = (
   | ({
       ytelsetype: 'OMP';
-    } & folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_OmsorgspengeGrunnlagDto)
+    } & folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_OmsorgspengeGrunnlagDto)
   | ({
       ytelsetype: 'SVP';
-    } & folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SvangerskapspengerGrunnlagDto)
+    } & folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_SvangerskapspengerGrunnlagDto)
   | ({
       ytelsetype: 'FP';
-    } & folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_ForeldrepengerGrunnlagDto)
+    } & folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_ForeldrepengerGrunnlagDto)
   | ({
       ytelsetype: 'FRISINN';
-    } & folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_FrisinnGrunnlagDto)
+    } & folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_FrisinnGrunnlagDto)
 ) & {
   ytelsetype: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fakta_ArbeidsforholdDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fakta_ArbeidsforholdDto = {
   andelsnr?: number;
   arbeidsforholdId?: string;
   arbeidsgiverIdent?: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fakta_LønnsendringSaksopplysningDto = {
-  arbeidsforhold: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fakta_ArbeidsforholdDto;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fakta_LønnsendringSaksopplysningDto = {
+  arbeidsforhold: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fakta_ArbeidsforholdDto;
   lønnsendringscenario: folketrygdloven_kalkulus_kodeverk_LønnsendringScenario;
   sisteLønnsendringsdato: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fakta_Saksopplysninger = {
-  arbeidsforholdMedLønnsendring?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fakta_ArbeidsforholdDto>;
-  kortvarigeArbeidsforhold?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fakta_ArbeidsforholdDto>;
-  lønnsendringSaksopplysning?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fakta_LønnsendringSaksopplysningDto>;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fakta_Saksopplysninger = {
+  arbeidsforholdMedLønnsendring?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fakta_ArbeidsforholdDto>;
+  kortvarigeArbeidsforhold?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fakta_ArbeidsforholdDto>;
+  lønnsendringSaksopplysning?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fakta_LønnsendringSaksopplysningDto>;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningInntektDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegningInntektDto = {
   arbeidsforholdId?: string;
   arbeidsgiverId?: string;
   arbeidsgiverIdent?: string;
@@ -3426,98 +3421,104 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_Beste
   opptjeningAktivitetType: folketrygdloven_kalkulus_kodeverk_OpptjeningAktivitetType;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto = {
   fom: string;
-  inntekter: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningInntektDto>;
+  inntekter: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegningInntektDto>;
   tom: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto = {
   avvik?: number;
   besteMåneder: [
-    folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
-    folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
-    folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
-    folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
-    folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
-    folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
+    folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
+    folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
+    folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
+    folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
+    folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
+    folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
   ];
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_ForeldrepengerGrunnlagDto = {
-  besteberegninggrunnlag?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_ForeldrepengerGrunnlagDto = {
+  besteberegninggrunnlag?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_AvslagsårsakPrPeriodeDto = {
-  avslagsårsak: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_frisinn_Avslagsårsak;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_Avslagsårsak =
+  | 'FOR_LAVT_BG'
+  | 'INGEN_FRILANS_I_PERIODE_UTEN_YTELSE'
+  | 'AVKORTET_GRUNNET_LØPENDE_INNTEKT'
+  | 'AVKORTET_GRUNNET_ANNEN_INNTEKT';
+
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_AvslagsårsakPrPeriodeDto = {
+  avslagsårsak: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_Avslagsårsak;
   fom: string;
   tom: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_FrisinnAndelDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_FrisinnAndelDto = {
   oppgittInntekt?: number;
   statusSøktFor: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_FrisinnGrunnlagDto = {
-  avslagsårsakPrPeriode: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_AvslagsårsakPrPeriodeDto>;
-  frisinnPerioder: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_FrisinnPeriodeDto>;
-  opplysningerFL?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_SøknadsopplysningerDto;
-  opplysningerSN?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_SøknadsopplysningerDto;
-  perioderSøktFor: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_OpplystPeriodeDto>;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_FrisinnGrunnlagDto = {
+  avslagsårsakPrPeriode: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_AvslagsårsakPrPeriodeDto>;
+  frisinnPerioder: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_FrisinnPeriodeDto>;
+  opplysningerFL?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_SøknadsopplysningerDto;
+  opplysningerSN?: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_SøknadsopplysningerDto;
+  perioderSøktFor: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_OpplystPeriodeDto>;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_FrisinnPeriodeDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_FrisinnPeriodeDto = {
   fom: string;
-  frisinnAndeler: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_FrisinnAndelDto>;
+  frisinnAndeler: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_FrisinnAndelDto>;
   oppgittArbeidsinntekt?: number;
   tom: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_OpplystPeriodeDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_OpplystPeriodeDto = {
   fom: string;
   statusSøktFor: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
   tom: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_SøknadsopplysningerDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_frisinn_SøknadsopplysningerDto = {
   erNyoppstartet?: boolean;
   oppgittInntekt?: number;
   oppgittÅrsinntekt?: number;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagDto = {
-  beregningsgrunnlagInntekter: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagMånedDto>;
-  måneder: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagMånedDto>;
-  pgiGrunnlag: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_PGIPrÅrDto>;
-  sammenligningsgrunnlagInntekter: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagMånedDto>;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagDto = {
+  beregningsgrunnlagInntekter: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagMånedDto>;
+  måneder: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagMånedDto>;
+  pgiGrunnlag: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_PGIPrÅrDto>;
+  sammenligningsgrunnlagInntekter: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagMånedDto>;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagInntektDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagInntektDto = {
   arbeidsgiverIdent?: string;
   beløp?: number;
   inntektAktivitetType: folketrygdloven_kalkulus_kodeverk_InntektAktivitetType;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagMånedDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagMånedDto = {
   fom: string;
-  inntekter?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagInntektDto>;
+  inntekter?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_InntektsgrunnlagInntektDto>;
   tom: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_PGIGrunnlagDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_PGIGrunnlagDto = {
   beløp?: number;
   pgiType: folketrygdloven_kalkulus_kodeverk_PGIType;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_PGIPrÅrDto = {
-  inntekter?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_inntektsgrunnlag_PGIGrunnlagDto>;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_PGIPrÅrDto = {
+  inntekter?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_inntektsgrunnlag_PGIGrunnlagDto>;
   år: number;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_RefusjonAndelTilVurderingDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_refusjon_RefusjonAndelTilVurderingDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
-  arbeidsgiver?: folketrygdloven_kalkulus_response_v1_Arbeidsgiver;
+  arbeidsgiver?: folketrygdloven_kalkulus_felles_Arbeidsgiver;
   eksternArbeidsforholdRef?: string;
   fastsattDelvisRefusjonPrMnd?: number;
   fastsattNyttRefusjonskravFom?: string;
@@ -3525,16 +3526,16 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon
   maksTillattDelvisRefusjonPrMnd?: number;
   nyttRefusjonskravFom?: string;
   skalKunneFastsetteDelvisRefusjon?: boolean;
-  tidligereUtbetalinger?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_TidligereUtbetalingDto>;
+  tidligereUtbetalinger?: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_refusjon_TidligereUtbetalingDto>;
   tidligsteMuligeRefusjonsdato?: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_RefusjonTilVurderingDto = {
-  andeler: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_RefusjonAndelTilVurderingDto>;
-  refusjonskravForSentListe: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravForSentDto>;
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_refusjon_RefusjonTilVurderingDto = {
+  andeler: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_refusjon_RefusjonAndelTilVurderingDto>;
+  refusjonskravForSentListe: Array<folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_RefusjonskravForSentDto>;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_TidligereUtbetalingDto = {
+export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_refusjon_TidligereUtbetalingDto = {
   erTildeltRefusjon: boolean;
   fom: string;
   tom?: string;
@@ -5772,7 +5773,7 @@ export type HentBeregningsgrunnlagResponses = {
   /**
    * default response
    */
-  default: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagDto;
+  default: folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_BeregningsgrunnlagDto;
 };
 
 export type HentBeregningsgrunnlagResponse = HentBeregningsgrunnlagResponses[keyof HentBeregningsgrunnlagResponses];
