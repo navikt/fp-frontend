@@ -14,7 +14,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, BrevOverstyring, DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-types';
-import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);
@@ -25,7 +25,7 @@ export type ForhandsvisData = {
   fritekst?: string;
 };
 
-type FormValues = VarselRevurderingAp;
+type FormValues = AksjonspunktTilBekreftelse<AksjonspunktKode.VARSEL_REVURDERING_MANUELL>;
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   kode: validerApKodeOgHentApEnum(aksjonspunkter[0]?.definisjon, AksjonspunktKode.VARSEL_REVURDERING_MANUELL),
@@ -48,7 +48,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
   const intl = useIntl();
 
   const { isReadOnly, alleKodeverk, behandling, submitCallback, aksjonspunkterForPanel } =
-    usePanelDataContext<VarselRevurderingAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.VARSEL_REVURDERING_MANUELL>>();
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel);
 
@@ -87,7 +87,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
         void submitCallback({
           ...formVerdier,
           ...modalValues,
-        } as VarselRevurderingAp);
+        } as AksjonspunktTilBekreftelse<AksjonspunktKode.VARSEL_REVURDERING_MANUELL>);
       }
       setSkalVisePåVentModal(false);
     });

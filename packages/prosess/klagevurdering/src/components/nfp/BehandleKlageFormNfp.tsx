@@ -16,7 +16,7 @@ import type {
   KlageVurderingType,
   KodeverkMedNavn,
 } from '@navikt/fp-types';
-import type { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { KlageFormType } from '../../types/klageFormType';
@@ -35,7 +35,9 @@ export type TransformedValues = {
   klageVurdering: KlageVurderingType;
 };
 
-const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
+const transformValues = (
+  values: KlageFormType,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP> => ({
   klageMedholdÅrsak: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageMedholdÅrsak : undefined,
   klageVurderingOmgjør: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageVurderingOmgjør : undefined,
   klageHjemmel: values.klageHjemmel,
@@ -82,7 +84,7 @@ interface Props {
  */
 export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlage, alleAktuelleHjemler }: Props) => {
   const { behandling, alleKodeverk, submitCallback, isReadOnly, isSubmittable } =
-    usePanelDataContext<KlageVurderingResultatAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP>>();
 
   const hjemmlerMedNavn = lagHjemlerMedNavn(alleKodeverk['KlageHjemmel'], lagHjemmelsKoder(alleAktuelleHjemler));
   const intl = useIntl();

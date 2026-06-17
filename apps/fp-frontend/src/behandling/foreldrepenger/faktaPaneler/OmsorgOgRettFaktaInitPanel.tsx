@@ -4,7 +4,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { OmsorgOgRettFaktaIndex } from '@navikt/fp-fakta-omsorg-og-rett';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -15,7 +15,7 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
   AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
-  AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
+  OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG,
 ];
 
 export const OmsorgOgRettFaktaInitPanel = () => {

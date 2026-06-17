@@ -22,7 +22,7 @@ const getStatusFromUttakresultat = (behandling: BehandlingFpSak): VilkårUtfallT
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FASTSETT_UTTAKPERIODER,
-  AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+  OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
   AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT,
   AksjonspunktKode.UTGÅTT_5069,
   AksjonspunktKode.UTGÅTT_5067,

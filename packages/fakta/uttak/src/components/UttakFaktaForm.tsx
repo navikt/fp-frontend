@@ -6,11 +6,16 @@ import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
-import { dateFormat } from '@navikt/ft-utils';
+import { dateFormat, sortPeriodsByFom } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import {
+  type FaktaBegrunnelseFormValues,
+  FaktaBegrunnelseTextField,
+  FaktaSubmitButton,
+  validerApKodeOgHentApEnum,
+} from '@navikt/fp-fakta-felles';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -19,11 +24,14 @@ import type {
   FaktaUttakPeriode,
   Ytelsefordeling,
 } from '@navikt/fp-types';
-import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { UttakFaktaTable } from './UttakFaktaTable';
+import type {
+  AksjonspunktTilBekreftelse,
+  OverstyringAksjonspunktTilBekreftelse,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling: Ytelsefordeling) =>
   aksjonspunkter.filter(erAksjonspunktÅpent).map(ap => {
@@ -136,6 +144,15 @@ const validerPerioder = (
     : '';
 };
 
+export type BekreftUttaksperioderAp =
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_FAKTA_UTTAK>
+  | AksjonspunktTilBekreftelse<
+      | AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO
+      | AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER
+      | AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET
+      | AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG
+    >[];
+
 interface Props {
   ytelsefordeling: Ytelsefordeling;
   uttakKontrollerFaktaPerioder: FaktaUttakPeriode[];
@@ -160,21 +177,20 @@ export const UttakFaktaForm = ({
     fagsak,
     aksjonspunkterForPanel,
     isReadOnly,
-  } = usePanelDataContext<BekreftUttaksperioderAp[]>();
+  } = usePanelDataContext<BekreftUttaksperioderAp>();
 
-  const sortertListe = [...uttakKontrollerFaktaPerioder].sort((krav1, krav2) =>
-    dayjs(krav1.fom).diff(dayjs(krav2.fom)),
-  );
+  const sortertListe = uttakKontrollerFaktaPerioder.toSorted(sortPeriodsByFom);
   const sortertePerioder = leggTilAksjonspunktMarkering(
     sortertListe,
     aksjonspunkterForPanel,
     arbeidsgiverOpplysningerPerId,
   );
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
-    uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[];
-    begrunnelse: string;
-  }>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<
+    {
+      uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[];
+    } & FaktaBegrunnelseFormValues
+  >();
 
   const [uttakPerioder, setUttakPerioder] = useState<KontrollerFaktaPeriodeMedApMarkering[]>(
     mellomlagretFormData?.uttakPerioder ?? sortertePerioder,
@@ -182,7 +198,7 @@ export const UttakFaktaForm = ({
 
   const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
 
-  const formMethods = useForm<{ begrunnelse: string }>({
+  const formMethods = useForm<FaktaBegrunnelseFormValues>({
     defaultValues: {
       begrunnelse: mellomlagretFormData?.begrunnelse ?? aksjonspunkterForPanel[0]?.begrunnelse ?? '',
     },
@@ -196,35 +212,8 @@ export const UttakFaktaForm = ({
   );
 
   const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
-    a => a.definisjon !== AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+    a => a.definisjon !== OverstyringKode.OVERSTYRING_FAKTA_UTTAK,
   );
-  const bekreft = (begrunnelse: string) => {
-    const overstyrAp = [
-      {
-        // TODO Fiks hack
-        kode: validerApKodeOgHentApEnum(
-          AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
-          AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
-        ),
-        perioder: uttakPerioder,
-        begrunnelse,
-      },
-    ];
-
-    const aksjonspunkterSomSkalBekreftes = automatiskeAksjonspunkter.map(ap => ({
-      kode: validerApKodeOgHentApEnum(
-        ap.definisjon,
-        AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-        AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
-      ),
-      perioder: uttakPerioder,
-      begrunnelse,
-    }));
-
-    return submitCallback(aksjonspunkterSomSkalBekreftes.length > 0 ? aksjonspunkterSomSkalBekreftes : overstyrAp);
-  };
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
@@ -285,7 +274,10 @@ export const UttakFaktaForm = ({
         visNyPeriode={visNyPeriode}
         settVisNyPeriode={setVisNyPeriode}
       />
-      <RhfForm formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(transformValues(values, uttakPerioder, automatiskeAksjonspunkter))}
+      >
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
@@ -305,4 +297,29 @@ export const UttakFaktaForm = ({
       </RhfForm>
     </VStack>
   );
+};
+
+const transformValues = (
+  values: FaktaBegrunnelseFormValues,
+  perioder: KontrollerFaktaPeriodeMedApMarkering[],
+  automatiskeAksjonspunkter: Aksjonspunkt[],
+): BekreftUttaksperioderAp => {
+  const overstyrAp: OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_FAKTA_UTTAK> = {
+    kode: OverstyringKode.OVERSTYRING_FAKTA_UTTAK,
+    perioder,
+    ...FaktaBegrunnelseTextField.transformValues(values),
+  };
+  const aksjonspunkterSomSkalBekreftes = automatiskeAksjonspunkter.map(ap => ({
+    kode: validerApKodeOgHentApEnum(
+      ap.definisjon,
+      AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
+      AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
+      AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
+      AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
+    ),
+    perioder,
+    ...FaktaBegrunnelseTextField.transformValues(values),
+  }));
+
+  return aksjonspunkterSomSkalBekreftes.length > 0 ? aksjonspunkterSomSkalBekreftes : overstyrAp;
 };

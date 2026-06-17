@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, Innsyn, InnsynDokument } from '@navikt/fp-types';
-import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListInnsyn } from './DocumentListInnsyn';
@@ -47,7 +47,10 @@ const getDocumentsStatus = (values: InnsynFormValues, documents: Dokument[]) =>
     fikkInnsyn: !!values[`dokument_${document.dokumentId}`],
   }));
 
-const transformValues = (values: InnsynFormValues, documents: Dokument[]): VurderInnsynAp => ({
+const transformValues = (
+  values: InnsynFormValues,
+  documents: Dokument[],
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_INNSYN> => ({
   kode: AksjonspunktKode.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),
   mottattDato: notEmpty(values.mottattDato),
@@ -82,7 +85,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
   const intl = useIntl();
 
   const { fagsak, alleKodeverk, isSubmittable, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
-    usePanelDataContext<VurderInnsynAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_INNSYN>>();
 
   const defaultValues = getDefaultValues(aksjonspunkterForPanel, behandling.fristBehandlingPåVent, innsyn);
 

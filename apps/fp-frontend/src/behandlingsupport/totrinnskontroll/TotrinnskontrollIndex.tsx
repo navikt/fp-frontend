@@ -5,7 +5,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import type { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type TotrinnskontrollFormValues, TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
+import type { VurderÅrsak } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { createLocationForSkjermlenke } from '../../app/paths';
@@ -17,14 +19,13 @@ import { BeslutterModalIndex } from './BeslutterModalIndex';
 
 type Values = {
   fatterVedtakAksjonspunktDto: {
-    '@type': string;
-    kode: string;
+    kode: AksjonspunktKode.FATTER_VEDTAK | '5005';
     begrunnelse: undefined;
     aksjonspunktGodkjenningDtos: {
       aksjonspunktKode: string;
       godkjent: boolean;
       begrunnelse: string | undefined;
-      arsaker: string[];
+      arsaker: VurderÅrsak[];
     }[];
   };
   erAlleAksjonspunktGodkjent: boolean;

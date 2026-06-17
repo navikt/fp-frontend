@@ -8,13 +8,11 @@ import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 
 import { MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
-import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Avslagsarsak, BehandlingFpSak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
 import type {
-  OverstyringAp,
-  OverstyringMedlemskapsvilkaretAp,
-  OverstyringMedlemskapvilkaretForutgaendeAp,
+  OverstyringAksjonspunktTilBekreftelse,
   ProsessAksjonspunkt,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import {
@@ -23,15 +21,16 @@ import {
   usePanelDataContext,
   usePanelOverstyring,
 } from '@navikt/fp-utils';
+
 import styles from './vilkarresultatMedOverstyringForm.module.css';
 
-type OverstyringMedlemskapsvilkaretLopendeAp = {
-  kode: AksjonspunktKode.UTGÅTT_6012;
-  begrunnelse?: string;
-  erVilkårOk?: boolean;
-  avslagskode?: string;
-  avslagDato?: string;
-};
+export type VilkårOverstyringAksjonspunkter =
+  | OverstyringKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET
+  | OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET
+  | OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET
+  | OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
+  | OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR
+  | OverstyringKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET;
 
 const isOverridden = (aksjonspunkter: Aksjonspunkt[], aksjonspunktCode: string): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktCode);
@@ -51,8 +50,8 @@ type FormValues = {
 
 function erOverstyringAvMedlemskap(overstyringApKode: AksjonspunktKode) {
   return [
-    AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
-    AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+    OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+    OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
   ].includes(overstyringApKode);
 }
 
@@ -83,53 +82,44 @@ const createInitialValues = (
   } as FormValues;
 };
 
-type OverstyringVilkår =
-  | OverstyringAp
-  | OverstyringMedlemskapsvilkaretLopendeAp
-  | OverstyringMedlemskapsvilkaretAp
-  | OverstyringMedlemskapvilkaretForutgaendeAp;
-
-const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyringAksjonspunkter): OverstyringVilkår => {
+const transformValues = (
+  values: FormValues,
+  overstyringApKode: VilkårOverstyringAksjonspunkter,
+): OverstyringAksjonspunktTilBekreftelse<VilkårOverstyringAksjonspunkter> => {
   switch (overstyringApKode) {
-    case AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET:
+    case OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET:
       return {
-        kode: AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
+        kode: OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
         begrunnelse: values.begrunnelse,
         ...MedlemskapVurderinger.transformValues(values),
       };
-    case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR:
+    case OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR:
       return {
-        kode: AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+        kode: OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
         begrunnelse: values.begrunnelse,
         ...MedlemskapVurderinger.transformValues(values),
       };
-    case AksjonspunktKode.UTGÅTT_6012:
+    case OverstyringKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET:
       return {
-        kode: AksjonspunktKode.UTGÅTT_6012,
+        kode: OverstyringKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
         begrunnelse: values.begrunnelse,
         ...VilkarResultPicker.transformValues(values),
       };
-    case AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET:
+    case OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET:
       return {
-        kode: AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET,
+        kode: OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
         begrunnelse: values.begrunnelse,
         ...VilkarResultPicker.transformValues(values),
       };
-    case AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET:
+    case OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR:
       return {
-        kode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET,
+        kode: OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR,
         begrunnelse: values.begrunnelse,
         ...VilkarResultPicker.transformValues(values),
       };
-    case AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR:
+    case OverstyringKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET:
       return {
-        kode: AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR,
-        begrunnelse: values.begrunnelse,
-        ...VilkarResultPicker.transformValues(values),
-      };
-    case AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET:
-      return {
-        kode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
+        kode: OverstyringKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET,
         begrunnelse: values.begrunnelse,
         ...VilkarResultPicker.transformValues(values),
       };
@@ -192,9 +182,7 @@ export const VilkarresultatMedOverstyringForm = ({
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) =>
-        submitCallback(transformValues(values, overstyringApKode) as unknown as ProsessAksjonspunkt)
-      }
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values, overstyringApKode))}
       setDataOnUnmount={setMellomlagretFormData}
     >
       <HStack gap="space-16">
@@ -254,7 +242,7 @@ export const VilkarresultatMedOverstyringForm = ({
                   readOnly={overrideReadOnly || !erOverstyrt}
                   ytelse={fagsak.fagsakYtelseType}
                   erRevurdering={behandling.type === 'BT-004'}
-                  erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
+                  erForutgående={overstyringApKode === OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
                 />
               ) : (
                 <VilkarResultPicker

@@ -589,14 +589,10 @@ export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto = (
       kode: '5049';
     } & foreldrepenger_domene_rest_dto_FastsettBruttoBeregningsgrunnlagSNforNyIArbeidslivetDto)
   | ({
-<<<<<<< HEAD
-      '@type': '5104';
+      kode: '5104';
     } & foreldrepenger_domene_rest_dto_KontrollerAAPKombinertATFLDto)
   | ({
-      '@type': '5062';
-=======
       kode: '5062';
->>>>>>> b82cb0267 (refactor: erstatt manuelle aksjonspunkt-typer med genererte DTO-er)
     } & foreldrepenger_domene_rest_dto_KontrollerBesteberegningDto)
   | ({
       kode: '5058';

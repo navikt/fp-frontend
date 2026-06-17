@@ -10,13 +10,17 @@ import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
+import type { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   type AlleKodeverk,
   type AnnenforelderUttakEøsPeriode,
   type Fagsak,
   type UttakPeriodeType,
 } from '@navikt/fp-types';
-import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  AksjonspunktTilBekreftelse,
+  OverstyringAksjonspunktTilBekreftelse,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 import { finnDager, finnUker, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './uttakEøsFaktaDetailForm.module.css';
@@ -39,7 +43,10 @@ interface Props {
 export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdater, slettPeriode, avbryt }: Props) => {
   const intl = useIntl();
 
-  const { isReadOnly, fagsak, alleKodeverk } = usePanelDataContext<BekreftUttaksperioderAp[]>();
+  const { isReadOnly, fagsak, alleKodeverk } = usePanelDataContext<
+    | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART>
+    | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART>
+  >();
 
   const formMethods = useForm<FormValues>({
     defaultValues: annenForelderUttakEøsPeriode

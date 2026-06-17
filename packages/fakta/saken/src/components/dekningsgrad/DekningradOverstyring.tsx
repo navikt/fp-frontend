@@ -11,7 +11,9 @@ import { notEmpty } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
-import type { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  OverstyringAksjonspunktTilBekreftelse,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);
@@ -31,7 +33,8 @@ interface Props {
 export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAccess }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, isReadOnly } = usePanelDataContext<OverstyringDekningsgradAp>();
+  const { submitCallback, isReadOnly } =
+    usePanelDataContext<OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD>>();
 
   const dekningsgrad =
     ytelseFordeling.dekningsgrader.avklartDekningsgrad ??
@@ -174,8 +177,10 @@ const buildInitialValues = (dekningsgrad: number | undefined, aksjonspunkt?: Aks
   begrunnelse: aksjonspunkt?.begrunnelse ?? '',
 });
 
-const transformValues = (values: FormValues): OverstyringDekningsgradAp => ({
-  kode: AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
+const transformValues = (
+  values: FormValues,
+): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD> => ({
+  kode: OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD,
   dekningsgrad: notEmpty(values.dekningsgrad),
   begrunnelse: values.begrunnelse,
 });

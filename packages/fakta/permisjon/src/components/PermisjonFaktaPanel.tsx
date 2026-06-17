@@ -9,8 +9,13 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { ArbeidOgInntektsmelding, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, BekreftetPermisjonStatus} from '@navikt/fp-types';
-import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  ArbeidOgInntektsmelding,
+  Arbeidsforhold,
+  ArbeidsgiverOpplysningerPerId,
+  BekreftetPermisjonStatus,
+} from '@navikt/fp-types';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ArbeidsforholdFieldArray } from './ArbeidsforholdFieldArray';
@@ -39,7 +44,7 @@ interface Props {
 
 export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerPerId }: Props) => {
   const { aksjonspunkterForPanel, fagsak, submitCallback, isReadOnly, alleKodeverk } =
-    usePanelDataContext<VurderArbeidsforholdPermisjonAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO>>();
 
   const arbeidOgInntektMedPermisjon = {
     inntektsmeldinger: arbeidOgInntekt.inntektsmeldinger,
@@ -140,13 +145,12 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
 const transformValues = (
   values: FormValues,
   sorterteArbeidsforhold: Arbeidsforhold[],
-): VurderArbeidsforholdPermisjonAp =>
-  ({
-    kode: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
-    arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
-      internArbeidsforholdId: sorterteArbeidsforhold[index]?.internArbeidsforholdId,
-      arbeidsgiverIdent: sorterteArbeidsforhold[index]?.arbeidsgiverIdent ?? '',
-      permisjonStatus: a.permisjonStatus,
-    })),
-    begrunnelse: values.begrunnelse,
-  });
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO> => ({
+  kode: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
+  arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
+    internArbeidsforholdId: sorterteArbeidsforhold[index]?.internArbeidsforholdId,
+    arbeidsgiverIdent: sorterteArbeidsforhold[index]?.arbeidsgiverIdent ?? '',
+    permisjonStatus: a.permisjonStatus,
+  })),
+  begrunnelse: values.begrunnelse,
+});

@@ -1,18 +1,18 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 
 export const totrinnskontrollaksjonspunktTextCodes = {
   [AksjonspunktKode.AUTO_VENT_PÅ_FØDSELREGISTRERING]: 'ToTrinnsForm.Fødsel.VurderSokersRelasjon',
   [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: 'ToTrinnsForm.Fødsel.SjekkTerminbekreftelse',
   [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: 'ToTrinnsForm.Fødsel.SjekkManglendeFødsel',
-  [AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL]: 'ToTrinnsForm.Fødsel.OverstyrFaktaFødsel',
-  [AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET]: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
-  [AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR]: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
+  [OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL]: 'ToTrinnsForm.Fødsel.OverstyrFaktaFødsel',
+  [OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET]: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
+  [OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR]: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
 
   [AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE]: 'ToTrinnsForm.VurderTidligereUtbetaling',
 
   [AksjonspunktKode.AVKLAR_AKTIVITETER]: 'ToTrinnsForm.Beregning.AvklarAktiviteter',
-  [AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER]: 'ToTrinnsForm.Beregning.OverstyrtBeregningsaktiviteter',
-  [AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG]: 'ToTrinnsForm.Beregning.OverstyrtBeregningsgrunnlag',
+  [OverstyringKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER]: 'ToTrinnsForm.Beregning.OverstyrtBeregningsaktiviteter',
+  [OverstyringKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG]: 'ToTrinnsForm.Beregning.OverstyrtBeregningsgrunnlag',
   [AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS]: 'ToTrinnsForm.Beregning.InntektFastsatt',
   [AksjonspunktKode.UTGÅTT_5042]: 'ToTrinnsForm.Beregning.InntektFastsatt',
   [AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD]: 'ToTrinnsForm.Beregning.InntektFastsatt',
@@ -22,16 +22,16 @@ export const totrinnskontrollaksjonspunktTextCodes = {
 
   [AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET]: 'ToTrinnsForm.Soknadsfrist.ManueltVurdert',
   [AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST]: 'ToTrinnsForm.Soknadsfrist.ManueltVurdert',
-  [AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET]: 'ToTrinnsForm.Soknadsfrist.VilkarOverstyrt',
+  [OverstyringKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET]: 'ToTrinnsForm.Soknadsfrist.VilkarOverstyrt',
 
   [AksjonspunktKode.UTGÅTT_5021]: 'ToTrinnsForm.Medlemskap.VurderGyldigMedlemskap',
   [AksjonspunktKode.UTGÅTT_5019]: 'ToTrinnsForm.Medlemskap.AvklarLovligOpphold',
   [AksjonspunktKode.UTGÅTT_5020]: 'ToTrinnsForm.Medlemskap.VurderSokerBosatt',
   [AksjonspunktKode.UTGÅTT_5023]: 'ToTrinnsForm.Medlemskap.AvklarOppholdsrett',
-  [AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET]: 'ToTrinnsForm.Medlemskap.VilkarOverstyrt',
-  [AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO]: 'ToTrinnsForm.Medlemskap.OverstyrtStartdato',
+  [OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET]: 'ToTrinnsForm.Medlemskap.VilkarOverstyrt',
+  [OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO]: 'ToTrinnsForm.Medlemskap.OverstyrtStartdato',
   [AksjonspunktKode.AVKLAR_DEKNINGSGRAD]: 'ToTrinnsForm.Medlemskap.AvklartDekningsgrad',
-  [AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD]: 'ToTrinnsForm.Medlemskap.OverstyrtDekningsgrad',
+  [OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD]: 'ToTrinnsForm.Medlemskap.OverstyrtDekningsgrad',
 
   [AksjonspunktKode.FORESLÅ_VEDTAK]: 'ToTrinnsForm.Vedtak.Fritekstbrev',
   [AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT]: 'ToTrinnsForm.Vedtak.Fritekstbrev',

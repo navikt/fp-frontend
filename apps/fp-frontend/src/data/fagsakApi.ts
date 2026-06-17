@@ -1,6 +1,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import ky from 'ky';
 
+import type { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FormValues as EndreUtlandFormValues } from '@navikt/fp-sak-meny-endre-utland';
 import type { FormValues } from '@navikt/fp-sak-meny-ny-behandling';
 import type {
@@ -20,7 +21,7 @@ import type {
   NavAnsatt,
   SakFullDtoFpTilbake,
 } from '@navikt/fp-types';
-import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 type BehandlendeEnheter = {
   enhetId: string;
@@ -44,7 +45,7 @@ export type BekreftedeTotrinnsaksjonspunkter = {
   behandlingVersjon: number;
   bekreftedeAksjonspunktDtoer: ({
     '@type': string;
-  } & FatterVedtakAp)[];
+  } & AksjonspunktTilBekreftelse<AksjonspunktKode.FATTER_VEDTAK>)[];
 };
 
 export type SubmitMessageParams = {

@@ -10,7 +10,7 @@ import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@n
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, DokumentMalType, InnsynDokument, InnsynResultatType } from '@navikt/fp-types';
-import type { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListVedtakInnsyn } from './DocumentListVedtakInnsyn';
@@ -85,7 +85,7 @@ const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspu
   begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FORESLÅ_VEDTAK)?.begrunnelse ?? undefined,
 });
 
-const transformValues = (values: FormValues): ForeslaVedtakAp => ({
+const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLÅ_VEDTAK> => ({
   kode: AksjonspunktKode.FORESLÅ_VEDTAK,
   ...values,
   begrunnelse: values.begrunnelse === '' ? undefined : values.begrunnelse,
@@ -114,7 +114,7 @@ export const InnsynVedtakForm = ({
   const intl = useIntl();
 
   const { fagsak, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
-    usePanelDataContext<ForeslaVedtakAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLÅ_VEDTAK>>();
 
   const initialValues = buildInitialValues(innsynMottattDato, aksjonspunkterForPanel);
 

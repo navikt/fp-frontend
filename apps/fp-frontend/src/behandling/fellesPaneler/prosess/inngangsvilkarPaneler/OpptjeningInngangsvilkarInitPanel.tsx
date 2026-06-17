@@ -34,7 +34,7 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
       vilkårKoder={VILKAR_KODER}
       inngangsvilkårPanelKode="OPPTJENINGSVILKARET"
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
-      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET}
+      overstyringApKode={OverstyringKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET}
     >
       <OverstyringPanelDef vilkårKoder={VILKAR_KODER} panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret" />
     </InngangsvilkarOverstyringDefaultInitPanel>

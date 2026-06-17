@@ -13,7 +13,7 @@ import type {
   SimuleringResultat,
   TilbakekrevingValg,
 } from '@navikt/fp-types';
-import type { KontrollerEtterbetalingTilSøkerAP, VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { harAksjonspunkt, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { EtterbetalingSøkerFormValues, FeilutbetalingFormValues } from '../types/FormValues';
@@ -29,7 +29,9 @@ type Details = {
 
 type FormValues = FeilutbetalingFormValues | EtterbetalingSøkerFormValues;
 
-type SimuleringAksjonspunkt = VurderFeilutbetalingAp | KontrollerEtterbetalingTilSøkerAP;
+type SimuleringAksjonspunkt =
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FEILUTBETALING>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER>;
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

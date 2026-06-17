@@ -18,12 +18,7 @@ import {
   type SimuleringResultat,
   type TilbakekrevingValg,
 } from '@navikt/fp-types';
-import type {
-  ForeslaVedtakAp,
-  ForeslaVedtakManueltAp,
-  VurdereAnnenYtelseForVedtakAp,
-  VurdereDokumentForVedtakAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { isAvslag, isInnvilget, isKlageOmgjort, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
@@ -136,10 +131,10 @@ export const buildInitialValues = (behandling: BehandlingFpSak): VedtakFormValue
 });
 
 type VedtakAksjonspunkter =
-  | ForeslaVedtakAp
-  | ForeslaVedtakManueltAp
-  | VurdereAnnenYtelseForVedtakAp
-  | VurdereDokumentForVedtakAp;
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLÅ_VEDTAK>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK>;
 
 interface Props {
   previewCallback: (data: VedtakForhåndsvisData) => void;

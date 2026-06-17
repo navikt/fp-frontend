@@ -31,10 +31,10 @@ export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyre
     ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
   );
   const overstyrDekningsgradAp = aksjonspunkterForPanel.find(
-    ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD,
+    ap => ap.definisjon === OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD,
   );
   const overstyrStartdatoAp = aksjonspunkterForPanel.find(
-    ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO,
+    ap => ap.definisjon === OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO,
   );
 
   return (

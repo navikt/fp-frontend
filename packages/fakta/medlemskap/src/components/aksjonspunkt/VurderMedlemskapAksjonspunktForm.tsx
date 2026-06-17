@@ -7,7 +7,7 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
-import type { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { harAksjonspunkt, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -35,7 +35,10 @@ export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: 
     isReadOnly,
     isSubmittable,
     alleMerknaderFraBeslutter,
-  } = usePanelDataContext<VurderMedlemskapAp | VurderForutgaendeMedlemskapAp>();
+  } = usePanelDataContext<
+    | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET>
+    | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR>
+  >();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -109,7 +112,9 @@ const createInitialValues = (
 const transformValues = (
   values: FormValues,
   erForutgåendeAksjonspunkt: boolean,
-): VurderMedlemskapAp | VurderForutgaendeMedlemskapAp => {
+):
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR> => {
   if (erForutgåendeAksjonspunkt) {
     return {
       kode: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,

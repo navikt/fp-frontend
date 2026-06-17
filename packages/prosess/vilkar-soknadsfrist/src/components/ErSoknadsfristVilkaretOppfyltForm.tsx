@@ -14,7 +14,7 @@ import {
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandlingsresultat, FamilieHendelse, Soknad, VilkårUtfallType } from '@navikt/fp-types';
-import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { SøknadsfristDetaljer } from './SøknadsfristDetaljer';
@@ -32,7 +32,9 @@ const buildInitialValues = (
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
-const transformValues = (values: FormValues): SoknadsfristAp => ({
+const transformValues = (
+  values: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET> => ({
   kode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
@@ -59,7 +61,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
     behandling,
     isReadOnly,
     submitCallback,
-  } = usePanelDataContext<SoknadsfristAp>();
+  } = usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET>>();
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
 

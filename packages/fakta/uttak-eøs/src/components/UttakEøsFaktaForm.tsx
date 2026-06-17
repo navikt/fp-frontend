@@ -9,10 +9,13 @@ import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-kompon
 import dayjs from 'dayjs';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
-import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import type {
+  AksjonspunktTilBekreftelse,
+  OverstyringAksjonspunktTilBekreftelse,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
@@ -25,7 +28,10 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   const intl = useIntl();
 
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, isReadOnly, submitCallback, alleKodeverk } =
-    usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
+    usePanelDataContext<
+      | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART>
+      | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART>
+    >();
   annenForelderUttakEøs.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
@@ -48,20 +54,10 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   });
 
   const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
-    a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART,
+    a => a.definisjon !== OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART,
   );
 
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
-
-  const bekreft = (begrunnelse: string) => {
-    return submitCallback({
-      kode: erOverstyrt
-        ? AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART
-        : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-      begrunnelse,
-      perioder: perioder,
-    });
-  };
 
   useEffect(() => {
     const periodeMap = perioder.map(({ fom, tom }) => [fom, tom]);
@@ -112,7 +108,10 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
         setDirty={setIsDirty}
         alleKodeverk={alleKodeverk}
       />
-      <RhfForm formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(transformValues(values, perioder, erOverstyrt))}
+      >
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
@@ -133,4 +132,20 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
       </RhfForm>
     </VStack>
   );
+};
+
+const transformValues = (
+  values: FaktaBegrunnelseFormValues,
+  perioder: AnnenforelderUttakEøsPeriode[],
+  erOverstyrt: boolean,
+):
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART>
+  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART> => {
+  return {
+    kode: erOverstyrt
+      ? OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART
+      : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+    perioder: perioder,
+    ...FaktaBegrunnelseTextField.transformValues(values),
+  };
 };

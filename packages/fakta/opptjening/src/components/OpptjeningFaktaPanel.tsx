@@ -14,13 +14,15 @@ import type {
   Opptjening,
   OpptjeningAktivitet,
 } from '@navikt/fp-types';
-import type { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type FormValues, ValgtAktivitetForm } from './aktivitet/ValgtAktivitetForm';
 import { OpptjeningTidslinje } from './tidslinje/OpptjeningTidslinje';
 
-type OpptjeningAktivitetAp = NonNullable<AvklarAktivitetsPerioderAp['opptjeningsaktiviteter']>[number];
+type OpptjeningAktivitetAp = NonNullable<
+  AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING>['opptjeningsaktiviteter']
+>[number];
 
 const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]): ReactElement[] => {
   const texts = new Array<ReactElement>();
@@ -93,7 +95,7 @@ export const OpptjeningFaktaPanel = ({
     submitCallback,
     isReadOnly,
     alleKodeverk,
-  } = usePanelDataContext<AvklarAktivitetsPerioderAp>();
+  } = usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING>>();
 
   const harAksjonspunkt = aksjonspunkterForPanel.length > 0;
 

@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -55,7 +55,7 @@ const TOTRINNSKONTROLL_AKSJONSPUNKTER: TotrinnskontrollSkjermlenkeContext[] = [
     totrinnskontrollAksjonspunkter: [
       createAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL),
       createAksjonspunkt(AksjonspunktKode.SJEKK_TERMINBEKREFTELSE),
-      createAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL),
+      createAksjonspunkt(OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL),
       createAksjonspunkt(AksjonspunktKode.AUTO_VENT_PÅ_FØDSELREGISTRERING),
     ],
   },

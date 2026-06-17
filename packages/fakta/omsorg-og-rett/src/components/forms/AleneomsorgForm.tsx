@@ -9,7 +9,7 @@ import { BTag } from '@navikt/ft-utils';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
-import type { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
@@ -30,7 +30,7 @@ interface Props {
 
 export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: Props) => {
   const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } =
-    usePanelDataContext<BekreftAleneomsorgVurderingAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG>>();
   const harAleneomsorg = omsorgOgRett.manuellBehandlingResultat?.søkerHarAleneomsorg ?? undefined;
   const harRettNorge = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettNorge ?? undefined;
   const harRettEØS = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettEØS ?? undefined;

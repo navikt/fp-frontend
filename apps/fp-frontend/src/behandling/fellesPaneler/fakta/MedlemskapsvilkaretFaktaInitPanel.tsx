@@ -4,7 +4,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { MedlemskapFaktaIndex } from '@navikt/fp-fakta-medlemskap';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -21,7 +21,7 @@ const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
   AksjonspunktKode.UTGÅTT_5021,
   AksjonspunktKode.UTGÅTT_5023,
   AksjonspunktKode.UTGÅTT_5053,
-  AksjonspunktKode.UTGÅTT_6012,
+  OverstyringKode.UTGÅTT_6012,
 ];
 
 export const MedlemskapsvilkaretFaktaInitPanel = () => {

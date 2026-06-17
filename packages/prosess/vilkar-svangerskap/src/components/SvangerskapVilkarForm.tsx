@@ -23,7 +23,7 @@ import type {
   SvpTilretteleggingDatoDto,
   VilkårUtfallType,
 } from '@navikt/fp-types';
-import type { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const finnesUttakPåArbfor = (arbfor: SvpArbeidsforholdDto): boolean => {
@@ -51,7 +51,9 @@ const buildInitialValues = (
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 });
 
-const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp => ({
+const transformValues = (
+  values: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET> => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
   kode: AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET,
@@ -72,7 +74,8 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     harÅpentAksjonspunkt,
     submitCallback,
     isReadOnly,
-  } = usePanelDataContext<BekreftSvangerskapspengervilkarAp>();
+  } =
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET>>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,

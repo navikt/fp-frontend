@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
   type PanelDataArgs,
@@ -24,7 +24,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData, withPanelOverstyring],
   args: {
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+    overstyringApKode: OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
     isReadOnly: false,
     aksjonspunkterForPanel: [],
     alleMerknaderFraBeslutter: {},
@@ -370,7 +370,7 @@ export const OverstyrtSettSomOverstyrer: Story = {
     initialToggleState: true,
     isReadOnly: false,
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL, {
+      lagAksjonspunkt(OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL, {
         status: 'UTFO',
         begrunnelse: 'Denne saken har blitt overstyrt',
       }),
@@ -384,7 +384,7 @@ export const OverstyrtSettSomSBH: Story = {
     initialToggleState: true,
     isReadOnly: false,
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL, {
+      lagAksjonspunkt(OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL, {
         status: 'UTFO',
         begrunnelse: 'Denne saken har blitt overstyrt',
       }),

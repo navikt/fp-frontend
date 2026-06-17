@@ -4,7 +4,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { FodselFaktaIndex } from '@navikt/fp-fakta-fodsel';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Dokument } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
@@ -18,7 +18,7 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
   AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
-  AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+  OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
 ];
 
 export const FodselvilkaretFaktaInitPanel = () => {
@@ -32,7 +32,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
   const fagsakApi = useFagsakApi();
 
   const harOverstyrigAP = standardPanelProps.aksjonspunkterForPanel.some(
-    a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+    a => a.definisjon === OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
   );
   const { data: faktafødsel } = useQuery(api.faktaFødselOptions(behandling));
   const { data: alleDokumenter = [] } = useQuery(
@@ -42,7 +42,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
   const terminbekreftelseDokument = finnTerminBekreftelse(alleDokumenter, fagsak.saksnummer);
   return (
     <PanelOverstyringProvider
-      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL}
+      overstyringApKode={OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL}
       kanOverstyreAccess={rettigheter.kanOverstyreAccess}
       overrideReadOnly={standardPanelProps.isReadOnly}
       initialToggleState={harOverstyrigAP}

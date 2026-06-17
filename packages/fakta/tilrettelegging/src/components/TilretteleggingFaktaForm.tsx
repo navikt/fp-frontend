@@ -16,7 +16,7 @@ import type {
   SvpArbeidsforholdDto,
   SvpTilrettelegging,
 } from '@navikt/fp-types';
-import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
@@ -38,7 +38,7 @@ export const TilretteleggingFaktaForm = ({
   const intl = useIntl();
 
   const { isSubmittable, isReadOnly, aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpentAksjonspunkt } =
-    usePanelDataContext<BekreftSvangerskapspengerAp>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_SVP_TILRETTELEGGING>>();
   const uttakArbeidTyper = alleKodeverk['UttakArbeidType'];
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<TilretteleggingFormValues>();
@@ -162,7 +162,9 @@ const mapTilTilrettelegging = (
     alleArbeidsforhold.filter(af => af.arbeidsgiverReferanse === arbeidsforhold.arbeidsgiverReferanse).length > 1,
 });
 
-const transformValues = (values: TilretteleggingFormValues): BekreftSvangerskapspengerAp => ({
+const transformValues = (
+  values: TilretteleggingFormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_SVP_TILRETTELEGGING> => ({
   kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
   termindato: notEmpty(values.termindato),
   fødselsdato: values.fødselsdato,

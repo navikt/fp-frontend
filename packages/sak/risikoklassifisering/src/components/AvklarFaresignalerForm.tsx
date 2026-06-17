@@ -13,7 +13,6 @@ import {
   type KodeverkMedNavn,
   type Risikoklassifisering,
 } from '@navikt/fp-types';
-
 import { notEmpty } from '@navikt/fp-utils';
 
 import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
