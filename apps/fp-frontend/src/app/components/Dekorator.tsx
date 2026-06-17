@@ -9,7 +9,7 @@ import { getAvdelingslederLenke, getJournalføringLenke } from '@navikt/fp-konst
 import { type DekoratorLenke } from '@navikt/fp-sak-dekorator';
 import type { NavAnsatt } from '@navikt/fp-types';
 
-import { UTBETALINGSDATA_PATH } from '../paths';
+import { SNARVEGER_PATH, UTBETALINGSDATA_PATH } from '../paths';
 
 interface Props {
   queryStrings: QueryStrings;
@@ -36,6 +36,11 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
     e.preventDefault();
   };
 
+  const visSnarvegerSide = (e: React.SyntheticEvent) => {
+    void navigate(SNARVEGER_PATH);
+    e.preventDefault();
+  };
+
   const interneLenker: DekoratorLenke[] = [];
   if (kanOppgavestyre) {
     interneLenker.push({
@@ -52,6 +57,10 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
   interneLenker.push({
     tekst: intl.formatMessage({ id: 'Dekorator.Utbetalingsdata' }),
     callback: (e: React.SyntheticEvent) => visUtbetalingsdataSide(e),
+  });
+  interneLenker.push({
+    tekst: intl.formatMessage({ id: 'Dekorator.Tastatursnarvegar' }),
+    callback: (e: React.SyntheticEvent) => visSnarvegerSide(e),
   });
 
   return (

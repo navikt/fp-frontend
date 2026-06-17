@@ -16,7 +16,14 @@ import { useFagsakApi } from '../../data/fagsakApi';
 import { RequestPendingProvider } from '../../data/polling/RequestPendingContext';
 import { FagsakIndex } from '../../fagsak/FagsakIndex';
 import { FagsakSearchIndex } from '../../fagsakSearch/FagsakSearchIndex';
-import { aktoerRoutePath, fagsakRoutePath, getFagsakHref, utbetalingsdataIs15RoutePath } from '../paths';
+import { SnarvegerIndex } from '../../snarveger/SnarvegerIndex';
+import {
+  aktoerRoutePath,
+  fagsakRoutePath,
+  getFagsakHref,
+  snarvegerRoutePath,
+  utbetalingsdataIs15RoutePath,
+} from '../paths';
 
 import styles from './home.module.css';
 
@@ -105,6 +112,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
           }
         />
         <Route path={aktoerRoutePath} element={<AktørIndex />} />
+        <Route path={snarvegerRoutePath} element={<SnarvegerIndex />} />
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
       </Routes>
     </div>

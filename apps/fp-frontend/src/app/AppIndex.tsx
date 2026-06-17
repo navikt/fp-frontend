@@ -7,6 +7,9 @@ import { AppShell, ErrorBoundary, ErrorType, type FpError, useAppShell } from '@
 
 import { initFetchOptions } from '../data/fagsakApi';
 import { PollingTimeoutError } from '../data/polling/pollingUtils';
+import { SnarvegerProvider } from '../snarveger/SnarvegerContext';
+import { SnarvegerHjelpModal } from '../snarveger/SnarvegerHjelpModal';
+import { useGlobalSnarveger } from '../snarveger/useGlobalSnarveger';
 import { AppConfigResolver } from './AppConfigResolver';
 import { Dekorator } from './components/Dekorator';
 import { Home } from './components/Home';
@@ -31,6 +34,11 @@ const handlePollingError = (error: Error, addErrorMessage: (data: FpError) => vo
   return false;
 };
 
+const SnarvegerLytter = () => {
+  useGlobalSnarveger();
+  return null;
+};
+
 const AppIndex = () => {
   const {
     headerHeight,
@@ -49,22 +57,26 @@ const AppIndex = () => {
 
   return (
     <RawIntlProvider value={intl}>
-      <AppConfigResolver>
-        <>
-          <Dekorator
-            hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
-            queryStrings={queryStrings}
-            setSiteHeight={setSiteHeight}
-            crashMessage={crashMessage}
-            theme={theme}
-            setTheme={setTheme}
-            navAnsatt={navAnsatt}
-          />
-          <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
-            {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
-          </ErrorBoundary>
-        </>
-      </AppConfigResolver>
+      <SnarvegerProvider>
+        <SnarvegerLytter />
+        <AppConfigResolver>
+          <>
+            <Dekorator
+              hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
+              queryStrings={queryStrings}
+              setSiteHeight={setSiteHeight}
+              crashMessage={crashMessage}
+              theme={theme}
+              setTheme={setTheme}
+              navAnsatt={navAnsatt}
+            />
+            <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
+              {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
+            </ErrorBoundary>
+            <SnarvegerHjelpModal />
+          </>
+        </AppConfigResolver>
+      </SnarvegerProvider>
     </RawIntlProvider>
   );
 };

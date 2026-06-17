@@ -5,11 +5,13 @@ import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 import type { SkjermlenkeType, SkjermlenkeTypeFpTilbake } from '@navikt/fp-types';
 
 export const UTBETALINGSDATA_PATH = 'utbetalingsdata';
+export const SNARVEGER_PATH = 'snarvegar';
 
 const DEFAULT_FAKTA = 'default';
 const DEFAULT_PROSESS_STEG = 'default';
 
 export const utbetalingsdataIs15RoutePath = `/${UTBETALINGSDATA_PATH}`;
+export const snarvegerRoutePath = `/${SNARVEGER_PATH}`;
 export const fagsakRoutePath = '/fagsak/:saksnummer//*';
 export const aktoerRoutePath = '/aktoer/:aktoerId';
 export const behandlingerRoutePath = '/behandling//*';
