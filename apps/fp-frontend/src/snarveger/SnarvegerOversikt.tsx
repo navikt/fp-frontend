@@ -6,16 +6,16 @@ import { BodyShort, Heading, Switch, Table, Tag } from '@navikt/ds-react';
 import { type SnarvegDefinisjon, type SnarvegGruppe, snarvegDefinisjoner } from './snarvegDefinisjoner';
 import { useSnarvegerContext } from './SnarvegerContext';
 
-import styles from './snarvegerOversikt.module.css';
-
 const GRUPPE_REKKEFOLGE: SnarvegGruppe[] = ['global', 'behandling'];
 
 const Tastesekvens = ({ taster }: { taster: string[] }) => (
-  <span className={styles['tastesekvens']}>
+  <span className="inline-flex items-center gap-1">
     {taster.map((tast, index) => (
       <Fragment key={tast}>
-        {index > 0 && <span className={styles['deretter']}>+</span>}
-        <kbd className={styles['tast']}>{tast}</kbd>
+        {index > 0 && <span className="text-ax-text-neutral-subtle text-sm">+</span>}
+        <kbd className="border-ax-border-neutral bg-ax-bg-default inline-block min-w-6 rounded border border-b-2 px-1.5 py-0.5 text-center font-mono text-sm leading-tight">
+          {tast}
+        </kbd>
       </Fragment>
     ))}
   </span>
@@ -25,7 +25,7 @@ const GruppeTabell = ({ gruppe, definisjoner }: { gruppe: SnarvegGruppe; definis
   const intl = useIntl();
 
   return (
-    <div className={styles['gruppe']}>
+    <div className="flex flex-col">
       <Heading size="small" level="3" spacing>
         {intl.formatMessage({ id: `Snarveger.Gruppe.${gruppe}` })}
       </Heading>
@@ -49,7 +49,7 @@ const GruppeTabell = ({ gruppe, definisjoner }: { gruppe: SnarvegGruppe; definis
               <Table.DataCell>
                 <BodyShort as="span">{intl.formatMessage({ id: def.beskrivelseId })}</BodyShort>
                 {def.kunNarTilgjengelig && (
-                  <Tag variant="neutral" size="xsmall" className={styles['merknad']}>
+                  <Tag variant="neutral" size="xsmall" className="ml-2">
                     {intl.formatMessage({ id: 'Snarveger.KunNarTilgjengelig' })}
                   </Tag>
                 )}
@@ -71,7 +71,7 @@ export const SnarvegerOversikt = () => {
   const { aktiv, settAktiv } = useSnarvegerContext();
 
   return (
-    <div className={styles['oversikt']}>
+    <div className="flex flex-col gap-6">
       <Switch checked={aktiv} onChange={event => settAktiv(event.target.checked)}>
         {intl.formatMessage({ id: 'Snarveger.SlaaPaa' })}
       </Switch>

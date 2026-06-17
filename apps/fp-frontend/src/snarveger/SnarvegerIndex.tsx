@@ -4,8 +4,6 @@ import { BodyShort, Heading, VStack } from '@navikt/ds-react';
 
 import { SnarvegerOversikt } from './SnarvegerOversikt';
 
-import styles from './snarvegerIndex.module.css';
-
 /**
  * SnarvegerIndex
  *
@@ -16,7 +14,7 @@ export const SnarvegerIndex = () => {
   const intl = useIntl();
 
   return (
-    <div className={styles['side']}>
+    <div className="mx-auto max-w-3xl px-4 py-8">
       <VStack gap="space-24">
         <div>
           <Heading size="large" level="1" spacing>
