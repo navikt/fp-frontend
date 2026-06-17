@@ -19,16 +19,25 @@ export const SvangerskapInngangsvilkarInitPanel = () => {
   const intl = useIntl();
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  const api = useBehandlingApi(standardPanelProps.behandling);
+  // Svangerskapspengervilkåret har ingen overstyrings-aksjonspunkt, kun manuell vurdering (5092).
+  // Når vilkåret er automatisk avgjort finnes ikke 5092-aksjonspunktet, og panelet må være read-only
+  // slik at en innsending ikke feilaktig rutes til overstyr-endepunktet (gir ugyldig type id 5092).
+  const harAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.length > 0;
+  const panelProps = {
+    ...standardPanelProps,
+    isReadOnly: standardPanelProps.isReadOnly || !harAksjonspunkt,
+  };
+
+  const api = useBehandlingApi(panelProps.behandling);
 
   const { data: svangerskapspengerTilrettelegging } = useQuery(
-    api.svp.svangerskapspengerTilretteleggingOptions(standardPanelProps.behandling),
+    api.svp.svangerskapspengerTilretteleggingOptions(panelProps.behandling),
   );
 
   return (
     <InngangsvilkarDefaultInitPanel
       vilkårKoder={VILKAR_KODER}
-      standardPanelProps={standardPanelProps}
+      standardPanelProps={panelProps}
       inngangsvilkårPanelKode="SVANGERSKAP"
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
     >
@@ -36,7 +45,7 @@ export const SvangerskapInngangsvilkarInitPanel = () => {
         {svangerskapspengerTilrettelegging && (
           <SvangerskapVilkarProsessIndex
             svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-            status={standardPanelProps.status}
+            status={panelProps.status}
           />
         )}
         {!svangerskapspengerTilrettelegging && <LoadingPanel />}
