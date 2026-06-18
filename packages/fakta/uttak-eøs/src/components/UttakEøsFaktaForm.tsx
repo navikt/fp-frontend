@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
+import type { Aksjonspunkt, AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -42,9 +42,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   const [isDirty, setIsDirty] = useState(false);
 
   const formMethods = useForm<FaktaBegrunnelseFormValues>({
-    defaultValues: mellomlagretFormData
-      ? { begrunnelse: mellomlagretFormData.begrunnelse }
-      : FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel[0]),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel[0]),
   });
 
   const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
@@ -127,6 +125,9 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
     </VStack>
   );
 };
+
+const buildInitialValues = (aksjonspunkt?: Aksjonspunkt): FaktaBegrunnelseFormValues =>
+  FaktaBegrunnelseTextField.initialValues(aksjonspunkt);
 
 const transformValues = (
   values: FaktaBegrunnelseFormValues,

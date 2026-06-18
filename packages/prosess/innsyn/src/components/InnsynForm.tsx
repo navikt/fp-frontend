@@ -27,35 +27,12 @@ const hentDokumenterMedNavnOgFikkInnsyn = (dokumenter: InnsynDokument[]): Record
     };
   }, {});
 
-const getDefaultValues = (
-  aksjonspunkter: Aksjonspunkt[],
-  fristBehandlingPåVent?: string,
-  innsyn?: Innsyn,
-): InnsynFormValues => ({
-  mottattDato: innsyn?.innsynMottattDato,
-  innsynResultatType: innsyn?.innsynResultatType,
-  fristDato: fristBehandlingPåVent ?? dayjs().add(3, 'days').format(ISO_DATE_FORMAT),
-  sattPaVent: aksjonspunkter[0]?.status === 'OPPR' ? undefined : !!fristBehandlingPåVent,
-  ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
-  ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter ?? []),
-});
-
 const getDocumentsStatus = (values: InnsynFormValues, documents: Dokument[]) =>
   documents.map(document => ({
     dokumentId: document.dokumentId,
     journalpostId: document.journalpostId,
     fikkInnsyn: !!values[`dokument_${document.dokumentId}`],
   }));
-
-const transformValues = (values: InnsynFormValues, documents: Dokument[]): VurderInnsynAp => ({
-  kode: AksjonspunktKode.VURDER_INNSYN,
-  innsynDokumenter: getDocumentsStatus(values, documents),
-  mottattDato: notEmpty(values.mottattDato),
-  innsynResultatType: notEmpty(values.innsynResultatType),
-  fristDato: values.fristDato,
-  sattPaVent: values.sattPaVent,
-  begrunnelse: values.begrunnelse,
-});
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
 const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
@@ -84,12 +61,11 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
   const { fagsak, alleKodeverk, isSubmittable, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
     usePanelDataContext<VurderInnsynAp>();
 
-  const defaultValues = getDefaultValues(aksjonspunkterForPanel, behandling.fristBehandlingPåVent, innsyn);
-
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<InnsynFormValues>();
 
   const formMethods = useForm<InnsynFormValues>({
-    defaultValues: mellomlagretFormData ?? defaultValues,
+    defaultValues:
+      mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, behandling.fristBehandlingPåVent, innsyn),
   });
 
   const documents = getFilteredReceivedDocuments(alleDokumenter);
@@ -194,3 +170,26 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
     </RhfForm>
   );
 };
+
+const buildInitialValues = (
+  aksjonspunkter: Aksjonspunkt[],
+  fristBehandlingPåVent?: string,
+  innsyn?: Innsyn,
+): InnsynFormValues => ({
+  mottattDato: innsyn?.innsynMottattDato,
+  innsynResultatType: innsyn?.innsynResultatType,
+  fristDato: fristBehandlingPåVent ?? dayjs().add(3, 'days').format(ISO_DATE_FORMAT),
+  sattPaVent: aksjonspunkter[0]?.status === 'OPPR' ? undefined : !!fristBehandlingPåVent,
+  ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
+  ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter ?? []),
+});
+
+const transformValues = (values: InnsynFormValues, documents: Dokument[]): VurderInnsynAp => ({
+  kode: AksjonspunktKode.VURDER_INNSYN,
+  innsynDokumenter: getDocumentsStatus(values, documents),
+  mottattDato: notEmpty(values.mottattDato),
+  innsynResultatType: notEmpty(values.innsynResultatType),
+  fristDato: values.fristDato,
+  sattPaVent: values.sattPaVent,
+  begrunnelse: values.begrunnelse,
+});

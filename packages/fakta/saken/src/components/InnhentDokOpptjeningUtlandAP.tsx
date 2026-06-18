@@ -37,10 +37,7 @@ export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props)
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? {
-      dokStatus,
-      ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
-    },
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkt, dokStatus),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -95,6 +92,11 @@ export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props)
     </AksjonspunktBox>
   );
 };
+
+const buildInitialValues = (aksjonspunkt: Aksjonspunkt, dokStatus?: string): FormValues => ({
+  dokStatus,
+  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
+});
 
 const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
   kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,

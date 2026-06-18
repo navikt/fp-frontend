@@ -189,11 +189,7 @@ export const UttakFaktaForm = ({
   const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
 
   const formMethods = useForm<FaktaBegrunnelseFormValues>({
-    defaultValues: {
-      begrunnelse:
-        mellomlagretFormData?.begrunnelse ??
-        FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel).begrunnelse,
-    },
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel),
   });
 
   useEffect(
@@ -290,6 +286,9 @@ export const UttakFaktaForm = ({
     </VStack>
   );
 };
+
+const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FaktaBegrunnelseFormValues =>
+  FaktaBegrunnelseTextField.initialValues(aksjonspunkter);
 
 const transformValues = (
   values: FaktaBegrunnelseFormValues,

@@ -40,7 +40,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? createInitialValues(aksjonspunkterForPanel, manuellBehandlingResultat),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, manuellBehandlingResultat),
   });
 
   const begrunnelseVerdi = formMethods.watch('begrunnelse');
@@ -96,7 +96,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: 
   );
 };
 
-const createInitialValues = (
+const buildInitialValues = (
   aksjonspunkterForPanel: Aksjonspunkt[],
   resultat: ManuellBehandlingResultat | undefined,
 ): FormValues => {

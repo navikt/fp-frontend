@@ -42,13 +42,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
   const { isReadOnly, fagsak, alleKodeverk } = usePanelDataContext<BekreftUttaksperioderAp[]>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: annenForelderUttakEøsPeriode
-      ? {
-          ...annenForelderUttakEøsPeriode,
-          trekkdager: finnDager(annenForelderUttakEøsPeriode.trekkdager),
-          trekkuker: finnUker(annenForelderUttakEøsPeriode.trekkdager),
-        }
-      : undefined,
+    defaultValues: annenForelderUttakEøsPeriode ? buildInitialValues(annenForelderUttakEøsPeriode) : undefined,
   });
 
   const fom = formMethods.watch('fom');
@@ -209,6 +203,12 @@ const lagGyldigeKontotyperOption = (fagsak: Fagsak, alleKodeverk: AlleKodeverk):
 
 const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
   dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.TomForFom' }) : null;
+
+const buildInitialValues = (annenForelderUttakEøsPeriode: AnnenforelderUttakEøsPeriode): FormValues => ({
+  ...annenForelderUttakEøsPeriode,
+  trekkdager: finnDager(annenForelderUttakEøsPeriode.trekkdager),
+  trekkuker: finnUker(annenForelderUttakEøsPeriode.trekkdager),
+});
 
 const transformValues = ({ trekkdager, trekkuker, ...rest }: FormValues): AnnenforelderUttakEøsPeriode => {
   return {

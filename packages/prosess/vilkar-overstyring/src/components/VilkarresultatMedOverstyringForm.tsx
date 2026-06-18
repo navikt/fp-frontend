@@ -49,59 +49,11 @@ function erOverstyringAvMedlemskap(overstyringApKode: AksjonspunktKode) {
   ].includes(overstyringApKode);
 }
 
-const createInitialValues = (
-  aksjonspunkter: Aksjonspunkt[],
-  status: string,
-  overstyringApKode: VilkårOverstyringAksjonspunkter,
-  behandlingsresultat: BehandlingFpSak['behandlingsresultat'],
-  medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined,
-): FormValues => {
-  const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === overstyringApKode);
-  const felles = {
-    isOverstyrt: aksjonspunkt !== undefined,
-    begrunnelse: decodeHtmlEntity(aksjonspunkt?.begrunnelse ?? ''),
-  };
-
-  if (erOverstyringAvMedlemskap(overstyringApKode)) {
-    return aksjonspunkt
-      ? {
-          ...felles,
-          ...MedlemskapVurderinger.initialValues(medlemskapManuellBehandlingResultat),
-        }
-      : felles;
-  }
-  return {
-    ...felles,
-    ...VilkarResultPicker.buildInitialValues(aksjonspunkt ? [aksjonspunkt] : [], status, behandlingsresultat),
-  };
-};
-
 type OverstyringVilkår =
   | OverstyringAp
   | OverstyringMedlemskapsvilkaretLopendeAp
   | OverstyringMedlemskapsvilkaretAp
   | OverstyringMedlemskapvilkaretForutgaendeAp;
-
-const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyringAksjonspunkter): OverstyringVilkår => {
-  const felles = {
-    kode: overstyringApKode,
-    begrunnelse: values.begrunnelse,
-  };
-
-  switch (overstyringApKode) {
-    case AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET:
-    case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR:
-      return {
-        ...felles,
-        ...MedlemskapVurderinger.transformValues(values),
-      };
-    default:
-      return {
-        ...felles,
-        ...VilkarResultPicker.transformValues(values),
-      };
-  }
-};
 
 interface Props {
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined;
@@ -127,7 +79,7 @@ export const VilkarresultatMedOverstyringForm = ({
   const { erOverstyrt, toggleOverstyring, overstyringApKode, overrideReadOnly, kanOverstyreAccess } =
     usePanelOverstyring<VilkårOverstyringAksjonspunkter>();
 
-  const initialValues = createInitialValues(
+  const initialValues = buildInitialValues(
     behandling.aksjonspunkt,
     status,
     overstyringApKode,
@@ -238,4 +190,52 @@ export const VilkarresultatMedOverstyringForm = ({
       </HStack>
     </RhfForm>
   );
+};
+
+const buildInitialValues = (
+  aksjonspunkter: Aksjonspunkt[],
+  status: string,
+  overstyringApKode: VilkårOverstyringAksjonspunkter,
+  behandlingsresultat: BehandlingFpSak['behandlingsresultat'],
+  medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined,
+): FormValues => {
+  const aksjonspunkt = aksjonspunkter.find(ap => ap.definisjon === overstyringApKode);
+  const felles = {
+    isOverstyrt: aksjonspunkt !== undefined,
+    begrunnelse: decodeHtmlEntity(aksjonspunkt?.begrunnelse ?? ''),
+  };
+
+  if (erOverstyringAvMedlemskap(overstyringApKode)) {
+    return aksjonspunkt
+      ? {
+          ...felles,
+          ...MedlemskapVurderinger.initialValues(medlemskapManuellBehandlingResultat),
+        }
+      : felles;
+  }
+  return {
+    ...felles,
+    ...VilkarResultPicker.buildInitialValues(aksjonspunkt ? [aksjonspunkt] : [], status, behandlingsresultat),
+  };
+};
+
+const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyringAksjonspunkter): OverstyringVilkår => {
+  const felles = {
+    kode: overstyringApKode,
+    begrunnelse: values.begrunnelse,
+  };
+
+  switch (overstyringApKode) {
+    case AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET:
+    case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR:
+      return {
+        ...felles,
+        ...MedlemskapVurderinger.transformValues(values),
+      };
+    default:
+      return {
+        ...felles,
+        ...VilkarResultPicker.transformValues(values),
+      };
+  }
 };

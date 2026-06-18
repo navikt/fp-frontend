@@ -16,7 +16,7 @@ import { DekningsgradVisning } from './DekningsgradVisning';
 
 type FormValues = {
   dekningsgrad: number;
-  begrunnelse: string;
+  begrunnelse: string | undefined;
 };
 
 interface Props {
@@ -33,10 +33,7 @@ export const DekningradAP = ({ ytelseFordeling, aksjonspunkt }: Props) => {
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? {
-      dekningsgrad: ytelseFordeling.dekningsgrader.avklartDekningsgrad ?? undefined,
-      ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
-    },
+    defaultValues: mellomlagretFormData ?? buildInitialValues(ytelseFordeling, aksjonspunkt),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -113,6 +110,11 @@ export const DekningradAP = ({ ytelseFordeling, aksjonspunkt }: Props) => {
     </AksjonspunktBox>
   );
 };
+
+const buildInitialValues = (ytelseFordeling: Ytelsefordeling, aksjonspunkt: Aksjonspunkt): FormValues => ({
+  dekningsgrad: ytelseFordeling.dekningsgrader.avklartDekningsgrad as number,
+  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
+});
 
 const transformValues = (values: FormValues): AvklarDekningsgradAp => ({
   kode: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
