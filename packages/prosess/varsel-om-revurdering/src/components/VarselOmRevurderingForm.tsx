@@ -26,17 +26,11 @@ export type ForhandsvisData = {
 };
 
 type FormValues = {
-  kode: AksjonspunktKode.UTGÅTT_5025 | AksjonspunktKode.VARSEL_REVURDERING_MANUELL;
   begrunnelse?: string;
   sendVarsel?: boolean;
 };
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
-  kode: validerApKodeOgHentApEnum(
-    aksjonspunkter[0]?.definisjon,
-    AksjonspunktKode.UTGÅTT_5025,
-    AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
-  ),
   begrunnelse: aksjonspunkter[0]?.begrunnelse ?? '',
   sendVarsel: undefined,
 });
@@ -92,10 +86,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
   const håndterSubmitFraModal = (modalValues: ModalFormValues) => {
     void formMethods.trigger().then(isValid => {
       if (isValid) {
-        void submitCallback({
-          ...formVerdier,
-          ...modalValues,
-        });
+        void submitCallback(transformValues(formVerdier, aksjonspunkterForPanel, modalValues));
       }
       setSkalVisePåVentModal(false);
     });
@@ -112,7 +103,11 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
 
   return (
     <>
-      <RhfForm formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(transformValues(values, aksjonspunkterForPanel))}
+        setDataOnUnmount={setMellomlagretFormData}
+      >
         <VStack gap="space-16">
           <Heading size="small" level="2">
             <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
@@ -243,3 +238,15 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
     </>
   );
 };
+
+const transformValues = (
+  values: FormValues,
+  aksjonspunkter: Aksjonspunkt[],
+  modalValues?: ModalFormValues,
+): VarselRevurderingAp => ({
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0]?.definisjon, AksjonspunktKode.VARSEL_REVURDERING_MANUELL),
+  begrunnelse: values.begrunnelse,
+  sendVarsel: values.sendVarsel,
+  frist: modalValues?.frist,
+  ventearsak: modalValues?.ventearsak,
+});

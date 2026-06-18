@@ -11,7 +11,7 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
-import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { VurderArbeidsforholdInntektsmeldingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
@@ -46,7 +46,7 @@ export const ArbeidOgInntektFaktaPanel = ({
   const [erOverstyrt, setErOverstyrt] = useState(false);
 
   const { alleKodeverk, submitCallback, aksjonspunkterForPanel, behandling, fagsak, isReadOnly } =
-    usePanelDataContext<FaktaAksjonspunkt>();
+    usePanelDataContext<VurderArbeidsforholdInntektsmeldingAp>();
 
   const aksjonspunkt = aksjonspunkterForPanel.length > 0 ? aksjonspunkterForPanel[0] : undefined;
 

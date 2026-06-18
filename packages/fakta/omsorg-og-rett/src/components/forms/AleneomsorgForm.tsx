@@ -49,20 +49,14 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: P
     },
   });
 
-  const transformerFeltverdier = (feltVerdier: FormValues) =>
-    submitCallback({
-      kode: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-      aleneomsorg: feltVerdier.harAleneomsorg,
-      annenforelderHarRett: feltVerdier.harAnnenForelderRett,
-      annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
-      annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
-      ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
-    });
-
   const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== 'MORA' || harUføretrygd === 'JA';
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>
+    <RhfForm
+      formMethods={formMethods}
+      onSubmit={values => submitCallback(transformValues(values))}
+      setDataOnUnmount={setMellomlagretFormData}
+    >
       <FaktaGruppe
         withoutBorder
         merknaderFraBeslutter={
@@ -100,3 +94,12 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: P
     </RhfForm>
   );
 };
+
+const transformValues = (values: FormValues): BekreftAleneomsorgVurderingAp => ({
+  kode: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+  aleneomsorg: values.harAleneomsorg,
+  annenforelderHarRett: values.harAnnenForelderRett,
+  annenforelderMottarUføretrygd: values.mottarAnnenForelderUforetrygd,
+  annenForelderHarRettEØS: values.harAnnenForelderRettEØS,
+  ...FaktaBegrunnelseTextField.transformValues(values),
+});

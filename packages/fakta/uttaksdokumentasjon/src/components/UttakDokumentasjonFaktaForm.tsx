@@ -6,7 +6,7 @@ import { Button, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import type { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -31,29 +31,27 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
 
   const readOnly = isReadOnly || aksjonspunkterForPanel.length === 0;
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
-    dokBehov: DokumentasjonVurderingBehov[];
-    begrunnelse: string;
-  }>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<
+    {
+      dokBehov: DokumentasjonVurderingBehov[];
+    } & FaktaBegrunnelseFormValues
+  >();
 
   const [erBekreftKnappTrykket, setErBekreftKnappTrykket] = useState(false);
   const [dokBehov, setDokBehov] = useState<DokumentasjonVurderingBehov[]>(
     mellomlagretFormData?.dokBehov ?? dokumentasjonVurderingBehov,
   );
 
-  const bekreft = (begrunnelse: string) => {
+  const bekreft = (values: FaktaBegrunnelseFormValues) => {
     setErBekreftKnappTrykket(true);
-    void submitCallback({
-      kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-      vurderingBehov: dokBehov,
-      begrunnelse,
-    });
+    void submitCallback(transformValues(values, dokBehov));
   };
 
-  const lagretBegrunnelse = aksjonspunkterForPanel[0]?.begrunnelse ?? '';
-  const formMethods = useForm<{ begrunnelse: string }>({
+  const formMethods = useForm<FaktaBegrunnelseFormValues>({
     defaultValues: {
-      begrunnelse: mellomlagretFormData?.begrunnelse ?? lagretBegrunnelse,
+      begrunnelse:
+        mellomlagretFormData?.begrunnelse ??
+        FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel).begrunnelse,
     },
   });
 
@@ -83,7 +81,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
         setDirty={setIsDirty}
         readOnly={readOnly}
       />
-      <RhfForm formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
+      <RhfForm formMethods={formMethods} onSubmit={values => bekreft(values)}>
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
@@ -109,3 +107,12 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
     </VStack>
   );
 };
+
+const transformValues = (
+  values: FaktaBegrunnelseFormValues,
+  dokBehov: DokumentasjonVurderingBehov[],
+): VurderDokumentasjonAp => ({
+  kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+  vurderingBehov: dokBehov,
+  begrunnelse: values.begrunnelse,
+});

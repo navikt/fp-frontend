@@ -12,7 +12,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
@@ -52,16 +52,6 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   );
 
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
-
-  const bekreft = (begrunnelse: string) => {
-    return submitCallback({
-      kode: erOverstyrt
-        ? AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART
-        : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-      begrunnelse,
-      perioder: perioder,
-    });
-  };
 
   useEffect(() => {
     const periodeMap = perioder.map(({ fom, tom }) => [fom, tom]);
@@ -112,7 +102,10 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
         setDirty={setIsDirty}
         alleKodeverk={alleKodeverk}
       />
-      <RhfForm formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(transformValues(values, perioder, erOverstyrt))}
+      >
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
@@ -134,3 +127,15 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
     </VStack>
   );
 };
+
+const transformValues = (
+  values: FaktaBegrunnelseFormValues,
+  perioder: AnnenforelderUttakEøsPeriode[],
+  erOverstyrt: boolean,
+): BekreftAnnenpartsUttakEøsAp => ({
+  kode: erOverstyrt
+    ? AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART
+    : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+  perioder,
+  ...FaktaBegrunnelseTextField.transformValues(values),
+});
