@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 
@@ -19,6 +19,8 @@ import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
 import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
 import { useFpSakKodeverk } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';
+import { BEHANDLING_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
+import { useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
 import { EksterneRessurser } from './EksterneRessurser';
 import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
 
@@ -62,6 +64,36 @@ export const FagsakProfileIndex = ({
   const intl = useIntl();
   const [showAll, setShowAll] = useState(!behandlingUuid);
   const toggleShowAll = () => setShowAll(!showAll);
+
+  const behandlingsvelgerRef = useRef<HTMLDivElement>(null);
+  const fokuserVedNesteVisning = useRef(false);
+
+  const fokuserBehandlingsvelger = () => {
+    const lenker = behandlingsvelgerRef.current?.querySelectorAll<HTMLAnchorElement>('a');
+    const aktiv = behandlingsvelgerRef.current?.querySelector<HTMLAnchorElement>('a[aria-current="page"]');
+    const mål = aktiv ?? lenker?.[0];
+    if (mål) {
+      mål.scrollIntoView({ block: 'nearest' });
+      mål.focus();
+    }
+  };
+
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER, () => {
+    if (showAll) {
+      fokuserBehandlingsvelger();
+    } else {
+      // Lista er kollapsa: vis alle behandlingar fyrst, fokuser når dei er rendra.
+      fokuserVedNesteVisning.current = true;
+      setShowAll(true);
+    }
+  });
+
+  useEffect(() => {
+    if (showAll && fokuserVedNesteVisning.current) {
+      fokuserVedNesteVisning.current = false;
+      fokuserBehandlingsvelger();
+    }
+  }, [showAll]);
 
   const api = useFagsakApi();
   const { data: alleFpSakKodeverk } = useQuery(api.kodeverkOptions());
@@ -148,7 +180,7 @@ export const FagsakProfileIndex = ({
           }
         >
           {!shouldRedirectToBehandlinger && (
-            <div>
+            <div ref={behandlingsvelgerRef}>
               <ErrorBoundary
                 errorMessageCallback={addErrorMessage}
                 errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}

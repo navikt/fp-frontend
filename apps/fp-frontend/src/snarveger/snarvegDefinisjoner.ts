@@ -29,6 +29,7 @@ export const BEHANDLING_SNARVEG_IDER = {
   STOTTE_FRA_BESLUTTER: 'stotte-fra-beslutter',
   UTVID_DETALJER: 'utvid-detaljer',
   AAPNE_BEHANDLINGSMENY: 'aapne-behandlingsmeny',
+  FOKUSER_BEHANDLINGSVELGER: 'fokuser-behandlingsvelger',
   FORRIGE_PROSESS: 'forrige-prosess',
   NESTE_PROSESS: 'neste-prosess',
   FORRIGE_FAKTA: 'forrige-fakta',
@@ -117,6 +118,12 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
     gruppe: 'behandling',
     taster: ['M'],
     beskrivelseId: 'Snarveger.AapneBehandlingsmeny',
+  },
+  {
+    id: BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER,
+    gruppe: 'behandling',
+    taster: ['B'],
+    beskrivelseId: 'Snarveger.FokuserBehandlingsvelger',
   },
   {
     id: BEHANDLING_SNARVEG_IDER.FORRIGE_PROSESS,
