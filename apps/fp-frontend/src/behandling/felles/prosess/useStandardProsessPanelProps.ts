@@ -123,19 +123,32 @@ const getBekreftAksjonspunktProsessCallback =
     const aksjonspunkterTilLagring = aksjonspunkter.filter(ap =>
       apListe.some(apModel => apModel.kode === ap.definisjon),
     );
-    const erOverstyringsaksjonspunkter = aksjonspunkterTilLagring.some(
-      ap => ap.aksjonspunktType === 'OVST' || ap.aksjonspunktType === 'SAOV',
-    );
+    // Rut til overstyr-endepunktet basert på faktisk aksjonspunktkode, ikke på fravær av matchende
+    // aksjonspunkt. Overstyringskoder (6xxx) finnes ikke i behandlingen før de opprettes, så de
+    // matcher ingen eksisterende aksjonspunkt – men det gjør heller ikke et manuelt aksjonspunkt
+    // som vises uten åpent aksjonspunkt. Kun overstyringskoder kan deserialiseres av overstyr-endepunktet.
+    const erOverstyring =
+      models.some(model => model.kode.startsWith('6')) ||
+      aksjonspunkterTilLagring.some(ap => ap.aksjonspunktType === 'OVST' || ap.aksjonspunktType === 'SAOV');
 
     if (apListe.length === 0) {
       throw new Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
     }
 
-    if (aksjonspunkterTilLagring.length === 0 || erOverstyringsaksjonspunkter) {
+    if (erOverstyring) {
       return lagreOverstyrteAksjonspunkter({
         ...params,
         overstyrteAksjonspunktDtoer: models,
       }).then(etterLagringCallback);
+    }
+
+    // Fail-fast: et aksjonspunkt uten matchende aksjonspunkt i behandlingen som ikke er en overstyring
+    // er en programmeringsfeil (f.eks. et panel som er redigerbart uten åpent aksjonspunkt). Feil tydelig
+    // her i stedet for å sende koden til overstyr-endepunktet og få en kryptisk Jackson-feil fra backend.
+    if (aksjonspunkterTilLagring.length === 0) {
+      throw new Error(
+        `Forsøk på å lagre aksjonspunkt ${models.map(model => model.kode).join(', ')} uten matchende aksjonspunkt i behandlingen og uten at det er en overstyring.`,
+      );
     }
 
     return lagreAksjonspunkter({
