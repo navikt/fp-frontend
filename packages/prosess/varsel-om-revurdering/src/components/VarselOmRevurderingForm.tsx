@@ -41,11 +41,6 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   sendVarsel: undefined,
 });
 
-const transformValues = (values: FormValues, modalValues?: ModalFormValues): VarselRevurderingAp => ({
-  ...values,
-  ...modalValues,
-});
-
 interface Props {
   previewCallback: (data: ForhandsvisData) => void;
   hentVarselHtml?: () => Promise<BrevOverstyring>;
@@ -249,3 +244,11 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
     </>
   );
 };
+
+const transformValues = (values: FormValues, modalValues?: ModalFormValues): VarselRevurderingAp => ({
+  kode: values.kode,
+  begrunnelse: values.begrunnelse,
+  sendVarsel: values.sendVarsel,
+  frist: modalValues?.frist,
+  ventearsak: modalValues?.ventearsak,
+});
