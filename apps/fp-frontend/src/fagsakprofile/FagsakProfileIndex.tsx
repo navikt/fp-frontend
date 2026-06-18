@@ -68,15 +68,57 @@ export const FagsakProfileIndex = ({
   const behandlingsvelgerRef = useRef<HTMLDivElement>(null);
   const fokuserVedNesteVisning = useRef(false);
 
-  const fokuserBehandlingsvelger = () => {
-    const lenker = behandlingsvelgerRef.current?.querySelectorAll<HTMLAnchorElement>('a');
-    const aktiv = behandlingsvelgerRef.current?.querySelector<HTMLAnchorElement>('a[aria-current="page"]');
-    const mål = aktiv ?? lenker?.[0];
-    if (mål) {
-      mål.scrollIntoView({ block: 'nearest' });
-      mål.focus();
+  const hentBehandlingsvelgerRader = (): HTMLElement[] =>
+    Array.from(behandlingsvelgerRef.current?.querySelectorAll<HTMLElement>('a, button') ?? []);
+
+  const fokuserRad = (index: number) => {
+    const rader = hentBehandlingsvelgerRader();
+    if (rader.length === 0) {
+      return;
+    }
+    const normalisert = ((index % rader.length) + rader.length) % rader.length;
+    const rad = rader[normalisert];
+    if (rad) {
+      rad.scrollIntoView({ block: 'nearest' });
+      rad.focus();
     }
   };
+
+  const fokuserBehandlingsvelger = () => {
+    const rader = hentBehandlingsvelgerRader();
+    const aktivIndex = rader.findIndex(rad => rad.getAttribute('aria-current') === 'page');
+    fokuserRad(aktivIndex === -1 ? 0 : aktivIndex);
+  };
+
+  const håndterBehandlingsvelgerTaster = (event: KeyboardEvent) => {
+    const rader = hentBehandlingsvelgerRader();
+    if (rader.length === 0) {
+      return;
+    }
+    const aktivIndex = rader.findIndex(rad => rad === document.activeElement);
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      fokuserRad(aktivIndex + 1);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      fokuserRad(aktivIndex - 1);
+    } else if (event.key === 'Home') {
+      event.preventDefault();
+      fokuserRad(0);
+    } else if (event.key === 'End') {
+      event.preventDefault();
+      fokuserRad(rader.length - 1);
+    }
+  };
+
+  useEffect(() => {
+    const element = behandlingsvelgerRef.current;
+    if (!element) {
+      return undefined;
+    }
+    element.addEventListener('keydown', håndterBehandlingsvelgerTaster);
+    return () => element.removeEventListener('keydown', håndterBehandlingsvelgerTaster);
+  });
 
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER, () => {
     if (showAll) {
