@@ -6,16 +6,15 @@ import { VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { BesteberegningAP, ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = {
-  begrunnelse: string | undefined;
   besteberegningErKorrektValg?: boolean;
-};
+} & FaktaBegrunnelseFormValues;
 
 interface Props {
   aksjonspunkt: Aksjonspunkt;

@@ -6,18 +6,17 @@ import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DekningsgradVisning } from './DekningsgradVisning';
 
 type FormValues = {
-  dekningsgrad: number;
-  begrunnelse: string | undefined;
-};
+  dekningsgrad: number | undefined;
+} & FaktaBegrunnelseFormValues;
 
 interface Props {
   ytelseFordeling: Ytelsefordeling;
@@ -112,11 +111,12 @@ export const DekningradAP = ({ ytelseFordeling, aksjonspunkt }: Props) => {
 };
 
 const buildInitialValues = (ytelseFordeling: Ytelsefordeling, aksjonspunkt: Aksjonspunkt): FormValues => ({
-  dekningsgrad: ytelseFordeling.dekningsgrader.avklartDekningsgrad as number,
+  dekningsgrad: ytelseFordeling.dekningsgrader.avklartDekningsgrad,
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
 const transformValues = (values: FormValues): AvklarDekningsgradAp => ({
   kode: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-  ...values,
+  dekningsgrad: notEmpty(values.dekningsgrad),
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });

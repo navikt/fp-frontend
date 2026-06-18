@@ -4,9 +4,9 @@ import { VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
+import type { Aksjonspunkt, OmsorgOgRett } from '@navikt/fp-types';
 import type { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -16,8 +16,7 @@ type FormValues = {
   harAnnenForelderRett: boolean;
   mottarAnnenForelderUforetrygd?: boolean;
   harAnnenForelderRettEØS?: boolean;
-  begrunnelse: string;
-};
+} & FaktaBegrunnelseFormValues;
 
 interface Props {
   omsorgOgRett: OmsorgOgRett;

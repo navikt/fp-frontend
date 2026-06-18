@@ -7,7 +7,7 @@ import { RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett, type Rettighetstype } from '@navikt/fp-types';
 import type { OverstyringRettigheterAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -17,8 +17,7 @@ import styles from './overstyrRettigheterForm.module.css';
 
 type FormValues = {
   rettighetstype: Rettighetstype;
-  begrunnelse: string;
-};
+} & FaktaBegrunnelseFormValues;
 
 interface Props {
   omsorgOgRett: OmsorgOgRett;

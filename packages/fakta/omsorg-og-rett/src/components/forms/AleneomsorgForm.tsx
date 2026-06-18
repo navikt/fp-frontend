@@ -6,7 +6,12 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@navikt/fp-fakta-felles';
+import {
+  type FaktaBegrunnelseFormValues,
+  FaktaBegrunnelseTextField,
+  FaktaSubmitButton,
+  TrueFalseInput,
+} from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
 import type { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -19,8 +24,7 @@ type FormValues = {
   harAnnenForelderRett?: boolean;
   mottarAnnenForelderUforetrygd?: boolean;
   harAnnenForelderRettEØS?: boolean;
-  begrunnelse: string;
-};
+} & FaktaBegrunnelseFormValues;
 
 interface Props {
   omsorgOgRett: OmsorgOgRett;
