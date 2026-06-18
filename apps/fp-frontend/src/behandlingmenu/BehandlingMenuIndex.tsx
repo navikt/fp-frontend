@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon } from '@navikt/aksel-icons';
@@ -63,7 +63,59 @@ export const BehandlingMenuIndex = ({
   const lukkModal = () => setValgtModal(undefined);
 
   const toggleRef = useRef<HTMLButtonElement>(null);
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.AAPNE_BEHANDLINGSMENY, () => toggleRef.current?.click());
+  const menyRef = useRef<HTMLDivElement>(null);
+  const [menyAapen, setMenyAapen] = useState(false);
+  const fokuserFørsteVedAapning = useRef(false);
+
+  const hentMenyKnappar = (): HTMLButtonElement[] =>
+    Array.from(menyRef.current?.querySelectorAll<HTMLButtonElement>('button.aksel-dropdown__item') ?? []);
+
+  const fokuserMenyKnapp = (index: number) => {
+    const knappar = hentMenyKnappar();
+    if (knappar.length === 0) {
+      return;
+    }
+    const normalisert = ((index % knappar.length) + knappar.length) % knappar.length;
+    knappar[normalisert]?.focus();
+  };
+
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.AAPNE_BEHANDLINGSMENY, () => {
+    fokuserFørsteVedAapning.current = true;
+    setMenyAapen(true);
+  });
+
+  useEffect(() => {
+    if (menyAapen && fokuserFørsteVedAapning.current) {
+      fokuserFørsteVedAapning.current = false;
+      fokuserMenyKnapp(0);
+    }
+  }, [menyAapen]);
+
+  const håndterMenyTaster = (event: React.KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      setMenyAapen(false);
+      toggleRef.current?.focus();
+      return;
+    }
+    const knappar = hentMenyKnappar();
+    if (knappar.length === 0) {
+      return;
+    }
+    const aktivIndex = knappar.findIndex(knapp => knapp === document.activeElement);
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      fokuserMenyKnapp(aktivIndex + 1);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      fokuserMenyKnapp(aktivIndex - 1);
+    } else if (event.key === 'Home') {
+      event.preventDefault();
+      fokuserMenyKnapp(0);
+    } else if (event.key === 'End') {
+      event.preventDefault();
+      fokuserMenyKnapp(knappar.length - 1);
+    }
+  };
 
   const fagsak = fagsakData.getFagsak();
   const behandlingAppContext = fagsakData.getBehandling(behandlingUuid);
@@ -72,7 +124,7 @@ export const BehandlingMenuIndex = ({
 
   return (
     <>
-      <Dropdown>
+      <Dropdown open={menyAapen} onOpenChange={setMenyAapen}>
         <Button
           ref={toggleRef}
           size="small"
@@ -83,7 +135,7 @@ export const BehandlingMenuIndex = ({
         >
           <FormattedMessage id="BehandlingMenuIndex.Behandlingsmeny" />
         </Button>
-        <Dropdown.Menu>
+        <Dropdown.Menu ref={menyRef} onKeyDown={håndterMenyTaster}>
           <Dropdown.Menu.List>
             {Object.keys(menyData)
               .filter(key => !menyData[key]!.disabled)

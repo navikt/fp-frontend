@@ -9,7 +9,8 @@ import { getAvdelingslederLenke, getJournalføringLenke } from '@navikt/fp-konst
 import { type DekoratorLenke } from '@navikt/fp-sak-dekorator';
 import type { NavAnsatt } from '@navikt/fp-types';
 
-import { useSnarvegerContextValgfri } from '../../snarveger/SnarvegerContext';
+import { GLOBALE_SNARVEG_IDER } from '../../snarveger/snarvegDefinisjoner';
+import { useRegistrerSnarveg,useSnarvegerContextValgfri } from '../../snarveger/SnarvegerContext';
 import { SNARVEGER_PATH, UTBETALINGSDATA_PATH } from '../paths';
 
 interface Props {
@@ -47,6 +48,17 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
       void navigate(SNARVEGER_PATH);
     }
   };
+
+  useRegistrerSnarveg(
+    GLOBALE_SNARVEG_IDER.GAA_AVDELINGSLEDER,
+    () => (globalThis.location.href = getAvdelingslederLenke()),
+    kanOppgavestyre,
+  );
+  useRegistrerSnarveg(
+    GLOBALE_SNARVEG_IDER.GAA_JOURNALFORING,
+    () => (globalThis.location.href = getJournalføringLenke()),
+    kanSaksbehandle,
+  );
 
   const interneLenker: DekoratorLenke[] = [];
   if (kanOppgavestyre) {

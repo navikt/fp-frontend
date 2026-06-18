@@ -16,6 +16,8 @@ export const GLOBALE_SNARVEG_IDER = {
   HJELP: 'hjelp',
   GAA_OPPGAVELISTE: 'gaa-oppgaveliste',
   GAA_INFOTRYGD: 'gaa-infotrygd',
+  GAA_AVDELINGSLEDER: 'gaa-avdelingsleder',
+  GAA_JOURNALFORING: 'gaa-journalforing',
 } as const;
 
 export const BEHANDLING_SNARVEG_IDER = {
@@ -51,6 +53,20 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
     gruppe: 'global',
     taster: ['G', 'I'],
     beskrivelseId: 'Snarveger.GaaInfotrygd',
+  },
+  {
+    id: GLOBALE_SNARVEG_IDER.GAA_AVDELINGSLEDER,
+    gruppe: 'global',
+    taster: ['G', 'A'],
+    beskrivelseId: 'Snarveger.GaaAvdelingsleder',
+    kunNarTilgjengelig: true,
+  },
+  {
+    id: GLOBALE_SNARVEG_IDER.GAA_JOURNALFORING,
+    gruppe: 'global',
+    taster: ['G', 'J'],
+    beskrivelseId: 'Snarveger.GaaJournalforing',
+    kunNarTilgjengelig: true,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.STOTTE_HISTORIKK,
@@ -105,25 +121,25 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
   {
     id: BEHANDLING_SNARVEG_IDER.FORRIGE_PROSESS,
     gruppe: 'behandling',
-    taster: ['['],
+    taster: [','],
     beskrivelseId: 'Snarveger.ForrigeProsess',
   },
   {
     id: BEHANDLING_SNARVEG_IDER.NESTE_PROSESS,
     gruppe: 'behandling',
-    taster: [']'],
+    taster: ['.'],
     beskrivelseId: 'Snarveger.NesteProsess',
   },
   {
     id: BEHANDLING_SNARVEG_IDER.FORRIGE_FAKTA,
     gruppe: 'behandling',
-    taster: [','],
+    taster: ['PageUp'],
     beskrivelseId: 'Snarveger.ForrigeFakta',
   },
   {
     id: BEHANDLING_SNARVEG_IDER.NESTE_FAKTA,
     gruppe: 'behandling',
-    taster: ['.'],
+    taster: ['PageDown'],
     beskrivelseId: 'Snarveger.NesteFakta',
   },
 ];

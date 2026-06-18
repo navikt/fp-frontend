@@ -88,7 +88,7 @@ export const useGlobalSnarveger = (): void => {
       if (ventarPaaSekvens.current) {
         const def = finnSekvensDefinisjon('G', normaliserTast(event.key));
         nullstillSekvens();
-        if (def && utforSekvenshandling(def.id)) {
+        if (def && (utforSekvenshandling(def.id) || tilstand.current.dispatch(def.id))) {
           event.preventDefault();
         }
         return;
