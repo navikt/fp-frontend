@@ -41,6 +41,11 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   sendVarsel: undefined,
 });
 
+const transformValues = (values: FormValues, modalValues?: ModalFormValues): VarselRevurderingAp => ({
+  ...values,
+  ...modalValues,
+});
+
 interface Props {
   previewCallback: (data: ForhandsvisData) => void;
   hentVarselHtml?: () => Promise<BrevOverstyring>;
@@ -92,10 +97,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
   const håndterSubmitFraModal = (modalValues: ModalFormValues) => {
     void formMethods.trigger().then(isValid => {
       if (isValid) {
-        void submitCallback({
-          ...formVerdier,
-          ...modalValues,
-        });
+        void submitCallback(transformValues(formVerdier, modalValues));
       }
       setSkalVisePåVentModal(false);
     });
@@ -112,7 +114,11 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
 
   return (
     <>
-      <RhfForm formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(transformValues(values))}
+        setDataOnUnmount={setMellomlagretFormData}
+      >
         <VStack gap="space-16">
           <Heading size="small" level="2">
             <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
