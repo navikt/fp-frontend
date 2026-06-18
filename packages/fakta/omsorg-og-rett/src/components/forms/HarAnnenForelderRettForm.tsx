@@ -46,17 +46,12 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmitt
 
   const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== 'MORA' || harUføretrygd === 'JA';
 
-  const transformerFeltverdier = (feltVerdier: FormValues) =>
-    submitCallback({
-      kode: AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
-      annenforelderHarRett: feltVerdier.harAnnenForelderRett,
-      annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
-      annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
-      ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
-    });
-
   return (
-    <RhfForm formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>
+    <RhfForm
+      formMethods={formMethods}
+      onSubmit={values => submitCallback(transformValues(values))}
+      setDataOnUnmount={setMellomlagretFormData}
+    >
       <FaktaGruppe
         withoutBorder
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT]}
@@ -82,3 +77,11 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmitt
     </RhfForm>
   );
 };
+
+const transformValues = (values: FormValues): AvklarAnnenforelderHarRettAp => ({
+  kode: AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
+  annenforelderHarRett: values.harAnnenForelderRett,
+  annenforelderMottarUføretrygd: values.mottarAnnenForelderUforetrygd,
+  annenForelderHarRettEØS: values.harAnnenForelderRettEØS,
+  ...FaktaBegrunnelseTextField.transformValues(values),
+});

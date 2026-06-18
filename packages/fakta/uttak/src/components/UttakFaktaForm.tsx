@@ -198,33 +198,6 @@ export const UttakFaktaForm = ({
   const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
     a => a.definisjon !== AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
   );
-  const bekreft = (begrunnelse: string) => {
-    const overstyrAp = [
-      {
-        // TODO Fiks hack
-        kode: validerApKodeOgHentApEnum(
-          AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
-          AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
-        ),
-        perioder: uttakPerioder,
-        begrunnelse,
-      },
-    ];
-
-    const aksjonspunkterSomSkalBekreftes = automatiskeAksjonspunkter.map(ap => ({
-      kode: validerApKodeOgHentApEnum(
-        ap.definisjon,
-        AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-        AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
-      ),
-      perioder: uttakPerioder,
-      begrunnelse,
-    }));
-
-    return submitCallback(aksjonspunkterSomSkalBekreftes.length > 0 ? aksjonspunkterSomSkalBekreftes : overstyrAp);
-  };
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
@@ -285,7 +258,12 @@ export const UttakFaktaForm = ({
         visNyPeriode={visNyPeriode}
         settVisNyPeriode={setVisNyPeriode}
       />
-      <RhfForm formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={(values: { begrunnelse: string }) =>
+          submitCallback(transformValues(values, uttakPerioder, automatiskeAksjonspunkter))
+        }
+      >
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
@@ -305,4 +283,38 @@ export const UttakFaktaForm = ({
       </RhfForm>
     </VStack>
   );
+};
+
+const transformValues = (
+  values: { begrunnelse: string },
+  uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[],
+  automatiskeAksjonspunkter: Aksjonspunkt[],
+): BekreftUttaksperioderAp[] => {
+  const { begrunnelse } = values;
+
+  const overstyrAp = [
+    {
+      // TODO Fiks hack
+      kode: validerApKodeOgHentApEnum(
+        AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+        AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+      ),
+      perioder: uttakPerioder,
+      begrunnelse,
+    },
+  ];
+
+  const aksjonspunkterSomSkalBekreftes = automatiskeAksjonspunkter.map(ap => ({
+    kode: validerApKodeOgHentApEnum(
+      ap.definisjon,
+      AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
+      AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
+      AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
+      AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
+    ),
+    perioder: uttakPerioder,
+    begrunnelse,
+  }));
+
+  return aksjonspunkterSomSkalBekreftes.length > 0 ? aksjonspunkterSomSkalBekreftes : overstyrAp;
 };

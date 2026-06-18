@@ -173,12 +173,7 @@ export const NyBehandlingModal = ({
 
   const formMethods = useForm<FormValues>();
 
-  const onSubmit = (values: FormValues) =>
-    submitCallback({
-      ...values,
-      eksternUuid: uuidForSistLukkede,
-      fagsakYtelseType: ytelseType,
-    });
+  const onSubmit = (values: FormValues) => submitCallback(transformValues(values, uuidForSistLukkede, ytelseType));
 
   const valgtBehandlingTypeKode = formMethods.watch('behandlingType');
 
@@ -251,3 +246,13 @@ export const NyBehandlingModal = ({
     </Dialog>
   );
 };
+
+const transformValues = (
+  values: FormValues,
+  eksternUuid: string | undefined,
+  fagsakYtelseType: string,
+): { eksternUuid?: string; fagsakYtelseType: string } & FormValues => ({
+  ...values,
+  eksternUuid,
+  fagsakYtelseType,
+});

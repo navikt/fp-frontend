@@ -137,22 +137,9 @@ export const OpptjeningFaktaPanel = ({
   const bekreft = () => {
     setIsSubmitting(true);
 
-    const opptjeningsaktiviteterSomSkallagres = filtrerteOgSorterteOpptjeningsaktiviteter
-      .map<OpptjeningAktivitetAp>((a, index) => ({
-        arbeidsforholdRef: a.arbeidsforholdRef,
-        arbeidsgiverReferanse: a.arbeidsgiverReferanse,
-        opptjeningFom: a.opptjeningFom,
-        opptjeningTom: a.opptjeningTom,
-        aktivitetType: a.aktivitetType,
-        erGodkjent: !!formVerdierForAlleAktiviteter[index]!.erGodkjent,
-        begrunnelse: formVerdierForAlleAktiviteter[index]!.begrunnelse,
-      }))
-      .filter(b => b.begrunnelse);
-
-    void submitCallback({
-      opptjeningsaktiviteter: opptjeningsaktiviteterSomSkallagres,
-      kode: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-    }).then(() => setIsSubmitting(false));
+    void submitCallback(transformValues(formVerdierForAlleAktiviteter, filtrerteOgSorterteOpptjeningsaktiviteter)).then(
+      () => setIsSubmitting(false),
+    );
   };
 
   const velgNesteAktivitet = () => {
@@ -248,3 +235,21 @@ const finnInitialFokusAktivitet = (opptjeningsAktiviteter: OpptjeningAktivitet[]
   if (førsteAktivitetSomIkkeErGodkjent !== -1) return førsteAktivitetSomIkkeErGodkjent;
   return 0;
 };
+
+const transformValues = (
+  values: FormValues[],
+  filtrerteOgSorterteOpptjeningsaktiviteter: OpptjeningAktivitet[],
+): AvklarAktivitetsPerioderAp => ({
+  opptjeningsaktiviteter: filtrerteOgSorterteOpptjeningsaktiviteter
+    .map<OpptjeningAktivitetAp>((a, index) => ({
+      arbeidsforholdRef: a.arbeidsforholdRef,
+      arbeidsgiverReferanse: a.arbeidsgiverReferanse,
+      opptjeningFom: a.opptjeningFom,
+      opptjeningTom: a.opptjeningTom,
+      aktivitetType: a.aktivitetType,
+      erGodkjent: !!values[index]!.erGodkjent,
+      begrunnelse: values[index]!.begrunnelse,
+    }))
+    .filter(b => b.begrunnelse),
+  kode: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+});

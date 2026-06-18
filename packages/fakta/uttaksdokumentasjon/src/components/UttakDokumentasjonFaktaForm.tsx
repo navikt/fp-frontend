@@ -41,13 +41,9 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
     mellomlagretFormData?.dokBehov ?? dokumentasjonVurderingBehov,
   );
 
-  const bekreft = (begrunnelse: string) => {
+  const bekreft = (values: { begrunnelse: string }) => {
     setErBekreftKnappTrykket(true);
-    void submitCallback({
-      kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-      vurderingBehov: dokBehov,
-      begrunnelse,
-    });
+    void submitCallback(transformValues(values, dokBehov));
   };
 
   const lagretBegrunnelse = aksjonspunkterForPanel[0]?.begrunnelse ?? '';
@@ -83,7 +79,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
         setDirty={setIsDirty}
         readOnly={readOnly}
       />
-      <RhfForm formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
+      <RhfForm formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values)}>
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
@@ -109,3 +105,12 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
     </VStack>
   );
 };
+
+const transformValues = (
+  values: { begrunnelse: string },
+  dokBehov: DokumentasjonVurderingBehov[],
+): VurderDokumentasjonAp => ({
+  kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+  vurderingBehov: dokBehov,
+  begrunnelse: values.begrunnelse,
+});

@@ -94,17 +94,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
       )}
       <RhfForm
         formMethods={formMethods}
-        onSubmit={values =>
-          submitCallback({
-            kode: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
-            arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
-              internArbeidsforholdId: sorterteArbeidsforhold[index]?.internArbeidsforholdId,
-              arbeidsgiverIdent: sorterteArbeidsforhold[index]?.arbeidsgiverIdent ?? '',
-              permisjonStatus: a.permisjonStatus,
-            })),
-            begrunnelse: values.begrunnelse,
-          })
-        }
+        onSubmit={values => submitCallback(transformValues(values, sorterteArbeidsforhold))}
       >
         <VStack gap="space-24">
           <ArbeidsforholdFieldArray
@@ -146,3 +136,16 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
     </VStack>
   );
 };
+
+const transformValues = (
+  values: FormValues,
+  sorterteArbeidsforhold: Arbeidsforhold[],
+): VurderArbeidsforholdPermisjonAp => ({
+  kode: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
+  arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
+    internArbeidsforholdId: sorterteArbeidsforhold[index]?.internArbeidsforholdId,
+    arbeidsgiverIdent: sorterteArbeidsforhold[index]?.arbeidsgiverIdent ?? '',
+    permisjonStatus: a.permisjonStatus,
+  })),
+  begrunnelse: values.begrunnelse,
+});
