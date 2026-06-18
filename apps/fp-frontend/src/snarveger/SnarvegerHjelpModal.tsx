@@ -2,8 +2,8 @@ import { useIntl } from 'react-intl';
 
 import { Dialog } from '@navikt/ds-react';
 
-import { SnarvegerOversikt } from './SnarvegerOversikt';
 import { useSnarvegerContext } from './SnarvegerContext';
+import { SnarvegerOversikt } from './SnarvegerOversikt';
 
 /**
  * Hjelp-modal som viser alle tastatursnarvegane. Opnast globalt med `?`.

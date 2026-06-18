@@ -7,7 +7,10 @@ import { SideMenu } from '@navikt/ft-plattform-komponenter';
 
 import type { Behandling } from '@navikt/fp-types';
 
+import { BEHANDLING_SNARVEG_IDER } from '../../../snarveger/snarvegDefinisjoner';
+import { useRegistrerSnarveg } from '../../../snarveger/SnarvegerContext';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
+import { finnNabopanelId } from '../menyNavigasjon';
 import { type FaktaPanelMedÅpentApInfo, type FaktaPanelMenyData, useFaktaPanelMenyData } from './useFaktaPanelMenyData';
 
 import styles from './faktaMeny.module.css';
@@ -30,6 +33,16 @@ export const FaktaMeny = <T extends Behandling>({
   const { oppdaterProsessStegOgFaktaPanelIUrl } = useBehandlingDataContext<T>();
 
   const { faktaPanelMenyData, settFaktaPanelMenyData } = useFaktaPanelMenyData(setFaktaPanelMedÅpentApInfo);
+
+  const byttFaktaPanel = (retning: 1 | -1) => {
+    const nyId = finnNabopanelId(faktaPanelMenyData, retning);
+    if (nyId) {
+      oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, nyId);
+    }
+  };
+
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.NESTE_FAKTA, () => byttFaktaPanel(1));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.FORRIGE_FAKTA, () => byttFaktaPanel(-1));
 
   //Denne er alltid false ved første render siden ingen paneler er registrert på dette tidspunktet
   const harFaktapaneler = faktaPanelMenyData.length > 0;

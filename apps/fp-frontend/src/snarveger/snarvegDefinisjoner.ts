@@ -26,6 +26,11 @@ export const BEHANDLING_SNARVEG_IDER = {
   STOTTE_TIL_BESLUTTER: 'stotte-til-beslutter',
   STOTTE_FRA_BESLUTTER: 'stotte-fra-beslutter',
   UTVID_DETALJER: 'utvid-detaljer',
+  AAPNE_BEHANDLINGSMENY: 'aapne-behandlingsmeny',
+  FORRIGE_PROSESS: 'forrige-prosess',
+  NESTE_PROSESS: 'neste-prosess',
+  FORRIGE_FAKTA: 'forrige-fakta',
+  NESTE_FAKTA: 'neste-fakta',
 } as const;
 
 export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
@@ -90,6 +95,36 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
     gruppe: 'behandling',
     taster: ['E'],
     beskrivelseId: 'Snarveger.UtvidDetaljer',
+  },
+  {
+    id: BEHANDLING_SNARVEG_IDER.AAPNE_BEHANDLINGSMENY,
+    gruppe: 'behandling',
+    taster: ['M'],
+    beskrivelseId: 'Snarveger.AapneBehandlingsmeny',
+  },
+  {
+    id: BEHANDLING_SNARVEG_IDER.FORRIGE_PROSESS,
+    gruppe: 'behandling',
+    taster: ['['],
+    beskrivelseId: 'Snarveger.ForrigeProsess',
+  },
+  {
+    id: BEHANDLING_SNARVEG_IDER.NESTE_PROSESS,
+    gruppe: 'behandling',
+    taster: [']'],
+    beskrivelseId: 'Snarveger.NesteProsess',
+  },
+  {
+    id: BEHANDLING_SNARVEG_IDER.FORRIGE_FAKTA,
+    gruppe: 'behandling',
+    taster: [','],
+    beskrivelseId: 'Snarveger.ForrigeFakta',
+  },
+  {
+    id: BEHANDLING_SNARVEG_IDER.NESTE_FAKTA,
+    gruppe: 'behandling',
+    taster: ['.'],
+    beskrivelseId: 'Snarveger.NesteFakta',
   },
 ];
 

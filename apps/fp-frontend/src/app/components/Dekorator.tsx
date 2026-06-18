@@ -9,6 +9,7 @@ import { getAvdelingslederLenke, getJournalføringLenke } from '@navikt/fp-konst
 import { type DekoratorLenke } from '@navikt/fp-sak-dekorator';
 import type { NavAnsatt } from '@navikt/fp-types';
 
+import { useSnarvegerContextValgfri } from '../../snarveger/SnarvegerContext';
 import { SNARVEGER_PATH, UTBETALINGSDATA_PATH } from '../paths';
 
 interface Props {
@@ -27,6 +28,7 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
   const { navn = '', kanOppgavestyre = false, kanSaksbehandle = false } = navAnsatt ?? {};
 
   const navigate = useNavigate();
+  const snarvegerContext = useSnarvegerContextValgfri();
   const gotToAppRoot = () => {
     void navigate('/');
   };
@@ -36,9 +38,14 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
     e.preventDefault();
   };
 
-  const visSnarvegerSide = (e: React.SyntheticEvent) => {
-    void navigate(SNARVEGER_PATH);
+  const visSnarveger = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    // Opnar hjelp-modalen om snarveg-konteksten finst, elles navigerast til snarvegsida.
+    if (snarvegerContext) {
+      snarvegerContext.settHjelpAapen(true);
+    } else {
+      void navigate(SNARVEGER_PATH);
+    }
   };
 
   const interneLenker: DekoratorLenke[] = [];
@@ -60,7 +67,7 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
   });
   interneLenker.push({
     tekst: intl.formatMessage({ id: 'Dekorator.Tastatursnarvegar' }),
-    callback: (e: React.SyntheticEvent) => visSnarvegerSide(e),
+    callback: (e: React.SyntheticEvent) => visSnarveger(e),
   });
 
   return (

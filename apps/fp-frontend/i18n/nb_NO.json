@@ -24,6 +24,11 @@
   "Snarveger.StotteTilBeslutter": "Vis til godkjenning",
   "Snarveger.StotteFraBeslutter": "Vis fra beslutter",
   "Snarveger.UtvidDetaljer": "Utvid eller minsk behandlingsdetaljer",
+  "Snarveger.AapneBehandlingsmeny": "Åpne behandlingsmenyen",
+  "Snarveger.ForrigeProsess": "Forrige prosesspanel",
+  "Snarveger.NesteProsess": "Neste prosesspanel",
+  "Snarveger.ForrigeFakta": "Forrige faktapanel",
+  "Snarveger.NesteFakta": "Neste faktapanel",
 
   "DokumentIndex.Dokumenter": "Dokumenter",
   "MeldingIndex.Meldinger": "Meldinger",

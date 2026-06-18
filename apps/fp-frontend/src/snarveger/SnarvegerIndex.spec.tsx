@@ -25,7 +25,7 @@ describe('SnarvegerIndex', () => {
   it('skal la brukeren slå snarveiene av og på', () => {
     render(<Default />);
 
-    const bryter = screen.getByRole('switch', { name: 'Bruk tastatursnarveier' });
+    const bryter = screen.getByRole('checkbox', { name: 'Bruk tastatursnarveier' });
     expect(bryter).toBeChecked();
   });
 });

@@ -5,7 +5,7 @@ const STORAGE_KEY = 'fp-frontend-snarveger-aktiv';
 const lesInnstilling = (): boolean => {
   try {
     // Default på: berre slått av dersom brukaren eksplisitt har valt det.
-    return globalThis.localStorage?.getItem(STORAGE_KEY) !== 'false';
+    return globalThis.localStorage.getItem(STORAGE_KEY) !== 'false';
   } catch {
     return true;
   }
@@ -22,7 +22,7 @@ export const useSnarvegInnstilling = (): { aktiv: boolean; settAktiv: (verdi: bo
   const settAktiv = useCallback((verdi: boolean) => {
     setAktivState(verdi);
     try {
-      globalThis.localStorage?.setItem(STORAGE_KEY, String(verdi));
+      globalThis.localStorage.setItem(STORAGE_KEY, String(verdi));
     } catch {
       // Ignorer dersom localStorage ikkje er tilgjengeleg.
     }

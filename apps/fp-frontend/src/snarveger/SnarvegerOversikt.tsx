@@ -3,19 +3,20 @@ import { useIntl } from 'react-intl';
 
 import { BodyShort, Heading, Switch, Table, Tag } from '@navikt/ds-react';
 
-import { type SnarvegDefinisjon, type SnarvegGruppe, snarvegDefinisjoner } from './snarvegDefinisjoner';
+import { type SnarvegDefinisjon, snarvegDefinisjoner,type SnarvegGruppe } from './snarvegDefinisjoner';
 import { useSnarvegerContext } from './SnarvegerContext';
 
 const GRUPPE_REKKEFOLGE: SnarvegGruppe[] = ['global', 'behandling'];
+
+const KBD_KLASSE =
+  'border-ax-border-neutral bg-ax-bg-default inline-block min-w-6 rounded border border-b-2 px-1.5 py-0.5 text-center font-mono text-sm leading-tight';
 
 const Tastesekvens = ({ taster }: { taster: string[] }) => (
   <span className="inline-flex items-center gap-1">
     {taster.map((tast, index) => (
       <Fragment key={tast}>
         {index > 0 && <span className="text-ax-text-neutral-subtle text-sm">+</span>}
-        <kbd className="border-ax-border-neutral bg-ax-bg-default inline-block min-w-6 rounded border border-b-2 px-1.5 py-0.5 text-center font-mono text-sm leading-tight">
-          {tast}
-        </kbd>
+        <kbd className={KBD_KLASSE}>{tast}</kbd>
       </Fragment>
     ))}
   </span>

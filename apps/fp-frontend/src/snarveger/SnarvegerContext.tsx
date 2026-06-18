@@ -55,6 +55,12 @@ export const useSnarvegerContext = (): SnarvegerContextValue => {
 };
 
 /**
+ * Som useSnarvegerContext, men returnerer undefined i staden for å kaste når det ikkje
+ * finst nokon provider (t.d. i isolerte stories/tester).
+ */
+export const useSnarvegerContextValgfri = (): SnarvegerContextValue | undefined => useContext(SnarvegerContext);
+
+/**
  * Registrerer ein handler for ein kontekst-snarveg så lenge komponenten er montert.
  *
  * Komponentar som eig ein handling (t.d. støttepanel-byte) kallar denne for å kople
@@ -63,7 +69,10 @@ export const useSnarvegerContext = (): SnarvegerContextValue => {
 export const useRegistrerSnarveg = (id: string, handler: () => void, aktivert = true): void => {
   const registrer = useContext(SnarvegerContext)?.registrer;
   const handlerRef = useRef(handler);
-  handlerRef.current = handler;
+
+  useEffect(() => {
+    handlerRef.current = handler;
+  });
 
   useEffect(() => {
     // Utan provider (t.d. i isolerte stories/tester) er snarvegen ein no-op.

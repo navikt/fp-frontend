@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon } from '@navikt/aksel-icons';
@@ -17,6 +17,8 @@ import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchOptions } from '../data/fagsakApi';
 import { FagsakData } from '../fagsak/FagsakData';
+import { BEHANDLING_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
+import { useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
 import { ApneForEndringerMenyModal } from './modaler/ApneForEndringerMenyModal';
 import { EndreBehandlendeEnhetMenyModal } from './modaler/EndreBehandlendeEnhetMenyModal';
 import { EndreFagsakMarkeringMenyModal } from './modaler/EndreFagsakMarkeringMenyModal';
@@ -60,6 +62,9 @@ export const BehandlingMenuIndex = ({
   const [valgtModal, setValgtModal] = useState<string | undefined>();
   const lukkModal = () => setValgtModal(undefined);
 
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.AAPNE_BEHANDLINGSMENY, () => toggleRef.current?.click());
+
   const fagsak = fagsakData.getFagsak();
   const behandlingAppContext = fagsakData.getBehandling(behandlingUuid);
 
@@ -69,6 +74,7 @@ export const BehandlingMenuIndex = ({
     <>
       <Dropdown>
         <Button
+          ref={toggleRef}
           size="small"
           as={Dropdown.Toggle}
           iconPosition="right"

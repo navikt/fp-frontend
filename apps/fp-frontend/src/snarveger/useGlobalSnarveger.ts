@@ -35,7 +35,9 @@ export const useGlobalSnarveger = (): void => {
   const { dispatch, settHjelpAapen, aktiv, hjelpAapen } = useSnarvegerContext();
 
   const tilstand = useRef({ dispatch, settHjelpAapen, aktiv, hjelpAapen, navigate });
-  tilstand.current = { dispatch, settHjelpAapen, aktiv, hjelpAapen, navigate };
+  useEffect(() => {
+    tilstand.current = { dispatch, settHjelpAapen, aktiv, hjelpAapen, navigate };
+  });
 
   const ventarPaaSekvens = useRef(false);
   const sekvensTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);

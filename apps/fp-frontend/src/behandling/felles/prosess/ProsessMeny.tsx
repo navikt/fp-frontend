@@ -4,7 +4,10 @@ import { ProcessMenu, ProcessMenuStepType } from '@navikt/ft-plattform-komponent
 
 import type { Behandling, VilkårUtfallType } from '@navikt/fp-types';
 
+import { BEHANDLING_SNARVEG_IDER } from '../../../snarveger/snarvegDefinisjoner';
+import { useRegistrerSnarveg } from '../../../snarveger/SnarvegerContext';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
+import { finnNabopanelId } from '../menyNavigasjon';
 import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
 import { type ProsessPanelMenyData, useProsessPanelMenyData } from './useProsessPanelMenyData';
 
@@ -26,6 +29,16 @@ export const ProsessMeny = <T extends Behandling>({ valgtProsessSteg, valgtFakta
     const nyvalgtProsessSteg = panel?.erAktiv ? undefined : panel?.id;
     oppdaterProsessStegOgFaktaPanelIUrl(nyvalgtProsessSteg, valgtFaktaSteg);
   };
+
+  const byttProsessPanel = (retning: 1 | -1) => {
+    const nyId = finnNabopanelId(prosessPanelMenyData, retning);
+    if (nyId) {
+      oppdaterProsessStegOgFaktaPanelIUrl(nyId, valgtFaktaSteg);
+    }
+  };
+
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.NESTE_PROSESS, () => byttProsessPanel(1));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.FORRIGE_PROSESS, () => byttProsessPanel(-1));
 
   const steg = prosessPanelMenyData.map(data => {
     const type = finnProsessmenyType(data.status, data.harÅpentAksjonspunkt);
