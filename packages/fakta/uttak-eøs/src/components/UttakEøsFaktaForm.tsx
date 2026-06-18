@@ -12,7 +12,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
@@ -136,6 +136,6 @@ const transformValues = (
   kode: erOverstyrt
     ? AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART
     : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-  begrunnelse: notEmpty(values.begrunnelse),
   perioder,
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });
