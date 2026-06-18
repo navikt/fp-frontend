@@ -1440,7 +1440,7 @@ __metadata:
     react-router-dom: "npm:7.16.0"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1494,7 +1494,7 @@ __metadata:
     stylelint: "npm:17.11.1"
     tailwindcss: "npm:4.3.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1535,7 +1535,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1566,7 +1566,7 @@ __metadata:
   resolution: "@navikt/fp-config-typescript@workspace:packages/config/typescript"
   dependencies:
     "@testing-library/jest-dom": "npm:6.9.1"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1582,7 +1582,7 @@ __metadata:
     react-dom: "npm:19.2.7"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vite-plugin-compression2: "npm:2.5.3"
     vitest: "npm:4.1.6"
   languageName: unknown
@@ -1618,7 +1618,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1659,7 +1659,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1690,7 +1690,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1728,7 +1728,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1766,7 +1766,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1806,7 +1806,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1840,7 +1840,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1879,7 +1879,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1917,7 +1917,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1954,7 +1954,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -1993,7 +1993,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2030,7 +2030,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2069,7 +2069,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2108,7 +2108,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2148,7 +2148,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2187,7 +2187,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2227,7 +2227,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2267,7 +2267,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2306,7 +2306,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2333,7 +2333,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2460,7 +2460,7 @@ __metadata:
     storybook: "npm:10.4.0"
     tailwindcss: "npm:4.3.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2509,7 +2509,7 @@ __metadata:
     stylelint: "npm:17.11.1"
     tailwindcss: "npm:4.3.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2573,7 +2573,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2613,7 +2613,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2647,7 +2647,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2683,7 +2683,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2716,7 +2716,7 @@ __metadata:
     react-router-dom: "npm:7.16.0"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
   languageName: unknown
   linkType: soft
 
@@ -2744,7 +2744,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2773,7 +2773,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2802,7 +2802,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2832,7 +2832,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2898,7 +2898,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2938,7 +2938,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -2977,7 +2977,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3016,7 +3016,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3055,7 +3055,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3088,7 +3088,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3128,7 +3128,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3168,7 +3168,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3207,7 +3207,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3240,7 +3240,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3281,7 +3281,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3318,7 +3318,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3356,7 +3356,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3395,7 +3395,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3432,7 +3432,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3469,7 +3469,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3506,7 +3506,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3538,7 +3538,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3570,7 +3570,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3602,7 +3602,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3634,7 +3634,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3665,7 +3665,7 @@ __metadata:
     react-responsive: "npm:10.0.1"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3698,7 +3698,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3725,7 +3725,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3761,7 +3761,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3790,7 +3790,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3823,7 +3823,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3857,7 +3857,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3886,7 +3886,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3921,7 +3921,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3950,7 +3950,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -3985,7 +3985,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -4019,7 +4019,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -4056,7 +4056,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -4091,7 +4091,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -4132,7 +4132,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -4158,7 +4158,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -4188,7 +4188,7 @@ __metadata:
     storybook: "npm:10.4.0"
     stylelint: "npm:17.11.1"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -4307,7 +4307,7 @@ __metadata:
     react-intl: "npm:10.1.6"
     storybook: "npm:10.4.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.0.13"
+    vite: "npm:8.0.16"
     vitest: "npm:4.1.6"
   languageName: unknown
   linkType: soft
@@ -4972,10 +4972,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-project/types@npm:=0.129.0":
-  version: 0.129.0
-  resolution: "@oxc-project/types@npm:0.129.0"
-  checksum: 10/a778eb3bd9997265ebcb9738fa4ac0ab0c2465853e6eacc7a70697a374c0bfd0ae0f894a159359445ad036fddbff25d5dec863ab3f2fda63eec2180e4c737481
+"@oxc-project/types@npm:=0.133.0":
+  version: 0.133.0
+  resolution: "@oxc-project/types@npm:0.133.0"
+  checksum: 10/de44f653a9e0c0267309122f1f184120c6869af4382218a6bf4a320c5150743eb00b5e8641b04917666281995ed0fe6381561922a48a28082a75bb122acf3ac6
   languageName: node
   linkType: hard
 
@@ -5142,93 +5142,93 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rolldown/binding-android-arm64@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-android-arm64@npm:1.0.0"
+"@rolldown/binding-android-arm64@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-android-arm64@npm:1.0.3"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-darwin-arm64@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-darwin-arm64@npm:1.0.0"
+"@rolldown/binding-darwin-arm64@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-darwin-arm64@npm:1.0.3"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-darwin-x64@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-darwin-x64@npm:1.0.0"
+"@rolldown/binding-darwin-x64@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-darwin-x64@npm:1.0.3"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-freebsd-x64@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-freebsd-x64@npm:1.0.0"
+"@rolldown/binding-freebsd-x64@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-freebsd-x64@npm:1.0.3"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-arm-gnueabihf@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-linux-arm-gnueabihf@npm:1.0.0"
+"@rolldown/binding-linux-arm-gnueabihf@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-linux-arm-gnueabihf@npm:1.0.3"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-arm64-gnu@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-linux-arm64-gnu@npm:1.0.0"
+"@rolldown/binding-linux-arm64-gnu@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-linux-arm64-gnu@npm:1.0.3"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-arm64-musl@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-linux-arm64-musl@npm:1.0.0"
+"@rolldown/binding-linux-arm64-musl@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-linux-arm64-musl@npm:1.0.3"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-ppc64-gnu@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-linux-ppc64-gnu@npm:1.0.0"
+"@rolldown/binding-linux-ppc64-gnu@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-linux-ppc64-gnu@npm:1.0.3"
   conditions: os=linux & cpu=ppc64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-s390x-gnu@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-linux-s390x-gnu@npm:1.0.0"
+"@rolldown/binding-linux-s390x-gnu@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-linux-s390x-gnu@npm:1.0.3"
   conditions: os=linux & cpu=s390x & libc=glibc
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-x64-gnu@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-linux-x64-gnu@npm:1.0.0"
+"@rolldown/binding-linux-x64-gnu@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-linux-x64-gnu@npm:1.0.3"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-x64-musl@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-linux-x64-musl@npm:1.0.0"
+"@rolldown/binding-linux-x64-musl@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-linux-x64-musl@npm:1.0.3"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@rolldown/binding-openharmony-arm64@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-openharmony-arm64@npm:1.0.0"
+"@rolldown/binding-openharmony-arm64@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-openharmony-arm64@npm:1.0.3"
   conditions: os=openharmony & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-wasm32-wasi@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-wasm32-wasi@npm:1.0.0"
+"@rolldown/binding-wasm32-wasi@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-wasm32-wasi@npm:1.0.3"
   dependencies:
     "@emnapi/core": "npm:1.10.0"
     "@emnapi/runtime": "npm:1.10.0"
@@ -5237,24 +5237,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rolldown/binding-win32-arm64-msvc@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-win32-arm64-msvc@npm:1.0.0"
+"@rolldown/binding-win32-arm64-msvc@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-win32-arm64-msvc@npm:1.0.3"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-win32-x64-msvc@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/binding-win32-x64-msvc@npm:1.0.0"
+"@rolldown/binding-win32-x64-msvc@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@rolldown/binding-win32-x64-msvc@npm:1.0.3"
   conditions: os=win32 & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@rolldown/pluginutils@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@rolldown/pluginutils@npm:1.0.0"
-  checksum: 10/2a2b795ab991cad4bab3e35571ecefc120d9a146019e8ec3d27b1ea1e03269de13def192b22bd12ec439cbc36177da6f080118299fc9d01cd1252f05204e79a7
   languageName: node
   linkType: hard
 
@@ -10269,6 +10262,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.3.12":
+  version: 3.3.12
+  resolution: "nanoid@npm:3.3.12"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 10/6eec280694e2088d18fb802b1e3bfc4578e27b665b7ecfbe36c7356612fea2f814277056e671e2a1529dff551588a652efdc0bfa39f8a3185bc2247be311872e
+  languageName: node
+  linkType: hard
+
 "napi-postinstall@npm:^0.3.0":
   version: 0.3.4
   resolution: "napi-postinstall@npm:0.3.4"
@@ -10899,6 +10901,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss@npm:^8.5.15":
+  version: 8.5.15
+  resolution: "postcss@npm:8.5.15"
+  dependencies:
+    nanoid: "npm:^3.3.12"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10/d02ad19eb1e0fa53a1229ee6d53807eb88f903f2b9a8cac66993367f3ac7dd3b97238c783a54ccbf4145f82f6ca9a5cbd58f089846285d759c8a3259fbea8318
+  languageName: node
+  linkType: hard
+
 "postcss@npm:^8.5.8":
   version: 8.5.12
   resolution: "postcss@npm:8.5.12"
@@ -11309,27 +11322,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rolldown@npm:1.0.0":
-  version: 1.0.0
-  resolution: "rolldown@npm:1.0.0"
+"rolldown@npm:1.0.3":
+  version: 1.0.3
+  resolution: "rolldown@npm:1.0.3"
   dependencies:
-    "@oxc-project/types": "npm:=0.129.0"
-    "@rolldown/binding-android-arm64": "npm:1.0.0"
-    "@rolldown/binding-darwin-arm64": "npm:1.0.0"
-    "@rolldown/binding-darwin-x64": "npm:1.0.0"
-    "@rolldown/binding-freebsd-x64": "npm:1.0.0"
-    "@rolldown/binding-linux-arm-gnueabihf": "npm:1.0.0"
-    "@rolldown/binding-linux-arm64-gnu": "npm:1.0.0"
-    "@rolldown/binding-linux-arm64-musl": "npm:1.0.0"
-    "@rolldown/binding-linux-ppc64-gnu": "npm:1.0.0"
-    "@rolldown/binding-linux-s390x-gnu": "npm:1.0.0"
-    "@rolldown/binding-linux-x64-gnu": "npm:1.0.0"
-    "@rolldown/binding-linux-x64-musl": "npm:1.0.0"
-    "@rolldown/binding-openharmony-arm64": "npm:1.0.0"
-    "@rolldown/binding-wasm32-wasi": "npm:1.0.0"
-    "@rolldown/binding-win32-arm64-msvc": "npm:1.0.0"
-    "@rolldown/binding-win32-x64-msvc": "npm:1.0.0"
-    "@rolldown/pluginutils": "npm:1.0.0"
+    "@oxc-project/types": "npm:=0.133.0"
+    "@rolldown/binding-android-arm64": "npm:1.0.3"
+    "@rolldown/binding-darwin-arm64": "npm:1.0.3"
+    "@rolldown/binding-darwin-x64": "npm:1.0.3"
+    "@rolldown/binding-freebsd-x64": "npm:1.0.3"
+    "@rolldown/binding-linux-arm-gnueabihf": "npm:1.0.3"
+    "@rolldown/binding-linux-arm64-gnu": "npm:1.0.3"
+    "@rolldown/binding-linux-arm64-musl": "npm:1.0.3"
+    "@rolldown/binding-linux-ppc64-gnu": "npm:1.0.3"
+    "@rolldown/binding-linux-s390x-gnu": "npm:1.0.3"
+    "@rolldown/binding-linux-x64-gnu": "npm:1.0.3"
+    "@rolldown/binding-linux-x64-musl": "npm:1.0.3"
+    "@rolldown/binding-openharmony-arm64": "npm:1.0.3"
+    "@rolldown/binding-wasm32-wasi": "npm:1.0.3"
+    "@rolldown/binding-win32-arm64-msvc": "npm:1.0.3"
+    "@rolldown/binding-win32-x64-msvc": "npm:1.0.3"
+    "@rolldown/pluginutils": "npm:^1.0.0"
   dependenciesMeta:
     "@rolldown/binding-android-arm64":
       optional: true
@@ -11362,8 +11375,8 @@ __metadata:
     "@rolldown/binding-win32-x64-msvc":
       optional: true
   bin:
-    rolldown: bin/cli.mjs
-  checksum: 10/d7bf0e215ee10933544192c483e9f0790278c69823dd9bdf30eeddcbe7aef3122bd4c0397118f17a3fb02acf4fce2dbcfaccbdd4c9eb481b4ee0f5b891d0249a
+    rolldown: ./bin/cli.mjs
+  checksum: 10/4dbe2c055104c47c15c051b713068cf4660acd473841904d3f7118f730922b2e498176610a45826cbc1ffe36842a29a076385d3bfcd5acb0f7ef8ad06b8feefb
   languageName: node
   linkType: hard
 
@@ -12134,6 +12147,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tinyglobby@npm:^0.2.17":
+  version: 0.2.17
+  resolution: "tinyglobby@npm:0.2.17"
+  dependencies:
+    fdir: "npm:^6.5.0"
+    picomatch: "npm:^4.0.4"
+  checksum: 10/f85e8a217d675c3f78d5f0ad25ea4557e7e023ed13ddc2b014da10bd0312eea53a34cd52356af07ccdff777f1243012547656282a4ca70936f68bf5065fbaa71
+  languageName: node
+  linkType: hard
+
 "tinyrainbow@npm:^2.0.0":
   version: 2.0.0
   resolution: "tinyrainbow@npm:2.0.0"
@@ -12579,16 +12602,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:8.0.12":
-  version: 8.0.12
-  resolution: "vite@npm:8.0.12"
+"vite@npm:8.0.16":
+  version: 8.0.16
+  resolution: "vite@npm:8.0.16"
   dependencies:
     fsevents: "npm:~2.3.3"
     lightningcss: "npm:^1.32.0"
     picomatch: "npm:^4.0.4"
-    postcss: "npm:^8.5.14"
-    rolldown: "npm:1.0.0"
-    tinyglobby: "npm:^0.2.16"
+    postcss: "npm:^8.5.15"
+    rolldown: "npm:1.0.3"
+    tinyglobby: "npm:^0.2.17"
   peerDependencies:
     "@types/node": ^20.19.0 || >=22.12.0
     "@vitejs/devtools": ^0.1.18
@@ -12632,7 +12655,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/37e2a6d66b64773c72a3b0093059c6e4ff3ab2cc4a73fd8c1e064621a6b324a7446bb059b29395dd61a5829c14ffff1d6dab4796d40415c8e95c6dcc3a1b7104
+  checksum: 10/a5d91d26f6110672a292a06ca161af9a58279fe9d27106c8c0afb725a942b0b47091c440c3b1e7ebc8e0fe901f64ac6a2ffee3cdae2f899339686dbecd0c0266
   languageName: node
   linkType: hard
 
