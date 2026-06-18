@@ -128,7 +128,7 @@ const getBekreftAksjonspunktProsessCallback =
     // matcher ingen eksisterende aksjonspunkt – men det gjør heller ikke et manuelt aksjonspunkt
     // som vises uten åpent aksjonspunkt. Kun overstyringskoder kan deserialiseres av overstyr-endepunktet.
     const erOverstyring =
-      models.some(model => model.kode.startsWith('6')) ||
+      apListe.some(ap => ap.kode.startsWith('6')) ||
       aksjonspunkterTilLagring.some(ap => ap.aksjonspunktType === 'OVST' || ap.aksjonspunktType === 'SAOV');
 
     if (apListe.length === 0) {
@@ -147,7 +147,7 @@ const getBekreftAksjonspunktProsessCallback =
     // her i stedet for å sende koden til overstyr-endepunktet og få en kryptisk Jackson-feil fra backend.
     if (aksjonspunkterTilLagring.length === 0) {
       throw new Error(
-        `Forsøk på å lagre aksjonspunkt ${models.map(model => model.kode).join(', ')} uten matchende aksjonspunkt i behandlingen og uten at det er en overstyring.`,
+        `Forsøk på å lagre aksjonspunkt ${apListe.map(ap => ap.kode).join(', ')} uten matchende aksjonspunkt i behandlingen og uten at det er en overstyring.`,
       );
     }
 
