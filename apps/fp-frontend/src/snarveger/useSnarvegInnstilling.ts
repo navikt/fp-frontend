@@ -17,10 +17,10 @@ const lesInnstilling = (): boolean => {
  * WCAG 2.1.4 (Character Key Shortcuts) krev at enkelttast-snarvegar kan slåast av.
  */
 export const useSnarvegInnstilling = (): { aktiv: boolean; settAktiv: (verdi: boolean) => void } => {
-  const [aktiv, setAktivState] = useState<boolean>(lesInnstilling);
+  const [aktiv, setAktiv] = useState<boolean>(lesInnstilling);
 
   const settAktiv = useCallback((verdi: boolean) => {
-    setAktivState(verdi);
+    setAktiv(verdi);
     try {
       globalThis.localStorage.setItem(STORAGE_KEY, String(verdi));
     } catch {
@@ -31,7 +31,7 @@ export const useSnarvegInnstilling = (): { aktiv: boolean; settAktiv: (verdi: bo
   useEffect(() => {
     const handterEndring = (event: StorageEvent) => {
       if (event.key === STORAGE_KEY) {
-        setAktivState(lesInnstilling());
+        setAktiv(lesInnstilling());
       }
     };
     globalThis.addEventListener('storage', handterEndring);

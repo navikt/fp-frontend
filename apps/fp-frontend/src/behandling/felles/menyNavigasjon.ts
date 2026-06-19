@@ -4,10 +4,7 @@
  *
  * @param retning 1 for neste, -1 for forrige.
  */
-export const finnNabopanelId = (
-  menyData: { id: string; erAktiv: boolean }[],
-  retning: 1 | -1,
-): string | undefined => {
+export const finnNabopanelId = (menyData: { id: string; erAktiv: boolean }[], retning: 1 | -1): string | undefined => {
   if (menyData.length === 0) {
     return undefined;
   }

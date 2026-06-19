@@ -21,6 +21,7 @@ import { useFpSakKodeverk } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BEHANDLING_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
 import { useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
+import { nesteFokusIndex } from '../snarveger/tastaturnavigasjon';
 import { EksterneRessurser } from './EksterneRessurser';
 import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
 
@@ -66,18 +67,13 @@ export const FagsakProfileIndex = ({
   const toggleShowAll = () => setShowAll(!showAll);
 
   const behandlingsvelgerRef = useRef<HTMLDivElement>(null);
-  const fokuserVedNesteVisning = useRef(false);
+  const fokuserVedNesteVisningRef = useRef(false);
 
   const hentBehandlingsvelgerRader = (): HTMLElement[] =>
     Array.from(behandlingsvelgerRef.current?.querySelectorAll<HTMLElement>('a, button') ?? []);
 
   const fokuserRad = (index: number) => {
-    const rader = hentBehandlingsvelgerRader();
-    if (rader.length === 0) {
-      return;
-    }
-    const normalisert = ((index % rader.length) + rader.length) % rader.length;
-    const rad = rader[normalisert];
+    const rad = hentBehandlingsvelgerRader()[index];
     if (rad) {
       rad.scrollIntoView({ block: 'nearest' });
       rad.focus();
@@ -92,22 +88,11 @@ export const FagsakProfileIndex = ({
 
   const håndterBehandlingsvelgerTaster = (event: KeyboardEvent) => {
     const rader = hentBehandlingsvelgerRader();
-    if (rader.length === 0) {
-      return;
-    }
     const aktivIndex = rader.findIndex(rad => rad === document.activeElement);
-    if (event.key === 'ArrowDown') {
+    const nyIndex = nesteFokusIndex(event.key, aktivIndex, rader.length);
+    if (nyIndex !== undefined) {
       event.preventDefault();
-      fokuserRad(aktivIndex + 1);
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      fokuserRad(aktivIndex - 1);
-    } else if (event.key === 'Home') {
-      event.preventDefault();
-      fokuserRad(0);
-    } else if (event.key === 'End') {
-      event.preventDefault();
-      fokuserRad(rader.length - 1);
+      fokuserRad(nyIndex);
     }
   };
 
@@ -125,14 +110,14 @@ export const FagsakProfileIndex = ({
       fokuserBehandlingsvelger();
     } else {
       // Lista er kollapsa: vis alle behandlingar fyrst, fokuser når dei er rendra.
-      fokuserVedNesteVisning.current = true;
+      fokuserVedNesteVisningRef.current = true;
       setShowAll(true);
     }
   });
 
   useEffect(() => {
-    if (showAll && fokuserVedNesteVisning.current) {
-      fokuserVedNesteVisning.current = false;
+    if (showAll && fokuserVedNesteVisningRef.current) {
+      fokuserVedNesteVisningRef.current = false;
       fokuserBehandlingsvelger();
     }
   }, [showAll]);

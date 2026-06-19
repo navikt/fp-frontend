@@ -16,21 +16,21 @@ interface SnarvegerContextValue {
 const SnarvegerContext = createContext<SnarvegerContextValue | undefined>(undefined);
 
 export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
-  const handlere = useRef(new Map<string, () => void>());
-  const [hjelpAapen, settHjelpAapen] = useState(false);
+  const handlereRef = useRef(new Map<string, () => void>());
+  const [hjelpAapen, setHjelpAapen] = useState(false);
   const { aktiv, settAktiv } = useSnarvegInnstilling();
 
   const registrer = useCallback((id: string, handler: () => void) => {
-    handlere.current.set(id, handler);
+    handlereRef.current.set(id, handler);
     return () => {
-      if (handlere.current.get(id) === handler) {
-        handlere.current.delete(id);
+      if (handlereRef.current.get(id) === handler) {
+        handlereRef.current.delete(id);
       }
     };
   }, []);
 
   const dispatch = useCallback((id: string) => {
-    const handler = handlere.current.get(id);
+    const handler = handlereRef.current.get(id);
     if (handler) {
       handler();
       return true;
@@ -39,7 +39,7 @@ export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const value = useMemo<SnarvegerContextValue>(
-    () => ({ registrer, dispatch, hjelpAapen, settHjelpAapen, aktiv, settAktiv }),
+    () => ({ registrer, dispatch, hjelpAapen, settHjelpAapen: setHjelpAapen, aktiv, settAktiv }),
     [registrer, dispatch, hjelpAapen, aktiv, settAktiv],
   );
 

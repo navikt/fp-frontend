@@ -1,11 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { utbetalingsdataIs15RoutePath } from '../app/paths';
-import { finnEnkelttastDefinisjon, finnSekvensDefinisjon, GLOBALE_SNARVEG_IDER } from './snarvegDefinisjoner';
+import { finnEnkelttastDefinisjon, finnSekvensDefinisjon } from './snarvegDefinisjoner';
 import { useSnarvegerContext } from './SnarvegerContext';
 
 const SEKVENS_TIMEOUT_MS = 1500;
+const SEKVENS_PREFIKS = 'G';
 
 const erSkrivefelt = (element: EventTarget | null): boolean => {
   if (!(element instanceof HTMLElement)) {
@@ -28,43 +27,31 @@ const normaliserTast = (key: string): string => (key.length === 1 ? key.toUpperC
  *
  * - Respekterer av/på-innstillinga (WCAG 2.1.4).
  * - Ignorerer tastetrykk medan fokus er i skrivefelt eller når modifikatortastar er nede.
- * - Handterer «G + tast»-sekvensar og enkelttast-snarvegar via det registrerte handler-registeret.
+ * - Handterer "G + tast"-sekvensar og enkelttast-snarvegar, og delegerer sjølve handlinga
+ *   til handlarane som komponentane har registrert via {@link useRegistrerSnarveg}.
  */
 export const useGlobalSnarveger = (): void => {
-  const navigate = useNavigate();
   const { dispatch, settHjelpAapen, aktiv, hjelpAapen } = useSnarvegerContext();
 
-  const tilstand = useRef({ dispatch, settHjelpAapen, aktiv, hjelpAapen, navigate });
+  const tilstandRef = useRef({ dispatch, settHjelpAapen, aktiv, hjelpAapen });
   useEffect(() => {
-    tilstand.current = { dispatch, settHjelpAapen, aktiv, hjelpAapen, navigate };
+    tilstandRef.current = { dispatch, settHjelpAapen, aktiv, hjelpAapen };
   });
 
-  const ventarPaaSekvens = useRef(false);
-  const sekvensTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const ventarPaaSekvensRef = useRef(false);
+  const sekvensTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     const nullstillSekvens = () => {
-      ventarPaaSekvens.current = false;
-      if (sekvensTimeout.current) {
-        clearTimeout(sekvensTimeout.current);
-        sekvensTimeout.current = undefined;
+      ventarPaaSekvensRef.current = false;
+      if (sekvensTimeoutRef.current) {
+        clearTimeout(sekvensTimeoutRef.current);
+        sekvensTimeoutRef.current = undefined;
       }
-    };
-
-    const utforSekvenshandling = (id: string): boolean => {
-      if (id === GLOBALE_SNARVEG_IDER.GAA_OPPGAVELISTE) {
-        void tilstand.current.navigate('/');
-        return true;
-      }
-      if (id === GLOBALE_SNARVEG_IDER.GAA_INFOTRYGD) {
-        void tilstand.current.navigate(utbetalingsdataIs15RoutePath);
-        return true;
-      }
-      return false;
     };
 
     const handterTast = (event: KeyboardEvent) => {
-      const { aktiv: erAktiv, hjelpAapen: erHjelpAapen } = tilstand.current;
+      const { aktiv: erAktiv, hjelpAapen: erHjelpAapen } = tilstandRef.current;
 
       if (!erAktiv || event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) {
         return;
@@ -74,7 +61,7 @@ export const useGlobalSnarveger = (): void => {
       }
 
       if (event.key === '?') {
-        tilstand.current.settHjelpAapen(!erHjelpAapen);
+        tilstandRef.current.settHjelpAapen(!erHjelpAapen);
         nullstillSekvens();
         event.preventDefault();
         return;
@@ -85,23 +72,23 @@ export const useGlobalSnarveger = (): void => {
         return;
       }
 
-      if (ventarPaaSekvens.current) {
-        const def = finnSekvensDefinisjon('G', normaliserTast(event.key));
+      if (ventarPaaSekvensRef.current) {
+        const def = finnSekvensDefinisjon(SEKVENS_PREFIKS, normaliserTast(event.key));
         nullstillSekvens();
-        if (def && (utforSekvenshandling(def.id) || tilstand.current.dispatch(def.id))) {
+        if (def && tilstandRef.current.dispatch(def.id)) {
           event.preventDefault();
         }
         return;
       }
 
-      if (event.key.toUpperCase() === 'G') {
-        ventarPaaSekvens.current = true;
-        sekvensTimeout.current = setTimeout(nullstillSekvens, SEKVENS_TIMEOUT_MS);
+      if (normaliserTast(event.key) === SEKVENS_PREFIKS) {
+        ventarPaaSekvensRef.current = true;
+        sekvensTimeoutRef.current = setTimeout(nullstillSekvens, SEKVENS_TIMEOUT_MS);
         return;
       }
 
       const def = finnEnkelttastDefinisjon(normaliserTast(event.key));
-      if (def && def.gruppe === 'behandling' && tilstand.current.dispatch(def.id)) {
+      if (def && def.gruppe === 'behandling' && tilstandRef.current.dispatch(def.id)) {
         event.preventDefault();
       }
     };

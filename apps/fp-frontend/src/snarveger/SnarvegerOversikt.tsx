@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { BodyShort, Heading, Switch, Table, Tag } from '@navikt/ds-react';
 
-import { type SnarvegDefinisjon, snarvegDefinisjoner,type SnarvegGruppe } from './snarvegDefinisjoner';
+import { type SnarvegDefinisjon, snarvegDefinisjoner, type SnarvegGruppe } from './snarvegDefinisjoner';
 import { useSnarvegerContext } from './SnarvegerContext';
 
 const GRUPPE_REKKEFOLGE: SnarvegGruppe[] = ['global', 'behandling'];
@@ -33,12 +33,8 @@ const GruppeTabell = ({ gruppe, definisjoner }: { gruppe: SnarvegGruppe; definis
       <Table size="small">
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell scope="col">
-              {intl.formatMessage({ id: 'Snarveger.Kolonne.Taster' })}
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              {intl.formatMessage({ id: 'Snarveger.Kolonne.Handling' })}
-            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">{intl.formatMessage({ id: 'Snarveger.Kolonne.Taster' })}</Table.HeaderCell>
+            <Table.HeaderCell scope="col">{intl.formatMessage({ id: 'Snarveger.Kolonne.Handling' })}</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>

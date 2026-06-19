@@ -1,4 +1,5 @@
 import { RawIntlProvider } from 'react-intl';
+import { useNavigate } from 'react-router-dom';
 
 import { createIntl } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
@@ -7,12 +8,14 @@ import { AppShell, ErrorBoundary, ErrorType, type FpError, useAppShell } from '@
 
 import { initFetchOptions } from '../data/fagsakApi';
 import { PollingTimeoutError } from '../data/polling/pollingUtils';
-import { SnarvegerProvider } from '../snarveger/SnarvegerContext';
+import { GLOBALE_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
+import { SnarvegerProvider, useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
 import { SnarvegerHjelpModal } from '../snarveger/SnarvegerHjelpModal';
 import { useGlobalSnarveger } from '../snarveger/useGlobalSnarveger';
 import { AppConfigResolver } from './AppConfigResolver';
 import { Dekorator } from './components/Dekorator';
 import { Home } from './components/Home';
+import { utbetalingsdataIs15RoutePath } from './paths';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -35,6 +38,9 @@ const handlePollingError = (error: Error, addErrorMessage: (data: FpError) => vo
 };
 
 const SnarvegerLytter = () => {
+  const navigate = useNavigate();
+  useRegistrerSnarveg(GLOBALE_SNARVEG_IDER.GAA_OPPGAVELISTE, () => void navigate('/'));
+  useRegistrerSnarveg(GLOBALE_SNARVEG_IDER.GAA_INFOTRYGD, () => void navigate(utbetalingsdataIs15RoutePath));
   useGlobalSnarveger();
   return null;
 };

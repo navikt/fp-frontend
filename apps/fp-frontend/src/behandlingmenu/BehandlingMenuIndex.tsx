@@ -19,6 +19,7 @@ import { initFetchOptions } from '../data/fagsakApi';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BEHANDLING_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
 import { useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
+import { nesteFokusIndex } from '../snarveger/tastaturnavigasjon';
 import { ApneForEndringerMenyModal } from './modaler/ApneForEndringerMenyModal';
 import { EndreBehandlendeEnhetMenyModal } from './modaler/EndreBehandlendeEnhetMenyModal';
 import { EndreFagsakMarkeringMenyModal } from './modaler/EndreFagsakMarkeringMenyModal';
@@ -65,28 +66,23 @@ export const BehandlingMenuIndex = ({
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menyRef = useRef<HTMLDivElement>(null);
   const [menyAapen, setMenyAapen] = useState(false);
-  const fokuserFørsteVedAapning = useRef(false);
+  const fokuserFørsteVedAapningRef = useRef(false);
 
   const hentMenyKnappar = (): HTMLButtonElement[] =>
     Array.from(menyRef.current?.querySelectorAll<HTMLButtonElement>('button.aksel-dropdown__item') ?? []);
 
   const fokuserMenyKnapp = (index: number) => {
-    const knappar = hentMenyKnappar();
-    if (knappar.length === 0) {
-      return;
-    }
-    const normalisert = ((index % knappar.length) + knappar.length) % knappar.length;
-    knappar[normalisert]?.focus();
+    hentMenyKnappar()[index]?.focus();
   };
 
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.AAPNE_BEHANDLINGSMENY, () => {
-    fokuserFørsteVedAapning.current = true;
+    fokuserFørsteVedAapningRef.current = true;
     setMenyAapen(true);
   });
 
   useEffect(() => {
-    if (menyAapen && fokuserFørsteVedAapning.current) {
-      fokuserFørsteVedAapning.current = false;
+    if (menyAapen && fokuserFørsteVedAapningRef.current) {
+      fokuserFørsteVedAapningRef.current = false;
       fokuserMenyKnapp(0);
     }
   }, [menyAapen]);
@@ -98,22 +94,11 @@ export const BehandlingMenuIndex = ({
       return;
     }
     const knappar = hentMenyKnappar();
-    if (knappar.length === 0) {
-      return;
-    }
     const aktivIndex = knappar.findIndex(knapp => knapp === document.activeElement);
-    if (event.key === 'ArrowDown') {
+    const nyIndex = nesteFokusIndex(event.key, aktivIndex, knappar.length);
+    if (nyIndex !== undefined) {
       event.preventDefault();
-      fokuserMenyKnapp(aktivIndex + 1);
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      fokuserMenyKnapp(aktivIndex - 1);
-    } else if (event.key === 'Home') {
-      event.preventDefault();
-      fokuserMenyKnapp(0);
-    } else if (event.key === 'End') {
-      event.preventDefault();
-      fokuserMenyKnapp(knappar.length - 1);
+      fokuserMenyKnapp(nyIndex);
     }
   };
 

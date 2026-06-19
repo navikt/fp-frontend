@@ -10,7 +10,7 @@ import { type DekoratorLenke } from '@navikt/fp-sak-dekorator';
 import type { NavAnsatt } from '@navikt/fp-types';
 
 import { GLOBALE_SNARVEG_IDER } from '../../snarveger/snarvegDefinisjoner';
-import { useRegistrerSnarveg,useSnarvegerContextValgfri } from '../../snarveger/SnarvegerContext';
+import { useRegistrerSnarveg, useSnarvegerContextValgfri } from '../../snarveger/SnarvegerContext';
 import { SNARVEGER_PATH, UTBETALINGSDATA_PATH } from '../paths';
 
 interface Props {
