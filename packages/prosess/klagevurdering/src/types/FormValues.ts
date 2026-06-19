@@ -1,7 +1,7 @@
 import type { ProsessStegBegrunnelseTextFieldFormValues } from '@navikt/fp-prosess-felles';
 import type { KlageHjemmel, KlageVurderingOmgjørType, KlageVurderingType } from '@navikt/fp-types';
 
-export type KlageFormType = {
+export type FormValues = {
   fritekstTilBrev?: string;
   klageVurdering?: KlageVurderingType;
   klageVurderingOmgjør?: KlageVurderingOmgjørType;

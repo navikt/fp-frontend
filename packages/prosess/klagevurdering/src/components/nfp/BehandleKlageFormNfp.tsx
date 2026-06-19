@@ -19,7 +19,7 @@ import type {
 import type { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import type { KlageFormType } from '../../types/klageFormType';
+import type { FormValues } from '../../types/FormValues';
 import { BekreftOgSubmitKlageModal } from './BekreftOgSubmitKlageModal';
 import { FritekstBrevTextField } from './FritekstKlageBrevTextField';
 import { KlageVurderingRadioOptionsNfp } from './KlageVurderingRadioOptionsNfp';
@@ -35,7 +35,7 @@ export type TransformedValues = {
   klageVurdering: KlageVurderingType;
 };
 
-const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
+const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
   klageMedholdÅrsak: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageMedholdÅrsak : undefined,
   klageVurderingOmgjør: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageVurderingOmgjør : undefined,
   klageHjemmel: values.klageHjemmel,
@@ -59,7 +59,7 @@ const lagHjemlerMedNavn = (
   kodeverkNavn.filter(({ kode }) => kodeverkVerdier.includes(kode)).sort((a, b) => a.kode.localeCompare(b.kode));
 const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map(kode => kode);
 
-const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
+const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): FormValues => ({
   klageMedholdÅrsak: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageMedholdÅrsak ?? undefined),
   klageVurderingOmgjør: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageVurderingOmgjør ?? undefined),
   klageHjemmel: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageHjemmel ?? undefined),
@@ -88,12 +88,10 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
   const intl = useIntl();
   const [visSubmitModal, setVisSubmitModal] = useState<boolean>(false);
 
-  const defaultValues = buildInitialValues(klageVurdering.klageVurderingResultatNFP ?? undefined);
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<KlageFormType>();
-
-  const formMethods = useForm<KlageFormType>({
-    defaultValues: mellomlagretFormData ?? defaultValues,
+  const formMethods = useForm<FormValues>({
+    defaultValues: mellomlagretFormData ?? buildInitialValues(klageVurdering.klageVurderingResultatNFP),
   });
   const formValues = formMethods.watch();
 
@@ -109,7 +107,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
     <RhfForm formMethods={formMethods} setDataOnUnmount={setMellomlagretFormData}>
       <VStack gap="space-16">
         <Heading size="small" level="2">
-          {intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}
+          <FormattedMessage id="Klage.ResolveKlage.Title" />
         </Heading>
         {isSubmittable && (
           <AksjonspunktHelpTextHTML>
@@ -170,7 +168,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
             <Button
               size="small"
               variant="primary"
-              onClick={formMethods.handleSubmit((values: KlageFormType) =>
+              onClick={formMethods.handleSubmit((values: FormValues) =>
                 saveKlage(transformValuesTempSave(values, AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP)),
               )}
               type="button"
@@ -184,7 +182,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
   );
 };
 
-const transformValuesTempSave = (values: KlageFormType, aksjonspunktCode: string): TransformedValues => ({
+const transformValuesTempSave = (values: FormValues, aksjonspunktCode: string): TransformedValues => ({
   kode: aksjonspunktCode,
   klageMedholdÅrsak:
     values.klageVurdering === 'MEDHOLD_I_KLAGE' || values.klageVurdering === 'OPPHEVE_YTELSESVEDTAK'

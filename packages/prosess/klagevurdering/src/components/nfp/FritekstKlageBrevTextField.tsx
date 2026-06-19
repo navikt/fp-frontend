@@ -5,7 +5,7 @@ import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import type { KlageFormType } from '../../types/klageFormType';
+import type { FormValues } from '../../types/FormValues';
 
 import styles from './fritekstKlageBrevTextField.module.css';
 
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const FritekstBrevTextField = ({ språkkode, readOnly = true }: Props) => {
-  const { control } = useFormContext<KlageFormType>();
+  const { control } = useFormContext<FormValues>();
 
   return (
     <div className={styles['fritekstTilBrevTextArea']}>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -51,13 +51,6 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
     defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel),
   });
 
-  useEffect(
-    () => () => {
-      setMellomlagretFormData({ dokBehov, begrunnelse: formMethods.getValues('begrunnelse') });
-    },
-    [],
-  );
-
   const begrunnelse = formMethods.watch('begrunnelse');
 
   const isSubmittable = submittable && dokBehov.every(a => a.vurdering) && !!begrunnelse;
@@ -77,7 +70,11 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
         setDirty={setIsDirty}
         readOnly={readOnly}
       />
-      <RhfForm formMethods={formMethods} onSubmit={values => bekreft(values)}>
+      <RhfForm
+        formMethods={formMethods}
+        setDataOnUnmount={(values: FaktaBegrunnelseFormValues) => setMellomlagretFormData({ ...values, dokBehov })}
+        onSubmit={values => bekreft(values)}
+      >
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
