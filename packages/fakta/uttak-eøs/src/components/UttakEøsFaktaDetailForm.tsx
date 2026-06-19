@@ -42,13 +42,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
   const { isReadOnly, fagsak, alleKodeverk } = usePanelDataContext<BekreftUttaksperioderAp[]>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: annenForelderUttakEøsPeriode
-      ? {
-          ...annenForelderUttakEøsPeriode,
-          trekkdager: finnDager(annenForelderUttakEøsPeriode.trekkdager),
-          trekkuker: finnUker(annenForelderUttakEøsPeriode.trekkdager),
-        }
-      : undefined,
+    defaultValues: annenForelderUttakEøsPeriode ? buildInitialValues(annenForelderUttakEøsPeriode) : undefined,
   });
 
   const fom = formMethods.watch('fom');
@@ -210,12 +204,20 @@ const lagGyldigeKontotyperOption = (fagsak: Fagsak, alleKodeverk: AlleKodeverk):
 const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
   dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.TomForFom' }) : null;
 
-const transformValues = ({ trekkdager, trekkuker, ...rest }: FormValues): AnnenforelderUttakEøsPeriode => {
-  return {
-    ...rest,
-    trekkdager: Number((Number.parseFloat(trekkuker) * 5 + Number.parseFloat(trekkdager)).toFixed(1)),
-  };
-};
+const buildInitialValues = (annenForelderUttakEøsPeriode: AnnenforelderUttakEøsPeriode): FormValues => ({
+  fom: annenForelderUttakEøsPeriode.fom,
+  tom: annenForelderUttakEøsPeriode.tom,
+  trekkonto: annenForelderUttakEøsPeriode.trekkonto,
+  trekkdager: finnDager(annenForelderUttakEøsPeriode.trekkdager),
+  trekkuker: finnUker(annenForelderUttakEøsPeriode.trekkdager),
+});
+
+const transformValues = (values: FormValues): AnnenforelderUttakEøsPeriode => ({
+  fom: values.fom,
+  tom: values.tom,
+  trekkonto: values.trekkonto,
+  trekkdager: Number((Number.parseFloat(values.trekkuker) * 5 + Number.parseFloat(values.trekkdager)).toFixed(1)),
+});
 
 export const finnTrekkkonto = (trekkontoKode: UttakPeriodeType, alleKodeverk: AlleKodeverk): string => {
   return alleKodeverk['UttakPeriodeType'].find(k => k.kode === trekkontoKode)?.navn ?? trekkontoKode;

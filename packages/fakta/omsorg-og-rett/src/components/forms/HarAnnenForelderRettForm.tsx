@@ -1,12 +1,12 @@
-import { useForm } from 'react-hook-form';
+import { type DefaultValues, useForm } from 'react-hook-form';
 
 import { VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
+import type { Aksjonspunkt, OmsorgOgRett } from '@navikt/fp-types';
 import type { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -16,8 +16,7 @@ type FormValues = {
   harAnnenForelderRett: boolean;
   mottarAnnenForelderUforetrygd?: boolean;
   harAnnenForelderRettEØS?: boolean;
-  begrunnelse: string;
-};
+} & FaktaBegrunnelseFormValues;
 
 interface Props {
   omsorgOgRett: OmsorgOgRett;
@@ -28,20 +27,13 @@ interface Props {
 export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: Props) => {
   const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } = usePanelDataContext<AvklarAnnenforelderHarRettAp>();
 
-  const harRettNorge = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettNorge ?? undefined;
-  const harRettEØS = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettEØS ?? undefined;
   const harUføretrygd = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd ?? undefined;
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const readOnly = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? {
-      harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === 'JA',
-      mottarAnnenForelderUforetrygd: harUføretrygd === undefined ? undefined : harUføretrygd === 'JA',
-      harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === 'JA',
-      ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
-    },
+    defaultValues: mellomlagretFormData ?? buildInitialValues(omsorgOgRett, aksjonspunkt),
   });
 
   const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== 'MORA' || harUføretrygd === 'JA';
@@ -76,6 +68,18 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmitt
       </FaktaGruppe>
     </RhfForm>
   );
+};
+
+const buildInitialValues = (omsorgOgRett: OmsorgOgRett, aksjonspunkt?: Aksjonspunkt): DefaultValues<FormValues> => {
+  const harRettNorge = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettNorge ?? undefined;
+  const harRettEØS = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettEØS ?? undefined;
+  const harUføretrygd = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd ?? undefined;
+  return {
+    harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === 'JA',
+    mottarAnnenForelderUforetrygd: harUføretrygd === undefined ? undefined : harUføretrygd === 'JA',
+    harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === 'JA',
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
+  };
 };
 
 const transformValues = (values: FormValues): AvklarAnnenforelderHarRettAp => ({

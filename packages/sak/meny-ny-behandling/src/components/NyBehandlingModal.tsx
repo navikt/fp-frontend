@@ -252,7 +252,9 @@ const transformValues = (
   eksternUuid: string | undefined,
   fagsakYtelseType: string,
 ): { eksternUuid?: string; fagsakYtelseType: string } & FormValues => ({
-  ...values,
+  behandlingType: values.behandlingType,
+  nyBehandlingEtterKlage: values.nyBehandlingEtterKlage,
+  behandlingArsakType: values.behandlingArsakType,
   eksternUuid,
   fagsakYtelseType,
 });

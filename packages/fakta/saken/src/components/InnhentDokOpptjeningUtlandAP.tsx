@@ -7,7 +7,7 @@ import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -19,9 +19,8 @@ const OpptjeningIUtlandDokStatus = {
 };
 
 type FormValues = {
-  begrunnelse: string | undefined;
   dokStatus?: string;
-};
+} & FaktaBegrunnelseFormValues;
 
 interface Props {
   aksjonspunkt: Aksjonspunkt;
@@ -37,10 +36,7 @@ export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props)
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? {
-      dokStatus,
-      ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
-    },
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkt, dokStatus),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -95,6 +91,11 @@ export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props)
     </AksjonspunktBox>
   );
 };
+
+const buildInitialValues = (aksjonspunkt: Aksjonspunkt, dokStatus?: string): FormValues => ({
+  dokStatus,
+  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
+});
 
 const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
   kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -8,7 +8,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+import type { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import type { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -48,19 +48,8 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
   };
 
   const formMethods = useForm<FaktaBegrunnelseFormValues>({
-    defaultValues: {
-      begrunnelse:
-        mellomlagretFormData?.begrunnelse ??
-        FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel).begrunnelse,
-    },
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel),
   });
-
-  useEffect(
-    () => () => {
-      setMellomlagretFormData({ dokBehov, begrunnelse: formMethods.getValues('begrunnelse') });
-    },
-    [],
-  );
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
@@ -81,7 +70,11 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
         setDirty={setIsDirty}
         readOnly={readOnly}
       />
-      <RhfForm formMethods={formMethods} onSubmit={values => bekreft(values)}>
+      <RhfForm
+        formMethods={formMethods}
+        setDataOnUnmount={(values: FaktaBegrunnelseFormValues) => setMellomlagretFormData({ ...values, dokBehov })}
+        onSubmit={values => bekreft(values)}
+      >
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
@@ -107,6 +100,9 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
     </VStack>
   );
 };
+
+const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FaktaBegrunnelseFormValues =>
+  FaktaBegrunnelseTextField.initialValues(aksjonspunkter);
 
 const transformValues = (
   values: FaktaBegrunnelseFormValues,

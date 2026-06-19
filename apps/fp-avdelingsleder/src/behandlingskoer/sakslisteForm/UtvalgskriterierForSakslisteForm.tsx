@@ -59,7 +59,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
   const queryClient = useQueryClient();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: buildDefaultValues(valgtSaksliste),
+    defaultValues: buildInitialValues(valgtSaksliste),
   });
 
   const { mutate: lagreSaksliste, isPending } = useMutation({
@@ -142,7 +142,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
   );
 };
 
-const buildDefaultValues = (valgtSaksliste: SakslisteDto): FormValues => {
+const buildInitialValues = (valgtSaksliste: SakslisteDto): FormValues => {
   return {
     navn: valgtSaksliste.navn,
     beskrivelse: valgtSaksliste.beskrivelse ?? '',
@@ -172,7 +172,7 @@ const fraAndreKriterierTilBeslutter = (andreKriterier?: AndreKriterieDto): TilBe
 };
 
 const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslisteId: number): SakslisteLagreDto => {
-  const { tilBeslutter, andreKriterie, sortering, beskrivelse, ...rest } = values;
+  const { tilBeslutter, andreKriterie, sortering } = values;
   const inkluder = andreKriterie.inkluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   const ekskluder = andreKriterie.ekskluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   if (tilBeslutter === 'TA_MED') {
@@ -182,8 +182,10 @@ const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslis
   }
 
   return {
-    ...rest,
-    beskrivelse: beskrivelse === '' ? undefined : beskrivelse,
+    beskrivelse: values.beskrivelse === '' ? undefined : values.beskrivelse,
+    navn: values.navn,
+    behandlingTyper: values.behandlingTyper,
+    fagsakYtelseTyper: values.fagsakYtelseTyper,
     andreKriterie: {
       inkluder,
       ekskluder,

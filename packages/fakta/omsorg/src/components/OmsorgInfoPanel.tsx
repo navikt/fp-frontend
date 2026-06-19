@@ -19,18 +19,6 @@ import { type FormValues as OmsorgFormValues, OmsorgFaktaFields } from './Omsorg
 
 type FormValues = OmsorgFormValues & FaktaBegrunnelseFormValues;
 
-const createInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
-  return {
-    ...OmsorgFaktaFields.initialValues(ytelsefordeling, aksjonspunkter),
-    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
-  };
-};
-
-const transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
-  ...OmsorgFaktaFields.transformValues(values),
-  ...FaktaBegrunnelseTextField.transformValues(values),
-});
-
 interface Props {
   personoversikt: Personoversikt | undefined;
   ytelsefordeling: Ytelsefordeling;
@@ -50,7 +38,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling }: Props) => {
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? createInitialValues(ytelsefordeling, aksjonspunkterForPanel),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(ytelsefordeling, aksjonspunkterForPanel),
   });
 
   const harAksjonspunkt = aksjonspunkterForPanel.length > 0;
@@ -91,3 +79,15 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling }: Props) => {
     </VStack>
   );
 };
+
+const buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
+  return {
+    ...OmsorgFaktaFields.initialValues(ytelsefordeling, aksjonspunkter),
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
+  };
+};
+
+const transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
+  ...OmsorgFaktaFields.transformValues(values),
+  ...FaktaBegrunnelseTextField.transformValues(values),
+});

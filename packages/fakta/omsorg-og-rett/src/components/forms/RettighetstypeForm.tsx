@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { type DefaultValues, useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
@@ -7,7 +7,7 @@ import { RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett, type Rettighetstype } from '@navikt/fp-types';
 import type { OverstyringRettigheterAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -17,8 +17,7 @@ import styles from './overstyrRettigheterForm.module.css';
 
 type FormValues = {
   rettighetstype: Rettighetstype;
-  begrunnelse: string;
-};
+} & FaktaBegrunnelseFormValues;
 
 interface Props {
   omsorgOgRett: OmsorgOgRett;
@@ -39,13 +38,8 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }:
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, isSubmittable } =
     usePanelDataContext<OverstyringRettigheterAp>();
 
-  const rettighetstype = omsorgOgRett.rettighetstype ?? undefined;
-
   const formMethods = useForm<FormValues>({
-    defaultValues: {
-      rettighetstype: rettighetstype,
-      ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
-    },
+    defaultValues: buildInitialValues(omsorgOgRett, aksjonspunkt),
   });
 
   const rettighetstyper =
@@ -99,6 +93,11 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }:
     </RhfForm>
   );
 };
+
+const buildInitialValues = (omsorgOgRett: OmsorgOgRett, aksjonspunkt?: Aksjonspunkt): DefaultValues<FormValues> => ({
+  rettighetstype: omsorgOgRett.rettighetstype ?? undefined,
+  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
+});
 
 const transformValues = (values: FormValues): OverstyringRettigheterAp => ({
   kode: AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,

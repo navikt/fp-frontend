@@ -57,48 +57,6 @@ export const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriodeMedApMarker
   return Årsakstype.UTTAK;
 };
 
-const lagDefaultVerdier = (
-  valgtPeriode: KontrollerFaktaPeriodeMedApMarkering,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): FormValues => {
-  const arsakstype = utledÅrsakstype(valgtPeriode);
-
-  const aRef =
-    valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse === 'undefined'
-      ? undefined
-      : valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse;
-  const aOpplysninger = aRef ? arbeidsgiverOpplysningerPerId[aRef] : undefined;
-
-  let arbeidsgiverId;
-
-  if ((!!aRef && aOpplysninger) || (valgtPeriode.arbeidsforhold && !aRef)) {
-    arbeidsgiverId = `${valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold?.arbeidType}`;
-  }
-
-  return {
-    ...valgtPeriode,
-    arsakstype,
-    arbeidsgiverId,
-    harGradering: !!valgtPeriode.arbeidstidsprosent,
-    harSamtidigUttaksprosent: !!valgtPeriode.samtidigUttaksprosent,
-  };
-};
-
-const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkering => ({
-  ...omitMany(values, ['arsakstype', 'arbeidsgiverId', 'harGradering', 'harSamtidigUttaksprosent']),
-  arbeidsforhold: values.arbeidsgiverId
-    ? {
-        arbeidsgiverReferanse:
-          values.arbeidsgiverId.split('-')[0] === 'undefined' ? undefined : values.arbeidsgiverId.split('-')[0],
-        arbeidType: values.arbeidsgiverId.split('-')[1] as UttakArbeidType,
-      }
-    : undefined,
-  periodeKilde: 'SAKSBEHANDLER',
-  aksjonspunktType: undefined,
-  arbeidstidsprosent: values.arbeidstidsprosent,
-  samtidigUttaksprosent: values.samtidigUttaksprosent,
-});
-
 const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
   dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakFaktaDetailForm.TomForFom' }) : null;
 
@@ -129,7 +87,7 @@ export const UttakFaktaDetailForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const defaultValues = valgtPeriode ? lagDefaultVerdier(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined;
+  const defaultValues = valgtPeriode ? buildInitialValues(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -391,3 +349,45 @@ export const UttakFaktaDetailForm = ({
     </>
   );
 };
+
+const buildInitialValues = (
+  valgtPeriode: KontrollerFaktaPeriodeMedApMarkering,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): FormValues => {
+  const arsakstype = utledÅrsakstype(valgtPeriode);
+
+  const aRef =
+    valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse === 'undefined'
+      ? undefined
+      : valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse;
+  const aOpplysninger = aRef ? arbeidsgiverOpplysningerPerId[aRef] : undefined;
+
+  let arbeidsgiverId;
+
+  if ((!!aRef && aOpplysninger) || (valgtPeriode.arbeidsforhold && !aRef)) {
+    arbeidsgiverId = `${valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold?.arbeidType}`;
+  }
+
+  return {
+    ...valgtPeriode,
+    arsakstype,
+    arbeidsgiverId,
+    harGradering: !!valgtPeriode.arbeidstidsprosent,
+    harSamtidigUttaksprosent: !!valgtPeriode.samtidigUttaksprosent,
+  };
+};
+
+const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkering => ({
+  ...omitMany(values, ['arsakstype', 'arbeidsgiverId', 'harGradering', 'harSamtidigUttaksprosent']),
+  arbeidsforhold: values.arbeidsgiverId
+    ? {
+        arbeidsgiverReferanse:
+          values.arbeidsgiverId.split('-')[0] === 'undefined' ? undefined : values.arbeidsgiverId.split('-')[0],
+        arbeidType: values.arbeidsgiverId.split('-')[1] as UttakArbeidType,
+      }
+    : undefined,
+  periodeKilde: 'SAKSBEHANDLER',
+  aksjonspunktType: undefined,
+  arbeidstidsprosent: values.arbeidstidsprosent,
+  samtidigUttaksprosent: values.samtidigUttaksprosent,
+});

@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { type DefaultValues, useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
@@ -6,7 +6,12 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@navikt/fp-fakta-felles';
+import {
+  type FaktaBegrunnelseFormValues,
+  FaktaBegrunnelseTextField,
+  FaktaSubmitButton,
+  TrueFalseInput,
+} from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
 import type { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -19,8 +24,7 @@ type FormValues = {
   harAnnenForelderRett?: boolean;
   mottarAnnenForelderUforetrygd?: boolean;
   harAnnenForelderRettEØS?: boolean;
-  begrunnelse: string;
-};
+} & FaktaBegrunnelseFormValues;
 
 interface Props {
   omsorgOgRett: OmsorgOgRett;
@@ -31,22 +35,13 @@ interface Props {
 export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: Props) => {
   const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } =
     usePanelDataContext<BekreftAleneomsorgVurderingAp>();
-  const harAleneomsorg = omsorgOgRett.manuellBehandlingResultat?.søkerHarAleneomsorg ?? undefined;
-  const harRettNorge = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettNorge ?? undefined;
-  const harRettEØS = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettEØS ?? undefined;
   const harUføretrygd = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd ?? undefined;
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const isReadOnlyOrApIsNull = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? {
-      harAleneomsorg: harAleneomsorg === undefined ? undefined : harAleneomsorg === 'JA',
-      harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === 'JA',
-      harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === 'JA',
-      mottarAnnenForelderUforetrygd: harUføretrygd === undefined ? undefined : harUføretrygd === 'JA',
-      ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
-    },
+    defaultValues: mellomlagretFormData ?? buildInitialValues(omsorgOgRett, aksjonspunkt),
   });
 
   const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== 'MORA' || harUføretrygd === 'JA';
@@ -93,6 +88,20 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: P
       </FaktaGruppe>
     </RhfForm>
   );
+};
+
+const buildInitialValues = (omsorgOgRett: OmsorgOgRett, aksjonspunkt?: Aksjonspunkt): DefaultValues<FormValues> => {
+  const harAleneomsorg = omsorgOgRett.manuellBehandlingResultat?.søkerHarAleneomsorg ?? undefined;
+  const harRettNorge = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettNorge ?? undefined;
+  const harRettEØS = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harRettEØS ?? undefined;
+  const harUføretrygd = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd ?? undefined;
+  return {
+    harAleneomsorg: harAleneomsorg === undefined ? undefined : harAleneomsorg === 'JA',
+    harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === 'JA',
+    harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === 'JA',
+    mottarAnnenForelderUforetrygd: harUføretrygd === undefined ? undefined : harUføretrygd === 'JA',
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
+  };
 };
 
 const transformValues = (values: FormValues): BekreftAleneomsorgVurderingAp => ({
