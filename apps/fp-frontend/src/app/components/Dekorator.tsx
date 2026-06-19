@@ -46,12 +46,12 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
   };
 
   useRegistrerSnarveg(
-    GLOBALE_SNARVEG_IDER.GAA_AVDELINGSLEDER,
+    GLOBALE_SNARVEG_IDER.AVDELINGSLEDER,
     () => (globalThis.location.href = getAvdelingslederLenke()),
     kanOppgavestyre,
   );
   useRegistrerSnarveg(
-    GLOBALE_SNARVEG_IDER.GAA_JOURNALFORING,
+    GLOBALE_SNARVEG_IDER.JOURNALFØRING,
     () => (globalThis.location.href = getJournalføringLenke()),
     kanSaksbehandle,
   );

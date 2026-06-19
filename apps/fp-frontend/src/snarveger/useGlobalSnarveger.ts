@@ -21,7 +21,7 @@ const erSkrivefelt = (element: EventTarget | null): boolean => {
 
 const normaliserTast = (key: string): string => (key.length === 1 ? key.toUpperCase() : key);
 
-const harAapenDialog = (): boolean =>
+const harÅpenDialog = (): boolean =>
   globalThis.document.querySelector('dialog[open], [role="dialog"], [aria-modal="true"]') !== null;
 
 /**
@@ -62,7 +62,7 @@ export const useGlobalSnarveger = (): void => {
         return;
       }
 
-      if (!erHjelpÅpen && harAapenDialog()) {
+      if (!erHjelpÅpen && harÅpenDialog()) {
         nullstillSekvens();
         return;
       }

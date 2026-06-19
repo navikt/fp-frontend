@@ -14,10 +14,10 @@ export interface SnarvegDefinisjon {
 
 export const GLOBALE_SNARVEG_IDER = {
   HJELP: 'hjelp',
-  GAA_OPPGAVELISTE: 'gaa-oppgaveliste',
-  GAA_INFOTRYGD: 'gaa-infotrygd',
-  GAA_AVDELINGSLEDER: 'gaa-avdelingsleder',
-  GAA_JOURNALFORING: 'gaa-journalforing',
+  OPPGAVELISTE: 'oppgaveliste',
+  INFOTRYGD: 'infotrygd',
+  AVDELINGSLEDER: 'avdelingsleder',
+  JOURNALFØRING: 'journalføring',
 } as const;
 
 export const BEHANDLING_SNARVEG_IDER = {
@@ -28,7 +28,7 @@ export const BEHANDLING_SNARVEG_IDER = {
   STOTTE_TIL_BESLUTTER: 'stotte-til-beslutter',
   STOTTE_FRA_BESLUTTER: 'stotte-fra-beslutter',
   UTVID_DETALJER: 'utvid-detaljer',
-  AAPNE_BEHANDLINGSMENY: 'aapne-behandlingsmeny',
+  ÅPNE_BEHANDLINGSMENY: 'åpne-behandlingsmeny',
   FOKUSER_BEHANDLINGSVELGER: 'fokuser-behandlingsvelger',
   FORRIGE_PROSESS: 'forrige-prosess',
   NESTE_PROSESS: 'neste-prosess',
@@ -46,29 +46,29 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
     beskrivelseId: 'Snarveger.Hjelp',
   },
   {
-    id: GLOBALE_SNARVEG_IDER.GAA_OPPGAVELISTE,
+    id: GLOBALE_SNARVEG_IDER.OPPGAVELISTE,
     gruppe: 'global',
     taster: ['G', 'O'],
-    beskrivelseId: 'Snarveger.GaaOppgaveliste',
+    beskrivelseId: 'Snarveger.Oppgaveliste',
   },
   {
-    id: GLOBALE_SNARVEG_IDER.GAA_INFOTRYGD,
+    id: GLOBALE_SNARVEG_IDER.INFOTRYGD,
     gruppe: 'global',
     taster: ['G', 'I'],
-    beskrivelseId: 'Snarveger.GaaInfotrygd',
+    beskrivelseId: 'Snarveger.Infotrygd',
   },
   {
-    id: GLOBALE_SNARVEG_IDER.GAA_AVDELINGSLEDER,
+    id: GLOBALE_SNARVEG_IDER.AVDELINGSLEDER,
     gruppe: 'global',
     taster: ['G', 'A'],
-    beskrivelseId: 'Snarveger.GaaAvdelingsleder',
+    beskrivelseId: 'Snarveger.Avdelingsleder',
     kunNarTilgjengelig: true,
   },
   {
-    id: GLOBALE_SNARVEG_IDER.GAA_JOURNALFORING,
+    id: GLOBALE_SNARVEG_IDER.JOURNALFØRING,
     gruppe: 'global',
     taster: ['G', 'J'],
-    beskrivelseId: 'Snarveger.GaaJournalforing',
+    beskrivelseId: 'Snarveger.Journalføring',
     kunNarTilgjengelig: true,
   },
   {
@@ -116,10 +116,10 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
     beskrivelseId: 'Snarveger.UtvidDetaljer',
   },
   {
-    id: BEHANDLING_SNARVEG_IDER.AAPNE_BEHANDLINGSMENY,
+    id: BEHANDLING_SNARVEG_IDER.ÅPNE_BEHANDLINGSMENY,
     gruppe: 'behandling',
     taster: ['M'],
-    beskrivelseId: 'Snarveger.AapneBehandlingsmeny',
+    beskrivelseId: 'Snarveger.ÅpneBehandlingsmeny',
   },
   {
     id: BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER,

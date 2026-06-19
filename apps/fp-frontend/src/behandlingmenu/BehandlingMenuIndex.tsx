@@ -65,8 +65,8 @@ export const BehandlingMenuIndex = ({
 
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menyRef = useRef<HTMLDivElement>(null);
-  const [menyAapen, setMenyAapen] = useState(false);
-  const fokuserFørsteVedAapningRef = useRef(false);
+  const [menyÅpen, setMenyÅpen] = useState(false);
+  const fokuserFørsteVedÅpningRef = useRef(false);
 
   const hentMenyKnappar = useCallback(
     (): HTMLButtonElement[] =>
@@ -81,21 +81,21 @@ export const BehandlingMenuIndex = ({
     [hentMenyKnappar],
   );
 
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.AAPNE_BEHANDLINGSMENY, () => {
-    fokuserFørsteVedAapningRef.current = true;
-    setMenyAapen(true);
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.ÅPNE_BEHANDLINGSMENY, () => {
+    fokuserFørsteVedÅpningRef.current = true;
+    setMenyÅpen(true);
   });
 
   useEffect(() => {
-    if (menyAapen && fokuserFørsteVedAapningRef.current) {
-      fokuserFørsteVedAapningRef.current = false;
+    if (menyÅpen && fokuserFørsteVedÅpningRef.current) {
+      fokuserFørsteVedÅpningRef.current = false;
       fokuserMenyKnapp(0);
     }
-  }, [fokuserMenyKnapp, menyAapen]);
+  }, [fokuserMenyKnapp, menyÅpen]);
 
   const håndterMenyTaster = (event: React.KeyboardEvent) => {
     if (event.key === 'Escape') {
-      setMenyAapen(false);
+      setMenyÅpen(false);
       toggleRef.current?.focus();
       return;
     }
@@ -115,7 +115,7 @@ export const BehandlingMenuIndex = ({
 
   return (
     <>
-      <Dropdown open={menyAapen} onOpenChange={setMenyAapen}>
+      <Dropdown open={menyÅpen} onOpenChange={setMenyÅpen}>
         <Button
           ref={toggleRef}
           size="small"

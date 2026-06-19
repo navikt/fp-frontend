@@ -89,7 +89,7 @@ export const SnarvegerOversikt = () => {
   return (
     <VStack gap="space-24">
       <Switch checked={aktiv} onChange={event => settAktiv(event.target.checked)}>
-        {intl.formatMessage({ id: 'Snarveger.SlaaPaa' })}
+        {intl.formatMessage({ id: 'Snarveger.SlåPå' })}
       </Switch>
       {GRUPPE_REKKEFOLGE.map(gruppe => (
         <GruppeTabell

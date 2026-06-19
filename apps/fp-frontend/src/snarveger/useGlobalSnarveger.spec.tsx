@@ -60,7 +60,7 @@ describe('useGlobalSnarveger', () => {
 
   it('skal køyre registrert G-sekvens', () => {
     const onSnarveg = vi.fn();
-    renderSnarveger(GLOBALE_SNARVEG_IDER.GAA_OPPGAVELISTE, onSnarveg);
+    renderSnarveger(GLOBALE_SNARVEG_IDER.OPPGAVELISTE, onSnarveg);
 
     trykk('g');
     trykk('o');

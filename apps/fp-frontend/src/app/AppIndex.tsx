@@ -91,8 +91,8 @@ export const AppIndexWrapper = () => (
 
 const SnarvegerLytter = () => {
   const navigate = useNavigate();
-  useRegistrerSnarveg(GLOBALE_SNARVEG_IDER.GAA_OPPGAVELISTE, () => void navigate('/'));
-  useRegistrerSnarveg(GLOBALE_SNARVEG_IDER.GAA_INFOTRYGD, () => void navigate(utbetalingsdataIs15RoutePath));
+  useRegistrerSnarveg(GLOBALE_SNARVEG_IDER.OPPGAVELISTE, () => void navigate('/'));
+  useRegistrerSnarveg(GLOBALE_SNARVEG_IDER.INFOTRYGD, () => void navigate(utbetalingsdataIs15RoutePath));
   useGlobalSnarveger();
   return null;
 };
