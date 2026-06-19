@@ -1,29 +1,31 @@
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { BodyShort, Heading, HStack, VStack } from '@navikt/ds-react';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { ArbeidOgInntektsmelding, Arbeidsforhold, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  ArbeidOgInntektsmelding,
+  Arbeidsforhold,
+  ArbeidsgiverOpplysningerPerId,
+} from '@navikt/fp-types';
 import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ArbeidsforholdFieldArray } from './ArbeidsforholdFieldArray';
 
-const minLength3 = minLength(3);
-const maxLength1500 = maxLength(1500);
-
 type FormValues = {
   arbeidsforhold: {
-    permisjonStatus: string;
+    arbeidsgiverIdent: string;
+    internArbeidsforholdId: string | undefined;
+    permisjonStatus: string | undefined;
   }[];
-  begrunnelse: string;
-};
+} & FaktaBegrunnelseFormValues;
 
 const getSorterArbeidsforhold =
   (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) =>
@@ -38,7 +40,7 @@ interface Props {
 }
 
 export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerPerId }: Props) => {
-  const { aksjonspunkterForPanel, fagsak, submitCallback, isReadOnly, alleKodeverk } =
+  const { aksjonspunkterForPanel, fagsak, submitCallback, isReadOnly, alleKodeverk, isSubmittable } =
     usePanelDataContext<VurderArbeidsforholdPermisjonAp>();
 
   const arbeidOgInntektMedPermisjon = {
@@ -48,30 +50,16 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
     skjæringstidspunkt: arbeidOgInntekt.skjæringstidspunkt,
   };
 
-  const { arbeidsforhold } = arbeidOgInntektMedPermisjon;
-
-  const sorterteArbeidsforhold = [...arbeidsforhold].sort(getSorterArbeidsforhold(arbeidsgiverOpplysningerPerId));
-
-  const defaultValues = {
-    arbeidsforhold: sorterteArbeidsforhold.map(a => ({
-      permisjonStatus: a.permisjonOgMangel?.permisjonStatus,
-    })),
-    begrunnelse: aksjonspunkterForPanel[0]?.begrunnelse ?? '',
-  };
-
+  const sorterteArbeidsforhold = arbeidOgInntektMedPermisjon.arbeidsforhold.toSorted(
+    getSorterArbeidsforhold(arbeidsgiverOpplysningerPerId),
+  );
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? defaultValues,
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, sorterteArbeidsforhold),
   });
 
-  useEffect(
-    () => () => {
-      setMellomlagretFormData(formMethods.getValues());
-    },
-    [],
-  );
-
+  const begrunnelse = formMethods.watch('begrunnelse');
   const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(a => a.status === 'OPPR');
 
   return (
@@ -94,7 +82,8 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
       )}
       <RhfForm
         formMethods={formMethods}
-        onSubmit={values => submitCallback(transformValues(values, sorterteArbeidsforhold))}
+        setDataOnUnmount={setMellomlagretFormData}
+        onSubmit={values => submitCallback(transformValues(values))}
       >
         <VStack gap="space-24">
           <ArbeidsforholdFieldArray
@@ -107,29 +96,21 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
             skjæringstidspunkt={arbeidOgInntektMedPermisjon.skjæringstidspunkt}
             alleKodeverk={alleKodeverk}
           />
-          <RhfTextarea
-            name="begrunnelse"
+          <FaktaBegrunnelseTextField
             control={formMethods.control}
-            label={
-              <Label size="small">
-                <FormattedMessage id="PermisjonFaktaPanel.Begrunn" />
-              </Label>
-            }
-            validate={[required, minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
-            readOnly={isReadOnly}
+            isSubmittable={isSubmittable}
+            isReadOnly={isReadOnly}
+            hasBegrunnelse={!!begrunnelse}
+            hasVurderingText
           />
+
           {!isReadOnly && (
-            <div>
-              <Button
-                size="small"
-                variant="primary"
-                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                loading={formMethods.formState.isSubmitting}
-              >
-                <FormattedMessage id="PermisjonFaktaPanel.Bekreft" />
-              </Button>
-            </div>
+            <FaktaSubmitButton
+              isSubmittable={isSubmittable}
+              isReadOnly={isReadOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
           )}
         </VStack>
       </RhfForm>
@@ -137,15 +118,21 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
   );
 };
 
-const transformValues = (
-  values: FormValues,
-  sorterteArbeidsforhold: Arbeidsforhold[],
-): VurderArbeidsforholdPermisjonAp => ({
-  kode: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
-  arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
-    internArbeidsforholdId: sorterteArbeidsforhold[index]?.internArbeidsforholdId,
-    arbeidsgiverIdent: sorterteArbeidsforhold[index]?.arbeidsgiverIdent ?? '',
-    permisjonStatus: a.permisjonStatus,
+const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], sorterteArbeidsforhold: Arbeidsforhold[]): FormValues => ({
+  arbeidsforhold: sorterteArbeidsforhold.map(a => ({
+    arbeidsgiverIdent: a.arbeidsgiverIdent,
+    internArbeidsforholdId: a.internArbeidsforholdId,
+    permisjonStatus: a.permisjonOgMangel?.permisjonStatus,
   })),
-  begrunnelse: values.begrunnelse,
+  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
+});
+
+const transformValues = (values: FormValues): VurderArbeidsforholdPermisjonAp => ({
+  kode: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
+  arbeidsforhold: values.arbeidsforhold.map(a => ({
+    arbeidsgiverIdent: a.arbeidsgiverIdent,
+    internArbeidsforholdId: a.internArbeidsforholdId,
+    permisjonStatus: notEmpty(a.permisjonStatus),
+  })),
+  ...FaktaBegrunnelseTextField.transformValues(values),
 });
