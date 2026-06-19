@@ -39,31 +39,6 @@ const handlePollingError = (error: Error, addErrorMessage: (data: FpError) => vo
   return false;
 };
 
-const SnarvegerLytter = () => {
-  const navigate = useNavigate();
-  useRegistrerSnarveg(GLOBALE_SNARVEG_IDER.GAA_OPPGAVELISTE, () => void navigate('/'));
-  useRegistrerSnarveg(GLOBALE_SNARVEG_IDER.GAA_INFOTRYGD, () => void navigate(utbetalingsdataIs15RoutePath));
-  useGlobalSnarveger();
-  return null;
-};
-
-/**
- * Aktiverer tastatursnarvegane i ikkje-prod-miljø. I prod blir korkje provider, global
- * lyttar eller hjelp-modal montert, slik at heile snarveg-funksjonaliteten er av.
- */
-const MedSnarveger = ({ children }: { children: ReactNode }) => {
-  if (!snarvegerErTilgjengelig()) {
-    return children;
-  }
-  return (
-    <SnarvegerProvider>
-      <SnarvegerLytter />
-      {children}
-      <SnarvegerHjelpModal />
-    </SnarvegerProvider>
-  );
-};
-
 const AppIndex = () => {
   const {
     headerHeight,
@@ -113,3 +88,28 @@ export const AppIndexWrapper = () => (
     <AppIndex />
   </AppShell>
 );
+
+const SnarvegerLytter = () => {
+  const navigate = useNavigate();
+  useRegistrerSnarveg(GLOBALE_SNARVEG_IDER.GAA_OPPGAVELISTE, () => void navigate('/'));
+  useRegistrerSnarveg(GLOBALE_SNARVEG_IDER.GAA_INFOTRYGD, () => void navigate(utbetalingsdataIs15RoutePath));
+  useGlobalSnarveger();
+  return null;
+};
+
+/**
+ * Aktiverer tastatursnarvegane i ikkje-prod-miljø. I prod blir korkje provider, global
+ * lyttar eller hjelp-modal montert, slik at heile snarveg-funksjonaliteten er av.
+ */
+const MedSnarveger = ({ children }: { children: ReactNode }) => {
+  if (!snarvegerErTilgjengelig()) {
+    return children;
+  }
+  return (
+    <SnarvegerProvider>
+      <SnarvegerLytter />
+      {children}
+      <SnarvegerHjelpModal />
+    </SnarvegerProvider>
+  );
+};
