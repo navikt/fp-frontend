@@ -30,7 +30,7 @@ describe('PermisjonFaktaIndex', () => {
       screen.getByText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes'),
     );
 
-    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -68,7 +68,7 @@ describe('PermisjonFaktaIndex', () => {
     );
     await userEvent.click(screen.getAllByLabelText('Ikke ta med arbeidsforholdet')[1]!);
 
-    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
