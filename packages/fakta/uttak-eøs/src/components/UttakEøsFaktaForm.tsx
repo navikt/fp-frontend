@@ -42,7 +42,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   const [isDirty, setIsDirty] = useState(false);
 
   const formMethods = useForm<FaktaBegrunnelseFormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel[0]),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel),
   });
 
   const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
@@ -126,8 +126,8 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   );
 };
 
-const buildInitialValues = (aksjonspunkt?: Aksjonspunkt): FaktaBegrunnelseFormValues =>
-  FaktaBegrunnelseTextField.initialValues(aksjonspunkt);
+const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FaktaBegrunnelseFormValues =>
+  FaktaBegrunnelseTextField.initialValues(aksjonspunkter);
 
 const transformValues = (
   values: FaktaBegrunnelseFormValues,
