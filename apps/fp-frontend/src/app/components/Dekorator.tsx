@@ -12,7 +12,7 @@ import type { NavAnsatt } from '@navikt/fp-types';
 import { GLOBALE_SNARVEG_IDER } from '../../snarveger/snarvegDefinisjoner';
 import { useRegistrerSnarveg, useSnarvegerContextValgfri } from '../../snarveger/SnarvegerContext';
 import { snarvegerErTilgjengelig } from '../../snarveger/snarvegerMiljo';
-import { SNARVEGER_PATH, UTBETALINGSDATA_PATH } from '../paths';
+import { UTBETALINGSDATA_PATH } from '../paths';
 
 interface Props {
   queryStrings: QueryStrings;
@@ -42,12 +42,7 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
 
   const visSnarveger = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    // Opnar hjelp-modalen om snarveg-konteksten finst, elles navigerast til snarvegsida.
-    if (snarvegerContext) {
-      snarvegerContext.settHjelpAapen(true);
-    } else {
-      void navigate(SNARVEGER_PATH);
-    }
+    snarvegerContext?.settHjelpAapen(true);
   };
 
   useRegistrerSnarveg(
