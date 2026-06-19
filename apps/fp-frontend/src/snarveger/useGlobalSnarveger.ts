@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react';
 
-import { finnEnkelttastDefinisjon, finnSekvensDefinisjon } from './snarvegDefinisjoner';
+import { erSekvensStart, finnEnkelttastDefinisjon, finnSekvensDefinisjon } from './snarvegDefinisjoner';
 import { useSnarvegerContext } from './SnarvegerContext';
 
 const SEKVENS_TIMEOUT_MS = 1500;
-const SEKVENS_PREFIKS = 'G';
 
 const erSkrivefelt = (element: EventTarget | null): boolean => {
   if (!(element instanceof HTMLElement)) {
@@ -22,6 +21,9 @@ const erSkrivefelt = (element: EventTarget | null): boolean => {
 
 const normaliserTast = (key: string): string => (key.length === 1 ? key.toUpperCase() : key);
 
+const harAapenDialog = (): boolean =>
+  globalThis.document.querySelector('dialog[open], [role="dialog"], [aria-modal="true"]') !== null;
+
 /**
  * Global lyttar for tastatursnarvegar. Skal monterast éin gong, høgt i treet og innanfor Router.
  *
@@ -38,12 +40,12 @@ export const useGlobalSnarveger = (): void => {
     tilstandRef.current = { dispatch, settHjelpAapen, aktiv, hjelpAapen };
   });
 
-  const ventarPaaSekvensRef = useRef(false);
+  const sekvensPrefiksRef = useRef<string | undefined>(undefined);
   const sekvensTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     const nullstillSekvens = () => {
-      ventarPaaSekvensRef.current = false;
+      sekvensPrefiksRef.current = undefined;
       if (sekvensTimeoutRef.current) {
         clearTimeout(sekvensTimeoutRef.current);
         sekvensTimeoutRef.current = undefined;
@@ -53,10 +55,15 @@ export const useGlobalSnarveger = (): void => {
     const handterTast = (event: KeyboardEvent) => {
       const { aktiv: erAktiv, hjelpAapen: erHjelpAapen } = tilstandRef.current;
 
-      if (!erAktiv || event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) {
+      if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) {
         return;
       }
       if (erSkrivefelt(event.target)) {
+        return;
+      }
+
+      if (!erHjelpAapen && harAapenDialog()) {
+        nullstillSekvens();
         return;
       }
 
@@ -72,8 +79,12 @@ export const useGlobalSnarveger = (): void => {
         return;
       }
 
-      if (ventarPaaSekvensRef.current) {
-        const def = finnSekvensDefinisjon(SEKVENS_PREFIKS, normaliserTast(event.key));
+      if (!erAktiv) {
+        return;
+      }
+
+      if (sekvensPrefiksRef.current) {
+        const def = finnSekvensDefinisjon(sekvensPrefiksRef.current, normaliserTast(event.key));
         nullstillSekvens();
         if (def && tilstandRef.current.dispatch(def.id)) {
           event.preventDefault();
@@ -81,13 +92,14 @@ export const useGlobalSnarveger = (): void => {
         return;
       }
 
-      if (normaliserTast(event.key) === SEKVENS_PREFIKS) {
-        ventarPaaSekvensRef.current = true;
+      const tast = normaliserTast(event.key);
+      if (erSekvensStart(tast)) {
+        sekvensPrefiksRef.current = tast;
         sekvensTimeoutRef.current = setTimeout(nullstillSekvens, SEKVENS_TIMEOUT_MS);
         return;
       }
 
-      const def = finnEnkelttastDefinisjon(normaliserTast(event.key));
+      const def = finnEnkelttastDefinisjon(tast);
       if (def && def.gruppe === 'behandling' && tilstandRef.current.dispatch(def.id)) {
         event.preventDefault();
       }

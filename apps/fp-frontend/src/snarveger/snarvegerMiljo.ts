@@ -6,4 +6,5 @@ const PROD_HOSTNAME_DEL = 'intern.nav.no';
  * Prod er https://fpsak.intern.nav.no. Dev (t.d. fpsak.intern.dev.nav.no) og localhost
  * inneheld ikkje delstrengen 'intern.nav.no', og får difor snarvegane.
  */
-export const snarvegerErTilgjengelig = (): boolean => !globalThis.location.hostname.includes(PROD_HOSTNAME_DEL);
+export const snarvegerErTilgjengelig = (hostname = globalThis.location.hostname): boolean =>
+  !hostname.includes(PROD_HOSTNAME_DEL);

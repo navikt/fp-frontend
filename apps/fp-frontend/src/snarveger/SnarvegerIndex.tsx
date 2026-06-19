@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl';
 
-import { BodyShort, Heading, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, Heading, VStack } from '@navikt/ds-react';
 
 import { SnarvegerOversikt } from './SnarvegerOversikt';
 
@@ -14,7 +14,7 @@ export const SnarvegerIndex = () => {
   const intl = useIntl();
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8">
+    <Box maxWidth="768px" marginInline="auto" paddingInline="space-16" paddingBlock="space-32">
       <VStack gap="space-24">
         <div>
           <Heading size="large" level="1" spacing>
@@ -24,6 +24,6 @@ export const SnarvegerIndex = () => {
         </div>
         <SnarvegerOversikt />
       </VStack>
-    </div>
+    </Box>
   );
 };

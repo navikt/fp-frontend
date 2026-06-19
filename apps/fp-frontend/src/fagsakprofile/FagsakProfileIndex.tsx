@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 
@@ -69,32 +69,40 @@ export const FagsakProfileIndex = ({
   const behandlingsvelgerRef = useRef<HTMLDivElement>(null);
   const fokuserVedNesteVisningRef = useRef(false);
 
-  const hentBehandlingsvelgerRader = (): HTMLElement[] =>
-    Array.from(behandlingsvelgerRef.current?.querySelectorAll<HTMLElement>('a, button') ?? []);
+  const hentBehandlingsvelgerRader = useCallback(
+    (): HTMLElement[] => Array.from(behandlingsvelgerRef.current?.querySelectorAll<HTMLElement>('a, button') ?? []),
+    [],
+  );
 
-  const fokuserRad = (index: number) => {
-    const rad = hentBehandlingsvelgerRader()[index];
-    if (rad) {
-      rad.scrollIntoView({ block: 'nearest' });
-      rad.focus();
-    }
-  };
+  const fokuserRad = useCallback(
+    (index: number) => {
+      const rad = hentBehandlingsvelgerRader()[index];
+      if (rad) {
+        rad.scrollIntoView({ block: 'nearest' });
+        rad.focus();
+      }
+    },
+    [hentBehandlingsvelgerRader],
+  );
 
-  const fokuserBehandlingsvelger = () => {
+  const fokuserBehandlingsvelger = useCallback(() => {
     const rader = hentBehandlingsvelgerRader();
     const aktivIndex = rader.findIndex(rad => rad.getAttribute('aria-current') === 'page');
     fokuserRad(aktivIndex === -1 ? 0 : aktivIndex);
-  };
+  }, [fokuserRad, hentBehandlingsvelgerRader]);
 
-  const håndterBehandlingsvelgerTaster = (event: KeyboardEvent) => {
-    const rader = hentBehandlingsvelgerRader();
-    const aktivIndex = rader.findIndex(rad => rad === document.activeElement);
-    const nyIndex = nesteFokusIndex(event.key, aktivIndex, rader.length);
-    if (nyIndex !== undefined) {
-      event.preventDefault();
-      fokuserRad(nyIndex);
-    }
-  };
+  const håndterBehandlingsvelgerTaster = useCallback(
+    (event: KeyboardEvent) => {
+      const rader = hentBehandlingsvelgerRader();
+      const aktivIndex = rader.findIndex(rad => rad === document.activeElement);
+      const nyIndex = nesteFokusIndex(event.key, aktivIndex, rader.length);
+      if (nyIndex !== undefined) {
+        event.preventDefault();
+        fokuserRad(nyIndex);
+      }
+    },
+    [fokuserRad, hentBehandlingsvelgerRader],
+  );
 
   useEffect(() => {
     const element = behandlingsvelgerRef.current;
@@ -103,7 +111,7 @@ export const FagsakProfileIndex = ({
     }
     element.addEventListener('keydown', håndterBehandlingsvelgerTaster);
     return () => element.removeEventListener('keydown', håndterBehandlingsvelgerTaster);
-  });
+  }, [håndterBehandlingsvelgerTaster]);
 
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER, () => {
     if (showAll) {
@@ -120,7 +128,7 @@ export const FagsakProfileIndex = ({
       fokuserVedNesteVisningRef.current = false;
       fokuserBehandlingsvelger();
     }
-  }, [showAll]);
+  }, [fokuserBehandlingsvelger, showAll]);
 
   const api = useFagsakApi();
   const { data: alleFpSakKodeverk } = useQuery(api.kodeverkOptions());

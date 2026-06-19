@@ -36,6 +36,8 @@ export const BEHANDLING_SNARVEG_IDER = {
   NESTE_FAKTA: 'neste-fakta',
 } as const;
 
+const erSekvensDefinisjon = (def: SnarvegDefinisjon): boolean => def.taster.length > 1;
+
 export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
   {
     id: GLOBALE_SNARVEG_IDER.HJELP,
@@ -140,13 +142,13 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
   {
     id: BEHANDLING_SNARVEG_IDER.FORRIGE_FAKTA,
     gruppe: 'behandling',
-    taster: ['PageUp'],
+    taster: [';'],
     beskrivelseId: 'Snarveger.ForrigeFakta',
   },
   {
     id: BEHANDLING_SNARVEG_IDER.NESTE_FAKTA,
     gruppe: 'behandling',
-    taster: ['PageDown'],
+    taster: [':'],
     beskrivelseId: 'Snarveger.NesteFakta',
   },
 ];
@@ -158,3 +160,6 @@ export const finnSekvensDefinisjon = (forsteTast: string, andreTast: string): Sn
 
 export const finnEnkelttastDefinisjon = (tast: string): SnarvegDefinisjon | undefined =>
   snarvegDefinisjoner.find(def => def.taster.length === 1 && def.taster[0] === tast);
+
+export const erSekvensStart = (tast: string): boolean =>
+  snarvegDefinisjoner.some(def => erSekvensDefinisjon(def) && def.taster[0] === tast);

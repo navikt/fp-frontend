@@ -12,6 +12,8 @@ describe('SnarvegerIndex', () => {
     expect(await screen.findByRole('heading', { level: 1, name: 'Tastatursnarveier' })).toBeInTheDocument();
     expect(screen.getByText('Generelt')).toBeInTheDocument();
     expect(screen.getByText('I en behandling')).toBeInTheDocument();
+    expect(screen.getByRole('table', { name: 'Generelt' })).toBeInTheDocument();
+    expect(screen.getByRole('table', { name: 'I en behandling' })).toBeInTheDocument();
   });
 
   it('skal liste opp både globale og behandlingsspesifikke handlinger', () => {
@@ -27,5 +29,11 @@ describe('SnarvegerIndex', () => {
 
     const bryter = screen.getByRole('checkbox', { name: 'Bruk tastatursnarveier' });
     expect(bryter).toBeChecked();
+  });
+
+  it('skal vise sekvens-snarveier med pil i stedet for pluss', () => {
+    render(<Default />);
+
+    expect(screen.getAllByLabelText('deretter')).toHaveLength(4);
   });
 });

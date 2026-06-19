@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon } from '@navikt/aksel-icons';
@@ -68,12 +68,18 @@ export const BehandlingMenuIndex = ({
   const [menyAapen, setMenyAapen] = useState(false);
   const fokuserFørsteVedAapningRef = useRef(false);
 
-  const hentMenyKnappar = (): HTMLButtonElement[] =>
-    Array.from(menyRef.current?.querySelectorAll<HTMLButtonElement>('button.aksel-dropdown__item') ?? []);
+  const hentMenyKnappar = useCallback(
+    (): HTMLButtonElement[] =>
+      Array.from(menyRef.current?.querySelectorAll<HTMLButtonElement>('button.aksel-dropdown__item') ?? []),
+    [],
+  );
 
-  const fokuserMenyKnapp = (index: number) => {
-    hentMenyKnappar()[index]?.focus();
-  };
+  const fokuserMenyKnapp = useCallback(
+    (index: number) => {
+      hentMenyKnappar()[index]?.focus();
+    },
+    [hentMenyKnappar],
+  );
 
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.AAPNE_BEHANDLINGSMENY, () => {
     fokuserFørsteVedAapningRef.current = true;
@@ -85,7 +91,7 @@ export const BehandlingMenuIndex = ({
       fokuserFørsteVedAapningRef.current = false;
       fokuserMenyKnapp(0);
     }
-  }, [menyAapen]);
+  }, [fokuserMenyKnapp, menyAapen]);
 
   const håndterMenyTaster = (event: React.KeyboardEvent) => {
     if (event.key === 'Escape') {
