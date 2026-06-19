@@ -205,17 +205,19 @@ const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormVal
   dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.TomForFom' }) : null;
 
 const buildInitialValues = (annenForelderUttakEøsPeriode: AnnenforelderUttakEøsPeriode): FormValues => ({
-  ...annenForelderUttakEøsPeriode,
+  fom: annenForelderUttakEøsPeriode.fom,
+  tom: annenForelderUttakEøsPeriode.tom,
+  trekkonto: annenForelderUttakEøsPeriode.trekkonto,
   trekkdager: finnDager(annenForelderUttakEøsPeriode.trekkdager),
   trekkuker: finnUker(annenForelderUttakEøsPeriode.trekkdager),
 });
 
-const transformValues = ({ trekkdager, trekkuker, ...rest }: FormValues): AnnenforelderUttakEøsPeriode => {
-  return {
-    ...rest,
-    trekkdager: Number((Number.parseFloat(trekkuker) * 5 + Number.parseFloat(trekkdager)).toFixed(1)),
-  };
-};
+const transformValues = (values: FormValues): AnnenforelderUttakEøsPeriode => ({
+  fom: values.fom,
+  tom: values.tom,
+  trekkonto: values.trekkonto,
+  trekkdager: Number((Number.parseFloat(values.trekkuker) * 5 + Number.parseFloat(values.trekkdager)).toFixed(1)),
+});
 
 export const finnTrekkkonto = (trekkontoKode: UttakPeriodeType, alleKodeverk: AlleKodeverk): string => {
   return alleKodeverk['UttakPeriodeType'].find(k => k.kode === trekkontoKode)?.navn ?? trekkontoKode;

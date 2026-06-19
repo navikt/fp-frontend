@@ -172,7 +172,7 @@ const buildInitialValues = (valgtSaksliste: SakslisteDto): FormValues => {
 };
 
 const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslisteId: number): SakslisteLagreDto => {
-  const { tilBeslutter, andreKriterie, sortering, beskrivelse, ...rest } = values;
+  const { tilBeslutter, andreKriterie, sortering } = values;
   const inkluder = andreKriterie.inkluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   const ekskluder = andreKriterie.ekskluder.filter((t): t is AndreKriterierType => t !== 'TIL_BESLUTTER');
   if (tilBeslutter === 'TA_MED') {
@@ -182,8 +182,10 @@ const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslis
   }
 
   return {
-    ...rest,
-    beskrivelse: beskrivelse === '' ? undefined : beskrivelse,
+    beskrivelse: values.beskrivelse === '' ? undefined : values.beskrivelse,
+    navn: values.navn,
+    behandlingTyper: values.behandlingTyper,
+    fagsakYtelseTyper: values.fagsakYtelseTyper,
     andreKriterie: {
       inkluder,
       ekskluder,
