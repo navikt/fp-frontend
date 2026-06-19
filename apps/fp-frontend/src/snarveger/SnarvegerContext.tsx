@@ -7,8 +7,8 @@ interface SnarvegerContextValue {
   registrer: (id: string, handler: () => void) => () => void;
   /** Køyr handleren som er registrert for id-en, om nokon. Returnerer true om noko vart køyrt. */
   dispatch: (id: string) => boolean;
-  hjelpAapen: boolean;
-  settHjelpAapen: (aapen: boolean) => void;
+  hjelpÅpen: boolean;
+  settHjelpÅpen: (åpen: boolean) => void;
   aktiv: boolean;
   settAktiv: (verdi: boolean) => void;
 }
@@ -17,7 +17,7 @@ const SnarvegerContext = createContext<SnarvegerContextValue | undefined>(undefi
 
 export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
   const handlereRef = useRef(new Map<string, () => void>());
-  const [hjelpAapen, setHjelpAapen] = useState(false);
+  const [hjelpÅpen, setHjelpÅpen] = useState(false);
   const { aktiv, settAktiv } = useSnarvegInnstilling();
 
   const registrer = useCallback((id: string, handler: () => void) => {
@@ -39,8 +39,8 @@ export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const value = useMemo<SnarvegerContextValue>(
-    () => ({ registrer, dispatch, hjelpAapen, settHjelpAapen: setHjelpAapen, aktiv, settAktiv }),
-    [registrer, dispatch, hjelpAapen, aktiv, settAktiv],
+    () => ({ registrer, dispatch, hjelpÅpen, settHjelpÅpen: setHjelpÅpen, aktiv, settAktiv }),
+    [registrer, dispatch, hjelpÅpen, aktiv, settAktiv],
   );
 
   return <SnarvegerContext.Provider value={value}>{children}</SnarvegerContext.Provider>;

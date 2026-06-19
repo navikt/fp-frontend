@@ -33,11 +33,11 @@ const harAapenDialog = (): boolean =>
  *   til handlarane som komponentane har registrert via {@link useRegistrerSnarveg}.
  */
 export const useGlobalSnarveger = (): void => {
-  const { dispatch, settHjelpAapen, aktiv, hjelpAapen } = useSnarvegerContext();
+  const { dispatch, settHjelpÅpen, aktiv, hjelpÅpen } = useSnarvegerContext();
 
-  const tilstandRef = useRef({ dispatch, settHjelpAapen, aktiv, hjelpAapen });
+  const tilstandRef = useRef({ dispatch, settHjelpÅpen, aktiv, hjelpÅpen });
   useEffect(() => {
-    tilstandRef.current = { dispatch, settHjelpAapen, aktiv, hjelpAapen };
+    tilstandRef.current = { dispatch, settHjelpÅpen, aktiv, hjelpÅpen };
   });
 
   const sekvensPrefiksRef = useRef<string | undefined>(undefined);
@@ -53,7 +53,7 @@ export const useGlobalSnarveger = (): void => {
     };
 
     const handterTast = (event: KeyboardEvent) => {
-      const { aktiv: erAktiv, hjelpAapen: erHjelpAapen } = tilstandRef.current;
+      const { aktiv: erAktiv, hjelpÅpen: erHjelpÅpen } = tilstandRef.current;
 
       if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) {
         return;
@@ -62,20 +62,20 @@ export const useGlobalSnarveger = (): void => {
         return;
       }
 
-      if (!erHjelpAapen && harAapenDialog()) {
+      if (!erHjelpÅpen && harAapenDialog()) {
         nullstillSekvens();
         return;
       }
 
       if (event.key === '?') {
-        tilstandRef.current.settHjelpAapen(!erHjelpAapen);
+        tilstandRef.current.settHjelpÅpen(!erHjelpÅpen);
         nullstillSekvens();
         event.preventDefault();
         return;
       }
 
       // Medan hjelpa er open lèt vi Aksel-modalen styre tastaturet (t.d. Escape).
-      if (erHjelpAapen) {
+      if (erHjelpÅpen) {
         return;
       }
 

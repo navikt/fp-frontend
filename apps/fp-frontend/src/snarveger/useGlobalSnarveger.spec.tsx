@@ -18,7 +18,7 @@ const Testflate = ({
   onSnarveg: () => void;
   visDialog?: boolean;
 }) => {
-  const { hjelpAapen, settAktiv } = useSnarvegerContext();
+  const { hjelpÅpen, settAktiv } = useSnarvegerContext();
   useRegistrerSnarveg(id, onSnarveg);
 
   return (
@@ -26,7 +26,7 @@ const Testflate = ({
       <button type="button" onClick={() => settAktiv(false)}>
         Deaktiver snarvegar
       </button>
-      <span data-testid="hjelpstatus">{hjelpAapen ? 'open' : 'closed'}</span>
+      <span data-testid="hjelpstatus">{hjelpÅpen ? 'open' : 'closed'}</span>
       <label>
         Skrivefelt
         <input />
