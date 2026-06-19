@@ -11,6 +11,7 @@ import type { NavAnsatt } from '@navikt/fp-types';
 
 import { GLOBALE_SNARVEG_IDER } from '../../snarveger/snarvegDefinisjoner';
 import { useRegistrerSnarveg, useSnarvegerContextValgfri } from '../../snarveger/SnarvegerContext';
+import { snarvegerErTilgjengelig } from '../../snarveger/snarvegerMiljo';
 import { SNARVEGER_PATH, UTBETALINGSDATA_PATH } from '../paths';
 
 interface Props {
@@ -77,10 +78,12 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
     tekst: intl.formatMessage({ id: 'Dekorator.Utbetalingsdata' }),
     callback: (e: React.SyntheticEvent) => visUtbetalingsdataSide(e),
   });
-  interneLenker.push({
-    tekst: intl.formatMessage({ id: 'Dekorator.Tastatursnarvegar' }),
-    callback: (e: React.SyntheticEvent) => visSnarveger(e),
-  });
+  if (snarvegerErTilgjengelig()) {
+    interneLenker.push({
+      tekst: intl.formatMessage({ id: 'Dekorator.Tastatursnarvegar' }),
+      callback: (e: React.SyntheticEvent) => visSnarveger(e),
+    });
+  }
 
   return (
     <FellesDekorator

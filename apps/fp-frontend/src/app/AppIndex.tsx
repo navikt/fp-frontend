@@ -1,3 +1,4 @@
+import { type ReactNode } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +12,7 @@ import { PollingTimeoutError } from '../data/polling/pollingUtils';
 import { GLOBALE_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
 import { SnarvegerProvider, useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
 import { SnarvegerHjelpModal } from '../snarveger/SnarvegerHjelpModal';
+import { snarvegerErTilgjengelig } from '../snarveger/snarvegerMiljo';
 import { useGlobalSnarveger } from '../snarveger/useGlobalSnarveger';
 import { AppConfigResolver } from './AppConfigResolver';
 import { Dekorator } from './components/Dekorator';
@@ -45,6 +47,23 @@ const SnarvegerLytter = () => {
   return null;
 };
 
+/**
+ * Aktiverer tastatursnarvegane i ikkje-prod-miljø. I prod blir korkje provider, global
+ * lyttar eller hjelp-modal montert, slik at heile snarveg-funksjonaliteten er av.
+ */
+const MedSnarveger = ({ children }: { children: ReactNode }) => {
+  if (!snarvegerErTilgjengelig()) {
+    return children;
+  }
+  return (
+    <SnarvegerProvider>
+      <SnarvegerLytter />
+      {children}
+      <SnarvegerHjelpModal />
+    </SnarvegerProvider>
+  );
+};
+
 const AppIndex = () => {
   const {
     headerHeight,
@@ -63,8 +82,7 @@ const AppIndex = () => {
 
   return (
     <RawIntlProvider value={intl}>
-      <SnarvegerProvider>
-        <SnarvegerLytter />
+      <MedSnarveger>
         <AppConfigResolver>
           <>
             <Dekorator
@@ -79,10 +97,9 @@ const AppIndex = () => {
             <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
               {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
             </ErrorBoundary>
-            <SnarvegerHjelpModal />
           </>
         </AppConfigResolver>
-      </SnarvegerProvider>
+      </MedSnarveger>
     </RawIntlProvider>
   );
 };

@@ -17,6 +17,7 @@ import { RequestPendingProvider } from '../../data/polling/RequestPendingContext
 import { FagsakIndex } from '../../fagsak/FagsakIndex';
 import { FagsakSearchIndex } from '../../fagsakSearch/FagsakSearchIndex';
 import { SnarvegerIndex } from '../../snarveger/SnarvegerIndex';
+import { snarvegerErTilgjengelig } from '../../snarveger/snarvegerMiljo';
 import {
   aktoerRoutePath,
   fagsakRoutePath,
@@ -112,7 +113,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
           }
         />
         <Route path={aktoerRoutePath} element={<AktørIndex />} />
-        <Route path={snarvegerRoutePath} element={<SnarvegerIndex />} />
+        {snarvegerErTilgjengelig() && <Route path={snarvegerRoutePath} element={<SnarvegerIndex />} />}
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
       </Routes>
     </div>
