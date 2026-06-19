@@ -1,6 +1,6 @@
-import { snarvegerErTilgjengelig } from './snarvegerMiljo';
+import { snarvegerErTilgjengelig } from './paths';
 
-describe('snarvegerMiljo', () => {
+describe('paths', () => {
   it('skal slå av snarvegar i prod', () => {
     expect(snarvegerErTilgjengelig('fpsak.intern.nav.no')).toBe(false);
   });

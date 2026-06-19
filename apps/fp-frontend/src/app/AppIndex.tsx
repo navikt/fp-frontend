@@ -12,12 +12,11 @@ import { PollingTimeoutError } from '../data/polling/pollingUtils';
 import { GLOBALE_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
 import { SnarvegerProvider, useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
 import { SnarvegerHjelpModal } from '../snarveger/SnarvegerHjelpModal';
-import { snarvegerErTilgjengelig } from '../snarveger/snarvegerMiljo';
 import { useGlobalSnarveger } from '../snarveger/useGlobalSnarveger';
 import { AppConfigResolver } from './AppConfigResolver';
 import { Dekorator } from './components/Dekorator';
 import { Home } from './components/Home';
-import { utbetalingsdataIs15RoutePath } from './paths';
+import { snarvegerErTilgjengelig, utbetalingsdataIs15RoutePath } from './paths';
 
 import messages from '../../i18n/nb_NO.json';
 

@@ -11,8 +11,7 @@ import type { NavAnsatt } from '@navikt/fp-types';
 
 import { GLOBALE_SNARVEG_IDER } from '../../snarveger/snarvegDefinisjoner';
 import { useRegistrerSnarveg, useSnarvegerContextValgfri } from '../../snarveger/SnarvegerContext';
-import { snarvegerErTilgjengelig } from '../../snarveger/snarvegerMiljo';
-import { UTBETALINGSDATA_PATH } from '../paths';
+import { snarvegerErTilgjengelig, UTBETALINGSDATA_PATH } from '../paths';
 
 interface Props {
   queryStrings: QueryStrings;
