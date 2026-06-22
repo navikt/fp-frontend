@@ -1,4 +1,4 @@
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Dialog } from '@navikt/ds-react';
 
@@ -9,15 +9,16 @@ import { SnarvegerOversikt } from './SnarvegerOversikt';
  * Hjelp-modal som viser alle tastatursnarvegane. Opnast globalt med `?`.
  */
 export const SnarvegerHjelpModal = () => {
-  const intl = useIntl();
   const { snarveiModalÅpen, settSnarveiModalÅpen } = useSnarvegerContext();
 
   return (
     <Dialog open={snarveiModalÅpen} onOpenChange={settSnarveiModalÅpen} size="medium">
       <Dialog.Popup width="medium">
         <Dialog.Header>
-          <Dialog.Title>{intl.formatMessage({ id: 'Snarveger.HjelpModal.Tittel' })}</Dialog.Title>
-        </Dialog.Header>
+        <Dialog.Title>
+          <FormattedMessage id="Snarveger.HjelpModal.Tittel" />
+        </Dialog.Title>
+      </Dialog.Header>
         <Dialog.Body>
           <SnarvegerOversikt />
         </Dialog.Body>
