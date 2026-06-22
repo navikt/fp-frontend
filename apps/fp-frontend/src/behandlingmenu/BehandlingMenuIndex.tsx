@@ -68,6 +68,7 @@ export const BehandlingMenuIndex = ({
   const {
     containerRef: menyRef,
     fokuserElement: fokuserMenyKnapp,
+    håndterTast: håndterMenyTaster,
   } = useTastaturfokus<HTMLDivElement, HTMLButtonElement>({
     selector: '[role="menuitem"]',
     onEscape: () => {
