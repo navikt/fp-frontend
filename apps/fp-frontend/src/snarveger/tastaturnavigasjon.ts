@@ -1,5 +1,3 @@
-const wrapIndex = (index: number, antall: number): number => ((index % antall) + antall) % antall;
-
 /**
  * Reknar ut kva element som skal fokuserast i ei liste ut frå ein piltast-trykk.
  * Brukast til roving-fokus i menyar/lister (pil opp/ned syklar, Home/End hoppar til endane).
@@ -23,3 +21,5 @@ export const nesteFokusIndex = (key: string, aktivIndex: number, antall: number)
       return undefined;
   }
 };
+
+const wrapIndex = (index: number, antall: number): number => ((index % antall) + antall) % antall;

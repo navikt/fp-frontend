@@ -9,28 +9,10 @@ import { SnarvegerHjelpModal } from './SnarvegerHjelpModal';
 
 import messages from '../../i18n/nb_NO.json';
 
-const withIntl = getIntlDecorator(messages);
-
-const withSnarvegerProvider: Decorator = Story => (
-  <SnarvegerProvider>
-    <Story />
-  </SnarvegerProvider>
-);
-
-const ÅpenSnarvegerHjelpModal = () => {
-  const { settSnarveiModalÅpen } = useSnarvegerContext();
-
-  useEffect(() => {
-    settSnarveiModalÅpen(true);
-  }, [settSnarveiModalÅpen]);
-
-  return <SnarvegerHjelpModal />;
-};
-
 const meta = {
   title: 'snarveger/SnarvegerHjelpModal',
   component: SnarvegerHjelpModal,
-  decorators: [withIntl, withSnarvegerProvider],
+  decorators: [getIntlDecorator(messages), withSnarvegerProvider],
   parameters: {
     layout: 'fullscreen',
   },
@@ -42,3 +24,21 @@ type Story = StoryObj<typeof meta>;
 export const Åpen: Story = {
   render: () => <ÅpenSnarvegerHjelpModal />,
 };
+
+function withSnarvegerProvider(Story: Parameters<Decorator>[0]) {
+  return (
+    <SnarvegerProvider>
+      <Story />
+    </SnarvegerProvider>
+  );
+}
+
+function ÅpenSnarvegerHjelpModal() {
+  const { settSnarveiModalÅpen } = useSnarvegerContext();
+
+  useEffect(() => {
+    settSnarveiModalÅpen(true);
+  }, [settSnarveiModalÅpen]);
+
+  return <SnarvegerHjelpModal />;
+}

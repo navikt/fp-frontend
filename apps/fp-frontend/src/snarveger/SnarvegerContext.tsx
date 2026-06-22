@@ -3,19 +3,6 @@ import { createContext, type ReactNode, useCallback, useContext, useEffect, useM
 import { GLOBALE_SNARVEG_IDER } from './snarvegDefinisjoner';
 import { useSnarvegInnstilling } from './useSnarvegInnstilling';
 
-interface SnarvegerContextValue {
-  /** Registrer ein handler for ein snarveg-id. Returnerer ein opprydjingsfunksjon. */
-  registrer: (id: string, handler: () => void) => () => void;
-  /** Køyr handleren som er registrert for id-en, om nokon. Returnerer true om noko vart køyrt. */
-  dispatch: (id: string) => boolean;
-  snarveiModalÅpen: boolean;
-  settSnarveiModalÅpen: (åpen: boolean) => void;
-  aktiv: boolean;
-  settAktiv: (verdi: boolean) => void;
-}
-
-const SnarvegerContext = createContext<SnarvegerContextValue | undefined>(undefined);
-
 export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
   const handlereRef = useRef(new Map<string, () => void>());
   const [snarveiModalÅpen, setSnarveiModalÅpen] = useState(false);
@@ -88,3 +75,16 @@ export const useRegistrerSnarveg = (id: string, handler: () => void, aktivert = 
     return registrer(id, () => handlerRef.current());
   }, [id, aktivert, registrer]);
 };
+
+interface SnarvegerContextValue {
+  /** Registrer ein handler for ein snarveg-id. Returnerer ein opprydjingsfunksjon. */
+  registrer: (id: string, handler: () => void) => () => void;
+  /** Køyr handleren som er registrert for id-en, om nokon. Returnerer true om noko vart køyrt. */
+  dispatch: (id: string) => boolean;
+  snarveiModalÅpen: boolean;
+  settSnarveiModalÅpen: (åpen: boolean) => void;
+  aktiv: boolean;
+  settAktiv: (verdi: boolean) => void;
+}
+
+const SnarvegerContext = createContext<SnarvegerContextValue | undefined>(undefined);

@@ -15,10 +15,10 @@ export const SnarvegerHjelpModal = () => {
     <Dialog open={snarveiModalÅpen} onOpenChange={settSnarveiModalÅpen} size="medium">
       <Dialog.Popup width="medium">
         <Dialog.Header>
-        <Dialog.Title>
-          <FormattedMessage id="Snarveger.HjelpModal.Tittel" />
-        </Dialog.Title>
-      </Dialog.Header>
+          <Dialog.Title>
+            <FormattedMessage id="Snarveger.HjelpModal.Tittel" />
+          </Dialog.Title>
+        </Dialog.Header>
         <Dialog.Body>
           <SnarvegerOversikt />
         </Dialog.Body>

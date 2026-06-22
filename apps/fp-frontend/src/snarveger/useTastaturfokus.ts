@@ -2,18 +2,6 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import { nesteFokusIndex } from './tastaturnavigasjon';
 
-interface Tastaturhendelse {
-  key: string;
-  preventDefault: () => void;
-}
-
-interface TastaturfokusOptions {
-  selector: string;
-  scrollVedFokus?: boolean;
-  onEscape?: () => void;
-  lyttPåContainer?: boolean;
-}
-
 export const useTastaturfokus = <TContainer extends HTMLElement, TElement extends HTMLElement>({
   selector,
   scrollVedFokus = false,
@@ -87,3 +75,15 @@ export const useFokusNårKlar = (kanFokusere: boolean, fokuser: () => void): (()
 
   return fokuserNårKlar;
 };
+
+interface Tastaturhendelse {
+  key: string;
+  preventDefault: () => void;
+}
+
+interface TastaturfokusOptions {
+  selector: string;
+  scrollVedFokus?: boolean;
+  onEscape?: () => void;
+  lyttPåContainer?: boolean;
+}

@@ -7,21 +7,21 @@ import { SnarvegerOversikt } from './SnarvegerOversikt';
 
 import messages from '../../i18n/nb_NO.json';
 
-const withIntl = getIntlDecorator(messages);
-
-const withSnarvegerProvider: Decorator = Story => (
-  <SnarvegerProvider>
-    <Story />
-  </SnarvegerProvider>
-);
-
 const meta = {
   title: 'snarveger/SnarvegerOversikt',
   component: SnarvegerOversikt,
-  decorators: [withIntl, withSnarvegerProvider],
+  decorators: [getIntlDecorator(messages), withSnarvegerProvider],
 } satisfies Meta<typeof SnarvegerOversikt>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+function withSnarvegerProvider(Story: Parameters<Decorator>[0]) {
+  return (
+    <SnarvegerProvider>
+      <Story />
+    </SnarvegerProvider>
+  );
+}

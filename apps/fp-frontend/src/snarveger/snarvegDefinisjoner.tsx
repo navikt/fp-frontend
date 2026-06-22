@@ -39,8 +39,6 @@ export const BEHANDLING_SNARVEG_IDER = {
   NESTE_FAKTA: 'neste-fakta',
 } as const;
 
-const erSekvensDefinisjon = (def: SnarvegDefinisjon): boolean => def.taster.length > 1;
-
 export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
   {
     id: GLOBALE_SNARVEG_IDER.HJELP,
@@ -166,3 +164,5 @@ export const finnEnkelttastDefinisjon = (tast: string): SnarvegDefinisjon | unde
 
 export const erSekvensStart = (tast: string): boolean =>
   snarvegDefinisjoner.some(def => erSekvensDefinisjon(def) && def.taster[0] === tast);
+
+const erSekvensDefinisjon = (def: SnarvegDefinisjon): boolean => def.taster.length > 1;

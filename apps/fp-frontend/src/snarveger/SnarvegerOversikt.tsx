@@ -6,6 +6,29 @@ import { BodyShort, Box, Heading, HStack, Switch, Table, Tag, VStack } from '@na
 import { type SnarvegDefinisjon, snarvegDefinisjoner, type SnarvegGruppe } from './snarvegDefinisjoner';
 import { useSnarvegerContext } from './SnarvegerContext';
 
+/**
+ * Felles innhald for både snarvegsida og hjelp-modalen: listar opp alle snarvegane
+ * gruppert, og lèt brukaren slå snarvegane av/på.
+ */
+export const SnarvegerOversikt = () => {
+  const { aktiv, settAktiv } = useSnarvegerContext();
+
+  return (
+    <VStack gap="space-24">
+      <Switch checked={aktiv} onChange={event => settAktiv(event.target.checked)}>
+        <FormattedMessage id="Snarveger.SlåPå" />
+      </Switch>
+      {GRUPPE_REKKEFOLGE.map(gruppe => (
+        <GruppeTabell
+          key={gruppe}
+          gruppe={gruppe}
+          definisjoner={snarvegDefinisjoner.filter(def => def.gruppe === gruppe)}
+        />
+      ))}
+    </VStack>
+  );
+};
+
 const GRUPPE_REKKEFOLGE: SnarvegGruppe[] = ['global', 'behandling'];
 
 const GruppeTittel = ({ gruppe }: { gruppe: SnarvegGruppe }) => {
@@ -78,29 +101,6 @@ const GruppeTabell = ({ gruppe, definisjoner }: { gruppe: SnarvegGruppe; definis
           ))}
         </Table.Body>
       </Table>
-    </VStack>
-  );
-};
-
-/**
- * Felles innhald for både snarvegsida og hjelp-modalen: listar opp alle snarvegane
- * gruppert, og lèt brukaren slå snarvegane av/på.
- */
-export const SnarvegerOversikt = () => {
-  const { aktiv, settAktiv } = useSnarvegerContext();
-
-  return (
-    <VStack gap="space-24">
-      <Switch checked={aktiv} onChange={event => settAktiv(event.target.checked)}>
-        <FormattedMessage id="Snarveger.SlåPå" />
-      </Switch>
-      {GRUPPE_REKKEFOLGE.map(gruppe => (
-        <GruppeTabell
-          key={gruppe}
-          gruppe={gruppe}
-          definisjoner={snarvegDefinisjoner.filter(def => def.gruppe === gruppe)}
-        />
-      ))}
     </VStack>
   );
 };

@@ -8,42 +8,6 @@ import {
 } from './snarvegDefinisjoner';
 import { useSnarvegerContext } from './SnarvegerContext';
 
-const SEKVENS_TIMEOUT_MS = 1500;
-
-const erSkrivefelt = (element: EventTarget | null): boolean => {
-  if (!(element instanceof HTMLElement)) {
-    return false;
-  }
-  if (element.isContentEditable) {
-    return true;
-  }
-  const tag = element.tagName;
-  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
-    return true;
-  }
-  return element.getAttribute('role') === 'textbox';
-};
-
-const normaliserTast = (key: string): string => (key.length === 1 ? key.toUpperCase() : key);
-
-const erÅpenDialog = (element: Element): boolean => {
-  if (element.tagName === 'DIALOG') {
-    return element.hasAttribute('open');
-  }
-  if (!(element instanceof HTMLElement)) {
-    return false;
-  }
-  if (element.hidden || element.getAttribute('aria-hidden') === 'true') {
-    return false;
-  }
-
-  const style = globalThis.getComputedStyle(element);
-  return style.display !== 'none' && style.visibility !== 'hidden';
-};
-
-const harÅpenDialog = (): boolean =>
-  Array.from(globalThis.document.querySelectorAll('dialog, [role="dialog"], [aria-modal="true"]')).some(erÅpenDialog);
-
 /**
  * Global lyttar for tastatursnarvegar. Skal monterast éin gong, høgt i treet og innanfor Router.
  *
@@ -135,3 +99,39 @@ export const useGlobalSnarveger = (): void => {
     };
   }, []);
 };
+
+const SEKVENS_TIMEOUT_MS = 1500;
+
+const erSkrivefelt = (element: EventTarget | null): boolean => {
+  if (!(element instanceof HTMLElement)) {
+    return false;
+  }
+  if (element.isContentEditable) {
+    return true;
+  }
+  const tag = element.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
+    return true;
+  }
+  return element.getAttribute('role') === 'textbox';
+};
+
+const normaliserTast = (key: string): string => (key.length === 1 ? key.toUpperCase() : key);
+
+const erÅpenDialog = (element: Element): boolean => {
+  if (element.tagName === 'DIALOG') {
+    return element.hasAttribute('open');
+  }
+  if (!(element instanceof HTMLElement)) {
+    return false;
+  }
+  if (element.hidden || element.getAttribute('aria-hidden') === 'true') {
+    return false;
+  }
+
+  const style = globalThis.getComputedStyle(element);
+  return style.display !== 'none' && style.visibility !== 'hidden';
+};
+
+const harÅpenDialog = (): boolean =>
+  Array.from(globalThis.document.querySelectorAll('dialog, [role="dialog"], [aria-modal="true"]')).some(erÅpenDialog);

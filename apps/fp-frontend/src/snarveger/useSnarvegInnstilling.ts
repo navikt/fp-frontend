@@ -1,16 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 
-const STORAGE_KEY = 'fp-frontend-snarveger-aktiv';
-
-const lesInnstilling = (): boolean => {
-  try {
-    // Default på: berre slått av dersom brukaren eksplisitt har valt det.
-    return globalThis.localStorage.getItem(STORAGE_KEY) !== 'false';
-  } catch {
-    return true;
-  }
-};
-
 /**
  * Av/på-innstilling for tastatursnarvegar, lagra i localStorage.
  *
@@ -39,4 +28,15 @@ export const useSnarvegInnstilling = (): { aktiv: boolean; settAktiv: (verdi: bo
   }, []);
 
   return { aktiv, settAktiv };
+};
+
+const STORAGE_KEY = 'fp-frontend-snarveger-aktiv';
+
+const lesInnstilling = (): boolean => {
+  try {
+    // Default på: berre slått av dersom brukaren eksplisitt har valt det.
+    return globalThis.localStorage.getItem(STORAGE_KEY) !== 'false';
+  } catch {
+    return true;
+  }
 };
