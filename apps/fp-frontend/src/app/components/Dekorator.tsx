@@ -41,7 +41,7 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
 
   const visSnarveger = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    snarvegerContext?.settHjelpÅpen(true);
+    snarvegerContext?.settSnarveiModalÅpen(true);
   };
 
   useRegistrerSnarveg(

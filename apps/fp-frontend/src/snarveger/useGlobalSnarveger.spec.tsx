@@ -18,7 +18,7 @@ const Testflate = ({
   onSnarveg: () => void;
   visDialog?: boolean;
 }) => {
-  const { hjelpÅpen, settAktiv } = useSnarvegerContext();
+  const { snarveiModalÅpen, settAktiv } = useSnarvegerContext();
   useRegistrerSnarveg(id, onSnarveg);
 
   return (
@@ -26,7 +26,7 @@ const Testflate = ({
       <button type="button" onClick={() => settAktiv(false)}>
         Deaktiver snarvegar
       </button>
-      <span data-testid="hjelpstatus">{hjelpÅpen ? 'open' : 'closed'}</span>
+      <span data-testid="snarvei-modal-status">{snarveiModalÅpen ? 'open' : 'closed'}</span>
       <label>
         <span>Skrivefelt</span>
         <input />
@@ -101,6 +101,6 @@ describe('useGlobalSnarveger', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Deaktiver snarvegar' }));
     trykk('?');
 
-    await waitFor(() => expect(screen.getByTestId('hjelpstatus')).toHaveTextContent('open'));
+    await waitFor(() => expect(screen.getByTestId('snarvei-modal-status')).toHaveTextContent('open'));
   });
 });

@@ -10,10 +10,10 @@ import { SnarvegerOversikt } from './SnarvegerOversikt';
  */
 export const SnarvegerHjelpModal = () => {
   const intl = useIntl();
-  const { hjelpÅpen, settHjelpÅpen } = useSnarvegerContext();
+  const { snarveiModalÅpen, settSnarveiModalÅpen } = useSnarvegerContext();
 
   return (
-    <Dialog open={hjelpÅpen} onOpenChange={settHjelpÅpen} size="medium">
+    <Dialog open={snarveiModalÅpen} onOpenChange={settSnarveiModalÅpen} size="medium">
       <Dialog.Popup width="medium">
         <Dialog.Header>
           <Dialog.Title>{intl.formatMessage({ id: 'Snarveger.HjelpModal.Tittel' })}</Dialog.Title>

@@ -8,8 +8,8 @@ interface SnarvegerContextValue {
   registrer: (id: string, handler: () => void) => () => void;
   /** Køyr handleren som er registrert for id-en, om nokon. Returnerer true om noko vart køyrt. */
   dispatch: (id: string) => boolean;
-  hjelpÅpen: boolean;
-  settHjelpÅpen: (åpen: boolean) => void;
+  snarveiModalÅpen: boolean;
+  settSnarveiModalÅpen: (åpen: boolean) => void;
   aktiv: boolean;
   settAktiv: (verdi: boolean) => void;
 }
@@ -18,10 +18,10 @@ const SnarvegerContext = createContext<SnarvegerContextValue | undefined>(undefi
 
 export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
   const handlereRef = useRef(new Map<string, () => void>());
-  const [hjelpÅpen, setHjelpÅpen] = useState(false);
+  const [snarveiModalÅpen, setSnarveiModalÅpen] = useState(false);
   const { aktiv, settAktiv } = useSnarvegInnstilling();
-  const toggleHjelp = useCallback(() => {
-    setHjelpÅpen(prev => !prev);
+  const toggleSnarveiModal = useCallback(() => {
+    setSnarveiModalÅpen(prev => !prev);
   }, []);
 
   const registrer = useCallback((id: string, handler: () => void) => {
@@ -42,11 +42,11 @@ export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
     return false;
   }, []);
 
-  useEffect(() => registrer(GLOBALE_SNARVEG_IDER.HJELP, toggleHjelp), [registrer, toggleHjelp]);
+  useEffect(() => registrer(GLOBALE_SNARVEG_IDER.HJELP, toggleSnarveiModal), [registrer, toggleSnarveiModal]);
 
   const value = useMemo<SnarvegerContextValue>(
-    () => ({ registrer, dispatch, hjelpÅpen, settHjelpÅpen: setHjelpÅpen, aktiv, settAktiv }),
-    [registrer, dispatch, hjelpÅpen, aktiv, settAktiv],
+    () => ({ registrer, dispatch, snarveiModalÅpen, settSnarveiModalÅpen: setSnarveiModalÅpen, aktiv, settAktiv }),
+    [registrer, dispatch, snarveiModalÅpen, aktiv, settAktiv],
   );
 
   return <SnarvegerContext.Provider value={value}>{children}</SnarvegerContext.Provider>;
