@@ -66,9 +66,7 @@ const GruppeTabell = ({ gruppe, definisjoner }: { gruppe: SnarvegGruppe; definis
               </Table.DataCell>
               <Table.DataCell>
                 <HStack as="span" gap="space-8" align="center" wrap>
-                  <BodyShort as="span">
-                    <FormattedMessage id={def.beskrivelseId} />
-                  </BodyShort>
+                  <BodyShort as="span">{def.beskrivelse}</BodyShort>
                   {def.kunNårTilgjengelig && (
                     <Tag variant="neutral" size="xsmall">
                       <FormattedMessage id="Snarveger.KunNårTilgjengelig" />

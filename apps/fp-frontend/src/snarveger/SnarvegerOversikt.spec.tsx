@@ -1,23 +1,11 @@
-import { RawIntlProvider } from 'react-intl';
-
-import { createIntl } from '@navikt/ft-utils';
+import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 
-import { SnarvegerProvider } from './SnarvegerContext';
-import { SnarvegerOversikt } from './SnarvegerOversikt';
+import * as stories from './SnarvegerOversikt.stories';
 
-import messages from '../../i18n/nb_NO.json';
+const { Default } = composeStories(stories);
 
-const intl = createIntl(messages);
-
-const renderSnarvegerOversikt = () =>
-  render(
-    <RawIntlProvider value={intl}>
-      <SnarvegerProvider>
-        <SnarvegerOversikt />
-      </SnarvegerProvider>
-    </RawIntlProvider>,
-  );
+const renderSnarvegerOversikt = () => render(<Default />);
 
 describe('SnarvegerOversikt', () => {
   it('skal vise gruppene med snarveier', () => {

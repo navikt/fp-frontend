@@ -1,3 +1,6 @@
+import { type ReactNode } from 'react';
+import { FormattedMessage } from 'react-intl';
+
 export type SnarvegGruppe = 'global' | 'behandling';
 
 export interface SnarvegDefinisjon {
@@ -6,8 +9,8 @@ export interface SnarvegDefinisjon {
   gruppe: SnarvegGruppe;
   /** Tastane som må trykkast. Fleire element = sekvens (t.d. ['G', 'O'] = trykk G, så O). */
   taster: string[];
-  /** i18n-nøkkel for beskrivelsen som visast i oversikta. */
-  beskrivelseId: string;
+  /** Beskrivelsen som visast i oversikta. */
+  beskrivelse: ReactNode;
   /** Settast når snarvegen berre er aktiv i visse situasjonar (visast med ein merknad). */
   kunNårTilgjengelig?: boolean;
 }
@@ -43,113 +46,113 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
     id: GLOBALE_SNARVEG_IDER.HJELP,
     gruppe: 'global',
     taster: ['?'],
-    beskrivelseId: 'Snarveger.Hjelp',
+    beskrivelse: <FormattedMessage id="Snarveger.Hjelp" />,
   },
   {
     id: GLOBALE_SNARVEG_IDER.OPPGAVELISTE,
     gruppe: 'global',
     taster: ['G', 'O'],
-    beskrivelseId: 'Snarveger.Oppgaveliste',
+    beskrivelse: <FormattedMessage id="Snarveger.Oppgaveliste" />,
   },
   {
     id: GLOBALE_SNARVEG_IDER.INFOTRYGD,
     gruppe: 'global',
     taster: ['G', 'I'],
-    beskrivelseId: 'Snarveger.Infotrygd',
+    beskrivelse: <FormattedMessage id="Snarveger.Infotrygd" />,
   },
   {
     id: GLOBALE_SNARVEG_IDER.AVDELINGSLEDER,
     gruppe: 'global',
     taster: ['G', 'A'],
-    beskrivelseId: 'Snarveger.Avdelingsleder',
+    beskrivelse: <FormattedMessage id="Snarveger.Avdelingsleder" />,
     kunNårTilgjengelig: true,
   },
   {
     id: GLOBALE_SNARVEG_IDER.JOURNALFØRING,
     gruppe: 'global',
     taster: ['G', 'J'],
-    beskrivelseId: 'Snarveger.Journalføring',
+    beskrivelse: <FormattedMessage id="Snarveger.Journalføring" />,
     kunNårTilgjengelig: true,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK,
     gruppe: 'behandling',
     taster: ['1'],
-    beskrivelseId: 'Snarveger.StøtteHistorikk',
+    beskrivelse: <FormattedMessage id="Snarveger.StøtteHistorikk" />,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.STØTTE_MELDINGER,
     gruppe: 'behandling',
     taster: ['2'],
-    beskrivelseId: 'Snarveger.StøtteMeldinger',
+    beskrivelse: <FormattedMessage id="Snarveger.StøtteMeldinger" />,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.STØTTE_DOKUMENTER,
     gruppe: 'behandling',
     taster: ['3'],
-    beskrivelseId: 'Snarveger.StøtteDokumenter',
+    beskrivelse: <FormattedMessage id="Snarveger.StøtteDokumenter" />,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.STØTTE_NOTATER,
     gruppe: 'behandling',
     taster: ['4'],
-    beskrivelseId: 'Snarveger.StøtteNotater',
+    beskrivelse: <FormattedMessage id="Snarveger.StøtteNotater" />,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.STØTTE_TIL_BESLUTTER,
     gruppe: 'behandling',
     taster: ['5'],
-    beskrivelseId: 'Snarveger.StøtteTilBeslutter',
+    beskrivelse: <FormattedMessage id="Snarveger.StøtteTilBeslutter" />,
     kunNårTilgjengelig: true,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.STØTTE_FRA_BESLUTTER,
     gruppe: 'behandling',
     taster: ['6'],
-    beskrivelseId: 'Snarveger.StøtteFraBeslutter',
+    beskrivelse: <FormattedMessage id="Snarveger.StøtteFraBeslutter" />,
     kunNårTilgjengelig: true,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.UTVID_DETALJER,
     gruppe: 'behandling',
     taster: ['E'],
-    beskrivelseId: 'Snarveger.UtvidDetaljer',
+    beskrivelse: <FormattedMessage id="Snarveger.UtvidDetaljer" />,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.ÅPNE_BEHANDLINGSMENY,
     gruppe: 'behandling',
     taster: ['M'],
-    beskrivelseId: 'Snarveger.ÅpneBehandlingsmeny',
+    beskrivelse: <FormattedMessage id="Snarveger.ÅpneBehandlingsmeny" />,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER,
     gruppe: 'behandling',
     taster: ['B'],
-    beskrivelseId: 'Snarveger.FokuserBehandlingsvelger',
+    beskrivelse: <FormattedMessage id="Snarveger.FokuserBehandlingsvelger" />,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.FORRIGE_PROSESS,
     gruppe: 'behandling',
     taster: [','],
-    beskrivelseId: 'Snarveger.ForrigeProsess',
+    beskrivelse: <FormattedMessage id="Snarveger.ForrigeProsess" />,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.NESTE_PROSESS,
     gruppe: 'behandling',
     taster: ['.'],
-    beskrivelseId: 'Snarveger.NesteProsess',
+    beskrivelse: <FormattedMessage id="Snarveger.NesteProsess" />,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.FORRIGE_FAKTA,
     gruppe: 'behandling',
     taster: [';'],
-    beskrivelseId: 'Snarveger.ForrigeFakta',
+    beskrivelse: <FormattedMessage id="Snarveger.ForrigeFakta" />,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.NESTE_FAKTA,
     gruppe: 'behandling',
     taster: [':'],
-    beskrivelseId: 'Snarveger.NesteFakta',
+    beskrivelse: <FormattedMessage id="Snarveger.NesteFakta" />,
   },
 ];
 
