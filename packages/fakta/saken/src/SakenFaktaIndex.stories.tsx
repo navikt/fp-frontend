@@ -35,6 +35,7 @@ const meta = {
   component: SakenFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
+    utlandDokStatus: undefined,
     isReadOnly: false,
     kanOverstyreAccess: true,
     ytelsefordeling: defaultYtelsefordeling,
