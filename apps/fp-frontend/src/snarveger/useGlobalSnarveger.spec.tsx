@@ -28,10 +28,10 @@ const Testflate = ({
       </button>
       <span data-testid="hjelpstatus">{hjelpÅpen ? 'open' : 'closed'}</span>
       <label>
-        Skrivefelt
+        <span>Skrivefelt</span>
         <input />
       </label>
-      {visDialog && <div role="dialog">Ein annan modal</div>}
+      {visDialog && <dialog open>Ein annan modal</dialog>}
     </>
   );
 };
@@ -45,7 +45,7 @@ const renderSnarveger = (id: string, onSnarveg = vi.fn(), visDialog = false) =>
   );
 
 const trykk = (key: string) => {
-  fireEvent.keyDown(window, { key });
+  fireEvent.keyDown(globalThis.window, { key });
 };
 
 describe('useGlobalSnarveger', () => {

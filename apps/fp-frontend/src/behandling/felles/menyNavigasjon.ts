@@ -9,7 +9,10 @@ export const finnNabopanelId = (menyData: { id: string; erAktiv: boolean }[], re
     return undefined;
   }
   const aktivIndex = menyData.findIndex(d => d.erAktiv);
-  const startIndex = aktivIndex === -1 ? (retning === 1 ? -1 : 0) : aktivIndex;
+  let startIndex = aktivIndex;
+  if (aktivIndex === -1) {
+    startIndex = retning === 1 ? -1 : 0;
+  }
   const nyIndex = (startIndex + retning + menyData.length) % menyData.length;
   return menyData[nyIndex]?.id;
 };

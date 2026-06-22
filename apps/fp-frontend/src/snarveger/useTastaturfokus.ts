@@ -48,7 +48,7 @@ export const useTastaturfokus = <TContainer extends HTMLElement, TElement extend
       }
 
       const elementer = hentElementer();
-      const aktivIndex = elementer.findIndex(element => element === document.activeElement);
+      const aktivIndex = elementer.indexOf(document.activeElement as TElement);
       const nyIndex = nesteFokusIndex(event.key, aktivIndex, elementer.length);
       if (nyIndex !== undefined) {
         event.preventDefault();

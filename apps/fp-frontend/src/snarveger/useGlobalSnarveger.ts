@@ -100,7 +100,7 @@ export const useGlobalSnarveger = (): void => {
       }
 
       const def = finnEnkelttastDefinisjon(tast);
-      if (def && def.gruppe === 'behandling' && tilstandRef.current.dispatch(def.id)) {
+      if (def?.gruppe === 'behandling' && tilstandRef.current.dispatch(def.id)) {
         event.preventDefault();
       }
     };
