@@ -25,3 +25,8 @@
 .toggleShowAllButton:focus {
   outline: none;
 }
+.linkToBehandling:focus-visible > :first-child,
+.toggleShowAllButton:focus-visible > :first-child {
+  outline: 3px solid var(--ax-border-focus);
+  outline-offset: 2px;
+}
