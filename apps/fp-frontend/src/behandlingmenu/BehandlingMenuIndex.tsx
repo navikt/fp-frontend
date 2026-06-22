@@ -68,9 +68,8 @@ export const BehandlingMenuIndex = ({
   const {
     containerRef: menyRef,
     fokuserElement: fokuserMenyKnapp,
-    håndterTast: håndterMenyTaster,
   } = useTastaturfokus<HTMLDivElement, HTMLButtonElement>({
-    selector: 'button.aksel-dropdown__item',
+    selector: '[role="menuitem"]',
     onEscape: () => {
       setMenyÅpen(false);
       toggleRef.current?.focus();
