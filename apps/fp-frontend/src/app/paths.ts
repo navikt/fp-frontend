@@ -6,7 +6,7 @@ import type { SkjermlenkeType, SkjermlenkeTypeFpTilbake } from '@navikt/fp-types
 
 const UTBETALINGSDATA_PATH = 'utbetalingsdata';
 
-const PROD_HOSTNAME_DEL = 'intern.nav.no';
+const PROD_HOSTNAME = 'fpsak.intern.nav.no';
 const DEFAULT_FAKTA = 'default';
 const DEFAULT_PROSESS_STEG = 'default';
 
@@ -16,8 +16,7 @@ export const aktoerRoutePath = '/aktoer/:aktoerId';
 export const behandlingerRoutePath = '/behandling//*';
 export const behandlingRoutePath = '/:behandlingUuid/';
 
-export const snarvegerErTilgjengelig = (hostname = globalThis.location.hostname): boolean =>
-  !hostname.includes(PROD_HOSTNAME_DEL);
+export const snarvegerErTilgjengelig = (hostname = globalThis.location.hostname): boolean => hostname !== PROD_HOSTNAME;
 
 export const pathToFagsak = (saksnummer: string): string => `/fagsak/${saksnummer}/`;
 export const pathToBehandlinger = (saksnummer: string): string => `/fagsak/${saksnummer}/behandling/`;
