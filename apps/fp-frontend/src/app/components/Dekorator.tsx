@@ -11,7 +11,7 @@ import type { NavAnsatt } from '@navikt/fp-types';
 
 import { GLOBALE_SNARVEG_IDER } from '../../snarveger/snarvegDefinisjoner';
 import { useRegistrerSnarveg, useSnarvegerContextValgfri } from '../../snarveger/SnarvegerContext';
-import { snarvegerErTilgjengelig, UTBETALINGSDATA_PATH } from '../paths';
+import { snarvegerErTilgjengelig, utbetalingsdataIs15RoutePath } from '../paths';
 
 interface Props {
   queryStrings: QueryStrings;
@@ -35,7 +35,7 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
   };
 
   const visUtbetalingsdataSide = (e: React.SyntheticEvent) => {
-    void navigate(UTBETALINGSDATA_PATH);
+    void navigate(utbetalingsdataIs15RoutePath);
     e.preventDefault();
   };
 

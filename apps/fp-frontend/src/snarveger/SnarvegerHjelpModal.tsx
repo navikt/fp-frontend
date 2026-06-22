@@ -13,7 +13,7 @@ export const SnarvegerHjelpModal = () => {
   const { hjelpÅpen, settHjelpÅpen } = useSnarvegerContext();
 
   return (
-    <Dialog open={hjelpÅpen} onOpenChange={() => settHjelpÅpen(false)} size="medium">
+    <Dialog open={hjelpÅpen} onOpenChange={settHjelpÅpen} size="medium">
       <Dialog.Popup width="medium">
         <Dialog.Header>
           <Dialog.Title>{intl.formatMessage({ id: 'Snarveger.HjelpModal.Tittel' })}</Dialog.Title>
