@@ -12,11 +12,11 @@ const SnarvegLytter = () => {
 const Testflate = ({
   id,
   onSnarveg,
-  visDialog = false,
+  dialogtype,
 }: {
   id: string;
   onSnarveg: () => void;
-  visDialog?: boolean;
+  dialogtype?: 'åpen' | 'skjult';
 }) => {
   const { snarveiModalÅpen, settAktiv } = useSnarvegerContext();
   useRegistrerSnarveg(id, onSnarveg);
@@ -31,16 +31,21 @@ const Testflate = ({
         <span>Skrivefelt</span>
         <input />
       </label>
-      {visDialog && <dialog open>Ein annan modal</dialog>}
+      {dialogtype === 'åpen' && <dialog open>Ein annan modal</dialog>}
+      {dialogtype === 'skjult' && (
+        <div aria-hidden="true" role="dialog">
+          Ein skjult modal
+        </div>
+      )}
     </>
   );
 };
 
-const renderSnarveger = (id: string, onSnarveg = vi.fn(), visDialog = false) =>
+const renderSnarveger = (id: string, onSnarveg = vi.fn(), dialogtype?: 'åpen' | 'skjult') =>
   render(
     <SnarvegerProvider>
       <SnarvegLytter />
-      <Testflate id={id} onSnarveg={onSnarveg} visDialog={visDialog} />
+      <Testflate id={id} onSnarveg={onSnarveg} dialogtype={dialogtype} />
     </SnarvegerProvider>,
   );
 
@@ -88,11 +93,20 @@ describe('useGlobalSnarveger', () => {
 
   it('skal ignorere snarvegar når ein annan dialog er open', () => {
     const onSnarveg = vi.fn();
-    renderSnarveger(BEHANDLING_SNARVEG_IDER.STOTTE_HISTORIKK, onSnarveg, true);
+    renderSnarveger(BEHANDLING_SNARVEG_IDER.STOTTE_HISTORIKK, onSnarveg, 'åpen');
 
     trykk('1');
 
     expect(onSnarveg).not.toHaveBeenCalled();
+  });
+
+  it('skal ikkje ignorere snarvegar når ein skjult dialog finst i DOM-en', () => {
+    const onSnarveg = vi.fn();
+    renderSnarveger(BEHANDLING_SNARVEG_IDER.STOTTE_HISTORIKK, onSnarveg, 'skjult');
+
+    trykk('1');
+
+    expect(onSnarveg).toHaveBeenCalledTimes(1);
   });
 
   it('skal opne hjelp med spørsmålsteikn sjølv om snarvegar elles er deaktivert', async () => {

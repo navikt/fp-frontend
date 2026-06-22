@@ -26,8 +26,23 @@ const erSkrivefelt = (element: EventTarget | null): boolean => {
 
 const normaliserTast = (key: string): string => (key.length === 1 ? key.toUpperCase() : key);
 
+const erÅpenDialog = (element: Element): boolean => {
+  if (element.tagName === 'DIALOG') {
+    return element.hasAttribute('open');
+  }
+  if (!(element instanceof HTMLElement)) {
+    return false;
+  }
+  if (element.hidden || element.getAttribute('aria-hidden') === 'true') {
+    return false;
+  }
+
+  const style = globalThis.getComputedStyle(element);
+  return style.display !== 'none' && style.visibility !== 'hidden';
+};
+
 const harÅpenDialog = (): boolean =>
-  globalThis.document.querySelector('dialog[open], [role="dialog"], [aria-modal="true"]') !== null;
+  Array.from(globalThis.document.querySelectorAll('dialog, [role="dialog"], [aria-modal="true"]')).some(erÅpenDialog);
 
 /**
  * Global lyttar for tastatursnarvegar. Skal monterast éin gong, høgt i treet og innanfor Router.
