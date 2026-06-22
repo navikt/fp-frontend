@@ -4,7 +4,7 @@ import { getLocationWithQueryParams } from '@navikt/fp-app-felles';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 import type { SkjermlenkeType, SkjermlenkeTypeFpTilbake } from '@navikt/fp-types';
 
-export const UTBETALINGSDATA_PATH = 'utbetalingsdata';
+const UTBETALINGSDATA_PATH = 'utbetalingsdata';
 
 const PROD_HOSTNAME_DEL = 'intern.nav.no';
 const DEFAULT_FAKTA = 'default';
