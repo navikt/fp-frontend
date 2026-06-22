@@ -1,6 +1,11 @@
 import { useEffect, useRef } from 'react';
 
-import { erSekvensStart, finnEnkelttastDefinisjon, finnSekvensDefinisjon } from './snarvegDefinisjoner';
+import {
+  erSekvensStart,
+  finnEnkelttastDefinisjon,
+  finnSekvensDefinisjon,
+  GLOBALE_SNARVEG_IDER,
+} from './snarvegDefinisjoner';
 import { useSnarvegerContext } from './SnarvegerContext';
 
 const SEKVENS_TIMEOUT_MS = 1500;
@@ -67,7 +72,10 @@ export const useGlobalSnarveger = (): void => {
         return;
       }
 
-      if (event.key === '?') {
+      const tast = normaliserTast(event.key);
+      const enkelttastDefinisjon = finnEnkelttastDefinisjon(tast);
+
+      if (enkelttastDefinisjon?.id === GLOBALE_SNARVEG_IDER.HJELP) {
         tilstandRef.current.settHjelpÅpen(!erHjelpÅpen);
         nullstillSekvens();
         event.preventDefault();
@@ -92,15 +100,13 @@ export const useGlobalSnarveger = (): void => {
         return;
       }
 
-      const tast = normaliserTast(event.key);
       if (erSekvensStart(tast)) {
         sekvensPrefiksRef.current = tast;
         sekvensTimeoutRef.current = setTimeout(nullstillSekvens, SEKVENS_TIMEOUT_MS);
         return;
       }
 
-      const def = finnEnkelttastDefinisjon(tast);
-      if (def?.gruppe === 'behandling' && tilstandRef.current.dispatch(def.id)) {
+      if (enkelttastDefinisjon?.gruppe === 'behandling' && tilstandRef.current.dispatch(enkelttastDefinisjon.id)) {
         event.preventDefault();
       }
     };
