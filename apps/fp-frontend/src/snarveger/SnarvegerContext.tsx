@@ -1,5 +1,6 @@
 import { createContext, type ReactNode, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
+import { GLOBALE_SNARVEG_IDER } from './snarvegDefinisjoner';
 import { useSnarvegInnstilling } from './useSnarvegInnstilling';
 
 interface SnarvegerContextValue {
@@ -19,6 +20,9 @@ export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
   const handlereRef = useRef(new Map<string, () => void>());
   const [hjelpÅpen, setHjelpÅpen] = useState(false);
   const { aktiv, settAktiv } = useSnarvegInnstilling();
+  const toggleHjelp = useCallback(() => {
+    setHjelpÅpen(prev => !prev);
+  }, []);
 
   const registrer = useCallback((id: string, handler: () => void) => {
     handlereRef.current.set(id, handler);
@@ -37,6 +41,8 @@ export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
     }
     return false;
   }, []);
+
+  useEffect(() => registrer(GLOBALE_SNARVEG_IDER.HJELP, toggleHjelp), [registrer, toggleHjelp]);
 
   const value = useMemo<SnarvegerContextValue>(
     () => ({ registrer, dispatch, hjelpÅpen, settHjelpÅpen: setHjelpÅpen, aktiv, settAktiv }),

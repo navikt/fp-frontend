@@ -38,11 +38,11 @@ const harÅpenDialog = (): boolean =>
  *   til handlarane som komponentane har registrert via {@link useRegistrerSnarveg}.
  */
 export const useGlobalSnarveger = (): void => {
-  const { dispatch, settHjelpÅpen, aktiv, hjelpÅpen } = useSnarvegerContext();
+  const { dispatch, aktiv, hjelpÅpen } = useSnarvegerContext();
 
-  const tilstandRef = useRef({ dispatch, settHjelpÅpen, aktiv, hjelpÅpen });
+  const tilstandRef = useRef({ dispatch, aktiv, hjelpÅpen });
   useEffect(() => {
-    tilstandRef.current = { dispatch, settHjelpÅpen, aktiv, hjelpÅpen };
+    tilstandRef.current = { dispatch, aktiv, hjelpÅpen };
   });
 
   const sekvensPrefiksRef = useRef<string | undefined>(undefined);
@@ -75,8 +75,10 @@ export const useGlobalSnarveger = (): void => {
       const tast = normaliserTast(event.key);
       const enkelttastDefinisjon = finnEnkelttastDefinisjon(tast);
 
-      if (enkelttastDefinisjon?.id === GLOBALE_SNARVEG_IDER.HJELP) {
-        tilstandRef.current.settHjelpÅpen(!erHjelpÅpen);
+      if (
+        enkelttastDefinisjon?.id === GLOBALE_SNARVEG_IDER.HJELP &&
+        tilstandRef.current.dispatch(enkelttastDefinisjon.id)
+      ) {
         nullstillSekvens();
         event.preventDefault();
         return;
