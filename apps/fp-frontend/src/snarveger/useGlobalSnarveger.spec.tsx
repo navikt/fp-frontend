@@ -56,7 +56,7 @@ const trykk = (key: string) => {
 describe('useGlobalSnarveger', () => {
   it('skal køyre registrert enkelttast-snarveg', () => {
     const onSnarveg = vi.fn();
-    renderSnarveger(BEHANDLING_SNARVEG_IDER.STOTTE_HISTORIKK, onSnarveg);
+    renderSnarveger(BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK, onSnarveg);
 
     trykk('1');
 
@@ -84,7 +84,7 @@ describe('useGlobalSnarveger', () => {
 
   it('skal ignorere snarvegar når fokus er i skrivefelt', () => {
     const onSnarveg = vi.fn();
-    renderSnarveger(BEHANDLING_SNARVEG_IDER.STOTTE_HISTORIKK, onSnarveg);
+    renderSnarveger(BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK, onSnarveg);
 
     fireEvent.keyDown(screen.getByLabelText('Skrivefelt'), { key: '1' });
 
@@ -93,7 +93,7 @@ describe('useGlobalSnarveger', () => {
 
   it('skal ignorere snarvegar når ein annan dialog er open', () => {
     const onSnarveg = vi.fn();
-    renderSnarveger(BEHANDLING_SNARVEG_IDER.STOTTE_HISTORIKK, onSnarveg, 'åpen');
+    renderSnarveger(BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK, onSnarveg, 'åpen');
 
     trykk('1');
 
@@ -102,7 +102,7 @@ describe('useGlobalSnarveger', () => {
 
   it('skal ikkje ignorere snarvegar når ein skjult dialog finst i DOM-en', () => {
     const onSnarveg = vi.fn();
-    renderSnarveger(BEHANDLING_SNARVEG_IDER.STOTTE_HISTORIKK, onSnarveg, 'skjult');
+    renderSnarveger(BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK, onSnarveg, 'skjult');
 
     trykk('1');
 
@@ -110,7 +110,7 @@ describe('useGlobalSnarveger', () => {
   });
 
   it('skal opne hjelp med spørsmålsteikn sjølv om snarvegar elles er deaktivert', async () => {
-    renderSnarveger(BEHANDLING_SNARVEG_IDER.STOTTE_HISTORIKK);
+    renderSnarveger(BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK);
 
     fireEvent.click(screen.getByRole('button', { name: 'Deaktiver snarvegar' }));
     trykk('?');

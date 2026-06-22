@@ -9,7 +9,7 @@ export interface SnarvegDefinisjon {
   /** i18n-nøkkel for beskrivelsen som visast i oversikta. */
   beskrivelseId: string;
   /** Settast når snarvegen berre er aktiv i visse situasjonar (visast med ein merknad). */
-  kunNarTilgjengelig?: boolean;
+  kunNårTilgjengelig?: boolean;
 }
 
 export const GLOBALE_SNARVEG_IDER = {
@@ -21,12 +21,12 @@ export const GLOBALE_SNARVEG_IDER = {
 } as const;
 
 export const BEHANDLING_SNARVEG_IDER = {
-  STOTTE_HISTORIKK: 'stotte-historikk',
-  STOTTE_MELDINGER: 'stotte-meldinger',
-  STOTTE_DOKUMENTER: 'stotte-dokumenter',
-  STOTTE_NOTATER: 'stotte-notater',
-  STOTTE_TIL_BESLUTTER: 'stotte-til-beslutter',
-  STOTTE_FRA_BESLUTTER: 'stotte-fra-beslutter',
+  STØTTE_HISTORIKK: 'støtte-historikk',
+  STØTTE_MELDINGER: 'støtte-meldinger',
+  STØTTE_DOKUMENTER: 'støtte-dokumenter',
+  STØTTE_NOTATER: 'støtte-notater',
+  STØTTE_TIL_BESLUTTER: 'støtte-til-beslutter',
+  STØTTE_FRA_BESLUTTER: 'støtte-fra-beslutter',
   UTVID_DETALJER: 'utvid-detaljer',
   ÅPNE_BEHANDLINGSMENY: 'åpne-behandlingsmeny',
   FOKUSER_BEHANDLINGSVELGER: 'fokuser-behandlingsvelger',
@@ -62,52 +62,52 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
     gruppe: 'global',
     taster: ['G', 'A'],
     beskrivelseId: 'Snarveger.Avdelingsleder',
-    kunNarTilgjengelig: true,
+    kunNårTilgjengelig: true,
   },
   {
     id: GLOBALE_SNARVEG_IDER.JOURNALFØRING,
     gruppe: 'global',
     taster: ['G', 'J'],
     beskrivelseId: 'Snarveger.Journalføring',
-    kunNarTilgjengelig: true,
+    kunNårTilgjengelig: true,
   },
   {
-    id: BEHANDLING_SNARVEG_IDER.STOTTE_HISTORIKK,
+    id: BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK,
     gruppe: 'behandling',
     taster: ['1'],
-    beskrivelseId: 'Snarveger.StotteHistorikk',
+    beskrivelseId: 'Snarveger.StøtteHistorikk',
   },
   {
-    id: BEHANDLING_SNARVEG_IDER.STOTTE_MELDINGER,
+    id: BEHANDLING_SNARVEG_IDER.STØTTE_MELDINGER,
     gruppe: 'behandling',
     taster: ['2'],
-    beskrivelseId: 'Snarveger.StotteMeldinger',
+    beskrivelseId: 'Snarveger.StøtteMeldinger',
   },
   {
-    id: BEHANDLING_SNARVEG_IDER.STOTTE_DOKUMENTER,
+    id: BEHANDLING_SNARVEG_IDER.STØTTE_DOKUMENTER,
     gruppe: 'behandling',
     taster: ['3'],
-    beskrivelseId: 'Snarveger.StotteDokumenter',
+    beskrivelseId: 'Snarveger.StøtteDokumenter',
   },
   {
-    id: BEHANDLING_SNARVEG_IDER.STOTTE_NOTATER,
+    id: BEHANDLING_SNARVEG_IDER.STØTTE_NOTATER,
     gruppe: 'behandling',
     taster: ['4'],
-    beskrivelseId: 'Snarveger.StotteNotater',
+    beskrivelseId: 'Snarveger.StøtteNotater',
   },
   {
-    id: BEHANDLING_SNARVEG_IDER.STOTTE_TIL_BESLUTTER,
+    id: BEHANDLING_SNARVEG_IDER.STØTTE_TIL_BESLUTTER,
     gruppe: 'behandling',
     taster: ['5'],
-    beskrivelseId: 'Snarveger.StotteTilBeslutter',
-    kunNarTilgjengelig: true,
+    beskrivelseId: 'Snarveger.StøtteTilBeslutter',
+    kunNårTilgjengelig: true,
   },
   {
-    id: BEHANDLING_SNARVEG_IDER.STOTTE_FRA_BESLUTTER,
+    id: BEHANDLING_SNARVEG_IDER.STØTTE_FRA_BESLUTTER,
     gruppe: 'behandling',
     taster: ['6'],
-    beskrivelseId: 'Snarveger.StotteFraBeslutter',
-    kunNarTilgjengelig: true,
+    beskrivelseId: 'Snarveger.StøtteFraBeslutter',
+    kunNårTilgjengelig: true,
   },
   {
     id: BEHANDLING_SNARVEG_IDER.UTVID_DETALJER,
@@ -153,9 +153,9 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
   },
 ];
 
-export const finnSekvensDefinisjon = (forsteTast: string, andreTast: string): SnarvegDefinisjon | undefined =>
+export const finnSekvensDefinisjon = (førsteTast: string, andreTast: string): SnarvegDefinisjon | undefined =>
   snarvegDefinisjoner.find(
-    def => def.taster.length === 2 && def.taster[0] === forsteTast && def.taster[1] === andreTast,
+    def => def.taster.length === 2 && def.taster[0] === førsteTast && def.taster[1] === andreTast,
   );
 
 export const finnEnkelttastDefinisjon = (tast: string): SnarvegDefinisjon | undefined =>

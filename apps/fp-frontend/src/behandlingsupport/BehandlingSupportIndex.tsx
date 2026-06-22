@@ -87,17 +87,17 @@ export const BehandlingSupportIndex = ({
     void navigate(getSupportPanelLocation(supportPanel));
   };
 
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STOTTE_HISTORIKK, () => changeRouteCallback(SupportTabs.HISTORIKK));
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STOTTE_MELDINGER, () => changeRouteCallback(SupportTabs.MELDINGER));
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STOTTE_DOKUMENTER, () => changeRouteCallback(SupportTabs.DOKUMENTER));
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STOTTE_NOTATER, () => changeRouteCallback(SupportTabs.NOTATER));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK, () => changeRouteCallback(SupportTabs.HISTORIKK));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_MELDINGER, () => changeRouteCallback(SupportTabs.MELDINGER));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_DOKUMENTER, () => changeRouteCallback(SupportTabs.DOKUMENTER));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_NOTATER, () => changeRouteCallback(SupportTabs.NOTATER));
   useRegistrerSnarveg(
-    BEHANDLING_SNARVEG_IDER.STOTTE_TIL_BESLUTTER,
+    BEHANDLING_SNARVEG_IDER.STØTTE_TIL_BESLUTTER,
     () => changeRouteCallback(SupportTabs.TIL_BESLUTTER),
     skalViseTilGodkjenning,
   );
   useRegistrerSnarveg(
-    BEHANDLING_SNARVEG_IDER.STOTTE_FRA_BESLUTTER,
+    BEHANDLING_SNARVEG_IDER.STØTTE_FRA_BESLUTTER,
     () => changeRouteCallback(SupportTabs.FRA_BESLUTTER),
     skalViseFraBeslutter,
   );
