@@ -32,11 +32,7 @@ const Testflate = ({
         <input />
       </label>
       {dialogtype === 'åpen' && <dialog open>Ein annan modal</dialog>}
-      {dialogtype === 'skjult' && (
-        <div aria-hidden="true" role="dialog">
-          Ein skjult modal
-        </div>
-      )}
+      {dialogtype === 'skjult' && <dialog aria-hidden="true">Ein skjult modal</dialog>}
     </>
   );
 };

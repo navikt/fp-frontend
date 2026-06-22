@@ -22,7 +22,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Åpen: Story = {
-  render: () => <ÅpenSnarvegerHjelpModal />,
+  render: () => <SnarvegerHjelpModalÅpen />,
 };
 
 function withSnarvegerProvider(Story: Parameters<Decorator>[0]) {
@@ -33,7 +33,7 @@ function withSnarvegerProvider(Story: Parameters<Decorator>[0]) {
   );
 }
 
-function ÅpenSnarvegerHjelpModal() {
+function SnarvegerHjelpModalÅpen() {
   const { settSnarveiModalÅpen } = useSnarvegerContext();
 
   useEffect(() => {
