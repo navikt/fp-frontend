@@ -4,9 +4,6 @@
   "Dekorator.Utbetalingsdata": "Søk i infotrygd",
   "Dekorator.Avdelingsleder": "Avdelingsleder",
   "Dekorator.Tastatursnarvegar": "Tastatursnarveier",
-
-  "Snarveger.Tittel": "Tastatursnarveier",
-  "Snarveger.Ingress": "Oversikt over tastatursnarveier for å navigere raskere i applikasjonen. Du kan når som helst trykke ? for å vise denne oversikten og slå snarveiene av eller på under. Snarveier med pil trykkes som en sekvens: trykk første tast, slipp, og trykk deretter neste tast.",
   "Snarveger.HjelpModal.Tittel": "Tastatursnarveier",
   "Snarveger.SlåPå": "Bruk tastatursnarveier",
   "Snarveger.KunNarTilgjengelig": "Når tilgjengelig",
