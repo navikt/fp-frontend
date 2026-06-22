@@ -59,7 +59,6 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
     <div>
       <VStack gap="space-16">
         <NøkkeltallbokserPanel valgtAvdelingEnhet={valgtAvdelingEnhet}>
-          {/* TODO (TOR) Denne selecten bør flyttast til dekoratøren */}
           <Select
             size="small"
             label={<FormattedMessage id="AvdelingslederIndex.Avdeling" />}

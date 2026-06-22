@@ -37,6 +37,7 @@ export const useBrevEditorJs = (
   const refMounted = useRef<boolean>(false);
   const refDestroyed = useRef<boolean>(false);
   const refEditorJs = useRef<EditorJS>(null);
+  const refUndo = useRef<Undo>(null);
   const refCurrentHtml = useRef('');
 
   // Refs for å unngå stale closures i EditorJS onChange-callback
@@ -75,7 +76,7 @@ export const useBrevEditorJs = (
           if (refDestroyed.current) {
             return;
           }
-          new Undo({ editor });
+          refUndo.current = new Undo({ editor });
 
           // For å seinare kunne finna ut om innhaldet er endra
           const innhold = await editor.save();
