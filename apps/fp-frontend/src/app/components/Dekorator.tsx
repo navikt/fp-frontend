@@ -9,7 +9,9 @@ import { getAvdelingslederLenke, getJournalføringLenke } from '@navikt/fp-konst
 import { type DekoratorLenke } from '@navikt/fp-sak-dekorator';
 import type { NavAnsatt } from '@navikt/fp-types';
 
-import { UTBETALINGSDATA_PATH } from '../paths';
+import { GLOBALE_SNARVEG_IDER } from '../../snarveger/snarvegDefinisjoner';
+import { useRegistrerSnarveg, useSnarvegerContextValgfri } from '../../snarveger/SnarvegerContext';
+import { snarvegerErTilgjengelig, utbetalingsdataIs15RoutePath } from '../paths';
 
 interface Props {
   queryStrings: QueryStrings;
@@ -27,14 +29,31 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
   const { navn = '', kanOppgavestyre = false, kanSaksbehandle = false } = navAnsatt ?? {};
 
   const navigate = useNavigate();
+  const snarvegerContext = useSnarvegerContextValgfri();
   const gotToAppRoot = () => {
     void navigate('/');
   };
 
   const visUtbetalingsdataSide = (e: React.SyntheticEvent) => {
-    void navigate(UTBETALINGSDATA_PATH);
+    void navigate(utbetalingsdataIs15RoutePath);
     e.preventDefault();
   };
+
+  const visSnarveger = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    snarvegerContext?.settSnarveiModalÅpen(true);
+  };
+
+  useRegistrerSnarveg(
+    GLOBALE_SNARVEG_IDER.AVDELINGSLEDER,
+    () => (globalThis.location.href = getAvdelingslederLenke()),
+    kanOppgavestyre,
+  );
+  useRegistrerSnarveg(
+    GLOBALE_SNARVEG_IDER.JOURNALFØRING,
+    () => (globalThis.location.href = getJournalføringLenke()),
+    kanSaksbehandle,
+  );
 
   const interneLenker: DekoratorLenke[] = [];
   if (kanOppgavestyre) {
@@ -53,6 +72,12 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
     tekst: intl.formatMessage({ id: 'Dekorator.Utbetalingsdata' }),
     callback: (e: React.SyntheticEvent) => visUtbetalingsdataSide(e),
   });
+  if (snarvegerErTilgjengelig()) {
+    interneLenker.push({
+      tekst: intl.formatMessage({ id: 'Dekorator.Tastatursnarvegar' }),
+      callback: (e: React.SyntheticEvent) => visSnarveger(e),
+    });
+  }
 
   return (
     <FellesDekorator

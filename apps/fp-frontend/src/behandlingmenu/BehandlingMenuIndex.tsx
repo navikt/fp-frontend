@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon } from '@navikt/aksel-icons';
@@ -17,6 +17,9 @@ import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchOptions } from '../data/fagsakApi';
 import { FagsakData } from '../fagsak/FagsakData';
+import { BEHANDLING_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
+import { useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
+import { useFokusNårKlar, useTastaturfokus } from '../snarveger/useTastaturfokus';
 import { ApneForEndringerMenyModal } from './modaler/ApneForEndringerMenyModal';
 import { EndreBehandlendeEnhetMenyModal } from './modaler/EndreBehandlendeEnhetMenyModal';
 import { EndreFagsakMarkeringMenyModal } from './modaler/EndreFagsakMarkeringMenyModal';
@@ -60,6 +63,26 @@ export const BehandlingMenuIndex = ({
   const [valgtModal, setValgtModal] = useState<string | undefined>();
   const lukkModal = () => setValgtModal(undefined);
 
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const [menyÅpen, setMenyÅpen] = useState(false);
+  const {
+    containerRef: menyRef,
+    fokuserElement: fokuserMenyKnapp,
+    håndterTast: håndterMenyTaster,
+  } = useTastaturfokus<HTMLDivElement, HTMLButtonElement>({
+    selector: 'button.aksel-dropdown__item',
+    onEscape: () => {
+      setMenyÅpen(false);
+      toggleRef.current?.focus();
+    },
+  });
+  const fokuserFørsteVedÅpning = useFokusNårKlar(menyÅpen, () => fokuserMenyKnapp(0));
+
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.ÅPNE_BEHANDLINGSMENY, () => {
+    fokuserFørsteVedÅpning();
+    setMenyÅpen(true);
+  });
+
   const fagsak = fagsakData.getFagsak();
   const behandlingAppContext = fagsakData.getBehandling(behandlingUuid);
 
@@ -67,8 +90,9 @@ export const BehandlingMenuIndex = ({
 
   return (
     <>
-      <Dropdown>
+      <Dropdown open={menyÅpen} onOpenChange={setMenyÅpen}>
         <Button
+          ref={toggleRef}
           size="small"
           as={Dropdown.Toggle}
           iconPosition="right"
@@ -77,7 +101,7 @@ export const BehandlingMenuIndex = ({
         >
           <FormattedMessage id="BehandlingMenuIndex.Behandlingsmeny" />
         </Button>
-        <Dropdown.Menu>
+        <Dropdown.Menu ref={menyRef} onKeyDown={håndterMenyTaster}>
           <Dropdown.Menu.List>
             {Object.keys(menyData)
               .filter(key => !menyData[key]!.disabled)

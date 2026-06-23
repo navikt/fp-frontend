@@ -18,6 +18,8 @@ import type { TotrinnskontrollFormValues } from '@navikt/fp-sak-totrinnskontroll
 
 import { getSupportPanelLocationCreator } from '../app/paths';
 import { FagsakData } from '../fagsak/FagsakData';
+import { BEHANDLING_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
+import { useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
 import { DokumentIndex } from './dokument/DokumentIndex';
 import { HistorikkIndex } from './historikk/HistorikkIndex';
 import { MeldingIndex } from './melding/MeldingIndex';
@@ -84,6 +86,22 @@ export const BehandlingSupportIndex = ({
     const getSupportPanelLocation = getSupportPanelLocationCreator(location);
     void navigate(getSupportPanelLocation(supportPanel));
   };
+
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK, () => changeRouteCallback(SupportTabs.HISTORIKK));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_MELDINGER, () => changeRouteCallback(SupportTabs.MELDINGER));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_DOKUMENTER, () => changeRouteCallback(SupportTabs.DOKUMENTER));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_NOTATER, () => changeRouteCallback(SupportTabs.NOTATER));
+  useRegistrerSnarveg(
+    BEHANDLING_SNARVEG_IDER.STØTTE_TIL_BESLUTTER,
+    () => changeRouteCallback(SupportTabs.TIL_BESLUTTER),
+    skalViseTilGodkjenning,
+  );
+  useRegistrerSnarveg(
+    BEHANDLING_SNARVEG_IDER.STØTTE_FRA_BESLUTTER,
+    () => changeRouteCallback(SupportTabs.FRA_BESLUTTER),
+    skalViseFraBeslutter,
+  );
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.UTVID_DETALJER, toggleVisUtvidetBehandlingDetaljer);
 
   return (
     <Tabs value={aktivtSupportPanel} onChange={changeRouteCallback}>
