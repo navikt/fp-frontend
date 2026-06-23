@@ -44,11 +44,11 @@ const Tastesekvens = ({ taster }: { taster: string[] }) => (
   <HStack as="span" gap="space-4" align="center">
     {taster.map((tast, index) => (
       <Fragment key={tast}>
-        {index > 0 && <span aria-label="deretter">→</span>}
+        {index > 0 && <span aria-label="deretter">+</span>}
         <Box
           asChild
-          background="default"
-          borderColor="neutral-subtle"
+          background="neutral-moderate"
+          borderColor="neutral"
           borderWidth="1 1 2 1"
           borderRadius="4"
           minWidth="1.5rem"

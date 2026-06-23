@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { nesteFokusIndex } from './tastaturnavigasjon';
 
 /**
- * Samlar roving-fokus for eksisterande menyar/lister: finn fokuserbare element
+ * Samlar tastaturfokus for eksisterande menyar/lister: finn fokuserbare element
  * inni ein container, flyttar fokus med piltastar/Home/End og kan lukke med Escape.
  */
 export const useTastaturfokus = <TContainer extends HTMLElement, TElement extends HTMLElement>({

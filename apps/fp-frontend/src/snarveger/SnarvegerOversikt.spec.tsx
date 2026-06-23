@@ -32,9 +32,11 @@ describe('SnarvegerOversikt', () => {
     expect(bryter).toBeChecked();
   });
 
-  it('skal vise sekvens-snarveier med pil i stedet for pluss', () => {
+  it('skal vise sekvens-snarveier med pluss mellom tastene', () => {
     renderSnarvegerOversikt();
 
-    expect(screen.getAllByLabelText('deretter')).toHaveLength(4);
+    const separatorer = screen.getAllByLabelText('deretter');
+    expect(separatorer).toHaveLength(4);
+    separatorer.forEach(separator => expect(separator).toHaveTextContent('+'));
   });
 });
