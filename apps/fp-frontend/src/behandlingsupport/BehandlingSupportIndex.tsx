@@ -94,7 +94,7 @@ export const BehandlingSupportIndex = ({
   );
 
   const byttSupportPanel = (supportPanel: string) => {
-    planleggPanelfokus();
+    planleggPanelfokus(supportPanel);
     changeRouteCallback(supportPanel);
   };
 

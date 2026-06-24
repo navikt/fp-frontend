@@ -12,7 +12,7 @@ describe('useTastaturfokus', () => {
     const fokuser = vi.fn();
     const { result, rerender } = renderPanelfokus(fokuser);
 
-    result.current();
+    result.current('b');
     rerender({ panel: 'b' });
 
     expect(fokuser).toHaveBeenCalledTimes(1);
@@ -31,7 +31,7 @@ describe('useTastaturfokus', () => {
     const fokuser = vi.fn();
     const { result, rerender } = renderPanelfokus(fokuser);
 
-    result.current();
+    result.current('b');
     rerender({ panel: 'a' });
 
     expect(fokuser).not.toHaveBeenCalled();
@@ -41,10 +41,20 @@ describe('useTastaturfokus', () => {
     const fokuser = vi.fn();
     const { result, rerender } = renderPanelfokus(fokuser);
 
-    result.current();
+    result.current('b');
     rerender({ panel: 'b' });
     rerender({ panel: 'c' });
 
     expect(fokuser).toHaveBeenCalledTimes(1);
+  });
+
+  it('skal ikkje planleggje fokus når målpanelet alt er aktivt', () => {
+    const fokuser = vi.fn();
+    const { result, rerender } = renderPanelfokus(fokuser);
+
+    result.current('a');
+    rerender({ panel: 'b' });
+
+    expect(fokuser).not.toHaveBeenCalled();
   });
 });

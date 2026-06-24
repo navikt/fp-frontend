@@ -39,7 +39,7 @@ export const ProsessMeny = <T extends Behandling>({ valgtProsessSteg, valgtFakta
   const byttProsessPanel = (retning: 1 | -1) => {
     const nyId = finnNabopanelId(prosessPanelMenyData, retning);
     if (nyId) {
-      planleggInnholdsfokus();
+      planleggInnholdsfokus(nyId);
       oppdaterProsessStegOgFaktaPanelIUrl(nyId, valgtFaktaSteg);
     }
   };

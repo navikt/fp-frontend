@@ -43,7 +43,7 @@ export const FaktaMeny = <T extends Behandling>({
   const byttFaktaPanel = (retning: 1 | -1) => {
     const nyId = finnNabopanelId(faktaPanelMenyData, retning);
     if (nyId) {
-      planleggInnholdsfokus();
+      planleggInnholdsfokus(nyId);
       oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, nyId);
     }
   };
