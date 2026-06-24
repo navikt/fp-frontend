@@ -3,13 +3,10 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
 import { FadingPanel } from '@navikt/ft-ui-komponenter';
-import classnames from 'classnames/bind';
 
 import type { VilkårUtfallType } from '@navikt/fp-types';
 
 import styles from './prosessPanelWrapper.module.css';
-
-const classNames = classnames.bind(styles);
 
 interface PanelContainerProps {
   skalSkjulePanel?: boolean;
@@ -17,7 +14,7 @@ interface PanelContainerProps {
 }
 
 const PanelContainer = ({ skalSkjulePanel = false, children }: PanelContainerProps) => (
-  <div className={classNames('steg', { skalSkjulePanel })}>
+  <div className={[styles['steg'], skalSkjulePanel && styles['skalSkjulePanel']].filter(Boolean).join(' ')}>
     <FadingPanel>{children}</FadingPanel>
   </div>
 );

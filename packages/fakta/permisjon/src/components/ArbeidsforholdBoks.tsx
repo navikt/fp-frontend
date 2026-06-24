@@ -1,10 +1,6 @@
 import { type ReactElement } from 'react';
 
-import classnames from 'classnames/bind';
-
 import styles from './arbeidsforholdBoks.module.css';
-
-const classNames = classnames.bind(styles);
 
 interface Props {
   harÅpentAksjonspunkt: boolean;
@@ -14,10 +10,13 @@ interface Props {
 
 export const ArbeidsforholdBoks = ({ harÅpentAksjonspunkt, harBorderTop, children }: Props) => (
   <div
-    className={classNames(styles['boks'], {
-      aksjonspunkt: harÅpentAksjonspunkt,
-      harBorderTop,
-    })}
+    className={[
+      styles['boks'],
+      harÅpentAksjonspunkt && styles['aksjonspunkt'],
+      harBorderTop && styles['harBorderTop'],
+    ]
+      .filter(Boolean)
+      .join(' ')}
   >
     {children}
   </div>
