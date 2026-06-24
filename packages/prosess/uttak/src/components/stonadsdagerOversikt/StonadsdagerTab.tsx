@@ -4,6 +4,7 @@ import { BodyShort, Detail, VStack } from '@navikt/ds-react';
 import { BTag } from '@navikt/ft-utils';
 
 import type { Stonadskonto, StønadskontoType } from '@navikt/fp-types';
+import { classNames } from '@navikt/fp-utils';
 
 import styles from './stonadsdagerTab.module.css';
 
@@ -58,13 +59,11 @@ export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false
   return (
     <div className={styles['tabs']}>
       <li
-        className={[styles['tab'], aktiv && styles['aktiv'], !stønadskonto.gyldigForbruk && styles['error']]
-          .filter(Boolean)
-          .join(' ')}
+        className={classNames(styles['tab'], aktiv && styles['aktiv'], !stønadskonto.gyldigForbruk && styles['error'])}
       >
         <button
           role="tab"
-          className={[styles['tabInner'], !stønadskonto.gyldigForbruk && styles['error']].filter(Boolean).join(' ')}
+          className={classNames(styles['tabInner'], !stønadskonto.gyldigForbruk && styles['error'])}
           type="button"
           onClick={velgKonto}
           aria-selected={aktiv}

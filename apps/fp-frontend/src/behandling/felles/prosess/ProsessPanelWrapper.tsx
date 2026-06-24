@@ -5,6 +5,7 @@ import { BodyShort } from '@navikt/ds-react';
 import { FadingPanel } from '@navikt/ft-ui-komponenter';
 
 import type { VilkårUtfallType } from '@navikt/fp-types';
+import { classNames } from '@navikt/fp-utils';
 
 import styles from './prosessPanelWrapper.module.css';
 
@@ -14,7 +15,7 @@ interface PanelContainerProps {
 }
 
 const PanelContainer = ({ skalSkjulePanel = false, children }: PanelContainerProps) => (
-  <div className={[styles['steg'], skalSkjulePanel && styles['skalSkjulePanel']].filter(Boolean).join(' ')}>
+  <div className={classNames(styles['steg'], skalSkjulePanel && styles['skalSkjulePanel'])}>
     <FadingPanel>{children}</FadingPanel>
   </div>
 );

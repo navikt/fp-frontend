@@ -12,6 +12,7 @@ import type {
   SimuleringResultatPerFagområde,
   SimuleringResultatRad,
 } from '@navikt/fp-types';
+import { classNames } from '@navikt/fp-utils';
 
 import { CollapseButton } from './CollapseButton';
 
@@ -168,14 +169,12 @@ const createColumns = (
     <Table.DataCell
       key={`columnIndex${månedIndex + 1}`}
       style={{ borderBottom }}
-      className={[
+      className={classNames(
         (!måned.beløp || måned.beløp < 0) && styles['rodTekst'],
         ('måned' in måned
           ? måned.måned === nextPeriodFormatted
           : dayjs(måned.periode.tom).format('MMMMYY') === nextPeriodFormatted) && styles['lastColumn'],
-      ]
-        .filter(Boolean)
-        .join(' ')}
+      )}
     >
       <BeløpLabel beløp={måned.beløp} />
     </Table.DataCell>

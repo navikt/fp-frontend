@@ -1,5 +1,7 @@
 import { type ReactElement } from 'react';
 
+import { classNames } from '@navikt/fp-utils';
+
 import styles from './arbeidsforholdBoks.module.css';
 
 interface Props {
@@ -10,13 +12,11 @@ interface Props {
 
 export const ArbeidsforholdBoks = ({ harÅpentAksjonspunkt, harBorderTop, children }: Props) => (
   <div
-    className={[
+    className={classNames(
       styles['boks'],
       harÅpentAksjonspunkt && styles['aksjonspunkt'],
       harBorderTop && styles['harBorderTop'],
-    ]
-      .filter(Boolean)
-      .join(' ')}
+    )}
   >
     {children}
   </div>

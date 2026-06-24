@@ -7,6 +7,7 @@ import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
+import { classNames } from '@navikt/fp-utils';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { Årsakstype, utledÅrsakstype, UttakFaktaDetailForm } from './UttakFaktaDetailForm';
@@ -129,13 +130,11 @@ export const UttakFaktaTable = ({
                 togglePlacement="right"
                 open={valgteFomDatoer.includes(periode.fom)}
                 onOpenChange={() => velgPeriodeFomDato(periode.fom)}
-                className={[
+                className={classNames(
                   styles['row'],
                   valgteFomDatoer.includes(periode.fom) && styles['isOpen'],
                   !!periode.aksjonspunktType && styles['isApOpen'],
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
+                )}
                 contentGutter="none"
                 content={
                   valgteFomDatoer.includes(periode.fom) && (

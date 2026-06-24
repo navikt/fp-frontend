@@ -11,6 +11,7 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
+import { classNames } from '@navikt/fp-utils';
 
 import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
 import { ArbeidsforholdInformasjonPanel } from './felles/ArbeidsforholdInformasjonPanel';
@@ -77,9 +78,7 @@ export const ArbeidsforholdRad = ({
       expandOnRowClick
       togglePlacement="right"
       contentGutter="none"
-      className={[styles['row'], erRadÅpen && styles['isOpen'], harÅpentAksjonspunkt && styles['isApOpen']]
-        .filter(Boolean)
-        .join(' ')}
+      className={classNames(styles['row'], erRadÅpen && styles['isOpen'], harÅpentAksjonspunkt && styles['isApOpen'])}
       content={
         <VStack gap="space-16" className={harÅpentAksjonspunkt ? styles['panelOpenAp'] : styles['panelOpen']}>
           {erManueltOpprettet && (
