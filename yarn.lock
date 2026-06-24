@@ -2684,6 +2684,7 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": "npm:12.3.1"
     "@navikt/ft-form-validators": "npm:6.0.9"
+    "@navikt/ft-plattform-komponenter": "npm:12.0.10"
     "@navikt/ft-ui-komponenter": "npm:8.0.11"
     "@navikt/ft-utils": "npm:5.0.8"
     "@storybook/react": "npm:10.4.0"

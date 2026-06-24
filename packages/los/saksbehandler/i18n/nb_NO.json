@@ -33,9 +33,6 @@
 
   "Person.Age": "{age} år",
   "Person.ImageText": "Personinformasjon",
-  "Person.Woman": "Kvinne",
-  "Person.Man": "Mann",
-  "Person.ManglerDodsdato": "Dødsdato mangler",
   "Person.UkjentNavn": "Ukjent navn på forelder",
   "Person.HarIkkeNorskFnrEllerDnr": "Har ikke norsk f.nr. eller d-nr.",
 
@@ -82,7 +79,7 @@
   "FagsakList.Status": "Status",
   "FagsakList.BarnFodt": "Barnet er født",
 
-  "MerkePanel.Dod": "DØD",
+  "MerkePanel.Dod": "Død {dødsdato}",
   "MerkePanel.Diskresjon6": "Kode 6",
   "MerkePanel.Diskresjon7": "Kode 7",
   "MerkePanel.DodTittel": "Personen er død",
