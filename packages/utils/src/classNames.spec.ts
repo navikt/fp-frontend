@@ -15,9 +15,10 @@ describe('classNames', () => {
     expect(classNames(false, undefined, null)).toBe('');
   });
 
-  it('skal støtte betinga klassar via && ', () => {
-    const aktiv = true;
-    const error = false;
-    expect(classNames('tab', aktiv && 'aktiv', error && 'error')).toBe('tab aktiv');
+  it('skal støtte betinga klassar via &&', () => {
+    const lagTabKlasse = (aktiv: boolean, error: boolean) =>
+      classNames('tab', aktiv && 'aktiv', error && 'error');
+    expect(lagTabKlasse(true, false)).toBe('tab aktiv');
+    expect(lagTabKlasse(false, true)).toBe('tab error');
   });
 });
