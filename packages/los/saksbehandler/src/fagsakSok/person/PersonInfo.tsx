@@ -1,44 +1,39 @@
-import { useIntl } from 'react-intl';
-
-import { FigureInwardFillIcon, FigureOutwardFillIcon } from '@navikt/aksel-icons';
 import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
-import dayjs from 'dayjs';
+import { Gender, GenderIcon } from '@navikt/ft-plattform-komponenter';
 
-import { type Person } from '@navikt/fp-types';
+import type { NavBrukerKjønn, Person } from '@navikt/fp-types';
 
 import { Aldersvisning } from './Aldersvisning';
 import { MerkePanel } from './Merkepanel';
-
-import styles from './personInfo.module.css';
 
 interface Props {
   person: Person;
 }
 
-export const PersonInfo = ({ person }: Props) => {
-  const intl = useIntl();
-  const { kjønn, dødsdato, diskresjonskode, fødselsdato, navn, fødselsnummer } = person;
-
-  const alder = dayjs().diff(fødselsdato, 'years');
-
-  return (
-    <HStack gap="space-16">
-      {kjønn === 'K' && (
-        <FigureOutwardFillIcon
-          className={styles['kvinneIcon']}
-          title={intl.formatMessage({ id: 'Person.ImageText' })}
-        />
-      )}
-      {kjønn === 'M' && (
-        <FigureInwardFillIcon className={styles['MannIcon']} title={intl.formatMessage({ id: 'Person.ImageText' })} />
-      )}
-      <VStack gap="space-4">
+export const PersonInfo = ({
+  person: { kjønn, dødsdato, diskresjonskode, fødselsdato, navn, fødselsnummer },
+}: Props) => (
+  <HStack gap="space-16" align="center">
+    <GenderIcon gender={getGender(kjønn)} size={40} />
+    <HStack gap="space-16" align="baseline">
+      <VStack>
         <Heading size="small" level="2">
-          {navn} <Aldersvisning erDød={!!dødsdato} alder={alder} dødsdato={dødsdato} />
+          {navn} <Aldersvisning erDød={!!dødsdato} fødselsdato={fødselsdato} />
         </Heading>
-        <Detail>{fødselsnummer}</Detail>
+        <Detail>{formaterFnr(fødselsnummer)}</Detail>
       </VStack>
-      <MerkePanel erDød={!!dødsdato} diskresjonskode={diskresjonskode} />
+      <MerkePanel diskresjonskode={diskresjonskode} dødsdato={dødsdato} />
     </HStack>
-  );
+  </HStack>
+);
+
+const getGender = (kjønn: NavBrukerKjønn | undefined) => {
+  if (kjønn === 'K') {
+    return Gender.female;
+  }
+  return kjønn === 'M' ? Gender.male : Gender.unknown;
+};
+
+const formaterFnr = (fnr: string) => {
+  return fnr.slice(0, 6) + ' ' + fnr.slice(6);
 };

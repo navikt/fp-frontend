@@ -1,29 +1,18 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort } from '@navikt/ds-react';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
-
-import styles from './aldersvisning.module.css';
+import dayjs from 'dayjs';
 
 interface Props {
   erDød: boolean;
-  alder: number;
-  dødsdato?: string;
+  fødselsdato: string;
 }
 
-/**
- * Aldersvisning
- *
- * Definerer visning av personens alder. (Søker)
- */
-export const Aldersvisning = ({ erDød, alder, dødsdato }: Props) => {
+export const Aldersvisning = ({ erDød, fødselsdato }: Props) => {
   if (erDød) {
-    return (
-      <BodyShort size="small" className={styles['displayInline']}>
-        {dødsdato ? <DateLabel dateString={dødsdato} /> : <FormattedMessage id="Person.ManglerDodsdato" />}
-      </BodyShort>
-    );
+    return null;
   }
+
+  const alder = dayjs().diff(fødselsdato, 'years');
 
   return (
     <span>
