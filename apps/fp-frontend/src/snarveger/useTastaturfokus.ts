@@ -80,6 +80,37 @@ export const useFokusNårKlar = (kanFokusere: boolean, fokuser: () => void): (()
   return fokuserNårKlar;
 };
 
+/**
+ * Flyttar fokus til panelinnhaldet når det valde panelet endrar seg etter ein snarveg.
+ *
+ * Brukast av tastatursnarvegar som byter panel (fakta, prosess, støttepanel): rett etter
+ * byttet hamnar fokus på sjølve panel-containeren, slik at neste Tab går rett inn i første
+ * skjemafelt i det nye panelet. Kall den returnerte funksjonen rett før du byter panel –
+ * fokuseringa skjer fyrst når {@link aktivtPanel} har endra seg og DOM-en er oppdatert,
+ * slik at vi ikkje treng å vente på asynkron lasting av innhaldet.
+ */
+export const useFokuserVedPanelbyte = (aktivtPanel: string | undefined, fokuser: () => void): (() => void) => {
+  const skalFokusereRef = useRef(false);
+  const fokuserRef = useRef(fokuser);
+
+  useEffect(() => {
+    fokuserRef.current = fokuser;
+  });
+
+  const planleggFokus = useCallback(() => {
+    skalFokusereRef.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (skalFokusereRef.current) {
+      skalFokusereRef.current = false;
+      fokuserRef.current();
+    }
+  }, [aktivtPanel]);
+
+  return planleggFokus;
+};
+
 interface Tastaturhendelse {
   key: string;
   preventDefault: () => void;
