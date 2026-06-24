@@ -15,5 +15,6 @@ jobs:
     with:
       package-manager: yarn
       cache: turbo
+      node-version: 26
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
