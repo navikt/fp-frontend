@@ -9,7 +9,7 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { harAksjonspunkt } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -32,7 +32,7 @@ export const ArbeidsforholdFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: 
 
   const { behandling } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(behandling));
 

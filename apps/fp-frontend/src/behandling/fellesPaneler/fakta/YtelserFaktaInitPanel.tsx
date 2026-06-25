@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { YtelserFaktaIndex } from '@navikt/fp-fakta-ytelser';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -17,7 +17,7 @@ export const YtelserFaktaInitPanel = () => {
   const { behandling } = useBehandlingDataContext();
   const standardPanelProps = useStandardFaktaPanelProps();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: inntektArbeidYtelse } = useQuery(api.inntektArbeidYtelseOptions(behandling));
 

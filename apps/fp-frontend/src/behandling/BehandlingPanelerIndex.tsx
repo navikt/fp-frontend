@@ -8,7 +8,7 @@ import { ErrorBoundary, parseQueryString, useRestApiErrorDispatcher } from '@nav
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../data/behandlingApi';
+import { getBehandlingApi } from '../data/behandlingApi';
 import { useBehandlingDataContext } from './felles/context/BehandlingDataContext';
 import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';
 import { lazyWithRetry } from './lazyUtils';
@@ -31,7 +31,7 @@ export const BehandlingPanelerIndex = () => {
 
   const erFørstegangssøknadEllerRevurdering = behandling.type === 'BT-002' || behandling.type === 'BT-004';
 
-  const behandlingApi = useBehandlingApi(behandling);
+  const behandlingApi = getBehandlingApi(behandling);
 
   const arbeidsgivereOversiktQuery = useQuery(
     behandlingApi.arbeidsgiverOversiktOptions(behandling, erFørstegangssøknadEllerRevurdering),

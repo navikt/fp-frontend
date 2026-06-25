@@ -10,7 +10,7 @@ import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { createLocationForSkjermlenke } from '../../app/paths';
-import { type BekreftedeTotrinnsaksjonspunkter, initFetchOptions, useFagsakBehandlingApi } from '../../data/fagsakApi';
+import { type BekreftedeTotrinnsaksjonspunkter, initFetchOptions, getFagsakBehandlingApi } from '../../data/fagsakApi';
 import { useKodeverk } from '../../data/useKodeverk';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
@@ -49,7 +49,7 @@ export const TotrinnskontrollIndex = ({
 
   const valgtBehandling = notEmpty(fagsakData.getBehandling(valgtBehandlingUuid));
 
-  const api = useFagsakBehandlingApi(valgtBehandling);
+  const api = getFagsakBehandlingApi(valgtBehandling);
 
   const location = useLocation();
   const navigate = useNavigate();

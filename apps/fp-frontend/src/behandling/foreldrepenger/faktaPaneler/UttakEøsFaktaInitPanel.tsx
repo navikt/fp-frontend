@@ -7,7 +7,7 @@ import { UttakFaktaEøsIndex } from '@navikt/fp-fakta-uttak-eos';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
-import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -24,7 +24,7 @@ export const UttakEøsFaktaInitPanel = () => {
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
   const { data: annenForelderUttakEøs } = useQuery(api.uttakAnnenpartEøsOptions(behandling));
 
   return (

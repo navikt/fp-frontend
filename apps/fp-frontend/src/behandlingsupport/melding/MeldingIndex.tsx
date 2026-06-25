@@ -19,7 +19,7 @@ import {
   forhåndsvisTilbakekreving,
   initFetchOptions,
   type SubmitMessageParams,
-  useFagsakBehandlingApi,
+  getFagsakBehandlingApi,
 } from '../../data/fagsakApi';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import { FagsakData } from '../../fagsak/FagsakData';
@@ -60,7 +60,7 @@ export const MeldingIndex = ({
   const fagsak = fagsakData.getFagsak();
   const valgtBehandling = notEmpty(fagsakData.getBehandling(valgtBehandlingUuid));
 
-  const api = useFagsakBehandlingApi(valgtBehandling);
+  const api = getFagsakBehandlingApi(valgtBehandling);
 
   const initFetchQuery = useQuery(initFetchOptions());
   const {
@@ -226,7 +226,7 @@ const finnKanIkkeLagreMeldingTekst = (kanVeilede: boolean, behandlingKanSendeMel
 };
 
 const useVisForhandsvisningAvMelding = (behandling: FagsakBehandlingDto) => {
-  const api = useFagsakBehandlingApi(behandling);
+  const api = getFagsakBehandlingApi(behandling);
 
   const { mutate: forhåndsvisFpSakBrev } = useMutation({
     mutationFn: (params: ForhåndsvisBrevParams) =>

@@ -9,7 +9,7 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Dokument } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
-import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, getBehandlingApi } from '../../../data/behandlingApi';
 import { useFagsakApi } from '../../../data/fagsakApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
@@ -28,7 +28,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
   const fagsakApi = useFagsakApi();
 
   const harOverstyrigAP = standardPanelProps.aksjonspunkterForPanel.some(

@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, type ReactElement, use, useEffect, useMemo, useState } from 'react';
 
 import type { Behandling } from '@navikt/fp-types';
 
@@ -37,7 +37,7 @@ export const MellomlagretFormDataProvider = <T,>({
 };
 
 export const useMellomlagretFormData = <T,>() => {
-  const context = useContext(MellomlagretFormDataContext) as MellomlagretFormData<T | undefined> | null;
+  const context = use(MellomlagretFormDataContext) as MellomlagretFormData<T | undefined> | null;
   if (!context) {
     throw new Error('MellomlagretFormDataContext er ikke satt opp');
   }

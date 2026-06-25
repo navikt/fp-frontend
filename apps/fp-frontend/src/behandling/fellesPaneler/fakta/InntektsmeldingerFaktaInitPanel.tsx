@@ -7,7 +7,7 @@ import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -23,7 +23,7 @@ export const InntektsmeldingerFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId 
 
   const standardPanelProps = useStandardFaktaPanelProps();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: inntektsmeldinger } = useQuery(api.inntektsmeldingerOptions(behandling));
 

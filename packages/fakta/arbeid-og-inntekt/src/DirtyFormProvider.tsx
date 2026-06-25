@@ -1,4 +1,4 @@
-import React, { createContext, type PropsWithChildren, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, type PropsWithChildren, use, useEffect, useMemo, useState } from 'react';
 
 const DirtyFormContext = createContext<{
   isDirty: boolean;
@@ -13,14 +13,14 @@ export const DirtyFormProvider = ({ children }: PropsWithChildren) => {
   const [isDirty, setIsDirty] = useState(false);
   const value = useMemo(() => ({ isDirty, setDirty: setIsDirty }), [isDirty, setIsDirty]);
 
-  return <DirtyFormContext.Provider value={value}>{children}</DirtyFormContext.Provider>;
+  return <DirtyFormContext value={value}>{children}</DirtyFormContext>;
 };
 
 export const useSetDirtyForm = (isDirty: boolean): void => {
-  const context = useContext(DirtyFormContext);
+  const context = use(DirtyFormContext);
   useEffect(() => {
     context.setDirty(isDirty);
   }, [isDirty]);
 };
 
-export const useIsFormDirty = (): boolean => useContext(DirtyFormContext).isDirty;
+export const useIsFormDirty = (): boolean => use(DirtyFormContext).isDirty;

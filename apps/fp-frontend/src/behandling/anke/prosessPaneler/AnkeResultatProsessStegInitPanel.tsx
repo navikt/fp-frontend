@@ -7,7 +7,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeResultatProsessIndex } from '@navikt/fp-prosess-anke-resultat';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -23,7 +23,7 @@ export const AnkeResultatProsessStegInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
   const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(behandling));
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);

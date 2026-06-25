@@ -12,7 +12,7 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { AlleKodeverkTilbakekreving, BehandlingFpTilbake } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
-import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -31,7 +31,7 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
 
   const { behandling, fagsak } = useBehandlingDataContext<BehandlingFpTilbake>();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: feilutbetalingFakta } = useQuery(api.tilbakekreving.feilutbetalingFaktaOptions(behandling));
   const { data: feilutbetalingÅrsak } = useQuery(api.tilbakekreving.feilutbetalingÅrsakOptions(behandling));

@@ -21,7 +21,7 @@ import type {
 } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
-import { forhåndsvisVedtaksbrev, useBehandlingApi } from '../../../data/behandlingApi';
+import { forhåndsvisVedtaksbrev, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -56,7 +56,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
   const erRevurderingTilbakekrevingFeilBeløpBortfalt =
     behandling.førsteÅrsak?.behandlingArsakType === 'RE_FEILUTBETALT_BELØP_REDUSERT';
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: beregningsresultat } = useQuery(api.tilbakekreving.beregningsresultatOptions(behandling));
   const { data: vedtaksbrev } = useQuery(api.tilbakekreving.vedtaksbrevOptions(behandling));

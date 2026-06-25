@@ -771,7 +771,7 @@ const getOppdaterStønadskontoer =
       })
       .json<UttakStonadskontoer>();
 
-export const useBehandlingApi = (behandling: Behandling) => {
+export const getBehandlingApi = (behandling: Behandling) => {
   const { links } = behandling;
   return {
     arbeidsgiverOversiktOptions: getArbeidsgiverOversiktOptions(links),

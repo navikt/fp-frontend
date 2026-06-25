@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, useContext, useMemo } from 'react';
+import { createContext, type ReactElement, use, useMemo } from 'react';
 
 import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak, Vilkår } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -36,7 +36,7 @@ export const usePanelDataContext = <
   AP_TYPE extends AksjonspunktType,
   B_TYPE extends Behandling = BehandlingFpSak,
 >() => {
-  const context = useContext(PanelDataContext);
+  const context = use(PanelDataContext);
   if (!context) {
     throw new Error('PanelContext.Provider er ikke satt opp');
   }

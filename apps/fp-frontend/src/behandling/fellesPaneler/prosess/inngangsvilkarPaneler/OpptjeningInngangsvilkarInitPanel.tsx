@@ -6,7 +6,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjening';
 import type { VilkårType } from '@navikt/fp-types';
 
-import { useBehandlingApi } from '../../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../../data/behandlingApi';
 import {
   InngangsvilkarDefaultInitPanel,
   InngangsvilkarOverstyringDefaultInitPanel,
@@ -24,7 +24,7 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
   const harIngenAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.length === 0;
 
-  const api = useBehandlingApi(standardPanelProps.behandling);
+  const api = getBehandlingApi(standardPanelProps.behandling);
 
   const { data: opptjening } = useQuery(api.opptjeningOptions(standardPanelProps.behandling, !harIngenAksjonspunkt));
 

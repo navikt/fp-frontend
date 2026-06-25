@@ -12,7 +12,7 @@ import {
 } from '@navikt/fp-prosess-varsel-om-revurdering';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { forhåndsvisMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { forhåndsvisMelding, harLenke, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
@@ -59,7 +59,7 @@ export const VarselProsessStegInitPanel = () => {
     onSuccess: forhandsvisDokument,
   });
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { mutateAsync: hentVarselHtml } = useMutation({
     mutationFn: () => api.hentBrevHtml(behandling.uuid, 'VARREV'),

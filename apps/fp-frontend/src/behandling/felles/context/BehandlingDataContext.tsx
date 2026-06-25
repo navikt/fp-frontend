@@ -1,4 +1,4 @@
-import { createContext, type JSX, type ReactElement, useContext, useMemo } from 'react';
+import { createContext, type JSX, type ReactElement, use, useMemo } from 'react';
 
 import type {
   AksessRettigheter,
@@ -35,11 +35,11 @@ export const BehandlingDataProvider = <T extends Behandling>(props: Props<T>): J
 
   const values = useMemo(() => otherProps, [otherProps]);
 
-  return <BehandlingDataContext.Provider value={values}>{children}</BehandlingDataContext.Provider>;
+  return <BehandlingDataContext value={values}>{children}</BehandlingDataContext>;
 };
 
 export const useBehandlingDataContext = <T extends Behandling = BehandlingFpSak>() => {
-  const context = useContext(BehandlingDataContext);
+  const context = use(BehandlingDataContext);
   if (!context) {
     throw new Error('BehandlingDataContext er ikke satt opp');
   }

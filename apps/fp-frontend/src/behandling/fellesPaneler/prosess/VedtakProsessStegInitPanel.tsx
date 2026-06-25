@@ -13,7 +13,7 @@ import { type Aksjonspunkt, type BehandlingFpSak, type Vilkår, type VilkårUtfa
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, isAvslag } from '@navikt/fp-utils';
 
-import { forhåndsvisMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { forhåndsvisMelding, harLenke, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
@@ -58,7 +58,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
 
   const statusForVedtak = finnStatusForVedtak(standardPanelProps);
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: beregningsresultatDagytelse, isFetching: isBdFetching } = useQuery(
     api.beregningsresultatDagytelseOptions(behandling, !erEngangsstønad),

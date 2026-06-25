@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, type ReactElement, use, useEffect, useMemo, useState } from 'react';
 
 import type { BehandlingFpSak, BrevOverstyring } from '@navikt/fp-types';
 
@@ -49,7 +49,7 @@ export const VedtakEditeringProvider = ({
 };
 
 export const useVedtakEditeringContext = () => {
-  const context = useContext<VedtakEditeringData | null>(VedtakEditeringContext);
+  const context = use<VedtakEditeringData | null>(VedtakEditeringContext);
   if (!context) {
     throw new Error('VedtakEditeringContext er ikke satt opp');
   }
