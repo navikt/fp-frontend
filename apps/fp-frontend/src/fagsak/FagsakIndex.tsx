@@ -83,6 +83,10 @@ export const FagsakIndex = () => {
     setVisSideMeny(!visSideMeny);
   };
 
+  const åpneSideMeny = () => {
+    setVisSideMeny(true);
+  };
+
   useEffect(() => {
     if (behandlingUuidFraUrl && fagsakBehandling) {
       hentOgSettBehandling();
@@ -135,6 +139,7 @@ export const FagsakIndex = () => {
             behandling={behandling}
             visSideMeny={visSideMeny}
             toggleSideMeny={toggleSideMeny}
+            åpneSideMeny={åpneSideMeny}
             visUtvidetBehandlingDetaljer={visUtvidetBehandlingDetaljer}
           />
         }

@@ -49,6 +49,7 @@ interface Props {
   hentOgSettBehandling: () => void;
   visSideMeny: boolean;
   toggleSideMeny: () => void;
+  åpneSideMeny: () => void;
   visUtvidetBehandlingDetaljer: boolean;
 }
 
@@ -60,6 +61,7 @@ export const FagsakProfileIndex = ({
   hentOgSettBehandling,
   visSideMeny,
   toggleSideMeny,
+  åpneSideMeny,
   visUtvidetBehandlingDetaljer,
 }: Props) => {
   const intl = useIntl();
@@ -83,12 +85,22 @@ export const FagsakProfileIndex = ({
   }, [fokuserRad, hentBehandlingsvelgerRader]);
   const fokuserNårBehandlingsvelgerVises = useFokusNårKlar(showAll, fokuserBehandlingsvelger);
 
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER, () => {
+  const visOgFokuserBehandlingsvelger = useCallback(() => {
     if (showAll) {
       fokuserBehandlingsvelger();
     } else {
       fokuserNårBehandlingsvelgerVises();
       setShowAll(true);
+    }
+  }, [fokuserBehandlingsvelger, fokuserNårBehandlingsvelgerVises, showAll]);
+  const fokuserNårSideMenyVises = useFokusNårKlar(visSideMeny, visOgFokuserBehandlingsvelger);
+
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER, () => {
+    if (visSideMeny) {
+      visOgFokuserBehandlingsvelger();
+    } else {
+      fokuserNårSideMenyVises();
+      åpneSideMeny();
     }
   });
 
@@ -157,6 +169,8 @@ export const FagsakProfileIndex = ({
                   setBehandling={setBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
                   behandling={behandling}
+                  visSideMeny={visSideMeny}
+                  åpneSideMeny={åpneSideMeny}
                 />
                 <ReservasjonsstatusPanel
                   saksnummer={fagsak.saksnummer}

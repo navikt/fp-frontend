@@ -81,6 +81,8 @@ const meta = {
   args: {
     setBehandling: action('button-click'),
     hentOgSettBehandling: action('button-click'),
+    visSideMeny: true,
+    åpneSideMeny: action('button-click'),
   },
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
