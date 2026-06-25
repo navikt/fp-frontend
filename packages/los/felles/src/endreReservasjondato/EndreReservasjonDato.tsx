@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { CalendarIcon, CheckmarkIcon } from '@navikt/aksel-icons';
 import { Button, DatePicker, HStack, Loader } from '@navikt/ds-react';
@@ -40,6 +40,7 @@ export const EndreReservasjonDato = ({ reservertTilTidspunkt, oppgaveId, invalid
 
   const { title, icon } = getState(isPending, showSuccess);
   const gjeldendeDato = new Date(reservertTilTidspunkt);
+  const iDag = useMemo(() => new Date(), []);
   return (
     <HStack gap="space-8" align="center" wrap={false}>
       <span className="w-[7ch]">{capitalizeFirstLetter(dayjs(reservertTilTidspunkt).format('dddd'))}</span>
@@ -52,7 +53,7 @@ export const EndreReservasjonDato = ({ reservertTilTidspunkt, oppgaveId, invalid
         defaultSelected={gjeldendeDato}
         onSelect={date => (date ? mutateAsync(date) : null)}
         onClose={() => setOpenDatepicker(false)}
-        fromDate={new Date()}
+        fromDate={iDag}
         toDate={dayjs().startOf('day').add(30, 'days').toDate()}
       >
         <Button

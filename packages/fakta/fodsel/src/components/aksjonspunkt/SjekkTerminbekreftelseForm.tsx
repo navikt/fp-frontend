@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -55,6 +56,8 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
 
   const isForTidligTerminbekreftelse = erTerminbekreftelseUtstedtForTidlig(utstedtdato, termindato);
 
+  const iDag = useMemo(() => new Date(), []);
+
   return (
     <FaktaKort
       label={intl.formatMessage({ id: 'SjekkTerminbekreftelseForm.Tittel' })}
@@ -78,7 +81,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
               readOnly={isReadOnly}
               fromDate={minTerminbekreftelseDato().toDate()}
               toDate={maxTerminbekreftelseDato().toDate()}
-              defaultMonth={new Date()}
+              defaultMonth={iDag}
             />
 
             <RhfTextField

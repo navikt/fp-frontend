@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
@@ -74,6 +75,8 @@ const validerTerminBekreftelse =
 export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Props) => {
   const { watch, getValues, control } = useFormContext<FormValues>();
 
+  const iDag = useMemo(() => new Date(), []);
+
   const erBarnetFødt = watch('erBarnetFødt');
 
   return (
@@ -109,7 +112,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                       readOnly={readOnly}
                       fromDate={minTermindato().toDate()}
                       toDate={maxTermindato().toDate()}
-                      defaultMonth={new Date()}
+                      defaultMonth={iDag}
                       validate={[
                         required,
                         hasValidDate,
@@ -136,7 +139,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                     readOnly={readOnly}
                     fromDate={minTerminbekreftelseDato().toDate()}
                     toDate={maxTerminbekreftelseDato().toDate()}
-                    defaultMonth={new Date()}
+                    defaultMonth={iDag}
                     validate={[hasValidDate, validerTerminBekreftelse(getValues)]}
                   />
                 </>
@@ -185,7 +188,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                     ]}
                     fromDate={minTermindato().toDate()}
                     toDate={maxTermindato().toDate()}
-                    defaultMonth={new Date()}
+                    defaultMonth={iDag}
                   />
                 </>
               )}
