@@ -89,7 +89,7 @@ export const BehandlingMenuIndex = ({
       fokuserFørsteVedÅpning();
       setMenyÅpen(true);
     }
-  }, [fokuserFørsteVedÅpning, fokuserMenyKnapp, menyÅpen]);
+  }, [fokuserFørsteVedÅpning, fokuserMenyKnapp, menyÅpen, setMenyÅpen]);
   const åpneMenyNårSideMenyVises = useFokusNårKlar(visSideMeny, åpneOgFokuserMeny);
 
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.ÅPNE_BEHANDLINGSMENY, () => {
