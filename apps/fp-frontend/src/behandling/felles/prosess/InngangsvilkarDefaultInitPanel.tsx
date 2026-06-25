@@ -1,4 +1,4 @@
-import { type ReactElement, use, useEffect, useState } from 'react';
+import { type ReactElement, use, useState } from 'react';
 
 import { type OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import type { BehandlingFpSak, VilkårType } from '@navikt/fp-types';
@@ -30,10 +30,11 @@ export const InngangsvilkarOverstyringDefaultInitPanel = (
   const [erOverstyrt, setErOverstyrt] = useState(false);
   const toggleOverstyring = () => setErOverstyrt(!erOverstyrt);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved ekstern endring av behandling
+  const [forrigeVersjon, setForrigeVersjon] = useState(behandling.versjon);
+  if (behandling.versjon !== forrigeVersjon) {
+    setForrigeVersjon(behandling.versjon);
     setErOverstyrt(false);
-  }, [behandling.versjon]);
+  }
 
   return (
     <PanelOverstyringProvider

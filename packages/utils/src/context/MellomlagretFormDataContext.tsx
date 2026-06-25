@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, use, useEffect, useMemo, useState } from 'react';
+import { createContext, type ReactElement, use, useMemo, useState } from 'react';
 
 import type { Behandling } from '@navikt/fp-types';
 
@@ -18,12 +18,14 @@ export const MellomlagretFormDataProvider = <T,>({
 }) => {
   const [mellomlagretFormData, setMellomlagretFormData] = useState<T | undefined>();
 
-  useEffect(() => {
+  const behandlingKey = `${behandling.uuid}-${behandling.versjon}`;
+  const [forrigeBehandlingKey, setForrigeBehandlingKey] = useState(behandlingKey);
+  if (behandlingKey !== forrigeBehandlingKey) {
+    setForrigeBehandlingKey(behandlingKey);
     if (mellomlagretFormData) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved endring av behandling
       setMellomlagretFormData(undefined);
     }
-  }, [behandling.uuid, behandling.versjon]);
+  }
 
   const value = useMemo(
     () => ({

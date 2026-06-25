@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 
@@ -66,6 +66,12 @@ export const FagsakProfileIndex = ({
   const [showAll, setShowAll] = useState(!behandlingUuid);
   const toggleShowAll = () => setShowAll(!showAll);
 
+  const [forrigeBehandlingUuid, setForrigeBehandlingUuid] = useState(behandlingUuid);
+  if (behandlingUuid !== forrigeBehandlingUuid) {
+    setForrigeBehandlingUuid(behandlingUuid);
+    setShowAll(!behandlingUuid);
+  }
+
   const {
     containerRef: behandlingsvelgerRef,
     hentElementer: hentBehandlingsvelgerRader,
@@ -111,11 +117,6 @@ export const FagsakProfileIndex = ({
   const ainntektHref = sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href;
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved valg av ny behandling
-    setShowAll(!behandlingUuid);
-  }, [behandlingUuid]);
 
   const match = useMatch('/fagsak/:saksnummer/');
   const shouldRedirectToBehandlinger = !!match;

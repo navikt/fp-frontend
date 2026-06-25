@@ -53,6 +53,11 @@ const sorterEtterOpptjeningFom = (
 
 const addDay = (dato: string): string => addDaysToDate(dato, 1);
 
+const finnFørsteIkkeBehandledeIndex = (formVerdier: FormValues[]): number | undefined => {
+  const index = formVerdier.findIndex(a => a.erGodkjent === undefined);
+  return index === -1 ? undefined : index;
+};
+
 const filtrerOpptjeningAktiviteter = (
   opptjeningAktiviteter: OpptjeningAktivitet[],
   fastsattOpptjening?: Opptjening['fastsattOpptjening'],
@@ -116,7 +121,7 @@ export const OpptjeningFaktaPanel = ({
   );
 
   const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState(
-    finnInitialFokusAktivitet(filtrerteOgSorterteOpptjeningsaktiviteter),
+    finnFørsteIkkeBehandledeIndex(formVerdierForAlleAktiviteter),
   );
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -128,11 +133,11 @@ export const OpptjeningFaktaPanel = ({
     [formVerdierForAlleAktiviteter],
   );
 
-  useEffect(() => {
-    const index = formVerdierForAlleAktiviteter.findIndex(a => a.erGodkjent === undefined);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setValgtAktivitetIndex(index === -1 ? undefined : index);
-  }, [formVerdierForAlleAktiviteter]);
+  const [forrigeFormVerdier, setForrigeFormVerdier] = useState(formVerdierForAlleAktiviteter);
+  if (formVerdierForAlleAktiviteter !== forrigeFormVerdier) {
+    setForrigeFormVerdier(formVerdierForAlleAktiviteter);
+    setValgtAktivitetIndex(finnFørsteIkkeBehandledeIndex(formVerdierForAlleAktiviteter));
+  }
 
   const bekreft = () => {
     setIsSubmitting(true);
@@ -226,14 +231,6 @@ export const OpptjeningFaktaPanel = ({
       )}
     </VStack>
   );
-};
-
-const finnInitialFokusAktivitet = (opptjeningsAktiviteter: OpptjeningAktivitet[]) => {
-  if (opptjeningsAktiviteter.length === 0) return undefined;
-
-  const førsteAktivitetSomIkkeErGodkjent = opptjeningsAktiviteter.findIndex(a => a.erGodkjent === undefined);
-  if (førsteAktivitetSomIkkeErGodkjent !== -1) return førsteAktivitetSomIkkeErGodkjent;
-  return 0;
 };
 
 const transformValues = (
