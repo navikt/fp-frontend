@@ -21,10 +21,10 @@ interface Props {
 export const LedigOppgaveRad = ({ oppgave, reserverOppgave, erNyBehandling }: Props) => {
   const intl = useIntl();
 
-  const refCopyButton = useRef<HTMLDivElement | null>(null);
+  const copyButtonRef = useRef<HTMLDivElement | null>(null);
 
   const goToFagsak = (event: React.MouseEvent | React.KeyboardEvent, valgtOppgave: OppgaveDto) => {
-    const erCopyButtonKlikk = refCopyButton.current?.contains(event.target as Node);
+    const erCopyButtonKlikk = copyButtonRef.current?.contains(event.target as Node);
 
     if (erCopyButtonKlikk) {
       return;
@@ -42,7 +42,7 @@ export const LedigOppgaveRad = ({ oppgave, reserverOppgave, erNyBehandling }: Pr
     >
       <Table.DataCell>{oppgave.navn}</Table.DataCell>
       <Table.DataCell>
-        <HStack align="center" gap="space-8" ref={refCopyButton} wrap={false}>
+        <HStack align="center" gap="space-8" ref={copyButtonRef} wrap={false}>
           <BodyShort>{oppgave.saksnummer}</BodyShort>
           <CopyButton
             size="small"
