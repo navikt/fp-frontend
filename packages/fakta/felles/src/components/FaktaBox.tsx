@@ -4,8 +4,8 @@ import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react'
 
 import { type FaktaKilde, getLabelForFaktaKilde } from './FaktaKilde';
 
-export const FaktaGruppe = (props: ComponentPropsWithRef<'div'>) => (
-  <HStack gap="space-8" style={{ display: 'flex' }} {...props} />
+export const FaktaGruppe = ({ ref, ...props }: ComponentPropsWithRef<'div'>) => (
+  <HStack gap="space-8" style={{ display: 'flex' }} {...props} ref={ref} />
 );
 
 interface FaktaBoxProps {
