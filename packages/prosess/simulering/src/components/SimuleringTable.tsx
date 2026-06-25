@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { Heading, Table } from '@navikt/ds-react';
 import { BeløpLabel } from '@navikt/ft-ui-komponenter';
-import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
 import type {
@@ -13,12 +12,11 @@ import type {
   SimuleringResultatPerFagområde,
   SimuleringResultatRad,
 } from '@navikt/fp-types';
+import { classNames } from '@navikt/fp-utils';
 
 import { CollapseButton } from './CollapseButton';
 
 import styles from './simuleringTable.module.css';
-
-const classNames = classnames.bind(styles);
 
 const simuleringCodes = {
   DIFFERANSE: 'differanse',
@@ -82,10 +80,7 @@ export const SimuleringTable = ({
                 {rangeOfMonths.map(monthAndYear => (
                   <Table.HeaderCell
                     scope="col"
-                    className={classNames({
-                      nextPeriod: isNextPeriod(monthAndYear, nesteMåned),
-                      normalPeriod: !isNextPeriod(monthAndYear, nesteMåned),
-                    })}
+                    className={isNextPeriod(monthAndYear, nesteMåned) ? styles['nextPeriod'] : styles['normalPeriod']}
                     key={`${monthAndYear.month}-${monthAndYear.year}`}
                   >
                     <FormattedMessage id={`Simulering.headerText.${monthAndYear.month}`} />
@@ -174,13 +169,12 @@ const createColumns = (
     <Table.DataCell
       key={`columnIndex${månedIndex + 1}`}
       style={{ borderBottom }}
-      className={classNames({
-        rodTekst: !måned.beløp || måned.beløp < 0,
-        lastColumn:
-          'måned' in måned
-            ? måned.måned === nextPeriodFormatted
-            : dayjs(måned.periode.tom).format('MMMMYY') === nextPeriodFormatted,
-      })}
+      className={classNames(
+        (!måned.beløp || måned.beløp < 0) && styles['rodTekst'],
+        ('måned' in måned
+          ? måned.måned === nextPeriodFormatted
+          : dayjs(måned.periode.tom).format('MMMMYY') === nextPeriodFormatted) && styles['lastColumn'],
+      )}
     >
       <BeløpLabel beløp={måned.beløp} />
     </Table.DataCell>
