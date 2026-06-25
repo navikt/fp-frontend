@@ -35,9 +35,9 @@ describe('FagsakIndex', () => {
   it('skal vise åpning og lukking av sidepanel ved storskjerm', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(
-      <ResponsiveContext.Provider value={{ width: 1702 }}>
+      <ResponsiveContext value={{ width: 1702 }}>
         <Default />
-      </ResponsiveContext.Provider>,
+      </ResponsiveContext>,
     );
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
@@ -51,9 +51,9 @@ describe('FagsakIndex', () => {
   it('skal skjule knapp for åpning eller lukking av sidepanel ved småskjerm', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(
-      <ResponsiveContext.Provider value={{ width: 1408 }}>
+      <ResponsiveContext value={{ width: 1408 }}>
         <Default />
-      </ResponsiveContext.Provider>,
+      </ResponsiveContext>,
     );
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();

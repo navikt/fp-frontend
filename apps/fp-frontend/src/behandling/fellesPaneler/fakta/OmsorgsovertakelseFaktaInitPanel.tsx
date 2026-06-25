@@ -7,7 +7,7 @@ import { OmsorgsovertakelseFaktaIndex } from '@navikt/fp-fakta-omsorgsovertakels
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
-import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -34,7 +34,7 @@ export const OmsorgsovertakelseFaktaInitPanel = () => {
 
   const skalPanelVisesIMeny = harLenke(behandling, 'FAKTA_OMSORGSOVERTAKELSE');
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: omsorgsovertakelse } = useQuery(api.faktaOmsorgsovertakelseOptions(behandling));
 

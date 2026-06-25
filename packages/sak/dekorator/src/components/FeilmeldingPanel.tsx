@@ -4,15 +4,11 @@ import { FormattedMessage } from 'react-intl';
 import { XMarkIcon } from '@navikt/aksel-icons';
 import { Button, Detail, Link } from '@navikt/ds-react';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
-import classnames from 'classnames/bind';
 
 import type { Feilmelding } from '../typer/feilmeldingTsType';
 import { FeilmeldingsdetaljerModal } from './FeilmeldingsdetaljerModal';
 
 import styles from './feilmeldingPanel.module.css';
-
-// TODO Dette er gjort fordi testen viste ein warning når ein dytta 'style.link' inn i a-tag'en. Bør ikkje vera naudsynt.
-const classNames = classnames.bind(styles);
 
 interface Props {
   feilmeldinger: Feilmelding[];
@@ -55,7 +51,7 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
             <Detail>
               <Link
                 href="#"
-                className={classNames('link')}
+                className={styles['link']}
                 onClick={event => toggleModalOnClick(event, index)}
                 onKeyDown={event => toggleModalOnKeyDown(event, index)}
               >

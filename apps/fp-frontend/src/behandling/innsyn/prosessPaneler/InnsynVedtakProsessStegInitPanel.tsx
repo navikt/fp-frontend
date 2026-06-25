@@ -12,7 +12,7 @@ import { type VedtakInnsynForhandsvisData, VedtakInnsynProsessIndex } from '@nav
 import type { BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
-import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
+import { forhåndsvisMelding, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -30,7 +30,7 @@ export const InnsynVedtakProsessStegInitPanel = () => {
   );
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideeffekterCallback);
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(behandling));
   const { data: innsyn } = useQuery(api.innsyn.innsynOptions(behandling));

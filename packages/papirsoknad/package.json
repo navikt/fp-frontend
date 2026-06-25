@@ -16,8 +16,8 @@
     "storybook": "storybook dev --quiet -p 7007"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.12.0",
-    "@navikt/ds-react": "8.12.0",
+    "@navikt/aksel-icons": "8.13.0",
+    "@navikt/ds-react": "8.13.0",
     "@navikt/fp-papirsoknad-ui-komponenter": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-types": "workspace:*",

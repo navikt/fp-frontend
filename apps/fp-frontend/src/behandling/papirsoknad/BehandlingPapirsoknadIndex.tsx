@@ -15,7 +15,7 @@ import {
 } from '@navikt/fp-papirsoknad';
 import type { Aksjonspunkt, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
 
-import { BehandlingRel, useBehandlingApi } from '../../data/behandlingApi';
+import { BehandlingRel, getBehandlingApi } from '../../data/behandlingApi';
 import { useBehandlingDataContext } from '../felles/context/BehandlingDataContext';
 
 /**
@@ -30,7 +30,7 @@ const BehandlingPapirsoknadIndex = () => {
 
   const { alleKodeverk, behandling, rettigheter, fagsak, setSkalOppdatereEtterBekreftelseAvAp } =
     useBehandlingDataContext();
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const isReadOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPåVent;
 

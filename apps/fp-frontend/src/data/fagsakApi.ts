@@ -319,7 +319,7 @@ export const useFagsakApi = () => {
   };
 };
 
-export const useFagsakBehandlingApi = (valgtBehandling: FagsakBehandlingDto) => {
+export const getFagsakBehandlingApi = (valgtBehandling: FagsakBehandlingDto) => {
   const { links } = valgtBehandling;
   return {
     lagreTotrinnsaksjonspunkt: getLagreTotrinnsaksjonspunkt(links),

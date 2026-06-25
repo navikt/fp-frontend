@@ -8,7 +8,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -30,7 +30,7 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({ arbeidsgiverOpplysningerPerI
     behandling.vilkår.some(v => v.vilkarType === 'FP_VK_23') &&
     behandling.vilkår.some(v => v.vilkarType === 'FP_VK_2' && v.vilkarStatus === 'OPPFYLT');
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: opptjening, isFetching } = useQuery(api.opptjeningOptions(behandling, skalPanelVisesIMeny));
 

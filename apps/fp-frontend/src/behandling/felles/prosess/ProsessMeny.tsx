@@ -92,7 +92,7 @@ const ProsessMenyProvider = (props: PropsContext): JSX.Element => {
 
   const values = useMemo(() => otherProps, [otherProps]);
 
-  return <ProsessMenyContext.Provider value={values}>{children}</ProsessMenyContext.Provider>;
+  return <ProsessMenyContext value={values}>{children}</ProsessMenyContext>;
 };
 
 const finnProsessmenyType = (status?: VilkårUtfallType, harÅpentAksjonspunkt?: boolean): ProcessMenuStepType => {

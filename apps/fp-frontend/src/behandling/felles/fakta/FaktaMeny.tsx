@@ -96,5 +96,5 @@ const FaktaMenyProvider = (props: PropsContext): JSX.Element => {
 
   const values = useMemo(() => otherProps, [otherProps]);
 
-  return <FaktaMenyContext.Provider value={values}>{children}</FaktaMenyContext.Provider>;
+  return <FaktaMenyContext value={values}>{children}</FaktaMenyContext>;
 };

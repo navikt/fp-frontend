@@ -8,7 +8,7 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
 import type { ArbeidsgiverOpplysningerPerId, BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
 
-import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -49,7 +49,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Pro
 
   const skalHenteData = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== 'IKKE_VURDERT';
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: uttaksresultat } = useQuery(api.uttaksresultatPerioderOptions(behandling));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));

@@ -7,7 +7,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { SvangerskapVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-svangerskap';
 import type { VilkårType } from '@navikt/fp-types';
 
-import { useBehandlingApi } from '../../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../../data/behandlingApi';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
@@ -28,7 +28,7 @@ export const SvangerskapInngangsvilkarInitPanel = () => {
     isReadOnly: standardPanelProps.isReadOnly || !harAksjonspunkt,
   };
 
-  const api = useBehandlingApi(panelProps.behandling);
+  const api = getBehandlingApi(panelProps.behandling);
 
   const { data: svangerskapspengerTilrettelegging } = useQuery(
     api.svp.svangerskapspengerTilretteleggingOptions(panelProps.behandling),
