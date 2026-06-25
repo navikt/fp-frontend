@@ -43,25 +43,25 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
     formMethods.reset();
   };
 
-  const bottomEl = useRef<HTMLDivElement | null>(null);
+  const bottomElRef = useRef<HTMLDivElement | null>(null);
   const [top, setTop] = useState<number>();
 
   // Denne for å scrolle innerste scrollbar ved bytte til notat-fane
-  const isInitialMount = useRef(0);
+  const isInitialMountRef = useRef(0);
   useEffect(() => {
-    const lastChildElement = bottomEl.current?.lastElementChild;
-    isInitialMount.current += 1;
-    if (isInitialMount.current === 2 && lastChildElement?.scrollIntoView) {
+    const lastChildElement = bottomElRef.current?.lastElementChild;
+    isInitialMountRef.current += 1;
+    if (isInitialMountRef.current === 2 && lastChildElement?.scrollIntoView) {
       lastChildElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }, [top]);
 
   // Denne for å scrolle innerste scrollbar når en legger til notat
-  const isInitialMount2 = useRef(true);
+  const isInitialMount2Ref = useRef(true);
   useEffect(() => {
-    const lastChildElement = bottomEl.current?.lastElementChild;
-    if (isInitialMount2.current) {
-      isInitialMount2.current = false;
+    const lastChildElement = bottomElRef.current?.lastElementChild;
+    if (isInitialMount2Ref.current) {
+      isInitialMount2Ref.current = false;
     } else if (lastChildElement?.scrollIntoView) {
       lastChildElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
@@ -87,7 +87,7 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
       }}
     >
       {sorterteNotater.length > 0 && (
-        <div className={styles['thechats']} ref={bottomEl}>
+        <div className={styles['thechats']} ref={bottomElRef}>
           <VStack gap="space-8">
             {sorterteNotater.map((notat, index) => (
               <div key={notat.opprettetTidspunkt} className={index === 0 ? styles['marginTop'] : undefined}>

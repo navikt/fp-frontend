@@ -67,11 +67,11 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
   const [skalVisePåVentModal, setSkalVisePåVentModal] = useState(false);
   const [brevData, setBrevData] = useState<{ opprinneligHtml: string; redigertHtml: string | null } | null>(null);
   const [visRedigeringModal, setVisRedigeringModal] = useState(false);
-  const hasFetchedBrevData = useRef(false);
+  const hasFetchedBrevDataRef = useRef(false);
 
   useEffect(() => {
-    if (!hasFetchedBrevData.current && erÅpentAksjonspunkt && hentVarselHtml) {
-      hasFetchedBrevData.current = true;
+    if (!hasFetchedBrevDataRef.current && erÅpentAksjonspunkt && hentVarselHtml) {
+      hasFetchedBrevDataRef.current = true;
       void hentVarselHtml()
         .then(result => {
           setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
