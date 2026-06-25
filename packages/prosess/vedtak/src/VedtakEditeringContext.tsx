@@ -25,9 +25,7 @@ export const VedtakEditeringProvider = ({
   mellomlagreBrev: (redigertInnhold?: string) => Promise<void>;
   children: ReactElement;
 }) => {
-  const [harRedigertBrev, setHarRedigertBrev] = useState(
-    behandling.links.some(l => l.rel === 'overstyrt-vedtaksbrev'),
-  );
+  const [harRedigertBrev, setHarRedigertBrev] = useState(behandling.links.some(l => l.rel === 'overstyrt-vedtaksbrev'));
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved endring av behandling

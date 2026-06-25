@@ -10,7 +10,7 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import { forhåndsvisTilbakekrevingMelding, getBehandlingApi,harLenke } from '../../../data/behandlingApi';
+import { forhåndsvisTilbakekrevingMelding, getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessMenyContext } from '../../felles/prosess/ProsessMeny';

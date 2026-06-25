@@ -9,7 +9,7 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Dokument } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
-import { getBehandlingApi,harLenke } from '../../../data/behandlingApi';
+import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useFagsakApi } from '../../../data/fagsakApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
