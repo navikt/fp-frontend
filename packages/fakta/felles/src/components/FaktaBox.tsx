@@ -1,10 +1,10 @@
-import { type ComponentProps, type ReactNode } from 'react';
+import { type ComponentPropsWithRef, type ReactNode } from 'react';
 
 import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 
 import { type FaktaKilde, getLabelForFaktaKilde } from './FaktaKilde';
 
-export const FaktaGruppe = (props: ComponentProps<typeof HStack>) => (
+export const FaktaGruppe = (props: ComponentPropsWithRef<'div'>) => (
   <HStack gap="space-8" style={{ display: 'flex' }} {...props} />
 );
 
