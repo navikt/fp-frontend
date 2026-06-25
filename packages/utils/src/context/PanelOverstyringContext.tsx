@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, useContext, useMemo, useState } from 'react';
+import { createContext, type ReactElement, use, useMemo, useState } from 'react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
@@ -43,11 +43,11 @@ export const PanelOverstyringProvider = (
     [erOverstyrt, toggleOverstyring, otherProps],
   );
 
-  return <PanelOverstyringContext.Provider value={value}>{children}</PanelOverstyringContext.Provider>;
+  return <PanelOverstyringContext value={value}>{children}</PanelOverstyringContext>;
 };
 
 export const usePanelOverstyring = <T extends AksjonspunktKode>() => {
-  const context = useContext(PanelOverstyringContext) as ContextValues<T> | null;
+  const context = use(PanelOverstyringContext) as ContextValues<T> | null;
   if (!context) {
     throw new Error('PanelOverstyringContext.Provider er ikke satt opp');
   }

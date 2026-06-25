@@ -7,8 +7,8 @@ import { type ForhåndsvisHenleggParams, MenyHenleggIndex } from '@navikt/fp-sak
 import type { Behandling, FagsakBehandlingDto, FagsakYtelseType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../../data/behandlingApi';
-import { forhåndsvisTilbakekrevingHenleggelse, useFagsakApi, useFagsakBehandlingApi } from '../../data/fagsakApi';
+import { getBehandlingApi } from '../../data/behandlingApi';
+import { forhåndsvisTilbakekrevingHenleggelse, getFagsakBehandlingApi, useFagsakApi } from '../../data/fagsakApi';
 
 interface Props {
   behandling: Behandling;
@@ -19,7 +19,7 @@ interface Props {
 
 export const HenleggMenyModal = ({ behandling, behandlingAppKontekst, fagsakYtelseType, lukkModal }: Props) => {
   const fagsakApi = useFagsakApi();
-  const behandlingApi = useBehandlingApi(behandling);
+  const behandlingApi = getBehandlingApi(behandling);
 
   const { data: alleFpSakKodeverk } = useQuery(fagsakApi.kodeverkOptions());
   const { data: alleFpTilbakeKodeverk } = useQuery(fagsakApi.fptilbake.kodeverkOptions());
@@ -57,7 +57,7 @@ export const HenleggMenyModal = ({ behandling, behandlingAppKontekst, fagsakYtel
 };
 
 const useVisForhandsvisningAvHenleggelse = (behandling: FagsakBehandlingDto) => {
-  const api = useFagsakBehandlingApi(behandling);
+  const api = getFagsakBehandlingApi(behandling);
 
   const { mutate: forhåndsvisFpSakHenleggelse } = useMutation({
     mutationFn: (values: ForhåndsvisHenleggParams) => api.forhåndsvisMelding(values),

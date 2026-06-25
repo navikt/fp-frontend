@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { MenyVergeIndex } from '@navikt/fp-sak-meny';
 import { type Behandling, type FagsakBehandlingDto } from '@navikt/fp-types';
 
-import { BehandlingRel, useBehandlingApi } from '../../data/behandlingApi';
+import { BehandlingRel, getBehandlingApi } from '../../data/behandlingApi';
 import { FagsakRel } from '../../data/fagsakApi';
 import { useKodeverk } from '../../data/useKodeverk';
 
@@ -34,7 +34,7 @@ export const VergeMenyModal = ({ behandlingAppKontekst, behandling, hentOgSettBe
     });
   };
 
-  const behandlingApi = useBehandlingApi(behandling);
+  const behandlingApi = getBehandlingApi(behandling);
   const { mutate: opprettVergeV2 } = useMutation({
     mutationFn: behandlingApi.verge.opprettVergeV2,
     onSuccess: onBehandlingSuccess,

@@ -104,16 +104,18 @@ export const VelferdspermisjonForm = ({
           </Alert>
         )}
 
-        {!readOnly && <Button
-          size="small"
-          variant="primary"
-          type="button"
-          disabled={!formMethods.formState.isDirty || false}
-          onClick={formMethods.handleSubmit(lagreForm)}
-          className="self-start"
-        >
-          <FormattedMessage id="VelferdspermisjonForm.Oppdater" />
-        </Button>}
+        {!readOnly && (
+          <Button
+            size="small"
+            variant="primary"
+            type="button"
+            disabled={!formMethods.formState.isDirty || false}
+            onClick={formMethods.handleSubmit(lagreForm)}
+            className="self-start"
+          >
+            <FormattedMessage id="VelferdspermisjonForm.Oppdater" />
+          </Button>
+        )}
       </VStack>
     </FormProvider>
   );

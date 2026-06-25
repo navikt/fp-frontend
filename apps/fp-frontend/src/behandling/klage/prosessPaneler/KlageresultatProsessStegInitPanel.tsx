@@ -12,7 +12,7 @@ import { type VedtakKlageForhandsvisData, VedtakKlageProsessIndex } from '@navik
 import type { Aksjonspunkt, Behandlingsresultat, VilkårUtfallType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
-import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
+import { forhåndsvisMelding, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -38,7 +38,7 @@ export const KlageresultatProsessStegInitPanel = () => {
 
   const vedtakStatus = getVedtakStatus(behandling.behandlingsresultat, aksjonspunkter);
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const navigate = useNavigate();
 

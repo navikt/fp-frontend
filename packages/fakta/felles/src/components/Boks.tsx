@@ -12,7 +12,11 @@ interface Props {
 
 export const Boks = ({ harBorderTop = false, harBorderLeft = true, children }: Props) => (
   <div
-    className={classNames(styles['boks'], harBorderLeft && styles['harBorderLeft'], harBorderTop && styles['harBorderTop'])}
+    className={classNames(
+      styles['boks'],
+      harBorderLeft && styles['harBorderLeft'],
+      harBorderTop && styles['harBorderTop'],
+    )}
   >
     {children}
   </div>

@@ -1,4 +1,4 @@
-import { createContext, type ReactNode, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { createContext, type ReactNode, use, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { GLOBALE_SNARVEG_IDER } from './snarvegDefinisjoner';
 import { useSnarvegInnstilling } from './useSnarvegInnstilling';
@@ -36,11 +36,11 @@ export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
     [registrer, dispatch, snarveiModalÅpen, aktiv, settAktiv],
   );
 
-  return <SnarvegerContext.Provider value={value}>{children}</SnarvegerContext.Provider>;
+  return <SnarvegerContext value={value}>{children}</SnarvegerContext>;
 };
 
 export const useSnarvegerContext = (): SnarvegerContextValue => {
-  const context = useContext(SnarvegerContext);
+  const context = use(SnarvegerContext);
   if (context === undefined) {
     throw new Error('useSnarvegerContext må brukast innanfor ein SnarvegerProvider');
   }
@@ -51,7 +51,7 @@ export const useSnarvegerContext = (): SnarvegerContextValue => {
  * Som useSnarvegerContext, men returnerer undefined i staden for å kaste når det ikkje
  * finst nokon provider (t.d. i isolerte stories/tester).
  */
-export const useSnarvegerContextValgfri = (): SnarvegerContextValue | undefined => useContext(SnarvegerContext);
+export const useSnarvegerContextValgfri = (): SnarvegerContextValue | undefined => use(SnarvegerContext);
 
 /**
  * Registrerer ein handler for ein kontekst-snarveg så lenge komponenten er montert.
@@ -60,7 +60,7 @@ export const useSnarvegerContextValgfri = (): SnarvegerContextValue | undefined 
  * seg på snarvegen utan å kjenne til tastane.
  */
 export const useRegistrerSnarveg = (id: string, handler: () => void, aktivert = true): void => {
-  const registrer = useContext(SnarvegerContext)?.registrer;
+  const registrer = use(SnarvegerContext)?.registrer;
   const handlerRef = useRef(handler);
 
   useEffect(() => {

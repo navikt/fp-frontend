@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsresultat';
 
-import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -18,7 +18,7 @@ export const BeregningEsProsessStegInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: beregningsresultatEngangsstønad, isFetching } = useQuery(
     api.es.beregningsresultatEngangsstønadOptions(behandling),

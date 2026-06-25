@@ -4,7 +4,7 @@ import { MenySettPaVentIndex } from '@navikt/fp-sak-meny-sett-pa-vent';
 import type { Behandling } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../../data/behandlingApi';
+import { getBehandlingApi } from '../../data/behandlingApi';
 import { useFagsakApi } from '../../data/fagsakApi';
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 
 export const SettPaVentMenyModal = ({ behandling, hentOgSettBehandling, lukkModal }: Props) => {
   const fagsakApi = useFagsakApi();
-  const behandlingApi = useBehandlingApi(behandling);
+  const behandlingApi = getBehandlingApi(behandling);
 
   const { data: alleFpSakKodeverk } = useQuery(fagsakApi.kodeverkOptions());
   const { data: alleFpTilbakeKodeverk } = useQuery(fagsakApi.fptilbake.kodeverkOptions());

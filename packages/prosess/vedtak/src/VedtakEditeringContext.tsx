@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, type ReactElement, use, useEffect, useMemo, useState } from 'react';
 
 import type { BehandlingFpSak, BrevOverstyring } from '@navikt/fp-types';
 
@@ -25,9 +25,7 @@ export const VedtakEditeringProvider = ({
   mellomlagreBrev: (redigertInnhold?: string) => Promise<void>;
   children: ReactElement;
 }) => {
-  const [harRedigertBrev, setHarRedigertBrev] = useState(
-    behandling.links.some(l => l.rel === 'overstyrt-vedtaksbrev'),
-  );
+  const [harRedigertBrev, setHarRedigertBrev] = useState(behandling.links.some(l => l.rel === 'overstyrt-vedtaksbrev'));
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved endring av behandling
@@ -49,7 +47,7 @@ export const VedtakEditeringProvider = ({
 };
 
 export const useVedtakEditeringContext = () => {
-  const context = useContext<VedtakEditeringData | null>(VedtakEditeringContext);
+  const context = use<VedtakEditeringData | null>(VedtakEditeringContext);
   if (!context) {
     throw new Error('VedtakEditeringContext er ikke satt opp');
   }

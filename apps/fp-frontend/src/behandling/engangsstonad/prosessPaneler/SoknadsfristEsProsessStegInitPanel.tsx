@@ -8,7 +8,7 @@ import { SoknadsfristVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-soknad
 import type { VilkårType } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
 import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -29,7 +29,7 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const harSoknadsfristAp = standardPanelProps.aksjonspunkterForPanel.some(
     ap => ap.definisjon === AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,

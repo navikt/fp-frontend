@@ -7,7 +7,7 @@ import { OmsorgOgRettFaktaIndex } from '@navikt/fp-fakta-omsorg-og-rett';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -23,7 +23,7 @@ export const OmsorgOgRettFaktaInitPanel = () => {
 
   const { behandling, rettigheter } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: omsorgOgRett } = useQuery(api.omsorgOgRettOptions(behandling));
   const { data: personoversikt } = useQuery(api.behandlingPersonoversiktOptions(behandling));
