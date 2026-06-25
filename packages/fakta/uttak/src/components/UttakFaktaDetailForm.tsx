@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm, type UseFormGetValues } from 'react-hook-form';
+import { useForm, type UseFormGetValues, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
@@ -113,10 +113,10 @@ export const UttakFaktaDetailForm = ({
   const sorterteOppholdÅrsaker = alleKodeverk['OppholdÅrsak'].toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
   const sorterteMorsAktiviteter = alleKodeverk['MorsAktivitet'].toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
 
-  const årsakstype = formMethods.watch('arsakstype');
-  const flerbarnsdager = formMethods.watch('flerbarnsdager');
-  const stønadskonto = formMethods.watch('uttakPeriodeType');
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const årsakstype = useWatch({ control: formMethods.control, name: 'arsakstype' });
+  const flerbarnsdager = useWatch({ control: formMethods.control, name: 'flerbarnsdager' });
+  const stønadskonto = useWatch({ control: formMethods.control, name: 'uttakPeriodeType' });
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   useEffect(() => {
     if (defaultValues?.arsakstype !== årsakstype) {

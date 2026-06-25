@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { RawIntlProvider } from 'react-intl';
 
 import { Button, Dialog } from '@navikt/ds-react';
@@ -41,7 +41,7 @@ export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModa
     lukkModal();
   };
 
-  const valgtVergeType = formMethods.watch('vergeType');
+  const valgtVergeType = useWatch({ control: formMethods.control, name: 'vergeType' });
 
   useEffect(() => {
     if (verge) {

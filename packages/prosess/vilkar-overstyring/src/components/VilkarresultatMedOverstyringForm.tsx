@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
@@ -99,7 +99,7 @@ export const VilkarresultatMedOverstyringForm = ({
     toggleOverstyring();
   };
 
-  const erVilkårOk = formMethods.watch('erVilkårOk');
+  const erVilkårOk = useWatch({ control: formMethods.control, name: 'erVilkårOk' });
 
   const aksjonspunkt = behandling.aksjonspunkt.find(ap => ap.definisjon === overstyringApKode);
   const hasAksjonspunkt = aksjonspunkt !== undefined;

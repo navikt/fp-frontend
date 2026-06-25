@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, Radio, VStack } from '@navikt/ds-react';
@@ -57,7 +57,7 @@ export const AvklarFaresignalerForm = ({
     defaultValues: buildInitialValues(aksjonspunkt, risikoklassifisering),
   });
 
-  const harValgtReelle = formMethods.watch(VURDERING_HOVEDKATEGORI) === 'INNVIRKNING';
+  const harValgtReelle = useWatch({ control: formMethods.control, name: VURDERING_HOVEDKATEGORI }) === 'INNVIRKNING';
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={(values: Values) => submitCallback?.(transformValues(values))}>

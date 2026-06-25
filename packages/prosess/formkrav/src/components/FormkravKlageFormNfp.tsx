@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Detail, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
@@ -117,7 +117,7 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const formVerdier = formMethods.watch();
+  const formVerdier = useWatch({ control: formMethods.control });
 
   return (
     <RhfForm

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm, type UseFormGetValues } from 'react-hook-form';
+import { useForm, type UseFormGetValues, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
@@ -50,9 +50,9 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
     defaultValues: mellomlagretFormData ?? initialValues(gjeldende, aksjonspunkt),
   });
 
-  const termindato = formMethods.watch('termindato');
-  const utstedtdato = formMethods.watch('utstedtdato');
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const termindato = useWatch({ control: formMethods.control, name: 'termindato' });
+  const utstedtdato = useWatch({ control: formMethods.control, name: 'utstedtdato' });
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   const isForTidligTerminbekreftelse = erTerminbekreftelseUtstedtForTidlig(utstedtdato, termindato);
 

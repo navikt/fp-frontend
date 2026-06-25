@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, HStack, VStack } from '@navikt/ds-react';
@@ -93,7 +93,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? buildInitialValues(klageVurdering.klageVurderingResultatNFP),
   });
-  const formValues = formMethods.watch();
+  const formValues = useWatch({ control: formMethods.control });
 
   const lukkModal = () => {
     setVisSubmitModal(false);

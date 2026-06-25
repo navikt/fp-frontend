@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useForm, type UseFormGetValues } from 'react-hook-form';
+import { useForm, type UseFormGetValues, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
@@ -79,7 +79,7 @@ export const ManglendeArbeidsforholdForm = ({
 
   useSetDirtyForm(formMethods.formState.isDirty);
 
-  const saksbehandlersVurdering = formMethods.watch('saksbehandlersVurdering');
+  const saksbehandlersVurdering = useWatch({ control: formMethods.control, name: 'saksbehandlersVurdering' });
 
   const avbryt = () => {
     lukkArbeidsforholdRad();

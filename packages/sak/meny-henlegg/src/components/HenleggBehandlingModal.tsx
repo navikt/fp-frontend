@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Dialog, HStack, Label, Link, VStack } from '@navikt/ds-react';
@@ -73,9 +73,9 @@ export const HenleggBehandlingModal = ({
 
   const formMethods = useForm<FormValues>();
 
-  const årsakKode = formMethods.watch('årsakKode');
-  const begrunnelse = formMethods.watch('begrunnelse');
-  const fritekst = formMethods.watch('fritekst');
+  const årsakKode = useWatch({ control: formMethods.control, name: 'årsakKode' });
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
+  const fritekst = useWatch({ control: formMethods.control, name: 'fritekst' });
 
   const showLink = getShowLink(behandlingType, årsakKode, fritekst);
 

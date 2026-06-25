@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 
 import { HGrid } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
@@ -76,7 +76,7 @@ export const SvangerskapspengerForm = ({
     defaultValues: { ...buildInitialValues(), ...mellomlagretData },
   });
 
-  const mottattDato = formMethods.watch('mottattDato');
+  const mottattDato = useWatch({ control: formMethods.control, name: 'mottattDato' });
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>

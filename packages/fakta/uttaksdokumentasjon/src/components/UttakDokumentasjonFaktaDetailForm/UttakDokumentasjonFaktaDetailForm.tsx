@@ -1,5 +1,5 @@
 import { type ReactNode, useState } from 'react';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { useFieldArray, useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Link, Radio, ReadMore, Table, VStack } from '@navikt/ds-react';
@@ -164,7 +164,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   </Radio>
                 ))}
               </RhfRadioGroup>
-              {formMethods.watch(`perioder.0.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
+              {useWatch({ control: formMethods.control, name: `perioder.0.vurdering` }) === VurderingsAlternativ.GODKJENT_UNDER75 && (
                 <RhfNumericField
                   name="perioder.0.morsStillingsprosent"
                   control={formMethods.control}
@@ -218,7 +218,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                       </Radio>
                     ))}
                   </RhfRadioGroup>
-                  {formMethods.watch(`perioder.${index}.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
+                  {useWatch({ control: formMethods.control, name: `perioder.${index}.vurdering` }) === VurderingsAlternativ.GODKJENT_UNDER75 && (
                     <RhfNumericField
                       label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
                       control={formMethods.control}

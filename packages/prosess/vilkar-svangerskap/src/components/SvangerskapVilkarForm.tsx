@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Detail, VStack } from '@navikt/ds-react';
@@ -87,7 +87,7 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const erVilkårOk = formMethods.watch('erVilkårOk');
+  const erVilkårOk = useWatch({ control: formMethods.control, name: 'erVilkårOk' });
 
   useEffect(() => {
     if (erVilkårOk) {

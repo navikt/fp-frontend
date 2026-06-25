@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Dialog, VStack } from '@navikt/ds-react';
@@ -175,7 +175,7 @@ export const NyBehandlingModal = ({
 
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values, uuidForSistLukkede, ytelseType));
 
-  const valgtBehandlingTypeKode = formMethods.watch('behandlingType');
+  const valgtBehandlingTypeKode = useWatch({ control: formMethods.control, name: 'behandlingType' });
 
   const behandlingTyper = getBehandlingTyper(behandlingstyper);
   const enabledBehandlingstyper = getEnabledBehandlingstyper(

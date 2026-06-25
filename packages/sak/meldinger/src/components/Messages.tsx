@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, Button, HStack, Link, VStack } from '@navikt/ds-react';
@@ -74,9 +74,9 @@ export const Messages = ({
     defaultValues: meldingFormData ?? buildInitialValues(behandling),
   });
 
-  const brevmalkode = formMethods.watch('brevmalkode');
-  const fritekst = formMethods.watch('fritekst');
-  const årsakskode = formMethods.watch('årsakskode');
+  const brevmalkode = useWatch({ control: formMethods.control, name: 'brevmalkode' });
+  const fritekst = useWatch({ control: formMethods.control, name: 'fritekst' });
+  const årsakskode = useWatch({ control: formMethods.control, name: 'årsakskode' });
 
   const filtrerteRevurderingVarslingArsaker = getfiltrerteRevurderingVarslingArsaker(
     revurderingVarslingArsak,

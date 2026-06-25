@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
@@ -35,7 +35,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt }: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkt),
   });
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
   return (
     <VStack gap="space-16">
       {aksjonspunkt.status === 'OPPR' && (

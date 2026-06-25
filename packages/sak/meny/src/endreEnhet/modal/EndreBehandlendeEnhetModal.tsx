@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Dialog, VStack } from '@navikt/ds-react';
@@ -52,8 +52,8 @@ export const EndreBehandlendeEnhetModal = ({
 
   const formMethods = useForm<FormValues>();
 
-  const nyEnhet = formMethods.watch('nyEnhet');
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const nyEnhet = useWatch({ control: formMethods.control, name: 'nyEnhet' });
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   return (
     <Dialog open onOpenChange={lukkModal} size="small">
