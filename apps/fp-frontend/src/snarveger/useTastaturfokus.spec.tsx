@@ -5,7 +5,7 @@ import { useFokuserVedPanelbyte } from './useTastaturfokus';
 describe('useTastaturfokus', () => {
   const renderPanelfokus = (fokuser: () => void) =>
     renderHook(({ panel }: { panel: string | undefined }) => useFokuserVedPanelbyte(panel, fokuser), {
-      initialProps: { panel: 'a' as string | undefined },
+      initialProps: { panel: 'a' },
     });
 
   it('skal flytte fokus når det er planlagt og panelet endrar seg', () => {
