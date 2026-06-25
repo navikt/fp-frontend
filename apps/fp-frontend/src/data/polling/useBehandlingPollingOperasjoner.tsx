@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import type { Behandling } from '@navikt/fp-types';
 
-import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs, getBehandlingApi } from '../behandlingApi';
+import { type AksjonspunktArgs, getBehandlingApi,type OverstyrteAksjonspunktArgs } from '../behandlingApi';
 import { doPolling, useTaskStatusChecker } from './pollingUtils';
 import { useRequestPendingContext } from './RequestPendingContext';
 

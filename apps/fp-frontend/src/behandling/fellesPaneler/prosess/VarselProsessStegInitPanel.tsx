@@ -12,7 +12,7 @@ import {
 } from '@navikt/fp-prosess-varsel-om-revurdering';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { forhåndsvisMelding, harLenke, getBehandlingApi } from '../../../data/behandlingApi';
+import { forhåndsvisMelding, getBehandlingApi,harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';

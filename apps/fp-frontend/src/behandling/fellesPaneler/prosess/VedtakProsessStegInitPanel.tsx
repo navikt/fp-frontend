@@ -13,7 +13,7 @@ import { type Aksjonspunkt, type BehandlingFpSak, type Vilkår, type VilkårUtfa
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, isAvslag } from '@navikt/fp-utils';
 
-import { forhåndsvisMelding, harLenke, getBehandlingApi } from '../../../data/behandlingApi';
+import { forhåndsvisMelding, getBehandlingApi,harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';

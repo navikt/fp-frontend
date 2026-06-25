@@ -18,7 +18,7 @@ import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkår } from 
 import type { BeregningAp, FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
-import { harLenke, getBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi,harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';

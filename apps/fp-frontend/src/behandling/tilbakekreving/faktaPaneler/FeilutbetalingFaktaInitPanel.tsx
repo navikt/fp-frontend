@@ -12,7 +12,7 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { AlleKodeverkTilbakekreving, BehandlingFpTilbake } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
-import { harLenke, getBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi,harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';

@@ -8,7 +8,7 @@ import type { Behandling, FagsakBehandlingDto, FagsakYtelseType } from '@navikt/
 import { notEmpty } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../data/behandlingApi';
-import { forhåndsvisTilbakekrevingHenleggelse, useFagsakApi, getFagsakBehandlingApi } from '../../data/fagsakApi';
+import { forhåndsvisTilbakekrevingHenleggelse, getFagsakBehandlingApi,useFagsakApi } from '../../data/fagsakApi';
 
 interface Props {
   behandling: Behandling;

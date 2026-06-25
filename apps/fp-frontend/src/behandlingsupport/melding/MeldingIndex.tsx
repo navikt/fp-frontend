@@ -17,9 +17,9 @@ import { notEmpty } from '@navikt/fp-utils';
 
 import {
   forhåndsvisTilbakekreving,
+  getFagsakBehandlingApi,
   initFetchOptions,
   type SubmitMessageParams,
-  getFagsakBehandlingApi,
 } from '../../data/fagsakApi';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import { FagsakData } from '../../fagsak/FagsakData';
