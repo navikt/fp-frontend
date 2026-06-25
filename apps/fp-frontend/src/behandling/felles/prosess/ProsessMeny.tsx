@@ -1,4 +1,4 @@
-import { createContext, type JSX, type ReactNode, useMemo } from 'react';
+import { createContext, type JSX, type ReactNode, useMemo, useRef } from 'react';
 
 import { ProcessMenu, ProcessMenuStepType } from '@navikt/ft-plattform-komponenter';
 
@@ -6,6 +6,7 @@ import type { Behandling, VilkårUtfallType } from '@navikt/fp-types';
 
 import { BEHANDLING_SNARVEG_IDER } from '../../../snarveger/snarvegDefinisjoner';
 import { useRegistrerSnarveg } from '../../../snarveger/SnarvegerContext';
+import { useFokuserVedPanelbyte } from '../../../snarveger/useTastaturfokus';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { finnNabopanelId } from '../menyNavigasjon';
 import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
@@ -24,6 +25,11 @@ export const ProsessMeny = <T extends Behandling>({ valgtProsessSteg, valgtFakta
 
   const { prosessPanelMenyData, settProsessPanelMenyData } = useProsessPanelMenyData();
 
+  const innholdRef = useRef<HTMLDivElement>(null);
+  const planleggInnholdsfokus = useFokuserVedPanelbyte(valgtProsessSteg, () =>
+    innholdRef.current?.focus({ preventScroll: true }),
+  );
+
   const oppdaterProsessPanelIUrl = (index: number) => {
     const panel = prosessPanelMenyData[index];
     const nyvalgtProsessSteg = panel?.erAktiv ? undefined : panel?.id;
@@ -33,6 +39,7 @@ export const ProsessMeny = <T extends Behandling>({ valgtProsessSteg, valgtFakta
   const byttProsessPanel = (retning: 1 | -1) => {
     const nyId = finnNabopanelId(prosessPanelMenyData, retning);
     if (nyId) {
+      planleggInnholdsfokus(nyId);
       oppdaterProsessStegOgFaktaPanelIUrl(nyId, valgtFaktaSteg);
     }
   };
@@ -58,13 +65,15 @@ export const ProsessMeny = <T extends Behandling>({ valgtProsessSteg, valgtFakta
           stepArrowContainerStyle={styles['stepArrowContainer']}
         />
       </div>
-      <ProsessMenyProvider
-        valgtProsessSteg={valgtProsessSteg}
-        settProsessPanelMenyData={settProsessPanelMenyData}
-        prosessPanelMenyData={prosessPanelMenyData}
-      >
-        {children}
-      </ProsessMenyProvider>
+      <div ref={innholdRef} tabIndex={-1}>
+        <ProsessMenyProvider
+          valgtProsessSteg={valgtProsessSteg}
+          settProsessPanelMenyData={settProsessPanelMenyData}
+          prosessPanelMenyData={prosessPanelMenyData}
+        >
+          {children}
+        </ProsessMenyProvider>
+      </div>
       {behandling.behandlingHenlagt && (
         <BehandlingHenlagtPanel
           valgtProsessSteg={valgtProsessSteg}

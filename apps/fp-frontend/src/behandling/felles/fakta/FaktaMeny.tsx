@@ -1,4 +1,4 @@
-import { createContext, type JSX, type ReactNode, useMemo } from 'react';
+import { createContext, type JSX, type ReactNode, useMemo, useRef } from 'react';
 import { useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
@@ -9,6 +9,7 @@ import type { Behandling } from '@navikt/fp-types';
 
 import { BEHANDLING_SNARVEG_IDER } from '../../../snarveger/snarvegDefinisjoner';
 import { useRegistrerSnarveg } from '../../../snarveger/SnarvegerContext';
+import { useFokuserVedPanelbyte } from '../../../snarveger/useTastaturfokus';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import { finnNabopanelId } from '../menyNavigasjon';
 import { type FaktaPanelMedÅpentApInfo, type FaktaPanelMenyData, useFaktaPanelMenyData } from './useFaktaPanelMenyData';
@@ -34,9 +35,15 @@ export const FaktaMeny = <T extends Behandling>({
 
   const { faktaPanelMenyData, settFaktaPanelMenyData } = useFaktaPanelMenyData(setFaktaPanelMedÅpentApInfo);
 
+  const innholdRef = useRef<HTMLDivElement>(null);
+  const planleggInnholdsfokus = useFokuserVedPanelbyte(valgtFaktaSteg, () =>
+    innholdRef.current?.focus({ preventScroll: true }),
+  );
+
   const byttFaktaPanel = (retning: 1 | -1) => {
     const nyId = finnNabopanelId(faktaPanelMenyData, retning);
     if (nyId) {
+      planleggInnholdsfokus(nyId);
       oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, nyId);
     }
   };
@@ -66,7 +73,7 @@ export const FaktaMeny = <T extends Behandling>({
           />
         </div>
       )}
-      <div className={styles['content']}>
+      <div className={styles['content']} ref={innholdRef} tabIndex={-1}>
         <FaktaMenyProvider
           valgtFaktaSteg={valgtFaktaSteg}
           settFaktaPanelMenyData={settFaktaPanelMenyData}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,6 +20,7 @@ import { getSupportPanelLocationCreator } from '../app/paths';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BEHANDLING_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
 import { useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
+import { useFokuserVedPanelbyte } from '../snarveger/useTastaturfokus';
 import { DokumentIndex } from './dokument/DokumentIndex';
 import { HistorikkIndex } from './historikk/HistorikkIndex';
 import { MeldingIndex } from './melding/MeldingIndex';
@@ -87,24 +88,34 @@ export const BehandlingSupportIndex = ({
     void navigate(getSupportPanelLocation(supportPanel));
   };
 
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK, () => changeRouteCallback(SupportTabs.HISTORIKK));
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_MELDINGER, () => changeRouteCallback(SupportTabs.MELDINGER));
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_DOKUMENTER, () => changeRouteCallback(SupportTabs.DOKUMENTER));
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_NOTATER, () => changeRouteCallback(SupportTabs.NOTATER));
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const planleggPanelfokus = useFokuserVedPanelbyte(aktivtSupportPanel, () =>
+    tabsRef.current?.querySelector<HTMLElement>('[role="tabpanel"]:not([hidden])')?.focus({ preventScroll: true }),
+  );
+
+  const byttSupportPanel = (supportPanel: string) => {
+    planleggPanelfokus(supportPanel);
+    changeRouteCallback(supportPanel);
+  };
+
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK, () => byttSupportPanel(SupportTabs.HISTORIKK));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_MELDINGER, () => byttSupportPanel(SupportTabs.MELDINGER));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_DOKUMENTER, () => byttSupportPanel(SupportTabs.DOKUMENTER));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.STØTTE_NOTATER, () => byttSupportPanel(SupportTabs.NOTATER));
   useRegistrerSnarveg(
     BEHANDLING_SNARVEG_IDER.STØTTE_TIL_BESLUTTER,
-    () => changeRouteCallback(SupportTabs.TIL_BESLUTTER),
+    () => byttSupportPanel(SupportTabs.TIL_BESLUTTER),
     skalViseTilGodkjenning,
   );
   useRegistrerSnarveg(
     BEHANDLING_SNARVEG_IDER.STØTTE_FRA_BESLUTTER,
-    () => changeRouteCallback(SupportTabs.FRA_BESLUTTER),
+    () => byttSupportPanel(SupportTabs.FRA_BESLUTTER),
     skalViseFraBeslutter,
   );
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.UTVID_DETALJER, toggleVisUtvidetBehandlingDetaljer);
 
   return (
-    <Tabs value={aktivtSupportPanel} onChange={changeRouteCallback}>
+    <Tabs ref={tabsRef} value={aktivtSupportPanel} onChange={changeRouteCallback}>
       <Tabs.List className={styles['tabContainer']}>
         {skalViseFraBeslutter && (
           <Tabs.Tab
