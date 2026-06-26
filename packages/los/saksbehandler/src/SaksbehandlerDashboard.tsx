@@ -26,7 +26,7 @@ export const SaksbehandlerDashboard = ({ setLosErIkkeTilgjengelig, åpneFagsak, 
     if (alleKodeverkQuery.isError) {
       setLosErIkkeTilgjengelig();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun reagere på feiltilstand; setLosErIkkeTilgjengelig-prop er ikkje memoisert og ville trigge effekten på nytt
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- reager berre på feiltilstand; setLosErIkkeTilgjengelig er ikkje memoisert og ville trigge på nytt
   }, [alleKodeverkQuery.isError]);
 
   if (alleKodeverkQuery.isPending) {

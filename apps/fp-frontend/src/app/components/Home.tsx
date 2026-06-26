@@ -44,7 +44,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
     if (!erLosTilgjengelig) {
       addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: intl.formatMessage({ id: 'Los.IkkeTilgjengelig' }) });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun vise feilmelding når LOS-tilgjengelegheit endrar seg; intl/addErrorMessage er stabile dispatcharar
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- vis feilmelding berre når LOS-tilgjenge endrar seg; intl/addErrorMessage er stabile
   }, [erLosTilgjengelig]);
 
   const navigate = useNavigate();

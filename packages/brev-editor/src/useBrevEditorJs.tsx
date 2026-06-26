@@ -135,7 +135,7 @@ const useAutoSaveDebouncer = () => {
     lagreFn();
   }, getTimeoutValue());
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- cleanup skal kun køyre ved unmount; lagre vert oppretta på nytt kvar render og skal ikkje vere dependency
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- cleanup berre ved unmount; lagre er ny kvar render og skal ikkje vere dependency
   useEffect(() => () => lagre.cancel(), []);
 
   return lagre;

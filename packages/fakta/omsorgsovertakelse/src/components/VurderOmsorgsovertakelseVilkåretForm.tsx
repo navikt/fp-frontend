@@ -59,7 +59,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
     return (omsorgsovertakelse.aktuelleDelvilkårAvslagsårsaker[delvilkår] ?? [])
       .map(kode => alleKodeverk['Avslagsårsak'].find(kodeverk => kodeverk.kode === kode))
       .sort(sortByNavn);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- avslagsårsaker skal kun reknast om når delvilkår endrar seg; alleKodeverk og aktuelleDelvilkårAvslagsårsaker er stabile etter lasting
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- avslagsårsaker reknast berre om ved endra delvilkår; alleKodeverk er stabil etter lasting
   }, [delvilkår]);
 
   return (
