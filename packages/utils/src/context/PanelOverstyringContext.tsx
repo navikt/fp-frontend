@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, use, useMemo, useState } from 'react';
+import { createContext, type ReactElement, use, useCallback, useMemo, useState } from 'react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
@@ -29,11 +29,11 @@ export const PanelOverstyringProvider = (
 
   const { children, toggleOverstyring: toggle, ...otherProps } = props;
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- closure som les gjeldande erOverstyrt; bevisst ikkje memoisert for å halde toggle-semantikken
-  const toggleOverstyring = () => {
-    setErOverstyrt(!erOverstyrt);
-    toggle?.(!erOverstyrt);
-  };
+  const toggleOverstyring = useCallback(() => {
+    const neste = !erOverstyrt;
+    setErOverstyrt(neste);
+    toggle?.(neste);
+  }, [erOverstyrt, toggle]);
 
   const value = useMemo(
     () => ({
