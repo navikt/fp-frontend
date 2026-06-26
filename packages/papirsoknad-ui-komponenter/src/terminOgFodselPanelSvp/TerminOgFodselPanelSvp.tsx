@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 
 import { Heading, Radio, VStack } from '@navikt/ds-react';
@@ -48,6 +49,8 @@ const validateTermin = (getValues: UseFormGetValues<FormValues>) => (termindato:
 export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
   const { getValues, watch, control } = useFormContext<FormValues>();
 
+  const [iDag] = useState(() => new Date());
+
   const erBarnetFødt = watch('erBarnetFødt');
 
   return (
@@ -88,7 +91,7 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
           readOnly={readOnly}
           fromDate={minTermindato().toDate()}
           toDate={maxTermindato().toDate()}
-          defaultMonth={new Date()}
+          defaultMonth={iDag}
           validate={[
             required,
             hasValidDate,
