@@ -14,6 +14,7 @@ const TestErrorMessage = ({ skalFjerne = false }) => {
     if (skalFjerne) {
       removeErrorMessages();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- testfixture: effekten skal kun køyre ein gong ved montering
   }, []);
 
   const feilmeldinger = useRestApiError();

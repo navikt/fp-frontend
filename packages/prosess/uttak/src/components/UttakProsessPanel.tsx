@@ -286,6 +286,7 @@ export const UttakProsessPanel = ({
       return true;
     }
     return valgtPeriodeIndex !== undefined || !isDirty;
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- aksjonspunkterForPanel er ny referanse kvar render; bevisst utelaten for å unngå rekalkulering kvar render
   }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
 
   const feilmeldinger =

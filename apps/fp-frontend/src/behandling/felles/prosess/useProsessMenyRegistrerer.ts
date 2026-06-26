@@ -28,6 +28,7 @@ export const useProsessMenyRegistrerer = (
       status,
       skalVisesIMeny,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun oppdatere menydata når visningstilstand/status endrar seg; id/tekst er konstante for panelet og setter frå context er stabil
   }, [skalVisesIMeny, erAktiv, harÅpentAksjonspunkt, status]);
 
   return skalVisesIMeny && erAktiv;

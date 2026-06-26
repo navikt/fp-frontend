@@ -23,6 +23,7 @@ export const useFaktaMenyRegistrerer = (
       harÅpentAksjonspunkt,
       skalVisesIMeny,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun oppdatere menydata når visningstilstand endrar seg; id/tekst er konstante for panelet og setter frå context er stabil
   }, [skalVisesIMeny, erAktiv, harÅpentAksjonspunkt]);
 
   return skalVisesIMeny && erAktiv;

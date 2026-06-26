@@ -54,6 +54,7 @@ export const DekoratorMedFeilviserSakIndex = ({
     if (fixedHeaderRef.current) {
       setSiteHeight(fixedHeaderRef.current.clientHeight);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun måle høgd når talet på feilmeldingar endrar seg; setSiteHeight-prop skal ikkje trigge effekten på nytt
   }, [feilmeldinger.length]);
 
   return (

@@ -29,6 +29,7 @@ export const PanelOverstyringProvider = (
 
   const { children, toggleOverstyring: toggle, ...otherProps } = props;
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- closure som les gjeldande erOverstyrt; bevisst ikkje memoisert for å halde toggle-semantikken
   const toggleOverstyring = () => {
     setErOverstyrt(!erOverstyrt);
     toggle?.(!erOverstyrt);

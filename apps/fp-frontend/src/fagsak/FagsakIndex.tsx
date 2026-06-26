@@ -99,6 +99,7 @@ export const FagsakIndex = () => {
     if (behandlingUuidFraUrl && fagsakBehandling) {
       hentOgSettBehandling();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun hente behandling når URL-uuid endrar seg; å inkludere hentOgSettBehandling/fagsakBehandling gjev gjentekne henteforsøk
   }, [behandlingUuidFraUrl, fagsakBehandling?.uuid]);
 
   const location = useLocation();

@@ -98,6 +98,7 @@ export const useBrevEditorJs = (
         editorJsRef.current.destroy();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- editor skal kun initialiserast ein gong ved montering
   }, []);
 
   const tilbakestillEndringer = async (opprinneligRedigerbartInnhold: string) => {
@@ -134,6 +135,7 @@ const useAutoSaveDebouncer = () => {
     lagreFn();
   }, getTimeoutValue());
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- cleanup skal kun køyre ved unmount; lagre vert oppretta på nytt kvar render og skal ikkje vere dependency
   useEffect(() => () => lagre.cancel(), []);
 
   return lagre;

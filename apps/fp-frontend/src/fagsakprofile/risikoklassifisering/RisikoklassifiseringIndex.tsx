@@ -117,6 +117,7 @@ const RisikoklassifiseringBehandling = ({
     if (!!risikoAksjonspunkt && risikoAksjonspunkt.status === 'UTFO') {
       void navigate(getRiskPanelLocationCreator(location)(false));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun reagere på endra behandling/risikoaksjonspunkt; navigate/location/isRiskPanelOpen er bevisst utelatne for å unngå uønskt navigering
   }, [!!risikoAksjonspunkt, behandling.uuid, behandling.versjon]);
 
   const { lagreAksjonspunkter } = useBehandlingPollingOperasjoner(behandling, setBehandling);

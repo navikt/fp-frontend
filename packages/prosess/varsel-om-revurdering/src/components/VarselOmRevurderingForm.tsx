@@ -78,6 +78,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
         })
         .catch(() => {});
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun hentast ein gong ved montering (styrt av hasFetchedBrevDataRef)
   }, []);
 
   const lukkModal = () => setSkalVisePåVentModal(false);

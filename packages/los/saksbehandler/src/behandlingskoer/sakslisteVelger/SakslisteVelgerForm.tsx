@@ -49,6 +49,7 @@ export const SakslisteVelgerForm = ({ sakslister, setValgtSakslisteId, fetchAnta
       setValgtSakslisteId(id);
       fetchAntallOppgaver(id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun reagere på endra sakslisteId; fetchAntallOppgaver/setValgtSakslisteId skal ikkje trigge effekten på nytt
   }, [sakslisteId]);
 
   if (sakslister.length === 0) {

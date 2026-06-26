@@ -68,6 +68,7 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
 
   useEffect(() => {
     void pollEtterOppgaver({ oppgaveIder: undefined });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun starte polling ein gong ved montering
   }, []);
 
   useEffect(() => {
@@ -80,6 +81,7 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
 
       void pollEtterOppgaver({ oppgaveIder: tilBehandling.map(o => o.id).join(',') });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- polling-kjede som kun skal reagere på isSuccess; å inkludere oppgaver/pollEtterOppgaver ville gitt ny polling i loop
   }, [isSuccess]);
 
   useEffect(() => {
