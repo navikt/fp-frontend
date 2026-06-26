@@ -8,7 +8,7 @@ import {
   MottattDatoPapirsoknadIndex,
   SoknadData,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import type { AlleKodeverk, FamilieHendelseType } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { RegistreringAdopsjonOgOmsorgGrid } from './RegistreringAdopsjonOgOmsorgGrid';
 import { RegistreringFodselGrid } from './RegistreringFodselGrid';
@@ -82,19 +82,13 @@ const initialValues = () => ({
 });
 
 const transformValues = (soknadData: SoknadData, values: ReturnType<typeof initialValues>) => {
+  const familieHendelseValues =
+    soknadData.getFamilieHendelseType() === 'ADPSJN'
+      ? RegistreringAdopsjonOgOmsorgGrid.transformValues(values)
+      : RegistreringFodselGrid.transformValues(values);
   return {
     ...MottattDatoPapirsoknadIndex.transformValues(values),
-    ...getComponentForFamiliehendelse(soknadData.getFamilieHendelseType()).transformValues(values),
+    ...familieHendelseValues,
     ...LagreSoknadPapirsoknadIndex.transformValues(values),
   };
-};
-
-const getComponentForFamiliehendelse = (familieHendelse: FamilieHendelseType) => {
-  if (familieHendelse === 'FODSL') {
-    return RegistreringFodselGrid;
-  }
-  if (familieHendelse === 'ADPSJN') {
-    return RegistreringAdopsjonOgOmsorgGrid;
-  }
-  throw new Error(`Unsupported FamilieHendelseType i papirsoknad for engangsstønad: ${familieHendelse}`);
 };
