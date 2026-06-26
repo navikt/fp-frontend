@@ -79,8 +79,12 @@ export const BehandlingMenuIndex = ({
   const fokuserFørsteVedÅpning = useFokusNårKlar(menyÅpen, () => fokuserMenyKnapp(0));
 
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.ÅPNE_BEHANDLINGSMENY, () => {
-    fokuserFørsteVedÅpning();
-    setMenyÅpen(true);
+    if (menyÅpen) {
+      fokuserMenyKnapp(0);
+    } else {
+      fokuserFørsteVedÅpning();
+      setMenyÅpen(true);
+    }
   });
 
   const fagsak = fagsakData.getFagsak();
