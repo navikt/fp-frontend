@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Box, Button, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
@@ -50,7 +50,7 @@ export const SoknadTypePickerForm = ({
     },
   });
 
-  const selectedFagsakYtelseType = formMethods.watch('fagsakYtelseType');
+  const selectedFagsakYtelseType = useWatch({ control: formMethods.control, name: 'fagsakYtelseType' });
 
   const fagsakYtelseTyper = alleKodeverk['FagsakYtelseType'];
   const familieHendelseTyper = alleKodeverk['FamilieHendelseType'];

@@ -1,5 +1,5 @@
 import { type MouseEvent, useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, Button, Heading, HStack, Link, Radio, VStack } from '@navikt/ds-react';
@@ -60,7 +60,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const formVerdier = formMethods.watch();
+  const formVerdier = useWatch({ control: formMethods.control });
 
   const erÅpentAksjonspunkt = !isReadOnly && aksjonspunkterForPanel[0]?.status === 'OPPR';
 

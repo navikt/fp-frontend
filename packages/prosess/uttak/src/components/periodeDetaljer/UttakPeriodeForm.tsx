@@ -1,5 +1,5 @@
 import { type ReactElement, useEffect, useMemo } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, HStack, Radio, VStack } from '@navikt/ds-react';
@@ -266,11 +266,11 @@ export const UttakPeriodeForm = ({
     formMethods.reset(defaultValues);
   }, [defaultValues]);
 
-  const erOppfylt = formMethods.watch('erOppfylt');
-  const graderingInnvilget = formMethods.watch('graderingInnvilget');
-  const samtidigUttak = formMethods.watch('samtidigUttak');
-  const valgtInnvilgelsesÅrsak = formMethods.watch('periodeResultatÅrsak');
-  const aktiviteter = formMethods.watch('aktiviteter');
+  const erOppfylt = useWatch({ control: formMethods.control, name: 'erOppfylt' });
+  const graderingInnvilget = useWatch({ control: formMethods.control, name: 'graderingInnvilget' });
+  const samtidigUttak = useWatch({ control: formMethods.control, name: 'samtidigUttak' });
+  const valgtInnvilgelsesÅrsak = useWatch({ control: formMethods.control, name: 'periodeResultatÅrsak' });
+  const aktiviteter = useWatch({ control: formMethods.control, name: 'aktiviteter' });
 
   const stønadskontoType: UttakPeriodeType = aktiviteter[0]?.stønadskontoType ?? '-';
 

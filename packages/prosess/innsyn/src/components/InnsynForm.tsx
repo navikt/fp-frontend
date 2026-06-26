@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, HStack, Radio, VStack } from '@navikt/ds-react';
@@ -76,8 +76,8 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
 
   const isApOpen = aksjonspunkterForPanel[0]?.status === 'OPPR';
 
-  const innsynResultatTypeKode = formMethods.watch('innsynResultatType');
-  const sattPaVent = formMethods.watch('sattPaVent');
+  const innsynResultatTypeKode = useWatch({ control: formMethods.control, name: 'innsynResultatType' });
+  const sattPaVent = useWatch({ control: formMethods.control, name: 'sattPaVent' });
 
   return (
     <RhfForm

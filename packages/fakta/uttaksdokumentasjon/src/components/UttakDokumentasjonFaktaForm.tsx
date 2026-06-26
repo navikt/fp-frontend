@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, VStack } from '@navikt/ds-react';
@@ -51,7 +51,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
     defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel),
   });
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   const isSubmittable = submittable && dokBehov.every(a => a.vurdering) && !!begrunnelse;
 

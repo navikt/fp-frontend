@@ -1,5 +1,5 @@
 import { type ReactElement, useState } from 'react';
-import { useForm, type UseFormGetValues } from 'react-hook-form';
+import { useForm, type UseFormGetValues, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
@@ -45,8 +45,8 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
     defaultValues: annenForelderUttakEøsPeriode ? buildInitialValues(annenForelderUttakEøsPeriode) : undefined,
   });
 
-  const fom = formMethods.watch('fom');
-  const tom = formMethods.watch('tom');
+  const fom = useWatch({ control: formMethods.control, name: 'fom' });
+  const tom = useWatch({ control: formMethods.control, name: 'tom' });
 
   const [visSletteDialog, setVisSletteDialog] = useState(false);
   const slettUttaksperiode = () => {

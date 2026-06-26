@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Box, Checkbox, ExpansionCard, Label, Table, VStack } from '@navikt/ds-react';
@@ -38,7 +38,7 @@ export const SaksbehandlereForSakslisteForm = ({
     defaultValues,
   });
 
-  const formvalues = formMethods.watch();
+  const formvalues = useWatch({ control: formMethods.control });
 
   useEffect(() => {
     formMethods.reset(defaultValues);

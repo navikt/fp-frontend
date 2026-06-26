@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
@@ -57,8 +57,8 @@ export const RegistrereVergeInfoPanel = ({ verge, alleKodeverk }: Props) => {
     shouldUnregister: true,
   });
 
-  const valgtVergeType = formMethods.watch('vergeType');
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const valgtVergeType = useWatch({ control: formMethods.control, name: 'vergeType' });
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   const vergetyper = alleKodeverk['VergeType'].sort((k1, k2) => k1.navn.localeCompare(k2.navn));
 

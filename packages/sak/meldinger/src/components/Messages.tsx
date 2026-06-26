@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, Button, HStack, Link, VStack } from '@navikt/ds-react';
@@ -74,9 +74,9 @@ export const Messages = ({
     defaultValues: meldingFormData ?? buildInitialValues(behandling),
   });
 
-  const brevmalkode = formMethods.watch('brevmalkode');
-  const fritekst = formMethods.watch('fritekst');
-  const årsakskode = formMethods.watch('årsakskode');
+  const brevmalkode = useWatch({ control: formMethods.control, name: 'brevmalkode' });
+  const fritekst = useWatch({ control: formMethods.control, name: 'fritekst' });
+  const årsakskode = useWatch({ control: formMethods.control, name: 'årsakskode' });
 
   const filtrerteRevurderingVarslingArsaker = getfiltrerteRevurderingVarslingArsaker(
     revurderingVarslingArsak,
@@ -85,26 +85,32 @@ export const Messages = ({
 
   const { formState, control } = formMethods;
 
-  const [brevData, setBrevData] = useState<{ opprinneligHtml: string; redigertHtml: string | null } | null>(null);
+  const [brevDataState, setBrevDataState] = useState<{
+    key: string;
+    opprinneligHtml: string;
+    redigertHtml: string | null;
+  } | null>(null);
   const [visRedigeringModal, setVisRedigeringModal] = useState(false);
 
   const erVarselOmRevurdering = brevmalkode === 'VARREV';
   const erInnhenteOpplysninger = brevmalkode === 'INNOPP';
   const brukBreveditor = erVarselOmRevurdering || erInnhenteOpplysninger;
 
-  useEffect(() => {
-    setBrevData(null);
-  }, [årsakskode, brevmalkode]);
+  // brevData er nøkla på (brevmalkode, årsakskode). Når valet endrar seg, sluttar nøkkelen
+  // å peika, så avleidd brevData blir null og hentinga under skjer på nytt – utan å
+  // nullstilla state synkront i ein effekt (set-state-in-effect).
+  const aktivBrevKey = `${brevmalkode ?? ''}|${årsakskode ?? ''}`;
+  const brevData = brevDataState?.key === aktivBrevKey ? brevDataState : null;
 
   useEffect(() => {
     if (brukBreveditor && !brevData && (!erVarselOmRevurdering || årsakskode)) {
       void hentBrevHtml(brevmalkode, årsakskode)
         .then(result => {
-          setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+          setBrevDataState({ key: aktivBrevKey, opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
         })
         .catch(() => {});
     }
-  }, [brukBreveditor, brevData, hentBrevHtml, brevmalkode, årsakskode, erVarselOmRevurdering]);
+  }, [brukBreveditor, brevData, hentBrevHtml, brevmalkode, årsakskode, erVarselOmRevurdering, aktivBrevKey]);
 
   const forhåndsvis = (e: React.MouseEvent | React.KeyboardEvent) => {
     if (brevmalkode) {
@@ -164,7 +170,11 @@ export const Messages = ({
                     if (!brevData) {
                       try {
                         const result = await hentBrevHtml(brevmalkode, årsakskode);
-                        setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+                        setBrevDataState({
+                          key: aktivBrevKey,
+                          opprinneligHtml: result.opprinneligHtml,
+                          redigertHtml: result.redigertHtml,
+                        });
                       } catch {
                         return;
                       }
@@ -224,7 +234,7 @@ export const Messages = ({
             if (brevmalkode) {
               await mellomlagreBrev(brevmalkode, html);
             }
-            setBrevData(prev => (prev ? { ...prev, redigertHtml: html ?? null } : null));
+            setBrevDataState(prev => (prev ? { ...prev, redigertHtml: html ?? null } : null));
           }}
           forhåndsvisBrev={async html => {
             if (brevmalkode) {

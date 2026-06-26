@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, Radio, VStack } from '@navikt/ds-react';
@@ -34,7 +34,7 @@ export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props)
     defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkt, dokStatus),
   });
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   return (
     <AksjonspunktBox

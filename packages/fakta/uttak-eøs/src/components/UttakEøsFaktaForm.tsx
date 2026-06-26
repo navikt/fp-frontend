@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
@@ -38,7 +38,6 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   );
   const [erOverstyrt, setErOverstyrt] = useState(false);
   const [visLeggTilPeriodeForm, setVisLeggTilPeriodeForm] = useState(false);
-  const [feilmelding, setFeilmelding] = useState<string | undefined>();
   const [isDirty, setIsDirty] = useState(false);
 
   const formMethods = useForm<FaktaBegrunnelseFormValues>({
@@ -51,17 +50,13 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
 
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
 
-  useEffect(() => {
-    const periodeMap = perioder.map(({ fom, tom }) => [fom, tom]);
-    const erOverlappendePerioder = periodeMap.length > 0 ? !!dateRangesNotOverlapping(periodeMap) : undefined;
-    if (erOverlappendePerioder) {
-      setFeilmelding(intl.formatMessage({ id: 'UttakEøsFaktaForm.OverlappendePerioder' }));
-    } else {
-      setFeilmelding(undefined);
-    }
-  }, [perioder]);
+  const periodeMap = perioder.map(({ fom, tom }) => [fom, tom]);
+  const erOverlappendePerioder = periodeMap.length > 0 ? !!dateRangesNotOverlapping(periodeMap) : undefined;
+  const feilmelding = erOverlappendePerioder
+    ? intl.formatMessage({ id: 'UttakEøsFaktaForm.OverlappendePerioder' })
+    : undefined;
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   useEffect(() => {
     setMellomlagretFormData({

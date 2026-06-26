@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, HStack, VStack } from '@navikt/ds-react';
@@ -59,7 +59,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
     defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, sorterteArbeidsforhold),
   });
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
   const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(a => a.status === 'OPPR');
 
   return (

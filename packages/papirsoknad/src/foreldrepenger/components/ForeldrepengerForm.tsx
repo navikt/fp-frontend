@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 
 import { HGrid } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
@@ -95,14 +95,12 @@ export const ForeldrepengerForm = ({
     defaultValues: { ...buildInitialValues(), ...mellomlagretData },
   });
 
-  const søkerHarAleneomsorg = formMethods.watch(`annenForelder.søkerHarAleneomsorg`);
-  const denAndreForelderenHarRettPåForeldrepenger = formMethods.watch(
-    `annenForelder.denAndreForelderenHarRettPåForeldrepenger`,
-  );
+  const søkerHarAleneomsorg = useWatch({ control: formMethods.control, name: 'annenForelder.søkerHarAleneomsorg' });
+  const denAndreForelderenHarRettPåForeldrepenger = useWatch({ control: formMethods.control, name: 'annenForelder.denAndreForelderenHarRettPåForeldrepenger' });
   const annenForelderInformertRequired = !søkerHarAleneomsorg && denAndreForelderenHarRettPåForeldrepenger !== false;
 
-  const foedselsDatoFraTerminOgFodelsPanel = formMethods.watch('fødselsdato');
-  const mottattDato = formMethods.watch('mottattDato');
+  const foedselsDatoFraTerminOgFodelsPanel = useWatch({ control: formMethods.control, name: 'fødselsdato' });
+  const mottattDato = useWatch({ control: formMethods.control, name: 'mottattDato' });
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>

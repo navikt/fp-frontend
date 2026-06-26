@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
@@ -43,7 +43,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: 
     defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, manuellBehandlingResultat),
   });
 
-  const begrunnelseVerdi = formMethods.watch('begrunnelse');
+  const begrunnelseVerdi = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   const erForutgående = harAksjonspunkt(AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR, aksjonspunkterForPanel);
 

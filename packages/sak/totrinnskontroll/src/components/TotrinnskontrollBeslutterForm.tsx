@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, HStack, Link, VStack } from '@navikt/ds-react';
@@ -138,7 +138,7 @@ export const TotrinnskontrollBeslutterForm = ({
     defaultValues: beslutterFormData || defaultValues,
   });
 
-  const aksjonspunktGodkjenning = formMethods.watch('aksjonspunktGodkjenning');
+  const aksjonspunktGodkjenning = useWatch({ control: formMethods.control, name: 'aksjonspunktGodkjenning' });
 
   if (!behandling.toTrinnsBehandling) {
     return null;

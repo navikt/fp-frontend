@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, VStack } from '@navikt/ds-react';
@@ -34,7 +34,7 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
     defaultValues: mellomlagretFormData ?? initialValues(gjeldende, aksjonspunkt),
   });
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
   const finnesBarnIFReg = gjeldende.barn.some(b => b.kilde === 'FOLKEREGISTER');
   const diffIAntallBarn = register.barn.length > 0 && register.barn.length !== søknad.antallBarn;
 

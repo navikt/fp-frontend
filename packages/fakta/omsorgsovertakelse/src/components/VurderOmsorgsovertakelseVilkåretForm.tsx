@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Checkbox, Radio, VStack } from '@navikt/ds-react';
@@ -50,9 +50,9 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
     defaultValues: buildInitialValues(omsorgsovertakelse, aksjonspunkterForPanel, alleBarn),
   });
 
-  const delvilkår = formMethods.watch('delvilkår');
-  const vilkårUtfallType = formMethods.watch('vilkårUtfallType');
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const delvilkår = useWatch({ control: formMethods.control, name: 'delvilkår' });
+  const vilkårUtfallType = useWatch({ control: formMethods.control, name: 'vilkårUtfallType' });
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
   const avslagsÅrsaker = useMemo(() => {
     if (!delvilkår) return [];
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
@@ -203,7 +203,7 @@ export const UttakFaktaForm = ({
     a => a.definisjon !== AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
   );
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   const [isDirty, setIsDirty] = useState(false);
 
