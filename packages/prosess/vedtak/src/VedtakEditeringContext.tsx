@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, use, useEffect, useMemo, useState } from 'react';
+import { createContext, type ReactElement, use, useMemo, useState } from 'react';
 
 import type { BehandlingFpSak, BrevOverstyring } from '@navikt/fp-types';
 
@@ -25,12 +25,15 @@ export const VedtakEditeringProvider = ({
   mellomlagreBrev: (redigertInnhold?: string) => Promise<void>;
   children: ReactElement;
 }) => {
-  const [harRedigertBrev, setHarRedigertBrev] = useState(behandling.links.some(l => l.rel === 'overstyrt-vedtaksbrev'));
+  const initiellHarRedigertBrev = behandling.links.some(l => l.rel === 'overstyrt-vedtaksbrev');
+  const [harRedigertBrev, setHarRedigertBrev] = useState(initiellHarRedigertBrev);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved endring av behandling
-    setHarRedigertBrev(behandling.links.some(l => l.rel === 'overstyrt-vedtaksbrev'));
-  }, [behandling.uuid, behandling.versjon]);
+  const behandlingKey = `${behandling.uuid}-${behandling.versjon}`;
+  const [forrigeBehandlingKey, setForrigeBehandlingKey] = useState(behandlingKey);
+  if (behandlingKey !== forrigeBehandlingKey) {
+    setForrigeBehandlingKey(behandlingKey);
+    setHarRedigertBrev(initiellHarRedigertBrev);
+  }
 
   const value = useMemo(
     () => ({
