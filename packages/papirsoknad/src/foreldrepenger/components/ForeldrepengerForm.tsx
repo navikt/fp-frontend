@@ -95,8 +95,8 @@ export const ForeldrepengerForm = ({
     defaultValues: { ...buildInitialValues(), ...mellomlagretData },
   });
 
-  const søkerHarAleneomsorg = useWatch({ control: formMethods.control, name: `annenForelder.søkerHarAleneomsorg` });
-  const denAndreForelderenHarRettPåForeldrepenger = useWatch({ control: formMethods.control, name: `annenForelder.denAndreForelderenHarRettPåForeldrepenger`, });
+  const søkerHarAleneomsorg = useWatch({ control: formMethods.control, name: 'annenForelder.søkerHarAleneomsorg' });
+  const denAndreForelderenHarRettPåForeldrepenger = useWatch({ control: formMethods.control, name: 'annenForelder.denAndreForelderenHarRettPåForeldrepenger' });
   const annenForelderInformertRequired = !søkerHarAleneomsorg && denAndreForelderenHarRettPåForeldrepenger !== false;
 
   const foedselsDatoFraTerminOgFodelsPanel = useWatch({ control: formMethods.control, name: 'fødselsdato' });

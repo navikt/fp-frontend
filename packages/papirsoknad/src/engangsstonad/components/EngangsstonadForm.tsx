@@ -34,8 +34,6 @@ export const EngangsstonadForm = ({
   onMellomlagre,
   mellomlagretData,
 }: Props) => {
-  const ComponentForFamilieHendelse = getComponentForFamiliehendelse(soknadData.getFamilieHendelseType());
-
   const formMethods = useForm({
     defaultValues: { ...initialValues(), ...mellomlagretData },
   });
@@ -47,13 +45,23 @@ export const EngangsstonadForm = ({
     <RhfForm formMethods={formMethods} onSubmit={values => onSubmit(transformValues(soknadData, values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="space-16">
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
-        <ComponentForFamilieHendelse
-          soknadData={soknadData}
-          readOnly={readOnly}
-          alleKodeverk={alleKodeverk}
-          fodselsdato={foedselsDatoFraTerminOgFodelsPanel}
-          mottattDato={mottattDato}
-        />
+        {soknadData.getFamilieHendelseType() === 'ADPSJN' ? (
+          <RegistreringAdopsjonOgOmsorgGrid
+            soknadData={soknadData}
+            readOnly={readOnly}
+            alleKodeverk={alleKodeverk}
+            fodselsdato={foedselsDatoFraTerminOgFodelsPanel}
+            mottattDato={mottattDato}
+          />
+        ) : (
+          <RegistreringFodselGrid
+            soknadData={soknadData}
+            readOnly={readOnly}
+            alleKodeverk={alleKodeverk}
+            fodselsdato={foedselsDatoFraTerminOgFodelsPanel}
+            mottattDato={mottattDato}
+          />
+        )}
       </HGrid>
       <LagreSoknadPapirsoknadIndex
         readOnly={readOnly}
