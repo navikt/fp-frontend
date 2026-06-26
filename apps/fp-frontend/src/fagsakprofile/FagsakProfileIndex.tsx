@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 
@@ -20,8 +20,8 @@ import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
 import { useFpSakKodeverk } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BEHANDLING_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
-import { useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
-import { useFokusNårKlar, useTastaturfokus } from '../snarveger/useTastaturfokus';
+import { useRegistrerSnarveg, useSnarvegerContextValgfri } from '../snarveger/SnarvegerContext';
+import { useTastaturfokus } from '../snarveger/useTastaturfokus';
 import { EksterneRessurser } from './EksterneRessurser';
 import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
 
@@ -49,7 +49,6 @@ interface Props {
   hentOgSettBehandling: () => void;
   visSideMeny: boolean;
   toggleSideMeny: () => void;
-  åpneSideMeny: () => void;
   visUtvidetBehandlingDetaljer: boolean;
 }
 
@@ -61,7 +60,6 @@ export const FagsakProfileIndex = ({
   hentOgSettBehandling,
   visSideMeny,
   toggleSideMeny,
-  åpneSideMeny,
   visUtvidetBehandlingDetaljer,
 }: Props) => {
   const intl = useIntl();
@@ -86,27 +84,51 @@ export const FagsakProfileIndex = ({
 
   const fokuserBehandlingsvelger = useCallback(() => {
     const rader = hentBehandlingsvelgerRader();
+    if (rader.length === 0) {
+      return false;
+    }
     const aktivIndex = rader.findIndex(rad => rad.getAttribute('aria-current') === 'page');
     fokuserRad(aktivIndex === -1 ? 0 : aktivIndex);
+    return true;
   }, [fokuserRad, hentBehandlingsvelgerRader]);
-  const fokuserNårBehandlingsvelgerVises = useFokusNårKlar(showAll, fokuserBehandlingsvelger);
 
-  const visOgFokuserBehandlingsvelger = useCallback(() => {
-    if (showAll) {
-      fokuserBehandlingsvelger();
-    } else {
-      fokuserNårBehandlingsvelgerVises();
-      setShowAll(true);
+  // Behandlingsvelgaren er gøymd (height: 0) når dei utvida behandlingsdetaljane er på. Snarvegen
+  // syter difor for å vise detaljane att – på same måte som «E» – og utvide lista før fokus blir
+  // flytta. Sidan DOM-en oppdaterast asynkront etter desse statusbyta, armerer me eit ynske om
+  // fokus og prøver på nytt over nokre animasjonsrammer til radene faktisk finst.
+  const snarveger = useSnarvegerContextValgfri();
+  const velgerErSynleg = !visUtvidetBehandlingDetaljer && showAll;
+  const skalFokuserVelgerRef = useRef(false);
+
+  useEffect(() => {
+    if (!skalFokuserVelgerRef.current || !velgerErSynleg) {
+      return undefined;
     }
-  }, [fokuserBehandlingsvelger, fokuserNårBehandlingsvelgerVises, showAll]);
-  const fokuserNårSideMenyVises = useFokusNårKlar(visSideMeny, visOgFokuserBehandlingsvelger);
+    let gjenståandeForsøk = 20;
+    let rammeId = 0;
+    const prøvFokuser = () => {
+      if (fokuserBehandlingsvelger() || gjenståandeForsøk <= 0) {
+        skalFokuserVelgerRef.current = false;
+        return;
+      }
+      gjenståandeForsøk -= 1;
+      rammeId = requestAnimationFrame(prøvFokuser);
+    };
+    rammeId = requestAnimationFrame(prøvFokuser);
+    return () => cancelAnimationFrame(rammeId);
+  }, [velgerErSynleg, fokuserBehandlingsvelger]);
 
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER, () => {
-    if (visSideMeny) {
-      visOgFokuserBehandlingsvelger();
-    } else {
-      fokuserNårSideMenyVises();
-      åpneSideMeny();
+    if (velgerErSynleg) {
+      fokuserBehandlingsvelger();
+      return;
+    }
+    skalFokuserVelgerRef.current = true;
+    if (visUtvidetBehandlingDetaljer) {
+      snarveger?.dispatch(BEHANDLING_SNARVEG_IDER.UTVID_DETALJER);
+    }
+    if (!showAll) {
+      setShowAll(true);
     }
   });
 
@@ -170,8 +192,6 @@ export const FagsakProfileIndex = ({
                   setBehandling={setBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
                   behandling={behandling}
-                  visSideMeny={visSideMeny}
-                  åpneSideMeny={åpneSideMeny}
                 />
                 <ReservasjonsstatusPanel
                   saksnummer={fagsak.saksnummer}

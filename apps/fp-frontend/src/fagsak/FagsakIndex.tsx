@@ -21,6 +21,8 @@ import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIn
 import { useRequestPendingContext } from '../data/polling/RequestPendingContext';
 import { useHentBehandling } from '../data/polling/useHentBehandling';
 import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';
+import { BEHANDLING_SNARVEG_IDER, krevSideMeny } from '../snarveger/snarvegDefinisjoner';
+import { useRegistrerFørDispatch, useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
 import { FagsakGrid } from './components/FagsakGrid';
 import { useHentFagsak } from './useHentFagsak';
 
@@ -83,9 +85,15 @@ export const FagsakIndex = () => {
     setVisSideMeny(!visSideMeny);
   };
 
-  const åpneSideMeny = () => {
-    setVisSideMeny(true);
-  };
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.TOGGLE_SIDEMENY, toggleSideMeny);
+
+  // Snarvegane E, M, B og 1–6 peikar på innhald i sidemenyen. Er han lukka, opnar vi han att
+  // før handlinga køyrer, slik at endringa ikkje skjer i ein skjult kolonne.
+  useRegistrerFørDispatch(id => {
+    if (!visSideMeny && krevSideMeny(id)) {
+      setVisSideMeny(true);
+    }
+  });
 
   useEffect(() => {
     if (behandlingUuidFraUrl && fagsakBehandling) {
@@ -139,7 +147,6 @@ export const FagsakIndex = () => {
             behandling={behandling}
             visSideMeny={visSideMeny}
             toggleSideMeny={toggleSideMeny}
-            åpneSideMeny={åpneSideMeny}
             visUtvidetBehandlingDetaljer={visUtvidetBehandlingDetaljer}
           />
         }
