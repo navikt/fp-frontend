@@ -5,6 +5,7 @@ import { useSnarvegInnstilling } from './useSnarvegInnstilling';
 
 export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
   const handlereRef = useRef(new Map<string, () => void>());
+  const førDispatchRef = useRef(new Set<(id: string) => void>());
   const [snarveiModalÅpen, setSnarveiModalÅpen] = useState(false);
   const { aktiv, settAktiv } = useSnarvegInnstilling();
   const toggleSnarveiModal = useCallback(() => {
@@ -20,9 +21,17 @@ export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
+  const registrerFørDispatch = useCallback((fn: (id: string) => void) => {
+    førDispatchRef.current.add(fn);
+    return () => {
+      førDispatchRef.current.delete(fn);
+    };
+  }, []);
+
   const dispatch = useCallback((id: string) => {
     const handler = handlereRef.current.get(id);
     if (handler) {
+      førDispatchRef.current.forEach(fn => fn(id));
       handler();
       return true;
     }
@@ -32,8 +41,16 @@ export const SnarvegerProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => registrer(GLOBALE_SNARVEG_IDER.HJELP, toggleSnarveiModal), [registrer, toggleSnarveiModal]);
 
   const value = useMemo<SnarvegerContextValue>(
-    () => ({ registrer, dispatch, snarveiModalÅpen, settSnarveiModalÅpen: setSnarveiModalÅpen, aktiv, settAktiv }),
-    [registrer, dispatch, snarveiModalÅpen, aktiv, settAktiv],
+    () => ({
+      registrer,
+      registrerFørDispatch,
+      dispatch,
+      snarveiModalÅpen,
+      settSnarveiModalÅpen: setSnarveiModalÅpen,
+      aktiv,
+      settAktiv,
+    }),
+    [registrer, registrerFørDispatch, dispatch, snarveiModalÅpen, aktiv, settAktiv],
   );
 
   return <SnarvegerContext value={value}>{children}</SnarvegerContext>;
@@ -76,9 +93,37 @@ export const useRegistrerSnarveg = (id: string, handler: () => void, aktivert = 
   }, [id, aktivert, registrer]);
 };
 
+/**
+ * Registrerer ein funksjon som køyrer rett før kvar snarveg-dispatch, så lenge komponenten
+ * er montert. Brukast til sideeffektar som må skje uavhengig av kva snarveg som blir køyrd
+ * (t.d. å opne sidemenyen før ein snarveg som peikar inn i han).
+ */
+export const useRegistrerFørDispatch = (fn: (id: string) => void): void => {
+  const registrer = use(SnarvegerContext)?.registrerFørDispatch;
+  const fnRef = useRef(fn);
+
+  useEffect(() => {
+    fnRef.current = fn;
+  });
+
+  useEffect(() => {
+    // Utan provider (t.d. i isolerte stories/tester) er dette ein no-op.
+    if (!registrer) {
+      return undefined;
+    }
+    return registrer(id => fnRef.current(id));
+  }, [registrer]);
+};
+
 interface SnarvegerContextValue {
   /** Registrer ein handler for ein snarveg-id. Returnerer ein opprydjingsfunksjon. */
   registrer: (id: string, handler: () => void) => () => void;
+  /**
+   * Registrer ein funksjon som køyrer rett før kvar dispatch (med id-en som argument).
+   * Brukast t.d. til å opne sidemenyen før ein snarveg som peikar inn i han køyrer.
+   * Returnerer ein opprydjingsfunksjon.
+   */
+  registrerFørDispatch: (fn: (id: string) => void) => () => void;
   /** Køyr handleren som er registrert for id-en, om nokon. Returnerer true om noko vart køyrt. */
   dispatch: (id: string) => boolean;
   snarveiModalÅpen: boolean;

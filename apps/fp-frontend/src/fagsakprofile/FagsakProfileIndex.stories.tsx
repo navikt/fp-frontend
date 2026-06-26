@@ -118,7 +118,6 @@ const meta = {
     setBehandling: action('button-click'),
     hentOgSettBehandling: action('button-click'),
     toggleSideMeny: action('button-click'),
-    åpneSideMeny: action('button-click'),
     visSideMeny: true,
     visUtvidetBehandlingDetaljer: false,
   },

@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon } from '@navikt/aksel-icons';
@@ -48,8 +48,6 @@ interface Props {
   behandling?: Behandling;
   setBehandling: (behandling: Behandling | undefined) => void;
   hentOgSettBehandling: () => void;
-  visSideMeny: boolean;
-  åpneSideMeny: () => void;
 }
 
 export const BehandlingMenuIndex = ({
@@ -58,8 +56,6 @@ export const BehandlingMenuIndex = ({
   behandling,
   setBehandling,
   hentOgSettBehandling,
-  visSideMeny,
-  åpneSideMeny,
 }: Props) => {
   const initFetchQuery = useQuery(initFetchOptions());
   const { innloggetBruker: navAnsatt } = notEmpty(initFetchQuery.data);
@@ -82,22 +78,12 @@ export const BehandlingMenuIndex = ({
   });
   const fokuserFørsteVedÅpning = useFokusNårKlar(menyÅpen, () => fokuserMenyKnapp(0));
 
-  const åpneOgFokuserMeny = useCallback(() => {
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.ÅPNE_BEHANDLINGSMENY, () => {
     if (menyÅpen) {
       fokuserMenyKnapp(0);
     } else {
       fokuserFørsteVedÅpning();
       setMenyÅpen(true);
-    }
-  }, [fokuserFørsteVedÅpning, fokuserMenyKnapp, menyÅpen, setMenyÅpen]);
-  const åpneMenyNårSideMenyVises = useFokusNårKlar(visSideMeny, åpneOgFokuserMeny);
-
-  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.ÅPNE_BEHANDLINGSMENY, () => {
-    if (visSideMeny) {
-      åpneOgFokuserMeny();
-    } else {
-      åpneMenyNårSideMenyVises();
-      åpneSideMeny();
     }
   });
 

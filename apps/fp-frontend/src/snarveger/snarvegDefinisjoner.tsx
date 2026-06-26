@@ -31,6 +31,7 @@ export const BEHANDLING_SNARVEG_IDER = {
   STØTTE_TIL_BESLUTTER: 'støtte-til-beslutter',
   STØTTE_FRA_BESLUTTER: 'støtte-fra-beslutter',
   UTVID_DETALJER: 'utvid-detaljer',
+  TOGGLE_SIDEMENY: 'toggle-sidemeny',
   ÅPNE_BEHANDLINGSMENY: 'åpne-behandlingsmeny',
   FOKUSER_BEHANDLINGSVELGER: 'fokuser-behandlingsvelger',
   FORRIGE_PROSESS: 'forrige-prosess',
@@ -117,6 +118,12 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
     beskrivelse: <FormattedMessage id="Snarveger.UtvidDetaljer" />,
   },
   {
+    id: BEHANDLING_SNARVEG_IDER.TOGGLE_SIDEMENY,
+    gruppe: 'behandling',
+    taster: ['S'],
+    beskrivelse: <FormattedMessage id="Snarveger.ToggleSidemeny" />,
+  },
+  {
     id: BEHANDLING_SNARVEG_IDER.ÅPNE_BEHANDLINGSMENY,
     gruppe: 'behandling',
     taster: ['M'],
@@ -153,6 +160,25 @@ export const snarvegDefinisjoner: SnarvegDefinisjon[] = [
     beskrivelse: <FormattedMessage id="Snarveger.NesteFakta" />,
   },
 ];
+
+/**
+ * Snarvegar som peikar på innhald i sidemenyen (høgre kolonne). Når sidemenyen er lukka må han
+ * opnast att før handlinga køyrer, elles skjer endringa i ein skjult kolonne (width: 0).
+ */
+const SIDEMENY_SNARVEG_IDER: ReadonlySet<string> = new Set([
+  BEHANDLING_SNARVEG_IDER.STØTTE_HISTORIKK,
+  BEHANDLING_SNARVEG_IDER.STØTTE_MELDINGER,
+  BEHANDLING_SNARVEG_IDER.STØTTE_DOKUMENTER,
+  BEHANDLING_SNARVEG_IDER.STØTTE_NOTATER,
+  BEHANDLING_SNARVEG_IDER.STØTTE_TIL_BESLUTTER,
+  BEHANDLING_SNARVEG_IDER.STØTTE_FRA_BESLUTTER,
+  BEHANDLING_SNARVEG_IDER.UTVID_DETALJER,
+  BEHANDLING_SNARVEG_IDER.ÅPNE_BEHANDLINGSMENY,
+  BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER,
+]);
+
+/** Sann når snarvegen treng at sidemenyen er open for å vere synleg. */
+export const krevSideMeny = (id: string): boolean => SIDEMENY_SNARVEG_IDER.has(id);
 
 export const finnSekvensDefinisjon = (førsteTast: string, andreTast: string): SnarvegDefinisjon | undefined =>
   snarvegDefinisjoner.find(
