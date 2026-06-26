@@ -264,7 +264,7 @@ export const UttakPeriodeForm = ({
 
   useEffect(() => {
     formMethods.reset(defaultValues);
-  }, [defaultValues]);
+  }, [defaultValues, formMethods]);
 
   const erOppfylt = useWatch({ control: formMethods.control, name: 'erOppfylt' });
   const graderingInnvilget = useWatch({ control: formMethods.control, name: 'graderingInnvilget' });

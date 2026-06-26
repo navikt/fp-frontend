@@ -21,5 +21,5 @@ export const removeValueFromLocalStorage = (key: string): void => {
 export const useStoreValuesInLocalStorage = <T>(stateKey: string, values: T) => {
   useEffect(() => {
     setValueInLocalStorage(stateKey, JSON.stringify(values));
-  }, [values]);
+  }, [values, stateKey]);
 };

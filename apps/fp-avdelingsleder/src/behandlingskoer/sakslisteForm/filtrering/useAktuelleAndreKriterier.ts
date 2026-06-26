@@ -54,7 +54,7 @@ export const useAktuelleAndreKriterier = (): LosKodeverkMedNavn<'AndreKriterierT
     if (nyInkluder.length !== andreKriterie.inkluder.length || nyEkskluder.length !== andreKriterie.ekskluder.length) {
       setValue('andreKriterie', { inkluder: nyInkluder, ekskluder: nyEkskluder }, { shouldDirty: true });
     }
-  }, [aktuelleKriterier]);
+  }, [aktuelleKriterier, getValues, setValue]);
 
   return aktuelleKriterier;
 };
