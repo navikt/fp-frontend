@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState } from 'react';
 import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -56,7 +56,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
 
   const isForTidligTerminbekreftelse = erTerminbekreftelseUtstedtForTidlig(utstedtdato, termindato);
 
-  const iDag = useMemo(() => new Date(), []);
+  const [iDag] = useState(() => new Date());
 
   return (
     <FaktaKort

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState } from 'react';
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 
 import { Heading, Radio, VStack } from '@navikt/ds-react';
@@ -49,7 +49,7 @@ const validateTermin = (getValues: UseFormGetValues<FormValues>) => (termindato:
 export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
   const { getValues, watch, control } = useFormContext<FormValues>();
 
-  const iDag = useMemo(() => new Date(), []);
+  const [iDag] = useState(() => new Date());
 
   const erBarnetFødt = watch('erBarnetFødt');
 
