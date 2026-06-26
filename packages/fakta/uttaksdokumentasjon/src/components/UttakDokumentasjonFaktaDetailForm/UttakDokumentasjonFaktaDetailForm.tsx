@@ -1,5 +1,5 @@
 import { type ReactNode, useState } from 'react';
-import { useFieldArray, useForm, useWatch } from 'react-hook-form';
+import { type Control, useFieldArray, useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Link, Radio, ReadMore, Table, VStack } from '@navikt/ds-react';
@@ -36,6 +36,32 @@ const HEADER_TEXT_CODES = [
   'UttakDokumentasjonFaktaDetailForm.AktivitetskravGrunnlagStillingsprosent',
   'UttakDokumentasjonFaktaDetailForm.AktivitetskravGrunnlagPermisjon',
 ];
+
+const MorsStillingsprosentField = ({
+  control,
+  index,
+  readOnly,
+}: {
+  control: Control<FormValues>;
+  index: number;
+  readOnly: boolean;
+}) => {
+  const vurdering = useWatch({ control, name: `perioder.${index}.vurdering` });
+
+  if (vurdering !== VurderingsAlternativ.GODKJENT_UNDER75) {
+    return null;
+  }
+
+  return (
+    <RhfNumericField
+      name={`perioder.${index}.morsStillingsprosent`}
+      control={control}
+      label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
+      validate={[required, minValue(0.01), maxValue(74.99)]}
+      readOnly={readOnly}
+    />
+  );
+};
 
 interface Props {
   behov: DokumentasjonVurderingBehov;
@@ -164,15 +190,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   </Radio>
                 ))}
               </RhfRadioGroup>
-              {useWatch({ control: formMethods.control, name: `perioder.0.vurdering` }) === VurderingsAlternativ.GODKJENT_UNDER75 && (
-                <RhfNumericField
-                  name="perioder.0.morsStillingsprosent"
-                  control={formMethods.control}
-                  label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
-                  validate={[required, minValue(0.01), maxValue(74.99)]}
-                  readOnly={readOnly}
-                />
-              )}
+              <MorsStillingsprosentField control={formMethods.control} index={0} readOnly={readOnly} />
             </VStack>
           )}
 
@@ -218,15 +236,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                       </Radio>
                     ))}
                   </RhfRadioGroup>
-                  {useWatch({ control: formMethods.control, name: `perioder.${index}.vurdering` }) === VurderingsAlternativ.GODKJENT_UNDER75 && (
-                    <RhfNumericField
-                      label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
-                      control={formMethods.control}
-                      name={`perioder.${index}.morsStillingsprosent`}
-                      validate={[required, minValue(0.01), maxValue(74.99)]}
-                      readOnly={readOnly}
-                    />
-                  )}
+                  <MorsStillingsprosentField control={formMethods.control} index={index} readOnly={readOnly} />
                 </Card.Content>
               </Card>
             ))}
