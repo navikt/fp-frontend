@@ -23,10 +23,10 @@
     "storybook": "storybook dev --quiet -p 7001"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.13.0",
-    "@navikt/ds-css": "8.13.0",
-    "@navikt/ds-react": "8.13.0",
-    "@navikt/ds-tailwind": "8.13.0",
+    "@navikt/aksel-icons": "8.13.1",
+    "@navikt/ds-css": "8.13.1",
+    "@navikt/ds-react": "8.13.1",
+    "@navikt/ds-tailwind": "8.13.1",
     "@navikt/fp-app-felles": "workspace:*",
     "@navikt/fp-fakta-aap": "workspace:*",
     "@navikt/fp-fakta-arbeid-og-inntekt": "workspace:*",
