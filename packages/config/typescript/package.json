@@ -8,6 +8,6 @@
   "dependencies": {
     "@testing-library/jest-dom": "6.9.1",
     "vite": "8.0.16",
-    "vitest": "4.1.6"
+    "vitest": "4.1.9"
   }
 }
