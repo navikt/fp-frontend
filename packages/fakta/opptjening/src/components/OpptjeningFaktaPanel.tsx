@@ -120,7 +120,7 @@ export const OpptjeningFaktaPanel = ({
       })),
   );
 
-  const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState(
+  const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState(() =>
     finnFørsteIkkeBehandledeIndex(formVerdierForAlleAktiviteter),
   );
 
