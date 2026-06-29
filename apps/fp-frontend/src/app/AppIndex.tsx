@@ -1,4 +1,3 @@
-import { type ReactNode } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +15,7 @@ import { useGlobalSnarveger } from '../snarveger/useGlobalSnarveger';
 import { AppConfigResolver } from './AppConfigResolver';
 import { Dekorator } from './components/Dekorator';
 import { Home } from './components/Home';
-import { snarvegerErTilgjengelig, utbetalingsdataIs15RoutePath } from './paths';
+import { utbetalingsdataIs15RoutePath } from './paths';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -56,7 +55,8 @@ const AppIndex = () => {
 
   return (
     <RawIntlProvider value={intl}>
-      <MedSnarveger>
+      <SnarvegerProvider>
+        <SnarvegerLytter />
         <AppConfigResolver>
           <>
             <Dekorator
@@ -73,7 +73,8 @@ const AppIndex = () => {
             </ErrorBoundary>
           </>
         </AppConfigResolver>
-      </MedSnarveger>
+        <SnarvegerHjelpModal />
+      </SnarvegerProvider>
     </RawIntlProvider>
   );
 };
@@ -94,21 +95,4 @@ const SnarvegerLytter = () => {
   useRegistrerSnarveg(GLOBALE_SNARVEG_IDER.INFOTRYGD, () => void navigate(utbetalingsdataIs15RoutePath));
   useGlobalSnarveger();
   return null;
-};
-
-/**
- * Aktiverer tastatursnarvegane i ikkje-prod-miljø. I prod blir korkje provider, global
- * lyttar eller hjelp-modal montert, slik at heile snarveg-funksjonaliteten er av.
- */
-const MedSnarveger = ({ children }: { children: ReactNode }) => {
-  if (!snarvegerErTilgjengelig()) {
-    return children;
-  }
-  return (
-    <SnarvegerProvider>
-      <SnarvegerLytter />
-      {children}
-      <SnarvegerHjelpModal />
-    </SnarvegerProvider>
-  );
 };
