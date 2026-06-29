@@ -22,7 +22,7 @@ interface Props {
 export const KontrollerBeregningAapKombinertAtflPanel = ({ aksjonspunkt }: Props) => {
   const intl = useIntl();
   const { submitCallback, isSubmittable, isReadOnly } =
-    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE>>();
+    usePanelDataContext<AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL>>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -96,7 +96,7 @@ const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
 
 const transformValues = (
   values: FormValues,
-): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE> => ({
-  kode: AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL> => ({
+  kode: AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL,
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

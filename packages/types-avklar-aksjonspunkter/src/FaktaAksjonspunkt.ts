@@ -33,7 +33,7 @@ export type FaktaAksjonspunkt =
   | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO>
   | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART>
   | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_DEKNINGSGRAD>
-  | AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE>
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL>
 
   // Overstyring
   | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER>

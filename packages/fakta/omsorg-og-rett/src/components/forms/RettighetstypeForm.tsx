@@ -99,7 +99,9 @@ const buildInitialValues = (omsorgOgRett: OmsorgOgRett, aksjonspunkt?: Aksjonspu
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
-const transformValues = (values: FormValues): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG> => ({
+const transformValues = (
+  values: FormValues,
+): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG> => ({
   kode: OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG,
   rettighetstype: values.rettighetstype,
   ...FaktaBegrunnelseTextField.transformValues(values),

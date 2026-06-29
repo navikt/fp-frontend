@@ -20,10 +20,6 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 import { type FormValues, ValgtAktivitetForm } from './aktivitet/ValgtAktivitetForm';
 import { OpptjeningTidslinje } from './tidslinje/OpptjeningTidslinje';
 
-type OpptjeningAktivitetAp = NonNullable<
-  AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING>['opptjeningsaktiviteter']
->[number];
-
 const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]): ReactElement[] => {
   const texts = new Array<ReactElement>();
   if (opptjeningAktiviteter.some(a => a.stillingsandel === 0)) {
@@ -240,9 +236,9 @@ export const OpptjeningFaktaPanel = ({
 const transformValues = (
   values: FormValues[],
   filtrerteOgSorterteOpptjeningsaktiviteter: OpptjeningAktivitet[],
-): AvklarAktivitetsPerioderAp => ({
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING> => ({
   opptjeningsaktiviteter: filtrerteOgSorterteOpptjeningsaktiviteter
-    .map<OpptjeningAktivitetAp>((a, index) => ({
+    .map((a, index) => ({
       arbeidsforholdRef: a.arbeidsforholdRef,
       arbeidsgiverReferanse: a.arbeidsgiverReferanse,
       opptjeningFom: a.opptjeningFom,

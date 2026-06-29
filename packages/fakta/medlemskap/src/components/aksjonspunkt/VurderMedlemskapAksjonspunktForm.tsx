@@ -112,20 +112,12 @@ const buildInitialValues = (
 const transformValues = (
   values: FormValues,
   erForutgåendeAksjonspunkt: boolean,
-):
-  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET>
-  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR> => {
-  if (erForutgåendeAksjonspunkt) {
-    return {
-      kode: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-      ...MedlemskapVurderinger.transformValues(values),
-      ...FaktaBegrunnelseTextField.transformValues(values),
-    };
-  }
-
-  return {
-    kode: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-    ...MedlemskapVurderinger.transformValues(values),
-    ...FaktaBegrunnelseTextField.transformValues(values),
-  };
-};
+): AksjonspunktTilBekreftelse<
+  AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET | AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
+> => ({
+  kode: erForutgåendeAksjonspunkt
+    ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
+    : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+  ...MedlemskapVurderinger.transformValues(values),
+  ...FaktaBegrunnelseTextField.transformValues(values),
+});

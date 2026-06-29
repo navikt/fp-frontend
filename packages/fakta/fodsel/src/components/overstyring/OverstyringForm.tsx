@@ -7,9 +7,7 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { OverstyringKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, FødselGjeldende } from '@navikt/fp-types';
-import type {
-  OverstyringAksjonspunktTilBekreftelse,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { OverstyringAksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ErBarnFødt, type ErBarnFødtFormValues } from '../form/ErBarnFødt';
@@ -85,7 +83,7 @@ const transformValues = (
   values: FormValues,
 ): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL> => ({
   kode: OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
-  termindato: notEmpty(values.termindato, 'termindato må være satt ved submit'),
+  termindato: notEmpty(values.termindato),
   ...ErBarnFødt.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

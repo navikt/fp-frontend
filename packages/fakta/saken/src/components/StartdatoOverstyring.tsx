@@ -12,9 +12,7 @@ import dayjs from 'dayjs';
 
 import { OverstyringKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
-import type {
-  OverstyringAksjonspunktTilBekreftelse,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { OverstyringAksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);

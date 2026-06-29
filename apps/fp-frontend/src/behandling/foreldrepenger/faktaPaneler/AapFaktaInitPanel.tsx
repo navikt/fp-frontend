@@ -8,7 +8,7 @@ import { useBehandlingDataContext } from '../../felles/context/BehandlingDataCon
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL];
 
 export const AapFaktaInitPanel = () => {
   const intl = useIntl();
@@ -16,7 +16,7 @@ export const AapFaktaInitPanel = () => {
   const { behandling } = useBehandlingDataContext();
 
   const aksjonspunkt = behandling.aksjonspunkt.find(
-    ap => ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE,
+    ap => ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL,
   );
 
   return (

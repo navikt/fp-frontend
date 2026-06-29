@@ -133,7 +133,8 @@ const transformValues = (
   values: FaktaBegrunnelseFormValues,
   perioder: AnnenforelderUttakEøsPeriode[],
   erOverstyrt: boolean,
-):  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART>
+):
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART>
   | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART> => ({
   kode: erOverstyrt
     ? OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART

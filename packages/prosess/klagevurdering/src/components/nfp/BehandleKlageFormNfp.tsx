@@ -35,7 +35,9 @@ export type TransformedValues = {
   klageVurdering: KlageVurderingType;
 };
 
-const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP> => ({
+const transformValues = (
+  values: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP> => ({
   klageMedholdÅrsak: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageMedholdÅrsak : undefined,
   klageVurderingOmgjør: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageVurderingOmgjør : undefined,
   klageHjemmel: values.klageHjemmel,

@@ -29,12 +29,11 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
 
-
-export type BeregningAp =
-  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_AKTIVITETER>
-  | AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN>
-  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER>
-  | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG>;
+type BeregningAp =
+  | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_AKTIVITETER | AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN>
+  | OverstyringAksjonspunktTilBekreftelse<
+      OverstyringKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER | OverstyringKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG
+    >;
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
@@ -118,11 +117,12 @@ const lagModifisertCallback =
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
 
-    const transformerteData = apListe.map<BeregningAp>(apData =>
-      ({
-        kode: mapBGKodeTilFpsakKode(apData.kode),
-        ...notEmpty(apData.grunnlag[0], 'Mangler grunnlag i be'),
-      }) as BeregningAp,
+    const transformerteData = apListe.map<BeregningAp>(
+      apData =>
+        ({
+          kode: mapBGKodeTilFpsakKode(apData.kode),
+          ...notEmpty(apData.grunnlag[0], 'Mangler grunnlag i be'),
+        }) as BeregningAp,
     );
     return submitCallback(transformerteData);
   };

@@ -9,21 +9,22 @@ import { dateFormat } from '@navikt/ft-utils';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
+  Aksjonspunkt,
   ArbeidOgInntektsmelding,
   Arbeidsforhold,
   ArbeidsgiverOpplysningerPerId,
   BekreftetPermisjonStatus,
 } from '@navikt/fp-types';
 import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ArbeidsforholdFieldArray } from './ArbeidsforholdFieldArray';
 
 type FormValues = {
   arbeidsforhold: {
-    permisjonStatus: BekreftetPermisjonStatus|undefined;
     arbeidsgiverIdent: string;
     internArbeidsforholdId: string | undefined;
+    permisjonStatus: BekreftetPermisjonStatus | undefined;
   }[];
 } & FaktaBegrunnelseFormValues;
 
@@ -127,7 +128,9 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], sorterteArbeidsforho
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
 });
 
-const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO> => ({
+const transformValues = (
+  values: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO> => ({
   kode: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
   arbeidsforhold: values.arbeidsforhold.map(a => ({
     arbeidsgiverIdent: a.arbeidsgiverIdent,
