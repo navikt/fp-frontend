@@ -20,6 +20,7 @@ export const useSetDirtyForm = (isDirty: boolean): void => {
   const context = use(DirtyFormContext);
   useEffect(() => {
     context.setDirty(isDirty);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun oppdatere dirty-state når isDirty-arg endrar seg; context er stabil
   }, [isDirty]);
 };
 

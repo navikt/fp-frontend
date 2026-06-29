@@ -93,7 +93,7 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     if (erVilkårOk) {
       formMethods.clearErrors();
     }
-  }, [erVilkårOk]);
+  }, [erVilkårOk, formMethods]);
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 

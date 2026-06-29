@@ -31,6 +31,7 @@ export const useHentFagsak = (
       void refetchFagsak();
       void refetchFpTilbakeFagsak();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- refetch berre ved endra behandlingUuid/-versjon; refetch er stabil frå react-query
   }, [behandlingUuid, behandlingVersjon]);
 
   const harHentetFpSak = !!fagsak;

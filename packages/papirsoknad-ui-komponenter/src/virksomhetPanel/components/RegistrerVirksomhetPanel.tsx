@@ -46,6 +46,7 @@ export const RegistrerVirksomhetPanel = ({ readOnly = false, alleKodeverk }: Pro
     if (fields.length === 0) {
       leggTilVirksomhet();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- legg berre til ein rad ved montering; fields.length/leggTilVirksomhet skal ikkje trigge på nytt
   }, []);
 
   return (

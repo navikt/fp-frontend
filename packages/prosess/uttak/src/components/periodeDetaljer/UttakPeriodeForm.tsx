@@ -250,11 +250,13 @@ export const UttakPeriodeForm = ({
   const sorterteAktiviteter = useMemo(() => {
     const sorterAktiviteter = hentSorterAktiviteterFn(arbeidsgiverOpplysningerPerId, intl);
     return [...valgtPeriode.aktiviteter].sort(sorterAktiviteter);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- bevisst utelating: arbeidsgiverOpplysningerPerId/intl gjev ny ref og uendeleg loop (sjå over)
   }, [valgtPeriode.aktiviteter]);
 
   // Her er det noko rart. Denne må ha useMemo, ellers blir testen aldri ferdig
   const defaultValues = useMemo(
     () => buildInitialValues(valgtPeriode, sorterteAktiviteter, muligeÅrsaker),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- bevisst utelating: muligeÅrsaker er ny ref kvar render og ville gitt uendeleg loop (sjå over)
     [valgtPeriode, sorterteAktiviteter, arbeidsgiverOpplysningerPerId],
   );
 
@@ -264,7 +266,7 @@ export const UttakPeriodeForm = ({
 
   useEffect(() => {
     formMethods.reset(defaultValues);
-  }, [defaultValues]);
+  }, [defaultValues, formMethods]);
 
   const erOppfylt = useWatch({ control: formMethods.control, name: 'erOppfylt' });
   const graderingInnvilget = useWatch({ control: formMethods.control, name: 'graderingInnvilget' });

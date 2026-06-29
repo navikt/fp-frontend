@@ -57,7 +57,7 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
     } else {
       clearErrors(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.notRegisteredInput`);
     }
-  }, [fulltUttak, skalGradere, skalUtsette, skalOvertaKvote]);
+  }, [fulltUttak, skalGradere, skalUtsette, skalOvertaKvote, setError, clearErrors, intl]);
 
   return (
     <BorderBox>
