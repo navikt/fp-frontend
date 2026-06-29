@@ -21,7 +21,7 @@
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",
-    "@navikt/ft-utils": "5.0.8",
+    "@navikt/ft-utils": "5.1.0",
     "@sentry/browser": "10.53.1",
     "@tanstack/react-query": "5.100.10",
     "@tanstack/react-query-devtools": "5.100.10",
