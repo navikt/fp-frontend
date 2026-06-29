@@ -55,27 +55,32 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
     kanSaksbehandle,
   );
 
-  const interneLenker: DekoratorLenke[] = [];
-  if (kanOppgavestyre) {
-    interneLenker.push({
-      tekst: intl.formatMessage({ id: 'Dekorator.Avdelingsleder' }),
-      callback: () => (globalThis.location.href = getAvdelingslederLenke()),
-    });
-  }
-  if (kanSaksbehandle) {
-    interneLenker.push({
-      tekst: intl.formatMessage({ id: 'Dekorator.Journalforing' }),
-      callback: () => (globalThis.location.href = getJournalføringLenke()),
-    });
-  }
-  interneLenker.push({
-    tekst: intl.formatMessage({ id: 'Dekorator.Utbetalingsdata' }),
-    callback: (e: React.SyntheticEvent) => visUtbetalingsdataSide(e),
-  });
-  interneLenker.push({
-    tekst: intl.formatMessage({ id: 'Dekorator.Tastatursnarvegar' }),
-    callback: (e: React.SyntheticEvent) => visSnarveger(e),
-  });
+  const interneLenker: DekoratorLenke[] = [
+    ...(kanOppgavestyre
+      ? [
+          {
+            tekst: intl.formatMessage({ id: 'Dekorator.Avdelingsleder' }),
+            callback: () => (globalThis.location.href = getAvdelingslederLenke()),
+          },
+        ]
+      : []),
+    ...(kanSaksbehandle
+      ? [
+          {
+            tekst: intl.formatMessage({ id: 'Dekorator.Journalforing' }),
+            callback: () => (globalThis.location.href = getJournalføringLenke()),
+          },
+        ]
+      : []),
+    {
+      tekst: intl.formatMessage({ id: 'Dekorator.Utbetalingsdata' }),
+      callback: (e: React.SyntheticEvent) => visUtbetalingsdataSide(e),
+    },
+    {
+      tekst: intl.formatMessage({ id: 'Dekorator.Tastatursnarvegar' }),
+      callback: (e: React.SyntheticEvent) => visSnarveger(e),
+    },
+  ];
 
   return (
     <FellesDekorator
