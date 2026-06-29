@@ -75,7 +75,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
 
   useEffect(() => {
     validateAlleFødselsdatoer(getValues, setError, clearErrors);
-  }, [barn, termindato]);
+  }, [barn, termindato, getValues, setError, clearErrors]);
 
   const today = dayjs().toDate();
 

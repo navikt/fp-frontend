@@ -47,7 +47,7 @@ export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModa
     if (verge) {
       formMethods.reset(RegistrereVergeForm.buildInitialValues(verge));
     }
-  }, [verge]);
+  }, [verge, formMethods]);
 
   return (
     <RawIntlProvider value={intl}>

@@ -63,7 +63,7 @@ export const ArbeidOgInntektFaktaPanel = ({
     () => () => {
       setMellomlagretFormData(tabellRader);
     },
-    [tabellRader],
+    [tabellRader, setMellomlagretFormData],
   );
 
   const toggleÅpenRad = (index: number) => {

@@ -42,6 +42,7 @@ export const SaksbehandlereForSakslisteForm = ({
 
   useEffect(() => {
     formMethods.reset(defaultValues);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- nullstill skjema berre når valt saksliste endrar seg; defaultValues er ny kvar render
   }, [valgtSaksliste.sakslisteId]);
 
   const harGrupper =

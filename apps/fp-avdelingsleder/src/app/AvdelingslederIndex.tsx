@@ -44,6 +44,7 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
 
   useEffect(() => {
     setAvdeling(setValgtAvdelingEnhet, initData.avdelinger, valgtAvdelingEnhet);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun setje default avdeling ein gong ved montering
   }, []);
 
   const activeAvdelingslederPanel = activeAvdelingslederPanelTemp || getPanelFromUrlOrDefault(location);

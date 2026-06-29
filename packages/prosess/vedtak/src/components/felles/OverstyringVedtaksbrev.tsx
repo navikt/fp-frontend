@@ -38,6 +38,7 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
       hasFetchedBrevOverstyringRef.current = true;
       void hentBrevHtml().then(setBrevOverstyring);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun hentast ein gong ved montering (styrt av hasFetchedBrevOverstyringRef)
   }, []);
 
   const visFritekstModalOgHentBrev = async () => {

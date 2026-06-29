@@ -63,7 +63,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
       annenForelderUttakEøsPerioder: perioder,
       begrunnelse: begrunnelse,
     });
-  }, [perioder, begrunnelse]);
+  }, [perioder, begrunnelse, setMellomlagretFormData]);
 
   return (
     <VStack gap="space-16">

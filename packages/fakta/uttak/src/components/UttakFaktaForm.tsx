@@ -196,7 +196,7 @@ export const UttakFaktaForm = ({
     () => () => {
       setMellomlagretFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
     },
-    [uttakPerioder],
+    [uttakPerioder, formMethods, setMellomlagretFormData],
   );
 
   const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(

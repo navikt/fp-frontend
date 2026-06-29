@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, use, useMemo, useState } from 'react';
+import { createContext, type ReactElement, use, useCallback, useMemo, useState } from 'react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
@@ -29,10 +29,11 @@ export const PanelOverstyringProvider = (
 
   const { children, toggleOverstyring: toggle, ...otherProps } = props;
 
-  const toggleOverstyring = () => {
-    setErOverstyrt(!erOverstyrt);
-    toggle?.(!erOverstyrt);
-  };
+  const toggleOverstyring = useCallback(() => {
+    const neste = !erOverstyrt;
+    setErOverstyrt(neste);
+    toggle?.(neste);
+  }, [erOverstyrt, toggle]);
 
   const value = useMemo(
     () => ({

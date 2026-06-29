@@ -47,6 +47,7 @@ export const BehandlingIndex = ({
 
   useEffect(() => {
     setBehandlingUuidFraUrl(behandlingUuid);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- synkroniserer berre når behandlingUuid frå URL endrar seg; setter-prop er stabil
   }, [behandlingUuid]);
 
   if (!behandling) {

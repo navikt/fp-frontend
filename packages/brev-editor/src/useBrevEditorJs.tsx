@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 import EditorJS, { type EditorConfig, type I18nConfig, type ToolConstructable } from '@editorjs/editorjs';
 import Header from '@editorjs/header';
@@ -98,6 +98,7 @@ export const useBrevEditorJs = (
         editorJsRef.current.destroy();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- editor skal kun initialiserast ein gong ved montering
   }, []);
 
   const tilbakestillEndringer = async (opprinneligRedigerbartInnhold: string) => {
@@ -130,11 +131,9 @@ export const useBrevEditorJs = (
 const getTimeoutValue = () => (import.meta.env.MODE === 'test' ? 0 : 1000);
 
 const useAutoSaveDebouncer = () => {
-  const lagre = debounce((lagreFn: () => void) => {
-    lagreFn();
-  }, getTimeoutValue());
+  const lagre = useMemo(() => debounce((lagreFn: () => void) => lagreFn(), getTimeoutValue()), []);
 
-  useEffect(() => () => lagre.cancel(), []);
+  useEffect(() => () => lagre.cancel(), [lagre]);
 
   return lagre;
 };

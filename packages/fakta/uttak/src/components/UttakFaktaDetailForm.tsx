@@ -131,6 +131,7 @@ export const UttakFaktaDetailForm = ({
       formMethods.unregister('morsAktivitet');
       formMethods.unregister('flerbarnsdager');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun avregistrere felt når årsakstype endrar seg; formMethods er stabil
   }, [årsakstype]);
 
   const onSubmit = (values: FormValues) => oppdaterPeriode(transformValues(values));

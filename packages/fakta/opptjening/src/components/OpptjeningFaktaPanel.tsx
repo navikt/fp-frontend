@@ -130,7 +130,7 @@ export const OpptjeningFaktaPanel = ({
     () => () => {
       setMellomlagretFormData(formVerdierForAlleAktiviteter);
     },
-    [formVerdierForAlleAktiviteter],
+    [formVerdierForAlleAktiviteter, setMellomlagretFormData],
   );
 
   const [forrigeFormVerdier, setForrigeFormVerdier] = useState(formVerdierForAlleAktiviteter);

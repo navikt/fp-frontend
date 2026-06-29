@@ -43,6 +43,7 @@ export const TilretteleggingForArbeidsgiverFieldArray = ({ readOnly }: Props) =>
     if (fields.length === 0) {
       leggTilArbeidsgiver();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- legg berre til ein rad ved montering; fields.length/leggTilArbeidsgiver skal ikkje trigge på nytt
   }, []);
 
   return (
