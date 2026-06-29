@@ -24,14 +24,14 @@ import type {
   FaktaUttakPeriode,
   Ytelsefordeling,
 } from '@navikt/fp-types';
-import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
-
-import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
-import { UttakFaktaTable } from './UttakFaktaTable';
 import type {
   AksjonspunktTilBekreftelse,
   OverstyringAksjonspunktTilBekreftelse,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+
+import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
+import { UttakFaktaTable } from './UttakFaktaTable';
 
 const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling: Ytelsefordeling) =>
   aksjonspunkter.filter(erAksjonspunktÅpent).map(ap => {
@@ -144,14 +144,15 @@ const validerPerioder = (
     : '';
 };
 
-export type BekreftUttaksperioderAp =
+export type BekreftUttaksperioderAp = (
   | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_FAKTA_UTTAK>
   | AksjonspunktTilBekreftelse<
       | AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO
       | AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER
       | AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET
       | AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG
-    >[];
+    >
+)[];
 
 interface Props {
   ytelsefordeling: Ytelsefordeling;
@@ -317,10 +318,11 @@ const transformValues = (
         perioder,
         ...FaktaBegrunnelseTextField.transformValues(values),
       }))
-    :
+    : [
         {
-          kode: AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+          kode: OverstyringKode.OVERSTYRING_FAKTA_UTTAK,
           perioder,
           ...FaktaBegrunnelseTextField.transformValues(values),
-        };
+        },
+      ];
 };

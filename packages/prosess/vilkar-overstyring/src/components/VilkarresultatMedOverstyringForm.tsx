@@ -11,6 +11,7 @@ import { MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-med
 import { OverstyringKode } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Avslagsarsak, BehandlingFpSak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
+import type { OverstyringAksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 import {
   erAksjonspunktÅpent,
   useMellomlagretFormData,
@@ -23,9 +24,9 @@ import styles from './vilkarresultatMedOverstyringForm.module.css';
 export type VilkårOverstyringAksjonspunkter =
   | OverstyringKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET
   | OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET
+  | OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR
   | OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET
   | OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
-  | OverstyringKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR
   | OverstyringKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET;
 
 const isOverridden = (aksjonspunkter: Aksjonspunkt[], aksjonspunktCode: string): boolean =>
@@ -44,12 +45,9 @@ type FormValues = {
   isOverstyrt?: boolean;
 };
 
-function erOverstyringAvMedlemskap(overstyringApKode: OverstyringKode) {
-  return [
-    OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
-    OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-  ].includes(overstyringApKode);
-}
+const erOverstyringAvMedlemskap = (overstyringApKode: OverstyringKode) =>
+  OverstyringKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET === overstyringApKode ||
+  OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR === overstyringApKode;
 
 interface Props {
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined;
@@ -70,7 +68,8 @@ export const VilkarresultatMedOverstyringForm = ({
   medlemskapManuellBehandlingResultat,
   status,
 }: Props) => {
-  const { behandling, fagsak, submitCallback, alleMerknaderFraBeslutter } = usePanelDataContext<OverstyringVilkår>();
+  const { behandling, fagsak, submitCallback, alleMerknaderFraBeslutter } =
+    usePanelDataContext<OverstyringAksjonspunktTilBekreftelse<VilkårOverstyringAksjonspunkter>>();
 
   const { erOverstyrt, toggleOverstyring, overstyringApKode, overrideReadOnly, kanOverstyreAccess } =
     usePanelOverstyring<VilkårOverstyringAksjonspunkter>();
@@ -215,23 +214,20 @@ const buildInitialValues = (
   };
 };
 
-const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyringAksjonspunkter): VilkårOverstyringAksjonspunkter => {
-  const felles = {
+const transformValues = (
+  values: FormValues,
+  overstyringApKode: VilkårOverstyringAksjonspunkter,
+): OverstyringAksjonspunktTilBekreftelse<VilkårOverstyringAksjonspunkter> => {
+  if (erOverstyringAvMedlemskap(overstyringApKode)) {
+    return {
+      kode: overstyringApKode,
+      begrunnelse: values.begrunnelse,
+      ...MedlemskapVurderinger.transformValues(values),
+    };
+  }
+  return {
     kode: overstyringApKode,
     begrunnelse: values.begrunnelse,
+    ...VilkarResultPicker.transformValues(values),
   };
-
-  switch (overstyringApKode) {
-    case AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET:
-    case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR:
-      return {
-        ...felles,
-        ...MedlemskapVurderinger.transformValues(values),
-      };
-    default:
-      return {
-        ...felles,
-        ...VilkarResultPicker.transformValues(values),
-      };
-  }
 };

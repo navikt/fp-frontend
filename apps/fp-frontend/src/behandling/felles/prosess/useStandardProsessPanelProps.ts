@@ -29,7 +29,7 @@ export type StandardProsessPanelProps<T extends Behandling> = {
   isReadOnly: boolean;
   isSubmittable: boolean;
   harÅpentAksjonspunkt: boolean;
-  submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
+  submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt[]) => Promise<void>;
 };
 
 export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFpSak>(

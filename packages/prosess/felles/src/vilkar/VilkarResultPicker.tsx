@@ -8,7 +8,7 @@ import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-val
 import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import type { Aksjonspunkt, AlleKodeverk, Behandlingsresultat, Vilkår } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Avslagsarsak, Behandlingsresultat, Vilkår } from '@navikt/fp-types';
 import { erAksjonspunktÅpent, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './vilkarResultPicker.module.css';
@@ -19,7 +19,7 @@ const intl = createIntl(messages);
 
 export type VilkarResultPickerFormValues = {
   erVilkårOk?: boolean;
-  avslagskode?: string;
+  avslagskode?: Avslagsarsak;
 };
 
 interface Props {

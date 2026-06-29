@@ -184,7 +184,10 @@ const buildInitialValues = (
   ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter ?? []),
 });
 
-const transformValues = (values: InnsynFormValues, documents: Dokument[]): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_INNSYN> => ({
+const transformValues = (
+  values: InnsynFormValues,
+  documents: Dokument[],
+): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_INNSYN> => ({
   kode: AksjonspunktKode.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),
   mottattDato: notEmpty(values.mottattDato),

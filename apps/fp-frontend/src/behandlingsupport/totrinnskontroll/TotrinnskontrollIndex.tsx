@@ -15,7 +15,7 @@ import type {
 import { notEmpty } from '@navikt/fp-utils';
 
 import { createLocationForSkjermlenke } from '../../app/paths';
-import { getFagsakBehandlingApi,initFetchOptions } from '../../data/fagsakApi';
+import { getFagsakBehandlingApi, initFetchOptions } from '../../data/fagsakApi';
 import { useKodeverk } from '../../data/useKodeverk';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
@@ -75,7 +75,6 @@ export const TotrinnskontrollIndex = ({
     aksjonspunktData:
       | AksjonspunktTilBekreftelse<AksjonspunktKode.FATTER_VEDTAK>
       | TilbakekrevingAksjonspunktTilBekreftelse<AksjonspunktKodeTilbakekreving.FATTER_VEDTAK>,
-    alleAksjonspunktGodkjent: boolean,
   ) => {
     const params: BekreftedeAksjonspunkterDto = {
       behandlingUuid: valgtBehandling.uuid,
@@ -85,6 +84,7 @@ export const TotrinnskontrollIndex = ({
           ? [aksjonspunktData]
           : [aksjonspunktData],
     };
+    const alleAksjonspunktGodkjent = (aksjonspunktData.aksjonspunktGodkjenningDtos ?? []).every(ap => ap.godkjent);
     setErAlleAksjonspunktGodkjent(alleAksjonspunktGodkjent);
     setVisBeslutterModal(true);
     godkjennTotrinnsaksjonspunkter(params);

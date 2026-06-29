@@ -210,7 +210,7 @@ export const getAksjonspunkttekst = (
 };
 
 const faktaUttakAksjonspunkter = [
-  AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+  OverstyringKode.OVERSTYRING_FAKTA_UTTAK,
   AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
   AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
   AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
@@ -218,7 +218,7 @@ const faktaUttakAksjonspunkter = [
 ];
 
 const uttakAksjonspunkter = [
-  AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+  OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
   AksjonspunktKode.FASTSETT_UTTAKPERIODER,
   AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT,
   AksjonspunktKode.UTGÅTT_5067,

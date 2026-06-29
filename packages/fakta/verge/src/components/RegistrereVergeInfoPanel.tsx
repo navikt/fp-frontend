@@ -8,7 +8,10 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktKodeTilbakekreving } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
-import type { AksjonspunktTilBekreftelse, TilbakekrevingAksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type {
+  AksjonspunktTilBekreftelse,
+  TilbakekrevingAksjonspunktTilBekreftelse,
+} from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 

@@ -67,7 +67,6 @@ interface Props {
     aksjonspunktData:
       | AksjonspunktTilBekreftelse<AksjonspunktKode.FATTER_VEDTAK>
       | TilbakekrevingAksjonspunktTilBekreftelse<AksjonspunktKodeTilbakekreving.FATTER_VEDTAK>,
-    alleAksjonspunktGodkjent: boolean,
   ) => void;
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (
@@ -92,10 +91,7 @@ export const TotrinnskontrollSakIndex = ({
   const erTilbakekreving = 'BT-007' === behandling.type || 'BT-009' === behandling.type;
 
   const submitHandler = (values: FormValues) => {
-    return onSubmit(
-      transformValues(values, erTilbakekreving),
-      values.aksjonspunktGodkjenning.every(ap => ap.totrinnskontrollGodkjent),
-    );
+    return onSubmit(transformValues(values, erTilbakekreving));
   };
 
   const erBehandlingEtterKlage = behandling.behandlingÅrsaker
@@ -162,10 +158,9 @@ const transformValues = (
     begrunnelse: apData.besluttersBegrunnelse,
     arsaker: getArsaker(apData),
   }));
-  const kode = erTilbakekreving ? AksjonspunktKodeTilbakekreving.FATTER_VEDTAK : AksjonspunktKode.FATTER_VEDTAK;
 
   return {
-    kode,
+    kode: erTilbakekreving ? AksjonspunktKodeTilbakekreving.FATTER_VEDTAK : AksjonspunktKode.FATTER_VEDTAK,
     begrunnelse: undefined,
     aksjonspunktGodkjenningDtos,
   };

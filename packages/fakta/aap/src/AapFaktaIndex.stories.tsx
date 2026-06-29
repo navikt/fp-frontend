@@ -24,13 +24,13 @@ type Story = StoryObj<typeof meta>;
 
 export const ÅpentAksjonspunkt: Story = {
   args: {
-    aksjonspunkt: lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE),
+    aksjonspunkt: lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL),
   },
 };
 
 export const LøstAksjonspunkt: Story = {
   args: {
-    aksjonspunkt: lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL_KODE, {
+    aksjonspunkt: lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL, {
       status: 'UTFO',
       begrunnelse: 'Beregningen er gjennomgått og bekreftet korrekt.',
     }),

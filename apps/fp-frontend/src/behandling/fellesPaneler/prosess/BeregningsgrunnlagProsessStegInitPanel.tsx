@@ -8,7 +8,6 @@ import {
   type BeregningAksjonspunktSubmitType,
   BeregningsgrunnlagProsessIndex,
   type FtBeregningsgrunnlag,
-  ProsessBeregningsgrunnlagAvklaringsbehovCode,
 } from '@navikt/ft-prosess-beregningsgrunnlag';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
@@ -28,45 +27,19 @@ import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardPr
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
 import '@navikt/ft-prosess-beregning/dist/style.css';
 
-export type BGAksjonpunktKoder =
+type BGAksjonpunktKoder =
   | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS
   | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD
   | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET
   | AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE;
-export type BeregningsgrunnlagAp = AksjonspunktTilBekreftelse<BGAksjonpunktKoder>;
-
-const mapBGKodeTilFpsakKode = (
-  bgKode: string,
-):
-  | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS
-  | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD
-  | AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET
-  | AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE => {
-  switch (bgKode) {
-    case ProsessBeregningsgrunnlagAvklaringsbehovCode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS:
-      return AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS;
-    case ProsessBeregningsgrunnlagAvklaringsbehovCode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD:
-      return AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD;
-    case ProsessBeregningsgrunnlagAvklaringsbehovCode.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET:
-      return AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET;
-    case ProsessBeregningsgrunnlagAvklaringsbehovCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE:
-      return AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE;
-    default:
-      throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
-  }
-};
+type BeregningsgrunnlagAp = AksjonspunktTilBekreftelse<BGAksjonpunktKoder>;
 
 const lagModifisertCallback =
-  (submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>) =>
+  (submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt[]) => Promise<void>) =>
   (aksjonspunkterSomSkalLagres: BeregningAksjonspunktSubmitType[]) => {
-    //TODO (TOR) Det ser ut i BeregningsgrunnlagProsessIndex som om aksjonspunkterSomSkalLagres alltid er eit array?
-    const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
-      ? aksjonspunkterSomSkalLagres
-      : [aksjonspunkterSomSkalLagres];
-    const transformerteData = apListe.map((apData): BeregningsgrunnlagAp => {
+    const transformerteData = aksjonspunkterSomSkalLagres.map<BeregningsgrunnlagAp>(apData => {
       const grunnlag = notEmpty(apData.grunnlag[0]);
       const felles = {
-        kode: mapBGKodeTilFpsakKode(apData.kode),
         periode: grunnlag.periode,
         begrunnelse: grunnlag.begrunnelse,
       };
@@ -74,28 +47,33 @@ const lagModifisertCallback =
       if ('inntektPrAndelList' in grunnlag) {
         return {
           ...felles,
+          kode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
           inntektPrAndelList: grunnlag.inntektPrAndelList,
           inntektFrilanser: grunnlag.inntektFrilanser ?? undefined,
-        } as AksjonspunktTilBekreftelse<BGAksjonpunktKoder>;
-      }
-      if ('erVarigEndretNaering' in grunnlag) {
+        } satisfies AksjonspunktTilBekreftelse<AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS>;
+      } else if ('erVarigEndretNaering' in grunnlag) {
         return {
           ...felles,
+          kode: AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE,
           erVarigEndretNaering: grunnlag.erVarigEndretNaering,
           bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag ?? undefined,
-        } as AksjonspunktTilBekreftelse<BGAksjonpunktKoder>;
-      }
-      if ('fastsatteTidsbegrensedePerioder' in grunnlag) {
+        } satisfies AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE>;
+      } else if ('fastsatteTidsbegrensedePerioder' in grunnlag) {
         return {
           ...felles,
+          kode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
           fastsatteTidsbegrensedePerioder: grunnlag.fastsatteTidsbegrensedePerioder,
           frilansInntekt: grunnlag.frilansInntekt ?? undefined,
-        } as AksjonspunktTilBekreftelse<BGAksjonpunktKoder>;
+        } satisfies AksjonspunktTilBekreftelse<AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD>;
+      } else if ('bruttoBeregningsgrunnlag' in grunnlag) {
+        return {
+          ...felles,
+          kode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET,
+          bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
+        } satisfies AksjonspunktTilBekreftelse<AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET>;
+      } else {
+        throw new Error(`Ukjent avklaringspunkt ${apData.kode}`);
       }
-      return {
-        ...felles,
-        bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
-      } as AksjonspunktTilBekreftelse<BGAksjonpunktKoder>;
     });
 
     return submitCallback(transformerteData);

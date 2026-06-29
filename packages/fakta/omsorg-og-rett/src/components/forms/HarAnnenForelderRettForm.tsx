@@ -83,7 +83,9 @@ const buildInitialValues = (omsorgOgRett: OmsorgOgRett, aksjonspunkt?: Aksjonspu
   };
 };
 
-const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT> => ({
+const transformValues = (
+  values: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT> => ({
   kode: AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
   annenforelderHarRett: values.harAnnenForelderRett,
   annenforelderMottarUføretrygd: values.mottarAnnenForelderUforetrygd,
