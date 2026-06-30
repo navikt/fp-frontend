@@ -1,35 +1,21 @@
-import type {
-  Aksjonspunkt,
-  AlleKodeverk,
-  Behandling,
-  BehandlingFpSak,
-  Fagsak,
-  Vilkår,
-  VilkårUtfallType,
-} from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, BehandlingFpSak, Fagsak, Vilkår, VilkårUtfallType } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import type { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
+import type { FellesPanelData } from '../panelData/BehandlingPanelDataProvider';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
 const DEFAULT_FAKTA_KODE = 'default';
 const DEFAULT_PROSESS_STEG_KODE = 'default';
 
-export type StandardProsessPanelProps<T extends Behandling> = {
-  behandling: T;
-  fagsak: Fagsak;
-  alleKodeverk: AlleKodeverk;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  aksjonspunkterForPanel: Aksjonspunkt[];
-  vilkårForPanel: Vilkår[];
+export type StandardProsessPanelProps<T extends Behandling = BehandlingFpSak> = FellesPanelData<
+  ProsessAksjonspunkt | ProsessAksjonspunkt[],
+  T
+> & {
   status: VilkårUtfallType;
-  isReadOnly: boolean;
-  isSubmittable: boolean;
-  harÅpentAksjonspunkt: boolean;
-  submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
 };
 
 export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFpSak>(

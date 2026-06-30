@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { type NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -82,11 +82,10 @@ const BehandlingIndexWrapper = ({
   const initFetchQuery = useQuery(initFetchOptions());
 
   const fagsak = fagsakData.getFagsak();
-  const rettigheter = getAccessRights(
-    notEmpty(initFetchQuery.data).innloggetBruker,
-    fagsak.status,
-    behandling.status,
-    behandling.type,
+  const innloggetBruker = notEmpty(initFetchQuery.data).innloggetBruker;
+  const rettigheter = useMemo(
+    () => getAccessRights(innloggetBruker, fagsak.status, behandling.status, behandling.type),
+    [innloggetBruker, fagsak.status, behandling.status, behandling.type],
   );
 
   const [skalOppdatereEtterBekreftelseAvAp, setSkalOppdatereEtterBekreftelseAvAp] = useState(true);
@@ -105,7 +104,10 @@ const BehandlingIndexWrapper = ({
 
   const navigate = useNavigate();
   const location = useLocation();
-  const oppdaterProsessStegOgFaktaPanelIUrl = getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate);
+  const oppdaterProsessStegOgFaktaPanelIUrl = useMemo(
+    () => getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate),
+    [location, navigate],
+  );
 
   if (kodeverk === undefined) {
     return <LoadingPanel />;

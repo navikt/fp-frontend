@@ -2,9 +2,9 @@ import { type ReactElement } from 'react';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { Behandling, BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
-import { MellomlagretFormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
+import { MellomlagretFormDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
-import { useBehandlingDataContext } from '../context/BehandlingDataContext';
+import { BehandlingPanelDataProvider } from '../panelData/BehandlingPanelDataProvider';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
 import type { StandardProsessPanelProps } from './useStandardProsessPanelProps';
@@ -45,7 +45,7 @@ const ProsessPanel = <T extends Behandling>({
   harÅpentAksjonspunkt,
   children,
 }: Props<T> & ProsessPanel) => {
-  const { behandling, fagsak, alleKodeverk } = useBehandlingDataContext<T>();
+  const { behandling } = standardPanelProps;
 
   const status = overstyrtStatus ?? standardPanelProps.status;
 
@@ -70,20 +70,7 @@ const ProsessPanel = <T extends Behandling>({
         status={status}
       >
         {skalVisePanel ? (
-          <PanelDataProvider
-            fagsak={fagsak}
-            behandling={behandling}
-            alleKodeverk={alleKodeverk}
-            alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
-            aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
-            vilkårForPanel={standardPanelProps.vilkårForPanel}
-            harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
-            isReadOnly={standardPanelProps.isReadOnly}
-            isSubmittable={standardPanelProps.isSubmittable}
-            submitCallback={standardPanelProps.submitCallback}
-          >
-            {children}
-          </PanelDataProvider>
+          <BehandlingPanelDataProvider panelData={standardPanelProps}>{children}</BehandlingPanelDataProvider>
         ) : null}
       </ProsessPanelWrapper>
     </MellomlagretFormDataProvider>

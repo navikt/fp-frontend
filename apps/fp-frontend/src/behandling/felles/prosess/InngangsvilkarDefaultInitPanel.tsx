@@ -2,9 +2,10 @@ import { type ReactElement, use, useState } from 'react';
 
 import { type OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import type { BehandlingFpSak, VilkårType } from '@navikt/fp-types';
-import { MellomlagretFormDataProvider, PanelDataProvider, PanelOverstyringProvider } from '@navikt/fp-utils';
+import { MellomlagretFormDataProvider, PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
+import { BehandlingPanelDataProvider } from '../panelData/BehandlingPanelDataProvider';
 import { InngangsvilkårPanelDataContext } from './InngangsvilkarDefaultInitWrapper';
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useInngangsvilkarRegistrerer } from './useInngangsvilkarRegistrerer';
@@ -60,8 +61,6 @@ export const InngangsvilkarDefaultInitPanel = ({
   erOverstyrt = false,
   children,
 }: Props & { erOverstyrt?: boolean }) => {
-  const { behandling, fagsak, alleKodeverk } = useBehandlingDataContext();
-
   const { erPanelValgt } = use(InngangsvilkårPanelDataContext);
 
   const skalVises = skalViseProsessPanel(
@@ -82,21 +81,10 @@ export const InngangsvilkarDefaultInitPanel = ({
   const skalViseVilkårIPanel = erPanelValgt && skalVises;
 
   return (
-    <MellomlagretFormDataProvider behandling={behandling}>
-      <PanelDataProvider
-        fagsak={fagsak}
-        behandling={behandling}
-        alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
-        alleKodeverk={alleKodeverk}
-        aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
-        vilkårForPanel={standardPanelProps.vilkårForPanel}
-        harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
-        isReadOnly={standardPanelProps.isReadOnly}
-        isSubmittable={standardPanelProps.isSubmittable}
-        submitCallback={standardPanelProps.submitCallback}
-      >
+    <MellomlagretFormDataProvider behandling={standardPanelProps.behandling}>
+      <BehandlingPanelDataProvider panelData={standardPanelProps}>
         {skalViseVilkårIPanel ? children : null}
-      </PanelDataProvider>
+      </BehandlingPanelDataProvider>
     </MellomlagretFormDataProvider>
   );
 };
