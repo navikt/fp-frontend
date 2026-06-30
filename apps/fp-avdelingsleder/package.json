@@ -23,11 +23,11 @@
     "storybook": "storybook dev --quiet -p 7004"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.13.1",
-    "@navikt/ds-css": "8.13.1",
-    "@navikt/ds-react": "8.13.1",
-    "@navikt/ds-tailwind": "8.13.1",
-    "@navikt/ds-tokens": "8.13.1",
+    "@navikt/aksel-icons": "8.14.0",
+    "@navikt/ds-css": "8.14.0",
+    "@navikt/ds-react": "8.14.0",
+    "@navikt/ds-tailwind": "8.14.0",
+    "@navikt/ds-tokens": "8.14.0",
     "@navikt/fp-app-felles": "workspace:*",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-los-felles": "workspace:*",
