@@ -28,3 +28,13 @@ export const lazyWithRetry = <T>(
       throw error;
     }
   });
+
+export const lazyNamedWithRetry = <T, ExportName extends string>(
+  componentImport: () => Promise<Record<ExportName, ComponentType<T>>>,
+  exportName: ExportName,
+): LazyExoticComponent<ComponentType<T>> =>
+  lazyWithRetry<T>(() =>
+    componentImport().then(module => ({
+      default: module[exportName],
+    })),
+  );

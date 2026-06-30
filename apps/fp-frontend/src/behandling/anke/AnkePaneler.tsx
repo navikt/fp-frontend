@@ -10,7 +10,7 @@ interface Props {
   valgtFaktaSteg: string | undefined;
 }
 
-const AnkePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => (
+export const AnkePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => (
   <>
     <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
       <AnkeBehandlingProsessStegInitPanel />
@@ -22,7 +22,3 @@ const AnkePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => (
     </FaktaMeny>
   </>
 );
-
-// Default export grunna React.lazy
-// eslint-disable-next-line import-x/no-default-export
-export default AnkePaneler;

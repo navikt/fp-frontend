@@ -6,20 +6,16 @@ import { useQuery } from '@tanstack/react-query';
 
 import { ErrorBoundary, parseQueryString, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
-import { notEmpty } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../data/behandlingApi';
+import {
+  finnPanelConfig,
+  renderBehandlingPanel,
+  skalHenteArbeidsgivere,
+  skalViseFellesPaVent,
+} from './behandlingPanelRegistry';
 import { useBehandlingDataContext } from './felles/context/BehandlingDataContext';
 import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';
-import { lazyWithRetry } from './lazyUtils';
-
-const ForeldrepengerPaneler = lazyWithRetry(() => import('./foreldrepenger/ForeldrepengerPaneler'));
-const EngangsstonadPaneler = lazyWithRetry(() => import('./engangsstonad/EngangsstonadPaneler'));
-const SvangerskapspengerPaneler = lazyWithRetry(() => import('./svangerskapspenger/SvangerskapspengerPaneler'));
-const KlagePaneler = lazyWithRetry(() => import('./klage/KlagePaneler'));
-const InnsynPaneler = lazyWithRetry(() => import('./innsyn/InnsynPaneler'));
-const AnkePaneler = lazyWithRetry(() => import('./anke/AnkePaneler'));
-const TilbakekrevingPaneler = lazyWithRetry(() => import('./tilbakekreving/TilbakekrevingPaneler'));
 
 export const BehandlingPanelerIndex = () => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
@@ -29,15 +25,16 @@ export const BehandlingPanelerIndex = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const erFørstegangssøknadEllerRevurdering = behandling.type === 'BT-002' || behandling.type === 'BT-004';
+  const panelConfig = finnPanelConfig(fagsak.fagsakYtelseType, behandling.type);
+  const hentArbeidsgivere = skalHenteArbeidsgivere(panelConfig);
 
   const behandlingApi = getBehandlingApi(behandling);
 
   const arbeidsgivereOversiktQuery = useQuery(
-    behandlingApi.arbeidsgiverOversiktOptions(behandling, erFørstegangssøknadEllerRevurdering),
+    behandlingApi.arbeidsgiverOversiktOptions(behandling, hentArbeidsgivere),
   );
 
-  if (erFørstegangssøknadEllerRevurdering && arbeidsgivereOversiktQuery.isPending) {
+  if (hentArbeidsgivere && arbeidsgivereOversiktQuery.isPending) {
     return <LoadingPanel />;
   }
 
@@ -45,13 +42,13 @@ export const BehandlingPanelerIndex = () => {
     return <ErrorPage />;
   }
 
-  const erTilbakekrevingsbehandling = erTilbakekreving(behandling.type);
-
   const query = parseQueryString(location.search);
+  const valgtProsessSteg = query['punkt'];
+  const valgtFaktaSteg = query['fakta'];
 
   return (
     <>
-      {!erTilbakekrevingsbehandling && (
+      {skalViseFellesPaVent(panelConfig, behandling.type) && (
         <BehandlingPaVent
           behandling={behandling}
           opneSokeside={() => {
@@ -60,70 +57,17 @@ export const BehandlingPanelerIndex = () => {
           kodeverk={alleKodeverk}
         />
       )}
-      {fagsak.fagsakYtelseType === 'FP' && erFørstegangssøknadEllerRevurdering && (
+      {panelConfig && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <ForeldrepengerPaneler
-              valgtProsessSteg={query['punkt']}
-              valgtFaktaSteg={query['fakta']}
-              arbeidsgivere={notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere}
-            />
-          </ErrorBoundary>
-        </Suspense>
-      )}
-      {fagsak.fagsakYtelseType === 'SVP' && erFørstegangssøknadEllerRevurdering && (
-        <Suspense fallback={<LoadingPanel />}>
-          <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <SvangerskapspengerPaneler
-              valgtProsessSteg={query['punkt']}
-              valgtFaktaSteg={query['fakta']}
-              arbeidsgivere={notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere}
-            />
-          </ErrorBoundary>
-        </Suspense>
-      )}
-      {fagsak.fagsakYtelseType === 'ES' && erFørstegangssøknadEllerRevurdering && (
-        <Suspense fallback={<LoadingPanel />}>
-          <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <EngangsstonadPaneler
-              valgtProsessSteg={query['punkt']}
-              valgtFaktaSteg={query['fakta']}
-              arbeidsgivere={notEmpty(arbeidsgivereOversiktQuery.data).arbeidsgivere}
-            />
-          </ErrorBoundary>
-        </Suspense>
-      )}
-      {behandling.type === 'BT-006' && (
-        <Suspense fallback={<LoadingPanel />}>
-          <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <InnsynPaneler valgtProsessSteg={query['punkt']} />
-          </ErrorBoundary>
-        </Suspense>
-      )}
-      {behandling.type === 'BT-008' && (
-        <Suspense fallback={<LoadingPanel />}>
-          <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <AnkePaneler valgtProsessSteg={query['punkt']} valgtFaktaSteg={query['fakta']} />
-          </ErrorBoundary>
-        </Suspense>
-      )}
-      {behandling.type === 'BT-003' && (
-        <Suspense fallback={<LoadingPanel />}>
-          <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <KlagePaneler valgtProsessSteg={query['punkt']} valgtFaktaSteg={query['fakta']} />
-          </ErrorBoundary>
-        </Suspense>
-      )}
-      {erTilbakekrevingsbehandling && (
-        <Suspense fallback={<LoadingPanel />}>
-          <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <TilbakekrevingPaneler valgtProsessSteg={query['punkt']} valgtFaktaSteg={query['fakta']} />
+            {renderBehandlingPanel(panelConfig, {
+              valgtProsessSteg,
+              valgtFaktaSteg,
+              arbeidsgivere: arbeidsgivereOversiktQuery.data?.arbeidsgivere,
+            })}
           </ErrorBoundary>
         </Suspense>
       )}
     </>
   );
 };
-
-const erTilbakekreving = (behandlingTypeKode?: string): boolean =>
-  behandlingTypeKode === 'BT-007' || behandlingTypeKode === 'BT-009';

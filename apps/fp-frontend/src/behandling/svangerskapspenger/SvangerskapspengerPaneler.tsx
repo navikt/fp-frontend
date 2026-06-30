@@ -32,7 +32,7 @@ interface Props {
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
 }
 
-const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere }: Props) => {
+export const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere }: Props) => {
   const [faktaPanelMedÅpentApInfo, setFaktaPanelMedÅpentApInfo] = useState<FaktaPanelMedÅpentApInfo>();
 
   return (
@@ -68,7 +68,3 @@ const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgi
     </>
   );
 };
-
-// Default export grunna React.lazy
-// eslint-disable-next-line import-x/no-default-export
-export default SvangerskapspengerPaneler;
