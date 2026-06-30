@@ -80,10 +80,12 @@ export const HistorikkInnslag = ({
             <div>
               {linjerSomSkalVises.map((linje, index) =>
                 linje.type === 'TEKST' ? (
+                  // eslint-disable-next-line @eslint-react/no-array-index-key -- linjer mangler stabil id, indeks trengs for unik nøkkel
                   <BodyLong key={`${linje.tekst}-${index}`} size="medium">
                     {parseBoldText(linje.tekst ?? '')}
                   </BodyLong>
                 ) : (
+                  // eslint-disable-next-line @eslint-react/no-array-index-key -- linjer mangler stabil id, indeks trengs for unik nøkkel
                   <br key={`${linje.type}-${index}`} />
                 ),
               )}
