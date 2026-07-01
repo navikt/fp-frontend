@@ -3,7 +3,6 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
-import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, ForeldreType } from '@navikt/fp-types';
@@ -23,6 +22,7 @@ import { RenderPermisjonPeriodeFieldArray } from './fulltUttak/RenderPermisjonPe
 import { PermisjonGraderingPanel } from './gradering/PermisjonGraderingPanel';
 import { PermisjonOppholdPanel } from './opphold/PermisjonOppholdPanel';
 import { PermisjonOverforingAvKvoterPanel } from './overforeKvote/PermisjonOverforingAvKvoterPanel';
+import { harOverlappMellomPeriodetypar, hentUtfylteTidsrom } from './permisjonOverlappValidering';
 import { PermisjonUtsettelsePanel } from './utsettelse/PermisjonUtsettelsePanel';
 
 interface Props {
@@ -31,23 +31,6 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   erEndringssøknad: boolean;
 }
-
-type PeriodeMedTidsrom = { periodeFom?: string; periodeTom?: string };
-type UtfyltPeriode = { periodeFom: string; periodeTom: string };
-
-const erUtfyltPeriode = (periode: PeriodeMedTidsrom): periode is UtfyltPeriode =>
-  !!periode.periodeFom && !!periode.periodeTom;
-
-const hentUtfylteTidsrom = (perioder?: PeriodeMedTidsrom[]): string[][] =>
-  (perioder ?? []).filter(erUtfyltPeriode).map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-
-const harOverlappMellomPeriodetypar = (periodeGrupper: string[][][]): boolean =>
-  periodeGrupper.some((periodeGruppe, index) => {
-    const andrePerioder = periodeGrupper.slice(index + 1).flat();
-    return periodeGruppe.some(periode =>
-      andrePerioder.some(annenPeriode => !!dateRangesNotOverlapping([periode, annenPeriode])),
-    );
-  });
 
 /**
  * PermisjonPanel
