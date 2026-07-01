@@ -19,7 +19,7 @@ import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
 import { BehandlingDataProvider } from './felles/context/BehandlingDataContext';
 import { lazyNamedWithRetry } from './lazyUtils';
 
-const BehandlingPapirsoknadIndex = lazyNamedWithRetry<object, 'BehandlingPapirsoknadIndex'>(
+const BehandlingPapirsoknadIndex = lazyNamedWithRetry<Record<never, never>, 'BehandlingPapirsoknadIndex'>(
   () => import('./papirsoknad/BehandlingPapirsoknadIndex'),
   'BehandlingPapirsoknadIndex',
 );

@@ -34,7 +34,13 @@ export const lazyNamedWithRetry = <T, ExportName extends string>(
   exportName: ExportName,
 ): LazyExoticComponent<ComponentType<T>> =>
   lazyWithRetry<T>(() =>
-    componentImport().then(module => ({
-      default: module[exportName],
-    })),
+    componentImport().then(module => {
+      const component: ComponentType<T> | undefined = (module as Record<string, ComponentType<T> | undefined>)[
+        exportName
+      ];
+      if (component === undefined) {
+        throw new Error(`lazyNamedWithRetry: fant ingen eksport med navnet "${exportName}" i modulen.`);
+      }
+      return { default: component };
+    }),
   );

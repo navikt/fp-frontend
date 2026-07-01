@@ -66,7 +66,9 @@ const ProsessPanel = <T extends Behandling>({
     <MellomlagretFormDataProvider behandling={behandling}>
       <ProsessPanelWrapper erPanelValgt={erPanelValgt} harÅpentAksjonspunkt={harÅpentAksjonspunkt} status={status}>
         {skalVisePanel ? (
-          <BehandlingPanelDataProvider panelData={standardPanelProps}>{children}</BehandlingPanelDataProvider>
+          <BehandlingPanelDataProvider panelData={{ ...standardPanelProps, harÅpentAksjonspunkt }}>
+            {children}
+          </BehandlingPanelDataProvider>
         ) : null}
       </ProsessPanelWrapper>
     </MellomlagretFormDataProvider>
