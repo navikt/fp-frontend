@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   ArrowUndoIcon,
@@ -12,7 +12,7 @@ import {
 } from '@navikt/aksel-icons';
 import { Tabs } from '@navikt/ds-react';
 
-import { useTrackRouteParam } from '@navikt/fp-app-felles';
+import { parseQueryString } from '@navikt/fp-app-felles';
 import type { MessagesFormValues } from '@navikt/fp-sak-meldinger';
 import type { TotrinnskontrollFormValues } from '@navikt/fp-sak-totrinnskontroll';
 
@@ -56,10 +56,8 @@ export const BehandlingSupportIndex = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { selected: valgtSupportPanel, location } = useTrackRouteParam<string>({
-    paramName: 'stotte',
-    isQueryParam: true,
-  });
+  const location = useLocation();
+  const valgtSupportPanel = parseQueryString(location.search)['stotte'];
 
   const [meldingFormData, setMeldingFormData] = useState<MessagesFormValues>();
   const [beslutterFormData, setBeslutterFormData] = useState<TotrinnskontrollFormValues>();
@@ -218,7 +216,7 @@ export const BehandlingSupportIndex = ({
 const utledAktivtPanel = (
   skalViseFraBeslutter: boolean,
   skalViseTilGodkjenning: boolean,
-  valgtSupportPanel: string,
+  valgtSupportPanel: string | undefined,
 ): string => {
   if (valgtSupportPanel) {
     return valgtSupportPanel;
