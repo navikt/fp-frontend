@@ -1,9 +1,13 @@
 import type { ReactNode } from 'react';
 
-import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import type { ArbeidsgiverOpplysningerPerId, BehandlingType, FagsakYtelseType } from '@navikt/fp-types';
 
 import { lazyNamedWithRetry } from './lazyUtils';
+
+/**
+ * Register som mappar (fagsakYtelseType, behandlingType) til rett paneloppsett for behandlinga.
+ * Erstattar ei rekke if/else-blokker i {@link BehandlingPanelerIndex} med oppslag i éin tabell.
+ */
 
 type ValgtStegProps = {
   valgtProsessSteg: string | undefined;
@@ -16,20 +20,36 @@ type ArbeidsgiverPanelProps = ValgtStegProps & {
 
 type InnsynPanelProps = Pick<ValgtStegProps, 'valgtProsessSteg'>;
 
-type PanelRenderProps = ValgtStegProps & {
-  arbeidsgivere: ArbeidsgiverOpplysningerPerId | undefined;
+type PanelRenderProps = ValgtStegProps;
+type PanelRenderPropsMedArbeidsgivere = ValgtStegProps & {
+  arbeidsgivere: ArbeidsgiverOpplysningerPerId;
 };
 
-export type PanelConfig = {
-  fagsakYtelseType?: 'FP' | 'SVP' | 'ES';
-  behandlingTyper: readonly string[];
-  skalHenteArbeidsgivere: boolean;
+type PanelFagsakYtelseType = Extract<FagsakYtelseType, 'FP' | 'SVP' | 'ES'>;
+
+type BasePanelConfig = {
+  behandlingTyper: readonly BehandlingType[];
   skalViseFellesPaVent: boolean;
+};
+
+// Delt i to varianter (med/uten arbeidsgivere) slik at TypeScript tvingar fram at `arbeidsgivere`
+// blir sendt til `render` når (og berre når) `skalHenteArbeidsgivere` er `true`.
+type PanelConfigMedArbeidsgivere = BasePanelConfig & {
+  fagsakYtelseType: PanelFagsakYtelseType;
+  skalHenteArbeidsgivere: true;
+  render: (props: PanelRenderPropsMedArbeidsgivere) => ReactNode;
+};
+
+type PanelConfigUtenArbeidsgivere = BasePanelConfig & {
+  fagsakYtelseType?: PanelFagsakYtelseType;
+  skalHenteArbeidsgivere: false;
   render: (props: PanelRenderProps) => ReactNode;
 };
 
-const førstegangsbehandlingEllerRevurdering: readonly string[] = ['BT-002', 'BT-004'];
-const tilbakekrevingBehandlingTyper: readonly string[] = ['BT-007', 'BT-009'];
+export type PanelConfig = PanelConfigMedArbeidsgivere | PanelConfigUtenArbeidsgivere;
+
+const førstegangsbehandlingEllerRevurdering = ['BT-002', 'BT-004'] satisfies readonly BehandlingType[];
+const tilbakekrevingBehandlingTyper = ['BT-007', 'BT-009'] satisfies readonly BehandlingType[];
 
 const ForeldrepengerPaneler = lazyNamedWithRetry<ArbeidsgiverPanelProps, 'ForeldrepengerPaneler'>(
   () => import('./foreldrepenger/ForeldrepengerPaneler'),
@@ -66,21 +86,21 @@ const panelConfigs = [
     behandlingTyper: førstegangsbehandlingEllerRevurdering,
     skalHenteArbeidsgivere: true,
     skalViseFellesPaVent: true,
-    render: props => <ForeldrepengerPaneler {...props} arbeidsgivere={notEmpty(props.arbeidsgivere)} />,
+    render: props => <ForeldrepengerPaneler {...props} />,
   },
   {
     fagsakYtelseType: 'SVP',
     behandlingTyper: førstegangsbehandlingEllerRevurdering,
     skalHenteArbeidsgivere: true,
     skalViseFellesPaVent: true,
-    render: props => <SvangerskapspengerPaneler {...props} arbeidsgivere={notEmpty(props.arbeidsgivere)} />,
+    render: props => <SvangerskapspengerPaneler {...props} />,
   },
   {
     fagsakYtelseType: 'ES',
     behandlingTyper: førstegangsbehandlingEllerRevurdering,
     skalHenteArbeidsgivere: true,
     skalViseFellesPaVent: true,
-    render: props => <EngangsstonadPaneler {...props} arbeidsgivere={notEmpty(props.arbeidsgivere)} />,
+    render: props => <EngangsstonadPaneler {...props} />,
   },
   {
     behandlingTyper: ['BT-006'],
@@ -111,24 +131,16 @@ const panelConfigs = [
 ] satisfies PanelConfig[];
 
 export const finnPanelConfig = (
-  fagsakYtelseType: string | undefined,
-  behandlingType: string | undefined,
+  fagsakYtelseType: FagsakYtelseType | undefined,
+  behandlingType: BehandlingType | undefined,
 ): PanelConfig | undefined =>
   panelConfigs.find(config => {
-    if (!behandlingType || !config.behandlingTyper.includes(behandlingType)) {
+    if (!behandlingType || !config.behandlingTyper.some(type => type === behandlingType)) {
       return false;
     }
 
     return !config.fagsakYtelseType || config.fagsakYtelseType === fagsakYtelseType;
   });
 
-const erTilbakekreving = (behandlingType: string | undefined): boolean =>
-  tilbakekrevingBehandlingTyper.includes(behandlingType ?? '');
-
 export const skalHenteArbeidsgivere = (panelConfig: PanelConfig | undefined): boolean =>
   panelConfig?.skalHenteArbeidsgivere ?? false;
-
-export const skalViseFellesPaVent = (panelConfig: PanelConfig | undefined, behandlingType: string | undefined): boolean =>
-  panelConfig?.skalViseFellesPaVent ?? !erTilbakekreving(behandlingType);
-
-export const renderBehandlingPanel = (panelConfig: PanelConfig, props: PanelRenderProps): ReactNode => panelConfig.render(props);

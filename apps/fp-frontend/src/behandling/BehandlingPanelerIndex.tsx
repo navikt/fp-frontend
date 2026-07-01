@@ -6,14 +6,10 @@ import { useQuery } from '@tanstack/react-query';
 
 import { ErrorBoundary, parseQueryString, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../data/behandlingApi';
-import {
-  finnPanelConfig,
-  renderBehandlingPanel,
-  skalHenteArbeidsgivere,
-  skalViseFellesPaVent,
-} from './behandlingPanelRegistry';
+import { finnPanelConfig, skalHenteArbeidsgivere } from './behandlingPanelRegistry';
 import { useBehandlingDataContext } from './felles/context/BehandlingDataContext';
 import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';
 
@@ -27,12 +23,11 @@ export const BehandlingPanelerIndex = () => {
 
   const panelConfig = finnPanelConfig(fagsak.fagsakYtelseType, behandling.type);
   const hentArbeidsgivere = skalHenteArbeidsgivere(panelConfig);
+  const skalViseFellesPaVent = panelConfig?.skalViseFellesPaVent ?? true;
 
   const behandlingApi = getBehandlingApi(behandling);
 
-  const arbeidsgivereOversiktQuery = useQuery(
-    behandlingApi.arbeidsgiverOversiktOptions(behandling, hentArbeidsgivere),
-  );
+  const arbeidsgivereOversiktQuery = useQuery(behandlingApi.arbeidsgiverOversiktOptions(behandling, hentArbeidsgivere));
 
   if (hentArbeidsgivere && arbeidsgivereOversiktQuery.isPending) {
     return <LoadingPanel />;
@@ -48,7 +43,7 @@ export const BehandlingPanelerIndex = () => {
 
   return (
     <>
-      {skalViseFellesPaVent(panelConfig, behandling.type) && (
+      {skalViseFellesPaVent && (
         <BehandlingPaVent
           behandling={behandling}
           opneSokeside={() => {
@@ -60,11 +55,19 @@ export const BehandlingPanelerIndex = () => {
       {panelConfig && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            {renderBehandlingPanel(panelConfig, {
-              valgtProsessSteg,
-              valgtFaktaSteg,
-              arbeidsgivere: arbeidsgivereOversiktQuery.data?.arbeidsgivere,
-            })}
+            {/* Kallet til render() må duplisert per gren: TypeScript snevrar berre inn den
+                diskriminerte PanelConfig-unionen når `skalHenteArbeidsgivere` sjekkast rett før
+                render() blir kalla, ikkje viss render-props blir bygd i ein separat variabel. */}
+            {panelConfig.skalHenteArbeidsgivere
+              ? panelConfig.render({
+                  valgtProsessSteg,
+                  valgtFaktaSteg,
+                  arbeidsgivere: notEmpty(arbeidsgivereOversiktQuery.data?.arbeidsgivere),
+                })
+              : panelConfig.render({
+                  valgtProsessSteg,
+                  valgtFaktaSteg,
+                })}
           </ErrorBoundary>
         </Suspense>
       )}

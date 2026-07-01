@@ -31,7 +31,7 @@ export const ProsessDefaultInitOverstyringPanel = <T extends Behandling = Behand
   return <ProsessPanel {...props} harÅpentAksjonspunkt={harÅpentAksjonspunkt} />;
 };
 
-interface ProsessPanel {
+interface ProsessPanelInterneProps {
   harÅpentAksjonspunkt: boolean;
 }
 
@@ -44,7 +44,7 @@ const ProsessPanel = <T extends Behandling>({
   standardPanelProps,
   harÅpentAksjonspunkt,
   children,
-}: Props<T> & ProsessPanel) => {
+}: Props<T> & ProsessPanelInterneProps) => {
   const { behandling } = standardPanelProps;
 
   const status = overstyrtStatus ?? standardPanelProps.status;

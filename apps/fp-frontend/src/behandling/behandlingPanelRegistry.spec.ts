@@ -1,8 +1,4 @@
-import {
-  finnPanelConfig,
-  skalHenteArbeidsgivere,
-  skalViseFellesPaVent,
-} from './behandlingPanelRegistry';
+import { finnPanelConfig, skalHenteArbeidsgivere } from './behandlingPanelRegistry';
 
 describe('behandlingPanelRegistry', () => {
   it('skal finne ytelsespanel for førstegangsbehandling og revurdering', () => {
@@ -54,14 +50,12 @@ describe('behandlingPanelRegistry', () => {
     });
   });
 
-  it('skal returnere undefined for ukjent behandlingstype', () => {
-    expect(finnPanelConfig('FP', 'BT-999')).toBeUndefined();
+  it('skal returnere undefined for behandlingstype utan panel', () => {
+    expect(finnPanelConfig('FP', '-')).toBeUndefined();
     expect(finnPanelConfig('FP', undefined)).toBeUndefined();
   });
 
-  it('skal ha trygg default for arbeidsgivarhenting og felles på-vent-panel', () => {
+  it('skal ha trygg default for arbeidsgivarhenting når panel ikkje finst', () => {
     expect(skalHenteArbeidsgivere(undefined)).toBe(false);
-    expect(skalViseFellesPaVent(undefined, 'BT-002')).toBe(true);
-    expect(skalViseFellesPaVent(undefined, 'BT-007')).toBe(false);
   });
 });
