@@ -83,26 +83,21 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
     }
   }, [fulltUttak, skalGradere, skalUtsette, skalOvertaKvote, setError, clearErrors, intl]);
 
-  // react-hook-form sine watch()-arrayar for feltarray blir muterte i staden for erstatta ved kvar endring,
-  // så vi må samanlikne innhaldet (JSON) i staden for objektreferansen for at effekten under skal trigge på nytt.
-  const permisjonsPerioderNøkkel = JSON.stringify(permisjonsPerioder);
-  const graderingPerioderNøkkel = JSON.stringify(graderingPerioder);
-  const utsettelsePerioderNøkkel = JSON.stringify(utsettelsePerioder);
-  const overføringsPerioderNøkkel = JSON.stringify(overføringsPerioder);
-  const oppholdPerioderNøkkel = JSON.stringify(oppholdPerioder);
+  // Perioder frå kvar periodetype skal ikkje overlappe i tid med perioder frå andre periodetypar,
+  // sjølv om dei ikkje overlappar med andre perioder innanfor same periodetype.
+  const periodeGrupper = [
+    fulltUttak ? hentUtfylteTidsrom(permisjonsPerioder) : [],
+    skalGradere ? hentUtfylteTidsrom(graderingPerioder) : [],
+    skalUtsette ? hentUtfylteTidsrom(utsettelsePerioder) : [],
+    skalOvertaKvote ? hentUtfylteTidsrom(overføringsPerioder) : [],
+    skalHaOpphold ? hentUtfylteTidsrom(oppholdPerioder) : [],
+  ].filter(periodeGruppe => periodeGruppe.length > 0);
+  const harOverlapp = periodeGrupper.length > 1 && harOverlappMellomPeriodetypar(periodeGrupper);
 
+  // Vi held RHF-feilstatus i synk med den utrekna verdien slik at submit blir blokkert.
+  // setError/clearErrors kan ikkje kallast under render, difor ligg synkinga i ein effekt med primitiv avhengigheit.
   useEffect(() => {
-    // Perioder frå kvar periodetype skal ikkje overlappe i tid med perioder frå andre periodetypar,
-    // sjølv om dei ikkje overlappar med andre perioder innanfor same periodetype.
-    const periodeGrupper = [
-      fulltUttak ? hentUtfylteTidsrom(permisjonsPerioder) : [],
-      skalGradere ? hentUtfylteTidsrom(graderingPerioder) : [],
-      skalUtsette ? hentUtfylteTidsrom(utsettelsePerioder) : [],
-      skalOvertaKvote ? hentUtfylteTidsrom(overføringsPerioder) : [],
-      skalHaOpphold ? hentUtfylteTidsrom(oppholdPerioder) : [],
-    ].filter(periodeGruppe => periodeGruppe.length > 0);
-
-    if (periodeGrupper.length > 1 && harOverlappMellomPeriodetypar(periodeGrupper)) {
+    if (harOverlapp) {
       setError(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.periodeOverlapper`, {
         type: 'custom',
         message: intl.formatMessage({ id: 'PermisjonPanel.DateRangesOverlappingPeriodTypes' }),
@@ -110,22 +105,7 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
     } else {
       clearErrors(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.periodeOverlapper`);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- *Nøkkel-variablane representerer innhaldet i dei tilsvarande periode-arrayane
-  }, [
-    fulltUttak,
-    skalGradere,
-    skalUtsette,
-    skalOvertaKvote,
-    skalHaOpphold,
-    permisjonsPerioderNøkkel,
-    graderingPerioderNøkkel,
-    utsettelsePerioderNøkkel,
-    overføringsPerioderNøkkel,
-    oppholdPerioderNøkkel,
-    setError,
-    clearErrors,
-    intl,
-  ]);
+  }, [harOverlapp, setError, clearErrors, intl]);
 
   return (
     <BorderBox>
