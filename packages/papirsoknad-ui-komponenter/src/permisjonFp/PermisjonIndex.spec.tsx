@@ -372,7 +372,7 @@ describe('PermisjonIndex', () => {
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(
-      await screen.findByText('Perioder kan ikke overlappe i tid (uttak, utsettelse, gradering, overforing, opphold)'),
+      await screen.findByText('Perioder kan ikke overlappe i tid'),
     ).toBeInTheDocument();
     expect(lagre).not.toHaveBeenCalled();
 
@@ -388,7 +388,7 @@ describe('PermisjonIndex', () => {
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(
-      screen.queryByText('Perioder kan ikke overlappe i tid (uttak, utsettelse, gradering, overforing, opphold)'),
+      screen.queryByText('Perioder kan ikke overlappe i tid'),
     ).not.toBeInTheDocument();
     expect(lagre).toHaveBeenCalledOnce();
   });
@@ -429,9 +429,26 @@ describe('PermisjonIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(
-      screen.queryByText('Perioder kan ikke overlappe i tid (uttak, utsettelse, gradering, overforing, opphold)'),
-    ).not.toBeInTheDocument();
+    // Berre éin periodetype (fullt uttak) er skrudd på, så overlappet er reint internt i periodetypen.
+    // Det gir feilmeldingar frå feltarray-valideringa, men den tverrgåande panel-feilmeldinga skal ikkje
+    // leggast til i tillegg (elles ville talet auka). Submit skal likevel vere blokkert.
+    const feilmeldingarVedInterntOverlapp = screen.getAllByText('Perioder kan ikke overlappe i tid').length;
     expect(lagre).not.toHaveBeenCalled();
+
+    // Flyttar andre periode slik at periodane ikkje lenger overlappar
+    await userEvent.clear(fomAndrePeriodeInput);
+    await userEvent.type(fomAndrePeriodeInput, '21.06.2022');
+    fireEvent.blur(fomAndrePeriodeInput);
+
+    await userEvent.clear(tomAndrePeriodeInput);
+    await userEvent.type(tomAndrePeriodeInput, '21.07.2022');
+    fireEvent.blur(tomAndrePeriodeInput);
+
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+
+    // Utan overlapp forsvinn alle feilmeldingane og submit går gjennom
+    expect(feilmeldingarVedInterntOverlapp).toBeGreaterThan(0);
+    expect(screen.queryByText('Perioder kan ikke overlappe i tid')).not.toBeInTheDocument();
+    expect(lagre).toHaveBeenCalledOnce();
   });
 });

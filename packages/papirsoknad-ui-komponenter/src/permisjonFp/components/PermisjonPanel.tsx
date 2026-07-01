@@ -33,17 +33,19 @@ interface Props {
 }
 
 type PeriodeMedTidsrom = { periodeFom?: string; periodeTom?: string };
+type UtfyltPeriode = { periodeFom: string; periodeTom: string };
+
+const erUtfyltPeriode = (periode: PeriodeMedTidsrom): periode is UtfyltPeriode =>
+  !!periode.periodeFom && !!periode.periodeTom;
 
 const hentUtfylteTidsrom = (perioder?: PeriodeMedTidsrom[]): string[][] =>
-  (perioder ?? [])
-    .filter(({ periodeFom, periodeTom }) => !!periodeFom && !!periodeTom)
-    .map(({ periodeFom, periodeTom }) => [periodeFom as string, periodeTom as string]);
+  (perioder ?? []).filter(erUtfyltPeriode).map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
 
 const harOverlappMellomPeriodetypar = (periodeGrupper: string[][][]): boolean =>
   periodeGrupper.some((periodeGruppe, index) => {
     const andrePerioder = periodeGrupper.slice(index + 1).flat();
     return periodeGruppe.some(periode =>
-      andrePerioder.some(annenPeriode => dateRangesNotOverlapping([periode, annenPeriode])),
+      andrePerioder.some(annenPeriode => !!dateRangesNotOverlapping([periode, annenPeriode])),
     );
   });
 
