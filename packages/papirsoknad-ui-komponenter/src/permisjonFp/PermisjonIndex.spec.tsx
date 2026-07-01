@@ -48,21 +48,17 @@ describe('PermisjonIndex', () => {
 
     expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
-        fulltUttak: true,
         permisjonsPerioder: [
           {
             flerbarnsdager: false,
             harSamtidigUttak: true,
             samtidigUttaksprosent: '100.00',
+            morsAktivitet: undefined,
             periodeFom: '2022-05-20',
             periodeTom: '2022-06-20',
             periodeType: 'MØDREKVOTE',
           },
         ],
-        skalGradere: false,
-        skalHaOpphold: false,
-        skalOvertaKvote: false,
-        skalUtsette: false,
         graderingPeriode: undefined,
         oppholdPerioder: undefined,
         overføringsperioder: undefined,
@@ -97,7 +93,6 @@ describe('PermisjonIndex', () => {
 
     expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
-        fulltUttak: false,
         overføringsperioder: [
           {
             overforingArsak: 'SYKDOM_ANNEN_FORELDER',
@@ -105,10 +100,6 @@ describe('PermisjonIndex', () => {
             periodeTom: '2022-06-20',
           },
         ],
-        skalGradere: false,
-        skalHaOpphold: false,
-        skalOvertaKvote: true,
-        skalUtsette: false,
         utsettelsePeriode: undefined,
         permisjonsPerioder: undefined,
         oppholdPerioder: undefined,
@@ -155,7 +146,6 @@ describe('PermisjonIndex', () => {
 
     expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
-        fulltUttak: false,
         utsettelsePeriode: [
           {
             arsakForUtsettelse: 'ARBEID',
@@ -169,10 +159,6 @@ describe('PermisjonIndex', () => {
         oppholdPerioder: undefined,
         overføringsperioder: undefined,
         permisjonsPerioder: undefined,
-        skalGradere: false,
-        skalHaOpphold: false,
-        skalOvertaKvote: false,
-        skalUtsette: true,
       },
     });
   });
@@ -222,7 +208,6 @@ describe('PermisjonIndex', () => {
 
     expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
-        fulltUttak: false,
         graderingPeriode: [
           {
             arbeidsgiverIdentifikator: '802323232',
@@ -243,10 +228,6 @@ describe('PermisjonIndex', () => {
         oppholdPerioder: undefined,
         overføringsperioder: undefined,
         permisjonsPerioder: undefined,
-        skalGradere: true,
-        skalHaOpphold: false,
-        skalOvertaKvote: false,
-        skalUtsette: false,
         utsettelsePeriode: undefined,
       },
     });
@@ -302,7 +283,6 @@ describe('PermisjonIndex', () => {
 
     expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
-        fulltUttak: true,
         oppholdPerioder: [
           {
             periodeFom: '2022-05-20',
@@ -310,10 +290,6 @@ describe('PermisjonIndex', () => {
             årsak: 'UTTAK_FORELDREPENGER_ANNEN_FORELDER',
           },
         ],
-        skalGradere: false,
-        skalHaOpphold: true,
-        skalOvertaKvote: false,
-        skalUtsette: false,
         permisjonsPerioder: [
           {
             flerbarnsdager: false,

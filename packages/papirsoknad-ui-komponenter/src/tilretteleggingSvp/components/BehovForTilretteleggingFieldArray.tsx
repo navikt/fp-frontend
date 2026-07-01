@@ -6,23 +6,25 @@ import { Box } from '@navikt/ds-react';
 import { RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { maxValue, required } from '@navikt/ft-form-validators';
 
+import type { SvpTilretteleggingType } from '@navikt/fp-types';
+
 import { FieldArrayRow } from '../../felles/FieldArrayRow';
 import { type FormValues, type Tilrettelegging } from '../types';
 
 const maxValue3 = maxValue(100);
 
 const defaultTilrettelegging: Tilrettelegging = {
-  tilretteleggingType: '',
+  tilretteleggingType: undefined as unknown as SvpTilretteleggingType,
   dato: '',
-  stillingsprosent: '',
+  stillingsprosent: undefined,
 };
 
 interface Props {
   readOnly: boolean;
   name:
-    | 'tilretteleggingArbeidsforhold.tilretteleggingFrilans'
-    | 'tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende'
-    | `tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.${number}.tilretteleggingArbeidsgiver`;
+    | 'tilretteleggingArbeidsforhold.tilretteleggingFrilans.tilrettelegginger'
+    | 'tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende.tilrettelegginger'
+    | `tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.${number}.tilrettelegginger`;
 }
 
 export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => {
@@ -65,13 +67,13 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
               label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' })}
               validate={[required]}
               selectValues={[
-                <option value="HEL_TILRETTELEGGING" key="HEL_TILRETTELEGGING">
+                <option value={'HEL_TILRETTELEGGING' satisfies SvpTilretteleggingType} key="HEL_TILRETTELEGGING">
                   {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.KanGjennomfores' })}
                 </option>,
-                <option value="DELVIS_TILRETTELEGGING" key="DELVIS_TILRETTELEGGING">
+                <option value={'DELVIS_TILRETTELEGGING' satisfies SvpTilretteleggingType} key="DELVIS_TILRETTELEGGING">
                   {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.RedusertArbeid' })}
                 </option>,
-                <option value="INGEN_TILRETTELEGGING" key="INGEN_TILRETTELEGGING">
+                <option value={'INGEN_TILRETTELEGGING' satisfies SvpTilretteleggingType} key="INGEN_TILRETTELEGGING">
                   {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.KanIkkeGjennomfores' })}
                 </option>,
               ]}

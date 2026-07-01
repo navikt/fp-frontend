@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, TidsromPermisjonDto } from '@navikt/fp-types';
 
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FormValuesGradering } from '../../types';
@@ -50,22 +50,25 @@ export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
   );
 };
 
-PermisjonGraderingPanel.transformValues = (formValues: FormValuesGradering) => {
-  const perioder = formValues[GRADERING_PERIODE_FIELD_ARRAY_NAME];
-  if (!perioder) {
-    return [];
+PermisjonGraderingPanel.transformValues = (
+  formValues: FormValuesGradering,
+): Pick<TidsromPermisjonDto, 'graderingPeriode'> => {
+  if (!formValues.skalGradere || !formValues.graderingPeriode) {
+    return { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: undefined };
   }
-  return perioder.map(periode => {
-    if (periode.arbeidskategoriType) {
+
+  return {
+    [GRADERING_PERIODE_FIELD_ARRAY_NAME]: formValues.graderingPeriode.map(periode => {
       return {
         ...periode,
-        erArbeidstaker: periode.arbeidskategoriType === 'ARBEIDSTAKER',
-        erFrilanser: periode.arbeidskategoriType === 'FRILANSER',
-        erSelvstNæringsdrivende: periode.arbeidskategoriType === 'SELVSTENDIG_NÆRINGSDRIVENDE',
+        erArbeidstaker: periode.arbeidskategoriType ? periode.arbeidskategoriType === 'ARBEIDSTAKER' : undefined,
+        erFrilanser: periode.arbeidskategoriType ? periode.arbeidskategoriType === 'FRILANSER' : undefined,
+        erSelvstNæringsdrivende: periode.arbeidskategoriType
+          ? periode.arbeidskategoriType === 'SELVSTENDIG_NÆRINGSDRIVENDE'
+          : undefined,
       };
-    }
-    return periode;
-  });
+    }),
+  };
 };
 
 PermisjonGraderingPanel.initialValues = (): FormValuesGradering => ({

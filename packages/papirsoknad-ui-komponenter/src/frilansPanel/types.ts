@@ -14,7 +14,7 @@ export type FrilansSubFormValues = {
   harSøkerPeriodeMedFrilans?: boolean;
   perioder?: {
     periodeFom: string;
-    periodeTom?: string;
+    periodeTom: string;
   }[];
   erNyoppstartetFrilanser?: boolean;
   harInntektFraFosterhjem?: boolean;

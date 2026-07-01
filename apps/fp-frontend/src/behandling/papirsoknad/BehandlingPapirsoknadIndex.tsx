@@ -4,16 +4,13 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
-  type EngangsstønadValues,
-  type ForeldrepengerEndringssøknadValues,
-  type ForeldrepengerValues,
   isPapirsøknadMellomlagring,
+  type PapirsøknadAp,
   type PapirsøknadMellomlagring,
   RegistrerPapirsoknadPanel,
   SoknadRegistrertModal,
-  type SvangerskapsValues,
 } from '@navikt/fp-papirsoknad';
-import type { Aksjonspunkt, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { BehandlingRel, getBehandlingApi } from '../../data/behandlingApi';
 import { useBehandlingDataContext } from '../felles/context/BehandlingDataContext';
@@ -34,10 +31,9 @@ const BehandlingPapirsoknadIndex = () => {
 
   const isReadOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPåVent;
 
-  const lagrePapirsøknad = useLagrePapirsøknad(setErAksjonspunktLagret, setSkalOppdatereEtterBekreftelseAvAp);
-
-  const erEndringssøknad = behandling.aksjonspunkt.some(
-    ap => ap.definisjon === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
+  const { lagrePapirsøknad, lagreUfullstendigPapirsøknad } = useLagrePapirsøknad(
+    setErAksjonspunktLagret,
+    setSkalOppdatereEtterBekreftelseAvAp,
   );
 
   const apKode = getAktivPapirsøknadApKode(behandling.aksjonspunkt);
@@ -77,13 +73,10 @@ const BehandlingPapirsoknadIndex = () => {
 
   const onMellomlagre = useCallback(
     (formValues: PapirsøknadMellomlagring) => {
-      const payload = JSON.stringify({
-        '@type': apKode,
-        ...formValues,
-      });
+      const payload = JSON.stringify(formValues);
       mellomlagreMutation(payload);
     },
-    [mellomlagreMutation, apKode],
+    [mellomlagreMutation],
   );
 
   if (mellomlagringLaster) {
@@ -98,7 +91,8 @@ const BehandlingPapirsoknadIndex = () => {
         kodeverk={alleKodeverk}
         readOnly={isReadOnly}
         lagrePapirsøknad={lagrePapirsøknad}
-        erEndringssøknad={erEndringssøknad}
+        lagreUfullstendigPapirsøknad={lagreUfullstendigPapirsøknad}
+        aksjonspunktKode={apKode}
         mellomlagretData={mellomlagretData}
         onMellomlagre={onMellomlagre}
       />
@@ -111,44 +105,38 @@ const useLagrePapirsøknad = (
   setSkalOppdatereEtterBekreftelseAvAp: (skalOppdatere: boolean) => void,
 ) => {
   const { behandling, fagsak, lagreAksjonspunkter } = useBehandlingDataContext();
-
-  return async (
-    fagsakYtelseType: FagsakYtelseType,
-    familieHendelseType: FamilieHendelseType,
-    foreldreType: string,
-    formValues?: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
-  ) => {
-    const kode = getAktivPapirsøknadApKode(behandling.aksjonspunkt);
-    const bekreftedeAksjonspunktDtoer = [
-      {
-        '@type': kode,
-        kode,
-        tema: familieHendelseType,
-        søknadstype: fagsakYtelseType,
-        søker: foreldreType,
-        ...formValues,
-      },
-    ];
-
-    if (formValues) {
-      setSkalOppdatereEtterBekreftelseAvAp(false);
-    }
+  const lagrePapirsøknad = async (transformedAksjonpunktData: PapirsøknadAp) => {
+    setSkalOppdatereEtterBekreftelseAvAp(false);
 
     const oppdatertBehandling = await lagreAksjonspunkter({
       saksnummer: fagsak.saksnummer,
       behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
-      bekreftedeAksjonspunktDtoer,
+      bekreftedeAksjonspunktDtoer: [transformedAksjonpunktData],
     });
 
-    if (formValues) {
-      setErAksjonspunktLagret(true);
-    } else {
-      globalThis.scrollTo(0, 0);
-    }
+    setErAksjonspunktLagret(true);
 
     return oppdatertBehandling;
   };
+  const lagreUfullstendigPapirsøknad = async (transformedAksjonpunktData: PapirsøknadAp) => {
+    const dataTilLagring = {
+      kode: transformedAksjonpunktData.kode,
+      tema: transformedAksjonpunktData.tema,
+      søknadstype: transformedAksjonpunktData.søknadstype,
+      søker: transformedAksjonpunktData.søker,
+    };
+    const oppdatertBehandling = await lagreAksjonspunkter({
+      saksnummer: fagsak.saksnummer,
+      behandlingUuid: behandling.uuid,
+      behandlingVersjon: behandling.versjon,
+      bekreftedeAksjonspunktDtoer: [dataTilLagring],
+    });
+    globalThis.scrollTo(0, 0);
+
+    return oppdatertBehandling;
+  };
+  return { lagrePapirsøknad, lagreUfullstendigPapirsøknad };
 };
 
 const getAktivPapirsøknadApKode = (

@@ -3,6 +3,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { HGrid } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   AndreYtelserPapirsoknadIndex,
   AnnenForelderPapirsoknadIndex,
@@ -22,6 +23,8 @@ import {
   VirksomhetPapirsoknadIndex,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
+
+import type { AksjonspunktTilBekreftelse } from '../../PapirsøknadAp';
 
 const buildInitialValues = () => ({
   ...MottattDatoPapirsoknadIndex.initialValues(),
@@ -43,8 +46,15 @@ const buildInitialValues = () => ({
 
 type FormValues = ReturnType<typeof buildInitialValues>;
 
-const transformValues = (formValues: FormValues) => {
+const transformValues = (
+  soknadData: SoknadData,
+  formValues: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER> => {
   return {
+    kode: AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER,
+    tema: soknadData.familieHendelseType,
+    søknadstype: soknadData.fagsakYtelseType,
+    søker: soknadData.foreldreType,
     ...MottattDatoPapirsoknadIndex.transformValues(formValues),
     ...OppholdINorgePapirsoknadIndex.transformValues(formValues),
     ...InntektsgivendeArbeidPapirsoknadIndex.transformValues(formValues),
@@ -96,14 +106,17 @@ export const ForeldrepengerForm = ({
   });
 
   const søkerHarAleneomsorg = useWatch({ control: formMethods.control, name: 'annenForelder.søkerHarAleneomsorg' });
-  const denAndreForelderenHarRettPåForeldrepenger = useWatch({ control: formMethods.control, name: 'annenForelder.denAndreForelderenHarRettPåForeldrepenger' });
+  const denAndreForelderenHarRettPåForeldrepenger = useWatch({
+    control: formMethods.control,
+    name: 'annenForelder.denAndreForelderenHarRettPåForeldrepenger',
+  });
   const annenForelderInformertRequired = !søkerHarAleneomsorg && denAndreForelderenHarRettPåForeldrepenger !== false;
 
   const foedselsDatoFraTerminOgFodelsPanel = useWatch({ control: formMethods.control, name: 'fødselsdato' });
   const mottattDato = useWatch({ control: formMethods.control, name: 'mottattDato' });
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
+    <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(soknadData, values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="space-16">
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
         <OppholdINorgePapirsoknadIndex
@@ -117,10 +130,10 @@ export const ForeldrepengerForm = ({
         <FrilansPapirsoknadIndex readOnly={readOnly} />
         <AndreYtelserPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
         <DekningsgradIndex readOnly={readOnly} />
+        <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
         {soknadData.getFamilieHendelseType() === 'FODSL' && (
           <TerminOgFodselPanel readOnly={readOnly} erForeldrepenger />
         )}
-        <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
         <OmsorgOgAdopsjonPapirsoknadIndex
           readOnly={readOnly}
           familieHendelseType={soknadData.getFamilieHendelseType()}

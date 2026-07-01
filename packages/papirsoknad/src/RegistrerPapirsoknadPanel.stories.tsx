@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { alleKodeverk, getIntlDecorator, lagBehandling, withRouter } from '@navikt/fp-storybook-utils';
 import type { Fagsak } from '@navikt/fp-types';
 
@@ -44,6 +45,10 @@ const meta = {
       action('lagrePapirsøknad')(values);
       return Promise.resolve(DEFAULT_BEHANDLING_FPSAK);
     },
+    lagreUfullstendigPapirsøknad: values => {
+      action('lagreUfullstendigPapirsøknad')(values);
+      return Promise.resolve(DEFAULT_BEHANDLING_FPSAK);
+    },
   },
 } satisfies Meta<typeof RegistrerPapirsoknadPanel>;
 
@@ -54,27 +59,27 @@ type Story = StoryObj<typeof meta>;
 export const ForeldrepengerFørstegangssøknad: Story = {
   args: {
     fagsak: { ...DEFAULT_FAGSAK, fagsakYtelseType: 'FP' } satisfies Fagsak,
-    erEndringssøknad: false,
+    aksjonspunktKode: AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER,
   },
 };
 
 export const ForeldrepengerEndringssøknad: Story = {
   args: {
     fagsak: { ...DEFAULT_FAGSAK, fagsakYtelseType: 'FP' } satisfies Fagsak,
-    erEndringssøknad: true,
+    aksjonspunktKode: AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
   },
 };
 
 export const SvangerskapspengerFørstegangssøknad: Story = {
   args: {
     fagsak: { ...DEFAULT_FAGSAK, fagsakYtelseType: 'SVP' } satisfies Fagsak,
-    erEndringssøknad: false,
+    aksjonspunktKode: AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER,
   },
 };
 
 export const EngangsstonadFørstegangssøknad: Story = {
   args: {
     fagsak: { ...DEFAULT_FAGSAK, fagsakYtelseType: 'ES' } satisfies Fagsak,
-    erEndringssøknad: false,
+    aksjonspunktKode: AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD,
   },
 };

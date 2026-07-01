@@ -5,3 +5,4 @@ export type * from './src/tilbakekreving';
 export type * from './src/index';
 export type * from './src/felles';
 export type * from './src/interne-typer';
+export type * from './src/papirsøknad';

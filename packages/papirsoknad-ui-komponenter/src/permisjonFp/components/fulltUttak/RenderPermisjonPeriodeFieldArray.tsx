@@ -11,6 +11,7 @@ import {
   hasValidDate,
   hasValidDecimal,
   maxValue,
+  notDash,
   required,
 } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -20,7 +21,7 @@ import type { AlleKodeverk, KodeverkMedNavn, UttakPeriodeType } from '@navikt/fp
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
-import type { PermisjonFormValues, PermisjonPeriode } from '../../types';
+import type { PermisjonFormValues } from '../../types';
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
@@ -35,7 +36,7 @@ export const gyldigeUttakperioder = new Set<UttakPeriodeType>([
   'MØDREKVOTE',
 ]);
 
-const PERIODS_WITH_NO_MORS_AKTIVITET = new Set<UttakPeriodeType>([
+export const PERIODS_WITH_NO_MORS_AKTIVITET = new Set<UttakPeriodeType>([
   'FEDREKVOTE',
   'FORELDREPENGER_FØR_FØDSEL',
   'MØDREKVOTE',
@@ -57,10 +58,6 @@ export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKo
 
   const periodeTyper = alleKodeverk['UttakPeriodeType'];
   const morsAktivitetTyper = alleKodeverk['MorsAktivitet'];
-
-  if (morsAktivitetTyper.filter(({ kode }) => kode === '-').length === 0) {
-    morsAktivitetTyper.unshift({ kode: '-', navn: '' });
-  }
 
   const {
     control,
@@ -89,7 +86,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKo
       fields={fields}
       addButtonText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       emptyTemplate={{
-        periodeType: '-',
+        periodeType: undefined,
         periodeFom: '',
         periodeTom: '',
       }}
@@ -155,6 +152,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKo
                 )}
                 selectValues={mapAktiviteter(morsAktivitetTyper)}
                 hideValueOnDisable
+                validate={[required, notDash]}
               />
             )}
             <div>
@@ -195,29 +193,6 @@ export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKo
     </RhfFieldArray>
   );
 };
-
-RenderPermisjonPeriodeFieldArray.transformValues = (values: PermisjonPeriode[]) =>
-  values.map(value => {
-    if (PERIODS_WITH_NO_MORS_AKTIVITET.has(value.periodeType)) {
-      return {
-        periodeType: value.periodeType,
-        periodeFom: value.periodeFom,
-        periodeTom: value.periodeTom,
-        flerbarnsdager: value.flerbarnsdager ?? false,
-        harSamtidigUttak: value.harSamtidigUttak ?? false,
-        samtidigUttaksprosent: value.samtidigUttaksprosent,
-      };
-    }
-    return {
-      periodeType: value.periodeType,
-      periodeFom: value.periodeFom,
-      periodeTom: value.periodeTom,
-      morsAktivitet: value.morsAktivitet,
-      flerbarnsdager: value.flerbarnsdager ?? false,
-      harSamtidigUttak: value.harSamtidigUttak ?? false,
-      samtidigUttaksprosent: value.samtidigUttaksprosent,
-    };
-  });
 
 const mapPeriodeTyper = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer

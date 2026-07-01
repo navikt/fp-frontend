@@ -13,6 +13,7 @@ import {
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { ANNEN_FORELDER_NAME_PREFIX, KAN_IKKE_OPPGI_NAME_PREFIX } from '../constant';
 import type { AnnenForelderFormValues, AnnenForelderSubFormValues } from '../types';
@@ -137,13 +138,15 @@ OppgiAnnenForelderPanel.transformValues = ({
   fødselsnummer,
   kanIkkeOppgiAnnenForelder,
   kanIkkeOppgiBegrunnelse: { årsak, land, utenlandskFødselsnummer } = {},
-}: AnnenForelderSubFormValues): AnnenForelderSubFormValues => {
+}: AnnenForelderSubFormValues) => {
   if (kanIkkeOppgiAnnenForelder) {
-    const erUkjentFar = årsak === 'IKKE_NORSK_FNR';
     return {
       fødselsnummer: undefined,
       kanIkkeOppgiAnnenForelder: true,
-      kanIkkeOppgiBegrunnelse: erUkjentFar ? { årsak, land, utenlandskFødselsnummer } : { årsak: årsak },
+      kanIkkeOppgiBegrunnelse:
+        årsak === 'IKKE_NORSK_FNR'
+          ? { årsak: notEmpty(årsak), land, utenlandskFødselsnummer }
+          : { årsak: notEmpty(årsak) },
     };
   }
 

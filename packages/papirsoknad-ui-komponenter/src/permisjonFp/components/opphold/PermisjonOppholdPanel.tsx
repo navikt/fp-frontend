@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, TidsromPermisjonDto } from '@navikt/fp-types';
 
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FormValuesOpphold } from '../../types';
@@ -46,4 +46,8 @@ export const PermisjonOppholdPanel = ({ readOnly, alleKodeverk }: Props) => {
 PermisjonOppholdPanel.initialValues = (): FormValuesOpphold => ({
   [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: [],
   skalHaOpphold: false,
+});
+
+PermisjonOppholdPanel.transformValues = (values: FormValuesOpphold): Pick<TidsromPermisjonDto, 'oppholdPerioder'> => ({
+  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: values.skalHaOpphold ? values.oppholdPerioder : undefined,
 });

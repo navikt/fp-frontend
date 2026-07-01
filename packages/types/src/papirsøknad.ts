@@ -1,0 +1,18 @@
+export type {
+  tjenester_registrering_es_ManuellRegistreringEngangsstonadDto as ManuellRegistreringEngangsstonadDto,
+  tjenester_registrering_fp_ManuellRegistreringEndringsøknadDto as ManuellRegistreringEndringsøknadDto,
+  tjenester_registrering_fp_ManuellRegistreringForeldrepengerDto as ManuellRegistreringForeldrepengerDto,
+  tjenester_registrering_dto_DekningsgradDto as DekningsgradDto,
+  tjenester_registrering_dto_RettigheterDto as RettigheterDto,
+  tjenester_registrering_fp_TidsromPermisjonDto as TidsromPermisjonDto,
+  tjenester_registrering_dto_GraderingDto as GraderingDto,
+  tjenester_registrering_dto_OppholdDto as OppholdDto,
+  tjenester_registrering_dto_OverføringsperiodeDto as OverføringsperiodeDto,
+  tjenester_registrering_fp_PermisjonPeriodeDto as PermisjonPeriodeDto,
+  tjenester_registrering_dto_UtsettelseDto as UtsettelseDto,
+  tjenester_registrering_svp_ManuellRegistreringSvangerskapspengerDto as ManuellRegistreringSvangerskapspengerDto,
+  tjenester_registrering_svp_SvpTilretteleggingArbeidsforholdDto as SvpTilretteleggingArbeidsforholdDto,
+  tjenester_registrering_svp_SvpTilretteleggingTypeDto as SvpTilretteleggingType,
+  tjenester_registrering_dto_OmsorgDto as OmsorgDto,
+  tjenester_registrering_dto_UtenlandsoppholdDto as UtenlandsoppholdDto,
+} from './fpsak.gen';

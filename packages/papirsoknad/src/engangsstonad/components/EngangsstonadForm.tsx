@@ -3,6 +3,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { HGrid } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   LagreSoknadPapirsoknadIndex,
   MottattDatoPapirsoknadIndex,
@@ -10,6 +11,7 @@ import {
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
+import type { AksjonspunktTilBekreftelse } from '../../PapirsøknadAp';
 import { RegistreringAdopsjonOgOmsorgGrid } from './RegistreringAdopsjonOgOmsorgGrid';
 import { RegistreringFodselGrid } from './RegistreringFodselGrid';
 
@@ -81,14 +83,19 @@ const initialValues = () => ({
   ...LagreSoknadPapirsoknadIndex.initialValues(),
 });
 
-const transformValues = (soknadData: SoknadData, values: ReturnType<typeof initialValues>) => {
-  const familieHendelseValues =
-    soknadData.getFamilieHendelseType() === 'ADPSJN'
-      ? RegistreringAdopsjonOgOmsorgGrid.transformValues(values)
-      : RegistreringFodselGrid.transformValues(values);
+const transformValues = (
+  soknadData: SoknadData,
+  values: ReturnType<typeof initialValues>,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD> => {
   return {
+    kode: AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD,
+    tema: soknadData.familieHendelseType,
+    søknadstype: soknadData.fagsakYtelseType,
+    søker: soknadData.foreldreType,
     ...MottattDatoPapirsoknadIndex.transformValues(values),
-    ...familieHendelseValues,
+    ...(soknadData.getFamilieHendelseType() === 'ADPSJN'
+      ? RegistreringAdopsjonOgOmsorgGrid.transformValues(values)
+      : RegistreringFodselGrid.transformValues(values)),
     ...LagreSoknadPapirsoknadIndex.transformValues(values),
   };
 };

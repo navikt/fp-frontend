@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
-import type { AlleKodeverk, ForeldreType } from '@navikt/fp-types';
+import { type AlleKodeverk, type ForeldreType, type TidsromPermisjonDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import {
@@ -18,7 +18,6 @@ import {
 } from '../constants';
 import type { PermisjonFormValues } from '../types';
 import { PermisjonFulltUttak } from './fulltUttak/PermisjonFulltUttak';
-import { RenderPermisjonPeriodeFieldArray } from './fulltUttak/RenderPermisjonPeriodeFieldArray';
 import { PermisjonGraderingPanel } from './gradering/PermisjonGraderingPanel';
 import { PermisjonOppholdPanel } from './opphold/PermisjonOppholdPanel';
 import { PermisjonOverforingAvKvoterPanel } from './overforeKvote/PermisjonOverforingAvKvoterPanel';
@@ -119,35 +118,20 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
   );
 };
 
-PermisjonPanel.transformValues = (values: PermisjonFormValues) => {
+PermisjonPanel.transformValues = (
+  values: PermisjonFormValues,
+): { [TIDSROM_PERMISJON_FORM_NAME_PREFIX]?: TidsromPermisjonDto } => {
   const permisjonValues = notEmpty(values[TIDSROM_PERMISJON_FORM_NAME_PREFIX]);
-  const newValues = permisjonValues;
-  const permisjonsdata = permisjonValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME];
-  if (values.tidsromPermisjon?.fulltUttak && permisjonsdata) {
-    newValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME] = RenderPermisjonPeriodeFieldArray.transformValues(permisjonsdata);
-  }
-  const graderingdata = permisjonValues[GRADERING_PERIODE_FIELD_ARRAY_NAME];
-  if (values.tidsromPermisjon?.skalGradere && graderingdata) {
-    newValues[GRADERING_PERIODE_FIELD_ARRAY_NAME] = PermisjonGraderingPanel.transformValues(permisjonValues);
-  }
 
-  if (!values.tidsromPermisjon?.fulltUttak) {
-    newValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME] = undefined;
-  }
-  if (!values.tidsromPermisjon?.skalGradere) {
-    newValues[GRADERING_PERIODE_FIELD_ARRAY_NAME] = undefined;
-  }
-  if (!values.tidsromPermisjon?.skalUtsette) {
-    newValues[UTSETTELSE_PERIODE_FIELD_ARRAY_NAME] = undefined;
-  }
-  if (!values.tidsromPermisjon?.skalOvertaKvote) {
-    newValues[OVERFØRING_PERIODE_FIELD_ARRAY_NAME] = undefined;
-  }
-  if (!values.tidsromPermisjon?.skalHaOpphold) {
-    newValues[OPPHOLD_PERIODE_FIELD_ARRAY_NAME] = undefined;
-  }
-
-  return { [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: newValues };
+  return {
+    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
+      ...PermisjonFulltUttak.transformValues(permisjonValues),
+      ...PermisjonGraderingPanel.transformValues(permisjonValues),
+      ...PermisjonUtsettelsePanel.transformValues(permisjonValues),
+      ...PermisjonOverforingAvKvoterPanel.transformValues(permisjonValues),
+      ...PermisjonOppholdPanel.transformValues(permisjonValues),
+    },
+  };
 };
 
 PermisjonPanel.initialValues = (): PermisjonFormValues => ({

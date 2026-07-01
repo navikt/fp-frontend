@@ -4,11 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import type { AlleKodeverk, ForeldreType } from '@navikt/fp-types';
+import type { AlleKodeverk, ForeldreType, TidsromPermisjonDto } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FromValuesFulltUttak, PermisjonFormValues } from '../../types';
-import { RenderPermisjonPeriodeFieldArray } from './RenderPermisjonPeriodeFieldArray';
+import { PERIODS_WITH_NO_MORS_AKTIVITET, RenderPermisjonPeriodeFieldArray } from './RenderPermisjonPeriodeFieldArray';
 
 interface Props {
   foreldreType: ForeldreType;
@@ -46,3 +47,22 @@ PermisjonFulltUttak.initialValues = (): FromValuesFulltUttak => ({
   [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: [],
   fulltUttak: false,
 });
+
+PermisjonFulltUttak.transformValues = (
+  values: FromValuesFulltUttak,
+): Pick<TidsromPermisjonDto, 'permisjonsPerioder'> => {
+  if (!values.fulltUttak || !values.permisjonsPerioder) {
+    return { [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: undefined };
+  }
+  return {
+    [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: values.permisjonsPerioder.map(value => ({
+      periodeType: value.periodeType,
+      periodeFom: value.periodeFom,
+      periodeTom: value.periodeTom,
+      morsAktivitet: PERIODS_WITH_NO_MORS_AKTIVITET.has(notEmpty(value.periodeType)) ? undefined : value.morsAktivitet,
+      flerbarnsdager: value.flerbarnsdager ?? false,
+      harSamtidigUttak: value.harSamtidigUttak ?? false,
+      samtidigUttaksprosent: value.samtidigUttaksprosent,
+    })),
+  };
+};

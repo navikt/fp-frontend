@@ -11,7 +11,7 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import { type KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from '../../constants';
@@ -21,7 +21,7 @@ import { gyldigeUttakperioder } from '../fulltUttak/RenderPermisjonPeriodeFieldA
 const defaultUtsettelsePeriode: UtsettelsPeriode = {
   periodeFom: '',
   periodeTom: '',
-  arsakForUtsettelse: '',
+  arsakForUtsettelse: undefined,
 };
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`;

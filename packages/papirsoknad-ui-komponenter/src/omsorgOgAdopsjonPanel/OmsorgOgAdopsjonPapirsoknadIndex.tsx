@@ -14,7 +14,7 @@ interface Props {
   readOnly: boolean;
   familieHendelseType: FamilieHendelseType;
   isForeldrepengerFagsak?: boolean;
-  fodselsdato?: string | string[];
+  fodselsdato?: string;
 }
 
 export const OmsorgOgAdopsjonPapirsoknadIndex = ({

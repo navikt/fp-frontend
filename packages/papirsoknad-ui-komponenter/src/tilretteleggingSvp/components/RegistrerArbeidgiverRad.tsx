@@ -7,11 +7,7 @@ import { BodyShort, Box, Button, HStack, Table, VStack } from '@navikt/ds-react'
 import { RhfDatepicker, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasNoWhiteSpace, hasValidOrgNumberOrFodselsnr, required } from '@navikt/ft-form-validators';
 
-import {
-  BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME,
-  TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME,
-  TILRETTELEGGING_NAME_PREFIX,
-} from '../constants';
+import { TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME, TILRETTELEGGING_NAME_PREFIX } from '../constants';
 import type { FormValues } from '../types';
 import { BehovForTilretteleggingFieldArray } from './BehovForTilretteleggingFieldArray';
 
@@ -68,10 +64,7 @@ export const RegistrerArbeidsgiverRad = ({ open, readOnly = false, index, remove
               readOnly={readOnly}
             />
           </HStack>
-          <BehovForTilretteleggingFieldArray
-            name={`${FA_PREFIX}.${index}.${BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME}`}
-            readOnly={readOnly}
-          />
+          <BehovForTilretteleggingFieldArray name={`${FA_PREFIX}.${index}.tilrettelegginger`} readOnly={readOnly} />
         </VStack>
       </Table.DataCell>
       <Table.DataCell valign="top" align="right">

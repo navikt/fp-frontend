@@ -11,11 +11,11 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 
-import type { KodeverkMedNavn, OppholdÅrsakType } from '@navikt/fp-types';
+import type { KodeverkMedNavn, OppholdÅrsakType,OppholdDto } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
-import type { OppholdPeriode, PermisjonFormValues } from '../../types';
+import type { PermisjonFormValues } from '../../types';
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
@@ -28,10 +28,10 @@ const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues
   return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
-const defaultOppholdPeriode: OppholdPeriode = {
+const defaultOppholdPeriode: OppholdDto = {
   periodeFom: '',
   periodeTom: '',
-  årsak: '',
+  årsak: undefined as unknown as OppholdDto['årsak'],
 };
 
 const gyldigeÅrsaker = new Set<OppholdÅrsakType>([

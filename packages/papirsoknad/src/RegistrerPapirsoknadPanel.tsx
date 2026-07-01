@@ -5,60 +5,47 @@ import { Heading, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
-import type {
-  AlleKodeverk,
-  BehandlingFpSak,
-  Fagsak,
-  FagsakYtelseType,
-  FamilieHendelseType,
-  ForeldreType,
-} from '@navikt/fp-types';
+import type { AlleKodeverk, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
 
-import type { EngangsstønadValues } from './engangsstonad/components/EngangsstonadForm';
 import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapirsoknadIndex';
-import type { ForeldrepengerEndringssøknadValues } from './foreldrepenger/components/ForeldrepengerEndringssøknadForm';
-import type { ForeldrepengerValues } from './foreldrepenger/components/ForeldrepengerForm';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
+import type { PapirsøknadAp } from './PapirsøknadAp';
 import type { PapirsøknadMellomlagring } from './PapirsøknadMellomlagring';
 import { SoknadTypePickerForm } from './SoknadTypePickerForm';
-import type { SvangerskapsValues } from './svangerskapspenger/components/SvangerskapspengerForm';
 import { SvangerskapspengerPapirsoknadIndex } from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
 
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-type AllFormValues =
-  | EngangsstønadValues
-  | ForeldrepengerValues
-  | ForeldrepengerEndringssøknadValues
-  | SvangerskapsValues;
-
 interface Props {
   fagsak: Fagsak;
   kodeverk: AlleKodeverk;
   readOnly: boolean;
-  lagrePapirsøknad: (
-    fagsakYtelseType: FagsakYtelseType,
-    familieHendelseType: FamilieHendelseType,
-    foreldreType: ForeldreType,
-    formValues?: AllFormValues,
-  ) => Promise<BehandlingFpSak>;
-  erEndringssøknad: boolean;
+  lagrePapirsøknad: (transformedValues: PapirsøknadAp) => Promise<BehandlingFpSak>;
+  lagreUfullstendigPapirsøknad: (transformedValues: PapirsøknadAp) => Promise<BehandlingFpSak>;
+  aksjonspunktKode:
+    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
+    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
+    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER
+    | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER;
   mellomlagretData?: PapirsøknadMellomlagring;
   onMellomlagre?: (values: PapirsøknadMellomlagring) => void;
 }
 
 export const RegistrerPapirsoknadPanel = ({
   fagsak,
+  aksjonspunktKode,
   kodeverk,
   readOnly,
   lagrePapirsøknad,
-  erEndringssøknad,
+  lagreUfullstendigPapirsøknad,
   mellomlagretData,
   onMellomlagre,
 }: Props) => {
+  const erEndringssøknad = aksjonspunktKode === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER;
   const [soknadData, setSoknadData] = useState<SoknadData | undefined>(() => {
     if (!mellomlagretData) {
       return undefined;
@@ -70,23 +57,21 @@ export const RegistrerPapirsoknadPanel = ({
     );
   });
 
-  const lagreFullstendigSøknad = (
-    formValues: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
-  ) => {
+  const lagreFullstendigSøknad = (transformedValues: PapirsøknadAp) => {
     if (soknadData) {
-      void lagrePapirsøknad(
-        soknadData.fagsakYtelseType,
-        soknadData.familieHendelseType,
-        soknadData.foreldreType,
-        formValues,
-      );
+      void lagrePapirsøknad(transformedValues);
     }
     return Promise.resolve();
   };
 
   const lagreUfullstendigSøknadOgAvslutt = () => {
     if (soknadData) {
-      void lagrePapirsøknad(soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType);
+      void lagreUfullstendigPapirsøknad({
+        kode: aksjonspunktKode,
+        tema: soknadData.familieHendelseType,
+        søknadstype: soknadData.fagsakYtelseType,
+        søker: soknadData.foreldreType,
+      });
     }
     return Promise.resolve();
   };

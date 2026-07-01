@@ -12,8 +12,9 @@ import { TrueFalseInput } from '../felles/TrueFalseInput';
 import { BehovForTilretteleggingFieldArray } from './components/BehovForTilretteleggingFieldArray';
 import { TilretteleggingForArbeidsgiverFieldArray } from './components/TilretteleggingForArbeidsgiverFieldArray';
 import {
-  FRILANS_FIELD_ARRAY_NAME,
-  SELVSTENDIG_NARINGSDRIVENDE_FIELD_ARRAY_NAME,
+  BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME,
+  FRILANS_FIELD,
+  SELVSTENDIG_NARINGSDRIVENDE_FIELD,
   TILRETTELEGGING_NAME_PREFIX,
 } from './constants';
 import { transformTilretteleggingsArbeidsforhold } from './transformer';
@@ -72,14 +73,14 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
                     <FormattedMessage id="BehovForTilretteleggingPanel.TittelSN" />
                   </Heading>
                   <RhfDatepicker
-                    name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoSN`}
+                    name={`${TILRETTELEGGING_NAME_PREFIX}.${SELVSTENDIG_NARINGSDRIVENDE_FIELD}.behovsdato`}
                     control={control}
                     label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
                     validate={[required]}
                     readOnly={readOnly}
                   />
                   <BehovForTilretteleggingFieldArray
-                    name={`${TILRETTELEGGING_NAME_PREFIX}.${SELVSTENDIG_NARINGSDRIVENDE_FIELD_ARRAY_NAME}`}
+                    name={`${TILRETTELEGGING_NAME_PREFIX}.${SELVSTENDIG_NARINGSDRIVENDE_FIELD}.tilrettelegginger`}
                     readOnly={readOnly}
                   />
                 </VStack>
@@ -99,14 +100,14 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
                     <FormattedMessage id="BehovForTilretteleggingPanel.TittelFrilans" />
                   </Heading>
                   <RhfDatepicker
-                    name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoFrilans`}
+                    name={`${TILRETTELEGGING_NAME_PREFIX}.${FRILANS_FIELD}.behovsdato`}
                     control={control}
                     label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
                     validate={[required]}
                     readOnly={readOnly}
                   />
                   <BehovForTilretteleggingFieldArray
-                    name={`${TILRETTELEGGING_NAME_PREFIX}.${FRILANS_FIELD_ARRAY_NAME}`}
+                    name={`${TILRETTELEGGING_NAME_PREFIX}.${FRILANS_FIELD}.${BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME}`}
                     readOnly={readOnly}
                   />
                 </VStack>

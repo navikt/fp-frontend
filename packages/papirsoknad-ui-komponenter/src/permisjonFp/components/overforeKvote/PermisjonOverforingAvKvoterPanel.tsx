@@ -5,9 +5,15 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import type { AlleKodeverk, ForeldreType, KodeverkMedNavn, OverføringÅrsak } from '@navikt/fp-types';
+import type {
+  AlleKodeverk,
+  ForeldreType,
+  KodeverkMedNavn,
+  OverføringÅrsak,
+  TidsromPermisjonDto,
+} from '@navikt/fp-types';
 
-import { TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
+import { OVERFØRING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FormValuesOverforing, PermisjonFormValues } from '../../types';
 import { RenderOverforingAvKvoterFieldArray } from './RenderOverforingAvKvoterFieldArray';
 
@@ -82,4 +88,10 @@ export const PermisjonOverforingAvKvoterPanel = ({ foreldreType, alleKodeverk, r
 PermisjonOverforingAvKvoterPanel.initialValues = (): FormValuesOverforing => ({
   skalOvertaKvote: false,
   overføringsperioder: [],
+});
+
+PermisjonOverforingAvKvoterPanel.transformValues = (
+  values: FormValuesOverforing,
+): Pick<TidsromPermisjonDto, 'overføringsperioder'> => ({
+  [OVERFØRING_PERIODE_FIELD_ARRAY_NAME]: values.skalOvertaKvote ? values.overføringsperioder : undefined,
 });
