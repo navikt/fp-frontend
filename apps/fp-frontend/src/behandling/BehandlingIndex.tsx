@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { type NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -17,9 +17,12 @@ import { useBehandlingPollingOperasjoner } from '../data/polling/useBehandlingPo
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
 import { BehandlingDataProvider } from './felles/context/BehandlingDataContext';
-import { lazyWithRetry } from './lazyUtils';
+import { lazyNamedWithRetry } from './lazyUtils';
 
-const BehandlingPapirsoknadIndex = lazyWithRetry(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));
+const BehandlingPapirsoknadIndex = lazyNamedWithRetry<Record<never, never>, 'BehandlingPapirsoknadIndex'>(
+  () => import('./papirsoknad/BehandlingPapirsoknadIndex'),
+  'BehandlingPapirsoknadIndex',
+);
 
 interface Props {
   behandling?: Behandling;
@@ -82,11 +85,10 @@ const BehandlingIndexWrapper = ({
   const initFetchQuery = useQuery(initFetchOptions());
 
   const fagsak = fagsakData.getFagsak();
-  const rettigheter = getAccessRights(
-    notEmpty(initFetchQuery.data).innloggetBruker,
-    fagsak.status,
-    behandling.status,
-    behandling.type,
+  const innloggetBruker = notEmpty(initFetchQuery.data).innloggetBruker;
+  const rettigheter = useMemo(
+    () => getAccessRights(innloggetBruker, fagsak.status, behandling.status, behandling.type),
+    [innloggetBruker, fagsak.status, behandling.status, behandling.type],
   );
 
   const [skalOppdatereEtterBekreftelseAvAp, setSkalOppdatereEtterBekreftelseAvAp] = useState(true);
@@ -105,7 +107,10 @@ const BehandlingIndexWrapper = ({
 
   const navigate = useNavigate();
   const location = useLocation();
-  const oppdaterProsessStegOgFaktaPanelIUrl = getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate);
+  const oppdaterProsessStegOgFaktaPanelIUrl = useMemo(
+    () => getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate),
+    [location, navigate],
+  );
 
   if (kodeverk === undefined) {
     return <LoadingPanel />;

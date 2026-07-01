@@ -25,7 +25,7 @@ interface Props {
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
 }
 
-const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere }: Props) => {
+export const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere }: Props) => {
   const [faktaPanelMedÅpentApInfo, setFaktaPanelMedÅpentApInfo] = useState<FaktaPanelMedÅpentApInfo>();
   const emptyArbeidsgiverOpplysningerPerId = {};
 
@@ -55,7 +55,3 @@ const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere 
     </>
   );
 };
-
-// Default export grunna React.lazy
-// eslint-disable-next-line import-x/no-default-export
-export default EngangsstonadPaneler;

@@ -21,7 +21,7 @@ interface Props {
   valgtFaktaSteg?: string;
 }
 
-const TilbakekrevingPaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => {
+export const TilbakekrevingPaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => {
   const { behandling } = useBehandlingDataContext<BehandlingFpTilbake>();
 
   const api = useFagsakApi();
@@ -54,7 +54,3 @@ const TilbakekrevingPaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => {
     </>
   );
 };
-
-// Default export grunna React.lazy
-// eslint-disable-next-line import-x/no-default-export
-export default TilbakekrevingPaneler;
