@@ -55,9 +55,6 @@ export const BehandlingPanelerIndex = () => {
       {panelConfig && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            {/* Kallet til render() må duplisert per gren: TypeScript snevrar berre inn den
-                diskriminerte PanelConfig-unionen når `skalHenteArbeidsgivere` sjekkast rett før
-                render() blir kalla, ikkje viss render-props blir bygd i ein separat variabel. */}
             {panelConfig.skalHenteArbeidsgivere
               ? panelConfig.render({
                   valgtProsessSteg,

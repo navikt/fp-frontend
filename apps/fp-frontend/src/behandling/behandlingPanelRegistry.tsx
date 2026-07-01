@@ -6,7 +6,6 @@ import { lazyNamedWithRetry } from './lazyUtils';
 
 /**
  * Register som mappar (fagsakYtelseType, behandlingType) til rett paneloppsett for behandlinga.
- * Erstattar ei rekke if/else-blokker i {@link BehandlingPanelerIndex} med oppslag i éin tabell.
  */
 
 type ValgtStegProps = {

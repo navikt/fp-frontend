@@ -17,9 +17,12 @@ import { useBehandlingPollingOperasjoner } from '../data/polling/useBehandlingPo
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
 import { BehandlingDataProvider } from './felles/context/BehandlingDataContext';
-import { lazyWithRetry } from './lazyUtils';
+import { lazyNamedWithRetry } from './lazyUtils';
 
-const BehandlingPapirsoknadIndex = lazyWithRetry(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));
+const BehandlingPapirsoknadIndex = lazyNamedWithRetry<object, 'BehandlingPapirsoknadIndex'>(
+  () => import('./papirsoknad/BehandlingPapirsoknadIndex'),
+  'BehandlingPapirsoknadIndex',
+);
 
 interface Props {
   behandling?: Behandling;
