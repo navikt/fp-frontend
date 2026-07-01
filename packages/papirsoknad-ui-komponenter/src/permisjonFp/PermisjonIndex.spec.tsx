@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './PermisjonIndex.stories';
 
-const { SokerErMor } = composeStories(stories);
+const { SokerErMor, SokerErFar } = composeStories(stories);
 
 describe('PermisjonIndex', () => {
   it('skal velge fullt uttak', async () => {
@@ -48,21 +48,17 @@ describe('PermisjonIndex', () => {
 
     expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
-        fulltUttak: true,
         permisjonsPerioder: [
           {
             flerbarnsdager: false,
             harSamtidigUttak: true,
-            samtidigUttaksprosent: '100.00',
+            samtidigUttaksprosent: 100,
+            morsAktivitet: undefined,
             periodeFom: '2022-05-20',
             periodeTom: '2022-06-20',
             periodeType: 'MØDREKVOTE',
           },
         ],
-        skalGradere: false,
-        skalHaOpphold: false,
-        skalOvertaKvote: false,
-        skalUtsette: false,
         graderingPeriode: undefined,
         oppholdPerioder: undefined,
         overføringsperioder: undefined,
@@ -97,7 +93,6 @@ describe('PermisjonIndex', () => {
 
     expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
-        fulltUttak: false,
         overføringsperioder: [
           {
             overforingArsak: 'SYKDOM_ANNEN_FORELDER',
@@ -105,10 +100,6 @@ describe('PermisjonIndex', () => {
             periodeTom: '2022-06-20',
           },
         ],
-        skalGradere: false,
-        skalHaOpphold: false,
-        skalOvertaKvote: true,
-        skalUtsette: false,
         utsettelsePeriode: undefined,
         permisjonsPerioder: undefined,
         oppholdPerioder: undefined,
@@ -120,7 +111,7 @@ describe('PermisjonIndex', () => {
   it('skal velge utsettelse', async () => {
     const lagre = vi.fn();
 
-    await SokerErMor.run({
+    await SokerErFar.run({
       parameters: {
         submitCallback: lagre,
       },
@@ -133,7 +124,7 @@ describe('PermisjonIndex', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(4);
 
-    await userEvent.selectOptions(screen.getByLabelText('Hva skal utsettes'), 'MØDREKVOTE');
+    await userEvent.selectOptions(screen.getByLabelText('Hva skal utsettes'), 'FELLESPERIODE');
 
     const fomDatoInput = screen.getByLabelText('F.o.m.');
     await userEvent.type(fomDatoInput, '20.05.2022');
@@ -144,23 +135,17 @@ describe('PermisjonIndex', () => {
     fireEvent.blur(tomDatoInput);
 
     await userEvent.selectOptions(screen.getByLabelText('Årsak til utsettelse'), 'ARBEID');
-
-    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
-
-    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
-
-    await userEvent.selectOptions(screen.getByLabelText('Type arbeid'), 'true');
+    await userEvent.selectOptions(screen.getByLabelText('Mors aktivitet'), 'UTDANNING');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
-        fulltUttak: false,
         utsettelsePeriode: [
           {
             arsakForUtsettelse: 'ARBEID',
-            erArbeidstaker: 'true',
-            periodeForUtsettelse: 'MØDREKVOTE',
+            morsAktivitet: 'UTDANNING',
+            periodeForUtsettelse: 'FELLESPERIODE',
             periodeFom: '2022-05-20',
             periodeTom: '2022-06-20',
           },
@@ -169,10 +154,6 @@ describe('PermisjonIndex', () => {
         oppholdPerioder: undefined,
         overføringsperioder: undefined,
         permisjonsPerioder: undefined,
-        skalGradere: false,
-        skalHaOpphold: false,
-        skalOvertaKvote: false,
-        skalUtsette: true,
       },
     });
   });
@@ -222,7 +203,6 @@ describe('PermisjonIndex', () => {
 
     expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
-        fulltUttak: false,
         graderingPeriode: [
           {
             arbeidsgiverIdentifikator: '802323232',
@@ -235,18 +215,14 @@ describe('PermisjonIndex', () => {
             periodeFom: '2022-05-20',
             periodeForGradering: 'MØDREKVOTE',
             periodeTom: '2022-06-20',
-            prosentandelArbeid: '100.00',
-            samtidigUttaksprosent: '100',
+            prosentandelArbeid: 100,
+            samtidigUttaksprosent: 100,
             skalGraderes: false,
           },
         ],
         oppholdPerioder: undefined,
         overføringsperioder: undefined,
         permisjonsPerioder: undefined,
-        skalGradere: true,
-        skalHaOpphold: false,
-        skalOvertaKvote: false,
-        skalUtsette: false,
         utsettelsePeriode: undefined,
       },
     });
@@ -302,7 +278,6 @@ describe('PermisjonIndex', () => {
 
     expect(lagre).toHaveBeenCalledExactlyOnceWith({
       tidsromPermisjon: {
-        fulltUttak: true,
         oppholdPerioder: [
           {
             periodeFom: '2022-05-20',
@@ -310,10 +285,6 @@ describe('PermisjonIndex', () => {
             årsak: 'UTTAK_FORELDREPENGER_ANNEN_FORELDER',
           },
         ],
-        skalGradere: false,
-        skalHaOpphold: true,
-        skalOvertaKvote: false,
-        skalUtsette: false,
         permisjonsPerioder: [
           {
             flerbarnsdager: false,
@@ -367,7 +338,6 @@ describe('PermisjonIndex', () => {
     fireEvent.blur(tomUtsettelseInput);
 
     await userEvent.selectOptions(screen.getByLabelText('Årsak til utsettelse'), 'ARBEID');
-    await userEvent.selectOptions(screen.getByLabelText('Type arbeid'), 'true');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 

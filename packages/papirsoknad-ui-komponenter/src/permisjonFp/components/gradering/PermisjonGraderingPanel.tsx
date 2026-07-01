@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, TidsromPermisjonDto } from '@navikt/fp-types';
 
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FormValuesGradering } from '../../types';
@@ -22,9 +22,6 @@ interface Props {
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent
  */
 export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
-  const graderingKvoter = alleKodeverk['UttakPeriodeType'];
-  const arbeidskategoriTyper = alleKodeverk['Arbeidskategori'];
-
   const { watch, control } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValuesGradering }>();
   const skalGradere = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
 
@@ -39,33 +36,30 @@ export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
         readOnly={readOnly}
         label={<FormattedMessage id="Registrering.Permisjon.Gradering.GraderUttaket" />}
       />
-      {skalGradere && (
-        <RenderGraderingPeriodeFieldArray
-          graderingKvoter={graderingKvoter}
-          arbeidskategoriTyper={arbeidskategoriTyper}
-          readOnly={readOnly}
-        />
-      )}
+      {skalGradere && <RenderGraderingPeriodeFieldArray alleKodeverk={alleKodeverk} readOnly={readOnly} />}
     </VStack>
   );
 };
 
-PermisjonGraderingPanel.transformValues = (formValues: FormValuesGradering) => {
-  const perioder = formValues[GRADERING_PERIODE_FIELD_ARRAY_NAME];
-  if (!perioder) {
-    return [];
+PermisjonGraderingPanel.transformValues = (
+  formValues: FormValuesGradering,
+): Pick<TidsromPermisjonDto, 'graderingPeriode'> => {
+  if (!formValues.skalGradere || !formValues.graderingPeriode) {
+    return { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: undefined };
   }
-  return perioder.map(periode => {
-    if (periode.arbeidskategoriType) {
+
+  return {
+    [GRADERING_PERIODE_FIELD_ARRAY_NAME]: formValues.graderingPeriode.map(periode => {
       return {
         ...periode,
-        erArbeidstaker: periode.arbeidskategoriType === 'ARBEIDSTAKER',
-        erFrilanser: periode.arbeidskategoriType === 'FRILANSER',
-        erSelvstNæringsdrivende: periode.arbeidskategoriType === 'SELVSTENDIG_NÆRINGSDRIVENDE',
+        erArbeidstaker: periode.arbeidskategoriType ? periode.arbeidskategoriType === 'ARBEIDSTAKER' : undefined,
+        erFrilanser: periode.arbeidskategoriType ? periode.arbeidskategoriType === 'FRILANSER' : undefined,
+        erSelvstNæringsdrivende: periode.arbeidskategoriType
+          ? periode.arbeidskategoriType === 'SELVSTENDIG_NÆRINGSDRIVENDE'
+          : undefined,
       };
-    }
-    return periode;
-  });
+    }),
+  };
 };
 
 PermisjonGraderingPanel.initialValues = (): FormValuesGradering => ({

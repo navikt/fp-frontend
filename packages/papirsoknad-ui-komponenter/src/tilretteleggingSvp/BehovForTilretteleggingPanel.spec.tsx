@@ -127,7 +127,7 @@ describe('BehovForTilretteleggingPanel', () => {
           tilrettelegginger: [
             {
               dato: '2024-03-03',
-              stillingsprosent: '100',
+              stillingsprosent: 100,
               tilretteleggingType: 'INGEN_TILRETTELEGGING',
             },
           ],
@@ -138,7 +138,7 @@ describe('BehovForTilretteleggingPanel', () => {
           tilrettelegginger: [
             {
               dato: '2024-02-02',
-              stillingsprosent: '90',
+              stillingsprosent: 90,
               tilretteleggingType: 'DELVIS_TILRETTELEGGING',
             },
           ],
@@ -149,7 +149,7 @@ describe('BehovForTilretteleggingPanel', () => {
           tilrettelegginger: [
             {
               dato: '2024-01-01',
-              stillingsprosent: '80',
+              stillingsprosent: 80,
               tilretteleggingType: 'HEL_TILRETTELEGGING',
             },
           ],

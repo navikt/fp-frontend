@@ -68,7 +68,7 @@ FrilansPanel.initialValues = (): FrilansFormValues => ({
   },
 });
 
-FrilansPanel.transformValues = ({ frilans }: FrilansFormValues): FrilansFormValues => ({
+FrilansPanel.transformValues = ({ frilans }: FrilansFormValues) => ({
   [FRILANS_NAME_PREFIX]:
     frilans.harSøkerPeriodeMedFrilans === false
       ? {

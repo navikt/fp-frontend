@@ -59,7 +59,7 @@ export const SoknadTypePickerForm = ({
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => {
+      onSubmit={values => {
         setSoknadData(new SoknadData(values.fagsakYtelseType, values.familieHendelseType, values.foreldreType));
         formMethods.reset(values);
       }}

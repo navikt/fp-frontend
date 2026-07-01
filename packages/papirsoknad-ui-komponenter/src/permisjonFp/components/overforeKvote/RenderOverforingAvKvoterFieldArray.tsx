@@ -1,40 +1,31 @@
 import { type ReactElement, useEffect } from 'react';
-import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useFieldArray, useFormContext } from 'react-hook-form';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { RhfDatepicker, RhfFieldArray, RhfSelect } from '@navikt/ft-form-hooks';
-import {
-  dateAfterOrEqual,
-  dateBeforeOrEqual,
-  dateRangesNotOverlapping,
-  hasValidDate,
-  required,
-} from '@navikt/ft-form-validators';
+import { hasValidDate, required } from '@navikt/ft-form-validators';
+
+import type { AlleKodeverk, KodeverkMedNavn, OverføringÅrsak, OverføringsperiodeDto } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { OVERFØRING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
-import type { OverforingPeriode, PermisjonFormValues } from '../../types';
+import type { PermisjonFormValues } from '../../types';
+import { getOverlappingValidator, getValiderFørEllerEtter } from '../permisjonValidering';
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFØRING_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 
-const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
-  const perioder = getValues(FA_PREFIX) ?? [];
-  const periodeMap = perioder
-    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-};
-
-const defaultOverforingPeriode: OverforingPeriode = {
+const defaultOverforingPeriode: OverføringsperiodeDto = {
   periodeFom: '',
   periodeTom: '',
-  overforingArsak: '-',
+  overforingArsak: undefined as unknown as OverføringsperiodeDto['overforingArsak'],
 };
 
 interface Props {
-  selectValues: ReactElement[];
   readOnly: boolean;
+  søkerErMor: boolean;
+  alleKodeverk: AlleKodeverk;
+  erEndringssøknad: boolean;
 }
 
 /**
@@ -42,8 +33,9 @@ interface Props {
  *
  * Viser inputfelter for dato for bestemmelse av overføring.
  */
-export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: Props) => {
+export const RenderOverforingAvKvoterFieldArray = ({ søkerErMor, alleKodeverk, readOnly, erEndringssøknad }: Props) => {
   const intl = useIntl();
+  const overføringÅrsaker = alleKodeverk['OverføringÅrsak'];
 
   const {
     control,
@@ -75,16 +67,14 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
     >
       {(field, index) => (
         <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
-          <div>
-            <RhfSelect
-              name={`${getPrefix(index)}.overforingArsak`}
-              control={control}
-              label={intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.AngiArsak' })}
-              selectValues={selectValues}
-              validate={[required]}
-              readOnly={readOnly}
-            />
-          </div>
+          <RhfSelect
+            name={`${getPrefix(index)}.overforingArsak`}
+            control={control}
+            label={intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.AngiArsak' })}
+            selectValues={mapOverføringÅrsaker(overføringÅrsaker, søkerErMor, erEndringssøknad, intl)}
+            validate={[required]}
+            readOnly={readOnly}
+          />
 
           <RhfDatepicker
             name={`${getPrefix(index)}.periodeFom`}
@@ -93,12 +83,8 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
             validate={[
               required,
               hasValidDate,
-              () => {
-                const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-                const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-                return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-              },
-              getOverlappingValidator(getValues),
+              getValiderFørEllerEtter(getValues, getPrefix(index), 'periodeFom'),
+              getOverlappingValidator(getValues, FA_PREFIX),
             ]}
             label={<FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.fomDato" />}
             onChange={() => (isSubmitted ? trigger() : undefined)}
@@ -111,12 +97,8 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
             validate={[
               required,
               hasValidDate,
-              () => {
-                const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-                const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-                return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-              },
-              getOverlappingValidator(getValues),
+              getValiderFørEllerEtter(getValues, getPrefix(index), 'periodeTom'),
+              getOverlappingValidator(getValues, FA_PREFIX),
             ]}
             label={<FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.tomDato" />}
             onChange={() => (isSubmitted ? trigger() : undefined)}
@@ -126,3 +108,33 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
     </RhfFieldArray>
   );
 };
+
+const getText = (intl: IntlShape, kode: OverføringÅrsak, navn: string): string => {
+  if (kode === 'INSTITUSJONSOPPHOLD_ANNEN_FORELDER') {
+    return intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.MorErInnlagt' });
+  }
+  if (kode === 'SYKDOM_ANNEN_FORELDER') {
+    return intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.MorErSyk' });
+  }
+  return navn;
+};
+
+const mapOverføringÅrsaker = (
+  arsaker: KodeverkMedNavn<'OverføringÅrsak'>[],
+  søkerErMor: boolean,
+  erEndringssøknad: boolean,
+  intl: IntlShape,
+): ReactElement[] =>
+  arsaker
+    .filter(({ kode }) => erEndringssøknad || (kode !== 'ALENEOMSORG' && kode !== 'IKKE_RETT_ANNEN_FORELDER'))
+    .map(({ kode, navn }) =>
+      søkerErMor ? (
+        <option value={kode} key={kode}>
+          {navn}
+        </option>
+      ) : (
+        <option value={kode} key={kode}>
+          {getText(intl, kode, navn)}
+        </option>
+      ),
+    );

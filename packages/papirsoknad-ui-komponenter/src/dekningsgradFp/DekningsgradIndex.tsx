@@ -6,12 +6,15 @@ import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
+import type { DekningsgradDto } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
+
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
 type FormValues = {
-  dekningsgrad?: string;
+  dekningsgrad?: DekningsgradDto;
 };
 
 interface Props {
@@ -38,10 +41,10 @@ export const DekningsgradIndex = ({ readOnly }: Props) => {
           readOnly={readOnly}
         >
           <HStack gap="space-16">
-            <Radio value="80_PROSENT" size="small">
+            <Radio value={'80_PROSENT' satisfies DekningsgradDto} size="small">
               {intl.formatMessage({ id: 'Registrering.Dekningsgrad.prosent.80' })}
             </Radio>
-            <Radio value="100_PROSENT" size="small">
+            <Radio value={'100_PROSENT' satisfies DekningsgradDto} size="small">
               {intl.formatMessage({ id: 'Registrering.Dekningsgrad.prosent.100' })}
             </Radio>
           </HStack>
@@ -52,4 +55,4 @@ export const DekningsgradIndex = ({ readOnly }: Props) => {
 };
 
 DekningsgradIndex.initialValues = (): FormValues => ({ dekningsgrad: undefined });
-DekningsgradIndex.transformValues = ({ dekningsgrad }: FormValues) => ({ dekningsgrad });
+DekningsgradIndex.transformValues = ({ dekningsgrad }: FormValues) => ({ dekningsgrad: notEmpty(dekningsgrad) });

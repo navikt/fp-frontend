@@ -15,21 +15,11 @@ import {
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { removeSpacesFromNumber } from '@navikt/ft-utils';
 
-import type { FamilieHendelseType } from '@navikt/fp-types';
+import type { FamilieHendelseType, OmsorgDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 const OMSORG_NAME_PREFIX = 'omsorg';
 const MAX_ANTALL_BARN = 10;
-
-const minValue1 = minValue(1);
-const maxValue10 = maxValue(10);
-
-const getValideringMotAnnenFødselsdato = (index: number, fødselsdato: string | undefined) => (fDato?: string) => {
-  if (index === 0 && fødselsdato && fDato) {
-    return isDatesEqual(fDato, fødselsdato);
-  }
-  return undefined;
-};
 
 type OmsorgOgAdopsjonFormValues = {
   [OMSORG_NAME_PREFIX]: {
@@ -130,7 +120,7 @@ export const OmsorgOgAdopsjonPanel = ({
           readOnly={readOnly}
           htmlSize={8}
           parse={value => removeSpacesFromNumber(value)}
-          validate={[...(erAdopsjon ? [required] : []), hasValidInteger, minValue1, maxValue10]}
+          validate={[...(erAdopsjon ? [required] : []), hasValidInteger, minValue(1), maxValue(10)]}
           onChange={oppdaterAntallBarn}
         />
 
@@ -154,9 +144,18 @@ export const OmsorgOgAdopsjonPanel = ({
   );
 };
 
+const getValideringMotAnnenFødselsdato = (index: number, fødselsdato: string | undefined) => (fDato?: string) => {
+  if (index === 0 && fødselsdato && fDato) {
+    return isDatesEqual(fDato, fødselsdato);
+  }
+  return undefined;
+};
+
 OmsorgOgAdopsjonPanel.initialValues = (): OmsorgOgAdopsjonFormValues => ({ [OMSORG_NAME_PREFIX]: {} });
 
-OmsorgOgAdopsjonPanel.transformValues = ({ omsorg }: OmsorgOgAdopsjonFormValues) => ({
+OmsorgOgAdopsjonPanel.transformValues = ({
+  omsorg,
+}: OmsorgOgAdopsjonFormValues): { [OMSORG_NAME_PREFIX]: OmsorgDto } => ({
   [OMSORG_NAME_PREFIX]: {
     ...omsorg,
     fødselsdato:
