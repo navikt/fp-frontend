@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Box, Heading, Select, Tabs, VStack } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 import { type Location } from 'history';
 
-import { getLocationWithQueryParams, parseQueryString, useTrackRouteParam } from '@navikt/fp-app-felles';
+import { getLocationWithQueryParams, parseQueryString } from '@navikt/fp-app-felles';
 import { type AvdelingDto, type InitLinksDto } from '@navikt/fp-types';
 
 import { EndreSakslisterPanel } from '../behandlingskoer/EndreSakslisterPanel';
@@ -33,10 +33,8 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
   const navigate = useNavigate();
   const [valgtAvdelingEnhet, setValgtAvdelingEnhet] = useState<string>();
 
-  const { selected: activeAvdelingslederPanelTemp, location } = useTrackRouteParam<string>({
-    paramName: 'fane',
-    isQueryParam: true,
-  });
+  const location = useLocation();
+  const activeAvdelingslederPanelTemp = parseQueryString(location.search)['fane'];
 
   const alleKodeverkQuery = useQuery(losKodeverkOptions());
 

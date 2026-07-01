@@ -1,12 +1,12 @@
 import { Suspense, useEffect, useState } from 'react';
-import { type NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
+import { type NavigateFunction, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { replaceNorwegianCharacters } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 import type { Location } from 'history';
 
-import { ErrorBoundary, useRestApiErrorDispatcher, useTrackRouteParam } from '@navikt/fp-app-felles';
+import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import type { Behandling } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -41,9 +41,8 @@ export const BehandlingIndex = ({
   fagsakData,
   setBehandlingUuidFraUrl,
 }: Props) => {
-  const { selected: behandlingUuid } = useTrackRouteParam<string>({
-    paramName: 'behandlingUuid',
-  });
+  const params = useParams<{ behandlingUuid: string }>();
+  const behandlingUuid = params['behandlingUuid']!;
 
   useEffect(() => {
     setBehandlingUuidFraUrl(behandlingUuid);
