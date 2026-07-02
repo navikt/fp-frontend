@@ -120,17 +120,11 @@ const useLagrePapirsøknad = (
     return oppdatertBehandling;
   };
   const lagreUfullstendigPapirsøknad = async (transformedAksjonpunktData: PapirsøknadAp) => {
-    const dataTilLagring = {
-      kode: transformedAksjonpunktData.kode,
-      tema: transformedAksjonpunktData.tema,
-      søknadstype: transformedAksjonpunktData.søknadstype,
-      søker: transformedAksjonpunktData.søker,
-    };
     const oppdatertBehandling = await lagreAksjonspunkter({
       saksnummer: fagsak.saksnummer,
       behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
-      bekreftedeAksjonspunktDtoer: [dataTilLagring],
+      bekreftedeAksjonspunktDtoer: [transformedAksjonpunktData],
     });
     globalThis.scrollTo(0, 0);
 

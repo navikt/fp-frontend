@@ -71,6 +71,7 @@ export const RegistrerPapirsoknadPanel = ({
         tema: soknadData.familieHendelseType,
         søknadstype: soknadData.fagsakYtelseType,
         søker: soknadData.foreldreType,
+        ufullstendigSøknad: true,
       });
     }
     return Promise.resolve();

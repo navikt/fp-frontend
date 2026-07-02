@@ -26,7 +26,7 @@ export type GraderingPeriode = Omit<GraderingDto, 'erArbeidstaker' | 'erFrilanse
 };
 
 export type UtsettelsPeriode = UtsettelseDto & {
-  // TODO: erArbeidstaker hører nok ikke hjemme i dtoen. Tror dette skal være morsAktivitet
+  // TODO(siri): erArbeidstaker hører nok ikke hjemme i dtoen. Tror dette skal være morsAktivitet
   erArbeidstaker?: string;
 };
 

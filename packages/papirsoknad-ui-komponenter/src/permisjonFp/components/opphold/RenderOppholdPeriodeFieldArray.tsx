@@ -11,7 +11,7 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 
-import type { KodeverkMedNavn, OppholdÅrsakType,OppholdDto } from '@navikt/fp-types';
+import type { KodeverkMedNavn, OppholdÅrsakType, OppholdDto } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
