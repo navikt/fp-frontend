@@ -78,6 +78,7 @@ export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, rem
 VirksomhetRad.initialValues = (): RegistrerVirksomhetFormValues => ({
   varigEndretEllerStartetSisteFireArArsak: [],
   typeVirksomhet: [],
+  navn: '',
 });
 
 VirksomhetRad.transformValues = (values: RegistrerVirksomhetFormValues) => ({

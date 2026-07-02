@@ -31,19 +31,13 @@ describe('permisjonOverlappValidering', () => {
     });
 
     it('skal returnere true når perioder i ulike grupper overlappar i tid', () => {
-      const grupper = [
-        [['2022-05-20', '2022-06-20']],
-        [['2022-06-10', '2022-07-10']],
-      ];
+      const grupper = [[['2022-05-20', '2022-06-20']], [['2022-06-10', '2022-07-10']]];
 
       expect(harOverlappMellomPeriodetypar(grupper)).toBe(true);
     });
 
     it('skal returnere false når perioder i ulike grupper ikkje overlappar i tid', () => {
-      const grupper = [
-        [['2022-05-20', '2022-06-20']],
-        [['2022-06-21', '2022-07-21']],
-      ];
+      const grupper = [[['2022-05-20', '2022-06-20']], [['2022-06-21', '2022-07-21']]];
 
       expect(harOverlappMellomPeriodetypar(grupper)).toBe(false);
     });

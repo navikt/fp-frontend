@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading, VStack } from '@navikt/ds-react';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, UtenlandsoppholdDto } from '@navikt/fp-types';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { type FormValues as FormValuesFieldArray, UtenlandsOppholdField } from './UtenlandsOppholdField';
@@ -21,8 +21,8 @@ type TranformFormValues = {
   oppholdINorge?: boolean;
   harTidligereOppholdUtenlands?: boolean;
   harFremtidigeOppholdUtenlands?: boolean;
-  tidligereOppholdUtenlands?: FormValuesFieldArray[];
-  fremtidigeOppholdUtenlands?: FormValuesFieldArray[];
+  tidligereOppholdUtenlands?: UtenlandsoppholdDto[];
+  fremtidigeOppholdUtenlands?: UtenlandsoppholdDto[];
 };
 
 interface Props {
@@ -41,7 +41,7 @@ interface Props {
  */
 export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato, erAdopsjon }: Props) => {
   const { formatMessage } = useIntl();
-  const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk['Landkoder'].toSorted((a, b) => a.navn.localeCompare(b.navn));
 
   const { watch, control } = useFormContext<OppholdINorgeFormValues>();
   const skalViseTidligereOppholdInput = !watch('oppholdSisteTolvINorge', true);
@@ -105,8 +105,8 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
 };
 
 OppholdINorgePanel.initialValues = (): OppholdINorgeFormValues => ({
-  tidligereOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],
-  fremtidigeOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],
+  tidligereOppholdUtenlands: [{ periodeFom: '', periodeTom: '', land: '-' }],
+  fremtidigeOppholdUtenlands: [{ periodeFom: '', periodeTom: '', land: '-' }],
 });
 
 OppholdINorgePanel.transformValues = ({

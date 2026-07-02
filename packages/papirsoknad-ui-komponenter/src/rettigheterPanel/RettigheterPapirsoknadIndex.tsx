@@ -2,8 +2,11 @@ import { useFormContext } from 'react-hook-form';
 
 import { Heading, Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
+
+import type { RettigheterDto } from '@navikt/fp-types';
 
 import { SoknadData } from '../felles/SoknadData';
 
@@ -15,44 +18,33 @@ interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
 }
-
-const rettighet = {
-  ANNEN_FORELDER_DOED: 'ANNEN_FORELDER_DOED',
-  OVERTA_FORELDREANSVARET_ALENE: 'OVERTA_FORELDREANSVARET_ALENE',
-  MANN_ADOPTERER_ALENE: 'MANN_ADOPTERER_ALENE',
-  IKKE_RELEVANT: 'IKKE_RELEVANT',
-};
-
+type RettigheterOptions = RettigheterDto | 'IKKE_RELEVANT';
 type RettigheterFormValues = {
-  rettigheter?: string;
+  rettigheter?: RettigheterOptions;
 };
 
-const baseOptions = [
+const baseOptions: { label: string; value: RettigheterOptions }[] = [
   {
     label: intl.formatMessage({ id: 'Registrering.Rettigheter.AnnenForelderDoed' }),
-    value: rettighet.ANNEN_FORELDER_DOED,
+    value: 'ANNEN_FORELDER_DOED',
   },
   {
     label: intl.formatMessage({ id: 'Registrering.Rettigheter.OvertaForeldreansvaretAlene' }),
-    value: rettighet.OVERTA_FORELDREANSVARET_ALENE,
+    value: 'OVERTA_FORELDREANSVARET_ALENE',
   },
   {
     label: intl.formatMessage({ id: 'Registrering.Rettigheter.MannAdoptererAlene' }),
-    value: rettighet.MANN_ADOPTERER_ALENE,
+    value: 'MANN_ADOPTERER_ALENE',
   },
   {
     label: intl.formatMessage({ id: 'Registrering.Rettigheter.IkkeRelevant' }),
-    value: rettighet.IKKE_RELEVANT,
+    value: 'IKKE_RELEVANT',
   },
 ];
 
 export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => {
   const visMannAdoptererAlene =
     soknadData.getFamilieHendelseType() !== 'FODSL' && soknadData.getForeldreType() === 'FAR';
-
-  const options = visMannAdoptererAlene
-    ? baseOptions
-    : baseOptions.filter(option => option.value !== rettighet.MANN_ADOPTERER_ALENE);
 
   const { control } = useFormContext<RettigheterFormValues>();
 
@@ -62,12 +54,21 @@ export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => 
         <Heading size="small" level="3">
           {intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}
         </Heading>
-        <RhfRadioGroup name="rettigheter" control={control} legend="" hideLegend readOnly={readOnly}>
-          {options.map(o => (
-            <Radio key={o.value} value={o.value} size="small">
-              {o.label}
-            </Radio>
-          ))}
+        <RhfRadioGroup
+          name="rettigheter"
+          control={control}
+          legend=""
+          hideLegend
+          readOnly={readOnly}
+          validate={[required]}
+        >
+          {baseOptions
+            .filter(option => option.value !== 'MANN_ADOPTERER_ALENE' || visMannAdoptererAlene)
+            .map(o => (
+              <Radio key={o.value} value={o.value} size="small">
+                {o.label}
+              </Radio>
+            ))}
         </RhfRadioGroup>
       </VStack>
     </BorderBox>
@@ -78,5 +79,6 @@ RettigheterPapirsoknadIndex.initialValues = (): RettigheterFormValues => ({
   rettigheter: undefined,
 });
 
-RettigheterPapirsoknadIndex.transformValues = ({ rettigheter }: RettigheterFormValues) =>
-  rettigheter === rettighet.IKKE_RELEVANT ? {} : { rettigheter };
+RettigheterPapirsoknadIndex.transformValues = ({ rettigheter }: RettigheterFormValues) => ({
+  rettigheter: rettigheter === 'IKKE_RELEVANT' ? undefined : rettigheter,
+});

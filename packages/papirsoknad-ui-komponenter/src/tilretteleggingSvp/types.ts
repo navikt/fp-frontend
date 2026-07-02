@@ -1,15 +1,16 @@
+import type { SvpTilretteleggingType } from '@navikt/fp-types';
+
 import {
-  BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME,
-  FRILANS_FIELD_ARRAY_NAME,
-  SELVSTENDIG_NARINGSDRIVENDE_FIELD_ARRAY_NAME,
+  FRILANS_FIELD,
+  SELVSTENDIG_NARINGSDRIVENDE_FIELD,
   TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME,
   TILRETTELEGGING_NAME_PREFIX,
 } from './constants';
 
 export type Tilrettelegging = {
-  tilretteleggingType: string;
+  tilretteleggingType: SvpTilretteleggingType;
   dato: string;
-  stillingsprosent?: string;
+  stillingsprosent?: number;
 };
 
 type VirtuellFeilType = {
@@ -22,20 +23,17 @@ export type FormValues = {
     [TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME]?: {
       behovsdato?: string;
       organisasjonsnummer?: string;
-      [BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME]?: Tilrettelegging[];
+      tilrettelegginger: Tilrettelegging[];
     }[];
     sokForFrilans?: boolean;
-    behovsdatoFrilans?: string;
-    [FRILANS_FIELD_ARRAY_NAME]?: Tilrettelegging[];
+    [FRILANS_FIELD]?: {
+      behovsdato?: string;
+      tilrettelegginger: Tilrettelegging[];
+    };
     sokForSelvstendigNaringsdrivende?: boolean;
-    behovsdatoSN?: string;
-    [SELVSTENDIG_NARINGSDRIVENDE_FIELD_ARRAY_NAME]?: Tilrettelegging[];
+    [SELVSTENDIG_NARINGSDRIVENDE_FIELD]?: {
+      behovsdato?: string;
+      tilrettelegginger: Tilrettelegging[];
+    };
   } & VirtuellFeilType;
-};
-
-export type TilretteleggingArbeidsforhold = {
-  '@type': string;
-  behovsdato?: string;
-  organisasjonsnummer?: string;
-  tilrettelegginger?: Tilrettelegging[];
 };

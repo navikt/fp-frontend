@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { HGrid } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   BekreftelsePanel,
   LagreSoknadPapirsoknadIndex,
@@ -11,6 +12,8 @@ import {
   SoknadData,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
+
+import type { AksjonspunktTilBekreftelse } from '../../PapirsøknadAp';
 
 const buildInitialValues = () => ({
   ...MottattDatoPapirsoknadIndex.initialValues(),
@@ -21,8 +24,23 @@ const buildInitialValues = () => ({
 
 type FormValues = ReturnType<typeof buildInitialValues>;
 
-const transformValues = (formValues: FormValues) => {
+const transformValues = (
+  soknadData: SoknadData,
+  formValues: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER> => {
+  if (formValues.ufullstendigSøknad) {
+    return {
+      kode: AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
+      tema: soknadData.familieHendelseType,
+      søknadstype: soknadData.fagsakYtelseType,
+      søker: soknadData.foreldreType,
+    };
+  }
   return {
+    kode: AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
+    tema: soknadData.familieHendelseType,
+    søknadstype: soknadData.fagsakYtelseType,
+    søker: soknadData.foreldreType,
     ...MottattDatoPapirsoknadIndex.transformValues(formValues),
     ...PermisjonIndex.transformValues(formValues),
     ...BekreftelsePanel.tranformValues(formValues),
@@ -61,7 +79,7 @@ export const ForeldrepengerEndringssøknadForm = ({
   });
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
+    <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(soknadData, values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="space-16">
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
         <BekreftelsePanel annenForelderInformertRequired readOnly={readOnly} />

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, HStack, Radio, VStack } from '@navikt/ds-react';
@@ -15,17 +15,21 @@ import {
 } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
-import type { FamilieHendelseType } from '@navikt/fp-types';
+import type { FamilieHendelseType, OmsorgDto } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { OMSORG_NAME_PREFIX } from '../constant';
-import type { OmsorgOgAdopsjonFormValues, TransformedFormValue } from './types';
 
-import styles from './omsorgOgAdopsjonPanel.module.css';
+type OmsorgOgAdopsjonFormValues = {
+  [OMSORG_NAME_PREFIX]: {
+    erEktefellesBarn?: boolean;
+    omsorgsovertakelsesdato?: string;
+    antallBarn?: number;
+    fødselsdato?: { dato?: string }[];
+  };
+};
 
 const MAX_ANTALL_BARN = 10;
-
-const validateMinAntall = (value: number) => (value ? minValue(1)(value) : undefined);
-const validateMaxAntall = (value: number) => (value ? maxValue(10)(value) : undefined);
 
 const getValideringMotAnnenFødselsdato = (index: number, fødselsdato?: string | string[]) => (fDato?: string) => {
   const fødselsdatoList = [fødselsdato].flat().filter(f => f !== undefined);
@@ -55,38 +59,40 @@ export const OmsorgOgAdopsjonPanel = ({
   isForeldrepengerFagsak,
   fodselsdatoer,
 }: Props) => {
+  const erAdopsjon = familieHendelseType === 'ADPSJN';
   const { formatMessage } = useIntl();
 
-  const { control, watch } = useFormContext<OmsorgOgAdopsjonFormValues>();
+  const { control } = useFormContext<OmsorgOgAdopsjonFormValues>();
   const { fields, remove, append } = useFieldArray({
     control,
     name: `${OMSORG_NAME_PREFIX}.fødselsdato`,
   });
 
-  const antallBarn = watch(`${OMSORG_NAME_PREFIX}.antallBarn`) ?? 0;
+  const antallBarn = useWatch({ control, name: `${OMSORG_NAME_PREFIX}.antallBarn` });
 
   useEffect(() => {
-    if (fields.length > Math.max(antallBarn, 0)) {
-      for (let i = fields.length; i > antallBarn; i -= 1) {
-        remove(i - 1);
-      }
-    } else if (fields.length < Math.min(antallBarn, MAX_ANTALL_BARN)) {
-      for (let i = fields.length; i < antallBarn; i += 1) {
-        append({ id: i, dato: undefined });
-      }
+    if (antallBarn === undefined || antallBarn <= 0) {
+      return undefined;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- synkroniser rader berre ved endra antallBarn; append/remove stabile, fields.length les med vilje
-  }, [antallBarn]);
+    const ønsketAntall = Math.min(Math.max(antallBarn, 0), MAX_ANTALL_BARN);
+    if (fields.length > ønsketAntall) {
+      remove(Array.from({ length: fields.length - ønsketAntall }, (_, i) => ønsketAntall + i));
+    } else if (fields.length < ønsketAntall) {
+      append(Array.from({ length: ønsketAntall - fields.length }, () => ({ dato: undefined })));
+    }
+  }, [antallBarn, append, remove, fields]);
 
   return (
     <BorderBox>
       <VStack gap="space-16">
         <Heading size="small" level="3">
-          <FormattedMessage
-            id={familieHendelseType === 'ADPSJN' ? 'Registrering.Adopsjon.Title' : 'Registrering.Adopsjon.OmsorgTitle'}
-          />
+          {erAdopsjon ? (
+            <FormattedMessage id="Registrering.Adopsjon.Title" />
+          ) : (
+            <FormattedMessage id="Registrering.Adopsjon.OmsorgTitle" />
+          )}
         </Heading>
-        {isForeldrepengerFagsak && familieHendelseType === 'ADPSJN' && (
+        {isForeldrepengerFagsak && erAdopsjon && (
           <RhfRadioGroup
             name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
             control={control}
@@ -107,14 +113,13 @@ export const OmsorgOgAdopsjonPanel = ({
         <RhfDatepicker
           name={`${OMSORG_NAME_PREFIX}.omsorgsovertakelsesdato`}
           control={control}
-          label={formatMessage({
-            id:
-              familieHendelseType === 'ADPSJN'
-                ? 'Registrering.Adopsjon.DatoForOvertakelsenStebarn'
-                : 'Registrering.Adopsjon.DatoForOvertakelsen',
-          })}
+          label={
+            erAdopsjon
+              ? formatMessage({ id: 'Registrering.Adopsjon.DatoForOvertakelsenStebarn' })
+              : formatMessage({ id: 'Registrering.Adopsjon.DatoForOvertakelsen' })
+          }
           readOnly={readOnly}
-          validate={familieHendelseType === 'ADPSJN' ? [required, hasValidDate] : [hasValidDate]}
+          validate={erAdopsjon ? [required, hasValidDate] : [hasValidDate]}
         />
         <HStack gap="space-16">
           <RhfTextField
@@ -122,17 +127,12 @@ export const OmsorgOgAdopsjonPanel = ({
             control={control}
             label={formatMessage({ id: 'Registrering.Adopsjon.AntallBarn' })}
             readOnly={readOnly}
-            className={styles['barnInput']}
+            htmlSize={8}
             parse={value => {
               const parsedValue = Number.parseInt(value.toString(), 10);
               return Number.isNaN(parsedValue) ? value : parsedValue;
             }}
-            validate={[
-              ...(familieHendelseType === 'ADPSJN' ? [required] : []),
-              hasValidInteger,
-              validateMinAntall,
-              validateMaxAntall,
-            ]}
+            validate={[...(erAdopsjon ? [required] : []), hasValidInteger, minValue(1), maxValue(10)]}
           />
         </HStack>
         {fields.map((field, index) => (
@@ -142,7 +142,7 @@ export const OmsorgOgAdopsjonPanel = ({
               control={control}
               readOnly={readOnly}
               validate={
-                familieHendelseType === 'ADPSJN'
+                erAdopsjon
                   ? [
                       required,
                       hasValidDate,
@@ -162,9 +162,14 @@ export const OmsorgOgAdopsjonPanel = ({
 
 OmsorgOgAdopsjonPanel.initialValues = (): OmsorgOgAdopsjonFormValues => ({ [OMSORG_NAME_PREFIX]: {} });
 
-OmsorgOgAdopsjonPanel.transformValues = ({ omsorg }: OmsorgOgAdopsjonFormValues): TransformedFormValue => ({
-  [OMSORG_NAME_PREFIX]: {
-    ...omsorg,
-    fødselsdato: omsorg.fødselsdato && omsorg.fødselsdato.length > 0 ? omsorg.fødselsdato.map(f => f.dato) : undefined,
-  },
-});
+OmsorgOgAdopsjonPanel.transformValues = ({
+  omsorg,
+}: OmsorgOgAdopsjonFormValues): { [OMSORG_NAME_PREFIX]: OmsorgDto } => {
+  return {
+    [OMSORG_NAME_PREFIX]: {
+      ...omsorg,
+      fødselsdato:
+        omsorg.fødselsdato && omsorg.fødselsdato.length > 0 ? omsorg.fødselsdato.map(f => notEmpty(f.dato)) : undefined,
+    },
+  };
+};

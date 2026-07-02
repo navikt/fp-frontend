@@ -9,23 +9,24 @@ import {
   dateBeforeOrEqual,
   dateRangesNotOverlapping,
   hasValidDate,
+  notDash,
   required,
 } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn, Landkode } from '@navikt/fp-types';
 
-const defaultUtenlandsOpphold = {
-  land: undefined,
-  periodeFom: undefined,
-  periodeTom: undefined,
+const defaultUtenlandsOpphold: FormValues = {
+  land: '-',
+  periodeFom: '',
+  periodeTom: '',
 };
 
 export type FormValues = {
-  land?: string;
-  periodeFom?: string;
-  periodeTom?: string;
+  land: Landkode;
+  periodeFom: string;
+  periodeTom: string;
 };
 
 type Keys = 'tidligereOppholdUtenlands' | 'fremtidigeOppholdUtenlands';
@@ -35,7 +36,7 @@ const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: Form
 
   const periodeMap: string[][] = perioder
     .filter(
-      (p): p is { periodeFom: string; periodeTom: string } =>
+      (p): p is { periodeFom: string; periodeTom: string; land: Landkode } =>
         typeof p.periodeFom === 'string' &&
         p.periodeFom !== '' &&
         typeof p.periodeTom === 'string' &&
@@ -118,7 +119,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
               hideLabel={index > 0}
               selectValues={land}
               readOnly={readOnly}
-              validate={[required]}
+              validate={[required, notDash]}
             />
 
             <RhfDatepicker

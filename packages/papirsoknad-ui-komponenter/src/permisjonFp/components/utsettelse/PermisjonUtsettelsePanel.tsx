@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, TidsromPermisjonDto } from '@navikt/fp-types';
 
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from '../../constants';
 import type { FormValuesUtsettelse, PermisjonFormValues } from '../../types';
@@ -53,4 +53,10 @@ export const PermisjonUtsettelsePanel = ({ readOnly, alleKodeverk }: Props) => {
 PermisjonUtsettelsePanel.initialValues = (): FormValuesUtsettelse => ({
   [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: [],
   skalUtsette: false,
+});
+
+PermisjonUtsettelsePanel.transformValues = (
+  values: FormValuesUtsettelse,
+): Pick<TidsromPermisjonDto, 'utsettelsePeriode'> => ({
+  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: values.skalUtsette ? values.utsettelsePeriode : undefined,
 });

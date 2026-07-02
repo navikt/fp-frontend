@@ -19,7 +19,7 @@ import {
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { Arbeidskategori, KodeverkMedNavn } from '@navikt/fp-types';
+import type { Arbeidskategori, KodeverkMedNavn, UttakPeriodeType } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -33,8 +33,9 @@ const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIE
 const defaultGraderingPeriode: GraderingPeriode = {
   periodeFom: '',
   periodeTom: '',
-  periodeForGradering: '',
-  prosentandelArbeid: '',
+  periodeForGradering: undefined as unknown as UttakPeriodeType,
+  prosentandelArbeid: undefined,
+  arbeidskategoriType: undefined,
   skalGraderes: false,
 };
 

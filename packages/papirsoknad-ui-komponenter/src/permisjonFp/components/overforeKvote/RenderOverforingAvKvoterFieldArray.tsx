@@ -11,9 +11,11 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 
+import type { OverføringsperiodeDto } from '@navikt/fp-types';
+
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { OVERFØRING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
-import type { OverforingPeriode, PermisjonFormValues } from '../../types';
+import type { PermisjonFormValues } from '../../types';
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFØRING_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
@@ -26,10 +28,10 @@ const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues
   return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
-const defaultOverforingPeriode: OverforingPeriode = {
+const defaultOverforingPeriode: OverføringsperiodeDto = {
   periodeFom: '',
   periodeTom: '',
-  overforingArsak: '-',
+  overforingArsak: undefined as unknown as OverføringsperiodeDto['overforingArsak'],
 };
 
 interface Props {

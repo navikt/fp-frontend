@@ -12,6 +12,7 @@ import { RegistrerArbeidsgiverRad } from './RegistrerArbeidgiverRad';
 const defaultArbeidsgiver = {
   organisasjonsnummer: '',
   behovsdato: '',
+  tilrettelegginger: [],
 };
 
 interface Props {
