@@ -41,7 +41,7 @@ export const ArbeidsforholdFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: 
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.ARBEIDSFORHOLD, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.ARBEIDSFORHOLD, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
 

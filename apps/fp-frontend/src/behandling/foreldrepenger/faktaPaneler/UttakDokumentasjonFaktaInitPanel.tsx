@@ -28,7 +28,7 @@ export const UttakDokumentasjonFaktaInitPanel = () => {
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.UTTAK_DOKUMENTASJON, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.UTTAK_DOKUMENTASJON, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
   const { data: dokumentasjonVurderingBehov } = useQuery(

@@ -52,7 +52,7 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.BEREGNING, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.BEREGNING, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
 

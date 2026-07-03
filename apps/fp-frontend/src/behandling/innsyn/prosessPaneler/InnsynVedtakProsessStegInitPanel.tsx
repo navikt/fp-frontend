@@ -38,7 +38,7 @@ export const InnsynVedtakProsessStegInitPanel = () => {
   const vedtakStatus = getVedtakStatus(behandling);
   const skalMarkeresSomAktiv = vedtakStatus !== 'IKKE_VURDERT' || standardPanelProps.harÅpentAksjonspunkt;
   const erAktiv = useErProsessPanelAktiv(ProsessStegCode.VEDTAK, true, skalMarkeresSomAktiv);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.VEDTAK, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.VEDTAK, erAktiv, 'prosess', true);
 
   const { data: innsynDokumenter } = useQuery(
     medPrioritet(api.innsyn.innsynDokumenterOptions(behandling), skalHenteData),

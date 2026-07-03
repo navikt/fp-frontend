@@ -53,7 +53,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Pro
   const skalHenteFamiliehendelse = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== 'IKKE_VURDERT';
 
   const erAktiv = useErProsessPanelAktiv(ProsessStegCode.UTTAK, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.UTTAK, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.UTTAK, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
 

@@ -43,7 +43,7 @@ export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPer
     true,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.TILKJENT_YTELSE, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.TILKJENT_YTELSE, erAktiv, 'prosess', true);
 
   const { data: beregningsresultatDagytelse } = useQuery(
     medPrioritet(api.beregningsresultatDagytelseOptions(behandling), skalHenteData),

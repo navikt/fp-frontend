@@ -38,7 +38,7 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({ arbeidsgiverOpplysningerPerI
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.OPPTJENINGSVILKARET, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.OPPTJENINGSVILKARET, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
 

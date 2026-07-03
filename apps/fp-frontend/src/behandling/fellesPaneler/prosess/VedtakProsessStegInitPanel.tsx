@@ -63,7 +63,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
   const skalMarkeresSomAktiv = !behandling.behandlingHenlagt && statusForVedtak !== 'IKKE_VURDERT';
 
   const erAktiv = useErProsessPanelAktiv(ProsessStegCode.VEDTAK, true, skalMarkeresSomAktiv);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.VEDTAK, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.VEDTAK, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
 

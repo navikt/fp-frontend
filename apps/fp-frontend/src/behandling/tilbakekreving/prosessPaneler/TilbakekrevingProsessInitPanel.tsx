@@ -37,7 +37,7 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
   const erAktiv = useErProsessPanelAktiv(ProsessStegCode.TILBAKEKREVING, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.TILBAKEKREVING, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.TILBAKEKREVING, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
 

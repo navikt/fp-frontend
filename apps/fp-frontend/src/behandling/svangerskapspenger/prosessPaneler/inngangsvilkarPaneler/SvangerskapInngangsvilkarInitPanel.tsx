@@ -13,6 +13,7 @@ import { medPrioritet } from '../../../felles/prioritet/medPrioritet';
 import { useSkalHenteData } from '../../../felles/prioritet/PanelDataPrioritetContext';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { InngangsvilkårPanelDataContext } from '../../../felles/prosess/InngangsvilkarDefaultInitWrapper';
+import { skalViseProsessPanel } from '../../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET];
@@ -33,9 +34,14 @@ export const SvangerskapInngangsvilkarInitPanel = () => {
     ...standardPanelProps,
     isReadOnly: standardPanelProps.isReadOnly || !harAksjonspunkt,
   };
+  const skalPanelVisesIMeny = skalViseProsessPanel(
+    panelProps.aksjonspunkterForPanel,
+    VILKAR_KODER,
+    panelProps.vilkårForPanel,
+  );
 
   const { erPanelValgt } = use(InngangsvilkårPanelDataContext);
-  const skalHenteData = useSkalHenteData(PANEL_ID, erPanelValgt, 'inngangsvilkar');
+  const skalHenteData = useSkalHenteData(PANEL_ID, erPanelValgt, 'inngangsvilkar', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(panelProps.behandling);
 

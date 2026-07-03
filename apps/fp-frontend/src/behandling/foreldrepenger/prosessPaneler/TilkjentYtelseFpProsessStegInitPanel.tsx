@@ -41,7 +41,7 @@ export const TilkjentYtelseFpProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
     true,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.TILKJENT_YTELSE, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.TILKJENT_YTELSE, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
 

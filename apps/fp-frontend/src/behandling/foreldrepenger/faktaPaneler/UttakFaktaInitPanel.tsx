@@ -41,7 +41,7 @@ export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) =>
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.UTTAK, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.UTTAK, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
 

@@ -47,7 +47,7 @@ export const KlageresultatProsessStegInitPanel = () => {
 
   const skalMarkeresSomAktiv = vedtakStatus !== 'IKKE_VURDERT' || standardPanelProps.harÅpentAksjonspunkt;
   const erAktiv = useErProsessPanelAktiv(ProsessStegCode.KLAGE_RESULTAT, true, skalMarkeresSomAktiv);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.KLAGE_RESULTAT, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.KLAGE_RESULTAT, erAktiv, 'prosess', true);
 
   const { data: klageVurdering } = useQuery(medPrioritet(api.klage.klageVurderingOptions(behandling), skalHenteData));
 

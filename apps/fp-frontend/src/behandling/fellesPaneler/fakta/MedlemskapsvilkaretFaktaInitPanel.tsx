@@ -39,7 +39,7 @@ export const MedlemskapsvilkaretFaktaInitPanel = () => {
     behandling.harSøknad,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.MEDLEMSKAPSVILKARET, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.MEDLEMSKAPSVILKARET, erAktiv, 'fakta', true);
 
   const api = getBehandlingApi(behandling);
 

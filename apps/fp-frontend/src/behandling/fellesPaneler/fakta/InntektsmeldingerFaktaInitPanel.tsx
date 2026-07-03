@@ -27,7 +27,7 @@ export const InntektsmeldingerFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId 
   const standardPanelProps = useStandardFaktaPanelProps();
 
   const erAktiv = useErFaktaPanelAktiv(FaktaPanelCode.INNTEKTSMELDINGER, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.INNTEKTSMELDINGER, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.INNTEKTSMELDINGER, erAktiv, 'fakta', true);
 
   const api = getBehandlingApi(behandling);
 

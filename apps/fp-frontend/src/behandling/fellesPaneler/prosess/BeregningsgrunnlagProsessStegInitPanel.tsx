@@ -157,7 +157,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
     true,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.BEREGNINGSGRUNNLAG, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.BEREGNINGSGRUNNLAG, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
 

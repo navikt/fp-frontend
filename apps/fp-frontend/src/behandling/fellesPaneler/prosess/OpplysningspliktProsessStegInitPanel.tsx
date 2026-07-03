@@ -44,7 +44,7 @@ export const OpplysningspliktProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.OPPLYSNINGSPLIKT, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.OPPLYSNINGSPLIKT, erAktiv, 'prosess', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
 

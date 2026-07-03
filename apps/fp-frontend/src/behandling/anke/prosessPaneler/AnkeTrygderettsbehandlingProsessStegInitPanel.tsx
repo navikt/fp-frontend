@@ -24,7 +24,7 @@ export const AnkeTrygderettsbehandlingProsessStegInitPanel = () => {
   const { behandling } = useBehandlingDataContext();
 
   const erAktiv = useErProsessPanelAktiv(ProsessStegCode.ANKE_MERKNADER, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.ANKE_MERKNADER, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.ANKE_MERKNADER, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
   const { data: ankeVurdering } = useQuery(medPrioritet(api.anke.ankeVurderingOptions(behandling), skalHenteData));

@@ -29,7 +29,7 @@ export const OmsorgFaktaInitPanel = () => {
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.OMSORG, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.OMSORG, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
 

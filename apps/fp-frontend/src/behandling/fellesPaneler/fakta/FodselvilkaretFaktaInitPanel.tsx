@@ -37,7 +37,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.FODSELSVILKARET, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.FODSELSVILKARET, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
   const fagsakApi = useFagsakApi();

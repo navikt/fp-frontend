@@ -16,6 +16,7 @@ import {
 } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { InngangsvilkårPanelDataContext } from '../../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
+import { skalViseProsessPanel } from '../../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET];
@@ -29,9 +30,14 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
   const harIngenAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.length === 0;
+  const skalPanelVisesIMeny = skalViseProsessPanel(
+    standardPanelProps.aksjonspunkterForPanel,
+    VILKAR_KODER,
+    standardPanelProps.vilkårForPanel,
+  );
 
   const { erPanelValgt } = use(InngangsvilkårPanelDataContext);
-  const skalHenteData = useSkalHenteData(PANEL_ID, erPanelValgt, 'inngangsvilkar');
+  const skalHenteData = useSkalHenteData(PANEL_ID, erPanelValgt, 'inngangsvilkar', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(standardPanelProps.behandling);
 

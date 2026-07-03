@@ -1,4 +1,4 @@
-import { createContext, type ReactNode, use, useEffect, useRef, useState } from 'react';
+import { createContext, type ReactNode, use, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { avbrytPlanlagtIdle, planleggPåIdle } from './idleCallback';
 
@@ -16,6 +16,22 @@ type Context = {
 
 type PanelDataGruppe = 'fakta' | 'prosess' | 'inngangsvilkar';
 
+const planleggPrefetchBatch = (
+  køRef: { current: string[] },
+  planlagtIdRef: { current: number | undefined },
+  setAktiverte: (oppdater: (forrige: ReadonlySet<string>) => ReadonlySet<string>) => void,
+) => {
+  planlagtIdRef.current = planleggPåIdle(() => {
+    const neste = køRef.current.splice(0, PREFETCH_BATCH_STØRRELSE);
+    if (neste.length > 0) {
+      setAktiverte(forrige => new Set([...forrige, ...neste]));
+    }
+    if (køRef.current.length > 0) {
+      planleggPrefetchBatch(køRef, planlagtIdRef, setAktiverte);
+    }
+  });
+};
+
 const PanelDataPrioritetContext = createContext<Context | undefined>(undefined);
 
 interface Props {
@@ -32,6 +48,11 @@ export const PanelDataPrioritetProvider = ({ children }: Props) => {
   const køRef = useRef<string[]>([]);
   const planlagtIdRef = useRef<number | undefined>(undefined);
   const [aktiverte, setAktiverte] = useState<ReadonlySet<string>>(() => new Set());
+  const aktiverteRef = useRef<ReadonlySet<string>>(aktiverte);
+
+  useEffect(() => {
+    aktiverteRef.current = aktiverte;
+  }, [aktiverte]);
 
   useEffect(
     () => () => {
@@ -42,36 +63,32 @@ export const PanelDataPrioritetProvider = ({ children }: Props) => {
     [],
   );
 
-  const planleggNesteBatch = () => {
-    planlagtIdRef.current = planleggPåIdle(() => {
-      const neste = køRef.current.splice(0, PREFETCH_BATCH_STØRRELSE);
-      if (neste.length > 0) {
-        setAktiverte(forrige => new Set([...forrige, ...neste]));
+  const planleggNesteBatch = useCallback(() => {
+    planleggPrefetchBatch(køRef, planlagtIdRef, setAktiverte);
+  }, []);
+
+  const registrerForPrefetch = useCallback(
+    (id: string) => {
+      if (køRef.current.includes(id) || aktiverteRef.current.has(id)) {
+        return;
       }
-      if (køRef.current.length > 0) {
+      const køVarTom = køRef.current.length === 0;
+      køRef.current.push(id);
+      if (køVarTom) {
         planleggNesteBatch();
       }
-    });
-  };
-
-  const registrerForPrefetch = (id: string) => {
-    if (køRef.current.includes(id) || aktiverte.has(id)) {
-      return;
-    }
-    const køVarTom = køRef.current.length === 0;
-    køRef.current.push(id);
-    if (køVarTom) {
-      planleggNesteBatch();
-    }
-  };
-
-  const erPrefetchAktivert = (id: string) => aktiverte.has(id);
-
-  return (
-    <PanelDataPrioritetContext value={{ registrerForPrefetch, erPrefetchAktivert }}>
-      {children}
-    </PanelDataPrioritetContext>
+    },
+    [planleggNesteBatch],
   );
+
+  const erPrefetchAktivert = useCallback((id: string) => aktiverte.has(id), [aktiverte]);
+
+  const context = useMemo(
+    () => ({ registrerForPrefetch, erPrefetchAktivert }),
+    [registrerForPrefetch, erPrefetchAktivert],
+  );
+
+  return <PanelDataPrioritetContext value={context}>{children}</PanelDataPrioritetContext>;
 };
 
 /**
@@ -83,7 +100,12 @@ export const PanelDataPrioritetProvider = ({ children }: Props) => {
  * Må kallast innanfor ein {@link PanelDataPrioritetProvider}. `gruppe` skil
  * mellom fakta-, prosess- og inngangsvilkårpanel som kan ha same meny-id.
  */
-export const useSkalHenteData = (id: string, erAktiv: boolean, gruppe: PanelDataGruppe): boolean => {
+export const useSkalHenteData = (
+  id: string,
+  erAktiv: boolean,
+  gruppe: PanelDataGruppe,
+  skalPanelVisesIMeny: boolean,
+): boolean => {
   const context = use(PanelDataPrioritetContext);
   if (!context) {
     throw new Error('useSkalHenteData må kallast innanfor ein PanelDataPrioritetProvider');
@@ -92,11 +114,10 @@ export const useSkalHenteData = (id: string, erAktiv: boolean, gruppe: PanelData
   const prefetchId = `${gruppe}:${id}`;
 
   useEffect(() => {
-    if (!erAktiv) {
+    if (skalPanelVisesIMeny && !erAktiv) {
       registrerForPrefetch(prefetchId);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- registrerForPrefetch er stabil for praktiske formål; skal berre køyrast att ved endra id/erAktiv
-  }, [prefetchId, erAktiv]);
+  }, [prefetchId, erAktiv, registrerForPrefetch, skalPanelVisesIMeny]);
 
-  return erAktiv || erPrefetchAktivert(prefetchId);
+  return skalPanelVisesIMeny && (erAktiv || erPrefetchAktivert(prefetchId));
 };
