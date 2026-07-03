@@ -2,9 +2,9 @@ import { type ReactElement } from 'react';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Behandling, BehandlingFpSak } from '@navikt/fp-types';
-import { MellomlagretFormDataProvider, PanelDataProvider } from '@navikt/fp-utils';
+import { MellomlagretFormDataProvider } from '@navikt/fp-utils';
 
-import { useBehandlingDataContext } from '../context/BehandlingDataContext';
+import { BehandlingPanelDataProvider } from '../panelData/BehandlingPanelDataProvider';
 import { useFaktaMenyRegistrerer } from './useFaktaMenyRegistrerer';
 import type { StandardFaktaPanelProps } from './useStandardFaktaPanelProps';
 
@@ -23,8 +23,6 @@ export const FaktaDefaultInitPanel = <T extends Behandling = BehandlingFpSak>({
   faktaPanelMenyTekst,
   children,
 }: Props<T>) => {
-  const { behandling, fagsak, alleKodeverk } = useBehandlingDataContext<T>();
-
   const skalVisePanel = useFaktaMenyRegistrerer(
     faktaPanelKode,
     faktaPanelMenyTekst,
@@ -33,22 +31,9 @@ export const FaktaDefaultInitPanel = <T extends Behandling = BehandlingFpSak>({
   );
 
   return (
-    <MellomlagretFormDataProvider behandling={behandling}>
+    <MellomlagretFormDataProvider behandling={standardPanelProps.behandling}>
       {skalVisePanel ? (
-        <PanelDataProvider
-          behandling={behandling}
-          fagsak={fagsak}
-          alleKodeverk={alleKodeverk}
-          alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
-          aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
-          vilkårForPanel={standardPanelProps.vilkårForPanel}
-          harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
-          isReadOnly={standardPanelProps.isReadOnly}
-          isSubmittable={standardPanelProps.isSubmittable}
-          submitCallback={standardPanelProps.submitCallback}
-        >
-          {children}
-        </PanelDataProvider>
+        <BehandlingPanelDataProvider panelData={standardPanelProps}>{children}</BehandlingPanelDataProvider>
       ) : null}
     </MellomlagretFormDataProvider>
   );

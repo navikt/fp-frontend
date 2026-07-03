@@ -42,7 +42,7 @@ interface Props {
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
 }
 
-const ForeldrepengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere }: Props) => {
+export const ForeldrepengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere }: Props) => {
   const [faktaPanelMedÅpentApInfo, setFaktaPanelMedÅpentApInfo] = useState<FaktaPanelMedÅpentApInfo>();
 
   return (
@@ -88,7 +88,3 @@ const ForeldrepengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere
     </>
   );
 };
-
-// Default export grunna React.lazy
-// eslint-disable-next-line import-x/no-default-export
-export default ForeldrepengerPaneler;
