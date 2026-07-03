@@ -15,7 +15,10 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 import { forhåndsvisMelding, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 export const InnsynVedtakProsessStegInitPanel = () => {
@@ -32,8 +35,15 @@ export const InnsynVedtakProsessStegInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideeffekterCallback);
   const api = getBehandlingApi(behandling);
 
-  const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(behandling));
-  const { data: innsyn } = useQuery(api.innsyn.innsynOptions(behandling));
+  const vedtakStatus = getVedtakStatus(behandling);
+  const skalMarkeresSomAktiv = vedtakStatus !== 'IKKE_VURDERT' || standardPanelProps.harÅpentAksjonspunkt;
+  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.VEDTAK, true, skalMarkeresSomAktiv);
+  const skalHenteData = useSkalHenteData(ProsessStegCode.VEDTAK, erAktiv, 'prosess');
+
+  const { data: innsynDokumenter } = useQuery(
+    medPrioritet(api.innsyn.innsynDokumenterOptions(behandling), skalHenteData),
+  );
+  const { data: innsyn } = useQuery(medPrioritet(api.innsyn.innsynOptions(behandling), skalHenteData));
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: VedtakInnsynForhandsvisData) =>
@@ -52,8 +62,8 @@ export const InnsynVedtakProsessStegInitPanel = () => {
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny
-      overstyrtStatus={getVedtakStatus(behandling)}
-      skalMarkeresSomAktiv={getVedtakStatus(behandling) !== 'IKKE_VURDERT'}
+      overstyrtStatus={vedtakStatus}
+      skalMarkeresSomAktiv={skalMarkeresSomAktiv}
     >
       <>
         <IverksetterVedtakStatusModal

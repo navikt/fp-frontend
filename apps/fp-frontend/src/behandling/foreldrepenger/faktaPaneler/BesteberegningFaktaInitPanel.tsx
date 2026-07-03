@@ -24,6 +24,7 @@ export const BesteberegningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: 
   const { behandling } = useBehandlingDataContext();
 
   const api = getBehandlingApi(behandling);
+  // Må hentast før panelet kan prioriterast: same respons avgjer om panelet skal visast i menyen.
   const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(behandling));
   const skalPanelVisesIMeny =
     beregningsgrunnlag?.ytelsesspesifiktGrunnlag?.ytelsetype === 'FP'

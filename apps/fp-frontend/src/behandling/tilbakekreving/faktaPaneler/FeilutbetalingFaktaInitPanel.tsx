@@ -15,7 +15,10 @@ import { useMellomlagretFormData } from '@navikt/fp-utils';
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 
 import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
 
@@ -31,17 +34,29 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
 
   const { behandling, fagsak } = useBehandlingDataContext<BehandlingFpTilbake>();
 
+  const skalPanelVisesIMeny = harLenke(behandling, 'FEILUTBETALING_FAKTA');
+  const erAktiv = useErFaktaPanelAktiv(
+    FaktaPanelCode.FEILUTBETALING,
+    skalPanelVisesIMeny,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.FEILUTBETALING, erAktiv, 'fakta');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: feilutbetalingFakta } = useQuery(api.tilbakekreving.feilutbetalingFaktaOptions(behandling));
-  const { data: feilutbetalingÅrsak } = useQuery(api.tilbakekreving.feilutbetalingÅrsakOptions(behandling));
+  const { data: feilutbetalingFakta } = useQuery(
+    medPrioritet(api.tilbakekreving.feilutbetalingFaktaOptions(behandling), skalHenteData),
+  );
+  const { data: feilutbetalingÅrsak } = useQuery(
+    medPrioritet(api.tilbakekreving.feilutbetalingÅrsakOptions(behandling), skalHenteData),
+  );
 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.FEILUTBETALING}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' })}
-      skalPanelVisesIMeny={harLenke(behandling, 'FEILUTBETALING_FAKTA')}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {feilutbetalingFakta && feilutbetalingÅrsak ? (
         <Wrapper

@@ -11,7 +11,10 @@ import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
@@ -32,18 +35,30 @@ export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) =>
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const skalPanelVisesIMeny = harLenke(behandling, 'UTTAK_KONTROLLER_FAKTA_PERIODER_V2');
+  const erAktiv = useErFaktaPanelAktiv(
+    FaktaPanelCode.UTTAK,
+    skalPanelVisesIMeny,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.UTTAK, erAktiv, 'fakta');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(behandling));
-  const { data: uttakKontrollerFaktaPerioder } = useQuery(api.uttakKontrollerFaktaPerioderOptions(behandling));
-  const { data: faktaArbeidsforhold } = useQuery(api.faktaArbeidsforholdOptions(behandling));
+  const { data: ytelsefordeling } = useQuery(medPrioritet(api.ytelsefordelingOptions(behandling), skalHenteData));
+  const { data: uttakKontrollerFaktaPerioder } = useQuery(
+    medPrioritet(api.uttakKontrollerFaktaPerioderOptions(behandling), skalHenteData),
+  );
+  const { data: faktaArbeidsforhold } = useQuery(
+    medPrioritet(api.faktaArbeidsforholdOptions(behandling), skalHenteData),
+  );
 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.UTTAK}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Uttak' })}
-      skalPanelVisesIMeny={harLenke(behandling, 'UTTAK_KONTROLLER_FAKTA_PERIODER_V2')}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {ytelsefordeling && uttakKontrollerFaktaPerioder ? (
         <UttakFaktaIndex

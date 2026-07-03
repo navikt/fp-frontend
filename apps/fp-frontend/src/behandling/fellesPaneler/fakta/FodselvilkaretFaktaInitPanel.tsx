@@ -13,7 +13,10 @@ import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useFagsakApi } from '../../../data/fagsakApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
@@ -28,15 +31,23 @@ export const FodselvilkaretFaktaInitPanel = () => {
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const skalPanelVisesIMeny = harLenke(behandling, 'FAKTA_FØDSEL');
+  const erAktiv = useErFaktaPanelAktiv(
+    FaktaPanelCode.FODSELSVILKARET,
+    skalPanelVisesIMeny,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.FODSELSVILKARET, erAktiv, 'fakta');
+
   const api = getBehandlingApi(behandling);
   const fagsakApi = useFagsakApi();
 
   const harOverstyrigAP = standardPanelProps.aksjonspunkterForPanel.some(
     a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
   );
-  const { data: faktafødsel } = useQuery(api.faktaFødselOptions(behandling));
+  const { data: faktafødsel } = useQuery(medPrioritet(api.faktaFødselOptions(behandling), skalHenteData));
   const { data: alleDokumenter = [] } = useQuery(
-    fagsakApi.hentDokumenter(fagsak.saksnummer, behandling.uuid, behandling.versjon),
+    medPrioritet(fagsakApi.hentDokumenter(fagsak.saksnummer, behandling.uuid, behandling.versjon), skalHenteData),
   );
 
   const terminbekreftelseDokument = finnTerminBekreftelse(alleDokumenter, fagsak.saksnummer);
@@ -51,7 +62,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
         standardPanelProps={standardPanelProps}
         faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
         faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Fodsel' })}
-        skalPanelVisesIMeny={harLenke(behandling, 'FAKTA_FØDSEL')}
+        skalPanelVisesIMeny={skalPanelVisesIMeny}
       >
         {faktafødsel ? (
           <FodselFaktaIndex fødsel={faktafødsel} terminbekreftelseDokument={terminbekreftelseDokument} />

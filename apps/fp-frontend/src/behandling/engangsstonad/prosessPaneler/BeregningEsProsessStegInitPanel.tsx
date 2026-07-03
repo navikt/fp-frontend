@@ -8,7 +8,10 @@ import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsres
 
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 export const BeregningEsProsessStegInitPanel = () => {
@@ -18,10 +21,13 @@ export const BeregningEsProsessStegInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
+  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.BEREGNING, true, standardPanelProps.harÅpentAksjonspunkt);
+  const skalHenteData = useSkalHenteData(ProsessStegCode.BEREGNING, erAktiv, 'prosess');
+
   const api = getBehandlingApi(behandling);
 
   const { data: beregningsresultatEngangsstønad, isFetching } = useQuery(
-    api.es.beregningsresultatEngangsstønadOptions(behandling),
+    medPrioritet(api.es.beregningsresultatEngangsstønadOptions(behandling), skalHenteData),
   );
 
   return (

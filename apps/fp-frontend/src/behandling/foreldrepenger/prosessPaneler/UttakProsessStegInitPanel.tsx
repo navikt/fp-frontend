@@ -10,7 +10,10 @@ import type { ArbeidsgiverOpplysningerPerId, BehandlingFpSak, VilkårUtfallType 
 
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 const getStatusFromUttakresultat = (behandling: BehandlingFpSak): VilkårUtfallType => {
@@ -47,16 +50,27 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Pro
 
   const overstyrtStatus = getStatusFromUttakresultat(behandling);
 
-  const skalHenteData = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== 'IKKE_VURDERT';
+  const skalHenteFamiliehendelse = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== 'IKKE_VURDERT';
+
+  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.UTTAK, true, standardPanelProps.harÅpentAksjonspunkt);
+  const skalHenteData = useSkalHenteData(ProsessStegCode.UTTAK, erAktiv, 'prosess');
 
   const api = getBehandlingApi(behandling);
 
-  const { data: uttaksresultat } = useQuery(api.uttaksresultatPerioderOptions(behandling));
-  const { data: søknad } = useQuery(api.søknadOptions(behandling));
-  const { data: familieHendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));
-  const { data: uttakStønadskontoer } = useQuery(api.uttakStønadskontoerOptions(behandling));
-  const { data: annenForelderUttakEøs } = useQuery(api.uttakAnnenpartEøsOptions(behandling));
-  const { data: personoversikt } = useQuery(api.behandlingPersonoversiktOptions(behandling));
+  const { data: uttaksresultat } = useQuery(medPrioritet(api.uttaksresultatPerioderOptions(behandling), skalHenteData));
+  const { data: søknad } = useQuery(medPrioritet(api.søknadOptions(behandling), skalHenteData));
+  const { data: familieHendelse } = useQuery(
+    medPrioritet(api.familiehendelseOptions(behandling, skalHenteFamiliehendelse), skalHenteData),
+  );
+  const { data: uttakStønadskontoer } = useQuery(
+    medPrioritet(api.uttakStønadskontoerOptions(behandling), skalHenteData),
+  );
+  const { data: annenForelderUttakEøs } = useQuery(
+    medPrioritet(api.uttakAnnenpartEøsOptions(behandling), skalHenteData),
+  );
+  const { data: personoversikt } = useQuery(
+    medPrioritet(api.behandlingPersonoversiktOptions(behandling), skalHenteData),
+  );
 
   const { mutateAsync: oppdaterStønadskontoer } = useMutation({
     mutationFn: api.oppdaterStønadskontoer,

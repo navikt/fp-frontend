@@ -16,7 +16,10 @@ import { harAksjonspunkt } from '@navikt/fp-utils';
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 
@@ -31,9 +34,20 @@ export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }:
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const skalPanelVisesIMeny =
+    harLenke(behandling, 'ARBEID_OG_INNTEKT') &&
+    !harAksjonspunkt(AksjonspunktKode.UTGÅTT_5080, behandling.aksjonspunkt);
+
+  const erAktiv = useErFaktaPanelAktiv(
+    FaktaPanelCode.ARBEID_OG_INNTEKT,
+    skalPanelVisesIMeny,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.ARBEID_OG_INNTEKT, erAktiv, 'fakta');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(behandling));
+  const { data: arbeidOgInntekt } = useQuery(medPrioritet(api.arbeidOgInntektOptions(behandling), skalHenteData));
 
   const { mutate: settBehandlingPåVent } = useMutation({
     mutationFn: (values: { frist?: string; ventearsak: string }) =>
@@ -68,10 +82,7 @@ export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }:
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.ArbeidOgInntekt' })}
-      skalPanelVisesIMeny={
-        harLenke(behandling, 'ARBEID_OG_INNTEKT') &&
-        !harAksjonspunkt(AksjonspunktKode.UTGÅTT_5080, behandling.aksjonspunkt)
-      }
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {arbeidOgInntekt ? (
         <ArbeidOgInntektFaktaIndex

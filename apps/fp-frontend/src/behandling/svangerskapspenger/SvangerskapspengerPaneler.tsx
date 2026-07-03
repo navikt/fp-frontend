@@ -4,6 +4,7 @@ import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
 import type { FaktaPanelMedÅpentApInfo } from '../felles/fakta/useFaktaPanelMenyData';
+import { PanelDataPrioritetProvider } from '../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessMeny } from '../felles/prosess/ProsessMeny';
 import { ArbeidOgInntektFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidOgInntektFaktaInitPanel';
 import { ArbeidsforholdFaktaInitPanel } from '../fellesPaneler/fakta/ArbeidsforholdFaktaInitPanel';
@@ -36,7 +37,7 @@ export const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, ar
   const [faktaPanelMedÅpentApInfo, setFaktaPanelMedÅpentApInfo] = useState<FaktaPanelMedÅpentApInfo>();
 
   return (
-    <>
+    <PanelDataPrioritetProvider>
       <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
         <OpplysningspliktProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <InngangsvilkarSvpProsessStegInitPanel faktaPanelMedÅpentApInfo={faktaPanelMedÅpentApInfo} />
@@ -65,6 +66,6 @@ export const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, ar
         <BeregningFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
         <FordelingFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
       </FaktaMeny>
-    </>
+    </PanelDataPrioritetProvider>
   );
 };

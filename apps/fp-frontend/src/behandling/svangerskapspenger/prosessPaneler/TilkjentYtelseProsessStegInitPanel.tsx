@@ -10,7 +10,10 @@ import type { ArbeidsgiverOpplysningerPerId, VilkårUtfallType } from '@navikt/f
 
 import { BehandlingRel, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.UTGÅTT_5090];
@@ -32,13 +35,29 @@ export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPer
     ? 'OPPFYLT'
     : 'IKKE_VURDERT';
 
-  const skalHenteData = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== 'IKKE_VURDERT';
+  const skalHenteFamiliehendelseOgFeriepenger =
+    standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== 'IKKE_VURDERT';
 
-  const { data: beregningsresultatDagytelse } = useQuery(api.beregningsresultatDagytelseOptions(behandling));
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));
-  const { data: søknad } = useQuery(api.søknadOptions(behandling));
-  const { data: feriepengegrunnlag } = useQuery(api.feriepengegrunnlagOptions(behandling, skalHenteData));
-  const { data: personoversikt } = useQuery(api.behandlingPersonoversiktOptions(behandling));
+  const erAktiv = useErProsessPanelAktiv(
+    ProsessStegCode.TILKJENT_YTELSE,
+    true,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(ProsessStegCode.TILKJENT_YTELSE, erAktiv, 'prosess');
+
+  const { data: beregningsresultatDagytelse } = useQuery(
+    medPrioritet(api.beregningsresultatDagytelseOptions(behandling), skalHenteData),
+  );
+  const { data: familiehendelse } = useQuery(
+    medPrioritet(api.familiehendelseOptions(behandling, skalHenteFamiliehendelseOgFeriepenger), skalHenteData),
+  );
+  const { data: søknad } = useQuery(medPrioritet(api.søknadOptions(behandling), skalHenteData));
+  const { data: feriepengegrunnlag } = useQuery(
+    medPrioritet(api.feriepengegrunnlagOptions(behandling, skalHenteFamiliehendelseOgFeriepenger), skalHenteData),
+  );
+  const { data: personoversikt } = useQuery(
+    medPrioritet(api.behandlingPersonoversiktOptions(behandling), skalHenteData),
+  );
 
   return (
     <ProsessDefaultInitPanel

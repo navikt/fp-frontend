@@ -10,7 +10,10 @@ import { isKlageAvvist } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.UTGÅTT_5083];
@@ -32,9 +35,18 @@ export const FormKravKlageInstansProsessStegInitPanel = () => {
       avsluttet: b.avsluttet ?? undefined,
     }));
 
+  const erAktiv = useErProsessPanelAktiv(
+    ProsessStegCode.FORMKRAV_KLAGE_NAV_KLAGEINSTANS,
+    true,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(ProsessStegCode.FORMKRAV_KLAGE_NAV_KLAGEINSTANS, erAktiv, 'prosess');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: klageVurdering, isFetching } = useQuery(api.klage.klageVurderingOptions(behandling));
+  const { data: klageVurdering, isFetching } = useQuery(
+    medPrioritet(api.klage.klageVurderingOptions(behandling), skalHenteData),
+  );
 
   const { mutate: lagreFormkravVurdering } = useMutation({
     mutationFn: (values: FormkravMellomlagretDataType) => api.klage.mellomlagreFormkravVurdering(values),

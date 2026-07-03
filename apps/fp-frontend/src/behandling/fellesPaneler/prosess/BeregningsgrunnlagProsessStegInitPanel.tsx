@@ -22,7 +22,10 @@ import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
@@ -145,9 +148,18 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
 
   const { behandling } = useBehandlingDataContext();
 
+  const erAktiv = useErProsessPanelAktiv(
+    ProsessStegCode.BEREGNINGSGRUNNLAG,
+    true,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(ProsessStegCode.BEREGNINGSGRUNNLAG, erAktiv, 'prosess');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
+  const { data: beregningsgrunnlag, isFetching } = useQuery(
+    medPrioritet(api.beregningsgrunnlagOptions(behandling), skalHenteData),
+  );
 
   return (
     <ProsessDefaultInitPanel

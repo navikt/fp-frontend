@@ -12,7 +12,10 @@ import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
@@ -30,9 +33,14 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
 
   const { behandling, fagsak } = useBehandlingDataContext<BehandlingFpTilbake>();
 
+  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.FORELDELSE, true, standardPanelProps.harÅpentAksjonspunkt);
+  const skalHenteData = useSkalHenteData(ProsessStegCode.FORELDELSE, erAktiv, 'prosess');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: perioderForeldelse } = useQuery(api.tilbakekreving.perioderForeldelseOptions(behandling));
+  const { data: perioderForeldelse } = useQuery(
+    medPrioritet(api.tilbakekreving.perioderForeldelseOptions(behandling), skalHenteData),
+  );
 
   const { mutateAsync: beregnBeløp } = useMutation({
     mutationFn: (values: BeregnBeløpParams) => api.tilbakekreving.beregneBeløp(values),

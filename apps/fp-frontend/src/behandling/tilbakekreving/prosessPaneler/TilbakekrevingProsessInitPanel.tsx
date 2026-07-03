@@ -15,7 +15,10 @@ import { erAksjonspunktÅpent, useMellomlagretFormData } from '@navikt/fp-utils'
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
@@ -33,11 +36,20 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
+  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.TILBAKEKREVING, true, standardPanelProps.harÅpentAksjonspunkt);
+  const skalHenteData = useSkalHenteData(ProsessStegCode.TILBAKEKREVING, erAktiv, 'prosess');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: perioderForeldelse } = useQuery(api.tilbakekreving.perioderForeldelseOptions(behandling));
-  const { data: vilkårvurderingsperioder } = useQuery(api.tilbakekreving.vilkårsvurderingsperioderOptions(behandling));
-  const { data: vilkårvurdering } = useQuery(api.tilbakekreving.vilkårsvurderingOptions(behandling));
+  const { data: perioderForeldelse } = useQuery(
+    medPrioritet(api.tilbakekreving.perioderForeldelseOptions(behandling), skalHenteData),
+  );
+  const { data: vilkårvurderingsperioder } = useQuery(
+    medPrioritet(api.tilbakekreving.vilkårsvurderingsperioderOptions(behandling), skalHenteData),
+  );
+  const { data: vilkårvurdering } = useQuery(
+    medPrioritet(api.tilbakekreving.vilkårsvurderingOptions(behandling), skalHenteData),
+  );
 
   const { mutateAsync: beregnBeløp } = useMutation({
     mutationFn: (values: BeregnBeløpParams) => api.tilbakekreving.beregneBeløp(values),
