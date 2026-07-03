@@ -15,7 +15,7 @@ export type FellesPanelData<AP extends AksjonspunktData, T extends Behandling = 
   behandling: T;
   fagsak: Fagsak;
   alleKodeverk: AlleKodeverk;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+  alleMerknaderFraBeslutter: Record<string, { notAccepted?: boolean }>;
   aksjonspunkterForPanel: Aksjonspunkt[];
   vilkårForPanel: Vilkår[];
   harÅpentAksjonspunkt: boolean;
