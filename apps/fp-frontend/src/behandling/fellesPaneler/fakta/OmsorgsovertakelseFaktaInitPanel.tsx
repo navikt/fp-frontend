@@ -41,7 +41,7 @@ export const OmsorgsovertakelseFaktaInitPanel = () => {
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.OMSORGSOVERTAKELSE, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.OMSORGSOVERTAKELSE, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
 

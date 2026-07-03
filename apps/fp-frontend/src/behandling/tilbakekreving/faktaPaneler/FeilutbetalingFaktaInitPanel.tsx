@@ -40,7 +40,7 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.FEILUTBETALING, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.FEILUTBETALING, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
 

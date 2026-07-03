@@ -32,7 +32,7 @@ export const VergeFaktaInitPanel = () => {
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.VERGE, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.VERGE, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const { data: verge, isFetching } = useQuery(
     medPrioritet(api.vergeOptions(behandling, skalPanelVisesIMeny), skalHenteData),

@@ -29,7 +29,7 @@ export const AnkeResultatProsessStegInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
   const erAktiv = useErProsessPanelAktiv(ProsessStegCode.ANKE_RESULTAT, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.ANKE_RESULTAT, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.ANKE_RESULTAT, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
   const { data: ankeVurdering } = useQuery(medPrioritet(api.anke.ankeVurderingOptions(behandling), skalHenteData));

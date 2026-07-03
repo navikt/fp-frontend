@@ -38,7 +38,7 @@ export const FormKravFamOgPensjonProsessStegInitPanel = () => {
     true,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.FORMKRAV_KLAGE_NAV_FAMILIE_OG_PENSJON, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.FORMKRAV_KLAGE_NAV_FAMILIE_OG_PENSJON, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
 

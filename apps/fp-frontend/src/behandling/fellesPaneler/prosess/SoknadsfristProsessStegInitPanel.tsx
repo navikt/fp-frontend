@@ -29,7 +29,7 @@ export const SoknadsfristProsessStegInitPanel = () => {
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.SOEKNADSFRIST, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.SOEKNADSFRIST, erAktiv, 'prosess', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
   const { data: søknad } = useQuery(medPrioritet(api.søknadOptions(behandling), skalHenteData));

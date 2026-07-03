@@ -42,7 +42,7 @@ export const SimuleringProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.SIMULERING, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.SIMULERING, erAktiv, 'prosess', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
 

@@ -27,7 +27,7 @@ export const BehandleInnsynProsessStegInitPanel = () => {
     true,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.BEHANDLE_INNSYN, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.BEHANDLE_INNSYN, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
 

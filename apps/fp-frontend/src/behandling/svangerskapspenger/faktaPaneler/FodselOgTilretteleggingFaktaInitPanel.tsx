@@ -32,7 +32,7 @@ export const FodselOgTilretteleggingFaktaInitPanel = ({ arbeidsgiverOpplysninger
     true,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.FODSELTILRETTELEGGING, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.FODSELTILRETTELEGGING, erAktiv, 'fakta', true);
 
   const api = getBehandlingApi(behandling);
 

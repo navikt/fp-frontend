@@ -62,7 +62,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
   const api = getBehandlingApi(behandling);
 
   const erAktiv = useErProsessPanelAktiv(ProsessStegCode.VEDTAK, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.VEDTAK, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.VEDTAK, erAktiv, 'prosess', true);
 
   const { data: beregningsresultat } = useQuery(
     medPrioritet(api.tilbakekreving.beregningsresultatOptions(behandling), skalHenteData),

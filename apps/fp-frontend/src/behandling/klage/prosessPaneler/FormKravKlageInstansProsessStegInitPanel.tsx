@@ -40,7 +40,7 @@ export const FormKravKlageInstansProsessStegInitPanel = () => {
     true,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.FORMKRAV_KLAGE_NAV_KLAGEINSTANS, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.FORMKRAV_KLAGE_NAV_KLAGEINSTANS, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
 

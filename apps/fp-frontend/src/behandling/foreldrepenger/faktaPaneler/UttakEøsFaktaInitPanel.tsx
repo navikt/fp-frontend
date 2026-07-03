@@ -33,7 +33,7 @@ export const UttakEøsFaktaInitPanel = () => {
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.UTTAK_EØS, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.UTTAK_EØS, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
   const { data: annenForelderUttakEøs } = useQuery(

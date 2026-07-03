@@ -27,7 +27,7 @@ export const OmsorgOgRettFaktaInitPanel = () => {
   const { behandling, rettigheter } = useBehandlingDataContext();
 
   const erAktiv = useErFaktaPanelAktiv(FaktaPanelCode.OMSORG_OG_RETT, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.OMSORG_OG_RETT, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.OMSORG_OG_RETT, erAktiv, 'fakta', true);
 
   const api = getBehandlingApi(behandling);
 

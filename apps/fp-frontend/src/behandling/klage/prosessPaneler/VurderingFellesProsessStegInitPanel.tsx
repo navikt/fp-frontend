@@ -57,7 +57,7 @@ export const VurderingFellesProsessStegInitPanel = ({
   const navigate = useNavigate();
 
   const erAktiv = useErProsessPanelAktiv(prosessPanelKode, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(prosessPanelKode, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(prosessPanelKode, erAktiv, 'prosess', true);
 
   const { data: klageVurdering } = useQuery(medPrioritet(api.klage.klageVurderingOptions(behandling), skalHenteData));
 

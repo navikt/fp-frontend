@@ -21,7 +21,7 @@ export const YtelserFaktaInitPanel = () => {
   const standardPanelProps = useStandardFaktaPanelProps();
 
   const erAktiv = useErFaktaPanelAktiv(FaktaPanelCode.YTELSER, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.YTELSER, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.YTELSER, erAktiv, 'fakta', true);
 
   const api = getBehandlingApi(behandling);
 

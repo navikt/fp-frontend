@@ -43,7 +43,7 @@ export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }:
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.ARBEID_OG_INNTEKT, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.ARBEID_OG_INNTEKT, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
 

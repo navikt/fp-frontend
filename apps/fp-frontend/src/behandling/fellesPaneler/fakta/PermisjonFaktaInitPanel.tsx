@@ -36,7 +36,7 @@ export const PermisjonFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
     skalPanelVisesIMeny,
     standardPanelProps.harÅpentAksjonspunkt,
   );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.PERMISJON, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.PERMISJON, erAktiv, 'fakta', skalPanelVisesIMeny);
 
   const api = getBehandlingApi(behandling);
 

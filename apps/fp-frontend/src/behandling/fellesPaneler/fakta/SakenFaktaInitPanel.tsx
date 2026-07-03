@@ -34,7 +34,7 @@ export const SakenFaktaInitPanel = () => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const erAktiv = useErFaktaPanelAktiv(FaktaPanelCode.SAKEN, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.SAKEN, erAktiv, 'fakta');
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.SAKEN, erAktiv, 'fakta', true);
 
   const api = getBehandlingApi(behandling);
 

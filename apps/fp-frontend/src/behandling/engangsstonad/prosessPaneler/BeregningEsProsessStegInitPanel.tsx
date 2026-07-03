@@ -22,7 +22,7 @@ export const BeregningEsProsessStegInitPanel = () => {
   const { behandling } = useBehandlingDataContext();
 
   const erAktiv = useErProsessPanelAktiv(ProsessStegCode.BEREGNING, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.BEREGNING, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.BEREGNING, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
 

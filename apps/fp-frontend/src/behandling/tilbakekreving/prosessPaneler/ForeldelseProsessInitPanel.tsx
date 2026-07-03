@@ -34,7 +34,7 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
   const { behandling, fagsak } = useBehandlingDataContext<BehandlingFpTilbake>();
 
   const erAktiv = useErProsessPanelAktiv(ProsessStegCode.FORELDELSE, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.FORELDELSE, erAktiv, 'prosess');
+  const skalHenteData = useSkalHenteData(ProsessStegCode.FORELDELSE, erAktiv, 'prosess', true);
 
   const api = getBehandlingApi(behandling);
 
