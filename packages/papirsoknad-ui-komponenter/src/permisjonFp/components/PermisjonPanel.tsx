@@ -22,6 +22,7 @@ import { RenderPermisjonPeriodeFieldArray } from './fulltUttak/RenderPermisjonPe
 import { PermisjonGraderingPanel } from './gradering/PermisjonGraderingPanel';
 import { PermisjonOppholdPanel } from './opphold/PermisjonOppholdPanel';
 import { PermisjonOverforingAvKvoterPanel } from './overforeKvote/PermisjonOverforingAvKvoterPanel';
+import { harOverlappMellomPeriodetypar, hentUtfylteTidsrom } from './permisjonOverlappValidering';
 import { PermisjonUtsettelsePanel } from './utsettelse/PermisjonUtsettelsePanel';
 
 interface Props {
@@ -40,11 +41,19 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
   const intl = useIntl();
 
   const { setError, clearErrors, formState, watch } = useFormContext<PermisjonFormValues>();
-  const [fulltUttak, skalGradere, skalUtsette, skalOvertaKvote] = watch([
+  const [fulltUttak, skalGradere, skalUtsette, skalOvertaKvote, skalHaOpphold] = watch([
     `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`,
     `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`,
     `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`,
     `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`,
+    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalHaOpphold`,
+  ]);
+  const [permisjonsPerioder, graderingPerioder, utsettelsePerioder, overføringsPerioder, oppholdPerioder] = watch([
+    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`,
+    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`,
+    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`,
+    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFØRING_PERIODE_FIELD_ARRAY_NAME}`,
+    `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`,
   ]);
 
   useEffect(() => {
@@ -58,6 +67,30 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
       clearErrors(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.notRegisteredInput`);
     }
   }, [fulltUttak, skalGradere, skalUtsette, skalOvertaKvote, setError, clearErrors, intl]);
+
+  // Perioder frå kvar periodetype skal ikkje overlappe i tid med perioder frå andre periodetypar,
+  // sjølv om dei ikkje overlappar med andre perioder innanfor same periodetype.
+  const periodeGrupper = [
+    fulltUttak ? hentUtfylteTidsrom(permisjonsPerioder) : [],
+    skalGradere ? hentUtfylteTidsrom(graderingPerioder) : [],
+    skalUtsette ? hentUtfylteTidsrom(utsettelsePerioder) : [],
+    skalOvertaKvote ? hentUtfylteTidsrom(overføringsPerioder) : [],
+    skalHaOpphold ? hentUtfylteTidsrom(oppholdPerioder) : [],
+  ].filter(periodeGruppe => periodeGruppe.length > 0);
+  const harOverlapp = periodeGrupper.length > 1 && harOverlappMellomPeriodetypar(periodeGrupper);
+
+  // Vi held RHF-feilstatus i synk med den utrekna verdien slik at submit blir blokkert.
+  // setError/clearErrors kan ikkje kallast under render, difor ligg synkinga i ein effekt med primitiv avhengigheit.
+  useEffect(() => {
+    if (harOverlapp) {
+      setError(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.periodeOverlapper`, {
+        type: 'custom',
+        message: intl.formatMessage({ id: 'PermisjonPanel.DateRangesOverlappingPeriodTypes' }),
+      });
+    } else {
+      clearErrors(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.periodeOverlapper`);
+    }
+  }, [harOverlapp, setError, clearErrors, intl]);
 
   return (
     <BorderBox>
@@ -77,6 +110,9 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
         <PermisjonOppholdPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
         {formState.isSubmitted && formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message && (
           <ErrorMessage>{formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX].notRegisteredInput.message}</ErrorMessage>
+        )}
+        {formState.isSubmitted && formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.periodeOverlapper?.message && (
+          <ErrorMessage>{formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX].periodeOverlapper.message}</ErrorMessage>
         )}
       </VStack>
     </BorderBox>

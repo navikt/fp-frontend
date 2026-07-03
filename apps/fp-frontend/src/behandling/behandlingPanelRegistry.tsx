@@ -45,7 +45,7 @@ type PanelConfigUtenArbeidsgivere = BasePanelConfig & {
   render: (props: PanelRenderProps) => ReactNode;
 };
 
-export type PanelConfig = PanelConfigMedArbeidsgivere | PanelConfigUtenArbeidsgivere;
+type PanelConfig = PanelConfigMedArbeidsgivere | PanelConfigUtenArbeidsgivere;
 
 const førstegangsbehandlingEllerRevurdering = ['BT-002', 'BT-004'] satisfies readonly BehandlingType[];
 const tilbakekrevingBehandlingTyper = ['BT-007', 'BT-009'] satisfies readonly BehandlingType[];

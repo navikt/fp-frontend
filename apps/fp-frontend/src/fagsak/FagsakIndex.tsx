@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
 
 import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Location } from 'history';
 
-import { ErrorBoundary, useRestApiErrorDispatcher, useTrackRouteParam } from '@navikt/fp-app-felles';
+import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import type { AnnenPartBehandling, Behandling, Fagsak } from '@navikt/fp-types';
 
@@ -62,9 +62,8 @@ const Visittkort = ({ fagsak, erTilbakekreving }: { fagsak: Fagsak; erTilbakekre
 export const FagsakIndex = () => {
   const { isRequestPending } = useRequestPendingContext();
 
-  const { selected: selectedSaksnummer } = useTrackRouteParam<string>({
-    paramName: 'saksnummer',
-  });
+  const params = useParams<{ saksnummer: string }>();
+  const selectedSaksnummer = params['saksnummer']!;
 
   const [behandlingUuidFraUrl, setBehandlingUuidFraUrl] = useState<string | undefined>();
   const [behandling, setBehandling] = useState<Behandling>();

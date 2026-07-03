@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { useTrackRouteParam } from '@navikt/fp-app-felles';
+import { parseQueryString } from '@navikt/fp-app-felles';
 import { type AvklartRisikoklassifiseringAp, RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
 import type {
   AksessRettigheter,
@@ -37,14 +37,9 @@ interface Props {
 export const RisikoklassifiseringIndex = ({ fagsakData, behandling, setBehandling }: Props) => {
   const fagsak = fagsakData.getFagsak();
 
-  const { selected: isRiskPanelOpen = false } = useTrackRouteParam<boolean>({
-    paramName: 'risiko',
-    parse: isOpen => isOpen === 'true',
-    isQueryParam: true,
-  });
-
   const navigate = useNavigate();
   const location = useLocation();
+  const isRiskPanelOpen = parseQueryString(location.search)['risiko'] === 'true';
 
   const toggleRiskPanel = () => {
     void navigate(getRiskPanelLocationCreator(location)(!isRiskPanelOpen));

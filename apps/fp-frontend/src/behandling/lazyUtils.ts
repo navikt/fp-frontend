@@ -1,6 +1,6 @@
 import { type ComponentType, lazy, type LazyExoticComponent } from 'react';
 
-export const lazyWithRetry = <T>(
+const lazyWithRetry = <T>(
   componentImport: () => Promise<{ default: ComponentType<T> }>,
 ): LazyExoticComponent<ComponentType<T>> =>
   lazy<ComponentType<T>>(async () => {

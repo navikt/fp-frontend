@@ -4,7 +4,7 @@ import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak, V
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { PanelDataProvider } from '@navikt/fp-utils';
 
-export type AksjonspunktData = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
+type AksjonspunktData = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
 /**
  * Felles datasett som alle fakta- og prosesspaneler sender vidare til formene sine.

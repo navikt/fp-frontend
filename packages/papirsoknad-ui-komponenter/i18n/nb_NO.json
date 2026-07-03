@@ -218,5 +218,5 @@
   "Registrering.TheOtherParent.OtherParentKnowPeriods": "Annen forelder er kjent med hvilke perioder det er søkt om",
 
   "PermisjonPanel.MinstEnPeriodeRequired": "Minst en av følgende perioder må være utfylt: fullt uttak, overføring av kvote, utsettelse eller gradering",
-  "PermisjonPanel.DateRangesOverlappingPeriodTypes": "Perioder kan ikke overlappe i tid (uttak, utsettelse, gradering, overforing, opphold)"
+  "PermisjonPanel.DateRangesOverlappingPeriodTypes": "Perioder kan ikke overlappe i tid"
 }
