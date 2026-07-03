@@ -17,7 +17,10 @@ import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter
 
 import { forhåndsvisMelding, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { KlageBehandlingModal } from '../modaler/KlageBehandlingModal';
 
@@ -53,7 +56,10 @@ export const VurderingFellesProsessStegInitPanel = ({
 
   const navigate = useNavigate();
 
-  const { data: klageVurdering } = useQuery(api.klage.klageVurderingOptions(behandling));
+  const erAktiv = useErProsessPanelAktiv(prosessPanelKode, true, standardPanelProps.harÅpentAksjonspunkt);
+  const skalHenteData = useSkalHenteData(prosessPanelKode, erAktiv, 'prosess');
+
+  const { data: klageVurdering } = useQuery(medPrioritet(api.klage.klageVurderingOptions(behandling), skalHenteData));
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: KlagevurderingForhåndsvisData) =>

@@ -10,7 +10,10 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 
 const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
   AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
@@ -31,9 +34,16 @@ export const MedlemskapsvilkaretFaktaInitPanel = () => {
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const erAktiv = useErFaktaPanelAktiv(
+    FaktaPanelCode.MEDLEMSKAPSVILKARET,
+    behandling.harSøknad,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.MEDLEMSKAPSVILKARET, erAktiv, 'fakta');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: medlemskap } = useQuery(api.medlemskapOptions(behandling));
+  const { data: medlemskap } = useQuery(medPrioritet(api.medlemskapOptions(behandling), skalHenteData));
 
   return (
     <FaktaDefaultInitPanel

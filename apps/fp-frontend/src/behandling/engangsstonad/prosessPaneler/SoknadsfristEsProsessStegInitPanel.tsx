@@ -10,9 +10,12 @@ import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
 import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [
@@ -35,8 +38,22 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
     ap => ap.definisjon === AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
   );
 
-  const { data: søknad } = useQuery(api.søknadOptions(behandling));
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, harSoknadsfristAp));
+  const skalPanelVisesIMeny = skalViseProsessPanel(
+    standardPanelProps.aksjonspunkterForPanel,
+    VILKAR_KODER,
+    standardPanelProps.vilkårForPanel,
+  );
+  const erAktiv = useErProsessPanelAktiv(
+    ProsessStegCode.SOEKNADSFRIST,
+    skalPanelVisesIMeny,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(ProsessStegCode.SOEKNADSFRIST, erAktiv, 'prosess');
+
+  const { data: søknad } = useQuery(medPrioritet(api.søknadOptions(behandling), skalHenteData));
+  const { data: familiehendelse } = useQuery(
+    medPrioritet(api.familiehendelseOptions(behandling, harSoknadsfristAp), skalHenteData),
+  );
 
   return (
     <PanelOverstyringProvider
@@ -48,11 +65,7 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
         standardPanelProps={standardPanelProps}
         prosessPanelKode={ProsessStegCode.SOEKNADSFRIST}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
-        skalPanelVisesIMeny={skalViseProsessPanel(
-          standardPanelProps.aksjonspunkterForPanel,
-          VILKAR_KODER,
-          standardPanelProps.vilkårForPanel,
-        )}
+        skalPanelVisesIMeny={skalPanelVisesIMeny}
       >
         <>
           {!harSoknadsfristAp && (

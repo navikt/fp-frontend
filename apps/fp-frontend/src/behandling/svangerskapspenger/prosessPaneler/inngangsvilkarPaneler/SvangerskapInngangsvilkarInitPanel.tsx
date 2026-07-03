@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -8,12 +9,17 @@ import { SvangerskapVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-svanger
 import type { VilkårType } from '@navikt/fp-types';
 
 import { getBehandlingApi } from '../../../../data/behandlingApi';
+import { medPrioritet } from '../../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../../felles/prioritet/PanelDataPrioritetContext';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { InngangsvilkårPanelDataContext } from '../../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET];
 
 const VILKAR_KODER = ['SVP_VK_1'] satisfies VilkårType[];
+
+const PANEL_ID = 'SVANGERSKAP';
 
 export const SvangerskapInngangsvilkarInitPanel = () => {
   const intl = useIntl();
@@ -28,17 +34,20 @@ export const SvangerskapInngangsvilkarInitPanel = () => {
     isReadOnly: standardPanelProps.isReadOnly || !harAksjonspunkt,
   };
 
+  const { erPanelValgt } = use(InngangsvilkårPanelDataContext);
+  const skalHenteData = useSkalHenteData(PANEL_ID, erPanelValgt, 'inngangsvilkar');
+
   const api = getBehandlingApi(panelProps.behandling);
 
   const { data: svangerskapspengerTilrettelegging } = useQuery(
-    api.svp.svangerskapspengerTilretteleggingOptions(panelProps.behandling),
+    medPrioritet(api.svp.svangerskapspengerTilretteleggingOptions(panelProps.behandling), skalHenteData),
   );
 
   return (
     <InngangsvilkarDefaultInitPanel
       vilkårKoder={VILKAR_KODER}
       standardPanelProps={panelProps}
-      inngangsvilkårPanelKode="SVANGERSKAP"
+      inngangsvilkårPanelKode={PANEL_ID}
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
     >
       <>

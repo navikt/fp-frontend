@@ -8,7 +8,10 @@ import { AnkeProsessIndex } from '@navikt/fp-prosess-anke';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 export const AnkeBehandlingProsessStegInitPanel = () => {
@@ -16,10 +19,13 @@ export const AnkeBehandlingProsessStegInitPanel = () => {
 
   const { behandling, alleBehandlinger } = useBehandlingDataContext();
 
-  const api = getBehandlingApi(behandling);
-  const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(behandling));
-
   const standardPanelProps = useStandardProsessPanelProps();
+
+  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.ANKEBEHANDLING, true, standardPanelProps.harÅpentAksjonspunkt);
+  const skalHenteData = useSkalHenteData(ProsessStegCode.ANKEBEHANDLING, erAktiv, 'prosess');
+
+  const api = getBehandlingApi(behandling);
+  const { data: ankeVurdering } = useQuery(medPrioritet(api.anke.ankeVurderingOptions(behandling), skalHenteData));
 
   return (
     <ProsessDefaultInitPanel

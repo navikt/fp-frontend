@@ -1,3 +1,5 @@
+import { use } from 'react';
+
 import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -6,7 +8,10 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../../felles/prioritet/PanelDataPrioritetContext';
 import { InngangsvilkarOverstyringDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { InngangsvilkårPanelDataContext } from '../../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
@@ -17,14 +22,19 @@ const AKSJONSPUNKT_KODER = [
 
 const VILKAR_KODER = ['FP_VK_2_F'] satisfies VilkårType[];
 
+const PANEL_ID = 'MEDLEMSKAP_FORUTGAENDE';
+
 export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
   const { behandling } = useBehandlingDataContext();
 
+  const { erPanelValgt } = use(InngangsvilkårPanelDataContext);
+  const skalHenteData = useSkalHenteData(PANEL_ID, erPanelValgt, 'inngangsvilkar');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: medlemskap, isFetching } = useQuery(api.medlemskapOptions(behandling));
+  const { data: medlemskap, isFetching } = useQuery(medPrioritet(api.medlemskapOptions(behandling), skalHenteData));
 
   const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
     ap => ap.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR && ap.status !== 'AVBR',

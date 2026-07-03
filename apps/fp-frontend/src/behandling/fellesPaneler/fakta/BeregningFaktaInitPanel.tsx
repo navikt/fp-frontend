@@ -21,7 +21,10 @@ import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
 
@@ -43,16 +46,26 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const skalPanelVisesIMeny = harLenke(behandling, 'BEREGNINGSGRUNNLAG');
+  const erAktiv = useErFaktaPanelAktiv(
+    FaktaPanelCode.BEREGNING,
+    skalPanelVisesIMeny,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.BEREGNING, erAktiv, 'fakta');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
+  const { data: beregningsgrunnlag, isFetching } = useQuery(
+    medPrioritet(api.beregningsgrunnlagOptions(behandling), skalHenteData),
+  );
 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.BEREGNING}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Beregning' })}
-      skalPanelVisesIMeny={harLenke(behandling, 'BEREGNINGSGRUNNLAG')}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {isFetching ? (
         <LoadingPanel />

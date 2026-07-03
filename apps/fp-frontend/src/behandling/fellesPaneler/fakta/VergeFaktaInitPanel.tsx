@@ -10,7 +10,10 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_VERGE];
 
@@ -24,8 +27,16 @@ export const VergeFaktaInitPanel = () => {
   const api = getBehandlingApi(behandling);
 
   const skalPanelVisesIMeny = harLenke(behandling, 'VERGE');
+  const erAktiv = useErFaktaPanelAktiv(
+    FaktaPanelCode.VERGE,
+    skalPanelVisesIMeny,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.VERGE, erAktiv, 'fakta');
 
-  const { data: verge, isFetching } = useQuery(api.vergeOptions(behandling, skalPanelVisesIMeny));
+  const { data: verge, isFetching } = useQuery(
+    medPrioritet(api.vergeOptions(behandling, skalPanelVisesIMeny), skalHenteData),
+  );
 
   return (
     <FaktaDefaultInitPanel

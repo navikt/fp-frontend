@@ -10,8 +10,11 @@ import type { ArbeidsgiverOpplysningerPerId, VilkårType } from '@navikt/fp-type
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, AksjonspunktKode.UTGÅTT_5017];
@@ -28,24 +31,31 @@ export const OpplysningspliktProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
 
   const { behandling } = useBehandlingDataContext();
 
+  const skalPanelVisesIMeny =
+    standardPanelProps.behandling.type === 'BT-004'
+      ? false
+      : skalViseProsessPanel(
+          standardPanelProps.aksjonspunkterForPanel,
+          VILKAR_KODER,
+          standardPanelProps.vilkårForPanel,
+        );
+  const erAktiv = useErProsessPanelAktiv(
+    ProsessStegCode.OPPLYSNINGSPLIKT,
+    skalPanelVisesIMeny,
+    standardPanelProps.harÅpentAksjonspunkt,
+  );
+  const skalHenteData = useSkalHenteData(ProsessStegCode.OPPLYSNINGSPLIKT, erAktiv, 'prosess');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: søknad } = useQuery(api.søknadOptions(behandling));
+  const { data: søknad } = useQuery(medPrioritet(api.søknadOptions(behandling), skalHenteData));
 
   return (
     <ProsessDefaultInitPanel
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.OPPLYSNINGSPLIKT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
-      skalPanelVisesIMeny={
-        standardPanelProps.behandling.type === 'BT-004'
-          ? false
-          : skalViseProsessPanel(
-              standardPanelProps.aksjonspunkterForPanel,
-              VILKAR_KODER,
-              standardPanelProps.vilkårForPanel,
-            )
-      }
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {søknad ? (
         <SokersOpplysningspliktVilkarProsessIndex

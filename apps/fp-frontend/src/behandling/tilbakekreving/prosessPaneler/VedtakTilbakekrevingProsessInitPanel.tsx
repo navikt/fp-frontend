@@ -24,7 +24,10 @@ import { useMellomlagretFormData } from '@navikt/fp-utils';
 import { forhåndsvisVedtaksbrev, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
+import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ÅpenRevurderingModal } from '../modaler/ÅpenRevurderingModal';
 
@@ -58,8 +61,15 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
 
   const api = getBehandlingApi(behandling);
 
-  const { data: beregningsresultat } = useQuery(api.tilbakekreving.beregningsresultatOptions(behandling));
-  const { data: vedtaksbrev } = useQuery(api.tilbakekreving.vedtaksbrevOptions(behandling));
+  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.VEDTAK, true, standardPanelProps.harÅpentAksjonspunkt);
+  const skalHenteData = useSkalHenteData(ProsessStegCode.VEDTAK, erAktiv, 'prosess');
+
+  const { data: beregningsresultat } = useQuery(
+    medPrioritet(api.tilbakekreving.beregningsresultatOptions(behandling), skalHenteData),
+  );
+  const { data: vedtaksbrev } = useQuery(
+    medPrioritet(api.tilbakekreving.vedtaksbrevOptions(behandling), skalHenteData),
+  );
 
   const { mutateAsync: forhandsvisVedtaksbrev } = useMutation({
     mutationFn: (values: ForhandsvisData) => forhåndsvisVedtaksbrev(values),

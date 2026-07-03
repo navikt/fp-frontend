@@ -9,7 +9,10 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
+import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { medPrioritet } from '../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
@@ -30,10 +33,13 @@ export const SakenFaktaInitPanel = () => {
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const erAktiv = useErFaktaPanelAktiv(FaktaPanelCode.SAKEN, true, standardPanelProps.harÅpentAksjonspunkt);
+  const skalHenteData = useSkalHenteData(FaktaPanelCode.SAKEN, erAktiv, 'fakta');
+
   const api = getBehandlingApi(behandling);
 
-  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(behandling));
-  const { data: utlandDokStatus } = useQuery(api.utlandDokStatusOptions(behandling));
+  const { data: ytelsefordeling } = useQuery(medPrioritet(api.ytelsefordelingOptions(behandling), skalHenteData));
+  const { data: utlandDokStatus } = useQuery(medPrioritet(api.utlandDokStatusOptions(behandling), skalHenteData));
 
   return (
     <FaktaDefaultInitPanel

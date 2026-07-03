@@ -1,3 +1,4 @@
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { useQuery } from '@tanstack/react-query';
@@ -7,10 +8,13 @@ import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjeni
 import type { VilkårType } from '@navikt/fp-types';
 
 import { getBehandlingApi } from '../../../../data/behandlingApi';
+import { medPrioritet } from '../../../felles/prioritet/medPrioritet';
+import { useSkalHenteData } from '../../../felles/prioritet/PanelDataPrioritetContext';
 import {
   InngangsvilkarDefaultInitPanel,
   InngangsvilkarOverstyringDefaultInitPanel,
 } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { InngangsvilkårPanelDataContext } from '../../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
@@ -18,21 +22,28 @@ const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET];
 
 const VILKAR_KODER = ['FP_VK_21', 'FP_VK_23'] satisfies VilkårType[];
 
+const PANEL_ID = 'OPPTJENINGSVILKARET';
+
 export const OpptjeningInngangsvilkarInitPanel = () => {
   const intl = useIntl();
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
   const harIngenAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.length === 0;
 
+  const { erPanelValgt } = use(InngangsvilkårPanelDataContext);
+  const skalHenteData = useSkalHenteData(PANEL_ID, erPanelValgt, 'inngangsvilkar');
+
   const api = getBehandlingApi(standardPanelProps.behandling);
 
-  const { data: opptjening } = useQuery(api.opptjeningOptions(standardPanelProps.behandling, !harIngenAksjonspunkt));
+  const { data: opptjening } = useQuery(
+    medPrioritet(api.opptjeningOptions(standardPanelProps.behandling, !harIngenAksjonspunkt), skalHenteData),
+  );
 
   return harIngenAksjonspunkt ? (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
       vilkårKoder={VILKAR_KODER}
-      inngangsvilkårPanelKode="OPPTJENINGSVILKARET"
+      inngangsvilkårPanelKode={PANEL_ID}
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
       overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET}
     >
@@ -42,7 +53,7 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
     <InngangsvilkarDefaultInitPanel
       standardPanelProps={standardPanelProps}
       vilkårKoder={VILKAR_KODER}
-      inngangsvilkårPanelKode="OPPTJENINGSVILKARET"
+      inngangsvilkårPanelKode={PANEL_ID}
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
     >
       <>
