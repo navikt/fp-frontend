@@ -6,6 +6,14 @@ import * as stories from './MenyEndreUtlandIndex.stories';
 
 const { Default } = composeStories(stories);
 
+const finnKnapp = (tekst: string): HTMLButtonElement => {
+  const knapp = screen.getByText(tekst).closest('button');
+  if (!knapp) {
+    throw new Error(`Fant ikke <button> for teksten "${tekst}"`);
+  }
+  return knapp;
+};
+
 describe('MenyEndreUtlandIndex', () => {
   it('skal endre fra ingenting til eøs', async () => {
     const endreFagsakMarkering = vi.fn();
@@ -40,6 +48,24 @@ describe('MenyEndreUtlandIndex', () => {
       fagsakMarkeringer: ['BOSATT_UTLAND'],
       saksnummer: '123',
     });
+    expect(lukkModal).not.toHaveBeenCalled();
+  });
+
+  it('skal disable OK/Avbryt-knappene og hindre ny innsending når lagring er isPending', async () => {
+    const endreFagsakMarkering = vi.fn();
+    const lukkModal = vi.fn();
+    render(<Default endreFagsakMarkering={endreFagsakMarkering} lukkModal={lukkModal} isPending />);
+    expect(await screen.findByText('Saksmarkering')).toBeInTheDocument();
+
+    const okKnapp = finnKnapp('OK');
+    const avbrytKnapp = finnKnapp('Avbryt');
+    expect(okKnapp).toBeDisabled();
+    expect(avbrytKnapp).toBeDisabled();
+
+    await userEvent.click(okKnapp);
+    await userEvent.click(avbrytKnapp);
+
+    expect(endreFagsakMarkering).not.toHaveBeenCalled();
     expect(lukkModal).not.toHaveBeenCalled();
   });
 });
