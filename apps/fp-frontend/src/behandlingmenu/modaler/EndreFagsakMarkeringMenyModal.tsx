@@ -25,7 +25,7 @@ export const EndreFagsakMarkeringMenyModal = ({
     a.navn.localeCompare(b.navn),
   );
 
-  const { mutate: endreFagsakMarkering } = useMutation({
+  const { mutate: endreFagsakMarkering, isPending } = useMutation({
     mutationFn: (valuesToStore: EndreUtlandFormValues) => api.endreSakMarkering(valuesToStore),
     onSuccess: () => {
       hentOgSettBehandling();
@@ -42,6 +42,7 @@ export const EndreFagsakMarkeringMenyModal = ({
       endreFagsakMarkering={endreFagsakMarkering}
       lukkModal={lukkModal}
       fagsakMarkeringerKodeverk={fagsakMarkeringerKodeverk}
+      isPending={isPending}
     />
   );
 };

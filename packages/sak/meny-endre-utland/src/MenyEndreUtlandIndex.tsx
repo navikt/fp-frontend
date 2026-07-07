@@ -18,6 +18,7 @@ interface Props {
   endreFagsakMarkering: (formData: FormValues) => void;
   lukkModal: () => void;
   fagsakMarkeringerKodeverk: KodeverkMedNavn<'FagsakMarkering'>[];
+  isPending?: boolean;
 }
 
 export const MenyEndreUtlandIndex = ({ endreFagsakMarkering, lukkModal, ...rest }: Props) => {
