@@ -32,6 +32,7 @@ export const EndreFagsakMarkeringMenyModal = ({
       void queryClient.invalidateQueries({
         queryKey: [FagsakRel.FETCH_FAGSAK],
       });
+      lukkModal();
     },
   });
 

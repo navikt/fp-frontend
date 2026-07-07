@@ -24,7 +24,6 @@ interface Props {
 export const MenyEndreUtlandIndex = ({ endreFagsakMarkering, lukkModal, ...rest }: Props) => {
   const submit = (formValues: FormValues) => {
     endreFagsakMarkering(formValues);
-    lukkModal();
   };
 
   return (

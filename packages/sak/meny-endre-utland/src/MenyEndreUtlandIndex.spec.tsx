@@ -17,12 +17,12 @@ describe('MenyEndreUtlandIndex', () => {
 
     await userEvent.click(screen.getByText('OK'));
 
-    await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(endreFagsakMarkering).toHaveBeenCalledTimes(1));
     expect(endreFagsakMarkering).toHaveBeenNthCalledWith(1, {
       fagsakMarkeringer: ['EØS_BOSATT_NORGE'],
       saksnummer: '123',
     });
+    expect(lukkModal).not.toHaveBeenCalled();
   });
 
   it('skal endre fra eøs til bosatt utland', async () => {
@@ -35,11 +35,11 @@ describe('MenyEndreUtlandIndex', () => {
 
     await userEvent.click(screen.getByText('OK'));
 
-    await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(endreFagsakMarkering).toHaveBeenCalledTimes(1));
     expect(endreFagsakMarkering).toHaveBeenNthCalledWith(1, {
       fagsakMarkeringer: ['BOSATT_UTLAND'],
       saksnummer: '123',
     });
+    expect(lukkModal).not.toHaveBeenCalled();
   });
 });
