@@ -143,7 +143,7 @@ function startApp() {
   // Server ferdig komprimerte gzip/br filer hvis mulig.
   server.use(serveKomprimerteFilerHvisMulig);
   // serve static files
-  server.use(express.static("./public"));
+  server.use(express.static("./public", { index: false }));
   server.use("*splat", (request, response) => {
     if (renderedHtml) {
       response.send(renderedHtml);
