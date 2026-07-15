@@ -2,9 +2,9 @@ import { type ReactElement } from 'react';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { Behandling, BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
-import { MellomlagretFormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
+import { MellomlagretFormDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
-import { useBehandlingDataContext } from '../context/BehandlingDataContext';
+import { BehandlingPanelDataProvider } from '../panelData/BehandlingPanelDataProvider';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
 import type { StandardProsessPanelProps } from './useStandardProsessPanelProps';
@@ -31,7 +31,7 @@ export const ProsessDefaultInitOverstyringPanel = <T extends Behandling = Behand
   return <ProsessPanel {...props} harÅpentAksjonspunkt={harÅpentAksjonspunkt} />;
 };
 
-interface ProsessPanel {
+interface ProsessPanelInterneProps {
   harÅpentAksjonspunkt: boolean;
 }
 
@@ -44,8 +44,8 @@ const ProsessPanel = <T extends Behandling>({
   standardPanelProps,
   harÅpentAksjonspunkt,
   children,
-}: Props<T> & ProsessPanel) => {
-  const { behandling, fagsak, alleKodeverk } = useBehandlingDataContext<T>();
+}: Props<T> & ProsessPanelInterneProps) => {
+  const { behandling } = standardPanelProps;
 
   const status = overstyrtStatus ?? standardPanelProps.status;
 
@@ -64,26 +64,11 @@ const ProsessPanel = <T extends Behandling>({
 
   return (
     <MellomlagretFormDataProvider behandling={behandling}>
-      <ProsessPanelWrapper
-        erPanelValgt={erPanelValgt}
-        harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
-        status={status}
-      >
+      <ProsessPanelWrapper erPanelValgt={erPanelValgt} harÅpentAksjonspunkt={harÅpentAksjonspunkt} status={status}>
         {skalVisePanel ? (
-          <PanelDataProvider
-            fagsak={fagsak}
-            behandling={behandling}
-            alleKodeverk={alleKodeverk}
-            alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
-            aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
-            vilkårForPanel={standardPanelProps.vilkårForPanel}
-            harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
-            isReadOnly={standardPanelProps.isReadOnly}
-            isSubmittable={standardPanelProps.isSubmittable}
-            submitCallback={standardPanelProps.submitCallback}
-          >
+          <BehandlingPanelDataProvider panelData={{ ...standardPanelProps, harÅpentAksjonspunkt }}>
             {children}
-          </PanelDataProvider>
+          </BehandlingPanelDataProvider>
         ) : null}
       </ProsessPanelWrapper>
     </MellomlagretFormDataProvider>

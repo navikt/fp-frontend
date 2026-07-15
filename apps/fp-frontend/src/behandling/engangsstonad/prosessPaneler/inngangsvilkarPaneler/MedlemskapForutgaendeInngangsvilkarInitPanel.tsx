@@ -4,7 +4,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { VilkårType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../../felles/context/BehandlingDataContext';
 import { InngangsvilkarOverstyringDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
@@ -22,7 +22,7 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: medlemskap, isFetching } = useQuery(api.medlemskapOptions(behandling));
 

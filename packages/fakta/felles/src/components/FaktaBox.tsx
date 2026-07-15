@@ -1,14 +1,12 @@
-import React, { forwardRef, type ForwardRefExoticComponent, type PropsWithChildren, type ReactNode } from 'react';
+import { type ComponentPropsWithRef, type ReactNode } from 'react';
 
 import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 
 import { type FaktaKilde, getLabelForFaktaKilde } from './FaktaKilde';
 
-export const FaktaGruppe = forwardRef((props, ref) => (
+export const FaktaGruppe = ({ ref, ...props }: ComponentPropsWithRef<'div'>) => (
   <HStack gap="space-8" style={{ display: 'flex' }} {...props} ref={ref} />
-)) as ForwardRefExoticComponent<PropsWithChildren & React.RefAttributes<HTMLDivElement>>;
-
-FaktaGruppe.displayName = 'FaktaGruppe';
+);
 
 interface FaktaBoxProps {
   label: string | ReactNode;

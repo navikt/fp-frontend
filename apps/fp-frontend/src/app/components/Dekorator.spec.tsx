@@ -1,5 +1,6 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import * as stories from './Dekorator.stories';
 
@@ -10,6 +11,14 @@ describe('Dekorator', () => {
     render(<Default />);
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
     expect(await screen.findByText('Sara Saksbehandler')).toBeInTheDocument();
+  });
+
+  it('skal vise snarveimeny utanfor prod', async () => {
+    render(<Default />);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Systemer og oppslagsverk' }));
+
+    expect(await screen.findByText('Tastatursnarveier (hjelp)')).toBeInTheDocument();
   });
 
   it('skal vise feilmeldinger som ligger i URL', async () => {

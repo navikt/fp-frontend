@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 import EditorJS, { type EditorConfig, type I18nConfig, type ToolConstructable } from '@editorjs/editorjs';
 import Header from '@editorjs/header';
@@ -34,10 +34,11 @@ export const useBrevEditorJs = (
   onAutoSave: (html?: string) => Promise<void>,
 ) => {
   // Hindrar tullball grunna to renders i DEV => React.StrictMode
-  const refMounted = useRef<boolean>(false);
-  const refDestroyed = useRef<boolean>(false);
-  const refEditorJs = useRef<EditorJS>(null);
-  const refCurrentHtml = useRef('');
+  const mountedRef = useRef<boolean>(false);
+  const destroyedRef = useRef<boolean>(false);
+  const editorJsRef = useRef<EditorJS>(null);
+  const undoRef = useRef<Undo>(null);
+  const currentHtmlRef = useRef('');
 
   // Refs for å unngå stale closures i EditorJS onChange-callback
   const onAutoSaveRef = useRef(onAutoSave);
@@ -54,32 +55,32 @@ export const useBrevEditorJs = (
   const autoSaveDebouncer = useAutoSaveDebouncer();
 
   const validerOgAutoLagre = async () => {
-    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
+    const editor = notEmpty(editorJsRef.current, EDITOR_IKKE_INITIALISERT);
     const innhold = await editor.save();
     const html = edjsHTML().parse(innhold);
 
-    if (refCurrentHtml.current !== html && erRedigertHtmlGyldig(html)) {
+    if (currentHtmlRef.current !== html && erRedigertHtmlGyldig(html)) {
       void onAutoSaveRef.current(lagRedigerbartInnholdWrapper(html, footerRef.current));
     }
   };
 
   useEffect(() => {
-    if (!refEditorJs.current && !refMounted.current) {
-      refMounted.current = true;
+    if (!editorJsRef.current && !mountedRef.current) {
+      mountedRef.current = true;
       const editor = new EditorJS({
         minHeight: 20,
         data: konverterHtmlToEditorJsFormat(redigerbartInnhold),
         holder: editorHolderId,
         i18n: lagEditorJsI18n(),
         onReady: async () => {
-          if (refDestroyed.current) {
+          if (destroyedRef.current) {
             return;
           }
-          new Undo({ editor });
+          undoRef.current = new Undo({ editor });
 
           // For å seinare kunne finna ut om innhaldet er endra
           const innhold = await editor.save();
-          refCurrentHtml.current = edjsHTML().parse(innhold);
+          currentHtmlRef.current = edjsHTML().parse(innhold);
         },
         tools: getTools(),
         onChange: () => {
@@ -88,37 +89,38 @@ export const useBrevEditorJs = (
       });
       // Set ref umiddelbart slik at cleanup alltid kan kalle destroy(),
       // sjølv om komponenten unmountar før onReady har fyrt
-      refEditorJs.current = editor;
+      editorJsRef.current = editor;
     }
 
     return () => {
-      refDestroyed.current = true;
-      if (refEditorJs.current?.destroy) {
-        refEditorJs.current.destroy();
+      destroyedRef.current = true;
+      if (editorJsRef.current?.destroy) {
+        editorJsRef.current.destroy();
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- editor skal kun initialiserast ein gong ved montering
   }, []);
 
   const tilbakestillEndringer = async (opprinneligRedigerbartInnhold: string) => {
-    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
+    const editor = notEmpty(editorJsRef.current, EDITOR_IKKE_INITIALISERT);
     await editor.blocks.clear();
     await editor.blocks.render(konverterHtmlToEditorJsFormat(opprinneligRedigerbartInnhold));
     await editor.isReady;
 
     const innhold = await editor.save();
-    refCurrentHtml.current = edjsHTML().parse(innhold);
+    currentHtmlRef.current = edjsHTML().parse(innhold);
 
     void onAutoSaveRef.current(undefined);
   };
 
   /** Kombinerer validering, endringssjekk og HTML-henting i ett editor.save()-kall */
   const hentEditorStatus = async () => {
-    const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
+    const editor = notEmpty(editorJsRef.current, EDITOR_IKKE_INITIALISERT);
     const innhold = await editor.save();
     const html = edjsHTML().parse(innhold);
     return {
       erGyldig: erRedigertHtmlGyldig(html),
-      erEndret: refCurrentHtml.current !== html,
+      erEndret: currentHtmlRef.current !== html,
       redigertHtml: lagRedigerbartInnholdWrapper(html, footerRef.current),
     };
   };
@@ -129,11 +131,9 @@ export const useBrevEditorJs = (
 const getTimeoutValue = () => (import.meta.env.MODE === 'test' ? 0 : 1000);
 
 const useAutoSaveDebouncer = () => {
-  const lagre = debounce((lagreFn: () => void) => {
-    lagreFn();
-  }, getTimeoutValue());
+  const lagre = useMemo(() => debounce((lagreFn: () => void) => lagreFn(), getTimeoutValue()), []);
 
-  useEffect(() => () => lagre.cancel(), []);
+  useEffect(() => () => lagre.cancel(), [lagre]);
 
   return lagre;
 };

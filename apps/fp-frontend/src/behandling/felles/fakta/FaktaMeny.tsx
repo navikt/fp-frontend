@@ -1,4 +1,4 @@
-import { createContext, type JSX, type ReactNode, useMemo } from 'react';
+import { createContext, type JSX, type ReactNode, useMemo, useRef } from 'react';
 import { useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
@@ -7,7 +7,11 @@ import { SideMenu } from '@navikt/ft-plattform-komponenter';
 
 import type { Behandling } from '@navikt/fp-types';
 
+import { BEHANDLING_SNARVEG_IDER } from '../../../snarveger/snarvegDefinisjoner';
+import { useRegistrerSnarveg } from '../../../snarveger/SnarvegerContext';
+import { useFokuserVedPanelbyte } from '../../../snarveger/useTastaturfokus';
 import { useBehandlingDataContext } from '../context/BehandlingDataContext';
+import { finnNabopanelId } from '../menyNavigasjon';
 import { type FaktaPanelMedÅpentApInfo, type FaktaPanelMenyData, useFaktaPanelMenyData } from './useFaktaPanelMenyData';
 
 import styles from './faktaMeny.module.css';
@@ -31,6 +35,22 @@ export const FaktaMeny = <T extends Behandling>({
 
   const { faktaPanelMenyData, settFaktaPanelMenyData } = useFaktaPanelMenyData(setFaktaPanelMedÅpentApInfo);
 
+  const innholdRef = useRef<HTMLDivElement>(null);
+  const planleggInnholdsfokus = useFokuserVedPanelbyte(valgtFaktaSteg, () =>
+    innholdRef.current?.focus({ preventScroll: true }),
+  );
+
+  const byttFaktaPanel = (retning: 1 | -1) => {
+    const nyId = finnNabopanelId(faktaPanelMenyData, retning);
+    if (nyId) {
+      planleggInnholdsfokus(nyId);
+      oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, nyId);
+    }
+  };
+
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.NESTE_FAKTA, () => byttFaktaPanel(1));
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.FORRIGE_FAKTA, () => byttFaktaPanel(-1));
+
   //Denne er alltid false ved første render siden ingen paneler er registrert på dette tidspunktet
   const harFaktapaneler = faktaPanelMenyData.length > 0;
 
@@ -53,7 +73,7 @@ export const FaktaMeny = <T extends Behandling>({
           />
         </div>
       )}
-      <div className={styles['content']}>
+      <div className={styles['content']} ref={innholdRef} tabIndex={-1}>
         <FaktaMenyProvider
           valgtFaktaSteg={valgtFaktaSteg}
           settFaktaPanelMenyData={settFaktaPanelMenyData}
@@ -83,5 +103,5 @@ const FaktaMenyProvider = (props: PropsContext): JSX.Element => {
 
   const values = useMemo(() => otherProps, [otherProps]);
 
-  return <FaktaMenyContext.Provider value={values}>{children}</FaktaMenyContext.Provider>;
+  return <FaktaMenyContext value={values}>{children}</FaktaMenyContext>;
 };

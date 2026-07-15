@@ -8,7 +8,7 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SokersOpplysningspliktVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-sokers-opplysningsplikt';
 import type { ArbeidsgiverOpplysningerPerId, VilkårType } from '@navikt/fp-types';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
@@ -28,7 +28,7 @@ export const OpplysningspliktProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
 
   const { behandling } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
 

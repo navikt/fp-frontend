@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
@@ -44,7 +44,7 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet }
     defaultValues: lagretFilter ?? formDefaultValues,
   });
 
-  const values = formMethods.watch();
+  const values = useWatch({ control: formMethods.control });
 
   useStoreValuesInLocalStorage(formName, values);
 

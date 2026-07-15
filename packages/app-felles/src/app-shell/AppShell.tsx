@@ -129,7 +129,7 @@ const AppShellInner = ({ onHeaderHeightChange, themeLocalStorageKey, children }:
   );
 
   return (
-    <AppShellContext.Provider value={contextValue}>
+    <AppShellContext value={contextValue}>
       <Theme theme={theme}>
         <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed}>
           {children}
@@ -137,7 +137,7 @@ const AppShellInner = ({ onHeaderHeightChange, themeLocalStorageKey, children }:
           {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
         </ErrorBoundary>
       </Theme>
-    </AppShellContext.Provider>
+    </AppShellContext>
   );
 };
 

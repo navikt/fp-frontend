@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { useForm, type UseFormGetValues } from 'react-hook-form';
+import { useState } from 'react';
+import { useForm, type UseFormGetValues, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
@@ -79,7 +79,7 @@ export const ManglendeArbeidsforholdForm = ({
 
   useSetDirtyForm(formMethods.formState.isDirty);
 
-  const saksbehandlersVurdering = formMethods.watch('saksbehandlersVurdering');
+  const saksbehandlersVurdering = useWatch({ control: formMethods.control, name: 'saksbehandlersVurdering' });
 
   const avbryt = () => {
     lukkArbeidsforholdRad();
@@ -118,9 +118,7 @@ export const ManglendeArbeidsforholdForm = ({
       .finally(() => formMethods.reset(formValues));
   };
 
-  const buttonRef = useRef<SVGSVGElement>(null);
-  const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
+  const [anchorEl, setAnchorEl] = useState<SVGSVGElement | null>(null);
 
   return (
     <VStack gap="space-32">
@@ -139,14 +137,13 @@ export const ManglendeArbeidsforholdForm = ({
                 <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
                 <QuestionmarkDiamondIcon
                   className={styles['svg']}
-                  ref={buttonRef}
-                  onClick={toggleHjelpetekst}
+                  onClick={event => setAnchorEl(anchorEl ? null : event.currentTarget)}
                   title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
                 />
                 <Popover
-                  open={openState}
-                  onClose={toggleHjelpetekst}
-                  anchorEl={buttonRef.current}
+                  open={anchorEl !== null}
+                  onClose={() => setAnchorEl(null)}
+                  anchorEl={anchorEl}
                   className={styles['hjelpetekst']}
                 >
                   <Popover.Content className={styles['hjelpetekstInnhold']}>

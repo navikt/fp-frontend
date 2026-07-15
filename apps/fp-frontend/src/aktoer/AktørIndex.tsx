@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { useTrackRouteParam } from '@navikt/fp-app-felles';
 import { AktørSakIndex } from '@navikt/fp-sak-aktor';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 
@@ -12,9 +11,8 @@ import { aktørInfoOptions } from '../data/fagsakApi';
 import { useFpSakKodeverk } from '../data/useKodeverk';
 
 export const AktørIndex = () => {
-  const { selected: selectedAktoerId } = useTrackRouteParam<string>({
-    paramName: 'aktoerId',
-  });
+  const params = useParams<{ aktoerId: string }>();
+  const selectedAktoerId = params['aktoerId']!;
 
   const { data: aktørInfo, status } = useQuery(aktørInfoOptions(selectedAktoerId));
 

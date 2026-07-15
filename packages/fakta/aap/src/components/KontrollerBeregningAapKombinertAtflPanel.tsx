@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, VStack } from '@navikt/ds-react';
@@ -28,7 +28,7 @@ export const KontrollerBeregningAapKombinertAtflPanel = ({ aksjonspunkt }: Props
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkt),
   });
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   return (
     <VStack gap="space-16">

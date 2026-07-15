@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronLeftIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons';
@@ -29,12 +29,13 @@ export const JournalføringHeader = ({
 }: Props) => {
   const [åpenSøkemodal, setÅpenSøkemodal] = useState(false);
 
-  useEffect(() => {
+  const [forrigeJournalpost, setForrigeJournalpost] = useState(valgtJournalpost);
+  if (valgtJournalpost !== forrigeJournalpost) {
+    setForrigeJournalpost(valgtJournalpost);
     if (valgtJournalpost) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setÅpenSøkemodal(false);
     }
-  }, [valgtJournalpost]);
+  }
 
   return (
     <HStack className={styles['header']}>

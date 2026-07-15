@@ -35,8 +35,7 @@ export const ReactECharts = ({ option, style, height }: Props): JSX.Element => {
         chart.setOption(option, { notMerge: true });
       }
     }
-    // eslint-disable-next-line react-hooks/refs
-  }, [chartRef.current, option]);
+  }, [option]);
 
   return <div ref={chartRef} style={{ width: 'auto', height, ...style }} />;
 };

@@ -1,12 +1,12 @@
-import { Suspense, useEffect, useState } from 'react';
-import { type NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
+import { Suspense, useEffect, useMemo, useState } from 'react';
+import { type NavigateFunction, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { replaceNorwegianCharacters } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 import type { Location } from 'history';
 
-import { ErrorBoundary, useRestApiErrorDispatcher, useTrackRouteParam } from '@navikt/fp-app-felles';
+import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import type { Behandling } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -17,9 +17,12 @@ import { useBehandlingPollingOperasjoner } from '../data/polling/useBehandlingPo
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
 import { BehandlingDataProvider } from './felles/context/BehandlingDataContext';
-import { lazyWithRetry } from './lazyUtils';
+import { lazyNamedWithRetry } from './lazyUtils';
 
-const BehandlingPapirsoknadIndex = lazyWithRetry(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));
+const BehandlingPapirsoknadIndex = lazyNamedWithRetry<Record<never, never>, 'BehandlingPapirsoknadIndex'>(
+  () => import('./papirsoknad/BehandlingPapirsoknadIndex'),
+  'BehandlingPapirsoknadIndex',
+);
 
 interface Props {
   behandling?: Behandling;
@@ -41,12 +44,12 @@ export const BehandlingIndex = ({
   fagsakData,
   setBehandlingUuidFraUrl,
 }: Props) => {
-  const { selected: behandlingUuid } = useTrackRouteParam<string>({
-    paramName: 'behandlingUuid',
-  });
+  const params = useParams<{ behandlingUuid: string }>();
+  const behandlingUuid = params['behandlingUuid']!;
 
   useEffect(() => {
     setBehandlingUuidFraUrl(behandlingUuid);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- synkroniserer berre når behandlingUuid frå URL endrar seg; setter-prop er stabil
   }, [behandlingUuid]);
 
   if (!behandling) {
@@ -81,11 +84,10 @@ const BehandlingIndexWrapper = ({
   const initFetchQuery = useQuery(initFetchOptions());
 
   const fagsak = fagsakData.getFagsak();
-  const rettigheter = getAccessRights(
-    notEmpty(initFetchQuery.data).innloggetBruker,
-    fagsak.status,
-    behandling.status,
-    behandling.type,
+  const innloggetBruker = notEmpty(initFetchQuery.data).innloggetBruker;
+  const rettigheter = useMemo(
+    () => getAccessRights(innloggetBruker, fagsak.status, behandling.status, behandling.type),
+    [innloggetBruker, fagsak.status, behandling.status, behandling.type],
   );
 
   const [skalOppdatereEtterBekreftelseAvAp, setSkalOppdatereEtterBekreftelseAvAp] = useState(true);
@@ -104,7 +106,10 @@ const BehandlingIndexWrapper = ({
 
   const navigate = useNavigate();
   const location = useLocation();
-  const oppdaterProsessStegOgFaktaPanelIUrl = getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate);
+  const oppdaterProsessStegOgFaktaPanelIUrl = useMemo(
+    () => getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate),
+    [location, navigate],
+  );
 
   if (kodeverk === undefined) {
     return <LoadingPanel />;

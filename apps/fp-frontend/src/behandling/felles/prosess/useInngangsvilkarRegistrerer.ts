@@ -23,5 +23,6 @@ export const useInngangsvilkarRegistrerer = (
         aksjonspunktTekst: erOverstyrt || erAksjonspunktApent ? aksjonspunktTekst : undefined,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- oppdater panel-data berre ved endra synleg-/aksjonspunkt-tilstand; resten er konstant/stabilt
   }, [erAksjonspunktApent, skalVises, erOverstyrt]);
 };

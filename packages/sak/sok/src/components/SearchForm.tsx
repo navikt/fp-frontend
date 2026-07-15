@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
@@ -32,7 +32,7 @@ export const SearchForm = ({ searchStarted, searchResultAccessDenied, searchFags
     },
   });
 
-  const searchString = formMethods.watch('searchString');
+  const searchString = useWatch({ control: formMethods.control, name: 'searchString' });
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={searchFagsakCallback} className={styles['container']}>

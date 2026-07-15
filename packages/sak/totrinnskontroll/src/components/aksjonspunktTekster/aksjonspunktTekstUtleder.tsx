@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, isFaktaUttakAksjonspunkt, isUttakAksjonspunkt } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Behandlingsresultat,
   BehandlingsresultatDtoFpTilbake,
@@ -208,3 +208,33 @@ export const getAksjonspunkttekst = (
   }
   return getTextFromAksjonspunktkode(aksjonspunkt);
 };
+
+const faktaUttakAksjonspunkter = [
+  AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+  AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
+  AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
+  AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
+  AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
+];
+
+const uttakAksjonspunkter = [
+  AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+  AksjonspunktKode.FASTSETT_UTTAKPERIODER,
+  AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT,
+  AksjonspunktKode.UTGÅTT_5067,
+  AksjonspunktKode.UTGÅTT_5069,
+  AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
+  AksjonspunktKode.UTGÅTT_5075,
+  AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD,
+  AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
+  AksjonspunktKode.UTGÅTT_5078,
+  AksjonspunktKode.UTGÅTT_5079,
+];
+
+const aksjonspunktIsOfType =
+  (validAksjonspunktCodes: string[]) =>
+  (aksjonspunktCode: string): boolean =>
+    validAksjonspunktCodes.includes(aksjonspunktCode);
+
+const isFaktaUttakAksjonspunkt = aksjonspunktIsOfType(faktaUttakAksjonspunkter);
+const isUttakAksjonspunkt = aksjonspunktIsOfType(uttakAksjonspunkter);

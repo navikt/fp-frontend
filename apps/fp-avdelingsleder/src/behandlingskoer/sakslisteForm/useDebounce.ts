@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { type FieldValues, type Path, useFormContext, type UseFormTrigger } from 'react-hook-form';
 
 import debounce from 'lodash.debounce';
@@ -13,11 +13,22 @@ export const useDebounce = <VALUE, FORM_VALUES extends FieldValues>(
   const context = useFormContext<FORM_VALUES>();
   const validationTrigger = trigger || context.trigger;
 
-  const lagre = debounce((verdi: VALUE) => {
-    void validationTrigger(feltNavn).then(isValid => isValid && funksjon(verdi));
-  }, getTimeoutValue());
+  const sisteArgsRef = useRef({ validationTrigger, feltNavn, funksjon });
+  useEffect(() => {
+    sisteArgsRef.current = { validationTrigger, feltNavn, funksjon };
+  });
 
-  useEffect(() => () => lagre.cancel(), []);
+  const lagre = useMemo(
+    () =>
+      // eslint-disable-next-line react-hooks/refs -- lesinga skjer inne i debounce-callbacken (etter render), ikkje under render
+      debounce((verdi: VALUE) => {
+        const { validationTrigger: validate, feltNavn: felt, funksjon: fn } = sisteArgsRef.current;
+        void validate(felt).then(isValid => isValid && fn(verdi));
+      }, getTimeoutValue()),
+    [],
+  );
+
+  useEffect(() => () => lagre.cancel(), [lagre]);
 
   return lagre;
 };

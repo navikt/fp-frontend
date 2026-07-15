@@ -1,4 +1,4 @@
-import { type ComponentProps } from 'react';
+import { type ComponentProps, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -29,6 +29,8 @@ export const Termindato = ({ isReadOnly, isRequired = true }: TermindatoProps) =
   const intl = useIntl();
   const { control } = useFormContext<TermindatoFormValues>();
 
+  const [iDag] = useState(() => new Date());
+
   return (
     <RhfDatepicker
       control={control}
@@ -38,7 +40,7 @@ export const Termindato = ({ isReadOnly, isRequired = true }: TermindatoProps) =
       validate={isRequired ? [required, ...notRequiredValidation] : notRequiredValidation}
       fromDate={minTermindato().toDate()}
       toDate={maxTermindato().toDate()}
-      defaultMonth={new Date()}
+      defaultMonth={iDag}
       readOnly={isReadOnly}
     />
   );

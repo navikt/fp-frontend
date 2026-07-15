@@ -233,7 +233,7 @@ export const UttakProsessPanel = ({
 
   const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
 
-  useEffect(() => () => setMellomlagretFormData(perioder), [perioder]);
+  useEffect(() => () => setMellomlagretFormData(perioder), [perioder, setMellomlagretFormData]);
 
   const visPeriode = (per: (PeriodeSoker | AnnenforelderUttakEøsPeriode)[]) => {
     const index = per.findIndex(
@@ -286,7 +286,7 @@ export const UttakProsessPanel = ({
       return true;
     }
     return valgtPeriodeIndex !== undefined || !isDirty;
-  }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
+  }, [aksjonspunkterForPanel, perioder, valgtPeriodeIndex, isDirty]);
 
   const feilmeldinger =
     !isDirty || valgtPeriodeIndex !== undefined ? [] : validerPerioder(perioder, stønadskonto, intl);

@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeProsessIndex } from '@navikt/fp-prosess-anke';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -16,7 +16,7 @@ export const AnkeBehandlingProsessStegInitPanel = () => {
 
   const { behandling, alleBehandlinger } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
   const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(behandling));
 
   const standardPanelProps = useStandardProsessPanelProps();

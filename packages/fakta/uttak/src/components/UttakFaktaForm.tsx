@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
@@ -9,7 +9,12 @@ import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-kompon
 import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
+import {
+  type FaktaBegrunnelseFormValues,
+  FaktaBegrunnelseTextField,
+  FaktaSubmitButton,
+  validerApKodeOgHentApEnum,
+} from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
@@ -171,10 +176,11 @@ export const UttakFaktaForm = ({
     arbeidsgiverOpplysningerPerId,
   );
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
-    uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[];
-    begrunnelse: string;
-  }>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<
+    {
+      uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[];
+    } & FaktaBegrunnelseFormValues
+  >();
 
   const [uttakPerioder, setUttakPerioder] = useState<KontrollerFaktaPeriodeMedApMarkering[]>(
     mellomlagretFormData?.uttakPerioder ?? sortertePerioder,
@@ -182,51 +188,22 @@ export const UttakFaktaForm = ({
 
   const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
 
-  const formMethods = useForm<{ begrunnelse: string }>({
-    defaultValues: {
-      begrunnelse: mellomlagretFormData?.begrunnelse ?? aksjonspunkterForPanel[0]?.begrunnelse ?? '',
-    },
+  const formMethods = useForm<FaktaBegrunnelseFormValues>({
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel),
   });
 
   useEffect(
     () => () => {
       setMellomlagretFormData({ uttakPerioder, begrunnelse: formMethods.getValues('begrunnelse') });
     },
-    [uttakPerioder],
+    [uttakPerioder, formMethods, setMellomlagretFormData],
   );
 
   const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
     a => a.definisjon !== AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
   );
-  const bekreft = (begrunnelse: string) => {
-    const overstyrAp = [
-      {
-        // TODO Fiks hack
-        kode: validerApKodeOgHentApEnum(
-          AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
-          AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
-        ),
-        perioder: uttakPerioder,
-        begrunnelse,
-      },
-    ];
 
-    const aksjonspunkterSomSkalBekreftes = automatiskeAksjonspunkter.map(ap => ({
-      kode: validerApKodeOgHentApEnum(
-        ap.definisjon,
-        AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
-        AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
-      ),
-      perioder: uttakPerioder,
-      begrunnelse,
-    }));
-
-    return submitCallback(aksjonspunkterSomSkalBekreftes.length > 0 ? aksjonspunkterSomSkalBekreftes : overstyrAp);
-  };
-
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   const [isDirty, setIsDirty] = useState(false);
 
@@ -285,7 +262,10 @@ export const UttakFaktaForm = ({
         visNyPeriode={visNyPeriode}
         settVisNyPeriode={setVisNyPeriode}
       />
-      <RhfForm formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(transformValues(values, uttakPerioder, automatiskeAksjonspunkter))}
+      >
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
@@ -305,4 +285,33 @@ export const UttakFaktaForm = ({
       </RhfForm>
     </VStack>
   );
+};
+
+const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FaktaBegrunnelseFormValues =>
+  FaktaBegrunnelseTextField.initialValues(aksjonspunkter);
+
+const transformValues = (
+  values: FaktaBegrunnelseFormValues,
+  uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[],
+  automatiskeAksjonspunkter: Aksjonspunkt[],
+): BekreftUttaksperioderAp[] => {
+  return automatiskeAksjonspunkter.length > 0
+    ? automatiskeAksjonspunkter.map(ap => ({
+        kode: validerApKodeOgHentApEnum(
+          ap.definisjon,
+          AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
+          AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
+          AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
+          AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
+        ),
+        perioder: uttakPerioder,
+        ...FaktaBegrunnelseTextField.transformValues(values),
+      }))
+    : [
+        {
+          kode: AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+          perioder: uttakPerioder,
+          ...FaktaBegrunnelseTextField.transformValues(values),
+        },
+      ];
 };

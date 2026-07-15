@@ -27,6 +27,7 @@ export const BehandlingHenlagtPanel = ({ valgtProsessSteg, settProsessPanelMenyD
       status: 'IKKE_VURDERT',
       skalVisesIMeny: true,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- oppdater menydata berre ved endra prosesssteg; resten er konstante, setter stabil
   }, [valgtProsessSteg]);
 
   return (

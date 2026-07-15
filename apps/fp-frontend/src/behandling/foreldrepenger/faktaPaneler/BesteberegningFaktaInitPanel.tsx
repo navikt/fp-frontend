@@ -8,7 +8,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -23,7 +23,7 @@ export const BesteberegningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
   const { behandling } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
   const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(behandling));
   const skalPanelVisesIMeny =
     beregningsgrunnlag?.ytelsesspesifiktGrunnlag?.ytelsetype === 'FP'

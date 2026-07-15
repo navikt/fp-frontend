@@ -5,7 +5,7 @@ import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import { type AlleKodeverk, type Behandlingsresultat, type KlageVurdering } from '@navikt/fp-types';
+import { type Aksjonspunkt, type AlleKodeverk, type Behandlingsresultat, type KlageVurdering } from '@navikt/fp-types';
 import type { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, isKlageOmgjort, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -44,13 +44,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
   const [isSubmitting, setIsSubmitting] = useState(false);
   const lagreVedtak = () => {
     setIsSubmitting(true);
-
-    const behandlingAksjonspunktKodes = aksjonspunkterForPanel.filter(erAksjonspunktÅpent).map(ap => ap.definisjon);
-    const input = behandlingAksjonspunktKodes.map(apCode => ({
-      kode: validerApKodeOgHentApEnum(apCode, AksjonspunktKode.FORESLÅ_VEDTAK, AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT),
-    }));
-
-    void submitCallback(input).then(() => setIsSubmitting(false));
+    void submitCallback(transformValues(aksjonspunkterForPanel)).then(() => setIsSubmitting(false));
   };
 
   return (
@@ -154,3 +148,11 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering) => {
       return 'VedtakKlageForm.IkkeFastsatt';
   }
 };
+
+const transformValues = (aksjonspunkter: Aksjonspunkt[]): AksjonspunktData =>
+  aksjonspunkter
+    .filter(erAksjonspunktÅpent)
+    .map(ap => ap.definisjon)
+    .map(apCode => ({
+      kode: validerApKodeOgHentApEnum(apCode, AksjonspunktKode.FORESLÅ_VEDTAK, AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT),
+    }));

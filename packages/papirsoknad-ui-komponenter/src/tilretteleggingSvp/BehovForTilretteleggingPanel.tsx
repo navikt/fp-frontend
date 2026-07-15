@@ -46,7 +46,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
     } else {
       clearErrors(`${TILRETTELEGGING_NAME_PREFIX}.notRegisteredInput`);
     }
-  }, [sokSN, sokFrilans, sokArbeid]);
+  }, [sokSN, sokFrilans, sokArbeid, setError, clearErrors]);
 
   return (
     <RawIntlProvider value={intl}>

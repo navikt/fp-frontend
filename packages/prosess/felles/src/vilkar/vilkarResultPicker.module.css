@@ -1,5 +1,6 @@
 .godkjentImage {
   color: var(--ax-bg-success-strong);
+  display: inline;
   height: 20px;
   margin-right: 8px;
   vertical-align: text-top;
@@ -8,6 +9,7 @@
 
 .avslattImage {
   color: var(--ax-danger-500);
+  display: inline;
   height: 20px;
   margin-right: 8px;
   vertical-align: text-top;

@@ -1,4 +1,4 @@
-import { createContext, type JSX, type ReactNode, useCallback, useContext, useReducer } from 'react';
+import { createContext, type JSX, type ReactNode, use, useCallback, useReducer } from 'react';
 
 import type { FpError } from './errorType';
 
@@ -36,9 +36,9 @@ export const RestApiErrorProvider = ({ children, initialState }: Props): JSX.Ele
   }, initialState || defaultInitialState);
 
   return (
-    <RestApiErrorStateContext.Provider value={state}>
-      <RestApiErrorDispatchContext.Provider value={dispatch}>{children}</RestApiErrorDispatchContext.Provider>
-    </RestApiErrorStateContext.Provider>
+    <RestApiErrorStateContext value={state}>
+      <RestApiErrorDispatchContext value={dispatch}>{children}</RestApiErrorDispatchContext>
+    </RestApiErrorStateContext>
   );
 };
 
@@ -46,7 +46,7 @@ export const RestApiErrorProvider = ({ children, initialState }: Props): JSX.Ele
  * Hook som tilbyr funksjoner for å legge til eller fjerne feil i kontekst.
  */
 export const useRestApiErrorDispatcher = () => {
-  const dispatch = useContext(RestApiErrorDispatchContext);
+  const dispatch = use(RestApiErrorDispatchContext);
 
   const addErrorMessage = useCallback(
     (data: FpError) => {
@@ -72,6 +72,6 @@ export const useRestApiErrorDispatcher = () => {
  * Hook som henter alle feilmeldinger registrert i kontekst.
  */
 export const useRestApiError = () => {
-  const state = useContext(RestApiErrorStateContext);
+  const state = use(RestApiErrorStateContext);
   return state.errors;
 };

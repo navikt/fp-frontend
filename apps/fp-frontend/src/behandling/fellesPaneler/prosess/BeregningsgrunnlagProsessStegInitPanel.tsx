@@ -20,7 +20,7 @@ import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkår, Vilkå
 import type { BeregningsgrunnlagAp, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -149,7 +149,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
 
   const { behandling } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
 

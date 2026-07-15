@@ -13,7 +13,7 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, AlleKodeverkTilbakekreving, BehandlingFpTilbake, VilkårUtfallType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent, useMellomlagretFormData } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -33,7 +33,7 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: perioderForeldelse } = useQuery(api.tilbakekreving.perioderForeldelseOptions(behandling));
   const { data: vilkårvurderingsperioder } = useQuery(api.tilbakekreving.vilkårsvurderingsperioderOptions(behandling));

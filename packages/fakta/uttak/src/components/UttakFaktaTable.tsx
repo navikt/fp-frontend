@@ -4,17 +4,15 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { PlusCircleIcon } from '@navikt/aksel-icons';
 import { Button, Heading, Table, VStack } from '@navikt/ds-react';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
-import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
+import { classNames } from '@navikt/fp-utils';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { Årsakstype, utledÅrsakstype, UttakFaktaDetailForm } from './UttakFaktaDetailForm';
 
 import styles from './uttakFaktaTable.module.css';
-
-const classNames = classnames.bind(styles);
 
 const getTypeTekst = (
   alleKodeverk: AlleKodeverk,
@@ -132,10 +130,11 @@ export const UttakFaktaTable = ({
                 togglePlacement="right"
                 open={valgteFomDatoer.includes(periode.fom)}
                 onOpenChange={() => velgPeriodeFomDato(periode.fom)}
-                className={classNames('row', {
-                  isOpen: valgteFomDatoer.includes(periode.fom),
-                  isApOpen: !!periode.aksjonspunktType,
-                })}
+                className={classNames(
+                  styles['row'],
+                  valgteFomDatoer.includes(periode.fom) && styles['isOpen'],
+                  !!periode.aksjonspunktType && styles['isApOpen'],
+                )}
                 contentGutter="none"
                 content={
                   valgteFomDatoer.includes(periode.fom) && (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
 
@@ -19,6 +19,9 @@ import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
 import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
 import { useFpSakKodeverk } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';
+import { BEHANDLING_SNARVEG_IDER } from '../snarveger/snarvegDefinisjoner';
+import { useRegistrerSnarveg, useSnarvegerContextValgfri } from '../snarveger/SnarvegerContext';
+import { useTastaturfokus } from '../snarveger/useTastaturfokus';
 import { EksterneRessurser } from './EksterneRessurser';
 import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
 
@@ -63,6 +66,72 @@ export const FagsakProfileIndex = ({
   const [showAll, setShowAll] = useState(!behandlingUuid);
   const toggleShowAll = () => setShowAll(!showAll);
 
+  const [forrigeBehandlingUuid, setForrigeBehandlingUuid] = useState(behandlingUuid);
+  if (behandlingUuid !== forrigeBehandlingUuid) {
+    setForrigeBehandlingUuid(behandlingUuid);
+    setShowAll(!behandlingUuid);
+  }
+
+  const {
+    containerRef: behandlingsvelgerRef,
+    hentElementer: hentBehandlingsvelgerRader,
+    fokuserElement: fokuserRad,
+  } = useTastaturfokus<HTMLDivElement, HTMLElement>({
+    selector: 'a, button',
+    scrollVedFokus: true,
+    lyttPåContainer: true,
+  });
+
+  const fokuserBehandlingsvelger = useCallback(() => {
+    const rader = hentBehandlingsvelgerRader();
+    if (rader.length === 0) {
+      return false;
+    }
+    const aktivIndex = rader.findIndex(rad => rad.getAttribute('aria-current') === 'page');
+    fokuserRad(aktivIndex === -1 ? 0 : aktivIndex);
+    return true;
+  }, [fokuserRad, hentBehandlingsvelgerRader]);
+
+  // Behandlingsvelgaren er gøymd (height: 0) når dei utvida behandlingsdetaljane er på. Snarvegen
+  // syter difor for å vise detaljane att – på same måte som «E» – og utvide lista før fokus blir
+  // flytta. Sidan DOM-en oppdaterast asynkront etter desse statusbyta, armerer me eit ynske om
+  // fokus og prøver på nytt over nokre animasjonsrammer til radene faktisk finst.
+  const snarveger = useSnarvegerContextValgfri();
+  const velgerErSynleg = !visUtvidetBehandlingDetaljer && showAll;
+  const skalFokuserVelgerRef = useRef(false);
+
+  useEffect(() => {
+    if (!skalFokuserVelgerRef.current || !velgerErSynleg) {
+      return undefined;
+    }
+    let gjenståandeForsøk = 20;
+    let rammeId = 0;
+    const prøvFokuser = () => {
+      if (fokuserBehandlingsvelger() || gjenståandeForsøk <= 0) {
+        skalFokuserVelgerRef.current = false;
+        return;
+      }
+      gjenståandeForsøk -= 1;
+      rammeId = requestAnimationFrame(prøvFokuser);
+    };
+    rammeId = requestAnimationFrame(prøvFokuser);
+    return () => cancelAnimationFrame(rammeId);
+  }, [velgerErSynleg, fokuserBehandlingsvelger]);
+
+  useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER, () => {
+    if (velgerErSynleg) {
+      fokuserBehandlingsvelger();
+      return;
+    }
+    skalFokuserVelgerRef.current = true;
+    if (visUtvidetBehandlingDetaljer) {
+      snarveger?.dispatch(BEHANDLING_SNARVEG_IDER.UTVID_DETALJER);
+    }
+    if (!showAll) {
+      setShowAll(true);
+    }
+  });
+
   const api = useFagsakApi();
   const { data: alleFpSakKodeverk } = useQuery(api.kodeverkOptions());
   const { data: alleKodeverkFpTilbake } = useQuery(api.fptilbake.kodeverkOptions());
@@ -82,11 +151,6 @@ export const FagsakProfileIndex = ({
   const ainntektHref = sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href;
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- OK, skjer kun ved valg av ny behandling
-    setShowAll(!behandlingUuid);
-  }, [behandlingUuid]);
 
   const match = useMatch('/fagsak/:saksnummer/');
   const shouldRedirectToBehandlinger = !!match;
@@ -148,7 +212,7 @@ export const FagsakProfileIndex = ({
           }
         >
           {!shouldRedirectToBehandlinger && (
-            <div>
+            <div ref={behandlingsvelgerRef}>
               <ErrorBoundary
                 errorMessageCallback={addErrorMessage}
                 errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Behandlingsvelger' })}

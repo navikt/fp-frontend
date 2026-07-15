@@ -1,6 +1,7 @@
 export { MellomlagretFormDataProvider, useMellomlagretFormData } from './src/context/MellomlagretFormDataContext';
 export { PanelDataProvider, usePanelDataContext } from './src/context/PanelDataContext';
 export { PanelOverstyringProvider, usePanelOverstyring } from './src/context/PanelOverstyringContext';
+export { classNames } from './src/classNames';
 export { notEmpty } from './src/notEmpty';
 export { assertUnreachable } from './src/switchCaseUtils';
 export { åpneDokument, åpneVindu } from './src/åpneDokument';

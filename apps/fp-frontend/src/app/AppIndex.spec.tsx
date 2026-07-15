@@ -13,9 +13,9 @@ describe('AppIndex', () => {
   it('skal rendre app med korrekt informasjon', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(
-      <ResponsiveContext.Provider value={{ width: 1000 }}>
+      <ResponsiveContext value={{ width: 1000 }}>
         <Default />
-      </ResponsiveContext.Provider>,
+      </ResponsiveContext>,
     );
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();

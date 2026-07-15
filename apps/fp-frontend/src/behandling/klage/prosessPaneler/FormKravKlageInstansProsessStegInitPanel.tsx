@@ -8,7 +8,7 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
 import { isKlageAvvist } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -32,7 +32,7 @@ export const FormKravKlageInstansProsessStegInitPanel = () => {
       avsluttet: b.avsluttet ?? undefined,
     }));
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: klageVurdering, isFetching } = useQuery(api.klage.klageVurderingOptions(behandling));
 

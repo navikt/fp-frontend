@@ -15,7 +15,7 @@ import {
 } from '@navikt/fp-papirsoknad';
 import type { Aksjonspunkt, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
 
-import { BehandlingRel, useBehandlingApi } from '../../data/behandlingApi';
+import { BehandlingRel, getBehandlingApi } from '../../data/behandlingApi';
 import { useBehandlingDataContext } from '../felles/context/BehandlingDataContext';
 
 /**
@@ -25,12 +25,12 @@ import { useBehandlingDataContext } from '../felles/context/BehandlingDataContex
  * Komponenten tilpasser skjemaet til valgt søknadstype, valgt søknadtema (fødsel, adopsjon eller omsorg)
  * og valgt foreldretype (mor, far/medmor eller tredjepart).
  */
-const BehandlingPapirsoknadIndex = () => {
+export const BehandlingPapirsoknadIndex = () => {
   const [erAksjonspunktLagret, setErAksjonspunktLagret] = useState(false);
 
   const { alleKodeverk, behandling, rettigheter, fagsak, setSkalOppdatereEtterBekreftelseAvAp } =
     useBehandlingDataContext();
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const isReadOnly = !rettigheter.writeAccess.isEnabled || behandling.behandlingPåVent;
 
@@ -174,7 +174,3 @@ const getAktivPapirsøknadApKode = (
   // @ts-expect-error Blir fiksa når AksjonspunktKode reflekterar backend-typar
   return ap;
 };
-
-// Default export grunna React.lazy
-// eslint-disable-next-line import-x/no-default-export
-export default BehandlingPapirsoknadIndex;

@@ -53,6 +53,11 @@ const sorterEtterOpptjeningFom = (
 
 const addDay = (dato: string): string => addDaysToDate(dato, 1);
 
+const finnFørsteIkkeBehandledeIndex = (formVerdier: FormValues[]): number | undefined => {
+  const index = formVerdier.findIndex(a => a.erGodkjent === undefined);
+  return index === -1 ? undefined : index;
+};
+
 const filtrerOpptjeningAktiviteter = (
   opptjeningAktiviteter: OpptjeningAktivitet[],
   fastsattOpptjening?: Opptjening['fastsattOpptjening'],
@@ -115,8 +120,8 @@ export const OpptjeningFaktaPanel = ({
       })),
   );
 
-  const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState(
-    finnInitialFokusAktivitet(filtrerteOgSorterteOpptjeningsaktiviteter),
+  const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState(() =>
+    finnFørsteIkkeBehandledeIndex(formVerdierForAlleAktiviteter),
   );
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -125,34 +130,21 @@ export const OpptjeningFaktaPanel = ({
     () => () => {
       setMellomlagretFormData(formVerdierForAlleAktiviteter);
     },
-    [formVerdierForAlleAktiviteter],
+    [formVerdierForAlleAktiviteter, setMellomlagretFormData],
   );
 
-  useEffect(() => {
-    const index = formVerdierForAlleAktiviteter.findIndex(a => a.erGodkjent === undefined);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setValgtAktivitetIndex(index === -1 ? undefined : index);
-  }, [formVerdierForAlleAktiviteter]);
+  const [forrigeFormVerdier, setForrigeFormVerdier] = useState(formVerdierForAlleAktiviteter);
+  if (formVerdierForAlleAktiviteter !== forrigeFormVerdier) {
+    setForrigeFormVerdier(formVerdierForAlleAktiviteter);
+    setValgtAktivitetIndex(finnFørsteIkkeBehandledeIndex(formVerdierForAlleAktiviteter));
+  }
 
   const bekreft = () => {
     setIsSubmitting(true);
 
-    const opptjeningsaktiviteterSomSkallagres = filtrerteOgSorterteOpptjeningsaktiviteter
-      .map<OpptjeningAktivitetAp>((a, index) => ({
-        arbeidsforholdRef: a.arbeidsforholdRef,
-        arbeidsgiverReferanse: a.arbeidsgiverReferanse,
-        opptjeningFom: a.opptjeningFom,
-        opptjeningTom: a.opptjeningTom,
-        aktivitetType: a.aktivitetType,
-        erGodkjent: !!formVerdierForAlleAktiviteter[index]!.erGodkjent,
-        begrunnelse: formVerdierForAlleAktiviteter[index]!.begrunnelse,
-      }))
-      .filter(b => b.begrunnelse);
-
-    void submitCallback({
-      opptjeningsaktiviteter: opptjeningsaktiviteterSomSkallagres,
-      kode: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-    }).then(() => setIsSubmitting(false));
+    void submitCallback(transformValues(formVerdierForAlleAktiviteter, filtrerteOgSorterteOpptjeningsaktiviteter)).then(
+      () => setIsSubmitting(false),
+    );
   };
 
   const velgNesteAktivitet = () => {
@@ -241,10 +233,20 @@ export const OpptjeningFaktaPanel = ({
   );
 };
 
-const finnInitialFokusAktivitet = (opptjeningsAktiviteter: OpptjeningAktivitet[]) => {
-  if (opptjeningsAktiviteter.length === 0) return undefined;
-
-  const førsteAktivitetSomIkkeErGodkjent = opptjeningsAktiviteter.findIndex(a => a.erGodkjent === undefined);
-  if (førsteAktivitetSomIkkeErGodkjent !== -1) return førsteAktivitetSomIkkeErGodkjent;
-  return 0;
-};
+const transformValues = (
+  values: FormValues[],
+  filtrerteOgSorterteOpptjeningsaktiviteter: OpptjeningAktivitet[],
+): AvklarAktivitetsPerioderAp => ({
+  opptjeningsaktiviteter: filtrerteOgSorterteOpptjeningsaktiviteter
+    .map<OpptjeningAktivitetAp>((a, index) => ({
+      arbeidsforholdRef: a.arbeidsforholdRef,
+      arbeidsgiverReferanse: a.arbeidsgiverReferanse,
+      opptjeningFom: a.opptjeningFom,
+      opptjeningTom: a.opptjeningTom,
+      aktivitetType: a.aktivitetType,
+      erGodkjent: !!values[index]!.erGodkjent,
+      begrunnelse: values[index]!.begrunnelse,
+    }))
+    .filter(b => b.begrunnelse),
+  kode: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+});

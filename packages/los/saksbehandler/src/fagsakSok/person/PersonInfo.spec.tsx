@@ -14,7 +14,7 @@ describe('PersonInfo', () => {
 
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText(`${alder} år`)).toBeInTheDocument();
-    expect(screen.getByText('23232332')).toBeInTheDocument();
+    expect(screen.getByText('232323 32123')).toBeInTheDocument();
     expect(screen.getByText('Kode 7')).toBeInTheDocument();
   });
 
@@ -22,8 +22,7 @@ describe('PersonInfo', () => {
     render(<PersonkortForDødKvinne />);
 
     expect(await screen.findByText('Olga Pettersen')).toBeInTheDocument();
-    expect(screen.getByText('10.10.2020')).toBeInTheDocument();
-    expect(screen.getByText('23232332')).toBeInTheDocument();
-    expect(screen.getByText('DØD')).toBeInTheDocument();
+    expect(screen.getByText('232323 32123')).toBeInTheDocument();
+    expect(screen.getByText('Død 10.10.2020')).toBeInTheDocument();
   });
 });

@@ -44,6 +44,7 @@ import type {
   OmsorgsovertakelseDto,
   Oppgave,
   Opptjening,
+  OpptjeningIUtlandDokStatusDto,
   PeriodeSoker,
   Personoversikt,
   SimuleringResultat,
@@ -541,9 +542,7 @@ const getUtlandDokStatusOptions = (links: ApiLink[]) => (behandling: BehandlingF
   queryOptions({
     queryKey: [BehandlingRel.UTLAND_DOK_STATUS, behandling.uuid, behandling.versjon],
     queryFn: () =>
-      jsonEllerNull<{
-        dokStatus?: string;
-      }>(kyExtended.get(getUrlFromRel('UTLAND_DOK_STATUS', links))),
+      jsonEllerNull<OpptjeningIUtlandDokStatusDto>(kyExtended.get(getUrlFromRel('UTLAND_DOK_STATUS', links))),
     enabled: harLenke(behandling, 'UTLAND_DOK_STATUS'),
     staleTime: Infinity,
     select: data => data ?? undefined,
@@ -772,7 +771,7 @@ const getOppdaterStønadskontoer =
       })
       .json<UttakStonadskontoer>();
 
-export const useBehandlingApi = (behandling: Behandling) => {
+export const getBehandlingApi = (behandling: Behandling) => {
   const { links } = behandling;
   return {
     arbeidsgiverOversiktOptions: getArbeidsgiverOversiktOptions(links),

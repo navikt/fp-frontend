@@ -100,6 +100,7 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
     if (fields.length === 0) {
       append(defaultUtsettelsePeriode);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- legg berre til ein tom rad ved montering; fields.length skal ikkje trigge effekten på nytt
   }, []);
 
   const triggerValidationOnChange = () => (isSubmitted ? trigger() : undefined);

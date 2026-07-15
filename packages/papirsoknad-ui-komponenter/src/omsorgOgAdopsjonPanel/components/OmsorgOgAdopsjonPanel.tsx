@@ -75,6 +75,7 @@ export const OmsorgOgAdopsjonPanel = ({
         append({ id: i, dato: undefined });
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- synkroniser rader berre ved endra antallBarn; append/remove stabile, fields.length les med vilje
   }, [antallBarn]);
 
   return (

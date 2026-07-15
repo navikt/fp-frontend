@@ -36,11 +36,14 @@ export const BrevInnhold = ({
       <div className={styles['dokument']}>
         <div className="brev-wrapper">
           <style>{` ${brevStiler} `}</style>
+          {/* eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- brev-HTML kommer fra backend og må rendres som markup */}
           <div className={styles['logo']} dangerouslySetInnerHTML={{ __html: navLogo }} />
+          {/* eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- brev-HTML kommer fra backend og må rendres som markup */}
           <div className={styles['header']} dangerouslySetInnerHTML={{ __html: header }} />
           <div id="content">
             <div id={editorHolderId} className={styles['redigerbartInnhold']} />
           </div>
+          {/* eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml -- brev-HTML kommer fra backend og må rendres som markup */}
           {footer !== undefined && <div className={styles['footer']} dangerouslySetInnerHTML={{ __html: footer }} />}
         </div>
       </div>

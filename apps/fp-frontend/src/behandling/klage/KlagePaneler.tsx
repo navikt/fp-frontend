@@ -12,7 +12,7 @@ interface Props {
   valgtFaktaSteg?: string;
 }
 
-const KlagePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => (
+export const KlagePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => (
   <>
     <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
       <FormKravFamOgPensjonProsessStegInitPanel />
@@ -26,7 +26,3 @@ const KlagePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => (
     </FaktaMeny>
   </>
 );
-
-// Default export grunna React.lazy
-// eslint-disable-next-line import-x/no-default-export
-export default KlagePaneler;

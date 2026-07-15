@@ -7,7 +7,7 @@ import { type FormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../../data/behandlingApi';
 
 interface Props {
   behandling: Behandling;
@@ -29,7 +29,7 @@ export const BehandlingPaVent = ({
 
   const skalViseModal = !skalIkkeViseModal && behandling.behandlingPåVent && !manueltSkjult;
 
-  const behandlingApi = useBehandlingApi(behandling);
+  const behandlingApi = getBehandlingApi(behandling);
 
   const { mutate: endrePaVent } = useMutation({
     mutationFn: (values: FormValues) =>

@@ -68,18 +68,21 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
 
   useEffect(() => {
     void pollEtterOppgaver({ oppgaveIder: undefined });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun starte polling ein gong ved montering
   }, []);
 
   useEffect(() => {
     if (isSuccess) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+      // eslint-disable-next-line @eslint-react/set-state-in-effect, react-hooks/set-state-in-effect
       setOppgaverTilBehandling(tilBehandling);
       if (oppgaverTilBehandling.length > 0) {
+        // eslint-disable-next-line @eslint-react/set-state-in-effect, react-hooks/set-state-in-effect
         setNyeBehandlinger(tilBehandling.filter(o => !oppgaverTilBehandling.some(ob => ob.id === o.id)));
       }
 
       void pollEtterOppgaver({ oppgaveIder: tilBehandling.map(o => o.id).join(',') });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- polling-kjede som berre skal reagere på isSuccess; oppgaver/pollEtterOppgaver ville gitt loop
   }, [isSuccess]);
 
   useEffect(() => {

@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "type": "module",
-  "packageManager": "yarn@4.14.1",
+  "packageManager": "yarn@4.17.0",
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
@@ -20,7 +20,7 @@
     "dotenv": "17.3.1",
     "express": "5.2.1",
     "helmet": "8.1.0",
-    "http-proxy-middleware": "4.0.0",
+    "http-proxy-middleware": "4.1.1",
     "morgan": "1.10.1",
     "winston": "3.19.0"
   },

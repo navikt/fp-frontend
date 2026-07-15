@@ -61,6 +61,7 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
     if (fields.length === 0) {
       append(defaultOverforingPeriode);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- legg berre til ein tom rad ved montering; fields.length skal ikkje trigge effekten på nytt
   }, []);
 
   return (

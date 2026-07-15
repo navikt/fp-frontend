@@ -8,7 +8,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { harAksjonspunkt } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -20,7 +20,7 @@ export const OmsorgFaktaInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(behandling));
   const { data: personoversikt } = useQuery(api.behandlingPersonoversiktOptions(behandling));

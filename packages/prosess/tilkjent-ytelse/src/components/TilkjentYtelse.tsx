@@ -21,7 +21,7 @@ import type {
   BeregningsresultatPeriode,
   Fagsak,
   FamilieHendelse,
-  Kjønnkode,
+  NavBrukerKjønn,
 } from '@navikt/fp-types';
 
 import { TilkjentYtelseTimelineData } from './TilkjentYtelseTimelineData';
@@ -38,7 +38,7 @@ interface Props {
   beregningsresultatPeriode?: BeregningsresultatPeriode[];
   søknadsdato: string;
   familieHendelse: FamilieHendelse;
-  hovedsøkerKjønnKode?: Kjønnkode;
+  hovedsøkerKjønnKode?: NavBrukerKjønn;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   fagsak: Fagsak;

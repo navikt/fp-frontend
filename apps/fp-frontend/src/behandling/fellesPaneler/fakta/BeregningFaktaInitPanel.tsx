@@ -18,7 +18,7 @@ import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkår } from 
 import type { BeregningAp, FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
-import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -43,7 +43,7 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
 

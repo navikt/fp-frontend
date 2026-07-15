@@ -20,6 +20,7 @@ export type { OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/Overst
 export type { OverstyringDekningsgradAp } from './src/fakta/OverstyringDekningsgradAp';
 export type { OverstyringRettigheterAp } from './src/fakta/OverstyringRettigheterAp';
 export type { AvklarDekningsgradAp } from './src/fakta/AvklarDekningsgradAp';
+export type { VurderArbeidsforholdInntektsmeldingAp } from './src/fakta/VurderArbeidsforholdInntektsmeldingAp';
 export type { VurderOmsorgsovertakelseVilkåretAp } from './src/fakta/VurderOmsorgsovertakelseVilkåretAp';
 export type { AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';
 export type { VurderDokumentasjonAp } from './src/fakta/VurderDokumentasjonAp';

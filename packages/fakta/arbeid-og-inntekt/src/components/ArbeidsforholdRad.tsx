@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Table, VStack } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
-import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
 import type {
@@ -12,6 +11,7 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
+import { classNames } from '@navikt/fp-utils';
 
 import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
 import { ArbeidsforholdInformasjonPanel } from './felles/ArbeidsforholdInformasjonPanel';
@@ -22,8 +22,6 @@ import { ManglendeInntektsmeldingForm } from './manglendeInntektsmelding/Manglen
 import { ManueltLagtTilArbeidsforholdForm } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 
 import styles from './arbeidsforholdRad.module.css';
-
-const classNames = classnames.bind(styles);
 
 interface Props {
   saksnummer: string;
@@ -80,10 +78,7 @@ export const ArbeidsforholdRad = ({
       expandOnRowClick
       togglePlacement="right"
       contentGutter="none"
-      className={classNames('row', {
-        isOpen: erRadÅpen,
-        isApOpen: harÅpentAksjonspunkt,
-      })}
+      className={classNames(styles['row'], erRadÅpen && styles['isOpen'], harÅpentAksjonspunkt && styles['isApOpen'])}
       content={
         <VStack gap="space-16" className={harÅpentAksjonspunkt ? styles['panelOpenAp'] : styles['panelOpen']}>
           {erManueltOpprettet && (

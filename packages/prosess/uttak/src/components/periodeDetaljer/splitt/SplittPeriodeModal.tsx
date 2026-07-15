@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, Button, Detail, Dialog, HStack, VStack } from '@navikt/ds-react';
@@ -29,7 +29,7 @@ export const SplittPeriodeModal = ({ fomDato, tomDato, submit, cancel }: Props) 
 
   const formMethods = useForm<{ dato: string }>();
 
-  const dato = formMethods.watch('dato');
+  const dato = useWatch({ control: formMethods.control, name: 'dato' });
 
   const numberOfDaysAndWeeks = calcDaysAndWeeks(fomDato, dato);
 

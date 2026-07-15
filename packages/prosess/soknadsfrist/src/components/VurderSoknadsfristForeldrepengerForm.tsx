@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Box, Detail, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
@@ -69,7 +69,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfris
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const gyldigSenFremsetting = formMethods.watch('gyldigSenFremsetting');
+  const gyldigSenFremsetting = useWatch({ control: formMethods.control, name: 'gyldigSenFremsetting' });
 
   const soknadsperiodeStart = søknadsfrist?.søknadsperiodeStart;
   const soknadsperiodeSlutt = søknadsfrist?.søknadsperiodeSlutt;

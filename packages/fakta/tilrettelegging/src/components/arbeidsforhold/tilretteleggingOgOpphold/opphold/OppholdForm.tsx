@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { FormProvider, useForm, type UseFormGetValues } from 'react-hook-form';
+import { FormProvider, useForm, type UseFormGetValues, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Button, HStack, Radio, VStack } from '@navikt/ds-react';
@@ -116,7 +116,7 @@ export const OppholdForm = ({
 
   // Når årsak endres må fom revalideres slik at en eventuell foreldet «samme fom»-feil
   // forsvinner når bruker bytter til Ferie (ferie kan dele fom med en tilrettelegging).
-  const valgtÅrsak = formMethods.watch(`${index}.oppholdÅrsak`);
+  const valgtÅrsak = useWatch({ control: formMethods.control, name: `${index}.oppholdÅrsak` });
   useEffect(() => {
     if (formMethods.getValues(`${index}.fom`)) {
       void formMethods.trigger(`${index}.fom`);

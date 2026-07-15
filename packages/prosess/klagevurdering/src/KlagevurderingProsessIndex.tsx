@@ -1,6 +1,6 @@
 import { RawIntlProvider } from 'react-intl';
 
-import { createIntl } from '@navikt/ft-utils';
+import { createIntl, hasAksjonspunkt } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { KlageVurdering } from '@navikt/fp-types';
@@ -25,12 +25,12 @@ export const KlagevurderingProsessIndex = ({ klageVurdering, saveKlage, previewC
   return (
     <RawIntlProvider value={intl}>
       {klageVurdering.klageVurderingResultatNK && <BehandleKlageFormKa klageVurdering={klageVurdering} />}
-      {aksjonspunkterForPanel.some(a => a.definisjon === AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP) && (
+      {hasAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP, aksjonspunkterForPanel) && (
         <BehandleKlageFormNfp
           klageVurdering={klageVurdering}
           saveKlage={saveKlage}
           previewCallback={previewCallback}
-          alleAktuelleHjemler={klageVurdering.aktuelleHjemler ? klageVurdering.aktuelleHjemler : []}
+          alleAktuelleHjemler={klageVurdering.aktuelleHjemler ?? []}
         />
       )}
     </RawIntlProvider>

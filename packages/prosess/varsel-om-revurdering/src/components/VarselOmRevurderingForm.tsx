@@ -1,5 +1,5 @@
 import { type MouseEvent, useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, Button, Heading, HStack, Link, Radio, VStack } from '@navikt/ds-react';
@@ -26,17 +26,11 @@ export type ForhandsvisData = {
 };
 
 type FormValues = {
-  kode: AksjonspunktKode.UTGÅTT_5025 | AksjonspunktKode.VARSEL_REVURDERING_MANUELL;
   begrunnelse?: string;
   sendVarsel?: boolean;
 };
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
-  kode: validerApKodeOgHentApEnum(
-    aksjonspunkter[0]?.definisjon,
-    AksjonspunktKode.UTGÅTT_5025,
-    AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
-  ),
   begrunnelse: aksjonspunkter[0]?.begrunnelse ?? '',
   sendVarsel: undefined,
 });
@@ -66,24 +60,25 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const formVerdier = formMethods.watch();
+  const formVerdier = useWatch({ control: formMethods.control });
 
   const erÅpentAksjonspunkt = !isReadOnly && aksjonspunkterForPanel[0]?.status === 'OPPR';
 
   const [skalVisePåVentModal, setSkalVisePåVentModal] = useState(false);
   const [brevData, setBrevData] = useState<{ opprinneligHtml: string; redigertHtml: string | null } | null>(null);
   const [visRedigeringModal, setVisRedigeringModal] = useState(false);
-  const hasFetchedBrevData = useRef(false);
+  const hasFetchedBrevDataRef = useRef(false);
 
   useEffect(() => {
-    if (!hasFetchedBrevData.current && erÅpentAksjonspunkt && hentVarselHtml) {
-      hasFetchedBrevData.current = true;
+    if (!hasFetchedBrevDataRef.current && erÅpentAksjonspunkt && hentVarselHtml) {
+      hasFetchedBrevDataRef.current = true;
       void hentVarselHtml()
         .then(result => {
           setBrevData({ opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
         })
         .catch(() => {});
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun hentast ein gong ved montering (styrt av hasFetchedBrevDataRef)
   }, []);
 
   const lukkModal = () => setSkalVisePåVentModal(false);
@@ -92,10 +87,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
   const håndterSubmitFraModal = (modalValues: ModalFormValues) => {
     void formMethods.trigger().then(isValid => {
       if (isValid) {
-        void submitCallback({
-          ...formVerdier,
-          ...modalValues,
-        });
+        void submitCallback(transformValues(formVerdier, aksjonspunkterForPanel, modalValues));
       }
       setSkalVisePåVentModal(false);
     });
@@ -112,7 +104,11 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
 
   return (
     <>
-      <RhfForm formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(transformValues(values, aksjonspunkterForPanel))}
+        setDataOnUnmount={setMellomlagretFormData}
+      >
         <VStack gap="space-16">
           <Heading size="small" level="2">
             <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
@@ -243,3 +239,15 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
     </>
   );
 };
+
+const transformValues = (
+  values: FormValues,
+  aksjonspunkter: Aksjonspunkt[],
+  modalValues?: ModalFormValues,
+): VarselRevurderingAp => ({
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0]?.definisjon, AksjonspunktKode.VARSEL_REVURDERING_MANUELL),
+  begrunnelse: values.begrunnelse,
+  sendVarsel: values.sendVarsel,
+  frist: modalValues?.frist,
+  ventearsak: modalValues?.ventearsak,
+});

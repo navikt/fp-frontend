@@ -1,4 +1,4 @@
-import { createContext, type JSX, type ReactElement, useContext, useMemo } from 'react';
+import { createContext, type JSX, type ReactElement, use, useMemo } from 'react';
 
 import type {
   AksessRettigheter,
@@ -31,15 +31,52 @@ type Props<T extends Behandling> = {
 const BehandlingDataContext = createContext<unknown>(null);
 
 export const BehandlingDataProvider = <T extends Behandling>(props: Props<T>): JSX.Element => {
-  const { children, ...otherProps } = props;
+  const {
+    children,
+    behandling,
+    alleBehandlinger,
+    fagsak,
+    rettigheter,
+    lagreAksjonspunkter,
+    lagreOverstyrteAksjonspunkter,
+    setSkalOppdatereEtterBekreftelseAvAp,
+    alleKodeverk,
+    hentOgSettBehandling,
+    oppdaterProsessStegOgFaktaPanelIUrl,
+  } = props;
 
-  const values = useMemo(() => otherProps, [otherProps]);
+  const values = useMemo<ContextData<T>>(
+    () => ({
+      behandling,
+      alleBehandlinger,
+      fagsak,
+      rettigheter,
+      lagreAksjonspunkter,
+      lagreOverstyrteAksjonspunkter,
+      setSkalOppdatereEtterBekreftelseAvAp,
+      alleKodeverk,
+      hentOgSettBehandling,
+      oppdaterProsessStegOgFaktaPanelIUrl,
+    }),
+    [
+      behandling,
+      alleBehandlinger,
+      fagsak,
+      rettigheter,
+      lagreAksjonspunkter,
+      lagreOverstyrteAksjonspunkter,
+      setSkalOppdatereEtterBekreftelseAvAp,
+      alleKodeverk,
+      hentOgSettBehandling,
+      oppdaterProsessStegOgFaktaPanelIUrl,
+    ],
+  );
 
-  return <BehandlingDataContext.Provider value={values}>{children}</BehandlingDataContext.Provider>;
+  return <BehandlingDataContext value={values}>{children}</BehandlingDataContext>;
 };
 
 export const useBehandlingDataContext = <T extends Behandling = BehandlingFpSak>() => {
-  const context = useContext(BehandlingDataContext);
+  const context = use(BehandlingDataContext);
   if (!context) {
     throw new Error('BehandlingDataContext er ikke satt opp');
   }

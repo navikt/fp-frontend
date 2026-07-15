@@ -1,5 +1,6 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './BehandlingMenuIndex.stories';
@@ -32,5 +33,20 @@ describe('BehandlingMenuIndex', () => {
     expect(screen.queryByText('Endre behandlende enhet')).not.toBeInTheDocument();
     expect(screen.queryByText('Åpne behandling for endringer')).not.toBeInTheDocument();
     expect(screen.queryByText('Opprett verge/fullmektig')).not.toBeInTheDocument();
+  });
+
+  it('skal kunne navigere i menyvalg med piltaster', async () => {
+    applyRequestHandlers(ValgNårBehandlingErValgt.parameters['msw'] as MswParameters['msw']);
+    render(<ValgNårBehandlingErValgt />);
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Behandlingsmeny' }));
+
+    const førsteMenyvalg = screen.getByRole('button', { name: 'Sett behandlingen på vent' });
+    const andreMenyvalg = screen.getByRole('button', { name: 'Henlegg behandlingen og avslutt' });
+
+    førsteMenyvalg.focus();
+    await userEvent.keyboard('{ArrowDown}');
+
+    expect(andreMenyvalg).toHaveFocus();
   });
 });

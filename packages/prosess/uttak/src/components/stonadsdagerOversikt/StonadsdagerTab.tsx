@@ -2,13 +2,11 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Detail, VStack } from '@navikt/ds-react';
 import { BTag } from '@navikt/ft-utils';
-import classnames from 'classnames/bind';
 
 import type { Stonadskonto, StønadskontoType } from '@navikt/fp-types';
+import { classNames } from '@navikt/fp-utils';
 
 import styles from './stonadsdagerTab.module.css';
-
-const classNames = classnames.bind(styles);
 
 const finnKorrektLabelForKvote = (stonadtype: StønadskontoType): string => {
   switch (stonadtype) {
@@ -60,10 +58,12 @@ export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false
 
   return (
     <div className={styles['tabs']}>
-      <li className={classNames('tab', { aktiv, error: !stønadskonto.gyldigForbruk })}>
+      <li
+        className={classNames(styles['tab'], aktiv && styles['aktiv'], !stønadskonto.gyldigForbruk && styles['error'])}
+      >
         <button
           role="tab"
-          className={classNames('tabInner', { error: !stønadskonto.gyldigForbruk })}
+          className={classNames(styles['tabInner'], !stønadskonto.gyldigForbruk && styles['error'])}
           type="button"
           onClick={velgKonto}
           aria-selected={aktiv}

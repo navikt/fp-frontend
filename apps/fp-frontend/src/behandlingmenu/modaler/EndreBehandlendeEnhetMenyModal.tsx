@@ -4,7 +4,7 @@ import { MenyEndreBehandlendeEnhetIndex } from '@navikt/fp-sak-meny';
 import type { Behandling } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { useBehandlingApi } from '../../data/behandlingApi';
+import { getBehandlingApi } from '../../data/behandlingApi';
 import { initFetchOptions } from '../../data/fagsakApi';
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 export const EndreBehandlendeEnhetMenyModal = ({ behandling, hentOgSettBehandling, lukkModal }: Props) => {
   const initFetchQuery = useQuery(initFetchOptions());
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
   const { mutate: endreBehandlendeEnhet } = useMutation({
     mutationFn: (values: { enhetNavn: string; enhetId: string; begrunnelse: string }) =>
       api.endreBehandlendeEnhet({

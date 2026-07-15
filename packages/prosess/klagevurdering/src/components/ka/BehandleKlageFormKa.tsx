@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 
@@ -15,8 +15,6 @@ interface Props {
  * Setter opp readonly-panel for behandling av klage (KA).
  */
 export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
-  const intl = useIntl();
-
   const { alleKodeverk } = usePanelDataContext();
 
   const {
@@ -32,7 +30,7 @@ export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
   return (
     <VStack gap="space-16">
       <Heading size="small" level="2">
-        {intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}
+        <FormattedMessage id="Klage.ResolveKlage.Title" />
       </Heading>
       <VStack gap="space-4">
         <Label size="small">

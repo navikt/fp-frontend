@@ -75,12 +75,12 @@ export const GraderingOgSamtidigUttakPanel = ({
       unregister('arbeidstidsprosent');
       unregister('arbeidsgiverId');
     }
-  }, [visGradering]);
+  }, [visGradering, unregister]);
   useEffect(() => {
     if (!visSamtidigUttaksgradering) {
       unregister('samtidigUttaksprosent');
     }
-  }, [visSamtidigUttaksgradering]);
+  }, [visSamtidigUttaksgradering, unregister]);
 
   return (
     <>

@@ -44,6 +44,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
     if (!erLosTilgjengelig) {
       addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: intl.formatMessage({ id: 'Los.IkkeTilgjengelig' }) });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- vis feilmelding berre når LOS-tilgjenge endrar seg; intl/addErrorMessage er stabile
   }, [erLosTilgjengelig]);
 
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
     if (location.pathname === '/') {
       removeErrorMessages();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun fjerne feilmeldingar ved navigasjonsendring; removeErrorMessages er stabil dispatcher
   }, [location]);
 
   const {

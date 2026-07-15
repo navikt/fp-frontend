@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ScissorsIcon } from '@navikt/aksel-icons';
@@ -30,7 +30,7 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
 
   const formMethods = useForm<{ dato: string }>();
 
-  const splittDato = formMethods.watch('dato');
+  const splittDato = useWatch({ control: formMethods.control, name: 'dato' });
   const perioder = splittDato ? splitPeriodePåDato(periode, splittDato) : null;
 
   return (

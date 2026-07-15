@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm, type UseFormGetValues } from 'react-hook-form';
+import { useForm, type UseFormGetValues, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
@@ -57,48 +57,6 @@ export const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriodeMedApMarker
   return Årsakstype.UTTAK;
 };
 
-const lagDefaultVerdier = (
-  valgtPeriode: KontrollerFaktaPeriodeMedApMarkering,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): FormValues => {
-  const arsakstype = utledÅrsakstype(valgtPeriode);
-
-  const aRef =
-    valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse === 'undefined'
-      ? undefined
-      : valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse;
-  const aOpplysninger = aRef ? arbeidsgiverOpplysningerPerId[aRef] : undefined;
-
-  let arbeidsgiverId;
-
-  if ((!!aRef && aOpplysninger) || (valgtPeriode.arbeidsforhold && !aRef)) {
-    arbeidsgiverId = `${valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold?.arbeidType}`;
-  }
-
-  return {
-    ...valgtPeriode,
-    arsakstype,
-    arbeidsgiverId,
-    harGradering: !!valgtPeriode.arbeidstidsprosent,
-    harSamtidigUttaksprosent: !!valgtPeriode.samtidigUttaksprosent,
-  };
-};
-
-const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkering => ({
-  ...omitMany(values, ['arsakstype', 'arbeidsgiverId', 'harGradering', 'harSamtidigUttaksprosent']),
-  arbeidsforhold: values.arbeidsgiverId
-    ? {
-        arbeidsgiverReferanse:
-          values.arbeidsgiverId.split('-')[0] === 'undefined' ? undefined : values.arbeidsgiverId.split('-')[0],
-        arbeidType: values.arbeidsgiverId.split('-')[1] as UttakArbeidType,
-      }
-    : undefined,
-  periodeKilde: 'SAKSBEHANDLER',
-  aksjonspunktType: undefined,
-  arbeidstidsprosent: values.arbeidstidsprosent,
-  samtidigUttaksprosent: values.samtidigUttaksprosent,
-});
-
 const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
   dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakFaktaDetailForm.TomForFom' }) : null;
 
@@ -129,7 +87,7 @@ export const UttakFaktaDetailForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const defaultValues = valgtPeriode ? lagDefaultVerdier(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined;
+  const defaultValues = valgtPeriode ? buildInitialValues(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -155,10 +113,10 @@ export const UttakFaktaDetailForm = ({
   const sorterteOppholdÅrsaker = alleKodeverk['OppholdÅrsak'].toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
   const sorterteMorsAktiviteter = alleKodeverk['MorsAktivitet'].toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
 
-  const årsakstype = formMethods.watch('arsakstype');
-  const flerbarnsdager = formMethods.watch('flerbarnsdager');
-  const stønadskonto = formMethods.watch('uttakPeriodeType');
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const årsakstype = useWatch({ control: formMethods.control, name: 'arsakstype' });
+  const flerbarnsdager = useWatch({ control: formMethods.control, name: 'flerbarnsdager' });
+  const stønadskonto = useWatch({ control: formMethods.control, name: 'uttakPeriodeType' });
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   useEffect(() => {
     if (defaultValues?.arsakstype !== årsakstype) {
@@ -173,6 +131,7 @@ export const UttakFaktaDetailForm = ({
       formMethods.unregister('morsAktivitet');
       formMethods.unregister('flerbarnsdager');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun avregistrere felt når årsakstype endrar seg; formMethods er stabil
   }, [årsakstype]);
 
   const onSubmit = (values: FormValues) => oppdaterPeriode(transformValues(values));
@@ -391,3 +350,45 @@ export const UttakFaktaDetailForm = ({
     </>
   );
 };
+
+const buildInitialValues = (
+  valgtPeriode: KontrollerFaktaPeriodeMedApMarkering,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): FormValues => {
+  const arsakstype = utledÅrsakstype(valgtPeriode);
+
+  const aRef =
+    valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse === 'undefined'
+      ? undefined
+      : valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse;
+  const aOpplysninger = aRef ? arbeidsgiverOpplysningerPerId[aRef] : undefined;
+
+  let arbeidsgiverId;
+
+  if ((!!aRef && aOpplysninger) || (valgtPeriode.arbeidsforhold && !aRef)) {
+    arbeidsgiverId = `${valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse}-${valgtPeriode.arbeidsforhold?.arbeidType}`;
+  }
+
+  return {
+    ...valgtPeriode,
+    arsakstype,
+    arbeidsgiverId,
+    harGradering: !!valgtPeriode.arbeidstidsprosent,
+    harSamtidigUttaksprosent: !!valgtPeriode.samtidigUttaksprosent,
+  };
+};
+
+const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkering => ({
+  ...omitMany(values, ['arsakstype', 'arbeidsgiverId', 'harGradering', 'harSamtidigUttaksprosent']),
+  arbeidsforhold: values.arbeidsgiverId
+    ? {
+        arbeidsgiverReferanse:
+          values.arbeidsgiverId.split('-')[0] === 'undefined' ? undefined : values.arbeidsgiverId.split('-')[0],
+        arbeidType: values.arbeidsgiverId.split('-')[1] as UttakArbeidType,
+      }
+    : undefined,
+  periodeKilde: 'SAKSBEHANDLER',
+  aksjonspunktType: undefined,
+  arbeidstidsprosent: values.arbeidstidsprosent,
+  samtidigUttaksprosent: values.samtidigUttaksprosent,
+});

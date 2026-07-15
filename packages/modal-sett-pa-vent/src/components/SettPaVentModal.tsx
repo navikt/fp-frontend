@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Button, Dialog, VStack } from '@navikt/ds-react';
@@ -48,8 +48,8 @@ export const SettPaVentModal = ({
     defaultValues: buildInitialValues(hasManualPaVent, frist, ventearsak ?? defaultVenteårsak),
   });
 
-  const fristFraFelt = formMethods.watch('frist');
-  const ventearsakFraFelt = formMethods.watch('ventearsak');
+  const fristFraFelt = useWatch({ control: formMethods.control, name: 'frist' });
+  const ventearsakFraFelt = useWatch({ control: formMethods.control, name: 'ventearsak' });
 
   const venteArsakHasChanged = harEndretVenteårsak(ventearsak, ventearsakFraFelt);
   const fristHasChanged = harEndretFrist(frist, fristFraFelt);

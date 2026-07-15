@@ -1,6 +1,6 @@
 import { type ComponentType, lazy, type LazyExoticComponent } from 'react';
 
-export const lazyWithRetry = <T>(
+const lazyWithRetry = <T>(
   componentImport: () => Promise<{ default: ComponentType<T> }>,
 ): LazyExoticComponent<ComponentType<T>> =>
   lazy<ComponentType<T>>(async () => {
@@ -27,4 +27,19 @@ export const lazyWithRetry = <T>(
       // Let's let the application crash and raise the error.
       throw error;
     }
+  });
+
+export const lazyNamedWithRetry = <T, ExportName extends string>(
+  componentImport: () => Promise<Record<ExportName, ComponentType<T>>>,
+  exportName: ExportName,
+): LazyExoticComponent<ComponentType<T>> =>
+  lazyWithRetry<T>(async () => {
+    const module = await componentImport();
+    const component: ComponentType<T> | undefined = (module as Record<string, ComponentType<T> | undefined>)[
+      exportName
+    ];
+    if (component === undefined) {
+      throw new Error(`lazyNamedWithRetry: fant ingen eksport med namnet "${exportName}" i modulen.`);
+    }
+    return { default: component };
   });

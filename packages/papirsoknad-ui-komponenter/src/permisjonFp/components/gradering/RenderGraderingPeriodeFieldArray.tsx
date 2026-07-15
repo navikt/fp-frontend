@@ -74,6 +74,7 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
     if (fields.length === 0) {
       append(defaultGraderingPeriode);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- legg berre til ein tom rad ved montering; fields.length skal ikkje trigge effekten på nytt
   }, []);
 
   return (

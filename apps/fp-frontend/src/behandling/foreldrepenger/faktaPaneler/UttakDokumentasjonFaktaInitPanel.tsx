@@ -7,7 +7,7 @@ import { UttakDokumentasjonFaktaIndex } from '@navikt/fp-fakta-uttaksdokumentasj
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
-import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
@@ -19,7 +19,7 @@ export const UttakDokumentasjonFaktaInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
   const { data: dokumentasjonVurderingBehov } = useQuery(api.dokumentasjonVurderingBehovOptions(behandling));
 
   return (

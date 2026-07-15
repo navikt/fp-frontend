@@ -1,5 +1,5 @@
 import { type ReactElement, useEffect, useMemo } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, HStack, Radio, VStack } from '@navikt/ds-react';
@@ -217,64 +217,6 @@ const hentSorterAktiviteterFn =
     return data1.arbeidsforhold.localeCompare(data2.arbeidsforhold);
   };
 
-const byggDefaultValues = (
-  valgtPeriode: PeriodeSoker,
-  sorterteAktiviteter: PeriodeSokerAktivitet[],
-  periodeResultatårsakKoder: PeriodeResultatÅrsakMuligeÅrsaker[],
-): UttakAktivitetType => {
-  const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0]?.stønadskontoType === '-';
-
-  return {
-    begrunnelse: valgtPeriode.begrunnelse,
-    erOppfylt: erPeriodeOppfylt(valgtPeriode, periodeResultatårsakKoder),
-    periodeResultatÅrsak: valgtPeriode.periodeResultatÅrsak,
-    graderingInnvilget: valgtPeriode.graderingInnvilget,
-    samtidigUttak: valgtPeriode.samtidigUttak,
-    graderingAvslagÅrsak: valgtPeriode.graderingAvslagÅrsak,
-    samtidigUttaksprosent: valgtPeriode.samtidigUttaksprosent
-      ? valgtPeriode.samtidigUttaksprosent.toString()
-      : undefined,
-    flerbarnsdager: valgtPeriode.flerbarnsdager,
-    oppholdÅrsak: valgtPeriode.oppholdÅrsak,
-    aktiviteter: sorterteAktiviteter.map(a => ({
-      stønadskontoType: a.stønadskontoType ?? '-',
-      weeks: finnUker(a, valgtPeriode),
-      days: finnDager(a, valgtPeriode),
-      utbetalingsgrad: !kontoIkkeSatt && a.utbetalingsgrad ? a.utbetalingsgrad.toString() : '0',
-    })),
-  };
-};
-
-const transformValues = (
-  values: UttakAktivitetType,
-  valgtPeriode: PeriodeSoker,
-  filtrerteAktiviteter: PeriodeSokerAktivitet[],
-): PeriodeSoker => ({
-  ...valgtPeriode,
-  begrunnelse: values.begrunnelse,
-  graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
-  oppholdÅrsak: values.oppholdÅrsak,
-  periodeResultatType: values.erOppfylt || values.oppholdÅrsak !== '-' ? 'INNVILGET' : 'AVSLÅTT',
-  graderingAvslagÅrsak: values.graderingAvslagÅrsak,
-  periodeResultatÅrsak: values.periodeResultatÅrsak,
-  samtidigUttaksprosent: values.samtidigUttaksprosent ? Number.parseFloat(values.samtidigUttaksprosent) : undefined,
-  samtidigUttak: values.samtidigUttak,
-  flerbarnsdager: values.flerbarnsdager,
-  aktiviteter: filtrerteAktiviteter.flatMap((a, index) => {
-    const aktivitet = values.aktiviteter[index];
-    if (!aktivitet) {
-      return [];
-    }
-    return {
-      ...a,
-      stønadskontoType: aktivitet.stønadskontoType,
-      utbetalingsgrad: Number.parseFloat(aktivitet.utbetalingsgrad),
-      trekkdagerDesimaler: Number.parseFloat(aktivitet.weeks) * 5 + Number.parseFloat(aktivitet.days),
-      trekkdager: Number.parseFloat(aktivitet.weeks) * 5 + Number.parseFloat(aktivitet.days),
-    };
-  }),
-});
-
 interface Props {
   valgtPeriode: PeriodeSoker;
   isReadOnly: boolean;
@@ -308,11 +250,13 @@ export const UttakPeriodeForm = ({
   const sorterteAktiviteter = useMemo(() => {
     const sorterAktiviteter = hentSorterAktiviteterFn(arbeidsgiverOpplysningerPerId, intl);
     return [...valgtPeriode.aktiviteter].sort(sorterAktiviteter);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- bevisst utelating: arbeidsgiverOpplysningerPerId/intl gjev ny ref og uendeleg loop (sjå over)
   }, [valgtPeriode.aktiviteter]);
 
   // Her er det noko rart. Denne må ha useMemo, ellers blir testen aldri ferdig
   const defaultValues = useMemo(
-    () => byggDefaultValues(valgtPeriode, sorterteAktiviteter, muligeÅrsaker),
+    () => buildInitialValues(valgtPeriode, sorterteAktiviteter, muligeÅrsaker),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- bevisst utelating: muligeÅrsaker er ny ref kvar render og ville gitt uendeleg loop (sjå over)
     [valgtPeriode, sorterteAktiviteter, arbeidsgiverOpplysningerPerId],
   );
 
@@ -322,13 +266,13 @@ export const UttakPeriodeForm = ({
 
   useEffect(() => {
     formMethods.reset(defaultValues);
-  }, [defaultValues]);
+  }, [defaultValues, formMethods]);
 
-  const erOppfylt = formMethods.watch('erOppfylt');
-  const graderingInnvilget = formMethods.watch('graderingInnvilget');
-  const samtidigUttak = formMethods.watch('samtidigUttak');
-  const valgtInnvilgelsesÅrsak = formMethods.watch('periodeResultatÅrsak');
-  const aktiviteter = formMethods.watch('aktiviteter');
+  const erOppfylt = useWatch({ control: formMethods.control, name: 'erOppfylt' });
+  const graderingInnvilget = useWatch({ control: formMethods.control, name: 'graderingInnvilget' });
+  const samtidigUttak = useWatch({ control: formMethods.control, name: 'samtidigUttak' });
+  const valgtInnvilgelsesÅrsak = useWatch({ control: formMethods.control, name: 'periodeResultatÅrsak' });
+  const aktiviteter = useWatch({ control: formMethods.control, name: 'aktiviteter' });
 
   const stønadskontoType: UttakPeriodeType = aktiviteter[0]?.stønadskontoType ?? '-';
 
@@ -481,3 +425,61 @@ export const UttakPeriodeForm = ({
     </RhfForm>
   );
 };
+
+const buildInitialValues = (
+  valgtPeriode: PeriodeSoker,
+  sorterteAktiviteter: PeriodeSokerAktivitet[],
+  periodeResultatårsakKoder: PeriodeResultatÅrsakMuligeÅrsaker[],
+): UttakAktivitetType => {
+  const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0]?.stønadskontoType === '-';
+
+  return {
+    begrunnelse: valgtPeriode.begrunnelse,
+    erOppfylt: erPeriodeOppfylt(valgtPeriode, periodeResultatårsakKoder),
+    periodeResultatÅrsak: valgtPeriode.periodeResultatÅrsak,
+    graderingInnvilget: valgtPeriode.graderingInnvilget,
+    samtidigUttak: valgtPeriode.samtidigUttak,
+    graderingAvslagÅrsak: valgtPeriode.graderingAvslagÅrsak,
+    samtidigUttaksprosent: valgtPeriode.samtidigUttaksprosent
+      ? valgtPeriode.samtidigUttaksprosent.toString()
+      : undefined,
+    flerbarnsdager: valgtPeriode.flerbarnsdager,
+    oppholdÅrsak: valgtPeriode.oppholdÅrsak,
+    aktiviteter: sorterteAktiviteter.map(a => ({
+      stønadskontoType: a.stønadskontoType ?? '-',
+      weeks: finnUker(a, valgtPeriode),
+      days: finnDager(a, valgtPeriode),
+      utbetalingsgrad: !kontoIkkeSatt && a.utbetalingsgrad ? a.utbetalingsgrad.toString() : '0',
+    })),
+  };
+};
+
+const transformValues = (
+  values: UttakAktivitetType,
+  valgtPeriode: PeriodeSoker,
+  filtrerteAktiviteter: PeriodeSokerAktivitet[],
+): PeriodeSoker => ({
+  ...valgtPeriode,
+  begrunnelse: values.begrunnelse,
+  graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
+  oppholdÅrsak: values.oppholdÅrsak,
+  periodeResultatType: values.erOppfylt || values.oppholdÅrsak !== '-' ? 'INNVILGET' : 'AVSLÅTT',
+  graderingAvslagÅrsak: values.graderingAvslagÅrsak,
+  periodeResultatÅrsak: values.periodeResultatÅrsak,
+  samtidigUttaksprosent: values.samtidigUttaksprosent ? Number.parseFloat(values.samtidigUttaksprosent) : undefined,
+  samtidigUttak: values.samtidigUttak,
+  flerbarnsdager: values.flerbarnsdager,
+  aktiviteter: filtrerteAktiviteter.flatMap((a, index) => {
+    const aktivitet = values.aktiviteter[index];
+    if (!aktivitet) {
+      return [];
+    }
+    return {
+      ...a,
+      stønadskontoType: aktivitet.stønadskontoType,
+      utbetalingsgrad: Number.parseFloat(aktivitet.utbetalingsgrad),
+      trekkdagerDesimaler: Number.parseFloat(aktivitet.weeks) * 5 + Number.parseFloat(aktivitet.days),
+      trekkdager: Number.parseFloat(aktivitet.weeks) * 5 + Number.parseFloat(aktivitet.days),
+    };
+  }),
+});

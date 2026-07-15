@@ -17,6 +17,7 @@ interface Props {
   cancelEvent: () => void;
   submitCallback: (formData: FormValues) => void;
   fagsakMarkeringerKodeverk: KodeverkMedNavn<'FagsakMarkering'>[];
+  isPending?: boolean;
 }
 
 /**
@@ -31,6 +32,7 @@ export const EndreUtlandModal = ({
   saksnummer,
   fagsakMarkeringer,
   fagsakMarkeringerKodeverk,
+  isPending,
 }: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: {
@@ -58,10 +60,10 @@ export const EndreUtlandModal = ({
             </RhfCheckboxGroup>
           </Dialog.Body>
           <Dialog.Footer>
-            <Button size="small" variant="secondary" onClick={cancelEvent} type="button">
+            <Button size="small" variant="secondary" onClick={cancelEvent} type="button" disabled={isPending}>
               <FormattedMessage id="MenyEndreUtlandIndex.Avbryt" />
             </Button>
-            <Button size="small" variant="primary">
+            <Button size="small" variant="primary" loading={isPending} disabled={isPending}>
               <FormattedMessage id="MenyEndreUtlandIndex.Ok" />
             </Button>
           </Dialog.Footer>

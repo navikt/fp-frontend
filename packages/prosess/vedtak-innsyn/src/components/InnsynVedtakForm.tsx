@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
@@ -129,7 +129,7 @@ export const InnsynVedtakForm = ({
   const apVurderInnsynBegrunnelse =
     aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse ?? undefined;
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   const previewBrev = getPreviewCallback(previewCallback, begrunnelse);
 

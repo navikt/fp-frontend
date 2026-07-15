@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, useContext, useMemo, useState } from 'react';
+import { createContext, type ReactElement, use, useMemo, useState } from 'react';
 
 const RequestPendingContext = createContext<{
   isRequestPending: boolean;
@@ -16,11 +16,11 @@ const RequestPendingProvider = ({ children }: { children: ReactElement }) => {
     [isRequestPending, setIsRequestPending],
   );
 
-  return <RequestPendingContext.Provider value={value}>{children}</RequestPendingContext.Provider>;
+  return <RequestPendingContext value={value}>{children}</RequestPendingContext>;
 };
 
 const useRequestPendingContext = () => {
-  const context = useContext(RequestPendingContext);
+  const context = use(RequestPendingContext);
   if (!context) {
     throw new Error('useRequestPendingContext er avhengig av RequestPendingContext.Provider');
   }

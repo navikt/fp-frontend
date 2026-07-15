@@ -7,7 +7,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { InnsynProsessIndex } from '@navikt/fp-prosess-innsyn';
 
-import { useBehandlingApi } from '../../../data/behandlingApi';
+import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -19,7 +19,7 @@ export const BehandleInnsynProsessStegInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
-  const api = useBehandlingApi(behandling);
+  const api = getBehandlingApi(behandling);
 
   const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(behandling));
   const { data: innsyn, isFetching } = useQuery(api.innsyn.innsynOptions(behandling));

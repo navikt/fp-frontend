@@ -8,7 +8,7 @@ import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import type { KlageVurderingOmgjørType, KlageVurderingType, KodeverkMedNavn } from '@navikt/fp-types';
 
-import type { KlageFormType } from '../../types/klageFormType';
+import type { FormValues } from '../../types/FormValues';
 
 import styles from './klageVurderingRadioOptionsNfp.module.css';
 
@@ -27,7 +27,7 @@ export const KlageVurderingRadioOptionsNfp = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { control } = useFormContext<KlageFormType>();
+  const { control } = useFormContext<FormValues>();
 
   const medholdOptions = medholdReasons.map(mo => (
     <option key={mo.kode} value={mo.kode}>

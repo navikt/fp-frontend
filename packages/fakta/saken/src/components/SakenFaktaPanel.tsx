@@ -5,7 +5,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { isAksjonspunktOpen } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Ytelsefordeling } from '@navikt/fp-types';
+import type { OpptjeningIUtlandDokStatusDto, Ytelsefordeling } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { DekningradAP } from './dekningsgrad/DekningradAP';
@@ -15,9 +15,7 @@ import { StartdatoOverstyring } from './StartdatoOverstyring';
 
 interface Props {
   ytelsefordeling?: Ytelsefordeling;
-  utlandDokStatus?: {
-    dokStatus?: string;
-  };
+  utlandDokStatus: OpptjeningIUtlandDokStatusDto | undefined;
   kanOverstyreAccess: boolean;
 }
 

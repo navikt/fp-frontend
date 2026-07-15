@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { PadlockLockedIcon } from '@navikt/aksel-icons';
@@ -19,20 +18,14 @@ interface Props {
 }
 
 export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid, kanVeilede }: Props) => {
-  const [erOppgaveReservert, setErOppgaveReservert] = useState(false);
-
   const { data: reserverteOppgaver = [], refetch } = useQuery({
     ...oppgaverForFagsakerOptions([saksnummer]),
-    refetchInterval: erOppgaveReservert ? false : 30000,
+    refetchInterval: query =>
+      query.state.data?.find(ro => ro.behandlingId === behandlingUuid)?.reservasjonStatus.erReservert ? false : 30000,
   });
 
   const oppgaveForBehandling = reserverteOppgaver.find(ro => ro.behandlingId === behandlingUuid);
   const erReservert = oppgaveForBehandling?.reservasjonStatus.erReservert;
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setErOppgaveReservert(erReservert || false);
-  }, [erReservert]);
 
   const { mutate: opphevOppgavereservasjon } = useMutation({
     mutationFn: opphevReservasjon,

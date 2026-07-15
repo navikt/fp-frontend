@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
@@ -39,7 +39,7 @@ export const SakslisteVelgerForm = ({ sakslister, setValgtSakslisteId, fetchAnta
     defaultValues: getFormDefaultValues(sorterteSakslister),
   });
 
-  const sakslisteId = formMethods.watch('sakslisteId');
+  const sakslisteId = useWatch({ control: formMethods.control, name: 'sakslisteId' });
 
   // (TOR) Prøv å refaktorer dette
   useEffect(() => {
@@ -49,6 +49,7 @@ export const SakslisteVelgerForm = ({ sakslister, setValgtSakslisteId, fetchAnta
       setValgtSakslisteId(id);
       fetchAntallOppgaver(id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- reager berre på endra sakslisteId; fetchAntallOppgaver/setValgtSakslisteId skal ikkje trigge
   }, [sakslisteId]);
 
   if (sakslister.length === 0) {

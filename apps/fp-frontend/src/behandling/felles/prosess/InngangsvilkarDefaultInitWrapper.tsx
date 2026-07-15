@@ -101,7 +101,7 @@ const InngangsvilkårPanelDataProvider = (props: PropsContext): JSX.Element => {
 
   const values = useMemo(() => otherProps, [otherProps]);
 
-  return <InngangsvilkårPanelDataContext.Provider value={values}>{children}</InngangsvilkårPanelDataContext.Provider>;
+  return <InngangsvilkårPanelDataContext value={values}>{children}</InngangsvilkårPanelDataContext>;
 };
 
 const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: VilkårUtfallType): boolean =>

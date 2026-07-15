@@ -1,10 +1,8 @@
 import React from 'react';
 
-import classnames from 'classnames/bind';
+import { classNames } from '@navikt/fp-utils';
 
 import styles from './boks.module.css';
-
-const classNames = classnames.bind(styles);
 
 interface Props {
   harBorderTop?: boolean;
@@ -14,10 +12,11 @@ interface Props {
 
 export const Boks = ({ harBorderTop = false, harBorderLeft = true, children }: Props) => (
   <div
-    className={classNames(styles['boks'], {
-      harBorderLeft,
-      harBorderTop,
-    })}
+    className={classNames(
+      styles['boks'],
+      harBorderLeft && styles['harBorderLeft'],
+      harBorderTop && styles['harBorderTop'],
+    )}
   >
     {children}
   </div>

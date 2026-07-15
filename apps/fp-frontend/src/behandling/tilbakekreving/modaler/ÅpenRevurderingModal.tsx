@@ -11,6 +11,7 @@ export const ÅpenRevurderingModal = ({ harÅpenRevurdering }: { harÅpenRevurde
   // eslint-disable-next-line @eslint-react/rules-of-hooks, react-hooks/rules-of-hooks -- Rapportert fordi den ikkje taklar norske bokstavar i komponentnamn
   useEffect(() => {
     if (harÅpenRevurdering) {
+      // eslint-disable-next-line @eslint-react/set-state-in-effect -- skal opne modal når revurdering blir åpen
       setOpen(true);
     }
   }, [harÅpenRevurdering]);

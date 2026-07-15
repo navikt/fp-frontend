@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
@@ -10,9 +10,9 @@ import dayjs from 'dayjs';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
+import type { Aksjonspunkt, AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
@@ -38,13 +38,10 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   );
   const [erOverstyrt, setErOverstyrt] = useState(false);
   const [visLeggTilPeriodeForm, setVisLeggTilPeriodeForm] = useState(false);
-  const [feilmelding, setFeilmelding] = useState<string | undefined>();
   const [isDirty, setIsDirty] = useState(false);
 
   const formMethods = useForm<FaktaBegrunnelseFormValues>({
-    defaultValues: mellomlagretFormData
-      ? { begrunnelse: mellomlagretFormData.begrunnelse }
-      : FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel[0]),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel),
   });
 
   const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
@@ -53,34 +50,20 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
 
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
 
-  const bekreft = (begrunnelse: string) => {
-    return submitCallback({
-      kode: erOverstyrt
-        ? AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART
-        : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-      begrunnelse,
-      perioder: perioder,
-    });
-  };
+  const periodeMap = perioder.map(({ fom, tom }) => [fom, tom]);
+  const erOverlappendePerioder = periodeMap.length > 0 ? !!dateRangesNotOverlapping(periodeMap) : undefined;
+  const feilmelding = erOverlappendePerioder
+    ? intl.formatMessage({ id: 'UttakEøsFaktaForm.OverlappendePerioder' })
+    : undefined;
 
-  useEffect(() => {
-    const periodeMap = perioder.map(({ fom, tom }) => [fom, tom]);
-    const erOverlappendePerioder = periodeMap.length > 0 ? !!dateRangesNotOverlapping(periodeMap) : undefined;
-    if (erOverlappendePerioder) {
-      setFeilmelding(intl.formatMessage({ id: 'UttakEøsFaktaForm.OverlappendePerioder' }));
-    } else {
-      setFeilmelding(undefined);
-    }
-  }, [perioder]);
-
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   useEffect(() => {
     setMellomlagretFormData({
       annenForelderUttakEøsPerioder: perioder,
       begrunnelse: begrunnelse,
     });
-  }, [perioder, begrunnelse]);
+  }, [perioder, begrunnelse, setMellomlagretFormData]);
 
   return (
     <VStack gap="space-16">
@@ -112,7 +95,10 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
         setDirty={setIsDirty}
         alleKodeverk={alleKodeverk}
       />
-      <RhfForm formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(transformValues(values, perioder, erOverstyrt))}
+      >
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
@@ -134,3 +120,18 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
     </VStack>
   );
 };
+
+const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FaktaBegrunnelseFormValues =>
+  FaktaBegrunnelseTextField.initialValues(aksjonspunkter);
+
+const transformValues = (
+  values: FaktaBegrunnelseFormValues,
+  perioder: AnnenforelderUttakEøsPeriode[],
+  erOverstyrt: boolean,
+): BekreftAnnenpartsUttakEøsAp => ({
+  kode: erOverstyrt
+    ? AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART
+    : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+  perioder,
+  ...FaktaBegrunnelseTextField.transformValues(values),
+});

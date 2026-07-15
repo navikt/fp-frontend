@@ -31,13 +31,14 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
   const [visFritekstRedigeringModal, setVisFritekstRedigeringModal] = useState(false);
   const [brevOverstyring, setBrevOverstyring] = useState<BrevOverstyring | null>(null);
   const [henterVedtaksbrevPdf, setHenterVedtaksbrevPdf] = useState(false);
-  const hasFetchedBrevOverstyring = useRef(false);
+  const hasFetchedBrevOverstyringRef = useRef(false);
 
   useEffect(() => {
-    if (!isReadOnly && !hasFetchedBrevOverstyring.current && harRedigertBrev && hentBrevHtml) {
-      hasFetchedBrevOverstyring.current = true;
+    if (!isReadOnly && !hasFetchedBrevOverstyringRef.current && harRedigertBrev && hentBrevHtml) {
+      hasFetchedBrevOverstyringRef.current = true;
       void hentBrevHtml().then(setBrevOverstyring);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun hentast ein gong ved montering (styrt av hasFetchedBrevOverstyringRef)
   }, []);
 
   const visFritekstModalOgHentBrev = async () => {

@@ -52,6 +52,7 @@ export default [
   {
     rules: {
       ...vitest.configs.recommended.rules,
+      '@eslint-react/purity': ERROR,
       eqeqeq: ERROR,
       'max-len': [ERROR, 160],
       'no-console': ERROR,

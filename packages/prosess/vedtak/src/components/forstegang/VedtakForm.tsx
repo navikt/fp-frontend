@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { type IntlShape, useIntl } from 'react-intl';
 
 import { RhfForm } from '@navikt/ft-form-hooks';
@@ -173,7 +173,7 @@ export const VedtakForm = ({
     defaultValues: mellomlagretFormData ?? buildInitialValues(behandling),
   });
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
   const { harRedigertBrev } = useVedtakEditeringContext();
 

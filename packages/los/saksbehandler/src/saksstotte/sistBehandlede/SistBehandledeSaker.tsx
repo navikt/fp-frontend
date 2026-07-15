@@ -32,7 +32,7 @@ interface Props {
  * Denne komponenten viser de siste fagsakene en nav-ansatt har behandlet.
  */
 export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
-  const [kunÅpne, setkunÅpne] = useState<boolean>(false);
+  const [kunÅpne, setKunÅpne] = useState<boolean>(false);
   const { data: sisteReserverte = [], isFetching } = useQuery(behandlendeOppgaverOptions(kunÅpne));
 
   return (
@@ -45,7 +45,7 @@ export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
           <FormattedMessage id="SistBehandledeSaker.SistBehandledeSaker" />
         </Heading>
         <Spacer />
-        <Switch position="right" size="small" checked={kunÅpne} onChange={e => setkunÅpne(e.target.checked)}>
+        <Switch position="right" size="small" checked={kunÅpne} onChange={e => setKunÅpne(e.target.checked)}>
           <FormattedMessage id="SistBehandledeSaker.KunÅpne" />
         </Switch>
       </HStack>

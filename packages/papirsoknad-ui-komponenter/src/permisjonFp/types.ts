@@ -11,6 +11,7 @@ import {
 
 type VirtuellFeilType = {
   notRegisteredInput?: string;
+  periodeOverlapper?: string;
 };
 
 export type GraderingPeriode = {
