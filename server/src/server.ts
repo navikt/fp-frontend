@@ -64,6 +64,7 @@ function startApp() {
             "https://graph.microsoft.com",
             "https://telemetry.nav.no",
             "https://telemetry.ekstern.dev.nav.no",
+            "https://cdn.nav.no",
           ],
           "font-src": ["'self'", "https://cdn.nav.no", "data:"],
           "img-src": ["'self'", "data:"],
