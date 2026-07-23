@@ -60,7 +60,6 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.arbeidsgiver`}
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' })}
             validate={[maxLength50]}
-            maxLength={99}
           />
 
           <RhfDatepicker

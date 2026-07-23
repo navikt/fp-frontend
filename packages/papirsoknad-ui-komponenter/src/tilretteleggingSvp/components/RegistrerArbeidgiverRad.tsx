@@ -58,7 +58,6 @@ export const RegistrerArbeidsgiverRad = ({ open, readOnly = false, index, remove
                 (value: string | number) => hasNoWhiteSpace(value.toString()),
                 hasValidOrgNumberOrFodselsnr,
               ]}
-              maxLength={99}
             />
             <RhfDatepicker
               name={`${FA_PREFIX}.${index}.behovsdato`}
