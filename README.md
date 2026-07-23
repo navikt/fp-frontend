@@ -13,26 +13,31 @@ https://navikt.github.io/fp-frontend
 
 ## For å komme i gang
 
-Lag en .yarnrc.yml-fil i hjemmefolderen din: (Bytt ut <token> med ditt genererte token)
+Lag en `~/.yarnrc.yml` i hjemmekatalogen din.  
+Bytt ut `<token>` med et generert token:
 
-```
+```yaml
 npmScopes:
   navikt:
     npmAlwaysAuth: true
     npmAuthToken: <token>
-    npmRegistryServer: "https://npm.pkg.github.com"
+    npmRegistryServer: 'https://npm.pkg.github.com'
+  nais:
+    npmAlwaysAuth: true
+    npmAuthToken: <token>
+    npmRegistryServer: 'https://npm.pkg.github.com'
 ```
 
-Kjør så desse kommandoene for å installere og bygge applikasjonen:
+Kjør deretter disse kommandoene for å installere og bygge applikasjonen:
 
-```
+```bash
 yarn install
 yarn build
 ```
 
-En kan kjøre tester og linting både fra rot og fra de ulike pakkene:
+Du kan kjøre tester og linting både fra repo-roten og fra de ulike pakkene:
 
-```
+```bash
 yarn test
 yarn tsc
 yarn eslint
@@ -108,10 +113,13 @@ yarn generate
 ```
 
 ## Oppgradere avhengigheter
+
 Avhengigheter kan oppgraderes på tvers av alle pakker med
+
 ```bash
 yarn upgrade-interactive
 ```
+
 ## Turborepo
 
 - Hovedregelen ved bruk av Turborepo er at dependencies skal installeres i pakkene de blir brukt.
