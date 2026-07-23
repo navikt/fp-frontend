@@ -76,6 +76,9 @@ spec:
       destinations:
         - id: loki
         - id: elastic
+  frontend:
+    generatedConfig:
+      mountPath: /app/public/nais.js
   env:
     - name: HOST
       value: {{ingress}}

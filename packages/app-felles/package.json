@@ -17,7 +17,8 @@
     "storybook": "storybook dev --quiet -p 7006"
   },
   "dependencies": {
-    "@navikt/ds-react": "8.14.0",
+    "@nais/apm": "0.4.0",
+    "@navikt/ds-react": "8.15.0",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",

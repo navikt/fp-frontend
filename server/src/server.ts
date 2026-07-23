@@ -1,4 +1,5 @@
 import path from "node:path";
+import fs from "node:fs";
 
 import { serveViteMode } from "@navikt/vite-mode";
 import cors from "cors";
@@ -17,6 +18,30 @@ import { verifyToken } from "./tokenValidation.js";
 const server = express();
 const { port, viteModePort } = config.server;
 const spaFilePath = path.resolve("./public", "index.html");
+
+const replaceNaisMetaTags = (html: string) => {
+  const metaTags = [
+    { name: 'nais-telemetry-url', content: process.env.NAIS_FRONTEND_TELEMETRY_COLLECTOR_URL },
+    { name: 'nais-app', content: process.env.NAIS_APP_NAME },
+    { name: 'nais-team', content: process.env.NAIS_TEAM ?? process.env.NAIS_NAMESPACE },
+    { name: 'nais-cluster', content: process.env.NAIS_CLUSTER_NAME },
+    { name: 'nais-version', content: process.env.NAIS_APP_IMAGE?.split(':').at(-1) },
+  ];
+
+  const tags = metaTags
+    .filter((tag): tag is { name: string; content: string } => Boolean(tag.content))
+    .map((tag) => `<meta name="${tag.name}" content="${tag.content}" />`)
+    .join('\n    ');
+
+  return html.replaceAll('{{{NAIS_META_TAGS}}}', tags);
+};
+
+let renderedHtml: string | null = null;
+try {
+  renderedHtml = replaceNaisMetaTags(fs.readFileSync(spaFilePath, 'utf-8'));
+} catch {
+  // File doesn't exist in local dev; serveViteMode handles that case
+}
 
 function startApp() {
   addHeaders(server);
@@ -37,10 +62,14 @@ function startApp() {
             "'self'",
             "https://sentry.gc.nav.no",
             "https://graph.microsoft.com",
+            "https://telemetry.nav.no",
+            "https://telemetry.ekstern.dev.nav.no",
+            "https://cdn.nav.no",
           ],
           "font-src": ["'self'", "https://cdn.nav.no", "data:"],
           "img-src": ["'self'", "data:"],
-          "style-src": ["'self'", "'unsafe-inline'"],
+          "script-src": ["'self'", "https://cdn.nav.no"],
+          "style-src": ["'self'", "'unsafe-inline'", "https://cdn.nav.no"],
           "frame-src": ["'self'"],
           "child-src": ["'self'"],
           "media-src": ["'none'"],
@@ -116,10 +145,13 @@ function startApp() {
   // Server ferdig komprimerte gzip/br filer hvis mulig.
   server.use(serveKomprimerteFilerHvisMulig);
   // serve static files
-  server.use(express.static("./public"));
+  server.use(express.static("./public", { index: false }));
   server.use("*splat", (request, response) => {
-    // Siden dette er et internt system med begrenset antall brukere anser vi å sette en rate-limiter som en unødvendig fallgruve. Ignorer dermed denne sonarklagen.
-    response.sendFile(spaFilePath); // NOSONAR: "Missing rate limiting".
+    if (renderedHtml) {
+      response.send(renderedHtml);
+    } else {
+      response.sendFile(spaFilePath); // NOSONAR: "Missing rate limiting".
+    }
   });
 
   server.listen(port, () => logger.info(`Listening on port ${port}`));

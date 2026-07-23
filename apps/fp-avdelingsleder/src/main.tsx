@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import dayjs from 'dayjs';
 
-import { initSentry, RestApiErrorProvider } from '@navikt/fp-app-felles';
+import { initFaro, initSentry, RestApiErrorProvider } from '@navikt/fp-app-felles';
 
 import { LosAppIndexWrapper } from './LosAppIndex';
 
@@ -19,6 +19,7 @@ if (app === null) {
 }
 
 initSentry('fp-avdelingsleder');
+initFaro();
 
 const root = createRoot(app);
 
