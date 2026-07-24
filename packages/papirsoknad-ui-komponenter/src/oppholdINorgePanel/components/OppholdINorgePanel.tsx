@@ -7,20 +7,16 @@ import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
-import { type FormValues as FormValuesFieldArray, UtenlandsOppholdField } from './UtenlandsOppholdField';
+import {
+  defaultUtenlandsOpphold,
+  type FormValues as FormValuesFieldArray,
+  UtenlandsOppholdField,
+} from './UtenlandsOppholdField';
 
 export type OppholdINorgeFormValues = {
   oppholdINorge?: boolean;
   oppholdSisteTolvINorge?: boolean;
   oppholdNesteTolvINorge?: boolean;
-  tidligereOppholdUtenlands?: FormValuesFieldArray[];
-  fremtidigeOppholdUtenlands?: FormValuesFieldArray[];
-};
-
-type TranformFormValues = {
-  oppholdINorge?: boolean;
-  harTidligereOppholdUtenlands?: boolean;
-  harFremtidigeOppholdUtenlands?: boolean;
   tidligereOppholdUtenlands?: FormValuesFieldArray[];
   fremtidigeOppholdUtenlands?: FormValuesFieldArray[];
 };
@@ -41,7 +37,7 @@ interface Props {
  */
 export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato, erAdopsjon }: Props) => {
   const { formatMessage } = useIntl();
-  const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk['Landkoder'].toSorted((a, b) => a.navn.localeCompare(b.navn));
 
   const { watch, control } = useFormContext<OppholdINorgeFormValues>();
   const skalViseTidligereOppholdInput = !watch('oppholdSisteTolvINorge', true);
@@ -105,8 +101,8 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
 };
 
 OppholdINorgePanel.initialValues = (): OppholdINorgeFormValues => ({
-  tidligereOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],
-  fremtidigeOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],
+  tidligereOppholdUtenlands: [defaultUtenlandsOpphold],
+  fremtidigeOppholdUtenlands: [defaultUtenlandsOpphold],
 });
 
 OppholdINorgePanel.transformValues = ({
@@ -115,7 +111,7 @@ OppholdINorgePanel.transformValues = ({
   oppholdNesteTolvINorge,
   tidligereOppholdUtenlands,
   fremtidigeOppholdUtenlands,
-}: OppholdINorgeFormValues): TranformFormValues => ({
+}: OppholdINorgeFormValues) => ({
   oppholdINorge,
   harTidligereOppholdUtenlands: !oppholdSisteTolvINorge,
   harFremtidigeOppholdUtenlands: !oppholdNesteTolvINorge,
