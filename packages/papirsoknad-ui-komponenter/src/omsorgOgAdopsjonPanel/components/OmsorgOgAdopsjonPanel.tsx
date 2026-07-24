@@ -21,6 +21,9 @@ import { notEmpty } from '@navikt/fp-utils';
 const OMSORG_NAME_PREFIX = 'omsorg';
 const MAX_ANTALL_BARN = 10;
 
+const minValue1 = minValue(1);
+const maxValue10 = maxValue(10);
+
 const getValideringMotAnnenFødselsdato = (index: number, fødselsdato: string | undefined) => (fDato?: string) => {
   if (index === 0 && fødselsdato && fDato) {
     return isDatesEqual(fDato, fødselsdato);
@@ -127,7 +130,7 @@ export const OmsorgOgAdopsjonPanel = ({
           readOnly={readOnly}
           htmlSize={8}
           parse={value => removeSpacesFromNumber(value)}
-          validate={[...(erAdopsjon ? [required] : []), hasValidInteger, minValue(1), maxValue(10)]}
+          validate={[...(erAdopsjon ? [required] : []), hasValidInteger, minValue1, maxValue10]}
           onChange={oppdaterAntallBarn}
         />
 

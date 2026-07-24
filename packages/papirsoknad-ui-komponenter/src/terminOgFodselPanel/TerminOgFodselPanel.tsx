@@ -57,7 +57,7 @@ type TransformFormValues =
 
 interface Props {
   readOnly: boolean;
-  erForeldrepenger?: boolean;
+  erForeldrepenger: boolean;
 }
 
 const validateTermin = (getValues: UseFormGetValues<FormValues>) => (termindato: string) => {
@@ -72,7 +72,7 @@ const validerTerminBekreftelse =
     return terminBekreftelseBeforeTodayOrTermindato(termindato, terminbekreftelseDato);
   };
 
-export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Props) => {
+export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger }: Props) => {
   const { watch, getValues, control } = useFormContext<FormValues>();
 
   const [iDag] = useState(() => new Date());

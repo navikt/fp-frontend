@@ -12,8 +12,8 @@ interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
-  fødselsdato?: string;
-  mottattDato?: string;
+  fødselsdato: string | undefined;
+  mottattDato: string | undefined;
 }
 
 export const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fødselsdato, mottattDato }: Props) => (
