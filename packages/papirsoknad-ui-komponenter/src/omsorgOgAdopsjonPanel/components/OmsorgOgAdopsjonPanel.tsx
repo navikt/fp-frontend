@@ -39,9 +39,9 @@ type OmsorgOgAdopsjonFormValues = {
 
 interface Props {
   familieHendelseType: FamilieHendelseType;
-  readOnly?: boolean;
+  readOnly: boolean;
   isForeldrepengerFagsak: boolean;
-  fodselsdato: string | undefined;
+  fødselsdato: string | undefined;
 }
 
 /**
@@ -51,10 +51,10 @@ interface Props {
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
 export const OmsorgOgAdopsjonPanel = ({
-  readOnly = true,
+  readOnly,
   familieHendelseType,
   isForeldrepengerFagsak,
-  fodselsdato,
+  fødselsdato,
 }: Props) => {
   const erAdopsjon = familieHendelseType === 'ADPSJN';
 
@@ -141,7 +141,7 @@ export const OmsorgOgAdopsjonPanel = ({
               required,
               hasValidDate,
               dateBeforeOrEqualToToday,
-              getValideringMotAnnenFødselsdato(index, fodselsdato),
+              getValideringMotAnnenFødselsdato(index, fødselsdato),
             ]}
             label={<FormattedMessage id="Registrering.Adopsjon.FodselsdatoBarnN" values={{ n: index + 1 }} />}
           />

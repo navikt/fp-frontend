@@ -38,7 +38,7 @@ export const EngangsstonadForm = ({
     defaultValues: { ...initialValues(), ...mellomlagretData },
   });
 
-  const foedselsDatoFraTerminOgFodelsPanel = useWatch({ control: formMethods.control, name: 'fødselsdato' });
+  const fødselsdatoFraTerminOgFodelsPanel = useWatch({ control: formMethods.control, name: 'fødselsdato' });
   const mottattDato = useWatch({ control: formMethods.control, name: 'mottattDato' });
 
   return (
@@ -50,7 +50,7 @@ export const EngangsstonadForm = ({
             soknadData={soknadData}
             readOnly={readOnly}
             alleKodeverk={alleKodeverk}
-            fodselsdato={foedselsDatoFraTerminOgFodelsPanel}
+            fødselsdato={fødselsdatoFraTerminOgFodelsPanel}
             mottattDato={mottattDato}
           />
         ) : (
@@ -58,7 +58,7 @@ export const EngangsstonadForm = ({
             soknadData={soknadData}
             readOnly={readOnly}
             alleKodeverk={alleKodeverk}
-            fodselsdato={foedselsDatoFraTerminOgFodelsPanel}
+            fødselsdato={fødselsdatoFraTerminOgFodelsPanel}
             mottattDato={mottattDato}
           />
         )}

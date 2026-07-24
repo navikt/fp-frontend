@@ -96,10 +96,13 @@ export const ForeldrepengerForm = ({
   });
 
   const søkerHarAleneomsorg = useWatch({ control: formMethods.control, name: 'annenForelder.søkerHarAleneomsorg' });
-  const denAndreForelderenHarRettPåForeldrepenger = useWatch({ control: formMethods.control, name: 'annenForelder.denAndreForelderenHarRettPåForeldrepenger' });
+  const denAndreForelderenHarRettPåForeldrepenger = useWatch({
+    control: formMethods.control,
+    name: 'annenForelder.denAndreForelderenHarRettPåForeldrepenger',
+  });
   const annenForelderInformertRequired = !søkerHarAleneomsorg && denAndreForelderenHarRettPåForeldrepenger !== false;
 
-  const foedselsDatoFraTerminOgFodelsPanel = useWatch({ control: formMethods.control, name: 'fødselsdato' });
+  const fødselsdatoFraTerminOgFodelsPanel = useWatch({ control: formMethods.control, name: 'fødselsdato' });
   const mottattDato = useWatch({ control: formMethods.control, name: 'mottattDato' });
 
   return (
@@ -124,7 +127,7 @@ export const ForeldrepengerForm = ({
         <OmsorgOgAdopsjonPapirsoknadIndex
           readOnly={readOnly}
           familieHendelseType={soknadData.getFamilieHendelseType()}
-          fodselsdato={foedselsDatoFraTerminOgFodelsPanel}
+          fødselsdato={fødselsdatoFraTerminOgFodelsPanel}
           isForeldrepengerFagsak
         />
         <AnnenForelderPapirsoknadIndex

@@ -14,21 +14,21 @@ interface Props {
   readOnly: boolean;
   familieHendelseType: FamilieHendelseType;
   isForeldrepengerFagsak?: boolean;
-  fodselsdato?: string;
+  fødselsdato: string | undefined;
 }
 
 export const OmsorgOgAdopsjonPapirsoknadIndex = ({
   readOnly,
   familieHendelseType,
   isForeldrepengerFagsak = false,
-  fodselsdato,
+  fødselsdato,
 }: Props) => (
   <RawIntlProvider value={intl}>
     <OmsorgOgAdopsjonPanel
       readOnly={readOnly}
       familieHendelseType={familieHendelseType}
       isForeldrepengerFagsak={isForeldrepengerFagsak}
-      fodselsdato={fodselsdato}
+      fødselsdato={fødselsdato}
     />
   </RawIntlProvider>
 );

@@ -11,7 +11,7 @@ const meta = {
   title: 'ui-komponenter/omsorg-og-adopsjon',
   component: OmsorgOgAdopsjonPapirsoknadIndex,
   args: {
-    fodselsdato: '2026-05-27',
+    fødselsdato: '2026-05-27',
     readOnly: false,
   },
   parameters: {
