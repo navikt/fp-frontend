@@ -12,11 +12,11 @@ interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
-  fodselsdato?: string;
-  mottattDato?: string;
+  fødselsdato: string | undefined;
+  mottattDato: string | undefined;
 }
 
-export const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdato, mottattDato }: Props) => (
+export const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fødselsdato, mottattDato }: Props) => (
   <>
     {soknadData.getForeldreType() !== 'MOR' && (
       <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
@@ -25,7 +25,7 @@ export const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fod
       <OmsorgOgAdopsjonPapirsoknadIndex
         readOnly={readOnly}
         familieHendelseType={soknadData.getFamilieHendelseType()}
-        fodselsdato={fodselsdato}
+        fødselsdato={fødselsdato}
       />
     )}
     <OppholdINorgePapirsoknadIndex

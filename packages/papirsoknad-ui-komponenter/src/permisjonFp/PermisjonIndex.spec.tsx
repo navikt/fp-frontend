@@ -371,9 +371,7 @@ describe('PermisjonIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(
-      await screen.findByText('Perioder kan ikke overlappe i tid'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Perioder kan ikke overlappe i tid')).toBeInTheDocument();
     expect(lagre).not.toHaveBeenCalled();
 
     // Flytter utsettelsesperioden slik at han ikkje lenger overlappar med fullt uttak
@@ -387,9 +385,7 @@ describe('PermisjonIndex', () => {
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(
-      screen.queryByText('Perioder kan ikke overlappe i tid'),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText('Perioder kan ikke overlappe i tid')).not.toBeInTheDocument();
     expect(lagre).toHaveBeenCalledOnce();
   });
 

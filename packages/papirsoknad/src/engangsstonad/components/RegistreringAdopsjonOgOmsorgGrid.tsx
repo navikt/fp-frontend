@@ -11,7 +11,7 @@ interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
-  fodselsdato?: string | string[];
+  fødselsdato: string | undefined;
   mottattDato?: string;
 }
 
@@ -24,7 +24,7 @@ export const RegistreringAdopsjonOgOmsorgGrid = ({
   readOnly,
   soknadData,
   alleKodeverk,
-  fodselsdato,
+  fødselsdato,
   mottattDato,
 }: Props) => (
   <>
@@ -32,12 +32,12 @@ export const RegistreringAdopsjonOgOmsorgGrid = ({
     <OmsorgOgAdopsjonPapirsoknadIndex
       readOnly={readOnly}
       familieHendelseType={soknadData.getFamilieHendelseType()}
-      fodselsdato={fodselsdato}
+      fødselsdato={fødselsdato}
     />
     <OppholdINorgePapirsoknadIndex
       readOnly={readOnly}
       alleKodeverk={alleKodeverk}
-      erAdopsjon={soknadData.getFamilieHendelseType() !== 'ADPSJN'}
+      erAdopsjon={soknadData.getFamilieHendelseType() === 'ADPSJN'}
       mottattDato={mottattDato}
     />
     <SprakPapirsoknadIndex readOnly={readOnly} />

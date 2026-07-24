@@ -14,18 +14,18 @@ import {
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn, Landkode } from '@navikt/fp-types';
 
-const defaultUtenlandsOpphold = {
-  land: undefined,
-  periodeFom: undefined,
-  periodeTom: undefined,
+export const defaultUtenlandsOpphold: FormValues = {
+  land: undefined as unknown as Landkode,
+  periodeFom: '',
+  periodeTom: '',
 };
 
 export type FormValues = {
-  land?: string;
-  periodeFom?: string;
-  periodeTom?: string;
+  land: Landkode;
+  periodeFom: string;
+  periodeTom: string;
 };
 
 type Keys = 'tidligereOppholdUtenlands' | 'fremtidigeOppholdUtenlands';
@@ -35,7 +35,7 @@ const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: Form
 
   const periodeMap: string[][] = perioder
     .filter(
-      (p): p is { periodeFom: string; periodeTom: string } =>
+      (p): p is { periodeFom: string; periodeTom: string; land: Landkode } =>
         typeof p.periodeFom === 'string' &&
         p.periodeFom !== '' &&
         typeof p.periodeTom === 'string' &&
@@ -49,13 +49,11 @@ const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: Form
 const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes
     .filter(({ kode }) => kode !== 'NOR')
-    .map(
-      ({ kode, navn }): ReactElement => (
-        <option value={kode} key={kode}>
-          {navn}
-        </option>
-      ),
-    );
+    .map(({ kode, navn }): ReactElement => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
 
 const getValiderFørEllerEtter = (sjekkFør: boolean, fomVerdi?: string, tomVerdi?: string) => () => {
   if (!tomVerdi || !fomVerdi) {

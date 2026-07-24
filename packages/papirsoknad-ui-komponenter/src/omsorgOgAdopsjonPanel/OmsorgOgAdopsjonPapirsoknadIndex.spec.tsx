@@ -4,13 +4,13 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './OmsorgOgAdopsjonPapirsoknadIndex.stories';
 
-const { ForFodsel, ForAdopsjon } = composeStories(stories);
+const { ForFodselEngangstønad, ForAdopsjonEngangstønad } = composeStories(stories);
 
 describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
   it('skal velge ett barn for fødsel', async () => {
     const lagre = vi.fn();
 
-    await ForFodsel.run({
+    await ForFodselEngangstønad.run({
       parameters: {
         submitCallback: lagre,
       },
@@ -19,22 +19,22 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     expect(await screen.findByText('Omsorg')).toBeInTheDocument();
 
     const datoInput = screen.getByLabelText('Dato for omsorgsovertakelsen');
-    await userEvent.type(datoInput, '30.05.2022');
+    await userEvent.type(datoInput, '30.05.2026');
     fireEvent.blur(datoInput);
 
     const antallBarnInput = screen.getByLabelText('Antall barn');
     await userEvent.type(antallBarnInput, '1');
 
     const fødselsdatoInput = screen.getByLabelText('Fødselsdato barn 1');
-    await userEvent.type(fødselsdatoInput, '21.05.2022');
+    await userEvent.type(fødselsdatoInput, '21.05.2026');
     fireEvent.blur(fødselsdatoInput);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(await screen.findByText('Dato må være lik 27.05.2022')).toBeInTheDocument();
+    expect(await screen.findByText('Dato må være lik 27.05.2026')).toBeInTheDocument();
 
     await userEvent.clear(fødselsdatoInput);
-    await userEvent.type(fødselsdatoInput, '27.05.2022');
+    await userEvent.type(fødselsdatoInput, '27.05.2026');
     fireEvent.blur(fødselsdatoInput);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -43,8 +43,8 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     expect(lagre).toHaveBeenCalledWith({
       omsorg: {
         antallBarn: 1,
-        fødselsdato: ['2022-05-27'],
-        omsorgsovertakelsesdato: '2022-05-30',
+        fødselsdato: ['2026-05-27'],
+        omsorgsovertakelsesdato: '2026-05-30',
       },
     });
   });
@@ -52,7 +52,7 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
   it('skal velge to barn for fødsel', async () => {
     const lagre = vi.fn();
 
-    await ForFodsel.run({
+    await ForFodselEngangstønad.run({
       parameters: {
         submitCallback: lagre,
       },
@@ -61,18 +61,18 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     expect(await screen.findByText('Omsorg')).toBeInTheDocument();
 
     const datoInput = screen.getByLabelText('Dato for omsorgsovertakelsen');
-    await userEvent.type(datoInput, '30.05.2022');
+    await userEvent.type(datoInput, '30.05.2026');
     fireEvent.blur(datoInput);
 
     const antallBarnInput = screen.getByLabelText('Antall barn');
     await userEvent.type(antallBarnInput, '2');
 
     const fødselsdatoInput = screen.getByLabelText('Fødselsdato barn 1');
-    await userEvent.type(fødselsdatoInput, '27.05.2022');
+    await userEvent.type(fødselsdatoInput, '27.05.2026');
     fireEvent.blur(fødselsdatoInput);
 
     const fødselsdato2Input = screen.getByLabelText('Fødselsdato barn 2');
-    await userEvent.type(fødselsdato2Input, '26.05.2022');
+    await userEvent.type(fødselsdato2Input, '26.05.2026');
     fireEvent.blur(fødselsdato2Input);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -81,8 +81,8 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     expect(lagre).toHaveBeenCalledWith({
       omsorg: {
         antallBarn: 2,
-        fødselsdato: ['2022-05-27', '2022-05-26'],
-        omsorgsovertakelsesdato: '2022-05-30',
+        fødselsdato: ['2026-05-27', '2026-05-26'],
+        omsorgsovertakelsesdato: '2026-05-30',
       },
     });
   });
@@ -90,7 +90,7 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
   it('skal velge to barn for adopsjon', async () => {
     const lagre = vi.fn();
 
-    await ForAdopsjon.run({
+    await ForAdopsjonEngangstønad.run({
       parameters: {
         submitCallback: lagre,
       },
@@ -103,7 +103,7 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const datoInput = screen.getByLabelText('Dato for omsorgsovertakelse/stebarnsadopsjon');
-    await userEvent.type(datoInput, '30.05.2022');
+    await userEvent.type(datoInput, '30.05.2026');
     fireEvent.blur(datoInput);
 
     const antallBarnInput = screen.getByLabelText('Antall barn');
@@ -114,11 +114,11 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const fødselsdatoInput = screen.getByLabelText('Fødselsdato barn 1');
-    await userEvent.type(fødselsdatoInput, '27.05.2022');
+    await userEvent.type(fødselsdatoInput, '27.05.2026');
     fireEvent.blur(fødselsdatoInput);
 
     const fødselsdato2Input = screen.getByLabelText('Fødselsdato barn 2');
-    await userEvent.type(fødselsdato2Input, '26.05.2022');
+    await userEvent.type(fødselsdato2Input, '26.05.2026');
     fireEvent.blur(fødselsdato2Input);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -127,8 +127,8 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     expect(lagre).toHaveBeenCalledWith({
       omsorg: {
         antallBarn: 2,
-        fødselsdato: ['2022-05-27', '2022-05-26'],
-        omsorgsovertakelsesdato: '2022-05-30',
+        fødselsdato: ['2026-05-27', '2026-05-26'],
+        omsorgsovertakelsesdato: '2026-05-30',
       },
     });
   });

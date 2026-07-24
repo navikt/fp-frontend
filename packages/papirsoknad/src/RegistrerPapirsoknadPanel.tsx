@@ -30,10 +30,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 type AllFormValues =
-  | EngangsstønadValues
-  | ForeldrepengerValues
-  | ForeldrepengerEndringssøknadValues
-  | SvangerskapsValues;
+  EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues;
 
 interface Props {
   fagsak: Fagsak;

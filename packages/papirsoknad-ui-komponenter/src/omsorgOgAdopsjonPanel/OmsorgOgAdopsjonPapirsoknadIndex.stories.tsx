@@ -11,8 +11,7 @@ const meta = {
   title: 'ui-komponenter/omsorg-og-adopsjon',
   component: OmsorgOgAdopsjonPapirsoknadIndex,
   args: {
-    isForeldrepengerFagsak: false,
-    fodselsdato: '2022-05-27',
+    fødselsdato: '2026-05-27',
     readOnly: false,
   },
   parameters: {
@@ -41,14 +40,23 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const ForFodsel: Story = {
+export const ForFodselEngangstønad: Story = {
   args: {
+    isForeldrepengerFagsak: false,
     familieHendelseType: 'FODSL',
   },
 };
 
-export const ForAdopsjon: Story = {
+export const ForAdopsjonEngangstønad: Story = {
   args: {
+    isForeldrepengerFagsak: false,
+    familieHendelseType: 'ADPSJN',
+  },
+};
+
+export const ForAdopsjonForeldrepenger: Story = {
+  args: {
+    isForeldrepengerFagsak: true,
     familieHendelseType: 'ADPSJN',
   },
 };
