@@ -106,7 +106,11 @@ export const Messages = ({
     if (brukBreveditor && !brevData && (!erVarselOmRevurdering || årsakskode)) {
       void hentBrevHtml(brevmalkode, årsakskode)
         .then(result => {
-          setBrevDataState({ key: aktivBrevKey, opprinneligHtml: result.opprinneligHtml, redigertHtml: result.redigertHtml });
+          setBrevDataState({
+            key: aktivBrevKey,
+            opprinneligHtml: result.opprinneligHtml,
+            redigertHtml: result.redigertHtml,
+          });
         })
         .catch(() => {});
     }
