@@ -8,6 +8,7 @@ import type { ForhandsvisData, Vedtaksbrev } from '@navikt/ft-prosess-tilbakekre
 import { queryOptions } from '@tanstack/react-query';
 import ky, { type ResponsePromise } from 'ky';
 
+import type { PapirsøknadAp } from '@navikt/fp-papirsoknad';
 import type { FormkravMellomlagretDataType } from '@navikt/fp-prosess-formkrav';
 import type { AksjonspunktVerdier } from '@navikt/fp-prosess-klagevurdering';
 import type { AvklartRisikoklassifiseringAp } from '@navikt/fp-sak-risikoklassifisering';
@@ -59,8 +60,6 @@ import type {
 } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import type { PapirsøknarAp } from '../behandling/papirsoknad/PapirsøknarAp';
-
 type SettPaVentParams = {
   ventearsak?: string;
   frist?: string;
@@ -78,7 +77,7 @@ type NyBehandlendeEnhet = {
 
 //TODO (TOR) Bør dela denne i to. Ein eigen for overstyringsaksjonspunkt
 
-type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | AvklartRisikoklassifiseringAp | PapirsøknarAp;
+type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | AvklartRisikoklassifiseringAp | PapirsøknadAp;
 
 export type AksjonspunktArgs = {
   behandlingUuid: string;
