@@ -1,19 +1,21 @@
 import type { ManuellRegistreringSvangerskapspengerDto, SvpTilretteleggingArbeidsforholdDto } from '@navikt/fp-types';
-
-import type { FormValues, Tilrettelegging } from './types';
 import { notEmpty } from '@navikt/fp-utils';
 
-export const transformTilretteleggingsArbeidsforhold = (
-  tilretteleggingArbeidsforhold: FormValues['tilretteleggingArbeidsforhold'],
-): ManuellRegistreringSvangerskapspengerDto['tilretteleggingArbeidsforhold'] => {
+import type { FormValues, Tilrettelegging } from './types';
+
+export const transformTilretteleggingsArbeidsforhold = ({
+  sokForArbeidsgiver,
+  sokForFrilans,
+  sokForSelvstendigNaringsdrivende,
+  tilretteleggingForArbeidsgiver,
+  tilretteleggingFrilans,
+  tilretteleggingSelvstendigNaringsdrivende,
+}: FormValues['tilretteleggingArbeidsforhold']): ManuellRegistreringSvangerskapspengerDto['tilretteleggingArbeidsforhold'] => {
   const transformerteVerdier: SvpTilretteleggingArbeidsforholdDto[] = [];
 
-  if (
-    tilretteleggingArbeidsforhold.sokForArbeidsgiver &&
-    tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver
-  ) {
+  if (sokForArbeidsgiver && tilretteleggingForArbeidsgiver) {
     transformerteVerdier.push(
-      ...tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.map(
+      ...tilretteleggingForArbeidsgiver.map(
         ta =>
           ({
             '@type': 'VI',
@@ -25,24 +27,19 @@ export const transformTilretteleggingsArbeidsforhold = (
     );
   }
 
-  if (tilretteleggingArbeidsforhold.sokForFrilans && tilretteleggingArbeidsforhold.tilretteleggingFrilans) {
+  if (sokForFrilans && tilretteleggingFrilans) {
     transformerteVerdier.push({
       '@type': 'FR',
-      behovsdato: tilretteleggingArbeidsforhold.tilretteleggingFrilans.behovsdato,
-      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingFrilans.tilrettelegginger.map(mapTilrettelegging),
+      behovsdato: tilretteleggingFrilans.behovsdato,
+      tilrettelegginger: tilretteleggingFrilans.tilrettelegginger.map(mapTilrettelegging),
     });
   }
-  if (
-    tilretteleggingArbeidsforhold.sokForSelvstendigNaringsdrivende &&
-    tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende
-  ) {
+
+  if (sokForSelvstendigNaringsdrivende && tilretteleggingSelvstendigNaringsdrivende) {
     transformerteVerdier.push({
       '@type': 'SN',
-      behovsdato: tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende.behovsdato,
-      tilrettelegginger:
-        tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende.tilrettelegginger.map(
-          mapTilrettelegging,
-        ),
+      behovsdato: tilretteleggingSelvstendigNaringsdrivende.behovsdato,
+      tilrettelegginger: tilretteleggingSelvstendigNaringsdrivende.tilrettelegginger.map(mapTilrettelegging),
     });
   }
 

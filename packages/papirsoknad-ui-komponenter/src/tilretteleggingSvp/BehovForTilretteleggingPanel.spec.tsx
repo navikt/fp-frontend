@@ -2,6 +2,7 @@ import { composeStories } from '@storybook/react';
 import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { BehovForTilretteleggingPanel } from './BehovForTilretteleggingPanel';
 import * as stories from './BehovForTilretteleggingPanel.stories';
 
 const { Default } = composeStories(stories);
@@ -183,4 +184,68 @@ describe('BehovForTilretteleggingPanel', () => {
       expect(lagre).toHaveBeenCalledTimes(0);
     },
   );
+
+  describe('initialValues', () => {
+    it('skal mappe legacy mellomlagring til ny tilrettelegging-struktur', () => {
+      const values = BehovForTilretteleggingPanel.initialValues({
+        tilretteleggingArbeidsforhold: {
+          behovsdatoSN: '2026-01-02',
+          behovsdatoFrilans: '2026-02-03',
+          tilretteleggingSelvstendigNaringsdrivende: [{ tilretteleggingType: 'HEL_TILRETTELEGGING' }],
+          tilretteleggingFrilans: [{ tilretteleggingType: 'DELVIS_TILRETTELEGGING' }],
+          tilretteleggingForArbeidsgiver: [
+            {
+              organisasjonsnummer: '999999999',
+              behovsdato: '2026-03-04',
+              tilretteleggingArbeidsgiver: [{ tilretteleggingType: 'INGEN_TILRETTELEGGING' }],
+            },
+          ],
+        },
+      });
+
+      expect(values.tilretteleggingArbeidsforhold).toEqual({
+        tilretteleggingSelvstendigNaringsdrivende: {
+          behovsdato: '2026-01-02',
+          tilrettelegginger: [{ tilretteleggingType: 'HEL_TILRETTELEGGING' }],
+        },
+        tilretteleggingFrilans: {
+          behovsdato: '2026-02-03',
+          tilrettelegginger: [{ tilretteleggingType: 'DELVIS_TILRETTELEGGING' }],
+        },
+        tilretteleggingForArbeidsgiver: [
+          {
+            organisasjonsnummer: '999999999',
+            behovsdato: '2026-03-04',
+            tilrettelegginger: [{ tilretteleggingType: 'INGEN_TILRETTELEGGING' }],
+          },
+        ],
+      });
+    });
+
+    it('skal beholde mellomlagring med nåværende feltnavn', () => {
+      const input = {
+        tilretteleggingArbeidsforhold: {
+          tilretteleggingSelvstendigNaringsdrivende: {
+            behovsdato: '2026-01-02',
+            tilrettelegginger: [{ tilretteleggingType: 'HEL_TILRETTELEGGING' }],
+          },
+          tilretteleggingFrilans: {
+            behovsdato: '2026-02-03',
+            tilrettelegginger: [{ tilretteleggingType: 'DELVIS_TILRETTELEGGING' }],
+          },
+          tilretteleggingForArbeidsgiver: [
+            {
+              organisasjonsnummer: '999999999',
+              behovsdato: '2026-03-04',
+              tilrettelegginger: [{ tilretteleggingType: 'INGEN_TILRETTELEGGING' }],
+            },
+          ],
+        },
+      };
+
+      const values = BehovForTilretteleggingPanel.initialValues(input);
+
+      expect(values.tilretteleggingArbeidsforhold).toEqual(input.tilretteleggingArbeidsforhold);
+    });
+  });
 });

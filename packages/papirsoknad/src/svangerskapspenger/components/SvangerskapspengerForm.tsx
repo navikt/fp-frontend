@@ -21,7 +21,7 @@ import type { AlleKodeverk } from '@navikt/fp-types';
 
 import type { AksjonspunktTilBekreftelse } from '../../PapirsøknadAp';
 
-const buildInitialValues = () => ({
+const buildInitialValues = (mellomlagretData: Record<string, unknown> = {}) => ({
   ...MottattDatoPapirsoknadIndex.initialValues(),
   ...OppholdINorgePapirsoknadIndex.initialValues(),
   ...InntektsgivendeArbeidPapirsoknadIndex.initialValues(),
@@ -29,7 +29,8 @@ const buildInitialValues = () => ({
   ...FrilansPapirsoknadIndex.initialValues(),
   ...AndreYtelserPapirsoknadIndex.initialValues(),
   ...TerminOgFodselPanelSvp.initialValues(),
-  ...BehovForTilretteleggingPanel.initialValues(),
+  ...mellomlagretData,
+  ...BehovForTilretteleggingPanel.initialValues(mellomlagretData),
   ...SprakPapirsoknadIndex.initialValues(),
   ...LagreSoknadPapirsoknadIndex.initialValues(),
 });
@@ -85,7 +86,7 @@ export const SvangerskapspengerForm = ({
   mellomlagretData,
 }: Props) => {
   const formMethods = useForm<FormValues>({
-    defaultValues: { ...buildInitialValues(), ...mellomlagretData },
+    defaultValues: buildInitialValues(mellomlagretData),
   });
 
   const mottattDato = useWatch({ control: formMethods.control, name: 'mottattDato' });

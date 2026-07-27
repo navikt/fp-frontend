@@ -49,11 +49,13 @@ const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: Form
 const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes
     .filter(({ kode }) => kode !== 'NOR')
-    .map(({ kode, navn }): ReactElement => (
-      <option value={kode} key={kode}>
-        {navn}
-      </option>
-    ));
+    .map(
+      ({ kode, navn }): ReactElement => (
+        <option value={kode} key={kode}>
+          {navn}
+        </option>
+      ),
+    );
 
 const getValiderFørEllerEtter = (sjekkFør: boolean, fomVerdi?: string, tomVerdi?: string) => () => {
   if (!tomVerdi || !fomVerdi) {

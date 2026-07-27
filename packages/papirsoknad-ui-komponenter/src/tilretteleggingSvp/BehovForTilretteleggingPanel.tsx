@@ -17,6 +17,7 @@ import {
   SELVSTENDIG_NARINGSDRIVENDE_FIELD,
   TILRETTELEGGING_NAME_PREFIX,
 } from './constants';
+import { migrerTilretteleggingMellomlagring } from './mellomlagringMigration';
 import { transformTilretteleggingsArbeidsforhold } from './transformer';
 import type { FormValues } from './types';
 
@@ -136,9 +137,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
   );
 };
 
-BehovForTilretteleggingPanel.initialValues = (): FormValues => ({
-  [TILRETTELEGGING_NAME_PREFIX]: {},
-});
+BehovForTilretteleggingPanel.initialValues = migrerTilretteleggingMellomlagring;
 
 BehovForTilretteleggingPanel.transformValues = ({ tilretteleggingArbeidsforhold }: FormValues) => ({
   [TILRETTELEGGING_NAME_PREFIX]: transformTilretteleggingsArbeidsforhold(tilretteleggingArbeidsforhold),
