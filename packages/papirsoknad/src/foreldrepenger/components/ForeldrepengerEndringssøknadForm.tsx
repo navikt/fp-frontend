@@ -28,14 +28,6 @@ const transformValues = (
   soknadData: SoknadData,
   formValues: FormValues,
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER> => {
-  if (formValues.ufullstendigSøknad) {
-    return {
-      '@type': AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
-      tema: soknadData.familieHendelseType,
-      søknadstype: soknadData.fagsakYtelseType,
-      søker: soknadData.foreldreType,
-    };
-  }
   return {
     '@type': AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
     tema: soknadData.familieHendelseType,

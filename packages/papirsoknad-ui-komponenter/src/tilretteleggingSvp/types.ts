@@ -8,7 +8,7 @@ import {
 } from './constants';
 
 export type Tilrettelegging = {
-  tilretteleggingType: SvpTilretteleggingType;
+  tilretteleggingType?: SvpTilretteleggingType;
   dato: string;
   stillingsprosent?: number;
 };

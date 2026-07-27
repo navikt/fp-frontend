@@ -40,15 +40,6 @@ const transformValues = (
   soknadData: SoknadData,
   formValues: FormValues,
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER> => {
-  if (formValues.ufullstendigSøknad) {
-    return {
-      '@type': AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER,
-      tema: soknadData.familieHendelseType,
-      søknadstype: soknadData.fagsakYtelseType,
-      søker: soknadData.foreldreType,
-    };
-  }
-
   return {
     '@type': AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER,
     tema: soknadData.familieHendelseType,
