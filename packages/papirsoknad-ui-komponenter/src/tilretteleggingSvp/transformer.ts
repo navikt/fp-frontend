@@ -29,9 +29,7 @@ export const transformTilretteleggingsArbeidsforhold = (
     transformerteVerdier.push({
       '@type': 'FR',
       behovsdato: tilretteleggingArbeidsforhold.tilretteleggingFrilans.behovsdato,
-      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingFrilans.tilrettelegginger.map(
-        mapTilrettelegging,
-      ),
+      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingFrilans.tilrettelegginger.map(mapTilrettelegging),
     });
   }
   if (
