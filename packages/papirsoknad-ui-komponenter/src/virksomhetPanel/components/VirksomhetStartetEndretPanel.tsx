@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Checkbox, VStack } from '@navikt/ds-react';
 import { RhfCheckboxGroup, RhfDatepicker, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
-import { hasValidDate, hasValidInteger, hasValidText, required } from '@navikt/ft-form-validators';
+import { hasValidDate, hasValidInteger, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
@@ -12,6 +12,8 @@ import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
 import type { StartedEndretFormValues, VirksomhetFormValues } from '../types';
 
 import styles from './virksomhetStartetEndretPanel.module.css';
+
+const maxLength4000 = maxLength(4000);
 
 interface Props {
   readOnly: boolean;
@@ -68,7 +70,7 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.beskrivelseAvEndring`}
               control={control}
               label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse" />}
-              validate={[hasValidText]}
+              validate={[hasValidText, maxLength4000]}
             />
             <RhfTextField
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.inntekt`}
