@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
@@ -152,4 +152,79 @@ describe('VirksomhetPapirsoknadIndex', () => {
       expect(lagre).toHaveBeenCalledTimes(0);
     },
   );
+
+  it('skal vise feil ved for lang beskrivelseAvEndring', { timeout: 30000 }, async () => {
+    const lagre = vi.fn();
+
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
+
+    await userEvent.click(
+      screen.getByText('Ja, søker har arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene'),
+    );
+
+    await userEvent.type(screen.getByLabelText('Navn på foretaket'), 'Bedriften AS');
+    await userEvent.click(screen.getAllByText('Nei')[0]!);
+    await userEvent.selectOptions(screen.getByLabelText('Hvilket land er virksomheten registrert i?'), 'AND');
+    await userEvent.type(screen.getByLabelText('Fra og med'), '01.06.2022');
+    await userEvent.type(screen.getByLabelText('Til og med'), '03.06.2022');
+    await userEvent.click(screen.getByLabelText('Fiske'));
+    await userEvent.click(screen.getAllByText('Ja')[1]!);
+    await userEvent.click(screen.getByLabelText('Varig endring i næring'));
+    await userEvent.type(screen.getByLabelText('Gjeldende f.o.m.'), '03.05.2022');
+
+    const beskrivelseInput = screen.getByLabelText('Beskriv endringen i næring');
+    fireEvent.change(beskrivelseInput, { target: { value: 'a'.repeat(4001) } });
+
+    await userEvent.type(screen.getByLabelText('Årsinntekt'), '500000');
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+
+    expect(await screen.findByText('Du kan skrive maksimalt 4000 tegn')).toBeInTheDocument();
+  });
+
+  it('skal vise feil ved for lang navnRegnskapsforer og tlfRegnskapsforer', { timeout: 50000 }, async () => {
+    const lagre = vi.fn();
+
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
+
+    await userEvent.click(
+      screen.getByText('Ja, søker har arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene'),
+    );
+
+    await userEvent.type(screen.getByLabelText('Navn på foretaket'), 'Bedriften AS');
+    await userEvent.click(screen.getAllByText('Nei')[0]!);
+    await userEvent.selectOptions(screen.getByLabelText('Hvilket land er virksomheten registrert i?'), 'AND');
+    await userEvent.type(screen.getByLabelText('Fra og med'), '01.06.2022');
+    await userEvent.type(screen.getByLabelText('Til og med'), '03.06.2022');
+    await userEvent.click(screen.getByLabelText('Fiske'));
+    await userEvent.click(screen.getAllByText('Ja')[1]!);
+    await userEvent.click(screen.getByLabelText('Varig endring i næring'));
+    await userEvent.type(screen.getByLabelText('Gjeldende f.o.m.'), '03.05.2022');
+    await userEvent.type(screen.getByLabelText('Beskriv endringen i næring'), 'Dette er en endring');
+    await userEvent.type(screen.getByLabelText('Årsinntekt'), '500000');
+    await userEvent.click(screen.getAllByText('Ja')[2]!);
+
+    const navnInput = screen.getByLabelText('Navn på regnskapsfører/revisor?');
+    fireEvent.change(navnInput, { target: { value: 'A'.repeat(101) } });
+
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+
+    expect(await screen.findByText('Du kan skrive maksimalt 100 tegn')).toBeInTheDocument();
+
+    fireEvent.change(navnInput, { target: { value: 'Espen Revisor' } });
+
+    const tlfInput = screen.getByLabelText('Telefonnummer til regnskapsfører/revisor?');
+    fireEvent.change(tlfInput, { target: { value: '1'.repeat(31) } });
+
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+
+    expect(await screen.findByText('Du kan skrive maksimalt 30 tegn')).toBeInTheDocument();
+  });
 });
