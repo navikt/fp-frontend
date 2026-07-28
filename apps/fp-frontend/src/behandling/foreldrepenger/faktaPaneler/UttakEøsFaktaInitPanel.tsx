@@ -10,10 +10,8 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
-import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
@@ -28,17 +26,14 @@ export const UttakEøsFaktaInitPanel = () => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const skalPanelVisesIMeny = harLenke(behandling, 'UTTAK_ANNEN_FORELDER_EOS');
-  const erAktiv = useErFaktaPanelAktiv(
-    FaktaPanelCode.UTTAK_EØS,
-    skalPanelVisesIMeny,
-    standardPanelProps.harÅpentAksjonspunkt,
-  );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.UTTAK_EØS, erAktiv, 'fakta', skalPanelVisesIMeny);
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.UTTAK_EØS,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
-  const { data: annenForelderUttakEøs } = useQuery(
-    medPrioritet(api.uttakAnnenpartEøsOptions(behandling), skalHenteData),
-  );
+  const { data: annenForelderUttakEøs } = useQuery(prioriter(api.uttakAnnenpartEøsOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel

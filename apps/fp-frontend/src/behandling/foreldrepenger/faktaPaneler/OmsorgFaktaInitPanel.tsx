@@ -11,10 +11,8 @@ import { harAksjonspunkt } from '@navikt/fp-utils';
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
-import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_LØPENDE_OMSORG];
 
@@ -24,19 +22,16 @@ export const OmsorgFaktaInitPanel = () => {
   const { behandling } = useBehandlingDataContext();
 
   const skalPanelVisesIMeny = AKSJONSPUNKT_KODER.some(kode => harAksjonspunkt(kode, behandling.aksjonspunkt));
-  const erAktiv = useErFaktaPanelAktiv(
-    FaktaPanelCode.OMSORG,
-    skalPanelVisesIMeny,
-    standardPanelProps.harÅpentAksjonspunkt,
-  );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.OMSORG, erAktiv, 'fakta', skalPanelVisesIMeny);
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.OMSORG,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: ytelsefordeling } = useQuery(medPrioritet(api.ytelsefordelingOptions(behandling), skalHenteData));
-  const { data: personoversikt } = useQuery(
-    medPrioritet(api.behandlingPersonoversiktOptions(behandling), skalHenteData),
-  );
+  const { data: ytelsefordeling } = useQuery(prioriter(api.ytelsefordelingOptions(behandling)));
+  const { data: personoversikt } = useQuery(prioriter(api.behandlingPersonoversiktOptions(behandling)));
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}

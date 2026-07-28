@@ -9,10 +9,8 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
-import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 export const YtelserFaktaInitPanel = () => {
   const intl = useIntl();
@@ -20,14 +18,15 @@ export const YtelserFaktaInitPanel = () => {
   const { behandling } = useBehandlingDataContext();
   const standardPanelProps = useStandardFaktaPanelProps();
 
-  const erAktiv = useErFaktaPanelAktiv(FaktaPanelCode.YTELSER, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.YTELSER, erAktiv, 'fakta', true);
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.YTELSER,
+    skalVisesIMeny: true,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: inntektArbeidYtelse } = useQuery(
-    medPrioritet(api.inntektArbeidYtelseOptions(behandling), skalHenteData),
-  );
+  const { data: inntektArbeidYtelse } = useQuery(prioriter(api.inntektArbeidYtelseOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel

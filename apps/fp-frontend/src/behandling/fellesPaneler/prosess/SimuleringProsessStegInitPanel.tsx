@@ -12,11 +12,9 @@ import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { forhåndsvisTilbakekrevingMelding, getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessMenyContext } from '../../felles/prosess/ProsessMeny';
-import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [
@@ -37,19 +35,16 @@ export const SimuleringProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }
     d => d.id === ProsessStegCode.VEDTAK && (d.status !== 'IKKE_VURDERT' || d.harÅpentAksjonspunkt),
   );
   const skalPanelVisesIMeny = harLenke(behandling, 'SIMULERING_RESULTAT') || !harVedtakspanel;
-  const erAktiv = useErProsessPanelAktiv(
-    ProsessStegCode.SIMULERING,
-    skalPanelVisesIMeny,
-    standardPanelProps.harÅpentAksjonspunkt,
-  );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.SIMULERING, erAktiv, 'prosess', skalPanelVisesIMeny);
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.SIMULERING,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: tilbakekrevingValg, isFetching } = useQuery(
-    medPrioritet(api.tilbakekrevingValgOptions(behandling), skalHenteData),
-  );
-  const { data: simuleringResultat } = useQuery(medPrioritet(api.simuleringResultatOptions(behandling), skalHenteData));
+  const { data: tilbakekrevingValg, isFetching } = useQuery(prioriter(api.tilbakekrevingValgOptions(behandling)));
+  const { data: simuleringResultat } = useQuery(prioriter(api.simuleringResultatOptions(behandling)));
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: { mottaker: string; fritekst: string }) =>

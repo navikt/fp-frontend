@@ -10,10 +10,8 @@ import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
-import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON];
 
@@ -23,17 +21,14 @@ export const UttakDokumentasjonFaktaInitPanel = () => {
   const { behandling } = useBehandlingDataContext();
 
   const skalPanelVisesIMeny = harLenke(behandling, 'DOKUMENTASJON_VURDERING_BEHOV');
-  const erAktiv = useErFaktaPanelAktiv(
-    FaktaPanelCode.UTTAK_DOKUMENTASJON,
-    skalPanelVisesIMeny,
-    standardPanelProps.harÅpentAksjonspunkt,
-  );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.UTTAK_DOKUMENTASJON, erAktiv, 'fakta', skalPanelVisesIMeny);
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.UTTAK_DOKUMENTASJON,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
-  const { data: dokumentasjonVurderingBehov } = useQuery(
-    medPrioritet(api.dokumentasjonVurderingBehovOptions(behandling), skalHenteData),
-  );
+  const { data: dokumentasjonVurderingBehov } = useQuery(prioriter(api.dokumentasjonVurderingBehovOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel

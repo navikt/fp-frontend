@@ -8,10 +8,8 @@ import { BeregningsresultatProsessIndex } from '@navikt/fp-prosess-beregningsres
 
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 export const BeregningEsProsessStegInitPanel = () => {
@@ -21,13 +19,15 @@ export const BeregningEsProsessStegInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
-  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.BEREGNING, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.BEREGNING, erAktiv, 'prosess', true);
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.BEREGNING,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
   const { data: beregningsresultatEngangsstønad, isFetching } = useQuery(
-    medPrioritet(api.es.beregningsresultatEngangsstønadOptions(behandling), skalHenteData),
+    prioriter(api.es.beregningsresultatEngangsstønadOptions(behandling)),
   );
 
   return (

@@ -17,10 +17,8 @@ import { forhåndsvisMelding, getBehandlingApi, harLenke } from '../../../data/b
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import {
   type StandardProsessPanelProps,
   useStandardProsessPanelProps,
@@ -62,34 +60,36 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
   const statusForVedtak = finnStatusForVedtak(standardPanelProps);
   const skalMarkeresSomAktiv = !behandling.behandlingHenlagt && statusForVedtak !== 'IKKE_VURDERT';
 
-  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.VEDTAK, true, skalMarkeresSomAktiv);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.VEDTAK, erAktiv, 'prosess', true);
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.VEDTAK,
+    skalMarkeresSomAktiv,
+  });
 
   const api = getBehandlingApi(behandling);
 
   const { data: beregningsresultatDagytelse, isFetching: isBdFetching } = useQuery(
-    medPrioritet(api.beregningsresultatDagytelseOptions(behandling, !erEngangsstønad), skalHenteData),
+    prioriter(api.beregningsresultatDagytelseOptions(behandling, !erEngangsstønad)),
   );
   const { data: beregningsresultatEngangsstønad, isFetching: isBeFetching } = useQuery(
-    medPrioritet(api.es.beregningsresultatEngangsstønadOptions(behandling, erEngangsstønad), skalHenteData),
+    prioriter(api.es.beregningsresultatEngangsstønadOptions(behandling, erEngangsstønad)),
   );
   const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(
-    medPrioritet(api.tilbakekrevingValgOptions(behandling), skalHenteData),
+    prioriter(api.tilbakekrevingValgOptions(behandling)),
   );
   const { data: beregningsgrunnlag, isFetching: isBgFetching } = useQuery(
-    medPrioritet(api.beregningsgrunnlagOptions(behandling, !erEngangsstønad), skalHenteData),
+    prioriter(api.beregningsgrunnlagOptions(behandling, !erEngangsstønad)),
   );
   const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(
-    medPrioritet(api.simuleringResultatOptions(behandling), skalHenteData),
+    prioriter(api.simuleringResultatOptions(behandling)),
   );
   const { data: beregningDagytelseOriginalBehandling, isFetching: isBdobFetching } = useQuery(
-    medPrioritet(api.beregningDagytelseOriginalBehandlingOptions(behandling), skalHenteData),
+    prioriter(api.beregningDagytelseOriginalBehandlingOptions(behandling)),
   );
   const {
     data: oppgaver,
     isFetching: isOFetching,
     refetch: refetchOppgaver,
-  } = useQuery(medPrioritet(api.oppgaverOptions(behandling), skalHenteData));
+  } = useQuery(prioriter(api.oppgaverOptions(behandling)));
 
   const { mutateAsync: hentBrevHtml, isPending } = useMutation({
     mutationFn: () => api.hentBrevHtml(behandling.uuid),

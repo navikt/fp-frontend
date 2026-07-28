@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -9,10 +8,8 @@ import { SvangerskapVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-svanger
 import type { VilkårType } from '@navikt/fp-types';
 
 import { getBehandlingApi } from '../../../../data/behandlingApi';
-import { medPrioritet } from '../../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../../felles/prioritet/PanelDataPrioritetContext';
+import { useInngangsvilkårPanelPrioritet } from '../../../felles/prioritet/usePanelPrioritet';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
-import { InngangsvilkårPanelDataContext } from '../../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import { skalViseProsessPanel } from '../../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
@@ -40,13 +37,12 @@ export const SvangerskapInngangsvilkarInitPanel = () => {
     panelProps.vilkårForPanel,
   );
 
-  const { erPanelValgt } = use(InngangsvilkårPanelDataContext);
-  const skalHenteData = useSkalHenteData(PANEL_ID, erPanelValgt, 'inngangsvilkar', skalPanelVisesIMeny);
+  const prioriter = useInngangsvilkårPanelPrioritet({ panelKode: PANEL_ID, skalVisesIMeny: skalPanelVisesIMeny });
 
   const api = getBehandlingApi(panelProps.behandling);
 
   const { data: svangerskapspengerTilrettelegging } = useQuery(
-    medPrioritet(api.svp.svangerskapspengerTilretteleggingOptions(panelProps.behandling), skalHenteData),
+    prioriter(api.svp.svangerskapspengerTilretteleggingOptions(panelProps.behandling)),
   );
 
   return (

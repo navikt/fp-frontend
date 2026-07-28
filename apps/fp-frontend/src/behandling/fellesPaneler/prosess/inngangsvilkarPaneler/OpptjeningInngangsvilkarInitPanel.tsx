@@ -1,4 +1,3 @@
-import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { useQuery } from '@tanstack/react-query';
@@ -8,13 +7,11 @@ import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjeni
 import type { VilkårType } from '@navikt/fp-types';
 
 import { getBehandlingApi } from '../../../../data/behandlingApi';
-import { medPrioritet } from '../../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../../felles/prioritet/PanelDataPrioritetContext';
+import { useInngangsvilkårPanelPrioritet } from '../../../felles/prioritet/usePanelPrioritet';
 import {
   InngangsvilkarDefaultInitPanel,
   InngangsvilkarOverstyringDefaultInitPanel,
 } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
-import { InngangsvilkårPanelDataContext } from '../../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { skalViseProsessPanel } from '../../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
@@ -36,13 +33,12 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
     standardPanelProps.vilkårForPanel,
   );
 
-  const { erPanelValgt } = use(InngangsvilkårPanelDataContext);
-  const skalHenteData = useSkalHenteData(PANEL_ID, erPanelValgt, 'inngangsvilkar', skalPanelVisesIMeny);
+  const prioriter = useInngangsvilkårPanelPrioritet({ panelKode: PANEL_ID, skalVisesIMeny: skalPanelVisesIMeny });
 
   const api = getBehandlingApi(standardPanelProps.behandling);
 
   const { data: opptjening } = useQuery(
-    medPrioritet(api.opptjeningOptions(standardPanelProps.behandling, !harIngenAksjonspunkt), skalHenteData),
+    prioriter(api.opptjeningOptions(standardPanelProps.behandling, !harIngenAksjonspunkt)),
   );
 
   return harIngenAksjonspunkt ? (

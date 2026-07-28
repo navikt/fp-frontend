@@ -15,10 +15,8 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 import { forhåndsvisMelding, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [
@@ -46,10 +44,12 @@ export const KlageresultatProsessStegInitPanel = () => {
   const navigate = useNavigate();
 
   const skalMarkeresSomAktiv = vedtakStatus !== 'IKKE_VURDERT' || standardPanelProps.harÅpentAksjonspunkt;
-  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.KLAGE_RESULTAT, true, skalMarkeresSomAktiv);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.KLAGE_RESULTAT, erAktiv, 'prosess', true);
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.KLAGE_RESULTAT,
+    skalMarkeresSomAktiv,
+  });
 
-  const { data: klageVurdering } = useQuery(medPrioritet(api.klage.klageVurderingOptions(behandling), skalHenteData));
+  const { data: klageVurdering } = useQuery(prioriter(api.klage.klageVurderingOptions(behandling)));
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: VedtakKlageForhandsvisData) =>

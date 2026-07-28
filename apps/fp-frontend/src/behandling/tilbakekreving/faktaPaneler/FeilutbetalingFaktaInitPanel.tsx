@@ -15,10 +15,8 @@ import { useMellomlagretFormData } from '@navikt/fp-utils';
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
-import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
 
@@ -35,21 +33,16 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
   const { behandling, fagsak } = useBehandlingDataContext<BehandlingFpTilbake>();
 
   const skalPanelVisesIMeny = harLenke(behandling, 'FEILUTBETALING_FAKTA');
-  const erAktiv = useErFaktaPanelAktiv(
-    FaktaPanelCode.FEILUTBETALING,
-    skalPanelVisesIMeny,
-    standardPanelProps.harÅpentAksjonspunkt,
-  );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.FEILUTBETALING, erAktiv, 'fakta', skalPanelVisesIMeny);
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.FEILUTBETALING,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: feilutbetalingFakta } = useQuery(
-    medPrioritet(api.tilbakekreving.feilutbetalingFaktaOptions(behandling), skalHenteData),
-  );
-  const { data: feilutbetalingÅrsak } = useQuery(
-    medPrioritet(api.tilbakekreving.feilutbetalingÅrsakOptions(behandling), skalHenteData),
-  );
+  const { data: feilutbetalingFakta } = useQuery(prioriter(api.tilbakekreving.feilutbetalingFaktaOptions(behandling)));
+  const { data: feilutbetalingÅrsak } = useQuery(prioriter(api.tilbakekreving.feilutbetalingÅrsakOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel

@@ -9,10 +9,8 @@ import { InnsynProsessIndex } from '@navikt/fp-prosess-innsyn';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_INNSYN];
@@ -22,19 +20,15 @@ export const BehandleInnsynProsessStegInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
-  const erAktiv = useErProsessPanelAktiv(
-    ProsessStegCode.BEHANDLE_INNSYN,
-    true,
-    standardPanelProps.harÅpentAksjonspunkt,
-  );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.BEHANDLE_INNSYN, erAktiv, 'prosess', true);
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.BEHANDLE_INNSYN,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: innsynDokumenter } = useQuery(
-    medPrioritet(api.innsyn.innsynDokumenterOptions(behandling), skalHenteData),
-  );
-  const { data: innsyn, isFetching } = useQuery(medPrioritet(api.innsyn.innsynOptions(behandling), skalHenteData));
+  const { data: innsynDokumenter } = useQuery(prioriter(api.innsyn.innsynDokumenterOptions(behandling)));
+  const { data: innsyn, isFetching } = useQuery(prioriter(api.innsyn.innsynOptions(behandling)));
 
   return (
     <ProsessDefaultInitPanel

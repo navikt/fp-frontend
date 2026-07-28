@@ -12,10 +12,8 @@ import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
@@ -33,14 +31,14 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
 
   const { behandling, fagsak } = useBehandlingDataContext<BehandlingFpTilbake>();
 
-  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.FORELDELSE, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.FORELDELSE, erAktiv, 'prosess', true);
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.FORELDELSE,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: perioderForeldelse } = useQuery(
-    medPrioritet(api.tilbakekreving.perioderForeldelseOptions(behandling), skalHenteData),
-  );
+  const { data: perioderForeldelse } = useQuery(prioriter(api.tilbakekreving.perioderForeldelseOptions(behandling)));
 
   const { mutateAsync: beregnBeløp } = useMutation({
     mutationFn: (values: BeregnBeløpParams) => api.tilbakekreving.beregneBeløp(values),
