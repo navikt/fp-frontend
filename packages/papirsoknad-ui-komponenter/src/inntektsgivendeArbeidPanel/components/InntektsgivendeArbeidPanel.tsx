@@ -37,11 +37,8 @@ InntektsgivendeArbeidPanel.initialValues = (): InntektsgivendeArbeidFormValues =
   [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]: [],
 });
 
-const isEmpty = (val: string | undefined): boolean => val === undefined || val === '';
 InntektsgivendeArbeidPanel.transformValues = ({
   arbeidsforhold,
 }: InntektsgivendeArbeidFormValues): InntektsgivendeArbeidFormValues => ({
-  arbeidsforhold: arbeidsforhold?.filter(
-    a => !(isEmpty(a.arbeidsgiver) && isEmpty(a.land) && isEmpty(a.periodeFom) && isEmpty(a.periodeTom)),
-  ),
+  arbeidsforhold: arbeidsforhold.filter(a => a.arbeidsgiver || a.land || a.periodeFom || a.periodeTom),
 });

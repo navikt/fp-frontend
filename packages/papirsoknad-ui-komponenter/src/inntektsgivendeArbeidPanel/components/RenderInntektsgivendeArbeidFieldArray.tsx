@@ -1,9 +1,9 @@
 import { type ReactElement } from 'react';
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
-import { hasValidDate, maxLength } from '@navikt/ft-form-validators';
+import { hasValidDate, maxLength, required } from '@navikt/ft-form-validators';
 
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
@@ -12,7 +12,15 @@ import { INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME } from '../constants';
 import type { InntektsgivendeArbeidFormValues } from '../types';
 
 const maxLength50 = maxLength(50);
-
+const requiredIfOther =
+  (getValues: UseFormGetValues<InntektsgivendeArbeidFormValues>, index: number) => (value: string) => {
+    const { arbeidsgiver, land, periodeFom, periodeTom } =
+      getValues(`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}`) ?? {};
+    if (arbeidsgiver || land || periodeFom || periodeTom) {
+      return required(value);
+    }
+    return undefined;
+  };
 const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes
     .filter(({ kode }) => kode !== 'NOR')
@@ -35,13 +43,13 @@ interface Props {
 export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }: Props) => {
   const intl = useIntl();
 
-  const { control } = useFormContext<InntektsgivendeArbeidFormValues>();
+  const { control, getValues } = useFormContext<InntektsgivendeArbeidFormValues>();
   const { fields, remove, append } = useFieldArray({
     control,
     name: INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME,
   });
 
-  const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk['Landkoder'].toSorted((a, b) => a.navn.localeCompare(b.navn));
 
   return (
     <RhfFieldArray
@@ -59,7 +67,7 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
             control={control}
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.arbeidsgiver`}
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' })}
-            validate={[maxLength50]}
+            validate={[requiredIfOther(getValues, index), maxLength50]}
           />
 
           <RhfDatepicker
@@ -67,15 +75,17 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
             control={control}
             readOnly={readOnly}
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeFom' })}
-            validate={[hasValidDate]}
+            validate={[requiredIfOther(getValues, index), hasValidDate]}
           />
+
           <RhfDatepicker
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.periodeTom`}
             control={control}
             readOnly={readOnly}
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeTom' })}
-            validate={[hasValidDate]}
+            validate={[requiredIfOther(getValues, index), hasValidDate]}
           />
+
           <RhfSelect
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.land`}
             control={control}
@@ -83,6 +93,7 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Land' })}
             selectValues={countrySelectValues(sortedCountriesByName)}
             size="small"
+            validate={[requiredIfOther(getValues, index)]}
           />
         </FieldArrayRow>
       )}

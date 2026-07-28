@@ -17,7 +17,7 @@ import dayjs from 'dayjs';
 import type { KodeverkMedNavn, Landkode } from '@navikt/fp-types';
 
 export const defaultUtenlandsOpphold: FormValues = {
-  land: undefined as unknown as Landkode,
+  land: '' as unknown as Landkode,
   periodeFom: '',
   periodeTom: '',
 };
@@ -49,13 +49,11 @@ const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: Form
 const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes
     .filter(({ kode }) => kode !== 'NOR')
-    .map(
-      ({ kode, navn }): ReactElement => (
-        <option value={kode} key={kode}>
-          {navn}
-        </option>
-      ),
-    );
+    .map(({ kode, navn }): ReactElement => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
 
 const getValiderFørEllerEtter = (sjekkFør: boolean, fomVerdi?: string, tomVerdi?: string) => () => {
   if (!tomVerdi || !fomVerdi) {
@@ -110,7 +108,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
     >
       {(field, index, removeButton) => (
         <React.Fragment key={field.id}>
-          <HStack gap="space-16" paddingBlock="space-8" align="end">
+          <HStack gap="space-16" paddingBlock="space-8" align="start">
             <RhfSelect
               name={`${name}.${index}.land`}
               control={control}

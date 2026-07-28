@@ -18,7 +18,7 @@ const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 const defaultOverforingPeriode: OverføringsperiodeDto = {
   periodeFom: '',
   periodeTom: '',
-  overforingArsak: undefined as unknown as OverføringsperiodeDto['overforingArsak'],
+  overforingArsak: '' as unknown as OverføringsperiodeDto['overforingArsak'],
 };
 
 interface Props {

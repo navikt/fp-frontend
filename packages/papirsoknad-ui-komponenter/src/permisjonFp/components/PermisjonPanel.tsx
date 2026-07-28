@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
-import { type AlleKodeverk, type ForeldreType, type TidsromPermisjonDto } from '@navikt/fp-types';
+import type { AlleKodeverk, ForeldreType, TidsromPermisjonDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import {

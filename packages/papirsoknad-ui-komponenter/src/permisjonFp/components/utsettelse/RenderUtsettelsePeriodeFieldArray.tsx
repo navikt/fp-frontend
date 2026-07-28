@@ -1,11 +1,12 @@
-import { type ReactElement, useEffect } from 'react';
+import type { ReactElement } from 'react';
+import { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { RhfDatepicker, RhfFieldArray, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 
-import { type AlleKodeverk, type KodeverkMedNavn, type UtsettelseDto } from '@navikt/fp-types';
+import type { AlleKodeverk, KodeverkMedNavn, UtsettelseÅrsak, UtsettelseDto } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from '../../constants';
@@ -16,7 +17,7 @@ import { mapMorsAktiviteter, mapUttakPeriodeTyper, PERIODS_WITH_NO_MORS_AKTIVITE
 const defaultUtsettelsePeriode: UtsettelseDto = {
   periodeFom: '',
   periodeTom: '',
-  arsakForUtsettelse: undefined,
+  arsakForUtsettelse: '' as unknown as UtsettelseÅrsak,
 };
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`;

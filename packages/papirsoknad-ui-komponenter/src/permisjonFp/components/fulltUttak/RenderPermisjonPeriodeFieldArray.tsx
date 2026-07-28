@@ -8,7 +8,7 @@ import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@na
 import { ISO_DATE_FORMAT, removeSpacesFromNumber } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, UttakPeriodeType } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -66,7 +66,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKo
       fields={fields}
       addButtonText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       emptyTemplate={{
-        periodeType: undefined,
+        periodeType: '' as unknown as UttakPeriodeType,
         periodeFom: '',
         periodeTom: '',
       }}

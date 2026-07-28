@@ -32,7 +32,7 @@ const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIE
 const defaultGraderingPeriode: GraderingPeriode = {
   periodeFom: '',
   periodeTom: '',
-  periodeForGradering: undefined as unknown as UttakPeriodeType,
+  periodeForGradering: '' as unknown as UttakPeriodeType,
   prosentandelArbeid: undefined,
   arbeidskategoriType: undefined,
   skalGraderes: false,

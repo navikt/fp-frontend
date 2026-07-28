@@ -16,7 +16,7 @@ const minValue0 = minValue(0);
 const maxValue100 = maxValue(100);
 
 const defaultTilrettelegging: Tilrettelegging = {
-  tilretteleggingType: undefined,
+  tilretteleggingType: '' as unknown as SvpTilretteleggingType,
   dato: '',
   stillingsprosent: undefined,
 };

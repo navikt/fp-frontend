@@ -18,7 +18,7 @@ const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 const defaultOppholdPeriode: OppholdDto = {
   periodeFom: '',
   periodeTom: '',
-  årsak: undefined as unknown as OppholdDto['årsak'],
+  årsak: '' as unknown as OppholdDto['årsak'],
 };
 
 const gyldigeÅrsaker = new Set<OppholdÅrsakType>([

@@ -7,7 +7,7 @@ import { action } from 'storybook/actions';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
-import { type OppholdINorgeFormValues } from './components/OppholdINorgePanel';
+import type { OppholdINorgeFormValues } from './components/OppholdINorgePanel';
 import { OppholdINorgePapirsoknadIndex } from './OppholdINorgePapirsoknadIndex';
 
 const meta = {
