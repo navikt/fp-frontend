@@ -3,12 +3,15 @@ import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
 import { RhfTextField } from '@navikt/ft-form-hooks';
-import { hasValidInteger, hasValidText, required } from '@navikt/ft-form-validators';
+import { hasValidInteger, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
 import type { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
+
+const maxLength100 = maxLength(100);
+const maxLength30 = maxLength(30);
 
 interface Props {
   readOnly: boolean;
@@ -36,14 +39,14 @@ export const VirksomhetRegnskapPanel = ({ index, readOnly }: Props) => {
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navnRegnskapsforer`}
               control={control}
               readOnly={readOnly}
-              validate={[required, hasValidText]}
+              validate={[required, hasValidText, maxLength100]}
               label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantName" />}
             />
             <RhfTextField
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.tlfRegnskapsforer`}
               control={control}
               readOnly={readOnly}
-              validate={[required, hasValidInteger]}
+              validate={[required, hasValidInteger, maxLength30]}
               label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantPhone" />}
             />
           </VStack>
