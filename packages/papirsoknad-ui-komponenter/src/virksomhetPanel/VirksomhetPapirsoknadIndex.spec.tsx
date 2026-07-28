@@ -153,7 +153,7 @@ describe('VirksomhetPapirsoknadIndex', () => {
     },
   );
 
-  it('skal vise feil ved for lang beskrivelseAvEndring', { timeout: 50000 }, async () => {
+  it('skal vise feil ved for lang beskrivelseAvEndring', { timeout: 30000 }, async () => {
     const lagre = vi.fn();
 
     await Default.run({
