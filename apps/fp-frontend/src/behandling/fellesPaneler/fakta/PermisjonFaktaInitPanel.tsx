@@ -12,10 +12,8 @@ import { harAksjonspunkt } from '@navikt/fp-utils';
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
-import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO];
 
@@ -31,16 +29,15 @@ export const PermisjonFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const skalPanelVisesIMeny = AKSJONSPUNKT_KODER.some(kode => harAksjonspunkt(kode, behandling.aksjonspunkt));
-  const erAktiv = useErFaktaPanelAktiv(
-    FaktaPanelCode.PERMISJON,
-    skalPanelVisesIMeny,
-    standardPanelProps.harÅpentAksjonspunkt,
-  );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.PERMISJON, erAktiv, 'fakta', skalPanelVisesIMeny);
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.PERMISJON,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: arbeidOgInntekt } = useQuery(medPrioritet(api.arbeidOgInntektOptions(behandling), skalHenteData));
+  const { data: arbeidOgInntekt } = useQuery(prioriter(api.arbeidOgInntektOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel

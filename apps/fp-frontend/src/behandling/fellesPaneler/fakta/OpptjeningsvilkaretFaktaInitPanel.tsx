@@ -11,10 +11,8 @@ import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
-import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING];
 
@@ -33,18 +31,15 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({ arbeidsgiverOpplysningerPerI
     behandling.vilkår.some(v => v.vilkarType === 'FP_VK_23') &&
     behandling.vilkår.some(v => v.vilkarType === 'FP_VK_2' && v.vilkarStatus === 'OPPFYLT');
 
-  const erAktiv = useErFaktaPanelAktiv(
-    FaktaPanelCode.OPPTJENINGSVILKARET,
-    skalPanelVisesIMeny,
-    standardPanelProps.harÅpentAksjonspunkt,
-  );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.OPPTJENINGSVILKARET, erAktiv, 'fakta', skalPanelVisesIMeny);
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.OPPTJENINGSVILKARET,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: opptjening, isFetching } = useQuery(
-    medPrioritet(api.opptjeningOptions(behandling, skalPanelVisesIMeny), skalHenteData),
-  );
+  const { data: opptjening, isFetching } = useQuery(prioriter(api.opptjeningOptions(behandling, skalPanelVisesIMeny)));
 
   return (
     <FaktaDefaultInitPanel

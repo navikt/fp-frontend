@@ -10,10 +10,8 @@ import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
-import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 type Props = {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -26,12 +24,15 @@ export const InntektsmeldingerFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId 
 
   const standardPanelProps = useStandardFaktaPanelProps();
 
-  const erAktiv = useErFaktaPanelAktiv(FaktaPanelCode.INNTEKTSMELDINGER, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.INNTEKTSMELDINGER, erAktiv, 'fakta', true);
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.INNTEKTSMELDINGER,
+    skalVisesIMeny: true,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: inntektsmeldinger } = useQuery(medPrioritet(api.inntektsmeldingerOptions(behandling), skalHenteData));
+  const { data: inntektsmeldinger } = useQuery(prioriter(api.inntektsmeldingerOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel

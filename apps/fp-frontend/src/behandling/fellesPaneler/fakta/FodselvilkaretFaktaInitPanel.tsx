@@ -13,10 +13,8 @@ import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useFagsakApi } from '../../../data/fagsakApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
-import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
@@ -32,12 +30,11 @@ export const FodselvilkaretFaktaInitPanel = () => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const skalPanelVisesIMeny = harLenke(behandling, 'FAKTA_FØDSEL');
-  const erAktiv = useErFaktaPanelAktiv(
-    FaktaPanelCode.FODSELSVILKARET,
-    skalPanelVisesIMeny,
-    standardPanelProps.harÅpentAksjonspunkt,
-  );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.FODSELSVILKARET, erAktiv, 'fakta', skalPanelVisesIMeny);
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.FODSELSVILKARET,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
   const fagsakApi = useFagsakApi();
@@ -45,9 +42,9 @@ export const FodselvilkaretFaktaInitPanel = () => {
   const harOverstyrigAP = standardPanelProps.aksjonspunkterForPanel.some(
     a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
   );
-  const { data: faktafødsel } = useQuery(medPrioritet(api.faktaFødselOptions(behandling), skalHenteData));
+  const { data: faktafødsel } = useQuery(prioriter(api.faktaFødselOptions(behandling)));
   const { data: alleDokumenter = [] } = useQuery(
-    medPrioritet(fagsakApi.hentDokumenter(fagsak.saksnummer, behandling.uuid, behandling.versjon), skalHenteData),
+    prioriter(fagsakApi.hentDokumenter(fagsak.saksnummer, behandling.uuid, behandling.versjon)),
   );
 
   const terminbekreftelseDokument = finnTerminBekreftelse(alleDokumenter, fagsak.saksnummer);

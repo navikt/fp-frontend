@@ -24,10 +24,8 @@ import { useMellomlagretFormData } from '@navikt/fp-utils';
 import { forhåndsvisVedtaksbrev, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ÅpenRevurderingModal } from '../modaler/ÅpenRevurderingModal';
 
@@ -61,15 +59,13 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
 
   const api = getBehandlingApi(behandling);
 
-  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.VEDTAK, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.VEDTAK, erAktiv, 'prosess', true);
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.VEDTAK,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
-  const { data: beregningsresultat } = useQuery(
-    medPrioritet(api.tilbakekreving.beregningsresultatOptions(behandling), skalHenteData),
-  );
-  const { data: vedtaksbrev } = useQuery(
-    medPrioritet(api.tilbakekreving.vedtaksbrevOptions(behandling), skalHenteData),
-  );
+  const { data: beregningsresultat } = useQuery(prioriter(api.tilbakekreving.beregningsresultatOptions(behandling)));
+  const { data: vedtaksbrev } = useQuery(prioriter(api.tilbakekreving.vedtaksbrevOptions(behandling)));
 
   const { mutateAsync: forhandsvisVedtaksbrev } = useMutation({
     mutationFn: (values: ForhandsvisData) => forhåndsvisVedtaksbrev(values),

@@ -11,10 +11,8 @@ import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
-import { useErFaktaPanelAktiv } from '../../felles/fakta/useFaktaMenyRegistrerer';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_SVP_TILRETTELEGGING];
 
@@ -27,18 +25,17 @@ export const FodselOgTilretteleggingFaktaInitPanel = ({ arbeidsgiverOpplysninger
 
   const { behandling } = useBehandlingDataContext();
 
-  const erAktiv = useErFaktaPanelAktiv(
-    FaktaPanelCode.FODSELTILRETTELEGGING,
-    true,
-    standardPanelProps.harÅpentAksjonspunkt,
-  );
-  const skalHenteData = useSkalHenteData(FaktaPanelCode.FODSELTILRETTELEGGING, erAktiv, 'fakta', true);
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.FODSELTILRETTELEGGING,
+    skalVisesIMeny: true,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: arbeidOgInntekt } = useQuery(medPrioritet(api.arbeidOgInntektOptions(behandling), skalHenteData));
+  const { data: arbeidOgInntekt } = useQuery(prioriter(api.arbeidOgInntektOptions(behandling)));
   const { data: svangerskapspengerTilrettelegging } = useQuery(
-    medPrioritet(api.svp.svangerskapspengerTilretteleggingOptions(behandling), skalHenteData),
+    prioriter(api.svp.svangerskapspengerTilretteleggingOptions(behandling)),
   );
 
   return (

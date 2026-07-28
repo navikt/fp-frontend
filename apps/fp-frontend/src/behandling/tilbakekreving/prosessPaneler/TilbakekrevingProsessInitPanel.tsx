@@ -15,10 +15,8 @@ import { erAksjonspunktÅpent, useMellomlagretFormData } from '@navikt/fp-utils'
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
@@ -36,20 +34,18 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.TILBAKEKREVING, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.TILBAKEKREVING, erAktiv, 'prosess', true);
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.TILBAKEKREVING,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: perioderForeldelse } = useQuery(
-    medPrioritet(api.tilbakekreving.perioderForeldelseOptions(behandling), skalHenteData),
-  );
+  const { data: perioderForeldelse } = useQuery(prioriter(api.tilbakekreving.perioderForeldelseOptions(behandling)));
   const { data: vilkårvurderingsperioder } = useQuery(
-    medPrioritet(api.tilbakekreving.vilkårsvurderingsperioderOptions(behandling), skalHenteData),
+    prioriter(api.tilbakekreving.vilkårsvurderingsperioderOptions(behandling)),
   );
-  const { data: vilkårvurdering } = useQuery(
-    medPrioritet(api.tilbakekreving.vilkårsvurderingOptions(behandling), skalHenteData),
-  );
+  const { data: vilkårvurdering } = useQuery(prioriter(api.tilbakekreving.vilkårsvurderingOptions(behandling)));
 
   const { mutateAsync: beregnBeløp } = useMutation({
     mutationFn: (values: BeregnBeløpParams) => api.tilbakekreving.beregneBeløp(values),

@@ -10,11 +10,9 @@ import type { ArbeidsgiverOpplysningerPerId, VilkårType } from '@navikt/fp-type
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
-import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST, AksjonspunktKode.UTGÅTT_5017];
@@ -39,16 +37,15 @@ export const OpplysningspliktProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
           VILKAR_KODER,
           standardPanelProps.vilkårForPanel,
         );
-  const erAktiv = useErProsessPanelAktiv(
-    ProsessStegCode.OPPLYSNINGSPLIKT,
-    skalPanelVisesIMeny,
-    standardPanelProps.harÅpentAksjonspunkt,
-  );
-  const skalHenteData = useSkalHenteData(ProsessStegCode.OPPLYSNINGSPLIKT, erAktiv, 'prosess', skalPanelVisesIMeny);
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.OPPLYSNINGSPLIKT,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: søknad } = useQuery(medPrioritet(api.søknadOptions(behandling), skalHenteData));
+  const { data: søknad } = useQuery(prioriter(api.søknadOptions(behandling)));
 
   return (
     <ProsessDefaultInitPanel

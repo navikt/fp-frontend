@@ -9,10 +9,8 @@ import { AnkeTrygderettsbehandlingProsessIndex } from '@navikt/fp-prosess-anke-t
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
-import { medPrioritet } from '../../felles/prioritet/medPrioritet';
-import { useSkalHenteData } from '../../felles/prioritet/PanelDataPrioritetContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { useErProsessPanelAktiv } from '../../felles/prosess/useProsessMenyRegistrerer';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AUTO_VENT_ANKE_OVERSENDT_TIL_TRYGDERETTEN];
@@ -23,11 +21,13 @@ export const AnkeTrygderettsbehandlingProsessStegInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
-  const erAktiv = useErProsessPanelAktiv(ProsessStegCode.ANKE_MERKNADER, true, standardPanelProps.harÅpentAksjonspunkt);
-  const skalHenteData = useSkalHenteData(ProsessStegCode.ANKE_MERKNADER, erAktiv, 'prosess', true);
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.ANKE_MERKNADER,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
-  const { data: ankeVurdering } = useQuery(medPrioritet(api.anke.ankeVurderingOptions(behandling), skalHenteData));
+  const { data: ankeVurdering } = useQuery(prioriter(api.anke.ankeVurderingOptions(behandling)));
 
   return (
     <ProsessDefaultInitPanel
