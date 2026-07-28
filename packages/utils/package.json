@@ -22,7 +22,7 @@
     "@navikt/ft-form-validators": "6.1.0",
     "@navikt/ft-utils": "5.1.0",
     "dayjs": "1.11.21",
-    "react": "19.2.7",
+    "react": "19.2.8",
     "react-intl": "10.1.18"
   },
   "devDependencies": {
