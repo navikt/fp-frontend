@@ -14,8 +14,9 @@ import type { InntektsgivendeArbeidFormValues } from '../types';
 const maxLength50 = maxLength(50);
 const requiredIfOther =
   (getValues: UseFormGetValues<InntektsgivendeArbeidFormValues>, index: number) => (value: string) => {
-    const { arbeidsgiver, land, periodeFom, periodeTom } =
-      getValues(`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}`) ?? {};
+    const { arbeidsgiver, land, periodeFom, periodeTom } = getValues(
+      `${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}`,
+    );
     if (arbeidsgiver || land || periodeFom || periodeTom) {
       return required(value);
     }
