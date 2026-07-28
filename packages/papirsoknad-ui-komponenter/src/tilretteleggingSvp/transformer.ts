@@ -1,42 +1,53 @@
-import type { FormValues, TilretteleggingArbeidsforhold } from './types';
+import type { ManuellRegistreringSvangerskapspengerDto, SvpTilretteleggingArbeidsforholdDto } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
-export const transformTilretteleggingsArbeidsforhold = (
-  tilretteleggingArbeidsforhold: FormValues['tilretteleggingArbeidsforhold'],
-): TilretteleggingArbeidsforhold[] => {
-  const transformerteVerdier: TilretteleggingArbeidsforhold[] = [];
+import type { FormValues, Tilrettelegging } from './types';
 
-  if (
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere
-    tilretteleggingArbeidsforhold?.sokForArbeidsgiver &&
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere
-    tilretteleggingArbeidsforhold?.tilretteleggingForArbeidsgiver
-  ) {
+export const transformTilretteleggingsArbeidsforhold = ({
+  sokForArbeidsgiver,
+  sokForFrilans,
+  sokForSelvstendigNaringsdrivende,
+  tilretteleggingForArbeidsgiver,
+  tilretteleggingFrilans,
+  tilretteleggingSelvstendigNaringsdrivende,
+}: FormValues['tilretteleggingArbeidsforhold']): ManuellRegistreringSvangerskapspengerDto['tilretteleggingArbeidsforhold'] => {
+  const transformerteVerdier: SvpTilretteleggingArbeidsforholdDto[] = [];
+
+  if (sokForArbeidsgiver && tilretteleggingForArbeidsgiver) {
     transformerteVerdier.push(
-      ...tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.map(ta => ({
-        '@type': 'VI',
-        behovsdato: ta.behovsdato,
-        organisasjonsnummer: ta.organisasjonsnummer,
-        tilrettelegginger: ta.tilretteleggingArbeidsgiver,
-      })),
+      ...tilretteleggingForArbeidsgiver.map(
+        ta =>
+          ({
+            '@type': 'VI',
+            behovsdato: ta.behovsdato,
+            organisasjonsnummer: ta.organisasjonsnummer,
+            tilrettelegginger: ta.tilrettelegginger.map(mapTilrettelegging),
+          }) satisfies SvpTilretteleggingArbeidsforholdDto,
+      ),
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere
-  if (tilretteleggingArbeidsforhold?.sokForFrilans) {
+  if (sokForFrilans && tilretteleggingFrilans) {
     transformerteVerdier.push({
       '@type': 'FR',
-      behovsdato: tilretteleggingArbeidsforhold.behovsdatoFrilans,
-      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingFrilans,
+      behovsdato: tilretteleggingFrilans.behovsdato,
+      tilrettelegginger: tilretteleggingFrilans.tilrettelegginger.map(mapTilrettelegging),
     });
   }
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere
-  if (tilretteleggingArbeidsforhold?.sokForSelvstendigNaringsdrivende) {
+
+  if (sokForSelvstendigNaringsdrivende && tilretteleggingSelvstendigNaringsdrivende) {
     transformerteVerdier.push({
       '@type': 'SN',
-      behovsdato: tilretteleggingArbeidsforhold.behovsdatoSN,
-      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende,
+      behovsdato: tilretteleggingSelvstendigNaringsdrivende.behovsdato,
+      tilrettelegginger: tilretteleggingSelvstendigNaringsdrivende.tilrettelegginger.map(mapTilrettelegging),
     });
   }
 
   return transformerteVerdier;
 };
+
+const mapTilrettelegging = (tilrettelegging: Tilrettelegging) => ({
+  tilretteleggingType: notEmpty(tilrettelegging.tilretteleggingType),
+  dato: tilrettelegging.dato,
+  stillingsprosent: tilrettelegging.stillingsprosent,
+});

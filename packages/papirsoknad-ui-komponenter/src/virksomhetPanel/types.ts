@@ -5,7 +5,7 @@ import { EGEN_VIRKSOMHET_NAME_PREFIX } from './constants';
 type IdFormValues = {
   fom?: string;
   tom?: string;
-  navn?: string;
+  navn: string;
   virksomhetRegistrertINorge?: boolean;
   organisasjonsnummer?: string;
   landJobberFra?: string;

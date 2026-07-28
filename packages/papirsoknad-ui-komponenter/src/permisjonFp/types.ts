@@ -1,4 +1,11 @@
-import type { Arbeidskategori, MorsAktivitet, OverføringÅrsak, UttakPeriodeType } from '@navikt/fp-types';
+import type {
+  Arbeidskategori,
+  GraderingDto,
+  OppholdDto,
+  OverføringsperiodeDto,
+  PermisjonPeriodeDto,
+  UtsettelseDto,
+} from '@navikt/fp-types';
 
 import {
   GRADERING_PERIODE_FIELD_ARRAY_NAME,
@@ -14,73 +21,36 @@ type VirtuellFeilType = {
   periodeOverlapper?: string;
 };
 
-export type GraderingPeriode = {
-  periodeFom: string;
-  periodeTom: string;
-  periodeForGradering: string;
-  prosentandelArbeid: string;
-  skalGraderes: boolean;
-  arbeidsgiverIdentifikator?: string;
+export type GraderingPeriode = Omit<GraderingDto, 'erArbeidstaker' | 'erFrilanser' | 'erSelvstNæringsdrivende'> & {
   arbeidskategoriType?: Arbeidskategori;
-  flerbarnsdager?: boolean;
-  harSamtidigUttak?: boolean;
-  samtidigUttaksprosent?: string;
-};
-
-export type PermisjonPeriode = {
-  periodeType: UttakPeriodeType;
-  periodeFom: string;
-  periodeTom: string;
-  flerbarnsdager?: boolean;
-  morsAktivitet?: MorsAktivitet;
-  harSamtidigUttak?: boolean;
-  samtidigUttaksprosent?: number;
-};
-
-export type UtsettelsPeriode = {
-  periodeFom: string;
-  periodeTom: string;
-  arsakForUtsettelse: string;
-  periodeForUtsettelse?: string;
-  erArbeidstaker?: string;
-};
-
-export type OverforingPeriode = {
-  periodeFom: string;
-  periodeTom: string;
-  overforingArsak: OverføringÅrsak;
-};
-
-export type OppholdPeriode = {
-  periodeFom: string;
-  periodeTom: string;
-  årsak: string;
 };
 
 export type FormValuesUtsettelse = {
   skalUtsette?: boolean;
-  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]?: UtsettelsPeriode[];
+  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]?: UtsettelseDto[];
 };
+
 export type FormValuesOpphold = {
   skalHaOpphold?: boolean;
-  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]?: OppholdPeriode[];
+  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]?: OppholdDto[];
 };
 
 export type FormValuesOverforing = {
   skalOvertaKvote: boolean;
-  [OVERFØRING_PERIODE_FIELD_ARRAY_NAME]?: OverforingPeriode[];
+  [OVERFØRING_PERIODE_FIELD_ARRAY_NAME]?: OverføringsperiodeDto[];
 };
+
 export type FormValuesGradering = {
   skalGradere?: boolean;
   [GRADERING_PERIODE_FIELD_ARRAY_NAME]?: GraderingPeriode[];
 };
 
-export type FromValuesFulltUttak = {
+export type FormValuesFulltUttak = {
   fulltUttak: boolean;
-  [PERMISJON_PERIODE_FIELD_ARRAY_NAME]?: PermisjonPeriode[];
+  [PERMISJON_PERIODE_FIELD_ARRAY_NAME]?: PermisjonPeriodeDto[];
 };
 
-type TidsromPermisjon = FromValuesFulltUttak &
+type TidsromPermisjon = FormValuesFulltUttak &
   FormValuesUtsettelse &
   FormValuesOpphold &
   FormValuesOverforing &

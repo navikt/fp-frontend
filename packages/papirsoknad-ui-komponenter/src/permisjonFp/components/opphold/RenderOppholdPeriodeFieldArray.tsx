@@ -1,37 +1,24 @@
 import { type ReactElement, useEffect } from 'react';
-import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { RhfDatepicker, RhfFieldArray, RhfSelect } from '@navikt/ft-form-hooks';
-import {
-  dateAfterOrEqual,
-  dateBeforeOrEqual,
-  dateRangesNotOverlapping,
-  hasValidDate,
-  required,
-} from '@navikt/ft-form-validators';
+import { hasValidDate, required } from '@navikt/ft-form-validators';
 
-import type { KodeverkMedNavn, OppholdÅrsakType } from '@navikt/fp-types';
+import type { AlleKodeverk, KodeverkMedNavn, OppholdÅrsakType, OppholdDto } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
-import type { OppholdPeriode, PermisjonFormValues } from '../../types';
+import type { PermisjonFormValues } from '../../types';
+import { getOverlappingValidator, getValiderFørEllerEtter } from '../permisjonValidering';
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 
-const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
-  const perioder = getValues(`${FA_PREFIX}`) ?? [];
-  const periodeMap = perioder
-    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-};
-
-const defaultOppholdPeriode: OppholdPeriode = {
+const defaultOppholdPeriode: OppholdDto = {
   periodeFom: '',
   periodeTom: '',
-  årsak: '',
+  årsak: '' as unknown as OppholdDto['årsak'],
 };
 
 const gyldigeÅrsaker = new Set<OppholdÅrsakType>([
@@ -41,8 +28,8 @@ const gyldigeÅrsaker = new Set<OppholdÅrsakType>([
   'UTTAK_FORELDREPENGER_ANNEN_FORELDER',
 ]);
 
-const mapTyper = (typer: KodeverkMedNavn<'OppholdÅrsak'>[]): ReactElement[] =>
-  typer
+const mapOppholdÅrsaker = (oppholdÅrsaker: KodeverkMedNavn<'OppholdÅrsak'>[]): ReactElement[] =>
+  oppholdÅrsaker
     .filter(({ kode }) => gyldigeÅrsaker.has(kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
@@ -51,7 +38,7 @@ const mapTyper = (typer: KodeverkMedNavn<'OppholdÅrsak'>[]): ReactElement[] =>
     ));
 
 interface Props {
-  oppholdsReasons: KodeverkMedNavn<'OppholdÅrsak'>[];
+  alleKodeverk: AlleKodeverk;
   readOnly: boolean;
 }
 
@@ -60,8 +47,10 @@ interface Props {
  *
  * Viser inputfelter for dato for bestemmelse av oppholdsperiode.
  */
-export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Props) => {
+export const RenderOppholdPeriodeFieldArray = ({ alleKodeverk, readOnly }: Props) => {
   const intl = useIntl();
+
+  const oppholdÅrsaker = alleKodeverk['OppholdÅrsak'];
 
   const {
     control,
@@ -93,6 +82,14 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
     >
       {(field, index) => (
         <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
+          <RhfSelect
+            name={`${getPrefix(index)}.årsak`}
+            control={control}
+            label={intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.Arsak' })}
+            selectValues={mapOppholdÅrsaker(oppholdÅrsaker)}
+            validate={[required]}
+          />
+
           <RhfDatepicker
             name={`${getPrefix(index)}.periodeFom`}
             control={control}
@@ -100,12 +97,8 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
             validate={[
               required,
               hasValidDate,
-              () => {
-                const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-                const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-                return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
-              },
-              getOverlappingValidator(getValues),
+              getValiderFørEllerEtter(getValues, getPrefix(index), 'periodeFom'),
+              getOverlappingValidator(getValues, FA_PREFIX),
             ]}
             onChange={() => (isSubmitted ? trigger() : undefined)}
           />
@@ -117,25 +110,11 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
             validate={[
               required,
               hasValidDate,
-              () => {
-                const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-                const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-                return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
-              },
-              getOverlappingValidator(getValues),
+              getValiderFørEllerEtter(getValues, getPrefix(index), 'periodeTom'),
+              getOverlappingValidator(getValues, FA_PREFIX),
             ]}
             onChange={() => (isSubmitted ? trigger() : undefined)}
           />
-
-          <div>
-            <RhfSelect
-              name={`${getPrefix(index)}.årsak`}
-              control={control}
-              label={intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.Arsak' })}
-              selectValues={mapTyper(oppholdsReasons)}
-              validate={[required]}
-            />
-          </div>
         </FieldArrayRow>
       )}
     </RhfFieldArray>

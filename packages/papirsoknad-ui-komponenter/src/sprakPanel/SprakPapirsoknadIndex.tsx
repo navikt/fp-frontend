@@ -6,6 +6,9 @@ import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
+import type { Språkkode } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
+
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -21,7 +24,7 @@ const sprakvalg = {
 };
 
 type SprakFormValues = {
-  språkkode?: string;
+  språkkode?: Språkkode;
 };
 
 export const SprakPapirsoknadIndex = ({ readOnly }: Props) => {
@@ -56,4 +59,4 @@ export const SprakPapirsoknadIndex = ({ readOnly }: Props) => {
 };
 
 SprakPapirsoknadIndex.initialValues = (): SprakFormValues => ({ språkkode: undefined });
-SprakPapirsoknadIndex.transformValues = ({ språkkode }: SprakFormValues) => ({ språkkode });
+SprakPapirsoknadIndex.transformValues = ({ språkkode }: SprakFormValues) => ({ språkkode: notEmpty(språkkode) });

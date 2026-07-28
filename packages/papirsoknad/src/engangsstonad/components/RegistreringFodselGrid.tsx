@@ -18,6 +18,12 @@ interface Props {
 
 export const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fødselsdato, mottattDato }: Props) => (
   <>
+    <OppholdINorgePapirsoknadIndex
+      readOnly={readOnly}
+      erAdopsjon={soknadData.getFamilieHendelseType() === 'ADPSJN'}
+      alleKodeverk={alleKodeverk}
+      mottattDato={mottattDato}
+    />
     {soknadData.getForeldreType() !== 'MOR' && (
       <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
     )}
@@ -28,12 +34,6 @@ export const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fø
         fødselsdato={fødselsdato}
       />
     )}
-    <OppholdINorgePapirsoknadIndex
-      readOnly={readOnly}
-      erAdopsjon={soknadData.getFamilieHendelseType() === 'ADPSJN'}
-      alleKodeverk={alleKodeverk}
-      mottattDato={mottattDato}
-    />
     <TerminOgFodselPanel readOnly={readOnly} erForeldrepenger={false} />
     <SprakPapirsoknadIndex readOnly={readOnly} />
   </>

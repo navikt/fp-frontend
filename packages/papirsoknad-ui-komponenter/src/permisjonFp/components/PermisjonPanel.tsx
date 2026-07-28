@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
-import type { AlleKodeverk, ForeldreType } from '@navikt/fp-types';
+import type { AlleKodeverk, ForeldreType, TidsromPermisjonDto } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import {
@@ -18,11 +18,10 @@ import {
 } from '../constants';
 import type { PermisjonFormValues } from '../types';
 import { PermisjonFulltUttak } from './fulltUttak/PermisjonFulltUttak';
-import { RenderPermisjonPeriodeFieldArray } from './fulltUttak/RenderPermisjonPeriodeFieldArray';
 import { PermisjonGraderingPanel } from './gradering/PermisjonGraderingPanel';
 import { PermisjonOppholdPanel } from './opphold/PermisjonOppholdPanel';
 import { PermisjonOverforingAvKvoterPanel } from './overforeKvote/PermisjonOverforingAvKvoterPanel';
-import { harOverlappMellomPeriodetypar, hentUtfylteTidsrom } from './permisjonOverlappValidering';
+import { harOverlappMellomPeriodetypar, hentUtfylteTidsrom } from './permisjonValidering';
 import { PermisjonUtsettelsePanel } from './utsettelse/PermisjonUtsettelsePanel';
 
 interface Props {
@@ -39,7 +38,7 @@ interface Props {
  */
 export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndringssøknad }: Props) => {
   const intl = useIntl();
-
+  const søkerErMor = foreldreType === 'MOR';
   const { setError, clearErrors, formState, watch } = useFormContext<PermisjonFormValues>();
   const [fulltUttak, skalGradere, skalUtsette, skalOvertaKvote, skalHaOpphold] = watch([
     `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`,
@@ -98,14 +97,14 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
         <Heading size="small" level="3">
           <FormattedMessage id="Registrering.Permisjon.Title" />
         </Heading>
-        <PermisjonFulltUttak foreldreType={foreldreType} readOnly={readOnly} alleKodeverk={alleKodeverk} />
+        <PermisjonFulltUttak readOnly={readOnly} alleKodeverk={alleKodeverk} søkerErMor={søkerErMor} />
         <PermisjonOverforingAvKvoterPanel
           readOnly={readOnly}
-          foreldreType={foreldreType}
           alleKodeverk={alleKodeverk}
+          søkerErMor={søkerErMor}
           erEndringssøknad={erEndringssøknad}
         />
-        <PermisjonUtsettelsePanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
+        <PermisjonUtsettelsePanel readOnly={readOnly} alleKodeverk={alleKodeverk} søkerErMor={søkerErMor} />
         <PermisjonGraderingPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
         <PermisjonOppholdPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
         {formState.isSubmitted && formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message && (
@@ -119,35 +118,20 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
   );
 };
 
-PermisjonPanel.transformValues = (values: PermisjonFormValues) => {
+PermisjonPanel.transformValues = (
+  values: PermisjonFormValues,
+): { [TIDSROM_PERMISJON_FORM_NAME_PREFIX]?: TidsromPermisjonDto } => {
   const permisjonValues = notEmpty(values[TIDSROM_PERMISJON_FORM_NAME_PREFIX]);
-  const newValues = permisjonValues;
-  const permisjonsdata = permisjonValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME];
-  if (values.tidsromPermisjon?.fulltUttak && permisjonsdata) {
-    newValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME] = RenderPermisjonPeriodeFieldArray.transformValues(permisjonsdata);
-  }
-  const graderingdata = permisjonValues[GRADERING_PERIODE_FIELD_ARRAY_NAME];
-  if (values.tidsromPermisjon?.skalGradere && graderingdata) {
-    newValues[GRADERING_PERIODE_FIELD_ARRAY_NAME] = PermisjonGraderingPanel.transformValues(permisjonValues);
-  }
 
-  if (!values.tidsromPermisjon?.fulltUttak) {
-    newValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME] = undefined;
-  }
-  if (!values.tidsromPermisjon?.skalGradere) {
-    newValues[GRADERING_PERIODE_FIELD_ARRAY_NAME] = undefined;
-  }
-  if (!values.tidsromPermisjon?.skalUtsette) {
-    newValues[UTSETTELSE_PERIODE_FIELD_ARRAY_NAME] = undefined;
-  }
-  if (!values.tidsromPermisjon?.skalOvertaKvote) {
-    newValues[OVERFØRING_PERIODE_FIELD_ARRAY_NAME] = undefined;
-  }
-  if (!values.tidsromPermisjon?.skalHaOpphold) {
-    newValues[OPPHOLD_PERIODE_FIELD_ARRAY_NAME] = undefined;
-  }
-
-  return { [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: newValues };
+  return {
+    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
+      ...PermisjonFulltUttak.transformValues(permisjonValues),
+      ...PermisjonGraderingPanel.transformValues(permisjonValues),
+      ...PermisjonUtsettelsePanel.transformValues(permisjonValues),
+      ...PermisjonOverforingAvKvoterPanel.transformValues(permisjonValues),
+      ...PermisjonOppholdPanel.transformValues(permisjonValues),
+    },
+  };
 };
 
 PermisjonPanel.initialValues = (): PermisjonFormValues => ({

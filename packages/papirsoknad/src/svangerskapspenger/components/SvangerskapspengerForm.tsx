@@ -3,6 +3,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { HGrid } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   AndreYtelserPapirsoknadIndex,
   BehovForTilretteleggingPanel,
@@ -18,7 +19,9 @@ import {
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
-const buildInitialValues = () => ({
+import type { AksjonspunktTilBekreftelse } from '../../PapirsøknadAp';
+
+const buildInitialValues = (mellomlagretData: Record<string, unknown> = {}) => ({
   ...MottattDatoPapirsoknadIndex.initialValues(),
   ...OppholdINorgePapirsoknadIndex.initialValues(),
   ...InntektsgivendeArbeidPapirsoknadIndex.initialValues(),
@@ -26,25 +29,35 @@ const buildInitialValues = () => ({
   ...FrilansPapirsoknadIndex.initialValues(),
   ...AndreYtelserPapirsoknadIndex.initialValues(),
   ...TerminOgFodselPanelSvp.initialValues(),
-  ...BehovForTilretteleggingPanel.initialValues(),
+  ...mellomlagretData,
+  ...BehovForTilretteleggingPanel.initialValues(mellomlagretData),
   ...SprakPapirsoknadIndex.initialValues(),
   ...LagreSoknadPapirsoknadIndex.initialValues(),
 });
 
 type FormValues = ReturnType<typeof buildInitialValues>;
 
-const transformValues = (formValues: FormValues) => ({
-  ...MottattDatoPapirsoknadIndex.transformValues(formValues),
-  ...OppholdINorgePapirsoknadIndex.transformValues(formValues),
-  ...InntektsgivendeArbeidPapirsoknadIndex.transformValues(formValues),
-  ...VirksomhetPapirsoknadIndex.transformValues(formValues),
-  ...FrilansPapirsoknadIndex.transformValues(formValues),
-  ...AndreYtelserPapirsoknadIndex.transformValues(formValues),
-  ...TerminOgFodselPanelSvp.transformValues(formValues),
-  ...BehovForTilretteleggingPanel.transformValues(formValues),
-  ...SprakPapirsoknadIndex.transformValues(formValues),
-  ...LagreSoknadPapirsoknadIndex.transformValues(formValues),
-});
+const transformValues = (
+  soknadData: SoknadData,
+  formValues: FormValues,
+): AksjonspunktTilBekreftelse<AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER> => {
+  return {
+    '@type': AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER,
+    tema: soknadData.familieHendelseType,
+    søknadstype: soknadData.fagsakYtelseType,
+    søker: soknadData.foreldreType,
+    ...MottattDatoPapirsoknadIndex.transformValues(formValues),
+    ...OppholdINorgePapirsoknadIndex.transformValues(formValues),
+    ...InntektsgivendeArbeidPapirsoknadIndex.transformValues(formValues),
+    ...VirksomhetPapirsoknadIndex.transformValues(formValues),
+    ...FrilansPapirsoknadIndex.transformValues(formValues),
+    ...AndreYtelserPapirsoknadIndex.transformValues(formValues),
+    ...TerminOgFodselPanelSvp.transformValues(formValues),
+    ...BehovForTilretteleggingPanel.transformValues(formValues),
+    ...SprakPapirsoknadIndex.transformValues(formValues),
+    ...LagreSoknadPapirsoknadIndex.transformValues(formValues),
+  };
+};
 
 export type SvangerskapsValues = ReturnType<typeof transformValues>;
 
@@ -73,13 +86,13 @@ export const SvangerskapspengerForm = ({
   mellomlagretData,
 }: Props) => {
   const formMethods = useForm<FormValues>({
-    defaultValues: { ...buildInitialValues(), ...mellomlagretData },
+    defaultValues: buildInitialValues(mellomlagretData),
   });
 
   const mottattDato = useWatch({ control: formMethods.control, name: 'mottattDato' });
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
+    <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(soknadData, values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="space-16">
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
         <OppholdINorgePapirsoknadIndex

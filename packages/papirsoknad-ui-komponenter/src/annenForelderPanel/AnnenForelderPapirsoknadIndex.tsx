@@ -44,9 +44,7 @@ AnnenForelderPapirsoknadIndex.initialValues = (): AnnenForelderFormValues => ({
   [ANNEN_FORELDER_NAME_PREFIX]: {},
 });
 
-AnnenForelderPapirsoknadIndex.transformValues = ({
-  annenForelder,
-}: AnnenForelderFormValues): AnnenForelderFormValues => ({
+AnnenForelderPapirsoknadIndex.transformValues = ({ annenForelder }: AnnenForelderFormValues) => ({
   [ANNEN_FORELDER_NAME_PREFIX]: {
     ...PermisjonRettigheterPanel.transformValues(annenForelder),
     ...OppgiAnnenForelderPanel.transformValues(annenForelder),

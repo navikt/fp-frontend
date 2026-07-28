@@ -17,7 +17,7 @@ import dayjs from 'dayjs';
 import type { KodeverkMedNavn, Landkode } from '@navikt/fp-types';
 
 export const defaultUtenlandsOpphold: FormValues = {
-  land: undefined as unknown as Landkode,
+  land: '' as unknown as Landkode,
   periodeFom: '',
   periodeTom: '',
 };
@@ -108,7 +108,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
     >
       {(field, index, removeButton) => (
         <React.Fragment key={field.id}>
-          <HStack gap="space-16" paddingBlock="space-8" align="end">
+          <HStack gap="space-16" paddingBlock="space-8" align="start">
             <RhfSelect
               name={`${name}.${index}.land`}
               control={control}

@@ -95,6 +95,7 @@ export type {
   tjenester_behandling_klage_KlageVurderingResultatDto as KlageVurderingResultat,
   foreldrepenger_behandlingslager_behandling_klage_KlageVurdering as KlageVurderingType,
   foreldrepenger_behandlingslager_geografisk_Landkoder as Landkode,
+  foreldrepenger_behandlingslager_geografisk_Språkkode as Språkkode,
   tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling as LegacyManuellMedlemskapsBehandling,
   tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling_MedlemPeriode as LegacyMedlemPeriode,
   foreldrepenger_domene_arbeidInntektsmelding_ManglendeOpplysningerVurderingDto as ManglendeInntektsmeldingVurdering,
@@ -112,6 +113,7 @@ export type {
   foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_SimuleringForMottakerDto as Mottaker,
   folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto as Månedsgrunnlag,
   foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType as NaturalYtelseType,
+  foreldrepenger_domene_iay_modell_kodeverk_BekreftetPermisjonStatus as BekreftetPermisjonStatus,
   foreldrepenger_tilganger_InnloggetNavAnsattDto as NavAnsatt,
   foreldrepenger_behandlingslager_aktør_NavBrukerKjønn as NavBrukerKjønn,
   tjenester_behandling_ytelsefordeling_OmsorgOgRettDto as OmsorgOgRett,
@@ -193,4 +195,6 @@ export type {
   tjenester_behandling_dto_behandling_BehandlingsresultatDto as Behandlingsresultat,
   foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen as KonsekvensForYtelsen,
   foreldrepenger_behandlingslager_behandling_BehandlingResultatType as BehandlingResultatType,
+  foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto as BekreftetAksjonspunktDto,
+  foreldrepenger_behandling_aksjonspunkt_OverstyringAksjonspunktDto as OverstyringAksjonspunktDto,
 } from './fpsak.gen';

@@ -1,13 +1,14 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { FaresignalVurdering } from '@navikt/fp-types';
-import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { BekreftetAksjonspunktDto } from '@navikt/fp-types';
 
-export type PapirsøknadAp = {
-  harInnvirketBehandlingen?: boolean;
-  faresignalVurdering?: FaresignalVurdering;
-} & AksjonspunktTilBekreftelse<
+export type PapirsøknadAp = AksjonspunktTilBekreftelse<
   | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
   | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
   | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
   | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER
+>;
+
+export type AksjonspunktTilBekreftelse<K extends AksjonspunktKode> = Extract<
+  BekreftetAksjonspunktDto,
+  { '@type': `${K}` }
 >;

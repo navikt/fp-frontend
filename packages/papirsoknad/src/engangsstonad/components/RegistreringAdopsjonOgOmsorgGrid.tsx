@@ -12,7 +12,7 @@ interface Props {
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   fødselsdato: string | undefined;
-  mottattDato?: string;
+  mottattDato: string | undefined;
 }
 
 /*
@@ -28,17 +28,17 @@ export const RegistreringAdopsjonOgOmsorgGrid = ({
   mottattDato,
 }: Props) => (
   <>
-    <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
-    <OmsorgOgAdopsjonPapirsoknadIndex
-      readOnly={readOnly}
-      familieHendelseType={soknadData.getFamilieHendelseType()}
-      fødselsdato={fødselsdato}
-    />
     <OppholdINorgePapirsoknadIndex
       readOnly={readOnly}
       alleKodeverk={alleKodeverk}
       erAdopsjon={soknadData.getFamilieHendelseType() === 'ADPSJN'}
       mottattDato={mottattDato}
+    />
+    <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
+    <OmsorgOgAdopsjonPapirsoknadIndex
+      readOnly={readOnly}
+      familieHendelseType={soknadData.getFamilieHendelseType()}
+      fødselsdato={fødselsdato}
     />
     <SprakPapirsoknadIndex readOnly={readOnly} />
   </>
