@@ -1,7 +1,8 @@
 import { RawIntlProvider } from 'react-intl';
 
-import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
+
+import { MerkSomHasterModal } from './components/MerkSomHasterModal';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -12,22 +13,21 @@ export const getMenytekst = () => intl.formatMessage({ id: 'MenyMerkSomHasterInd
 interface Props {
   merkSomHaster: () => void;
   lukkModal: () => void;
+  isPending?: boolean;
 }
 
-export const MenyMerkSomHasterIndex = ({ merkSomHaster, lukkModal }: Props) => {
+export const MenyMerkSomHasterIndex = ({ merkSomHaster, lukkModal, isPending }: Props) => {
   const submit = () => {
     merkSomHaster();
-
-    lukkModal();
   };
 
   return (
     <RawIntlProvider value={intl}>
-      <OkAvbrytModal
+      <MerkSomHasterModal
         text={intl.formatMessage({ id: 'MenyMerkSomHasterIndex.MerkSomHasterSpørsmål' })}
-        showModal
-        submit={submit}
-        cancel={lukkModal}
+        submitCallback={submit}
+        cancelEvent={lukkModal}
+        isPending={isPending}
       />
     </RawIntlProvider>
   );
