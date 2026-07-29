@@ -4178,7 +4178,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/ft-ui-komponenter": "npm:8.1.1"
     "@navikt/ft-utils": "npm:5.1.0"
     "@storybook/react": "npm:10.5.2"
     "@storybook/react-vite": "npm:10.5.2"
