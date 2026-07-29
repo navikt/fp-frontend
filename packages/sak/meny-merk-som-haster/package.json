@@ -18,7 +18,6 @@
     "storybook": "storybook dev --quiet -p 7052"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.15.0",
     "@navikt/ds-react": "8.15.0",
     "@navikt/ft-utils": "5.1.0",
     "dayjs": "1.11.21",
