@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { FieldArray, FieldArrayWithId, UseFieldArrayReplace } from 'react-hook-form';
+import type { FieldArrayWithId, UseFieldArrayReplace } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { MinusIcon, PlusIcon } from '@navikt/aksel-icons';
@@ -224,7 +224,7 @@ const fjernDuplikateOppholdPerioder = (
 
 const tilTilretteleggingVerdi = (
   tilrettelegging: FieldArrayWithId<TilretteleggingFormValues, 'arbeidsforhold'>,
-): FieldArray<TilretteleggingFormValues, 'arbeidsforhold'> => ({
+): Tilrettelegging => ({
   arbeidsgiverReferanse: tilrettelegging.arbeidsgiverReferanse,
   avklarteOppholdPerioder: tilrettelegging.avklarteOppholdPerioder,
   begrunnelse: tilrettelegging.begrunnelse,
