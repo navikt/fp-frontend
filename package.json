@@ -40,7 +40,7 @@
     "@storybook/addon-a11y": "10.5.2",
     "@storybook/addon-links": "10.5.2",
     "@storybook/react": "10.5.2",
-    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/jest-dom": "7.0.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@types/react-router-dom": "5.3.3",
