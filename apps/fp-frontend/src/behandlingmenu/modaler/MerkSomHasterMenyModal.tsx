@@ -16,7 +16,7 @@ export const MerkSomHasterMenyModal = ({ behandling, hentOgSettBehandling, lukkM
   const api = getBehandlingApi(behandling);
   const queryClient = useQueryClient();
 
-  const { mutate: merkSomHaster } = useMutation({
+  const { mutate: merkSomHaster, isPending } = useMutation({
     mutationFn: () => api.merkSomHaster(behandling.uuid, behandling.versjon),
     onSuccess: () => {
       hentOgSettBehandling();
@@ -27,8 +27,9 @@ export const MerkSomHasterMenyModal = ({ behandling, hentOgSettBehandling, lukkM
       void queryClient.invalidateQueries({
         queryKey: [FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE],
       });
+      lukkModal();
     },
   });
 
-  return <MenyMerkSomHasterIndex merkSomHaster={merkSomHaster} lukkModal={lukkModal} />;
+  return <MenyMerkSomHasterIndex merkSomHaster={merkSomHaster} lukkModal={lukkModal} isPending={isPending} />;
 };
