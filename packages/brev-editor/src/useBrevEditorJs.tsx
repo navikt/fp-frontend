@@ -138,36 +138,6 @@ const useAutoSaveDebouncer = () => {
   return lagre;
 };
 
-class CustomList extends EditorjsList {
-  override renderSettings() {
-    return super
-      .renderSettings()
-      .filter(item =>
-        // https://github.com/editor-js/list/issues/119
-        // @ts-expect-error Fiks
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        ['Unordered'].includes(item.label),
-      )
-      .map(item => ({
-        ...item,
-        label: 'Punktliste',
-      }));
-  }
-}
-
-//TODO (TOR) Hacka det til for å få endra til norsk tekst. Burde kunne legga til i18n-messages?
-class CustomHeader extends Header {
-  override renderSettings() {
-    const settings = super.renderSettings();
-    const items = Array.isArray(settings) ? settings : [settings];
-    return items.map(item => ({
-      ...item,
-      // @ts-expect-error label er ikkje tilgjengeleg på alle MenuConfigItem-typar
-      label: item.label === 'Heading 1' ? 'Overskrift' : 'Underoverskrift',
-    }));
-  }
-}
-
 // Denne blir overstyrt for å ikkje strippa vekk a-tags ved lagring.
 class CustomParagraph extends Paragraph {
   static override get sanitize() {
@@ -190,7 +160,7 @@ const getTools = (): EditorConfig['tools'] => ({
     },
   },
   header: {
-    class: CustomHeader as unknown as ToolConstructable,
+    class: Header,
     inlineToolbar: false,
     config: {
       levels: [2, 1],
@@ -200,12 +170,14 @@ const getTools = (): EditorConfig['tools'] => ({
     toolbox: [
       {
         title: intl.formatMessage({ id: 'useBrevEditorJs.Heading1' }),
+        icon: 'H1',
         data: {
           level: 1,
         },
       },
       {
         title: intl.formatMessage({ id: 'useBrevEditorJs.Heading2' }),
+        icon: 'H2',
         data: {
           level: 2,
         },
@@ -213,7 +185,7 @@ const getTools = (): EditorConfig['tools'] => ({
     ],
   },
   list: {
-    class: CustomList as unknown as ToolConstructable,
+    class: EditorjsList,
     inlineToolbar: ['bold'],
     config: {
       preservedBlank: true,
@@ -240,8 +212,9 @@ const lagEditorJsI18n = (): I18nConfig => ({
       link: {
         'Add a link': intl.formatMessage({ id: 'useBrevEditorJs.AddALink' }),
       },
-      List: {
-        Unordered: intl.formatMessage({ id: 'useBrevEditorJs.Unordered' }),
+      header: {
+        'Heading 1': intl.formatMessage({ id: 'useBrevEditorJs.Heading1' }),
+        'Heading 2': intl.formatMessage({ id: 'useBrevEditorJs.Heading2' }),
       },
     },
     ui: {
