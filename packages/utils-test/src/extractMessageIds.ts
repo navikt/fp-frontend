@@ -16,7 +16,7 @@ import * as ts from 'typescript';
 export const extractMessageIds = (files: string[]): string[] => {
   const ids: string[] = [];
   for (const file of files) {
-    const content = readFileSync(file).toString();
+    const content = readFileSync(file, 'utf8');
     const scriptKind = file.endsWith('.tsx') ? ts.ScriptKind.TSX : ts.ScriptKind.TS;
     const sourceFile = ts.createSourceFile(file, content, ts.ScriptTarget.Latest, true, scriptKind);
     visit(sourceFile, ids);

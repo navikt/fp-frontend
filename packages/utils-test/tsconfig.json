@@ -1,7 +1,7 @@
 {
   "extends": "@navikt/fp-config-typescript",
   "compilerOptions": {
-    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom", "node"]
+    "types": ["node"]
   },
   "include": ["./", "../../@types/externals.d.ts"]
 }
