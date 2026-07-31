@@ -158,9 +158,11 @@ class CustomList extends EditorjsList {
 //TODO (TOR) Hacka det til for å få endra til norsk tekst. Burde kunne legga til i18n-messages?
 class CustomHeader extends Header {
   override renderSettings() {
-    return super.renderSettings().map(item => ({
+    const settings = super.renderSettings();
+    const items = Array.isArray(settings) ? settings : [settings];
+    return items.map(item => ({
       ...item,
-      // @ts-expect-error Fiks
+      // @ts-expect-error label er ikkje tilgjengeleg på alle MenuConfigItem-typar
       label: item.label === 'Heading 1' ? 'Overskrift' : 'Underoverskrift',
     }));
   }
