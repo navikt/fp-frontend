@@ -138,6 +138,16 @@ const useAutoSaveDebouncer = () => {
   return lagre;
 };
 
+class CustomList extends EditorjsList {
+  override renderSettings() {
+    return super.renderSettings().filter(item =>
+      // https://github.com/editor-js/list/issues/119
+      // @ts-expect-error Fiks
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      ['Unordered'].includes(item.label),
+    );
+  }
+}
 // Denne blir overstyrt for å ikkje strippa vekk a-tags ved lagring.
 class CustomParagraph extends Paragraph {
   static override get sanitize() {
@@ -185,7 +195,7 @@ const getTools = (): EditorConfig['tools'] => ({
     ],
   },
   list: {
-    class: EditorjsList,
+    class: CustomList as unknown as ToolConstructable,
     inlineToolbar: ['bold'],
     config: {
       preservedBlank: true,
