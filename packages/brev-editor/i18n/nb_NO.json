@@ -21,5 +21,6 @@
   "useBrevEditorJs.Delete": "Fjern",
   "useBrevEditorJs.KlikkForFjern": "Klikk for å fjerne",
   "useBrevEditorJs.MoveUp": "Flytt opp",
-  "useBrevEditorJs.MoveDown": "Flytt ned"
+  "useBrevEditorJs.MoveDown": "Flytt ned",
+  "useBrevEditorJs.Filter": "Filtrer"
 }

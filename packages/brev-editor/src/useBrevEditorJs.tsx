@@ -222,6 +222,9 @@ const lagEditorJsI18n = (): I18nConfig => ({
       link: {
         'Add a link': intl.formatMessage({ id: 'useBrevEditorJs.AddALink' }),
       },
+      list: {
+        Unordered: intl.formatMessage({ id: 'useBrevEditorJs.UnorderedList' }),
+      },
       header: {
         'Heading 1': intl.formatMessage({ id: 'useBrevEditorJs.Heading1' }),
         'Heading 2': intl.formatMessage({ id: 'useBrevEditorJs.Heading2' }),
@@ -231,6 +234,7 @@ const lagEditorJsI18n = (): I18nConfig => ({
       popover: {
         'Nothing found': intl.formatMessage({ id: 'useBrevEditorJs.NothingFound' }),
         'Convert to': intl.formatMessage({ id: 'useBrevEditorJs.ConvertTo' }),
+        Filter: intl.formatMessage({ id: 'useBrevEditorJs.Filter' }),
       },
     },
     blockTunes: {
