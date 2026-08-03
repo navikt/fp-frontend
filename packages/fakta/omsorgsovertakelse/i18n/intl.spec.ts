@@ -1,5 +1,6 @@
-import { extract } from '@formatjs/cli-lib';
 import { globSync } from 'node:fs';
+
+import { extractMessageIds } from '@navikt/fp-utils-test';
 
 import nb from './nb_NO.json';
 
@@ -20,14 +21,10 @@ const NOT_FOUND_BECAUSE_ID_IS_STRING_UNION_IN_CODE = new Set([
 ]);
 
 describe('intl', () => {
-  it('Check that i18n strings in code and in language file match', async () => {
+  it('Check that i18n strings in code and in language file match', () => {
     const files = globSync('src/**/*.{ts,tsx}');
 
-    const foundTranslations = await extract(files, {
-      idInterpolationPattern: '[sha512:contenthash:base64:6]',
-    });
-
-    const stringsInCode = new Set(Object.keys(JSON.parse(foundTranslations) as Record<string, string>));
+    const stringsInCode = new Set(extractMessageIds(files));
     const stringsInFile = new Set(Object.keys(nb));
 
     const missingKeysBokmål = stringsInCode.difference(stringsInFile);
