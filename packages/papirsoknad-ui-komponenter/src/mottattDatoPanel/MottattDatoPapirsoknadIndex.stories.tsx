@@ -22,7 +22,7 @@ const meta = {
     return (
       <RhfForm
         formMethods={formMethods}
-        onSubmit={val => submitCallback(MottattDatoPapirsoknadIndex.transformValues(val))}
+        onSubmit={values => submitCallback(MottattDatoPapirsoknadIndex.transformValues(values))}
       >
         <VStack gap="space-40">
           <MottattDatoPapirsoknadIndex {...args} />

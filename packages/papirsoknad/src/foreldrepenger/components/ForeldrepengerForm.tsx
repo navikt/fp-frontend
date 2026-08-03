@@ -67,7 +67,7 @@ const transformValues = (
     ...OmsorgOgAdopsjonPapirsoknadIndex.transformValues(formValues),
     ...AnnenForelderPapirsoknadIndex.transformValues(formValues),
     ...PermisjonIndex.transformValues(formValues),
-    ...BekreftelsePanel.tranformValues(formValues),
+    ...BekreftelsePanel.transformValues(formValues),
     ...SprakPapirsoknadIndex.transformValues(formValues),
     ...LagreSoknadPapirsoknadIndex.transformValues(formValues),
   };

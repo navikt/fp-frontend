@@ -8,7 +8,6 @@ import { action } from 'storybook/actions';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { PermisjonIndex } from './PermisjonIndex';
-import type { PermisjonFormValues } from './types';
 
 const meta = {
   title: 'ui-komponenter/permisjon',
@@ -26,10 +25,7 @@ const meta = {
     });
 
     return (
-      <RhfForm
-        formMethods={formMethods}
-        onSubmit={(values: PermisjonFormValues) => submitCallback(PermisjonIndex.transformValues(values))}
-      >
+      <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(PermisjonIndex.transformValues(values))}>
         <VStack gap="space-40">
           <PermisjonIndex {...args} />
           <Button size="small" variant="primary">

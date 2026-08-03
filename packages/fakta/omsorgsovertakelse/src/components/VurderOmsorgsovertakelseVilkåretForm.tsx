@@ -69,10 +69,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
       })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET]}
     >
-      <RhfForm
-        formMethods={formMethods}
-        onSubmit={(values: FormValues) => submitCallback(transformValues(values, alleBarn))}
-      >
+      <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(transformValues(values, alleBarn))}>
         <VStack gap="space-20">
           <RhfDatepicker
             name="omsorgsovertakelseDato"

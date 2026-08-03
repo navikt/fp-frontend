@@ -133,7 +133,7 @@ export const Messages = ({
     <>
       <RhfForm
         formMethods={formMethods}
-        onSubmit={(values: FormValues) => submitCallback(values)}
+        onSubmit={values => submitCallback(values)}
         setDataOnUnmount={setMeldingFormData}
       >
         <VStack gap="space-16">

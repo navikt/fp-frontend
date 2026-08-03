@@ -20,7 +20,10 @@ const meta = {
     const formMethods = useForm();
 
     return (
-      <RhfForm formMethods={formMethods} onSubmit={val => submitCallback(TerminOgFodselPanelSvp.transformValues(val))}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(TerminOgFodselPanelSvp.transformValues(values))}
+      >
         <VStack gap="space-40">
           <TerminOgFodselPanelSvp {...args} />
           <Button size="small" variant="primary">

@@ -224,5 +224,4 @@ export type VilkårOverstyringAksjonspunkter =
   | AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET;
 
 export type OverstyringAksjonspunkter =
-  | VilkårOverstyringAksjonspunkter
-  | AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL;
+  VilkårOverstyringAksjonspunkter | AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL;

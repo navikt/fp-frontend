@@ -78,7 +78,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfris
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(formValues: FormValues) => submitCallback(transformValues(formValues))}
+      onSubmit={values => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="space-24">

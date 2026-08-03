@@ -82,7 +82,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: InnsynFormValues) => submitCallback(transformValues(values, alleDokumenter))}
+      onSubmit={values => submitCallback(transformValues(values, alleDokumenter))}
       setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="space-16">
