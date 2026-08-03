@@ -15,12 +15,12 @@
   "useBrevEditorJs.Heading1": "Overskrift",
   "useBrevEditorJs.Heading2": "Underoverskrift",
   "useBrevEditorJs.UnorderedList": "Punktliste",
-  "useBrevEditorJs.Unordered": "Punkt",
   "useBrevEditorJs.AddALink": "Legg til en lenke",
   "useBrevEditorJs.NothingFound": "Ingenting funnet",
   "useBrevEditorJs.ConvertTo": "Endre til",
   "useBrevEditorJs.Delete": "Fjern",
   "useBrevEditorJs.KlikkForFjern": "Klikk for å fjerne",
   "useBrevEditorJs.MoveUp": "Flytt opp",
-  "useBrevEditorJs.MoveDown": "Flytt ned"
+  "useBrevEditorJs.MoveDown": "Flytt ned",
+  "useBrevEditorJs.Filter": "Filtrer"
 }
