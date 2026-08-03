@@ -35,7 +35,7 @@ const transformValues = (
     søker: soknadData.foreldreType,
     ...MottattDatoPapirsoknadIndex.transformValues(formValues),
     ...PermisjonIndex.transformValues(formValues),
-    ...BekreftelsePanel.tranformValues(formValues),
+    ...BekreftelsePanel.transformValues(formValues),
     ...LagreSoknadPapirsoknadIndex.transformValues(formValues),
   };
 };

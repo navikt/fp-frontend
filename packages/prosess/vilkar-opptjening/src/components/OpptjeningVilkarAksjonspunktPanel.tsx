@@ -58,10 +58,12 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }
 
   const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
-  const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
-
   return (
-    <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
+    <RhfForm
+      formMethods={formMethods}
+      onSubmit={values => submitCallback(transformValues(values))}
+      setDataOnUnmount={setMellomlagretFormData}
+    >
       <ProsessPanelTemplate
         title={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret" />}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}

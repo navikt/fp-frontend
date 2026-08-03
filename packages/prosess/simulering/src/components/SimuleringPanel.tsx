@@ -105,7 +105,7 @@ export const SimuleringPanel = ({
       {skalHaForm && (
         <RhfForm
           formMethods={formMethods}
-          onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
+          onSubmit={values => submitCallback(transformValues(values, aksjonspunkterForPanel))}
           setDataOnUnmount={setMellomlagretFormData}
         >
           <VStack gap="space-16">

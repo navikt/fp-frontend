@@ -20,7 +20,10 @@ const meta = {
     const formMethods = useForm();
 
     return (
-      <RhfForm formMethods={formMethods} onSubmit={val => submitCallback(SprakPapirsoknadIndex.transformValues(val))}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(SprakPapirsoknadIndex.transformValues(values))}
+      >
         <VStack gap="space-40">
           <SprakPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">

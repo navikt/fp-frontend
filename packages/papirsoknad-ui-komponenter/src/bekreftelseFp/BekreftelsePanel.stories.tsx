@@ -20,7 +20,7 @@ const meta = {
     const formMethods = useForm();
 
     return (
-      <RhfForm formMethods={formMethods} onSubmit={val => submitCallback(BekreftelsePanel.tranformValues(val))}>
+      <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(BekreftelsePanel.transformValues(values))}>
         <VStack gap="space-40">
           <BekreftelsePanel {...args} />
           <Button size="small" variant="primary">

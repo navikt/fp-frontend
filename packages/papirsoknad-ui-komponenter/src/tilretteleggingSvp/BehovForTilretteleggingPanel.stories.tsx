@@ -24,7 +24,7 @@ const meta = {
     return (
       <RhfForm
         formMethods={formMethods}
-        onSubmit={val => submitCallback(BehovForTilretteleggingPanel.transformValues(val))}
+        onSubmit={values => submitCallback(BehovForTilretteleggingPanel.transformValues(values))}
       >
         <VStack gap="space-40">
           <BehovForTilretteleggingPanel {...args} />

@@ -71,7 +71,7 @@ export const RegistrereVergeInfoPanel = ({ verge, alleKodeverk }: Props) => {
       )}
       <RhfForm
         formMethods={formMethods}
-        onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+        onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="space-24">

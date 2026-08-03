@@ -42,6 +42,7 @@ export const BekreftelsePanel = ({ readOnly, annenForelderInformertRequired = fa
 BekreftelsePanel.initialValues = (): BekreftelseFormValues => ({
   annenForelderInformert: undefined,
 });
-BekreftelsePanel.tranformValues = ({ annenForelderInformert }: BekreftelseFormValues) => ({
+
+BekreftelsePanel.transformValues = ({ annenForelderInformert }: BekreftelseFormValues) => ({
   annenForelderInformert,
 });

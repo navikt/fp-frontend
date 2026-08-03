@@ -19,7 +19,7 @@
     "stylelint": "stylelint \"src/**/*.module.css\"",
     "dev": "vite serve",
     "preview": "vite preview",
-    "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build",
+    "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
     "storybook": "storybook dev --quiet -p 7005"
   },
   "dependencies": {

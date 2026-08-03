@@ -100,7 +100,7 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      onSubmit={values => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
     >
       <ProsessPanelTemplate

@@ -27,7 +27,7 @@ const meta = {
     return (
       <RhfForm
         formMethods={formMethods}
-        onSubmit={val => submitCallback(InntektsgivendeArbeidPapirsoknadIndex.transformValues(val))}
+        onSubmit={values => submitCallback(InntektsgivendeArbeidPapirsoknadIndex.transformValues(values))}
       >
         <VStack gap="space-40">
           <InntektsgivendeArbeidPapirsoknadIndex {...args} />
