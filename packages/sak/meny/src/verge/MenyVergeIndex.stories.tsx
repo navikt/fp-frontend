@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, promiseAction } from '@navikt/fp-storybook-utils';
 
 import { MenyVergeIndex } from './MenyVergeIndex';
 
@@ -11,8 +11,8 @@ const meta = {
   args: {
     alleKodeverk: alleKodeverk,
     lukkModal: action('onLukkModal'),
-    opprettVerge: action('onOpprettVerge') as () => Promise<void>,
-    fjernVerge: action('onFjernVerge') as () => Promise<void>,
+    opprettVerge: promiseAction('onOpprettVerge'),
+    fjernVerge: promiseAction('onFjernVerge'),
   },
 } satisfies Meta<typeof MenyVergeIndex>;
 export default meta;

@@ -295,8 +295,10 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const behandlingsresultat = {
+      id: 1,
       type: 'KLAGE_MEDHOLD',
-    } as Behandlingsresultat;
+      vedtaksbrevStatus: 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING',
+    } satisfies Behandlingsresultat;
     const message = getAksjonspunkttekst(behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
@@ -304,8 +306,10 @@ describe('aksjonspunktTekstUtleder', () => {
   // Ytelsesvedtak opphevet
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak opphevet', () => {
     const behandlingsresultat = {
+      id: 1,
       type: 'KLAGE_YTELSESVEDTAK_OPPHEVET',
-    } as Behandlingsresultat;
+      vedtaksbrevStatus: 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING',
+    } satisfies Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
@@ -322,8 +326,10 @@ describe('aksjonspunktTekstUtleder', () => {
   // Klage avvist
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag klage avvist', () => {
     const behandlingsresultat = {
+      id: 1,
       type: 'KLAGE_AVVIST',
-    } as Behandlingsresultat;
+      vedtaksbrevStatus: 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING',
+    } satisfies Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
@@ -334,8 +340,10 @@ describe('aksjonspunktTekstUtleder', () => {
   // Ikke fastsatt Engangsstønad
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ikke fastsatt', () => {
     const behandlingsresultat = {
+      id: 1,
       type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
-    } as Behandlingsresultat;
+      vedtaksbrevStatus: 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING',
+    } satisfies Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
@@ -345,8 +353,10 @@ describe('aksjonspunktTekstUtleder', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak stadfestet', () => {
     const behandlingsresultat = {
+      id: 1,
       type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
-    } as Behandlingsresultat;
+      vedtaksbrevStatus: 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING',
+    } satisfies Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
