@@ -36,7 +36,7 @@
     "packages/**/*"
   ],
   "devDependencies": {
-    "@navikt/aksel-stylelint": "8.15.0",
+    "@navikt/aksel-stylelint": "8.16.1",
     "@storybook/addon-a11y": "10.5.5",
     "@storybook/addon-links": "10.5.5",
     "@storybook/react": "10.5.5",
