@@ -28,8 +28,8 @@
     "history": "5.3.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-intl": "10.1.18",
-    "react-router-dom": "7.18.1"
+    "react-intl": "10.1.19",
+    "react-router-dom": "7.18.2"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
@@ -45,7 +45,7 @@
     "storybook": "10.5.5",
     "stylelint": "17.14.1",
     "typescript": "6.0.3",
-    "vite": "8.1.5",
+    "vite": "8.2.0",
     "vitest": "4.1.10"
   }
 }
