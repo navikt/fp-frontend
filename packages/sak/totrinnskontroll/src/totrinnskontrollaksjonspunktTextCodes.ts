@@ -59,4 +59,4 @@ export const totrinnskontrollaksjonspunktTextCodes = {
   [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING]: 'ToTrinnsForm.ArbeidOgInntekt.ManueltOpprettet',
 };
 
-export const totrinnsTilbakekrevingkontrollaksjonspunktTextCodes = {} as Record<string, string>;
+export const totrinnsTilbakekrevingkontrollaksjonspunktTextCodes: Record<string, string> = {};

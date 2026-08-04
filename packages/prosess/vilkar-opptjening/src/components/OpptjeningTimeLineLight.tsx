@@ -21,7 +21,7 @@ const PERIODE_STATUS_IKON_MAP = {
   danger: <XMarkOctagonIcon />,
   success: <CheckmarkCircleIcon />,
   info: <DoorOpenIcon />,
-} as Record<string, React.ReactElement>;
+} satisfies Record<string, React.ReactElement>;
 
 const getStatus = (klasseKode: FastsattOpptjeningAktivitet['klasse']) => {
   if (klasseKode === 'BEKREFTET_AVVIST') {

@@ -1,3 +1,4 @@
+export { promiseAction } from './storyUtils';
 export { withRouter } from './decorators/withRouter';
 export { getIntlDecorator } from './decorators/withIntl';
 export { withQueryClient } from './decorators/withQueryClient';

@@ -17,7 +17,7 @@ import { InntektsmeldingInfoBlokk } from './InntektsmeldingInfoBlokk';
  * bortfalt periode: {fomDato: '2024-09-05', tomDato: '2024-09-26'}
  */
 const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsmelding) => {
-  const gruppertPåType = inntektsmelding.aktiveNaturalytelser.reduce(
+  const gruppertPåType = inntektsmelding.aktiveNaturalytelser.reduce<Record<string, AktivNaturalYtelse[]>>(
     (prev, value) => {
       const type = value.type;
       const prevType = prev[type];
@@ -27,10 +27,10 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
 
       return { ...prev, [type]: [value] };
     },
-    {} as Record<string, AktivNaturalYtelse[]>,
+    {},
   );
 
-  const bortfalteNaturalytelser = {} as Record<string, AktivNaturalYtelse[]>;
+  const bortfalteNaturalytelser: Record<string, AktivNaturalYtelse[]> = {};
 
   for (const [key, value] of Object.entries(gruppertPåType)) {
     const sortert = value
