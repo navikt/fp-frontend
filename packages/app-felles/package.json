@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@nais/apm": "0.5.0",
-    "@navikt/ds-react": "8.15.0",
+    "@navikt/ds-react": "8.16.1",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",
