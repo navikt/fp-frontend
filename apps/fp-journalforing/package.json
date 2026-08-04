@@ -23,31 +23,31 @@
     "storybook": "storybook dev --quiet -p 7005"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.15.0",
-    "@navikt/ds-react": "8.15.0",
-    "@navikt/ds-tailwind": "8.15.0",
+    "@navikt/aksel-icons": "8.16.1",
+    "@navikt/ds-react": "8.16.1",
+    "@navikt/ds-tailwind": "8.16.1",
     "@navikt/fp-app-felles": "workspace:*",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-form-hooks": "12.4.1",
-    "@navikt/ft-form-validators": "6.1.0",
-    "@navikt/ft-ui-komponenter": "8.1.1",
-    "@navikt/ft-utils": "5.1.0",
+    "@navikt/ft-form-hooks": "12.4.2",
+    "@navikt/ft-form-validators": "6.1.1",
+    "@navikt/ft-ui-komponenter": "8.1.2",
+    "@navikt/ft-utils": "5.1.1",
     "@sentry/vite-plugin": "5.4.0",
     "@tanstack/react-query": "5.101.4",
     "dayjs": "1.11.21",
     "ky": "2.0.2",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-hook-form": "7.83.0",
-    "react-intl": "10.1.18",
-    "react-router-dom": "7.18.1"
+    "react-hook-form": "7.84.0",
+    "react-intl": "10.1.19",
+    "react-router-dom": "7.18.2"
   },
   "devDependencies": {
-    "@navikt/ds-css": "8.15.0",
+    "@navikt/ds-css": "8.16.1",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
@@ -65,7 +65,7 @@
     "stylelint": "17.14.1",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3",
-    "vite": "8.1.5",
+    "vite": "8.2.0",
     "vitest": "4.1.10"
   }
 }

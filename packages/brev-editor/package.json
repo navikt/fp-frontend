@@ -22,10 +22,10 @@
     "@editorjs/header": "2.8.9",
     "@editorjs/list": "2.0.9",
     "@editorjs/paragraph": "2.11.7",
-    "@navikt/aksel-icons": "8.15.0",
-    "@navikt/ds-react": "8.15.0",
+    "@navikt/aksel-icons": "8.16.1",
+    "@navikt/ds-react": "8.16.1",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-utils": "5.1.0",
+    "@navikt/ft-utils": "5.1.1",
     "css-tree": "3.2.1",
     "dayjs": "1.11.21",
     "editorjs-html": "4.0.5",
@@ -33,8 +33,8 @@
     "lodash.debounce": "4.0.8",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-intl": "10.1.18",
-    "react-router-dom": "7.18.1"
+    "react-intl": "10.1.19",
+    "react-router-dom": "7.18.2"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
@@ -52,7 +52,7 @@
     "storybook": "10.5.5",
     "stylelint": "17.14.1",
     "typescript": "6.0.3",
-    "vite": "8.1.5",
+    "vite": "8.2.0",
     "vitest": "4.1.10"
   }
 }

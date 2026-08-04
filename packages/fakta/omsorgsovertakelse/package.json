@@ -17,23 +17,23 @@
     "storybook": "storybook dev --quiet -p 7029"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.15.0",
-    "@navikt/ds-react": "8.15.0",
+    "@navikt/aksel-icons": "8.16.1",
+    "@navikt/ds-react": "8.16.1",
     "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/fp-ui-komponenter": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-form-hooks": "12.4.1",
-    "@navikt/ft-form-validators": "6.1.0",
-    "@navikt/ft-ui-komponenter": "8.1.1",
-    "@navikt/ft-utils": "5.1.0",
+    "@navikt/ft-form-hooks": "12.4.2",
+    "@navikt/ft-form-validators": "6.1.1",
+    "@navikt/ft-ui-komponenter": "8.1.2",
+    "@navikt/ft-utils": "5.1.1",
     "dayjs": "1.11.21",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-hook-form": "7.83.0",
-    "react-intl": "10.1.18"
+    "react-hook-form": "7.84.0",
+    "react-intl": "10.1.19"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
@@ -49,7 +49,7 @@
     "eslint": "10.8.0",
     "storybook": "10.5.5",
     "typescript": "6.0.3",
-    "vite": "8.1.5",
+    "vite": "8.2.0",
     "vitest": "4.1.10"
   }
 }

@@ -36,7 +36,7 @@
     "packages/**/*"
   ],
   "devDependencies": {
-    "@navikt/aksel-stylelint": "8.15.0",
+    "@navikt/aksel-stylelint": "8.16.1",
     "@storybook/addon-a11y": "10.5.5",
     "@storybook/addon-links": "10.5.5",
     "@storybook/react": "10.5.5",
@@ -46,14 +46,14 @@
     "@types/react-router-dom": "5.3.3",
     "eslint": "10.8.0",
     "husky": "9.1.7",
-    "jsdom": "29.1.1",
-    "knip": "6.29.0",
-    "lint-staged": "17.2.0",
+    "jsdom": "30.0.1",
+    "knip": "6.31.0",
+    "lint-staged": "17.3.0",
     "prettier": "3.9.6",
     "storybook": "10.5.5",
     "stylelint": "17.14.1",
     "stylelint-order": "8.1.1",
-    "turbo": "2.10.7",
+    "turbo": "2.10.8",
     "typescript": "6.0.3"
   },
   "resolutions": {

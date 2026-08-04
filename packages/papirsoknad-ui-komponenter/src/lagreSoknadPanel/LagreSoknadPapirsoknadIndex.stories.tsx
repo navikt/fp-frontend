@@ -4,7 +4,7 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { withRouter } from '@navikt/fp-storybook-utils';
+import { promiseAction, withRouter } from '@navikt/fp-storybook-utils';
 
 import { LagreSoknadPapirsoknadIndex } from './LagreSoknadPapirsoknadIndex';
 
@@ -36,7 +36,7 @@ export const Default: Story = {
   args: {
     readOnly: false,
     submitting: false,
-    onSubmitUfullstendigsoknad: action('onSubmitUfullstendigsoknad') as () => Promise<void>,
+    onSubmitUfullstendigsoknad: promiseAction('onSubmitUfullstendigsoknad'),
     erEndringssøknad: false,
   },
 };
@@ -45,7 +45,7 @@ export const ErEndringssøknad: Story = {
   args: {
     readOnly: false,
     submitting: false,
-    onSubmitUfullstendigsoknad: action('onSubmitUfullstendigsoknad') as () => Promise<void>,
+    onSubmitUfullstendigsoknad: promiseAction('onSubmitUfullstendigsoknad'),
     erEndringssøknad: true,
   },
 };

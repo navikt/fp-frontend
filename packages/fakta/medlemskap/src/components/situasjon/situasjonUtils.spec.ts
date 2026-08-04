@@ -94,7 +94,7 @@ describe('situasjonUtils', () => {
           tom: '2025-02-01',
           landNavn: 'Finland',
           landkode: 'FIN',
-        } as UtlandsoppholdPeriode,
+        } satisfies UtlandsoppholdPeriode,
       ];
       expect(formaterUtenlandsopphold(utenlandsopphold, kodeverk, intl)).toBe('I Finland');
     });
@@ -106,13 +106,13 @@ describe('situasjonUtils', () => {
           tom: '2023-09-01',
           landNavn: 'Danmark',
           landkode: 'DNK',
-        } as UtlandsoppholdPeriode,
+        } satisfies UtlandsoppholdPeriode,
         {
           fom: '2024-07-01',
           tom: '2024-10-01',
           landNavn: 'Finland',
           landkode: 'FIN',
-        } as UtlandsoppholdPeriode,
+        } satisfies UtlandsoppholdPeriode,
       ];
       expect(formaterUtenlandsopphold(utenlandsopphold, kodeverk, intl)).toBe('I flere land');
     });
