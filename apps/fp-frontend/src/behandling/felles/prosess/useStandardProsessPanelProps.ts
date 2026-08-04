@@ -93,10 +93,6 @@ const getBekreftAksjonspunktProsessCallback =
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
-    const models = apListe.map(ap => ({
-      '@type': ap.kode,
-      ...ap,
-    }));
 
     const params = {
       saksnummer: fagsak.saksnummer,
@@ -107,14 +103,14 @@ const getBekreftAksjonspunktProsessCallback =
     const etterLagringCallback = lagringSideEffectsCallback(apListe);
 
     const aksjonspunkterTilLagring = aksjonspunkter.filter(ap =>
-      apListe.some(apModel => apModel.kode === ap.definisjon),
+      apListe.some(apModel => apModel['@type'] === ap.definisjon),
     );
     // Rut til overstyr-endepunktet basert på faktisk aksjonspunktkode, ikke på fravær av matchende
     // aksjonspunkt. Overstyringskoder (6xxx) finnes ikke i behandlingen før de opprettes, så de
     // matcher ingen eksisterende aksjonspunkt – men det gjør heller ikke et manuelt aksjonspunkt
     // som vises uten åpent aksjonspunkt. Kun overstyringskoder kan deserialiseres av overstyr-endepunktet.
     const erOverstyring =
-      apListe.some(ap => ap.kode.startsWith('6')) ||
+      apListe.some(ap => ap['@type'].startsWith('6')) ||
       aksjonspunkterTilLagring.some(ap => ap.aksjonspunktType === 'OVST' || ap.aksjonspunktType === 'SAOV');
 
     if (apListe.length === 0) {
@@ -124,7 +120,7 @@ const getBekreftAksjonspunktProsessCallback =
     if (erOverstyring) {
       return lagreOverstyrteAksjonspunkter({
         ...params,
-        overstyrteAksjonspunktDtoer: models,
+        overstyrteAksjonspunktDtoer: apListe,
       }).then(etterLagringCallback);
     }
 
@@ -133,13 +129,14 @@ const getBekreftAksjonspunktProsessCallback =
     // her i stedet for å sende koden til overstyr-endepunktet og få en kryptisk Jackson-feil fra backend.
     if (aksjonspunkterTilLagring.length === 0) {
       throw new Error(
-        `Forsøk på å lagre aksjonspunkt ${apListe.map(ap => ap.kode).join(', ')} uten matchende aksjonspunkt i behandlingen og uten at det er en overstyring.`,
+        // eslint-disable-next-line max-len
+        `Forsøk på å lagre aksjonspunkt ${apListe.map(ap => ap['@type']).join(', ')} uten matchende aksjonspunkt i behandlingen og uten at det er en overstyring.`,
       );
     }
 
     return lagreAksjonspunkter({
       ...params,
-      bekreftedeAksjonspunktDtoer: models,
+      bekreftedeAksjonspunktDtoer: apListe,
     }).then(etterLagringCallback);
   };
 

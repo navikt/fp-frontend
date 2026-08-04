@@ -35,7 +35,7 @@ describe('SimuleringProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: 'Dette er en begrunnelse',
-        kode: '5084',
+        '@type': '5084',
         varseltekst: undefined,
         videreBehandling: 'TILBAKEKR_IGNORER',
       },
@@ -67,7 +67,7 @@ describe('SimuleringProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: 'Dette er en begrunnelse',
-        kode: '5084',
+        '@type': '5084',
         varseltekst: 'Dette er en fritekst',
         videreBehandling: 'TILBAKEKR_OPPRETT',
       },
@@ -132,7 +132,7 @@ describe('SimuleringProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: 'Dette er en begrunnelse',
-        kode: '5029',
+        '@type': '5029',
       },
     ]);
   });

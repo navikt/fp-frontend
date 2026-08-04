@@ -87,7 +87,7 @@ const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
 const transformValues = (
   values: FormValues,
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING> => ({
-  kode: AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
+  '@type': AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
   begrunnelse: values.begrunnelse,
   besteberegningErKorrekt: !!values.besteberegningErKorrektValg,
 });

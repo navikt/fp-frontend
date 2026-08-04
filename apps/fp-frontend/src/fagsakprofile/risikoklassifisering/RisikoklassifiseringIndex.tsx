@@ -122,12 +122,7 @@ const RisikoklassifiseringBehandling = ({
       behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
       saksnummer: fagsak.saksnummer,
-      bekreftedeAksjonspunktDtoer: [
-        {
-          '@type': values.kode,
-          ...values,
-        },
-      ],
+      bekreftedeAksjonspunktDtoer: [values],
     });
   };
 

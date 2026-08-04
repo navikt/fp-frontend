@@ -34,7 +34,7 @@ describe('AapFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5104',
+      '@type': '5104',
       begrunnelse: 'Beregningen er kontrollert og korrekt.',
     });
   });

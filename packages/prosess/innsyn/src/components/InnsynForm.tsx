@@ -188,7 +188,7 @@ const transformValues = (
   values: InnsynFormValues,
   documents: Dokument[],
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_INNSYN> => ({
-  kode: AksjonspunktKode.VURDER_INNSYN,
+  '@type': AksjonspunktKode.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),
   mottattDato: notEmpty(values.mottattDato),
   innsynResultatType: notEmpty(values.innsynResultatType),

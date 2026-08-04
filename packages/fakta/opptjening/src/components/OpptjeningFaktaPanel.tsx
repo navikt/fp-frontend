@@ -248,5 +248,5 @@ const transformValues = (
       begrunnelse: values[index]!.begrunnelse,
     }))
     .filter(b => b.begrunnelse),
-  kode: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+  '@type': AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
 });

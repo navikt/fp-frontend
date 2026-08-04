@@ -100,5 +100,8 @@ const transformValues = (
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE> => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
-  kode: validerApKodeOgHentApEnum(aksjonspunkter[0]?.definisjon, AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE),
+  '@type': validerApKodeOgHentApEnum(
+    aksjonspunkter[0]?.definisjon,
+    AksjonspunktKode.AVKLAR_OM_SØKER_HAR_MOTTATT_STØTTE,
+  ),
 });

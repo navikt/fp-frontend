@@ -59,7 +59,7 @@ describe('TilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
+      '@type': AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
       begrunnelse: 'Dette er en begrunnelse',
       fødselsdato: undefined,
       termindato: '2020-11-06',
@@ -337,7 +337,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
+      '@type': AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
       begrunnelse: 'Dette er en begrunnelse',
       fødselsdato: undefined,
       termindato: '2020-11-06',
@@ -678,7 +678,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
+      '@type': AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
       begrunnelse: 'En begrunnelse',
       fødselsdato: undefined,
       termindato: '2020-11-06',
@@ -783,7 +783,7 @@ describe('TilretteleggingFaktaIndex', () => {
           velferdspermisjoner: [],
         },
       ],
-    } satisfies BekreftSvangerskapspengerAp);
+    });
 
     // Reverser splitten og verifiser at vi er tilbake til ett samlet arbeidsforhold
     await userEvent.click(

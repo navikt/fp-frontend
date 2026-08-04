@@ -234,7 +234,7 @@ const getLagringSideeffekter =
     return () => {
       const skalTilTotrinnskontroll = aksjonspunkter.some(
         ap =>
-          ap.kode === AksjonspunktKode.FORESLÅ_VEDTAK ||
+          ap['@type'] === AksjonspunktKode.FORESLÅ_VEDTAK ||
           ('skalBrukeOverstyrendeFritekstBrev' in ap && ap.skalBrukeOverstyrendeFritekstBrev),
       );
       if (skalTilTotrinnskontroll) {

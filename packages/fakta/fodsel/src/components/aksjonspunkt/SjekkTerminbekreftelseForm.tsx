@@ -137,7 +137,7 @@ const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt):
 });
 
 const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_TERMINBEKREFTELSE> => ({
-  kode: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
+  '@type': AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
   utstedtdato: notEmpty(values.utstedtdato, 'utstedtdato må være satt ved submit'),
   antallBarn: notEmpty(values.antallBarn, 'antallBarn må være satt ved submit'),
   termindato: notEmpty(values.termindato, 'termindato må være satt ved submit'),

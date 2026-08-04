@@ -63,7 +63,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: undefined,
-        kode: '5015',
+        '@type': '5015',
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -126,7 +126,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: undefined,
-        kode: '5015',
+        '@type': '5015',
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -148,7 +148,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: undefined,
-        kode: '5015',
+        '@type': '5015',
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -181,7 +181,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: 'Dette er en tekst',
-        kode: '5015',
+        '@type': '5015',
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -217,7 +217,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: 'Dette er en tekst',
-        kode: '5015',
+        '@type': '5015',
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -336,7 +336,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: undefined,
-        kode: '5015',
+        '@type': '5015',
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);
@@ -361,7 +361,7 @@ describe('VedtakProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
         begrunnelse: undefined,
-        kode: '5015',
+        '@type': '5015',
         skalBrukeOverstyrendeFritekstBrev: false,
       },
     ]);

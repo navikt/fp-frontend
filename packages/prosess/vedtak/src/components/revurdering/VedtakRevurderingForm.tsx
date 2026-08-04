@@ -36,7 +36,7 @@ import { VedtakInnvilgetRevurderingPanel } from './VedtakInnvilgetRevurderingPan
 import { VedtakOpphorRevurderingPanel } from './VedtakOpphorRevurderingPanel';
 
 type KontrollAvManueltOpprettetRevurderingsbehandlingAp = {
-  kode: AksjonspunktKode.UTGÅTT_5056;
+  '@type': AksjonspunktKode.UTGÅTT_5056;
   begrunnelse?: string;
   skalBrukeOverstyrendeFritekstBrev?: boolean;
 };
@@ -153,7 +153,7 @@ const transformValues = (
   aksjonspunkterForPanel
     .filter(ap => ap.kanLoses)
     .map(ap => ({
-      kode: validerApKodeOgHentApEnum(
+      '@type': validerApKodeOgHentApEnum(
         ap.definisjon,
         AksjonspunktKode.FORESLÅ_VEDTAK,
         AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT,

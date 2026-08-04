@@ -98,7 +98,7 @@ const buildInitialValues = (
 const transformValues = (
   values: FormValues,
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK> => ({
-  kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+  '@type': AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   dokStatus: values.dokStatus,
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

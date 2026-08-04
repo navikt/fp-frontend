@@ -99,7 +99,7 @@ const lagModifisertCallback =
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     const transformerteData = apListe.map(apData => ({
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
-      kode: mapBGKodeTilFpsakKode(apData.kode),
+      '@type': mapBGKodeTilFpsakKode(apData.kode),
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       ...apData.grunnlag[0],
     }));

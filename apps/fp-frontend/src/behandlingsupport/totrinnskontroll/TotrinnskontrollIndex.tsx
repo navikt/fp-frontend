@@ -80,7 +80,7 @@ export const TotrinnskontrollIndex = ({
       behandlingUuid: valgtBehandling.uuid,
       behandlingVersjon: valgtBehandling.versjon,
       bekreftedeAksjonspunktDtoer:
-        aksjonspunktData.kode === AksjonspunktKodeTilbakekreving.FATTER_VEDTAK
+        aksjonspunktData['@type'] === AksjonspunktKodeTilbakekreving.FATTER_VEDTAK
           ? [aksjonspunktData]
           : [aksjonspunktData],
     };

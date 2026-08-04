@@ -53,7 +53,7 @@ describe('OpptjeningFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5051',
+      '@type': '5051',
       opptjeningsaktiviteter: [
         {
           arbeidsgiverReferanse: '1',

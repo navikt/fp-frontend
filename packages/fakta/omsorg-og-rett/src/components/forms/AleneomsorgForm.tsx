@@ -107,7 +107,7 @@ const buildInitialValues = (omsorgOgRett: OmsorgOgRett, aksjonspunkt?: Aksjonspu
 const transformValues = (
   values: FormValues,
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG> => ({
-  kode: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+  '@type': AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
   aleneomsorg: values.harAleneomsorg,
   annenforelderHarRett: values.harAnnenForelderRett,
   annenforelderMottarUføretrygd: values.mottarAnnenForelderUforetrygd,

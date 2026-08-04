@@ -37,7 +37,7 @@ describe('SakenFaktaIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       dokStatus: 'DOKUMENTASJON_VIL_BLI_INNHENTET',
-      kode: '5068',
+      '@type': '5068',
     });
   });
 
@@ -88,7 +88,7 @@ describe('SakenFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
-      kode: '6045',
+      '@type': '6045',
       opprinneligDato: '2019-01-01',
       startdatoFraSøknad: '2020-01-01',
     });
@@ -114,7 +114,7 @@ describe('SakenFaktaIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       dekningsgrad: 80,
-      kode: '6016',
+      '@type': '6016',
     });
   });
 
@@ -174,7 +174,7 @@ describe('SakenFaktaIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       dekningsgrad: 80,
-      kode: '5002',
+      '@type': '5002',
     });
   });
 });

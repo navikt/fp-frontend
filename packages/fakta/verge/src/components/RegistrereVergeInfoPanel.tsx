@@ -32,7 +32,7 @@ const transformValues = (
 ):
   | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_VERGE>
   | TilbakekrevingAksjonspunktTilBekreftelse<AksjonspunktKodeTilbakekreving.AVKLAR_VERGE> => ({
-  kode: AksjonspunktKode.AVKLAR_VERGE,
+  '@type': AksjonspunktKode.AVKLAR_VERGE,
   ...RegistrereVergeForm.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

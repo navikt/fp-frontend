@@ -115,7 +115,7 @@ const transformValues = (
 ): AksjonspunktTilBekreftelse<
   AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET | AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
 > => ({
-  kode: erForutgåendeAksjonspunkt
+  '@type': erForutgåendeAksjonspunkt
     ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
     : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
   ...MedlemskapVurderinger.transformValues(values),

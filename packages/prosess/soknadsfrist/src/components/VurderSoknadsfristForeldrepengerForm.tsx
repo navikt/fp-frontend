@@ -45,7 +45,7 @@ const transformValues = (
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST> => ({
   harGyldigGrunn: values.gyldigSenFremsetting,
   ansesMottattDato: values.ansesMottatt,
-  kode: AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST,
+  '@type': AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRIST,
   ...ProsessStegBegrunnelseTextField.transformValues(values),
 });
 

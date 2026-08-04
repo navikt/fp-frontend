@@ -54,7 +54,7 @@ describe('UttakDokumentasjonFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5074',
+      '@type': '5074',
       begrunnelse: 'Dette er en begrunnelse',
       vurderingBehov: [
         {
@@ -146,7 +146,7 @@ describe('UttakDokumentasjonFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      kode: '5074',
+      '@type': '5074',
       vurderingBehov: [
         {
           fom: '2022-12-08',

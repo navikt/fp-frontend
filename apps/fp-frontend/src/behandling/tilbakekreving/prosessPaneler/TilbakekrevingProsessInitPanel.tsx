@@ -63,6 +63,9 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
           // @ts-expect-error K9 har ein verdi 'DELTAKER' som me ikkje har. Legg til?
           relasjonsRolleTypeKodeverk={standardPanelProps.alleKodeverk['RelasjonsRolleType']}
           {...standardPanelProps}
+          submitCallback={aksjonspunktdata =>
+            standardPanelProps.submitCallback({ '@type': aksjonspunktdata.kode, ...aksjonspunktdata })
+          }
           behandlingUuid={behandling.uuid}
         />
       ) : (

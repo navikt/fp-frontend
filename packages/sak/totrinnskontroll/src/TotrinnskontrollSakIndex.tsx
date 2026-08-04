@@ -160,7 +160,7 @@ const transformValues = (
   }));
 
   return {
-    kode: erTilbakekreving ? AksjonspunktKodeTilbakekreving.FATTER_VEDTAK : AksjonspunktKode.FATTER_VEDTAK,
+    '@type': erTilbakekreving ? AksjonspunktKodeTilbakekreving.FATTER_VEDTAK : AksjonspunktKode.FATTER_VEDTAK,
     begrunnelse: undefined,
     aksjonspunktGodkjenningDtos,
   };

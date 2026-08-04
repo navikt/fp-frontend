@@ -60,7 +60,7 @@ describe('UttakFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
-        kode: '6065',
+        '@type': '6065',
         begrunnelse: 'Dette er en begrunnelse',
         perioder: [
           {
@@ -110,7 +110,7 @@ describe('UttakFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
-        kode: '5065',
+        '@type': '5065',
         begrunnelse: 'Dette er en begrunnelse',
         perioder: [
           {
@@ -195,7 +195,7 @@ describe('UttakFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
-        kode: '5064',
+        '@type': '5064',
         begrunnelse: 'Dette er en begrunnelse',
         perioder: [
           {
@@ -243,7 +243,7 @@ describe('UttakFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
-        kode: '5063',
+        '@type': '5063',
         begrunnelse: 'Dette er en begrunnelse',
         perioder: [
           {

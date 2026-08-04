@@ -47,7 +47,7 @@ describe('InnsynProsessIndex', () => {
         },
       ],
       innsynResultatType: 'AVVIST',
-      kode: '5037',
+      '@type': '5037',
       mottattDato: '2021-12-23',
       sattPåVent: undefined,
     });
@@ -106,7 +106,7 @@ describe('InnsynProsessIndex', () => {
         },
       ],
       innsynResultatType: 'INNV',
-      kode: '5037',
+      '@type': '5037',
       mottattDato: '2021-12-23',
       sattPåVent: true,
     });

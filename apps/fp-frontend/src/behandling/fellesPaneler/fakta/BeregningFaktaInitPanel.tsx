@@ -120,7 +120,7 @@ const lagModifisertCallback =
     const transformerteData = apListe.map<BeregningAp>(
       apData =>
         ({
-          kode: mapBGKodeTilFpsakKode(apData.kode),
+          '@type': mapBGKodeTilFpsakKode(apData.kode),
           ...notEmpty(apData.grunnlag[0], 'Mangler grunnlag i be'),
         }) as BeregningAp,
     );

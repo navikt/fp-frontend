@@ -86,7 +86,7 @@ const transformValues = (
   erKonkret: !!values.erKonkret,
   erSignert: !!values.erSignert,
   begrunnelse: values.begrunnelse,
-  kode: AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
+  '@type': AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
   vedtakBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? undefined : values.vedtak,
   mottattDato: values.mottattDato,
   erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),

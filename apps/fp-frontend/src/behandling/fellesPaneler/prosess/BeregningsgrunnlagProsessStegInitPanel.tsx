@@ -47,28 +47,28 @@ const lagModifisertCallback =
       if ('inntektPrAndelList' in grunnlag) {
         return {
           ...felles,
-          kode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+          '@type': AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
           inntektPrAndelList: grunnlag.inntektPrAndelList,
           inntektFrilanser: grunnlag.inntektFrilanser ?? undefined,
         } satisfies AksjonspunktTilBekreftelse<AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS>;
       } else if ('erVarigEndretNaering' in grunnlag) {
         return {
           ...felles,
-          kode: AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE,
+          '@type': AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE,
           erVarigEndretNaering: grunnlag.erVarigEndretNaering,
           bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag ?? undefined,
         } satisfies AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NÆRING_SELVSTENDIG_NÆRINGSDRIVENDE>;
       } else if ('fastsatteTidsbegrensedePerioder' in grunnlag) {
         return {
           ...felles,
-          kode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+          '@type': AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
           fastsatteTidsbegrensedePerioder: grunnlag.fastsatteTidsbegrensedePerioder,
           frilansInntekt: grunnlag.frilansInntekt ?? undefined,
         } satisfies AksjonspunktTilBekreftelse<AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD>;
       } else if ('bruttoBeregningsgrunnlag' in grunnlag) {
         return {
           ...felles,
-          kode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET,
+          '@type': AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET,
           bruttoBeregningsgrunnlag: grunnlag.bruttoBeregningsgrunnlag,
         } satisfies AksjonspunktTilBekreftelse<AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_FOR_SN_NY_I_ARBEIDSLIVET>;
       } else {

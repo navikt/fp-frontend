@@ -82,7 +82,7 @@ const initialValues = (gjeldende: FødselGjeldende, overstyringsAP?: Aksjonspunk
 const transformValues = (
   values: FormValues,
 ): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL> => ({
-  kode: OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+  '@type': OverstyringKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
   termindato: notEmpty(values.termindato),
   ...ErBarnFødt.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),

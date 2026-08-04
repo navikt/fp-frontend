@@ -18,8 +18,7 @@ import {
   VirksomhetPapirsoknadIndex,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
-
-import type { AksjonspunktTilBekreftelse } from '../../PapirsøknadAp';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 const buildInitialValues = (mellomlagretData: Record<string, unknown> = {}) => ({
   ...MottattDatoPapirsoknadIndex.initialValues(),

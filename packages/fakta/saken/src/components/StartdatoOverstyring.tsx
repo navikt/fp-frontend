@@ -32,7 +32,7 @@ const transformValues = (
   ytelseFordeling: Ytelsefordeling,
   values: FormValues,
 ): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO> => ({
-  kode: OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO,
+  '@type': OverstyringKode.OVERSTYRING_AV_AVKLART_STARTDATO,
   opprinneligDato: ytelseFordeling.startDatoForPermisjon,
   startdatoFraSøknad: notEmpty(values.startdatoFraSøknad),
   begrunnelse: values.begrunnelse,
@@ -120,9 +120,7 @@ export const StartdatoOverstyring = ({ aksjonspunkt, ytelseFordeling }: Props) =
     >
       <RhfForm
         formMethods={formMethods}
-        onSubmit={(values: FormValues) =>
-          submitCallback(transformValues(ytelseFordeling, values)).then(slaAvEditeringAvStartdato)
-        }
+        onSubmit={values => submitCallback(transformValues(ytelseFordeling, values)).then(slaAvEditeringAvStartdato)}
         setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="space-16">

@@ -153,7 +153,7 @@ describe('UttakProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
-        kode: '5071',
+        '@type': '5071',
         perioder: [
           {
             aktiviteter: [
@@ -289,7 +289,7 @@ describe('UttakProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
-        kode: '5071',
+        '@type': '5071',
         perioder: [
           {
             aktiviteter: [

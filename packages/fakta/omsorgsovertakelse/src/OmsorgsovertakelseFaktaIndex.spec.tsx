@@ -87,7 +87,7 @@ describe('OmsorgsovertakelseFaktaIndex', () => {
 
     await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
     expect(submit).toHaveBeenCalledWith({
-      kode: AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
+      '@type': AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
       omsorgsovertakelseDato: '2025-11-10',
       barn: [{ barnNummer: 1, fødselsdato: '2015-10-09' }],
       ektefellesBarn: true,

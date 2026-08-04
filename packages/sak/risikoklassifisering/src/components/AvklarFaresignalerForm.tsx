@@ -25,7 +25,7 @@ const VURDERING_HOVEDKATEGORI = 'vurderingerHovedkategori';
 const IKKE_REELLE_VURDERINGER_UNDERKATEGORI = 'ikkeReelleVurderingerUnderkategori';
 
 type Values = {
-  [begrunnelseFieldName]?: string;
+  begrunnelse?: string;
   [VURDERING_HOVEDKATEGORI]: FaresignalVurdering;
   [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]?: FaresignalVurdering;
 };
@@ -137,12 +137,12 @@ const buildInitialValues = (
 };
 
 const transformValues = (values: Values): AvklartRisikoklassifiseringAp => ({
-  kode: AksjonspunktKode.VURDER_FARESIGNALER,
+  '@type': AksjonspunktKode.VURDER_FARESIGNALER,
   faresignalVurdering: notEmpty(
     utledFaresignalVurderingVerdi(values[VURDERING_HOVEDKATEGORI], values[IKKE_REELLE_VURDERINGER_UNDERKATEGORI]),
     'faresignalVurdering må være satt ved submit',
   ),
-  begrunnelse: values[begrunnelseFieldName],
+  begrunnelse: values.begrunnelse,
 });
 
 const utledFaresignalVurderingVerdi = (

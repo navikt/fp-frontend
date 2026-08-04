@@ -4438,6 +4438,8 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "npm:10.2.0"
+    "@navikt/ft-prosess-tilbakekreving": "npm:11.2.0"
+    "@navikt/ft-prosess-tilbakekreving-foreldelse": "npm:10.2.0"
     "@navikt/ft-prosess-tilbakekreving-vedtak": "npm:9.2.0"
     "@types/react": "npm:19.2.17"
     eslint: "npm:10.8.0"

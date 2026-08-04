@@ -50,7 +50,7 @@ describe('BesteberegningFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5062',
+      '@type': '5062',
       begrunnelse: 'Min begrunnelse for vurdering av besteberegning',
       besteberegningErKorrekt: true,
     });

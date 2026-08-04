@@ -251,7 +251,7 @@ const transformValues = (
   ventearsaker: KodeverkMedNavn<'Venteårsak'>[],
   modalValues?: ModalFormValues,
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.VARSEL_REVURDERING_MANUELL> => ({
-  kode: AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
+  '@type': AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
   begrunnelse: values.begrunnelse,
   sendVarsel: values.sendVarsel,
   frist: modalValues?.frist,

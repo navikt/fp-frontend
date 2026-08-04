@@ -178,7 +178,7 @@ const buildInitialValues = (dekningsgrad: number | undefined, aksjonspunkt?: Aks
 const transformValues = (
   values: FormValues,
 ): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD> => ({
-  kode: OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD,
+  '@type': OverstyringKode.OVERSTYRING_AV_DEKNINGSGRAD,
   dekningsgrad: notEmpty(values.dekningsgrad),
   begrunnelse: values.begrunnelse,
 });

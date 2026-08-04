@@ -108,7 +108,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
-      kode: '5085',
+      '@type': '5085',
     });
   });
 
@@ -246,7 +246,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
-      kode: '5085',
+      '@type': '5085',
     });
   });
 
@@ -296,7 +296,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
-      kode: '5085',
+      '@type': '5085',
     });
   });
 
@@ -415,7 +415,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
-      kode: '5085',
+      '@type': '5085',
     });
   });
 
@@ -486,7 +486,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
-      kode: '5085',
+      '@type': '5085',
     });
   });
 

@@ -1,6 +1,8 @@
+import type { VilkårsvurderingAp } from '@navikt/ft-prosess-tilbakekreving';
+import type { VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import type { ForeslaVedtakTilbakekrevingAp } from '@navikt/ft-prosess-tilbakekreving-vedtak';
 
-import type { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
+import { type AksjonspunktKode, type OverstyringKode } from '@navikt/fp-kodeverk';
 
 import type { AksjonspunktTilBekreftelse, OverstyringAksjonspunktTilBekreftelse } from './AksjonspunktTilBekreftelse';
 
@@ -41,4 +43,6 @@ export type ProsessAksjonspunkt =
   | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER>
   | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR>
   // Tilbakekreving (ekstern pakke)
-  | ForeslaVedtakTilbakekrevingAp;
+  | ({ '@type': '5002' } & VilkårsvurderingAp)
+  | ({ '@type': '5003' } & VurderForeldelseAp)
+  | ({ '@type': '5004' } & ForeslaVedtakTilbakekrevingAp);

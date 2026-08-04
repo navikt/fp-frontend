@@ -70,7 +70,7 @@ describe('VergeFaktaIndex', () => {
       fnr: undefined,
       gyldigFom: '2022-09-14',
       gyldigTom: '2022-09-24',
-      kode: AksjonspunktKode.AVKLAR_VERGE,
+      '@type': AksjonspunktKode.AVKLAR_VERGE,
       navn: 'Espen Utvikler',
       organisasjonsnummer: '232232323',
       vergeType: 'ADVOKAT',

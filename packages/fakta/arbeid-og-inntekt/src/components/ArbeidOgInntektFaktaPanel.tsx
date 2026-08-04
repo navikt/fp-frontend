@@ -84,7 +84,7 @@ export const ArbeidOgInntektFaktaPanel = ({
   const lagreOgFortsett = () => {
     setErKnappTrykket(true);
     void submitCallback({
-      kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      '@type': AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     });
   };
 

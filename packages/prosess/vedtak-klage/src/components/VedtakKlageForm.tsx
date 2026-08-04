@@ -157,5 +157,9 @@ const transformValues = (aksjonspunkter: Aksjonspunkt[]): AksjonspunktData =>
     .filter(erAksjonspunktÅpent)
     .map(ap => ap.definisjon)
     .map(apCode => ({
-      kode: validerApKodeOgHentApEnum(apCode, AksjonspunktKode.FORESLÅ_VEDTAK, AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT),
+      '@type': validerApKodeOgHentApEnum(
+        apCode,
+        AksjonspunktKode.FORESLÅ_VEDTAK,
+        AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT,
+      ),
     }));

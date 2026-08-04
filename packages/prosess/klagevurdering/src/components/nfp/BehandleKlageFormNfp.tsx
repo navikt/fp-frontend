@@ -44,7 +44,7 @@ const transformValues = (
   klageVurdering: notEmpty(values.klageVurdering),
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
-  kode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
+  '@type': AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
 });
 
 const definertKodeverdiEllerUndefined = <T,>(kode: T | undefined): T | undefined => {

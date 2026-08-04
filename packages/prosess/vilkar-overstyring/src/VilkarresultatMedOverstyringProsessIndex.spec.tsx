@@ -38,7 +38,7 @@ describe('VilkarresultatMedOverstyringProsessIndex', () => {
       avslagskode: '1003',
       begrunnelse: 'Dette er en begrunnelse',
       erVilkårOk: false,
-      kode: '6003',
+      '@type': '6003',
     });
   });
 
@@ -94,7 +94,7 @@ describe('VilkarresultatMedOverstyringProsessIndex', () => {
       opphørFom: '2021-12-20',
       avslagskode: '1021',
       begrunnelse: 'Dette er en begrunnelse',
-      kode: '6005',
+      '@type': '6005',
     });
   });
 

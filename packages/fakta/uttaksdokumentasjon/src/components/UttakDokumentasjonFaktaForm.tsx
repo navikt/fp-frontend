@@ -108,7 +108,7 @@ const transformValues = (
   values: FaktaBegrunnelseFormValues,
   vurderingBehov: DokumentasjonVurderingBehov[],
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON> => ({
-  kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+  '@type': AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
   vurderingBehov,
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

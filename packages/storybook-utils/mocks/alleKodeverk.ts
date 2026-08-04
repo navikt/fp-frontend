@@ -2585,99 +2585,99 @@ export const alleKodeverk: AlleKodeverk = {
   ],
   ManuellBehandlingÅrsak: [
     {
-      kode: '5001',
+      '@type': '5001',
       navn: 'Stønadskonto tom for stønadsdager. Vurder bruk av annen stønadskonto eller avslå perioden.',
     },
     {
-      kode: '5002',
+      '@type': '5002',
       navn: 'Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.',
     },
     {
-      kode: '5003',
+      '@type': '5003',
       navn: 'Ikke gyldig grunn for overføring av kvote. Vurder bruk av annen stønadskonto eller avslå perioden.',
     },
     {
-      kode: '5004',
+      '@type': '5004',
       navn: 'Kontroller mors krav til aktivitet.',
     },
     {
-      kode: '5005',
+      '@type': '5005',
       navn: 'Manglende søkt periode. Fastsett hvilken stønadskonto perioden skal trekkes fra.',
     },
     {
-      kode: '5006',
+      '@type': '5006',
       navn: 'Søker er i arbeid i perioden. Vurder konsekvens for arbeid i perioden.',
     },
     {
-      kode: '5007',
+      '@type': '5007',
       navn: 'Støtte for automatisk behandling av adopsjon er ikke implementert i saksbehandlingsløsningen.',
     },
     {
-      kode: '5009',
+      '@type': '5009',
       navn: 'Søker har ikke omsorg for barnet. Vurder bruk av annen stønadskonto eller avslå perioden.',
     },
     {
-      kode: '5010',
+      '@type': '5010',
       navn: 'For sent fremsatt søknad. Vurder om uttak i perioden er gyldig.',
     },
     {
-      kode: '5011',
+      '@type': '5011',
       navn: 'Ikke gyldig grunn for utsettelse av perioden, avslå utsettelsen, og sett riktig stønadskonto som skal benyttes.',
     },
     {
-      kode: '5012',
+      '@type': '5012',
       navn: 'Perioden er uavklart. Vurder trekkdager og sett utbetalingsgrad.',
     },
     {
-      kode: '5014',
+      '@type': '5014',
       navn: 'Vurder samtidig uttak av foreldrepenger.',
     },
     {
-      kode: '5016',
+      '@type': '5016',
       navn: 'Vurder søknad om overføring av kvote.',
     },
     {
-      kode: '5018',
+      '@type': '5018',
       navn: 'Opphør av foreldrepenger fordi inngangsvilkår ikke oppfylt, avslå stønadsperiode',
     },
     {
-      kode: '5019',
+      '@type': '5019',
       navn: 'Stebarnsadopsjon - sjekk uttak med tanke på aktivitetskravet',
     },
     {
-      kode: '5024',
+      '@type': '5024',
       navn: 'Opphold større enn tilgjengelige dager',
     },
     {
-      kode: '5025',
+      '@type': '5025',
       navn: 'Søker er ikke registrert med en heltidsstilling i Aa-registeret. Avklar om søker jobber 100 % og dermed har rett til utsettelse',
     },
     {
-      kode: '5026',
+      '@type': '5026',
       navn: 'Vurder uttak med hensyn på dødsfall',
     },
     {
-      kode: '5027',
+      '@type': '5027',
       navn: 'Vurder fars/medmors rett til uttak på grunn av mors uføretrygd',
     },
     {
-      kode: '5028',
+      '@type': '5028',
       navn: 'Innvilget pleiepenger med innleggelse, vurder riktig ytelse',
     },
     {
-      kode: '5029',
+      '@type': '5029',
       navn: 'Innvilget pleiepenger uten innleggelse, vurder riktig ytelse',
     },
     {
-      kode: '5030',
+      '@type': '5030',
       navn: 'Far/medmor søker før fødsel/omsorg',
     },
     {
-      kode: '5031',
+      '@type': '5031',
       navn: 'Vurder om det skal være utsettelse i perioden',
     },
     {
-      kode: '5032',
+      '@type': '5032',
       navn: 'Vurder utbetalingsgrad og trekkdager når mor er i delvis arbeid (under 75% arbeidsprosent)',
     },
   ],

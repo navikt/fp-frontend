@@ -111,7 +111,7 @@ const getLagringSideeffekter =
   (aksjonspunkter: ProsessAksjonspunkt[]) => {
     const skalByttTilKlageinstans = aksjonspunkter.some(
       apValue =>
-        apValue.kode === AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP &&
+        apValue['@type'] === AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP &&
         'klageVurdering' in apValue &&
         apValue.klageVurdering === 'STADFESTE_YTELSESVEDTAK',
     );

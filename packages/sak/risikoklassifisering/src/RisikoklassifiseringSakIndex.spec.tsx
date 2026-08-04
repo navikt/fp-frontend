@@ -41,7 +41,7 @@ describe('RisikoklassifiseringSakIndex', () => {
     expect(lagreAksjonspunkt).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       faresignalVurdering: 'INGEN_INNVIRKNING',
-      kode: '5095',
+      '@type': '5095',
     });
   });
 
@@ -70,7 +70,7 @@ describe('RisikoklassifiseringSakIndex', () => {
     expect(lagreAksjonspunkt).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       faresignalVurdering: 'INNVILGET_REDUSERT',
-      kode: '5095',
+      '@type': '5095',
     });
   });
 

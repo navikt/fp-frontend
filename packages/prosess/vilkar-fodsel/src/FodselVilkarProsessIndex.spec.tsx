@@ -27,7 +27,7 @@ describe('FodselVilkarProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
       erVilkårOk: true,
-      kode: '5031',
+      '@type': '5031',
     });
   });
 
@@ -56,7 +56,7 @@ describe('FodselVilkarProsessIndex', () => {
       avslagskode: '1031',
       begrunnelse: 'Dette er en vurdering',
       erVilkårOk: false,
-      kode: '5031',
+      '@type': '5031',
     });
   });
 

@@ -220,13 +220,13 @@ const transformValues = (
 ): OverstyringAksjonspunktTilBekreftelse<VilkårOverstyringAksjonspunkter> => {
   if (erOverstyringAvMedlemskap(overstyringApKode)) {
     return {
-      kode: overstyringApKode,
+      '@type': overstyringApKode,
       begrunnelse: values.begrunnelse,
       ...MedlemskapVurderinger.transformValues(values),
     };
   }
   return {
-    kode: overstyringApKode,
+    '@type': overstyringApKode,
     begrunnelse: values.begrunnelse,
     ...VilkarResultPicker.transformValues(values),
   };

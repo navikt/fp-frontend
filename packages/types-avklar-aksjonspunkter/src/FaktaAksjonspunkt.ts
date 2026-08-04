@@ -46,4 +46,4 @@ export type FaktaAksjonspunkt =
   | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART>
   // Tilbakekreving
   | TilbakekrevingAksjonspunktTilBekreftelse<AksjonspunktKodeTilbakekreving.AVKLAR_VERGE>
-  | AvklartFaktaFeilutbetalingAp;
+  | ({ '@type': '7003' } & AvklartFaktaFeilutbetalingAp);

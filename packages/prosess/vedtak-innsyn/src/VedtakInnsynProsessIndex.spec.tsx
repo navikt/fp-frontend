@@ -37,7 +37,7 @@ describe('VedtakInnsynProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: undefined,
-      kode: '5015',
+      '@type': '5015',
       mottattDato: '2019-01-01',
     });
   });
@@ -71,7 +71,7 @@ describe('VedtakInnsynProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en fritekst',
-      kode: '5015',
+      '@type': '5015',
       mottattDato: '2019-01-01',
     });
   });

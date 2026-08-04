@@ -86,7 +86,7 @@ const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspu
 });
 
 const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLÅ_VEDTAK> => ({
-  kode: AksjonspunktKode.FORESLÅ_VEDTAK,
+  '@type': AksjonspunktKode.FORESLÅ_VEDTAK,
   ...values,
   begrunnelse: values.begrunnelse === '' ? undefined : values.begrunnelse,
 });

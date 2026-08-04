@@ -48,7 +48,7 @@ describe('KlagevurderingProsessIndex', () => {
       klageMedholdÅrsak: 'ULIK_VURDERING',
       klageVurdering: 'MEDHOLD_I_KLAGE',
       klageVurderingOmgjør: 'GUNST_MEDHOLD_I_KLAGE',
-      kode: '5035',
+      '@type': '5035',
     });
 
     await userEvent.click(screen.getByText('Forhåndsvis brev'));
@@ -69,7 +69,7 @@ describe('KlagevurderingProsessIndex', () => {
       klageMedholdÅrsak: 'ULIK_VURDERING',
       klageVurdering: 'MEDHOLD_I_KLAGE',
       klageVurderingOmgjør: 'GUNST_MEDHOLD_I_KLAGE',
-      kode: '5035',
+      '@type': '5035',
     });
   });
 
@@ -112,7 +112,7 @@ describe('KlagevurderingProsessIndex', () => {
       klageMedholdÅrsak: undefined,
       klageVurdering: 'STADFESTE_YTELSESVEDTAK',
       klageVurderingOmgjør: undefined,
-      kode: '5035',
+      '@type': '5035',
     });
   });
 

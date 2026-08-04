@@ -31,7 +31,7 @@ describe('SvangerskapVilkarProsessIndex', () => {
       avslagskode: '1065',
       begrunnelse: 'Dette er en vurdering',
       erVilkårOk: false,
-      kode: '5092',
+      '@type': '5092',
     });
   });
 
@@ -57,7 +57,7 @@ describe('SvangerskapVilkarProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       erVilkårOk: true,
       begrunnelse: 'Dette er en vurdering',
-      kode: '5092',
+      '@type': '5092',
     });
   });
 

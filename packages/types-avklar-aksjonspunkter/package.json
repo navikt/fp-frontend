@@ -21,6 +21,8 @@
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "10.2.0",
+    "@navikt/ft-prosess-tilbakekreving": "11.2.0",
+    "@navikt/ft-prosess-tilbakekreving-foreldelse": "10.2.0",
     "@navikt/ft-prosess-tilbakekreving-vedtak": "9.2.0"
   },
   "devDependencies": {

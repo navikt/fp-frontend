@@ -136,7 +136,7 @@ const transformValues = (
 ):
   | AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART>
   | OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART> => ({
-  kode: erOverstyrt
+  '@type': erOverstyrt
     ? OverstyringKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART
     : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
   perioder,

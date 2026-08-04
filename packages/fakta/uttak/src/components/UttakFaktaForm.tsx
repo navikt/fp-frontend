@@ -308,7 +308,7 @@ const transformValues = (
 ): BekreftUttaksperioderAp => {
   return automatiskeAksjonspunkter.length > 0
     ? automatiskeAksjonspunkter.map(ap => ({
-        kode: validerApKodeOgHentApEnum(
+        '@type': validerApKodeOgHentApEnum(
           ap.definisjon,
           AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
           AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER,
@@ -320,7 +320,7 @@ const transformValues = (
       }))
     : [
         {
-          kode: OverstyringKode.OVERSTYRING_FAKTA_UTTAK,
+          '@type': OverstyringKode.OVERSTYRING_FAKTA_UTTAK,
           perioder,
           ...FaktaBegrunnelseTextField.transformValues(values),
         },

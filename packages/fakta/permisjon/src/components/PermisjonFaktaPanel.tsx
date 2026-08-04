@@ -131,7 +131,7 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], sorterteArbeidsforho
 const transformValues = (
   values: FormValues,
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO> => ({
-  kode: AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
+  '@type': AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO,
   arbeidsforhold: values.arbeidsforhold.map(a => ({
     arbeidsgiverIdent: a.arbeidsgiverIdent,
     internArbeidsforholdId: a.internArbeidsforholdId,

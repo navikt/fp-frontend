@@ -3,6 +3,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
+import { sortPeriodsByFom } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, OverstyringKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
@@ -150,7 +151,7 @@ const transformValues = (søkersPerioder: PeriodeSoker[], aksjonspunkter: Aksjon
   const perioder = søkersPerioder.map(mapPerioderTilBekreftelse);
   if (skalSendeInnOverstyringAp) {
     return {
-      kode: OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
+      '@type': OverstyringKode.OVERSTYRING_AV_UTTAKPERIODER,
       perioder,
     };
   }
@@ -159,7 +160,7 @@ const transformValues = (søkersPerioder: PeriodeSoker[], aksjonspunkter: Aksjon
     .map(ap => ap.definisjon);
 
   return apKoder.map(ap => ({
-    kode: validerApKodeOgHentApEnum(
+    '@type': validerApKodeOgHentApEnum(
       ap,
       AksjonspunktKode.FASTSETT_UTTAKPERIODER,
       AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT,
@@ -185,16 +186,6 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[] | undefined;
 }
-
-const sortByDate = (a: PeriodeSoker, b: PeriodeSoker): number => {
-  if (a.fom < b.fom) {
-    return -1;
-  }
-  if (a.fom > b.fom) {
-    return 1;
-  }
-  return 0;
-};
 
 const erOrdinærPeriode = (periode: PeriodeSoker | AnnenforelderUttakEøsPeriode): periode is PeriodeSoker => {
   return 'periodeResultatType' in periode;
@@ -272,7 +263,7 @@ export const UttakProsessPanel = ({
 
   const oppdaterPeriode = (oppdatertePerioder: PeriodeSoker[]) => {
     const andrePerioder = perioder.filter(p => p.fom !== oppdatertePerioder[0]?.fom);
-    const nyePerioder = andrePerioder.concat(oppdatertePerioder).sort(sortByDate);
+    const nyePerioder = andrePerioder.concat(oppdatertePerioder).sort(sortPeriodsByFom);
     setPerioder(nyePerioder);
     setIsDirty(true);
 

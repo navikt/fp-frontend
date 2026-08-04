@@ -109,7 +109,7 @@ const transformValues = (
   aksjonspunkterForPanel
     .filter(ap => ap.kanLoses)
     .map(ap => ({
-      kode: validerApKodeOgHentApEnum(
+      '@type': validerApKodeOgHentApEnum(
         ap.definisjon,
         AksjonspunktKode.FORESLÅ_VEDTAK,
         AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT,

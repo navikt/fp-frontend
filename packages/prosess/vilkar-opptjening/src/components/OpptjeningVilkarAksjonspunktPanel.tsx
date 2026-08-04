@@ -119,5 +119,5 @@ const transformValues = (
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET> => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
-  kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET,
+  '@type': AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET,
 });

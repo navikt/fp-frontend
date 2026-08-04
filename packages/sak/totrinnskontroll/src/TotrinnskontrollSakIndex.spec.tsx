@@ -30,26 +30,22 @@ describe('TotrinnskontrollSakIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      erAlleAksjonspunktGodkjent: true,
-      fatterVedtakAksjonspunktDto: {
-        '@type': '5016',
-        aksjonspunktGodkjenningDtos: [
-          {
-            aksjonspunktKode: '5082',
-            arsaker: [],
-            begrunnelse: undefined,
-            godkjent: true,
-          },
-          {
-            aksjonspunktKode: '5035',
-            arsaker: [],
-            begrunnelse: undefined,
-            godkjent: true,
-          },
-        ],
-        begrunnelse: undefined,
-        kode: '5016',
-      },
+      '@type': '5016',
+      aksjonspunktGodkjenningDtos: [
+        {
+          aksjonspunktKode: '5082',
+          arsaker: [],
+          begrunnelse: undefined,
+          godkjent: true,
+        },
+        {
+          aksjonspunktKode: '5035',
+          arsaker: [],
+          begrunnelse: undefined,
+          godkjent: true,
+        },
+      ],
+      begrunnelse: undefined,
     });
   });
 
@@ -77,26 +73,22 @@ describe('TotrinnskontrollSakIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      erAlleAksjonspunktGodkjent: false,
-      fatterVedtakAksjonspunktDto: {
-        '@type': '5016',
-        aksjonspunktGodkjenningDtos: [
-          {
-            aksjonspunktKode: '5082',
-            arsaker: [],
-            begrunnelse: undefined,
-            godkjent: true,
-          },
-          {
-            aksjonspunktKode: '5035',
-            arsaker: ['FEIL_FAKTA', 'FEIL_LOV'],
-            begrunnelse: 'Dette er en begrunnelse',
-            godkjent: false,
-          },
-        ],
-        begrunnelse: undefined,
-        kode: '5016',
-      },
+      '@type': '5016',
+      aksjonspunktGodkjenningDtos: [
+        {
+          aksjonspunktKode: '5082',
+          arsaker: [],
+          begrunnelse: undefined,
+          godkjent: true,
+        },
+        {
+          aksjonspunktKode: '5035',
+          arsaker: ['FEIL_FAKTA', 'FEIL_LOV'],
+          begrunnelse: 'Dette er en begrunnelse',
+          godkjent: false,
+        },
+      ],
+      begrunnelse: undefined,
     });
   });
 

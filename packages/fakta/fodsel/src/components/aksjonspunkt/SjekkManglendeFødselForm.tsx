@@ -97,7 +97,7 @@ const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt):
 });
 
 const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL> => ({
-  kode: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
+  '@type': AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
   ...Termindato.transformValues(values),
   ...ErBarnFødt.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),

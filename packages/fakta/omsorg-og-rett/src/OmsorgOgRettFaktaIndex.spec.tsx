@@ -43,7 +43,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
-      kode: '5060',
+      '@type': '5060',
       begrunnelse: 'Dette er en begrunnelse',
       aleneomsorg: true,
       annenforelderHarRett: undefined,
@@ -73,7 +73,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
-      kode: '5060',
+      '@type': '5060',
       begrunnelse: 'Dette er en begrunnelse',
       aleneomsorg: false,
       annenforelderHarRett: true,
@@ -108,7 +108,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
-      kode: '5086',
+      '@type': '5086',
       begrunnelse: 'Dette er en begrunnelse',
       annenforelderHarRett: true,
       annenforelderMottarUføretrygd: undefined,
@@ -140,7 +140,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
-      kode: '5086',
+      '@type': '5086',
       begrunnelse: 'Dette er en begrunnelse',
       annenforelderHarRett: false,
       annenForelderHarRettEØS: false,
@@ -229,7 +229,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
-      kode: '6018',
+      '@type': '6018',
       begrunnelse: 'Dette er en begrunnelse',
       rettighetstype: 'BEGGE_RETT',
     });

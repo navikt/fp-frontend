@@ -23,7 +23,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5103',
+      '@type': '5103',
       begrunnelse: 'Dette er en begrunnelse',
       perioder: [],
     });
@@ -57,7 +57,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5103',
+      '@type': '5103',
       begrunnelse: 'Dette er en begrunnelse',
       perioder: [
         {
@@ -86,7 +86,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5103',
+      '@type': '5103',
       begrunnelse: 'Dette er en begrunnelse',
       perioder: [
         {
@@ -166,7 +166,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5103',
+      '@type': '5103',
       begrunnelse: 'Dette er en begrunnelse',
       perioder: [
         {
@@ -203,7 +203,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '6103',
+      '@type': '6103',
       begrunnelse: 'Dette er en begrunnelse',
       perioder: [
         {

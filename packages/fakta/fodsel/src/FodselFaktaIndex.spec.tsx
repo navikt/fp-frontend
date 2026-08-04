@@ -97,7 +97,7 @@ describe('FodselFaktaIndex', () => {
       await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
       expect(lagre).toHaveBeenNthCalledWith(1, {
         begrunnelse: 'Dette er en begrunnelse',
-        kode: '5001',
+        '@type': '5001',
         termindato: '2025-06-25',
         utstedtdato: '2025-05-21',
         antallBarn: 2,
@@ -138,7 +138,7 @@ describe('FodselFaktaIndex', () => {
 
       await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
       expect(lagre).toHaveBeenNthCalledWith(1, {
-        kode: '5027',
+        '@type': '5027',
         barn: [
           {
             fødselsdato: '2025-05-04',
@@ -194,7 +194,7 @@ describe('FodselFaktaIndex', () => {
 
       await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
       expect(lagre).toHaveBeenNthCalledWith(1, {
-        kode: '5027',
+        '@type': '5027',
         barn: undefined,
         termindato: '2025-05-06',
         begrunnelse: 'Dette er en begrunnelse',
@@ -234,7 +234,7 @@ describe('FodselFaktaIndex', () => {
 
       await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
       expect(lagre).toHaveBeenNthCalledWith(1, {
-        kode: '6019',
+        '@type': '6019',
         termindato: '2025-06-11',
         barn: [
           {

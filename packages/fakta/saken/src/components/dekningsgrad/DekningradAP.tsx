@@ -116,7 +116,7 @@ const buildInitialValues = (ytelseFordeling: Ytelsefordeling, aksjonspunkt: Aksj
 });
 
 const transformValues = (values: FormValues): AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_DEKNINGSGRAD> => ({
-  kode: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+  '@type': AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
   dekningsgrad: notEmpty(values.dekningsgrad),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

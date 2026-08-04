@@ -97,6 +97,6 @@ const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
 const transformValues = (
   values: FormValues,
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL> => ({
-  kode: AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL,
+  '@type': AksjonspunktKode.MANUELL_KONTROLL_AAP_KOMBINERT_ATFL,
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

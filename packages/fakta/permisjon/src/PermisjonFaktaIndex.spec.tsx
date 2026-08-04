@@ -36,7 +36,7 @@ describe('PermisjonFaktaIndex', () => {
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
-      kode: '5041',
+      '@type': '5041',
       begrunnelse: 'Dette er en begrunnelse',
       arbeidsforhold: [
         {
@@ -74,7 +74,7 @@ describe('PermisjonFaktaIndex', () => {
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
-      kode: '5041',
+      '@type': '5041',
       begrunnelse: 'Dette er en begrunnelse',
       arbeidsforhold: [
         {

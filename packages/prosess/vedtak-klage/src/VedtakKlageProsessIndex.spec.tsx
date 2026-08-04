@@ -32,7 +32,7 @@ describe('VedtakKlageProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
       {
-        kode: '5015',
+        '@type': '5015',
       },
     ]);
   });

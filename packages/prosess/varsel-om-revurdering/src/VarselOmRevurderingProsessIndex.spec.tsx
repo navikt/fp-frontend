@@ -27,7 +27,7 @@ describe('VarselOmRevurderingProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      kode: '5026',
+      '@type': '5026',
       sendVarsel: false,
     });
   });
@@ -64,7 +64,7 @@ describe('VarselOmRevurderingProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       frist: dayjs().add(28, 'days').format(ISO_DATE_FORMAT),
-      kode: '5026',
+      '@type': '5026',
       sendVarsel: true,
       ventearsak: 'AVV_DOK',
     });
@@ -88,7 +88,7 @@ describe('VarselOmRevurderingProsessIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      kode: '5026',
+      '@type': '5026',
       sendVarsel: false,
     });
   });

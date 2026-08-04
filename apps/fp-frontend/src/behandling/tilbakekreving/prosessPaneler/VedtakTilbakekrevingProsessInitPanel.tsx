@@ -97,6 +97,9 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
             erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage ?? false}
             erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
             {...standardPanelProps}
+            submitCallback={aksjonspunktdata =>
+              standardPanelProps.submitCallback({ '@type': aksjonspunktdata.kode, ...aksjonspunktdata })
+            }
             behandlingUuid={behandling.uuid}
           />
         ) : (

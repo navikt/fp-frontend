@@ -30,7 +30,7 @@ describe('OmsorgFaktaIndex', () => {
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
-      kode: '5061',
+      '@type': '5061',
       begrunnelse: 'Dette er en begrunnelse',
       omsorg: true,
     });
@@ -55,7 +55,7 @@ describe('OmsorgFaktaIndex', () => {
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
-      kode: '5061',
+      '@type': '5061',
       begrunnelse: 'Dette er en begrunnelse',
       omsorg: false,
     });

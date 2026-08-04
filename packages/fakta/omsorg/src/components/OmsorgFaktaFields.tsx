@@ -9,8 +9,6 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-const { AVKLAR_LØPENDE_OMSORG } = AksjonspunktKode;
-
 export type FormValues = {
   omsorg?: boolean;
 };
@@ -23,7 +21,10 @@ interface Props {
 export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props) => {
   const { control } = useFormContext<FormValues>();
   return (
-    <FaktaGruppe withoutBorder merknaderFraBeslutter={alleMerknaderFraBeslutter[AVKLAR_LØPENDE_OMSORG]}>
+    <FaktaGruppe
+      withoutBorder
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_LØPENDE_OMSORG]}
+    >
       <TrueFalseInput
         name="omsorg"
         control={control}
@@ -46,6 +47,6 @@ OmsorgFaktaFields.initialValues = (ytelsefordeling: Ytelsefordeling, omsorgAp: A
 OmsorgFaktaFields.transformValues = (
   values: FormValues,
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_LØPENDE_OMSORG> => ({
-  kode: AVKLAR_LØPENDE_OMSORG,
+  '@type': AksjonspunktKode.AVKLAR_LØPENDE_OMSORG,
   omsorg: values.omsorg || false,
 });

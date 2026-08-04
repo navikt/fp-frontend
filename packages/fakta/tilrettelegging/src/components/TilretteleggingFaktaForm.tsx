@@ -173,7 +173,7 @@ const mapTilTilrettelegging = (
 const transformValues = (
   values: TilretteleggingFormValues,
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_SVP_TILRETTELEGGING> => ({
-  kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
+  '@type': AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
   termindato: notEmpty(values.termindato),
   fødselsdato: values.fødselsdato,
   begrunnelse: values.begrunnelse || undefined,

@@ -11,12 +11,12 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { OverstyringKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett, type Rettighetstype } from '@navikt/fp-types';
 import type { OverstyringAksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './overstyrRettigheterForm.module.css';
 
 type FormValues = {
-  rettighetstype: Rettighetstype;
+  rettighetstype: Rettighetstype | undefined;
 } & FaktaBegrunnelseFormValues;
 
 interface Props {
@@ -102,7 +102,7 @@ const buildInitialValues = (omsorgOgRett: OmsorgOgRett, aksjonspunkt?: Aksjonspu
 const transformValues = (
   values: FormValues,
 ): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG> => ({
-  kode: OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG,
-  rettighetstype: values.rettighetstype,
+  '@type': OverstyringKode.OVERSTYRING_AV_RETT_OG_OMSORG,
+  rettighetstype: notEmpty(values.rettighetstype),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

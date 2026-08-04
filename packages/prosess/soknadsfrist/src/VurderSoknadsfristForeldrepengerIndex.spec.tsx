@@ -31,7 +31,7 @@ describe('VurderSoknadsfristForeldrepengerIndex', () => {
       ansesMottattDato: '2019-01-01',
       begrunnelse: 'Dette er en vurdering',
       harGyldigGrunn: false,
-      kode: '5043',
+      '@type': '5043',
     });
   });
 
@@ -63,7 +63,7 @@ describe('VurderSoknadsfristForeldrepengerIndex', () => {
       ansesMottattDato: '2020-01-01',
       begrunnelse: 'Dette er en vurdering',
       harGyldigGrunn: true,
-      kode: '5043',
+      '@type': '5043',
     });
   });
 });

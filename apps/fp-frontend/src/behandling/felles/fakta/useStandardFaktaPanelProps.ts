@@ -71,13 +71,10 @@ const getBekreftAksjonspunktFaktaCallback =
     lagreOverstyrteAksjonspunkter: (params: OverstyrteAksjonspunktArgs) => Promise<Behandling>,
     overstyringApCodes: string[],
   ) =>
-  (aksjonspunkter: FaktaAksjonspunkt | FaktaAksjonspunkt[]): Promise<void> => {
-    const apListe = Array.isArray(aksjonspunkter) ? aksjonspunkter : [aksjonspunkter];
-
-    const model = apListe.map(ap => ({
-      '@type': ap.kode,
-      ...ap,
-    }));
+  (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]): Promise<void> => {
+    const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
+      ? aksjonspunkterSomSkalLagres
+      : [aksjonspunkterSomSkalLagres];
 
     const params = {
       saksnummer: fagsak.saksnummer,
@@ -85,32 +82,29 @@ const getBekreftAksjonspunktFaktaCallback =
       behandlingVersjon: behandling.versjon,
     };
 
-    if (overstyringApCodes.length > 0) {
-      if (model.length === 0) {
-        throw new Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
-      }
-      if (overstyringApCodes.includes(model[0]?.kode ?? '')) {
-        return lagreOverstyrteAksjonspunkter({
-          ...params,
-          overstyrteAksjonspunktDtoer: model,
-        }).then(() => {
-          oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
-          globalThis.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          });
-        });
-      }
-    }
-
-    return lagreAksjonspunkter({
-      ...params,
-      bekreftedeAksjonspunktDtoer: model,
-    }).then(() => {
+    const etterLagringCallback = () => {
       oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
       globalThis.scrollTo({
         top: 0,
         behavior: 'smooth',
       });
-    });
+    };
+
+    if (apListe.length === 0) {
+      throw new Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
+    }
+
+    if (overstyringApCodes.length > 0) {
+      if (apListe.every(ap => overstyringApCodes.includes(ap['@type']))) {
+        return lagreOverstyrteAksjonspunkter({
+          ...params,
+          overstyrteAksjonspunktDtoer: apListe,
+        }).then(etterLagringCallback);
+      }
+    }
+
+    return lagreAksjonspunkter({
+      ...params,
+      bekreftedeAksjonspunktDtoer: apListe,
+    }).then(etterLagringCallback);
   };

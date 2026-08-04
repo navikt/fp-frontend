@@ -63,6 +63,6 @@ EtterbetalingSøkerForm.initialValues = (aksjonspunkt?: Aksjonspunkt): Etterbeta
 EtterbetalingSøkerForm.transformValues = (
   values: EtterbetalingSøkerFormValues,
 ): AksjonspunktTilBekreftelse<AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER> => ({
-  kode: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+  '@type': AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
   begrunnelse: values.begrunnelseEtterbetaling,
 });

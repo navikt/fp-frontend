@@ -119,7 +119,7 @@ const transformValues = (
   values: FormValues,
 ): OverstyringAksjonspunktTilBekreftelse<OverstyringKode.SØKERS_OPPLYSNINGSPLIKT_OVST> => {
   return {
-    kode: OverstyringKode.SØKERS_OPPLYSNINGSPLIKT_OVST,
+    '@type': OverstyringKode.SØKERS_OPPLYSNINGSPLIKT_OVST,
     ...VilkarResultPicker.transformValues(values),
     ...ProsessStegBegrunnelseTextField.transformValues(values),
   };

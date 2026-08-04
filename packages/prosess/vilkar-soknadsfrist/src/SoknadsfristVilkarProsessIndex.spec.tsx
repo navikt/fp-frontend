@@ -30,7 +30,7 @@ describe('SoknadsfristVilkarProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
       erVilkårOk: true,
-      kode: '5007',
+      '@type': '5007',
     });
   });
 

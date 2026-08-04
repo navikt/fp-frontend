@@ -10,8 +10,8 @@ import {
   SoknadData,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import type { AksjonspunktTilBekreftelse } from '../../PapirsøknadAp';
 import { RegistreringAdopsjonOgOmsorgGrid } from './RegistreringAdopsjonOgOmsorgGrid';
 import { RegistreringFodselGrid } from './RegistreringFodselGrid';
 

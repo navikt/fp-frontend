@@ -7,17 +7,17 @@ import type {
 
 export type AksjonspunktTilBekreftelse<K extends AksjonspunktKode> = Extract<
   BekreftetAksjonspunktDto,
-  { kode: `${K}` }
+  { '@type': `${K}` }
 >;
 
 export type TilbakekrevingAksjonspunktTilBekreftelse<K extends AksjonspunktKodeTilbakekreving> = Extract<
   BekreftetTilbakekrevingAksjonspunktDto,
-  { kode: `${K}` }
+  { '@type': `${K}` }
 >;
 
 export type OverstyringAksjonspunktTilBekreftelse<K extends OverstyringKode> = Extract<
   OverstyringAksjonspunktDto,
-  { kode: `${K}` }
+  { '@type': `${K}` }
 >;
 
 export type BekreftedeAksjonspunkterDto = {

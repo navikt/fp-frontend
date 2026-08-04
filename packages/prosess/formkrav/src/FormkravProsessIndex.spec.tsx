@@ -43,7 +43,7 @@ describe('FormkravProsessIndex', () => {
       erSignert: true,
       erTilbakekreving: false,
       fritekstTilBrev: undefined,
-      kode: '5082',
+      '@type': '5082',
       mottattDato: '2025-08-26',
       tilbakekrevingInfo: undefined,
       vedtakBehandlingUuid: '1',

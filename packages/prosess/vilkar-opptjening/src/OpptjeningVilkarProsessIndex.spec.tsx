@@ -29,7 +29,7 @@ describe('OpptjeningVilkarProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
       erVilkårOk: true,
-      kode: '5089',
+      '@type': '5089',
     });
   });
 
@@ -62,7 +62,7 @@ describe('OpptjeningVilkarProsessIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
       erVilkårOk: false,
-      kode: '5089',
+      '@type': '5089',
       avslagskode: undefined,
     });
   });

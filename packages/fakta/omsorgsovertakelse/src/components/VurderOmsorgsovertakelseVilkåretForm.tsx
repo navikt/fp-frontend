@@ -242,7 +242,7 @@ const transformValues = (
   barn: alleBarn
     .filter(b => values.barnSomSkalVurderes.includes(b.barnNummer))
     .map(({ barnNummer, fødselsdato }) => ({ barnNummer, fødselsdato })),
-  kode: AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
+  '@type': AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
 

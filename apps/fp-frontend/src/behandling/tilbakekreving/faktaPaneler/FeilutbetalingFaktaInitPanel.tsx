@@ -53,7 +53,9 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
           kodeverkSamlingFpsak={standardPanelProps.alleKodeverk}
           isAksjonspunktOpen={standardPanelProps.harÅpentAksjonspunkt}
           {...standardPanelProps}
-          submitCallback={standardPanelProps.submitCallback}
+          submitCallback={aksjonspunktdata =>
+            standardPanelProps.submitCallback({ '@type': aksjonspunktdata.kode, ...aksjonspunktdata })
+          }
         />
       ) : (
         <LoadingPanel />
