@@ -4,7 +4,7 @@ export type TilretteleggingFormValues = {
   arbeidsforhold: Tilrettelegging[];
   termindato: string;
   fødselsdato: string;
-  begrunnelse: string;
+  begrunnelse: string | undefined;
 };
 
 export type Tilrettelegging = BekreftTilrettelegging & {

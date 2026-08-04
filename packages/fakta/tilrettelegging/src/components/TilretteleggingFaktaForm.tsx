@@ -1,9 +1,9 @@
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfForm } from '@navikt/ft-form-hooks';
-import { hasValidDate, required } from '@navikt/ft-form-validators';
+import { RhfDatepicker, RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
+import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
@@ -23,6 +23,9 @@ import type { Tilrettelegging, TilretteleggingFormValues } from '../types/Tilret
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
 import { alfabetiskArbeidsforhold } from './arbeidsforholdUtils';
 import { harUvurderteVelferdspermisjoner, TilretteleggingFormFeil } from './TilretteleggingFormFeil';
+
+const minLength3 = minLength(3);
+const maxLength1000 = maxLength(1000);
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -49,11 +52,6 @@ export const TilretteleggingFaktaForm = ({
       buildInitialValues(svangerskapspengerTilrettelegging, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId),
   });
 
-  const begrunnelse = useWatch({
-    control: formMethods.control,
-    name: 'begrunnelse',
-  });
-
   const skalVurdereVelferdspermisjoner = harUvurderteVelferdspermisjoner(
     svangerskapspengerTilrettelegging.arbeidsforholdListe,
   );
@@ -78,6 +76,7 @@ export const TilretteleggingFaktaForm = ({
             {harFAISU && <FormattedMessage id="TilretteleggingFaktaForm.AksjonpunktFAISU" />}
           </AksjonspunktHelpTextHTML>
         )}
+
         <HStack gap="space-16">
           <RhfDatepicker
             name="termindato"
@@ -86,6 +85,7 @@ export const TilretteleggingFaktaForm = ({
             validate={[required, hasValidDate]}
             readOnly={isReadOnly}
           />
+
           {svangerskapspengerTilrettelegging.fødselsdato && (
             <RhfDatepicker
               name="fødselsdato"
@@ -96,24 +96,32 @@ export const TilretteleggingFaktaForm = ({
             />
           )}
         </HStack>
+
         <ArbeidsforholdFieldArray
           aoiArbeidsforhold={aoiArbeidsforhold}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           readOnly={isReadOnly}
           uttakArbeidTyper={uttakArbeidTyper}
         />
+
         <TilretteleggingFormFeil />
-        <FaktaBegrunnelseTextField
+
+        <RhfTextarea
+          name="begrunnelse"
           control={formMethods.control}
-          isReadOnly={isReadOnly}
-          isSubmittable={isSubmittable}
-          hasBegrunnelse={!!begrunnelse}
+          size="small"
+          readOnly={isReadOnly}
+          label={<FormattedMessage id="TilretteleggingFaktaForm.BegrunnEndringene" />}
           description={
-            harFAISU
-              ? intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnelseDescription.MedSplitt' })
-              : intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnelseDescription.UtenSplitt' })
+            harFAISU ? (
+              <FormattedMessage id="TilretteleggingFaktaForm.BegrunnelseDescription.MedSplitt" />
+            ) : (
+              <FormattedMessage id="TilretteleggingFaktaForm.BegrunnelseDescription.UtenSplitt" />
+            )
           }
+          validate={[minLength3, maxLength1000, hasValidText]}
         />
+
         <FaktaSubmitButton
           isSubmittable={isSubmittable}
           isReadOnly={isReadOnly}
@@ -166,7 +174,7 @@ const transformValues = (values: TilretteleggingFormValues): BekreftSvangerskaps
   kode: AksjonspunktKode.VURDER_SVP_TILRETTELEGGING,
   termindato: notEmpty(values.termindato),
   fødselsdato: values.fødselsdato,
-  begrunnelse: values.begrunnelse,
+  begrunnelse: values.begrunnelse || undefined,
   bekreftetSvpArbeidsforholdList: values.arbeidsforhold.map(mapTilBekreftTilrettelegging),
 });
 
