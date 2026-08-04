@@ -21,7 +21,7 @@
     "@editorjs/editorjs": "2.31.6",
     "@editorjs/header": "2.8.9",
     "@editorjs/list": "2.0.9",
-    "@editorjs/paragraph": "2.11.7",
+    "@editorjs/paragraph": "3.0.0",
     "@navikt/aksel-icons": "8.16.1",
     "@navikt/ds-react": "8.16.1",
     "@navikt/fp-utils": "workspace:*",
