@@ -122,7 +122,7 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values, avsluttedeBehandlinger))}
+      onSubmit={values => submitCallback(transformValues(values, avsluttedeBehandlinger))}
       setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="space-16">

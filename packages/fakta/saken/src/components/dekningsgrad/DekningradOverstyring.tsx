@@ -95,7 +95,7 @@ export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverst
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values)).then(slåAvEditeringAvDekningsgrad)}
+      onSubmit={values => submitCallback(transformValues(values)).then(slåAvEditeringAvDekningsgrad)}
       setDataOnUnmount={setMellomlagretFormData}
     >
       <AksjonspunktBoks

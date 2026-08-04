@@ -111,7 +111,7 @@ export const VilkarresultatMedOverstyringForm = ({
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values, overstyringApKode))}
+      onSubmit={values => submitCallback(transformValues(values, overstyringApKode))}
       setDataOnUnmount={setMellomlagretFormData}
     >
       <HStack gap="space-16">

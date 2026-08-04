@@ -173,8 +173,6 @@ export const NyBehandlingModal = ({
 
   const formMethods = useForm<FormValues>();
 
-  const onSubmit = (values: FormValues) => submitCallback(transformValues(values, uuidForSistLukkede, ytelseType));
-
   const valgtBehandlingTypeKode = useWatch({ control: formMethods.control, name: 'behandlingType' });
 
   const behandlingTyper = getBehandlingTyper(behandlingstyper);
@@ -193,7 +191,10 @@ export const NyBehandlingModal = ({
   return (
     <Dialog open onOpenChange={cancelEvent}>
       <Dialog.Popup className={styles['modal']}>
-        <RhfForm formMethods={formMethods} onSubmit={onSubmit}>
+        <RhfForm
+          formMethods={formMethods}
+          onSubmit={values => submitCallback(transformValues(values, uuidForSistLukkede, ytelseType))}
+        >
           <Dialog.Header>
             <Dialog.Title>
               <FormattedMessage id="MenyNyBehandlingIndex.OpprettNyForstegangsbehandling" />

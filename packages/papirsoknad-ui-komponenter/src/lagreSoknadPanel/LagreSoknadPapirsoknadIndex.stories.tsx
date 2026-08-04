@@ -20,7 +20,7 @@ const meta = {
     return (
       <RhfForm
         formMethods={formMethods}
-        onSubmit={val => submitCallback(LagreSoknadPapirsoknadIndex.transformValues(val))}
+        onSubmit={values => submitCallback(LagreSoknadPapirsoknadIndex.transformValues(values))}
       >
         <LagreSoknadPapirsoknadIndex {...args} />
       </RhfForm>

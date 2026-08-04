@@ -56,7 +56,7 @@ export const FodselVilkarForm = ({ status }: Props) => {
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
+      onSubmit={values => submitCallback(transformValues(values, aksjonspunkterForPanel))}
       setDataOnUnmount={setMellomlagretFormData}
     >
       <ProsessPanelTemplate
