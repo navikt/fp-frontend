@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
 
 import { IngenBehandlingValgtPanel } from '@navikt/fp-sak-infosider';
 import type { Behandling } from '@navikt/fp-types';

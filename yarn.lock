@@ -1610,7 +1610,7 @@ __metadata:
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
     react-intl: "npm:10.1.19"
-    react-router-dom: "npm:7.18.2"
+    react-router: "npm:7.18.2"
     storybook: "npm:10.5.5"
     typescript: "npm:6.0.3"
     vite: "npm:8.2.0"
@@ -1662,7 +1662,7 @@ __metadata:
     react-dom: "npm:19.2.8"
     react-hook-form: "npm:7.84.0"
     react-intl: "npm:10.1.19"
-    react-router-dom: "npm:7.18.2"
+    react-router: "npm:7.18.2"
     storybook: "npm:10.5.5"
     stylelint: "npm:17.14.1"
     tailwindcss: "npm:4.3.3"
@@ -1704,7 +1704,7 @@ __metadata:
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
     react-intl: "npm:10.1.19"
-    react-router-dom: "npm:7.18.2"
+    react-router: "npm:7.18.2"
     storybook: "npm:10.5.5"
     stylelint: "npm:17.14.1"
     typescript: "npm:6.0.3"
@@ -2624,7 +2624,7 @@ __metadata:
     react-hook-form: "npm:7.84.0"
     react-intl: "npm:10.1.19"
     react-responsive: "npm:10.0.1"
-    react-router-dom: "npm:7.18.2"
+    react-router: "npm:7.18.2"
     storybook: "npm:10.5.5"
     tailwindcss: "npm:4.3.3"
     typescript: "npm:6.0.3"
@@ -2672,7 +2672,7 @@ __metadata:
     react-dom: "npm:19.2.8"
     react-hook-form: "npm:7.84.0"
     react-intl: "npm:10.1.19"
-    react-router-dom: "npm:7.18.2"
+    react-router: "npm:7.18.2"
     storybook: "npm:10.5.5"
     stylelint: "npm:17.14.1"
     tailwindcss: "npm:4.3.3"
@@ -2884,7 +2884,7 @@ __metadata:
     react-dom: "npm:19.2.8"
     react-hook-form: "npm:7.84.0"
     react-intl: "npm:10.1.19"
-    react-router-dom: "npm:7.18.2"
+    react-router: "npm:7.18.2"
     storybook: "npm:10.5.5"
     typescript: "npm:6.0.3"
     vite: "npm:8.2.0"
@@ -3863,7 +3863,7 @@ __metadata:
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
     react-intl: "npm:10.1.19"
-    react-router-dom: "npm:7.18.2"
+    react-router: "npm:7.18.2"
     storybook: "npm:10.5.5"
     stylelint: "npm:17.14.1"
     typescript: "npm:6.0.3"
@@ -4295,7 +4295,7 @@ __metadata:
     react-dom: "npm:19.2.8"
     react-hook-form: "npm:7.84.0"
     react-intl: "npm:10.1.19"
-    react-router-dom: "npm:7.18.2"
+    react-router: "npm:7.18.2"
     storybook: "npm:10.5.5"
     stylelint: "npm:17.14.1"
     typescript: "npm:6.0.3"
@@ -4380,7 +4380,7 @@ __metadata:
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
     react-intl: "npm:10.1.19"
-    react-router-dom: "npm:7.18.2"
+    react-router: "npm:7.18.2"
     storybook: "npm:10.5.5"
     typescript: "npm:6.0.3"
   languageName: unknown
@@ -6631,13 +6631,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/history@npm:^4.7.11":
-  version: 4.7.11
-  resolution: "@types/history@npm:4.7.11"
-  checksum: 10/1da529a3485f3015daf794effa3185493bf7dd2551c26932389c614f5a0aab76ab97645897d1eef9c74ead216a3848fcaa019f165bbd6e4b71da6eff164b4c68
-  languageName: node
-  linkType: hard
-
 "@types/json-schema@npm:7.0.15, @types/json-schema@npm:^7.0.15":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
@@ -6676,36 +6669,6 @@ __metadata:
   peerDependencies:
     "@types/react": ^19.2.0
   checksum: 10/616c4a8aee250ea05fb1e7b98e7e00475dd3a6c1c30d7be18b4b93caba832f4203106b3a496a6b147e5acc2da14575eca47bce234c633bca1f8430ef8ffb234a
-  languageName: node
-  linkType: hard
-
-"@types/react-router-dom@npm:5.3.3":
-  version: 5.3.3
-  resolution: "@types/react-router-dom@npm:5.3.3"
-  dependencies:
-    "@types/history": "npm:^4.7.11"
-    "@types/react": "npm:*"
-    "@types/react-router": "npm:*"
-  checksum: 10/28c4ea48909803c414bf5a08502acbb8ba414669b4b43bb51297c05fe5addc4df0b8fd00e0a9d1e3535ec4073ef38aaafac2c4a2b95b787167d113bc059beff3
-  languageName: node
-  linkType: hard
-
-"@types/react-router@npm:*":
-  version: 5.1.20
-  resolution: "@types/react-router@npm:5.1.20"
-  dependencies:
-    "@types/history": "npm:^4.7.11"
-    "@types/react": "npm:*"
-  checksum: 10/72d78d2f4a4752ec40940066b73d7758a0824c4d0cbeb380ae24c8b1cdacc21a6fc835a99d6849b5b295517a3df5466fc28be038f1040bd870f8e39e5ded43a4
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:*":
-  version: 19.2.14
-  resolution: "@types/react@npm:19.2.14"
-  dependencies:
-    csstype: "npm:^3.2.2"
-  checksum: 10/fbff239089ee64b6bd9b00543594db498278b06de527ef1b0f71bb0eb09cc4445a71b5dd3c0d3d0257255c4eed94406be40a74ad4a987ade8a8d5dd65c82bc5f
   languageName: node
   linkType: hard
 
@@ -9096,7 +9059,6 @@ __metadata:
     "@testing-library/jest-dom": "npm:7.0.0"
     "@types/react": "npm:19.2.17"
     "@types/react-dom": "npm:19.2.3"
-    "@types/react-router-dom": "npm:5.3.3"
     eslint: "npm:10.8.0"
     husky: "npm:9.1.7"
     jsdom: "npm:30.0.1"
@@ -11743,18 +11705,6 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
   checksum: 10/4f3659be972be889445f396ceb680b26ba01886c906ae6efce2985c9a9cd58ef1de6907d37658ed74f41cbc9071823a3cdcb41887da84ebfeb563e329b453ea5
-  languageName: node
-  linkType: hard
-
-"react-router-dom@npm:7.18.2":
-  version: 7.18.2
-  resolution: "react-router-dom@npm:7.18.2"
-  dependencies:
-    react-router: "npm:7.18.2"
-  peerDependencies:
-    react: ">=18"
-    react-dom: ">=18"
-  checksum: 10/354a7af84963fe7acaf32c583f180b636b5071d9cf1f83090dba8ff2616ac65bba82aaf8e3cfa425d2a523a3318df3cfcf526462a154211c8abbf7ee70045a07
   languageName: node
   linkType: hard
 
