@@ -44,7 +44,7 @@
     "react-dom": "19.2.8",
     "react-hook-form": "7.84.0",
     "react-intl": "10.1.19",
-    "react-router-dom": "7.18.2"
+    "react-router": "7.18.2"
   },
   "devDependencies": {
     "@navikt/ds-css": "8.16.1",

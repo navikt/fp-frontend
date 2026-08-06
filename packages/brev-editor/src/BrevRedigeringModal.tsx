@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
-import { useHref, useLocation } from 'react-router-dom';
+import { useHref, useLocation } from 'react-router';
 
 import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import { Alert, Button, Dialog } from '@navikt/ds-react';

@@ -1,4 +1,4 @@
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 
 import type { Meta, StoryObj } from '@storybook/react';
 import { cleanUrl, http, HttpResponse, type JsonBodyType } from 'msw';

@@ -1,6 +1,6 @@
 import { type ComponentProps } from 'react';
 import { useIntl } from 'react-intl';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import type { Theme } from '@navikt/ds-react';
 

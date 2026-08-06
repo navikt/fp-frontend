@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { Alert, BodyShort, Button, Dialog, HStack } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';

@@ -1,5 +1,5 @@
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 
 import { BodyShort, Link, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
@@ -35,8 +35,7 @@ export type AksjonspunktGodkjenningData = {
 type Props = {
   behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: (
-    | TotrinnskontrollSkjermlenkeContext
-    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
   readOnly: boolean;
   erTilbakekreving: boolean;
