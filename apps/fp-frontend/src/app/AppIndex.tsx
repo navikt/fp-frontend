@@ -1,5 +1,5 @@
 import { RawIntlProvider } from 'react-intl';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { createIntl } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
