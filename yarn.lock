@@ -1610,7 +1610,7 @@ __metadata:
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
     react-intl: "npm:10.1.19"
-    react-router: "npm:7.18.2"
+    react-router: "npm:8.3.0"
     storybook: "npm:10.5.5"
     typescript: "npm:6.0.3"
     vite: "npm:8.2.0"
@@ -1662,7 +1662,7 @@ __metadata:
     react-dom: "npm:19.2.8"
     react-hook-form: "npm:7.84.0"
     react-intl: "npm:10.1.19"
-    react-router: "npm:7.18.2"
+    react-router: "npm:8.3.0"
     storybook: "npm:10.5.5"
     stylelint: "npm:17.14.1"
     tailwindcss: "npm:4.3.3"
@@ -1704,7 +1704,7 @@ __metadata:
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
     react-intl: "npm:10.1.19"
-    react-router: "npm:7.18.2"
+    react-router: "npm:8.3.0"
     storybook: "npm:10.5.5"
     stylelint: "npm:17.14.1"
     typescript: "npm:6.0.3"
@@ -2624,7 +2624,7 @@ __metadata:
     react-hook-form: "npm:7.84.0"
     react-intl: "npm:10.1.19"
     react-responsive: "npm:10.0.1"
-    react-router: "npm:7.18.2"
+    react-router: "npm:8.3.0"
     storybook: "npm:10.5.5"
     tailwindcss: "npm:4.3.3"
     typescript: "npm:6.0.3"
@@ -2672,7 +2672,7 @@ __metadata:
     react-dom: "npm:19.2.8"
     react-hook-form: "npm:7.84.0"
     react-intl: "npm:10.1.19"
-    react-router: "npm:7.18.2"
+    react-router: "npm:8.3.0"
     storybook: "npm:10.5.5"
     stylelint: "npm:17.14.1"
     tailwindcss: "npm:4.3.3"
@@ -2884,7 +2884,7 @@ __metadata:
     react-dom: "npm:19.2.8"
     react-hook-form: "npm:7.84.0"
     react-intl: "npm:10.1.19"
-    react-router: "npm:7.18.2"
+    react-router: "npm:8.3.0"
     storybook: "npm:10.5.5"
     typescript: "npm:6.0.3"
     vite: "npm:8.2.0"
@@ -3863,7 +3863,7 @@ __metadata:
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
     react-intl: "npm:10.1.19"
-    react-router: "npm:7.18.2"
+    react-router: "npm:8.3.0"
     storybook: "npm:10.5.5"
     stylelint: "npm:17.14.1"
     typescript: "npm:6.0.3"
@@ -4295,7 +4295,7 @@ __metadata:
     react-dom: "npm:19.2.8"
     react-hook-form: "npm:7.84.0"
     react-intl: "npm:10.1.19"
-    react-router: "npm:7.18.2"
+    react-router: "npm:8.3.0"
     storybook: "npm:10.5.5"
     stylelint: "npm:17.14.1"
     typescript: "npm:6.0.3"
@@ -4380,7 +4380,7 @@ __metadata:
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
     react-intl: "npm:10.1.19"
-    react-router: "npm:7.18.2"
+    react-router: "npm:8.3.0"
     storybook: "npm:10.5.5"
     typescript: "npm:6.0.3"
   languageName: unknown
@@ -7841,7 +7841,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:^1.0.1, cookie@npm:^1.1.1":
+"cookie-es@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "cookie-es@npm:3.1.1"
+  checksum: 10/e40083c42d0e3a4b3caa271775858f8e6cdd31f24b9c445ff08d7a8f4dc01069fc82012bdf1602d5a03fa1d75aba51a3dd33cd8a5db639db2ed17bcfd650f4bc
+  languageName: node
+  linkType: hard
+
+"cookie@npm:^1.1.1":
   version: 1.1.1
   resolution: "cookie@npm:1.1.1"
   checksum: 10/85538153054791155cf4d38d2e807e3b9382d71bf71d92fc46fca348515ea574049d0d9ef8eb84d2d54a681ad1d7a7316b1989b901dace50a6c0f4c3858dbdb2
@@ -11708,19 +11715,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:7.18.2":
-  version: 7.18.2
-  resolution: "react-router@npm:7.18.2"
+"react-router@npm:8.3.0":
+  version: 8.3.0
+  resolution: "react-router@npm:8.3.0"
   dependencies:
-    cookie: "npm:^1.0.1"
-    set-cookie-parser: "npm:^2.6.0"
+    cookie-es: "npm:^3.1.1"
   peerDependencies:
-    react: ">=18"
-    react-dom: ">=18"
+    react: ">=19.2.7"
+    react-dom: ">=19.2.7"
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 10/e68aa655e5ec2d4143f66ab3b745c50b8588152d89e4ec66c099625357c6a16dfaee5a7e963a9f4f9fbe0adaa37cf9731d63a108a2c4abfaa00124a06da16c24
+  checksum: 10/6ef9ee17910356e7a7c1d262d3c3a943a25e36bf871a199628438d1436d1a16828091da30a5df7c318030dff434c5b3f003c16f82c7ffca9cf37545316f6525c
   languageName: node
   linkType: hard
 
@@ -12031,13 +12037,6 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 10/26bdc6d58b29528f4142d29afb8526bc335f4fc04c4a10f2b98b217f277a031c66736bf82d3d3bb354a2f6a3ae50f18fd62b053c4ac3f294a3d10a61f5075b75
-  languageName: node
-  linkType: hard
-
-"set-cookie-parser@npm:^2.6.0":
-  version: 2.7.1
-  resolution: "set-cookie-parser@npm:2.7.1"
-  checksum: 10/c92b1130032693342bca13ea1b1bc93967ab37deec4387fcd8c2a843c0ef2fd9a9f3df25aea5bb3976cd05a91c2cf4632dd6164d6e1814208fb7d7e14edd42b4
   languageName: node
   linkType: hard
 
