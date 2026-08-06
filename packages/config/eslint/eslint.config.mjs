@@ -2,7 +2,6 @@ import eslintReact from '@eslint-react/eslint-plugin';
 import pluginJs from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import * as importPlugin from 'eslint-plugin-import-x';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
 import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import vitest from '@vitest/eslint-plugin';
@@ -46,7 +45,6 @@ export default [
     },
   },
   eslintReact.configs['recommended-typescript'],
-  jsxA11y.flatConfigs.recommended,
   reactHooks.configs.flat.recommended,
   eslintConfigPrettier,
   {
@@ -57,7 +55,6 @@ export default [
       'max-len': [ERROR, 160],
       'no-console': ERROR,
       'no-debugger': WARNING,
-      'jsx-a11y/no-autofocus': OFF,
       'import-x/no-duplicates': ERROR,
       '@typescript-eslint/no-restricted-types': [
         'error',
