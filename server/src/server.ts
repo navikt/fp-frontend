@@ -150,7 +150,11 @@ function startApp() {
     if (renderedHtml) {
       response.send(renderedHtml);
     } else {
-      response.sendFile(spaFilePath); // NOSONAR: "Missing rate limiting".
+      // renderedHtml is null when the SPA index.html could not be read at startup.
+      // In local dev, serveViteMode (registered above) handles this route instead.
+      // In production, respond with an error rather than performing an unmetered
+      // filesystem read on every request.
+      response.status(500).send("Application failed to load. Please try again later.");
     }
   });
 
