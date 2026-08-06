@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 
 import { BodyShort, Link } from '@navikt/ds-react';
 import { type Location } from 'history';

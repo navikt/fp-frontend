@@ -1,5 +1,5 @@
 import { useIntl } from 'react-intl';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation } from '@tanstack/react-query';

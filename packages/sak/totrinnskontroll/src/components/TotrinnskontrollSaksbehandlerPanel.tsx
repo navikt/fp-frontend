@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Link } from '@navikt/ds-react';
@@ -41,8 +41,7 @@ const VurderPåNyttPunkter = ({
 interface Props {
   behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: (
-    | TotrinnskontrollSkjermlenkeContext
-    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
   erTilbakekreving: boolean;
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { Navigate, NavLink, useLocation, useMatch } from 'react-router-dom';
+import { Navigate, NavLink, useLocation, useMatch } from 'react-router';
 
 import { HStack, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';

@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 
 import { type ReactRenderer } from '@storybook/react';
 import type { DecoratorFunction } from 'storybook/internal/types';

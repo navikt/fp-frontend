@@ -1,5 +1,5 @@
 import { type ComponentProps, createContext, type ReactNode, use, useCallback, useMemo, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router';
 
 import { Theme } from '@navikt/ds-react';
 import { QueryClientProvider } from '@tanstack/react-query';

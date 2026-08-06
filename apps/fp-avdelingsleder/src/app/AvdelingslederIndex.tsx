@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
 
 import { Box, Heading, Select, Tabs, VStack } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
