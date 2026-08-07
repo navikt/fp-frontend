@@ -133,9 +133,14 @@ export const OpptjeningFaktaPanel = ({
     [formVerdierForAlleAktiviteter, setMellomlagretFormData],
   );
 
-  useEffect(() => {
+  // Juster valgtAktivitetIndex når formVerdierForAlleAktiviteter endrar seg (t.d. ny periode lasta inn).
+  // Følgjer Reacts anbefalte mønster for å justere state ved endra props/avleidde verdiar under render,
+  // i staden for via useEffect (unngår react-hooks/set-state-in-effect og ein ekstra commit/render).
+  const [forrigeFormVerdier, setForrigeFormVerdier] = useState(formVerdierForAlleAktiviteter);
+  if (formVerdierForAlleAktiviteter !== forrigeFormVerdier) {
+    setForrigeFormVerdier(formVerdierForAlleAktiviteter);
     setValgtAktivitetIndex(finnFørsteIkkeBehandledeIndex(formVerdierForAlleAktiviteter));
-  }, [formVerdierForAlleAktiviteter]);
+  }
 
   const bekreft = () => {
     setIsSubmitting(true);
