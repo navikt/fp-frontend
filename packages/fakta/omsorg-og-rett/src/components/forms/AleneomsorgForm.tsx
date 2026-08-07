@@ -42,6 +42,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: P
 
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? buildInitialValues(omsorgOgRett, aksjonspunkt),
+    shouldUnregister: true,
   });
 
   const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== 'MORA' || harUføretrygd === 'JA';

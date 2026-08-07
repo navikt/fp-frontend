@@ -113,6 +113,6 @@ const transformValues = (
   kode: erForutgåendeAksjonspunkt
     ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
     : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-  ...MedlemskapVurderinger.transformValues(values),
+  ...MedlemskapVurderinger.transformValues(values, erForutgåendeAksjonspunkt),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

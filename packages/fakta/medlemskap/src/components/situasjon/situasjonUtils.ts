@@ -7,12 +7,12 @@ import { toTitleCapitalization } from '../../utils/stringUtils';
 
 export const getSisteRegion = (medlemskap: Medlemskap, alleKodeverk: AlleKodeverk, intl: IntlShape): string => {
   const alleRegioner = alleKodeverk['Region'];
-  const nyesteRegion = medlemskap.regioner.sort(sorterPerioder).at(0);
+  const nyesteRegion = [...medlemskap.regioner].sort(sorterPerioder).at(0);
   return alleRegioner.find(r => r.kode === nyesteRegion?.type)?.navn ?? intl.formatMessage({ id: 'Situasjon.Ukjent' });
 };
 
 export const getSistePersonstatus = (medlemskap: Medlemskap, alleKodeverk: AlleKodeverk, intl: IntlShape): string => {
-  const nyeste = medlemskap.personstatuser.sort(sorterPerioder).at(0);
+  const nyeste = [...medlemskap.personstatuser].sort(sorterPerioder).at(0);
   if (nyeste) {
     return alleKodeverk['PersonstatusType'].find(type => type.kode === nyeste.type)?.navn ?? '';
   }

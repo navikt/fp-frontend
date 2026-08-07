@@ -29,10 +29,11 @@ type FormValues = {
 
 const getSorterArbeidsforhold =
   (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) =>
-  (a1: Arbeidsforhold, a2: Arbeidsforhold): number =>
-    arbeidsgiverOpplysningerPerId[a1.arbeidsgiverIdent]!.navn.localeCompare(
-      arbeidsgiverOpplysningerPerId[a2.arbeidsgiverIdent]!.navn,
-    );
+  (a1: Arbeidsforhold, a2: Arbeidsforhold): number => {
+    const navnA = arbeidsgiverOpplysningerPerId[a1.arbeidsgiverIdent]?.navn ?? a1.arbeidsgiverIdent;
+    const navnB = arbeidsgiverOpplysningerPerId[a2.arbeidsgiverIdent]?.navn ?? a2.arbeidsgiverIdent;
+    return navnA.localeCompare(navnB);
+  };
 
 interface Props {
   arbeidOgInntekt: ArbeidOgInntektsmelding;

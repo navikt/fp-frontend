@@ -83,7 +83,7 @@ export const PersonYtelserTable = ({ ytelser }: Props) => {
             <Table.DataCell>
               {ytelse.saksnummer && ytelse.skalViseLenke && (
                 <BodyShort size="small">
-                  <Link href={`/fagsak/${ytelse.saksnummer}`} target="_blank">
+                  <Link href={`/fagsak/${ytelse.saksnummer}`} target="_blank" rel="noopener noreferrer">
                     {ytelse.saksnummer}
                   </Link>
                 </BodyShort>

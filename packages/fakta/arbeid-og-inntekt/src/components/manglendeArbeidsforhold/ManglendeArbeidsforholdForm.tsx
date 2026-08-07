@@ -103,8 +103,10 @@ export const ManglendeArbeidsforholdForm = ({
         tom: formValues.tom,
         stillingsprosent: formValues.stillingsprosent ?? 0,
       })
-        .then(oppdater)
-        .finally(() => formMethods.reset(formValues));
+        .then(() => {
+          oppdater();
+          formMethods.reset(formValues);
+        });
     }
     return lagreVurdering({
       behandlingUuid,
@@ -114,8 +116,10 @@ export const ManglendeArbeidsforholdForm = ({
       arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
       internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId ?? undefined,
     })
-      .then(oppdater)
-      .finally(() => formMethods.reset(formValues));
+      .then(() => {
+        oppdater();
+        formMethods.reset(formValues);
+      });
   };
 
   const [anchorEl, setAnchorEl] = useState<SVGSVGElement | null>(null);
@@ -246,9 +250,11 @@ const getOppdaterTabell =
     formValues: FormValues,
   ) =>
   () => {
+    const inntektsmeldingRadId = lagInntektsmeldingRadId(inntektsmelding);
     oppdaterTabell(oldData =>
       oldData.map(data => {
-        if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
+        const radInntektsmelding = data.inntektsmeldingerForRad[0];
+        if (radInntektsmelding && lagInntektsmeldingRadId(radInntektsmelding) === inntektsmeldingRadId) {
           const opprettArbeidsforhold = formValues.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING';
           const avklaring = opprettArbeidsforhold
             ? {
@@ -272,3 +278,14 @@ const getOppdaterTabell =
       }),
     );
   };
+
+const lagInntektsmeldingRadId = (inntektsmelding: Inntektsmelding): string =>
+  [
+    inntektsmelding.arbeidsgiverIdent,
+    inntektsmelding.journalpostId ?? '',
+    inntektsmelding.dokumentId ?? '',
+    inntektsmelding.innsendingstidspunkt,
+    inntektsmelding.internArbeidsforholdId ?? '',
+    inntektsmelding.eksternArbeidsforholdId ?? '',
+    inntektsmelding.mottattDato,
+  ].join('-');

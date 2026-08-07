@@ -13,6 +13,14 @@ interface Props {
   omsorgsovertakelse: OmsorgsovertakelseDto;
 }
 
+const renderJaNeiEllerTomt = (value?: boolean) => {
+  if (value === undefined) {
+    return '-';
+  }
+
+  return value ? <FormattedMessage id="Label.Ja" /> : <FormattedMessage id="Label.Nei" />;
+};
+
 export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, kildeGjeldende } }: Props) => {
   const intl = useIntl();
   const { alleKodeverk } = usePanelDataContext();
@@ -112,21 +120,15 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
               </Table.Row>
             );
           })}
-          {søknad.erEktefellesBarn !== undefined && (
+          {(søknad.erEktefellesBarn !== undefined || gjeldende.erEktefellesBarn !== undefined) && (
             <Table.Row shadeOnHover={false}>
               <Table.HeaderCell scope="row">
                 <FormattedMessage id="Label.ErEktefellesBarn" />
               </Table.HeaderCell>
-              <Table.DataCell>
-                {søknad.erEktefellesBarn ? <FormattedMessage id="Label.Ja" /> : <FormattedMessage id="Label.Nei" />}
-              </Table.DataCell>
+              <Table.DataCell>{renderJaNeiEllerTomt(søknad.erEktefellesBarn)}</Table.DataCell>
               {erIkkeFraSøknad && (
                 <Table.DataCell>
-                  {gjeldende.erEktefellesBarn ? (
-                    <FormattedMessage id="Label.Ja" />
-                  ) : (
-                    <FormattedMessage id="Label.Nei" />
-                  )}
+                  {renderJaNeiEllerTomt(gjeldende.erEktefellesBarn)}
                   <ErEndretMarkering første={søknad.erEktefellesBarn} andre={gjeldende.erEktefellesBarn} />
                 </Table.DataCell>
               )}

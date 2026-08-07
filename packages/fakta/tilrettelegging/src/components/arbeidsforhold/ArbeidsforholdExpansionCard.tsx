@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { type FieldArrayWithId } from 'react-hook-form';
 
 import { ExpansionCard } from '@navikt/ds-react';
@@ -33,13 +33,10 @@ export const ArbeidsforholdExpansionCard = ({
   faisu,
 }: Props) => {
   const [open, setOpen] = useState(tilrettelegging.skalBrukes);
-  const [forrigeSkalBrukes, setForrigeSkalBrukes] = useState(tilrettelegging.skalBrukes);
 
-  // Kortet åpnes/lukkes automatisk når skalBrukes endres, men kan også styres manuelt av saksbehandler.
-  if (tilrettelegging.skalBrukes !== forrigeSkalBrukes) {
-    setForrigeSkalBrukes(tilrettelegging.skalBrukes);
+  useEffect(() => {
     setOpen(tilrettelegging.skalBrukes);
-  }
+  }, [tilrettelegging.skalBrukes]);
 
   const alleIafAf = aoiArbeidsforhold.filter(iaya => iaya.arbeidsgiverIdent === tilrettelegging.arbeidsgiverReferanse);
 

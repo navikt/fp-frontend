@@ -39,7 +39,7 @@ const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]):
   return texts;
 };
 
-const findSkjaringstidspunkt = (dato?: string): string => dayjs(dato).add(1, 'days').format(ISO_DATE_FORMAT);
+const findSkjaringstidspunkt = (dato: string): string => dayjs(dato).add(1, 'days').format(ISO_DATE_FORMAT);
 
 const sorterEtterOpptjeningFom = (
   opptjeningPerioder: OpptjeningAktivitet[],
@@ -133,16 +133,14 @@ export const OpptjeningFaktaPanel = ({
     [formVerdierForAlleAktiviteter, setMellomlagretFormData],
   );
 
-  const [forrigeFormVerdier, setForrigeFormVerdier] = useState(formVerdierForAlleAktiviteter);
-  if (formVerdierForAlleAktiviteter !== forrigeFormVerdier) {
-    setForrigeFormVerdier(formVerdierForAlleAktiviteter);
+  useEffect(() => {
     setValgtAktivitetIndex(finnFørsteIkkeBehandledeIndex(formVerdierForAlleAktiviteter));
-  }
+  }, [formVerdierForAlleAktiviteter]);
 
   const bekreft = () => {
     setIsSubmitting(true);
 
-    void submitCallback(transformValues(formVerdierForAlleAktiviteter, filtrerteOgSorterteOpptjeningsaktiviteter)).then(
+    void submitCallback(transformValues(formVerdierForAlleAktiviteter, filtrerteOgSorterteOpptjeningsaktiviteter)).finally(
       () => setIsSubmitting(false),
     );
   };
@@ -175,6 +173,9 @@ export const OpptjeningFaktaPanel = ({
   };
 
   const harIkkeBehandletAlle = formVerdierForAlleAktiviteter.some(a => a.erGodkjent === undefined);
+  const skjæringstidspunkt = fastsattOpptjening?.opptjeningTom
+    ? findSkjaringstidspunkt(fastsattOpptjening.opptjeningTom)
+    : undefined;
 
   return (
     <VStack gap="space-24">
@@ -186,7 +187,7 @@ export const OpptjeningFaktaPanel = ({
       <LabeledValue
         size="small"
         label={<FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" />}
-        value={<DateLabel dateString={findSkjaringstidspunkt(fastsattOpptjening?.opptjeningTom)} />}
+        value={skjæringstidspunkt ? <DateLabel dateString={skjæringstidspunkt} /> : '-'}
       />
       <OpptjeningTidslinje
         opptjeningPerioder={filtrerteOgSorterteOpptjeningsaktiviteter}

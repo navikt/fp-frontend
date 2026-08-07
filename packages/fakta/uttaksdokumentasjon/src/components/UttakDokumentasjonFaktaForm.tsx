@@ -42,9 +42,13 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
     mellomlagretFormData?.dokBehov ?? dokumentasjonVurderingBehov,
   );
 
-  const bekreft = (values: FaktaBegrunnelseFormValues) => {
+  const bekreft = async (values: FaktaBegrunnelseFormValues) => {
     setErBekreftKnappTrykket(true);
-    void submitCallback(transformValues(values, dokBehov));
+    try {
+      await submitCallback(transformValues(values, dokBehov));
+    } finally {
+      setErBekreftKnappTrykket(false);
+    }
   };
 
   const formMethods = useForm<FaktaBegrunnelseFormValues>({
@@ -73,7 +77,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
       <RhfForm
         formMethods={formMethods}
         setDataOnUnmount={(values: FaktaBegrunnelseFormValues) => setMellomlagretFormData({ ...values, dokBehov })}
-        onSubmit={values => bekreft(values)}
+        onSubmit={bekreft}
       >
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField

@@ -68,8 +68,7 @@ describe('UttakFaktaIndex', () => {
             tom: '2022-12-01',
             originalFom: '2022-11-12',
             periodeKilde: 'SAKSBEHANDLER',
-            // @ts-expect-error -- typene i formet er inkonsekvente
-            samtidigUttaksprosent: '10',
+            samtidigUttaksprosent: 10,
             uttakPeriodeType: 'MØDREKVOTE',
             aksjonspunktType: undefined,
             arbeidsforhold: undefined,

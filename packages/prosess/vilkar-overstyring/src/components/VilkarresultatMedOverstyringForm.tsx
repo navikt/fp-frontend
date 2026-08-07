@@ -230,7 +230,10 @@ const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyri
     case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR:
       return {
         ...felles,
-        ...MedlemskapVurderinger.transformValues(values),
+        ...MedlemskapVurderinger.transformValues(
+          values,
+          overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+        ),
       };
     default:
       return {

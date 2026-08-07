@@ -12,7 +12,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Detail, ErrorMessage, HelpText, HStack, Table, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfFieldArrayAppendButton, RhfFieldArrayRemoveButton } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { type FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
@@ -237,12 +236,12 @@ const validateAlleFødselsdatoer = (
     return false;
   }
 
-  if (minDate) {
-    const avvikFeil = fødselErINærhetenAvTermin(minDate.format(ISO_DATE_FORMAT), termindato);
-    if (avvikFeil) {
-      setError(FIELD_ARRAY_NAME, { type: 'manual', message: avvikFeil });
-      return false;
-    }
+  const avvikFeil = barn
+    .map(({ fødselsdato }) => fødselErINærhetenAvTermin(fødselsdato, termindato))
+    .find(feilmelding => !!feilmelding);
+  if (avvikFeil) {
+    setError(FIELD_ARRAY_NAME, { type: 'manual', message: avvikFeil });
+    return false;
   }
 
   clearErrors(FIELD_ARRAY_NAME);

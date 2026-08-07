@@ -26,7 +26,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
 
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, isReadOnly, submitCallback, alleKodeverk } =
     usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
-  annenForelderUttakEøs.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
+  const sorterteAnnenForelderUttakEøs = [...annenForelderUttakEøs].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
     annenForelderUttakEøsPerioder: AnnenforelderUttakEøsPeriode[];
@@ -34,7 +34,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   }>();
 
   const [perioder, setPerioder] = useState<AnnenforelderUttakEøsPeriode[]>(
-    mellomlagretFormData?.annenForelderUttakEøsPerioder ?? annenForelderUttakEøs,
+    mellomlagretFormData?.annenForelderUttakEøsPerioder ?? sorterteAnnenForelderUttakEøs,
   );
   const [erOverstyrt, setErOverstyrt] = useState(false);
   const [visLeggTilPeriodeForm, setVisLeggTilPeriodeForm] = useState(false);

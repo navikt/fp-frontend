@@ -22,7 +22,7 @@ export const ArbeidsforholdInfoPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysnin
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
   const sorterteArbeidsforhold = arbeidsforhold.toSorted(
-    getSortArbeidsforholdFn(arbeidsgiverOpplysningerPerId, inntektsmeldinger),
+    getSortArbeidsforholdFn(arbeidsforhold, arbeidsgiverOpplysningerPerId, inntektsmeldinger),
   );
 
   return (
@@ -44,11 +44,18 @@ export const ArbeidsforholdInfoPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysnin
   );
 };
 
-const harInntektmelding = (arbeidsforhold: Arbeidsforhold, inntektsmeldinger: Inntektsmelding[]): boolean =>
-  inntektsmeldinger.some(im => erMatch(arbeidsforhold, im));
+const harInntektmelding = (
+  arbeidsforhold: Arbeidsforhold,
+  inntektsmeldinger: Inntektsmelding[],
+  alleArbeidsforhold: Arbeidsforhold[],
+): boolean => inntektsmeldinger.some(im => erMatch(arbeidsforhold, im, alleArbeidsforhold));
 
 const getSortArbeidsforholdFn =
-  (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId, inntektsmeldinger: Inntektsmelding[]) =>
+  (
+    alleArbeidsforhold: Arbeidsforhold[],
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+    inntektsmeldinger: Inntektsmelding[],
+  ) =>
   (a1: Arbeidsforhold, a2: Arbeidsforhold): number => {
     const arbeidsgiverOpplysningerA1 = arbeidsgiverOpplysningerPerId[a1.arbeidsgiverIdent];
     const arbeidsgiverOpplysningerA2 = arbeidsgiverOpplysningerPerId[a2.arbeidsgiverIdent];
@@ -60,12 +67,12 @@ const getSortArbeidsforholdFn =
       }
     }
 
-    const a1HarInntektsmelding = harInntektmelding(a1, inntektsmeldinger);
-    const a2HarInntektsmelding = harInntektmelding(a2, inntektsmeldinger);
+    const a1HarInntektsmelding = harInntektmelding(a1, inntektsmeldinger, alleArbeidsforhold);
+    const a2HarInntektsmelding = harInntektmelding(a2, inntektsmeldinger, alleArbeidsforhold);
 
     if (a1HarInntektsmelding && a2HarInntektsmelding) {
-      const a1MottattDato = inntektsmeldinger.find(im => erMatch(a1, im))?.mottattDato;
-      const a2MottattDato = inntektsmeldinger.find(im => erMatch(a2, im))?.mottattDato;
+      const a1MottattDato = inntektsmeldinger.find(im => erMatch(a1, im, alleArbeidsforhold))?.mottattDato;
+      const a2MottattDato = inntektsmeldinger.find(im => erMatch(a2, im, alleArbeidsforhold))?.mottattDato;
       return dayjs(a2MottattDato, ISO_DATE_FORMAT).diff(dayjs(a1MottattDato, ISO_DATE_FORMAT));
     }
     if (a1HarInntektsmelding) {

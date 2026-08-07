@@ -63,11 +63,16 @@ const validerAtPeriodeIkkeOverlapper =
   () => {
     const fomDato = getValues(`${index}.fom`);
     const tomDato = getValues(`${index}.tom`);
+
+    if (!fomDato || !tomDato) {
+      return undefined;
+    }
+
     const periodeMap = alleOpphold
       .filter(p => p.fom !== valgtOpphold.fom)
       .map(({ fom, tom }) => [fom, tom])
       .concat([[fomDato, tomDato]]);
-    return periodeMap.length > 0 && dayjs(fomDato).isBefore(dayjs(tomDato))
+    return periodeMap.length > 0 && !dayjs(fomDato).isAfter(dayjs(tomDato))
       ? dateRangesNotOverlapping(periodeMap)
       : undefined;
   };

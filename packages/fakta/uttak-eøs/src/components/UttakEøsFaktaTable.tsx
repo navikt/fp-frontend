@@ -51,10 +51,11 @@ export const UttakEøsFaktaTable = ({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {annenForelderUttakEøsPerioder.map(annenForelderUttakEøsPeriode => (
+        {annenForelderUttakEøsPerioder.map((annenForelderUttakEøsPeriode, periodIndex) => (
           <Rad
             key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
             annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
+            rowIndex={periodIndex}
             setPerioder={setPerioder}
             isReadOnly={isReadOnly}
             setDirty={setDirty}
@@ -107,21 +108,20 @@ export const UttakEøsFaktaTable = ({
 
 interface RadProps {
   annenForelderUttakEøsPeriode: AnnenforelderUttakEøsPeriode;
+  rowIndex: number;
   setPerioder: React.Dispatch<React.SetStateAction<AnnenforelderUttakEøsPeriode[]>>;
   isReadOnly: boolean;
   setDirty: (isDirty: boolean) => void;
   alleKodeverk: AlleKodeverk;
 }
 
-const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly, setDirty, alleKodeverk }: RadProps) => {
+const Rad = ({ annenForelderUttakEøsPeriode, rowIndex, setPerioder, isReadOnly, setDirty, alleKodeverk }: RadProps) => {
   const [erÅpen, setErÅpen] = useState(false);
 
   const oppdaterPeriode = (oppdatertPeriode: AnnenforelderUttakEøsPeriode) => {
     setErÅpen(false);
     setPerioder(prevPerioder => {
-      const perioderSomIkkeErOppdatert = prevPerioder.filter(
-        periode => periode.fom !== annenForelderUttakEøsPeriode.fom && periode.tom !== annenForelderUttakEøsPeriode.tom,
-      );
+      const perioderSomIkkeErOppdatert = prevPerioder.filter((_, index) => index !== rowIndex);
       return [...perioderSomIkkeErOppdatert, oppdatertPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
     });
     setDirty(true);
@@ -130,9 +130,7 @@ const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly, setDirty,
   const slettPeriode = () => {
     setErÅpen(false);
     setPerioder(prevPerioder => {
-      return prevPerioder.filter(
-        periode => periode.fom !== annenForelderUttakEøsPeriode.fom && periode.tom !== annenForelderUttakEøsPeriode.tom,
-      );
+      return prevPerioder.filter((_, index) => index !== rowIndex);
     });
     setDirty(true);
   };
@@ -145,7 +143,6 @@ const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly, setDirty,
 
   return (
     <Table.ExpandableRow
-      key={fom + tom}
       expandOnRowClick
       expansionDisabled={isReadOnly}
       togglePlacement="right"

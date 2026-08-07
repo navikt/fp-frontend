@@ -60,7 +60,7 @@ export const RegistrereVergeInfoPanel = ({ verge, alleKodeverk }: Props) => {
   const valgtVergeType = useWatch({ control: formMethods.control, name: 'vergeType' });
   const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
-  const vergetyper = alleKodeverk['VergeType'].sort((k1, k2) => k1.navn.localeCompare(k2.navn));
+  const vergetyper = [...alleKodeverk['VergeType']].sort((k1, k2) => k1.navn.localeCompare(k2.navn));
 
   return (
     <VStack gap="space-20">

@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Alert, HStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { formaterArbeidsgiver, guid } from '@navikt/ft-utils';
+import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@navikt/fp-types';
 
@@ -39,7 +39,7 @@ const mapArbeidsforhold = (
     }
 
     return (
-      <option value={`${arbeidsgiverReferanse}-${arbeidType}`} key={guid()}>
+      <option value={`${arbeidsgiverReferanse}-${arbeidType}`} key={`${arbeidsgiverReferanse}-${arbeidType}`}>
         {periodeArbeidsforhold}
       </option>
     );

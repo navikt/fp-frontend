@@ -6,6 +6,8 @@ import { DateLabel, FaktaBoks, LabeledValue } from '@navikt/ft-ui-komponenter';
 import type { FødselSøknad } from '@navikt/fp-types';
 import { DokumentLink, type DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
 
+import { formaterLiv } from './barnUtils';
+
 interface Props {
   søknad: FødselSøknad;
   terminbekreftelseDokument: DokumentLinkReferanse | undefined;
@@ -16,7 +18,6 @@ export const FaktaFraSøknad = ({
   terminbekreftelseDokument,
 }: Props) => {
   const intl = useIntl();
-  const barnet = barn[0];
   return (
     <FaktaBoks tittel={intl.formatMessage({ id: 'FaktaFraSøknad.Tittel' })}>
       <VStack gap="space-16">
@@ -35,13 +36,31 @@ export const FaktaFraSøknad = ({
           />
         )}
 
-        {barnet && (
-          <LabeledValue
-            size="medium"
-            label={<FormattedMessage id="Label.Fødselsdato" />}
-            value={<DateLabel dateString={barnet.fødselsdato} />}
-          />
+        {barn.length === 1 && (
+          <>
+            <LabeledValue
+              size="medium"
+              label={<FormattedMessage id="Label.Fødselsdato" />}
+              value={<DateLabel dateString={barn[0]!.fødselsdato} />}
+            />
+            {barn[0]!.dødsdato && (
+              <LabeledValue
+                size="medium"
+                label={<FormattedMessage id="Label.Dødsdato" />}
+                value={<DateLabel dateString={barn[0]!.dødsdato} />}
+              />
+            )}
+          </>
         )}
+        {barn.length > 1 &&
+          barn.map((barnet, index) => (
+            <LabeledValue
+              key={`${barnet.barnNummer ?? index}-${barnet.fødselsdato}-${barnet.dødsdato ?? ''}`}
+              size="medium"
+              label={intl.formatMessage({ id: 'Label.NummerertBarn' }, { nummer: index + 1 })}
+              value={formaterLiv(barnet)}
+            />
+          ))}
         {antallBarn && (
           <LabeledValue size="medium" label={<FormattedMessage id="Label.AntallBarn" />} value={antallBarn} />
         )}

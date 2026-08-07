@@ -1,8 +1,9 @@
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 
 import { HStack, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
+  dateAfterOrEqual,
   hasValidDate,
   hasValidFodselsnummer,
   hasValidName,
@@ -33,7 +34,7 @@ interface Props {
  * Formkomponent. Registrering og oppdatering av verge.
  */
 export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType }: Props) => {
-  const { control } = useFormContext<VergeFormValues & FaktaBegrunnelseFormValues>();
+  const { control, getValues } = useFormContext<VergeFormValues & FaktaBegrunnelseFormValues>();
   return (
     <VStack gap="space-16">
       <RhfSelect
@@ -88,7 +89,7 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
               name="gyldigTom"
               control={control}
               label={intl.formatMessage({ id: 'Verge.PeriodeTOM' })}
-              validate={[hasValidDate]}
+              validate={[hasValidDate, validerGyldigTomEtterFom(getValues)]}
               readOnly={readOnly}
             />
           </HStack>
@@ -118,3 +119,9 @@ RegistrereVergeForm.transformValues = ({
     ? { organisasjonsnummer: notEmpty(values.organisasjonsnummer).trim() }
     : { fnr: notEmpty(values.fnr) }),
 });
+
+const validerGyldigTomEtterFom =
+  (getValues: UseFormGetValues<VergeFormValues & FaktaBegrunnelseFormValues>) => (gyldigTom?: string) => {
+    const gyldigFom = getValues('gyldigFom');
+    return gyldigFom && gyldigTom ? dateAfterOrEqual(gyldigFom)(gyldigTom) : null;
+  };

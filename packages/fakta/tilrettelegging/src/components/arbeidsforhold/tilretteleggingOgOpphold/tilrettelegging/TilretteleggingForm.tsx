@@ -68,7 +68,11 @@ export const finnProsentSvangerskapspenger = (
   if (tilretteleggingDato.type === 'HEL_TILRETTELEGGING') {
     return undefined;
   }
-  if (brukOverstyrtUtbetalingsgrad && tilretteleggingDato.overstyrtUtbetalingsgrad) {
+  if (
+    brukOverstyrtUtbetalingsgrad &&
+    tilretteleggingDato.overstyrtUtbetalingsgrad !== undefined &&
+    tilretteleggingDato.overstyrtUtbetalingsgrad !== null
+  ) {
     return tilretteleggingDato.overstyrtUtbetalingsgrad;
   }
 

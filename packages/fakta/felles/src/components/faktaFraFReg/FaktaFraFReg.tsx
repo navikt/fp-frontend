@@ -63,7 +63,12 @@ const BarnVisning = ({ barna }: { barna: BarnHendelseData[] }) => {
   return (
     <>
       {barna.map(({ fødselsdato, dødsdato }, index) => (
-        <HStack key={fødselsdato + dødsdato} gap="space-24" wrap={false} className={styles['grid']}>
+        <HStack
+          key={`${fødselsdato ?? 'ukjent-fodselsdato'}-${dødsdato ?? 'ingen-dodsdato'}-${index}`}
+          gap="space-24"
+          wrap={false}
+          className={styles['grid']}
+        >
           <LabeledValue size="medium" label={index > 0 ? '' : <FormattedMessage id="Label.Barn" />} value={index + 1} />
           <LabeledValue
             size="medium"

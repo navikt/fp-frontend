@@ -45,12 +45,13 @@ export const PersonArbeidsforholdTable = ({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {alleArbeidsforhold.map(arbeidsforhold => {
-          const stillingsprosent = `${arbeidsforhold.stillingsprosent?.toFixed(2)} %`;
-          const mottattDato = inntektsmeldinger.find(im => erMatch(arbeidsforhold, im))?.mottattDato;
+        {alleArbeidsforhold.map((arbeidsforhold, index) => {
+          const stillingsprosent =
+            arbeidsforhold.stillingsprosent !== undefined ? `${arbeidsforhold.stillingsprosent.toFixed(2)} %` : '-';
+          const mottattDato = inntektsmeldinger.find(im => erMatch(arbeidsforhold, im, alleArbeidsforhold))?.mottattDato;
           return (
             <Table.ExpandableRow
-              key={utledNøkkel(arbeidsforhold, arbeidsgiverOpplysningerPerId)}
+              key={utledNøkkel(arbeidsforhold, index)}
               content={
                 arbeidsforhold.saksbehandlersVurdering ? (
                   <ArbeidsforholdDetail valgtArbeidsforhold={arbeidsforhold} />
@@ -99,10 +100,21 @@ const finnKilde = (arbeidsforhold: Arbeidsforhold, intl: IntlShape) => {
   return intl.formatMessage({ id: 'PersonArbeidsforholdTable.AaRegisteret' });
 };
 
-export const erMatch = (arbeidsforhold: Arbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
-  inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent &&
-  (!inntektsmelding.internArbeidsforholdId ||
-    inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
+export const erMatch = (
+  arbeidsforhold: Arbeidsforhold,
+  inntektsmelding: Inntektsmelding,
+  alleArbeidsforhold: Arbeidsforhold[] = [arbeidsforhold],
+): boolean => {
+  if (inntektsmelding.arbeidsgiverIdent !== arbeidsforhold.arbeidsgiverIdent) {
+    return false;
+  }
+
+  if (inntektsmelding.internArbeidsforholdId) {
+    return inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId;
+  }
+
+  return alleArbeidsforhold.filter(af => af.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length === 1;
+};
 
 const utledNavn = (
   { saksbehandlersVurdering, eksternArbeidsforholdId, arbeidsgiverIdent }: Arbeidsforhold,
@@ -127,10 +139,12 @@ const utledNavn = (
   return formaterArbeidsgiver(arbeidsgiverOpplysninger, eksternId ?? undefined);
 };
 
-const utledNøkkel = (
-  arbeidsforhold: Arbeidsforhold,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): string => {
-  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
-  return `${arbeidsforhold.eksternArbeidsforholdId}${arbeidsforhold.arbeidsgiverIdent}${arbeidsgiverOpplysninger?.identifikator}`;
-};
+const utledNøkkel = (arbeidsforhold: Arbeidsforhold, index: number): string =>
+  [
+    arbeidsforhold.arbeidsgiverIdent,
+    arbeidsforhold.internArbeidsforholdId ?? '',
+    arbeidsforhold.eksternArbeidsforholdId ?? '',
+    arbeidsforhold.fom,
+    arbeidsforhold.tom,
+    `${index}`,
+  ].join('-');
