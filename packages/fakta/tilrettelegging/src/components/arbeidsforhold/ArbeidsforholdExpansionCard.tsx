@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { type FieldArrayWithId } from 'react-hook-form';
 
 import { ExpansionCard } from '@navikt/ds-react';
@@ -34,9 +34,14 @@ export const ArbeidsforholdExpansionCard = ({
 }: Props) => {
   const [open, setOpen] = useState(tilrettelegging.skalBrukes);
 
-  useEffect(() => {
+  // Juster open når tilrettelegging.skalBrukes endrar seg, ved å samanlikne med førre verdi
+  // og justere state under render (Reacts anbefalte mønster), i staden for via useEffect
+  // (unngår react-hooks/set-state-in-effect og ein ekstra commit/render).
+  const [forrigeSkalBrukes, setForrigeSkalBrukes] = useState(tilrettelegging.skalBrukes);
+  if (tilrettelegging.skalBrukes !== forrigeSkalBrukes) {
+    setForrigeSkalBrukes(tilrettelegging.skalBrukes);
     setOpen(tilrettelegging.skalBrukes);
-  }, [tilrettelegging.skalBrukes]);
+  }
 
   const alleIafAf = aoiArbeidsforhold.filter(iaya => iaya.arbeidsgiverIdent === tilrettelegging.arbeidsgiverReferanse);
 
