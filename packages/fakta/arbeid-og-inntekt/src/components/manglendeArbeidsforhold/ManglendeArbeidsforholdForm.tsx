@@ -89,7 +89,7 @@ export const ManglendeArbeidsforholdForm = ({
   const inntektsmelding = radData.inntektsmeldingerForRad[0]!;
 
   const lagre = (formValues: FormValues) => {
-    const oppdater = getOppdaterTabell(oppdaterTabell, radData, inntektsmelding, formValues);
+    const oppdater = getOppdaterTabell(oppdaterTabell, inntektsmelding, formValues);
     if (formValues.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING') {
       return registrerArbeidsforhold({
         behandlingUuid,
@@ -242,19 +242,23 @@ const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (
   return fom && tom ? dateAfterOrEqual(fom)(tom) : null;
 };
 
+// Vurderinga lagrast i backend på (arbeidsgiverIdent, internArbeidsforholdRef). Rader som deler
+// denne nøkkelen deler difor same vurdering, og må oppdaterast likt lokalt.
+const erSammeVurdering = (inntektsmelding: Inntektsmelding, annen: Inntektsmelding): boolean =>
+  inntektsmelding.arbeidsgiverIdent === annen.arbeidsgiverIdent &&
+  (inntektsmelding.internArbeidsforholdId ?? undefined) === (annen.internArbeidsforholdId ?? undefined);
+
 const getOppdaterTabell =
   (
     oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void,
-    radData: ArbeidsforholdOgInntektRadData,
     inntektsmelding: Inntektsmelding,
     formValues: FormValues,
   ) =>
   () => {
-    const inntektsmeldingRadId = lagInntektsmeldingRadId(inntektsmelding);
     oppdaterTabell(oldData =>
       oldData.map(data => {
         const radInntektsmelding = data.inntektsmeldingerForRad[0];
-        if (radInntektsmelding && lagInntektsmeldingRadId(radInntektsmelding) === inntektsmeldingRadId) {
+        if (radInntektsmelding && erSammeVurdering(inntektsmelding, radInntektsmelding)) {
           const opprettArbeidsforhold = formValues.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING';
           const avklaring = opprettArbeidsforhold
             ? {
@@ -270,7 +274,7 @@ const getOppdaterTabell =
                 saksbehandlersVurdering: formValues.saksbehandlersVurdering,
               };
           return {
-            ...radData,
+            ...data,
             avklaring,
           };
         }
@@ -278,14 +282,3 @@ const getOppdaterTabell =
       }),
     );
   };
-
-const lagInntektsmeldingRadId = (inntektsmelding: Inntektsmelding): string =>
-  [
-    inntektsmelding.arbeidsgiverIdent,
-    inntektsmelding.journalpostId ?? '',
-    inntektsmelding.dokumentId ?? '',
-    inntektsmelding.innsendingstidspunkt,
-    inntektsmelding.internArbeidsforholdId ?? '',
-    inntektsmelding.eksternArbeidsforholdId ?? '',
-    inntektsmelding.mottattDato,
-  ].join('-');
