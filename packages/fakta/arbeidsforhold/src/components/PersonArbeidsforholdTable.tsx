@@ -48,7 +48,7 @@ export const PersonArbeidsforholdTable = ({
         {alleArbeidsforhold.map((arbeidsforhold, index) => {
           const stillingsprosent =
             arbeidsforhold.stillingsprosent !== undefined ? `${arbeidsforhold.stillingsprosent.toFixed(2)} %` : '-';
-          const mottattDato = inntektsmeldinger.find(im => erMatch(arbeidsforhold, im, alleArbeidsforhold))?.mottattDato;
+          const mottattDato = inntektsmeldinger.find(im => erMatch(arbeidsforhold, im))?.mottattDato;
           return (
             <Table.ExpandableRow
               key={utledNøkkel(arbeidsforhold, index)}
@@ -100,21 +100,10 @@ const finnKilde = (arbeidsforhold: Arbeidsforhold, intl: IntlShape) => {
   return intl.formatMessage({ id: 'PersonArbeidsforholdTable.AaRegisteret' });
 };
 
-export const erMatch = (
-  arbeidsforhold: Arbeidsforhold,
-  inntektsmelding: Inntektsmelding,
-  alleArbeidsforhold: Arbeidsforhold[] = [arbeidsforhold],
-): boolean => {
-  if (inntektsmelding.arbeidsgiverIdent !== arbeidsforhold.arbeidsgiverIdent) {
-    return false;
-  }
-
-  if (inntektsmelding.internArbeidsforholdId) {
-    return inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId;
-  }
-
-  return alleArbeidsforhold.filter(af => af.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length === 1;
-};
+export const erMatch = (arbeidsforhold: Arbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
+  inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent &&
+  (!inntektsmelding.internArbeidsforholdId ||
+    inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
 
 const utledNavn = (
   { saksbehandlersVurdering, eksternArbeidsforholdId, arbeidsgiverIdent }: Arbeidsforhold,
