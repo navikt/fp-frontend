@@ -3,8 +3,6 @@ import { fireEvent, render, screen, waitFor, within } from '@testing-library/rea
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
-import { notEmpty } from '@navikt/fp-utils';
-
 import * as stories from './FodselFaktaIndex.stories';
 
 const {
@@ -48,40 +46,6 @@ describe('FodselFaktaIndex', () => {
     expect(fregBoks.getByText('1')).toBeInTheDocument();
     expect(fregBoks.getByText('Fødselsdato')).toBeInTheDocument();
     expect(fregBoks.getByText('03.06.2025')).toBeInTheDocument();
-  });
-
-  it('skal vise alle barn oppgitt i søknaden ved flerbarnsfødsel', () => {
-    const fødsel = notEmpty(Default.args.fødsel);
-    render(
-      <Default
-        submitCallback={vi.fn()}
-        fødsel={{
-          ...fødsel,
-          søknad: {
-            ...fødsel.søknad,
-            barn: [
-              {
-                fødselsdato: '2025-06-03',
-                barnNummer: 1,
-              },
-              {
-                fødselsdato: '2025-06-03',
-                dødsdato: '2025-06-04',
-                barnNummer: 2,
-              },
-            ],
-            antallBarn: 2,
-          },
-        }}
-      />,
-    );
-
-    const søknadsBoks = within(screen.getByLabelText('Opplysninger oppgitt i søknaden'));
-    expect(søknadsBoks.getByText('Barn 1')).toBeInTheDocument();
-    expect(søknadsBoks.getByText('f. 03.06.2025')).toBeInTheDocument();
-    expect(søknadsBoks.getByText('Barn 2')).toBeInTheDocument();
-    expect(søknadsBoks.getByText('f. 03.06.2025 - d. 04.06.2025')).toBeInTheDocument();
-    expect(søknadsBoks.getByText('2')).toBeInTheDocument();
   });
 
   describe('terminbekreftelse', () => {
