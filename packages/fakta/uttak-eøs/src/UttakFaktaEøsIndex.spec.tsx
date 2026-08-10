@@ -135,7 +135,7 @@ describe('UttakFaktaEøsIndex', () => {
   });
 
   it('skal ikke endre rekkefølgen i input-arrayet når periodene sorteres for visning', async () => {
-    const perioder = (stories.ÅpentAksjonspunktMedPerioder.args?.annenForelderUttakEøs ?? []).map(periode => ({
+    const perioder = (ÅpentAksjonspunktMedPerioder.args.annenForelderUttakEøs ?? []).map(periode => ({
       ...periode,
     }));
     const originalRekkefølge = perioder.map(({ fom, tom }) => `${fom}-${tom}`);
