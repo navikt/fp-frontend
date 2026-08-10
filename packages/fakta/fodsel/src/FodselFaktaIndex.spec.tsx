@@ -3,6 +3,8 @@ import { fireEvent, render, screen, waitFor, within } from '@testing-library/rea
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
+import { notEmpty } from '@navikt/fp-utils';
+
 import * as stories from './FodselFaktaIndex.stories';
 
 const {
@@ -49,7 +51,7 @@ describe('FodselFaktaIndex', () => {
   });
 
   it('skal vise alle barn oppgitt i søknaden ved flerbarnsfødsel', () => {
-    const fødsel = Default.args.fødsel!;
+    const fødsel = notEmpty(Default.args.fødsel);
     render(
       <Default
         submitCallback={vi.fn()}

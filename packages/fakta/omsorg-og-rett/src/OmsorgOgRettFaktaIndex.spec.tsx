@@ -6,6 +6,7 @@ import { expect } from 'vitest';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { lagAksjonspunkt } from '@navikt/fp-storybook-utils';
 import type { OmsorgOgRett } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import * as stories from './OmsorgOgRettFaktaIndex.stories';
 
@@ -241,7 +242,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
   it('skal ikke sende skjulte felter videre når søker endrer til aleneomsorg', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
-    const omsorgOgRett = HarAksjonspunktForAvklarAleneomsorg.args.omsorgOgRett!;
+    const omsorgOgRett = notEmpty(HarAksjonspunktForAvklarAleneomsorg.args.omsorgOgRett);
 
     // relasjonsRolleType må vera ulik MORA for at "Mottar annen forelder uføretrygd"-feltet skal visast.
     render(
@@ -328,7 +329,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
   });
 
   it('skal vise rå landkode når bostedsland ikke finnes i kodeverket', async () => {
-    const omsorgOgRett = HarAksjonspunktForAvklarAnnenForelderRett.args.omsorgOgRett!;
+    const omsorgOgRett = notEmpty(HarAksjonspunktForAvklarAnnenForelderRett.args.omsorgOgRett);
     render(
       <HarAksjonspunktForAvklarAnnenForelderRett
         omsorgOgRett={{
@@ -346,7 +347,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
   });
 
   it('skal bruke riktig aksjonspunktbegrunnelse for hvert skjema når begge aksjonspunkt finnes', async () => {
-    const omsorgOgRett = HarAksjonspunktForAvklarAleneomsorg.args.omsorgOgRett!;
+    const omsorgOgRett = notEmpty(HarAksjonspunktForAvklarAleneomsorg.args.omsorgOgRett);
     render(
       <HarAksjonspunktForAvklarAleneomsorg
         isReadOnly

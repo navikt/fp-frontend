@@ -106,15 +106,15 @@ describe('OpptjeningFaktaIndex', () => {
     await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse 2');
     await userEvent.click(screen.getByText('Oppdater'));
 
-    const bekreftKnapp = screen.getByText('Bekreft og fortsett').closest('button');
+    const bekreftKnapp = screen.getByRole('button', { name: 'Bekreft og fortsett' });
 
     expect(bekreftKnapp).toBeEnabled();
-    await userEvent.click(bekreftKnapp!);
+    await userEvent.click(bekreftKnapp);
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(bekreftKnapp).toBeEnabled());
 
-    await userEvent.click(bekreftKnapp!);
+    await userEvent.click(bekreftKnapp);
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(2));
   });

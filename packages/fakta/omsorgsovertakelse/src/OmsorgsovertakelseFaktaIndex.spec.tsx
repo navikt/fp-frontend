@@ -98,7 +98,7 @@ describe('OmsorgsovertakelseFaktaIndex', () => {
   });
 
   it('skal vise raden for ektefelles barn når bare gjeldende opplysninger har verdien', () => {
-    const omsorgsovertakelse = EngangsstønadUtenAp.args.omsorgsovertakelse!;
+    const omsorgsovertakelse = notEmpty(EngangsstønadUtenAp.args.omsorgsovertakelse);
     render(
       <EngangsstønadUtenAp
         omsorgsovertakelse={{
@@ -122,7 +122,7 @@ describe('OmsorgsovertakelseFaktaIndex', () => {
   });
 
   it('skal vise barn som bare finnes i gjeldende opplysninger som valgbart alternativ', async () => {
-    const omsorgsovertakelse = EngangsstønadMedAp.args.omsorgsovertakelse!;
+    const omsorgsovertakelse = notEmpty(EngangsstønadMedAp.args.omsorgsovertakelse);
     render(
       <EngangsstønadMedAp
         omsorgsovertakelse={{

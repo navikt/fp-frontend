@@ -187,14 +187,14 @@ describe('UttakDokumentasjonFaktaIndex', () => {
 
     await userEvent.type(screen.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 
-    const bekreftKnapp = screen.getByText('Bekreft og fortsett').closest('button');
+    const bekreftKnapp = screen.getByRole('button', { name: 'Bekreft og fortsett' });
 
-    await userEvent.click(bekreftKnapp!);
+    await userEvent.click(bekreftKnapp);
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(bekreftKnapp).not.toBeDisabled());
 
-    await userEvent.click(bekreftKnapp!);
+    await userEvent.click(bekreftKnapp);
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(2));
   });

@@ -2,6 +2,8 @@ import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { notEmpty } from '@navikt/fp-utils';
+
 import * as stories from './InntektsmeldingFaktaIndex.stories';
 
 const { InntektsmeldingDefault } = composeStories(stories);
@@ -23,8 +25,9 @@ describe('InntektsmeldingFaktaIndex', () => {
     await verifiserKolonneSortering('Behandling', 4, ['Andre', 'Denne', 'Ingen']);
   });
 
+  // eslint-disable-next-line vitest/expect-expect -- assertes i hjelpefunksjon
   it('skal beholde rekkefølgen når flere startdatoer mangler', async () => {
-    const inntektsmeldinger = InntektsmeldingDefault.args.inntektsmeldinger!;
+    const inntektsmeldinger = notEmpty(InntektsmeldingDefault.args.inntektsmeldinger);
     render(
       <InntektsmeldingDefault
         inntektsmeldinger={[
@@ -53,7 +56,7 @@ describe('InntektsmeldingFaktaIndex', () => {
   });
 
   it('skal vise ingen bortfalte naturalytelser når aktive perioder ikke gir et bortfall', async () => {
-    const inntektsmeldinger = InntektsmeldingDefault.args.inntektsmeldinger!;
+    const inntektsmeldinger = notEmpty(InntektsmeldingDefault.args.inntektsmeldinger);
     render(
       <InntektsmeldingDefault
         inntektsmeldinger={[

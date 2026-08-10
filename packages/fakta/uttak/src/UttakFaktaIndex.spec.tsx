@@ -2,6 +2,9 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { notEmpty } from '@navikt/fp-utils';
+
 import type { KontrollerFaktaPeriodeMedApMarkering } from './typer/kontrollerFaktaPeriodeMedApMarkering';
 import * as stories from './UttakFaktaIndex.stories';
 
@@ -295,16 +298,9 @@ describe('UttakFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
 
-    expect(lagre).toHaveBeenCalledWith([
-      expect.objectContaining({
-        perioder: expect.arrayContaining([
-          expect.objectContaining({
-            arbeidstidsprosent: 12,
-            samtidigUttaksprosent: 34,
-          }),
-        ]),
-      }),
-    ]);
+    const [aksjonspunktSendtInn] = (lagre.mock.calls[0] as unknown as [BekreftUttaksperioderAp[]])[0];
+    const oppdatertPeriode = notEmpty(aksjonspunktSendtInn).perioder.find(periode => periode.arbeidstidsprosent === 12);
+    expect(oppdatertPeriode).toEqual(expect.objectContaining({ arbeidstidsprosent: 12, samtidigUttaksprosent: 34 }));
   });
 
   it('skal vise ulike felter for ulike periodetyper', async () => {

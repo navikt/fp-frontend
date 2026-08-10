@@ -692,10 +692,6 @@ describe('TilretteleggingFaktaIndex', () => {
     const svangerskapspengerTilrettelegging =
       stories.TilretteleggingMed100ProsentVelferdspermisjon.args.svangerskapspengerTilrettelegging;
 
-    if (!svangerskapspengerTilrettelegging) {
-      throw new Error('Mangler svangerskapspengerTilrettelegging-fixture');
-    }
-
     const førsteArbeidsforhold = svangerskapspengerTilrettelegging.arbeidsforholdListe[0]!;
 
     render(
