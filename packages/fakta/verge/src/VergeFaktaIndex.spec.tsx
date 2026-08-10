@@ -61,10 +61,11 @@ describe('VergeFaktaIndex', () => {
   });
 
   it('skal ikke endre rekkefølgen i kodeverk-arrayet når verge-typer sorteres', async () => {
-    const vergetyper = (stories.Default.args?.alleKodeverk?.VergeType ?? []).map(vergetype => ({ ...vergetype })).reverse();
+    const alleKodeverk = stories.Default.args!.alleKodeverk!;
+    const vergetyper = alleKodeverk.VergeType.map(vergetype => ({ ...vergetype })).reverse();
     const originalRekkefølge = vergetyper.map(vergetype => vergetype.kode);
 
-    render(<Default alleKodeverk={{ ...stories.Default.args!.alleKodeverk, VergeType: vergetyper }} />);
+    render(<Default alleKodeverk={{ ...alleKodeverk, VergeType: vergetyper }} />);
 
     expect(await screen.findByText('Fyll ut og kontroller vergeopplysninger')).toBeInTheDocument();
     expect(vergetyper.map(vergetype => vergetype.kode)).toEqual(originalRekkefølge);
