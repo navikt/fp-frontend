@@ -61,7 +61,7 @@ describe('VergeFaktaIndex', () => {
   });
 
   it('skal ikke endre rekkefølgen i kodeverk-arrayet når verge-typer sorteres', async () => {
-    const alleKodeverk = stories.Default.args!.alleKodeverk!;
+    const alleKodeverk = Default.args!.alleKodeverk!;
     const vergetyper = alleKodeverk.VergeType.map(vergetype => ({ ...vergetype })).reverse();
     const originalRekkefølge = vergetyper.map(vergetype => vergetype.kode);
 

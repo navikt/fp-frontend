@@ -106,7 +106,10 @@ export const ManglendeArbeidsforholdForm = ({
         .then(() => {
           oppdater();
           formMethods.reset(formValues);
-        });
+        })
+        // Fangar feilen her (i staden for å la RhfForm/react-hook-form få ein ufanga rejection) slik at
+        // brukaren kan prøve å lagre på nytt om lagringa feilar.
+        .catch(() => undefined);
     }
     return lagreVurdering({
       behandlingUuid,
@@ -119,7 +122,8 @@ export const ManglendeArbeidsforholdForm = ({
       .then(() => {
         oppdater();
         formMethods.reset(formValues);
-      });
+      })
+      .catch(() => undefined);
   };
 
   const [anchorEl, setAnchorEl] = useState<SVGSVGElement | null>(null);

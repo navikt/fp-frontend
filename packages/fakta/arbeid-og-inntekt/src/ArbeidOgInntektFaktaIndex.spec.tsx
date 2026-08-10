@@ -1,6 +1,6 @@
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { composeStories } from '@storybook/react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import dayjs from 'dayjs';
 
@@ -648,25 +648,40 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     render(<ArbeidsforholdMedSammeOrgNr registrerArbeidsforhold={registrerArbeidsforhold} />);
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
-    expect(screen.getAllByAltText('Åpent aksjonspunkt')).toHaveLength(3);
 
-    await userEvent.click(screen.getByText('Opprett arbeidsforhold basert på inntektsmeldingen'));
+    // Autoservice AS har to inntektsmeldinger utan tilhøyrande arbeidsforhold (same arbeidsgjevar-ident).
+    // Opne begge radene slik at kvar sin ManglendeArbeidsforholdForm-instans blir rendra.
+    const table = document.querySelector('table')!;
+    const rader = Array.from(table.querySelectorAll<HTMLTableRowElement>('tbody > tr:not(.aksel-table__expanded-row)'));
+    await userEvent.click(within(rader[1]!).getByText('Vis mer'));
 
-    const periodeFra = screen.getByText('Periode fra');
+    expect(screen.getAllByTitle('Åpent aksjonspunkt')).toHaveLength(5);
+
+    // Vel "Opprett arbeidsforhold basert på inntektsmeldingen" for berre den FØRSTE av dei to Autoservice-radene.
+    await userEvent.click(screen.getAllByText('Opprett arbeidsforhold basert på inntektsmeldingen')[0]!);
+
+    const skjema = within(screen.getByLabelText('Stillingsprosent').closest('form')!);
+
+    const periodeFra = skjema.getByText('Periode fra');
     await userEvent.type(periodeFra, '01.02.2020');
     fireEvent.blur(periodeFra);
 
-    const periodeTil = screen.getByText('Periode til');
+    const periodeTil = skjema.getByText('Periode til');
     await userEvent.type(periodeTil, '01.02.2022');
     fireEvent.blur(periodeTil);
 
-    await userEvent.type(screen.getByLabelText('Stillingsprosent'), '100');
-    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(skjema.getByLabelText('Stillingsprosent'), '100');
+    await userEvent.type(skjema.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
-    await userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(skjema.getByText('Lagre'));
 
     await waitFor(() => expect(registrerArbeidsforhold).toHaveBeenCalledTimes(1));
-    expect(screen.getAllByAltText('Åpent aksjonspunkt')).toHaveLength(2);
+    expect(registrerArbeidsforhold).toHaveBeenCalledWith(
+      expect.objectContaining({ internArbeidsforholdRef: '8ff2c608-6bab-4f83-9732-d26f8cwds' }),
+    );
+    // Berre den redigerte rada skal ha blitt oppdatert - den andre inntektsmeldinga med same
+    // arbeidsgjevar-ident skal framleis vise ope aksjonspunkt.
+    expect(screen.getAllByTitle('Åpent aksjonspunkt')).toHaveLength(4);
   });
 
   it('skal vise to arbeidsforhold fra samme virksomhet der kun ett har fått inntektsmelding', async () => {

@@ -46,6 +46,9 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
     setErBekreftKnappTrykket(true);
     try {
       await submitCallback(transformValues(values, dokBehov));
+    } catch {
+      // Fangar feilen her slik at brukaren kan prøve å lagre på nytt om lagringa feilar,
+      // utan at det oppstår ein "unhandled promise rejection".
     } finally {
       setErBekreftKnappTrykket(false);
     }

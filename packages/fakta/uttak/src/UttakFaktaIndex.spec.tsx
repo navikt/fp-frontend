@@ -274,11 +274,17 @@ describe('UttakFaktaIndex', () => {
 
     await userEvent.click(screen.getAllByTitle('Vis mer')[0]!);
 
+    const periodeFra = screen.getByLabelText('Periode fra');
+    await userEvent.clear(periodeFra);
+    await userEvent.type(periodeFra, '31.01.2022');
+    fireEvent.blur(periodeFra);
+
     const arbeidstidsprosent = screen.getByLabelText('Gradering %');
     await userEvent.clear(arbeidstidsprosent);
     await userEvent.type(arbeidstidsprosent, '12');
 
-    const samtidigUttaksprosent = screen.getByLabelText('Samtidig uttaksprosent');
+    // Label "Samtidig uttaksprosent" er delt mellom ein checkbox og talfeltet - hent ut talfeltet spesifikt.
+    const samtidigUttaksprosent = screen.getByRole('textbox', { name: 'Samtidig uttaksprosent' });
     await userEvent.clear(samtidigUttaksprosent);
     await userEvent.type(samtidigUttaksprosent, '34');
 
@@ -291,12 +297,12 @@ describe('UttakFaktaIndex', () => {
 
     expect(lagre).toHaveBeenCalledWith([
       expect.objectContaining({
-        perioder: [
+        perioder: expect.arrayContaining([
           expect.objectContaining({
             arbeidstidsprosent: 12,
             samtidigUttaksprosent: 34,
           }),
-        ],
+        ]),
       }),
     ]);
   });

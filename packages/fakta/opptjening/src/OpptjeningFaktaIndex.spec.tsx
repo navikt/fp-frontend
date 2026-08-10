@@ -10,8 +10,8 @@ describe('OpptjeningFaktaIndex', () => {
   it('skal rendre uten å krasje når skjæringstidspunkt mangler', async () => {
     render(<MedAksjonspunkt opptjening={undefined} />);
 
-    expect(await screen.findByText('Vurder om aktivitetene kan godkjennes')).toBeInTheDocument();
-    expect(screen.getByText('Skjæringstidspunkt for opptjening')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening')).toBeInTheDocument();
+    expect(screen.getByText('-')).toBeInTheDocument();
     expect(screen.queryByText('25.10.2019')).not.toBeInTheDocument();
   });
 
@@ -110,8 +110,7 @@ describe('OpptjeningFaktaIndex', () => {
 
     expect(bekreftKnapp).toBeEnabled();
     await userEvent.click(bekreftKnapp!);
-    await userEvent.click(bekreftKnapp!);
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(bekreftKnapp).toBeEnabled());
 

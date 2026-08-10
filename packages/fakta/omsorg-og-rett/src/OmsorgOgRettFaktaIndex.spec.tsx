@@ -5,6 +5,7 @@ import { expect } from 'vitest';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { lagAksjonspunkt } from '@navikt/fp-storybook-utils';
+import type { OmsorgOgRett } from '@navikt/fp-types';
 
 import * as stories from './OmsorgOgRettFaktaIndex.stories';
 
@@ -240,8 +241,15 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
   it('skal ikke sende skjulte felter videre når søker endrer til aleneomsorg', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
+    const omsorgOgRett = HarAksjonspunktForAvklarAleneomsorg.args.omsorgOgRett!;
 
-    render(<HarAksjonspunktForAvklarAleneomsorg submitCallback={lagreVurdering} />);
+    // relasjonsRolleType må vera ulik MORA for at "Mottar annen forelder uføretrygd"-feltet skal visast.
+    render(
+      <HarAksjonspunktForAvklarAleneomsorg
+        submitCallback={lagreVurdering}
+        omsorgOgRett={{ ...omsorgOgRett, relasjonsRolleType: 'FARA' }}
+      />,
+    );
 
     await userEvent.click(await screen.findByLabelText('Søker har ikke aleneomsorg for barnet'));
 
@@ -302,7 +310,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
     );
     await userEvent.click(uforetrygdGruppe.getByLabelText('Ja'));
 
-    await userEvent.click(harRettGruppe.getByLabelText('Ja'));
+    // "Ja" finnes no fleire stader (i nøsta radiogrupper), så vi må vera meir presise enn
+    // harRettGruppe (som via `within` også omfattar dei nøsta radiogruppene).
+    await userEvent.click(harRettGruppe.getAllByLabelText('Ja')[0]!);
     await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -325,13 +335,14 @@ describe('OmsorgOgRettFaktaIndex', () => {
           ...omsorgOgRett,
           søknad: {
             ...omsorgOgRett.søknad,
-            annenpartBostedsland: 'XXX',
+            // "XXX" finnes i kodeverket (Statsløs) - bruk ein oppdikta kode som ikkje finnes.
+            annenpartBostedsland: 'IKKE_I_KODEVERKET' as OmsorgOgRett['søknad']['annenpartBostedsland'],
           },
         }}
       />,
     );
 
-    expect(await screen.findByText('XXX')).toBeInTheDocument();
+    expect(await screen.findByText('IKKE_I_KODEVERKET')).toBeInTheDocument();
   });
 
   it('skal bruke riktig aksjonspunktbegrunnelse for hvert skjema når begge aksjonspunkt finnes', async () => {
@@ -364,7 +375,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
       />,
     );
 
-    expect(await screen.findByDisplayValue('Begrunnelse for aleneomsorg')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('Begrunnelse for annen forelder')).toBeInTheDocument();
+    expect(await screen.findByText('Begrunnelse for aleneomsorg')).toBeInTheDocument();
+    expect(screen.getByText('Begrunnelse for annen forelder')).toBeInTheDocument();
   });
 });

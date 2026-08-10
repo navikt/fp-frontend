@@ -496,13 +496,14 @@ describe('TilretteleggingFaktaIndex', () => {
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: 'Opphold' }));
-    await userEvent.click(screen.getByText('Ferie'));
+    // "Ferie" finnes fleire stader (som tabelltekst for eksisterande periodar) - vel radioknappen.
+    await userEvent.click(screen.getByRole('radio', { name: 'Ferie' }));
 
-    const fomDato = screen.getAllByText('Fra og med')[2]!;
+    const fomDato = screen.getByRole('textbox', { name: 'Fra og med' });
     await userEvent.type(fomDato, lagNyDato('20.09.2020'));
     fireEvent.blur(fomDato);
 
-    const tomDato = screen.getByText('Til og med');
+    const tomDato = screen.getByRole('textbox', { name: 'Til og med' });
     await userEvent.type(tomDato, lagNyDato('20.09.2020'));
     fireEvent.blur(tomDato);
 

@@ -145,9 +145,11 @@ export const OpptjeningFaktaPanel = ({
   const bekreft = () => {
     setIsSubmitting(true);
 
-    void submitCallback(transformValues(formVerdierForAlleAktiviteter, filtrerteOgSorterteOpptjeningsaktiviteter)).finally(
-      () => setIsSubmitting(false),
-    );
+    // Fangar feil her (i staden for å la dei forbli ufanga) slik at brukaren kan prøve å lagre på nytt
+    // om lagringa feilar, utan at det oppstår ein "unhandled promise rejection".
+    void submitCallback(transformValues(formVerdierForAlleAktiviteter, filtrerteOgSorterteOpptjeningsaktiviteter))
+      .catch(() => undefined)
+      .finally(() => setIsSubmitting(false));
   };
 
   const velgNesteAktivitet = () => {
