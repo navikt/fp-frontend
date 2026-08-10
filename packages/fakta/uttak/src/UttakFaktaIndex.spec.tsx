@@ -289,12 +289,16 @@ describe('UttakFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
 
-    const perioder = lagre.mock.calls[0]?.[0]?.[0]?.perioder;
-
-    expect(perioder[0]?.arbeidstidsprosent).toBe(12);
-    expect(typeof perioder[0]?.arbeidstidsprosent).toBe('number');
-    expect(perioder[0]?.samtidigUttaksprosent).toBe(34);
-    expect(typeof perioder[0]?.samtidigUttaksprosent).toBe('number');
+    expect(lagre).toHaveBeenCalledWith([
+      expect.objectContaining({
+        perioder: [
+          expect.objectContaining({
+            arbeidstidsprosent: 12,
+            samtidigUttaksprosent: 34,
+          }),
+        ],
+      }),
+    ]);
   });
 
   it('skal vise ulike felter for ulike periodetyper', async () => {

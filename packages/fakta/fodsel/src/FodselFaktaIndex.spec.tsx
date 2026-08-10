@@ -49,13 +49,14 @@ describe('FodselFaktaIndex', () => {
   });
 
   it('skal vise alle barn oppgitt i søknaden ved flerbarnsfødsel', () => {
+    const fødsel = Default.args.fødsel!;
     render(
       <Default
         submitCallback={vi.fn()}
         fødsel={{
-          ...Default.args.fødsel,
+          ...fødsel,
           søknad: {
-            ...Default.args.fødsel.søknad,
+            ...fødsel.søknad,
             barn: [
               {
                 fødselsdato: '2025-06-03',

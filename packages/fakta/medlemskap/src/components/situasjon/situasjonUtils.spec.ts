@@ -40,7 +40,7 @@ describe('situasjonUtils', () => {
     });
 
     it('skal ikke endre rekkefølgen på regioner som sendes inn', () => {
-      const regioner = [
+      const regioner: Medlemskap['regioner'] = [
         { fom: '2022-06-02', tom: '2025-02-01', type: 'ANNET' },
         { fom: '2022-07-01', tom: '2025-02-01', type: 'EOS' },
       ];
@@ -71,7 +71,7 @@ describe('situasjonUtils', () => {
     });
 
     it('skal ikke endre rekkefølgen på personstatuser som sendes inn', () => {
-      const personstatuser = [
+      const personstatuser: Medlemskap['personstatuser'] = [
         { fom: '2022-06-02', tom: '2025-02-01', type: 'DØD' },
         { fom: '2022-07-01', tom: '2025-02-01', type: 'UTVA' },
       ];

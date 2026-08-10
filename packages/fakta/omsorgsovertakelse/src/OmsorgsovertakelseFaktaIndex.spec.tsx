@@ -98,17 +98,18 @@ describe('OmsorgsovertakelseFaktaIndex', () => {
   });
 
   it('skal vise raden for ektefelles barn når bare gjeldende opplysninger har verdien', () => {
+    const omsorgsovertakelse = EngangsstønadUtenAp.args.omsorgsovertakelse!;
     render(
       <EngangsstønadUtenAp
         omsorgsovertakelse={{
-          ...EngangsstønadUtenAp.args.omsorgsovertakelse,
+          ...omsorgsovertakelse,
           kildeGjeldende: 'SAKSBEHANDLER',
           søknad: {
-            ...EngangsstønadUtenAp.args.omsorgsovertakelse.søknad,
+            ...omsorgsovertakelse.søknad,
             erEktefellesBarn: undefined,
           },
           gjeldende: {
-            ...EngangsstønadUtenAp.args.omsorgsovertakelse.gjeldende,
+            ...omsorgsovertakelse.gjeldende,
             erEktefellesBarn: true,
           },
         }}
@@ -121,21 +122,19 @@ describe('OmsorgsovertakelseFaktaIndex', () => {
   });
 
   it('skal vise barn som bare finnes i gjeldende opplysninger som valgbart alternativ', async () => {
+    const omsorgsovertakelse = EngangsstønadMedAp.args.omsorgsovertakelse!;
     render(
       <EngangsstønadMedAp
         omsorgsovertakelse={{
-          ...EngangsstønadMedAp.args.omsorgsovertakelse,
+          ...omsorgsovertakelse,
           søknad: {
-            ...EngangsstønadMedAp.args.omsorgsovertakelse.søknad,
-            barn: [EngangsstønadMedAp.args.omsorgsovertakelse.søknad.barn[0]!],
+            ...omsorgsovertakelse.søknad,
+            barn: [omsorgsovertakelse.søknad.barn[0]!],
             antallBarn: 1,
           },
           gjeldende: {
-            ...EngangsstønadMedAp.args.omsorgsovertakelse.gjeldende,
-            barn: [
-              EngangsstønadMedAp.args.omsorgsovertakelse.gjeldende.barn[0]!,
-              EngangsstønadMedAp.args.omsorgsovertakelse.gjeldende.barn[1]!,
-            ],
+            ...omsorgsovertakelse.gjeldende,
+            barn: [omsorgsovertakelse.gjeldende.barn[0]!, omsorgsovertakelse.gjeldende.barn[1]!],
             antallBarn: 2,
           },
         }}

@@ -318,12 +318,13 @@ describe('OmsorgOgRettFaktaIndex', () => {
   });
 
   it('skal vise rå landkode når bostedsland ikke finnes i kodeverket', async () => {
+    const omsorgOgRett = HarAksjonspunktForAvklarAnnenForelderRett.args.omsorgOgRett!;
     render(
       <HarAksjonspunktForAvklarAnnenForelderRett
         omsorgOgRett={{
-          ...HarAksjonspunktForAvklarAnnenForelderRett.args.omsorgOgRett,
+          ...omsorgOgRett,
           søknad: {
-            ...HarAksjonspunktForAvklarAnnenForelderRett.args.omsorgOgRett.søknad,
+            ...omsorgOgRett.søknad,
             annenpartBostedsland: 'XXX',
           },
         }}
@@ -334,6 +335,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
   });
 
   it('skal bruke riktig aksjonspunktbegrunnelse for hvert skjema når begge aksjonspunkt finnes', async () => {
+    const omsorgOgRett = HarAksjonspunktForAvklarAleneomsorg.args.omsorgOgRett!;
     render(
       <HarAksjonspunktForAvklarAleneomsorg
         isReadOnly
@@ -348,7 +350,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
           }),
         ]}
         omsorgOgRett={{
-          ...HarAksjonspunktForAvklarAleneomsorg.args.omsorgOgRett,
+          ...omsorgOgRett,
           manuellBehandlingResultat: {
             søkerHarAleneomsorg: 'NEI',
             annenpartRettighet: {

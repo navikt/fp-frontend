@@ -24,21 +24,22 @@ describe('InntektsmeldingFaktaIndex', () => {
   });
 
   it('skal beholde rekkefølgen når flere startdatoer mangler', async () => {
+    const inntektsmeldinger = InntektsmeldingDefault.args.inntektsmeldinger!;
     render(
       <InntektsmeldingDefault
         inntektsmeldinger={[
           {
-            ...InntektsmeldingDefault.args.inntektsmeldinger[0],
+            ...inntektsmeldinger[0]!,
             arbeidsgiverIdent: '2',
             startDatoPermisjon: undefined,
           },
           {
-            ...InntektsmeldingDefault.args.inntektsmeldinger[1],
+            ...inntektsmeldinger[1]!,
             arbeidsgiverIdent: '3',
             startDatoPermisjon: undefined,
           },
           {
-            ...InntektsmeldingDefault.args.inntektsmeldinger[2],
+            ...inntektsmeldinger[2]!,
             arbeidsgiverIdent: '1',
             startDatoPermisjon: '2024-11-11',
           },
@@ -52,11 +53,12 @@ describe('InntektsmeldingFaktaIndex', () => {
   });
 
   it('skal vise ingen bortfalte naturalytelser når aktive perioder ikke gir et bortfall', async () => {
+    const inntektsmeldinger = InntektsmeldingDefault.args.inntektsmeldinger!;
     render(
       <InntektsmeldingDefault
         inntektsmeldinger={[
           {
-            ...InntektsmeldingDefault.args.inntektsmeldinger[0],
+            ...inntektsmeldinger[0]!,
             aktiveNaturalytelser: [
               {
                 periode: { fomDato: '0001-01-01', tomDato: '2024-10-09' },

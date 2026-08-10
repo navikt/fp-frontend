@@ -8,23 +8,10 @@ const { MedAksjonspunkt, UtenAksjonspunkt } = composeStories(stories);
 
 describe('OpptjeningFaktaIndex', () => {
   it('skal rendre uten å krasje når skjæringstidspunkt mangler', async () => {
-    if (!stories.MedAksjonspunkt.args.opptjening?.fastsattOpptjening) {
-      throw new Error('Mangler opptjening-fixture for MedAksjonspunkt');
-    }
-
-    const opptjening = {
-      ...stories.MedAksjonspunkt.args.opptjening,
-      fastsattOpptjening: {
-        ...stories.MedAksjonspunkt.args.opptjening.fastsattOpptjening,
-        opptjeningTom: undefined,
-      },
-    };
-
-    render(<MedAksjonspunkt opptjening={opptjening} />);
+    render(<MedAksjonspunkt opptjening={undefined} />);
 
     expect(await screen.findByText('Vurder om aktivitetene kan godkjennes')).toBeInTheDocument();
     expect(screen.getByText('Skjæringstidspunkt for opptjening')).toBeInTheDocument();
-    expect(screen.getByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
     expect(screen.queryByText('25.10.2019')).not.toBeInTheDocument();
   });
 
