@@ -265,6 +265,38 @@ describe('UttakFaktaIndex', () => {
     ]);
   });
 
+  it('skal sende arbeidstidsprosent og samtidig uttaksprosent som tall ved innsending', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<VisUttaksperiodeMedAksjonspunkt submitCallback={lagre} />);
+
+    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+
+    await userEvent.click(screen.getAllByTitle('Vis mer')[0]!);
+
+    const arbeidstidsprosent = screen.getByLabelText('Gradering %');
+    await userEvent.clear(arbeidstidsprosent);
+    await userEvent.type(arbeidstidsprosent, '12');
+
+    const samtidigUttaksprosent = screen.getByLabelText('Samtidig uttaksprosent');
+    await userEvent.clear(samtidigUttaksprosent);
+    await userEvent.type(samtidigUttaksprosent, '34');
+
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+
+    const perioder = lagre.mock.calls[0]?.[0]?.[0]?.perioder;
+
+    expect(perioder[0]?.arbeidstidsprosent).toBe(12);
+    expect(typeof perioder[0]?.arbeidstidsprosent).toBe('number');
+    expect(perioder[0]?.samtidigUttaksprosent).toBe(34);
+    expect(typeof perioder[0]?.samtidigUttaksprosent).toBe('number');
+  });
+
   it('skal vise ulike felter for ulike periodetyper', async () => {
     render(<VisUtsettelseperiodeMedAksjonspunkt />);
 

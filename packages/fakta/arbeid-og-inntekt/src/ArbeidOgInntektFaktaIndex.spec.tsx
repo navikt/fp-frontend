@@ -19,6 +19,7 @@ const {
   ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet,
   ArbeidsforholdErOK,
   ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet,
+  ArbeidsforholdMedSammeOrgNr,
   FlereArbeidsforholdOgInntekstemeldinger,
   ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre,
   FoerRegisterinnhenting,
@@ -216,6 +217,33 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
       vurdering: 'MELDING_TIL_ARBEIDSGIVER_NAV_NO',
     });
+  });
+
+  it('skal beholde skjemaet dirty når lagring av manglende arbeidsforhold feiler', async () => {
+    const lagreVurdering = vi.fn(() => {
+      const promise = Promise.reject(new Error('Lagring feilet'));
+      void promise.catch(() => undefined);
+      return promise;
+    });
+
+    render(<AvklarManglendeArbeidsforhold lagreVurdering={lagreVurdering} />);
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
+    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+
+    const lagreKnapp = screen.getByText('Lagre').closest('button');
+    expect(lagreKnapp).toBeEnabled();
+
+    await userEvent.click(screen.getByText('Lagre'));
+
+    await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(lagreKnapp).toBeEnabled());
+
+    expect(screen.getByLabelText('Jeg kontakter arbeidsgiver')).toBeChecked();
+    expect(screen.getByLabelText('Begrunn valget')).toHaveValue('Dette er en begrunnelse');
+    expect(screen.queryByText('Sett på vent')).not.toBeInTheDocument();
   });
 
   it('skal avklare manglende arbeidsforhold og så se bort fra inntektsmelding', async () => {
@@ -612,6 +640,33 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       frist,
       ventearsak: 'VENT_OPDT_INNTEKTSMELDING',
     });
+  });
+
+  it('skal bare oppdatere raden som matcher internArbeidsforholdId ved lagring av manglende arbeidsforhold', async () => {
+    const registrerArbeidsforhold = vi.fn(() => Promise.resolve());
+
+    render(<ArbeidsforholdMedSammeOrgNr registrerArbeidsforhold={registrerArbeidsforhold} />);
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(screen.getAllByAltText('Åpent aksjonspunkt')).toHaveLength(3);
+
+    await userEvent.click(screen.getByText('Opprett arbeidsforhold basert på inntektsmeldingen'));
+
+    const periodeFra = screen.getByText('Periode fra');
+    await userEvent.type(periodeFra, '01.02.2020');
+    fireEvent.blur(periodeFra);
+
+    const periodeTil = screen.getByText('Periode til');
+    await userEvent.type(periodeTil, '01.02.2022');
+    fireEvent.blur(periodeTil);
+
+    await userEvent.type(screen.getByLabelText('Stillingsprosent'), '100');
+    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Lagre'));
+
+    await waitFor(() => expect(registrerArbeidsforhold).toHaveBeenCalledTimes(1));
+    expect(screen.getAllByAltText('Åpent aksjonspunkt')).toHaveLength(2);
   });
 
   it('skal vise to arbeidsforhold fra samme virksomhet der kun ett har fått inntektsmelding', async () => {

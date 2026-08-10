@@ -4,8 +4,10 @@ import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { SvpTilretteleggingDatoDto } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import { finnProsentSvangerskapspenger } from './components/arbeidsforhold/tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import * as stories from './TilretteleggingFaktaIndex.stories';
 
 const {
@@ -23,6 +25,19 @@ const lagNyDato = (nyDato: string) => {
 };
 
 describe('TilretteleggingFaktaIndex', () => {
+  it('skal bruke en eksplisitt overstyrt utbetalingsgrad på 0', () => {
+    const tilretteleggingDato: SvpTilretteleggingDatoDto = {
+      fom: '2020-03-17',
+      kilde: 'SØKNAD',
+      mottattDato: '2020-02-20',
+      overstyrtUtbetalingsgrad: 0,
+      stillingsprosent: 50,
+      type: 'DELVIS_TILRETTELEGGING',
+    };
+
+    expect(finnProsentSvangerskapspenger(tilretteleggingDato, 100, 50)).toBe(0);
+  });
+
   it('skal vurdere velferdspermisjon og så bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
@@ -475,6 +490,27 @@ describe('TilretteleggingFaktaIndex', () => {
     expect(await screen.findByText('Perioder kan ikke overlappe i tid')).toBeInTheDocument();
   });
 
+  it('skal validere at ettdagsopphold ikke overlapper med annet opphold', async () => {
+    render(<HarOpphold />);
+
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Opphold' }));
+    await userEvent.click(screen.getByText('Ferie'));
+
+    const fomDato = screen.getAllByText('Fra og med')[2]!;
+    await userEvent.type(fomDato, lagNyDato('20.09.2020'));
+    fireEvent.blur(fomDato);
+
+    const tomDato = screen.getByText('Til og med');
+    await userEvent.type(tomDato, lagNyDato('20.09.2020'));
+    fireEvent.blur(tomDato);
+
+    await userEvent.click(screen.getByText('Legg til ny periode'));
+
+    expect(await screen.findByText('Perioder kan ikke overlappe i tid')).toBeInTheDocument();
+  });
+
   it('skal validere at tom-datoen til opphold er etter fom-datoen', async () => {
     render(<HarOpphold />);
 
@@ -648,6 +684,88 @@ describe('TilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+  });
+
+  it('skal ikke blokkere når bare en irrelevant velferdspermisjon utenfor perioden er på 100%', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    const svangerskapspengerTilrettelegging =
+      stories.TilretteleggingMed100ProsentVelferdspermisjon.args.svangerskapspengerTilrettelegging;
+
+    if (!svangerskapspengerTilrettelegging) {
+      throw new Error('Mangler svangerskapspengerTilrettelegging-fixture');
+    }
+
+    const førsteArbeidsforhold = svangerskapspengerTilrettelegging.arbeidsforholdListe[0]!;
+
+    render(
+      <TilretteleggingMed100ProsentVelferdspermisjon
+        submitCallback={lagre}
+        svangerskapspengerTilrettelegging={{
+          ...svangerskapspengerTilrettelegging,
+          arbeidsforholdListe: [
+            {
+              ...førsteArbeidsforhold,
+              velferdspermisjoner: [
+                {
+                  permisjonFom: '2019-02-17',
+                  permisjonTom: '2019-02-17',
+                  permisjonsprosent: 100,
+                  type: 'VELFERDSPERMISJON',
+                },
+                {
+                  permisjonFom: '2020-02-17',
+                  permisjonTom: '2020-07-12',
+                  permisjonsprosent: 50,
+                  type: 'VELFERDSPERMISJON',
+                },
+              ],
+            },
+            svangerskapspengerTilrettelegging.arbeidsforholdListe[1]!,
+          ],
+        }}
+      />,
+    );
+
+    expect(
+      await screen.findByText(
+        'Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer',
+      ),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+
+    expect(
+      screen.queryByText(
+        'Permisjonen på 100% er satt som gyldig, og dette fører til at søker ikke får svangerskapspenger for arbeidsforholdet.',
+      ),
+    ).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getAllByText('Oppdater')[0]!);
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(
+      screen.queryByText('Arbeidsforhold med gyldig permisjon på 100% kan ikke ha svangerskapspenger'),
+    ).not.toBeInTheDocument();
+  });
+
+  it('skal lukke arbeidsforholdskortet når skalBrukes blir slått av', async () => {
+    const { container } = render(<TilretteleggingMedVelferdspermisjon />);
+
+    expect(
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
+    ).toBeInTheDocument();
+
+    const ekspanderingsKnapp = container.querySelector<HTMLButtonElement>('button[aria-expanded="true"]');
+
+    expect(ekspanderingsKnapp).toBeTruthy();
+
+    await userEvent.click(screen.getByLabelText('Skal ha svangerskapspenger for arbeidsforholdet'));
+
+    await waitFor(() =>
+      expect(container.querySelector<HTMLButtonElement>('button[aria-expanded]')).toHaveAttribute('aria-expanded', 'false'),
+    );
   });
 
   it('skal kunne splitte et arbeidsforhold med flere stillinger i samme underenhet, bekrefte og deretter reversere splitten', async () => {

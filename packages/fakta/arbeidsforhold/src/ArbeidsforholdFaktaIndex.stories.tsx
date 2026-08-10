@@ -76,6 +76,27 @@ export const ArbeidsforholdetSkalBenyttesUtenInntektsmelding: Story = {
   },
 };
 
+export const ArbeidsforholdUtenStillingsprosent: Story = {
+  args: {
+    arbeidOgInntekt: {
+      arbeidsforhold: [
+        {
+          ...defaultArbeidsforhold,
+          arbeidsgiverIdent: '999999999',
+          internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+          eksternArbeidsforholdId: 'ARB001-001',
+          fom: '2000-04-19',
+          tom: '9999-12-31',
+          stillingsprosent: undefined,
+        },
+      ],
+      inntektsmeldinger: [],
+      inntekter: [],
+      skjæringstidspunkt: '2022-01-31',
+    },
+  },
+};
+
 export const ManueltOpprettetArbeidsforhold: Story = {
   args: {
     arbeidOgInntekt: {

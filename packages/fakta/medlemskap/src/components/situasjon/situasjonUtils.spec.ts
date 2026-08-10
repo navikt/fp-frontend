@@ -38,6 +38,24 @@ describe('situasjonUtils', () => {
       };
       expect(getSisteRegion(medlemskap, kodeverk, intl)).toBe('EU/EØS');
     });
+
+    it('skal ikke endre rekkefølgen på regioner som sendes inn', () => {
+      const regioner = [
+        { fom: '2022-06-02', tom: '2025-02-01', type: 'ANNET' },
+        { fom: '2022-07-01', tom: '2025-02-01', type: 'EOS' },
+      ];
+      const medlemskap: Medlemskap = {
+        ...defaultMedlemskapProps,
+        regioner,
+      };
+
+      getSisteRegion(medlemskap, kodeverk, intl);
+
+      expect(regioner).toEqual([
+        { fom: '2022-06-02', tom: '2025-02-01', type: 'ANNET' },
+        { fom: '2022-07-01', tom: '2025-02-01', type: 'EOS' },
+      ]);
+    });
   });
 
   describe('getSistePersonstatus', () => {
@@ -50,6 +68,24 @@ describe('situasjonUtils', () => {
         ],
       };
       expect(getSistePersonstatus(medlemskap, kodeverk, intl)).toBe('Utflyttet');
+    });
+
+    it('skal ikke endre rekkefølgen på personstatuser som sendes inn', () => {
+      const personstatuser = [
+        { fom: '2022-06-02', tom: '2025-02-01', type: 'DØD' },
+        { fom: '2022-07-01', tom: '2025-02-01', type: 'UTVA' },
+      ];
+      const medlemskap: Medlemskap = {
+        ...defaultMedlemskapProps,
+        personstatuser,
+      };
+
+      getSistePersonstatus(medlemskap, kodeverk, intl);
+
+      expect(personstatuser).toEqual([
+        { fom: '2022-06-02', tom: '2025-02-01', type: 'DØD' },
+        { fom: '2022-07-01', tom: '2025-02-01', type: 'UTVA' },
+      ]);
     });
   });
 

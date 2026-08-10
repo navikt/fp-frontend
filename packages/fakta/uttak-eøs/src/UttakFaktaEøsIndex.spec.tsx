@@ -6,6 +6,7 @@ import * as stories from './UttakFaktaEøsIndex.stories';
 
 const {
   ÅpentAksjonspunktMedPerioder,
+  ÅpentAksjonspunktMedPerioderSomDelerSammeFom,
   AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg,
   OverstyringSkalVæreMuligHvisDetForeliggerEnTidligereVurderingMedRegistrertePerioder,
   OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSomKanLøsesEllerEndres,
@@ -103,6 +104,46 @@ describe('UttakFaktaEøsIndex', () => {
         },
       ],
     });
+  });
+
+  it('skal bare slette valgt periode når flere perioder har samme fom', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<ÅpentAksjonspunktMedPerioderSomDelerSammeFom submitCallback={lagre} />);
+
+    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('01.01.2023 - 31.01.2023'));
+    await userEvent.click(screen.getByRole('button', { name: 'Slett periode' }));
+    await userEvent.click(screen.getByText('OK'));
+
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      kode: '5103',
+      begrunnelse: 'Dette er en begrunnelse',
+      perioder: [
+        {
+          fom: '2023-01-01',
+          tom: '2023-02-15',
+          trekkonto: 'FELLESPERIODE',
+          trekkdager: 15,
+        },
+      ],
+    });
+  });
+
+  it('skal ikke endre rekkefølgen i input-arrayet når periodene sorteres for visning', async () => {
+    const perioder = (stories.ÅpentAksjonspunktMedPerioder.args?.annenForelderUttakEøs ?? []).map(periode => ({
+      ...periode,
+    }));
+    const originalRekkefølge = perioder.map(({ fom, tom }) => `${fom}-${tom}`);
+
+    render(<ÅpentAksjonspunktMedPerioder annenForelderUttakEøs={perioder} />);
+
+    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(perioder.map(({ fom, tom }) => `${fom}-${tom}`)).toEqual(originalRekkefølge);
   });
 
   it('skal få feilmelding hvis en legger til overlappende perioder, rydder opp i overlapper og sender inn', async () => {

@@ -48,6 +48,39 @@ describe('FodselFaktaIndex', () => {
     expect(fregBoks.getByText('03.06.2025')).toBeInTheDocument();
   });
 
+  it('skal vise alle barn oppgitt i søknaden ved flerbarnsfødsel', () => {
+    render(
+      <Default
+        submitCallback={vi.fn()}
+        fødsel={{
+          ...Default.args.fødsel,
+          søknad: {
+            ...Default.args.fødsel.søknad,
+            barn: [
+              {
+                fødselsdato: '2025-06-03',
+                barnNummer: 1,
+              },
+              {
+                fødselsdato: '2025-06-03',
+                dødsdato: '2025-06-04',
+                barnNummer: 2,
+              },
+            ],
+            antallBarn: 2,
+          },
+        }}
+      />,
+    );
+
+    const søknadsBoks = within(screen.getByLabelText('Opplysninger oppgitt i søknaden'));
+    expect(søknadsBoks.getByText('Barn 1')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('f. 03.06.2025')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('Barn 2')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('f. 03.06.2025 - d. 04.06.2025')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('2')).toBeInTheDocument();
+  });
+
   describe('terminbekreftelse', () => {
     it('skal bekrefte aksjonspunkt for termin', async () => {
       const lagre = vi.fn(() => Promise.resolve());
@@ -169,6 +202,33 @@ describe('FodselFaktaIndex', () => {
       await userEvent.clear(fødselsdatoFelt);
       await userEvent.type(fødselsdatoFelt, '02.06.2025');
       fireEvent.blur(fødselsdatoFelt);
+
+      expect(
+        await apBoks.findByText(
+          'For stort avvik mellom termin og fødsel. Fødsel må være tidligst 19 uker før og senest 6 uker etter termin.',
+        ),
+      ).toBeInTheDocument();
+    });
+
+    it('skal vise feilmelding når et barn er for langt unna termindato selv om første barn er gyldig', async () => {
+      render(<APSjekkManglendeFødselPåForeldrepenger submitCallback={vi.fn()} />);
+
+      const apBoks = within(screen.getByLabelText('Kontroller opplysninger om fødsel'));
+
+      await userEvent.click(apBoks.getByText('Ja'));
+
+      const alleDatofelt = apBoks.getAllByRole('textbox', { hidden: true });
+      const fødselsdatoFelt1 = alleDatofelt[0]!;
+
+      await userEvent.clear(fødselsdatoFelt1);
+      await userEvent.type(fødselsdatoFelt1, '25.05.2025');
+      fireEvent.blur(fødselsdatoFelt1);
+
+      await userEvent.click(apBoks.getByText('Legg til barn'));
+
+      const fødselsdatoFelt2 = apBoks.getAllByRole('textbox', { hidden: true })[2]!;
+      await userEvent.type(fødselsdatoFelt2, '27.05.2025');
+      fireEvent.blur(fødselsdatoFelt2);
 
       expect(
         await apBoks.findByText(

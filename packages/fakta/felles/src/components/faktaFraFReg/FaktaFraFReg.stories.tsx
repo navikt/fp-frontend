@@ -51,3 +51,17 @@ export const ToBarnMedEnDødsdato: Story = {
     ],
   },
 };
+
+export const ToBarnMedLikFødselsdato: Story = {
+  args: {
+    barna: [
+      {
+        fødselsdato: '2025-05-03',
+        dødsdato: '2025-05-04',
+      },
+      {
+        fødselsdato: '2025-05-03',
+      },
+    ],
+  },
+};

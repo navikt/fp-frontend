@@ -5,7 +5,8 @@ import { describe, expect } from 'vitest';
 import { erBarnUlike } from './FaktaFraFReg';
 import * as stories from './FaktaFraFReg.stories';
 
-const { IngenBarn, EttBarn, EttBarnMedDødsdato, ToBarnMedEnDødsdato } = composeStories(stories);
+const { IngenBarn, EttBarn, EttBarnMedDødsdato, ToBarnMedEnDødsdato, ToBarnMedLikFødselsdato } =
+  composeStories(stories);
 
 describe('FaktaFraFReg', () => {
   it('skal vise folkeregister med null registrerte barn', () => {
@@ -52,6 +53,17 @@ describe('FaktaFraFReg', () => {
     expect(screen.getByText('2')).toBeInTheDocument();
     expect(screen.getByText('03.05.2025')).toBeInTheDocument();
     expect(screen.getByText('-')).toBeInTheDocument();
+  });
+
+  it('skal vise begge barn når de har lik fødselsdato', () => {
+    render(<ToBarnMedLikFødselsdato />);
+
+    expect(screen.getByText('Opplysninger fra Folkeregisteret')).toBeInTheDocument();
+    expect(screen.getAllByText('03.05.2025')).toHaveLength(2);
+    expect(screen.getByText('04.05.2025')).toBeInTheDocument();
+    expect(screen.getByText('-')).toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
+    expect(screen.getByText('2')).toBeInTheDocument();
   });
 
   describe('erBarnUlike', () => {

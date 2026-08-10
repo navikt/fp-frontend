@@ -7,6 +7,27 @@ import * as stories from './OpptjeningFaktaIndex.stories';
 const { MedAksjonspunkt, UtenAksjonspunkt } = composeStories(stories);
 
 describe('OpptjeningFaktaIndex', () => {
+  it('skal rendre uten å krasje når skjæringstidspunkt mangler', async () => {
+    if (!stories.MedAksjonspunkt.args.opptjening?.fastsattOpptjening) {
+      throw new Error('Mangler opptjening-fixture for MedAksjonspunkt');
+    }
+
+    const opptjening = {
+      ...stories.MedAksjonspunkt.args.opptjening,
+      fastsattOpptjening: {
+        ...stories.MedAksjonspunkt.args.opptjening.fastsattOpptjening,
+        opptjeningTom: undefined,
+      },
+    };
+
+    render(<MedAksjonspunkt opptjening={opptjening} />);
+
+    expect(await screen.findByText('Vurder om aktivitetene kan godkjennes')).toBeInTheDocument();
+    expect(screen.getByText('Skjæringstidspunkt for opptjening')).toBeInTheDocument();
+    expect(screen.getByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
+    expect(screen.queryByText('25.10.2019')).not.toBeInTheDocument();
+  });
+
   it('skal åpne aktivitet automatisk når det har åpent aksjonspunkt og så godkjenne det', async () => {
     const lagre = vi.fn(() => Promise.resolve());
     render(<MedAksjonspunkt submitCallback={lagre} />);
@@ -73,6 +94,43 @@ describe('OpptjeningFaktaIndex', () => {
         },
       ],
     });
+  });
+
+  it('skal nullstille bekreft-knappen når submit feiler så brukeren kan prøve igjen', async () => {
+    const førsteFeil = Promise.reject(new Error('Kunne ikke lagre opptjening'));
+    void førsteFeil.catch(() => undefined);
+
+    const lagre = vi
+      .fn()
+      .mockImplementationOnce(() => førsteFeil)
+      .mockImplementationOnce(() => Promise.resolve());
+
+    render(<MedAksjonspunkt submitCallback={lagre} />);
+
+    expect(await screen.findByText('Vurder om aktivitetene kan godkjennes')).toBeInTheDocument();
+
+    await userEvent.click(screen.getAllByRole('radio')[0]!);
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    expect(await screen.findAllByText('Sykepenger')).toHaveLength(2);
+
+    await userEvent.click(screen.getAllByRole('radio')[1]!);
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse 2');
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    const bekreftKnapp = screen.getByText('Bekreft og fortsett').closest('button');
+
+    expect(bekreftKnapp).toBeEnabled();
+    await userEvent.click(bekreftKnapp!);
+    await userEvent.click(bekreftKnapp!);
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(bekreftKnapp).toBeEnabled());
+
+    await userEvent.click(bekreftKnapp!);
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(2));
   });
 
   it('skal bytte og så lukke aktiviteter ved hjelp av pil-ikoner', async () => {

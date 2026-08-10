@@ -54,4 +54,14 @@ describe('YtelserFaktaIndex', () => {
     expect(screen.getByText('Svangerskapspenger')).toBeInTheDocument();
     expect(screen.getByText('Ingen')).toBeInTheDocument();
   });
+
+  it('skal sette sikker rel-attributt på lenker som åpnes i ny fane', async () => {
+    render(<YtelserForHovedsøker />);
+
+    const lenke = await screen.findByRole('link', { name: '12' });
+
+    expect(lenke).toHaveAttribute('target', '_blank');
+    expect(lenke.getAttribute('rel')).toContain('noopener');
+    expect(lenke.getAttribute('rel')).toContain('noreferrer');
+  });
 });

@@ -1,11 +1,13 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+
 import * as stories from './MedlemskapFaktaIndex.stories';
 
-const { Default } = composeStories(stories);
+const { Default, ForutgåendeMedlemskap } = composeStories(stories);
 
 describe('MedlemskapFaktaIndex', () => {
   it('skal vise medlemspanel med aksjonspunkt', async () => {
@@ -186,5 +188,29 @@ describe('MedlemskapFaktaIndex', () => {
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett')).toBeInTheDocument();
+  });
+
+  it('skal ikke sende medlemFom når vurderingen endres til oppfylt', async () => {
+    const submitCallback = vi.fn(() => Promise.resolve());
+
+    render(<ForutgåendeMedlemskap submitCallback={submitCallback} />);
+
+    await userEvent.click(screen.getByLabelText('Ikke oppfylt'));
+    await userEvent.selectOptions(screen.getByLabelText('Avslagsårsak'), '1052');
+    await userEvent.type(screen.getByLabelText('Innflyttingsdato'), '01.01.2024');
+    await userEvent.click(screen.getByLabelText('Oppfylt'));
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() =>
+      expect(submitCallback).toHaveBeenCalledWith({
+        kode: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+        avslagskode: undefined,
+        opphørFom: undefined,
+        medlemFom: undefined,
+        begrunnelse: 'Dette er en begrunnelse',
+      }),
+    );
   });
 });
