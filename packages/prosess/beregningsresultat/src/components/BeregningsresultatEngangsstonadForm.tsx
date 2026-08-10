@@ -34,9 +34,7 @@ export const BeregningsresultatEngangsstonadForm = ({
           <Detail>
             <FormattedMessage id="BeregningEngangsstonadForm.Sats" />
           </Detail>
-          <Label size="small">
-            {behandlingResultatstruktur.satsVerdi ? formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi) : '-'}
-          </Label>
+          <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi)}</Label>
         </HStack>
         <HStack justify="space-between">
           <Detail>
@@ -49,11 +47,7 @@ export const BeregningsresultatEngangsstonadForm = ({
           <Detail>
             <FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" />
           </Detail>
-          <Label size="small">
-            {behandlingResultatstruktur.beregnetTilkjentYtelse
-              ? formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)
-              : '-'}
-          </Label>
+          <Label size="small">{formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)}</Label>
         </HStack>
       </VStack>
     </VStack>

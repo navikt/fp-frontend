@@ -154,7 +154,7 @@ const hentToggleDetaljer =
         : [
             ...showDetails.slice(0, tableIndex),
             { id, show: !showDetails[tableIndex]?.show },
-            ...showDetails.slice(tableIndex + 1, -1),
+            ...showDetails.slice(tableIndex + 1),
           ];
     setShowDetails(newShowDetailsArray);
   };

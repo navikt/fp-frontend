@@ -44,7 +44,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
   const [isSubmitting, setIsSubmitting] = useState(false);
   const lagreVedtak = () => {
     setIsSubmitting(true);
-    void submitCallback(transformValues(aksjonspunkterForPanel)).then(() => setIsSubmitting(false));
+    void submitCallback(transformValues(aksjonspunkterForPanel)).finally(() => setIsSubmitting(false));
   };
 
   return (
