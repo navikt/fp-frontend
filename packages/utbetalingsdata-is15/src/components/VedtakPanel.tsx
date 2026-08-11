@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Table, VStack } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
+import dayjs from 'dayjs';
 
 import type { Vedtak } from '@navikt/fp-types';
 
@@ -61,7 +62,14 @@ export const VedtakPanel = ({ alleVedtak, erForeldrepenger }: Props) => {
               </Table.DataCell>
               <Table.DataCell>{vedtak.dekningsgrad}</Table.DataCell>
               <Table.DataCell>
-                <PeriodLabel dateStringFom={vedtak.periode.fom} dateStringTom={vedtak.periode.tom} />
+                <PeriodLabel
+                  dateStringFom={vedtak.periode.fom}
+                  dateStringTom={
+                    vedtak.opphørFom
+                      ? dayjs(vedtak.opphørFom).subtract(1, 'day').format('YYYY-MM-DD')
+                      : vedtak.periode.tom
+                  }
+                />
               </Table.DataCell>
               <Table.DataCell>{vedtak.arbeidskategori?.termnavn}</Table.DataCell>
               <Table.DataCell>{vedtak.opphørFom && <DateLabel dateString={vedtak.opphørFom} />}</Table.DataCell>
