@@ -11,12 +11,12 @@ interface Props {
 export const ArbeidsforholdPanel = ({ alleArbeidsforhold }: Props) => (
   <VStack gap="space-16">
     <div />
-    {!alleArbeidsforhold && (
+    {(!alleArbeidsforhold || alleArbeidsforhold.length === 0) && (
       <BodyShort size="small">
         <FormattedMessage id="ArbeidsforholdPanel.IngenArbeidsforhold" />
       </BodyShort>
     )}
-    {alleArbeidsforhold && (
+    {alleArbeidsforhold && alleArbeidsforhold.length > 0 && (
       <Table size="small">
         <Table.Header>
           <Table.Row>
@@ -36,7 +36,9 @@ export const ArbeidsforholdPanel = ({ alleArbeidsforhold }: Props) => (
         </Table.Header>
         <Table.Body>
           {alleArbeidsforhold.map(arbeidsforhold => (
-            <Table.Row key={arbeidsforhold.identdato}>
+            <Table.Row
+              key={`${arbeidsforhold.identdato}-${arbeidsforhold.arbeidsgiverOrgnr}-${arbeidsforhold.refusjonTom ?? ''}`}
+            >
               <Table.DataCell>{arbeidsforhold.arbeidsgiverOrgnr}</Table.DataCell>
               <Table.DataCell>{arbeidsforhold.inntekt}</Table.DataCell>
               <Table.DataCell>{arbeidsforhold.inntektsperiode?.termnavn}</Table.DataCell>
