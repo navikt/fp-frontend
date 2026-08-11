@@ -1,24 +1,31 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
+import { vi } from 'vitest';
 
 import * as stories from './TilBehandlingPanel.stories';
+
+vi.mock('@navikt/fp-los-felles', async importOriginal => {
+  const actual = await importOriginal<typeof import('@navikt/fp-los-felles')>();
+  return {
+    ...actual,
+    ReactECharts: () => <div data-testid="mock-chart" />,
+  };
+});
 
 const { Default } = composeStories(stories);
 
 describe('TilBehandlingPanel', () => {
-  // TODO echarts-testing
-  it.todo('skal vise graffilter', async () => {
+  it('skal vise graffilter', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    const { getByLabelText } = render(<Default />);
+    render(<Default />);
     expect(await screen.findByText('Antall åpne oppgaver pr dato')).toBeInTheDocument();
 
-    expect(screen.getByText<HTMLOptionElement>('2 siste uker').selected).toBeTruthy();
-    expect(screen.getByText<HTMLOptionElement>('4 siste uker').selected).toBeFalsy();
+    expect(screen.getByRole('radio', { name: '2 siste uker' })).toHaveAttribute('aria-checked', 'true');
+    expect(screen.getByRole('radio', { name: '4 siste uker' })).toHaveAttribute('aria-checked', 'false');
 
-    expect(getByLabelText('Foreldrepenger')).not.toBeChecked();
-    expect(getByLabelText('Engangsstønad')).not.toBeChecked();
-    expect(getByLabelText('Svangerskapspenger')).not.toBeChecked();
-    expect(getByLabelText('Alle')).toBeChecked();
+    expect(screen.getByRole('button', { name: 'Foreldrepenger' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('button', { name: 'Engangsstønad' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('button', { name: 'Svangerskapspenger' })).toHaveAttribute('aria-pressed', 'true');
   });
 });
