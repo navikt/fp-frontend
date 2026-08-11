@@ -156,7 +156,7 @@ export const MedPeriodeUtenDagsats: Story = {
     aksjonspunkterForPanel: [],
     beregningresultat: {
       perioder: [
-        ...beregningresultat.perioder!,
+        ...(beregningresultat.perioder ?? []),
         {
           andeler: [
             {
