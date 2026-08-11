@@ -2,6 +2,7 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { harPeriodeMedStartdato } from './components/UttakFaktaForm';
 import type { KontrollerFaktaPeriodeMedApMarkering } from './typer/kontrollerFaktaPeriodeMedApMarkering';
 import * as stories from './UttakFaktaIndex.stories';
 
@@ -16,6 +17,16 @@ const {
 } = composeStories(stories);
 
 describe('UttakFaktaIndex', () => {
+  it('skal validere mot startdato og ikke automatisk generert periode for tapte dager', () => {
+    const perioder = [
+      { fom: '2024-10-28', tom: '2024-12-31' },
+      { fom: '2025-01-01', tom: '2025-01-31' },
+    ] as KontrollerFaktaPeriodeMedApMarkering[];
+
+    expect(harPeriodeMedStartdato(perioder, '2025-01-01')).toBe(true);
+    expect(harPeriodeMedStartdato(perioder, '2025-02-01')).toBe(false);
+  });
+
   it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
     render(<VisUttaksperiodeUtenAksjonspunkt />);
 
