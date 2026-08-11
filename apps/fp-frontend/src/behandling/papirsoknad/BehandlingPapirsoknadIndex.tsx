@@ -143,7 +143,7 @@ const PAPIRSØKNAD_AP_KODER = [
 type PapirsøknadApKode = (typeof PAPIRSØKNAD_AP_KODER)[number];
 
 const erPapirsøknadApKode = (kode: Aksjonspunkt['definisjon']): kode is PapirsøknadApKode =>
-  PAPIRSØKNAD_AP_KODER.some(papirsøknadKode => papirsøknadKode === kode);
+  (PAPIRSØKNAD_AP_KODER as readonly Aksjonspunkt['definisjon'][]).includes(kode);
 
 const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): PapirsøknadApKode => {
   const ap = aksjonspunkter.map(a => a.definisjon).find(erPapirsøknadApKode);
