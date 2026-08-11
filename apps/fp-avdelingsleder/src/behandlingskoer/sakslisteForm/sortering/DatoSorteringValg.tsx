@@ -28,6 +28,10 @@ export const DatoSorteringValg = () => {
   const fraVerdi = watch('sortering.fra');
   const tilVerdi = watch('sortering.til');
 
+  // Tekstfeltet lagrar rå input, så verdien kan vere ein streng som ikkje er eit tal
+  const fraTall = tilTallEllerNull(fraVerdi);
+  const tilTall = tilTallEllerNull(tilVerdi);
+
   return (
     <ArrowBox marginTop={4}>
       <VStack gap="space-8">
@@ -67,12 +71,12 @@ export const DatoSorteringValg = () => {
                   label={<FormattedMessage id="SorteringVelger.Fom" />}
                   validate={[hasValidPosOrNegInteger, minValue(-500), maxValue(1100)]}
                 />
-                {erGyldigRelativVerdi(fraVerdi) && (
+                {fraTall !== null && (
                   <Detail>
                     {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
-                      <DateLabel dateString={finnDato(fraVerdi)} />
+                      <DateLabel dateString={finnDato(fraTall)} />
                     ) : (
-                      <DateLabel dateString={finnDatoMåned(fraVerdi, true)} />
+                      <DateLabel dateString={finnDatoMåned(fraTall, true)} />
                     )}
                   </Detail>
                 )}
@@ -100,12 +104,12 @@ export const DatoSorteringValg = () => {
                     maxValue(1100),
                   ]}
                 />
-                {erGyldigRelativVerdi(tilVerdi) && (
+                {tilTall !== null && (
                   <Detail>
                     {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
-                      <DateLabel dateString={finnDato(tilVerdi)} />
+                      <DateLabel dateString={finnDato(tilTall)} />
                     ) : (
-                      <DateLabel dateString={finnDatoMåned(tilVerdi, false)} />
+                      <DateLabel dateString={finnDatoMåned(tilTall, false)} />
                     )}
                   </Detail>
                 )}
@@ -148,8 +152,14 @@ const finnDatoMåned = (antallMåneder: number, erStartenAvMåned: boolean) => {
   return baseDato.add(antallMåneder, 'month').format();
 };
 
-const erGyldigRelativVerdi = (verdi: number | string | null): verdi is number =>
-  typeof verdi === 'number' && Number.isFinite(verdi);
+const tilTallEllerNull = (verdi: number | string | null): number | null => {
+  const tekst = verdi === null ? '' : String(verdi).trim();
+  if (tekst === '') {
+    return null;
+  }
+  const tall = Number(tekst);
+  return Number.isFinite(tall) ? tall : null;
+};
 
 const validerTomDatoLikEllerEtterFomDato = (fomDato: string | null) => (tomDato: string) => {
   return fomDato && tomDato ? dateAfterOrEqual(fomDato)(tomDato) : null;

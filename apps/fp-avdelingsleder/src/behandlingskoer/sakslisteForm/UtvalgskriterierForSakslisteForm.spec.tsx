@@ -1,6 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import dayjs from 'dayjs';
 import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './UtvalgskriterierForSakslisteForm.stories';
@@ -63,5 +64,21 @@ describe('UtvalgskriterierForSakslisteForm', () => {
     const lagreKnapp = screen.getByRole('button', { name: /Lagre/i });
     await userEvent.click(lagreKnapp);
     expect(await screen.findByText(/Feltet kan kun inneholde tall/i)).toBeInTheDocument();
+  });
+
+  it('skal vise utrekna dato når det er skrive inn eit gyldig antall dager', async () => {
+    applyRequestHandlers(MedGittNavn.parameters['msw'] as MswParameters['msw']);
+    render(<MedGittNavn />);
+
+    expect(await screen.findByText('Utvalgskriterier')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByLabelText('Relativ periode (dager)'));
+
+    const fomInput = screen.getByLabelText('F.o.m.');
+    await userEvent.clear(fomInput);
+    await userEvent.type(fomInput, '5');
+
+    const forventetDato = dayjs().add(5, 'd').format('DD.MM.YYYY');
+    expect(await screen.findByText(forventetDato)).toBeInTheDocument();
   });
 });
