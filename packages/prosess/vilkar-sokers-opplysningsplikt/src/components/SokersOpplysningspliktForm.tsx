@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
-import { BTag, isObject } from '@navikt/ft-utils';
+import { BTag } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
@@ -48,8 +48,6 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
   );
 
-  const hasSoknad = harSoknad(søknad);
-
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
@@ -85,7 +83,7 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
             vilkår={undefined}
             legend={<FormattedMessage id="SokersOpplysningspliktForm.ErVilkåretOppfylt" />}
             isReadOnly={isReadOnly}
-            skalKunneInnvilge={hasSoknad}
+            skalKunneInnvilge
             vilkårOppfyltLabel={<FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />}
             vilkårIkkeOppfyltLabel={
               <FormattedMessage
@@ -100,9 +98,6 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
     </RhfForm>
   );
 };
-
-// TODO: søknad er vel alltid objekt så denne sjekken er irrelevant??
-const harSoknad = (soknad: Soknad): boolean => isObject(soknad);
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],

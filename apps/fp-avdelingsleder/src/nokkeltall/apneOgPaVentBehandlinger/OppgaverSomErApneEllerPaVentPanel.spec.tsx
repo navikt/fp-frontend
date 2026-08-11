@@ -1,14 +1,22 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
+import { vi } from 'vitest';
 
 import * as stories from './OppgaverSomErApneEllerPaVentPanel.stories';
+
+vi.mock('@navikt/fp-los-felles', async importOriginal => {
+  const actual = await importOriginal<typeof import('@navikt/fp-los-felles')>();
+  return {
+    ...actual,
+    ReactECharts: () => <div data-testid="mock-chart" />,
+  };
+});
 
 const { Default } = composeStories(stories);
 
 describe('OppgaverSomErApneEllerPaVentPanel', () => {
-  // TODO echarts-testing
-  it.todo('skal vise graffilter', async () => {
+  it('skal vise graffilter', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(

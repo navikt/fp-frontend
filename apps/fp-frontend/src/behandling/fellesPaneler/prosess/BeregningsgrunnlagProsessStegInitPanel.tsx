@@ -52,11 +52,7 @@ const mapBGKodeTilFpsakKode = (
 const lagModifisertCallback =
   (submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>) =>
   (aksjonspunkterSomSkalLagres: BeregningAksjonspunktSubmitType[]) => {
-    //TODO (TOR) Det ser ut i BeregningsgrunnlagProsessIndex som om aksjonspunkterSomSkalLagres alltid er eit array?
-    const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
-      ? aksjonspunkterSomSkalLagres
-      : [aksjonspunkterSomSkalLagres];
-    const transformerteData = apListe.map((apData): BeregningsgrunnlagAp => {
+    const transformerteData = aksjonspunkterSomSkalLagres.map((apData): BeregningsgrunnlagAp => {
       const grunnlag = notEmpty(apData.grunnlag[0]);
       const felles = {
         kode: mapBGKodeTilFpsakKode(apData.kode),
