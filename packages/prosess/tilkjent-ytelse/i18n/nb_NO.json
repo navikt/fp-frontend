@@ -1,5 +1,6 @@
 {
   "TilkjentYtelse.Title": "Tilkjent ytelse",
+  "TilkjentYtelse.NullIDagsats": "Tilkjent ytelse inneholder en eller flere perioder med 0 kroner i dagsats. Dette kan føre til feil ved brevutsending. Kontroller beregningen før du fortsetter.",
   "TilkjentYtelse.VurderTilbaketrekk.Beskrivelse": "Saksbehandler har vurdert om ytelsen skal endres fra direkte utbetaling til refusjon til arbeidsgiver, og tilbakekreves fra bruker, eller om det er en sak mellom arbeidstaker og arbeidsgiver.",
   "TilkjentYtelse.Stonadinfo.Stonadsdager": "Stønadsdager",
   "TilkjentYtelse.PeriodeData.Detaljer": "Detaljer for valgt periode",

@@ -150,3 +150,35 @@ export const MedBarnFodtLengeForForstePeriode: Story = {
     } satisfies FamilieHendelse,
   },
 };
+
+export const MedPeriodeUtenDagsats: Story = {
+  args: {
+    aksjonspunkterForPanel: [],
+    beregningresultat: {
+      perioder: [
+        ...beregningresultat.perioder!,
+        {
+          andeler: [
+            {
+              uttak: {
+                stonadskontoType: 'FORELDREPENGER' satisfies StønadskontoType,
+                gradering: false,
+              },
+              aktivitetStatus: 'AT',
+              arbeidsforholdType: 'ARBEID',
+              arbeidsgiverReferanse: '',
+              refusjon: 0,
+              tilSøker: 0,
+              utbetalingsgrad: 0,
+              sisteUtbetalingsdato: '',
+              eksternArbeidsforholdId: '',
+            },
+          ],
+          fom: '2019-06-11',
+          tom: '2019-07-01',
+          dagsats: 0,
+        },
+      ],
+    } satisfies BeregningsresultatDagytelse,
+  },
+};
