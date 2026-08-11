@@ -6,6 +6,19 @@ import { capitalizeFirstLetter } from '@navikt/ft-utils';
 
 import type { Feilmelding } from '../typer/feilmeldingTsType';
 
+type Detalj = NonNullable<Feilmelding['tilleggsInfo']>[string];
+
+// Detaljane kan vera nøsta objekt eller lister. Desse blir serialisert i staden for å renderast rekursivt.
+const formaterDetalj = (detalj: Detalj | undefined): string => {
+  if (detalj === undefined) {
+    return '';
+  }
+  if (typeof detalj === 'object') {
+    return JSON.stringify(detalj);
+  }
+  return String(detalj);
+};
+
 interface Props {
   skalViseModal: boolean;
   lukkModal: () => void;
@@ -40,8 +53,7 @@ export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldin
                   <div key={edKey}>
                     <Detail>{`${capitalizeFirstLetter(edKey)}:`}</Detail>
                     <div>
-                      {/* @ts-expect-error Fiks. Dette vil kreve at vi lager en rekursiv rendering av objectet */}
-                      <BodyShort size="small">{feilmeldingsdetaljer[edKey]}</BodyShort>
+                      <BodyShort size="small">{formaterDetalj(feilmeldingsdetaljer[edKey])}</BodyShort>
                     </div>
                   </div>
                 ))}

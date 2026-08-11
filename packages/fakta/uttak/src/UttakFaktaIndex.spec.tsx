@@ -15,6 +15,12 @@ const {
   VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet,
 } = composeStories(stories);
 
+// RhfNumericField gir prosentverdiar som tekst på runtime, medan DTO-typen seier number.
+// Testen dokumenterer den faktiske runtime-forma til lagra data.
+type PeriodeMedProsentSomTekst = Omit<KontrollerFaktaPeriodeMedApMarkering, 'samtidigUttaksprosent'> & {
+  samtidigUttaksprosent?: string;
+};
+
 describe('UttakFaktaIndex', () => {
   it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
     render(<VisUttaksperiodeUtenAksjonspunkt />);
@@ -68,7 +74,6 @@ describe('UttakFaktaIndex', () => {
             tom: '2022-12-01',
             originalFom: '2022-11-12',
             periodeKilde: 'SAKSBEHANDLER',
-            // @ts-expect-error -- typene i formet er inkonsekvente
             samtidigUttaksprosent: '10',
             uttakPeriodeType: 'MØDREKVOTE',
             aksjonspunktType: undefined,
@@ -76,7 +81,7 @@ describe('UttakFaktaIndex', () => {
             arbeidstidsprosent: undefined,
             flerbarnsdager: false,
           },
-        ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
+        ] satisfies PeriodeMedProsentSomTekst[],
       },
     ]);
   });

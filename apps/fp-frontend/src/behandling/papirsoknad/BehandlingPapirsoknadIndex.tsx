@@ -133,26 +133,23 @@ const useLagrePapirsøknad = (
   return { lagrePapirsøknad, lagreUfullstendigPapirsøknad };
 };
 
-const getAktivPapirsøknadApKode = (
-  aksjonspunkter: Aksjonspunkt[],
-):
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
-  | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER => {
-  const ap = aksjonspunkter
-    .map(a => a.definisjon)
-    .find(
-      kode =>
-        kode === AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD ||
-        kode === AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER ||
-        kode === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER ||
-        kode === AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER,
-    );
+const PAPIRSØKNAD_AP_KODER = [
+  AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD,
+  AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER,
+  AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
+  AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER,
+] as const;
+
+type PapirsøknadApKode = (typeof PAPIRSØKNAD_AP_KODER)[number];
+
+const erPapirsøknadApKode = (kode: Aksjonspunkt['definisjon']): kode is PapirsøknadApKode =>
+  PAPIRSØKNAD_AP_KODER.some(papirsøknadKode => papirsøknadKode === kode);
+
+const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): PapirsøknadApKode => {
+  const ap = aksjonspunkter.map(a => a.definisjon).find(erPapirsøknadApKode);
 
   if (!ap) {
     throw new Error('Fant ikke aktivt aksjonspunkt for papirsøknad');
   }
-  // @ts-expect-error Blir fiksa når AksjonspunktKode reflekterar backend-typar
   return ap;
 };

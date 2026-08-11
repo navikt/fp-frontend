@@ -8,7 +8,7 @@ import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@na
 import { ISO_DATE_FORMAT, removeSpacesFromNumber } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { AlleKodeverk, UttakPeriodeType } from '@navikt/fp-types';
+import type { AlleKodeverk, PermisjonPeriodeDto, UttakPeriodeType } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -21,6 +21,12 @@ const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 
 const minValue0 = minValue(0);
 const maxValue100 = maxValue(100);
+
+const TOM_PERMISJONSPERIODE = {
+  periodeType: '' as unknown as UttakPeriodeType,
+  periodeFom: '',
+  periodeTom: '',
+} satisfies PermisjonPeriodeDto;
 
 interface Props {
   readOnly: boolean;
@@ -54,8 +60,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKo
 
   useEffect(() => {
     if (fields.length === 0) {
-      // @ts-expect-error Fiks
-      append({});
+      append(TOM_PERMISJONSPERIODE);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- legg berre til ein tom rad ved montering; fields.length skal ikkje trigge effekten på nytt
   }, []);
@@ -65,11 +70,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKo
       readOnly={readOnly}
       fields={fields}
       addButtonText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
-      emptyTemplate={{
-        periodeType: '' as unknown as UttakPeriodeType,
-        periodeFom: '',
-        periodeTom: '',
-      }}
+      emptyTemplate={TOM_PERMISJONSPERIODE}
       append={append}
       remove={remove}
     >
