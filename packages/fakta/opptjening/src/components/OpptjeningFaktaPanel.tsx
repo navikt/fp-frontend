@@ -145,8 +145,10 @@ export const OpptjeningFaktaPanel = ({
   const bekreft = () => {
     setIsSubmitting(true);
 
-    // Fangar feil her (i staden for å la dei forbli ufanga) slik at brukaren kan prøve å lagre på nytt
-    // om lagringa feilar, utan at det oppstår ein "unhandled promise rejection".
+    // Fangar feil her sidan ingenting elles ventar på/fangar denne (submitCallback vert kalla
+    // med `void` frå ein klikk-handler). Utan dette vart det ein ufanga ("unhandled") promise-
+    // rejection. isSubmitting blir uansett nullstilt av finally under, uavhengig av dette
+    // catch-et; feilmelding til brukar er alt sikra via mutation-cachen (queryUtils.ts).
     void submitCallback(transformValues(formVerdierForAlleAktiviteter, filtrerteOgSorterteOpptjeningsaktiviteter))
       .catch(() => undefined)
       .finally(() => setIsSubmitting(false));

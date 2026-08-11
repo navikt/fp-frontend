@@ -107,8 +107,10 @@ export const ManglendeArbeidsforholdForm = ({
           oppdater();
           formMethods.reset(formValues);
         })
-        // Fangar feilen her (i staden for å la RhfForm/react-hook-form få ein ufanga rejection) slik at
-        // brukaren kan prøve å lagre på nytt om lagringa feilar.
+        // Fangar feilen her sidan ingenting elles ventar på/fangar denne promisen (kalla frå eit
+        // onSubmit-DOM-event). Utan dette vart det ein ufanga ("unhandled") promise-rejection.
+        // Feilmelding til brukar og moglegheit til å prøve på nytt er alt sikra uavhengig av dette:
+        // mutation-cachen (queryUtils.ts) viser feilen, og reset() over køyrer berre ved suksess.
         .catch(() => undefined);
     }
     return lagreVurdering({
@@ -123,6 +125,7 @@ export const ManglendeArbeidsforholdForm = ({
         oppdater();
         formMethods.reset(formValues);
       })
+      // Sjå kommentar over: fangar berre for å unngå ufanga rejection, ikkje for brukarvarsling/retry.
       .catch(() => undefined);
   };
 

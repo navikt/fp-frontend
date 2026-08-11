@@ -47,8 +47,10 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
     try {
       await submitCallback(transformValues(values, dokBehov));
     } catch {
-      // Fangar feilen her slik at brukaren kan prøve å lagre på nytt om lagringa feilar,
-      // utan at det oppstår ein "unhandled promise rejection".
+      // Fangar feilen her sidan ingenting elles ventar på/fangar denne (kalla frå ein
+      // klikk-handler). Utan dette vart det ein ufanga ("unhandled") promise-rejection.
+      // Knappen sin loading-state blir uansett nullstilt av finally-blokka under, uavhengig
+      // av dette catch-et; feilmelding til brukar er alt sikra via mutation-cachen (queryUtils.ts).
     } finally {
       setErBekreftKnappTrykket(false);
     }
