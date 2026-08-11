@@ -159,6 +159,40 @@ describe('BehovForTilretteleggingPanel', () => {
     });
   });
 
+  it('skal ikke tillate fra dato etter til og med dato i neste tilretteleggingsperiode', async () => {
+    const lagre = vi.fn();
+
+    await Default.run({
+      parameters: {
+        submitCallback: lagre,
+      },
+    });
+
+    await userEvent.click(screen.getAllByText('Ja')[2]!);
+
+    const arbeidstaker = within(
+      screen.getByText('Søkes det om svangerskapspenger som arbeidstaker?').closest('fieldset') as HTMLElement,
+    );
+
+    await userEvent.type(arbeidstaker.getByLabelText('Arbeidsgivers orgnr/fnr'), '000000000');
+    await userEvent.type(
+      arbeidstaker.getByLabelText('Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med'),
+      '01.01.2024',
+    );
+    await userEvent.selectOptions(arbeidstaker.getByLabelText('Behov for tilrettelegging'), 'HEL_TILRETTELEGGING');
+    await userEvent.type(arbeidstaker.getByLabelText('Fra dato'), '10.01.2024');
+    await userEvent.type(arbeidstaker.getByLabelText('Stillingsprosent'), '100');
+    await userEvent.click(screen.getByText('Legg til tilretteleggingsbehov'));
+    await userEvent.selectOptions(arbeidstaker.getAllByLabelText('Behov for tilrettelegging')[1]!, 'DELVIS_TILRETTELEGGING');
+    await userEvent.type(arbeidstaker.getAllByLabelText('Fra dato')[1]!, '05.01.2024');
+    await userEvent.type(arbeidstaker.getAllByLabelText('Stillingsprosent')[1]!, '100');
+
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+
+    expect(await screen.findByText('Fra dato må være før neste tilretteleggingsperiode')).toBeInTheDocument();
+    expect(lagre).not.toHaveBeenCalled();
+  });
+
   it(
     'skal slette alle arbeidsgivere og gi beskje om at den trenger minst et element i arbeidsgiiverlisten',
     { timeout: 30000 },

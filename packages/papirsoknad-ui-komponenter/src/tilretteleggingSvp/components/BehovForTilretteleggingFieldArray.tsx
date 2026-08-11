@@ -4,8 +4,9 @@ import { useIntl } from 'react-intl';
 
 import { Box } from '@navikt/ds-react';
 import { RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
-import { hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
-import { removeSpacesFromNumber } from '@navikt/ft-utils';
+import { dateBeforeOrEqual, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
+import { ISO_DATE_FORMAT, removeSpacesFromNumber } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import type { SvpTilretteleggingType } from '@navikt/fp-types';
 
@@ -32,7 +33,12 @@ interface Props {
 export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => {
   const intl = useIntl();
 
-  const { control } = useFormContext<FormValues>();
+  const {
+    control,
+    getValues,
+    trigger,
+    formState: { isSubmitted },
+  } = useFormContext<FormValues>();
 
   const { fields, remove, append } = useFieldArray({
     control,
@@ -86,7 +92,26 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
               control={control}
               readOnly={readOnly}
               label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDato' })}
-              validate={[required]}
+              validate={[
+                required,
+                () => {
+                  const dato = getValues(`${name}.${index}.dato`);
+                  const nesteDato = getValues(`${name}.${index + 1}.dato`);
+
+                  if (!dato || !nesteDato) {
+                    return null;
+                  }
+
+                  const datoEtterNeste = dateBeforeOrEqual(
+                    dayjs(nesteDato).subtract(1, 'day').format(ISO_DATE_FORMAT),
+                  )(dato);
+
+                  return datoEtterNeste
+                    ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDatoMaaVaereFoerNeste' })
+                    : null;
+                },
+              ]}
+              onChange={() => (isSubmitted ? trigger() : undefined)}
             />
 
             <RhfTextField
