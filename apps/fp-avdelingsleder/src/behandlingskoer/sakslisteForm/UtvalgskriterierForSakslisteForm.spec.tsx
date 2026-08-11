@@ -49,12 +49,6 @@ describe('UtvalgskriterierForSakslisteForm', () => {
   });
 
   it('skal vise feilmelding når en skriver inn bokstaver i tom-datofeltet', async () => {
-    /**
-     * TODO: fiks at ikke denne kaster formatDate error, men heller validerer
-     * midlertidig fiks er å absorberer error log for å redusere støy i testlogger.
-     * Vurder å flytte til SorteringVelger.spec.ts
-     */
-    const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
     applyRequestHandlers(MedGittNavn.parameters['msw'] as MswParameters['msw']);
     render(<MedGittNavn />);
 
@@ -68,8 +62,6 @@ describe('UtvalgskriterierForSakslisteForm', () => {
 
     const lagreKnapp = screen.getByRole('button', { name: /Lagre/i });
     await userEvent.click(lagreKnapp);
-
     expect(await screen.findByText(/Feltet kan kun inneholde tall/i)).toBeInTheDocument();
-    spy.mockRestore();
   });
 });

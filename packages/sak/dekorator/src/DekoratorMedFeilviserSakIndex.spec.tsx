@@ -24,8 +24,7 @@ describe('DekoratorMedFeilviserSakIndex', () => {
     await waitFor(() => expect(screen.queryByText('Feilmelding 1')).not.toBeInTheDocument());
   });
 
-  // TODO Fiks denne
-  it.todo('skal vise feilmelding med lenke som åpner feilmeldingsdetaljer', async () => {
+  it('skal vise feilmelding med lenke som åpner feilmeldingsdetaljer', async () => {
     render(<MedFeilmeldingDetaljer />);
     expect(
       await screen.findByText(
@@ -35,6 +34,6 @@ describe('DekoratorMedFeilviserSakIndex', () => {
 
     await userEvent.click(screen.getByText('Detaljert informasjon'));
 
-    expect(await screen.findByText('Lukk')).toBeInTheDocument();
+    expect(await screen.findByRole('dialog')).toBeInTheDocument();
   });
 });

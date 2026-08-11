@@ -67,7 +67,7 @@ export const DatoSorteringValg = () => {
                   label={<FormattedMessage id="SorteringVelger.Fom" />}
                   validate={[hasValidPosOrNegInteger, minValue(-500), maxValue(1100)]}
                 />
-                {fraVerdi && (
+                {erGyldigRelativVerdi(fraVerdi) && (
                   <Detail>
                     {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                       <DateLabel dateString={finnDato(fraVerdi)} />
@@ -100,7 +100,7 @@ export const DatoSorteringValg = () => {
                     maxValue(1100),
                   ]}
                 />
-                {tilVerdi && (
+                {erGyldigRelativVerdi(tilVerdi) && (
                   <Detail>
                     {periodefilter === 'RELATIV_PERIODE_DAGER' ? (
                       <DateLabel dateString={finnDato(tilVerdi)} />
@@ -147,6 +147,9 @@ const finnDatoMåned = (antallMåneder: number, erStartenAvMåned: boolean) => {
   const baseDato = erStartenAvMåned ? dayjs().startOf('month') : dayjs().endOf('month');
   return baseDato.add(antallMåneder, 'month').format();
 };
+
+const erGyldigRelativVerdi = (verdi: number | string | null): verdi is number =>
+  typeof verdi === 'number' && Number.isFinite(verdi);
 
 const validerTomDatoLikEllerEtterFomDato = (fomDato: string | null) => (tomDato: string) => {
   return fomDato && tomDato ? dateAfterOrEqual(fomDato)(tomDato) : null;

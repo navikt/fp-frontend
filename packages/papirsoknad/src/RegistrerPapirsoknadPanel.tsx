@@ -9,12 +9,12 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
 
-import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapirsoknadIndex';
+import { EngangsstonadForm } from './engangsstonad/components/EngangsstonadForm';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
 import type { PapirsøknadAp } from './PapirsøknadAp';
 import type { PapirsøknadMellomlagring } from './PapirsøknadMellomlagring';
 import { SoknadTypePickerForm } from './SoknadTypePickerForm';
-import { SvangerskapspengerPapirsoknadIndex } from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
+import { SvangerskapspengerForm } from './svangerskapspenger/components/SvangerskapspengerForm';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -113,7 +113,7 @@ export const RegistrerPapirsoknadPanel = ({
           initialForeldreType={soknadData?.foreldreType}
         />
         {soknadData?.getFagsakYtelseType() === 'ES' && (
-          <EngangsstonadPapirsoknadIndex
+          <EngangsstonadForm
             onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
             onSubmit={lagreFullstendigSøknad}
             onMellomlagre={mellomlagreWrapped}
@@ -137,7 +137,7 @@ export const RegistrerPapirsoknadPanel = ({
           />
         )}
         {soknadData?.getFagsakYtelseType() === 'SVP' && (
-          <SvangerskapspengerPapirsoknadIndex
+          <SvangerskapspengerForm
             onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
             onSubmit={lagreFullstendigSøknad}
             onMellomlagre={mellomlagreWrapped}
