@@ -3,7 +3,7 @@
   "UtbetalingsdataPanel.Sok": "Fødselsnummer",
   "UtbetalingsdataPanel.UgyldigFnr": "Oppgitt fødselsnummer er ikke gyldig",
   "UtbetalingsdataPanel.Resultat": "Søkeresultat:",
-  "UtbetalingsdataPanel.IngenSakerFunnet": "Søkeresultat: Ingen saker funnet",
+  "UtbetalingsdataPanel.IngenSakerFunnet": "Bruker har ingen saker som gjelder foreldrepenger, svangerskapspenger eller engangsstønad i Infotrygd",
   "UtbetalingsdataPanel.Saker": "Saker",
   "UtbetalingsdataPanel.Utbetalinger": "Utbetalinger",
 
