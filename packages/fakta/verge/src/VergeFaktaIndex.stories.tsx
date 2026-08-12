@@ -35,14 +35,15 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const ÅpentAksjonpunkt: Story = {
   args: {
     verge: undefined,
     isReadOnly: false,
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_VERGE)],
   },
 };
 
-export const ReadOnly: Story = {
+export const ReadOnlyUtført: Story = {
   args: {
     verge: {
       vergeType: 'ADVOKAT',
@@ -52,5 +53,20 @@ export const ReadOnly: Story = {
       gyldigTom: '2025-12-31',
     },
     isReadOnly: true,
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_VERGE, { status: 'UTFO' })],
+  },
+};
+
+export const UtenAksjonpunkt: Story = {
+  args: {
+    verge: {
+      vergeType: 'ADVOKAT',
+      navn: 'Ola Nordmann',
+      organisasjonsnummer: '123456789',
+      gyldigFom: '2025-01-01',
+      gyldigTom: '2025-12-31',
+    },
+    isReadOnly: true,
+    aksjonspunkterForPanel: [],
   },
 };

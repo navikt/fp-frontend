@@ -1,4 +1,4 @@
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
@@ -25,18 +25,18 @@ export const OpplysningerOmAdresser = ({
   alleKodeverk,
   skalViseAvvik,
 }: Props) => {
-  const intl = useIntl();
-
   return (
     <EkspansjonsKort
       skalViseAvvik={skalViseAvvik}
-      tittel={intl.formatMessage(
-        { id: 'OpplysningsKort.AdresseTittel' },
-        {
-          adresseCountSoker: adresser.length,
-          adresseCountAnnenpart: annenpart?.adresser.length ?? 'none',
-        },
-      )}
+      tittel={
+        <FormattedMessage
+          id="OpplysningsKort.AdresseTittel"
+          values={{
+            adresseCountSoker: adresser.length,
+            adresseCountAnnenpart: annenpart?.adresser.length ?? 'none',
+          }}
+        />
+      }
       kilde="FOLKEREGISTER"
       relevanteAvvik={avvik.filter(a => relevantForAdresser.includes(a))}
     >

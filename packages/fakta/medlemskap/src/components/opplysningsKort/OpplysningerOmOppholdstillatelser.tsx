@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { BodyLong, BodyShort, Box, ReadMore, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
@@ -22,18 +22,18 @@ export const OpplysningerOmOppholdstillatelser = ({
   alleKodeverk,
   skalViseAvvik,
 }: Props) => {
-  const intl = useIntl();
-
   const oppholdstillatelseTypeKodeverk = alleKodeverk['OppholdstillatelseType'];
 
   return (
     <EkspansjonsKort
       skalViseAvvik={skalViseAvvik}
       kilde="FOLKEREGISTER"
-      tittel={intl.formatMessage(
-        { id: 'OpplysningsKort.OppholdstillatelseTittel' },
-        { count: oppholdstillatelser.length },
-      )}
+      tittel={
+        <FormattedMessage
+          id="OpplysningsKort.OppholdstillatelseTittel"
+          values={{ count: oppholdstillatelser.length }}
+        />
+      }
       relevanteAvvik={avvik.filter(a => relevantForOppholdstillatelser.includes(a))}
     >
       <>

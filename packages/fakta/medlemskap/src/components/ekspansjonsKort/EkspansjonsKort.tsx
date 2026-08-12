@@ -1,4 +1,4 @@
-import { type PropsWithChildren } from 'react';
+import { type PropsWithChildren, type ReactNode, useId } from 'react';
 
 import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
 
@@ -10,7 +10,7 @@ import { AvvikStatus } from './AvvikStatus';
 
 interface Props {
   kilde: FaktaKilde;
-  tittel: string;
+  tittel: ReactNode;
   relevanteAvvik: MedlemskapAvvik[];
   skalViseAvvik: boolean;
 }
@@ -22,8 +22,9 @@ export const EkspansjonsKort = ({
   skalViseAvvik,
   children,
 }: PropsWithChildren<Props>) => {
+  const id = useId();
   return (
-    <ExpansionCard aria-label={tittel} size="small">
+    <ExpansionCard aria-labelledby={id} size="small">
       <ExpansionCard.Header>
         <HStack gap="space-16" wrap={false}>
           {skalViseAvvik && (
@@ -32,7 +33,9 @@ export const EkspansjonsKort = ({
             </div>
           )}
           <div>
-            <ExpansionCard.Title size="small">{tittel}</ExpansionCard.Title>
+            <ExpansionCard.Title id={id} size="small">
+              {tittel}
+            </ExpansionCard.Title>
             <ExpansionCard.Description>{getLabelForFaktaKilde(kilde)}</ExpansionCard.Description>
           </div>
         </HStack>

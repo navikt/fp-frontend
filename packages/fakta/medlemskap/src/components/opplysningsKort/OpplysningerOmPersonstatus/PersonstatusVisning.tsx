@@ -37,7 +37,7 @@ export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleK
       </>
     );
   return (
-    <Table style={{ tableLayout: 'fixed' }} aria-label={`Personstatus for ${erAnnenpart ? 'annenpart' : 'bruker'}`}>
+    <Table className="table-fixed" aria-label={`Personstatus for ${erAnnenpart ? 'annenpart' : 'bruker'}`}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>

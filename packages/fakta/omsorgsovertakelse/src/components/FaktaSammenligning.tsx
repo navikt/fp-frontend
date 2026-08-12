@@ -1,10 +1,9 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { HStack, Table } from '@navikt/ds-react';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { DateLabel, FaktaBoks } from '@navikt/ft-ui-komponenter';
 
 import type { OmsorgsovertakelseDto } from '@navikt/fp-types';
-import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { ErEndretMarkering, Over15Markering } from './Markering';
@@ -14,13 +13,12 @@ interface Props {
 }
 
 export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, kildeGjeldende } }: Props) => {
-  const intl = useIntl();
   const { alleKodeverk } = usePanelDataContext();
   const lengsteListeBarn = søknad.barn.length >= gjeldende.barn.length ? søknad.barn : gjeldende.barn;
   const erIkkeFraSøknad = kildeGjeldende !== 'SØKNAD';
 
   return (
-    <FaktaKort label={intl.formatMessage({ id: 'FaktaSammenligning.Tittel' })}>
+    <FaktaBoks tittel={<FormattedMessage id="FaktaSammenligning.Tittel" />}>
       <Table>
         <Table.Header>
           <Table.Row>
@@ -149,6 +147,6 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
           </Table.Row>
         </Table.Body>
       </Table>
-    </FaktaKort>
+    </FaktaBoks>
   );
 };

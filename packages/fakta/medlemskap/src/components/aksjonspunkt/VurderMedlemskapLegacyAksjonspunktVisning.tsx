@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { AksjonspunktBoks, AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
@@ -116,13 +116,9 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
 
 export const VurderMedlemsskapLegacyAksjonspunktVisning = ({ legacyManuellBehandling, alleKodeverk }: Props) => {
   const skalViseDato = legacyManuellBehandling.perioder.length !== 1;
-  const intl = useIntl();
 
   return (
-    <AksjonspunktBoks
-      tittel={intl.formatMessage({ id: 'MedlemskapLegacy.TidligereVurdering' })}
-      aksjonspunkt={undefined}
-    >
+    <AksjonspunktBoks tittel={<FormattedMessage id="MedlemskapLegacy.TidligereVurdering" />} aksjonspunkt={undefined}>
       <VStack gap="space-16">
         {legacyManuellBehandling.perioder.map((p, index) => (
           <React.Fragment key={p.vurderingsdato}>

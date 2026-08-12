@@ -1,10 +1,9 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { LabeledValue } from '@navikt/ft-ui-komponenter';
+import { FaktaBoks, LabeledValue } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 export const LegacyAksjonspunktVisning = () => {
@@ -15,8 +14,8 @@ export const LegacyAksjonspunktVisning = () => {
     ap => ap.definisjon !== AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
   );
   return (
-    <FaktaKort
-      label={intl.formatMessage({
+    <FaktaBoks
+      tittel={intl.formatMessage({
         id: 'LegacyAksjonspunktVisning.Tittel',
       })}
     >
@@ -30,6 +29,6 @@ export const LegacyAksjonspunktVisning = () => {
           />
         ))}
       </VStack>
-    </FaktaKort>
+    </FaktaBoks>
   );
 };

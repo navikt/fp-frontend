@@ -39,7 +39,7 @@ export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: P
       </>
     );
   return (
-    <Table style={{ tableLayout: 'fixed' }} aria-label={`Region for ${erAnnenpart ? 'annenpart' : 'bruker'}`}>
+    <Table className="table-fixed" aria-label={`Region for ${erAnnenpart ? 'annenpart' : 'bruker'}`}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>

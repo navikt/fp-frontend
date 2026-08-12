@@ -1,14 +1,14 @@
 import { useForm, useWatch } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Alert, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
+import { AksjonspunktBoks } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fødsel, FødselGjeldende } from '@navikt/fp-types';
 import type { SjekkManglendeFødselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ErBarnFødt, type ErBarnFødtFormValues } from '../form/ErBarnFødt';
@@ -23,10 +23,7 @@ interface Props {
 }
 
 export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, søknad, register } }: Props) => {
-  const intl = useIntl();
-
-  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, isSubmittable } =
-    usePanelDataContext<SjekkManglendeFødselAp>();
+  const { submitCallback, isReadOnly, isSubmittable } = usePanelDataContext<SjekkManglendeFødselAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -39,18 +36,15 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
   const diffIAntallBarn = register.barn.length > 0 && register.barn.length !== søknad.antallBarn;
 
   return (
-    <FaktaKort
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]}
-      label={intl.formatMessage({ id: 'SjekkManglendeFødselForm.Tittel' })}
-    >
+    <AksjonspunktBoks aksjonspunkt={aksjonspunkt} tittel={<FormattedMessage id="SjekkManglendeFødselForm.Tittel" />}>
       <RhfForm
         formMethods={formMethods}
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
-        <VStack gap="space-16">
+        <VStack gap="space-16" maxWidth="800px">
           {!isReadOnly && !finnesBarnIFReg && (
-            <Alert variant="info">
+            <Alert variant="info" className="self-start">
               <FormattedMessage id="SjekkManglendeFødselForm.Info.IngenBarnRegistrert" />
             </Alert>
           )}
@@ -86,7 +80,7 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
           )}
         </VStack>
       </RhfForm>
-    </FaktaKort>
+    </AksjonspunktBoks>
   );
 };
 
