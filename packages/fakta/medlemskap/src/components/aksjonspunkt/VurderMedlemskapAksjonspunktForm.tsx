@@ -3,12 +3,12 @@ import { useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
+import { AksjonspunktBoks } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
 import type { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { harAksjonspunkt, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { MedlemskapVurderinger, type MedlemskapVurderingerFormValues } from './MedlemskapVurderinger';
@@ -34,7 +34,6 @@ export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: 
     submitCallback,
     isReadOnly,
     isSubmittable,
-    alleMerknaderFraBeslutter,
   } = usePanelDataContext<VurderMedlemskapAp | VurderForutgaendeMedlemskapAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
@@ -48,19 +47,13 @@ export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: 
   const erForutgående = harAksjonspunkt(AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR, aksjonspunkterForPanel);
 
   return (
-    <FaktaKort
-      label={
+    <AksjonspunktBoks
+      tittel={
         erForutgående
           ? intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.Tittel.Forutgående' })
           : intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.Tittel.Ordinært' })
       }
-      merknaderFraBeslutter={
-        alleMerknaderFraBeslutter[
-          erForutgående
-            ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
-            : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET
-        ]
-      }
+      aksjonspunkt={aksjonspunkterForPanel}
     >
       <RhfForm
         formMethods={formMethods}
@@ -92,7 +85,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: 
           )}
         </VStack>
       </RhfForm>
-    </FaktaKort>
+    </AksjonspunktBoks>
   );
 };
 
