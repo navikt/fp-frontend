@@ -10,6 +10,9 @@ interface Props {
   };
 }
 
+/**
+ * @deprecated bruk FaktaBoks eller AksjonpunktBoks fra @navikt/ft-ui-komponenter
+ */
 export const FaktaKort = ({ label, children, merknaderFraBeslutter }: Props) => {
   const error = merknaderFraBeslutter?.notAccepted ?? false;
   return (

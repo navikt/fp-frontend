@@ -2,11 +2,10 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
-import { AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktBoks, AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
 
 import type { AlleKodeverk, LegacyManuellMedlemskapsBehandling, LegacyMedlemPeriode } from '@navikt/fp-types';
-import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 interface Props {
   alleKodeverk: AlleKodeverk;
@@ -120,7 +119,10 @@ export const VurderMedlemsskapLegacyAksjonspunktVisning = ({ legacyManuellBehand
   const intl = useIntl();
 
   return (
-    <FaktaKort label={intl.formatMessage({ id: 'MedlemskapLegacy.TidligereVurdering' })}>
+    <AksjonspunktBoks
+      tittel={intl.formatMessage({ id: 'MedlemskapLegacy.TidligereVurdering' })}
+      aksjonspunkt={undefined}
+    >
       <VStack gap="space-16">
         {legacyManuellBehandling.perioder.map((p, index) => (
           <React.Fragment key={p.vurderingsdato}>
@@ -129,6 +131,6 @@ export const VurderMedlemsskapLegacyAksjonspunktVisning = ({ legacyManuellBehand
           </React.Fragment>
         ))}
       </VStack>
-    </FaktaKort>
+    </AksjonspunktBoks>
   );
 };
