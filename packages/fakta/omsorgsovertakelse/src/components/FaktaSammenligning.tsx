@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { HStack, Table } from '@navikt/ds-react';
+import { Table } from '@navikt/ds-react';
 import { DateLabel, FaktaBoks } from '@navikt/ft-ui-komponenter';
 
 import type { OmsorgsovertakelseDto } from '@navikt/fp-types';
@@ -93,10 +93,10 @@ export const FaktaSammenligning = ({ omsorgsovertakelse: { søknad, gjeldende, k
                 </Table.HeaderCell>
                 <Table.DataCell>
                   {søknadFødselsdato ? (
-                    <HStack gap="space-12">
+                    <>
                       <DateLabel dateString={søknadFødselsdato} />
                       <Over15Markering fødselsdato={søknadFødselsdato} />
-                    </HStack>
+                    </>
                   ) : (
                     '-'
                   )}

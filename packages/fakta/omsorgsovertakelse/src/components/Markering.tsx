@@ -28,7 +28,7 @@ export const Over15Markering = ({ fødselsdato }: { fødselsdato: string }) => {
       data-color="warning"
       variant="outline"
       size="small"
-      className="mr-2 align-middle"
+      className="ml-4"
       icon={<ExclamationmarkTriangleFillIcon color="var(--ax-warning-700)" />}
     >
       <FormattedMessage id="FaktaSammenligning.Over15År" />
