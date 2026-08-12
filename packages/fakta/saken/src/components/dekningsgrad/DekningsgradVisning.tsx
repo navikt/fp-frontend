@@ -12,7 +12,7 @@ interface PartBoxProps {
 }
 
 export const DekningsgradVisning = ({ navn, kjønn, søknadsdato, dekningsgrad }: PartBoxProps) => (
-  <Box background="brand-blue-moderate" padding="space-20" borderColor="neutral" borderRadius="4">
+  <Box background="brand-blue-moderateA" padding="space-20" borderColor="neutral" borderRadius="4">
     <VStack gap="space-8">
       <HStack gap="space-16" align="center">
         <GenderIcon gender={finnIkonForKjønn(kjønn)} />
@@ -20,14 +20,14 @@ export const DekningsgradVisning = ({ navn, kjønn, søknadsdato, dekningsgrad }
           <Label size="medium">{navn}</Label>
           <Detail>
             <FormattedMessage
-              id="DekningradAP.SøknadSendt"
+              id="DekningsgradAP.SøknadSendt"
               values={{ dato: dateFormat(søknadsdato, { month: 'long' }) }}
             />
           </Detail>
         </VStack>
       </HStack>
       <Label size="medium">
-        <FormattedMessage id="DekningradAP.HarValgt" values={{ dekningsgrad }} />
+        <FormattedMessage id="DekningsgradAP.HarValgt" values={{ dekningsgrad }} />
       </Label>
     </VStack>
   </Box>

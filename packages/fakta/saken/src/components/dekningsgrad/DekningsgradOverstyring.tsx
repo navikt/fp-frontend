@@ -28,7 +28,7 @@ interface Props {
   kanOverstyreAccess: boolean;
 }
 
-export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAccess }: Props) => {
+export const DekningsgradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAccess }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, isReadOnly } = usePanelDataContext<OverstyringDekningsgradAp>();
@@ -57,21 +57,21 @@ export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverst
         <div>
           <HStack gap="space-8">
             <Label>
-              <FormattedMessage id="DekningradOverstyring.Dekningsgrad" />
+              <FormattedMessage id="DekningsgradOverstyring.Dekningsgrad" />
             </Label>
             {aksjonspunkt?.begrunnelse && <EditedIcon />}
           </HStack>
           <HStack gap="space-16" align="center">
             <BodyShort>
-              <FormattedMessage id="DekningradOverstyring.DekningsgradForeldrepenger" values={{ dekningsgrad }} />
+              <FormattedMessage id="DekningsgradOverstyring.DekningsgradForeldrepenger" values={{ dekningsgrad }} />
             </BodyShort>
 
             {kanOverstyreAccess && !isReadOnly && (
               <Button
                 variant="tertiary"
                 size="small"
-                title={intl.formatMessage({ id: 'DekningradOverstyring.EndreDekningsgrad' })}
-                aria-label={intl.formatMessage({ id: 'DekningradOverstyring.EndreDekningsgrad' })}
+                title={intl.formatMessage({ id: 'DekningsgradOverstyring.EndreDekningsgrad' })}
+                aria-label={intl.formatMessage({ id: 'DekningsgradOverstyring.EndreDekningsgrad' })}
                 onClick={() => setVisEditeringsmodus(true)}
                 icon={<PencilFillIcon aria-hidden />}
               />
@@ -99,7 +99,7 @@ export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverst
       setDataOnUnmount={setMellomlagretFormData}
     >
       <AksjonspunktBoks
-        tittel={intl.formatMessage({ id: 'DekningradOverstyring.EndreDekningsgrad' })}
+        tittel={<FormattedMessage id="DekningsgradOverstyring.EndreDekningsgrad" />}
         aksjonspunkt={aksjonspunkt}
       >
         <VStack gap="space-16">
@@ -164,7 +164,7 @@ export const DekningradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverst
 const validateIkkeLikEksisterende =
   (intl: IntlShape, dekningsgrad: number | undefined) => (value: number | undefined) => {
     if (value === dekningsgrad) {
-      return intl.formatMessage({ id: 'DekningradOverstyring.LikEksisterende' });
+      return intl.formatMessage({ id: 'DekningsgradOverstyring.LikEksisterende' });
     }
     return null;
   };
