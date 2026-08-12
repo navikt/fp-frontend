@@ -6,7 +6,6 @@ const config: KnipConfig = {
     'server/**',
     'packages/types/src/los/fplos.gen.ts',
     'packages/types/src/fpsak.gen.ts',
-    'packages/kodeverk/src/aksjonspunktCodes.ts',
   ],
 };
 
