@@ -56,6 +56,10 @@ describe('UtbetalingsdataIs15Index', () => {
 
     await userEvent.click(screen.getAllByRole('button')[1]!);
 
-    expect(await screen.findByText('Søkeresultat: Ingen saker funnet')).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        'Bruker har ingen saker som gjelder foreldrepenger, svangerskapspenger eller engangsstønad i Infotrygd',
+      ),
+    ).toBeInTheDocument();
   });
 });

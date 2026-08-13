@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './TilkjentYtelseProsessIndex.stories';
 
-const { UtenAksjonspunkt, UtførtAksjonspunkt } = composeStories(stories);
+const { UtenAksjonspunkt, UtførtAksjonspunkt, MedPeriodeUtenDagsats } = composeStories(stories);
 
 describe('TilkjentYtelseProsessIndex', () => {
   it('skal se på tilkjent ytelse uten aksjonspunkt', async () => {
@@ -33,5 +33,17 @@ describe('TilkjentYtelseProsessIndex', () => {
       ),
     ).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse saksbehandler tidligere har gjort.')).toBeInTheDocument();
+  });
+
+  it('skal vise feilmelding når en periode har 0 i dagsats', async () => {
+    render(<MedPeriodeUtenDagsats />);
+
+    expect(await screen.findByText('Tilkjent ytelse')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Tilkjent ytelse inneholder en eller flere perioder med 0 kroner i dagsats. ' +
+          'Dette kan føre til feil ved brevutsending. Kontroller beregningen før du fortsetter.',
+      ),
+    ).toBeInTheDocument();
   });
 });
