@@ -1,6 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import dayjs from 'dayjs';
 import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './UtvalgskriterierForSakslisteForm.stories';
@@ -49,12 +50,6 @@ describe('UtvalgskriterierForSakslisteForm', () => {
   });
 
   it('skal vise feilmelding når en skriver inn bokstaver i tom-datofeltet', async () => {
-    /**
-     * TODO: fiks at ikke denne kaster formatDate error, men heller validerer
-     * midlertidig fiks er å absorberer error log for å redusere støy i testlogger.
-     * Vurder å flytte til SorteringVelger.spec.ts
-     */
-    const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
     applyRequestHandlers(MedGittNavn.parameters['msw'] as MswParameters['msw']);
     render(<MedGittNavn />);
 
@@ -68,8 +63,22 @@ describe('UtvalgskriterierForSakslisteForm', () => {
 
     const lagreKnapp = screen.getByRole('button', { name: /Lagre/i });
     await userEvent.click(lagreKnapp);
-
     expect(await screen.findByText(/Feltet kan kun inneholde tall/i)).toBeInTheDocument();
-    spy.mockRestore();
+  });
+
+  it('skal vise utrekna dato når det er skrive inn eit gyldig antall dager', async () => {
+    applyRequestHandlers(MedGittNavn.parameters['msw'] as MswParameters['msw']);
+    render(<MedGittNavn />);
+
+    expect(await screen.findByText('Utvalgskriterier')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByLabelText('Relativ periode (dager)'));
+
+    const fomInput = screen.getByLabelText('F.o.m.');
+    await userEvent.clear(fomInput);
+    await userEvent.type(fomInput, '5');
+
+    const forventetDato = dayjs().add(5, 'd').format('DD.MM.YYYY');
+    expect(await screen.findByText(forventetDato)).toBeInTheDocument();
   });
 });

@@ -25,8 +25,7 @@ describe('AktørIndex', () => {
     expect(screen.getByText('Har ingen fagsaker i fpsak')).toBeInTheDocument();
   });
 
-  //TODO Denne feilar av og til
-  it.todo('skal feile på api-kall', async () => {
+  it('skal feile på api-kall', async () => {
     applyRequestHandlers(AktørInfoKallFeilet.parameters['msw'] as MswParameters['msw']);
     render(<AktørInfoKallFeilet />);
 

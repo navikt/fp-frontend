@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { EditedIcon } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -42,11 +42,18 @@ export const TilkjentYtelsePanel = ({
 
   const søknadMottattDato = søknad.søknadsfrist.gjeldendeMottattDato ?? søknad.mottattDato;
 
+  const harPeriodeMedNullIDagsats = finnHarPeriodeMedNullIDagsats(beregningresultat.perioder);
+
   return (
     <VStack gap="space-16">
       <Heading size="small" level="2">
         <FormattedMessage id="TilkjentYtelse.Title" />
       </Heading>
+      {harPeriodeMedNullIDagsats && (
+        <Alert size="small" variant="error">
+          <FormattedMessage id="TilkjentYtelse.NullIDagsats" />
+        </Alert>
+      )}
       <TilkjentYtelse
         beregningsresultatPeriode={beregningresultat.perioder}
         søknadsdato={søknadMottattDato}
@@ -80,3 +87,6 @@ export const TilkjentYtelsePanel = ({
 
 const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunkt[]): string | undefined =>
   alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.UTGÅTT_5090)?.begrunnelse ?? undefined;
+
+const finnHarPeriodeMedNullIDagsats = (perioder: BeregningsresultatDagytelse['perioder']): boolean =>
+  (perioder ?? []).some(periode => periode.dagsats === 0);
