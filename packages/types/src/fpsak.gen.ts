@@ -2519,6 +2519,8 @@ export type foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak =
   | 'ENDRING_I_ARBEIDSFORHOLDS_ID'
   | 'PERMISJON_UTEN_SLUTTDATO';
 
+export type foreldrepenger_domene_arbeidsforhold_impl_InaktivArbeidsforholdÅrsak = 'INAKTIVT_ARBEIDSFORHOLD' | 'PERMISJON';
+
 export type foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak = 'NY' | 'ENDRING';
 
 export type foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType =
@@ -2554,6 +2556,7 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto = 
   begrunnelse?: string;
   eksternArbeidsforholdId?: string;
   fom: string;
+  inaktivÅrsak?: foreldrepenger_domene_arbeidsforhold_impl_InaktivArbeidsforholdÅrsak;
   internArbeidsforholdId?: string;
   permisjonOgMangel?: foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto;
   permisjoner: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonDto>;

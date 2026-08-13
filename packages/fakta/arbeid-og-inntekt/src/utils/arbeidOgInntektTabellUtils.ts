@@ -42,6 +42,7 @@ export const byggTabellStruktur = (
       const ne: ArbeidsforholdOgInntektRadData = {
         ...arbeidsgiverOpplysninger,
         årsak: af.årsak ?? inntektsmeldingerForRad[0]?.årsak ?? undefined,
+        inaktivÅrsak: arbeidsforholdForRad.find(a => a.inaktivÅrsak)?.inaktivÅrsak,
         avklaring: lagAvklaringFraArbeidsforhold(af, arbeidsgiverOpplysninger.arbeidsgiverNavn),
         arbeidsforholdForRad,
         inntektsmeldingerForRad,

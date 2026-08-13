@@ -1077,3 +1077,49 @@ export const SkalViseFødselsnummerForPrivatperson: Story = {
     },
   },
 };
+
+export const InaktivtArbeidsforholdIkkebestiltInntektsmelding: Story = {
+  args: {
+    arbeidOgInntekt: {
+      arbeidsforhold: [
+        {
+          ...defaultArbeidsforhold,
+          arbeidsgiverIdent: '910909090',
+          eksternArbeidsforholdId: 'ARB001-001',
+          fom: '2019-01-01',
+          internArbeidsforholdId: 'a1b2c3d4-0000-0000-0000-000000000001',
+          stillingsprosent: 100,
+          tom: '9999-12-31',
+          inaktivÅrsak: 'INAKTIVT_ARBEIDSFORHOLD',
+          permisjoner: [],
+        },
+      ],
+      inntektsmeldinger: [],
+      inntekter: [],
+      skjæringstidspunkt: '2021-11-10',
+    },
+  },
+};
+
+export const PermisjonArbeidsforholdIkkebestiltInntektsmelding: Story = {
+  args: {
+    arbeidOgInntekt: {
+      arbeidsforhold: [
+        {
+          ...defaultArbeidsforhold,
+          arbeidsgiverIdent: '910909090',
+          eksternArbeidsforholdId: 'ARB001-001',
+          fom: '2019-01-01',
+          internArbeidsforholdId: 'a1b2c3d4-0000-0000-0000-000000000001',
+          stillingsprosent: 100,
+          tom: '9999-12-31',
+          inaktivÅrsak: 'PERMISJON',
+          permisjoner: [],
+        },
+      ],
+      inntektsmeldinger: [],
+      inntekter: [],
+      skjæringstidspunkt: '2021-11-10',
+    },
+  },
+};

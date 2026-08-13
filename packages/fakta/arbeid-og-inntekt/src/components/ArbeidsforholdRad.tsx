@@ -56,16 +56,21 @@ export const ArbeidsforholdRad = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { inntektsmeldingerForRad, arbeidsforholdForRad, arbeidsgiverNavn, avklaring, årsak } = radData;
+  const { inntektsmeldingerForRad, arbeidsforholdForRad, arbeidsgiverNavn, avklaring, årsak, inaktivÅrsak } = radData;
 
   const erManueltOpprettet = avklaring?.saksbehandlersVurdering === 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER';
+  const erInaktivtEllerPermisjonsArbeidsforhold = inaktivÅrsak !== undefined;
   const harArbeidsforholdOgInntektsmelding =
     arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length > 0 && !årsak;
   const manglerInntektsmelding = årsak === 'MANGLENDE_INNTEKTSMELDING';
   const manglerArbeidsforhold = årsak === 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD';
   const harÅpentAksjonspunkt = !!årsak && !avklaring?.saksbehandlersVurdering;
   const harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak =
-    arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length === 0 && !årsak && !erManueltOpprettet;
+    arbeidsforholdForRad.length > 0 &&
+    inntektsmeldingerForRad.length === 0 &&
+    !årsak &&
+    !erManueltOpprettet &&
+    !erInaktivtEllerPermisjonsArbeidsforhold;
   const harKunInntektsmeldingOgIkkeÅrsak =
     arbeidsforholdForRad.length === 0 && inntektsmeldingerForRad.length > 0 && !årsak;
 

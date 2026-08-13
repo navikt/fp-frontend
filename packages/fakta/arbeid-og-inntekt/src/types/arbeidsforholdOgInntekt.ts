@@ -32,5 +32,6 @@ export type ArbeidsforholdOgInntektRadData = {
   arbeidsforholdForRad: Arbeidsforhold[];
   inntektsposter: Inntektspost[];
   årsak?: string;
+  inaktivÅrsak?: 'INAKTIVT_ARBEIDSFORHOLD' | 'PERMISJON';
   avklaring?: Avklaring;
 } & AGOpplysninger;
