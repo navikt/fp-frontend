@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktBoks } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -23,11 +23,10 @@ interface Props {
   aksjonspunkt: Aksjonspunkt;
 }
 
-export const DekningradAP = ({ ytelseFordeling, aksjonspunkt }: Props) => {
+export const DekningsgradAP = ({ ytelseFordeling, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, alleMerknaderFraBeslutter, fagsak, isReadOnly, isSubmittable } =
-    usePanelDataContext<AvklarDekningsgradAp>();
+  const { submitCallback, fagsak, isReadOnly, isSubmittable } = usePanelDataContext<AvklarDekningsgradAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -41,10 +40,7 @@ export const DekningradAP = ({ ytelseFordeling, aksjonspunkt }: Props) => {
   const { bruker, annenPart } = fagsak;
 
   return (
-    <AksjonspunktBox
-      erAksjonspunktApent={aksjonspunkt.status === 'OPPR'}
-      erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
-    >
+    <AksjonspunktBoks tittel={<FormattedMessage id="DekningsgradAP.AvklarDekningsgrad" />} aksjonspunkt={aksjonspunkt}>
       <RhfForm
         formMethods={formMethods}
         onSubmit={values => submitCallback(transformValues(values))}
@@ -106,7 +102,7 @@ export const DekningradAP = ({ ytelseFordeling, aksjonspunkt }: Props) => {
           />
         </VStack>
       </RhfForm>
-    </AksjonspunktBox>
+    </AksjonspunktBoks>
   );
 };
 

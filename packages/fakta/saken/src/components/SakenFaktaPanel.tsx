@@ -8,8 +8,8 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { OpptjeningIUtlandDokStatusDto, Ytelsefordeling } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { DekningradAP } from './dekningsgrad/DekningradAP';
-import { DekningradOverstyring } from './dekningsgrad/DekningradOverstyring';
+import { DekningsgradAP } from './dekningsgrad/DekningsgradAP';
+import { DekningsgradOverstyring } from './dekningsgrad/DekningsgradOverstyring';
 import { InnhentDokOpptjeningUtlandAP } from './InnhentDokOpptjeningUtlandAP';
 import { StartdatoOverstyring } from './StartdatoOverstyring';
 
@@ -49,7 +49,7 @@ export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyre
       )}
 
       {ytelsefordeling && avklarDekningsgradAP && (
-        <DekningradAP ytelseFordeling={ytelsefordeling} aksjonspunkt={avklarDekningsgradAP} />
+        <DekningsgradAP ytelseFordeling={ytelsefordeling} aksjonspunkt={avklarDekningsgradAP} />
       )}
       {automatiskMarkeringAvUtenlandssakAp && (
         <InnhentDokOpptjeningUtlandAP
@@ -61,7 +61,7 @@ export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyre
         <StartdatoOverstyring ytelseFordeling={ytelsefordeling} aksjonspunkt={overstyrStartdatoAp} />
       )}
       {ytelsefordeling && !avklarDekningsgradAP && fagsak.fagsakYtelseType === 'FP' && (
-        <DekningradOverstyring
+        <DekningsgradOverstyring
           ytelseFordeling={ytelsefordeling}
           aksjonspunkt={overstyrDekningsgradAp}
           kanOverstyreAccess={kanOverstyreAccess}

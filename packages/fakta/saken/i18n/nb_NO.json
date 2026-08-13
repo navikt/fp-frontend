@@ -22,11 +22,12 @@
   "Dekningsgrad.100.Nåværende": "100 (Nåværende)",
   "Dekningsgrad.HvilkenDekningsgrad": "Hvilken dekningsgrad skal gjelde{harAnnenPart, select, true{ for begge} other {}}?",
 
-  "DekningradOverstyring.Dekningsgrad": "Dekningsgrad",
-  "DekningradOverstyring.DekningsgradForeldrepenger": "{dekningsgrad}% foreldrepenger",
-  "DekningradOverstyring.EndreDekningsgrad": "Endre dekningsgrad",
-  "DekningradOverstyring.LikEksisterende": "Du må endre dekningsgrad",
+  "DekningsgradOverstyring.Dekningsgrad": "Dekningsgrad",
+  "DekningsgradOverstyring.DekningsgradForeldrepenger": "{dekningsgrad}% foreldrepenger",
+  "DekningsgradOverstyring.EndreDekningsgrad": "Endre dekningsgrad",
+  "DekningsgradOverstyring.LikEksisterende": "Du må endre dekningsgrad",
 
-  "DekningradAP.HarValgt": "Har valgt {dekningsgrad}% foreldrepenger",
-  "DekningradAP.SøknadSendt": "Søknad sendt {dato}"
+  "DekningsgradAP.AvklarDekningsgrad": "Avklar dekningsgrad",
+  "DekningsgradAP.HarValgt": "Har valgt {dekningsgrad}% foreldrepenger",
+  "DekningsgradAP.SøknadSendt": "Søknad sendt {dato}"
 }

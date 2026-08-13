@@ -115,7 +115,7 @@ export const StartdatoOverstyring = ({ aksjonspunkt, ytelseFordeling }: Props) =
   return (
     <AksjonspunktBoks
       aksjonspunkt={aksjonspunkt}
-      tittel={intl.formatMessage({ id: 'StartdatoOverstyring.EndreStartdato' })}
+      tittel={<FormattedMessage id="StartdatoOverstyring.EndreStartdato" />}
     >
       <RhfForm
         formMethods={formMethods}
