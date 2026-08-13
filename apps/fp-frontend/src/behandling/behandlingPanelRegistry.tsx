@@ -46,8 +46,8 @@ type PanelConfigUtenArbeidsgivere = BasePanelConfig & {
 
 type PanelConfig = PanelConfigMedArbeidsgivere | PanelConfigUtenArbeidsgivere;
 
-const førstegangsbehandlingEllerRevurdering: readonly BehandlingType[] = ['BT-002', 'BT-004'];
-const tilbakekrevingBehandlingTyper: readonly BehandlingType[] = ['BT-007', 'BT-009'];
+const førstegangsbehandlingEllerRevurdering = ['BT-002', 'BT-004'] satisfies readonly BehandlingType[];
+const tilbakekrevingBehandlingTyper = ['BT-007', 'BT-009'] satisfies readonly BehandlingType[];
 
 const ForeldrepengerPaneler = lazyNamedWithRetry<ArbeidsgiverPanelProps, 'ForeldrepengerPaneler'>(
   () => import('./foreldrepenger/ForeldrepengerPaneler'),
@@ -101,19 +101,19 @@ const panelConfigs = [
     render: props => <EngangsstonadPaneler {...props} />,
   },
   {
-    behandlingTyper: ['BT-006'] as readonly BehandlingType[],
+    behandlingTyper: ['BT-006'],
     skalHenteArbeidsgivere: false,
     skalViseFellesPaVent: true,
     render: props => <InnsynPaneler valgtProsessSteg={props.valgtProsessSteg} />,
   },
   {
-    behandlingTyper: ['BT-008'] as readonly BehandlingType[],
+    behandlingTyper: ['BT-008'],
     skalHenteArbeidsgivere: false,
     skalViseFellesPaVent: true,
     render: props => <AnkePaneler valgtProsessSteg={props.valgtProsessSteg} valgtFaktaSteg={props.valgtFaktaSteg} />,
   },
   {
-    behandlingTyper: ['BT-003'] as readonly BehandlingType[],
+    behandlingTyper: ['BT-003'],
     skalHenteArbeidsgivere: false,
     skalViseFellesPaVent: true,
     render: props => <KlagePaneler valgtProsessSteg={props.valgtProsessSteg} valgtFaktaSteg={props.valgtFaktaSteg} />,
@@ -133,7 +133,8 @@ export const finnPanelConfig = (
   behandlingType: BehandlingType | undefined,
 ): PanelConfig | undefined =>
   panelConfigs.find(config => {
-    if (!behandlingType || !config.behandlingTyper.includes(behandlingType)) {
+    const behandlingTyper: readonly BehandlingType[] = config.behandlingTyper;
+    if (!behandlingType || !behandlingTyper.includes(behandlingType)) {
       return false;
     }
 

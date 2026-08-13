@@ -217,6 +217,12 @@ describe('redigeringsUtils', () => {
       expect(result).toContain('<li>Punkt</li>');
       expect(result).not.toContain('<li><p>Punkt</p></li>');
     });
+
+    it('skal beholde mellomrommet framfor lenker, men fjerne det rundt andre tags', () => {
+      const html = lagBrevHtml({ redigerbartInnhold: '<p>Les mer <a href="https://nav.no">her</a></p>' });
+      const result = utledRedigerbartInnhold(html);
+      expect(result).toContain('Les mer <a href="https://nav.no">her</a>');
+    });
   });
 
   describe('utledStiler', () => {

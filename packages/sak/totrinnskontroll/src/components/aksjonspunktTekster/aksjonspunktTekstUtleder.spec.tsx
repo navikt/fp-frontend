@@ -306,7 +306,7 @@ describe('aksjonspunktTekstUtleder', () => {
   type KlageAvslagTestCase = {
     beskrivelse: string;
     type: Behandlingsresultat['type'];
-    faktaOmBeregningTilfeller: typeof faktaOmBeregningTilfeller;
+    faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
     forventetId: string;
   };
   it.each([

@@ -6,7 +6,9 @@ import { notEmpty } from '@navikt/fp-utils';
 const REMOVE_P_IN_LI_REGEX = /<li([^>]*)>\s*<p[^>]*>([\s\S]*?)<\/p>\s*<\/li>/g; // Fjern p-tags inni li-tags for å få korrekt styling i editor.js
 const ADD_P_IN_LI_REGEX = /<li([^>]*)>(?!\s*<p>)([\s\S]*?)(?!<\/p>)<\/li>/g; // Legg til p-tags inni li-tags for å få korrekt styling i pdf
 
-const erLenkeTag = (tagInnhold: string): boolean => /^a\s+href/.test(tagInnhold);
+// Mellomrom skal berre fjernast rundt tags som ikkje er ei opnande lenkje. Tom tag (`<>`) tel ikkje som
+// ein tag, slik at teksten blir ståande urørt — same som originalregexen, som kravde minst eitt teikn inni.
+const skalBeholdeMellomrom = (tagInnhold: string): boolean => tagInnhold.length === 0 || /^a\s+href/.test(tagInnhold);
 
 // Fjernar mellomrom rundt html-tags (utanom framfor <a href>). Gjer eitt lineært gjennomsyn av strengen
 // i staden for regex med \s* på begge sider av ei tag-gruppe, som kan gi super-lineær køyretid ved backtracking.
@@ -25,7 +27,7 @@ const fjernMellomromRundtTags = (html: string): string => {
 
     const tagInnhold = html.slice(tagStart + 1, tagEnd);
 
-    if (erLenkeTag(tagInnhold)) {
+    if (skalBeholdeMellomrom(tagInnhold)) {
       resultat += html.slice(posisjon, tagEnd + 1);
       posisjon = tagEnd + 1;
     } else {
