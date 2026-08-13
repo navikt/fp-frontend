@@ -163,6 +163,40 @@ export const MedPeriodeUtenDagsats: Story = {
               uttak: {
                 stonadskontoType: 'FORELDREPENGER' satisfies StønadskontoType,
                 gradering: false,
+                periodeResultatType: 'INNVILGET',
+              },
+              aktivitetStatus: 'AT',
+              arbeidsforholdType: 'ARBEID',
+              arbeidsgiverReferanse: '',
+              refusjon: 0,
+              tilSøker: 0,
+              utbetalingsgrad: 0,
+              sisteUtbetalingsdato: '',
+              eksternArbeidsforholdId: '',
+            },
+          ],
+          fom: '2019-06-11',
+          tom: '2019-07-01',
+          dagsats: 0,
+        },
+      ],
+    } satisfies BeregningsresultatDagytelse,
+  },
+};
+
+export const MedAvslåttPeriodeUtenDagsats: Story = {
+  args: {
+    aksjonspunkterForPanel: [],
+    beregningresultat: {
+      perioder: [
+        ...(beregningresultat.perioder ?? []),
+        {
+          andeler: [
+            {
+              uttak: {
+                stonadskontoType: 'FORELDREPENGER' satisfies StønadskontoType,
+                gradering: false,
+                periodeResultatType: 'AVSLÅTT',
               },
               aktivitetStatus: 'AT',
               arbeidsforholdType: 'ARBEID',

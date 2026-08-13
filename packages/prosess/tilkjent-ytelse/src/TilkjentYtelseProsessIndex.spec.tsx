@@ -4,7 +4,8 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './TilkjentYtelseProsessIndex.stories';
 
-const { UtenAksjonspunkt, UtførtAksjonspunkt, MedPeriodeUtenDagsats } = composeStories(stories);
+const { UtenAksjonspunkt, UtførtAksjonspunkt, MedPeriodeUtenDagsats, MedAvslåttPeriodeUtenDagsats } =
+  composeStories(stories);
 
 describe('TilkjentYtelseProsessIndex', () => {
   it('skal se på tilkjent ytelse uten aksjonspunkt', async () => {
@@ -35,7 +36,7 @@ describe('TilkjentYtelseProsessIndex', () => {
     expect(screen.getByText('Dette er en begrunnelse saksbehandler tidligere har gjort.')).toBeInTheDocument();
   });
 
-  it('skal vise feilmelding når en periode har 0 i dagsats', async () => {
+  it('skal vise advarsel når en innvilget periode har 0 i dagsats', async () => {
     render(<MedPeriodeUtenDagsats />);
 
     expect(await screen.findByText('Tilkjent ytelse')).toBeInTheDocument();
@@ -45,5 +46,17 @@ describe('TilkjentYtelseProsessIndex', () => {
           'Dette kan føre til feil ved brevutsending. Kontroller beregningen før du fortsetter.',
       ),
     ).toBeInTheDocument();
+  });
+
+  it('skal ikke vise advarsel når periode med 0 i dagsats har alle andeler avslått', async () => {
+    render(<MedAvslåttPeriodeUtenDagsats />);
+
+    expect(await screen.findByText('Tilkjent ytelse')).toBeInTheDocument();
+    expect(
+      screen.queryByText(
+        'Tilkjent ytelse inneholder en eller flere perioder med 0 kroner i dagsats. ' +
+          'Dette kan føre til feil ved brevutsending. Kontroller beregningen før du fortsetter.',
+      ),
+    ).not.toBeInTheDocument();
   });
 });

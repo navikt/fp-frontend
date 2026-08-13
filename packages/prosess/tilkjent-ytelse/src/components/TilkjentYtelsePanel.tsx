@@ -50,7 +50,7 @@ export const TilkjentYtelsePanel = ({
         <FormattedMessage id="TilkjentYtelse.Title" />
       </Heading>
       {harPeriodeMedNullIDagsats && (
-        <Alert size="small" variant="error">
+        <Alert size="small" variant="warning">
           <FormattedMessage id="TilkjentYtelse.NullIDagsats" />
         </Alert>
       )}
@@ -88,5 +88,9 @@ export const TilkjentYtelsePanel = ({
 const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunkt[]): string | undefined =>
   alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.UTGÅTT_5090)?.begrunnelse ?? undefined;
 
+const erAlleAndelerAvslått = (periode: BeregningsresultatDagytelse['perioder'][0]): boolean =>
+  (periode.andeler ?? []).length > 0 &&
+  (periode.andeler ?? []).every(andel => andel.uttak.periodeResultatType === 'AVSLÅTT');
+
 const finnHarPeriodeMedNullIDagsats = (perioder: BeregningsresultatDagytelse['perioder']): boolean =>
-  (perioder ?? []).some(periode => periode.dagsats === 0);
+  (perioder ?? []).filter(periode => !erAlleAndelerAvslått(periode)).some(periode => periode.dagsats === 0);
