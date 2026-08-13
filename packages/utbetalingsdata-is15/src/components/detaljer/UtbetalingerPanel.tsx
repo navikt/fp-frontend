@@ -12,12 +12,12 @@ interface Props {
 export const UtbetalingerPanel = ({ utbetalinger }: Props) => (
   <VStack gap="space-16">
     <div />
-    {!utbetalinger && (
+    {(!utbetalinger || utbetalinger.length === 0) && (
       <BodyShort size="small">
         <FormattedMessage id="UtbetalingerPanel.IngenUtbetalinger" />
       </BodyShort>
     )}
-    {utbetalinger && (
+    {utbetalinger && utbetalinger.length > 0 && (
       <Table size="small">
         <Table.Header>
           <Table.Row>
@@ -37,7 +37,7 @@ export const UtbetalingerPanel = ({ utbetalinger }: Props) => (
         </Table.Header>
         <Table.Body>
           {utbetalinger.map(utbetaling => (
-            <Table.Row key={utbetaling.identdato}>
+            <Table.Row key={`${utbetaling.identdato}-${utbetaling.periode.fom}-${utbetaling.periode.tom}`}>
               <Table.DataCell>
                 <PeriodLabel dateStringFom={utbetaling.periode.fom} dateStringTom={utbetaling.periode.tom} />
               </Table.DataCell>

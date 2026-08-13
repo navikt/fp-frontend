@@ -164,6 +164,9 @@ export const Default: Story = {
               dekningsgrad: 100,
               fødselsdatoBarn: '2015-08-20',
               gradering: 50,
+              // Infotrygd returnerer tomme lister (ikke utelatte felt) for FØ-vedtak uten IS13/IS15-rader
+              arbeidsforhold: [],
+              utbetalinger: [],
             },
             {
               identdato: '2015-12-18',

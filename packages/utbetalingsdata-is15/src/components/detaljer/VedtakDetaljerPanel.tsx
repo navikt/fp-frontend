@@ -14,10 +14,10 @@ interface Props {
 export const VedtakDetaljerPanel = ({ vedtak }: Props) => (
   <Tabs defaultValue="utbetalinger">
     <Tabs.List>
-      <Tabs.Tab value="arbeidshforhold" label={<FormattedMessage id="VedtakDetaljerPanel.Arbeidsforhold" />} />
+      <Tabs.Tab value="arbeidsforhold" label={<FormattedMessage id="VedtakDetaljerPanel.Arbeidsforhold" />} />
       <Tabs.Tab value="utbetalinger" label={<FormattedMessage id="VedtakDetaljerPanel.Utbetalinger" />} />
     </Tabs.List>
-    <Tabs.Panel value="arbeidshforhold">
+    <Tabs.Panel value="arbeidsforhold">
       <ArbeidsforholdPanel alleArbeidsforhold={vedtak.arbeidsforhold ?? undefined} />
     </Tabs.Panel>
     <Tabs.Panel value="utbetalinger">
