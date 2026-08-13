@@ -687,13 +687,16 @@ describe('TilretteleggingFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
   });
 
-  it('skal ikke blokkere når bare en irrelevant velferdspermisjon utenfor perioden er på 100%', async () => {
+  it('skal ikke blokkere når en tidligere vurdert gyldig 100%-permisjon faller utenfor tilretteleggingsperioden', async () => {
     const lagre = vi.fn(() => Promise.resolve());
     const svangerskapspengerTilrettelegging =
       stories.TilretteleggingMed100ProsentVelferdspermisjon.args.svangerskapspengerTilrettelegging;
 
     const førsteArbeidsforhold = svangerskapspengerTilrettelegging.arbeidsforholdListe[0]!;
 
+    // Permisjonen er alt vurdert som gyldig (erGyldig: true) i ei tidlegare lagring, men ligg no
+    // heilt før tilretteleggingBehovFom (2020-03-17) og blir difor ikkje vist i permisjonstabellen.
+    // Saksbehandlaren kan altså ikkje endre vurderinga, og skal heller ikkje blokkerast av henne.
     render(
       <TilretteleggingMed100ProsentVelferdspermisjon
         submitCallback={lagre}
@@ -702,17 +705,13 @@ describe('TilretteleggingFaktaIndex', () => {
           arbeidsforholdListe: [
             {
               ...førsteArbeidsforhold,
+              skalBrukes: true,
               velferdspermisjoner: [
                 {
-                  permisjonFom: '2019-02-17',
-                  permisjonTom: '2019-02-17',
+                  permisjonFom: '2019-01-01',
+                  permisjonTom: '2019-06-01',
                   permisjonsprosent: 100,
-                  type: 'VELFERDSPERMISJON',
-                },
-                {
-                  permisjonFom: '2020-02-17',
-                  permisjonTom: '2020-07-12',
-                  permisjonsprosent: 50,
+                  erGyldig: true,
                   type: 'VELFERDSPERMISJON',
                 },
               ],
@@ -724,20 +723,12 @@ describe('TilretteleggingFaktaIndex', () => {
     );
 
     expect(
-      await screen.findByText(
-        'Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer',
-      ),
+      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver'),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Ja'));
+    // Permisjonen er filtrert bort, så saksbehandlaren har ingen måte å endre vurderinga på
+    expect(screen.queryByText('Velferdspermisjon')).not.toBeInTheDocument();
 
-    expect(
-      screen.queryByText(
-        'Permisjonen på 100% er satt som gyldig, og dette fører til at søker ikke får svangerskapspenger for arbeidsforholdet.',
-      ),
-    ).not.toBeInTheDocument();
-
-    await userEvent.click(screen.getAllByText('Oppdater')[0]!);
     await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
