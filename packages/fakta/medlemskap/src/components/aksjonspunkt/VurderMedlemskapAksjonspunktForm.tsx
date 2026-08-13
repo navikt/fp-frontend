@@ -1,5 +1,5 @@
 import { useForm, useWatch } from 'react-hook-form';
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
@@ -25,16 +25,8 @@ interface Props {
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
 export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: Props) => {
-  const intl = useIntl();
-  const {
-    fagsak,
-    behandling,
-    aksjonspunkterForPanel,
-    vilkårForPanel,
-    submitCallback,
-    isReadOnly,
-    isSubmittable,
-  } = usePanelDataContext<VurderMedlemskapAp | VurderForutgaendeMedlemskapAp>();
+  const { fagsak, behandling, aksjonspunkterForPanel, vilkårForPanel, submitCallback, isReadOnly, isSubmittable } =
+    usePanelDataContext<VurderMedlemskapAp | VurderForutgaendeMedlemskapAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -49,9 +41,11 @@ export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: 
   return (
     <AksjonspunktBoks
       tittel={
-        erForutgående
-          ? intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.Tittel.Forutgående' })
-          : intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.Tittel.Ordinært' })
+        erForutgående ? (
+          <FormattedMessage id="VurderMedlemsskapAksjonspunktForm.Tittel.Forutgående" />
+        ) : (
+          <FormattedMessage id="VurderMedlemsskapAksjonspunktForm.Tittel.Ordinært" />
+        )
       }
       aksjonspunkt={aksjonspunkterForPanel}
     >

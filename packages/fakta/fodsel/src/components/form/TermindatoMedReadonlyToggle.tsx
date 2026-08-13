@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { PencilIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { Box, Button, Detail, HStack } from '@navikt/ds-react';
+import { Button, Detail, HStack } from '@navikt/ds-react';
 
 import { getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
 
@@ -30,22 +30,19 @@ export const TermindatoMedReadonlyToggle = ({ isReadOnly }: TermindatoMedReadonl
       <Termindato isReadOnly={isInputReadonly} isRequired={erBarnFødt === false} />
 
       {skalViseKnapp && (
-        <Box paddingBlock={isInputReadonly ? 'space-24 space-0' : 'space-40 space-0'}>
-          <Button
-            size="small"
-            type="button"
-            onClick={toggleTermindato}
-            icon={isInputReadonly ? <PencilIcon aria-hidden /> : <XMarkIcon aria-hidden />}
-            variant={isInputReadonly ? 'tertiary' : 'tertiary-neutral'}
-            title={intl.formatMessage({
-              id: isInputReadonly ? 'Termindato.EndreTermindato' : 'Termindato.AvbrytRedigering',
-            })}
-          />
-        </Box>
+        <Button
+          size="small"
+          type="button"
+          className="mt-7 self-center"
+          onClick={toggleTermindato}
+          icon={isInputReadonly ? <PencilIcon aria-hidden /> : <XMarkIcon aria-hidden />}
+          variant={isInputReadonly ? 'tertiary' : 'tertiary-neutral'}
+          title={intl.formatMessage({
+            id: isInputReadonly ? 'Termindato.EndreTermindato' : 'Termindato.AvbrytRedigering',
+          })}
+        />
       )}
-      <Box paddingBlock={isInputReadonly ? 'space-36 space-0' : 'space-40 space-0'}>
-        <Detail>{formatertKilde}</Detail>
-      </Box>
+      <Detail className="mt-7 self-center">{formatertKilde}</Detail>
     </HStack>
   );
 };

@@ -1,15 +1,14 @@
 import { useForm, useWatch } from 'react-hook-form';
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktBoks, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import type { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { RegistrereVergeForm, type VergeFormValues } from './RegistrereVergeForm';
@@ -35,20 +34,9 @@ interface Props {
   verge: Verge | undefined;
 }
 
-/**
- * TODO: fjern aksjonspunktet AVKLAR_VERGE når det ikke lenger er i bruk
- */
 export const RegistrereVergeInfoPanel = ({ verge, alleKodeverk }: Props) => {
-  const intl = useIntl();
-
-  const {
-    aksjonspunkterForPanel,
-    submitCallback,
-    isSubmittable,
-    alleMerknaderFraBeslutter,
-    harÅpentAksjonspunkt,
-    isReadOnly,
-  } = usePanelDataContext<AvklarVergeAp>();
+  const { aksjonspunkterForPanel, submitCallback, isSubmittable, harÅpentAksjonspunkt, isReadOnly } =
+    usePanelDataContext<AvklarVergeAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -66,7 +54,7 @@ export const RegistrereVergeInfoPanel = ({ verge, alleKodeverk }: Props) => {
     <VStack gap="space-20">
       {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
-          {intl.formatMessage({ id: 'RegistrereVergeInfoPanel.AksjonspunktTekst' })}
+          <FormattedMessage id="RegistrereVergeInfoPanel.AksjonspunktTekst" />
         </AksjonspunktHelpTextHTML>
       )}
       <RhfForm
@@ -74,34 +62,34 @@ export const RegistrereVergeInfoPanel = ({ verge, alleKodeverk }: Props) => {
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
-        <VStack gap="space-24">
-          <FaktaKort
-            label={intl.formatMessage({ id: 'Verge.VergeFullmektig' })}
-            merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}
-          >
+        <AksjonspunktBoks
+          tittel={<FormattedMessage id="Verge.VergeFullmektig" />}
+          aksjonspunkt={aksjonspunkterForPanel}
+        >
+          <VStack gap="space-16" maxWidth="800px">
             <RegistrereVergeForm
               readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}
               vergetyper={vergetyper}
               valgtVergeType={valgtVergeType}
             />
-          </FaktaKort>
-          {aksjonspunkterForPanel.length !== 0 && (
-            <>
-              <FaktaBegrunnelseTextField
-                control={formMethods.control}
-                isSubmittable={isSubmittable}
-                isReadOnly={isReadOnly}
-                hasBegrunnelse={!!begrunnelse}
-              />
-              <FaktaSubmitButton
-                isSubmittable={isSubmittable && !!valgtVergeType}
-                isReadOnly={isReadOnly}
-                isSubmitting={formMethods.formState.isSubmitting}
-                isDirty={formMethods.formState.isDirty}
-              />
-            </>
-          )}
-        </VStack>
+            {aksjonspunkterForPanel.length !== 0 && (
+              <>
+                <FaktaBegrunnelseTextField
+                  control={formMethods.control}
+                  isSubmittable={isSubmittable}
+                  isReadOnly={isReadOnly}
+                  hasBegrunnelse={!!begrunnelse}
+                />
+                <FaktaSubmitButton
+                  isSubmittable={isSubmittable && !!valgtVergeType}
+                  isReadOnly={isReadOnly}
+                  isSubmitting={formMethods.formState.isSubmitting}
+                  isDirty={formMethods.formState.isDirty}
+                />
+              </>
+            )}
+          </VStack>
+        </AksjonspunktBoks>
       </RhfForm>
     </VStack>
   );

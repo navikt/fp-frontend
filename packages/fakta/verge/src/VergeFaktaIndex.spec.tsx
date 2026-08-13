@@ -6,13 +6,13 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
 import * as stories from './VergeFaktaIndex.stories';
 
-const { Default } = composeStories(stories);
+const { ÅpentAksjonpunkt } = composeStories(stories);
 
 describe('VergeFaktaIndex', () => {
   it('skal trimme trailing whitespace fra organisasjonsnummer ved innsending', async () => {
     const lagre = vi.fn();
 
-    render(<Default submitCallback={lagre} />);
+    render(<ÅpentAksjonpunkt submitCallback={lagre} />);
 
     await userEvent.selectOptions(screen.getByLabelText('Type verge'), 'ADVOKAT');
 
@@ -39,7 +39,7 @@ describe('VergeFaktaIndex', () => {
   it('skal velge vergetype og bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    render(<Default submitCallback={lagre} />);
+    render(<ÅpentAksjonpunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Fyll ut og kontroller vergeopplysninger')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();

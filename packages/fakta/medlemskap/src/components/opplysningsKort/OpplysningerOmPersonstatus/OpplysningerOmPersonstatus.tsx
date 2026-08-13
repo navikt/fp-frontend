@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Detail, Label, VStack } from '@navikt/ds-react';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
@@ -27,12 +27,10 @@ export const OpplysningerOmPersonstatus = ({
   alleKodeverk,
   skalViseAvvik,
 }: Props) => {
-  const intl = useIntl();
-
   return (
     <EkspansjonsKort
       skalViseAvvik={skalViseAvvik}
-      tittel={intl.formatMessage({ id: 'OpplysningsKort.PersonstatusTittel' }, { harAnnenpart: !!annenpart })}
+      tittel={<FormattedMessage id="OpplysningsKort.PersonstatusTittel" values={{ harAnnenpart: !!annenpart }} />}
       kilde="FOLKEREGISTER"
       relevanteAvvik={avvik.filter(a => relevantForPersonstatus.includes(a))}
     >

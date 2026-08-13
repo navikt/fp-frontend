@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { BodyLong, BodyShort, Box, Table } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
@@ -22,8 +22,6 @@ export const OpplysningerFraMedlemskapsregister = ({
   alleKodeverk,
   skalViseAvvik,
 }: Props) => {
-  const intl = useIntl();
-
   const medlemskapTypeKodeverk = alleKodeverk['MedlemskapType'];
   const dekningTypeKodeverk = alleKodeverk['MedlemskapDekningType'];
 
@@ -34,10 +32,12 @@ export const OpplysningerFraMedlemskapsregister = ({
     <EkspansjonsKort
       skalViseAvvik={skalViseAvvik}
       kilde="MEDL"
-      tittel={intl.formatMessage(
-        { id: 'OpplysningsKort.MedlemskapsperiodeTittel' },
-        { count: medlemskapsperioder.length },
-      )}
+      tittel={
+        <FormattedMessage
+          id="OpplysningsKort.MedlemskapsperiodeTittel"
+          values={{ count: medlemskapsperioder.length }}
+        />
+      }
       relevanteAvvik={avvik.filter(a => relevantForMedl.includes(a))}
     >
       <>

@@ -1,5 +1,5 @@
 import { type ReactElement } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
 import { LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
@@ -43,15 +43,13 @@ interface Props {
 }
 
 export const OpplysningerOmUtenlandsopphold = ({ medlemskap, skalViseAvvik }: Props) => {
-  const intl = useIntl();
-
   const { oppholdSistePeriode, oppholdNestePeriode, utlandsoppholdFør, utlandsoppholdEtter } =
     medlemskap.oppgittUtlandsopphold;
 
   return (
     <EkspansjonsKort
       skalViseAvvik={skalViseAvvik}
-      tittel={intl.formatMessage({ id: 'OpplysningsKort.UtenlandsoppholdTittel' })}
+      tittel={<FormattedMessage id="OpplysningsKort.UtenlandsoppholdTittel" />}
       kilde="SØKNAD"
       relevanteAvvik={medlemskap.avvik.filter(a => relevantForUtenlandsopphold.includes(a))}
     >

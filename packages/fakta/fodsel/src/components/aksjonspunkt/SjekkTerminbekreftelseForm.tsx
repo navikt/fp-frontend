@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { useForm, type UseFormGetValues, useWatch } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, required } from '@navikt/ft-form-validators';
+import { AksjonspunktBoks } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fødsel, FødselGjeldende } from '@navikt/fp-types';
 import type { SjekkTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import {
   maxTerminbekreftelseDato,
   minTerminbekreftelseDato,
@@ -39,10 +39,7 @@ interface Props {
 }
 
 export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunkt }: Props) => {
-  const intl = useIntl();
-
-  const { submitCallback, isSubmittable, alleMerknaderFraBeslutter, isReadOnly } =
-    usePanelDataContext<SjekkTerminbekreftelseAp>();
+  const { submitCallback, isSubmittable, isReadOnly } = usePanelDataContext<SjekkTerminbekreftelseAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -59,16 +56,13 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
   const [iDag] = useState(() => new Date());
 
   return (
-    <FaktaKort
-      label={intl.formatMessage({ id: 'SjekkTerminbekreftelseForm.Tittel' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]}
-    >
+    <AksjonspunktBoks tittel={<FormattedMessage id="SjekkTerminbekreftelseForm.Tittel" />} aksjonspunkt={aksjonspunkt}>
       <RhfForm
         formMethods={formMethods}
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
-        <VStack gap="space-16">
+        <VStack gap="space-16" maxWidth="800px">
           <HStack gap="space-16">
             <Termindato isReadOnly={isReadOnly} isRequired />
 
@@ -76,7 +70,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
               control={formMethods.control}
               name="utstedtdato"
               size="medium"
-              label={intl.formatMessage({ id: 'Label.Utstedtdato' })}
+              label={<FormattedMessage id="Label.Utstedtdato" />}
               validate={[required, hasValidDate, validerTerminBekreftelse(formMethods.getValues)]}
               readOnly={isReadOnly}
               fromDate={minTerminbekreftelseDato().toDate()}
@@ -88,7 +82,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
               control={formMethods.control}
               name="antallBarn"
               size="medium"
-              label={intl.formatMessage({ id: 'Label.AntallBarn' })}
+              label={<FormattedMessage id="Label.AntallBarn" />}
               parse={value => {
                 const parsedValue = Number.parseInt(value.toString(), 10);
                 return Number.isNaN(parsedValue) ? value : parsedValue;
@@ -125,7 +119,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
           )}
         </VStack>
       </RhfForm>
-    </FaktaKort>
+    </AksjonspunktBoks>
   );
 };
 

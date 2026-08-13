@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Checkbox, Radio, VStack } from '@navikt/ds-react';
 import { RhfCheckboxGroup, RhfDatepicker, RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
+import { AksjonspunktBoks } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
 import {
@@ -22,7 +23,6 @@ import {
   type VilkårUtfallType,
 } from '@navikt/fp-types';
 import type { VurderOmsorgsovertakelseVilkåretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 
 import { Over15Markering } from './Markering';
@@ -43,7 +43,7 @@ interface Props {
 export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, alleMerknaderFraBeslutter, submitCallback, isReadOnly, isSubmittable, alleKodeverk } =
+  const { aksjonspunkterForPanel, submitCallback, isReadOnly, isSubmittable, alleKodeverk } =
     usePanelDataContext<VurderOmsorgsovertakelseVilkåretAp>();
   const alleBarn = mapBarn(omsorgsovertakelse);
   const formMethods = useForm<FormValues>({
@@ -63,11 +63,11 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
   }, [delvilkår]);
 
   return (
-    <FaktaKort
-      label={intl.formatMessage({
-        id: 'VurderOmsorgsovertakelseVilkåretForm.Tittel',
-      })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET]}
+    <AksjonspunktBoks
+      tittel={<FormattedMessage id="VurderOmsorgsovertakelseVilkåretForm.Tittel" />}
+      aksjonspunkt={aksjonspunkterForPanel.filter(
+        ap => ap.definisjon === AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
+      )}
     >
       <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(transformValues(values, alleBarn))}>
         <VStack gap="space-20">
@@ -209,7 +209,7 @@ export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Pr
           />
         </VStack>
       </RhfForm>
-    </FaktaKort>
+    </AksjonspunktBoks>
   );
 };
 
