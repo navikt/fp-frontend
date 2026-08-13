@@ -19,6 +19,7 @@ export type {
   foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidOgInntektsmeldingDto as ArbeidOgInntektsmelding,
   foreldrepenger_behandlingslager_virksomhet_ArbeidType as ArbeidType,
   foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto as Arbeidsforhold,
+  foreldrepenger_domene_arbeidsforhold_impl_InaktivArbeidsforholdÅrsak as InaktivArbeidsforholdÅrsak,
   tjenester_behandling_svp_SvpArbeidsforholdDto as SvpArbeidsforholdDto,
   tjenester_behandling_svp_BekreftTilrettelegging as BekreftTilrettelegging,
   tjenester_behandling_svp_SvpTilretteleggingDatoDto as SvpTilretteleggingDatoDto,
