@@ -8,6 +8,7 @@ import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
+  BeregningsresultatPeriode,
   FamilieHendelse,
   Feriepengegrunnlag,
   Personoversikt,
@@ -88,7 +89,7 @@ export const TilkjentYtelsePanel = ({
 const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunkt[]): string | undefined =>
   alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.UTGÅTT_5090)?.begrunnelse ?? undefined;
 
-const erAlleAndelerAvslått = (periode: BeregningsresultatDagytelse['perioder'][0]): boolean =>
+const erAlleAndelerAvslått = (periode: BeregningsresultatPeriode): boolean =>
   (periode.andeler ?? []).length > 0 &&
   (periode.andeler ?? []).every(andel => andel.uttak.periodeResultatType === 'AVSLÅTT');
 
