@@ -45,7 +45,7 @@ describe('FagsakIndex', () => {
     expect(screen.getByLabelText('Skjul profil sidepanel')).toBeInTheDocument();
 
     await userEvent.click(screen.getByLabelText('Skjul profil sidepanel'));
-    expect(screen.queryByLabelText('Vis sidepanel')).toBeInTheDocument();
+    expect(screen.getByLabelText('Vis sidepanel')).toBeInTheDocument();
   });
 
   it('skal skjule knapp for åpning eller lukking av sidepanel ved småskjerm', async () => {

@@ -130,8 +130,8 @@ describe('lukkedeOppgaverMapper', () => {
 
     const { forrigeUke } = mapLukkedeOppgaver(statistikk);
 
-    expect(forrigeUke.onsdagForrigeUke).toBe(undefined);
-    expect(forrigeUke.forrigeUkeTotal).toBe(undefined);
+    expect(forrigeUke.onsdagForrigeUke).toBeUndefined();
+    expect(forrigeUke.forrigeUkeTotal).toBeUndefined();
   });
 
   it('skal ignorere data eldre enn to uker tilbake', () => {

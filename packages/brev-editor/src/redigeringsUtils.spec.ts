@@ -32,22 +32,25 @@ const lagBrevHtml = ({
 
 describe('redigeringsUtils', () => {
   describe('leggTilPTagsILiTags', () => {
-    it('skal legge til p-tags inni li-tags som mangler dem', () => {
-      const html = '<ul><li>Punkt 1</li><li>Punkt 2</li></ul>';
+    it.each([
+      {
+        beskrivelse: 'skal legge til p-tags inni li-tags som mangler dem',
+        html: '<ul><li>Punkt 1</li><li>Punkt 2</li></ul>',
+        forventet: '<ul><li><p>Punkt 1</p></li><li><p>Punkt 2</p></li></ul>',
+      },
+      {
+        beskrivelse: 'skal ikke legge til p-tags inni li-tags som allerede har dem',
+        html: '<ul><li><p>Punkt 1</p></li></ul>',
+        forventet: '<ul><li><p>Punkt 1</p></li></ul>',
+      },
+      {
+        beskrivelse: 'skal håndtere li-tags med attributter',
+        html: '<ul><li class="item">Punkt</li></ul>',
+        forventet: '<ul><li class="item"><p>Punkt</p></li></ul>',
+      },
+    ])('$beskrivelse', ({ html, forventet }) => {
       const result = leggTilPTagsILiTags(html);
-      expect(result).toBe('<ul><li><p>Punkt 1</p></li><li><p>Punkt 2</p></li></ul>');
-    });
-
-    it('skal ikke legge til p-tags inni li-tags som allerede har dem', () => {
-      const html = '<ul><li><p>Punkt 1</p></li></ul>';
-      const result = leggTilPTagsILiTags(html);
-      expect(result).toBe('<ul><li><p>Punkt 1</p></li></ul>');
-    });
-
-    it('skal håndtere li-tags med attributter', () => {
-      const html = '<ul><li class="item">Punkt</li></ul>';
-      const result = leggTilPTagsILiTags(html);
-      expect(result).toBe('<ul><li class="item"><p>Punkt</p></li></ul>');
+      expect(result).toBe(forventet);
     });
 
     it('skal returnere uendret tekst uten li-tags', () => {

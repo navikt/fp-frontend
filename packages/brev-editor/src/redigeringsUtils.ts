@@ -3,12 +3,47 @@ import { generate, parse, walk } from 'css-tree';
 
 import { notEmpty } from '@navikt/fp-utils';
 
-const REMOVE_SPACE_REGEX = /\s*(<(?!a\s+href)[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags (utanom framfor <a href)
 const REMOVE_P_IN_LI_REGEX = /<li([^>]*)>\s*<p[^>]*>([\s\S]*?)<\/p>\s*<\/li>/g; // Fjern p-tags inni li-tags for å få korrekt styling i editor.js
 const ADD_P_IN_LI_REGEX = /<li([^>]*)>(?!\s*<p>)([\s\S]*?)(?!<\/p>)<\/li>/g; // Legg til p-tags inni li-tags for å få korrekt styling i pdf
 
+const erLenkeTag = (tagInnhold: string): boolean => /^a\s+href/.test(tagInnhold);
+
+// Fjernar mellomrom rundt html-tags (utanom framfor <a href>). Gjer eitt lineært gjennomsyn av strengen
+// i staden for regex med \s* på begge sider av ei tag-gruppe, som kan gi super-lineær køyretid ved backtracking.
+const fjernMellomromRundtTags = (html: string): string => {
+  let resultat = '';
+  let posisjon = 0;
+
+  while (posisjon < html.length) {
+    const tagStart = html.indexOf('<', posisjon);
+    const tagEnd = tagStart === -1 ? -1 : html.indexOf('>', tagStart);
+
+    if (tagStart === -1 || tagEnd === -1) {
+      resultat += html.slice(posisjon);
+      break;
+    }
+
+    const tagInnhold = html.slice(tagStart + 1, tagEnd);
+
+    if (erLenkeTag(tagInnhold)) {
+      resultat += html.slice(posisjon, tagEnd + 1);
+      posisjon = tagEnd + 1;
+    } else {
+      resultat += html.slice(posisjon, tagStart).replace(/\s+$/, '') + html.slice(tagStart, tagEnd + 1);
+
+      let etterTag = tagEnd + 1;
+      while (etterTag < html.length && /\s/.test(html[etterTag]!)) {
+        etterTag += 1;
+      }
+      posisjon = etterTag;
+    }
+  }
+
+  return resultat;
+};
+
 const fjernMellomromOgPTagsILiTags = (html: string): string =>
-  html.replaceAll(REMOVE_SPACE_REGEX, '$1').replaceAll(REMOVE_P_IN_LI_REGEX, '<li$1>$2</li>');
+  fjernMellomromRundtTags(html).replaceAll(REMOVE_P_IN_LI_REGEX, '<li$1>$2</li>');
 
 export const leggTilPTagsILiTags = (html: string): string => html.replaceAll(ADD_P_IN_LI_REGEX, '<li$1><p>$2</p></li>');
 

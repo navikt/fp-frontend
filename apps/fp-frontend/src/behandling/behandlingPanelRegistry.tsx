@@ -19,7 +19,6 @@ type ArbeidsgiverPanelProps = ValgtStegProps & {
 
 type InnsynPanelProps = Pick<ValgtStegProps, 'valgtProsessSteg'>;
 
-type PanelRenderProps = ValgtStegProps;
 type PanelRenderPropsMedArbeidsgivere = ValgtStegProps & {
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
 };
@@ -42,13 +41,13 @@ type PanelConfigMedArbeidsgivere = BasePanelConfig & {
 type PanelConfigUtenArbeidsgivere = BasePanelConfig & {
   fagsakYtelseType?: PanelFagsakYtelseType;
   skalHenteArbeidsgivere: false;
-  render: (props: PanelRenderProps) => ReactNode;
+  render: (props: ValgtStegProps) => ReactNode;
 };
 
 type PanelConfig = PanelConfigMedArbeidsgivere | PanelConfigUtenArbeidsgivere;
 
-const førstegangsbehandlingEllerRevurdering = ['BT-002', 'BT-004'] satisfies readonly BehandlingType[];
-const tilbakekrevingBehandlingTyper = ['BT-007', 'BT-009'] satisfies readonly BehandlingType[];
+const førstegangsbehandlingEllerRevurdering: readonly BehandlingType[] = ['BT-002', 'BT-004'];
+const tilbakekrevingBehandlingTyper: readonly BehandlingType[] = ['BT-007', 'BT-009'];
 
 const ForeldrepengerPaneler = lazyNamedWithRetry<ArbeidsgiverPanelProps, 'ForeldrepengerPaneler'>(
   () => import('./foreldrepenger/ForeldrepengerPaneler'),
@@ -102,19 +101,19 @@ const panelConfigs = [
     render: props => <EngangsstonadPaneler {...props} />,
   },
   {
-    behandlingTyper: ['BT-006'],
+    behandlingTyper: ['BT-006'] as readonly BehandlingType[],
     skalHenteArbeidsgivere: false,
     skalViseFellesPaVent: true,
     render: props => <InnsynPaneler valgtProsessSteg={props.valgtProsessSteg} />,
   },
   {
-    behandlingTyper: ['BT-008'],
+    behandlingTyper: ['BT-008'] as readonly BehandlingType[],
     skalHenteArbeidsgivere: false,
     skalViseFellesPaVent: true,
     render: props => <AnkePaneler valgtProsessSteg={props.valgtProsessSteg} valgtFaktaSteg={props.valgtFaktaSteg} />,
   },
   {
-    behandlingTyper: ['BT-003'],
+    behandlingTyper: ['BT-003'] as readonly BehandlingType[],
     skalHenteArbeidsgivere: false,
     skalViseFellesPaVent: true,
     render: props => <KlagePaneler valgtProsessSteg={props.valgtProsessSteg} valgtFaktaSteg={props.valgtFaktaSteg} />,
@@ -134,7 +133,7 @@ export const finnPanelConfig = (
   behandlingType: BehandlingType | undefined,
 ): PanelConfig | undefined =>
   panelConfigs.find(config => {
-    if (!behandlingType || !config.behandlingTyper.some(type => type === behandlingType)) {
+    if (!behandlingType || !config.behandlingTyper.includes(behandlingType)) {
       return false;
     }
 

@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
@@ -34,9 +34,7 @@ describe('EndreReservasjonDato', () => {
     expect(spy).toHaveBeenCalledExactlyOnceWith(123, '2026-01-12');
     expect(screen.getByTitle('Lagret')).toBeInTheDocument();
 
-    await waitFor(() => expect(screen.getByTitle('Åpne datovelger')).toBeInTheDocument(), {
-      timeout: 2500,
-    });
+    await screen.findByTitle('Åpne datovelger', {}, { timeout: 2500 });
 
     vi.useRealTimers();
   });

@@ -303,67 +303,47 @@ describe('aksjonspunktTekstUtleder', () => {
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
   // Klage avslag
-  // Ytelsesvedtak opphevet
-  it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak opphevet', () => {
-    const behandlingsresultat = {
-      id: 1,
+  type KlageAvslagTestCase = {
+    beskrivelse: string;
+    type: Behandlingsresultat['type'];
+    faktaOmBeregningTilfeller: typeof faktaOmBeregningTilfeller;
+    forventetId: string;
+  };
+  it.each([
+    {
+      beskrivelse: 'ytelsesvedtak opphevet',
       type: 'KLAGE_YTELSESVEDTAK_OPPHEVET',
-      vedtaksbrevStatus: 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING',
-    } satisfies Behandlingsresultat;
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      behandlingStatusFVED,
       faktaOmBeregningTilfeller,
-      false,
-      aksjonspunkt,
-      behandlingsresultat,
-    );
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
-  });
-  // Klage avvist
-  it('skal vise korrekt tekst for aksjonspunkt 5035 avslag klage avvist', () => {
-    const behandlingsresultat = {
-      id: 1,
+      forventetId: 'ToTrinnsForm.Klage.OppheveYtelsesVedtak',
+    },
+    {
+      beskrivelse: 'klage avvist',
       type: 'KLAGE_AVVIST',
-      vedtaksbrevStatus: 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING',
-    } satisfies Behandlingsresultat;
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.Avvist');
-  });
-  // Ikke fastsatt Engangsstønad
-  it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ikke fastsatt', () => {
-    const behandlingsresultat = {
-      id: 1,
+      faktaOmBeregningTilfeller: [],
+      forventetId: 'ToTrinnsForm.Klage.Avvist',
+    },
+    {
+      beskrivelse: 'ikke fastsatt',
       type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
-      vedtaksbrevStatus: 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING',
-    } satisfies Behandlingsresultat;
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
-  });
-  it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak stadfestet', () => {
-    const behandlingsresultat = {
-      id: 1,
-      type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
-      vedtaksbrevStatus: 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING',
-    } satisfies Behandlingsresultat;
-    const aksjonspunkt = {
-      ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
-    } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
-  });
+      faktaOmBeregningTilfeller: [],
+      forventetId: 'ToTrinnsForm.Klage.StadfesteYtelsesVedtak',
+    },
+  ] satisfies KlageAvslagTestCase[])(
+    'skal vise korrekt tekst for aksjonspunkt 5035 avslag $beskrivelse',
+    ({ type, faktaOmBeregningTilfeller: tilfeller, forventetId }) => {
+      const behandlingsresultat = {
+        id: 1,
+        type,
+        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING',
+      } satisfies Behandlingsresultat;
+      const aksjonspunkt = {
+        ...defaultAksjonspunkt,
+        aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP,
+      } satisfies TotrinnskontrollAksjonspunkt;
+      const message = getAksjonspunkttekst(behandlingStatusFVED, tilfeller, false, aksjonspunkt, behandlingsresultat);
+      expect(message[0]!.props.id).toEqual(forventetId);
+    },
+  );
 
   it('skal vise korrekt tekst for aksjonspunkt 5058 vurder tidsbegrenset', () => {
     const beregningTilfeller = [
