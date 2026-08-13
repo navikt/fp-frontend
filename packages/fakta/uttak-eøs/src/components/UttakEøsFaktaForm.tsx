@@ -6,7 +6,7 @@ import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
-import dayjs from 'dayjs';
+import { sortPeriodsByFom } from '@navikt/ft-utils';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -26,7 +26,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
 
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, isReadOnly, submitCallback, alleKodeverk } =
     usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
-  const sorterteAnnenForelderUttakEøs = [...annenForelderUttakEøs].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
+  const sorterteAnnenForelderUttakEøs = annenForelderUttakEøs.toSorted(sortPeriodsByFom);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
     annenForelderUttakEøsPerioder: AnnenforelderUttakEøsPeriode[];
