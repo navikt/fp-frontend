@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useFieldArray, useFormContext } from 'react-hook-form';
-import { useIntl } from 'react-intl';
+import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
+import { type IntlShape, useIntl } from 'react-intl';
 
 import { Box } from '@navikt/ds-react';
 import { RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
@@ -22,12 +22,37 @@ const defaultTilrettelegging: Tilrettelegging = {
   stillingsprosent: undefined,
 };
 
+type TilretteleggingerFieldName =
+  | 'tilretteleggingArbeidsforhold.tilretteleggingFrilans.tilrettelegginger'
+  | 'tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende.tilrettelegginger'
+  | `tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.${number}.tilrettelegginger`;
+
+// Perioden mangler eit eige til og med-felt, så til og med-dato for ein periode er alltid
+// neste periodes fra dato minus éin dag. Denne validerer at fra dato ikkje er etter den avleia til og med-datoen.
+// Datoane vert henta lazy via getValues ved kvar validering, sidan komponenten ikkje nødvendigvis
+// vert re-rendra når naboraden si fra dato vert endra.
+const validerFraDatoErFørNestePeriode =
+  (intl: IntlShape, getValues: UseFormGetValues<FormValues>, name: TilretteleggingerFieldName, index: number) =>
+  (): string | null => {
+    const dato = getValues(`${name}.${index}.dato`);
+    const nesteDato = getValues(`${name}.${index + 1}.dato`);
+
+    if (!dato || !nesteDato) {
+      return null;
+    }
+
+    const erEtterNestePeriode = dateBeforeOrEqual(dayjs(nesteDato).subtract(1, 'day').format(ISO_DATE_FORMAT))(
+      dato,
+    );
+
+    return erEtterNestePeriode
+      ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDatoMaaVaereFoerNeste' })
+      : null;
+  };
+
 interface Props {
   readOnly: boolean;
-  name:
-    | 'tilretteleggingArbeidsforhold.tilretteleggingFrilans.tilrettelegginger'
-    | 'tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende.tilrettelegginger'
-    | `tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.${number}.tilrettelegginger`;
+  name: TilretteleggingerFieldName;
 }
 
 export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => {
@@ -92,25 +117,7 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
               control={control}
               readOnly={readOnly}
               label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDato' })}
-              validate={[
-                required,
-                () => {
-                  const dato = getValues(`${name}.${index}.dato`);
-                  const nesteDato = getValues(`${name}.${index + 1}.dato`);
-
-                  if (!dato || !nesteDato) {
-                    return null;
-                  }
-
-                  const datoEtterNeste = dateBeforeOrEqual(
-                    dayjs(nesteDato).subtract(1, 'day').format(ISO_DATE_FORMAT),
-                  )(dato);
-
-                  return datoEtterNeste
-                    ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDatoMaaVaereFoerNeste' })
-                    : null;
-                },
-              ]}
+              validate={[required, validerFraDatoErFørNestePeriode(intl, getValues, name, index)]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
 
