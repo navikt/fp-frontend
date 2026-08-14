@@ -40,7 +40,7 @@ describe('VergeFaktaIndex', () => {
   it('skal vise valideringsfeil når til og med er før fra og med', async () => {
     const lagre = vi.fn();
 
-    render(<Default submitCallback={lagre} />);
+    render(<ÅpentAksjonpunkt submitCallback={lagre} />);
 
     await userEvent.selectOptions(screen.getByLabelText('Type verge'), 'ADVOKAT');
     await userEvent.type(screen.getByLabelText('Navn'), 'Espen Utvikler');
@@ -66,7 +66,7 @@ describe('VergeFaktaIndex', () => {
     const originalRekkefølge = vergetyper.map(vergetype => vergetype.kode);
 
     render(
-      <Default alleKodeverk={{ ...alleKodeverk, ...alleKodeverkTilbakekreving, VergeType: vergetyper }} />,
+      <ÅpentAksjonpunkt alleKodeverk={{ ...alleKodeverk, ...alleKodeverkTilbakekreving, VergeType: vergetyper }} />,
     );
 
     expect(await screen.findByText('Fyll ut og kontroller vergeopplysninger')).toBeInTheDocument();
