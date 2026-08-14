@@ -51,7 +51,7 @@ export const PersonArbeidsforholdTable = ({
           const mottattDato = inntektsmeldinger.find(im => erMatch(arbeidsforhold, im))?.mottattDato;
           return (
             <Table.ExpandableRow
-              key={utledNøkkel(arbeidsforhold)}
+              key={`${arbeidsforhold.arbeidsgiverIdent}-${arbeidsforhold.internArbeidsforholdId}`}
               content={
                 arbeidsforhold.saksbehandlersVurdering ? (
                   <ArbeidsforholdDetail valgtArbeidsforhold={arbeidsforhold} />
@@ -127,6 +127,3 @@ const utledNavn = (
 
   return formaterArbeidsgiver(arbeidsgiverOpplysninger, eksternId ?? undefined);
 };
-
-const utledNøkkel = (arbeidsforhold: Arbeidsforhold): string =>
-  `${arbeidsforhold.arbeidsgiverIdent}-${arbeidsforhold.internArbeidsforholdId}`;
