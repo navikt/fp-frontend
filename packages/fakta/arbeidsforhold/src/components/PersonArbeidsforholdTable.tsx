@@ -45,12 +45,13 @@ export const PersonArbeidsforholdTable = ({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {alleArbeidsforhold.map(arbeidsforhold => {
-          const stillingsprosent = `${arbeidsforhold.stillingsprosent?.toFixed(2)} %`;
+        {alleArbeidsforhold.map((arbeidsforhold, index) => {
+          const stillingsprosent =
+            arbeidsforhold.stillingsprosent !== undefined ? `${arbeidsforhold.stillingsprosent.toFixed(2)} %` : '-';
           const mottattDato = inntektsmeldinger.find(im => erMatch(arbeidsforhold, im))?.mottattDato;
           return (
             <Table.ExpandableRow
-              key={utledNøkkel(arbeidsforhold, arbeidsgiverOpplysningerPerId)}
+              key={utledNøkkel(arbeidsforhold, index)}
               content={
                 arbeidsforhold.saksbehandlersVurdering ? (
                   <ArbeidsforholdDetail valgtArbeidsforhold={arbeidsforhold} />
@@ -127,10 +128,12 @@ const utledNavn = (
   return formaterArbeidsgiver(arbeidsgiverOpplysninger, eksternId ?? undefined);
 };
 
-const utledNøkkel = (
-  arbeidsforhold: Arbeidsforhold,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): string => {
-  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
-  return `${arbeidsforhold.eksternArbeidsforholdId}${arbeidsforhold.arbeidsgiverIdent}${arbeidsgiverOpplysninger?.identifikator}`;
-};
+const utledNøkkel = (arbeidsforhold: Arbeidsforhold, index: number): string =>
+  [
+    arbeidsforhold.arbeidsgiverIdent,
+    arbeidsforhold.internArbeidsforholdId ?? '',
+    arbeidsforhold.eksternArbeidsforholdId ?? '',
+    arbeidsforhold.fom,
+    arbeidsforhold.tom,
+    `${index}`,
+  ].join('-');

@@ -1,7 +1,12 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
+
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { lagAksjonspunkt } from '@navikt/fp-storybook-utils';
+import type { OmsorgOgRett } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import * as stories from './OmsorgOgRettFaktaIndex.stories';
 
@@ -233,5 +238,145 @@ describe('OmsorgOgRettFaktaIndex', () => {
       begrunnelse: 'Dette er en begrunnelse',
       rettighetstype: 'BEGGE_RETT',
     });
+  });
+
+  it('skal ikke sende skjulte felter videre når søker endrer til aleneomsorg', async () => {
+    const lagreVurdering = vi.fn(() => Promise.resolve());
+    const omsorgOgRett = notEmpty(HarAksjonspunktForAvklarAleneomsorg.args.omsorgOgRett);
+
+    // relasjonsRolleType må vera ulik MORA for at "Mottar annen forelder uføretrygd"-feltet skal visast.
+    render(
+      <HarAksjonspunktForAvklarAleneomsorg
+        submitCallback={lagreVurdering}
+        omsorgOgRett={{ ...omsorgOgRett, relasjonsRolleType: 'FARA' }}
+      />,
+    );
+
+    await userEvent.click(await screen.findByLabelText('Søker har ikke aleneomsorg for barnet'));
+
+    const harRettGruppe = within(screen.getByRole('radiogroup', { name: 'Har annen forelder rett til foreldrepenger i Norge?' }));
+    await userEvent.click(harRettGruppe.getByLabelText('Nei'));
+
+    const harRettEosGruppe = within(
+      screen.getByRole('radiogroup', {
+        name: 'Har annen forelder mottatt pengestøtte tilsvarende foreldrepenger fra land i EØS?',
+      }),
+    );
+    await userEvent.click(harRettEosGruppe.getByLabelText('Nei'));
+
+    const uforetrygdGruppe = within(
+      screen.getByRole('radiogroup', {
+        name: 'Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?',
+      }),
+    );
+    await userEvent.click(uforetrygdGruppe.getByLabelText('Ja'));
+
+    await userEvent.click(screen.getByLabelText('Søker har aleneomsorg for barnet'));
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
+    expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
+      kode: '5060',
+      begrunnelse: 'Dette er en begrunnelse',
+      aleneomsorg: true,
+      annenforelderHarRett: undefined,
+      annenForelderHarRettEØS: undefined,
+      annenforelderMottarUføretrygd: undefined,
+    });
+  });
+
+  it('skal ikke sende skjulte felter videre når annen forelder har rett i Norge', async () => {
+    const lagreVurdering = vi.fn(() => Promise.resolve());
+
+    render(<HarAksjonspunktForAvklarAnnenForelderRett submitCallback={lagreVurdering} />);
+
+    expect(await screen.findByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
+
+    const harRettGruppe = within(screen.getByRole('radiogroup', { name: 'Har annen forelder rett til foreldrepenger i Norge?' }));
+    await userEvent.click(harRettGruppe.getByLabelText('Nei'));
+
+    const harRettEosGruppe = within(
+      screen.getByRole('radiogroup', {
+        name: 'Har annen forelder mottatt pengestøtte tilsvarende foreldrepenger fra land i EØS?',
+      }),
+    );
+    await userEvent.click(harRettEosGruppe.getByLabelText('Nei'));
+
+    const uforetrygdGruppe = within(
+      screen.getByRole('radiogroup', {
+        name: 'Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?',
+      }),
+    );
+    await userEvent.click(uforetrygdGruppe.getByLabelText('Ja'));
+
+    // "Ja" finnes no fleire stader (i nøsta radiogrupper), så vi må vera meir presise enn
+    // harRettGruppe (som via `within` også omfattar dei nøsta radiogruppene).
+    await userEvent.click(harRettGruppe.getAllByLabelText('Ja')[0]!);
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
+    expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
+      kode: '5086',
+      begrunnelse: 'Dette er en begrunnelse',
+      annenforelderHarRett: true,
+      annenForelderHarRettEØS: undefined,
+      annenforelderMottarUføretrygd: undefined,
+    });
+  });
+
+  it('skal vise rå landkode når bostedsland ikke finnes i kodeverket', async () => {
+    const omsorgOgRett = notEmpty(HarAksjonspunktForAvklarAnnenForelderRett.args.omsorgOgRett);
+    render(
+      <HarAksjonspunktForAvklarAnnenForelderRett
+        omsorgOgRett={{
+          ...omsorgOgRett,
+          søknad: {
+            ...omsorgOgRett.søknad,
+            // "XXX" finnes i kodeverket (Statsløs) - bruk ein oppdikta kode som ikkje finnes.
+            annenpartBostedsland: 'IKKE_I_KODEVERKET' as OmsorgOgRett['søknad']['annenpartBostedsland'],
+          },
+        }}
+      />,
+    );
+
+    expect(await screen.findByText('IKKE_I_KODEVERKET')).toBeInTheDocument();
+  });
+
+  it('skal bruke riktig aksjonspunktbegrunnelse for hvert skjema når begge aksjonspunkt finnes', async () => {
+    const omsorgOgRett = notEmpty(HarAksjonspunktForAvklarAleneomsorg.args.omsorgOgRett);
+    render(
+      <HarAksjonspunktForAvklarAleneomsorg
+        isReadOnly
+        aksjonspunkterForPanel={[
+          lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, {
+            status: 'UTFO',
+            begrunnelse: 'Begrunnelse for aleneomsorg',
+          }),
+          lagAksjonspunkt(AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT, {
+            status: 'UTFO',
+            begrunnelse: 'Begrunnelse for annen forelder',
+          }),
+        ]}
+        omsorgOgRett={{
+          ...omsorgOgRett,
+          manuellBehandlingResultat: {
+            søkerHarAleneomsorg: 'NEI',
+            annenpartRettighet: {
+              harRettNorge: 'NEI',
+              harOppholdEØS: 'IKKE_RELEVANT',
+              harRettEØS: 'NEI',
+              harUføretrygd: 'JA',
+            },
+          },
+        }}
+      />,
+    );
+
+    expect(await screen.findByText('Begrunnelse for aleneomsorg')).toBeInTheDocument();
+    expect(screen.getByText('Begrunnelse for annen forelder')).toBeInTheDocument();
   });
 });

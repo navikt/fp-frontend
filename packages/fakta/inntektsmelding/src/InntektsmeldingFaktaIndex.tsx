@@ -181,6 +181,9 @@ const sorterInntektsmeldinger = ({
 };
 
 const sorterStreng = (a: string | undefined | number, b: string | undefined | number) => {
+  if (a === b) {
+    return 0;
+  }
   if (a === undefined) {
     return -1;
   }

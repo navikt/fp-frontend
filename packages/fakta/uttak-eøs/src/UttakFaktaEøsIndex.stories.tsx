@@ -53,6 +53,25 @@ export const ÅpentAksjonspunktMedPerioder: Story = {
   },
 };
 
+export const ÅpentAksjonspunktMedPerioderSomDelerSammeFom: Story = {
+  args: {
+    annenForelderUttakEøs: [
+      {
+        fom: '2023-01-01',
+        tom: '2023-01-31',
+        trekkonto: 'MØDREKVOTE',
+        trekkdager: 10,
+      },
+      {
+        fom: '2023-01-01',
+        tom: '2023-02-15',
+        trekkonto: 'FELLESPERIODE',
+        trekkdager: 15,
+      },
+    ],
+  },
+};
+
 export const AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg: Story = {
   args: {
     annenForelderUttakEøs: [],

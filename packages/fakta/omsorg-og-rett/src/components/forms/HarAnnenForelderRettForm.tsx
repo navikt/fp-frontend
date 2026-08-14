@@ -34,6 +34,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmitt
 
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? buildInitialValues(omsorgOgRett, aksjonspunkt),
+    shouldUnregister: true,
   });
 
   const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== 'MORA' || harUføretrygd === 'JA';

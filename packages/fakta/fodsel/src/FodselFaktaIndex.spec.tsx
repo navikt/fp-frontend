@@ -177,6 +177,33 @@ describe('FodselFaktaIndex', () => {
       ).toBeInTheDocument();
     });
 
+    it('skal vise feilmelding når et barn er for langt unna termindato selv om første barn er gyldig', async () => {
+      render(<APSjekkManglendeFødselPåForeldrepenger submitCallback={vi.fn()} />);
+
+      const apBoks = within(screen.getByLabelText('Kontroller opplysninger om fødsel'));
+
+      await userEvent.click(apBoks.getByText('Ja'));
+
+      const alleDatofelt = apBoks.getAllByRole('textbox', { hidden: true });
+      const fødselsdatoFelt1 = alleDatofelt[0]!;
+
+      await userEvent.clear(fødselsdatoFelt1);
+      await userEvent.type(fødselsdatoFelt1, '25.05.2025');
+      fireEvent.blur(fødselsdatoFelt1);
+
+      await userEvent.click(apBoks.getByText('Legg til barn'));
+
+      const fødselsdatoFelt2 = apBoks.getAllByRole('textbox', { hidden: true })[2]!;
+      await userEvent.type(fødselsdatoFelt2, '27.05.2025');
+      fireEvent.blur(fødselsdatoFelt2);
+
+      expect(
+        await apBoks.findByText(
+          'For stort avvik mellom termin og fødsel. Fødsel må være tidligst 19 uker før og senest 6 uker etter termin.',
+        ),
+      ).toBeInTheDocument();
+    });
+
     it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon ikke foreligger', async () => {
       const lagre = vi.fn(() => Promise.resolve());
       render(<APSjekkManglendeFødselPåEngangstønad submitCallback={lagre} />);

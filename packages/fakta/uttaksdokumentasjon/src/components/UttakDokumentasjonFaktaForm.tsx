@@ -42,9 +42,18 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
     mellomlagretFormData?.dokBehov ?? dokumentasjonVurderingBehov,
   );
 
-  const bekreft = (values: FaktaBegrunnelseFormValues) => {
+  const bekreft = async (values: FaktaBegrunnelseFormValues) => {
     setErBekreftKnappTrykket(true);
-    void submitCallback(transformValues(values, dokBehov));
+    try {
+      await submitCallback(transformValues(values, dokBehov));
+    } catch {
+      // Fangar feilen her sidan ingenting elles ventar på/fangar denne (kalla frå ein
+      // klikk-handler). Utan dette vart det ein ufanga ("unhandled") promise-rejection.
+      // Knappen sin loading-state blir uansett nullstilt av finally-blokka under, uavhengig
+      // av dette catch-et; feilmelding til brukar er alt sikra via mutation-cachen (queryUtils.ts).
+    } finally {
+      setErBekreftKnappTrykket(false);
+    }
   };
 
   const formMethods = useForm<FaktaBegrunnelseFormValues>({
@@ -73,7 +82,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
       <RhfForm
         formMethods={formMethods}
         setDataOnUnmount={(values: FaktaBegrunnelseFormValues) => setMellomlagretFormData({ ...values, dokBehov })}
-        onSubmit={values => bekreft(values)}
+        onSubmit={bekreft}
       >
         <VStack gap="space-16">
           <FaktaBegrunnelseTextField

@@ -1,6 +1,6 @@
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { composeStories } from '@storybook/react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import dayjs from 'dayjs';
 
@@ -19,6 +19,7 @@ const {
   ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet,
   ArbeidsforholdErOK,
   ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet,
+  ArbeidsforholdMedSammeOrgNr,
   FlereArbeidsforholdOgInntekstemeldinger,
   ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre,
   FoerRegisterinnhenting,
@@ -216,6 +217,33 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
       vurdering: 'MELDING_TIL_ARBEIDSGIVER_NAV_NO',
     });
+  });
+
+  it('skal beholde skjemaet dirty når lagring av manglende arbeidsforhold feiler', async () => {
+    const lagreVurdering = vi.fn(() => {
+      const promise = Promise.reject(new Error('Lagring feilet'));
+      void promise.catch(() => undefined);
+      return promise;
+    });
+
+    render(<AvklarManglendeArbeidsforhold lagreVurdering={lagreVurdering} />);
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
+    await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+
+    const lagreKnapp = screen.getByText('Lagre').closest('button');
+    expect(lagreKnapp).toBeEnabled();
+
+    await userEvent.click(screen.getByText('Lagre'));
+
+    await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(lagreKnapp).toBeEnabled());
+
+    expect(screen.getByLabelText('Jeg kontakter arbeidsgiver')).toBeChecked();
+    expect(screen.getByLabelText('Begrunn valget')).toHaveValue('Dette er en begrunnelse');
+    expect(screen.queryByText('Sett på vent')).not.toBeInTheDocument();
   });
 
   it('skal avklare manglende arbeidsforhold og så se bort fra inntektsmelding', async () => {
@@ -612,6 +640,48 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       frist,
       ventearsak: 'VENT_OPDT_INNTEKTSMELDING',
     });
+  });
+
+  it('skal bare oppdatere raden som matcher internArbeidsforholdId ved lagring av manglende arbeidsforhold', async () => {
+    const registrerArbeidsforhold = vi.fn(() => Promise.resolve());
+
+    render(<ArbeidsforholdMedSammeOrgNr registrerArbeidsforhold={registrerArbeidsforhold} />);
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+
+    // Autoservice AS har to inntektsmeldinger utan tilhøyrande arbeidsforhold (same arbeidsgjevar-ident).
+    // Opne begge radene slik at kvar sin ManglendeArbeidsforholdForm-instans blir rendra.
+    const table = document.querySelector('table')!;
+    const rader = Array.from(table.querySelectorAll<HTMLTableRowElement>('tbody > tr:not(.aksel-table__expanded-row)'));
+    await userEvent.click(within(rader[1]!).getByText('Vis mer'));
+
+    expect(screen.getAllByTitle('Åpent aksjonspunkt')).toHaveLength(5);
+
+    // Vel "Opprett arbeidsforhold basert på inntektsmeldingen" for berre den FØRSTE av dei to Autoservice-radene.
+    await userEvent.click(screen.getAllByText('Opprett arbeidsforhold basert på inntektsmeldingen')[0]!);
+
+    const skjema = within(screen.getByLabelText('Stillingsprosent').closest('form')!);
+
+    const periodeFra = skjema.getByText('Periode fra');
+    await userEvent.type(periodeFra, '01.02.2020');
+    fireEvent.blur(periodeFra);
+
+    const periodeTil = skjema.getByText('Periode til');
+    await userEvent.type(periodeTil, '01.02.2022');
+    fireEvent.blur(periodeTil);
+
+    await userEvent.type(skjema.getByLabelText('Stillingsprosent'), '100');
+    await userEvent.type(skjema.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+
+    await userEvent.click(skjema.getByText('Lagre'));
+
+    await waitFor(() => expect(registrerArbeidsforhold).toHaveBeenCalledTimes(1));
+    expect(registrerArbeidsforhold).toHaveBeenCalledWith(
+      expect.objectContaining({ internArbeidsforholdRef: '8ff2c608-6bab-4f83-9732-d26f8cwds' }),
+    );
+    // Berre den redigerte rada skal ha blitt oppdatert - den andre inntektsmeldinga med same
+    // arbeidsgjevar-ident skal framleis vise ope aksjonspunkt.
+    expect(screen.getAllByTitle('Åpent aksjonspunkt')).toHaveLength(4);
   });
 
   it('skal vise to arbeidsforhold fra samme virksomhet der kun ett har fått inntektsmelding', async () => {

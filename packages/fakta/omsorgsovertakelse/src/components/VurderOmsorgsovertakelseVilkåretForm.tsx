@@ -265,9 +265,10 @@ const mapEktefellesBarn = (gjeldende: OmsorgsovertakelseDto['gjeldende']) => {
 };
 
 const mapBarn = (omsorgsovertakelse: OmsorgsovertakelseDto) => {
-  return omsorgsovertakelse.søknad.barn.map(søknadBarn => {
-    const identiskBarn = omsorgsovertakelse.gjeldende.barn.find(
-      gjeldendeBarn => gjeldendeBarn.barnNummer === søknadBarn.barnNummer,
+  const gjeldendeBarn = omsorgsovertakelse.gjeldende.barn;
+  const barnFraSøknad = omsorgsovertakelse.søknad.barn.map(søknadBarn => {
+    const identiskBarn = gjeldendeBarn.find(
+      gjeldendeBarnItem => gjeldendeBarnItem.barnNummer === søknadBarn.barnNummer,
     );
     return {
       fødselsdato: identiskBarn?.fødselsdato ?? søknadBarn.fødselsdato,
@@ -275,4 +276,16 @@ const mapBarn = (omsorgsovertakelse: OmsorgsovertakelseDto) => {
       skalBrukes: !!identiskBarn,
     };
   });
+
+  const barnKunIGjeldende = gjeldendeBarn
+    .filter(
+      gjeldendeBarnItem => !omsorgsovertakelse.søknad.barn.some(b => b.barnNummer === gjeldendeBarnItem.barnNummer),
+    )
+    .map(gjeldendeBarnItem => ({
+      fødselsdato: gjeldendeBarnItem.fødselsdato,
+      barnNummer: gjeldendeBarnItem.barnNummer,
+      skalBrukes: true,
+    }));
+
+  return [...barnFraSøknad, ...barnKunIGjeldende];
 };

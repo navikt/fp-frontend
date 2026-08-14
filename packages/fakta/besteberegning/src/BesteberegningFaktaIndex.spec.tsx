@@ -4,9 +4,17 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './BesteberegningFaktaIndex.stories';
 
-const { BesteberegningMedDagpengerOgArbeid, BesteberegningMedAvvik } = composeStories(stories);
+const { BesteberegningMedDagpengerOgArbeid, BesteberegningMedAvvik, BesteberegningMedTomBeregningsgrunnlagPeriode } =
+  composeStories(stories);
 
 describe('BesteberegningFaktaIndex', () => {
+  it('skal rendre uten å krasje når beregningsgrunnlagPeriode er tom', async () => {
+    render(<BesteberegningMedTomBeregningsgrunnlagPeriode />);
+
+    expect(await screen.findByText('Inntektsgrunnlag for besteberegning')).toBeInTheDocument();
+    expect(screen.queryByText('Beregning etter § 14-7 første ledd gir beste beregning.')).not.toBeInTheDocument();
+  });
+
   it('skal se at tabell renderes med korrekt antall måneder og at passende navn vises for aktivitetene', async () => {
     render(<BesteberegningMedDagpengerOgArbeid />);
     expect(await screen.findByText('Beregning etter § 14-7 første ledd gir beste beregning.')).toBeInTheDocument();
@@ -25,6 +33,24 @@ describe('BesteberegningFaktaIndex', () => {
     expect(screen.getByText('April - 2020')).toBeInTheDocument();
     expect(screen.getByText('Mai - 2020')).toBeInTheDocument();
     expect(screen.getByText('Juni - 2020')).toBeInTheDocument();
+  });
+
+  it('skal deaktivere bekreft-knappen igjen når checkboxen fjernes', async () => {
+    render(<BesteberegningMedAvvik />);
+
+    const checkbox = await screen.findByRole('checkbox');
+    const bekreftKnapp = screen.getByText('Bekreft og fortsett').closest('button');
+
+    expect(bekreftKnapp).toBeDisabled();
+
+    await userEvent.click(checkbox);
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Min begrunnelse for vurdering av besteberegning');
+
+    expect(bekreftKnapp).toBeEnabled();
+
+    await userEvent.click(checkbox);
+
+    expect(bekreftKnapp).toBeDisabled();
   });
 
   it('skal bekrefte aksjonspunkt for vurder besteberegning', async () => {

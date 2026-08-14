@@ -2,6 +2,9 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { notEmpty } from '@navikt/fp-utils';
+
 import type { KontrollerFaktaPeriodeMedApMarkering } from './typer/kontrollerFaktaPeriodeMedApMarkering';
 import * as stories from './UttakFaktaIndex.stories';
 
@@ -68,8 +71,7 @@ describe('UttakFaktaIndex', () => {
             tom: '2022-12-01',
             originalFom: '2022-11-12',
             periodeKilde: 'SAKSBEHANDLER',
-            // @ts-expect-error -- typene i formet er inkonsekvente
-            samtidigUttaksprosent: '10',
+            samtidigUttaksprosent: 10,
             uttakPeriodeType: 'MØDREKVOTE',
             aksjonspunktType: undefined,
             arbeidsforhold: undefined,
@@ -264,6 +266,41 @@ describe('UttakFaktaIndex', () => {
         ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
       },
     ]);
+  });
+
+  it('skal sende arbeidstidsprosent og samtidig uttaksprosent som tall ved innsending', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    render(<VisUttaksperiodeMedAksjonspunkt submitCallback={lagre} />);
+
+    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+
+    await userEvent.click(screen.getAllByTitle('Vis mer')[0]!);
+
+    const periodeFra = screen.getByLabelText('Periode fra');
+    await userEvent.clear(periodeFra);
+    await userEvent.type(periodeFra, '31.01.2022');
+    fireEvent.blur(periodeFra);
+
+    const arbeidstidsprosent = screen.getByLabelText('Gradering %');
+    await userEvent.clear(arbeidstidsprosent);
+    await userEvent.type(arbeidstidsprosent, '12');
+
+    // Label "Samtidig uttaksprosent" er delt mellom ein checkbox og talfeltet - hent ut talfeltet spesifikt.
+    const samtidigUttaksprosent = screen.getByRole('textbox', { name: 'Samtidig uttaksprosent' });
+    await userEvent.clear(samtidigUttaksprosent);
+    await userEvent.type(samtidigUttaksprosent, '34');
+
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+
+    const [aksjonspunktSendtInn] = (lagre.mock.calls[0] as unknown as [BekreftUttaksperioderAp[]])[0];
+    const oppdatertPeriode = notEmpty(aksjonspunktSendtInn).perioder.find(periode => periode.arbeidstidsprosent === 12);
+    expect(oppdatertPeriode).toEqual(expect.objectContaining({ arbeidstidsprosent: 12, samtidigUttaksprosent: 34 }));
   });
 
   it('skal vise ulike felter for ulike periodetyper', async () => {

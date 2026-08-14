@@ -47,6 +47,12 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOversty
   const harAleneomsorgAp = aksjonspunkter.some(
     a => a.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
   );
+  const aleneomsorgAksjonspunkt = aksjonspunkter.find(
+    a => a.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+  );
+  const rettAksjonspunkt = aksjonspunkter.find(
+    a => a.definisjon === AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT,
+  );
   const resultatUtenAp = omsorgOgRett.manuellBehandlingResultat && !harRettAp && !harAleneomsorgAp;
 
   const søkerHarAleneomsorgResultat = omsorgOgRett.manuellBehandlingResultat?.søkerHarAleneomsorg ?? 'IKKE_RELEVANT';
@@ -77,13 +83,17 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOversty
       {personoversikt && <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />}
       {omsorgOgRett.registerdata && <AnnenPartsYtelser omsorgOgRett={omsorgOgRett} />}
       {(opprettetAleneomsorgAPUtenResultat || aleneomsorgAPMedResultat) && (
-        <AleneomsorgForm omsorgOgRett={omsorgOgRett} aksjonspunkt={aksjonspunkter[0]} isSubmittable={isSubmittable} />
+        <AleneomsorgForm
+          omsorgOgRett={omsorgOgRett}
+          aksjonspunkt={aleneomsorgAksjonspunkt}
+          isSubmittable={isSubmittable}
+        />
       )}
       {(opprettetRettAPUtenResultat || rettAPMedResultat) && (
         <HarAnnenForelderRettForm
           omsorgOgRett={omsorgOgRett}
           isSubmittable={isSubmittable}
-          aksjonspunkt={aksjonspunkter[0]}
+          aksjonspunkt={rettAksjonspunkt}
         />
       )}
       {resultatUtenAp && søkerHarAleneomsorgResultat !== 'IKKE_RELEVANT' && (

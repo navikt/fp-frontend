@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 
 import * as stories from './VergeFaktaIndex.stories';
 
@@ -34,6 +35,42 @@ describe('VergeFaktaIndex', () => {
         organisasjonsnummer: '232232323', // skal være trimmet
       }),
     );
+  });
+
+  it('skal vise valideringsfeil når til og med er før fra og med', async () => {
+    const lagre = vi.fn();
+
+    render(<Default submitCallback={lagre} />);
+
+    await userEvent.selectOptions(screen.getByLabelText('Type verge'), 'ADVOKAT');
+    await userEvent.type(screen.getByLabelText('Navn'), 'Espen Utvikler');
+    await userEvent.type(screen.getByLabelText('Organisasjonsnummer'), '232232323');
+
+    const fomInput = screen.getByLabelText('Fra og med');
+    await userEvent.type(fomInput, '24.09.2022');
+    fireEvent.blur(fomInput);
+
+    const tomInput = screen.getByLabelText('Til og med');
+    await userEvent.type(tomInput, '14.09.2022');
+    fireEvent.blur(tomInput);
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(await screen.findByText('Dato må være etter eller lik 24.09.2022')).toBeInTheDocument();
+    expect(lagre).not.toHaveBeenCalled();
+  });
+
+  it('skal ikke endre rekkefølgen i kodeverk-arrayet når verge-typer sorteres', async () => {
+    const vergetyper = alleKodeverk.VergeType.map(vergetype => ({ ...vergetype })).reverse();
+    const originalRekkefølge = vergetyper.map(vergetype => vergetype.kode);
+
+    render(
+      <Default alleKodeverk={{ ...alleKodeverk, ...alleKodeverkTilbakekreving, VergeType: vergetyper }} />,
+    );
+
+    expect(await screen.findByText('Fyll ut og kontroller vergeopplysninger')).toBeInTheDocument();
+    expect(vergetyper.map(vergetype => vergetype.kode)).toEqual(originalRekkefølge);
   });
 
   it('skal velge vergetype og bekrefte aksjonspunkt', async () => {

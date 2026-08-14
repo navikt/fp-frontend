@@ -31,7 +31,10 @@ const harUferdigstiltPeriode = (a: BekreftTilrettelegging) =>
   a.tilretteleggingDatoer.some(td => !td.fom) || a.avklarteOppholdPerioder.some(td => !td.fom);
 
 const harGyldig100Permisjon = (a: BekreftTilrettelegging) =>
-  a.skalBrukes && a.velferdspermisjoner.some(vp => vp.erGyldig && vp.permisjonsprosent === 100);
+  a.skalBrukes &&
+  filtrerVelferdspermisjoner(a.velferdspermisjoner, a.tilretteleggingBehovFom).some(
+    vp => vp.erGyldig && vp.permisjonsprosent === 100,
+  );
 
 const erArbeidsforholdUtenTilrettelegging = (a: BekreftTilrettelegging) =>
   a.skalBrukes && a.tilretteleggingDatoer.length === 0;

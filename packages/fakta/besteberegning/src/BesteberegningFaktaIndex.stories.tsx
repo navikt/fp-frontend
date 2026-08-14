@@ -41,6 +41,16 @@ export const BesteberegningMedDagpengerOgArbeid: Story = {
   },
 };
 
+export const BesteberegningMedTomBeregningsgrunnlagPeriode: Story = {
+  args: {
+    aksjonspunkterForPanel: [],
+    beregningsgrunnlag: {
+      ...scenarioBG,
+      beregningsgrunnlagPeriode: [],
+    },
+  },
+};
+
 export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt: Story = {
   args: {
     beregningsgrunnlag: scenarioBG,

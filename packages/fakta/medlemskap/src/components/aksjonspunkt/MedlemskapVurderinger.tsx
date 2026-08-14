@@ -124,8 +124,16 @@ MedlemskapVurderinger.initialValues = (
   return {};
 };
 
-MedlemskapVurderinger.transformValues = (values: MedlemskapVurderingerFormValues) => ({
+MedlemskapVurderinger.transformValues = (
+  values: MedlemskapVurderingerFormValues,
+  erForutgående: boolean,
+) => ({
   avslagskode: values.vurdering === MedlemskapVurdering.OPPFYLT ? undefined : values.avslagskode,
   opphørFom: values.vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? values.opphørFom : undefined,
-  medlemFom: values.avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? values.medlemFom : undefined,
+  medlemFom:
+    erForutgående &&
+    values.vurdering === MedlemskapVurdering.IKKE_OPPFYLT &&
+    values.avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE
+      ? values.medlemFom
+      : undefined,
 });

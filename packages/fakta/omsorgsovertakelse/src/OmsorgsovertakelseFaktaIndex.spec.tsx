@@ -96,6 +96,55 @@ describe('OmsorgsovertakelseFaktaIndex', () => {
       begrunnelse: 'Dette er en begrunnelse',
     });
   });
+
+  it('skal vise raden for ektefelles barn når bare gjeldende opplysninger har verdien', () => {
+    const omsorgsovertakelse = notEmpty(EngangsstønadUtenAp.args.omsorgsovertakelse);
+    render(
+      <EngangsstønadUtenAp
+        omsorgsovertakelse={{
+          ...omsorgsovertakelse,
+          kildeGjeldende: 'SAKSBEHANDLER',
+          søknad: {
+            ...omsorgsovertakelse.søknad,
+            erEktefellesBarn: undefined,
+          },
+          gjeldende: {
+            ...omsorgsovertakelse.gjeldende,
+            erEktefellesBarn: true,
+          },
+        }}
+      />,
+    );
+
+    const ektefellesBarnRad = withinRowWithLabel('Er det ektefelles barn?');
+    expect(ektefellesBarnRad.getByText('-')).toBeInTheDocument();
+    expect(ektefellesBarnRad.getByText('Ja')).toBeInTheDocument();
+  });
+
+  it('skal vise barn som bare finnes i gjeldende opplysninger som valgbart alternativ', async () => {
+    const omsorgsovertakelse = notEmpty(EngangsstønadMedAp.args.omsorgsovertakelse);
+    render(
+      <EngangsstønadMedAp
+        omsorgsovertakelse={{
+          ...omsorgsovertakelse,
+          søknad: {
+            ...omsorgsovertakelse.søknad,
+            barn: [omsorgsovertakelse.søknad.barn[0]!],
+            antallBarn: 1,
+          },
+          gjeldende: {
+            ...omsorgsovertakelse.gjeldende,
+            barn: [omsorgsovertakelse.gjeldende.barn[0]!, omsorgsovertakelse.gjeldende.barn[1]!],
+            antallBarn: 2,
+          },
+        }}
+      />,
+    );
+
+    const apBoks = within(screen.getByLabelText('Vurder opplysningene om omsorgsovertakelse'));
+
+    expect(await apBoks.findByRole('checkbox', { name: 'Barn 2 født 09.10.2005Over 15 år' })).toBeChecked();
+  });
 });
 
 const withinRowWithLabel = (name: string) => {

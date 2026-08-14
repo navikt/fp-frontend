@@ -2,6 +2,8 @@ import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { notEmpty } from '@navikt/fp-utils';
+
 import * as stories from './InntektsmeldingFaktaIndex.stories';
 
 const { InntektsmeldingDefault } = composeStories(stories);
@@ -21,6 +23,69 @@ describe('InntektsmeldingFaktaIndex', () => {
     await verifiserKolonneSortering('Startdato', 2, ['-', '10.10.2024', '11.11.2024']);
     await verifiserKolonneSortering('Månedsi.', 3, ['10 001', '20 000', '30 000']);
     await verifiserKolonneSortering('Behandling', 4, ['Andre', 'Denne', 'Ingen']);
+  });
+
+  // eslint-disable-next-line vitest/expect-expect -- assertes i hjelpefunksjon
+  it('skal beholde rekkefølgen når flere startdatoer mangler', async () => {
+    const inntektsmeldinger = notEmpty(InntektsmeldingDefault.args.inntektsmeldinger);
+    render(
+      <InntektsmeldingDefault
+        inntektsmeldinger={[
+          {
+            ...inntektsmeldinger[0]!,
+            arbeidsgiverIdent: '2',
+            startDatoPermisjon: undefined,
+          },
+          {
+            ...inntektsmeldinger[1]!,
+            arbeidsgiverIdent: '3',
+            startDatoPermisjon: undefined,
+          },
+          {
+            ...inntektsmeldinger[2]!,
+            arbeidsgiverIdent: '1',
+            startDatoPermisjon: '2024-11-11',
+          },
+        ]}
+      />,
+    );
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Startdato' }));
+
+    assertSortedColumn(1, ['Kiwi', 'Meny', 'Rema 1000']);
+  });
+
+  it('skal vise ingen bortfalte naturalytelser når aktive perioder ikke gir et bortfall', async () => {
+    const inntektsmeldinger = notEmpty(InntektsmeldingDefault.args.inntektsmeldinger);
+    render(
+      <InntektsmeldingDefault
+        inntektsmeldinger={[
+          {
+            ...inntektsmeldinger[0]!,
+            aktiveNaturalytelser: [
+              {
+                periode: { fomDato: '0001-01-01', tomDato: '2024-10-09' },
+                type: 'ELEKTRISK_KOMMUNIKASJON',
+                beløpPerMnd: { verdi: 999 },
+                indexKey: '1',
+              },
+              {
+                periode: { fomDato: '2024-10-10', tomDato: '9999-12-31' },
+                type: 'ELEKTRISK_KOMMUNIKASJON',
+                beløpPerMnd: { verdi: 999 },
+                indexKey: '2',
+              },
+            ],
+          },
+        ]}
+      />,
+    );
+
+    await userEvent.click(screen.getByText('Rema 1000'));
+
+    const blokk = screen.getByText('Naturalytelser som faller bort').parentElement;
+    expect(blokk).not.toBeNull();
+    expect(blokk).toHaveTextContent('Ingen');
   });
 });
 

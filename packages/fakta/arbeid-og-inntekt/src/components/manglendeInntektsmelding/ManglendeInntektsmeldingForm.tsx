@@ -62,6 +62,7 @@ export const ManglendeInntektsmeldingForm = ({
   };
 
   const lagre = (formValues: FormValues) => {
+    const oppdater = getOppdaterTabell(oppdaterTabell, radData, formValues);
     const params = {
       behandlingUuid,
       behandlingVersjon,
@@ -73,8 +74,10 @@ export const ManglendeInntektsmeldingForm = ({
       begrunnelse: formValues.begrunnelse ?? '',
     };
     return lagreVurdering(params)
-      .then(getOppdaterTabell(oppdaterTabell, radData, formValues))
-      .finally(() => formMethods.reset(formValues));
+      .then(() => {
+        oppdater();
+        formMethods.reset(formValues);
+      });
   };
 
   const svgRef = useRef<SVGSVGElement>(null);

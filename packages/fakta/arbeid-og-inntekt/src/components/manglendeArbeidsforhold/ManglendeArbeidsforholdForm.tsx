@@ -89,7 +89,7 @@ export const ManglendeArbeidsforholdForm = ({
   const inntektsmelding = radData.inntektsmeldingerForRad[0]!;
 
   const lagre = (formValues: FormValues) => {
-    const oppdater = getOppdaterTabell(oppdaterTabell, radData, inntektsmelding, formValues);
+    const oppdater = getOppdaterTabell(oppdaterTabell, inntektsmelding, formValues);
     if (formValues.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING') {
       return registrerArbeidsforhold({
         behandlingUuid,
@@ -103,8 +103,15 @@ export const ManglendeArbeidsforholdForm = ({
         tom: formValues.tom,
         stillingsprosent: formValues.stillingsprosent ?? 0,
       })
-        .then(oppdater)
-        .finally(() => formMethods.reset(formValues));
+        .then(() => {
+          oppdater();
+          formMethods.reset(formValues);
+        })
+        // Fangar feilen her sidan ingenting elles ventar på/fangar denne promisen (kalla frå eit
+        // onSubmit-DOM-event). Utan dette vart det ein ufanga ("unhandled") promise-rejection.
+        // Feilmelding til brukar og moglegheit til å prøve på nytt er alt sikra uavhengig av dette:
+        // mutation-cachen (queryUtils.ts) viser feilen, og reset() over køyrer berre ved suksess.
+        .catch(() => undefined);
     }
     return lagreVurdering({
       behandlingUuid,
@@ -114,8 +121,12 @@ export const ManglendeArbeidsforholdForm = ({
       arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
       internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId ?? undefined,
     })
-      .then(oppdater)
-      .finally(() => formMethods.reset(formValues));
+      .then(() => {
+        oppdater();
+        formMethods.reset(formValues);
+      })
+      // Sjå kommentar over: fangar berre for å unngå ufanga rejection, ikkje for brukarvarsling/retry.
+      .catch(() => undefined);
   };
 
   const [anchorEl, setAnchorEl] = useState<SVGSVGElement | null>(null);
@@ -238,17 +249,23 @@ const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (
   return fom && tom ? dateAfterOrEqual(fom)(tom) : null;
 };
 
+// Vurderinga lagrast i backend på (arbeidsgiverIdent, internArbeidsforholdRef). Rader som deler
+// denne nøkkelen deler difor same vurdering, og må oppdaterast likt lokalt.
+const erSammeVurdering = (inntektsmelding: Inntektsmelding, annen: Inntektsmelding): boolean =>
+  inntektsmelding.arbeidsgiverIdent === annen.arbeidsgiverIdent &&
+  (inntektsmelding.internArbeidsforholdId ?? undefined) === (annen.internArbeidsforholdId ?? undefined);
+
 const getOppdaterTabell =
   (
     oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void,
-    radData: ArbeidsforholdOgInntektRadData,
     inntektsmelding: Inntektsmelding,
     formValues: FormValues,
   ) =>
   () => {
     oppdaterTabell(oldData =>
       oldData.map(data => {
-        if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
+        const radInntektsmelding = data.inntektsmeldingerForRad[0];
+        if (radInntektsmelding && erSammeVurdering(inntektsmelding, radInntektsmelding)) {
           const opprettArbeidsforhold = formValues.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING';
           const avklaring = opprettArbeidsforhold
             ? {
@@ -264,7 +281,7 @@ const getOppdaterTabell =
                 saksbehandlersVurdering: formValues.saksbehandlersVurdering,
               };
           return {
-            ...radData,
+            ...data,
             avklaring,
           };
         }

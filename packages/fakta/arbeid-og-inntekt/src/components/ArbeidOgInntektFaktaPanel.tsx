@@ -159,7 +159,7 @@ export const ArbeidOgInntektFaktaPanel = ({
         <Table.Body>
           {tabellRader.map((radData, index) => (
             <ArbeidsforholdRad
-              key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}`}
+              key={lagRadNøkkel(radData, index)}
               saksnummer={fagsak.saksnummer}
               behandlingUuid={behandling.uuid}
               behandlingVersjon={behandling.versjon}
@@ -236,4 +236,25 @@ export const ArbeidOgInntektFaktaPanel = ({
       )}
     </VStack>
   );
+};
+
+const lagRadNøkkel = (radData: ArbeidsforholdOgInntektRadData, index: number): string => {
+  const inntektsmeldingsnøkkel = radData.inntektsmeldingerForRad
+    .map(im =>
+      [
+        im.journalpostId ?? '',
+        im.dokumentId ?? '',
+        im.innsendingstidspunkt,
+        im.internArbeidsforholdId ?? '',
+        im.eksternArbeidsforholdId ?? '',
+        im.mottattDato,
+      ].join('-'),
+    )
+    .join('--');
+
+  const arbeidsforholdsnøkkel = radData.arbeidsforholdForRad
+    .map(af => [af.internArbeidsforholdId ?? '', af.eksternArbeidsforholdId ?? '', af.fom, af.tom].join('-'))
+    .join('--');
+
+  return [radData.arbeidsgiverIdent, inntektsmeldingsnøkkel || arbeidsforholdsnøkkel || 'rad', `${index}`].join('-');
 };

@@ -31,7 +31,7 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
     return null;
   }
 
-  const førstePeriode = beregningsgrunnlagPeriode[0]!;
+  const førstePeriode = beregningsgrunnlagPeriode[0];
   const besteberegningAP = aksjonspunkterForPanel.find(
     ap =>
       ap.definisjon === AksjonspunktKode.UTGÅTT_5048 ||
@@ -40,12 +40,14 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
   return (
     <VStack gap="space-16">
       {!!besteberegningAP && <KontrollerBesteberegningPanel aksjonspunkt={besteberegningAP} />}
-      <BorderBox>
-        <BesteberegningResultatGrunnlagPanel
-          periode={førstePeriode}
-          besteMåneder={besteberegninggrunnlag.besteMåneder}
-        />
-      </BorderBox>
+      {førstePeriode && (
+        <BorderBox>
+          <BesteberegningResultatGrunnlagPanel
+            periode={førstePeriode}
+            besteMåneder={besteberegninggrunnlag.besteMåneder}
+          />
+        </BorderBox>
+      )}
       <BorderBox>
         <BesteMånederVisningPanel
           besteMåneder={besteberegninggrunnlag.besteMåneder}

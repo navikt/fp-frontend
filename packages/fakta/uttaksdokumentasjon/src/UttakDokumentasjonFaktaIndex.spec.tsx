@@ -160,6 +160,45 @@ describe('UttakDokumentasjonFaktaIndex', () => {
     });
   });
 
+  it('skal kunne prøve å bekrefte på nytt etter feil ved submit', async () => {
+    const rejectedSubmit = Promise.reject(new Error('Feilet'));
+    rejectedSubmit.catch(() => undefined);
+    const lagre = vi.fn().mockImplementationOnce(() => rejectedSubmit).mockImplementationOnce(() => Promise.resolve());
+
+    render(<AksjonspunktMedUavklartePerioder submitCallback={lagre} />);
+
+    expect(screen.getByText('Kontroller dokumentasjon')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByLabelText('Godkjent'));
+    await userEvent.click(screen.getByText('Oppdater'));
+    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
+
+    await userEvent.click(screen.getByLabelText('Ikke godkjent'));
+    await userEvent.click(screen.getByText('Oppdater'));
+    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
+
+    await userEvent.click(screen.getByLabelText('Godkjent'));
+    await userEvent.click(screen.getByText('Oppdater'));
+    await waitFor(() => expect(screen.getByText('Oppdater').closest('button')).toBeDisabled());
+
+    await userEvent.click(screen.getByLabelText('Godkjent - Mor jobber mindre enn 75%'));
+    await userEvent.type(screen.getByLabelText('Hvor mange prosent jobber mor?'), '60');
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    await userEvent.type(screen.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
+
+    const bekreftKnapp = screen.getByRole('button', { name: 'Bekreft og fortsett' });
+
+    await userEvent.click(bekreftKnapp);
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(bekreftKnapp).not.toBeDisabled());
+
+    await userEvent.click(bekreftKnapp);
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(2));
+  });
+
   it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', () => {
     render(<UavklartePerioderMenIkkeAksjonspunktEnnå />);
     expect(screen.queryByText('Kontroller dokumentasjon')).not.toBeInTheDocument();

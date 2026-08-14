@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -26,14 +25,16 @@ interface Props {
  * Formkomponent. Lar saksbehandler vurdere om den automatiske besteberegningen er korrekt utført.
  */
 export const KontrollerBesteberegningPanel = ({ aksjonspunkt }: Props) => {
-  const [erKnappEnabled, setErKnappEnabled] = useState(false);
-
   const { submitCallback, isSubmittable, isReadOnly } = usePanelDataContext<BesteberegningAP>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkt),
+  });
+  const besteberegningErKorrektValg = useWatch({
+    control: formMethods.control,
+    name: 'besteberegningErKorrektValg',
   });
   const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
   return (
@@ -54,7 +55,6 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt }: Props) => {
             control={formMethods.control}
             label={<FormattedMessage id="BesteberegningProsessPanel.Aksjonspunkt.Radiotekst" />}
             readOnly={isReadOnly}
-            onChange={() => setErKnappEnabled(!erKnappEnabled)}
           />
           <FaktaBegrunnelseTextField
             control={formMethods.control}
@@ -64,7 +64,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt }: Props) => {
             hasVurderingText
           />
           <FaktaSubmitButton
-            isSubmittable={isSubmittable && erKnappEnabled}
+            isSubmittable={isSubmittable && besteberegningErKorrektValg === true}
             isSubmitting={formMethods.formState.isSubmitting}
             isDirty={formMethods.formState.isDirty}
             isReadOnly={isReadOnly}

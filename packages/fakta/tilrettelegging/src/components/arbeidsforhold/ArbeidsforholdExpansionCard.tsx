@@ -33,9 +33,11 @@ export const ArbeidsforholdExpansionCard = ({
   faisu,
 }: Props) => {
   const [open, setOpen] = useState(tilrettelegging.skalBrukes);
-  const [forrigeSkalBrukes, setForrigeSkalBrukes] = useState(tilrettelegging.skalBrukes);
 
-  // Kortet åpnes/lukkes automatisk når skalBrukes endres, men kan også styres manuelt av saksbehandler.
+  // Juster open når tilrettelegging.skalBrukes endrar seg, ved å samanlikne med førre verdi
+  // og justere state under render (Reacts anbefalte mønster), i staden for via useEffect
+  // (unngår react-hooks/set-state-in-effect og ein ekstra commit/render).
+  const [forrigeSkalBrukes, setForrigeSkalBrukes] = useState(tilrettelegging.skalBrukes);
   if (tilrettelegging.skalBrukes !== forrigeSkalBrukes) {
     setForrigeSkalBrukes(tilrettelegging.skalBrukes);
     setOpen(tilrettelegging.skalBrukes);

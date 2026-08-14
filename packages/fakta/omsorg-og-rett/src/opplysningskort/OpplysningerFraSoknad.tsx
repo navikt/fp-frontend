@@ -23,7 +23,9 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett, alleKodeverk }: Props) => 
   const harSøkerAleneOmsorg = omsorgOgRett.søknad.søkerHarAleneomsorg;
   const { annenpartIdent, annenpartBostedsland } = omsorgOgRett.søknad;
   const bostedsland = alleKodeverk.Landkoder.find(land => land.kode === annenpartBostedsland)?.navn;
-  const formattedBostedsland = bostedsland ? capitalizeFirstLetter(bostedsland.toLowerCase()) : null;
+  const formattedAnnenpartBostedsland = bostedsland
+    ? capitalizeFirstLetter(bostedsland.toLowerCase())
+    : annenpartBostedsland;
 
   return (
     <EkspansjonsKort
@@ -75,7 +77,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett, alleKodeverk }: Props) => 
                   <BodyShort size="small">
                     <FormattedMessage
                       id="OpplysningerFraSøknad.Bostedsland.Svar"
-                      values={{ bostedsland: formattedBostedsland }}
+                      values={{ bostedsland: formattedAnnenpartBostedsland }}
                     />
                   </BodyShort>
                 </Table.DataCell>

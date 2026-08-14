@@ -4,9 +4,18 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './PermisjonFaktaIndex.stories';
 
-const { EttArbeidsforholdUtenSluttdatoForPermisjon, FlereArbeidsforhold } = composeStories(stories);
+const { EttArbeidsforholdUtenSluttdatoForPermisjon, FlereArbeidsforhold, ArbeidsforholdManglerArbeidsgiveropplysninger } =
+  composeStories(stories);
 
 describe('PermisjonFaktaIndex', () => {
+  it('skal rendre når arbeidsgiveropplysninger mangler for et arbeidsforhold', async () => {
+    render(<ArbeidsforholdManglerArbeidsgiveropplysninger />);
+
+    expect(await screen.findByText('Fakta om permisjon')).toBeInTheDocument();
+    expect(screen.getByText('BEDRIFT AS')).toBeInTheDocument();
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
+  });
+
   it('skal velge å ta med arbeidsforholdet og så bekrefte', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 

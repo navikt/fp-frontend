@@ -63,7 +63,13 @@ const BarnVisning = ({ barna }: { barna: BarnHendelseData[] }) => {
   return (
     <>
       {barna.map(({ fødselsdato, dødsdato }, index) => (
-        <HStack key={fødselsdato + dødsdato} gap="space-24" wrap={false} className={styles['grid']}>
+        // eslint-disable-next-line @eslint-react/no-array-index-key -- barn manglar stabil id, indeks trengs for unik nøkkel ved like fødsels-/dødsdato
+        <HStack
+          key={`${fødselsdato}-${dødsdato ?? 'ingen-dodsdato'}-${index}`}
+          gap="space-24"
+          wrap={false}
+          className={styles['grid']}
+        >
           <LabeledValue size="medium" label={index > 0 ? '' : <FormattedMessage id="Label.Barn" />} value={index + 1} />
           <LabeledValue
             size="medium"

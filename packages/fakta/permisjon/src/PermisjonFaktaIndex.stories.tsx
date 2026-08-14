@@ -258,6 +258,53 @@ export const FlereArbeidsforhold: Story = {
   },
 };
 
+export const ArbeidsforholdManglerArbeidsgiveropplysninger: Story = {
+  args: {
+    arbeidsgiverOpplysningerPerId: {
+      910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
+    },
+    arbeidOgInntekt: {
+      arbeidsforhold: [
+        {
+          arbeidsgiverIdent: '910909088',
+          eksternArbeidsforholdId: 'ARB001-001',
+          fom: '2019-12-06',
+          internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+          stillingsprosent: 100,
+          tom: '9999-12-31',
+          permisjonOgMangel: {
+            permisjonFom: '2022-10-02',
+            type: 'PERMITTERING',
+            årsak: 'PERMISJON_UTEN_SLUTTDATO',
+          },
+          årsak: 'PERMISJON',
+          saksbehandlersVurdering: '-',
+          permisjoner: [],
+        },
+        {
+          arbeidsgiverIdent: '910909099',
+          eksternArbeidsforholdId: 'ARB001-002',
+          fom: '2019-06-06',
+          internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
+          stillingsprosent: 80,
+          tom: '2021-12-31',
+          årsak: 'MANGLENDE_INNTEKTSMELDING',
+          permisjonOgMangel: {
+            permisjonFom: '2021-11-07',
+            type: 'PERMITTERING',
+            årsak: 'PERMISJON_UTEN_SLUTTDATO',
+          },
+          saksbehandlersVurdering: '-',
+          permisjoner: [],
+        },
+      ],
+      inntektsmeldinger: [],
+      inntekter: [],
+      skjæringstidspunkt: '2021-11-10',
+    },
+  },
+};
+
 export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
   args: {
     arbeidsgiverOpplysningerPerId: {

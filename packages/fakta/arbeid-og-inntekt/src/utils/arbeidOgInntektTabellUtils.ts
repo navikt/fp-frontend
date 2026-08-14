@@ -1,6 +1,11 @@
-import type { ArbeidOgInntektsmelding, Arbeidsforhold, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type {
+  ArbeidOgInntektsmelding,
+  Arbeidsforhold,
+  ArbeidsgiverOpplysninger,
+  ArbeidsgiverOpplysningerPerId,
+} from '@navikt/fp-types';
 
-import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
+import type { AGOpplysninger, ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
 import { harMatchendeArbeidsgiverIdent, lagArbeidsgiver } from './arbeidsgiverUtils';
 import { lagAvklaringFraArbeidsforhold, lagAvklaringFraInntektsmelding } from './avklaringUtils';
 import { finnInntektsmeldingerForArbeidsgiver } from './inntektsmeldingUtils';
@@ -32,9 +37,9 @@ export const byggTabellStruktur = (
         return acc;
       }
       const arbeidsforholdForRad = arbeidsforhold.filter(harMatchendeArbeidsgiverIdent(af));
-      const arbeidsgiverOpplysninger = lagArbeidsgiver(
+      const arbeidsgiverOpplysninger = lagArbeidsgiverMedFallback(
         af.arbeidsgiverIdent,
-        arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent]!,
+        arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent],
       );
       const inntektsmeldingerForRad = finnInntektsmeldingerForArbeidsgiver(inntektsmeldinger, af.arbeidsgiverIdent);
       const inntektsposter = inntekter.find(harMatchendeArbeidsgiverIdent(af))?.inntekter ?? [];
@@ -56,9 +61,9 @@ export const byggTabellStruktur = (
   const alleInntektsmeldingerSomManglerArbeidsforhold = inntektsmeldinger
     .filter(im => !arbeidsforhold.some(af => im.arbeidsgiverIdent === af.arbeidsgiverIdent))
     .map<ArbeidsforholdOgInntektRadData>(im => {
-      const arbeidsgiverOpplysninger = lagArbeidsgiver(
+      const arbeidsgiverOpplysninger = lagArbeidsgiverMedFallback(
         im.arbeidsgiverIdent,
-        arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]!,
+        arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent],
       );
       const inntektsposter = inntekter.find(harMatchendeArbeidsgiverIdent(im))?.inntekter ?? [];
 
@@ -78,4 +83,19 @@ export const byggTabellStruktur = (
 export const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntektRadData[]): number[] => {
   const index = tabellData.findIndex(d => d.årsak && !d.avklaring);
   return index === -1 ? [] : [index];
+};
+
+const lagArbeidsgiverMedFallback = (
+  arbeidsgiverIdent: string,
+  arbeidsgiverOpplysninger?: ArbeidsgiverOpplysninger,
+): AGOpplysninger => {
+  if (arbeidsgiverOpplysninger) {
+    return lagArbeidsgiver(arbeidsgiverIdent, arbeidsgiverOpplysninger);
+  }
+
+  return {
+    erPrivatPerson: false,
+    arbeidsgiverIdent,
+    arbeidsgiverNavn: arbeidsgiverIdent,
+  };
 };

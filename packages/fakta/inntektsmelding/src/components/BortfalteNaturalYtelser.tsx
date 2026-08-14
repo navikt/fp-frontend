@@ -47,9 +47,14 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
 
       const nyFom = current.periode.tomDato;
 
-      const nyTom = next?.periode.fomDato;
-
       if (nyFom === TIDENES_ENDE) {
+        return [];
+      }
+
+      const fomDato = addDaysToDate(nyFom, 1);
+      const tomDato = next?.periode.fomDato ? addDaysToDate(next.periode.fomDato, -1) : TIDENES_ENDE;
+
+      if (tomDato !== TIDENES_ENDE && fomDato > tomDato) {
         return [];
       }
 
@@ -57,8 +62,8 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
         {
           ...current,
           periode: {
-            fomDato: addDaysToDate(nyFom, 1),
-            tomDato: nyTom ? addDaysToDate(nyTom, -1) : TIDENES_ENDE,
+            fomDato,
+            tomDato,
           },
         },
       ];
@@ -78,17 +83,18 @@ export const BortfalteNaturalYtelser = ({
   const intl = useIntl();
 
   const bortfalteNaturalytelser = konverterAktivePerioderTilBortfaltePerioder(inntektsmelding);
+  const bortfalteNaturalytelserEntries = Object.entries(bortfalteNaturalytelser).filter(([, value]) => value.length > 0);
   return (
     <InntektsmeldingInfoBlokk
       tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading' })}
     >
-      {inntektsmelding.aktiveNaturalytelser.length === 0 ? (
+      {bortfalteNaturalytelserEntries.length === 0 ? (
         <span>
           <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen" />
         </span>
       ) : (
         <VStack gap="space-4">
-          {Object.entries(bortfalteNaturalytelser).map(([key, value]) => (
+          {bortfalteNaturalytelserEntries.map(([key, value]) => (
             <div key={key}>
               <span>{alleKodeverk['NaturalYtelseType'].find(kodeverk => kodeverk.kode === key)?.navn}</span>
               <ul>

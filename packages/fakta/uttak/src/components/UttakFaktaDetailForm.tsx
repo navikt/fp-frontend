@@ -389,6 +389,9 @@ const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkeri
     : undefined,
   periodeKilde: 'SAKSBEHANDLER',
   aksjonspunktType: undefined,
-  arbeidstidsprosent: values.arbeidstidsprosent,
-  samtidigUttaksprosent: values.samtidigUttaksprosent,
+  arbeidstidsprosent: parseOptionalNumber(values.arbeidstidsprosent),
+  samtidigUttaksprosent: parseOptionalNumber(values.samtidigUttaksprosent),
 });
+
+const parseOptionalNumber = (value?: number | string) =>
+  value === undefined || value === '' ? undefined : Number.parseFloat(`${value}`);

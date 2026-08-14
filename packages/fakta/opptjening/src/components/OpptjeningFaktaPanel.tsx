@@ -39,7 +39,7 @@ const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]):
   return texts;
 };
 
-const findSkjaringstidspunkt = (dato?: string): string => dayjs(dato).add(1, 'days').format(ISO_DATE_FORMAT);
+const findSkjaringstidspunkt = (dato: string): string => dayjs(dato).add(1, 'days').format(ISO_DATE_FORMAT);
 
 const sorterEtterOpptjeningFom = (
   opptjeningPerioder: OpptjeningAktivitet[],
@@ -133,6 +133,9 @@ export const OpptjeningFaktaPanel = ({
     [formVerdierForAlleAktiviteter, setMellomlagretFormData],
   );
 
+  // Juster valgtAktivitetIndex når formVerdierForAlleAktiviteter endrar seg (t.d. ny periode lasta inn).
+  // Følgjer Reacts anbefalte mønster for å justere state ved endra props/avleidde verdiar under render,
+  // i staden for via useEffect (unngår react-hooks/set-state-in-effect og ein ekstra commit/render).
   const [forrigeFormVerdier, setForrigeFormVerdier] = useState(formVerdierForAlleAktiviteter);
   if (formVerdierForAlleAktiviteter !== forrigeFormVerdier) {
     setForrigeFormVerdier(formVerdierForAlleAktiviteter);
@@ -142,9 +145,13 @@ export const OpptjeningFaktaPanel = ({
   const bekreft = () => {
     setIsSubmitting(true);
 
-    void submitCallback(transformValues(formVerdierForAlleAktiviteter, filtrerteOgSorterteOpptjeningsaktiviteter)).then(
-      () => setIsSubmitting(false),
-    );
+    // Fangar feil her sidan ingenting elles ventar på/fangar denne (submitCallback vert kalla
+    // med `void` frå ein klikk-handler). Utan dette vart det ein ufanga ("unhandled") promise-
+    // rejection. isSubmitting blir uansett nullstilt av finally under, uavhengig av dette
+    // catch-et; feilmelding til brukar er alt sikra via mutation-cachen (queryUtils.ts).
+    void submitCallback(transformValues(formVerdierForAlleAktiviteter, filtrerteOgSorterteOpptjeningsaktiviteter))
+      .catch(() => undefined)
+      .finally(() => setIsSubmitting(false));
   };
 
   const velgNesteAktivitet = () => {
@@ -175,6 +182,9 @@ export const OpptjeningFaktaPanel = ({
   };
 
   const harIkkeBehandletAlle = formVerdierForAlleAktiviteter.some(a => a.erGodkjent === undefined);
+  const skjæringstidspunkt = fastsattOpptjening?.opptjeningTom
+    ? findSkjaringstidspunkt(fastsattOpptjening.opptjeningTom)
+    : undefined;
 
   return (
     <VStack gap="space-24">
@@ -186,7 +196,7 @@ export const OpptjeningFaktaPanel = ({
       <LabeledValue
         size="small"
         label={<FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" />}
-        value={<DateLabel dateString={findSkjaringstidspunkt(fastsattOpptjening?.opptjeningTom)} />}
+        value={skjæringstidspunkt ? <DateLabel dateString={skjæringstidspunkt} /> : '-'}
       />
       <OpptjeningTidslinje
         opptjeningPerioder={filtrerteOgSorterteOpptjeningsaktiviteter}

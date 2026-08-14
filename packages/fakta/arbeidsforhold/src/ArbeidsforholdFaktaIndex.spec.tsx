@@ -1,11 +1,12 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './ArbeidsforholdFaktaIndex.stories';
 
 const {
   ArbeidsforholdetErIkkeAktivt,
+  ArbeidsforholdUtenStillingsprosent,
   FjernArbeidsforholdet,
   FlereArbeidsforholdITabell,
   IngenArbeidsforholdRegistrert,
@@ -17,6 +18,18 @@ const {
 } = composeStories(stories);
 
 describe('ArbeidsforholdFaktaIndex', () => {
+  it('skal vise bindestrek når stillingsprosent mangler', async () => {
+    render(<ArbeidsforholdUtenStillingsprosent />);
+
+    const arbeidsforholdRad = (await screen.findByText('KIWI (999999999)')).closest('tr');
+    if (!arbeidsforholdRad) {
+      throw new Error('Fant ikke arbeidsforholdraden');
+    }
+
+    expect(screen.queryByText('undefined %')).not.toBeInTheDocument();
+    expect(within(arbeidsforholdRad).getByText('-')).toBeInTheDocument();
+  });
+
   it('skal vise at arbeidsforholdet er oppdatert og behandlingen har fortsatt uten IM', async () => {
     render(<ArbeidsforholdetSkalBenyttesUtenInntektsmelding />);
 
