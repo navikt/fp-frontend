@@ -27,8 +27,8 @@ export const byggTabellStruktur = (
 
   const alleArbeidsforhold = [...arbeidsforhold.sort(sorterGittÅrsak)].reduce<ArbeidsforholdOgInntektRadData[]>(
     (acc, af) => {
-      const tidligereAf = acc.find(harMatchendeArbeidsgiverIdent(af));
-      if (tidligereAf) {
+      const harTidligereAf = acc.some(harMatchendeArbeidsgiverIdent(af));
+      if (harTidligereAf) {
         return acc;
       }
       const arbeidsforholdForRad = arbeidsforhold.filter(harMatchendeArbeidsgiverIdent(af));

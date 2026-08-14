@@ -19,7 +19,6 @@ type ArbeidsgiverPanelProps = ValgtStegProps & {
 
 type InnsynPanelProps = Pick<ValgtStegProps, 'valgtProsessSteg'>;
 
-type PanelRenderProps = ValgtStegProps;
 type PanelRenderPropsMedArbeidsgivere = ValgtStegProps & {
   arbeidsgivere: ArbeidsgiverOpplysningerPerId;
 };
@@ -42,7 +41,7 @@ type PanelConfigMedArbeidsgivere = BasePanelConfig & {
 type PanelConfigUtenArbeidsgivere = BasePanelConfig & {
   fagsakYtelseType?: PanelFagsakYtelseType;
   skalHenteArbeidsgivere: false;
-  render: (props: PanelRenderProps) => ReactNode;
+  render: (props: ValgtStegProps) => ReactNode;
 };
 
 type PanelConfig = PanelConfigMedArbeidsgivere | PanelConfigUtenArbeidsgivere;
@@ -134,7 +133,8 @@ export const finnPanelConfig = (
   behandlingType: BehandlingType | undefined,
 ): PanelConfig | undefined =>
   panelConfigs.find(config => {
-    if (!behandlingType || !config.behandlingTyper.some(type => type === behandlingType)) {
+    const behandlingTyper: readonly BehandlingType[] = config.behandlingTyper;
+    if (!behandlingType || !behandlingTyper.includes(behandlingType)) {
       return false;
     }
 

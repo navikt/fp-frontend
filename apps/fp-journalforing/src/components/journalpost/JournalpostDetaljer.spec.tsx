@@ -158,7 +158,7 @@ describe('JournalpostDetaljer', () => {
     await userEvent.click(screen.getAllByRole('radio')[4]!);
     expect(screen.queryByLabelText('Ytelse')).not.toBeInTheDocument();
     expect(
-      screen.queryByText(
+      screen.getByText(
         'Det vil ikke opprettes sak når du journalfører på generell sak. Innholdet vil bli knyttet direkte til personen.',
       ),
     ).toBeInTheDocument();
