@@ -31,7 +31,7 @@ const fjernMellomromRundtTags = (html: string): string => {
       resultat += html.slice(posisjon, tagEnd + 1);
       posisjon = tagEnd + 1;
     } else {
-      resultat += html.slice(posisjon, tagStart).replace(/\s+$/, '') + html.slice(tagStart, tagEnd + 1);
+      resultat += html.slice(posisjon, tagStart).trimEnd() + html.slice(tagStart, tagEnd + 1);
 
       let etterTag = tagEnd + 1;
       while (etterTag < html.length && /\s/.test(html[etterTag]!)) {

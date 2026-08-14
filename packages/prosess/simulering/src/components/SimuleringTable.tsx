@@ -143,8 +143,8 @@ const skalViseCollapseButton = (mottakerResultatPerFag: SimuleringResultatPerFag
   mottakerResultatPerFag.some(fag => fag.rader.length > 1);
 
 const rowToggable = (fagOmråde: SimuleringResultatPerFagområde, rowIsFeilUtbetalt: boolean): boolean => {
-  const fagFeilUtbetalt = fagOmråde.rader.some(rad => rad.feltnavn === simuleringCodes.DIFFERANSE);
-  return fagFeilUtbetalt && !rowIsFeilUtbetalt;
+  const fagHarFeilUtbetaltRad = fagOmråde.rader.some(rad => rad.feltnavn === simuleringCodes.DIFFERANSE);
+  return fagHarFeilUtbetaltRad && !rowIsFeilUtbetalt;
 };
 
 const rowIsHidden = (isRowToggable: boolean, showDetails: boolean): boolean => isRowToggable && !showDetails;
