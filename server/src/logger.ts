@@ -26,6 +26,7 @@ const colors = {
   debug: "white",
 };
 
+// eslint-disable-next-line unicorn/no-top-level-side-effects
 winston.addColors(colors);
 
 const uppercaseLevel = format((info) => {
@@ -38,6 +39,7 @@ const stdoutLogger = winston.createLogger({
   levels,
   transports: [
     new winston.transports.Console({
+      // eslint-disable-next-line unicorn/max-nested-calls
       format: combine(timestamp(), uppercaseLevel(), json()),
     }),
   ],
@@ -70,7 +72,7 @@ const vanligFormat =
 
 const morganMiddleware = morgan(vanligFormat, {
   stream: {
-    // Use the http severity
+    // Use the HTTP severity
     write: (message) => stdoutLogger.http(message),
   },
   skip,

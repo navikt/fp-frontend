@@ -22,10 +22,9 @@ export const setupProxies = (router: Router) => {
         if (obo.ok) {
           request.headers["obo-token"] = obo.token;
           return next();
-        } else {
-          logger.warning(`OBO-utveksling for ${api.scopes} feilet.`);
-          response.status(403).send();
         }
+        logger.warning(`OBO-utveksling for ${api.scopes} feilet.`);
+        response.status(403).send();
       },
       createProxyMiddleware({
         target: `${api.url}${api.path}`,
@@ -44,16 +43,18 @@ export const setupProxies = (router: Router) => {
                 `Access token ligger ikke i sesjon for scope ${api.scopes}`,
               );
             }
-            (request as unknown as Record<string, unknown>)._proxyStartTime = Date.now();
+            (request as unknown as Record<string, unknown>)._proxyStartTime =
+              Date.now();
           },
-          proxyRes: (proxyResponse, request, response) => {
+          proxyRes: (proxyResponse, request) => {
             // Location header rewrite — strip backend origin, keep relative path
             const location = proxyResponse.headers.location;
             if (location) {
-              const targetOrigin = new URL(api.url).origin;
-              if (location.startsWith(targetOrigin)) {
-                proxyResponse.headers.location =
-                  location.slice(targetOrigin.length);
+              const target = new URL(api.url);
+              if (location.startsWith(target.origin)) {
+                proxyResponse.headers.location = location.slice(
+                  target.origin.length,
+                );
               }
             }
 

@@ -3,6 +3,7 @@ import "dotenv/config";
 import logger from "./logger.js";
 
 const envVar = (name: string, required: boolean) => {
+  // eslint-disable-next-line unicorn/no-computed-property-existence-check
   if (!process.env[name] && required) {
     const errorMessage = `Missing required environment variable '${name}'`;
     logger.error(errorMessage);
@@ -26,10 +27,10 @@ const configValueAsJson = (name: string, required: boolean) => {
 };
 
 const server = {
-  // should be equivalent to the URL this application is hosted on for correct CORS origin header
+  // should be equivalent to the URL this app is hosted on for correct CORS origin header
   host: envVar("HOST", false) ?? "localhost",
 
-  // port for your application
+  // port for your app
   port: envVar("PORT", false) ?? 3000,
   viteModePort: envVar("VITE_MODE_PORT", false) ?? "9010",
 };
@@ -52,7 +53,7 @@ const cors = {
   allowedMethods: envVar("CORS_ALLOWED_METHODS", false) ?? "",
 };
 
-export type ProxyConfig = {
+type ProxyConfig = {
   apis: [
     {
       path: string;
