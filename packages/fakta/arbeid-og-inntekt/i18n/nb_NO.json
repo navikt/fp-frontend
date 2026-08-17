@@ -21,6 +21,12 @@
   "ArbeidsforholdRad.Ok": "Arbeidsforhold er OK",
   "ArbeidsforholdRad.Mottatt": "Mottatt",
   "ArbeidsforholdRad.IkkeMottatt": "Ikke mottatt",
+  "ArbeidsforholdRad.IkkebestiltInaktivt": "Ikke bestilt",
+  "ArbeidsforholdRad.IkkebestiltPermisjon": "Ikke bestilt",
+  "ArbeidsforholdRad.InaktivtArbeidsforhold.Tittel": "Arbeidsforhold uten inntekt",
+  "ArbeidsforholdRad.InaktivtArbeidsforhold.Forklaring": "Ingen inntektsmelding bestilt – ingen registrert inntekt de siste 4 månedene.",
+  "ArbeidsforholdRad.Permisjon.Tittel": "Arbeidsforhold med permisjon",
+  "ArbeidsforholdRad.Permisjon.Forklaring": "Ingen inntektsmelding bestilt - på grunn av registrert permisjon.",
 
   "InntektsmeldingInnhentesForm.MåInnhentes": "Må inntektsmelding innhentes?",
   "InntektsmeldingInnhentesForm.TarKontakt": "Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding",
