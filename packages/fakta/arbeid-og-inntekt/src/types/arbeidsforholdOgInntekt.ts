@@ -1,6 +1,7 @@
 import type {
   Arbeidsforhold,
   ArbeidsforholdKomplettVurderingType,
+  InaktivArbeidsforholdÅrsak,
   Inntektsmelding,
   Inntektspost,
 } from '@navikt/fp-types';
@@ -32,5 +33,6 @@ export type ArbeidsforholdOgInntektRadData = {
   arbeidsforholdForRad: Arbeidsforhold[];
   inntektsposter: Inntektspost[];
   årsak?: string;
+  inaktivÅrsak?: InaktivArbeidsforholdÅrsak;
   avklaring?: Avklaring;
 } & AGOpplysninger;
