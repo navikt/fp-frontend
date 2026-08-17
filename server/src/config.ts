@@ -3,7 +3,8 @@ import "dotenv/config";
 import logger from "./logger.js";
 
 const envVar = (name: string, required: boolean) => {
-  if (!Object.hasOwn(process.env, name) && required) {
+  // eslint-disable-next-line unicorn/no-computed-property-existence-check
+  if (!process.env[name] && required) {
     const errorMessage = `Missing required environment variable '${name}'`;
     logger.error(errorMessage);
     throw new Error(errorMessage);
