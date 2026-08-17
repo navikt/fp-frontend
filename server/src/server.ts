@@ -1,5 +1,5 @@
-import path from "node:path";
 import fs from "node:fs";
+import path from "node:path";
 
 import { serveViteMode } from "@navikt/vite-mode";
 import cors from "cors";
@@ -21,24 +21,37 @@ const spaFilePath = path.resolve("./public", "index.html");
 
 const replaceNaisMetaTags = (html: string) => {
   const metaTags = [
-    { name: 'nais-telemetry-url', content: process.env.NAIS_FRONTEND_TELEMETRY_COLLECTOR_URL },
-    { name: 'nais-app', content: process.env.NAIS_APP_NAME },
-    { name: 'nais-team', content: process.env.NAIS_TEAM ?? process.env.NAIS_NAMESPACE },
-    { name: 'nais-cluster', content: process.env.NAIS_CLUSTER_NAME },
-    { name: 'nais-version', content: process.env.NAIS_APP_IMAGE?.split(':').at(-1) },
+    {
+      name: "nais-telemetry-url",
+      content: process.env.NAIS_FRONTEND_TELEMETRY_COLLECTOR_URL,
+    },
+    { name: "nais-app", content: process.env.NAIS_APP_NAME },
+    {
+      name: "nais-team",
+      content: process.env.NAIS_TEAM ?? process.env.NAIS_NAMESPACE,
+    },
+    { name: "nais-cluster", content: process.env.NAIS_CLUSTER_NAME },
+    {
+      name: "nais-version",
+      // eslint-disable-next-line unicorn/no-optional-chaining-on-undeclared-variable
+      content: process.env.NAIS_APP_IMAGE?.split(":").at(-1),
+    },
   ];
 
   const tags = metaTags
-    .filter((tag): tag is { name: string; content: string } => Boolean(tag.content))
+    .filter((tag): tag is { name: string; content: string } =>
+      Boolean(tag.content),
+    )
     .map((tag) => `<meta name="${tag.name}" content="${tag.content}" />`)
-    .join('\n    ');
+    .join("\n    ");
 
-  return html.replaceAll('{{{NAIS_META_TAGS}}}', tags);
+  // eslint-disable-next-line unicorn/no-unsafe-string-replacement
+  return html.replaceAll("{{{NAIS_META_TAGS}}}", tags);
 };
 
 let renderedHtml: string | null = null;
 try {
-  renderedHtml = replaceNaisMetaTags(fs.readFileSync(spaFilePath, 'utf-8'));
+  renderedHtml = replaceNaisMetaTags(fs.readFileSync(spaFilePath, "utf8"));
 } catch {
   // File doesn't exist in local dev; serveViteMode handles that case
 }
@@ -46,7 +59,7 @@ try {
 function startApp() {
   addHeaders(server);
 
-  // Logging i json format
+  // Logging i JSON format
   server.use(logger.morganMiddleware);
 
   server.set("trust proxy", 1);

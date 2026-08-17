@@ -35,6 +35,27 @@ updates:
         update-types:
           - 'patch'
           - 'minor'
+          -
+  - package-ecosystem: npm
+    directory: "/server"
+    registries:
+      - npm-github
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 3
+    open-pull-requests-limit: 10
+    groups:
+      dependencies:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      devDependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: github-actions
     directory: '/'
