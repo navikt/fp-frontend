@@ -25,6 +25,8 @@ const {
   FoerRegisterinnhenting,
   AutomatiskIgnorertInntektsmelding,
   EtterAtEtterspurtInntektsmeldingErKommet,
+  InaktivtArbeidsforholdIkkebestiltInntektsmelding,
+  PermisjonArbeidsforholdIkkebestiltInntektsmelding,
 } = composeStories(stories);
 
 const frist = dayjs().add(28, 'days').format(ISO_DATE_FORMAT);
@@ -779,5 +781,35 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     expect(screen.getAllByTitle('Arbeidsforhold er OK')).toHaveLength(2);
 
     expect(screen.getByText('Bekreft og fortsett')).toBeInTheDocument();
+  });
+
+  it('skal vise forklaring for inaktivt arbeidsforhold der inntektsmelding ikke er bestilt', async () => {
+    render(<InaktivtArbeidsforholdIkkebestiltInntektsmelding />);
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
+    expect(screen.getByText('Ikke bestilt')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByTitle('Vis mer'));
+
+    expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
+    expect(screen.getByText('Arbeidsforhold uten inntekt')).toBeInTheDocument();
+    expect(
+      screen.getByText('Ingen inntektsmelding bestilt – ingen registrert inntekt de siste 4 månedene.'),
+    ).toBeInTheDocument();
+  });
+
+  it('skal vise forklaring for permisjonsarbeidsforhold der inntektsmelding ikke er bestilt', async () => {
+    render(<PermisjonArbeidsforholdIkkebestiltInntektsmelding />);
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
+    expect(screen.getByText('Ikke bestilt')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByTitle('Vis mer'));
+
+    expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
+    expect(screen.getByText('Arbeidsforhold med permisjon')).toBeInTheDocument();
+    expect(screen.getByText('Ingen inntektsmelding bestilt - på grunn av registrert permisjon.')).toBeInTheDocument();
   });
 });

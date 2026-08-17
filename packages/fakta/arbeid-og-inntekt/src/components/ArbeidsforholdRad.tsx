@@ -1,7 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Detail, Table, VStack } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
@@ -59,6 +59,8 @@ export const ArbeidsforholdRad = ({
   const { inntektsmeldingerForRad, arbeidsforholdForRad, arbeidsgiverNavn, avklaring, årsak, inaktivÅrsak } = radData;
 
   const erManueltOpprettet = avklaring?.saksbehandlersVurdering === 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER';
+  const erInaktivtArbeidsforhold = inaktivÅrsak === 'INAKTIVT_ARBEIDSFORHOLD';
+  const erPermisjonArbeidsforhold = inaktivÅrsak === 'PERMISJON';
   const erInaktivtEllerPermisjonsArbeidsforhold = inaktivÅrsak !== undefined;
   const harArbeidsforholdOgInntektsmelding =
     arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length > 0 && !årsak;
@@ -159,6 +161,26 @@ export const ArbeidsforholdRad = ({
               radData={radData}
             />
           )}
+          {erInaktivtArbeidsforhold && (
+            <VStack gap="space-4">
+              <Detail>
+                <FormattedMessage id="ArbeidsforholdRad.InaktivtArbeidsforhold.Tittel" />
+              </Detail>
+              <BodyShort>
+                <FormattedMessage id="ArbeidsforholdRad.InaktivtArbeidsforhold.Forklaring" />
+              </BodyShort>
+            </VStack>
+          )}
+          {erPermisjonArbeidsforhold && (
+            <VStack gap="space-4">
+              <Detail>
+                <FormattedMessage id="ArbeidsforholdRad.Permisjon.Tittel" />
+              </Detail>
+              <BodyShort>
+                <FormattedMessage id="ArbeidsforholdRad.Permisjon.Forklaring" />
+              </BodyShort>
+            </VStack>
+          )}
         </VStack>
       }
     >
@@ -203,6 +225,8 @@ export const ArbeidsforholdRad = ({
             (manglerInntektsmelding && inntektsmeldingerForRad.length < arbeidsforholdForRad.length)) && (
             <FormattedMessage id="ArbeidsforholdRad.IkkeMottatt" />
           )}
+          {erInaktivtArbeidsforhold && <FormattedMessage id="ArbeidsforholdRad.IkkebestiltInaktivt" />}
+          {erPermisjonArbeidsforhold && <FormattedMessage id="ArbeidsforholdRad.IkkebestiltPermisjon" />}
         </BodyShort>
       </Table.DataCell>
     </Table.ExpandableRow>
