@@ -35,7 +35,6 @@ updates:
         update-types:
           - 'patch'
           - 'minor'
-          -
   - package-ecosystem: npm
     directory: "/server"
     registries:
