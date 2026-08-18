@@ -22,8 +22,8 @@ export const serveKomprimerteFilerHvisMulig = (
     return next();
   }
 
-  const filendelse = FILENDELSER_VI_KOMPRIMERER.find((ext) =>
-    request.path.endsWith(ext),
+  const filendelse = FILENDELSER_VI_KOMPRIMERER.find((extension) =>
+    request.path.endsWith(extension),
   );
   if (filendelse) {
     request.url = `${request.url}.${komprimering.extension}`;

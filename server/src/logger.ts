@@ -45,27 +45,27 @@ const stdoutLogger = winston.createLogger({
   ],
 });
 
-const debug = (msg: string) => {
-  stdoutLogger.debug(msg.replaceAll(/[\n\r]/g, ""));
+const debug = (message: string) => {
+  stdoutLogger.debug(message.replaceAll(/[\n\r]/g, ""));
 };
 
-const info = (msg: string) => {
-  stdoutLogger.info(msg.replaceAll(/[\n\r]/g, ""));
+const info = (message: string) => {
+  stdoutLogger.info(message.replaceAll(/[\n\r]/g, ""));
 };
 
-const warning = (msg: string) => {
-  stdoutLogger.warn(msg.replaceAll(/[\n\r]/g, ""));
+const warning = (message: string) => {
+  stdoutLogger.warn(message.replaceAll(/[\n\r]/g, ""));
 };
 
-const error = (msg: string, err?: unknown) => {
-  if (err instanceof Error) {
-    stdoutLogger.error(msg, { message: `: ${err.message}` });
+const error = (message: string, error_?: unknown) => {
+  if (error_ instanceof Error) {
+    stdoutLogger.error(message, { message: `: ${error_.message}` });
   } else {
-    stdoutLogger.error(msg, { message: `: ${err}` });
+    stdoutLogger.error(message, { message: `: ${error_}` });
   }
 };
 
-const skip = () => process.env.NODE_ENV === "production";
+const shouldSkip = () => process.env.NODE_ENV === "production";
 
 const vanligFormat =
   ":method :url :status :res[content-length] - :response-time ms";
@@ -75,7 +75,7 @@ const morganMiddleware = morgan(vanligFormat, {
     // Use the HTTP severity
     write: (message) => stdoutLogger.http(message),
   },
-  skip,
+  skip: shouldSkip,
 });
 
 export default {
