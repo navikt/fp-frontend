@@ -2,9 +2,9 @@ import "dotenv/config";
 
 import logger from "./logger.js";
 
-const envVar = (name: string, required: boolean) => {
+const environmentVariable = (name: string, isRequired: boolean) => {
   // eslint-disable-next-line unicorn/no-computed-property-existence-check
-  if (!process.env[name] && required) {
+  if (isRequired && !process.env[name]) {
     const errorMessage = `Missing required environment variable '${name}'`;
     logger.error(errorMessage);
     throw new Error(errorMessage);
@@ -12,8 +12,8 @@ const envVar = (name: string, required: boolean) => {
   return process.env[name];
 };
 
-const configValueAsJson = (name: string, required: boolean) => {
-  const value = envVar(name, required);
+const configValueAsJson = (name: string, isRequired: boolean) => {
+  const value = environmentVariable(name, isRequired);
   if (!value) {
     return null;
   }
@@ -28,19 +28,19 @@ const configValueAsJson = (name: string, required: boolean) => {
 
 const server = {
   // should be equivalent to the URL this app is hosted on for correct CORS origin header
-  host: envVar("HOST", false) ?? "localhost",
+  host: environmentVariable("HOST", false) ?? "localhost",
 
   // port for your app
-  port: envVar("PORT", false) ?? 3000,
-  viteModePort: envVar("VITE_MODE_PORT", false) ?? "9010",
+  port: environmentVariable("PORT", false) ?? 3000,
+  viteModePort: environmentVariable("VITE_MODE_PORT", false) ?? "9010",
 };
 
 const azureAd = {
   // automatically provided by NAIS at runtime
-  discoveryUrl: envVar("AZURE_APP_WELL_KNOWN_URL", true),
-  clientId: envVar("AZURE_APP_CLIENT_ID", true),
+  discoveryUrl: environmentVariable("AZURE_APP_WELL_KNOWN_URL", true),
+  clientId: environmentVariable("AZURE_APP_CLIENT_ID", true),
   clientJwks: configValueAsJson("AZURE_APP_JWKS", true),
-  graphUrl: envVar("MS_GRAPH_URL", false),
+  graphUrl: environmentVariable("MS_GRAPH_URL", false),
 
   // leave at default
   tokenEndpointAuthMethod: "private_key_jwt",
@@ -48,9 +48,10 @@ const azureAd = {
 };
 
 const cors = {
-  allowedHeaders: envVar("CORS_ALLOWED_HEADERS", false) ?? "Nav-Callid",
-  exposedHeaders: envVar("CORS_EXPOSED_HEADERS", false) ?? "",
-  allowedMethods: envVar("CORS_ALLOWED_METHODS", false) ?? "",
+  allowedHeaders:
+    environmentVariable("CORS_ALLOWED_HEADERS", false) ?? "Nav-Callid",
+  exposedHeaders: environmentVariable("CORS_EXPOSED_HEADERS", false) ?? "",
+  allowedMethods: environmentVariable("CORS_ALLOWED_METHODS", false) ?? "",
 };
 
 type ProxyConfig = {

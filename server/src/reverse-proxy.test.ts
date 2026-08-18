@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-top-level-assignment-in-function */
 import http from "node:http";
 
 import express, { Router } from "express";
@@ -25,17 +26,17 @@ let lastRequest: { path: string; headers: http.IncomingHttpHeaders };
 
 beforeAll(async () => {
   // Start a simple backend server
-  backendServer = http.createServer((req, res) => {
-    lastRequest = { path: req.url ?? "", headers: req.headers };
-    if (req.url?.includes("redirect")) {
-      res.writeHead(302, {
+  backendServer = http.createServer((request, response) => {
+    lastRequest = { path: request.url ?? "", headers: request.headers };
+    if (request.url?.includes("redirect")) {
+      response.writeHead(302, {
         Location: `http://localhost:${backendPort}/fpsak/api/behandlinger/123`,
       });
-      res.end();
+      response.end();
       return;
     }
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: true }));
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify({ ok: true }));
   });
   await new Promise<void>((resolve) => {
     backendServer.listen(0, () => {
@@ -102,17 +103,17 @@ test("strips cookie header", async () => {
 });
 
 test("rewrites Location header on redirect", async () => {
-  const res = await supertest(app)
+  const response = await supertest(app)
     .get("/fpsak/api/redirect")
     .set("Authorization", "Bearer t")
     .redirects(0);
-  expect(res.status).toBe(302);
-  expect(res.headers.location).toBe("/fpsak/api/behandlinger/123");
+  expect(response.status).toBe(302);
+  expect(response.headers.location).toBe("/fpsak/api/behandlinger/123");
 });
 
 test("does not proxy requests outside /api path", async () => {
-  const res = await supertest(app)
+  const response = await supertest(app)
     .get("/fpsak/internal/health")
     .set("Authorization", "Bearer t");
-  expect(res.status).toBe(404);
+  expect(response.status).toBe(404);
 });
