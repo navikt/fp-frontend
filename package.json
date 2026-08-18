@@ -63,7 +63,8 @@
     "js-yaml": "^4.3.0"
   },
   "lint-staged": {
-    "{packages,apps,server}/**/*.{js,jsx,ts,tsx,cjs,mjs}": "eslint --cache --fix  --config packages/config/eslint/eslint.config.mjs",
+    "{packages,apps}/**/*.{js,jsx,ts,tsx,cjs,mjs}": "eslint --cache --fix  --config packages/config/eslint/eslint.config.mjs",
+    "server/**/*.{js,jsx,ts,tsx,cjs,mjs}": "eslint --cache --fix  --config server/eslint.config.mjs",
     "*.{js,jsx,ts,tsx,cjs,mjs,json,yaml,yml,md,css}": "prettier --write",
     "*.css": "stylelint --fix"
   },
