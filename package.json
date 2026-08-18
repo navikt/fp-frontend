@@ -52,7 +52,7 @@
     "storybook": "10.5.8",
     "stylelint": "17.14.1",
     "stylelint-order": "8.1.1",
-    "turbo": "2.10.9",
+    "turbo": "2.10.10",
     "typescript": "6.0.3"
   },
   "resolutions": {
