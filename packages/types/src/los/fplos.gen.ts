@@ -29,10 +29,6 @@ export type statistikk_KøStatistikkDto = {
   ventende: number;
 };
 
-export type tjenester_felles_dto_SakslisteIdDto = {
-  sakslisteId: number;
-};
-
 export type oppgave_BehandlingType = 'BT-002' | 'BT-003' | 'BT-004' | 'BT-006' | 'BT-007' | 'BT-008' | 'BT-009';
 
 export type tjenester_avdelingsleder_nøkkeltall_dto_BehandlingVenteStatus = 'PÅ_VENT' | 'IKKE_PÅ_VENT';
@@ -42,10 +38,6 @@ export type tjenester_avdelingsleder_nøkkeltall_dto_NøkkeltallBehandlingFørst
   behandlingType: oppgave_BehandlingType;
   behandlingVenteStatus: tjenester_avdelingsleder_nøkkeltall_dto_BehandlingVenteStatus;
   førsteUttakMåned?: string;
-};
-
-export type tjenester_avdelingsleder_dto_AvdelingEnhetDto = {
-  avdelingEnhet: string;
 };
 
 export type oppgave_FagsakYtelseType = 'ES' | 'FP' | 'SVP';
@@ -120,24 +112,16 @@ export type tjenester_avdelingsleder_reservasjon_AvdelingReservasjonDto = {
   ytelseType: oppgave_FagsakYtelseType;
 };
 
-export type tjenester_saksbehandler_oppgave_dto_OppgaveIdDto = {
-  oppgaveId: number;
-};
-
 export type tjenester_avdelingsleder_saksbehandler_dto_SaksbehandlerGruppeNavneEndringRequestDto = {
-  avdelingEnhet?: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+  avdelingEnhet?: string;
   gruppeId?: number;
   gruppeNavn: string;
 };
 
 export type tjenester_avdelingsleder_dto_SaksbehandlerOgGruppeDto = {
-  avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
-  brukerIdent: tjenester_felles_dto_SaksbehandlerBrukerIdentDto;
-  gruppeId?: number;
-};
-
-export type tjenester_felles_dto_SaksbehandlerBrukerIdentDto = {
+  avdelingEnhet: string;
   brukerIdent: string;
+  gruppeId?: number;
 };
 
 export type tjenester_felles_dto_SaksbehandlerDto = {
@@ -157,25 +141,19 @@ export type tjenester_avdelingsleder_saksbehandler_dto_SaksbehandlereOgSaksbehan
 };
 
 export type tjenester_avdelingsleder_dto_SaksbehandlerOgAvdelingDto = {
-  avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
-  brukerIdent: tjenester_felles_dto_SaksbehandlerBrukerIdentDto;
+  avdelingEnhet: string;
+  brukerIdent: string;
 };
 
 export type tjenester_avdelingsleder_saksbehandler_dto_SaksbehandlerGruppeSletteRequestDto = {
-  avdelingEnhet?: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+  avdelingEnhet?: string;
   gruppeId?: number;
 };
 
 export type oppgave_Periodefilter = 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER' | 'FAST_PERIODE';
 
 export type oppgavekø_KøSortering =
-  | 'BEHFRIST'
-  | 'OPPRBEH'
-  | 'FORSTONAD'
-  | 'FORSTONAD_SYNK'
-  | 'BELOP'
-  | 'FEILUTBETALINGSTART'
-  | 'OPPGAVE_OPPRETTET';
+  'BEHFRIST' | 'OPPRBEH' | 'FORSTONAD' | 'FORSTONAD_SYNK' | 'BELOP' | 'FEILUTBETALINGSTART' | 'OPPGAVE_OPPRETTET';
 
 export type oppgavekø_KøSortering_FeltType = 'HELTALL' | 'DATO' | 'DATO_UTEN_FILTER';
 
@@ -243,15 +221,15 @@ export type tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto_SorteringDt
 };
 
 export type tjenester_avdelingsleder_saksliste_dto_SakslisteSaksbehandlerDto = {
-  avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
-  brukerIdent: tjenester_felles_dto_SaksbehandlerBrukerIdentDto;
+  avdelingEnhet: string;
+  brukerIdent: string;
   checked?: boolean;
-  sakslisteId: tjenester_felles_dto_SakslisteIdDto;
+  sakslisteId: number;
 };
 
 export type tjenester_avdelingsleder_saksliste_dto_SakslisteOgAvdelingDto = {
-  avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
-  sakslisteId: tjenester_felles_dto_SakslisteIdDto;
+  avdelingEnhet: string;
+  sakslisteId: number;
 };
 
 export type tjenester_kodeverk_KodeverkRestTjeneste_KriterieFilterDto = {
@@ -277,14 +255,14 @@ export type tjenester_felles_dto_ReservasjonStatusDto = {
 };
 
 export type tjenester_reservasjon_dto_ReservasjonEndringRequestDto = {
-  oppgaveId: tjenester_saksbehandler_oppgave_dto_OppgaveIdDto;
+  oppgaveId: number;
   reserverTil: string;
 };
 
 export type tjenester_saksbehandler_oppgave_dto_OppgaveFlyttingDto = {
   begrunnelse: string;
-  brukerIdent: tjenester_felles_dto_SaksbehandlerBrukerIdentDto;
-  oppgaveId: tjenester_saksbehandler_oppgave_dto_OppgaveIdDto;
+  brukerIdent: string;
+  oppgaveId: number;
 };
 
 export type domene_typer_Fagsystem = 'FPSAK' | 'FPTILBAKE';
@@ -306,11 +284,7 @@ export type tjenester_felles_dto_OppgaveDto = {
 };
 
 export type tjenester_felles_dto_OppgaveBehandlingStatus =
-  | 'PÅ_VENT'
-  | 'FERDIG'
-  | 'TIL_BESLUTTER'
-  | 'RETURNERT_FRA_BESLUTTER'
-  | 'UNDER_ARBEID';
+  'PÅ_VENT' | 'FERDIG' | 'TIL_BESLUTTER' | 'RETURNERT_FRA_BESLUTTER' | 'UNDER_ARBEID';
 
 export type tjenester_felles_dto_OppgaveDtoMedStatus = {
   andreKriterier: Array<oppgave_AndreKriterierType>;
@@ -340,19 +314,7 @@ export type tjenester_felles_dto_AsyncPollingStatus = {
 };
 
 export type tjenester_felles_dto_AsyncPollingStatus_Status =
-  | 'PENDING'
-  | 'COMPLETE'
-  | 'DELAYED'
-  | 'CANCELLED'
-  | 'HALTED';
-
-export type tjenester_saksbehandler_oppgave_dto_OppgaveIderDto = {
-  oppgaveIder: string;
-};
-
-export type tjenester_saksbehandler_oppgave_dto_SaknummerIderDto = {
-  saksnummerListe: string;
-};
+  'PENDING' | 'COMPLETE' | 'DELAYED' | 'CANCELLED' | 'HALTED';
 
 export type HentAvdelingerData = {
   body?: never;
@@ -390,7 +352,7 @@ export type AktiveOgTilgjengligeOppgaverStatistikkForKøData = {
   body?: never;
   path?: never;
   query: {
-    sakslisteId: tjenester_felles_dto_SakslisteIdDto;
+    sakslisteId: number;
   };
   url: '/api/avdelingsleder/nøkkeltall/statistikk-oppgave-filter';
 };
@@ -409,7 +371,7 @@ export type GetAlleBehandlingerForAvdelingData = {
   body?: never;
   path?: never;
   query: {
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+    avdelingEnhet: string;
   };
   url: '/api/avdelingsleder/nøkkeltall/åpne-behandlinger';
 };
@@ -428,7 +390,7 @@ export type GetAlleOppgaverForAvdelingData = {
   body?: never;
   path?: never;
   query: {
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+    avdelingEnhet: string;
   };
   url: '/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid';
 };
@@ -447,7 +409,7 @@ export type GetAlleVentefristerForAvdelingData = {
   body?: never;
   path?: never;
   query: {
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+    avdelingEnhet: string;
   };
   url: '/api/avdelingsleder/nøkkeltall/frist-utløp';
 };
@@ -466,7 +428,7 @@ export type GetAntallOppgaverForAvdelingPerDatoData = {
   body?: never;
   path?: never;
   query: {
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+    avdelingEnhet: string;
   };
   url: '/api/avdelingsleder/nøkkeltall/behandlinger-under-arbeid-historikk';
 };
@@ -485,7 +447,7 @@ export type GetOppgaverPerFørsteStønadsdagMånedData = {
   body?: never;
   path?: never;
   query: {
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+    avdelingEnhet: string;
   };
   url: '/api/avdelingsleder/nøkkeltall/behandlinger-første-stønadsdag-mnd';
 };
@@ -504,7 +466,7 @@ export type HentAntallOppgaverForAvdelingData = {
   body?: never;
   path?: never;
   query: {
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+    avdelingEnhet: string;
   };
   url: '/api/avdelingsleder/oppgaver/avdelingantall';
 };
@@ -523,8 +485,8 @@ export type HentAntallOppgaverForSakslisteData = {
   body?: never;
   path?: never;
   query: {
-    sakslisteId: tjenester_felles_dto_SakslisteIdDto;
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+    sakslisteId: number;
+    avdelingEnhet: string;
   };
   url: '/api/avdelingsleder/oppgaver/antall';
 };
@@ -543,7 +505,7 @@ export type HentAvdelingensReservasjonerData = {
   body?: never;
   path?: never;
   query: {
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+    avdelingEnhet: string;
   };
   url: '/api/avdelingsleder/reservasjoner';
 };
@@ -562,7 +524,7 @@ export type OpphevOppgaveReservasjonData = {
   /**
    * Id for oppgave som reservasjonen er tilknyttet
    */
-  body: tjenester_saksbehandler_oppgave_dto_OppgaveIdDto;
+  body: number;
   path?: never;
   query?: never;
   url: '/api/avdelingsleder/reservasjoner/opphev';
@@ -607,7 +569,7 @@ export type HentAvdelingensSaksbehandlereData = {
   body?: never;
   path?: never;
   query: {
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+    avdelingEnhet: string;
   };
   url: '/api/avdelingsleder/saksbehandlere';
 };
@@ -643,7 +605,7 @@ export type HentSaksbehandlerGrupperData = {
   body?: never;
   path?: never;
   query: {
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+    avdelingEnhet: string;
   };
   url: '/api/avdelingsleder/saksbehandlere/grupper';
 };
@@ -690,7 +652,7 @@ export type OppdaterSaksbehandlerResponses = {
 };
 
 export type OpprettSaksbehandlerGruppeData = {
-  body?: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+  body?: string;
   path?: never;
   query?: never;
   url: '/api/avdelingsleder/saksbehandlere/grupper/opprett-gruppe';
@@ -741,7 +703,7 @@ export type SøkAvdelingensSaksbehandlereData = {
   /**
    * Brukeridentifikasjon
    */
-  body: tjenester_felles_dto_SaksbehandlerBrukerIdentDto;
+  body: string;
   path?: never;
   query?: never;
   url: '/api/avdelingsleder/saksbehandlere/søk';
@@ -761,7 +723,7 @@ export type HentAvdelingensSakslisterData = {
   body?: never;
   path?: never;
   query: {
-    avdelingEnhet: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+    avdelingEnhet: string;
   };
   url: '/api/avdelingsleder/sakslister';
 };
@@ -780,7 +742,7 @@ export type OpprettNySakslisteData = {
   /**
    * enhet til avdelingsenheten som det skal opprettes ny saksliste for
    */
-  body: tjenester_avdelingsleder_dto_AvdelingEnhetDto;
+  body: string;
   path?: never;
   query?: never;
   url: '/api/avdelingsleder/sakslister';
@@ -790,7 +752,7 @@ export type OpprettNySakslisteResponses = {
   /**
    * default response
    */
-  default: tjenester_felles_dto_SakslisteIdDto;
+  default: number;
 };
 
 export type OpprettNySakslisteResponse = OpprettNySakslisteResponses[keyof OpprettNySakslisteResponses];
@@ -936,7 +898,7 @@ export type HentAktuelleSaksbehandlereData = {
     /**
      * oppgaveId
      */
-    oppgaveId: tjenester_saksbehandler_oppgave_dto_OppgaveIdDto;
+    oppgaveId: number;
   };
   url: '/api/reservasjon/hent-aktuelle-saksbehandlere';
 };
@@ -958,7 +920,7 @@ export type HentReservasjonData = {
     /**
      * id til oppgaven
      */
-    oppgaveId: tjenester_saksbehandler_oppgave_dto_OppgaveIdDto;
+    oppgaveId: number;
   };
   url: '/api/reservasjon/reservasjon-status';
 };
@@ -976,7 +938,7 @@ export type OpphevReservasjonTilknyttetOppgaveData = {
   /**
    * Id og begrunnelse
    */
-  body: tjenester_saksbehandler_oppgave_dto_OppgaveIdDto;
+  body: number;
   path?: never;
   query?: never;
   url: '/api/reservasjon/opphev-reservasjon';
@@ -996,7 +958,7 @@ export type ReserverOppgaveData = {
   /**
    * id til oppgaven
    */
-  body: tjenester_saksbehandler_oppgave_dto_OppgaveIdDto;
+  body: number;
   path?: never;
   query?: never;
   url: '/api/reservasjon/reserver';
@@ -1036,7 +998,7 @@ export type KøStatistikkForSakslisteData = {
   body?: never;
   path?: never;
   query: {
-    sakslisteId: tjenester_felles_dto_SakslisteIdDto;
+    sakslisteId: number;
   };
   url: '/api/saksbehandler/nøkkeltall/statistikk-oppgave-filter';
 };
@@ -1055,7 +1017,7 @@ export type GetOppgaverTilBehandlingData = {
   body?: never;
   path?: never;
   query: {
-    sakslisteId: tjenester_felles_dto_SakslisteIdDto;
+    sakslisteId: number;
   };
   url: '/api/saksbehandler/oppgaver/resultat';
 };
@@ -1074,7 +1036,7 @@ export type HentAntallOppgaverForSaksliste1Data = {
   body?: never;
   path?: never;
   query: {
-    sakslisteId: tjenester_felles_dto_SakslisteIdDto;
+    sakslisteId: number;
   };
   url: '/api/saksbehandler/oppgaver/antall';
 };
@@ -1093,8 +1055,8 @@ export type HentNesteOppgaverOgSjekkOmDisseErNyeData = {
   body?: never;
   path?: never;
   query: {
-    sakslisteId: tjenester_felles_dto_SakslisteIdDto;
-    oppgaveIder?: tjenester_saksbehandler_oppgave_dto_OppgaveIderDto;
+    sakslisteId: number;
+    oppgaveIder?: string;
   };
   url: '/api/saksbehandler/oppgaver/status';
 };
@@ -1113,8 +1075,8 @@ export type HentOppgaverData = {
   body?: never;
   path?: never;
   query: {
-    sakslisteId: tjenester_felles_dto_SakslisteIdDto;
-    oppgaveIder?: tjenester_saksbehandler_oppgave_dto_OppgaveIderDto;
+    sakslisteId: number;
+    oppgaveIder?: string;
   };
   url: '/api/saksbehandler/oppgaver';
 };
@@ -1133,7 +1095,7 @@ export type HentOppgaverForFagsakerData = {
     /**
      * Liste med saksnummer
      */
-    saksnummerListe: tjenester_saksbehandler_oppgave_dto_SaknummerIderDto;
+    saksnummerListe: string;
   };
   url: '/api/saksbehandler/oppgaver/oppgaver-for-fagsaker';
 };

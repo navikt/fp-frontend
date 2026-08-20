@@ -29,4 +29,8 @@ export type {
   tjenester_avdelingsleder_saksliste_dto_SakslisteLagreDto as SakslisteLagreDto,
   tjenester_felles_dto_SaksbehandlerDto as SaksbehandlerDto,
   tjenester_kodeverk_KodeverkRestTjeneste_KriterieFilterDto as KriterieFilterDto,
+  tjenester_reservasjon_dto_ReservasjonEndringRequestDto as ReservasjonEndringRequestDto,
+  tjenester_saksbehandler_oppgave_dto_OppgaveFlyttingDto as OppgaveFlyttingDto,
+  ReserverOppgaveData,
+  OpphevReservasjonTilknyttetOppgaveData,
 } from './fplos.gen';

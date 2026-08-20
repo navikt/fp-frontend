@@ -48,7 +48,7 @@ export const FlyttReservasjonModal = ({
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
-    mutationFn: ({ brukerIdent, begrunnelse }: FormValues) => flyttReservasjon(oppgaveId, brukerIdent, begrunnelse),
+    mutationFn: ({ brukerIdent, begrunnelse }: FormValues) => flyttReservasjon({ oppgaveId, brukerIdent, begrunnelse }),
     onSuccess: () => {
       if (invalidateQueryKeys.length > 0) {
         void queryClient.invalidateQueries({ queryKey: invalidateQueryKeys });

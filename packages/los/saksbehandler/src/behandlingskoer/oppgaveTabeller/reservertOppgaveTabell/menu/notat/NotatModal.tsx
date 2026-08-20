@@ -32,7 +32,7 @@ export const NotatModal = ({ begrunnelse, oppgaveId, closeModal, brukerIdent }: 
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: (values: LagreFormValues) => flyttReservasjon(oppgaveId, brukerIdent, values.notat),
+    mutationFn: (values: LagreFormValues) => flyttReservasjon({ oppgaveId, brukerIdent, begrunnelse: values.notat }),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: [LosUrl.RESERVERTE_OPPGAVER] });
       closeModal();

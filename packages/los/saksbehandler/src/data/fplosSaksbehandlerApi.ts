@@ -8,6 +8,7 @@ import type {
   OppgaveDto,
   OppgaveDtoMedStatus,
   ReservasjonStatusDto,
+  ReserverOppgaveData,
   SaksbehandlerDto,
   SakslisteDto,
 } from '@navikt/fp-types';
@@ -126,8 +127,8 @@ export const hentAktuelleSaksbehandlere = (oppgaveId: number, skalKjøres: boole
 export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>
   kyExtended.post(LosUrl.SØK_FAGSAK, { json: { searchString, skalReservere } }).json<FagsakEnkel[]>();
 
-export const opphevReservasjon = (oppgaveId: number) =>
-  kyExtended.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, { json: { oppgaveId } });
+export const opphevReservasjon = (body: OpphevReservasjonTilknyttetOppgaveData['body']) =>
+  kyExtended.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, { json: body });
 
-export const reserverOppgavePost = (oppgaveId: number) =>
-  kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: { oppgaveId } }).json<ReservasjonStatusDto>();
+export const reserverOppgavePost = (body: ReserverOppgaveData['body']) =>
+  kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: body }).json<ReservasjonStatusDto>();
