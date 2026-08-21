@@ -65,7 +65,7 @@
     "@types/react": "19.2.17",
     "eslint": "10.8.0",
     "msw": "2.15.0",
-    "msw-storybook-addon": "2.0.7",
+    "msw-storybook-addon": "3.0.0",
     "storybook": "10.5.8",
     "stylelint": "17.14.1",
     "tailwindcss": "4.3.3",
