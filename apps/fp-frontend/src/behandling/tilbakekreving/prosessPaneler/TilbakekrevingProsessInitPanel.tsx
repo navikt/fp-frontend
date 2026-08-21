@@ -15,6 +15,7 @@ import { erAksjonspunktÅpent, useMellomlagretFormData } from '@navikt/fp-utils'
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -33,11 +34,18 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.TILBAKEKREVING,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: perioderForeldelse } = useQuery(api.tilbakekreving.perioderForeldelseOptions(behandling));
-  const { data: vilkårvurderingsperioder } = useQuery(api.tilbakekreving.vilkårsvurderingsperioderOptions(behandling));
-  const { data: vilkårvurdering } = useQuery(api.tilbakekreving.vilkårsvurderingOptions(behandling));
+  const { data: perioderForeldelse } = useQuery(prioriter(api.tilbakekreving.perioderForeldelseOptions(behandling)));
+  const { data: vilkårvurderingsperioder } = useQuery(
+    prioriter(api.tilbakekreving.vilkårsvurderingsperioderOptions(behandling)),
+  );
+  const { data: vilkårvurdering } = useQuery(prioriter(api.tilbakekreving.vilkårsvurderingOptions(behandling)));
 
   const { mutateAsync: beregnBeløp } = useMutation({
     mutationFn: (values: BeregnBeløpParams) => api.tilbakekreving.beregneBeløp(values),

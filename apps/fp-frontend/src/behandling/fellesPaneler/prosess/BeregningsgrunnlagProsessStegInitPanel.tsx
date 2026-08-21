@@ -22,6 +22,7 @@ import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -145,9 +146,14 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
 
   const { behandling } = useBehandlingDataContext();
 
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.BEREGNINGSGRUNNLAG,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
+  const { data: beregningsgrunnlag, isFetching } = useQuery(prioriter(api.beregningsgrunnlagOptions(behandling)));
 
   return (
     <ProsessDefaultInitPanel

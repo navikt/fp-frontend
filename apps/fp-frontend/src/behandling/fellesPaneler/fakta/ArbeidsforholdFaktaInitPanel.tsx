@@ -13,6 +13,7 @@ import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.UTGÅTT_5080];
 
@@ -32,16 +33,23 @@ export const ArbeidsforholdFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: 
 
   const { behandling } = useBehandlingDataContext();
 
+  const skalPanelVisesIMeny = AKSJONSPUNKT_KODER.some(kode => harAksjonspunkt(kode, behandling.aksjonspunkt));
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.ARBEIDSFORHOLD,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(behandling));
+  const { data: arbeidOgInntekt } = useQuery(prioriter(api.arbeidOgInntektOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.ARBEIDSFORHOLD}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Arbeidsforhold' })}
-      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => harAksjonspunkt(kode, behandling.aksjonspunkt))}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {arbeidOgInntekt ? (
         <ArbeidsforholdFaktaIndex

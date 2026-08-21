@@ -12,6 +12,7 @@ import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { forhåndsvisTilbakekrevingMelding, getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessMenyContext } from '../../felles/prosess/ProsessMeny';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -30,10 +31,20 @@ export const SimuleringProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }
   const { behandling, fagsak } = useBehandlingDataContext();
   const { prosessPanelMenyData } = use(ProsessMenyContext);
 
+  const harVedtakspanel = prosessPanelMenyData.some(
+    d => d.id === ProsessStegCode.VEDTAK && (d.status !== 'IKKE_VURDERT' || d.harÅpentAksjonspunkt),
+  );
+  const skalPanelVisesIMeny = harLenke(behandling, 'SIMULERING_RESULTAT') || !harVedtakspanel;
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.SIMULERING,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: tilbakekrevingValg, isFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
-  const { data: simuleringResultat } = useQuery(api.simuleringResultatOptions(behandling));
+  const { data: tilbakekrevingValg, isFetching } = useQuery(prioriter(api.tilbakekrevingValgOptions(behandling)));
+  const { data: simuleringResultat } = useQuery(prioriter(api.simuleringResultatOptions(behandling)));
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: { mottaker: string; fritekst: string }) =>
@@ -45,16 +56,12 @@ export const SimuleringProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }
     onSuccess: forhandsvisDokument,
   });
 
-  const harVedtakspanel = prosessPanelMenyData.some(
-    d => d.id === ProsessStegCode.VEDTAK && (d.status !== 'IKKE_VURDERT' || d.harÅpentAksjonspunkt),
-  );
-
   return (
     <ProsessDefaultInitPanel
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.SIMULERING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
-      skalPanelVisesIMeny={harLenke(behandling, 'SIMULERING_RESULTAT') || !harVedtakspanel}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
       overstyrtStatus={harLenke(behandling, 'SIMULERING_RESULTAT') ? 'OPPFYLT' : 'IKKE_VURDERT'}
     >
       {isFetching ? (

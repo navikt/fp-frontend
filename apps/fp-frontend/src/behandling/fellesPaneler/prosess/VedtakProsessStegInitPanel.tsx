@@ -17,6 +17,7 @@ import { forhåndsvisMelding, getBehandlingApi, harLenke } from '../../../data/b
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import {
   type StandardProsessPanelProps,
@@ -57,28 +58,38 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
   const { behandling } = standardPanelProps;
 
   const statusForVedtak = finnStatusForVedtak(standardPanelProps);
+  const skalMarkeresSomAktiv = !behandling.behandlingHenlagt && statusForVedtak !== 'IKKE_VURDERT';
+
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.VEDTAK,
+    skalMarkeresSomAktiv,
+  });
 
   const api = getBehandlingApi(behandling);
 
   const { data: beregningsresultatDagytelse, isFetching: isBdFetching } = useQuery(
-    api.beregningsresultatDagytelseOptions(behandling, !erEngangsstønad),
+    prioriter(api.beregningsresultatDagytelseOptions(behandling, !erEngangsstønad)),
   );
   const { data: beregningsresultatEngangsstønad, isFetching: isBeFetching } = useQuery(
-    api.es.beregningsresultatEngangsstønadOptions(behandling, erEngangsstønad),
+    prioriter(api.es.beregningsresultatEngangsstønadOptions(behandling, erEngangsstønad)),
   );
-  const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
+  const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(
+    prioriter(api.tilbakekrevingValgOptions(behandling)),
+  );
   const { data: beregningsgrunnlag, isFetching: isBgFetching } = useQuery(
-    api.beregningsgrunnlagOptions(behandling, !erEngangsstønad),
+    prioriter(api.beregningsgrunnlagOptions(behandling, !erEngangsstønad)),
   );
-  const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(api.simuleringResultatOptions(behandling));
+  const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(
+    prioriter(api.simuleringResultatOptions(behandling)),
+  );
   const { data: beregningDagytelseOriginalBehandling, isFetching: isBdobFetching } = useQuery(
-    api.beregningDagytelseOriginalBehandlingOptions(behandling),
+    prioriter(api.beregningDagytelseOriginalBehandlingOptions(behandling)),
   );
   const {
     data: oppgaver,
     isFetching: isOFetching,
     refetch: refetchOppgaver,
-  } = useQuery(api.oppgaverOptions(behandling));
+  } = useQuery(prioriter(api.oppgaverOptions(behandling)));
 
   const { mutateAsync: hentBrevHtml, isPending } = useMutation({
     mutationFn: () => api.hentBrevHtml(behandling.uuid),
@@ -135,7 +146,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
         skalPanelVisesIMeny
         overstyrtStatus={statusForVedtak}
-        skalMarkeresSomAktiv={!behandling.behandlingHenlagt && statusForVedtak !== 'IKKE_VURDERT'}
+        skalMarkeresSomAktiv={skalMarkeresSomAktiv}
       >
         <>
           <IverksetterVedtakStatusModal

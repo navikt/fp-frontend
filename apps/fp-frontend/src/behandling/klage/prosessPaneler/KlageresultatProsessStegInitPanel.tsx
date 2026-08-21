@@ -15,6 +15,7 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 import { forhåndsvisMelding, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -42,7 +43,13 @@ export const KlageresultatProsessStegInitPanel = () => {
 
   const navigate = useNavigate();
 
-  const { data: klageVurdering } = useQuery(api.klage.klageVurderingOptions(behandling));
+  const skalMarkeresSomAktiv = vedtakStatus !== 'IKKE_VURDERT' || standardPanelProps.harÅpentAksjonspunkt;
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.KLAGE_RESULTAT,
+    skalMarkeresSomAktiv,
+  });
+
+  const { data: klageVurdering } = useQuery(prioriter(api.klage.klageVurderingOptions(behandling)));
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: VedtakKlageForhandsvisData) =>
@@ -69,7 +76,7 @@ export const KlageresultatProsessStegInitPanel = () => {
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.ResultatKlage' })}
         standardPanelProps={standardPanelProps}
         overstyrtStatus={vedtakStatus}
-        skalMarkeresSomAktiv={vedtakStatus !== 'IKKE_VURDERT'}
+        skalMarkeresSomAktiv={skalMarkeresSomAktiv}
       >
         {klageVurdering ? (
           <VedtakKlageProsessIndex klageVurdering={klageVurdering} previewVedtakCallback={forhåndsvis} />

@@ -14,6 +14,7 @@ import { useFagsakApi } from '../../../data/fagsakApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
@@ -28,15 +29,22 @@ export const FodselvilkaretFaktaInitPanel = () => {
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const skalPanelVisesIMeny = harLenke(behandling, 'FAKTA_FØDSEL');
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.FODSELSVILKARET,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
   const fagsakApi = useFagsakApi();
 
   const harOverstyrigAP = standardPanelProps.aksjonspunkterForPanel.some(
     a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
   );
-  const { data: faktafødsel } = useQuery(api.faktaFødselOptions(behandling));
+  const { data: faktafødsel } = useQuery(prioriter(api.faktaFødselOptions(behandling)));
   const { data: alleDokumenter = [] } = useQuery(
-    fagsakApi.hentDokumenter(fagsak.saksnummer, behandling.uuid, behandling.versjon),
+    prioriter(fagsakApi.hentDokumenter(fagsak.saksnummer, behandling.uuid, behandling.versjon)),
   );
 
   const terminbekreftelseDokument = finnTerminBekreftelse(alleDokumenter, fagsak.saksnummer);
@@ -51,7 +59,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
         standardPanelProps={standardPanelProps}
         faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
         faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Fodsel' })}
-        skalPanelVisesIMeny={harLenke(behandling, 'FAKTA_FØDSEL')}
+        skalPanelVisesIMeny={skalPanelVisesIMeny}
       >
         {faktafødsel ? (
           <FodselFaktaIndex fødsel={faktafødsel} terminbekreftelseDokument={terminbekreftelseDokument} />
