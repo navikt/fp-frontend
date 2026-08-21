@@ -2,6 +2,7 @@
   "HelpText.ToTrinnsKontroll": "Kontroller endrede opplysninger og faglige vurderinger",
 
   "ApprovalField.Godkjent": "Godkjent",
+  "ApprovalField.Legend": "Vurdering av aksjonspunkt",
   "ApprovalField.Vurder": "Vurder på nytt",
 
   "AksjonspunktGodkjenningArsakPanel.Begrunnelse": "Begrunnelse",

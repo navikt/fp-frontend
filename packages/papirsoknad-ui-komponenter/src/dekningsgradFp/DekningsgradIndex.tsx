@@ -35,7 +35,7 @@ export const DekningsgradIndex = ({ readOnly }: Props) => {
         <RhfRadioGroup
           name="dekningsgrad"
           control={control}
-          legend=""
+          legend={intl.formatMessage({ id: 'Registrering.Dekningsgrad.Label' })}
           hideLegend
           validate={[required]}
           readOnly={readOnly}

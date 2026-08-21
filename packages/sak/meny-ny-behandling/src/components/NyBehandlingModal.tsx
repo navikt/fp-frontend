@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Button, Dialog, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
@@ -169,8 +169,6 @@ export const NyBehandlingModal = ({
   revurderingArsaker,
   tilbakekrevingRevurderingArsaker,
 }: Props) => {
-  const intl = useIntl();
-
   const formMethods = useForm<FormValues>();
 
   const valgtBehandlingTypeKode = useWatch({ control: formMethods.control, name: 'behandlingType' });
@@ -205,7 +203,8 @@ export const NyBehandlingModal = ({
               <RhfSelect
                 name="behandlingType"
                 control={formMethods.control}
-                label=""
+                label={<FormattedMessage id="MenyNyBehandlingIndex.BehandlingType" />}
+                hideLabel
                 validate={[required]}
                 selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper))}
                 className={styles['typeBredde']}
@@ -214,14 +213,14 @@ export const NyBehandlingModal = ({
                 <RhfCheckbox
                   name="nyBehandlingEtterKlage"
                   control={formMethods.control}
-                  label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyBehandlingEtterKlage' })}
+                  label={<FormattedMessage id="MenyNyBehandlingIndex.NyBehandlingEtterKlage" />}
                 />
               )}
               {behandlingArsakTyper.length > 0 && (
                 <RhfSelect
                   name="behandlingArsakType"
                   control={formMethods.control}
-                  label=""
+                  label={<FormattedMessage id="MenyNyBehandlingIndex.BehandlingArsakType" />}
                   hideLabel
                   validate={[required]}
                   className={styles['arsakBredde']}

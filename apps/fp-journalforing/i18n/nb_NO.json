@@ -20,6 +20,7 @@
   "Journalpost.Søk.Tittel": "Søk etter journalpost",
   "Journalpost.Søk.Finn": "Finn journalpost",
   "Journalpost.Søk.Forklaring": "Hvis du trenger å knytte en allerede journalført journalpost til en annen sak, kan du bruke denne funksjonaliteten. Journalposten vil da kopieres til den nye saken du legger til.",
+  "VelgSakForm.Legend": "Velg sak for journalføring",
   "Journalpost.Søk.JournalpostID": "Journalpost-ID",
   "Journalpost.Søk.IngenTreffEllerManglerTilgang": "Søket ga ingen treff eller du mangler tilgang til denne journalposten",
   "Journalforing.Antall.Oppgaver": "Åpne oppgaver: {antall}",

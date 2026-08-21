@@ -37,7 +37,7 @@ export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = fal
         <RhfCheckboxGroup
           name={`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_TYPER_NAME}`}
           control={control}
-          legend=""
+          legend={<FormattedMessage id="Registrering.AndreYtelser.Label" />}
           hideLegend
           readOnly={readOnly}
         >

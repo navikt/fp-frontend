@@ -38,7 +38,7 @@ export const SprakPapirsoknadIndex = ({ readOnly }: Props) => {
         <RhfRadioGroup
           name="språkkode"
           control={control}
-          legend=""
+          legend={intl.formatMessage({ id: 'Registrering.Sprak.Label' })}
           hideLegend
           validate={[required]}
           readOnly={readOnly}

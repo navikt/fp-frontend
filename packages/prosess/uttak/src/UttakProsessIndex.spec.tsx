@@ -100,8 +100,7 @@ describe('UttakProsessIndex', () => {
     expect(await screen.findByText('24.01.2020 - 13.02.2020')).toBeInTheDocument();
   });
 
-  // TODO FIX
-  it.fails('skal validere at stønadskonto ikke er gyldig, endre og så bekrefte', async () => {
+  it('skal validere at stønadskonto ikke er gyldig, endre og så bekrefte', async () => {
     const lagre = vi.fn();
 
     render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
@@ -115,13 +114,15 @@ describe('UttakProsessIndex', () => {
       ),
     ).toBeInTheDocument();
 
-    const inputFelter = screen.getAllByRole('textbox');
-    expect(inputFelter).toHaveLength(7);
+    const inputFelter = screen.getAllByLabelText('Utbetalingsgrad (%)');
+    expect(inputFelter).toHaveLength(2);
 
-    await userEvent.type(inputFelter[2]!, '0');
-    await userEvent.type(inputFelter[5]!, '10');
+    await userEvent.clear(inputFelter[0]!);
+    await userEvent.type(inputFelter[0]!, '0');
+    await userEvent.clear(inputFelter[1]!);
+    await userEvent.type(inputFelter[1]!, '10');
 
-    await userEvent.type(screen.getByLabelText('Vurdering:'), 'Dette er en vurdering');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Oppfylt'));
 
@@ -131,24 +132,26 @@ describe('UttakProsessIndex', () => {
 
     expect(await screen.findByText('Stønadskonto Foreldrepenger er ikke tilgjengelig')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeDisabled();
 
-    await userEvent.click(screen.getAllByRole('button')[4]!);
+    await userEvent.click(screen.getByRole('button', { name: 'Suksess fra 20.10.2022 til 09.11.2022' }));
 
     expect(await screen.findByText('Detaljer for valgt periode')).toBeInTheDocument();
 
-    const dropdowns = screen.getAllByRole('combobox');
-    expect(dropdowns).toHaveLength(3);
+    const dropdowns = screen.getAllByLabelText('Stønadskontotype');
+    expect(dropdowns).toHaveLength(2);
 
     await userEvent.selectOptions(dropdowns[0]!, 'MØDREKVOTE');
     await userEvent.selectOptions(dropdowns[1]!, 'FELLESPERIODE');
+
+    await userEvent.selectOptions(screen.getByLabelText('Årsak til innvilgelse'), '2003');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
     expect(screen.queryByText('Stønadskonto Foreldrepenger er ikke tilgjengelig')).not.toBeInTheDocument();
     await waitFor(() => expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeEnabled());
 
-    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
@@ -187,12 +190,12 @@ describe('UttakProsessIndex', () => {
             fom: '2022-10-20',
             graderingAvslagÅrsak: '-',
             graderingInnvilget: false,
-            gradertAktivitet: null,
+            gradertAktivitet: undefined,
             manuellBehandlingÅrsak: '5002',
             mottattDato: '2023-01-05',
             oppholdÅrsak: '-',
             periodeResultatType: 'INNVILGET',
-            periodeResultatÅrsak: '2002',
+            periodeResultatÅrsak: '2003',
             periodeType: 'FORELDREPENGER',
             samtidigUttak: false,
             samtidigUttaksprosent: undefined,
@@ -214,20 +217,20 @@ describe('UttakProsessIndex', () => {
                 uttakArbeidType: 'ORDINÆRT_ARBEID',
               },
             ],
-
+            begrunnelse: undefined,
             flerbarnsdager: false,
             fom: '2022-11-10',
             graderingAvslagÅrsak: '-',
             graderingInnvilget: false,
-            gradertAktivitet: null,
+            gradertAktivitet: undefined,
             manuellBehandlingÅrsak: '-',
 
             oppholdÅrsak: '-',
             periodeResultatType: 'AVSLÅTT',
             periodeResultatÅrsak: '4103',
-            periodeType: null,
+            periodeType: 'FORELDREPENGER',
             samtidigUttak: false,
-
+            samtidigUttaksprosent: undefined,
             tom: '2022-12-21',
             utsettelseType: '-',
           },
@@ -262,29 +265,33 @@ describe('UttakProsessIndex', () => {
 
     expect(await screen.findByText('20.10.2022 - 28.10.2022')).toBeInTheDocument();
 
-    const inputFelter = screen.getAllByRole('textbox');
-    expect(inputFelter).toHaveLength(7);
+    const inputFelter = screen.getAllByLabelText('Utbetalingsgrad (%)');
+    expect(inputFelter).toHaveLength(2);
 
-    await userEvent.type(inputFelter[2]!, '0');
-    await userEvent.type(inputFelter[5]!, '0');
+    await userEvent.clear(inputFelter[0]!);
+    await userEvent.type(inputFelter[0]!, '0');
+    await userEvent.clear(inputFelter[1]!);
+    await userEvent.type(inputFelter[1]!, '0');
 
-    await userEvent.type(screen.getByLabelText('Vurdering:'), 'Dette er en vurdering');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
     expect(await screen.findByText('29.10.2022 - 09.11.2022')).toBeInTheDocument();
 
-    const inputFelter2 = screen.getAllByRole('textbox');
-    expect(inputFelter2).toHaveLength(7);
+    const inputFelter2 = screen.getAllByLabelText('Utbetalingsgrad (%)');
+    expect(inputFelter2).toHaveLength(2);
 
-    await userEvent.type(inputFelter2[2]!, '0');
-    await userEvent.type(inputFelter2[5]!, '0');
+    await userEvent.clear(inputFelter2[0]!);
+    await userEvent.type(inputFelter2[0]!, '0');
+    await userEvent.clear(inputFelter2[1]!);
+    await userEvent.type(inputFelter2[1]!, '0');
 
-    await userEvent.type(screen.getByLabelText('Vurdering:'), 'Dette er en vurdering på periode 2');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering på periode 2');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
-    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [
@@ -433,13 +440,13 @@ describe('UttakProsessIndex', () => {
 
     await userEvent.type(inputFelter[2]!, '0');
 
-    await userEvent.type(screen.getByLabelText('Vurdering:'), 'Dette er en vurdering');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
     expect(await screen.findByText('Antall dager valgt for Mødrekvote er ikke gyldig')).toBeInTheDocument();
 
-    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeDisabled();
   });
 
   it('skal vise varsel når samlet utbetalingsgrad og andel i arbeid overskrider 100%', async () => {
@@ -459,7 +466,7 @@ describe('UttakProsessIndex', () => {
 
     await userEvent.type(inputFelter[2]!, '0');
 
-    await userEvent.type(screen.getByLabelText('Vurdering:'), 'Dette er en vurdering');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Oppfylt'));
 

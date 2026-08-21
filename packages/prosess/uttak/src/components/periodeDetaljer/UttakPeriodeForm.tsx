@@ -348,7 +348,7 @@ export const UttakPeriodeForm = ({
               <RhfRadioGroup
                 name="erOppfylt"
                 control={formMethods.control}
-                legend=""
+                legend={<FormattedMessage id="UttakInfoPanel.FastsettResultat" />}
                 hideLegend
                 validate={[required]}
                 onClick={() => formMethods.setValue('periodeResultatÅrsak', '-')}

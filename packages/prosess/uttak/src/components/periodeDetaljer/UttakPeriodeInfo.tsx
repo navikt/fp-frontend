@@ -218,9 +218,9 @@ export const UttakPeriodeInfo = ({
                 <RhfNumericField
                   name="samtidigUttaksprosent"
                   control={control}
-                  className={styles['numberFieldLength']}
+                  htmlSize={6}
                   readOnly={isReadOnly}
-                  label={intl.formatMessage({ id: 'UttakInfo.SamtidigUttaksprosent' })}
+                  label={<FormattedMessage id="UttakInfo.SamtidigUttaksprosent" />}
                   validate={[required, maxValue100, hasValidDecimal]}
                   forceTwoDecimalDigits
                 />
@@ -258,7 +258,7 @@ export const UttakPeriodeInfo = ({
         )}
       </HStack>
       {valgtPeriode.oppholdÅrsak !== '-' && (
-        <div className={styles['select']}>
+        <VStack gap="space-8">
           <Detail>
             <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
           </Detail>
@@ -266,12 +266,13 @@ export const UttakPeriodeInfo = ({
             name="oppholdÅrsak"
             control={control}
             selectValues={mapPeriodeTyper(oppholdArsakTyper)}
-            label=""
+            label={<FormattedMessage id="UttakInfo.Opphold.Årsak" />}
             hideLabel
+            className="w-48"
             readOnly={isReadOnly}
             validate={[required, notDash]}
           />
-        </div>
+        </VStack>
       )}
       {valgtPeriode.mottattDato && (
         <BodyShort>

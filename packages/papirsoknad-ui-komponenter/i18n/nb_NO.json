@@ -4,6 +4,7 @@
   "Registrering.AndreYtelser.periodeTom": "T.o.m.",
   "Registrering.AndreYtelser.periodeFom": "F.o.m.",
   "Registrering.AndreYtelser.Title": "Andre inntektskilder",
+  "Registrering.AndreYtelser.Label": "Velg inntektskilder",
 
   "Registrering.TheOtherParent.CannotSpecifyOtherParent": "Kan ikke oppgi annen forelder",
   "Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title": "Angi årsak",
@@ -92,8 +93,10 @@
   "Registrering.Rettigheter.MannAdoptererAlene": "Mann adopterer alene",
   "Registrering.Rettigheter.IkkeRelevant": "Ikke relevant",
   "Registrering.Rettigheter.Title": "Rettigheter",
+  "Registrering.Rettigheter.Label": "Velg rettigheter",
 
   "Registrering.Sprak": "Språk",
+  "Registrering.Sprak.Label": "Velg språk",
   "Registrering.Sprak.Bokmal": "Bokmål",
   "Registrering.Sprak.Nynorsk": "Nynorsk",
   "Registrering.Sprak.Engelsk": "Engelsk",
@@ -127,6 +130,7 @@
   "Registrering.VirksomhetIdentifikasjonPanel.periodeTom": "Til og med",
 
   "Registrering.EgenVirksomhet.Title": "Egen næringsvirksomhet",
+  "Registrering.EgenVirksomhet.Label": "Har søker arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene?",
   "Registrering.EgenVirksomhet.Yes": "Ja, søker har arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene",
   "Registrering.EgenVirksomhet.No": "Nei, søker har ikke arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene",
 
@@ -160,6 +164,7 @@
   "RegistrerArbeidsgiverRad.TilretteleggingFra": "Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med",
 
   "Registrering.Dekningsgrad.Title": "Dekningsgrad",
+  "Registrering.Dekningsgrad.Label": "Hvilken dekningsgrad på foreldrepenger skal brukes?",
   "Registrering.Dekningsgrad.prosent.80": "80 prosent",
   "Registrering.Dekningsgrad.prosent.100": "100 prosent",
 

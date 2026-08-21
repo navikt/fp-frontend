@@ -57,7 +57,7 @@ export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => 
         <RhfRadioGroup
           name="rettigheter"
           control={control}
-          legend=""
+          legend={intl.formatMessage({ id: 'Registrering.Rettigheter.Label' })}
           hideLegend
           readOnly={readOnly}
           validate={[required]}

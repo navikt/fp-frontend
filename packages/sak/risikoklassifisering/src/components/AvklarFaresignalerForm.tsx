@@ -86,7 +86,7 @@ export const AvklarFaresignalerForm = ({
                 <RhfRadioGroup
                   name={IKKE_REELLE_VURDERINGER_UNDERKATEGORI}
                   control={formMethods.control}
-                  legend=""
+                  legend={<FormattedMessage id="Risikopanel.RhfForm.Underkategori" />}
                   hideLegend
                   validate={[required]}
                   readOnly={readOnly}

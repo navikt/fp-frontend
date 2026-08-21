@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { BodyShort, HStack, Table } from '@navikt/ds-react';
+import { HStack, Table } from '@navikt/ds-react';
 import { RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   hasValidDecimal,
@@ -26,8 +26,6 @@ import type {
 
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
 import type { UttakAktivitetType } from './UttakAktivitetType';
-
-import styles from './uttakAktiviteterTabell.module.css';
 
 const maxLength3 = maxLength(3);
 const minValue0 = minValue(0);
@@ -201,150 +199,132 @@ export const UttakAktiviteterTabell = ({
 
   const aktiviteterFraFormState = watch('aktiviteter');
 
+  if (fields.length === 0) {
+    return null;
+  }
+
   return (
-    <div className={styles['tableOverflow']}>
-      {fields.length > 0 && (
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="RenderUttakTable.PeriodeData.Aktivitet" />
-              </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="RenderUttakTable.PeriodeData.Stonadskonto" />
-              </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="RenderUttakTable.PeriodeData.Trekk" />
-              </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="RenderUttakTable.PeriodeData.Andel" />
-              </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="RenderUttakTable.PeriodeData.Utbetalingsgrad" />
-              </Table.HeaderCell>
+    <Table>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="RenderUttakTable.PeriodeData.Aktivitet" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="RenderUttakTable.PeriodeData.Stonadskonto" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            <FormattedMessage id="RenderUttakTable.PeriodeData.Trekk" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col" align="right">
+            <FormattedMessage id="RenderUttakTable.PeriodeData.Andel" />
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col" align="right">
+            <FormattedMessage id="RenderUttakTable.PeriodeData.Utbetalingsgrad" />
+          </Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {fields.map((field, index: number) => {
+          const arbeidsforholdData = finnArbeidsforholdNavnOgProsentArbeid(
+            aktiviteter[index]!,
+            arbeidsgiverOpplysningerPerId,
+            intl,
+          );
+
+          const samletUtbetalingsgradForAndreAktiviteter = aktiviteterFraFormState.reduce(
+            (sum, aktivitet, i) => (i === index ? sum : sum + Number.parseInt(aktivitet.utbetalingsgrad, 10)),
+            0,
+          );
+
+          return (
+            <Table.Row key={field.id}>
+              <Table.DataCell textSize="small">{arbeidsforholdData.arbeidsforhold}</Table.DataCell>
+              <Table.DataCell>
+                <RhfSelect
+                  name={`aktiviteter.${index}.stønadskontoType`}
+                  control={control}
+                  selectValues={periodeTypeOptions}
+                  label={<FormattedMessage id="RenderUttakTable.PeriodeData.StønadskontoType" />}
+                  hideLabel
+                  readOnly={isReadOnly}
+                  validate={[validerUkerOgDager(getValues, index)]}
+                />
+              </Table.DataCell>
+              <Table.DataCell>
+                <HStack gap="space-8" align="center">
+                  <RhfNumericField
+                    name={`aktiviteter.${index}.weeks`}
+                    control={control}
+                    label={<FormattedMessage id="RenderUttakTable.PeriodeData.Uker" />}
+                    hideLabel
+                    htmlSize={4}
+                    readOnly={isReadOnly}
+                    validate={[
+                      required,
+                      hasValidInteger,
+                      maxLength3,
+                      validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType ?? '-', intl),
+                    ]}
+                  />
+                  <span>/</span>
+                  <RhfNumericField
+                    name={`aktiviteter.${index}.days`}
+                    control={control}
+                    label={<FormattedMessage id="RenderUttakTable.PeriodeData.Dager" />}
+                    hideLabel
+                    htmlSize={4}
+                    readOnly={isReadOnly}
+                    validate={[
+                      required,
+                      hasValidDecimal,
+                      maxLength3,
+                      validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType ?? '-', intl),
+                    ]}
+                  />
+                </HStack>
+              </Table.DataCell>
+              <Table.DataCell textSize="small" align="right">
+                {arbeidsforholdData.prosentArbeidText}
+              </Table.DataCell>
+              <Table.DataCell align="right">
+                <RhfNumericField
+                  name={`aktiviteter.${index}.utbetalingsgrad`}
+                  control={control}
+                  label={<FormattedMessage id="RenderUttakTable.PeriodeData.Utbetalingsgrad" />}
+                  hideLabel
+                  className="justify-end"
+                  htmlSize={8}
+                  validate={[
+                    required,
+                    minValue0,
+                    maxProsentValue100,
+                    hasValidDecimal,
+                    sjekkOmUtbetalingsgradMårVæreHøyereEnn0(
+                      intl,
+                      valgtPeriode,
+                      samletUtbetalingsgradForAndreAktiviteter,
+                      erOppfylt,
+                      erTilknyttetStortinget,
+                    ),
+                    sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
+                    sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
+                    sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
+                    (utbetalingsgrad: string) => {
+                      const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
+                      return harUtsettelsestype && getValues('erOppfylt') && Number.parseFloat(utbetalingsgrad) > 0
+                        ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' })
+                        : null;
+                    },
+                  ]}
+                  readOnly={isReadOnly}
+                  forceTwoDecimalDigits
+                />
+              </Table.DataCell>
             </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {fields.map((field, index: number) => {
-              const arbeidsforholdData = finnArbeidsforholdNavnOgProsentArbeid(
-                aktiviteter[index]!,
-                arbeidsgiverOpplysningerPerId,
-                intl,
-              );
-
-              const samletUtbetalingsgradForAndreAktiviteter = aktiviteterFraFormState.reduce(
-                (sum, aktivitet, i) => (i === index ? sum : sum + Number.parseInt(aktivitet.utbetalingsgrad, 10)),
-                0,
-              );
-
-              return (
-                <Table.Row key={field.id}>
-                  <Table.DataCell>
-                    <BodyShort size="small" className={styles['forsteKolWidth']}>
-                      {arbeidsforholdData.arbeidsforhold}
-                    </BodyShort>
-                  </Table.DataCell>
-                  <Table.DataCell>
-                    <div className={styles['selectStonad']}>
-                      <RhfSelect
-                        name={`aktiviteter.${index}.stønadskontoType`}
-                        control={control}
-                        selectValues={periodeTypeOptions}
-                        hideLabel
-                        label=""
-                        readOnly={isReadOnly}
-                        validate={[validerUkerOgDager(getValues, index)]}
-                      />
-                    </div>
-                  </Table.DataCell>
-                  <Table.DataCell>
-                    <HStack gap="space-8" align="center">
-                      <span className={styles['weekPosition']}>
-                        <RhfNumericField
-                          name={`aktiviteter.${index}.weeks`}
-                          control={control}
-                          label=""
-                          hideLabel
-                          className={styles['numberWidth']}
-                          readOnly={isReadOnly}
-                          validate={[
-                            required,
-                            hasValidInteger,
-                            maxLength3,
-                            validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(
-                              getValues,
-                              utsettelseType ?? '-',
-                              intl,
-                            ),
-                          ]}
-                        />
-                      </span>
-                      {isReadOnly ? <div>/</div> : <div className={styles['verticalCharPlacementInTable']}>/</div>}
-                      <RhfNumericField
-                        name={`aktiviteter.${index}.days`}
-                        control={control}
-                        className={styles['numberWidth']}
-                        label=""
-                        hideLabel
-                        readOnly={isReadOnly}
-                        validate={[
-                          required,
-                          hasValidDecimal,
-                          maxLength3,
-                          validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(
-                            getValues,
-                            utsettelseType ?? '-',
-                            intl,
-                          ),
-                        ]}
-                      />
-                    </HStack>
-                  </Table.DataCell>
-                  <Table.DataCell>
-                    <BodyShort size="small">{arbeidsforholdData.prosentArbeidText}</BodyShort>
-                  </Table.DataCell>
-                  <Table.DataCell>
-                    <div className={styles['utbetalingsgrad']}>
-                      <RhfNumericField
-                        name={`aktiviteter.${index}.utbetalingsgrad`}
-                        control={control}
-                        label={<FormattedMessage id="RenderUttakTable.PeriodeData.Utbetalingsgrad" />}
-                        hideLabel
-                        validate={[
-                          required,
-                          minValue0,
-                          maxProsentValue100,
-                          hasValidDecimal,
-                          sjekkOmUtbetalingsgradMårVæreHøyereEnn0(
-                            intl,
-                            valgtPeriode,
-                            samletUtbetalingsgradForAndreAktiviteter,
-                            erOppfylt,
-                            erTilknyttetStortinget,
-                          ),
-                          sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
-                          sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
-                          sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
-                          (utbetalingsgrad: string) => {
-                            const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
-                            return harUtsettelsestype &&
-                              getValues('erOppfylt') &&
-                              Number.parseFloat(utbetalingsgrad) > 0
-                              ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' })
-                              : null;
-                          },
-                        ]}
-                        readOnly={isReadOnly}
-                        forceTwoDecimalDigits
-                      />
-                    </div>
-                  </Table.DataCell>
-                </Table.Row>
-              );
-            })}
-          </Table.Body>
-        </Table>
-      )}
-    </div>
+          );
+        })}
+      </Table.Body>
+    </Table>
   );
 };

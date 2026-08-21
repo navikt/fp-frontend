@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Heading, Radio, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfRadioGroup, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
@@ -19,8 +19,6 @@ import { ANNEN_FORELDER_NAME_PREFIX, KAN_IKKE_OPPGI_NAME_PREFIX } from '../const
 import type { AnnenForelderFormValues, AnnenForelderSubFormValues } from '../types';
 import type { KanIkkeOppgiAnnenForelderArsak } from './kanIkkeOppgiAnnenForelderArsak';
 
-import styles from './annenForelderPanel.module.css';
-
 const filtrerLandOgLagOptions = (landkoder: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   landkoder
     .filter(({ kode }) => kode !== 'NOR')
@@ -37,8 +35,6 @@ interface Props {
 }
 
 export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakPersonnummer }: Props) => {
-  const { formatMessage } = useIntl();
-
   const {
     watch,
     control,
@@ -57,10 +53,10 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
       <RhfTextField
         name={`${ANNEN_FORELDER_NAME_PREFIX}.fødselsnummer`}
         control={control}
-        label={formatMessage({ id: 'Registrering.TheOtherParent.Fodselsnummer' })}
+        label={<FormattedMessage id="Registrering.TheOtherParent.Fodselsnummer" />}
         parse={value => (value ? value.toString().replaceAll(/\s/g, '') : value)}
         readOnly={readOnly}
-        className={styles['inputBredde']}
+        htmlSize={20}
         validate={
           kanIkkeOppgiAnnenForelder
             ? []
@@ -77,7 +73,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
         <RhfCheckbox
           name={`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`}
           control={control}
-          label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent' })}
+          label={<FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent" />}
           readOnly={readOnly}
           onChange={() => (isSubmitted ? trigger() : undefined)}
         />
@@ -85,12 +81,12 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
           <ArrowBox>
             <VStack gap="space-16">
               <Heading size="small" level="4">
-                {formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title' })}
+                <FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title" />
               </Heading>
               <RhfRadioGroup
                 name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.årsak`}
                 control={control}
-                legend=""
+                legend={<FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title" />}
                 hideLegend
                 validate={[required]}
                 readOnly={readOnly}
@@ -107,21 +103,21 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
                   <RhfSelect
                     name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
                     control={control}
-                    label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Land' })}
+                    label={<FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent.Land" />}
                     selectValues={filtrerLandOgLagOptions(sorterteLand)}
                     validate={[required]}
-                    className={styles['inputBredde']}
+                    className="self-start"
                     readOnly={readOnly}
                   />
 
                   <RhfTextField
                     name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFødselsnummer`}
                     control={control}
-                    label={formatMessage({
-                      id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer',
-                    })}
+                    label={
+                      <FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer" />
+                    }
                     validate={[required]}
-                    className={styles['inputBredde']}
+                    htmlSize={20}
                     readOnly={readOnly}
                   />
                 </>
