@@ -37,7 +37,7 @@ export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) =>
         <RhfRadioGroup
           name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}
           control={control}
-          legend=""
+          legend={<FormattedMessage id="Registrering.EgenVirksomhet.Label" />}
           hideLegend
           validate={[required]}
           readOnly={readOnly}

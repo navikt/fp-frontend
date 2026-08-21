@@ -131,7 +131,13 @@ export const VelgSakForm = ({
       )}
       <VStack gap="space-32">
         <VStack gap="space-16">
-          <RhfRadioGroup name={radioFieldName} control={formMethods.control} legend="" hideLegend validate={[required]}>
+          <RhfRadioGroup
+            name={radioFieldName}
+            control={formMethods.control}
+            legend={<FormattedMessage id="VelgSakForm.Legend" />}
+            hideLegend
+            validate={[required]}
+          >
             {lagRadioOptions(journalpost).map(option => (
               <Radio
                 key={option.value}

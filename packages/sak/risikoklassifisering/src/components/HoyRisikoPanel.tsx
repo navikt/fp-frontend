@@ -35,7 +35,7 @@ export const HoyRisikoPanel = ({
         <FormattedMessage id="Risikopanel.Panel.Tittel" />
       </AksjonspunktHelpTextHTML>
     )}
-    <div>
+    <VStack gap="space-16">
       <Faresignaler risikoklassifisering={risikoklassifisering} />
       {!!aksjonspunkt && (
         <AvklarFaresignalerForm
@@ -46,6 +46,6 @@ export const HoyRisikoPanel = ({
           faresignalVurderinger={faresignalVurderinger}
         />
       )}
-    </div>
+    </VStack>
   </VStack>
 );

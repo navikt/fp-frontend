@@ -2,6 +2,8 @@
   "MenyNyBehandlingIndex.NyForstegangsbehandling": "Opprett ny behandling",
 
   "MenyNyBehandlingIndex.OpprettNyForstegangsbehandling": "Opprett ny behandling",
+  "MenyNyBehandlingIndex.BehandlingType": "Behandlingstype",
+  "MenyNyBehandlingIndex.BehandlingArsakType": "Behandlingsårsak",
   "MenyNyBehandlingIndex.NyBehandlingEtterKlage": "Behandlingen opprettes som et resultat av klagebehandling",
   "MenyNyBehandlingIndex.Ok": "OK",
   "MenyNyBehandlingIndex.Avbryt": "Avbryt"

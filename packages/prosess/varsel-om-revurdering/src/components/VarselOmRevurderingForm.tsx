@@ -122,7 +122,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
                 <RhfRadioGroup
                   name="sendVarsel"
                   control={formMethods.control}
-                  legend=""
+                  legend={<FormattedMessage id="VarselOmRevurderingForm.SendVarselLegend" />}
                   hideLegend
                   validate={[required]}
                 >

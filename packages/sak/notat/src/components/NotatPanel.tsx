@@ -20,7 +20,7 @@ const formatTimestamp = (intl: IntlShape, opprettetTidspunkt: string): string =>
 };
 
 type FormValues = {
-  beskrivelse: string;
+  notat: string;
 };
 
 interface Props {
@@ -37,8 +37,8 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
 
   const sorterteNotater = [...notater].sort((a, b) => dayjs(a.opprettetTidspunkt).diff(dayjs(b.opprettetTidspunkt)));
 
-  const lagre = (values: FormValues) => {
-    lagreNotat({ saksnummer, notat: values.beskrivelse });
+  const lagre = ({ notat }: FormValues) => {
+    lagreNotat({ saksnummer, notat });
 
     formMethods.reset();
   };
@@ -124,9 +124,10 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
           <RhfForm formMethods={formMethods} onSubmit={lagre}>
             <VStack gap="space-16">
               <RhfTextarea
-                name="beskrivelse"
+                name="notat"
                 control={formMethods.control}
-                label=""
+                label={<FormattedMessage id="NotatPanel.Notat" />}
+                hideLabel
                 maxLength={1000}
                 validate={[required, maxLength1000, hasValidText]}
               />

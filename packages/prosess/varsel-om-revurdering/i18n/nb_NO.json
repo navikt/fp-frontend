@@ -4,6 +4,7 @@
   "VarselOmRevurderingForm.Etterkontroll": "Etterkontroll",
   "VarselOmRevurderingForm.Manuell": "Manuell",
   "VarselOmRevurderingForm.Bekreft": "Bekreft og fortsett",
+  "VarselOmRevurderingForm.SendVarselLegend": "Skal det sendes varsel om revurdering til søker?",
   "VarselOmRevurderingForm.IkkeSendVarsel": "Ikke send varsel til søker",
   "VarselOmRevurderingForm.SendVarsel": "Send varsel til søker",
   "VarselOmRevurderingForm.BegrunnelseForSvar": "Begrunnelse",

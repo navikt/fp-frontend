@@ -51,7 +51,12 @@ export const EndreUtlandModal = ({
             </Dialog.Title>
           </Dialog.Header>
           <Dialog.Body>
-            <RhfCheckboxGroup name="fagsakMarkeringer" control={formMethods.control} legend="" hideLegend>
+            <RhfCheckboxGroup
+              name="fagsakMarkeringer"
+              control={formMethods.control}
+              legend={<FormattedMessage id="MenyEndreUtlandIndex.VelgSaksmarkering" />}
+              hideLegend
+            >
               {fagsakMarkeringerKodeverk.map(markering => (
                 <Checkbox key={markering.kode} value={markering.kode}>
                   {markering.navn}

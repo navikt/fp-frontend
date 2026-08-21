@@ -44,7 +44,7 @@ export const KlageVurderingRadioOptionsNfp = ({
       <RhfRadioGroup
         name="klageVurdering"
         control={control}
-        legend=""
+        legend={<FormattedMessage id="Klage.ResolveKlage.VurderingLegend" />}
         hideLegend
         validate={[required]}
         readOnly={readOnly}
@@ -73,7 +73,7 @@ export const KlageVurderingRadioOptionsNfp = ({
             <RhfRadioGroup
               name="klageVurderingOmgjør"
               control={control}
-              legend=""
+              legend={<FormattedMessage id="Klage.Behandle.OmgjørLegend" />}
               hideLegend
               validate={[required]}
               readOnly={readOnly}

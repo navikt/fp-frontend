@@ -13,7 +13,7 @@ describe('MenyNyBehandlingIndex', () => {
     render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'BT-003');
+    await userEvent.selectOptions(screen.getByLabelText('Behandlingstype'), 'BT-003');
 
     await userEvent.click(screen.getByText('OK'));
 
@@ -38,9 +38,9 @@ describe('MenyNyBehandlingIndex', () => {
     render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'BT-002');
+    await userEvent.selectOptions(screen.getByLabelText('Behandlingstype'), 'BT-002');
 
-    await userEvent.click(screen.getByRole('checkbox', { hidden: true }));
+    await userEvent.click(screen.getByLabelText('Behandlingen opprettes som et resultat av klagebehandling'));
 
     await userEvent.click(screen.getByText('OK'));
 
@@ -64,7 +64,7 @@ describe('MenyNyBehandlingIndex', () => {
     render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'BT-002');
+    await userEvent.selectOptions(screen.getByLabelText('Behandlingstype'), 'BT-002');
 
     await userEvent.click(screen.getByText('OK'));
 
@@ -88,9 +88,9 @@ describe('MenyNyBehandlingIndex', () => {
     render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'BT-004');
+    await userEvent.selectOptions(screen.getByLabelText('Behandlingstype'), 'BT-004');
 
-    await userEvent.selectOptions(screen.getAllByRole('combobox', { hidden: true })[1]!, 'RE-KLAG-U-INNTK');
+    await userEvent.selectOptions(screen.getByLabelText('Behandlingsårsak'), 'RE-KLAG-U-INNTK');
 
     await userEvent.click(screen.getByText('OK'));
 

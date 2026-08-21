@@ -135,7 +135,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfris
               <RhfRadioGroup
                 name="gyldigSenFremsetting"
                 control={formMethods.control}
-                legend=""
+                legend={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.GyldigSenFremsettingLegend" />}
                 hideLegend
                 validate={[required]}
                 readOnly={isReadOnly}

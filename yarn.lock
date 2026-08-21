@@ -4256,7 +4256,6 @@ __metadata:
     react-hook-form: "npm:7.85.0"
     react-intl: "npm:10.1.20"
     storybook: "npm:10.5.8"
-    stylelint: "npm:17.14.1"
     typescript: "npm:6.0.3"
     vite: "npm:8.2.1"
     vitest: "npm:4.1.10"

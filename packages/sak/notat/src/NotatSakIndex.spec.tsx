@@ -24,8 +24,7 @@ describe('NotatSakIndex', () => {
 
     expect(screen.getByText('Kun saksbehandlere får se notatet')).toBeInTheDocument();
 
-    const notatInput = screen.getByRole('textbox');
-    await userEvent.type(notatInput, 'Dette er et notat');
+    await userEvent.type(screen.getByLabelText('Notat'), 'Dette er et notat');
 
     await userEvent.click(screen.getByText('Legg til notat'));
 
