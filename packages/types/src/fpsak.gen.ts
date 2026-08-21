@@ -128,14 +128,7 @@ export type foreldrepenger_behandlingslager_behandling_BehandlingResultatType =
 export type foreldrepenger_behandlingslager_behandling_BehandlingStatus = 'AVSLU' | 'FVED' | 'IVED' | 'OPPRE' | 'UTRED';
 
 export type foreldrepenger_behandlingslager_behandling_BehandlingType =
-  | 'BT-002'
-  | 'BT-003'
-  | 'BT-004'
-  | 'BT-008'
-  | 'BT-006'
-  | 'BT-007'
-  | 'BT-009'
-  | '-';
+  'BT-002' | 'BT-003' | 'BT-004' | 'BT-008' | 'BT-006' | 'BT-007' | 'BT-009' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType =
   | 'RE-LOV'
@@ -361,10 +354,7 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
 export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktStatus = 'AVBR' | 'OPPR' | 'UTFO';
 
 export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktType =
-  | 'AUTO'
-  | 'MANU'
-  | 'OVST'
-  | 'SAOV';
+  'AUTO' | 'MANU' | 'OVST' | 'SAOV';
 
 export type foreldrepenger_behandlingslager_behandling_vedtak_Vedtaksbrev = 'AUTOMATISK' | 'FRITEKST' | 'INGEN' | '-';
 
@@ -429,10 +419,7 @@ export type foreldrepenger_behandlingslager_behandling_vilkår_VilkårType =
   | 'SVP_VK_1';
 
 export type foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType =
-  | 'OPPFYLT'
-  | 'IKKE_OPPFYLT'
-  | 'IKKE_VURDERT'
-  | '-';
+  'OPPFYLT' | 'IKKE_OPPFYLT' | 'IKKE_VURDERT' | '-';
 
 export type foreldrepenger_behandlingslager_geografisk_Språkkode = 'NB' | 'NN' | 'EN' | '-';
 
@@ -477,11 +464,7 @@ export type tjenester_behandling_dto_AsyncPollingStatus = {
 };
 
 export type tjenester_behandling_dto_AsyncPollingStatus_Status =
-  | 'PENDING'
-  | 'COMPLETE'
-  | 'DELAYED'
-  | 'CANCELLED'
-  | 'HALTED';
+  'PENDING' | 'COMPLETE' | 'DELAYED' | 'CANCELLED' | 'HALTED';
 
 export type tjenester_behandling_dto_behandling_BehandlingsresultatDto = {
   avslagsarsak?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
@@ -740,21 +723,10 @@ export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto = (
 };
 
 export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak =
-  | 'FEIL_FAKTA'
-  | 'FEIL_LOV'
-  | 'SKJØNN'
-  | 'UTREDNING'
-  | 'SAKSFLYT'
-  | 'BEGRUNNELSE'
-  | 'ANNET'
-  | 'FEIL_REGEL';
+  'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | 'ANNET' | 'FEIL_REGEL';
 
 export type foreldrepenger_behandlingslager_behandling_aktivitetskrav_AktivitetskravPermisjonType =
-  | '-'
-  | 'UTDANNING'
-  | 'FORELDREPENGER'
-  | 'PERMITTERING'
-  | 'ANNEN_PERMISJON';
+  '-' | 'UTDANNING' | 'FORELDREPENGER' | 'PERMITTERING' | 'ANNEN_PERMISJON';
 
 export type foreldrepenger_behandlingslager_behandling_beregning_AktivitetStatus =
   | 'AAP'
@@ -787,21 +759,10 @@ export type foreldrepenger_behandlingslager_behandling_beregning_Inntektskategor
   | '-';
 
 export type foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType =
-  | 'ADPSJN'
-  | 'OMSRGO'
-  | 'FODSL'
-  | 'TERM'
-  | '-';
+  'ADPSJN' | 'OMSRGO' | 'FODSL' | 'TERM' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType =
-  | 'FP_VK_4'
-  | 'FP_VK_8'
-  | 'FP_VK_5'
-  | 'FP_VK_33'
-  | 'FP_VK_16'
-  | 'FP_VK_8F'
-  | 'FP_VK_16S'
-  | '-';
+  'FP_VK_4' | 'FP_VK_8' | 'FP_VK_5' | 'FP_VK_33' | 'FP_VK_16' | 'FP_VK_8F' | 'FP_VK_16S' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_innsyn_InnsynResultatType = 'INNV' | 'DELV' | 'AVVIST';
 
@@ -829,11 +790,7 @@ export type foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel =
   | '-';
 
 export type foreldrepenger_behandlingslager_behandling_klage_KlageMedholdÅrsak =
-  | 'NYE_OPPLYSNINGER'
-  | 'ULIK_REGELVERKSTOLKNING'
-  | 'ULIK_VURDERING'
-  | 'PROSESSUELL_FEIL'
-  | '-';
+  'NYE_OPPLYSNINGER' | 'ULIK_REGELVERKSTOLKNING' | 'ULIK_VURDERING' | 'PROSESSUELL_FEIL' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_klage_KlageVurdering =
   | 'OPPHEVE_YTELSESVEDTAK'
@@ -844,10 +801,7 @@ export type foreldrepenger_behandlingslager_behandling_klage_KlageVurdering =
   | '-';
 
 export type foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør =
-  | 'GUNST_MEDHOLD_I_KLAGE'
-  | 'DELVIS_MEDHOLD_I_KLAGE'
-  | 'UGUNST_MEDHOLD_I_KLAGE'
-  | '-';
+  'GUNST_MEDHOLD_I_KLAGE' | 'DELVIS_MEDHOLD_I_KLAGE' | 'UGUNST_MEDHOLD_I_KLAGE' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType =
   | 'AAP'
@@ -874,31 +828,18 @@ export type foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAkti
 export type foreldrepenger_behandlingslager_behandling_søknad_ForeldreType = 'MOR' | 'FAR' | 'MEDMOR' | 'ANDRE';
 
 export type foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling =
-  | '-'
-  | 'TILBAKEKR_OPPRETT'
-  | 'TILBAKEKR_IGNORER'
-  | 'TILBAKEKR_INNTREKK'
-  | 'TILBAKEKR_OPPDATER';
+  '-' | 'TILBAKEKR_OPPRETT' | 'TILBAKEKR_IGNORER' | 'TILBAKEKR_INNTREKK' | 'TILBAKEKR_OPPDATER';
 
 export type foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak = 'SYKEPENGER' | 'FERIE';
 
 export type foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde =
-  | 'ENDRET_AV_SAKSBEHANDLER'
-  | 'REGISTRERT_AV_SAKSBEHANDLER'
-  | 'TIDLIGERE_VEDTAK'
-  | 'SØKNAD';
+  'ENDRET_AV_SAKSBEHANDLER' | 'REGISTRERT_AV_SAKSBEHANDLER' | 'TIDLIGERE_VEDTAK' | 'SØKNAD';
 
 export type foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType =
-  | 'HEL_TILRETTELEGGING'
-  | 'DELVIS_TILRETTELEGGING'
-  | 'INGEN_TILRETTELEGGING';
+  'HEL_TILRETTELEGGING' | 'DELVIS_TILRETTELEGGING' | 'INGEN_TILRETTELEGGING';
 
 export type foreldrepenger_behandlingslager_behandling_verge_VergeType =
-  | 'BARN'
-  | 'FBARN'
-  | 'VOKSEN'
-  | 'ADVOKAT'
-  | 'ANNEN_F';
+  'BARN' | 'FBARN' | 'VOKSEN' | 'ADVOKAT' | 'ANNEN_F';
 
 export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_MorsAktivitet =
   | '-'
@@ -913,18 +854,10 @@ export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_MorsAktiv
   | 'IKKE_OPPGITT';
 
 export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_FordelingPeriodeKilde =
-  | 'SØKNAD'
-  | 'TIDLIGERE_VEDTAK'
-  | 'ANDRE_NAV_VEDTAK'
-  | 'SAKSBEHANDLER';
+  'SØKNAD' | 'TIDLIGERE_VEDTAK' | 'ANDRE_NAV_VEDTAK' | 'SAKSBEHANDLER';
 
 export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType =
-  | 'FELLESPERIODE'
-  | 'MØDREKVOTE'
-  | 'FEDREKVOTE'
-  | 'FORELDREPENGER'
-  | 'FORELDREPENGER_FØR_FØDSEL'
-  | '-';
+  'FELLESPERIODE' | 'MØDREKVOTE' | 'FEDREKVOTE' | 'FORELDREPENGER' | 'FORELDREPENGER_FØR_FØDSEL' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak =
   | '-'
@@ -934,11 +867,7 @@ export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_Op
   | 'UTTAK_FORELDREPENGER_ANNEN_FORELDER';
 
 export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OverføringÅrsak =
-  | 'INSTITUSJONSOPPHOLD_ANNEN_FORELDER'
-  | 'SYKDOM_ANNEN_FORELDER'
-  | 'IKKE_RETT_ANNEN_FORELDER'
-  | 'ALENEOMSORG'
-  | '-';
+  'INSTITUSJONSOPPHOLD_ANNEN_FORELDER' | 'SYKDOM_ANNEN_FORELDER' | 'IKKE_RETT_ANNEN_FORELDER' | 'ALENEOMSORG' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_UtsettelseÅrsak =
   | 'ARBEID'
@@ -954,9 +883,7 @@ export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_Ut
 export type foreldrepenger_behandlingslager_fagsak_FagsakYtelseType = 'ES' | 'FP' | 'SVP' | '-';
 
 export type foreldrepenger_behandlingslager_fagsak_egenskaper_UtlandDokumentasjonStatus =
-  | 'DOKUMENTASJON_ER_INNHENTET'
-  | 'DOKUMENTASJON_VIL_BLI_INNHENTET'
-  | 'DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET';
+  'DOKUMENTASJON_ER_INNHENTET' | 'DOKUMENTASJON_VIL_BLI_INNHENTET' | 'DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET';
 
 export type foreldrepenger_behandlingslager_risikoklassifisering_FaresignalVurdering =
   | 'INNVIRKNING'
@@ -969,18 +896,10 @@ export type foreldrepenger_behandlingslager_risikoklassifisering_FaresignalVurde
 export type foreldrepenger_behandlingslager_uttak_PeriodeResultatType = 'INNVILGET' | 'AVSLÅTT' | 'MANUELL_BEHANDLING';
 
 export type foreldrepenger_behandlingslager_uttak_UttakArbeidType =
-  | 'ORDINÆRT_ARBEID'
-  | 'SELVSTENDIG_NÆRINGSDRIVENDE'
-  | 'FRILANS'
-  | 'ANNET';
+  'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
 
 export type foreldrepenger_behandlingslager_uttak_fp_GraderingAvslagÅrsak =
-  | '-'
-  | '4504'
-  | '4501'
-  | '4502'
-  | '4503'
-  | '4523';
+  '-' | '4504' | '4501' | '4502' | '4503' | '4523';
 
 export type foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak =
   | '-'
@@ -1100,15 +1019,7 @@ export type foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak =
   | '4117';
 
 export type foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType =
-  | 'ARBEID'
-  | 'FERIE'
-  | 'SYKDOM_SKADE'
-  | 'SØKER_INNLAGT'
-  | 'BARN_INNLAGT'
-  | 'HV_OVELSE'
-  | 'NAV_TILTAK'
-  | 'FRI'
-  | '-';
+  'ARBEID' | 'FERIE' | 'SYKDOM_SKADE' | 'SØKER_INNLAGT' | 'BARN_INNLAGT' | 'HV_OVELSE' | 'NAV_TILTAK' | 'FRI' | '-';
 
 export type foreldrepenger_behandlingslager_virksomhet_ArbeidType =
   | 'ETTERLØNN_SLUTTPAKKE'
@@ -1140,10 +1051,7 @@ export type foreldrepenger_domene_arbeidInntektsmelding_BekreftArbeidMedPermisjo
 };
 
 export type foreldrepenger_domene_iay_modell_kodeverk_BekreftetPermisjonStatus =
-  | '-'
-  | 'BRUK_PERMISJON'
-  | 'IKKE_BRUK_PERMISJON'
-  | 'UGYLDIGE_PERIODER';
+  '-' | 'BRUK_PERMISJON' | 'IKKE_BRUK_PERMISJON' | 'UGYLDIGE_PERIODER';
 
 export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType =
   | 'PERMISJON'
@@ -1431,16 +1339,12 @@ export type foreldrepenger_domene_rest_dto_fordeling_FordelBeregningsgrunnlagAnd
   aktivitetStatus?: foreldrepenger_behandlingslager_behandling_beregning_AktivitetStatus;
   andelsnr?: number;
   arbeidsforholdId?: string;
-  arbeidsforholdType?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
   arbeidsgiverId?: string;
-  beregningsperiodeFom?: string;
-  beregningsperiodeTom?: string;
   fastsatteVerdier: foreldrepenger_domene_rest_dto_fordeling_FordelFastsatteVerdierDto;
   forrigeArbeidsinntektPrÅr?: number;
   forrigeInntektskategori?: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
   forrigeRefusjonPrÅr?: number;
   kilde?: foreldrepenger_domene_modell_kodeverk_AndelKilde;
-  lagtTilAvSaksbehandler?: boolean;
   nyAndel: boolean;
 };
 
@@ -1462,9 +1366,7 @@ export type foreldrepenger_domene_rest_dto_fordeling_FordelFastsatteVerdierDto =
 };
 
 export type foreldrepenger_domene_uttak_fakta_uttak_DokumentasjonVurderingBehov_Behov_Type =
-  | 'UTSETTELSE'
-  | 'OVERFØRING'
-  | 'UTTAK';
+  'UTSETTELSE' | 'OVERFØRING' | 'UTTAK';
 
 export type foreldrepenger_domene_uttak_fakta_uttak_DokumentasjonVurderingBehov_Behov_Årsak =
   | 'INNLEGGELSE_SØKER'
@@ -1649,10 +1551,7 @@ export type tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto = {
 };
 
 export type tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde =
-  | 'SØKNAD'
-  | 'INNTEKTSMELDING'
-  | 'REGISTRERT_AV_SAKSBEHANDLER'
-  | 'TIDLIGERE_VEDTAK';
+  'SØKNAD' | 'INNTEKTSMELDING' | 'REGISTRERT_AV_SAKSBEHANDLER' | 'TIDLIGERE_VEDTAK';
 
 export type tjenester_behandling_svp_SvpTilretteleggingDatoDto = {
   fom: string;
@@ -1715,10 +1614,7 @@ export type tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehov
 };
 
 export type tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto_Vurdering =
-  | 'GODKJENT'
-  | 'GODKJENT_AUTOMATISK'
-  | 'IKKE_GODKJENT'
-  | 'IKKE_DOKUMENTERT';
+  'GODKJENT' | 'GODKJENT_AUTOMATISK' | 'IKKE_GODKJENT' | 'IKKE_DOKUMENTERT';
 
 export type tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDto = {
   begrunnelse?: string;
@@ -1985,9 +1881,7 @@ export type tjenester_registrering_dto_OverføringsperiodeDto = {
 };
 
 export type tjenester_registrering_dto_RettigheterDto =
-  | 'ANNEN_FORELDER_DOED'
-  | 'OVERTA_FORELDREANSVARET_ALENE'
-  | 'MANN_ADOPTERER_ALENE';
+  'ANNEN_FORELDER_DOED' | 'OVERTA_FORELDREANSVARET_ALENE' | 'MANN_ADOPTERER_ALENE';
 
 export type tjenester_registrering_dto_UtenlandsoppholdDto = {
   land: string;
@@ -2206,9 +2100,7 @@ export type tjenester_registrering_svp_SvpTilretteleggingSelvstendigNæringsdriv
 };
 
 export type tjenester_registrering_svp_SvpTilretteleggingTypeDto =
-  | 'HEL_TILRETTELEGGING'
-  | 'DELVIS_TILRETTELEGGING'
-  | 'INGEN_TILRETTELEGGING';
+  'HEL_TILRETTELEGGING' | 'DELVIS_TILRETTELEGGING' | 'INGEN_TILRETTELEGGING';
 
 export type tjenester_registrering_svp_SvpTilretteleggingVirksomhetDto = {
   behovsdato?: string;
@@ -2270,12 +2162,7 @@ export type foreldrepenger_behandling_aksjonspunkt_OverstyringAksjonspunktDto = 
 };
 
 export type foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype =
-  | 'ALENEOMSORG'
-  | 'BEGGE_RETT'
-  | 'BEGGE_RETT_EØS'
-  | 'BARE_MOR_RETT'
-  | 'BARE_FAR_RETT'
-  | 'BARE_FAR_RETT_MOR_UFØR';
+  'ALENEOMSORG' | 'BEGGE_RETT' | 'BEGGE_RETT_EØS' | 'BARE_MOR_RETT' | 'BARE_FAR_RETT' | 'BARE_FAR_RETT_MOR_UFØR';
 
 export type foreldrepenger_domene_rest_dto_FastsatteVerdierDto = {
   fastsattBeløp?: number;
@@ -2288,19 +2175,12 @@ export type foreldrepenger_domene_rest_dto_FastsatteVerdierDto = {
 };
 
 export type foreldrepenger_domene_rest_dto_FastsettBeregningsgrunnlagAndelDto = {
-  aktivitetStatus?: foreldrepenger_behandlingslager_behandling_beregning_AktivitetStatus;
   andelsnr?: number;
-  arbeidsforholdId?: string;
-  arbeidsforholdType?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
-  arbeidsgiverId?: string;
-  beregningsperiodeFom?: string;
-  beregningsperiodeTom?: string;
   fastsatteVerdier: foreldrepenger_domene_rest_dto_FastsatteVerdierDto;
   forrigeArbeidsinntektPrÅr?: number;
   forrigeInntektskategori?: foreldrepenger_behandlingslager_behandling_beregning_Inntektskategori;
   forrigeRefusjonPrÅr?: number;
   lagtTilAvSaksbehandler?: boolean;
-  nyAndel: boolean;
 };
 
 export type foreldrepenger_domene_rest_dto_OverstyrBeregningsaktiviteterDto = {
@@ -2401,11 +2281,7 @@ export type tjenester_behandling_ytelsefordeling_OverstyringAvklarStartdatoForPe
 };
 
 export type foreldrepenger_behandlingslager_behandling_anke_AnkeOmgjørÅrsak =
-  | 'NYE_OPPLYSNINGER'
-  | 'ULIK_REGELVERKSTOLKNING'
-  | 'ULIK_VURDERING'
-  | 'PROSESSUELL_FEIL'
-  | '-';
+  'NYE_OPPLYSNINGER' | 'ULIK_REGELVERKSTOLKNING' | 'ULIK_VURDERING' | 'PROSESSUELL_FEIL' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_anke_AnkeVurdering =
   | 'ANKE_STADFESTE_YTELSESVEDTAK'
@@ -2416,10 +2292,7 @@ export type foreldrepenger_behandlingslager_behandling_anke_AnkeVurdering =
   | '-';
 
 export type foreldrepenger_behandlingslager_behandling_anke_AnkeVurderingOmgjør =
-  | 'ANKE_TIL_GUNST'
-  | 'ANKE_DELVIS_OMGJOERING_TIL_GUNST'
-  | 'ANKE_TIL_UGUNST'
-  | '-';
+  'ANKE_TIL_GUNST' | 'ANKE_DELVIS_OMGJOERING_TIL_GUNST' | 'ANKE_TIL_UGUNST' | '-';
 
 export type tjenester_behandling_anke_AnkeVurderingResultatDto = {
   ankeOmgjørÅrsak?: foreldrepenger_behandlingslager_behandling_anke_AnkeOmgjørÅrsak;
@@ -2519,8 +2392,6 @@ export type foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak =
   | 'ENDRING_I_ARBEIDSFORHOLDS_ID'
   | 'PERMISJON_UTEN_SLUTTDATO';
 
-export type foreldrepenger_domene_arbeidsforhold_impl_InaktivArbeidsforholdÅrsak = 'INAKTIVT_ARBEIDSFORHOLD' | 'PERMISJON';
-
 export type foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak = 'NY' | 'ENDRING';
 
 export type foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType =
@@ -2593,11 +2464,11 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto
   årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
 };
 
+export type foreldrepenger_domene_arbeidsforhold_impl_InaktivArbeidsforholdÅrsak =
+  'INAKTIVT_ARBEIDSFORHOLD' | 'PERMISJON';
+
 export type foreldrepenger_domene_iay_modell_kodeverk_InntektspostType =
-  | 'LØNN'
-  | 'YTELSE'
-  | 'SELVSTENDIG_NÆRINGSDRIVENDE'
-  | 'NÆRING_FISKE_FANGST_FAMBARNEHAGE';
+  'LØNN' | 'YTELSE' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'NÆRING_FISKE_FANGST_FAMBARNEHAGE';
 
 export type foreldrepenger_domene_arbeidInntektsmelding_ManueltArbeidsforholdDto = {
   arbeidsgiverIdent: string;
@@ -2768,10 +2639,7 @@ export type folketrygdloven_kalkulus_kodeverk_Hjemmel =
   | '-';
 
 export type folketrygdloven_kalkulus_kodeverk_InntektAktivitetType =
-  | 'ARBEIDSTAKERINNTEKT'
-  | 'FRILANSINNTEKT'
-  | 'YTELSEINNTEKT'
-  | '-';
+  'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-';
 
 export type folketrygdloven_kalkulus_kodeverk_Inntektskategori =
   | 'ARBEIDSTAKER'
@@ -2787,10 +2655,7 @@ export type folketrygdloven_kalkulus_kodeverk_Inntektskategori =
   | '-';
 
 export type folketrygdloven_kalkulus_kodeverk_LønnsendringScenario =
-  | 'MANUELT_BEHANDLET'
-  | 'DELVIS_MÅNEDSINNTEKT_SISTE_MND'
-  | 'FULL_MÅNEDSINNTEKT_EN_MND'
-  | 'FULL_MÅNEDSINNTEKT_TO_MND';
+  'MANUELT_BEHANDLET' | 'DELVIS_MÅNEDSINNTEKT_SISTE_MND' | 'FULL_MÅNEDSINNTEKT_EN_MND' | 'FULL_MÅNEDSINNTEKT_TO_MND';
 
 export type folketrygdloven_kalkulus_kodeverk_OpptjeningAktivitetType =
   | 'AAP'
@@ -2845,12 +2710,7 @@ export type folketrygdloven_kalkulus_kodeverk_SammenligningsgrunnlagType =
   | 'SAMMENLIGNING_MIDL_INAKTIV';
 
 export type folketrygdloven_kalkulus_kodeverk_VirksomhetType =
-  | 'DAGMAMMA'
-  | 'FISKE'
-  | 'FRILANSER'
-  | 'JORDBRUK_SKOGBRUK'
-  | 'ANNEN'
-  | '-';
+  'DAGMAMMA' | 'FISKE' | 'FRILANSER' | 'JORDBRUK_SKOGBRUK' | 'ANNEN' | '-';
 
 export type folketrygdloven_kalkulus_response_beregningsgrunnlag_gui_ATogFLISammeOrganisasjonDto = {
   aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
@@ -3621,9 +3481,7 @@ export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_AntallBarn = {
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_FødselDokumetasjonStatus =
-  | 'DOKUMENTERT'
-  | 'IKKE_DOKUMENTERT'
-  | 'IKKE_VURDERT';
+  'DOKUMENTERT' | 'IKKE_DOKUMENTERT' | 'IKKE_VURDERT';
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_GjeldendeBarn = {
   barn: tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData;
@@ -3714,12 +3572,7 @@ export type tjenester_behandling_innsyn_InnsynsbehandlingDto = {
 };
 
 export type foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak =
-  | 'KLAGET_FOR_SENT'
-  | 'KLAGE_UGYLDIG'
-  | 'IKKE_PAKLAGD_VEDTAK'
-  | 'KLAGER_IKKE_PART'
-  | 'IKKE_KONKRET'
-  | 'IKKE_SIGNERT';
+  'KLAGET_FOR_SENT' | 'KLAGE_UGYLDIG' | 'IKKE_PAKLAGD_VEDTAK' | 'KLAGER_IKKE_PART' | 'IKKE_KONKRET' | 'IKKE_SIGNERT';
 
 export type tjenester_behandling_klage_KlageFormkravResultatDto = {
   avvistÅrsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
@@ -3783,10 +3636,7 @@ export type foreldrepenger_domene_opptjening_dto_OpptjeningIUtlandDokStatusDto =
 };
 
 export type foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetKlassifisering =
-  | 'BEKREFTET_GODKJENT'
-  | 'BEKREFTET_AVVIST'
-  | 'ANTATT_GODKJENT'
-  | 'MELLOMLIGGENDE_PERIODE';
+  'BEKREFTET_GODKJENT' | 'BEKREFTET_AVVIST' | 'ANTATT_GODKJENT' | 'MELLOMLIGGENDE_PERIODE';
 
 export type foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto = {
   fastsattOpptjeningAktivitetList: Array<foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_FastsattOpptjeningAktivitetDto>;
@@ -3848,18 +3698,7 @@ export type foreldrepenger_behandlingslager_aktør_NavBrukerKjønn = 'K' | 'M' |
 export type foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode = 'UDEF' | 'SPSF' | 'SPFO';
 
 export type foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType =
-  | 'ENKE'
-  | 'GIFT'
-  | 'GJPA'
-  | 'GLAD'
-  | 'NULL'
-  | 'REPA'
-  | 'SAMB'
-  | 'SEPA'
-  | 'SEPR'
-  | 'SKIL'
-  | 'SKPA'
-  | 'UGIF';
+  'ENKE' | 'GIFT' | 'GJPA' | 'GLAD' | 'NULL' | 'REPA' | 'SAMB' | 'SEPA' | 'SEPR' | 'SKIL' | 'SKPA' | 'UGIF';
 
 export type tjenester_behandling_personopplysning_PersonadresseDto = {
   adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
@@ -3894,15 +3733,7 @@ export type tjenester_behandling_personopplysning_PersonoversiktDto = {
 export type foreldrepenger_behandlingslager_aktør_OppholdstillatelseType = 'MIDLERTIDIG' | 'PERMANENT';
 
 export type foreldrepenger_behandlingslager_aktør_PersonstatusType =
-  | 'ADNR'
-  | 'BOSA'
-  | 'DØD'
-  | 'FOSV'
-  | 'FØDR'
-  | 'UREG'
-  | 'UTPE'
-  | 'UTVA'
-  | '-';
+  'ADNR' | 'BOSA' | 'DØD' | 'FOSV' | 'FØDR' | 'UREG' | 'UTPE' | 'UTVA' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapDekningType =
   | 'FTL_2_6'
@@ -3920,11 +3751,7 @@ export type foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapDekn
   | '-';
 
 export type foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapManuellVurderingType =
-  | '-'
-  | 'MEDLEM'
-  | 'UNNTAK'
-  | 'IKKE_RELEVANT'
-  | 'OPPHOR_PGA_ENDRING_I_TPS';
+  '-' | 'MEDLEM' | 'UNNTAK' | 'IKKE_RELEVANT' | 'OPPHOR_PGA_ENDRING_I_TPS';
 
 export type foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapType = 'ENDELIG' | 'FORELOPIG' | 'AVKLARES';
 
@@ -4423,12 +4250,7 @@ export type foreldrepenger_kontrakter_simulering_resultat_kodeverk_Fagområde =
 export type foreldrepenger_kontrakter_simulering_resultat_kodeverk_MottakerType = 'BRUKER' | 'ARBG_ORG' | 'ARBG_PRIV';
 
 export type foreldrepenger_kontrakter_simulering_resultat_kodeverk_RadId =
-  | 'nyttBeløp'
-  | 'tidligereUtbetalt'
-  | 'differanse'
-  | 'resultatEtterMotregning'
-  | 'inntrekkNesteMåned'
-  | 'resultat';
+  'nyttBeløp' | 'tidligereUtbetalt' | 'differanse' | 'resultatEtterMotregning' | 'inntrekkNesteMåned' | 'resultat';
 
 export type foreldrepenger_kontrakter_simulering_resultat_v1_PeriodeDto = {
   fom: string;
@@ -4565,9 +4387,7 @@ export type foreldrepenger_behandlingslager_uttak_fp_ManuellBehandlingÅrsak =
   | '5032';
 
 export type foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak_LovEndring =
-  | 'KREVER_SAMMENHENGENDE_UTTAK'
-  | 'FRITT_UTTAK'
-  | 'MINSTERETT_2022';
+  'KREVER_SAMMENHENGENDE_UTTAK' | 'FRITT_UTTAK' | 'MINSTERETT_2022';
 
 export type foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak_SynligFor = 'MOR' | 'IKKE_MOR';
 
@@ -4680,14 +4500,7 @@ export type tjenester_behandling_ytelsefordeling_YtelseFordelingDto_OppgittDekni
 };
 
 export type foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType =
-  | 'EKTE'
-  | 'BARN'
-  | 'FARA'
-  | 'MORA'
-  | 'REPA'
-  | 'MMOR'
-  | 'ANPA'
-  | '-';
+  'EKTE' | 'BARN' | 'FARA' | 'MORA' | 'REPA' | 'MMOR' | 'ANPA' | '-';
 
 export type tjenester_behandling_ytelsefordeling_OmsorgOgRettDto = {
   manuellBehandlingResultat?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_ManuellBehandlingResultat;
@@ -4896,11 +4709,7 @@ export type tjenester_fagsak_dto_FagsakDto = {
 };
 
 export type foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør =
-  | 'BESL'
-  | 'SBH'
-  | 'SOKER'
-  | 'ARBEIDSGIVER'
-  | 'VL';
+  'BESL' | 'SBH' | 'SOKER' | 'ARBEIDSGIVER' | 'VL';
 
 export type foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType =
   | 'ANKE_MERKNADER'
@@ -4949,9 +4758,7 @@ export type foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeTy
   | 'FAKTA_UTTAK_EØS';
 
 export type foreldrepenger_behandlingslager_risikoklassifisering_Kontrollresultat =
-  | 'HOY'
-  | 'IKKE_HOY'
-  | 'IKKE_KLASSIFISERT';
+  'HOY' | 'IKKE_HOY' | 'IKKE_KLASSIFISERT';
 
 export type foreldrepenger_domene_person_verge_dto_VergeBehandlingsmenyEnum = 'SKJUL' | 'OPPRETT' | 'FJERN';
 
@@ -5232,10 +5039,7 @@ export type tjenester_infotrygd_InfotrygdVedtakDto_VedtakKjede = {
 };
 
 export type foreldrepenger_behandlingslager_behandling_dokument_MellomlagringType =
-  | 'VARSEL_REVURDERING'
-  | 'INNHENT_OPPLYSNINGER'
-  | 'VEDTAKSBREV'
-  | 'PAPIRSØKNAD';
+  'VARSEL_REVURDERING' | 'INNHENT_OPPLYSNINGER' | 'VEDTAKSBREV' | 'PAPIRSØKNAD';
 
 export type tjenester_mellomlagring_MellomlagringRestTjeneste_HentMellomlagringDto = {
   behandlingUuid: string;
