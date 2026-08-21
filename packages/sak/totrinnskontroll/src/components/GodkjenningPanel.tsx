@@ -34,8 +34,7 @@ const harIkkeValgtMinstEnFakta = (
 type Props = {
   index: number;
   totrinnskontrollSkjermlenkeContext: (
-    | TotrinnskontrollSkjermlenkeContext
-    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
   readOnly: boolean;
 };

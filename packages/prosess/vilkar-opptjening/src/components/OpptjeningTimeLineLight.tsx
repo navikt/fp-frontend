@@ -34,14 +34,12 @@ const getStatus = (klasseKode: FastsattOpptjeningAktivitet['klasse']) => {
 };
 
 const lagTidslinjePerioder = (opptjeningsperioder: FastsattOpptjeningAktivitet[]): Periode[] =>
-  opptjeningsperioder.map(
-    (opptjeningsperiode): Periode => ({
-      start: dayjs(opptjeningsperiode.fom).toDate(),
-      end: dayjs(opptjeningsperiode.tom).toDate(),
-      status: getStatus(opptjeningsperiode.klasse),
-      opptjeningsperiode,
-    }),
-  );
+  opptjeningsperioder.map((opptjeningsperiode): Periode => ({
+    start: dayjs(opptjeningsperiode.fom).toDate(),
+    end: dayjs(opptjeningsperiode.tom).toDate(),
+    status: getStatus(opptjeningsperiode.klasse),
+    opptjeningsperiode,
+  }));
 
 const finnTitle = (status: 'success' | 'danger' | 'info'): string => {
   if (status === 'info') {

@@ -15,8 +15,7 @@ import type {
 } from './tilbakekreving';
 
 export type SkjermlenkeType =
-  | foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType
-  | SkjermlenkeTypeFpTilbake;
+  foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType | SkjermlenkeTypeFpTilbake;
 
 export type FagsakBehandlingDto = FagsakBehandlingDtoFpSak | FagsakBehandlingDtoFpTilbake;
 

@@ -83,7 +83,9 @@ export const BortfalteNaturalYtelser = ({
   const intl = useIntl();
 
   const bortfalteNaturalytelser = konverterAktivePerioderTilBortfaltePerioder(inntektsmelding);
-  const bortfalteNaturalytelserEntries = Object.entries(bortfalteNaturalytelser).filter(([, value]) => value.length > 0);
+  const bortfalteNaturalytelserEntries = Object.entries(bortfalteNaturalytelser).filter(
+    ([, value]) => value.length > 0,
+  );
   return (
     <InntektsmeldingInfoBlokk
       tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading' })}

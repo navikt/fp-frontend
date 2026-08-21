@@ -20,9 +20,7 @@ describe('OppgaverPerForsteStonadsdagPanel', () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
     expect(
-      await screen.findByText(
-        'Antall åpne oppgaver for førstegangsbehandlinger fordelt på første stønadsdag',
-      ),
+      await screen.findByText('Antall åpne oppgaver for førstegangsbehandlinger fordelt på første stønadsdag'),
     ).toBeInTheDocument();
     expect(screen.getByTestId('mock-chart')).toBeInTheDocument();
   });

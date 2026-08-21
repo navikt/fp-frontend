@@ -37,15 +37,7 @@ type BrevmalDtoFpTilbake = {
 };
 
 export type VurderÅrsakFpTilbake =
-  | 'FEIL_FAKTA'
-  | 'FEIL_LOV'
-  | 'SKJØNN'
-  | 'UTREDNING'
-  | 'SAKSFLYT'
-  | 'BEGRUNNELSE'
-  | '-'
-  | 'ANNET'
-  | 'FEIL_REGEL';
+  'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL';
 
 export type TotrinnskontrollAksjonspunkterDtoFpTilbake = {
   aksjonspunktKode: string;

@@ -63,7 +63,6 @@ const BarnVisning = ({ barna }: { barna: BarnHendelseData[] }) => {
   return (
     <>
       {barna.map(({ fødselsdato, dødsdato }, index) => (
-        // eslint-disable-next-line @eslint-react/no-array-index-key -- barn manglar stabil id, indeks trengs for unik nøkkel ved like fødsels-/dødsdato
         <HStack
           key={`${fødselsdato}-${dødsdato ?? 'ingen-dodsdato'}-${index}`}
           gap="space-24"

@@ -73,11 +73,10 @@ export const ManglendeInntektsmeldingForm = ({
         : undefined,
       begrunnelse: formValues.begrunnelse ?? '',
     };
-    return lagreVurdering(params)
-      .then(() => {
-        oppdater();
-        formMethods.reset(formValues);
-      });
+    return lagreVurdering(params).then(() => {
+      oppdater();
+      formMethods.reset(formValues);
+    });
   };
 
   const svgRef = useRef<SVGSVGElement>(null);

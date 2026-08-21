@@ -183,7 +183,10 @@ describe('BehovForTilretteleggingPanel', () => {
     await userEvent.type(arbeidstaker.getByLabelText('Fra dato'), '10.01.2024');
     await userEvent.type(arbeidstaker.getByLabelText('Stillingsprosent'), '100');
     await userEvent.click(screen.getByText('Legg til tilretteleggingsbehov'));
-    await userEvent.selectOptions(arbeidstaker.getAllByLabelText('Behov for tilrettelegging')[1]!, 'DELVIS_TILRETTELEGGING');
+    await userEvent.selectOptions(
+      arbeidstaker.getAllByLabelText('Behov for tilrettelegging')[1]!,
+      'DELVIS_TILRETTELEGGING',
+    );
     await userEvent.type(arbeidstaker.getAllByLabelText('Fra dato')[1]!, '05.01.2024');
     await userEvent.type(arbeidstaker.getAllByLabelText('Stillingsprosent')[1]!, '100');
 

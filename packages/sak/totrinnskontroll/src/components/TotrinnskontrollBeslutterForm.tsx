@@ -77,8 +77,7 @@ export type FormValues = {
 
 const buildInitialValues = (
   totrinnskontrollSkjermlenkeContext: (
-    | TotrinnskontrollSkjermlenkeContext
-    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[],
 ): FormValues => ({
   aksjonspunktGodkjenning: totrinnskontrollSkjermlenkeContext
@@ -97,8 +96,7 @@ const buildInitialValues = (
 interface Props {
   behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: (
-    | TotrinnskontrollSkjermlenkeContext
-    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
   forhandsvisVedtaksbrev: () => void;
   readOnly: boolean;

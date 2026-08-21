@@ -32,15 +32,7 @@ type AksjonspunktTypeFpTilbake = 'AUTO' | 'MANU' | 'OVST' | 'SAOV';
 type AksjonspunktDefinisjonFpTilbake = '5002' | '5003' | '5004' | '5005' | '5030' | '7003' | '7001' | '7002';
 
 type VurderÅrsakFpTilbake =
-  | 'FEIL_FAKTA'
-  | 'FEIL_LOV'
-  | 'SKJØNN'
-  | 'UTREDNING'
-  | 'SAKSFLYT'
-  | 'BEGRUNNELSE'
-  | '-'
-  | 'ANNET'
-  | 'FEIL_REGEL';
+  'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL';
 
 type AksjonspunktDtoFpTilbake = {
   aksjonspunktType: AksjonspunktTypeFpTilbake;
