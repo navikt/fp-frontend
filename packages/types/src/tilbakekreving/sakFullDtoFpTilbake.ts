@@ -29,12 +29,7 @@ type HistorikkInnslagDokumentLinkDtoFpTilbake = {
 };
 
 export type SkjermlenkeTypeFpTilbake =
-  | 'FAKTA_OM_FEILUTBETALING'
-  | 'TILBAKEKREVING'
-  | 'FORELDELSE'
-  | 'VEDTAK'
-  | 'FAKTA_OM_VERGE'
-  | '-';
+  'FAKTA_OM_FEILUTBETALING' | 'TILBAKEKREVING' | 'FORELDELSE' | 'VEDTAK' | 'FAKTA_OM_VERGE' | '-';
 
 export type HistorikkinnslagDtoFpTilbake = {
   behandlingUuid?: string;

@@ -5,12 +5,7 @@ import type { JournalFagsak } from './journalFagsakTsType';
 
 export type JournalKanal = 'NAV_NO' | 'ALTINN' | 'EESSI' | 'EIA' | 'HELSENETTET' | 'SKAN_NETS';
 export type JournalpostTilstand =
-  | 'MOTTATT'
-  | 'JOURNALFOERT'
-  | 'FEILREGISTRERT'
-  | 'EKSPEDERT'
-  | 'FERDIGSTILT'
-  | 'UTGAAR';
+  'MOTTATT' | 'JOURNALFOERT' | 'FEILREGISTRERT' | 'EKSPEDERT' | 'FERDIGSTILT' | 'UTGAAR';
 
 type JournalBruker = Readonly<{
   navn: string;

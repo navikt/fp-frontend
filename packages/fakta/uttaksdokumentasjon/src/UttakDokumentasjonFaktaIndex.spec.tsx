@@ -163,7 +163,10 @@ describe('UttakDokumentasjonFaktaIndex', () => {
   it('skal kunne prøve å bekrefte på nytt etter feil ved submit', async () => {
     const rejectedSubmit = Promise.reject(new Error('Feilet'));
     rejectedSubmit.catch(() => undefined);
-    const lagre = vi.fn().mockImplementationOnce(() => rejectedSubmit).mockImplementationOnce(() => Promise.resolve());
+    const lagre = vi
+      .fn()
+      .mockImplementationOnce(() => rejectedSubmit)
+      .mockImplementationOnce(() => Promise.resolve());
 
     render(<AksjonspunktMedUavklartePerioder submitCallback={lagre} />);
 

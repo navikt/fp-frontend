@@ -4,8 +4,11 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './PermisjonFaktaIndex.stories';
 
-const { EttArbeidsforholdUtenSluttdatoForPermisjon, FlereArbeidsforhold, ArbeidsforholdManglerArbeidsgiveropplysninger } =
-  composeStories(stories);
+const {
+  EttArbeidsforholdUtenSluttdatoForPermisjon,
+  FlereArbeidsforhold,
+  ArbeidsforholdManglerArbeidsgiveropplysninger,
+} = composeStories(stories);
 
 describe('PermisjonFaktaIndex', () => {
   it('skal rendre når arbeidsgiveropplysninger mangler for et arbeidsforhold', async () => {

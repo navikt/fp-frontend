@@ -136,10 +136,7 @@ export const buildInitialValues = (behandling: BehandlingFpSak): VedtakFormValue
 });
 
 type VedtakAksjonspunkter =
-  | ForeslaVedtakAp
-  | ForeslaVedtakManueltAp
-  | VurdereAnnenYtelseForVedtakAp
-  | VurdereDokumentForVedtakAp;
+  ForeslaVedtakAp | ForeslaVedtakManueltAp | VurdereAnnenYtelseForVedtakAp | VurdereDokumentForVedtakAp;
 
 interface Props {
   previewCallback: (data: VedtakForhåndsvisData) => void;

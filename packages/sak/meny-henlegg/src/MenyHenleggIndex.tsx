@@ -24,8 +24,7 @@ interface Props {
   forhandsvisHenleggBehandling: (data: ForhåndsvisHenleggParams) => void;
   ytelseType: FagsakYtelseType;
   behandlingResultatTyper:
-    | KodeverkMedNavn<'BehandlingResultatType'>[]
-    | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[];
+    KodeverkMedNavn<'BehandlingResultatType'>[] | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[];
   gaaTilSokeside: () => void;
   lukkModal: () => void;
 }

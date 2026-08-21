@@ -91,42 +91,46 @@ export const ManglendeArbeidsforholdForm = ({
   const lagre = (formValues: FormValues) => {
     const oppdater = getOppdaterTabell(oppdaterTabell, inntektsmelding, formValues);
     if (formValues.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING') {
-      return registrerArbeidsforhold({
+      return (
+        registrerArbeidsforhold({
+          behandlingUuid,
+          behandlingVersjon,
+          internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId ?? undefined,
+          arbeidsgiverNavn: radData.arbeidsgiverNavn,
+          arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+          vurdering: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
+          begrunnelse: formValues.begrunnelse ?? '',
+          fom: formValues.fom ?? '',
+          tom: formValues.tom,
+          stillingsprosent: formValues.stillingsprosent ?? 0,
+        })
+          .then(() => {
+            oppdater();
+            formMethods.reset(formValues);
+          })
+          // Fangar feilen her sidan ingenting elles ventar på/fangar denne promisen (kalla frå eit
+          // onSubmit-DOM-event). Utan dette vart det ein ufanga ("unhandled") promise-rejection.
+          // Feilmelding til brukar og moglegheit til å prøve på nytt er alt sikra uavhengig av dette:
+          // mutation-cachen (queryUtils.ts) viser feilen, og reset() over køyrer berre ved suksess.
+          .catch(() => undefined)
+      );
+    }
+    return (
+      lagreVurdering({
         behandlingUuid,
         behandlingVersjon,
-        internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId ?? undefined,
-        arbeidsgiverNavn: radData.arbeidsgiverNavn,
+        vurdering: formValues.saksbehandlersVurdering,
+        begrunnelse: formValues.begrunnelse,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-        vurdering: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
-        begrunnelse: formValues.begrunnelse ?? '',
-        fom: formValues.fom ?? '',
-        tom: formValues.tom,
-        stillingsprosent: formValues.stillingsprosent ?? 0,
+        internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId ?? undefined,
       })
         .then(() => {
           oppdater();
           formMethods.reset(formValues);
         })
-        // Fangar feilen her sidan ingenting elles ventar på/fangar denne promisen (kalla frå eit
-        // onSubmit-DOM-event). Utan dette vart det ein ufanga ("unhandled") promise-rejection.
-        // Feilmelding til brukar og moglegheit til å prøve på nytt er alt sikra uavhengig av dette:
-        // mutation-cachen (queryUtils.ts) viser feilen, og reset() over køyrer berre ved suksess.
-        .catch(() => undefined);
-    }
-    return lagreVurdering({
-      behandlingUuid,
-      behandlingVersjon,
-      vurdering: formValues.saksbehandlersVurdering,
-      begrunnelse: formValues.begrunnelse,
-      arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-      internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId ?? undefined,
-    })
-      .then(() => {
-        oppdater();
-        formMethods.reset(formValues);
-      })
-      // Sjå kommentar over: fangar berre for å unngå ufanga rejection, ikkje for brukarvarsling/retry.
-      .catch(() => undefined);
+        // Sjå kommentar over: fangar berre for å unngå ufanga rejection, ikkje for brukarvarsling/retry.
+        .catch(() => undefined)
+    );
   };
 
   const [anchorEl, setAnchorEl] = useState<SVGSVGElement | null>(null);

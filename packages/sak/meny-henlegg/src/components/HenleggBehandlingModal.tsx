@@ -49,8 +49,7 @@ interface Props {
   behandlingUuid: string;
   ytelseType: FagsakYtelseType;
   behandlingResultatTyper:
-    | KodeverkMedNavn<'BehandlingResultatType'>[]
-    | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[];
+    KodeverkMedNavn<'BehandlingResultatType'>[] | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[];
   behandlingType: BehandlingType;
 }
 
@@ -204,8 +203,7 @@ const getShowLink = (
 
 const getHenleggÅrsaker = (
   behandlingResultatTyper:
-    | KodeverkMedNavn<'BehandlingResultatType'>[]
-    | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[],
+    KodeverkMedNavn<'BehandlingResultatType'>[] | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[],
   behandlingType: BehandlingType,
   ytelseType: FagsakYtelseType,
 ): (KodeverkMedNavn<'BehandlingResultatType'> | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>)[] => {

@@ -722,9 +722,7 @@ describe('TilretteleggingFaktaIndex', () => {
       />,
     );
 
-    expect(
-      await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
     // Permisjonen er filtrert bort, så saksbehandlaren har ingen måte å endre vurderinga på
     expect(screen.queryByText('Velferdspermisjon')).not.toBeInTheDocument();
@@ -752,7 +750,10 @@ describe('TilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByLabelText('Skal ha svangerskapspenger for arbeidsforholdet'));
 
     await waitFor(() =>
-      expect(container.querySelector<HTMLButtonElement>('button[aria-expanded]')).toHaveAttribute('aria-expanded', 'false'),
+      expect(container.querySelector<HTMLButtonElement>('button[aria-expanded]')).toHaveAttribute(
+        'aria-expanded',
+        'false',
+      ),
     );
   });
 

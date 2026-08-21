@@ -41,9 +41,7 @@ const validerFraDatoErFørNestePeriode =
       return null;
     }
 
-    const erEtterNestePeriode = dateBeforeOrEqual(dayjs(nesteDato).subtract(1, 'day').format(ISO_DATE_FORMAT))(
-      dato,
-    );
+    const erEtterNestePeriode = dateBeforeOrEqual(dayjs(nesteDato).subtract(1, 'day').format(ISO_DATE_FORMAT))(dato);
 
     return erEtterNestePeriode
       ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDatoMaaVaereFoerNeste' })

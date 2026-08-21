@@ -124,10 +124,7 @@ MedlemskapVurderinger.initialValues = (
   return {};
 };
 
-MedlemskapVurderinger.transformValues = (
-  values: MedlemskapVurderingerFormValues,
-  erForutgående: boolean,
-) => ({
+MedlemskapVurderinger.transformValues = (values: MedlemskapVurderingerFormValues, erForutgående: boolean) => ({
   avslagskode: values.vurdering === MedlemskapVurdering.OPPFYLT ? undefined : values.avslagskode,
   opphørFom: values.vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? values.opphørFom : undefined,
   medlemFom:

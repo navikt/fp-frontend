@@ -254,7 +254,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     await userEvent.click(await screen.findByLabelText('Søker har ikke aleneomsorg for barnet'));
 
-    const harRettGruppe = within(screen.getByRole('radiogroup', { name: 'Har annen forelder rett til foreldrepenger i Norge?' }));
+    const harRettGruppe = within(
+      screen.getByRole('radiogroup', { name: 'Har annen forelder rett til foreldrepenger i Norge?' }),
+    );
     await userEvent.click(harRettGruppe.getByLabelText('Nei'));
 
     const harRettEosGruppe = within(
@@ -294,7 +296,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     expect(await screen.findByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
 
-    const harRettGruppe = within(screen.getByRole('radiogroup', { name: 'Har annen forelder rett til foreldrepenger i Norge?' }));
+    const harRettGruppe = within(
+      screen.getByRole('radiogroup', { name: 'Har annen forelder rett til foreldrepenger i Norge?' }),
+    );
     await userEvent.click(harRettGruppe.getByLabelText('Nei'));
 
     const harRettEosGruppe = within(

@@ -169,13 +169,7 @@ export type tjenester_avdelingsleder_saksbehandler_dto_SaksbehandlerGruppeSlette
 export type oppgave_Periodefilter = 'RELATIV_PERIODE_DAGER' | 'RELATIV_PERIODE_MÅNEDER' | 'FAST_PERIODE';
 
 export type oppgavekø_KøSortering =
-  | 'BEHFRIST'
-  | 'OPPRBEH'
-  | 'FORSTONAD'
-  | 'FORSTONAD_SYNK'
-  | 'BELOP'
-  | 'FEILUTBETALINGSTART'
-  | 'OPPGAVE_OPPRETTET';
+  'BEHFRIST' | 'OPPRBEH' | 'FORSTONAD' | 'FORSTONAD_SYNK' | 'BELOP' | 'FEILUTBETALINGSTART' | 'OPPGAVE_OPPRETTET';
 
 export type oppgavekø_KøSortering_FeltType = 'HELTALL' | 'DATO' | 'DATO_UTEN_FILTER';
 
@@ -306,11 +300,7 @@ export type tjenester_felles_dto_OppgaveDto = {
 };
 
 export type tjenester_felles_dto_OppgaveBehandlingStatus =
-  | 'PÅ_VENT'
-  | 'FERDIG'
-  | 'TIL_BESLUTTER'
-  | 'RETURNERT_FRA_BESLUTTER'
-  | 'UNDER_ARBEID';
+  'PÅ_VENT' | 'FERDIG' | 'TIL_BESLUTTER' | 'RETURNERT_FRA_BESLUTTER' | 'UNDER_ARBEID';
 
 export type tjenester_felles_dto_OppgaveDtoMedStatus = {
   andreKriterier: Array<oppgave_AndreKriterierType>;
@@ -340,11 +330,7 @@ export type tjenester_felles_dto_AsyncPollingStatus = {
 };
 
 export type tjenester_felles_dto_AsyncPollingStatus_Status =
-  | 'PENDING'
-  | 'COMPLETE'
-  | 'DELAYED'
-  | 'CANCELLED'
-  | 'HALTED';
+  'PENDING' | 'COMPLETE' | 'DELAYED' | 'CANCELLED' | 'HALTED';
 
 export type tjenester_saksbehandler_oppgave_dto_OppgaveIderDto = {
   oppgaveIder: string;
