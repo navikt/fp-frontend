@@ -54,6 +54,5 @@ jobs:
       - name: Run knip
         uses: navikt/fp-gha-workflows/.github/actions/knip-it@main
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           package-manager: 'yarn'
           node-version: 26
