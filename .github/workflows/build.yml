@@ -50,7 +50,7 @@ jobs:
   build-and-test:
     name: Build and test
     permissions:
-      packages: write
+      packages: read
       id-token: write
     runs-on: ${{ (github.event.pull_request.user.login == 'dependabot[bot]' && 'ubuntu-latest') || inputs.runs-on }}
     env:
