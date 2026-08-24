@@ -32,7 +32,6 @@ jobs:
       # Alle apper bakar CDN-URL inn i assets (jf. build-<app>.yml).
       vite-cdn-url: 'https://cdn.nav.no/teamforeldrepenger/${{ inputs.app }}/'
     secrets:
-      READER_TOKEN: ${{ secrets.READER_TOKEN }}
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN  }}
 
   upload-to-CDN:
