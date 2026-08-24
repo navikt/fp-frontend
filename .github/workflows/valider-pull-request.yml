@@ -16,7 +16,9 @@ jobs:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # ratchet:actions/setup-node@v7.0.0
         with:
           node-version: 26
-          cache: 'yarn'
+          # cache bevisst deaktivert i denne test-branchen: enableGlobalCache=false gjør at
+          # GHA restaurerer .yarn/cache (keyet på uendret yarn.lock), så pakkene aldri hentes
+          # autentisert. Vi vil teste at GITHUB_TOKEN faktisk kan laste ned pakkene (inkl. @nais/apm).
 
       - name: Use turbo cache
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # ratchet:actions/cache@v6.1.0
