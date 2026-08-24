@@ -2,9 +2,6 @@ name: Build app
 on:
   workflow_call:
     secrets:
-      READER_TOKEN:
-        description: 'A token passed from the caller workflow'
-        required: true
       SENTRY_AUTH_TOKEN:
         description: 'A token passed from the caller workflow'
         required: true
