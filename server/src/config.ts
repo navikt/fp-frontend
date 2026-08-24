@@ -22,7 +22,7 @@ const configValueAsJson = (name: string, isRequired: boolean) => {
   } catch (error) {
     const errorMessage = `Config: '${name}' er ikke et gyldig JSON-objekt.`;
     logger.error(errorMessage, error);
-    throw new Error(errorMessage);
+    throw new Error(errorMessage, { cause: error });
   }
 };
 
