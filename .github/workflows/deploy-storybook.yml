@@ -11,6 +11,7 @@ jobs:
       contents: write
       pages: write
       id-token: write
+      packages: read
     uses: navikt/fp-gha-workflows/.github/workflows/deploy-storybook.yml@main
     with:
       package-manager: yarn
