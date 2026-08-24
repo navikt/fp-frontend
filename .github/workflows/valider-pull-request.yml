@@ -48,12 +48,12 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: read
+      packages: read
       pull-requests: write
     steps:
       - name: Run knip
         uses: navikt/fp-gha-workflows/.github/actions/knip-it@main
         with:
-          npm-auth-token: ${{ secrets.READER_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           package-manager: 'yarn'
           node-version: 26
