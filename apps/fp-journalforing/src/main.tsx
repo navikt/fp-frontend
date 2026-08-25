@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router';
 
 import dayjs from 'dayjs';
 
-import { initFaro, initSentry, RestApiErrorProvider } from '@navikt/fp-app-felles';
+import { initFaro, reactRootOptions, RestApiErrorProvider } from '@navikt/fp-app-felles';
 
 import { JournalføringAppIndexWrapper } from './JournalforingAppIndex';
 
@@ -17,10 +17,9 @@ const app = document.getElementById('root');
 if (app === null) {
   throw new Error('No app element');
 }
-initSentry('fp-journalforing');
 initFaro();
 
-const root = createRoot(app);
+const root = createRoot(app, reactRootOptions);
 
 root.render(
   <StrictMode>
