@@ -1,7 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
 import { ErrorMessage } from '@navikt/ds-react';
-import { captureException, withScope } from '@sentry/browser';
 
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 
@@ -36,13 +35,6 @@ export class ErrorBoundary extends Component<Props, State> {
   override componentDidCatch(error: Error, info: ErrorInfo): void {
     const { errorMessageCallback } = this.props;
 
-    withScope(scope => {
-      for (const entry of Object.entries(info)) {
-        scope.setExtra(entry[0], entry[1]);
-      }
-      captureException(error);
-    });
-
     const errorStrings = info.componentStack
       ? [
           error.toString(),
@@ -54,9 +46,6 @@ export class ErrorBoundary extends Component<Props, State> {
       : error.toString();
 
     errorMessageCallback({ type: ErrorType.GENERAL_ERROR, message: errorStrings });
-
-    // eslint-disable-next-line no-console
-    console.error(error);
   }
 
   override render(): ReactNode {

@@ -73,7 +73,6 @@ function startApp() {
           "base-uri": ["'self'"],
           "connect-src": [
             "'self'",
-            "https://sentry.gc.nav.no",
             "https://graph.microsoft.com",
             "https://telemetry.nav.no",
             "https://telemetry.ekstern.dev.nav.no",

@@ -1,4 +1,4 @@
-import { captureException } from '@sentry/browser';
+import { captureException } from '@nais/apm';
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 

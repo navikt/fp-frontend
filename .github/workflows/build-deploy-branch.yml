@@ -31,9 +31,6 @@ jobs:
       image_suffix: '/${{ inputs.app }}'
       # Alle apper bakar CDN-URL inn i assets (jf. build-<app>.yml).
       vite-cdn-url: 'https://cdn.nav.no/teamforeldrepenger/${{ inputs.app }}/'
-    secrets:
-      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN  }}
-
   upload-to-CDN:
     name: Upload assets to CDN
     needs: build-app

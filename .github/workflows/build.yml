@@ -1,10 +1,6 @@
 name: Build app
 on:
   workflow_call:
-    secrets:
-      SENTRY_AUTH_TOKEN:
-        description: 'A token passed from the caller workflow'
-        required: true
     inputs:
       runs-on:
         required: false
@@ -78,17 +74,9 @@ jobs:
       - name: Installere dependencies
         run: yarn install --immutable
 
-      - name: Opprett SENTRY_RELEASE environment variable
-        if: inputs.push-image
-        id: sentry_release_key
-        run: |
-          echo "SENTRY_RELEASE=${{ inputs.app }}-$(git rev-parse --short HEAD)-$(date +%Y.%m.%d.%H%M%S)" >> $GITHUB_OUTPUT
-
       - name: Bygg og test
         run: yarn ci --filter=@navikt/${{ inputs.app }}
         env:
-          VITE_SENTRY_RELEASE: ${{ steps.sentry_release_key.outputs.SENTRY_RELEASE }}
-          VITE_SENTRY_AUTH_TOKEN: ${{ inputs.push-image && secrets.SENTRY_AUTH_TOKEN || '' }}
           VITE_CDN_URL: ${{ inputs.vite-cdn-url }}
 
       - name: Bygg server
