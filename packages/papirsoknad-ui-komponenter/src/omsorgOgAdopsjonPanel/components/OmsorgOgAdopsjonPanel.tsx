@@ -21,6 +21,10 @@ import { notEmpty } from '@navikt/fp-utils';
 const OMSORG_NAME_PREFIX = 'omsorg';
 const MAX_ANTALL_BARN = 10;
 
+// minValue/maxValue validerer sjølv tomme verdiar (tolkar '' som 0), så dei må vernast bak ei sjekk på om feltet har verdi
+const validateMinAntallBarn = (value?: number) => (value ? minValue(1)(value) : undefined);
+const validateMaxAntallBarn = (value?: number) => (value ? maxValue(10)(value) : undefined);
+
 type OmsorgOgAdopsjonFormValues = {
   [OMSORG_NAME_PREFIX]: {
     erEktefellesBarn?: boolean;
@@ -120,7 +124,7 @@ export const OmsorgOgAdopsjonPanel = ({
           readOnly={readOnly}
           htmlSize={8}
           parse={value => removeSpacesFromNumber(value)}
-          validate={[...(erAdopsjon ? [required] : []), hasValidInteger, minValue(1), maxValue(10)]}
+          validate={[...(erAdopsjon ? [required] : []), hasValidInteger, validateMinAntallBarn, validateMaxAntallBarn]}
           onChange={oppdaterAntallBarn}
         />
 
