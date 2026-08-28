@@ -146,7 +146,7 @@ const finnAntallPerDato = (
     {} as Record<string, number>,
   );
 
-  return Object.keys(antallPerDatoOgUkjent).map(k => ({ x: k, y: antallPerDatoOgUkjent[k]! }));
+  return Object.entries(antallPerDatoOgUkjent).map(([x, y]) => ({ x, y }));
 };
 
 const lagKoordinatForDato = (dato: dayjs.Dayjs, oppgaver: KoordinatDatoEllerUkjent[]): number => {

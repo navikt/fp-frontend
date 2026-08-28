@@ -46,12 +46,12 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
 
   useRegistrerSnarveg(
     GLOBALE_SNARVEG_IDER.AVDELINGSLEDER,
-    () => (globalThis.location.href = getAvdelingslederLenke()),
+    () => (location.href = getAvdelingslederLenke()),
     kanOppgavestyre,
   );
   useRegistrerSnarveg(
     GLOBALE_SNARVEG_IDER.JOURNALFØRING,
-    () => (globalThis.location.href = getJournalføringLenke()),
+    () => (location.href = getJournalføringLenke()),
     kanSaksbehandle,
   );
 
@@ -60,7 +60,7 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
       ? [
           {
             tekst: intl.formatMessage({ id: 'Dekorator.Avdelingsleder' }),
-            callback: () => (globalThis.location.href = getAvdelingslederLenke()),
+            callback: () => (location.href = getAvdelingslederLenke()),
           },
         ]
       : []),
@@ -68,7 +68,7 @@ export const Dekorator = ({ navAnsatt, ...rest }: Props) => {
       ? [
           {
             tekst: intl.formatMessage({ id: 'Dekorator.Journalforing' }),
-            callback: () => (globalThis.location.href = getJournalføringLenke()),
+            callback: () => (location.href = getJournalføringLenke()),
           },
         ]
       : []),

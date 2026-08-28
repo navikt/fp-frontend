@@ -46,7 +46,7 @@ const renderSnarveger = (id: string, onSnarveg = vi.fn(), dialogtype?: 'åpen' |
   );
 
 const trykk = (key: string) => {
-  fireEvent.keyDown(globalThis.window, { key });
+  fireEvent.keyDown(window, { key });
 };
 
 describe('useGlobalSnarveger', () => {

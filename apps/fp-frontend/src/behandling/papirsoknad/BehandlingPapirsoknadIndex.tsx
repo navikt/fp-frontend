@@ -126,7 +126,7 @@ const useLagrePapirsøknad = (
       behandlingVersjon: behandling.versjon,
       bekreftedeAksjonspunktDtoer: [transformedAksjonpunktData],
     });
-    globalThis.scrollTo(0, 0);
+    scrollTo(0, 0);
 
     return oppdatertBehandling;
   };

@@ -24,7 +24,7 @@ export const Dekorator = (props: Props) => {
   const interneLenker: DekoratorLenke[] = [
     {
       tekst: intl.formatMessage({ id: 'Dekorator.Foreldrepenger' }),
-      callback: () => (globalThis.location.href = getFpSakLenke()),
+      callback: () => (location.href = getFpSakLenke()),
     },
   ];
 

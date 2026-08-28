@@ -184,7 +184,7 @@ const Wrapper = (props: Omit<ComponentProps<typeof BeregningsgrunnlagProsessInde
   const { mellomlagretFormData, setMellomlagretFormData } =
     useMellomlagretFormData<React.ComponentProps<typeof BeregningsgrunnlagProsessIndex>['formData']>();
 
-  const erProd = globalThis.location.hostname.includes('intern.nav.no');
+  const erProd = location.hostname.includes('intern.nav.no');
   const erAktivitetKunAT = props.beregningsgrunnlagListe
     .flatMap(bg => bg.aktivitetStatus)
     .every(status => status === 'AT');

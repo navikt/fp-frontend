@@ -70,9 +70,9 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
   // Denne er kun her for å få komponent-repaint ved scrolling
   const scrollReset = () => setTop(0);
   useEffect(() => {
-    globalThis.addEventListener('scroll', scrollReset);
+    addEventListener('scroll', scrollReset);
     return () => {
-      globalThis.removeEventListener('scroll', scrollReset);
+      removeEventListener('scroll', scrollReset);
     };
   }, []);
 

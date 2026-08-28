@@ -51,7 +51,7 @@ export const FellesDekorator = ({
       gotToAppRoot();
     }
     if (e.type === 'contextmenu') {
-      globalThis.open('/', '_newtab');
+      open('/', '_newtab');
     }
     e.preventDefault();
   };

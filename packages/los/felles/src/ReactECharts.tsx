@@ -20,11 +20,11 @@ export const ReactECharts = ({ option, style, height }: Props): JSX.Element => {
     const resizeChart = () => {
       chart?.resize();
     };
-    globalThis.addEventListener('resize', resizeChart);
+    addEventListener('resize', resizeChart);
 
     return () => {
       chart?.dispose();
-      globalThis.removeEventListener('resize', resizeChart);
+      removeEventListener('resize', resizeChart);
     };
   }, []);
 

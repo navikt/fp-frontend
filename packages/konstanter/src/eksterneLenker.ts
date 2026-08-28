@@ -9,7 +9,7 @@ export const AAREG_URL = 'https://arbeid-og-inntekt.nais.adeo.no/';
 export const FOLKETRYGDLOVEN_KAP14_13_URL = 'https://lovdata.no/nav/folketrygdloven/kap14/%C2%A714-13';
 
 export const getGosysUrl = (fødselsnummer: string) => {
-  const { host } = globalThis.location;
+  const { host } = location;
   const envPrefix = host.includes('dev') ? '-q2.dev' : '';
   return `https://gosys${envPrefix}.intern.nav.no/gosys/bruker/brukeroversikt.jsf?fodselsnummer=${fødselsnummer}`;
 };
@@ -28,16 +28,14 @@ const AVDELINGSLEDER_URL_NAME = 'fpavdelingsleder';
 const JOURNALFORING_URL_NAME = 'fpjournalforing';
 
 export const getAvdelingslederLenke = () =>
-  removePathAndQuery(globalThis.location.href.replace(FPSAK_URL_NAME, AVDELINGSLEDER_URL_NAME));
+  removePathAndQuery(location.href.replace(FPSAK_URL_NAME, AVDELINGSLEDER_URL_NAME));
 
 export const getJournalføringLenke = () =>
-  removePathAndQuery(globalThis.location.href.replace(FPSAK_URL_NAME, JOURNALFORING_URL_NAME));
+  removePathAndQuery(location.href.replace(FPSAK_URL_NAME, JOURNALFORING_URL_NAME));
 
 export const getFpSakLenke = () =>
   removePathAndQuery(
-    globalThis.location.href
-      .replace(JOURNALFORING_URL_NAME, FPSAK_URL_NAME)
-      .replace(AVDELINGSLEDER_URL_NAME, FPSAK_URL_NAME),
+    location.href.replace(JOURNALFORING_URL_NAME, FPSAK_URL_NAME).replace(AVDELINGSLEDER_URL_NAME, FPSAK_URL_NAME),
   );
 
 const removePathAndQuery = (url: string): string => {

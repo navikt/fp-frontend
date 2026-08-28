@@ -92,9 +92,9 @@ export const useGlobalSnarveger = (): void => {
       }
     };
 
-    globalThis.addEventListener('keydown', handterTast);
+    addEventListener('keydown', handterTast);
     return () => {
-      globalThis.removeEventListener('keydown', handterTast);
+      removeEventListener('keydown', handterTast);
       nullstillSekvens();
     };
   }, []);
@@ -129,9 +129,9 @@ const erÅpenDialog = (element: Element): boolean => {
     return false;
   }
 
-  const style = globalThis.getComputedStyle(element);
+  const style = getComputedStyle(element);
   return style.display !== 'none' && style.visibility !== 'hidden';
 };
 
 const harÅpenDialog = (): boolean =>
-  Array.from(globalThis.document.querySelectorAll('dialog, [role="dialog"], [aria-modal="true"]')).some(erÅpenDialog);
+  Array.from(document.querySelectorAll('dialog, [role="dialog"], [aria-modal="true"]')).some(erÅpenDialog);

@@ -122,7 +122,7 @@ export const BrevRedigeringModal = ({
                 variant="tertiary"
                 onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
                   e.preventDefault();
-                  globalThis.open(href, '_blank');
+                  open(href, '_blank');
                 }}
                 iconPosition="right"
                 icon={<ExternalLinkIcon aria-hidden />}
