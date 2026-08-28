@@ -2,11 +2,7 @@ import { type ComponentProps } from 'react';
 import { useIntl } from 'react-intl';
 
 import type { BeregnBeløpParams } from '@navikt/ft-prosess-tilbakekreving';
-import {
-  ForeldelseAksjonspunktCodes,
-  ForeldelseProsessIndex,
-  type ForeldelsesresultatActivity,
-} from '@navikt/ft-prosess-tilbakekreving-foreldelse';
+import { ForeldelseAksjonspunktCodes, ForeldelseProsessIndex } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -71,6 +67,7 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
 };
 
 const Wrapper = (props: ComponentProps<typeof ForeldelseProsessIndex>) => {
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<ForeldelsesresultatActivity[]>();
+  const { mellomlagretFormData, setMellomlagretFormData } =
+    useMellomlagretFormData<NonNullable<ComponentProps<typeof ForeldelseProsessIndex>['formData']>>();
   return <ForeldelseProsessIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />;
 };
