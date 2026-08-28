@@ -9,22 +9,30 @@ import { AvvikStatus } from './AvvikStatus';
 
 const getFormateringsIdForAvvik = (avvik: MedlemskapAvvik) => {
   switch (avvik) {
-    case 'BOSATT_UTENLANDSOPPHOLD':
+    case 'BOSATT_UTENLANDSOPPHOLD': {
       return 'AvvikMerknad.BosattUtenlandsopphold';
-    case 'BOSATT_MANGLENDE_BOSTEDSADRESSE':
+    }
+    case 'BOSATT_MANGLENDE_BOSTEDSADRESSE': {
       return 'AvvikMerknad.BosattManglendeBostedsadresse';
-    case 'BOSATT_UGYLDIG_PERSONSTATUS':
+    }
+    case 'BOSATT_UGYLDIG_PERSONSTATUS': {
       return 'AvvikMerknad.BosattUgyldigPersonstatus';
-    case 'BOSATT_UTENLANDSADRESSE':
+    }
+    case 'BOSATT_UTENLANDSADRESSE': {
       return 'AvvikMerknad.BosattUtenlandsadresse';
-    case 'TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD':
+    }
+    case 'TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD': {
       return 'AvvikMerknad.Oppholdsrett';
-    case 'MEDL_PERIODER':
+    }
+    case 'MEDL_PERIODER': {
       return 'AvvikMerknad.MedlPerioder';
-    case 'EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT':
+    }
+    case 'EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT': {
       return 'AvvikMerknad.EOSManglendeAnsettelseMedInntekt';
-    default:
+    }
+    default: {
       assertUnreachable(avvik);
+    }
   }
 };
 

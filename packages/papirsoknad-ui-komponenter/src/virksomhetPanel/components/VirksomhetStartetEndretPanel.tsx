@@ -105,17 +105,15 @@ VirksomhetStartetEndretPanel.transformValues = ({
 
   return {
     varigEndretEllerStartetSisteFireAr,
-    ...(varigEndretEllerStartetSisteFireAr
-      ? {
-          harVarigEndring,
-          ...(harVarigEndring ? { varigEndringGjeldendeFom } : {}),
-          erNyoppstartet,
-          erNyIArbeidslivet,
-          ...(erNyIArbeidslivet ? { nyIArbeidslivetFom } : {}),
-          beskrivelseAvEndring,
-          inntekt,
-        }
-      : {}),
+    ...(varigEndretEllerStartetSisteFireAr && {
+      harVarigEndring,
+      ...(harVarigEndring && { varigEndringGjeldendeFom }),
+      erNyoppstartet,
+      erNyIArbeidslivet,
+      ...(erNyIArbeidslivet && { nyIArbeidslivetFom }),
+      beskrivelseAvEndring,
+      inntekt,
+    }),
   };
 };
 

@@ -14,12 +14,12 @@ const inntektsmeldingmal = {
   innsendingsårsak: 'NY' as const,
   arbeidsgiverIdent: '1',
   eksternArbeidsforholdId: 'ARB001-001',
-  inntektPrMnd: 30000,
+  inntektPrMnd: 30_000,
   internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
   kontaktpersonNavn: 'Corpolarsen',
   kontaktpersonNummer: '41925090',
   mottattDato: '2021-12-06',
-  refusjonPrMnd: 20000,
+  refusjonPrMnd: 20_000,
   journalpostId: '1',
   dokumentId: '2',
 };
@@ -70,7 +70,7 @@ export const InntektsmeldingDefault: Story = {
       {
         ...inntektsmeldingmal,
         tilknyttedeBehandlingIder: ['UUID1'],
-        inntektPrMnd: 10000.5,
+        inntektPrMnd: 10_000.5,
         innsendingstidspunkt: '2024-07-20T00:00:00',
         startDatoPermisjon: '2024-10-10',
 
@@ -91,7 +91,7 @@ export const InntektsmeldingDefault: Story = {
       {
         ...inntektsmeldingmal,
         tilknyttedeBehandlingIder: ['UUID1', 'UUID2'],
-        inntektPrMnd: 20000,
+        inntektPrMnd: 20_000,
         innsendingstidspunkt: '2024-08-01T00:00:00',
         kildeSystem: 'FS22',
 
@@ -101,7 +101,7 @@ export const InntektsmeldingDefault: Story = {
       {
         ...inntektsmeldingmal,
         tilknyttedeBehandlingIder: [],
-        inntektPrMnd: 30000,
+        inntektPrMnd: 30_000,
         innsendingstidspunkt: '2024-09-10T00:00:00',
         innsendingsårsak: 'ENDRING' as const,
         kildeSystem: 'NAV_NO',

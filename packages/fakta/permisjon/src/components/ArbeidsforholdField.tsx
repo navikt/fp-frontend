@@ -151,10 +151,7 @@ export const ArbeidsforholdField = ({
                 )}
                 {arbeidsforhold.eksternArbeidsforholdId.length >= 50 && (
                   <Tooltip content={delOppAId(arbeidsforhold.eksternArbeidsforholdId)} placement="bottom">
-                    <BodyShort size="small">{`${arbeidsforhold.eksternArbeidsforholdId.substring(
-                      0,
-                      50,
-                    )}...`}</BodyShort>
+                    <BodyShort size="small">{`${arbeidsforhold.eksternArbeidsforholdId.slice(0, 50)}...`}</BodyShort>
                   </Tooltip>
                 )}
               </div>

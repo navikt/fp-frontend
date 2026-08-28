@@ -41,7 +41,7 @@ type Story = StoryObj<typeof meta>;
 export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
   args: {
     arbeidsgiverOpplysningerPerId: {
-      910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
+      910_909_088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
     },
     arbeidOgInntekt: {
       arbeidsforhold: [
@@ -86,31 +86,31 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
           arbeidsgiverIdent: '910909088',
           inntekter: [
             {
-              beløp: 40000,
+              beløp: 40_000,
               fom: '2020-06-01',
               tom: '2020-06-30',
               type: 'LØNN',
             },
             {
-              beløp: 41000,
+              beløp: 41_000,
               fom: '2021-07-01',
               tom: '2021-07-31',
               type: 'LØNN',
             },
             {
-              beløp: 40000,
+              beløp: 40_000,
               fom: '2020-08-01',
               tom: '2020-08-31',
               type: 'LØNN',
             },
             {
-              beløp: 40000,
+              beløp: 40_000,
               fom: '2020-09-01',
               tom: '2020-09-30',
               type: 'LØNN',
             },
             {
-              beløp: 40000,
+              beløp: 40_000,
               fom: '2021-11-01',
               tom: '2021-11-30',
               type: 'LØNN',
@@ -126,9 +126,9 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
 export const FlereArbeidsforhold: Story = {
   args: {
     arbeidsgiverOpplysningerPerId: {
-      910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
-      910909090: lagArbeidsgiver('910909090', 'Autoservice AS'),
-      910909092: lagArbeidsgiver('910909092', 'DNB'),
+      910_909_088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
+      910_909_090: lagArbeidsgiver('910909090', 'Autoservice AS'),
+      910_909_092: lagArbeidsgiver('910909092', 'DNB'),
     },
     arbeidOgInntekt: {
       arbeidsforhold: [
@@ -171,12 +171,12 @@ export const FlereArbeidsforhold: Story = {
           ...fellesInntektsmeldingFelter,
           arbeidsgiverIdent: '910909088',
           eksternArbeidsforholdId: 'ARB001-001',
-          inntektPrMnd: 30000,
+          inntektPrMnd: 30_000,
           internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
           kontaktpersonNavn: 'Corpolarsen',
           kontaktpersonNummer: '41925090',
           mottattDato: '2021-12-06',
-          refusjonPrMnd: 20000,
+          refusjonPrMnd: 20_000,
           journalpostId: '1',
           dokumentId: '2',
         },
@@ -186,31 +186,31 @@ export const FlereArbeidsforhold: Story = {
           arbeidsgiverIdent: '910909088',
           inntekter: [
             {
-              beløp: 40000,
+              beløp: 40_000,
               fom: '2020-06-01',
               tom: '2020-06-30',
               type: 'LØNN',
             },
             {
-              beløp: 40000,
+              beløp: 40_000,
               fom: '2020-07-01',
               tom: '2020-07-31',
               type: 'LØNN',
             },
             {
-              beløp: 40000,
+              beløp: 40_000,
               fom: '2020-08-01',
               tom: '2020-08-31',
               type: 'LØNN',
             },
             {
-              beløp: 40000,
+              beløp: 40_000,
               fom: '2020-09-01',
               tom: '2020-09-30',
               type: 'LØNN',
             },
             {
-              beløp: 40000,
+              beløp: 40_000,
               fom: '2021-11-01',
               tom: '2021-11-30',
               type: 'LØNN',
@@ -221,31 +221,31 @@ export const FlereArbeidsforhold: Story = {
           arbeidsgiverIdent: '910909090',
           inntekter: [
             {
-              beløp: 30000,
+              beløp: 30_000,
               fom: '2020-06-01',
               tom: '2020-06-30',
               type: 'LØNN',
             },
             {
-              beløp: 31000,
+              beløp: 31_000,
               fom: '2021-07-01',
               tom: '2021-07-31',
               type: 'LØNN',
             },
             {
-              beløp: 30000,
+              beløp: 30_000,
               fom: '2020-08-01',
               tom: '2020-08-31',
               type: 'LØNN',
             },
             {
-              beløp: 30000,
+              beløp: 30_000,
               fom: '2020-09-01',
               tom: '2020-09-30',
               type: 'LØNN',
             },
             {
-              beløp: 30000,
+              beløp: 30_000,
               fom: '2021-11-01',
               tom: '2021-11-30',
               type: 'LØNN',
@@ -261,7 +261,7 @@ export const FlereArbeidsforhold: Story = {
 export const ArbeidsforholdManglerArbeidsgiveropplysninger: Story = {
   args: {
     arbeidsgiverOpplysningerPerId: {
-      910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
+      910_909_088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
     },
     arbeidOgInntekt: {
       arbeidsforhold: [
@@ -308,7 +308,7 @@ export const ArbeidsforholdManglerArbeidsgiveropplysninger: Story = {
 export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
   args: {
     arbeidsgiverOpplysningerPerId: {
-      910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
+      910_909_088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
     },
     arbeidOgInntekt: {
       arbeidsforhold: [
@@ -351,12 +351,12 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           ...fellesInntektsmeldingFelter,
           arbeidsgiverIdent: '910909088',
           eksternArbeidsforholdId: 'ARB001-001-asdfasdfasdf-asdfadsfertbrtynet65y454hrthfdsgfbdsfgb',
-          inntektPrMnd: 30000,
+          inntektPrMnd: 30_000,
           internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
           kontaktpersonNavn: 'Corpolarsen',
           kontaktpersonNummer: '41925090',
           mottattDato: '2021-12-06',
-          refusjonPrMnd: 20000,
+          refusjonPrMnd: 20_000,
           journalpostId: '1',
           dokumentId: '2',
         },
@@ -364,7 +364,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           ...fellesInntektsmeldingFelter,
           arbeidsgiverIdent: '910909088',
           eksternArbeidsforholdId: 'ARB001-002',
-          inntektPrMnd: 10000,
+          inntektPrMnd: 10_000,
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
           kontaktpersonNavn: 'Corpolarsen',
           kontaktpersonNummer: '41925090',
@@ -378,7 +378,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           arbeidsgiverIdent: '910909088',
           inntekter: [
             {
-              beløp: 40000,
+              beløp: 40_000,
               fom: '2020-06-01',
               tom: '2020-06-30',
               type: 'LØNN',
@@ -389,7 +389,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           arbeidsgiverIdent: '910909090',
           inntekter: [
             {
-              beløp: 30000,
+              beløp: 30_000,
               fom: '2020-06-01',
               tom: '2020-06-30',
               type: 'LØNN',
@@ -405,7 +405,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
 export const VisFødselsdatoNårPrivatperson: Story = {
   args: {
     arbeidsgiverOpplysningerPerId: {
-      910909088: lagPrivatArbeidsgiver('910909088', 'Bettan', '2000-01-01'),
+      910_909_088: lagPrivatArbeidsgiver('910909088', 'Bettan', '2000-01-01'),
     },
     arbeidOgInntekt: {
       arbeidsforhold: [

@@ -85,7 +85,7 @@ describe('OpptjeningFaktaIndex', () => {
 
   it('skal nullstille bekreft-knappen når submit feiler så brukeren kan prøve igjen', async () => {
     const førsteFeil = Promise.reject(new Error('Kunne ikke lagre opptjening'));
-    void førsteFeil.catch(() => undefined);
+    void førsteFeil.catch(() => {});
 
     const lagre = vi
       .fn()

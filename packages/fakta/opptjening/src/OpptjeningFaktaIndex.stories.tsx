@@ -19,7 +19,7 @@ const merknaderFraBeslutter = {
 };
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
-  123456789: lagArbeidsgiver('123456789', 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET'),
+  123_456_789: lagArbeidsgiver('123456789', 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET'),
 };
 
 const meta = {
@@ -117,15 +117,15 @@ export const MedAksjonspunkt: Story = {
       ferdiglignetNæring: [
         {
           år: '2016',
-          beløp: 100000,
+          beløp: 100_000,
         },
         {
           år: '2017',
-          beløp: 150000,
+          beløp: 150_000,
         },
         {
           år: '2018',
-          beløp: 200000,
+          beløp: 200_000,
         },
       ],
     },
@@ -212,15 +212,15 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
       ferdiglignetNæring: [
         {
           år: '2016',
-          beløp: 100000,
+          beløp: 100_000,
         },
         {
           år: '2017',
-          beløp: 150000,
+          beløp: 150_000,
         },
         {
           år: '2018',
-          beløp: 200000,
+          beløp: 200_000,
         },
       ],
     },

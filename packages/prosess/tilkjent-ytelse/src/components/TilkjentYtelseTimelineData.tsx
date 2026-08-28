@@ -117,7 +117,7 @@ export const TilkjentYtelseTimelineData = ({
             </HStack>
           </VStack>
         </Box>
-        {valgtBeregningsresultatPeriode.andeler && valgtBeregningsresultatPeriode.andeler.length !== 0 && (
+        {valgtBeregningsresultatPeriode.andeler && valgtBeregningsresultatPeriode.andeler.length > 0 && (
           <Table>
             <Table.Header>
               <Table.Row>
@@ -207,23 +207,31 @@ const findAndelsnavn = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
   switch (andel.aktivitetStatus) {
-    case 'AT':
+    case 'AT': {
       return createVisningNavnForUttakArbeidstaker(andel, alleKodeverk, arbeidsgiverOpplysningerPerId);
-    case 'FL':
+    }
+    case 'FL': {
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.Frilans" />;
-    case 'SN':
+    }
+    case 'SN': {
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.SelvstendigNaeringsdrivende" />;
-    case 'DP':
+    }
+    case 'DP': {
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.Dagpenger" />;
-    case 'AAP':
+    }
+    case 'AAP': {
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.AAP" />;
-    case 'MS':
+    }
+    case 'MS': {
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.Militaer" />;
-    case 'BA':
+    }
+    case 'BA': {
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.BrukersAndel" />;
+    }
 
-    default:
+    default: {
       return '';
+    }
   }
 };
 
@@ -231,6 +239,6 @@ const getGradering = (andel?: BeregningsresultatPeriodeAndel): ReactElement | nu
   if (andel === undefined) {
     return null;
   }
-  const stringId = andel.uttak.gradering === true ? 'TilkjentYtelse.PeriodeData.Ja' : 'TilkjentYtelse.PeriodeData.Nei';
+  const stringId = andel.uttak.gradering ? 'TilkjentYtelse.PeriodeData.Ja' : 'TilkjentYtelse.PeriodeData.Nei';
   return <FormattedMessage id={stringId} />;
 };

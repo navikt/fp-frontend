@@ -84,7 +84,7 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
     if (!vedtaksbrevDokumentLink) return;
     setHenterVedtaksbrevPdf(true);
     try {
-      const response = await fetch(vedtaksbrevDokumentLink.href, { credentials: 'same-origin' });
+      const response = await fetch(vedtaksbrevDokumentLink.href);
       if (response.ok) {
         const blob = await response.blob();
         forhandsvisDokument(blob);

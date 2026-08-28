@@ -96,7 +96,7 @@ const generateReservasjoner = () => {
       reservertAvNavn: saksbehandler.navn,
       reservertTilTidspunkt,
       oppgaveId: oppgaveId++,
-      oppgaveSaksNr: `${100000 + i}`,
+      oppgaveSaksNr: String(100_000 + i),
       behandlingType: behandlingType,
       ytelseType: ytelseType,
       andreKriterier: andreKriterier,

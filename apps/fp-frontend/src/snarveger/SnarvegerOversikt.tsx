@@ -33,10 +33,12 @@ const GRUPPE_REKKEFOLGE: SnarvegGruppe[] = ['global', 'behandling'];
 
 const GruppeTittel = ({ gruppe }: { gruppe: SnarvegGruppe }) => {
   switch (gruppe) {
-    case 'global':
+    case 'global': {
       return <FormattedMessage id="Snarveger.Gruppe.global" />;
-    case 'behandling':
+    }
+    case 'behandling': {
       return <FormattedMessage id="Snarveger.Gruppe.behandling" />;
+    }
   }
 };
 

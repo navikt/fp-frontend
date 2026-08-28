@@ -19,12 +19,12 @@ describe('reactRootOptions', () => {
     vi.clearAllMocks();
     vi.restoreAllMocks();
     vi.unstubAllEnvs();
-    document.body.innerHTML = '';
+    document.body.replaceChildren();
   });
 
   const renderCaughtError = () => {
     const app = document.createElement('div');
-    document.body.appendChild(app);
+    document.body.append(app);
     const root = createRoot(app, reactRootOptions);
 
     act(() => {
@@ -40,7 +40,7 @@ describe('reactRootOptions', () => {
 
   it('skal rapportere ein fanga renderfeil til konsollen i lokal utvikling', () => {
     vi.stubEnv('DEV', true);
-    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
 
     const root = renderCaughtError();
 
@@ -53,7 +53,7 @@ describe('reactRootOptions', () => {
 
   it('skal rapportere ein fanga renderfeil nøyaktig éin gong til APM med React-kontekst', () => {
     vi.stubEnv('DEV', false);
-    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
 
     const root = renderCaughtError();
 

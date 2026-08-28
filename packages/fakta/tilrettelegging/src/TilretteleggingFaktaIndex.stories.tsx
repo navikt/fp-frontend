@@ -24,7 +24,7 @@ const TILRETTELEGGING_PERMISJON: SvpTilrettelegging = {
   termindato: '2020-11-06',
   arbeidsforholdListe: [
     {
-      tilretteleggingId: 1116961,
+      tilretteleggingId: 1_116_961,
       tilretteleggingBehovFom: '2020-03-17',
       tilretteleggingDatoer: [
         {
@@ -78,7 +78,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON: SvpTilrettelegging = {
   termindato: '2020-11-06',
   arbeidsforholdListe: [
     {
-      tilretteleggingId: 1116961,
+      tilretteleggingId: 1_116_961,
       tilretteleggingBehovFom: '2020-03-17',
       tilretteleggingDatoer: [
         {
@@ -107,7 +107,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON: SvpTilrettelegging = {
       skalVurdereSplittAvArbeidsforholdet: false,
     },
     {
-      tilretteleggingId: 1008654,
+      tilretteleggingId: 1_008_654,
       tilretteleggingBehovFom: '2019-10-01',
       kanTilrettelegges: false,
       tilretteleggingDatoer: [
@@ -136,7 +136,7 @@ const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER: SvpTilrettelegging = {
   saksbehandlet: false,
   arbeidsforholdListe: [
     {
-      tilretteleggingId: 1008653,
+      tilretteleggingId: 1_008_653,
       tilretteleggingBehovFom: '2019-10-01',
       kanTilrettelegges: false,
       tilretteleggingDatoer: [
@@ -157,7 +157,7 @@ const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER: SvpTilrettelegging = {
       skalVurdereSplittAvArbeidsforholdet: false,
     },
     {
-      tilretteleggingId: 1008654,
+      tilretteleggingId: 1_008_654,
       tilretteleggingBehovFom: '2019-10-01',
       kanTilrettelegges: false,
       tilretteleggingDatoer: [
@@ -233,10 +233,10 @@ const ARBEIDSGIVEROPPLYSNINGER_PER_ID: ArbeidsgiverOpplysningerPerId = {
   1: lagArbeidsgiver('1', 'Frilanser, samlet aktivitet'),
   2: lagPrivatArbeidsgiver('2', 'Halvor Hansen', '1990-01-01'),
   3: lagArbeidsgiver('3', 'Test'),
-  555864629: lagArbeidsgiver('555864629', 'WWW.EIENDOMSDRIFT.CC SA'),
-  999999999: lagArbeidsgiver('999999999', 'Arbeidsgiveren AS'),
-  1111111: lagArbeidsgiver('1111111', 'STATOIL'),
-  342352362: lagArbeidsgiver('342352362', 'Lagt til av saksbehandler'),
+  555_864_629: lagArbeidsgiver('555864629', 'WWW.EIENDOMSDRIFT.CC SA'),
+  999_999_999: lagArbeidsgiver('999999999', 'Arbeidsgiveren AS'),
+  1_111_111: lagArbeidsgiver('1111111', 'STATOIL'),
+  342_352_362: lagArbeidsgiver('342352362', 'Lagt til av saksbehandler'),
 };
 
 const meta = {
@@ -286,7 +286,7 @@ export const HarOpphold: Story = {
       ...TILRETTELEGGING_PERMISJON,
       arbeidsforholdListe: [
         {
-          tilretteleggingId: 1116961,
+          tilretteleggingId: 1_116_961,
           tilretteleggingBehovFom: '2020-03-17',
           tilretteleggingDatoer: [
             {
@@ -366,7 +366,7 @@ export const ErReadonly: Story = {
       ...TILRETTELEGGING_PERMISJON,
       arbeidsforholdListe: [
         {
-          tilretteleggingId: 1116961,
+          tilretteleggingId: 1_116_961,
           tilretteleggingBehovFom: '2020-03-17',
           tilretteleggingDatoer: [
             {
@@ -422,7 +422,7 @@ export const ErRevurdering: Story = {
       ...TILRETTELEGGING_PERMISJON,
       arbeidsforholdListe: [
         {
-          tilretteleggingId: 1116961,
+          tilretteleggingId: 1_116_961,
           tilretteleggingBehovFom: '2020-03-17',
           tilretteleggingDatoer: [
             {
@@ -460,7 +460,7 @@ export const KanSplittes: Story = {
       termindato: '2020-11-06',
       arbeidsforholdListe: [
         {
-          tilretteleggingId: 1116961,
+          tilretteleggingId: 1_116_961,
           tilretteleggingBehovFom: '2020-03-17',
           tilretteleggingDatoer: [
             {
@@ -506,7 +506,7 @@ export const KanSplittes: Story = {
           skalVurdereSplittAvArbeidsforholdet: true,
         },
         {
-          tilretteleggingId: 1116962,
+          tilretteleggingId: 1_116_962,
           tilretteleggingBehovFom: '2020-03-17',
           tilretteleggingDatoer: [
             {

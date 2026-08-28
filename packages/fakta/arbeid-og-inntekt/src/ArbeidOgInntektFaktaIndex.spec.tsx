@@ -224,7 +224,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal beholde skjemaet dirty når lagring av manglende arbeidsforhold feiler', async () => {
     const lagreVurdering = vi.fn(() => {
       const promise = Promise.reject(new Error('Lagring feilet'));
-      void promise.catch(() => undefined);
+      void promise.catch(() => {});
       return promise;
     });
 

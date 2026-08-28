@@ -20,7 +20,7 @@ const requiredIfOther =
     if (arbeidsgiver || land || periodeFom || periodeTom) {
       return required(value);
     }
-    return undefined;
+    return;
   };
 const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes

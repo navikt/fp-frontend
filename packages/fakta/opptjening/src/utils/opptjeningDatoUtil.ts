@@ -25,7 +25,7 @@ export const finnOpptjeningTom = (
   opptjeningsperiodeTom?: string,
 ) => {
   if (!opptjeningsperiodeFom || !opptjeningsperiodeTom) {
-    return undefined;
+    return;
   }
   return dayjs(opptjeningTom).isAfter(opptjeningsperiodeTom)
     ? opptjeningsperiodeTom

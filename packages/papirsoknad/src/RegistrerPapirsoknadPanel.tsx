@@ -48,7 +48,7 @@ export const RegistrerPapirsoknadPanel = ({
   const erEndringssøknad = aksjonspunktKode === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER;
   const [soknadData, setSoknadData] = useState<SoknadData | undefined>(() => {
     if (!mellomlagretData) {
-      return undefined;
+      return;
     }
     return new SoknadData(
       mellomlagretData.fagsakYtelseType,

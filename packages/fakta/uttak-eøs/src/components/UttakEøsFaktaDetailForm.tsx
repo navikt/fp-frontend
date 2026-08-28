@@ -189,16 +189,15 @@ const lagGyldigeKontotyperOption = (fagsak: Fagsak, alleKodeverk: AlleKodeverk):
         {finnTrekkkonto('FEDREKVOTE', alleKodeverk)}
       </option>,
     ];
-  } else {
-    return [
-      <option key={0} value={'FELLESPERIODE' satisfies UttakPeriodeType}>
-        {finnTrekkkonto('FELLESPERIODE', alleKodeverk)}
-      </option>,
-      <option key={1} value={'MØDREKVOTE' satisfies UttakPeriodeType}>
-        {finnTrekkkonto('MØDREKVOTE', alleKodeverk)}
-      </option>,
-    ];
   }
+  return [
+    <option key={0} value={'FELLESPERIODE' satisfies UttakPeriodeType}>
+      {finnTrekkkonto('FELLESPERIODE', alleKodeverk)}
+    </option>,
+    <option key={1} value={'MØDREKVOTE' satisfies UttakPeriodeType}>
+      {finnTrekkkonto('MØDREKVOTE', alleKodeverk)}
+    </option>,
+  ];
 };
 
 const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>

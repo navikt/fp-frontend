@@ -112,7 +112,7 @@ export const ManglendeArbeidsforholdForm = ({
           // onSubmit-DOM-event). Utan dette vart det ein ufanga ("unhandled") promise-rejection.
           // Feilmelding til brukar og moglegheit til å prøve på nytt er alt sikra uavhengig av dette:
           // mutation-cachen (queryUtils.ts) viser feilen, og reset() over køyrer berre ved suksess.
-          .catch(() => undefined)
+          .catch(() => {})
       );
     }
     return (
@@ -129,7 +129,7 @@ export const ManglendeArbeidsforholdForm = ({
           formMethods.reset(formValues);
         })
         // Sjå kommentar over: fangar berre for å unngå ufanga rejection, ikkje for brukarvarsling/retry.
-        .catch(() => undefined)
+        .catch(() => {})
     );
   };
 

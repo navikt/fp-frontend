@@ -53,7 +53,7 @@ const FEIL_SJEKKER: FeilSjekk[] = [
   },
   {
     type: 'HarIkkeValgtArbeidsforhold',
-    harFeil: af => !af.some(a => a.skalBrukes),
+    harFeil: af => af.every(a => !a.skalBrukes),
     melding: <FormattedMessage id="TilretteleggingFormFeil.HarIkkeValgtArbeidsforhold" />,
   },
   {

@@ -4,6 +4,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 import * as importPlugin from 'eslint-plugin-import-x';
 import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import vitest from '@vitest/eslint-plugin';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -12,6 +13,69 @@ import describeNameMatchesFilename from './rules/describe-name-matches-filename.
 const OFF = 0;
 const WARNING = 1;
 const ERROR = 2;
+
+const DEFERRED_UNICORN_RULES = {
+  'unicorn/consistent-boolean-name': OFF,
+  'unicorn/consistent-class-member-order': OFF,
+  'unicorn/consistent-function-scoping': OFF,
+  'unicorn/filename-case': OFF,
+  'unicorn/max-nested-calls': OFF,
+  'unicorn/name-replacements': OFF,
+  'unicorn/no-array-callback-reference': OFF,
+  'unicorn/no-array-fill-with-reference-type': OFF,
+  'unicorn/no-array-reduce': OFF,
+  'unicorn/no-array-reverse': OFF,
+  'unicorn/no-array-sort': OFF,
+  'unicorn/no-await-expression-member': OFF,
+  'unicorn/no-computed-property-existence-check': OFF,
+  'unicorn/no-confusing-array-splice': OFF,
+  'unicorn/no-declarations-before-early-exit': OFF,
+  'unicorn/no-duplicate-if-branches': OFF,
+  'unicorn/no-duplicate-loops': OFF,
+  'unicorn/no-for-each': OFF,
+  'unicorn/no-incorrect-template-string-interpolation': OFF,
+  'unicorn/no-negated-condition': OFF,
+  'unicorn/no-nested-ternary': OFF,
+  'unicorn/no-new-array': OFF,
+  'unicorn/no-non-function-verb-prefix': OFF,
+  'unicorn/no-null': OFF,
+  'unicorn/no-top-level-side-effects': OFF,
+  'unicorn/no-unnecessary-global-this': OFF,
+  'unicorn/no-unnecessary-boolean-comparison': OFF,
+  'unicorn/no-unreadable-object-destructuring': OFF,
+  'unicorn/no-unsafe-string-replacement': OFF,
+  'unicorn/no-useless-switch-case': OFF,
+  'unicorn/prefer-array-from-map': OFF,
+  'unicorn/prefer-array-some': OFF,
+  'unicorn/prefer-await': OFF,
+  'unicorn/prefer-continue': OFF,
+  'unicorn/prefer-dom-node-html-methods': OFF,
+  'unicorn/prefer-early-return': OFF,
+  'unicorn/prefer-else-if': OFF,
+  'unicorn/prefer-includes': OFF,
+  'unicorn/prefer-includes-over-repeated-comparisons': OFF,
+  'unicorn/prefer-iterator-helpers': OFF,
+  'unicorn/prefer-location-assign': OFF,
+  'unicorn/prefer-logical-operator-over-ternary': OFF,
+  'unicorn/prefer-minimal-ternary': OFF,
+  'unicorn/prefer-number-coercion': OFF,
+  'unicorn/prefer-object-from-entries': OFF,
+  'unicorn/prefer-object-iterable-methods': OFF,
+  'unicorn/prefer-query-selector': OFF,
+  'unicorn/prefer-scoped-selector': OFF,
+  'unicorn/prefer-simple-condition-first': OFF,
+  'unicorn/prefer-simple-sort-comparator': OFF,
+  'unicorn/prefer-spread': OFF,
+  'unicorn/prefer-switch': OFF,
+  'unicorn/prefer-ternary': OFF,
+  'unicorn/prevent-abbreviations': OFF,
+};
+
+const unicornRecommended = {
+  ...eslintPluginUnicorn.configs['flat/recommended'],
+  files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+  ignores: ['**/*.gen.ts', '**/apiDtoGenerert.ts'],
+};
 
 export default [
   { ignores: ['packages/config/eslint/**', 'packages/config/vite/**'] },
@@ -46,10 +110,12 @@ export default [
   },
   eslintReact.configs['recommended-typescript'],
   reactHooks.configs.flat.recommended,
+  unicornRecommended,
   eslintConfigPrettier,
   {
     rules: {
       ...vitest.configs.recommended.rules,
+      ...DEFERRED_UNICORN_RULES,
       '@eslint-react/purity': ERROR,
       eqeqeq: ERROR,
       'max-len': [ERROR, 160],

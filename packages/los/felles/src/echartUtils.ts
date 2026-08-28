@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import { type BarSeriesOption, type LineSeriesOption } from 'echarts';
 
 export const formaterMånedÅr = (dato: string) =>
-  capitalizeFirstLetter(`${dayjs(dato).format('MMM YYYY')}`).replaceAll('.', '');
+  capitalizeFirstLetter(dayjs(dato).format('MMM YYYY')).replaceAll('.', '');
 
 export type ColorPair = { primaryColor: string; secondaryColor: string };
 type ColorVariant = AkselDynamicStatelessBackgroundToken | AkselDynamicStatefulBackgroundToken;

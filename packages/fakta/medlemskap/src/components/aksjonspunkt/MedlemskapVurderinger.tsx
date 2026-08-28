@@ -114,9 +114,11 @@ MedlemskapVurderinger.initialValues = (
     const { opphørFom, avslagskode, medlemFom } = resultat;
     if (!avslagskode) {
       return { vurdering: MedlemskapVurdering.OPPFYLT };
-    } else if (opphørFom) {
+    }
+    if (opphørFom) {
       return { vurdering: MedlemskapVurdering.DELVIS_OPPFYLT, opphørFom, avslagskode };
-    } else if (medlemFom) {
+    }
+    if (medlemFom) {
       return { vurdering: MedlemskapVurdering.IKKE_OPPFYLT, medlemFom, avslagskode };
     }
     return { vurdering: MedlemskapVurdering.IKKE_OPPFYLT, avslagskode };

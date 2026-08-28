@@ -44,13 +44,13 @@ export const BehandlingPapirsoknadIndex = () => {
   );
   const mellomlagretData = (() => {
     if (!mellomlagretResponse?.innhold) {
-      return undefined;
+      return;
     }
     try {
       const parsed = JSON.parse(mellomlagretResponse.innhold) as Record<string, unknown>;
       return isPapirsøknadMellomlagring(parsed) ? parsed : undefined;
     } catch {
-      return undefined;
+      return;
     }
   })();
 

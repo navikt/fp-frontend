@@ -33,17 +33,15 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
   periodeSlutt: dayjs.Dayjs,
 ): [LosBehandlingType, DataPunkt[]][] =>
   Array.from(
-    Array.from(data.entries())
-      .reduce((acc, [behandlingstype, behandlingstypeData]) => {
-        const koordinater: DataPunkt[] = [];
-        for (let dato = periodeStart; dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'day').startOf('day')) {
-          const funnetDato = behandlingstypeData.find(d => dayjs(d[0]).isSame(dato));
-          koordinater.push(funnetDato ?? [dato.toDate(), undefined]);
-        }
-        acc.set(behandlingstype, koordinater);
-        return acc;
-      }, new Map<LosBehandlingType, DataPunkt[]>())
-      .entries(),
+    Array.from(data).reduce((acc, [behandlingstype, behandlingstypeData]) => {
+      const koordinater: DataPunkt[] = [];
+      for (let dato = periodeStart; dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'day').startOf('day')) {
+        const funnetDato = behandlingstypeData.find(d => dayjs(d[0]).isSame(dato));
+        koordinater.push(funnetDato ?? [dato.toDate(), undefined]);
+      }
+      acc.set(behandlingstype, koordinater);
+      return acc;
+    }, new Map<LosBehandlingType, DataPunkt[]>()),
   );
 
 export const slåSammenLikeBehandlingstyperOgDatoer = (
@@ -54,7 +52,7 @@ export const slåSammenLikeBehandlingstyperOgDatoer = (
     o => `${o.behandlingType}|${o.statistikkDato}`,
   );
 
-  return Array.from(gruppertPåBehandlingsTypeOgDato.entries()).map(summerOppgaverIGruppe);
+  return Array.from(gruppertPåBehandlingsTypeOgDato).map(summerOppgaverIGruppe);
 };
 const summerOppgaverIGruppe = ([, oppgaver]: [string, OppgaverForAvdelingPerDato[]]): OppgaverForDato => {
   const [første, ...resten] = oppgaver;

@@ -18,9 +18,10 @@ export const Avatar = ({ aktørType }: Props) => {
   const intl = useIntl();
 
   switch (aktørType) {
-    case 'SBH':
+    case 'SBH': {
       return <PersonHeadsetIcon fontSize={24} title={intl.formatMessage({ id: 'Historikkinnslag.Saksbehandler' })} />;
-    case 'SOKER':
+    }
+    case 'SOKER': {
       return (
         <PersonFillIcon
           fontSize={24}
@@ -28,11 +29,15 @@ export const Avatar = ({ aktørType }: Props) => {
           title={intl.formatMessage({ id: 'Historikkinnslag.Soker' })}
         />
       );
-    case 'BESL':
+    }
+    case 'BESL': {
       return <PersonCheckmarkIcon fontSize={24} title={intl.formatMessage({ id: 'Historikkinnslag.Beslutter' })} />;
-    case 'VL':
+    }
+    case 'VL': {
       return <RobotSmileIcon fontSize={24} title={intl.formatMessage({ id: 'Historikkinnslag.Vedtakslosninger' })} />;
-    case 'ARBEIDSGIVER':
+    }
+    case 'ARBEIDSGIVER': {
       return <PersonSuitIcon fontSize={24} title={intl.formatMessage({ id: 'Historikkinnslag.Arbeidsgiver' })} />;
+    }
   }
 };

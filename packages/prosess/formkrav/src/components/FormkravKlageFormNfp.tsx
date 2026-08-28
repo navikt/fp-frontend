@@ -29,7 +29,7 @@ import {
 import styles from './formkravKlageFormNfp.module.css';
 
 const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']): string =>
-  klageFormkavResultat?.påKlagdBehandlingUuid ? `${klageFormkavResultat.påKlagdBehandlingUuid}` : IKKE_PA_KLAGD_VEDTAK;
+  klageFormkavResultat?.påKlagdBehandlingUuid ? klageFormkavResultat.påKlagdBehandlingUuid : IKKE_PA_KLAGD_VEDTAK;
 
 const getKlagBareVedtak = (
   avsluttedeBehandlinger: AvsluttetBehandling[],
@@ -45,7 +45,7 @@ const getKlagBareVedtak = (
     [...avsluttedeBehandlinger]
       .sort((b1, b2) => dayjs(b1.avsluttet).diff(dayjs(b2.avsluttet)))
       .map(({ uuid, type, avsluttet }) => (
-        <option key={uuid} value={`${uuid}`}>
+        <option key={uuid} value={uuid}>
           {`${alleKodeverk['BehandlingType'].find(({ kode }) => kode === type)?.navn ?? ''} ${avsluttet ? dateTimeFormat(avsluttet) : ''}`}
         </option>
       )),
@@ -238,7 +238,7 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
               name="fritekstTilBrev"
               control={formMethods.control}
               label={intl.formatMessage({ id: 'FormkravKlageFormNfp.Fritekst' })}
-              maxLength={100000}
+              maxLength={100_000}
               validate={[required, hasValidText]}
               readOnly={isReadOnly}
               parse={formaterFritekst}

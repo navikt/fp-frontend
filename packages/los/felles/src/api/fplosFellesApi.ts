@@ -5,11 +5,11 @@ import type { AlleKodeverkLos, ReservasjonStatusDto } from '@navikt/fp-types';
 
 const kyExtended = ky.extend({
   retry: 0,
-  timeout: 15000,
+  timeout: 15_000,
   hooks: {
     beforeRequest: [
       ({ request }) => {
-        const navCallId = `CallId_${Date.now()}_${Math.floor(Math.random() * 1000000000)}`;
+        const navCallId = `CallId_${Date.now()}_${Math.floor(Math.random() * 1_000_000_000)}`;
         request.headers.set('Nav-Callid', navCallId);
       },
     ],

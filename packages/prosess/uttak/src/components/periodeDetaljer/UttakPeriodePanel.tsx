@@ -77,7 +77,7 @@ const hentApTekst = (
       periodeTypeKode,
       stonadskonto,
     );
-    const arbeidsForholdMedNullDagerIgjen = arbeidsForhold.join();
+    const arbeidsForholdMedNullDagerIgjen = arbeidsForhold.join(',');
     if (arbeidsForhold.length > 1) {
       aksjonspunktTekster.push(
         <FormattedMessage

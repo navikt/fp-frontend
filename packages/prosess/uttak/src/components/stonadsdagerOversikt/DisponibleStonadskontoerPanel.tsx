@@ -114,7 +114,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
 
   const sorterteAktiviteter = useMemo(() => {
     if (!valgtKonto) {
-      return undefined;
+      return;
     }
 
     const aktiviteterMedNavn = valgtKonto.aktivitetSaldoDtoList.map(aktivitet => ({

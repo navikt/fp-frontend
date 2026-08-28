@@ -38,7 +38,7 @@ const getDocumentsStatus = (values: InnsynFormValues, documents: Dokument[]) =>
 const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
   const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === 'INN');
   for (const doc of allDocuments) {
-    if (!filteredDocuments.some(fd => fd.dokumentId === doc.dokumentId)) {
+    if (filteredDocuments.every(fd => fd.dokumentId !== doc.dokumentId)) {
       filteredDocuments.push(doc);
     }
   }

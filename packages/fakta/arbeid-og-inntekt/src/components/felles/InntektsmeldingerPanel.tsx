@@ -61,7 +61,7 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                       )}
                       {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length >= 50 && (
                         <Tooltip content={delOppAId(a.eksternArbeidsforholdId)}>
-                          <BodyShort size="small">{`${a.eksternArbeidsforholdId.substring(0, 50)}...`}</BodyShort>
+                          <BodyShort size="small">{`${a.eksternArbeidsforholdId.slice(0, 50)}...`}</BodyShort>
                         </Tooltip>
                       )}
                       {!a.eksternArbeidsforholdId && <BodyShort size="small">-</BodyShort>}
@@ -149,7 +149,7 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                             return {
                               ...info,
 
-                              [a.internArbeidsforholdId]: status === undefined || status === false,
+                              [a.internArbeidsforholdId]: status === undefined || !status,
                             };
                           });
                         }}

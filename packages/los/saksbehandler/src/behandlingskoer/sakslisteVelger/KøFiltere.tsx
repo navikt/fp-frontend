@@ -196,7 +196,7 @@ const datoForRelativPeriode = (
   fraTilAntall?: number,
 ) => {
   if (fraTilAntall === undefined) {
-    return undefined;
+    return;
   }
   return periodefilter === 'RELATIV_PERIODE_DAGER' ? finnDato(fraTilAntall) : finnDatoMåned(fraTilAntall, erFom);
 };

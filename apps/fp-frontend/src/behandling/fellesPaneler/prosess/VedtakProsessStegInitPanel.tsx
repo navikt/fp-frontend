@@ -174,7 +174,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
 
 const harKunLukkedeAksjonspunkt = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => {
   return aksjonspunkter
-    .filter(ap => !vedtakAksjonspunkter.some(vap => vap.definisjon === ap.definisjon))
+    .filter(ap => vedtakAksjonspunkter.every(vap => vap.definisjon !== ap.definisjon))
     .every(ap => ap.status !== 'OPPR');
 };
 

@@ -56,7 +56,7 @@ describe('BehovForTilretteleggingPanel', () => {
     expect(lagre).toHaveBeenCalledTimes(0);
   });
 
-  it('skal søkes om tilrettelegging for alle arbeidstyper', { timeout: 50000 }, async () => {
+  it('skal søkes om tilrettelegging for alle arbeidstyper', { timeout: 50_000 }, async () => {
     const lagre = vi.fn();
 
     await Default.run({
@@ -198,7 +198,7 @@ describe('BehovForTilretteleggingPanel', () => {
 
   it(
     'skal slette alle arbeidsgivere og gi beskje om at den trenger minst et element i arbeidsgiiverlisten',
-    { timeout: 30000 },
+    { timeout: 30_000 },
     async () => {
       const lagre = vi.fn();
 

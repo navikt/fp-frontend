@@ -87,16 +87,21 @@ const mapBGKodeTilFpsakKode = (
   | AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN
   | AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG => {
   switch (bgKode) {
-    case FaktaBeregningAvklaringsbehovCode.AVKLAR_AKTIVITETER:
+    case FaktaBeregningAvklaringsbehovCode.AVKLAR_AKTIVITETER: {
       return AksjonspunktKode.AVKLAR_AKTIVITETER;
-    case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER:
+    }
+    case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER: {
       return AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER;
-    case FaktaBeregningAvklaringsbehovCode.VURDER_FAKTA_FOR_ATFL_SN:
+    }
+    case FaktaBeregningAvklaringsbehovCode.VURDER_FAKTA_FOR_ATFL_SN: {
       return AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN;
-    case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG:
+    }
+    case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG: {
       return AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG;
-    default:
+    }
+    default: {
       throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
+    }
   }
 };
 

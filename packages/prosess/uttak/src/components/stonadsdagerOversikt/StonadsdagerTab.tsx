@@ -10,26 +10,36 @@ import styles from './stonadsdagerTab.module.css';
 
 const finnKorrektLabelForKvote = (stonadtype: StønadskontoType): string => {
   switch (stonadtype) {
-    case 'FEDREKVOTE':
+    case 'FEDREKVOTE': {
       return 'TimeLineTab.Stonadinfo.Fedrekvote';
-    case 'MØDREKVOTE':
+    }
+    case 'MØDREKVOTE': {
       return 'TimeLineTab.Stonadinfo.Modrekvote';
-    case 'FELLESPERIODE':
+    }
+    case 'FELLESPERIODE': {
       return 'TimeLineTab.Stonadinfo.Fellesperiode';
-    case 'FORELDREPENGER_FØR_FØDSEL':
+    }
+    case 'FORELDREPENGER_FØR_FØDSEL': {
       return 'TimeLineTab.Stonadinfo.ForeldrepengerFF';
-    case 'FLERBARNSDAGER':
+    }
+    case 'FLERBARNSDAGER': {
       return 'TimeLineTab.Stonadinfo.Flerbarnsdager';
-    case 'FORELDREPENGER':
+    }
+    case 'FORELDREPENGER': {
       return 'TimeLineTab.Stonadinfo.ForeldrePenger';
-    case 'UTEN_AKTIVITETSKRAV':
+    }
+    case 'UTEN_AKTIVITETSKRAV': {
       return 'TimeLineTab.Stonadinfo.UtenAktivitetskrav';
-    case 'MINSTERETT':
+    }
+    case 'MINSTERETT': {
       return 'TimeLineTab.Stonadinfo.Minsterett';
-    case 'MINSTERETT_NESTE_STØNADSPERIODE':
+    }
+    case 'MINSTERETT_NESTE_STØNADSPERIODE': {
       return 'TimeLineTab.Stonadinfo.MinsterettNesteStønadsperiode';
-    default:
+    }
+    default: {
       return 'TimeLineTab.Stonadinfo.Empty';
+    }
   }
 };
 

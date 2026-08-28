@@ -59,7 +59,7 @@ export const ArbeidsforholdHeader = ({
 
             {dayjs(tilrettelegging.tilretteleggingBehovFom).isValid() && (
               <>
-                <span>{'\u2022'}</span>
+                <span>{'\u{2022}'}</span>
                 <span>
                   <DateLabel dateString={tilrettelegging.tilretteleggingBehovFom} />
                 </span>
@@ -68,7 +68,7 @@ export const ArbeidsforholdHeader = ({
 
             {tilrettelegging.velferdspermisjoner.length > 0 && (
               <>
-                <span>{'\u2022'}</span>
+                <span>{'\u{2022}'}</span>
                 <FormattedMessage
                   id="ArbeidsforholdExpansionCard.AntallVelferdspermisjon"
                   tagName="span"
@@ -82,7 +82,7 @@ export const ArbeidsforholdHeader = ({
               </>
             )}
             <>
-              <span>{'\u2022'}</span>
+              <span>{'\u{2022}'}</span>
               <FormattedMessage
                 id="ArbeidsforholdExpansionCard.Stillingsprosent"
                 tagName="span"
@@ -96,7 +96,7 @@ export const ArbeidsforholdHeader = ({
   );
 };
 
-const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+const getEndCharFromId = (id?: string): string => (id ? `...${id.slice(-4)}` : '');
 
 interface SVPTagProps {
   skalBrukes: boolean;

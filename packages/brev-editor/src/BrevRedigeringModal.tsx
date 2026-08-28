@@ -17,13 +17,21 @@ const intl = createIntl(messages);
 const BREV_EDITOR_HOLDER_ID = 'brev-rediger-innhold';
 
 interface Props {
-  /** Full opprinnelig HTML fra backend */
+  /**
+  Full opprinnelig HTML fra backend
+  */
   opprinneligHtml: string;
-  /** Redigert HTML fra mellomlagring, eller null hvis ikke redigert */
+  /**
+  Redigert HTML fra mellomlagring, eller null hvis ikke redigert
+  */
   redigertHtml: string | null;
-  /** Kalles med pakket HTML ved auto-mellomlagring og eksplisitt lagring */
+  /**
+  Kalles med pakket HTML ved auto-mellomlagring og eksplisitt lagring
+  */
   mellomlagreOgHentPåNytt: (html?: string) => Promise<void>;
-  /** Kalles med ferdig HTML for forhåndsvisning */
+  /**
+  Kalles med ferdig HTML for forhåndsvisning
+  */
   forhåndsvisBrev: (html: string) => void;
   setVisRedigeringModal: (vis: boolean) => void;
   isReadOnly: boolean;

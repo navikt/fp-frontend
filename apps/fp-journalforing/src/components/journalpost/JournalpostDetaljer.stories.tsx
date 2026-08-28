@@ -13,7 +13,7 @@ import messages from '../../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const saksbehandler = 'Z123343';
-const journalpost = 986547336994;
+const journalpost = 986_547_336_994;
 
 const defaultOppgave: Oppgave = {
   journalpostId: journalpost.toString(),

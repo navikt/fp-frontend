@@ -100,11 +100,11 @@ export const AktiveOgTilgjengeligeOppgaverGraf = ({ aktiveOgLedigeTidslinje }: P
                 formatter: (value: string) => {
                   if (tidsintervall === 'dag') {
                     return timeFormat(value);
-                  } else if (tidsintervall === 'måned') {
-                    return dayjs(value).format('DD.MM');
-                  } else {
-                    return dayjs(value).format('ddd DD.MM');
                   }
+                  if (tidsintervall === 'måned') {
+                    return dayjs(value).format('DD.MM');
+                  }
+                  return dayjs(value).format('ddd DD.MM');
                 },
               },
             },
@@ -144,12 +144,15 @@ const filtererTidslinjeBasertPåValgIntervall = (
     const diffDays = diffHours / 24;
 
     switch (timeRange) {
-      case Tidsintervall.DAG:
+      case Tidsintervall.DAG: {
         return diffHours <= 24;
-      case Tidsintervall.UKE:
+      }
+      case Tidsintervall.UKE: {
         return diffDays <= 7;
-      case Tidsintervall.MÅNED:
+      }
+      case Tidsintervall.MÅNED: {
         return diffDays <= 30;
+      }
     }
   });
 };

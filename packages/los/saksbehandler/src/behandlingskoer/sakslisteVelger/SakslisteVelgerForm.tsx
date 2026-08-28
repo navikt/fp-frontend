@@ -64,7 +64,7 @@ export const SakslisteVelgerForm = ({ sakslister, setValgtSakslisteId, fetchAnta
       </VStack>
     );
   }
-  const valgtSaksliste = sorterteSakslister.find(s => sakslisteId === `${s.sakslisteId}`);
+  const valgtSaksliste = sorterteSakslister.find(s => sakslisteId === String(s.sakslisteId));
 
   return (
     <VStack gap="space-24" className={styles['container']}>
@@ -75,7 +75,7 @@ export const SakslisteVelgerForm = ({ sakslister, setValgtSakslisteId, fetchAnta
             control={formMethods.control}
             label={<FormattedMessage id="SakslisteVelgerForm.Saksliste" />}
             selectValues={sorterteSakslister.map(saksliste => (
-              <option key={saksliste.sakslisteId} value={`${saksliste.sakslisteId}`}>
+              <option key={saksliste.sakslisteId} value={String(saksliste.sakslisteId)}>
                 {saksliste.navn}
                 {getAntallSaker(saksliste)}
               </option>
@@ -120,7 +120,7 @@ const getAntallSaker = ({ gjeldendeStatistikk }: SakslisteDto) => {
 const getDefaultSaksliste = (sorterteSakslister: SakslisteDto[]): string | undefined => {
   const lagretSakslisteId = getValueFromLocalStorage('sakslisteId');
   if (lagretSakslisteId) {
-    if (sorterteSakslister.some(s => `${s.sakslisteId}` === lagretSakslisteId)) {
+    if (sorterteSakslister.some(s => String(s.sakslisteId) === lagretSakslisteId)) {
       return lagretSakslisteId;
     }
     removeValueFromLocalStorage('sakslisteId');

@@ -17,7 +17,7 @@ import { OverføringÅrsak } from './kodeverk/overføringÅrsak';
 import { UttakFaktaIndex } from './UttakFaktaIndex';
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
-  910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
+  910_909_088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
 };
 
 const meta = {

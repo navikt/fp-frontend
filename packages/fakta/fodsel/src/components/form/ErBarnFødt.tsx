@@ -62,11 +62,14 @@ ErBarnFødt.transformValues = (values: ErBarnFødtFormValues) => ({
 const mapErBarnFødt = ({ fødselDokumetasjonStatus, barn }: FødselGjeldende) => {
   const finnesBarnIFReg = barn.some(b => b.kilde === 'FOLKEREGISTER');
   switch (fødselDokumetasjonStatus) {
-    case 'DOKUMENTERT':
+    case 'DOKUMENTERT': {
       return true;
-    case 'IKKE_DOKUMENTERT':
+    }
+    case 'IKKE_DOKUMENTERT': {
       return false;
-    case 'IKKE_VURDERT':
+    }
+    case 'IKKE_VURDERT': {
       return finnesBarnIFReg || undefined;
+    }
   }
 };

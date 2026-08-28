@@ -22,7 +22,7 @@ export const useFaktaPanelMenyData = (
     setFaktaPanelMenyData(oldData => {
       const newData = [...oldData];
       const index = newData.findIndex(d => d.id === data.id);
-      if (index >= 0) {
+      if (index !== -1) {
         newData.splice(index, 1, data);
       } else {
         newData.push(data);

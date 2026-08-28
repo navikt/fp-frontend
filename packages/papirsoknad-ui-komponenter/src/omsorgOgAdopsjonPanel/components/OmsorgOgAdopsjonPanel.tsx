@@ -66,7 +66,7 @@ export const OmsorgOgAdopsjonPanel = ({
 
   const oppdaterAntallBarn = (antallBarn: number | undefined) => {
     if (antallBarn === undefined || antallBarn <= 0) {
-      return undefined;
+      return;
     }
     const ønsketAntall = Math.min(Math.max(antallBarn, 0), MAX_ANTALL_BARN);
     if (fields.length > ønsketAntall) {
@@ -155,7 +155,7 @@ const getValideringMotAnnenFødselsdato = (index: number, fødselsdato: string |
   if (index === 0 && fødselsdato && fDato) {
     return isDatesEqual(fDato, fødselsdato);
   }
-  return undefined;
+  return;
 };
 
 OmsorgOgAdopsjonPanel.initialValues = (): OmsorgOgAdopsjonFormValues => ({ [OMSORG_NAME_PREFIX]: {} });

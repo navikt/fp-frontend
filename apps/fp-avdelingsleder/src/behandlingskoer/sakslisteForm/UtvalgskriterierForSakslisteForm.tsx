@@ -164,11 +164,11 @@ const buildInitialValues = (valgtSaksliste: SakslisteDto): FormValues => {
 const fraAndreKriterierTilBeslutter = (andreKriterier?: AndreKriterieDto): TilBeslutter => {
   if (andreKriterier?.inkluder.includes('TIL_BESLUTTER')) {
     return 'TA_MED';
-  } else if (andreKriterier?.ekskluder.includes('TIL_BESLUTTER')) {
-    return 'FJERN';
-  } else {
-    return 'TA_MED_ALLE';
   }
+  if (andreKriterier?.ekskluder.includes('TIL_BESLUTTER')) {
+    return 'FJERN';
+  }
+  return 'TA_MED_ALLE';
 };
 
 const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslisteId: number): SakslisteLagreDto => {

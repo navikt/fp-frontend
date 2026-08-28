@@ -20,12 +20,15 @@ export const compareByOrder =
   (sort: SortConfig) =>
   (a: Dokument, b: Dokument): number => {
     switch (sort.direction) {
-      case 'ascending':
+      case 'ascending': {
         return comparator(sort.orderBy, a, b);
-      case 'descending':
+      }
+      case 'descending': {
         return comparator(sort.orderBy, b, a);
-      default:
+      }
+      default: {
         return 0;
+      }
     }
   };
 
@@ -35,12 +38,15 @@ export const getNextSortingDirection = (newSortKey: TableHeaders, currentSortSta
   }
 
   switch (currentSortState.direction) {
-    case 'ascending':
+    case 'ascending': {
       return 'descending';
-    case 'descending':
+    }
+    case 'descending': {
       return 'none';
-    case 'none':
+    }
+    case 'none': {
       return 'ascending';
+    }
   }
 };
 

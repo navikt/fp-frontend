@@ -118,7 +118,7 @@ const parseErrorDetails = (details: string) => {
 
 const prosesserFeilmelding = (feilmelding: FpError, feilmeldinger: Feilmelding[]) => {
   switch (feilmelding.type) {
-    case ErrorType.POLLING_HALTED_OR_DELAYED:
+    case ErrorType.POLLING_HALTED_OR_DELAYED: {
       if (feilmelding.status === 'HALTED') {
         const decoded = decodeHtmlEntity(feilmelding.message);
         addIfNotExists(feilmeldinger, {
@@ -140,36 +140,40 @@ const prosesserFeilmelding = (feilmelding: FpError, feilmeldinger: Feilmelding[]
         });
       }
       break;
-    case ErrorType.POLLING_TIMEOUT:
+    }
+    case ErrorType.POLLING_TIMEOUT: {
       addIfNotExists(feilmeldinger, {
         melding: intl.formatMessage({ id: 'Rest.ErrorMessage.PollingTimeout' }, { location: feilmelding.location }),
       });
       break;
-    case ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND:
+    }
+    case ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND: {
       addIfNotExists(feilmeldinger, {
         melding: intl.formatMessage(
           { id: 'Rest.ErrorMessage.GatewayTimeoutOrNotFound' },
           {
-            contextPath: feilmelding.location ? feilmelding.location.split('/')[1]?.toUpperCase() : '',
+            contextPath: feilmelding.location ? feilmelding.location.split('/', 2)[1]?.toUpperCase() : '',
             location: feilmelding.location,
           },
         ),
       });
       break;
+    }
     case ErrorType.REQUEST_FORBIDDEN:
     case ErrorType.REQUEST_UNAUTHORIZED:
     case ErrorType.GENERAL_ERROR:
-    default:
+    default: {
       addIfNotExists(feilmeldinger, {
         melding: feilmelding.message,
       });
+    }
   }
 };
 
 const addIfNotExists = (feilmeldinger: Feilmelding[], nyFeilmelding: Feilmelding) => {
   if (
-    !feilmeldinger.some(
-      feil => feil.melding === nyFeilmelding.melding && feil.tilleggsInfo === nyFeilmelding.tilleggsInfo,
+    feilmeldinger.every(
+      feil => !(feil.melding === nyFeilmelding.melding && feil.tilleggsInfo === nyFeilmelding.tilleggsInfo),
     )
   ) {
     feilmeldinger.push(nyFeilmelding);

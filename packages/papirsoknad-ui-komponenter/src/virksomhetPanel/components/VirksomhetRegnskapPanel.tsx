@@ -62,6 +62,6 @@ VirksomhetRegnskapPanel.transformValues = ({
   tlfRegnskapsforer,
 }: RegistrerVirksomhetFormValues) => ({
   harRegnskapsforer,
-  ...(harRegnskapsforer ? { navnRegnskapsforer } : {}),
-  ...(harRegnskapsforer ? { tlfRegnskapsforer } : {}),
+  ...(harRegnskapsforer && { navnRegnskapsforer }),
+  ...(harRegnskapsforer && { tlfRegnskapsforer }),
 });

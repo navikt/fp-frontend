@@ -178,7 +178,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                 </Table>
               )}
               <RhfRadioGroup
-                name={`perioder.${0}.vurdering`}
+                name={`perioder.0.vurdering`}
                 control={formMethods.control}
                 legend={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
                 validate={[required]}

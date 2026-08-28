@@ -57,7 +57,7 @@ const gradertArbforhold = (
 
     if (arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]) {
       const { navn, identifikator } = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
-      arbeidsforhold = navn ? `${navn}` : arbeidsforhold;
+      arbeidsforhold = navn || arbeidsforhold;
       arbeidsforhold = identifikator ? `${arbeidsforhold} (${identifikator})` : arbeidsforhold;
     }
   }
@@ -208,7 +208,7 @@ export const UttakPeriodeInfo = ({
               readOnly={isReadOnly}
               validate={[
                 samtidigUttak =>
-                  erOppfylt && samtidigUttak !== true && valgtInnvilgelsesÅrsak === '2038'
+                  erOppfylt && !samtidigUttak && valgtInnvilgelsesÅrsak === '2038'
                     ? intl.formatMessage({ id: 'ValidationMessage.SamtidigUttakErObligatorisk' })
                     : null,
               ]}

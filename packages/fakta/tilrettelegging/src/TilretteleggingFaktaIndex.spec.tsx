@@ -104,7 +104,7 @@ describe('TilretteleggingFaktaIndex', () => {
               type: 'HEL_TILRETTELEGGING',
             },
           ],
-          tilretteleggingId: 1116961,
+          tilretteleggingId: 1_116_961,
           uttakArbeidType: 'FRILANS',
           velferdspermisjoner: [
             {
@@ -389,7 +389,7 @@ describe('TilretteleggingFaktaIndex', () => {
               type: 'HEL_TILRETTELEGGING',
             },
           ],
-          tilretteleggingId: 1116961,
+          tilretteleggingId: 1_116_961,
           uttakArbeidType: 'FRILANS',
           velferdspermisjoner: [
             {
@@ -885,7 +885,7 @@ describe('TilretteleggingFaktaIndex', () => {
               kilde: 'SØKNAD',
             },
           ],
-          tilretteleggingId: 1116962,
+          tilretteleggingId: 1_116_962,
           uttakArbeidType: 'ORDINÆRT_ARBEID',
           velferdspermisjoner: [],
         },

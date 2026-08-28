@@ -155,7 +155,7 @@ const createColumns = (
   nextPeriod: string,
   borderBottom?: string,
 ): ReactElement[] => {
-  const nextPeriodFormatted = `${dayjs(nextPeriod).format('MMMMYY')}`;
+  const nextPeriodFormatted = dayjs(nextPeriod).format('MMMMYY');
 
   const perioderData = rangeOfMonths.map(monthAndYear => {
     const periodeExists = perioder.find(
@@ -185,7 +185,7 @@ const lagVisningsNavn = (mottaker: Mottaker, arbeidsgiverOpplysninger: Arbeidsgi
   const agOpplysning = mottaker.mottakerIdentifikator
     ? arbeidsgiverOpplysninger[mottaker.mottakerIdentifikator]
     : undefined;
-  return agOpplysning ? `${agOpplysning.navn} (${mottaker.mottakerNummer})` : `${mottaker.mottakerNummer}`;
+  return agOpplysning ? `${agOpplysning.navn} (${mottaker.mottakerNummer})` : mottaker.mottakerNummer;
 };
 
 const tableTitle = (

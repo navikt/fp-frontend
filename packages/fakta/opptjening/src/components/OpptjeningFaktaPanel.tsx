@@ -150,7 +150,7 @@ export const OpptjeningFaktaPanel = ({
     // rejection. isSubmitting blir uansett nullstilt av finally under, uavhengig av dette
     // catch-et; feilmelding til brukar er alt sikra via mutation-cachen (queryUtils.ts).
     void submitCallback(transformValues(formVerdierForAlleAktiviteter, filtrerteOgSorterteOpptjeningsaktiviteter))
-      .catch(() => undefined)
+      .catch(() => {})
       .finally(() => setIsSubmitting(false));
   };
 

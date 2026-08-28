@@ -22,7 +22,7 @@ const meta = {
       errorcode: undefined,
       errormessage: undefined,
     },
-    setSiteHeight: () => undefined,
+    setSiteHeight: () => {},
     crashMessage: undefined,
     hideErrorMessages: false,
     theme: 'light',

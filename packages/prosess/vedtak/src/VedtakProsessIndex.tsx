@@ -22,11 +22,11 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT = [
+const BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT = new Set<string>([
   AksjonspunktKode.UTGÅTT_5042,
   AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
   AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
-];
+]);
 
 interface Props {
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
@@ -70,7 +70,7 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
     return false;
   }
   const behandlingHarLøstBGAP = aksjonspunkter.find(
-    ap => BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some(k => k === ap.definisjon) && ap.status === 'UTFO',
+    ap => BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.has(ap.definisjon) && ap.status === 'UTFO',
   );
   const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode.at(0);
   const andelSomErManueltFastsatt = førstePeriode?.beregningsgrunnlagPrStatusOgAndel?.find(

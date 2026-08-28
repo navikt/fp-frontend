@@ -8,15 +8,20 @@ export type FaktaKilde = 'SØKNAD' | 'FOLKEREGISTER' | 'MEDL' | 'SAKSBEHANDLER';
 
 export const getLabelForFaktaKilde = (kilde: FaktaKilde) => {
   switch (kilde) {
-    case 'SØKNAD':
+    case 'SØKNAD': {
       return intl.formatMessage({ id: 'FaktaKilde.Soknad' });
-    case 'FOLKEREGISTER':
+    }
+    case 'FOLKEREGISTER': {
       return intl.formatMessage({ id: 'FaktaKilde.FREG' });
-    case 'MEDL':
+    }
+    case 'MEDL': {
       return intl.formatMessage({ id: 'FaktaKilde.MEDL' });
-    case 'SAKSBEHANDLER':
+    }
+    case 'SAKSBEHANDLER': {
       return intl.formatMessage({ id: 'FaktaKilde.SBH' });
-    default:
+    }
+    default: {
       return assertUnreachable(kilde);
+    }
   }
 };

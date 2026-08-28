@@ -134,18 +134,24 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering) => {
   const klageResultat =
     behandlingKlageVurdering.klageVurderingResultatNK ?? behandlingKlageVurdering.klageVurderingResultatNFP;
   switch (klageResultat?.klageVurdering) {
-    case 'AVVIS_KLAGE':
+    case 'AVVIS_KLAGE': {
       return 'VedtakKlageForm.KlageAvvist';
-    case 'STADFESTE_YTELSESVEDTAK':
+    }
+    case 'STADFESTE_YTELSESVEDTAK': {
       return 'VedtakKlageForm.KlageStadfestet';
-    case 'OPPHEVE_YTELSESVEDTAK':
+    }
+    case 'OPPHEVE_YTELSESVEDTAK': {
       return 'VedtakKlageForm.YtelsesvedtakOpphevet';
-    case 'HJEMSENDE_UTEN_Å_OPPHEVE':
+    }
+    case 'HJEMSENDE_UTEN_Å_OPPHEVE': {
       return 'VedtakKlageForm.HjemmsendUtenOpphev';
-    case 'MEDHOLD_I_KLAGE':
+    }
+    case 'MEDHOLD_I_KLAGE': {
       return klageResultat.klageVurderingOmgjør ? OMGJOER_TEKST_MAP[klageResultat.klageVurderingOmgjør] : undefined;
-    default:
+    }
+    default: {
       return 'VedtakKlageForm.IkkeFastsatt';
+    }
   }
 };
 

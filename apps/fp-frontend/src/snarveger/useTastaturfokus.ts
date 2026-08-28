@@ -53,7 +53,7 @@ export const useTastaturfokus = <TContainer extends HTMLElement, TElement extend
   useEffect(() => {
     const element = containerRef.current;
     if (!lyttPåContainer || !element) {
-      return undefined;
+      return;
     }
 
     element.addEventListener('keydown', håndterTast);
