@@ -108,11 +108,13 @@ Plukker ut `id="..."` eller `id={'...'}` fra JSX-attributter.
 */
 const collectIdFromJsxAttributes = (attributes: ts.JsxAttributes, ids: string[]): void => {
   for (const attribute of attributes.properties) {
-    if (ts.isJsxAttribute(attribute) && attribute.name.getText() === 'id' && attribute.initializer !== undefined) {
-      const id = getJsxAttributeString(attribute.initializer);
-      if (id !== undefined) {
-        ids.push(id);
-      }
+    if (!(ts.isJsxAttribute(attribute) && attribute.name.getText() === 'id') || attribute.initializer === undefined) {
+      continue;
+    }
+
+    const id = getJsxAttributeString(attribute.initializer);
+    if (id !== undefined) {
+      ids.push(id);
     }
   }
 };

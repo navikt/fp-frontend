@@ -47,7 +47,7 @@ const unicornRecommended = {
   ignores: ['**/*.gen.ts', '**/apiDtoGenerert.ts'],
 };
 
-export default [
+const baseConfig = [
   { ignores: ['packages/config/eslint/**', 'packages/config/vite/**'] },
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
@@ -80,79 +80,79 @@ export default [
   },
   eslintReact.configs['recommended-typescript'],
   reactHooks.configs.flat.recommended,
-  unicornRecommended,
-  eslintConfigPrettier,
-  {
-    plugins: { unicorn: eslintPluginUnicorn },
-    rules: {
-      ...vitest.configs.recommended.rules,
-      ...DEFERRED_UNICORN_RULES,
-      '@eslint-react/purity': ERROR,
-      eqeqeq: ERROR,
-      'max-len': [ERROR, 160],
-      'no-console': ERROR,
-      'no-debugger': WARNING,
-      'import-x/no-duplicates': ERROR,
-      '@typescript-eslint/no-restricted-types': [
-        'error',
-        {
-          types: {
-            'React.FC': {
-              message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
-            },
-            FC: {
-              message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
-            },
-            'React.FunctionComponent': {
-              message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
-            },
-            FunctionComponent: {
-              message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
-            },
+];
+
+const sharedRulesConfig = {
+  rules: {
+    ...vitest.configs.recommended.rules,
+    '@eslint-react/purity': ERROR,
+    eqeqeq: ERROR,
+    'max-len': [ERROR, 160],
+    'no-console': ERROR,
+    'no-debugger': WARNING,
+    'import-x/no-duplicates': ERROR,
+    '@typescript-eslint/no-restricted-types': [
+      'error',
+      {
+        types: {
+          'React.FC': {
+            message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
+          },
+          FC: {
+            message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
+          },
+          'React.FunctionComponent': {
+            message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
+          },
+          FunctionComponent: {
+            message: 'Useless and has some drawbacks, see https://github.com/facebook/create-react-app/pull/8177',
           },
         },
-      ],
-      '@typescript-eslint/no-explicit-any': ERROR,
-      '@typescript-eslint/ban-ts-comment': ERROR,
-      '@typescript-eslint/no-unnecessary-condition': ERROR,
-      'local/describe-name-matches-filename': ERROR,
-      '@typescript-eslint/no-unsafe-enum-comparison': OFF,
-      '@typescript-eslint/no-misused-promises': OFF,
-      '@typescript-eslint/no-unsafe-call': ERROR,
-      'import-x/no-default-export': ERROR,
-      '@eslint-react/rules-of-hooks': ERROR,
-      '@eslint-react/exhaustive-deps': OFF,
+      },
+    ],
+    '@typescript-eslint/no-explicit-any': ERROR,
+    '@typescript-eslint/ban-ts-comment': ERROR,
+    '@typescript-eslint/no-unnecessary-condition': ERROR,
+    'local/describe-name-matches-filename': ERROR,
+    '@typescript-eslint/no-unsafe-enum-comparison': OFF,
+    '@typescript-eslint/no-misused-promises': OFF,
+    '@typescript-eslint/no-unsafe-call': ERROR,
+    'import-x/no-default-export': ERROR,
+    '@eslint-react/rules-of-hooks': ERROR,
+    '@eslint-react/exhaustive-deps': OFF,
 
-      // Note: you must disable the base rule as it can report incorrect errors
-      'no-use-before-define': OFF,
-      '@typescript-eslint/no-use-before-define': [OFF],
-      'no-shadow': OFF,
-      '@typescript-eslint/no-shadow': [ERROR],
-      'no-unused-vars': OFF,
-      '@typescript-eslint/no-unused-vars': [ERROR],
+    // Note: you must disable the base rule as it can report incorrect errors
+    'no-use-before-define': OFF,
+    '@typescript-eslint/no-use-before-define': [OFF],
+    'no-shadow': OFF,
+    '@typescript-eslint/no-shadow': [ERROR],
+    'no-unused-vars': OFF,
+    '@typescript-eslint/no-unused-vars': [ERROR],
 
-      // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
-      'import-x/no-unresolved': OFF,
+    // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
+    'import-x/no-unresolved': OFF,
 
-      'no-restricted-syntax': [
-        'error',
-        {
-          // Denne selectoren er chatGPT-generert. Men den funker til å differensiere "!"-bruk på index-access kontra annen bruk
-          selector:
-            "TSNonNullExpression[expression.type='Identifier'], TSNonNullExpression[expression.type='MemberExpression'][expression.computed=false]",
-          message:
-            'Ikke bruk non-null assertions på variabler eller properties. Bruk de kun på index access på arrays eller objecter hvis nødvendig',
-        },
-      ],
+    'no-restricted-syntax': [
+      'error',
+      {
+        // Denne selectoren er chatGPT-generert. Men den funker til å differensiere "!"-bruk på index-access kontra annen bruk
+        selector:
+          "TSNonNullExpression[expression.type='Identifier'], TSNonNullExpression[expression.type='MemberExpression'][expression.computed=false]",
+        message:
+          'Ikke bruk non-null assertions på variabler eller properties. Bruk de kun på index access på arrays eller objecter hvis nødvendig',
+      },
+    ],
 
-      'simple-import-sort/imports': [
-        'error',
-        {
-          groups: [['^react'], ['^@?\\w'], ['^@navikt/fp-*'], ['@/(.*)'], ['^[./]'], ['./*.module.css'], ['./*.json']],
-        },
-      ],
-    },
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [['^react'], ['^@?\\w'], ['^@navikt/fp-*'], ['@/(.*)'], ['^[./]'], ['./*.module.css'], ['./*.json']],
+      },
+    ],
   },
+};
+
+const fileOverrides = [
   {
     files: ['**/*.stories.tsx', 'eslint.config.mjs'],
     rules: {
@@ -163,4 +163,25 @@ export default [
     },
   },
   { files: ['**/apiDtoGenerert.ts'], rules: { '@typescript-eslint/no-redundant-type-constituents': OFF } },
+];
+
+export default [
+  ...baseConfig,
+  eslintConfigPrettier,
+  sharedRulesConfig,
+  ...fileOverrides,
+];
+
+export const unicornConfig = [
+  ...baseConfig,
+  unicornRecommended,
+  eslintConfigPrettier,
+  {
+    plugins: { unicorn: eslintPluginUnicorn },
+    rules: {
+      ...DEFERRED_UNICORN_RULES,
+    },
+  },
+  sharedRulesConfig,
+  ...fileOverrides,
 ];
