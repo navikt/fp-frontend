@@ -23,8 +23,8 @@ export const useSnarvegInnstilling = (): { aktiv: boolean; settAktiv: (verdi: bo
         setAktiv(lesInnstilling());
       }
     };
-    addEventListener('storage', handterEndring);
-    return () => removeEventListener('storage', handterEndring);
+    window.addEventListener('storage', handterEndring);
+    return () => window.removeEventListener('storage', handterEndring);
   }, []);
 
   return { aktiv, settAktiv };

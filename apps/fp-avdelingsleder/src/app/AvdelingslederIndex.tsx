@@ -160,7 +160,7 @@ const setAvdeling = (
   avdelinger: AvdelingDto[],
   valgtAvdelingEnhet?: string,
 ) => {
-  if (!(avdelinger.length > 0 && !valgtAvdelingEnhet)) {
+  if (avdelinger.length === 0 || valgtAvdelingEnhet) {
     return;
   }
 

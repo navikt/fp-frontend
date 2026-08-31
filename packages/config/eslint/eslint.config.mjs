@@ -32,6 +32,7 @@ const DEFERRED_UNICORN_RULES = {
   'unicorn/no-top-level-side-effects': OFF,
   'unicorn/prefer-array-from-map': OFF,
   'unicorn/prefer-await': OFF,
+  'unicorn/prefer-global-this': OFF,
   'unicorn/prefer-includes': OFF,
   'unicorn/prefer-includes-over-repeated-comparisons': OFF,
   'unicorn/prefer-location-assign': OFF,

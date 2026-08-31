@@ -78,11 +78,13 @@ const collectIdFromObject = (node: ts.Node, ids: string[]): void => {
     return;
   }
   for (const property of node.properties) {
-    if (ts.isPropertyAssignment(property) && getPropertyName(property.name) === 'id') {
-      const id = getStaticString(property.initializer);
-      if (id !== undefined) {
-        ids.push(id);
-      }
+    if (!(ts.isPropertyAssignment(property) && getPropertyName(property.name) === 'id')) {
+      continue;
+    }
+
+    const id = getStaticString(property.initializer);
+    if (id !== undefined) {
+      ids.push(id);
     }
   }
 };

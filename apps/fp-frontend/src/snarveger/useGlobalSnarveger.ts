@@ -92,9 +92,9 @@ export const useGlobalSnarveger = (): void => {
       }
     };
 
-    addEventListener('keydown', handterTast);
+    window.addEventListener('keydown', handterTast);
     return () => {
-      removeEventListener('keydown', handterTast);
+      window.removeEventListener('keydown', handterTast);
       nullstillSekvens();
     };
   }, []);

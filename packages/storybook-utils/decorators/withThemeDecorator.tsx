@@ -8,7 +8,7 @@ export const withThemeDecorator: DecoratorFunction<ReactRenderer> = (Story, cont
   const Wrapper = () => {
     const theme = context.globals['theme'] as string;
     useEffect(() => {
-      const elements = document.getElementsByClassName('sb-show-main');
+      const elements = document.querySelectorAll('.sb-show-main');
       if (elements.length > 0) {
         elements[0]!.setAttribute(
           'style',

@@ -154,7 +154,7 @@ const sorterInntektsmeldinger = ({
   behandling: BehandlingFpSak;
 }) => {
   if (sortKey === 'arbeidsgiverIdent') {
-    return inntektsmeldinger.slice().sort((a, b) => {
+    return [...inntektsmeldinger].sort((a, b) => {
       const navnA = arbeidsgiverOpplysningerPerId[a.arbeidsgiverIdent]?.navn;
 
       const navnB = arbeidsgiverOpplysningerPerId[b.arbeidsgiverIdent]?.navn;
@@ -164,7 +164,7 @@ const sorterInntektsmeldinger = ({
   }
 
   if (sortKey === 'tilknyttedeBehandlingIder') {
-    return inntektsmeldinger.slice().sort((a, b) => {
+    return [...inntektsmeldinger].sort((a, b) => {
       const IMStatusA = hentBehandlingIMStatus({ behandling, inntektsmelding: a });
       const IMStatusB = hentBehandlingIMStatus({ behandling, inntektsmelding: b });
 
@@ -172,7 +172,7 @@ const sorterInntektsmeldinger = ({
     });
   }
 
-  return inntektsmeldinger.slice().sort((a, b) => {
+  return [...inntektsmeldinger].sort((a, b) => {
     const aValue = a[sortKey] ?? undefined;
     const bValue = b[sortKey] ?? undefined;
 

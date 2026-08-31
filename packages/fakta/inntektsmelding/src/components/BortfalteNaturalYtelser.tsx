@@ -40,7 +40,7 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
           { fom: b.periode.fomDato, tom: b.periode.tomDato },
         ),
       )
-      .reverse();
+      .toReversed();
 
     bortfalteNaturalytelser[key] = sortert.flatMap((current, index, array) => {
       const next = array[index + 1];
