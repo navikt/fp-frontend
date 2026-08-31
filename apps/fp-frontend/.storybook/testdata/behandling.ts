@@ -17,7 +17,7 @@ export const behandling: BehandlingFpSak = {
   språkkode: 'NB',
 
   behandlingsresultat: {
-    id: 999951,
+    id: 999_951,
     type: 'IKKE_FASTSATT',
 
     konsekvenserForYtelsen: [],

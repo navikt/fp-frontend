@@ -13,7 +13,7 @@ import './index.css';
 
 dayjs.locale('nb');
 
-const app = document.getElementById('root');
+const app = document.querySelector('#root');
 if (app === null) {
   throw new Error('No app element');
 }

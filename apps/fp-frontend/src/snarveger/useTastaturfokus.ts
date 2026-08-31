@@ -15,7 +15,7 @@ export const useTastaturfokus = <TContainer extends HTMLElement, TElement extend
   const containerRef = useRef<TContainer>(null);
 
   const hentElementer = useCallback(
-    (): TElement[] => Array.from(containerRef.current?.querySelectorAll<TElement>(selector) ?? []),
+    (): TElement[] => [...(containerRef.current?.querySelectorAll<TElement>(selector) ?? [])],
     [selector],
   );
 
@@ -71,10 +71,12 @@ export const useFokusNårKlar = (kanFokusere: boolean, fokuser: () => void): (()
   }, []);
 
   useEffect(() => {
-    if (kanFokusere && skalFokusereRef.current) {
-      skalFokusereRef.current = false;
-      fokuser();
+    if (!(kanFokusere && skalFokusereRef.current)) {
+      return;
     }
+
+    skalFokusereRef.current = false;
+    fokuser();
   }, [fokuser, kanFokusere]);
 
   return fokuserNårKlar;
@@ -114,10 +116,12 @@ export const useFokuserVedPanelbyte = (
   }, []);
 
   useEffect(() => {
-    if (skalFokusereRef.current) {
-      skalFokusereRef.current = false;
-      fokuserRef.current();
+    if (!skalFokusereRef.current) {
+      return;
     }
+
+    skalFokusereRef.current = false;
+    fokuserRef.current();
   }, [aktivtPanel]);
 
   return planleggFokus;

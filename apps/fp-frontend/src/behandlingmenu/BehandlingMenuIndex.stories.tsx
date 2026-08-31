@@ -75,7 +75,7 @@ const meta = {
   component: BehandlingMenuIndex,
   parameters: {
     msw: {
-      handlers: HANDLERS.concat(http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak))),
+      handlers: [...HANDLERS, http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak))],
     },
   },
   args: {
@@ -112,14 +112,15 @@ export const ValgNårBehandlingIkkeErValgt: Story = {
 export const ValgNårVeileder: Story = {
   parameters: {
     msw: {
-      handlers: HANDLERS.concat(
+      handlers: [
+        ...HANDLERS,
         http.get(FagsakUrl.INIT_FETCH, () =>
           HttpResponse.json({
             ...initFetchFpsak,
             innloggetBruker: { ...initFetchFpsak.innloggetBruker, kanVeilede: true },
           }),
         ),
-      ),
+      ],
     },
   },
   args: {

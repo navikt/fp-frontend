@@ -27,10 +27,12 @@ export const useHentFagsak = (
   } = useQuery(api.fptilbake.hentFagsakOptions(skalHenteFraFpTilbake, saksnummer));
 
   useEffect(() => {
-    if (!erBehandlingEndretFraUndefined) {
-      void refetchFagsak();
-      void refetchFpTilbakeFagsak();
+    if (erBehandlingEndretFraUndefined) {
+      return;
     }
+
+    void refetchFagsak();
+    void refetchFpTilbakeFagsak();
     // eslint-disable-next-line react-hooks/exhaustive-deps -- refetch berre ved endra behandlingUuid/-versjon; refetch er stabil frå react-query
   }, [behandlingUuid, behandlingVersjon]);
 

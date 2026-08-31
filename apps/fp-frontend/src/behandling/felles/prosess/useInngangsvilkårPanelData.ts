@@ -15,10 +15,10 @@ export const useInngangsvilkårPanelData = () => {
     setInngangsvilkårPanelData(oldData => {
       const newData = [...oldData];
       const index = newData.findIndex(d => d.id === nyData.id);
-      if (index !== -1) {
-        newData.splice(index, 1, nyData);
-      } else {
+      if (index === -1) {
         newData.push(nyData);
+      } else {
+        newData.splice(index, 1, nyData);
       }
       return newData;
     });

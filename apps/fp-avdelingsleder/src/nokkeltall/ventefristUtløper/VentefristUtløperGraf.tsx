@@ -84,4 +84,4 @@ const formaterUkeÅr = (value: string): string => {
 };
 
 const getUkeKategorier = (behandlingerPaVent: NøkkeltallBehandlingVentefristUtløperDto[]): string[] =>
-  Array.from(new Set(behandlingerPaVent.map(behandling => behandling.fristUke))).sort((a, b) => a.localeCompare(b));
+  [...new Set(behandlingerPaVent.map(behandling => behandling.fristUke))].sort((a, b) => a.localeCompare(b));

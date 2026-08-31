@@ -121,7 +121,7 @@ const finnMaaneder = (oppgaverSomErApneEllerPaVent: NøkkeltallBehandlingFørste
       .map(o => dayjs(o.førsteUttakMåned).startOf('month').format(ISO_DATE_FORMAT)),
   );
 
-  const maaneder: string[] = Array.from(alledatoer)
+  const maaneder: string[] = [...alledatoer]
     .map(m => dayjs(m))
     .sort((a, b) => (a.isBefore(b) ? -1 : 1))
     .map(d => d.format(ISO_DATE_FORMAT));

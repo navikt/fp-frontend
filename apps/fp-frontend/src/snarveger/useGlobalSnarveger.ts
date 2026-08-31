@@ -134,4 +134,4 @@ const erÅpenDialog = (element: Element): boolean => {
 };
 
 const harÅpenDialog = (): boolean =>
-  Array.from(document.querySelectorAll('dialog, [role="dialog"], [aria-modal="true"]')).some(erÅpenDialog);
+  [...document.querySelectorAll('dialog, [role="dialog"], [aria-modal="true"]')].some(erÅpenDialog);

@@ -66,6 +66,7 @@ describe('access', () => {
       const expected =
         validFagsakStatuser.some(fs => fs === fagsakStatus) &&
         validBehandlingStatuser.some(bs => bs === behandlingStatus);
+
       // eslint-disable-next-line unicorn/no-useless-template-literals -- Vitest requires a statically analyzable title.
       it(`${getTestName('skrivetilgang', expected, fagsakStatus, behandlingStatus)}`, () => {
         const access = writeAccess(saksbehandlerAnsatt, fagsakStatus, behandlingStatus, validBehandlingTyper);
