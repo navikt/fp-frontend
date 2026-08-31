@@ -28,9 +28,10 @@ export class FagsakData {
 
   private slåSammenData(): void {
     if (this.$$fpTilbakeFagsakData) {
-      this.$$behandlingOppretting = this.$$fagsak.behandlingTypeKanOpprettes.concat(
-        this.$$fpTilbakeFagsakData.behandlingTypeKanOpprettes,
-      );
+      this.$$behandlingOppretting = [
+        ...this.$$fagsak.behandlingTypeKanOpprettes,
+        ...this.$$fpTilbakeFagsakData.behandlingTypeKanOpprettes,
+      ];
 
       this.$$alleBehandlinger = [...this.$$fagsak.behandlinger, ...this.$$fpTilbakeFagsakData.behandlinger];
     } else {

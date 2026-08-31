@@ -65,7 +65,7 @@ const validerAtPeriodeIkkeOverlapper =
     const tomDato = getValues(`${index}.tom`);
 
     if (!fomDato || !tomDato) {
-      return undefined;
+      return;
     }
 
     const periodeMap = alleOpphold
@@ -202,7 +202,7 @@ export const OppholdForm = ({
               size="small"
               variant="primary"
               type="button"
-              disabled={!formMethods.formState.isDirty || false}
+              disabled={!formMethods.formState.isDirty}
               loading={false}
               onClick={formMethods.handleSubmit((values: FormValues) => lagreIForm(values))}
             >

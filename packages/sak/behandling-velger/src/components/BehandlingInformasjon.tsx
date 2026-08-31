@@ -4,19 +4,13 @@ import { ChevronDownIcon, ChevronUpIcon, StarFillIcon } from '@navikt/aksel-icon
 import { BodyShort, Box, HStack, Label, Spacer, Tooltip, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
-import type {
-  AlleKodeverk,
-  AlleKodeverkTilbakekreving,
-  BehandlingÅrsakTypeFpTilbake,
-  FagsakBehandlingDto,
-} from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, FagsakBehandlingDto } from '@navikt/fp-types';
 
 import styles from './behandlingInformasjon.module.css';
 
-const tilbakekrevingÅrsakTyperKlage: BehandlingÅrsakTypeFpTilbake[] = ['RE_KLAGE_KA', 'RE_KLAGE_NFP'];
+const tilbakekrevingÅrsakTyperKlage = new Set<string>(['RE_KLAGE_KA', 'RE_KLAGE_NFP']);
 
-const erTilbakekrevingÅrsakKlage = (årsak?: string): boolean =>
-  !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
+const erTilbakekrevingÅrsakKlage = (årsak?: string): boolean => !!årsak && tilbakekrevingÅrsakTyperKlage.has(årsak);
 
 interface Props {
   withChevronDown?: boolean;

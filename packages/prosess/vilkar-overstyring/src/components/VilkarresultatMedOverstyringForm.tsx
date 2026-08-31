@@ -103,8 +103,7 @@ export const VilkarresultatMedOverstyringForm = ({
 
   const aksjonspunkt = behandling.aksjonspunkt.find(ap => ap.definisjon === overstyringApKode);
   const hasAksjonspunkt = aksjonspunkt !== undefined;
-  const isSolvable =
-    aksjonspunkt === undefined ? false : !(erAksjonspunktÅpent(aksjonspunkt) && !aksjonspunkt.kanLoses);
+  const isSolvable = aksjonspunkt === undefined ? false : !erAksjonspunktÅpent(aksjonspunkt) || aksjonspunkt.kanLoses;
 
   const originalErVilkårOk = 'IKKE_VURDERT' === status ? undefined : 'OPPFYLT' === status;
 
@@ -227,7 +226,7 @@ const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyri
 
   switch (overstyringApKode) {
     case AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET:
-    case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR:
+    case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR: {
       return {
         ...felles,
         ...MedlemskapVurderinger.transformValues(
@@ -235,10 +234,12 @@ const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyri
           overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
         ),
       };
-    default:
+    }
+    default: {
       return {
         ...felles,
         ...VilkarResultPicker.transformValues(values),
       };
+    }
   }
 };

@@ -122,14 +122,18 @@ const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
 
 const hentSpråkkode = (ankeVurderingOmgjør: string | null | undefined): string => {
   switch (ankeVurderingOmgjør) {
-    case 'ANKE_TIL_UGUNST':
+    case 'ANKE_TIL_UGUNST': {
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilUgunst';
-    case 'ANKE_TIL_GUNST':
+    }
+    case 'ANKE_TIL_GUNST': {
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilGunst';
-    case 'ANKE_DELVIS_OMGJOERING_TIL_GUNST':
+    }
+    case 'ANKE_DELVIS_OMGJOERING_TIL_GUNST': {
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.Delvis';
-    default:
+    }
+    default: {
       return '';
+    }
   }
 };
 
@@ -169,18 +173,24 @@ const AnkeResultat = ({ ankeVurderingResultat }: Props): ReactElement | null => 
   }
 
   switch (ankeVurderingResultat.ankeVurdering) {
-    case 'ANKE_STADFESTE_YTELSESVEDTAK':
+    case 'ANKE_STADFESTE_YTELSESVEDTAK': {
       return <ResultatEnkel ankeVurderingResultat={ankeVurderingResultat} />;
-    case 'ANKE_OPPHEVE_OG_HJEMSENDE':
+    }
+    case 'ANKE_OPPHEVE_OG_HJEMSENDE': {
       return <ResultatOpphev ankeVurderingResultat={ankeVurderingResultat} />;
-    case 'ANKE_HJEMSENDE_UTEN_OPPHEV':
+    }
+    case 'ANKE_HJEMSENDE_UTEN_OPPHEV': {
       return <ResultatHjemsend ankeVurderingResultat={ankeVurderingResultat} />;
-    case 'ANKE_OMGJOER':
+    }
+    case 'ANKE_OMGJOER': {
       return <ResultatOmgjores ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />;
-    case 'ANKE_AVVIS':
+    }
+    case 'ANKE_AVVIS': {
       return <ResultatAvvise ankeVurderingResultat={ankeVurderingResultat} />;
-    default:
+    }
+    default: {
       return <div>???</div>;
+    }
   }
 };
 

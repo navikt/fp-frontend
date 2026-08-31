@@ -27,12 +27,15 @@ interface Props {
 
 const hentKjønn = (kjønn: NavBrukerKjønn | undefined): Gender => {
   switch (kjønn) {
-    case 'K':
+    case 'K': {
       return Gender.female;
-    case 'M':
+    }
+    case 'M': {
       return Gender.male;
-    default:
+    }
+    default: {
       return Gender.unknown;
+    }
   }
 };
 

@@ -9,7 +9,7 @@ import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validat
 import styles from './searchForm.module.css';
 
 const isButtonDisabled = (searchStarted: boolean, searchString?: string): boolean =>
-  !!(searchStarted || searchString === undefined || searchString.length < 1);
+  !!(searchStarted || searchString === undefined || searchString.length === 0);
 
 interface Props {
   searchStarted: boolean;

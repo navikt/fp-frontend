@@ -291,7 +291,7 @@ export const TilretteleggingForm = ({
               size="small"
               variant="primary"
               type="button"
-              disabled={!formMethods.formState.isDirty || false}
+              disabled={!formMethods.formState.isDirty}
               loading={false}
               onClick={formMethods.handleSubmit(lagreIForm)}
             >

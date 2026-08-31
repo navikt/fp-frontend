@@ -199,7 +199,7 @@ const meta = {
         http.get('https://www.test.com/api/status', () =>
           HttpResponse.json<AsyncPollingStatus>({
             status: 'PENDING',
-            pollIntervalMillis: 100000000,
+            pollIntervalMillis: 100_000_000,
             message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
           }),
         ),

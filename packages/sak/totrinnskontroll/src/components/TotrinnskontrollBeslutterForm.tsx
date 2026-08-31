@@ -77,7 +77,8 @@ export type FormValues = {
 
 const buildInitialValues = (
   totrinnskontrollSkjermlenkeContext: (
-    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    | TotrinnskontrollSkjermlenkeContext
+    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[],
 ): FormValues => ({
   aksjonspunktGodkjenning: totrinnskontrollSkjermlenkeContext
@@ -85,9 +86,7 @@ const buildInitialValues = (
     .map(ap => ({
       aksjonspunktKode: ap.aksjonspunktKode,
       totrinnskontrollGodkjent:
-        ap.totrinnskontrollGodkjent === false && ap.vurderPaNyttArsaker.length === 0
-          ? undefined
-          : ap.totrinnskontrollGodkjent,
+        !ap.totrinnskontrollGodkjent && ap.vurderPaNyttArsaker.length === 0 ? undefined : ap.totrinnskontrollGodkjent,
       besluttersBegrunnelse: decodeHtmlEntity(ap.besluttersBegrunnelse ?? undefined),
       ...finnArsaker(ap.vurderPaNyttArsaker),
     })),
@@ -96,7 +95,8 @@ const buildInitialValues = (
 interface Props {
   behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: (
-    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    | TotrinnskontrollSkjermlenkeContext
+    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
   forhandsvisVedtaksbrev: () => void;
   readOnly: boolean;

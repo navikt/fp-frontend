@@ -60,9 +60,7 @@ describe('UtbetalingsdataIs15Index', () => {
     // Første foreldrepenge-vedtak er det eneste med gradering 50, og har tomme lister fra Infotrygd
     const vedtaksrad = screen
       .getAllByRole('row')
-      .filter(
-        rad => within(rad).queryAllByText('20.08.2015').length > 0 && within(rad).queryAllByText('50').length > 0,
-      )[0]!;
+      .find(rad => within(rad).queryAllByText('20.08.2015').length > 0 && within(rad).queryAllByText('50').length > 0)!;
     await userEvent.click(vedtaksrad);
 
     expect(await screen.findByText('Ingen utbetalinger')).toBeInTheDocument();

@@ -12,7 +12,7 @@ import { SupportHeaderAndContent } from '../SupportHeader';
 
 const sorterDokumenter = (dok1: Dokument, dok2: Dokument): number => {
   if (!dok1.tidspunkt) {
-    return +1;
+    return 1;
   }
 
   if (!dok2.tidspunkt) {

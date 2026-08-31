@@ -7,12 +7,15 @@ import type { DokumentMalType, KlageVurderingType } from '@navikt/fp-types';
 
 const getBrevKode = (klageVurdering?: KlageVurderingType): DokumentMalType | undefined => {
   switch (klageVurdering) {
-    case 'STADFESTE_YTELSESVEDTAK':
+    case 'STADFESTE_YTELSESVEDTAK': {
       return 'KGEOVE';
-    case 'MEDHOLD_I_KLAGE':
+    }
+    case 'MEDHOLD_I_KLAGE': {
       return 'KGEOMG';
-    default:
+    }
+    default: {
       return undefined;
+    }
   }
 };
 

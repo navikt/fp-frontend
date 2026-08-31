@@ -96,7 +96,7 @@ const meta = {
     personoversikt,
     søknad,
     arbeidsgiverOpplysningerPerId: {
-      123456789: lagArbeidsgiver('123456789', 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET'),
+      123_456_789: lagArbeidsgiver('123456789', 'EQUINOR ASA AVD STATOIL SOKKELVIRKSOMHET'),
     },
   },
   render: args => <TilkjentYtelseProsessIndex {...args} />,
@@ -130,7 +130,7 @@ export const MedFeriepengegrunnlag: Story = {
         {
           aktivitetStatus: 'AT',
           opptjeningsår: 2,
-          årsbeløp: 500000,
+          årsbeløp: 500_000,
           erBrukerMottaker: true,
           arbeidsgiverId: '',
           arbeidsforholdId: '',

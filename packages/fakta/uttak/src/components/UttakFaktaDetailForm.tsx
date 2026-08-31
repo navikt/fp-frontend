@@ -383,8 +383,8 @@ const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkeri
   arbeidsforhold: values.arbeidsgiverId
     ? {
         arbeidsgiverReferanse:
-          values.arbeidsgiverId.split('-')[0] === 'undefined' ? undefined : values.arbeidsgiverId.split('-')[0],
-        arbeidType: values.arbeidsgiverId.split('-')[1] as UttakArbeidType,
+          values.arbeidsgiverId.split('-', 1)[0] === 'undefined' ? undefined : values.arbeidsgiverId.split('-', 1)[0],
+        arbeidType: values.arbeidsgiverId.split('-', 2)[1] as UttakArbeidType,
       }
     : undefined,
   periodeKilde: 'SAKSBEHANDLER',
@@ -394,4 +394,4 @@ const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkeri
 });
 
 const parseOptionalNumber = (value?: number | string) =>
-  value === undefined || value === '' ? undefined : Number.parseFloat(`${value}`);
+  value === undefined || value === '' ? undefined : Number.parseFloat(String(value));

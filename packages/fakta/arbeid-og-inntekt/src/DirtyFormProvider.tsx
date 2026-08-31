@@ -3,7 +3,7 @@ import React, { createContext, type PropsWithChildren, use, useEffect, useMemo, 
 const DirtyFormContext = createContext<{
   isDirty: boolean;
   setDirty: React.Dispatch<React.SetStateAction<boolean>>;
-}>({ isDirty: false, setDirty: () => undefined });
+}>({ isDirty: false, setDirty: () => {} });
 
 /**
  * Håndterer state for data som skal hentes fra backend kun en gang og som en trenger aksess til

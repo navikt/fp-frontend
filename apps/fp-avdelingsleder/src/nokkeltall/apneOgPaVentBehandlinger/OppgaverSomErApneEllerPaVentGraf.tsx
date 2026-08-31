@@ -121,7 +121,7 @@ const finnMaaneder = (oppgaverSomErApneEllerPaVent: NøkkeltallBehandlingFørste
       .map(o => dayjs(o.førsteUttakMåned).startOf('month').format(ISO_DATE_FORMAT)),
   );
 
-  const maaneder: string[] = Array.from(alledatoer)
+  const maaneder: string[] = [...alledatoer]
     .map(m => dayjs(m))
     .sort((a, b) => (a.isBefore(b) ? -1 : 1))
     .map(d => d.format(ISO_DATE_FORMAT));
@@ -146,7 +146,7 @@ const finnAntallPerDato = (
     {} as Record<string, number>,
   );
 
-  return Object.keys(antallPerDatoOgUkjent).map(k => ({ x: k, y: antallPerDatoOgUkjent[k]! }));
+  return Object.entries(antallPerDatoOgUkjent).map(([x, y]) => ({ x, y }));
 };
 
 const lagKoordinatForDato = (dato: dayjs.Dayjs, oppgaver: KoordinatDatoEllerUkjent[]): number => {

@@ -77,7 +77,7 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
       setOppgaverTilBehandling(tilBehandling);
       if (oppgaverTilBehandling.length > 0) {
         // eslint-disable-next-line @eslint-react/set-state-in-effect
-        setNyeBehandlinger(tilBehandling.filter(o => !oppgaverTilBehandling.some(ob => ob.id === o.id)));
+        setNyeBehandlinger(tilBehandling.filter(o => oppgaverTilBehandling.every(ob => ob.id !== o.id)));
       }
 
       void pollEtterOppgaver({ oppgaveIder: tilBehandling.map(o => o.id).join(',') });

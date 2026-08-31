@@ -140,9 +140,9 @@ const soknad = {
 } satisfies Soknad;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
-  342352362: lagArbeidsgiver('342352362', 'Lagt til av saksbehandler'),
-  910909088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
-  994884174: lagArbeidsgiver('994884174', 'Nav'),
+  342_352_362: lagArbeidsgiver('342352362', 'Lagt til av saksbehandler'),
+  910_909_088: lagArbeidsgiver('910909088', 'BEDRIFT AS'),
+  994_884_174: lagArbeidsgiver('994884174', 'Nav'),
 };
 
 const meta = {

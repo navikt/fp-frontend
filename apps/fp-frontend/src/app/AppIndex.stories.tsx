@@ -98,7 +98,7 @@ const HANDLERS = [
   http.get('https://www.test.com/api/status', () =>
     HttpResponse.json({
       status: 'PENDING',
-      pollIntervalMillis: 100000000,
+      pollIntervalMillis: 100_000_000,
     }),
   ),
   http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json(oppgaverForFagsaker)),

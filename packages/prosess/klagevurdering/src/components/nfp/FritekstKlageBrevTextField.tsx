@@ -25,7 +25,7 @@ export const FritekstBrevTextField = ({ språkkode, readOnly = true }: Props) =>
         label={useIntl().formatMessage({ id: 'FritekstKlageBrevTextField.Fritekst' })}
         validate={[required, hasValidText]}
         readOnly={readOnly}
-        maxLength={100000}
+        maxLength={100_000}
         badges={[
           {
             type: 'info',

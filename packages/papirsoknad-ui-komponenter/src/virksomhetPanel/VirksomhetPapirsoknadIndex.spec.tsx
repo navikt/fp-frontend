@@ -36,7 +36,7 @@ describe('VirksomhetPapirsoknadIndex', () => {
     });
   });
 
-  it('skal velge at søker har arbeidet i egen næringsvirksomhet', { timeout: 50000 }, async () => {
+  it('skal velge at søker har arbeidet i egen næringsvirksomhet', { timeout: 50_000 }, async () => {
     const lagre = vi.fn();
 
     await Default.run({
@@ -106,7 +106,7 @@ describe('VirksomhetPapirsoknadIndex', () => {
             tom: '2022-06-03',
             harRegnskapsforer: true,
             harVarigEndring: true,
-            inntekt: 500000,
+            inntekt: 500_000,
             landJobberFra: 'AND',
             navn: 'Bedriften AS',
             navnRegnskapsforer: 'Espen Utvikler',
@@ -128,7 +128,7 @@ describe('VirksomhetPapirsoknadIndex', () => {
 
   it(
     'skal velge at søker har arbeidet i egen næringsvirksomhet og ikke oppgi virksomhet',
-    { timeout: 30000 },
+    { timeout: 30_000 },
     async () => {
       const lagre = vi.fn();
 
@@ -153,7 +153,7 @@ describe('VirksomhetPapirsoknadIndex', () => {
     },
   );
 
-  it('skal vise feil ved for lang beskrivelseAvEndring', { timeout: 30000 }, async () => {
+  it('skal vise feil ved for lang beskrivelseAvEndring', { timeout: 30_000 }, async () => {
     const lagre = vi.fn();
 
     await Default.run({
@@ -185,7 +185,7 @@ describe('VirksomhetPapirsoknadIndex', () => {
     expect(await screen.findByText('Du kan skrive maksimalt 4000 tegn')).toBeInTheDocument();
   });
 
-  it('skal vise feil ved for lang navnRegnskapsforer og tlfRegnskapsforer', { timeout: 50000 }, async () => {
+  it('skal vise feil ved for lang navnRegnskapsforer og tlfRegnskapsforer', { timeout: 50_000 }, async () => {
     const lagre = vi.fn();
 
     await Default.run({

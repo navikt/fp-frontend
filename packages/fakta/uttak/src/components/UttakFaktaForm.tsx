@@ -98,7 +98,7 @@ const valider = (
     );
   }
 
-  return undefined;
+  return;
 };
 
 const validerPerioder = (

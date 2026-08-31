@@ -104,29 +104,37 @@ const getTextForKlageHelper = (
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
   let aksjonspunktTextId = '';
   switch (behandlingsresultat?.type) {
-    case 'KLAGE_YTELSESVEDTAK_STADFESTET':
+    case 'KLAGE_YTELSESVEDTAK_STADFESTET': {
       aksjonspunktTextId = 'ToTrinnsForm.Klage.StadfesteYtelsesVedtak';
       break;
-    case 'KLAGE_YTELSESVEDTAK_OPPHEVET':
+    }
+    case 'KLAGE_YTELSESVEDTAK_OPPHEVET': {
       aksjonspunktTextId = 'ToTrinnsForm.Klage.OppheveYtelsesVedtak';
       break;
-    case 'KLAGE_AVVIST':
+    }
+    case 'KLAGE_AVVIST': {
       aksjonspunktTextId = 'ToTrinnsForm.Klage.Avvist';
       break;
-    case 'HJEMSENDE_UTEN_OPPHEVE':
+    }
+    case 'HJEMSENDE_UTEN_OPPHEVE': {
       aksjonspunktTextId = 'ToTrinnsForm.Klage.HjemsendUtenOpphev';
       break;
-    case 'KLAGE_DELVIS_MEDHOLD':
+    }
+    case 'KLAGE_DELVIS_MEDHOLD': {
       aksjonspunktTextId = 'ToTrinnsForm.Klage.DelvisOmgjortTilGunst';
       break;
-    case 'KLAGE_OMGJORT_UGUNST':
+    }
+    case 'KLAGE_OMGJORT_UGUNST': {
       aksjonspunktTextId = 'ToTrinnsForm.Klage.OmgjortTilUgunst';
       break;
-    case 'KLAGE_MEDHOLD':
+    }
+    case 'KLAGE_MEDHOLD': {
       aksjonspunktTextId = 'ToTrinnsForm.Klage.OmgjortTilGunst';
       break;
-    default:
+    }
+    default: {
       break;
+    }
   }
   return <FormattedMessage id={aksjonspunktTextId} />;
 };

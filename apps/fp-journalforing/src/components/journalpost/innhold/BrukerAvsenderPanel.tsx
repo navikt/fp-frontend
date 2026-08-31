@@ -94,10 +94,12 @@ export const BrukerAvsenderPanel = ({
   };
 
   const oppdaterMedBrukerKlikk = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      const fnr = e.currentTarget.value;
-      forhåndsvisSøker(fnr);
+    if (e.key !== 'Enter') {
+      return;
     }
+
+    const fnr = e.currentTarget.value;
+    forhåndsvisSøker(fnr);
   };
 
   return (

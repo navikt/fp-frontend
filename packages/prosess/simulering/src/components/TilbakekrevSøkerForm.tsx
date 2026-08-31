@@ -111,10 +111,10 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
               </ArrowBox>
             </div>
           )}
-          <Radio value={`${'TILBAKEKR_OPPRETT' satisfies TilbakekrevingVidereBehandling}${IKKE_SEND}`} size="small">
+          <Radio value={('TILBAKEKR_OPPRETT' satisfies TilbakekrevingVidereBehandling) + IKKE_SEND} size="small">
             <FormattedMessage id="Simulering.OpprettMenIkkeSendVarsel" />
           </Radio>
-          <Radio value={`${'TILBAKEKR_IGNORER' satisfies TilbakekrevingVidereBehandling}`} size="small">
+          <Radio value={'TILBAKEKR_IGNORER' satisfies TilbakekrevingVidereBehandling} size="small">
             <FormattedMessage id="Simulering.avvent" />
           </Radio>
         </VStack>

@@ -48,7 +48,7 @@ const meta = {
     forhandsvisVedtaksbrev: action('button-click'),
     alleKodeverk: alleKodeverk,
     createLocationForSkjermlenke: () => LOCATION,
-    setBeslutterFormData: () => undefined,
+    setBeslutterFormData: () => {},
   },
   decorators: [withRouter, withDiv],
 } satisfies Meta<typeof TotrinnskontrollSakIndex>;

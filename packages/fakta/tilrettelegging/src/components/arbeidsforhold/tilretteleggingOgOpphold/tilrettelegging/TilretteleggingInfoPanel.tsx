@@ -16,23 +16,29 @@ const finnFremTilTekst = (intl: IntlShape, termindato: string, tomDatoForTilrett
 
 const finnProsentSvangerskapspenger = (tilretteleggingDato: SvpTilretteleggingDatoDto): number => {
   switch (tilretteleggingDato.type) {
-    case 'HEL_TILRETTELEGGING':
+    case 'HEL_TILRETTELEGGING': {
       return 0;
-    case 'INGEN_TILRETTELEGGING':
+    }
+    case 'INGEN_TILRETTELEGGING': {
       return 100;
-    case 'DELVIS_TILRETTELEGGING':
+    }
+    case 'DELVIS_TILRETTELEGGING': {
       return tilretteleggingDato.overstyrtUtbetalingsgrad ?? 0;
+    }
   }
 };
 
 const finnProsentArbeid = (tilretteleggingDato: SvpTilretteleggingDatoDto): number => {
   switch (tilretteleggingDato.type) {
-    case 'HEL_TILRETTELEGGING':
+    case 'HEL_TILRETTELEGGING': {
       return 100;
-    case 'INGEN_TILRETTELEGGING':
+    }
+    case 'INGEN_TILRETTELEGGING': {
       return 0;
-    case 'DELVIS_TILRETTELEGGING':
+    }
+    case 'DELVIS_TILRETTELEGGING': {
       return tilretteleggingDato.stillingsprosent ?? 0;
+    }
   }
 };
 

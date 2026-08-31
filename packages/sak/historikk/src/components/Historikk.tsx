@@ -65,9 +65,9 @@ export const Historikk = ({
   const scrollReset = () => setTop(0);
 
   useEffect(() => {
-    globalThis.addEventListener('scroll', scrollReset);
+    addEventListener('scroll', scrollReset);
     return () => {
-      globalThis.removeEventListener('scroll', scrollReset);
+      removeEventListener('scroll', scrollReset);
     };
   }, []);
 

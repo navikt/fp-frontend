@@ -94,7 +94,7 @@ describe('redigeringsUtils', () => {
     });
 
     it('skal returnere false for streng med bare whitespace', () => {
-      expect(erRedigertHtmlGyldig('   ')).toBe(false);
+      expect(erRedigertHtmlGyldig(' '.repeat(3))).toBe(false);
     });
   });
 

@@ -22,7 +22,7 @@ type Props = Readonly<{
 export const OppgaveTabell = ({ velgOppgaveOgHentJournalpost, ansattIdent, reserverOppgave }: Props) => {
   const { data: oppgaver } = useQuery(hentAlleJournalOppgaver(ansattIdent));
 
-  if ((oppgaver ?? []).length < 1) {
+  if ((oppgaver ?? []).length === 0) {
     return (
       <BodyShort size="small">
         <FormattedMessage id="Journalforing.Oppgaver.IngenOppgaver" />

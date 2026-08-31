@@ -94,7 +94,7 @@ const erNyttBehandlingResult = (
 };
 
 const lagKonsekvensForYtelsenTekst = (alleKodeverk: AlleKodeverk, konsekvenser?: KonsekvensForYtelsen[]): string => {
-  if (!konsekvenser || konsekvenser.length < 1) {
+  if (!konsekvenser || konsekvenser.length === 0) {
     return '';
   }
   return konsekvenser
@@ -308,14 +308,17 @@ const lagVedtakstatusTekst = (
     return intl.formatMessage({
       id: hentResultattekst(true, beregningsresultat, beregningsresultatOriginalBehandling),
     });
-  } else if (isInnvilget(type)) {
+  }
+  if (isInnvilget(type)) {
     const konsekvens = lagKonsekvensForYtelsenTekst(alleKodeverk, konsekvenserForYtelsen);
     return `${konsekvens}${konsekvens === '' ? '. ' : (tilbakekrevingtekst ?? '')}`;
-  } else if (isAvslag(type)) {
+  }
+  if (isAvslag(type)) {
     return intl.formatMessage({
       id: hentResultattekst(false, beregningsresultat, beregningsresultatOriginalBehandling),
     });
-  } else if (isOpphor(type) && opphørsdato) {
+  }
+  if (isOpphor(type) && opphørsdato) {
     return intl.formatMessage({ id: 'VedtakForm.Revurdering.Opphoerer' }, { dato: dateFormat(opphørsdato) });
   }
   return undefined;

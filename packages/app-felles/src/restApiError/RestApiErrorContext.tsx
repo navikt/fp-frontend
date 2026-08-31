@@ -24,14 +24,17 @@ interface Props {
 export const RestApiErrorProvider = ({ children, initialState }: Props): JSX.Element => {
   const [state, dispatch] = useReducer((oldState: State, action: Action) => {
     switch (action.type) {
-      case 'add':
+      case 'add': {
         return {
           errors: oldState.errors.concat(action.data),
         };
-      case 'remove':
+      }
+      case 'remove': {
         return defaultInitialState;
-      default:
+      }
+      default: {
         throw new Error("Action type doesn't exist");
+      }
     }
   }, initialState || defaultInitialState);
 

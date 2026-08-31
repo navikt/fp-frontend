@@ -65,7 +65,7 @@ const SistBehandledeSakerContent = ({
 }) => {
   if (isFetching) return <LoadingPanel />;
 
-  if (!sisteReserverte.length) {
+  if (sisteReserverte.length === 0) {
     return (
       <div className={styles['ingenBehandlinger']}>
         <BodyShort size="medium">
@@ -122,17 +122,23 @@ const StatusIcon = ({ oppgave }: { oppgave: OppgaveDtoMedStatus }) => {
   const statusNavn = oppgaveBehandlingStatuser.find(obs => obs.kode === oppgave.oppgaveBehandlingStatus)?.navn ?? '-';
 
   switch (oppgave.oppgaveBehandlingStatus) {
-    case 'UNDER_ARBEID':
+    case 'UNDER_ARBEID': {
       return <PencilIcon title={statusNavn} fontSize="1.5rem" />;
-    case 'FERDIG':
+    }
+    case 'FERDIG': {
       return <CheckmarkCircleIcon title={statusNavn} fontSize="1.5rem" color="var(--ax-success-500)" />;
-    case 'PÅ_VENT':
+    }
+    case 'PÅ_VENT': {
       return <HourglassTopFilledIcon title={statusNavn} fontSize="1.5rem" color="var(--ax-success-500)" />;
-    case 'RETURNERT_FRA_BESLUTTER':
+    }
+    case 'RETURNERT_FRA_BESLUTTER': {
       return <ArrowCirclepathIcon title={statusNavn} fontSize="1.5rem" color="var(--ax-warning-500)" />;
-    case 'TIL_BESLUTTER':
+    }
+    case 'TIL_BESLUTTER': {
       return <PersonEnvelopeIcon title={statusNavn} fontSize="1.5rem" />;
-    default:
+    }
+    default: {
       throw new Error('Ukjent status i statusfeltet til "Dine siste reserverte behandlinger');
+    }
   }
 };

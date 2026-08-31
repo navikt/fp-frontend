@@ -124,13 +124,17 @@ const OppholdType = ({ opphold }: { opphold: Partial<SvpAvklartOppholdPeriode> }
 
 const OppholdKilde = ({ opphold }: { opphold: SvpAvklartOppholdPeriode }) => {
   switch (opphold.oppholdKilde) {
-    case 'SØKNAD':
+    case 'SØKNAD': {
       return <FormattedMessage id="Kilde.Soknad" />;
-    case 'INNTEKTSMELDING':
+    }
+    case 'INNTEKTSMELDING': {
       return <FormattedMessage id="Kilde.Inntektsmelding" />;
-    case 'TIDLIGERE_VEDTAK':
+    }
+    case 'TIDLIGERE_VEDTAK': {
       return <FormattedMessage id="Kilde.TidligereVedtak" />;
-    default:
+    }
+    default: {
       return <FormattedMessage id="Kilde.Saksbehandler" />;
+    }
   }
 };

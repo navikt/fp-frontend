@@ -14,13 +14,17 @@ export const KildeSystem = ({ kildeSystem }: { kildeSystem: string }) => {
 
 const getKilde = (kildeSystem: string, intl: IntlShape) => {
   switch (kildeSystem.toUpperCase()) {
-    case '':
+    case '': {
       return intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kilde.ukjent' });
-    case 'NAV_NO':
+    }
+    case 'NAV_NO': {
       return intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kilde.nav' });
-    case 'ALTINN':
+    }
+    case 'ALTINN': {
       return intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kilde.altinn' });
-    default:
+    }
+    default: {
       return intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kilde.lps' });
+    }
   }
 };

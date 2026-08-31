@@ -210,7 +210,7 @@ const getValiderArbeidsgiverIdNårRequired =
 
 const validerAtArbeidsgiverIdErGyldig = (arbeidsgiverIdentifikator: string) => {
   if (!arbeidsgiverIdentifikator) {
-    return undefined;
+    return;
   }
   return arbeidsgiverIdentifikator.length === 11
     ? hasValidFodselsnummer(arbeidsgiverIdentifikator)

@@ -2,7 +2,7 @@ import { type OppgaveDto } from '@navikt/fp-types';
 
 export const oppgaverForFagsaker: OppgaveDto[] = [
   {
-    id: 46567,
+    id: 46_567,
     saksnummer: '1',
     navn: 'Kristine Kalv',
     system: 'FPSAK',

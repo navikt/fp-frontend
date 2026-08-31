@@ -7,9 +7,9 @@ const meta = {
   component: BeregningsresultatProsessIndex,
   args: {
     beregningresultatEngangsstonad: {
-      beregnetTilkjentYtelse: 92000,
+      beregnetTilkjentYtelse: 92_000,
       antallBarn: 1,
-      satsVerdi: 92000,
+      satsVerdi: 92_000,
     },
   },
   render: args => <BeregningsresultatProsessIndex {...args} />,

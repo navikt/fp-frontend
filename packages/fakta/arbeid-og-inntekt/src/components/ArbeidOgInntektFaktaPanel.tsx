@@ -48,7 +48,7 @@ export const ArbeidOgInntektFaktaPanel = ({
   const { alleKodeverk, submitCallback, aksjonspunkterForPanel, behandling, fagsak, isReadOnly } =
     usePanelDataContext<VurderArbeidsforholdInntektsmeldingAp>();
 
-  const aksjonspunkt = aksjonspunkterForPanel.length > 0 ? aksjonspunkterForPanel[0] : undefined;
+  const aksjonspunkt = aksjonspunkterForPanel[0];
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<ArbeidsforholdOgInntektRadData[]>();
 
@@ -256,5 +256,5 @@ const lagRadNøkkel = (radData: ArbeidsforholdOgInntektRadData, index: number): 
     .map(af => [af.internArbeidsforholdId ?? '', af.eksternArbeidsforholdId ?? '', af.fom, af.tom].join('-'))
     .join('--');
 
-  return [radData.arbeidsgiverIdent, inntektsmeldingsnøkkel || arbeidsforholdsnøkkel || 'rad', `${index}`].join('-');
+  return [radData.arbeidsgiverIdent, inntektsmeldingsnøkkel || arbeidsforholdsnøkkel || 'rad', String(index)].join('-');
 };

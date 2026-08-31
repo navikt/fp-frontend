@@ -41,7 +41,8 @@ const VurderPåNyttPunkter = ({
 interface Props {
   behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: (
-    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    | TotrinnskontrollSkjermlenkeContext
+    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
   erTilbakekreving: boolean;
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
@@ -76,7 +77,7 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
           return (
             <React.Fragment key={context.skjermlenkeType}>
               {lenke && skjermlenkeTypeKodeverk && (
-                <Link as={NavLink} to={lenke} onClick={() => globalThis.scroll(0, 0)}>
+                <Link as={NavLink} to={lenke} onClick={() => scroll(0, 0)}>
                   {skjermlenkeTypeKodeverk.navn}
                 </Link>
               )}

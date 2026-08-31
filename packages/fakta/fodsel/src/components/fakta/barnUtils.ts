@@ -14,5 +14,5 @@ export const erGjeldendeBarnLike = (alleBarn: FødselGjeldende['barn']) => {
   if (!barnet) {
     return false;
   }
-  return !alleBarn.some(({ barn, kilde }) => kilde !== barnet.kilde || erBarnUlike(barnet.barn)(barn));
+  return alleBarn.every(({ barn, kilde }) => kilde === barnet.kilde && !erBarnUlike(barnet.barn)(barn));
 };

@@ -22,12 +22,15 @@ function getFormateringsIdForAvvik(avvik: MedlemskapAvvik) {
     case 'BOSATT_UGYLDIG_PERSONSTATUS':
     case 'BOSATT_UTENLANDSADRESSE':
       return 'AksjonspunktHelpText.Bosatt';
-    case 'MEDL_PERIODER':
+    case 'MEDL_PERIODER': {
       return 'AksjonspunktHelpText.MedlPerioder';
-    case 'TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD':
+    }
+    case 'TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD': {
       return 'AksjonspunktHelpText.Oppholdsrett';
-    case 'EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT':
+    }
+    case 'EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT': {
       return 'AksjonspunktHelpText.EØSManglendeAnsettelseMedInntekt';
+    }
   }
 }
 const getVurdering = (resultat: ManuellBehandlingResultat) => {
@@ -35,13 +38,15 @@ const getVurdering = (resultat: ManuellBehandlingResultat) => {
 
   if (avslagskode && opphørFom) {
     return MedlemskapVurdering.DELVIS_OPPFYLT;
-  } else if (avslagskode && !opphørFom) {
+  }
+  if (avslagskode && !opphørFom) {
     return MedlemskapVurdering.IKKE_OPPFYLT;
-  } else if (!opphørFom && !avslagskode) {
+  }
+  if (!opphørFom && !avslagskode) {
     return MedlemskapVurdering.OPPFYLT;
   }
 
-  return undefined;
+  return;
 };
 
 export const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
@@ -62,22 +67,26 @@ export const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
         ))}
       </VStack>
     );
-  } else if (resultat && åpneAksjonspunkt.length === 0 && utførteAksjonspunkt.length > 0) {
+  }
+  if (resultat && åpneAksjonspunkt.length === 0 && utførteAksjonspunkt.length > 0) {
     const vurdering = getVurdering(resultat);
 
     const text = intl.formatMessage({ id: 'AksjonspunktHelpText.ErMedlem' }, { vurdering });
 
     switch (vurdering) {
-      case MedlemskapVurdering.OPPFYLT:
+      case MedlemskapVurdering.OPPFYLT: {
         return (
           <Alert variant="success" size="small">
             {text}
           </Alert>
         );
-      case MedlemskapVurdering.DELVIS_OPPFYLT:
+      }
+      case MedlemskapVurdering.DELVIS_OPPFYLT: {
         return <InfoBox Icon={ExclamationmarkIcon}>{text}</InfoBox>;
-      case MedlemskapVurdering.IKKE_OPPFYLT:
+      }
+      case MedlemskapVurdering.IKKE_OPPFYLT: {
         return <InfoBox Icon={XMarkOctagonIcon}>{text}</InfoBox>;
+      }
     }
   }
 

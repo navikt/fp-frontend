@@ -95,7 +95,7 @@ const getBekreftAksjonspunktFaktaCallback =
           overstyrteAksjonspunktDtoer: model,
         }).then(() => {
           oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
-          globalThis.scrollTo({
+          scrollTo({
             top: 0,
             behavior: 'smooth',
           });
@@ -108,7 +108,7 @@ const getBekreftAksjonspunktFaktaCallback =
       bekreftedeAksjonspunktDtoer: model,
     }).then(() => {
       oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
-      globalThis.scrollTo({
+      scrollTo({
         top: 0,
         behavior: 'smooth',
       });

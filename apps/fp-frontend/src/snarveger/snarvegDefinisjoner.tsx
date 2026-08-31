@@ -4,14 +4,22 @@ import { FormattedMessage } from 'react-intl';
 export type SnarvegGruppe = 'global' | 'behandling';
 
 export interface SnarvegDefinisjon {
-  /** Unik id som koplar definisjonen til ein registrert handler eller ein innebygd handling. */
+  /**
+  Unik id som koplar definisjonen til ein registrert handler eller ein innebygd handling.
+  */
   id: string;
   gruppe: SnarvegGruppe;
-  /** Tastane som må trykkast. Fleire element = sekvens (t.d. ['G', 'O'] = trykk G, så O). */
+  /**
+  Tastane som må trykkast. Fleire element = sekvens (t.d. ['G', 'O'] = trykk G, så O).
+  */
   taster: string[];
-  /** Beskrivelsen som visast i oversikta. */
+  /**
+  Beskrivelsen som visast i oversikta.
+  */
   beskrivelse: ReactNode;
-  /** Settast når snarvegen berre er aktiv i visse situasjonar (visast med ein merknad). */
+  /**
+  Settast når snarvegen berre er aktiv i visse situasjonar (visast med ein merknad).
+  */
   kunNårTilgjengelig?: boolean;
 }
 
@@ -177,7 +185,9 @@ const SIDEMENY_SNARVEG_IDER: ReadonlySet<string> = new Set([
   BEHANDLING_SNARVEG_IDER.FOKUSER_BEHANDLINGSVELGER,
 ]);
 
-/** Sann når snarvegen treng at sidemenyen er open for å vere synleg. */
+/**
+Sann når snarvegen treng at sidemenyen er open for å vere synleg.
+*/
 export const krevSideMeny = (id: string): boolean => SIDEMENY_SNARVEG_IDER.has(id);
 
 export const finnSekvensDefinisjon = (førsteTast: string, andreTast: string): SnarvegDefinisjon | undefined =>

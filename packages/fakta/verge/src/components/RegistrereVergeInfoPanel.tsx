@@ -72,7 +72,7 @@ export const RegistrereVergeInfoPanel = ({ verge, alleKodeverk }: Props) => {
               vergetyper={vergetyper}
               valgtVergeType={valgtVergeType}
             />
-            {aksjonspunkterForPanel.length !== 0 && (
+            {aksjonspunkterForPanel.length > 0 && (
               <>
                 <FaktaBegrunnelseTextField
                   control={formMethods.control}

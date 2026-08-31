@@ -43,7 +43,7 @@ export const SaksbehandlerDashboard = ({ setLosErIkkeTilgjengelig, åpneFagsak, 
           brukernavn={navAnsatt.brukernavn}
         />
         <div className={styles['sokContainer']}>
-          <FagsakSøkIndex åpneFagsak={åpneFagsak} kanSaksbehandle={navAnsatt.kanSaksbehandle || false} />
+          <FagsakSøkIndex åpneFagsak={åpneFagsak} kanSaksbehandle={navAnsatt.kanSaksbehandle} />
         </div>
       </div>
       <div className={styles['rightColumn']}>

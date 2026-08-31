@@ -43,7 +43,7 @@ const getPreviewCallback =
 const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
   const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === 'INN');
   for (const doc of allDocuments) {
-    if (!filteredDocuments.some(fd => fd.dokumentId === doc.dokumentId)) {
+    if (filteredDocuments.every(fd => fd.dokumentId !== doc.dokumentId)) {
       filteredDocuments.push(doc);
     }
   }
@@ -179,7 +179,7 @@ export const InnsynVedtakForm = ({
         {innsynResultatType !== 'AVVIST' && (
           <DocumentListVedtakInnsyn
             saksNr={fagsak.saksnummer}
-            documents={documents.filter(document => document.fikkInnsyn === true)}
+            documents={documents.filter(document => document.fikkInnsyn)}
           />
         )}
         <HStack gap="space-16">

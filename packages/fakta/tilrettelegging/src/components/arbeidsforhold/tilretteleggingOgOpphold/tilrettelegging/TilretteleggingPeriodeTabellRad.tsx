@@ -146,13 +146,17 @@ const TilretteleggingType = ({
 
 const TilretteleggingKilde = ({ tilretteleggingDato }: { tilretteleggingDato: SvpTilretteleggingDatoDto }) => {
   switch (tilretteleggingDato.kilde) {
-    case 'ENDRET_AV_SAKSBEHANDLER':
+    case 'ENDRET_AV_SAKSBEHANDLER': {
       return <FormattedMessage id="Kilde.EndretAvSaksbehandler" />;
-    case 'TIDLIGERE_VEDTAK':
+    }
+    case 'TIDLIGERE_VEDTAK': {
       return <FormattedMessage id="Kilde.TidligereVedtak" />;
-    case 'SØKNAD':
+    }
+    case 'SØKNAD': {
       return <FormattedMessage id="Kilde.Soknad" />;
-    default:
+    }
+    default: {
       return <FormattedMessage id="Kilde.Saksbehandler" />;
+    }
   }
 };

@@ -113,7 +113,9 @@ export const useBrevEditorJs = (
     void onAutoSaveRef.current(undefined);
   };
 
-  /** Kombinerer validering, endringssjekk og HTML-henting i ett editor.save()-kall */
+  /**
+  Kombinerer validering, endringssjekk og HTML-henting i ett editor.save()-kall
+  */
   const hentEditorStatus = async () => {
     const editor = notEmpty(editorJsRef.current, EDITOR_IKKE_INITIALISERT);
     const innhold = await editor.save();

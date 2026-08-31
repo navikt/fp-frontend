@@ -36,7 +36,7 @@ const lagForkortetNavn = (tittel: string): string => {
     return 'Ukjent tittel';
   }
   if (tittel.length > 15) {
-    const kortNavn = tittel.substring(0, 14);
+    const kortNavn = tittel.slice(0, 14);
     return kortNavn.concat('...');
   }
   return tittel;

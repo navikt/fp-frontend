@@ -126,7 +126,7 @@ const getLagringSideeffekter =
         setVisModalKlageBehandling(true);
       } else if (oppdaterProsessStegOgFaktaPanelIUrl) {
         oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
-        globalThis.scrollTo({
+        scrollTo({
           top: 0,
           behavior: 'smooth',
         });

@@ -50,7 +50,7 @@ export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFp
 
   const standardlagringSideEffekter = () => () => {
     oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
-    globalThis.scrollTo({
+    scrollTo({
       top: 0,
       behavior: 'smooth',
     });

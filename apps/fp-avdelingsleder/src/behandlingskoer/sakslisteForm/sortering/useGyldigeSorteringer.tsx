@@ -44,18 +44,22 @@ const erSorteringGyldig = (
     case 'OPPRBEH':
     case 'BEHFRIST':
     case 'FORSTONAD':
-    case 'FORSTONAD_SYNK':
+    case 'FORSTONAD_SYNK': {
       return true;
+    }
 
-    case 'OPPGAVE_OPPRETTET':
+    case 'OPPGAVE_OPPRETTET': {
       return tilBeslutter === 'TA_MED';
+    }
 
     case 'BELOP':
-    case 'FEILUTBETALINGSTART':
+    case 'FEILUTBETALINGSTART': {
       return kunTilbakekrevingValgt(behandlingtyper);
+    }
 
-    default:
+    default: {
       return køSortering satisfies never;
+    }
   }
 };
 

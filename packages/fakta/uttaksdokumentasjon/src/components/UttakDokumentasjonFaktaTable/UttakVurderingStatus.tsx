@@ -23,7 +23,7 @@ export const UttakVurderingStatus = ({ vurdering, morsStillingsprosent }: Props)
     );
   }
   switch (vurdering) {
-    case 'GODKJENT':
+    case 'GODKJENT': {
       return (
         <HStack gap="space-4">
           <CheckmarkCircleFillIcon color="var(--ax-text-success-decoration)" />
@@ -34,28 +34,33 @@ export const UttakVurderingStatus = ({ vurdering, morsStillingsprosent }: Props)
           )}
         </HStack>
       );
-    case 'IKKE_GODKJENT':
+    }
+    case 'IKKE_GODKJENT': {
       return (
         <IconLabel
           icon={<XMarkOctagonFillIcon color="var(--ax-text-danger-decoration)" />}
           formattedMessageId="UttakDokumentasjonFaktaTable.IkkeGodkjent"
         />
       );
-    case 'IKKE_DOKUMENTERT':
+    }
+    case 'IKKE_DOKUMENTERT': {
       return (
         <IconLabel
           icon={<FileXMarkFillIcon color="var(--ax-text-neutral-subtle)" />}
           formattedMessageId="UttakDokumentasjonFaktaTable.ManglerDok"
         />
       );
-    case 'GODKJENT_AUTOMATISK':
+    }
+    case 'GODKJENT_AUTOMATISK': {
       return (
         <IconLabel
           icon={<CheckmarkCircleFillIcon color="var(--ax-text-success-decoration)" />}
           formattedMessageId="UttakDokumentasjonFaktaTable.GodkjentAutomatisk"
         />
       );
-    default:
+    }
+    default: {
       return assertUnreachable(vurdering);
+    }
   }
 };

@@ -109,7 +109,7 @@ export const VelferdspermisjonForm = ({
             size="small"
             variant="primary"
             type="button"
-            disabled={!formMethods.formState.isDirty || false}
+            disabled={!formMethods.formState.isDirty}
             onClick={formMethods.handleSubmit(lagreForm)}
             className="self-start"
           >

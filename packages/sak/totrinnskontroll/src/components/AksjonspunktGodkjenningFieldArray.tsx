@@ -35,7 +35,8 @@ export type AksjonspunktGodkjenningData = {
 type Props = {
   behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: (
-    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    | TotrinnskontrollSkjermlenkeContext
+    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
   readOnly: boolean;
   erTilbakekreving: boolean;
@@ -95,7 +96,7 @@ export const AksjonspunktGodkjenningFieldArray = ({
         return (
           <div key={field.id}>
             {lenke && skjermlenkeTypeKodeverk && (
-              <Link as={NavLink} to={lenke} onClick={() => globalThis.scroll(0, 0)}>
+              <Link as={NavLink} to={lenke} onClick={() => scroll(0, 0)}>
                 {skjermlenkeTypeKodeverk.navn}
               </Link>
             )}

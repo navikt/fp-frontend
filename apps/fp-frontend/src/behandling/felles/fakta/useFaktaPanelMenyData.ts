@@ -22,10 +22,10 @@ export const useFaktaPanelMenyData = (
     setFaktaPanelMenyData(oldData => {
       const newData = [...oldData];
       const index = newData.findIndex(d => d.id === data.id);
-      if (index >= 0) {
-        newData.splice(index, 1, data);
-      } else {
+      if (index === -1) {
         newData.push(data);
+      } else {
+        newData.splice(index, 1, data);
       }
       return newData;
     });

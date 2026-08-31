@@ -106,7 +106,7 @@ export const ArbeidsforholdRad = ({
           {harKunInntektsmeldingOgIkkeÅrsak && (
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
-              arbeidsforhold={arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0] : undefined}
+              arbeidsforhold={arbeidsforholdForRad[0]}
               inntektsmelding={inntektsmeldingerForRad[0]!}
               skalViseArbeidsforholdId={false}
               alleKodeverk={alleKodeverk}

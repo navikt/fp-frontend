@@ -15,7 +15,7 @@ describe('ErrorBoundary', () => {
       <ErrorBoundary key="feil" errorMessage="Noko gjekk gale" errorMessageCallback={errorMessageCallback}>
         <TestComponent />
       </ErrorBoundary>,
-      { onCaughtError: () => undefined },
+      { onCaughtError: () => {} },
     );
 
     expect(screen.getByText('Noko gjekk gale')).toBeInTheDocument();

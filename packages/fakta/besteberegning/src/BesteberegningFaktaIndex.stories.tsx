@@ -17,8 +17,8 @@ import { BesteberegningFaktaIndex } from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
 
 const arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId = {
-  974652269: lagArbeidsgiver('974652269', 'BEDRIFT AS'),
-  6823424234232: lagPrivatArbeidsgiver('6823424234232', 'Testy Test', '1943-03-03'),
+  974_652_269: lagArbeidsgiver('974652269', 'BEDRIFT AS'),
+  6_823_424_234_232: lagPrivatArbeidsgiver('6823424234232', 'Testy Test', '1943-03-03'),
 };
 
 const meta = {

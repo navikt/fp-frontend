@@ -81,12 +81,15 @@ const Wrapper = (
 
 const mapBGKodeTilFpsakKode = (bgKode: string): string => {
   switch (bgKode) {
-    case FaktaFordelBeregningAvklaringsbehovCode.FORDEL_BEREGNINGSGRUNNLAG:
+    case FaktaFordelBeregningAvklaringsbehovCode.FORDEL_BEREGNINGSGRUNNLAG: {
       return AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG;
-    case FaktaFordelBeregningAvklaringsbehovCode.VURDER_REFUSJON_BERGRUNN:
+    }
+    case FaktaFordelBeregningAvklaringsbehovCode.VURDER_REFUSJON_BERGRUNN: {
       return AksjonspunktKode.VURDER_REFUSJON_BERGRUNN;
-    default:
+    }
+    default: {
       throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
+    }
   }
 };
 

@@ -9,13 +9,11 @@ const cdnUrl = process.env.VITE_CDN_URL;
 
 // eslint-disable-next-line import-x/no-default-export
 export default mergeConfig(createSharedAppConfig(), {
-  ...(cdnUrl
-    ? {
-        experimental: {
-          renderBuiltUrl: (filename: string) => `${cdnUrl}${filename}`,
-        },
-      }
-    : {}),
+  ...(cdnUrl && {
+    experimental: {
+      renderBuiltUrl: (filename: string) => `${cdnUrl}${filename}`,
+    },
+  }),
   server: {
     port: 9014,
     cors: {

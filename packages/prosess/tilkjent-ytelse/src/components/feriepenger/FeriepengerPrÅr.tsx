@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const FeriepengerPrÅr = ({ alleAndeler, opptjeningsår, alleKodeverk, arbeidsgiverOpplysningerPerId }: Props) => {
-  if (alleAndeler.length < 1) {
+  if (alleAndeler.length === 0) {
     return null;
   }
 

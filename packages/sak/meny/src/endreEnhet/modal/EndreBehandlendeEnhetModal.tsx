@@ -37,7 +37,7 @@ export const EndreBehandlendeEnhetModal = ({
   gjeldendeBehandlendeEnhetNavn,
 }: Props) => {
   const options = behandlendeEnheter.map((enhet, index) => (
-    <option key={enhet.enhetId} value={`${index}`}>
+    <option key={enhet.enhetId} value={String(index)}>
       {`${enhet.enhetId} ${enhet.enhetNavn}`}
     </option>
   ));

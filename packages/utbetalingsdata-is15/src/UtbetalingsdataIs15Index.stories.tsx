@@ -87,7 +87,7 @@ export const Default: Story = {
               arbeidsforhold: [
                 {
                   arbeidsgiverOrgnr: '999999999',
-                  inntekt: 12250,
+                  inntekt: 12_250,
                   inntektsperiode: {
                     kode: 'M',
                     termnavn: 'Månedlig',

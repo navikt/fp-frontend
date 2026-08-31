@@ -60,7 +60,7 @@ export const byggTabellStruktur = (
   );
 
   const alleInntektsmeldingerSomManglerArbeidsforhold = inntektsmeldinger
-    .filter(im => !arbeidsforhold.some(af => im.arbeidsgiverIdent === af.arbeidsgiverIdent))
+    .filter(im => arbeidsforhold.every(af => im.arbeidsgiverIdent !== af.arbeidsgiverIdent))
     .map<ArbeidsforholdOgInntektRadData>(im => {
       const arbeidsgiverOpplysninger = lagArbeidsgiverMedFallback(
         im.arbeidsgiverIdent,

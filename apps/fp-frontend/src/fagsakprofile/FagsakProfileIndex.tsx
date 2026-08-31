@@ -102,7 +102,7 @@ export const FagsakProfileIndex = ({
 
   useEffect(() => {
     if (!skalFokuserVelgerRef.current || !velgerErSynleg) {
-      return undefined;
+      return;
     }
     let gjenståandeForsøk = 20;
     let rammeId = 0;

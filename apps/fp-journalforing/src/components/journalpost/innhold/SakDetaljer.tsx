@@ -79,31 +79,41 @@ const velgSakLenke = (saksnummer: string): string => `${getFpSakLenke()}/fagsak/
 
 const finnTagProps = (statusKode: FagsakStatus): TagProps | null => {
   switch (statusKode) {
-    case 'AVSLU':
+    case 'AVSLU': {
       return { variant: 'neutral', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Avsluttet" /> };
-    case 'LOP':
+    }
+    case 'LOP': {
       return { variant: 'warning', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Løpende" /> };
-    case 'OPPR':
+    }
+    case 'OPPR': {
       return { variant: 'alt1', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Opprettet" /> };
-    case 'UBEH':
+    }
+    case 'UBEH': {
       return { variant: 'alt2', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.UnderBehandling" /> };
-    default:
+    }
+    default: {
       return null;
+    }
   }
 };
 
 const finnFamilieHendelseTekstKode = (hendelseType: FamilieHendelseType): string => {
   switch (hendelseType) {
-    case 'ADPSJN':
+    case 'ADPSJN': {
       return 'Journal.Sak.FamAdopsjon';
-    case 'FODSL':
+    }
+    case 'FODSL': {
       return 'Journal.Sak.FamFødsel';
-    case 'TERM':
+    }
+    case 'TERM': {
       return 'Journal.Sak.FamTermin';
-    case 'OMSRGO':
+    }
+    case 'OMSRGO': {
       return 'Journal.Sak.FamOmsorg';
-    default:
+    }
+    default: {
       throw new Error(`Ukjent familiehendelse ${hendelseType}`);
+    }
   }
 };
 

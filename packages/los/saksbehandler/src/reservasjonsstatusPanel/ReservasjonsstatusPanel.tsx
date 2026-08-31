@@ -21,7 +21,7 @@ export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid, kanVeilede
   const { data: reserverteOppgaver = [], refetch } = useQuery({
     ...oppgaverForFagsakerOptions([saksnummer]),
     refetchInterval: query =>
-      query.state.data?.find(ro => ro.behandlingId === behandlingUuid)?.reservasjonStatus.erReservert ? false : 30000,
+      query.state.data?.find(ro => ro.behandlingId === behandlingUuid)?.reservasjonStatus.erReservert ? false : 30_000,
   });
 
   const oppgaveForBehandling = reserverteOppgaver.find(ro => ro.behandlingId === behandlingUuid);

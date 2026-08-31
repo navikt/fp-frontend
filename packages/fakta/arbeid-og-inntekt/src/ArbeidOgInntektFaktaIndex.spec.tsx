@@ -32,7 +32,7 @@ const {
 const frist = dayjs().add(28, 'days').format(ISO_DATE_FORMAT);
 
 const scrollIntoViewMock = vi.fn();
-globalThis.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
 
 describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal avklare arbeidsforhold som mangler inntektsmelding og så sette på vent', async () => {
@@ -224,7 +224,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal beholde skjemaet dirty når lagring av manglende arbeidsforhold feiler', async () => {
     const lagreVurdering = vi.fn(() => {
       const promise = Promise.reject(new Error('Lagring feilet'));
-      void promise.catch(() => undefined);
+      void promise.catch(() => {});
       return promise;
     });
 

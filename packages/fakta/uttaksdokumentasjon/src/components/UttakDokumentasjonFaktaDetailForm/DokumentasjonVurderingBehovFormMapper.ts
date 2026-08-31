@@ -17,14 +17,18 @@ function mapVurderingsAlternativTilUttakVurdering(vurdering: VurderingsAlternati
   switch (vurdering) {
     case VurderingsAlternativ.GODKJENT:
     case VurderingsAlternativ.GODKJENT_OVER75:
-    case VurderingsAlternativ.GODKJENT_UNDER75:
+    case VurderingsAlternativ.GODKJENT_UNDER75: {
       return 'GODKJENT';
-    case VurderingsAlternativ.IKKE_GODKJENT:
+    }
+    case VurderingsAlternativ.IKKE_GODKJENT: {
       return 'IKKE_GODKJENT';
-    case VurderingsAlternativ.IKKE_DOKUMENTERT:
+    }
+    case VurderingsAlternativ.IKKE_DOKUMENTERT: {
       return 'IKKE_DOKUMENTERT';
-    default:
+    }
+    default: {
       return assertUnreachable(vurdering);
+    }
   }
 }
 
@@ -42,12 +46,15 @@ function mapUttakVurderingTilVurderingsAlternativ(
       }
       return VurderingsAlternativ.GODKJENT;
     }
-    case 'IKKE_GODKJENT':
+    case 'IKKE_GODKJENT': {
       return VurderingsAlternativ.IKKE_GODKJENT;
-    case 'IKKE_DOKUMENTERT':
+    }
+    case 'IKKE_DOKUMENTERT': {
       return VurderingsAlternativ.IKKE_DOKUMENTERT;
-    default:
+    }
+    default: {
       return assertUnreachable(vurdering as never);
+    }
   }
 }
 

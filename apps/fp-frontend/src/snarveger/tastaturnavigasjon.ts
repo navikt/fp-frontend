@@ -9,16 +9,21 @@ export const nesteFokusIndex = (key: string, aktivIndex: number, antall: number)
     return undefined;
   }
   switch (key) {
-    case 'ArrowDown':
+    case 'ArrowDown': {
       return wrapIndex(aktivIndex + 1, antall);
-    case 'ArrowUp':
+    }
+    case 'ArrowUp': {
       return wrapIndex(aktivIndex - 1, antall);
-    case 'Home':
+    }
+    case 'Home': {
       return 0;
-    case 'End':
+    }
+    case 'End': {
       return antall - 1;
-    default:
+    }
+    default: {
       return undefined;
+    }
   }
 };
 

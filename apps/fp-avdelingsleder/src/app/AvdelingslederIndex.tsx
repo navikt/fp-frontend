@@ -160,20 +160,22 @@ const setAvdeling = (
   avdelinger: AvdelingDto[],
   valgtAvdelingEnhet?: string,
 ) => {
-  if (avdelinger.length > 0 && !valgtAvdelingEnhet) {
-    let valgtEnhet = avdelinger.some(a => a.avdelingEnhet === nasjonalEnhet)
-      ? nasjonalEnhet
-      : avdelinger[0]!.avdelingEnhet;
-    const lagretAvdelingEnhet = getValueFromLocalStorage('avdelingEnhet');
-    if (lagretAvdelingEnhet) {
-      if (avdelinger.some(a => a.avdelingEnhet === lagretAvdelingEnhet)) {
-        valgtEnhet = lagretAvdelingEnhet;
-      } else {
-        removeValueFromLocalStorage('avdelingEnhet');
-      }
-    }
-    setValgtAvdeling(valgtEnhet);
+  if (avdelinger.length === 0 || valgtAvdelingEnhet) {
+    return;
   }
+
+  let valgtEnhet = avdelinger.some(a => a.avdelingEnhet === nasjonalEnhet)
+    ? nasjonalEnhet
+    : avdelinger[0]!.avdelingEnhet;
+  const lagretAvdelingEnhet = getValueFromLocalStorage('avdelingEnhet');
+  if (lagretAvdelingEnhet) {
+    if (avdelinger.some(a => a.avdelingEnhet === lagretAvdelingEnhet)) {
+      valgtEnhet = lagretAvdelingEnhet;
+    } else {
+      removeValueFromLocalStorage('avdelingEnhet');
+    }
+  }
+  setValgtAvdeling(valgtEnhet);
 };
 
 const getPanelFromUrlOrDefault = (location: Location) => {

@@ -45,10 +45,7 @@ export const SaksbehandlereForSakslisteForm = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- nullstill skjema berre når valt saksliste endrar seg; defaultValues er ny kvar render
   }, [valgtSaksliste.sakslisteId]);
 
-  const harGrupper =
-    grupper &&
-    grupper.saksbehandlerGrupper.length > 0 &&
-    !grupper.saksbehandlerGrupper.every(sg => sg.saksbehandlere.length === 0);
+  const harGrupper = grupper && grupper.saksbehandlerGrupper.some(sg => sg.saksbehandlere.length > 0);
 
   return (
     <RhfForm<FormValues> formMethods={formMethods}>
@@ -95,7 +92,7 @@ export const SaksbehandlereForSakslisteForm = ({
                       <Checkbox
                         hideLabel
                         indeterminate={
-                          !sg.saksbehandlere.every(saksbehandler => formvalues[saksbehandler.brukerIdent]) &&
+                          sg.saksbehandlere.some(saksbehandler => !formvalues[saksbehandler.brukerIdent]) &&
                           sg.saksbehandlere.some(saksbehandler => formvalues[saksbehandler.brukerIdent])
                         }
                         checked={sg.saksbehandlere.every(saksbehandler => formvalues[saksbehandler.brukerIdent])}

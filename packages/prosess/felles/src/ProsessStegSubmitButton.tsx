@@ -19,7 +19,7 @@ const isDisabled = (
   if (hasEmptyRequiredFields === undefined) {
     return !isDirty;
   }
-  return (!isDirty && hasEmptyRequiredFields) || hasEmptyRequiredFields;
+  return hasEmptyRequiredFields;
 };
 
 interface Props {

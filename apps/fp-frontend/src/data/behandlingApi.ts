@@ -99,11 +99,11 @@ export type OverstyrteAksjonspunktArgs = {
 
 const kyExtended = ky.extend({
   retry: 0,
-  timeout: 15000,
+  timeout: 15_000,
   hooks: {
     beforeRequest: [
       ({ request }) => {
-        const navCallId = `CallId_${Date.now()}_${Math.floor(Math.random() * 1000000000)}`;
+        const navCallId = `CallId_${Date.now()}_${Math.floor(Math.random() * 1_000_000_000)}`;
         request.headers.set('Nav-Callid', navCallId);
       },
     ],
@@ -114,7 +114,9 @@ const kyExtended = ky.extend({
 const isTest = import.meta.env.MODE === 'test';
 const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
-/** Backend returnerer null for Optional.orElse(null), som JAX-RS oversetter til 204 No Content */
+/**
+Backend returnerer null for Optional.orElse(null), som JAX-RS oversetter til 204 No Content
+*/
 const jsonEllerNull = async <T>(responsePromise: ResponsePromise) => {
   const response = await responsePromise;
   return response.status === 204 ? null : response.json<T>();
@@ -664,8 +666,8 @@ const getHentBrevHtml =
       .post(getUrlFromRel('HENT_BREV_HTML', links), {
         json: {
           behandlingUuid,
-          ...(dokumentMalType ? { dokumentMal: dokumentMalType } : {}),
-          ...(revurderingÅrsak ? { revurderingÅrsak } : {}),
+          ...(dokumentMalType && { dokumentMal: dokumentMalType }),
+          ...(revurderingÅrsak && { revurderingÅrsak }),
         },
       })
       .json<BrevOverstyring>();

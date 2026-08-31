@@ -162,7 +162,7 @@ describe('UttakDokumentasjonFaktaIndex', () => {
 
   it('skal kunne prøve å bekrefte på nytt etter feil ved submit', async () => {
     const rejectedSubmit = Promise.reject(new Error('Feilet'));
-    rejectedSubmit.catch(() => undefined);
+    rejectedSubmit.catch(() => {});
     const lagre = vi
       .fn()
       .mockImplementationOnce(() => rejectedSubmit)

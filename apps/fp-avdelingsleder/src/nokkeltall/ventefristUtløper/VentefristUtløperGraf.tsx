@@ -80,8 +80,8 @@ const lagDatastruktur = (
 };
 
 const formaterUkeÅr = (value: string): string => {
-  return 'Uke ' + value.split('-')[1] + ' ' + value.split('-')[0];
+  return 'Uke ' + value.split('-', 2)[1] + ' ' + value.split('-', 1)[0];
 };
 
 const getUkeKategorier = (behandlingerPaVent: NøkkeltallBehandlingVentefristUtløperDto[]): string[] =>
-  Array.from(new Set(behandlingerPaVent.map(behandling => behandling.fristUke))).sort((a, b) => a.localeCompare(b));
+  [...new Set(behandlingerPaVent.map(behandling => behandling.fristUke))].sort((a, b) => a.localeCompare(b));

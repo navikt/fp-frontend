@@ -35,15 +35,18 @@ const visit = (node: ts.Node, ids: string[]): void => {
         collectIdsFromMessagesObject(firstArgument, ids);
       }
     }
-  } else if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
-    if (getJsxTagName(node.tagName) === 'FormattedMessage') {
-      collectIdFromJsxAttributes(node.attributes, ids);
-    }
+  } else if (
+    (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) &&
+    getJsxTagName(node.tagName) === 'FormattedMessage'
+  ) {
+    collectIdFromJsxAttributes(node.attributes, ids);
   }
   ts.forEachChild(node, child => visit(child, ids));
 };
 
-/** Returnerer funksjonsnavnet for `foo()` og `obj.foo()`. */
+/**
+Returnerer funksjonsnavnet for `foo()` og `obj.foo()`.
+*/
 const getCalleeName = (expression: ts.Expression): string | undefined => {
   if (ts.isIdentifier(expression)) {
     return expression.text;
@@ -54,7 +57,9 @@ const getCalleeName = (expression: ts.Expression): string | undefined => {
   return undefined;
 };
 
-/** Returnerer JSX-tagnavnet, f.eks. `FormattedMessage` for `<Intl.FormattedMessage>`. */
+/**
+Returnerer JSX-tagnavnet, f.eks. `FormattedMessage` for `<Intl.FormattedMessage>`.
+*/
 const getJsxTagName = (tagName: ts.JsxTagNameExpression): string | undefined => {
   if (ts.isIdentifier(tagName)) {
     return tagName.text;
@@ -65,22 +70,28 @@ const getJsxTagName = (tagName: ts.JsxTagNameExpression): string | undefined => 
   return undefined;
 };
 
-/** Plukker ut `id` fra et meldingsdeskriptor-objekt: `{ id: '...' }`. */
+/**
+Plukker ut `id` fra et meldingsdeskriptor-objekt: `{ id: '...' }`.
+*/
 const collectIdFromObject = (node: ts.Node, ids: string[]): void => {
   if (!ts.isObjectLiteralExpression(node)) {
     return;
   }
   for (const property of node.properties) {
-    if (ts.isPropertyAssignment(property) && getPropertyName(property.name) === 'id') {
-      const id = getStaticString(property.initializer);
-      if (id !== undefined) {
-        ids.push(id);
-      }
+    if (!(ts.isPropertyAssignment(property) && getPropertyName(property.name) === 'id')) {
+      continue;
+    }
+
+    const id = getStaticString(property.initializer);
+    if (id !== undefined) {
+      ids.push(id);
     }
   }
 };
 
-/** Plukker ut `id` fra hvert deskriptor-objekt i `defineMessages({ a: {...}, b: {...} })`. */
+/**
+Plukker ut `id` fra hvert deskriptor-objekt i `defineMessages({ a: {...}, b: {...} })`.
+*/
 const collectIdsFromMessagesObject = (node: ts.Node, ids: string[]): void => {
   if (!ts.isObjectLiteralExpression(node)) {
     return;
@@ -92,14 +103,18 @@ const collectIdsFromMessagesObject = (node: ts.Node, ids: string[]): void => {
   }
 };
 
-/** Plukker ut `id="..."` eller `id={'...'}` fra JSX-attributter. */
+/**
+Plukker ut `id="..."` eller `id={'...'}` fra JSX-attributter.
+*/
 const collectIdFromJsxAttributes = (attributes: ts.JsxAttributes, ids: string[]): void => {
   for (const attribute of attributes.properties) {
-    if (ts.isJsxAttribute(attribute) && attribute.name.getText() === 'id' && attribute.initializer !== undefined) {
-      const id = getJsxAttributeString(attribute.initializer);
-      if (id !== undefined) {
-        ids.push(id);
-      }
+    if (!(ts.isJsxAttribute(attribute) && attribute.name.getText() === 'id') || attribute.initializer === undefined) {
+      continue;
+    }
+
+    const id = getJsxAttributeString(attribute.initializer);
+    if (id !== undefined) {
+      ids.push(id);
     }
   }
 };
@@ -121,7 +136,9 @@ const getJsxAttributeString = (initializer: ts.JsxAttributeValue): string | unde
   return undefined;
 };
 
-/** Returnerer verdien for statiske strenger, men ignorerer dynamiske template-literaler. */
+/**
+Returnerer verdien for statiske strenger, men ignorerer dynamiske template-literaler.
+*/
 const getStaticString = (node: ts.Expression): string | undefined => {
   if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) {
     return node.text;

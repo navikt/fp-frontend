@@ -32,7 +32,7 @@ import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 
 const AKSJONSPUNKT_KODER = [VedtakAksjonspunktCode.FORESLA_VEDTAK];
 
-const tilbakekrevingÅrsakTyperKlage: BehandlingÅrsakTypeFpTilbake[] = ['RE_KLAGE_KA', 'RE_KLAGE_NFP'];
+const tilbakekrevingÅrsakTyperKlage: Set<BehandlingÅrsakTypeFpTilbake> = new Set(['RE_KLAGE_KA', 'RE_KLAGE_NFP']);
 interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
 }
@@ -120,7 +120,7 @@ const Wrapper = (props: Omit<ComponentProps<typeof VedtakTilbakekrevingProsessIn
 };
 
 const erTilbakekrevingÅrsakKlage = (årsak: BehandlingÅrsakTypeFpTilbake): boolean =>
-  tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
+  tilbakekrevingÅrsakTyperKlage.has(årsak);
 
 const getVedtakStatus = (beregningsresultat?: BehandlingsresultatDtoFpTilbake): VilkårUtfallType => {
   if (!beregningsresultat) {

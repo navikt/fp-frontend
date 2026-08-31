@@ -102,7 +102,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger }: Props) => {
           </RhfRadioGroup>
           {erBarnetFødt !== undefined && (
             <VStack gap="space-16">
-              {erBarnetFødt === false && (
+              {!erBarnetFødt && (
                 <>
                   <HStack gap="space-16">
                     <RhfDatepicker
@@ -144,7 +144,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger }: Props) => {
                   />
                 </>
               )}
-              {erBarnetFødt === true && (
+              {erBarnetFødt && (
                 <>
                   <HStack gap="space-16">
                     <RhfDatepicker

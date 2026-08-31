@@ -278,8 +278,8 @@ const mapBarn = (omsorgsovertakelse: OmsorgsovertakelseDto) => {
   });
 
   const barnKunIGjeldende = gjeldendeBarn
-    .filter(
-      gjeldendeBarnItem => !omsorgsovertakelse.søknad.barn.some(b => b.barnNummer === gjeldendeBarnItem.barnNummer),
+    .filter(gjeldendeBarnItem =>
+      omsorgsovertakelse.søknad.barn.every(b => b.barnNummer !== gjeldendeBarnItem.barnNummer),
     )
     .map(gjeldendeBarnItem => ({
       fødselsdato: gjeldendeBarnItem.fødselsdato,

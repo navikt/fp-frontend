@@ -111,25 +111,35 @@ const hentAndreKriterierNavn = (
   andreKriterier: LosKodeverkMedNavn<'AndreKriterierType'>[],
 ) => {
   switch (kode) {
-    case 'REVURDERING_INNTEKTSMELDING':
+    case 'REVURDERING_INNTEKTSMELDING': {
       return intl.formatMessage({ id: 'OppgaveLabels.RevurderingInntekstmelding' });
-    case 'BERØRT_BEHANDLING':
+    }
+    case 'BERØRT_BEHANDLING': {
       return intl.formatMessage({ id: 'OppgaveLabels.BerortBehandling' });
-    case 'KLAGE_PÅ_TILBAKEBETALING':
+    }
+    case 'KLAGE_PÅ_TILBAKEBETALING': {
       return intl.formatMessage({ id: 'OppgaveLabels.KlageTilbakebetaling' });
-    case 'DØD':
+    }
+    case 'DØD': {
       return intl.formatMessage({ id: 'OppgaveLabels.Dod' });
-    case 'PAPIRSOKNAD':
+    }
+    case 'PAPIRSOKNAD': {
       return intl.formatMessage({ id: 'OppgaveLabels.Papirsoknad' });
-    case 'RETURNERT_FRA_BESLUTTER':
+    }
+    case 'RETURNERT_FRA_BESLUTTER': {
       return intl.formatMessage({ id: 'OppgaveLabels.FraBeslutter' });
-    case 'NÆRING':
+    }
+    case 'NÆRING': {
       return intl.formatMessage({ id: 'OppgaveLabels.Naring' });
-    case 'UTBETALING_TIL_BRUKER':
+    }
+    case 'UTBETALING_TIL_BRUKER': {
       return intl.formatMessage({ id: 'OppgaveLabels.Utbetaling' });
-    case 'VURDER_EØS_OPPTJENING':
+    }
+    case 'VURDER_EØS_OPPTJENING': {
       return intl.formatMessage({ id: 'OppgaveLabels.VurderSed' });
-    default:
+    }
+    default: {
       return andreKriterier.find(b => b.kode === kode)?.navn;
+    }
   }
 };

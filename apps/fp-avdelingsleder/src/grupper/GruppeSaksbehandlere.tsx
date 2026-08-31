@@ -32,7 +32,7 @@ const sortAvdelingensSaksbehandlere = (
   grupperteSaksbehandlere: SaksbehandlerDto[],
 ) =>
   saksbehandlere
-    .filter(s => !grupperteSaksbehandlere.some(gs => gs.brukerIdent === s.brukerIdent))
+    .filter(s => grupperteSaksbehandlere.every(gs => gs.brukerIdent !== s.brukerIdent))
     .sort((saksbehandler1, saksbehandler2) => saksbehandler1.navn.localeCompare(saksbehandler2.navn));
 
 interface Props {
@@ -114,7 +114,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
   };
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={() => undefined}>
+    <RhfForm formMethods={formMethods} onSubmit={() => {}}>
       <VStack gap="space-20">
         <RhfTextField
           name="navn"

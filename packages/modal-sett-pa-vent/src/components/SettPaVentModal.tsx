@@ -54,7 +54,7 @@ export const SettPaVentModal = ({
   const venteArsakHasChanged = harEndretVenteårsak(ventearsak, ventearsakFraFelt);
   const fristHasChanged = harEndretFrist(frist, fristFraFelt);
 
-  const showAvbryt = !(frist === fristFraFelt && !venteArsakHasChanged);
+  const showAvbryt = frist !== fristFraFelt || venteArsakHasChanged;
   const showFristenTekst = skalViseFristenTekst(erTilbakekreving, frist, fristFraFelt, ventearsakFraFelt);
 
   return (
@@ -155,7 +155,7 @@ const buildInitialValues = (
   ventearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake,
 ): FormValues => ({
   ventearsak: ventearsak ?? undefined,
-  frist: frist || hasManualPaVent === false ? (frist ?? undefined) : initFrist(),
+  frist: frist || !hasManualPaVent ? (frist ?? undefined) : initFrist(),
 });
 
 const manuelleVenteArsaker = new Set<VenteArsakType | VenteÅrsakTypeFpTilbake>([
@@ -171,18 +171,16 @@ const manuelleVenteArsaker = new Set<VenteArsakType | VenteÅrsakTypeFpTilbake>(
   'VENT_PÅ_MULIG_MOTREGNING',
 ]);
 
-const automatiskeVentearsakerForTilbakekreving: VenteÅrsakTypeFpTilbake[] = [
+const automatiskeVentearsakerForTilbakekreving = new Set<string>([
   'VENT_PÅ_BRUKERTILBAKEMELDING',
   'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG',
-];
+]);
 
 const inkluderVentearsak = (
   ventearsak: KodeverkMedNavn<'Venteårsak'> | KodeverkMedNavnTilbakekreving<'Venteårsak'>,
   valgtVentearsak?: VenteArsakType | VenteÅrsakTypeFpTilbake,
 ): boolean =>
-  automatiskeVentearsakerForTilbakekreving.some(kode => kode === ventearsak.kode)
-    ? ventearsak.kode === valgtVentearsak
-    : true;
+  automatiskeVentearsakerForTilbakekreving.has(ventearsak.kode) ? ventearsak.kode === valgtVentearsak : true;
 
 const skalViseFristenTekst = (
   erTilbakekreving: boolean,

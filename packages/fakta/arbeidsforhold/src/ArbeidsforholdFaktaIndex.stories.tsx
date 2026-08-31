@@ -36,9 +36,9 @@ const defaultArbeidsforhold = {
 } satisfies Arbeidsforhold;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
-  11212: lagArbeidsgiver('11212', 'Vy'),
-  999999999: lagArbeidsgiver('999999999', 'KIWI'),
-  999999998: lagArbeidsgiver('999999998', 'REMA 1000'),
+  11_212: lagArbeidsgiver('11212', 'Vy'),
+  999_999_999: lagArbeidsgiver('999999999', 'KIWI'),
+  999_999_998: lagArbeidsgiver('999999998', 'REMA 1000'),
 };
 
 const meta = {
@@ -114,7 +114,7 @@ export const ManueltOpprettetArbeidsforhold: Story = {
       inntektsmeldinger: [
         {
           ...fellesInntektsmeldingFelter,
-          inntektPrMnd: 40000,
+          inntektPrMnd: 40_000,
           arbeidsgiverIdent: '999999999',
           kontaktpersonNavn: 'Dolly Dollesen',
           kontaktpersonNummer: '99999999',
@@ -262,7 +262,7 @@ export const ArbeidsforholdetErOpprettetBasertPåIM: Story = {
       inntektsmeldinger: [
         {
           ...fellesInntektsmeldingFelter,
-          inntektPrMnd: 25500,
+          inntektPrMnd: 25_500,
           arbeidsgiverIdent: '999999999',
           kontaktpersonNavn: 'Dolly Dollesen',
           kontaktpersonNummer: '99999999',
@@ -343,7 +343,7 @@ export const FlereArbeidsforholdITabell: Story = {
       inntektsmeldinger: [
         {
           ...fellesInntektsmeldingFelter,
-          inntektPrMnd: 30000,
+          inntektPrMnd: 30_000,
           arbeidsgiverIdent: '999999999',
           eksternArbeidsforholdId: 'V999999999R50049082SS157848L0001',
           internArbeidsforholdId: 'c14b0c78-eb1f-4d8e-b73f-7f385a5e67d2',
@@ -355,7 +355,7 @@ export const FlereArbeidsforholdITabell: Story = {
         },
         {
           ...fellesInntektsmeldingFelter,
-          inntektPrMnd: 40000,
+          inntektPrMnd: 40_000,
           arbeidsgiverIdent: '999999998',
           eksternArbeidsforholdId: 'ARB001-001',
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',

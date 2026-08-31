@@ -79,7 +79,7 @@ export const fagsakFullFpsak: Fagsak = {
 
       toTrinnsBehandling: false,
       behandlingsresultat: {
-        id: 999951,
+        id: 999_951,
         type: 'IKKE_FASTSATT',
 
         konsekvenserForYtelsen: [],

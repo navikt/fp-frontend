@@ -75,17 +75,21 @@ export const utledStiler = (html: string) => {
         node.name = 'brev-wrapper';
       } else {
         switch (node.type) {
-          case 'ClassSelector':
+          case 'ClassSelector': {
             node.name = `brev-wrapper .${node.name}`;
             break;
-          case 'IdSelector':
+          }
+          case 'IdSelector': {
             node.name = `brev-wrapper #${node.name}`;
             break;
-          case 'TypeSelector':
+          }
+          case 'TypeSelector': {
             node.name = `brev-wrapper ${node.name}`;
             break;
-          default:
+          }
+          default: {
             break;
+          }
         }
       }
       node.type = 'ClassSelector';
@@ -138,25 +142,29 @@ export const konverterHtmlToEditorJsFormat = (html: string): OutputData => {
       const element = node as HTMLElement;
       switch (element.tagName.toLowerCase()) {
         case 'h1':
-        case 'h2':
+        case 'h2': {
           blocks.push({
             type: 'header',
             data: { text: element.innerHTML, level: Number.parseInt(element.tagName[1]!) },
           });
           break;
-        case 'p':
+        }
+        case 'p': {
           blocks.push({ type: 'paragraph', data: { text: element.innerHTML } });
           break;
-        case 'ul':
+        }
+        case 'ul': {
           blocks.push({
             type: 'list',
             data: { style: 'unordered', items: Array.from(element.querySelectorAll('li')).map(li => li.innerHTML) },
           });
           break;
-        default:
+        }
+        default: {
           for (const child of node.childNodes) {
             processNode(child);
           }
+        }
       }
     }
   };

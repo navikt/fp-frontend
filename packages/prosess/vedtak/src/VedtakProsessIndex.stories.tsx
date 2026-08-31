@@ -437,7 +437,7 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyrin
     behandling: defaultBehandling,
     beregningsresultat: {
       antallBarn: 2,
-      beregnetTilkjentYtelse: 10000,
+      beregnetTilkjentYtelse: 10_000,
       satsVerdi: 0,
     } satisfies BeregningsresultatEs,
     fagsak: {
@@ -455,7 +455,7 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
     },
     beregningsresultat: {
       antallBarn: 2,
-      beregnetTilkjentYtelse: 10000,
+      beregnetTilkjentYtelse: 10_000,
       satsVerdi: 0,
     } satisfies BeregningsresultatEs,
     fagsak: {
@@ -470,7 +470,7 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring
   args: {
     beregningsresultat: {
       antallBarn: 2,
-      beregnetTilkjentYtelse: 10000,
+      beregnetTilkjentYtelse: 10_000,
       satsVerdi: 0,
     } satisfies BeregningsresultatEs,
     fagsak: {
@@ -484,7 +484,7 @@ export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
   args: {
     beregningsresultat: {
       antallBarn: 2,
-      beregnetTilkjentYtelse: 10000,
+      beregnetTilkjentYtelse: 10_000,
       satsVerdi: 0,
     } satisfies BeregningsresultatEs,
     fagsak: {
@@ -521,7 +521,7 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
     } satisfies BehandlingFpSak,
     beregningsresultat: {
       antallBarn: 2,
-      beregnetTilkjentYtelse: 10000,
+      beregnetTilkjentYtelse: 10_000,
       satsVerdi: 0,
     } satisfies BeregningsresultatEs,
     fagsak: {
@@ -788,7 +788,7 @@ export const SkalIkkeProduseresBrev: Story = {
     } satisfies BehandlingFpSak,
     beregningsresultat: {
       antallBarn: 2,
-      beregnetTilkjentYtelse: 10000,
+      beregnetTilkjentYtelse: 10_000,
       satsVerdi: 0,
     } satisfies BeregningsresultatEs,
   },

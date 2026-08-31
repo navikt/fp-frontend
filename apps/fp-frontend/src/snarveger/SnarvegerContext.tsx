@@ -87,7 +87,7 @@ export const useRegistrerSnarveg = (id: string, handler: () => void, aktivert = 
   useEffect(() => {
     // Utan provider (t.d. i isolerte stories/tester) er snarvegen ein no-op.
     if (!registrer || !aktivert) {
-      return undefined;
+      return;
     }
     return registrer(id, () => handlerRef.current());
   }, [id, aktivert, registrer]);
@@ -109,14 +109,16 @@ export const useRegistrerFørDispatch = (fn: (id: string) => void): void => {
   useEffect(() => {
     // Utan provider (t.d. i isolerte stories/tester) er dette ein no-op.
     if (!registrer) {
-      return undefined;
+      return;
     }
     return registrer(id => fnRef.current(id));
   }, [registrer]);
 };
 
 interface SnarvegerContextValue {
-  /** Registrer ein handler for ein snarveg-id. Returnerer ein opprydjingsfunksjon. */
+  /**
+  Registrer ein handler for ein snarveg-id. Returnerer ein opprydjingsfunksjon.
+  */
   registrer: (id: string, handler: () => void) => () => void;
   /**
    * Registrer ein funksjon som køyrer rett før kvar dispatch (med id-en som argument).
@@ -124,7 +126,9 @@ interface SnarvegerContextValue {
    * Returnerer ein opprydjingsfunksjon.
    */
   registrerFørDispatch: (fn: (id: string) => void) => () => void;
-  /** Køyr handleren som er registrert for id-en, om nokon. Returnerer true om noko vart køyrt. */
+  /**
+  Køyr handleren som er registrert for id-en, om nokon. Returnerer true om noko vart køyrt.
+  */
   dispatch: (id: string) => boolean;
   snarveiModalÅpen: boolean;
   settSnarveiModalÅpen: (åpen: boolean) => void;

@@ -14,7 +14,7 @@ export const BehandlingPollingTimoutModal = () => {
     <NavModal
       open
       aria-label={intl.formatMessage({ id: 'BehandlingPollingTimoutModal.TimeoutMelding' })}
-      onClose={() => globalThis.location.reload()}
+      onClose={() => location.reload()}
     >
       <NavModal.Header>
         <HStack gap="space-16" align="center">
@@ -25,7 +25,7 @@ export const BehandlingPollingTimoutModal = () => {
         </HStack>
       </NavModal.Header>
       <NavModal.Footer>
-        <Button size="small" variant="primary" onClick={() => globalThis.location.reload()} autoFocus type="button">
+        <Button size="small" variant="primary" onClick={() => location.reload()} autoFocus type="button">
           <FormattedMessage id="BehandlingPollingTimoutModal.Fortsett" />
         </Button>
       </NavModal.Footer>
