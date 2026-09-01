@@ -58,9 +58,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
     };
 
     const onScroll = () => {
-      if (rafId === null) {
-        rafId = requestAnimationFrame(updateTop);
-      }
+      rafId ??= requestAnimationFrame(updateTop);
     };
 
     updateTop();
