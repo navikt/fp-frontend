@@ -27,7 +27,7 @@
     "dayjs": "1.11.23",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-intl": "10.1.23"
+    "react-intl": "10.1.24"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
@@ -36,7 +36,7 @@
     "@storybook/react": "10.5.10",
     "@storybook/react-vite": "10.5.10",
     "@testing-library/dom": "10.4.1",
-    "@testing-library/react": "16.3.2",
+    "@testing-library/react": "16.3.3",
     "@types/react": "19.2.17",
     "eslint": "10.8.0",
     "storybook": "10.5.10",
