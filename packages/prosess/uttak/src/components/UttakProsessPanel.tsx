@@ -52,7 +52,7 @@ const UttakPeriodeNavn = {
   FLERBARNSDAGER: 'Flerbarnsdager',
   UTEN_AKTIVITETSKRAV: 'Uten aktivitetskrav',
   MINSTERETT_NESTE_STØNADSPERIODE: 'Minsterett neste stønadsperiode',
-  MINSTERETT: 'minsterett',
+  MINSTERETT: 'Minsterett',
   '-': '-',
 };
 

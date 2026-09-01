@@ -10,6 +10,7 @@ import type {
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatPeriode,
   BeregningsresultatPeriodeAndel,
+  StønadskontoType,
 } from '@navikt/fp-types';
 
 // TODO Kva er dette? Kodeverk-navn skal hentast fra databasen!
@@ -20,8 +21,11 @@ const UttakPeriodeNavn: Record<string, string> = {
   FORELDREPENGER_FØR_FØDSEL: 'Foreldrepenger før fødsel',
   FORELDREPENGER: 'Foreldrepenger',
   FLERBARNSDAGER: 'Flerbarnsdager',
+  UTEN_AKTIVITETSKRAV: 'Uten aktivitetskrav',
+  MINSTERETT_NESTE_STØNADSPERIODE: 'Minsterett neste stønadsperiode',
+  MINSTERETT: 'Minsterett',
   '-': '-',
-};
+} satisfies Record<StønadskontoType | '-', string>;
 
 interface Props {
   valgtBeregningsresultatPeriode: BeregningsresultatPeriode;
