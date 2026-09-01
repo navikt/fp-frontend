@@ -35,7 +35,7 @@ export const createQueryClient = (errorHandler: (error: Error) => void) =>
         retry: retryHandler(),
       },
       mutations: {
-        retry: retryHandler(),
+        retry: false,
       },
     },
     queryCache: new QueryCache({
