@@ -2,6 +2,11 @@
   margin-top: 30px;
 }
 
+.scrollContainer {
+  min-height: 250px;
+  overflow-y: auto;
+}
+
 .kommunikasjonsretning {
   align-items: center;
   display: flex;
