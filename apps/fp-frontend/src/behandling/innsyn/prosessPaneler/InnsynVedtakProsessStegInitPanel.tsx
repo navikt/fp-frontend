@@ -6,6 +6,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakInnsynForhandsvisData, VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
@@ -36,6 +37,7 @@ export const InnsynVedtakProsessStegInitPanel = () => {
   const { data: innsyn } = useQuery(api.innsyn.innsynOptions(behandling));
 
   const { mutate: forhåndsvis } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (values: VedtakInnsynForhandsvisData) =>
       forhåndsvisMelding({
         ...values,

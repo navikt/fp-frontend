@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { FagsakSokSakIndex } from '@navikt/fp-sak-sok';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -32,6 +33,7 @@ export const FagsakSearchIndex = () => {
     status: søkeStatus,
     error: fagsakError,
   } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (valuesToStore: { searchString: string }) => søkFagsak(valuesToStore.searchString),
     onSuccess: resultatFagsaker => {
       if (resultatFagsaker.length === 1) {

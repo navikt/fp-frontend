@@ -9,6 +9,7 @@ import {
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, AlleKodeverkTilbakekreving, BehandlingFpTilbake, VilkårUtfallType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent, useMellomlagretFormData } from '@navikt/fp-utils';
@@ -40,6 +41,7 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
   const { data: vilkårvurdering } = useQuery(api.tilbakekreving.vilkårsvurderingOptions(behandling));
 
   const { mutateAsync: beregnBeløp } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (values: BeregnBeløpParams) => api.tilbakekreving.beregneBeløp(values),
   });
 

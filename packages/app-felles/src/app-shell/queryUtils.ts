@@ -11,28 +11,26 @@ type FeilDto = {
   callId?: string;
 };
 
-const retryHandler = () => {
+export const skalPrøveLeseoperasjonPåNytt = (failureCount: number, error: Error) => {
   if (import.meta.env.MODE === 'test') {
     return ZERO_RETRIES;
   }
-  return (failureCount: number, error: Error) => {
-    if (error instanceof HTTPError) {
-      if (error.response.status === 401 || error.response.status === 403) {
-        return ZERO_RETRIES;
-      }
-      if (error.response.status === 500) {
-        return failureCount < 1;
-      }
+  if (error instanceof HTTPError) {
+    if (error.response.status === 401 || error.response.status === 403) {
+      return ZERO_RETRIES;
     }
-    return failureCount < 3;
-  };
+    if (error.response.status === 500) {
+      return failureCount < 1;
+    }
+  }
+  return failureCount < 3;
 };
 
 export const createQueryClient = (errorHandler: (error: Error) => void) =>
   new QueryClient({
     defaultOptions: {
       queries: {
-        retry: retryHandler(),
+        retry: skalPrøveLeseoperasjonPåNytt,
       },
       mutations: {
         retry: false,

@@ -5,6 +5,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
@@ -56,6 +57,7 @@ export const VurderingFellesProsessStegInitPanel = ({
   const { data: klageVurdering } = useQuery(api.klage.klageVurderingOptions(behandling));
 
   const { mutate: forhåndsvis } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (values: KlagevurderingForhåndsvisData) =>
       forhåndsvisMelding({
         ...values,

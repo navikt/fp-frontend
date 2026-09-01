@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { type ForhåndsvisHenleggParams, MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
 import type { Behandling, FagsakBehandlingDto, FagsakYtelseType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -60,6 +61,7 @@ const useVisForhandsvisningAvHenleggelse = (behandling: FagsakBehandlingDto) => 
   const api = getFagsakBehandlingApi(behandling);
 
   const { mutate: forhåndsvisFpSakHenleggelse } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (values: ForhåndsvisHenleggParams) => api.forhåndsvisMelding(values),
     onSuccess: response => {
       forhandsvisDokument(response);
@@ -67,6 +69,7 @@ const useVisForhandsvisningAvHenleggelse = (behandling: FagsakBehandlingDto) => 
   });
 
   const { mutate: forhandsvisFpTilbakeHenleggelse } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (values: ForhåndsvisHenleggParams) =>
       forhåndsvisTilbakekrevingHenleggelse(values.behandlingUuid, values.fritekst ?? ''),
     onSuccess: response => {
