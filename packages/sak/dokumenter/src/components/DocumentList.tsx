@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { StarFillIcon } from '@navikt/aksel-icons';
@@ -38,14 +38,39 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
 
   const [sort, setSort] = useState<SortConfig>({ orderBy: 'tidspunkt', direction: 'descending' });
 
-  const [top, setTop] = useState<number>();
+  const [top, setTop] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  // Måler avstand til toppen av vindauget på nytt ved kvar rendering, slik at høgda på
-  // scroll-containeren held seg riktig når sida elles scrollar.
+  // Målar avstanden til toppen av vindauget på nytt ved scrolling, slik at høgda på
+  // scroll-containeren held seg riktig når sida elles scrollar. Oppdateringa er
+  // throttla til éin gong per animation frame, og set berre state når verdien faktisk endrar seg.
   useEffect(() => {
-    const scrollReset = () => setTop(0);
-    globalThis.addEventListener('scroll', scrollReset);
-    return () => globalThis.removeEventListener('scroll', scrollReset);
+    let rafId: number | null = null;
+
+    const updateTop = () => {
+      rafId = null;
+      const element = scrollContainerRef.current;
+      if (!element) {
+        return;
+      }
+      const newTop = Math.round(element.getBoundingClientRect().top);
+      setTop(prevTop => (prevTop === newTop ? prevTop : newTop));
+    };
+
+    const onScroll = () => {
+      if (rafId === null) {
+        rafId = requestAnimationFrame(updateTop);
+      }
+    };
+
+    updateTop();
+    globalThis.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      globalThis.removeEventListener('scroll', onScroll);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+    };
   }, []);
 
   if (documents.length === 0) {
@@ -64,15 +89,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
   };
 
   return (
-    <div
-      className={styles['scrollContainer']}
-      style={{ height: `calc(100vh - ${top}px)` }}
-      ref={el => {
-        if (el) {
-          setTop(el.getBoundingClientRect().top);
-        }
-      }}
-    >
+    <div ref={scrollContainerRef} className={styles['scrollContainer']} style={{ height: `calc(100vh - ${top}px)` }}>
       <VStack gap="space-8">
         {valgteDokumentKeys.length > 0 && (
           <Button
