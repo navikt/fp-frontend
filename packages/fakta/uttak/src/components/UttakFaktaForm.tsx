@@ -78,11 +78,6 @@ const leggTilAksjonspunktMarkering = (
 const periodeSkalVurderesIftFørsteDato = (periode: FaktaUttakPeriode): boolean =>
   !(periode.utsettelseÅrsak ?? periode.oppholdÅrsak);
 
-export const harPeriodeMedStartdato = (
-  uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[],
-  startdato: string,
-): boolean => uttakPerioder.some(periode => dayjs(periode.fom).isSame(startdato));
-
 const valider = (
   uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[],
   erMor: boolean,
@@ -127,7 +122,7 @@ const validerPerioder = (
   const tidligsteDato = brukFødselsdato ? fødselsdato : førsteUttaksdato;
   const startdatoForValidering = startDatoForPermisjon || førsteUttaksdato;
 
-  if (!harPeriodeMedStartdato(uttakPerioder, startdatoForValidering)) {
+  if (uttakPerioder.every(periode => !dayjs(periode.fom).isSame(startdatoForValidering))) {
     return intl.formatMessage(
       {
         id: 'UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato',

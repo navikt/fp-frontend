@@ -5,7 +5,6 @@ import userEvent from '@testing-library/user-event';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { harPeriodeMedStartdato } from './components/UttakFaktaForm';
 import type { KontrollerFaktaPeriodeMedApMarkering } from './typer/kontrollerFaktaPeriodeMedApMarkering';
 import * as stories from './UttakFaktaIndex.stories';
 
@@ -20,14 +19,49 @@ const {
 } = composeStories(stories);
 
 describe('UttakFaktaIndex', () => {
-  it('skal validere mot startdato og ikke automatisk generert periode for tapte dager', () => {
-    const perioder = [
-      { fom: '2024-10-28', tom: '2024-12-31' },
-      { fom: '2025-01-01', tom: '2025-01-31' },
-    ] as KontrollerFaktaPeriodeMedApMarkering[];
+  it('skal validere mot startdato etter at perioden for tapte dager er slettet', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
 
-    expect(harPeriodeMedStartdato(perioder, '2025-01-01')).toBe(true);
-    expect(harPeriodeMedStartdato(perioder, '2025-02-01')).toBe(false);
+    render(
+      <VisUttaksperiodeMedAksjonspunkt
+        submitCallback={lagre}
+        ytelsefordeling={{
+          førsteUttaksdato: '2024-10-28',
+          startDatoForPermisjon: '2025-01-01',
+          dekningsgrader: {
+            avklartDekningsgrad: 80,
+            søker: {
+              dekningsgrad: 80,
+              søknadsdato: '2025-01-01',
+            },
+          },
+        }}
+        uttakKontrollerFaktaPerioder={[
+          {
+            fom: '2024-10-28',
+            tom: '2024-12-31',
+            uttakPeriodeType: 'FORELDREPENGER',
+            flerbarnsdager: false,
+            periodeKilde: 'SØKNAD',
+          },
+          {
+            fom: '2025-01-01',
+            tom: '2025-01-31',
+            uttakPeriodeType: 'FORELDREPENGER',
+            flerbarnsdager: false,
+            periodeKilde: 'SØKNAD',
+          },
+        ]}
+      />,
+    );
+
+    await userEvent.click(screen.getAllByTitle('Vis mer')[0]!);
+    await userEvent.click(screen.getByText('Slett periode'));
+    await userEvent.click(screen.getByText('OK'));
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
   });
 
   it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
