@@ -24,7 +24,7 @@ const hentSorteringBoks = () => {
   return sorteringBoks;
 };
 
-vi.mock('echarts', () => ({
+vi.mock('echarts/core', () => ({
   init: vi.fn(() => ({
     setOption: vi.fn(),
     resize: vi.fn(),
@@ -34,8 +34,6 @@ vi.mock('echarts', () => ({
     showLoading: vi.fn(),
     hideLoading: vi.fn(),
   })),
-  registerTheme: vi.fn(),
-  registerMap: vi.fn(),
   getInstanceByDom: vi.fn(),
   use: vi.fn(),
 }));
