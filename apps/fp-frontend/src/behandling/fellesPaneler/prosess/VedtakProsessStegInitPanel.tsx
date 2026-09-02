@@ -6,6 +6,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakEditeringProvider, type VedtakForhåndsvisData, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
@@ -81,6 +82,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
   } = useQuery(api.oppgaverOptions(behandling));
 
   const { mutateAsync: hentBrevHtml, isPending } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: () => api.hentBrevHtml(behandling.uuid),
   });
 
@@ -90,6 +92,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
   });
 
   const { mutate: forhandsvis } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (values: VedtakForhåndsvisData) =>
       forhåndsvisMelding({
         ...values,

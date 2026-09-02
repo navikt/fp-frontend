@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
@@ -51,6 +52,7 @@ export const VarselProsessStegInitPanel = () => {
   const skalPanelVisesIMeny = skalViseProsessPanel(standardPanelProps.aksjonspunkterForPanel);
 
   const { mutate: forhåndsvis } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (values: VarselOmRevurderingForhåndsvisData) =>
       forhåndsvisMelding({
         ...values,
@@ -62,6 +64,7 @@ export const VarselProsessStegInitPanel = () => {
   const api = getBehandlingApi(behandling);
 
   const { mutateAsync: hentVarselHtml } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: () => api.hentBrevHtml(behandling.uuid, 'VARREV'),
   });
 

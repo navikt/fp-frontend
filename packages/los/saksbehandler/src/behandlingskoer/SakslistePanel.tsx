@@ -1,6 +1,7 @@
 import { VStack } from '@navikt/ds-react';
 import { useMutation } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { type OppgaveDto, type SakslisteDto } from '@navikt/fp-types';
 
 import { getBehandlingskøOppgaveAntall } from '../data/fplosSaksbehandlerApi';
@@ -24,6 +25,7 @@ export const SakslistePanel = ({
   brukernavn,
 }: Props) => {
   const { mutate: fetchAntallOppgaver, data: antallOppgaver } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: getBehandlingskøOppgaveAntall,
   });
 

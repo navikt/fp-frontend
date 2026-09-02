@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { type FagsakEnkel, type OppgaveDto, type ReservasjonStatusDto } from '@navikt/fp-types';
 
 import {
@@ -48,6 +49,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     data: fagsakOppgaver = EMPTY_ARRAY_OPPGAVER,
     isPending: isHentOppgaverPending,
   } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: getOppgaverForFagsaker,
   });
 
@@ -80,6 +82,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
   });
 
   const { mutateAsync: hentReservasjonsstatus } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: getReservasjonsstatus,
   });
 

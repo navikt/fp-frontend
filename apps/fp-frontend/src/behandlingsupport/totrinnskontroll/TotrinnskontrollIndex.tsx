@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { type TotrinnskontrollFormValues, TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty } from '@navikt/fp-utils';
@@ -64,6 +65,7 @@ export const TotrinnskontrollIndex = ({
   });
 
   const { mutate: forhåndsvisVedtaksbrev } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: () =>
       api.forhåndsvisMelding({
         behandlingUuid: valgtBehandling.uuid,

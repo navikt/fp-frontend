@@ -4,7 +4,7 @@ import { Link, Route, Routes, useLocation, useNavigate } from 'react-router';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { ErrorType, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
+import { ErrorType, skalPrøveLeseoperasjonPåNytt, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { NotFoundPage } from '@navikt/fp-sak-infosider';
 import type { NavAnsatt } from '@navikt/fp-types';
@@ -67,6 +67,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
     isSuccess: søkInfotrygdIsSuccess,
     data: infotrygdVedtak,
   } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (valuesToSave: { searchString: string }) => søkInfotrygd(valuesToSave.searchString),
   });
 
