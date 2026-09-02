@@ -7,6 +7,7 @@ import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import type { SaksbehandlerDto } from '@navikt/fp-types';
 
 import { LosUrl, opprettNySaksbehandler, saksbehandlerSøk } from '../data/fplosAvdelingslederApi';
@@ -32,6 +33,7 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
     status: saksbehandlerStatus,
     reset: resetSaksbehandlerSøk,
   } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (valuesToStore: { brukerIdent: string }) => saksbehandlerSøk(valuesToStore.brukerIdent),
   });
 

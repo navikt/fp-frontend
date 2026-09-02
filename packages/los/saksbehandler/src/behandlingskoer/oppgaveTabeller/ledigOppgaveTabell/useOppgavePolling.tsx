@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { type AsyncPollingStatus, type OppgaveDto } from '@navikt/fp-types';
 
 import { doGetRequest, getOppgaverTilBehandling } from '../../../data/fplosSaksbehandlerApi';
@@ -62,6 +63,7 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
     isSuccess,
     error: tilBehandlingError,
   } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (values: { oppgaveIder?: string }) =>
       hentOppgaver(valgtSakslisteId, getSakslisteId, values.oppgaveIder),
   });

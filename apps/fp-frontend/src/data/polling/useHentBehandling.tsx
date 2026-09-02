@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import type { Behandling } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -16,6 +17,7 @@ export const useHentBehandling = (
   const { onBehandlingSuccess } = useTaskStatusChecker(setBehandling);
 
   const { mutate: hentOgSettBehandling } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: async () => {
       const response = erTilbakekreving
         ? await hentBehandlingTilbakekreving(notEmpty(behandlingUuid))
