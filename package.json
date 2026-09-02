@@ -46,13 +46,13 @@
     "eslint": "10.8.0",
     "husky": "9.1.7",
     "jsdom": "30.0.1",
-    "knip": "6.32.2",
-    "lint-staged": "17.3.0",
+    "knip": "6.33.0",
+    "lint-staged": "17.4.1",
     "prettier": "3.9.6",
     "storybook": "10.5.10",
     "stylelint": "17.14.1",
     "stylelint-order": "8.1.1",
-    "turbo": "2.10.11",
+    "turbo": "2.10.12",
     "typescript": "6.0.3"
   },
   "resolutions": {
