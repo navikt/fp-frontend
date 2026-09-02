@@ -54,7 +54,7 @@ const UttakPeriodeNavn = {
   MINSTERETT_NESTE_STØNADSPERIODE: 'Minsterett neste stønadsperiode',
   MINSTERETT: 'Minsterett',
   '-': '-',
-};
+} satisfies Record<StønadskontoType | '-', string>;
 
 const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const filtrerteAksjonspunkter = aksjonspunkter.filter(

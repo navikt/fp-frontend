@@ -14,7 +14,7 @@ import type {
 } from '@navikt/fp-types';
 
 // TODO Kva er dette? Kodeverk-navn skal hentast fra databasen!
-const UttakPeriodeNavn: Record<string, string> = {
+const UttakPeriodeNavn = {
   MØDREKVOTE: 'Mødrekvote',
   FEDREKVOTE: 'Fedrekvote',
   FELLESPERIODE: 'Fellesperiode',
@@ -26,6 +26,11 @@ const UttakPeriodeNavn: Record<string, string> = {
   MINSTERETT: 'Minsterett',
   '-': '-',
 } satisfies Record<StønadskontoType | '-', string>;
+
+const finnUttakPeriodeNavn = (stonadskontoType: string): string => {
+  const navnPerKontoType: Record<string, string | undefined> = UttakPeriodeNavn;
+  return navnPerKontoType[stonadskontoType] ?? stonadskontoType;
+};
 
 interface Props {
   valgtBeregningsresultatPeriode: BeregningsresultatPeriode;
@@ -158,7 +163,7 @@ export const TilkjentYtelseTimelineData = ({
                   <Table.DataCell>{findAndelsnavn(andel, alleKodeverk, arbeidsgiverOpplysningerPerId)}</Table.DataCell>
                   {!erSøknadSvangerskapspenger && (
                     <Table.DataCell>
-                      <BodyShort size="small">{UttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort>
+                      <BodyShort size="small">{finnUttakPeriodeNavn(andel.uttak.stonadskontoType)}</BodyShort>
                     </Table.DataCell>
                   )}
                   {!erSøknadSvangerskapspenger && (
