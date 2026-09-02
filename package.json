@@ -60,7 +60,8 @@
     "minimatch@npm:10.2.5/brace-expansion": "^5.0.9",
     "minimatch@npm:10.2.6/brace-expansion": "^5.0.9",
     "fast-uri": "^3.1.5",
-    "js-yaml": "^4.3.0"
+    "js-yaml": "^4.3.0",
+    "nanoid@npm:^3.3.16": "^3.3.18"
   },
   "lint-staged": {
     "{packages,apps}/**/*.{js,jsx,ts,tsx,cjs,mjs}": "eslint --cache --fix  --config packages/config/eslint/eslint.config.mjs",
