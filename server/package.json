@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@navikt/oasis": "4.1.4",
-    "@navikt/vite-mode": "0.16.1",
+    "@navikt/vite-mode": "1.0.0",
     "cors": "2.8.6",
     "dotenv": "17.4.2",
     "express": "5.2.1",

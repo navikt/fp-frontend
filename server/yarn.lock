@@ -182,7 +182,7 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:10.0.1"
     "@navikt/oasis": "npm:4.1.4"
-    "@navikt/vite-mode": "npm:0.16.1"
+    "@navikt/vite-mode": "npm:1.0.0"
     "@types/cors": "npm:2.8.19"
     "@types/express": "npm:5.0.6"
     "@types/morgan": "npm:1.9.10"
@@ -304,14 +304,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/vite-mode@npm:0.16.1":
-  version: 0.16.1
-  resolution: "@navikt/vite-mode@npm:0.16.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fvite-mode%2F0.16.1%2Fb26c812acd11aca072cb07819d56118b064a8444"
+"@navikt/vite-mode@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@navikt/vite-mode@npm:1.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fvite-mode%2F1.0.0%2F0be68332799f3d0925acaa73468fe0e49b1147ad"
   dependencies:
     cookie-parser: "npm:1.4.7"
   peerDependencies:
     express: 5.x
-  checksum: 10/edf800fe451577ef74593c89cc7fb7dcf970c8b0a25b8e9b7a197a3d207f084a0a881b61a7ccc93f1624e7a760e61e80b2c03f50f98a33bedb56816d38036bc2
+  checksum: 10/40abc06caa35a33a2d7bae8c865c945f3cc646b780e0cd4679b9387579cb793255e5fe1db9ae6d28c53336263000fee8c6a63c72913242fd833a933637199afb
   languageName: node
   linkType: hard
 
