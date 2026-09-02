@@ -1,6 +1,31 @@
 import { type CSSProperties, type JSX, useEffect, useRef } from 'react';
 
-import { type ECharts, type EChartsOption, getInstanceByDom, init } from 'echarts';
+import type { EChartsOption } from 'echarts';
+import { BarChart, LineChart } from 'echarts/charts';
+import {
+  GridComponent,
+  LegendComponent,
+  MarkLineComponent,
+  TitleComponent,
+  ToolboxComponent,
+  TooltipComponent,
+} from 'echarts/components';
+import { type ECharts, getInstanceByDom, init, use as registerEChartsModules } from 'echarts/core';
+import { LabelLayout } from 'echarts/features';
+import { CanvasRenderer } from 'echarts/renderers';
+
+registerEChartsModules([
+  BarChart,
+  LineChart,
+  GridComponent,
+  LabelLayout,
+  LegendComponent,
+  MarkLineComponent,
+  TitleComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  CanvasRenderer,
+]);
 
 interface Props {
   option: EChartsOption;
