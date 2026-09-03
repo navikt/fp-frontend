@@ -1,5 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
+
 import { hentBruker, oppdaterMedBruker } from '../../data/journalføringApi';
 import type { JournalførSubmitValue } from '../../typer/ferdigstillJournalføringSubmit';
 import type { Journalpost } from '../../typer/journalpostTsType';
@@ -41,6 +43,7 @@ export const JournalpostIndex = ({
     data: hentetNavn,
     status: hentBrukerState,
   } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: hentBruker,
   });
 

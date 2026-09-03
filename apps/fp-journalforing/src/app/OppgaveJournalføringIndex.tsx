@@ -6,6 +6,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 
 import { JournalføringHeader } from '../components/header/JournalføringHeader';
@@ -58,6 +59,7 @@ const JournalforingIndex = ({ ansattIdent }: Props) => {
     reset: resetValgtJournalpost,
     status: hentJournalpostStatus,
   } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: hentJournalpostDetaljer,
   });
 

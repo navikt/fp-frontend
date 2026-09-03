@@ -36,23 +36,23 @@
     "packages/**/*"
   ],
   "devDependencies": {
-    "@navikt/aksel-stylelint": "8.16.1",
+    "@navikt/aksel-stylelint": "8.16.2",
     "@storybook/addon-a11y": "10.5.10",
     "@storybook/addon-links": "10.5.10",
     "@storybook/react": "10.5.10",
     "@testing-library/jest-dom": "7.0.1",
-    "@types/react": "19.2.17",
-    "@types/react-dom": "19.2.3",
-    "eslint": "10.8.0",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+    "eslint": "10.9.1",
     "husky": "9.1.7",
     "jsdom": "30.0.1",
-    "knip": "6.32.2",
-    "lint-staged": "17.3.0",
+    "knip": "6.33.0",
+    "lint-staged": "17.4.1",
     "prettier": "3.9.6",
     "storybook": "10.5.10",
     "stylelint": "17.14.1",
     "stylelint-order": "8.1.1",
-    "turbo": "2.10.11",
+    "turbo": "2.10.12",
     "typescript": "6.0.3"
   },
   "resolutions": {
@@ -60,7 +60,8 @@
     "minimatch@npm:10.2.5/brace-expansion": "^5.0.9",
     "minimatch@npm:10.2.6/brace-expansion": "^5.0.9",
     "fast-uri": "^3.1.5",
-    "js-yaml": "^4.3.0"
+    "js-yaml": "^4.3.0",
+    "nanoid@npm:^3.3.16": "^3.3.18"
   },
   "lint-staged": {
     "{packages,apps}/**/*.{js,jsx,ts,tsx,cjs,mjs}": "eslint --cache --fix  --config packages/config/eslint/eslint.config.mjs",

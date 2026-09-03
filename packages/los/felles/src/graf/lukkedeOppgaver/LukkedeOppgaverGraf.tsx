@@ -2,7 +2,8 @@ import { type IntlShape, useIntl } from 'react-intl';
 
 import { capitalizeFirstLetter } from '@navikt/ft-utils';
 import dayjs, { type Dayjs } from 'dayjs';
-import type { BarSeriesOption, EChartsOption } from 'echarts';
+import type { EChartsOption } from 'echarts';
+import type { BarSeriesOption } from 'echarts/charts';
 import type { CallbackDataParams } from 'echarts/types/dist/shared';
 
 import { createBarSeries, getAkselVariable, getStyle, ReactECharts } from '@navikt/fp-los-felles';

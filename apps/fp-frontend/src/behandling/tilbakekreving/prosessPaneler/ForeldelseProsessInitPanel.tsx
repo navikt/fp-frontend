@@ -6,6 +6,7 @@ import { ForeldelseAksjonspunktCodes, ForeldelseProsessIndex } from '@navikt/ft-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { AlleKodeverkTilbakekreving, BehandlingFpTilbake } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
@@ -35,6 +36,7 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
   const { data: perioderForeldelse } = useQuery(api.tilbakekreving.perioderForeldelseOptions(behandling));
 
   const { mutateAsync: beregnBeløp } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (values: BeregnBeløpParams) => api.tilbakekreving.beregneBeløp(values),
   });
 

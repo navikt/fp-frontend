@@ -11,6 +11,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type {
   AlleKodeverkTilbakekreving,
@@ -62,6 +63,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
   const { data: vedtaksbrev } = useQuery(api.tilbakekreving.vedtaksbrevOptions(behandling));
 
   const { mutateAsync: forhandsvisVedtaksbrev } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (values: ForhandsvisData) => forhåndsvisVedtaksbrev(values),
     onSuccess: forhandsvisDokument,
   });

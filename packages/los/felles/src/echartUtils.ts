@@ -5,7 +5,7 @@ import type {
 } from '@navikt/ds-tokens/types';
 import { capitalizeFirstLetter } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
-import { type BarSeriesOption, type LineSeriesOption } from 'echarts';
+import type { BarSeriesOption, LineSeriesOption } from 'echarts/charts';
 
 export const formaterMånedÅr = (dato: string) =>
   capitalizeFirstLetter(dayjs(dato).format('MMM YYYY')).replaceAll('.', '');

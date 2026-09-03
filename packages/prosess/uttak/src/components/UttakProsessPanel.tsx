@@ -52,9 +52,9 @@ const UttakPeriodeNavn = {
   FLERBARNSDAGER: 'Flerbarnsdager',
   UTEN_AKTIVITETSKRAV: 'Uten aktivitetskrav',
   MINSTERETT_NESTE_STØNADSPERIODE: 'Minsterett neste stønadsperiode',
-  MINSTERETT: 'minsterett',
+  MINSTERETT: 'Minsterett',
   '-': '-',
-};
+} satisfies Record<StønadskontoType | '-', string>;
 
 const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const filtrerteAksjonspunkter = aksjonspunkter.filter(

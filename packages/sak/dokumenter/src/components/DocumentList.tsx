@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { StarFillIcon } from '@navikt/aksel-icons';
@@ -38,6 +38,39 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
 
   const [sort, setSort] = useState<SortConfig>({ orderBy: 'tidspunkt', direction: 'descending' });
 
+  const [top, setTop] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+
+  // Målar avstanden til toppen av vindauget på nytt ved scrolling, slik at høgda på
+  // scroll-containeren held seg riktig når sida elles scrollar. Oppdateringa er
+  // throttla til éin gong per animation frame, og set berre state når verdien faktisk endrar seg.
+  useEffect(() => {
+    let rafId: number | null = null;
+
+    const updateTop = () => {
+      rafId = null;
+      const element = scrollContainerRef.current;
+      if (!element) {
+        return;
+      }
+      const newTop = Math.round(element.getBoundingClientRect().top);
+      setTop(prevTop => (prevTop === newTop ? prevTop : newTop));
+    };
+
+    const onScroll = () => {
+      rafId ??= requestAnimationFrame(updateTop);
+    };
+
+    updateTop();
+    globalThis.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      globalThis.removeEventListener('scroll', onScroll);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+    };
+  }, []);
+
   if (documents.length === 0) {
     return (
       <BodyShort size="small" className={styles['noDocuments']}>
@@ -54,106 +87,110 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
   };
 
   return (
-    <VStack gap="space-8">
-      {valgteDokumentKeys.length > 0 && (
-        <Button
-          size="small"
-          variant="primary"
-          className="self-start"
-          onClick={() => {
-            documents
-              .filter(d => valgteDokumentKeys.includes(getDokumentKey(d)))
-              .forEach(dokument => {
-                åpneDokument(saksnummer, dokument.journalpostId, dokument.dokumentId, dokument.tittel ?? undefined);
-              });
-          }}
-        >
-          <FormattedMessage id="DocumentList.LastNedKnapp" values={{ antall: valgteDokumentKeys.length }} />
-        </Button>
-      )}
+    <div ref={scrollContainerRef} className={styles['scrollContainer']} style={{ height: `calc(100vh - ${top}px)` }}>
+      <VStack gap="space-8">
+        {valgteDokumentKeys.length > 0 && (
+          <Button
+            size="small"
+            variant="primary"
+            className="self-start"
+            onClick={() => {
+              documents
+                .filter(d => valgteDokumentKeys.includes(getDokumentKey(d)))
+                .forEach(dokument => {
+                  åpneDokument(saksnummer, dokument.journalpostId, dokument.dokumentId, dokument.tittel ?? undefined);
+                });
+            }}
+          >
+            <FormattedMessage id="DocumentList.LastNedKnapp" values={{ antall: valgteDokumentKeys.length }} />
+          </Button>
+        )}
 
-      <Table size="small" sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>
-              <Checkbox
-                size="small"
-                checked={valgteDokumentKeys.length === sortedDocuments.length}
-                indeterminate={valgteDokumentKeys.length > 0 && valgteDokumentKeys.length !== sortedDocuments.length}
-                onChange={() =>
-                  valgteDokumentKeys.length > 0
-                    ? setValgteDokumentKeys([])
-                    : setValgteDokumentKeys(sortedDocuments.map(getDokumentKey))
-                }
-                hideLabel
-              >
-                Velg alle rader
-              </Checkbox>
-            </Table.HeaderCell>
-            <Table.ColumnHeader sortKey="kommunikasjonsretning" sortable>
-              <FormattedMessage id="DocumentList.Direction" />
-            </Table.ColumnHeader>
-            <Table.ColumnHeader sortKey="tittel" sortable>
-              <FormattedMessage id="DocumentList.DocumentType" />
-            </Table.ColumnHeader>
-            {visGjelderForKolonne && (
-              <Table.ColumnHeader sortKey="gjelderFor" sortable>
-                <FormattedMessage id="DocumentList.Gjelder" />
-              </Table.ColumnHeader>
-            )}
-            <Table.ColumnHeader sortKey="tidspunkt" sortable>
-              <FormattedMessage id="DocumentList.DateTime" />
-            </Table.ColumnHeader>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {sortedDocuments.map(document => (
-            <Table.Row key={getDokumentKey(document)}>
-              <Table.DataCell>
+        <Table size="small" sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>
                 <Checkbox
                   size="small"
+                  checked={valgteDokumentKeys.length === sortedDocuments.length}
+                  indeterminate={
+                    valgteDokumentKeys.length > 0 && valgteDokumentKeys.length !== sortedDocuments.length
+                  }
+                  onChange={() =>
+                    valgteDokumentKeys.length > 0
+                      ? setValgteDokumentKeys([])
+                      : setValgteDokumentKeys(sortedDocuments.map(getDokumentKey))
+                  }
                   hideLabel
-                  checked={valgteDokumentKeys.includes(getDokumentKey(document))}
-                  onChange={() => toggleValgDokument(document)}
-                  aria-label={document.tittel}
                 >
-                  {' '}
+                  Velg alle rader
                 </Checkbox>
-              </Table.DataCell>
-              <Table.DataCell>
-                <KommunikasjonsretningIkon kommunikasjonsretning={document.kommunikasjonsretning} />
-              </Table.DataCell>
-              <Table.DataCell scope="row">
-                <HStack gap="space-4" wrap={false}>
-                  {document.behandlingUuidList &&
-                    behandlingUuid &&
-                    document.behandlingUuidList.includes(behandlingUuid) && (
-                      <StarFillIcon
-                        color="var(--ax-warning-500)"
-                        fontSize="1.25rem"
-                        title={intl.formatMessage({ id: 'DocumentList.IBruk' })}
-                      />
-                    )}
-                  <DokumentLink
-                    saksnummer={saksnummer}
-                    journalpostId={document.journalpostId}
-                    dokumentId={document.dokumentId}
-                    dokumentTittel={document.tittel ?? undefined}
-                  />
-                </HStack>
-              </Table.DataCell>
-              {visGjelderForKolonne && <Table.DataCell>{document.gjelderFor}</Table.DataCell>}
-              <Table.DataCell>
-                {document.tidspunkt ? (
-                  <DateTimeLabel dateTimeString={document.tidspunkt} />
-                ) : (
-                  <FormattedMessage id="DocumentList.IProduksjon" />
-                )}
-              </Table.DataCell>
+              </Table.HeaderCell>
+              <Table.ColumnHeader sortKey="kommunikasjonsretning" sortable>
+                <FormattedMessage id="DocumentList.Direction" />
+              </Table.ColumnHeader>
+              <Table.ColumnHeader sortKey="tittel" sortable>
+                <FormattedMessage id="DocumentList.DocumentType" />
+              </Table.ColumnHeader>
+              {visGjelderForKolonne && (
+                <Table.ColumnHeader sortKey="gjelderFor" sortable>
+                  <FormattedMessage id="DocumentList.Gjelder" />
+                </Table.ColumnHeader>
+              )}
+              <Table.ColumnHeader sortKey="tidspunkt" sortable>
+                <FormattedMessage id="DocumentList.DateTime" />
+              </Table.ColumnHeader>
             </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
-    </VStack>
+          </Table.Header>
+          <Table.Body>
+            {sortedDocuments.map(document => (
+              <Table.Row key={getDokumentKey(document)}>
+                <Table.DataCell>
+                  <Checkbox
+                    size="small"
+                    hideLabel
+                    checked={valgteDokumentKeys.includes(getDokumentKey(document))}
+                    onChange={() => toggleValgDokument(document)}
+                    aria-label={document.tittel}
+                  >
+                    {' '}
+                  </Checkbox>
+                </Table.DataCell>
+                <Table.DataCell>
+                  <KommunikasjonsretningIkon kommunikasjonsretning={document.kommunikasjonsretning} />
+                </Table.DataCell>
+                <Table.DataCell scope="row">
+                  <HStack gap="space-4" wrap={false}>
+                    {document.behandlingUuidList &&
+                      behandlingUuid &&
+                      document.behandlingUuidList.includes(behandlingUuid) && (
+                        <StarFillIcon
+                          color="var(--ax-warning-500)"
+                          fontSize="1.25rem"
+                          title={intl.formatMessage({ id: 'DocumentList.IBruk' })}
+                        />
+                      )}
+                    <DokumentLink
+                      saksnummer={saksnummer}
+                      journalpostId={document.journalpostId}
+                      dokumentId={document.dokumentId}
+                      dokumentTittel={document.tittel ?? undefined}
+                    />
+                  </HStack>
+                </Table.DataCell>
+                {visGjelderForKolonne && <Table.DataCell>{document.gjelderFor}</Table.DataCell>}
+                <Table.DataCell>
+                  {document.tidspunkt ? (
+                    <DateTimeLabel dateTimeString={document.tidspunkt} />
+                  ) : (
+                    <FormattedMessage id="DocumentList.IProduksjon" />
+                  )}
+                </Table.DataCell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      </VStack>
+    </div>
   );
 };

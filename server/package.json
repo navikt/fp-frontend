@@ -15,13 +15,13 @@
   },
   "dependencies": {
     "@navikt/oasis": "4.1.4",
-    "@navikt/vite-mode": "0.16.1",
+    "@navikt/vite-mode": "1.0.0",
     "cors": "2.8.6",
     "dotenv": "17.4.2",
     "express": "5.2.1",
     "helmet": "8.3.0",
     "http-proxy-middleware": "4.2.0",
-    "morgan": "1.11.0",
+    "morgan": "1.12.0",
     "winston": "3.19.0"
   },
   "devDependencies": {
@@ -30,15 +30,15 @@
     "@types/express": "5.0.6",
     "@types/morgan": "1.9.10",
     "@types/supertest": "7.2.1",
-    "eslint": "10.9.0",
+    "eslint": "10.9.1",
     "eslint-plugin-prettier": "5.5.6",
     "eslint-plugin-simple-import-sort": "14.0.0",
-    "eslint-plugin-unicorn": "73.0.0",
-    "knip": "6.32.2",
+    "eslint-plugin-unicorn": "74.0.0",
+    "knip": "6.33.0",
     "prettier": "3.9.6",
     "supertest": "7.2.2",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.67.0",
+    "typescript-eslint": "8.68.0",
     "vitest": "4.1.11"
   }
 }

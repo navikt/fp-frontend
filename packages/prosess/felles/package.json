@@ -15,26 +15,26 @@
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.16.1",
-    "@navikt/ds-react": "8.16.1",
+    "@navikt/aksel-icons": "8.16.2",
+    "@navikt/ds-react": "8.16.2",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-form-hooks": "12.4.9",
-    "@navikt/ft-form-validators": "6.1.8",
-    "@navikt/ft-ui-komponenter": "8.2.4",
-    "@navikt/ft-utils": "5.1.8",
+    "@navikt/ft-form-hooks": "12.4.11",
+    "@navikt/ft-form-validators": "6.1.10",
+    "@navikt/ft-ui-komponenter": "8.2.6",
+    "@navikt/ft-utils": "5.1.10",
     "dayjs": "1.11.23",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-hook-form": "7.86.0",
-    "react-intl": "10.1.23"
+    "react-hook-form": "7.87.0",
+    "react-intl": "10.1.24"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
-    "@types/react": "19.2.17",
-    "eslint": "10.8.0",
+    "@types/react": "19.2.18",
+    "eslint": "10.9.1",
     "stylelint": "17.14.1",
     "typescript": "6.0.3"
   }

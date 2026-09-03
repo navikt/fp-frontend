@@ -6,6 +6,7 @@ import { Alert, VStack } from '@navikt/ds-react';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { skalPrøveLeseoperasjonPåNytt } from '@navikt/fp-app-felles';
 import {
   type ForhåndsvisBrevParams,
   MeldingerSakIndex,
@@ -75,6 +76,7 @@ export const MeldingIndex = ({
   });
 
   const { mutateAsync: hentBrevHtml } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: ({ brevmalkode, årsak }: { brevmalkode: string; årsak?: string }) =>
       api.hentBrevHtml(valgtBehandling.uuid, brevmalkode, årsak),
   });
@@ -229,6 +231,7 @@ const useVisForhandsvisningAvMelding = (behandling: FagsakBehandlingDto) => {
   const api = getFagsakBehandlingApi(behandling);
 
   const { mutate: forhåndsvisFpSakBrev } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (params: ForhåndsvisBrevParams) =>
       api.forhåndsvisMelding({
         behandlingUuid: behandling.uuid,
@@ -242,6 +245,7 @@ const useVisForhandsvisningAvMelding = (behandling: FagsakBehandlingDto) => {
   });
 
   const { mutate: forhåndsvisFpTilbakeBrev } = useMutation({
+    retry: skalPrøveLeseoperasjonPåNytt,
     mutationFn: (params: ForhåndsvisBrevParams) =>
       forhåndsvisTilbakekreving(behandling.uuid, params.brevmalkode, params.fritekst ?? ' '),
     onSuccess: response => {
