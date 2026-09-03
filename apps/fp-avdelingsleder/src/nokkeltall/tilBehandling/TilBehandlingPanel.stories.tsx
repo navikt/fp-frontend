@@ -146,7 +146,7 @@ const meta = {
   beforeEach({ msw }) {
     msw.use(
       http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-      http.get(LosUrl.HENT_OPPGAVER_PER_DATO.replace('ø', '%C3%B8'), () => HttpResponse.json(OPPGAVER_PER_DATO)),
+      http.get(LosUrl.HENT_OPPGAVER_PER_DATO.replaceAll('ø', '%C3%B8'), () => HttpResponse.json(OPPGAVER_PER_DATO)),
     );
   },
 
