@@ -135,9 +135,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  parameters: {
-    msw: {
-      handlers: HANDLERS,
-    },
+  beforeEach({ msw }) {
+    msw.use(...HANDLERS);
   },
 };

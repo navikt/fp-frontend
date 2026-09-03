@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './SakslisteVelgerForm.stories';
 
@@ -40,8 +39,7 @@ vi.mock('echarts/core', () => ({
 
 describe('SakslisteVelgerForm', () => {
   it('skal vise dropdown med en saksliste', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('A03 Førstegangsbehandling (3 saker)')).toBeInTheDocument();
 
@@ -66,8 +64,7 @@ describe('SakslisteVelgerForm', () => {
   });
 
   it('skal vise dropdown med to saksliste og så bytte valgt liste', async () => {
-    applyRequestHandlers(MedToSakslister.parameters['msw'] as MswParameters['msw']);
-    render(<MedToSakslister />);
+    await MedToSakslister.run();
 
     expect(await screen.findByText('A03 Førstegangsbehandling (3 saker)')).toBeInTheDocument();
 
@@ -98,8 +95,7 @@ describe('SakslisteVelgerForm', () => {
   });
 
   it('skal i utgangspunktet kun vise tre saksbehandlere og så klikke for å vise alle', async () => {
-    applyRequestHandlers(MedFlereEnnTreSaksbehandlere.parameters['msw'] as MswParameters['msw']);
-    render(<MedFlereEnnTreSaksbehandlere />);
+    await MedFlereEnnTreSaksbehandlere.run();
 
     expect(await screen.findByText('Behandlingskø')).toBeInTheDocument();
 
@@ -124,8 +120,7 @@ describe('SakslisteVelgerForm', () => {
   });
 
   it('skal vise både fra og til for BELOP', async () => {
-    applyRequestHandlers(MedBelopFraOgTil.parameters['msw'] as MswParameters['msw']);
-    render(<MedBelopFraOgTil />);
+    await MedBelopFraOgTil.run();
 
     expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
 
@@ -136,8 +131,7 @@ describe('SakslisteVelgerForm', () => {
   });
 
   it('skal vise kun fra når til mangler for BELOP', async () => {
-    applyRequestHandlers(MedBelopKunFra.parameters['msw'] as MswParameters['msw']);
-    render(<MedBelopKunFra />);
+    await MedBelopKunFra.run();
 
     expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
 
@@ -148,8 +142,7 @@ describe('SakslisteVelgerForm', () => {
   });
 
   it('skal vise kun til når fra mangler for BELOP', async () => {
-    applyRequestHandlers(MedBelopKunTil.parameters['msw'] as MswParameters['msw']);
-    render(<MedBelopKunTil />);
+    await MedBelopKunTil.run();
 
     expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
 
@@ -160,8 +153,7 @@ describe('SakslisteVelgerForm', () => {
   });
 
   it('skal ikke vise fra/til når sorteringstype ikke er BELOP', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('A03 Førstegangsbehandling (3 saker)')).toBeInTheDocument();
 
@@ -172,8 +164,7 @@ describe('SakslisteVelgerForm', () => {
   });
 
   it('skal åpne dialog og vise graf med avsluttede oppgaver', async () => {
-    applyRequestHandlers(MedAvsluttedeOppgaver.parameters['msw'] as MswParameters['msw']);
-    render(<MedAvsluttedeOppgaver />);
+    await MedAvsluttedeOppgaver.run();
 
     expect(await screen.findByText('A03 Førstegangsbehandling (3 saker)')).toBeInTheDocument();
 

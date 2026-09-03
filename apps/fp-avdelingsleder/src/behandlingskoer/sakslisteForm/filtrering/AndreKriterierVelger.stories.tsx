@@ -34,8 +34,8 @@ const meta = {
   title: 'los/avdelingsleder/behandlingskoer/AndreKriterierVelger',
   component: AndreKriterierVelger,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: { handlers: defaultMswHandlers },
+  beforeEach({ msw }) {
+    msw.use(...defaultMswHandlers);
   },
 } satisfies Meta<typeof AndreKriterierVelger>;
 export default meta;

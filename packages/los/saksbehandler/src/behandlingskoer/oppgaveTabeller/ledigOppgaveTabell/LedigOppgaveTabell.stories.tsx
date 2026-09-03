@@ -61,55 +61,52 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
-        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
-          const doPolling = t.request.url.includes('oppgaveIder');
-          return doPolling
-            ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
-            : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+      http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
+        const doPolling = t.request.url.includes('oppgaveIder');
+        return doPolling
+          ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
+          : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
+      }),
+      http.get('https://www.test.com/api/status', () =>
+        HttpResponse.json<AsyncPollingStatus>({
+          status: 'PENDING',
+          pollIntervalMillis: 100_000_000,
+          message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
         }),
-        http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json<AsyncPollingStatus>({
-            status: 'PENDING',
-            pollIntervalMillis: 100_000_000,
-            message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
-          }),
-        ),
-        http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
-      ],
-    },
+      ),
+      http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
+    );
   },
+
   args: {
     antallOppgaver: 4,
   },
 };
 
 export const TomOppgaveTabell: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
-        http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json([])),
-        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
-          const doPolling = t.request.url.includes('oppgaveIder');
-          return doPolling
-            ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
-            : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+      http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json([])),
+      http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
+        const doPolling = t.request.url.includes('oppgaveIder');
+        return doPolling
+          ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
+          : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
+      }),
+      http.get('https://www.test.com/api/status', () =>
+        HttpResponse.json<AsyncPollingStatus>({
+          status: 'PENDING',
+          pollIntervalMillis: 100_000_000,
+          message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
         }),
-        http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json<AsyncPollingStatus>({
-            status: 'PENDING',
-            pollIntervalMillis: 100_000_000,
-            message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
-          }),
-        ),
-        http.get('https://www.test.com/api/result', () => HttpResponse.json([])),
-      ],
-    },
+      ),
+      http.get('https://www.test.com/api/result', () => HttpResponse.json([])),
+    );
   },
 };

@@ -17,15 +17,16 @@ const meta = {
   title: 'søk/SøkResultat',
   component: SøkResultat,
   decorators: [withIntl, withQueryClient],
+
   args: {
     åpneFagsak: action('åpneFagsak'),
     selectOppgaveCallback: action('onSelectOppgave'),
   },
-  parameters: {
-    msw: {
-      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)));
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const alleKodeverk = useQuery(losKodeverkOptions()).data;

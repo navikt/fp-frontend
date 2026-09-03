@@ -1,18 +1,44 @@
 import { Context as ResponsiveContext } from 'react-responsive';
 
-import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { composeStories, composeStory } from '@storybook/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './FagsakIndex.stories';
 
 const { Default } = composeStories(stories);
+const DefaultForStorskjerm = composeStory(
+  stories.Default,
+  stories.default,
+  {
+    decorators: [
+      Story => (
+        <ResponsiveContext value={{ width: 1702 }}>
+          <Story />
+        </ResponsiveContext>
+      ),
+    ],
+  },
+  'DefaultForStorskjerm',
+);
+const DefaultForSmåskjerm = composeStory(
+  stories.Default,
+  stories.default,
+  {
+    decorators: [
+      Story => (
+        <ResponsiveContext value={{ width: 1408 }}>
+          <Story />
+        </ResponsiveContext>
+      ),
+    ],
+  },
+  'DefaultForSmåskjerm',
+);
 
 describe('FagsakIndex', () => {
   it('skal vise fagsak-delen av app og vente på at behandling skal vises', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('Faresignaler')).toBeInTheDocument();
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
@@ -33,12 +59,7 @@ describe('FagsakIndex', () => {
   });
 
   it('skal vise åpning og lukking av sidepanel ved storskjerm', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(
-      <ResponsiveContext value={{ width: 1702 }}>
-        <Default />
-      </ResponsiveContext>,
-    );
+    await DefaultForStorskjerm.run();
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
     expect(await screen.findByText('352018689 - Under behandling')).toBeInTheDocument();
@@ -49,12 +70,7 @@ describe('FagsakIndex', () => {
   });
 
   it('skal skjule knapp for åpning eller lukking av sidepanel ved småskjerm', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(
-      <ResponsiveContext value={{ width: 1408 }}>
-        <Default />
-      </ResponsiveContext>,
-    );
+    await DefaultForSmåskjerm.run();
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
     expect(await screen.findByText('352018689 - Under behandling')).toBeInTheDocument();

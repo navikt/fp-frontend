@@ -52,17 +52,17 @@ const meta = {
   title: 'los/avdelingsleder/grupper/GrupperPanel',
   component: GrupperPanel,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.HENT_GRUPPER, () => HttpResponse.json(SAKSBEHANDLERE_OG_SAKSBEHANDLER_GRUPPER)),
-        http.post(LosUrl.OPPRETT_GRUPPE, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.LEGG_SAKSBEHANDLER_TIL_GRUPPE, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.SLETT_GRUPPE, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.FJERN_SAKSBEHANDLER_FRA_GRUPPE, () => new HttpResponse(null, { status: 200 })),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.HENT_GRUPPER, () => HttpResponse.json(SAKSBEHANDLERE_OG_SAKSBEHANDLER_GRUPPER)),
+      http.post(LosUrl.OPPRETT_GRUPPE, () => new HttpResponse(null, { status: 200 })),
+      http.post(LosUrl.LEGG_SAKSBEHANDLER_TIL_GRUPPE, () => new HttpResponse(null, { status: 200 })),
+      http.post(LosUrl.SLETT_GRUPPE, () => new HttpResponse(null, { status: 200 })),
+      http.post(LosUrl.FJERN_SAKSBEHANDLER_FRA_GRUPPE, () => new HttpResponse(null, { status: 200 })),
+    );
   },
+
   args: {
     valgtAvdelingEnhet: '1',
     avdelingensSaksbehandlere: AVDELING_SAKSBEHANDLERE,

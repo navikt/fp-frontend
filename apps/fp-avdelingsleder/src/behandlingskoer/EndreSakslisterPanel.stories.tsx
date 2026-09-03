@@ -59,9 +59,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const ToSakslister: Story = {
-  parameters: {
-    msw: {
-      handlers: lagHandlersMedSakslister([
+  beforeEach({ msw }) {
+    msw.use(
+      ...lagHandlersMedSakslister([
         lagNySaksliste({
           sakslisteId: 1,
           navn: 'A00 Hurtig kø',
@@ -94,14 +94,12 @@ export const ToSakslister: Story = {
           },
         }),
       ]),
-    },
+    );
   },
 };
 
 export const IngenSakslister: Story = {
-  parameters: {
-    msw: {
-      handlers: lagHandlersMedSakslister([]),
-    },
+  beforeEach({ msw }) {
+    msw.use(...lagHandlersMedSakslister([]));
   },
 };

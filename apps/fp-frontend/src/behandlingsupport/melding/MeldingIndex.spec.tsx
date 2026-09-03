@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import type { DokumentMalType } from '@navikt/fp-types';
 
@@ -19,8 +18,7 @@ const { Default } = composeStories(stories);
 
 describe('MeldingIndex', () => {
   it('skal vise meldinger når mottakere og brevmaler har blitt hentet fra server', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
     expect(await screen.findByText('Mal 1')).toBeInTheDocument();
     expect(screen.getByText('Mal 2')).toBeInTheDocument();
     expect(screen.getByText('Mal 3')).toBeInTheDocument();
@@ -28,8 +26,7 @@ describe('MeldingIndex', () => {
   });
 
   it('skal sende melding og så lukke modal', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('Meldinger')).toBeInTheDocument();
     expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
@@ -44,8 +41,7 @@ describe('MeldingIndex', () => {
   });
 
   it('skal vise breveditor-knapp for INNOPP i stedet for fritekst', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('Meldinger')).toBeInTheDocument();
 

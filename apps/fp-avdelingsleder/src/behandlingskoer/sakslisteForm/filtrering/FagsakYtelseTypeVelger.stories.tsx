@@ -19,14 +19,14 @@ const meta = {
   title: 'los/avdelingsleder/behandlingskoer/FagsakYtelseTypeVelger',
   component: FagsakYtelseTypeVelger,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, () => new HttpResponse(null, { status: 200 })),
+    );
   },
+
   render: function Render() {
     const formMethods = useForm({
       defaultValues: {

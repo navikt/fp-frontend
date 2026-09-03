@@ -45,38 +45,37 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const DetFinnesDokumenterPåSak: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(getHref(FagsakRel.ALL_DOCUMENTS), () =>
-          HttpResponse.json<Dokument[]>([
-            {
-              journalpostId: '1',
-              dokumentId: '1',
-              tittel: 'dok',
-              tidspunkt: '10.10.2017 10:23',
-              kommunikasjonsretning: 'INN',
-            },
-            {
-              journalpostId: '2',
-              dokumentId: '2',
-              tittel: 'dok1',
-              tidspunkt: '10.10.2019 10:23',
-              kommunikasjonsretning: 'INN',
-            },
-            {
-              journalpostId: '3',
-              dokumentId: '3',
-              tittel: 'dok2',
-              tidspunkt: '10.10.2018 10:23',
-              kommunikasjonsretning: 'INN',
-            },
-          ]),
-        ),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(getHref(FagsakRel.ALL_DOCUMENTS), () =>
+        HttpResponse.json<Dokument[]>([
+          {
+            journalpostId: '1',
+            dokumentId: '1',
+            tittel: 'dok',
+            tidspunkt: '10.10.2017 10:23',
+            kommunikasjonsretning: 'INN',
+          },
+          {
+            journalpostId: '2',
+            dokumentId: '2',
+            tittel: 'dok1',
+            tidspunkt: '10.10.2019 10:23',
+            kommunikasjonsretning: 'INN',
+          },
+          {
+            journalpostId: '3',
+            dokumentId: '3',
+            tittel: 'dok2',
+            tidspunkt: '10.10.2018 10:23',
+            kommunikasjonsretning: 'INN',
+          },
+        ]),
+      ),
+    );
   },
+
   args: {
     behandlingUuid: '11212',
     behandlingVersjon: 1,
@@ -84,13 +83,12 @@ export const DetFinnesDokumenterPåSak: Story = {
 };
 
 export const DetFinnesIngenDokumenterPåSak: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(getHref(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json([])),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(getHref(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json([])),
+    );
   },
+
   args: {},
 };

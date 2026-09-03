@@ -17,18 +17,19 @@ const meta = {
   title: 'los/avdelingsleder/behandlingskoer/UtvalgskriterierForSakslisteForm',
   component: UtvalgskriterierForSakslisteForm,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.OPPGAVE_ANTALL, () => HttpResponse.json(1)),
-        http.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, () => new HttpResponse(null, { status: 204 })),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.get(LosUrl.OPPGAVE_ANTALL, () => HttpResponse.json(1)),
+      http.post(LosUrl.ENDRE_EKSISTERENDE_SAKSLISTE, () => new HttpResponse(null, { status: 204 })),
+    );
   },
+
   args: {
     valgtAvdelingEnhet: '',
   },
+
   render: function Render(args) {
     const { data: kodeverkLos } = useQuery(losKodeverkOptions());
 

@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 import { expect } from 'vitest';
 
 import * as api from '../api/fplosFellesApi';
@@ -41,9 +40,7 @@ describe('FlyttReservasjonModal', () => {
 
   it('skal vise finne brukerident og så lagre begrunnelse for flytting', async () => {
     const spy = vi.spyOn(api, 'flyttReservasjon');
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-
-    render(<Default />);
+    await Default.run();
 
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 

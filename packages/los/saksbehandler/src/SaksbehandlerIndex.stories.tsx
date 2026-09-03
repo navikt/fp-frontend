@@ -177,41 +177,43 @@ const meta = {
   title: 'SaksbehandlerIndex',
   decorators: [withQueryClient],
   component: SaksbehandlerIndex,
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.get(LosUrl.SAKSLISTE, () => HttpResponse.json(SAKSLISTER)),
+      http.post(LosUrl.RESERVER_OPPGAVE, () =>
+        HttpResponse.json({ erReservert: true, erReservertAvInnloggetBruker: true }),
+      ),
+      http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json(RESERVERTE_OPPGAVER)),
+      http.get(LosUrl.BEHANDLINGSKO_OPPGAVE_ANTALL, () => HttpResponse.json(100)),
+      http.post(LosUrl.SØK_FAGSAK, () => HttpResponse.json([])),
+      http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json([])),
+      http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
+        const doPolling = t.request.url.includes('oppgaveIder');
+        return doPolling
+          ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
+          : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
+      }),
+      http.get('https://www.test.com/api/status', () =>
+        HttpResponse.json<AsyncPollingStatus>({
+          status: 'PENDING',
+          pollIntervalMillis: 100_000_000,
+          message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
+        }),
+      ),
+      http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
+      http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => HttpResponse.json({ erReservert: false })),
+      http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
+      http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+      http.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, () => HttpResponse.json({})),
+      http.post(LosUrl.FLYTT_RESERVASJON, () => HttpResponse.json({})),
+      http.get(encodeURI(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK), () => HttpResponse.json([])),
+    );
+  },
+
   parameters: {
     layout: 'fullscreen',
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.SAKSLISTE, () => HttpResponse.json(SAKSLISTER)),
-        http.post(LosUrl.RESERVER_OPPGAVE, () =>
-          HttpResponse.json({ erReservert: true, erReservertAvInnloggetBruker: true }),
-        ),
-        http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json(RESERVERTE_OPPGAVER)),
-        http.get(LosUrl.BEHANDLINGSKO_OPPGAVE_ANTALL, () => HttpResponse.json(100)),
-        http.post(LosUrl.SØK_FAGSAK, () => HttpResponse.json([])),
-        http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json([])),
-        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
-          const doPolling = t.request.url.includes('oppgaveIder');
-          return doPolling
-            ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
-            : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
-        }),
-        http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json<AsyncPollingStatus>({
-            status: 'PENDING',
-            pollIntervalMillis: 100_000_000,
-            message: 'Venter på prosesstask [behandlingskontroll.fortsettBehandling][id: 1000020]',
-          }),
-        ),
-        http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
-        http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => HttpResponse.json({ erReservert: false })),
-        http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
-        http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
-        http.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, () => HttpResponse.json({})),
-        http.post(LosUrl.FLYTT_RESERVASJON, () => HttpResponse.json({})),
-        http.get(encodeURI(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK), () => HttpResponse.json([])),
-      ],
-    },
   },
 } satisfies Meta<typeof SaksbehandlerIndex>;
 export default meta;

@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './LeggTilSaksbehandlerForm.stories';
 
@@ -9,8 +8,7 @@ const { Default, SaksbehandlerFinnesIkke } = composeStories(stories);
 
 describe('LeggTilSaksbehandlerForm', () => {
   it('skal vise at oppgitt brukerident ikke finnes', async () => {
-    applyRequestHandlers(SaksbehandlerFinnesIkke.parameters['msw'] as MswParameters['msw']);
-    render(<SaksbehandlerFinnesIkke />);
+    await SaksbehandlerFinnesIkke.run();
 
     expect(await screen.findByText('Legg til saksbehandler')).toBeInTheDocument();
 
@@ -27,8 +25,7 @@ describe('LeggTilSaksbehandlerForm', () => {
   });
 
   it('skal finne brukerident og så legge saksbehandler til listen', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('Legg til saksbehandler')).toBeInTheDocument();
 

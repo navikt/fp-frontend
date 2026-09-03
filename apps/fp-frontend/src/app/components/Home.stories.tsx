@@ -71,25 +71,29 @@ const meta = {
   title: 'app/Home',
   decorators: [withIntl, withQueryClient],
   component: Home,
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
+      http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+      http.get(getHref(FagsakRel.SEARCH_UTBETALINGSDATA_IS15), () => HttpResponse.json({})),
+      http.get(FagsakUrl.AKTOER_INFO, () => HttpResponse.json(AKTØR_INFO)),
+      http.get(wrapUrl('fplos/api/kodeverk'), () => HttpResponse.json(alleKodeverkLos)),
+      http.get(wrapUrl('fplos/api/reservasjon/tidligere-reserverte'), () => HttpResponse.json([])),
+      http.get(wrapUrl('fplos/api/saksbehandler/saksliste'), () => HttpResponse.json([])),
+    );
+  },
+
   parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.get(getHref(FagsakRel.SEARCH_UTBETALINGSDATA_IS15), () => HttpResponse.json({})),
-        http.get(FagsakUrl.AKTOER_INFO, () => HttpResponse.json(AKTØR_INFO)),
-        http.get(wrapUrl('fplos/api/kodeverk'), () => HttpResponse.json(alleKodeverkLos)),
-        http.get(wrapUrl('fplos/api/reservasjon/tidligere-reserverte'), () => HttpResponse.json([])),
-        http.get(wrapUrl('fplos/api/saksbehandler/saksliste'), () => HttpResponse.json([])),
-      ],
-    },
     layout: 'fullscreen',
   },
+
   args: {
     headerHeight: 100,
     navAnsatt: NAV_ANSATT,
   },
+
   render: function Render(props, { parameters: { url } }) {
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());

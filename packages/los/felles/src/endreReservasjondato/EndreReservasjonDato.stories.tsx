@@ -12,16 +12,17 @@ const meta = {
   title: 'los/EndreReservasjonDato',
   component: EndreReservasjonDato,
   decorators: [withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [http.post(LosUrlFelles.ENDRE_OPPGAVERESERVASJON, () => HttpResponse.json({}))],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(http.post(LosUrlFelles.ENDRE_OPPGAVERESERVASJON, () => HttpResponse.json({})));
   },
+
   args: {
     oppgaveId: 123,
     invalidateQueryKeys: [],
     reservertTilTidspunkt: dayjs().add(1, 'week').format(ISO_DATE_FORMAT),
   },
+
   render: props => {
     return <EndreReservasjonDato {...props} />;
   },

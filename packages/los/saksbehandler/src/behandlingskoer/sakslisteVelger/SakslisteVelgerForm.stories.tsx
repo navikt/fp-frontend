@@ -79,19 +79,23 @@ const meta = {
   title: 'behandlingskoer/SakslisteVelgerForm',
   component: SakslisteVelgerForm,
   decorators: [withIntl, withQueryClient],
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.get(encodeURI(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK), () => HttpResponse.json([])),
+    );
+  },
+
   parameters: {
     layout: 'fullscreen',
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(encodeURI(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK), () => HttpResponse.json([])),
-      ],
-    },
   },
+
   args: {
     setValgtSakslisteId: action('setValgtSakslisteId'),
     fetchAntallOppgaver: action('fetchAntallOppgaver'),
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const alleKodeverk = useQuery(losKodeverkOptions()).data;
@@ -109,14 +113,13 @@ export const Default: Story = {
 };
 
 export const MedAvsluttedeOppgaver: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(encodeURI(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK), () => HttpResponse.json(køStatistikkMock)),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.get(encodeURI(LosUrl.SAKSBEHANDLER_KØ_STATISTIKK), () => HttpResponse.json(køStatistikkMock)),
+    );
   },
+
   args: {
     sakslister: [saksliste1],
   },

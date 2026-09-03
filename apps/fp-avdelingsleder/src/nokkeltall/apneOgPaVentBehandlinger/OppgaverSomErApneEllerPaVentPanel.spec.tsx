@@ -1,6 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
+import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import * as stories from './OppgaverSomErApneEllerPaVentPanel.stories';
@@ -17,16 +16,15 @@ const { Default } = composeStories(stories);
 
 describe('OppgaverSomErApneEllerPaVentPanel', () => {
   it('skal vise graffilter', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    const { getByLabelText } = render(<Default />);
+    await Default.run();
     expect(
       await screen.findByText('Åpne behandlinger foreldrepenger fordelt på første uttaksdag fra søknad'),
     ).toBeInTheDocument();
 
-    expect(getByLabelText('Førstegangsbehandling')).toBeChecked();
-    expect(getByLabelText('Klage')).toBeChecked();
-    expect(getByLabelText('Revurdering')).toBeChecked();
-    expect(getByLabelText('Innsyn')).toBeChecked();
-    expect(getByLabelText('Anke')).toBeChecked();
+    expect(screen.getByLabelText('Førstegangsbehandling')).toBeChecked();
+    expect(screen.getByLabelText('Klage')).toBeChecked();
+    expect(screen.getByLabelText('Revurdering')).toBeChecked();
+    expect(screen.getByLabelText('Innsyn')).toBeChecked();
+    expect(screen.getByLabelText('Anke')).toBeChecked();
   });
 });

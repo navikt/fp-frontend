@@ -1,6 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
+import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import * as stories from './TilBehandlingPanel.stories';
@@ -17,8 +16,7 @@ const { Default } = composeStories(stories);
 
 describe('TilBehandlingPanel', () => {
   it('skal vise graffilter', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
     expect(await screen.findByText('Antall åpne oppgaver pr dato')).toBeInTheDocument();
 
     expect(screen.getByRole('radio', { name: '2 siste uker' })).toHaveAttribute('aria-checked', 'true');

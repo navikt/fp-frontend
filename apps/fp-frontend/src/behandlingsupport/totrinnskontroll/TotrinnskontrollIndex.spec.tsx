@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -11,8 +10,7 @@ const { Default } = composeStories(stories);
 
 describe('TotrinnskontrollIndex', () => {
   it('skal vise modal når beslutter godkjenner', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
     expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();

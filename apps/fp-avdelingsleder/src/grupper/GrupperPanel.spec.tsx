@@ -1,6 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
+import { screen } from '@testing-library/react';
 
 import * as stories from './GrupperPanel.stories';
 
@@ -8,8 +7,7 @@ const { Default } = composeStories(stories);
 
 describe('GrupperPanel', () => {
   it('skal vise gruppe i tabell', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
     expect(await screen.findByText('Grupper')).toBeInTheDocument();
     expect(screen.getByText('Id')).toBeInTheDocument();
     expect(screen.getByText('Navn')).toBeInTheDocument();

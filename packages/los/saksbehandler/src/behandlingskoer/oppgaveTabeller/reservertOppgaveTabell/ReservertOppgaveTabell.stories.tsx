@@ -98,26 +98,22 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
-        http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json(RESERVERTE_OPPGAVER)),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+      http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json(RESERVERTE_OPPGAVER)),
+    );
   },
 };
 
 export const TomOppgaveTabell: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
-        http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json([])),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+      http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json([])),
+    );
   },
 };
 
@@ -129,24 +125,22 @@ const oppdatertId = (oppgaver: OppgaveDto[], idnumber: number): OppgaveDto[] => 
 };
 
 export const VisPagineringNårMerEnn15Oppgaver: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
-        http.get(LosUrl.RESERVERTE_OPPGAVER, () =>
-          HttpResponse.json([
-            ...RESERVERTE_OPPGAVER,
-            ...oppdatertId(RESERVERTE_OPPGAVER, 10),
-            ...oppdatertId(RESERVERTE_OPPGAVER, 20),
-            ...oppdatertId(RESERVERTE_OPPGAVER, 30),
-            ...oppdatertId(RESERVERTE_OPPGAVER, 40),
-            ...oppdatertId(RESERVERTE_OPPGAVER, 50),
-            ...oppdatertId(RESERVERTE_OPPGAVER, 60),
-            ...oppdatertId(RESERVERTE_OPPGAVER, 70),
-          ]),
-        ),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
+      http.get(LosUrl.RESERVERTE_OPPGAVER, () =>
+        HttpResponse.json([
+          ...RESERVERTE_OPPGAVER,
+          ...oppdatertId(RESERVERTE_OPPGAVER, 10),
+          ...oppdatertId(RESERVERTE_OPPGAVER, 20),
+          ...oppdatertId(RESERVERTE_OPPGAVER, 30),
+          ...oppdatertId(RESERVERTE_OPPGAVER, 40),
+          ...oppdatertId(RESERVERTE_OPPGAVER, 50),
+          ...oppdatertId(RESERVERTE_OPPGAVER, 60),
+          ...oppdatertId(RESERVERTE_OPPGAVER, 70),
+        ]),
+      ),
+    );
   },
 };

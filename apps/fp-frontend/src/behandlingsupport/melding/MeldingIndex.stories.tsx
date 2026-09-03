@@ -77,26 +77,26 @@ const meta = {
   title: 'fagsak/MeldingIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: MeldingIndex,
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
-        http.post(wrapUrl('/fpsak/bestill'), () => HttpResponse.json()),
-        http.post(wrapUrl('/fpsak/hent-brev-html'), () =>
-          HttpResponse.json({
-            opprinneligHtml:
-              '<html><body><div id="logo"><img /></div><div id="content">' +
-              '<div id="header"><table></table></div><div data-editable="true"><p>Brevinnhold</p></div></div></body></html>',
-            redigertHtml: null,
-          }),
-        ),
-        http.post(wrapUrl('/fpsak/mellomlagring'), () => HttpResponse.json()),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
+      http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+      http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
+      http.post(wrapUrl('/fpsak/bestill'), () => HttpResponse.json()),
+      http.post(wrapUrl('/fpsak/hent-brev-html'), () =>
+        HttpResponse.json({
+          opprinneligHtml:
+            '<html><body><div id="logo"><img /></div><div id="content">' +
+            '<div id="header"><table></table></div><div data-editable="true"><p>Brevinnhold</p></div></div></body></html>',
+          redigertHtml: null,
+        }),
+      ),
+      http.post(wrapUrl('/fpsak/mellomlagring'), () => HttpResponse.json()),
+    );
   },
+
   args: {
     fagsakData: new FagsakData(FAGSAK),
     valgtBehandlingUuid: '1',
@@ -109,6 +109,7 @@ const meta = {
       />
     ),
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());

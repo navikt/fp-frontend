@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, within } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 import { vi } from 'vitest';
 
 import * as stories from './EndreSakslisterPanel.stories';
@@ -16,8 +15,7 @@ const { IngenSakslister, ToSakslister } = composeStories(stories);
 
 describe('EndreSakslisterPanel', () => {
   it('skal vise at ingen behandlingskøer er laget og så legge til en ny kø', async () => {
-    applyRequestHandlers(IngenSakslister.parameters['msw'] as MswParameters['msw']);
-    render(<IngenSakslister />);
+    await IngenSakslister.run();
     expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
     expect(screen.queryByRole('columnheader', { name: 'Navn' })).not.toBeInTheDocument();
 
@@ -28,8 +26,7 @@ describe('EndreSakslisterPanel', () => {
   });
 
   it('skal vise antall saksbehandlere og oppgaver for kø', async () => {
-    applyRequestHandlers(ToSakslister.parameters['msw'] as MswParameters['msw']);
-    render(<ToSakslister />);
+    await ToSakslister.run();
     const rows = await screen.findAllByRole('row');
     const headerRow = rows[0]!;
     expect(headerRow).toHaveTextContent('Navn');
@@ -53,8 +50,7 @@ describe('EndreSakslisterPanel', () => {
   });
 
   it('skal vise graf ved å trykke på graf ikon', async () => {
-    applyRequestHandlers(ToSakslister.parameters['msw'] as MswParameters['msw']);
-    render(<ToSakslister />);
+    await ToSakslister.run();
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Vis oppgave graf for A00 Hurtig kø'));
@@ -70,8 +66,7 @@ describe('EndreSakslisterPanel', () => {
   });
 
   it('skal vise slette kø ved å trykke på ikon for sletting', async () => {
-    applyRequestHandlers(ToSakslister.parameters['msw'] as MswParameters['msw']);
-    render(<ToSakslister />);
+    await ToSakslister.run();
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Slett saksliste A00 Hurtig kø'));

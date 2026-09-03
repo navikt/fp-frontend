@@ -17,20 +17,21 @@ const meta = {
   title: 'los/avdelingsleder/nokkeltall/OppgaverPerForsteStonadsdagPanel',
   component: OppgaverPerForsteStonadsdagPanel,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(encodeURI(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND), () =>
-          HttpResponse.json(oppgaverFørsteStønadsdagPerMnd),
-        ),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.get(encodeURI(LosUrl.HENT_OPPGAVER_PER_FORSTE_STONADSDAG_MND), () =>
+        HttpResponse.json(oppgaverFørsteStønadsdagPerMnd),
+      ),
+    );
   },
+
   args: {
     height: 300,
     valgtAvdelingEnhet: '1',
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const alleKodeverk = useQuery(losKodeverkOptions()).data;

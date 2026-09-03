@@ -14,14 +14,14 @@ const meta = {
   title: 'los/avdelingsleder/saksbehandlere/SaksbehandlereTabell',
   component: SaksbehandlereTabell,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [
-        http.post(LosUrl.SLETT_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
-        http.get(LosUrl.SAKSBEHANDLERE_FOR_AVDELING, () => new HttpResponse(null, { status: 200 })),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.post(LosUrl.SLETT_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
+      http.get(LosUrl.SAKSBEHANDLERE_FOR_AVDELING, () => new HttpResponse(null, { status: 200 })),
+    );
   },
+
   args: {
     valgtAvdelingEnhet: 'Nav Vikafossen',
   },

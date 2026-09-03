@@ -79,18 +79,19 @@ const meta = {
   title: 'los/avdelingsleder/nokkeltall/VentefristUtløperPanel',
   component: VentefristUtløperPanel,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(encodeURI(LosUrl.HENT_BEHANDLINGER_FRISTUTLOP), () => HttpResponse.json(BEHANDLINGER_PÅ_VENT)),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.get(encodeURI(LosUrl.HENT_BEHANDLINGER_FRISTUTLOP), () => HttpResponse.json(BEHANDLINGER_PÅ_VENT)),
+    );
   },
+
   args: {
     height: 300,
     valgtAvdelingEnhet: '1',
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const alleKodeverk = useQuery(losKodeverkOptions()).data;
