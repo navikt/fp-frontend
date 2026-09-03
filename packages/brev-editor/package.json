@@ -25,7 +25,7 @@
     "@navikt/aksel-icons": "8.16.2",
     "@navikt/ds-react": "8.16.2",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-utils": "5.1.10",
+    "@navikt/ft-utils": "5.1.11",
     "css-tree": "3.2.1",
     "dayjs": "1.11.23",
     "editorjs-html": "4.0.5",
@@ -33,7 +33,7 @@
     "lodash.debounce": "4.0.8",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-intl": "10.1.24",
+    "react-intl": "10.1.25",
     "react-router": "8.3.1"
   },
   "devDependencies": {
