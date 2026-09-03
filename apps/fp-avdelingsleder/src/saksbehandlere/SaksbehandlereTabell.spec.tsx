@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './SaksbehandlereTabell.stories';
@@ -22,7 +22,7 @@ describe('SaksbehandlereTabell', () => {
   });
 
   it('skal vise tekst som viser at ingen saksbehandlere er lagt til', async () => {
-    render(<TomTabell />);
+    await TomTabell.run();
     expect(await screen.findByText('Ingen saksbehandlere lagt til')).toBeInTheDocument();
   });
 

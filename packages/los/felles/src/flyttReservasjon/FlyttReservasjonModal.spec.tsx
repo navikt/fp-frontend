@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
@@ -10,7 +10,7 @@ const { Default } = composeStories(stories);
 
 describe('FlyttReservasjonModal', () => {
   it('skal vise feilmelding når flytting blir forsøkt utført uten at skjemaet er fylt ut', async () => {
-    render(<Default />);
+    await Default.run();
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
     expect(screen.getByText('Notat til annen saksbehandler')).toBeInTheDocument();
@@ -25,7 +25,7 @@ describe('FlyttReservasjonModal', () => {
   });
 
   it('skal vise at oppgitt bruker ikke finnes', async () => {
-    render(<Default />);
+    await Default.run();
 
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
