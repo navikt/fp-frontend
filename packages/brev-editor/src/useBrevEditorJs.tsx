@@ -141,13 +141,11 @@ const useAutoSaveDebouncer = () => {
 };
 
 class CustomList extends EditorjsList {
+  // https://github.com/editor-js/list/issues/119 - berre punktliste skal kunne veljast.
+  // Editor.js omset label via i18n-ordboka, så vi må samanlikne med same melding som ordboka blir bygd av.
   override renderSettings() {
-    return super.renderSettings().filter(item =>
-      // https://github.com/editor-js/list/issues/119
-      // @ts-expect-error Fiks
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      ['Unordered'].includes(item.label),
-    );
+    const punktlisteLabel = intl.formatMessage({ id: 'useBrevEditorJs.UnorderedList' });
+    return super.renderSettings().filter(item => 'label' in item && item.label === punktlisteLabel);
   }
 }
 // Denne blir overstyrt for å ikkje strippa vekk a-tags ved lagring.

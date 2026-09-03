@@ -4,7 +4,12 @@ import type { Theme } from '@navikt/ds-react';
 import { createIntl, dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 
 import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
-import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
+import {
+  type DekoratorLenke,
+  DekoratorMedFeilviserSakIndex,
+  type Feilmelding,
+  type JSONValue,
+} from '@navikt/fp-sak-dekorator';
 
 import { ErrorType, type FpError } from '../restApiError/errorType';
 import { useRestApiError, useRestApiErrorDispatcher } from '../restApiError/RestApiErrorContext';
@@ -107,10 +112,9 @@ const formaterFeilmeldinger = (
   return feilmeldinger;
 };
 
-const parseErrorDetails = (details: string) => {
+const parseErrorDetails = (details: string): JSONValue => {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return JSON.parse(details);
+    return JSON.parse(details) as JSONValue;
   } catch {
     return 'Kunne ikke tolke feildetaljer';
   }
@@ -123,7 +127,6 @@ const prosesserFeilmelding = (feilmelding: FpError, feilmeldinger: Feilmelding[]
         const decoded = decodeHtmlEntity(feilmelding.message);
         addIfNotExists(feilmeldinger, {
           melding: intl.formatMessage({ id: 'Rest.ErrorMessage.General' }),
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           tilleggsInfo: decoded ? parseErrorDetails(decoded) : undefined,
         });
       }

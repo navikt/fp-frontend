@@ -4,7 +4,7 @@ import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Detail, Dialog, Heading, HStack, VStack } from '@navikt/ds-react';
 import { capitalizeFirstLetter } from '@navikt/ft-utils';
 
-import type { Feilmelding } from '../typer/feilmeldingTsType';
+import type { Feilmelding, JSONValue } from '../typer/feilmeldingTsType';
 
 interface Props {
   skalViseModal: boolean;
@@ -35,16 +35,7 @@ export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldin
           <HStack gap="space-40">
             <div />
             <VStack gap="space-16">
-              {feilmeldingsdetaljer &&
-                Object.keys(feilmeldingsdetaljer).map(edKey => (
-                  <div key={edKey}>
-                    <Detail>{`${capitalizeFirstLetter(edKey)}:`}</Detail>
-                    <div>
-                      {/* @ts-expect-error Fiks. Dette vil kreve at vi lager en rekursiv rendering av objectet */}
-                      <BodyShort size="small">{feilmeldingsdetaljer[edKey]}</BodyShort>
-                    </div>
-                  </div>
-                ))}
+              {feilmeldingsdetaljer !== undefined && <FeilmeldingsdetaljerVerdi verdi={feilmeldingsdetaljer} />}
             </VStack>
           </HStack>
         </Dialog.Body>
@@ -56,4 +47,36 @@ export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldin
       </Dialog.Popup>
     </Dialog>
   );
+};
+
+const FeilmeldingsdetaljerVerdi = ({ verdi }: { verdi: JSONValue }) => {
+  if (verdi === null) {
+    return <BodyShort size="small">-</BodyShort>;
+  }
+
+  if (Array.isArray(verdi)) {
+    return (
+      <VStack gap="space-8">
+        {verdi.map((element, index) => (
+          // eslint-disable-next-line @eslint-react/no-array-index-key -- feildetaljer manglar stabil id, indeks trengs for unik nøkkel
+          <FeilmeldingsdetaljerVerdi key={index} verdi={element} />
+        ))}
+      </VStack>
+    );
+  }
+
+  if (typeof verdi === 'object') {
+    return (
+      <VStack gap="space-8">
+        {Object.entries(verdi).map(([nøkkel, element]) => (
+          <div key={nøkkel}>
+            <Detail>{`${capitalizeFirstLetter(nøkkel)}:`}</Detail>
+            <FeilmeldingsdetaljerVerdi verdi={element} />
+          </div>
+        ))}
+      </VStack>
+    );
+  }
+
+  return <BodyShort size="small">{String(verdi)}</BodyShort>;
 };

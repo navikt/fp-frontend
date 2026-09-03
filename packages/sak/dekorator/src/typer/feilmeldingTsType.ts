@@ -1,4 +1,4 @@
-type JSONValue = string | number | boolean | JSONObject | Array<JSONValue>;
+export type JSONValue = string | number | boolean | null | JSONObject | JSONValue[];
 
 interface JSONObject {
   [x: string]: JSONValue;
@@ -6,5 +6,5 @@ interface JSONObject {
 
 export type Feilmelding = {
   melding: string;
-  tilleggsInfo?: JSONObject;
+  tilleggsInfo?: JSONValue;
 };
