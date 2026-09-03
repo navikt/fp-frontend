@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 import { expect } from 'vitest';
 
 import * as api from '../api/fplosFellesApi';
@@ -11,7 +10,7 @@ const { Default } = composeStories(stories);
 
 describe('FlyttReservasjonModal', () => {
   it('skal vise feilmelding når flytting blir forsøkt utført uten at skjemaet er fylt ut', async () => {
-    render(<Default />);
+    await Default.run();
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
     expect(screen.getByText('Notat til annen saksbehandler')).toBeInTheDocument();
@@ -26,7 +25,7 @@ describe('FlyttReservasjonModal', () => {
   });
 
   it('skal vise at oppgitt bruker ikke finnes', async () => {
-    render(<Default />);
+    await Default.run();
 
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
@@ -41,9 +40,7 @@ describe('FlyttReservasjonModal', () => {
 
   it('skal vise finne brukerident og så lagre begrunnelse for flytting', async () => {
     const spy = vi.spyOn(api, 'flyttReservasjon');
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-
-    render(<Default />);
+    await Default.run();
 
     expect(screen.getByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 

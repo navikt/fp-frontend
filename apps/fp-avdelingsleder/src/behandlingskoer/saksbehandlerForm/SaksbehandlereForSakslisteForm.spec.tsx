@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './SaksbehandlereForSakslisteForm.stories';
 
@@ -9,23 +8,20 @@ const { IngenSaksbehandlere, ToSaksbehandlere, SaksbehandlereSomErGruppert } = c
 
 describe('SaksbehandlereForSakslisteForm', () => {
   it('skal vise tekst som viser at ingen saksbehandlere er tilknyttet', async () => {
-    applyRequestHandlers(IngenSaksbehandlere.parameters['msw'] as MswParameters['msw']);
-    render(<IngenSaksbehandlere />);
+    await IngenSaksbehandlere.run();
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
     expect(await screen.findByText('Avdelingen har ingen saksbehandlere tilknyttet')).toBeInTheDocument();
   });
 
   it('skal vise to saksbehandlere i listen', async () => {
-    applyRequestHandlers(ToSaksbehandlere.parameters['msw'] as MswParameters['msw']);
-    render(<ToSaksbehandlere />);
+    await ToSaksbehandlere.run();
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText('Steffen')).toBeInTheDocument();
   });
 
   it('skal vise gruppe og liste med alle saksbehandlere', async () => {
-    applyRequestHandlers(SaksbehandlereSomErGruppert.parameters['msw'] as MswParameters['msw']);
-    render(<SaksbehandlereSomErGruppert />);
+    await SaksbehandlereSomErGruppert.run();
     expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
     expect(screen.getByText('Saksbehandlere')).toBeInTheDocument();
     expect(screen.getByText('Gruppe 1')).toBeInTheDocument();
@@ -40,8 +36,7 @@ describe('SaksbehandlereForSakslisteForm', () => {
   });
 
   it('skal huke av alle saksbehandler i gruppe ved gruppe avhukning og fjerne ved avhuking', async () => {
-    applyRequestHandlers(SaksbehandlereSomErGruppert.parameters['msw'] as MswParameters['msw']);
-    render(<SaksbehandlereSomErGruppert />);
+    await SaksbehandlereSomErGruppert.run();
 
     expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
 
@@ -76,8 +71,7 @@ describe('SaksbehandlereForSakslisteForm', () => {
   });
 
   it('skal vise indeterminate tilstand på gruppe-checkbox når en eller flere er valgt, men ikke alle', async () => {
-    applyRequestHandlers(SaksbehandlereSomErGruppert.parameters['msw'] as MswParameters['msw']);
-    render(<SaksbehandlereSomErGruppert />);
+    await SaksbehandlereSomErGruppert.run();
 
     expect(await screen.findByText('Gruppenavn')).toBeInTheDocument();
 

@@ -11,11 +11,11 @@ const meta = {
   title: 'los/FlyttReservasjonModal',
   component: FlyttReservasjonModal,
   decorators: [withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [http.post(LosUrlFelles.FLYTT_RESERVASJON, () => HttpResponse.json({}))],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(http.post(LosUrlFelles.FLYTT_RESERVASJON, () => HttpResponse.json({})));
   },
+
   args: {
     oppgaveId: 123,
     invalidateQueryKeys: [],

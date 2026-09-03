@@ -17,11 +17,11 @@ const meta = {
   title: 'app/BehandlingPaVent',
   component: BehandlingPaVent,
   decorators: [withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [http.post('https://www.test.com' + link.href, () => new HttpResponse(null, { status: 200 }))],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(http.post('https://www.test.com' + link.href, () => new HttpResponse(null, { status: 200 })));
   },
+
   args: {
     kodeverk: alleKodeverk,
     opneSokeside: action('button-click'),

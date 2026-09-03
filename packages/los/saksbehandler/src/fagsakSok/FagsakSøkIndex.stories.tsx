@@ -15,18 +15,18 @@ const meta = {
   title: 'søk/FagsakSøkIndex',
   component: FagsakSøkIndex,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [
-        http.post(LosUrl.RESERVER_OPPGAVE, () =>
-          HttpResponse.json({ erReservert: true, erReservertAvInnloggetBruker: true }),
-        ),
-        http.post(LosUrl.SØK_FAGSAK, () => HttpResponse.json({})),
-        http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json([])),
-        http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => HttpResponse.json({ erReservert: false })),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.post(LosUrl.RESERVER_OPPGAVE, () =>
+        HttpResponse.json({ erReservert: true, erReservertAvInnloggetBruker: true }),
+      ),
+      http.post(LosUrl.SØK_FAGSAK, () => HttpResponse.json({})),
+      http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json([])),
+      http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => HttpResponse.json({ erReservert: false })),
+    );
   },
+
   args: {
     åpneFagsak: action('åpneFagsak'),
     kanSaksbehandle: true,

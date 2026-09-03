@@ -142,18 +142,19 @@ const meta = {
   title: 'los/avdelingsleder/nokkeltall/TilBehandlingPanel',
   component: TilBehandlingPanel,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.HENT_OPPGAVER_PER_DATO.replace('ø', '%C3%B8'), () => HttpResponse.json(OPPGAVER_PER_DATO)),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.get(LosUrl.HENT_OPPGAVER_PER_DATO.replaceAll('ø', '%C3%B8'), () => HttpResponse.json(OPPGAVER_PER_DATO)),
+    );
   },
+
   args: {
     height: 300,
     valgtAvdelingEnhet: '1',
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const alleKodeverk = useQuery(losKodeverkOptions()).data;

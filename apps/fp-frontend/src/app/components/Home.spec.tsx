@@ -1,6 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
+import { screen } from '@testing-library/react';
 
 import * as stories from './Home.stories';
 
@@ -8,20 +7,17 @@ const { VisAktør, VisSøk, VisSideIkkeFunnet } = composeStories(stories);
 
 describe('Home', () => {
   it('skal rendre aktør-panel', async () => {
-    applyRequestHandlers(VisAktør.parameters['msw'] as MswParameters['msw']);
-    render(<VisAktør />);
+    await VisAktør.run();
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
   });
 
   it('skal rendre søke-panel', async () => {
-    applyRequestHandlers(VisSøk.parameters['msw'] as MswParameters['msw']);
-    render(<VisSøk />);
+    await VisSøk.run();
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
   });
 
   it('skal rendre side-ikke-funnet-panel', async () => {
-    applyRequestHandlers(VisSideIkkeFunnet.parameters['msw'] as MswParameters['msw']);
-    render(<VisSideIkkeFunnet />);
+    await VisSideIkkeFunnet.run();
     expect(await screen.findByText('Beklager, vi finner ikke siden du leter etter.')).toBeInTheDocument();
   });
 });

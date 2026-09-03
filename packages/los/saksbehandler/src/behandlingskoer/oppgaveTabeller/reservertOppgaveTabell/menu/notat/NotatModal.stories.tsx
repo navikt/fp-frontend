@@ -15,11 +15,11 @@ const meta = {
   title: 'behandlingskoer/NotatModal',
   component: NotatModal,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [http.post(LosUrlFelles.FLYTT_RESERVASJON, () => HttpResponse.json({}))],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(http.post(LosUrlFelles.FLYTT_RESERVASJON, () => HttpResponse.json({})));
   },
+
   args: {
     oppgaveId: 123,
     brukerIdent: 'T232332',

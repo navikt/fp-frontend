@@ -88,23 +88,24 @@ const meta = {
   title: 'fagsak/BehandlingSupportIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: BehandlingSupportIndex,
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
-        http.get(getHref(FagsakRel.KAN_TILBAKEKREVING_OPPRETTES), () => HttpResponse.json(false)),
-        http.get(getHref(FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES), () => HttpResponse.json(false)),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
+      http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+      http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
+      http.get(getHref(FagsakRel.KAN_TILBAKEKREVING_OPPRETTES), () => HttpResponse.json(false)),
+      http.get(getHref(FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES), () => HttpResponse.json(false)),
+    );
   },
+
   args: {
     hentOgSettBehandling: action('button-click'),
     toggleVisUtvidetBehandlingDetaljer: action('button-click'),
     visUtvidetBehandlingDetaljer: false,
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());

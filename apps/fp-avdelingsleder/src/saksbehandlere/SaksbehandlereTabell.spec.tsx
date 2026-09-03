@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './SaksbehandlereTabell.stories';
 
@@ -9,8 +8,7 @@ const { Default, TomTabell, MedSaksbehandlerUtenAnsattAvdeling } = composeStorie
 
 describe('SaksbehandlereTabell', () => {
   it('skal vise to saksbehandlere i tabell', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
@@ -24,13 +22,12 @@ describe('SaksbehandlereTabell', () => {
   });
 
   it('skal vise tekst som viser at ingen saksbehandlere er lagt til', async () => {
-    render(<TomTabell />);
+    await TomTabell.run();
     expect(await screen.findByText('Ingen saksbehandlere lagt til')).toBeInTheDocument();
   });
 
   it('skal fjerne en saksbehandler ved å trykk på fjern-knappen', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
@@ -40,8 +37,7 @@ describe('SaksbehandlereTabell', () => {
   });
 
   it('skal sortere saksbehandlere etter ansattAvdeling og navn', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     const sortedNames = ['Hildegunn', 'Espen Utvikler', 'Steffen'];
 
@@ -53,8 +49,7 @@ describe('SaksbehandlereTabell', () => {
   });
 
   it('skal sortere saksbehandlere med ansattAvdeling null sist', async () => {
-    applyRequestHandlers(MedSaksbehandlerUtenAnsattAvdeling.parameters['msw'] as MswParameters['msw']);
-    render(<MedSaksbehandlerUtenAnsattAvdeling />);
+    await MedSaksbehandlerUtenAnsattAvdeling.run();
     const sortedNames = ['Hildegunn', 'Ukjent saksbehandler (X11111)'];
 
     const rows = await screen.findAllByRole('row');

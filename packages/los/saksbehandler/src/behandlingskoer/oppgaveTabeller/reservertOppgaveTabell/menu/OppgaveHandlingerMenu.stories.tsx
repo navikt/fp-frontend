@@ -25,16 +25,16 @@ const meta = {
   title: 'behandlingskoer/OppgaveHandlingerMenu',
   component: OppgaveHandlingerMenu,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [
-        http.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, () => HttpResponse.json({})),
-        http.post(LosUrl.FLYTT_RESERVASJON, () => HttpResponse.json({})),
-        http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => HttpResponse.json({})),
-        http.get(LosUrl.HENT_AKTUELLE_SAKSBEHANDLERE, () => HttpResponse.json(saksbehandlereForSaksliste)),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, () => HttpResponse.json({})),
+      http.post(LosUrl.FLYTT_RESERVASJON, () => HttpResponse.json({})),
+      http.post(LosUrl.ENDRE_OPPGAVERESERVASJON, () => HttpResponse.json({})),
+      http.get(LosUrl.HENT_AKTUELLE_SAKSBEHANDLERE, () => HttpResponse.json(saksbehandlereForSaksliste)),
+    );
   },
+
   args: {
     brukernavn: 'P123456',
     oppgave: {

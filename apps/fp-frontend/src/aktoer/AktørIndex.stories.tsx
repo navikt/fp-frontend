@@ -81,45 +81,39 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.get(FagsakUrl.AKTOER_INFO, () => HttpResponse.json(AKTØR_INFO)),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
+      http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+      http.get(FagsakUrl.AKTOER_INFO, () => HttpResponse.json(AKTØR_INFO)),
+    );
   },
 };
 
 export const IngenFagsaker: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.get(FagsakUrl.AKTOER_INFO, () =>
-          HttpResponse.json({
-            fagsaker: [],
-            person: { ...PERSON, aktørId: undefined },
-          } satisfies Aktor),
-        ),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
+      http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+      http.get(FagsakUrl.AKTOER_INFO, () =>
+        HttpResponse.json({
+          fagsaker: [],
+          person: { ...PERSON, aktørId: undefined },
+        } satisfies Aktor),
+      ),
+    );
   },
 };
 
 export const AktørInfoKallFeilet: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.get(FagsakUrl.AKTOER_INFO, () => new HttpResponse(null, { status: 500 })),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
+      http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+      http.get(FagsakUrl.AKTOER_INFO, () => new HttpResponse(null, { status: 500 })),
+    );
   },
 };

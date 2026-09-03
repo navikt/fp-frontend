@@ -43,15 +43,15 @@ const meta = {
   title: 'fagsak/FagsakSearchIndex',
   decorators: [withRouter, withQueryClient],
   component: FagsakSearchIndex,
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.post(getHref(FagsakRel.SEARCH_FAGSAK), () => HttpResponse.json(FAGSAKER)),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+      http.post(getHref(FagsakRel.SEARCH_FAGSAK), () => HttpResponse.json(FAGSAKER)),
+    );
   },
+
   render: function Render() {
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());

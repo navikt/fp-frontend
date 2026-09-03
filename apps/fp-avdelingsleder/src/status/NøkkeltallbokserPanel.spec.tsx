@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, within } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import type { BehandlingType } from '@navikt/fp-types';
 
@@ -11,8 +10,7 @@ const { Default } = composeStories(stories);
 
 describe('NøkkeltallbokserPanel', () => {
   it('skal vise nøkkeltallbokser', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('Status')).toBeInTheDocument();
 
@@ -43,8 +41,7 @@ describe('NøkkeltallbokserPanel', () => {
   });
 
   it('skal velge bort foreldrepenger i filter', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('Status')).toBeInTheDocument();
 

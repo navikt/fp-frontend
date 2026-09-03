@@ -32,45 +32,41 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.TIDLIGERE_RESERVERTE, () =>
-          HttpResponse.json([
-            {
-              id: 1,
-              personnummer: '334342323',
-              navn: 'Espen Utvikler',
-              saksnummer: '13232323',
-              oppgaveBehandlingStatus: 'UNDER_ARBEID',
-              reservasjonStatus: {
-                erReservert: true,
-                reservertAvNavn: 'Ola Nordmann',
-              },
-              andreKriterier: [],
-              behandlingId: '1',
-              behandlingsfrist: '2024-01-01',
-              behandlingstype: 'BT-002',
-              erTilSaksbehandling: true,
-              fagsakYtelseType: 'FP',
-              opprettetTidspunkt: '2024-01-01',
-              system: 'FPSAK',
-            } satisfies OppgaveDtoMedStatus,
-          ]),
-        ),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.get(LosUrl.TIDLIGERE_RESERVERTE, () =>
+        HttpResponse.json([
+          {
+            id: 1,
+            personnummer: '334342323',
+            navn: 'Espen Utvikler',
+            saksnummer: '13232323',
+            oppgaveBehandlingStatus: 'UNDER_ARBEID',
+            reservasjonStatus: {
+              erReservert: true,
+              reservertAvNavn: 'Ola Nordmann',
+            },
+            andreKriterier: [],
+            behandlingId: '1',
+            behandlingsfrist: '2024-01-01',
+            behandlingstype: 'BT-002',
+            erTilSaksbehandling: true,
+            fagsakYtelseType: 'FP',
+            opprettetTidspunkt: '2024-01-01',
+            system: 'FPSAK',
+          } satisfies OppgaveDtoMedStatus,
+        ]),
+      ),
+    );
   },
 };
 
 export const IngenBehandlinger: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json<OppgaveDtoMedStatus[]>([])),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.get(LosUrl.TIDLIGERE_RESERVERTE, () => HttpResponse.json<OppgaveDtoMedStatus[]>([])),
+    );
   },
 };

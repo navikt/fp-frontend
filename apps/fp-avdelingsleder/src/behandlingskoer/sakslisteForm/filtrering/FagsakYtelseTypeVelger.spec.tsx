@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './FagsakYtelseTypeVelger.stories';
 
@@ -9,15 +8,14 @@ const { Default } = composeStories(stories);
 
 describe('FagsakYtelseTypeVelger', () => {
   it('skal vise checkboxer for stønadstyper og så velge engangsstønad', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    const { getByLabelText } = render(<Default />);
+    await Default.run();
     expect(await screen.findByText('Stønadstype')).toBeInTheDocument();
-    expect(getByLabelText('Foreldrepenger')).toBeChecked();
-    expect(getByLabelText('Engangsstønad')).toBeChecked();
+    expect(screen.getByLabelText('Foreldrepenger')).toBeChecked();
+    expect(screen.getByLabelText('Engangsstønad')).toBeChecked();
 
     await userEvent.click(screen.getByText('Engangsstønad'));
 
-    await waitFor(() => expect(getByLabelText('Engangsstønad')).not.toBeChecked());
-    expect(getByLabelText('Foreldrepenger')).toBeChecked();
+    await waitFor(() => expect(screen.getByLabelText('Engangsstønad')).not.toBeChecked());
+    expect(screen.getByLabelText('Foreldrepenger')).toBeChecked();
   });
 });

@@ -1,6 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
+import { screen } from '@testing-library/react';
 
 import * as stories from './OppgaveJournalføringIndex.stories';
 
@@ -8,8 +7,7 @@ const { ViseOppgaverIListe, IngenOppgaver } = composeStories(stories);
 
 describe('OppgaveJournalføringIndex', () => {
   it('skal vise en liste med oppgaver', async () => {
-    applyRequestHandlers(ViseOppgaverIListe.parameters['msw'] as MswParameters['msw']);
-    render(<ViseOppgaverIListe />);
+    await ViseOppgaverIListe.run();
     expect(await screen.findByText('Journalføring')).toBeInTheDocument();
 
     // Tabell overskrift
@@ -30,8 +28,7 @@ describe('OppgaveJournalføringIndex', () => {
   });
 
   it('skal vise ingen oppgaver', async () => {
-    applyRequestHandlers(IngenOppgaver.parameters['msw'] as MswParameters['msw']);
-    render(<IngenOppgaver />);
+    await IngenOppgaver.run();
     expect(await screen.findByText('Fant ingen journalføringsoppgaver')).toBeInTheDocument();
   });
 });

@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 import { expect } from 'vitest';
 
 import * as api from '@navikt/fp-los-felles';
@@ -13,8 +12,7 @@ const { Default } = composeStories(stories);
 describe('NotatModal', () => {
   it('skal legge til notat på reservasjon', async () => {
     const spy = vi.spyOn(api, 'flyttReservasjon');
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('Legg til notat på reservasjon')).toBeInTheDocument();
 

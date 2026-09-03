@@ -126,20 +126,20 @@ const meta = {
   title: 'fagsak/FagsakIndex',
   decorators: [withIntl, withQueryClient, withRequestPendingProvider],
   component: FagsakIndex,
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
-        http.get(getHref(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(FAGSAK)),
-        http.get(getHref(FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE), () => HttpResponse.json(fagsakFpTilbake)),
-        http.post(BehandlingUrl.BEHANDLING, () => HttpResponse.json(behandling)),
-        http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json(oppgaverForFagsaker)),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
+      http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+      http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
+      http.get(getHref(FagsakRel.FETCH_FAGSAK), () => HttpResponse.json(FAGSAK)),
+      http.get(getHref(FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE), () => HttpResponse.json(fagsakFpTilbake)),
+      http.post(BehandlingUrl.BEHANDLING, () => HttpResponse.json(behandling)),
+      http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json(oppgaverForFagsaker)),
+    );
   },
+
   render: function Render() {
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());

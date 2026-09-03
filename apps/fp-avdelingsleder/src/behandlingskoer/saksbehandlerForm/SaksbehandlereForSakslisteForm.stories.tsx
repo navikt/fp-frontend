@@ -48,14 +48,13 @@ const SbhKari = {
 };
 
 export const IngenSaksbehandlere: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.HENT_GRUPPER, () => HttpResponse.json()),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.HENT_GRUPPER, () => HttpResponse.json()),
+      http.post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
+    );
   },
+
   args: {
     valgtSaksliste: {
       sakslisteId: 1,
@@ -78,14 +77,13 @@ export const IngenSaksbehandlere: Story = {
 };
 
 export const ToSaksbehandlere: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.HENT_GRUPPER, () => HttpResponse.json()),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.HENT_GRUPPER, () => HttpResponse.json()),
+      http.post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
+    );
   },
+
   args: {
     valgtSaksliste: lagNySaksliste({
       saksbehandlere: [SbhSteffen],
@@ -95,14 +93,13 @@ export const ToSaksbehandlere: Story = {
 };
 
 export const TreSaksbehandlere: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.HENT_GRUPPER, () => HttpResponse.json()),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.HENT_GRUPPER, () => HttpResponse.json()),
+      http.post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
+    );
   },
+
   args: {
     valgtSaksliste: lagNySaksliste({
       saksbehandlere: [SbhSteffen],
@@ -112,75 +109,74 @@ export const TreSaksbehandlere: Story = {
 };
 
 export const SaksbehandlereSomErGruppert: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.HENT_GRUPPER, () =>
-          HttpResponse.json({
-            saksbehandlerGrupper: [
-              {
-                gruppeId: 1001,
-                gruppeNavn: 'Gruppe 1',
-                saksbehandlere: [
-                  SbhSteffen,
-                  SbhEspen,
-                  {
-                    brukerIdent: 'A123456',
-                    navn: 'Anders Utvikler',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                  {
-                    brukerIdent: 'T123421',
-                    navn: 'Jens-Otto Techlead',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                  {
-                    brukerIdent: 'M00000',
-                    navn: 'Morgan Designer',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                  {
-                    brukerIdent: 'S00001',
-                    navn: 'Tor på Spor',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                  {
-                    brukerIdent: 'M00002',
-                    navn: 'Marte',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                  SbhKari,
-                ],
-              },
-              {
-                gruppeId: 1002,
-                gruppeNavn: 'Drammen',
-                saksbehandlere: [
-                  {
-                    brukerIdent: 'M00002',
-                    navn: 'Marte',
-                    ansattAvdeling: 'Avdeling Å',
-                  },
-                  SbhKari,
-                ],
-              },
-              {
-                gruppeId: 1003,
-                gruppeNavn: 'Besluttergruppen',
-                saksbehandlere: [SbhSteffen, SbhEspen, SbhKari],
-              },
-              {
-                gruppeId: 1004,
-                gruppeNavn: 'Hastefolket',
-                saksbehandlere: [SbhSteffen, SbhEspen],
-              },
-            ],
-          }),
-        ),
-        http.post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.HENT_GRUPPER, () =>
+        HttpResponse.json({
+          saksbehandlerGrupper: [
+            {
+              gruppeId: 1001,
+              gruppeNavn: 'Gruppe 1',
+              saksbehandlere: [
+                SbhSteffen,
+                SbhEspen,
+                {
+                  brukerIdent: 'A123456',
+                  navn: 'Anders Utvikler',
+                  ansattAvdeling: 'Avdeling Å',
+                },
+                {
+                  brukerIdent: 'T123421',
+                  navn: 'Jens-Otto Techlead',
+                  ansattAvdeling: 'Avdeling Å',
+                },
+                {
+                  brukerIdent: 'M00000',
+                  navn: 'Morgan Designer',
+                  ansattAvdeling: 'Avdeling Å',
+                },
+                {
+                  brukerIdent: 'S00001',
+                  navn: 'Tor på Spor',
+                  ansattAvdeling: 'Avdeling Å',
+                },
+                {
+                  brukerIdent: 'M00002',
+                  navn: 'Marte',
+                  ansattAvdeling: 'Avdeling Å',
+                },
+                SbhKari,
+              ],
+            },
+            {
+              gruppeId: 1002,
+              gruppeNavn: 'Drammen',
+              saksbehandlere: [
+                {
+                  brukerIdent: 'M00002',
+                  navn: 'Marte',
+                  ansattAvdeling: 'Avdeling Å',
+                },
+                SbhKari,
+              ],
+            },
+            {
+              gruppeId: 1003,
+              gruppeNavn: 'Besluttergruppen',
+              saksbehandlere: [SbhSteffen, SbhEspen, SbhKari],
+            },
+            {
+              gruppeId: 1004,
+              gruppeNavn: 'Hastefolket',
+              saksbehandlere: [SbhSteffen, SbhEspen],
+            },
+          ],
+        }),
+      ),
+      http.post(LosUrl.LAGRE_SAKSLISTE_SAKSBEHANDLER, () => new HttpResponse(null, { status: 200 })),
+    );
   },
+
   args: {
     valgtSaksliste: lagNySaksliste({
       saksbehandlere: [SbhSteffen],

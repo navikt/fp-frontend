@@ -113,157 +113,141 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
 });
 
 export const ViseOppgaverIListe: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () =>
-          HttpResponse.json([
-            {
-              journalpostId: '12345125',
-              aktørId: '9996923456799',
-              fødselsnummer: '12048714373',
-              opprettetDato: '2022-01-01',
-              frist: '2022-02-01',
-              ytelseType: 'FP',
-              enhetId: '4016',
-              beskrivelse: 'Inntektsmelding',
-              reservertAv: 'Y654321',
-              kilde: 'LOKAL',
-            },
-            {
-              journalpostId: '245745871',
-              aktørId: '274572457624',
-              fødselsnummer: '12018847182',
-              opprettetDato: '2022-01-01',
-              frist: '2022-03-01',
-              ytelseType: 'SVP',
-              enhetId: '4008',
-              beskrivelse: 'Inntektsmelding',
-              kilde: 'GOSYS',
-            },
-            {
-              journalpostId: '345681257',
-              opprettetDato: '2022-01-01',
-              frist: '2022-01-01',
-              ytelseType: 'FP',
-              enhetId: '4008',
-              beskrivelse: 'Søknad',
-              reservertAv: 'X123456',
-              kilde: 'GOSYS',
-            },
-          ]),
-        ),
-        http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, () =>
-          HttpResponse.json(getDetaljertJournalpostMal(true, 'MOTTATT')),
-        ),
-        http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
-        http.post(FpmottakUrl.HENT_BRUKER, () =>
-          HttpResponse.json({ navn: 'Søker Søkersen', fødselsnummer: '15529115072' }),
-        ),
-        http.post(FpmottakUrl.OPPDATER_MED_BRUKER, () =>
-          HttpResponse.json(getDetaljertJournalpostMal(true, 'MOTTATT')),
-        ),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () =>
+        HttpResponse.json([
+          {
+            journalpostId: '12345125',
+            aktørId: '9996923456799',
+            fødselsnummer: '12048714373',
+            opprettetDato: '2022-01-01',
+            frist: '2022-02-01',
+            ytelseType: 'FP',
+            enhetId: '4016',
+            beskrivelse: 'Inntektsmelding',
+            reservertAv: 'Y654321',
+            kilde: 'LOKAL',
+          },
+          {
+            journalpostId: '245745871',
+            aktørId: '274572457624',
+            fødselsnummer: '12018847182',
+            opprettetDato: '2022-01-01',
+            frist: '2022-03-01',
+            ytelseType: 'SVP',
+            enhetId: '4008',
+            beskrivelse: 'Inntektsmelding',
+            kilde: 'GOSYS',
+          },
+          {
+            journalpostId: '345681257',
+            opprettetDato: '2022-01-01',
+            frist: '2022-01-01',
+            ytelseType: 'FP',
+            enhetId: '4008',
+            beskrivelse: 'Søknad',
+            reservertAv: 'X123456',
+            kilde: 'GOSYS',
+          },
+        ]),
+      ),
+      http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, () =>
+        HttpResponse.json(getDetaljertJournalpostMal(true, 'MOTTATT')),
+      ),
+      http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
+      http.post(FpmottakUrl.HENT_BRUKER, () =>
+        HttpResponse.json({ navn: 'Søker Søkersen', fødselsnummer: '15529115072' }),
+      ),
+      http.post(FpmottakUrl.OPPDATER_MED_BRUKER, () => HttpResponse.json(getDetaljertJournalpostMal(true, 'MOTTATT'))),
+    );
   },
 };
 
 export const ViseOppgaverUtenBruker: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () =>
-          HttpResponse.json([
-            {
-              journalpostId: '12345125',
-              aktørId: '9996923456799',
-              fødselsnummer: '12048714373',
-              opprettetDato: '2022-01-01',
-              frist: '2022-02-01',
-              ytelseType: 'FP',
-              enhetId: '4016',
-              beskrivelse: 'Inntektsmelding',
-              reservertAv: 'X123456',
-              kilde: 'GOSYS',
-            },
-            {
-              journalpostId: '245745871',
-              aktørId: '274572457624',
-              fødselsnummer: '12018847182',
-              opprettetDato: '2022-01-01',
-              frist: '2022-03-01',
-              ytelseType: 'SVP',
-              enhetId: '4008',
-              beskrivelse: 'Inntektsmelding',
-              reservertAv: 'Y654321',
-              kilde: 'LOKAL',
-            },
-            {
-              journalpostId: '345681257',
-              opprettetDato: '2022-01-01',
-              frist: '2022-01-01',
-              ytelseType: 'FP',
-              enhetId: '4008',
-              beskrivelse: 'Søknad',
-              kilde: 'GOSYS',
-            },
-          ]),
-        ),
-        http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, () =>
-          HttpResponse.json(getDetaljertJournalpostMal(false, 'MOTTATT')),
-        ),
-        http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
-        http.post(FpmottakUrl.HENT_BRUKER, () =>
-          HttpResponse.json({ navn: 'Søker Søkersen', fødselsnummer: '15529115072' }),
-        ),
-        http.post(FpmottakUrl.OPPDATER_MED_BRUKER, () =>
-          HttpResponse.json(getDetaljertJournalpostMal(true, 'MOTTATT')),
-        ),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () =>
+        HttpResponse.json([
+          {
+            journalpostId: '12345125',
+            aktørId: '9996923456799',
+            fødselsnummer: '12048714373',
+            opprettetDato: '2022-01-01',
+            frist: '2022-02-01',
+            ytelseType: 'FP',
+            enhetId: '4016',
+            beskrivelse: 'Inntektsmelding',
+            reservertAv: 'X123456',
+            kilde: 'GOSYS',
+          },
+          {
+            journalpostId: '245745871',
+            aktørId: '274572457624',
+            fødselsnummer: '12018847182',
+            opprettetDato: '2022-01-01',
+            frist: '2022-03-01',
+            ytelseType: 'SVP',
+            enhetId: '4008',
+            beskrivelse: 'Inntektsmelding',
+            reservertAv: 'Y654321',
+            kilde: 'LOKAL',
+          },
+          {
+            journalpostId: '345681257',
+            opprettetDato: '2022-01-01',
+            frist: '2022-01-01',
+            ytelseType: 'FP',
+            enhetId: '4008',
+            beskrivelse: 'Søknad',
+            kilde: 'GOSYS',
+          },
+        ]),
+      ),
+      http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, () =>
+        HttpResponse.json(getDetaljertJournalpostMal(false, 'MOTTATT')),
+      ),
+      http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
+      http.post(FpmottakUrl.HENT_BRUKER, () =>
+        HttpResponse.json({ navn: 'Søker Søkersen', fødselsnummer: '15529115072' }),
+      ),
+      http.post(FpmottakUrl.OPPDATER_MED_BRUKER, () => HttpResponse.json(getDetaljertJournalpostMal(true, 'MOTTATT'))),
+    );
   },
 };
 
 export const SøkeOppJournalpostSomLiggerPåAnnenSak: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () => HttpResponse.json([])),
-        http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, () =>
-          HttpResponse.json(getDetaljertJournalpostMal(true, 'JOURNALFOERT')),
-        ),
-        http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () => HttpResponse.json([])),
+      http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, () =>
+        HttpResponse.json(getDetaljertJournalpostMal(true, 'JOURNALFOERT')),
+      ),
+      http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
+    );
   },
 };
 
 export const FinnerIkkeJournalpostVedSøkOgIngenOppgaver: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () => HttpResponse.json([])),
-        http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, () => HttpResponse.json(undefined)),
-        http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () => HttpResponse.json([])),
+      http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, () => HttpResponse.json(undefined)),
+      http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
+    );
   },
 };
 
 export const IngenOppgaver: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () => HttpResponse.json([])),
-        http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, () => HttpResponse.json(undefined)),
-        http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
-        http.post(FpmottakUrl.HENT_BRUKER, () =>
-          HttpResponse.json({ navn: 'Søker Søkersen', fødselsnummer: '15529115072' }),
-        ),
-        http.post(FpmottakUrl.OPPDATER_MED_BRUKER, () =>
-          HttpResponse.json(getDetaljertJournalpostMal(true, 'MOTTATT')),
-        ),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () => HttpResponse.json([])),
+      http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, () => HttpResponse.json(undefined)),
+      http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '12345678' })),
+      http.post(FpmottakUrl.HENT_BRUKER, () =>
+        HttpResponse.json({ navn: 'Søker Søkersen', fødselsnummer: '15529115072' }),
+      ),
+      http.post(FpmottakUrl.OPPDATER_MED_BRUKER, () => HttpResponse.json(getDetaljertJournalpostMal(true, 'MOTTATT'))),
+    );
   },
 };

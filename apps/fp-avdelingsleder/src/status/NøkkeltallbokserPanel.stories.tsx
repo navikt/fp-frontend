@@ -49,18 +49,19 @@ const meta = {
   title: 'los/avdelingsleder/status/NøkkeltallbokserPanel',
   component: NøkkeltallbokserPanel,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
-        http.get(encodeURI(LosUrl.HENT_OPPGAVER_FOR_AVDELING), () => HttpResponse.json(OPPGAVER_FOR_AVDELING)),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+      http.get(encodeURI(LosUrl.HENT_OPPGAVER_FOR_AVDELING), () => HttpResponse.json(OPPGAVER_FOR_AVDELING)),
+    );
   },
+
   args: {
     valgtAvdelingEnhet: '1',
     children: <div>Avdelingsvelger</div>,
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const alleKodeverk = useQuery(losKodeverkOptions()).data;

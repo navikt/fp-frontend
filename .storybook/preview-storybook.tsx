@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react';
 import dayjs from 'dayjs';
-import { initialize, mswLoader } from 'msw-storybook-addon';
+import { mswLoader } from 'msw-storybook-addon/csf3';
+import type { SetupWorker } from 'msw/browser';
 
 import { withThemeDecorator } from '@navikt/fp-storybook-utils';
 
@@ -33,15 +34,26 @@ export const globalTypes = {
 };
 
 const preview: Preview = {
-  beforeAll: async () => {
-    initialize({
-      onUnhandledRequest: 'bypass',
-      serviceWorker: {
-        url: './mockServiceWorker.js',
-      },
-    });
-  },
-  loaders: [mswLoader],
+  loaders: [
+    mswLoader(async () => {
+      if (import.meta.env.MODE === 'test') {
+        const { setupServer } = await import('msw/node');
+        const server = setupServer();
+        server.listen({ onUnhandledRequest: 'bypass' });
+        return server as unknown as SetupWorker;
+      }
+
+      const { setupWorker } = await import('msw/browser');
+      const worker = setupWorker();
+      await worker.start({
+        onUnhandledRequest: 'bypass',
+        serviceWorker: {
+          url: './mockServiceWorker.js',
+        },
+      });
+      return worker;
+    }),
+  ],
   decorators,
   globalTypes,
 };

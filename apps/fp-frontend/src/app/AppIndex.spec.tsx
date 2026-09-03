@@ -1,22 +1,29 @@
 import { Context as ResponsiveContext } from 'react-responsive';
 
-import { composeStories } from '@storybook/react';
-import { render, screen, waitFor, within } from '@testing-library/react';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
+import { composeStory } from '@storybook/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import { expect } from 'vitest';
 
 import * as stories from './AppIndex.stories';
 
-const { Default } = composeStories(stories);
+const ResponsiveDefault = composeStory(
+  stories.Default,
+  stories.default,
+  {
+    decorators: [
+      Story => (
+        <ResponsiveContext value={{ width: 1000 }}>
+          <Story />
+        </ResponsiveContext>
+      ),
+    ],
+  },
+  'ResponsiveDefault',
+);
 
 describe('AppIndex', () => {
   it('skal rendre app med korrekt informasjon', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(
-      <ResponsiveContext value={{ width: 1000 }}>
-        <Default />
-      </ResponsiveContext>,
-    );
+    await ResponsiveDefault.run();
 
     expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
     expect(screen.getByText('Sara Saksbehandler')).toBeInTheDocument();

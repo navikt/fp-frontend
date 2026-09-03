@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './FagsakSearchIndex.stories';
 
@@ -9,8 +8,7 @@ const { Default } = composeStories(stories);
 
 describe('FagsakSearchIndex', () => {
   it('skal søke med saksnummer og få opp treff i liste', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    render(<Default />);
+    await Default.run();
 
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
 

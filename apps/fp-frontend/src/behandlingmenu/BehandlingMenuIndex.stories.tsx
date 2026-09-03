@@ -73,15 +73,19 @@ const meta = {
   title: 'fagsak/BehandlingMenuIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: BehandlingMenuIndex,
-  parameters: {
-    msw: {
-      handlers: [...HANDLERS, http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak))],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      ...HANDLERS,
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+    );
   },
+
   args: {
     setBehandling: action('button-click'),
     hentOgSettBehandling: action('button-click'),
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());
@@ -110,19 +114,18 @@ export const ValgNårBehandlingIkkeErValgt: Story = {
 };
 
 export const ValgNårVeileder: Story = {
-  parameters: {
-    msw: {
-      handlers: [
-        ...HANDLERS,
-        http.get(FagsakUrl.INIT_FETCH, () =>
-          HttpResponse.json({
-            ...initFetchFpsak,
-            innloggetBruker: { ...initFetchFpsak.innloggetBruker, kanVeilede: true },
-          }),
-        ),
-      ],
-    },
+  beforeEach({ msw }) {
+    msw.use(
+      ...HANDLERS,
+      http.get(FagsakUrl.INIT_FETCH, () =>
+        HttpResponse.json({
+          ...initFetchFpsak,
+          innloggetBruker: { ...initFetchFpsak.innloggetBruker, kanVeilede: true },
+        }),
+      ),
+    );
   },
+
   args: {
     behandlingUuid: '1',
     fagsakData: new FagsakData({

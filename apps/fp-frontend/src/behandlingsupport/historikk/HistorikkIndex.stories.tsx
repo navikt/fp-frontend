@@ -35,16 +35,16 @@ const meta = {
   title: 'fagsak/HistorikkIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: HistorikkIndex,
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
+      http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+      http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
+    );
   },
+
   args: {
     saksnummer: '1',
     toggleVisUtvidetBehandlingDetaljerKnapp: (
@@ -54,6 +54,7 @@ const meta = {
       />
     ),
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());

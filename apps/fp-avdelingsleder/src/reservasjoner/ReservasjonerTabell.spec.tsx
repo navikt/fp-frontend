@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './ReservasjonerTabell.stories';
 
@@ -9,16 +8,14 @@ const { ViseAtIngenReservasjonerBleFunnet, VisTabellMedReservasjoner } = compose
 
 describe('ReservasjonerTabell', () => {
   it('skal vise tekst som viser at ingen reservasjoner er lagt til', async () => {
-    applyRequestHandlers(ViseAtIngenReservasjonerBleFunnet.parameters['msw'] as MswParameters['msw']);
-    render(<ViseAtIngenReservasjonerBleFunnet />);
+    await ViseAtIngenReservasjonerBleFunnet.run();
 
     expect(await screen.findByText('Reservasjoner for avdelingen')).toBeInTheDocument();
     expect(await screen.findByText('Ingen reservasjoner funnet')).toBeInTheDocument();
   });
 
   it('skal vise alle reservasjoner i tabell', async () => {
-    applyRequestHandlers(VisTabellMedReservasjoner.parameters['msw'] as MswParameters['msw']);
-    render(<VisTabellMedReservasjoner />);
+    await VisTabellMedReservasjoner.run();
 
     expect(await screen.findByText('Reservasjoner for avdelingen')).toBeInTheDocument();
     expect(await screen.findAllByText('Espen Utvikler')).toHaveLength(6);
@@ -31,9 +28,8 @@ describe('ReservasjonerTabell', () => {
   });
 
   it('skal filtrere reservasjoner ved søk på Espen - skal vise flere innslag fra samme person', async () => {
+    await VisTabellMedReservasjoner.run();
     const user = userEvent.setup();
-    applyRequestHandlers(VisTabellMedReservasjoner.parameters['msw'] as MswParameters['msw']);
-    render(<VisTabellMedReservasjoner />);
 
     expect(await screen.findByText('Reservasjoner for avdelingen')).toBeInTheDocument();
 

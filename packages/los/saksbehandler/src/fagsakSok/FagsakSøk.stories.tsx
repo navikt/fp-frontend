@@ -17,11 +17,11 @@ const meta = {
   title: 'søk/FagsakSøk',
   component: FagsakSøk,
   decorators: [withIntl, withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos))],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)));
   },
+
   args: {
     kanSaksbehandle: true,
     searchResultReceived: true,
@@ -31,6 +31,7 @@ const meta = {
     selectOppgaveCallback: action('selectOppgaveCallback'),
     resetSearch: action('resetSearch'),
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const alleKodeverk = useQuery(losKodeverkOptions()).data;

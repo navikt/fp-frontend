@@ -1,6 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
+import { screen } from '@testing-library/react';
 
 import * as stories from './FagsakProfileIndex.stories';
 
@@ -8,8 +7,7 @@ const { BehandlingErValgt, BehandlingErIkkeValgt } = composeStories(stories);
 
 describe('FagsakProfileIndex', () => {
   it('skal vise en behandling i liste når behandling er valgt', async () => {
-    applyRequestHandlers(BehandlingErValgt.parameters['msw'] as MswParameters['msw']);
-    render(<BehandlingErValgt />);
+    await BehandlingErValgt.run();
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByText('123 - Under behandling')).toBeInTheDocument();
@@ -22,8 +20,7 @@ describe('FagsakProfileIndex', () => {
   });
 
   it('skal vise alle behandlinger i liste når ingen behandling er valgt', async () => {
-    applyRequestHandlers(BehandlingErIkkeValgt.parameters['msw'] as MswParameters['msw']);
-    render(<BehandlingErIkkeValgt />);
+    await BehandlingErIkkeValgt.run();
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
     expect(screen.getByText('123 - Under behandling')).toBeInTheDocument();

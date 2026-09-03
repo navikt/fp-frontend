@@ -130,17 +130,17 @@ const meta = {
   title: 'fagsak/TotrinnskontrollIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: TotrinnskontrollIndex,
-  parameters: {
-    msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
-        http.get(getHref(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json([])),
-      ],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+      http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
+      http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+      http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
+      http.get(getHref(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json([])),
+    );
   },
+
   args: {
     fagsakData: new FagsakData(FAGSAK),
     valgtBehandlingUuid: '1',
@@ -152,6 +152,7 @@ const meta = {
       />
     ),
   },
+
   render: function Render(props) {
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());

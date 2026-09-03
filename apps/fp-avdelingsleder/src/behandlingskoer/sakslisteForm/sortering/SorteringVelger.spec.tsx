@@ -1,7 +1,6 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './SorteringVelger.stories';
 
@@ -13,8 +12,7 @@ const {
 
 describe('SorteringVelger', () => {
   it('skal vise tre sorteringsvalg når mange behandlingstyper er valgt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters['msw'] as MswParameters['msw']);
-    render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);
+    await SorteringsvelgerNårMangeBehandlingstyperErValgt.run();
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(await screen.findByLabelText('Dato for behandlingsfrist')).toBeChecked();
     expect(screen.getByLabelText('Dato for opprettelse av behandling')).not.toBeChecked();
@@ -24,8 +22,7 @@ describe('SorteringVelger', () => {
   });
 
   it('skal vise datovelger der dynamisk periode ikke er valgt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters['msw'] as MswParameters['msw']);
-    render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);
+    await SorteringsvelgerNårMangeBehandlingstyperErValgt.run();
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(await screen.findByText('Ta kun med behandlinger med dato')).toBeInTheDocument();
     expect(screen.getByText('F.o.m.')).toBeInTheDocument();
@@ -35,8 +32,7 @@ describe('SorteringVelger', () => {
   });
 
   it('skal vise datovelger der dynamisk periode er valgt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårDynamiskPeriodeErValgt.parameters['msw'] as MswParameters['msw']);
-    render(<SorteringsvelgerNårDynamiskPeriodeErValgt />);
+    await SorteringsvelgerNårDynamiskPeriodeErValgt.run();
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(await screen.findByText('Ta kun med behandlinger med dato')).toBeInTheDocument();
     expect(screen.getByText('F.o.m.')).toBeInTheDocument();
@@ -46,8 +42,7 @@ describe('SorteringVelger', () => {
   });
 
   it('skal vise vis beløpvelger når Feilutbetalt beløp er valgt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw'] as MswParameters['msw']);
-    render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
+    await SorteringsvelgerNårKunTilbakekrevingErValgt.run();
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Feilutbetalt beløp'));
@@ -58,8 +53,7 @@ describe('SorteringVelger', () => {
   });
 
   it('skal vise fem sorteringsvalg når kun tilbakekreving er valgt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw'] as MswParameters['msw']);
-    render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
+    await SorteringsvelgerNårKunTilbakekrevingErValgt.run();
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(screen.getByLabelText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(screen.getByLabelText('Dato for opprettelse av behandling')).toBeInTheDocument();
@@ -69,8 +63,7 @@ describe('SorteringVelger', () => {
   });
 
   it('skal resette sortering til default BEHFRIST når gjeldende sortering er ugyldig', async () => {
-    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw'] as MswParameters['msw']);
-    render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
+    await SorteringsvelgerNårKunTilbakekrevingErValgt.run();
     expect(await screen.findByText('Ta kun med behandlinger mellom')).toBeInTheDocument();
 
     await userEvent.click(screen.getByTestId('endre-behandlingstyper'));

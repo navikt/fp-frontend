@@ -1,8 +1,7 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import dayjs from 'dayjs';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './UtvalgskriterierForSakslisteForm.stories';
 
@@ -10,19 +9,17 @@ const { MedGittNavn } = composeStories(stories);
 
 describe('UtvalgskriterierForSakslisteForm', () => {
   it('skal vise sakslistenavn som saksbehandler har skrive inn', async () => {
-    applyRequestHandlers(MedGittNavn.parameters['msw'] as MswParameters['msw']);
-    render(<MedGittNavn />);
+    await MedGittNavn.run();
     expect(await screen.findByText('Navn')).toBeInTheDocument();
     expect(await screen.findByLabelText('Navn')).toHaveValue('liste');
   });
 
   it('skal vise feilmelding når en fjerner nok tegn til at navnet blir færre enn 3 tegn langt', async () => {
-    applyRequestHandlers(MedGittNavn.parameters['msw'] as MswParameters['msw']);
-    const { getByLabelText } = render(<MedGittNavn />);
+    await MedGittNavn.run();
 
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
-    const navnInput = getByLabelText('Navn');
+    const navnInput = screen.getByLabelText('Navn');
     await userEvent.type(navnInput, '{Backspace}{Backspace}{Backspace}');
 
     const lagreKnapp = screen.getByRole('button', { name: /Lagre/i });
@@ -32,8 +29,7 @@ describe('UtvalgskriterierForSakslisteForm', () => {
   });
 
   it('skal vise feilmelding når en skriver inn bokstaver i fom-datofeltet', async () => {
-    applyRequestHandlers(MedGittNavn.parameters['msw'] as MswParameters['msw']);
-    render(<MedGittNavn />);
+    await MedGittNavn.run();
 
     expect(await screen.findByText('Utvalgskriterier')).toBeInTheDocument();
 
@@ -50,8 +46,7 @@ describe('UtvalgskriterierForSakslisteForm', () => {
   });
 
   it('skal vise feilmelding når en skriver inn bokstaver i tom-datofeltet', async () => {
-    applyRequestHandlers(MedGittNavn.parameters['msw'] as MswParameters['msw']);
-    render(<MedGittNavn />);
+    await MedGittNavn.run();
 
     expect(await screen.findByText('Utvalgskriterier')).toBeInTheDocument();
 
@@ -67,8 +62,7 @@ describe('UtvalgskriterierForSakslisteForm', () => {
   });
 
   it('skal vise utrekna dato når det er skrive inn eit gyldig antall dager', async () => {
-    applyRequestHandlers(MedGittNavn.parameters['msw'] as MswParameters['msw']);
-    render(<MedGittNavn />);
+    await MedGittNavn.run();
 
     expect(await screen.findByText('Utvalgskriterier')).toBeInTheDocument();
 

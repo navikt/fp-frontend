@@ -1,6 +1,5 @@
 import { composeStories } from '@storybook/react';
 import { screen } from '@testing-library/react';
-import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './LedigOppgaveTabell.stories';
 
@@ -8,7 +7,6 @@ const { Default, TomOppgaveTabell } = composeStories(stories);
 
 describe('LedigOppgaveTabell', () => {
   it('skal vise tabell med behandlinger', async () => {
-    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     await Default.run();
 
     expect(await screen.findByText('Neste i køen')).toBeInTheDocument();
@@ -20,7 +18,6 @@ describe('LedigOppgaveTabell', () => {
   });
 
   it('skal vise tom tabell når det ikke er behandlinger for køen', async () => {
-    applyRequestHandlers(TomOppgaveTabell.parameters['msw'] as MswParameters['msw']);
     await TomOppgaveTabell.run();
     expect(await screen.findByText('Neste i køen')).toBeInTheDocument();
     expect(await screen.findByText('0 totalt')).toBeInTheDocument();

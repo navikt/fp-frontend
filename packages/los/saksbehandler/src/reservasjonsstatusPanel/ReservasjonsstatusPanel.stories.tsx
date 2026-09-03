@@ -42,10 +42,9 @@ const meta = {
   title: 'ReservasjonsstatusPanel',
   component: ReservasjonsstatusPanel,
   decorators: [withQueryClient],
-  parameters: {
-    msw: {
-      handlers: [http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json(oppgaver))],
-    },
+
+  beforeEach({ msw }) {
+    msw.use(http.get(LosUrl.OPPGAVER_FOR_FAGSAKER, () => HttpResponse.json(oppgaver)));
   },
 } satisfies Meta<typeof ReservasjonsstatusPanel>;
 export default meta;
