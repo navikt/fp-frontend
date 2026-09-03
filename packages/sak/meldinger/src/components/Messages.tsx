@@ -72,6 +72,7 @@ export const Messages = ({
 
   const formMethods = useForm<FormValues>({
     defaultValues: meldingFormData ?? buildInitialValues(behandling),
+    shouldUnregister: true,
   });
 
   const brevmalkode = useWatch({ control: formMethods.control, name: 'brevmalkode' });

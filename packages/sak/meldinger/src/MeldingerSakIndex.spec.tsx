@@ -1,8 +1,9 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import type { DokumentMalType } from '@navikt/fp-types';
+import { lagFagsakBehandling } from '@navikt/fp-storybook-utils';
+import type { DokumentMalType, DokumentMalTypeFpTilbake } from '@navikt/fp-types';
 
 // EditorJS refererer til `Element` ved modul-lasting, som ikkje finst i JSDOM
 vi.mock('@editorjs/editorjs', () => ({ default: vi.fn() }));
@@ -48,6 +49,35 @@ describe('MeldingerSakIndex', () => {
 
     expect(await screen.findByText('Rediger brev')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Send brev' })).toBeDisabled();
+  });
+
+  it('skal ikke sende fritekst etter bytte til en brevmal uten fritekst', async () => {
+    const lagre = vi.fn();
+    const behandling = lagFagsakBehandling({
+      brevmaler: [
+        {
+          kode: 'INNHEN' satisfies DokumentMalTypeFpTilbake,
+          navn: 'Innhent dokumentasjon',
+          tilgjengelig: true,
+        },
+        {
+          kode: 'FORSAK' satisfies DokumentMalType,
+          navn: 'Forlenget saksbehandlingstid',
+          tilgjengelig: true,
+        },
+      ],
+    });
+    render(<Default behandling={behandling} submitCallback={lagre} />);
+
+    await userEvent.selectOptions(screen.getByLabelText('Mal'), 'INNHEN' satisfies DokumentMalTypeFpTilbake);
+    await userEvent.type(
+      screen.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)'),
+      'Ettersender dokumentasjon',
+    );
+    await userEvent.selectOptions(screen.getByLabelText('Mal'), 'FORSAK' satisfies DokumentMalType);
+    await userEvent.click(screen.getByRole('button', { name: 'Send brev' }));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledWith({ brevmalkode: 'FORSAK' }));
   });
 
   it('skal ikke vise årsaksverdi Barn ikke registrert for Svangerskapspenger', async () => {
