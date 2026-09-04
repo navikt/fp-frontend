@@ -141,11 +141,11 @@ const useAutoSaveDebouncer = () => {
 };
 
 class CustomList extends EditorjsList {
-  // https://github.com/editor-js/list/issues/119 - berre punktliste skal kunne veljast.
-  // Editor.js omset label via i18n-ordboka, så vi må samanlikne med same melding som ordboka blir bygd av.
+  // https://github.com/editor-js/list/issues/119 - berre punktliste skal kunne veljast, so
+  // listestil-vekslarane i blokkinnstillingane ville uansett berre hatt eitt alltid-aktivt val.
+  // Valet mellom listetypar er avgrensa til punktliste via toolbox-konfigen under.
   override renderSettings() {
-    const punktlisteLabel = intl.formatMessage({ id: 'useBrevEditorJs.UnorderedList' });
-    return super.renderSettings().filter(item => 'label' in item && item.label === punktlisteLabel);
+    return [];
   }
 }
 // Denne blir overstyrt for å ikkje strippa vekk a-tags ved lagring.
