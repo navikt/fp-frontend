@@ -107,6 +107,7 @@ const validerPerioder = (
   erMor: boolean,
   aksjonspunkter: Aksjonspunkt[],
   førsteUttaksdato: string,
+  startDatoForPermisjon: string,
   intl: IntlShape,
 ): string | null => {
   const periodeMap = uttakPerioder.map(({ fom, tom }) => [fom, tom]);
@@ -119,13 +120,14 @@ const validerPerioder = (
     fagsak.familiehendelse?.hendelseType === 'FODSL' ? fagsak.familiehendelse.hendelseDato : undefined;
   const brukFødselsdato = erMor && !!fødselsdato && dayjs(fødselsdato).isBefore(førsteUttaksdato);
   const tidligsteDato = brukFødselsdato ? fødselsdato : førsteUttaksdato;
+  const startdatoForValidering = startDatoForPermisjon || førsteUttaksdato;
 
-  if (uttakPerioder.every(up => !dayjs(up.fom).isSame(førsteUttaksdato))) {
+  if (uttakPerioder.every(periode => !dayjs(periode.fom).isSame(startdatoForValidering))) {
     return intl.formatMessage(
       {
         id: 'UttakFaktaDetailForm.ErIkkeLikForsteUttaksdato',
       },
-      { dato: dateFormat(førsteUttaksdato) },
+      { dato: dateFormat(startdatoForValidering) },
     );
   }
 
@@ -216,6 +218,7 @@ export const UttakFaktaForm = ({
       erMor,
       aksjonspunkterForPanel,
       ytelsefordeling.førsteUttaksdato,
+      ytelsefordeling.startDatoForPermisjon,
       intl,
     );
   }
