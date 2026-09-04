@@ -16,6 +16,7 @@ import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
 
@@ -31,17 +32,24 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
 
   const { behandling, fagsak } = useBehandlingDataContext<BehandlingFpTilbake>();
 
+  const skalPanelVisesIMeny = harLenke(behandling, 'FEILUTBETALING_FAKTA');
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.FEILUTBETALING,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: feilutbetalingFakta } = useQuery(api.tilbakekreving.feilutbetalingFaktaOptions(behandling));
-  const { data: feilutbetalingÅrsak } = useQuery(api.tilbakekreving.feilutbetalingÅrsakOptions(behandling));
+  const { data: feilutbetalingFakta } = useQuery(prioriter(api.tilbakekreving.feilutbetalingFaktaOptions(behandling)));
+  const { data: feilutbetalingÅrsak } = useQuery(prioriter(api.tilbakekreving.feilutbetalingÅrsakOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.FEILUTBETALING}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' })}
-      skalPanelVisesIMeny={harLenke(behandling, 'FEILUTBETALING_FAKTA')}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {feilutbetalingFakta && feilutbetalingÅrsak ? (
         <Wrapper

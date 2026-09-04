@@ -9,6 +9,7 @@ import { AnkeResultatProsessIndex } from '@navikt/fp-prosess-anke-resultat';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -23,10 +24,15 @@ export const AnkeResultatProsessStegInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
-  const api = getBehandlingApi(behandling);
-  const { data: ankeVurdering } = useQuery(api.anke.ankeVurderingOptions(behandling));
-
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
+
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.ANKE_RESULTAT,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
+  const api = getBehandlingApi(behandling);
+  const { data: ankeVurdering } = useQuery(prioriter(api.anke.ankeVurderingOptions(behandling)));
 
   return (
     <ProsessDefaultInitPanel

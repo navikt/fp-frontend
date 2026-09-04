@@ -10,6 +10,7 @@ import { isKlageAvvist } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -32,9 +33,14 @@ export const FormKravKlageInstansProsessStegInitPanel = () => {
       avsluttet: b.avsluttet ?? undefined,
     }));
 
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.FORMKRAV_KLAGE_NAV_KLAGEINSTANS,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: klageVurdering, isFetching } = useQuery(api.klage.klageVurderingOptions(behandling));
+  const { data: klageVurdering, isFetching } = useQuery(prioriter(api.klage.klageVurderingOptions(behandling)));
 
   const { mutate: lagreFormkravVurdering } = useMutation({
     mutationFn: (values: FormkravMellomlagretDataType) => api.klage.mellomlagreFormkravVurdering(values),

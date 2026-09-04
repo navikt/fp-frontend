@@ -22,6 +22,7 @@ import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
 
@@ -43,16 +44,23 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const skalPanelVisesIMeny = harLenke(behandling, 'BEREGNINGSGRUNNLAG');
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.BEREGNING,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
+  const { data: beregningsgrunnlag, isFetching } = useQuery(prioriter(api.beregningsgrunnlagOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.BEREGNING}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Beregning' })}
-      skalPanelVisesIMeny={harLenke(behandling, 'BEREGNINGSGRUNNLAG')}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {isFetching ? (
         <LoadingPanel />

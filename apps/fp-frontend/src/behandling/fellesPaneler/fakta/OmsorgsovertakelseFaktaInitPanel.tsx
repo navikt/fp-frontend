@@ -11,6 +11,7 @@ import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET, // Aktivt aksjonspunkt
@@ -33,10 +34,15 @@ export const OmsorgsovertakelseFaktaInitPanel = () => {
   const { behandling } = useBehandlingDataContext();
 
   const skalPanelVisesIMeny = harLenke(behandling, 'FAKTA_OMSORGSOVERTAKELSE');
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.OMSORGSOVERTAKELSE,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: omsorgsovertakelse } = useQuery(api.faktaOmsorgsovertakelseOptions(behandling));
+  const { data: omsorgsovertakelse } = useQuery(prioriter(api.faktaOmsorgsovertakelseOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel

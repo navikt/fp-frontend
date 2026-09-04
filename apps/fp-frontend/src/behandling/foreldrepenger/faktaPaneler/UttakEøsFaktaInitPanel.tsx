@@ -11,6 +11,7 @@ import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
@@ -24,15 +25,22 @@ export const UttakEøsFaktaInitPanel = () => {
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const skalPanelVisesIMeny = harLenke(behandling, 'UTTAK_ANNEN_FORELDER_EOS');
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.UTTAK_EØS,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
-  const { data: annenForelderUttakEøs } = useQuery(api.uttakAnnenpartEøsOptions(behandling));
+  const { data: annenForelderUttakEøs } = useQuery(prioriter(api.uttakAnnenpartEøsOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.UTTAK_EØS}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Uttak.Eos' })}
-      skalPanelVisesIMeny={harLenke(behandling, 'UTTAK_ANNEN_FORELDER_EOS')}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {annenForelderUttakEøs ? (
         <UttakFaktaEøsIndex

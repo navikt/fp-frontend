@@ -12,6 +12,7 @@ import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO,
@@ -32,18 +33,27 @@ export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) =>
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const skalPanelVisesIMeny = harLenke(behandling, 'UTTAK_KONTROLLER_FAKTA_PERIODER_V2');
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.UTTAK,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(behandling));
-  const { data: uttakKontrollerFaktaPerioder } = useQuery(api.uttakKontrollerFaktaPerioderOptions(behandling));
-  const { data: faktaArbeidsforhold } = useQuery(api.faktaArbeidsforholdOptions(behandling));
+  const { data: ytelsefordeling } = useQuery(prioriter(api.ytelsefordelingOptions(behandling)));
+  const { data: uttakKontrollerFaktaPerioder } = useQuery(
+    prioriter(api.uttakKontrollerFaktaPerioderOptions(behandling)),
+  );
+  const { data: faktaArbeidsforhold } = useQuery(prioriter(api.faktaArbeidsforholdOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.UTTAK}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Uttak' })}
-      skalPanelVisesIMeny={harLenke(behandling, 'UTTAK_KONTROLLER_FAKTA_PERIODER_V2')}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {ytelsefordeling && uttakKontrollerFaktaPerioder ? (
         <UttakFaktaIndex

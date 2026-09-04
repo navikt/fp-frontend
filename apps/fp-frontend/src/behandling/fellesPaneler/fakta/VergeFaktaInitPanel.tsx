@@ -11,6 +11,7 @@ import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_VERGE];
 
@@ -24,8 +25,13 @@ export const VergeFaktaInitPanel = () => {
   const api = getBehandlingApi(behandling);
 
   const skalPanelVisesIMeny = harLenke(behandling, 'VERGE');
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.VERGE,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
-  const { data: verge, isFetching } = useQuery(api.vergeOptions(behandling, skalPanelVisesIMeny));
+  const { data: verge, isFetching } = useQuery(prioriter(api.vergeOptions(behandling, skalPanelVisesIMeny)));
 
   return (
     <FaktaDefaultInitPanel

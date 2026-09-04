@@ -10,6 +10,7 @@ import type { ArbeidsgiverOpplysningerPerId, BehandlingFpSak, VilkårUtfallType 
 
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -47,16 +48,23 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Pro
 
   const overstyrtStatus = getStatusFromUttakresultat(behandling);
 
-  const skalHenteData = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== 'IKKE_VURDERT';
+  const skalHenteFamiliehendelse = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== 'IKKE_VURDERT';
+
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.UTTAK,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
 
   const api = getBehandlingApi(behandling);
 
-  const { data: uttaksresultat } = useQuery(api.uttaksresultatPerioderOptions(behandling));
-  const { data: søknad } = useQuery(api.søknadOptions(behandling));
-  const { data: familieHendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));
-  const { data: uttakStønadskontoer } = useQuery(api.uttakStønadskontoerOptions(behandling));
-  const { data: annenForelderUttakEøs } = useQuery(api.uttakAnnenpartEøsOptions(behandling));
-  const { data: personoversikt } = useQuery(api.behandlingPersonoversiktOptions(behandling));
+  const { data: uttaksresultat } = useQuery(prioriter(api.uttaksresultatPerioderOptions(behandling)));
+  const { data: søknad } = useQuery(prioriter(api.søknadOptions(behandling)));
+  const { data: familieHendelse } = useQuery(
+    prioriter(api.familiehendelseOptions(behandling, skalHenteFamiliehendelse)),
+  );
+  const { data: uttakStønadskontoer } = useQuery(prioriter(api.uttakStønadskontoerOptions(behandling)));
+  const { data: annenForelderUttakEøs } = useQuery(prioriter(api.uttakAnnenpartEøsOptions(behandling)));
+  const { data: personoversikt } = useQuery(prioriter(api.behandlingPersonoversiktOptions(behandling)));
 
   const { mutateAsync: oppdaterStønadskontoer } = useMutation({
     mutationFn: api.oppdaterStønadskontoer,

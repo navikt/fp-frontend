@@ -11,6 +11,7 @@ import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
   AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
@@ -31,9 +32,15 @@ export const MedlemskapsvilkaretFaktaInitPanel = () => {
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.MEDLEMSKAPSVILKARET,
+    skalVisesIMeny: behandling.harSøknad,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: medlemskap } = useQuery(api.medlemskapOptions(behandling));
+  const { data: medlemskap } = useQuery(prioriter(api.medlemskapOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel
