@@ -83,3 +83,32 @@ export const MedFeilmeldingDetaljer: Story = {
     ],
   },
 };
+
+export const MedNøstaFeilmeldingDetaljer: Story = {
+  args: {
+    feilmeldinger: [
+      {
+        melding: 'Noe feilet. Feilen kan være forbigående.',
+        tilleggsInfo: {
+          melding: 'test',
+          årsaker: ['første årsak', 'andre årsak'],
+          kontekst: {
+            saksnummer: '123456',
+            erKritisk: false,
+          },
+        },
+      },
+    ],
+  },
+};
+
+export const MedFeilmeldingDetaljerSomIkkjeErObjekt: Story = {
+  args: {
+    feilmeldinger: [
+      {
+        melding: 'Noe feilet. Feilen kan være forbigående.',
+        tilleggsInfo: 'Kunne ikke tolke feildetaljer',
+      },
+    ],
+  },
+};
