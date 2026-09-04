@@ -4,7 +4,7 @@ import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Detail, Dialog, Heading, HStack, VStack } from '@navikt/ds-react';
 import { capitalizeFirstLetter } from '@navikt/ft-utils';
 
-import type { Feilmelding, JSONValue } from '../typer/feilmeldingTsType';
+import type { Feilmelding, Feilmeldingsdetaljer } from '../typer/feilmeldingTsType';
 
 interface Props {
   skalViseModal: boolean;
@@ -49,7 +49,7 @@ export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldin
   );
 };
 
-const FeilmeldingsdetaljerVerdi = ({ verdi }: { verdi: JSONValue }) => {
+const FeilmeldingsdetaljerVerdi = ({ verdi }: { verdi: Feilmeldingsdetaljer }) => {
   if (verdi === null) {
     return <BodyShort size="small">-</BodyShort>;
   }

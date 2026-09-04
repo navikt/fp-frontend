@@ -8,7 +8,7 @@ import {
   type DekoratorLenke,
   DekoratorMedFeilviserSakIndex,
   type Feilmelding,
-  type JSONValue,
+  type Feilmeldingsdetaljer,
 } from '@navikt/fp-sak-dekorator';
 
 import { ErrorType, type FpError } from '../restApiError/errorType';
@@ -112,9 +112,9 @@ const formaterFeilmeldinger = (
   return feilmeldinger;
 };
 
-const parseErrorDetails = (details: string): JSONValue => {
+const parseErrorDetails = (details: string): Feilmeldingsdetaljer => {
   try {
-    return JSON.parse(details) as JSONValue;
+    return JSON.parse(details) as Feilmeldingsdetaljer;
   } catch {
     return 'Kunne ikke tolke feildetaljer';
   }
