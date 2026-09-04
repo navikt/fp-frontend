@@ -2509,7 +2509,7 @@ __metadata:
     "@navikt/ft-form-hooks": "npm:12.4.12"
     "@navikt/ft-form-validators": "npm:6.1.11"
     "@navikt/ft-plattform-komponenter": "npm:12.1.11"
-    "@navikt/ft-prosess-beregning": "npm:2.3.8"
+    "@navikt/ft-prosess-beregning": "npm:2.4.0"
     "@navikt/ft-prosess-beregningsgrunnlag": "npm:13.2.10"
     "@navikt/ft-prosess-tilbakekreving": "npm:11.2.9"
     "@navikt/ft-prosess-tilbakekreving-foreldelse": "npm:10.2.9"
@@ -4531,9 +4531,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-beregning@npm:2.3.8":
-  version: 2.3.8
-  resolution: "@navikt/ft-prosess-beregning@npm:2.3.8::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregning%2F2.3.8%2Fd23fde2649f9c1cc605e3d1f9060b3f16540f5e8"
+"@navikt/ft-prosess-beregning@npm:2.4.0":
+  version: 2.4.0
+  resolution: "@navikt/ft-prosess-beregning@npm:2.4.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregning%2F2.4.0%2F44a5cfcf1ff027e7fcaba26573507d85348d0b9c"
   dependencies:
     echarts: "npm:6.1.0"
   peerDependencies:
@@ -4552,7 +4552,7 @@ __metadata:
     react-dom: 19.x
     react-hook-form: 7.x
     react-intl: 10.x
-  checksum: 10/b11209bb732182d7be1546d429f5d5e8f64aa03dc1de6e10e95df85bc7fbc43691c951694b8920fcd4856a935b0d782455455e5d31579a55c03125ffdcd35121
+  checksum: 10/d23901effc19debd04de3914455f8f4bc8cbfbe93ee3ecd4c671bbdf0469dd0712a414d83f89ab3925a16625fdd2ab0cc15d66de0923a37f9f750b3a4c2023a0
   languageName: node
   linkType: hard
 
