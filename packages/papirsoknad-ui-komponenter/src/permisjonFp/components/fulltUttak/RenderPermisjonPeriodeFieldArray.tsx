@@ -8,7 +8,7 @@ import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@na
 import { ISO_DATE_FORMAT, removeSpacesFromNumber } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { AlleKodeverk, PermisjonPeriodeDto, UttakPeriodeType } from '@navikt/fp-types';
+import type { AlleKodeverk, PermisjonPeriodeDto } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -20,7 +20,6 @@ const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIE
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 
 const defaultPermisjonPeriode: PermisjonPeriodeDto = {
-  periodeType: '' as unknown as UttakPeriodeType,
   periodeFom: '',
   periodeTom: '',
 };
