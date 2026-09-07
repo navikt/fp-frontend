@@ -13,13 +13,12 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fagsak, TilbakekrevingValg, TilbakekrevingVidereBehandling } from '@navikt/fp-types';
 import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import type { FeilutbetalingFormValues } from '../types/FormValues';
+import { type FeilutbetalingFormValues, TILBAKEKR_OPPRETT_UTEN_VARSEL } from '../types/FormValues';
 
 import styles from './tilbakekrevSøkerForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
-const IKKE_SEND = 'IKKE_SEND';
 
 interface Props {
   fagsak: Fagsak;
@@ -111,7 +110,7 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
               </ArrowBox>
             </div>
           )}
-          <Radio value={('TILBAKEKR_OPPRETT' satisfies TilbakekrevingVidereBehandling) + IKKE_SEND} size="small">
+          <Radio value={TILBAKEKR_OPPRETT_UTEN_VARSEL} size="small">
             <FormattedMessage id="Simulering.OpprettMenIkkeSendVarsel" />
           </Radio>
           <Radio value={'TILBAKEKR_IGNORER' satisfies TilbakekrevingVidereBehandling} size="small">
@@ -135,10 +134,7 @@ TilbakekrevSøkerForm.initialValues = (
     !tilbakekrevingvalg.varseltekst && tilbakekrevingvalg.videreBehandling === 'TILBAKEKR_OPPRETT';
 
   return {
-    // @ts-expect-error kva er dette?
-    videreBehandling: harTypeIkkeSendt
-      ? tilbakekrevingvalg.videreBehandling + IKKE_SEND
-      : tilbakekrevingvalg.videreBehandling,
+    videreBehandling: harTypeIkkeSendt ? TILBAKEKR_OPPRETT_UTEN_VARSEL : tilbakekrevingvalg.videreBehandling,
     varseltekst: tilbakekrevingvalg.varseltekst,
     begrunnelse: aksjonspunkt.begrunnelse ?? '',
   };
@@ -146,7 +142,7 @@ TilbakekrevSøkerForm.initialValues = (
 
 TilbakekrevSøkerForm.transformValues = (values: FeilutbetalingFormValues): VurderFeilutbetalingAp => {
   const { videreBehandling, varseltekst, begrunnelse } = values;
-  if (videreBehandling.endsWith(IKKE_SEND)) {
+  if (videreBehandling === TILBAKEKR_OPPRETT_UTEN_VARSEL) {
     return {
       kode: AksjonspunktKode.VURDER_FEILUTBETALING,
       begrunnelse,

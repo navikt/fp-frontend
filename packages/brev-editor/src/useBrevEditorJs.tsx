@@ -141,13 +141,11 @@ const useAutoSaveDebouncer = () => {
 };
 
 class CustomList extends EditorjsList {
+  // https://github.com/editor-js/list/issues/119 - berre punktliste skal kunne veljast, so
+  // listestil-vekslarane i blokkinnstillingane ville uansett berre hatt eitt alltid-aktivt val.
+  // Valet mellom listetypar er avgrensa til punktliste via toolbox-konfigen under.
   override renderSettings() {
-    return super.renderSettings().filter(item =>
-      // https://github.com/editor-js/list/issues/119
-      // @ts-expect-error Fiks
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      ['Unordered'].includes(item.label),
-    );
+    return [];
   }
 }
 // Denne blir overstyrt for å ikkje strippa vekk a-tags ved lagring.

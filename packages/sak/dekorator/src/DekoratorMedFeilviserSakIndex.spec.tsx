@@ -1,10 +1,16 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './DekoratorMedFeilviserSakIndex.stories';
 
-const { UtenFeilmeldinger, MedFeilmeldinger, MedFeilmeldingDetaljer } = composeStories(stories);
+const {
+  UtenFeilmeldinger,
+  MedFeilmeldinger,
+  MedFeilmeldingDetaljer,
+  MedNøstaFeilmeldingDetaljer,
+  MedFeilmeldingDetaljerSomIkkjeErObjekt,
+} = composeStories(stories);
 
 describe('DekoratorMedFeilviserSakIndex', () => {
   it('skal vise dekoratør uten feilmeldinger', async () => {
@@ -34,6 +40,35 @@ describe('DekoratorMedFeilviserSakIndex', () => {
 
     await userEvent.click(screen.getByText('Detaljert informasjon'));
 
-    expect(await screen.findByRole('dialog')).toBeInTheDocument();
+    const dialog = await screen.findByRole('dialog');
+    expect(within(dialog).getByText('Melding:')).toBeInTheDocument();
+    expect(within(dialog).getByText('test')).toBeInTheDocument();
+    expect(within(dialog).getByText('Ekstra:')).toBeInTheDocument();
+    expect(within(dialog).getByText('test2')).toBeInTheDocument();
+  });
+
+  it('skal vise nøsta feilmeldingsdetaljer med objekt og lister', async () => {
+    render(<MedNøstaFeilmeldingDetaljer />);
+
+    await userEvent.click(await screen.findByText('Detaljert informasjon'));
+
+    const dialog = await screen.findByRole('dialog');
+    expect(within(dialog).getByText('Årsaker:')).toBeInTheDocument();
+    expect(within(dialog).getByText('første årsak')).toBeInTheDocument();
+    expect(within(dialog).getByText('andre årsak')).toBeInTheDocument();
+    expect(within(dialog).getByText('Kontekst:')).toBeInTheDocument();
+    expect(within(dialog).getByText('Saksnummer:')).toBeInTheDocument();
+    expect(within(dialog).getByText('123456')).toBeInTheDocument();
+    expect(within(dialog).getByText('ErKritisk:')).toBeInTheDocument();
+    expect(within(dialog).getByText('false')).toBeInTheDocument();
+  });
+
+  it('skal vise feilmeldingsdetaljer som ikkje er eit objekt utan å splitte teksten opp i teikn', async () => {
+    render(<MedFeilmeldingDetaljerSomIkkjeErObjekt />);
+
+    await userEvent.click(await screen.findByText('Detaljert informasjon'));
+
+    const dialog = await screen.findByRole('dialog');
+    expect(within(dialog).getByText('Kunne ikke tolke feildetaljer')).toBeInTheDocument();
   });
 });

@@ -8,7 +8,7 @@ import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@na
 import { ISO_DATE_FORMAT, removeSpacesFromNumber } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { AlleKodeverk, UttakPeriodeType } from '@navikt/fp-types';
+import type { AlleKodeverk, PermisjonPeriodeDto } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -18,6 +18,11 @@ import { mapMorsAktiviteter, mapUttakPeriodeTyper, PERIODS_WITH_NO_MORS_AKTIVITE
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`;
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
+
+const defaultPermisjonPeriode: PermisjonPeriodeDto = {
+  periodeFom: '',
+  periodeTom: '',
+};
 
 const minValue0 = minValue(0);
 const maxValue100 = maxValue(100);
@@ -54,8 +59,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKo
 
   useEffect(() => {
     if (fields.length === 0) {
-      // @ts-expect-error Fiks
-      append({});
+      append(defaultPermisjonPeriode);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- legg berre til ein tom rad ved montering; fields.length skal ikkje trigge effekten på nytt
   }, []);
@@ -65,11 +69,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKo
       readOnly={readOnly}
       fields={fields}
       addButtonText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
-      emptyTemplate={{
-        periodeType: '' as unknown as UttakPeriodeType,
-        periodeFom: '',
-        periodeTom: '',
-      }}
+      emptyTemplate={defaultPermisjonPeriode}
       append={append}
       remove={remove}
     >
