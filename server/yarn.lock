@@ -192,7 +192,7 @@ __metadata:
   resolution: "@fp-frontend/server@workspace:."
   dependencies:
     "@eslint/js": "npm:10.0.1"
-    "@navikt/oasis": "npm:4.1.4"
+    "@navikt/oasis": "npm:4.2.2"
     "@navikt/vite-mode": "npm:1.0.0"
     "@types/cors": "npm:2.8.19"
     "@types/express": "npm:5.0.6"
@@ -299,22 +299,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/oasis@npm:4.1.4":
-  version: 4.1.4
-  resolution: "@navikt/oasis@npm:4.1.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F4.1.4%2F0d9c93820b9b6d93b1bd9da134feb95461ad8a47"
+"@navikt/oasis@npm:4.2.2":
+  version: 4.2.2
+  resolution: "@navikt/oasis@npm:4.2.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Foasis%2F4.2.2%2F3c43e1e89bb2d46646a9a2aaf27972a024377a6f"
   dependencies:
-    "@navikt/texas": "npm:^4.1.4"
-    "@opentelemetry/api": "npm:^1.9.0"
-    jose: "npm:^6.1.3"
-    prom-client: "npm:^15.1.3"
-  checksum: 10/1f0a9df3aa1b79d17a4076579a140eae607f45d8974072330b3faee3f80706560945aee7ad84f8aac7429e7dc719bdcb4c96774395d1f6cd75d422bfdce0b534
+    "@navikt/texas": "npm:^4.2.2"
+    "@opentelemetry/api": "npm:^1.9.1"
+    "@prometheus-io/client": "npm:^0.16.1"
+    jose: "npm:^6.2.10"
+  checksum: 10/ff6c0ff545e39c7f358077de97f19e2e9d04045cfa948093d2cd1b7417b38fd4d35ee202894ef984257d1c74b19560345eafbd7620602aa159d42a36bbef8ab6
   languageName: node
   linkType: hard
 
-"@navikt/texas@npm:^4.1.4":
-  version: 4.1.4
-  resolution: "@navikt/texas@npm:4.1.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ftexas%2F4.1.4%2F1725aca0fa0b803e0048212c3e202d24c10f3c3b"
-  checksum: 10/43a3e9a840e16893d919a5aa4e02c093d8b3b2263e5900de951e079b4788708e1d172ee1eadceac092e03b27a46b6bde088d64ebba5e98ed23c977b08d82bb0a
+"@navikt/texas@npm:^4.2.2":
+  version: 4.2.2
+  resolution: "@navikt/texas@npm:4.2.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Ftexas%2F4.2.2%2F862d743a1df21630a007a0d2d2a36a74dd8b5187"
+  checksum: 10/ee1067aa92437e688d1c035d028ae472e9eb0b554e41e739bac953a38adea125ada81dcf6eb2d215be076790d1bfa2157d3b9bead27920a42c917491929c2fb4
   languageName: node
   linkType: hard
 
@@ -336,10 +336,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@opentelemetry/api@npm:^1.4.0, @opentelemetry/api@npm:^1.9.0":
+"@opentelemetry/api@npm:^1.4.0":
   version: 1.9.0
   resolution: "@opentelemetry/api@npm:1.9.0"
   checksum: 10/a607f0eef971893c4f2ee2a4c2069aade6ec3e84e2a1f5c2aac19f65c5d9eeea41aa72db917c1029faafdd71789a1a040bdc18f40d63690e22ccae5d7070f194
+  languageName: node
+  linkType: hard
+
+"@opentelemetry/api@npm:^1.9.1":
+  version: 1.9.1
+  resolution: "@opentelemetry/api@npm:1.9.1"
+  checksum: 10/b26032739d3c54ca99b5a2920844a1fbd4c3ee383cacbb0915e8c706a2626fe91e96feaa6e893397abe0545dc8d0a765b220aa18a31b1773176eeaf3a225e10e
   languageName: node
   linkType: hard
 
@@ -640,6 +647,16 @@ __metadata:
   version: 0.3.6
   resolution: "@pkgr/core@npm:0.3.6"
   checksum: 10/29082aa13d36f13fc41cdc64cb1feb36b630de0d6ebde84e2ff68e3d7a7f1dce4462cca91f76176c46e50bbca6b1e7f1fd9cf907af12d5d70da83bc981ca4ccf
+  languageName: node
+  linkType: hard
+
+"@prometheus-io/client@npm:^0.16.1":
+  version: 0.16.1
+  resolution: "@prometheus-io/client@npm:0.16.1"
+  dependencies:
+    "@opentelemetry/api": "npm:^1.4.0"
+    tdigest: "npm:^0.1.1"
+  checksum: 10/6e8cdf0fbafc8506e3b5fb32815504fdfcf702e06b0d5d3d345a41ecf7e726e9a8e23b536eded80fdfb2073e14baee1622819129802104984c9fc179d1787048
   languageName: node
   linkType: hard
 
@@ -2620,10 +2637,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^6.1.3":
-  version: 6.1.3
-  resolution: "jose@npm:6.1.3"
-  checksum: 10/9626c51e8c3792b505e954f3094698c182208617b62dfb27269230f31e57560b083985ed8128b8a9753aa92daf18d3a2341cc826d149503f14569abe87d42389
+"jose@npm:^6.2.10":
+  version: 6.2.12
+  resolution: "jose@npm:6.2.12"
+  checksum: 10/42ef7b598d22fe4ed0a4d0407f9dd9ae9f56dabd31cbad6cb4f67e296953a46b5d63603f8a599a3ee4c5659bf29bb14e846237f0381ea679116520b53e71e4ea
   languageName: node
   linkType: hard
 
@@ -3422,16 +3439,6 @@ __metadata:
   version: 6.1.0
   resolution: "proc-log@npm:6.1.0"
   checksum: 10/9033f30f168ed5a0991b773d0c50ff88384c4738e9a0a67d341de36bf7293771eed648ab6a0562f62276da12fde91f3bbfc75ffff6e71ad49aafd74fc646be66
-  languageName: node
-  linkType: hard
-
-"prom-client@npm:^15.1.3":
-  version: 15.1.3
-  resolution: "prom-client@npm:15.1.3"
-  dependencies:
-    "@opentelemetry/api": "npm:^1.4.0"
-    tdigest: "npm:^0.1.1"
-  checksum: 10/eba75e15ab896845d39359e3a4d6f7913ea05339b3122d8dde8c8c374669ad1a1d1ab2694ab2101c420bd98086a564e4f2a18aa29018fc14a4732e57c1c19aec
   languageName: node
   linkType: hard
 
