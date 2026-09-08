@@ -1,8 +1,11 @@
-name: Valider pull request
-on: [pull_request]
+name: Valider klient kode
+
+on:
+  pull_request:
+
 jobs:
   valid-pull-request:
-    name: Valider pull request
+    name: Valider klient
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -33,14 +36,6 @@ jobs:
 
       - name: ESLint
         run: yarn eslint
-
-      - name: Install server dependencies
-        working-directory: server
-        run: yarn install --immutable
-
-      - name: Server tests
-        working-directory: server
-        run: yarn test
 
   knip-it:
     name: Kjør knip
