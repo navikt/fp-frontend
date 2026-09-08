@@ -1,0 +1,36 @@
+name: Valider server kode
+
+on:
+  pull_request:
+    paths:
+      - 'server/**'
+
+jobs:
+  server-tester:
+    name: Server-tester
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # ratchet:actions/checkout@v7.0.1
+
+      - uses: navikt/fp-gha-workflows/.github/actions/setup-yarnrc@main
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # ratchet:actions/setup-node@v7.0.0
+        with:
+          node-version: 26
+          cache: 'yarn'
+
+      - name: Install server dependencies
+        working-directory: server
+        run: yarn install --immutable
+
+      - name: Server ESLint
+        working-directory: server
+        run: yarn eslint
+
+      - name: Server tests
+        working-directory: server
+        run: yarn test
