@@ -49,7 +49,6 @@
   "OpplysningerOmUtenlandsopphold.BoNeste12.Svar": "{iNorge, select, true {Jeg skal bo i Norge} other {Jeg skal bo helt eller delvis i utlandet}}",
   "OpplysningerOmUtenlandsopphold.BoNeste12.HvilkeLand": "Hvilke land og hvor lenge skal du bo der?",
   "OpplysningerOmUtenlandsopphold.iLand": "i {land}",
-  "OpplysningerOmUtenlandsopphold.IngenSluttdato": "– ingen sluttdato oppgitt",
 
   "OpplysningerOmPersonstatus.Soker": "Søker, {navn}",
   "OpplysningerOmPersonstatus.Annenpart": "Annen part{navn, select, none {} other {, {navn}}}",
