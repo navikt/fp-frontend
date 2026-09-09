@@ -2,7 +2,8 @@ import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
-import { LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { DateLabel, LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { type Medlemskap, type UtlandsoppholdPeriode } from '@navikt/fp-types';
 
@@ -24,7 +25,14 @@ const UtenlandsoppholdListe = ({
         {utlandsopphold.map(({ fom, tom, landNavn }) => (
           <li key={fom}>
             <BodyShort size="small">
-              <PeriodLabel dateStringFom={fom} dateStringTom={tom} />{' '}
+              {tom === TIDENES_ENDE ? (
+                <>
+                  <DateLabel dateString={fom} />{' '}
+                  <FormattedMessage id="OpplysningerOmUtenlandsopphold.IngenSluttdato" />
+                </>
+              ) : (
+                <PeriodLabel dateStringFom={fom} dateStringTom={tom} />
+              )}{' '}
               <FormattedMessage
                 id="OpplysningerOmUtenlandsopphold.iLand"
                 values={{ land: toTitleCapitalization(landNavn) }}
