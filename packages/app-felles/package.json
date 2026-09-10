@@ -17,7 +17,7 @@
     "storybook": "storybook dev --quiet -p 7006"
   },
   "dependencies": {
-    "@nais/apm": "0.6.2",
+    "@nais/apm": "0.6.3",
     "@navikt/ds-react": "8.16.2",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",
@@ -43,7 +43,7 @@
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.3",
     "@types/react": "19.2.18",
-    "eslint": "10.9.1",
+    "eslint": "10.10.0",
     "storybook": "10.6.0",
     "typescript": "6.0.3",
     "vite": "8.2.2",

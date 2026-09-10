@@ -20,9 +20,9 @@
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-form-hooks": "12.4.12",
+    "@navikt/ft-form-hooks": "12.4.13",
     "@navikt/ft-form-validators": "6.1.11",
-    "@navikt/ft-ui-komponenter": "8.2.7",
+    "@navikt/ft-ui-komponenter": "8.2.8",
     "@navikt/ft-utils": "5.1.11",
     "dayjs": "1.11.23",
     "react": "19.2.8",
@@ -34,7 +34,7 @@
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@types/react": "19.2.18",
-    "eslint": "10.9.1",
+    "eslint": "10.10.0",
     "stylelint": "17.15.0",
     "typescript": "6.0.3"
   }
