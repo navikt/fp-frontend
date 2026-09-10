@@ -12,7 +12,7 @@ interface Props {
 export const VisittkortBarnInfoOmsorgPanel = ({ familiehendelse }: Props) => {
   const { hendelseDato, antallBarn } = familiehendelse;
   return (
-    <BodyShort>
+    <BodyShort className="text-pretty">
       <FormattedMessage
         id="VisittkortBarnInfoOmsorgPanel.Omsorgsovertakelse"
         values={{ antallBarn, dato: hendelseDato ? dateFormat(hendelseDato) : '-' }}

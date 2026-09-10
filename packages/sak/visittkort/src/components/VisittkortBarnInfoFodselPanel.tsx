@@ -56,7 +56,7 @@ export const VisittkortBarnInfoFodselPanel = ({ familiehendelse }: Props) => {
 
   return (
     <>
-      <BodyShort>
+      <BodyShort className="text-pretty">
         {visFødselsdato && !!hendelseDato && antallBarn > 0 && (
           <>
             <FormattedMessage id={finnFodselsdatoTekstkode(antallBarn)} values={{ dato: dateFormat(hendelseDato) }} />
