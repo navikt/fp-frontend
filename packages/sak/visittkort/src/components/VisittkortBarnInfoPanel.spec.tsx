@@ -50,7 +50,7 @@ describe('VisittkortBarnInfoPanel', () => {
 
   it('skal vise panel for adopsjon av flere barn', () => {
     render(<Component hendelseType="ADPSJN" antallBarn={2} />);
-    expect(screen.getByText('Omsorgsovertakelse(2 barn) 01.01.2024')).toBeInTheDocument();
+    expect(screen.getByText('Omsorgsovertakelse (2 barn) 01.01.2024')).toBeInTheDocument();
   });
 
   it('skal vise panel for termin', () => {
