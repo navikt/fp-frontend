@@ -33,7 +33,7 @@
     "@tanstack/react-query-devtools": "5.102.8",
     "@types/react": "19.2.18",
     "dayjs": "1.11.23",
-    "eslint": "10.9.1",
+    "eslint": "10.10.0",
     "typescript": "6.0.3"
   }
 }
