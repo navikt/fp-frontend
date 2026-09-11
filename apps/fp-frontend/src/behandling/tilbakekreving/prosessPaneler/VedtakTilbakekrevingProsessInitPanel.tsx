@@ -25,6 +25,7 @@ import { useMellomlagretFormData } from '@navikt/fp-utils';
 import { forhåndsvisVedtaksbrev, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { ÅpenRevurderingModal } from '../modaler/ÅpenRevurderingModal';
@@ -59,8 +60,13 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
 
   const api = getBehandlingApi(behandling);
 
-  const { data: beregningsresultat } = useQuery(api.tilbakekreving.beregningsresultatOptions(behandling));
-  const { data: vedtaksbrev } = useQuery(api.tilbakekreving.vedtaksbrevOptions(behandling));
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.VEDTAK,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
+  const { data: beregningsresultat } = useQuery(prioriter(api.tilbakekreving.beregningsresultatOptions(behandling)));
+  const { data: vedtaksbrev } = useQuery(prioriter(api.tilbakekreving.vedtaksbrevOptions(behandling)));
 
   const { mutateAsync: forhandsvisVedtaksbrev } = useMutation({
     retry: skalPrøveLeseoperasjonPåNytt,

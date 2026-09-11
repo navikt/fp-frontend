@@ -11,6 +11,7 @@ import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
@@ -23,10 +24,16 @@ export const OmsorgOgRettFaktaInitPanel = () => {
 
   const { behandling, rettigheter } = useBehandlingDataContext();
 
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.OMSORG_OG_RETT,
+    skalVisesIMeny: true,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: omsorgOgRett } = useQuery(api.omsorgOgRettOptions(behandling));
-  const { data: personoversikt } = useQuery(api.behandlingPersonoversiktOptions(behandling));
+  const { data: omsorgOgRett } = useQuery(prioriter(api.omsorgOgRettOptions(behandling)));
+  const { data: personoversikt } = useQuery(prioriter(api.behandlingPersonoversiktOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel

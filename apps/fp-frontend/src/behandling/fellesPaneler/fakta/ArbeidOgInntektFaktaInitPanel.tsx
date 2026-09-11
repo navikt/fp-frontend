@@ -17,6 +17,7 @@ import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 
@@ -31,9 +32,19 @@ export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }:
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const skalPanelVisesIMeny =
+    harLenke(behandling, 'ARBEID_OG_INNTEKT') &&
+    !harAksjonspunkt(AksjonspunktKode.UTGÅTT_5080, behandling.aksjonspunkt);
+
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.ARBEID_OG_INNTEKT,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(behandling));
+  const { data: arbeidOgInntekt } = useQuery(prioriter(api.arbeidOgInntektOptions(behandling)));
 
   const { mutate: settBehandlingPåVent } = useMutation({
     mutationFn: (values: { frist?: string; ventearsak: string }) =>
@@ -68,10 +79,7 @@ export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }:
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.ArbeidOgInntekt' })}
-      skalPanelVisesIMeny={
-        harLenke(behandling, 'ARBEID_OG_INNTEKT') &&
-        !harAksjonspunkt(AksjonspunktKode.UTGÅTT_5080, behandling.aksjonspunkt)
-      }
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {arbeidOgInntekt ? (
         <ArbeidOgInntektFaktaIndex

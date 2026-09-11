@@ -6,6 +6,26 @@ import { ProsessMenyContext } from './ProsessMeny';
 
 const DEFAULT_PANEL_VALGT = 'default';
 
+const beregnErAktiv = (
+  valgtProsessSteg: string | undefined,
+  id: string,
+  skalVisesIMeny: boolean,
+  skalMarkeresSomAktiv: boolean,
+): boolean =>
+  skalVisesIMeny && (valgtProsessSteg === id || (skalMarkeresSomAktiv && valgtProsessSteg === DEFAULT_PANEL_VALGT));
+
+/**
+ * Lettvekts variant av {@link useProsessMenyRegistrerer} som berre les kontekst
+ * og returnerer om panelet er aktivt, utan sideeffekten som registrerer panelet
+ * i menyen. Brukast av InitPanel-komponentar som treng å vite om panelet er
+ * aktivt *før* dei sjølve kallar `useProsessMenyRegistrerer` (t.d. for å avgjere
+ * om tunge `useQuery`-kall skal vere `enabled`).
+ */
+export const useErProsessPanelAktiv = (id: string, skalVisesIMeny: boolean, skalMarkeresSomAktiv: boolean): boolean => {
+  const { valgtProsessSteg } = use(ProsessMenyContext);
+  return beregnErAktiv(valgtProsessSteg, id, skalVisesIMeny, skalMarkeresSomAktiv);
+};
+
 export const useProsessMenyRegistrerer = (
   id: string,
   tekst: string,
@@ -16,8 +36,7 @@ export const useProsessMenyRegistrerer = (
 ) => {
   const { valgtProsessSteg, settProsessPanelMenyData } = use(ProsessMenyContext);
 
-  const erAktiv =
-    skalVisesIMeny && (valgtProsessSteg === id || (skalMarkeresSomAktiv && valgtProsessSteg === DEFAULT_PANEL_VALGT));
+  const erAktiv = beregnErAktiv(valgtProsessSteg, id, skalVisesIMeny, skalMarkeresSomAktiv);
 
   useEffect(() => {
     settProsessPanelMenyData({

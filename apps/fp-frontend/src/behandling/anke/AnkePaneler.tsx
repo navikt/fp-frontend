@@ -1,4 +1,5 @@
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
+import { PanelDataPrioritetProvider } from '../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessMeny } from '../felles/prosess/ProsessMeny';
 import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import { AnkeBehandlingProsessStegInitPanel } from './prosessPaneler/AnkeBehandlingProsessStegInitPanel';
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export const AnkePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => (
-  <>
+  <PanelDataPrioritetProvider>
     <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
       <AnkeBehandlingProsessStegInitPanel />
       <AnkeResultatProsessStegInitPanel />
@@ -20,5 +21,5 @@ export const AnkePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => (
     <FaktaMeny valgtFaktaSteg={valgtFaktaSteg} valgtProsessSteg={valgtProsessSteg}>
       <VergeFaktaInitPanel />
     </FaktaMeny>
-  </>
+  </PanelDataPrioritetProvider>
 );

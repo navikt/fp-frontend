@@ -16,6 +16,7 @@ import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 import { forhåndsvisMelding, getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -33,8 +34,15 @@ export const InnsynVedtakProsessStegInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideeffekterCallback);
   const api = getBehandlingApi(behandling);
 
-  const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(behandling));
-  const { data: innsyn } = useQuery(api.innsyn.innsynOptions(behandling));
+  const vedtakStatus = getVedtakStatus(behandling);
+  const skalMarkeresSomAktiv = vedtakStatus !== 'IKKE_VURDERT' || standardPanelProps.harÅpentAksjonspunkt;
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.VEDTAK,
+    skalMarkeresSomAktiv,
+  });
+
+  const { data: innsynDokumenter } = useQuery(prioriter(api.innsyn.innsynDokumenterOptions(behandling)));
+  const { data: innsyn } = useQuery(prioriter(api.innsyn.innsynOptions(behandling)));
 
   const { mutate: forhåndsvis } = useMutation({
     retry: skalPrøveLeseoperasjonPåNytt,
@@ -54,8 +62,8 @@ export const InnsynVedtakProsessStegInitPanel = () => {
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny
-      overstyrtStatus={getVedtakStatus(behandling)}
-      skalMarkeresSomAktiv={getVedtakStatus(behandling) !== 'IKKE_VURDERT'}
+      overstyrtStatus={vedtakStatus}
+      skalMarkeresSomAktiv={skalMarkeresSomAktiv}
     >
       <>
         <IverksetterVedtakStatusModal

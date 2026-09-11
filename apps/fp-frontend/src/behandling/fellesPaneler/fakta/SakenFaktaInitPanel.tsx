@@ -10,6 +10,7 @@ import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
@@ -30,10 +31,16 @@ export const SakenFaktaInitPanel = () => {
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.SAKEN,
+    skalVisesIMeny: true,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: ytelsefordeling } = useQuery(api.ytelsefordelingOptions(behandling));
-  const { data: utlandDokStatus } = useQuery(api.utlandDokStatusOptions(behandling));
+  const { data: ytelsefordeling } = useQuery(prioriter(api.ytelsefordelingOptions(behandling)));
+  const { data: utlandDokStatus } = useQuery(prioriter(api.utlandDokStatusOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel

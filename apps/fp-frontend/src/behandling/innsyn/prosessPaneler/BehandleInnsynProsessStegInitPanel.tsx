@@ -9,6 +9,7 @@ import { InnsynProsessIndex } from '@navikt/fp-prosess-innsyn';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -19,10 +20,15 @@ export const BehandleInnsynProsessStegInitPanel = () => {
 
   const { behandling } = useBehandlingDataContext();
 
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.BEHANDLE_INNSYN,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: innsynDokumenter } = useQuery(api.innsyn.innsynDokumenterOptions(behandling));
-  const { data: innsyn, isFetching } = useQuery(api.innsyn.innsynOptions(behandling));
+  const { data: innsynDokumenter } = useQuery(prioriter(api.innsyn.innsynDokumenterOptions(behandling)));
+  const { data: innsyn, isFetching } = useQuery(prioriter(api.innsyn.innsynOptions(behandling)));
 
   return (
     <ProsessDefaultInitPanel

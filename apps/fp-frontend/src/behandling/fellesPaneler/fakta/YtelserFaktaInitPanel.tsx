@@ -10,6 +10,7 @@ import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 export const YtelserFaktaInitPanel = () => {
   const intl = useIntl();
@@ -17,9 +18,15 @@ export const YtelserFaktaInitPanel = () => {
   const { behandling } = useBehandlingDataContext();
   const standardPanelProps = useStandardFaktaPanelProps();
 
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.YTELSER,
+    skalVisesIMeny: true,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: inntektArbeidYtelse } = useQuery(api.inntektArbeidYtelseOptions(behandling));
+  const { data: inntektArbeidYtelse } = useQuery(prioriter(api.inntektArbeidYtelseOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel

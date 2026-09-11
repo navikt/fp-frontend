@@ -13,6 +13,7 @@ import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { getBehandlingApi, harLenke } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
@@ -31,9 +32,14 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
 
   const { behandling, fagsak } = useBehandlingDataContext<BehandlingFpTilbake>();
 
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.FORELDELSE,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: perioderForeldelse } = useQuery(api.tilbakekreving.perioderForeldelseOptions(behandling));
+  const { data: perioderForeldelse } = useQuery(prioriter(api.tilbakekreving.perioderForeldelseOptions(behandling)));
 
   const { mutateAsync: beregnBeløp } = useMutation({
     retry: skalPrøveLeseoperasjonPåNytt,

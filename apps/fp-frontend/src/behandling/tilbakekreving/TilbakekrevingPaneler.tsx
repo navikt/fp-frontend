@@ -9,6 +9,7 @@ import { useFagsakApi } from '../../data/fagsakApi';
 import { useBehandlingDataContext } from '../felles/context/BehandlingDataContext';
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
 import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
+import { PanelDataPrioritetProvider } from '../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessMeny } from '../felles/prosess/ProsessMeny';
 import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import { FeilutbetalingFaktaInitPanel } from './faktaPaneler/FeilutbetalingFaktaInitPanel';
@@ -42,15 +43,17 @@ export const TilbakekrevingPaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Prop
         kodeverk={tilbakekrevingKodeverk}
         erTilbakekreving
       />
-      <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
-        <ForeldelseProsessInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
-        <TilbakekrevingProsessInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
-        <VedtakTilbakekrevingProsessInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
-      </ProsessMeny>
-      <FaktaMeny valgtFaktaSteg={valgtFaktaSteg} valgtProsessSteg={valgtProsessSteg}>
-        <FeilutbetalingFaktaInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
-        <VergeFaktaInitPanel />
-      </FaktaMeny>
+      <PanelDataPrioritetProvider>
+        <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
+          <ForeldelseProsessInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
+          <TilbakekrevingProsessInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
+          <VedtakTilbakekrevingProsessInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
+        </ProsessMeny>
+        <FaktaMeny valgtFaktaSteg={valgtFaktaSteg} valgtProsessSteg={valgtProsessSteg}>
+          <FeilutbetalingFaktaInitPanel tilbakekrevingKodeverk={tilbakekrevingKodeverk} />
+          <VergeFaktaInitPanel />
+        </FaktaMeny>
+      </PanelDataPrioritetProvider>
     </>
   );
 };

@@ -9,6 +9,7 @@ import { VurderSoknadsfristForeldrepengerIndex } from '@navikt/fp-prosess-soknad
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
@@ -20,15 +21,22 @@ export const SoknadsfristProsessStegInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
   const { behandling } = useBehandlingDataContext();
 
+  const skalPanelVisesIMeny = skalViseProsessPanel(standardPanelProps.aksjonspunkterForPanel);
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.SOEKNADSFRIST,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
-  const { data: søknad } = useQuery(api.søknadOptions(behandling));
+  const { data: søknad } = useQuery(prioriter(api.søknadOptions(behandling)));
 
   return (
     <ProsessDefaultInitPanel
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.SOEKNADSFRIST}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
-      skalPanelVisesIMeny={skalViseProsessPanel(standardPanelProps.aksjonspunkterForPanel)}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {søknad ? <VurderSoknadsfristForeldrepengerIndex soknad={søknad} /> : <LoadingPanel />}
     </ProsessDefaultInitPanel>

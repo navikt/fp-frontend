@@ -11,6 +11,7 @@ import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 type Props = {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -23,9 +24,15 @@ export const InntektsmeldingerFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId 
 
   const standardPanelProps = useStandardFaktaPanelProps();
 
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.INNTEKTSMELDINGER,
+    skalVisesIMeny: true,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: inntektsmeldinger } = useQuery(api.inntektsmeldingerOptions(behandling));
+  const { data: inntektsmeldinger } = useQuery(prioriter(api.inntektsmeldingerOptions(behandling)));
 
   return (
     <FaktaDefaultInitPanel

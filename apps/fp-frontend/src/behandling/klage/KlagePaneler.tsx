@@ -1,4 +1,5 @@
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
+import { PanelDataPrioritetProvider } from '../felles/prioritet/PanelDataPrioritetContext';
 import { ProsessMeny } from '../felles/prosess/ProsessMeny';
 import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import { FormKravFamOgPensjonProsessStegInitPanel } from './prosessPaneler/FormKravFamOgPensjonProsessStegInitPanel';
@@ -13,7 +14,7 @@ interface Props {
 }
 
 export const KlagePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => (
-  <>
+  <PanelDataPrioritetProvider>
     <ProsessMeny valgtProsessSteg={valgtProsessSteg} valgtFaktaSteg={valgtFaktaSteg}>
       <FormKravFamOgPensjonProsessStegInitPanel />
       <VurderingFamOgPensjonProsessStegInitPanel />
@@ -24,5 +25,5 @@ export const KlagePaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => (
     <FaktaMeny valgtFaktaSteg={valgtFaktaSteg} valgtProsessSteg={valgtProsessSteg}>
       <VergeFaktaInitPanel />
     </FaktaMeny>
-  </>
+  </PanelDataPrioritetProvider>
 );

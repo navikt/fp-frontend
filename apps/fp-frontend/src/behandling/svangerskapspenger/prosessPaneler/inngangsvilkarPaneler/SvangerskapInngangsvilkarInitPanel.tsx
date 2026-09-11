@@ -8,12 +8,16 @@ import { SvangerskapVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-svanger
 import type { VilkårType } from '@navikt/fp-types';
 
 import { getBehandlingApi } from '../../../../data/behandlingApi';
+import { useInngangsvilkårPanelPrioritet } from '../../../felles/prioritet/usePanelPrioritet';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import { skalViseProsessPanel } from '../../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET];
 
 const VILKAR_KODER = ['SVP_VK_1'] satisfies VilkårType[];
+
+const PANEL_ID = 'SVANGERSKAP';
 
 export const SvangerskapInngangsvilkarInitPanel = () => {
   const intl = useIntl();
@@ -27,18 +31,25 @@ export const SvangerskapInngangsvilkarInitPanel = () => {
     ...standardPanelProps,
     isReadOnly: standardPanelProps.isReadOnly || !harAksjonspunkt,
   };
+  const skalPanelVisesIMeny = skalViseProsessPanel(
+    panelProps.aksjonspunkterForPanel,
+    VILKAR_KODER,
+    panelProps.vilkårForPanel,
+  );
+
+  const prioriter = useInngangsvilkårPanelPrioritet({ panelKode: PANEL_ID, skalVisesIMeny: skalPanelVisesIMeny });
 
   const api = getBehandlingApi(panelProps.behandling);
 
   const { data: svangerskapspengerTilrettelegging } = useQuery(
-    api.svp.svangerskapspengerTilretteleggingOptions(panelProps.behandling),
+    prioriter(api.svp.svangerskapspengerTilretteleggingOptions(panelProps.behandling)),
   );
 
   return (
     <InngangsvilkarDefaultInitPanel
       vilkårKoder={VILKAR_KODER}
       standardPanelProps={panelProps}
-      inngangsvilkårPanelKode="SVANGERSKAP"
+      inngangsvilkårPanelKode={PANEL_ID}
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
     >
       <>

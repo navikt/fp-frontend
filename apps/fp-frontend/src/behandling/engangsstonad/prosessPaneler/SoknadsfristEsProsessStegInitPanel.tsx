@@ -10,6 +10,7 @@ import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
+import { useProsessPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
 import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
@@ -35,8 +36,19 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
     ap => ap.definisjon === AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
   );
 
-  const { data: søknad } = useQuery(api.søknadOptions(behandling));
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, harSoknadsfristAp));
+  const skalPanelVisesIMeny = skalViseProsessPanel(
+    standardPanelProps.aksjonspunkterForPanel,
+    VILKAR_KODER,
+    standardPanelProps.vilkårForPanel,
+  );
+  const prioriter = useProsessPanelPrioritet({
+    panelKode: ProsessStegCode.SOEKNADSFRIST,
+    skalVisesIMeny: skalPanelVisesIMeny,
+    skalMarkeresSomAktiv: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
+  const { data: søknad } = useQuery(prioriter(api.søknadOptions(behandling)));
+  const { data: familiehendelse } = useQuery(prioriter(api.familiehendelseOptions(behandling, harSoknadsfristAp)));
 
   return (
     <PanelOverstyringProvider
@@ -48,11 +60,7 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
         standardPanelProps={standardPanelProps}
         prosessPanelKode={ProsessStegCode.SOEKNADSFRIST}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
-        skalPanelVisesIMeny={skalViseProsessPanel(
-          standardPanelProps.aksjonspunkterForPanel,
-          VILKAR_KODER,
-          standardPanelProps.vilkårForPanel,
-        )}
+        skalPanelVisesIMeny={skalPanelVisesIMeny}
       >
         <>
           {!harSoknadsfristAp && (

@@ -12,6 +12,7 @@ import { getBehandlingApi } from '../../../data/behandlingApi';
 import { useBehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
+import { useFaktaPanelPrioritet } from '../../felles/prioritet/usePanelPrioritet';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_SVP_TILRETTELEGGING];
 
@@ -24,11 +25,17 @@ export const FodselOgTilretteleggingFaktaInitPanel = ({ arbeidsgiverOpplysninger
 
   const { behandling } = useBehandlingDataContext();
 
+  const prioriter = useFaktaPanelPrioritet({
+    panelKode: FaktaPanelCode.FODSELTILRETTELEGGING,
+    skalVisesIMeny: true,
+    harÅpentAksjonspunkt: standardPanelProps.harÅpentAksjonspunkt,
+  });
+
   const api = getBehandlingApi(behandling);
 
-  const { data: arbeidOgInntekt } = useQuery(api.arbeidOgInntektOptions(behandling));
+  const { data: arbeidOgInntekt } = useQuery(prioriter(api.arbeidOgInntektOptions(behandling)));
   const { data: svangerskapspengerTilrettelegging } = useQuery(
-    api.svp.svangerskapspengerTilretteleggingOptions(behandling),
+    prioriter(api.svp.svangerskapspengerTilretteleggingOptions(behandling)),
   );
 
   return (
