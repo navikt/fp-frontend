@@ -16,10 +16,10 @@ export const VisittkortBarnInfoPanel = ({ familiehendelse }: Props) => {
   const ikon = (
     <StrollerIcon
       title={intl.formatMessage({ id: 'VisittkortBarnInfoPanel.Barnevogn' })}
-      height={24}
-      width={24}
+      height={30}
+      width={30}
       color="white"
-      style={{ backgroundColor: 'var(--ax-neutral-500)', borderRadius: '50%', padding: '2px' }}
+      style={{ backgroundColor: 'var(--ax-neutral-500)', borderRadius: '50%', padding: '4px' }}
     />
   );
 

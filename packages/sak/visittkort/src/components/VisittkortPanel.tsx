@@ -58,7 +58,7 @@ export const VisittkortPanel = ({
 
   return (
     <div className={styles['container']}>
-      <HStack wrap={false} align="center">
+      <HStack wrap={false}>
         {primærBruker.aktørId ? (
           <PersonCard
             name={primærBruker.navn}

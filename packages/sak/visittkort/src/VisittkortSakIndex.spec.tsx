@@ -68,7 +68,7 @@ describe('VisittkortSakIndex', () => {
     ['fødsel', [/Født 21.01.2020 \(\d+ år\)/], FamilieMedFødtBarn],
     ['termin', ['Termin 21.01.2020'], FamilieMedTermin],
     ['omsorgovertakelse', ['Omsorgsovertakelse 21.01.2020'], FamilieMedOmsorgovertakelse],
-    ['adopsjon', ['Omsorgsovertakelse(2 barn) 21.01.2020'], FamilieMedAdopsjon],
+    ['adopsjon', ['Omsorgsovertakelse 21.01.2020 (2 barn)'], FamilieMedAdopsjon],
     ['dødfødsel', ['Født 21.01.2020', 'Død'], FamilieMedDødfødtBarn],
   ])('skal vise visittkort med familiehendelse: %s', (_, expected, Component) => {
     render(<Component />);
