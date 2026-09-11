@@ -3,6 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import type { AlleKodeverk } from '@navikt/fp-types';
 
@@ -105,6 +106,13 @@ OppholdINorgePanel.initialValues = (): OppholdINorgeFormValues => ({
   fremtidigeOppholdUtenlands: [defaultUtenlandsOpphold],
 });
 
+const mapUtenlandsopphold = (opphold?: FormValuesFieldArray[]) =>
+  opphold?.map(({ land, periodeFom, periodeTom, ukjentTom }) => ({
+    land,
+    periodeFom,
+    periodeTom: ukjentTom ? TIDENES_ENDE : periodeTom,
+  }));
+
 OppholdINorgePanel.transformValues = ({
   oppholdINorge,
   oppholdSisteTolvINorge,
@@ -115,6 +123,6 @@ OppholdINorgePanel.transformValues = ({
   oppholdINorge,
   harTidligereOppholdUtenlands: !oppholdSisteTolvINorge,
   harFremtidigeOppholdUtenlands: !oppholdNesteTolvINorge,
-  tidligereOppholdUtenlands: oppholdSisteTolvINorge ? undefined : tidligereOppholdUtenlands,
-  fremtidigeOppholdUtenlands: oppholdNesteTolvINorge ? undefined : fremtidigeOppholdUtenlands,
+  tidligereOppholdUtenlands: oppholdSisteTolvINorge ? undefined : mapUtenlandsopphold(tidligereOppholdUtenlands),
+  fremtidigeOppholdUtenlands: oppholdNesteTolvINorge ? undefined : mapUtenlandsopphold(fremtidigeOppholdUtenlands),
 });

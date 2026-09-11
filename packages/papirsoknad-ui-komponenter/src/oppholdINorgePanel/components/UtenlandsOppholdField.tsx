@@ -2,8 +2,8 @@ import React, { type ReactElement } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { HStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfFieldArray, RhfSelect } from '@navikt/ft-form-hooks';
+import { HStack, VStack } from '@navikt/ds-react';
+import { RhfCheckbox, RhfDatepicker, RhfFieldArray, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -20,12 +20,14 @@ export const defaultUtenlandsOpphold: FormValues = {
   land: '' as unknown as Landkode,
   periodeFom: '',
   periodeTom: '',
+  ukjentTom: false,
 };
 
 export type FormValues = {
   land: Landkode;
   periodeFom: string;
   periodeTom: string;
+  ukjentTom?: boolean;
 };
 
 type Keys = 'tidligereOppholdUtenlands' | 'fremtidigeOppholdUtenlands';
@@ -87,6 +89,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
     control,
     getValues,
     trigger,
+    watch,
     formState: { isSubmitted },
   } = useFormContext<{ [K in Keys]: FormValues[] }>();
   const { fields, remove, append } = useFieldArray({
@@ -106,74 +109,91 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
       remove={remove}
       append={append}
     >
-      {(field, index, removeButton) => (
-        <React.Fragment key={field.id}>
-          <HStack gap="space-16" paddingBlock="space-8" align="start">
-            <RhfSelect
-              name={`${name}.${index}.land`}
-              control={control}
-              label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Country' })}
-              hideLabel={index > 0}
-              selectValues={land}
-              readOnly={readOnly}
-              validate={[required]}
-            />
+      {(field, index, removeButton) => {
+        const rad = watch(`${name}.${index}`);
+        const vetIkkeNaarTilbake = !erTidligereOpphold && rad.ukjentTom;
 
-            <RhfDatepicker
-              name={`${name}.${index}.periodeFom`}
-              control={control}
-              label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeFom' })}
-              hideLabel={index > 0}
-              readOnly={readOnly}
-              validate={[
-                required,
-                hasValidDate,
-                getValiderFørEllerEtter(
-                  true,
-                  getValues(`${name}.${index}.periodeFom`),
-                  getValues(`${name}.${index}.periodeTom`),
-                ),
-                () => {
-                  const fomVerdi = getValues(`${name}.${index}.periodeFom`);
-                  if (erTidligereOpphold) {
-                    return dateBeforeOrEqual(dayjs().format(ISO_DATE_FORMAT))(fomVerdi);
-                  }
-                  return mottattDato ? dateAfterOrEqual(mottattDato)(fomVerdi) : undefined;
-                },
-                getOverlappingValidator(getValues, name),
-              ]}
-              onChange={() => (isSubmitted ? trigger() : undefined)}
-            />
+        return (
+          <React.Fragment key={field.id}>
+            <HStack gap="space-16" paddingBlock="space-8" align="start">
+              <RhfSelect
+                name={`${name}.${index}.land`}
+                control={control}
+                label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Country' })}
+                hideLabel={index > 0}
+                selectValues={land}
+                readOnly={readOnly}
+                validate={[required]}
+              />
 
-            <RhfDatepicker
-              name={`${name}.${index}.periodeTom`}
-              control={control}
-              label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeTom' })}
-              hideLabel={index > 0}
-              readOnly={readOnly}
-              validate={[
-                required,
-                hasValidDate,
-                getValiderFørEllerEtter(
-                  false,
-                  getValues(`${name}.${index}.periodeFom`),
-                  getValues(`${name}.${index}.periodeTom`),
-                ),
-                () => {
-                  const tomVerdi = getValues(`${name}.${index}.periodeTom`);
-                  if (erTidligereOpphold) {
-                    return dateBeforeOrEqual(dayjs().format(ISO_DATE_FORMAT))(tomVerdi);
-                  }
-                  return mottattDato ? dateAfterOrEqual(mottattDato)(tomVerdi) : undefined;
-                },
-                getOverlappingValidator(getValues, name),
-              ]}
-              onChange={() => (isSubmitted ? trigger() : undefined)}
-            />
-            <div>{removeButton}</div>
-          </HStack>
-        </React.Fragment>
-      )}
+              <RhfDatepicker
+                name={`${name}.${index}.periodeFom`}
+                control={control}
+                label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeFom' })}
+                hideLabel={index > 0}
+                readOnly={readOnly}
+                validate={[
+                  required,
+                  hasValidDate,
+                  getValiderFørEllerEtter(
+                    true,
+                    getValues(`${name}.${index}.periodeFom`),
+                    getValues(`${name}.${index}.periodeTom`),
+                  ),
+                  () => {
+                    const fomVerdi = getValues(`${name}.${index}.periodeFom`);
+                    if (erTidligereOpphold) {
+                      return dateBeforeOrEqual(dayjs().format(ISO_DATE_FORMAT))(fomVerdi);
+                    }
+                    return mottattDato ? dateAfterOrEqual(mottattDato)(fomVerdi) : undefined;
+                  },
+                  getOverlappingValidator(getValues, name),
+                ]}
+                onChange={() => (isSubmitted ? trigger() : undefined)}
+              />
+
+              <VStack gap="space-8">
+                {!vetIkkeNaarTilbake && (
+                  <RhfDatepicker
+                    name={`${name}.${index}.periodeTom`}
+                    control={control}
+                    label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeTom' })}
+                    hideLabel={index > 0}
+                    readOnly={readOnly}
+                    validate={[
+                      required,
+                      hasValidDate,
+                      getValiderFørEllerEtter(
+                        false,
+                        getValues(`${name}.${index}.periodeFom`),
+                        getValues(`${name}.${index}.periodeTom`),
+                      ),
+                      () => {
+                        const tomVerdi = getValues(`${name}.${index}.periodeTom`);
+                        if (erTidligereOpphold) {
+                          return dateBeforeOrEqual(dayjs().format(ISO_DATE_FORMAT))(tomVerdi);
+                        }
+                        return mottattDato ? dateAfterOrEqual(mottattDato)(tomVerdi) : undefined;
+                      },
+                      getOverlappingValidator(getValues, name),
+                    ]}
+                    onChange={() => (isSubmitted ? trigger() : undefined)}
+                  />
+                )}
+                {!erTidligereOpphold && (
+                  <RhfCheckbox
+                    name={`${name}.${index}.ukjentTom`}
+                    control={control}
+                    readOnly={readOnly}
+                    label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.VetIkkeTom' })}
+                  />
+                )}
+              </VStack>
+              <div>{removeButton}</div>
+            </HStack>
+          </React.Fragment>
+        );
+      }}
     </RhfFieldArray>
   );
 };
