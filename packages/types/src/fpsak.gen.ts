@@ -1886,7 +1886,8 @@ export type tjenester_registrering_dto_RettigheterDto =
 export type tjenester_registrering_dto_UtenlandsoppholdDto = {
   land: string;
   periodeFom: string;
-  periodeTom: string;
+  // TFP-5511: midlertidig gjort valgfri i påvente av at typen regenereres fra fp-sak sin OpenAPI-spesifikasjon
+  periodeTom?: string;
 };
 
 export type tjenester_registrering_dto_UtsettelseDto = {
