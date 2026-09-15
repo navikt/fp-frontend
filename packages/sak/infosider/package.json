@@ -22,8 +22,8 @@
     "@navikt/ds-react": "8.16.2",
     "@navikt/ft-utils": "5.1.11",
     "dayjs": "1.11.23",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "react-intl": "10.1.26"
   },
   "devDependencies": {
