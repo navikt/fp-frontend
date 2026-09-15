@@ -28,8 +28,8 @@
     "@navikt/ft-utils": "5.1.11",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-hook-form": "7.87.0",
-    "react-intl": "10.1.26"
+    "react-hook-form": "7.88.0",
+    "react-intl": "10.2.1"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
@@ -45,7 +45,7 @@
     "eslint": "10.10.0",
     "storybook": "10.6.0",
     "typescript": "6.0.3",
-    "vite": "8.2.2",
+    "vite": "8.3.0",
     "vitest": "4.1.11"
   }
 }

@@ -1023,14 +1023,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl@npm:4.1.20":
-  version: 4.1.20
-  resolution: "@formatjs/intl@npm:4.1.20"
+"@formatjs/intl@npm:4.2.0":
+  version: 4.2.0
+  resolution: "@formatjs/intl@npm:4.2.0"
   dependencies:
     "@formatjs/fast-memoize": "npm:3.1.7"
     "@formatjs/icu-messageformat-parser": "npm:3.5.17"
     intl-messageformat: "npm:11.2.14"
-  checksum: 10/2c9e1138616060a207a87f18e11654831253cb2d5f529c24810da236b855d1f8d0108930993d1074aadcd7fb465cb7f2a876e84f7e515e48dfa0184fe2a98acd
+  checksum: 10/a227a959aed540b3782d79d59207519cb316392cb3ba667d4205caeb2d82cc844474b4bf011e5d0d8704138ec290b37bb33d1382767cea8b2ce8eed85cd4b809
   languageName: node
   linkType: hard
 
@@ -1528,11 +1528,11 @@ __metadata:
     ky: "npm:2.1.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1577,14 +1577,14 @@ __metadata:
     msw: "npm:2.15.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     tailwindcss: "npm:4.3.3"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1620,12 +1620,12 @@ __metadata:
     lodash.debounce: "npm:4.0.8"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1645,7 +1645,7 @@ __metadata:
     eslint-plugin-unicorn: "npm:74.0.0"
     globals: "npm:17.12.0"
     typescript: "npm:6.0.3"
-    typescript-eslint: "npm:8.69.0"
+    typescript-eslint: "npm:8.70.0"
   peerDependencies:
     eslint: 10.x
   languageName: unknown
@@ -1656,7 +1656,7 @@ __metadata:
   resolution: "@navikt/fp-config-typescript@workspace:packages/config/typescript"
   dependencies:
     "@testing-library/jest-dom": "npm:7.0.1"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1672,7 +1672,7 @@ __metadata:
     react-dom: "npm:19.2.8"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vite-plugin-compression2: "npm:2.5.3"
     vitest: "npm:4.1.11"
   languageName: unknown
@@ -1704,11 +1704,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1743,12 +1743,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1776,10 +1776,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1812,12 +1812,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1849,12 +1849,12 @@ __metadata:
     lodash: "npm:^4.18.1"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1888,12 +1888,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1923,11 +1923,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1961,11 +1961,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -1999,11 +1999,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2036,11 +2036,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2074,11 +2074,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2111,11 +2111,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2148,12 +2148,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2188,11 +2188,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2227,12 +2227,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2266,12 +2266,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2305,12 +2305,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2345,12 +2345,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2384,11 +2384,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2412,10 +2412,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2532,14 +2532,14 @@ __metadata:
     msw: "npm:2.15.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     react-responsive: "npm:10.0.1"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     tailwindcss: "npm:4.3.3"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2579,14 +2579,14 @@ __metadata:
     msw: "npm:2.15.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     tailwindcss: "npm:4.3.3"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2644,12 +2644,12 @@ __metadata:
     msw: "npm:2.15.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2684,12 +2684,12 @@ __metadata:
     msw: "npm:2.15.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2719,11 +2719,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2754,12 +2754,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2789,12 +2789,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2820,10 +2820,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2849,10 +2849,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2878,10 +2878,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2907,11 +2907,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -2936,8 +2936,8 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
   languageName: unknown
@@ -2972,12 +2972,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3012,12 +3012,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3051,12 +3051,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3089,12 +3089,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3128,12 +3128,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3163,10 +3163,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3200,12 +3200,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3241,11 +3241,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3279,12 +3279,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3314,10 +3314,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3353,12 +3353,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3391,11 +3391,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3428,12 +3428,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3467,12 +3467,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3505,11 +3505,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3542,11 +3542,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3579,11 +3579,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3612,10 +3612,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3643,11 +3643,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3674,11 +3674,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3706,11 +3706,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3737,11 +3737,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     react-responsive: "npm:10.0.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3769,12 +3769,12 @@ __metadata:
     history: "npm:5.3.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3797,11 +3797,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3833,11 +3833,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3863,10 +3863,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3895,11 +3895,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3929,11 +3929,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3957,10 +3957,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -3990,12 +3990,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -4021,10 +4021,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -4055,11 +4055,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -4088,12 +4088,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -4125,11 +4125,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -4159,12 +4159,12 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -4199,13 +4199,13 @@ __metadata:
     history: "npm:5.3.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -4228,10 +4228,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -4257,11 +4257,11 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -4285,7 +4285,7 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
@@ -4319,8 +4319,8 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.1"
     typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
@@ -4377,10 +4377,10 @@ __metadata:
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
     react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vitest: "npm:4.1.11"
   languageName: unknown
   linkType: soft
@@ -4395,7 +4395,7 @@ __metadata:
     "@types/react": "npm:19.2.18"
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
@@ -4417,7 +4417,7 @@ __metadata:
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
     react: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react-intl: "npm:10.2.1"
     typescript: "npm:6.0.3"
     vitest: "npm:4.1.11"
   languageName: unknown
@@ -4998,9 +4998,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-android-arm-eabi@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-android-arm-eabi@npm:0.147.0"
+"@oxc-parser/binding-android-arm-eabi@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-android-arm-eabi@npm:0.148.0"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
@@ -5012,9 +5012,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-android-arm64@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-android-arm64@npm:0.147.0"
+"@oxc-parser/binding-android-arm64@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-android-arm64@npm:0.148.0"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
@@ -5026,9 +5026,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-darwin-arm64@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-darwin-arm64@npm:0.147.0"
+"@oxc-parser/binding-darwin-arm64@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-darwin-arm64@npm:0.148.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
@@ -5040,9 +5040,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-darwin-x64@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-darwin-x64@npm:0.147.0"
+"@oxc-parser/binding-darwin-x64@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-darwin-x64@npm:0.148.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -5054,9 +5054,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-freebsd-x64@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-freebsd-x64@npm:0.147.0"
+"@oxc-parser/binding-freebsd-x64@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-freebsd-x64@npm:0.148.0"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
@@ -5068,9 +5068,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-arm-gnueabihf@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-arm-gnueabihf@npm:0.147.0"
+"@oxc-parser/binding-linux-arm-gnueabihf@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-arm-gnueabihf@npm:0.148.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -5082,9 +5082,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-arm-musleabihf@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-arm-musleabihf@npm:0.147.0"
+"@oxc-parser/binding-linux-arm-musleabihf@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-arm-musleabihf@npm:0.148.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -5096,9 +5096,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-arm64-gnu@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-arm64-gnu@npm:0.147.0"
+"@oxc-parser/binding-linux-arm64-gnu@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-arm64-gnu@npm:0.148.0"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
@@ -5110,9 +5110,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-arm64-musl@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-arm64-musl@npm:0.147.0"
+"@oxc-parser/binding-linux-arm64-musl@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-arm64-musl@npm:0.148.0"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
@@ -5124,9 +5124,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-ppc64-gnu@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-ppc64-gnu@npm:0.147.0"
+"@oxc-parser/binding-linux-ppc64-gnu@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-ppc64-gnu@npm:0.148.0"
   conditions: os=linux & cpu=ppc64 & libc=glibc
   languageName: node
   linkType: hard
@@ -5138,9 +5138,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-riscv64-gnu@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-riscv64-gnu@npm:0.147.0"
+"@oxc-parser/binding-linux-riscv64-gnu@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-riscv64-gnu@npm:0.148.0"
   conditions: os=linux & cpu=riscv64 & libc=glibc
   languageName: node
   linkType: hard
@@ -5152,9 +5152,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-riscv64-musl@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-riscv64-musl@npm:0.147.0"
+"@oxc-parser/binding-linux-riscv64-musl@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-riscv64-musl@npm:0.148.0"
   conditions: os=linux & cpu=riscv64 & libc=musl
   languageName: node
   linkType: hard
@@ -5166,9 +5166,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-s390x-gnu@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-s390x-gnu@npm:0.147.0"
+"@oxc-parser/binding-linux-s390x-gnu@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-s390x-gnu@npm:0.148.0"
   conditions: os=linux & cpu=s390x & libc=glibc
   languageName: node
   linkType: hard
@@ -5180,9 +5180,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-x64-gnu@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-x64-gnu@npm:0.147.0"
+"@oxc-parser/binding-linux-x64-gnu@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-x64-gnu@npm:0.148.0"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
@@ -5194,9 +5194,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-x64-musl@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-x64-musl@npm:0.147.0"
+"@oxc-parser/binding-linux-x64-musl@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-x64-musl@npm:0.148.0"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
@@ -5208,9 +5208,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-openharmony-arm64@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-openharmony-arm64@npm:0.147.0"
+"@oxc-parser/binding-openharmony-arm64@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-openharmony-arm64@npm:0.148.0"
   conditions: os=openharmony & cpu=arm64
   languageName: node
   linkType: hard
@@ -5233,9 +5233,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-win32-arm64-msvc@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-win32-arm64-msvc@npm:0.147.0"
+"@oxc-parser/binding-win32-arm64-msvc@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-win32-arm64-msvc@npm:0.148.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
@@ -5247,9 +5247,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-win32-ia32-msvc@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-win32-ia32-msvc@npm:0.147.0"
+"@oxc-parser/binding-win32-ia32-msvc@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-win32-ia32-msvc@npm:0.148.0"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
@@ -5261,17 +5261,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-win32-x64-msvc@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-win32-x64-msvc@npm:0.147.0"
+"@oxc-parser/binding-win32-x64-msvc@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-win32-x64-msvc@npm:0.148.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@oxc-project/types@npm:=0.147.0, @oxc-project/types@npm:^0.147.0":
+"@oxc-project/types@npm:=0.147.0":
   version: 0.147.0
   resolution: "@oxc-project/types@npm:0.147.0"
   checksum: 10/d454c44bb9e65b8a660c2b2099391883986bbb6796fd4eea22fbd3016af109547986ec5fa0685db9ee7a6c5e33568134a2e5eea6452eb0f94c4fcc44e544fb32
+  languageName: node
+  linkType: hard
+
+"@oxc-project/types@npm:=0.149.0":
+  version: 0.149.0
+  resolution: "@oxc-project/types@npm:0.149.0"
+  checksum: 10/6bd7b656ecdbfa96eea3ca0d79264ad367f941eaec1c47883b7c763a300ac81750de23862089b959b0c9a865abd171145d639368294a9daab0d47df07b1f8c6e
   languageName: node
   linkType: hard
 
@@ -5279,6 +5286,13 @@ __metadata:
   version: 0.127.0
   resolution: "@oxc-project/types@npm:0.127.0"
   checksum: 10/f154f4720367186aed63a16fb1395f9039d4e6872265fe9e6b5eacc02fb2b948f9ea6c5f85efd3a015ea28aa8c31232b7a8301218ae28651659e46dd0c4f2031
+  languageName: node
+  linkType: hard
+
+"@oxc-project/types@npm:^0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-project/types@npm:0.148.0"
+  checksum: 10/835b0479161cd80c7dee653b77d31f6d5239e20530cda8a10466bcbb17de08363777939c29670e82fb9d9eca89dc49030e50742051418d987ec70f62faa3317b
   languageName: node
   linkType: hard
 
@@ -5563,9 +5577,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rolldown/binding-android-arm-eabi@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-android-arm-eabi@npm:1.2.8"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
 "@rolldown/binding-android-arm64@npm:1.2.6":
   version: 1.2.6
   resolution: "@rolldown/binding-android-arm64@npm:1.2.6"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@rolldown/binding-android-arm64@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-android-arm64@npm:1.2.8"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
@@ -5577,9 +5605,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rolldown/binding-darwin-arm64@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-darwin-arm64@npm:1.2.8"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@rolldown/binding-darwin-x64@npm:1.2.6":
   version: 1.2.6
   resolution: "@rolldown/binding-darwin-x64@npm:1.2.6"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rolldown/binding-darwin-x64@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-darwin-x64@npm:1.2.8"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -5591,9 +5633,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rolldown/binding-freebsd-x64@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-freebsd-x64@npm:1.2.8"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@rolldown/binding-linux-arm-gnueabihf@npm:1.2.6":
   version: 1.2.6
   resolution: "@rolldown/binding-linux-arm-gnueabihf@npm:1.2.6"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@rolldown/binding-linux-arm-gnueabihf@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-arm-gnueabihf@npm:1.2.8"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -5605,9 +5661,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rolldown/binding-linux-arm64-gnu@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-arm64-gnu@npm:1.2.8"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@rolldown/binding-linux-arm64-musl@npm:1.2.6":
   version: 1.2.6
   resolution: "@rolldown/binding-linux-arm64-musl@npm:1.2.6"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@rolldown/binding-linux-arm64-musl@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-arm64-musl@npm:1.2.8"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
@@ -5619,9 +5689,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rolldown/binding-linux-ppc64-gnu@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-ppc64-gnu@npm:1.2.8"
+  conditions: os=linux & cpu=ppc64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@rolldown/binding-linux-s390x-gnu@npm:1.2.6":
   version: 1.2.6
   resolution: "@rolldown/binding-linux-s390x-gnu@npm:1.2.6"
+  conditions: os=linux & cpu=s390x & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@rolldown/binding-linux-s390x-gnu@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-s390x-gnu@npm:1.2.8"
   conditions: os=linux & cpu=s390x & libc=glibc
   languageName: node
   linkType: hard
@@ -5633,9 +5717,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rolldown/binding-linux-x64-gnu@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-x64-gnu@npm:1.2.8"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@rolldown/binding-linux-x64-musl@npm:1.2.6":
   version: 1.2.6
   resolution: "@rolldown/binding-linux-x64-musl@npm:1.2.6"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@rolldown/binding-linux-x64-musl@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-x64-musl@npm:1.2.8"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
@@ -5647,6 +5745,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rolldown/binding-openharmony-arm64@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-openharmony-arm64@npm:1.2.8"
+  conditions: os=openharmony & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@rolldown/binding-win32-arm64-msvc@npm:1.2.6":
   version: 1.2.6
   resolution: "@rolldown/binding-win32-arm64-msvc@npm:1.2.6"
@@ -5654,9 +5759,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rolldown/binding-win32-arm64-msvc@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-win32-arm64-msvc@npm:1.2.8"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@rolldown/binding-win32-x64-msvc@npm:1.2.6":
   version: 1.2.6
   resolution: "@rolldown/binding-win32-x64-msvc@npm:1.2.6"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rolldown/binding-win32-x64-msvc@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-win32-x64-msvc@npm:1.2.8"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -6339,39 +6458,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.69.0":
-  version: 8.69.0
-  resolution: "@typescript-eslint/eslint-plugin@npm:8.69.0"
+"@typescript-eslint/eslint-plugin@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/eslint-plugin@npm:8.70.0"
   dependencies:
     "@eslint-community/regexpp": "npm:^4.12.2"
-    "@typescript-eslint/scope-manager": "npm:8.69.0"
-    "@typescript-eslint/type-utils": "npm:8.69.0"
-    "@typescript-eslint/utils": "npm:8.69.0"
-    "@typescript-eslint/visitor-keys": "npm:8.69.0"
+    "@typescript-eslint/scope-manager": "npm:8.70.0"
+    "@typescript-eslint/type-utils": "npm:8.70.0"
+    "@typescript-eslint/utils": "npm:8.70.0"
+    "@typescript-eslint/visitor-keys": "npm:8.70.0"
     ignore: "npm:^7.0.5"
     natural-compare: "npm:^1.4.0"
     ts-api-utils: "npm:^2.5.0"
   peerDependencies:
-    "@typescript-eslint/parser": ^8.69.0
+    "@typescript-eslint/parser": ^8.70.0
     eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.1.0"
-  checksum: 10/3d020557de0cddb276d513800150934cfadffc507c4f808b753e1b7fe42a864b8f14c35063483867518108b71cb718ead22d17943513e72f2d0d4cf0fa2f558c
+  checksum: 10/d078f6d7212b9f6d83f8240d4458d10a9975eaab74ab09b2ed3a1000fe3d94ba5c510dded243fd8750bd7fdbf58e63742ac29c996e737234430ab48910389ab1
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.69.0":
-  version: 8.69.0
-  resolution: "@typescript-eslint/parser@npm:8.69.0"
+"@typescript-eslint/parser@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/parser@npm:8.70.0"
   dependencies:
-    "@typescript-eslint/scope-manager": "npm:8.69.0"
-    "@typescript-eslint/types": "npm:8.69.0"
-    "@typescript-eslint/typescript-estree": "npm:8.69.0"
-    "@typescript-eslint/visitor-keys": "npm:8.69.0"
+    "@typescript-eslint/scope-manager": "npm:8.70.0"
+    "@typescript-eslint/types": "npm:8.70.0"
+    "@typescript-eslint/typescript-estree": "npm:8.70.0"
+    "@typescript-eslint/visitor-keys": "npm:8.70.0"
     debug: "npm:^4.4.3"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.1.0"
-  checksum: 10/3266e512700dc0d55d0c41a5aab08a8f8ef36ef8e9bc94e6de6ab35205ec7259105914ed8d2464afedde24b0c70e3af6b5e46a1c96bdc31c1c307f4a8bab823d
+  checksum: 10/44ea118c7a0c0d4e8ce21845784cda4727240e10a1e8966f759fc48363748a48a74a0aa228664a2148fa24f586d77e230d98058916f8a1a1c85325bb1f9d2e0f
   languageName: node
   linkType: hard
 
@@ -6388,6 +6507,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/project-service@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/project-service@npm:8.70.0"
+  dependencies:
+    "@typescript-eslint/tsconfig-utils": "npm:^8.70.0"
+    "@typescript-eslint/types": "npm:^8.70.0"
+    debug: "npm:^4.4.3"
+  peerDependencies:
+    typescript: ">=4.8.4 <6.1.0"
+  checksum: 10/b06286f1ec6fc0fde7382f14cf4645aa0d008dfc25f40a8ec58e644fd42058a91e1d9ce1e106fbe78f5c2a3cf6b75560a24d24901972a4d21cc604f13aa921ad
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/scope-manager@npm:8.69.0, @typescript-eslint/scope-manager@npm:^8.58.0, @typescript-eslint/scope-manager@npm:^8.69.0":
   version: 8.69.0
   resolution: "@typescript-eslint/scope-manager@npm:8.69.0"
@@ -6395,6 +6527,16 @@ __metadata:
     "@typescript-eslint/types": "npm:8.69.0"
     "@typescript-eslint/visitor-keys": "npm:8.69.0"
   checksum: 10/6eafb382ad54848a796fe6ba6e29ff0f5db246d459a5c30a04a2144e3005d0ed0ee08e83abf2b943614ef02cc7f78358a722f028c87fbbee3a736a099b5b8bf1
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/scope-manager@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/scope-manager@npm:8.70.0"
+  dependencies:
+    "@typescript-eslint/types": "npm:8.70.0"
+    "@typescript-eslint/visitor-keys": "npm:8.70.0"
+  checksum: 10/7168d1ddf945ee47179420063bcc867f289926c7bea348bab4b9310b7c9b0f4b9031eb7653a820bb9fe41f668cc724c9886e19b7e39e2220ed0df168e8cf7607
   languageName: node
   linkType: hard
 
@@ -6407,7 +6549,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:8.69.0, @typescript-eslint/type-utils@npm:^8.69.0":
+"@typescript-eslint/tsconfig-utils@npm:8.70.0, @typescript-eslint/tsconfig-utils@npm:^8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/tsconfig-utils@npm:8.70.0"
+  peerDependencies:
+    typescript: ">=4.8.4 <6.1.0"
+  checksum: 10/c4ad046c1082ebca815d52fd9ababe122ba8c59012ae69e790185ea0e2f898fe5abc2b5256ff88ee167d19844a5f6152dc63342e0a866cfe22a11c2887c5d8da
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/type-utils@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/type-utils@npm:8.70.0"
+  dependencies:
+    "@typescript-eslint/types": "npm:8.70.0"
+    "@typescript-eslint/typescript-estree": "npm:8.70.0"
+    "@typescript-eslint/utils": "npm:8.70.0"
+    debug: "npm:^4.4.3"
+    ts-api-utils: "npm:^2.5.0"
+  peerDependencies:
+    eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+    typescript: ">=4.8.4 <6.1.0"
+  checksum: 10/54bf0ef53a67f3e58bcbbefa1837d6b973d31e6c682ce6447c863426fc396fbcac2800dc7e2d343d09029e5c333668f29463ec99197562ee6211736c8460e4fe
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/type-utils@npm:^8.69.0":
   version: 8.69.0
   resolution: "@typescript-eslint/type-utils@npm:8.69.0"
   dependencies:
@@ -6430,6 +6597,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/types@npm:8.70.0, @typescript-eslint/types@npm:^8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/types@npm:8.70.0"
+  checksum: 10/a264fbebf12d3ee5363688f10713890f67264277749c7f7e2b7fa8636d8836a19a9532e7228bd3155b12f455121b22998282acb17e76561e81902891f7205b44
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/typescript-estree@npm:8.69.0, @typescript-eslint/typescript-estree@npm:^8.69.0":
   version: 8.69.0
   resolution: "@typescript-eslint/typescript-estree@npm:8.69.0"
@@ -6449,6 +6623,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/typescript-estree@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/typescript-estree@npm:8.70.0"
+  dependencies:
+    "@typescript-eslint/project-service": "npm:8.70.0"
+    "@typescript-eslint/tsconfig-utils": "npm:8.70.0"
+    "@typescript-eslint/types": "npm:8.70.0"
+    "@typescript-eslint/visitor-keys": "npm:8.70.0"
+    debug: "npm:^4.4.3"
+    minimatch: "npm:^10.2.2"
+    semver: "npm:^7.7.3"
+    tinyglobby: "npm:^0.2.15"
+    ts-api-utils: "npm:^2.5.0"
+  peerDependencies:
+    typescript: ">=4.8.4 <6.1.0"
+  checksum: 10/c588aac52c24883befe0c07312df808f27fb00676250e20036f43760cbe831e482ec92232703d9dea95c583687cf374a23e2c49cf8afddce370929eb128270f4
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/utils@npm:8.69.0, @typescript-eslint/utils@npm:^8.58.0, @typescript-eslint/utils@npm:^8.69.0":
   version: 8.69.0
   resolution: "@typescript-eslint/utils@npm:8.69.0"
@@ -6464,6 +6657,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/utils@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/utils@npm:8.70.0"
+  dependencies:
+    "@eslint-community/eslint-utils": "npm:^4.9.1"
+    "@typescript-eslint/scope-manager": "npm:8.70.0"
+    "@typescript-eslint/types": "npm:8.70.0"
+    "@typescript-eslint/typescript-estree": "npm:8.70.0"
+  peerDependencies:
+    eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+    typescript: ">=4.8.4 <6.1.0"
+  checksum: 10/518521b1f7e8bb7a5bd7bc2db39e85b3bd1d710d0cf92da9a7d13a3394e9fb99eda76b90b7ecdc334afc60cb4415b8e079439a3cb9b29b6aea7f8ff1f499590b
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/visitor-keys@npm:8.69.0":
   version: 8.69.0
   resolution: "@typescript-eslint/visitor-keys@npm:8.69.0"
@@ -6471,6 +6679,16 @@ __metadata:
     "@typescript-eslint/types": "npm:8.69.0"
     eslint-visitor-keys: "npm:^5.0.0"
   checksum: 10/15096ea595db6c7571f2a2d6e20e55ff82409cd046af51bb7b9f9ac9fe74dba2fccc707c7a34040a028e126afc65ab3ee77f964a7cd4a0ffa26e9ceb17851b28
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/visitor-keys@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/visitor-keys@npm:8.70.0"
+  dependencies:
+    "@typescript-eslint/types": "npm:8.70.0"
+    eslint-visitor-keys: "npm:^5.0.0"
+  checksum: 10/3b6724e29e68f4468da18aaf7300dd178d5aa0465e6f3a203f91920d3bda6d0cdb97615ada9d1b04a63ccb485301cc4cd701e78931061ec2ec90a3f008cba3c7
   languageName: node
   linkType: hard
 
@@ -8278,8 +8496,8 @@ __metadata:
     eslint: "npm:10.10.0"
     husky: "npm:9.1.7"
     jsdom: "npm:30.0.1"
-    knip: "npm:6.34.0"
-    lint-staged: "npm:17.5.0"
+    knip: "npm:6.35.1"
+    lint-staged: "npm:17.5.1"
     msw: "npm:2.15.0"
     msw-storybook-addon: "npm:3.0.0"
     prettier: "npm:3.9.6"
@@ -8934,27 +9152,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knip@npm:6.34.0":
-  version: 6.34.0
-  resolution: "knip@npm:6.34.0"
+"knip@npm:6.35.1":
+  version: 6.35.1
+  resolution: "knip@npm:6.35.1"
   dependencies:
     fdir: "npm:^6.5.0"
     formatly: "npm:^0.7.0"
     get-tsconfig: "npm:4.14.3"
     jiti: "npm:^2.7.0"
-    oxc-parser: "npm:^0.147.0"
+    oxc-parser: "npm:^0.148.0"
     oxc-resolver: "npm:11.24.2"
     picomatch: "npm:^4.0.7"
     smol-toml: "npm:^1.8.0"
     strip-json-comments: "npm:5.0.3"
     tinyglobby: "npm:^0.2.17"
-    unbash: "npm:^4.0.10"
+    unbash: "npm:^4.0.11"
     yaml: "npm:^2.9.0"
     zod: "npm:^4.4.3"
   bin:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
-  checksum: 10/eeebec459f516630cc4066e257f098a4bd35024c65e536b63a8e0a343ac4af0f7f0564ecaaa21d7caa2a0f0b9f256c361b3c9bdcde700546e34ef8282091c821
+  checksum: 10/9f1cf5eafcbe685c58440c6d306ba2f7fdafb4fc835511455be800a698ecd0071eda90f7183bd2749086da46a062460292a52c2162225f1114371f8b606d4066
   languageName: node
   linkType: hard
 
@@ -9222,9 +9440,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:17.5.0":
-  version: 17.5.0
-  resolution: "lint-staged@npm:17.5.0"
+"lint-staged@npm:17.5.1":
+  version: 17.5.1
+  resolution: "lint-staged@npm:17.5.1"
   dependencies:
     picomatch: "npm:^4.0.7"
     string-argv: "npm:^0.3.2"
@@ -9235,7 +9453,7 @@ __metadata:
       optional: true
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10/3ca6263488ae3e8e4915e5c6ee70bb3b54bbffcb7e84dd2fb05c02032563401e5bb41c3d216cdc43933c6d6ff3ed66319d22c5cb5c63727e00af966b95929516
+  checksum: 10/2e10b821214eafce576e8505d6b5cee3a83dd40d68b2d3705b0c69abe35a26e3ad3fcd9cc8379bab47c3e5b3cb8042923d8fbe42e7f72b28da54e6c7d4b4986a
   languageName: node
   linkType: hard
 
@@ -9516,6 +9734,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.3.18":
+  version: 3.3.19
+  resolution: "nanoid@npm:3.3.19"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 10/a330adb28dad63eccb0a0c95a2a61353e84b7e067061fff94167803d94be8eef0f7b75cf2da1bece06e8b7afb892abbe52cf0ec33298c817a083eedccd7656e4
+  languageName: node
+  linkType: hard
+
 "napi-postinstall@npm:^0.3.4":
   version: 0.3.4
   resolution: "napi-postinstall@npm:0.3.4"
@@ -9715,30 +9942,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"oxc-parser@npm:^0.147.0":
-  version: 0.147.0
-  resolution: "oxc-parser@npm:0.147.0"
+"oxc-parser@npm:^0.148.0":
+  version: 0.148.0
+  resolution: "oxc-parser@npm:0.148.0"
   dependencies:
-    "@oxc-parser/binding-android-arm-eabi": "npm:0.147.0"
-    "@oxc-parser/binding-android-arm64": "npm:0.147.0"
-    "@oxc-parser/binding-darwin-arm64": "npm:0.147.0"
-    "@oxc-parser/binding-darwin-x64": "npm:0.147.0"
-    "@oxc-parser/binding-freebsd-x64": "npm:0.147.0"
-    "@oxc-parser/binding-linux-arm-gnueabihf": "npm:0.147.0"
-    "@oxc-parser/binding-linux-arm-musleabihf": "npm:0.147.0"
-    "@oxc-parser/binding-linux-arm64-gnu": "npm:0.147.0"
-    "@oxc-parser/binding-linux-arm64-musl": "npm:0.147.0"
-    "@oxc-parser/binding-linux-ppc64-gnu": "npm:0.147.0"
-    "@oxc-parser/binding-linux-riscv64-gnu": "npm:0.147.0"
-    "@oxc-parser/binding-linux-riscv64-musl": "npm:0.147.0"
-    "@oxc-parser/binding-linux-s390x-gnu": "npm:0.147.0"
-    "@oxc-parser/binding-linux-x64-gnu": "npm:0.147.0"
-    "@oxc-parser/binding-linux-x64-musl": "npm:0.147.0"
-    "@oxc-parser/binding-openharmony-arm64": "npm:0.147.0"
-    "@oxc-parser/binding-win32-arm64-msvc": "npm:0.147.0"
-    "@oxc-parser/binding-win32-ia32-msvc": "npm:0.147.0"
-    "@oxc-parser/binding-win32-x64-msvc": "npm:0.147.0"
-    "@oxc-project/types": "npm:^0.147.0"
+    "@oxc-parser/binding-android-arm-eabi": "npm:0.148.0"
+    "@oxc-parser/binding-android-arm64": "npm:0.148.0"
+    "@oxc-parser/binding-darwin-arm64": "npm:0.148.0"
+    "@oxc-parser/binding-darwin-x64": "npm:0.148.0"
+    "@oxc-parser/binding-freebsd-x64": "npm:0.148.0"
+    "@oxc-parser/binding-linux-arm-gnueabihf": "npm:0.148.0"
+    "@oxc-parser/binding-linux-arm-musleabihf": "npm:0.148.0"
+    "@oxc-parser/binding-linux-arm64-gnu": "npm:0.148.0"
+    "@oxc-parser/binding-linux-arm64-musl": "npm:0.148.0"
+    "@oxc-parser/binding-linux-ppc64-gnu": "npm:0.148.0"
+    "@oxc-parser/binding-linux-riscv64-gnu": "npm:0.148.0"
+    "@oxc-parser/binding-linux-riscv64-musl": "npm:0.148.0"
+    "@oxc-parser/binding-linux-s390x-gnu": "npm:0.148.0"
+    "@oxc-parser/binding-linux-x64-gnu": "npm:0.148.0"
+    "@oxc-parser/binding-linux-x64-musl": "npm:0.148.0"
+    "@oxc-parser/binding-openharmony-arm64": "npm:0.148.0"
+    "@oxc-parser/binding-win32-arm64-msvc": "npm:0.148.0"
+    "@oxc-parser/binding-win32-ia32-msvc": "npm:0.148.0"
+    "@oxc-parser/binding-win32-x64-msvc": "npm:0.148.0"
+    "@oxc-project/types": "npm:^0.148.0"
   dependenciesMeta:
     "@oxc-parser/binding-android-arm-eabi":
       optional: true
@@ -9778,7 +10005,7 @@ __metadata:
       optional: true
     "@oxc-parser/binding-win32-x64-msvc":
       optional: true
-  checksum: 10/4cee544d47f476c6cb4fd7c64d3bb9ac5e359f051ccea76f5ea7984aaba54434102f7f1c7b69177dc1ba03ee25ad141104049e680da922437d815e11670bea2e
+  checksum: 10/452fe0114afe61198f05a4e15acb60047167eb485958b6d66b98bb3c6bf968cf67c928737ab97b64824c27916835744a504d9f6e546b65fc0e76b48800f9fc51
   languageName: node
   linkType: hard
 
@@ -10129,6 +10356,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss@npm:^8.5.28":
+  version: 8.5.28
+  resolution: "postcss@npm:8.5.28"
+  dependencies:
+    nanoid: "npm:^3.3.18"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10/c34814c1da499f370cd3b02a085a2d866989a966629b7bd4025f4a2a10d538a2ec83dc3181e1008550edb4cf44e49a0c40ec82332b08d9600877e6841240ad05
+  languageName: node
+  linkType: hard
+
 "powershell-utils@npm:^0.1.0":
   version: 0.1.0
   resolution: "powershell-utils@npm:0.1.0"
@@ -10275,26 +10513,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:7.87.0":
-  version: 7.87.0
-  resolution: "react-hook-form@npm:7.87.0"
+"react-hook-form@npm:7.88.0":
+  version: 7.88.0
+  resolution: "react-hook-form@npm:7.88.0"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18 || ^19
-  checksum: 10/737ba6a3ba2062b9206fb717c0701866a9e60620059e49b5c24aad29126a8d78a6c79df412656ba0a2908593584ec4cba3c8804a3d6015c0d0882f882aca5841
+  checksum: 10/ab039b934d7083284dc704b79f2518182e1a448b1be1b249f0e58df4cbe68bef8fe80c14fb6b84618f819b411b46e1ab56c09f6cc46efbe960eaa169cf433c9b
   languageName: node
   linkType: hard
 
-"react-intl@npm:10.1.26":
-  version: 10.1.26
-  resolution: "react-intl@npm:10.1.26"
+"react-intl@npm:10.2.1":
+  version: 10.2.1
+  resolution: "react-intl@npm:10.2.1"
   dependencies:
     "@formatjs/icu-messageformat-parser": "npm:3.5.17"
-    "@formatjs/intl": "npm:4.1.20"
+    "@formatjs/intl": "npm:4.2.0"
     intl-messageformat: "npm:11.2.14"
   peerDependencies:
     "@types/react": ">=18.0.0"
     react: ">=18.0.0"
-  checksum: 10/9e9ebf08a452a56964d05c2a234bd6995921d9673d5ff47833076da8d5e89ee7cf01d64a252bfba53ab3f1c6a8f228d676edd4c325ccb77469843a456030c180
+  checksum: 10/f0f2e5a5b57bc77dcd48195a1b451eb6cfbdbc0d94ff1e216431edd7c442dcdd676b6f3478d0b46878de53a8a6936b1c509341d9cee4c2ecbcaa7a3e8c4322a3
   languageName: node
   linkType: hard
 
@@ -10531,6 +10769,64 @@ __metadata:
   bin:
     rolldown: ./bin/cli.mjs
   checksum: 10/29bff46d93bc551732503e4a34786fec5f69aed7186a9617b701fbfbb6f91415d54ce31af6b0dcd11a40eb296c90b47bb7c7d04fe9c1f912decb2f02aacfb65a
+  languageName: node
+  linkType: hard
+
+"rolldown@npm:~1.2.6":
+  version: 1.2.8
+  resolution: "rolldown@npm:1.2.8"
+  dependencies:
+    "@oxc-project/types": "npm:=0.149.0"
+    "@rolldown/binding-android-arm-eabi": "npm:1.2.8"
+    "@rolldown/binding-android-arm64": "npm:1.2.8"
+    "@rolldown/binding-darwin-arm64": "npm:1.2.8"
+    "@rolldown/binding-darwin-x64": "npm:1.2.8"
+    "@rolldown/binding-freebsd-x64": "npm:1.2.8"
+    "@rolldown/binding-linux-arm-gnueabihf": "npm:1.2.8"
+    "@rolldown/binding-linux-arm64-gnu": "npm:1.2.8"
+    "@rolldown/binding-linux-arm64-musl": "npm:1.2.8"
+    "@rolldown/binding-linux-ppc64-gnu": "npm:1.2.8"
+    "@rolldown/binding-linux-s390x-gnu": "npm:1.2.8"
+    "@rolldown/binding-linux-x64-gnu": "npm:1.2.8"
+    "@rolldown/binding-linux-x64-musl": "npm:1.2.8"
+    "@rolldown/binding-openharmony-arm64": "npm:1.2.8"
+    "@rolldown/binding-win32-arm64-msvc": "npm:1.2.8"
+    "@rolldown/binding-win32-x64-msvc": "npm:1.2.8"
+    "@rolldown/pluginutils": "npm:^1.0.0"
+  dependenciesMeta:
+    "@rolldown/binding-android-arm-eabi":
+      optional: true
+    "@rolldown/binding-android-arm64":
+      optional: true
+    "@rolldown/binding-darwin-arm64":
+      optional: true
+    "@rolldown/binding-darwin-x64":
+      optional: true
+    "@rolldown/binding-freebsd-x64":
+      optional: true
+    "@rolldown/binding-linux-arm-gnueabihf":
+      optional: true
+    "@rolldown/binding-linux-arm64-gnu":
+      optional: true
+    "@rolldown/binding-linux-arm64-musl":
+      optional: true
+    "@rolldown/binding-linux-ppc64-gnu":
+      optional: true
+    "@rolldown/binding-linux-s390x-gnu":
+      optional: true
+    "@rolldown/binding-linux-x64-gnu":
+      optional: true
+    "@rolldown/binding-linux-x64-musl":
+      optional: true
+    "@rolldown/binding-openharmony-arm64":
+      optional: true
+    "@rolldown/binding-win32-arm64-msvc":
+      optional: true
+    "@rolldown/binding-win32-x64-msvc":
+      optional: true
+  bin:
+    rolldown: ./bin/cli.mjs
+  checksum: 10/7260c1f3d6ee32358f110a425174ae44df9383957cf2364195db371ab407ed3dced45afe14a86556df551fba4efbe073ef53fb994ffd8c5d517754ec55c872b0
   languageName: node
   linkType: hard
 
@@ -11214,18 +11510,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:8.69.0":
-  version: 8.69.0
-  resolution: "typescript-eslint@npm:8.69.0"
+"typescript-eslint@npm:8.70.0":
+  version: 8.70.0
+  resolution: "typescript-eslint@npm:8.70.0"
   dependencies:
-    "@typescript-eslint/eslint-plugin": "npm:8.69.0"
-    "@typescript-eslint/parser": "npm:8.69.0"
-    "@typescript-eslint/typescript-estree": "npm:8.69.0"
-    "@typescript-eslint/utils": "npm:8.69.0"
+    "@typescript-eslint/eslint-plugin": "npm:8.70.0"
+    "@typescript-eslint/parser": "npm:8.70.0"
+    "@typescript-eslint/typescript-estree": "npm:8.70.0"
+    "@typescript-eslint/utils": "npm:8.70.0"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.1.0"
-  checksum: 10/d06d299ec1b5468a9963d57e1e835cf48f2fbf89b301b8a4d1a2438b2d1853e12f97c48ea78f7f27d7da91671c7d8cbb04c3e3cd3d5b1a3f8bc9f7224e73150a
+  checksum: 10/afdb2760ff425e806165d516e5d5baea4b446ce75c8e039a71d225047550a07b712f76b4b4a48982613f881e9694155e1beff1c5f0c4d034286048a41448911c
   languageName: node
   linkType: hard
 
@@ -11258,10 +11554,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unbash@npm:^4.0.10":
-  version: 4.0.10
-  resolution: "unbash@npm:4.0.10"
-  checksum: 10/8cce584b92ba8d0617b3db81153aae0a0f266c4aa8457724f0010ab6d862a17a5547aa788eb37e1b1e441f0af7a270a5871642abe4dcc0b254212caaad511347
+"unbash@npm:^4.0.11":
+  version: 4.0.11
+  resolution: "unbash@npm:4.0.11"
+  checksum: 10/f44bd9febbef85976623ade7c264bdf6c5b0f420f277d4ecf27a8290de49baade349254f4ef3cbbcf47c3ee3e01d64788d963b277b16ccc18aab50626fcd8a33
   languageName: node
   linkType: hard
 
@@ -11432,7 +11728,64 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:8.2.2, vite@npm:^6.0.0 || ^7.0.0 || ^8.0.0":
+"vite@npm:8.3.0":
+  version: 8.3.0
+  resolution: "vite@npm:8.3.0"
+  dependencies:
+    fsevents: "npm:~2.3.3"
+    lightningcss: "npm:^1.33.0"
+    picomatch: "npm:^4.0.7"
+    postcss: "npm:^8.5.28"
+    rolldown: "npm:~1.2.6"
+    tinyglobby: "npm:^0.2.17"
+  peerDependencies:
+    "@types/node": ^20.19.0 || >=22.12.0
+    "@vitejs/devtools": ^0.7.1
+    esbuild: ^0.27.0 || ^0.28.0
+    jiti: ">=1.21.0"
+    less: ^4.0.0
+    sass: ^1.70.0
+    sass-embedded: ^1.70.0
+    stylus: ">=0.54.8"
+    sugarss: ^5.0.0
+    terser: ^5.16.0
+    tsx: ^4.8.1
+    yaml: ^2.4.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  peerDependenciesMeta:
+    "@types/node":
+      optional: true
+    "@vitejs/devtools":
+      optional: true
+    esbuild:
+      optional: true
+    jiti:
+      optional: true
+    less:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    terser:
+      optional: true
+    tsx:
+      optional: true
+    yaml:
+      optional: true
+  bin:
+    vite: bin/vite.js
+  checksum: 10/7f373449d1189c6b54c24555aab260afb0863e864a7f4a0b52e59dbbe86e4166ee6e82c3b4ab82cb00b38a5f0922ab665cf2dcfb5c7fb6a31812cc71a456fe72
+  languageName: node
+  linkType: hard
+
+"vite@npm:^6.0.0 || ^7.0.0 || ^8.0.0":
   version: 8.2.2
   resolution: "vite@npm:8.2.2"
   dependencies:
