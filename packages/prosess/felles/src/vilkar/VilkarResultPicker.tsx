@@ -124,7 +124,6 @@ const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkår 
         </option>
       ));
   }
-  return;
 };
 
 const getIsAvslagCodeRequired = (erVilkårOk: boolean, avslagCode?: string) => () => !erVilkårOk && !avslagCode;

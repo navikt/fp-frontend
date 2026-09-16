@@ -45,8 +45,6 @@ const getVurdering = (resultat: ManuellBehandlingResultat) => {
   if (!opphørFom && !avslagskode) {
     return MedlemskapVurdering.OPPFYLT;
   }
-
-  return;
 };
 
 export const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
