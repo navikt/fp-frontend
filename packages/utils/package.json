@@ -19,19 +19,19 @@
     "@navikt/fp-konstanter": "workspace:^",
     "@navikt/fp-types": "workspace:^",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^",
-    "@navikt/ft-form-validators": "6.1.11",
-    "@navikt/ft-utils": "5.1.11",
+    "@navikt/ft-form-validators": "6.1.12",
+    "@navikt/ft-utils": "5.1.12",
     "dayjs": "1.11.23",
-    "react": "19.2.8",
-    "react-intl": "10.1.26"
+    "react": "19.3.0",
+    "react-intl": "10.2.2"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
-    "@types/react": "19.2.18",
+    "@types/react": "19.3.0",
     "eslint": "10.10.0",
     "typescript": "6.0.3",
-    "vitest": "4.1.11"
+    "vitest": "5.0.0"
   }
 }

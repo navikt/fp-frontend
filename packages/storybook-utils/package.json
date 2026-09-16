@@ -20,9 +20,9 @@
     "@navikt/fp-utils": "workspace:*",
     "@storybook/react": "10.6.0",
     "@tanstack/react-query": "5.102.8",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "react-intl": "10.1.26",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-intl": "10.2.2",
     "react-router": "8.3.1",
     "storybook": "10.6.0"
   },
@@ -31,7 +31,7 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@tanstack/react-query-devtools": "5.102.8",
-    "@types/react": "19.2.18",
+    "@types/react": "19.3.0",
     "dayjs": "1.11.23",
     "eslint": "10.10.0",
     "typescript": "6.0.3"

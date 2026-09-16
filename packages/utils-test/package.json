@@ -14,15 +14,15 @@
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
-    "react": "19.2.8",
-    "react-intl": "10.1.26",
+    "react": "19.3.0",
+    "react-intl": "10.2.2",
     "typescript": "6.0.3"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
-    "@types/node": "24.13.3",
-    "@types/react": "19.2.18",
+    "@types/node": "24.13.4",
+    "@types/react": "19.3.0",
     "eslint": "10.10.0"
   }
 }

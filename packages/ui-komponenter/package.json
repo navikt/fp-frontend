@@ -17,13 +17,13 @@
     "@navikt/ds-react": "8.16.2",
     "@navikt/fp-konstanter": "workspace:^",
     "@navikt/fp-utils": "workspace:^",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
-    "@types/react": "19.2.18",
+    "@types/react": "19.3.0",
     "eslint": "10.10.0",
     "typescript": "6.0.3"
   }
