@@ -74,7 +74,7 @@ export const SaksbehandlereForSakslisteForm = ({
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-                {grupper.saksbehandlerGrupper.map(sg => (
+                {grupper?.saksbehandlerGrupper.map(sg => (
                   <Table.ExpandableRow
                     key={sg.gruppeId}
                     expandOnRowClick
