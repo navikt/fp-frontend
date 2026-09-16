@@ -18,7 +18,7 @@ const {
 } = composeStories(stories);
 
 describe('VedtakProsessIndex', () => {
-  vi.hoisted(() => {
+  beforeAll(() => {
     Object.defineProperty(globalThis, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation(query => ({
