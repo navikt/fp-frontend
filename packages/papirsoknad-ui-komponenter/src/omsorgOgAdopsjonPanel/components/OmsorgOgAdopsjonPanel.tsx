@@ -155,7 +155,7 @@ const getValideringMotAnnenFødselsdato = (index: number, fødselsdato: string |
   if (index === 0 && fødselsdato && fDato) {
     return isDatesEqual(fDato, fødselsdato);
   }
-  return;
+  return undefined;
 };
 
 OmsorgOgAdopsjonPanel.initialValues = (): OmsorgOgAdopsjonFormValues => ({ [OMSORG_NAME_PREFIX]: {} });

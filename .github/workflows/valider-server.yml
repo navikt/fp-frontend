@@ -25,6 +25,8 @@ jobs:
 
       - name: Install server dependencies
         working-directory: server
+        env:
+          YARN_ENABLE_SCRIPTS: false
         run: yarn install --immutable
 
       - name: Server ESLint

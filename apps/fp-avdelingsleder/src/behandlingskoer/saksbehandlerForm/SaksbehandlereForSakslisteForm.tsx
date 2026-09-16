@@ -45,7 +45,7 @@ export const SaksbehandlereForSakslisteForm = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- nullstill skjema berre når valt saksliste endrar seg; defaultValues er ny kvar render
   }, [valgtSaksliste.sakslisteId]);
 
-  const harGrupper = grupper && grupper.saksbehandlerGrupper.some(sg => sg.saksbehandlere.length > 0);
+  const harGrupper = grupper?.saksbehandlerGrupper.some(sg => sg.saksbehandlere.length > 0);
 
   return (
     <RhfForm<FormValues> formMethods={formMethods}>
@@ -74,7 +74,7 @@ export const SaksbehandlereForSakslisteForm = ({
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-                {grupper.saksbehandlerGrupper.map(sg => (
+                {grupper?.saksbehandlerGrupper.map(sg => (
                   <Table.ExpandableRow
                     key={sg.gruppeId}
                     expandOnRowClick

@@ -29,6 +29,8 @@ jobs:
           restore-keys: turbo-${{ runner.os }}-master-${{ hashFiles('yarn.lock') }}
 
       - name: Install dependencies
+        env:
+          YARN_ENABLE_SCRIPTS: false
         run: yarn install --immutable
 
       - name: Stylelint

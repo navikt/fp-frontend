@@ -97,8 +97,7 @@ const valider = (
       { dato: dateFormat(dato) },
     );
   }
-
-  return;
+  return undefined;
 };
 
 const validerPerioder = (
