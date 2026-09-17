@@ -1007,12 +1007,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/icu-messageformat-parser@npm:3.5.17":
-  version: 3.5.17
-  resolution: "@formatjs/icu-messageformat-parser@npm:3.5.17"
+"@formatjs/icu-messageformat-parser@npm:3.5.18":
+  version: 3.5.18
+  resolution: "@formatjs/icu-messageformat-parser@npm:3.5.18"
   dependencies:
     "@formatjs/icu-skeleton-parser": "npm:2.1.11"
-  checksum: 10/cbb9daf23f65e4ef3697eae3be4c6888eda942fcde18929dfc6e96ef6c45052409d20340ece13476eeadd062e222809c46a2f26e3b453c9cbd4979bb6c0b0ae5
+  checksum: 10/fc2215a16571fcff3eb9f446878ef7649d40064a79648352ab79f68f4b48ce7b196125495eec82caa02edec78a9a094d8fd6fd5db0abeb353b95afb62672c2a2
   languageName: node
   linkType: hard
 
@@ -1023,14 +1023,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/intl@npm:4.1.20":
-  version: 4.1.20
-  resolution: "@formatjs/intl@npm:4.1.20"
+"@formatjs/intl@npm:4.2.1":
+  version: 4.2.1
+  resolution: "@formatjs/intl@npm:4.2.1"
   dependencies:
     "@formatjs/fast-memoize": "npm:3.1.7"
-    "@formatjs/icu-messageformat-parser": "npm:3.5.17"
-    intl-messageformat: "npm:11.2.14"
-  checksum: 10/2c9e1138616060a207a87f18e11654831253cb2d5f529c24810da236b855d1f8d0108930993d1074aadcd7fb465cb7f2a876e84f7e515e48dfa0184fe2a98acd
+    "@formatjs/icu-messageformat-parser": "npm:3.5.18"
+    intl-messageformat: "npm:11.2.15"
+  checksum: 10/3c9da64a7fdf87c61c9ca147888bc0604555a064ea4d02182274da2505e36ef1699f6d855772422089f0372587aed728b99e5a811b629b7d1267c216f0aea005
   languageName: node
   linkType: hard
 
@@ -1353,14 +1353,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/sourcemap-codec@npm:^1.4.14, @jridgewell/sourcemap-codec@npm:^1.5.0, @jridgewell/sourcemap-codec@npm:^1.5.5":
+"@jridgewell/sourcemap-codec@npm:^1.4.14, @jridgewell/sourcemap-codec@npm:^1.5.0, @jridgewell/sourcemap-codec@npm:^1.5.5, @jridgewell/sourcemap-codec@npm:^1.6.0":
   version: 1.6.0
   resolution: "@jridgewell/sourcemap-codec@npm:1.6.0"
   checksum: 10/eb53fbf7eb4051302a599d6b91425f381168b2856f321336fb00852cea1e0c1904af2610c157b1535e94a61caa98f0bd068d1d0394dd46adf9e9c45c4e11af91
   languageName: node
   linkType: hard
 
-"@jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.28":
+"@jridgewell/trace-mapping@npm:0.3.31, @jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.28":
   version: 0.3.31
   resolution: "@jridgewell/trace-mapping@npm:0.3.31"
   dependencies:
@@ -1514,26 +1514,26 @@ __metadata:
     "@navikt/fp-sak-dekorator": "workspace:*"
     "@navikt/fp-sak-infosider": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
     "@tanstack/react-query": "npm:5.102.8"
     "@tanstack/react-query-devtools": "npm:5.102.8"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
     history: "npm:5.3.0"
     ky: "npm:2.1.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1557,35 +1557,35 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
     "@tanstack/react-query": "npm:5.102.8"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
     "@types/lodash.debounce": "npm:4.0.9"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
     history: "npm:5.3.0"
     ky: "npm:2.1.0"
     lodash.debounce: "npm:4.0.8"
     msw: "npm:2.15.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     tailwindcss: "npm:4.3.3"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1604,29 +1604,29 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
     "@types/css-tree": "npm:3.2.0"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     css-tree: "npm:3.2.1"
     dayjs: "npm:1.11.23"
     editorjs-html: "npm:4.0.5"
     editorjs-undo: "npm:2.0.28"
     eslint: "npm:10.10.0"
     lodash.debounce: "npm:4.0.8"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1645,7 +1645,7 @@ __metadata:
     eslint-plugin-unicorn: "npm:74.0.0"
     globals: "npm:17.12.0"
     typescript: "npm:6.0.3"
-    typescript-eslint: "npm:8.69.0"
+    typescript-eslint: "npm:8.70.0"
   peerDependencies:
     eslint: 10.x
   languageName: unknown
@@ -1656,8 +1656,8 @@ __metadata:
   resolution: "@navikt/fp-config-typescript@workspace:packages/config/typescript"
   dependencies:
     "@testing-library/jest-dom": "npm:7.0.1"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1668,13 +1668,13 @@ __metadata:
     "@storybook/react": "npm:10.6.0"
     "@tailwindcss/vite": "npm:4.3.3"
     "@vitejs/plugin-react": "npm:6.1.1"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
+    vite: "npm:8.3.0"
     vite-plugin-compression2: "npm:2.5.3"
-    vitest: "npm:4.1.11"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1692,24 +1692,24 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1729,27 +1729,27 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1764,23 +1764,23 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1799,26 +1799,26 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1835,27 +1835,27 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-plattform-komponenter": "npm:12.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-plattform-komponenter": "npm:12.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
     lodash: "npm:^4.18.1"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1874,27 +1874,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1911,24 +1911,24 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1947,26 +1947,26 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1985,26 +1985,26 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2023,25 +2023,25 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2061,25 +2061,25 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2097,26 +2097,26 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2134,27 +2134,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2173,27 +2173,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-plattform-komponenter": "npm:12.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-plattform-komponenter": "npm:12.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2213,27 +2213,27 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2252,27 +2252,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2291,27 +2291,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2331,27 +2331,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2370,26 +2370,26 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2402,21 +2402,21 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2503,44 +2503,44 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utbetalingsdata-is15": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-fakta-beregning": "npm:14.2.10"
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "npm:16.2.10"
-    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "npm:10.2.10"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-plattform-komponenter": "npm:12.1.11"
-    "@navikt/ft-prosess-beregning": "npm:2.4.1"
-    "@navikt/ft-prosess-beregningsgrunnlag": "npm:13.2.11"
-    "@navikt/ft-prosess-tilbakekreving": "npm:11.2.10"
-    "@navikt/ft-prosess-tilbakekreving-foreldelse": "npm:10.2.10"
-    "@navikt/ft-prosess-tilbakekreving-vedtak": "npm:9.2.10"
-    "@navikt/ft-types": "npm:6.3.9"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-fakta-beregning": "npm:14.2.11"
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "npm:16.2.11"
+    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "npm:10.2.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-plattform-komponenter": "npm:12.1.12"
+    "@navikt/ft-prosess-beregning": "npm:2.4.2"
+    "@navikt/ft-prosess-beregningsgrunnlag": "npm:13.2.12"
+    "@navikt/ft-prosess-tilbakekreving": "npm:11.2.11"
+    "@navikt/ft-prosess-tilbakekreving-foreldelse": "npm:10.2.11"
+    "@navikt/ft-prosess-tilbakekreving-vedtak": "npm:9.2.11"
+    "@navikt/ft-types": "npm:6.3.10"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/addon-a11y": "npm:10.6.0"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
     "@tanstack/react-query": "npm:5.102.8"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
     history: "npm:5.3.0"
     ky: "npm:2.1.0"
     msw: "npm:2.15.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     react-responsive: "npm:10.0.1"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     tailwindcss: "npm:4.3.3"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2562,32 +2562,32 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
     "@tanstack/react-query": "npm:5.102.8"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
     ky: "npm:2.1.0"
     msw: "npm:2.15.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     tailwindcss: "npm:4.3.3"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2626,31 +2626,31 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
     "@tanstack/react-query": "npm:5.102.8"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     echarts: "npm:6.1.0"
     eslint: "npm:10.10.0"
     ky: "npm:2.1.0"
     msw: "npm:2.15.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2666,31 +2666,31 @@ __metadata:
     "@navikt/fp-los-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-plattform-komponenter": "npm:12.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-plattform-komponenter": "npm:12.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
     "@tanstack/react-query": "npm:5.102.8"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
     ky: "npm:2.1.0"
     msw: "npm:2.15.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2705,26 +2705,26 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2740,27 +2740,27 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:^"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2776,26 +2776,26 @@ __metadata:
     "@navikt/fp-papirsoknad-ui-komponenter": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2810,21 +2810,21 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2839,21 +2839,21 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2868,21 +2868,21 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2896,23 +2896,23 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2927,17 +2927,17 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
-    "@types/react": "npm:19.2.18"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
   languageName: unknown
@@ -2958,27 +2958,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -2998,27 +2998,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3037,27 +3037,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3075,27 +3075,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3114,27 +3114,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3151,23 +3151,23 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3186,27 +3186,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3227,26 +3227,26 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3265,27 +3265,27 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3303,22 +3303,22 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3339,27 +3339,27 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3378,25 +3378,25 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3415,26 +3415,26 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3454,26 +3454,26 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3492,25 +3492,25 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3529,25 +3529,25 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3566,25 +3566,25 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3600,23 +3600,23 @@ __metadata:
     "@navikt/fp-sak-visittkort": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-plattform-komponenter": "npm:12.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-plattform-komponenter": "npm:12.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3631,24 +3631,24 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3661,25 +3661,25 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/ft-plattform-komponenter": "npm:12.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-plattform-komponenter": "npm:12.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3695,23 +3695,23 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3726,23 +3726,23 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     react-responsive: "npm:10.0.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3757,25 +3757,25 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
     history: "npm:5.3.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3787,22 +3787,22 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3819,26 +3819,26 @@ __metadata:
     "@navikt/fp-sak-ukjent-adresse": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3851,23 +3851,23 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3882,25 +3882,25 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3915,26 +3915,26 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3946,22 +3946,22 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -3976,27 +3976,27 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4010,22 +4010,22 @@ __metadata:
     "@navikt/fp-modal-sett-pa-vent": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4041,26 +4041,26 @@ __metadata:
     "@navikt/fp-fakta-verge": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4074,27 +4074,27 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4111,26 +4111,26 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:^"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4145,27 +4145,27 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4184,29 +4184,29 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
     history: "npm:5.3.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4218,21 +4218,21 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4246,23 +4246,23 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-types": "workspace:^"
-    "@navikt/ft-plattform-komponenter": "npm:12.1.11"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-plattform-komponenter": "npm:12.1.12"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4280,12 +4280,12 @@ __metadata:
     "@storybook/react": "npm:10.6.0"
     "@tanstack/react-query": "npm:5.102.8"
     "@tanstack/react-query-devtools": "npm:5.102.8"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
@@ -4303,24 +4303,24 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-fakta-beregning": "npm:14.2.10"
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "npm:16.2.10"
-    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "npm:10.2.10"
-    "@navikt/ft-form-hooks": "npm:12.4.13"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-plattform-komponenter": "npm:12.1.11"
-    "@navikt/ft-prosess-beregningsgrunnlag": "npm:13.2.11"
-    "@navikt/ft-prosess-tilbakekreving-vedtak": "npm:9.2.10"
-    "@navikt/ft-types": "npm:6.3.9"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
-    "@types/react": "npm:19.2.18"
+    "@navikt/ft-fakta-beregning": "npm:14.2.11"
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "npm:16.2.11"
+    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "npm:10.2.11"
+    "@navikt/ft-form-hooks": "npm:12.4.14"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-plattform-komponenter": "npm:12.1.12"
+    "@navikt/ft-prosess-beregningsgrunnlag": "npm:13.2.12"
+    "@navikt/ft-prosess-tilbakekreving-vedtak": "npm:9.2.11"
+    "@navikt/ft-types": "npm:6.3.10"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-hook-form: "npm:7.87.0"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-hook-form: "npm:7.88.0"
+    react-intl: "npm:10.2.2"
     typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
@@ -4346,10 +4346,10 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-konstanter": "workspace:^"
     "@navikt/fp-utils": "workspace:^"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
     typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
@@ -4365,23 +4365,23 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-ui-komponenter": "npm:8.2.8"
-    "@navikt/ft-utils": "npm:5.1.11"
+    "@navikt/ft-ui-komponenter": "npm:8.2.9"
+    "@navikt/ft-utils": "npm:5.1.12"
     "@storybook/react": "npm:10.6.0"
     "@storybook/react-vite": "npm:10.6.0"
-    "@testing-library/dom": "npm:10.4.1"
+    "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/react": "npm:19.2.18"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     storybook: "npm:10.6.0"
     typescript: "npm:6.0.3"
-    vite: "npm:8.2.2"
-    vitest: "npm:4.1.11"
+    vite: "npm:8.3.0"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
@@ -4391,11 +4391,11 @@ __metadata:
   dependencies:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
-    "@types/node": "npm:24.13.3"
-    "@types/react": "npm:19.2.18"
+    "@types/node": "npm:24.13.4"
+    "@types/react": "npm:19.3.0"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
@@ -4411,21 +4411,21 @@ __metadata:
     "@navikt/fp-konstanter": "workspace:^"
     "@navikt/fp-types": "workspace:^"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^"
-    "@navikt/ft-form-validators": "npm:6.1.11"
-    "@navikt/ft-utils": "npm:5.1.11"
-    "@types/react": "npm:19.2.18"
+    "@navikt/ft-form-validators": "npm:6.1.12"
+    "@navikt/ft-utils": "npm:5.1.12"
+    "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    react: "npm:19.2.8"
-    react-intl: "npm:10.1.26"
+    react: "npm:19.3.0"
+    react-intl: "npm:10.2.2"
     typescript: "npm:6.0.3"
-    vitest: "npm:4.1.11"
+    vitest: "npm:5.0.0"
   languageName: unknown
   linkType: soft
 
-"@navikt/ft-fakta-beregning@npm:14.2.10":
-  version: 14.2.10
-  resolution: "@navikt/ft-fakta-beregning@npm:14.2.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F14.2.10%2F5dba1f50b02c2b5ee3bcbbf89e598e6b964c85f9"
+"@navikt/ft-fakta-beregning@npm:14.2.11":
+  version: 14.2.11
+  resolution: "@navikt/ft-fakta-beregning@npm:14.2.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F14.2.11%2F5dbc9690cf90822fd0e3ec1469e7c0895aa7352e"
   peerDependencies:
     "@navikt/aksel-icons": 8.x
     "@navikt/ds-css": 8.x
@@ -4442,13 +4442,13 @@ __metadata:
     react-dom: 19.x
     react-hook-form: 7.x
     react-intl: 10.x
-  checksum: 10/ad52372edaf966fb90abcb5748f064f8ec842cb6c9550c76d2f2e0ae5bcbd3f3ec9eccb09093f61857bad69c18bf33d4df5cea46d56bee5663e7b115788d7eaa
+  checksum: 10/7b7560fb950ce50e58648246d6f7f0faa68d1313e14f5ac68a95aedda791f98c7ef5c84b1f8c1385f55366c4fb4b014bbf283d5f1f19926a0c19c80d4e75ea9f
   languageName: node
   linkType: hard
 
-"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:16.2.10":
-  version: 16.2.10
-  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:16.2.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F16.2.10%2F2404944e2f9fee74f01d4c3ba435a7a057a499b5"
+"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:16.2.11":
+  version: 16.2.11
+  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:16.2.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F16.2.11%2F30c35b6034dd62c2a5f61413c8d87879d3c9d4b3"
   peerDependencies:
     "@navikt/aksel-icons": 8.x
     "@navikt/ds-css": 8.x
@@ -4465,13 +4465,13 @@ __metadata:
     react-dom: 19.x
     react-hook-form: 7.x
     react-intl: 10.x
-  checksum: 10/14d2b7e2e758e3207780e378e1d9e1dbb5c2ecb2854dac157b4262f122087a8286dbb042b5bda2c3ec14da9f29ff7e7cdd53fa3e065c539875a786bc259a2dd3
+  checksum: 10/07de28ba6cf71ddcc1350db535dfeba248f70cd1cb1fba2f1438b2fcb0a56ef08a9d6e31c753028bb597b464ae5899beeb6171c2d12a51d17d70eb289f8f3ed1
   languageName: node
   linkType: hard
 
-"@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:10.2.10":
-  version: 10.2.10
-  resolution: "@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:10.2.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-tilbakekreving-feilutbetaling%2F10.2.10%2F82a793d7b50ab226cd1498f409d67cf4275c6d6b"
+"@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:10.2.11":
+  version: 10.2.11
+  resolution: "@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:10.2.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-tilbakekreving-feilutbetaling%2F10.2.11%2F4fd890f33b51e976b4cb5393a33702ff23f41ac3"
   peerDependencies:
     "@navikt/aksel-icons": 8.x
     "@navikt/ds-css": 8.x
@@ -4487,13 +4487,13 @@ __metadata:
     react-dom: 19.x
     react-hook-form: 7.x
     react-intl: 10.x
-  checksum: 10/8f9174b2dddf1a61e939f813d632b6fc3ba379c9c7df933d2c371888779df56aae1ffb77024bfef326172533a01692d12cc534e62bf0471c780753fe12e2bad6
+  checksum: 10/354c13d709c8d4becc10ad8c8d02d78a048f63d83b2c2baf062ce87ac70f8ce546e7b94e76e0d7b3ff83b547fda87a75f765103a0d2845740e6eb459af6782a4
   languageName: node
   linkType: hard
 
-"@navikt/ft-form-hooks@npm:12.4.13":
-  version: 12.4.13
-  resolution: "@navikt/ft-form-hooks@npm:12.4.13::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-hooks%2F12.4.13%2F3256117541f2b138e22fa0668b4219f2a97bf8dc"
+"@navikt/ft-form-hooks@npm:12.4.14":
+  version: 12.4.14
+  resolution: "@navikt/ft-form-hooks@npm:12.4.14::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-hooks%2F12.4.14%2F6da60e75db4e948dbae40929279f2d687b42d6a2"
   peerDependencies:
     "@navikt/aksel-icons": 8.x
     "@navikt/ds-react": 8.x
@@ -4503,23 +4503,23 @@ __metadata:
     react: 19.x
     react-dom: 19.x
     react-hook-form: 7.x
-  checksum: 10/aed78be2d1ec3083a164f60c58c6cee0f44c2ef12e961d9f01cd8d3ac45416c32291096f14472a114e578e8d86a7db4685752367aec76dcb69cdab2db83d256d
+  checksum: 10/9e5dc74ab75d4aec73d9a402bbb6e7a338a4db1eaa04ffab10c3d6aaa175adb8e679521130f24fd64275ecf89cd029326c9ace6c6036d27b8b71590c1ee1a178
   languageName: node
   linkType: hard
 
-"@navikt/ft-form-validators@npm:6.1.11":
-  version: 6.1.11
-  resolution: "@navikt/ft-form-validators@npm:6.1.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-validators%2F6.1.11%2F5c4efc61f6203d4214d927865a5ed67b354ec1ab"
+"@navikt/ft-form-validators@npm:6.1.12":
+  version: 6.1.12
+  resolution: "@navikt/ft-form-validators@npm:6.1.12::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-validators%2F6.1.12%2F525d9e3317315c8979fe686f85f820f7f127de09"
   peerDependencies:
     "@navikt/ft-utils": 5.x
     dayjs: 1.x
-  checksum: 10/c47aa84b2fe0ff3990dbac2c4f61706f5339ec94b747ca3ff29ff57493fb0916c5af94418c0ae2c72fb192b2bab81795623801c278770775c312a70e518b1221
+  checksum: 10/db3bfabfd3b8e21547175a0d94c437dda00c8bcb39ee8a27aecfd052482dcdad730a24b51c2654a41ad294da6185f84442240d75dbfc0b3b5823cae408de62d9
   languageName: node
   linkType: hard
 
-"@navikt/ft-plattform-komponenter@npm:12.1.11":
-  version: 12.1.11
-  resolution: "@navikt/ft-plattform-komponenter@npm:12.1.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-plattform-komponenter%2F12.1.11%2Fa26b009d48ec70db3570aae8a4d2168fc84a63e2"
+"@navikt/ft-plattform-komponenter@npm:12.1.12":
+  version: 12.1.12
+  resolution: "@navikt/ft-plattform-komponenter@npm:12.1.12::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-plattform-komponenter%2F12.1.12%2Fd34c39ad2b1fa3096e49582cbd87ee818b31226a"
   peerDependencies:
     "@navikt/aksel-icons": 8.x
     "@navikt/ds-react": 8.x
@@ -4527,13 +4527,13 @@ __metadata:
     dayjs: 1.x
     react: 19.x
     react-dom: 19.x
-  checksum: 10/0547a97113b6ea359fdafaf7a910a41a7f2a0b510897f36d9618ae3f84015c06afe9a16360968d027a4af7f23d7c5fb3de45c33bfa0eec28bea090806033a409
+  checksum: 10/eb45ac429abe450b67d3658dfe88c444d4b1fe1dd7dfba3580cb9d1e851a7cf79da9e8e2cd7d2695d23bb90c37e8cb41fa1c612e182065cac5946f0852315407
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-beregning@npm:2.4.1":
-  version: 2.4.1
-  resolution: "@navikt/ft-prosess-beregning@npm:2.4.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregning%2F2.4.1%2F91366b4a947c994b706210ddc972a90a78f05b88"
+"@navikt/ft-prosess-beregning@npm:2.4.2":
+  version: 2.4.2
+  resolution: "@navikt/ft-prosess-beregning@npm:2.4.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregning%2F2.4.2%2Ffae451e5a6cc275edd17bbb16abbe014ce511074"
   dependencies:
     echarts: "npm:6.1.0"
   peerDependencies:
@@ -4552,13 +4552,13 @@ __metadata:
     react-dom: 19.x
     react-hook-form: 7.x
     react-intl: 10.x
-  checksum: 10/84aeec244c7bd3fd7a7d9514d334cfc8427f273a64fe034b0923be66017e15ebd81e0b1dba5c3169e0d39dbe2bd89d4548a2bf3729f772203dc11aa1aed7cb57
+  checksum: 10/20aa146588e17718be5b06fe498e13185cfa1d8cbad88d3ebe4121791aa2a963b88f8f05344f5527bf1f5f6550d98f26fc720bf97d590667e09c835e97ea24f8
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-beregningsgrunnlag@npm:13.2.11":
-  version: 13.2.11
-  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:13.2.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F13.2.11%2Fe718daaee1f8976ca850a0e1a8903355e1534147"
+"@navikt/ft-prosess-beregningsgrunnlag@npm:13.2.12":
+  version: 13.2.12
+  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:13.2.12::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F13.2.12%2F325d1a466c7b222b67dc0406632b33376a2de136"
   dependencies:
     echarts: "npm:6.1.0"
   peerDependencies:
@@ -4577,13 +4577,13 @@ __metadata:
     react-dom: 19.x
     react-hook-form: 7.x
     react-intl: 10.x
-  checksum: 10/eb6cdc6efe5dd4d00fde77af6c1ad2a3d14b3b9582e5a9781df45073b2fb476fc658fdd93caff4a8dbf81ceab5616c1716da78a089a65fd1e2db5f52332edefe
+  checksum: 10/c909773f0a071ab88d535fe4ae9b569a2868bc2139376f8677c43af19fa1753ec16a9cc77e2b664c7c849fd11db466f37523f62c92229f18d4b0a9d76af5b069
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-tilbakekreving-foreldelse@npm:10.2.10":
-  version: 10.2.10
-  resolution: "@navikt/ft-prosess-tilbakekreving-foreldelse@npm:10.2.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving-foreldelse%2F10.2.10%2Fbd7a2202854334128dceee4e2f3d26a8089be709"
+"@navikt/ft-prosess-tilbakekreving-foreldelse@npm:10.2.11":
+  version: 10.2.11
+  resolution: "@navikt/ft-prosess-tilbakekreving-foreldelse@npm:10.2.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving-foreldelse%2F10.2.11%2Fd492dfc759fc7204247d0687db402c0065630c2a"
   peerDependencies:
     "@navikt/aksel-icons": 8.x
     "@navikt/ds-css": 8.x
@@ -4599,13 +4599,13 @@ __metadata:
     react-dom: 19.x
     react-hook-form: 7.x
     react-intl: 10.x
-  checksum: 10/56ffc503479d79d4a3136d261a38ea66278aae7f3e44b2353622f12b03bc3bf70508cb2deb684e626a6de286676ddcb95a144eed56341a5a8dd8b2caf06b3529
+  checksum: 10/67a80d0e7ffde278b2e88e5ea5cd71d45e3ff2a205e9edc2193fa737a7f0d93fe5b89eee5e585308b5fae7b7885b8b80003e26f96c6ed8270da6d7f346415533
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-tilbakekreving-vedtak@npm:9.2.10":
-  version: 9.2.10
-  resolution: "@navikt/ft-prosess-tilbakekreving-vedtak@npm:9.2.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving-vedtak%2F9.2.10%2F202a0811f3d20a9488a134d54b841d91dc30f2fa"
+"@navikt/ft-prosess-tilbakekreving-vedtak@npm:9.2.11":
+  version: 9.2.11
+  resolution: "@navikt/ft-prosess-tilbakekreving-vedtak@npm:9.2.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving-vedtak%2F9.2.11%2F94ce1ac15c39c7ad9bb9afb830e2346169de21a6"
   peerDependencies:
     "@navikt/aksel-icons": 8.x
     "@navikt/ds-css": 8.x
@@ -4620,13 +4620,13 @@ __metadata:
     react-dom: 19.x
     react-hook-form: 7.x
     react-intl: 10.x
-  checksum: 10/7f3538b8f75238a290e09658e7b494f9e899952a98f08e5f7563be4439a6c01170508816afa175507fef35d8ee046b89b336743dc6d8f5c284d58bb4f7dc8837
+  checksum: 10/296a78552184ce2fae89d60d3bed81c0279eb1761020de722232ec2d38409206010245a4db30f36ff728149986dad567c2a441fd8fc1ccd7a67fd2f9f207725f
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-tilbakekreving@npm:11.2.10":
-  version: 11.2.10
-  resolution: "@navikt/ft-prosess-tilbakekreving@npm:11.2.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving%2F11.2.10%2F982a2578c7375fa7fea30d030e0652f1f4e81148"
+"@navikt/ft-prosess-tilbakekreving@npm:11.2.11":
+  version: 11.2.11
+  resolution: "@navikt/ft-prosess-tilbakekreving@npm:11.2.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving%2F11.2.11%2Fd618621fb887020783c9ce9cb7f957f1ebb62c63"
   peerDependencies:
     "@navikt/aksel-icons": 8.x
     "@navikt/ds-css": 8.x
@@ -4642,20 +4642,20 @@ __metadata:
     react-dom: 19.x
     react-hook-form: 7.x
     react-intl: 10.x
-  checksum: 10/a8e0dd31e5dee3fd0aa1a606ea7254d8bca5beb41a3465a62a61598c8aa2ed955a707ca5a8d57a807e5bbe7cc4643bd1598d3cbcd68e60c4d0e208aa6e907feb
+  checksum: 10/efd97fe0e162362cbb50f71761508277d86f6ae5222bb01137d06da889a553c967403ba784eda756b827e3ddfa74d728c6f2206ceb37012033086b67ecd2e01e
   languageName: node
   linkType: hard
 
-"@navikt/ft-types@npm:6.3.9":
-  version: 6.3.9
-  resolution: "@navikt/ft-types@npm:6.3.9::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-types%2F6.3.9%2F52f7c62af0bc35c97d857ab4bde36e8cded3fc2b"
-  checksum: 10/42dd473e85cf9ca81c5356bb2b9cc78f398976c093b29cb3694d3ecfd60380da0f1dc4125f60b4a0177f037762dfcd94dd65e3987424b6d2d919af9d089a34cb
+"@navikt/ft-types@npm:6.3.10":
+  version: 6.3.10
+  resolution: "@navikt/ft-types@npm:6.3.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-types%2F6.3.10%2Fe4b1e96989eb46dcad738837b51a54dd3eedf789"
+  checksum: 10/5e18b0018d0be5e85b7b5f18141a411b4aaadd7092f6af899fc9dcbe0a013d7d0a54a3c98dfdd91e3a41876c7978ec7716bf9d3d99aec3622c88288e3d0b892b
   languageName: node
   linkType: hard
 
-"@navikt/ft-ui-komponenter@npm:8.2.8":
-  version: 8.2.8
-  resolution: "@navikt/ft-ui-komponenter@npm:8.2.8::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-ui-komponenter%2F8.2.8%2Fc913aac2f96ff175375f263892ab720c728ec318"
+"@navikt/ft-ui-komponenter@npm:8.2.9":
+  version: 8.2.9
+  resolution: "@navikt/ft-ui-komponenter@npm:8.2.9::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-ui-komponenter%2F8.2.9%2F95d426d08bdafe99d18b9c1c64f609bfabc3aaab"
   peerDependencies:
     "@navikt/aksel-icons": 8.x
     "@navikt/ds-react": 8.x
@@ -4664,17 +4664,17 @@ __metadata:
     react: 19.x
     react-dom: 19.x
     react-intl: 10.x
-  checksum: 10/8a95770b313d5830489e726c4c9106e6fcb680c4c5f35b1728871f19e75c0d7f5fd2a7dc133e83d544a892ed4bec51fd455438a6634d07a09608b5e817fefede
+  checksum: 10/3eba2466d42c609881f5cc295dff154c3ae53701563e2d3359408f72e22c10a9d5389f9ed1a043679b3333f94ccb24fcd032768033d5a401cc499063f21f463e
   languageName: node
   linkType: hard
 
-"@navikt/ft-utils@npm:5.1.11":
-  version: 5.1.11
-  resolution: "@navikt/ft-utils@npm:5.1.11::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-utils%2F5.1.11%2F922b5d376b516be3370bde877a840ba2b8d744f2"
+"@navikt/ft-utils@npm:5.1.12":
+  version: 5.1.12
+  resolution: "@navikt/ft-utils@npm:5.1.12::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-utils%2F5.1.12%2Fe6c7f8bfa13514b5c352ca5b4633be50448c6005"
   peerDependencies:
     dayjs: 1.x
     react-intl: 10.x
-  checksum: 10/1f63eba0dd583950ac2fd96a8a9fe351a7daad0d889fe66a877bfa379bc2ec97ac99444126dd5dd1b99f9c6158ecf9621a647c445bcc41de80890a6b5f9919e0
+  checksum: 10/1b90eab5592965efd70659e967d9d0b3eb1947651cbd3d6e9b0fcbff9d5bc7dbe8061ab018be266dbfc55d11df98afe7fdd9039f1096bc7e0b21982576a7a124
   languageName: node
   linkType: hard
 
@@ -4998,9 +4998,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-android-arm-eabi@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-android-arm-eabi@npm:0.147.0"
+"@oxc-parser/binding-android-arm-eabi@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-android-arm-eabi@npm:0.148.0"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
@@ -5012,9 +5012,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-android-arm64@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-android-arm64@npm:0.147.0"
+"@oxc-parser/binding-android-arm64@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-android-arm64@npm:0.148.0"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
@@ -5026,9 +5026,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-darwin-arm64@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-darwin-arm64@npm:0.147.0"
+"@oxc-parser/binding-darwin-arm64@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-darwin-arm64@npm:0.148.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
@@ -5040,9 +5040,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-darwin-x64@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-darwin-x64@npm:0.147.0"
+"@oxc-parser/binding-darwin-x64@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-darwin-x64@npm:0.148.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -5054,9 +5054,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-freebsd-x64@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-freebsd-x64@npm:0.147.0"
+"@oxc-parser/binding-freebsd-x64@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-freebsd-x64@npm:0.148.0"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
@@ -5068,9 +5068,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-arm-gnueabihf@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-arm-gnueabihf@npm:0.147.0"
+"@oxc-parser/binding-linux-arm-gnueabihf@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-arm-gnueabihf@npm:0.148.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -5082,9 +5082,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-arm-musleabihf@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-arm-musleabihf@npm:0.147.0"
+"@oxc-parser/binding-linux-arm-musleabihf@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-arm-musleabihf@npm:0.148.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -5096,9 +5096,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-arm64-gnu@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-arm64-gnu@npm:0.147.0"
+"@oxc-parser/binding-linux-arm64-gnu@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-arm64-gnu@npm:0.148.0"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
@@ -5110,9 +5110,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-arm64-musl@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-arm64-musl@npm:0.147.0"
+"@oxc-parser/binding-linux-arm64-musl@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-arm64-musl@npm:0.148.0"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
@@ -5124,9 +5124,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-ppc64-gnu@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-ppc64-gnu@npm:0.147.0"
+"@oxc-parser/binding-linux-ppc64-gnu@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-ppc64-gnu@npm:0.148.0"
   conditions: os=linux & cpu=ppc64 & libc=glibc
   languageName: node
   linkType: hard
@@ -5138,9 +5138,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-riscv64-gnu@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-riscv64-gnu@npm:0.147.0"
+"@oxc-parser/binding-linux-riscv64-gnu@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-riscv64-gnu@npm:0.148.0"
   conditions: os=linux & cpu=riscv64 & libc=glibc
   languageName: node
   linkType: hard
@@ -5152,9 +5152,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-riscv64-musl@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-riscv64-musl@npm:0.147.0"
+"@oxc-parser/binding-linux-riscv64-musl@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-riscv64-musl@npm:0.148.0"
   conditions: os=linux & cpu=riscv64 & libc=musl
   languageName: node
   linkType: hard
@@ -5166,9 +5166,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-s390x-gnu@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-s390x-gnu@npm:0.147.0"
+"@oxc-parser/binding-linux-s390x-gnu@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-s390x-gnu@npm:0.148.0"
   conditions: os=linux & cpu=s390x & libc=glibc
   languageName: node
   linkType: hard
@@ -5180,9 +5180,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-x64-gnu@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-x64-gnu@npm:0.147.0"
+"@oxc-parser/binding-linux-x64-gnu@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-x64-gnu@npm:0.148.0"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
@@ -5194,9 +5194,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-linux-x64-musl@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-linux-x64-musl@npm:0.147.0"
+"@oxc-parser/binding-linux-x64-musl@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-linux-x64-musl@npm:0.148.0"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
@@ -5208,9 +5208,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-openharmony-arm64@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-openharmony-arm64@npm:0.147.0"
+"@oxc-parser/binding-openharmony-arm64@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-openharmony-arm64@npm:0.148.0"
   conditions: os=openharmony & cpu=arm64
   languageName: node
   linkType: hard
@@ -5233,9 +5233,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-win32-arm64-msvc@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-win32-arm64-msvc@npm:0.147.0"
+"@oxc-parser/binding-win32-arm64-msvc@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-win32-arm64-msvc@npm:0.148.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
@@ -5247,9 +5247,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-win32-ia32-msvc@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-win32-ia32-msvc@npm:0.147.0"
+"@oxc-parser/binding-win32-ia32-msvc@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-win32-ia32-msvc@npm:0.148.0"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
@@ -5261,17 +5261,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-parser/binding-win32-x64-msvc@npm:0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-parser/binding-win32-x64-msvc@npm:0.147.0"
+"@oxc-parser/binding-win32-x64-msvc@npm:0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-parser/binding-win32-x64-msvc@npm:0.148.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@oxc-project/types@npm:=0.147.0, @oxc-project/types@npm:^0.147.0":
-  version: 0.147.0
-  resolution: "@oxc-project/types@npm:0.147.0"
-  checksum: 10/d454c44bb9e65b8a660c2b2099391883986bbb6796fd4eea22fbd3016af109547986ec5fa0685db9ee7a6c5e33568134a2e5eea6452eb0f94c4fcc44e544fb32
+"@oxc-project/types@npm:=0.149.0":
+  version: 0.149.0
+  resolution: "@oxc-project/types@npm:0.149.0"
+  checksum: 10/6bd7b656ecdbfa96eea3ca0d79264ad367f941eaec1c47883b7c763a300ac81750de23862089b959b0c9a865abd171145d639368294a9daab0d47df07b1f8c6e
   languageName: node
   linkType: hard
 
@@ -5279,6 +5279,13 @@ __metadata:
   version: 0.127.0
   resolution: "@oxc-project/types@npm:0.127.0"
   checksum: 10/f154f4720367186aed63a16fb1395f9039d4e6872265fe9e6b5eacc02fb2b948f9ea6c5f85efd3a015ea28aa8c31232b7a8301218ae28651659e46dd0c4f2031
+  languageName: node
+  linkType: hard
+
+"@oxc-project/types@npm:^0.148.0":
+  version: 0.148.0
+  resolution: "@oxc-project/types@npm:0.148.0"
+  checksum: 10/835b0479161cd80c7dee653b77d31f6d5239e20530cda8a10466bcbb17de08363777939c29670e82fb9d9eca89dc49030e50742051418d987ec70f62faa3317b
   languageName: node
   linkType: hard
 
@@ -5556,107 +5563,107 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rolldown/binding-android-arm-eabi@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-android-arm-eabi@npm:1.2.6"
+"@rolldown/binding-android-arm-eabi@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-android-arm-eabi@npm:1.2.8"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
 
-"@rolldown/binding-android-arm64@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-android-arm64@npm:1.2.6"
+"@rolldown/binding-android-arm64@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-android-arm64@npm:1.2.8"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-darwin-arm64@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-darwin-arm64@npm:1.2.6"
+"@rolldown/binding-darwin-arm64@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-darwin-arm64@npm:1.2.8"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-darwin-x64@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-darwin-x64@npm:1.2.6"
+"@rolldown/binding-darwin-x64@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-darwin-x64@npm:1.2.8"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-freebsd-x64@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-freebsd-x64@npm:1.2.6"
+"@rolldown/binding-freebsd-x64@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-freebsd-x64@npm:1.2.8"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-arm-gnueabihf@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-linux-arm-gnueabihf@npm:1.2.6"
+"@rolldown/binding-linux-arm-gnueabihf@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-arm-gnueabihf@npm:1.2.8"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-arm64-gnu@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-linux-arm64-gnu@npm:1.2.6"
+"@rolldown/binding-linux-arm64-gnu@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-arm64-gnu@npm:1.2.8"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-arm64-musl@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-linux-arm64-musl@npm:1.2.6"
+"@rolldown/binding-linux-arm64-musl@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-arm64-musl@npm:1.2.8"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-ppc64-gnu@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-linux-ppc64-gnu@npm:1.2.6"
+"@rolldown/binding-linux-ppc64-gnu@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-ppc64-gnu@npm:1.2.8"
   conditions: os=linux & cpu=ppc64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-s390x-gnu@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-linux-s390x-gnu@npm:1.2.6"
+"@rolldown/binding-linux-s390x-gnu@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-s390x-gnu@npm:1.2.8"
   conditions: os=linux & cpu=s390x & libc=glibc
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-x64-gnu@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-linux-x64-gnu@npm:1.2.6"
+"@rolldown/binding-linux-x64-gnu@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-x64-gnu@npm:1.2.8"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@rolldown/binding-linux-x64-musl@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-linux-x64-musl@npm:1.2.6"
+"@rolldown/binding-linux-x64-musl@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-linux-x64-musl@npm:1.2.8"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@rolldown/binding-openharmony-arm64@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-openharmony-arm64@npm:1.2.6"
+"@rolldown/binding-openharmony-arm64@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-openharmony-arm64@npm:1.2.8"
   conditions: os=openharmony & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-win32-arm64-msvc@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-win32-arm64-msvc@npm:1.2.6"
+"@rolldown/binding-win32-arm64-msvc@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-win32-arm64-msvc@npm:1.2.8"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@rolldown/binding-win32-x64-msvc@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@rolldown/binding-win32-x64-msvc@npm:1.2.6"
+"@rolldown/binding-win32-x64-msvc@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@rolldown/binding-win32-x64-msvc@npm:1.2.8"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -5688,13 +5695,6 @@ __metadata:
   version: 4.0.0
   resolution: "@sindresorhus/merge-streams@npm:4.0.0"
   checksum: 10/16551c787f5328c8ef05fd9831ade64369ccc992df78deb635ec6c44af217d2f1b43f8728c348cdc4e00585ff2fad6e00d8155199cbf6b154acc45fe65cbf0aa
-  languageName: node
-  linkType: hard
-
-"@standard-schema/spec@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@standard-schema/spec@npm:1.1.0"
-  checksum: 10/a209615c9e8b2ea535d7db0a5f6aa0f962fd4ab73ee86a46c100fb78116964af1f55a27c1794d4801e534a196794223daa25ff5135021e03c7828aa3d95e1763
   languageName: node
   linkType: hard
 
@@ -6027,7 +6027,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:10.4.1, @testing-library/dom@npm:^10.4.1":
+"@testing-library/dom@npm:10.4.2":
+  version: 10.4.2
+  resolution: "@testing-library/dom@npm:10.4.2"
+  dependencies:
+    "@babel/code-frame": "npm:^7.10.4"
+    "@babel/runtime": "npm:^7.12.5"
+    "@types/aria-query": "npm:^5.0.1"
+    aria-query: "npm:5.3.0"
+    dom-accessibility-api: "npm:^0.5.9"
+    lz-string: "npm:^1.5.0"
+    picocolors: "npm:1.1.1"
+    pretty-format: "npm:^27.0.2"
+  checksum: 10/3ac24b320ae0e59f48a560bbe279f80e75539641e260d5e1c0455413babcb73a23f7090e9d80fca13933c5bc319fe3e48f61b9c89fbe6d4194f8f58e8bab44d4
+  languageName: node
+  linkType: hard
+
+"@testing-library/dom@npm:^10.4.1":
   version: 10.4.1
   resolution: "@testing-library/dom@npm:10.4.1"
   dependencies:
@@ -6289,30 +6305,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:24.13.3":
-  version: 24.13.3
-  resolution: "@types/node@npm:24.13.3"
+"@types/node@npm:24.13.4":
+  version: 24.13.4
+  resolution: "@types/node@npm:24.13.4"
   dependencies:
     undici-types: "npm:~7.18.0"
-  checksum: 10/cfa6ed1e16c4624d1e83b09aeb72a2f50a7e17d837bf5a1259a52e346f33a693afd289402d3b6118ce3abea7aff35f2a4f13a0284b96bc5807a50f0e22e1ec77
+  checksum: 10/e0f13f5b40384287df3d8be1b68ecc0a43b030330343d60d2e6a191890f10c2e1bfe37a1274b7a105a1576c455373d6c508fb99e0528ffc02726ebed156c4d00
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:19.2.7":
-  version: 19.2.7
-  resolution: "@types/react-dom@npm:19.2.7"
+"@types/react-dom@npm:19.3.0":
+  version: 19.3.0
+  resolution: "@types/react-dom@npm:19.3.0"
   peerDependencies:
-    "@types/react": ^19.2.0
-  checksum: 10/84079ed3b5470b7fafe4478c9180c2b0f19f8c5aebe666091e1ee5bc15464acb248909553769bd338de5f508afe96fec353997aed0457bb0d3a1e6246bcafcb8
+    "@types/react": ^19.3.0
+  checksum: 10/e24ee9948dc3a6c81e8aa4acf120a1194d3a3b68e97205b1e5e24e087b9f0c0c2e40b128fd258663ccb5889c852aeee558c0daa3255c3d82e0fc1c5d64c4b69a
   languageName: node
   linkType: hard
 
-"@types/react@npm:19.2.18":
-  version: 19.2.18
-  resolution: "@types/react@npm:19.2.18"
+"@types/react@npm:19.3.0":
+  version: 19.3.0
+  resolution: "@types/react@npm:19.3.0"
   dependencies:
     csstype: "npm:^3.2.2"
-  checksum: 10/c718ec5c5272ef5c1c77fcdd07f567c77197b593583539459b4bdaea89ca55ad7c814b7eb2151dccfa459b2c384b599a45e7e35550b789883d66b363d30c94d8
+  checksum: 10/2f4589222fd9c512e1ef78e65f334ade8777400add8ec0803fcc3a044761679b7984ba8410a890af24255383c3251a568bb692b60acfa22397ba0a64b2e032bf
   languageName: node
   linkType: hard
 
@@ -6339,39 +6355,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.69.0":
-  version: 8.69.0
-  resolution: "@typescript-eslint/eslint-plugin@npm:8.69.0"
+"@typescript-eslint/eslint-plugin@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/eslint-plugin@npm:8.70.0"
   dependencies:
     "@eslint-community/regexpp": "npm:^4.12.2"
-    "@typescript-eslint/scope-manager": "npm:8.69.0"
-    "@typescript-eslint/type-utils": "npm:8.69.0"
-    "@typescript-eslint/utils": "npm:8.69.0"
-    "@typescript-eslint/visitor-keys": "npm:8.69.0"
+    "@typescript-eslint/scope-manager": "npm:8.70.0"
+    "@typescript-eslint/type-utils": "npm:8.70.0"
+    "@typescript-eslint/utils": "npm:8.70.0"
+    "@typescript-eslint/visitor-keys": "npm:8.70.0"
     ignore: "npm:^7.0.5"
     natural-compare: "npm:^1.4.0"
     ts-api-utils: "npm:^2.5.0"
   peerDependencies:
-    "@typescript-eslint/parser": ^8.69.0
+    "@typescript-eslint/parser": ^8.70.0
     eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.1.0"
-  checksum: 10/3d020557de0cddb276d513800150934cfadffc507c4f808b753e1b7fe42a864b8f14c35063483867518108b71cb718ead22d17943513e72f2d0d4cf0fa2f558c
+  checksum: 10/d078f6d7212b9f6d83f8240d4458d10a9975eaab74ab09b2ed3a1000fe3d94ba5c510dded243fd8750bd7fdbf58e63742ac29c996e737234430ab48910389ab1
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.69.0":
-  version: 8.69.0
-  resolution: "@typescript-eslint/parser@npm:8.69.0"
+"@typescript-eslint/parser@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/parser@npm:8.70.0"
   dependencies:
-    "@typescript-eslint/scope-manager": "npm:8.69.0"
-    "@typescript-eslint/types": "npm:8.69.0"
-    "@typescript-eslint/typescript-estree": "npm:8.69.0"
-    "@typescript-eslint/visitor-keys": "npm:8.69.0"
+    "@typescript-eslint/scope-manager": "npm:8.70.0"
+    "@typescript-eslint/types": "npm:8.70.0"
+    "@typescript-eslint/typescript-estree": "npm:8.70.0"
+    "@typescript-eslint/visitor-keys": "npm:8.70.0"
     debug: "npm:^4.4.3"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.1.0"
-  checksum: 10/3266e512700dc0d55d0c41a5aab08a8f8ef36ef8e9bc94e6de6ab35205ec7259105914ed8d2464afedde24b0c70e3af6b5e46a1c96bdc31c1c307f4a8bab823d
+  checksum: 10/44ea118c7a0c0d4e8ce21845784cda4727240e10a1e8966f759fc48363748a48a74a0aa228664a2148fa24f586d77e230d98058916f8a1a1c85325bb1f9d2e0f
   languageName: node
   linkType: hard
 
@@ -6388,6 +6404,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/project-service@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/project-service@npm:8.70.0"
+  dependencies:
+    "@typescript-eslint/tsconfig-utils": "npm:^8.70.0"
+    "@typescript-eslint/types": "npm:^8.70.0"
+    debug: "npm:^4.4.3"
+  peerDependencies:
+    typescript: ">=4.8.4 <6.1.0"
+  checksum: 10/b06286f1ec6fc0fde7382f14cf4645aa0d008dfc25f40a8ec58e644fd42058a91e1d9ce1e106fbe78f5c2a3cf6b75560a24d24901972a4d21cc604f13aa921ad
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/scope-manager@npm:8.69.0, @typescript-eslint/scope-manager@npm:^8.58.0, @typescript-eslint/scope-manager@npm:^8.69.0":
   version: 8.69.0
   resolution: "@typescript-eslint/scope-manager@npm:8.69.0"
@@ -6395,6 +6424,16 @@ __metadata:
     "@typescript-eslint/types": "npm:8.69.0"
     "@typescript-eslint/visitor-keys": "npm:8.69.0"
   checksum: 10/6eafb382ad54848a796fe6ba6e29ff0f5db246d459a5c30a04a2144e3005d0ed0ee08e83abf2b943614ef02cc7f78358a722f028c87fbbee3a736a099b5b8bf1
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/scope-manager@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/scope-manager@npm:8.70.0"
+  dependencies:
+    "@typescript-eslint/types": "npm:8.70.0"
+    "@typescript-eslint/visitor-keys": "npm:8.70.0"
+  checksum: 10/7168d1ddf945ee47179420063bcc867f289926c7bea348bab4b9310b7c9b0f4b9031eb7653a820bb9fe41f668cc724c9886e19b7e39e2220ed0df168e8cf7607
   languageName: node
   linkType: hard
 
@@ -6407,7 +6446,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:8.69.0, @typescript-eslint/type-utils@npm:^8.69.0":
+"@typescript-eslint/tsconfig-utils@npm:8.70.0, @typescript-eslint/tsconfig-utils@npm:^8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/tsconfig-utils@npm:8.70.0"
+  peerDependencies:
+    typescript: ">=4.8.4 <6.1.0"
+  checksum: 10/c4ad046c1082ebca815d52fd9ababe122ba8c59012ae69e790185ea0e2f898fe5abc2b5256ff88ee167d19844a5f6152dc63342e0a866cfe22a11c2887c5d8da
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/type-utils@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/type-utils@npm:8.70.0"
+  dependencies:
+    "@typescript-eslint/types": "npm:8.70.0"
+    "@typescript-eslint/typescript-estree": "npm:8.70.0"
+    "@typescript-eslint/utils": "npm:8.70.0"
+    debug: "npm:^4.4.3"
+    ts-api-utils: "npm:^2.5.0"
+  peerDependencies:
+    eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+    typescript: ">=4.8.4 <6.1.0"
+  checksum: 10/54bf0ef53a67f3e58bcbbefa1837d6b973d31e6c682ce6447c863426fc396fbcac2800dc7e2d343d09029e5c333668f29463ec99197562ee6211736c8460e4fe
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/type-utils@npm:^8.69.0":
   version: 8.69.0
   resolution: "@typescript-eslint/type-utils@npm:8.69.0"
   dependencies:
@@ -6430,6 +6494,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/types@npm:8.70.0, @typescript-eslint/types@npm:^8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/types@npm:8.70.0"
+  checksum: 10/a264fbebf12d3ee5363688f10713890f67264277749c7f7e2b7fa8636d8836a19a9532e7228bd3155b12f455121b22998282acb17e76561e81902891f7205b44
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/typescript-estree@npm:8.69.0, @typescript-eslint/typescript-estree@npm:^8.69.0":
   version: 8.69.0
   resolution: "@typescript-eslint/typescript-estree@npm:8.69.0"
@@ -6449,6 +6520,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/typescript-estree@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/typescript-estree@npm:8.70.0"
+  dependencies:
+    "@typescript-eslint/project-service": "npm:8.70.0"
+    "@typescript-eslint/tsconfig-utils": "npm:8.70.0"
+    "@typescript-eslint/types": "npm:8.70.0"
+    "@typescript-eslint/visitor-keys": "npm:8.70.0"
+    debug: "npm:^4.4.3"
+    minimatch: "npm:^10.2.2"
+    semver: "npm:^7.7.3"
+    tinyglobby: "npm:^0.2.15"
+    ts-api-utils: "npm:^2.5.0"
+  peerDependencies:
+    typescript: ">=4.8.4 <6.1.0"
+  checksum: 10/c588aac52c24883befe0c07312df808f27fb00676250e20036f43760cbe831e482ec92232703d9dea95c583687cf374a23e2c49cf8afddce370929eb128270f4
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/utils@npm:8.69.0, @typescript-eslint/utils@npm:^8.58.0, @typescript-eslint/utils@npm:^8.69.0":
   version: 8.69.0
   resolution: "@typescript-eslint/utils@npm:8.69.0"
@@ -6464,6 +6554,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/utils@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/utils@npm:8.70.0"
+  dependencies:
+    "@eslint-community/eslint-utils": "npm:^4.9.1"
+    "@typescript-eslint/scope-manager": "npm:8.70.0"
+    "@typescript-eslint/types": "npm:8.70.0"
+    "@typescript-eslint/typescript-estree": "npm:8.70.0"
+  peerDependencies:
+    eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
+    typescript: ">=4.8.4 <6.1.0"
+  checksum: 10/518521b1f7e8bb7a5bd7bc2db39e85b3bd1d710d0cf92da9a7d13a3394e9fb99eda76b90b7ecdc334afc60cb4415b8e079439a3cb9b29b6aea7f8ff1f499590b
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/visitor-keys@npm:8.69.0":
   version: 8.69.0
   resolution: "@typescript-eslint/visitor-keys@npm:8.69.0"
@@ -6471,6 +6576,16 @@ __metadata:
     "@typescript-eslint/types": "npm:8.69.0"
     eslint-visitor-keys: "npm:^5.0.0"
   checksum: 10/15096ea595db6c7571f2a2d6e20e55ff82409cd046af51bb7b9f9ac9fe74dba2fccc707c7a34040a028e126afc65ab3ee77f964a7cd4a0ffa26e9ceb17851b28
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/visitor-keys@npm:8.70.0":
+  version: 8.70.0
+  resolution: "@typescript-eslint/visitor-keys@npm:8.70.0"
+  dependencies:
+    "@typescript-eslint/types": "npm:8.70.0"
+    eslint-visitor-keys: "npm:^5.0.0"
+  checksum: 10/3b6724e29e68f4468da18aaf7300dd178d5aa0465e6f3a203f91920d3bda6d0cdb97615ada9d1b04a63ccb485301cc4cd701e78931061ec2ec90a3f008cba3c7
   languageName: node
   linkType: hard
 
@@ -6688,27 +6803,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/expect@npm:4.1.11":
-  version: 4.1.11
-  resolution: "@vitest/expect@npm:4.1.11"
+"@vitest/mocker@npm:5.0.0":
+  version: 5.0.0
+  resolution: "@vitest/mocker@npm:5.0.0"
   dependencies:
-    "@standard-schema/spec": "npm:^1.1.0"
-    "@types/chai": "npm:^5.2.2"
-    "@vitest/spy": "npm:4.1.11"
-    "@vitest/utils": "npm:4.1.11"
-    chai: "npm:^6.2.2"
-    tinyrainbow: "npm:^3.1.0"
-  checksum: 10/9bfcfe5ad926ab58beea1c700dc057f17422f14516506f8fc12c9881ed3e81d4c2faadb768042c8497fdee7007e201c1bd3e7d2e91157dbb47fb5c07c4c02aaa
-  languageName: node
-  linkType: hard
-
-"@vitest/mocker@npm:4.1.11":
-  version: 4.1.11
-  resolution: "@vitest/mocker@npm:4.1.11"
-  dependencies:
-    "@vitest/spy": "npm:4.1.11"
+    "@jridgewell/trace-mapping": "npm:0.3.31"
+    "@vitest/spy": "npm:5.0.0"
     estree-walker: "npm:^3.0.3"
-    magic-string: "npm:^0.30.21"
+    magic-string: "npm:^1.2.3"
   peerDependencies:
     msw: ^2.4.9
     vite: ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -6717,7 +6819,7 @@ __metadata:
       optional: true
     vite:
       optional: true
-  checksum: 10/00b6e1266d8403194b49313e3a9a1af0dff2c773f4b2df11f4955fa0f244fd4b59484cd23381dfef8af30298e2651c1aaa42b439fdbc871bb4bb911de38a9509
+  checksum: 10/57a1e55c18946c8977d304dfc8a1b5551331c7fc240a97034e497708d1d9520305193346ff96ff629e951c7c538ee649bba71bf074b29f53e0b95419126896af
   languageName: node
   linkType: hard
 
@@ -6730,37 +6832,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/pretty-format@npm:4.1.11":
-  version: 4.1.11
-  resolution: "@vitest/pretty-format@npm:4.1.11"
-  dependencies:
-    tinyrainbow: "npm:^3.1.0"
-  checksum: 10/2dfc2f20dbe1c4dbea33ec42e85a8b5648aa6585521bea47573406f5cefb81cd3b86b71f981c4e3d69946e77252cb42a700416c1dc656bb0478cb2932c953cdc
-  languageName: node
-  linkType: hard
-
-"@vitest/runner@npm:4.1.11":
-  version: 4.1.11
-  resolution: "@vitest/runner@npm:4.1.11"
-  dependencies:
-    "@vitest/utils": "npm:4.1.11"
-    pathe: "npm:^2.0.3"
-  checksum: 10/5247df824fa28b458ba0102592dfec50707982193b62076db941fbe5d7c88fb7067e68a33c194db0092bbe35459cfbeaed33b3c667e5f02192c18baeb4f56239
-  languageName: node
-  linkType: hard
-
-"@vitest/snapshot@npm:4.1.11":
-  version: 4.1.11
-  resolution: "@vitest/snapshot@npm:4.1.11"
-  dependencies:
-    "@vitest/pretty-format": "npm:4.1.11"
-    "@vitest/utils": "npm:4.1.11"
-    magic-string: "npm:^0.30.21"
-    pathe: "npm:^2.0.3"
-  checksum: 10/5d096373fb4b102f65ff884844a18c2d2e7d88caf68a64a842a245573311b2d531ca5a94ebf7e4fe39324e71a78670f74c949d4ec2cad3764c3f4c272b84d982
-  languageName: node
-  linkType: hard
-
 "@vitest/spy@npm:3.2.4":
   version: 3.2.4
   resolution: "@vitest/spy@npm:3.2.4"
@@ -6770,10 +6841,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/spy@npm:4.1.11":
-  version: 4.1.11
-  resolution: "@vitest/spy@npm:4.1.11"
-  checksum: 10/d49a7ed7501080e5f817d61250a169a46fcc7901887e4985a1e08705ce79aea8d1edcffd74f4dc6669ea1bc3d717a39354ce89c67188d81a63dc439d42f195f6
+"@vitest/spy@npm:5.0.0":
+  version: 5.0.0
+  resolution: "@vitest/spy@npm:5.0.0"
+  checksum: 10/71ab66f41517078d25af58b60d3792c0ba3d4bece080f496994662e803cd0a2d8c56b073165bf8028f3970d388704e5f1d869378bcfd99a5a17664cfb2f24355
   languageName: node
   linkType: hard
 
@@ -6785,17 +6856,6 @@ __metadata:
     loupe: "npm:^3.1.4"
     tinyrainbow: "npm:^2.0.0"
   checksum: 10/7f12ef63bd8ee13957744d1f336b0405f164ade4358bf9dfa531f75bbb58ffac02bf61aba65724311ddbc50b12ba54853a169e59c6b837c16086173b9a480710
-  languageName: node
-  linkType: hard
-
-"@vitest/utils@npm:4.1.11":
-  version: 4.1.11
-  resolution: "@vitest/utils@npm:4.1.11"
-  dependencies:
-    "@vitest/pretty-format": "npm:4.1.11"
-    convert-source-map: "npm:^2.0.0"
-    tinyrainbow: "npm:^3.1.0"
-  checksum: 10/f05381e12d0926db7b01bfaae9a577fa664d36b96c23df185e4b0f6dad3a9fb59ac00931613da53b4511ee6ab473a14ac500c72c5ec5e9b3c3042875051f20c4
   languageName: node
   linkType: hard
 
@@ -7593,7 +7653,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es-module-lexer@npm:^2.0.0, es-module-lexer@npm:^2.2.0":
+"es-module-lexer@npm:^2.2.0, es-module-lexer@npm:^2.3.2":
   version: 2.3.2
   resolution: "es-module-lexer@npm:2.3.2"
   checksum: 10/065246d6e2b2dfea3287650b5800a30326771e0d9d238570e81371d7ae8d53db239bccb2166e272926bba44917da7c66dd7407a5214d17b0af5269005b1fec52
@@ -8068,7 +8128,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expect-type@npm:^1.3.0":
+"expect-type@npm:^1.4.0":
   version: 1.4.0
   resolution: "expect-type@npm:1.4.0"
   checksum: 10/bad91f4b7eb807248695ee840a935d12818fe531ad523bc7ac7dcc540a4d86dc566a3ef829f4da6e8b5a458ac84092771739865114c91e7e8a9317302f401f09
@@ -8273,18 +8333,18 @@ __metadata:
     "@storybook/addon-links": "npm:10.6.0"
     "@storybook/react": "npm:10.6.0"
     "@testing-library/jest-dom": "npm:7.0.1"
-    "@types/react": "npm:19.2.18"
-    "@types/react-dom": "npm:19.2.7"
+    "@types/react": "npm:19.3.0"
+    "@types/react-dom": "npm:19.3.0"
     eslint: "npm:10.10.0"
     husky: "npm:9.1.7"
     jsdom: "npm:30.0.1"
-    knip: "npm:6.34.0"
-    lint-staged: "npm:17.5.0"
+    knip: "npm:6.35.1"
+    lint-staged: "npm:17.5.1"
     msw: "npm:2.15.0"
     msw-storybook-addon: "npm:3.0.0"
     prettier: "npm:3.9.6"
-    react: "npm:19.2.8"
-    react-dom: "npm:19.2.8"
+    react: "npm:19.3.0"
+    react-dom: "npm:19.3.0"
     storybook: "npm:10.6.0"
     stylelint: "npm:17.15.0"
     stylelint-order: "npm:8.1.1"
@@ -8658,13 +8718,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"intl-messageformat@npm:11.2.14":
-  version: 11.2.14
-  resolution: "intl-messageformat@npm:11.2.14"
+"intl-messageformat@npm:11.2.15":
+  version: 11.2.15
+  resolution: "intl-messageformat@npm:11.2.15"
   dependencies:
     "@formatjs/fast-memoize": "npm:3.1.7"
-    "@formatjs/icu-messageformat-parser": "npm:3.5.17"
-  checksum: 10/2720155c42bfd99a00d41f7bc9e2f5c2c83c2b6cb2353006b7d8e736a0f1ed20d0147406c1aeba0748731a0ce588c67304b52eb2fe92b42b928bf1ef6bffdcdf
+    "@formatjs/icu-messageformat-parser": "npm:3.5.18"
+  checksum: 10/71d1448964e685c821b3680a89668aae3fe92f6b7774842ea5eb08830417846d4fcbcaf691930e4da1ceb2cc414eeab468c7e3dd4eb530a38ffed91530468ac5
   languageName: node
   linkType: hard
 
@@ -8934,27 +8994,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"knip@npm:6.34.0":
-  version: 6.34.0
-  resolution: "knip@npm:6.34.0"
+"knip@npm:6.35.1":
+  version: 6.35.1
+  resolution: "knip@npm:6.35.1"
   dependencies:
     fdir: "npm:^6.5.0"
     formatly: "npm:^0.7.0"
     get-tsconfig: "npm:4.14.3"
     jiti: "npm:^2.7.0"
-    oxc-parser: "npm:^0.147.0"
+    oxc-parser: "npm:^0.148.0"
     oxc-resolver: "npm:11.24.2"
     picomatch: "npm:^4.0.7"
     smol-toml: "npm:^1.8.0"
     strip-json-comments: "npm:5.0.3"
     tinyglobby: "npm:^0.2.17"
-    unbash: "npm:^4.0.10"
+    unbash: "npm:^4.0.11"
     yaml: "npm:^2.9.0"
     zod: "npm:^4.4.3"
   bin:
     knip: bin/knip.js
     knip-bun: bin/knip-bun.js
-  checksum: 10/eeebec459f516630cc4066e257f098a4bd35024c65e536b63a8e0a343ac4af0f7f0564ecaaa21d7caa2a0f0b9f256c361b3c9bdcde700546e34ef8282091c821
+  checksum: 10/9f1cf5eafcbe685c58440c6d306ba2f7fdafb4fc835511455be800a698ecd0071eda90f7183bd2749086da46a062460292a52c2162225f1114371f8b606d4066
   languageName: node
   linkType: hard
 
@@ -9222,9 +9282,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:17.5.0":
-  version: 17.5.0
-  resolution: "lint-staged@npm:17.5.0"
+"lint-staged@npm:17.5.1":
+  version: 17.5.1
+  resolution: "lint-staged@npm:17.5.1"
   dependencies:
     picomatch: "npm:^4.0.7"
     string-argv: "npm:^0.3.2"
@@ -9235,7 +9295,7 @@ __metadata:
       optional: true
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10/3ca6263488ae3e8e4915e5c6ee70bb3b54bbffcb7e84dd2fb05c02032563401e5bb41c3d216cdc43933c6d6ff3ed66319d22c5cb5c63727e00af966b95929516
+  checksum: 10/2e10b821214eafce576e8505d6b5cee3a83dd40d68b2d3705b0c69abe35a26e3ad3fcd9cc8379bab47c3e5b3cb8042923d8fbe42e7f72b28da54e6c7d4b4986a
   languageName: node
   linkType: hard
 
@@ -9327,6 +9387,15 @@ __metadata:
   dependencies:
     "@jridgewell/sourcemap-codec": "npm:^1.5.5"
   checksum: 10/d1a943913fad82733704cc6b4ff327a1ee9dcdbaa1475931f03368aa0ac54305eb37f591ff1478c36e7f9c62dabc335d6dc5d28744e632f62d42f350031d758f
+  languageName: node
+  linkType: hard
+
+"magic-string@npm:^1.2.3":
+  version: 1.3.1
+  resolution: "magic-string@npm:1.3.1"
+  dependencies:
+    "@jridgewell/sourcemap-codec": "npm:^1.6.0"
+  checksum: 10/4c65e9a6d9e56d911f40f8ba85c615d2546e77cbe49c757120cde2b78ac02ca38071f838e2fc796e294d6b8ac41a20d5c1bea7bbc511078b6b213ff2fbda3810
   languageName: node
   linkType: hard
 
@@ -9516,6 +9585,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.3.18":
+  version: 3.3.19
+  resolution: "nanoid@npm:3.3.19"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 10/a330adb28dad63eccb0a0c95a2a61353e84b7e067061fff94167803d94be8eef0f7b75cf2da1bece06e8b7afb892abbe52cf0ec33298c817a083eedccd7656e4
+  languageName: node
+  linkType: hard
+
 "napi-postinstall@npm:^0.3.4":
   version: 0.3.4
   resolution: "napi-postinstall@npm:0.3.4"
@@ -9584,10 +9662,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"obug@npm:^2.1.1":
-  version: 2.1.4
-  resolution: "obug@npm:2.1.4"
-  checksum: 10/05e3ac83f60ef18edb935d67703bada2cbc0feb1a1cef575240b1e48e6e877df95b74048e69bbe549759df18c57ad1808e1e60a9fc4f785525c8549bf7fe81db
+"obug@npm:^2.1.4":
+  version: 2.2.1
+  resolution: "obug@npm:2.2.1"
+  checksum: 10/306f1bf423aafdd46bc4a99108ffa2a1f6f82b87b10f535ad9853b580d565612f7913a0e71542914fb88d8920b97d6313c36fc1eec858d08071fe2eea0a8aa12
   languageName: node
   linkType: hard
 
@@ -9715,30 +9793,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"oxc-parser@npm:^0.147.0":
-  version: 0.147.0
-  resolution: "oxc-parser@npm:0.147.0"
+"oxc-parser@npm:^0.148.0":
+  version: 0.148.0
+  resolution: "oxc-parser@npm:0.148.0"
   dependencies:
-    "@oxc-parser/binding-android-arm-eabi": "npm:0.147.0"
-    "@oxc-parser/binding-android-arm64": "npm:0.147.0"
-    "@oxc-parser/binding-darwin-arm64": "npm:0.147.0"
-    "@oxc-parser/binding-darwin-x64": "npm:0.147.0"
-    "@oxc-parser/binding-freebsd-x64": "npm:0.147.0"
-    "@oxc-parser/binding-linux-arm-gnueabihf": "npm:0.147.0"
-    "@oxc-parser/binding-linux-arm-musleabihf": "npm:0.147.0"
-    "@oxc-parser/binding-linux-arm64-gnu": "npm:0.147.0"
-    "@oxc-parser/binding-linux-arm64-musl": "npm:0.147.0"
-    "@oxc-parser/binding-linux-ppc64-gnu": "npm:0.147.0"
-    "@oxc-parser/binding-linux-riscv64-gnu": "npm:0.147.0"
-    "@oxc-parser/binding-linux-riscv64-musl": "npm:0.147.0"
-    "@oxc-parser/binding-linux-s390x-gnu": "npm:0.147.0"
-    "@oxc-parser/binding-linux-x64-gnu": "npm:0.147.0"
-    "@oxc-parser/binding-linux-x64-musl": "npm:0.147.0"
-    "@oxc-parser/binding-openharmony-arm64": "npm:0.147.0"
-    "@oxc-parser/binding-win32-arm64-msvc": "npm:0.147.0"
-    "@oxc-parser/binding-win32-ia32-msvc": "npm:0.147.0"
-    "@oxc-parser/binding-win32-x64-msvc": "npm:0.147.0"
-    "@oxc-project/types": "npm:^0.147.0"
+    "@oxc-parser/binding-android-arm-eabi": "npm:0.148.0"
+    "@oxc-parser/binding-android-arm64": "npm:0.148.0"
+    "@oxc-parser/binding-darwin-arm64": "npm:0.148.0"
+    "@oxc-parser/binding-darwin-x64": "npm:0.148.0"
+    "@oxc-parser/binding-freebsd-x64": "npm:0.148.0"
+    "@oxc-parser/binding-linux-arm-gnueabihf": "npm:0.148.0"
+    "@oxc-parser/binding-linux-arm-musleabihf": "npm:0.148.0"
+    "@oxc-parser/binding-linux-arm64-gnu": "npm:0.148.0"
+    "@oxc-parser/binding-linux-arm64-musl": "npm:0.148.0"
+    "@oxc-parser/binding-linux-ppc64-gnu": "npm:0.148.0"
+    "@oxc-parser/binding-linux-riscv64-gnu": "npm:0.148.0"
+    "@oxc-parser/binding-linux-riscv64-musl": "npm:0.148.0"
+    "@oxc-parser/binding-linux-s390x-gnu": "npm:0.148.0"
+    "@oxc-parser/binding-linux-x64-gnu": "npm:0.148.0"
+    "@oxc-parser/binding-linux-x64-musl": "npm:0.148.0"
+    "@oxc-parser/binding-openharmony-arm64": "npm:0.148.0"
+    "@oxc-parser/binding-win32-arm64-msvc": "npm:0.148.0"
+    "@oxc-parser/binding-win32-ia32-msvc": "npm:0.148.0"
+    "@oxc-parser/binding-win32-x64-msvc": "npm:0.148.0"
+    "@oxc-project/types": "npm:^0.148.0"
   dependenciesMeta:
     "@oxc-parser/binding-android-arm-eabi":
       optional: true
@@ -9778,7 +9856,7 @@ __metadata:
       optional: true
     "@oxc-parser/binding-win32-x64-msvc":
       optional: true
-  checksum: 10/4cee544d47f476c6cb4fd7c64d3bb9ac5e359f051ccea76f5ea7984aaba54434102f7f1c7b69177dc1ba03ee25ad141104049e680da922437d815e11670bea2e
+  checksum: 10/452fe0114afe61198f05a4e15acb60047167eb485958b6d66b98bb3c6bf968cf67c928737ab97b64824c27916835744a504d9f6e546b65fc0e76b48800f9fc51
   languageName: node
   linkType: hard
 
@@ -10058,7 +10136,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^4.0.2, picomatch@npm:^4.0.3, picomatch@npm:^4.0.4, picomatch@npm:^4.0.5, picomatch@npm:^4.0.7":
+"picomatch@npm:^4.0.2, picomatch@npm:^4.0.4, picomatch@npm:^4.0.7":
   version: 4.0.7
   resolution: "picomatch@npm:4.0.7"
   checksum: 10/66e1df34bc39c72fa3756be4069f7887ea3e35e94bba1c3f6167763007698cb04b8a0a365161d186fda6e9571a2d3efb606b2966eb6a7dea6252911224dc2f48
@@ -10126,6 +10204,17 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10/842a624f822f77cb37264cc24f0cf97c0a69dd8d6f7b4a6d76b5a8dc95355899dd044f33a2d4e890da858293de570fce18dff453f3b629ff14cac67a3591895a
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.5.28":
+  version: 8.5.28
+  resolution: "postcss@npm:8.5.28"
+  dependencies:
+    nanoid: "npm:^3.3.18"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10/c34814c1da499f370cd3b02a085a2d866989a966629b7bd4025f4a2a10d538a2ec83dc3181e1008550edb4cf44e49a0c40ec82332b08d9600877e6841240ad05
   languageName: node
   linkType: hard
 
@@ -10264,37 +10353,37 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:19.2.8":
-  version: 19.2.8
-  resolution: "react-dom@npm:19.2.8"
+"react-dom@npm:19.3.0":
+  version: 19.3.0
+  resolution: "react-dom@npm:19.3.0"
   dependencies:
-    scheduler: "npm:^0.27.0"
+    scheduler: "npm:^0.28.0"
   peerDependencies:
-    react: ^19.2.8
-  checksum: 10/fb45d500a8615a36d71a821213a3d4bfe32a70aa1d04ce17d8791dd10c4ef0281e7fdd46694e1112f0f2dcf58df89d12043a13228be9788458aa82f4885a9cdc
+    react: ^19.3.0
+  checksum: 10/fa6c6a3d0cca3f98280017936f818a1f9e474d61d1a64a7b02bfedabbf936234dd3752ba5b7f35efa7f2264c9a073ebace56cb2521e1cbfe7a50444a43ef5690
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:7.87.0":
-  version: 7.87.0
-  resolution: "react-hook-form@npm:7.87.0"
+"react-hook-form@npm:7.88.0":
+  version: 7.88.0
+  resolution: "react-hook-form@npm:7.88.0"
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18 || ^19
-  checksum: 10/737ba6a3ba2062b9206fb717c0701866a9e60620059e49b5c24aad29126a8d78a6c79df412656ba0a2908593584ec4cba3c8804a3d6015c0d0882f882aca5841
+  checksum: 10/ab039b934d7083284dc704b79f2518182e1a448b1be1b249f0e58df4cbe68bef8fe80c14fb6b84618f819b411b46e1ab56c09f6cc46efbe960eaa169cf433c9b
   languageName: node
   linkType: hard
 
-"react-intl@npm:10.1.26":
-  version: 10.1.26
-  resolution: "react-intl@npm:10.1.26"
+"react-intl@npm:10.2.2":
+  version: 10.2.2
+  resolution: "react-intl@npm:10.2.2"
   dependencies:
-    "@formatjs/icu-messageformat-parser": "npm:3.5.17"
-    "@formatjs/intl": "npm:4.1.20"
-    intl-messageformat: "npm:11.2.14"
+    "@formatjs/icu-messageformat-parser": "npm:3.5.18"
+    "@formatjs/intl": "npm:4.2.1"
+    intl-messageformat: "npm:11.2.15"
   peerDependencies:
     "@types/react": ">=18.0.0"
     react: ">=18.0.0"
-  checksum: 10/9e9ebf08a452a56964d05c2a234bd6995921d9673d5ff47833076da8d5e89ee7cf01d64a252bfba53ab3f1c6a8f228d676edd4c325ccb77469843a456030c180
+  checksum: 10/a250632d6cc0178e87651deb9aa8b4fc0594cbdd850d510d6abc79a6fbb9476cc17f76091160d908648d7398837e7fd8311d1f74cb678bd3077fa954d8898b88
   languageName: node
   linkType: hard
 
@@ -10341,10 +10430,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:19.2.8":
-  version: 19.2.8
-  resolution: "react@npm:19.2.8"
-  checksum: 10/a3c697798035e295ca9e51591d3a8700824535cb8c070fac1f8abbe69717ceb99108cbc4ba7b31a606806f336b1eba705705f63b9d39ace198fe51e8990ac843
+"react@npm:19.3.0":
+  version: 19.3.0
+  resolution: "react@npm:19.3.0"
+  checksum: 10/e98669f09750c41abb1bf020af67cc847e018c91a8c5413d3f40ddd737e3daef6e419bcd1521b113fda73fd667ae82d5f0e9d9e3ff462faeb82059c09e7f04b1
   languageName: node
   linkType: hard
 
@@ -10476,26 +10565,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rolldown@npm:~1.2.4":
-  version: 1.2.6
-  resolution: "rolldown@npm:1.2.6"
+"rolldown@npm:~1.2.6":
+  version: 1.2.8
+  resolution: "rolldown@npm:1.2.8"
   dependencies:
-    "@oxc-project/types": "npm:=0.147.0"
-    "@rolldown/binding-android-arm-eabi": "npm:1.2.6"
-    "@rolldown/binding-android-arm64": "npm:1.2.6"
-    "@rolldown/binding-darwin-arm64": "npm:1.2.6"
-    "@rolldown/binding-darwin-x64": "npm:1.2.6"
-    "@rolldown/binding-freebsd-x64": "npm:1.2.6"
-    "@rolldown/binding-linux-arm-gnueabihf": "npm:1.2.6"
-    "@rolldown/binding-linux-arm64-gnu": "npm:1.2.6"
-    "@rolldown/binding-linux-arm64-musl": "npm:1.2.6"
-    "@rolldown/binding-linux-ppc64-gnu": "npm:1.2.6"
-    "@rolldown/binding-linux-s390x-gnu": "npm:1.2.6"
-    "@rolldown/binding-linux-x64-gnu": "npm:1.2.6"
-    "@rolldown/binding-linux-x64-musl": "npm:1.2.6"
-    "@rolldown/binding-openharmony-arm64": "npm:1.2.6"
-    "@rolldown/binding-win32-arm64-msvc": "npm:1.2.6"
-    "@rolldown/binding-win32-x64-msvc": "npm:1.2.6"
+    "@oxc-project/types": "npm:=0.149.0"
+    "@rolldown/binding-android-arm-eabi": "npm:1.2.8"
+    "@rolldown/binding-android-arm64": "npm:1.2.8"
+    "@rolldown/binding-darwin-arm64": "npm:1.2.8"
+    "@rolldown/binding-darwin-x64": "npm:1.2.8"
+    "@rolldown/binding-freebsd-x64": "npm:1.2.8"
+    "@rolldown/binding-linux-arm-gnueabihf": "npm:1.2.8"
+    "@rolldown/binding-linux-arm64-gnu": "npm:1.2.8"
+    "@rolldown/binding-linux-arm64-musl": "npm:1.2.8"
+    "@rolldown/binding-linux-ppc64-gnu": "npm:1.2.8"
+    "@rolldown/binding-linux-s390x-gnu": "npm:1.2.8"
+    "@rolldown/binding-linux-x64-gnu": "npm:1.2.8"
+    "@rolldown/binding-linux-x64-musl": "npm:1.2.8"
+    "@rolldown/binding-openharmony-arm64": "npm:1.2.8"
+    "@rolldown/binding-win32-arm64-msvc": "npm:1.2.8"
+    "@rolldown/binding-win32-x64-msvc": "npm:1.2.8"
     "@rolldown/pluginutils": "npm:^1.0.0"
   dependenciesMeta:
     "@rolldown/binding-android-arm-eabi":
@@ -10530,7 +10619,7 @@ __metadata:
       optional: true
   bin:
     rolldown: ./bin/cli.mjs
-  checksum: 10/29bff46d93bc551732503e4a34786fec5f69aed7186a9617b701fbfbb6f91415d54ce31af6b0dcd11a40eb296c90b47bb7c7d04fe9c1f912decb2f02aacfb65a
+  checksum: 10/7260c1f3d6ee32358f110a425174ae44df9383957cf2364195db371ab407ed3dced45afe14a86556df551fba4efbe073ef53fb994ffd8c5d517754ec55c872b0
   languageName: node
   linkType: hard
 
@@ -10559,10 +10648,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.27.0":
-  version: 0.27.0
-  resolution: "scheduler@npm:0.27.0"
-  checksum: 10/eab3c3a8373195173e59c147224fc30dabe6dd453f248f5e610e8458512a5a2ee3a06465dc400ebfe6d35c9f5b7f3bb6b2e41c88c86fd177c25a73e7286a1e06
+"scheduler@npm:^0.28.0":
+  version: 0.28.0
+  resolution: "scheduler@npm:0.28.0"
+  checksum: 10/2a936a3729df438bd42e6af7a16a62b83543796209c9d2e637f3d7b198bd5c25c5909478a9da4f66923d290e01997816338cf740587c440448863783bd33d31d
   languageName: node
   linkType: hard
 
@@ -10697,7 +10786,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"std-env@npm:^4.0.0-rc.1":
+"std-env@npm:^4.2.0":
   version: 4.2.0
   resolution: "std-env@npm:4.2.0"
   checksum: 10/d30c3ae49c5568b4e61dca628eaafe12944dbcfe76980e5b1b1499b48e23f85f1ee01fe2306eeef5964a80b763948bbf2ba40490bc53709f45cf989071c9e4e7
@@ -11015,14 +11104,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinybench@npm:^2.9.0":
-  version: 2.9.0
-  resolution: "tinybench@npm:2.9.0"
-  checksum: 10/cfa1e1418e91289219501703c4693c70708c91ffb7f040fd318d24aef419fb5a43e0c0160df9471499191968b2451d8da7f8087b08c3133c251c40d24aced06c
+"tinybench@npm:6.1.4":
+  version: 6.1.4
+  resolution: "tinybench@npm:6.1.4"
+  checksum: 10/dee4bb749b2cb3fa7ca093f8ee9576a58d07409268e4219a87565e28911f6310c72561650bc706676ee6c109dc28828ab27b813e78836467e481643e09f33535
   languageName: node
   linkType: hard
 
-"tinyexec@npm:^1.0.2":
+"tinyexec@npm:1.3.0":
   version: 1.3.0
   resolution: "tinyexec@npm:1.3.0"
   checksum: 10/749a8c5aac2ffe3f04220b8966f414636c6c324d4ae88895dfffb2319db61cf1c01c5d7e8f0fb8ab747389ea0be1f0f80d850a9cce88a9d96cc5ebcb345db018
@@ -11050,13 +11139,6 @@ __metadata:
   version: 2.0.0
   resolution: "tinyrainbow@npm:2.0.0"
   checksum: 10/94d4e16246972614a5601eeb169ba94f1d49752426312d3cf8cc4f2cc663a2e354ffc653aa4de4eebccbf9eeebdd0caef52d1150271fdfde65d7ae7f3dcb9eb5
-  languageName: node
-  linkType: hard
-
-"tinyrainbow@npm:^3.1.0":
-  version: 3.1.1
-  resolution: "tinyrainbow@npm:3.1.1"
-  checksum: 10/6aa4aadf89cc8ecf8c227ef189616911292c4f0d2d5708b669b00375c5a8b43058115685f043034ffb11a8744c24650a30493525ff62134b436d94c84fa33ed5
   languageName: node
   linkType: hard
 
@@ -11214,18 +11296,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:8.69.0":
-  version: 8.69.0
-  resolution: "typescript-eslint@npm:8.69.0"
+"typescript-eslint@npm:8.70.0":
+  version: 8.70.0
+  resolution: "typescript-eslint@npm:8.70.0"
   dependencies:
-    "@typescript-eslint/eslint-plugin": "npm:8.69.0"
-    "@typescript-eslint/parser": "npm:8.69.0"
-    "@typescript-eslint/typescript-estree": "npm:8.69.0"
-    "@typescript-eslint/utils": "npm:8.69.0"
+    "@typescript-eslint/eslint-plugin": "npm:8.70.0"
+    "@typescript-eslint/parser": "npm:8.70.0"
+    "@typescript-eslint/typescript-estree": "npm:8.70.0"
+    "@typescript-eslint/utils": "npm:8.70.0"
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     typescript: ">=4.8.4 <6.1.0"
-  checksum: 10/d06d299ec1b5468a9963d57e1e835cf48f2fbf89b301b8a4d1a2438b2d1853e12f97c48ea78f7f27d7da91671c7d8cbb04c3e3cd3d5b1a3f8bc9f7224e73150a
+  checksum: 10/afdb2760ff425e806165d516e5d5baea4b446ce75c8e039a71d225047550a07b712f76b4b4a48982613f881e9694155e1beff1c5f0c4d034286048a41448911c
   languageName: node
   linkType: hard
 
@@ -11258,10 +11340,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unbash@npm:^4.0.10":
-  version: 4.0.10
-  resolution: "unbash@npm:4.0.10"
-  checksum: 10/8cce584b92ba8d0617b3db81153aae0a0f266c4aa8457724f0010ab6d862a17a5547aa788eb37e1b1e441f0af7a270a5871642abe4dcc0b254212caaad511347
+"unbash@npm:^4.0.11":
+  version: 4.0.11
+  resolution: "unbash@npm:4.0.11"
+  checksum: 10/f44bd9febbef85976623ade7c264bdf6c5b0f420f277d4ecf27a8290de49baade349254f4ef3cbbcf47c3ee3e01d64788d963b277b16ccc18aab50626fcd8a33
   languageName: node
   linkType: hard
 
@@ -11432,19 +11514,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:8.2.2, vite@npm:^6.0.0 || ^7.0.0 || ^8.0.0":
-  version: 8.2.2
-  resolution: "vite@npm:8.2.2"
+"vite@npm:8.3.0":
+  version: 8.3.0
+  resolution: "vite@npm:8.3.0"
   dependencies:
     fsevents: "npm:~2.3.3"
     lightningcss: "npm:^1.33.0"
-    picomatch: "npm:^4.0.5"
-    postcss: "npm:^8.5.26"
-    rolldown: "npm:~1.2.4"
+    picomatch: "npm:^4.0.7"
+    postcss: "npm:^8.5.28"
+    rolldown: "npm:~1.2.6"
     tinyglobby: "npm:^0.2.17"
   peerDependencies:
     "@types/node": ^20.19.0 || >=22.12.0
-    "@vitejs/devtools": ^0.4.0 || ^0.5.0
+    "@vitejs/devtools": ^0.7.1
     esbuild: ^0.27.0 || ^0.28.0
     jiti: ">=1.21.0"
     less: ^4.0.0
@@ -11485,47 +11567,40 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/65cd73267ea2fd49736e51e91681ddc5cbee3af880f20ce5c8df3d4c97d811a11e3ca62d3899fc8ac98ec442b5bc6f55a5d7625ac574ab68c7e3e541e543f264
+  checksum: 10/7f373449d1189c6b54c24555aab260afb0863e864a7f4a0b52e59dbbe86e4166ee6e82c3b4ab82cb00b38a5f0922ab665cf2dcfb5c7fb6a31812cc71a456fe72
   languageName: node
   linkType: hard
 
-"vitest@npm:4.1.11":
-  version: 4.1.11
-  resolution: "vitest@npm:4.1.11"
+"vitest@npm:5.0.0":
+  version: 5.0.0
+  resolution: "vitest@npm:5.0.0"
   dependencies:
-    "@vitest/expect": "npm:4.1.11"
-    "@vitest/mocker": "npm:4.1.11"
-    "@vitest/pretty-format": "npm:4.1.11"
-    "@vitest/runner": "npm:4.1.11"
-    "@vitest/snapshot": "npm:4.1.11"
-    "@vitest/spy": "npm:4.1.11"
-    "@vitest/utils": "npm:4.1.11"
-    es-module-lexer: "npm:^2.0.0"
-    expect-type: "npm:^1.3.0"
-    magic-string: "npm:^0.30.21"
-    obug: "npm:^2.1.1"
-    pathe: "npm:^2.0.3"
-    picomatch: "npm:^4.0.3"
-    std-env: "npm:^4.0.0-rc.1"
-    tinybench: "npm:^2.9.0"
-    tinyexec: "npm:^1.0.2"
-    tinyglobby: "npm:^0.2.15"
-    tinyrainbow: "npm:^3.1.0"
-    vite: "npm:^6.0.0 || ^7.0.0 || ^8.0.0"
+    "@types/chai": "npm:^5.2.2"
+    "@vitest/mocker": "npm:5.0.0"
+    chai: "npm:^6.2.2"
+    es-module-lexer: "npm:^2.3.2"
+    expect-type: "npm:^1.4.0"
+    magic-string: "npm:^1.2.3"
+    obug: "npm:^2.1.4"
+    picomatch: "npm:^4.0.7"
+    std-env: "npm:^4.2.0"
+    tinybench: "npm:6.1.4"
+    tinyexec: "npm:1.3.0"
+    tinyglobby: "npm:^0.2.17"
     why-is-node-running: "npm:^2.3.0"
   peerDependencies:
     "@edge-runtime/vm": "*"
     "@opentelemetry/api": ^1.9.0
-    "@types/node": ^20.0.0 || ^22.0.0 || >=24.0.0
-    "@vitest/browser-playwright": 4.1.11
-    "@vitest/browser-preview": 4.1.11
-    "@vitest/browser-webdriverio": 4.1.11
-    "@vitest/coverage-istanbul": 4.1.11
-    "@vitest/coverage-v8": 4.1.11
-    "@vitest/ui": 4.1.11
+    "@types/node": ^22.0.0 || >=24.0.0
+    "@vitest/browser-playwright": 5.0.0
+    "@vitest/browser-preview": 5.0.0
+    "@vitest/browser-webdriverio": ^5.0.0-beta.5 || >=5.0.0
+    "@vitest/coverage-istanbul": 5.0.0
+    "@vitest/coverage-v8": 5.0.0
+    "@vitest/ui": 5.0.0
     happy-dom: "*"
     jsdom: "*"
-    vite: ^6.0.0 || ^7.0.0 || ^8.0.0
+    vite: ^6.4.0 || ^7.0.0 || ^8.0.0
   peerDependenciesMeta:
     "@edge-runtime/vm":
       optional: true
@@ -11553,7 +11628,7 @@ __metadata:
       optional: false
   bin:
     vitest: ./vitest.mjs
-  checksum: 10/054f1e25d90d911693b0b93c5b85a7c3105775aa3e39c3279c7d3e7af719e2d94070a898d6d74292445366c1215bb91d07063989ac0965973f0c5ae22ad3b06b
+  checksum: 10/66a8272ba5d102c97954e54c048a105e27d061729511a8a21e0189b38858058264c02835d6fa4aaa674455b58cfd74c798c04bc70e4072f3126559054696a9ee
   languageName: node
   linkType: hard
 
