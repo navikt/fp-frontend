@@ -8,8 +8,15 @@ import compression from 'vite-plugin-compression2';
 const __filename = fileURLToPath(import.meta.url);
 const folder = path.dirname(__filename);
 
+const removeNaisMetaTagsPlaceholder = () => ({
+  name: 'remove-nais-meta-tags-placeholder',
+  apply: 'serve',
+  transformIndexHtml: html => html.replaceAll('{{{NAIS_META_TAGS}}}', ''),
+});
+
 export const createSharedAppConfig = setupFileDirName =>
   mergeConfig(createConfig(setupFileDirName), {
+    plugins: [removeNaisMetaTagsPlaceholder()],
     build: {
       sourcemap: true,
     },
