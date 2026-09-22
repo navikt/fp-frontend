@@ -11,29 +11,26 @@
 
 .stepArrowContainer {
   bottom: -24px;
-  filter: drop-shadow(0 -3px 2px color-mix(in srgb, var(--panel-border-color) 40%, transparent));
   position: relative;
   z-index: 1;
 }
 
 .stepArrowContainer:after {
-  border: solid transparent;
+  border: 12px solid transparent;
   border-bottom-color: var(--ax-bg-default);
-  border-width: 13px;
   bottom: 100%;
   content: ' ';
   height: 0;
   left: 50%;
-  margin-left: -13px;
+  margin-left: -12px;
   pointer-events: none;
   position: absolute;
   width: 0;
 }
 
 .stepArrowContainer:before {
-  border: solid transparent;
+  border: 14px solid transparent;
   border-bottom-color: var(--panel-border-color);
-  border-width: 14px;
   bottom: 100%;
   content: ' ';
   height: 0;
