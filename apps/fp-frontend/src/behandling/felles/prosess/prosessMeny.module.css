@@ -10,19 +10,14 @@
 }
 
 .stepArrowContainer {
-  bottom: -24px !important;
-  filter: drop-shadow(0 -3px 2px rgba(0, 0, 0, 0.1));
+  bottom: -24px;
+  filter: drop-shadow(0 -3px 2px color-mix(in srgb, var(--panel-border-color) 40%, transparent));
   position: relative;
   z-index: 1;
 }
 
-:global(.dark) .stepArrowContainer {
-  filter: drop-shadow(0 -3px 2px rgba(255, 255, 255, 0.1));
-}
-
 .stepArrowContainer:after {
   border: solid transparent;
-  border-color: rgba(255, 255, 255, 0);
   border-bottom-color: var(--ax-bg-default);
   border-width: 13px;
   bottom: 100%;
@@ -37,7 +32,6 @@
 
 .stepArrowContainer:before {
   border: solid transparent;
-  border-color: transparent;
   border-bottom-color: var(--panel-border-color);
   border-width: 14px;
   bottom: 100%;
@@ -48,8 +42,4 @@
   pointer-events: none;
   position: absolute;
   width: 0;
-}
-
-:global(.dark) .stepArrowContainer:before {
-  border-bottom-color: var(--ax-neutral-700);
 }

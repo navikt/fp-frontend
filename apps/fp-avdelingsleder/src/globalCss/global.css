@@ -17,17 +17,3 @@ body {
 :root {
   --header-height: 80px; /* Set dynamically with JS when it changes */
 }
-
-/*
- * Felles kantfarge for panel-rammer. Verdien er temaavhengig: en subtil kant i
- * lyst tema og en sterkere kant i mørkt tema. Ved å samle dette i én variabel
- * slipper hvert panel å gjenta egne :global(.dark)-overstyringer.
- */
-:root,
-.light {
-  --panel-border-color: var(--ax-border-neutral-subtle);
-}
-
-.dark {
-  --panel-border-color: var(--ax-border-neutral-strong);
-}
