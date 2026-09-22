@@ -1,4 +1,13 @@
-import { type ComponentProps, createContext, type ReactNode, use, useCallback, useMemo, useState } from 'react';
+import {
+  type ComponentProps,
+  createContext,
+  type ReactNode,
+  use,
+  useCallback,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { Link, useLocation } from 'react-router';
 
 import { Theme } from '@navikt/ds-react';
@@ -144,16 +153,18 @@ const AppShellInner = ({ onHeaderHeightChange, themeLocalStorageKey, children }:
 const useAppTheme = (localStorageKey?: string) => {
   const [theme, setTheme] = useState<ThemeType>(() => {
     if (localStorageKey) {
-      const storedTheme = (localStorage.getItem(localStorageKey) ?? 'light') as ThemeType;
-      document.body.classList.add(storedTheme);
-      return storedTheme;
+      return (localStorage.getItem(localStorageKey) ?? 'light') as ThemeType;
     }
     return 'light';
   });
 
+  useLayoutEffect(() => {
+    document.body.classList.remove('light', 'dark');
+    document.body.classList.add(theme);
+  }, [theme]);
+
   const updateTheme = (newTheme: ThemeType) => {
     if (localStorageKey) {
-      document.body.classList.replace(newTheme === 'dark' ? 'light' : 'dark', newTheme);
       localStorage.setItem(localStorageKey, newTheme);
     }
     setTheme(newTheme);
