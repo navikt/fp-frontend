@@ -1,9 +1,5 @@
 .container {
-  border-bottom: 1px solid var(--ax-neutral-400);
-}
-
-:global(.dark) .container {
-  border-bottom: 1px solid var(--ax-neutral-700);
+  border-bottom: 1px solid var(--panel-border-color);
 }
 
 .meny {
@@ -41,8 +37,8 @@
 
 .stepArrowContainer:before {
   border: solid transparent;
-  border-color: rgba(0, 0, 0, 0);
-  border-bottom-color: var(--ax-neutral-400);
+  border-color: transparent;
+  border-bottom-color: var(--panel-border-color);
   border-width: 14px;
   bottom: 100%;
   content: ' ';
@@ -55,6 +51,5 @@
 }
 
 :global(.dark) .stepArrowContainer:before {
-  border-color: rgba(255, 255, 255, 0);
   border-bottom-color: var(--ax-neutral-700);
 }

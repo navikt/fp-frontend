@@ -42,21 +42,13 @@
 
 @media all and (min-width: 1350px) {
   .rightColumn {
-    border-left: 1px solid var(--ax-border-neutral-subtle);
-  }
-
-  :global(.dark) .rightColumn {
-    border-left: 1px solid var(--ax-border-neutral-strong);
+    border-left: 1px solid var(--panel-border-color);
   }
 }
 
 @media all and (max-width: 1350px) {
   .rightColumn {
-    border-top: 1px solid var(--ax-border-neutral-subtle);
+    border-top: 1px solid var(--panel-border-color);
     margin-top: 40px;
-  }
-
-  :global(.dark) .rightColumn {
-    border-top-color: 1px solid var(--ax-border-neutral-strong);
   }
 }

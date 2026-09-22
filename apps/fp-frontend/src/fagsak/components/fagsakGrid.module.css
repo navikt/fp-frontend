@@ -50,18 +50,12 @@
 
 @media all and (min-width: 1409px) {
   .rightColumn {
-    border-left: 1px solid var(--ax-neutral-400);
-  }
-  :global(.dark) .rightColumn {
-    border-left: 1px solid var(--ax-neutral-700);
+    border-left: 1px solid var(--panel-border-color);
   }
 }
 
 @media all and (max-width: 1408px) {
   .rightColumn {
-    border-top: 1px solid var(--ax-neutral-400);
-  }
-  :global(.dark) .rightColumn {
-    border-top: 1px solid var(--ax-neutral-700);
+    border-top: 1px solid var(--panel-border-color);
   }
 }
