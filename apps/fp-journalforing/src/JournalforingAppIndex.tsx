@@ -4,7 +4,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { AppShell, ErrorBoundary, useAppShell } from '@navikt/fp-app-felles';
+import { AppShell, ErrorBoundary, THEME_LOCALE_STORAGE_KEY, useAppShell } from '@navikt/fp-app-felles';
 
 import { Dekorator } from './app/Dekorator';
 import { Home } from './app/Home';
@@ -59,7 +59,10 @@ const JournalføringAppIndex = () => {
 };
 
 export const JournalføringAppIndexWrapper = () => (
-  <AppShell onHeaderHeightChange={h => document.documentElement.setAttribute('style', `height: calc(100% - ${h}px)`)}>
+  <AppShell
+    themeLocalStorageKey={THEME_LOCALE_STORAGE_KEY}
+    onHeaderHeightChange={h => document.documentElement.setAttribute('style', `height: calc(100% - ${h}px)`)}
+  >
     <JournalføringAppIndex />
   </AppShell>
 );

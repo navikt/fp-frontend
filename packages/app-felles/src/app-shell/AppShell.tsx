@@ -39,6 +39,8 @@ export type AppShellContextValue = {
 
 const AppShellContext = createContext<AppShellContextValue | null>(null);
 
+export const THEME_LOCALE_STORAGE_KEY = 'fp-frontend-theme';
+
 export const useAppShell = (): AppShellContextValue => {
   const ctx = use(AppShellContext);
   if (!ctx) {
