@@ -1,6 +1,6 @@
 .header {
   background-color: var(--ax-neutral-200);
-  border-bottom: 1px solid var(--ax-border-neutral-subtle);
+  border-bottom: 1px solid var(--panel-border-color);
   padding: 24px;
   width: 100%;
 }

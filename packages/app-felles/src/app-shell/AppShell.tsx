@@ -39,7 +39,7 @@ export type AppShellContextValue = {
 
 const AppShellContext = createContext<AppShellContextValue | null>(null);
 
-export const THEME_LOCALE_STORAGE_KEY = 'fp-frontend-theme';
+const THEME_LOCALE_STORAGE_KEY = 'fp-frontend-theme';
 
 export const useAppShell = (): AppShellContextValue => {
   const ctx = use(AppShellContext);
@@ -50,18 +50,12 @@ export const useAppShell = (): AppShellContextValue => {
 };
 
 interface AppShellProps {
-  themeLocalStorageKey?: string;
   onHeaderHeightChange?: (newHeaderHeight: number) => void;
   additionalErrorHandler?: (error: Error, addErrorMessage: (data: FpError) => void) => boolean;
   children: ReactNode;
 }
 
-export const AppShell = ({
-  onHeaderHeightChange,
-  themeLocalStorageKey,
-  additionalErrorHandler,
-  children,
-}: AppShellProps) => {
+export const AppShell = ({ onHeaderHeightChange, additionalErrorHandler, children }: AppShellProps) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
   const queryClient = useMemo(
     () => createQueryClient(getErrorHandler(addErrorMessage, additionalErrorHandler)),
@@ -71,23 +65,20 @@ export const AppShell = ({
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
-      <AppShellInner onHeaderHeightChange={onHeaderHeightChange} themeLocalStorageKey={themeLocalStorageKey}>
-        {children}
-      </AppShellInner>
+      <AppShellInner onHeaderHeightChange={onHeaderHeightChange}>{children}</AppShellInner>
     </QueryClientProvider>
   );
 };
 
 interface AppShellInnerProps {
-  themeLocalStorageKey?: string;
   onHeaderHeightChange?: (newHeaderHeight: number) => void;
   children: ReactNode;
 }
 
-const AppShellInner = ({ onHeaderHeightChange, themeLocalStorageKey, children }: AppShellInnerProps) => {
+const AppShellInner = ({ onHeaderHeightChange, children }: AppShellInnerProps) => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
-  const { theme, setTheme } = useAppTheme(themeLocalStorageKey);
+  const { theme, setTheme } = useAppTheme();
 
   const location = useLocation();
 
@@ -152,13 +143,10 @@ const AppShellInner = ({ onHeaderHeightChange, themeLocalStorageKey, children }:
   );
 };
 
-const useAppTheme = (localStorageKey?: string) => {
-  const [theme, setTheme] = useState<ThemeType>(() => {
-    if (localStorageKey) {
-      return (localStorage.getItem(localStorageKey) ?? 'light') as ThemeType;
-    }
-    return 'light';
-  });
+const useAppTheme = () => {
+  const [theme, setTheme] = useState<ThemeType>(
+    () => (localStorage.getItem(THEME_LOCALE_STORAGE_KEY) ?? 'light') as ThemeType,
+  );
 
   useLayoutEffect(() => {
     document.body.classList.remove('light', 'dark');
@@ -166,9 +154,7 @@ const useAppTheme = (localStorageKey?: string) => {
   }, [theme]);
 
   const updateTheme = (newTheme: ThemeType) => {
-    if (localStorageKey) {
-      localStorage.setItem(localStorageKey, newTheme);
-    }
+    localStorage.setItem(THEME_LOCALE_STORAGE_KEY, newTheme);
     setTheme(newTheme);
   };
 

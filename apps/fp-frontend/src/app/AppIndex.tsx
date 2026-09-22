@@ -4,14 +4,7 @@ import { useNavigate } from 'react-router';
 import { createIntl } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import {
-  AppShell,
-  ErrorBoundary,
-  ErrorType,
-  type FpError,
-  THEME_LOCALE_STORAGE_KEY,
-  useAppShell,
-} from '@navikt/fp-app-felles';
+import { AppShell, ErrorBoundary, ErrorType, type FpError, useAppShell } from '@navikt/fp-app-felles';
 
 import { initFetchOptions } from '../data/fagsakApi';
 import { PollingTimeoutError } from '../data/polling/pollingUtils';
@@ -86,7 +79,6 @@ const AppIndex = () => {
 
 export const AppIndexWrapper = () => (
   <AppShell
-    themeLocalStorageKey={THEME_LOCALE_STORAGE_KEY}
     onHeaderHeightChange={h => document.documentElement.style.setProperty('--header-height', `${h}px`)}
     additionalErrorHandler={handlePollingError}
   >
