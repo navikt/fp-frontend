@@ -2537,6 +2537,7 @@ __metadata:
     react-responsive: "npm:10.0.1"
     react-router: "npm:8.3.1"
     storybook: "npm:10.6.0"
+    stylelint: "npm:17.15.0"
     tailwindcss: "npm:4.3.3"
     typescript: "npm:6.0.3"
     vite: "npm:8.3.0"
