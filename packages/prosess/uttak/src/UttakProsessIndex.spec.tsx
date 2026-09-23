@@ -161,6 +161,28 @@ describe('UttakProsessIndex', () => {
     ]);
   });
 
+  it('skal kunne bekrefte på nytt med samme perioder etter lagringsfeil', async () => {
+    const førsteInnsending = Promise.withResolvers<void>();
+    const nyInnsending = Promise.withResolvers<void>();
+    const lagre = vi.fn().mockReturnValueOnce(førsteInnsending.promise).mockReturnValueOnce(nyInnsending.promise);
+
+    render(<AksjonspunktDerValgtStønadskontoIkkeFinnes submitCallback={lagre} />);
+
+    await oppdaterManuellPeriode();
+    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
+    expect(screen.getByRole('button', { name: /Bekreft og fortsett/ })).toBeDisabled();
+    await fullførForespørsel(() => førsteInnsending.reject(new Error('Lagringen feilet')));
+
+    expect(screen.getByText(/Kunne ikke lagre uttaket/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
+    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
+    expect(lagre).toHaveBeenCalledTimes(2);
+    expect(lagre.mock.calls[1]).toEqual(lagre.mock.calls[0]);
+    expect(screen.queryByText(/Kunne ikke lagre uttaket/)).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Bekreft og fortsett/ })).toBeDisabled();
+    await fullførForespørsel(() => nyInnsending.resolve());
+  });
+
   it('skal vise periode med gradering', async () => {
     const lagre = vi.fn();
 

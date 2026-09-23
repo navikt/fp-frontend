@@ -213,6 +213,7 @@ export const UttakProsessPanel = ({
   const [erOverstyrt, setErOverstyrt] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [innsendingFeilet, setInnsendingFeilet] = useState(false);
   const [saldoStatus, setSaldoStatus] = useState<'oppdatert' | 'venter' | 'feilet'>('oppdatert');
   const sisteSaldoForespørselRef = useRef(0);
   const toggleOverstyring = () => {
@@ -248,12 +249,18 @@ export const UttakProsessPanel = ({
     }
   };
 
-  const bekreftAksjonspunkter = () => {
+  const bekreftAksjonspunkter = async () => {
     if (saldoStatus !== 'oppdatert' || isSubmitting) {
       return;
     }
     setIsSubmitting(true);
-    void submitCallback(transformValues(perioder, aksjonspunkterForPanel));
+    setInnsendingFeilet(false);
+    try {
+      await submitCallback(transformValues(perioder, aksjonspunkterForPanel));
+    } catch {
+      setInnsendingFeilet(true);
+      setIsSubmitting(false);
+    }
   };
 
   const oppdaterSaldo = async (nyePerioder: PeriodeSoker[]) => {
@@ -392,6 +399,11 @@ export const UttakProsessPanel = ({
       )}
       {((!harIngenEllerLukkedeAksjonspunkt && !isReadOnly) || erOverstyrt) && (
         <>
+          {innsendingFeilet && (
+            <Alert size="small" variant="error">
+              <FormattedMessage id="UttakPanel.InnsendingFeilet" />
+            </Alert>
+          )}
           {feilmeldinger.length > 0 && (
             <>
               {feilmeldinger.map(fm => (

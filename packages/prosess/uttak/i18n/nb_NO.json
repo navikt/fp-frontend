@@ -18,6 +18,7 @@
   "UttakPanel.OppdatererSaldo": "Oppdaterer saldo. Vent før du bekrefter uttaket.",
   "UttakPanel.SaldoFeilet": "Kunne ikke oppdatere saldo. Endringene dine er beholdt. Prøv igjen før du bekrefter uttaket.",
   "UttakPanel.PrøvSaldoPåNytt": "Prøv å oppdatere saldo på nytt",
+  "UttakPanel.InnsendingFeilet": "Kunne ikke lagre uttaket. Endringene dine er beholdt. Prøv å bekrefte på nytt.",
   "UttakPanel.manuellBehandlingÅrsakEnskiltArbeidsforhold": "{arbeidsforhold} er tom for stønadsdager. Vurder å endre stønadskonto eller sette trekkdager og utbetalingsgrad til null. Kontakt søker ved behov.",
   "UttakPanel.manuellBehandlingÅrsakArbeidsforhold": "{arbeidsforhold} er tomme for stønadsdager. Vurder å endre stønadskonto eller sette trekkdager og utbetalingsgrad til null. Kontakt søker ved behov.",
   "PeriodeResultatType.INNVILGET": "Innvilget",
