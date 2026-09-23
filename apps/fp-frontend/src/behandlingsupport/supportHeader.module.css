@@ -1,13 +1,12 @@
 .header {
   background-color: var(--ax-neutral-100);
-  border-bottom: solid var(--ax-neutral-400) 2px;
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
   padding: 20px;
 }
 
 .circle {
   background: var(--ax-neutral-400);
-  border-radius: 50%;
-  color: var(--ax-text-accent-contrast);
+  border-radius: var(--ax-radius-full);
   height: 25px;
   line-height: 25px;
   text-align: center;

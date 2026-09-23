@@ -7,13 +7,13 @@ import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles'
 
 import styles from './supportHeader.module.css';
 
-type Props = {
+interface Props {
   tekst: string;
   antall?: number;
   children: ReactNode;
   brukPadding?: boolean;
   toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
-};
+}
 
 export const SupportHeaderAndContent = ({
   tekst,
