@@ -60,6 +60,8 @@
   "Journal.Sak.Ytelse": "{ytelseType, select, ES {Engangsstønad} FP {Foreldrepenger} SVP {Svangerskapspenger} other {Ukjent}}",
   "Journal.Sak.AnnenSak": "Journalfør på en annen sak",
   "Journal.Tittel.Fritekst": "Fritekst",
+  "Journal.Tittel.EndreTittel": "Endre tittel på journalpost",
+  "DokumentDetaljer.EndreTittel": "Endre tittel på dokument",
   "Journalfør.Modal.Ok": "Ok",
   "Journalfør.Modal.Ferdigstiller": "Ferdigstiller journalføringen...",
   "Journalfør.Modal.Journalført": "Dokumentet er journalført på saksnummer ",

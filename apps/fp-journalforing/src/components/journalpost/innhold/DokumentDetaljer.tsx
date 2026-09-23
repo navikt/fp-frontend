@@ -113,6 +113,7 @@ export const DokumentDetaljer = ({
           {erKanalSomErÅpenForEndring(journalpost.kanal) && (
             <Button
               icon={<PencilIcon aria-hidden />}
+              title={intl.formatMessage({ id: 'DokumentDetaljer.EndreTittel' })}
               className={styles['editButton']}
               onClick={() => {
                 setKanRedigeres(!kanRedigeres);
