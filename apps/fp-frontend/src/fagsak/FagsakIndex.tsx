@@ -115,7 +115,6 @@ const FagsakInnhold = ({
   toggleVisUtvidetBehandlingDetaljer,
 }: FagsakInnholdProps) => {
   const { isRequestPending } = useRequestPendingContext();
-  const [behandlingUuidFraUrl, setBehandlingUuidFraUrl] = useState(behandlingUuid);
   const [behandling, setBehandling] = useState<Behandling>();
   const oppdaterBehandling = useCallback(
     (oppdatertBehandling: Behandling | undefined) => {
@@ -131,20 +130,20 @@ const FagsakInnhold = ({
     [behandlingUuid],
   );
 
-  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuidFraUrl, behandling?.versjon);
-  const fagsakBehandling = fagsakData?.getBehandling(behandlingUuidFraUrl);
+  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandling?.versjon);
+  const fagsakBehandling = fagsakData?.getBehandling(behandlingUuid);
   const erTilbakekreving = fagsakBehandling?.type === 'BT-007' || fagsakBehandling?.type === 'BT-009';
-  const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, oppdaterBehandling, behandlingUuidFraUrl);
+  const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, oppdaterBehandling, behandlingUuid);
 
   useEffect(() => {
-    if (behandlingUuidFraUrl && fagsakBehandling) {
+    if (behandlingUuid && fagsakBehandling) {
       hentOgSettBehandling();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- hent behandling berre ved endra URL-uuid; hentOgSettBehandling gjev gjentekne henteforsøk
-  }, [behandlingUuidFraUrl, fagsakBehandling?.uuid]);
+  }, [behandlingUuid, fagsakBehandling?.uuid]);
 
   const location = useLocation();
-  const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuidFraUrl);
+  const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuid);
 
   if (!fagsakData) {
     if (!harHentetFagsak) {
@@ -172,7 +171,6 @@ const FagsakInnhold = ({
                   behandling={behandling}
                   setBehandling={oppdaterBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
-                  setBehandlingUuidFraUrl={setBehandlingUuidFraUrl}
                 />
               }
             />
@@ -183,7 +181,7 @@ const FagsakInnhold = ({
         profileAndNavigationContent={
           <FagsakProfileIndex
             fagsakData={fagsakData}
-            behandlingUuid={behandlingUuidFraUrl}
+            behandlingUuid={behandlingUuid}
             setBehandling={oppdaterBehandling}
             hentOgSettBehandling={hentOgSettBehandling}
             behandling={behandling}
@@ -195,7 +193,7 @@ const FagsakInnhold = ({
         supportContent={
           <BehandlingSupportIndex
             fagsakData={fagsakData}
-            behandlingUuid={behandlingUuidFraUrl}
+            behandlingUuid={behandlingUuid}
             behandlingVersjon={behandling?.versjon}
             hentOgSettBehandling={hentOgSettBehandling}
             toggleVisUtvidetBehandlingDetaljer={toggleVisUtvidetBehandlingDetaljer}

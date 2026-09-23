@@ -101,6 +101,19 @@ describe('FagsakIndexNavigasjon', () => {
     expect(screen.queryByText('Behandling A, versjon 3')).not.toBeInTheDocument();
   });
 
+  it('skal fjerne valgt behandling når URL-en ikke lenger har en behandlings-UUID', async () => {
+    const router = renderFagsak();
+    act(() => forespørsler[0]!.svar(lagBehandling({ uuid: 'A', versjon: 1 })));
+
+    await act(() => router.navigate('/fagsak/123/behandling/'));
+    act(() => forespørsler[0]!.svar(lagBehandling({ uuid: 'A', versjon: 2 })));
+
+    expect(screen.queryByText('Meny for A')).not.toBeInTheDocument();
+    expect(screen.getByText('Ingen behandlingsmeny')).toBeInTheDocument();
+    expect(vi.mocked(useHentFagsak)).toHaveBeenLastCalledWith('123', undefined, undefined);
+    expect(forespørsler.map(f => f.uuid)).toEqual(['A']);
+  });
+
   it('skal ignorere gamle svar også etter navigasjon tilbake til samme behandling', async () => {
     const router = renderFagsak();
     await act(() => router.navigate('/fagsak/123/behandling/B/'));

@@ -28,7 +28,6 @@ interface Props {
   setBehandling: (behandling: Behandling) => void;
   hentOgSettBehandling: () => void;
   fagsakData: FagsakData;
-  setBehandlingUuidFraUrl: (uuid: string) => void;
 }
 
 /**
@@ -36,20 +35,9 @@ interface Props {
  *
  * Er rot for for den delen av hovedvinduet som har innhold for en valgt behandling.
  */
-export const BehandlingIndex = ({
-  behandling,
-  setBehandling,
-  hentOgSettBehandling,
-  fagsakData,
-  setBehandlingUuidFraUrl,
-}: Props) => {
+export const BehandlingIndex = ({ behandling, setBehandling, hentOgSettBehandling, fagsakData }: Props) => {
   const params = useParams<{ behandlingUuid: string }>();
   const behandlingUuid = params['behandlingUuid']!;
-
-  useEffect(() => {
-    setBehandlingUuidFraUrl(behandlingUuid);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- synkroniserer berre når behandlingUuid frå URL endrar seg; setter-prop er stabil
-  }, [behandlingUuid]);
 
   if (!behandling || behandling.uuid !== behandlingUuid) {
     return <LoadingPanel />;

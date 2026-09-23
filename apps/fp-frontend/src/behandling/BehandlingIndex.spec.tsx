@@ -53,7 +53,6 @@ describe('BehandlingIndex', () => {
               fagsakData={new FagsakData(lagFagsak({ saksnummer: '123' }))}
               setBehandling={vi.fn()}
               hentOgSettBehandling={vi.fn()}
-              setBehandlingUuidFraUrl={vi.fn()}
             />
           ),
         },
