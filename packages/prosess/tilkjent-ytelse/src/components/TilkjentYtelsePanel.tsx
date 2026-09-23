@@ -8,7 +8,6 @@ import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
-  BeregningsresultatPeriode,
   FamilieHendelse,
   Feriepengegrunnlag,
   Personoversikt,
@@ -16,6 +15,7 @@ import type {
 } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
+import { erAlleAndelerAvslått } from './erAlleAndelerAvslått';
 import { FeriepengerPanel } from './feriepenger/FeriepengerPanel';
 import { TilkjentYtelse } from './TilkjentYtelse';
 
@@ -88,10 +88,6 @@ export const TilkjentYtelsePanel = ({
 
 const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunkt[]): string | undefined =>
   alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.UTGÅTT_5090)?.begrunnelse ?? undefined;
-
-const erAlleAndelerAvslått = (periode: BeregningsresultatPeriode): boolean =>
-  (periode.andeler ?? []).length > 0 &&
-  (periode.andeler ?? []).every(andel => andel.uttak.periodeResultatType === 'AVSLÅTT');
 
 const finnHarPeriodeMedNullIDagsats = (perioder: BeregningsresultatDagytelse['perioder']): boolean =>
   (perioder ?? []).filter(periode => !erAlleAndelerAvslått(periode)).some(periode => periode.dagsats === 0);

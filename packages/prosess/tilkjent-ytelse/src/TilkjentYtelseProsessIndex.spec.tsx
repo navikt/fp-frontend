@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './TilkjentYtelseProsessIndex.stories';
@@ -36,7 +36,7 @@ describe('TilkjentYtelseProsessIndex', () => {
     expect(screen.getByText('Dette er en begrunnelse saksbehandler tidligere har gjort.')).toBeInTheDocument();
   });
 
-  it('skal vise advarsel når en innvilget periode har 0 i dagsats', async () => {
+  it('skal vise advarsel og detaljer når en innvilget periode har 0 i dagsats', async () => {
     render(<MedPeriodeUtenDagsats />);
 
     expect(await screen.findByText('Tilkjent ytelse')).toBeInTheDocument();
@@ -46,9 +46,17 @@ describe('TilkjentYtelseProsessIndex', () => {
           'Dette kan føre til feil ved brevutsending. Kontroller beregningen før du fortsetter.',
       ),
     ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: /fra 11\.06\.2019/ }));
+
+    expect(screen.getByText('Detaljer for valgt periode')).toBeInTheDocument();
+    expect(screen.getByText('11.06.2019 - 01.07.2019')).toBeInTheDocument();
+    expect(screen.getByText('0', { selector: 'b' })).toBeInTheDocument();
+    expect(screen.getByText('Foreldrepenger')).toBeInTheDocument();
+    expect(screen.getByText('Nei')).toBeInTheDocument();
   });
 
-  it('skal ikke vise advarsel når periode med 0 i dagsats har alle andeler avslått', async () => {
+  it('skal ikke vise advarsel eller periode når nullperioden har alle andeler avslått', async () => {
     render(<MedAvslåttPeriodeUtenDagsats />);
 
     expect(await screen.findByText('Tilkjent ytelse')).toBeInTheDocument();
@@ -58,5 +66,26 @@ describe('TilkjentYtelseProsessIndex', () => {
           'Dette kan føre til feil ved brevutsending. Kontroller beregningen før du fortsetter.',
       ),
     ).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /fra 11\.06\.2019/ })).not.toBeInTheDocument();
+    expect(within(screen.getByRole('list')).getAllByRole('button')).toHaveLength(2);
   });
+
+  it.each([{ andeler: undefined }, { andeler: [] }])(
+    'skal ikke vise nullperioden uten andeler ($andeler)',
+    ({ andeler }) => {
+      render(
+        <MedPeriodeUtenDagsats
+          beregningresultat={{
+            perioder: MedPeriodeUtenDagsats.args.beregningresultat?.perioder?.map(periode => ({
+              ...periode,
+              andeler: periode.dagsats === 0 ? andeler : periode.andeler,
+            })),
+          }}
+        />,
+      );
+
+      expect(screen.queryByRole('button', { name: /fra 11\.06\.2019/ })).not.toBeInTheDocument();
+      expect(within(screen.getByRole('list')).getAllByRole('button')).toHaveLength(2);
+    },
+  );
 });

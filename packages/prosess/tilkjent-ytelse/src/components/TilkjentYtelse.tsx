@@ -24,6 +24,7 @@ import type {
   NavBrukerKjønn,
 } from '@navikt/fp-types';
 
+import { erAlleAndelerAvslått } from './erAlleAndelerAvslått';
 import { TilkjentYtelseTimelineData } from './TilkjentYtelseTimelineData';
 
 type Periode = {
@@ -238,7 +239,9 @@ const getFamiliehendelseData = (familieHendelse: FamilieHendelse): { dato?: stri
 
 const formatPerioder = (perioder: BeregningsresultatPeriode[] = []): Periode[] =>
   perioder
-    .filter(periode => periode.andeler?.[0] && periode.dagsats)
+    .filter(
+      periode => periode.andeler?.[0] && (periode.dagsats || (periode.dagsats === 0 && !erAlleAndelerAvslått(periode))),
+    )
     .map((periode, index: number) => ({
       erGradert: sjekkOmGradert(periode),
       start: dayjs(periode.fom).toDate(),
