@@ -2,7 +2,7 @@ import morgan from "morgan";
 import winston from "winston";
 
 const { format } = winston;
-const { combine, json, timestamp } = format;
+const { combine, json, splat, timestamp } = format;
 
 const levels = {
   error: 0,
@@ -39,8 +39,9 @@ const stdoutLogger = winston.createLogger({
   levels,
   transports: [
     new winston.transports.Console({
+      // splat() is required for printf-style messages, e.g. from http-proxy-middleware
       // eslint-disable-next-line unicorn/max-nested-calls
-      format: combine(timestamp(), uppercaseLevel(), json()),
+      format: combine(timestamp(), splat(), uppercaseLevel(), json()),
     }),
   ],
 });
@@ -58,11 +59,8 @@ const warning = (message: string) => {
 };
 
 const error = (message: string, error_?: unknown) => {
-  if (error_ instanceof Error) {
-    stdoutLogger.error(message, { message: `: ${error_.message}` });
-  } else {
-    stdoutLogger.error(message, { message: `: ${error_}` });
-  }
+  const detaljer = error_ instanceof Error ? error_.message : String(error_);
+  stdoutLogger.error(`${message}: ${detaljer}`);
 };
 
 const shouldSkip = () => process.env.NODE_ENV === "production";
