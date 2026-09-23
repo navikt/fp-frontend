@@ -10,10 +10,9 @@ import { Dekorator } from './app/Dekorator';
 import { Home } from './app/Home';
 import { initFetchOptions } from './data/fplosAvdelingslederApi';
 
-import './globalCss/global.module.css';
-
 import messages from '../i18n/nb_NO.json';
 
+import './globalCss/global.css';
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';

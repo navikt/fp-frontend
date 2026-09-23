@@ -25,8 +25,6 @@ import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const THEME_LOCALE_STORAGE_KEY = 'fp-frontend-theme';
-
 const intl = createIntl(messages);
 
 const handlePollingError = (error: Error, addErrorMessage: (data: FpError) => void): boolean => {
@@ -81,7 +79,6 @@ const AppIndex = () => {
 
 export const AppIndexWrapper = () => (
   <AppShell
-    themeLocalStorageKey={THEME_LOCALE_STORAGE_KEY}
     onHeaderHeightChange={h => document.documentElement.style.setProperty('--header-height', `${h}px`)}
     additionalErrorHandler={handlePollingError}
   >

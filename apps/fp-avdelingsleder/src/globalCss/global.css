@@ -1,0 +1,7 @@
+body {
+  background-color: var(--ax-bg-default);
+}
+
+:root {
+  --header-height: 80px; /* Set dynamically with JS when it changes */
+}

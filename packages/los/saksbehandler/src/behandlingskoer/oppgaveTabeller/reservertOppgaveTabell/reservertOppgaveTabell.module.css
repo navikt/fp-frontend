@@ -1,8 +1,4 @@
 .container {
-  border-bottom: 1px solid var(--ax-border-neutral-subtle);
+  border-bottom: 1px solid var(--panel-border-color);
   padding-bottom: 50px;
-}
-
-:global(.dark) .container {
-  border-bottom: 1px solid var(--ax-border-neutral-strong);
 }
