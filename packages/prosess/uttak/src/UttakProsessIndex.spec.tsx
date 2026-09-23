@@ -1,6 +1,8 @@
 import { composeStories } from '@storybook/react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+import type { UttakStonadskontoer } from '@navikt/fp-types';
 
 import * as stories from './UttakProsessIndex.stories';
 
@@ -12,7 +14,153 @@ const {
   VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent,
 } = composeStories(stories);
 
+const fullførForespørsel = (fullfør: () => void) => act(() => Promise.resolve().then(fullfør));
+
+const oppdaterManuellPeriode = async () => {
+  for (const input of screen.getAllByLabelText('Utbetalingsgrad (%)')) {
+    await userEvent.clear(input);
+    await userEvent.type(input, '0');
+  }
+  await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en vurdering');
+  await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+};
+
+const endrePeriodePåNytt = async () => {
+  await userEvent.click(screen.getByRole('button', { name: /fra 20.10.2022 til 09.11.2022/ }));
+  await userEvent.clear(screen.getByLabelText('Vurdering'));
+  await userEvent.type(screen.getByLabelText('Vurdering'), 'Ny vurdering');
+  await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+};
+
 describe('UttakProsessIndex', () => {
+  it.each(['svar', 'feil'])('skal ignorere foreldet saldo%s etter at nyeste saldo er mottatt', async utfall => {
+    const første = Promise.withResolvers<UttakStonadskontoer>();
+    const andre = Promise.withResolvers<UttakStonadskontoer>();
+    const oppdaterStønadskontoer = vi.fn().mockReturnValueOnce(første.promise).mockReturnValueOnce(andre.promise);
+    const lagre = vi.fn().mockResolvedValue(undefined);
+
+    render(
+      <AksjonspunktDerValgtStønadskontoIkkeFinnes
+        oppdaterStønadskontoer={oppdaterStønadskontoer}
+        submitCallback={lagre}
+      />,
+    );
+
+    await oppdaterManuellPeriode();
+    await endrePeriodePåNytt();
+    expect(oppdaterStønadskontoer).toHaveBeenCalledTimes(2);
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeDisabled();
+
+    await fullførForespørsel(() => andre.resolve(stories.uttakStonadskontoer));
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
+
+    await fullførForespørsel(() => {
+      if (utfall === 'feil') {
+        første.reject(new Error('Saldokallet feilet'));
+      } else {
+        første.resolve({
+          ...stories.uttakStonadskontoer,
+          stønadskonti: {
+            ...stories.uttakStonadskontoer.stønadskonti,
+            MØDREKVOTE: {
+              ...stories.uttakStonadskontoer.stønadskonti.MØDREKVOTE,
+              saldo: 30,
+              gyldigForbruk: false,
+            },
+          },
+        });
+      }
+    });
+
+    expect(screen.getByText('7/0')).toBeInTheDocument();
+    expect(screen.queryByText(/Kunne ikke oppdatere saldo/)).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
+    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
+    expect(lagre).toHaveBeenCalledWith([
+      expect.objectContaining({
+        perioder: [
+          expect.objectContaining({ begrunnelse: 'Ny vurdering' }),
+          expect.objectContaining({ fom: '2022-11-10' }),
+        ],
+      }),
+    ]);
+  });
+
+  it('skal vente på siste saldo selv om en eldre forespørsel er ferdig', async () => {
+    const første = Promise.withResolvers<UttakStonadskontoer>();
+    const andre = Promise.withResolvers<UttakStonadskontoer>();
+    const oppdaterStønadskontoer = vi.fn().mockReturnValueOnce(første.promise).mockReturnValueOnce(andre.promise);
+    const lagre = vi.fn();
+
+    render(
+      <AksjonspunktDerValgtStønadskontoIkkeFinnes
+        oppdaterStønadskontoer={oppdaterStønadskontoer}
+        submitCallback={lagre}
+      />,
+    );
+
+    await oppdaterManuellPeriode();
+    await endrePeriodePåNytt();
+    await fullførForespørsel(() => første.resolve(stories.uttakStonadskontoer));
+
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeDisabled();
+    expect(screen.getByText('Oppdaterer saldo. Vent før du bekrefter uttaket.')).toBeInTheDocument();
+    expect(screen.queryByText('Disponible stønadsdager (u/d)')).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
+    expect(lagre).not.toHaveBeenCalled();
+
+    await fullførForespørsel(() => andre.resolve(stories.uttakStonadskontoer));
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
+  });
+
+  it('skal beholde periodene og kunne hente saldo på nytt etter feil', async () => {
+    const første = Promise.withResolvers<UttakStonadskontoer>();
+    const andre = Promise.withResolvers<UttakStonadskontoer>();
+    const nyttForsøk = Promise.withResolvers<UttakStonadskontoer>();
+    const oppdaterStønadskontoer = vi
+      .fn()
+      .mockReturnValueOnce(første.promise)
+      .mockReturnValueOnce(andre.promise)
+      .mockReturnValueOnce(nyttForsøk.promise);
+    const lagre = vi.fn().mockResolvedValue(undefined);
+
+    render(
+      <AksjonspunktDerValgtStønadskontoIkkeFinnes
+        oppdaterStønadskontoer={oppdaterStønadskontoer}
+        submitCallback={lagre}
+      />,
+    );
+
+    await oppdaterManuellPeriode();
+    await endrePeriodePåNytt();
+    await fullførForespørsel(() => andre.reject(new Error('Saldokallet feilet')));
+    await fullførForespørsel(() => første.resolve(stories.uttakStonadskontoer));
+
+    expect(screen.getByText(/Kunne ikke oppdatere saldo/)).toBeInTheDocument();
+    expect(screen.queryByText('Disponible stønadsdager (u/d)')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeDisabled();
+    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
+    expect(lagre).not.toHaveBeenCalled();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Prøv å oppdatere saldo på nytt' }));
+    expect(oppdaterStønadskontoer).toHaveBeenCalledTimes(3);
+    expect(oppdaterStønadskontoer.mock.calls[2]).toEqual(oppdaterStønadskontoer.mock.calls[1]);
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeDisabled();
+    await fullførForespørsel(() => nyttForsøk.resolve(stories.uttakStonadskontoer));
+
+    expect(screen.queryByText(/Kunne ikke oppdatere saldo/)).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
+    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
+    expect(lagre).toHaveBeenCalledWith([
+      expect.objectContaining({
+        perioder: [
+          expect.objectContaining({ begrunnelse: 'Ny vurdering' }),
+          expect.objectContaining({ fom: '2022-11-10' }),
+        ],
+      }),
+    ]);
+  });
+
   it('skal vise periode med gradering', async () => {
     const lagre = vi.fn();
 
