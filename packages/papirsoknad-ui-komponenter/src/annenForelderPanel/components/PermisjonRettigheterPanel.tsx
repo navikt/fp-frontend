@@ -68,6 +68,14 @@ PermisjonRettigheterPanel.transformValues = ({
   søkerHarAleneomsorg,
   denAndreForelderenHarRettPåForeldrepenger:
     søkerHarAleneomsorg === false ? denAndreForelderenHarRettPåForeldrepenger : undefined,
-  annenForelderRettEØS: denAndreForelderenHarRettPåForeldrepenger === false ? annenForelderRettEØS : undefined,
-  morMottarUføretrygd: annenForelderRettEØS === false ? morMottarUføretrygd : undefined,
+  annenForelderRettEØS:
+    søkerHarAleneomsorg === false && denAndreForelderenHarRettPåForeldrepenger === false
+      ? annenForelderRettEØS
+      : undefined,
+  morMottarUføretrygd:
+    søkerHarAleneomsorg === false &&
+    denAndreForelderenHarRettPåForeldrepenger === false &&
+    annenForelderRettEØS === false
+      ? morMottarUføretrygd
+      : undefined,
 });
