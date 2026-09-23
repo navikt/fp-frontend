@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo, useState } from 'react';
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type Location, type NavigateFunction, useLocation, useNavigate, useParams } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -51,7 +51,7 @@ export const BehandlingIndex = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- synkroniserer berre når behandlingUuid frå URL endrar seg; setter-prop er stabil
   }, [behandlingUuid]);
 
-  if (!behandling) {
+  if (!behandling || behandling.uuid !== behandlingUuid) {
     return <LoadingPanel />;
   }
 
@@ -105,8 +105,19 @@ const BehandlingIndexWrapper = ({
 
   const navigate = useNavigate();
   const location = useLocation();
-  const oppdaterProsessStegOgFaktaPanelIUrl = useMemo(
-    () => getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate),
+  const erAktivRef = useRef(true);
+  useEffect(() => {
+    erAktivRef.current = true;
+    return () => {
+      erAktivRef.current = false;
+    };
+  }, []);
+  const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(
+    (prosessStegId?: string, faktaPanelId?: string) => {
+      if (erAktivRef.current) {
+        getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate)(prosessStegId, faktaPanelId);
+      }
+    },
     [location, navigate],
   );
 
