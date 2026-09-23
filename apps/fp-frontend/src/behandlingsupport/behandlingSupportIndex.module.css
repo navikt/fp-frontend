@@ -10,10 +10,8 @@
 
 .ulesteNotater {
   background-color: var(--ax-bg-danger-moderateA);
-  border-radius: 9999px;
-  color: var(--ax-text-neutral);
+  border-radius: var(--ax-radius-full);
   font-size: 0.875rem;
-  font-weight: 600;
   height: 1.25rem;
   left: calc(50% + 7px);
   line-height: 1.25rem;
