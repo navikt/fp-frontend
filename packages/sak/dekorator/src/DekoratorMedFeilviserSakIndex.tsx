@@ -9,8 +9,6 @@ import { FeilmeldingPanel } from './components/FeilmeldingPanel';
 import type { DekoratorLenke } from './typer/dekoratorLenke';
 import type { Feilmelding } from './typer/feilmeldingTsType';
 
-import styles from './dekoratorMedFeilviserSakIndex.module.css';
-
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -58,11 +56,11 @@ export const DekoratorMedFeilviserSakIndex = ({
   }, [feilmeldinger.length]);
 
   return (
-    <div ref={fixedHeaderRef} className={styles['container']}>
+    <div ref={fixedHeaderRef} className="fixed top-0 z-[101] w-full">
       <RawIntlProvider value={intl}>
         <InternalHeader>
           <InternalHeader.Title
-            style={{ cursor: 'pointer' }}
+            className="text-xl"
             href={tittelLenke}
             onClick={tittelCallback}
             onContextMenu={tittelCallback}
@@ -73,7 +71,7 @@ export const DekoratorMedFeilviserSakIndex = ({
           <Dropdown>
             <InternalHeader.Button as={Dropdown.Toggle}>
               <MenuGridIcon
-                style={{ fontSize: '1.5rem' }}
+                fontSize="1.5rem"
                 title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk' })}
               />
             </InternalHeader.Button>
@@ -109,12 +107,12 @@ export const DekoratorMedFeilviserSakIndex = ({
           <InternalHeader.Button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
             {theme === 'dark' ? (
               <SunIcon
-                style={{ fontSize: '1.5rem' }}
+                fontSize="1.5rem"
                 title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EndreTilLysTema' })}
               />
             ) : (
               <MoonIcon
-                style={{ fontSize: '1.5rem' }}
+                fontSize="1.5rem"
                 title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EndreTilMorkTema' })}
               />
             )}
