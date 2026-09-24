@@ -26,5 +26,6 @@
 
   "VisittkortBarnInfoOmsorgPanel.Omsorgsovertakelse": "Omsorgsovertakelse {dato}{antallBarn, plural, one {} other { ({antallBarn} barn)}}",
 
-  "VisittkortPanel.Ukjent": "Ukjent navn, mangler norsk id-nr"
+  "VisittkortPanel.Ukjent": "Ukjent navn, mangler norsk id-nr",
+  "VisittkortPanel.Sidetittel": "Sak for {navn}"
 }

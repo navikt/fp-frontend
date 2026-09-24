@@ -1,5 +1,7 @@
 import { type ReactElement } from 'react';
 
+import { Heading } from '@navikt/ds-react';
+
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Behandling, BehandlingFpSak } from '@navikt/fp-types';
 import { MellomlagretFormDataProvider } from '@navikt/fp-utils';
@@ -33,7 +35,12 @@ export const FaktaDefaultInitPanel = <T extends Behandling = BehandlingFpSak>({
   return (
     <MellomlagretFormDataProvider behandling={standardPanelProps.behandling}>
       {skalVisePanel ? (
-        <BehandlingPanelDataProvider panelData={standardPanelProps}>{children}</BehandlingPanelDataProvider>
+        <>
+          <Heading level="2" size="small" visuallyHidden>
+            {faktaPanelMenyTekst}
+          </Heading>
+          <BehandlingPanelDataProvider panelData={standardPanelProps}>{children}</BehandlingPanelDataProvider>
+        </>
       ) : null}
     </MellomlagretFormDataProvider>
   );
