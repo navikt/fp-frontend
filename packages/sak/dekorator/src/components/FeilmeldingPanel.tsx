@@ -54,4 +54,4 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
 
 const containerClassName =
   'relative block max-h-[120px] min-h-[53px] overflow-x-hidden overflow-y-auto ' +
-  'bg-[var(--ax-bg-danger-strong)] px-[24px] py-[8px] text-[var(--ax-text-danger-contrast)]';
+  'bg-(--ax-bg-danger-strong) px-[24px] py-[8px] text-(--ax-text-danger-contrast)';

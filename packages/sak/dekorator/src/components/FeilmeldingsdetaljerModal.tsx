@@ -34,9 +34,7 @@ export const FeilmeldingsdetaljerModal = ({ feilmeldingsdetaljer }: Props) => {
           </HStack>
         </Dialog.Header>
         <Dialog.Body>
-          <VStack gap="space-16">
-            {feilmeldingsdetaljer !== undefined && <FeilmeldingsdetaljerVerdi verdi={feilmeldingsdetaljer} />}
-          </VStack>
+          {feilmeldingsdetaljer !== undefined && <FeilmeldingsdetaljerVerdi verdi={feilmeldingsdetaljer} />}
         </Dialog.Body>
         <Dialog.Footer>
           <CopyButton
@@ -105,4 +103,4 @@ const FeilmeldingsdetaljerVerdi = ({
 
 const triggerClassName =
   'cursor-pointer appearance-none border-0 bg-transparent p-0 ' +
-  'font-[inherit] text-[0.875rem] text-[var(--ax-text-danger-contrast)]';
+  'font-[inherit] text-(length:--ax-font-size-small) text-(--ax-text-danger-contrast)';
