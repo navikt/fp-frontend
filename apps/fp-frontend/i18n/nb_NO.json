@@ -53,6 +53,8 @@
   "ErrorBoundary.Error": "Det har oppstått en teknisk feil i visning av {name}. Meld feilen i Porten. Ta med feilmeldingsteksten.",
 
   "FagsakIndex.Sidetittel": "Sak for {navn}",
+  "FagsakIndex.Sidetittel.MedYtelse": "{ytelse} for {navn}",
+  "FagsakIndex.Sidetittel.MedBehandling": "{behandlingstype} – {ytelse} for {navn}",
 
   "FatterVedtakStatusModal.SendtBeslutter": "Forslag til vedtak er sendt til beslutter",
 

@@ -4,6 +4,7 @@ import { type Location, Navigate, Route, Routes, useLocation, useParams } from '
 
 import { Heading } from '@navikt/ds-react';
 import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { useQuery } from '@tanstack/react-query';
 
 import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
@@ -18,6 +19,7 @@ import {
 } from '../app/paths';
 import { BehandlingerIndex } from '../behandling/BehandlingerIndex';
 import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIndex';
+import { useFagsakApi } from '../data/fagsakApi';
 import { useRequestPendingContext } from '../data/polling/RequestPendingContext';
 import { useHentBehandling } from '../data/polling/useHentBehandling';
 import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';
@@ -72,6 +74,9 @@ export const FagsakIndex = () => {
   const fagsakBehandling = fagsakData?.getBehandling(behandlingUuidFraUrl);
   const erTilbakekreving = fagsakBehandling?.type === 'BT-007' || fagsakBehandling?.type === 'BT-009';
 
+  const { kodeverkOptions } = useFagsakApi();
+  const { data: alleKodeverk } = useQuery(kodeverkOptions());
+
   const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, setBehandling, behandlingUuidFraUrl);
   const [visSideMeny, setVisSideMeny] = useState(true);
   const [visUtvidetBehandlingDetaljer, setVisUtvidetBehandlingDetaljer] = useState(false);
@@ -117,10 +122,23 @@ export const FagsakIndex = () => {
 
   const fagsak = fagsakData.getFagsak();
 
+  const ytelseTypeNavn = alleKodeverk?.FagsakYtelseType.find(k => k.kode === fagsak.fagsakYtelseType)?.navn;
+  const behandlingstypeNavn = alleKodeverk?.BehandlingType.find(
+    k => k.kode === (behandling?.type ?? fagsakBehandling?.type),
+  )?.navn;
+  const sidetittelId = behandlingstypeNavn
+    ? 'FagsakIndex.Sidetittel.MedBehandling'
+    : ytelseTypeNavn
+      ? 'FagsakIndex.Sidetittel.MedYtelse'
+      : 'FagsakIndex.Sidetittel';
+
   return (
     <>
       <Heading level="1" size="small" visuallyHidden>
-        <FormattedMessage id="FagsakIndex.Sidetittel" values={{ navn: fagsak.bruker.navn }} />
+        <FormattedMessage
+          id={sidetittelId}
+          values={{ navn: fagsak.bruker.navn, ytelse: ytelseTypeNavn, behandlingstype: behandlingstypeNavn }}
+        />
       </Heading>
       <FagsakGrid
         behandlingContent={
