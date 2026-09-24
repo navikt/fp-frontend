@@ -1,24 +1,24 @@
 .container {
-    background-color: var(--ax-bg-danger-strong);
-    display: block;
-    max-height: 120px;
-    min-height: 53px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding-inline: 40px;
-    padding-block: 8px;
-    position: relative;
+  background-color: var(--ax-bg-danger-strong);
+  display: block;
+  max-height: 120px;
+  min-height: 53px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-block: 8px;
+  padding-inline: 40px;
+  position: relative;
 }
 
 .link {
-    color: var(--ax-text-danger-contrast);
+  color: var(--ax-text-danger-contrast);
 }
 
 .wordWrap {
-    white-space: pre-line;
+  white-space: pre-line;
 }
 
 .list {
-    list-style: disc;
-    margin-inline: var(--ax-space-20);
+  list-style: disc;
+  margin-inline: var(--ax-space-20);
 }
