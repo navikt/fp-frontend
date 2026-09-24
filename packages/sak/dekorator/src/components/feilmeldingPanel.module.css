@@ -23,3 +23,7 @@
   list-style: disc;
   margin-inline: var(--ax-space-20);
 }
+
+.stacktrace {
+  font-size: 0.75rem;
+}

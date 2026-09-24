@@ -92,7 +92,7 @@ const FeilmeldingsdetaljerVerdi = ({
   if (nøkkelForVerdi === 'stacktrace') {
     return (
       <Detail>
-        <pre>{String(verdi)}</pre>
+        <pre className={styles['stacktrace']}>{String(verdi)}</pre>
       </Detail>
     );
   }
