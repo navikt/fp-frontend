@@ -11,6 +11,7 @@
     "test": "vitest run",
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
+    "prettier": "prettier --check src",
     "prettier:fix": "prettier --write src"
   },
   "dependencies": {
@@ -31,7 +32,6 @@
     "@types/supertest": "7.2.1",
     "eslint": "10.11.0",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-prettier": "5.5.6",
     "eslint-plugin-simple-import-sort": "14.0.0",
     "eslint-plugin-unicorn": "74.0.0",
     "knip": "6.37.0",

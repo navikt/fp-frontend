@@ -33,6 +33,10 @@ jobs:
         working-directory: server
         run: yarn eslint
 
+      - name: Server Prettier
+        working-directory: server
+        run: yarn prettier
+
       - name: Server tests
         working-directory: server
         run: yarn test
