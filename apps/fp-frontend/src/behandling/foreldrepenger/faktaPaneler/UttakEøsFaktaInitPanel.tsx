@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -18,11 +16,9 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 export const UttakEøsFaktaInitPanel = () => {
-  const intl = useIntl();
-
   const { behandling, rettigheter } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.UTTAK_EØS, AKSJONSPUNKT_KODER);
 
   const api = getBehandlingApi(behandling);
   const { data: annenForelderUttakEøs } = useQuery(api.uttakAnnenpartEøsOptions(behandling));
@@ -31,7 +27,6 @@ export const UttakEøsFaktaInitPanel = () => {
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.UTTAK_EØS}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Uttak.Eos' })}
       skalPanelVisesIMeny={harLenke(behandling, 'UTTAK_ANNEN_FORELDER_EOS')}
     >
       {annenForelderUttakEøs ? (

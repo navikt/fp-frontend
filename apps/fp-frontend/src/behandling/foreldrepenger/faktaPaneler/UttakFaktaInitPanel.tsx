@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -26,11 +24,9 @@ interface Props {
 }
 
 export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
-  const intl = useIntl();
-
   const { behandling, rettigheter } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.UTTAK, AKSJONSPUNKT_KODER);
 
   const api = getBehandlingApi(behandling);
 
@@ -42,7 +38,6 @@ export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) =>
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.UTTAK}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Uttak' })}
       skalPanelVisesIMeny={harLenke(behandling, 'UTTAK_KONTROLLER_FAKTA_PERIODER_V2')}
     >
       {ytelsefordeling && uttakKontrollerFaktaPerioder ? (

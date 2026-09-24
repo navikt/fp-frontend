@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -15,9 +13,7 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_VERGE];
 
 export const VergeFaktaInitPanel = () => {
-  const intl = useIntl();
-
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.VERGE, AKSJONSPUNKT_KODER);
 
   const { behandling } = useBehandlingDataContext();
 
@@ -31,7 +27,6 @@ export const VergeFaktaInitPanel = () => {
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.VERGE}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Verge' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {isFetching ? <LoadingPanel /> : <VergeFaktaIndex verge={verge} alleKodeverk={standardPanelProps.alleKodeverk} />}

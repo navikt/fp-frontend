@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -26,9 +24,7 @@ interface Props {
  * Dette faktapanelet skal alltid vises
  */
 export const ArbeidsforholdFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
-  const intl = useIntl();
-
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.ARBEIDSFORHOLD, AKSJONSPUNKT_KODER);
 
   const { behandling } = useBehandlingDataContext();
 
@@ -40,7 +36,6 @@ export const ArbeidsforholdFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: 
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.ARBEIDSFORHOLD}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Arbeidsforhold' })}
       skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => harAksjonspunkt(kode, behandling.aksjonspunkt))}
     >
       {arbeidOgInntekt ? (

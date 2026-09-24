@@ -1,3 +1,6 @@
+import { useIntl } from 'react-intl';
+
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, Behandling, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
@@ -7,17 +10,21 @@ import { useBehandlingDataContext } from '../context/BehandlingDataContext';
 import type { FellesPanelData } from '../panelData/BehandlingPanelDataProvider';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
+import { FAKTA_PANEL_TITTEL_MESSAGE_ID } from './faktaPanelTittelMessageId';
 
 const DEFAULT_FAKTA_KODE = 'default';
 const DEFAULT_PROSESS_STEG_KODE = 'default';
 
 export type StandardFaktaPanelProps<T extends Behandling = BehandlingFpSak> = Readonly<
-  FellesPanelData<FaktaAksjonspunkt | FaktaAksjonspunkt[], T>
+  FellesPanelData<FaktaAksjonspunkt | FaktaAksjonspunkt[], T> & { faktaPanelMenyTekst: string }
 >;
 
 export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSak>(
+  faktaPanelKode: FaktaPanelCode,
   aksjonspunktKoder: Aksjonspunkt['definisjon'][] = [],
 ): StandardFaktaPanelProps<T> => {
+  const intl = useIntl();
+
   const {
     behandling,
     rettigheter,
@@ -48,6 +55,12 @@ export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSa
     overstyringKoder,
   );
 
+  const faktaPanelTittelMessageId = FAKTA_PANEL_TITTEL_MESSAGE_ID[faktaPanelKode];
+  if (!faktaPanelTittelMessageId) {
+    throw new Error(`Mangler i18n-nøkkel for faktapanel-tittel for koden ${faktaPanelKode}`);
+  }
+  const faktaPanelMenyTekst = intl.formatMessage({ id: faktaPanelTittelMessageId });
+
   return {
     behandling,
     fagsak,
@@ -59,6 +72,7 @@ export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSa
     isReadOnly,
     alleMerknaderFraBeslutter,
     submitCallback,
+    faktaPanelMenyTekst,
   };
 };
 

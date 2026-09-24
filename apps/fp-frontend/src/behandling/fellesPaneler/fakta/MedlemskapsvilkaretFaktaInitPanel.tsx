@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -25,11 +23,9 @@ const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
 ];
 
 export const MedlemskapsvilkaretFaktaInitPanel = () => {
-  const intl = useIntl();
-
   const { behandling } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.MEDLEMSKAPSVILKARET, AKSJONSPUNKT_KODER);
 
   const api = getBehandlingApi(behandling);
 
@@ -39,7 +35,6 @@ export const MedlemskapsvilkaretFaktaInitPanel = () => {
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Medlemskap' })}
       skalPanelVisesIMeny={behandling.harSøknad}
     >
       {medlemskap ? <MedlemskapFaktaIndex medlemskap={medlemskap} /> : <LoadingPanel />}

@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Alert, Button, Table, VStack } from '@navikt/ds-react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import type {
   ArbeidOgInntektsmelding,
@@ -125,6 +126,7 @@ export const ArbeidOgInntektFaktaPanel = ({
 
   return (
     <VStack gap="space-16">
+      <FaktaPanelTittel visuallyHidden={false} />
       <ArbeidsOgInntektOverstyrPanel
         behandling={behandling}
         aksjonspunkt={aksjonspunkt}

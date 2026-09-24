@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -20,11 +18,9 @@ interface Props {
 }
 
 export const OpptjeningsvilkaretFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
-  const intl = useIntl();
-
   const { behandling } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.OPPTJENINGSVILKARET, AKSJONSPUNKT_KODER);
 
   const skalPanelVisesIMeny =
     behandling.vilkår.some(v => v.vilkarType === 'FP_VK_23') &&
@@ -38,7 +34,6 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({ arbeidsgiverOpplysningerPerI
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Opptjening' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {isFetching ? (

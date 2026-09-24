@@ -2,6 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { KontrollerBeregningAapKombinertAtflPanel } from './components/KontrollerBeregningAapKombinertAtflPanel';
@@ -16,6 +17,7 @@ interface Props {
 
 export const AapFaktaIndex = ({ aksjonspunkt }: Props) => (
   <RawIntlProvider value={intl}>
+    <FaktaPanelTittel />
     <KontrollerBeregningAapKombinertAtflPanel aksjonspunkt={aksjonspunkt} />
   </RawIntlProvider>
 );

@@ -22,6 +22,7 @@ export type FellesPanelData<AP extends AksjonspunktData, T extends Behandling = 
   isReadOnly: boolean;
   isSubmittable: boolean;
   submitCallback: (aksjonspunkter: AP) => Promise<void>;
+  panelTittel?: string;
 };
 
 interface Props<AP extends AksjonspunktData, T extends Behandling> {
@@ -44,6 +45,7 @@ export const BehandlingPanelDataProvider = <AP extends AksjonspunktData, T exten
     isReadOnly={panelData.isReadOnly}
     isSubmittable={panelData.isSubmittable}
     submitCallback={panelData.submitCallback}
+    panelTittel={panelData.panelTittel}
   >
     {children}
   </PanelDataProvider>

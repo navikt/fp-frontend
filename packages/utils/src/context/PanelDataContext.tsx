@@ -16,6 +16,7 @@ type Props<AP_TYPE extends AksjonspunktType, B extends Behandling> = {
   isReadOnly: boolean;
   isSubmittable: boolean;
   submitCallback: (aksjonspunktData: AP_TYPE) => Promise<void>;
+  panelTittel?: string;
 };
 
 const PanelDataContext = createContext<unknown>(null);
@@ -33,7 +34,7 @@ export const PanelDataProvider = <T extends AksjonspunktType, B extends Behandli
 };
 
 export const usePanelDataContext = <
-  AP_TYPE extends AksjonspunktType,
+  AP_TYPE extends AksjonspunktType = FaktaAksjonspunkt,
   B_TYPE extends Behandling = BehandlingFpSak,
 >() => {
   const context = use(PanelDataContext);

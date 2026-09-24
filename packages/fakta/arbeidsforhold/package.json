@@ -19,7 +19,9 @@
   "dependencies": {
     "@navikt/aksel-icons": "8.16.2",
     "@navikt/ds-react": "8.16.2",
+    "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-types": "workspace:*",
+    "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-ui-komponenter": "9.0.0",
     "@navikt/ft-utils": "6.0.0",
     "dayjs": "1.11.23",

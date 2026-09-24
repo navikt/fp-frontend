@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -19,7 +17,7 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 export const OmsorgOgRettFaktaInitPanel = () => {
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.OMSORG_OG_RETT, AKSJONSPUNKT_KODER);
 
   const { behandling, rettigheter } = useBehandlingDataContext();
 
@@ -32,7 +30,6 @@ export const OmsorgOgRettFaktaInitPanel = () => {
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.OMSORG_OG_RETT}
-      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgRett' })}
       skalPanelVisesIMeny
     >
       {omsorgOgRett ? (

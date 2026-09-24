@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { VStack } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
-import { FaktaFraFReg } from '@navikt/fp-fakta-felles';
+import { FaktaFraFReg, FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { OmsorgsovertakelseDto } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -29,6 +29,7 @@ export const OmsorgsovertakelseFaktaIndex = ({ omsorgsovertakelse }: Props) => {
   return (
     <RawIntlProvider value={intl}>
       <VStack gap="space-16">
+        <FaktaPanelTittel />
         {harÅpentAksjonspunkt && <AksjonspunktTekst omsorgsovertakelse={omsorgsovertakelse} />}
 
         <FaktaSammenligning omsorgsovertakelse={omsorgsovertakelse} />

@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -12,10 +10,8 @@ import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel'
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
 export const YtelserFaktaInitPanel = () => {
-  const intl = useIntl();
-
   const { behandling } = useBehandlingDataContext();
-  const standardPanelProps = useStandardFaktaPanelProps();
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.YTELSER);
 
   const api = getBehandlingApi(behandling);
 
@@ -25,7 +21,6 @@ export const YtelserFaktaInitPanel = () => {
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.YTELSER}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Ytelser' })}
       skalPanelVisesIMeny
     >
       {inntektArbeidYtelse ? <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} /> : <LoadingPanel />}

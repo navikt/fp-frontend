@@ -2,6 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type { OmsorgOgRett, Personoversikt } from '@navikt/fp-types';
 
 import { OmsorgOgRettInfoPanel } from './components/OmsorgOgRettInfoPanel';
@@ -18,6 +19,7 @@ export interface OmsorgOgRettProps {
 
 export const OmsorgOgRettFaktaIndex = (props: OmsorgOgRettProps) => (
   <RawIntlProvider value={intl}>
+    <FaktaPanelTittel />
     <OmsorgOgRettInfoPanel {...props} />
   </RawIntlProvider>
 );

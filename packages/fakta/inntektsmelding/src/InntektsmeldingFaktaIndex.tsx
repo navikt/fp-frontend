@@ -14,6 +14,7 @@ import type {
 } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { InntektsmeldingInnhold } from './components/InntektsmeldingInnhold';
 
 import styles from './inntektsmeldingFakta.module.css';
@@ -65,6 +66,7 @@ export const InntektsmeldingFaktaIndex = ({
   if (ims.length === 0) {
     return (
       <RawIntlProvider value={intl}>
+        <FaktaPanelTittel />
         <HStack gap="space-8" justify="center" align="center" className={styles['ingenInntektsmeldinger']}>
           <BodyShort>
             <FormattedMessage id="InntektsmeldingFaktaPanel.ingen" />
@@ -77,6 +79,7 @@ export const InntektsmeldingFaktaIndex = ({
 
   return (
     <RawIntlProvider value={intl}>
+      <FaktaPanelTittel />
       <Table sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
         <Table.Header>
           <Table.Row>

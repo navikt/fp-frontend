@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
 import { UttakDokumentasjonFaktaForm } from './components/UttakDokumentasjonFaktaForm';
@@ -20,6 +21,7 @@ export const UttakDokumentasjonFaktaIndex = ({ dokumentasjonVurderingBehov }: Pr
 
   return (
     <RawIntlProvider value={intl}>
+      <FaktaPanelTittel />
       <UttakDokumentasjonFaktaForm dokumentasjonVurderingBehov={sorterteBehov} />
     </RawIntlProvider>
   );

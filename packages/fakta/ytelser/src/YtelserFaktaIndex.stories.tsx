@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { withPanelData } from '@navikt/fp-storybook-utils';
+
 import { YtelserFaktaIndex } from './YtelserFaktaIndex';
 
 const defaultInntektArbeidYtelse = {
@@ -45,6 +47,7 @@ const defaultInntektArbeidYtelse = {
 const meta = {
   title: 'fakta/fakta-ytelser',
   component: YtelserFaktaIndex,
+  decorators: [withPanelData],
 } satisfies Meta<typeof YtelserFaktaIndex>;
 export default meta;
 
