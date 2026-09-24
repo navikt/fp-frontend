@@ -19,7 +19,7 @@ export const FeilmeldingsdetaljerModal = ({ feilmeldingsdetaljer }: Props) => {
           <FormattedMessage id="FeilmeldingPanel.ShowErrorDetails" />
         </Link>
       </Dialog.Trigger>
-      <Dialog.Popup width="fit-content" style={{ minWidth: 'min(90dvw, 640px)', maxWidth: 'min(90dvw, 1100px)' }}>
+      <Dialog.Popup width="fit-content" style={{ minWidth: 'min(90dvw, 640px)', maxWidth: 'min(92dvw, 1600px)' }}>
         <Dialog.Header>
           <HStack gap="space-16">
             <ExclamationmarkTriangleFillIcon
