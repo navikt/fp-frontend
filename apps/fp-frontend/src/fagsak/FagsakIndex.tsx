@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { type Location, Navigate, Route, Routes, useLocation, useParams } from 'react-router';
 
+import { Heading } from '@navikt/ds-react';
 import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
@@ -118,6 +119,9 @@ export const FagsakIndex = () => {
 
   return (
     <>
+      <Heading level="1" size="small" visuallyHidden>
+        <FormattedMessage id="FagsakIndex.Sidetittel" values={{ navn: fagsak.bruker.navn }} />
+      </Heading>
       <FagsakGrid
         behandlingContent={
           <Routes>

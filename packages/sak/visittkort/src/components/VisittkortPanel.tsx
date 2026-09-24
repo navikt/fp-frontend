@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl';
 
-import { Heading, HStack, Spacer } from '@navikt/ds-react';
+import { HStack, Spacer } from '@navikt/ds-react';
 import { EmptyPersonCard, Gender, PersonCard } from '@navikt/ft-plattform-komponenter';
 
 import type { FagsakHendelse, NavBrukerKjønn, Person } from '@navikt/fp-types';
@@ -41,9 +41,6 @@ export const VisittkortPanel = ({
   if (erTilbakekreving && harVergeIÅpenBehandling) {
     return (
       <div className={styles['container']}>
-        <Heading level="1" size="small" visuallyHidden>
-          {intl.formatMessage({ id: 'VisittkortPanel.Sidetittel' }, { navn: bruker.navn })}
-        </Heading>
         <PersonCard
           name={bruker.navn}
           fodselsnummer={bruker.fødselsnummer}
@@ -61,9 +58,6 @@ export const VisittkortPanel = ({
 
   return (
     <div className={styles['container']}>
-      <Heading level="1" size="small" visuallyHidden>
-        {intl.formatMessage({ id: 'VisittkortPanel.Sidetittel' }, { navn: primærBruker.navn })}
-      </Heading>
       <HStack wrap={false}>
         {primærBruker.aktørId ? (
           <PersonCard

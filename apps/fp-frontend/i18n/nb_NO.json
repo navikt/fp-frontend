@@ -52,6 +52,8 @@
 
   "ErrorBoundary.Error": "Det har oppstått en teknisk feil i visning av {name}. Meld feilen i Porten. Ta med feilmeldingsteksten.",
 
+  "FagsakIndex.Sidetittel": "Sak for {navn}",
+
   "FatterVedtakStatusModal.SendtBeslutter": "Forslag til vedtak er sendt til beslutter",
 
   "FagsakGrid.ApneSidemeny": "Åpne sidemeny",
