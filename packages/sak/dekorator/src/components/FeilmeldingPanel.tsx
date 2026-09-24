@@ -61,12 +61,10 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
   );
 };
 
-const containerClassName = [
-  'relative block max-h-[120px] min-h-[53px] overflow-x-hidden overflow-y-auto',
-  'bg-[var(--ax-bg-danger-strong)] px-[40px] py-[8px] text-[var(--ax-text-danger-contrast)]',
-].join(' ');
+const containerClassName =
+  'relative block max-h-[120px] min-h-[53px] overflow-x-hidden overflow-y-auto ' +
+  'bg-[var(--ax-bg-danger-strong)] px-[40px] py-[8px] text-[var(--ax-text-danger-contrast)]';
 
-const triggerClassName = [
-  'cursor-pointer appearance-none border-0 bg-transparent p-0',
-  'font-[inherit] text-[0.875rem] text-[var(--ax-text-danger-contrast)]',
-].join(' ');
+const triggerClassName =
+  'cursor-pointer appearance-none border-0 bg-transparent p-0 ';
+  'font-[inherit] text-[0.875rem] text-[var(--ax-text-danger-contrast)]';
