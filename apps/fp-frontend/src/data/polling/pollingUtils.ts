@@ -21,49 +21,47 @@ export class PollingTimeoutError extends Error {
 }
 
 export const doPolling = async <T>(response: KyResponse<T>, setPollingPending: PollingPendingFn) => {
-  if (response.status === HTTP_ACCEPTED) {
+  setPollingPending(true);
+
+  try {
+    if (response.status !== HTTP_ACCEPTED) {
+      throw new Error(`Responderte ikke med 202 - Accepted: ${response.url}`);
+    }
+
     const location = response.headers.get('location');
     if (location === null) {
       throw new Error(`Location i response er ikke angitt for URL: ${response.url}`);
     }
 
-    try {
-      return await pollOgHentData(setPollingPending, location);
-    } catch (error) {
-      if (error instanceof HTTPError) {
-        const data = error.data as AsyncPollingStatus;
-        if (isPollingDelayedOrHalted(data) && data.location) {
-          setPollingPending(false);
-          //Ikke vent på at behandling blir oppdatert, men hent gammel versjon (som da er read only)
-          return await doGetRequest<Behandling>(data.location);
-        }
+    return await pollOgHentData(location);
+  } catch (error) {
+    if (error instanceof HTTPError) {
+      const data = error.data as AsyncPollingStatus | undefined;
+      if (data && isPollingDelayedOrHalted(data) && data.location) {
+        //Ikke vent på at behandling blir oppdatert, men hent gammel versjon (som da er read only)
+        return await doGetRequest<Behandling>(data.location);
       }
-      throw error;
     }
+    throw error;
+  } finally {
+    setPollingPending(false);
   }
-
-  throw new Error(`Responderte ikke med 202 - Accepted: ${response.url}`);
 };
 
-const pollOgHentData = async (setPollingPending: PollingPendingFn, location: string, pollingCounter = 0) => {
+const pollOgHentData = async (location: string, pollingCounter = 0) => {
   const response = await doGetRequest<AsyncPollingStatus | Behandling>(location);
 
   if (isPollingResponse(response)) {
     if (pollingCounter === MAX_POLLING_ATTEMPTS) {
-      setPollingPending(false);
       throw new PollingTimeoutError(location);
     }
     const { pollIntervalMillis } = response;
     const interval = calculatePollingInterval(pollIntervalMillis, pollingCounter);
 
-    setPollingPending(true);
-
     await wait(interval);
 
-    return await pollOgHentData(setPollingPending, location, pollingCounter + 1);
+    return await pollOgHentData(location, pollingCounter + 1);
   }
-
-  setPollingPending(false);
 
   return response;
 };

@@ -1,4 +1,4 @@
-import { createContext, type ReactElement, use, useMemo, useState } from 'react';
+import { createContext, type ReactElement, use, useCallback, useMemo, useState } from 'react';
 
 const RequestPendingContext = createContext<{
   isRequestPending: boolean;
@@ -6,7 +6,11 @@ const RequestPendingContext = createContext<{
 } | null>(null);
 
 const RequestPendingProvider = ({ children }: { children: ReactElement }) => {
-  const [isRequestPending, setIsRequestPending] = useState(false);
+  const [antallAktiveOperasjoner, setAntallAktiveOperasjoner] = useState(0);
+  const setIsRequestPending = useCallback((isPending: boolean) => {
+    setAntallAktiveOperasjoner(antall => antall + (isPending ? 1 : -1));
+  }, []);
+  const isRequestPending = antallAktiveOperasjoner > 0;
 
   const value = useMemo(
     () => ({
