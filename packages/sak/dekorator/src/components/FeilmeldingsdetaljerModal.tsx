@@ -1,24 +1,23 @@
+import type { ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, CopyButton, Detail, Dialog, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, CopyButton, Dialog, HStack, Label, VStack } from '@navikt/ds-react';
 import { capitalizeFirstLetter } from '@navikt/ft-utils';
 
 import type { Feilmelding, Feilmeldingsdetaljer } from '../typer/feilmeldingTsType';
 
-import styles from './feilmeldingPanel.module.css';
-
 interface Props {
-  skalViseModal: boolean;
-  lukkModal: () => void;
-  feilmeldingsdetaljer?: Feilmelding['tilleggsInfo'];
+  feilmeldingsdetaljer: Feilmelding['tilleggsInfo'];
+  trigger: ReactElement;
 }
 
-export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldingsdetaljer }: Props) => {
+export const FeilmeldingsdetaljerModal = ({ feilmeldingsdetaljer, trigger }: Props) => {
   const intl = useIntl();
   return (
-    <Dialog open={skalViseModal} onOpenChange={lukkModal}>
-      <Dialog.Popup width="large">
+    <Dialog>
+      <Dialog.Trigger>{trigger}</Dialog.Trigger>
+      <Dialog.Popup width="fit-content" style={{ minWidth: 'min(90dvw, 640px)', maxWidth: 'min(90dvw, 1100px)' }}>
         <Dialog.Header>
           <HStack gap="space-16">
             <ExclamationmarkTriangleFillIcon
@@ -43,9 +42,11 @@ export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldin
             text={intl.formatMessage({ id: 'FeilmeldingsdetaljerModal.KopierFeil' })}
             copyText={feilmeldingsdetaljer ? JSON.stringify(feilmeldingsdetaljer, null, 2) : ''}
           />
-          <Button variant="primary" onClick={lukkModal} type="button">
-            <FormattedMessage id="FeilmeldingsdetaljerModal.Close" />
-          </Button>
+          <Dialog.CloseTrigger>
+            <Button variant="primary" type="button">
+              <FormattedMessage id="FeilmeldingsdetaljerModal.Close" />
+            </Button>
+          </Dialog.CloseTrigger>
         </Dialog.Footer>
       </Dialog.Popup>
     </Dialog>
@@ -65,7 +66,7 @@ const FeilmeldingsdetaljerVerdi = ({
 
   if (Array.isArray(verdi)) {
     return (
-      <VStack as="ul" className={styles['list']}>
+      <VStack as="ul" className="mx-(--ax-space-20) list-disc">
         {verdi.map((element, index) => (
           // eslint-disable-next-line @eslint-react/no-array-index-key -- feildetaljer manglar stabil id, indeks trengs for unik nøkkel
           <li key={index}>
@@ -91,9 +92,9 @@ const FeilmeldingsdetaljerVerdi = ({
 
   if (nøkkelForVerdi === 'stacktrace') {
     return (
-      <Detail>
-        <pre className={styles['stacktrace']}>{String(verdi)}</pre>
-      </Detail>
+      <pre className="m-0 whitespace-pre-wrap wrap-break-word text-[0.75rem]">
+        <code>{String(verdi)}</code>
+      </pre>
     );
   }
 

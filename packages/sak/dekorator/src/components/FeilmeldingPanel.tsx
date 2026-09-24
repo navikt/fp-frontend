@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
@@ -7,8 +6,6 @@ import { decodeHtmlEntity } from '@navikt/ft-utils';
 
 import type { Feilmelding } from '../typer/feilmeldingTsType';
 import { FeilmeldingsdetaljerModal } from './FeilmeldingsdetaljerModal';
-
-import styles from './feilmeldingPanel.module.css';
 
 interface Props {
   feilmeldinger: Feilmelding[];
@@ -22,47 +19,29 @@ interface Props {
  */
 export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) => {
   const intl = useIntl();
-  const [erModalÅpen, setErModalÅpen] = useState(false);
-  const [valgtFeilmeldingIndex, setValgtFeilmeldingIndex] = useState<number | undefined>(undefined);
-
-  const toggleModalOnClick = (event: React.MouseEvent | React.KeyboardEvent, index: number): void => {
-    setErModalÅpen(!erModalÅpen);
-    setValgtFeilmeldingIndex(index);
-    event.preventDefault();
-  };
-
-  const toggleModalOnKeyDown = (event: React.KeyboardEvent, index: number): void => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      toggleModalOnClick(event, index);
-    } else {
-      event.preventDefault();
-    }
-  };
 
   if (feilmeldinger.length === 0) {
     return null;
   }
 
   return (
-    <div className={styles['container']}>
+    <div className={containerClassName}>
       <HStack wrap={false} justify="space-between">
         <VStack gap="space-8">
-          {feilmeldinger.map((message, index) => (
+          {feilmeldinger.map(message => (
             <div key={message.melding}>
-              <BodyShort size="small" className={styles['wordWrap']}>
+              <BodyShort size="small" className="whitespace-pre-line">
                 {decodeHtmlEntity(message.melding)}
               </BodyShort>
               {message.tilleggsInfo && (
-                <BodyShort size="small">
-                  <Link
-                    href="#"
-                    className={styles['link']}
-                    onClick={event => toggleModalOnClick(event, index)}
-                    onKeyDown={event => toggleModalOnKeyDown(event, index)}
-                  >
-                    <FormattedMessage id="FeilmeldingPanel.ShowErrorDetails" />
-                  </Link>
-                </BodyShort>
+                <FeilmeldingsdetaljerModal
+                  feilmeldingsdetaljer={message.tilleggsInfo}
+                  trigger={
+                    <Link as="button" type="button" className={triggerClassName}>
+                      <FormattedMessage id="FeilmeldingPanel.ShowErrorDetails" />
+                    </Link>
+                  }
+                />
               )}
             </div>
           ))}
@@ -78,14 +57,16 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
           onClick={fjernFeilmeldinger}
         />
       </HStack>
-
-      <FeilmeldingsdetaljerModal
-        skalViseModal={erModalÅpen}
-        lukkModal={() => setErModalÅpen(false)}
-        feilmeldingsdetaljer={
-          valgtFeilmeldingIndex === undefined ? undefined : feilmeldinger[valgtFeilmeldingIndex]?.tilleggsInfo
-        }
-      />
     </div>
   );
 };
+
+const containerClassName = [
+  'relative block max-h-[120px] min-h-[53px] overflow-x-hidden overflow-y-auto',
+  'bg-[var(--ax-bg-danger-strong)] px-[40px] py-[8px] text-[var(--ax-text-danger-contrast)]',
+].join(' ');
+
+const triggerClassName = [
+  'cursor-pointer appearance-none border-0 bg-transparent p-0',
+  'font-[inherit] text-[0.875rem] text-[var(--ax-text-danger-contrast)]',
+].join(' ');
