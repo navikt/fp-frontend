@@ -1,7 +1,7 @@
 import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, HStack, VStack } from '@navikt/ds-react';
+import { BodyShort, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
@@ -65,14 +65,12 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
 
   return (
     <VStack gap="space-32">
-      <HStack justify="space-between">
-        <BodyShort size="small">
-          <FormattedMessage
-            id="PermisjonFaktaPanel.Skjaringstidspunkt"
-            values={{ skjæringspunktDato: dateFormat(arbeidOgInntektMedPermisjon.skjæringstidspunkt) }}
-          />
-        </BodyShort>
-      </HStack>
+      <BodyShort size="small">
+        <FormattedMessage
+          id="PermisjonFaktaPanel.Skjaringstidspunkt"
+          values={{ skjæringspunktDato: dateFormat(arbeidOgInntektMedPermisjon.skjæringstidspunkt) }}
+        />
+      </BodyShort>
       {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="PermisjonFaktaPanel.PermisjonUtenSluttdato" />

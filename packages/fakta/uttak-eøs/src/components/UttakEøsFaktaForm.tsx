@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { ErrorSummary, HStack, VStack } from '@navikt/ds-react';
+import { ErrorSummary, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
@@ -67,11 +67,9 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
 
   return (
     <VStack gap="space-16">
-      <HStack gap="space-16">
-        {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
-          <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
-        )}
-      </HStack>
+      {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
+        <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
+      )}
       {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="UttakEøsFaktaForm.Aksjonspunkt" />
