@@ -1,65 +1,77 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Detail, Dialog, Heading, HStack, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, CopyButton, Dialog, HStack, Label, Link, VStack } from '@navikt/ds-react';
 import { capitalizeFirstLetter } from '@navikt/ft-utils';
 
 import type { Feilmelding, Feilmeldingsdetaljer } from '../typer/feilmeldingTsType';
 
 interface Props {
-  skalViseModal: boolean;
-  lukkModal: () => void;
-  feilmeldingsdetaljer?: Feilmelding['tilleggsInfo'];
+  feilmeldingsdetaljer: Feilmelding['tilleggsInfo'];
 }
 
-/**
- * FeilmeldingsdetaljerModal
- *
- * Modal som viser en feildetaljer.
- */
-export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldingsdetaljer }: Props) => {
+export const FeilmeldingsdetaljerModal = ({ feilmeldingsdetaljer }: Props) => {
+  const intl = useIntl();
   return (
-    <Dialog open={skalViseModal} onOpenChange={lukkModal}>
-      <Dialog.Popup>
+    <Dialog>
+      <Dialog.Trigger>
+        <Link as="button" type="button" className={triggerClassName}>
+          <FormattedMessage id="FeilmeldingPanel.ShowErrorDetails" />
+        </Link>
+      </Dialog.Trigger>
+      <Dialog.Popup width="fit-content" style={{ minWidth: 'min(90dvw, 640px)', maxWidth: 'min(92dvw, 1600px)' }}>
         <Dialog.Header>
-          <Dialog.Title>
-            <HStack gap="space-16">
-              <ExclamationmarkTriangleFillIcon aria-hidden width={30} height={30} color="var(--ax-warning-600)" />
-              <Heading size="small" level="2">
-                <FormattedMessage id="FeilmeldingsdetaljerModal.ErrorDetails" />
-              </Heading>
-            </HStack>
-          </Dialog.Title>
+          <HStack gap="space-16">
+            <ExclamationmarkTriangleFillIcon
+              aria-hidden
+              width={32}
+              height={32}
+              color="var(--ax-text-warning-decoration)"
+            />
+            <Dialog.Title>
+              <FormattedMessage id="FeilmeldingsdetaljerModal.ErrorDetails" />
+            </Dialog.Title>
+          </HStack>
         </Dialog.Header>
         <Dialog.Body>
-          <HStack gap="space-40">
-            <div />
-            <VStack gap="space-16">
-              {feilmeldingsdetaljer !== undefined && <FeilmeldingsdetaljerVerdi verdi={feilmeldingsdetaljer} />}
-            </VStack>
-          </HStack>
+          {feilmeldingsdetaljer !== undefined && <FeilmeldingsdetaljerVerdi verdi={feilmeldingsdetaljer} />}
         </Dialog.Body>
         <Dialog.Footer>
-          <Button size="small" variant="secondary" onClick={lukkModal} type="button">
-            <FormattedMessage id="FeilmeldingsdetaljerModal.Close" />
-          </Button>
+          <CopyButton
+            data-color="accent"
+            text={intl.formatMessage({ id: 'FeilmeldingsdetaljerModal.KopierFeil' })}
+            copyText={feilmeldingsdetaljer ? JSON.stringify(feilmeldingsdetaljer, null, 2) : ''}
+          />
+          <Dialog.CloseTrigger>
+            <Button variant="primary" type="button">
+              <FormattedMessage id="FeilmeldingsdetaljerModal.Close" />
+            </Button>
+          </Dialog.CloseTrigger>
         </Dialog.Footer>
       </Dialog.Popup>
     </Dialog>
   );
 };
 
-const FeilmeldingsdetaljerVerdi = ({ verdi }: { verdi: Feilmeldingsdetaljer }) => {
+const FeilmeldingsdetaljerVerdi = ({
+  nøkkelForVerdi,
+  verdi,
+}: {
+  nøkkelForVerdi?: string;
+  verdi: Feilmeldingsdetaljer;
+}) => {
   if (verdi === null) {
     return <BodyShort size="small">-</BodyShort>;
   }
 
   if (Array.isArray(verdi)) {
     return (
-      <VStack gap="space-8">
+      <VStack as="ul" className="mx-(--ax-space-20) list-disc">
         {verdi.map((element, index) => (
           // eslint-disable-next-line @eslint-react/no-array-index-key -- feildetaljer manglar stabil id, indeks trengs for unik nøkkel
-          <FeilmeldingsdetaljerVerdi key={index} verdi={element} />
+          <li key={index}>
+            <FeilmeldingsdetaljerVerdi verdi={element} />
+          </li>
         ))}
       </VStack>
     );
@@ -67,16 +79,28 @@ const FeilmeldingsdetaljerVerdi = ({ verdi }: { verdi: Feilmeldingsdetaljer }) =
 
   if (typeof verdi === 'object') {
     return (
-      <VStack gap="space-8">
+      <VStack gap="space-8" marginInline={nøkkelForVerdi ? 'space-16' : undefined}>
         {Object.entries(verdi).map(([nøkkel, element]) => (
           <div key={nøkkel}>
-            <Detail>{`${capitalizeFirstLetter(nøkkel)}:`}</Detail>
-            <FeilmeldingsdetaljerVerdi verdi={element} />
+            <Label size="small">{`${capitalizeFirstLetter(nøkkel)}:`}</Label>
+            <FeilmeldingsdetaljerVerdi nøkkelForVerdi={nøkkel} verdi={element} />
           </div>
         ))}
       </VStack>
     );
   }
 
+  if (nøkkelForVerdi === 'stacktrace') {
+    return (
+      <pre className="m-0 whitespace-pre-wrap wrap-break-word text-[0.75rem]">
+        <code>{String(verdi)}</code>
+      </pre>
+    );
+  }
+
   return <BodyShort size="small">{String(verdi)}</BodyShort>;
 };
+
+const triggerClassName =
+  'cursor-pointer appearance-none border-0 bg-transparent p-0 ' +
+  'font-[inherit] text-(length:--ax-font-size-small) text-(--ax-text-danger-contrast)';

@@ -1,7 +1,8 @@
 {
-  "FeilmeldingPanel.ErrorDetails": "Detaljert informasjon",
+  "FeilmeldingPanel.ShowErrorDetails": "Vis detaljert informasjon",
   "FeilmeldingPanel.Close": "Lukk",
   "FeilmeldingsdetaljerModal.ErrorDetails": "Detaljert informasjon",
+  "FeilmeldingsdetaljerModal.KopierFeil": "Kopier feil",
   "FeilmeldingsdetaljerModal.Close": "Lukk",
   "DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk": "Systemer og oppslagsverk",
   "DekoratorMedFeilviserSakIndex.Vedtakslosningen": "Vedtaksløsningen",
