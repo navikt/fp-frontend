@@ -1,5 +1,5 @@
 import eslint from "@eslint/js";
-import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import eslintConfigPrettier from "eslint-config-prettier";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
@@ -33,5 +33,5 @@ export default tseslint.config(
       ...IGNORED_UNICORN_RULES,
     },
   },
-  eslintPluginPrettierRecommended,
+  eslintConfigPrettier,
 );
