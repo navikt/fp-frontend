@@ -1,7 +1,7 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Link, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, VStack } from '@navikt/ds-react';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
 import type { Feilmelding } from '../typer/feilmeldingTsType';
@@ -33,16 +33,7 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
               <BodyShort size="small" className="whitespace-pre-line">
                 {decodeHtmlEntity(message.melding)}
               </BodyShort>
-              {message.tilleggsInfo && (
-                <FeilmeldingsdetaljerModal
-                  feilmeldingsdetaljer={message.tilleggsInfo}
-                  trigger={
-                    <Link as="button" type="button" className={triggerClassName}>
-                      <FormattedMessage id="FeilmeldingPanel.ShowErrorDetails" />
-                    </Link>
-                  }
-                />
-              )}
+              {message.tilleggsInfo && <FeilmeldingsdetaljerModal feilmeldingsdetaljer={message.tilleggsInfo} />}
             </div>
           ))}
         </VStack>
@@ -64,7 +55,3 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
 const containerClassName =
   'relative block max-h-[120px] min-h-[53px] overflow-x-hidden overflow-y-auto ' +
   'bg-[var(--ax-bg-danger-strong)] px-[40px] py-[8px] text-[var(--ax-text-danger-contrast)]';
-
-const triggerClassName =
-  'cursor-pointer appearance-none border-0 bg-transparent p-0 ';
-  'font-[inherit] text-[0.875rem] text-[var(--ax-text-danger-contrast)]';

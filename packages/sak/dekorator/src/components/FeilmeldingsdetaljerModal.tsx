@@ -1,22 +1,24 @@
-import type { ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, CopyButton, Dialog, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, CopyButton, Dialog, HStack, Label, Link, VStack } from '@navikt/ds-react';
 import { capitalizeFirstLetter } from '@navikt/ft-utils';
 
 import type { Feilmelding, Feilmeldingsdetaljer } from '../typer/feilmeldingTsType';
 
 interface Props {
   feilmeldingsdetaljer: Feilmelding['tilleggsInfo'];
-  trigger: ReactElement;
 }
 
-export const FeilmeldingsdetaljerModal = ({ feilmeldingsdetaljer, trigger }: Props) => {
+export const FeilmeldingsdetaljerModal = ({ feilmeldingsdetaljer }: Props) => {
   const intl = useIntl();
   return (
     <Dialog>
-      <Dialog.Trigger>{trigger}</Dialog.Trigger>
+      <Dialog.Trigger>
+        <Link as="button" type="button" className={triggerClassName}>
+          <FormattedMessage id="FeilmeldingPanel.ShowErrorDetails" />
+        </Link>
+      </Dialog.Trigger>
       <Dialog.Popup width="fit-content" style={{ minWidth: 'min(90dvw, 640px)', maxWidth: 'min(90dvw, 1100px)' }}>
         <Dialog.Header>
           <HStack gap="space-16">
@@ -100,3 +102,7 @@ const FeilmeldingsdetaljerVerdi = ({
 
   return <BodyShort size="small">{String(verdi)}</BodyShort>;
 };
+
+const triggerClassName =
+  'cursor-pointer appearance-none border-0 bg-transparent p-0 ' +
+  'font-[inherit] text-[0.875rem] text-[var(--ax-text-danger-contrast)]';
