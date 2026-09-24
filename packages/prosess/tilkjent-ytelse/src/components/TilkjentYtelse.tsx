@@ -24,7 +24,7 @@ import type {
   NavBrukerKjønn,
 } from '@navikt/fp-types';
 
-import { erAlleAndelerAvslått } from './erAlleAndelerAvslått';
+import { erAlleAndelerAvslått } from '../utils/tilkjentYtelseUtils';
 import { TilkjentYtelseTimelineData } from './TilkjentYtelseTimelineData';
 
 type Periode = {

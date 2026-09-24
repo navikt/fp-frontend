@@ -15,7 +15,7 @@ import type {
 } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { erAlleAndelerAvslått } from './erAlleAndelerAvslått';
+import { erAlleAndelerAvslått } from '../utils/tilkjentYtelseUtils';
 import { FeriepengerPanel } from './feriepenger/FeriepengerPanel';
 import { TilkjentYtelse } from './TilkjentYtelse';
 
