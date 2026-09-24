@@ -1,4 +1,5 @@
 import { type ReactElement } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { Heading } from '@navikt/ds-react';
 
@@ -37,7 +38,7 @@ export const FaktaDefaultInitPanel = <T extends Behandling = BehandlingFpSak>({
       {skalVisePanel ? (
         <>
           <Heading level="2" size="small" visuallyHidden>
-            {faktaPanelMenyTekst}
+            <FormattedMessage id="FaktaDefaultInitPanel.Tittel" values={{ tittel: faktaPanelMenyTekst }} />
           </Heading>
           <BehandlingPanelDataProvider panelData={standardPanelProps}>{children}</BehandlingPanelDataProvider>
         </>
