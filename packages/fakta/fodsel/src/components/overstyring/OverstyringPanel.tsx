@@ -25,7 +25,7 @@ export const OverstyringPanel = ({ gjeldende }: Props) => {
     <>
       {kanOverstyreAccess.isEnabled && (
         <HStack gap="space-16">
-          <Heading size="small">
+          <Heading level="2" size="small">
             <FormattedMessage id="OverstyringPanel.Tittel" />
           </Heading>
           <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
