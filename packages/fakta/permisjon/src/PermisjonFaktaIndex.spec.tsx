@@ -14,7 +14,7 @@ describe('PermisjonFaktaIndex', () => {
   it('skal rendre når arbeidsgiveropplysninger mangler for et arbeidsforhold', async () => {
     render(<ArbeidsforholdManglerArbeidsgiveropplysninger />);
 
-    expect(await screen.findByText('Fakta om permisjon')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(screen.getByText('BEDRIFT AS')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
   });
@@ -24,7 +24,7 @@ describe('PermisjonFaktaIndex', () => {
 
     render(<EttArbeidsforholdUtenSluttdatoForPermisjon submitCallback={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om permisjon')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(
       screen.getByText('Vi fant en permisjon uten sluttdato. Vurder om arbeidsforholdet skal tas med.'),
     ).toBeInTheDocument();
@@ -65,7 +65,7 @@ describe('PermisjonFaktaIndex', () => {
 
     render(<FlereArbeidsforhold submitCallback={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om permisjon')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(
       screen.getByText('Vi fant en permisjon uten sluttdato. Vurder om arbeidsforholdet skal tas med.'),
     ).toBeInTheDocument();

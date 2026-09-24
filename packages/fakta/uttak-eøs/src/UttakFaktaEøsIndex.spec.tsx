@@ -18,7 +18,7 @@ describe('UttakFaktaEøsIndex', () => {
 
     render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
     expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
     await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -35,7 +35,7 @@ describe('UttakFaktaEøsIndex', () => {
 
     render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
     expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
 
     expect(screen.getByText('Periode')).toBeInTheDocument();
@@ -75,7 +75,7 @@ describe('UttakFaktaEøsIndex', () => {
     const lagre = vi.fn(() => Promise.resolve());
     render(<ÅpentAksjonspunktMedPerioder submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
     expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByText('01.01.2021 - 31.01.2021'));
@@ -111,7 +111,7 @@ describe('UttakFaktaEøsIndex', () => {
 
     render(<ÅpentAksjonspunktMedPerioderSomDelerSammeFom submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('01.01.2023 - 31.01.2023'));
     await userEvent.click(screen.getByRole('button', { name: 'Slett periode' }));
@@ -142,7 +142,7 @@ describe('UttakFaktaEøsIndex', () => {
 
     render(<ÅpentAksjonspunktMedPerioder annenForelderUttakEøs={perioder} />);
 
-    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
     expect(perioder.map(({ fom, tom }) => `${fom}-${tom}`)).toEqual(originalRekkefølge);
   });
 
@@ -151,7 +151,7 @@ describe('UttakFaktaEøsIndex', () => {
 
     render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
     expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
 
     expect(screen.getByText('Periode')).toBeInTheDocument();
@@ -233,7 +233,7 @@ describe('UttakFaktaEøsIndex', () => {
       <OverstyringSkalVæreMuligHvisDetForeliggerEnTidligereVurderingMedRegistrertePerioder submitCallback={lagre} />,
     );
 
-    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
     expect(screen.getByText('Overstyr')).toBeInTheDocument();
     expect(screen.queryByTitle('Bekreft og fortsett')).not.toBeInTheDocument();
 
@@ -263,7 +263,7 @@ describe('UttakFaktaEøsIndex', () => {
       <OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSomKanLøsesEllerEndres submitCallback={lagre} />,
     );
 
-    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
     expect(screen.queryByText('Overstyr')).not.toBeInTheDocument();
   });
 });

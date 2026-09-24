@@ -41,7 +41,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     render(<InnhentInntektsmelding settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(screen.getByText('Skjæringstidspunkt for opptjening: 10.11.2021')).toBeInTheDocument();
     expect(screen.getByText('Innhent manglende inntektsmeldinger.')).toBeInTheDocument();
 
@@ -89,7 +89,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     render(<InnhentInntektsmelding submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Gå videre uten inntektsmelding'));
 
@@ -118,7 +118,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal vise at ingen inntektet er registrert på bruker i A-ordningen', async () => {
     render(<InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(screen.getByText('Ingen inntekt registrert på bruker i A-ordningen siste seks mnd.')).toBeInTheDocument();
     expect(screen.queryByText('Inntekter (fra A-ordningen)')).not.toBeInTheDocument();
   });
@@ -126,7 +126,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal vise at inntektsmelding er innhentet og behandling er avsluttet', async () => {
     render(<InnhentInntektsmeldingDerBehandlingErAvsluttet />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Vis mer'));
     expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
@@ -144,7 +144,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     render(<AvklarManglendeArbeidsforhold settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(screen.getByText('Skjæringstidspunkt for opptjening: 10.11.2021')).toBeInTheDocument();
     expect(screen.getByText('Avklar manglende opplysninger.')).toBeInTheDocument();
 
@@ -202,7 +202,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       />,
     );
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Send påminnelse via Min side - arbeidsgiver på nav.no'));
 
@@ -230,7 +230,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     render(<AvklarManglendeArbeidsforhold lagreVurdering={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
     await userEvent.type(screen.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
@@ -254,7 +254,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     render(<AvklarManglendeArbeidsforhold submitCallback={bekrefteAksjonspunkt} lagreVurdering={lagreVurdering} />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Se bort fra inntektsmeldingen'));
 
@@ -291,7 +291,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       />,
     );
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Opprett arbeidsforhold basert på inntektsmeldingen'));
 
@@ -333,7 +333,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal vise at arbeidsforhold er manuelt opprettet og at behandling er avsluttet', async () => {
     render(<AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Vis mer'));
     expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
@@ -352,7 +352,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       />,
     );
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(
       screen.getByText(
         'Ved å bruke "Åpne for ny vurdering" kan du endre valg som er ' +
@@ -370,7 +370,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     render(<IngenAksjonspunktMenTilbakehoppMuligForOverstyrer åpneForNyVurdering={åpneForNyVurdering} />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(
       screen.getByText(
         'Ved å bruke "Åpne for ny vurdering" kan du endre valg som er ' +
@@ -399,7 +399,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       />,
     );
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(
       screen.getByText(
         'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Det er kun unntaksvis at det skal ' +
@@ -454,7 +454,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       <SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer />,
     );
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(
       screen.queryByText(
         'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. ' +
@@ -476,7 +476,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       />,
     );
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(
       screen.queryByText(
         'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. ' +
@@ -523,7 +523,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal vise arbeidsforhold som er komplett', async () => {
     render(<ArbeidsforholdErOK />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
     expect(screen.queryByAltText('Vis mindre')).not.toBeInTheDocument();
@@ -550,7 +550,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal vise to arbeidsforhold fra samme virksomhet som er komplette', async () => {
     render(<ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
     expect(screen.queryByAltText('Vis mindre')).not.toBeInTheDocument();
@@ -598,7 +598,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       />,
     );
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     await userEvent.click(
       screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'),
@@ -649,7 +649,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     render(<ArbeidsforholdMedSammeOrgNr registrerArbeidsforhold={registrerArbeidsforhold} />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     // Autoservice AS har to inntektsmeldinger utan tilhøyrande arbeidsforhold (same arbeidsgjevar-ident).
     // Opne begge radene slik at kvar sin ManglendeArbeidsforholdForm-instans blir rendra.
@@ -697,7 +697,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       />,
     );
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     expect(screen.getByText('Ikke mottatt')).toBeInTheDocument();
 
@@ -749,7 +749,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal inntektsmelding før registerinnhenting', async () => {
     render(<FoerRegisterinnhenting />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
@@ -760,7 +760,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal automatisk ignorere at inntektsmelding mangler', async () => {
     render(<AutomatiskIgnorertInntektsmelding />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     expect(screen.getByTitle('Arbeidsforhold er OK')).toBeInTheDocument();
 
@@ -775,7 +775,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal ha mottatt etterspurt innnteksmelding og kan da gå videre', async () => {
     render(<EtterAtEtterspurtInntektsmeldingErKommet />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
 
     expect(screen.getByText('Innhent manglende inntektsmeldinger.')).toBeInTheDocument();
     expect(screen.getAllByTitle('Arbeidsforhold er OK')).toHaveLength(2);
@@ -786,7 +786,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal vise forklaring for inaktivt arbeidsforhold der inntektsmelding ikke er bestilt', async () => {
     render(<InaktivtArbeidsforholdIkkebestiltInntektsmelding />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
     expect(screen.getByText('Ikke bestilt')).toBeInTheDocument();
 
@@ -802,7 +802,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal vise forklaring for permisjonsarbeidsforhold der inntektsmelding ikke er bestilt', async () => {
     render(<PermisjonArbeidsforholdIkkebestiltInntektsmelding />);
 
-    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Skjæringstidspunkt for opptjening:', { exact: false })).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
     expect(screen.getByText('Ikke bestilt')).toBeInTheDocument();
 
