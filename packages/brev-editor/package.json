@@ -30,7 +30,7 @@
     "dayjs": "1.11.23",
     "editorjs-html": "4.0.5",
     "editorjs-undo": "2.0.28",
-    "lodash.debounce": "4.0.8",
+    "es-toolkit": "1.52.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-intl": "10.2.2",

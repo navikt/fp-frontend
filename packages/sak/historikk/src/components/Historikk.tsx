@@ -1,8 +1,8 @@
 import { type ReactElement, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { type Location } from 'react-router';
 
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
-import { type Location } from 'history';
 
 import type {
   AlleKodeverk,

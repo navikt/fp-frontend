@@ -1,11 +1,11 @@
 import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+import { type Location } from 'react-router';
 
 import { Button, HStack, Link, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
-import { type Location } from 'history';
 
 import type {
   FagsakBehandlingDto,

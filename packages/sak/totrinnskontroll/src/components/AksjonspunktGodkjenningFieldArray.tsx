@@ -1,8 +1,7 @@
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { NavLink } from 'react-router';
+import { type Location, NavLink } from 'react-router';
 
 import { BodyShort, Link, VStack } from '@navikt/ds-react';
-import { type Location } from 'history';
 
 import type {
   FagsakBehandlingDto,

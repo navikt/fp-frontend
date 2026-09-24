@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { Navigate, NavLink, useLocation, useMatch } from 'react-router';
+import { type Location, Navigate, NavLink, useLocation, useMatch } from 'react-router';
 
 import { HStack, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
-import type { Location } from 'history';
 
 import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { ReservasjonsstatusPanel } from '@navikt/fp-los-saksbehandler';

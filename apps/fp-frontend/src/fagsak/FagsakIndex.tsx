@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { Navigate, Route, Routes, useLocation, useParams } from 'react-router';
+import { type Location, Navigate, Route, Routes, useLocation, useParams } from 'react-router';
 
 import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
-import type { Location } from 'history';
 
 import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
