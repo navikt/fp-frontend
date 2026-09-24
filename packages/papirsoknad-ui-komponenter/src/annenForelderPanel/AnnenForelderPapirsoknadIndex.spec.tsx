@@ -1,12 +1,88 @@
 import { composeStories } from '@storybook/react';
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './AnnenForelderPapirsoknadIndex.stories';
 
-const { SokerErMor } = composeStories(stories);
+const { SokerErMor, SokerErFar } = composeStories(stories);
 
 describe('AnnenForelderPapirsoknadIndex', () => {
+  it.each([
+    {
+      spørsmål: 'Har søker aleneomsorg for barnet?',
+      forventedeRettigheter: {
+        søkerHarAleneomsorg: true,
+        denAndreForelderenHarRettPåForeldrepenger: undefined,
+        annenForelderRettEØS: undefined,
+        morMottarUføretrygd: undefined,
+      },
+    },
+    {
+      spørsmål: 'Har den andre forelderen rett på foreldrepenger i Norge?',
+      forventedeRettigheter: {
+        søkerHarAleneomsorg: false,
+        denAndreForelderenHarRettPåForeldrepenger: true,
+        annenForelderRettEØS: undefined,
+        morMottarUføretrygd: undefined,
+      },
+    },
+    {
+      spørsmål: 'Annen forelder har tilstrekkelig opptjening fra land i EØS?',
+      forventedeRettigheter: {
+        søkerHarAleneomsorg: false,
+        denAndreForelderenHarRettPåForeldrepenger: false,
+        annenForelderRettEØS: true,
+        morMottarUføretrygd: undefined,
+      },
+    },
+  ])(
+    'skal fjerne skjulte rettighetsfelt når svaret endres til ja på "$spørsmål"',
+    async ({ spørsmål, forventedeRettigheter }) => {
+      const lagre = vi.fn();
+
+      await SokerErFar.run({
+        parameters: {
+          submitCallback: lagre,
+        },
+      });
+
+      await userEvent.type(screen.getByLabelText('Fødselsnummer/D-nummer'), '30013726678');
+      for (const navn of [
+        'Har søker aleneomsorg for barnet?',
+        'Har den andre forelderen rett på foreldrepenger i Norge?',
+        'Annen forelder har tilstrekkelig opptjening fra land i EØS?',
+      ]) {
+        await userEvent.click(
+          within(screen.getByRole('radiogroup', { name: navn })).getByRole('radio', { name: 'Nei' }),
+        );
+      }
+      await userEvent.click(
+        within(screen.getByRole('radiogroup', { name: 'Bare far rett og mor mottar uføretryd?' })).getByRole('radio', {
+          name: 'Ja',
+        }),
+      );
+
+      await userEvent.click(
+        within(screen.getByRole('radiogroup', { name: spørsmål })).getByRole('radio', { name: 'Ja' }),
+      );
+      expect(
+        screen.queryByRole('radiogroup', { name: 'Bare far rett og mor mottar uføretryd?' }),
+      ).not.toBeInTheDocument();
+
+      await userEvent.click(screen.getByRole('button', { name: 'Lagreknapp (Kun for test)' }));
+
+      await waitFor(() => expect(lagre).toHaveBeenCalledOnce());
+      expect(lagre.mock.calls[0]![0]).toStrictEqual({
+        annenForelder: {
+          fødselsnummer: '30013726678',
+          kanIkkeOppgiAnnenForelder: false,
+          kanIkkeOppgiBegrunnelse: undefined,
+          ...forventedeRettigheter,
+        },
+      });
+    },
+  );
+
   it('skal validere fødselsnummer', async () => {
     const lagre = vi.fn();
 
