@@ -14,6 +14,15 @@ const {
   VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent,
 } = composeStories(stories);
 
+const forventetInnsendingEtterNyVurdering = [
+  expect.objectContaining({
+    perioder: [
+      expect.objectContaining({ begrunnelse: 'Ny vurdering' }),
+      expect.objectContaining({ fom: '2022-11-10' }),
+    ],
+  }),
+];
+
 const fullførForespørsel = (fullfør: () => void) => act(() => Promise.resolve().then(fullfør));
 
 const oppdaterManuellPeriode = async () => {
@@ -76,14 +85,7 @@ describe('UttakProsessIndex', () => {
     expect(screen.queryByText(/Kunne ikke oppdatere saldo/)).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
     await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
-    expect(lagre).toHaveBeenCalledWith([
-      expect.objectContaining({
-        perioder: [
-          expect.objectContaining({ begrunnelse: 'Ny vurdering' }),
-          expect.objectContaining({ fom: '2022-11-10' }),
-        ],
-      }),
-    ]);
+    expect(lagre).toHaveBeenCalledWith(forventetInnsendingEtterNyVurdering);
   });
 
   it('skal vente på siste saldo selv om en eldre forespørsel er ferdig', async () => {
@@ -151,14 +153,7 @@ describe('UttakProsessIndex', () => {
     expect(screen.queryByText(/Kunne ikke oppdatere saldo/)).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
     await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
-    expect(lagre).toHaveBeenCalledWith([
-      expect.objectContaining({
-        perioder: [
-          expect.objectContaining({ begrunnelse: 'Ny vurdering' }),
-          expect.objectContaining({ fom: '2022-11-10' }),
-        ],
-      }),
-    ]);
+    expect(lagre).toHaveBeenCalledWith(forventetInnsendingEtterNyVurdering);
   });
 
   it('skal kunne bekrefte på nytt med samme perioder etter lagringsfeil', async () => {
