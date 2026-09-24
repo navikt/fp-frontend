@@ -1,10 +1,9 @@
 import { Suspense, useEffect, useMemo, useState } from 'react';
-import { type NavigateFunction, useLocation, useNavigate, useParams } from 'react-router';
+import { type Location, type NavigateFunction, useLocation, useNavigate, useParams } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { replaceNorwegianCharacters } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
-import type { Location } from 'history';
 
 import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import type { Behandling } from '@navikt/fp-types';

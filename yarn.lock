@@ -176,7 +176,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.7.6":
+"@babel/runtime@npm:^7.12.5":
   version: 7.29.7
   resolution: "@babel/runtime@npm:7.29.7"
   checksum: 10/9883b4951787779fd382b121f22f92966d85f19434841f65fb00b2dfec232107e139683f47c6f252891826ad8ee18317b46c3a0e4819116a9885f47b46d7126a
@@ -1611,7 +1611,6 @@ __metadata:
     "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    history: "npm:5.3.0"
     ky: "npm:2.1.0"
     react: "npm:19.3.0"
     react-dom: "npm:19.3.0"
@@ -1654,13 +1653,11 @@ __metadata:
     "@testing-library/dom": "npm:10.4.2"
     "@testing-library/react": "npm:16.3.3"
     "@testing-library/user-event": "npm:14.6.7"
-    "@types/lodash.debounce": "npm:4.0.9"
     "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
+    es-toolkit: "npm:1.52.0"
     eslint: "npm:10.10.0"
-    history: "npm:5.3.0"
     ky: "npm:2.1.0"
-    lodash.debounce: "npm:4.0.8"
     msw: "npm:2.15.0"
     react: "npm:19.3.0"
     react-dom: "npm:19.3.0"
@@ -1703,8 +1700,8 @@ __metadata:
     dayjs: "npm:1.11.23"
     editorjs-html: "npm:4.0.5"
     editorjs-undo: "npm:2.0.28"
+    es-toolkit: "npm:1.52.0"
     eslint: "npm:10.10.0"
-    lodash.debounce: "npm:4.0.8"
     react: "npm:19.3.0"
     react-dom: "npm:19.3.0"
     react-intl: "npm:10.2.2"
@@ -1932,8 +1929,8 @@ __metadata:
     "@testing-library/react": "npm:16.3.3"
     "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
+    es-toolkit: "npm:1.52.0"
     eslint: "npm:10.10.0"
-    lodash: "npm:^4.18.1"
     react: "npm:19.3.0"
     react-dom: "npm:19.3.0"
     react-hook-form: "npm:7.88.0"
@@ -2614,7 +2611,6 @@ __metadata:
     "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    history: "npm:5.3.0"
     ky: "npm:2.1.0"
     msw: "npm:2.15.0"
     react: "npm:19.3.0"
@@ -3854,7 +3850,6 @@ __metadata:
     "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    history: "npm:5.3.0"
     react: "npm:19.3.0"
     react-dom: "npm:19.3.0"
     react-intl: "npm:10.2.2"
@@ -4284,7 +4279,6 @@ __metadata:
     "@types/react": "npm:19.3.0"
     dayjs: "npm:1.11.23"
     eslint: "npm:10.10.0"
-    history: "npm:5.3.0"
     react: "npm:19.3.0"
     react-dom: "npm:19.3.0"
     react-hook-form: "npm:7.88.0"
@@ -6549,22 +6543,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash.debounce@npm:4.0.9":
-  version: 4.0.9
-  resolution: "@types/lodash.debounce@npm:4.0.9"
-  dependencies:
-    "@types/lodash": "npm:*"
-  checksum: 10/8183a152e01928e3b97ca773f6ae6038b8695e76493ba8bf6b743ec143948a62294fbc9d49fa4a78b52265b3ba4892ef57534e0c13d04aa0f111671b5a944feb
-  languageName: node
-  linkType: hard
-
-"@types/lodash@npm:*":
-  version: 4.17.25
-  resolution: "@types/lodash@npm:4.17.25"
-  checksum: 10/f786e05664439cc8d327fd97c62c060d81b3c4ed52127d01fbc926139e1a669c1554bf3cd0dbb43f8fcc7d9b5c6c23c543cc36de8dc815c9f289ea852b26ebd6
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:*":
   version: 26.4.0
   resolution: "@types/node@npm:26.4.0"
@@ -7927,6 +7905,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es-toolkit@npm:1.52.0":
+  version: 1.52.0
+  resolution: "es-toolkit@npm:1.52.0"
+  dependenciesMeta:
+    "@trivago/prettier-plugin-sort-imports@4.3.0":
+      unplugged: true
+    prettier-plugin-sort-re-exports@0.0.1:
+      unplugged: true
+    vitepress-plugin-sandpack@1.1.4:
+      unplugged: true
+  checksum: 10/d36768a16c17cedc3255c108176a8472d56b3b7e51d909c22905fb9ba163296d058ad17a82d6e65883d5aa65aedf8c268c1b31d7979353968e030c9d104b15c0
+  languageName: node
+  linkType: hard
+
 "esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0 || ^0.26.0 || ^0.27.0 || ^0.28.0":
   version: 0.28.2
   resolution: "esbuild@npm:0.28.2"
@@ -8861,15 +8853,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"history@npm:5.3.0":
-  version: 5.3.0
-  resolution: "history@npm:5.3.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.7.6"
-  checksum: 10/52ba685b842ca6438ff11ef459951eb13d413ae715866a8dc5f7c3b1ea0cdeb8db6aabf7254551b85f56abc205e6e2d7e1d5afb36b711b401cdaff4f2cf187e9
-  languageName: node
-  linkType: hard
-
 "hookified@npm:^1.15.0, hookified@npm:^1.15.1":
   version: 1.15.1
   resolution: "hookified@npm:1.15.1"
@@ -9584,24 +9567,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.debounce@npm:4.0.8":
-  version: 4.0.8
-  resolution: "lodash.debounce@npm:4.0.8"
-  checksum: 10/cd0b2819786e6e80cb9f5cda26b1a8fc073daaf04e48d4cb462fa4663ec9adb3a5387aa22d7129e48eed1afa05b482e2a6b79bfc99b86886364449500cbb00fd
-  languageName: node
-  linkType: hard
-
 "lodash.truncate@npm:^4.4.2":
   version: 4.4.2
   resolution: "lodash.truncate@npm:4.4.2"
   checksum: 10/7a495616121449e5d2288c606b1025d42ab9979e8c93ba885e5c5802ffd4f1ebad4428c793ccc12f73e73237e85a9f5b67dd6415757546fbd5a4653ba83e25ac
-  languageName: node
-  linkType: hard
-
-"lodash@npm:^4.18.1":
-  version: 4.18.1
-  resolution: "lodash@npm:4.18.1"
-  checksum: 10/306fea53dfd39dad1f03d45ba654a2405aebd35797b673077f401edb7df2543623dc44b9effbb98f69b32152295fff725a4cec99c684098947430600c6af0c3f
   languageName: node
   linkType: hard
 

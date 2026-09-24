@@ -7,7 +7,7 @@ import Paragraph from '@editorjs/paragraph';
 import { createIntl } from '@navikt/ft-utils';
 import edjsHTML from 'editorjs-html';
 import Undo from 'editorjs-undo';
-import debounce from 'lodash.debounce';
+import { debounce } from 'es-toolkit';
 
 import { notEmpty } from '@navikt/fp-utils';
 

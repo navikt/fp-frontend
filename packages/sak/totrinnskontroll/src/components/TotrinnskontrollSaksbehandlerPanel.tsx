@@ -1,11 +1,10 @@
 import React, { type ReactNode } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { NavLink } from 'react-router';
+import { type Location, NavLink } from 'react-router';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Link } from '@navikt/ds-react';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
-import { type Location } from 'history';
 
 import type {
   FagsakBehandlingDto,

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { type FieldValues, type Path, useFormContext, type UseFormTrigger } from 'react-hook-form';
 
-import debounce from 'lodash.debounce';
+import { debounce } from 'es-toolkit';
 
 const getTimeoutValue = () => (import.meta.env.MODE === 'test' ? 0 : 1000);
 

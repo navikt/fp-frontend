@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useLocation, useNavigate } from 'react-router';
+import { type Location, useLocation, useNavigate } from 'react-router';
 
 import { Box, Heading, Select, Tabs, VStack } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
-import { type Location } from 'history';
 
 import { getLocationWithQueryParams, parseQueryString } from '@navikt/fp-app-felles';
 import { type AvdelingDto, type InitLinksDto } from '@navikt/fp-types';

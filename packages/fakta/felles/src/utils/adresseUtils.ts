@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash';
+import { isEqual } from 'es-toolkit';
 
 import type { AdresseType, Personadresse } from '@navikt/fp-types';
 

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
+import { type Location } from 'react-router';
 
 import { BodyLong, BodyShort, Box, type BoxNewProps, Button, Detail, HStack, VStack } from '@navikt/ds-react';
 import { dateTimeFormat } from '@navikt/ft-utils';
-import { type Location } from 'history';
 
 import type {
   AlleKodeverk,

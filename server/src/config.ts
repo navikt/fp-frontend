@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "./loadEnvironment.js";
 
 import logger from "./logger.js";
 

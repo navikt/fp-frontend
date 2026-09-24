@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
 import { RawIntlProvider } from 'react-intl';
+import type { Location } from 'react-router';
 
 import { createIntl } from '@navikt/ft-utils';
-import type { Location } from 'history';
 
 import type {
   AlleKodeverk,

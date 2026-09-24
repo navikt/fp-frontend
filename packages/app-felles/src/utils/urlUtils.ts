@@ -1,4 +1,4 @@
-import type { Location, Search } from 'history';
+import type { Location } from 'react-router';
 
 type QueryParams = Record<string, string | boolean | undefined>;
 
@@ -16,7 +16,7 @@ export const formatQueryString = (queryParams: QueryParams = {}): string => {
   return query ? `?${query}` : '';
 };
 
-export const updateQueryParams = (queryString: string, nextParams: QueryParams): Search => {
+export const updateQueryParams = (queryString: string, nextParams: QueryParams): string => {
   const prevParams = parseQueryString(queryString);
   return formatQueryString({
     ...prevParams,

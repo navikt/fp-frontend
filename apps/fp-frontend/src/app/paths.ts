@@ -1,4 +1,4 @@
-import type { Location } from 'history';
+import type { Location } from 'react-router';
 
 import { getLocationWithQueryParams } from '@navikt/fp-app-felles';
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
