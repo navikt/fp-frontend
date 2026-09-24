@@ -112,7 +112,7 @@ export const MedFeilmeldingDetaljerSomErTekst: Story = {
   },
 };
 
-export const MedReelFeilmeldingMedStacktrace: Story = {
+export const MedReellFeilmeldingMedStacktrace: Story = {
   args: {
     feilmeldinger: [
       {
