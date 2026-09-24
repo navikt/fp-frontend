@@ -1,5 +1,6 @@
 .container {
   background-color: var(--ax-bg-danger-strong);
+  color: var(--ax-text-danger-contrast);
   display: block;
   max-height: 120px;
   min-height: 53px;
