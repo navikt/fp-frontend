@@ -1,7 +1,7 @@
 import { createContext, type JSX, type MouseEvent, type ReactElement, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { HStack, Link, VStack } from '@navikt/ds-react';
+import { Heading, HStack, Link, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -52,6 +52,11 @@ export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, ch
       skalSkjulePanel={!erPanelValgt}
     >
       <VStack gap="space-32">
+        {erPanelValgt && (
+          <Heading level="2" size="small" visuallyHidden>
+            <FormattedMessage id="Behandlingspunkt.Inngangsvilkar" />
+          </Heading>
+        )}
         {erPanelValgt && (harFaktaApOgIkkeFerdigBehandlet || aksjonspunktTekster.length > 0) && (
           <AksjonspunktHelpTextHTML>
             {harFaktaApOgIkkeFerdigBehandlet ? (
