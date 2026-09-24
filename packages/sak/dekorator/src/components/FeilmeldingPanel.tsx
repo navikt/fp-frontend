@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
-import { Button, Detail, Link } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Link, VStack } from '@navikt/ds-react';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
 import type { Feilmelding } from '../typer/feilmeldingTsType';
@@ -21,6 +21,7 @@ interface Props {
  * Definerer hvordan feilmeldinger vises under header.
  */
 export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) => {
+  const intl = useIntl();
   const [erModalÅpen, setErModalÅpen] = useState(false);
   const [valgtFeilmeldingIndex, setValgtFeilmeldingIndex] = useState<number | undefined>(undefined);
 
@@ -44,35 +45,47 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
 
   return (
     <div className={styles['container']}>
-      {feilmeldinger.map((message, index) => (
-        <React.Fragment key={message.melding}>
-          <Detail className={styles['wordWrap']}>{`${decodeHtmlEntity(message.melding)} `}</Detail>
-          {message.tilleggsInfo && (
-            <Detail>
-              <Link
-                href="#"
-                className={styles['link']}
-                onClick={event => toggleModalOnClick(event, index)}
-                onKeyDown={event => toggleModalOnKeyDown(event, index)}
-              >
-                <FormattedMessage id="FeilmeldingPanel.ErrorDetails" />
-              </Link>
-            </Detail>
-          )}
-        </React.Fragment>
-      ))}
-      <div className={styles['lukkContainer']}>
-        <Button variant="tertiary" icon={<XMarkIcon color="white" />} onClick={fjernFeilmeldinger} type="button" />
-      </div>
-      {erModalÅpen && (
-        <FeilmeldingsdetaljerModal
-          skalViseModal={erModalÅpen}
-          lukkModal={toggleModalOnClick as () => void}
-          feilmeldingsdetaljer={
-            valgtFeilmeldingIndex === undefined ? undefined : feilmeldinger[valgtFeilmeldingIndex]?.tilleggsInfo
-          }
+      <HStack wrap={false} justify="space-between">
+        <VStack gap="space-8">
+          {feilmeldinger.map((message, index) => (
+            <div key={message.melding}>
+              <BodyShort size="small" className={styles['wordWrap']}>
+                {decodeHtmlEntity(message.melding)}
+              </BodyShort>
+              {message.tilleggsInfo && (
+                <BodyShort size="small">
+                  <Link
+                    href="#"
+                    className={styles['link']}
+                    onClick={event => toggleModalOnClick(event, index)}
+                    onKeyDown={event => toggleModalOnKeyDown(event, index)}
+                  >
+                    <FormattedMessage id="FeilmeldingPanel.ShowErrorDetails" />
+                  </Link>
+                </BodyShort>
+              )}
+            </div>
+          ))}
+        </VStack>
+
+        <Button
+          variant="primary"
+          data-color="danger"
+          size="small"
+          type="button"
+          icon={<XMarkIcon aria-hidden />}
+          title={intl.formatMessage({ id: 'FeilmeldingPanel.Close' })}
+          onClick={fjernFeilmeldinger}
         />
-      )}
+      </HStack>
+
+      <FeilmeldingsdetaljerModal
+        skalViseModal={erModalÅpen}
+        lukkModal={() => setErModalÅpen(false)}
+        feilmeldingsdetaljer={
+          valgtFeilmeldingIndex === undefined ? undefined : feilmeldinger[valgtFeilmeldingIndex]?.tilleggsInfo
+        }
+      />
     </div>
   );
 };

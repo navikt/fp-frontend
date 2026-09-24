@@ -1,25 +1,24 @@
 .container {
-  background-color: var(--ax-danger-600);
-  color: var(--ax-bg-default);
-  display: block;
-  max-height: 120px;
-  min-height: 53px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding-bottom: 5px;
-  padding-left: 40px;
-  padding-top: 5px;
-  position: relative;
+    background-color: var(--ax-bg-danger-strong);
+    display: block;
+    max-height: 120px;
+    min-height: 53px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-inline: 40px;
+    padding-block: 8px;
+    position: relative;
 }
+
 .link {
-  color: var(--ax-bg-default);
+    color: var(--ax-text-danger-contrast);
 }
-.lukkContainer {
-  font-size: 18px;
-  position: absolute;
-  right: 16px;
-  top: 3px;
-}
+
 .wordWrap {
-  white-space: pre-line;
+    white-space: pre-line;
+}
+
+.list {
+    list-style: disc;
+    margin-inline: var(--ax-space-20);
 }
