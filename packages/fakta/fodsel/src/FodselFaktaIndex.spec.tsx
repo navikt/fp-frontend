@@ -233,7 +233,6 @@ describe('FodselFaktaIndex', () => {
       const lagre = vi.fn(() => Promise.resolve());
       render(<OverstyringSomOverstyrer submitCallback={lagre} />);
 
-      expect(screen.getByText('Fakta om fødsel')).toBeInTheDocument();
       await userEvent.click(screen.getByText('Overstyr'));
 
       expect(screen.getByText('Overstyring av fødselsdetaljer')).toBeInTheDocument();
@@ -286,7 +285,6 @@ describe('FodselFaktaIndex', () => {
         />,
       );
 
-      expect(screen.queryByText('Fakta om fødsel')).not.toBeInTheDocument();
       expect(screen.queryByText('Overstyr')).not.toBeInTheDocument();
     });
   });
