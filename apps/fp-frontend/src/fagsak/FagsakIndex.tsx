@@ -10,6 +10,7 @@ import type { AnnenPartBehandling, Behandling, Fagsak } from '@navikt/fp-types';
 
 import {
   behandlingerRoutePath,
+  behandlingFullRoutePath,
   erBehandlingValgt,
   erUrlUnderBehandling,
   pathToAnnenPart,
@@ -61,7 +62,7 @@ const Visittkort = ({ fagsak, erTilbakekreving }: { fagsak: Fagsak; erTilbakekre
 export const FagsakIndex = () => {
   const params = useParams<{ saksnummer: string }>();
   const selectedSaksnummer = params['saksnummer']!;
-  const behandlingMatch = useMatch('/fagsak/:saksnummer/behandling/:behandlingUuid/*');
+  const behandlingMatch = useMatch(behandlingFullRoutePath);
   const behandlingUuid = behandlingMatch?.params.behandlingUuid;
   const [visSideMeny, setVisSideMeny] = useState(true);
   const [visUtvidetBehandlingDetaljer, setVisUtvidetBehandlingDetaljer] = useState(false);
