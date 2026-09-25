@@ -37,7 +37,7 @@ export const KontrollerBeregningAapKombinertAtflPanel = ({ aksjonspunkt }: Props
 
   return (
     <VStack gap="space-16">
-      <FaktaPanelTittel />
+      <FaktaPanelTittel visuallyHidden />
       {aksjonspunkt.status === 'OPPR' && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="Arbeidsavklaringspenger.Aksjonspunkt.HelpText" />

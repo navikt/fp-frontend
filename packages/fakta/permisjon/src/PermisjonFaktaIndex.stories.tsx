@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagAksjonspunkt,
   lagArbeidsgiver,
@@ -31,7 +32,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO)],
-    panelTittel: 'Fakta om permisjon',
+    faktaPanelKode: FaktaPanelCode.PERMISJON,
   },
   render: args => <PermisjonFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof PermisjonFaktaIndex>>;

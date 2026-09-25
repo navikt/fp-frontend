@@ -286,7 +286,7 @@ describe('FodselFaktaIndex', () => {
         />,
       );
 
-      expect(screen.queryByText('Fakta om fødsel')).not.toBeInTheDocument();
+      expect(screen.getByText('Fakta om fødsel')).toBeInTheDocument();
       expect(screen.queryByText('Overstyr')).not.toBeInTheDocument();
     });
   });

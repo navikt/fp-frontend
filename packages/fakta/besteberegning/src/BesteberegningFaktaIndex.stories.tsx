@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagAksjonspunkt,
   lagArbeidsgiver,
@@ -27,6 +28,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysninger,
+    faktaPanelKode: FaktaPanelCode.BESTEBEREGNING,
   },
   render: args => <BesteberegningFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof BesteberegningFaktaIndex>>;

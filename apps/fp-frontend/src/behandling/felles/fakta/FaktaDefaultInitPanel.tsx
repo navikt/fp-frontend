@@ -31,17 +31,10 @@ export const FaktaDefaultInitPanel = <T extends Behandling = BehandlingFpSak>({
     standardPanelProps.harÅpentAksjonspunkt,
   );
 
-  const panelTittel = intl.formatMessage(
-    { id: 'FaktaDefaultInitPanel.Tittel' },
-    { tittel: faktaPanelMenyTekst.toLocaleLowerCase() },
-  );
-
   return (
     <MellomlagretFormDataProvider behandling={standardPanelProps.behandling}>
       {skalVisePanel ? (
-        <BehandlingPanelDataProvider panelData={{ ...standardPanelProps, panelTittel }}>
-          {children}
-        </BehandlingPanelDataProvider>
+        <BehandlingPanelDataProvider panelData={standardPanelProps}>{children}</BehandlingPanelDataProvider>
       ) : null}
     </MellomlagretFormDataProvider>
   );

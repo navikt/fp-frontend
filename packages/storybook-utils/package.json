@@ -16,6 +16,7 @@
   "dependencies": {
     "@navikt/ds-react": "8.16.2",
     "@navikt/fp-kodeverk": "workspace:*",
+    "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
     "@storybook/react": "10.6.0",

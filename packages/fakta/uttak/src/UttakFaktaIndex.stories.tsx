@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagAksjonspunkt,
   lagArbeidsgiver,
@@ -27,7 +28,7 @@ const meta = {
   args: {
     arbeidsgiverOpplysningerPerId,
     kanOverstyre: false,
-    panelTittel: 'Fakta om uttak',
+    faktaPanelKode: FaktaPanelCode.UTTAK,
     faktaArbeidsforhold: [
       {
         arbeidsgiverReferanse: '910909088',

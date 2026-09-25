@@ -6,6 +6,7 @@ import { Alert, BodyShort, Button, HStack, Spacer, VStack } from '@navikt/ds-rea
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type { Aksjonspunkt, ArbeidOgInntektsmelding, BehandlingFpSak, ManueltArbeidsforhold } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
@@ -65,6 +66,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   return (
     <VStack gap="space-32">
       <HStack gap="space-16">
+        <FaktaPanelTittel />
         {erOverstyrer && erAksjonspunktÅpent && !readOnly && <OverstyringKnapp onClick={toggleOverstyring} />}
         <Spacer />
         <BodyShort size="small">

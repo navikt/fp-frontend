@@ -3,6 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagAksjonspunkt,
   type PanelDataArgs,
@@ -67,6 +68,7 @@ const meta = {
   args: {
     isReadOnly: false,
     omsorgsovertakelse: omsorgsovertakelseDefault,
+    faktaPanelKode: FaktaPanelCode.OMSORGSOVERTAKELSE,
   },
   render: args => <OmsorgsovertakelseFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof OmsorgsovertakelseFaktaIndex>>;

@@ -1,5 +1,6 @@
 import { createContext, type ReactElement, use, useMemo } from 'react';
 
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak, Vilkår } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -16,7 +17,7 @@ type Props<AP_TYPE extends AksjonspunktType, B extends Behandling> = {
   isReadOnly: boolean;
   isSubmittable: boolean;
   submitCallback: (aksjonspunktData: AP_TYPE) => Promise<void>;
-  panelTittel?: string;
+  faktaPanelKode?: FaktaPanelCode;
 };
 
 const PanelDataContext = createContext<unknown>(null);
