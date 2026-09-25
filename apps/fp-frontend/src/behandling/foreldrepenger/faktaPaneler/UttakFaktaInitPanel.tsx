@@ -37,7 +37,6 @@ export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) =>
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.UTTAK}
       skalPanelVisesIMeny={harLenke(behandling, 'UTTAK_KONTROLLER_FAKTA_PERIODER_V2')}
     >
       {ytelsefordeling && uttakKontrollerFaktaPerioder ? (

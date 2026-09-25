@@ -26,7 +26,6 @@ export const UttakEøsFaktaInitPanel = () => {
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.UTTAK_EØS}
       skalPanelVisesIMeny={harLenke(behandling, 'UTTAK_ANNEN_FORELDER_EOS')}
     >
       {annenForelderUttakEøs ? (

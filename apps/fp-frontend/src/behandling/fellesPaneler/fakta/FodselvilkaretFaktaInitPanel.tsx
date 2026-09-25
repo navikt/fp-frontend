@@ -45,7 +45,6 @@ export const FodselvilkaretFaktaInitPanel = () => {
     >
       <FaktaDefaultInitPanel
         standardPanelProps={standardPanelProps}
-        faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
         skalPanelVisesIMeny={harLenke(behandling, 'FAKTA_FØDSEL')}
       >
         {faktafødsel ? (

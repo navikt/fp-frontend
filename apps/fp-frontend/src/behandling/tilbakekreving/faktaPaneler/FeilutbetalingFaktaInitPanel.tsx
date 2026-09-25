@@ -38,7 +38,6 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.FEILUTBETALING}
       skalPanelVisesIMeny={harLenke(behandling, 'FEILUTBETALING_FAKTA')}
     >
       <>

@@ -23,7 +23,6 @@ export const UttakDokumentasjonFaktaInitPanel = () => {
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.UTTAK_DOKUMENTASJON}
       skalPanelVisesIMeny={harLenke(behandling, 'DOKUMENTASJON_VURDERING_BEHOV')}
     >
       {dokumentasjonVurderingBehov ? (

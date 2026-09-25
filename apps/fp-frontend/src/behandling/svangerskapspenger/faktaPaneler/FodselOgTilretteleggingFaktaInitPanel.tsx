@@ -30,11 +30,7 @@ export const FodselOgTilretteleggingFaktaInitPanel = ({ arbeidsgiverOpplysninger
   );
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.FODSELTILRETTELEGGING}
-      skalPanelVisesIMeny
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny>
       {svangerskapspengerTilrettelegging ? (
         <TilretteleggingFaktaIndex
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

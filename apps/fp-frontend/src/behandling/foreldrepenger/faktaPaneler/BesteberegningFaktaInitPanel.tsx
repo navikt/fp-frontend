@@ -29,11 +29,7 @@ export const BesteberegningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: 
       : false;
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.BESTEBEREGNING}
-      skalPanelVisesIMeny={skalPanelVisesIMeny}
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny={skalPanelVisesIMeny}>
       {beregningsgrunnlag ? (
         <BesteberegningFaktaIndex
           arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId}

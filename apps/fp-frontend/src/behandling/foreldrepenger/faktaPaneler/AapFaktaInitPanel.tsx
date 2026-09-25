@@ -17,11 +17,7 @@ export const AapFaktaInitPanel = () => {
   );
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.ARBEIDSAVKLARINGSPENGER}
-      skalPanelVisesIMeny={!!aksjonspunkt}
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny={!!aksjonspunkt}>
       {aksjonspunkt ? <AapFaktaIndex aksjonspunkt={aksjonspunkt} /> : <></>}
     </FaktaDefaultInitPanel>
   );

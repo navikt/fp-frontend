@@ -37,11 +37,7 @@ export const OmsorgsovertakelseFaktaInitPanel = () => {
   const { data: omsorgsovertakelse } = useQuery(api.faktaOmsorgsovertakelseOptions(behandling));
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.OMSORGSOVERTAKELSE}
-      skalPanelVisesIMeny={skalPanelVisesIMeny}
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny={skalPanelVisesIMeny}>
       {omsorgsovertakelse ? <OmsorgsovertakelseFaktaIndex omsorgsovertakelse={omsorgsovertakelse} /> : <LoadingPanel />}
     </FaktaDefaultInitPanel>
   );

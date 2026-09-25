@@ -32,11 +32,7 @@ export const MedlemskapsvilkaretFaktaInitPanel = () => {
   const { data: medlemskap } = useQuery(api.medlemskapOptions(behandling));
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET}
-      skalPanelVisesIMeny={behandling.harSøknad}
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny={behandling.harSøknad}>
       {medlemskap ? <MedlemskapFaktaIndex medlemskap={medlemskap} /> : <LoadingPanel />}
     </FaktaDefaultInitPanel>
   );

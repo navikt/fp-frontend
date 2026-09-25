@@ -32,11 +32,7 @@ export const SakenFaktaInitPanel = () => {
   const { data: utlandDokStatus } = useQuery(api.utlandDokStatusOptions(behandling));
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.SAKEN}
-      skalPanelVisesIMeny
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny>
       <SakenFaktaIndex
         ytelsefordeling={ytelsefordeling}
         utlandDokStatus={utlandDokStatus}

@@ -1,10 +1,12 @@
+import type { IntlShape } from 'react-intl';
+
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 /**
  * Mappar faktapanel-koden til i18n-nøkkelen for panelets tittel/menynavn.
  * Slik slepp kvart enkelt panel å vite kva for ein konkret nøkkel det skal bruke.
  */
-export const FAKTA_PANEL_TITTEL_MESSAGE_ID: Partial<Record<FaktaPanelCode, string>> = {
+const FAKTA_PANEL_TITTEL_MESSAGE_ID: Partial<Record<FaktaPanelCode, string>> = {
   [FaktaPanelCode.ARBEIDSAVKLARINGSPENGER]: 'FaktaInitPanel.Title.Arbeidsavklaringspenger',
   [FaktaPanelCode.ARBEIDSFORHOLD]: 'FaktaInitPanel.Title.Arbeidsforhold',
   [FaktaPanelCode.ARBEID_OG_INNTEKT]: 'FaktaInitPanel.Title.ArbeidOgInntekt',
@@ -27,4 +29,17 @@ export const FAKTA_PANEL_TITTEL_MESSAGE_ID: Partial<Record<FaktaPanelCode, strin
   [FaktaPanelCode.UTTAK_DOKUMENTASJON]: 'FaktaInitPanel.Title.UttakDokumentasjon',
   [FaktaPanelCode.VERGE]: 'FaktaInitPanel.Title.Verge',
   [FaktaPanelCode.YTELSER]: 'FaktaInitPanel.Title.Ytelser',
+};
+
+/**
+ * Hentar ut menyteksten/kortnamnet til eit faktapanel basert på panelkoden.
+ * Same kode blir brukt både til å slå opp aksjonspunkt/vilkår for panelet og
+ * til å hente ut namnet, slik at kvar wrapper berre treng kjenne til éin ting.
+ */
+export const hentFaktaPanelMenyTekst = (faktaPanelKode: FaktaPanelCode, intl: IntlShape): string => {
+  const messageId = FAKTA_PANEL_TITTEL_MESSAGE_ID[faktaPanelKode];
+  if (!messageId) {
+    throw new Error(`Mangler i18n-nøkkel for faktapanel-tittel for koden ${faktaPanelKode}`);
+  }
+  return intl.formatMessage({ id: messageId });
 };

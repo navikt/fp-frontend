@@ -48,7 +48,6 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.BEREGNING}
       skalPanelVisesIMeny={harLenke(behandling, 'BEREGNINGSGRUNNLAG')}
     >
       <>

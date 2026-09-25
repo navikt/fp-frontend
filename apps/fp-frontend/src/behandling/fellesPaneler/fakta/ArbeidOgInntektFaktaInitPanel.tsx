@@ -62,7 +62,6 @@ export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }:
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       skalPanelVisesIMeny={
         harLenke(behandling, 'ARBEID_OG_INNTEKT') &&
         !harAksjonspunkt(AksjonspunktKode.UTGÅTT_5080, behandling.aksjonspunkt)

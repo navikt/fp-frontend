@@ -24,11 +24,7 @@ export const VergeFaktaInitPanel = () => {
   const { data: verge, isFetching } = useQuery(api.vergeOptions(behandling, skalPanelVisesIMeny));
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.VERGE}
-      skalPanelVisesIMeny={skalPanelVisesIMeny}
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny={skalPanelVisesIMeny}>
       {isFetching ? <LoadingPanel /> : <VergeFaktaIndex verge={verge} alleKodeverk={standardPanelProps.alleKodeverk} />}
     </FaktaDefaultInitPanel>
   );

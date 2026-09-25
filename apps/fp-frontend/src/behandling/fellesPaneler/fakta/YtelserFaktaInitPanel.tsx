@@ -18,11 +18,7 @@ export const YtelserFaktaInitPanel = () => {
   const { data: inntektArbeidYtelse } = useQuery(api.inntektArbeidYtelseOptions(behandling));
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.YTELSER}
-      skalPanelVisesIMeny
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny>
       {inntektArbeidYtelse ? <YtelserFaktaIndex inntektArbeidYtelse={inntektArbeidYtelse} /> : <LoadingPanel />}
     </FaktaDefaultInitPanel>
   );

@@ -27,11 +27,7 @@ export const OmsorgOgRettFaktaInitPanel = () => {
   const { data: personoversikt } = useQuery(api.behandlingPersonoversiktOptions(behandling));
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.OMSORG_OG_RETT}
-      skalPanelVisesIMeny
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny>
       {omsorgOgRett ? (
         <OmsorgOgRettFaktaIndex
           omsorgOgRett={omsorgOgRett}

@@ -31,11 +31,7 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({ arbeidsgiverOpplysningerPerI
   const { data: opptjening, isFetching } = useQuery(api.opptjeningOptions(behandling, skalPanelVisesIMeny));
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
-      skalPanelVisesIMeny={skalPanelVisesIMeny}
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny={skalPanelVisesIMeny}>
       {isFetching ? (
         <LoadingPanel />
       ) : (

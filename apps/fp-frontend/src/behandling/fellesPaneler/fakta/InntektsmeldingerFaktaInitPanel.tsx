@@ -24,11 +24,7 @@ export const InntektsmeldingerFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId 
   const { data: inntektsmeldinger } = useQuery(api.inntektsmeldingerOptions(behandling));
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.INNTEKTSMELDINGER}
-      skalPanelVisesIMeny
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny>
       {inntektsmeldinger ? (
         <InntektsmeldingFaktaIndex
           inntektsmeldinger={inntektsmeldinger}
