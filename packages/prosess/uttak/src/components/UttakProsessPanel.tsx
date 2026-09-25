@@ -210,17 +210,25 @@ export const UttakProsessPanel = ({
   const { fagsak, behandling, submitCallback, alleKodeverk, isReadOnly, aksjonspunkterForPanel } =
     usePanelDataContext<UttakAp[]>();
 
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<PeriodeSoker[]>();
+  const harMellomlagredeEndringer =
+    mellomlagretFormData !== undefined && mellomlagretFormData !== uttaksresultat.perioderSøker;
+
   const [erOverstyrt, setErOverstyrt] = useState(false);
-  const [isDirty, setIsDirty] = useState(false);
+  const [isDirty, setIsDirty] = useState(harMellomlagredeEndringer);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [innsendingFeilet, setInnsendingFeilet] = useState(false);
-  const [saldoStatus, setSaldoStatus] = useState<'oppdatert' | 'venter' | 'feilet'>('oppdatert');
+  const [saldoStatus, setSaldoStatus] = useState<'oppdatert' | 'venter' | 'feilet'>(
+    harMellomlagredeEndringer ? 'venter' : 'oppdatert',
+  );
+  const [saldoForespørsel, setSaldoForespørsel] = useState(() =>
+    harMellomlagredeEndringer ? { perioder: mellomlagretFormData, id: 0 } : undefined,
+  );
   const sisteSaldoForespørselRef = useRef(0);
+  const [valgtKontoType, setValgtKontoType] = useState<StønadskontoType>();
   const toggleOverstyring = () => {
     setErOverstyrt(forrigeVerdi => !forrigeVerdi);
   };
-
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<PeriodeSoker[]>();
 
   const [perioder, setPerioder] = useState<PeriodeSoker[]>(mellomlagretFormData ?? uttaksresultat.perioderSøker);
 
@@ -263,23 +271,36 @@ export const UttakProsessPanel = ({
     }
   };
 
-  const oppdaterSaldo = async (nyePerioder: PeriodeSoker[]) => {
-    const forespørsel = ++sisteSaldoForespørselRef.current;
-    setSaldoStatus('venter');
-    try {
-      const oppdatertStønadskonto = await oppdaterStønadskontoer({
-        behandlingUuid: behandling.uuid,
-        perioder: nyePerioder,
-      });
-      if (forespørsel === sisteSaldoForespørselRef.current) {
-        setStønadskonto(oppdatertStønadskonto);
-        setSaldoStatus('oppdatert');
-      }
-    } catch {
-      if (forespørsel === sisteSaldoForespørselRef.current) {
-        setSaldoStatus('feilet');
-      }
+  useEffect(() => {
+    if (!saldoForespørsel) {
+      return;
     }
+    let erAktiv = true;
+    const hentSaldo = async () => {
+      try {
+        const oppdatertStønadskonto = await oppdaterStønadskontoer({
+          behandlingUuid: behandling.uuid,
+          perioder: saldoForespørsel.perioder,
+        });
+        if (erAktiv && saldoForespørsel.id === sisteSaldoForespørselRef.current) {
+          setStønadskonto(oppdatertStønadskonto);
+          setSaldoStatus('oppdatert');
+        }
+      } catch {
+        if (erAktiv && saldoForespørsel.id === sisteSaldoForespørselRef.current) {
+          setSaldoStatus('feilet');
+        }
+      }
+    };
+    void hentSaldo();
+    return () => {
+      erAktiv = false;
+    };
+  }, [saldoForespørsel, behandling.uuid, oppdaterStønadskontoer]);
+
+  const oppdaterSaldo = (nyePerioder: PeriodeSoker[]) => {
+    setSaldoStatus('venter');
+    setSaldoForespørsel({ perioder: nyePerioder, id: ++sisteSaldoForespørselRef.current });
   };
 
   const oppdaterPeriode = (oppdatertePerioder: PeriodeSoker[]) => {
@@ -288,7 +309,7 @@ export const UttakProsessPanel = ({
     setPerioder(nyePerioder);
     setIsDirty(true);
 
-    void oppdaterSaldo(nyePerioder);
+    oppdaterSaldo(nyePerioder);
     if (oppdatertePerioder.length === 2) {
       const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0]?.fom);
       setValgtPeriodeIndex(perioderAnnenpart.length + index);
@@ -345,6 +366,8 @@ export const UttakProsessPanel = ({
         <DisponibleStonadskontoerPanel
           stønadskontoer={Object.values(stønadskonto.stønadskonti)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          valgtKontoType={valgtKontoType}
+          setValgtKontoType={setValgtKontoType}
         />
       )}
       {saldoStatus === 'venter' && (

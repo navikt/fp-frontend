@@ -1,9 +1,12 @@
-import { composeStories } from '@storybook/react';
+import { type ComponentProps, useState } from 'react';
+
+import { composeStories, composeStory } from '@storybook/react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import type { UttakStonadskontoer } from '@navikt/fp-types';
 
+import { UttakProsessIndex } from './UttakProsessIndex';
 import * as stories from './UttakProsessIndex.stories';
 
 const {
@@ -13,6 +16,24 @@ const {
   VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent,
   VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent,
 } = composeStories(stories);
+
+const UttakMedPanelbytte = (props: ComponentProps<typeof UttakProsessIndex>) => {
+  const [visUttak, setVisUttak] = useState(true);
+  return (
+    <>
+      <button onClick={() => setVisUttak(!visUttak)}>{visUttak ? 'Lukk uttak' : 'Åpne uttak'}</button>
+      {visUttak && <UttakProsessIndex {...props} />}
+    </>
+  );
+};
+
+const GjenåpnetUttak = composeStory(
+  {
+    ...stories.AksjonspunktDerValgtStønadskontoIkkeFinnes,
+    render: args => <UttakMedPanelbytte {...args} />,
+  },
+  stories.default,
+);
 
 const forventetInnsendingEtterNyVurdering = [
   expect.objectContaining({
@@ -42,6 +63,84 @@ const endrePeriodePåNytt = async () => {
 };
 
 describe('UttakProsessIndex', () => {
+  it('skal ikke beregne saldo på nytt ved gjenåpning uten periodeendringer', async () => {
+    const oppdaterStønadskontoer = vi.fn();
+    render(<GjenåpnetUttak oppdaterStønadskontoer={oppdaterStønadskontoer} />);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Lukk uttak' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Åpne uttak' }));
+
+    expect(oppdaterStønadskontoer).not.toHaveBeenCalled();
+    expect(screen.getByText('Disponible stønadsdager (u/d)')).toBeInTheDocument();
+  });
+
+  it('skal beholde valgt konto og vise nye kontodetaljer etter saldooppdatering', async () => {
+    const saldo = Promise.withResolvers<UttakStonadskontoer>();
+    render(<AksjonspunktDerValgtStønadskontoIkkeFinnes oppdaterStønadskontoer={() => saldo.promise} />);
+
+    await userEvent.click(screen.getByText('Mødrekvote'));
+    expect(screen.getByRole('cell', { name: '7/0' })).toBeInTheDocument();
+
+    await oppdaterManuellPeriode();
+    expect(screen.queryByRole('table')).not.toBeInTheDocument();
+
+    const konto = stories.uttakStonadskontoer.stønadskonti.MØDREKVOTE;
+    await fullførForespørsel(() =>
+      saldo.resolve({
+        ...stories.uttakStonadskontoer,
+        stønadskonti: {
+          ...stories.uttakStonadskontoer.stønadskonti,
+          MØDREKVOTE: {
+            ...konto,
+            saldo: 30,
+            aktivitetSaldoDtoList: konto.aktivitetSaldoDtoList.map(aktivitet => ({ ...aktivitet, saldo: 30 })),
+          },
+        },
+      }),
+    );
+
+    expect(screen.getByRole('tab', { name: /Mødrekvote/ })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('cell', { name: '6/0' })).toBeInTheDocument();
+    expect(screen.queryByRole('cell', { name: '7/0' })).not.toBeInTheDocument();
+  });
+
+  it('skal hente saldo for mellomlagrede perioder og tillate nytt forsøk etter feil ved gjenåpning', async () => {
+    const gjenåpning = Promise.withResolvers<UttakStonadskontoer>();
+    const nyttForsøk = Promise.withResolvers<UttakStonadskontoer>();
+    const oppdaterStønadskontoer = vi
+      .fn()
+      .mockResolvedValueOnce(stories.uttakStonadskontoer)
+      .mockReturnValueOnce(gjenåpning.promise)
+      .mockReturnValueOnce(nyttForsøk.promise);
+    const lagre = vi.fn().mockResolvedValue(undefined);
+    render(<GjenåpnetUttak oppdaterStønadskontoer={oppdaterStønadskontoer} submitCallback={lagre} />);
+
+    await oppdaterManuellPeriode();
+    await userEvent.click(screen.getByRole('button', { name: 'Lukk uttak' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Åpne uttak' }));
+
+    expect(oppdaterStønadskontoer).toHaveBeenCalledTimes(2);
+    expect(oppdaterStønadskontoer.mock.calls[1]).toEqual(oppdaterStønadskontoer.mock.calls[0]);
+    expect(screen.queryByText('Disponible stønadsdager (u/d)')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeDisabled();
+
+    await fullførForespørsel(() => gjenåpning.reject(new Error('Saldokallet feilet')));
+    expect(screen.getByText(/Kunne ikke oppdatere saldo/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeDisabled();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Prøv å oppdatere saldo på nytt' }));
+    expect(oppdaterStønadskontoer.mock.calls[2]).toEqual(oppdaterStønadskontoer.mock.calls[0]);
+    await fullførForespørsel(() => nyttForsøk.resolve(stories.uttakStonadskontoer));
+
+    expect(screen.getByRole('button', { name: 'Bekreft og fortsett' })).toBeEnabled();
+    await userEvent.click(screen.getByRole('button', { name: 'Bekreft og fortsett' }));
+    expect(lagre).toHaveBeenCalledExactlyOnceWith([
+      expect.objectContaining({
+        perioder: [expect.objectContaining({ begrunnelse: 'Dette er en vurdering' }), expect.anything()],
+      }),
+    ]);
+  });
+
   it.each(['svar', 'feil'])('skal ignorere foreldet saldo%s etter at nyeste saldo er mottatt', async utfall => {
     const første = Promise.withResolvers<UttakStonadskontoer>();
     const andre = Promise.withResolvers<UttakStonadskontoer>();
