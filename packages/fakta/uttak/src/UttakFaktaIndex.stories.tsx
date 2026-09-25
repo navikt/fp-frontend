@@ -27,6 +27,7 @@ const meta = {
   args: {
     arbeidsgiverOpplysningerPerId,
     kanOverstyre: false,
+    panelTittel: 'Fakta om uttak',
     faktaArbeidsforhold: [
       {
         arbeidsgiverReferanse: '910909088',

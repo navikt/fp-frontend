@@ -20,6 +20,7 @@ const meta = {
   args: {
     fagsak: lagFagsak({ relasjonsRolleType: 'FARA' }),
     kanOverstyre: false,
+    panelTittel: 'Fakta om uttak til annen forelder i EØS',
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART)],
   },
   render: args => <UttakFaktaEøsIndex {...args} />,

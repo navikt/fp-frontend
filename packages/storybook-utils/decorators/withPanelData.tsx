@@ -19,6 +19,7 @@ export type PanelDataArgs = {
   isReadOnly?: boolean;
   isSubmittable?: boolean;
   submitCallback?: (data: AksjonspunktType) => Promise<void>;
+  panelTittel?: string;
 };
 
 const promiseAction =
@@ -98,6 +99,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
     isReadOnly,
     isSubmittable,
     submitCallback,
+    panelTittel,
   } = context.args as PanelDataArgs;
 
   const aksjonspunkter = aksjonspunkterForPanel ?? [];
@@ -114,6 +116,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
       isReadOnly={isReadOnly ?? false}
       isSubmittable={isSubmittable ?? true}
       submitCallback={submitCallback ?? promiseAction()}
+      panelTittel={panelTittel}
     >
       <Story />
     </PanelDataProvider>

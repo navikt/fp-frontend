@@ -53,6 +53,7 @@ const meta = {
       972_674_818: lagArbeidsgiver('972674818', 'PENGELØS SPAREBANK'),
       [MANUELT_ORG_NR]: lagArbeidsgiver(MANUELT_ORG_NR, 'Lagt til av saksbehandler'),
     },
+    panelTittel: 'Fakta om arbeid og inntekt',
     lagreVurdering: promiseAction('onLagreVurdering'),
     registrerArbeidsforhold: promiseAction('onRegistrerArbeidsforhold'),
     åpneForNyVurdering: action('onÅpneForNyVurdering'),

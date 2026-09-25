@@ -31,6 +31,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO)],
+    panelTittel: 'Fakta om permisjon',
   },
   render: args => <PermisjonFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof PermisjonFaktaIndex>>;
