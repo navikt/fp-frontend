@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { lagArbeidsgiver, lagFagsakBehandling, type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type { BehandlingFpSak } from '@navikt/fp-types';
 
@@ -28,6 +29,9 @@ const meta = {
   title: 'fakta/fakta-inntektsmelding',
   component: InntektsmeldingFaktaIndex,
   decorators: [withPanelData],
+  args: {
+    faktaPanelKode: FaktaPanelCode.INNTEKTSMELDINGER,
+  },
   render: args => <InntektsmeldingFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof InntektsmeldingFaktaIndex>>;
 export default meta;

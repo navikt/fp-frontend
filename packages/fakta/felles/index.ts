@@ -11,6 +11,7 @@ export { validerApKodeOgHentApEnum } from './src/utils/validerApKodeOgHentApEnum
 export { FaktaGruppe, FaktaBox } from './src/components/FaktaBox';
 export { type FaktaKilde, getLabelForFaktaKilde } from './src/components/FaktaKilde';
 export { Boks } from './src/components/Boks';
+export { FaktaPanelTittel } from './src/components/FaktaPanelTittel';
 
 export { Personopplysninger } from './src/components/personer/Personopplysninger';
 export { PersonopplysningerForFamilie } from './src/components/personer/PersonopplysningerForFamilie';

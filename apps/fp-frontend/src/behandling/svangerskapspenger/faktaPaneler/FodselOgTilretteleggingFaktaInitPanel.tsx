@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -20,7 +18,7 @@ interface Props {
 }
 
 export const FodselOgTilretteleggingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.FODSELTILRETTELEGGING, AKSJONSPUNKT_KODER);
 
   const { behandling } = useBehandlingDataContext();
 
@@ -32,14 +30,7 @@ export const FodselOgTilretteleggingFaktaInitPanel = ({ arbeidsgiverOpplysninger
   );
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.FODSELTILRETTELEGGING}
-      faktaPanelMenyTekst={useIntl().formatMessage({
-        id: 'FaktaInitPanel.Title.FodselOgTilrettelegging',
-      })}
-      skalPanelVisesIMeny
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny>
       {svangerskapspengerTilrettelegging ? (
         <TilretteleggingFaktaIndex
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

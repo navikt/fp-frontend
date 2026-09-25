@@ -4,6 +4,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagAksjonspunkt,
   type PanelDataArgs,
@@ -79,6 +80,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     ytelsefordeling,
+    faktaPanelKode: FaktaPanelCode.OMSORG,
   },
   render: args => <OmsorgFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof OmsorgFaktaIndex>>;

@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagAksjonspunkt,
   lagArbeidsgiver,
@@ -246,6 +247,7 @@ const meta = {
   args: {
     arbeidsgiverOpplysningerPerId: ARBEIDSGIVEROPPLYSNINGER_PER_ID,
     isReadOnly: false,
+    faktaPanelKode: FaktaPanelCode.FODSELTILRETTELEGGING,
   },
   render: args => <TilretteleggingFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof TilretteleggingFaktaIndex>>;

@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagAksjonspunkt,
   type PanelDataArgs,
@@ -16,6 +17,9 @@ const meta = {
   title: 'fakta/fakta-aap',
   component: AapFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
+  args: {
+    faktaPanelKode: FaktaPanelCode.ARBEIDSAVKLARINGSPENGER,
+  },
   render: args => <AapFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof AapFaktaIndex>>;
 export default meta;

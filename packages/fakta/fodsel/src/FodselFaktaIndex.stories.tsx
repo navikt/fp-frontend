@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagAksjonspunkt,
   type PanelDataArgs,
@@ -28,6 +29,7 @@ const meta = {
     isReadOnly: false,
     aksjonspunkterForPanel: [],
     alleMerknaderFraBeslutter: {},
+    faktaPanelKode: FaktaPanelCode.FODSELSVILKARET,
     terminbekreftelseDokument: {
       journalpostId: '1',
       dokumentId: '2',

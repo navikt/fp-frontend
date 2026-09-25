@@ -1,3 +1,4 @@
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, Behandling, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
@@ -12,10 +13,11 @@ const DEFAULT_FAKTA_KODE = 'default';
 const DEFAULT_PROSESS_STEG_KODE = 'default';
 
 export type StandardFaktaPanelProps<T extends Behandling = BehandlingFpSak> = Readonly<
-  FellesPanelData<FaktaAksjonspunkt | FaktaAksjonspunkt[], T>
+  FellesPanelData<FaktaAksjonspunkt | FaktaAksjonspunkt[], T> & { faktaPanelKode: FaktaPanelCode }
 >;
 
 export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSak>(
+  faktaPanelKode: FaktaPanelCode,
   aksjonspunktKoder: Aksjonspunkt['definisjon'][] = [],
 ): StandardFaktaPanelProps<T> => {
   const {
@@ -59,6 +61,7 @@ export const useStandardFaktaPanelProps = <T extends Behandling = BehandlingFpSa
     isReadOnly,
     alleMerknaderFraBeslutter,
     submitCallback,
+    faktaPanelKode,
   };
 };
 

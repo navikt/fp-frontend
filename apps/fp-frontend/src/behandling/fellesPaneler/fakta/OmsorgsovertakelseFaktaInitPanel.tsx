@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -28,7 +26,7 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 export const OmsorgsovertakelseFaktaInitPanel = () => {
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.OMSORGSOVERTAKELSE, AKSJONSPUNKT_KODER);
 
   const { behandling } = useBehandlingDataContext();
 
@@ -39,12 +37,7 @@ export const OmsorgsovertakelseFaktaInitPanel = () => {
   const { data: omsorgsovertakelse } = useQuery(api.faktaOmsorgsovertakelseOptions(behandling));
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.OMSORGSOVERTAKELSE}
-      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Omsorgsovertakelse' })}
-      skalPanelVisesIMeny={skalPanelVisesIMeny}
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny={skalPanelVisesIMeny}>
       {omsorgsovertakelse ? <OmsorgsovertakelseFaktaIndex omsorgsovertakelse={omsorgsovertakelse} /> : <LoadingPanel />}
     </FaktaDefaultInitPanel>
   );

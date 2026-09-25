@@ -6,6 +6,7 @@ import { AksjonspunktHelpTextHTML, DateLabel, LabeledValue } from '@navikt/ft-ui
 import { addDaysToDate, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   ArbeidsgiverOpplysningerPerId,
@@ -188,6 +189,7 @@ export const OpptjeningFaktaPanel = ({
 
   return (
     <VStack gap="space-24">
+      <FaktaPanelTittel />
       {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}

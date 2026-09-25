@@ -4,6 +4,7 @@ import { VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { isAksjonspunktOpen } from '@navikt/ft-utils';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { OpptjeningIUtlandDokStatusDto, Ytelsefordeling } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -37,6 +38,7 @@ export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyre
 
   return (
     <VStack gap="space-32" maxWidth="700px">
+      <FaktaPanelTittel />
       {isAksjonspunktOpen(automatiskMarkeringAvUtenlandssakAp) && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="SakenFaktaPanel.OpptjeningUtland" />

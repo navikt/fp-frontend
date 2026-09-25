@@ -1,5 +1,4 @@
 import { type ComponentProps } from 'react';
-import { useIntl } from 'react-intl';
 
 import {
   FeilutbetalingAksjonspunktCode,
@@ -8,6 +7,7 @@ import {
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { AlleKodeverkTilbakekreving, BehandlingFpTilbake } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
@@ -26,8 +26,7 @@ interface Props {
 }
 
 export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) => {
-  const intl = useIntl();
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.FEILUTBETALING, AKSJONSPUNKT_KODER);
 
   const { behandling, fagsak } = useBehandlingDataContext<BehandlingFpTilbake>();
 
@@ -39,25 +38,26 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.FEILUTBETALING}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' })}
       skalPanelVisesIMeny={harLenke(behandling, 'FEILUTBETALING_FAKTA')}
     >
-      {feilutbetalingFakta && feilutbetalingÅrsak ? (
-        <Wrapper
-          feilutbetalingFakta={feilutbetalingFakta}
-          feilutbetalingAarsak={feilutbetalingÅrsak}
-          fagsakYtelseTypeKode={fagsak.fagsakYtelseType}
-          // @ts-expect-error -- venter på at "-" skal fjernes fra API type
-          kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
-          kodeverkSamlingFpsak={standardPanelProps.alleKodeverk}
-          isAksjonspunktOpen={standardPanelProps.harÅpentAksjonspunkt}
-          {...standardPanelProps}
-          submitCallback={standardPanelProps.submitCallback}
-        />
-      ) : (
-        <LoadingPanel />
-      )}
+      <>
+        <FaktaPanelTittel visuallyHidden />
+        {feilutbetalingFakta && feilutbetalingÅrsak ? (
+          <Wrapper
+            feilutbetalingFakta={feilutbetalingFakta}
+            feilutbetalingAarsak={feilutbetalingÅrsak}
+            fagsakYtelseTypeKode={fagsak.fagsakYtelseType}
+            // @ts-expect-error -- venter på at "-" skal fjernes fra API type
+            kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
+            kodeverkSamlingFpsak={standardPanelProps.alleKodeverk}
+            isAksjonspunktOpen={standardPanelProps.harÅpentAksjonspunkt}
+            {...standardPanelProps}
+            submitCallback={standardPanelProps.submitCallback}
+          />
+        ) : (
+          <LoadingPanel />
+        )}
+      </>
     </FaktaDefaultInitPanel>
   );
 };

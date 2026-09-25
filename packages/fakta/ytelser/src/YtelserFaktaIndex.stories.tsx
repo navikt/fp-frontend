@@ -1,4 +1,9 @@
+import type { ComponentProps } from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
+
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 
 import { YtelserFaktaIndex } from './YtelserFaktaIndex';
 
@@ -45,7 +50,11 @@ const defaultInntektArbeidYtelse = {
 const meta = {
   title: 'fakta/fakta-ytelser',
   component: YtelserFaktaIndex,
-} satisfies Meta<typeof YtelserFaktaIndex>;
+  decorators: [withPanelData],
+  args: {
+    faktaPanelKode: FaktaPanelCode.YTELSER,
+  },
+} satisfies Meta<PanelDataArgs & ComponentProps<typeof YtelserFaktaIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

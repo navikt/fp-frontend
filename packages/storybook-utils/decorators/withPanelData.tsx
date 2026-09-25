@@ -2,6 +2,7 @@ import { type ReactRenderer } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, BehandlingFpSak, Fagsak, Vilkår } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, PanelDataProvider } from '@navikt/fp-utils';
@@ -19,6 +20,7 @@ export type PanelDataArgs = {
   isReadOnly?: boolean;
   isSubmittable?: boolean;
   submitCallback?: (data: AksjonspunktType) => Promise<void>;
+  faktaPanelKode?: FaktaPanelCode;
 };
 
 const promiseAction =
@@ -98,6 +100,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
     isReadOnly,
     isSubmittable,
     submitCallback,
+    faktaPanelKode,
   } = context.args as PanelDataArgs;
 
   const aksjonspunkter = aksjonspunkterForPanel ?? [];
@@ -114,6 +117,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
       isReadOnly={isReadOnly ?? false}
       isSubmittable={isSubmittable ?? true}
       submitCallback={submitCallback ?? promiseAction()}
+      faktaPanelKode={faktaPanelKode}
     >
       <Story />
     </PanelDataProvider>

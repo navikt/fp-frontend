@@ -1,5 +1,4 @@
 import { type ComponentProps } from 'react';
-import { useIntl } from 'react-intl';
 
 import {
   FaktaFordelBeregningAvklaringsbehovCode,
@@ -13,6 +12,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkår } from '@navikt/fp-types';
@@ -33,7 +33,7 @@ interface Props {
 }
 
 export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.FORDELING, AKSJONSPUNKT_KODER);
 
   const { behandling } = useBehandlingDataContext();
 
@@ -44,23 +44,24 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.FORDELING}
-      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Fordeling' })}
       skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => harAksjonspunkt(kode, behandling.aksjonspunkt))}
     >
-      {isFetching ? (
-        <LoadingPanel />
-      ) : (
-        <Wrapper
-          kodeverkSamling={standardPanelProps.alleKodeverk}
-          beregningsgrunnlagVilkår={lagBGVilkår(standardPanelProps.behandling.vilkår, beregningsgrunnlag)}
-          beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
-          submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          readOnly={standardPanelProps.isReadOnly}
-          submittable={standardPanelProps.isSubmittable}
-        />
-      )}
+      <>
+        <FaktaPanelTittel visuallyHidden />
+        {isFetching ? (
+          <LoadingPanel />
+        ) : (
+          <Wrapper
+            kodeverkSamling={standardPanelProps.alleKodeverk}
+            beregningsgrunnlagVilkår={lagBGVilkår(standardPanelProps.behandling.vilkår, beregningsgrunnlag)}
+            beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
+            submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            readOnly={standardPanelProps.isReadOnly}
+            submittable={standardPanelProps.isSubmittable}
+          />
+        )}
+      </>
     </FaktaDefaultInitPanel>
   );
 };

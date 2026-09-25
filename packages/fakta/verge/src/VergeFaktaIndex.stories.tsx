@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -28,6 +29,7 @@ const meta = {
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AVKLAR_VERGE]: merknaderFraBeslutter,
     },
+    faktaPanelKode: FaktaPanelCode.VERGE,
   },
   render: args => <VergeFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof VergeFaktaIndex>>;

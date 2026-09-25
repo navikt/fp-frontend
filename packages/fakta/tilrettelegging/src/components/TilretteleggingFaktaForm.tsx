@@ -6,7 +6,7 @@ import { RhfDatepicker, RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, FaktaPanelTittel, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
@@ -60,76 +60,79 @@ export const TilretteleggingFaktaForm = ({
   );
 
   return (
-    <RhfForm
-      formMethods={formMethods}
-      setDataOnUnmount={setMellomlagretFormData}
-      onSubmit={values => submitCallback(transformValues(values))}
-    >
-      <VStack gap="space-32">
-        {harÅpentAksjonspunkt && (
-          <AksjonspunktHelpTextHTML>
-            {skalVurdereVelferdspermisjoner ? (
-              <FormattedMessage id="TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner" />
-            ) : (
-              <FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" />
-            )}
-            {harFAISU && <FormattedMessage id="TilretteleggingFaktaForm.AksjonpunktFAISU" />}
-          </AksjonspunktHelpTextHTML>
-        )}
+    <>
+      <FaktaPanelTittel />
+      <RhfForm
+        formMethods={formMethods}
+        setDataOnUnmount={setMellomlagretFormData}
+        onSubmit={values => submitCallback(transformValues(values))}
+      >
+        <VStack gap="space-32">
+          {harÅpentAksjonspunkt && (
+            <AksjonspunktHelpTextHTML>
+              {skalVurdereVelferdspermisjoner ? (
+                <FormattedMessage id="TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner" />
+              ) : (
+                <FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" />
+              )}
+              {harFAISU && <FormattedMessage id="TilretteleggingFaktaForm.AksjonpunktFAISU" />}
+            </AksjonspunktHelpTextHTML>
+          )}
 
-        <HStack gap="space-16">
-          <RhfDatepicker
-            name="termindato"
-            control={formMethods.control}
-            label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
-            validate={[required, hasValidDate]}
-            readOnly={isReadOnly}
-          />
-
-          {svangerskapspengerTilrettelegging.fødselsdato && (
+          <HStack gap="space-16">
             <RhfDatepicker
-              name="fødselsdato"
+              name="termindato"
               control={formMethods.control}
-              label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
+              label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
               validate={[required, hasValidDate]}
               readOnly={isReadOnly}
             />
-          )}
-        </HStack>
 
-        <ArbeidsforholdFieldArray
-          aoiArbeidsforhold={aoiArbeidsforhold}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          readOnly={isReadOnly}
-          uttakArbeidTyper={uttakArbeidTyper}
-        />
+            {svangerskapspengerTilrettelegging.fødselsdato && (
+              <RhfDatepicker
+                name="fødselsdato"
+                control={formMethods.control}
+                label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
+                validate={[required, hasValidDate]}
+                readOnly={isReadOnly}
+              />
+            )}
+          </HStack>
 
-        <TilretteleggingFormFeil />
+          <ArbeidsforholdFieldArray
+            aoiArbeidsforhold={aoiArbeidsforhold}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            readOnly={isReadOnly}
+            uttakArbeidTyper={uttakArbeidTyper}
+          />
 
-        <RhfTextarea
-          name="begrunnelse"
-          control={formMethods.control}
-          size="small"
-          readOnly={isReadOnly}
-          label={<FormattedMessage id="TilretteleggingFaktaForm.BegrunnEndringene" />}
-          description={
-            harFAISU ? (
-              <FormattedMessage id="TilretteleggingFaktaForm.BegrunnelseDescription.MedSplitt" />
-            ) : (
-              <FormattedMessage id="TilretteleggingFaktaForm.BegrunnelseDescription.UtenSplitt" />
-            )
-          }
-          validate={[minLength3, maxLength1000, hasValidText]}
-        />
+          <TilretteleggingFormFeil />
 
-        <FaktaSubmitButton
-          isSubmittable={isSubmittable}
-          isReadOnly={isReadOnly}
-          isSubmitting={formMethods.formState.isSubmitting}
-          isDirty={formMethods.formState.isDirty}
-        />
-      </VStack>
-    </RhfForm>
+          <RhfTextarea
+            name="begrunnelse"
+            control={formMethods.control}
+            size="small"
+            readOnly={isReadOnly}
+            label={<FormattedMessage id="TilretteleggingFaktaForm.BegrunnEndringene" />}
+            description={
+              harFAISU ? (
+                <FormattedMessage id="TilretteleggingFaktaForm.BegrunnelseDescription.MedSplitt" />
+              ) : (
+                <FormattedMessage id="TilretteleggingFaktaForm.BegrunnelseDescription.UtenSplitt" />
+              )
+            }
+            validate={[minLength3, maxLength1000, hasValidText]}
+          />
+
+          <FaktaSubmitButton
+            isSubmittable={isSubmittable}
+            isReadOnly={isReadOnly}
+            isSubmitting={formMethods.formState.isSubmitting}
+            isDirty={formMethods.formState.isDirty}
+          />
+        </VStack>
+      </RhfForm>
+    </>
   );
 };
 

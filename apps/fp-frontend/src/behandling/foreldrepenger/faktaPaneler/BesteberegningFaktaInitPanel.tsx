@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -20,7 +18,7 @@ interface Props {
 }
 
 export const BesteberegningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.BESTEBEREGNING, AKSJONSPUNKT_KODER);
   const { behandling } = useBehandlingDataContext();
 
   const api = getBehandlingApi(behandling);
@@ -31,12 +29,7 @@ export const BesteberegningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: 
       : false;
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.BESTEBEREGNING}
-      faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Besteberegning' })}
-      skalPanelVisesIMeny={skalPanelVisesIMeny}
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny={skalPanelVisesIMeny}>
       {beregningsgrunnlag ? (
         <BesteberegningFaktaIndex
           arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId}

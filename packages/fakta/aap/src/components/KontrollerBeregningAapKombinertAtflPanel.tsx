@@ -5,7 +5,12 @@ import { BodyShort, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktBoks, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import {
+  type FaktaBegrunnelseFormValues,
+  FaktaBegrunnelseTextField,
+  FaktaPanelTittel,
+  FaktaSubmitButton,
+} from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { ManuellKontrollAapKombinertAtflAP } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -32,6 +37,7 @@ export const KontrollerBeregningAapKombinertAtflPanel = ({ aksjonspunkt }: Props
 
   return (
     <VStack gap="space-16">
+      <FaktaPanelTittel visuallyHidden />
       {aksjonspunkt.status === 'OPPR' && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="Arbeidsavklaringspenger.Aksjonspunkt.HelpText" />

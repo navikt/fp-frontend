@@ -6,7 +6,7 @@ import { Button, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import type { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -68,6 +68,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
 
   return (
     <VStack gap="space-24">
+      <FaktaPanelTittel />
       {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst" />

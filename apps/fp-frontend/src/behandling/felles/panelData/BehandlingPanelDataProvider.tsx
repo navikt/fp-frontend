@@ -1,5 +1,6 @@
 import { type ReactElement } from 'react';
 
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak, Vilkår } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { PanelDataProvider } from '@navikt/fp-utils';
@@ -22,6 +23,7 @@ export type FellesPanelData<AP extends AksjonspunktData, T extends Behandling = 
   isReadOnly: boolean;
   isSubmittable: boolean;
   submitCallback: (aksjonspunkter: AP) => Promise<void>;
+  faktaPanelKode?: FaktaPanelCode;
 };
 
 interface Props<AP extends AksjonspunktData, T extends Behandling> {
@@ -44,6 +46,7 @@ export const BehandlingPanelDataProvider = <AP extends AksjonspunktData, T exten
     isReadOnly={panelData.isReadOnly}
     isSubmittable={panelData.isSubmittable}
     submitCallback={panelData.submitCallback}
+    faktaPanelKode={panelData.faktaPanelKode}
   >
     {children}
   </PanelDataProvider>

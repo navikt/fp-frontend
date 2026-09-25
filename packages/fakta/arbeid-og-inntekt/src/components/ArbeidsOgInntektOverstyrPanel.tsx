@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, Heading, HStack, Spacer, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, HStack, Spacer, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type { Aksjonspunkt, ArbeidOgInntektsmelding, BehandlingFpSak, ManueltArbeidsforhold } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
@@ -65,9 +66,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   return (
     <VStack gap="space-32">
       <HStack gap="space-16">
-        <Heading size="small" level="3">
-          <FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" />
-        </Heading>
+        <FaktaPanelTittel />
         {erOverstyrer && erAksjonspunktÅpent && !readOnly && <OverstyringKnapp onClick={toggleOverstyring} />}
         <Spacer />
         <BodyShort size="small">
