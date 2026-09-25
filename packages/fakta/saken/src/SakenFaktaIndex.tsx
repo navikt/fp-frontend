@@ -2,7 +2,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type { OpptjeningIUtlandDokStatusDto, Ytelsefordeling } from '@navikt/fp-types';
 
 import { SakenFaktaPanel } from './components/SakenFaktaPanel';
@@ -19,7 +18,6 @@ const intl = createIntl(messages);
 
 export const SakenFaktaIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <FaktaPanelTittel />
     <SakenFaktaPanel {...props} />
   </RawIntlProvider>
 );

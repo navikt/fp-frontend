@@ -8,6 +8,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import {
   type FaktaBegrunnelseFormValues,
   FaktaBegrunnelseTextField,
+  FaktaPanelTittel,
   FaktaSubmitButton,
   PersonopplysningerForFamilie,
 } from '@navikt/fp-fakta-felles';
@@ -45,6 +46,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling }: Props) => {
 
   return (
     <VStack gap="space-32">
+      <FaktaPanelTittel />
       {!isReadOnly && harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="OmsorgInfoPanel.VurderOmsorg" />

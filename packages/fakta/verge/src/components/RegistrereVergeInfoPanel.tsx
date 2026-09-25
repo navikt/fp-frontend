@@ -5,7 +5,12 @@ import { VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktBoks, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import {
+  type FaktaBegrunnelseFormValues,
+  FaktaBegrunnelseTextField,
+  FaktaPanelTittel,
+  FaktaSubmitButton,
+} from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import type { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -52,6 +57,7 @@ export const RegistrereVergeInfoPanel = ({ verge, alleKodeverk }: Props) => {
 
   return (
     <VStack gap="space-20">
+      <FaktaPanelTittel />
       {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="RegistrereVergeInfoPanel.AksjonspunktTekst" />

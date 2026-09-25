@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Box, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -63,6 +64,7 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOversty
   const harUløsteAksjonspunkter = opprettetRettAPUtenResultat || opprettetAleneomsorgAPUtenResultat;
   return (
     <VStack gap="space-24">
+      <FaktaPanelTittel />
       {!isReadOnly && harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           {harAleneomsorgAp && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderOmAleneomsorg" />}

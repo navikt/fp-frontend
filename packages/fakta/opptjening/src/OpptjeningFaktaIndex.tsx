@@ -2,7 +2,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningFaktaPanel } from './components/OpptjeningFaktaPanel';
@@ -22,7 +21,6 @@ export const OpptjeningFaktaIndex = ({ opptjening, arbeidsgiverOpplysningerPerId
   const ferdiglignetNæring = opptjening?.ferdiglignetNæring ?? [];
   return (
     <RawIntlProvider value={intl}>
-      <FaktaPanelTittel />
       <OpptjeningFaktaPanel
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         opptjeningAktiviteter={opptjeningAktiviteter}

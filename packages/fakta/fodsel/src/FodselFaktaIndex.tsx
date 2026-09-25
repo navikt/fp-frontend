@@ -2,7 +2,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type { Fødsel } from '@navikt/fp-types';
 import type { DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
 
@@ -19,7 +18,6 @@ interface Props {
 
 export const FodselFaktaIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <FaktaPanelTittel />
     <FodselInfoPanel {...props} />
   </RawIntlProvider>
 );

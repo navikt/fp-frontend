@@ -11,7 +11,7 @@ interface Props {
  * lokalisert fra {@link BehandlingPanelDataProvider} via panel-konteksten,
  * så panelet trenger ikke eget i18n for dette.
  */
-export const FaktaPanelTittel = ({ visuallyHidden = true }: Props) => {
+export const FaktaPanelTittel = ({ visuallyHidden = false }: Props) => {
   const { panelTittel } = usePanelDataContext();
 
   return (

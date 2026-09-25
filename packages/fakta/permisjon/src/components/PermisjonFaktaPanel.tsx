@@ -6,7 +6,12 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaPanelTittel, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import {
+  type FaktaBegrunnelseFormValues,
+  FaktaBegrunnelseTextField,
+  FaktaPanelTittel,
+  FaktaSubmitButton,
+} from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
@@ -65,7 +70,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
 
   return (
     <VStack gap="space-32">
-      <FaktaPanelTittel visuallyHidden={false} />
+      <FaktaPanelTittel />
       <BodyShort size="small">
         <FormattedMessage
           id="PermisjonFaktaPanel.Skjaringstidspunkt"

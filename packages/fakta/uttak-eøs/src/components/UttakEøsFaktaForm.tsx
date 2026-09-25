@@ -8,7 +8,12 @@ import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { sortPeriodsByFom } from '@navikt/ft-utils';
 
-import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaPanelTittel, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import {
+  type FaktaBegrunnelseFormValues,
+  FaktaBegrunnelseTextField,
+  FaktaPanelTittel,
+  FaktaSubmitButton,
+} from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';

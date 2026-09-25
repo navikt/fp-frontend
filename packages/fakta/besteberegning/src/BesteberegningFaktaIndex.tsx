@@ -2,7 +2,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 
 import { BesteberegningPanel } from './components/BesteberegningPanel';
@@ -18,7 +17,6 @@ interface Props {
 
 export const BesteberegningFaktaIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <FaktaPanelTittel />
     <BesteberegningPanel {...props} />
   </RawIntlProvider>
 );

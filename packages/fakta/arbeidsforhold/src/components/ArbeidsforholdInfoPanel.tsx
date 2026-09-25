@@ -4,6 +4,7 @@ import { Heading, VStack } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type {
   ArbeidOgInntektsmelding,
   Arbeidsforhold,
@@ -27,6 +28,7 @@ export const ArbeidsforholdInfoPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysnin
 
   return (
     <VStack gap="space-16">
+      <FaktaPanelTittel />
       <Heading size="small" level="3">
         <FormattedMessage id="ArbeidsforholdInfoPanel.ArbeidsforholdHeader" />
       </Heading>

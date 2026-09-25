@@ -1,6 +1,7 @@
 import { VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -28,7 +29,7 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
     ytelsesspesifiktGrunnlag?.ytelsetype === 'FP' ? ytelsesspesifiktGrunnlag.besteberegninggrunnlag : undefined;
 
   if (!besteberegninggrunnlag) {
-    return null;
+    return <FaktaPanelTittel />;
   }
 
   const førstePeriode = beregningsgrunnlagPeriode[0];
@@ -39,6 +40,7 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
   );
   return (
     <VStack gap="space-16">
+      <FaktaPanelTittel />
       {!!besteberegningAP && <KontrollerBesteberegningPanel aksjonspunkt={besteberegningAP} />}
       {førstePeriode && (
         <BorderBox>

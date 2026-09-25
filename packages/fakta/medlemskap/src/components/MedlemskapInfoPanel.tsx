@@ -1,5 +1,6 @@
 import { VStack } from '@navikt/ds-react';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Medlemskap } from '@navikt/fp-types';
 import { harAksjonspunkt, usePanelDataContext } from '@navikt/fp-utils';
@@ -32,6 +33,7 @@ export const MedlemskapInfoPanel = ({ medlemskap }: Props) => {
 
   return (
     <VStack gap="space-24">
+      <FaktaPanelTittel />
       {harÅpentAksjonspunkt && <AksjonspunktHelpText aksjonspunkter={aksjonspunkterForPanel} medlemskap={medlemskap} />}
 
       {medlemskap.legacyManuellBehandling && !medlemskap.manuellBehandlingResultat && (
