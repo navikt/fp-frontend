@@ -14,6 +14,7 @@ export const fagsakRoutePath = '/fagsak/:saksnummer//*';
 export const aktoerRoutePath = '/aktoer/:aktoerId';
 export const behandlingerRoutePath = '/behandling//*';
 export const behandlingRoutePath = '/:behandlingUuid/';
+export const behandlingFullRoutePath = '/fagsak/:saksnummer/behandling/:behandlingUuid/*';
 
 export const pathToFagsak = (saksnummer: string): string => `/fagsak/${saksnummer}/`;
 export const pathToBehandlinger = (saksnummer: string): string => `/fagsak/${saksnummer}/behandling/`;

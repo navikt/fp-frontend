@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { type Location, Navigate, Route, Routes, useLocation, useParams } from 'react-router';
+import { type Location, Navigate, Route, Routes, useLocation, useMatch, useParams } from 'react-router';
 
 import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 
@@ -10,6 +10,7 @@ import type { AnnenPartBehandling, Behandling, Fagsak } from '@navikt/fp-types';
 
 import {
   behandlingerRoutePath,
+  behandlingFullRoutePath,
   erBehandlingValgt,
   erUrlUnderBehandling,
   pathToAnnenPart,
@@ -59,19 +60,10 @@ const Visittkort = ({ fagsak, erTilbakekreving }: { fagsak: Fagsak; erTilbakekre
  * Er rot for for fagsakdelen av hovedvinduet, og har ansvar å legge valgt saksnummer fra URL-en i staten.
  */
 export const FagsakIndex = () => {
-  const { isRequestPending } = useRequestPendingContext();
-
   const params = useParams<{ saksnummer: string }>();
   const selectedSaksnummer = params['saksnummer']!;
-
-  const [behandlingUuidFraUrl, setBehandlingUuidFraUrl] = useState<string | undefined>();
-  const [behandling, setBehandling] = useState<Behandling>();
-
-  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuidFraUrl, behandling?.versjon);
-  const fagsakBehandling = fagsakData?.getBehandling(behandlingUuidFraUrl);
-  const erTilbakekreving = fagsakBehandling?.type === 'BT-007' || fagsakBehandling?.type === 'BT-009';
-
-  const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, setBehandling, behandlingUuidFraUrl);
+  const behandlingMatch = useMatch(behandlingFullRoutePath);
+  const behandlingUuid = behandlingMatch?.params.behandlingUuid;
   const [visSideMeny, setVisSideMeny] = useState(true);
   const [visUtvidetBehandlingDetaljer, setVisUtvidetBehandlingDetaljer] = useState(false);
 
@@ -93,15 +85,66 @@ export const FagsakIndex = () => {
     }
   });
 
+  return (
+    <FagsakInnhold
+      key={`${selectedSaksnummer}/${behandlingUuid ?? ''}`}
+      selectedSaksnummer={selectedSaksnummer}
+      behandlingUuid={behandlingUuid}
+      visSideMeny={visSideMeny}
+      toggleSideMeny={toggleSideMeny}
+      visUtvidetBehandlingDetaljer={visUtvidetBehandlingDetaljer}
+      toggleVisUtvidetBehandlingDetaljer={toggleVisUtvidetBehandlingDetaljer}
+    />
+  );
+};
+
+interface FagsakInnholdProps {
+  selectedSaksnummer: string;
+  behandlingUuid?: string;
+  visSideMeny: boolean;
+  toggleSideMeny: () => void;
+  visUtvidetBehandlingDetaljer: boolean;
+  toggleVisUtvidetBehandlingDetaljer: () => void;
+}
+
+const FagsakInnhold = ({
+  selectedSaksnummer,
+  behandlingUuid,
+  visSideMeny,
+  toggleSideMeny,
+  visUtvidetBehandlingDetaljer,
+  toggleVisUtvidetBehandlingDetaljer,
+}: FagsakInnholdProps) => {
+  const { isRequestPending } = useRequestPendingContext();
+  const [behandling, setBehandling] = useState<Behandling>();
+  const oppdaterBehandling = useCallback(
+    (oppdatertBehandling: Behandling | undefined) => {
+      if (oppdatertBehandling && oppdatertBehandling.uuid !== behandlingUuid) {
+        return;
+      }
+      setBehandling(gjeldende =>
+        gjeldende && oppdatertBehandling && gjeldende.versjon > oppdatertBehandling.versjon
+          ? gjeldende
+          : oppdatertBehandling,
+      );
+    },
+    [behandlingUuid],
+  );
+
+  const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuid, behandling?.versjon);
+  const fagsakBehandling = fagsakData?.getBehandling(behandlingUuid);
+  const erTilbakekreving = fagsakBehandling?.type === 'BT-007' || fagsakBehandling?.type === 'BT-009';
+  const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, oppdaterBehandling, behandlingUuid);
+
   useEffect(() => {
-    if (behandlingUuidFraUrl && fagsakBehandling) {
+    if (behandlingUuid && fagsakBehandling) {
       hentOgSettBehandling();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- hent behandling berre ved endra URL-uuid; hentOgSettBehandling gjev gjentekne henteforsøk
-  }, [behandlingUuidFraUrl, fagsakBehandling?.uuid]);
+  }, [behandlingUuid, fagsakBehandling?.uuid]);
 
   const location = useLocation();
-  const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuidFraUrl);
+  const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuid);
 
   if (!fagsakData) {
     if (!harHentetFagsak) {
@@ -127,9 +170,8 @@ export const FagsakIndex = () => {
                 <BehandlingerIndex
                   fagsakData={fagsakData}
                   behandling={behandling}
-                  setBehandling={setBehandling}
+                  setBehandling={oppdaterBehandling}
                   hentOgSettBehandling={hentOgSettBehandling}
-                  setBehandlingUuidFraUrl={setBehandlingUuidFraUrl}
                 />
               }
             />
@@ -140,8 +182,8 @@ export const FagsakIndex = () => {
         profileAndNavigationContent={
           <FagsakProfileIndex
             fagsakData={fagsakData}
-            behandlingUuid={behandlingUuidFraUrl}
-            setBehandling={setBehandling}
+            behandlingUuid={behandlingUuid}
+            setBehandling={oppdaterBehandling}
             hentOgSettBehandling={hentOgSettBehandling}
             behandling={behandling}
             visSideMeny={visSideMeny}
@@ -152,7 +194,7 @@ export const FagsakIndex = () => {
         supportContent={
           <BehandlingSupportIndex
             fagsakData={fagsakData}
-            behandlingUuid={behandlingUuidFraUrl}
+            behandlingUuid={behandlingUuid}
             behandlingVersjon={behandling?.versjon}
             hentOgSettBehandling={hentOgSettBehandling}
             toggleVisUtvidetBehandlingDetaljer={toggleVisUtvidetBehandlingDetaljer}

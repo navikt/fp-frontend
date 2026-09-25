@@ -12,16 +12,9 @@ interface Props {
   setBehandling: (behandling: Behandling) => void;
   hentOgSettBehandling: () => void;
   behandling?: Behandling;
-  setBehandlingUuidFraUrl: (uuid: string) => void;
 }
 
-export const BehandlingerIndex = ({
-  fagsakData,
-  setBehandling,
-  behandling,
-  hentOgSettBehandling,
-  setBehandlingUuidFraUrl,
-}: Props) => (
+export const BehandlingerIndex = ({ fagsakData, setBehandling, behandling, hentOgSettBehandling }: Props) => (
   <Routes>
     <Route
       path={behandlingRoutePath}
@@ -31,7 +24,6 @@ export const BehandlingerIndex = ({
           behandling={behandling}
           setBehandling={setBehandling}
           hentOgSettBehandling={hentOgSettBehandling}
-          setBehandlingUuidFraUrl={setBehandlingUuidFraUrl}
         />
       }
     />
