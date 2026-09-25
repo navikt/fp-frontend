@@ -3,8 +3,8 @@ import type { IntlShape } from 'react-intl';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 /**
- * Mappar faktapanel-koden til i18n-nøkkelen for panelets tittel/menynavn.
- * Slik slepp kvart enkelt panel å vite kva for ein konkret nøkkel det skal bruke.
+ * Mapper faktapanel-koden til i18n-nøkkelen for panelets tittel/menynavn.
+ * Slik slipper hvert enkelt panel å vite hvilken konkret nøkkel det skal bruke.
  */
 const FAKTA_PANEL_TITTEL_MESSAGE_ID: Partial<Record<FaktaPanelCode, string>> = {
   [FaktaPanelCode.ARBEIDSAVKLARINGSPENGER]: 'FaktaInitPanel.Title.Arbeidsavklaringspenger',
@@ -32,9 +32,9 @@ const FAKTA_PANEL_TITTEL_MESSAGE_ID: Partial<Record<FaktaPanelCode, string>> = {
 };
 
 /**
- * Hentar ut menyteksten/kortnamnet til eit faktapanel basert på panelkoden.
- * Same kode blir brukt både til å slå opp aksjonspunkt/vilkår for panelet og
- * til å hente ut namnet, slik at kvar wrapper berre treng kjenne til éin ting.
+ * Henter ut menyteksten/kortnavnet til et faktapanel basert på panelkoden.
+ * Samme kode blir brukt både til å slå opp aksjonspunkt/vilkår for panelet og
+ * til å hente ut navnet, slik at hver wrapper bare trenger å kjenne til én ting.
  */
 export const hentFaktaPanelMenyTekst = (faktaPanelKode: FaktaPanelCode, intl: IntlShape): string => {
   const messageId = FAKTA_PANEL_TITTEL_MESSAGE_ID[faktaPanelKode];
