@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
@@ -96,16 +96,21 @@ const utledNavn = (
 interface Props {
   stønadskontoer?: Stonadskonto[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  valgtKontoType?: StønadskontoType;
+  setValgtKontoType: (kontoType?: StønadskontoType) => void;
 }
 
-export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpplysningerPerId }: Props) => {
+export const DisponibleStonadskontoerPanel = ({
+  stønadskontoer,
+  arbeidsgiverOpplysningerPerId,
+  valgtKontoType,
+  setValgtKontoType,
+}: Props) => {
   const intl = useIntl();
-  const [valgtKonto, setValgtKonto] = useState<Stonadskonto>();
+  const valgtKonto = stønadskontoer?.find(konto => konto.stonadskontotype === valgtKontoType);
 
   const visDagerForKonto = (stonadskonto: Stonadskonto): void => {
-    setValgtKonto(forrigeKontoType =>
-      forrigeKontoType?.stonadskontotype === stonadskonto.stonadskontotype ? undefined : stonadskonto,
-    );
+    setValgtKontoType(valgtKontoType === stonadskonto.stonadskontotype ? undefined : stonadskonto.stonadskontotype);
   };
 
   const stønadskontoerMedNavn = stønadskontoer ? Object.values(stønadskontoer).sort(sorterKontoer) : [];

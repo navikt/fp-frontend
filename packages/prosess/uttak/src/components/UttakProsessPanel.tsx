@@ -1,4 +1,4 @@
-import { type ReactElement, useEffect, useMemo, useState } from 'react';
+import { type ReactElement, useEffect, useMemo, useRef, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
@@ -210,14 +210,25 @@ export const UttakProsessPanel = ({
   const { fagsak, behandling, submitCallback, alleKodeverk, isReadOnly, aksjonspunkterForPanel } =
     usePanelDataContext<UttakAp[]>();
 
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<PeriodeSoker[]>();
+  const harMellomlagredeEndringer =
+    mellomlagretFormData !== undefined && mellomlagretFormData !== uttaksresultat.perioderSøker;
+
   const [erOverstyrt, setErOverstyrt] = useState(false);
-  const [isDirty, setIsDirty] = useState(false);
+  const [isDirty, setIsDirty] = useState(harMellomlagredeEndringer);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [innsendingFeilet, setInnsendingFeilet] = useState(false);
+  const [saldoStatus, setSaldoStatus] = useState<'oppdatert' | 'venter' | 'feilet'>(
+    harMellomlagredeEndringer ? 'venter' : 'oppdatert',
+  );
+  const [saldoForespørsel, setSaldoForespørsel] = useState(() =>
+    harMellomlagredeEndringer ? { perioder: mellomlagretFormData, id: 0 } : undefined,
+  );
+  const sisteSaldoForespørselRef = useRef(0);
+  const [valgtKontoType, setValgtKontoType] = useState<StønadskontoType>();
   const toggleOverstyring = () => {
     setErOverstyrt(forrigeVerdi => !forrigeVerdi);
   };
-
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<PeriodeSoker[]>();
 
   const [perioder, setPerioder] = useState<PeriodeSoker[]>(mellomlagretFormData ?? uttaksresultat.perioderSøker);
 
@@ -246,9 +257,50 @@ export const UttakProsessPanel = ({
     }
   };
 
-  const bekreftAksjonspunkter = () => {
+  const bekreftAksjonspunkter = async () => {
+    if (saldoStatus !== 'oppdatert' || isSubmitting) {
+      return;
+    }
     setIsSubmitting(true);
-    void submitCallback(transformValues(perioder, aksjonspunkterForPanel));
+    setInnsendingFeilet(false);
+    try {
+      await submitCallback(transformValues(perioder, aksjonspunkterForPanel));
+    } catch {
+      setInnsendingFeilet(true);
+      setIsSubmitting(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!saldoForespørsel) {
+      return;
+    }
+    let erAktiv = true;
+    const hentSaldo = async () => {
+      try {
+        const oppdatertStønadskonto = await oppdaterStønadskontoer({
+          behandlingUuid: behandling.uuid,
+          perioder: saldoForespørsel.perioder,
+        });
+        if (erAktiv && saldoForespørsel.id === sisteSaldoForespørselRef.current) {
+          setStønadskonto(oppdatertStønadskonto);
+          setSaldoStatus('oppdatert');
+        }
+      } catch {
+        if (erAktiv && saldoForespørsel.id === sisteSaldoForespørselRef.current) {
+          setSaldoStatus('feilet');
+        }
+      }
+    };
+    void hentSaldo();
+    return () => {
+      erAktiv = false;
+    };
+  }, [saldoForespørsel, behandling.uuid, oppdaterStønadskontoer]);
+
+  const oppdaterSaldo = (nyePerioder: PeriodeSoker[]) => {
+    setSaldoStatus('venter');
+    setSaldoForespørsel({ perioder: nyePerioder, id: ++sisteSaldoForespørselRef.current });
   };
 
   const oppdaterPeriode = (oppdatertePerioder: PeriodeSoker[]) => {
@@ -257,17 +309,13 @@ export const UttakProsessPanel = ({
     setPerioder(nyePerioder);
     setIsDirty(true);
 
-    void oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder }).then(
-      oppdatertStønadskonto => {
-        setStønadskonto(oppdatertStønadskonto);
-        if (oppdatertePerioder.length === 2) {
-          const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0]?.fom);
-          setValgtPeriodeIndex(perioderAnnenpart.length + index);
-        } else {
-          visPeriode(perioderAnnenpart.concat(nyePerioder));
-        }
-      },
-    );
+    oppdaterSaldo(nyePerioder);
+    if (oppdatertePerioder.length === 2) {
+      const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0]?.fom);
+      setValgtPeriodeIndex(perioderAnnenpart.length + index);
+    } else {
+      visPeriode(perioderAnnenpart.concat(nyePerioder));
+    }
   };
 
   const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(erAksjonspunktÅpent);
@@ -289,7 +337,9 @@ export const UttakProsessPanel = ({
   }, [aksjonspunkterForPanel, perioder, valgtPeriodeIndex, isDirty]);
 
   const feilmeldinger =
-    !isDirty || valgtPeriodeIndex !== undefined ? [] : validerPerioder(perioder, stønadskonto, intl);
+    !isDirty || valgtPeriodeIndex !== undefined || saldoStatus !== 'oppdatert'
+      ? []
+      : validerPerioder(perioder, stønadskonto, intl);
 
   const harIngenEllerLukkedeAksjonspunkt =
     aksjonspunkterForPanel.filter(ap => ap.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER).length === 0 ||
@@ -312,10 +362,31 @@ export const UttakProsessPanel = ({
       {aksjonspunkterForPanel.length > 0 && harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>{hentApTekster(uttaksresultat, aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
-      <DisponibleStonadskontoerPanel
-        stønadskontoer={Object.values(stønadskonto.stønadskonti)}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      />
+      {saldoStatus === 'oppdatert' && (
+        <DisponibleStonadskontoerPanel
+          stønadskontoer={Object.values(stønadskonto.stønadskonti)}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          valgtKontoType={valgtKontoType}
+          setValgtKontoType={setValgtKontoType}
+        />
+      )}
+      {saldoStatus === 'venter' && (
+        <Alert size="small" variant="info">
+          <FormattedMessage id="UttakPanel.OppdatererSaldo" />
+        </Alert>
+      )}
+      {saldoStatus === 'feilet' && (
+        <VStack gap="space-8">
+          <Alert size="small" variant="error">
+            <FormattedMessage id="UttakPanel.SaldoFeilet" />
+          </Alert>
+          <div>
+            <Button size="small" variant="secondary" type="button" onClick={() => oppdaterSaldo(perioder)}>
+              <FormattedMessage id="UttakPanel.PrøvSaldoPåNytt" />
+            </Button>
+          </div>
+        </VStack>
+      )}
       <UttakTidslinjeIndex
         perioderSøker={perioder}
         perioderAnnenpart={perioderAnnenpart}
@@ -351,6 +422,11 @@ export const UttakProsessPanel = ({
       )}
       {((!harIngenEllerLukkedeAksjonspunkt && !isReadOnly) || erOverstyrt) && (
         <>
+          {innsendingFeilet && (
+            <Alert size="small" variant="error">
+              <FormattedMessage id="UttakPanel.InnsendingFeilet" />
+            </Alert>
+          )}
           {feilmeldinger.length > 0 && (
             <>
               {feilmeldinger.map(fm => (
@@ -364,7 +440,9 @@ export const UttakProsessPanel = ({
             <Button
               size="small"
               variant="primary"
-              disabled={feilmeldinger.length > 0 || isSubmitting || erBekreftKnappDisablet}
+              disabled={
+                feilmeldinger.length > 0 || isSubmitting || erBekreftKnappDisablet || saldoStatus !== 'oppdatert'
+              }
               loading={isSubmitting}
               onClick={bekreftAksjonspunkter}
               type="button"
