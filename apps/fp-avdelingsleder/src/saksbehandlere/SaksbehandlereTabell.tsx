@@ -72,7 +72,7 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
           <Table.Body>
             {sorterteSaksbehandlere.map(saksbehandler => (
               <Table.Row key={saksbehandler.brukerIdent}>
-                <Table.DataCell scope="row">{saksbehandler.navn}</Table.DataCell>
+                <Table.HeaderCell scope="row">{saksbehandler.navn}</Table.HeaderCell>
                 <Table.DataCell>{saksbehandler.brukerIdent}</Table.DataCell>
                 <Table.DataCell>{saksbehandler.ansattAvdeling}</Table.DataCell>
                 <Table.DataCell align="right">

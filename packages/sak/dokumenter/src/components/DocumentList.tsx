@@ -159,7 +159,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                 <Table.DataCell>
                   <KommunikasjonsretningIkon kommunikasjonsretning={document.kommunikasjonsretning} />
                 </Table.DataCell>
-                <Table.DataCell scope="row">
+                <Table.HeaderCell scope="row">
                   <HStack gap="space-4" wrap={false}>
                     {document.behandlingUuidList &&
                       behandlingUuid &&
@@ -177,7 +177,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                       dokumentTittel={document.tittel ?? undefined}
                     />
                   </HStack>
-                </Table.DataCell>
+                </Table.HeaderCell>
                 {visGjelderForKolonne && <Table.DataCell>{document.gjelderFor}</Table.DataCell>}
                 <Table.DataCell>
                   {document.tidspunkt ? (

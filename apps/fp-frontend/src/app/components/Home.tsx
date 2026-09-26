@@ -72,7 +72,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
   });
 
   return (
-    <div className={styles['content']} style={{ margin: `${headerHeight}px auto 0` }}>
+    <main className={styles['content']} style={{ margin: `${headerHeight}px auto 0` }}>
       <Routes>
         <Route
           path="/"
@@ -110,6 +110,6 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
         <Route path={aktoerRoutePath} element={<AktørIndex />} />
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
       </Routes>
-    </div>
+    </main>
   );
 };

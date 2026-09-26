@@ -67,7 +67,7 @@ describe('UttakFaktaIndex', () => {
   it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
     render(<VisUttaksperiodeUtenAksjonspunkt />);
 
-    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
 
     expect(screen.getByTitle('Vis mer')).toBeInTheDocument();
     expect(screen.queryByTitle('Overstyr')).not.toBeInTheDocument();
@@ -78,7 +78,7 @@ describe('UttakFaktaIndex', () => {
 
     render(<VisUttaksperiodeUtenAksjonspunktKanOverstyre submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
 
     expect(screen.getByTitle('Vis mer')).toBeInTheDocument();
 
@@ -133,7 +133,7 @@ describe('UttakFaktaIndex', () => {
 
     render(<VisUttaksperiodeMedAksjonspunkt submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
 
     expect(
       screen.getByText('Første periode starter ikke på avklart startdato 31.01.2022. Legg inn periode fra startdato'),
@@ -211,7 +211,7 @@ describe('UttakFaktaIndex', () => {
 
     render(<VisAksjonspunktDerIngenPerioderFinnes submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
 
     expect(
       screen.getByText('Ingen perioder å vurdere. Vurder om behandlingen er feilopprettet og kan henlegges'),
@@ -264,7 +264,7 @@ describe('UttakFaktaIndex', () => {
 
     render(<VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
 
     expect(screen.getByText('Gradering av ukjent arbeidsforhold. Vurder gradering')).toBeInTheDocument();
 
@@ -318,7 +318,7 @@ describe('UttakFaktaIndex', () => {
 
     render(<VisUttaksperiodeMedAksjonspunkt submitCallback={lagre} />);
 
-    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
 
     await userEvent.click(screen.getAllByTitle('Vis mer')[0]!);
 
@@ -351,7 +351,7 @@ describe('UttakFaktaIndex', () => {
   it('skal vise ulike felter for ulike periodetyper', async () => {
     render(<VisUtsettelseperiodeMedAksjonspunkt />);
 
-    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Vis mer'));
 
@@ -407,7 +407,7 @@ describe('UttakFaktaIndex', () => {
   it('skal vise periode der aksjonspunkt er løst og behandlingen er avsluttet', async () => {
     render(<VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet />);
 
-    expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
+    expect(await screen.findByText('Periode')).toBeInTheDocument();
 
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
 

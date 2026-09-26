@@ -1,4 +1,7 @@
 import { type ReactElement } from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import { Heading, VStack } from '@navikt/ds-react';
 
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Behandling, BehandlingFpSak } from '@navikt/fp-types';
@@ -33,7 +36,15 @@ export const FaktaDefaultInitPanel = <T extends Behandling = BehandlingFpSak>({
   return (
     <MellomlagretFormDataProvider behandling={standardPanelProps.behandling}>
       {skalVisePanel ? (
-        <BehandlingPanelDataProvider panelData={standardPanelProps}>{children}</BehandlingPanelDataProvider>
+        <VStack gap="space-8">
+          <Heading level="2" size="small">
+            <FormattedMessage
+              id="FaktaDefaultInitPanel.Tittel"
+              values={{ tittel: faktaPanelMenyTekst.toLocaleLowerCase() }}
+            />
+          </Heading>
+          <BehandlingPanelDataProvider panelData={standardPanelProps}>{children}</BehandlingPanelDataProvider>
+        </VStack>
       ) : null}
     </MellomlagretFormDataProvider>
   );

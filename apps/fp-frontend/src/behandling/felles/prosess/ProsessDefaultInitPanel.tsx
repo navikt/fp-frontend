@@ -1,5 +1,7 @@
 import { type ReactElement } from 'react';
 
+import { Heading } from '@navikt/ds-react';
+
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { Behandling, BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
 import { MellomlagretFormDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
@@ -66,9 +68,14 @@ const ProsessPanel = <T extends Behandling>({
     <MellomlagretFormDataProvider behandling={behandling}>
       <ProsessPanelWrapper erPanelValgt={erPanelValgt} harÅpentAksjonspunkt={harÅpentAksjonspunkt} status={status}>
         {skalVisePanel ? (
-          <BehandlingPanelDataProvider panelData={{ ...standardPanelProps, harÅpentAksjonspunkt }}>
-            {children}
-          </BehandlingPanelDataProvider>
+          <>
+            <Heading level="2" size="small" visuallyHidden>
+              {prosessPanelMenyTekst}
+            </Heading>
+            <BehandlingPanelDataProvider panelData={{ ...standardPanelProps, harÅpentAksjonspunkt }}>
+              {children}
+            </BehandlingPanelDataProvider>
+          </>
         ) : null}
       </ProsessPanelWrapper>
     </MellomlagretFormDataProvider>

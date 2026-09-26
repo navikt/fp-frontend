@@ -23,6 +23,7 @@ import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';
 import { BEHANDLING_SNARVEG_IDER, krevSideMeny } from '../snarveger/snarvegDefinisjoner';
 import { useRegistrerFørDispatch, useRegistrerSnarveg } from '../snarveger/SnarvegerContext';
 import { FagsakGrid } from './components/FagsakGrid';
+import { FagsakSidetittel } from './FagsakSidetittel';
 import { useHentFagsak } from './useHentFagsak';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string =>
@@ -118,6 +119,7 @@ export const FagsakIndex = () => {
 
   return (
     <>
+      <FagsakSidetittel fagsak={fagsak} behandlingType={behandling?.type ?? fagsakBehandling?.type} />
       <FagsakGrid
         behandlingContent={
           <Routes>

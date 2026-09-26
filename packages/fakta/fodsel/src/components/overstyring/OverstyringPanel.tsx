@@ -1,6 +1,6 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 
-import { Heading, HStack } from '@navikt/ds-react';
+import { HStack } from '@navikt/ds-react';
 import { AksjonspunktBoks, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -24,10 +24,7 @@ export const OverstyringPanel = ({ gjeldende }: Props) => {
   return (
     <>
       {kanOverstyreAccess.isEnabled && (
-        <HStack gap="space-16">
-          <Heading size="small">
-            <FormattedMessage id="OverstyringPanel.Tittel" />
-          </Heading>
+        <HStack justify="end">
           <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
         </HStack>
       )}

@@ -69,7 +69,7 @@ const GruppeTabell = ({ gruppe, definisjoner }: { gruppe: SnarvegGruppe; definis
 
   return (
     <VStack gap="space-8">
-      <Heading id={headingId} size="small" level="3">
+      <Heading id={headingId} size="small" level="2">
         <GruppeTittel gruppe={gruppe} />
       </Heading>
       <Table size="small" aria-labelledby={headingId}>
