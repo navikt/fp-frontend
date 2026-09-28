@@ -17,11 +17,11 @@ interface Props {
  */
 export const Home = ({ headerHeight, initData }: Props) => {
   return (
-    <div style={{ margin: `${headerHeight}px auto 0` }}>
+    <main style={{ margin: `${headerHeight}px auto 0` }}>
       <Routes>
         <Route path="/" element={<AvdelingslederIndex initData={initData} />} />
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
       </Routes>
-    </div>
+    </main>
   );
 };

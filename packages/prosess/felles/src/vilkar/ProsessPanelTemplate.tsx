@@ -43,8 +43,18 @@ export const ProsessPanelTemplate = ({
   <HStack gap="space-8">
     {originalErVilkårOk !== undefined && (
       <>
-        {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles['godkjentImage']} />}
-        {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles['avslattImage']} />}
+        {originalErVilkårOk && (
+          <CheckmarkCircleFillIcon
+            title={intl.formatMessage({ id: 'ProsessPanelTemplate.ErOppfylt' })}
+            className={styles['godkjentImage']}
+          />
+        )}
+        {!originalErVilkårOk && (
+          <XMarkOctagonFillIcon
+            title={intl.formatMessage({ id: 'ProsessPanelTemplate.ErIkkeOppfylt' })}
+            className={styles['avslattImage']}
+          />
+        )}
       </>
     )}
     <VStack gap="space-16">
