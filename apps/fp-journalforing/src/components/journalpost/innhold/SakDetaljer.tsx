@@ -69,7 +69,7 @@ export const SakDetaljer = ({ sak }: Props) => {
         rel="noreferrer"
         variant="tertiary"
         title={intl.formatMessage({ id: 'DokumentDetaljer.ExternalLink' })}
-        icon={<ExternalLinkIcon className={styles['externalLinkIcon']} />}
+        icon={<ExternalLinkIcon aria-hidden className={styles['externalLinkIcon']} />}
       />
     </HStack>
   );

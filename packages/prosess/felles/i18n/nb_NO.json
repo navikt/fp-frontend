@@ -8,6 +8,8 @@
 
   "ProsessPanelTemplate.ErOppfylt": "Vilkåret er oppfylt",
   "ProsessPanelTemplate.ErIkkeOppfylt": "Vilkåret er avslått",
+  "ProsessPanelTemplate.IkonOppfylt": "Vilkår oppfylt",
+  "ProsessPanelTemplate.IkonAvslått": "Vilkår avslått",
   "ProsessPanelTemplate.IkkeBehandlet": "Ikke behandlet",
 
   "VilkarResultPicker.Arsak": "Avslagsårsak",
