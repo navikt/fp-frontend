@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { HGrid, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { FaktaFraFReg } from '@navikt/fp-fakta-felles';
+import { FaktaFraFReg, FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Fødsel } from '@navikt/fp-types';
 import type { DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
@@ -31,8 +31,10 @@ export const FodselInfoPanel = ({ fødsel, terminbekreftelseDokument }: Props) =
 
   return (
     <VStack gap="space-16">
-      {(!(terminbekreftelseAp || manglendeFødselAp) || overstyringAP) && (
+      {!(terminbekreftelseAp || manglendeFødselAp) || overstyringAP ? (
         <OverstyringPanel gjeldende={fødsel.gjeldende} />
+      ) : (
+        <FaktaPanelTittel />
       )}
 
       <AksjonspunktHelpTextHTML>

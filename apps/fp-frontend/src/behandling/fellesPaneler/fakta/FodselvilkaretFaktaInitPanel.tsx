@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -22,11 +20,9 @@ const AKSJONSPUNKT_KODER = [
 ];
 
 export const FodselvilkaretFaktaInitPanel = () => {
-  const intl = useIntl();
-
   const { behandling, fagsak, rettigheter } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.FODSELSVILKARET, AKSJONSPUNKT_KODER);
 
   const api = getBehandlingApi(behandling);
   const fagsakApi = useFagsakApi();
@@ -49,8 +45,6 @@ export const FodselvilkaretFaktaInitPanel = () => {
     >
       <FaktaDefaultInitPanel
         standardPanelProps={standardPanelProps}
-        faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
-        faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Fodsel' })}
         skalPanelVisesIMeny={harLenke(behandling, 'FAKTA_FØDSEL')}
       >
         {faktafødsel ? (

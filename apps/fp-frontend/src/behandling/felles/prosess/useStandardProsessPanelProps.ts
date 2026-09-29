@@ -1,3 +1,4 @@
+import type { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, Behandling, BehandlingFpSak, Fagsak, Vilkår, VilkårUtfallType } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
@@ -22,6 +23,7 @@ export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFp
   aksjonspunktKoder: Aksjonspunkt['definisjon'][] = [],
   vilkårKoder: Aksjonspunkt['vilkarType'][] = [],
   lagringSideEffekter?: (aksjonspunkter: ProsessAksjonspunkt[]) => () => void,
+  panelKode?: ProsessStegCode,
 ): StandardProsessPanelProps<T> => {
   const {
     behandling,
@@ -77,6 +79,7 @@ export const useStandardProsessPanelProps = <T extends Behandling = BehandlingFp
     harÅpentAksjonspunkt,
     submitCallback,
     status,
+    panelKode,
   };
 };
 
