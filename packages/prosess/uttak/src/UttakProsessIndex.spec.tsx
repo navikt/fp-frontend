@@ -35,6 +35,31 @@ const GjenåpnetUttak = composeStory(
   stories.default,
 );
 
+const UttakMedTomSaldoForEttArbeidsforhold = composeStory(
+  {
+    ...stories.AksjonspunktDerValgtStønadskontoIkkeFinnes,
+    render: args => (
+      <UttakProsessIndex
+        {...args}
+        uttaksresultat={{
+          ...args.uttaksresultat,
+          perioderSøker: args.uttaksresultat.perioderSøker.map((periode, index) =>
+            index === 1
+              ? {
+                  ...periode,
+                  manuellBehandlingÅrsak: '5001',
+                  periodeType: 'MØDREKVOTE',
+                  periodeResultatType: 'MANUELL_BEHANDLING',
+                }
+              : periode,
+          ),
+        }}
+      />
+    ),
+  },
+  stories.default,
+);
+
 const forventetInnsendingEtterNyVurdering = [
   expect.objectContaining({
     perioder: [
@@ -102,6 +127,71 @@ describe('UttakProsessIndex', () => {
     expect(screen.getByRole('tab', { name: /Mødrekvote/ })).toHaveAttribute('aria-selected', 'true');
     expect(screen.getByRole('cell', { name: '6/0' })).toBeInTheDocument();
     expect(screen.queryByRole('cell', { name: '7/0' })).not.toBeInTheDocument();
+  });
+
+  it('skal skjule saldohjelp frem til siste saldo er hentet uten å skjule annen hjelp eller nullstille skjemaet', async () => {
+    const første = Promise.withResolvers<UttakStonadskontoer>();
+    const nyttForsøk = Promise.withResolvers<UttakStonadskontoer>();
+    const oppdaterStønadskontoer = vi.fn().mockReturnValueOnce(første.promise).mockReturnValueOnce(nyttForsøk.promise);
+    const lagSaldo = (arbeidsgiverMedTomSaldo: string): UttakStonadskontoer => ({
+      ...stories.uttakStonadskontoer,
+      stønadskonti: {
+        ...stories.uttakStonadskontoer.stønadskonti,
+        MØDREKVOTE: {
+          ...stories.uttakStonadskontoer.stønadskonti.MØDREKVOTE,
+          aktivitetSaldoDtoList: ['910909088', '994884174'].map(arbeidsgiverReferanse => ({
+            aktivitetIdentifikator: { uttakArbeidType: 'ORDINÆRT_ARBEID', arbeidsgiverReferanse },
+            saldo: arbeidsgiverReferanse === arbeidsgiverMedTomSaldo ? 0 : 35,
+          })),
+        },
+      },
+    });
+    const annenHjelp =
+      'Ikke gyldig grunn for uttak av denne stønadskontoen. Vurder bruk av annen stønadskonto eller avslå perioden.';
+
+    render(
+      <UttakMedTomSaldoForEttArbeidsforhold
+        uttakStonadskontoer={lagSaldo('910909088')}
+        oppdaterStønadskontoer={oppdaterStønadskontoer}
+      />,
+    );
+
+    expect(screen.getByText(annenHjelp)).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Neste' }));
+    expect(screen.getByText(/BEDRIFT AS er tom for stønadsdager/)).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Forrige' }));
+
+    await oppdaterManuellPeriode();
+    expect(screen.getByText('Oppdaterer saldo. Vent før du bekrefter uttaket.')).toBeInTheDocument();
+    expect(screen.queryByText(/er tom for stønadsdager/)).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Vurdering')).toBeEnabled();
+    await userEvent.click(screen.getByRole('button', { name: 'Forrige' }));
+    expect(screen.getByText(annenHjelp)).toBeInTheDocument();
+    expect(screen.getByLabelText('Vurdering')).toHaveValue('Dette er en vurdering');
+    await userEvent.click(screen.getByRole('button', { name: 'Neste' }));
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Vurdering under saldooppdatering');
+
+    await fullførForespørsel(() => første.reject(new Error('Saldokallet feilet')));
+    expect(screen.getByText(/Kunne ikke oppdatere saldo/)).toBeInTheDocument();
+    expect(screen.queryByText(/er tom for stønadsdager/)).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Vurdering')).toHaveValue('Vurdering under saldooppdatering');
+    await userEvent.click(screen.getByRole('button', { name: 'Forrige' }));
+    expect(screen.getByText(annenHjelp)).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Neste' }));
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Vurdering under saldooppdatering');
+
+    await userEvent.click(screen.getByRole('button', { name: 'Prøv å oppdatere saldo på nytt' }));
+    expect(oppdaterStønadskontoer).toHaveBeenCalledTimes(2);
+    expect(oppdaterStønadskontoer.mock.calls[1]).toEqual(oppdaterStønadskontoer.mock.calls[0]);
+    expect(screen.queryByText(/er tom for stønadsdager/)).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Vurdering')).toHaveValue('Vurdering under saldooppdatering');
+    expect(screen.getByRole('button', { name: 'Oppdater' })).toBeEnabled();
+
+    await fullførForespørsel(() => nyttForsøk.resolve(lagSaldo('994884174')));
+    expect(screen.getByText(/Nav er tom for stønadsdager/)).toBeInTheDocument();
+    expect(screen.queryByText(/BEDRIFT AS er tom for stønadsdager/)).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Vurdering')).toHaveValue('Vurdering under saldooppdatering');
+    expect(screen.getByRole('button', { name: 'Oppdater' })).toBeEnabled();
   });
 
   it('skal hente saldo for mellomlagrede perioder og tillate nytt forsøk etter feil ved gjenåpning', async () => {

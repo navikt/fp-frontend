@@ -414,6 +414,7 @@ export const UttakProsessPanel = ({
           alleKodeverk={alleKodeverk}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           uttakStonadskontoer={stønadskonto}
+          erSaldoOppdatert={saldoStatus === 'oppdatert'}
           setValgtPeriodeIndex={setValgtPeriodeIndex}
           erTilknyttetStortinget={erTilknyttetStortinget}
           harÅpentAksjonspunkt={harÅpentAksjonspunkt}
