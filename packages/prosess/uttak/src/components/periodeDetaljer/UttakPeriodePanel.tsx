@@ -157,6 +157,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttakStonadskontoer: UttakStonadskontoer;
+  erSaldoOppdatert: boolean;
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   erTilknyttetStortinget: boolean;
   harÅpentAksjonspunkt: boolean;
@@ -174,6 +175,7 @@ export const UttakPeriodePanel = ({
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   uttakStonadskontoer,
+  erSaldoOppdatert,
   setValgtPeriodeIndex,
   erTilknyttetStortinget,
   harÅpentAksjonspunkt,
@@ -289,17 +291,19 @@ export const UttakPeriodePanel = ({
         {erValgtPeriodeEøsPeriode && <UttakPeriodeInfoEØS valgtPeriode={valgtPeriode} alleKodeverk={alleKodeverk} />}
         {!erValgtPeriodeEøsPeriode && (
           <>
-            {valgtPeriode.manuellBehandlingÅrsak && valgtPeriode.manuellBehandlingÅrsak !== '-' && (
-              <AksjonspunktHelpTextHTML>
-                {hentApTekst(
-                  valgtPeriode.manuellBehandlingÅrsak,
-                  alleKodeverk,
-                  arbeidsgiverOpplysningerPerId,
-                  uttakStonadskontoer,
-                  valgtPeriode.periodeType ?? '-',
-                )}
-              </AksjonspunktHelpTextHTML>
-            )}
+            {valgtPeriode.manuellBehandlingÅrsak &&
+              valgtPeriode.manuellBehandlingÅrsak !== '-' &&
+              (valgtPeriode.manuellBehandlingÅrsak !== '5001' || erSaldoOppdatert) && (
+                <AksjonspunktHelpTextHTML>
+                  {hentApTekst(
+                    valgtPeriode.manuellBehandlingÅrsak,
+                    alleKodeverk,
+                    arbeidsgiverOpplysningerPerId,
+                    uttakStonadskontoer,
+                    valgtPeriode.periodeType ?? '-',
+                  )}
+                </AksjonspunktHelpTextHTML>
+              )}
             <UttakPeriodeForm
               valgtPeriode={valgtPeriode}
               oppdaterPeriode={oppdaterPeriode}
