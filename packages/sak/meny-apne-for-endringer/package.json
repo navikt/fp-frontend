@@ -18,8 +18,8 @@
     "storybook": "storybook dev --quiet -p 7049"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "8.16.2",
-    "@navikt/ds-react": "8.16.2",
+    "@navikt/aksel-icons": "8.17.2",
+    "@navikt/ds-react": "8.17.2",
     "@navikt/ft-ui-komponenter": "9.0.0",
     "@navikt/ft-utils": "6.0.0",
     "dayjs": "1.11.23",
