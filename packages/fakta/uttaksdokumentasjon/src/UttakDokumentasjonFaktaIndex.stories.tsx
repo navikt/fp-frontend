@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagAksjonspunkt,
   type PanelDataArgs,
@@ -87,6 +88,9 @@ const meta = {
   title: 'fakta/fakta-uttaksdokumentasjon',
   component: UttakDokumentasjonFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
+  args: {
+    faktaPanelKode: FaktaPanelCode.UTTAK_DOKUMENTASJON,
+  },
   render: args => <UttakDokumentasjonFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof UttakDokumentasjonFaktaIndex>>;
 export default meta;

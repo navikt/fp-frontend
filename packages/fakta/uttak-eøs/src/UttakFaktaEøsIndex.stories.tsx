@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagAksjonspunkt,
   lagFagsak,
@@ -20,6 +21,7 @@ const meta = {
   args: {
     fagsak: lagFagsak({ relasjonsRolleType: 'FARA' }),
     kanOverstyre: false,
+    faktaPanelKode: FaktaPanelCode.UTTAK_EØS,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART)],
   },
   render: args => <UttakFaktaEøsIndex {...args} />,

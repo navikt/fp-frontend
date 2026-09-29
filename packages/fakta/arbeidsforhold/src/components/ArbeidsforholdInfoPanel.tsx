@@ -1,9 +1,10 @@
 import { FormattedMessage } from 'react-intl';
 
-import { Heading, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type {
   ArbeidOgInntektsmelding,
   Arbeidsforhold,
@@ -27,9 +28,7 @@ export const ArbeidsforholdInfoPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysnin
 
   return (
     <VStack gap="space-16">
-      <Heading size="small" level="3">
-        <FormattedMessage id="ArbeidsforholdInfoPanel.ArbeidsforholdHeader" />
-      </Heading>
+      <FaktaPanelTittel />
       {sorterteArbeidsforhold.length === 0 && (
         <FormattedMessage id="PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert" />
       )}
