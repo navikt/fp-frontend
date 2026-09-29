@@ -18,11 +18,11 @@ interface Props {
  */
 export const Home = ({ headerHeight, ansattIdent }: Props) => {
   return (
-    <div className={styles['content']} style={{ margin: `${headerHeight}px auto 0` }}>
+    <main className={styles['content']} style={{ margin: `${headerHeight}px auto 0` }}>
       <Routes>
         <Route path="/" element={<OppgaveJournalføringIndex ansattIdent={ansattIdent} />} />
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
       </Routes>
-    </div>
+    </main>
   );
 };

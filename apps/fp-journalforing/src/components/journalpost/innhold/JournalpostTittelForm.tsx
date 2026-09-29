@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PencilIcon } from '@navikt/aksel-icons';
 import { Button, Checkbox, CheckboxGroup, Heading, HStack } from '@navikt/ds-react';
@@ -23,6 +23,7 @@ type Props = Readonly<{
  * JournalpostTittelForm - Inneholder tittel på journalpost og formkomponent for å endre denne
  */
 export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
+  const intl = useIntl();
   const [kanRedigereTittel, setKanRedigereTittel] = useState(!journalpost.tittel);
   const [harToggletFritekst, setHarToggletFritekst] = useState(false);
 
@@ -81,6 +82,7 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
           {!readOnly && erKanalSomErÅpenForEndring(journalpost.kanal) && (
             <Button
               icon={<PencilIcon aria-hidden />}
+              title={intl.formatMessage({ id: 'Journal.Tittel.EndreTittel' })}
               onClick={() => {
                 setKanRedigereTittel(!kanRedigereTittel);
               }}

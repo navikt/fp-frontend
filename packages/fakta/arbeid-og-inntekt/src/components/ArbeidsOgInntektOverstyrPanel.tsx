@@ -65,7 +65,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   return (
     <VStack gap="space-32">
       <HStack gap="space-16">
-        <Heading size="small" level="3">
+        <Heading size="small" level="2">
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" />
         </Heading>
         {erOverstyrer && erAksjonspunktÅpent && !readOnly && <OverstyringKnapp onClick={toggleOverstyring} />}

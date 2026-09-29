@@ -14,9 +14,9 @@ import styles from './brukerAvsenderPanel.module.css';
 const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
   const avsenderId = journalpost.avsender.id;
   if (avsenderId?.length === 9) {
-    return <Buildings3Icon className={styles['ikon']} />;
+    return <Buildings3Icon aria-hidden className={styles['ikon']} />;
   }
-  return <SilhouetteIcon className={styles['ikon']} />;
+  return <SilhouetteIcon aria-hidden className={styles['ikon']} />;
 };
 
 interface BrukerAvsenderRadProps {
@@ -126,7 +126,7 @@ export const BrukerAvsenderPanel = ({
               <BrukerAvsenderRad
                 navn={brukerTilForhåndsvisning.navn}
                 id={brukerTilForhåndsvisning.fødselsnummer}
-                ikon={<SilhouetteIcon className={styles['ikon']} />}
+                ikon={<SilhouetteIcon aria-hidden className={styles['ikon']} />}
               />
               <Button type="button" onClick={knyttSøkerTilJP}>
                 <FormattedMessage id="ValgtOppgave.Søk.KnyttTil" />
@@ -140,7 +140,7 @@ export const BrukerAvsenderPanel = ({
         <BrukerAvsenderRad
           navn={journalpost.bruker.navn}
           id={journalpost.bruker.fnr}
-          ikon={<SilhouetteIcon className={styles['ikon']} />}
+          ikon={<SilhouetteIcon aria-hidden className={styles['ikon']} />}
           title={<FormattedMessage id="ValgtOppgave.Søker" />}
         />
       )}
