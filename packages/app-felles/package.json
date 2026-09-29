@@ -17,14 +17,14 @@
     "storybook": "storybook dev --quiet -p 7006"
   },
   "dependencies": {
-    "@nais/apm": "0.6.3",
+    "@nais/apm": "0.7.2",
     "@navikt/ds-react": "8.16.2",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",
     "@navikt/ft-utils": "6.0.0",
-    "@tanstack/react-query": "5.103.1",
-    "@tanstack/react-query-devtools": "5.103.1",
+    "@tanstack/react-query": "5.104.0",
+    "@tanstack/react-query-devtools": "5.104.0",
     "dayjs": "1.11.23",
     "ky": "2.1.0",
     "react": "19.3.0",
@@ -45,7 +45,7 @@
     "eslint": "10.10.0",
     "storybook": "10.6.0",
     "typescript": "6.0.3",
-    "vite": "8.3.0",
-    "vitest": "5.0.1"
+    "vite": "8.3.1",
+    "vitest": "5.0.2"
   }
 }
