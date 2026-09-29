@@ -19,7 +19,7 @@
     "storybook": "storybook dev --quiet -p 7046"
   },
   "dependencies": {
-    "@navikt/ds-react": "8.16.2",
+    "@navikt/ds-react": "8.17.2",
     "@navikt/ft-utils": "6.0.0",
     "dayjs": "1.11.23",
     "react": "19.3.0",
