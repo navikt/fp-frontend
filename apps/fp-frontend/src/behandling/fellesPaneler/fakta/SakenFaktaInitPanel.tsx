@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { useQuery } from '@tanstack/react-query';
 
 import { SakenFaktaIndex } from '@navikt/fp-fakta-saken';
@@ -24,11 +22,9 @@ const AKSJONSPUNKT_KODER = [
  * Dette faktapanelet skal alltid vises
  */
 export const SakenFaktaInitPanel = () => {
-  const intl = useIntl();
-
   const { behandling, rettigheter } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.SAKEN, AKSJONSPUNKT_KODER);
 
   const api = getBehandlingApi(behandling);
 
@@ -36,12 +32,7 @@ export const SakenFaktaInitPanel = () => {
   const { data: utlandDokStatus } = useQuery(api.utlandDokStatusOptions(behandling));
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.SAKEN}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Saken' })}
-      skalPanelVisesIMeny
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny>
       <SakenFaktaIndex
         ytelsefordeling={ytelsefordeling}
         utlandDokStatus={utlandDokStatus}

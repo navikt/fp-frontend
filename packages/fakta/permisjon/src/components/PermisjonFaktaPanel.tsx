@@ -1,12 +1,17 @@
 import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading, HStack, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import {
+  type FaktaBegrunnelseFormValues,
+  FaktaBegrunnelseTextField,
+  FaktaPanelTittel,
+  FaktaSubmitButton,
+} from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
@@ -66,9 +71,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
   return (
     <VStack gap="space-32">
       <HStack justify="space-between">
-        <Heading size="small" level="2">
-          <FormattedMessage id="PermisjonFaktaPanel.Overskrift" />
-        </Heading>
+        <FaktaPanelTittel visuallyHidden />
         <BodyShort size="small">
           <FormattedMessage
             id="PermisjonFaktaPanel.Skjaringstidspunkt"

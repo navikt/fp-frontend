@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
@@ -17,23 +15,16 @@ type Props = {
 };
 
 export const InntektsmeldingerFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
-  const intl = useIntl();
-
   const { behandling, alleBehandlinger } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps();
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.INNTEKTSMELDINGER);
 
   const api = getBehandlingApi(behandling);
 
   const { data: inntektsmeldinger } = useQuery(api.inntektsmeldingerOptions(behandling));
 
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.INNTEKTSMELDINGER}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Inntektsmelding' })}
-      skalPanelVisesIMeny
-    >
+    <FaktaDefaultInitPanel standardPanelProps={standardPanelProps} skalPanelVisesIMeny>
       {inntektsmeldinger ? (
         <InntektsmeldingFaktaIndex
           inntektsmeldinger={inntektsmeldinger}

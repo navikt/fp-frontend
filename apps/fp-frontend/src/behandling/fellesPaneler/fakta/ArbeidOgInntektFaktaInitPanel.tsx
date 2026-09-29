@@ -1,5 +1,3 @@
-import { useIntl } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
@@ -25,11 +23,9 @@ interface Props {
 }
 
 export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
-  const intl = useIntl();
-
   const { behandling, hentOgSettBehandling, rettigheter } = useBehandlingDataContext();
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(FaktaPanelCode.ARBEID_OG_INNTEKT, AKSJONSPUNKT_KODER);
 
   const api = getBehandlingApi(behandling);
 
@@ -66,8 +62,6 @@ export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }:
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.ArbeidOgInntekt' })}
       skalPanelVisesIMeny={
         harLenke(behandling, 'ARBEID_OG_INNTEKT') &&
         !harAksjonspunkt(AksjonspunktKode.UTGÅTT_5080, behandling.aksjonspunkt)
