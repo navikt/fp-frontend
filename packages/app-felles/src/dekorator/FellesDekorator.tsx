@@ -155,7 +155,9 @@ const prosesserFeilmelding = (feilmelding: FpError, feilmeldinger: Feilmelding[]
         melding: intl.formatMessage(
           { id: 'Rest.ErrorMessage.GatewayTimeoutOrNotFound' },
           {
-            contextPath: feilmelding.location ? feilmelding.location.split('/', 2)[1]?.toUpperCase() : '',
+            contextPath: feilmelding.location
+              ? new URL(feilmelding.location, window.location.origin).pathname.split('/')[1]?.toUpperCase()
+              : '',
             location: feilmelding.location,
           },
         ),

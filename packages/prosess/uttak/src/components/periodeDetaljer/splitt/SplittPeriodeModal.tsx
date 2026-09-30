@@ -14,7 +14,7 @@ const validerInnenforIntervall = (fom: string, tom: string, intl: IntlShape) => 
   if (!dayjs(dato).isBefore(fom) && dayjs(dato).isBefore(tom)) {
     return null;
   }
-  return intl.formatMessage({ id: 'DelOppPeriodeModal.UgyldigDato' });
+  return intl.formatMessage({ id: 'DelOppPeriodeModalImpl.DatoUtenforPeriode' });
 };
 
 interface Props {
