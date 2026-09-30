@@ -46,9 +46,14 @@ const utledKomprimeringsAlgoritme = (
     ? acceptEncoding.join(",")
     : acceptEncoding;
 
-  return encodings?.includes("br")
-    ? { extension: "br", encoding: "br" }
-    : encodings?.includes("gzip")
-      ? { extension: "gz", encoding: "gzip" }
-      : undefined;
+  // eslint-disable-next-line unicorn/prefer-ternary
+  if (encodings?.includes("br")) {
+    return { extension: "br", encoding: "br" };
+  }
+  // eslint-disable-next-line unicorn/prefer-ternary
+  if (encodings?.includes("gzip")) {
+    return { extension: "gz", encoding: "gzip" };
+  }
+
+  return undefined;
 };
