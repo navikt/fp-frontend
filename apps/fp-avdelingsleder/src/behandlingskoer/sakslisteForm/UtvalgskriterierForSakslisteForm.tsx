@@ -165,10 +165,7 @@ const fraAndreKriterierTilBeslutter = (andreKriterier?: AndreKriterieDto): TilBe
   if (andreKriterier?.inkluder.includes('TIL_BESLUTTER')) {
     return 'TA_MED';
   }
-  if (andreKriterier?.ekskluder.includes('TIL_BESLUTTER')) {
-    return 'FJERN';
-  }
-  return 'TA_MED_ALLE';
+  return andreKriterier?.ekskluder.includes('TIL_BESLUTTER') ? 'FJERN' : 'TA_MED_ALLE';
 };
 
 const transformValues = (values: FormValues, valgtAvdelingEnhet: string, sakslisteId: number): SakslisteLagreDto => {

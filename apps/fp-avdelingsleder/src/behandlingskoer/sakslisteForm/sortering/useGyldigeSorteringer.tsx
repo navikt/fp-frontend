@@ -20,15 +20,16 @@ export function useGyldigeSorteringer(muligeSorteringer: KøSorteringFeltDto[]) 
 
   useEffect(() => {
     const erCurrentSorteringGyldig = gyldigeSorteringer.some(s => s.sorteringType === currentSorteringType);
-    if (!erCurrentSorteringGyldig) {
-      const opts = { shouldValidate: true, shouldDirty: false } as const;
-      setValue('sortering.sorteringType', 'BEHFRIST', opts);
-      setValue('sortering.fra', null, opts);
-      setValue('sortering.til', null, opts);
-      setValue('sortering.fomDato', null, opts);
-      setValue('sortering.tomDato', null, opts);
-      setValue('sortering.periodefilter', 'FAST_PERIODE', opts);
+    if (erCurrentSorteringGyldig) {
+      return;
     }
+    const opts = { shouldValidate: true, shouldDirty: false } as const;
+    setValue('sortering.sorteringType', 'BEHFRIST', opts);
+    setValue('sortering.fra', null, opts);
+    setValue('sortering.til', null, opts);
+    setValue('sortering.fomDato', null, opts);
+    setValue('sortering.tomDato', null, opts);
+    setValue('sortering.periodefilter', 'FAST_PERIODE', opts);
   }, [currentSorteringType, gyldigeSorteringer, setValue]);
 
   return gyldigeSorteringer;

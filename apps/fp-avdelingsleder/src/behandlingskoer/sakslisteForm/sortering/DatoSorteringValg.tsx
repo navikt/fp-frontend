@@ -166,8 +166,5 @@ const validerTomDatoLikEllerEtterFomDato = (fomDato: string | null) => (tomDato:
 };
 
 export const validerTilLikEllerStørreEnnFra = (fra: number | null) => (til: number | string) => {
-  if (!fra || !til || Number.isNaN(til)) {
-    return null;
-  }
-  return minValue(fra)(til);
+  return !fra || !til || Number.isNaN(til) ? null : minValue(fra)(til);
 };

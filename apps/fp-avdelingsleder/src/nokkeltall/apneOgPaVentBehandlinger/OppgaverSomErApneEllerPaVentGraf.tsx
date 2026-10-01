@@ -60,10 +60,7 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
             label: {
               formatter: params => {
                 const dato = dayjs(params.value);
-                if (dato.isSame(periodeSlutt)) {
-                  return ukjentTekst;
-                }
-                return formaterMånedÅr(params.value as string);
+                return dato.isSame(periodeSlutt) ? ukjentTekst : formaterMånedÅr(params.value as string);
               },
             },
           },
@@ -77,10 +74,7 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
               ...options.textStyle,
               formatter: value => {
                 const dato = dayjs(value);
-                if (dato.isSame(periodeSlutt)) {
-                  return ukjentTekst;
-                }
-                return formaterMånedÅr(value);
+                return dato.isSame(periodeSlutt) ? ukjentTekst : formaterMånedÅr(value);
               },
             },
           },

@@ -30,10 +30,9 @@ export const TilBehandlingGraf = ({ height, oppgaverPerDato, behandlingTyper, pe
             type: 'cross',
             label: {
               formatter: params => {
-                if (params.axisDimension === 'y') {
-                  return Number.parseInt(params.value as string, 10).toLocaleString('nb-NO');
-                }
-                return dayjs(params.value).format('D. MMMM YYYY');
+                return params.axisDimension === 'y'
+                  ? Number.parseInt(params.value as string, 10).toLocaleString('nb-NO')
+                  : dayjs(params.value).format('D. MMMM YYYY');
               },
             },
           },

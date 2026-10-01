@@ -38,10 +38,9 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
     };
 
     const enhetComparison = compareWithUndefinedLast(saksbehandler1.ansattAvdeling, saksbehandler2.ansattAvdeling);
-    if (enhetComparison !== 0) {
-      return enhetComparison;
-    }
-    return compareWithUndefinedLast(saksbehandler1.navn, saksbehandler2.navn);
+    return enhetComparison !== 0
+      ? enhetComparison
+      : compareWithUndefinedLast(saksbehandler1.navn, saksbehandler2.navn);
   });
 
   return (

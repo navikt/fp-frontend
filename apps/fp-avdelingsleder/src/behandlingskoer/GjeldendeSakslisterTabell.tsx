@@ -143,33 +143,32 @@ const formatStonadstyper = (
   fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
   valgteFagsakYtelseTyper: string[],
 ) => {
-  if (valgteFagsakYtelseTyper.length === 0 || valgteFagsakYtelseTyper.length === fagsakYtelseTyper.length) {
-    return <FormattedMessage id="Label.Alle" />;
-  }
-
-  return valgteFagsakYtelseTyper
-    .map(fyt => fagsakYtelseTyper.find(def => def.kode === fyt)?.navn ?? '')
-    .sort((a, b) => a.localeCompare(b))
-    .join(', ');
+  return valgteFagsakYtelseTyper.length === 0 || valgteFagsakYtelseTyper.length === fagsakYtelseTyper.length ? (
+    <FormattedMessage id="Label.Alle" />
+  ) : (
+    valgteFagsakYtelseTyper
+      .map(fyt => fagsakYtelseTyper.find(def => def.kode === fyt)?.navn ?? '')
+      .sort((a, b) => a.localeCompare(b))
+      .join(', ')
+  );
 };
 
 const formatBehandlingstyper = (
   behandlingTyper: LosKodeverkMedNavn<'BehandlingType'>[],
   valgteBehandlingTyper: string[],
 ) => {
-  if (valgteBehandlingTyper.length === 0 || valgteBehandlingTyper.length === behandlingTyper.length) {
-    return <FormattedMessage id="Label.Alle" />;
-  }
-
-  return valgteBehandlingTyper
-    .map(bt => behandlingTyper.find(def => def.kode === bt)?.navn ?? '')
-    .sort((a, b) => a.localeCompare(b))
-    .join(', ');
+  return valgteBehandlingTyper.length === 0 || valgteBehandlingTyper.length === behandlingTyper.length ? (
+    <FormattedMessage id="Label.Alle" />
+  ) : (
+    valgteBehandlingTyper
+      .map(bt => behandlingTyper.find(def => def.kode === bt)?.navn ?? '')
+      .sort((a, b) => a.localeCompare(b))
+      .join(', ')
+  );
 };
 
 const reserverteOppgaver = (saksliste: SakslisteDto) => {
-  if (saksliste.gjeldendeStatistikk === undefined) {
-    return '-';
-  }
-  return saksliste.gjeldendeStatistikk.alleOppgaver - saksliste.gjeldendeStatistikk.tilgjengeligeOppgaver;
+  return saksliste.gjeldendeStatistikk === undefined
+    ? '-'
+    : saksliste.gjeldendeStatistikk.alleOppgaver - saksliste.gjeldendeStatistikk.tilgjengeligeOppgaver;
 };

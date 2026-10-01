@@ -37,10 +37,9 @@ export const OpprettetAvsluttetGraf = ({
             type: 'cross',
             label: {
               formatter: params => {
-                if (params.axisDimension === 'y') {
-                  return (params.value as number).toLocaleString('nb-NO');
-                }
-                return dayjs(params.value).format('D. MMMM YYYY');
+                return params.axisDimension === 'y'
+                  ? (params.value as number).toLocaleString('nb-NO')
+                  : dayjs(params.value).format('D. MMMM YYYY');
               },
             },
           },

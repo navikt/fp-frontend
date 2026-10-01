@@ -104,8 +104,5 @@ const getFilterStatus = (
   if (inkluder.includes(kode)) {
     return FilterStatus.PLUS;
   }
-  if (ekskluder.includes(kode)) {
-    return FilterStatus.MINUS;
-  }
-  return FilterStatus.OFF;
+  return ekskluder.includes(kode) ? FilterStatus.MINUS : FilterStatus.OFF;
 };
