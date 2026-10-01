@@ -14,7 +14,7 @@ Monorepo for NAV's foreldrepenger saksbehandler frontend (FPSAK). Built with Yar
 
 ## Setup
 
-- Node version is pinned in `.tool-versions` (currently Node 24); package manager is Yarn 4 (declared via `packageManager` in `package.json`).
+- Node version is pinned in `.tool-versions` (currently Node 26); package manager is Yarn 4 (declared via `packageManager` in `package.json`).
 - Internal `@navikt/*` packages are pulled from GitHub Packages. A `~/.yarnrc.yml` with `npmAuthToken` for the `navikt` scope is required before `yarn install`. See README for the snippet.
 
 ## Commands
