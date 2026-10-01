@@ -79,7 +79,7 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
     <Box
       background="brand-blue-moderateA"
       padding="space-12"
-      style={{ borderLeft: '4px solid var(--a-lightblue-700)' }}
+      style={{ borderLeft: '4px solid var(--ax-border-brand-blue-strong)' }}
     >
       <RhfFieldArray
         fields={fields}

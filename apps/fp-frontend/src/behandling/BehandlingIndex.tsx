@@ -132,14 +132,14 @@ const BehandlingIndexWrapper = ({
       <>
         {erPapirsøknad && (
           <Suspense fallback={<LoadingPanel />}>
-            <ErrorBoundary errorMessageCallback={addErrorMessage}>
-              <BehandlingPapirsoknadIndex key={behandling.uuid} />
+            <ErrorBoundary key={behandling.uuid} errorMessageCallback={addErrorMessage}>
+              <BehandlingPapirsoknadIndex />
             </ErrorBoundary>
           </Suspense>
         )}
         {!erPapirsøknad && (
-          <ErrorBoundary errorMessageCallback={addErrorMessage}>
-            <BehandlingPanelerIndex key={behandling.uuid} />
+          <ErrorBoundary key={behandling.uuid} errorMessageCallback={addErrorMessage}>
+            <BehandlingPanelerIndex />
           </ErrorBoundary>
         )}
       </>
