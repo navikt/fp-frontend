@@ -173,4 +173,5 @@ try {
   startApp();
 } catch (error) {
   logger.error("Oppstart av server feilet", error);
+  process.exitCode = 1;
 }

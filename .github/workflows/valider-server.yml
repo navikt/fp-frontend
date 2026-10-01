@@ -20,7 +20,7 @@ jobs:
 
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # ratchet:actions/setup-node@v7.0.0
         with:
-          node-version: 26
+          node-version-file: .tool-versions
           cache: 'yarn'
 
       - name: Install server dependencies
