@@ -10,8 +10,8 @@
   "scripts": {
     "build:storybook": "storybook build -o .storybook-static-build",
     "test": "vitest",
-    "eslint": "eslint src/**/*.ts* --color",
-    "eslint:fix": "eslint --fix src/**/*.ts* --color",
+    "eslint": "eslint {src,i18n}/**/*.ts* --color",
+    "eslint:fix": "eslint --fix {src,i18n}/**/*.ts* --color",
     "prettier:fix": "prettier --write src",
     "tsc": "tsc --noEmit",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build",
@@ -31,6 +31,7 @@
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
+    "@navikt/fp-utils-test": "workspace:*",
     "@storybook/react": "10.6.0",
     "@storybook/react-vite": "10.6.0",
     "@testing-library/dom": "10.4.2",
