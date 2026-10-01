@@ -40,7 +40,6 @@
   "ValgtOppgave.RelaterteSaker.ManglerSøker": "Ingen saker er knyttet til innholdet ettersom saken mangler søker.",
   "ValgtOppgave.KnyttTilSak": "Journalfør på sak",
   "ValgtOppgave.Dokumenter": "Innhold",
-  "ValgtOppgave.Dokument.Knapp": "Dokument {dok}/{antall}",
   "ValgtOppgave.Dokumenter.Tom": "Journalposten har ingen dokumenter",
   "Journal.Sak.Avsluttet": "Avsluttet",
   "Journal.Sak.Løpende": "Løpende",
@@ -65,6 +64,5 @@
   "Journalfør.Modal.Ok": "Ok",
   "Journalfør.Modal.Ferdigstiller": "Ferdigstiller journalføringen...",
   "Journalfør.Modal.Journalført": "Dokumentet er journalført på saksnummer ",
-  "DokumentDetaljer.ExternalLink": "Åpne dokument i nytt vindu",
-  "SakDetaljer.ExternalLink": "Åpne sak i nytt vindu"
+  "DokumentDetaljer.ExternalLink": "Åpne dokument i nytt vindu"
 }

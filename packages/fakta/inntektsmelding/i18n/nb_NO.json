@@ -11,11 +11,7 @@
   "InntektsmeldingFaktaPanel.tabell.cell.behandling.andre": "Andre",
   "InntektsmeldingFaktaPanel.tabell.cell.behandling.ingen": "Ingen",
 
-  "InntektsmeldingFaktaPanel.modal.heading": "All informasjon fra PDF’en er tilgjengelig i faktapanelet",
   "InntektsmeldingFaktaPanel.modal.trigger": "Åpne PDF",
-  "InntektsmeldingFaktaPanel.modal.body": "PDF’en du skal åpne inneholder ikke noe annet enn det som står i faktapanelet. Du kan likevel åpne den hvis du ønsker det.",
-  "InntektsmeldingFaktaPanel.modal.button.primary": "Last ned som PDF",
-  "InntektsmeldingFaktaPanel.modal.button.secondary": "Avbryt",
 
   "InntektsmeldingFaktaPanel.behandling.heading": "Behandling",
   "InntektsmeldingFaktaPanel.behandling.bruktKunIDenne": "Brukt i denne behandlingen",

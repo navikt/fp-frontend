@@ -18,8 +18,6 @@
   "DocumentListInnsyn.IProduksjon": "I produksjon",
   "DocumentListInnsyn.VelgInnsynsDok": "Velg innsynsdokumentasjon til søker",
   "DocumentListInnsyn.Vedtaksdokumentasjon": "Vedtaksdokumentasjon på saken ({numberOfDocuments})",
-  "DocumentListInnsyn.Empty": " ",
 
-  "Malform.Beskrivelse": "Foretrukket språk",
   "SubmitButton.SettPåVent": "Sett behandling på vent"
 }

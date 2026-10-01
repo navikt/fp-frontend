@@ -38,7 +38,6 @@
   "AnnenPartsYtelser.Engangsstønad": "Er annen part innvilget engangsstønad?",
   "AnnenPartsYtelser.Engangsstønad.Svar": "{engangsstønad, select, JA {Ja} other {Nei}}",
 
-  "Rettighetstype.Tittel": "Overstyr rettighetstype",
   "Rettighetstype.Aleneomsorg": "Aleneomsorg",
   "Rettighetstype.BeggeRett": "Begge rett",
   "Rettighetstype.BeggeRettEØS": "Begge rett EØS",
@@ -46,5 +45,4 @@
   "Rettighetstype.BareFarRett": "Bare far/medmor rett",
   "Rettighetstype.BareFarRettMorUfør": "Bare far/medmor rett, mor er ufør",
   "Rettighetstype.SelectLabel": "Rettighetstype"
-
 }

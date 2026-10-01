@@ -11,6 +11,5 @@
   "ResultatGrunnlag.Kap1473GirBesteBeregning": "Beregning etter § 14-7 tredje ledd gir beste beregning.",
 
   "BesteberegningProsessPanel.Aksjonspunkt.Radiotekst": "Beregningen er riktig, fortsett behandlingen.",
-  "BesteberegningProsessPanel.Aksjonspunkt.HelpText": "Saken er automatisk besteberegnet, vennligst kontroller beregningen",
   "BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll": "Saken er tatt ut til kontroll på grunn av stort avvik mellom tredje og første ledd. Vennligst kontroller beregningen"
 }
