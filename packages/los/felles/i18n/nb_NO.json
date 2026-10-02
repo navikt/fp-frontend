@@ -2,11 +2,8 @@
   "Label.Ok": "OK",
   "Label.Avbryt": "Avbryt",
 
-  "LeggTilSaksbehandlerForm.FinnesIkke": "Kan ikke finne brukerident",
-
   "FlyttReservasjonModal.FlyttReservasjon": "Flytt reservasjonen til annen saksbehandler",
   "FlyttReservasjonModal.Saksbehandler": "Saksbehandler",
-  "FlyttReservasjonModal.Sok": "Søk",
   "FlyttReservasjonModal.Notat": "Notat til annen saksbehandler",
   "FlyttReservasjonModal.ManglerSaksbehandler": "Du må velge en saksbehandler",
 

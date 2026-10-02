@@ -1,4 +1,4 @@
 {
   "extends": "@navikt/fp-config-typescript",
-  "include": ["./src/", "../../@types/*"]
+  "include": ["./src/", "./i18n/", "../../@types/*"]
 }

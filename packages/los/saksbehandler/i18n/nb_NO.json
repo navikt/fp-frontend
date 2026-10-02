@@ -12,7 +12,6 @@
   "LedigOppgaveRad.Saksnr": "Kopier saksnummer",
 
   "ReservasjonsstatusPanel.Reservert": "Reservert på {navn}",
-  "ReservasjonsstatusPanel.Ingen": "Ingen reservasjon",
   "ReservasjonsstatusPanel.OpphevReservasjon": "Opphev reservasjon",
   "ReservasjonsstatusPanel.Reserver": "Reserver på meg",
   "ReservasjonsstatusPanel.ErReservertPaDeg": "Er reservert på deg",
@@ -32,19 +31,14 @@
   "ReservertOppgaveRad.Saksnr": "Kopier saksnummer",
 
   "Person.Age": "{age} år",
-  "Person.ImageText": "Personinformasjon",
-  "Person.UkjentNavn": "Ukjent navn på forelder",
-  "Person.HarIkkeNorskFnrEllerDnr": "Har ikke norsk f.nr. eller d-nr.",
 
   "Search.SearchHeader": "Søk",
   "Search.SaksnummerOrPersonId": "Du kan søke saksnummer, fødselsnummer eller D-nummer.",
-  "Search.Search": "Søk",
   "Search.ReserverBehandling": "Reserver behandlingen ved søk",
 
   "SistBehandledeSaker.SistBehandledeSaker": "Dine siste reserverte behandlinger",
   "SistBehandledeSaker.KunÅpne": "Vis kun åpne",
   "SistBehandledeSaker.IngenBehandlinger": "Ingen behandlinger",
-  "SistBehandledeSaker.Behandling": "Behandling {index}",
   "SistBehandledeSaker.Soker": "Søker",
   "SistBehandledeSaker.Saksnr": "Saksnr",
   "SistBehandledeSaker.Status": "Status",
@@ -52,14 +46,6 @@
 
   "OppgaveErReservertAvAnnenModal.ReservertAv": "{saksbehandlernavn} ({saksbehandlerid}) arbeider nå med denne behandlingen (reservert fram t.o.m {datetime})",
   "OppgaveErReservertAvAnnenModal.ReservertAvEnkel": "En annen saksbehandler arbeider nå med denne behandlingen",
-
-  "LeggTilSaksbehandlerForm.LeggTil": "Legg til saksbehandler",
-  "LeggTilSaksbehandlerForm.Brukerident": "Brukerident",
-  "LeggTilSaksbehandlerForm.Sok": "Søk",
-  "LeggTilSaksbehandlerForm.LeggTilIListen": "Legg til i listen",
-  "LeggTilSaksbehandlerForm.Nullstill": "Nullstill",
-  "LeggTilSaksbehandlerForm.FinnesAllerede": "Saksbehandler finnes allerede i listen",
-  "LeggTilSaksbehandlerForm.FinnesIkke": "Kan ikke finne brukerident",
 
   "BehandlingPollingTimoutModal.TimeoutMelding": "Din økt er gått ut på tid, trykk Fortsett",
   "BehandlingPollingTimoutModal.Fortsett": "Fortsett",
@@ -105,10 +91,6 @@
   "SakslisteVelgerForm.VisFærre": "Se færre",
   "SakslisteVelgerForm.Andre": "{antallAndre} andre",
   "SakslisteVelgerForm.FilterForKoen": "Filtere for køen",
-
-  "SaksbehandlerNokkeltallPanel.Statistikk": "Statistikk",
-  "SaksbehandlerNokkeltallPanel.ForAlle": "For alle saksbehandlere",
-  "SaksbehandlerNokkeltallPanel.ForAlleDetaljer": "Statistikk for alle som jobber med foreldrepenger, engangsstønad og svangerskapspenger",
 
   "NotatModal.SkrivNotat": "Legg til notat på reservasjon",
   "NotatModal.Notat": "Notat",

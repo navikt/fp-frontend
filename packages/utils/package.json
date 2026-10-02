@@ -7,8 +7,8 @@
     ".": "./index.ts"
   },
   "scripts": {
-    "eslint": "eslint src/**/*.ts* --color",
-    "eslint:fix": "eslint --fix src/**/*.ts* --color",
+    "eslint": "eslint {src,i18n}/**/*.ts* --color",
+    "eslint:fix": "eslint --fix {src,i18n}/**/*.ts* --color",
     "prettier:fix": "prettier --write src",
     "test": "vitest",
     "tsc": "tsc --noEmit",
@@ -29,6 +29,7 @@
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
+    "@navikt/fp-utils-test": "workspace:*",
     "@types/react": "19.3.0",
     "eslint": "10.10.0",
     "typescript": "6.0.3",

@@ -18,8 +18,5 @@
   "Ankebehandling.Avvisning.IkkeSignert": "Anken er ikke signert",
   "Ankebehandling.Realitetsbehandles": "Skal anken subsidiært realitetsbehandles?",
   "Ankebehandling.Realitetsbehandles.Ja": "Ja",
-  "Ankebehandling.Realitetsbehandles.Nei": "Nei",
-
-  "Malform.Beskrivelse": "Foretrukket språk",
-  "PreviewAnkeLink.ForhandvisBrev": "Forhåndsvis brev"
+  "Ankebehandling.Realitetsbehandles.Nei": "Nei"
 }

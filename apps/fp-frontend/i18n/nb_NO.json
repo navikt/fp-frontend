@@ -40,13 +40,6 @@
   "TotrinnskontrollIndex.Godkjenning": "Godkjenning",
   "TotrinnskontrollIndex.FraBeslutter": "Fra beslutter",
 
-  "AnkeVurderingModal.VedtakOversendt": "Behandlingen er sendt.",
-  "AnkeVurderingModal.Ferdigbehandlet": "Anken er ferdigbehandlet.",
-  "AnkeVurderingModal.SettVent": "Behandlingen er satt på vent.",
-  "AnkeVurderingModal.ModalDescription": "Vedtaket er stadfestet. Du kommer nå til forsiden",
-  "AnkeVurderingModal.GoToSearchPage": "Du kommer nå til forsiden.",
-  "AnkeVurderingModal.Ok": "OK",
-
   "FatterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden.",
   "FatterVedtakStatusModal.Ok": "OK",
 
@@ -56,7 +49,6 @@
 
   "FagsakGrid.ApneSidemeny": "Åpne sidemeny",
 
-  "ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafForeldrepenger": "Vurder om vilkår om foreldreansvaret etter § 14-5 andre ledd er oppfylt",
   "OpptjeningVilkarView.VurderOmSøkerHarRett": "Vurder om søker har opptjent rett til foreldrepenger",
 
   "IverksetterVedtakStatusModal.VedtakAvslatt": "Vedtak er avslått.",
@@ -94,7 +86,6 @@
 
   "FatterVedtakStatusModal.KlagenErFerdigbehandlet": "Klagen er ferdigbehandlet",
 
-  "FaktaInitPanel.Title.Adopsjon": "Adopsjon",
   "FaktaInitPanel.Title.ArbeidOgInntekt": "Arbeid og inntekt",
   "FaktaInitPanel.Title.Arbeidsforhold": "Arbeidsforhold",
   "FaktaInitPanel.Title.Beregning": "Beregning",
@@ -106,7 +97,6 @@
   "FaktaInitPanel.Title.Inntektsmelding": "Inntektsmelding",
   "FaktaInitPanel.Title.Medlemskap": "Medlemskap",
   "FaktaInitPanel.Title.Omsorg": "Omsorg",
-  "FaktaInitPanel.Title.OmsorgOgForeldreansvar": "Omsorg og foreldreansvar",
   "FaktaInitPanel.Title.OmsorgOgRett": "Omsorg og rett",
   "FaktaInitPanel.Title.Omsorgsovertakelse": "Omsorgsovertakelse",
   "FaktaInitPanel.Title.Opptjening": "Opptjening",
@@ -141,14 +131,10 @@
   "Behandlingspunkt.Vedtak": "Vedtak",
 
   "SRBVilkarForm.VurderSammeBarn": "Vurder om tidligere utbetalte foreldrepenger eller engangsstønad gjelder for samme barn. Dersom det gjelder for samme barn er dette vilkåret ikke oppfylt.",
-  "ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad": "Vurder om vilkår om foreldreansvaret etter § 14-17 andre ledd er oppfylt",
-  "ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf": "Vurder om vilkårene i § 14-17 fjerde ledd for far er oppfylt (når far overtar foreldreansvaret alene)",
-  "ErOmsorgVilkaarOppfyltForm.Paragraf": "Vurder om vilkårene i § 14-17 tredje ledd for far er oppfylt (når mor dør ifm fødsel/omsorgsovertakelse)",
 
   "SvangerskapVilkarForm.FyllerVilkår": "Kontroller at søker fyller vilkårene i § 14-4 første eller andre ledd og tredje ledd, første punktum",
 
   "TilbakekrevingFakta.FaktaFeilutbetaling": "Feilutbetaling",
-  "ProsessPanelWrapper.Henlagt": "Behandlingen er henlagt",
 
   "FatterTilbakekrevingVedtakStatusModal.Sendt": "Forslag til vedtak er sendt til beslutter",
   "ÅpenRevurderingModal.ApenRevurdering": "Det finnes en åpen revurdering som kan påvirke denne tilbakekrevingsbehandlingen. Vurder konsekvens ved behandling.",

@@ -7,16 +7,13 @@
   "PersonArbeidsforholdTable.Stillingsprosent": "{br}Stillingsprosent",
   "PersonArbeidsforholdTable.MottattDato": "Inntektsmeld.{br}mottatt dato",
   "PersonArbeidsforholdTable.ErIBruk": "Arbeidsforhold skal brukes",
-  "PersonArbeidsforholdTable.IngenArbeidsforhold": "Det finnes ingen arbeidsforhold",
   "PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert": "Ingen arbeidsforhold registrert",
-  "PersonArbeidsforholdTable.LeggTilArbeidsforhold": "Legg til arbeidsforhold",
 
   "ArbeidsforholdDetail.Header": "Detaljer",
   "ArbeidsforholdDetail.ArbeidsforholdErAktivt": "Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.",
   "ArbeidsforholdDetail.OppdaterArbeidsforhold": "Arbeidsforhold er manuelt opprettet av saksbehandler",
   "ArbeidsforholdDetail.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon": "Søker er ikke i permisjon. Arbeidsforholdet er aktivt og skal benyttes i behandlingen.",
   "ArbeidsforholdDetail.FjernArbeidsforholdet": "Fjern arbeidsforholdet for denne behandlingen",
-  "ArbeidsforholdDetail.IMIkkeRelevant": "Inntektsmeldingen er ikke relevant, gå videre uten disse opplysningene",
   "ArbeidsforholdDetail.ArbeidsforholdetErIkkeAktivt": "Arbeidsforholdet er ikke aktivt. Inntektsmelding er ikke nødvendig.",
   "ArbeidsforholdDetail.ArbeidsforholdetAktivTomDato": "Arbeidsforhold aktivt tom. dato",
   "ArbeidsforholdDetail.AvslaYtelseManglendeOpplysninger": "Ytelsen kan avslås på grunn av manglende opplysninger.",
@@ -28,6 +25,5 @@
   "PersonArbeidsforholdTable.Saksbehandler": "Saksbehandler",
   "PersonArbeidsforholdTable.AaRegisteret": "Aa-registeret",
 
-  "PermisjonPeriode.Permisjon": "Permisjon",
-  "PermisjonPeriode.Permisjoner": "Permisjoner"
+  "PermisjonPeriode.Permisjon": "Permisjon"
 }

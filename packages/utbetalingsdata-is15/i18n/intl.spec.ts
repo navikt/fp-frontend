@@ -1,35 +1,9 @@
-import { globSync } from 'node:fs';
-
-import { extractMessageIds } from '@navikt/fp-utils-test';
+import { finnIntlAvvik } from '@navikt/fp-utils-test';
 
 import nb from './nb_NO.json';
 
-// eslint-disable-next-line no-console
-const writeToConsole = (text: string) => console.log(text);
-
 describe('intl', () => {
-  it('Check that i18n strings in code and in language file match', () => {
-    const files = globSync('src/**/*.{ts,tsx}');
-
-    const stringsInCode = extractMessageIds(files);
-
-    const missingKeysBokmål = stringsInCode.filter(key => !Object.keys(nb).includes(key));
-    if (missingKeysBokmål.length > 0) {
-      writeToConsole('Not found in nb_NO.json:');
-    }
-    for (const key of missingKeysBokmål) {
-      writeToConsole(`key ${key}`);
-    }
-
-    const missingKeysCode = Object.keys(nb).filter(key => !stringsInCode.includes(key));
-    if (missingKeysCode.length > 0) {
-      writeToConsole('Not found in code:');
-    }
-    for (const key of missingKeysCode) {
-      writeToConsole(`key ${key}`);
-    }
-
-    expect(missingKeysBokmål.length).toBe(0);
-    expect(missingKeysCode.length).toBe(0);
+  it('skal ha samsvar mellom nøkler i koden og i nb_NO.json', () => {
+    expect(finnIntlAvvik(nb)).toEqual({ manglerIFil: [], ubrukteNøkler: [] });
   });
 });
