@@ -73,7 +73,7 @@ const baseConfig = [
   {
     languageOptions: {
       parserOptions: {
-        projectService: '../typescript/tsconfig.json',
+        projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
