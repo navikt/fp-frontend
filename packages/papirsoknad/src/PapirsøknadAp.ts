@@ -8,6 +8,8 @@ export type PapirsøknadAp = AksjonspunktTilBekreftelse<
   | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER
 >;
 
+export type PapirsøknadKode = PapirsøknadAp['@type'];
+
 export type AksjonspunktTilBekreftelse<K extends AksjonspunktKode> = Extract<
   BekreftetAksjonspunktDto,
   { '@type': `${K}` }

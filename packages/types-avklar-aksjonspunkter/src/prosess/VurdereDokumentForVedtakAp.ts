@@ -1,5 +1,3 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-
 import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type VurdereDokumentForVedtakAp = AksjonspunktFraBackend<typeof AksjonspunktKode.VURDERE_DOKUMENT_FØR_VEDTAK>;
+export type VurdereDokumentForVedtakAp = AksjonspunktFraBackend<'VURDERE_DOKUMENT_FØR_VEDTAK'>;

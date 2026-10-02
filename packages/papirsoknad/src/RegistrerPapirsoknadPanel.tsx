@@ -11,7 +11,7 @@ import type { AlleKodeverk, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
 
 import { EngangsstonadForm } from './engangsstonad/components/EngangsstonadForm';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
-import type { PapirsøknadAp } from './PapirsøknadAp';
+import type { PapirsøknadAp, PapirsøknadKode } from './PapirsøknadAp';
 import type { PapirsøknadMellomlagring } from './PapirsøknadMellomlagring';
 import { SoknadTypePickerForm } from './SoknadTypePickerForm';
 import { SvangerskapspengerForm } from './svangerskapspenger/components/SvangerskapspengerForm';
@@ -26,11 +26,7 @@ interface Props {
   readOnly: boolean;
   lagrePapirsøknad: (transformedValues: PapirsøknadAp) => Promise<BehandlingFpSak>;
   lagreUfullstendigPapirsøknad: (transformedValues: PapirsøknadAp) => Promise<BehandlingFpSak>;
-  aksjonspunktKode:
-    | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
-    | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
-    | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER
-    | typeof AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER;
+  aksjonspunktKode: PapirsøknadKode;
   mellomlagretData?: PapirsøknadMellomlagring;
   onMellomlagre?: (values: PapirsøknadMellomlagring) => void;
 }
