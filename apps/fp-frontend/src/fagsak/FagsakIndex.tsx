@@ -104,10 +104,7 @@ export const FagsakIndex = () => {
   const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuidFraUrl);
 
   if (!fagsakData) {
-    if (!harHentetFagsak) {
-      return <LoadingPanel />;
-    }
-    return <Navigate to={pathToMissingPage()} />;
+    return !harHentetFagsak ? <LoadingPanel /> : <Navigate to={pathToMissingPage()} />;
   }
 
   if (fagsakData.getFagsak().saksnummer !== selectedSaksnummer) {

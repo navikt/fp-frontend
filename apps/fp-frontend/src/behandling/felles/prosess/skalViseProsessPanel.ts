@@ -11,9 +11,5 @@ export const skalViseProsessPanel = (
   }
 
   const harVilkår = vilkårKoder.some(vc => vilkår.some(v => v.vilkarType === vc));
-  if (harVilkår && !harAksjonspunkter) {
-    return true;
-  }
-
-  return harAksjonspunkter && harVilkår;
+  return harVilkår;
 };
