@@ -20,12 +20,7 @@ describe('BehandlingerIndex', () => {
 
     render(
       <MemoryRouter>
-        <BehandlingerIndex
-          fagsakData={new FagsakData(fagsak)}
-          setBehandling={vi.fn()}
-          setBehandlingUuidFraUrl={vi.fn()}
-          hentOgSettBehandling={vi.fn()}
-        />
+        <BehandlingerIndex fagsakData={new FagsakData(fagsak)} setBehandling={vi.fn()} hentOgSettBehandling={vi.fn()} />
       </MemoryRouter>,
     );
 
