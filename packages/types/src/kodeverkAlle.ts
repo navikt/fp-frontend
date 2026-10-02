@@ -58,6 +58,17 @@ import {
 } from './index';
 import type { Arbeidskategori } from './interne-typer';
 
+// Den genererte StønadskontoType dekker bare kontoene som vises i saldo. Kodeverket fra backend har alle.
+type StønadskontoTypeKodeverk =
+  | StønadskontoType
+  | 'TILLEGG_FLERBARN'
+  | 'TILLEGG_PREMATUR'
+  | 'UFØREDAGER'
+  | 'TETTE_SAKER_MOR'
+  | 'TETTE_SAKER_FAR'
+  | 'BARE_FAR_RETT'
+  | 'FAR_RUNDT_FØDSEL';
+
 //Mapping mellom KodeverkType og union-types med verdier
 type KodeverkEnumMap = {
   AdresseType: AdresseType;
@@ -107,7 +118,7 @@ type KodeverkEnumMap = {
   RevurderingVarslingÅrsak: RevurderingVarslingÅrsak;
   SivilstandType: SivilstandType;
   SkjermlenkeType: SkjermlenkeType;
-  StønadskontoType: StønadskontoType;
+  StønadskontoType: StønadskontoTypeKodeverk;
   UtsettelseÅrsak: UtsettelseÅrsak;
   UttakArbeidType: UttakArbeidType;
   UttakPeriodeType: UttakPeriodeType;
