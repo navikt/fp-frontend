@@ -9,4 +9,4 @@ export type AvklarVergeAp = {
   vergeType: string;
   organisasjonsnummer?: string;
   fnr?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_VERGE>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.AVKLAR_VERGE>;

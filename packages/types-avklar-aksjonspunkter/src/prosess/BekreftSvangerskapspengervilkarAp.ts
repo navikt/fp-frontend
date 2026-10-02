@@ -4,4 +4,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type BekreftSvangerskapspengervilkarAp = {
   avslagskode?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.MANUELL_VURDERING_AV_SVANGERSKAPSPENGERVILKÅRET>;

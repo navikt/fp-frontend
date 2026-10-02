@@ -2,10 +2,10 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { BekreftetAksjonspunktDto } from '@navikt/fp-types';
 
 export type PapirsøknadAp = AksjonspunktTilBekreftelse<
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
-  | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER
+  | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
+  | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
+  | typeof AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
+  | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER
 >;
 
 export type AksjonspunktTilBekreftelse<K extends AksjonspunktKode> = Extract<

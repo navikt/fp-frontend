@@ -6,4 +6,4 @@ export type VarselRevurderingAp = {
   sendVarsel?: boolean;
   frist?: string;
   ventearsak?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VARSEL_REVURDERING_MANUELL>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VARSEL_REVURDERING_MANUELL>;

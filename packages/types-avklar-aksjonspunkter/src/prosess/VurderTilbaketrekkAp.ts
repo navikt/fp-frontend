@@ -4,4 +4,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type VurderTilbaketrekkAp = {
   hindreTilbaketrekk?: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.UTGÅTT_5090>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.UTGÅTT_5090>;

@@ -114,7 +114,7 @@ const sharedRulesConfig = {
     '@typescript-eslint/ban-ts-comment': ERROR,
     '@typescript-eslint/no-unnecessary-condition': ERROR,
     'local/describe-name-matches-filename': ERROR,
-    '@typescript-eslint/no-unsafe-enum-comparison': OFF,
+    '@typescript-eslint/no-unsafe-enum-comparison': ERROR,
     '@typescript-eslint/no-misused-promises': OFF,
     '@typescript-eslint/no-unsafe-call': ERROR,
     'import-x/no-default-export': ERROR,

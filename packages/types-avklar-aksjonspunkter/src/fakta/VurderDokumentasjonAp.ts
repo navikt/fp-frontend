@@ -5,4 +5,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type VurderDokumentasjonAp = {
   vurderingBehov: DokumentasjonVurderingBehov[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON>;

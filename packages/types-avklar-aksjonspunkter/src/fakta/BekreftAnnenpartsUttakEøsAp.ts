@@ -6,5 +6,5 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 export type BekreftAnnenpartsUttakEøsAp = {
   perioder: AnnenforelderUttakEøsPeriode[];
 } & AksjonspunktTilBekreftelse<
-  AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART | AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART
+  typeof AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART | typeof AksjonspunktKode.OVERSTYRING_AV_UTTAK_I_EØS_FOR_ANNENPART
 >;

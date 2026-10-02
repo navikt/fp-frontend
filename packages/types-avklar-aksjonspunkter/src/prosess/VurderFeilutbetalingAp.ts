@@ -6,4 +6,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 export type VurderFeilutbetalingAp = {
   videreBehandling: TilbakekrevingVidereBehandling;
   varseltekst?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FEILUTBETALING>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_FEILUTBETALING>;

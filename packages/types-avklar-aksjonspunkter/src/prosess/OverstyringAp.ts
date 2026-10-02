@@ -6,9 +6,9 @@ export type OverstyringAp = {
   erVilkårOk?: boolean;
   avslagskode?: string;
 } & AksjonspunktTilBekreftelse<
-  | AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET
-  | AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET
-  | AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET
-  | AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR
-  | AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET
+  | typeof AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET
+  | typeof AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET
+  | typeof AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET
+  | typeof AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET_FAR_MEDMOR
+  | typeof AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKÅRET
 >;

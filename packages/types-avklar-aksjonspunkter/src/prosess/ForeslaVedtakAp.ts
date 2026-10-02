@@ -4,4 +4,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type ForeslaVedtakAp = {
   skalBrukeOverstyrendeFritekstBrev?: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.FORESLÅ_VEDTAK>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.FORESLÅ_VEDTAK>;

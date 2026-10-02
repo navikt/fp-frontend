@@ -6,4 +6,4 @@ export type SjekkTerminbekreftelseAp = {
   utstedtdato: string;
   termindato: string | null;
   antallBarn: number;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_TERMINBEKREFTELSE>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.SJEKK_TERMINBEKREFTELSE>;

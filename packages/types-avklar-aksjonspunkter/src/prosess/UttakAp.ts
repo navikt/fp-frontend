@@ -6,10 +6,10 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 export type UttakAp = {
   perioder: UttakResultatPeriodeLagreDto[];
 } & AksjonspunktTilBekreftelse<
-  | AksjonspunktKode.FASTSETT_UTTAKPERIODER
-  | AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
-  | AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT
-  | AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE
-  | AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD
-  | AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST
+  | typeof AksjonspunktKode.FASTSETT_UTTAKPERIODER
+  | typeof AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
+  | typeof AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT
+  | typeof AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE
+  | typeof AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD
+  | typeof AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST
 >;

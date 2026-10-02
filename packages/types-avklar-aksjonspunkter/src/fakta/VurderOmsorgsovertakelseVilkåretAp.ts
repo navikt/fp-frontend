@@ -9,4 +9,4 @@ export type VurderOmsorgsovertakelseVilkåretAp = {
   omsorgsovertakelseDato: string;
   barn: { fødselsdato: string; barnNummer: number }[];
   ektefellesBarn: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET>;

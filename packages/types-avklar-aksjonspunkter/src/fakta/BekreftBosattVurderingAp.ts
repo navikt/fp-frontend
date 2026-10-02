@@ -5,4 +5,4 @@ import type { MedlemskapBekreftetPeriode } from './MedlemskapBekreftetPeriode';
 
 export type BekreftBosattVurderingAp = {
   bekreftedePerioder: MedlemskapBekreftetPeriode[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.UTGÅTT_5020>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.UTGÅTT_5020>;

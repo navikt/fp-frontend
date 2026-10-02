@@ -6,4 +6,4 @@ export type OverstyringMedlemskapsvilkaretLopendeAp = {
   erVilkårOk?: boolean;
   avslagskode?: string;
   avslagDato?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.UTGÅTT_6012>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.UTGÅTT_6012>;

@@ -27,10 +27,10 @@ interface Props {
   lagrePapirsøknad: (transformedValues: PapirsøknadAp) => Promise<BehandlingFpSak>;
   lagreUfullstendigPapirsøknad: (transformedValues: PapirsøknadAp) => Promise<BehandlingFpSak>;
   aksjonspunktKode:
-    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
-    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
-    | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER
-    | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER;
+    | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
+    | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
+    | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER
+    | typeof AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER;
   mellomlagretData?: PapirsøknadMellomlagring;
   onMellomlagre?: (values: PapirsøknadMellomlagring) => void;
 }

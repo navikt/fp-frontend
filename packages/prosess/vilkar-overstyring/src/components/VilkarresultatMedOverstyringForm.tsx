@@ -43,10 +43,10 @@ type FormValues = {
 };
 
 function erOverstyringAvMedlemskap(overstyringApKode: AksjonspunktKode) {
-  return [
-    AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
-    AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-  ].includes(overstyringApKode);
+  return (
+    overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET ||
+    overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
+  );
 }
 
 type OverstyringVilkår =

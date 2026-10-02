@@ -136,10 +136,10 @@ const useLagrePapirsøknad = (
 const getAktivPapirsøknadApKode = (
   aksjonspunkter: Aksjonspunkt[],
 ):
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
-  | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER => {
+  | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
+  | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
+  | typeof AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
+  | typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER => {
   const ap = aksjonspunkter
     .map(a => a.definisjon)
     .find(
@@ -153,6 +153,5 @@ const getAktivPapirsøknadApKode = (
   if (!ap) {
     throw new Error('Fant ikke aktivt aksjonspunkt for papirsøknad');
   }
-  // @ts-expect-error Blir fiksa når AksjonspunktKode reflekterar backend-typar
   return ap;
 };

@@ -49,7 +49,7 @@ type FormValues = ReturnType<typeof buildInitialValues>;
 const transformValues = (
   soknadData: SoknadData,
   formValues: FormValues,
-): AksjonspunktTilBekreftelse<AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER> => {
+): AksjonspunktTilBekreftelse<typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER> => {
   return {
     '@type': AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER,
     tema: soknadData.familieHendelseType,

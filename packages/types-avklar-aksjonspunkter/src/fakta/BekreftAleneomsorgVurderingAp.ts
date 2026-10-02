@@ -7,4 +7,4 @@ export type BekreftAleneomsorgVurderingAp = {
   annenforelderHarRett?: boolean;
   annenforelderMottarUføretrygd?: boolean;
   annenForelderHarRettEØS?: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG>;

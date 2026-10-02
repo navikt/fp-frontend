@@ -4,4 +4,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type OverstyringDekningsgradAp = {
   dekningsgrad: number;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD>;
