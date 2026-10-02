@@ -1,11 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type OverstyringAp = {
-  erVilkårOk?: boolean;
-  avslagskode?: string;
-} & AksjonspunktTilBekreftelse<
+export type OverstyringAp = AksjonspunktFraBackend<
   | typeof AksjonspunktKode.OVERSTYRING_AV_SØKNADSFRISTVILKÅRET
   | typeof AksjonspunktKode.OVERSTYRING_AV_FØDSELSVILKÅRET
   | typeof AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET

@@ -1,6 +1,7 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type KontrollerEtterbetalingTilSøkerAP =
-  AksjonspunktTilBekreftelse<typeof AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER>;
+export type KontrollerEtterbetalingTilSøkerAP = AksjonspunktFraBackend<
+  typeof AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER
+>;

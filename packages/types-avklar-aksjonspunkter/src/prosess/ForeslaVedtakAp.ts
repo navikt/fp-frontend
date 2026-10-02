@@ -1,7 +1,5 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type ForeslaVedtakAp = {
-  skalBrukeOverstyrendeFritekstBrev?: boolean;
-} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.FORESLÅ_VEDTAK>;
+export type ForeslaVedtakAp = AksjonspunktFraBackend<typeof AksjonspunktKode.FORESLÅ_VEDTAK>;

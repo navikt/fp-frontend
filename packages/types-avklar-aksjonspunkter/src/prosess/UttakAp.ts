@@ -1,11 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { UttakResultatPeriodeLagreDto } from '@navikt/fp-types';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type UttakAp = {
-  perioder: UttakResultatPeriodeLagreDto[];
-} & AksjonspunktTilBekreftelse<
+export type UttakAp = AksjonspunktFraBackend<
   | typeof AksjonspunktKode.FASTSETT_UTTAKPERIODER
   | typeof AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
   | typeof AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT

@@ -12,23 +12,18 @@ import type { AvklartFaktaFeilutbetalingAp } from '@navikt/ft-fakta-tilbakekrevi
 import type { AvklarAktivitetsPerioderAp } from './fakta/AvklarAktivitetsPerioderAp';
 import type { AvklarAnnenforelderHarRettAp } from './fakta/AvklarAnnenforelderHarRettAp';
 import type { AvklarDekningsgradAp } from './fakta/AvklarDekningsgradAp';
-import type { AvklarFortsattMedlemskapAp } from './fakta/AvklarFortsattMedlemskapAp';
 import type { AvklarVergeAp } from './fakta/AvklarVergeAp';
 import type { BekreftAleneomsorgVurderingAp } from './fakta/BekreftAleneomsorgVurderingAp';
 import type { BekreftAnnenpartsUttakEøsAp } from './fakta/BekreftAnnenpartsUttakEøsAp';
-import type { BekreftBosattVurderingAp } from './fakta/BekreftBosattVurderingAp';
-import type { BekreftErMedlemVurderingAp } from './fakta/BekreftErMedlemVurderingAp';
-import type { BekreftLovligOppholdVurderingAp } from './fakta/BekreftLovligOppholdVurderingAp';
 import type { BekreftOmsorgVurderingAp } from './fakta/BekreftOmsorgVurderingAp';
-import type { BekreftOppholdsrettVurderingAp } from './fakta/BekreftOppholdsrettVurderingAp';
 import type { BekreftSvangerskapspengerAp } from './fakta/BekreftSvangerskapspengerAp';
 import type { BekreftUttaksperioderAp } from './fakta/BekreftUttaksperioderAp';
 import type { BeregningAp } from './fakta/BeregningAp';
 import type { OverstyringFaktaFødselAp } from './fakta/fødsel/OverstyringFaktaFødselAp';
 import type { SjekkManglendeFødselAp } from './fakta/fødsel/SjekkManglendeFødselAp';
 import type { SjekkTerminbekreftelseAp } from './fakta/fødsel/SjekkTerminbekreftelseAp';
-import type { KontrollerBesteberegningAP, ManuellKontrollBesteberegningAP } from './fakta/KontrollerBesteberegningAP';
 import type { ManuellKontrollAapKombinertAtflAP } from './fakta/ManuellKontrollAapKombinertAtflAP';
+import type { ManuellKontrollBesteberegningAP } from './fakta/ManuellKontrollBesteberegningAP';
 import type { MerkOpptjeningUtlandAp } from './fakta/MerkOpptjeningUtlandAp';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import type { OverstyringDekningsgradAp } from './fakta/OverstyringDekningsgradAp';
@@ -52,18 +47,12 @@ export type FaktaAksjonspunkt =
   | BekreftSvangerskapspengerAp
   | VurderForutgaendeMedlemskapAp
   | BekreftOmsorgVurderingAp
-  | BekreftBosattVurderingAp
-  | BekreftErMedlemVurderingAp
-  | BekreftOppholdsrettVurderingAp
-  | BekreftLovligOppholdVurderingAp
-  | AvklarFortsattMedlemskapAp
   | SjekkTerminbekreftelseAp
   | SjekkManglendeFødselAp
   | OverstyringFaktaFødselAp
   | AvklarAnnenforelderHarRettAp
   | BekreftUttaksperioderAp
   | OverstyringAvklarStartdatoForPeriodenAp
-  | KontrollerBesteberegningAP
   | OverstyrBeregningsaktiviteterAP
   | BeregningFaktaAP
   | BeregningOverstyringAP

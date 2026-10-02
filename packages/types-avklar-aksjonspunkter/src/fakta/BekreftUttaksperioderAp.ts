@@ -1,11 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { FaktaUttakPeriode } from '@navikt/fp-types';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type BekreftUttaksperioderAp = {
-  perioder: FaktaUttakPeriode[];
-} & AksjonspunktTilBekreftelse<
+export type BekreftUttaksperioderAp = AksjonspunktFraBackend<
   | typeof AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO
   | typeof AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER
   | typeof AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET
