@@ -1,62 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import type { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 
 export const alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving = {
-  Fagsystem: [
-    {
-      kode: 'AAREGISTERET',
-      navn: null,
-    },
-    {
-      kode: 'ARENA',
-      navn: null,
-    },
-    {
-      kode: 'ENHETSREGISTERET',
-      navn: null,
-    },
-    {
-      kode: 'FPSAK',
-      navn: null,
-    },
-    {
-      kode: 'FPTILBAKE',
-      navn: null,
-    },
-    {
-      kode: 'GOSYS',
-      navn: null,
-    },
-    {
-      kode: 'INFOTRYGD',
-      navn: null,
-    },
-    {
-      kode: 'INNTEKT',
-      navn: null,
-    },
-    {
-      kode: 'JOARK',
-      navn: null,
-    },
-    {
-      kode: 'K9',
-      navn: null,
-    },
-    {
-      kode: 'K9TILBAKE',
-      navn: null,
-    },
-    {
-      kode: 'MEDL',
-      navn: null,
-    },
-    {
-      kode: 'TPS',
-      navn: null,
-    },
-  ],
   Venteårsak: [
     {
       kode: 'AVV_DOK',
@@ -95,16 +39,6 @@ export const alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving = {
     {
       kode: 'SIMPEL_UAKTSOM',
       navn: 'Simpel uaktsomhet',
-    },
-  ],
-  AnnenVurdering: [
-    {
-      kode: 'FORELDET',
-      navn: 'Foreldet',
-    },
-    {
-      kode: 'GOD_TRO',
-      navn: 'Handlet i god tro',
     },
   ],
   SærligGrunn: [
