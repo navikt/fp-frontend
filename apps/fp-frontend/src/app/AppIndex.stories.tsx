@@ -84,8 +84,7 @@ const getMockResponse = (rel: string): (() => HttpResponse<JsonBodyType>) => {
     return () =>
       HttpResponse.json({ error: `Mangler mock for relasjonslenke i ressursMap for rel: ${rel}` }, { status: 500 });
 
-  if (isStrictResponse(responseData)) return () => responseData;
-  return () => HttpResponse.json(responseData);
+  return isStrictResponse(responseData) ? () => responseData : () => HttpResponse.json(responseData);
 };
 
 const HANDLERS = [

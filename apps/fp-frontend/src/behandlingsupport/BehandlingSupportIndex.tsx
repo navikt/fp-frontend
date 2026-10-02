@@ -224,8 +224,5 @@ const utledAktivtPanel = (
   if (skalViseFraBeslutter) {
     return SupportTabs.FRA_BESLUTTER;
   }
-  if (skalViseTilGodkjenning) {
-    return SupportTabs.TIL_BESLUTTER;
-  }
-  return SupportTabs.HISTORIKK;
+  return skalViseTilGodkjenning ? SupportTabs.TIL_BESLUTTER : SupportTabs.HISTORIKK;
 };
