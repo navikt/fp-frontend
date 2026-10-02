@@ -38,10 +38,12 @@ export const ProsessMeny = <T extends Behandling>({ valgtProsessSteg, valgtFakta
 
   const byttProsessPanel = (retning: 1 | -1) => {
     const nyId = finnNabopanelId(prosessPanelMenyData, retning);
-    if (nyId) {
-      planleggInnholdsfokus(nyId);
-      oppdaterProsessStegOgFaktaPanelIUrl(nyId, valgtFaktaSteg);
+    if (!nyId) {
+      return;
     }
+
+    planleggInnholdsfokus(nyId);
+    oppdaterProsessStegOgFaktaPanelIUrl(nyId, valgtFaktaSteg);
   };
 
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.NESTE_PROSESS, () => byttProsessPanel(1));
@@ -111,8 +113,5 @@ const finnProsessmenyType = (status?: VilkårUtfallType, harÅpentAksjonspunkt?:
   if (status === 'OPPFYLT') {
     return ProcessMenuStepType.success;
   }
-  if (status === 'IKKE_OPPFYLT') {
-    return ProcessMenuStepType.danger;
-  }
-  return ProcessMenuStepType.default;
+  return status === 'IKKE_OPPFYLT' ? ProcessMenuStepType.danger : ProcessMenuStepType.default;
 };

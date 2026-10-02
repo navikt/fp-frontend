@@ -121,9 +121,8 @@ const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: B
   if (paneler.some(p => p.harÅpentAksjonspunkt)) {
     return true;
   }
-  if (paneler.some(p => p.status === 'IKKE_OPPFYLT')) {
-    return false;
-  }
-
-  return !(paneler.every(p => p.status === 'IKKE_VURDERT') || paneler.every(p => p.status === 'OPPFYLT'));
+  return (
+    !paneler.some(p => p.status === 'IKKE_OPPFYLT') &&
+    !(paneler.every(p => p.status === 'IKKE_VURDERT') || paneler.every(p => p.status === 'OPPFYLT'))
+  );
 };
