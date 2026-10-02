@@ -43,10 +43,10 @@ type FormValues = {
 };
 
 function erOverstyringAvMedlemskap(overstyringApKode: AksjonspunktKode) {
-  return [
-    AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET,
-    AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-  ].includes(overstyringApKode);
+  return (
+    overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET ||
+    overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
+  );
 }
 
 type OverstyringVilkår =
@@ -219,16 +219,12 @@ const buildInitialValues = (
 };
 
 const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyringAksjonspunkter): OverstyringVilkår => {
-  const felles = {
-    kode: overstyringApKode,
-    begrunnelse: values.begrunnelse,
-  };
-
   switch (overstyringApKode) {
     case AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET:
     case AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR: {
       return {
-        ...felles,
+        kode: overstyringApKode,
+        begrunnelse: values.begrunnelse,
         ...MedlemskapVurderinger.transformValues(
           values,
           overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
@@ -237,7 +233,8 @@ const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyri
     }
     default: {
       return {
-        ...felles,
+        kode: overstyringApKode,
+        begrunnelse: values.begrunnelse,
         ...VilkarResultPicker.transformValues(values),
       };
     }

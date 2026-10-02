@@ -2703,6 +2703,7 @@ __metadata:
   dependencies:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
+    "@navikt/fp-types": "workspace:*"
     eslint: "npm:10.10.0"
     typescript: "npm:6.0.3"
   languageName: unknown

@@ -82,10 +82,10 @@ const Wrapper = (props: Omit<ComponentProps<typeof BeregningFaktaIndex>, 'formDa
 const mapBGKodeTilFpsakKode = (
   bgKode: string,
 ):
-  | AksjonspunktKode.AVKLAR_AKTIVITETER
-  | AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER
-  | AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN
-  | AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG => {
+  | typeof AksjonspunktKode.AVKLAR_AKTIVITETER
+  | typeof AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER
+  | typeof AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN
+  | typeof AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG => {
   switch (bgKode) {
     case FaktaBeregningAvklaringsbehovCode.AVKLAR_AKTIVITETER: {
       return AksjonspunktKode.AVKLAR_AKTIVITETER;

@@ -1,7 +1,5 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type BekreftOmsorgVurderingAp = {
-  omsorg: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_LØPENDE_OMSORG>;
+export type BekreftOmsorgVurderingAp = AksjonspunktFraBackend<typeof AksjonspunktKode.AVKLAR_LØPENDE_OMSORG>;

@@ -5,4 +5,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 export type VurderMedlemskapAp = {
   avslagskode?: string;
   opphørFom?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET>;

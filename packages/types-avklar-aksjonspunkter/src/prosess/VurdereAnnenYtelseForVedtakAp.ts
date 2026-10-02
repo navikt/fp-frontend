@@ -1,6 +1,7 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type VurdereAnnenYtelseForVedtakAp =
-  AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK>;
+export type VurdereAnnenYtelseForVedtakAp = AksjonspunktFraBackend<
+  typeof AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK
+>;

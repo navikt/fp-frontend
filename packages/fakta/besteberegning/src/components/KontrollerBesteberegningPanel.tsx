@@ -8,7 +8,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
-import type { BesteberegningAP, ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = {
@@ -25,7 +25,7 @@ interface Props {
  * Formkomponent. Lar saksbehandler vurdere om den automatiske besteberegningen er korrekt utført.
  */
 export const KontrollerBesteberegningPanel = ({ aksjonspunkt }: Props) => {
-  const { submitCallback, isSubmittable, isReadOnly } = usePanelDataContext<BesteberegningAP>();
+  const { submitCallback, isSubmittable, isReadOnly } = usePanelDataContext<ManuellKontrollBesteberegningAP>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 

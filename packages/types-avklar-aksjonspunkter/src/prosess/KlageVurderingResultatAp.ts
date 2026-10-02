@@ -10,4 +10,4 @@ export type KlageVurderingResultatAp = {
   klageVurderingOmgjør?: KlageVurderingOmgjørType;
   klageHjemmel?: KlageHjemmel;
   vedtaksdatoPaklagdBehandling?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP>;
