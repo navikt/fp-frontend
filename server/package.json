@@ -7,7 +7,7 @@
   "packageManager": "yarn@4.17.0",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --noEmit && tsc -p tsconfig.build.json",
     "test": "vitest run",
     "eslint": "eslint src/**/*.ts* --color",
     "eslint:fix": "eslint --fix src/**/*.ts* --color",
