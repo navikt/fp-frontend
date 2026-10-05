@@ -72,12 +72,12 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
 
   return (
     <VStack gap="space-16">
-      <FaktaPanelTittel />
-      {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
-        <HStack justify="end">
+      <HStack gap="space-16">
+        <FaktaPanelTittel />
+        {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
           <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
-        </HStack>
-      )}
+        )}
+      </HStack>
       {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="UttakEøsFaktaForm.Aksjonspunkt" />

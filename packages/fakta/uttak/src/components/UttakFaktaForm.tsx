@@ -236,12 +236,12 @@ export const UttakFaktaForm = ({
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
   return (
     <VStack gap="space-32">
-      <FaktaPanelTittel />
-      {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
-        <HStack justify="end">
+      <HStack gap="space-16">
+        <FaktaPanelTittel />
+        {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
           <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
-        </HStack>
-      )}
+        )}
+      </HStack>
       {harÅpentAksjonspunkt && <AksjonspunktHelpTextHTML>{aksjonspunktTekster}</AksjonspunktHelpTextHTML>}
       {feilmelding && (
         <ErrorSummary>
