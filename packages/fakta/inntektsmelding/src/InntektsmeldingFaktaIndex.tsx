@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, type SortState, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, type SortState, Table } from '@navikt/ds-react';
 import { BeløpLabel, DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -66,7 +66,7 @@ export const InntektsmeldingFaktaIndex = ({
   if (ims.length === 0) {
     return (
       <RawIntlProvider value={intl}>
-        <VStack gap="space-24">
+        <>
           <FaktaPanelTittel visuallyHidden />
           <HStack gap="space-8" justify="center" align="center" className={styles['ingenInntektsmeldinger']}>
             <BodyShort>
@@ -74,14 +74,14 @@ export const InntektsmeldingFaktaIndex = ({
             </BodyShort>
             <CoffeeIcon />
           </HStack>
-        </VStack>
+        </>
       </RawIntlProvider>
     );
   }
 
   return (
     <RawIntlProvider value={intl}>
-      <VStack gap="space-24">
+      <>
         <FaktaPanelTittel visuallyHidden />
         <Table sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
           <Table.Header>
@@ -144,7 +144,7 @@ export const InntektsmeldingFaktaIndex = ({
             })}
           </Table.Body>
         </Table>
-      </VStack>
+      </>
     </RawIntlProvider>
   );
 };
