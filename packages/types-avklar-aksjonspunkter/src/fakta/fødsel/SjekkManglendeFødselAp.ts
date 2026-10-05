@@ -10,4 +10,4 @@ export type SjekkManglendeFødselAp = {
         dødsdato?: string;
       }[]
     | null;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL>;

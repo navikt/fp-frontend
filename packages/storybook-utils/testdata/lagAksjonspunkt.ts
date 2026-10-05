@@ -15,7 +15,7 @@ export const lagAksjonspunkt = (aksjonspunktKode: AksjonspunktKode, options?: Pa
   };
 };
 
-const aksjonspunktKoderMedToTrinnsBehandling = new Set([
+const aksjonspunktKoderMedToTrinnsBehandling = new Set<AksjonspunktKode>([
   AksjonspunktKode.VURDER_OMSORGSOVERTAKELSEVILKÅRET,
   AksjonspunktKode.MANUELL_VURDERING_AV_SØKNADSFRISTVILKÅRET,
   AksjonspunktKode.AVKLAR_DEKNINGSGRAD,

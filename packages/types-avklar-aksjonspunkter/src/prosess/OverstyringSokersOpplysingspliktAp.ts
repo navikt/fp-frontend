@@ -4,4 +4,4 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type OverstyringSokersOpplysingspliktAp = {
   erVilkårOk: boolean;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST>;

@@ -56,7 +56,7 @@ const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverk
 
 type ApData = {
   fatterVedtakAksjonspunktDto: {
-    '@type': AksjonspunktKode.FATTER_VEDTAK | '5005';
+    '@type': typeof AksjonspunktKode.FATTER_VEDTAK | '5005';
   } & FatterVedtakAp;
   erAlleAksjonspunktGodkjent: boolean;
 };
@@ -97,7 +97,7 @@ export const TotrinnskontrollSakIndex = ({
       arsaker: getArsaker(apData),
     }));
 
-    const kode = erTilbakekreving ? ('5005' as const) : (AksjonspunktKode.FATTER_VEDTAK as const);
+    const kode = erTilbakekreving ? ('5005' as const) : AksjonspunktKode.FATTER_VEDTAK;
     const fatterVedtakAksjonspunktDto = {
       '@type': kode,
       kode,

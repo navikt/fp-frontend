@@ -19,4 +19,4 @@ type KlageFormkravBasic = {
 };
 
 export type KlageFormkravAp = KlageFormkravBasic &
-  AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP>;
+  AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP>;

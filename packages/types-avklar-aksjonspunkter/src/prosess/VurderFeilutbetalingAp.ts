@@ -1,9 +1,5 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { TilbakekrevingVidereBehandling } from '@navikt/fp-types';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type VurderFeilutbetalingAp = {
-  videreBehandling: TilbakekrevingVidereBehandling;
-  varseltekst?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FEILUTBETALING>;
+export type VurderFeilutbetalingAp = AksjonspunktFraBackend<typeof AksjonspunktKode.VURDER_FEILUTBETALING>;

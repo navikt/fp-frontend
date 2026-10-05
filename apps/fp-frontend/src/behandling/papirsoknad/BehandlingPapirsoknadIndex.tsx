@@ -6,6 +6,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   isPapirsøknadMellomlagring,
   type PapirsøknadAp,
+  type PapirsøknadKode,
   type PapirsøknadMellomlagring,
   RegistrerPapirsoknadPanel,
   SoknadRegistrertModal,
@@ -133,13 +134,7 @@ const useLagrePapirsøknad = (
   return { lagrePapirsøknad, lagreUfullstendigPapirsøknad };
 };
 
-const getAktivPapirsøknadApKode = (
-  aksjonspunkter: Aksjonspunkt[],
-):
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_FORELDREPENGER
-  | AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER
-  | AksjonspunktKode.REGISTRER_PAPIRSØKNAD_SVANGERSKAPSPENGER => {
+const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): PapirsøknadKode => {
   const ap = aksjonspunkter
     .map(a => a.definisjon)
     .find(
@@ -153,6 +148,5 @@ const getAktivPapirsøknadApKode = (
   if (!ap) {
     throw new Error('Fant ikke aktivt aksjonspunkt for papirsøknad');
   }
-  // @ts-expect-error Blir fiksa når AksjonspunktKode reflekterar backend-typar
   return ap;
 };

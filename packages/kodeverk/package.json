@@ -13,6 +13,9 @@
     "tsc": "tsc --noEmit",
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
+  "dependencies": {
+    "@navikt/fp-types": "workspace:*"
+  },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",

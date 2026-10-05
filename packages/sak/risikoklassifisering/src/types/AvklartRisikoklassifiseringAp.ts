@@ -5,4 +5,4 @@ import type { AksjonspunktTilBekreftelse } from '@navikt/fp-types-avklar-aksjons
 export type AvklartRisikoklassifiseringAp = {
   harInnvirketBehandlingen?: boolean;
   faresignalVurdering?: FaresignalVurdering;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FARESIGNALER>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_FARESIGNALER>;
