@@ -46,7 +46,6 @@ import {
   type RelasjonsRolleType,
   type RevurderingVarslingÅrsak,
   type SivilstandType,
-  type StønadskontoType,
   type UtsettelseÅrsak,
   type UttakArbeidType,
   type UttakPeriodeType,
@@ -56,18 +55,7 @@ import {
   type VilkårType,
   type VirksomhetType,
 } from './index';
-import type { Arbeidskategori } from './interne-typer';
-
-// Den genererte StønadskontoType dekker bare kontoene som vises i saldo. Kodeverket fra backend har alle.
-type StønadskontoTypeKodeverk =
-  | StønadskontoType
-  | 'TILLEGG_FLERBARN'
-  | 'TILLEGG_PREMATUR'
-  | 'UFØREDAGER'
-  | 'TETTE_SAKER_MOR'
-  | 'TETTE_SAKER_FAR'
-  | 'BARE_FAR_RETT'
-  | 'FAR_RUNDT_FØDSEL';
+import type { Arbeidskategori, StønadskontoTypeKodeverk } from './interne-typer';
 
 //Mapping mellom KodeverkType og union-types med verdier
 type KodeverkEnumMap = {
