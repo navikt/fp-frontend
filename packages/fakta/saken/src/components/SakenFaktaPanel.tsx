@@ -38,7 +38,7 @@ export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyre
 
   return (
     <VStack gap="space-32" maxWidth="700px">
-      <FaktaPanelTittel />
+      <FaktaPanelTittel visuallyHidden />
       {isAksjonspunktOpen(automatiskMarkeringAvUtenlandssakAp) && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="SakenFaktaPanel.OpptjeningUtland" />
