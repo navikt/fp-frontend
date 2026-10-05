@@ -24,16 +24,6 @@
   "FaktaPanelTittel.ytelser": "Fakta om ytelser",
   "FaktaPanelTittel.uttakdokumentasjon": "Fakta om uttaksdokumentasjon",
 
-  "AdresseVisning.Adresse": "Adresse",
-
-  "ForelderPanel.Soker": "Søker",
-  "ForelderPanel.AnnenForelder": "Annen forelder",
-
-  "AlleBarnPanel.Barn": "Barn",
-  "AlleBarnPanel.BarnNr": "Barn {nummer}",
-  "AlleBarnPanel.Fodt": "Født",
-  "AlleBarnPanel.Dod": "Død",
-
   "PersonPanel.RolleOgNavn": "{rolle, select, BRUKER {Søker, } ANNEN_PART {Den andre forelderen, } BARN {Barnet, } other {} }{navn}",
   "PersonPanel.Beskrivelse.Bruker": "Adresser for søker registrert i folkeregisteret gyldige for de siste 12 månedene",
   "PersonPanel.Beskrivelse.Barn": "Adresser for barnet registrert i folkeregisteret gyldige på skjæringstidspunktet",
