@@ -66,24 +66,21 @@ export const InntektsmeldingFaktaIndex = ({
   if (ims.length === 0) {
     return (
       <RawIntlProvider value={intl}>
-        <>
-          <FaktaPanelTittel visuallyHidden />
-          <HStack gap="space-8" justify="center" align="center" className={styles['ingenInntektsmeldinger']}>
-            <BodyShort>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.ingen" />
-            </BodyShort>
-            <CoffeeIcon />
-          </HStack>
-        </>
+        <FaktaPanelTittel visuallyHidden />
+        <HStack gap="space-8" justify="center" align="center" className={styles['ingenInntektsmeldinger']}>
+          <BodyShort>
+            <FormattedMessage id="InntektsmeldingFaktaPanel.ingen" />
+          </BodyShort>
+          <CoffeeIcon />
+        </HStack>
       </RawIntlProvider>
     );
   }
 
   return (
     <RawIntlProvider value={intl}>
-      <>
-        <FaktaPanelTittel visuallyHidden />
-        <Table sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
+      <FaktaPanelTittel visuallyHidden />
+      <Table sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey="innsendingstidspunkt" sortable>
@@ -143,8 +140,7 @@ export const InntektsmeldingFaktaIndex = ({
               );
             })}
           </Table.Body>
-        </Table>
-      </>
+      </Table>
     </RawIntlProvider>
   );
 };
