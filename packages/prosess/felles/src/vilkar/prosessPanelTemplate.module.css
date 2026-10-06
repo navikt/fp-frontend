@@ -3,13 +3,13 @@
 }
 
 .godkjentImage {
-  color: var(--ax-bg-success-strong);
+  color: var(--ax-text-success-decoration);
   height: 25px;
   width: 25px;
 }
 
 .avslattImage {
-  color: var(--ax-danger-500);
+  color: var(--ax-text-danger-decoration);
   height: 25px;
   width: 25px;
 }

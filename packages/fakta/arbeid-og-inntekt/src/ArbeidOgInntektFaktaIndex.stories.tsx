@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagAksjonspunkt,
   lagArbeidsgiver,
@@ -53,6 +54,7 @@ const meta = {
       972_674_818: lagArbeidsgiver('972674818', 'PENGELØS SPAREBANK'),
       [MANUELT_ORG_NR]: lagArbeidsgiver(MANUELT_ORG_NR, 'Lagt til av saksbehandler'),
     },
+    faktaPanelKode: FaktaPanelCode.ARBEID_OG_INNTEKT,
     lagreVurdering: promiseAction('onLagreVurdering'),
     registrerArbeidsforhold: promiseAction('onRegistrerArbeidsforhold'),
     åpneForNyVurdering: action('onÅpneForNyVurdering'),

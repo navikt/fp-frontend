@@ -6,6 +6,7 @@ import { BodyShort, HStack, type SortState, Table } from '@navikt/ds-react';
 import { BeløpLabel, DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import type {
   ArbeidsgiverOpplysningerPerId,
   BehandlingFpSak,
@@ -65,6 +66,7 @@ export const InntektsmeldingFaktaIndex = ({
   if (ims.length === 0) {
     return (
       <RawIntlProvider value={intl}>
+        <FaktaPanelTittel visuallyHidden />
         <HStack gap="space-8" justify="center" align="center" className={styles['ingenInntektsmeldinger']}>
           <BodyShort>
             <FormattedMessage id="InntektsmeldingFaktaPanel.ingen" />
@@ -77,66 +79,67 @@ export const InntektsmeldingFaktaIndex = ({
 
   return (
     <RawIntlProvider value={intl}>
+      <FaktaPanelTittel visuallyHidden />
       <Table sort={sort} onSortChange={sortKey => handleSort(sortKey as TableHeaders)}>
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeader sortKey="innsendingstidspunkt" sortable>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.innsendt" />
-            </Table.ColumnHeader>
-            <Table.ColumnHeader sortKey="arbeidsgiverIdent" sortable>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.arbeidsgiver" />
-            </Table.ColumnHeader>
-            <Table.ColumnHeader sortKey="startDatoPermisjon" sortable>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.skjæringstidspunkt" />
-            </Table.ColumnHeader>
-            <Table.ColumnHeader sortKey="inntektPrMnd" sortable>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.månedsinntekt" />
-            </Table.ColumnHeader>
-            <Table.ColumnHeader sortKey="tilknyttedeBehandlingIder" sortable>
-              <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.behandling" />
-            </Table.ColumnHeader>
-            <Table.HeaderCell />
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {ims.map(inntektsmelding => {
-            return (
-              <Table.ExpandableRow
-                expandOnRowClick
-                contentGutter="none"
-                togglePlacement="right"
-                key={`${inntektsmelding.journalpostId}-${inntektsmelding.internArbeidsforholdId}`}
-                content={
-                  <InntektsmeldingInnhold
-                    alleBehandlinger={alleBehandlinger}
-                    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                    inntektsmelding={inntektsmelding}
-                  />
-                }
-              >
-                <Table.DataCell>
-                  <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
-                </Table.DataCell>
-                <Table.DataCell>
-                  {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]?.navn ?? '-'}
-                </Table.DataCell>
-                <Table.DataCell>
-                  {inntektsmelding.startDatoPermisjon ? (
-                    <DateLabel dateString={inntektsmelding.startDatoPermisjon} />
-                  ) : (
-                    '-'
-                  )}
-                </Table.DataCell>
-                <Table.DataCell>
-                  <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
-                </Table.DataCell>
-                <Table.DataCell>
-                  <InntektsmeldingStatus behandling={behandling} inntektsmelding={inntektsmelding} />
-                </Table.DataCell>
-              </Table.ExpandableRow>
-            );
-          })}
-        </Table.Body>
+          <Table.Header>
+            <Table.Row>
+              <Table.ColumnHeader sortKey="innsendingstidspunkt" sortable>
+                <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.innsendt" />
+              </Table.ColumnHeader>
+              <Table.ColumnHeader sortKey="arbeidsgiverIdent" sortable>
+                <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.arbeidsgiver" />
+              </Table.ColumnHeader>
+              <Table.ColumnHeader sortKey="startDatoPermisjon" sortable>
+                <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.skjæringstidspunkt" />
+              </Table.ColumnHeader>
+              <Table.ColumnHeader sortKey="inntektPrMnd" sortable>
+                <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.månedsinntekt" />
+              </Table.ColumnHeader>
+              <Table.ColumnHeader sortKey="tilknyttedeBehandlingIder" sortable>
+                <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.header.behandling" />
+              </Table.ColumnHeader>
+              <Table.HeaderCell />
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {ims.map(inntektsmelding => {
+              return (
+                <Table.ExpandableRow
+                  expandOnRowClick
+                  contentGutter="none"
+                  togglePlacement="right"
+                  key={`${inntektsmelding.journalpostId}-${inntektsmelding.internArbeidsforholdId}`}
+                  content={
+                    <InntektsmeldingInnhold
+                      alleBehandlinger={alleBehandlinger}
+                      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                      inntektsmelding={inntektsmelding}
+                    />
+                  }
+                >
+                  <Table.DataCell>
+                    <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
+                  </Table.DataCell>
+                  <Table.DataCell>
+                    {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]?.navn ?? '-'}
+                  </Table.DataCell>
+                  <Table.DataCell>
+                    {inntektsmelding.startDatoPermisjon ? (
+                      <DateLabel dateString={inntektsmelding.startDatoPermisjon} />
+                    ) : (
+                      '-'
+                    )}
+                  </Table.DataCell>
+                  <Table.DataCell>
+                    <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
+                  </Table.DataCell>
+                  <Table.DataCell>
+                    <InntektsmeldingStatus behandling={behandling} inntektsmelding={inntektsmelding} />
+                  </Table.DataCell>
+                </Table.ExpandableRow>
+              );
+            })}
+          </Table.Body>
       </Table>
     </RawIntlProvider>
   );

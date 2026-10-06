@@ -1,5 +1,4 @@
 {
-  "PermisjonFaktaPanel.Overskrift": "Fakta om permisjon",
   "PermisjonFaktaPanel.Skjaringstidspunkt": "Skjæringstidspunkt for opptjening: {skjæringspunktDato}",
   "PermisjonFaktaPanel.PermisjonUtenSluttdato": "Vi fant en permisjon uten sluttdato. Vurder om arbeidsforholdet skal tas med.",
 

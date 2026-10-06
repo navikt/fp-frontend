@@ -6,7 +6,7 @@ import { RhfDatepicker, RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, FaktaPanelTittel, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
@@ -66,6 +66,7 @@ export const TilretteleggingFaktaForm = ({
       onSubmit={values => submitCallback(transformValues(values))}
     >
       <VStack gap="space-32">
+        <FaktaPanelTittel visuallyHidden />
         {harÅpentAksjonspunkt && (
           <AksjonspunktHelpTextHTML>
             {skalVurdereVelferdspermisjoner ? (

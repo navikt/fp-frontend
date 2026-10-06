@@ -2,6 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import {
   lagArbeidsgiver,
   type PanelDataArgs,
@@ -48,6 +49,7 @@ const meta = {
   args: {
     arbeidsgiverOpplysningerPerId,
     isReadOnly: true,
+    faktaPanelKode: FaktaPanelCode.ARBEIDSFORHOLD,
   },
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof ArbeidsforholdFaktaIndex>>;
 export default meta;

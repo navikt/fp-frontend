@@ -3,10 +3,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
 
+import { ProsessStegCode } from '@navikt/fp-konstanter';
+
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import type { ProsessPanelMenyData } from './useProsessPanelMenyData';
 
-const ID = 'henlagt';
+const ID = ProsessStegCode.HENLAGT;
 
 type Props = {
   valgtProsessSteg: string | undefined;
@@ -31,7 +33,13 @@ export const BehandlingHenlagtPanel = ({ valgtProsessSteg, settProsessPanelMenyD
   }, [valgtProsessSteg]);
 
   return (
-    <ProsessPanelWrapper erPanelValgt={erPanelValgt} harÅpentAksjonspunkt={false} status="OPPFYLT">
+    <ProsessPanelWrapper
+      erPanelValgt={erPanelValgt}
+      harÅpentAksjonspunkt={false}
+      status="OPPFYLT"
+      prosessPanelKode={ID}
+      prosessPanelTittel={intl.formatMessage({ id: 'BehandlingHenlagtPanel.Header' })}
+    >
       <BodyShort size="small">
         <FormattedMessage id="BehandlingHenlagtPanel.Henlagt" />
       </BodyShort>

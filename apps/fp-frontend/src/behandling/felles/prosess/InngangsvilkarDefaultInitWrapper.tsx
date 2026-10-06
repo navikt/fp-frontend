@@ -49,6 +49,8 @@ export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, ch
       erPanelValgt={erPanelValgt}
       harÅpentAksjonspunkt={harÅpentInngangsvilkårAksjonspunkt}
       status={status}
+      prosessPanelKode={ProsessStegCode.INNGANGSVILKAR}
+      prosessPanelTittel={intl.formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' })}
       skalSkjulePanel={!erPanelValgt}
     >
       <VStack gap="space-32">

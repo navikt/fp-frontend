@@ -1,8 +1,9 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 
-import { Heading, HStack } from '@navikt/ds-react';
+import { HStack } from '@navikt/ds-react';
 import { AksjonspunktBoks, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
+import { FaktaPanelTittel } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FødselGjeldende } from '@navikt/fp-types';
 import { usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
@@ -23,14 +24,10 @@ export const OverstyringPanel = ({ gjeldende }: Props) => {
 
   return (
     <>
-      {kanOverstyreAccess.isEnabled && (
-        <HStack gap="space-16">
-          <Heading size="small">
-            <FormattedMessage id="OverstyringPanel.Tittel" />
-          </Heading>
-          <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
-        </HStack>
-      )}
+      <HStack gap="space-16">
+        <FaktaPanelTittel />
+        {kanOverstyreAccess.isEnabled && <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />}
+      </HStack>
 
       {erOverstyrt && (
         <AksjonspunktBoks
