@@ -24,9 +24,6 @@ import { VedtakHelpTextPanel } from './VedtakHelpTextPanel';
 
 import styles from './vedtakFellesPanel.module.css';
 
-const finnTekstkodeFraBehandlingstatus = (behandlingStatus: BehandlingStatus): string =>
-  behandlingStatus === 'AVSLU' || behandlingStatus === 'IVED' ? 'VedtakForm.vedtak' : 'VedtakForm.ForslagTilVedtak';
-
 const kanSendesTilGodkjenning = (behandlingStatusKode: BehandlingStatus): boolean => behandlingStatusKode === 'UTRED';
 
 const finnKnappetekstkode = (aksjonspunkterForPanel: Aksjonspunkt[], skalBrukeManueltBrev: boolean): string =>
@@ -122,7 +119,7 @@ export const VedtakFellesPanel = ({
           </>
         )}
         <Heading size="small" level="2">
-          <FormattedMessage id={finnTekstkodeFraBehandlingstatus(status)} />
+          <FormattedMessage id="VedtakForm.Tittel" />
         </Heading>
       </HStack>
       <HStack gap="space-8">
