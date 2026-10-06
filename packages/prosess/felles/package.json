@@ -38,8 +38,8 @@
     "@navikt/fp-utils-test": "workspace:*",
     "@types/react": "19.3.0",
     "eslint": "10.10.0",
-    "stylelint": "17.15.0",
+    "stylelint": "17.16.0",
     "typescript": "6.0.3",
-    "vitest": "5.0.2"
+    "vitest": "5.0.3"
   }
 }
