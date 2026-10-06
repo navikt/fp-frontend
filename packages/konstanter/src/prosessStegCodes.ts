@@ -1,6 +1,7 @@
 // Definerer alle prosess-steg. Desse verdien blir vist i URL og brukt i historikk-elementene.
 export enum ProsessStegCode {
   DEFAULT = 'default',
+  HENLAGT = 'henlagt',
   INNGANGSVILKAR = 'inngangsvilkar',
   BEHANDLE_INNSYN = 'behandle_innsyn',
   BEREGNING = 'beregning',

@@ -14,6 +14,7 @@ interface Props<T extends Behandling> {
   overstyrtStatus?: VilkårUtfallType;
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
+  prosessPanelTittel?: string;
   skalMarkeresSomAktiv?: boolean;
   standardPanelProps: StandardProsessPanelProps<T>;
   children: ReactElement;
@@ -41,6 +42,7 @@ const ProsessPanel = <T extends Behandling>({
   skalPanelVisesIMeny,
   prosessPanelKode,
   prosessPanelMenyTekst,
+  prosessPanelTittel,
   standardPanelProps,
   harÅpentAksjonspunkt,
   children,
@@ -64,7 +66,13 @@ const ProsessPanel = <T extends Behandling>({
 
   return (
     <MellomlagretFormDataProvider behandling={behandling}>
-      <ProsessPanelWrapper erPanelValgt={erPanelValgt} harÅpentAksjonspunkt={harÅpentAksjonspunkt} status={status}>
+      <ProsessPanelWrapper
+        erPanelValgt={erPanelValgt}
+        harÅpentAksjonspunkt={harÅpentAksjonspunkt}
+        status={status}
+        prosessPanelKode={prosessPanelKode}
+        prosessPanelTittel={prosessPanelTittel ?? prosessPanelMenyTekst}
+      >
         {skalVisePanel ? (
           <BehandlingPanelDataProvider panelData={{ ...standardPanelProps, harÅpentAksjonspunkt }}>
             {children}
