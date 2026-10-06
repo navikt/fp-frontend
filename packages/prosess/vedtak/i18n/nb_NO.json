@@ -1,5 +1,5 @@
 {
-  "VedtakForm.ForslagTilVedtak": "Vedtak",
+  "VedtakForm.Tittel": "Vedtak",
   "VedtakForm.ResultatKlageYtelsesvedtakOpphevet": "Vedtaket er opphevet",
   "VedtakForm.ResultatKlageAvvist": "Klagen er avvist",
   "VedtakForm.EngangsstonadIkkeInnvilget": "Engangsstønad er avslått",
@@ -15,7 +15,6 @@
   "VedtakForm.FattVedtak": "Fatt vedtak",
   "VedtakForm.beregnetTilkjentYtelse": "Beregnet engangsstønad",
   "VedtakForm.AntallBarn": "Antall barn",
-  "VedtakForm.vedtak": "Vedtak",
   "VedtakForm.ArsakTilAvslag": "Årsak til avslag",
   "VedtakForm.Fritekst": "Fritekst i brev til søker",
   "VedtakForm.Fritekst.Beregningsgrunnlag": "Fritekst i brev til søker som handler om fastsettelse av beregningsgrunnlaget",

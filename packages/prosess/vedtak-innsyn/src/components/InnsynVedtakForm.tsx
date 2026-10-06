@@ -141,7 +141,7 @@ export const InnsynVedtakForm = ({
     >
       <VStack gap="space-16">
         <Heading size="small" level="2">
-          <FormattedMessage id={isReadOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} />
+          <FormattedMessage id="InnsynVedtakForm.Tittel" />
         </Heading>
         <VStack gap="space-4">
           <Label size="small">

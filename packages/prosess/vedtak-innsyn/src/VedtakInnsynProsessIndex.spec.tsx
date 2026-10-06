@@ -13,7 +13,7 @@ describe('VedtakInnsynProsessIndex', () => {
 
     render(<PanelForInnvilgetVedtak submitCallback={lagre} previewCallback={forhåndsvise} />);
 
-    expect(await screen.findByText('Forslag til vedtak')).toBeInTheDocument();
+    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
     expect(screen.getByText('Resultat')).toBeInTheDocument();
     expect(screen.getByText('Krav om innsyn innvilget')).toBeInTheDocument();
     expect(screen.getByText('Vurdering')).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe('VedtakInnsynProsessIndex', () => {
 
     render(<PanelForAvvistVedtak submitCallback={lagre} previewCallback={forhåndsvise} />);
 
-    expect(await screen.findByText('Forslag til vedtak')).toBeInTheDocument();
+    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
     expect(screen.getByText('Resultat')).toBeInTheDocument();
     expect(screen.getByText('Krav om innsyn avslått')).toBeInTheDocument();
     expect(screen.getByText('Vurdering')).toBeInTheDocument();

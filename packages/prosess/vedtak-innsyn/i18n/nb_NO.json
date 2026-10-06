@@ -1,6 +1,5 @@
 {
-  "InnsynVedtakForm.ForslagVedtak": "Forslag til vedtak",
-  "InnsynVedtakForm.Vedtak": "Vedtak",
+  "InnsynVedtakForm.Tittel": "Vedtak",
   "InnsynVedtakForm.Innvilget": "Krav om innsyn innvilget",
   "InnsynVedtakForm.Delvis": "Krav om innsyn delvis innvilget",
   "InnsynVedtakForm.Avslatt": "Krav om innsyn avslått",
