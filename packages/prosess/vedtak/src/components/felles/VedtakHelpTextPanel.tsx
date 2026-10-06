@@ -1,6 +1,6 @@
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Alert, BodyShort } from '@navikt/ds-react';
+import { Alert, Label, List } from '@navikt/ds-react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
@@ -23,16 +23,14 @@ export const VedtakHelpTextPanel = ({ isReadOnly, aksjonspunkterForPanel }: Prop
   if (!isReadOnly && helpTexts.length > 0) {
     return (
       <Alert variant="info" size="small">
-        <BodyShort size="small">
+        <Label size="small" spacing>
           <FormattedMessage id="VedtakHelpTextPanel.Vurder" />
-        </BodyShort>
-        <ul>
+        </Label>
+        <List size="small" className="list-none">
           {helpTexts.map(text => (
-            <li key={text}>
-              <BodyShort size="small">{text}</BodyShort>
-            </li>
+            <List.Item key={text}>{text}</List.Item>
           ))}
-        </ul>
+        </List>
       </Alert>
     );
   }

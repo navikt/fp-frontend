@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
-import { formatCurrencyWithKr } from '@navikt/ft-utils';
+import { HStack, VStack } from '@navikt/ds-react';
+import { BeløpLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 
 import type { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
 
@@ -31,29 +31,28 @@ export const VedtakInnvilgetRevurderingPanel = ({
   <VStack gap="space-16">
     {ytelseTypeKode === 'ES' && beregningsresultat && 'antallBarn' in beregningsresultat && (
       <HStack gap="space-8">
-        <VStack gap="space-4">
-          <Detail>
-            <FormattedMessage id="VedtakForm.beregnetTilkjentYtelse" />
-          </Detail>
-          <Label size="small">{formatCurrencyWithKr(beregningsresultat.beregnetTilkjentYtelse)}</Label>
-        </VStack>
-        <VStack gap="space-4">
-          <Detail>
-            <FormattedMessage id="VedtakForm.AntallBarn" />
-          </Detail>
-          <Label size="small">{beregningsresultat.antallBarn}</Label>
-        </VStack>
+        <LabeledValue
+          size="small"
+          label={<FormattedMessage id="VedtakForm.beregnetTilkjentYtelse" />}
+          value={<BeløpLabel beløp={beregningsresultat.beregnetTilkjentYtelse} kr />}
+        />
+
+        <LabeledValue
+          size="small"
+          label={<FormattedMessage id="VedtakForm.AntallBarn" />}
+          value={beregningsresultat.antallBarn}
+        />
       </HStack>
     )}
+
     {(ytelseTypeKode === 'FP' || ytelseTypeKode === 'SVP') && (
       <>
         {revurderingsÅrsakString && (
-          <VStack gap="space-4">
-            <Label size="small">
-              <FormattedMessage id="VedtakForm.Revurdering.Aarsak" />
-            </Label>
-            <BodyShort size="small">{revurderingsÅrsakString}</BodyShort>
-          </VStack>
+          <LabeledValue
+            size="small"
+            label={<FormattedMessage id="VedtakForm.Revurdering.Aarsak" />}
+            value={revurderingsÅrsakString}
+          />
         )}
         {!skalBrukeOverstyrendeFritekstBrev && beregningErManueltFastsatt && (
           <VedtakFritekstPanel

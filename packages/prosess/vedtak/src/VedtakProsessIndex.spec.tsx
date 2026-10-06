@@ -83,7 +83,7 @@ describe('VedtakProsessIndex', () => {
 
     expect(screen.getByText('Innholdet fra det automatiske brevet kan nå redigeres')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Rediger brev')[0]!);
+    await userEvent.click(screen.getByRole('button', { name: 'Åpne redigering av brev' }));
 
     expect(screen.getByText(/Gjør nødvendige endringer i brevet nedenfor/)).toBeInTheDocument();
 
@@ -109,7 +109,7 @@ describe('VedtakProsessIndex', () => {
 
     expect(await screen.findByText('Innholdet fra det automatiske brevet kan nå redigeres')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Rediger brev'));
+    await userEvent.click(screen.getByRole('button', { name: 'Åpne redigering av brev' }));
 
     expect(screen.getByText(/Gjør nødvendige endringer i brevet nedenfor/)).toBeInTheDocument();
 
@@ -326,7 +326,7 @@ describe('VedtakProsessIndex', () => {
     expect(screen.getByText('Rediger vedtaksbrev')).toBeInTheDocument();
 
     expect(screen.getByText('Beregnet engangsstønad')).toBeInTheDocument();
-    expect(screen.getByText('10 000 kr')).toBeInTheDocument();
+    expect(screen.getByText('10 000')).toHaveTextContent('10 000 kr');
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
 

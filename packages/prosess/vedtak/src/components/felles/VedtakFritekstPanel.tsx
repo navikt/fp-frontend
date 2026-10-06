@@ -1,16 +1,14 @@
 import { useFormContext } from 'react-hook-form';
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { Detail, VStack } from '@navikt/ds-react';
 import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import type { Behandlingsresultat } from '@navikt/fp-types';
 
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
-
-import styles from './vedtakFritekstPanel.module.css';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
@@ -23,8 +21,6 @@ interface Props {
 }
 
 export const VedtakFritekstPanel = ({ behandlingsresultat, språkkode, isReadOnly, labelTextCode }: Props) => {
-  const intl = useIntl();
-
   const { control } = useFormContext<VedtakFormValues>();
 
   return (
@@ -33,7 +29,7 @@ export const VedtakFritekstPanel = ({ behandlingsresultat, språkkode, isReadOnl
         <RhfTextarea
           name="begrunnelse"
           control={control}
-          label={intl.formatMessage({ id: labelTextCode })}
+          label={<FormattedMessage id={labelTextCode} />}
           validate={[minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
           readOnly={isReadOnly}
@@ -47,10 +43,13 @@ export const VedtakFritekstPanel = ({ behandlingsresultat, språkkode, isReadOnl
         />
       )}
       {isReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
-        <VStack gap="space-16">
-          <Detail>{intl.formatMessage({ id: labelTextCode })}</Detail>
-          <div className={styles['fritekstItem']}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
-        </VStack>
+        <LabeledValue
+          size="small"
+          label={<FormattedMessage id={labelTextCode} />}
+          value={
+            <span className="whitespace-pre-wrap">{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</span>
+          }
+        />
       )}
     </>
   );

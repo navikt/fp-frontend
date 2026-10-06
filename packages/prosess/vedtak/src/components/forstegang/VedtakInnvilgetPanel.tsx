@@ -1,7 +1,7 @@
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Detail, HStack, Label, VStack } from '@navikt/ds-react';
-import { formatCurrencyWithKr } from '@navikt/ft-utils';
+import { HStack } from '@navikt/ds-react';
+import { BeløpLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 
 import type { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
 
@@ -30,15 +30,18 @@ export const VedtakInnvilgetPanel = ({
   return (
     <>
       {ytelseTypeKode === 'ES' && 'antallBarn' in beregningsresultat && (
-        <HStack gap="space-8">
-          <VStack gap="space-4">
-            <Detail>{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Detail>
-            <Label size="small">{formatCurrencyWithKr(beregningsresultat.beregnetTilkjentYtelse)}</Label>
-          </VStack>
-          <VStack gap="space-4">
-            <Detail>{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Detail>
-            <Label size="small">{beregningsresultat.antallBarn}</Label>
-          </VStack>
+        <HStack gap="space-16">
+          <LabeledValue
+            size="small"
+            label={intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}
+            value={<BeløpLabel beløp={beregningsresultat.beregnetTilkjentYtelse} kr />}
+          />
+
+          <LabeledValue
+            size="small"
+            label={<FormattedMessage id="VedtakForm.AntallBarn" />}
+            value={beregningsresultat.antallBarn}
+          />
         </HStack>
       )}
       {beregningErManueltFastsatt && !skalBrukeOverstyrendeFritekstBrev && (

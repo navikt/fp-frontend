@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Label, VStack } from '@navikt/ds-react';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 
 import type { Behandlingsresultat } from '@navikt/fp-types';
 
@@ -24,12 +24,12 @@ export const VedtakOpphorRevurderingPanel = ({
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => (
   <>
-    <VStack gap="space-4">
-      <Label size="small">
-        <FormattedMessage id="VedtakForm.Revurdering.Aarsak" />
-      </Label>
-      {revurderingsÅrsakString && <BodyShort size="small">{revurderingsÅrsakString}</BodyShort>}
-    </VStack>
+    <LabeledValue
+      size="small"
+      label={<FormattedMessage id="VedtakForm.Revurdering.Aarsak" />}
+      value={revurderingsÅrsakString ?? '-'}
+    />
+
     {!skalBrukeOverstyrendeFritekstBrev && beregningErManueltFastsatt && (
       <VedtakFritekstPanel
         isReadOnly={isReadOnly}

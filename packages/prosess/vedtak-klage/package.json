@@ -23,6 +23,7 @@
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
+    "@navikt/ft-ui-komponenter": "9.0.1",
     "@navikt/ft-utils": "6.0.1",
     "dayjs": "1.11.23",
     "react": "19.3.0",

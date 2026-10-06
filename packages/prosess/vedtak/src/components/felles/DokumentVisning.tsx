@@ -23,8 +23,14 @@ export const DokumentVisning = ({ dokument }: Props) => {
       dokumentTittel={tittel}
     >
       <HStack gap="space-4" wrap={false}>
-        <FileIcon width="20" height="20" aria-label={intl.formatMessage({ id: 'DokumentVisning.FilIkon' })} />
-        <BodyShort size="small">{tittel}</BodyShort>
+        <FileIcon
+          fontSize="1.125rem"
+          className="mr-1 inline"
+          aria-label={intl.formatMessage({ id: 'DokumentVisning.FilIkon' })}
+        />
+        <BodyShort size="small" as="span">
+          {tittel}
+        </BodyShort>
       </HStack>
     </DokumentLink>
   );

@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Label, Table, VStack } from '@navikt/ds-react';
+import { Label, Table, VStack } from '@navikt/ds-react';
 
 import type { Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -8,8 +8,6 @@ import { usePanelDataContext } from '@navikt/fp-utils';
 import { Beskrivelser } from './Beskrivelser';
 import { Dokumenter } from './Dokumenter';
 import { FerdigstillOppgaveKnapp } from './FerdigstillOppgaveKnapp';
-
-import styles from './oppgaveTabell.module.css';
 
 interface Props {
   oppgaver: Oppgave[];
@@ -28,22 +26,20 @@ export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave, isReadOnly }: Prop
       <Table>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell className={styles['headerType']} textSize="small">
+            <Table.HeaderCell textSize="small">
               <FormattedMessage id="OppgaveTabell.Type" />
             </Table.HeaderCell>
             <Table.HeaderCell textSize="small">
               <FormattedMessage id="OppgaveTabell.Beskrivelse" />
             </Table.HeaderCell>
-            {!isReadOnly && <Table.HeaderCell className={styles['headerButton']} />}
+            {!isReadOnly && <Table.HeaderCell />}
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {oppgaver.map(oppgave => (
-            <Table.Row key={oppgave.oppgaveId} className={styles['row']}>
-              <Table.DataCell>
-                <BodyShort size="small">
-                  {alleKodeverk['OppgaveType'].find(o => o.kode === oppgave.oppgavetype)?.navn}
-                </BodyShort>
+            <Table.Row key={oppgave.oppgaveId} className="align-top">
+              <Table.DataCell textSize="small">
+                {alleKodeverk['OppgaveType'].find(o => o.kode === oppgave.oppgavetype)?.navn}
               </Table.DataCell>
               <Table.DataCell>
                 <VStack gap="space-8">

@@ -106,74 +106,62 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
       <VStack gap="space-16">
         <Box padding="space-16" borderRadius="4" background="neutral-soft">
           <VStack gap="space-16">
+            {!isReadOnly && (
+              <Heading size="xsmall" level="3">
+                <FormattedMessage id="OverstyringVedtaksbrev.RedigerBrevOverskrift" />
+              </Heading>
+            )}
             {!isReadOnly && !brevOverstyring?.redigertHtml && !hentBrevHtmlIsPending && (
               <Alert variant="info" size="small">
                 <FormattedMessage id="OverstyringVedtaksbrev.KanRedigeres" />
               </Alert>
             )}
-            {!!brevOverstyring?.redigertHtml && !hentBrevHtmlIsPending && (
-              <Alert variant="success" size="small">
-                <FormattedMessage id="OverstyringVedtaksbrev.ErOverstyrt" />
-              </Alert>
-            )}
-            {isReadOnly && harRedigertBrev && (
+            {((!!brevOverstyring?.redigertHtml && !hentBrevHtmlIsPending) || (isReadOnly && harRedigertBrev)) && (
               <Alert variant="success" size="small">
                 <FormattedMessage id="OverstyringVedtaksbrev.ErOverstyrt" />
               </Alert>
             )}
             {!isReadOnly && (
-              <>
-                <Heading size="small" level="2">
-                  <FormattedMessage id="OverstyringVedtaksbrev.RedigerBrevOverskrift" />
-                </Heading>
-                <HStack gap="space-16">
-                  <Button
-                    variant="secondary"
-                    type="button"
-                    onClick={visFritekstModalOgHentBrev}
-                    size="small"
-                    disabled={isReadOnly}
-                  >
-                    <FormattedMessage id="OverstyringVedtaksbrev.RedigerVedtaksbrev" />
-                  </Button>
-                  <Button
-                    size="small"
-                    variant="secondary"
-                    onClick={() => setVisForkastOverstyringModal(true)}
-                    type="button"
-                  >
-                    <FormattedMessage id="OverstyringVedtaksbrev.ForkastManueltBrev" />
-                  </Button>
-                </HStack>
-              </>
+              <HStack gap="space-16">
+                <Button variant="secondary" type="button" onClick={visFritekstModalOgHentBrev} size="small">
+                  <FormattedMessage id="OverstyringVedtaksbrev.ÅpneRedigering" />
+                </Button>
+                <Button
+                  size="small"
+                  variant="secondary"
+                  onClick={() => setVisForkastOverstyringModal(true)}
+                  type="button"
+                >
+                  <FormattedMessage id="OverstyringVedtaksbrev.ForkastManueltBrev" />
+                </Button>
+              </HStack>
             )}
             {isReadOnly && harRedigertBrev && vedtaksbrevDokumentLink && (
-              <div>
-                <Button
-                  variant="tertiary"
-                  size="small"
-                  icon={<FileSearchIcon aria-hidden />}
-                  onClick={visOverstyrtVedtaksbrevPdf}
-                  loading={henterVedtaksbrevPdf}
-                  type="button"
-                >
-                  <FormattedMessage id="OverstyringVedtaksbrev.VisBrev" />
-                </Button>
-              </div>
+              <Button
+                className="self-start"
+                variant="tertiary"
+                size="small"
+                icon={<FileSearchIcon aria-hidden />}
+                onClick={visOverstyrtVedtaksbrevPdf}
+                loading={henterVedtaksbrevPdf}
+                type="button"
+              >
+                <FormattedMessage id="OverstyringVedtaksbrev.VisBrev" />
+              </Button>
             )}
+
             {!isReadOnly && !!brevOverstyring?.redigertHtml && (
-              <div>
-                <Button
-                  variant="tertiary"
-                  size="small"
-                  icon={<FileSearchIcon aria-hidden />}
-                  onClick={() => forhåndsvisRedigertHtmlBrev()}
-                  onKeyDown={e => (e.key === 'Enter' ? forhåndsvisRedigertHtmlBrev() : null)}
-                  type="button"
-                >
-                  <FormattedMessage id="OverstyringVedtaksbrev.ForhandvisBrev" />
-                </Button>
-              </div>
+              <Button
+                className="self-start"
+                variant="tertiary"
+                size="small"
+                icon={<FileSearchIcon aria-hidden />}
+                onClick={() => forhåndsvisRedigertHtmlBrev()}
+                onKeyDown={e => (e.key === 'Enter' ? forhåndsvisRedigertHtmlBrev() : null)}
+                type="button"
+              >
+                <FormattedMessage id="OverstyringVedtaksbrev.ForhandvisBrev" />
+              </Button>
             )}
             {!isReadOnly && !!brevOverstyring?.redigertHtml && !harRedigertBrev && (
               <Alert variant="info" size="small">
