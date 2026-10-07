@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Suspense, useCallback, useMemo, useState } from 'react';
 import { type Location, type NavigateFunction, useLocation, useNavigate, useParams } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -17,6 +17,7 @@ import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
 import { BehandlingDataProvider } from './felles/context/BehandlingDataContext';
 import { lazyNamedWithRetry } from './lazyUtils';
+import { useErMontert } from './useErMontert';
 
 const BehandlingPapirsoknadIndex = lazyNamedWithRetry<Record<never, never>, 'BehandlingPapirsoknadIndex'>(
   () => import('./papirsoknad/BehandlingPapirsoknadIndex'),
@@ -93,20 +94,14 @@ const BehandlingIndexWrapper = ({
 
   const navigate = useNavigate();
   const location = useLocation();
-  const erAktivRef = useRef(true);
-  useEffect(() => {
-    erAktivRef.current = true;
-    return () => {
-      erAktivRef.current = false;
-    };
-  }, []);
+  const erMontertRef = useErMontert();
   const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(
     (prosessStegId?: string, faktaPanelId?: string) => {
-      if (erAktivRef.current) {
+      if (erMontertRef.current) {
         getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate)(prosessStegId, faktaPanelId);
       }
     },
-    [location, navigate],
+    [location, navigate, erMontertRef],
   );
 
   if (kodeverk === undefined) {
