@@ -94,6 +94,7 @@ const BehandlingIndexWrapper = ({
 
   const navigate = useNavigate();
   const location = useLocation();
+  // Lagring og polling kan bli ferdig etter at brukeren har byttet behandling. Da skal ikke URL-en oppdateres.
   const erMontertRef = useErMontert();
   const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(
     (prosessStegId?: string, faktaPanelId?: string) => {
