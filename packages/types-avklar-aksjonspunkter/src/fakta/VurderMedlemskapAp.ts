@@ -1,8 +1,5 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type VurderMedlemskapAp = {
-  avslagskode?: string;
-  opphørFom?: string;
-} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET>;
+export type VurderMedlemskapAp = AksjonspunktFraBackend<typeof AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET>;

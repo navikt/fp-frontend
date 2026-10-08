@@ -1,13 +1,5 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { KlageHjemmel, KlageVurderingOmgjørType, KlageVurderingType } from '@navikt/fp-types';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type KlageVurderingResultatAp = {
-  klageVurdering: KlageVurderingType;
-  fritekstTilBrev?: string;
-  klageMedholdÅrsak?: string;
-  klageVurderingOmgjør?: KlageVurderingOmgjørType;
-  klageHjemmel?: KlageHjemmel;
-  vedtaksdatoPaklagdBehandling?: string;
-} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP>;
+export type KlageVurderingResultatAp = AksjonspunktFraBackend<typeof AksjonspunktKode.MANUELL_VURDERING_AV_KLAGE_NFP>;

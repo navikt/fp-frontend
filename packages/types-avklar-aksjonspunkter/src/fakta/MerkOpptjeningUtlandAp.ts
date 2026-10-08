@@ -1,7 +1,7 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type MerkOpptjeningUtlandAp = {
-  dokStatus?: string;
-} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK>;
+export type MerkOpptjeningUtlandAp = AksjonspunktFraBackend<
+  typeof AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK
+>;

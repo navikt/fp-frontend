@@ -1,4 +1,5 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { OpptjeningAktivitetType } from '@navikt/fp-types';
 
 import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
@@ -7,7 +8,7 @@ export type OpptjeningAktivitetAp = {
   arbeidsforholdRef?: string;
   erGodkjent: boolean;
   begrunnelse: string;
-  aktivitetType: string;
+  aktivitetType: OpptjeningAktivitetType;
   opptjeningFom: string;
   opptjeningTom: string;
 };

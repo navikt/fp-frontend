@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { ArbeidsgiverOpplysningerPerId, Soknad } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Soknad, VilkårUtfallType } from '@navikt/fp-types';
 
 import { SokersOpplysningspliktForm } from './components/SokersOpplysningspliktForm';
 
@@ -13,7 +13,7 @@ const intl = createIntl(messages);
 interface Props {
   søknad: Soknad;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  status: string;
+  status: VilkårUtfallType;
 }
 
 export const SokersOpplysningspliktVilkarProsessIndex = (props: Props) => (

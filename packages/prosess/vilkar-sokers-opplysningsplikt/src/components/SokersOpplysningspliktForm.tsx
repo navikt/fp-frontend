@@ -13,7 +13,13 @@ import {
   VilkarResultPicker,
   type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandlingsresultat, Soknad } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  ArbeidsgiverOpplysningerPerId,
+  Behandlingsresultat,
+  Soknad,
+  VilkårUtfallType,
+} from '@navikt/fp-types';
 import type { OverstyringSokersOpplysingspliktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -23,7 +29,7 @@ type FormValues = ProsessStegBegrunnelseTextFieldFormValues & VilkarResultPicker
 
 interface Props {
   søknad: Soknad;
-  status: string;
+  status: VilkårUtfallType;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -101,7 +107,7 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
+  status: VilkårUtfallType,
   behandlingsresultat: Behandlingsresultat | undefined,
 ): FormValues => {
   return {

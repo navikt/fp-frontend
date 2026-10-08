@@ -2,9 +2,15 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { BehandlingType, KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
+import type {
+  BehandlingOppretting,
+  BehandlingType,
+  FagsakYtelseType,
+  KodeverkMedNavn,
+  KodeverkMedNavnTilbakekreving,
+} from '@navikt/fp-types';
 
-import { type BehandlingOppretting, type FormValues, NyBehandlingModal } from './components/NyBehandlingModal';
+import { type FormValues, NyBehandlingModal } from './components/NyBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -15,7 +21,7 @@ const intl = createIntl(messages);
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyForstegangsbehandling' });
 
 interface Props {
-  ytelseType: string;
+  ytelseType: FagsakYtelseType;
   saksnummer: string;
   behandlingUuid?: string;
   lagNyBehandling: (values: {
