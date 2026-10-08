@@ -17,14 +17,14 @@
     "storybook": "storybook dev --quiet -p 7006"
   },
   "dependencies": {
-    "@nais/apm": "0.7.2",
+    "@nais/apm": "0.7.3",
     "@navikt/ds-react": "8.18.0",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-sak-dekorator": "workspace:*",
     "@navikt/fp-sak-infosider": "workspace:*",
     "@navikt/ft-utils": "6.0.0",
-    "@tanstack/react-query": "5.104.0",
-    "@tanstack/react-query-devtools": "5.104.0",
+    "@tanstack/react-query": "5.104.1",
+    "@tanstack/react-query-devtools": "5.104.1",
     "dayjs": "1.11.23",
     "ky": "2.1.0",
     "react": "19.3.0",
@@ -37,15 +37,15 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-utils-test": "workspace:*",
-    "@storybook/react": "10.6.0",
-    "@storybook/react-vite": "10.6.0",
+    "@storybook/react": "10.6.1",
+    "@storybook/react-vite": "10.6.1",
     "@testing-library/dom": "10.4.2",
     "@testing-library/react": "16.3.3",
     "@types/react": "19.3.0",
     "eslint": "10.10.0",
-    "storybook": "10.6.0",
+    "storybook": "10.6.1",
     "typescript": "6.0.3",
-    "vite": "8.3.1",
-    "vitest": "5.0.2"
+    "vite": "8.3.2",
+    "vitest": "5.0.3"
   }
 }
