@@ -190,6 +190,6 @@ const transformValues = (values: InnsynFormValues, documents: Dokument[]): Vurde
   mottattDato: notEmpty(values.mottattDato),
   innsynResultatType: notEmpty(values.innsynResultatType),
   fristDato: values.fristDato,
-  sattPaVent: values.sattPaVent,
+  sattPåVent: values.sattPaVent,
   begrunnelse: values.begrunnelse,
 });
