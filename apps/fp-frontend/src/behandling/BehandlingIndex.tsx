@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo, useState } from 'react';
+import { Suspense, useCallback, useMemo, useState } from 'react';
 import { type Location, type NavigateFunction, useLocation, useNavigate, useParams } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -17,6 +17,7 @@ import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
 import { BehandlingDataProvider } from './felles/context/BehandlingDataContext';
 import { lazyNamedWithRetry } from './lazyUtils';
+import { useErMontert } from './useErMontert';
 
 const BehandlingPapirsoknadIndex = lazyNamedWithRetry<Record<never, never>, 'BehandlingPapirsoknadIndex'>(
   () => import('./papirsoknad/BehandlingPapirsoknadIndex'),
@@ -28,7 +29,6 @@ interface Props {
   setBehandling: (behandling: Behandling) => void;
   hentOgSettBehandling: () => void;
   fagsakData: FagsakData;
-  setBehandlingUuidFraUrl: (uuid: string) => void;
 }
 
 /**
@@ -36,22 +36,11 @@ interface Props {
  *
  * Er rot for for den delen av hovedvinduet som har innhold for en valgt behandling.
  */
-export const BehandlingIndex = ({
-  behandling,
-  setBehandling,
-  hentOgSettBehandling,
-  fagsakData,
-  setBehandlingUuidFraUrl,
-}: Props) => {
+export const BehandlingIndex = ({ behandling, setBehandling, hentOgSettBehandling, fagsakData }: Props) => {
   const params = useParams<{ behandlingUuid: string }>();
   const behandlingUuid = params['behandlingUuid']!;
 
-  useEffect(() => {
-    setBehandlingUuidFraUrl(behandlingUuid);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- synkroniserer berre når behandlingUuid frå URL endrar seg; setter-prop er stabil
-  }, [behandlingUuid]);
-
-  if (!behandling) {
+  if (!behandling || behandling.uuid !== behandlingUuid) {
     return <LoadingPanel />;
   }
 
@@ -105,9 +94,15 @@ const BehandlingIndexWrapper = ({
 
   const navigate = useNavigate();
   const location = useLocation();
-  const oppdaterProsessStegOgFaktaPanelIUrl = useMemo(
-    () => getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate),
-    [location, navigate],
+  // Lagring og polling kan bli ferdig etter at brukeren har byttet behandling. Da skal ikke URL-en oppdateres.
+  const erMontertRef = useErMontert();
+  const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(
+    (prosessStegId?: string, faktaPanelId?: string) => {
+      if (erMontertRef.current) {
+        getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate)(prosessStegId, faktaPanelId);
+      }
+    },
+    [location, navigate, erMontertRef],
   );
 
   if (kodeverk === undefined) {
