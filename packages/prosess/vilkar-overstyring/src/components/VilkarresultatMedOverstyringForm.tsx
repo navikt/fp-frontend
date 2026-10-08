@@ -10,7 +10,14 @@ import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Avslagsarsak, BehandlingFpSak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  Avslagsarsak,
+  BehandlingFpSak,
+  ManuellBehandlingResultat,
+  Vilkår,
+  VilkårUtfallType,
+} from '@navikt/fp-types';
 import type {
   OverstyringAp,
   OverstyringMedlemskapsvilkaretAp,
@@ -58,7 +65,7 @@ type OverstyringVilkår =
 interface Props {
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined;
   vilkår: Vilkår | undefined;
-  status: string;
+  status: VilkårUtfallType;
   panelTekstKode: string;
 }
 
@@ -193,7 +200,7 @@ export const VilkarresultatMedOverstyringForm = ({
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
+  status: VilkårUtfallType,
   overstyringApKode: VilkårOverstyringAksjonspunkter,
   behandlingsresultat: BehandlingFpSak['behandlingsresultat'],
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined,

@@ -1,4 +1,4 @@
-import type { FastsattOpptjening } from '@navikt/fp-types';
+import type { FastsattOpptjening, VilkårUtfallType } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { OpptjeningVilkarAksjonspunktPanel } from './OpptjeningVilkarAksjonspunktPanel';
@@ -6,7 +6,7 @@ import { OpptjeningVilkarView } from './OpptjeningVilkarView';
 
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
-  status: string;
+  status: VilkårUtfallType;
 }
 
 /**

@@ -44,7 +44,7 @@ type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextField
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
+  status: VilkårUtfallType,
   behandlingsresultat?: BehandlingFpSak['behandlingsresultat'],
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),

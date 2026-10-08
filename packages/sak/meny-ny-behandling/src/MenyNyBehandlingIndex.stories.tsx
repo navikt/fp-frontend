@@ -2,10 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import type { BehandlingOppretting } from '@navikt/fp-types';
 
 import { MenyNyBehandlingIndex } from './MenyNyBehandlingIndex';
 
-const BEHANDLING_OPPRETTING = [
+const BEHANDLING_OPPRETTING: BehandlingOppretting[] = [
   {
     behandlingType: 'BT-002',
     kanOppretteBehandling: true,

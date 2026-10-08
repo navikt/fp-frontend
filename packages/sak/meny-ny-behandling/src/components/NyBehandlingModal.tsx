@@ -9,6 +9,8 @@ import { required } from '@navikt/ft-form-validators';
 import type {
   BehandlingArsakType,
   BehandlingÅrsakTypeFpTilbake,
+  BehandlingOppretting,
+  FagsakYtelseType,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
 } from '@navikt/fp-types';
@@ -65,7 +67,7 @@ const TilbakekrevingRevurderingArsaker: BehandlingÅrsakTypeFpTilbake[] = [
 ];
 
 const getBehandlingAarsaker = (
-  ytelseType: string,
+  ytelseType: FagsakYtelseType,
   valgtBehandlingType?: string,
   alleRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[],
   alleTilbakekrevingRevurderingArsaker?: KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[],
@@ -121,11 +123,6 @@ const getEnabledBehandlingstyper = (
     return behandlingOppretting.some(bo => bo.behandlingType === bt.kode && bo.kanOppretteBehandling);
   });
 
-export type BehandlingOppretting = Readonly<{
-  behandlingType: string;
-  kanOppretteBehandling: boolean;
-}>;
-
 export type FormValues = {
   behandlingType?: string;
   nyBehandlingEtterKlage?: string;
@@ -133,12 +130,12 @@ export type FormValues = {
 };
 
 interface Props {
-  ytelseType: string;
+  ytelseType: FagsakYtelseType;
   cancelEvent: () => void;
   submitCallback: (
     data: {
       eksternUuid?: string;
-      fagsakYtelseType: string;
+      fagsakYtelseType: FagsakYtelseType;
     } & FormValues,
   ) => void;
   behandlingOppretting: BehandlingOppretting[];
@@ -250,8 +247,8 @@ export const NyBehandlingModal = ({
 const transformValues = (
   values: FormValues,
   eksternUuid: string | undefined,
-  fagsakYtelseType: string,
-): { eksternUuid?: string; fagsakYtelseType: string } & FormValues => ({
+  fagsakYtelseType: FagsakYtelseType,
+): { eksternUuid?: string; fagsakYtelseType: FagsakYtelseType } & FormValues => ({
   behandlingType: values.behandlingType,
   nyBehandlingEtterKlage: values.nyBehandlingEtterKlage,
   behandlingArsakType: values.behandlingArsakType,

@@ -14,14 +14,14 @@ import {
   VilkarResultPicker,
   type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak } from '@navikt/fp-types';
+import type { Aksjonspunkt, BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
 import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextFieldFormValues;
 
 interface Props {
-  status: string;
+  status: VilkårUtfallType;
 }
 
 /**
@@ -87,7 +87,7 @@ export const FodselVilkarForm = ({ status }: Props) => {
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
+  status: VilkårUtfallType,
   behandlingsresultat?: BehandlingFpSak['behandlingsresultat'],
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),

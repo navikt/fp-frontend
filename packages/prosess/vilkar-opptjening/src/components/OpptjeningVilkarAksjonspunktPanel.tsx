@@ -13,7 +13,7 @@ import {
   VilkarResultPicker,
   type VilkarResultPickerFormValues,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening, VilkårUtfallType } from '@navikt/fp-types';
 import type { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -23,7 +23,7 @@ type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextField
 
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
-  status: string;
+  status: VilkårUtfallType;
 }
 
 /**
@@ -107,7 +107,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }
 
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
-  status: string,
+  status: VilkårUtfallType,
   behandlingsresultat: Behandlingsresultat | undefined,
 ): FormValues => ({
   ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
