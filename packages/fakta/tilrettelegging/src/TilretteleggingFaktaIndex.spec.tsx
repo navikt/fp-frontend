@@ -205,6 +205,8 @@ describe('TilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Ja'));
     await userEvent.click(screen.getByText('Oppdater'));
 
+    await userEvent.click(screen.getByText('17.03.2020 - 14.08.2020'));
+
     const dato = screen.getAllByText('Fra og med')[0]!;
     await userEvent.type(dato, '{backspace}1');
     fireEvent.blur(dato);
@@ -223,6 +225,8 @@ describe('TilretteleggingFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Ja'));
     await userEvent.click(screen.getByText('Oppdater'));
+
+    await userEvent.click(screen.getByText('17.03.2020 - 14.08.2020'));
 
     const dato = screen.getAllByText('Fra og med')[0]!;
     await userEvent.type(dato, lagNyDato('16.03.2020'));
@@ -244,6 +248,8 @@ describe('TilretteleggingFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Ja'));
     await userEvent.click(screen.getByText('Oppdater'));
+
+    await userEvent.click(screen.getByText('17.03.2020 - 14.08.2020'));
 
     const dato = screen.getAllByText('Fra og med')[0]!;
     await userEvent.type(dato, lagNyDato('15.08.2020'));
@@ -432,6 +438,8 @@ describe('TilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
+    await userEvent.click(screen.getByText('15.09.2020 - 20.09.2020'));
+
     const dato = screen.getAllByText('Fra og med')[1]!;
     await userEvent.type(dato, lagNyDato('17.03.2020'));
     fireEvent.blur(dato);
@@ -453,6 +461,8 @@ describe('TilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
+    await userEvent.click(screen.getByText('15.09.2020 - 20.09.2020'));
+
     const dato = screen.getAllByText('Fra og med')[1]!;
     await userEvent.type(dato, '{backspace}1');
     fireEvent.blur(dato);
@@ -467,6 +477,8 @@ describe('TilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
+    await userEvent.click(screen.getByText('15.09.2020 - 20.09.2020'));
+
     const dato = screen.getAllByText('Fra og med')[1]!;
     await userEvent.type(dato, lagNyDato('16.03.2020'));
     fireEvent.blur(dato);
@@ -480,6 +492,8 @@ describe('TilretteleggingFaktaIndex', () => {
     render(<HarOpphold />);
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('15.09.2020 - 20.09.2020'));
 
     const tomDato = screen.getAllByText('Til og med')[0]!;
     await userEvent.type(tomDato, lagNyDato('26.09.2020'));
@@ -516,6 +530,8 @@ describe('TilretteleggingFaktaIndex', () => {
     render(<HarOpphold />);
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('15.09.2020 - 20.09.2020'));
 
     const dato = screen.getAllByText('Fra og med')[1]!;
     await userEvent.type(dato, lagNyDato('21.09.2020'));
