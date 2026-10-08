@@ -5,4 +5,4 @@ export const harAksjonspunkt = (
   aksjonspunkter: Aksjonspunkt[],
 ): boolean => aksjonspunkter.some(ap => ap.definisjon === aksjonspunktKode);
 
-export const erAksjonspunktÅpent = (ap: Pick<Aksjonspunkt, 'status'>): boolean => ap.status === 'OPPR';
+export const erAksjonspunktÅpent = (ap: { status: Aksjonspunkt['status'] }): boolean => ap.status === 'OPPR';
