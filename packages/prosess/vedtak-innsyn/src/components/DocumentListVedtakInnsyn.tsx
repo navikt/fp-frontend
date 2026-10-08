@@ -17,16 +17,16 @@ interface Props {
 export const DocumentListVedtakInnsyn = ({ documents, saksNr }: Props) => {
   return (
     <LabeledValue
-      size="small"
+      size="medium"
       label={<FormattedMessage id="DocumentListVedtakInnsyn.InnsynsDok" />}
       fieldType="component"
       value={
         documents.length === 0 ? (
-          <BodyShort size="small">
+          <BodyShort size="medium">
             <FormattedMessage id="DocumentListVedtakInnsyn.NoDocuments" />
           </BodyShort>
         ) : (
-          <List size="small">
+          <List size="medium">
             {documents.map(document => (
               <List.Item key={Number.parseInt(document.dokumentId, 10)}>
                 <DokumentLink

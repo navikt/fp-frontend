@@ -28,7 +28,7 @@ export const VedtakKlageSubmitPanel = ({
   };
 
   return (
-    <HStack gap="space-8" align="center">
+    <HStack gap="space-16" align="center">
       {!readOnly && (
         <Button
           variant="primary"
