@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, List } from '@navikt/ds-react';
+import { FileIcon } from '@navikt/aksel-icons';
+import { BodyShort, HStack } from '@navikt/ds-react';
 import { LabeledValue } from '@navikt/ft-ui-komponenter';
 
 import type { Dokument } from '@navikt/fp-types';
@@ -17,27 +18,34 @@ interface Props {
 export const DocumentListVedtakInnsyn = ({ documents, saksNr }: Props) => {
   return (
     <LabeledValue
-      size="medium"
+      size="small"
       label={<FormattedMessage id="DocumentListVedtakInnsyn.InnsynsDok" />}
       fieldType="component"
       value={
         documents.length === 0 ? (
-          <BodyShort size="medium">
+          <BodyShort size="small">
             <FormattedMessage id="DocumentListVedtakInnsyn.NoDocuments" />
           </BodyShort>
         ) : (
-          <List size="medium">
+          <ul>
             {documents.map(document => (
-              <List.Item key={Number.parseInt(document.dokumentId, 10)}>
+              <li key={Number.parseInt(document.dokumentId, 10)}>
                 <DokumentLink
                   saksnummer={saksNr}
                   journalpostId={document.journalpostId}
                   dokumentId={document.dokumentId}
                   dokumentTittel={document.tittel ?? undefined}
-                />
-              </List.Item>
+                >
+                  <HStack gap="space-4" wrap={false} align="center">
+                    <FileIcon fontSize="1.125rem" className="mr-1" aria-hidden />
+                    <BodyShort size="small" as="span">
+                      {document.tittel}
+                    </BodyShort>
+                  </HStack>
+                </DokumentLink>
+              </li>
             ))}
-          </List>
+          </ul>
         )
       }
     />
