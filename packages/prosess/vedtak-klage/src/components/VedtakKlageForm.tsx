@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Heading, VStack } from '@navikt/ds-react';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
@@ -52,43 +53,44 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
       <Heading size="small" level="2">
         <FormattedMessage id="VedtakKlageForm.Tittel" />
       </Heading>
-      <VStack gap="space-4">
-        <Label size="small">
-          <FormattedMessage id="VedtakKlageForm.Resultat" />
-        </Label>
-        {behandlingsResultatTekst && (
-          <BodyShort size="small">
-            <FormattedMessage id={behandlingsResultatTekst} />
-          </BodyShort>
-        )}
-      </VStack>
+
+      <LabeledValue
+        size="small"
+        label={<FormattedMessage id="VedtakKlageForm.Resultat" />}
+        value={behandlingsResultatTekst ? <FormattedMessage id={behandlingsResultatTekst} /> : '-'}
+      />
+
       {behandlingsresultat.type === 'KLAGE_AVVIST' && (
-        <VStack gap="space-4">
-          <Label size="small">
-            <FormattedMessage id="VedtakKlageForm.ArsakTilAvvisning" />
-          </Label>
-          {avvistArsaker.map(arsak => (
-            <BodyShort size="small" key={arsak}>
-              {alleKodeverk['KlageAvvistÅrsak'].find(({ kode }) => kode === arsak)?.navn ?? ''}
-            </BodyShort>
-          ))}
-        </VStack>
+        <LabeledValue
+          size="small"
+          label={<FormattedMessage id="VedtakKlageForm.ArsakTilAvvisning" />}
+          fieldType="component"
+          value={
+            <>
+              {avvistArsaker.map(arsak => (
+                <BodyShort size="small" key={arsak}>
+                  {alleKodeverk['KlageAvvistÅrsak'].find(({ kode }) => kode === arsak)?.navn ?? ''}
+                </BodyShort>
+              ))}
+            </>
+          }
+        />
       )}
+
       {erOmgjort && (
-        <VStack gap="space-4">
-          <Label size="small">
-            <FormattedMessage id="VedtakKlageForm.ArsakTilOmgjoring" />
-          </Label>
-          {omgjortAarsak}
-        </VStack>
+        <LabeledValue
+          size="small"
+          label={<FormattedMessage id="VedtakKlageForm.ArsakTilOmgjoring" />}
+          value={omgjortAarsak ?? '-'}
+        />
       )}
+
       {behandlingsresultat.type === 'KLAGE_YTELSESVEDTAK_OPPHEVET' && (
-        <VStack gap="space-4">
-          <Label size="small">
-            <FormattedMessage id="VedtakKlageForm.ArsakTilOppheving" />
-          </Label>
-          {omgjortAarsak}
-        </VStack>
+        <LabeledValue
+          size="small"
+          label={<FormattedMessage id="VedtakKlageForm.ArsakTilOppheving" />}
+          value={omgjortAarsak ?? '-'}
+        />
       )}
       {klageVurderingResultat?.klageVurdertAv === 'NFP' && (
         <VedtakKlageSubmitPanel
@@ -102,6 +104,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
     </VStack>
   );
 };
+
 const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering) => {
   if (klageVurderingResultat.klageFormkravResultatKA && klageVurderingResultat.klageVurderingResultatNK) {
     return klageVurderingResultat.klageFormkravResultatKA.avvistÅrsaker;

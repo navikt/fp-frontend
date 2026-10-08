@@ -216,18 +216,20 @@ export const VedtakForm = ({
               />
             );
           }
-
-          return erAvslatt ? (
-            <VedtakAvslagPanel
-              behandlingsresultat={behandlingsresultat}
-              isReadOnly={isReadOnly}
-              språkkode={språkkode}
-              alleKodeverk={alleKodeverk}
-              vilkår={vilkår}
-              beregningErManueltFastsatt={beregningErManueltFastsatt}
-              skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
-            />
-          ) : null;
+          if (erAvslatt) {
+            return (
+              <VedtakAvslagPanel
+                behandlingsresultat={behandlingsresultat}
+                isReadOnly={isReadOnly}
+                språkkode={språkkode}
+                alleKodeverk={alleKodeverk}
+                vilkår={vilkår}
+                beregningErManueltFastsatt={beregningErManueltFastsatt}
+                skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
+              />
+            );
+          }
+          return null;
         }}
       />
     </RhfForm>

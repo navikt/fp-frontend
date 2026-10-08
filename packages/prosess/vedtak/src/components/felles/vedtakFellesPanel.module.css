@@ -2,34 +2,21 @@
   margin-left: 5px;
 }
 
-.blyant {
-  margin-right: 5px;
-}
-
 .status {
   height: 20px;
   width: 20px;
 }
 
 .innvilgetImage {
-  color: var(--ax-bg-success-strong);
+  color: var(--ax-text-success-decoration);
   height: 25px;
   width: 25px;
 }
 
 .avslattImage {
-  color: var(--ax-danger-600);
+  color: var(--ax-text-danger-decoration);
   height: 25px;
   width: 25px;
-}
-
-.disabletLink {
-  color: var(--ax-neutral-200);
-  display: inline;
-}
-
-.space {
-  margin-right: 50px;
 }
 
 .alert {

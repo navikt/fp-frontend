@@ -264,9 +264,7 @@ export const VedtakRevurderingForm = ({
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
               />
             );
-          }
-
-          if (erAvslatt) {
+          } else if (erAvslatt) {
             return (
               <VedtakAvslagArsakOgBegrunnelsePanel
                 vilkår={vilkår}
@@ -277,18 +275,19 @@ export const VedtakRevurderingForm = ({
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
               />
             );
+          } else if (erOpphor) {
+            return (
+              <VedtakOpphorRevurderingPanel
+                revurderingsÅrsakString={revurderingsÅrsakString}
+                isReadOnly={isReadOnly}
+                behandlingsresultat={behandlingsresultat}
+                språkkode={språkkode}
+                beregningErManueltFastsatt={beregningErManueltFastsatt}
+                skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
+              />
+            );
           }
-
-          return erOpphor ? (
-            <VedtakOpphorRevurderingPanel
-              revurderingsÅrsakString={revurderingsÅrsakString}
-              isReadOnly={isReadOnly}
-              behandlingsresultat={behandlingsresultat}
-              språkkode={språkkode}
-              beregningErManueltFastsatt={beregningErManueltFastsatt}
-              skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
-            />
-          ) : null;
+          return null;
         }}
       />
     </RhfForm>

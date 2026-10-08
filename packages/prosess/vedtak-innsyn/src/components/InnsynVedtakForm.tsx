@@ -2,9 +2,10 @@ import React from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
+import { Heading, HStack, Link, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -14,8 +15,6 @@ import type { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListVedtakInnsyn } from './DocumentListVedtakInnsyn';
-
-import styles from './innsynVedtakForm.module.css';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
@@ -127,7 +126,7 @@ export const InnsynVedtakForm = ({
   const documents = getDocumenterMedFikkInnsynVerdi(getFilteredReceivedDocuments(alleDokumenter), innsynDokumenter);
 
   const apVurderInnsynBegrunnelse =
-    aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse ?? undefined;
+    behandling.aksjonspunkt.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse ?? undefined;
 
   const begrunnelse = useWatch({ control: formMethods.control, name: 'begrunnelse' });
 
@@ -143,22 +142,19 @@ export const InnsynVedtakForm = ({
         <Heading size="small" level="2">
           <FormattedMessage id="InnsynVedtakForm.Tittel" />
         </Heading>
-        <VStack gap="space-4">
-          <Label size="small">
-            <FormattedMessage id="InnsynVedtakForm.Resultat" />
-          </Label>
-          <BodyShort size="small">
-            <FormattedMessage id={findResultTypeMessage(innsynResultatType)} />
-          </BodyShort>
-        </VStack>
-        <VStack gap="space-4">
-          <Label size="small">
-            <FormattedMessage id="InnsynVedtakForm.Vurdering" />
-          </Label>
-          <BodyShort size="small" className={styles['wordwrap']}>
-            {decodeHtmlEntity(apVurderInnsynBegrunnelse)}
-          </BodyShort>
-        </VStack>
+
+        <LabeledValue
+          size="small"
+          label={<FormattedMessage id="InnsynVedtakForm.Resultat" />}
+          value={<FormattedMessage id={findResultTypeMessage(innsynResultatType)} />}
+        />
+
+        <LabeledValue
+          size="small"
+          label={<FormattedMessage id="InnsynVedtakForm.Vurdering" />}
+          value={<span className="whitespace-pre-wrap">{decodeHtmlEntity(apVurderInnsynBegrunnelse)}</span>}
+        />
+
         {innsynResultatType !== 'INNV' && (
           <RhfTextarea
             name="begrunnelse"

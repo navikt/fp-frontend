@@ -8,8 +8,6 @@ import type { Beskrivelse } from '@navikt/fp-types';
 
 import { BeskrivelseVisning } from './BeskrivelseVisning';
 
-import styles from './beskrivelser.module.css';
-
 interface Props {
   beskrivelser: Beskrivelse[];
 }
@@ -17,42 +15,34 @@ interface Props {
 export const Beskrivelser = ({ beskrivelser }: Props) => {
   const intl = useIntl();
 
-  const skalSkjuleResterendeBeskrivelser = beskrivelser.length > 1;
-  const [erResterendeBeskrivelserSkjult, setErResterendeBeskrivelserSkjult] = useState(
-    skalSkjuleResterendeBeskrivelser,
-  );
+  const [erResterendeBeskrivelserSkjult, setErResterendeBeskrivelserSkjult] = useState(true);
 
-  const beskrivelseForVisning = beskrivelser[0];
-  const beskrivelserSomSkjules = beskrivelser.slice(1);
+  const beskrivelseForVisning = erResterendeBeskrivelserSkjult ? beskrivelser.slice(0, 1) : beskrivelser;
 
-  return (
-    <VStack gap="space-4">
-      {beskrivelseForVisning && <BeskrivelseVisning beskrivelse={beskrivelseForVisning} />}
-      {skalSkjuleResterendeBeskrivelser && (
-        <Button
-          className={styles['button']}
-          variant="tertiary"
-          size="xsmall"
-          type="button"
-          icon={erResterendeBeskrivelserSkjult ? <ChevronDownIcon aria-hidden /> : <ChevronUpIcon aria-hidden />}
-          onClick={() => setErResterendeBeskrivelserSkjult(!erResterendeBeskrivelserSkjult)}
-          aria-expanded={!erResterendeBeskrivelserSkjult}
-        >
-          {erResterendeBeskrivelserSkjult
-            ? intl.formatMessage({ id: 'Beskrivelser.VisMer' })
-            : intl.formatMessage({ id: 'Beskrivelser.VisMindre' })}
-        </Button>
-      )}
-      {!erResterendeBeskrivelserSkjult && (
-        <VStack gap="space-12" className={styles['eldreBeskrivelser']}>
-          {beskrivelserSomSkjules.map(beskrivelse => (
-            <BeskrivelseVisning
-              key={(beskrivelse.header ?? '') + (beskrivelse.kommentarer.at(0) ?? '')}
-              beskrivelse={beskrivelse}
-            />
-          ))}
-        </VStack>
-      )}
+  return beskrivelser.length === 1 ? (
+    <BeskrivelseVisning beskrivelse={beskrivelser[0]!} />
+  ) : (
+    <VStack gap="space-8">
+      {beskrivelseForVisning.map(beskrivelse => (
+        <BeskrivelseVisning
+          key={(beskrivelse.header ?? '') + (beskrivelse.kommentarer.at(0) ?? '')}
+          beskrivelse={beskrivelse}
+        />
+      ))}
+
+      <Button
+        className="text-nowrap self-start"
+        variant="tertiary"
+        size="xsmall"
+        type="button"
+        icon={erResterendeBeskrivelserSkjult ? <ChevronDownIcon aria-hidden /> : <ChevronUpIcon aria-hidden />}
+        onClick={() => setErResterendeBeskrivelserSkjult(!erResterendeBeskrivelserSkjult)}
+        aria-expanded={!erResterendeBeskrivelserSkjult}
+      >
+        {erResterendeBeskrivelserSkjult
+          ? intl.formatMessage({ id: 'Beskrivelser.VisMer' })
+          : intl.formatMessage({ id: 'Beskrivelser.VisMindre' })}
+      </Button>
     </VStack>
   );
 };

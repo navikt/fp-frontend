@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Label } from '@navikt/ds-react';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, Behandlingsresultat, Vilkår } from '@navikt/fp-types';
 
@@ -25,28 +25,23 @@ export const VedtakAvslagPanel = ({
   alleKodeverk,
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
-}: Props) => {
-  const intl = useIntl();
-  const textCode = beregningErManueltFastsatt ? 'VedtakForm.Fritekst.Beregningsgrunnlag' : 'VedtakForm.Fritekst';
-  return (
-    <>
-      {getAvslagÅrsak(vilkår, alleKodeverk, behandlingsresultat) && (
-        <div>
-          <Label size="small">{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Label>
-          <BodyShort size="small">{getAvslagÅrsak(vilkår, alleKodeverk, behandlingsresultat)}</BodyShort>
-        </div>
-      )}
-      {!skalBrukeOverstyrendeFritekstBrev && (
-        <VedtakFritekstPanel
-          isReadOnly={isReadOnly}
-          språkkode={språkkode}
-          behandlingsresultat={behandlingsresultat}
-          labelTextCode={textCode}
-        />
-      )}
-    </>
-  );
-};
+}: Props) => (
+  <>
+    <LabeledValue
+      size="small"
+      label={<FormattedMessage id="VedtakForm.ArsakTilAvslag" />}
+      value={getAvslagÅrsak(vilkår, alleKodeverk, behandlingsresultat)}
+    />
+    {!skalBrukeOverstyrendeFritekstBrev && (
+      <VedtakFritekstPanel
+        isReadOnly={isReadOnly}
+        språkkode={språkkode}
+        behandlingsresultat={behandlingsresultat}
+        labelTextCode={beregningErManueltFastsatt ? 'VedtakForm.Fritekst.Beregningsgrunnlag' : 'VedtakForm.Fritekst'}
+      />
+    )}
+  </>
+);
 
 const getAvslagÅrsak = (
   vilkar: Vilkår[],

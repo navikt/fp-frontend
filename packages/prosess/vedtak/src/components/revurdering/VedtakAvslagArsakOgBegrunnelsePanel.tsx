@@ -2,16 +2,15 @@ import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Detail, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Label, VStack } from '@navikt/ds-react';
 import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import type { AlleKodeverk, Behandlingsresultat, Vilkår } from '@navikt/fp-types';
 
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
-
-import styles from './vedtakAvslagArsakOgBegrunnelsePanel.module.css';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
@@ -90,12 +89,13 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
         />
       )}
       {isReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
-        <VStack gap="space-4">
-          <Detail>
-            <FormattedMessage id="VedtakForm.Fritekst" />
-          </Detail>
-          <div className={styles['fritekstItem']}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
-        </VStack>
+        <LabeledValue
+          size="small"
+          label={<FormattedMessage id="VedtakForm.Fritekst" />}
+          value={
+            <span className="whitespace-pre-wrap">{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</span>
+          }
+        />
       )}
     </VStack>
   );

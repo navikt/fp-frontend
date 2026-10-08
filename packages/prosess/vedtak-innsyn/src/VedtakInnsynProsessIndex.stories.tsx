@@ -6,6 +6,7 @@ import { action } from 'storybook/actions';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   lagAksjonspunkt,
+  lagBehandling,
   type PanelDataArgs,
   withMellomlagretFormData,
   withPanelData,
@@ -19,10 +20,12 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     previewCallback: action('button-click'),
-    aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.VURDER_INNSYN, { status: 'UTFO', begrunnelse: 'Dette er utført' }),
-      lagAksjonspunkt(AksjonspunktKode.FORESLÅ_VEDTAK),
-    ],
+    behandling: lagBehandling({
+      aksjonspunkt: [
+        lagAksjonspunkt(AksjonspunktKode.VURDER_INNSYN, { status: 'UTFO', begrunnelse: 'Dette er utført' }),
+      ],
+    }),
+    aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.FORESLÅ_VEDTAK)],
     alleDokumenter: [
       {
         journalpostId: '2',

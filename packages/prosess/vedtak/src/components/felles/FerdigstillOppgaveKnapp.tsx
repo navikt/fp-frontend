@@ -5,8 +5,6 @@ import { Button } from '@navikt/ds-react';
 
 import type { Oppgave } from '@navikt/fp-types';
 
-import styles from './ferdigstillOppgaveKnapp.module.css';
-
 interface Props {
   oppgave: Oppgave;
   ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
@@ -17,7 +15,7 @@ export const FerdigstillOppgaveKnapp = ({ oppgave, ferdigstillOppgave }: Props) 
 
   return (
     <Button
-      className={styles['knapp']}
+      className="text-nowrap"
       size="small"
       variant="secondary"
       onClick={async () => {
