@@ -46,7 +46,6 @@ import {
   type RelasjonsRolleType,
   type RevurderingVarslingÅrsak,
   type SivilstandType,
-  type StønadskontoType,
   type UtsettelseÅrsak,
   type UttakArbeidType,
   type UttakPeriodeType,
@@ -56,7 +55,7 @@ import {
   type VilkårType,
   type VirksomhetType,
 } from './index';
-import type { Arbeidskategori } from './interne-typer';
+import type { Arbeidskategori, StønadskontoTypeKodeverk } from './interne-typer';
 
 //Mapping mellom KodeverkType og union-types med verdier
 type KodeverkEnumMap = {
@@ -107,7 +106,7 @@ type KodeverkEnumMap = {
   RevurderingVarslingÅrsak: RevurderingVarslingÅrsak;
   SivilstandType: SivilstandType;
   SkjermlenkeType: SkjermlenkeType;
-  StønadskontoType: StønadskontoType;
+  StønadskontoType: StønadskontoTypeKodeverk;
   UtsettelseÅrsak: UtsettelseÅrsak;
   UttakArbeidType: UttakArbeidType;
   UttakPeriodeType: UttakPeriodeType;

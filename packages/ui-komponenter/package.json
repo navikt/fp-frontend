@@ -24,7 +24,7 @@
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@types/react": "19.3.0",
-    "eslint": "10.10.0",
+    "eslint": "10.12.0",
     "typescript": "6.0.3"
   }
 }

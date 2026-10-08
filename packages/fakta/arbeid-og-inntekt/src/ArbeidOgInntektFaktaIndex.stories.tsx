@@ -839,7 +839,6 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
             permisjonTom: '2022-12-01',
             type: 'VELFERDSPERMISJON',
           },
-          saksbehandlersVurdering: '-',
           permisjoner: [],
         },
       ],
