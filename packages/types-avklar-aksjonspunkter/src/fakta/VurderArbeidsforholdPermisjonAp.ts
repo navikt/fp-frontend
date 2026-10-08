@@ -9,4 +9,4 @@ export type VurderArbeidsforholdPermisjonAp = {
     permisjonStatus: string;
   }[];
   begrunnelse: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO>;

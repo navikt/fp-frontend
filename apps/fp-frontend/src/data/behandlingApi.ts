@@ -115,11 +115,15 @@ const isTest = import.meta.env.MODE === 'test';
 const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 /**
-Backend returnerer null for Optional.orElse(null), som JAX-RS oversetter til 204 No Content
+Backend returnerer null for Optional.orElse(null), som JAX-RS oversetter til 204 No Content, eller 200 med tom body
 */
 const jsonEllerNull = async <T>(responsePromise: ResponsePromise) => {
   const response = await responsePromise;
-  return response.status === 204 ? null : response.json<T>();
+  if (response.status === 204) {
+    return null;
+  }
+  const tekst = await response.text();
+  return tekst === '' ? null : (JSON.parse(tekst) as T);
 };
 
 const getUrlFromRel = (rel: keyof typeof BehandlingRel, links: ApiLink[]): string => {

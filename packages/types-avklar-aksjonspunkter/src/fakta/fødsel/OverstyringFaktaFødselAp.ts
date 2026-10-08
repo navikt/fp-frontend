@@ -10,4 +10,4 @@ export type OverstyringFaktaFødselAp = {
         dødsdato?: string;
       }[]
     | null;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL>;

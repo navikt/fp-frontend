@@ -50,7 +50,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
   return (
     <VStack gap="space-16">
       <Heading size="small" level="2">
-        <FormattedMessage id="VedtakKlageForm.Header" />
+        <FormattedMessage id="VedtakKlageForm.Tittel" />
       </Heading>
       <VStack gap="space-4">
         <Label size="small">

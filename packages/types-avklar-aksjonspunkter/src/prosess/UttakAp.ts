@@ -1,15 +1,12 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { UttakResultatPeriodeLagreDto } from '@navikt/fp-types';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend } from '../AksjonspunktFraBackend';
 
-export type UttakAp = {
-  perioder: UttakResultatPeriodeLagreDto[];
-} & AksjonspunktTilBekreftelse<
-  | AksjonspunktKode.FASTSETT_UTTAKPERIODER
-  | AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
-  | AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT
-  | AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE
-  | AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD
-  | AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST
+export type UttakAp = AksjonspunktFraBackend<
+  | typeof AksjonspunktKode.FASTSETT_UTTAKPERIODER
+  | typeof AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
+  | typeof AksjonspunktKode.FASTSETT_UTTAK_STORTINGSREPRESENTANT
+  | typeof AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE
+  | typeof AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD
+  | typeof AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST
 >;

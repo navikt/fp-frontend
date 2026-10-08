@@ -13,4 +13,4 @@ export type VurderInnsynAp = {
   }[];
   sattPaVent?: boolean;
   fristDato?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_INNSYN>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_INNSYN>;

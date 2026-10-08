@@ -9,4 +9,4 @@ export type FatterVedtakAp = {
     aksjonspunktKode?: string;
     arsaker: string[];
   }[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.FATTER_VEDTAK | '5005'>;
+} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.FATTER_VEDTAK | '5005'>;

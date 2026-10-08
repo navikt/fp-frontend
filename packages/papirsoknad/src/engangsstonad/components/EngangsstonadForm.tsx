@@ -86,7 +86,7 @@ const initialValues = () => ({
 const transformValues = (
   soknadData: SoknadData,
   values: ReturnType<typeof initialValues>,
-): AksjonspunktTilBekreftelse<AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD> => {
+): AksjonspunktTilBekreftelse<typeof AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD> => {
   return {
     '@type': AksjonspunktKode.REGISTRER_PAPIRSØKNAD_ENGANGSSTØNAD,
     tema: soknadData.familieHendelseType,

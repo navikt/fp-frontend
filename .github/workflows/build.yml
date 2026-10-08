@@ -80,7 +80,7 @@ jobs:
           VITE_CDN_URL: ${{ inputs.vite-cdn-url }}
 
       - name: Bygg server
-        run: cd ./server && yarn install --immutable && yarn build
+        run: cd ./server && yarn install --immutable && yarn build && yarn workspaces focus --production
 
       - name: Generate build version
         id: generate-build-version
