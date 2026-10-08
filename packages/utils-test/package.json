@@ -21,8 +21,8 @@
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
-    "@types/node": "24.13.4",
+    "@types/node": "24.19.1",
     "@types/react": "19.3.0",
-    "eslint": "10.10.0"
+    "eslint": "10.12.0"
   }
 }
