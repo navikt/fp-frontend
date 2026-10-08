@@ -119,13 +119,13 @@ export const VedtakFellesPanel = ({
           <FormattedMessage id="VedtakForm.Tittel" />
         </Heading>
       </HStack>
-      <HStack gap="space-48" wrap={false}>
-        <Label size="medium">
+      <HStack gap="space-4 space-48" wrap={false} align="start">
+        <Label size="small">
           {vedtakstatusTekst}
           {tilbakekrevingtekst && `. ${intl.formatMessage({ id: tilbakekrevingtekst })}`}
         </Label>
         {skalViseLink && harIkkeKonsekvensForYtelse && kanBehandles && (
-          <Link href="#" onClick={previewAutomatiskBrev}>
+          <Link href="#" onClick={previewAutomatiskBrev} className="text-nowrap">
             <FormattedMessage
               id={
                 erBehandlingEtterKlage
@@ -133,11 +133,11 @@ export const VedtakFellesPanel = ({
                   : 'VedtakFellesPanel.AutomatiskVedtaksbrev'
               }
             />
-            <ArrowForwardIcon fontSize="1.25rem" className="ml-1" />
+            <ArrowForwardIcon fontSize="1.25rem" />
           </Link>
         )}
         {skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles && (
-          <BodyShort className="opacity-ax-disabled">
+          <Link as="span" className="opacity-ax-disabled no-underline text-nowrap">
             <FormattedMessage
               id={
                 erBehandlingEtterKlage
@@ -145,26 +145,27 @@ export const VedtakFellesPanel = ({
                   : 'VedtakFellesPanel.AutomatiskVedtaksbrev'
               }
             />
-            <ArrowForwardIcon fontSize="1.25rem" className="ml-1 inline" />
-          </BodyShort>
+            <ArrowForwardIcon fontSize="1.25rem" />
+          </Link>
         )}
-        {hentBrevHtml && skalProdusereBrev && !isReadOnly && !harValgtÅRedigereVedtaksbrev && (
+        {hentBrevHtml && skalProdusereBrev && !(isReadOnly || harValgtÅRedigereVedtaksbrev) && (
           <Link
+            className="text-nowrap"
             href="#"
             onClick={e => {
               setHarValgtÅRedigereVedtaksbrev(true);
               e.preventDefault();
             }}
           >
-            <PencilIcon fontSize="1.25rem" className="mr-1" />
+            <PencilIcon fontSize="1.25rem" />
             <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
           </Link>
         )}
         {skalProdusereBrev && (isReadOnly || harValgtÅRedigereVedtaksbrev) && (
-          <BodyShort className="opacity-ax-disabled">
-            <PencilIcon fontSize="1.25rem" className="mr-1 inline" />
+          <Link as="span" className="opacity-ax-disabled no-underline text-nowrap">
+            <PencilIcon fontSize="1.25rem" />
             <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
-          </BodyShort>
+          </Link>
         )}
       </HStack>
       {!skalProdusereBrev && (
