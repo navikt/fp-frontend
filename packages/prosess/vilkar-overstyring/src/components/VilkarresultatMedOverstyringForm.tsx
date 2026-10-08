@@ -10,7 +10,7 @@ import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, BehandlingFpSak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
+import type { Aksjonspunkt, Avslagsarsak, BehandlingFpSak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
 import type {
   OverstyringAp,
   OverstyringMedlemskapsvilkaretAp,
@@ -35,7 +35,7 @@ const isHidden = (kanOverstyre: boolean, aksjonspunkter: Aksjonspunkt[], aksjons
 type FormValues = {
   erVilkårOk?: boolean;
   vurdering?: MedlemskapVurdering;
-  avslagskode?: string;
+  avslagskode?: Avslagsarsak;
   opphørFom?: string;
   medlemFom?: string;
   begrunnelse?: string;

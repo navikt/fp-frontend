@@ -13,6 +13,7 @@ import type {
   ArbeidOgInntektsmelding,
   Arbeidsforhold,
   ArbeidsgiverOpplysningerPerId,
+  BekreftetPermisjonStatus,
 } from '@navikt/fp-types';
 import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -23,7 +24,7 @@ type FormValues = {
   arbeidsforhold: {
     arbeidsgiverIdent: string;
     internArbeidsforholdId: string | undefined;
-    permisjonStatus: string | undefined;
+    permisjonStatus: BekreftetPermisjonStatus | undefined;
   }[];
 } & FaktaBegrunnelseFormValues;
 

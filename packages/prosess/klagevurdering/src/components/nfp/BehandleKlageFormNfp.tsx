@@ -10,6 +10,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type {
   KlageHjemmel,
+  KlageMedholdÅrsak,
   KlageVurdering,
   KlageVurderingOmgjørType,
   KlageVurderingResultat,
@@ -27,7 +28,7 @@ import { type KlagevurderingForhåndsvisData, PreviewKlageLink } from './Preview
 
 export type TransformedValues = {
   kode: string;
-  klageMedholdÅrsak?: string;
+  klageMedholdÅrsak?: KlageMedholdÅrsak;
   klageVurderingOmgjør?: KlageVurderingOmgjørType;
   klageHjemmel?: KlageHjemmel;
   fritekstTilBrev: string;
