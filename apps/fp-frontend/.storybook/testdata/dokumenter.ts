@@ -19,12 +19,11 @@ export const dokumenter: Dokument[] = [
     kommunikasjonsretning: 'INN',
   },
   {
-    journalpostId: '5',
-    dokumentId: '5',
+    journalpostId: '5555',
+    dokumentId: '55555',
     behandlingUuidList: [],
     tittel: '2023.11.11_NAV_Innvilgelsesbrev_svangerskapspenger.pdf',
     tidspunkt: '2025-04-01T02:54:25.455',
     kommunikasjonsretning: 'UT',
-    gjelderFor: 'test5',
   },
 ];

@@ -42,21 +42,22 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell scope="col" className="w-px whitespace-nowrap">
-              <Checkbox
-                size="small"
-                checked={allSelected}
-                indeterminate={selectedCount > 0 && !allSelected}
-                disabled={readOnly}
-                onChange={() => {
-                  const nextValue = !allSelected;
-                  documents.forEach(document => {
-                    setValue(`dokument_${document.dokumentId}`, nextValue, { shouldDirty: true });
-                  });
-                }}
-                hideLabel
-              >
-                <FormattedMessage id="DocumentListInnsyn.VelgAlleDokumenter" />
-              </Checkbox>
+              {!readOnly && (
+                <Checkbox
+                  size="small"
+                  checked={allSelected}
+                  indeterminate={selectedCount > 0 && !allSelected}
+                  disabled={readOnly}
+                  onChange={() => {
+                    documents.forEach(document => {
+                      setValue(`dokument_${document.dokumentId}`, !allSelected, { shouldDirty: true });
+                    });
+                  }}
+                  hideLabel
+                >
+                  <FormattedMessage id="DocumentListInnsyn.VelgAlleDokumenter" />
+                </Checkbox>
+              )}
             </Table.HeaderCell>
 
             {!readOnly && (
@@ -92,7 +93,9 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
                   <RhfCheckbox
                     name={`dokument_${dokId}`}
                     control={control}
-                    label={<FormattedMessage id="DocumentListInnsyn.SkalDokumentInkluderes" />}
+                    label={
+                      <FormattedMessage id="DocumentListInnsyn.VelgDokument" values={{ tittel: document.tittel }} />
+                    }
                     hideLabel
                     disabled={readOnly}
                   />

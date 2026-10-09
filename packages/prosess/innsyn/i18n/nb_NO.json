@@ -14,7 +14,7 @@
   "DocumentListInnsyn.NoDocuments": "Det finnes ingen dokumenter på saken",
   "DocumentListInnsyn.VelgInnsynsDok": "Velg innsynsdokumentasjon til søker",
   "DocumentListInnsyn.InnsynsDok": "Innsynsdokumentasjon til søker",
-  "DocumentListInnsyn.SkalDokumentInkluderes": "Skal dokumentet inkluderes i innsynsbehandlingen?",
+  "DocumentListInnsyn.VelgDokument": "Velg {tittel}",
   "DocumentListInnsyn.VelgAlleDokumenter": "Velg alle dokumenter",
   "DocumentListInnsyn.IProduksjon": "I produksjon",
 

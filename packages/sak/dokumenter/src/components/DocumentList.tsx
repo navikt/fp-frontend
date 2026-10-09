@@ -153,7 +153,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                 <Table.DataCell textSize="small">
                   <KommunikasjonsretningIkon kommunikasjonsretning={document.kommunikasjonsretning} />
                 </Table.DataCell>
-                <Table.DataCell scope="row">
+                <Table.DataCell>
                   <HStack as="span" gap="space-4" wrap={false}>
                     {document.behandlingUuidList &&
                       behandlingUuid &&
