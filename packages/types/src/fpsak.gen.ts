@@ -1100,19 +1100,19 @@ export type foreldrepenger_domene_opptjening_dto_AvklarAktivitetsPerioderDto = {
 };
 
 export type foreldrepenger_domene_opptjening_dto_AvklarOpptjeningAktivitetDto = {
-  aktivitetType?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
+  aktivitetType: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
   arbeidsforholdRef?: string;
   arbeidsgiverReferanse?: string;
   begrunnelse?: string;
-  erGodkjent?: boolean;
-  opptjeningFom?: string;
-  opptjeningTom?: string;
+  erGodkjent: boolean;
+  opptjeningFom: string;
+  opptjeningTom: string;
 };
 
 export type foreldrepenger_domene_opptjening_dto_AvklarOpptjeningsvilkåretDto = {
   avslagskode?: string;
   begrunnelse?: string;
-  erVilkårOk?: boolean;
+  erVilkårOk: boolean;
 };
 
 export type foreldrepenger_domene_opptjening_dto_MerkOpptjeningUtlandDto = {
@@ -1123,9 +1123,9 @@ export type foreldrepenger_domene_opptjening_dto_MerkOpptjeningUtlandDto = {
 export type foreldrepenger_domene_person_verge_dto_AvklarVergeDto = {
   begrunnelse?: string;
   fnr?: string;
-  gyldigFom?: string;
+  gyldigFom: string;
   gyldigTom?: string;
-  navn?: string;
+  navn: string;
   organisasjonsnummer?: string;
   vergeType: foreldrepenger_behandlingslager_behandling_verge_VergeType;
 };
@@ -1440,7 +1440,7 @@ export type tjenester_behandling_aksjonspunkt_FatterVedtakAksjonspunktDto = {
 
 export type tjenester_behandling_dekningsgrad_AvklarDekningsgradDto = {
   begrunnelse?: string;
-  dekningsgrad?: number;
+  dekningsgrad: number;
 };
 
 export type tjenester_behandling_innsyn_aksjonspunkt_VurderInnsynDokumentDto = {
@@ -1460,10 +1460,10 @@ export type tjenester_behandling_innsyn_aksjonspunkt_VurderInnsynDto = {
 
 export type tjenester_behandling_klage_aksjonspunkt_KlageFormkravAksjonspunktDto = {
   begrunnelse?: string;
-  erFristOverholdt?: boolean;
-  erKlagerPart?: boolean;
-  erKonkret?: boolean;
-  erSignert?: boolean;
+  erFristOverholdt: boolean;
+  erKlagerPart: boolean;
+  erKonkret: boolean;
+  erSignert: boolean;
   erTilbakekreving?: boolean;
   fritekstTilBrev?: string;
   mottattDato?: string;
@@ -1516,7 +1516,7 @@ export type tjenester_behandling_risikoklassifisering_VurderFaresignalerDto = {
 
 export type tjenester_behandling_svp_BekreftSvangerskapspengerDto = {
   begrunnelse?: string;
-  bekreftetSvpArbeidsforholdList?: Array<tjenester_behandling_svp_BekreftTilrettelegging>;
+  bekreftetSvpArbeidsforholdList: Array<tjenester_behandling_svp_BekreftTilrettelegging>;
   fødselsdato?: string;
   termindato: string;
 };
@@ -1751,7 +1751,7 @@ export type tjenester_behandling_vedtak_aksjonspunkt_AksjonspunktGodkjenningDto 
   aksjonspunktKode?: string;
   arsaker: Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>;
   begrunnelse?: string;
-  godkjent?: boolean;
+  godkjent: boolean;
 };
 
 export type tjenester_behandling_vedtak_aksjonspunkt_ForeslaVedtakManueltAksjonspuntDto = {
@@ -2198,7 +2198,7 @@ export type foreldrepenger_domene_rest_dto_OverstyrBeregningsgrunnlagDto = {
 export type foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_OverstyringFaktaOmFødselDto = {
   barn?: Array<foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_DokumentertBarnDto>;
   begrunnelse?: string;
-  termindato: string;
+  termindato?: string;
 };
 
 export type tjenester_behandling_aksjonspunkt_OverstyrteAksjonspunkterDto = {
@@ -2209,7 +2209,7 @@ export type tjenester_behandling_aksjonspunkt_OverstyrteAksjonspunkterDto = {
 
 export type tjenester_behandling_dekningsgrad_AvklarDekningsgradOverstyringDto = {
   begrunnelse?: string;
-  dekningsgrad?: number;
+  dekningsgrad: number;
 };
 
 export type tjenester_behandling_uttak_dto_OverstyrOmsorgOgRettDto = {
@@ -2266,7 +2266,7 @@ export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringOpptjenings
 
 export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSokersOpplysingspliktDto = {
   begrunnelse?: string;
-  erVilkårOk?: boolean;
+  erVilkårOk: boolean;
 };
 
 export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSøknadsfristvilkåretDto = {
@@ -2277,8 +2277,8 @@ export type tjenester_behandling_vilkår_aksjonspunkt_dto_OverstyringSøknadsfri
 
 export type tjenester_behandling_ytelsefordeling_OverstyringAvklarStartdatoForPeriodenDto = {
   begrunnelse?: string;
-  opprinneligDato?: string;
-  startdatoFraSøknad?: string;
+  opprinneligDato: string;
+  startdatoFraSøknad: string;
 };
 
 export type foreldrepenger_behandlingslager_behandling_anke_AnkeOmgjørÅrsak =
