@@ -25,70 +25,10 @@ export type VedtakInnsynForhandsvisData = {
   dokumentMal: DokumentMalType;
 };
 
-const getPreviewCallback =
-  (previewCallback: (data: VedtakInnsynForhandsvisData) => void, begrunnelse?: string) =>
-  (e: React.KeyboardEvent | React.MouseEvent): void => {
-    e.preventDefault();
-
-    const data = {
-      fritekst: begrunnelse ?? ' ',
-      mottaker: '',
-      dokumentMal: 'INNSYN' as const,
-    };
-    previewCallback(data);
-  };
-
-// Samme dokument kan ligge på flere behandlinger under samme fagsak.
-const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
-  const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === 'INN');
-  for (const doc of allDocuments) {
-    if (filteredDocuments.every(fd => fd.dokumentId !== doc.dokumentId)) {
-      filteredDocuments.push(doc);
-    }
-  }
-  return filteredDocuments;
-};
-
-const getDocumenterMedFikkInnsynVerdi = (
-  alleDokumenter: Dokument[],
-  valgteDokumenter: InnsynDokument[],
-): DokumentMedInnsynMarkor[] =>
-  alleDokumenter
-    .filter(dokAlle => valgteDokumenter.find(dokValgte => dokValgte.dokumentId === dokAlle.dokumentId))
-    .map(dokAlle => ({
-      ...dokAlle,
-      fikkInnsyn: valgteDokumenter.find(dokValgte => dokValgte.dokumentId === dokAlle.dokumentId)?.fikkInnsyn || false,
-    }));
-
-const findResultTypeMessage = (resultat: InnsynResultatType): string => {
-  if (resultat === 'AVVIST') {
-    return 'InnsynVedtakForm.Avslatt';
-  }
-  if (resultat === 'DELV') {
-    return 'InnsynVedtakForm.Delvis';
-  }
-  return 'InnsynVedtakForm.Innvilget';
-};
-
-type DokumentMedInnsynMarkor = {
-  fikkInnsyn: boolean;
-} & Dokument;
-
 type FormValues = {
   mottattDato?: string;
   begrunnelse?: string;
 };
-
-const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
-  mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FORESLÅ_VEDTAK)?.begrunnelse ?? undefined,
-});
-
-const transformValues = (values: FormValues): ForeslaVedtakAp => ({
-  kode: AksjonspunktKode.FORESLÅ_VEDTAK,
-  ...values,
-  begrunnelse: values.begrunnelse === '' ? undefined : values.begrunnelse,
-});
 
 interface Props {
   innsynDokumenter: InnsynDokument[];
@@ -122,8 +62,6 @@ export const InnsynVedtakForm = ({
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
-
-  const documents = getDocumenterMedFikkInnsynVerdi(getFilteredReceivedDocuments(alleDokumenter), innsynDokumenter);
 
   const apVurderInnsynBegrunnelse =
     behandling.aksjonspunkt.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse ?? undefined;
@@ -175,19 +113,18 @@ export const InnsynVedtakForm = ({
         {innsynResultatType !== 'AVVIST' && (
           <DocumentListVedtakInnsyn
             saksNr={fagsak.saksnummer}
-            documents={documents.filter(document => document.fikkInnsyn)}
+            alleDokumenter={alleDokumenter}
+            innsynDokumenter={innsynDokumenter}
           />
         )}
         <HStack gap="space-16">
-          {!isReadOnly && (
-            <ProsessStegSubmitButton
-              isReadOnly={isReadOnly}
-              isSubmittable
-              isSubmitting={formMethods.formState.isSubmitting}
-              isDirty={formMethods.formState.isDirty}
-              hasEmptyRequiredFields={false}
-            />
-          )}
+          <ProsessStegSubmitButton
+            isReadOnly={isReadOnly}
+            isSubmittable
+            isSubmitting={formMethods.formState.isSubmitting}
+            isDirty={formMethods.formState.isDirty}
+            hasEmptyRequiredFields={false}
+          />
           <Link
             href="#"
             onClick={previewBrev}
@@ -204,4 +141,38 @@ export const InnsynVedtakForm = ({
       </VStack>
     </RhfForm>
   );
+};
+
+const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
+  mottattDato: innsynMottattDato,
+  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FORESLÅ_VEDTAK)?.begrunnelse ?? undefined,
+});
+
+const transformValues = (values: FormValues): ForeslaVedtakAp => ({
+  kode: AksjonspunktKode.FORESLÅ_VEDTAK,
+  ...values,
+  begrunnelse: values.begrunnelse === '' ? undefined : values.begrunnelse,
+});
+
+const getPreviewCallback =
+  (previewCallback: (data: VedtakInnsynForhandsvisData) => void, begrunnelse?: string) =>
+  (e: React.KeyboardEvent | React.MouseEvent): void => {
+    e.preventDefault();
+
+    const data = {
+      fritekst: begrunnelse ?? ' ',
+      mottaker: '',
+      dokumentMal: 'INNSYN' as const,
+    };
+    previewCallback(data);
+  };
+
+const findResultTypeMessage = (resultat: InnsynResultatType): string => {
+  if (resultat === 'AVVIST') {
+    return 'InnsynVedtakForm.Avslatt';
+  }
+  if (resultat === 'DELV') {
+    return 'InnsynVedtakForm.Delvis';
+  }
+  return 'InnsynVedtakForm.Innvilget';
 };

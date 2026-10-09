@@ -1,7 +1,7 @@
 import type { ProsessStegBegrunnelseTextFieldFormValues } from '@navikt/fp-prosess-felles';
 import type { InnsynResultatType } from '@navikt/fp-types';
 
-export type InnsynFormValues = {
+export type FormValues = {
   mottattDato?: string;
   innsynResultatType?: InnsynResultatType;
   fristDato?: string;

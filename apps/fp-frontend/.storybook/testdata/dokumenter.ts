@@ -18,4 +18,13 @@ export const dokumenter: Dokument[] = [
     tittel: 'Søknad for foreldrepenger',
     kommunikasjonsretning: 'INN',
   },
+  {
+    journalpostId: '5',
+    dokumentId: '5',
+    behandlingUuidList: [],
+    tittel: '2023.11.11_NAV_Innvilgelsesbrev_svangerskapspenger.pdf',
+    tidspunkt: '2025-04-01T02:54:25.455',
+    kommunikasjonsretning: 'UT',
+    gjelderFor: 'test5',
+  },
 ];

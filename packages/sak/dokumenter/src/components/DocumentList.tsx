@@ -6,7 +6,7 @@ import { BodyShort, Button, Checkbox, HStack, Table, VStack } from '@navikt/ds-r
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Dokument } from '@navikt/fp-types';
-import { DokumentLink } from '@navikt/fp-ui-komponenter';
+import { DokumentLink, KommunikasjonsretningIkon } from '@navikt/fp-ui-komponenter';
 import { åpneDokument } from '@navikt/fp-utils';
 
 import {
@@ -16,9 +16,6 @@ import {
   type SortConfig,
   type TableHeaders,
 } from './documentListUtils';
-import { KommunikasjonsretningIkon } from './KommunikasjonsretningIkon';
-
-import styles from './documentList.module.css';
 
 interface Props {
   documents: Dokument[];
@@ -73,8 +70,8 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
 
   if (documents.length === 0) {
     return (
-      <BodyShort size="small" className={styles['noDocuments']}>
-        <FormattedMessage id="DocumentList.NoDocuments" />
+      <BodyShort size="small" spacing>
+        <FormattedMessage tagName="i" id="DocumentList.NoDocuments" />
       </BodyShort>
     );
   }
@@ -87,7 +84,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
   };
 
   return (
-    <div ref={scrollContainerRef} className={styles['scrollContainer']} style={{ height: `calc(100vh - ${top}px)` }}>
+    <div ref={scrollContainerRef} className="min-h-64 overflow-y-auto" style={{ height: `calc(100vh - ${top}px)` }}>
       <VStack gap="space-8">
         {valgteDokumentKeys.length > 0 && (
           <Button
@@ -113,9 +110,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                 <Checkbox
                   size="small"
                   checked={valgteDokumentKeys.length === sortedDocuments.length}
-                  indeterminate={
-                    valgteDokumentKeys.length > 0 && valgteDokumentKeys.length !== sortedDocuments.length
-                  }
+                  indeterminate={valgteDokumentKeys.length > 0 && valgteDokumentKeys.length !== sortedDocuments.length}
                   onChange={() =>
                     valgteDokumentKeys.length > 0
                       ? setValgteDokumentKeys([])
@@ -123,7 +118,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                   }
                   hideLabel
                 >
-                  Velg alle rader
+                  <FormattedMessage id="DocumentList.VelgAlleDokumenter" />
                 </Checkbox>
               </Table.HeaderCell>
               <Table.ColumnHeader sortKey="kommunikasjonsretning" sortable>
@@ -151,24 +146,24 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                     hideLabel
                     checked={valgteDokumentKeys.includes(getDokumentKey(document))}
                     onChange={() => toggleValgDokument(document)}
-                    aria-label={document.tittel}
                   >
-                    {' '}
+                    <FormattedMessage id="DocumentList.VelgDokument" values={{ tittel: document.tittel }} />
                   </Checkbox>
                 </Table.DataCell>
-                <Table.DataCell>
+                <Table.DataCell textSize="small">
                   <KommunikasjonsretningIkon kommunikasjonsretning={document.kommunikasjonsretning} />
                 </Table.DataCell>
-                <Table.HeaderCell scope="row">
-                  <HStack gap="space-4" wrap={false}>
+                <Table.DataCell scope="row">
+                  <HStack as="span" gap="space-4" wrap={false}>
                     {document.behandlingUuidList &&
                       behandlingUuid &&
                       document.behandlingUuidList.includes(behandlingUuid) && (
-                        <StarFillIcon
-                          color="var(--ax-warning-500)"
-                          fontSize="1.25rem"
-                          title={intl.formatMessage({ id: 'DocumentList.IBruk' })}
-                        />
+                        <span>
+                          <StarFillIcon
+                            color="var(--ax-warning-500)"
+                            title={intl.formatMessage({ id: 'DocumentList.IBruk' })}
+                          />
+                        </span>
                       )}
                     <DokumentLink
                       saksnummer={saksnummer}
@@ -177,9 +172,9 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                       dokumentTittel={document.tittel ?? undefined}
                     />
                   </HStack>
-                </Table.HeaderCell>
-                {visGjelderForKolonne && <Table.DataCell>{document.gjelderFor}</Table.DataCell>}
-                <Table.DataCell>
+                </Table.DataCell>
+                {visGjelderForKolonne && <Table.DataCell textSize="small">{document.gjelderFor}</Table.DataCell>}
+                <Table.DataCell textSize="small">
                   {document.tidspunkt ? (
                     <DateTimeLabel dateTimeString={document.tidspunkt} />
                   ) : (
