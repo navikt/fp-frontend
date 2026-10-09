@@ -1098,6 +1098,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/icu-messageformat-parser@npm:3.5.20":
+  version: 3.5.20
+  resolution: "@formatjs/icu-messageformat-parser@npm:3.5.20"
+  dependencies:
+    "@formatjs/icu-skeleton-parser": "npm:2.1.12"
+  checksum: 10/4bf0f0ed56bd84e29ed1bf47ba1a2d9c167dc5b79b56b27e3b3710edb8b31dfe13b5a121cda797354d0c3bcc2e0387f0d8fe4ff458c4bb9836a058ed85c6fa66
+  languageName: node
+  linkType: hard
+
 "@formatjs/icu-messageformat-parser@npm:3.5.21":
   version: 3.5.21
   resolution: "@formatjs/icu-messageformat-parser@npm:3.5.21"
@@ -1111,6 +1120,17 @@ __metadata:
   version: 2.1.12
   resolution: "@formatjs/icu-skeleton-parser@npm:2.1.12"
   checksum: 10/c45951202390de86e239b2ec37589a5c1ae90eb6777f9e7e4e3ee85466a2e1004128cdfe52ff4643fbc1d4117d56fa4c60450d93a79934a6d64a387b5fd100b0
+  languageName: node
+  linkType: hard
+
+"@formatjs/intl@npm:6.1.2":
+  version: 6.1.2
+  resolution: "@formatjs/intl@npm:6.1.2"
+  dependencies:
+    "@formatjs/fast-memoize": "npm:3.1.7"
+    "@formatjs/icu-messageformat-parser": "npm:3.5.20"
+    intl-messageformat: "npm:12.1.2"
+  checksum: 10/46066ef3981d79e2d2fc070a18d5216dbfcad27c7ff44f145d0f6069851d945c2ef86235cbdc43fdf6617634e2607ab87940cf638d25c3227e30d3dfae8d3eb9
   languageName: node
   linkType: hard
 
@@ -3182,6 +3202,7 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
     "@navikt/ft-form-hooks": "npm:13.0.1"
@@ -3201,7 +3222,6 @@ __metadata:
     react-hook-form: "npm:7.90.0"
     react-intl: "npm:12.1.4"
     storybook: "npm:10.6.1"
-    stylelint: "npm:17.16.0"
     typescript: "npm:6.0.3"
     vite: "npm:8.3.4"
     vitest: "npm:5.0.3"
@@ -3913,7 +3933,6 @@ __metadata:
     react-dom: "npm:19.3.0"
     react-intl: "npm:12.1.4"
     storybook: "npm:10.6.1"
-    stylelint: "npm:17.16.0"
     typescript: "npm:6.0.3"
     vite: "npm:8.3.4"
     vitest: "npm:5.0.3"
@@ -4566,10 +4585,12 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-konstanter": "workspace:^"
     "@navikt/fp-utils": "workspace:^"
+    "@navikt/ft-utils": "npm:6.0.1"
     "@types/react": "npm:19.3.0"
     eslint: "npm:10.12.0"
     react: "npm:19.3.0"
     react-dom: "npm:19.3.0"
+    react-intl: "npm:12.1.3"
     typescript: "npm:6.0.3"
   languageName: unknown
   linkType: soft
@@ -9051,6 +9072,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"intl-messageformat@npm:12.1.2":
+  version: 12.1.2
+  resolution: "intl-messageformat@npm:12.1.2"
+  dependencies:
+    "@formatjs/fast-memoize": "npm:3.1.7"
+    "@formatjs/icu-messageformat-parser": "npm:3.5.20"
+  checksum: 10/9f5cbf02b2d2af3660b9c3cb2a64b3e340e3ab7ed77aeabafdb87b4152fb64d004b6f53079aa3a5ac0a0d13ccfd5decc70ee6618055ed1e04e7f8b7d15795b8a
+  languageName: node
+  linkType: hard
+
 "intl-messageformat@npm:12.1.3":
   version: 12.1.3
   resolution: "intl-messageformat@npm:12.1.3"
@@ -10718,6 +10749,20 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 10/407576c6ffac5cbbe3c15b6a6e1274e2417e85a175b5de55f80c526367cd924f22c0c0f5d164f1e403420ac7b7c81f418322f9c1d3e6f02dc6eb7319a148a756
+  languageName: node
+  linkType: hard
+
+"react-intl@npm:12.1.3":
+  version: 12.1.3
+  resolution: "react-intl@npm:12.1.3"
+  dependencies:
+    "@formatjs/icu-messageformat-parser": "npm:3.5.20"
+    "@formatjs/intl": "npm:6.1.2"
+    intl-messageformat: "npm:12.1.2"
+  peerDependencies:
+    "@types/react": ">=18.0.0"
+    react: ">=18.0.0"
+  checksum: 10/ce7099f81ce6a24a23e87b1b32c657629e73010f468e8f4d06cdc75173f05083e862ad013e47db4ebfce09831cdd9ec7a2a7615bb75a3449ea3696b484ecf8e1
   languageName: node
   linkType: hard
 
