@@ -7,7 +7,7 @@ import * as stories from './SakenFaktaIndex.stories';
 const {
   StartdatoForForeldrepengerOgDekningsgrad,
   ApentAksjonspunktForInnhentingAvDokumentasjon,
-  KanIkkeOverstyreDekningsgrad,
+  DekningsgradMedReadOnly,
   DekningsgradOgStartdatoErEndret,
   StartdatoForForeldrepengerOgDekningsgradMedAnnenPart,
   HarFåttDekningsgradAksjonspunkt,
@@ -128,10 +128,16 @@ describe('SakenFaktaIndex', () => {
     expect(screen.getByText('Hvilken dekningsgrad skal gjelde for begge?')).toBeInTheDocument();
   });
 
-  it('skal ikke kunne overstyre dekningsgrad når en ikke er overstyrer', async () => {
-    render(<KanIkkeOverstyreDekningsgrad />);
+  it('skal skjule lagreknappen hvis dekningsgrad blir read-only under redigering', async () => {
+    const { rerender } = render(<DekningsgradMedReadOnly />);
     expect(await screen.findByText('Dekningsgrad')).toBeInTheDocument();
-    expect(screen.queryByTitle('Endre dekningsgrad')).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByTitle('Endre dekningsgrad'));
+    expect(screen.getByText('Overstyr')).toBeInTheDocument();
+
+    rerender(<DekningsgradMedReadOnly isReadOnly />);
+
+    expect(screen.queryByText('Overstyr')).not.toBeInTheDocument();
   });
 
   it('skal vise at dekningsgrad er endret', async () => {

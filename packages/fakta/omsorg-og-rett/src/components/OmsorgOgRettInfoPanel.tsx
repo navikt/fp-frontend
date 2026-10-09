@@ -14,7 +14,7 @@ import { AleneomsorgForm } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
 import { RettighetstypeForm } from './forms/RettighetstypeForm';
 
-export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOverstyre }: OmsorgOgRettProps) => {
+export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett }: OmsorgOgRettProps) => {
   const { alleKodeverk, isSubmittable, aksjonspunkterForPanel, isReadOnly, harÅpentAksjonspunkt } =
     usePanelDataContext();
 
@@ -72,11 +72,7 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOversty
       )}
       {!harUløsteAksjonspunkter && omsorgOgRett.rettighetstype && (
         <Box background="neutral-moderate" padding="space-20">
-          <RettighetstypeForm
-            omsorgOgRett={omsorgOgRett}
-            aksjonspunkt={overstyringAksjonspunkter[0]}
-            kanOverstyre={kanOverstyre}
-          />
+          <RettighetstypeForm omsorgOgRett={omsorgOgRett} aksjonspunkt={overstyringAksjonspunkter[0]} />
         </Box>
       )}
       <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} alleKodeverk={alleKodeverk} />

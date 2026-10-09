@@ -162,7 +162,6 @@ const meta = {
         sivilstand: 'UGIF',
       },
     } satisfies Personoversikt,
-    kanOverstyre: false,
     familiehendelse,
     oppdaterStønadskontoer: v => {
       action('button-click')(v);
@@ -269,7 +268,6 @@ export const AksjonspunktDerValgtStønadskontoIkkeFinnes: Story = {
 
 export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
   args: {
-    kanOverstyre: true,
     uttaksresultat: {
       perioderSøker: [
         {

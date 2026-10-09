@@ -28,7 +28,7 @@ interface Props {
 export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) => {
   const intl = useIntl();
 
-  const { behandling, rettigheter } = useBehandlingDataContext();
+  const { behandling } = useBehandlingDataContext();
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
@@ -47,7 +47,7 @@ export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) =>
     >
       {ytelsefordeling && uttakKontrollerFaktaPerioder ? (
         <UttakFaktaIndex
-          kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled && behandling.harSattEndringsdato}
+          harSattEndringsdato={behandling.harSattEndringsdato}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioder}
           ytelsefordeling={ytelsefordeling}

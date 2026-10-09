@@ -44,5 +44,6 @@
   "Rettighetstype.BareMorRett": "Bare mor rett",
   "Rettighetstype.BareFarRett": "Bare far/medmor rett",
   "Rettighetstype.BareFarRettMorUfør": "Bare far/medmor rett, mor er ufør",
-  "Rettighetstype.SelectLabel": "Rettighetstype"
+  "Rettighetstype.SelectLabel": "Rettighetstype",
+  "RettighetstypeForm.RedigerRettighetstype": "Rediger rettighetstype"
 }
