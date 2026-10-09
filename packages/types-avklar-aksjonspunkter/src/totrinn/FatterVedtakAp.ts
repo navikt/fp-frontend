@@ -4,6 +4,8 @@ import type { AksjonspunktFraBackend, MedPåkravdeFelt } from '../AksjonspunktFr
 
 type FatterVedtakDto = AksjonspunktFraBackend<typeof AksjonspunktKode.FATTER_VEDTAK>;
 
+// TODO: fp-sak AksjonspunktGodkjenningDto har godkjent som primitiv boolean uten @NotNull.
+// Manglende verdi blir stille false. Fjern MedPåkravdeFelt når det er fikset.
 type AksjonspunktGodkjenning = MedPåkravdeFelt<
   NonNullable<FatterVedtakDto['aksjonspunktGodkjenningDtos']>[number],
   'godkjent'
