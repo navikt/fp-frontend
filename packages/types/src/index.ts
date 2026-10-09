@@ -192,6 +192,7 @@ export type {
   foreldrepenger_behandlingslager_behandling_vilkår_VilkårType as VilkårType,
   foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType as VilkårUtfallType,
   folketrygdloven_kalkulus_kodeverk_VirksomhetType as VirksomhetType,
+  foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak as VurderÅrsakFpSak,
   tjenester_behandling_ytelsefordeling_YtelseFordelingDto as Ytelsefordeling,
   tjenester_behandling_dto_behandling_BehandlingsresultatDto as Behandlingsresultat,
   foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen as KonsekvensForYtelsen,

@@ -1,10 +1,10 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { BekreftTilrettelegging } from '@navikt/fp-types';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend, MedPåkravdeFelt } from '../AksjonspunktFraBackend';
 
-export type BekreftSvangerskapspengerAp = {
-  termindato: string;
-  fødselsdato?: string;
-  bekreftetSvpArbeidsforholdList: BekreftTilrettelegging[];
-} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_SVP_TILRETTELEGGING>;
+// TODO: fp-sak BekreftSvangerskapspengerDto mangler @NotNull på bekreftetSvpArbeidsforholdList.
+// Null gir NPE i oppdatereren. Fjern MedPåkravdeFelt når det er fikset.
+export type BekreftSvangerskapspengerAp = MedPåkravdeFelt<
+  AksjonspunktFraBackend<typeof AksjonspunktKode.VURDER_SVP_TILRETTELEGGING>,
+  'bekreftetSvpArbeidsforholdList'
+>;

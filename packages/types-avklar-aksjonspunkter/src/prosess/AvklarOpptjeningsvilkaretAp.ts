@@ -1,8 +1,10 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend, MedPåkravdeFelt } from '../AksjonspunktFraBackend';
 
-export type AvklarOpptjeningsvilkaretAp = {
-  erVilkårOk: boolean;
-  avslagskode?: string;
-} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET>;
+// TODO: fp-sak AvklarOpptjeningsvilkåretDto har erVilkårOk som primitiv boolean uten @NotNull.
+// Manglende verdi blir stille false (avslag). Fjern MedPåkravdeFelt når det er fikset.
+export type AvklarOpptjeningsvilkaretAp = MedPåkravdeFelt<
+  AksjonspunktFraBackend<typeof AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET>,
+  'erVilkårOk'
+>;

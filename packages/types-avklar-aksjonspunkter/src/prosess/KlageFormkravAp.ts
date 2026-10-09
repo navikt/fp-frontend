@@ -1,22 +1,10 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend, MedPåkravdeFelt } from '../AksjonspunktFraBackend';
 
-type KlageFormkravBasic = {
-  erKlagerPart: boolean;
-  erFristOverholdt: boolean;
-  erKonkret: boolean;
-  erSignert: boolean;
-  erTilbakekreving?: boolean;
-  tilbakekrevingInfo?: {
-    tilbakekrevingUuid?: string;
-    tilbakekrevingVedtakDato?: string;
-    tilbakekrevingBehandlingType?: string;
-  };
-  vedtakBehandlingUuid?: string;
-  fritekstTilBrev?: string;
-  mottattDato?: string;
-};
-
-export type KlageFormkravAp = KlageFormkravBasic &
-  AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP>;
+// TODO: fp-sak KlageFormkravAksjonspunktDto har erKlagerPart, erFristOverholdt, erKonkret og erSignert
+// som primitive boolean uten @NotNull. Manglende verdi blir stille false. Fjern MedPåkravdeFelt når det er fikset.
+export type KlageFormkravAp = MedPåkravdeFelt<
+  AksjonspunktFraBackend<typeof AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP>,
+  'erKlagerPart' | 'erFristOverholdt' | 'erKonkret' | 'erSignert'
+>;

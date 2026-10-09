@@ -1,13 +1,10 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { BekreftetPermisjonStatus } from '@navikt/fp-types';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend, MedPåkravdeFelt } from '../AksjonspunktFraBackend';
 
-export type VurderArbeidsforholdPermisjonAp = {
-  arbeidsforhold: {
-    internArbeidsforholdId?: string;
-    arbeidsgiverIdent: string;
-    permisjonStatus: BekreftetPermisjonStatus;
-  }[];
-  begrunnelse: string;
-} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO>;
+// TODO: begrunnelse er valgfri i fp-sak BekreftArbeidMedPermisjonUtenSluttdatoDto og brukes bare i historikkinnslaget.
+// Avklar om den skal være påkrevd. I så fall: legg til @NotNull i backend. Hvis ikke: fjern MedPåkravdeFelt her.
+export type VurderArbeidsforholdPermisjonAp = MedPåkravdeFelt<
+  AksjonspunktFraBackend<typeof AksjonspunktKode.VURDER_PERMISJON_UTEN_SLUTTDATO>,
+  'begrunnelse'
+>;

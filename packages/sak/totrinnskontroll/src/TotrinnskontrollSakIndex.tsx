@@ -10,7 +10,7 @@ import type {
   FagsakBehandlingDto,
   SkjermlenkeType,
   SkjermlenkeTypeFpTilbake,
-  VurderÅrsak,
+  VurderÅrsakFpSak,
 } from '@navikt/fp-types';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -29,8 +29,8 @@ const sorterteSkjermlenkeCodesForTilbakekreving: SkjermlenkeTypeFpTilbake[] = [
   'VEDTAK',
 ];
 
-const getArsaker = (apData: AksjonspunktGodkjenningData): VurderÅrsak[] => {
-  const arsaker = new Array<VurderÅrsak>();
+const getArsaker = (apData: AksjonspunktGodkjenningData): VurderÅrsakFpSak[] => {
+  const arsaker = new Array<VurderÅrsakFpSak>();
   if (apData.feilFakta) {
     arsaker.push('FEIL_FAKTA');
   }
