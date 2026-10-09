@@ -197,7 +197,7 @@ BarnFieldArray.initialValues = ({ barn, antallBarn }: FødselGjeldende): BarnFor
 BarnFieldArray.transformValues = (
   values: BarnFormValues,
   erBarnFødt: boolean,
-): { barn: { fødselsdato: string; dødsdato: string | undefined }[] | null } =>
+): { barn?: { fødselsdato: string; dødsdato: string | undefined }[] } =>
   erBarnFødt
     ? {
         barn: values.barn.map(({ fødselsdato, dødsdato }) => ({
@@ -205,7 +205,7 @@ BarnFieldArray.transformValues = (
           dødsdato: dødsdato || undefined,
         })),
       }
-    : { barn: null };
+    : {};
 
 const lagBarn = (antallBarnFraSoknad: number): FieldArrayRow[] => {
   const antallBarn = antallBarnFraSoknad > 0 ? antallBarnFraSoknad : 1;

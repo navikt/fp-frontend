@@ -81,13 +81,18 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
     // eslint-disable-next-line react-hooks/exhaustive-deps -- skal kun hentast ein gong ved montering (styrt av hasFetchedBrevDataRef)
   }, []);
 
+  const ventearsaker = alleKodeverk['Venteårsak'];
+
   const lukkModal = () => setSkalVisePåVentModal(false);
   const åpneModal = () => setSkalVisePåVentModal(true);
 
   const håndterSubmitFraModal = (modalValues: ModalFormValues) => {
     void formMethods.trigger().then(isValid => {
       if (isValid) {
-        void submitCallback(transformValues(formVerdier, aksjonspunkterForPanel, modalValues));
+        const ventearsak = ventearsaker.find(({ kode }) => kode === modalValues.ventearsak)?.kode;
+        void submitCallback(
+          transformValues(formVerdier, aksjonspunkterForPanel, { frist: modalValues.frist, ventearsak }),
+        );
       }
       setSkalVisePåVentModal(false);
     });
@@ -100,8 +105,6 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
       fritekst: brevData?.redigertHtml ?? undefined,
     });
   };
-  const ventearsaker = alleKodeverk['Venteårsak'];
-
   return (
     <>
       <RhfForm
@@ -243,7 +246,7 @@ export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mello
 const transformValues = (
   values: FormValues,
   aksjonspunkter: Aksjonspunkt[],
-  modalValues?: ModalFormValues,
+  modalValues?: Pick<VarselRevurderingAp, 'frist' | 'ventearsak'>,
 ): VarselRevurderingAp => ({
   kode: validerApKodeOgHentApEnum(aksjonspunkter[0]?.definisjon, AksjonspunktKode.VARSEL_REVURDERING_MANUELL),
   begrunnelse: values.begrunnelse,

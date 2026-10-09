@@ -1,18 +1,14 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { OpptjeningAktivitetType } from '@navikt/fp-types';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend, MedPåkravdeFelt } from '../AksjonspunktFraBackend';
 
-export type OpptjeningAktivitetAp = {
-  arbeidsgiverReferanse?: string;
-  arbeidsforholdRef?: string;
-  erGodkjent: boolean;
-  begrunnelse: string;
-  aktivitetType: OpptjeningAktivitetType;
-  opptjeningFom: string;
-  opptjeningTom: string;
-};
+type AvklarAktivitetsPerioderDto = AksjonspunktFraBackend<typeof AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING>;
 
-export type AvklarAktivitetsPerioderAp = {
+export type OpptjeningAktivitetAp = MedPåkravdeFelt<
+  NonNullable<AvklarAktivitetsPerioderDto['opptjeningsaktiviteter']>[number],
+  'erGodkjent' | 'begrunnelse' | 'aktivitetType' | 'opptjeningFom' | 'opptjeningTom'
+>;
+
+export type AvklarAktivitetsPerioderAp = Omit<AvklarAktivitetsPerioderDto, 'opptjeningsaktiviteter'> & {
   opptjeningsaktiviteter?: OpptjeningAktivitetAp[];
-} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING>;
+};

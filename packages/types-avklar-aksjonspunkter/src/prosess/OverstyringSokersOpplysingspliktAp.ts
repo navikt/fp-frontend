@@ -1,7 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend, MedPåkravdeFelt } from '../AksjonspunktFraBackend';
 
-export type OverstyringSokersOpplysingspliktAp = {
-  erVilkårOk: boolean;
-} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST>;
+export type OverstyringSokersOpplysingspliktAp = MedPåkravdeFelt<
+  AksjonspunktFraBackend<typeof AksjonspunktKode.SØKERS_OPPLYSNINGSPLIKT_OVST>,
+  'erVilkårOk'
+>;

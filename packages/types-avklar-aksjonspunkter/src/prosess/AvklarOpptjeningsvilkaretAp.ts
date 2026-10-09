@@ -1,8 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend, MedPåkravdeFelt } from '../AksjonspunktFraBackend';
 
-export type AvklarOpptjeningsvilkaretAp = {
-  erVilkårOk: boolean;
-  avslagskode?: string;
-} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET>;
+export type AvklarOpptjeningsvilkaretAp = MedPåkravdeFelt<
+  AksjonspunktFraBackend<typeof AksjonspunktKode.VURDER_OPPTJENINGSVILKÅRET>,
+  'erVilkårOk'
+>;

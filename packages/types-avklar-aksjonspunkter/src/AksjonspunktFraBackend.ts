@@ -9,3 +9,5 @@ type AksjonspunktDto = BekreftetAksjonspunktDto | OverstyringAksjonspunktDto;
 export type AksjonspunktFraBackend<K extends AksjonspunktDto['@type']> = K extends unknown
   ? { kode: K } & Omit<Extract<AksjonspunktDto, { '@type': K }>, '@type'>
   : never;
+
+export type MedPåkravdeFelt<T, K extends keyof T> = T & Required<Pick<T, K>>;

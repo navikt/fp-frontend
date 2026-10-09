@@ -52,5 +52,5 @@ Termindato.initialValues = (gjeldende: FødselGjeldende) => ({
 });
 
 Termindato.transformValues = (values: TermindatoFormValues) => ({
-  termindato: values.termindato || null,
+  termindato: values.termindato || undefined,
 });

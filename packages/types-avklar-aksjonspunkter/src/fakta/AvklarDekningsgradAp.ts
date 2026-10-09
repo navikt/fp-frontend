@@ -1,7 +1,8 @@
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
+import type { AksjonspunktFraBackend, MedPåkravdeFelt } from '../AksjonspunktFraBackend';
 
-export type AvklarDekningsgradAp = {
-  dekningsgrad: number;
-} & AksjonspunktTilBekreftelse<typeof AksjonspunktKode.AVKLAR_DEKNINGSGRAD>;
+export type AvklarDekningsgradAp = MedPåkravdeFelt<
+  AksjonspunktFraBackend<typeof AksjonspunktKode.AVKLAR_DEKNINGSGRAD>,
+  'dekningsgrad'
+>;
