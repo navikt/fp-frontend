@@ -12,12 +12,15 @@
   "DocumentListInnsyn.DocumentType": "Dokument",
   "DocumentListInnsyn.DateTime": "Sendt/mottatt",
   "DocumentListInnsyn.NoDocuments": "Det finnes ingen dokumenter på saken",
-  "DocumentListInnsyn.Motta": "Inn",
-  "DocumentListInnsyn.Send": "Ut",
-  "DocumentListInnsyn.Intern": "Intern",
-  "DocumentListInnsyn.IProduksjon": "I produksjon",
   "DocumentListInnsyn.VelgInnsynsDok": "Velg innsynsdokumentasjon til søker",
-  "DocumentListInnsyn.Vedtaksdokumentasjon": "Vedtaksdokumentasjon på saken ({numberOfDocuments})",
+  "DocumentListInnsyn.InnsynsDok": "Innsynsdokumentasjon til søker",
+  "DocumentListInnsyn.VelgDokument": "Velg {tittel}",
+  "DocumentListInnsyn.VelgAlleDokumenter": "Velg alle dokumenter",
+  "DocumentListInnsyn.IProduksjon": "I produksjon",
+
+  "VedtakDocuments.Vedtaksdokumentasjon": "Vedtaksdokumentasjon på saken ({numberOfDocuments})",
+  "VedtakDocuments.IngenVedtaksdokumenterLabel": "Vedtaksdokumentasjon på saken",
+  "VedtakDocuments.IngenVedtaksdokumenter": "Det finnes ingen vedtaksdokumenter på saken",
 
   "SubmitButton.SettPåVent": "Sett behandling på vent"
 }

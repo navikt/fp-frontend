@@ -3,6 +3,8 @@
 
 @config "@navikt/ds-tailwind";
 
+@source '../packages/**/src/**';
+
 /*
  * Felles kantfarge for panel-rammer. Verdien er temaavhengig: en subtil kant i
  * lyst tema og en sterkere kant i mørkt tema. Ved å samle dette i én variabel

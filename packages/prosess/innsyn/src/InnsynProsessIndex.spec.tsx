@@ -24,6 +24,8 @@ describe('InnsynProsessIndex', () => {
 
     expect(screen.getByText('Velg innsynsdokumentasjon til søker')).toBeInTheDocument();
     expect(screen.getByText('Dette er et dokument')).toBeInTheDocument();
+    expect(screen.getByText('Dette er et annet dokument')).toBeInTheDocument();
+    expect(screen.getByText('Dette er et internt dokument')).toBeInTheDocument();
 
     const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
@@ -45,6 +47,16 @@ describe('InnsynProsessIndex', () => {
           fikkInnsyn: false,
           journalpostId: '2',
         },
+        {
+          dokumentId: '5',
+          fikkInnsyn: false,
+          journalpostId: '4',
+        },
+        {
+          dokumentId: '7',
+          fikkInnsyn: false,
+          journalpostId: '6',
+        },
       ],
       innsynResultatType: 'AVVIST',
       kode: '5037',
@@ -58,12 +70,14 @@ describe('InnsynProsessIndex', () => {
 
     expect(await screen.findByText('Innsynsbehandling')).toBeInTheDocument();
 
-    expect(screen.queryByText('01.01.2019')).not.toBeInTheDocument();
+    const ekspanderKnapp = screen.getByRole('button', { name: 'Vedtaksdokumentasjon på saken (2)' });
+    expect(ekspanderKnapp).toHaveAttribute('aria-expanded', 'false');
 
-    await userEvent.click(screen.getByText('Vedtaksdokumentasjon på saken (1)'));
+    await userEvent.click(ekspanderKnapp);
 
-    expect(await screen.findByText('01.01.2019')).toBeInTheDocument();
-    expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
+    expect(ekspanderKnapp).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByText('01.01.2019')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Førstegangsbehandling' })).toBeInTheDocument();
   });
 
   it('skal fylle ut og så bekrefte innvilget innsyn', async () => {
@@ -78,7 +92,7 @@ describe('InnsynProsessIndex', () => {
     await userEvent.type(datoMottattKravInput, '23.12.2021');
     fireEvent.blur(datoMottattKravInput);
 
-    await userEvent.click(screen.getByRole('checkbox'));
+    await userEvent.click(screen.getByRole('checkbox', { name: 'Velg alle dokumenter' }));
 
     const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
@@ -103,6 +117,16 @@ describe('InnsynProsessIndex', () => {
           dokumentId: '3',
           fikkInnsyn: true,
           journalpostId: '2',
+        },
+        {
+          dokumentId: '5',
+          fikkInnsyn: true,
+          journalpostId: '4',
+        },
+        {
+          dokumentId: '7',
+          fikkInnsyn: true,
+          journalpostId: '6',
         },
       ],
       innsynResultatType: 'INNV',

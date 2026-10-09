@@ -20,7 +20,7 @@ describe('VedtakInnsynProsessIndex', () => {
     expect(screen.getByText('Dette er utført')).toBeInTheDocument();
 
     expect(screen.getByText('Innsynsdokumentasjon til søker')).toBeInTheDocument();
-    expect(screen.getByText('Dette er et dokument')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Dette er et dokument (02.08.2017 - 00:54)' })).toBeInTheDocument();
     expect(screen.queryByText('Fritekst i brev')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Forhåndsvis brev'));
