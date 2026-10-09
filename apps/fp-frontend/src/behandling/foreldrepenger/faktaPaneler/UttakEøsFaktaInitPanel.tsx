@@ -20,7 +20,7 @@ const AKSJONSPUNKT_KODER = [
 export const UttakEøsFaktaInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling, rettigheter } = useBehandlingDataContext();
+  const { behandling } = useBehandlingDataContext();
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
@@ -36,7 +36,7 @@ export const UttakEøsFaktaInitPanel = () => {
     >
       {annenForelderUttakEøs ? (
         <UttakFaktaEøsIndex
-          kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled && behandling.harSattEndringsdato}
+          harSattEndringsdato={behandling.harSattEndringsdato}
           annenForelderUttakEøs={annenForelderUttakEøs}
         />
       ) : (

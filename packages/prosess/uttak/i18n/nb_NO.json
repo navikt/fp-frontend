@@ -13,6 +13,7 @@
   "UttakPanel.Aksjonspunkt.Generell": "Alle aksjonspunkter skal vurderes manuelt. Kontakt søker ved behov.",
   "UttakPanel.Overstyrt.KontrollerPaNytt": "Perioden var overstyrt i forrige behandling, vurder om perioden fortsatt må overstyres.",
   "UttakPanel.Overstyrt.Utfort": "Perioder er overstyrt.",
+  "UttakPanel.RedigerUttaksperioder": "Rediger uttaksperioder",
   "UttakPanel.Title": "Uttak",
   "UttakPanel.OppdatererSaldo": "Oppdaterer saldo. Vent før du bekrefter uttaket.",
   "UttakPanel.SaldoFeilet": "Kunne ikke oppdatere saldo. Endringene dine er beholdt. Prøv igjen før du bekrefter uttaket.",

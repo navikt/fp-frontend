@@ -88,6 +88,42 @@ const endrePeriodePåNytt = async () => {
 };
 
 describe('UttakProsessIndex', () => {
+  it('skal aktivere overstyring én gang med knapp for å redigere uttaksperioder', async () => {
+    render(<PeriodeMedGraderingUtenAksjonspunkt />);
+
+    const redigeringsknapp = screen.getByRole('button', { name: 'Rediger uttaksperioder' });
+    expect(redigeringsknapp).toBeEnabled();
+
+    await userEvent.click(redigeringsknapp);
+
+    expect(redigeringsknapp).toBeDisabled();
+    await userEvent.click(redigeringsknapp);
+    expect(redigeringsknapp).toBeDisabled();
+  });
+
+  it('skal skjule redigeringsknappen når det finnes et åpent aksjonspunkt som ikke gjelder overstyring', () => {
+    render(<AksjonspunktDerValgtStønadskontoIkkeFinnes />);
+
+    expect(screen.queryByRole('button', { name: 'Rediger uttaksperioder' })).not.toBeInTheDocument();
+  });
+
+  it('skal skjule redigeringsknappen og bekreft-knappen når skrivebeskyttet etter at redigering er aktivert', async () => {
+    const { rerender } = render(<PeriodeMedGraderingUtenAksjonspunkt />);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Rediger uttaksperioder' }));
+
+    rerender(<PeriodeMedGraderingUtenAksjonspunkt isReadOnly />);
+
+    expect(screen.queryByRole('button', { name: 'Rediger uttaksperioder' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Bekreft og fortsett' })).not.toBeInTheDocument();
+  });
+
+  it('skal skjule redigeringsknappen i skrivebeskyttet modus', () => {
+    render(<PeriodeMedGraderingUtenAksjonspunkt isReadOnly />);
+
+    expect(screen.queryByRole('button', { name: 'Rediger uttaksperioder' })).not.toBeInTheDocument();
+  });
+
   it('skal ikke beregne saldo på nytt ved gjenåpning uten periodeendringer', async () => {
     const oppdaterStønadskontoer = vi.fn();
     render(<GjenåpnetUttak oppdaterStønadskontoer={oppdaterStønadskontoer} />);

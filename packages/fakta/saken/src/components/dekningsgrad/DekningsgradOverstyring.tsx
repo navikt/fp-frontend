@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { PencilFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Radio, Textarea, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
@@ -12,6 +11,7 @@ import { notEmpty } from '@navikt/ft-utils';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);
@@ -25,10 +25,9 @@ type FormValues = {
 interface Props {
   aksjonspunkt?: Aksjonspunkt;
   ytelseFordeling: Ytelsefordeling;
-  kanOverstyreAccess: boolean;
 }
 
-export const DekningsgradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOverstyreAccess }: Props) => {
+export const DekningsgradOverstyring = ({ aksjonspunkt, ytelseFordeling }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, isReadOnly } = usePanelDataContext<OverstyringDekningsgradAp>();
@@ -45,13 +44,14 @@ export const DekningsgradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOver
   });
 
   const [visEditeringsmodus, setVisEditeringsmodus] = useState(false);
+  const erRedigeringAktiv = visEditeringsmodus && !isReadOnly;
 
   const slåAvEditeringAvDekningsgrad = () => {
     formMethods.reset();
     setVisEditeringsmodus(false);
   };
 
-  if (!visEditeringsmodus) {
+  if (!erRedigeringAktiv) {
     return (
       <VStack gap="space-8">
         <div>
@@ -66,14 +66,10 @@ export const DekningsgradOverstyring = ({ aksjonspunkt, ytelseFordeling, kanOver
               <FormattedMessage id="DekningsgradOverstyring.DekningsgradForeldrepenger" values={{ dekningsgrad }} />
             </BodyShort>
 
-            {kanOverstyreAccess && !isReadOnly && (
-              <Button
-                variant="tertiary"
-                size="small"
-                title={intl.formatMessage({ id: 'DekningsgradOverstyring.EndreDekningsgrad' })}
-                aria-label={intl.formatMessage({ id: 'DekningsgradOverstyring.EndreDekningsgrad' })}
+            {!isReadOnly && (
+              <RedigerKnapp
+                label={intl.formatMessage({ id: 'DekningsgradOverstyring.EndreDekningsgrad' })}
                 onClick={() => setVisEditeringsmodus(true)}
-                icon={<PencilFillIcon aria-hidden />}
               />
             )}
           </HStack>

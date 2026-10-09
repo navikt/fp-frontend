@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
-  kanOverstyre: boolean;
+  harSattEndringsdato: boolean;
 }
 
 export const UttakFaktaEøsIndex = (props: Props) => (

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { PencilFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Textarea, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
@@ -13,6 +12,7 @@ import dayjs from 'dayjs';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);
@@ -88,13 +88,9 @@ export const StartdatoOverstyring = ({ aksjonspunkt, ytelseFordeling }: Props) =
               {capitalizeFirstLetter(dayjs(ytelseFordeling.startDatoForPermisjon).format('dddd D. MMMM YYYY'))}
             </BodyShort>
             {!isReadOnly && (
-              <Button
-                variant="tertiary"
-                size="small"
-                aria-label={intl.formatMessage({ id: 'StartdatoOverstyring.EndreStartdato' })}
-                title={intl.formatMessage({ id: 'StartdatoOverstyring.EndreStartdato' })}
+              <RedigerKnapp
+                label={intl.formatMessage({ id: 'StartdatoOverstyring.EndreStartdato' })}
                 onClick={slåPåEditering}
-                icon={<PencilFillIcon aria-hidden />}
               />
             )}
           </HStack>

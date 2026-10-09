@@ -116,7 +116,6 @@ export const HarAksjonspunktForAvklarAleneomsorg: Story = {
   args: {
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG)],
     omsorgOgRett: aleneOmsorgForOmsorgOgRett,
-    kanOverstyre: false,
   },
 };
 
@@ -137,7 +136,6 @@ export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn: Story = {
       annenPart: defaultAnnenPart,
       bruker: defaultBruker,
     },
-    kanOverstyre: false,
   },
 };
 
@@ -164,7 +162,6 @@ export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
       relasjonsRolleType: 'FARA',
       rettighetstype: 'BEGGE_RETT',
     },
-    kanOverstyre: false,
   },
 };
 
@@ -205,7 +202,6 @@ export const AvklarAnnenForelderRettBareFarRett: Story = {
       relasjonsRolleType: 'FARA',
       rettighetstype: 'BARE_FAR_RETT_MOR_UFØR',
     },
-    kanOverstyre: false,
   },
 };
 
@@ -240,10 +236,9 @@ export const RevurderingManuell: Story = {
       relasjonsRolleType: 'MMOR',
       rettighetstype: 'BARE_FAR_RETT_MOR_UFØR',
     },
-    kanOverstyre: false,
   },
 };
-export const KanOverstyreMor: Story = {
+export const KanRedigereRettighetstype: Story = {
   args: {
     aksjonspunkterForPanel: [],
     isReadOnly: false,
@@ -267,10 +262,9 @@ export const KanOverstyreMor: Story = {
       relasjonsRolleType: 'MORA',
       rettighetstype: 'BEGGE_RETT',
     },
-    kanOverstyre: true,
   },
 };
-export const KanOverstyreFarOgAlleredeLøstAP: Story = {
+export const KanRedigereRettighetstypeFarOgAlleredeLøstAP: Story = {
   args: {
     aksjonspunkterForPanel: [],
     isReadOnly: false,
@@ -302,6 +296,5 @@ export const KanOverstyreFarOgAlleredeLøstAP: Story = {
       relasjonsRolleType: 'FARA',
       rettighetstype: 'BARE_FAR_RETT',
     },
-    kanOverstyre: true,
   },
 };

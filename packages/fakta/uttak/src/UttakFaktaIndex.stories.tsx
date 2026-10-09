@@ -26,7 +26,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId,
-    kanOverstyre: false,
+    harSattEndringsdato: false,
     faktaArbeidsforhold: [
       {
         arbeidsgiverReferanse: '910909088',
@@ -71,7 +71,7 @@ export const VisUttaksperiodeUtenAksjonspunkt: Story = {
         periodeKilde: 'SØKNAD',
       },
     ],
-    kanOverstyre: false,
+    harSattEndringsdato: false,
   },
 };
 
@@ -102,7 +102,7 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre: Story = {
         periodeKilde: 'SØKNAD',
       },
     ],
-    kanOverstyre: true,
+    harSattEndringsdato: true,
   },
 };
 
@@ -165,7 +165,7 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
         periodeKilde: 'SØKNAD',
       },
     ],
-    kanOverstyre: false,
+    harSattEndringsdato: false,
   },
 };
 
@@ -193,7 +193,7 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
         periodeKilde: 'SØKNAD',
       },
     ],
-    kanOverstyre: false,
+    harSattEndringsdato: false,
   },
 };
 
@@ -226,7 +226,7 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
         periodeKilde: 'SØKNAD',
       },
     ],
-    kanOverstyre: false,
+    harSattEndringsdato: false,
   },
 };
 
@@ -245,7 +245,7 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
       startDatoForPermisjon: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [],
-    kanOverstyre: false,
+    harSattEndringsdato: false,
   },
 };
 
@@ -281,7 +281,7 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
         periodeKilde: 'SØKNAD',
       },
     ],
-    kanOverstyre: false,
+    harSattEndringsdato: false,
   },
 };
 
@@ -317,7 +317,7 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
         periodeKilde: 'SØKNAD',
       },
     ],
-    kanOverstyre: false,
+    harSattEndringsdato: false,
   },
 };
 
@@ -359,7 +359,7 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
         periodeKilde: 'SØKNAD',
       },
     ],
-    kanOverstyre: false,
+    harSattEndringsdato: false,
     isReadOnly: true,
   },
 };
@@ -401,7 +401,7 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
         begrunnelse: 'Dette er en gammel begrunnelse',
       },
     ],
-    kanOverstyre: false,
+    harSattEndringsdato: false,
     isReadOnly: true,
   },
 };
@@ -465,7 +465,7 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
         periodeKilde: 'SØKNAD',
       },
     ],
-    kanOverstyre: false,
+    harSattEndringsdato: false,
     fagsak: lagFagsak({ relasjonsRolleType: 'FARA' }),
   },
 };

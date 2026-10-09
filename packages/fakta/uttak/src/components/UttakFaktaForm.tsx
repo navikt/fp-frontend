@@ -5,7 +5,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
-import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -25,6 +25,7 @@ import type {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
 import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
@@ -147,7 +148,7 @@ interface Props {
   uttakKontrollerFaktaPerioder: FaktaUttakPeriode[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
-  kanOverstyre: boolean;
+  harSattEndringsdato: boolean;
 }
 
 export const UttakFaktaForm = ({
@@ -155,7 +156,7 @@ export const UttakFaktaForm = ({
   arbeidsgiverOpplysningerPerId,
   faktaArbeidsforhold,
   ytelsefordeling,
-  kanOverstyre,
+  harSattEndringsdato,
 }: Props) => {
   const intl = useIntl();
 
@@ -239,8 +240,12 @@ export const UttakFaktaForm = ({
         <Heading size="small" level="2">
           <FormattedMessage id="UttakFaktaForm.FaktaUttak" />
         </Heading>
-        {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
-          <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
+        {harSattEndringsdato && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
+          <RedigerKnapp
+            label={intl.formatMessage({ id: 'UttakFaktaForm.RedigerFaktaOmUttak' })}
+            erAktiv={erOverstyrt}
+            onClick={() => setErOverstyrt(true)}
+          />
         )}
       </HStack>
       {harÅpentAksjonspunkt && <AksjonspunktHelpTextHTML>{aksjonspunktTekster}</AksjonspunktHelpTextHTML>}

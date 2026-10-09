@@ -37,7 +37,6 @@ const meta = {
   args: {
     utlandDokStatus: undefined,
     isReadOnly: false,
-    kanOverstyreAccess: true,
     ytelsefordeling: defaultYtelsefordeling,
   },
   render: args => <SakenFaktaIndex {...args} />,
@@ -74,7 +73,7 @@ export const StartdatoForForeldrepengerOgDekningsgradMedAnnenPart: Story = {
   },
 };
 
-export const KanIkkeOverstyreDekningsgrad: Story = {
+export const DekningsgradMedReadOnly: Story = {
   args: {
     aksjonspunkterForPanel: [],
     fagsak: lagFagsak({
@@ -93,7 +92,6 @@ export const KanIkkeOverstyreDekningsgrad: Story = {
         språkkode: 'NB',
       },
     }),
-    kanOverstyreAccess: false,
   },
 };
 

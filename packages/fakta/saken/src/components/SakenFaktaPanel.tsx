@@ -16,10 +16,9 @@ import { StartdatoOverstyring } from './StartdatoOverstyring';
 interface Props {
   ytelsefordeling?: Ytelsefordeling;
   utlandDokStatus: OpptjeningIUtlandDokStatusDto | undefined;
-  kanOverstyreAccess: boolean;
 }
 
-export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyreAccess }: Props) => {
+export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus }: Props) => {
   const { aksjonspunkterForPanel, fagsak } = usePanelDataContext();
 
   const automatiskMarkeringAvUtenlandssakAp = aksjonspunkterForPanel.find(
@@ -61,11 +60,7 @@ export const SakenFaktaPanel = ({ ytelsefordeling, utlandDokStatus, kanOverstyre
         <StartdatoOverstyring ytelseFordeling={ytelsefordeling} aksjonspunkt={overstyrStartdatoAp} />
       )}
       {ytelsefordeling && !avklarDekningsgradAP && fagsak.fagsakYtelseType === 'FP' && (
-        <DekningsgradOverstyring
-          ytelseFordeling={ytelsefordeling}
-          aksjonspunkt={overstyrDekningsgradAp}
-          kanOverstyreAccess={kanOverstyreAccess}
-        />
+        <DekningsgradOverstyring ytelseFordeling={ytelsefordeling} aksjonspunkt={overstyrDekningsgradAp} />
       )}
     </VStack>
   );

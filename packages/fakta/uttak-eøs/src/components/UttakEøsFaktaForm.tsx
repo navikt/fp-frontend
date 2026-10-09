@@ -5,23 +5,24 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
-import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { sortPeriodsByFom } from '@navikt/ft-utils';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
 interface Props {
   annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
-  kanOverstyre: boolean;
+  harSattEndringsdato: boolean;
 }
 
-export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Props) => {
+export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, harSattEndringsdato }: Props) => {
   const intl = useIntl();
 
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, isReadOnly, submitCallback, alleKodeverk } =
@@ -71,8 +72,12 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
         <Heading size="small">
           <FormattedMessage id="UttakEøsFaktaForm.FaktaUttakEos" />
         </Heading>
-        {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
-          <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
+        {harSattEndringsdato && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
+          <RedigerKnapp
+            label={intl.formatMessage({ id: 'UttakEøsFaktaForm.RedigerUttakEøs' })}
+            erAktiv={erOverstyrt}
+            onClick={() => setErOverstyrt(true)}
+          />
         )}
       </HStack>
       {harÅpentAksjonspunkt && (

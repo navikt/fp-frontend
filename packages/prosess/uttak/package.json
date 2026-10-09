@@ -26,6 +26,7 @@
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
+    "@navikt/fp-ui-komponenter": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-form-hooks": "13.0.1",
     "@navikt/ft-form-validators": "7.0.1",

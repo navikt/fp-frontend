@@ -43,7 +43,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Pro
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
 
-  const { rettigheter, behandling } = useBehandlingDataContext();
+  const { behandling } = useBehandlingDataContext();
 
   const overstyrtStatus = getStatusFromUttakresultat(behandling);
 
@@ -72,7 +72,6 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }: Pro
     >
       {uttaksresultat && søknad && familieHendelse && uttakStønadskontoer && personoversikt ? (
         <UttakProsessIndex
-          kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           personoversikt={personoversikt}
           oppdaterStønadskontoer={oppdaterStønadskontoer}

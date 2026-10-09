@@ -25,7 +25,6 @@ interface Props {
   uttaksresultat: Uttaksresultat;
   familiehendelse: FamilieHendelse;
   personoversikt: Personoversikt;
-  kanOverstyre: boolean;
   oppdaterStønadskontoer: (params: {
     behandlingUuid: string;
     perioder: PeriodeSoker[];
@@ -40,7 +39,6 @@ export const UttakProsessIndex = ({
   familiehendelse,
   soknad,
   personoversikt,
-  kanOverstyre,
   oppdaterStønadskontoer,
   arbeidsgiverOpplysningerPerId,
   annenForelderUttakEøs,
@@ -52,7 +50,6 @@ export const UttakProsessIndex = ({
       familiehendelse={familiehendelse}
       soknad={soknad}
       personoversikt={personoversikt}
-      kanOverstyre={kanOverstyre}
       oppdaterStønadskontoer={oppdaterStønadskontoer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       annenForelderUttakEøs={annenForelderUttakEøs}

@@ -11,7 +11,6 @@ import messages from '../i18n/nb_NO.json';
 interface Props {
   ytelsefordeling?: Ytelsefordeling;
   utlandDokStatus: OpptjeningIUtlandDokStatusDto | undefined;
-  kanOverstyreAccess: boolean;
 }
 
 const intl = createIntl(messages);
