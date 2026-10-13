@@ -2198,7 +2198,7 @@ export type foreldrepenger_domene_rest_dto_OverstyrBeregningsgrunnlagDto = {
 export type foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_OverstyringFaktaOmFødselDto = {
   barn?: Array<foreldrepenger_familiehendelse_aksjonspunkt_fødsel_dto_DokumentertBarnDto>;
   begrunnelse?: string;
-  termindato?: string;
+  termindato: string;
 };
 
 export type tjenester_behandling_aksjonspunkt_OverstyrteAksjonspunkterDto = {
