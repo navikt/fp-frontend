@@ -265,7 +265,34 @@ describe('aksjonspunktTekstUtleder', () => {
     } satisfies TotrinnskontrollAksjonspunkt;
 
     const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]!.props.id).toEqual('ToTrinnsForm.OverstyrUttak.PeriodeEndret');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.EndreUttak.PeriodeEndret');
+  });
+  it('skal vise innledende tekst og endret periode for aksjonspunkt 6065', () => {
+    const uttakPeriode = {
+      fom: '2024-05-01',
+      tom: '2025-01-20',
+      typeEndring: 'ENDRET',
+    } satisfies UttakPeriodeEndring;
+    const aksjonspunkt = {
+      ...defaultAksjonspunkt,
+      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+      uttakPerioder: [uttakPeriode],
+    } satisfies TotrinnskontrollAksjonspunkt;
+
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.EndretAvSaksbehandler');
+    expect(message[1]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeEndret');
+  });
+  it('skal vise innledende tekst uten perioder for aksjonspunkt 6065', () => {
+    const aksjonspunkt = {
+      ...defaultAksjonspunkt,
+      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
+      uttakPerioder: [],
+    } satisfies TotrinnskontrollAksjonspunkt;
+
+    const message = getAksjonspunkttekst(behandlingStatus, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
+    expect(message).toHaveLength(1);
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.EndretAvSaksbehandler');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 endret', () => {
     const uttakPeriode = {

@@ -29,9 +29,9 @@ export const totrinnskontrollaksjonspunktTextCodes = {
   [AksjonspunktKode.UTGÅTT_5020]: 'ToTrinnsForm.Medlemskap.VurderSokerBosatt',
   [AksjonspunktKode.UTGÅTT_5023]: 'ToTrinnsForm.Medlemskap.AvklarOppholdsrett',
   [AksjonspunktKode.OVERSTYRING_AV_MEDLEMSKAPSVILKÅRET]: 'ToTrinnsForm.Medlemskap.VilkarOverstyrt',
-  [AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO]: 'ToTrinnsForm.Medlemskap.OverstyrtStartdato',
+  [AksjonspunktKode.OVERSTYRING_AV_AVKLART_STARTDATO]: 'ToTrinnsForm.Medlemskap.EndretStartdato',
   [AksjonspunktKode.AVKLAR_DEKNINGSGRAD]: 'ToTrinnsForm.Medlemskap.AvklartDekningsgrad',
-  [AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD]: 'ToTrinnsForm.Medlemskap.OverstyrtDekningsgrad',
+  [AksjonspunktKode.OVERSTYRING_AV_DEKNINGSGRAD]: 'ToTrinnsForm.Medlemskap.EndretDekningsgrad',
 
   [AksjonspunktKode.FORESLÅ_VEDTAK]: 'ToTrinnsForm.Vedtak.Fritekstbrev',
   [AksjonspunktKode.FORESLÅ_VEDTAK_MANUELT]: 'ToTrinnsForm.Vedtak.Fritekstbrev',
