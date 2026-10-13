@@ -26,7 +26,7 @@ const AKSJONSPUNKT_KODER = [
 export const SakenFaktaInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling, rettigheter } = useBehandlingDataContext();
+  const { behandling } = useBehandlingDataContext();
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
@@ -42,11 +42,7 @@ export const SakenFaktaInitPanel = () => {
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Saken' })}
       skalPanelVisesIMeny
     >
-      <SakenFaktaIndex
-        ytelsefordeling={ytelsefordeling}
-        utlandDokStatus={utlandDokStatus}
-        kanOverstyreAccess={rettigheter.kanOverstyreAccess.isEnabled}
-      />
+      <SakenFaktaIndex ytelsefordeling={ytelsefordeling} utlandDokStatus={utlandDokStatus} />
     </FaktaDefaultInitPanel>
   );
 };

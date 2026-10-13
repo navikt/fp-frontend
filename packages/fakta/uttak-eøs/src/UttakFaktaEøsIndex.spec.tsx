@@ -234,10 +234,10 @@ describe('UttakFaktaEøsIndex', () => {
     );
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
-    expect(screen.getByText('Overstyr')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Rediger uttak for annen forelder i EØS' })).toBeInTheDocument();
     expect(screen.queryByTitle('Bekreft og fortsett')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Overstyr'));
+    await userEvent.click(screen.getByRole('button', { name: 'Rediger uttak for annen forelder i EØS' }));
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
     await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
@@ -264,6 +264,6 @@ describe('UttakFaktaEøsIndex', () => {
     );
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
-    expect(screen.queryByText('Overstyr')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Rediger uttak for annen forelder i EØS' })).not.toBeInTheDocument();
   });
 });

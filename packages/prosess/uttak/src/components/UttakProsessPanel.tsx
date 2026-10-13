@@ -2,7 +2,7 @@ import { type ReactElement, useEffect, useMemo, useRef, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
-import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { sortPeriodsByFom } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -22,6 +22,7 @@ import type {
   UttakStonadskontoer,
 } from '@navikt/fp-types';
 import type { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
 import { erAksjonspunktÅpent, notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
@@ -168,7 +169,6 @@ interface Props {
   familiehendelse: FamilieHendelse;
   soknad: Soknad;
   personoversikt: Personoversikt;
-  kanOverstyre: boolean;
   oppdaterStønadskontoer: (params: {
     behandlingUuid: string;
     perioder: PeriodeSoker[];
@@ -200,7 +200,6 @@ export const UttakProsessPanel = ({
   familiehendelse,
   soknad,
   personoversikt,
-  kanOverstyre,
   oppdaterStønadskontoer,
   arbeidsgiverOpplysningerPerId,
   annenForelderUttakEøs,
@@ -226,9 +225,6 @@ export const UttakProsessPanel = ({
   );
   const sisteSaldoForespørselRef = useRef(0);
   const [valgtKontoType, setValgtKontoType] = useState<StønadskontoType>();
-  const toggleOverstyring = () => {
-    setErOverstyrt(forrigeVerdi => !forrigeVerdi);
-  };
 
   const [perioder, setPerioder] = useState<PeriodeSoker[]>(mellomlagretFormData ?? uttaksresultat.perioderSøker);
 
@@ -348,6 +344,7 @@ export const UttakProsessPanel = ({
   const harOverstyrAp = aksjonspunkterForPanel.some(
     ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
   );
+  const erRedigeringAktiv = erOverstyrt && !isReadOnly;
 
   return (
     <VStack gap="space-24">
@@ -355,8 +352,12 @@ export const UttakProsessPanel = ({
         <Heading size="small" level="2">
           <FormattedMessage id="UttakPanel.Title" />
         </Heading>
-        {!isReadOnly && kanOverstyre && (!harÅpentAksjonspunkt || harOverstyrAp) && (
-          <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
+        {!isReadOnly && (!harÅpentAksjonspunkt || harOverstyrAp) && (
+          <RedigerKnapp
+            label={intl.formatMessage({ id: 'UttakPanel.RedigerUttaksperioder' })}
+            erAktiv={erOverstyrt}
+            onClick={() => setErOverstyrt(true)}
+          />
         )}
       </HStack>
       {aksjonspunkterForPanel.length > 0 && harÅpentAksjonspunkt && (
@@ -410,7 +411,7 @@ export const UttakProsessPanel = ({
           uttaksresultat={uttaksresultat}
           valgtPeriodeIndex={valgtPeriodeIndex}
           oppdaterPeriode={oppdaterPeriode}
-          isReadOnly={(harIngenEllerLukkedeAksjonspunkt || isReadOnly) && !erOverstyrt}
+          isReadOnly={(harIngenEllerLukkedeAksjonspunkt || isReadOnly) && !erRedigeringAktiv}
           alleKodeverk={alleKodeverk}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           uttakStonadskontoer={stønadskonto}
@@ -421,7 +422,7 @@ export const UttakProsessPanel = ({
           endringsdato={uttaksresultat.endringsdato}
         />
       )}
-      {((!harIngenEllerLukkedeAksjonspunkt && !isReadOnly) || erOverstyrt) && (
+      {((!harIngenEllerLukkedeAksjonspunkt && !isReadOnly) || erRedigeringAktiv) && (
         <>
           {innsendingFeilet && (
             <Alert size="small" variant="error">

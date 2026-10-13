@@ -19,7 +19,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     fagsak: lagFagsak({ relasjonsRolleType: 'FARA' }),
-    kanOverstyre: false,
+    harSattEndringsdato: false,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART)],
   },
   render: args => <UttakFaktaEøsIndex {...args} />,
@@ -91,7 +91,7 @@ export const AksjonspunktErUtførtHvorIngenPerioderErRegistrert: Story = {
 
 export const OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSomKanLøsesEllerEndres: Story = {
   args: {
-    kanOverstyre: true,
+    harSattEndringsdato: true,
     aksjonspunkterForPanel: [lagAksjonspunkt(AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART, { status: 'UTFO' })],
     annenForelderUttakEøs: [
       {
@@ -106,7 +106,7 @@ export const OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSom
 
 export const OverstyringSkalVæreMuligHvisDetForeliggerEnTidligereVurderingMedRegistrertePerioder: Story = {
   args: {
-    kanOverstyre: true,
+    harSattEndringsdato: true,
     aksjonspunkterForPanel: [],
     annenForelderUttakEøs: [
       {
@@ -121,7 +121,7 @@ export const OverstyringSkalVæreMuligHvisDetForeliggerEnTidligereVurderingMedRe
 
 export const OverstyringSkalVæreMuligHvisDetForeliggerEnTidligereVurderingMedIngenPerioder: Story = {
   args: {
-    kanOverstyre: true,
+    harSattEndringsdato: true,
     aksjonspunkterForPanel: [],
     annenForelderUttakEøs: [],
   },

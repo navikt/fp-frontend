@@ -21,7 +21,7 @@ const AKSJONSPUNKT_KODER = [
 export const OmsorgOgRettFaktaInitPanel = () => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
-  const { behandling, rettigheter } = useBehandlingDataContext();
+  const { behandling } = useBehandlingDataContext();
 
   const api = getBehandlingApi(behandling);
 
@@ -36,11 +36,7 @@ export const OmsorgOgRettFaktaInitPanel = () => {
       skalPanelVisesIMeny
     >
       {omsorgOgRett ? (
-        <OmsorgOgRettFaktaIndex
-          omsorgOgRett={omsorgOgRett}
-          personoversikt={personoversikt}
-          kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
-        />
+        <OmsorgOgRettFaktaIndex omsorgOgRett={omsorgOgRett} personoversikt={personoversikt} />
       ) : (
         <LoadingPanel />
       )}

@@ -32,7 +32,7 @@ const buildUttakText = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] =>
   aksjonspunkt.uttakPerioder.map(
-    (uttakperiode): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
+    (uttakperiode, index): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
       const fom = dateFormat(uttakperiode.fom);
       const tom = dateFormat(uttakperiode.tom);
       let id;
@@ -47,14 +47,12 @@ const buildUttakText = (
       ) {
         id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
       } else if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER) {
-        id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-      } else if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK) {
-        id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
+        id = 'ToTrinnsForm.EndreUttak.PeriodeEndret';
       } else {
         id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
       }
 
-      return <FormattedMessage key={id} id={id} values={{ a: fom, b: tom }} />;
+      return <FormattedMessage key={`${id}-${fom}-${tom}-${index}`} id={id} values={{ a: fom, b: tom }} />;
     },
   );
 
@@ -154,10 +152,15 @@ const buildAvklarAnnenForelderText = (): ReactElement<
   typeof FormattedMessage
 > => <FormattedMessage id="ToTrinnsForm.AvklarUttak.AnnenForelderHarRett" />;
 
-const buildOverstyrtRettOgOmsorgText = (): ReactElement<
+const buildEndretRettOgOmsorgText = (): ReactElement<
   React.ComponentProps<typeof FormattedMessage>,
   typeof FormattedMessage
-> => <FormattedMessage id="ToTrinnsForm.AvklarUttak.OverstyrtRettOgOmsorg" />;
+> => <FormattedMessage id="ToTrinnsForm.AvklarUttak.EndretRettOgOmsorg" />;
+
+const buildEndretAvSaksbehandlerText = (): ReactElement<
+  React.ComponentProps<typeof FormattedMessage>,
+  typeof FormattedMessage
+> => <FormattedMessage id="ToTrinnsForm.AvklarUttak.EndretAvSaksbehandler" />;
 
 const erKlageAksjonspunkt = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt | TotrinnskontrollAksjonspunkterDtoFpTilbake,
@@ -199,14 +202,24 @@ export const getAksjonspunkttekst = (
     erFpSakAksjonspunkt &&
     aksjonspunkt.uttakPerioder.length > 0
   ) {
-    return buildUttakText(aksjonspunkt);
+    const uttakTekster = buildUttakText(aksjonspunkt);
+    return aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK
+      ? [buildEndretAvSaksbehandlerText(), ...uttakTekster]
+      : uttakTekster;
+  }
+  if (
+    aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK &&
+    erFpSakAksjonspunkt &&
+    aksjonspunkt.uttakPerioder.length === 0
+  ) {
+    return [buildEndretAvSaksbehandlerText()];
   }
 
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.AVKLAR_FAKTA_ANNEN_FORELDER_HAR_RETT) {
     return [buildAvklarAnnenForelderText()];
   }
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG) {
-    return [buildOverstyrtRettOgOmsorgText()];
+    return [buildEndretRettOgOmsorgText()];
   }
   if (erKlageAksjonspunkt(aksjonspunkt)) {
     return getTextForKlage(behandlingStatus, behandlingsresultat);

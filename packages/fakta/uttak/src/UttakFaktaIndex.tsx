@@ -20,7 +20,7 @@ interface Props {
   uttakKontrollerFaktaPerioder: FaktaUttakPeriode[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
-  kanOverstyre: boolean;
+  harSattEndringsdato: boolean;
 }
 
 export const UttakFaktaIndex = (props: Props) => (

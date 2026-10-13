@@ -16,7 +16,7 @@ const {
   HarAksjonspunktForAvklarAnnenForelderRett,
   AvklarAnnenForelderRettBareFarRett,
   RevurderingManuell,
-  KanOverstyreMor,
+  KanRedigereRettighetstype,
 } = composeStories(stories);
 
 describe('OmsorgOgRettFaktaIndex', () => {
@@ -220,12 +220,14 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(bekreftOgFortsettKnapp).not.toBeInTheDocument();
   });
 
-  it('skal kunne ovestyre', async () => {
+  it('skal kunne redigere rettighetstype uten overstyrerrolle', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    render(<KanOverstyreMor submitCallback={lagreVurdering} />);
+    render(<KanRedigereRettighetstype submitCallback={lagreVurdering} />);
 
-    await userEvent.click(screen.getByTitle('Overstyr'));
+    const redigerKnapp = screen.getByRole('button', { name: 'Rediger rettighetstype' });
+    expect(redigerKnapp).toBeInTheDocument();
+    await userEvent.click(redigerKnapp);
     await userEvent.selectOptions(screen.getByLabelText('Rettighetstype'), 'BEGGE_RETT');
 
     await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
@@ -238,6 +240,12 @@ describe('OmsorgOgRettFaktaIndex', () => {
       begrunnelse: 'Dette er en begrunnelse',
       rettighetstype: 'BEGGE_RETT',
     });
+  });
+
+  it('skal skjule redigeringsknappen i read-only-modus', () => {
+    render(<KanRedigereRettighetstype isReadOnly />);
+
+    expect(screen.queryByRole('button', { name: 'Rediger rettighetstype' })).not.toBeInTheDocument();
   });
 
   it('skal ikke sende skjulte felter videre når søker endrer til aleneomsorg', async () => {

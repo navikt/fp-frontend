@@ -70,10 +70,10 @@ describe('UttakFaktaIndex', () => {
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
     expect(screen.getByTitle('Vis mer')).toBeInTheDocument();
-    expect(screen.queryByTitle('Overstyr')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Rediger fakta om uttak' })).not.toBeInTheDocument();
   });
 
-  it('skal kunne overstyre når det ikke er aksjonspunkter og en er overstyrer', async () => {
+  it('skal kunne redigere når det ikke er aksjonspunkter og endringsdato er satt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
     render(<VisUttaksperiodeUtenAksjonspunktKanOverstyre submitCallback={lagre} />);
@@ -82,7 +82,7 @@ describe('UttakFaktaIndex', () => {
 
     expect(screen.getByTitle('Vis mer')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByTitle('Overstyr'));
+    await userEvent.click(screen.getByRole('button', { name: 'Rediger fakta om uttak' }));
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
 
