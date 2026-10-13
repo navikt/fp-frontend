@@ -1464,7 +1464,7 @@ export type tjenester_behandling_klage_aksjonspunkt_KlageFormkravAksjonspunktDto
   erKlagerPart: boolean;
   erKonkret: boolean;
   erSignert: boolean;
-  erTilbakekreving?: boolean;
+  erTilbakekreving: boolean;
   fritekstTilBrev?: string;
   mottattDato?: string;
   tilbakekrevingInfo?: tjenester_behandling_klage_aksjonspunkt_KlageTilbakekrevingDto;
