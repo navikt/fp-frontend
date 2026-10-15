@@ -12,9 +12,13 @@ import { Termindato, type TermindatoFormValues } from './Termindato';
 
 interface TermindatoMedReadonlyToggleProps {
   isReadOnly: boolean;
+  alltidPåkravd?: boolean;
 }
 
-export const TermindatoMedReadonlyToggle = ({ isReadOnly }: TermindatoMedReadonlyToggleProps) => {
+export const TermindatoMedReadonlyToggle = ({
+  isReadOnly,
+  alltidPåkravd = false,
+}: TermindatoMedReadonlyToggleProps) => {
   const intl = useIntl();
   const { getValues, getFieldState } = useFormContext<TermindatoFormValues & ErBarnFødtFormValues>();
 
@@ -27,7 +31,7 @@ export const TermindatoMedReadonlyToggle = ({ isReadOnly }: TermindatoMedReadonl
   const formatertKilde = getLabelForFaktaKilde(isDirty ? 'SAKSBEHANDLER' : kilde);
   return (
     <HStack gap="space-8" align="start">
-      <Termindato isReadOnly={isInputReadonly} isRequired={erBarnFødt === false} />
+      <Termindato isReadOnly={isInputReadonly} isRequired={alltidPåkravd || erBarnFødt === false} />
 
       {skalViseKnapp && (
         <Button
