@@ -15,7 +15,7 @@ import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListInnsyn } from './DocumentListInnsyn';
-import type { InnsynFormValues } from './InnsynFormValues';
+import type { FormValues } from './formValues';
 import { VedtakDocuments } from './VedtakDocuments';
 
 const hentDokumenterMedNavnOgFikkInnsyn = (dokumenter: InnsynDokument[]): Record<string, boolean> =>
@@ -27,7 +27,7 @@ const hentDokumenterMedNavnOgFikkInnsyn = (dokumenter: InnsynDokument[]): Record
     };
   }, {});
 
-const getDocumentsStatus = (values: InnsynFormValues, documents: Dokument[]) =>
+const getDocumentsStatus = (values: FormValues, documents: Dokument[]) =>
   documents.map(document => ({
     dokumentId: document.dokumentId,
     journalpostId: document.journalpostId,
@@ -50,29 +50,22 @@ interface Props {
   alleDokumenter?: Dokument[];
 }
 
-/**
- * InnsynForm
- *
- * Viser panelet som håndterer avklaring av innsyn.
- */
 export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
   const intl = useIntl();
 
   const { fagsak, alleKodeverk, isSubmittable, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
     usePanelDataContext<VurderInnsynAp>();
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<InnsynFormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
-  const formMethods = useForm<InnsynFormValues>({
+  const formMethods = useForm<FormValues>({
     defaultValues:
       mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, behandling.fristBehandlingPåVent, innsyn),
   });
 
   const documents = getFilteredReceivedDocuments(alleDokumenter);
 
-  const innsynResultatTyper = alleKodeverk['InnsynResultatType']
-    .sort((t1, t2) => t1.navn.localeCompare(t2.navn))
-    .reverse();
+  const innsynResultatTyper = alleKodeverk['InnsynResultatType'].sort((t1, t2) => t2.navn.localeCompare(t1.navn));
 
   const isApOpen = aksjonspunkterForPanel[0]?.status === 'OPPR';
 
@@ -85,31 +78,36 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
       onSubmit={values => submitCallback(transformValues(values, alleDokumenter))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="space-16">
+      <VStack gap="space-24">
         <Heading size="small" level="2">
           <FormattedMessage id="InnsynForm.Innsynsbehandling" />
         </Heading>
+
         {isApOpen && (
           <AksjonspunktHelpTextHTML>
             <FormattedMessage id="InnsynForm.VurderKravetOmInnsyn" />
           </AksjonspunktHelpTextHTML>
         )}
+
         <RhfDatepicker
+          size="small"
           name="mottattDato"
           control={formMethods.control}
-          label={intl.formatMessage({ id: 'InnsynForm.DatoMottattKrav' })}
+          label={<FormattedMessage id="InnsynForm.DatoMottattKrav" />}
           readOnly={isReadOnly}
           isEdited={!isApOpen}
           validate={[required, hasValidDate]}
         />
-        <VedtakDocuments
-          vedtaksdokumenter={innsyn?.vedtaksdokumentasjon ?? []}
-          behandlingTypes={alleKodeverk['BehandlingType']}
-        />
+
+        <VedtakDocuments vedtaksdokumenter={innsyn?.vedtaksdokumentasjon ?? []} />
+
         <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} readOnly={isReadOnly} />
+
         <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
+
         <VStack gap="space-12">
           <RhfRadioGroup
+            size="small"
             name="innsynResultatType"
             control={formMethods.control}
             legend={<FormattedMessage id="InnsynForm.Resultat" />}
@@ -117,7 +115,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
             readOnly={isReadOnly}
             isEdited={!isApOpen}
           >
-            <HStack gap="space-16">
+            <HStack gap="space-0 space-16">
               {innsynResultatTyper.map(irt => (
                 <Radio key={irt.kode} value={irt.kode} size="small">
                   {irt.navn}
@@ -125,10 +123,12 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
               ))}
             </HStack>
           </RhfRadioGroup>
+
           {(innsynResultatTypeKode === 'INNV' || innsynResultatTypeKode === 'DELV') && (
             <ArrowBox alignOffset={innsynResultatTypeKode === 'INNV' ? 28 : 176}>
               <VStack gap="space-16">
                 <RhfRadioGroup
+                  size="small"
                   name="sattPaVent"
                   control={formMethods.control}
                   legend={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
@@ -136,7 +136,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
                   readOnly={isReadOnly}
                   isEdited={!isApOpen}
                 >
-                  <HStack gap="space-16">
+                  <HStack gap="space-0 space-16">
                     <Radio value={true} size="small">
                       <FormattedMessage id="InnsynForm.SettBehandlingPåVent" />
                     </Radio>
@@ -145,11 +145,12 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
                     </Radio>
                   </HStack>
                 </RhfRadioGroup>
+
                 {sattPaVent && (
                   <RhfDatepicker
                     name="fristDato"
                     control={formMethods.control}
-                    label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
+                    label={<FormattedMessage id="InnsynForm.FristDato" />}
                     readOnly={isReadOnly}
                     isEdited={!isApOpen}
                     validate={[required, hasValidDate]}
@@ -159,6 +160,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
             </ArrowBox>
           )}
         </VStack>
+
         <ProsessStegSubmitButton
           isReadOnly={isReadOnly}
           isSubmittable={isSubmittable}
@@ -175,7 +177,7 @@ const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   fristBehandlingPåVent?: string,
   innsyn?: Innsyn,
-): InnsynFormValues => ({
+): FormValues => ({
   mottattDato: innsyn?.innsynMottattDato,
   innsynResultatType: innsyn?.innsynResultatType,
   fristDato: fristBehandlingPåVent ?? dayjs().add(3, 'days').format(ISO_DATE_FORMAT),
@@ -184,7 +186,7 @@ const buildInitialValues = (
   ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter ?? []),
 });
 
-const transformValues = (values: InnsynFormValues, documents: Dokument[]): VurderInnsynAp => ({
+const transformValues = (values: FormValues, documents: Dokument[]): VurderInnsynAp => ({
   kode: AksjonspunktKode.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),
   mottattDato: notEmpty(values.mottattDato),
