@@ -3,7 +3,8 @@ import { MemoryRouter, Route, Routes } from 'react-router';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { cleanUrl, http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
+import { getCleanUrlString } from 'msw/utils/get-clean-url-string';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
 import { LosUrl } from '@navikt/fp-los-saksbehandler';
@@ -35,7 +36,7 @@ const withRequestPendingProvider: DecoratorFunction<ReactRenderer> = Story => {
 };
 
 const getHref = (rel: string) =>
-  cleanUrl(
+  getCleanUrlString(
     wrapUrl(
       notEmpty(
         initFetchFpsak.links.find(link => link.rel === rel) ??
