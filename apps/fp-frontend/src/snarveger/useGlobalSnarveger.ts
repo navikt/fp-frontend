@@ -30,19 +30,18 @@ export const useGlobalSnarveger = (): void => {
   useEffect(() => {
     const nullstillSekvens = () => {
       sekvensPrefiksRef.current = undefined;
-      if (sekvensTimeoutRef.current) {
-        clearTimeout(sekvensTimeoutRef.current);
-        sekvensTimeoutRef.current = undefined;
+      if (!sekvensTimeoutRef.current) {
+        return;
       }
+
+      clearTimeout(sekvensTimeoutRef.current);
+      sekvensTimeoutRef.current = undefined;
     };
 
     const handterTast = (event: KeyboardEvent) => {
       const { aktiv: erAktiv, snarveiModalÅpen: erSnarveiModalÅpen } = tilstandRef.current;
 
-      if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) {
-        return;
-      }
-      if (erSkrivefelt(event.target)) {
+      if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey || erSkrivefelt(event.target)) {
         return;
       }
 
@@ -110,10 +109,12 @@ const erSkrivefelt = (element: EventTarget | null): boolean => {
     return true;
   }
   const tag = element.tagName;
-  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') {
-    return true;
-  }
-  return element.getAttribute('role') === 'textbox';
+  return (
+    tag === 'INPUT' ||
+    tag === 'TEXTAREA' ||
+    tag === 'SELECT' ||
+    element.getAttribute('role') === 'textbox'
+  );
 };
 
 const normaliserTast = (key: string): string => (key.length === 1 ? key.toUpperCase() : key);
@@ -122,10 +123,11 @@ const erÅpenDialog = (element: Element): boolean => {
   if (element.tagName === 'DIALOG') {
     return element.hasAttribute('open');
   }
-  if (!(element instanceof HTMLElement)) {
-    return false;
-  }
-  if (element.hidden || element.getAttribute('aria-hidden') === 'true') {
+  if (
+    !(element instanceof HTMLElement) ||
+    element.hidden ||
+    element.getAttribute('aria-hidden') === 'true'
+  ) {
     return false;
   }
 

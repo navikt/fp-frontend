@@ -15,10 +15,7 @@ const sorterDokumenter = (dok1: Dokument, dok2: Dokument): number => {
     return 1;
   }
 
-  if (!dok2.tidspunkt) {
-    return -1;
-  }
-  return dok2.tidspunkt.localeCompare(dok1.tidspunkt);
+  return !dok2.tidspunkt ? -1 : dok2.tidspunkt.localeCompare(dok1.tidspunkt);
 };
 
 interface Props {

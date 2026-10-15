@@ -42,10 +42,12 @@ export const FaktaMeny = <T extends Behandling>({
 
   const byttFaktaPanel = (retning: 1 | -1) => {
     const nyId = finnNabopanelId(faktaPanelMenyData, retning);
-    if (nyId) {
-      planleggInnholdsfokus(nyId);
-      oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, nyId);
+    if (!nyId) {
+      return;
     }
+
+    planleggInnholdsfokus(nyId);
+    oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, nyId);
   };
 
   useRegistrerSnarveg(BEHANDLING_SNARVEG_IDER.NESTE_FAKTA, () => byttFaktaPanel(1));

@@ -134,11 +134,11 @@ export const finnPanelConfig = (
 ): PanelConfig | undefined =>
   panelConfigs.find(config => {
     const behandlingTyper: readonly BehandlingType[] = config.behandlingTyper;
-    if (!behandlingType || !behandlingTyper.includes(behandlingType)) {
-      return false;
-    }
-
-    return !config.fagsakYtelseType || config.fagsakYtelseType === fagsakYtelseType;
+    return Boolean(
+      behandlingType &&
+        behandlingTyper.includes(behandlingType) &&
+        (!config.fagsakYtelseType || config.fagsakYtelseType === fagsakYtelseType),
+    );
   });
 
 export const skalHenteArbeidsgivere = (panelConfig: PanelConfig | undefined): boolean =>

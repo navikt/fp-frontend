@@ -209,19 +209,15 @@ const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps<Behan
     return 'IKKE_OPPFYLT';
   }
 
-  if (harVilkarMedStatus(vilkår, 'IKKE_VURDERT') || harRelevantOgÅpentAksjonspunkt(aksjonspunkt)) {
+  if (
+    harVilkarMedStatus(vilkår, 'IKKE_VURDERT') ||
+    harRelevantOgÅpentAksjonspunkt(aksjonspunkt) ||
+    !kunLukkedeAksjonspunkt
+  ) {
     return 'IKKE_VURDERT';
   }
 
-  if (!kunLukkedeAksjonspunkt) {
-    return 'IKKE_VURDERT';
-  }
-
-  if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
-    return 'IKKE_OPPFYLT';
-  }
-
-  return 'OPPFYLT';
+  return behandlingsresultat && isAvslag(behandlingsresultat.type) ? 'IKKE_OPPFYLT' : 'OPPFYLT';
 };
 
 const getLagringSideeffekter =

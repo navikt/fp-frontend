@@ -32,13 +32,16 @@ const DEFERRED_UNICORN_RULES = {
   'unicorn/no-top-level-side-effects': OFF,
   'unicorn/prefer-array-from-map': OFF,
   'unicorn/prefer-await': OFF,
+  'unicorn/prefer-combined-guards': OFF,
   'unicorn/prefer-global-this': OFF,
   'unicorn/prefer-includes': OFF,
   'unicorn/prefer-includes-over-repeated-comparisons': OFF,
   'unicorn/prefer-location-assign': OFF,
+  'unicorn/prefer-logical-operator-over-ternary': OFF,
   'unicorn/prefer-number-coercion': OFF,
   'unicorn/prefer-object-from-entries': OFF,
   'unicorn/prefer-simple-condition-first': OFF,
+  'unicorn/prefer-ternary': OFF,
 };
 
 const unicornRecommended = {
@@ -165,12 +168,7 @@ const fileOverrides = [
   { files: ['**/apiDtoGenerert.ts'], rules: { '@typescript-eslint/no-redundant-type-constituents': OFF } },
 ];
 
-export default [
-  ...baseConfig,
-  eslintConfigPrettier,
-  sharedRulesConfig,
-  ...fileOverrides,
-];
+export default [...baseConfig, eslintConfigPrettier, sharedRulesConfig, ...fileOverrides];
 
 export const unicornConfig = [
   ...baseConfig,

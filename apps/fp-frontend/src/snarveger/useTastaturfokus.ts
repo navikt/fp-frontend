@@ -22,12 +22,14 @@ export const useTastaturfokus = <TContainer extends HTMLElement, TElement extend
   const fokuserElement = useCallback(
     (index: number) => {
       const element = hentElementer()[index];
-      if (element) {
-        if (scrollVedFokus) {
-          element.scrollIntoView({ block: 'nearest' });
-        }
-        element.focus();
+      if (!element) {
+        return;
       }
+
+      if (scrollVedFokus) {
+        element.scrollIntoView({ block: 'nearest' });
+      }
+      element.focus();
     },
     [hentElementer, scrollVedFokus],
   );
@@ -42,10 +44,12 @@ export const useTastaturfokus = <TContainer extends HTMLElement, TElement extend
       const elementer = hentElementer();
       const aktivIndex = elementer.indexOf(document.activeElement as TElement);
       const nyIndex = nesteFokusIndex(event.key, aktivIndex, elementer.length);
-      if (nyIndex !== undefined) {
-        event.preventDefault();
-        fokuserElement(nyIndex);
+      if (nyIndex === undefined) {
+        return;
       }
+
+      event.preventDefault();
+      fokuserElement(nyIndex);
     },
     [fokuserElement, hentElementer, onEscape],
   );

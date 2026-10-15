@@ -221,10 +221,7 @@ const finnKanIkkeLagreMeldingTekst = (kanVeilede: boolean, behandlingKanSendeMel
   if (!behandlingKanSendeMelding) {
     return 'MeldingIndex.IkkeTilgjengeligPaVent';
   }
-  if (kanVeilede) {
-    return 'MeldingIndex.IkkeTilgjengeligVeileder';
-  }
-  return 'MeldingIndex.IkkeTilgjengeligAvsluttet';
+  return kanVeilede ? 'MeldingIndex.IkkeTilgjengeligVeileder' : 'MeldingIndex.IkkeTilgjengeligAvsluttet';
 };
 
 const useVisForhandsvisningAvMelding = (behandling: FagsakBehandlingDto) => {

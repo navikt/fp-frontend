@@ -25,10 +25,10 @@ export const BesteberegningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: 
 
   const api = getBehandlingApi(behandling);
   const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(behandling));
-  const skalPanelVisesIMeny =
-    beregningsgrunnlag?.ytelsesspesifiktGrunnlag?.ytelsetype === 'FP'
-      ? !!beregningsgrunnlag.ytelsesspesifiktGrunnlag.besteberegninggrunnlag
-      : false;
+  const skalPanelVisesIMeny = Boolean(
+    beregningsgrunnlag?.ytelsesspesifiktGrunnlag?.ytelsetype === 'FP' &&
+      beregningsgrunnlag.ytelsesspesifiktGrunnlag.besteberegninggrunnlag,
+  );
 
   return (
     <FaktaDefaultInitPanel

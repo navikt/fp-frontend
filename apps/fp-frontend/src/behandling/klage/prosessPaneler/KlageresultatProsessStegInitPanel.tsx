@@ -96,10 +96,9 @@ const getVedtakStatus = (
   if (resultatTypeCode === 'HENLAGT_KLAGE_TRUKKET' || resultatTypeCode === 'HENLAGT_FEILOPPRETTET') {
     return 'IKKE_VURDERT';
   }
-  if (resultatTypeCode === 'KLAGE_AVVIST' || resultatTypeCode === 'KLAGE_YTELSESVEDTAK_OPPHEVET') {
-    return 'IKKE_OPPFYLT';
-  }
-  return 'OPPFYLT';
+  return resultatTypeCode === 'KLAGE_AVVIST' || resultatTypeCode === 'KLAGE_YTELSESVEDTAK_OPPHEVET'
+    ? 'IKKE_OPPFYLT'
+    : 'OPPFYLT';
 };
 
 const getLagringSideeffekter =
