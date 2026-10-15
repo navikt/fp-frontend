@@ -8,7 +8,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, FødselGjeldende } from '@navikt/fp-types';
 import type { OverstyringFaktaFødselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ErBarnFødt, type ErBarnFødtFormValues } from '../form/ErBarnFødt';
 import { Termindato, type TermindatoFormValues } from '../form/Termindato';
@@ -37,7 +37,7 @@ export const OverstyringForm = ({ gjeldende, isReadOnly, avbrytOverstyring }: Pr
   return (
     <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(transformValues(values))}>
       <VStack gap="space-24">
-        <TermindatoMedReadonlyToggle isReadOnly={isReadOnly} />
+        <TermindatoMedReadonlyToggle isReadOnly={isReadOnly} alltidPåkravd />
 
         <ErBarnFødt
           isReadOnly={isReadOnly}
@@ -80,7 +80,7 @@ const initialValues = (gjeldende: FødselGjeldende, overstyringsAP?: Aksjonspunk
 
 const transformValues = (values: FormValues): OverstyringFaktaFødselAp => ({
   kode: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
-  ...Termindato.transformValues(values),
+  termindato: notEmpty(values.termindato, 'termindato må være satt ved submit'),
   ...ErBarnFødt.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
