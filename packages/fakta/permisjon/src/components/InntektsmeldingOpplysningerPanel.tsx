@@ -5,8 +5,7 @@ import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { BeløpLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Inntektsmelding } from '@navikt/fp-types';
-
-import { DokumentLink } from '../../../../ui-komponenter';
+import { DokumentLink } from '@navikt/fp-ui-komponenter';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
