@@ -1,7 +1,8 @@
 import { MemoryRouter } from 'react-router';
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { cleanUrl, http, HttpResponse, type JsonBodyType } from 'msw';
+import { http, HttpResponse, type JsonBodyType } from 'msw';
+import { getCleanUrlString } from 'msw/utils/get-clean-url-string';
 
 import { RestApiErrorProvider } from '@navikt/fp-app-felles';
 import { LosUrl } from '@navikt/fp-los-saksbehandler';
@@ -109,7 +110,7 @@ const HANDLERS = [
     ...initFetchFptilbake.links,
     ...initFetchFptilbake.sakLinks,
     ...behandling.links,
-  ].map(link => http.all(encodeURI(cleanUrl(wrapUrl(link.href))), getMockResponse(link.rel))),
+  ].map(link => http.all(encodeURI(getCleanUrlString(wrapUrl(link.href))), getMockResponse(link.rel))),
 ];
 
 const meta = {

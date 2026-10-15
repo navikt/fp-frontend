@@ -1,7 +1,8 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { cleanUrl, http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
+import { getCleanUrlString } from 'msw/utils/get-clean-url-string';
 import { action } from 'storybook/actions';
 
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -18,7 +19,7 @@ import messages from '../../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const getHref = (rel: string) =>
-  cleanUrl(wrapUrl(notEmpty(initFetchFpsak.sakLinks.find(link => link.rel === rel)).href));
+  getCleanUrlString(wrapUrl(notEmpty(initFetchFpsak.sakLinks.find(link => link.rel === rel)).href));
 
 const meta = {
   title: 'fagsak/DokumentIndex',

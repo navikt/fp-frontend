@@ -3,7 +3,8 @@ import { MemoryRouter } from 'react-router';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { cleanUrl, http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
+import { getCleanUrlString } from 'msw/utils/get-clean-url-string';
 
 import { alleKodeverk, alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { Aktor, NavAnsatt, Person } from '@navikt/fp-types';
@@ -17,7 +18,7 @@ import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
+const getHref = (rel: string) => getCleanUrlString(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 
 const PERSON = {
   navn: 'Espen Utvikler',
