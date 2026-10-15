@@ -1,7 +1,8 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { cleanUrl, http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
+import { getCleanUrlString } from 'msw/utils/get-clean-url-string';
 
 import { alleKodeverk, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
@@ -11,7 +12,7 @@ import { initFetchFpsak } from '../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { FagsakSearchIndex } from './FagsakSearchIndex';
 
-const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
+const getHref = (rel: string) => getCleanUrlString(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 
 const FAGSAK_1 = {
   saksnummer: '12345',

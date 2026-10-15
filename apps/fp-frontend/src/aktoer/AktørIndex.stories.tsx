@@ -3,7 +3,8 @@ import { MemoryRouter, Route, Routes } from 'react-router';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { cleanUrl, http, HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
+import { getCleanUrlString } from 'msw/utils/get-clean-url-string';
 
 import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { Aktor, Person } from '@navikt/fp-types';
@@ -13,7 +14,7 @@ import { initFetchFpsak, initFetchFptilbake } from '../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { AktørIndex } from './AktørIndex';
 
-const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
+const getHref = (rel: string) => getCleanUrlString(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 
 const PERSON = {
   navn: 'Espen Utvikler',
