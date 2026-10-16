@@ -101,7 +101,7 @@ export const SimuleringPanel = ({
           )}
         </>
       )}
-      {!simuleringResultat && <FormattedMessage id="Simulering.ingenData" />}
+      {!simuleringResultat && <FormattedMessage id="Simulering.ingenData" tagName="i" />}
       {skalHaForm && (
         <RhfForm
           formMethods={formMethods}

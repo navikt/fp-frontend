@@ -14,7 +14,7 @@ export const UtbetalingerPanel = ({ utbetalinger }: Props) => (
     <div />
     {(!utbetalinger || utbetalinger.length === 0) && (
       <BodyShort size="small">
-        <FormattedMessage id="UtbetalingerPanel.IngenUtbetalinger" />
+        <FormattedMessage id="UtbetalingerPanel.IngenUtbetalinger" tagName="i" />
       </BodyShort>
     )}
     {utbetalinger && utbetalinger.length > 0 && (

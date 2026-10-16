@@ -94,7 +94,7 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
       )}
       {!visInntektsposter && (
         <Label size="small">
-          <FormattedMessage id="ArbeidsforholdInformasjonPanel.IngenInntekt" />
+          <FormattedMessage id="ArbeidsforholdInformasjonPanel.IngenInntekt" tagName="i" />
         </Label>
       )}
     </VStack>

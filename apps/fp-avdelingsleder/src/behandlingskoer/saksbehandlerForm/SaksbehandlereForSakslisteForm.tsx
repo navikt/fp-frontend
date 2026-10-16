@@ -56,7 +56,7 @@ export const SaksbehandlereForSakslisteForm = ({
           </Label>
           {sorterteAvdelingensSaksbehandlere.length === 0 && (
             <BodyShort size="small">
-              <FormattedMessage id="SaksbehandlereForSakslisteForm.IngenSaksbehandlere" />
+              <FormattedMessage id="SaksbehandlereForSakslisteForm.IngenSaksbehandlere" tagName="i" />
             </BodyShort>
           )}
           {harGrupper && (

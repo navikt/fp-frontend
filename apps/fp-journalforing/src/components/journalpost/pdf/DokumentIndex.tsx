@@ -20,7 +20,7 @@ export const DokumentIndex = ({ dokumenter }: Props) => {
   if (!valgtDokument || !dokumenter) {
     return (
       <Heading size="small" level="2">
-        <FormattedMessage id="ValgtOppgave.Dokumenter.Tom" />
+        <FormattedMessage id="ValgtOppgave.Dokumenter.Tom" tagName="i" />
       </Heading>
     );
   }

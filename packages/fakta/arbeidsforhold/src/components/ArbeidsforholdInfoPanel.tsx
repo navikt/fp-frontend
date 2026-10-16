@@ -31,7 +31,7 @@ export const ArbeidsforholdInfoPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysnin
         <FormattedMessage id="ArbeidsforholdInfoPanel.ArbeidsforholdHeader" />
       </Heading>
       {sorterteArbeidsforhold.length === 0 && (
-        <FormattedMessage id="PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert" />
+        <FormattedMessage id="PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert" tagName="i" />
       )}
       {sorterteArbeidsforhold.length > 0 && (
         <PersonArbeidsforholdTable

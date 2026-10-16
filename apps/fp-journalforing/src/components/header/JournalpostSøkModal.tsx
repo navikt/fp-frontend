@@ -62,7 +62,7 @@ export const JournalpostSøkModal = ({ hentJournalpost, lukkModal, erÅpen, harS
             </RhfForm>
             {harSøktOgFunnetIngenMatch && (
               <BodyShort>
-                <FormattedMessage id="Journalpost.Søk.IngenTreffEllerManglerTilgang" />
+                <FormattedMessage id="Journalpost.Søk.IngenTreffEllerManglerTilgang" tagName="i" />
               </BodyShort>
             )}
           </VStack>

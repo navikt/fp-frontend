@@ -43,8 +43,8 @@ export const FagsakSearch = ({
       searchResultAccessDenied={searchResultAccessDenied}
     />
     {searchResultReceived && fagsaker.length === 0 && (
-      <BodyShort size="small" className={styles['label']}>
-        <FormattedMessage id="FagsakSearch.ZeroSearchResults" />
+      <BodyShort size="small">
+        <FormattedMessage id="FagsakSearch.ZeroSearchResults" tagName="i" />
       </BodyShort>
     )}
     {searchResultReceived && fagsaker.length > 1 && (

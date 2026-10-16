@@ -39,7 +39,7 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
 
   return saksbehandlere.length === 0 ? (
     <Detail>
-      <FormattedMessage id="ValgAvSaksbehandlere.IngenSaksbehandlere" />
+      <FormattedMessage id="ValgAvSaksbehandlere.IngenSaksbehandlere" tagName="i" />
     </Detail>
   ) : (
     <ul className="columns-3xs list-none">

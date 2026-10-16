@@ -16,7 +16,7 @@ describe('UtbetalingsdataIs15Index', () => {
     const søkeInput = screen.getByLabelText('Fødselsnummer');
     await userEvent.type(søkeInput, '111');
 
-    await userEvent.click(screen.getAllByRole('button')[1]!);
+    await userEvent.click(screen.getByRole('button', { name: 'Søk' }));
 
     expect(await screen.findByText('Oppgitt fødselsnummer er ikke gyldig')).toBeInTheDocument();
   });
@@ -30,7 +30,7 @@ describe('UtbetalingsdataIs15Index', () => {
     const søkeInput = screen.getByLabelText('Fødselsnummer');
     await userEvent.type(søkeInput, '07078518434');
 
-    await userEvent.click(screen.getAllByRole('button')[1]!);
+    await userEvent.click(screen.getByRole('button', { name: 'Søk' }));
 
     expect(await screen.findByText('Søkeresultat:')).toBeInTheDocument();
 
@@ -50,7 +50,7 @@ describe('UtbetalingsdataIs15Index', () => {
 
     const søkeInput = screen.getByLabelText('Fødselsnummer');
     await userEvent.type(søkeInput, '07078518434');
-    await userEvent.click(screen.getAllByRole('button')[1]!);
+    await userEvent.click(screen.getByRole('button', { name: 'Søk' }));
 
     expect(await screen.findByText('Søkeresultat:')).toBeInTheDocument();
 
@@ -79,7 +79,7 @@ describe('UtbetalingsdataIs15Index', () => {
     const søkeInput = screen.getByLabelText('Fødselsnummer');
     await userEvent.type(søkeInput, '07078518434');
 
-    await userEvent.click(screen.getAllByRole('button')[1]!);
+    await userEvent.click(screen.getByRole('button', { name: 'Søk' }));
 
     expect(
       await screen.findByText(

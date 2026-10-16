@@ -115,7 +115,7 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
       {sorterteNotater.length === 0 && (
         <div className={styles['textAlign']}>
           <BodyShort className={styles['ingen']}>
-            <FormattedMessage id="NotatPanel.Ingen" />
+            <FormattedMessage id="NotatPanel.Ingen" tagName="i" />
           </BodyShort>
         </div>
       )}

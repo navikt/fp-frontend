@@ -57,7 +57,7 @@ export const BehandlingerListe = ({
       {behandlinger.length === 0 && (
         <Box borderWidth="2" borderColor="neutral-subtle" borderRadius="8" padding="space-12">
           <Label size="small">
-            <FormattedMessage id="BehandlingList.ZeroBehandlinger" />
+            <FormattedMessage id="BehandlingList.ZeroBehandlinger" tagName="i" />
           </Label>
         </Box>
       )}

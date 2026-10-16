@@ -13,7 +13,7 @@ export const ArbeidsforholdPanel = ({ alleArbeidsforhold }: Props) => (
     <div />
     {(!alleArbeidsforhold || alleArbeidsforhold.length === 0) && (
       <BodyShort size="small">
-        <FormattedMessage id="ArbeidsforholdPanel.IngenArbeidsforhold" />
+        <FormattedMessage id="ArbeidsforholdPanel.IngenArbeidsforhold" tagName="i" />
       </BodyShort>
     )}
     {alleArbeidsforhold && alleArbeidsforhold.length > 0 && (
