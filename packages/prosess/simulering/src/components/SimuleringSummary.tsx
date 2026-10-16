@@ -1,10 +1,8 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, HStack, Label, VStack } from '@navikt/ds-react';
 import { BeløpLabel } from '@navikt/ft-ui-komponenter';
 import { periodFormat } from '@navikt/ft-utils';
-
-import styles from './simuleringSummary.module.css';
 
 interface Props {
   fom: string;
@@ -26,47 +24,50 @@ export const SimuleringSummary = ({
   inntrekk,
   ingenPerioderMedAvvik,
 }: Props) => (
-  <VStack gap="space-16">
-    <BodyShort size="small" className={styles['summaryTitle']}>
+  <VStack gap="space-4">
+    <Label size="small">
       <FormattedMessage id="Simulering.bruker" />
-    </BodyShort>
-    <div className={styles['infoSummary']}>
-      {ingenPerioderMedAvvik && (
-        <div className={styles['ingenPerioder']}>
-          <FormattedMessage id="Simulering.ingenPerioder" />
-        </div>
-      )}
-      {!ingenPerioderMedAvvik && (
-        <VStack gap="space-16">
+    </Label>
+    {ingenPerioderMedAvvik && (
+      <BodyShort size="small">
+        <FormattedMessage id="Simulering.ingenPerioder" tagName="i" />
+      </BodyShort>
+    )}
+    {!ingenPerioderMedAvvik && (
+      <Box background="neutral-soft" padding="space-20" maxWidth="300px">
+        <VStack gap="space-8">
           <Label size="small">{periodFormat(fom, tom)}</Label>
-          <HStack gap="space-16">
+
+          <HStack gap="space-16" justify="space-between">
             <BodyShort size="small">
               <FormattedMessage id="Simulering.etterbetaling" />:
             </BodyShort>
             <BodyShort size="small">
-              <BeløpLabel beløp={etterbetaling} />
+              <BeløpLabel beløp={etterbetaling} kr />
             </BodyShort>
           </HStack>
-          <HStack gap="space-16">
+
+          <HStack gap="space-16" justify="space-between">
             <BodyShort size="small">
               <FormattedMessage id="Simulering.tilbakekreving" />:
             </BodyShort>
-            <BodyShort weight="semibold" size="small" className={styles['number']}>
-              <BeløpLabel beløp={feilutbetaling} rød={feilutbetaling < 0} />
+            <BodyShort weight="semibold" size="small">
+              <BeløpLabel beløp={feilutbetaling} rød={feilutbetaling < 0} kr />
             </BodyShort>
           </HStack>
+
           {inntrekk !== undefined && (
-            <HStack gap="space-16">
+            <HStack gap="space-16" justify="space-between">
               <BodyShort size="small">
                 <FormattedMessage id="Simulering.inntrekk" />:
               </BodyShort>
-              <BodyShort weight="semibold" size="small" className={styles['number']}>
-                <BeløpLabel beløp={inntrekk} rød={inntrekk < 0} />
+              <BodyShort weight="semibold" size="small">
+                <BeløpLabel beløp={inntrekk} rød={inntrekk < 0} kr />
               </BodyShort>
             </HStack>
           )}
         </VStack>
-      )}
-    </div>
+      </Box>
+    )}
   </VStack>
 );

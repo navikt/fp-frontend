@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
+import { FileIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { BeløpLabel } from '@navikt/ft-ui-komponenter';
 
@@ -48,18 +48,18 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
         </BodyShort>
       </HStack>
     )}
-    <DokumentLink
-      saksnummer={saksnummer}
-      journalpostId={inntektsmelding.journalpostId}
-      dokumentId={inntektsmelding.dokumentId}
-    >
-      <HStack gap="space-4">
-        <BodyShort size="small" className={styles['inline']}>
+    <BodyShort size="small">
+      <DokumentLink
+        saksnummer={saksnummer}
+        journalpostId={inntektsmelding.journalpostId}
+        dokumentId={inntektsmelding.dokumentId}
+      >
+        <HStack gap="space-4" wrap={false} align="center">
+          <FileIcon fontSize="1.125rem" aria-hidden />
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
-        </BodyShort>
-        <FileFillIcon className={styles['docIcon']} />
-      </HStack>
-    </DokumentLink>
+        </HStack>
+      </DokumentLink>
+    </BodyShort>
     <HStack gap="space-16" align="center">
       <PhoneFillIcon className={styles['phoneIcon']} />
       <VStack gap="space-4">

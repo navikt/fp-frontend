@@ -25,7 +25,7 @@ export const OppgaveTabell = ({ velgOppgaveOgHentJournalpost, ansattIdent, reser
   if ((oppgaver ?? []).length === 0) {
     return (
       <BodyShort size="small">
-        <FormattedMessage id="Journalforing.Oppgaver.IngenOppgaver" />
+        <FormattedMessage id="Journalforing.Oppgaver.IngenOppgaver" tagName="i" />
       </BodyShort>
     );
   }

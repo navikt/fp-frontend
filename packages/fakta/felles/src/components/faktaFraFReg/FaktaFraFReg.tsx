@@ -22,7 +22,7 @@ export const FaktaFraFReg = ({ barna }: Props) => {
       <FaktaBoks tittel={intl.formatMessage({ id: 'FaktaFraFReg.Tittel' })}>
         {barna.length === 0 ? (
           <BodyShort>
-            <FormattedMessage id="FaktaFraFReg.IngenBarn" />
+            <FormattedMessage tagName="i" id="FaktaFraFReg.IngenBarn" />
           </BodyShort>
         ) : (
           <BarnVisning barna={barna} />

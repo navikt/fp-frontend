@@ -88,7 +88,7 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
       )}
       {grupper.saksbehandlerGrupper.length === 0 && (
         <BodyShort>
-          <FormattedMessage id="GrupperTabell.IngenGrupper" />
+          <FormattedMessage id="GrupperTabell.IngenGrupper" tagName="i" />
         </BodyShort>
       )}
     </>

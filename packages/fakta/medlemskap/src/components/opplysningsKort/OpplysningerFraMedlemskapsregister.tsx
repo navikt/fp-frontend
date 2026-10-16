@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyLong, BodyShort, Box, Table } from '@navikt/ds-react';
+import { BodyShort, Table } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
@@ -46,17 +46,15 @@ export const OpplysningerFraMedlemskapsregister = ({
         </BodyShort>
 
         {medlemskapsperioder.length === 0 && (
-          <Box padding="space-16">
-            <BodyLong textColor="subtle">
-              <FormattedMessage id="OpplysningerFraMedlemskapsregister.Tabell.Ingen" />
-            </BodyLong>
-          </Box>
+          <BodyShort>
+            <FormattedMessage id="OpplysningerFraMedlemskapsregister.Tabell.Ingen" tagName="i" />
+          </BodyShort>
         )}
         {medlemskapsperioder.length > 0 && (
           <Table>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>
+                <Table.HeaderCell className="w-60">
                   <FormattedMessage id="OpplysningerFraMedlemskapsregister.TabellHeader.Periode" />
                 </Table.HeaderCell>
                 <Table.HeaderCell>

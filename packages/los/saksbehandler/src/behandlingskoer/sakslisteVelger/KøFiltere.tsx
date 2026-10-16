@@ -87,7 +87,7 @@ export const KøFiltere = ({ valgtSaksliste }: Props) => {
           value={
             sorterteSaksbehandlere.length === 0 ? (
               <BodyShort size="small">
-                <FormattedMessage id="SakslisteVelgerForm.Ingen" />
+                <FormattedMessage id="SakslisteVelgerForm.Ingen" tagName="i" />
               </BodyShort>
             ) : (
               <HStack gap="space-8" paddingBlock="space-8">

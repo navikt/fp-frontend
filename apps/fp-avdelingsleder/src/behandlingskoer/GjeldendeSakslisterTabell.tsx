@@ -38,7 +38,7 @@ export const GjeldendeSakslisterTabell = ({
   if (sakslister.length === 0) {
     return (
       <BodyShort size="small">
-        <FormattedMessage id="GjeldendeSakslisterTabell.IngenLister" />
+        <FormattedMessage id="GjeldendeSakslisterTabell.IngenLister" tagName="i" />
       </BodyShort>
     );
   }

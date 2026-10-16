@@ -32,7 +32,7 @@ export const OpptjeningVilkarView = ({
     />
     {fastsattOpptjeningAktivitetList.length === 0 && (
       <BodyShort size="small">
-        <FormattedMessage id="OpptjeningVilkarView.IngenAktiviteter" />
+        <FormattedMessage id="OpptjeningVilkarView.IngenAktiviteter" tagName="i" />
       </BodyShort>
     )}
     <LabeledValue

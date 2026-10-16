@@ -1,9 +1,8 @@
-import { useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Detail, HStack, Label, Popover, Radio, Tooltip, VStack } from '@navikt/ds-react';
+import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Detail, HelpText, HStack, Label, Radio, Tooltip, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
@@ -62,9 +61,6 @@ export const ArbeidsforholdField = ({
 
   const { inntektsmeldinger, inntekter } = arbeidOgInntekt;
 
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const [openState, setOpenState] = useState(false);
-
   const arbeidsforhold = sorterteArbeidsforhold[index];
   if (!arbeidsforhold) {
     return null;
@@ -80,8 +76,6 @@ export const ArbeidsforholdField = ({
   )?.inntekter;
   const visArbeidsforholdId =
     sorterteArbeidsforhold.filter(a => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length > 1;
-
-  const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
 
   return (
     <ArbeidsforholdBoks key={fieldId} harÅpentAksjonspunkt={harÅpentAksjonspunkt} harBorderTop={index === 0}>
@@ -192,43 +186,22 @@ export const ArbeidsforholdField = ({
             legend={
               <HStack gap="space-8">
                 <FormattedMessage id="ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed" />
-                <div className={styles['image']}>
-                  <Button
-                    ref={buttonRef}
-                    type="button"
-                    variant="tertiary"
-                    onClick={toggleHjelpetekst}
-                    icon={
-                      <QuestionmarkDiamondIcon
-                        title={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.AltHjelpetekst' })}
-                      />
-                    }
-                  />
-                  <Popover
-                    open={openState}
-                    onClose={toggleHjelpetekst}
-                    /* eslint-disable react-hooks/refs */
-                    anchorEl={buttonRef.current}
-                    className={styles['hjelpetekst']}
-                  >
-                    <Popover.Content className={styles['hjelpetekstInnhold']}>
-                      <VStack gap="space-8">
-                        <BodyShort>
-                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel1" />
-                        </BodyShort>
-                        <BodyShort>
-                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel2" />
-                        </BodyShort>
-                        <BodyShort>
-                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel3" />
-                        </BodyShort>
-                        <BodyShort>
-                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel4" />
-                        </BodyShort>
-                      </VStack>
-                    </Popover.Content>
-                  </Popover>
-                </div>
+                <HelpText content={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.AltHjelpetekst' })}>
+                  <VStack gap="space-8">
+                    <BodyShort>
+                      <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel1" />
+                    </BodyShort>
+                    <BodyShort>
+                      <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel2" />
+                    </BodyShort>
+                    <BodyShort>
+                      <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel3" />
+                    </BodyShort>
+                    <BodyShort>
+                      <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel4" />
+                    </BodyShort>
+                  </VStack>
+                </HelpText>
               </HStack>
             }
             validate={[required]}

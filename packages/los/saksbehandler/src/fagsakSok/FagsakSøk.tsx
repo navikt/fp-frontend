@@ -59,7 +59,7 @@ export const FagsakSøk = ({
     />
     {searchResultReceived && fagsaker.length === 0 && (
       <BodyShort>
-        <FormattedMessage id="FagsakSearch.ZeroSearchResults" />
+        <FormattedMessage id="FagsakSearch.ZeroSearchResults" tagName="i" />
       </BodyShort>
     )}
     {searchResultReceived && skalViseListe(fagsaker, fagsakOppgaver) && (

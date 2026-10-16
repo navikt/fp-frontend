@@ -92,7 +92,7 @@ export const BortfalteNaturalYtelser = ({
     >
       {bortfalteNaturalytelserEntries.length === 0 ? (
         <span>
-          <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen" />
+          <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen" tagName="i" />
         </span>
       ) : (
         <VStack gap="space-4">
