@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { VStack } from '@navikt/ds-react';
+import { CopyButton, Detail, HStack, VStack } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
@@ -27,7 +27,10 @@ const meta = {
 
     return (
       <VStack gap="space-20">
-        <div style={{ color: 'var(--ax-bg-danger-soft)' }}>Gyldig fødselsnummer for testing: 07078518434</div>
+        <HStack gap="space-8" align="center">
+          <Detail>Gyldig fødselsnummer for testing: 07078518434</Detail>
+          <CopyButton size="small" copyText="07078518434" />
+        </HStack>
         <UtbetalingsdataIs15Index {...args} søkInfotrygdVedtak={søkInfotrygdVedtak} />
       </VStack>
     );

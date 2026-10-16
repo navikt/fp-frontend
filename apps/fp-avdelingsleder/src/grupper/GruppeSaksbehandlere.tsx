@@ -143,7 +143,9 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
               label={<FormattedMessage id="GruppeSaksbehandlere.ValgteSaksbehandlere" />}
               value={
                 <>
-                  {sorterteGrupperteSaksbehandlere.length === 0 && <FormattedMessage id="GruppeSaksbehandlere.Ingen" />}
+                  {sorterteGrupperteSaksbehandlere.length === 0 && (
+                    <FormattedMessage id="GruppeSaksbehandlere.Ingen" tagName="i" />
+                  )}
                   {sorterteGrupperteSaksbehandlere.map(saksbehandler => (
                     <HStack as="span" gap="space-8" align="center" key={saksbehandler.brukerIdent}>
                       {`${saksbehandler.navn} (${saksbehandler.brukerIdent})`}
