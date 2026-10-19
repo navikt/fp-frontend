@@ -162,7 +162,7 @@ export const FagsakProfileIndex = ({
 
   return (
     <div className={styles['panelPadding']}>
-      <VStack gap="space-20">
+      <VStack gap="space-16">
         {fagsak.brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
         {shouldRedirectToBehandlinger && (
           <Navigate to={findPathToBehandling(fagsak.saksnummer, location, fagsakData.getAlleBehandlinger())} />
@@ -203,7 +203,7 @@ export const FagsakProfileIndex = ({
         )}
 
         <VStack
-          gap="space-24"
+          gap="space-16"
           className={
             visUtvidetBehandlingDetaljer
               ? styles['skjulUtvidetBehandlingDetaljer']

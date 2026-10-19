@@ -3911,7 +3911,6 @@ __metadata:
     react-intl: "npm:12.1.4"
     react-router: "npm:8.4.0"
     storybook: "npm:10.6.2"
-    stylelint: "npm:17.16.0"
     typescript: "npm:6.0.3"
     vite: "npm:8.3.4"
     vitest: "npm:5.0.5"

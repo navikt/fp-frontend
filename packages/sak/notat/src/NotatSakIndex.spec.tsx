@@ -2,11 +2,40 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { NotatSakIndex } from './NotatSakIndex';
 import * as stories from './NotatSakIndex.stories';
 
-const { Default } = composeStories(stories);
+const { Default, ErVeileder } = composeStories(stories);
 
 describe('NotatSakIndex', () => {
+  it('skal beholde notatteksten når forelderen rendres på nytt', async () => {
+    const props = {
+      saksnummer: '123',
+      notater: [],
+      lagreNotat: vi.fn(),
+      saksbehandlerNavn: 'Espen',
+      kanSaksbehandle: true,
+    };
+
+    const { rerender } = render(<NotatSakIndex {...props} />);
+
+    await userEvent.type(screen.getByLabelText('Notat'), 'Uferdig notat');
+    rerender(<NotatSakIndex {...props} />);
+    expect(screen.getByLabelText('Notat')).toHaveValue('Uferdig notat');
+  });
+
+  it('skal vise inputfeltet med en gang', () => {
+    render(<Default />);
+
+    expect(screen.getByLabelText('Notat')).toBeVisible();
+  });
+
+  it('skal vise infoboksen med en gang for veileder', () => {
+    render(<ErVeileder />);
+
+    expect(screen.getByText('Kun saksbehandler kan skrive notater')).toBeVisible();
+  });
+
   it('skal legge til notat', async () => {
     const lagre = vi.fn();
 
@@ -14,12 +43,12 @@ describe('NotatSakIndex', () => {
 
     expect(await screen.findByText('Dette er et notat skrevet av Espen som nå er innlogget')).toBeInTheDocument();
     expect(screen.getByText('Du')).toBeInTheDocument();
-    expect(screen.getByText('02. august 2022 kl. 00:54')).toBeInTheDocument();
+    expect(screen.getByText('2. august 2022 kl. 00:54')).toBeInTheDocument();
 
     expect(screen.getByText('Dette er et annet notat')).toBeInTheDocument();
-    expect(screen.getByText('02. september 2022 kl. 00:23')).toBeInTheDocument();
+    expect(screen.getByText('2. september 2022 kl. 00:23')).toBeInTheDocument();
     expect(screen.getByText('Dette er et tredje notat')).toBeInTheDocument();
-    expect(screen.getByText('02. september 2022 kl. 11:12')).toBeInTheDocument();
+    expect(screen.getByText('2. september 2022 kl. 11:12')).toBeInTheDocument();
     expect(screen.getAllByText('Saksbehandler Eva')).toHaveLength(2);
 
     expect(screen.getByText('Kun saksbehandlere får se notatet')).toBeInTheDocument();
