@@ -132,33 +132,35 @@ export const TotrinnskontrollSakIndex = ({
 
   return (
     <RawIntlProvider value={intl}>
-      {erStatusFatterVedtak && (
-        <TotrinnskontrollBeslutterForm
-          behandling={behandling}
-          totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
-          readOnly={readOnly}
-          onSubmit={submitHandler}
-          forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-          skjemalenkeTyper={skjemalenkeTyper}
-          erBehandlingEtterKlage={erBehandlingEtterKlage}
-          faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
-          erTilbakekreving={erTilbakekreving}
-          lagLenke={lagLenke}
-          beslutterFormData={beslutterFormData}
-          setBeslutterFormData={setBeslutterFormData}
-        />
-      )}
-      {!erStatusFatterVedtak && (
-        <TotrinnskontrollSaksbehandlerPanel
-          behandling={behandling}
-          totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
-          erTilbakekreving={erTilbakekreving}
-          skjemalenkeTyper={skjemalenkeTyper}
-          lagLenke={lagLenke}
-          vurderArsaker={vurderArsaker}
-          faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
-        />
-      )}
+      <div className="px-4 pt-4">
+        {erStatusFatterVedtak && (
+          <TotrinnskontrollBeslutterForm
+            behandling={behandling}
+            totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
+            readOnly={readOnly}
+            onSubmit={submitHandler}
+            forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
+            skjemalenkeTyper={skjemalenkeTyper}
+            erBehandlingEtterKlage={erBehandlingEtterKlage}
+            faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
+            erTilbakekreving={erTilbakekreving}
+            lagLenke={lagLenke}
+            beslutterFormData={beslutterFormData}
+            setBeslutterFormData={setBeslutterFormData}
+          />
+        )}
+        {!erStatusFatterVedtak && (
+          <TotrinnskontrollSaksbehandlerPanel
+            behandling={behandling}
+            totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
+            erTilbakekreving={erTilbakekreving}
+            skjemalenkeTyper={skjemalenkeTyper}
+            lagLenke={lagLenke}
+            vurderArsaker={vurderArsaker}
+            faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
+          />
+        )}
+      </div>
     </RawIntlProvider>
   );
 };

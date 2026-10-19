@@ -29,7 +29,7 @@ import { SupportTabs } from './supportTabs';
 import { TotrinnskontrollIndex } from './totrinnskontroll/TotrinnskontrollIndex';
 import { UtvidEllerMinskKnapp } from './UtvidEllerMinskKnapp';
 
-import styles from './supportLayout.module.css';
+import styles from './behandlingSupportIndex.module.css';
 
 interface Props {
   fagsakData: FagsakData;

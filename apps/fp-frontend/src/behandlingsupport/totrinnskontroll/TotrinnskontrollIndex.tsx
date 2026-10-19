@@ -102,19 +102,17 @@ export const TotrinnskontrollIndex = ({
         })}
         toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
       >
-        <div className="px-4 pt-4">
-          <TotrinnskontrollSakIndex
-            behandling={valgtBehandling}
-            location={location}
-            readOnly={brukernavn === valgtBehandling.ansvarligSaksbehandler || kanVeilede}
-            onSubmit={onSubmit}
-            forhandsvisVedtaksbrev={forhåndsvisVedtaksbrev}
-            alleKodeverk={alleKodeverk}
-            createLocationForSkjermlenke={createLocationForSkjermlenke}
-            beslutterFormData={beslutterFormData}
-            setBeslutterFormData={setBeslutterFormData}
-          />
-        </div>
+        <TotrinnskontrollSakIndex
+          behandling={valgtBehandling}
+          location={location}
+          readOnly={brukernavn === valgtBehandling.ansvarligSaksbehandler || kanVeilede}
+          onSubmit={onSubmit}
+          forhandsvisVedtaksbrev={forhåndsvisVedtaksbrev}
+          alleKodeverk={alleKodeverk}
+          createLocationForSkjermlenke={createLocationForSkjermlenke}
+          beslutterFormData={beslutterFormData}
+          setBeslutterFormData={setBeslutterFormData}
+        />
       </SupportHeaderAndContent>
       {visBeslutterModal && (
         <BeslutterModalIndex
