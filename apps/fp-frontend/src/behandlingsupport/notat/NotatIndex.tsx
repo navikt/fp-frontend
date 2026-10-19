@@ -36,7 +36,6 @@ export const NotatIndex = ({ fagsak, toggleVisUtvidetBehandlingDetaljerKnapp }: 
     <SupportHeaderAndContent
       tekst={intl.formatMessage({ id: 'NotatIndex.Notatblokk' })}
       antall={fagsak.notater.length}
-      brukPadding={false}
       toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
     >
       <NotatSakIndex

@@ -44,13 +44,33 @@
 
   .rightColumn {
     margin-left: 0;
+    min-width: 0;
     width: 100%;
   }
 }
 
 @media all and (min-width: 1409px) {
+  .gridContainer {
+    overflow: visible;
+  }
+
+  .leftColumn {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+    overflow: visible;
+  }
+
   .rightColumn {
     border-left: 1px solid var(--panel-border-color);
+  }
+
+  .support {
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    position: sticky;
+    top: var(--header-height);
   }
 }
 

@@ -1,9 +1,10 @@
 .panelPadding {
-  padding: 20px;
+  padding: 20px 20px 8px;
 }
 
 .skjulUtvidetBehandlingDetaljer {
   height: 0;
+  margin-bottom: -16px;
   opacity: 0;
   overflow: hidden;
   transition: opacity 0.3s ease-in-out;

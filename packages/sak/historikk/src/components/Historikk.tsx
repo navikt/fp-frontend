@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { type ReactElement, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { type Location } from 'react-router';
 
-import { VStack } from '@navikt/ds-react';
+import { Badge, BodyShort, Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
 
 import type {
   AlleKodeverk,
@@ -15,9 +16,8 @@ import type {
 import { sortAndTagTilbakekreving } from '../utils/historikkUtils';
 import { HistorikkInnslag } from './HistorikkInnslag/HistorikkInnslag';
 
-import styles from './historikk.module.css';
-
 interface Props {
+  valgtBehandlingUuid?: string;
   historikkFpSak: Historikkinnslag[];
   historikkFpTilbake: HistorikkinnslagDtoFpTilbake[];
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
@@ -28,6 +28,7 @@ interface Props {
     behandlingLocation: Location,
     skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake,
   ) => Location | undefined;
+  utvidEllerMinskBehandlingDetaljerKnapp: ReactElement;
 }
 
 /**
@@ -36,6 +37,7 @@ interface Props {
  * Historikken for en behandling
  */
 export const Historikk = ({
+  valgtBehandlingUuid,
   historikkFpSak,
   historikkFpTilbake,
   alleKodeverkFpSak, // TODO: Kodeverk brukes bare får å hente navn på aktør
@@ -43,32 +45,44 @@ export const Historikk = ({
   saksnummer,
   getBehandlingLocation,
   createLocationForSkjermlenke,
+  utvidEllerMinskBehandlingDetaljerKnapp,
 }: Props) => {
+  const [skalSortertePaValgtBehandling, setSkalSortertePaValgtBehandling] = useState(false);
+
   const alleHistorikkInnslag = sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake);
 
-  const [top, setTop] = useState<number>();
-
-  const scrollReset = () => setTop(0);
-
-  useEffect(() => {
-    addEventListener('scroll', scrollReset);
-    return () => {
-      removeEventListener('scroll', scrollReset);
-    };
-  }, []);
+  const filtrerteInnslag =
+    valgtBehandlingUuid && skalSortertePaValgtBehandling
+      ? alleHistorikkInnslag.filter(i => i.behandlingUuid === valgtBehandlingUuid)
+      : alleHistorikkInnslag;
 
   return (
-    <div
-      style={{ height: `calc(100vh - ${top}px)` }}
-      className={styles['overflow']}
-      ref={el => {
-        if (el) {
-          setTop(el.getBoundingClientRect().top);
-        }
-      }}
-    >
+    <div className="min-h-32">
+      <Box background="neutral-soft" borderColor="neutral-subtle" borderWidth="0 0 1 0" padding="space-20">
+        <HStack justify="space-between">
+          <HStack gap="space-4" align="center">
+            <Heading size="small" level="2">
+              <FormattedMessage id="History.Historikk" />
+            </Heading>
+            {utvidEllerMinskBehandlingDetaljerKnapp}
+          </HStack>
+          <HStack align="center" gap="space-32" as="span">
+            {valgtBehandlingUuid && (
+              <Checkbox size="small" onChange={() => setSkalSortertePaValgtBehandling(!skalSortertePaValgtBehandling)}>
+                <FormattedMessage id="History.FiltrerPaBehandling" />
+              </Checkbox>
+            )}
+            <Badge count={filtrerteInnslag.length} data-color="neutral" />
+          </HStack>
+        </HStack>
+      </Box>
       <VStack gap="space-8" padding="space-16">
-        {alleHistorikkInnslag.map(historikkinnslag => {
+        {filtrerteInnslag.length === 0 && (
+          <BodyShort textColor="subtle" className="m-auto py-4">
+            <FormattedMessage id="History.IngenHistorikk" />
+          </BodyShort>
+        )}
+        {filtrerteInnslag.map(historikkinnslag => {
           const alleKodeverk = historikkinnslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
 
           if (!alleKodeverk) {
