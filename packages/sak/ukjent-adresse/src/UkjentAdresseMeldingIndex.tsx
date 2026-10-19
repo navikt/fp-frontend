@@ -16,7 +16,7 @@ const intl = createIntl(messages);
 export const UkjentAdresseMeldingIndex = () => (
   <RawIntlProvider value={intl}>
     <Alert variant="warning" size="small">
-      <FormattedMessage id="UkjentAdresse.Text" tagName="b" />
+      <FormattedMessage id="UkjentAdresse.Text" />
     </Alert>
   </RawIntlProvider>
 );

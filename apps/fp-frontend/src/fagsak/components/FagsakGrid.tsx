@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode, useLayoutEffect, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import { SidePanelKnapp } from './SidePanelKnapp';
@@ -27,12 +27,48 @@ export const FagsakGrid = ({
   visSideMeny,
   toggleSideMeny,
 }: Props) => {
-  const isSmallScreen = useMediaQuery({ maxWidth: 1701 });
-  const isBigScreen = useMediaQuery({ minWidth: 1702 });
+  const isTwoColumns = useMediaQuery({ minWidth: 1409 });
   const isWrappedUnder = useMediaQuery({ maxWidth: 1408 });
+  const profileRef = useRef<HTMLDivElement>(null);
+  const supportRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const support = supportRef.current;
+    const profile = profileRef.current;
+    if (!isTwoColumns || !visSideMeny || !support || !profile) {
+      return;
+    }
+
+    let frame: number | undefined;
+    const updateHeight = () => {
+      frame = undefined;
+      const top = Math.max(0, support.getBoundingClientRect().top);
+      support.style.setProperty('--support-height', `${Math.max(0, window.innerHeight - top)}px`);
+    };
+    const scheduleUpdate = () => {
+      frame ??= requestAnimationFrame(updateHeight);
+    };
+
+    updateHeight();
+    const observer = new ResizeObserver(scheduleUpdate);
+    observer.observe(profile);
+    observer.observe(support);
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      if (frame !== undefined) {
+        cancelAnimationFrame(frame);
+      }
+      support.style.removeProperty('--support-height');
+    };
+  }, [isTwoColumns, visSideMeny]);
+
   return (
     <>
-      {isSmallScreen && (
+      {isWrappedUnder && (
         <VisittkortMedKnapp
           visittkortContent={visittkortContent}
           visSideMeny={visSideMeny}
@@ -41,7 +77,7 @@ export const FagsakGrid = ({
       )}
       <div className={styles['gridContainer']}>
         <div className={styles['leftColumn']}>
-          {isBigScreen && (
+          {isTwoColumns && (
             <VisittkortMedKnapp
               visittkortContent={visittkortContent}
               visSideMeny={visSideMeny}
@@ -51,8 +87,10 @@ export const FagsakGrid = ({
           {behandlingContent}
         </div>
         <div className={visSideMeny || isWrappedUnder ? styles['rightColumn'] : styles['rightColumnHidden']}>
-          <div>{profileAndNavigationContent}</div>
-          <div>{supportContent}</div>
+          <div ref={profileRef}>{profileAndNavigationContent}</div>
+          <div ref={supportRef} className={styles['support']}>
+            {supportContent}
+          </div>
         </div>
       </div>
     </>
