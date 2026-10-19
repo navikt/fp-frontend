@@ -46,8 +46,8 @@ export const OpplysningerFraMedlemskapsregister = ({
         </BodyShort>
 
         {medlemskapsperioder.length === 0 && (
-          <BodyShort>
-            <FormattedMessage id="OpplysningerFraMedlemskapsregister.Tabell.Ingen" tagName="i" />
+          <BodyShort textColor="subtle">
+            <FormattedMessage id="OpplysningerFraMedlemskapsregister.Tabell.Ingen" />
           </BodyShort>
         )}
         {medlemskapsperioder.length > 0 && (

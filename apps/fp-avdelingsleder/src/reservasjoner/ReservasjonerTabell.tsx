@@ -67,8 +67,8 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
         />
       </HStack>
       {sorterteReservasjoner.length === 0 && (
-        <BodyShort size="small">
-          <FormattedMessage id="ReservasjonerTabell.IngenReservasjoner" tagName="i" />
+        <BodyShort size="small" textColor="subtle">
+          <FormattedMessage id="ReservasjonerTabell.IngenReservasjoner" />
         </BodyShort>
       )}
       {sorterteReservasjoner.length > 0 && (

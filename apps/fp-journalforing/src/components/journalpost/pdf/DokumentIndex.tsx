@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Heading, VStack } from '@navikt/ds-react';
+import { BodyShort, VStack } from '@navikt/ds-react';
 
 import type { JournalDokument } from '../../../typer/journalDokumentTsType';
 import { DokumentVelger } from './DokumentVelger';
@@ -19,9 +19,9 @@ export const DokumentIndex = ({ dokumenter }: Props) => {
 
   if (!valgtDokument || !dokumenter) {
     return (
-      <Heading size="small" level="2">
-        <FormattedMessage id="ValgtOppgave.Dokumenter.Tom" tagName="i" />
-      </Heading>
+      <BodyShort size="small" textColor="subtle">
+        <FormattedMessage id="ValgtOppgave.Dokumenter.Tom" />
+      </BodyShort>
     );
   }
 

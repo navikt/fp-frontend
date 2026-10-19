@@ -23,8 +23,8 @@ export const AdresseTabell = ({
 }: AdresseTabellProps) => {
   if (harSammeAdresser) {
     return (
-      <BodyShort className="pt-2">
-        <FormattedMessage id="AdresseTabell.SammeAdresse" tagName="i" />
+      <BodyShort className="pt-2" textColor="subtle">
+        <FormattedMessage id="AdresseTabell.SammeAdresse" />
       </BodyShort>
     );
   }
@@ -34,8 +34,8 @@ export const AdresseTabell = ({
   return (
     <>
       {adresser.length === 0 && (
-        <BodyShort className="pt-2">
-          <FormattedMessage id="AdresseTabell.IngenAdresse" values={{ erAnnenpart }} tagName="i" />
+        <BodyShort className="pt-2" textColor="subtle">
+          <FormattedMessage id="AdresseTabell.IngenAdresse" values={{ erAnnenpart }} />
         </BodyShort>
       )}
       {adresser.length > 0 && (

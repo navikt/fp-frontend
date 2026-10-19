@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
+import { BodyShort, VStack } from '@navikt/ds-react';
 import { BeløpLabel, DateLabel } from '@navikt/ft-ui-komponenter';
 import { addDaysToDate, TIDENES_ENDE } from '@navikt/ft-utils';
 
@@ -91,9 +91,9 @@ export const BortfalteNaturalYtelser = ({
       tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.bortfalteNaturalytelser.heading' })}
     >
       {bortfalteNaturalytelserEntries.length === 0 ? (
-        <span>
-          <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen" tagName="i" />
-        </span>
+        <BodyShort size="small" textColor="subtle">
+          <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen" />
+        </BodyShort>
       ) : (
         <VStack gap="space-4">
           {bortfalteNaturalytelserEntries.map(([key, value]) => (

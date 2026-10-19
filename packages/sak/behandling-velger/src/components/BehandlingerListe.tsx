@@ -1,7 +1,7 @@
 import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Box, Label } from '@navikt/ds-react';
+import { BodyShort, Box } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, FagsakBehandlingDto } from '@navikt/fp-types';
@@ -56,9 +56,9 @@ export const BehandlingerListe = ({
     <ul className={styles['behandlingList']}>
       {behandlinger.length === 0 && (
         <Box borderWidth="2" borderColor="neutral-subtle" borderRadius="8" padding="space-12">
-          <Label size="small">
-            <FormattedMessage id="BehandlingList.ZeroBehandlinger" tagName="i" />
-          </Label>
+          <BodyShort size="small" textColor="subtle">
+            <FormattedMessage id="BehandlingList.ZeroBehandlinger" />
+          </BodyShort>
         </Box>
       )}
       {behandlinger.length > 0 &&

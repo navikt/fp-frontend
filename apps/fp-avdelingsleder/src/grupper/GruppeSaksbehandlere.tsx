@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
-import { Button, HStack, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { LabeledValue } from '@navikt/ft-ui-komponenter';
@@ -144,7 +144,9 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
               value={
                 <>
                   {sorterteGrupperteSaksbehandlere.length === 0 && (
-                    <FormattedMessage id="GruppeSaksbehandlere.Ingen" tagName="i" />
+                    <BodyShort size="small" textColor="subtle">
+                      <FormattedMessage id="GruppeSaksbehandlere.Ingen" />
+                    </BodyShort>
                   )}
                   {sorterteGrupperteSaksbehandlere.map(saksbehandler => (
                     <HStack as="span" gap="space-8" align="center" key={saksbehandler.brukerIdent}>

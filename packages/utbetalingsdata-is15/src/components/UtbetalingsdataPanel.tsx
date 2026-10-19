@@ -10,8 +10,6 @@ import type { InfotrygdVedtak } from '@navikt/fp-types';
 import { SakerPanel } from './SakerPanel';
 import { VedtakPanel } from './VedtakPanel';
 
-import styles from './utbetalingsdataPanel.module.css';
-
 const FORELDREPENGER_KODER = new Set(['AP', 'FØ']);
 
 interface Props {
@@ -36,10 +34,11 @@ export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, isPending, isSuccess
   };
 
   return (
-    <VStack gap="space-20" className={styles['container']}>
+    <VStack gap="space-20" padding="space-40">
       <Heading size="large" level="2">
         <FormattedMessage id="UtbetalingsdataPanel.Heading" />
       </Heading>
+
       <div>
         <Search
           label={<FormattedMessage id="UtbetalingsdataPanel.Sok" />}
@@ -54,27 +53,27 @@ export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, isPending, isSuccess
           <Search.Button type="button" loading={isPending} />
         </Search>
       </div>
+
       {isSuccess && infotrygdVedtak && !error && (
-        <>
-          {infotrygdVedtak.saker.length > 0 || infotrygdVedtak.vedtakKjeder.length > 0 ? (
-            <Heading size="small" level="3">
-              <FormattedMessage id="UtbetalingsdataPanel.Resultat" />
-            </Heading>
-          ) : (
-            <BodyShort size="medium">
-              <FormattedMessage id="UtbetalingsdataPanel.IngenSakerFunnet" tagName="i" />
+        <VStack gap="space-16">
+          <Heading size="small" level="3">
+            <FormattedMessage id="UtbetalingsdataPanel.Resultat" />
+          </Heading>
+          {infotrygdVedtak.saker.length === 0 && infotrygdVedtak.vedtakKjeder.length === 0 && (
+            <BodyShort size="medium" textColor="subtle">
+              <FormattedMessage id="UtbetalingsdataPanel.IngenSakerFunnet" />
             </BodyShort>
           )}
           {infotrygdVedtak.saker.length > 0 && (
             <>
-              <Heading size="xsmall" level="3">
+              <Heading size="xsmall" level="4">
                 <FormattedMessage id="UtbetalingsdataPanel.Saker" />
               </Heading>
               <SakerPanel saker={infotrygdVedtak.saker} />
             </>
           )}
           {infotrygdVedtak.vedtakKjeder.length > 0 && (
-            <Heading size="xsmall" level="3">
+            <Heading size="xsmall" level="4">
               <FormattedMessage id="UtbetalingsdataPanel.Utbetalinger" />
             </Heading>
           )}
@@ -96,7 +95,7 @@ export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, isPending, isSuccess
               </ExpansionCard.Content>
             </ExpansionCard>
           ))}
-        </>
+        </VStack>
       )}
     </VStack>
   );

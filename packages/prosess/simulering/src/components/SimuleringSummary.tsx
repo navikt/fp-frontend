@@ -29,8 +29,8 @@ export const SimuleringSummary = ({
       <FormattedMessage id="Simulering.bruker" />
     </Label>
     {ingenPerioderMedAvvik && (
-      <BodyShort size="small">
-        <FormattedMessage id="Simulering.ingenPerioder" tagName="i" />
+      <BodyShort size="small" textColor="subtle">
+        <FormattedMessage id="Simulering.ingenPerioder" />
       </BodyShort>
     )}
     {!ingenPerioderMedAvvik && (

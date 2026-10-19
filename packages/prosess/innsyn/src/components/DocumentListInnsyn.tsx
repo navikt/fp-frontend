@@ -1,7 +1,7 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Checkbox, Label, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Checkbox, Label, Table, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { DateTimeLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 
@@ -25,7 +25,11 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
       <LabeledValue
         size="small"
         label={<FormattedMessage id="DocumentListInnsyn.InnsynsDok" />}
-        value={<FormattedMessage tagName="i" id="DocumentListInnsyn.NoDocuments" />}
+        value={
+          <BodyShort size="small" textColor="subtle">
+            <FormattedMessage id="DocumentListInnsyn.NoDocuments" />
+          </BodyShort>
+        }
       />
     );
   }

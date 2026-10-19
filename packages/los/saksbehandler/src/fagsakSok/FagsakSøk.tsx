@@ -58,8 +58,8 @@ export const FagsakSøk = ({
       kanSaksbehandle={kanSaksbehandle}
     />
     {searchResultReceived && fagsaker.length === 0 && (
-      <BodyShort>
-        <FormattedMessage id="FagsakSearch.ZeroSearchResults" tagName="i" />
+      <BodyShort textColor="subtle">
+        <FormattedMessage id="FagsakSearch.ZeroSearchResults" />
       </BodyShort>
     )}
     {searchResultReceived && skalViseListe(fagsaker, fagsakOppgaver) && (

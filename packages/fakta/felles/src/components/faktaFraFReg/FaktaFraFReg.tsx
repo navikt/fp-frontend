@@ -21,8 +21,8 @@ export const FaktaFraFReg = ({ barna }: Props) => {
     <RawIntlProvider value={intl}>
       <FaktaBoks tittel={intl.formatMessage({ id: 'FaktaFraFReg.Tittel' })}>
         {barna.length === 0 ? (
-          <BodyShort>
-            <FormattedMessage tagName="i" id="FaktaFraFReg.IngenBarn" />
+          <BodyShort textColor="subtle">
+            <FormattedMessage id="FaktaFraFReg.IngenBarn" />
           </BodyShort>
         ) : (
           <BarnVisning barna={barna} />

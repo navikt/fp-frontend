@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { useForm, type UseFormGetValues, useWatch } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, HStack, Popover, Radio, VStack } from '@navikt/ds-react';
+import { Alert, Button, HelpText, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm, RhfRadioGroup, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
@@ -133,8 +131,6 @@ export const ManglendeArbeidsforholdForm = ({
     );
   };
 
-  const [anchorEl, setAnchorEl] = useState<SVGSVGElement | null>(null);
-
   return (
     <VStack gap="space-32">
       <div className={styles['alertStripe']}>
@@ -150,23 +146,9 @@ export const ManglendeArbeidsforholdForm = ({
             legend={
               <HStack gap="space-8">
                 <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
-                <QuestionmarkDiamondIcon
-                  className={styles['svg']}
-                  onClick={event => setAnchorEl(anchorEl ? null : event.currentTarget)}
-                  title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
-                />
-                <Popover
-                  open={anchorEl !== null}
-                  onClose={() => setAnchorEl(null)}
-                  anchorEl={anchorEl}
-                  className={styles['hjelpetekst']}
-                >
-                  <Popover.Content className={styles['hjelpetekstInnhold']}>
-                    <BodyShort>
-                      <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
-                    </BodyShort>
-                  </Popover.Content>
-                </Popover>
+                <HelpText content={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}>
+                  <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
+                </HelpText>
               </HStack>
             }
             validate={[required]}

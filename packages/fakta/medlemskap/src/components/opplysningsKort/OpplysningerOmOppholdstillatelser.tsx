@@ -42,8 +42,8 @@ export const OpplysningerOmOppholdstillatelser = ({
         </BodyShort>
 
         {oppholdstillatelser.length === 0 && (
-          <BodyShort>
-            <FormattedMessage id="OpplysningerOmOppholdstillatelser.Tabell.Ingen" tagName="i" />
+          <BodyShort textColor="subtle">
+            <FormattedMessage id="OpplysningerOmOppholdstillatelser.Tabell.Ingen" />
           </BodyShort>
         )}
         {oppholdstillatelser.length > 0 && (

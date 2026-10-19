@@ -33,8 +33,8 @@ export const AktørGrid = ({ aktorInfo, fagsakStatuser, fagsakYtelseTyper, rende
             );
           })
         ) : (
-          <BodyShort size="medium">
-            <FormattedMessage id="AktoerGrid.IngenFagsaker" tagName="i" />
+          <BodyShort size="medium" textColor="subtle">
+            <FormattedMessage id="AktoerGrid.IngenFagsaker" />
           </BodyShort>
         )}
       </VStack>

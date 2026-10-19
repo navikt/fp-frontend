@@ -124,7 +124,7 @@ export const ArbeidOgInntektFaktaPanel = ({
     !isReadOnly && erAksjonspunktApent && harBehandletAllePerioder && !isDirty && !kanSettePåVent;
 
   return (
-    <VStack gap="space-16">
+    <VStack gap="space-20">
       <ArbeidsOgInntektOverstyrPanel
         behandling={behandling}
         aksjonspunkt={aksjonspunkt}
@@ -137,46 +137,48 @@ export const ArbeidOgInntektFaktaPanel = ({
         setErOverstyrt={setErOverstyrt}
         oppdaterTabell={oppdaterTabellData}
       />
-      <Table ref={tableRef}>
-        <Table.Header>
-          <Table.Row className={styles['headerRow']}>
-            <Table.HeaderCell scope="col" />
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Arbeidsforhold" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Periode" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Kilde" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col" />
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {tabellRader.map((radData, index) => (
-            <ArbeidsforholdRad
-              key={lagRadNøkkel(radData, index)}
-              saksnummer={fagsak.saksnummer}
-              behandlingUuid={behandling.uuid}
-              behandlingVersjon={behandling.versjon}
-              radData={radData}
-              skjæringstidspunkt={arbeidOgInntekt.skjæringstidspunkt}
-              isReadOnly={isReadOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
-              registrerArbeidsforhold={registrerArbeidsforhold}
-              lagreVurdering={lagreVurdering}
-              toggleÅpenRad={() => toggleÅpenRad(index)}
-              erOverstyrt={erOverstyrt}
-              oppdaterTabell={oppdaterTabellData}
-              erRadÅpen={åpneRadIndexer.includes(index)}
-              alleKodeverk={alleKodeverk}
-            />
-          ))}
-        </Table.Body>
-      </Table>
+      {tabellRader.length > 0 && (
+        <Table ref={tableRef}>
+          <Table.Header>
+            <Table.Row className={styles['headerRow']}>
+              <Table.HeaderCell scope="col" />
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="ArbeidOgInntektFaktaPanel.Arbeidsforhold" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="ArbeidOgInntektFaktaPanel.Periode" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="ArbeidOgInntektFaktaPanel.Kilde" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col" />
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {tabellRader.map((radData, index) => (
+              <ArbeidsforholdRad
+                key={lagRadNøkkel(radData, index)}
+                saksnummer={fagsak.saksnummer}
+                behandlingUuid={behandling.uuid}
+                behandlingVersjon={behandling.versjon}
+                radData={radData}
+                skjæringstidspunkt={arbeidOgInntekt.skjæringstidspunkt}
+                isReadOnly={isReadOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
+                registrerArbeidsforhold={registrerArbeidsforhold}
+                lagreVurdering={lagreVurdering}
+                toggleÅpenRad={() => toggleÅpenRad(index)}
+                erOverstyrt={erOverstyrt}
+                oppdaterTabell={oppdaterTabellData}
+                erRadÅpen={åpneRadIndexer.includes(index)}
+                alleKodeverk={alleKodeverk}
+              />
+            ))}
+          </Table.Body>
+        </Table>
+      )}
       {skalViseSettPåVentKnapp && (
         <div>
           <Button

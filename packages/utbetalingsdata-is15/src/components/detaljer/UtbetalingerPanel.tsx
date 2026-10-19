@@ -13,8 +13,8 @@ export const UtbetalingerPanel = ({ utbetalinger }: Props) => (
   <VStack gap="space-16">
     <div />
     {(!utbetalinger || utbetalinger.length === 0) && (
-      <BodyShort size="small">
-        <FormattedMessage id="UtbetalingerPanel.IngenUtbetalinger" tagName="i" />
+      <BodyShort size="small" textColor="subtle">
+        <FormattedMessage id="UtbetalingerPanel.IngenUtbetalinger" />
       </BodyShort>
     )}
     {utbetalinger && utbetalinger.length > 0 && (

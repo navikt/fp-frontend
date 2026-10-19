@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { Table } from '@navikt/ds-react';
+import { BodyShort, Table } from '@navikt/ds-react';
 import { DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
@@ -29,7 +29,9 @@ export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleK
         size="medium"
         label={<FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusLabel" />}
         value={
-          <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusIngen" values={{ erAnnenpart }} tagName="i" />
+          <BodyShort size="small" textColor="subtle">
+            <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusIngen" values={{ erAnnenpart }} />
+          </BodyShort>
         }
       />
     );

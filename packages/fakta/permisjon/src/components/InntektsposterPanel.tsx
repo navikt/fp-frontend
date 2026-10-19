@@ -25,8 +25,8 @@ export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Pro
         <FormattedMessage id="InntektsposterPanel.Inntekter" />
       </Label>
       {inntektsposter.length === 0 && (
-        <BodyShort size="small">
-          <FormattedMessage id="InntektsposterPanel.IngenInntekt" tagName="i" />
+        <BodyShort size="small" textColor="subtle">
+          <FormattedMessage id="InntektsposterPanel.IngenInntekt" />
         </BodyShort>
       )}
       {inntektsposter.length > 0 && (

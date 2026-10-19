@@ -12,8 +12,8 @@ export const ArbeidsforholdPanel = ({ alleArbeidsforhold }: Props) => (
   <VStack gap="space-16">
     <div />
     {(!alleArbeidsforhold || alleArbeidsforhold.length === 0) && (
-      <BodyShort size="small">
-        <FormattedMessage id="ArbeidsforholdPanel.IngenArbeidsforhold" tagName="i" />
+      <BodyShort size="small" textColor="subtle">
+        <FormattedMessage id="ArbeidsforholdPanel.IngenArbeidsforhold" />
       </BodyShort>
     )}
     {alleArbeidsforhold && alleArbeidsforhold.length > 0 && (

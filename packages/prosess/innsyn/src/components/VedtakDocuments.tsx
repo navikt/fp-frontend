@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { HStack, Link, ReadMore } from '@navikt/ds-react';
+import { BodyShort, HStack, Link, ReadMore } from '@navikt/ds-react';
 import { DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { sortPeriodsBy } from '@navikt/ft-utils';
 
@@ -21,7 +21,11 @@ export const VedtakDocuments = ({ vedtaksdokumenter }: Props) => {
       <LabeledValue
         size="small"
         label={<FormattedMessage id="VedtakDocuments.IngenVedtaksdokumenterLabel" />}
-        value={<FormattedMessage tagName="i" id="VedtakDocuments.IngenVedtaksdokumenter" />}
+        value={
+          <BodyShort size="small" textColor="subtle">
+            <FormattedMessage id="VedtakDocuments.IngenVedtaksdokumenter" />
+          </BodyShort>
+        }
       />
     );
   }

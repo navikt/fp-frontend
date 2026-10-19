@@ -66,8 +66,8 @@ export const InntektsmeldingFaktaIndex = ({
     return (
       <RawIntlProvider value={intl}>
         <HStack gap="space-8" justify="center" align="center" className={styles['ingenInntektsmeldinger']}>
-          <BodyShort>
-            <FormattedMessage id="InntektsmeldingFaktaPanel.ingen" tagName="i" />
+          <BodyShort textColor="subtle">
+            <FormattedMessage id="InntektsmeldingFaktaPanel.ingen" />
           </BodyShort>
           <CoffeeIcon />
         </HStack>

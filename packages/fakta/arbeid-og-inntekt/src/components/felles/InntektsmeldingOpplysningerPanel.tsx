@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
+import { FileIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { BeløpLabel, DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
@@ -8,8 +8,6 @@ import type { AlleKodeverk, Arbeidsforhold, Inntektsmelding } from '@navikt/fp-t
 import { DokumentLink } from '@navikt/fp-ui-komponenter';
 
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
-
-import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
 interface Props {
   saksnummer: string;
@@ -52,6 +50,7 @@ export const InntektsmeldingOpplysningerPanel = ({
           </BodyShort>
         </HStack>
       )}
+
       {skalViseArbeidsforholdId && (
         <HStack gap="space-16">
           <Label size="small">
@@ -60,6 +59,7 @@ export const InntektsmeldingOpplysningerPanel = ({
           <BodyShort size="small">{inntektsmelding.eksternArbeidsforholdId}</BodyShort>
         </HStack>
       )}
+
       {arbeidsforhold && (
         <>
           <HStack gap="space-16">
@@ -84,6 +84,7 @@ export const InntektsmeldingOpplysningerPanel = ({
           )}
         </>
       )}
+
       <HStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
@@ -92,6 +93,7 @@ export const InntektsmeldingOpplysningerPanel = ({
           <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
         </BodyShort>
       </HStack>
+
       <HStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
@@ -106,7 +108,8 @@ export const InntektsmeldingOpplysningerPanel = ({
           />
         </BodyShort>
       </HStack>
-      {inntektsmelding.refusjonPrMnd !== undefined && (
+
+      {inntektsmelding.refusjonPrMnd && (
         <HStack gap="space-16">
           <Label size="small">
             <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
@@ -116,19 +119,23 @@ export const InntektsmeldingOpplysningerPanel = ({
           </BodyShort>
         </HStack>
       )}
-      <DokumentLink
-        saksnummer={saksnummer}
-        journalpostId={inntektsmelding.journalpostId}
-        dokumentId={inntektsmelding.dokumentId}
-      >
-        <BodyShort size="small" className={styles['inline']}>
-          <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
-        </BodyShort>
-        <FileFillIcon className={styles['docIcon']} />
-      </DokumentLink>
+
+      <BodyShort size="small">
+        <DokumentLink
+          saksnummer={saksnummer}
+          journalpostId={inntektsmelding.journalpostId}
+          dokumentId={inntektsmelding.dokumentId}
+        >
+          <HStack gap="space-4" wrap={false} align="center">
+            <FileIcon fontSize="1.125rem" aria-hidden />
+            <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
+          </HStack>
+        </DokumentLink>
+      </BodyShort>
     </VStack>
+
     <HStack gap="space-16">
-      <PhoneFillIcon className={styles['phoneIcon']} />
+      <PhoneFillIcon aria-hidden fontSize="1.5rem" />
       <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />

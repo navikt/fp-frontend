@@ -69,7 +69,7 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
         </HStack>
         {reserverteOppgaver.length === 0 && (
           <BodyShort size="small">
-            <FormattedMessage id="ReservertOppgaveTabell.IngenOppgaver" tagName="i" />
+            <FormattedMessage id="ReservertOppgaveTabell.IngenOppgaver" />
           </BodyShort>
         )}
       </VStack>

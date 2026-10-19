@@ -120,8 +120,8 @@ export const VelgSakForm = ({
   return (
     <VStack gap="space-16">
       {!finnesSaker && erKlarForJournalføring && (
-        <BodyShort>
-          <FormattedMessage id="Journal.Sak.Ingen" tagName="i" />
+        <BodyShort textColor="subtle">
+          <FormattedMessage id="Journal.Sak.Ingen" />
         </BodyShort>
       )}
       {erEndeligJournalført(journalpost.tilstand) && (

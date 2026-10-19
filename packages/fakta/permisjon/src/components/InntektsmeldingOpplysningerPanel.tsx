@@ -7,8 +7,6 @@ import { BeløpLabel } from '@navikt/ft-ui-komponenter';
 import type { Inntektsmelding } from '@navikt/fp-types';
 import { DokumentLink } from '@navikt/fp-ui-komponenter';
 
-import styles from './inntektsmeldingOpplysningerPanel.module.css';
-
 interface Props {
   saksnummer: string;
   inntektsmelding: Inntektsmelding;
@@ -24,6 +22,7 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
         <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
       </BodyShort>
     </HStack>
+
     <HStack gap="space-16">
       <Label size="small">
         <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
@@ -38,6 +37,7 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
         />
       </BodyShort>
     </HStack>
+
     {inntektsmelding.refusjonPrMnd && (
       <HStack gap="space-16">
         <Label size="small">
@@ -48,6 +48,7 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
         </BodyShort>
       </HStack>
     )}
+
     <BodyShort size="small">
       <DokumentLink
         saksnummer={saksnummer}
@@ -60,8 +61,9 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
         </HStack>
       </DokumentLink>
     </BodyShort>
+
     <HStack gap="space-16" align="center">
-      <PhoneFillIcon className={styles['phoneIcon']} />
+      <PhoneFillIcon aria-hidden fontSize="1.5rem" />
       <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />

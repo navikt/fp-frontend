@@ -34,22 +34,25 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
 
   const harEttArbeidsforhold = arbeidsforholdForRad.length === 1;
 
-  const visInntektsposter = inntektsposter.some(i => i.beløp > 0);
-
   return (
     <VStack gap="space-32">
       <InntektsmeldingerPanel saksnummer={saksnummer} alleKodeverk={alleKodeverk} radData={radData} />
-      {visInntektsposter && (
-        <VStack gap="space-8">
-          <Label size="small">
-            <FormattedMessage
-              id={
-                harEttArbeidsforhold
-                  ? 'ArbeidsforholdInformasjonPanel.Inntekter'
-                  : 'ArbeidsforholdInformasjonPanel.TotaltInntekter'
-              }
-            />
-          </Label>
+      <VStack gap="space-4">
+        <Label size="small">
+          <FormattedMessage
+            id={
+              harEttArbeidsforhold
+                ? 'ArbeidsforholdInformasjonPanel.Inntekter'
+                : 'ArbeidsforholdInformasjonPanel.TotaltInntekter'
+            }
+          />
+        </Label>
+        {inntektsposter.length === 0 && (
+          <BodyShort size="small" textColor="subtle">
+            <FormattedMessage id="ArbeidsforholdInformasjonPanel.IngenInntekt" />
+          </BodyShort>
+        )}
+        {inntektsposter.length > 0 && (
           <VStack gap="space-4">
             {sorterteInntektsposter
               .filter((_inntekt, index) => (visAlleMåneder ? true : index < 3))
@@ -65,38 +68,32 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
                   </BodyShort>
                 </HStack>
               ))}
-          </VStack>
-          <Link
-            onClick={e => {
-              e.preventDefault();
-              setVisAlleMåneder(!visAlleMåneder);
-            }}
-            href=""
-          >
-            <span>
-              <BodyShort size="small" className={styles['inline']}>
+            <BodyShort size="small">
+              <Link
+                onClick={e => {
+                  e.preventDefault();
+                  setVisAlleMåneder(!visAlleMåneder);
+                }}
+                href=""
+              >
                 <FormattedMessage
+                  tagName="span"
                   id={
                     visAlleMåneder
                       ? 'ArbeidsforholdInformasjonPanel.FaerreManeder'
                       : 'ArbeidsforholdInformasjonPanel.TidligereManeder'
                   }
                 />
-              </BodyShort>
-            </span>
-            {visAlleMåneder ? (
-              <ChevronUpIcon className={styles['arrow']} />
-            ) : (
-              <ChevronDownIcon className={styles['arrow']} />
-            )}
-          </Link>
-        </VStack>
-      )}
-      {!visInntektsposter && (
-        <Label size="small">
-          <FormattedMessage id="ArbeidsforholdInformasjonPanel.IngenInntekt" tagName="i" />
-        </Label>
-      )}
+                {visAlleMåneder ? (
+                  <ChevronUpIcon fontSize="1.5rem" aria-hidden />
+                ) : (
+                  <ChevronDownIcon fontSize="1.5rem" aria-hidden />
+                )}
+              </Link>
+            </BodyShort>
+          </VStack>
+        )}
+      </VStack>
     </VStack>
   );
 };

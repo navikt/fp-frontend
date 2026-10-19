@@ -33,7 +33,7 @@ export const LedigOppgaveTabell = ({ reserverOppgave, antallOppgaver = 0, valgtS
         </HStack>
         {oppgaverTilBehandling.length === 0 && (
           <BodyShort size="small">
-            <FormattedMessage id="LedigOppgaveTabell.IngenOppgaver" tagName="i" />
+            <FormattedMessage id="LedigOppgaveTabell.IngenOppgaver" />
           </BodyShort>
         )}
       </VStack>
