@@ -5,7 +5,7 @@ import { Badge, Box, Heading, HStack } from '@navikt/ds-react';
 
 import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 
-import styles from './supportLayout.module.css';
+import styles from './behandlingSupportIndex.module.css';
 
 interface Props {
   tekst: string;
