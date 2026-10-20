@@ -8,6 +8,8 @@ export { withThemeDecorator } from './decorators/withThemeDecorator';
 export type { PanelDataArgs } from './decorators/withPanelData';
 export { withPanelOverstyring } from './decorators/withPanelOverstyring';
 export type { PanelOverstyringContextArgs } from './decorators/withPanelOverstyring';
+export { withReadOnly } from './decorators/withReadOnly';
+export type { ReadOnlyArgs } from './decorators/withReadOnly';
 export { alleKodeverk } from './mocks/alleKodeverk';
 export { alleKodeverkLos } from './mocks/alleKodeverkLos';
 export { alleKodeverkTilbakekreving } from './mocks/alleKodeverkTilbakekreving';

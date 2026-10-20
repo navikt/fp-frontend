@@ -3,6 +3,8 @@ import { createContext, type ReactElement, use, useMemo } from 'react';
 import type { Aksjonspunkt, AlleKodeverk, Behandling, BehandlingFpSak, Fagsak, Vilkår } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import { ReadOnlyProvider } from './ReadOnlyContext';
+
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
 type Props<AP_TYPE extends AksjonspunktType, B extends Behandling> = {
@@ -29,7 +31,11 @@ export const PanelDataProvider = <T extends AksjonspunktType, B extends Behandli
 
   const value = useMemo(() => otherProps, [otherProps]);
 
-  return <PanelDataContext value={value}>{children}</PanelDataContext>;
+  return (
+    <PanelDataContext value={value}>
+      <ReadOnlyProvider readOnly={otherProps.isReadOnly}>{children}</ReadOnlyProvider>
+    </PanelDataContext>
+  );
 };
 
 export const usePanelDataContext = <

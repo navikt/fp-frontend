@@ -1,6 +1,7 @@
 export { MellomlagretFormDataProvider, useMellomlagretFormData } from './src/context/MellomlagretFormDataContext';
 export { PanelDataProvider, usePanelDataContext } from './src/context/PanelDataContext';
 export { PanelOverstyringProvider, usePanelOverstyring } from './src/context/PanelOverstyringContext';
+export { ReadOnlyProvider, useReadOnly } from './src/context/ReadOnlyContext';
 export { classNames } from './src/classNames';
 export { notEmpty } from './src/notEmpty';
 export { assertUnreachable } from './src/switchCaseUtils';
