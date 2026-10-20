@@ -7,7 +7,7 @@
     box-shadow: inset 4px 0 0 var(--ax-bg-warning-strong);
   }
 
-  &[data-open-ap='true'] + tr > td:first-child > div {
-    padding-left: 16px;
+  + tr > td:first-child > div {
+    padding-left: 50px;
   }
 }

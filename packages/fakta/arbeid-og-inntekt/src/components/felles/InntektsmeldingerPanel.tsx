@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Label, Link, Tooltip, VStack } from '@navikt/ds-react';
-import { AvsnittSkiller, DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { AvsnittSkiller, DateLabel, LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk } from '@navikt/fp-types';
 
@@ -29,16 +29,17 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
   );
   return (
     <VStack gap="space-16">
-      <HStack gap="space-16">
-        <Label size="small">
+      <LabeledValue
+        size="small"
+        horizontal
+        label={
           <FormattedMessage
             id={erPrivatPerson ? 'ArbeidsforholdInformasjonPanel.Fodselsdato' : 'ArbeidsforholdInformasjonPanel.Orgnr'}
           />
-        </Label>
-        <BodyShort size="small">
-          {erPrivatPerson ? <DateLabel dateString={radData.arbeidsgiverFødselsdato} /> : arbeidsgiverIdent}
-        </BodyShort>
-      </HStack>
+        }
+        value={erPrivatPerson ? <DateLabel dateString={radData.arbeidsgiverFødselsdato} /> : arbeidsgiverIdent}
+      />
+
       {!harEttArbeidsforhold && (
         <>
           <AvsnittSkiller dividerParagraf />
@@ -47,12 +48,13 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
               <React.Fragment key={`${a.arbeidsgiverIdent}${a.internArbeidsforholdId}`}>
                 <HStack justify="space-between">
                   <VStack gap="space-8">
-                    <HStack gap="space-16">
-                      <Label size="small">
-                        <FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" />
-                      </Label>
-                      <div>
-                        {a.eksternArbeidsforholdId && (
+                    <LabeledValue
+                      size="small"
+                      horizontal
+                      label={<FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" />}
+                      fieldType="component"
+                      value={
+                        a.eksternArbeidsforholdId ? (
                           <Tooltip content={delOppAId(a.eksternArbeidsforholdId)} maxChar={100}>
                             <BodyShort size="small">
                               {a.eksternArbeidsforholdId.length > 50
@@ -60,37 +62,41 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                                 : a.eksternArbeidsforholdId}
                             </BodyShort>
                           </Tooltip>
-                        )}
-                        {!a.eksternArbeidsforholdId && <BodyShort size="small">-</BodyShort>}
-                      </div>
-                    </HStack>
-                    <HStack gap="space-16">
-                      <Label size="small">
-                        <FormattedMessage id="ArbeidsforholdInformasjonPanel.Periode" />
-                      </Label>
-                      <BodyShort size="small">
-                        <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom} />
-                      </BodyShort>
-                    </HStack>
-                    <HStack gap="space-16">
-                      <Label size="small">
-                        <FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" />
-                      </Label>
-                      <BodyShort size="small">{`${a.stillingsprosent}%`}</BodyShort>
-                    </HStack>
+                        ) : (
+                          <BodyShort size="small">-</BodyShort>
+                        )
+                      }
+                    />
+
+                    <LabeledValue
+                      size="small"
+                      horizontal
+                      label={<FormattedMessage id="ArbeidsforholdInformasjonPanel.Periode" />}
+                      value={<PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom} />}
+                    />
+
+                    <LabeledValue
+                      size="small"
+                      horizontal
+                      label={<FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" />}
+                      value={`${a.stillingsprosent}%`}
+                    />
+
                     {a.permisjonOgMangel && (
-                      <HStack gap="space-16">
-                        <Label size="small">
-                          {alleKodeverk['PermisjonsbeskrivelseType'].find(k => k.kode === a.permisjonOgMangel?.type)
-                            ?.navn ?? ''}
-                        </Label>
-                        <BodyShort size="small">
+                      <LabeledValue
+                        size="small"
+                        horizontal
+                        label={
+                          alleKodeverk['PermisjonsbeskrivelseType'].find(k => k.kode === a.permisjonOgMangel?.type)
+                            ?.navn ?? ''
+                        }
+                        value={
                           <PeriodLabel
                             dateStringFom={a.permisjonOgMangel.permisjonFom}
                             dateStringTom={a.permisjonOgMangel.permisjonTom}
                           />
-                        </BodyShort>
-                      </HStack>
+                        }
+                      />
                     )}
                     {im && (
                       <>
@@ -182,28 +188,32 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
             ikkeVisInfo
           />
         )}
+
       {harEttArbeidsforhold && inntektsmeldingerForRad.length === 0 && (
         <>
-          <HStack gap="space-16">
-            <Label size="small">
-              <FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" />
-            </Label>
-            <BodyShort size="small">{`${arbeidsforholdForRad[0]!.stillingsprosent}%`}</BodyShort>
-          </HStack>
+          <LabeledValue
+            size="small"
+            horizontal
+            label={<FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" />}
+            value={`${arbeidsforholdForRad[0]!.stillingsprosent}%`}
+          />
+
           {arbeidsforholdForRad[0]!.permisjonOgMangel && (
-            <HStack gap="space-16">
-              <Label size="small">
-                {alleKodeverk['PermisjonsbeskrivelseType'].find(
+            <LabeledValue
+              size="small"
+              horizontal
+              label={
+                alleKodeverk['PermisjonsbeskrivelseType'].find(
                   k => k.kode === arbeidsforholdForRad[0]!.permisjonOgMangel?.type,
-                )?.navn ?? ''}
-              </Label>
-              <BodyShort size="small">
+                )?.navn ?? ''
+              }
+              value={
                 <PeriodLabel
                   dateStringFom={arbeidsforholdForRad[0]!.permisjonOgMangel.permisjonFom}
                   dateStringTom={arbeidsforholdForRad[0]!.permisjonOgMangel.permisjonTom}
                 />
-              </BodyShort>
-            </HStack>
+              }
+            />
           )}
         </>
       )}

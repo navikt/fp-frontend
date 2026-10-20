@@ -1,8 +1,8 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, Table, VStack } from '@navikt/ds-react';
-import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { Table, VStack } from '@navikt/ds-react';
+import { DateLabel, LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import type {
@@ -162,24 +162,16 @@ export const ArbeidsforholdRad = ({
             />
           )}
           {erInaktivtArbeidsforhold && (
-            <VStack gap="space-4">
-              <Detail>
-                <FormattedMessage id="ArbeidsforholdRad.InaktivtArbeidsforhold.Tittel" />
-              </Detail>
-              <BodyShort>
-                <FormattedMessage id="ArbeidsforholdRad.InaktivtArbeidsforhold.Forklaring" />
-              </BodyShort>
-            </VStack>
+            <LabeledValue
+              label={<FormattedMessage id="ArbeidsforholdRad.InaktivtArbeidsforhold.Tittel" />}
+              value={<FormattedMessage id="ArbeidsforholdRad.InaktivtArbeidsforhold.Forklaring" />}
+            />
           )}
           {erPermisjonArbeidsforhold && (
-            <VStack gap="space-4">
-              <Detail>
-                <FormattedMessage id="ArbeidsforholdRad.Permisjon.Tittel" />
-              </Detail>
-              <BodyShort>
-                <FormattedMessage id="ArbeidsforholdRad.Permisjon.Forklaring" />
-              </BodyShort>
-            </VStack>
+            <LabeledValue
+              label={<FormattedMessage id="ArbeidsforholdRad.Permisjon.Tittel" />}
+              value={<FormattedMessage id="ArbeidsforholdRad.Permisjon.Forklaring" />}
+            />
           )}
         </VStack>
       }
@@ -200,36 +192,28 @@ export const ArbeidsforholdRad = ({
           />
         )}
       </Table.DataCell>
+      <Table.DataCell>{arbeidsgiverNavn}</Table.DataCell>
       <Table.DataCell>
-        <BodyShort>{arbeidsgiverNavn}</BodyShort>
+        {periode?.fom ? <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} /> : '-'}
       </Table.DataCell>
       <Table.DataCell>
-        <BodyShort>
-          {periode?.fom ? <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} /> : '-'}
-        </BodyShort>
+        <FormattedMessage id={finnKildekode(erManueltOpprettet, arbeidsforholdForRad.length > 0)} />
       </Table.DataCell>
       <Table.DataCell>
-        <BodyShort>
-          <FormattedMessage id={finnKildekode(erManueltOpprettet, arbeidsforholdForRad.length > 0)} />
-        </BodyShort>
-      </Table.DataCell>
-      <Table.DataCell>
-        <BodyShort>
-          {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
-            <DateLabel dateString={inntektsmeldingerForRad[0]!.mottattDato} />
+        {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
+          <DateLabel dateString={inntektsmeldingerForRad[0]!.mottattDato} />
+        )}
+        {!manglerInntektsmelding &&
+          arbeidsforholdForRad.length > 1 &&
+          inntektsmeldingerForRad.length === arbeidsforholdForRad.length && (
+            <FormattedMessage id="ArbeidsforholdRad.Mottatt" />
           )}
-          {!manglerInntektsmelding &&
-            arbeidsforholdForRad.length > 1 &&
-            inntektsmeldingerForRad.length === arbeidsforholdForRad.length && (
-              <FormattedMessage id="ArbeidsforholdRad.Mottatt" />
-            )}
-          {(erManueltOpprettet ||
-            (manglerInntektsmelding && inntektsmeldingerForRad.length < arbeidsforholdForRad.length)) && (
-            <FormattedMessage id="ArbeidsforholdRad.IkkeMottatt" />
-          )}
-          {erInaktivtArbeidsforhold && <FormattedMessage id="ArbeidsforholdRad.IkkebestiltInaktivt" />}
-          {erPermisjonArbeidsforhold && <FormattedMessage id="ArbeidsforholdRad.IkkebestiltPermisjon" />}
-        </BodyShort>
+        {(erManueltOpprettet ||
+          (manglerInntektsmelding && inntektsmeldingerForRad.length < arbeidsforholdForRad.length)) && (
+          <FormattedMessage id="ArbeidsforholdRad.IkkeMottatt" />
+        )}
+        {erInaktivtArbeidsforhold && <FormattedMessage id="ArbeidsforholdRad.IkkebestiltInaktivt" />}
+        {erPermisjonArbeidsforhold && <FormattedMessage id="ArbeidsforholdRad.IkkebestiltPermisjon" />}
       </Table.DataCell>
     </Table.ExpandableRow>
   );

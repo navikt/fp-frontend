@@ -146,7 +146,7 @@ export const ArbeidOgInntektFaktaPanel = ({
         <Table ref={tableRef}>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell scope="col" className="w-8" />
+              <Table.HeaderCell scope="col" className="w-12" />
               <Table.HeaderCell scope="col">
                 <FormattedMessage id="ArbeidOgInntektFaktaPanel.Arbeidsforhold" />
               </Table.HeaderCell>
