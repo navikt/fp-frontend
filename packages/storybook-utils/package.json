@@ -18,19 +18,19 @@
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@storybook/react": "10.6.1",
-    "@tanstack/react-query": "5.104.2",
+    "@storybook/react": "10.6.2",
+    "@tanstack/react-query": "5.104.3",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-intl": "12.1.4",
     "react-router": "8.4.0",
-    "storybook": "10.6.1"
+    "storybook": "10.6.2"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
-    "@tanstack/react-query-devtools": "5.104.2",
+    "@tanstack/react-query-devtools": "5.104.3",
     "@types/react": "19.3.0",
     "dayjs": "1.11.23",
     "eslint": "10.12.0",
