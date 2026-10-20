@@ -203,7 +203,6 @@ const meta = {
   component: HistorikkSakIndex,
   decorators: [withRouter, story => <div style={{ width: '600px' }}>{story()}</div>],
   args: {
-    valgtBehandlingUuid: undefined,
     historikkFpSak: historikkInnslag,
     historikkFpTilbake: [],
     alleKodeverkFpSak: alleKodeverk,
@@ -218,12 +217,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const BehandlingIkkeErValgt: Story = {
+export const Default: Story = {
   args: {},
-};
-
-export const BehandlingErValgt: Story = {
-  args: {
-    valgtBehandlingUuid: '999951',
-  },
 };

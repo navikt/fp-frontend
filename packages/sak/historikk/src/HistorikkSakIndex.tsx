@@ -29,7 +29,6 @@ interface Props {
     behandlingLocation: Location,
     skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake,
   ) => Location | undefined;
-  valgtBehandlingUuid?: string;
 }
 
 export const HistorikkSakIndex = ({
@@ -40,11 +39,9 @@ export const HistorikkSakIndex = ({
   saksnummer,
   getBehandlingLocation,
   createLocationForSkjermlenke,
-  valgtBehandlingUuid,
 }: Props) => (
   <RawIntlProvider value={intl}>
     <Historikk
-      valgtBehandlingUuid={valgtBehandlingUuid}
       historikkFpSak={historikkFpSak}
       historikkFpTilbake={historikkFpTilbake}
       alleKodeverkFpTilbake={alleKodeverkFpTilbake}

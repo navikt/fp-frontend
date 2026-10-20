@@ -1,7 +1,8 @@
-import type { ReactElement } from 'react';
+import { type ReactElement, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useLocation } from 'react-router';
 
+import { Checkbox } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { HistorikkSakIndex } from '@navikt/fp-sak-historikk';
@@ -35,6 +36,15 @@ export const HistorikkIndex = ({
   const { data: alleKodeverkFpSak } = useQuery(kodeverkOptions());
   const { data: alleKodeverkFpTilbake } = useQuery(fptilbakeKodeverkOptions());
 
+  const [filtrerPaBehandling, setFiltrerPaBehandling] = useState(false);
+  const erFiltrert = !!behandlingUuid && filtrerPaBehandling;
+  const historikkFpSak = erFiltrert
+    ? historikkinnslagFpSak?.filter(h => h.behandlingUuid === behandlingUuid)
+    : historikkinnslagFpSak;
+  const historikkFpTilbake = erFiltrert
+    ? historikkinnslagFpTilbake?.filter(h => h.behandlingUuid === behandlingUuid)
+    : historikkinnslagFpTilbake;
+
   const location = useLocation();
   const getBehandlingLocation = (bUuid: string) => ({
     ...location,
@@ -44,19 +54,29 @@ export const HistorikkIndex = ({
   return (
     <SupportHeaderAndContent
       tekst={intl.formatMessage({ id: 'HistorikkIndex.Historikk' })}
-      antall={(historikkinnslagFpSak?.length ?? 0) + (historikkinnslagFpTilbake?.length ?? 0)}
+      antall={(historikkFpSak?.length ?? 0) + (historikkFpTilbake?.length ?? 0)}
       brukPadding={false}
       toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
+      headerHandlinger={
+        !!behandlingUuid && (
+          <Checkbox
+            size="small"
+            checked={filtrerPaBehandling}
+            onChange={() => setFiltrerPaBehandling(!filtrerPaBehandling)}
+          >
+            {intl.formatMessage({ id: 'HistorikkIndex.FiltrerPaBehandling' })}
+          </Checkbox>
+        )
+      }
     >
       <HistorikkSakIndex
-        historikkFpSak={historikkinnslagFpSak}
-        historikkFpTilbake={historikkinnslagFpTilbake}
+        historikkFpSak={historikkFpSak}
+        historikkFpTilbake={historikkFpTilbake}
         alleKodeverkFpTilbake={alleKodeverkFpTilbake}
         alleKodeverkFpSak={notEmpty(alleKodeverkFpSak)}
         saksnummer={saksnummer}
         getBehandlingLocation={getBehandlingLocation}
         createLocationForSkjermlenke={createLocationForSkjermlenke}
-        valgtBehandlingUuid={behandlingUuid}
       />
     </SupportHeaderAndContent>
   );
