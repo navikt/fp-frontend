@@ -12,7 +12,7 @@ import type {
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 import type { VurderArbeidsforholdInntektsmeldingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { ReadOnlyProvider, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { ReadOnlyProvider, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
@@ -45,7 +45,8 @@ export const ArbeidOgInntektFaktaPanel = ({
   const [visSettPåVentModal, setVisSettPåVentModal] = useState(false);
   const [erOverstyrt, setErOverstyrt] = useState(false);
 
-  const { alleKodeverk, submitCallback, aksjonspunkterForPanel, behandling, fagsak, isReadOnly } =
+  const isReadOnly = useReadOnly();
+  const { alleKodeverk, submitCallback, aksjonspunkterForPanel, behandling, fagsak } =
     usePanelDataContext<VurderArbeidsforholdInntektsmeldingAp>();
 
   const aksjonspunkt = aksjonspunkterForPanel[0];

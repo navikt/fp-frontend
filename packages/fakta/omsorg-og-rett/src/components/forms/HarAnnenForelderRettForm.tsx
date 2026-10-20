@@ -8,7 +8,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, OmsorgOgRett } from '@navikt/fp-types';
 import type { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { ReadOnlyProvider, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { ReadOnlyProvider, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
@@ -25,7 +25,8 @@ interface Props {
 }
 
 export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: Props) => {
-  const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } = usePanelDataContext<AvklarAnnenforelderHarRettAp>();
+  const isReadOnly = useReadOnly();
+  const { submitCallback, alleMerknaderFraBeslutter } = usePanelDataContext<AvklarAnnenforelderHarRettAp>();
 
   const harUføretrygd = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd ?? undefined;
 

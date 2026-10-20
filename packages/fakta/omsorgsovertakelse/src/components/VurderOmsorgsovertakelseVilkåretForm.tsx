@@ -23,7 +23,7 @@ import {
   type VilkårUtfallType,
 } from '@navikt/fp-types';
 import type { VurderOmsorgsovertakelseVilkåretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { Over15Markering } from './Markering';
 
@@ -43,7 +43,8 @@ interface Props {
 export const VurderOmsorgsovertakelseVilkåretForm = ({ omsorgsovertakelse }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, submitCallback, isReadOnly, isSubmittable, alleKodeverk } =
+  const isReadOnly = useReadOnly();
+  const { aksjonspunkterForPanel, submitCallback, isSubmittable, alleKodeverk } =
     usePanelDataContext<VurderOmsorgsovertakelseVilkåretAp>();
   const alleBarn = mapBarn(omsorgsovertakelse);
   const formMethods = useForm<FormValues>({

@@ -15,7 +15,7 @@ import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navik
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, BrevOverstyring, DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-types';
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);
 
@@ -49,7 +49,8 @@ interface Props {
 export const VarselOmRevurderingForm = ({ previewCallback, hentVarselHtml, mellomlagreBrev }: Props) => {
   const intl = useIntl();
 
-  const { isReadOnly, alleKodeverk, behandling, submitCallback, aksjonspunkterForPanel } =
+  const isReadOnly = useReadOnly();
+  const { alleKodeverk, behandling, submitCallback, aksjonspunkterForPanel } =
     usePanelDataContext<VarselRevurderingAp>();
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel);

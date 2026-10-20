@@ -12,7 +12,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -30,7 +30,8 @@ interface Props {
 export const DekningsgradOverstyring = ({ aksjonspunkt, ytelseFordeling }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, isReadOnly } = usePanelDataContext<OverstyringDekningsgradAp>();
+  const isReadOnly = useReadOnly();
+  const { submitCallback } = usePanelDataContext<OverstyringDekningsgradAp>();
 
   const dekningsgrad =
     ytelseFordeling.dekningsgrader.avklartDekningsgrad ??

@@ -15,7 +15,7 @@ import {
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
 import type { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.module.css';
 
@@ -58,7 +58,8 @@ interface Props {
  * Setter opp aksjonspunktet for vurdering av søknadsfristvilkåret.
  */
 export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfrist }: Props) => {
-  const { aksjonspunkterForPanel, isReadOnly, submitCallback, isSubmittable, harÅpentAksjonspunkt } =
+  const isReadOnly = useReadOnly();
+  const { aksjonspunkterForPanel, submitCallback, isSubmittable, harÅpentAksjonspunkt } =
     usePanelDataContext<VurderSoknadsfristAp>();
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel, mottattDato, søknadsfrist);

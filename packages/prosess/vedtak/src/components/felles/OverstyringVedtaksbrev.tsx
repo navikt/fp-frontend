@@ -8,7 +8,7 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { BrevRedigeringModal } from '@navikt/fp-brev-editor';
 import type { BrevOverstyring } from '@navikt/fp-types';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
@@ -20,7 +20,8 @@ interface Props {
 
 export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigereVedtaksbrev }: Props) => {
   const intl = useIntl();
-  const { isReadOnly, behandling } = usePanelDataContext();
+  const isReadOnly = useReadOnly();
+  const { behandling } = usePanelDataContext();
 
   const { harRedigertBrev, setHarRedigertBrev, hentBrevHtml, hentBrevHtmlIsPending, mellomlagreBrev } =
     useVedtakEditeringContext();

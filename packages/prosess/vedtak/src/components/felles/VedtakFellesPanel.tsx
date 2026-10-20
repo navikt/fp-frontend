@@ -13,7 +13,7 @@ import {
   type BehandlingStatus,
   type Oppgave,
 } from '@navikt/fp-types';
-import { isAvslag, isInnvilget, isOpphor, usePanelDataContext } from '@navikt/fp-utils';
+import { isAvslag, isInnvilget, isOpphor, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
@@ -80,7 +80,8 @@ export const VedtakFellesPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { behandling, isReadOnly, aksjonspunkterForPanel } = usePanelDataContext();
+  const isReadOnly = useReadOnly();
+  const { behandling, aksjonspunkterForPanel } = usePanelDataContext();
   const { behandlingsresultat, behandlingPåVent, status, behandlingHenlagt, uuid, taskStatus } = behandling;
 
   const {

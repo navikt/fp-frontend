@@ -24,7 +24,7 @@ import type {
   VilkårUtfallType,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 const finnesUttakPåArbfor = (arbfor: SvpArbeidsforholdDto): boolean => {
   const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer.some(
@@ -63,6 +63,7 @@ interface Props {
 }
 
 export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, status }: Props) => {
+  const isReadOnly = useReadOnly();
   const {
     aksjonspunkterForPanel,
     vilkårForPanel,
@@ -71,7 +72,6 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     isSubmittable,
     harÅpentAksjonspunkt,
     submitCallback,
-    isReadOnly,
   } = usePanelDataContext<BekreftSvangerskapspengervilkarAp>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(

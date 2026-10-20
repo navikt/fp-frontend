@@ -9,7 +9,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { ManuellKontrollAapKombinertAtflAP } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 type FormValues = {
   erBeregningenKorrekt: boolean;
@@ -21,7 +21,8 @@ interface Props {
 
 export const KontrollerBeregningAapKombinertAtflPanel = ({ aksjonspunkt }: Props) => {
   const intl = useIntl();
-  const { submitCallback, isSubmittable, isReadOnly } = usePanelDataContext<ManuellKontrollAapKombinertAtflAP>();
+  const isReadOnly = useReadOnly();
+  const { submitCallback, isSubmittable } = usePanelDataContext<ManuellKontrollAapKombinertAtflAP>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 

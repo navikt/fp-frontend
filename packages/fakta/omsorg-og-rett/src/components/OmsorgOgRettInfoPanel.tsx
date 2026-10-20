@@ -4,7 +4,7 @@ import { Box, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { type OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
 import { AnnenPartsYtelser } from '../opplysningskort/AnnenPartsYtelser';
@@ -15,8 +15,8 @@ import { HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
 import { RettighetstypeForm } from './forms/RettighetstypeForm';
 
 export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett }: OmsorgOgRettProps) => {
-  const { alleKodeverk, isSubmittable, aksjonspunkterForPanel, isReadOnly, harÅpentAksjonspunkt } =
-    usePanelDataContext();
+  const isReadOnly = useReadOnly();
+  const { alleKodeverk, isSubmittable, aksjonspunkterForPanel, harÅpentAksjonspunkt } = usePanelDataContext();
 
   const aksjonspunkter = aksjonspunkterForPanel.filter(
     a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,

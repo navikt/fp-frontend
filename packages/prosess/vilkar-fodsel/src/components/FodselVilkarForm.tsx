@@ -16,7 +16,7 @@ import {
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, BehandlingFpSak, VilkårUtfallType } from '@navikt/fp-types';
 import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 type FormValues = VilkarResultPickerFormValues & ProsessStegBegrunnelseTextFieldFormValues;
 
@@ -30,6 +30,7 @@ interface Props {
  * Setter opp aksjonspunktet for avklaring av Fødselsvilkåret.
  */
 export const FodselVilkarForm = ({ status }: Props) => {
+  const isReadOnly = useReadOnly();
   const {
     behandling,
     isSubmittable,
@@ -37,7 +38,6 @@ export const FodselVilkarForm = ({ status }: Props) => {
     vilkårForPanel,
     submitCallback,
     harÅpentAksjonspunkt,
-    isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
 

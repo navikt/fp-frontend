@@ -15,7 +15,7 @@ import {
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandlingsresultat, FamilieHendelse, Soknad, VilkårUtfallType } from '@navikt/fp-types';
 import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { SøknadsfristDetaljer } from './SøknadsfristDetaljer';
 
@@ -50,6 +50,7 @@ interface Props {
  * Setter opp aksjonspunktet for vurdering av søknadsfristvilkåret.
  */
 export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehendelse, status }: Props) => {
+  const isReadOnly = useReadOnly();
   const {
     isSubmittable,
     aksjonspunkterForPanel,
@@ -57,7 +58,6 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
     vilkårForPanel,
     harÅpentAksjonspunkt,
     behandling,
-    isReadOnly,
     submitCallback,
   } = usePanelDataContext<SoknadsfristAp>();
 

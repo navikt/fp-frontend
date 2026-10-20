@@ -9,7 +9,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
 import type { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { harAksjonspunkt, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { harAksjonspunkt, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { MedlemskapVurderinger, type MedlemskapVurderingerFormValues } from './MedlemskapVurderinger';
 
@@ -25,7 +25,8 @@ interface Props {
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
 export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: Props) => {
-  const { fagsak, behandling, aksjonspunkterForPanel, vilkårForPanel, submitCallback, isReadOnly, isSubmittable } =
+  const isReadOnly = useReadOnly();
+  const { fagsak, behandling, aksjonspunkterForPanel, vilkårForPanel, submitCallback, isSubmittable } =
     usePanelDataContext<VurderMedlemskapAp | VurderForutgaendeMedlemskapAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();

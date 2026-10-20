@@ -10,7 +10,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { DekningsgradVisning } from './DekningsgradVisning';
 
@@ -26,7 +26,8 @@ interface Props {
 export const DekningsgradAP = ({ ytelseFordeling, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, fagsak, isReadOnly, isSubmittable } = usePanelDataContext<AvklarDekningsgradAp>();
+  const isReadOnly = useReadOnly();
+  const { submitCallback, fagsak, isSubmittable } = usePanelDataContext<AvklarDekningsgradAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 

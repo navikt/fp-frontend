@@ -11,7 +11,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, UtlandDokumentasjonStatus } from '@navikt/fp-types';
 import type { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 type FormValues = {
   dokStatus?: UtlandDokumentasjonStatus;
@@ -25,7 +25,8 @@ interface Props {
 export const InnhentDokOpptjeningUtlandAP = ({ aksjonspunkt, dokStatus }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, isReadOnly, isSubmittable } = usePanelDataContext<MerkOpptjeningUtlandAp>();
+  const isReadOnly = useReadOnly();
+  const { submitCallback, isSubmittable } = usePanelDataContext<MerkOpptjeningUtlandAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 

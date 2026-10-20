@@ -13,7 +13,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -58,7 +58,8 @@ interface Props {
 export const StartdatoOverstyring = ({ aksjonspunkt, ytelseFordeling }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, isReadOnly } = usePanelDataContext<OverstyringAvklarStartdatoForPeriodenAp>();
+  const isReadOnly = useReadOnly();
+  const { submitCallback } = usePanelDataContext<OverstyringAvklarStartdatoForPeriodenAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 

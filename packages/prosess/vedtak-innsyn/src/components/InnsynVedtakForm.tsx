@@ -12,7 +12,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, DokumentMalType, InnsynDokument, InnsynResultatType } from '@navikt/fp-types';
 import type { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { DocumentListVedtakInnsyn } from './DocumentListVedtakInnsyn';
 
@@ -52,8 +52,8 @@ export const InnsynVedtakForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { fagsak, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
-    usePanelDataContext<ForeslaVedtakAp>();
+  const isReadOnly = useReadOnly();
+  const { fagsak, aksjonspunkterForPanel, submitCallback, behandling } = usePanelDataContext<ForeslaVedtakAp>();
 
   const initialValues = buildInitialValues(innsynMottattDato, aksjonspunkterForPanel);
 

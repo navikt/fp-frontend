@@ -17,7 +17,7 @@ import type {
   SvpTilrettelegging,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../types/TilretteleggingFormValues';
 import { ArbeidsforholdFieldArray } from './arbeidsforhold/ArbeidsforholdFieldArray';
@@ -40,7 +40,8 @@ export const TilretteleggingFaktaForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { isSubmittable, isReadOnly, aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpentAksjonspunkt } =
+  const isReadOnly = useReadOnly();
+  const { isSubmittable, aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpentAksjonspunkt } =
     usePanelDataContext<BekreftSvangerskapspengerAp>();
   const uttakArbeidTyper = alleKodeverk['UttakArbeidType'];
 

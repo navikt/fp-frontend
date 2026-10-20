@@ -12,7 +12,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, Innsyn, InnsynDokument } from '@navikt/fp-types';
 import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { DocumentListInnsyn } from './DocumentListInnsyn';
 import type { FormValues } from './formValues';
@@ -53,7 +53,8 @@ interface Props {
 export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
   const intl = useIntl();
 
-  const { fagsak, alleKodeverk, isSubmittable, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
+  const isReadOnly = useReadOnly();
+  const { fagsak, alleKodeverk, isSubmittable, aksjonspunkterForPanel, submitCallback, behandling } =
     usePanelDataContext<VurderInnsynAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();

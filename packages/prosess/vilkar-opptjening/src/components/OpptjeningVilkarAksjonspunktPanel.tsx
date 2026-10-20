@@ -15,7 +15,7 @@ import {
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandlingsresultat, FastsattOpptjening, VilkårUtfallType } from '@navikt/fp-types';
 import type { AvklarOpptjeningsvilkaretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { OpptjeningVilkarView } from './OpptjeningVilkarView';
 
@@ -32,6 +32,7 @@ interface Props {
  * Viser panel for å løse aksjonspunkt for avslått opptjeningsvilkår
  */
 export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }: Props) => {
+  const isReadOnly = useReadOnly();
   const {
     fagsak,
     behandling,
@@ -40,7 +41,6 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ status, fastsattOpptjening }
     vilkårForPanel,
     submitCallback,
     harÅpentAksjonspunkt,
-    isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<AvklarOpptjeningsvilkaretAp>();
   const intl = useIntl();

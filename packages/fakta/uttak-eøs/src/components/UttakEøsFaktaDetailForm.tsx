@@ -17,7 +17,7 @@ import {
   type UttakPeriodeType,
 } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { finnDager, finnUker, usePanelDataContext } from '@navikt/fp-utils';
+import { finnDager, finnUker, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import styles from './uttakEøsFaktaDetailForm.module.css';
 
@@ -39,7 +39,8 @@ interface Props {
 export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdater, slettPeriode, avbryt }: Props) => {
   const intl = useIntl();
 
-  const { isReadOnly, fagsak, alleKodeverk } = usePanelDataContext<BekreftUttaksperioderAp[]>();
+  const isReadOnly = useReadOnly();
+  const { fagsak, alleKodeverk } = usePanelDataContext<BekreftUttaksperioderAp[]>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: annenForelderUttakEøsPeriode ? buildInitialValues(annenForelderUttakEøsPeriode) : undefined,

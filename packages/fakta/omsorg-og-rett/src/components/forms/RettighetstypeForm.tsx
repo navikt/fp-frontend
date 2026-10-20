@@ -12,7 +12,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett, type Rettighetstype } from '@navikt/fp-types';
 import type { OverstyringRettigheterAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import styles from './overstyrRettigheterForm.module.css';
 
@@ -36,8 +36,8 @@ const RETTIGHETSTYPER = {
 
 export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt }: Props) => {
   const intl = useIntl();
-  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, isSubmittable } =
-    usePanelDataContext<OverstyringRettigheterAp>();
+  const isReadOnly = useReadOnly();
+  const { submitCallback, alleMerknaderFraBeslutter, isSubmittable } = usePanelDataContext<OverstyringRettigheterAp>();
 
   const formMethods = useForm<FormValues>({
     defaultValues: buildInitialValues(omsorgOgRett, aksjonspunkt),

@@ -15,7 +15,7 @@ import {
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
 import type { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { ReadOnlyProvider, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { ReadOnlyProvider, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
@@ -33,8 +33,8 @@ interface Props {
 }
 
 export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: Props) => {
-  const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } =
-    usePanelDataContext<BekreftAleneomsorgVurderingAp>();
+  const isReadOnly = useReadOnly();
+  const { submitCallback, alleMerknaderFraBeslutter } = usePanelDataContext<BekreftAleneomsorgVurderingAp>();
   const harUføretrygd = omsorgOgRett.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd ?? undefined;
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();

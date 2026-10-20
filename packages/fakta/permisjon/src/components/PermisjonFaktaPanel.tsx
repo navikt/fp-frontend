@@ -16,7 +16,7 @@ import type {
   BekreftetPermisjonStatus,
 } from '@navikt/fp-types';
 import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { ArbeidsforholdFieldArray } from './ArbeidsforholdFieldArray';
 
@@ -42,7 +42,8 @@ interface Props {
 }
 
 export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerPerId }: Props) => {
-  const { aksjonspunkterForPanel, fagsak, submitCallback, isReadOnly, alleKodeverk, isSubmittable } =
+  const isReadOnly = useReadOnly();
+  const { aksjonspunkterForPanel, fagsak, submitCallback, alleKodeverk, isSubmittable } =
     usePanelDataContext<VurderArbeidsforholdPermisjonAp>();
 
   const arbeidOgInntektMedPermisjon = {

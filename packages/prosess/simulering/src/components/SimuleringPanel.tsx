@@ -14,7 +14,7 @@ import type {
   TilbakekrevingValg,
 } from '@navikt/fp-types';
 import type { KontrollerEtterbetalingTilSøkerAP, VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { harAksjonspunkt, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { harAksjonspunkt, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import type { EtterbetalingSøkerFormValues, FeilutbetalingFormValues } from '../types/FormValues';
 import { EtterbetalingSøkerForm } from './EtterbetalingSøkerForm';
@@ -44,7 +44,8 @@ export const SimuleringPanel = ({
   tilbakekrevingvalg,
   arbeidsgiverOpplysningerPerId,
 }: Props) => {
-  const { aksjonspunkterForPanel, submitCallback, isReadOnly, harÅpentAksjonspunkt, fagsak, behandling } =
+  const isReadOnly = useReadOnly();
+  const { aksjonspunkterForPanel, submitCallback, harÅpentAksjonspunkt, fagsak, behandling } =
     usePanelDataContext<SimuleringAksjonspunkt[]>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();

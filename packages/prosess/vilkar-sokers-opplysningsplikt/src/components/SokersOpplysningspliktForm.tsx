@@ -21,7 +21,7 @@ import type {
   VilkårUtfallType,
 } from '@navikt/fp-types';
 import type { OverstyringSokersOpplysingspliktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { MangledeVedlegg } from './MangledeVedlegg';
 
@@ -39,6 +39,7 @@ interface Props {
  * Informasjon om søkers informasjonsplikt er godkjent eller avvist.
  */
 export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplysningerPerId }: Props) => {
+  const isReadOnly = useReadOnly();
   const {
     aksjonspunkterForPanel,
     vilkårForPanel,
@@ -46,7 +47,6 @@ export const SokersOpplysningspliktForm = ({ søknad, status, arbeidsgiverOpplys
     submitCallback,
     alleMerknaderFraBeslutter,
     harÅpentAksjonspunkt,
-    isReadOnly,
     behandling,
   } = usePanelDataContext<OverstyringSokersOpplysingspliktAp>();
 

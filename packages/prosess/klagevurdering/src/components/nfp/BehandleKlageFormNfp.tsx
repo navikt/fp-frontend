@@ -18,7 +18,7 @@ import type {
   KodeverkMedNavn,
 } from '@navikt/fp-types';
 import type { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import type { FormValues } from '../../types/FormValues';
 import { BekreftOgSubmitKlageModal } from './BekreftOgSubmitKlageModal';
@@ -82,8 +82,8 @@ interface Props {
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling av klage (NFP).
  */
 export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlage, alleAktuelleHjemler }: Props) => {
-  const { behandling, alleKodeverk, submitCallback, isReadOnly, isSubmittable } =
-    usePanelDataContext<KlageVurderingResultatAp>();
+  const isReadOnly = useReadOnly();
+  const { behandling, alleKodeverk, submitCallback, isSubmittable } = usePanelDataContext<KlageVurderingResultatAp>();
 
   const hjemmlerMedNavn = lagHjemlerMedNavn(alleKodeverk['KlageHjemmel'], lagHjemmelsKoder(alleAktuelleHjemler));
   const intl = useIntl();

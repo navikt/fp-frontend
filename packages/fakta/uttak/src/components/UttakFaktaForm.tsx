@@ -26,7 +26,7 @@ import type {
 } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
-import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { UttakFaktaTable } from './UttakFaktaTable';
@@ -160,13 +160,13 @@ export const UttakFaktaForm = ({
 }: Props) => {
   const intl = useIntl();
 
+  const isReadOnly = useReadOnly();
   const {
     alleKodeverk,
     isSubmittable: submittable,
     submitCallback,
     fagsak,
     aksjonspunkterForPanel,
-    isReadOnly,
   } = usePanelDataContext<BekreftUttaksperioderAp[]>();
 
   const sortertListe = [...uttakKontrollerFaktaPerioder].sort((krav1, krav2) =>

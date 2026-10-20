@@ -13,7 +13,7 @@ import {
 } from '@navikt/fp-fakta-felles';
 import type { Aksjonspunkt, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import type { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { type FormValues as OmsorgFormValues, OmsorgFaktaFields } from './OmsorgFaktaFields';
 
@@ -25,12 +25,12 @@ interface Props {
 }
 
 export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling }: Props) => {
+  const isReadOnly = useReadOnly();
   const {
     alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
     harÅpentAksjonspunkt,
-    isReadOnly,
     isSubmittable,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<BekreftOmsorgVurderingAp>();

@@ -20,6 +20,8 @@ type Props<AP_TYPE extends AksjonspunktType, B extends Behandling> = {
   submitCallback: (aksjonspunktData: AP_TYPE) => Promise<void>;
 };
 
+type PanelData<AP_TYPE extends AksjonspunktType, B extends Behandling> = Omit<Props<AP_TYPE, B>, 'isReadOnly'>;
+
 const PanelDataContext = createContext<unknown>(null);
 
 export const PanelDataProvider = <T extends AksjonspunktType, B extends Behandling = BehandlingFpSak>(
@@ -27,13 +29,13 @@ export const PanelDataProvider = <T extends AksjonspunktType, B extends Behandli
     children: ReactElement | null;
   } & Props<T, B>,
 ) => {
-  const { children, ...otherProps } = props;
+  const { children, isReadOnly, ...panelData } = props;
 
-  const value = useMemo(() => otherProps, [otherProps]);
+  const value = useMemo(() => panelData, [panelData]);
 
   return (
     <PanelDataContext value={value}>
-      <ReadOnlyProvider readOnly={otherProps.isReadOnly}>{children}</ReadOnlyProvider>
+      <ReadOnlyProvider readOnly={isReadOnly}>{children}</ReadOnlyProvider>
     </PanelDataContext>
   );
 };
@@ -46,5 +48,5 @@ export const usePanelDataContext = <
   if (!context) {
     throw new Error('PanelContext.Provider er ikke satt opp');
   }
-  return context as Props<AP_TYPE, B_TYPE>;
+  return context as PanelData<AP_TYPE, B_TYPE>;
 };

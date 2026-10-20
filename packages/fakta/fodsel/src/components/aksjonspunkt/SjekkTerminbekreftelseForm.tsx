@@ -19,6 +19,7 @@ import {
   terminBekreftelseBeforeTodayOrTermindato,
   useMellomlagretFormData,
   usePanelDataContext,
+  useReadOnly,
   validateMaxAntallBarn,
   validateMinAntallBarn,
 } from '@navikt/fp-utils';
@@ -39,7 +40,8 @@ interface Props {
 }
 
 export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunkt }: Props) => {
-  const { submitCallback, isSubmittable, isReadOnly } = usePanelDataContext<SjekkTerminbekreftelseAp>();
+  const isReadOnly = useReadOnly();
+  const { submitCallback, isSubmittable } = usePanelDataContext<SjekkTerminbekreftelseAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 

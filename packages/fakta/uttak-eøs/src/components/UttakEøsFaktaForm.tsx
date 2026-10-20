@@ -13,7 +13,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
-import { ReadOnlyProvider, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { ReadOnlyProvider, useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
@@ -25,7 +25,8 @@ interface Props {
 export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, harSattEndringsdato }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, isReadOnly, submitCallback, alleKodeverk } =
+  const isReadOnly = useReadOnly();
+  const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, submitCallback, alleKodeverk } =
     usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
   const sorterteAnnenForelderUttakEøs = annenForelderUttakEøs.toSorted(sortPeriodsByFom);
 

@@ -29,6 +29,7 @@ import {
   ReadOnlyProvider,
   useMellomlagretFormData,
   usePanelDataContext,
+  useReadOnly,
 } from '@navikt/fp-utils';
 
 import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
@@ -212,8 +213,8 @@ export const UttakProsessPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { fagsak, behandling, submitCallback, alleKodeverk, isReadOnly, aksjonspunkterForPanel } =
-    usePanelDataContext<UttakAp[]>();
+  const isReadOnly = useReadOnly();
+  const { fagsak, behandling, submitCallback, alleKodeverk, aksjonspunkterForPanel } = usePanelDataContext<UttakAp[]>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<PeriodeSoker[]>();
   const harMellomlagredeEndringer =

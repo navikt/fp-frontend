@@ -9,7 +9,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fødsel, FødselGjeldende } from '@navikt/fp-types';
 import type { SjekkManglendeFødselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { ErBarnFødt, type ErBarnFødtFormValues } from '../form/ErBarnFødt';
 import { Termindato, type TermindatoFormValues } from '../form/Termindato';
@@ -23,7 +23,8 @@ interface Props {
 }
 
 export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, søknad, register } }: Props) => {
-  const { submitCallback, isReadOnly, isSubmittable } = usePanelDataContext<SjekkManglendeFødselAp>();
+  const isReadOnly = useReadOnly();
+  const { submitCallback, isSubmittable } = usePanelDataContext<SjekkManglendeFødselAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
