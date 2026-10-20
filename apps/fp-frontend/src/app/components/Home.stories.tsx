@@ -18,7 +18,8 @@ import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const getHref = (rel: string) => getCleanUrlString(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
+const getHref = (rel: string) =>
+  getCleanUrlString(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 
 const PERSON = {
   navn: 'Espen Utvikler',

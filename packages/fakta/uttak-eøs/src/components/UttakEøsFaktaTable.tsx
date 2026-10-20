@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
-import { Alert, Box, Button, Heading, Table } from '@navikt/ds-react';
+import { Alert, BodyShort, Box, Button, Heading, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
@@ -66,7 +66,9 @@ export const UttakEøsFaktaTable = ({
           <Table.Row shadeOnHover={false}>
             <Table.DataCell colSpan={4}>
               <Alert inline variant="info" size="small">
-                <FormattedMessage id="UttakEøsFaktaForm.IngenPerioderRegistrert" tagName="i" />
+                <BodyShort size="small" textColor="subtle">
+                  <FormattedMessage id="UttakEøsFaktaForm.IngenPerioderRegistrert" />
+                </BodyShort>
               </Alert>
             </Table.DataCell>
           </Table.Row>

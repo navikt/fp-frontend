@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyLong, Box, Table } from '@navikt/ds-react';
+import { BodyShort, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { KodeverkMedNavn, Personadresse } from '@navikt/fp-types';
@@ -23,11 +23,9 @@ export const AdresseTabell = ({
 }: AdresseTabellProps) => {
   if (harSammeAdresser) {
     return (
-      <Box padding="space-16">
-        <BodyLong textColor="subtle">
-          <FormattedMessage id="AdresseTabell.SammeAdresse" />
-        </BodyLong>
-      </Box>
+      <BodyShort className="pt-2" textColor="subtle">
+        <FormattedMessage id="AdresseTabell.SammeAdresse" />
+      </BodyShort>
     );
   }
 
@@ -36,20 +34,18 @@ export const AdresseTabell = ({
   return (
     <>
       {adresser.length === 0 && (
-        <Box padding="space-16">
-          <BodyLong textColor="subtle">
-            <FormattedMessage id="AdresseTabell.IngenAdresse" values={{ erAnnenpart }} />
-          </BodyLong>
-        </Box>
+        <BodyShort className="pt-2" textColor="subtle">
+          <FormattedMessage id="AdresseTabell.IngenAdresse" values={{ erAnnenpart }} />
+        </BodyShort>
       )}
       {adresser.length > 0 && (
-        <Table style={{ tableLayout: 'fixed' }}>
+        <Table>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>
+              <Table.HeaderCell className="w-54">
                 <FormattedMessage id="AdresseTabell.PeriodeLabel" />
               </Table.HeaderCell>
-              <Table.HeaderCell>
+              <Table.HeaderCell className="w-100">
                 <FormattedMessage id="AdresseTabell.AdresseLabel" />
               </Table.HeaderCell>
               <Table.HeaderCell>

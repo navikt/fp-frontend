@@ -120,7 +120,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
     expect(screen.getByText('Ingen inntekt registrert på bruker i A-ordningen siste seks mnd.')).toBeInTheDocument();
-    expect(screen.queryByText('Inntekter (fra A-ordningen)')).not.toBeInTheDocument();
+    expect(screen.getByText('Inntekter (fra A-ordningen)')).toBeInTheDocument();
   });
 
   it('skal vise at inntektsmelding er innhentet og behandling er avsluttet', async () => {

@@ -58,8 +58,8 @@ export const SakslisteVelgerForm = ({ sakslister, setValgtSakslisteId, fetchAnta
         <Label size="small">
           <FormattedMessage id="SakslisteVelgerForm.Saksliste" />
         </Label>
-        <BodyShort>
-          <FormattedMessage id="SakslisteVelgerForm.IkkeOppfort" tagName="i" />
+        <BodyShort textColor="subtle">
+          <FormattedMessage id="SakslisteVelgerForm.IkkeOppfort" />
         </BodyShort>
       </VStack>
     );

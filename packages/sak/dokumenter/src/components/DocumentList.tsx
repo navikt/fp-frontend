@@ -70,8 +70,8 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
 
   if (documents.length === 0) {
     return (
-      <BodyShort size="small" spacing>
-        <FormattedMessage tagName="i" id="DocumentList.NoDocuments" />
+      <BodyShort size="small" spacing textColor="subtle">
+        <FormattedMessage id="DocumentList.NoDocuments" />
       </BodyShort>
     );
   }

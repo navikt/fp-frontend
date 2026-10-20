@@ -14,7 +14,8 @@ import { initFetchFpsak, initFetchFptilbake } from '../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { AktørIndex } from './AktørIndex';
 
-const getHref = (rel: string) => getCleanUrlString(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
+const getHref = (rel: string) =>
+  getCleanUrlString(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 
 const PERSON = {
   navn: 'Espen Utvikler',

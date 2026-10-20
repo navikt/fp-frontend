@@ -2,7 +2,7 @@ import { type ReactElement, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Button, Heading, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
@@ -101,7 +101,11 @@ export const SimuleringPanel = ({
           )}
         </>
       )}
-      {!simuleringResultat && <FormattedMessage id="Simulering.ingenData" />}
+      {!simuleringResultat && (
+        <BodyShort size="small" textColor="subtle">
+          <FormattedMessage id="Simulering.ingenData" />
+        </BodyShort>
+      )}
       {skalHaForm && (
         <RhfForm
           formMethods={formMethods}

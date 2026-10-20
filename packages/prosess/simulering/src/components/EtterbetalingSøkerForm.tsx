@@ -11,8 +11,6 @@ import type { KontrollerEtterbetalingTilSøkerAP } from '@navikt/fp-types-avklar
 
 import type { EtterbetalingSøkerFormValues } from '../types/FormValues';
 
-import styles from './etterbetalingSøkerForm.module.css';
-
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
@@ -32,10 +30,7 @@ export const EtterbetalingSøkerForm = ({ readOnly, aksjonspunkt }: Props) => {
 
   return (
     <VStack gap="space-16">
-      <ReadMore
-        header={<FormattedMessage id="Simulering.Etterbetaling.ReadMoreTittel" />}
-        className={styles['readMore']}
-      >
+      <ReadMore header={<FormattedMessage id="Simulering.Etterbetaling.ReadMoreTittel" />} className="w-5xl">
         <FormattedMessage id="Simulering.Etterbetaling.ReadMoreInnhold" />
       </ReadMore>
       <RhfTextarea

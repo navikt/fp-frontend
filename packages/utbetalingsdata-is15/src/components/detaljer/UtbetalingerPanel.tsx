@@ -13,7 +13,7 @@ export const UtbetalingerPanel = ({ utbetalinger }: Props) => (
   <VStack gap="space-16">
     <div />
     {(!utbetalinger || utbetalinger.length === 0) && (
-      <BodyShort size="small">
+      <BodyShort size="small" textColor="subtle">
         <FormattedMessage id="UtbetalingerPanel.IngenUtbetalinger" />
       </BodyShort>
     )}

@@ -1,9 +1,7 @@
-import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, HStack, Popover, Radio, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, HelpText, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
@@ -79,10 +77,6 @@ export const ManglendeInntektsmeldingForm = ({
     });
   };
 
-  const svgRef = useRef<SVGSVGElement>(null);
-  const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
-
   return (
     <RhfForm formMethods={formMethods} onSubmit={lagre}>
       <VStack gap="space-16">
@@ -99,33 +93,19 @@ export const ManglendeInntektsmeldingForm = ({
           legend={
             <HStack gap="space-8">
               <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
-              <QuestionmarkDiamondIcon
-                ref={svgRef}
-                onClick={toggleHjelpetekst}
-                className={styles['svg']}
-                title={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}
-              />
-              <Popover
-                open={openState}
-                onClose={toggleHjelpetekst}
-                /* eslint-disable react-hooks/refs */
-                anchorEl={svgRef.current}
-                className={styles['hjelpetekst']}
-              >
-                <Popover.Content className={styles['hjelpetekstInnhold']}>
-                  <VStack gap="space-16">
-                    <BodyShort>
-                      <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
-                    </BodyShort>
-                    <BodyShort>
-                      <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
-                    </BodyShort>
-                    <BodyShort>
-                      <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
-                    </BodyShort>
-                  </VStack>
-                </Popover.Content>
-              </Popover>
+              <HelpText content={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}>
+                <VStack gap="space-16">
+                  <BodyShort>
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
+                  </BodyShort>
+                  <BodyShort>
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
+                  </BodyShort>
+                  <BodyShort>
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
+                  </BodyShort>
+                </VStack>
+              </HelpText>
             </HStack>
           }
           validate={[required]}

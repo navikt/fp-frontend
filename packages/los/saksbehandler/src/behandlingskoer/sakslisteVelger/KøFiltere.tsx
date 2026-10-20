@@ -86,7 +86,7 @@ export const KøFiltere = ({ valgtSaksliste }: Props) => {
           fieldType="component"
           value={
             sorterteSaksbehandlere.length === 0 ? (
-              <BodyShort size="small">
+              <BodyShort size="small" textColor="subtle">
                 <FormattedMessage id="SakslisteVelgerForm.Ingen" />
               </BodyShort>
             ) : (

@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { Heading, VStack } from '@navikt/ds-react';
+import { BodyShort, Heading, VStack } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -31,7 +31,9 @@ export const ArbeidsforholdInfoPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysnin
         <FormattedMessage id="ArbeidsforholdInfoPanel.ArbeidsforholdHeader" />
       </Heading>
       {sorterteArbeidsforhold.length === 0 && (
-        <FormattedMessage id="PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert" />
+        <BodyShort size="small" textColor="subtle">
+          <FormattedMessage id="PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert" />
+        </BodyShort>
       )}
       {sorterteArbeidsforhold.length > 0 && (
         <PersonArbeidsforholdTable

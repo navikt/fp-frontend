@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyLong, Label, Table } from '@navikt/ds-react';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Table } from '@navikt/ds-react';
+import { DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
@@ -22,30 +22,32 @@ export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: P
 
   const sortertRegion = regioner.toSorted(sorterPerioder);
 
-  const rowStyle = (index: number) => (index + 1 === sortertRegion.length ? { border: '0px' } : {});
-
   if (sortertRegion.length === 0)
     return (
-      <>
-        <Label size="small">
-          <FormattedMessage id="OpplysningerOmPersonstatus.RegionLabel" />
-        </Label>
-        <BodyLong textColor="subtle">
-          <FormattedMessage
-            id="OpplysningerOmPersonstatus.RegionIngen"
-            values={{ type: 'Region' satisfies KodeverkType, erAnnenpart }}
-          />
-        </BodyLong>
-      </>
+      <LabeledValue
+        size="medium"
+        label={<FormattedMessage id="OpplysningerOmPersonstatus.RegionLabel" />}
+        value={
+          <BodyShort size="small" textColor="subtle">
+            <FormattedMessage
+              id="OpplysningerOmPersonstatus.RegionIngen"
+              values={{ type: 'Region' satisfies KodeverkType, erAnnenpart }}
+            />
+          </BodyShort>
+        }
+      />
     );
   return (
-    <Table className="table-fixed" aria-label={`Region for ${erAnnenpart ? 'annenpart' : 'bruker'}`}>
+    <Table
+      aria-label={`Region for ${erAnnenpart ? 'annenpart' : 'bruker'}`}
+      className="[&>tbody>tr:last-child>td]:border-0"
+    >
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>
+          <Table.HeaderCell className="w-60">
             <FormattedMessage id="OpplysningerOmPersonstatus.RegionLabel" />
           </Table.HeaderCell>
-          <Table.HeaderCell>
+          <Table.HeaderCell className="w-32">
             <FormattedMessage id="OpplysningerOmPersonstatus.Fom" />
           </Table.HeaderCell>
           <Table.HeaderCell>
@@ -54,15 +56,13 @@ export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: P
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {sortertRegion.map((r, index) => (
+        {sortertRegion.map(r => (
           <Table.Row key={`${r.fom}-${r.tom}-${r.type}`}>
-            <Table.DataCell style={rowStyle(index)}>{getRegion(r)}</Table.DataCell>
-            <Table.DataCell style={rowStyle(index)}>
+            <Table.DataCell>{getRegion(r)}</Table.DataCell>
+            <Table.DataCell>
               <DateLabel dateString={r.fom} />
             </Table.DataCell>
-            <Table.DataCell style={rowStyle(index)}>
-              {r.tom !== TIDENES_ENDE && <DateLabel dateString={r.tom} />}
-            </Table.DataCell>
+            <Table.DataCell>{r.tom !== TIDENES_ENDE && <DateLabel dateString={r.tom} />}</Table.DataCell>
           </Table.Row>
         ))}
       </Table.Body>
