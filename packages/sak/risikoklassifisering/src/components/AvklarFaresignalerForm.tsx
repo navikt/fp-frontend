@@ -13,6 +13,7 @@ import {
   type KodeverkMedNavn,
   type Risikoklassifisering,
 } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
 
@@ -31,7 +32,6 @@ type Values = {
 
 interface Props {
   aksjonspunkt: Aksjonspunkt;
-  readOnly: boolean;
   risikoklassifisering?: Risikoklassifisering;
   submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
   faresignalVurderinger: KodeverkMedNavn<'FaresignalVurdering'>[];
@@ -43,12 +43,12 @@ interface Props {
  * Statisk visning av panel som tilsier ingen faresignaler funnet i behandlingen.
  */
 export const AvklarFaresignalerForm = ({
-  readOnly,
   aksjonspunkt,
   faresignalVurderinger,
   risikoklassifisering,
   submitCallback,
 }: Props) => {
+  const readOnly = useReadOnly();
   const underkategoriFaresignalVurderinger = faresignalVurderinger.filter(
     vurdering => vurdering.kode !== 'INNVIRKNING' && vurdering.kode !== 'INGEN_INNVIRKNING',
   );

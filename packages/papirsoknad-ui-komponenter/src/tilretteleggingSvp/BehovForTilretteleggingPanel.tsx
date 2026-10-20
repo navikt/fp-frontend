@@ -8,6 +8,8 @@ import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 import { TrueFalseInput } from '../felles/TrueFalseInput';
 import { BehovForTilretteleggingFieldArray } from './components/BehovForTilretteleggingFieldArray';
 import { TilretteleggingForArbeidsgiverFieldArray } from './components/TilretteleggingForArbeidsgiverFieldArray';
@@ -25,11 +27,8 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface Props {
-  readOnly: boolean;
-}
-
-export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
+export const BehovForTilretteleggingPanel = () => {
+  const readOnly = useReadOnly();
   const { watch, setError, clearErrors, formState, control } = useFormContext<FormValues>();
 
   const [sokSN, sokFrilans, sokArbeid] = watch([
@@ -66,7 +65,6 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`}
             control={control}
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" />}
-            readOnly={readOnly}
             trueContent={
               <ArrowBox>
                 <VStack gap="space-16">
@@ -82,7 +80,6 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
                   />
                   <BehovForTilretteleggingFieldArray
                     name={`${TILRETTELEGGING_NAME_PREFIX}.${SELVSTENDIG_NARINGSDRIVENDE_FIELD}.tilrettelegginger`}
-                    readOnly={readOnly}
                   />
                 </VStack>
               </ArrowBox>
@@ -93,7 +90,6 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`}
             control={control}
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForFrilans" />}
-            readOnly={readOnly}
             trueContent={
               <ArrowBox>
                 <VStack gap="space-16">
@@ -109,7 +105,6 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
                   />
                   <BehovForTilretteleggingFieldArray
                     name={`${TILRETTELEGGING_NAME_PREFIX}.${FRILANS_FIELD}.${BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME}`}
-                    readOnly={readOnly}
                   />
                 </VStack>
               </ArrowBox>
@@ -119,14 +114,13 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForArbeidsgiver`}
             control={control}
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForArbeidsgiver" />}
-            readOnly={readOnly}
             trueContent={
               <ArrowBox>
                 <VStack gap="space-16">
                   <Heading size="small" level="4">
                     <FormattedMessage id="BehovForTilretteleggingPanel.TittelArbeidstaker" />
                   </Heading>
-                  <TilretteleggingForArbeidsgiverFieldArray readOnly={readOnly} />
+                  <TilretteleggingForArbeidsgiverFieldArray />
                 </VStack>
               </ArrowBox>
             }

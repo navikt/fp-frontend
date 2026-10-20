@@ -16,7 +16,7 @@ import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { removeSpacesFromNumber } from '@navikt/ft-utils';
 
 import type { FamilieHendelseType, OmsorgDto } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { notEmpty, useReadOnly } from '@navikt/fp-utils';
 
 const OMSORG_NAME_PREFIX = 'omsorg';
 const MAX_ANTALL_BARN = 10;
@@ -39,7 +39,6 @@ type OmsorgOgAdopsjonFormValues = {
 
 interface Props {
   familieHendelseType: FamilieHendelseType;
-  readOnly: boolean;
   isForeldrepengerFagsak: boolean;
   fødselsdato: string | undefined;
 }
@@ -50,12 +49,8 @@ interface Props {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad ved adopsjon og omsorgsovertakelse.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-export const OmsorgOgAdopsjonPanel = ({
-  readOnly,
-  familieHendelseType,
-  isForeldrepengerFagsak,
-  fødselsdato,
-}: Props) => {
+export const OmsorgOgAdopsjonPanel = ({ familieHendelseType, isForeldrepengerFagsak, fødselsdato }: Props) => {
+  const readOnly = useReadOnly();
   const erAdopsjon = familieHendelseType === 'ADPSJN';
 
   const { control } = useFormContext<OmsorgOgAdopsjonFormValues>();

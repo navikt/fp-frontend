@@ -6,6 +6,8 @@ import { RhfCheckbox, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 const maxLength1500 = maxLength(1500);
 
 type LagreSoknadFormValues = {
@@ -17,7 +19,6 @@ type LagreSoknadFormValues = {
 interface Props {
   onSubmitUfullstendigsoknad: () => Promise<void>;
   onMellomlagre?: () => void;
-  readOnly?: boolean;
   submitting: boolean;
   erEndringssøknad: boolean;
 }
@@ -26,9 +27,9 @@ export const LagreSoknadPanel = ({
   submitting,
   onSubmitUfullstendigsoknad,
   onMellomlagre,
-  readOnly = true,
   erEndringssøknad,
 }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const { watch, control } = useFormContext<LagreSoknadFormValues>();

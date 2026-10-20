@@ -10,7 +10,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField } from '@nav
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import type { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { ReadOnlyProvider, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakDokumentasjonFaktaTable } from './UttakDokumentasjonFaktaTable/UttakDokumentasjonFaktaTable';
 
@@ -73,12 +73,13 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
           <FormattedMessage id="UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst" />
         </AksjonspunktHelpTextHTML>
       )}
-      <UttakDokumentasjonFaktaTable
-        dokumentasjonVurderingBehov={dokBehov}
-        oppdaterDokBehov={setDokBehov}
-        setDirty={setIsDirty}
-        readOnly={readOnly}
-      />
+      <ReadOnlyProvider readOnly={readOnly}>
+        <UttakDokumentasjonFaktaTable
+          dokumentasjonVurderingBehov={dokBehov}
+          oppdaterDokBehov={setDokBehov}
+          setDirty={setIsDirty}
+        />
+      </ReadOnlyProvider>
       <RhfForm
         formMethods={formMethods}
         setDataOnUnmount={(values: FaktaBegrunnelseFormValues) => setMellomlagretFormData({ ...values, dokBehov })}

@@ -10,11 +10,7 @@ import type { FrilansFormValues } from '../types';
 import { FrilansOppdragForFamiliePanel } from './FrilansOppdragForFamiliePanel';
 import { FrilansPerioderFieldArray } from './FrilansPerioderFieldArray';
 
-interface Props {
-  readOnly: boolean;
-}
-
-export const FrilansPanel = ({ readOnly }: Props) => {
+export const FrilansPanel = () => {
   const { control } = useFormContext<FrilansFormValues>();
   return (
     <BorderBox>
@@ -27,7 +23,6 @@ export const FrilansPanel = ({ readOnly }: Props) => {
           name={`${FRILANS_NAME_PREFIX}.harSøkerPeriodeMedFrilans`}
           control={control}
           label={<FormattedMessage id="Registrering.Frilans.HarFrilansvirksomhet" />}
-          readOnly={readOnly}
           trueContent={
             <ArrowBox>
               <VStack gap="space-16">
@@ -35,23 +30,21 @@ export const FrilansPanel = ({ readOnly }: Props) => {
                   <FormattedMessage id="Registrering.Frilans.OppgiPeriode" />
                 </Detail>
 
-                <FrilansPerioderFieldArray readOnly={readOnly} />
+                <FrilansPerioderFieldArray />
 
                 <TrueFalseInput
                   name={`${FRILANS_NAME_PREFIX}.erNyoppstartetFrilanser`}
                   control={control}
                   label={<FormattedMessage id="Registrering.Frilans.ErNyoppstartedFrilanser" />}
-                  readOnly={readOnly}
                 />
 
                 <TrueFalseInput
                   name={`${FRILANS_NAME_PREFIX}.harInntektFraFosterhjem`}
                   control={control}
                   label={<FormattedMessage id="Registrering.Frilans.HarInntektFraForsterhjem" />}
-                  readOnly={readOnly}
                 />
 
-                <FrilansOppdragForFamiliePanel readOnly={readOnly} />
+                <FrilansOppdragForFamiliePanel />
               </VStack>
             </ArrowBox>
           }

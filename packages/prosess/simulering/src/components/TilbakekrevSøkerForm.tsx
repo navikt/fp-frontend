@@ -11,6 +11,7 @@ import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fagsak, TilbakekrevingValg, TilbakekrevingVidereBehandling } from '@navikt/fp-types';
 import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { type FeilutbetalingFormValues, TILBAKEKR_OPPRETT_UTEN_VARSEL } from '../types/FormValues';
 
@@ -21,11 +22,11 @@ interface Props {
   fagsak: Fagsak;
   språkkode: string;
   aksjonspunkt?: Aksjonspunkt;
-  readOnly: boolean;
   previewCallback: (params: { mottaker: string; fritekst: string }) => void;
 }
 
-export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, aksjonspunkt, fagsak }: Props) => {
+export const TilbakekrevSøkerForm = ({ språkkode, previewCallback, aksjonspunkt, fagsak }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const { watch, control } = useFormContext<FeilutbetalingFormValues>();

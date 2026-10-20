@@ -14,7 +14,7 @@ import { createIntl, TIDENES_ENDE } from '@navikt/ft-utils';
 
 import type { FaktaBegrunnelseFormValues } from '@navikt/fp-fakta-felles';
 import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving, Verge, VergeType } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { notEmpty, useReadOnly } from '@navikt/fp-utils';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -23,7 +23,6 @@ const intl = createIntl(messages);
 export type VergeFormValues = Verge;
 
 interface Props {
-  readOnly: boolean;
   vergetyper: KodeverkMedNavn<'VergeType'>[] | KodeverkMedNavnTilbakekreving<'VergeType'>[];
   valgtVergeType: VergeType | undefined;
 }
@@ -33,7 +32,8 @@ interface Props {
  *
  * Formkomponent. Registrering og oppdatering av verge.
  */
-export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType }: Props) => {
+export const RegistrereVergeForm = ({ vergetyper = [], valgtVergeType }: Props) => {
+  const readOnly = useReadOnly();
   const { control, getValues } = useFormContext<VergeFormValues & FaktaBegrunnelseFormValues>();
   return (
     <VStack gap="space-16">

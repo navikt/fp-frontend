@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
@@ -5,13 +6,14 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, type ReadOnlyArgs, withReadOnly } from '@navikt/fp-storybook-utils';
 
 import { AnnenForelderPapirsoknadIndex } from './AnnenForelderPapirsoknadIndex';
 
 const meta = {
   title: 'ui-komponenter/annen-forelder',
   component: AnnenForelderPapirsoknadIndex,
+  decorators: [withReadOnly],
   args: {
     readOnly: false,
     alleKodeverk: alleKodeverk,
@@ -39,7 +41,7 @@ const meta = {
       </RhfForm>
     );
   },
-} satisfies Meta<typeof AnnenForelderPapirsoknadIndex>;
+} satisfies Meta<ComponentProps<typeof AnnenForelderPapirsoknadIndex> & ReadOnlyArgs>;
 
 export default meta;
 

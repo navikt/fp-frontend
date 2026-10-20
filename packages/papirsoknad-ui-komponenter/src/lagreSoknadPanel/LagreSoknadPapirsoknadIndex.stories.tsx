@@ -1,17 +1,18 @@
+import type { ComponentProps } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { promiseAction, withRouter } from '@navikt/fp-storybook-utils';
+import { promiseAction, type ReadOnlyArgs, withReadOnly, withRouter } from '@navikt/fp-storybook-utils';
 
 import { LagreSoknadPapirsoknadIndex } from './LagreSoknadPapirsoknadIndex';
 
 const meta = {
   title: 'ui-komponenter/lagre-soknad',
   component: LagreSoknadPapirsoknadIndex,
-  decorators: [withRouter],
+  decorators: [withReadOnly, withRouter],
   parameters: {
     submitCallback: action('onSubmit'),
   },
@@ -26,7 +27,7 @@ const meta = {
       </RhfForm>
     );
   },
-} satisfies Meta<typeof LagreSoknadPapirsoknadIndex>;
+} satisfies Meta<ComponentProps<typeof LagreSoknadPapirsoknadIndex> & ReadOnlyArgs>;
 
 export default meta;
 

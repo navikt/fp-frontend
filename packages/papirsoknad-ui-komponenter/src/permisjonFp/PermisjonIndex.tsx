@@ -12,19 +12,13 @@ const intl = createIntl(messages);
 
 interface Props {
   foreldreType: ForeldreType;
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   erEndringssøknad: boolean;
 }
 
-export const PermisjonIndex = ({ foreldreType, readOnly, alleKodeverk, erEndringssøknad }: Props) => (
+export const PermisjonIndex = ({ foreldreType, alleKodeverk, erEndringssøknad }: Props) => (
   <RawIntlProvider value={intl}>
-    <PermisjonPanel
-      readOnly={readOnly}
-      foreldreType={foreldreType}
-      alleKodeverk={alleKodeverk}
-      erEndringssøknad={erEndringssøknad}
-    />
+    <PermisjonPanel foreldreType={foreldreType} alleKodeverk={alleKodeverk} erEndringssøknad={erEndringssøknad} />
   </RawIntlProvider>
 );
 

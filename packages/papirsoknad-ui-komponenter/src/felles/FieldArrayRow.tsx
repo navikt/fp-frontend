@@ -5,14 +5,16 @@ import { HStack } from '@navikt/ds-react';
 import { RhfFieldArrayRemoveButton } from '@navikt/ft-form-hooks';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 interface Props {
   children: React.ReactNode;
   remove: UseFieldArrayRemove;
   index: number;
-  readOnly: boolean;
 }
 
-export const FieldArrayRow = ({ children, remove, readOnly, index }: Props) => {
+export const FieldArrayRow = ({ children, remove, index }: Props) => {
+  const readOnly = useReadOnly();
   return (
     <>
       {index > 0 && <AvsnittSkiller spaceUnder spaceAbove />}

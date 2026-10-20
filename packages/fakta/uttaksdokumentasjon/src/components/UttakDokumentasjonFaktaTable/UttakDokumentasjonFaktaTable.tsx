@@ -34,16 +34,10 @@ const HEADER_TEXT_CODES = [
 interface Props {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
   oppdaterDokBehov: (dokBehov: DokumentasjonVurderingBehov[]) => void;
-  readOnly: boolean;
   setDirty: (isDirty: boolean) => void;
 }
 
-export const UttakDokumentasjonFaktaTable = ({
-  dokumentasjonVurderingBehov,
-  oppdaterDokBehov,
-  readOnly,
-  setDirty,
-}: Props) => {
+export const UttakDokumentasjonFaktaTable = ({ dokumentasjonVurderingBehov, oppdaterDokBehov, setDirty }: Props) => {
   const [valgtDokBehovFomDatoer, setValgtDokBehovFomDatoer] = useState<string[]>(() => {
     const fom = dokumentasjonVurderingBehov.find(oa => !oa.vurdering)?.fom;
     return fom ? [fom] : [];
@@ -123,7 +117,6 @@ export const UttakDokumentasjonFaktaTable = ({
                     <UttakDokumentasjonFaktaDetailForm
                       key={behov.fom}
                       behov={behov}
-                      readOnly={readOnly}
                       submit={oppdaterPeriode}
                       cancel={() => velgDokBehovFomDato(behov.fom)}
                     />

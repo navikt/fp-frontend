@@ -22,6 +22,7 @@
     "@navikt/ds-react": "8.19.1",
     "@navikt/fp-fakta-verge": "workspace:*",
     "@navikt/fp-types": "workspace:*",
+    "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-form-hooks": "13.0.2",
     "@navikt/ft-form-validators": "7.0.2",
     "@navikt/ft-ui-komponenter": "9.0.2",

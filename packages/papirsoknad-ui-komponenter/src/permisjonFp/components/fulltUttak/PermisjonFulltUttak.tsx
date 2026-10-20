@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
 import type { AlleKodeverk, TidsromPermisjonDto } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { notEmpty, useReadOnly } from '@navikt/fp-utils';
 
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FormValuesFulltUttak, PermisjonFormValues } from '../../types';
@@ -14,11 +14,11 @@ import { RenderPermisjonPeriodeFieldArray } from './RenderPermisjonPeriodeFieldA
 
 interface Props {
   søkerErMor: boolean;
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
-export const PermisjonFulltUttak = ({ søkerErMor, readOnly, alleKodeverk }: Props) => {
+export const PermisjonFulltUttak = ({ søkerErMor, alleKodeverk }: Props) => {
+  const readOnly = useReadOnly();
   const { watch, control } = useFormContext<PermisjonFormValues>();
   const fulltUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`);
 
@@ -33,9 +33,7 @@ export const PermisjonFulltUttak = ({ søkerErMor, readOnly, alleKodeverk }: Pro
         readOnly={readOnly}
         label={<FormattedMessage id="Registrering.Permisjon.FulltUttak" />}
       />
-      {fulltUttak && (
-        <RenderPermisjonPeriodeFieldArray søkerErMor={søkerErMor} readOnly={readOnly} alleKodeverk={alleKodeverk} />
-      )}
+      {fulltUttak && <RenderPermisjonPeriodeFieldArray søkerErMor={søkerErMor} alleKodeverk={alleKodeverk} />}
     </VStack>
   );
 };

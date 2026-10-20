@@ -7,7 +7,7 @@ import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import type { AlleKodeverk, AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
-import { finnDager, finnUker } from '@navikt/fp-utils';
+import { finnDager, finnUker, useReadOnly } from '@navikt/fp-utils';
 
 import { finnTrekkkonto, UttakEøsFaktaDetailForm } from './UttakEøsFaktaDetailForm';
 
@@ -16,7 +16,6 @@ import styles from './uttakEøsFaktaTable.module.css';
 interface Props {
   annenForelderUttakEøsPerioder: AnnenforelderUttakEøsPeriode[];
   setPerioder: React.Dispatch<React.SetStateAction<AnnenforelderUttakEøsPeriode[]>>;
-  isReadOnly: boolean;
   erRedigerbart?: boolean;
   visLeggTilPeriodeForm?: boolean;
   setVisLeggTilPeriodeForm: (vis: boolean) => void;
@@ -27,97 +26,98 @@ interface Props {
 export const UttakEøsFaktaTable = ({
   annenForelderUttakEøsPerioder,
   setPerioder,
-  isReadOnly,
   erRedigerbart,
   visLeggTilPeriodeForm,
   setVisLeggTilPeriodeForm,
   setDirty,
   alleKodeverk,
-}: Props) => (
-  <>
-    <Table className={styles['table']}>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell scope="col">
-            <FormattedMessage id="UttakEøsFaktaTable.Periode" />
-          </Table.HeaderCell>
-          <Table.HeaderCell scope="col">
-            <FormattedMessage id="UttakEøsFaktaTable.Kontotype" />
-          </Table.HeaderCell>
-          <Table.HeaderCell scope="col">
-            <FormattedMessage id="UttakEøsFaktaTable.Trekkdager" />
-          </Table.HeaderCell>
-          <Table.HeaderCell />
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        {annenForelderUttakEøsPerioder.map((annenForelderUttakEøsPeriode, periodIndex) => (
-          <Rad
-            key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
-            annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
-            rowIndex={periodIndex}
-            setPerioder={setPerioder}
-            isReadOnly={isReadOnly}
-            setDirty={setDirty}
-            alleKodeverk={alleKodeverk}
-          />
-        ))}
-        {annenForelderUttakEøsPerioder.length === 0 && (
-          <Table.Row shadeOnHover={false}>
-            <Table.DataCell colSpan={4}>
-              <Alert inline variant="info" size="small">
-                <BodyShort size="small" textColor="subtle">
-                  <FormattedMessage id="UttakEøsFaktaForm.IngenPerioderRegistrert" />
-                </BodyShort>
-              </Alert>
-            </Table.DataCell>
+}: Props) => {
+  const isReadOnly = useReadOnly();
+  return (
+    <>
+      <Table className={styles['table']}>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="UttakEøsFaktaTable.Periode" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="UttakEøsFaktaTable.Kontotype" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="UttakEøsFaktaTable.Trekkdager" />
+            </Table.HeaderCell>
+            <Table.HeaderCell />
           </Table.Row>
-        )}
-      </Table.Body>
-    </Table>
+        </Table.Header>
+        <Table.Body>
+          {annenForelderUttakEøsPerioder.map((annenForelderUttakEøsPeriode, periodIndex) => (
+            <Rad
+              key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
+              annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
+              rowIndex={periodIndex}
+              setPerioder={setPerioder}
+              setDirty={setDirty}
+              alleKodeverk={alleKodeverk}
+            />
+          ))}
+          {annenForelderUttakEøsPerioder.length === 0 && (
+            <Table.Row shadeOnHover={false}>
+              <Table.DataCell colSpan={4}>
+                <Alert inline variant="info" size="small">
+                  <BodyShort size="small" textColor="subtle">
+                    <FormattedMessage id="UttakEøsFaktaForm.IngenPerioderRegistrert" />
+                  </BodyShort>
+                </Alert>
+              </Table.DataCell>
+            </Table.Row>
+          )}
+        </Table.Body>
+      </Table>
 
-    {erRedigerbart && visLeggTilPeriodeForm && (
-      <Box background="sunken" padding="space-16">
-        <Heading size="small" level="3">
-          <FormattedMessage id="UttakEøsFaktaForm.NyPeriode" />
-        </Heading>
-        <UttakEøsFaktaDetailForm
-          oppdater={(nyPeriode: AnnenforelderUttakEøsPeriode) => {
-            setPerioder(prevPerioder => [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))));
-            setVisLeggTilPeriodeForm(false);
-            setDirty(true);
-          }}
-          avbryt={() => setVisLeggTilPeriodeForm(false)}
-        />
-      </Box>
-    )}
-    {erRedigerbart && !visLeggTilPeriodeForm && (
-      <div>
-        <Button
-          size="small"
-          variant="tertiary"
-          type="button"
-          icon={<PlusCircleIcon />}
-          onClick={() => setVisLeggTilPeriodeForm(true)}
-          disabled={isReadOnly}
-        >
-          <FormattedMessage id="UttakEøsFaktaForm.LeggTilPeriode" />
-        </Button>
-      </div>
-    )}
-  </>
-);
+      {erRedigerbart && visLeggTilPeriodeForm && (
+        <Box background="sunken" padding="space-16">
+          <Heading size="small" level="3">
+            <FormattedMessage id="UttakEøsFaktaForm.NyPeriode" />
+          </Heading>
+          <UttakEøsFaktaDetailForm
+            oppdater={(nyPeriode: AnnenforelderUttakEøsPeriode) => {
+              setPerioder(prevPerioder => [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))));
+              setVisLeggTilPeriodeForm(false);
+              setDirty(true);
+            }}
+            avbryt={() => setVisLeggTilPeriodeForm(false)}
+          />
+        </Box>
+      )}
+      {erRedigerbart && !visLeggTilPeriodeForm && (
+        <div>
+          <Button
+            size="small"
+            variant="tertiary"
+            type="button"
+            icon={<PlusCircleIcon />}
+            onClick={() => setVisLeggTilPeriodeForm(true)}
+            disabled={isReadOnly}
+          >
+            <FormattedMessage id="UttakEøsFaktaForm.LeggTilPeriode" />
+          </Button>
+        </div>
+      )}
+    </>
+  );
+};
 
 interface RadProps {
   annenForelderUttakEøsPeriode: AnnenforelderUttakEøsPeriode;
   rowIndex: number;
   setPerioder: React.Dispatch<React.SetStateAction<AnnenforelderUttakEøsPeriode[]>>;
-  isReadOnly: boolean;
   setDirty: (isDirty: boolean) => void;
   alleKodeverk: AlleKodeverk;
 }
 
-const Rad = ({ annenForelderUttakEøsPeriode, rowIndex, setPerioder, isReadOnly, setDirty, alleKodeverk }: RadProps) => {
+const Rad = ({ annenForelderUttakEøsPeriode, rowIndex, setPerioder, setDirty, alleKodeverk }: RadProps) => {
+  const isReadOnly = useReadOnly();
   const [erÅpen, setErÅpen] = useState(false);
 
   const oppdaterPeriode = (oppdatertPeriode: AnnenforelderUttakEøsPeriode) => {

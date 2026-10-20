@@ -23,6 +23,7 @@
     "@navikt/fp-kodeverk": "workspace:^",
     "@navikt/fp-types": "workspace:^",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^",
+    "@navikt/fp-utils": "workspace:^",
     "@navikt/ft-form-hooks": "13.0.2",
     "@navikt/ft-form-validators": "7.0.2",
     "@navikt/ft-ui-komponenter": "9.0.2",

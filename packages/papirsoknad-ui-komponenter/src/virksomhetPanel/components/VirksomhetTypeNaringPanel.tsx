@@ -5,6 +5,7 @@ import { Checkbox } from '@navikt/ds-react';
 import { RhfCheckboxGroup } from '@navikt/ft-form-hooks';
 
 import type { AlleKodeverk, VirksomhetType } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
 import type { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
@@ -19,7 +20,6 @@ const naringsvirksomhetTypeOrder: Record<VirksomhetType, number> = {
 };
 
 interface Props {
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   index: number;
 }
@@ -30,7 +30,8 @@ interface Props {
  * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetTypeNaringPanel = ({ readOnly, alleKodeverk, index }: Props) => {
+export const VirksomhetTypeNaringPanel = ({ alleKodeverk, index }: Props) => {
+  const readOnly = useReadOnly();
   const { control } = useFormContext<VirksomhetFormValues>();
   const intl = useIntl();
   return (

@@ -62,7 +62,6 @@ const transformValues = (
 export type SvangerskapsValues = ReturnType<typeof transformValues>;
 
 interface Props {
-  readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   onSubmit: (values: SvangerskapsValues) => Promise<void>;
@@ -77,7 +76,6 @@ interface Props {
  * RhfForm-komponent for registrering av papirsøknad for svangerskapspenger.
  */
 export const SvangerskapspengerForm = ({
-  readOnly,
   soknadData,
   alleKodeverk,
   onSubmit,
@@ -94,23 +92,21 @@ export const SvangerskapspengerForm = ({
   return (
     <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(soknadData, values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="space-16">
-        <MottattDatoPapirsoknadIndex readOnly={readOnly} />
+        <MottattDatoPapirsoknadIndex />
         <OppholdINorgePapirsoknadIndex
-          readOnly={readOnly}
           alleKodeverk={alleKodeverk}
           erAdopsjon={soknadData.getFamilieHendelseType() !== 'ADPSJN'}
           mottattDato={mottattDato}
         />
-        <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        <VirksomhetPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        <FrilansPapirsoknadIndex readOnly={readOnly} />
-        <AndreYtelserPapirsoknadIndex readOnly={readOnly} kunMiliterEllerSiviltjeneste alleKodeverk={alleKodeverk} />
-        <TerminOgFodselPanelSvp readOnly={readOnly} />
-        <BehovForTilretteleggingPanel readOnly={readOnly} />
-        <SprakPapirsoknadIndex readOnly={readOnly} />
+        <InntektsgivendeArbeidPapirsoknadIndex alleKodeverk={alleKodeverk} />
+        <VirksomhetPapirsoknadIndex alleKodeverk={alleKodeverk} />
+        <FrilansPapirsoknadIndex />
+        <AndreYtelserPapirsoknadIndex kunMiliterEllerSiviltjeneste alleKodeverk={alleKodeverk} />
+        <TerminOgFodselPanelSvp />
+        <BehovForTilretteleggingPanel />
+        <SprakPapirsoknadIndex />
       </HGrid>
       <LagreSoknadPapirsoknadIndex
-        readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
         onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues()) : undefined}
         submitting={formMethods.formState.isSubmitting}

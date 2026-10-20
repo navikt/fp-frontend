@@ -15,6 +15,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type { KodeverkMedNavn, Landkode } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 export const defaultUtenlandsOpphold: FormValues = {
   land: '' as unknown as Landkode,
@@ -69,7 +70,6 @@ interface Props {
   erTidligereOpphold?: boolean;
   mottattDato?: string;
   countryCodes: KodeverkMedNavn<'Landkoder'>[];
-  readOnly: boolean;
 }
 
 /**
@@ -80,7 +80,8 @@ interface Props {
  * som lar seg tilpasse om opphold skal være fram eller tilbake i tid.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato, readOnly, countryCodes }: Props) => {
+export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato, countryCodes }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const name = erTidligereOpphold ? 'tidligereOppholdUtenlands' : 'fremtidigeOppholdUtenlands';

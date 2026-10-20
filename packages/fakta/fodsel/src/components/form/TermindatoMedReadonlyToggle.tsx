@@ -6,19 +6,17 @@ import { PencilIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { Button, Detail, HStack } from '@navikt/ds-react';
 
 import { getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
+import { ReadOnlyProvider, useReadOnly } from '@navikt/fp-utils';
 
 import type { ErBarnFødtFormValues } from './ErBarnFødt';
 import { Termindato, type TermindatoFormValues } from './Termindato';
 
 interface TermindatoMedReadonlyToggleProps {
-  isReadOnly: boolean;
   alltidPåkravd?: boolean;
 }
 
-export const TermindatoMedReadonlyToggle = ({
-  isReadOnly,
-  alltidPåkravd = false,
-}: TermindatoMedReadonlyToggleProps) => {
+export const TermindatoMedReadonlyToggle = ({ alltidPåkravd = false }: TermindatoMedReadonlyToggleProps) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
   const { getValues, getFieldState } = useFormContext<TermindatoFormValues & ErBarnFødtFormValues>();
 
@@ -31,7 +29,9 @@ export const TermindatoMedReadonlyToggle = ({
   const formatertKilde = getLabelForFaktaKilde(isDirty ? 'SAKSBEHANDLER' : kilde);
   return (
     <HStack gap="space-8" align="start">
-      <Termindato isReadOnly={isInputReadonly} isRequired={alltidPåkravd || erBarnFødt === false} />
+      <ReadOnlyProvider readOnly={isInputReadonly}>
+        <Termindato isRequired={alltidPåkravd || erBarnFødt === false} />
+      </ReadOnlyProvider>
 
       {skalViseKnapp && (
         <Button

@@ -8,6 +8,8 @@ import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -19,11 +21,8 @@ type MottattDatoFormValues = {
   mottattDato?: string;
 };
 
-interface Props {
-  readOnly: boolean;
-}
-
-export const MottattDatoPapirsoknadIndex = ({ readOnly }: Props) => {
+export const MottattDatoPapirsoknadIndex = () => {
+  const readOnly = useReadOnly();
   const { control } = useFormContext<MottattDatoFormValues>();
   return (
     <RawIntlProvider value={intl}>

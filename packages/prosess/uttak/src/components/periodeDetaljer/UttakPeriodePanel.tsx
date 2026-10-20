@@ -19,6 +19,7 @@ import type {
   Uttaksresultat,
   UttakStonadskontoer,
 } from '@navikt/fp-types';
+import { ReadOnlyProvider, useReadOnly } from '@navikt/fp-utils';
 
 import { SplittPeriodeModal } from './splitt/SplittPeriodeModal';
 import { UttakPeriodeForm } from './UttakPeriodeForm';
@@ -153,7 +154,6 @@ interface Props {
   uttaksresultat: Uttaksresultat;
   valgtPeriodeIndex: number;
   oppdaterPeriode: (perioder: PeriodeSoker[]) => void;
-  isReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttakStonadskontoer: UttakStonadskontoer;
@@ -171,7 +171,6 @@ export const UttakPeriodePanel = ({
   uttaksresultat,
   valgtPeriodeIndex,
   oppdaterPeriode,
-  isReadOnly,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   uttakStonadskontoer,
@@ -181,6 +180,7 @@ export const UttakPeriodePanel = ({
   harÅpentAksjonspunkt,
   endringsdato,
 }: Props) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
 
   const [visModal, setVisModal] = useState(false);
@@ -304,19 +304,20 @@ export const UttakPeriodePanel = ({
                   )}
                 </AksjonspunktHelpTextHTML>
               )}
-            <UttakPeriodeForm
-              valgtPeriode={valgtPeriode}
-              oppdaterPeriode={oppdaterPeriode}
-              isReadOnly={isReadOnly || !erHovedsøkersPeriode || erRevurderingFørEndringsdato}
-              erHovedsøkersPeriode={erHovedsøkersPeriode}
-              lukkPeriodeVisning={lukkPeriode}
-              alleKodeverk={alleKodeverk}
-              muligeÅrsaker={uttaksresultat.muligeÅrsaker}
-              årsakFilter={uttaksresultat.årsakFilter}
-              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-              harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
-              erTilknyttetStortinget={erTilknyttetStortinget}
-            />
+            <ReadOnlyProvider readOnly={isReadOnly || !erHovedsøkersPeriode || erRevurderingFørEndringsdato}>
+              <UttakPeriodeForm
+                valgtPeriode={valgtPeriode}
+                oppdaterPeriode={oppdaterPeriode}
+                erHovedsøkersPeriode={erHovedsøkersPeriode}
+                lukkPeriodeVisning={lukkPeriode}
+                alleKodeverk={alleKodeverk}
+                muligeÅrsaker={uttaksresultat.muligeÅrsaker}
+                årsakFilter={uttaksresultat.årsakFilter}
+                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
+                erTilknyttetStortinget={erTilknyttetStortinget}
+              />
+            </ReadOnlyProvider>
           </>
         )}
       </VStack>

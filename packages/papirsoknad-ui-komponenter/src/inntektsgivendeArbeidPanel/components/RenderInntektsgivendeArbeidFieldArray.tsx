@@ -6,6 +6,7 @@ import { RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/f
 import { hasValidDate, maxLength, required } from '@navikt/ft-form-validators';
 
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { FieldArrayRow } from '../../felles/FieldArrayRow';
 import { INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME } from '../constants';
@@ -32,7 +33,6 @@ const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): Reac
     ));
 
 interface Props {
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -41,7 +41,8 @@ interface Props {
  *
  * Viser inputfelter for arbeidsgiver og organisasjonsnummer for registrering av arbeidsforhold.
  */
-export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }: Props) => {
+export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const { control, getValues } = useFormContext<InntektsgivendeArbeidFormValues>();
@@ -62,7 +63,7 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
       append={append}
     >
       {(field, index) => (
-        <FieldArrayRow key={field.id} remove={remove} index={index} readOnly={readOnly}>
+        <FieldArrayRow key={field.id} remove={remove} index={index}>
           <RhfTextField
             readOnly={readOnly}
             control={control}

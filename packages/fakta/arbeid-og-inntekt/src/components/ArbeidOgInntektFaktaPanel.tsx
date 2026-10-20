@@ -12,7 +12,7 @@ import type {
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 import type { VurderArbeidsforholdInntektsmeldingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { ReadOnlyProvider, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
@@ -128,7 +128,6 @@ export const ArbeidOgInntektFaktaPanel = ({
       <ArbeidsOgInntektOverstyrPanel
         behandling={behandling}
         aksjonspunkt={aksjonspunkt}
-        readOnly={isReadOnly}
         arbeidOgInntekt={arbeidOgInntekt}
         registrerArbeidsforhold={registrerArbeidsforhold}
         erOverstyrer={erOverstyrer}
@@ -159,22 +158,25 @@ export const ArbeidOgInntektFaktaPanel = ({
           </Table.Header>
           <Table.Body>
             {tabellRader.map((radData, index) => (
-              <ArbeidsforholdRad
+              <ReadOnlyProvider
                 key={lagRadNøkkel(radData, index)}
-                saksnummer={fagsak.saksnummer}
-                behandlingUuid={behandling.uuid}
-                behandlingVersjon={behandling.versjon}
-                radData={radData}
-                skjæringstidspunkt={arbeidOgInntekt.skjæringstidspunkt}
-                isReadOnly={isReadOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
-                registrerArbeidsforhold={registrerArbeidsforhold}
-                lagreVurdering={lagreVurdering}
-                toggleÅpenRad={() => toggleÅpenRad(index)}
-                erOverstyrt={erOverstyrt}
-                oppdaterTabell={oppdaterTabellData}
-                erRadÅpen={åpneRadIndexer.includes(index)}
-                alleKodeverk={alleKodeverk}
-              />
+                readOnly={isReadOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
+              >
+                <ArbeidsforholdRad
+                  saksnummer={fagsak.saksnummer}
+                  behandlingUuid={behandling.uuid}
+                  behandlingVersjon={behandling.versjon}
+                  radData={radData}
+                  skjæringstidspunkt={arbeidOgInntekt.skjæringstidspunkt}
+                  registrerArbeidsforhold={registrerArbeidsforhold}
+                  lagreVurdering={lagreVurdering}
+                  toggleÅpenRad={() => toggleÅpenRad(index)}
+                  erOverstyrt={erOverstyrt}
+                  oppdaterTabell={oppdaterTabellData}
+                  erRadÅpen={åpneRadIndexer.includes(index)}
+                  alleKodeverk={alleKodeverk}
+                />
+              </ReadOnlyProvider>
             ))}
           </Table.Body>
         </Table>

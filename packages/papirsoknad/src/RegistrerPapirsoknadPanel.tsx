@@ -8,6 +8,7 @@ import { createIntl } from '@navikt/ft-utils';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk, BehandlingFpSak, Fagsak } from '@navikt/fp-types';
+import { ReadOnlyProvider } from '@navikt/fp-utils';
 
 import { EngangsstonadForm } from './engangsstonad/components/EngangsstonadForm';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
@@ -87,63 +88,62 @@ export const RegistrerPapirsoknadPanel = ({
       : undefined;
 
   return (
-    <RawIntlProvider value={intl}>
-      <VStack gap="space-16" padding="space-16">
-        <Heading size="small" level="2">
-          {erEndringssøknad ? (
-            <FormattedMessage id="Registrering.RegistrereEndringssoknad" />
-          ) : (
-            <FormattedMessage id="Registrering.RegistrereSoknad" />
+    <ReadOnlyProvider readOnly={readOnly}>
+      <RawIntlProvider value={intl}>
+        <VStack gap="space-16" padding="space-16">
+          <Heading size="small" level="2">
+            {erEndringssøknad ? (
+              <FormattedMessage id="Registrering.RegistrereEndringssoknad" />
+            ) : (
+              <FormattedMessage id="Registrering.RegistrereSoknad" />
+            )}
+          </Heading>
+          {!readOnly && (
+            <AksjonspunktHelpTextHTML>
+              <FormattedMessage id="Registrering.RegistrerAlleOpplysninger" />
+            </AksjonspunktHelpTextHTML>
           )}
-        </Heading>
-        {!readOnly && (
-          <AksjonspunktHelpTextHTML>
-            <FormattedMessage id="Registrering.RegistrerAlleOpplysninger" />
-          </AksjonspunktHelpTextHTML>
-        )}
-        <SoknadTypePickerForm
-          setSoknadData={setSoknadData}
-          fagsakYtelseType={fagsak.fagsakYtelseType}
-          alleKodeverk={kodeverk}
-          initialFamilieHendelseType={soknadData?.familieHendelseType}
-          initialForeldreType={soknadData?.foreldreType}
-        />
-        {soknadData?.getFagsakYtelseType() === 'ES' && (
-          <EngangsstonadForm
-            onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
-            onSubmit={lagreFullstendigSøknad}
-            onMellomlagre={mellomlagreWrapped}
-            mellomlagretData={mellomlagretData}
-            readOnly={readOnly}
-            soknadData={soknadData}
+          <SoknadTypePickerForm
+            setSoknadData={setSoknadData}
+            fagsakYtelseType={fagsak.fagsakYtelseType}
             alleKodeverk={kodeverk}
+            initialFamilieHendelseType={soknadData?.familieHendelseType}
+            initialForeldreType={soknadData?.foreldreType}
           />
-        )}
-        {soknadData?.getFagsakYtelseType() === 'FP' && (
-          <ForeldrepengerPapirsoknadIndex
-            onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
-            onSubmit={lagreFullstendigSøknad}
-            onMellomlagre={mellomlagreWrapped}
-            mellomlagretData={mellomlagretData}
-            readOnly={readOnly}
-            soknadData={soknadData}
-            alleKodeverk={kodeverk}
-            fagsakPersonnummer={fagsak.bruker.fødselsnummer}
-            erEndringssøknad={erEndringssøknad}
-          />
-        )}
-        {soknadData?.getFagsakYtelseType() === 'SVP' && (
-          <SvangerskapspengerForm
-            onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
-            onSubmit={lagreFullstendigSøknad}
-            onMellomlagre={mellomlagreWrapped}
-            mellomlagretData={mellomlagretData}
-            readOnly={readOnly}
-            soknadData={soknadData}
-            alleKodeverk={kodeverk}
-          />
-        )}
-      </VStack>
-    </RawIntlProvider>
+          {soknadData?.getFagsakYtelseType() === 'ES' && (
+            <EngangsstonadForm
+              onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
+              onSubmit={lagreFullstendigSøknad}
+              onMellomlagre={mellomlagreWrapped}
+              mellomlagretData={mellomlagretData}
+              soknadData={soknadData}
+              alleKodeverk={kodeverk}
+            />
+          )}
+          {soknadData?.getFagsakYtelseType() === 'FP' && (
+            <ForeldrepengerPapirsoknadIndex
+              onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
+              onSubmit={lagreFullstendigSøknad}
+              onMellomlagre={mellomlagreWrapped}
+              mellomlagretData={mellomlagretData}
+              soknadData={soknadData}
+              alleKodeverk={kodeverk}
+              fagsakPersonnummer={fagsak.bruker.fødselsnummer}
+              erEndringssøknad={erEndringssøknad}
+            />
+          )}
+          {soknadData?.getFagsakYtelseType() === 'SVP' && (
+            <SvangerskapspengerForm
+              onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
+              onSubmit={lagreFullstendigSøknad}
+              onMellomlagre={mellomlagreWrapped}
+              mellomlagretData={mellomlagretData}
+              soknadData={soknadData}
+              alleKodeverk={kodeverk}
+            />
+          )}
+        </VStack>
+      </RawIntlProvider>
+    </ReadOnlyProvider>
   );
 };

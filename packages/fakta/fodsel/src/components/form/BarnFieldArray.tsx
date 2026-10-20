@@ -21,6 +21,7 @@ import {
   fødselErINærhetenAvTermin,
   maxFodselsdato,
   minFodselsdato,
+  useReadOnly,
 } from '@navikt/fp-utils';
 
 import styles from './barnFieldArray.module.css';
@@ -47,11 +48,8 @@ export type BarnFormValues = {
 
 type FormValuesMedTermin = BarnFormValues & { termindato?: string };
 
-interface Props {
-  isReadOnly: boolean;
-}
-
-export const BarnFieldArray = ({ isReadOnly }: Props) => {
+export const BarnFieldArray = () => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
 
   const {

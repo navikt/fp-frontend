@@ -7,7 +7,7 @@ import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { DekningsgradDto } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { notEmpty, useReadOnly } from '@navikt/fp-utils';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -17,14 +17,11 @@ type FormValues = {
   dekningsgrad?: DekningsgradDto;
 };
 
-interface Props {
-  readOnly: boolean;
-}
-
 /**
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
-export const DekningsgradIndex = ({ readOnly }: Props) => {
+export const DekningsgradIndex = () => {
+  const readOnly = useReadOnly();
   const { control } = useFormContext<FormValues>();
   return (
     <BorderBox>

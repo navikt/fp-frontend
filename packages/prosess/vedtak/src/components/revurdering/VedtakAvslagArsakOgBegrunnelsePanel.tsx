@@ -9,6 +9,7 @@ import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import type { AlleKodeverk, Behandlingsresultat, Vilkår } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
 
@@ -40,7 +41,6 @@ interface Props {
   vilkår: Vilkår[];
   behandlingsresultat?: Behandlingsresultat;
   språkkode: string;
-  isReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }
@@ -49,10 +49,10 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
   vilkår,
   behandlingsresultat,
   språkkode,
-  isReadOnly,
   alleKodeverk,
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => {
+  const isReadOnly = useReadOnly();
   const {
     formState: { isDirty },
     control,

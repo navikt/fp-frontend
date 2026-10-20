@@ -211,7 +211,6 @@ export const OpptjeningFaktaPanel = ({
           key={valgtAktivitetIndex}
           valgtOpptjeningAktivitet={filtrerteOgSorterteOpptjeningsaktiviteter[valgtAktivitetIndex]!}
           valgteFormValues={formVerdierForAlleAktiviteter[valgtAktivitetIndex]!}
-          readOnly={isReadOnly}
           opptjeningAktivitetTyper={opptjeningAktivitetTypes}
           avbrytAktivitet={avbrytAktivitet}
           oppdaterAktivitet={oppdaterAktivitet}

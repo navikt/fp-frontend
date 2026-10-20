@@ -14,6 +14,7 @@ import type {
   ArbeidsgiverOpplysningerPerId,
   Inntektsmelding,
 } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { BekreftetPermisjonStatus } from '../kodeverk/BekreftetPermisjonStatus';
 import { ArbeidsforholdBoks } from './ArbeidsforholdBoks';
@@ -37,7 +38,6 @@ interface Props {
   sorterteArbeidsforhold: Arbeidsforhold[];
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  isReadOnly: boolean;
   harÅpentAksjonspunkt: boolean;
   skjæringstidspunkt: string;
   alleKodeverk: AlleKodeverk;
@@ -50,11 +50,11 @@ export const ArbeidsforholdField = ({
   sorterteArbeidsforhold,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
-  isReadOnly,
   harÅpentAksjonspunkt,
   skjæringstidspunkt,
   alleKodeverk,
 }: Props) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
 
   const { control } = useFormContext<FormValues>();

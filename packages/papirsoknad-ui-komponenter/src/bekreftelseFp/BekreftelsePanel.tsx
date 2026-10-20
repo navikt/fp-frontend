@@ -11,7 +11,6 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  readOnly: boolean;
   annenForelderInformertRequired?: boolean;
 }
 
@@ -19,7 +18,7 @@ type BekreftelseFormValues = {
   annenForelderInformert?: boolean;
 };
 
-export const BekreftelsePanel = ({ readOnly, annenForelderInformertRequired = false }: Props) => {
+export const BekreftelsePanel = ({ annenForelderInformertRequired = false }: Props) => {
   const { control } = useFormContext<BekreftelseFormValues>();
   return (
     <BorderBox>
@@ -32,7 +31,6 @@ export const BekreftelsePanel = ({ readOnly, annenForelderInformertRequired = fa
           control={control}
           label={intl.formatMessage({ id: 'Registrering.TheOtherParent.OtherParentKnowPeriods' })}
           isRequired={annenForelderInformertRequired}
-          readOnly={readOnly}
         />
       </VStack>
     </BorderBox>

@@ -192,7 +192,7 @@ export const VedtakRevurderingForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly, aksjonspunkterForPanel } =
+  const { behandling, fagsak, alleKodeverk, submitCallback, aksjonspunkterForPanel } =
     usePanelDataContext<RevurderingVedtakAksjonspunkter[]>();
 
   const { harRedigertBrev } = useVedtakEditeringContext();
@@ -256,7 +256,6 @@ export const VedtakRevurderingForm = ({
               <VedtakInnvilgetRevurderingPanel
                 ytelseTypeKode={fagsak.fagsakYtelseType}
                 revurderingsÅrsakString={revurderingsÅrsakString}
-                isReadOnly={isReadOnly}
                 beregningsresultat={beregningsresultat}
                 språkkode={språkkode}
                 behandlingsresultat={behandlingsresultat}
@@ -270,7 +269,6 @@ export const VedtakRevurderingForm = ({
                 vilkår={vilkår}
                 behandlingsresultat={behandlingsresultat}
                 språkkode={språkkode}
-                isReadOnly={isReadOnly}
                 alleKodeverk={alleKodeverk}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
               />
@@ -279,7 +277,6 @@ export const VedtakRevurderingForm = ({
             return (
               <VedtakOpphorRevurderingPanel
                 revurderingsÅrsakString={revurderingsÅrsakString}
-                isReadOnly={isReadOnly}
                 behandlingsresultat={behandlingsresultat}
                 språkkode={språkkode}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}

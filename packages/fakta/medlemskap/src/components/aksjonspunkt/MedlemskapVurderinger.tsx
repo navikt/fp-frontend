@@ -7,7 +7,7 @@ import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { AlleKodeverk, Avslagsarsak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { MedlemskapVurdering, SØKER_INNFLYTTET_FOR_SENT_KODE } from '../../types/vurderingMedlemskapForm';
 import { lagVurderingsAlternativer } from './lagVurderingsAlternativer';
@@ -25,13 +25,13 @@ export type MedlemskapVurderingerFormValues = {
 
 interface Props {
   vilkår: Vilkår;
-  readOnly: boolean;
   ytelse: string;
   erForutgående: boolean;
   erRevurdering: boolean;
 }
 
-export const MedlemskapVurderinger = ({ readOnly, ytelse, vilkår, erForutgående, erRevurdering }: Props) => {
+export const MedlemskapVurderinger = ({ ytelse, vilkår, erForutgående, erRevurdering }: Props) => {
+  const readOnly = useReadOnly();
   const { watch, control } = useFormContext<MedlemskapVurderingerFormValues>();
   const vurdering = watch('vurdering');
   const avslagskode = watch('avslagskode');

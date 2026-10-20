@@ -7,7 +7,7 @@ import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
-import { classNames } from '@navikt/fp-utils';
+import { classNames, ReadOnlyProvider, useReadOnly } from '@navikt/fp-utils';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { Årsakstype, utledÅrsakstype, UttakFaktaDetailForm } from './UttakFaktaDetailForm';
@@ -44,7 +44,6 @@ interface Props {
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
   oppdaterUttakPerioder: (perioder: KontrollerFaktaPeriodeMedApMarkering[]) => void;
   alleKodeverk: AlleKodeverk;
-  readOnly: boolean;
   setDirty: (isDirty: boolean) => void;
   erRedigerbart: boolean;
   visNyPeriode: boolean;
@@ -60,12 +59,12 @@ export const UttakFaktaTable = ({
   faktaArbeidsforhold,
   oppdaterUttakPerioder,
   alleKodeverk,
-  readOnly,
   setDirty,
   erRedigerbart,
   visNyPeriode,
   settVisNyPeriode,
 }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const velgPeriodeFomDato = (fom?: string, lukkAlleAndre = false) => {
@@ -139,17 +138,18 @@ export const UttakFaktaTable = ({
                 content={
                   valgteFomDatoer.includes(periode.fom) && (
                     <div className={periode.aksjonspunktType ? styles['panelOpenAp'] : styles['panelOpen']}>
-                      <UttakFaktaDetailForm
-                        fagsak={fagsak}
-                        valgtPeriode={periode}
-                        readOnly={readOnly || !erRedigerbart}
-                        oppdaterPeriode={oppdaterPeriode}
-                        slettPeriode={() => slettPeriode(periode.originalFom)}
-                        avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
-                        alleKodeverk={alleKodeverk}
-                        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                        faktaArbeidsforhold={faktaArbeidsforhold}
-                      />
+                      <ReadOnlyProvider readOnly={readOnly || !erRedigerbart}>
+                        <UttakFaktaDetailForm
+                          fagsak={fagsak}
+                          valgtPeriode={periode}
+                          oppdaterPeriode={oppdaterPeriode}
+                          slettPeriode={() => slettPeriode(periode.originalFom)}
+                          avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
+                          alleKodeverk={alleKodeverk}
+                          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                          faktaArbeidsforhold={faktaArbeidsforhold}
+                        />
+                      </ReadOnlyProvider>
                     </div>
                   )
                 }
@@ -188,23 +188,24 @@ export const UttakFaktaTable = ({
               <Heading size="small" level="3">
                 <FormattedMessage id="UttakFaktaForm.NyPeriode" />
               </Heading>
-              <UttakFaktaDetailForm
-                fagsak={fagsak}
-                avbrytEditering={() => settVisNyPeriode(false)}
-                readOnly={false}
-                alleKodeverk={alleKodeverk}
-                oppdaterPeriode={(uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => {
-                  const nyeSortertePerioder = uttakKontrollerFaktaPerioder
-                    .concat(uttaksperiode)
-                    .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
-                  setDirty(true);
-                  oppdaterUttakPerioder(nyeSortertePerioder);
-                  settVisNyPeriode(false);
-                }}
-                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                faktaArbeidsforhold={faktaArbeidsforhold}
-                defaultMonth={sisteMåned}
-              />
+              <ReadOnlyProvider readOnly={false}>
+                <UttakFaktaDetailForm
+                  fagsak={fagsak}
+                  avbrytEditering={() => settVisNyPeriode(false)}
+                  alleKodeverk={alleKodeverk}
+                  oppdaterPeriode={(uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => {
+                    const nyeSortertePerioder = uttakKontrollerFaktaPerioder
+                      .concat(uttaksperiode)
+                      .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
+                    setDirty(true);
+                    oppdaterUttakPerioder(nyeSortertePerioder);
+                    settVisNyPeriode(false);
+                  }}
+                  arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                  faktaArbeidsforhold={faktaArbeidsforhold}
+                  defaultMonth={sisteMåned}
+                />
+              </ReadOnlyProvider>
             </VStack>
           )}
         </>

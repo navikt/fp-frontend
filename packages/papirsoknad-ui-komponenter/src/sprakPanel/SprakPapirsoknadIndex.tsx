@@ -7,15 +7,11 @@ import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { Språkkode } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { notEmpty, useReadOnly } from '@navikt/fp-utils';
 
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
-
-interface Props {
-  readOnly: boolean;
-}
 
 const sprakvalg = {
   BOKMAL: 'NB',
@@ -27,7 +23,8 @@ type SprakFormValues = {
   språkkode?: Språkkode;
 };
 
-export const SprakPapirsoknadIndex = ({ readOnly }: Props) => {
+export const SprakPapirsoknadIndex = () => {
+  const readOnly = useReadOnly();
   const { control } = useFormContext<SprakFormValues>();
   return (
     <BorderBox>

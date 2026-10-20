@@ -12,7 +12,6 @@ import { HoyRisikoPanel } from './HoyRisikoPanel';
 interface Props {
   risikoklassifisering: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
-  readOnly: boolean;
   submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
   isRiskPanelOpen: boolean;
   toggleRiskPanel: () => void;
@@ -27,7 +26,6 @@ interface Props {
 export const HoyRisikoTittel = ({
   risikoklassifisering,
   aksjonspunkt,
-  readOnly,
   submitCallback,
   isRiskPanelOpen,
   toggleRiskPanel,
@@ -56,7 +54,6 @@ export const HoyRisikoTittel = ({
         <HoyRisikoPanel
           risikoklassifisering={risikoklassifisering}
           aksjonspunkt={aksjonspunkt}
-          readOnly={readOnly}
           submitCallback={submitCallback}
           faresignalVurderinger={faresignalVurderinger}
         />

@@ -15,13 +15,9 @@ const defaultArbeidsgiver = {
   tilrettelegginger: [],
 };
 
-interface Props {
-  readOnly: boolean;
-}
-
 const FA_PREFIX = `${TILRETTELEGGING_NAME_PREFIX}.${TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME}`;
 
-export const TilretteleggingForArbeidsgiverFieldArray = ({ readOnly }: Props) => {
+export const TilretteleggingForArbeidsgiverFieldArray = () => {
   const intl = useIntl();
   const {
     control,
@@ -66,7 +62,6 @@ export const TilretteleggingForArbeidsgiverFieldArray = ({ readOnly }: Props) =>
               index={index}
               open={index + 1 === fields.length}
               remove={() => remove(index)}
-              readOnly={readOnly}
             />
           ))}
         </Table.Body>

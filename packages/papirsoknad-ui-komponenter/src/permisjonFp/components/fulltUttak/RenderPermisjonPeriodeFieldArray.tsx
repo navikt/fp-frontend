@@ -9,6 +9,7 @@ import { ISO_DATE_FORMAT, removeSpacesFromNumber } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type { AlleKodeverk, PermisjonPeriodeDto } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -28,7 +29,6 @@ const minValue0 = minValue(0);
 const maxValue100 = maxValue(100);
 
 interface Props {
-  readOnly: boolean;
   søkerErMor: boolean;
   alleKodeverk: AlleKodeverk;
 }
@@ -38,7 +38,8 @@ interface Props {
  *
  * Viser inputfelter for dato for bestemmelse av perioder med permijon.
  */
-export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKodeverk }: Props) => {
+export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, alleKodeverk }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const uttakPeriodeTyper = alleKodeverk['UttakPeriodeType'];
@@ -77,7 +78,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ søkerErMor, readOnly, alleKo
         const periode = watch(getPrefix(index));
 
         return (
-          <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
+          <FieldArrayRow key={field.id} remove={remove} index={index}>
             <RhfSelect
               name={`${getPrefix(index)}.periodeType`}
               control={control}

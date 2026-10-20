@@ -7,6 +7,7 @@ import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import type { Behandlingsresultat } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
 
@@ -16,11 +17,11 @@ const minLength3 = minLength(3);
 interface Props {
   behandlingsresultat?: Behandlingsresultat;
   språkkode: string;
-  isReadOnly: boolean;
   labelTextCode: string;
 }
 
-export const VedtakFritekstPanel = ({ behandlingsresultat, språkkode, isReadOnly, labelTextCode }: Props) => {
+export const VedtakFritekstPanel = ({ behandlingsresultat, språkkode, labelTextCode }: Props) => {
+  const isReadOnly = useReadOnly();
   const { control } = useFormContext<VedtakFormValues>();
 
   return (

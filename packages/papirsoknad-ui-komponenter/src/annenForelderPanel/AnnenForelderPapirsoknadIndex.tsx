@@ -16,25 +16,20 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
   søkerErMor: boolean;
 }
 
-export const AnnenForelderPapirsoknadIndex = ({ readOnly, alleKodeverk, fagsakPersonnummer, søkerErMor }: Props) => (
+export const AnnenForelderPapirsoknadIndex = ({ alleKodeverk, fagsakPersonnummer, søkerErMor }: Props) => (
   <RawIntlProvider value={intl}>
     <BorderBox>
       <VStack gap="space-16">
         <Heading size="small" level="3">
           <FormattedMessage id="Registrering.TheOtherParent.Title" />
         </Heading>
-        <OppgiAnnenForelderPanel
-          readOnly={readOnly}
-          fagsakPersonnummer={fagsakPersonnummer}
-          alleKodeverk={alleKodeverk}
-        />
-        <PermisjonRettigheterPanel readOnly={readOnly} søkerErMor={søkerErMor} />
+        <OppgiAnnenForelderPanel fagsakPersonnummer={fagsakPersonnummer} alleKodeverk={alleKodeverk} />
+        <PermisjonRettigheterPanel søkerErMor={søkerErMor} />
       </VStack>
     </BorderBox>
   </RawIntlProvider>

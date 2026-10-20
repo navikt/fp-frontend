@@ -1,8 +1,16 @@
+import type { ComponentProps } from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
-import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
+import {
+  alleKodeverk,
+  getIntlDecorator,
+  type ReadOnlyArgs,
+  withReadOnly,
+  withRouter,
+} from '@navikt/fp-storybook-utils';
 
 import { ForeldrepengerPapirsoknadIndex } from './ForeldrepengerPapirsoknadIndex';
 
@@ -10,7 +18,7 @@ import messages from '../../i18n/nb_NO.json';
 
 const meta = {
   component: ForeldrepengerPapirsoknadIndex,
-  decorators: [withRouter, getIntlDecorator(messages)],
+  decorators: [withReadOnly, withRouter, getIntlDecorator(messages)],
   args: {
     readOnly: false,
     alleKodeverk: alleKodeverk,
@@ -25,7 +33,7 @@ const meta = {
     erEndringssøknad: false,
     fagsakPersonnummer: '12345678910',
   },
-} satisfies Meta<typeof ForeldrepengerPapirsoknadIndex>;
+} satisfies Meta<ComponentProps<typeof ForeldrepengerPapirsoknadIndex> & ReadOnlyArgs>;
 
 export default meta;
 

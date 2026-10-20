@@ -9,7 +9,6 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  readOnly: boolean;
   onSubmitUfullstendigsoknad: () => Promise<void>;
   onMellomlagre?: () => void;
   submitting: boolean;

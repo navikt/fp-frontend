@@ -5,19 +5,18 @@ import { HStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfFieldArray } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 import { FRILANS_NAME_PREFIX } from '../constants';
 import type { FrilansFormValues, FrilansSubFormValues } from '../types';
-
-interface Props {
-  readOnly: boolean;
-}
 
 /**
  * FrilansPerioderFieldArray
  *
  * Viser inputfelter for fra og til dato for frilansperioder
  */
-export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
+export const FrilansPerioderFieldArray = () => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const {

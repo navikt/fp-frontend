@@ -17,6 +17,7 @@ import type {
   FaktaArbeidsforhold,
   UttakArbeidType,
 } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import {
@@ -67,7 +68,6 @@ interface Props {
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
   slettPeriode?: () => void;
   avbrytEditering: () => void;
-  readOnly: boolean;
   oppdaterPeriode: (uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => void;
   alleKodeverk: AlleKodeverk;
   defaultMonth?: Date;
@@ -81,10 +81,10 @@ export const UttakFaktaDetailForm = ({
   slettPeriode,
   avbrytEditering,
   oppdaterPeriode,
-  readOnly,
   alleKodeverk,
   defaultMonth,
 }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const defaultValues = valgtPeriode ? buildInitialValues(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined;
@@ -281,7 +281,6 @@ export const UttakFaktaDetailForm = ({
               valgtPeriode={valgtPeriode}
               arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
               faktaArbeidsforhold={faktaArbeidsforhold}
-              readOnly={readOnly}
               alleKodeverk={alleKodeverk}
             />
           )}

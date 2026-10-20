@@ -18,6 +18,7 @@ import { ISO_DATE_FORMAT, removeSpacesFromNumber } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type { AlleKodeverk, Arbeidskategori, KodeverkMedNavn, UttakPeriodeType } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -45,7 +46,6 @@ const maxValue100 = maxValue(100);
 
 interface Props {
   alleKodeverk: AlleKodeverk;
-  readOnly: boolean;
 }
 
 /**
@@ -53,7 +53,8 @@ interface Props {
  *
  * Viser inputfelter for dato for bestemmelse av graderingperiode.
  */
-export const RenderGraderingPeriodeFieldArray = ({ alleKodeverk, readOnly }: Props) => {
+export const RenderGraderingPeriodeFieldArray = ({ alleKodeverk }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const uttakPeriodeTyper = alleKodeverk['UttakPeriodeType'];
@@ -95,7 +96,7 @@ export const RenderGraderingPeriodeFieldArray = ({ alleKodeverk, readOnly }: Pro
         const periodeFomForTidlig = periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
 
         return (
-          <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
+          <FieldArrayRow key={field.id} remove={remove} index={index}>
             <RhfSelect
               name={`${getPrefix(index)}.periodeForGradering`}
               control={control}

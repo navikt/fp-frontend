@@ -12,7 +12,6 @@ import { Faresignaler } from './Faresignaler';
 interface Props {
   risikoklassifisering: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
-  readOnly: boolean;
   submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
   faresignalVurderinger: KodeverkMedNavn<'FaresignalVurdering'>[];
 }
@@ -25,7 +24,6 @@ interface Props {
 export const HoyRisikoPanel = ({
   risikoklassifisering,
   aksjonspunkt,
-  readOnly,
   submitCallback,
   faresignalVurderinger,
 }: Props) => (
@@ -40,7 +38,6 @@ export const HoyRisikoPanel = ({
       {!!aksjonspunkt && (
         <AvklarFaresignalerForm
           aksjonspunkt={aksjonspunkt}
-          readOnly={readOnly}
           submitCallback={submitCallback}
           risikoklassifisering={risikoklassifisering}
           faresignalVurderinger={faresignalVurderinger}

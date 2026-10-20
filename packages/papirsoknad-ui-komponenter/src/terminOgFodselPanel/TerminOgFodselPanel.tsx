@@ -24,6 +24,7 @@ import {
   minTermindato,
   terminBekreftelseBeforeTodayOrTermindato,
   terminErRundtFodselsdato,
+  useReadOnly,
   validateMaxAntallBarn,
   validateMinAntallBarn,
 } from '@navikt/fp-utils';
@@ -56,7 +57,6 @@ type TransformFormValues =
     };
 
 interface Props {
-  readOnly: boolean;
   erForeldrepenger: boolean;
 }
 
@@ -72,7 +72,8 @@ const validerTerminBekreftelse =
     return terminBekreftelseBeforeTodayOrTermindato(termindato, terminbekreftelseDato);
   };
 
-export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger }: Props) => {
+export const TerminOgFodselPanel = ({ erForeldrepenger }: Props) => {
+  const readOnly = useReadOnly();
   const { watch, getValues, control } = useFormContext<FormValues>();
 
   const [iDag] = useState(() => new Date());

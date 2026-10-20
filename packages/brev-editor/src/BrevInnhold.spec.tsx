@@ -5,6 +5,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
+import { ReadOnlyProvider } from '@navikt/fp-utils';
+
 import { BrevInnhold } from './BrevInnhold';
 
 import messages from '../i18n/nb_NO.json';
@@ -34,10 +36,15 @@ const defaultProps = {
   forhåndsvis: vi.fn(),
 };
 
-const renderBrevInnhold = (props: Partial<Parameters<typeof BrevInnhold>[0]> = {}) =>
+const renderBrevInnhold = ({
+  isReadOnly = false,
+  ...props
+}: Partial<Parameters<typeof BrevInnhold>[0]> & { isReadOnly?: boolean } = {}) =>
   render(
     <RawIntlProvider value={intl}>
-      <BrevInnhold {...defaultProps} {...props} />
+      <ReadOnlyProvider readOnly={isReadOnly}>
+        <BrevInnhold {...defaultProps} {...props} />
+      </ReadOnlyProvider>
     </RawIntlProvider>,
   );
 

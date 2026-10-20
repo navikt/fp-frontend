@@ -34,10 +34,8 @@ export type AksjonspunktGodkjenningData = {
 type Props = {
   behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: (
-    | TotrinnskontrollSkjermlenkeContext
-    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
-  readOnly: boolean;
   erTilbakekreving: boolean;
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
@@ -47,7 +45,6 @@ type Props = {
 export const AksjonspunktGodkjenningFieldArray = ({
   behandling,
   totrinnskontrollSkjermlenkeContext,
-  readOnly,
   erTilbakekreving,
   skjemalenkeTyper,
   faktaOmBeregningTilfeller,
@@ -107,11 +104,7 @@ export const AksjonspunktGodkjenningFieldArray = ({
                 <BodyShort size="small">{formattedMessage}</BodyShort>
               </div>
             ))}
-            <GodkjenningPanel
-              index={index}
-              totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
-              readOnly={readOnly}
-            />
+            <GodkjenningPanel index={index} totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext} />
           </div>
         );
       })}

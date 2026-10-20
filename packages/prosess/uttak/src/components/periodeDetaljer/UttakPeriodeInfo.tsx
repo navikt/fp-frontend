@@ -14,6 +14,7 @@ import type {
   OppholdÅrsakType,
   PeriodeSoker,
 } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
 import type { UttakAktivitetType } from './UttakAktivitetType';
@@ -151,7 +152,6 @@ const visGraderingIkkeInnvilget = (
 
 interface Props {
   valgtPeriode: PeriodeSoker;
-  isReadOnly: boolean;
   harSoktOmFlerbarnsdager: boolean;
   graderingInnvilget?: boolean;
   erSamtidigUttak?: boolean;
@@ -164,7 +164,6 @@ interface Props {
 
 export const UttakPeriodeInfo = ({
   valgtPeriode,
-  isReadOnly,
   graderingInnvilget,
   erSamtidigUttak,
   harSoktOmFlerbarnsdager,
@@ -174,6 +173,7 @@ export const UttakPeriodeInfo = ({
   erOppfylt,
   valgtInnvilgelsesÅrsak,
 }: Props) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
 
   const { control } = useFormContext<UttakAktivitetType>();

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label, Table, VStack } from '@navikt/ds-react';
 
 import type { Oppgave } from '@navikt/fp-types';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { Beskrivelser } from './Beskrivelser';
 import { Dokumenter } from './Dokumenter';
@@ -12,10 +12,10 @@ import { FerdigstillOppgaveKnapp } from './FerdigstillOppgaveKnapp';
 interface Props {
   oppgaver: Oppgave[];
   ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
-  isReadOnly: boolean;
 }
 
-export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave, isReadOnly }: Props) => {
+export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave }: Props) => {
+  const isReadOnly = useReadOnly();
   const { alleKodeverk } = usePanelDataContext();
 
   return (

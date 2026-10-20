@@ -26,6 +26,7 @@ import type {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import {
   erAksjonspunktÅpent,
+  ReadOnlyProvider,
   useMellomlagretFormData,
   usePanelDataContext,
   usePanelOverstyring,
@@ -172,13 +173,14 @@ export const VilkarresultatMedOverstyringForm = ({
               }
             >
               {erOverstyringAvMedlemskap(overstyringApKode) && vilkår ? (
-                <MedlemskapVurderinger
-                  vilkår={vilkår}
-                  readOnly={overrideReadOnly || !erOverstyrt}
-                  ytelse={fagsak.fagsakYtelseType}
-                  erRevurdering={behandling.type === 'BT-004'}
-                  erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
-                />
+                <ReadOnlyProvider readOnly={overrideReadOnly || !erOverstyrt}>
+                  <MedlemskapVurderinger
+                    vilkår={vilkår}
+                    ytelse={fagsak.fagsakYtelseType}
+                    erRevurdering={behandling.type === 'BT-004'}
+                    erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYRING_AV_FORUTGÅENDE_MEDLEMSKAPSVILKÅR}
+                  />
+                </ReadOnlyProvider>
               ) : (
                 <VilkarResultPicker
                   vilkår={vilkår}

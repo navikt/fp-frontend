@@ -5,13 +5,13 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
 import type { AlleKodeverk, TidsromPermisjonDto } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FormValuesGradering } from '../../types';
 import { RenderGraderingPeriodeFieldArray } from './RenderGraderingPeriodeFieldArray';
 
 interface Props {
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -21,7 +21,8 @@ interface Props {
  * Viser panel for gradering
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent
  */
-export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
+export const PermisjonGraderingPanel = ({ alleKodeverk }: Props) => {
+  const readOnly = useReadOnly();
   const { watch, control } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValuesGradering }>();
   const skalGradere = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
 
@@ -36,7 +37,7 @@ export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
         readOnly={readOnly}
         label={<FormattedMessage id="Registrering.Permisjon.Gradering.GraderUttaket" />}
       />
-      {skalGradere && <RenderGraderingPeriodeFieldArray alleKodeverk={alleKodeverk} readOnly={readOnly} />}
+      {skalGradere && <RenderGraderingPeriodeFieldArray alleKodeverk={alleKodeverk} />}
     </VStack>
   );
 };

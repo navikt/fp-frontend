@@ -256,7 +256,6 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
               saveKlage={lagreFormkravVurdering}
               avsluttedeBehandlinger={avsluttedeBehandlinger}
               handleSubmit={formMethods.handleSubmit}
-              readOnly={isReadOnly}
               aksjonspunktCode={AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP}
             />
           </HStack>

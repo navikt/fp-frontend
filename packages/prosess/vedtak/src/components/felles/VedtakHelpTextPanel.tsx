@@ -4,6 +4,7 @@ import { Alert, Label, List } from '@navikt/ds-react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 const helpTextMap: Record<string, string> = {
   [AksjonspunktKode.VURDERE_ANNEN_YTELSE_FØR_VEDTAK]: 'VedtakForm.VurderAnnenYtelse',
@@ -13,11 +14,11 @@ const helpTextMap: Record<string, string> = {
 };
 
 interface Props {
-  isReadOnly: boolean;
   aksjonspunkterForPanel: Aksjonspunkt[];
 }
 
-export const VedtakHelpTextPanel = ({ isReadOnly, aksjonspunkterForPanel }: Props) => {
+export const VedtakHelpTextPanel = ({ aksjonspunkterForPanel }: Props) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
   const helpTexts = findHelpTexts(intl, aksjonspunkterForPanel);
   if (!isReadOnly && helpTexts.length > 0) {

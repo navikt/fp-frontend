@@ -5,13 +5,13 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
 import type { AlleKodeverk, TidsromPermisjonDto } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FormValuesOpphold } from '../../types';
 import { RenderOppholdPeriodeFieldArray } from './RenderOppholdPeriodeFieldArray';
 
 interface Props {
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -21,7 +21,8 @@ interface Props {
  * Viser panel for utsettelse
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-export const PermisjonOppholdPanel = ({ readOnly, alleKodeverk }: Props) => {
+export const PermisjonOppholdPanel = ({ alleKodeverk }: Props) => {
+  const readOnly = useReadOnly();
   const { watch, control } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValuesOpphold }>();
   const skalHaOpphold = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalHaOpphold`) || false;
 
@@ -36,7 +37,7 @@ export const PermisjonOppholdPanel = ({ readOnly, alleKodeverk }: Props) => {
         readOnly={readOnly}
         label={<FormattedMessage id="Registrering.Permisjon.Opphold.OppholdUttaket" />}
       />
-      {skalHaOpphold && <RenderOppholdPeriodeFieldArray alleKodeverk={alleKodeverk} readOnly={readOnly} />}
+      {skalHaOpphold && <RenderOppholdPeriodeFieldArray alleKodeverk={alleKodeverk} />}
     </VStack>
   );
 };

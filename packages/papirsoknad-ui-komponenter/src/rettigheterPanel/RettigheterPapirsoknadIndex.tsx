@@ -7,6 +7,7 @@ import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { RettigheterDto } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { SoknadData } from '../felles/SoknadData';
 
@@ -15,7 +16,6 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  readOnly: boolean;
   soknadData: SoknadData;
 }
 type RettigheterOptions = RettigheterDto | 'IKKE_RELEVANT';
@@ -42,7 +42,8 @@ const baseOptions: { label: string; value: RettigheterOptions }[] = [
   },
 ];
 
-export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => {
+export const RettigheterPapirsoknadIndex = ({ soknadData }: Props) => {
+  const readOnly = useReadOnly();
   const visMannAdoptererAlene =
     soknadData.getFamilieHendelseType() !== 'FODSL' && soknadData.getForeldreType() === 'FAR';
 

@@ -7,6 +7,8 @@ import { RhfCheckboxGroup, RhfDatepicker, RhfTextarea, RhfTextField } from '@nav
 import { hasValidDate, hasValidInteger, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
 import type { StartedEndretFormValues, VirksomhetFormValues } from '../types';
@@ -16,7 +18,6 @@ import styles from './virksomhetStartetEndretPanel.module.css';
 const maxLength4000 = maxLength(4000);
 
 interface Props {
-  readOnly: boolean;
   index: number;
 }
 
@@ -26,7 +27,8 @@ interface Props {
  * Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
+export const VirksomhetStartetEndretPanel = ({ index }: Props) => {
+  const readOnly = useReadOnly();
   const { control } = useFormContext<VirksomhetFormValues>();
   const intl = useIntl();
   return (
@@ -34,7 +36,6 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
       name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireAr`}
       control={control}
       label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.NewlyStartedOrChanged" />}
-      readOnly={readOnly}
       trueContent={
         <ArrowBox>
           <VStack gap="space-16">
@@ -52,7 +53,6 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
               <CheckboxWithInfo
                 value="harVarigEndring"
                 label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />}
-                readOnly={readOnly}
                 index={index}
               />
               <Checkbox value="erNyoppstartet" readOnly={readOnly}>
@@ -61,7 +61,6 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
               <CheckboxWithInfo
                 value="erNyIArbeidslivet"
                 label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.NyIArbeidslivet" />}
-                readOnly={readOnly}
                 index={index}
               />
             </RhfCheckboxGroup>
@@ -120,14 +119,13 @@ VirksomhetStartetEndretPanel.transformValues = ({
 const CheckboxWithInfo = ({
   value,
   label,
-  readOnly,
   index,
 }: {
   value: 'harVarigEndring' | 'erNyIArbeidslivet';
   label: React.ReactNode;
-  readOnly: boolean;
   index: number;
 }) => {
+  const readOnly = useReadOnly();
   const { watch, control } = useFormContext<VirksomhetFormValues>();
   const valgteÅrsaker = watch(`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireArArsak`, []);
 

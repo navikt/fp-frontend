@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
+import { ReadOnlyProvider } from '@navikt/fp-utils';
 
 import { HoyRisikoTittel } from './components/HoyRisikoTittel';
 import { IngenRisikoPanel } from './components/IngenRisikoPanel';
@@ -51,20 +52,21 @@ export const RisikoklassifiseringSakIndex = ({
   const harHoyRisikoklassifisering = harResultatkode('HOY', risikoklassifisering);
 
   return (
-    <RawIntlProvider value={intl}>
-      {harIkkeHoyRisikoklassifisering && <IngenRisikoPanel />}
-      {risikoklassifisering && harHoyRisikoklassifisering && (
-        <HoyRisikoTittel
-          risikoklassifisering={risikoklassifisering}
-          aksjonspunkt={aksjonspunkt}
-          readOnly={readOnly}
-          isRiskPanelOpen={isPanelOpen}
-          submitCallback={submitAksjonspunkt}
-          toggleRiskPanel={toggleRiskPanel}
-          faresignalVurderinger={faresignalVurderinger}
-        />
-      )}
-      {!harIkkeHoyRisikoklassifisering && !harHoyRisikoklassifisering && <ManglendeKlassifiseringPanel />}
-    </RawIntlProvider>
+    <ReadOnlyProvider readOnly={readOnly}>
+      <RawIntlProvider value={intl}>
+        {harIkkeHoyRisikoklassifisering && <IngenRisikoPanel />}
+        {risikoklassifisering && harHoyRisikoklassifisering && (
+          <HoyRisikoTittel
+            risikoklassifisering={risikoklassifisering}
+            aksjonspunkt={aksjonspunkt}
+            isRiskPanelOpen={isPanelOpen}
+            submitCallback={submitAksjonspunkt}
+            toggleRiskPanel={toggleRiskPanel}
+            faresignalVurderinger={faresignalVurderinger}
+          />
+        )}
+        {!harIkkeHoyRisikoklassifisering && !harHoyRisikoklassifisering && <ManglendeKlassifiseringPanel />}
+      </RawIntlProvider>
+    </ReadOnlyProvider>
   );
 };

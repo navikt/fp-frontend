@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Button, Dialog, VStack } from '@navikt/ds-react';
 
 import { ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
+import { useReadOnly } from '@navikt/fp-utils';
 
 interface Props {
   erModalÅpen: boolean;
@@ -10,7 +11,6 @@ interface Props {
   isSubmittable: boolean;
   isSubmitting: boolean;
   isDirty: boolean;
-  readOnly: boolean;
   valgtHjemmel?: string;
   submitCallback: () => void;
 }
@@ -21,10 +21,10 @@ export const BekreftOgSubmitKlageModal = ({
   isSubmittable,
   isSubmitting,
   isDirty,
-  readOnly,
   valgtHjemmel,
   submitCallback,
 }: Props) => {
+  const readOnly = useReadOnly();
   return (
     <Dialog open={erModalÅpen} onOpenChange={lukkModal} size="small">
       <Dialog.Popup closeOnOutsideClick={false} width="small">

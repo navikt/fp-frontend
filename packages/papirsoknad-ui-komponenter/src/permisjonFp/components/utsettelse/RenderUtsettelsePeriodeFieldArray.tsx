@@ -7,6 +7,7 @@ import { RhfDatepicker, RhfFieldArray, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 
 import type { AlleKodeverk, KodeverkMedNavn, UtsettelseÅrsak, UtsettelseDto } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from '../../constants';
@@ -32,7 +33,6 @@ const mapTyper = (typer: KodeverkMedNavn<'UtsettelseÅrsak'>[]): ReactElement[] 
 
 interface Props {
   alleKodeverk: AlleKodeverk;
-  readOnly: boolean;
   søkerErMor: boolean;
 }
 
@@ -41,7 +41,8 @@ interface Props {
  *
  * Viser inputfelter for dato for bestemmelse av utsettelseperiode.
  */
-export const RenderUtsettelsePeriodeFieldArray = ({ alleKodeverk, readOnly, søkerErMor }: Props) => {
+export const RenderUtsettelsePeriodeFieldArray = ({ alleKodeverk, søkerErMor }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
   const utsettelseReasons = alleKodeverk['UtsettelseÅrsak'];
   const periodeTyper = alleKodeverk['UttakPeriodeType'];
@@ -82,7 +83,7 @@ export const RenderUtsettelsePeriodeFieldArray = ({ alleKodeverk, readOnly, søk
         const periodeForUtsettelse = watch(`${getPrefix(index)}.periodeForUtsettelse`);
 
         return (
-          <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
+          <FieldArrayRow key={field.id} remove={remove} index={index}>
             <RhfSelect
               name={`${getPrefix(index)}.periodeForUtsettelse`}
               control={control}

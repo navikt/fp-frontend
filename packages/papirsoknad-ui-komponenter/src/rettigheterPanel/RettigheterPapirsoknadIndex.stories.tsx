@@ -1,8 +1,11 @@
+import type { ComponentProps } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
+
+import { type ReadOnlyArgs, withReadOnly } from '@navikt/fp-storybook-utils';
 
 import { SoknadData } from '../felles/SoknadData';
 import { RettigheterPapirsoknadIndex } from './RettigheterPapirsoknadIndex';
@@ -10,6 +13,7 @@ import { RettigheterPapirsoknadIndex } from './RettigheterPapirsoknadIndex';
 const meta = {
   title: 'ui-komponenter/rettigheter',
   component: RettigheterPapirsoknadIndex,
+  decorators: [withReadOnly],
   args: {
     readOnly: false,
   },
@@ -30,7 +34,7 @@ const meta = {
       </RhfForm>
     );
   },
-} satisfies Meta<typeof RettigheterPapirsoknadIndex>;
+} satisfies Meta<ComponentProps<typeof RettigheterPapirsoknadIndex> & ReadOnlyArgs>;
 
 export default meta;
 

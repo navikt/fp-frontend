@@ -93,7 +93,6 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
             sorterteArbeidsforhold={sorterteArbeidsforhold}
             arbeidOgInntekt={arbeidOgInntektMedPermisjon}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-            isReadOnly={isReadOnly}
             harÅpentAksjonspunkt={harÅpentAksjonspunkt}
             skjæringstidspunkt={arbeidOgInntektMedPermisjon.skjæringstidspunkt}
             alleKodeverk={alleKodeverk}

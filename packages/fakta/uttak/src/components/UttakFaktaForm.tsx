@@ -261,7 +261,6 @@ export const UttakFaktaForm = ({
         uttakKontrollerFaktaPerioder={uttakPerioder}
         oppdaterUttakPerioder={setUttakPerioder}
         alleKodeverk={alleKodeverk}
-        readOnly={isReadOnly}
         setDirty={setIsDirty}
         erRedigerbart={erRedigerbart}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

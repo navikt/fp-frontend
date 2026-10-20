@@ -9,7 +9,6 @@ import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 interface Props {
   revurderingsÅrsakString?: string;
   språkkode: string;
-  isReadOnly: boolean;
   behandlingsresultat?: Behandlingsresultat;
   beregningErManueltFastsatt: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
@@ -18,7 +17,6 @@ interface Props {
 export const VedtakOpphorRevurderingPanel = ({
   revurderingsÅrsakString,
   språkkode,
-  isReadOnly,
   behandlingsresultat,
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
@@ -32,7 +30,6 @@ export const VedtakOpphorRevurderingPanel = ({
 
     {!skalBrukeOverstyrendeFritekstBrev && beregningErManueltFastsatt && (
       <VedtakFritekstPanel
-        isReadOnly={isReadOnly}
         språkkode={språkkode}
         behandlingsresultat={behandlingsresultat}
         labelTextCode="VedtakForm.Fritekst.Beregningsgrunnlag"

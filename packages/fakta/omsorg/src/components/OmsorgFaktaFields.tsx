@@ -8,6 +8,7 @@ import { TrueFalseInput } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useReadOnly } from '@navikt/fp-utils';
 
 const { AVKLAR_LØPENDE_OMSORG } = AksjonspunktKode;
 
@@ -16,11 +17,11 @@ export type FormValues = {
 };
 
 interface Props {
-  readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
-export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props) => {
+export const OmsorgFaktaFields = ({ alleMerknaderFraBeslutter }: Props) => {
+  const readOnly = useReadOnly();
   const { control } = useFormContext<FormValues>();
   return (
     <FaktaGruppe withoutBorder merknaderFraBeslutter={alleMerknaderFraBeslutter[AVKLAR_LØPENDE_OMSORG]}>

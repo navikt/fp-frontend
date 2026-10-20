@@ -32,8 +32,7 @@ interface Props {
 }
 
 export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandlingsresultat }: Props) => {
-  const { behandling, isReadOnly, alleKodeverk, aksjonspunkterForPanel, submitCallback } =
-    usePanelDataContext<AksjonspunktData>();
+  const { behandling, alleKodeverk, aksjonspunkterForPanel, submitCallback } = usePanelDataContext<AksjonspunktData>();
 
   const avvistArsaker = getAvvisningsAarsaker(klageVurdering);
   const omgjortAarsak = getOmgjortAarsak(klageVurdering, alleKodeverk);
@@ -95,7 +94,6 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
       {klageVurderingResultat?.klageVurdertAv === 'NFP' && (
         <VedtakKlageSubmitPanel
           previewVedtakCallback={previewVedtakCallback}
-          readOnly={isReadOnly}
           behandlingPåVent={behandling.behandlingPåVent}
           lagreVedtak={lagreVedtak}
           isSubmitting={isSubmitting}

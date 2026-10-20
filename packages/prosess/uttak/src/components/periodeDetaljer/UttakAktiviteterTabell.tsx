@@ -23,6 +23,7 @@ import type {
   UttakPeriodeType,
   UttakUtsettelseType,
 } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
 import type { UttakAktivitetType } from './UttakAktivitetType';
@@ -168,7 +169,6 @@ const validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt =
 
 interface Props {
   periodeTyper: KodeverkMedNavn<'UttakPeriodeType'>[];
-  isReadOnly: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   aktiviteter: PeriodeSokerAktivitet[];
   erOppfylt: boolean;
@@ -178,13 +178,13 @@ interface Props {
 
 export const UttakAktiviteterTabell = ({
   periodeTyper,
-  isReadOnly,
   arbeidsgiverOpplysningerPerId,
   aktiviteter,
   erOppfylt,
   valgtPeriode,
   erTilknyttetStortinget,
 }: Props) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
 
   const { control, getValues, watch } = useFormContext<UttakAktivitetType>();

@@ -3,6 +3,8 @@ import { FormattedMessage } from 'react-intl';
 import { ArrowUndoIcon, FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 import { utledDelerFraBrev, utledStiler } from './redigeringsUtils';
 
 import styles from './brevInnhold.module.css';
@@ -11,7 +13,6 @@ interface Props {
   opprinneligHtml: string;
   editorHolderId: string;
   footer?: string;
-  isReadOnly?: boolean;
   visForhåndsvisValideringsFeil: boolean;
   setVisTilbakestillAdvarselModal: (skalVise: boolean) => void;
   lagreOgLukk: () => void;
@@ -22,12 +23,12 @@ export const BrevInnhold = ({
   opprinneligHtml,
   editorHolderId,
   footer,
-  isReadOnly = false,
   visForhåndsvisValideringsFeil,
   setVisTilbakestillAdvarselModal,
   lagreOgLukk,
   forhåndsvis,
 }: Props) => {
+  const isReadOnly = useReadOnly();
   const brevStiler = utledStiler(opprinneligHtml);
   const { navLogo, header } = utledDelerFraBrev(opprinneligHtml);
 

@@ -9,11 +9,7 @@ import { FRILANS_NAME_PREFIX } from '../constants';
 import type { FrilansFormValues, FrilansSubFormValues } from '../types';
 import { FrilansOppdragForFamilieFieldArray } from './FrilansOppdragForFamilieFieldArray';
 
-interface Props {
-  readOnly: boolean;
-}
-
-export const FrilansOppdragForFamiliePanel = ({ readOnly }: Props) => {
+export const FrilansOppdragForFamiliePanel = () => {
   const { watch, control } = useFormContext<FrilansFormValues>();
   const harHattOppdragForFamilie = watch(`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`);
 
@@ -23,14 +19,13 @@ export const FrilansOppdragForFamiliePanel = ({ readOnly }: Props) => {
         name={`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`}
         control={control}
         label={<FormattedMessage id="Registrering.FrilansOppdrag.HarHattOppdragForFamilie" />}
-        readOnly={readOnly}
       />
       {harHattOppdragForFamilie && (
         <ArrowBox>
           <Label size="small">
             <FormattedMessage id="Registrering.FrilansOppdrag.OppgiPeriode" />
           </Label>
-          <FrilansOppdragForFamilieFieldArray readOnly={readOnly} />
+          <FrilansOppdragForFamilieFieldArray />
         </ArrowBox>
       )}
     </VStack>

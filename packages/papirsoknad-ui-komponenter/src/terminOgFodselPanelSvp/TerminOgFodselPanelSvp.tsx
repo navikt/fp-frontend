@@ -19,6 +19,7 @@ import {
   minFodselsdato,
   minTermindato,
   terminErRundtFodselsdato,
+  useReadOnly,
 } from '@navikt/fp-utils';
 
 import messages from '../../i18n/nb_NO.json';
@@ -31,10 +32,6 @@ type FormValues = {
   erBarnetFødt?: boolean;
 };
 
-interface Props {
-  readOnly: boolean;
-}
-
 const validateTermin = (getValues: UseFormGetValues<FormValues>) => (termindato: string) => {
   const fodselsdato = getValues('fødselsdato');
 
@@ -46,7 +43,8 @@ const validateTermin = (getValues: UseFormGetValues<FormValues>) => (termindato:
  *
  * RhfForm som brukes for registrere termin og fødsel i papirsøknad.
  */
-export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
+export const TerminOgFodselPanelSvp = () => {
+  const readOnly = useReadOnly();
   const { getValues, watch, control } = useFormContext<FormValues>();
 
   const [iDag] = useState(() => new Date());

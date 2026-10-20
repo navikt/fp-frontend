@@ -43,7 +43,6 @@ const transformValues = (
 export type ForeldrepengerEndringssøknadValues = ReturnType<typeof transformValues>;
 
 interface Props {
-  readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   onSubmit: (values: ForeldrepengerEndringssøknadValues) => Promise<void>;
@@ -58,7 +57,6 @@ interface Props {
  * RhfForm-komponent for registrering av papir-endringssøknad for foreldrepenger.
  */
 export const ForeldrepengerEndringssøknadForm = ({
-  readOnly,
   soknadData,
   alleKodeverk,
   onSubmit,
@@ -73,17 +71,11 @@ export const ForeldrepengerEndringssøknadForm = ({
   return (
     <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(soknadData, values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="space-16">
-        <MottattDatoPapirsoknadIndex readOnly={readOnly} />
-        <BekreftelsePanel annenForelderInformertRequired readOnly={readOnly} />
+        <MottattDatoPapirsoknadIndex />
+        <BekreftelsePanel annenForelderInformertRequired />
       </HGrid>
-      <PermisjonIndex
-        foreldreType={soknadData.getForeldreType()}
-        readOnly={readOnly}
-        alleKodeverk={alleKodeverk}
-        erEndringssøknad
-      />
+      <PermisjonIndex foreldreType={soknadData.getForeldreType()} alleKodeverk={alleKodeverk} erEndringssøknad />
       <LagreSoknadPapirsoknadIndex
-        readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
         onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues()) : undefined}
         submitting={formMethods.formState.isSubmitting}

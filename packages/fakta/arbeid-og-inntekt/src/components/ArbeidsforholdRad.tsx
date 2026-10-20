@@ -11,7 +11,7 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
-import { classNames } from '@navikt/fp-utils';
+import { classNames, ReadOnlyProvider } from '@navikt/fp-utils';
 
 import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
 import { ArbeidsforholdInformasjonPanel } from './felles/ArbeidsforholdInformasjonPanel';
@@ -28,7 +28,6 @@ interface Props {
   behandlingUuid: string;
   behandlingVersjon: number;
   radData: ArbeidsforholdOgInntektRadData;
-  isReadOnly: boolean;
   erOverstyrt: boolean;
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
@@ -44,7 +43,6 @@ export const ArbeidsforholdRad = ({
   behandlingUuid,
   behandlingVersjon,
   radData,
-  isReadOnly,
   erOverstyrt,
   oppdaterTabell,
   registrerArbeidsforhold,
@@ -89,16 +87,17 @@ export const ArbeidsforholdRad = ({
       content={
         <VStack gap="space-16" className={harÅpentAksjonspunkt ? styles['panelOpenAp'] : styles['panelOpen']}>
           {erManueltOpprettet && (
-            <ManueltLagtTilArbeidsforholdForm
-              behandlingUuid={behandlingUuid}
-              behandlingVersjon={behandlingVersjon}
-              isReadOnly={false}
-              registrerArbeidsforhold={registrerArbeidsforhold}
-              radData={radData}
-              lukkArbeidsforholdRad={toggleÅpenRad}
-              erOverstyrt={erOverstyrt}
-              oppdaterTabell={oppdaterTabell}
-            />
+            <ReadOnlyProvider readOnly={false}>
+              <ManueltLagtTilArbeidsforholdForm
+                behandlingUuid={behandlingUuid}
+                behandlingVersjon={behandlingVersjon}
+                registrerArbeidsforhold={registrerArbeidsforhold}
+                radData={radData}
+                lukkArbeidsforholdRad={toggleÅpenRad}
+                erOverstyrt={erOverstyrt}
+                oppdaterTabell={oppdaterTabell}
+              />
+            </ReadOnlyProvider>
           )}
           {harArbeidsforholdOgInntektsmelding && (
             <InntektsmeldingerPanel saksnummer={saksnummer} alleKodeverk={alleKodeverk} radData={radData} />
@@ -124,7 +123,6 @@ export const ArbeidsforholdRad = ({
               <ManglendeInntektsmeldingForm
                 behandlingUuid={behandlingUuid}
                 behandlingVersjon={behandlingVersjon}
-                isReadOnly={isReadOnly}
                 radData={radData}
                 lagreVurdering={lagreVurdering}
                 lukkArbeidsforholdRad={toggleÅpenRad}
@@ -145,7 +143,6 @@ export const ArbeidsforholdRad = ({
                 behandlingUuid={behandlingUuid}
                 behandlingVersjon={behandlingVersjon}
                 radData={radData}
-                isReadOnly={isReadOnly}
                 registrerArbeidsforhold={registrerArbeidsforhold}
                 lagreVurdering={lagreVurdering}
                 lukkArbeidsforholdRad={toggleÅpenRad}

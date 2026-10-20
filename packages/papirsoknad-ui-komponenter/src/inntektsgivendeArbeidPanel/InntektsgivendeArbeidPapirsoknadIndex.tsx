@@ -11,13 +11,12 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
-export const InntektsgivendeArbeidPapirsoknadIndex = ({ readOnly, alleKodeverk }: Props) => (
+export const InntektsgivendeArbeidPapirsoknadIndex = ({ alleKodeverk }: Props) => (
   <RawIntlProvider value={intl}>
-    <InntektsgivendeArbeidPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
+    <InntektsgivendeArbeidPanel alleKodeverk={alleKodeverk} />
   </RawIntlProvider>
 );
 

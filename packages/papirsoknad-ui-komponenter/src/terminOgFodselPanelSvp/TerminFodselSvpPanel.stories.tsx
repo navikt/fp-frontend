@@ -5,18 +5,21 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
+import { type ReadOnlyArgs, withReadOnly } from '@navikt/fp-storybook-utils';
+
 import { TerminOgFodselPanelSvp } from './TerminOgFodselPanelSvp';
 
 const meta = {
   title: 'ui-komponenter/termin-og-fodsel-svp',
   component: TerminOgFodselPanelSvp,
+  decorators: [withReadOnly],
   parameters: {
     submitCallback: action('onSubmit'),
   },
   args: {
     readOnly: false,
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
+  render: function Render(_args, { parameters: { submitCallback } }) {
     const formMethods = useForm();
 
     return (
@@ -25,7 +28,7 @@ const meta = {
         onSubmit={values => submitCallback(TerminOgFodselPanelSvp.transformValues(values))}
       >
         <VStack gap="space-40">
-          <TerminOgFodselPanelSvp {...args} />
+          <TerminOgFodselPanelSvp />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)
           </Button>
@@ -33,7 +36,7 @@ const meta = {
       </RhfForm>
     );
   },
-} satisfies Meta<typeof TerminOgFodselPanelSvp>;
+} satisfies Meta<ReadOnlyArgs>;
 
 export default meta;
 

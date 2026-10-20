@@ -24,7 +24,6 @@ export type OppholdINorgeFormValues = {
 
 interface Props {
   erAdopsjon: boolean;
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   mottattDato?: string;
 }
@@ -36,7 +35,7 @@ interface Props {
  * Inneholder delen av skjemaet som omhandler informasjon om utenlandsopphold.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato, erAdopsjon }: Props) => {
+export const OppholdINorgePanel = ({ alleKodeverk, mottattDato, erAdopsjon }: Props) => {
   const { formatMessage } = useIntl();
   const sortedCountriesByName = alleKodeverk['Landkoder'].toSorted((a, b) => a.navn.localeCompare(b.navn));
 
@@ -57,7 +56,6 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
           label={formatMessage({
             id: erAdopsjon ? 'Registrering.OppholdVedAdopsjon' : 'Registrering.OppholdVedFodsel',
           })}
-          readOnly={readOnly}
         />
 
         <VStack gap="space-8">
@@ -65,7 +63,6 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
             name="oppholdSisteTolvINorge"
             control={control}
             label={<FormattedMessage id="Registrering.OppholdSisteTolv" />}
-            readOnly={readOnly}
           />
           {skalViseTidligereOppholdInput && (
             <ArrowBox alignOffset={58}>
@@ -73,7 +70,6 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
                 erTidligereOpphold
                 mottattDato={mottattDato}
                 countryCodes={sortedCountriesByName}
-                readOnly={readOnly}
               />
             </ArrowBox>
           )}
@@ -84,15 +80,10 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
             name="oppholdNesteTolvINorge"
             control={control}
             label={<FormattedMessage id="Registrering.OppholdNesteTolv" />}
-            readOnly={readOnly}
           />
           {skalViseFremtidigeOppholdInput && (
             <ArrowBox alignOffset={58}>
-              <UtenlandsOppholdField
-                mottattDato={mottattDato}
-                countryCodes={sortedCountriesByName}
-                readOnly={readOnly}
-              />
+              <UtenlandsOppholdField mottattDato={mottattDato} countryCodes={sortedCountriesByName} />
             </ArrowBox>
           )}
         </VStack>

@@ -7,13 +7,13 @@ import { RhfCheckboxGroup } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { ANDRE_YTELSER_NAME_PREFIX, ANDRE_YTELSER_PERIODER_NAME, ANDRE_YTELSER_TYPER_NAME } from '../constants';
 import type { AndreYtelserFormValue, TransformValues } from '../types';
 import { RenderAndreYtelserPerioderFieldArray } from './RenderAndreYtelserPerioderFieldArray';
 
 interface Props {
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   kunMiliterEllerSiviltjeneste?: boolean;
 }
@@ -23,7 +23,8 @@ interface Props {
  *
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
-export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = false, alleKodeverk }: Props) => {
+export const AndreYtelserPanel = ({ kunMiliterEllerSiviltjeneste = false, alleKodeverk }: Props) => {
+  const readOnly = useReadOnly();
   const { control } = useFormContext<AndreYtelserFormValue>();
 
   const filtrerteArbeidstyper = filtrerArbeidstyper(alleKodeverk['ArbeidType'], kunMiliterEllerSiviltjeneste);
@@ -42,7 +43,7 @@ export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = fal
           readOnly={readOnly}
         >
           {filtrerteArbeidstyper.map(at => (
-            <CheckboxWithInfo key={at.kode} arbeidstype={at} readOnly={readOnly} />
+            <CheckboxWithInfo key={at.kode} arbeidstype={at} />
           ))}
         </RhfCheckboxGroup>
       </VStack>
@@ -72,13 +73,8 @@ AndreYtelserPanel.transformValues = ({
     .filter(o => o !== undefined),
 });
 
-const CheckboxWithInfo = ({
-  arbeidstype,
-  readOnly,
-}: {
-  arbeidstype: KodeverkMedNavn<'ArbeidType'>;
-  readOnly: boolean;
-}) => {
+const CheckboxWithInfo = ({ arbeidstype }: { arbeidstype: KodeverkMedNavn<'ArbeidType'> }) => {
+  const readOnly = useReadOnly();
   const { watch } = useFormContext<AndreYtelserFormValue>();
   const valgteArbeidstyper = watch(`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_TYPER_NAME}`, []);
 
@@ -93,7 +89,6 @@ const CheckboxWithInfo = ({
         <ArrowBox>
           <RenderAndreYtelserPerioderFieldArray
             name={`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_PERIODER_NAME}.${arbeidstype.kode}`}
-            readOnly={readOnly}
           />
         </ArrowBox>
       )}

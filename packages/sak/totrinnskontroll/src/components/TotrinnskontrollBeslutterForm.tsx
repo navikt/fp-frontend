@@ -18,7 +18,7 @@ import type {
   TotrinnskontrollSkjermlenkeContextDtoFpTilbake,
   VurderÅrsak,
 } from '@navikt/fp-types';
-import { erTilbakekrevingBehandling } from '@navikt/fp-utils';
+import { erTilbakekrevingBehandling, useReadOnly } from '@navikt/fp-utils';
 
 import {
   type AksjonspunktGodkjenningData,
@@ -77,8 +77,7 @@ export type FormValues = {
 
 const buildInitialValues = (
   totrinnskontrollSkjermlenkeContext: (
-    | TotrinnskontrollSkjermlenkeContext
-    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[],
 ): FormValues => ({
   aksjonspunktGodkjenning: totrinnskontrollSkjermlenkeContext
@@ -95,11 +94,9 @@ const buildInitialValues = (
 interface Props {
   behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: (
-    | TotrinnskontrollSkjermlenkeContext
-    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
   forhandsvisVedtaksbrev: () => void;
-  readOnly: boolean;
   erTilbakekreving: boolean;
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   erBehandlingEtterKlage: boolean;
@@ -114,7 +111,6 @@ export const TotrinnskontrollBeslutterForm = ({
   behandling,
   onSubmit,
   forhandsvisVedtaksbrev,
-  readOnly,
   erBehandlingEtterKlage,
   skjemalenkeTyper,
   erTilbakekreving,
@@ -124,6 +120,7 @@ export const TotrinnskontrollBeslutterForm = ({
   beslutterFormData,
   setBeslutterFormData,
 }: Props) => {
+  const readOnly = useReadOnly();
   const erKlage = behandling.type === 'BT-003';
   const erAnke = behandling.type === 'BT-008';
   const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
@@ -153,7 +150,6 @@ export const TotrinnskontrollBeslutterForm = ({
         <AksjonspunktGodkjenningFieldArray
           behandling={behandling}
           erTilbakekreving={erTilbakekreving}
-          readOnly={readOnly}
           totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
           skjemalenkeTyper={skjemalenkeTyper}
           faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}

@@ -12,7 +12,6 @@ interface Props {
   onSubmit: (values: ForeldrepengerValues | ForeldrepengerEndringssøknadValues) => Promise<void>;
   onMellomlagre?: (values: Record<string, unknown>) => void;
   mellomlagretData?: Record<string, unknown>;
-  readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
@@ -24,7 +23,6 @@ export const ForeldrepengerPapirsoknadIndex = ({
   onSubmit,
   onMellomlagre,
   mellomlagretData,
-  readOnly,
   soknadData,
   alleKodeverk,
   fagsakPersonnummer,
@@ -36,7 +34,6 @@ export const ForeldrepengerPapirsoknadIndex = ({
       onSubmit={onSubmit}
       onMellomlagre={onMellomlagre}
       mellomlagretData={mellomlagretData}
-      readOnly={readOnly}
       soknadData={soknadData}
       alleKodeverk={alleKodeverk}
     />
@@ -46,7 +43,6 @@ export const ForeldrepengerPapirsoknadIndex = ({
       onSubmit={onSubmit}
       onMellomlagre={onMellomlagre}
       mellomlagretData={mellomlagretData}
-      readOnly={readOnly}
       soknadData={soknadData}
       alleKodeverk={alleKodeverk}
       fagsakPersonnummer={fagsakPersonnummer}

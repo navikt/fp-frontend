@@ -10,6 +10,7 @@ import type {
   TotrinnskontrollSkjermlenkeContext,
   TotrinnskontrollSkjermlenkeContextDtoFpTilbake,
 } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { AksjonspunktGodkjenningData } from './AksjonspunktGodkjenningFieldArray';
 
@@ -36,10 +37,10 @@ type Props = {
   totrinnskontrollSkjermlenkeContext: (
     TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
-  readOnly: boolean;
 };
 
-export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, readOnly }: Props) => {
+export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext }: Props) => {
+  const readOnly = useReadOnly();
   const { watch, getValues, control } = useFormContext<{
     aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
   }>();

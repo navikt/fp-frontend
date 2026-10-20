@@ -5,18 +5,21 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
+import { type ReadOnlyArgs, withReadOnly } from '@navikt/fp-storybook-utils';
+
 import { DekningsgradIndex } from './DekningsgradIndex';
 
 const meta = {
   title: 'ui-komponenter/dekningsgrad',
   component: DekningsgradIndex,
+  decorators: [withReadOnly],
   parameters: {
     submitCallback: action('onSubmit'),
   },
   args: {
     readOnly: false,
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
+  render: function Render(_args, { parameters: { submitCallback } }) {
     const formMethods = useForm({
       defaultValues: DekningsgradIndex.initialValues(),
     });
@@ -24,7 +27,7 @@ const meta = {
     return (
       <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(DekningsgradIndex.transformValues(values))}>
         <VStack gap="space-40">
-          <DekningsgradIndex {...args} />
+          <DekningsgradIndex />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)
           </Button>
@@ -32,7 +35,7 @@ const meta = {
       </RhfForm>
     );
   },
-} satisfies Meta<typeof DekningsgradIndex>;
+} satisfies Meta<ReadOnlyArgs>;
 
 export default meta;
 

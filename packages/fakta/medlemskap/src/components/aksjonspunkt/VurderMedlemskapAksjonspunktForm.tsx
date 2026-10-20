@@ -59,7 +59,6 @@ export const VurderMedlemskapAksjonspunktForm = ({ manuellBehandlingResultat }: 
             erForutgående={erForutgående}
             erRevurdering={behandling.type === 'BT-004'}
             vilkår={vilkårForPanel[0]!}
-            readOnly={isReadOnly}
             ytelse={fagsak.fagsakYtelseType}
           />
           <FaktaBegrunnelseTextField

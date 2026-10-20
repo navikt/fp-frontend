@@ -157,7 +157,7 @@ export const VedtakForm = ({
   oppgaver,
   ferdigstillOppgave,
 }: Props) => {
-  const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly, aksjonspunkterForPanel } =
+  const { behandling, fagsak, alleKodeverk, submitCallback, aksjonspunkterForPanel } =
     usePanelDataContext<VedtakAksjonspunkter[]>();
 
   const { behandlingsresultat, språkkode, vilkår } = behandling;
@@ -207,7 +207,6 @@ export const VedtakForm = ({
             return (
               <VedtakInnvilgetPanel
                 behandlingsresultat={behandlingsresultat}
-                isReadOnly={isReadOnly}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
                 ytelseTypeKode={fagsak.fagsakYtelseType}
                 språkkode={språkkode}
@@ -220,7 +219,6 @@ export const VedtakForm = ({
             return (
               <VedtakAvslagPanel
                 behandlingsresultat={behandlingsresultat}
-                isReadOnly={isReadOnly}
                 språkkode={språkkode}
                 alleKodeverk={alleKodeverk}
                 vilkår={vilkår}

@@ -21,6 +21,7 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
@@ -44,7 +45,6 @@ interface Props {
   behandlingUuid: string;
   behandlingVersjon: number;
   radData: ArbeidsforholdOgInntektRadData;
-  isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
@@ -55,12 +55,12 @@ export const ManglendeArbeidsforholdForm = ({
   behandlingUuid,
   behandlingVersjon,
   radData,
-  isReadOnly,
   registrerArbeidsforhold,
   lagreVurdering,
   lukkArbeidsforholdRad,
   oppdaterTabell,
 }: Props) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
 
   const defaultValues = {

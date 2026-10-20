@@ -7,7 +7,7 @@ import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@na
 
 import { type FaktaKilde } from '@navikt/fp-fakta-felles';
 import type { FødselGjeldende } from '@navikt/fp-types';
-import { maxTermindato, minTermindato } from '@navikt/fp-utils';
+import { maxTermindato, minTermindato, useReadOnly } from '@navikt/fp-utils';
 
 const notRequiredValidation: ComponentProps<typeof RhfDatepicker>['validate'] = [
   hasValidDate,
@@ -21,11 +21,11 @@ export type TermindatoFormValues = {
 };
 
 interface TermindatoProps {
-  isReadOnly: boolean;
   isRequired?: boolean;
 }
 
-export const Termindato = ({ isReadOnly, isRequired = true }: TermindatoProps) => {
+export const Termindato = ({ isRequired = true }: TermindatoProps) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
   const { control } = useFormContext<TermindatoFormValues>();
 

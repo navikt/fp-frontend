@@ -11,20 +11,14 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  readOnly: boolean;
   erAdopsjon: boolean;
   alleKodeverk: AlleKodeverk;
   mottattDato?: string;
 }
 
-export const OppholdINorgePapirsoknadIndex = ({ readOnly, erAdopsjon, alleKodeverk, mottattDato }: Props) => (
+export const OppholdINorgePapirsoknadIndex = ({ erAdopsjon, alleKodeverk, mottattDato }: Props) => (
   <RawIntlProvider value={intl}>
-    <OppholdINorgePanel
-      readOnly={readOnly}
-      erAdopsjon={erAdopsjon}
-      alleKodeverk={alleKodeverk}
-      mottattDato={mottattDato}
-    />
+    <OppholdINorgePanel erAdopsjon={erAdopsjon} alleKodeverk={alleKodeverk} mottattDato={mottattDato} />
   </RawIntlProvider>
 );
 

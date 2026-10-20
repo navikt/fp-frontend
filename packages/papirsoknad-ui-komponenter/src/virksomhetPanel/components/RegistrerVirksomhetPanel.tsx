@@ -12,7 +12,6 @@ import type { VirksomhetFormValues } from '../types';
 import { VirksomhetRad } from './VirksomhetRad';
 
 interface Props {
-  readOnly?: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -23,7 +22,7 @@ interface Props {
  * foreldrepenger og søker har arbeidet i egen virksomhet.
  * Viser registrerte virksomheter samt knapp for å legge til nye virksomheter.
  */
-export const RegistrerVirksomhetPanel = ({ readOnly = false, alleKodeverk }: Props) => {
+export const RegistrerVirksomhetPanel = ({ alleKodeverk }: Props) => {
   const intl = useIntl();
 
   const {
@@ -69,7 +68,6 @@ export const RegistrerVirksomhetPanel = ({ readOnly = false, alleKodeverk }: Pro
               open={index + 1 === fields.length}
               remove={() => remove(index)}
               alleKodeverk={alleKodeverk}
-              readOnly={readOnly}
             />
           ))}
         </Table.Body>

@@ -101,7 +101,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
 
         <VedtakDocuments vedtaksdokumenter={innsyn?.vedtaksdokumentasjon ?? []} />
 
-        <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} readOnly={isReadOnly} />
+        <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} />
 
         <ProsessStegBegrunnelseTextField readOnly={isReadOnly} />
 

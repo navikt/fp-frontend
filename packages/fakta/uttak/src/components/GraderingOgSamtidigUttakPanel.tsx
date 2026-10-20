@@ -8,6 +8,7 @@ import { required } from '@navikt/ft-form-validators';
 import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
@@ -49,7 +50,6 @@ interface Props {
   valgtPeriode?: KontrollerFaktaPeriodeMedApMarkering;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -57,9 +57,9 @@ export const GraderingOgSamtidigUttakPanel = ({
   valgtPeriode,
   arbeidsgiverOpplysningerPerId,
   faktaArbeidsforhold,
-  readOnly,
   alleKodeverk,
 }: Props) => {
+  const readOnly = useReadOnly();
   const aRef = valgtPeriode?.arbeidsforhold?.arbeidsgiverReferanse;
   const arbeidsgiverFinnesIkke = aRef && aRef !== 'null' && !arbeidsgiverOpplysningerPerId[aRef];
 

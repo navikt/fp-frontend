@@ -8,6 +8,7 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { KontrollerEtterbetalingTilSøkerAP } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { EtterbetalingSøkerFormValues } from '../types/FormValues';
 
@@ -16,10 +17,10 @@ const maxLength1500 = maxLength(1500);
 
 interface Props {
   aksjonspunkt?: Aksjonspunkt;
-  readOnly: boolean;
 }
 
-export const EtterbetalingSøkerForm = ({ readOnly, aksjonspunkt }: Props) => {
+export const EtterbetalingSøkerForm = ({ aksjonspunkt }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const { control } = useFormContext<EtterbetalingSøkerFormValues>();

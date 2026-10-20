@@ -9,33 +9,28 @@ import {
 import type { AlleKodeverk } from '@navikt/fp-types';
 
 interface Props {
-  readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   fødselsdato: string | undefined;
   mottattDato: string | undefined;
 }
 
-export const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fødselsdato, mottattDato }: Props) => (
+export const RegistreringFodselGrid = ({ soknadData, alleKodeverk, fødselsdato, mottattDato }: Props) => (
   <>
     <OppholdINorgePapirsoknadIndex
-      readOnly={readOnly}
       erAdopsjon={soknadData.getFamilieHendelseType() === 'ADPSJN'}
       alleKodeverk={alleKodeverk}
       mottattDato={mottattDato}
     />
-    {soknadData.getForeldreType() !== 'MOR' && (
-      <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
-    )}
+    {soknadData.getForeldreType() !== 'MOR' && <RettigheterPapirsoknadIndex soknadData={soknadData} />}
     {soknadData.getForeldreType() !== 'MOR' && (
       <OmsorgOgAdopsjonPapirsoknadIndex
-        readOnly={readOnly}
         familieHendelseType={soknadData.getFamilieHendelseType()}
         fødselsdato={fødselsdato}
       />
     )}
-    <TerminOgFodselPanel readOnly={readOnly} erForeldrepenger={false} />
-    <SprakPapirsoknadIndex readOnly={readOnly} />
+    <TerminOgFodselPanel erForeldrepenger={false} />
+    <SprakPapirsoknadIndex />
   </>
 );
 

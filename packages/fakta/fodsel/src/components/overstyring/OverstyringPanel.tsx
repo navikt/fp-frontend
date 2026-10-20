@@ -5,7 +5,7 @@ import { AksjonspunktBoks, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FødselGjeldende } from '@navikt/fp-types';
-import { usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
+import { ReadOnlyProvider, usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
 
 import { OverstyringForm } from './OverstyringForm';
 
@@ -39,7 +39,9 @@ export const OverstyringPanel = ({ gjeldende }: Props) => {
             ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
           )}
         >
-          <OverstyringForm isReadOnly={readOnly} gjeldende={gjeldende} avbrytOverstyring={toggleOverstyring} />
+          <ReadOnlyProvider readOnly={readOnly}>
+            <OverstyringForm gjeldende={gjeldende} avbrytOverstyring={toggleOverstyring} />
+          </ReadOnlyProvider>
         </AksjonspunktBoks>
       )}
     </>

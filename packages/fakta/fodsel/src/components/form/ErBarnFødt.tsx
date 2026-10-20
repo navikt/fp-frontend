@@ -6,11 +6,11 @@ import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import type { FødselGjeldende } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { BarnFieldArray, type BarnFormValues } from './BarnFieldArray';
 
 interface Props {
-  isReadOnly: boolean;
   finnesBarnIFReg: boolean;
   antallBarnISøknad: number;
 }
@@ -19,7 +19,8 @@ export type ErBarnFødtFormValues = {
   erBarnFødt: boolean | undefined;
 } & BarnFormValues;
 
-export const ErBarnFødt = ({ isReadOnly, finnesBarnIFReg, antallBarnISøknad }: Props) => {
+export const ErBarnFødt = ({ finnesBarnIFReg, antallBarnISøknad }: Props) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
 
   const { control, watch } = useFormContext<ErBarnFødtFormValues>();
@@ -45,7 +46,7 @@ export const ErBarnFødt = ({ isReadOnly, finnesBarnIFReg, antallBarnISøknad }:
           </Radio>
         </HStack>
       </RhfRadioGroup>
-      {erBarnFødt && <BarnFieldArray isReadOnly={isReadOnly} />}
+      {erBarnFødt && <BarnFieldArray />}
     </VStack>
   );
 };

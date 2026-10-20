@@ -23,6 +23,7 @@
     "@navikt/fp-papirsoknad-ui-komponenter": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-types": "workspace:*",
+    "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-form-hooks": "13.0.2",
     "@navikt/ft-form-validators": "7.0.2",
     "@navikt/ft-ui-komponenter": "9.0.2",

@@ -116,7 +116,6 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
           </AksjonspunktHelpTextHTML>
         )}
         <KlageVurderingRadioOptionsNfp
-          readOnly={isReadOnly}
           klageVurdering={formValues.klageVurdering}
           medholdReasons={alleKodeverk['KlageMedholdÅrsak']}
           alleHjemmlerMedNavn={hjemmlerMedNavn}
@@ -125,7 +124,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
           readOnly={isReadOnly}
           text={intl.formatMessage({ id: 'BehandleKlageFormNfp.BegrunnelseForKlage' })}
         />
-        <FritekstBrevTextField språkkode={behandling.språkkode} readOnly={isReadOnly} />
+        <FritekstBrevTextField språkkode={behandling.språkkode} />
         <HStack justify="space-between">
           <HStack gap="space-16">
             {formValues.klageVurdering === 'STADFESTE_YTELSESVEDTAK' && (
@@ -137,7 +136,6 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
                   erModalÅpen={visSubmitModal}
                   lukkModal={lukkModal}
                   valgtHjemmel={hjemmlerMedNavn.find(hj => hj.kode === formValues.klageHjemmel)?.navn}
-                  readOnly={isReadOnly}
                   isSubmittable={isSubmittable}
                   isSubmitting={formMethods.formState.isSubmitting}
                   isDirty={formMethods.formState.isValid}

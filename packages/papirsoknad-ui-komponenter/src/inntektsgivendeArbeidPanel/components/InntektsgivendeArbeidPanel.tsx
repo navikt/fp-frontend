@@ -10,7 +10,6 @@ import type { InntektsgivendeArbeidFormValues } from '../types';
 import { RenderInntektsgivendeArbeidFieldArray } from './RenderInntektsgivendeArbeidFieldArray';
 
 interface Props {
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -19,7 +18,7 @@ interface Props {
  *
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
-export const InntektsgivendeArbeidPanel = ({ readOnly, alleKodeverk }: Props) => (
+export const InntektsgivendeArbeidPanel = ({ alleKodeverk }: Props) => (
   <BorderBox>
     <VStack gap="space-16">
       <Heading size="small" level="3">
@@ -28,7 +27,7 @@ export const InntektsgivendeArbeidPanel = ({ readOnly, alleKodeverk }: Props) =>
       <Detail>
         <FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidIUtland.SkalIkkeRegistrereArbeidsforhold" />
       </Detail>
-      <RenderInntektsgivendeArbeidFieldArray readOnly={readOnly} alleKodeverk={alleKodeverk} />
+      <RenderInntektsgivendeArbeidFieldArray alleKodeverk={alleKodeverk} />
     </VStack>
   </BorderBox>
 );

@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Button } from '@navikt/ds-react';
 
 import type { ProsessStegBegrunnelseTextFieldFormValues } from '@navikt/fp-prosess-felles';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
 import type { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
@@ -84,7 +85,6 @@ interface Props {
   avsluttedeBehandlinger: AvsluttetBehandling[];
   saveKlage: (data: FormkravMellomlagretDataType) => void;
   spinner?: boolean;
-  readOnly?: boolean;
   handleSubmit: UseFormHandleSubmit<FormValues>;
 }
 
@@ -94,9 +94,9 @@ export const TempsaveKlageButton = ({
   avsluttedeBehandlinger,
   spinner = false,
   aksjonspunktCode,
-  readOnly = false,
   handleSubmit,
 }: Props) => {
+  const readOnly = useReadOnly();
   if (!readOnly) {
     return (
       <Button

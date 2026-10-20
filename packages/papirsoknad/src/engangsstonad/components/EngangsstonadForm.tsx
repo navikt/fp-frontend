@@ -16,7 +16,6 @@ import { RegistreringAdopsjonOgOmsorgGrid } from './RegistreringAdopsjonOgOmsorg
 import { RegistreringFodselGrid } from './RegistreringFodselGrid';
 
 interface Props {
-  readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   onSubmitUfullstendigsoknad: () => Promise<void>;
@@ -28,7 +27,6 @@ interface Props {
 export type EngangsstønadValues = ReturnType<typeof transformValues>;
 
 export const EngangsstonadForm = ({
-  readOnly,
   soknadData,
   alleKodeverk,
   onSubmitUfullstendigsoknad,
@@ -46,11 +44,10 @@ export const EngangsstonadForm = ({
   return (
     <RhfForm formMethods={formMethods} onSubmit={values => onSubmit(transformValues(soknadData, values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="space-16">
-        <MottattDatoPapirsoknadIndex readOnly={readOnly} />
+        <MottattDatoPapirsoknadIndex />
         {soknadData.getFamilieHendelseType() === 'ADPSJN' ? (
           <RegistreringAdopsjonOgOmsorgGrid
             soknadData={soknadData}
-            readOnly={readOnly}
             alleKodeverk={alleKodeverk}
             fødselsdato={fødselsdatoFraTerminOgFodelsPanel}
             mottattDato={mottattDato}
@@ -58,7 +55,6 @@ export const EngangsstonadForm = ({
         ) : (
           <RegistreringFodselGrid
             soknadData={soknadData}
-            readOnly={readOnly}
             alleKodeverk={alleKodeverk}
             fødselsdato={fødselsdatoFraTerminOgFodelsPanel}
             mottattDato={mottattDato}
@@ -66,7 +62,6 @@ export const EngangsstonadForm = ({
         )}
       </HGrid>
       <LagreSoknadPapirsoknadIndex
-        readOnly={readOnly}
         submitting={formMethods.formState.isSubmitting}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
         onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues()) : undefined}

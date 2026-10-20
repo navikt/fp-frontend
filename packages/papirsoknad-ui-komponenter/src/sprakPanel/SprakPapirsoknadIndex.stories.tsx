@@ -5,18 +5,21 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
+import { type ReadOnlyArgs, withReadOnly } from '@navikt/fp-storybook-utils';
+
 import { SprakPapirsoknadIndex } from './SprakPapirsoknadIndex';
 
 const meta = {
   title: 'ui-komponenter/sprak',
   component: SprakPapirsoknadIndex,
+  decorators: [withReadOnly],
   parameters: {
     submitCallback: action('onSubmit'),
   },
   args: {
     readOnly: false,
   },
-  render: function Render(args, { parameters: { submitCallback } }) {
+  render: function Render(_args, { parameters: { submitCallback } }) {
     const formMethods = useForm();
 
     return (
@@ -25,7 +28,7 @@ const meta = {
         onSubmit={values => submitCallback(SprakPapirsoknadIndex.transformValues(values))}
       >
         <VStack gap="space-40">
-          <SprakPapirsoknadIndex {...args} />
+          <SprakPapirsoknadIndex />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)
           </Button>
@@ -33,7 +36,7 @@ const meta = {
       </RhfForm>
     );
   },
-} satisfies Meta<typeof SprakPapirsoknadIndex>;
+} satisfies Meta<ReadOnlyArgs>;
 
 export default meta;
 

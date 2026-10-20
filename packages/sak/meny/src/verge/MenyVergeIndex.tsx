@@ -8,6 +8,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import { RegistrereVergeForm, type VergeFormValues } from '@navikt/fp-fakta-verge';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
+import { ReadOnlyProvider } from '@navikt/fp-utils';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -62,11 +63,9 @@ export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModa
               </Dialog.Title>
             </Dialog.Header>
             <Dialog.Body>
-              <RegistrereVergeForm
-                readOnly={erFjerneOperasjon}
-                vergetyper={alleKodeverk['VergeType']}
-                valgtVergeType={valgtVergeType}
-              />
+              <ReadOnlyProvider readOnly={erFjerneOperasjon}>
+                <RegistrereVergeForm vergetyper={alleKodeverk['VergeType']} valgtVergeType={valgtVergeType} />
+              </ReadOnlyProvider>
             </Dialog.Body>
             <Dialog.Footer>
               <Button variant="primary" size="small" autoFocus type="submit">

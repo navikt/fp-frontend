@@ -6,6 +6,7 @@ import { RhfDatepicker, RhfFieldArray, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 
 import type { AlleKodeverk, KodeverkMedNavn, OverføringÅrsak, OverføringsperiodeDto } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { OVERFØRING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -22,7 +23,6 @@ const defaultOverforingPeriode: OverføringsperiodeDto = {
 };
 
 interface Props {
-  readOnly: boolean;
   søkerErMor: boolean;
   alleKodeverk: AlleKodeverk;
   erEndringssøknad: boolean;
@@ -33,7 +33,8 @@ interface Props {
  *
  * Viser inputfelter for dato for bestemmelse av overføring.
  */
-export const RenderOverforingAvKvoterFieldArray = ({ søkerErMor, alleKodeverk, readOnly, erEndringssøknad }: Props) => {
+export const RenderOverforingAvKvoterFieldArray = ({ søkerErMor, alleKodeverk, erEndringssøknad }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
   const overføringÅrsaker = alleKodeverk['OverføringÅrsak'];
 
@@ -66,7 +67,7 @@ export const RenderOverforingAvKvoterFieldArray = ({ søkerErMor, alleKodeverk, 
       remove={remove}
     >
       {(field, index) => (
-        <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
+        <FieldArrayRow key={field.id} remove={remove} index={index}>
           <RhfSelect
             name={`${getPrefix(index)}.overforingArsak`}
             control={control}

@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
@@ -5,13 +6,14 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, type ReadOnlyArgs, withReadOnly } from '@navikt/fp-storybook-utils';
 
 import { AndreYtelserPapirsoknadIndex } from './AndreYtelserPapirsoknadIndex';
 
 const meta = {
   title: 'ui-komponenter/andre-ytelser',
   component: AndreYtelserPapirsoknadIndex,
+  decorators: [withReadOnly],
   parameters: {
     submitCallback: action('onSubmit'),
   },
@@ -38,7 +40,7 @@ const meta = {
       </RhfForm>
     );
   },
-} satisfies Meta<typeof AndreYtelserPapirsoknadIndex>;
+} satisfies Meta<ComponentProps<typeof AndreYtelserPapirsoknadIndex> & ReadOnlyArgs>;
 
 export default meta;
 

@@ -7,6 +7,7 @@ import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { EGEN_VIRKSOMHET_NAME_PREFIX } from '../constants';
 import type { VirksomhetFormValues } from '../types';
@@ -15,7 +16,6 @@ import { VirksomhetRad } from './VirksomhetRad';
 
 interface Props {
   alleKodeverk: AlleKodeverk;
-  readOnly?: boolean;
 }
 
 /**
@@ -24,7 +24,8 @@ interface Props {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  * Søker må oppgi om hen har arbdeidet i egen virksomhet.
  */
-export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) => {
+export const EgenVirksomhetPanel = ({ alleKodeverk }: Props) => {
+  const readOnly = useReadOnly();
   const { watch, control } = useFormContext<VirksomhetFormValues>();
   const harArbeidetIEgenVirksomhet = watch(`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`) || null;
 
@@ -49,7 +50,7 @@ export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) =>
             <FormattedMessage id="Registrering.EgenVirksomhet.Yes" />
           </Radio>
         </RhfRadioGroup>
-        {harArbeidetIEgenVirksomhet && <RegistrerVirksomhetPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />}
+        {harArbeidetIEgenVirksomhet && <RegistrerVirksomhetPanel alleKodeverk={alleKodeverk} />}
       </VStack>
     </BorderBox>
   );

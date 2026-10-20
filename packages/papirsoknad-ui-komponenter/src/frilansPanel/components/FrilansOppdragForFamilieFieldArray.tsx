@@ -7,6 +7,8 @@ import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, maxLength } from '@n
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 import { FRILANS_NAME_PREFIX } from '../constants';
 import type { FrilansFormValues } from '../types';
 
@@ -33,16 +35,13 @@ const getValiderAtFomDatoErFørFørstePeriode = (sorterteFomDatoer: string[], in
   return null;
 };
 
-interface Props {
-  readOnly: boolean;
-}
-
 /**
  * FrilansOppdragForFamilieFieldArray
  *
  * Viser inputfelter for fra og til dato for frilansperioder.
  */
-export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
+export const FrilansOppdragForFamilieFieldArray = () => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const {

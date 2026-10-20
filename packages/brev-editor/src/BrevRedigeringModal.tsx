@@ -6,6 +6,8 @@ import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import { Alert, Button, Dialog } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
+import { ReadOnlyProvider } from '@navikt/fp-utils';
+
 import { BrevInnhold } from './BrevInnhold';
 import { utledDelerFraBrev, utledRedigerbartInnhold } from './redigeringsUtils';
 import { useBrevEditorJs } from './useBrevEditorJs';
@@ -103,76 +105,77 @@ export const BrevRedigeringModal = ({
   };
 
   return (
-    <RawIntlProvider value={intl}>
-      <Dialog
-        open
-        onOpenChange={() => {
-          setVisRedigeringModal(false);
-        }}
-        size="small"
-      >
-        <Dialog.Popup width="53.75rem">
-          <Dialog.Header>
-            <Dialog.Title>
-              <FormattedMessage id="BrevRedigeringModal.Tittel" />
-            </Dialog.Title>
-            <Alert variant="info" size="small" style={{ marginTop: '1rem' }}>
-              <FormattedMessage id="BrevRedigeringModal.Infotekst" />
+    <ReadOnlyProvider readOnly={isReadOnly}>
+      <RawIntlProvider value={intl}>
+        <Dialog
+          open
+          onOpenChange={() => {
+            setVisRedigeringModal(false);
+          }}
+          size="small"
+        >
+          <Dialog.Popup width="53.75rem">
+            <Dialog.Header>
+              <Dialog.Title>
+                <FormattedMessage id="BrevRedigeringModal.Tittel" />
+              </Dialog.Title>
+              <Alert variant="info" size="small" style={{ marginTop: '1rem' }}>
+                <FormattedMessage id="BrevRedigeringModal.Infotekst" />
+                <Button
+                  variant="tertiary"
+                  onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+                    e.preventDefault();
+                    open(href, '_blank');
+                  }}
+                  iconPosition="right"
+                  icon={<ExternalLinkIcon aria-hidden />}
+                  size="small"
+                >
+                  <FormattedMessage id="BrevRedigeringModal.ApneINyFane" />
+                </Button>
+              </Alert>
+            </Dialog.Header>
+            <Dialog.Body>
+              <BrevInnhold
+                opprinneligHtml={opprinneligHtml}
+                editorHolderId={BREV_EDITOR_HOLDER_ID}
+                footer={footer}
+                setVisTilbakestillAdvarselModal={setVisTilbakestillAdvarselModal}
+                lagreOgLukk={lagreOgLukk}
+                forhåndsvis={forhåndsvisEditertBrev}
+                visForhåndsvisValideringsFeil={visValideringsFeil}
+              />
+            </Dialog.Body>
+          </Dialog.Popup>
+        </Dialog>
+        <Dialog open={visTilbakestillAdvarselModal} onOpenChange={() => setVisTilbakestillAdvarselModal(false)}>
+          <Dialog.Popup closeOnOutsideClick={false} withBackdrop>
+            <Dialog.Header>
+              <Dialog.Title>
+                <FormattedMessage id="BrevRedigeringModal.BekreftTilbakestillTittel" />
+              </Dialog.Title>
+            </Dialog.Header>
+            <Dialog.Body>
+              <Alert variant="warning" inline>
+                <FormattedMessage id="BrevRedigeringModal.BekreftTilbakestill" />
+              </Alert>
+            </Dialog.Body>
+            <Dialog.Footer>
               <Button
-                variant="tertiary"
-                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-                  e.preventDefault();
-                  open(href, '_blank');
-                }}
-                iconPosition="right"
-                icon={<ExternalLinkIcon aria-hidden />}
                 size="small"
+                type="button"
+                variant="tertiary"
+                onClick={() => setVisTilbakestillAdvarselModal(false)}
               >
-                <FormattedMessage id="BrevRedigeringModal.ApneINyFane" />
+                <FormattedMessage id="BrevRedigeringModal.IkkeTilbakestill" />
               </Button>
-            </Alert>
-          </Dialog.Header>
-          <Dialog.Body>
-            <BrevInnhold
-              opprinneligHtml={opprinneligHtml}
-              editorHolderId={BREV_EDITOR_HOLDER_ID}
-              footer={footer}
-              isReadOnly={isReadOnly}
-              setVisTilbakestillAdvarselModal={setVisTilbakestillAdvarselModal}
-              lagreOgLukk={lagreOgLukk}
-              forhåndsvis={forhåndsvisEditertBrev}
-              visForhåndsvisValideringsFeil={visValideringsFeil}
-            />
-          </Dialog.Body>
-        </Dialog.Popup>
-      </Dialog>
-      <Dialog open={visTilbakestillAdvarselModal} onOpenChange={() => setVisTilbakestillAdvarselModal(false)}>
-        <Dialog.Popup closeOnOutsideClick={false} withBackdrop>
-          <Dialog.Header>
-            <Dialog.Title>
-              <FormattedMessage id="BrevRedigeringModal.BekreftTilbakestillTittel" />
-            </Dialog.Title>
-          </Dialog.Header>
-          <Dialog.Body>
-            <Alert variant="warning" inline>
-              <FormattedMessage id="BrevRedigeringModal.BekreftTilbakestill" />
-            </Alert>
-          </Dialog.Body>
-          <Dialog.Footer>
-            <Button
-              size="small"
-              type="button"
-              variant="tertiary"
-              onClick={() => setVisTilbakestillAdvarselModal(false)}
-            >
-              <FormattedMessage id="BrevRedigeringModal.IkkeTilbakestill" />
-            </Button>
-            <Button size="small" type="button" variant="primary" onClick={tilbakestill}>
-              <FormattedMessage id="BrevRedigeringModal.Tilbakestill" />
-            </Button>
-          </Dialog.Footer>
-        </Dialog.Popup>
-      </Dialog>
-    </RawIntlProvider>
+              <Button size="small" type="button" variant="primary" onClick={tilbakestill}>
+                <FormattedMessage id="BrevRedigeringModal.Tilbakestill" />
+              </Button>
+            </Dialog.Footer>
+          </Dialog.Popup>
+        </Dialog>
+      </RawIntlProvider>
+    </ReadOnlyProvider>
   );
 };

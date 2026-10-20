@@ -7,24 +7,20 @@ import { required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import type { KlageVurderingOmgjørType, KlageVurderingType, KodeverkMedNavn } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { FormValues } from '../../types/FormValues';
 
 import styles from './klageVurderingRadioOptionsNfp.module.css';
 
 interface Props {
-  readOnly: boolean;
   medholdReasons: KodeverkMedNavn<'KlageMedholdÅrsak'>[];
   alleHjemmlerMedNavn: KodeverkMedNavn<'KlageHjemmel'>[];
   klageVurdering?: KlageVurderingType;
 }
 
-export const KlageVurderingRadioOptionsNfp = ({
-  readOnly,
-  medholdReasons,
-  alleHjemmlerMedNavn,
-  klageVurdering,
-}: Props) => {
+export const KlageVurderingRadioOptionsNfp = ({ medholdReasons, alleHjemmlerMedNavn, klageVurdering }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const { control } = useFormContext<FormValues>();

@@ -6,15 +6,17 @@ import { HStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfFieldArray } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 import { ANDRE_YTELSER_NAME_PREFIX, ANDRE_YTELSER_PERIODER_NAME } from '../constants';
 import type { AndreYtelserFormValue } from '../types';
 
 interface Props {
-  readOnly: boolean;
   name: `${typeof ANDRE_YTELSER_NAME_PREFIX}.${typeof ANDRE_YTELSER_PERIODER_NAME}.${string}`;
 }
 
-export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) => {
+export const RenderAndreYtelserPerioderFieldArray = ({ name }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
   const {
     getValues,

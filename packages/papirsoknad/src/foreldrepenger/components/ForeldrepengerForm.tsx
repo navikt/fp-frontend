@@ -76,7 +76,6 @@ const transformValues = (
 export type ForeldrepengerValues = ReturnType<typeof transformValues>;
 
 interface Props {
-  readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
@@ -92,7 +91,6 @@ interface Props {
  * RhfForm-komponent for registrering av papirsøknad for foreldrepenger.
  */
 export const ForeldrepengerForm = ({
-  readOnly,
   soknadData,
   alleKodeverk,
   onSubmit,
@@ -118,45 +116,38 @@ export const ForeldrepengerForm = ({
   return (
     <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(soknadData, values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="space-16">
-        <MottattDatoPapirsoknadIndex readOnly={readOnly} />
+        <MottattDatoPapirsoknadIndex />
         <OppholdINorgePapirsoknadIndex
-          readOnly={readOnly}
           erAdopsjon={soknadData.getFamilieHendelseType() === 'ADPSJN'}
           alleKodeverk={alleKodeverk}
           mottattDato={mottattDato}
         />
-        <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        <VirksomhetPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        <FrilansPapirsoknadIndex readOnly={readOnly} />
-        <AndreYtelserPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        <DekningsgradIndex readOnly={readOnly} />
-        <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
-        {soknadData.getFamilieHendelseType() === 'FODSL' && (
-          <TerminOgFodselPanel readOnly={readOnly} erForeldrepenger />
-        )}
+        <InntektsgivendeArbeidPapirsoknadIndex alleKodeverk={alleKodeverk} />
+        <VirksomhetPapirsoknadIndex alleKodeverk={alleKodeverk} />
+        <FrilansPapirsoknadIndex />
+        <AndreYtelserPapirsoknadIndex alleKodeverk={alleKodeverk} />
+        <DekningsgradIndex />
+        <RettigheterPapirsoknadIndex soknadData={soknadData} />
+        {soknadData.getFamilieHendelseType() === 'FODSL' && <TerminOgFodselPanel erForeldrepenger />}
         <OmsorgOgAdopsjonPapirsoknadIndex
-          readOnly={readOnly}
           familieHendelseType={soknadData.getFamilieHendelseType()}
           fødselsdato={fødselsdatoFraTerminOgFodelsPanel}
           isForeldrepengerFagsak
         />
         <AnnenForelderPapirsoknadIndex
-          readOnly={readOnly}
           alleKodeverk={alleKodeverk}
           fagsakPersonnummer={fagsakPersonnummer}
           søkerErMor={soknadData.getForeldreType() === 'MOR'}
         />
         <PermisjonIndex
           foreldreType={soknadData.getForeldreType()}
-          readOnly={readOnly}
           alleKodeverk={alleKodeverk}
           erEndringssøknad={false}
         />
-        <BekreftelsePanel annenForelderInformertRequired={annenForelderInformertRequired} readOnly={readOnly} />
-        <SprakPapirsoknadIndex readOnly={readOnly} />
+        <BekreftelsePanel annenForelderInformertRequired={annenForelderInformertRequired} />
+        <SprakPapirsoknadIndex />
       </HGrid>
       <LagreSoknadPapirsoknadIndex
-        readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
         onMellomlagre={onMellomlagre ? () => onMellomlagre(formMethods.getValues()) : undefined}
         submitting={formMethods.formState.isSubmitting}

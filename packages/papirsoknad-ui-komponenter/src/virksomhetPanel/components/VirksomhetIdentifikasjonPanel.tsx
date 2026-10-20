@@ -15,6 +15,7 @@ import {
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
@@ -30,7 +31,6 @@ const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): Reac
   ));
 
 interface Props {
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   index: number;
 }
@@ -41,7 +41,8 @@ interface Props {
  * Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }: Props) => {
+export const VirksomhetIdentifikasjonPanel = ({ index, alleKodeverk }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
   const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
@@ -52,7 +53,6 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
       name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.virksomhetRegistrertINorge`}
       control={control}
       label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.RegisteredInNorway" />}
-      readOnly={readOnly}
       trueContent={
         <ArrowBox>
           <RhfTextField

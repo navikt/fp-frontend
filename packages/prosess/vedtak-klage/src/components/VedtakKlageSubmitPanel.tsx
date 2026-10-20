@@ -3,12 +3,13 @@ import { FormattedMessage } from 'react-intl';
 
 import { Button, HStack, Link } from '@navikt/ds-react';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 import { type VedtakKlageForhandsvisData } from './VedtakKlageForm';
 
 interface Props {
   previewVedtakCallback: (data: VedtakKlageForhandsvisData) => void;
   behandlingPåVent: boolean;
-  readOnly: boolean;
   lagreVedtak: () => void;
   isSubmitting: boolean;
 }
@@ -16,10 +17,10 @@ interface Props {
 export const VedtakKlageSubmitPanel = ({
   behandlingPåVent,
   previewVedtakCallback,
-  readOnly,
   lagreVedtak,
   isSubmitting,
 }: Props) => {
+  const readOnly = useReadOnly();
   const forhåndsvis = (e: KeyboardEvent | MouseEvent) => {
     e.preventDefault();
     previewVedtakCallback({

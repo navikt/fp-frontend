@@ -8,13 +8,9 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-interface Props {
-  readOnly: boolean;
-}
-
-export const FrilansPapirsoknadIndex = ({ readOnly }: Props) => (
+export const FrilansPapirsoknadIndex = () => (
   <RawIntlProvider value={intl}>
-    <FrilansPanel readOnly={readOnly} />
+    <FrilansPanel />
   </RawIntlProvider>
 );
 

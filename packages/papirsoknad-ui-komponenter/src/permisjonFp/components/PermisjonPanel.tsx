@@ -26,7 +26,6 @@ import { PermisjonUtsettelsePanel } from './utsettelse/PermisjonUtsettelsePanel'
 
 interface Props {
   foreldreType: ForeldreType;
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   erEndringssøknad: boolean;
 }
@@ -36,7 +35,7 @@ interface Props {
  *
  * Viser permisjonspanel for mor eller far/medmor
  */
-export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndringssøknad }: Props) => {
+export const PermisjonPanel = ({ foreldreType, alleKodeverk, erEndringssøknad }: Props) => {
   const intl = useIntl();
   const søkerErMor = foreldreType === 'MOR';
   const { setError, clearErrors, formState, watch } = useFormContext<PermisjonFormValues>();
@@ -97,16 +96,15 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
         <Heading size="small" level="3">
           <FormattedMessage id="Registrering.Permisjon.Title" />
         </Heading>
-        <PermisjonFulltUttak readOnly={readOnly} alleKodeverk={alleKodeverk} søkerErMor={søkerErMor} />
+        <PermisjonFulltUttak alleKodeverk={alleKodeverk} søkerErMor={søkerErMor} />
         <PermisjonOverforingAvKvoterPanel
-          readOnly={readOnly}
           alleKodeverk={alleKodeverk}
           søkerErMor={søkerErMor}
           erEndringssøknad={erEndringssøknad}
         />
-        <PermisjonUtsettelsePanel readOnly={readOnly} alleKodeverk={alleKodeverk} søkerErMor={søkerErMor} />
-        <PermisjonGraderingPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        <PermisjonOppholdPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
+        <PermisjonUtsettelsePanel alleKodeverk={alleKodeverk} søkerErMor={søkerErMor} />
+        <PermisjonGraderingPanel alleKodeverk={alleKodeverk} />
+        <PermisjonOppholdPanel alleKodeverk={alleKodeverk} />
         {formState.isSubmitted && formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message && (
           <ErrorMessage>{formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX].notRegisteredInput.message}</ErrorMessage>
         )}

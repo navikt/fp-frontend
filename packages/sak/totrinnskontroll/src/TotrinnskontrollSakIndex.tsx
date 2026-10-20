@@ -13,6 +13,7 @@ import type {
   VurderÅrsakFpSak,
 } from '@navikt/fp-types';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { ReadOnlyProvider } from '@navikt/fp-utils';
 
 import { type AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
 import { type FormValues, TotrinnskontrollBeslutterForm } from './components/TotrinnskontrollBeslutterForm';
@@ -131,34 +132,35 @@ export const TotrinnskontrollSakIndex = ({
   const faktaOmBeregningTilfeller = finnFaktaOmBeregningTilfeller(alleKodeverk);
 
   return (
-    <RawIntlProvider value={intl}>
-      {erStatusFatterVedtak && (
-        <TotrinnskontrollBeslutterForm
-          behandling={behandling}
-          totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
-          readOnly={readOnly}
-          onSubmit={submitHandler}
-          forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-          skjemalenkeTyper={skjemalenkeTyper}
-          erBehandlingEtterKlage={erBehandlingEtterKlage}
-          faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
-          erTilbakekreving={erTilbakekreving}
-          lagLenke={lagLenke}
-          beslutterFormData={beslutterFormData}
-          setBeslutterFormData={setBeslutterFormData}
-        />
-      )}
-      {!erStatusFatterVedtak && (
-        <TotrinnskontrollSaksbehandlerPanel
-          behandling={behandling}
-          totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
-          erTilbakekreving={erTilbakekreving}
-          skjemalenkeTyper={skjemalenkeTyper}
-          lagLenke={lagLenke}
-          vurderArsaker={vurderArsaker}
-          faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
-        />
-      )}
-    </RawIntlProvider>
+    <ReadOnlyProvider readOnly={readOnly}>
+      <RawIntlProvider value={intl}>
+        {erStatusFatterVedtak && (
+          <TotrinnskontrollBeslutterForm
+            behandling={behandling}
+            totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
+            onSubmit={submitHandler}
+            forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
+            skjemalenkeTyper={skjemalenkeTyper}
+            erBehandlingEtterKlage={erBehandlingEtterKlage}
+            faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
+            erTilbakekreving={erTilbakekreving}
+            lagLenke={lagLenke}
+            beslutterFormData={beslutterFormData}
+            setBeslutterFormData={setBeslutterFormData}
+          />
+        )}
+        {!erStatusFatterVedtak && (
+          <TotrinnskontrollSaksbehandlerPanel
+            behandling={behandling}
+            totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
+            erTilbakekreving={erTilbakekreving}
+            skjemalenkeTyper={skjemalenkeTyper}
+            lagLenke={lagLenke}
+            vurderArsaker={vurderArsaker}
+            faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
+          />
+        )}
+      </RawIntlProvider>
+    </ReadOnlyProvider>
   );
 };

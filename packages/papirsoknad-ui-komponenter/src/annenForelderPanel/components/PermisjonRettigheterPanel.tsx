@@ -8,11 +8,10 @@ import { ANNEN_FORELDER_NAME_PREFIX } from '../constant';
 import type { AnnenForelderFormValues, PermisjonRettigheterFormValues } from '../types';
 
 interface Props {
-  readOnly: boolean;
   søkerErMor: boolean;
 }
 
-export const PermisjonRettigheterPanel = ({ readOnly, søkerErMor }: Props) => {
+export const PermisjonRettigheterPanel = ({ søkerErMor }: Props) => {
   const intl = useIntl();
 
   const { watch, control } = useFormContext<AnnenForelderFormValues>();
@@ -26,14 +25,12 @@ export const PermisjonRettigheterPanel = ({ readOnly, søkerErMor }: Props) => {
         name={`${ANNEN_FORELDER_NAME_PREFIX}.søkerHarAleneomsorg`}
         control={control}
         label={intl.formatMessage({ id: 'Registrering.Permisjon.SøkerHarAleneomsorg' })}
-        readOnly={readOnly}
       />
       {søkerHarAleneomsorg === false && (
         <TrueFalseInput
           name={`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPåForeldrepenger`}
           control={control}
           label={intl.formatMessage({ id: 'Registrering.Permisjon.HarRettPaForeldrepenger' })}
-          readOnly={readOnly}
         />
       )}
       {søkerHarAleneomsorg === false && annenForelderHarRett === false && (
@@ -41,7 +38,6 @@ export const PermisjonRettigheterPanel = ({ readOnly, søkerErMor }: Props) => {
           name={`${ANNEN_FORELDER_NAME_PREFIX}.annenForelderRettEØS`}
           control={control}
           label={intl.formatMessage({ id: 'Registrering.Permisjon.AnnenForelderRettEØS' })}
-          readOnly={readOnly}
         />
       )}
       {!søkerErMor &&
@@ -52,7 +48,6 @@ export const PermisjonRettigheterPanel = ({ readOnly, søkerErMor }: Props) => {
             name={`${ANNEN_FORELDER_NAME_PREFIX}.morMottarUføretrygd`}
             control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd' })}
-            readOnly={readOnly}
           />
         )}
     </VStack>

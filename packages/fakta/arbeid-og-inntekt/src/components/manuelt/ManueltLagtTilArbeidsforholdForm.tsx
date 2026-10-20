@@ -19,6 +19,7 @@ import {
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import type { ArbeidsforholdKomplettVurderingType, ManueltArbeidsforhold } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
@@ -41,7 +42,6 @@ type FormValues = {
 interface Props {
   behandlingUuid: string;
   behandlingVersjon: number;
-  isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   radData?: ArbeidsforholdOgInntektRadData;
   lukkArbeidsforholdRad: () => void;
@@ -53,7 +53,6 @@ interface Props {
 export const ManueltLagtTilArbeidsforholdForm = ({
   behandlingUuid,
   behandlingVersjon,
-  isReadOnly,
   registrerArbeidsforhold,
   radData,
   lukkArbeidsforholdRad,
@@ -61,6 +60,7 @@ export const ManueltLagtTilArbeidsforholdForm = ({
   oppdaterTabell,
   erNyttArbeidsforhold = false,
 }: Props) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
   const [visSletteDialog, setVisSletteDialog] = useState(false);
 

@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
@@ -5,11 +6,14 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
+import { type ReadOnlyArgs, withReadOnly } from '@navikt/fp-storybook-utils';
+
 import { TerminOgFodselPanel } from './TerminOgFodselPanel';
 
 const meta = {
   title: 'ui-komponenter/termin-og-fodsel',
   component: TerminOgFodselPanel,
+  decorators: [withReadOnly],
   parameters: {
     submitCallback: action('onSubmit'),
   },
@@ -32,7 +36,7 @@ const meta = {
       </RhfForm>
     );
   },
-} satisfies Meta<typeof TerminOgFodselPanel>;
+} satisfies Meta<ComponentProps<typeof TerminOgFodselPanel> & ReadOnlyArgs>;
 
 export default meta;
 

@@ -6,6 +6,8 @@ import { RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidInteger, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
 import type { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
@@ -14,7 +16,6 @@ const maxLength100 = maxLength(100);
 const maxLength30 = maxLength(30);
 
 interface Props {
-  readOnly: boolean;
   index: number;
 }
 
@@ -24,14 +25,14 @@ interface Props {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom
  * søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetRegnskapPanel = ({ index, readOnly }: Props) => {
+export const VirksomhetRegnskapPanel = ({ index }: Props) => {
+  const readOnly = useReadOnly();
   const { control } = useFormContext<VirksomhetFormValues>();
   return (
     <TrueFalseInput
       name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.harRegnskapsforer`}
       control={control}
       label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Accountant" />}
-      readOnly={readOnly}
       trueContent={
         <ArrowBox>
           <VStack gap="space-16">

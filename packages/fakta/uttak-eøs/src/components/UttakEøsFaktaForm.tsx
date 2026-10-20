@@ -13,7 +13,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { ReadOnlyProvider, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
@@ -90,16 +90,17 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, harSattEndringsdato
           <ErrorSummary.Item>{feilmelding}</ErrorSummary.Item>
         </ErrorSummary>
       )}
-      <UttakEøsFaktaTable
-        annenForelderUttakEøsPerioder={perioder}
-        setPerioder={setPerioder}
-        isReadOnly={!erRedigerbart}
-        erRedigerbart={erRedigerbart}
-        visLeggTilPeriodeForm={visLeggTilPeriodeForm}
-        setVisLeggTilPeriodeForm={setVisLeggTilPeriodeForm}
-        setDirty={setIsDirty}
-        alleKodeverk={alleKodeverk}
-      />
+      <ReadOnlyProvider readOnly={!erRedigerbart}>
+        <UttakEøsFaktaTable
+          annenForelderUttakEøsPerioder={perioder}
+          setPerioder={setPerioder}
+          erRedigerbart={erRedigerbart}
+          visLeggTilPeriodeForm={visLeggTilPeriodeForm}
+          setVisLeggTilPeriodeForm={setVisLeggTilPeriodeForm}
+          setDirty={setIsDirty}
+          alleKodeverk={alleKodeverk}
+        />
+      </ReadOnlyProvider>
       <RhfForm
         formMethods={formMethods}
         onSubmit={values => submitCallback(transformValues(values, perioder, erOverstyrt))}

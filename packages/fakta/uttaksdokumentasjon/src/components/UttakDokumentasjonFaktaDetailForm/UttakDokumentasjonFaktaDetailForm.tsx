@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import { Boks } from '@navikt/fp-fakta-felles';
 import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
 import { type DokumentasjonVurderingBehov } from '@navikt/fp-types';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { type FormValues, VurderingsAlternativ } from '../../types/FormValues';
 import { getFormatertPeriode, periodeErMerEnnEnDag } from '../../utils/periodeUtils';
@@ -37,15 +37,8 @@ const HEADER_TEXT_CODES = [
   'UttakDokumentasjonFaktaDetailForm.AktivitetskravGrunnlagPermisjon',
 ];
 
-const MorsStillingsprosentField = ({
-  control,
-  index,
-  readOnly,
-}: {
-  control: Control<FormValues>;
-  index: number;
-  readOnly: boolean;
-}) => {
+const MorsStillingsprosentField = ({ control, index }: { control: Control<FormValues>; index: number }) => {
+  const readOnly = useReadOnly();
   const vurdering = useWatch({ control, name: `perioder.${index}.vurdering` });
 
   if (vurdering !== VurderingsAlternativ.GODKJENT_UNDER75) {
@@ -65,12 +58,12 @@ const MorsStillingsprosentField = ({
 
 interface Props {
   behov: DokumentasjonVurderingBehov;
-  readOnly: boolean;
   submit: (dokBehov: { perioder: DokumentasjonVurderingBehov[] }) => void;
   cancel: () => void;
 }
 
-export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, submit }: Props) => {
+export const UttakDokumentasjonFaktaDetailForm = ({ behov, cancel, submit }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
@@ -190,7 +183,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   </Radio>
                 ))}
               </RhfRadioGroup>
-              <MorsStillingsprosentField control={formMethods.control} index={0} readOnly={readOnly} />
+              <MorsStillingsprosentField control={formMethods.control} index={0} />
             </VStack>
           )}
 
@@ -236,7 +229,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                       </Radio>
                     ))}
                   </RhfRadioGroup>
-                  <MorsStillingsprosentField control={formMethods.control} index={index} readOnly={readOnly} />
+                  <MorsStillingsprosentField control={formMethods.control} index={index} />
                 </Card.Content>
               </Card>
             ))}

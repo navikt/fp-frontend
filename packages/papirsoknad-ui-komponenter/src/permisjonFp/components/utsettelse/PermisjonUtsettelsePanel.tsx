@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
 import type { AlleKodeverk, TidsromPermisjonDto } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { notEmpty, useReadOnly } from '@navikt/fp-utils';
 
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from '../../constants';
 import type { FormValuesUtsettelse, PermisjonFormValues } from '../../types';
@@ -13,7 +13,6 @@ import { PERIODS_WITH_NO_MORS_AKTIVITET } from '../selectUtils';
 import { RenderUtsettelsePeriodeFieldArray } from './RenderUtsettelsePeriodeFieldArray';
 
 interface Props {
-  readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   søkerErMor: boolean;
 }
@@ -24,7 +23,8 @@ interface Props {
  * Viser panel for utsettelse
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form komponent.
  */
-export const PermisjonUtsettelsePanel = ({ readOnly, alleKodeverk, søkerErMor }: Props) => {
+export const PermisjonUtsettelsePanel = ({ alleKodeverk, søkerErMor }: Props) => {
+  const readOnly = useReadOnly();
   const { watch, control } = useFormContext<PermisjonFormValues>();
   const skalUtsette = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
 
@@ -39,9 +39,7 @@ export const PermisjonUtsettelsePanel = ({ readOnly, alleKodeverk, søkerErMor }
         readOnly={readOnly}
         label={<FormattedMessage id="Registrering.Permisjon.Utsettelse.UtsettUttaket" />}
       />
-      {skalUtsette && (
-        <RenderUtsettelsePeriodeFieldArray alleKodeverk={alleKodeverk} readOnly={readOnly} søkerErMor={søkerErMor} />
-      )}
+      {skalUtsette && <RenderUtsettelsePeriodeFieldArray alleKodeverk={alleKodeverk} søkerErMor={søkerErMor} />}
     </VStack>
   );
 };

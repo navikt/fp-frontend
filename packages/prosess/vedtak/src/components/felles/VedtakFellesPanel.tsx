@@ -175,10 +175,8 @@ export const VedtakFellesPanel = ({
           </BodyShort>
         </Alert>
       )}
-      <VedtakHelpTextPanel aksjonspunkterForPanel={aksjonspunkterForPanel} isReadOnly={isReadOnly} />
-      {oppgaver && oppgaver.length > 0 && (
-        <OppgaveTabell oppgaver={oppgaver} ferdigstillOppgave={ferdigstillOppgave} isReadOnly={isReadOnly} />
-      )}
+      <VedtakHelpTextPanel aksjonspunkterForPanel={aksjonspunkterForPanel} />
+      {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} ferdigstillOppgave={ferdigstillOppgave} />}
       <VStack gap="space-32">
         {renderPanel(harValgtÅRedigereVedtaksbrev, erInnvilget, erAvslatt, erOpphor)}
         {harValgtÅRedigereVedtaksbrev && (

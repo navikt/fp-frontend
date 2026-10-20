@@ -6,6 +6,7 @@ import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import type { ArbeidsforholdKomplettVurderingType, ManglendeInntektsmeldingVurdering } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
@@ -24,7 +25,6 @@ interface Props {
   behandlingUuid: string;
   behandlingVersjon: number;
   radData: ArbeidsforholdOgInntektRadData;
-  isReadOnly: boolean;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
@@ -34,11 +34,11 @@ export const ManglendeInntektsmeldingForm = ({
   behandlingUuid,
   behandlingVersjon,
   radData,
-  isReadOnly,
   lagreVurdering,
   lukkArbeidsforholdRad,
   oppdaterTabell,
 }: Props) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
   const { arbeidsforholdForRad, inntektsmeldingerForRad } = radData;
 

@@ -7,16 +7,17 @@ import { DateTimeLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 
 import type { Dokument } from '@navikt/fp-types';
 import { DokumentLink, KommunikasjonsretningIkon } from '@navikt/fp-ui-komponenter';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { FormValues } from './formValues';
 
 interface Props {
   saksNr: string;
   documents: Dokument[];
-  readOnly?: boolean;
 }
 
-export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Props) => {
+export const DocumentListInnsyn = ({ documents, saksNr }: Props) => {
+  const readOnly = useReadOnly();
   const { control, setValue } = useFormContext<FormValues>();
   const formValues = useWatch({ control });
 

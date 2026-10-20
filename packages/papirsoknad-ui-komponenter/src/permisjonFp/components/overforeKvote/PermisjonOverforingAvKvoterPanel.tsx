@@ -5,6 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
 import type { AlleKodeverk, TidsromPermisjonDto } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { OVERFØRING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FormValuesOverforing, PermisjonFormValues } from '../../types';
@@ -12,7 +13,6 @@ import { RenderOverforingAvKvoterFieldArray } from './RenderOverforingAvKvoterFi
 
 interface Props {
   alleKodeverk: AlleKodeverk;
-  readOnly: boolean;
   søkerErMor: boolean;
   erEndringssøknad: boolean;
 }
@@ -23,7 +23,8 @@ interface Props {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-export const PermisjonOverforingAvKvoterPanel = ({ søkerErMor, alleKodeverk, readOnly, erEndringssøknad }: Props) => {
+export const PermisjonOverforingAvKvoterPanel = ({ søkerErMor, alleKodeverk, erEndringssøknad }: Props) => {
+  const readOnly = useReadOnly();
   const { watch, control } = useFormContext<PermisjonFormValues>();
   const skalOvertaKvote = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;
 
@@ -42,7 +43,6 @@ export const PermisjonOverforingAvKvoterPanel = ({ søkerErMor, alleKodeverk, re
         <RenderOverforingAvKvoterFieldArray
           søkerErMor={søkerErMor}
           alleKodeverk={alleKodeverk}
-          readOnly={readOnly}
           erEndringssøknad={erEndringssøknad}
         />
       )}

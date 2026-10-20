@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
@@ -5,11 +6,14 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
+import { type ReadOnlyArgs, withReadOnly } from '@navikt/fp-storybook-utils';
+
 import { OmsorgOgAdopsjonPapirsoknadIndex } from './OmsorgOgAdopsjonPapirsoknadIndex';
 
 const meta = {
   title: 'ui-komponenter/omsorg-og-adopsjon',
   component: OmsorgOgAdopsjonPapirsoknadIndex,
+  decorators: [withReadOnly],
   args: {
     fødselsdato: '2026-05-27',
     readOnly: false,
@@ -34,7 +38,7 @@ const meta = {
       </RhfForm>
     );
   },
-} satisfies Meta<typeof OmsorgOgAdopsjonPapirsoknadIndex>;
+} satisfies Meta<ComponentProps<typeof OmsorgOgAdopsjonPapirsoknadIndex> & ReadOnlyArgs>;
 
 export default meta;
 

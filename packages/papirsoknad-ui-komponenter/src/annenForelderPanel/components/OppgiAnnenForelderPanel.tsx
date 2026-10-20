@@ -13,7 +13,7 @@ import {
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { notEmpty, useReadOnly } from '@navikt/fp-utils';
 
 import { ANNEN_FORELDER_NAME_PREFIX, KAN_IKKE_OPPGI_NAME_PREFIX } from '../constant';
 import type { AnnenForelderFormValues, AnnenForelderSubFormValues } from '../types';
@@ -29,12 +29,12 @@ const filtrerLandOgLagOptions = (landkoder: KodeverkMedNavn<'Landkoder'>[]): Rea
     ));
 
 interface Props {
-  readOnly?: boolean;
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
 }
 
-export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakPersonnummer }: Props) => {
+export const OppgiAnnenForelderPanel = ({ alleKodeverk, fagsakPersonnummer }: Props) => {
+  const readOnly = useReadOnly();
   const {
     watch,
     control,

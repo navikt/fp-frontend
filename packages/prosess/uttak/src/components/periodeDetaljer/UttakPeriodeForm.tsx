@@ -19,6 +19,7 @@ import type {
   UtsettelseArsakCode,
   UttakPeriodeType,
 } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { finnArbeidsforholdNavnOgProsentArbeid, UttakAktiviteterTabell } from './UttakAktiviteterTabell';
 import type { UttakAktivitet, UttakAktivitetType } from './UttakAktivitetType';
@@ -219,7 +220,6 @@ const hentSorterAktiviteterFn =
 
 interface Props {
   valgtPeriode: PeriodeSoker;
-  isReadOnly: boolean;
   erHovedsøkersPeriode: boolean;
   oppdaterPeriode: (perioder: PeriodeSoker[]) => void;
   lukkPeriodeVisning: () => void;
@@ -235,7 +235,6 @@ export const UttakPeriodeForm = ({
   valgtPeriode,
   oppdaterPeriode,
   lukkPeriodeVisning,
-  isReadOnly,
   erHovedsøkersPeriode,
   alleKodeverk,
   muligeÅrsaker,
@@ -244,6 +243,7 @@ export const UttakPeriodeForm = ({
   harSoktOmFlerbarnsdager,
   erTilknyttetStortinget,
 }: Props) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
 
   // Her er det noko rart. Denne må ha useMemo, ellers blir testen aldri ferdig
@@ -312,7 +312,6 @@ export const UttakPeriodeForm = ({
         <UttakPeriodeInfo
           valgtPeriode={valgtPeriode}
           alleKodeverk={alleKodeverk}
-          isReadOnly={isReadOnly}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
           graderingInnvilget={graderingInnvilget}
@@ -323,7 +322,6 @@ export const UttakPeriodeForm = ({
         />
         {valgtPeriode.oppholdÅrsak === '-' && (
           <UttakAktiviteterTabell
-            isReadOnly={isReadOnly}
             periodeTyper={alleKodeverk['UttakPeriodeType']}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             aktiviteter={sorterteAktiviteter}

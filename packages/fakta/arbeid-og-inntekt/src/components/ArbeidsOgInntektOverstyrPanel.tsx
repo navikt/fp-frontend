@@ -7,6 +7,7 @@ import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-kompon
 import { dateFormat } from '@navikt/ft-utils';
 
 import type { Aksjonspunkt, ArbeidOgInntektsmelding, BehandlingFpSak, ManueltArbeidsforhold } from '@navikt/fp-types';
+import { ReadOnlyProvider, useReadOnly } from '@navikt/fp-utils';
 
 import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
 import { MANUELT_ORG_NR, ManueltLagtTilArbeidsforholdForm } from './manuelt/ManueltLagtTilArbeidsforholdForm';
@@ -16,7 +17,6 @@ import styles from './arbeidsOgInntektOverstyrPanel.module.css';
 interface Props {
   behandling: BehandlingFpSak;
   aksjonspunkt?: Aksjonspunkt;
-  readOnly: boolean;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   erOverstyrer: boolean;
@@ -29,7 +29,6 @@ interface Props {
 export const ArbeidsOgInntektOverstyrPanel = ({
   behandling,
   aksjonspunkt,
-  readOnly,
   arbeidOgInntekt,
   registrerArbeidsforhold,
   erOverstyrer,
@@ -38,6 +37,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   setErOverstyrt,
   oppdaterTabell,
 }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
@@ -102,16 +102,17 @@ export const ArbeidsOgInntektOverstyrPanel = ({
         </div>
       )}
       {skalToggleVisningAvLeggTilArbeidsforhold && (
-        <ManueltLagtTilArbeidsforholdForm
-          behandlingUuid={behandling.uuid}
-          behandlingVersjon={behandling.versjon}
-          isReadOnly={false}
-          registrerArbeidsforhold={registrerArbeidsforhold}
-          lukkArbeidsforholdRad={() => setSkalToggleVisningAvLeggTilArbeidsforhold(false)}
-          oppdaterTabell={oppdaterTabell}
-          erOverstyrt
-          erNyttArbeidsforhold
-        />
+        <ReadOnlyProvider readOnly={false}>
+          <ManueltLagtTilArbeidsforholdForm
+            behandlingUuid={behandling.uuid}
+            behandlingVersjon={behandling.versjon}
+            registrerArbeidsforhold={registrerArbeidsforhold}
+            lukkArbeidsforholdRad={() => setSkalToggleVisningAvLeggTilArbeidsforhold(false)}
+            oppdaterTabell={oppdaterTabell}
+            erOverstyrt
+            erNyttArbeidsforhold
+          />
+        </ReadOnlyProvider>
       )}
     </>
   );

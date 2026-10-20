@@ -2,6 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { TrueFalseInput } from '@navikt/fp-fakta-felles';
+import { useReadOnly } from '@navikt/fp-utils';
 
 type FormValues = {
   harAnnenForelderRett: boolean;
@@ -10,11 +11,11 @@ type FormValues = {
 };
 
 interface Props {
-  readOnly: boolean;
   avklareUforetrygd: boolean;
 }
 
-export const HarAnnenForelderRettFelter = ({ readOnly, avklareUforetrygd }: Props) => {
+export const HarAnnenForelderRettFelter = ({ avklareUforetrygd }: Props) => {
+  const readOnly = useReadOnly();
   const { watch, control } = useFormContext<FormValues>();
   const harAnnenForelderRettEØS = watch('harAnnenForelderRettEØS');
 

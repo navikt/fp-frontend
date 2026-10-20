@@ -8,7 +8,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, FødselGjeldende } from '@navikt/fp-types';
 import type { OverstyringFaktaFødselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
 import { ErBarnFødt, type ErBarnFødtFormValues } from '../form/ErBarnFødt';
 import { Termindato, type TermindatoFormValues } from '../form/Termindato';
@@ -16,14 +16,14 @@ import { TermindatoMedReadonlyToggle } from '../form/TermindatoMedReadonlyToggle
 
 interface Props {
   gjeldende: FødselGjeldende;
-  isReadOnly: boolean;
   avbrytOverstyring: () => void;
 }
 
 type FormValues = ErBarnFødtFormValues & TermindatoFormValues & FaktaBegrunnelseFormValues;
 
 // TODO(siri): legg til mellomlagring når den støtter lagring av flere forms i samme panel
-export const OverstyringForm = ({ gjeldende, isReadOnly, avbrytOverstyring }: Props) => {
+export const OverstyringForm = ({ gjeldende, avbrytOverstyring }: Props) => {
+  const isReadOnly = useReadOnly();
   const intl = useIntl();
   const { aksjonspunkterForPanel, submitCallback, isSubmittable } = usePanelDataContext<OverstyringFaktaFødselAp>();
 
@@ -37,13 +37,9 @@ export const OverstyringForm = ({ gjeldende, isReadOnly, avbrytOverstyring }: Pr
   return (
     <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(transformValues(values))}>
       <VStack gap="space-24">
-        <TermindatoMedReadonlyToggle isReadOnly={isReadOnly} alltidPåkravd />
+        <TermindatoMedReadonlyToggle alltidPåkravd />
 
-        <ErBarnFødt
-          isReadOnly={isReadOnly}
-          finnesBarnIFReg={finnesBarnIFReg}
-          antallBarnISøknad={gjeldende.antallBarn.antall}
-        />
+        <ErBarnFødt finnesBarnIFReg={finnesBarnIFReg} antallBarnISøknad={gjeldende.antallBarn.antall} />
 
         <FaktaBegrunnelseTextField
           control={formMethods.control}

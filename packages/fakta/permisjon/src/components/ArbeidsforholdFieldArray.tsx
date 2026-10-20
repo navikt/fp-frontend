@@ -16,7 +16,6 @@ interface Props {
   sorterteArbeidsforhold: Arbeidsforhold[];
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  isReadOnly: boolean;
   harÅpentAksjonspunkt: boolean;
   skjæringstidspunkt: string;
   alleKodeverk: AlleKodeverk;
@@ -27,7 +26,6 @@ export const ArbeidsforholdFieldArray = ({
   sorterteArbeidsforhold,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
-  isReadOnly,
   harÅpentAksjonspunkt,
   skjæringstidspunkt,
   alleKodeverk,
@@ -49,7 +47,6 @@ export const ArbeidsforholdFieldArray = ({
           sorterteArbeidsforhold={sorterteArbeidsforhold}
           arbeidOgInntekt={arbeidOgInntekt}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          isReadOnly={isReadOnly}
           harÅpentAksjonspunkt={harÅpentAksjonspunkt}
           skjæringstidspunkt={skjæringstidspunkt}
           alleKodeverk={alleKodeverk}

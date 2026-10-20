@@ -117,11 +117,9 @@ export const SimuleringPanel = ({
               aksjonspunkt={finnAksjonspunkt(aksjonspunkterForPanel, AksjonspunktKode.VURDER_FEILUTBETALING)}
               fagsak={fagsak}
               previewCallback={previewFptilbakeCallback}
-              readOnly={isReadOnly}
               språkkode={behandling.språkkode}
             />
             <EtterbetalingSøkerForm
-              readOnly={isReadOnly}
               aksjonspunkt={finnAksjonspunkt(
                 aksjonspunkterForPanel,
                 AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,

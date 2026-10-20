@@ -9,6 +9,7 @@ import { ISO_DATE_FORMAT, removeSpacesFromNumber } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type { SvpTilretteleggingType } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { FieldArrayRow } from '../../felles/FieldArrayRow';
 import { type FormValues, type Tilrettelegging } from '../types';
@@ -49,11 +50,11 @@ const validerFraDatoErFørNestePeriode =
   };
 
 interface Props {
-  readOnly: boolean;
   name: TilretteleggingerFieldName;
 }
 
-export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => {
+export const BehovForTilretteleggingFieldArray = ({ name }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const {
@@ -90,7 +91,7 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
         remove={remove}
       >
         {(field, index) => (
-          <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
+          <FieldArrayRow key={field.id} remove={remove} index={index}>
             <RhfSelect
               name={`${name}.${index}.tilretteleggingType`}
               control={control}

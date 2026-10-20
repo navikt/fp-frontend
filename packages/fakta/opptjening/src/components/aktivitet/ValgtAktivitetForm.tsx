@@ -17,6 +17,7 @@ import type {
   Opptjening,
   OpptjeningAktivitet,
 } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
 import { ValgtAktivitetSubForm } from './ValgtAktivitetSubForm';
@@ -65,7 +66,6 @@ export type FormValues = {
 interface Props {
   valgtOpptjeningAktivitet: OpptjeningAktivitet;
   valgteFormValues: FormValues;
-  readOnly: boolean;
   oppdaterAktivitet: (values: FormValues) => void;
   avbrytAktivitet: () => void;
   velgNesteAktivitet: () => void;
@@ -85,7 +85,6 @@ interface Props {
  * Viser informasjon om valgt aktivitet
  */
 export const ValgtAktivitetForm = ({
-  readOnly,
   opptjeningAktivitetTyper,
   avbrytAktivitet,
   velgNesteAktivitet,
@@ -100,6 +99,7 @@ export const ValgtAktivitetForm = ({
   fastsattOpptjening,
   lukkPeriode,
 }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({

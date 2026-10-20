@@ -58,7 +58,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling }: Props) => {
           setDataOnUnmount={setMellomlagretFormData}
         >
           <VStack gap="space-24">
-            <OmsorgFaktaFields readOnly={isReadOnly} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
+            <OmsorgFaktaFields alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
 
             <FaktaBegrunnelseTextField
               control={formMethods.control}

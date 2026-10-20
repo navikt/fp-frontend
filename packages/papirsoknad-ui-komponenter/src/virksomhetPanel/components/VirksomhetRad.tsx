@@ -8,6 +8,7 @@ import { RhfTextField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import type { AlleKodeverk } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
 import type { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
@@ -19,13 +20,13 @@ import { VirksomhetTypeNaringPanel } from './VirksomhetTypeNaringPanel';
 
 interface Props {
   index: number;
-  readOnly?: boolean;
   alleKodeverk: AlleKodeverk;
   remove: () => void;
   open: boolean;
 }
 
-export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, remove }: Props) => {
+export const VirksomhetRad = ({ open, alleKodeverk, index, remove }: Props) => {
+  const readOnly = useReadOnly();
   const { getFieldState, watch, control } = useFormContext<VirksomhetFormValues>();
   const { error } = getFieldState(`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}`);
   const virksomhetNavn = watch(`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navn`);
@@ -54,11 +55,11 @@ export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, rem
             label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.Name" />}
             readOnly={readOnly}
           />
-          <VirksomhetIdentifikasjonPanel readOnly={readOnly} index={index} alleKodeverk={alleKodeverk} />
-          <VirksomhetTypeNaringPanel readOnly={readOnly} index={index} alleKodeverk={alleKodeverk} />
-          <VirksomhetStartetEndretPanel readOnly={readOnly} index={index} />
-          <VirksomhetRegnskapPanel readOnly={readOnly} index={index} />
-          <VirksomhetRelasjonPanel readOnly={readOnly} index={index} />
+          <VirksomhetIdentifikasjonPanel index={index} alleKodeverk={alleKodeverk} />
+          <VirksomhetTypeNaringPanel index={index} alleKodeverk={alleKodeverk} />
+          <VirksomhetStartetEndretPanel index={index} />
+          <VirksomhetRegnskapPanel index={index} />
+          <VirksomhetRelasjonPanel index={index} />
         </VStack>
       </Table.DataCell>
       <Table.DataCell valign="top" align="right">

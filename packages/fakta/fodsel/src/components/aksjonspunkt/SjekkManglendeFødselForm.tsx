@@ -57,9 +57,9 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
             </Alert>
           )}
 
-          <TermindatoMedReadonlyToggle isReadOnly={isReadOnly} />
+          <TermindatoMedReadonlyToggle />
 
-          <ErBarnFødt isReadOnly={isReadOnly} finnesBarnIFReg={finnesBarnIFReg} antallBarnISøknad={søknad.antallBarn} />
+          <ErBarnFødt finnesBarnIFReg={finnesBarnIFReg} antallBarnISøknad={søknad.antallBarn} />
 
           <FaktaBegrunnelseTextField
             control={formMethods.control}

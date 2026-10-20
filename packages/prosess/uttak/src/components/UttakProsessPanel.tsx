@@ -23,7 +23,13 @@ import type {
 } from '@navikt/fp-types';
 import type { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { RedigerKnapp } from '@navikt/fp-ui-komponenter';
-import { erAksjonspunktÅpent, notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import {
+  erAksjonspunktÅpent,
+  notEmpty,
+  ReadOnlyProvider,
+  useMellomlagretFormData,
+  usePanelDataContext,
+} from '@navikt/fp-utils';
 
 import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
 import { DisponibleStonadskontoerPanel } from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
@@ -403,24 +409,27 @@ export const UttakProsessPanel = ({
         alleKodeverk={alleKodeverk}
       />
       {valgtPeriodeIndex !== undefined && (
-        <UttakPeriodePanel
+        <ReadOnlyProvider
           key={valgtPeriodeIndex}
-          perioderSøker={perioder}
-          perioderAnnenpart={perioderAnnenpart}
-          behandling={behandling}
-          uttaksresultat={uttaksresultat}
-          valgtPeriodeIndex={valgtPeriodeIndex}
-          oppdaterPeriode={oppdaterPeriode}
-          isReadOnly={(harIngenEllerLukkedeAksjonspunkt || isReadOnly) && !erRedigeringAktiv}
-          alleKodeverk={alleKodeverk}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          uttakStonadskontoer={stønadskonto}
-          erSaldoOppdatert={saldoStatus === 'oppdatert'}
-          setValgtPeriodeIndex={setValgtPeriodeIndex}
-          erTilknyttetStortinget={erTilknyttetStortinget}
-          harÅpentAksjonspunkt={harÅpentAksjonspunkt}
-          endringsdato={uttaksresultat.endringsdato}
-        />
+          readOnly={(harIngenEllerLukkedeAksjonspunkt || isReadOnly) && !erRedigeringAktiv}
+        >
+          <UttakPeriodePanel
+            perioderSøker={perioder}
+            perioderAnnenpart={perioderAnnenpart}
+            behandling={behandling}
+            uttaksresultat={uttaksresultat}
+            valgtPeriodeIndex={valgtPeriodeIndex}
+            oppdaterPeriode={oppdaterPeriode}
+            alleKodeverk={alleKodeverk}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            uttakStonadskontoer={stønadskonto}
+            erSaldoOppdatert={saldoStatus === 'oppdatert'}
+            setValgtPeriodeIndex={setValgtPeriodeIndex}
+            erTilknyttetStortinget={erTilknyttetStortinget}
+            harÅpentAksjonspunkt={harÅpentAksjonspunkt}
+            endringsdato={uttaksresultat.endringsdato}
+          />
+        </ReadOnlyProvider>
       )}
       {((!harIngenEllerLukkedeAksjonspunkt && !isReadOnly) || erRedigeringAktiv) && (
         <>
