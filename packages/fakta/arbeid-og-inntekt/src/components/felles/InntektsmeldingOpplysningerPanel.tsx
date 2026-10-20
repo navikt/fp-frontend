@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { FileIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
-import { BeløpLabel, DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { BeløpLabel, DateLabel, LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, Arbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 import { DokumentLink } from '@navikt/fp-ui-komponenter';
@@ -31,8 +31,10 @@ export const InntektsmeldingOpplysningerPanel = ({
   <>
     <VStack gap="space-16">
       {!ikkeVisInfo && (
-        <HStack gap="space-16">
-          <Label size="small">
+        <LabeledValue
+          size="small"
+          horizontal
+          label={
             <FormattedMessage
               id={
                 radData.erPrivatPerson
@@ -40,65 +42,66 @@ export const InntektsmeldingOpplysningerPanel = ({
                   : 'ArbeidsforholdInformasjonPanel.Orgnr'
               }
             />
-          </Label>
-          <BodyShort size="small">
-            {radData.erPrivatPerson ? (
+          }
+          value={
+            radData.erPrivatPerson ? (
               <DateLabel dateString={radData.arbeidsgiverFødselsdato} />
             ) : (
               radData.arbeidsgiverIdent
-            )}
-          </BodyShort>
-        </HStack>
+            )
+          }
+        />
       )}
 
       {skalViseArbeidsforholdId && (
-        <HStack gap="space-16">
-          <Label size="small">
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.ArbeidsforholdId" />
-          </Label>
-          <BodyShort size="small">{inntektsmelding.eksternArbeidsforholdId}</BodyShort>
-        </HStack>
+        <LabeledValue
+          size="small"
+          horizontal
+          label={<FormattedMessage id="InntektsmeldingOpplysningerPanel.ArbeidsforholdId" />}
+          value={inntektsmelding.eksternArbeidsforholdId ?? '-'}
+        />
       )}
 
       {arbeidsforhold && (
         <>
-          <HStack gap="space-16">
-            <Label size="small">
-              <FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" />
-            </Label>
-            <BodyShort size="small">{`${arbeidsforhold.stillingsprosent}%`}</BodyShort>
-          </HStack>
+          <LabeledValue
+            size="small"
+            horizontal
+            label={<FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" />}
+            value={`${arbeidsforhold.stillingsprosent}%`}
+          />
+
           {arbeidsforhold.permisjonOgMangel && (
-            <HStack gap="space-16">
-              <Label size="small">
-                {alleKodeverk['PermisjonsbeskrivelseType'].find(k => k.kode === arbeidsforhold.permisjonOgMangel?.type)
-                  ?.navn ?? ''}
-              </Label>
-              <BodyShort size="small">
+            <LabeledValue
+              size="small"
+              horizontal
+              label={
+                alleKodeverk['PermisjonsbeskrivelseType'].find(k => k.kode === arbeidsforhold.permisjonOgMangel?.type)
+                  ?.navn ?? ''
+              }
+              value={
                 <PeriodLabel
                   dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
                   dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom}
                 />
-              </BodyShort>
-            </HStack>
+              }
+            />
           )}
         </>
       )}
 
-      <HStack gap="space-16">
-        <Label size="small">
-          <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
-        </Label>
-        <BodyShort size="small">
-          <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
-        </BodyShort>
-      </HStack>
+      <LabeledValue
+        size="small"
+        horizontal
+        label={<FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />}
+        value={<BeløpLabel beløp={inntektsmelding.inntektPrMnd} />}
+      />
 
-      <HStack gap="space-16">
-        <Label size="small">
-          <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
-        </Label>
-        <BodyShort size="small">
+      <LabeledValue
+        size="small"
+        horizontal
+        label={<FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />}
+        value={
           <FormattedMessage
             id={
               inntektsmelding.refusjonPrMnd
@@ -106,18 +109,16 @@ export const InntektsmeldingOpplysningerPanel = ({
                 : 'InntektsmeldingOpplysningerPanel.Nei'
             }
           />
-        </BodyShort>
-      </HStack>
+        }
+      />
 
       {inntektsmelding.refusjonPrMnd !== undefined && (
-        <HStack gap="space-16">
-          <Label size="small">
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
-          </Label>
-          <BodyShort size="small">
-            <BeløpLabel beløp={inntektsmelding.refusjonPrMnd} />
-          </BodyShort>
-        </HStack>
+        <LabeledValue
+          size="small"
+          horizontal
+          label={<FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />}
+          value={<BeløpLabel beløp={inntektsmelding.refusjonPrMnd} />}
+        />
       )}
 
       <BodyShort size="small">
