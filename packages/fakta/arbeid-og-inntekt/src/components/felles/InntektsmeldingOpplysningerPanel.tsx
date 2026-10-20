@@ -109,7 +109,7 @@ export const InntektsmeldingOpplysningerPanel = ({
         </BodyShort>
       </HStack>
 
-      {inntektsmelding.refusjonPrMnd && (
+      {inntektsmelding.refusjonPrMnd !== undefined && (
         <HStack gap="space-16">
           <Label size="small">
             <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
