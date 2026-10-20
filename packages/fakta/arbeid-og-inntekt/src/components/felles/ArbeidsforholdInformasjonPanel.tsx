@@ -79,12 +79,12 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
                   {visAlleMåneder ? (
                     <span>
                       <FormattedMessage id="ArbeidsforholdInformasjonPanel.FaerreManeder" />
-                      <ChevronUpIcon fontSize="1.5rem" aria-hidden className="inline" />
+                      <ChevronUpIcon aria-hidden className="inline" />
                     </span>
                   ) : (
                     <span>
                       <FormattedMessage id="ArbeidsforholdInformasjonPanel.TidligereManeder" />
-                      <ChevronDownIcon fontSize="1.5rem" aria-hidden className="inline" />
+                      <ChevronDownIcon aria-hidden className="inline" />
                     </span>
                   )}
                 </Link>

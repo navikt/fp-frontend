@@ -109,38 +109,37 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                             alleKodeverk={alleKodeverk}
                           />
                         )}
-                        <Link
-                          onClick={e => {
-                            e.preventDefault();
-                            setVisInfoOmIm(info => {
-                              if (!a.internArbeidsforholdId) {
-                                return info;
-                              }
-                              const status = info[a.internArbeidsforholdId];
-                              return {
-                                ...info,
+                        <BodyShort size="small">
+                          <Link
+                            onClick={e => {
+                              e.preventDefault();
+                              setVisInfoOmIm(info => {
+                                if (!a.internArbeidsforholdId) {
+                                  return info;
+                                }
+                                const status = info[a.internArbeidsforholdId];
+                                return {
+                                  ...info,
 
-                                [a.internArbeidsforholdId]: status === undefined || !status,
-                              };
-                            });
-                          }}
-                          href=""
-                        >
-                          <BodyShort size="small" as="span">
-                            <FormattedMessage
-                              id={
-                                !a.internArbeidsforholdId || !visInfoOmIm[a.internArbeidsforholdId]
-                                  ? 'ArbeidsforholdInformasjonPanel.ApneImInfo'
-                                  : 'ArbeidsforholdInformasjonPanel.LukkeImInfo'
-                              }
-                            />
-                          </BodyShort>
-                          {a.internArbeidsforholdId && visInfoOmIm[a.internArbeidsforholdId] ? (
-                            <ChevronUpIcon aria-hidden fontSize="1.5rem" />
-                          ) : (
-                            <ChevronDownIcon aria-hidden fontSize="1.5rem" />
-                          )}
-                        </Link>
+                                  [a.internArbeidsforholdId]: status === undefined || !status,
+                                };
+                              });
+                            }}
+                            href=""
+                          >
+                            {a.internArbeidsforholdId && visInfoOmIm[a.internArbeidsforholdId] ? (
+                              <span>
+                                <FormattedMessage id="ArbeidsforholdInformasjonPanel.LukkeImInfo" />
+                                <ChevronUpIcon aria-hidden className="inline" />
+                              </span>
+                            ) : (
+                              <span>
+                                <FormattedMessage id="ArbeidsforholdInformasjonPanel.ApneImInfo" />
+                                <ChevronDownIcon aria-hidden className="inline" />
+                              </span>
+                            )}
+                          </Link>
+                        </BodyShort>
                       </>
                     )}
                   </VStack>
