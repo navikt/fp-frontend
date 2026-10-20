@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-papirsoknad-ui-komponenter",
   "license": "MIT",
+  "description": "Felles skjemakomponenter for papirsøknader, med paneler for blant annet termin og fødsel, permisjon, rettigheter, opphold og arbeid.",
   "private": true,
   "type": "module",
   "exports": {

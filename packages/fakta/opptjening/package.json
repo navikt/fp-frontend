@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-opptjening",
   "license": "MIT",
+  "description": "Faktapanel for opptjening, lar saksbehandler vurdere om aktivitetene i opptjeningsperioden kan godkjennes.",
   "private": true,
   "type": "module",
   "exports": {

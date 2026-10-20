@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-ytelser",
   "license": "MIT",
+  "description": "Faktapanel for ytelser, viser søkerens og den andre forelderens tilgrensende ytelser.",
   "private": true,
   "type": "module",
   "exports": {

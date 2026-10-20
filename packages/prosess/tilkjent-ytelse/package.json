@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-tilkjent-ytelse",
   "license": "MIT",
+  "description": "Prosesspanel for tilkjent ytelse, viser beregnede perioder, dagsatser, fordeling mellom søker og arbeidsgiver og feriepengegrunnlag, og gir grunnlag for vurdering av refusjon og tilbakekreving.",
   "private": true,
   "type": "module",
   "exports": {

@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-anke-trygderettsbehandling",
   "license": "MIT",
+  "description": "Prosesspanel for anke behandlet i Trygderetten, lar saksbehandler registrere merknader og resultat med eventuell årsak og omgjøringstype.",
   "private": true,
   "type": "module",
   "exports": {

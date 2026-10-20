@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-vilkar-opptjening",
   "license": "MIT",
+  "description": "Prosesspanel for opptjeningsvilkåret, viser opptjeningsperiode og registrerte aktiviteter med godkjente eller avslåtte perioder og lar saksbehandler vurdere om opptjeningskravet er oppfylt.",
   "private": true,
   "type": "module",
   "exports": {

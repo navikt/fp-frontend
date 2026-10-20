@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-vedtak",
   "license": "MIT",
+  "description": "Prosesspanel for vedtak i førstegangsbehandling eller revurdering, viser vedtaksresultat og beregningsopplysninger og lar saksbehandler arbeide med vedtak og vedtaksbrev.",
   "private": true,
   "type": "module",
   "exports": {

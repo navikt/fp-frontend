@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-verge",
   "license": "MIT",
+  "description": "Faktapanel for verge og fullmektig, lar saksbehandler registrere og kontrollere type verge, identifikasjon og gyldighetsperiode.",
   "private": true,
   "type": "module",
   "exports": {

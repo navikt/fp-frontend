@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-app-felles",
   "license": "MIT",
+  "description": "Felles applikasjonskomponenter for applikasjonsskall, dekoratør, tema og feilhåndtering.",
   "private": true,
   "type": "module",
   "exports": {

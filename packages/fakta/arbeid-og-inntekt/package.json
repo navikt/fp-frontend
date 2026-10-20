@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-arbeid-og-inntekt",
   "license": "MIT",
+  "description": "Faktapanel for arbeid og inntekt, lar saksbehandler vurdere arbeidsforhold og inntektsmeldinger, avklare manglende opplysninger og eventuelt registrere arbeidsforhold manuelt.",
   "private": true,
   "type": "module",
   "exports": {

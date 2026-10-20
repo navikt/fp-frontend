@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-aap",
   "license": "MIT",
+  "description": "Faktapanel for arbeidsavklaringspenger kombinert med arbeid eller frilans, lar saksbehandler kontrollere om beregningen er korrekt eller må overstyres.",
   "private": true,
   "type": "module",
   "exports": {

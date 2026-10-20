@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-vedtak-klage",
   "license": "MIT",
+  "description": "Prosesspanel for vedtak i klagesak, viser resultatet og lar saksbehandler arbeide med vedtaksbrev for avvisning, stadfestelse, omgjøring, oppheving eller hjemsending.",
   "private": true,
   "type": "module",
   "exports": {

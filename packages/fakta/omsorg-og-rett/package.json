@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-omsorg-og-rett",
   "license": "MIT",
+  "description": "Faktapanel for omsorg og rettigheter, lar saksbehandler vurdere aleneomsorg og den andre forelderens rett til foreldrepenger.",
   "private": true,
   "type": "module",
   "exports": {

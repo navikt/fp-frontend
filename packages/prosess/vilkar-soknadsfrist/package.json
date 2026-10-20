@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-vilkar-soknadsfrist",
   "license": "MIT",
+  "description": "Prosesspanel for søknadsfristvilkåret, viser søknadens mottaksdato, søknadsfrist og relevante familiehendelsesdatoer og lar saksbehandler vurdere om vilkåret er oppfylt.",
   "private": true,
   "type": "module",
   "exports": {

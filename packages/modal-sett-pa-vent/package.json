@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-modal-sett-pa-vent",
   "license": "MIT",
+  "description": "Modal for å sette en behandling på vent, med valg av årsak og frist og visning av eventuell brevbestilling.",
   "private": true,
   "type": "module",
   "exports": {

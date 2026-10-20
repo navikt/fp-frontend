@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-vilkar-fodsel",
   "license": "MIT",
+  "description": "Prosesspanel for fødselsvilkåret, viser tidligere utbetalte foreldrepenger eller engangsstønad og lar saksbehandler vurdere om vilkåret er oppfylt for barnet.",
   "private": true,
   "type": "module",
   "exports": {

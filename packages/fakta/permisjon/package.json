@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-permisjon",
   "license": "MIT",
+  "description": "Faktapanel for permisjon i arbeidsforhold, lar saksbehandler vurdere permisjoner uten sluttdato og om arbeidsforholdet skal inngå i beregningen.",
   "private": true,
   "type": "module",
   "exports": {

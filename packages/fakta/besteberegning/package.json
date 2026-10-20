@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-besteberegning",
   "license": "MIT",
+  "description": "Faktapanel for besteberegning, viser beregningsgrunnlaget og lar saksbehandler vurdere hvilken beregning som gir best resultat.",
   "private": true,
   "type": "module",
   "exports": {

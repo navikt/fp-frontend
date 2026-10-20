@@ -1,12 +1,14 @@
 {
   "name": "@navikt/fp-fakta-felles",
   "license": "MIT",
+  "description": "Felles komponenter for faktapaneler, blant annet visning av opplysninger fra Folkeregisteret.",
   "private": true,
   "type": "module",
   "exports": {
     ".": "./index.ts"
   },
   "scripts": {
+    "build:storybook": "storybook build -o .storybook-static-build",
     "test": "vitest",
     "eslint": "eslint {src,i18n}/**/*.ts* --color",
     "eslint:fix": "eslint --fix {src,i18n}/**/*.ts* --color",

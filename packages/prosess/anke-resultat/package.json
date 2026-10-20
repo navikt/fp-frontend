@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-anke-resultat",
   "license": "MIT",
+  "description": "Prosesspanel for resultat av anke, viser innstillingen med resultat, årsak og begrunnelse, inkludert eventuell avvisning.",
   "private": true,
   "type": "module",
   "exports": {

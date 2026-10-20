@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-saken",
   "license": "MIT",
+  "description": "Faktapanel for saken, lar saksbehandler avklare startdato og dekningsgrad og vurdere om dokumentasjon fra utlandet skal innhentes.",
   "private": true,
   "type": "module",
   "exports": {

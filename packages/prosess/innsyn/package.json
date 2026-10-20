@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-innsyn",
   "license": "MIT",
+  "description": "Prosesspanel for behandling av krav om innsyn, viser dokumenter på saken og lar saksbehandler vurdere resultat, velge dokumenter og beslutte videre handling.",
   "private": true,
   "type": "module",
   "exports": {

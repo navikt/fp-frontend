@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-formkrav",
   "license": "MIT",
+  "description": "Prosesspanel for formkrav ved klage, lar saksbehandler vurdere om klager er part, om klagen er konkret og signert, om fristen er overholdt og hvilket vedtak klagen gjelder.",
   "private": true,
   "type": "module",
   "exports": {

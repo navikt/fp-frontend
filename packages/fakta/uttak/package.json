@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-uttak",
   "license": "MIT",
+  "description": "Faktapanel for uttaksperioder, lar saksbehandler vurdere perioder, periodetyper, gradering, overføring og utsettelse.",
   "private": true,
   "type": "module",
   "exports": {
