@@ -32,6 +32,7 @@
   "Snarveger.NesteFakta": "Neste faktapanel",
 
   "DokumentIndex.Dokumenter": "Dokumenter",
+  "HistorikkIndex.Historikk": "Historikk",
   "MeldingIndex.Meldinger": "Meldinger",
   "MeldingIndex.IkkeTilgjengeligPaVent": "Det er ikke mulig å skrive melding til bruker når behandlingen er på vent",
   "MeldingIndex.IkkeTilgjengeligAvsluttet": "Det er ikke mulig å skrive melding til bruker når fagsaken er avsluttet",

@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+import { useIntl } from 'react-intl';
 import { useLocation } from 'react-router';
 
 import { useQuery } from '@tanstack/react-query';
@@ -9,6 +10,7 @@ import { notEmpty } from '@navikt/fp-utils';
 
 import { createLocationForSkjermlenke, pathToBehandling } from '../../app/paths';
 import { useFagsakApi } from '../../data/fagsakApi';
+import { SupportHeaderAndContent } from '../SupportHeader';
 
 interface Props {
   saksnummer: string;
@@ -25,6 +27,7 @@ export const HistorikkIndex = ({
   historikkinnslagFpTilbake,
   toggleVisUtvidetBehandlingDetaljerKnapp,
 }: Props) => {
+  const intl = useIntl();
   const {
     kodeverkOptions,
     fptilbake: { kodeverkOptions: fptilbakeKodeverkOptions },
@@ -39,16 +42,22 @@ export const HistorikkIndex = ({
   });
 
   return (
-    <HistorikkSakIndex
-      historikkFpSak={historikkinnslagFpSak}
-      historikkFpTilbake={historikkinnslagFpTilbake}
-      alleKodeverkFpTilbake={alleKodeverkFpTilbake}
-      alleKodeverkFpSak={notEmpty(alleKodeverkFpSak)}
-      saksnummer={saksnummer}
-      getBehandlingLocation={getBehandlingLocation}
-      createLocationForSkjermlenke={createLocationForSkjermlenke}
-      valgtBehandlingUuid={behandlingUuid}
-      utvidEllerMinskBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
-    />
+    <SupportHeaderAndContent
+      tekst={intl.formatMessage({ id: 'HistorikkIndex.Historikk' })}
+      antall={(historikkinnslagFpSak?.length ?? 0) + (historikkinnslagFpTilbake?.length ?? 0)}
+      brukPadding={false}
+      toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
+    >
+      <HistorikkSakIndex
+        historikkFpSak={historikkinnslagFpSak}
+        historikkFpTilbake={historikkinnslagFpTilbake}
+        alleKodeverkFpTilbake={alleKodeverkFpTilbake}
+        alleKodeverkFpSak={notEmpty(alleKodeverkFpSak)}
+        saksnummer={saksnummer}
+        getBehandlingLocation={getBehandlingLocation}
+        createLocationForSkjermlenke={createLocationForSkjermlenke}
+        valgtBehandlingUuid={behandlingUuid}
+      />
+    </SupportHeaderAndContent>
   );
 };

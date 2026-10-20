@@ -1,12 +1,3 @@
-.circle {
-  background: var(--ax-bg-neutral-soft);
-  border-radius: 50%;
-  height: 25px;
-  line-height: 25px;
-  text-align: center;
-  width: 25px;
-}
-
 .overflow {
   min-height: 250px;
   overflow-y: auto;

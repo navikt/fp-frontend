@@ -1,8 +1,8 @@
-import { type ReactElement, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { type Location } from 'react-router';
 
-import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
+import { Box, Checkbox, VStack } from '@navikt/ds-react';
 
 import type {
   AlleKodeverk,
@@ -30,7 +30,6 @@ interface Props {
     behandlingLocation: Location,
     skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake,
   ) => Location | undefined;
-  utvidEllerMinskBehandlingDetaljerKnapp: ReactElement;
 }
 
 /**
@@ -47,7 +46,6 @@ export const Historikk = ({
   saksnummer,
   getBehandlingLocation,
   createLocationForSkjermlenke,
-  utvidEllerMinskBehandlingDetaljerKnapp,
 }: Props) => {
   const intl = useIntl();
 
@@ -73,24 +71,13 @@ export const Historikk = ({
 
   return (
     <>
-      <Box background="neutral-moderate" borderColor="neutral-subtleA" borderWidth="0 0 2 0" padding="space-20">
-        <HStack justify="space-between">
-          <HStack gap="space-4" align="center">
-            <Heading size="small" level="3">
-              {intl.formatMessage({ id: 'History.Historikk' })}
-            </Heading>
-            {utvidEllerMinskBehandlingDetaljerKnapp}
-          </HStack>
-          <HStack gap="space-32">
-            {valgtBehandlingUuid && (
-              <Checkbox size="small" onChange={() => setSkalSortertePaValgtBehandling(!skalSortertePaValgtBehandling)}>
-                {intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
-              </Checkbox>
-            )}
-            <div className={styles['circle']}>{filtrerteInnslag.length}</div>
-          </HStack>
-        </HStack>
-      </Box>
+      {valgtBehandlingUuid && (
+        <Box paddingInline="space-16" paddingBlock="space-16 space-0">
+          <Checkbox size="small" onChange={() => setSkalSortertePaValgtBehandling(!skalSortertePaValgtBehandling)}>
+            {intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
+          </Checkbox>
+        </Box>
+      )}
       <div
         style={{ height: `calc(100vh - ${top}px)` }}
         className={styles['overflow']}

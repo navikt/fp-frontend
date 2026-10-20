@@ -1,4 +1,3 @@
-import type { ReactElement } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import type { Location } from 'react-router';
 
@@ -31,7 +30,6 @@ interface Props {
     skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake,
   ) => Location | undefined;
   valgtBehandlingUuid?: string;
-  utvidEllerMinskBehandlingDetaljerKnapp: ReactElement;
 }
 
 export const HistorikkSakIndex = ({
@@ -43,7 +41,6 @@ export const HistorikkSakIndex = ({
   getBehandlingLocation,
   createLocationForSkjermlenke,
   valgtBehandlingUuid,
-  utvidEllerMinskBehandlingDetaljerKnapp,
 }: Props) => (
   <RawIntlProvider value={intl}>
     <Historikk
@@ -55,7 +52,6 @@ export const HistorikkSakIndex = ({
       saksnummer={saksnummer}
       getBehandlingLocation={getBehandlingLocation}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
-      utvidEllerMinskBehandlingDetaljerKnapp={utvidEllerMinskBehandlingDetaljerKnapp}
     />
   </RawIntlProvider>
 );

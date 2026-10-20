@@ -1,5 +1,3 @@
-import { ExpandVerticalIcon } from '@navikt/aksel-icons';
-import { Button, Tooltip } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { alleKodeverk, alleKodeverkTilbakekreving, withRouter } from '@navikt/fp-storybook-utils';
@@ -8,18 +6,6 @@ import type { Historikkinnslag } from '@navikt/fp-types';
 import { HistorikkSakIndex } from './HistorikkSakIndex';
 
 const locationMock = { key: 'test', pathname: 'test', search: 'test', state: {}, hash: 'test' };
-
-const utvidKnapp = (
-  <Tooltip content="Utvid" placement="bottom">
-    <Button
-      data-color="neutral"
-      icon={<ExpandVerticalIcon fontSize="1.4rem" aria-hidden />}
-      aria-label="Utvid behandling detaljer panel"
-      variant="tertiary"
-      size="xsmall"
-    />
-  </Tooltip>
-);
 
 const historikkInnslag: Historikkinnslag[] = [
   {
@@ -225,7 +211,6 @@ const meta = {
     saksnummer: '2',
     getBehandlingLocation: () => locationMock,
     createLocationForSkjermlenke: () => locationMock,
-    utvidEllerMinskBehandlingDetaljerKnapp: utvidKnapp,
   },
 } satisfies Meta<typeof HistorikkSakIndex>;
 
