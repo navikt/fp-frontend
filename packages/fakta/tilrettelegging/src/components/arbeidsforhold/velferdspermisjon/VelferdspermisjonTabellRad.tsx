@@ -20,14 +20,12 @@ const utledStyleForRad = (open: boolean, erIkkeValgt: boolean) => {
 interface Props {
   velferdspermisjon: VelferdspermisjonDto;
   arbeidsforholdIndex: number;
-  readOnly: boolean;
   oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;
 }
 
 export const VelferdspermisjonTabellRad = ({
   velferdspermisjon,
   arbeidsforholdIndex,
-  readOnly,
   oppdaterOverstyrtUtbetalingsgrad,
 }: Props) => {
   const erIkkeValgt = velferdspermisjon.erGyldig === undefined;
@@ -44,7 +42,6 @@ export const VelferdspermisjonTabellRad = ({
         <VelferdspermisjonForm
           velferdspermisjon={velferdspermisjon}
           arbeidsforholdIndex={arbeidsforholdIndex}
-          readOnly={readOnly}
           lukkRad={() => setOpen(false)}
           oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
         />

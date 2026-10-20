@@ -7,6 +7,8 @@ import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
+import { useReadOnly } from '@navikt/fp-utils';
+
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { filtrerVelferdspermisjoner } from '../arbeidsforholdUtils';
 import type { FAISUProps } from './faisuUtils';
@@ -18,7 +20,6 @@ import { VelferdspermisjonTabell } from './velferdspermisjon/VelferdspermisjonTa
 interface Props {
   tilrettelegging: Tilrettelegging;
   arbeidsforholdIndex: number;
-  readOnly: boolean;
   visInfoAlert: boolean;
   stillingsprosentArbeidsforhold: number;
   faisu: FAISUProps | undefined;
@@ -27,11 +28,11 @@ interface Props {
 export const ArbeidsforholdPanel = ({
   tilrettelegging,
   arbeidsforholdIndex,
-  readOnly,
   visInfoAlert,
   stillingsprosentArbeidsforhold,
   faisu,
 }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const { watch, setValue, control } = useFormContext<TilretteleggingFormValues>();
@@ -97,7 +98,6 @@ export const ArbeidsforholdPanel = ({
           <VelferdspermisjonTabell
             filtrerteVelferdspermisjoner={filtrerteVelferdspermisjoner}
             arbeidsforholdIndex={arbeidsforholdIndex}
-            readOnly={readOnly}
             oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
           />
         )}
@@ -105,7 +105,6 @@ export const ArbeidsforholdPanel = ({
         <TilretteleggingOgOppholdPerioderPanel
           tilrettelegging={tilrettelegging}
           arbeidsforholdIndex={arbeidsforholdIndex}
-          readOnly={readOnly}
           disabled={harUavklartVelferdspermisjon}
           stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
           termindato={termindato}

@@ -6,6 +6,7 @@ import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import type { VelferdspermisjonDto } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
 
@@ -14,7 +15,6 @@ type FormValues = Record<string, VelferdspermisjonDto>;
 interface Props {
   velferdspermisjon: VelferdspermisjonDto;
   arbeidsforholdIndex: number;
-  readOnly: boolean;
   lukkRad: () => void;
   oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;
 }
@@ -22,10 +22,10 @@ interface Props {
 export const VelferdspermisjonForm = ({
   velferdspermisjon,
   arbeidsforholdIndex,
-  readOnly,
   lukkRad,
   oppdaterOverstyrtUtbetalingsgrad,
 }: Props) => {
+  const readOnly = useReadOnly();
   const { setValue, getValues } = useFormContext<TilretteleggingFormValues>();
 
   const alleVelferdpermisjoner = getValues(`arbeidsforhold.${arbeidsforholdIndex}.velferdspermisjoner`);

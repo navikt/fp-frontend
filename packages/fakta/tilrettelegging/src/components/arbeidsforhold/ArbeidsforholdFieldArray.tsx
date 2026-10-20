@@ -9,7 +9,6 @@ import { ArbeidsforholdExpansionCard } from './ArbeidsforholdExpansionCard';
 import { getFAISUProps } from './faisuUtils';
 
 interface Props {
-  readOnly: boolean;
   aoiArbeidsforhold: Arbeidsforhold[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttakArbeidTyper: KodeverkMedNavn<'UttakArbeidType'>[];
@@ -18,7 +17,6 @@ interface Props {
 export const ArbeidsforholdFieldArray = ({
   aoiArbeidsforhold,
   arbeidsgiverOpplysningerPerId,
-  readOnly,
   uttakArbeidTyper,
 }: Props) => {
   const { control, watch } = useFormContext<TilretteleggingFormValues>();
@@ -44,7 +42,6 @@ export const ArbeidsforholdFieldArray = ({
             tilrettelegging={arbeidsforhold}
             field={field}
             index={index}
-            readOnly={readOnly}
             uttakArbeidTyper={uttakArbeidTyper}
             aoiArbeidsforhold={aoiArbeidsforhold}
             arbeidsgiverOpplysning={arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse ?? '']}

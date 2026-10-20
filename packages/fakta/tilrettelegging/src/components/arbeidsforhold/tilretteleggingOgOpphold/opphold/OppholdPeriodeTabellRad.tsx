@@ -7,6 +7,7 @@ import { Button, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { SvpAvklartOppholdPeriode } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
 import { OppholdForm } from './OppholdForm';
@@ -16,7 +17,6 @@ import styles from './oppholdPeriodeTabellRad.module.css';
 interface Props {
   navn: `arbeidsforhold.${number}.avklarteOppholdPerioder.${number}`;
   opphold: SvpAvklartOppholdPeriode;
-  readOnly: boolean;
   disabled: boolean;
   index: number;
   openRad: boolean;
@@ -30,7 +30,6 @@ export const OppholdPeriodeTabellRad = ({
   navn,
   opphold,
   index,
-  readOnly,
   disabled,
   openRad,
   fjernOpphold,
@@ -38,6 +37,7 @@ export const OppholdPeriodeTabellRad = ({
   tilrettelegging,
   termindato,
 }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
   const [open, setOpen] = useState(openRad);
 
@@ -69,7 +69,6 @@ export const OppholdPeriodeTabellRad = ({
           index={index}
           oppdaterOpphold={oppdaterOpphold}
           avbrytEditering={avbrytEditering}
-          readOnly={readOnly}
           disabled={disabled}
           tilretteleggingDatoer={tilrettelegging.tilretteleggingDatoer}
           alleOpphold={tilrettelegging.avklarteOppholdPerioder}

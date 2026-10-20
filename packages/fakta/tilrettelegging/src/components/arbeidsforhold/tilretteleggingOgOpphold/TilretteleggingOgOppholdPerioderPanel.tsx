@@ -13,6 +13,7 @@ import type {
   SvpTilretteleggingDatoDto,
   TilretteleggingType,
 } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
 import { OppholdPeriodeTabellRad } from './opphold/OppholdPeriodeTabellRad';
@@ -30,7 +31,6 @@ const finnNesteTilretteleggingFom = (
 interface Props {
   tilrettelegging: Tilrettelegging;
   arbeidsforholdIndex: number;
-  readOnly: boolean;
   disabled: boolean;
   stillingsprosentArbeidsforhold: number;
   termindato: string;
@@ -39,11 +39,11 @@ interface Props {
 export const TilretteleggingOgOppholdPerioderPanel = ({
   tilrettelegging,
   arbeidsforholdIndex,
-  readOnly,
   disabled,
   stillingsprosentArbeidsforhold,
   termindato,
 }: Props) => {
+  const readOnly = useReadOnly();
   const tilretteleggingStateName = `arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer` as const;
   const oppholdPerioderStateName = `arbeidsforhold.${arbeidsforholdIndex}.avklarteOppholdPerioder` as const;
 
@@ -127,7 +127,6 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                   navn={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
                   index={arbeidsforholdIndex + tilretteleggingIndex}
                   tilretteleggingDato={rad}
-                  readOnly={readOnly}
                   disabled={disabled}
                   openRad={rad.fom === ''}
                   fjernTilrettelegging={slettTilrettelegging}
@@ -148,7 +147,6 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                 key={`${oppholdPerioderStateName}.${oppholdIndex}`}
                 navn={`${oppholdPerioderStateName}.${oppholdIndex}`}
                 opphold={rad}
-                readOnly={readOnly}
                 disabled={disabled}
                 index={arbeidsforholdIndex + oppholdIndex}
                 openRad={rad.fom === ''}

@@ -100,7 +100,6 @@ export const TilretteleggingFaktaForm = ({
         <ArbeidsforholdFieldArray
           aoiArbeidsforhold={aoiArbeidsforhold}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          readOnly={isReadOnly}
           uttakArbeidTyper={uttakArbeidTyper}
         />
 

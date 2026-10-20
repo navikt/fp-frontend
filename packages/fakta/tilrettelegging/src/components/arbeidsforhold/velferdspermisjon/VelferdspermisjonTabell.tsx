@@ -9,14 +9,12 @@ import { VelferdspermisjonTabellRad } from './VelferdspermisjonTabellRad';
 interface Props {
   filtrerteVelferdspermisjoner: VelferdspermisjonDto[];
   arbeidsforholdIndex: number;
-  readOnly: boolean;
   oppdaterOverstyrtUtbetalingsgrad: (velferdspermisjonprosent: number) => void;
 }
 
 export const VelferdspermisjonTabell = ({
   filtrerteVelferdspermisjoner,
   arbeidsforholdIndex,
-  readOnly,
   oppdaterOverstyrtUtbetalingsgrad,
 }: Props) => (
   <Table size="small">
@@ -32,7 +30,6 @@ export const VelferdspermisjonTabell = ({
         <VelferdspermisjonTabellRad
           key={permisjon.permisjonFom}
           velferdspermisjon={permisjon}
-          readOnly={readOnly}
           arbeidsforholdIndex={arbeidsforholdIndex}
           oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
         />

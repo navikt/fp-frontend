@@ -14,7 +14,6 @@ import type { FAISUProps } from './faisuUtils';
 interface Props {
   tilrettelegging: Tilrettelegging;
   index: number;
-  readOnly: boolean;
   aoiArbeidsforhold: Arbeidsforhold[];
   arbeidsgiverOpplysning: ArbeidsgiverOpplysninger | undefined;
   uttakArbeidTyper: KodeverkMedNavn<'UttakArbeidType'>[];
@@ -29,7 +28,6 @@ export const ArbeidsforholdExpansionCard = ({
   aoiArbeidsforhold,
   uttakArbeidTyper,
   field,
-  readOnly,
   faisu,
 }: Props) => {
   const [open, setOpen] = useState(tilrettelegging.skalBrukes);
@@ -72,7 +70,6 @@ export const ArbeidsforholdExpansionCard = ({
         <ArbeidsforholdPanel
           tilrettelegging={tilrettelegging}
           arbeidsforholdIndex={index}
-          readOnly={readOnly}
           visInfoAlert={tilrettelegging.skalBrukes && visInfoAlert}
           stillingsprosentArbeidsforhold={stillingsprosent ?? 0}
           faisu={faisu}

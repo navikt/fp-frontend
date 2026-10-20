@@ -17,6 +17,7 @@ const {
   SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod,
   TilretteleggingMed100ProsentVelferdspermisjon,
   KanSplittes,
+  ErReadonly,
 } = composeStories(stories);
 
 const lagNyDato = (nyDato: string) => {
@@ -25,6 +26,21 @@ const lagNyDato = (nyDato: string) => {
 };
 
 describe('TilretteleggingFaktaIndex', () => {
+  it('skal ikke vise knapper for å legge til perioder i lesemodus', async () => {
+    render(<ErReadonly />);
+
+    expect(await screen.findAllByText('Kilde')).not.toHaveLength(0);
+    expect(screen.queryByRole('button', { name: 'Periode med svangerskapspenger' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Opphold' })).not.toBeInTheDocument();
+  });
+
+  it('skal vise knapper for å legge til perioder når en ikke er i lesemodus', async () => {
+    render(<HarOpphold />);
+
+    expect(await screen.findAllByRole('button', { name: 'Periode med svangerskapspenger' })).not.toHaveLength(0);
+    expect(screen.getAllByRole('button', { name: 'Opphold' })).not.toHaveLength(0);
+  });
+
   it('skal bruke en eksplisitt overstyrt utbetalingsgrad på 0', () => {
     const tilretteleggingDato: SvpTilretteleggingDatoDto = {
       fom: '2020-03-17',

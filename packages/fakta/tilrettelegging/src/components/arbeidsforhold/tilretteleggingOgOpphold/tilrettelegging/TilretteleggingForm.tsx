@@ -8,7 +8,7 @@ import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@na
 import dayjs, { type Dayjs } from 'dayjs';
 
 import type { SvpAvklartOppholdPeriode, SvpTilretteleggingDatoDto } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import {notEmpty, useReadOnly } from '@navikt/fp-utils';
 
 import type { Tilrettelegging } from '../../../../types/TilretteleggingFormValues';
 import { finnSisteGyldigeDatoFørTermindato, validerIkkeEtterSisteGyldigeDato } from '../../tilretteleggingsdatoer';
@@ -88,7 +88,6 @@ interface Props {
   tilretteleggingDato: SvpTilretteleggingDatoDto;
   termindato: string;
   index: number;
-  readOnly: boolean;
   disabled: boolean;
   oppdaterTilrettelegging: (values: SvpTilretteleggingDatoDto) => void;
   avbrytEditering: () => void;
@@ -101,7 +100,6 @@ export const TilretteleggingForm = ({
   tilretteleggingDato,
   termindato,
   index,
-  readOnly,
   disabled,
   oppdaterTilrettelegging,
   avbrytEditering,
@@ -109,6 +107,7 @@ export const TilretteleggingForm = ({
   tilrettelegging,
   tomDatoForTilrettelegging,
 }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const erNyPeriode = !tilretteleggingDato.fom;

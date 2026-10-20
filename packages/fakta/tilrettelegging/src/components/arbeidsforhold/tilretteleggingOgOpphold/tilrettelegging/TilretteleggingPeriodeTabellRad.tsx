@@ -7,6 +7,7 @@ import { Button, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { type SvpTilretteleggingDatoDto } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import type { Tilrettelegging, TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
 import {
@@ -20,7 +21,6 @@ import styles from './tilretteleggingPeriodeTabellRad.module.css';
 interface Props {
   navn: `arbeidsforhold.${number}.tilretteleggingDatoer.${number}`;
   tilretteleggingDato: SvpTilretteleggingDatoDto;
-  readOnly: boolean;
   disabled: boolean;
   index: number;
   openRad: boolean;
@@ -36,7 +36,6 @@ export const TilretteleggingPeriodeTabellRad = ({
   navn,
   tilretteleggingDato,
   index,
-  readOnly,
   disabled,
   openRad,
   fjernTilrettelegging,
@@ -46,6 +45,7 @@ export const TilretteleggingPeriodeTabellRad = ({
   tomDatoForTilrettelegging,
   termindato,
 }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
   const [open, setOpen] = useState(openRad);
 
@@ -78,7 +78,6 @@ export const TilretteleggingPeriodeTabellRad = ({
           index={index}
           oppdaterTilrettelegging={oppdaterTilrettelegging}
           avbrytEditering={avbrytEditering}
-          readOnly={readOnly}
           disabled={disabled}
           stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
           tilrettelegging={tilrettelegging}

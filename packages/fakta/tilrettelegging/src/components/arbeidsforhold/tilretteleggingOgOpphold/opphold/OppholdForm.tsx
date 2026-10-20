@@ -8,6 +8,7 @@ import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-for
 import dayjs, { type Dayjs } from 'dayjs';
 
 import type { SvpAvklartOppholdPeriode, SvpTilretteleggingDatoDto } from '@navikt/fp-types';
+import { useReadOnly } from '@navikt/fp-utils';
 
 import { finnSisteGyldigeDatoFørTermindato, validerIkkeEtterSisteGyldigeDato } from '../../tilretteleggingsdatoer';
 
@@ -80,7 +81,6 @@ const validerAtPeriodeIkkeOverlapper =
 interface Props {
   opphold: SvpAvklartOppholdPeriode;
   index: number;
-  readOnly: boolean;
   disabled: boolean;
   oppdaterOpphold: (values: SvpAvklartOppholdPeriode) => void;
   avbrytEditering: () => void;
@@ -101,7 +101,6 @@ const finnFørsteDatoForTilrettelegging = (tilretteleggingDatoer: SvpTilretteleg
 export const OppholdForm = ({
   opphold,
   index,
-  readOnly,
   disabled,
   oppdaterOpphold,
   avbrytEditering,
@@ -109,6 +108,7 @@ export const OppholdForm = ({
   alleOpphold,
   termindato,
 }: Props) => {
+  const readOnly = useReadOnly();
   const intl = useIntl();
 
   const erNyPeriode = !opphold.fom;
