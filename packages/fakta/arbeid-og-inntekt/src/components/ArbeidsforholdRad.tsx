@@ -11,15 +11,14 @@ import type {
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
-import { classNames } from '@navikt/fp-utils';
 
 import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
 import { ArbeidsforholdInformasjonPanel } from './felles/ArbeidsforholdInformasjonPanel';
 import { InntektsmeldingerPanel } from './felles/InntektsmeldingerPanel';
 import { InntektsmeldingOpplysningerPanel } from './felles/InntektsmeldingOpplysningerPanel';
-import { ManglendeArbeidsforholdForm } from './manglendeArbeidsforhold/ManglendeArbeidsforholdForm';
-import { ManglendeInntektsmeldingForm } from './manglendeInntektsmelding/ManglendeInntektsmeldingForm';
-import { ManueltLagtTilArbeidsforholdForm } from './manuelt/ManueltLagtTilArbeidsforholdForm';
+import { ManglendeArbeidsforholdForm } from './ManglendeArbeidsforholdForm';
+import { ManglendeInntektsmeldingForm } from './ManglendeInntektsmeldingForm';
+import { ManueltLagtTilArbeidsforholdForm } from './ManueltLagtTilArbeidsforholdForm';
 
 import styles from './arbeidsforholdRad.module.css';
 
@@ -85,9 +84,10 @@ export const ArbeidsforholdRad = ({
       expandOnRowClick
       togglePlacement="right"
       contentGutter="none"
-      className={classNames(styles['row'], erRadÅpen && styles['isOpen'], harÅpentAksjonspunkt && styles['isApOpen'])}
+      data-open-ap={harÅpentAksjonspunkt}
+      className={styles['tabellRad']}
       content={
-        <VStack gap="space-16" className={harÅpentAksjonspunkt ? styles['panelOpenAp'] : styles['panelOpen']}>
+        <VStack gap="space-16">
           {erManueltOpprettet && (
             <ManueltLagtTilArbeidsforholdForm
               behandlingUuid={behandlingUuid}
@@ -188,13 +188,15 @@ export const ArbeidsforholdRad = ({
         {!harÅpentAksjonspunkt && (
           <CheckmarkIcon
             title={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })}
-            className={styles['checkmarkIcon']}
+            color="var(--ax-text-success-decoration)"
+            fontSize="1.5rem"
           />
         )}
         {harÅpentAksjonspunkt && (
           <ExclamationmarkTriangleFillIcon
             title={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })}
-            className={styles['exclamationmarkIcon']}
+            fontSize="1.5rem"
+            color="var(--ax-text-warning-decoration)"
           />
         )}
       </Table.DataCell>

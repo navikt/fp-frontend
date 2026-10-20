@@ -126,7 +126,7 @@ export const InntektsmeldingOpplysningerPanel = ({
           journalpostId={inntektsmelding.journalpostId}
           dokumentId={inntektsmelding.dokumentId}
         >
-          <HStack gap="space-4" wrap={false} align="center">
+          <HStack gap="space-4" wrap={false} align="center" as="span">
             <FileIcon fontSize="1.125rem" aria-hidden />
             <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
           </HStack>

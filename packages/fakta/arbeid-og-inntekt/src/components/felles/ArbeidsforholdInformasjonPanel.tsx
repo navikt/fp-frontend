@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Label, Link, Spacer, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Label, Link, VStack } from '@navikt/ds-react';
 import { BeløpLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -11,8 +11,6 @@ import type { AlleKodeverk, Inntektspost } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 import { InntektsmeldingerPanel } from './InntektsmeldingerPanel';
-
-import styles from './arbeidsforholdInformasjonPanel.module.css';
 
 type ForenkletInntektspost = {
   beløp: number;
@@ -57,17 +55,20 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
             {sorterteInntektsposter
               .filter((_inntekt, index) => (visAlleMåneder ? true : index < 3))
               .map(inntekt => (
-                <HStack gap="space-8" className={styles['bredde']} key={inntekt.fom}>
+                <HStack justify="space-between" asChild key={inntekt.fom} className="max-w-34">
                   <BodyShort size="small">
-                    <FormattedMessage id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`} />
-                  </BodyShort>
-                  <BodyShort size="small">{dayjs(inntekt.fom).year()}</BodyShort>
-                  <Spacer />
-                  <BodyShort size="small">
-                    <BeløpLabel beløp={inntekt.beløp} />
+                    <HStack gap="space-4" justify="space-between" className="w-18" as="span">
+                      <FormattedMessage
+                        tagName="span"
+                        id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`}
+                      />
+                      <span>{dayjs(inntekt.fom).year()}</span>
+                    </HStack>
+                    <BeløpLabel beløp={inntekt.beløp} kr />
                   </BodyShort>
                 </HStack>
               ))}
+
             <BodyShort size="small">
               <Link
                 onClick={e => {

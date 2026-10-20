@@ -22,10 +22,8 @@ import type {
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
 
-import { useSetDirtyForm } from '../../DirtyFormProvider';
-import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
-
-import styles from './manglendeArbeidsforholdForm.module.css';
+import { useSetDirtyForm } from '../DirtyFormProvider';
+import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -132,101 +130,99 @@ export const ManglendeArbeidsforholdForm = ({
   };
 
   return (
-    <VStack gap="space-32">
-      <div className={styles['alertStripe']}>
-        <Alert variant="info">
+    <RhfForm formMethods={formMethods} onSubmit={lagre}>
+      <VStack gap="space-16">
+        <Alert variant="info" size="small" className="self-start">
           <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
         </Alert>
-      </div>
-      <RhfForm formMethods={formMethods} onSubmit={lagre}>
-        <VStack gap="space-16">
-          <RhfRadioGroup
-            name="saksbehandlersVurdering"
-            control={formMethods.control}
-            legend={
-              <HStack gap="space-8">
-                <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
-                <HelpText content={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}>
-                  <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
-                </HelpText>
-              </HStack>
-            }
-            validate={[required]}
-            readOnly={isReadOnly}
-          >
-            <Radio value="KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD" size="small">
-              <FormattedMessage id="ManglendeOpplysningerForm.TarKontakt" />
-            </Radio>
-            <Radio value="IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING" size="small">
-              <FormattedMessage id="ManglendeOpplysningerForm.GåVidere" />
-            </Radio>
-            <Radio value="OPPRETT_BASERT_PÅ_INNTEKTSMELDING" size="small">
-              <FormattedMessage id="ManglendeOpplysningerForm.OpprettArbeidsforhold" />
-            </Radio>
-          </RhfRadioGroup>
-          {saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING' && (
-            <HStack gap="space-16">
-              <RhfDatepicker
-                name="fom"
-                control={formMethods.control}
-                label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
-                validate={[required, hasValidDate]}
-                readOnly={isReadOnly}
-              />
-              <RhfDatepicker
-                name="tom"
-                control={formMethods.control}
-                label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
-                validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
-                readOnly={isReadOnly}
-              />
-              <RhfTextField
-                name="stillingsprosent"
-                control={formMethods.control}
-                label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
-                parse={value => {
-                  const parsedValue = Number.parseInt(value.toString(), 10);
-                  return Number.isNaN(parsedValue) ? value : parsedValue;
-                }}
-                validate={[required, hasValidInteger, minValue1, maxValue100]}
-                readOnly={isReadOnly}
-                maxLength={3}
-              />
+
+        <RhfRadioGroup
+          name="saksbehandlersVurdering"
+          control={formMethods.control}
+          legend={
+            <HStack gap="space-8" align="center">
+              <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
+              <HelpText content={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}>
+                <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
+              </HelpText>
             </HStack>
-          )}
-          <RhfTextarea
-            name="begrunnelse"
-            control={formMethods.control}
-            label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
-            validate={[required, minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
-            readOnly={isReadOnly}
-          />
-          {!isReadOnly && (
-            <HStack gap="space-16">
-              <Button
-                size="small"
-                variant="secondary"
-                loading={formMethods.formState.isSubmitting}
-                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-              >
-                <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
-              </Button>
-              <Button
-                size="small"
-                variant="tertiary"
-                loading={false}
-                disabled={formMethods.formState.isSubmitting}
-                onClick={avbryt}
-                type="button"
-              >
-                <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
-              </Button>
-            </HStack>
-          )}
-        </VStack>
-      </RhfForm>
-    </VStack>
+          }
+          validate={[required]}
+          readOnly={isReadOnly}
+        >
+          <Radio value="KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD" size="small">
+            <FormattedMessage id="ManglendeOpplysningerForm.TarKontakt" />
+          </Radio>
+          <Radio value="IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING" size="small">
+            <FormattedMessage id="ManglendeOpplysningerForm.GåVidere" />
+          </Radio>
+          <Radio value="OPPRETT_BASERT_PÅ_INNTEKTSMELDING" size="small">
+            <FormattedMessage id="ManglendeOpplysningerForm.OpprettArbeidsforhold" />
+          </Radio>
+        </RhfRadioGroup>
+        {saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING' && (
+          <HStack gap="space-16">
+            <RhfDatepicker
+              name="fom"
+              control={formMethods.control}
+              label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
+              validate={[required, hasValidDate]}
+              readOnly={isReadOnly}
+            />
+            <RhfDatepicker
+              name="tom"
+              control={formMethods.control}
+              label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
+              validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
+              readOnly={isReadOnly}
+            />
+            <RhfTextField
+              name="stillingsprosent"
+              control={formMethods.control}
+              label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
+              parse={value => {
+                const parsedValue = Number.parseInt(value.toString(), 10);
+                return Number.isNaN(parsedValue) ? value : parsedValue;
+              }}
+              validate={[required, hasValidInteger, minValue1, maxValue100]}
+              readOnly={isReadOnly}
+              maxLength={3}
+            />
+          </HStack>
+        )}
+        <RhfTextarea
+          name="begrunnelse"
+          control={formMethods.control}
+          label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
+          validate={[required, minLength3, maxLength1500, hasValidText]}
+          maxLength={1500}
+          readOnly={isReadOnly}
+          className="max-w-3xl"
+        />
+        {!isReadOnly && (
+          <HStack gap="space-16">
+            <Button
+              size="small"
+              variant="secondary"
+              loading={formMethods.formState.isSubmitting}
+              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+            >
+              <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
+            </Button>
+            <Button
+              size="small"
+              variant="tertiary"
+              loading={false}
+              disabled={formMethods.formState.isSubmitting}
+              onClick={avbryt}
+              type="button"
+            >
+              <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
+            </Button>
+          </HStack>
+        )}
+      </VStack>
+    </RhfForm>
   );
 };
 
