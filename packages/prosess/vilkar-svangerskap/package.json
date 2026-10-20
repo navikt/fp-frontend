@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-vilkar-svangerskap",
   "license": "MIT",
+  "description": "Prosesspanel for svangerskapsvilkåret, viser tilrettelegging i arbeidsforhold og lar saksbehandler vurdere om vilkåret for svangerskapspenger er oppfylt og perioder kan innvilges.",
   "private": true,
   "type": "module",
   "exports": {

@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-los-saksbehandler",
   "license": "MIT",
+  "description": "Saksbehandlerflate for LOS med valg av behandlingskø, søk etter saker og håndtering av reserverte behandlinger.",
   "private": true,
   "type": "module",
   "exports": {

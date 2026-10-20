@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-inntektsmelding",
   "license": "MIT",
+  "description": "Faktapanel for inntektsmeldinger, viser innsendingsdato, arbeidsgiver, månedsinntekt og hvilke behandlinger meldingene er knyttet til.",
   "private": true,
   "type": "module",
   "exports": {

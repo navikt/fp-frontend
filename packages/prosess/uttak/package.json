@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-uttak",
   "license": "MIT",
+  "description": "Prosesspanel for uttak av foreldrepenger, viser stønadskontoer og uttaksperioder på en tidslinje og lar saksbehandler redigere perioder og vurdere konto, trekkdager og utbetalingsgrad.",
   "private": true,
   "type": "module",
   "exports": {

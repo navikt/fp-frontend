@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-vedtak-innsyn",
   "license": "MIT",
+  "description": "Prosesspanel for vedtak om innsyn, lar saksbehandler innvilge, delvis innvilge eller avslå innsyn, velge dokumentasjon til søker og forhåndsvise vedtaksbrevet.",
   "private": true,
   "type": "module",
   "exports": {

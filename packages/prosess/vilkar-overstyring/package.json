@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-vilkar-overstyring",
   "license": "MIT",
+  "description": "Prosesspanel for overstyring av inngangsvilkår, viser vilkårsstatus og lar saksbehandler overstyre den automatiske vurderingen av blant annet fødsel, medlemskap, opptjening eller søknadsfrist.",
   "private": true,
   "type": "module",
   "exports": {

@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-brev-editor",
   "license": "MIT",
+  "description": "Komponenter for å redigere og forhåndsvise brev, mellomlagre endringer og tilbakestille til opprinnelig innhold.",
   "private": true,
   "type": "module",
   "exports": {

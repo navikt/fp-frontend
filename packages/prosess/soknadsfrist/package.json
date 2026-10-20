@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-soknadsfrist",
   "license": "MIT",
+  "description": "Prosesspanel for vurdering av oversittet søknadsfrist, viser søknads- og mottaksdato og lar saksbehandler vurdere fristavbrytende kontakt, misvisende opplysninger eller gyldig grunn for sen søknad.",
   "private": true,
   "type": "module",
   "exports": {

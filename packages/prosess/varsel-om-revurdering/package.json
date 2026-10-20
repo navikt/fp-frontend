@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-varsel-om-revurdering",
   "license": "MIT",
+  "description": "Prosesspanel for varsel om revurdering, lar saksbehandler vurdere om søker skal varsles og forhåndsvise eller redigere varselbrevet.",
   "private": true,
   "type": "module",
   "exports": {

@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-vilkar-sokers-opplysningsplikt",
   "license": "MIT",
+  "description": "Prosesspanel for søkers opplysningsplikt, viser manglende vedlegg og lar saksbehandler vurdere om vilkåret er oppfylt eller om manglende opplysninger tilsier avslag.",
   "private": true,
   "type": "module",
   "exports": {

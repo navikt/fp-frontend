@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-arbeidsforhold",
   "license": "MIT",
+  "description": "Faktapanel for arbeidsforhold som er aktive ved permisjonsstart, viser perioder og inntektsmeldinger og lar saksbehandler vurdere hvilke arbeidsforhold som skal brukes.",
   "private": true,
   "type": "module",
   "exports": {

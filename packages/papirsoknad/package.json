@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-papirsoknad",
   "license": "MIT",
+  "description": "Skjema for registrering av papirsøknader om foreldrepenger, svangerskapspenger og engangsstønad.",
   "private": true,
   "type": "module",
   "exports": {

@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-prosess-klagevurdering",
   "license": "MIT",
+  "description": "Prosesspanel for vurdering av klage, lar saksbehandler ta stilling til om vedtaket skal opprettholdes, omgjøres eller oppheves og hjemsendes, med hjemmel og begrunnelse.",
   "private": true,
   "type": "module",
   "exports": {

@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-utbetalingsdata-is15",
   "license": "MIT",
+  "description": "Komponent for å søke etter Infotrygd-data og vise saker, vedtak, arbeidsforhold og utbetalinger for en person.",
   "private": true,
   "type": "module",
   "exports": {

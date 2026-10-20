@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-omsorg",
   "license": "MIT",
+  "description": "Faktapanel for omsorg for barnet, lar saksbehandler vurdere om søker har omsorg i søknadsperioden.",
   "private": true,
   "type": "module",
   "exports": {

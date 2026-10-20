@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-uttak-eos",
   "license": "MIT",
+  "description": "Faktapanel for uttak i EØS, lar saksbehandler avklare perioder med uttak for den andre forelderen i et EØS-land.",
   "private": true,
   "type": "module",
   "exports": {

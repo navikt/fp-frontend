@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-uttaksdokumentasjon",
   "license": "MIT",
+  "description": "Faktapanel for dokumentasjon ved uttak, lar saksbehandler vurdere avklaringsbehov, aktivitetskrav og om dokumentasjonen for periodene er godkjent.",
   "private": true,
   "type": "module",
   "exports": {

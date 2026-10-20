@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-medlemskap",
   "license": "MIT",
+  "description": "Faktapanel for medlemskap i folketrygden, lar saksbehandler vurdere bosted, oppholdsrett og registrerte medlemskapsperioder.",
   "private": true,
   "type": "module",
   "exports": {

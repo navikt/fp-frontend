@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-fodsel",
   "license": "MIT",
+  "description": "Faktapanel for opplysninger om termin og fødsel, lar saksbehandler sammenligne søknaden med Folkeregisteret og kontrollere dokumentasjon og fødselsopplysninger.",
   "private": true,
   "type": "module",
   "exports": {

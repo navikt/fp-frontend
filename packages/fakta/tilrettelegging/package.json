@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-tilrettelegging",
   "license": "MIT",
+  "description": "Faktapanel for tilrettelegging ved svangerskap, lar saksbehandler kontrollere opplysninger fra jordmor og arbeidsgiver og vurdere svangerskapspenger per arbeidsforhold.",
   "private": true,
   "type": "module",
   "exports": {

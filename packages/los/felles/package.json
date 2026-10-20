@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-los-felles",
   "license": "MIT",
+  "description": "Felles LOS-komponenter for å endre eller flytte oppgavereservasjoner og vise statistikk over oppgaver i køene.",
   "private": true,
   "type": "module",
   "exports": {

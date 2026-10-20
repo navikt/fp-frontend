@@ -1,6 +1,7 @@
 {
   "name": "@navikt/fp-fakta-omsorgsovertakelse",
   "license": "MIT",
+  "description": "Faktapanel for omsorgsovertakelse, lar saksbehandler sammenligne opplysninger fra søknaden og Folkeregisteret og vurdere vilkårene for barna i saken.",
   "private": true,
   "type": "module",
   "exports": {
