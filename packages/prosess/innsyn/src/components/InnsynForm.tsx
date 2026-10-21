@@ -12,7 +12,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, Innsyn, InnsynDokument } from '@navikt/fp-types';
 import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, sortKodeverkByNavn, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListInnsyn } from './DocumentListInnsyn';
 import type { FormValues } from './formValues';
@@ -65,7 +65,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
 
   const documents = getFilteredReceivedDocuments(alleDokumenter);
 
-  const innsynResultatTyper = alleKodeverk['InnsynResultatType'].sort((t1, t2) => t2.navn.localeCompare(t1.navn));
+  const innsynResultatTyper = alleKodeverk['InnsynResultatType'].toSorted((t1, t2) => sortKodeverkByNavn(t2, t1));
 
   const isApOpen = aksjonspunkterForPanel[0]?.status === 'OPPR';
 

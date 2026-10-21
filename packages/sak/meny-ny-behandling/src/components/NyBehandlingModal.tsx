@@ -14,6 +14,7 @@ import type {
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
 } from '@navikt/fp-types';
+import { sortKodeverkByNavn } from '@navikt/fp-utils';
 
 import styles from './nyBehandlingModal.module.css';
 
@@ -93,7 +94,7 @@ const getBehandlingAarsaker = (
 
     return alleRevurderingArsaker
       .filter(bat => manuelleRevurderingsArsaker.includes(bat.kode))
-      .sort((bat1, bat2) => bat1.navn.localeCompare(bat2.navn));
+      .sort(sortKodeverkByNavn);
   }
 
   return [];
@@ -101,7 +102,7 @@ const getBehandlingAarsaker = (
 
 const getBehandlingTyper = (
   behandlingstyper: KodeverkMedNavn<'BehandlingType'>[],
-): KodeverkMedNavn<'BehandlingType'>[] => [...behandlingstyper].sort((bt1, bt2) => bt1.navn.localeCompare(bt2.navn));
+): KodeverkMedNavn<'BehandlingType'>[] => behandlingstyper.toSorted(sortKodeverkByNavn);
 
 const defaultKanTilbakekrevingOpprettes = {
   kanBehandlingOpprettes: false,

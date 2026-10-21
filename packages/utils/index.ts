@@ -3,6 +3,7 @@ export { PanelDataProvider, usePanelDataContext } from './src/context/PanelDataC
 export { PanelOverstyringProvider, usePanelOverstyring } from './src/context/PanelOverstyringContext';
 export { classNames } from './src/classNames';
 export { notEmpty } from './src/notEmpty';
+export { sortKodeverkByNavn } from './src/sortKodeverkByNavn';
 export { assertUnreachable } from './src/switchCaseUtils';
 export { åpneDokument, åpneVindu } from './src/åpneDokument';
 

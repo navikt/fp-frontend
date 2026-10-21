@@ -6,6 +6,7 @@ import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import type { AlleKodeverk } from '@navikt/fp-types';
+import { sortKodeverkByNavn } from '@navikt/fp-utils';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import {
@@ -38,7 +39,7 @@ interface Props {
  */
 export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato, erAdopsjon }: Props) => {
   const { formatMessage } = useIntl();
-  const sortedCountriesByName = alleKodeverk['Landkoder'].toSorted((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk['Landkoder'].toSorted(sortKodeverkByNavn);
 
   const { watch, control } = useFormContext<OppholdINorgeFormValues>();
   const skalViseTidligereOppholdInput = !watch('oppholdSisteTolvINorge', true);

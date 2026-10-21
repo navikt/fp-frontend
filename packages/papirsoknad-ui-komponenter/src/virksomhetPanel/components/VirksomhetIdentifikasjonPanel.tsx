@@ -15,6 +15,7 @@ import {
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import { sortKodeverkByNavn } from '@navikt/fp-utils';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
@@ -43,7 +44,7 @@ interface Props {
  */
 export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }: Props) => {
   const intl = useIntl();
-  const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk['Landkoder'].toSorted(sortKodeverkByNavn);
 
   const { getValues, control } = useFormContext<VirksomhetFormValues>();
 

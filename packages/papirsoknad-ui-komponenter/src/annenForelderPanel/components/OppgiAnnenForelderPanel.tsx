@@ -13,7 +13,7 @@ import {
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { notEmpty, sortKodeverkByNavn } from '@navikt/fp-utils';
 
 import { ANNEN_FORELDER_NAME_PREFIX, KAN_IKKE_OPPGI_NAME_PREFIX } from '../constant';
 import type { AnnenForelderFormValues, AnnenForelderSubFormValues } from '../types';
@@ -46,7 +46,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
   const årsak = watch(`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.årsak`);
 
   const landkoder = alleKodeverk['Landkoder'];
-  const sorterteLand = landkoder.slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const sorterteLand = landkoder.toSorted(sortKodeverkByNavn);
 
   return (
     <>

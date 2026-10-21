@@ -17,6 +17,7 @@ import type {
   FaktaArbeidsforhold,
   UttakArbeidType,
 } from '@navikt/fp-types';
+import { sortKodeverkByNavn } from '@navikt/fp-utils';
 
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import {
@@ -99,17 +100,11 @@ export const UttakFaktaDetailForm = ({
     }
   };
 
-  const sorterteUttakPeriodeTyper = alleKodeverk['UttakPeriodeType'].toSorted((k1, k2) =>
-    k1.navn.localeCompare(k2.navn),
-  );
-  const sorterteOverføringÅrsaker = alleKodeverk['OverføringÅrsak'].toSorted((k1, k2) =>
-    k1.navn.localeCompare(k2.navn),
-  );
-  const sorterteUtsettelseÅrsaker = alleKodeverk['UtsettelseÅrsak'].toSorted((k1, k2) =>
-    k1.navn.localeCompare(k2.navn),
-  );
-  const sorterteOppholdÅrsaker = alleKodeverk['OppholdÅrsak'].toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
-  const sorterteMorsAktiviteter = alleKodeverk['MorsAktivitet'].toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
+  const sorterteUttakPeriodeTyper = alleKodeverk['UttakPeriodeType'].toSorted(sortKodeverkByNavn);
+  const sorterteOverføringÅrsaker = alleKodeverk['OverføringÅrsak'].toSorted(sortKodeverkByNavn);
+  const sorterteUtsettelseÅrsaker = alleKodeverk['UtsettelseÅrsak'].toSorted(sortKodeverkByNavn);
+  const sorterteOppholdÅrsaker = alleKodeverk['OppholdÅrsak'].toSorted(sortKodeverkByNavn);
+  const sorterteMorsAktiviteter = alleKodeverk['MorsAktivitet'].toSorted(sortKodeverkByNavn);
 
   const årsakstype = useWatch({ control: formMethods.control, name: 'arsakstype' });
   const flerbarnsdager = useWatch({ control: formMethods.control, name: 'flerbarnsdager' });
