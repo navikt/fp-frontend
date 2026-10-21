@@ -1,8 +1,7 @@
-import { type ReactElement, useEffect, useState } from 'react';
-import { useIntl } from 'react-intl';
+import { useEffect, useState } from 'react';
 import { type Location } from 'react-router';
 
-import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
+import { VStack } from '@navikt/ds-react';
 
 import type {
   AlleKodeverk,
@@ -19,7 +18,6 @@ import { HistorikkInnslag } from './HistorikkInnslag/HistorikkInnslag';
 import styles from './historikk.module.css';
 
 interface Props {
-  valgtBehandlingUuid?: string;
   historikkFpSak: Historikkinnslag[];
   historikkFpTilbake: HistorikkinnslagDtoFpTilbake[];
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
@@ -30,7 +28,6 @@ interface Props {
     behandlingLocation: Location,
     skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake,
   ) => Location | undefined;
-  utvidEllerMinskBehandlingDetaljerKnapp: ReactElement;
 }
 
 /**
@@ -39,7 +36,6 @@ interface Props {
  * Historikken for en behandling
  */
 export const Historikk = ({
-  valgtBehandlingUuid,
   historikkFpSak,
   historikkFpTilbake,
   alleKodeverkFpSak, // TODO: Kodeverk brukes bare får å hente navn på aktør
@@ -47,18 +43,8 @@ export const Historikk = ({
   saksnummer,
   getBehandlingLocation,
   createLocationForSkjermlenke,
-  utvidEllerMinskBehandlingDetaljerKnapp,
 }: Props) => {
-  const intl = useIntl();
-
-  const [skalSortertePaValgtBehandling, setSkalSortertePaValgtBehandling] = useState(false);
-
   const alleHistorikkInnslag = sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake);
-
-  const filtrerteInnslag =
-    valgtBehandlingUuid && skalSortertePaValgtBehandling
-      ? alleHistorikkInnslag.filter(i => i.behandlingUuid === valgtBehandlingUuid)
-      : alleHistorikkInnslag;
 
   const [top, setTop] = useState<number>();
 
@@ -72,56 +58,36 @@ export const Historikk = ({
   }, []);
 
   return (
-    <>
-      <Box background="neutral-moderate" borderColor="neutral-subtleA" borderWidth="0 0 2 0" padding="space-20">
-        <HStack justify="space-between">
-          <HStack gap="space-4" align="center">
-            <Heading size="small" level="3">
-              {intl.formatMessage({ id: 'History.Historikk' })}
-            </Heading>
-            {utvidEllerMinskBehandlingDetaljerKnapp}
-          </HStack>
-          <HStack gap="space-32">
-            {valgtBehandlingUuid && (
-              <Checkbox size="small" onChange={() => setSkalSortertePaValgtBehandling(!skalSortertePaValgtBehandling)}>
-                {intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
-              </Checkbox>
-            )}
-            <div className={styles['circle']}>{filtrerteInnslag.length}</div>
-          </HStack>
-        </HStack>
-      </Box>
-      <div
-        style={{ height: `calc(100vh - ${top}px)` }}
-        className={styles['overflow']}
-        ref={el => {
-          if (el) {
-            setTop(el.getBoundingClientRect().top);
-          }
-        }}
-      >
-        <VStack gap="space-8" padding="space-16">
-          {filtrerteInnslag.map(historikkinnslag => {
-            const alleKodeverk = historikkinnslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
+    <div
+      style={{ height: `calc(100vh - ${top}px)` }}
+      className={styles['overflow']}
+      ref={el => {
+        if (el) {
+          setTop(el.getBoundingClientRect().top);
+        }
+      }}
+    >
+      <VStack gap="space-8" padding="space-16">
+        {alleHistorikkInnslag.map(historikkinnslag => {
+          const alleKodeverk = historikkinnslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
 
-            if (!alleKodeverk) {
-              return null;
-            }
-            return (
-              <HistorikkInnslag
-                key={historikkinnslag.opprettetTidspunkt}
-                saksnummer={saksnummer}
-                historikkInnslag={historikkinnslag}
-                createLocationForSkjermlenke={createLocationForSkjermlenke}
-                alleKodeverk={alleKodeverk}
-                behandlingLocation={
-                  historikkinnslag.behandlingUuid ? getBehandlingLocation(historikkinnslag.behandlingUuid) : undefined
-                }
-              />
-            );
-          })}
-        </VStack>
-      </div>
-    </>
+          if (!alleKodeverk) {
+            return null;
+          }
+          return (
+            <HistorikkInnslag
+              key={historikkinnslag.opprettetTidspunkt}
+              saksnummer={saksnummer}
+              historikkInnslag={historikkinnslag}
+              createLocationForSkjermlenke={createLocationForSkjermlenke}
+              alleKodeverk={alleKodeverk}
+              behandlingLocation={
+                historikkinnslag.behandlingUuid ? getBehandlingLocation(historikkinnslag.behandlingUuid) : undefined
+              }
+            />
+          );
+        })}
+      </VStack>
+    </div>
   );
 };

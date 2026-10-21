@@ -13,6 +13,7 @@ interface Props {
   children: ReactNode;
   brukPadding?: boolean;
   toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
+  headerHandlinger?: ReactNode;
 }
 
 export const SupportHeaderAndContent = ({
@@ -21,6 +22,7 @@ export const SupportHeaderAndContent = ({
   children,
   brukPadding = true,
   toggleVisUtvidetBehandlingDetaljerKnapp,
+  headerHandlinger,
 }: Props) => {
   const intl = useIntl();
   const { addErrorMessage } = useRestApiErrorDispatcher();
@@ -35,7 +37,10 @@ export const SupportHeaderAndContent = ({
             </Heading>
             {toggleVisUtvidetBehandlingDetaljerKnapp}
           </HStack>
-          {!!antall && antall > 0 && <div className={styles['circle']}>{antall}</div>}
+          <HStack gap="space-32" align="center">
+            {headerHandlinger}
+            {!!antall && antall > 0 && <div className={styles['circle']}>{antall}</div>}
+          </HStack>
         </HStack>
       </div>
       <div className={brukPadding ? styles['container'] : undefined}>
