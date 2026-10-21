@@ -63,6 +63,7 @@ export const OppholdPeriodeTabellRad = ({
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
+      className={styles['tabellRad']}
       content={
         <OppholdForm
           opphold={opphold}
@@ -76,7 +77,6 @@ export const OppholdPeriodeTabellRad = ({
           termindato={termindato}
         />
       }
-      className={open ? styles['openRow'] : undefined}
     >
       <Table.DataCell>
         {opphold.fom ? (
