@@ -2,12 +2,12 @@ import React from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
-import { Button, Heading, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, Table, VStack } from '@navikt/ds-react';
+import { LabeledValue } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
-import { classNames } from '@navikt/fp-utils';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { Årsakstype, utledÅrsakstype, UttakFaktaDetailForm } from './UttakFaktaDetailForm';
@@ -102,69 +102,77 @@ export const UttakFaktaTable = ({
 
   return (
     <VStack gap="space-24">
-      <Table>
-        <Table.Header>
-          <Table.Row className={styles['headerRow']}>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="UttakFaktaTable.Periode" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="UttakFaktaTable.AntallDager" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="UttakFaktaTable.Type" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="UttakFaktaTable.Kilde" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col" />
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {uttakKontrollerFaktaPerioder.map(periode => {
-            const numberOfDaysAndWeeks = calcDaysAndWeeks(periode.fom, periode.tom);
-            return (
-              <Table.ExpandableRow
-                key={periode.fom + periode.tom}
-                expandOnRowClick
-                togglePlacement="right"
-                open={valgteFomDatoer.includes(periode.fom)}
-                onOpenChange={() => velgPeriodeFomDato(periode.fom)}
-                className={classNames(
-                  styles['row'],
-                  valgteFomDatoer.includes(periode.fom) && styles['isOpen'],
-                  !!periode.aksjonspunktType && styles['isApOpen'],
-                )}
-                contentGutter="none"
-                content={
-                  valgteFomDatoer.includes(periode.fom) && (
-                    <div className={periode.aksjonspunktType ? styles['panelOpenAp'] : styles['panelOpen']}>
-                      <UttakFaktaDetailForm
-                        fagsak={fagsak}
-                        valgtPeriode={periode}
-                        readOnly={readOnly || !erRedigerbart}
-                        oppdaterPeriode={oppdaterPeriode}
-                        slettPeriode={() => slettPeriode(periode.originalFom)}
-                        avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
-                        alleKodeverk={alleKodeverk}
-                        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                        faktaArbeidsforhold={faktaArbeidsforhold}
-                      />
-                    </div>
-                  )
-                }
-              >
-                <Table.DataCell>{`${dateFormat(periode.fom)} - ${dateFormat(periode.tom)}`}</Table.DataCell>
-                <Table.DataCell>{numberOfDaysAndWeeks.formattedString}</Table.DataCell>
-                <Table.DataCell>{getTypeTekst(alleKodeverk, periode, intl)}</Table.DataCell>
-                <Table.DataCell>
-                  {alleKodeverk['FordelingPeriodeKilde'].find(k => k.kode === periode.periodeKilde)?.navn}
-                </Table.DataCell>
-              </Table.ExpandableRow>
-            );
-          })}
-        </Table.Body>
-      </Table>
+      {uttakKontrollerFaktaPerioder.length === 0 && (
+        <LabeledValue
+          label={<FormattedMessage id="UttakFaktaTable.Perioder" />}
+          value={
+            <BodyShort as="span" textColor="subtle">
+              <FormattedMessage id="UttakFaktaTable.IngenPerioderRegistrert" />
+            </BodyShort>
+          }
+        />
+      )}
+      {uttakKontrollerFaktaPerioder.length > 0 && (
+        <Table className={styles['table']}>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="UttakFaktaTable.Periode" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="UttakFaktaTable.AntallDager" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="UttakFaktaTable.Type" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="UttakFaktaTable.Kilde" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col" />
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {uttakKontrollerFaktaPerioder.map(periode => {
+              const numberOfDaysAndWeeks = calcDaysAndWeeks(periode.fom, periode.tom);
+              return (
+                <Table.ExpandableRow
+                  key={periode.fom + periode.tom}
+                  expandOnRowClick
+                  data-til-vurdering={!!periode.aksjonspunktType}
+                  togglePlacement="right"
+                  open={valgteFomDatoer.includes(periode.fom)}
+                  onOpenChange={() => velgPeriodeFomDato(periode.fom)}
+                  contentGutter="none"
+                  content={
+                    valgteFomDatoer.includes(periode.fom) && (
+                      <div className={periode.aksjonspunktType ? styles['panelOpenAp'] : styles['panelOpen']}>
+                        <UttakFaktaDetailForm
+                          fagsak={fagsak}
+                          valgtPeriode={periode}
+                          readOnly={readOnly || !erRedigerbart}
+                          oppdaterPeriode={oppdaterPeriode}
+                          slettPeriode={() => slettPeriode(periode.originalFom)}
+                          avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
+                          alleKodeverk={alleKodeverk}
+                          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                          faktaArbeidsforhold={faktaArbeidsforhold}
+                        />
+                      </div>
+                    )
+                  }
+                >
+                  <Table.DataCell>{`${dateFormat(periode.fom)} - ${dateFormat(periode.tom)}`}</Table.DataCell>
+                  <Table.DataCell>{numberOfDaysAndWeeks.formattedString}</Table.DataCell>
+                  <Table.DataCell>{getTypeTekst(alleKodeverk, periode, intl)}</Table.DataCell>
+                  <Table.DataCell>
+                    {alleKodeverk['FordelingPeriodeKilde'].find(k => k.kode === periode.periodeKilde)?.navn}
+                  </Table.DataCell>
+                </Table.ExpandableRow>
+              );
+            })}
+          </Table.Body>
+        </Table>
+      )}
       {erRedigerbart && (
         <>
           {!visNyPeriode && (
@@ -184,7 +192,7 @@ export const UttakFaktaTable = ({
             </div>
           )}
           {visNyPeriode && (
-            <VStack gap="space-16" className={styles['panel']}>
+            <VStack gap="space-16" className={styles['nyPeriodePanel']}>
               <Heading size="small" level="3">
                 <FormattedMessage id="UttakFaktaForm.NyPeriode" />
               </Heading>
