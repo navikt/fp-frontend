@@ -55,7 +55,6 @@ export const HistorikkIndex = ({
     <SupportHeaderAndContent
       tekst={intl.formatMessage({ id: 'HistorikkIndex.Historikk' })}
       antall={(historikkFpSak?.length ?? 0) + (historikkFpTilbake?.length ?? 0)}
-      brukPadding={false}
       toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
       headerHandlinger={
         !!behandlingUuid && (
