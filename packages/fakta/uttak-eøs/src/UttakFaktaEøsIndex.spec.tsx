@@ -36,9 +36,8 @@ describe('UttakFaktaEøsIndex', () => {
     render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
-    expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
-
-    expect(screen.getByText('Periode')).toBeInTheDocument();
+    expect(screen.getByText('Perioder')).toBeInTheDocument();
+    expect(screen.getByText('Ingen perioder lagt til.')).toBeInTheDocument();
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Legg til periode'));
