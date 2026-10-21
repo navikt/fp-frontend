@@ -20,8 +20,8 @@ import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import type { ArbeidsforholdKomplettVurderingType, ManueltArbeidsforhold } from '@navikt/fp-types';
 
-import { useSetDirtyForm } from '../../DirtyFormProvider';
-import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
+import { useSetDirtyForm } from '../DirtyFormProvider';
+import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
 
 export const MANUELT_ORG_NR = '342352362';
 
@@ -145,6 +145,7 @@ export const ManueltLagtTilArbeidsforholdForm = ({
                 />
               </>
             )}
+
             <RhfTextField
               name="stillingsprosent"
               control={formMethods.control}
@@ -158,6 +159,7 @@ export const ManueltLagtTilArbeidsforholdForm = ({
               maxLength={3}
             />
           </HStack>
+
           <RhfTextarea
             name="begrunnelse"
             control={formMethods.control}
@@ -165,7 +167,9 @@ export const ManueltLagtTilArbeidsforholdForm = ({
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly || !erOverstyrt}
+            className="max-w-3xl"
           />
+
           {erOverstyrt && (
             <HStack gap="space-16">
               <Button

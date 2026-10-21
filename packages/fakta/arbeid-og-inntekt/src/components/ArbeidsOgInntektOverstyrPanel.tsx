@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { type Dispatch, type ReactNode, type SetStateAction, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, Heading, HStack, Spacer } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
-import { dateFormat } from '@navikt/ft-utils';
+import { dateFormat, isAksjonspunktOpen } from '@navikt/ft-utils';
 
 import type { Aksjonspunkt, ArbeidOgInntektsmelding, BehandlingFpSak, ManueltArbeidsforhold } from '@navikt/fp-types';
+import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
-import { MANUELT_ORG_NR, ManueltLagtTilArbeidsforholdForm } from './manuelt/ManueltLagtTilArbeidsforholdForm';
-
-import styles from './arbeidsOgInntektOverstyrPanel.module.css';
+import { MANUELT_ORG_NR, ManueltLagtTilArbeidsforholdForm } from './ManueltLagtTilArbeidsforholdForm';
 
 interface Props {
   behandling: BehandlingFpSak;
@@ -21,8 +20,8 @@ interface Props {
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   erOverstyrer: boolean;
   tabellData: ArbeidsforholdOgInntektRadData[];
-  settÅpneRadIndexer: React.Dispatch<React.SetStateAction<number[]>>;
-  setErOverstyrt: React.Dispatch<React.SetStateAction<boolean>>;
+  settÅpneRadIndexer: Dispatch<SetStateAction<number[]>>;
+  setErOverstyrt: Dispatch<SetStateAction<boolean>>;
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
 }
 
@@ -30,7 +29,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   behandling,
   aksjonspunkt,
   readOnly,
-  arbeidOgInntekt,
+  arbeidOgInntekt: { arbeidsforhold, inntektsmeldinger, skjæringstidspunkt },
   registrerArbeidsforhold,
   erOverstyrer,
   tabellData,
@@ -38,9 +37,6 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   setErOverstyrt,
   oppdaterTabell,
 }: Props) => {
-  const intl = useIntl();
-  const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
-
   const [erLokaltOverstyrt, setErLokaltOverstyrt] = useState(false);
   const [skalToggleVisningAvLeggTilArbeidsforhold, setSkalToggleVisningAvLeggTilArbeidsforhold] = useState(false);
 
@@ -56,11 +52,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
     }
   };
 
-  const aksjonspunktTekstKoder = finnAksjonspunktTekstKoder(tabellData, aksjonspunkt);
-
   const harIngenArbeidsforholdSomErManueltLagtTil = tabellData.every(data => data.arbeidsgiverIdent !== MANUELT_ORG_NR);
-
-  const erAksjonspunktÅpent = aksjonspunkt?.status === 'OPPR';
 
   return (
     <>
@@ -68,38 +60,37 @@ export const ArbeidsOgInntektOverstyrPanel = ({
         <Heading size="small" level="2">
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" />
         </Heading>
-        {erOverstyrer && erAksjonspunktÅpent && !readOnly && <OverstyringKnapp onClick={toggleOverstyring} />}
+        {erOverstyrer && isAksjonspunktOpen(aksjonspunkt) && !readOnly && (
+          <OverstyringKnapp onClick={toggleOverstyring} />
+        )}
         <Spacer />
         <BodyShort size="small">
           <FormattedMessage
             id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt"
-            values={{ skjæringspunktDato: dateFormat(arbeidOgInntekt.skjæringstidspunkt) }}
+            values={{ skjæringspunktDato: dateFormat(skjæringstidspunkt) }}
           />
         </BodyShort>
       </HStack>
-      {aksjonspunktTekstKoder.length > 0 && (
-        <AksjonspunktHelpTextHTML>
-          {aksjonspunktTekstKoder.map(kode => intl.formatMessage({ id: kode })).join(' ')}
-        </AksjonspunktHelpTextHTML>
+
+      {aksjonspunkt && erAksjonspunktÅpent(aksjonspunkt) && (
+        <AksjonspunktHelpTextHTML>{finnAksjonspunktTekster(tabellData)}</AksjonspunktHelpTextHTML>
       )}
+
       {arbeidsforhold.length === 0 && inntektsmeldinger.length === 0 && erOverstyrer && (
-        <div className={styles['alertStripe']}>
-          <Alert variant="info">
-            <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
-          </Alert>
-        </div>
+        <Alert variant="info" size="small" className="self-start">
+          <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
+        </Alert>
       )}
       {erLokaltOverstyrt && harIngenArbeidsforholdSomErManueltLagtTil && !skalToggleVisningAvLeggTilArbeidsforhold && (
-        <div>
-          <Button
-            size="small"
-            variant="tertiary"
-            icon={<PlusCircleIcon aria-hidden />}
-            onClick={() => setSkalToggleVisningAvLeggTilArbeidsforhold(true)}
-          >
-            <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
-          </Button>
-        </div>
+        <Button
+          size="small"
+          variant="tertiary"
+          className="self-start"
+          icon={<PlusCircleIcon aria-hidden />}
+          onClick={() => setSkalToggleVisningAvLeggTilArbeidsforhold(true)}
+        >
+          <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
+        </Button>
       )}
       {skalToggleVisningAvLeggTilArbeidsforhold && (
         <ManueltLagtTilArbeidsforholdForm
@@ -117,20 +108,13 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   );
 };
 
-const finnAksjonspunktTekstKoder = (
-  tabellData: ArbeidsforholdOgInntektRadData[],
-  aksjonspunkt?: Aksjonspunkt,
-): string[] => {
-  const harManglendeInntektsmeldinger = tabellData.some(d => d.årsak === 'MANGLENDE_INNTEKTSMELDING');
-  const harManglandeOpplysninger = tabellData.some(d => d.årsak === 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD');
-  const erApÅpent = aksjonspunkt?.status === 'OPPR';
-
+const finnAksjonspunktTekster = (tabellData: ArbeidsforholdOgInntektRadData[]): ReactNode[] => {
   const koder = [];
-  if (erApÅpent && harManglendeInntektsmeldinger) {
-    koder.push('ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding');
+  if (tabellData.some(d => d.årsak === 'MANGLENDE_INNTEKTSMELDING')) {
+    koder.push(<FormattedMessage id="ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding" />);
   }
-  if (erApÅpent && harManglandeOpplysninger) {
-    koder.push('ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger');
+  if (tabellData.some(d => d.årsak === 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD')) {
+    koder.push(<FormattedMessage id="ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger" />);
   }
   return koder;
 };

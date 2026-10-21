@@ -7,10 +7,8 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 
 import type { ArbeidsforholdKomplettVurderingType, ManglendeInntektsmeldingVurdering } from '@navikt/fp-types';
 
-import { useSetDirtyForm } from '../../DirtyFormProvider';
-import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
-
-import styles from './manglendeInntektsmeldingForm.module.css';
+import { useSetDirtyForm } from '../DirtyFormProvider';
+import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgInntekt';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -81,17 +79,15 @@ export const ManglendeInntektsmeldingForm = ({
     <RhfForm formMethods={formMethods} onSubmit={lagre}>
       <VStack gap="space-16">
         {!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0 && (
-          <div className={styles['alertStripe']}>
-            <Alert variant="info">
-              <FormattedMessage id="InntektsmeldingInnhentesForm.InnehentAlle" />
-            </Alert>
-          </div>
+          <Alert variant="info" size="small" className="self-start">
+            <FormattedMessage id="InntektsmeldingInnhentesForm.InnehentAlle" />
+          </Alert>
         )}
         <RhfRadioGroup
           name="saksbehandlersVurdering"
           control={formMethods.control}
           legend={
-            <HStack gap="space-8">
+            <HStack gap="space-8" align="center">
               <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
               <HelpText content={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}>
                 <VStack gap="space-16">
@@ -111,7 +107,7 @@ export const ManglendeInntektsmeldingForm = ({
           validate={[required]}
           readOnly={isReadOnly}
         >
-          <VStack gap="space-2">
+          <>
             <Radio value="KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING" size="small">
               <FormattedMessage id="InntektsmeldingInnhentesForm.TarKontakt" />
             </Radio>
@@ -123,8 +119,9 @@ export const ManglendeInntektsmeldingForm = ({
             <Radio value="FORTSETT_UTEN_INNTEKTSMELDING" size="small">
               <FormattedMessage id="InntektsmeldingInnhentesForm.GåVidere" />
             </Radio>
-          </VStack>
+          </>
         </RhfRadioGroup>
+
         <RhfTextarea
           name="begrunnelse"
           control={formMethods.control}
@@ -138,7 +135,9 @@ export const ManglendeInntektsmeldingForm = ({
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
           readOnly={isReadOnly}
+          className="max-w-3xl"
         />
+
         {!isReadOnly && (
           <HStack gap="space-16">
             <Button
