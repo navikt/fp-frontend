@@ -1,10 +1,6 @@
 .table {
-  thead th {
-    background-color: var(--ax-neutral-100);
-  }
-
-  tbody tr:has(+ tr[data-state='open']) td,
-  tbody tr[data-state='open'] td {
-    background-color: var(--ax-neutral-100);
+  tr:has(+ tr[data-state='open']) td,
+  tr[data-state='open'] td {
+    background-color: var(--ax-bg-neutral-softA);
   }
 }

@@ -71,6 +71,7 @@ export const TilretteleggingPeriodeTabellRad = ({
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
+      className={styles['tabellRad']}
       content={
         <TilretteleggingForm
           tilretteleggingDato={tilretteleggingDato}
@@ -85,7 +86,6 @@ export const TilretteleggingPeriodeTabellRad = ({
           tomDatoForTilrettelegging={tomDatoForTilrettelegging}
         />
       }
-      className={open ? styles['openRow'] : undefined}
     >
       <Table.DataCell>
         {tilretteleggingDato.fom ? (

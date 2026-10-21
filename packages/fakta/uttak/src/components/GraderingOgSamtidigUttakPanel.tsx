@@ -11,8 +11,6 @@ import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold }
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
-import styles from './graderingOgSamtidigUttakPanel.module.css';
-
 export type FormValues = KontrollerFaktaPeriodeMedApMarkering & {
   arbeidsgiverId?: string;
   harGradering?: boolean;
@@ -101,11 +99,9 @@ export const GraderingOgSamtidigUttakPanel = ({
         />
       </HStack>
       {!readOnly && arbeidsgiverFinnesIkke && (
-        <div className={styles['alert']}>
-          <Alert variant="info">
-            <FormattedMessage id="UttakFaktaDetailForm.UkjentArbeidsgiver" values={{ aRef }} />
-          </Alert>
-        </div>
+        <Alert variant="info" className="self-start" size="small">
+          <FormattedMessage id="UttakFaktaDetailForm.UkjentArbeidsgiver" values={{ aRef }} />
+        </Alert>
       )}
       {(visGradering || visSamtidigUttaksgradering) && (
         <HStack gap="space-24">
@@ -117,7 +113,7 @@ export const GraderingOgSamtidigUttakPanel = ({
                 label={<FormattedMessage id="UttakFaktaDetailForm.GraderingProsent" />}
                 forceTwoDecimalDigits
                 validate={[required]}
-                className={styles['gradering']}
+                htmlSize={8}
                 readOnly={readOnly}
               />
               <RhfSelect
@@ -126,6 +122,7 @@ export const GraderingOgSamtidigUttakPanel = ({
                 label={<FormattedMessage id="UttakFaktaDetailForm.Arbeidsgiver" />}
                 validate={[required]}
                 selectValues={mapArbeidsforhold(faktaArbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
+                className="self-start"
                 readOnly={readOnly}
               />
             </>
@@ -137,6 +134,7 @@ export const GraderingOgSamtidigUttakPanel = ({
               label={<FormattedMessage id="UttakFaktaDetailForm.SamtidigUttaksprosent" />}
               validate={[required]}
               forceTwoDecimalDigits
+              htmlSize={8}
               readOnly={readOnly}
             />
           )}
