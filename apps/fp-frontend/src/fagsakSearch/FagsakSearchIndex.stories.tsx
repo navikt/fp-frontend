@@ -12,7 +12,8 @@ import { initFetchFpsak } from '../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { FagsakSearchIndex } from './FagsakSearchIndex';
 
-const getHref = (rel: string) => getCleanUrlString(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
+const getHref = (rel: string) =>
+  getCleanUrlString(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 
 const FAGSAK_1 = {
   saksnummer: '12345',

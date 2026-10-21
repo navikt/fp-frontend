@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyLong, Label, Table } from '@navikt/ds-react';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Table } from '@navikt/ds-react';
+import { DateLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
@@ -23,27 +23,29 @@ export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleK
 
   const sortertPersonstatus = personstatuser.toSorted(sorterPerioder);
 
-  const rowStyle = (index: number) => (index + 1 === sortertPersonstatus.length ? { border: '0px' } : {});
-
   if (sortertPersonstatus.length === 0)
     return (
-      <>
-        <Label size="small">
-          <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusLabel" />
-        </Label>
-        <BodyLong textColor="subtle">
-          <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusIngen" values={{ erAnnenpart }} />
-        </BodyLong>
-      </>
+      <LabeledValue
+        size="medium"
+        label={<FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusLabel" />}
+        value={
+          <BodyShort size="small" textColor="subtle">
+            <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusIngen" values={{ erAnnenpart }} />
+          </BodyShort>
+        }
+      />
     );
   return (
-    <Table className="table-fixed" aria-label={`Personstatus for ${erAnnenpart ? 'annenpart' : 'bruker'}`}>
+    <Table
+      aria-label={`Personstatus for ${erAnnenpart ? 'annenpart' : 'bruker'}`}
+      className="[&>tbody>tr:last-child>td]:border-0"
+    >
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>
+          <Table.HeaderCell className="w-60">
             <FormattedMessage id="OpplysningerOmPersonstatus.PersonstatusLabel" />
           </Table.HeaderCell>
-          <Table.HeaderCell>
+          <Table.HeaderCell className="w-32">
             <FormattedMessage id="OpplysningerOmPersonstatus.Fom" />
           </Table.HeaderCell>
           <Table.HeaderCell>
@@ -52,15 +54,13 @@ export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleK
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {sortertPersonstatus.map((ps, index) => (
+        {sortertPersonstatus.map(ps => (
           <Table.Row key={`${ps.fom}-${ps.tom}-${ps.type}`}>
-            <Table.DataCell style={rowStyle(index)}>{getPersonstatus(ps)}</Table.DataCell>
-            <Table.DataCell style={rowStyle(index)}>
+            <Table.DataCell>{getPersonstatus(ps)}</Table.DataCell>
+            <Table.DataCell>
               <DateLabel dateString={ps.fom} />
             </Table.DataCell>
-            <Table.DataCell style={rowStyle(index)}>
-              {ps.tom !== TIDENES_ENDE && <DateLabel dateString={ps.tom} />}
-            </Table.DataCell>
+            <Table.DataCell>{ps.tom !== TIDENES_ENDE && <DateLabel dateString={ps.tom} />}</Table.DataCell>
           </Table.Row>
         ))}
       </Table.Body>

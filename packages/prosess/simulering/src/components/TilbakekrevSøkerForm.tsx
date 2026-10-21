@@ -2,8 +2,7 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Link, Radio, Tooltip, VStack } from '@navikt/ds-react';
+import { HelpText, HStack, Label, Link, Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
@@ -14,8 +13,6 @@ import type { Aksjonspunkt, Fagsak, TilbakekrevingValg, TilbakekrevingVidereBeha
 import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { type FeilutbetalingFormValues, TILBAKEKR_OPPRETT_UTEN_VARSEL } from '../types/FormValues';
-
-import styles from './tilbakekrevSøkerForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -69,46 +66,43 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
             <FormattedMessage id="Simulering.gjennomfør" />
           </Radio>
           {videreBehandling === 'TILBAKEKR_OPPRETT' && (
-            <div className={styles['varsel']}>
-              <ArrowBox alignOffset={20}>
-                <VStack gap="space-16">
-                  <HStack gap="space-8">
-                    <BodyShort size="small" className={styles['bold']}>
-                      <FormattedMessage id="Simulering.varseltekst" />
-                    </BodyShort>
-                    <Tooltip
-                      content={
-                        isForeldrepenger
-                          ? intl.formatMessage({ id: 'Simulering.HjelpetekstForeldrepenger' })
-                          : intl.formatMessage({ id: 'Simulering.HjelpetekstEngangsstonad' })
-                      }
-                    >
-                      <QuestionmarkDiamondIcon className={styles['helpTextImage']} />
-                    </Tooltip>
-                  </HStack>
-                  <RhfTextarea
-                    name="varseltekst"
-                    control={control}
-                    label={intl.formatMessage({ id: 'Simulering.fritekst' })}
-                    validate={[required, minLength3, maxLength1500, hasValidText]}
-                    maxLength={1500}
-                    readOnly={readOnly}
-                    parse={formaterFritekst}
-                    badges={[
-                      {
-                        type: 'info',
-                        titleText: getLanguageFromSprakkode(språkkode),
-                      },
-                    ]}
-                  />
-                  {!readOnly && (
-                    <Link href="#" onClick={previewMessage}>
-                      <FormattedMessage id="Messages.PreviewText" />
-                    </Link>
-                  )}
-                </VStack>
-              </ArrowBox>
-            </div>
+            <ArrowBox alignOffset={20} marginTop={4}>
+              <VStack gap="space-16">
+                <HStack gap="space-8">
+                  <Label size="small">
+                    <FormattedMessage id="Simulering.varseltekst" />
+                  </Label>
+                  <HelpText>
+                    {<FormattedMessage id="Simulering.HjelpetekstBegge" />}
+                    {isForeldrepenger && <br />}
+                    {isForeldrepenger && <FormattedMessage id="Simulering.HjelpetekstForeldrepengerEksempel" />}
+                  </HelpText>
+                </HStack>
+
+                <RhfTextarea
+                  name="varseltekst"
+                  control={control}
+                  label={intl.formatMessage({ id: 'Simulering.fritekst' })}
+                  validate={[required, minLength3, maxLength1500, hasValidText]}
+                  className="w-xl"
+                  maxLength={1500}
+                  readOnly={readOnly}
+                  parse={formaterFritekst}
+                  badges={[
+                    {
+                      type: 'info',
+                      titleText: getLanguageFromSprakkode(språkkode),
+                    },
+                  ]}
+                />
+
+                {!readOnly && (
+                  <Link href="#" onClick={previewMessage}>
+                    <FormattedMessage id="Messages.PreviewText" />
+                  </Link>
+                )}
+              </VStack>
+            </ArrowBox>
           )}
           <Radio value={TILBAKEKR_OPPRETT_UTEN_VARSEL} size="small">
             <FormattedMessage id="Simulering.OpprettMenIkkeSendVarsel" />

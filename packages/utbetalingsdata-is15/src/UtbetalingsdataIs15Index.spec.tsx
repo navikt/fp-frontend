@@ -16,7 +16,7 @@ describe('UtbetalingsdataIs15Index', () => {
     const søkeInput = screen.getByLabelText('Fødselsnummer');
     await userEvent.type(søkeInput, '111');
 
-    await userEvent.click(screen.getAllByRole('button')[1]!);
+    await userEvent.click(screen.getByRole('button', { name: 'Søk' }));
 
     expect(await screen.findByText('Oppgitt fødselsnummer er ikke gyldig')).toBeInTheDocument();
   });
@@ -30,9 +30,9 @@ describe('UtbetalingsdataIs15Index', () => {
     const søkeInput = screen.getByLabelText('Fødselsnummer');
     await userEvent.type(søkeInput, '07078518434');
 
-    await userEvent.click(screen.getAllByRole('button')[1]!);
+    await userEvent.click(screen.getByRole('button', { name: 'Søk' }));
 
-    expect(await screen.findByText('Søkeresultat:')).toBeInTheDocument();
+    expect(await screen.findByText('Søkeresultat')).toBeInTheDocument();
 
     expect(screen.getByText('Saker')).toBeInTheDocument();
     expect(screen.getByText('Foreldrepenger fødsel ordinær')).toBeInTheDocument();
@@ -50,9 +50,9 @@ describe('UtbetalingsdataIs15Index', () => {
 
     const søkeInput = screen.getByLabelText('Fødselsnummer');
     await userEvent.type(søkeInput, '07078518434');
-    await userEvent.click(screen.getAllByRole('button')[1]!);
+    await userEvent.click(screen.getByRole('button', { name: 'Søk' }));
 
-    expect(await screen.findByText('Søkeresultat:')).toBeInTheDocument();
+    expect(await screen.findByText('Søkeresultat')).toBeInTheDocument();
 
     // Innholdet i ExpansionCard er skjult til kortet utvides. Andre kort er foreldrepenger m/ fødsel.
     await userEvent.click(screen.getAllByRole('button', { name: 'Vis mer' })[1]!);
@@ -79,7 +79,7 @@ describe('UtbetalingsdataIs15Index', () => {
     const søkeInput = screen.getByLabelText('Fødselsnummer');
     await userEvent.type(søkeInput, '07078518434');
 
-    await userEvent.click(screen.getAllByRole('button')[1]!);
+    await userEvent.click(screen.getByRole('button', { name: 'Søk' }));
 
     expect(
       await screen.findByText(

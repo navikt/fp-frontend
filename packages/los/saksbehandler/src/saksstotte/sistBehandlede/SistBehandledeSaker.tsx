@@ -68,8 +68,8 @@ const SistBehandledeSakerContent = ({
   if (sisteReserverte.length === 0) {
     return (
       <div className={styles['ingenBehandlinger']}>
-        <BodyShort size="medium">
-          <FormattedMessage id="SistBehandledeSaker.IngenBehandlinger" tagName="i" />
+        <BodyShort size="medium" textColor="subtle">
+          <FormattedMessage id="SistBehandledeSaker.IngenBehandlinger" />
         </BodyShort>
       </div>
     );

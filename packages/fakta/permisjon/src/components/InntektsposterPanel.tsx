@@ -9,8 +9,6 @@ import dayjs from 'dayjs';
 
 import type { Inntektspost } from '@navikt/fp-types';
 
-import styles from './inntektsposterPanel.module.css';
-
 interface Props {
   inntektsposter: Inntektspost[];
   skjæringstidspunkt: string;
@@ -22,57 +20,54 @@ export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Pro
   const sorterteInntektsposter = behandleInntektsposter(skjæringstidspunkt, inntektsposter);
 
   return (
-    <>
+    <VStack gap="space-4">
+      <Label size="small">
+        <FormattedMessage id="InntektsposterPanel.Inntekter" />
+      </Label>
+      {inntektsposter.length === 0 && (
+        <BodyShort size="small" textColor="subtle">
+          <FormattedMessage id="InntektsposterPanel.IngenInntekt" />
+        </BodyShort>
+      )}
       {inntektsposter.length > 0 && (
-        <VStack gap="space-8">
-          <Label size="small">
-            <FormattedMessage id="InntektsposterPanel.Inntekter" />
-          </Label>
+        <>
           <VStack gap="space-4" width="150px">
             {sorterteInntektsposter
               .filter((_inntekt, index) => (visAlleMåneder ? true : index < 3))
               .map(inntekt => (
-                <HStack justify="space-between" key={inntekt.fom}>
-                  <HStack gap="space-4" key={inntekt.fom}>
-                    <BodyShort size="small">
-                      <FormattedMessage id={`InntektsposterPanel.${dayjs(inntekt.fom).month() + 1}`} />
-                    </BodyShort>
-                    <BodyShort size="small">{dayjs(inntekt.fom).year()}</BodyShort>
-                  </HStack>
+                <HStack justify="space-between" asChild key={inntekt.fom}>
                   <BodyShort size="small">
-                    <BeløpLabel beløp={inntekt.beløp} />
+                    <HStack gap="space-4" justify="space-between" className="w-18">
+                      <FormattedMessage tagName="span" id={`InntektsposterPanel.${dayjs(inntekt.fom).month() + 1}`} />
+                      <span>{dayjs(inntekt.fom).year()}</span>
+                    </HStack>
+                    <BeløpLabel beløp={inntekt.beløp} kr />
                   </BodyShort>
                 </HStack>
               ))}
           </VStack>
-          <Link
-            onClick={e => {
-              e.preventDefault();
-              setVisAlleMåneder(!visAlleMåneder);
-            }}
-            href=""
-          >
-            <span>
-              <BodyShort size="small" className={styles['inline']}>
-                <FormattedMessage
-                  id={visAlleMåneder ? 'InntektsposterPanel.FaerreManeder' : 'InntektsposterPanel.TidligereManeder'}
-                />
-              </BodyShort>
-            </span>
-            {visAlleMåneder ? (
-              <ChevronUpIcon className={styles['arrow']} />
-            ) : (
-              <ChevronDownIcon className={styles['arrow']} />
-            )}
-          </Link>
-        </VStack>
+          <BodyShort size="small">
+            <Link
+              onClick={e => {
+                e.preventDefault();
+                setVisAlleMåneder(!visAlleMåneder);
+              }}
+              href=""
+            >
+              <FormattedMessage
+                id={visAlleMåneder ? 'InntektsposterPanel.FaerreManeder' : 'InntektsposterPanel.TidligereManeder'}
+                tagName="span"
+              />
+              {visAlleMåneder ? (
+                <ChevronUpIcon fontSize="1.5rem" aria-hidden />
+              ) : (
+                <ChevronDownIcon fontSize="1.5rem" aria-hidden />
+              )}
+            </Link>
+          </BodyShort>
+        </>
       )}
-      {inntektsposter.length === 0 && (
-        <Label size="small">
-          <FormattedMessage id="InntektsposterPanel.IngenInntekt" />
-        </Label>
-      )}
-    </>
+    </VStack>
   );
 };
 

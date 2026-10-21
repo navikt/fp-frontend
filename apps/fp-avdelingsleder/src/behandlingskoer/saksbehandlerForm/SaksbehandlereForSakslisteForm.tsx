@@ -55,7 +55,7 @@ export const SaksbehandlereForSakslisteForm = ({
             <FormattedMessage id="Label.Saksbehandlere" />
           </Label>
           {sorterteAvdelingensSaksbehandlere.length === 0 && (
-            <BodyShort size="small">
+            <BodyShort size="small" textColor="subtle">
               <FormattedMessage id="SaksbehandlereForSakslisteForm.IngenSaksbehandlere" />
             </BodyShort>
           )}

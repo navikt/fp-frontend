@@ -1,7 +1,7 @@
 import React, { type ReactElement, type ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Heading, VStack } from '@navikt/ds-react';
+import { BodyShort, VStack } from '@navikt/ds-react';
 
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import type { Aktor, KodeverkMedNavn } from '@navikt/fp-types';
@@ -33,9 +33,9 @@ export const AktørGrid = ({ aktorInfo, fagsakStatuser, fagsakYtelseTyper, rende
             );
           })
         ) : (
-          <Heading size="small" level="2">
+          <BodyShort size="medium" textColor="subtle">
             <FormattedMessage id="AktoerGrid.IngenFagsaker" />
-          </Heading>
+          </BodyShort>
         )}
       </VStack>
     </>

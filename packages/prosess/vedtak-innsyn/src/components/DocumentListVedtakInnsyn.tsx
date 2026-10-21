@@ -24,8 +24,8 @@ export const DocumentListVedtakInnsyn = ({ saksNr, innsynDokumenter, alleDokumen
       fieldType="component"
       value={
         dokumenterInnvilgetForInnsyn.length === 0 ? (
-          <BodyShort size="small">
-            <FormattedMessage tagName="i" id="DocumentListVedtakInnsyn.NoDocuments" />
+          <BodyShort size="small" textColor="subtle">
+            <FormattedMessage id="DocumentListVedtakInnsyn.NoDocuments" />
           </BodyShort>
         ) : (
           <ul>

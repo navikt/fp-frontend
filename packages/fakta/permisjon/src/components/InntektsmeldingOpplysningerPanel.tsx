@@ -1,13 +1,11 @@
 import { FormattedMessage } from 'react-intl';
 
-import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
+import { FileIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { BeløpLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Inntektsmelding } from '@navikt/fp-types';
 import { DokumentLink } from '@navikt/fp-ui-komponenter';
-
-import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
 interface Props {
   saksnummer: string;
@@ -24,6 +22,7 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
         <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
       </BodyShort>
     </HStack>
+
     <HStack gap="space-16">
       <Label size="small">
         <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
@@ -38,7 +37,8 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
         />
       </BodyShort>
     </HStack>
-    {inntektsmelding.refusjonPrMnd && (
+
+    {inntektsmelding.refusjonPrMnd !== undefined && (
       <HStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
@@ -48,20 +48,22 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
         </BodyShort>
       </HStack>
     )}
-    <DokumentLink
-      saksnummer={saksnummer}
-      journalpostId={inntektsmelding.journalpostId}
-      dokumentId={inntektsmelding.dokumentId}
-    >
-      <HStack gap="space-4">
-        <BodyShort size="small" className={styles['inline']}>
+
+    <BodyShort size="small">
+      <DokumentLink
+        saksnummer={saksnummer}
+        journalpostId={inntektsmelding.journalpostId}
+        dokumentId={inntektsmelding.dokumentId}
+      >
+        <HStack gap="space-4" wrap={false} align="center">
+          <FileIcon fontSize="1.125rem" aria-hidden />
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
-        </BodyShort>
-        <FileFillIcon className={styles['docIcon']} />
-      </HStack>
-    </DokumentLink>
+        </HStack>
+      </DokumentLink>
+    </BodyShort>
+
     <HStack gap="space-16" align="center">
-      <PhoneFillIcon className={styles['phoneIcon']} />
+      <PhoneFillIcon aria-hidden fontSize="1.5rem" />
       <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, Heading, HStack, Spacer, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Heading, HStack, Spacer } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
@@ -63,7 +63,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   const erAksjonspunktÅpent = aksjonspunkt?.status === 'OPPR';
 
   return (
-    <VStack gap="space-32">
+    <>
       <HStack gap="space-16">
         <Heading size="small" level="2">
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" />
@@ -77,47 +77,43 @@ export const ArbeidsOgInntektOverstyrPanel = ({
           />
         </BodyShort>
       </HStack>
-      <VStack gap="space-16">
-        {aksjonspunktTekstKoder.length > 0 && (
-          <AksjonspunktHelpTextHTML>
-            {aksjonspunktTekstKoder.map(kode => intl.formatMessage({ id: kode })).join(' ')}
-          </AksjonspunktHelpTextHTML>
-        )}
-        {arbeidsforhold.length === 0 && inntektsmeldinger.length === 0 && erOverstyrer && (
-          <div className={styles['alertStripe']}>
-            <Alert variant="info">
-              <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
-            </Alert>
-          </div>
-        )}
-        {erLokaltOverstyrt &&
-          harIngenArbeidsforholdSomErManueltLagtTil &&
-          !skalToggleVisningAvLeggTilArbeidsforhold && (
-            <div>
-              <Button
-                size="small"
-                variant="tertiary"
-                icon={<PlusCircleIcon aria-hidden />}
-                onClick={() => setSkalToggleVisningAvLeggTilArbeidsforhold(true)}
-              >
-                <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
-              </Button>
-            </div>
-          )}
-        {skalToggleVisningAvLeggTilArbeidsforhold && (
-          <ManueltLagtTilArbeidsforholdForm
-            behandlingUuid={behandling.uuid}
-            behandlingVersjon={behandling.versjon}
-            isReadOnly={false}
-            registrerArbeidsforhold={registrerArbeidsforhold}
-            lukkArbeidsforholdRad={() => setSkalToggleVisningAvLeggTilArbeidsforhold(false)}
-            oppdaterTabell={oppdaterTabell}
-            erOverstyrt
-            erNyttArbeidsforhold
-          />
-        )}
-      </VStack>
-    </VStack>
+      {aksjonspunktTekstKoder.length > 0 && (
+        <AksjonspunktHelpTextHTML>
+          {aksjonspunktTekstKoder.map(kode => intl.formatMessage({ id: kode })).join(' ')}
+        </AksjonspunktHelpTextHTML>
+      )}
+      {arbeidsforhold.length === 0 && inntektsmeldinger.length === 0 && erOverstyrer && (
+        <div className={styles['alertStripe']}>
+          <Alert variant="info">
+            <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
+          </Alert>
+        </div>
+      )}
+      {erLokaltOverstyrt && harIngenArbeidsforholdSomErManueltLagtTil && !skalToggleVisningAvLeggTilArbeidsforhold && (
+        <div>
+          <Button
+            size="small"
+            variant="tertiary"
+            icon={<PlusCircleIcon aria-hidden />}
+            onClick={() => setSkalToggleVisningAvLeggTilArbeidsforhold(true)}
+          >
+            <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
+          </Button>
+        </div>
+      )}
+      {skalToggleVisningAvLeggTilArbeidsforhold && (
+        <ManueltLagtTilArbeidsforholdForm
+          behandlingUuid={behandling.uuid}
+          behandlingVersjon={behandling.versjon}
+          isReadOnly={false}
+          registrerArbeidsforhold={registrerArbeidsforhold}
+          lukkArbeidsforholdRad={() => setSkalToggleVisningAvLeggTilArbeidsforhold(false)}
+          oppdaterTabell={oppdaterTabell}
+          erOverstyrt
+          erNyttArbeidsforhold
+        />
+      )}
+    </>
   );
 };
 

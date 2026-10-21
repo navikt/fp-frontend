@@ -42,7 +42,7 @@ export const ProsessPanelWrapper = ({
   if (erPanelValgt && status === 'IKKE_VURDERT' && !harÅpentAksjonspunkt) {
     return (
       <PanelContainer>
-        <BodyShort size="small">
+        <BodyShort textColor="subtle">
           <FormattedMessage id="ProsessPanelWrapper.IkkeBehandlet" />
         </BodyShort>
       </PanelContainer>

@@ -12,7 +12,7 @@ export const ArbeidsforholdPanel = ({ alleArbeidsforhold }: Props) => (
   <VStack gap="space-16">
     <div />
     {(!alleArbeidsforhold || alleArbeidsforhold.length === 0) && (
-      <BodyShort size="small">
+      <BodyShort size="small" textColor="subtle">
         <FormattedMessage id="ArbeidsforholdPanel.IngenArbeidsforhold" />
       </BodyShort>
     )}

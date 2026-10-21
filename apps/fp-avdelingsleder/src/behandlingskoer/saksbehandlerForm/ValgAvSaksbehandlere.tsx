@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Detail } from '@navikt/ds-react';
+import { BodyShort } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -38,9 +38,9 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
   });
 
   return saksbehandlere.length === 0 ? (
-    <Detail>
+    <BodyShort size="small" textColor="subtle">
       <FormattedMessage id="ValgAvSaksbehandlere.IngenSaksbehandlere" />
-    </Detail>
+    </BodyShort>
   ) : (
     <ul className="columns-3xs list-none">
       {saksbehandlere.map(s => (

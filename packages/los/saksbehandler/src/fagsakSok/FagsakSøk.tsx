@@ -58,7 +58,7 @@ export const FagsakSøk = ({
       kanSaksbehandle={kanSaksbehandle}
     />
     {searchResultReceived && fagsaker.length === 0 && (
-      <BodyShort>
+      <BodyShort textColor="subtle">
         <FormattedMessage id="FagsakSearch.ZeroSearchResults" />
       </BodyShort>
     )}

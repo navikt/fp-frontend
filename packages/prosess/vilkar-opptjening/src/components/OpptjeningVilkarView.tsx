@@ -31,7 +31,7 @@ export const OpptjeningVilkarView = ({
       value={<FormattedMessage id="OpptjeningVilkarView.MonthsAndDays" values={{ months: måneder, days: dager }} />}
     />
     {fastsattOpptjeningAktivitetList.length === 0 && (
-      <BodyShort size="small">
+      <BodyShort size="small" textColor="subtle">
         <FormattedMessage id="OpptjeningVilkarView.IngenAktiviteter" />
       </BodyShort>
     )}
