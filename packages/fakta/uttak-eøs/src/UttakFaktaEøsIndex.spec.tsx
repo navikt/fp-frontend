@@ -19,7 +19,8 @@ describe('UttakFaktaEøsIndex', () => {
     render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
-    expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
+    expect(screen.getByText('Perioder')).toBeInTheDocument();
+    expect(screen.getByText('Ingen perioder lagt til.')).toBeInTheDocument();
     await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -151,9 +152,8 @@ describe('UttakFaktaEøsIndex', () => {
     render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
-    expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
-
     expect(screen.getByText('Perioder')).toBeInTheDocument();
+    expect(screen.getByText('Ingen perioder lagt til.')).toBeInTheDocument();
     expect(screen.queryByRole('table')).not.toBeInTheDocument();
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
