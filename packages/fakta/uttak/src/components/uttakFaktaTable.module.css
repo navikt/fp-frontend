@@ -1,39 +1,15 @@
-.panel {
-  background-color: var(--ax-neutral-200);
-  padding: 10px;
-}
+.table {
+  tr[data-til-vurdering='true'],
+  tr[data-til-vurdering='true'] + tr {
+    box-shadow: inset 4px 0 0 var(--ax-bg-warning-strong);
+  }
 
-.panelOpen {
-  background-color: var(--ax-neutral-100);
-  margin-bottom: -16px;
-  margin-left: -7px;
-  margin-right: -7px;
-  margin-top: -16px;
-  padding: 16px;
-}
+  tr:has(+ tr[data-state='open']) td,
+  tr[data-state='open'] td {
+    background-color: var(--ax-bg-neutral-softA);
 
-.panelOpenAp {
-  background-color: var(--ax-neutral-100);
-  border-left: 4px solid var(--ax-warning-500);
-  margin-bottom: -16px;
-  margin-left: -10px;
-  margin-right: -7px;
-  margin-top: -16px;
-  padding: 16px;
-}
-
-.headerRow {
-  background-color: var(--ax-neutral-200);
-}
-
-.row {
-  cursor: pointer;
-}
-
-.isOpen {
-  background-color: var(--ax-neutral-100);
-}
-
-.isApOpen {
-  border-left: 4px solid var(--ax-warning-500);
+    &:first-child > div {
+      padding-left: 20px;
+    }
+  }
 }

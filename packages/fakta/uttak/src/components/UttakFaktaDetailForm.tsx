@@ -3,10 +3,10 @@ import { useForm, type UseFormGetValues, useWatch } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { Button, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfDatepicker, RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
+import { LabeledValue, OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { omitMany } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -23,8 +23,6 @@ import {
   type FormValues as FormValuesGraderingOgSamtidigUttak,
   GraderingOgSamtidigUttakPanel,
 } from './GraderingOgSamtidigUttakPanel';
-
-import styles from './uttakFaktaDetailForm.module.css';
 
 type FormValues = FormValuesGraderingOgSamtidigUttak & {
   arsakstype: Årsakstype;
@@ -185,14 +183,11 @@ export const UttakFaktaDetailForm = ({
           </HStack>
           <HStack gap="space-8">
             {readOnly && (
-              <div>
-                <Label size="small">
-                  <FormattedMessage id="UttakFaktaDetailForm.Periodetype" />
-                </Label>
-                <BodyShort size="small">
-                  <FormattedMessage id={ÅRSAKSTYPE_TEKST_KODER[årsakstype]} />
-                </BodyShort>
-              </div>
+              <LabeledValue
+                size="small"
+                label={<FormattedMessage id="UttakFaktaDetailForm.Periodetype" />}
+                value={<FormattedMessage id={ÅRSAKSTYPE_TEKST_KODER[årsakstype]} />}
+              />
             )}
             {!readOnly && (
               <RhfRadioGroup
@@ -218,7 +213,7 @@ export const UttakFaktaDetailForm = ({
               control={formMethods.control}
               label={<FormattedMessage id="UttakFaktaDetailForm.Stonadskonto" />}
               validate={[required]}
-              className={styles['select']}
+              className="self-start"
               selectValues={sorterteUttakPeriodeTyper.map(vt => (
                 <option key={vt.kode} value={vt.kode}>
                   {vt.navn}
@@ -235,7 +230,7 @@ export const UttakFaktaDetailForm = ({
                   control={formMethods.control}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
-                  className={styles['selectArsak']}
+                  className="self-start"
                   selectValues={sorterteUtsettelseÅrsaker.map(vt => (
                     <option key={vt.kode} value={vt.kode}>
                       {vt.navn}
@@ -250,7 +245,7 @@ export const UttakFaktaDetailForm = ({
                   control={formMethods.control}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
-                  className={styles['selectArsak']}
+                  className="self-start"
                   selectValues={sorterteOverføringÅrsaker.map(vt => (
                     <option key={vt.kode} value={vt.kode}>
                       {vt.navn}
@@ -265,7 +260,7 @@ export const UttakFaktaDetailForm = ({
                   control={formMethods.control}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
-                  className={styles['selectArsak']}
+                  className="self-start"
                   selectValues={sorterteOppholdÅrsaker.map(vt => (
                     <option key={vt.kode} value={vt.kode}>
                       {vt.navn}
@@ -290,7 +285,7 @@ export const UttakFaktaDetailForm = ({
               name="morsAktivitet"
               control={formMethods.control}
               label={<FormattedMessage id="UttakFaktaDetailForm.MorsAktivitet" />}
-              className={styles['select']}
+              className="self-start"
               selectValues={sorterteMorsAktiviteter.map(vt => (
                 <option key={vt.kode} value={vt.kode}>
                   {vt.navn}
@@ -302,16 +297,15 @@ export const UttakFaktaDetailForm = ({
           {årsakstype === Årsakstype.UTTAK && (
             <>
               {readOnly && (
-                <div>
-                  <Label size="small">
-                    <FormattedMessage id="UttakFaktaDetailForm.HarFlerbarnsdager" />
-                  </Label>
-                  <BodyShort size="small">
+                <LabeledValue
+                  size="small"
+                  label={<FormattedMessage id="UttakFaktaDetailForm.HarFlerbarnsdager" />}
+                  value={
                     <FormattedMessage
                       id={flerbarnsdager === true ? 'UttakFaktaDetailForm.Ja' : 'UttakFaktaDetailForm.Nei'}
                     />
-                  </BodyShort>
-                </div>
+                  }
+                />
               )}
               {!readOnly && (
                 <RhfCheckbox
@@ -323,15 +317,14 @@ export const UttakFaktaDetailForm = ({
             </>
           )}
           {begrunnelse && (
-            <div>
-              <Label size="small">
-                <FormattedMessage id="UttakFaktaDetailForm.Begrunnelse" />
-              </Label>
-              <BodyShort size="small">{begrunnelse}</BodyShort>
-            </div>
+            <LabeledValue
+              size="small"
+              label={<FormattedMessage id="UttakFaktaDetailForm.Begrunnelse" />}
+              value={begrunnelse}
+            />
           )}
           {!readOnly && (
-            <HStack gap="space-8" className={styles['marginBtn']}>
+            <HStack gap="space-8">
               <Button
                 size="small"
                 variant="secondary"

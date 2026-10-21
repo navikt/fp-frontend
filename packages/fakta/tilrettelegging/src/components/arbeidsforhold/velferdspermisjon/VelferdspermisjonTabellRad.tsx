@@ -31,9 +31,11 @@ export const VelferdspermisjonTabellRad = ({
   return (
     <Table.ExpandableRow
       open={open}
+      data-til-vurdering={erIkkeValgt}
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
+      className={styles['tabellRad']}
       content={
         <VelferdspermisjonForm
           velferdspermisjon={velferdspermisjon}
@@ -43,7 +45,6 @@ export const VelferdspermisjonTabellRad = ({
           oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
         />
       }
-      className={utledStyleForRad(open, erIkkeValgt)}
     >
       <Table.DataCell>
         <PeriodLabel dateStringFom={velferdspermisjon.permisjonFom} dateStringTom={velferdspermisjon.permisjonTom} />
@@ -59,11 +60,4 @@ export const VelferdspermisjonTabellRad = ({
       </Table.DataCell>
     </Table.ExpandableRow>
   );
-};
-
-const utledStyleForRad = (open: boolean, erIkkeValgt: boolean) => {
-  if (erIkkeValgt) {
-    return styles['apRow'];
-  }
-  return open ? styles['openRow'] : undefined;
 };

@@ -106,7 +106,11 @@ interface SVPTagProps {
 const SVPTag = ({ skalBrukes, visInfoAlert }: SVPTagProps) => {
   if (visInfoAlert && skalBrukes) {
     return (
-      <Tag data-color="warning" size="xsmall" icon={<ExclamationmarkTriangleFillIcon />}>
+      <Tag
+        data-color="warning"
+        size="xsmall"
+        icon={<ExclamationmarkTriangleFillIcon color="var(--ax-text-warning-decoration)" aria-hidden />}
+      >
         <FormattedMessage id="ArbeidsforholdExpansionCard.SvpIkkeBeregnet" />
       </Tag>
     );

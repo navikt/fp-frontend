@@ -69,7 +69,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, harSattEndringsdato
   return (
     <VStack gap="space-16">
       <HStack gap="space-16">
-        <Heading size="small">
+        <Heading size="small" level="2">
           <FormattedMessage id="UttakEøsFaktaForm.FaktaUttakEos" />
         </Heading>
         {harSattEndringsdato && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
