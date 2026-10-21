@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Alert, Button, Table, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Table, VStack } from '@navikt/ds-react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
@@ -19,8 +19,6 @@ import type { ArbeidsforholdOgInntektRadData } from '../types/arbeidsforholdOgIn
 import { byggTabellStruktur, finnUløstArbeidsforholdIndex } from '../utils/arbeidOgInntektTabellUtils';
 import { ArbeidsforholdRad } from './ArbeidsforholdRad';
 import { ArbeidsOgInntektOverstyrPanel } from './ArbeidsOgInntektOverstyrPanel';
-
-import styles from './arbeidOgInntektFaktaPanel.module.css';
 
 interface Props {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
@@ -137,11 +135,18 @@ export const ArbeidOgInntektFaktaPanel = ({
         setErOverstyrt={setErOverstyrt}
         oppdaterTabell={oppdaterTabellData}
       />
+
+      {tabellRader.length === 0 && (
+        <BodyShort textColor="subtle">
+          <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforholdEllerInntektsmeldinger" />
+        </BodyShort>
+      )}
+
       {tabellRader.length > 0 && (
         <Table ref={tableRef}>
           <Table.Header>
-            <Table.Row className={styles['headerRow']}>
-              <Table.HeaderCell scope="col" />
+            <Table.Row>
+              <Table.HeaderCell scope="col" className="w-12" />
               <Table.HeaderCell scope="col">
                 <FormattedMessage id="ArbeidOgInntektFaktaPanel.Arbeidsforhold" />
               </Table.HeaderCell>
@@ -217,11 +222,9 @@ export const ArbeidOgInntektFaktaPanel = ({
       )}
       {skalViseÅpneForNyVurderingKnapp && (
         <VStack gap="space-16">
-          <div className={styles['alertStripe']}>
-            <Alert variant="info">
-              <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" />
-            </Alert>
-          </div>
+          <Alert variant="info" size="small" className="self-start">
+            <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" />
+          </Alert>
           <div>
             <Button
               size="small"

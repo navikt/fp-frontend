@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Label, Link, Spacer, VStack } from '@navikt/ds-react';
-import { BeløpLabel } from '@navikt/ft-ui-komponenter';
+import { BodyShort, HStack, Link, VStack } from '@navikt/ds-react';
+import { BeløpLabel, LabeledValue } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -11,8 +11,6 @@ import type { AlleKodeverk, Inntektspost } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 import { InntektsmeldingerPanel } from './InntektsmeldingerPanel';
-
-import styles from './arbeidsforholdInformasjonPanel.module.css';
 
 type ForenkletInntektspost = {
   beløp: number;
@@ -37,8 +35,11 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
   return (
     <VStack gap="space-32">
       <InntektsmeldingerPanel saksnummer={saksnummer} alleKodeverk={alleKodeverk} radData={radData} />
-      <VStack gap="space-4">
-        <Label size="small">
+
+      <LabeledValue
+        size="small"
+        fieldType="component"
+        label={
           <FormattedMessage
             id={
               harEttArbeidsforhold
@@ -46,54 +47,56 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
                 : 'ArbeidsforholdInformasjonPanel.TotaltInntekter'
             }
           />
-        </Label>
-        {inntektsposter.length === 0 && (
-          <BodyShort size="small" textColor="subtle">
-            <FormattedMessage id="ArbeidsforholdInformasjonPanel.IngenInntekt" />
-          </BodyShort>
-        )}
-        {inntektsposter.length > 0 && (
-          <VStack gap="space-4">
-            {sorterteInntektsposter
-              .filter((_inntekt, index) => (visAlleMåneder ? true : index < 3))
-              .map(inntekt => (
-                <HStack gap="space-8" className={styles['bredde']} key={inntekt.fom}>
-                  <BodyShort size="small">
-                    <FormattedMessage id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`} />
-                  </BodyShort>
-                  <BodyShort size="small">{dayjs(inntekt.fom).year()}</BodyShort>
-                  <Spacer />
-                  <BodyShort size="small">
-                    <BeløpLabel beløp={inntekt.beløp} />
-                  </BodyShort>
-                </HStack>
-              ))}
-            <BodyShort size="small">
-              <Link
-                onClick={e => {
-                  e.preventDefault();
-                  setVisAlleMåneder(!visAlleMåneder);
-                }}
-                href=""
-              >
-                <FormattedMessage
-                  tagName="span"
-                  id={
-                    visAlleMåneder
-                      ? 'ArbeidsforholdInformasjonPanel.FaerreManeder'
-                      : 'ArbeidsforholdInformasjonPanel.TidligereManeder'
-                  }
-                />
-                {visAlleMåneder ? (
-                  <ChevronUpIcon fontSize="1.5rem" aria-hidden />
-                ) : (
-                  <ChevronDownIcon fontSize="1.5rem" aria-hidden />
-                )}
-              </Link>
+        }
+        value={
+          inntektsposter.length > 0 ? (
+            <VStack gap="space-4">
+              {sorterteInntektsposter
+                .filter((_inntekt, index) => (visAlleMåneder ? true : index < 3))
+                .map(inntekt => (
+                  <HStack justify="space-between" asChild key={inntekt.fom} className="w-40">
+                    <BodyShort size="small">
+                      <HStack gap="space-4" justify="space-between" className="w-18" as="span">
+                        <FormattedMessage
+                          tagName="span"
+                          id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`}
+                        />
+                        <span>{dayjs(inntekt.fom).year()}</span>
+                      </HStack>
+                      <BeløpLabel beløp={inntekt.beløp} kr />
+                    </BodyShort>
+                  </HStack>
+                ))}
+
+              <BodyShort size="small">
+                <Link
+                  onClick={e => {
+                    e.preventDefault();
+                    setVisAlleMåneder(!visAlleMåneder);
+                  }}
+                  href=""
+                >
+                  {visAlleMåneder ? (
+                    <span>
+                      <FormattedMessage id="ArbeidsforholdInformasjonPanel.FaerreManeder" />
+                      <ChevronUpIcon aria-hidden className="inline" />
+                    </span>
+                  ) : (
+                    <span>
+                      <FormattedMessage id="ArbeidsforholdInformasjonPanel.TidligereManeder" />
+                      <ChevronDownIcon aria-hidden className="inline" />
+                    </span>
+                  )}
+                </Link>
+              </BodyShort>
+            </VStack>
+          ) : (
+            <BodyShort size="small" textColor="subtle">
+              <FormattedMessage id="ArbeidsforholdInformasjonPanel.IngenInntekt" />
             </BodyShort>
-          </VStack>
-        )}
-      </VStack>
+          )
+        }
+      />
     </VStack>
   );
 };

@@ -1,4 +1,6 @@
-.openRow,
-.openRow + tr[data-state='open'] {
-  background-color: var(--ax-bg-neutral-softA);
+.tabellRad {
+  &:has(+ tr[data-state='open']),
+  & + tr[data-state='open'] {
+    background-color: var(--ax-bg-neutral-softA);
+  }
 }

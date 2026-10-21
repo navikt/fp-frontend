@@ -111,6 +111,7 @@ export const TilretteleggingFaktaForm = ({
           control={formMethods.control}
           size="small"
           readOnly={isReadOnly}
+          className="max-w-2xl"
           label={<FormattedMessage id="TilretteleggingFaktaForm.BegrunnEndringene" />}
           description={
             harFAISU ? (
