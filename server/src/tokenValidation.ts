@@ -4,8 +4,8 @@ import { NextFunction, Request, Response } from "express";
 import logger from "./logger.js";
 
 /**
- * Validerer token som kommer fra Wonderwall
- */
+Validerer token som kommer fra Wonderwall
+*/
 export const verifyToken = async (
   request: Request,
   response: Response,

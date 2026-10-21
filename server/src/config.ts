@@ -91,6 +91,7 @@ const getProxyConfig = () => {
   return config as ProxyConfig;
 };
 
+// eslint-disable-next-line unicorn/no-top-level-side-effects -- konfig skal valideres ved oppstart slik at appen feiler tidlig
 export default {
   server,
   azureAd,

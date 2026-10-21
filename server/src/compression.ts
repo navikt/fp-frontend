@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 
 /**
- * Primært relevant for js og CSS filer.
- * Har lagt til HTML støtte men vil ikke påvirke den første requesten som server selve appen (index.html) siden den ikke spesifikt spør etter HTML fila, men den serves som en fallback
- */
+Primært relevant for js og CSS filer.
+Har lagt til HTML støtte men vil ikke påvirke den første requesten som server selve appen (index.html) siden den ikke spesifikt spør etter HTML fila, men den serves som en fallback
+*/
 const MIME_TYPES: Record<string, string> = {
   ".js": "application/javascript",
   ".html": "text/html",
@@ -46,7 +46,6 @@ const utledKomprimeringsAlgoritme = (
     ? acceptEncoding.join(",")
     : acceptEncoding;
 
-  // eslint-disable-next-line unicorn/prefer-ternary
   if (encodings?.includes("br")) {
     return { extension: "br", encoding: "br" };
   }

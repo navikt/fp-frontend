@@ -26,7 +26,7 @@ export default tseslint.config(
       "simple-import-sort/exports": "error",
     },
   },
-  eslintPluginUnicorn.configs["flat/recommended"],
+  eslintPluginUnicorn.configs.recommended,
   {
     rules: {
       eqeqeq: ["error", "always"],
