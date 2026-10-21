@@ -5,12 +5,11 @@ import { PlusCircleIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Heading, Table, VStack } from '@navikt/ds-react';
 import { LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, sortPeriodsByFom } from '@navikt/ft-utils';
-import dayjs from 'dayjs';
 
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
-import { Årsakstype,utledÅrsakstype, UttakFaktaDetailForm } from './UttakFaktaDetailForm';
+import { Årsakstype, utledÅrsakstype, UttakFaktaDetailForm } from './UttakFaktaDetailForm';
 
 import styles from './uttakFaktaTable.module.css';
 
@@ -189,28 +188,24 @@ export const UttakFaktaTable = ({
           )}
           {visNyPeriode && (
             <Box background="sunken" padding="space-16">
-              <VStack gap="space-16" className={styles['nyPeriodePanel']}>
-                <Heading size="small" level="3">
-                  <FormattedMessage id="UttakFaktaForm.NyPeriode" />
-                </Heading>
-                <UttakFaktaDetailForm
-                  fagsak={fagsak}
-                  avbrytEditering={() => settVisNyPeriode(false)}
-                  readOnly={false}
-                  alleKodeverk={alleKodeverk}
-                  oppdaterPeriode={(uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => {
-                    const nyeSortertePerioder = uttakKontrollerFaktaPerioder
-                      .concat(uttaksperiode)
-                      .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
-                    setDirty(true);
-                    oppdaterUttakPerioder(nyeSortertePerioder);
-                    settVisNyPeriode(false);
-                  }}
-                  arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                  faktaArbeidsforhold={faktaArbeidsforhold}
-                  defaultMonth={sisteMåned}
-                />
-              </VStack>
+              <Heading size="small" level="3">
+                <FormattedMessage id="UttakFaktaForm.NyPeriode" />
+              </Heading>
+              <UttakFaktaDetailForm
+                fagsak={fagsak}
+                avbrytEditering={() => settVisNyPeriode(false)}
+                readOnly={false}
+                alleKodeverk={alleKodeverk}
+                oppdaterPeriode={(uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => {
+                  const nyeSortertePerioder = uttakKontrollerFaktaPerioder.concat(uttaksperiode).sort(sortPeriodsByFom);
+                  setDirty(true);
+                  oppdaterUttakPerioder(nyeSortertePerioder);
+                  settVisNyPeriode(false);
+                }}
+                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                faktaArbeidsforhold={faktaArbeidsforhold}
+                defaultMonth={sisteMåned}
+              />
             </Box>
           )}
         </>
