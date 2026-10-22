@@ -14,14 +14,14 @@
     "clean": "rm -rf ./dist ./node_modules ./.turbo ./.storybook-static-build"
   },
   "dependencies": {
-    "@navikt/ds-react": "8.19.1",
+    "@navikt/ds-react": "8.19.2",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
     "@storybook/react": "10.6.2",
     "@tanstack/react-query": "5.104.3",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "react-intl": "12.1.4",
     "react-router": "8.4.0",
     "storybook": "10.6.2"
