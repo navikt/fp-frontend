@@ -62,6 +62,7 @@ export const FaktaBegrunnelseTextField = <T extends FieldValues & FaktaBegrunnel
           maxLength={1500}
           readOnly={isReadOnly}
           size={size}
+          className="max-w-2xl"
         />
       )}
     </RawIntlProvider>

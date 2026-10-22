@@ -5,17 +5,11 @@ import { Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { VelferdspermisjonDto } from '@navikt/fp-types';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { VelferdspermisjonForm } from './VelferdspermisjonForm';
 
 import styles from './velferdspermisjonTabellRad.module.css';
-
-const utledStyleForRad = (open: boolean, erIkkeValgt: boolean) => {
-  if (erIkkeValgt) {
-    return styles['apRow'];
-  }
-  return open ? styles['openRow'] : undefined;
-};
 
 interface Props {
   velferdspermisjon: VelferdspermisjonDto;
@@ -29,15 +23,17 @@ export const VelferdspermisjonTabellRad = ({
   oppdaterOverstyrtUtbetalingsgrad,
 }: Props) => {
   const erIkkeValgt = velferdspermisjon.erGyldig === undefined;
-
+  const { alleKodeverk } = usePanelDataContext();
   const [open, setOpen] = useState(erIkkeValgt);
 
   return (
     <Table.ExpandableRow
       open={open}
+      data-til-vurdering={erIkkeValgt}
       expandOnRowClick
       onOpenChange={() => setOpen(!open)}
       onClick={() => setOpen(!open)}
+      className={styles['tabellRad']}
       content={
         <VelferdspermisjonForm
           velferdspermisjon={velferdspermisjon}
@@ -46,7 +42,6 @@ export const VelferdspermisjonTabellRad = ({
           oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
         />
       }
-      className={utledStyleForRad(open, erIkkeValgt)}
     >
       <Table.DataCell>
         <PeriodLabel dateStringFom={velferdspermisjon.permisjonFom} dateStringTom={velferdspermisjon.permisjonTom} />
@@ -55,7 +50,7 @@ export const VelferdspermisjonTabellRad = ({
         <FormattedMessage
           id="VelferdspermisjonTabellRad.Permisjon"
           values={{
-            type: velferdspermisjon.type.toLowerCase(),
+            type: alleKodeverk['PermisjonsbeskrivelseType'].find(k => k.kode === velferdspermisjon.type)?.navn,
             permisjon: velferdspermisjon.permisjonsprosent,
           }}
         />

@@ -16,7 +16,7 @@ import type {
   Vilkår,
   VilkårUtfallType,
 } from '@navikt/fp-types';
-import { erAksjonspunktÅpent, usePanelDataContext } from '@navikt/fp-utils';
+import { erAksjonspunktÅpent, sortKodeverkByNavn, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './vilkarResultPicker.module.css';
 
@@ -124,7 +124,7 @@ const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkår 
   if (vilkår) {
     return alleKodeverk['Avslagsårsak']
       .filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))
-      .toSorted((k1, k2) => k1.navn.localeCompare(k2.navn))
+      .toSorted(sortKodeverkByNavn)
       .map(aa => (
         <option key={aa.kode} value={aa.kode}>
           {aa.navn}

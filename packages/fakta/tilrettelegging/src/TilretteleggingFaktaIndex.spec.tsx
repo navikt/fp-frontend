@@ -71,7 +71,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     expect(screen.getByText('Registrerte velferdspermisjoner fra Aa-registeret')).toBeInTheDocument();
     expect(screen.getByText('17.02.2020 - 12.07.2020')).toBeInTheDocument();
-    expect(screen.getByText('50% velferdspermisjon')).toBeInTheDocument();
+    expect(screen.getByText('50% Velferdspermisjon')).toBeInTheDocument();
 
     expect(screen.getByText('Perioder')).toBeInTheDocument();
     expect(screen.getByText('17.03.2020 - 14.08.2020')).toBeInTheDocument();

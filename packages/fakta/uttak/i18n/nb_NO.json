@@ -11,6 +11,8 @@
   "UttakFaktaForm.NyPeriode": "Ny periode",
   "UttakFaktaForm.OverlappendePerioder": "Det finnes overlappende perioder",
 
+  "UttakFaktaTable.Perioder": "Perioder",
+  "UttakFaktaTable.IngenPerioderRegistrert": "Ingen perioder lagt til.",
   "UttakFaktaTable.Periode": "Periode",
   "UttakFaktaTable.AntallDager": "Antall dager",
   "UttakFaktaTable.Type": "Type",

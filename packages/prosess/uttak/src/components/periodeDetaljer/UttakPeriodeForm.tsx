@@ -12,14 +12,13 @@ import type {
   AarsakFilter,
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
-  KodeverkMedNavn,
   PeriodeResultatÅrsakMuligeÅrsaker,
   PeriodeSoker,
   PeriodeSokerAktivitet,
   UtsettelseArsakCode,
   UttakPeriodeType,
 } from '@navikt/fp-types';
-import { useReadOnly } from '@navikt/fp-utils';
+import { sortKodeverkByNavn, useReadOnly } from '@navikt/fp-utils';
 
 import { finnArbeidsforholdNavnOgProsentArbeid, UttakAktiviteterTabell } from './UttakAktiviteterTabell';
 import type { UttakAktivitet, UttakAktivitetType } from './UttakAktivitetType';
@@ -61,21 +60,12 @@ const sorterÅrsakKodeverk = (
   b: PeriodeResultatÅrsakMuligeÅrsaker,
   alleKodeverk: AlleKodeverk,
 ): number => {
-  if (a.sortering < b.sortering) {
-    return -1;
-  }
-  if (a.sortering > b.sortering) {
-    return 1;
+  if (a.sortering !== b.sortering) {
+    return a.sortering < b.sortering ? -1 : 1;
   }
   const navnA = alleKodeverk['PeriodeResultatÅrsak'].find(k => k.kode === a.kode)?.navn ?? '';
   const navnB = alleKodeverk['PeriodeResultatÅrsak'].find(k => k.kode === b.kode)?.navn ?? '';
-  if (navnA < navnB) {
-    return -1;
-  }
-  if (navnA > navnB) {
-    return 1;
-  }
-  return 0;
+  return sortKodeverkByNavn({ navn: navnA }, { navn: navnB });
 };
 
 const lagOptionsTilPeriodeÅrsakSelect = (
@@ -162,22 +152,9 @@ const finnDager = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker)
     : '0';
 };
 
-const sorterGradering = (
-  a: KodeverkMedNavn<'GraderingAvslagÅrsak'>,
-  b: KodeverkMedNavn<'GraderingAvslagÅrsak'>,
-): number => {
-  if (a.navn < b.navn) {
-    return -1;
-  }
-  if (a.navn > b.navn) {
-    return 1;
-  }
-  return 0;
-};
-
 const lagOptionsTilGraderingAvslagsårsakerSelect = (alleKodeverk: AlleKodeverk): ReactElement[] => {
   const årsakKoder = alleKodeverk['GraderingAvslagÅrsak'];
-  return [...årsakKoder].sort(sorterGradering).map(({ kode, navn }) => (
+  return årsakKoder.toSorted(sortKodeverkByNavn).map(({ kode, navn }) => (
     <option value={kode} key={kode}>
       {navn}
     </option>

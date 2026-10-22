@@ -6,7 +6,7 @@ import { RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/f
 import { hasValidDate, maxLength, required } from '@navikt/ft-form-validators';
 
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
-import { useReadOnly } from '@navikt/fp-utils';
+import { sortKodeverkByNavn, useReadOnly } from '@navikt/fp-utils';
 
 import { FieldArrayRow } from '../../felles/FieldArrayRow';
 import { INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME } from '../constants';
@@ -51,7 +51,7 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk }: Props) =
     name: INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME,
   });
 
-  const sortedCountriesByName = alleKodeverk['Landkoder'].toSorted((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk['Landkoder'].toSorted(sortKodeverkByNavn);
 
   return (
     <RhfFieldArray

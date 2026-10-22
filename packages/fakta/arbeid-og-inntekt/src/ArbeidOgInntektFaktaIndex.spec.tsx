@@ -44,6 +44,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
     expect(screen.getByText('Skjæringstidspunkt for opptjening: 10.11.2021')).toBeInTheDocument();
     expect(screen.getByText('Innhent manglende inntektsmeldinger.')).toBeInTheDocument();
+    expect(screen.queryByText('Ingen arbeidsforhold eller inntektsmeldinger registrert.')).not.toBeInTheDocument();
 
     expect(screen.getByText('Stillingsprosent')).toBeInTheDocument();
     expect(screen.getByText('100%')).toBeInTheDocument();
@@ -455,6 +456,8 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     );
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(screen.getByText('Ingen arbeidsforhold eller inntektsmeldinger registrert.')).toBeInTheDocument();
+    expect(screen.queryByRole('table')).not.toBeInTheDocument();
     expect(
       screen.queryByText(
         'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. ' +
@@ -657,7 +660,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     const rader = Array.from(table.querySelectorAll<HTMLTableRowElement>('tbody > tr:not(.aksel-table__expanded-row)'));
     await userEvent.click(within(rader[1]!).getByText('Vis mer'));
 
-    expect(screen.getAllByTitle('Åpent aksjonspunkt')).toHaveLength(5);
+    expect(screen.getAllByTitle('Åpent aksjonspunkt')).toHaveLength(3);
 
     // Vel "Opprett arbeidsforhold basert på inntektsmeldingen" for berre den FØRSTE av dei to Autoservice-radene.
     await userEvent.click(screen.getAllByText('Opprett arbeidsforhold basert på inntektsmeldingen')[0]!);
@@ -683,7 +686,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     );
     // Berre den redigerte rada skal ha blitt oppdatert - den andre inntektsmeldinga med same
     // arbeidsgjevar-ident skal framleis vise ope aksjonspunkt.
-    expect(screen.getAllByTitle('Åpent aksjonspunkt')).toHaveLength(4);
+    expect(screen.getAllByTitle('Åpent aksjonspunkt')).toHaveLength(2);
   });
 
   it('skal vise to arbeidsforhold fra samme virksomhet der kun ett har fått inntektsmelding', async () => {

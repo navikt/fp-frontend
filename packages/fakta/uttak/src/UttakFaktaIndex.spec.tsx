@@ -216,6 +216,9 @@ describe('UttakFaktaIndex', () => {
     expect(
       screen.getByText('Ingen perioder å vurdere. Vurder om behandlingen er feilopprettet og kan henlegges'),
     ).toBeInTheDocument();
+    expect(screen.getByText('Perioder')).toBeInTheDocument();
+    expect(screen.getByText('Ingen perioder lagt til.')).toBeInTheDocument();
+    expect(screen.queryByRole('table')).not.toBeInTheDocument();
 
     expect(screen.queryByAltText('Vis mer')).not.toBeInTheDocument();
 

@@ -19,8 +19,6 @@ import {
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { finnDager, finnUker, usePanelDataContext, useReadOnly } from '@navikt/fp-utils';
 
-import styles from './uttakEøsFaktaDetailForm.module.css';
-
 type FormValues = {
   fom: string;
   tom: string;
@@ -94,7 +92,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               />
               {slettPeriode && !isReadOnly && (
                 <Button
-                  className={styles['marginBtn']}
+                  className="mt-6"
                   size="small"
                   variant="tertiary"
                   type="button"
@@ -120,13 +118,15 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               id: 'UttakEøsFaktaDetailForm.Stønadskonto',
             })}
             control={formMethods.control}
-            className={styles['select']}
+            className="self-start"
             selectValues={lagGyldigeKontotyperOption(fagsak, alleKodeverk)}
             readOnly={isReadOnly}
             validate={[required]}
           />
           <VStack align="start">
-            <Label size="small">{intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.TrekkUkerDager' })}</Label>
+            <Label size="small">
+              <FormattedMessage id="UttakEøsFaktaDetailForm.TrekkUkerDager" />
+            </Label>
             <HStack gap="space-8">
               <RhfNumericField
                 name="trekkuker"

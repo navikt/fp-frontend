@@ -14,7 +14,7 @@ import {
 } from '@navikt/fp-storybook-utils';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
+import { fagsakFullFpsak, initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
 import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp';
 import { HistorikkIndex } from './HistorikkIndex';
@@ -71,6 +71,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    behandlingUuid: '11212',
+    behandlingUuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
+    historikkinnslagFpSak: fagsakFullFpsak.historikkinnslag,
   },
 };
