@@ -1077,7 +1077,7 @@ export const SkalViseFødselsnummerForPrivatperson: Story = {
   },
 };
 
-export const InaktivtArbeidsforholdIkkebestiltInntektsmelding: Story = {
+export const InaktivtArbeidsforholdIkkebestiltInntektsmelding = {
   args: {
     arbeidOgInntekt: {
       arbeidsforhold: [
@@ -1096,6 +1096,28 @@ export const InaktivtArbeidsforholdIkkebestiltInntektsmelding: Story = {
       inntektsmeldinger: [],
       inntekter: [],
       skjæringstidspunkt: '2021-11-10',
+    },
+  },
+} satisfies Story;
+
+export const InaktivtArbeidsforholdMedMottattInntektsmelding: Story = {
+  args: {
+    arbeidOgInntekt: {
+      ...InaktivtArbeidsforholdIkkebestiltInntektsmelding.args.arbeidOgInntekt,
+      inntektsmeldinger: [
+        {
+          ...fellesInntektsmeldingFelter,
+          arbeidsgiverIdent: '910909090',
+          eksternArbeidsforholdId: 'ARB001-001',
+          inntektPrMnd: 30_000,
+          internArbeidsforholdId: 'a1b2c3d4-0000-0000-0000-000000000001',
+          mottattDato: '2026-10-22',
+          kontaktpersonNavn: 'Kari Hansen',
+          kontaktpersonNummer: '99999999',
+          journalpostId: '1',
+          dokumentId: '2',
+        },
+      ],
     },
   },
 };

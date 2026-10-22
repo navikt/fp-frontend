@@ -26,6 +26,7 @@ const {
   AutomatiskIgnorertInntektsmelding,
   EtterAtEtterspurtInntektsmeldingErKommet,
   InaktivtArbeidsforholdIkkebestiltInntektsmelding,
+  InaktivtArbeidsforholdMedMottattInntektsmelding,
   PermisjonArbeidsforholdIkkebestiltInntektsmelding,
 } = composeStories(stories);
 
@@ -791,7 +792,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
-    expect(screen.getByText('Ikke bestilt')).toBeInTheDocument();
+    expect(screen.getByRole('cell', { name: 'Ikke bestilt' })).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Vis mer'));
 
@@ -802,12 +803,19 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     ).toBeInTheDocument();
   });
 
+  it('skal vise Ikke bestilt i parentes når mottattdato vises', async () => {
+    render(<InaktivtArbeidsforholdMedMottattInntektsmelding />);
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(screen.getByRole('cell', { name: '22.10.2026 (Ikke bestilt)' })).toBeInTheDocument();
+  });
+
   it('skal vise forklaring for permisjonsarbeidsforhold der inntektsmelding ikke er bestilt', async () => {
     render(<PermisjonArbeidsforholdIkkebestiltInntektsmelding />);
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
-    expect(screen.getByText('Ikke bestilt')).toBeInTheDocument();
+    expect(screen.getByRole('cell', { name: 'Ikke bestilt' })).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Vis mer'));
 
