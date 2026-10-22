@@ -1017,4 +1017,53 @@ describe('TilretteleggingFaktaIndex', () => {
     const ap = (lagre.mock.calls[0] as unknown as [BekreftSvangerskapspengerAp])[0];
     expect(ap.bekreftetSvpArbeidsforholdList[0]!.tilretteleggingDatoer[1]?.overstyrtUtbetalingsgrad).toBe(70);
   });
+
+  it('skal sende overstyrt utbetalingsgrad for splittet arbeidsforhold uten arbeidsprosent, også når graden er 100', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    const svangerskapspengerTilrettelegging =
+      stories.TilretteleggingMedOverstyrtUtbetalingsgrad.args.svangerskapspengerTilrettelegging;
+    const arbeidsforhold = svangerskapspengerTilrettelegging.arbeidsforholdListe[0]!;
+
+    render(
+      <TilretteleggingMedOverstyrtUtbetalingsgrad
+        submitCallback={lagre}
+        svangerskapspengerTilrettelegging={{
+          ...svangerskapspengerTilrettelegging,
+          arbeidsforholdListe: [
+            {
+              ...arbeidsforhold,
+              tilretteleggingDatoer: [
+                {
+                  fom: '2020-03-17',
+                  type: 'DELVIS_TILRETTELEGGING',
+                  mottattDato: '2020-02-20',
+                  kilde: 'SØKNAD',
+                  overstyrtUtbetalingsgrad: 30,
+                },
+              ],
+            },
+            {
+              ...arbeidsforhold,
+              internArbeidsforholdReferanse: 'annen-ref',
+              eksternArbeidsforholdReferanse: 'annen-ekstern-ref',
+            },
+          ],
+        }}
+      />,
+    );
+
+    await userEvent.click(await screen.findByText('17.03.2020 - 15.10.2020'));
+
+    const utbetalingsgrad = screen.getByRole('textbox', { name: 'Prosent svangerskapspenger' });
+    await userEvent.clear(utbetalingsgrad);
+    await userEvent.type(utbetalingsgrad, '100');
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'En begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    const ap = (lagre.mock.calls[0] as unknown as [BekreftSvangerskapspengerAp])[0];
+    expect(ap.bekreftetSvpArbeidsforholdList[0]!.tilretteleggingDatoer[0]?.overstyrtUtbetalingsgrad).toBe(100);
+  });
 });

@@ -92,6 +92,9 @@ const finnOverstyrtUtbetalingsgrad = (
   velferdspermisjonprosent: number,
 ): number | undefined => {
   if (lagreFormValues.type === 'DELVIS_TILRETTELEGGING' && gradErEndretAvSaksbehandler) {
+    if (lagreFormValues.stillingsprosent === undefined) {
+      return lagreFormValues.overstyrtUtbetalingsgrad;
+    }
     const automatiskUtbetalingsgrad = finnProsentSvangerskapspenger(
       lagreFormValues,
       stillingsprosentArbeidsforhold,
