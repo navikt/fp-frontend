@@ -40,10 +40,13 @@ const getTypeTekst = (
   return intl.formatMessage({ id: 'UttakFaktaTabel.Utsettelse' }, { arsak: navn });
 };
 
+const lagNyPeriodeId = (perioder: KontrollerFaktaPeriodeMedApMarkering[]): number =>
+  Math.max(-1, ...perioder.map(p => p.id)) + 1;
+
 interface Props {
   fagsak: Fagsak;
-  valgtePeriodeIder: string[];
-  setValgtePeriodeIder: Dispatch<SetStateAction<string[]>>;
+  valgtePeriodeIder: number[];
+  setValgtePeriodeIder: Dispatch<SetStateAction<number[]>>;
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriodeMedApMarkering[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
@@ -73,13 +76,13 @@ export const UttakFaktaTable = ({
 }: Props) => {
   const intl = useIntl();
 
-  const togglePeriode = (id: string) => {
+  const togglePeriode = (id: number) => {
     setValgtePeriodeIder(ider => (ider.includes(id) ? ider.filter(i => i !== id) : ider.concat(id)));
   };
 
   const lukkAllePerioder = () => setValgtePeriodeIder([]);
 
-  const oppdaterPeriode = (id: string, periode: FaktaUttakPeriode) => {
+  const oppdaterPeriode = (id: number, periode: FaktaUttakPeriode) => {
     const oppdatertePerioder = uttakKontrollerFaktaPerioder
       .map(p => (p.id === id ? { ...periode, id } : p))
       .sort(sortPeriodsByFom);
@@ -89,7 +92,7 @@ export const UttakFaktaTable = ({
     lukkAllePerioder();
   };
 
-  const slettPeriode = (id: string) => {
+  const slettPeriode = (id: number) => {
     oppdaterUttakPerioder(uttakKontrollerFaktaPerioder.filter(p => p.id !== id));
     setValgtePeriodeIder(ider => ider.filter(i => i !== id));
     setDirty(true);
@@ -97,7 +100,7 @@ export const UttakFaktaTable = ({
 
   const leggTilPeriode = (periode: FaktaUttakPeriode) => {
     const nyeSortertePerioder = uttakKontrollerFaktaPerioder
-      .concat({ ...periode, id: crypto.randomUUID() })
+      .concat({ ...periode, id: lagNyPeriodeId(uttakKontrollerFaktaPerioder) })
       .sort(sortPeriodsByFom);
     setDirty(true);
     oppdaterUttakPerioder(nyeSortertePerioder);

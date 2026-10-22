@@ -52,7 +52,7 @@ const leggTilAksjonspunktMarkering = (
   aksjonspunkter: Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): KontrollerFaktaPeriodeMedApMarkering[] =>
-  perioder.map(periode => {
+  perioder.map((periode, index) => {
     if (
       aksjonspunkter.some(
         ap =>
@@ -65,14 +65,14 @@ const leggTilAksjonspunktMarkering = (
     ) {
       return {
         ...periode,
-        id: crypto.randomUUID(),
+        id: index,
         aksjonspunktType: 'MANGLENDE_ARBEIDSFORHOLD',
       };
     }
 
     return {
       ...periode,
-      id: crypto.randomUUID(),
+      id: index,
     };
   });
 
@@ -184,7 +184,7 @@ export const UttakFaktaForm = ({
       leggTilAksjonspunktMarkering(sortertListe, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId),
   );
 
-  const [valgtePeriodeIder, setValgtePeriodeIder] = useState<string[]>([]);
+  const [valgtePeriodeIder, setValgtePeriodeIder] = useState<number[]>([]);
 
   const formMethods = useForm<FaktaBegrunnelseFormValues>({
     defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel),
