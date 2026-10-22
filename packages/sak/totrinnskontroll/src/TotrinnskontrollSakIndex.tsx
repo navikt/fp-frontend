@@ -66,7 +66,7 @@ interface Props {
   location: Location;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   readOnly: boolean;
-  onSubmit: (data: ApData) => void;
+  onSubmit: (data: ApData) => Promise<void>;
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (
     behandlingLocation: Location,

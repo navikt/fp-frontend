@@ -1,32 +1,59 @@
 import { composeStories } from '@storybook/react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
-import { notEmpty } from '@navikt/fp-utils';
 
 import * as stories from './TotrinnskontrollIndex.stories';
 
-const { Default } = composeStories(stories);
+const { Default, LagringFeiler, LagringTarTid } = composeStories(stories);
+
+const erLagreKall = (request: unknown) =>
+  request instanceof Request && request.method === 'POST' && request.url.endsWith('/totrinnskontroll/bekreft');
+
+const godkjennAlleAksjonspunkter = async () => {
+  expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
+
+  const alleGodkjentRadios = screen.getAllByText('Godkjent');
+  expect(alleGodkjentRadios).toHaveLength(7);
+  for (const radio of alleGodkjentRadios) {
+    await userEvent.click(radio);
+  }
+
+  await userEvent.click(screen.getByText('Godkjenn vedtaket'));
+};
 
 describe('TotrinnskontrollIndex', () => {
   it('skal vise modal når beslutter godkjenner', async () => {
     await Default.run();
 
-    expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
-    expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
+    expect(await screen.findByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
 
-    const alleGodkjentRadios = screen.getAllByText('Godkjent');
-    expect(alleGodkjentRadios).toHaveLength(7);
-    await userEvent.click(notEmpty(alleGodkjentRadios[0]!));
-    await userEvent.click(notEmpty(alleGodkjentRadios[1]!));
-    await userEvent.click(notEmpty(alleGodkjentRadios[2]!));
-    await userEvent.click(notEmpty(alleGodkjentRadios[3]!));
-    await userEvent.click(notEmpty(alleGodkjentRadios[4]!));
-    await userEvent.click(notEmpty(alleGodkjentRadios[5]!));
-    await userEvent.click(notEmpty(alleGodkjentRadios[6]!));
-
-    await userEvent.click(screen.getByText('Godkjenn vedtaket'));
+    await godkjennAlleAksjonspunkter();
 
     expect(await screen.findByText('Vedtaket er innvilget og blir iverksatt')).toBeInTheDocument();
+  });
+
+  it('skal ikke vise modal når lagring av totrinnskontroll feiler', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch');
+    await LagringFeiler.run();
+
+    await godkjennAlleAksjonspunkter();
+
+    await waitFor(() => expect(fetchSpy.mock.calls.some(([request]) => erLagreKall(request))).toBe(true));
+    await waitFor(() => expect(fetchSpy.mock.settledResults.every(result => result.type !== 'incomplete')).toBe(true));
+    await new Promise(resolve => setTimeout(resolve, 50));
+
+    expect(screen.queryByText('Vedtaket er innvilget og blir iverksatt')).not.toBeInTheDocument();
+    fetchSpy.mockRestore();
+  });
+
+  it('skal ikke kunne sende inn på nytt mens lagringen pågår', async () => {
+    await LagringTarTid.run();
+
+    await godkjennAlleAksjonspunkter();
+
+    expect(screen.getByText('Godkjenn vedtaket').closest('button')).toBeDisabled();
+    expect(
+      await screen.findByText('Vedtaket er innvilget og blir iverksatt', {}, { timeout: 3000 }),
+    ).toBeInTheDocument();
   });
 });

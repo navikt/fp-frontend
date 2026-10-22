@@ -60,8 +60,11 @@ export const TotrinnskontrollIndex = ({
 
   const alleKodeverk = useKodeverk(valgtBehandling.type);
 
-  const { mutate: godkjennTotrinnsaksjonspunkter } = useMutation({
+  const { mutateAsync: godkjennTotrinnsaksjonspunkter } = useMutation({
     mutationFn: (valuesToStore: BekreftedeTotrinnsaksjonspunkter) => api.lagreTotrinnsaksjonspunkt(valuesToStore),
+    onSuccess: () => {
+      setVisBeslutterModal(true);
+    },
   });
 
   const { mutate: forhåndsvisVedtaksbrev } = useMutation({
@@ -75,15 +78,18 @@ export const TotrinnskontrollIndex = ({
     },
   });
 
-  const onSubmit = (totrinnskontrollData: Values) => {
+  const onSubmit = async (totrinnskontrollData: Values) => {
     const params = {
       behandlingUuid: valgtBehandling.uuid,
       behandlingVersjon: valgtBehandling.versjon,
       bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
     };
     setErAlleAksjonspunktGodkjent(totrinnskontrollData.erAlleAksjonspunktGodkjent);
-    setVisBeslutterModal(true);
-    godkjennTotrinnsaksjonspunkter(params);
+    try {
+      await godkjennTotrinnsaksjonspunkter(params);
+    } catch {
+      // Feilen vises av den globale feilhåndteringen i MutationCache
+    }
   };
 
   const erStatusFatterVedtak = valgtBehandling.status === 'FVED';

@@ -1,7 +1,7 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 import { getCleanUrlString } from 'msw/utils/get-clean-url-string';
 import { action } from 'storybook/actions';
 
@@ -73,8 +73,11 @@ const TOTRINNSKONTROLL_AKSJONSPUNKTER: TotrinnskontrollSkjermlenkeContext[] = [
   },
 ];
 
+const LAGRE_TOTRINNSAKSJONSPUNKT_HREF = '/fpsak/api/behandling/totrinnskontroll/bekreft';
+
 const BEHANDLING = lagFagsakBehandling({
   versjon: 2,
+  links: [{ href: LAGRE_TOTRINNSAKSJONSPUNKT_HREF, rel: FagsakRel.SAVE_TOTRINNSAKSJONSPUNKT, type: 'POST' }],
   uuid: '1',
   type: 'BT-002',
   status: 'FVED',
@@ -167,4 +170,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  beforeEach({ msw }) {
+    msw.use(http.post(wrapUrl(LAGRE_TOTRINNSAKSJONSPUNKT_HREF), () => new HttpResponse(null, { status: 200 })));
+  },
+};
+
+export const LagringFeiler: Story = {
+  beforeEach({ msw }) {
+    msw.use(http.post(wrapUrl(LAGRE_TOTRINNSAKSJONSPUNKT_HREF), () => new HttpResponse(null, { status: 500 })));
+  },
+};
+
+export const LagringTarTid: Story = {
+  beforeEach({ msw }) {
+    msw.use(
+      http.post(wrapUrl(LAGRE_TOTRINNSAKSJONSPUNKT_HREF), async () => {
+        await delay(1000);
+        return new HttpResponse(null, { status: 200 });
+      }),
+    );
+  },
+};

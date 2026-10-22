@@ -67,11 +67,15 @@ const JournalforingIndex = ({ ansattIdent }: Props) => {
     mutate: submitJournalføringNySak,
     data: saksnumerJournalføringNySak,
     isPending: submitJournalføringIsPending,
+    reset: resetJournalføringNySak,
   } = useMutation({
     mutationFn: ferdigstillJournalføring,
     onSuccess: () => {
       void innhentAlleOppgaverPåNytt();
       avbrytVisningAvJournalpost();
+    },
+    onError: () => {
+      setVisModal(false);
     },
   });
 
@@ -79,11 +83,15 @@ const JournalforingIndex = ({ ansattIdent }: Props) => {
     mutate: knyttTilAnnenSak,
     data: saksnummerNySakKnyttAnnenSak,
     isPending: knyttTilAnnenSakIsPending,
+    reset: resetKnyttTilAnnenSak,
   } = useMutation({
     mutationFn: knyttJournalpostTilAnnenSak,
     onSuccess: () => {
       void innhentAlleOppgaverPåNytt();
       avbrytVisningAvJournalpost();
+    },
+    onError: () => {
+      setVisModal(false);
     },
   });
 
@@ -119,6 +127,8 @@ const JournalforingIndex = ({ ansattIdent }: Props) => {
   };
 
   const journalførCallback = (data: JournalførSubmitValue, erAlleredeJournalført: boolean) => {
+    resetJournalføringNySak();
+    resetKnyttTilAnnenSak();
     setVisModal(true);
     if (erAlleredeJournalført) {
       knyttTilAnnenSak(data);
