@@ -6,7 +6,7 @@ import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
-import { dateFormat } from '@navikt/ft-utils';
+import { dateFormat, omitMany } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import {
@@ -65,14 +65,14 @@ const leggTilAksjonspunktMarkering = (
     ) {
       return {
         ...periode,
-        originalFom: periode.fom,
+        id: crypto.randomUUID(),
         aksjonspunktType: 'MANGLENDE_ARBEIDSFORHOLD',
       };
     }
 
     return {
       ...periode,
-      originalFom: periode.fom,
+      id: crypto.randomUUID(),
     };
   });
 
@@ -172,12 +172,6 @@ export const UttakFaktaForm = ({
   const sortertListe = [...uttakKontrollerFaktaPerioder].sort((krav1, krav2) =>
     dayjs(krav1.fom).diff(dayjs(krav2.fom)),
   );
-  const sortertePerioder = leggTilAksjonspunktMarkering(
-    sortertListe,
-    aksjonspunkterForPanel,
-    arbeidsgiverOpplysningerPerId,
-  );
-
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<
     {
       uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[];
@@ -185,10 +179,12 @@ export const UttakFaktaForm = ({
   >();
 
   const [uttakPerioder, setUttakPerioder] = useState<KontrollerFaktaPeriodeMedApMarkering[]>(
-    mellomlagretFormData?.uttakPerioder ?? sortertePerioder,
+    () =>
+      mellomlagretFormData?.uttakPerioder ??
+      leggTilAksjonspunktMarkering(sortertListe, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId),
   );
 
-  const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);
+  const [valgtePeriodeIder, setValgtePeriodeIder] = useState<string[]>([]);
 
   const formMethods = useForm<FaktaBegrunnelseFormValues>({
     defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel),
@@ -226,7 +222,7 @@ export const UttakFaktaForm = ({
   const [visNyPeriode, setVisNyPeriode] = useState(false);
 
   const isSubmittable =
-    submittable && feilmelding === null && !!begrunnelse && !visNyPeriode && valgteFomDatoer.length === 0;
+    submittable && feilmelding === null && !!begrunnelse && !visNyPeriode && valgtePeriodeIder.length === 0;
 
   const [erOverstyrt, setErOverstyrt] = useState(false);
 
@@ -256,8 +252,8 @@ export const UttakFaktaForm = ({
       )}
       <UttakFaktaTable
         fagsak={fagsak}
-        valgteFomDatoer={valgteFomDatoer}
-        setValgteFomDatoer={setValgteFomDatoer}
+        valgtePeriodeIder={valgtePeriodeIder}
+        setValgtePeriodeIder={setValgtePeriodeIder}
         uttakKontrollerFaktaPerioder={uttakPerioder}
         oppdaterUttakPerioder={setUttakPerioder}
         alleKodeverk={alleKodeverk}
@@ -297,6 +293,9 @@ export const UttakFaktaForm = ({
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FaktaBegrunnelseFormValues =>
   FaktaBegrunnelseTextField.initialValues(aksjonspunkter);
 
+const tilFaktaUttakPeriode = (periode: KontrollerFaktaPeriodeMedApMarkering): FaktaUttakPeriode =>
+  omitMany(periode, ['id', 'aksjonspunktType']);
+
 const transformValues = (
   values: FaktaBegrunnelseFormValues,
   uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[],
@@ -311,13 +310,13 @@ const transformValues = (
           AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET,
           AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG,
         ),
-        perioder: uttakPerioder,
+        perioder: uttakPerioder.map(tilFaktaUttakPeriode),
         ...FaktaBegrunnelseTextField.transformValues(values),
       }))
     : [
         {
           kode: AksjonspunktKode.OVERSTYRING_FAKTA_UTTAK,
-          perioder: uttakPerioder,
+          perioder: uttakPerioder.map(tilFaktaUttakPeriode),
           ...FaktaBegrunnelseTextField.transformValues(values),
         },
       ];

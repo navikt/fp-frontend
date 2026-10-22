@@ -6,7 +6,13 @@ import { BodyShort, Box, Button, Heading, Table, VStack } from '@navikt/ds-react
 import { LabeledValue, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, sortPeriodsByFom } from '@navikt/ft-utils';
 
-import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
+import type {
+  AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId,
+  Fagsak,
+  FaktaArbeidsforhold,
+  FaktaUttakPeriode,
+} from '@navikt/fp-types';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { Årsakstype, utledÅrsakstype, UttakFaktaDetailForm } from './UttakFaktaDetailForm';
@@ -36,8 +42,8 @@ const getTypeTekst = (
 
 interface Props {
   fagsak: Fagsak;
-  valgteFomDatoer: string[];
-  setValgteFomDatoer: Dispatch<SetStateAction<string[]>>;
+  valgtePeriodeIder: string[];
+  setValgtePeriodeIder: Dispatch<SetStateAction<string[]>>;
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriodeMedApMarkering[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
@@ -52,8 +58,8 @@ interface Props {
 
 export const UttakFaktaTable = ({
   fagsak,
-  valgteFomDatoer,
-  setValgteFomDatoer,
+  valgtePeriodeIder,
+  setValgtePeriodeIder,
   uttakKontrollerFaktaPerioder,
   arbeidsgiverOpplysningerPerId,
   faktaArbeidsforhold,
@@ -67,33 +73,35 @@ export const UttakFaktaTable = ({
 }: Props) => {
   const intl = useIntl();
 
-  const velgPeriodeFomDato = (fom?: string, lukkAlleAndre = false) => {
-    if (fom && valgteFomDatoer.includes(fom)) {
-      setValgteFomDatoer(foms => foms.filter(f => f !== fom));
-    } else if (lukkAlleAndre) {
-      const nye = fom ? [fom] : [];
-      setValgteFomDatoer(() => nye);
-    } else if (fom) {
-      setValgteFomDatoer(foms => foms.concat(fom));
-    }
+  const togglePeriode = (id: string) => {
+    setValgtePeriodeIder(ider => (ider.includes(id) ? ider.filter(i => i !== id) : ider.concat(id)));
   };
 
-  const oppdaterPeriode = (uPeriode: KontrollerFaktaPeriodeMedApMarkering) => {
+  const lukkAllePerioder = () => setValgtePeriodeIder([]);
+
+  const oppdaterPeriode = (id: string, periode: FaktaUttakPeriode) => {
     const oppdatertePerioder = uttakKontrollerFaktaPerioder
-      .filter(p => p.originalFom !== uPeriode.originalFom)
-      .concat(uPeriode)
+      .map(p => (p.id === id ? { ...periode, id } : p))
       .sort(sortPeriodsByFom);
 
     setDirty(true);
     oppdaterUttakPerioder(oppdatertePerioder);
-    velgPeriodeFomDato(undefined, true);
+    lukkAllePerioder();
   };
 
-  const slettPeriode = (fom: string) => {
-    const oppdatertePerioder = uttakKontrollerFaktaPerioder.filter(p => p.originalFom !== fom);
-    oppdaterUttakPerioder(oppdatertePerioder);
-    velgPeriodeFomDato(fom);
+  const slettPeriode = (id: string) => {
+    oppdaterUttakPerioder(uttakKontrollerFaktaPerioder.filter(p => p.id !== id));
+    setValgtePeriodeIder(ider => ider.filter(i => i !== id));
     setDirty(true);
+  };
+
+  const leggTilPeriode = (periode: FaktaUttakPeriode) => {
+    const nyeSortertePerioder = uttakKontrollerFaktaPerioder
+      .concat({ ...periode, id: crypto.randomUUID() })
+      .sort(sortPeriodsByFom);
+    setDirty(true);
+    oppdaterUttakPerioder(nyeSortertePerioder);
+    settVisNyPeriode(false);
   };
 
   const sisteMåned =
@@ -133,22 +141,22 @@ export const UttakFaktaTable = ({
           <Table.Body>
             {uttakKontrollerFaktaPerioder.map(periode => (
               <Table.ExpandableRow
-                key={periode.fom + periode.tom}
+                key={periode.id}
                 expandOnRowClick
                 data-til-vurdering={!!periode.aksjonspunktType}
                 togglePlacement="right"
-                open={valgteFomDatoer.includes(periode.fom)}
-                onOpenChange={() => velgPeriodeFomDato(periode.fom)}
+                open={valgtePeriodeIder.includes(periode.id)}
+                onOpenChange={() => togglePeriode(periode.id)}
                 contentGutter="none"
                 content={
-                  valgteFomDatoer.includes(periode.fom) && (
+                  valgtePeriodeIder.includes(periode.id) && (
                     <UttakFaktaDetailForm
                       fagsak={fagsak}
                       valgtPeriode={periode}
                       readOnly={readOnly || !erRedigerbart}
-                      oppdaterPeriode={oppdaterPeriode}
-                      slettPeriode={() => slettPeriode(periode.originalFom)}
-                      avbrytEditering={() => velgPeriodeFomDato(periode.fom)}
+                      oppdaterPeriode={oppdatertPeriode => oppdaterPeriode(periode.id, oppdatertPeriode)}
+                      slettPeriode={() => slettPeriode(periode.id)}
+                      avbrytEditering={() => togglePeriode(periode.id)}
                       alleKodeverk={alleKodeverk}
                       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                       faktaArbeidsforhold={faktaArbeidsforhold}
@@ -179,7 +187,7 @@ export const UttakFaktaTable = ({
               className="self-start"
               icon={<PlusCircleIcon />}
               onClick={() => {
-                velgPeriodeFomDato(undefined, true);
+                lukkAllePerioder();
                 settVisNyPeriode(true);
               }}
             >
@@ -196,12 +204,7 @@ export const UttakFaktaTable = ({
                 avbrytEditering={() => settVisNyPeriode(false)}
                 readOnly={false}
                 alleKodeverk={alleKodeverk}
-                oppdaterPeriode={(uttaksperiode: KontrollerFaktaPeriodeMedApMarkering) => {
-                  const nyeSortertePerioder = uttakKontrollerFaktaPerioder.concat(uttaksperiode).sort(sortPeriodsByFom);
-                  setDirty(true);
-                  oppdaterUttakPerioder(nyeSortertePerioder);
-                  settVisNyPeriode(false);
-                }}
+                oppdaterPeriode={leggTilPeriode}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                 faktaArbeidsforhold={faktaArbeidsforhold}
                 defaultMonth={sisteMåned}
