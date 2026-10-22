@@ -62,6 +62,9 @@ export const TotrinnskontrollIndex = ({
 
   const { mutate: godkjennTotrinnsaksjonspunkter } = useMutation({
     mutationFn: (valuesToStore: BekreftedeTotrinnsaksjonspunkter) => api.lagreTotrinnsaksjonspunkt(valuesToStore),
+    onSuccess: () => {
+      setVisBeslutterModal(true);
+    },
   });
 
   const { mutate: forhåndsvisVedtaksbrev } = useMutation({
@@ -82,7 +85,6 @@ export const TotrinnskontrollIndex = ({
       bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
     };
     setErAlleAksjonspunktGodkjent(totrinnskontrollData.erAlleAksjonspunktGodkjent);
-    setVisBeslutterModal(true);
     godkjennTotrinnsaksjonspunkter(params);
   };
 

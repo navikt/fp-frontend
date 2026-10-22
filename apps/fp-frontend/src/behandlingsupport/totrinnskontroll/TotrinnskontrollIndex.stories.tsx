@@ -73,8 +73,11 @@ const TOTRINNSKONTROLL_AKSJONSPUNKTER: TotrinnskontrollSkjermlenkeContext[] = [
   },
 ];
 
+const LAGRE_TOTRINNSAKSJONSPUNKT_HREF = '/fpsak/api/behandling/totrinnskontroll/bekreft';
+
 const BEHANDLING = lagFagsakBehandling({
   versjon: 2,
+  links: [{ href: LAGRE_TOTRINNSAKSJONSPUNKT_HREF, rel: FagsakRel.SAVE_TOTRINNSAKSJONSPUNKT, type: 'POST' }],
   uuid: '1',
   type: 'BT-002',
   status: 'FVED',
@@ -167,4 +170,14 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  beforeEach({ msw }) {
+    msw.use(http.post(wrapUrl(LAGRE_TOTRINNSAKSJONSPUNKT_HREF), () => new HttpResponse(null, { status: 200 })));
+  },
+};
+
+export const LagringFeiler: Story = {
+  beforeEach({ msw }) {
+    msw.use(http.post(wrapUrl(LAGRE_TOTRINNSAKSJONSPUNKT_HREF), () => new HttpResponse(null, { status: 500 })));
+  },
+};
