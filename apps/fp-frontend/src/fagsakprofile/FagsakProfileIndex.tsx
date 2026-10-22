@@ -227,7 +227,7 @@ export const FagsakProfileIndex = ({
                     </NavLink>
                   )}
                   alleKodeverk={notEmpty(alleFpSakKodeverk)}
-                  alleKodeverkTilbakekreving={notEmpty(alleKodeverkFpTilbake)}
+                  alleKodeverkTilbakekreving={alleKodeverkFpTilbake}
                 />
               </ErrorBoundary>
             </div>
