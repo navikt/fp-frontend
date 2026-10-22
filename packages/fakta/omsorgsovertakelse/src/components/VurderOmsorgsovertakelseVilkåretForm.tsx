@@ -23,7 +23,7 @@ import {
   type VilkårUtfallType,
 } from '@navikt/fp-types';
 import type { VurderOmsorgsovertakelseVilkåretAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, sortKodeverkByNavn, usePanelDataContext } from '@navikt/fp-utils';
 
 import { Over15Markering } from './Markering';
 
@@ -249,7 +249,7 @@ const transformValues = (
 const sortByNavn = (a: { navn: string } | undefined, b: { navn: string } | undefined) => {
   if (!a) return 1;
   if (!b) return -1;
-  return a.navn.localeCompare(b.navn);
+  return sortKodeverkByNavn(a, b);
 };
 
 const mapEktefellesBarn = (gjeldende: OmsorgsovertakelseDto['gjeldende']) => {

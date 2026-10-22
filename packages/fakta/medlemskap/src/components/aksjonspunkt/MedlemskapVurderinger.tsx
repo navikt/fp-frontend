@@ -7,7 +7,7 @@ import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { AlleKodeverk, Avslagsarsak, ManuellBehandlingResultat, Vilkår } from '@navikt/fp-types';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { sortKodeverkByNavn, usePanelDataContext } from '@navikt/fp-utils';
 
 import { MedlemskapVurdering, SØKER_INNFLYTTET_FOR_SENT_KODE } from '../../types/vurderingMedlemskapForm';
 import { lagVurderingsAlternativer } from './lagVurderingsAlternativer';
@@ -99,7 +99,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, vilkår, erForutgåend
 const getAvslagsårsakerOptions = (alleKodeverk: AlleKodeverk, vilkår: Vilkår) => {
   return alleKodeverk['Avslagsårsak']
     .filter(kodeverk => vilkår.aktuelleAvslagsårsaker.includes(kodeverk.kode))
-    .toSorted((k1, k2) => k1.navn.localeCompare(k2.navn))
+    .toSorted(sortKodeverkByNavn)
     .map(aa => (
       <option key={aa.kode} value={aa.kode}>
         {aa.navn}

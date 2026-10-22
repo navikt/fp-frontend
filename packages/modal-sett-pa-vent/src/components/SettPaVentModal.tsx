@@ -13,6 +13,7 @@ import type {
   VenteArsakType,
   VenteÅrsakTypeFpTilbake,
 } from '@navikt/fp-types';
+import { sortKodeverkByNavn } from '@navikt/fp-utils';
 
 export type FormValues = {
   frist?: string;
@@ -89,7 +90,7 @@ export const SettPaVentModal = ({
                         ? inkluderVentearsak(va, ventearsakFraFelt)
                         : manuelleVenteArsaker.has(va.kode)),
                   )
-                  .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
+                  .sort(sortKodeverkByNavn)
                   .map(va => (
                     <option key={va.kode} value={va.kode}>
                       {va.navn}
