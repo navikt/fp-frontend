@@ -17,6 +17,7 @@ const {
   SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod,
   TilretteleggingMed100ProsentVelferdspermisjon,
   KanSplittes,
+  TilretteleggingMedOverstyrtUtbetalingsgrad,
 } = composeStories(stories);
 
 const lagNyDato = (nyDato: string) => {
@@ -917,5 +918,103 @@ describe('TilretteleggingFaktaIndex', () => {
     expect(screen.getByText('Flere arbeidsforhold')).toBeInTheDocument();
     expect(screen.getByText('80% stilling')).toBeInTheDocument();
     expect(screen.queryByText('Splitt')).not.toBeInTheDocument();
+  });
+
+  it('skal beholde ulagrede endringer i arbeidsforholdene når et arbeidsforhold splittes', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    render(<KanSplittes submitCallback={lagre} />);
+
+    expect(await screen.findByRole('button', { name: 'Splitt til 2 arbeidsforhold' })).toBeInTheDocument();
+
+    await userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+    await userEvent.click(screen.getAllByLabelText('Skal ha svangerskapspenger for arbeidsforholdet')[1]!);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Splitt til 2 arbeidsforhold' }));
+    expect(await screen.findAllByText('Splitt')).toHaveLength(2);
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'En begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    const ap = (lagre.mock.calls[0] as unknown as [BekreftSvangerskapspengerAp])[0];
+    const [splittetA, splittetB, statoil] = ap.bekreftetSvpArbeidsforholdList;
+    expect(splittetA?.internArbeidsforholdReferanse).toBe('999999999-a');
+    expect(splittetA?.velferdspermisjoner.find(p => p.permisjonFom === '2020-02-17')?.erGyldig).toBe(true);
+    expect(splittetB?.internArbeidsforholdReferanse).toBe('999999999-b');
+    expect(statoil?.arbeidsgiverReferanse).toBe('1111111');
+    expect(statoil?.skalBrukes).toBe(false);
+  });
+
+  it('skal beholde overstyrt utbetalingsgrad når bare datoen endres', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    render(<TilretteleggingMedOverstyrtUtbetalingsgrad submitCallback={lagre} />);
+
+    await userEvent.click(await screen.findByText('17.03.2020 - 31.05.2020'));
+    expect(screen.getByRole('textbox', { name: 'Prosent svangerskapspenger' })).toHaveValue('30,00');
+
+    const dato = screen.getByRole('textbox', { name: 'Fra og med' });
+    await userEvent.type(dato, lagNyDato('18.03.2020'));
+    fireEvent.blur(dato);
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+
+    expect(await screen.findByText('18.03.2020 - 31.05.2020')).toBeInTheDocument();
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'En begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    const ap = (lagre.mock.calls[0] as unknown as [BekreftSvangerskapspengerAp])[0];
+    expect(ap.bekreftetSvpArbeidsforholdList[0]!.tilretteleggingDatoer[0]).toEqual({
+      fom: '2020-03-18',
+      type: 'DELVIS_TILRETTELEGGING',
+      mottattDato: '2020-02-20',
+      kilde: 'ENDRET_AV_SAKSBEHANDLER',
+      stillingsprosent: 50,
+      overstyrtUtbetalingsgrad: 30,
+    });
+  });
+
+  it('skal ikke lagre automatisk utregnet utbetalingsgrad som overstyrt når arbeidsprosenten endres', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    render(<TilretteleggingMedOverstyrtUtbetalingsgrad submitCallback={lagre} />);
+
+    await userEvent.click(await screen.findByText('01.06.2020 - 14.08.2020'));
+
+    const arbeidsprosent = screen.getByRole('textbox', { name: 'Arbeidsprosent' });
+    await userEvent.clear(arbeidsprosent);
+    await userEvent.type(arbeidsprosent, '40');
+    expect(screen.getByRole('textbox', { name: 'Prosent svangerskapspenger' })).toHaveValue('60,00');
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'En begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    const ap = (lagre.mock.calls[0] as unknown as [BekreftSvangerskapspengerAp])[0];
+    const endretDato = ap.bekreftetSvpArbeidsforholdList[0]!.tilretteleggingDatoer[1];
+    expect(endretDato).toEqual(
+      expect.objectContaining({ fom: '2020-06-01', stillingsprosent: 40, kilde: 'REGISTRERT_AV_SAKSBEHANDLER' }),
+    );
+    expect(endretDato?.overstyrtUtbetalingsgrad).toBeUndefined();
+  });
+
+  it('skal lagre overstyrt utbetalingsgrad når saksbehandler endrer graden', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    render(<TilretteleggingMedOverstyrtUtbetalingsgrad submitCallback={lagre} />);
+
+    await userEvent.click(await screen.findByText('01.06.2020 - 14.08.2020'));
+
+    const utbetalingsgrad = screen.getByRole('textbox', { name: 'Prosent svangerskapspenger' });
+    await userEvent.clear(utbetalingsgrad);
+    await userEvent.type(utbetalingsgrad, '70');
+    await userEvent.click(screen.getByRole('button', { name: 'Oppdater' }));
+
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'En begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    const ap = (lagre.mock.calls[0] as unknown as [BekreftSvangerskapspengerAp])[0];
+    expect(ap.bekreftetSvpArbeidsforholdList[0]!.tilretteleggingDatoer[1]?.overstyrtUtbetalingsgrad).toBe(70);
   });
 });
