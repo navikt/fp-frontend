@@ -77,8 +77,7 @@ export type FormValues = {
 
 const buildInitialValues = (
   totrinnskontrollSkjermlenkeContext: (
-    | TotrinnskontrollSkjermlenkeContext
-    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[],
 ): FormValues => ({
   aksjonspunktGodkjenning: totrinnskontrollSkjermlenkeContext
@@ -95,8 +94,7 @@ const buildInitialValues = (
 interface Props {
   behandling: FagsakBehandlingDto;
   totrinnskontrollSkjermlenkeContext: (
-    | TotrinnskontrollSkjermlenkeContext
-    | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
+    TotrinnskontrollSkjermlenkeContext | TotrinnskontrollSkjermlenkeContextDtoFpTilbake
   )[];
   forhandsvisVedtaksbrev: () => void;
   readOnly: boolean;
@@ -105,7 +103,7 @@ interface Props {
   erBehandlingEtterKlage: boolean;
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
   lagLenke: (skjermlenkeCode: SkjermlenkeType | SkjermlenkeTypeFpTilbake) => Location | undefined;
-  onSubmit: (data: FormValues) => void;
+  onSubmit: (data: FormValues) => Promise<void>;
   beslutterFormData?: FormValues;
   setBeslutterFormData: (data?: FormValues) => void;
 }

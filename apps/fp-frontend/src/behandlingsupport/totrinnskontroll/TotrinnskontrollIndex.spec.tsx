@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './TotrinnskontrollIndex.stories';
 
-const { Default, LagringFeiler } = composeStories(stories);
+const { Default, LagringFeiler, LagringTarTid } = composeStories(stories);
 
 const erLagreKall = (request: unknown) =>
   request instanceof Request && request.method === 'POST' && request.url.endsWith('/totrinnskontroll/bekreft');
@@ -44,5 +44,16 @@ describe('TotrinnskontrollIndex', () => {
 
     expect(screen.queryByText('Vedtaket er innvilget og blir iverksatt')).not.toBeInTheDocument();
     fetchSpy.mockRestore();
+  });
+
+  it('skal ikke kunne sende inn på nytt mens lagringen pågår', async () => {
+    await LagringTarTid.run();
+
+    await godkjennAlleAksjonspunkter();
+
+    expect(screen.getByText('Godkjenn vedtaket').closest('button')).toBeDisabled();
+    expect(
+      await screen.findByText('Vedtaket er innvilget og blir iverksatt', {}, { timeout: 3000 }),
+    ).toBeInTheDocument();
   });
 });
