@@ -251,3 +251,46 @@ export const IngenOppgaver: Story = {
     );
   },
 };
+
+const OPPGAVE_RESERVERT_AV_MEG = {
+  journalpostId: '345681257',
+  aktørId: '9996923456799',
+  fødselsnummer: '12048714373',
+  opprettetDato: '2022-01-01',
+  frist: '2022-01-01',
+  ytelseType: 'FP',
+  enhetId: '4008',
+  beskrivelse: 'Søknad',
+  reservertAv: 'X123456',
+  kilde: 'LOKAL',
+};
+
+export const JournalføringFeiler: Story = {
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () => HttpResponse.json([OPPGAVE_RESERVERT_AV_MEG])),
+      http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, () =>
+        HttpResponse.json(getDetaljertJournalpostMal(true, 'MOTTATT')),
+      ),
+      http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => new HttpResponse(null, { status: 500 })),
+    );
+  },
+};
+
+export const JournalførPåNySakOgDeretterPåAnnenSak: Story = {
+  beforeEach({ msw }) {
+    msw.use(
+      http.get(FpmottakUrl.ALLE_JOURNAL_OPPGAVER, () => HttpResponse.json([OPPGAVE_RESERVERT_AV_MEG])),
+      http.get(FpmottakUrl.HENT_JOURNALPOST_DETALJER, ({ request }) =>
+        HttpResponse.json(
+          getDetaljertJournalpostMal(
+            true,
+            new URL(request.url).searchParams.get('journalpostId') === '111111111' ? 'JOURNALFOERT' : 'MOTTATT',
+          ),
+        ),
+      ),
+      http.post(FpmottakUrl.FERDIGSTILL_JOURNALFØRING, () => HttpResponse.json({ saksnummer: '11111111' })),
+      http.post(FpmottakUrl.KNYTT_JOURNALPOST_TIL_ANNEN_SAK, () => HttpResponse.json({ saksnummer: '22222222' })),
+    );
+  },
+};
