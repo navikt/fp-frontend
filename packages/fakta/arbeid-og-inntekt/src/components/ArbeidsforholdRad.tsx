@@ -76,6 +76,10 @@ export const ArbeidsforholdRad = ({
     arbeidsforholdForRad.length === 0 && inntektsmeldingerForRad.length > 0 && !årsak;
 
   const periode = finnPeriode(arbeidsforholdForRad, avklaring);
+  const skalViseIMMottattdato = arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1;
+  const ikkeBestiltIMTekst = intl.formatMessage({
+    id: erInaktivtArbeidsforhold ? 'ArbeidsforholdRad.IkkebestiltInaktivt' : 'ArbeidsforholdRad.IkkebestiltPermisjon',
+  });
 
   return (
     <Table.ExpandableRow
@@ -200,9 +204,7 @@ export const ArbeidsforholdRad = ({
         <FormattedMessage id={finnKildekode(erManueltOpprettet, arbeidsforholdForRad.length > 0)} />
       </Table.DataCell>
       <Table.DataCell>
-        {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
-          <DateLabel dateString={inntektsmeldingerForRad[0]!.mottattDato} />
-        )}
+        {skalViseIMMottattdato && <DateLabel dateString={inntektsmeldingerForRad[0]!.mottattDato} />}
         {!manglerInntektsmelding &&
           arbeidsforholdForRad.length > 1 &&
           inntektsmeldingerForRad.length === arbeidsforholdForRad.length && (
@@ -212,8 +214,8 @@ export const ArbeidsforholdRad = ({
           (manglerInntektsmelding && inntektsmeldingerForRad.length < arbeidsforholdForRad.length)) && (
           <FormattedMessage id="ArbeidsforholdRad.IkkeMottatt" />
         )}
-        {erInaktivtArbeidsforhold && <FormattedMessage id="ArbeidsforholdRad.IkkebestiltInaktivt" />}
-        {erPermisjonArbeidsforhold && <FormattedMessage id="ArbeidsforholdRad.IkkebestiltPermisjon" />}
+        {(erInaktivtArbeidsforhold || erPermisjonArbeidsforhold) &&
+          (skalViseIMMottattdato ? ` (${ikkeBestiltIMTekst})` : ikkeBestiltIMTekst)}
       </Table.DataCell>
     </Table.ExpandableRow>
   );
